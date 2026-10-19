@@ -1,0 +1,175 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-nativegeocoder and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-nativegeocoder` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+npm install @capgo/capacitor-nativegeocoder
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+```
+
+## Quick start
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+const { addresses } = await NativeGeocoder.reverseGeocode({
+  latitude: 48.8566,
+  longitude: 2.3522,
+  maxResults: 1,
+});
+```
+
+## Example: forward geocode an address
+
+```typescript
+const { addresses } = await NativeGeocoder.forwardGeocode({
+  address: '1 Infinite Loop, Cupertino, CA',
+  maxResults: 3,
+});
+```
+
+## Common pitfalls
+
+- **Web API key**: reverse and forward geocoding on web need a Google Geocoding API key in options.
+- **Locale**: set `useLocale` or `defaultLocale` when displaying addresses internationally.
+- **Ambiguous addresses**: raise `maxResults` and let users pick among matches.
+
+## API Overview
+
+### `reverseGeocode`
+
+Convert latitude and longitude to an address
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+const result = await NativeGeocoder.reverseGeocode({
+  latitude: 48.8566,
+  longitude: 2.3522,
+});
+console.log(result);
+```
+
+### `forwardGeocode`
+
+Convert an address to latitude and longitude
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+const result = await NativeGeocoder.forwardGeocode({ addressString: 'address-string' });
+console.log(result);
+```
+
+## Type Reference
+
+### `ReverseOptions`
+```typescript
+export interface ReverseOptions {
+  /**
+   * latitude is a number representing the latitude of the location.
+   */
+  latitude: number;
+  /**
+   * longitude is a number representing the longitude of the location.
+   */
+  longitude: number;
+  /**
+   * Localise the results to the given locale.
+   */
+  useLocale?: boolean;
+  /**
+   * locale is a string in the format of language_country, for example en_US.
+   */
+  defaultLocale?: string;
+  /**
+   * Max number of results to return.
+   */
+  maxResults?: number;
+  /**
+   * Only used for web platform to use google api
+   */
+  apiKey?: string;
+  /**
+   * Only used for web platform to use google api
+   */
+  resultType?: string;
+}
+```
+
+### `Address`
+```typescript
+export interface Address {
+  latitude: number;
+  longitude: number;
+  countryCode: string;
+  countryName: string;
+  postalCode: string;
+  administrativeArea: string;
+  subAdministrativeArea: string;
+  locality: string;
+  subLocality: string;
+  thoroughfare: string;
+  subThoroughfare: string;
+  areasOfInterest: string[];
+}
+```
+
+### `ForwardOptions`
+```typescript
+export interface ForwardOptions {
+  /**
+   * address is a string of the address to be geocoded.
+   */
+  addressString: string;
+  /**
+   * Localise the results to the given locale.
+   */
+  useLocale?: boolean;
+  /**
+   * locale is a string in the format of language_country, for example en_US.
+   */
+  defaultLocale?: string;
+  /**
+   * Max number of results to return.
+   */
+  maxResults?: number;
+  /**
+   * Only used for web platform to use google api
+   */
+  apiKey?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-nativegeocoder](/plugins/capacitor-nativegeocoder/) for the native capability in Using @capgo/capacitor-nativegeocoder, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

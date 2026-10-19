@@ -1,0 +1,53 @@
+---
+import { formatTime } from '@/config/app'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const props = Astro.props as {
+  tag: string
+  link: string
+  date: string
+  title: string
+  image?: string
+  loading?: 'eager' | 'lazy'
+}
+
+const MAX_VISIBLE_TAGS = 2
+const tags = props.tag.split(',').map((t) => t.trim()).filter(Boolean)
+const visibleTags = tags.slice(0, MAX_VISIBLE_TAGS)
+const hiddenCount = tags.length - visibleTags.length
+const cannLink = getRelativeLocaleUrl(Astro.locals.locale, `blog/${props.link}`)
+---
+
+<a href={cannLink} aria-label={props.title} class="block pb-8 bg-gray-700 rounded-lg transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+  <div>
+    <div class="relative p-2">
+      <img
+        width="1536"
+        height="1024"
+        decoding="async"
+        src={props.image}
+        alt={props.title}
+        loading={props.loading || 'lazy'}
+        class="object-contain w-full h-full text-transparent bg-center bg-no-repeat bg-cover rounded-lg border border-gray-600 z-2 aspect-video bg-linear-to-br from-gray-600/50 to-gray-700/50"
+      />
+      <div class="absolute top-4 left-4 right-4 flex flex-wrap gap-1.5 pointer-events-none">
+        {visibleTags.map((tag) => (
+          <span class="max-w-full truncate py-1.5 px-3 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg">
+            {tag}
+          </span>
+        ))}
+        {hiddenCount > 0 && (
+          <span class="shrink-0 py-1.5 px-3 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white/90 rounded-full shadow-lg">
+            +{hiddenCount}
+          </span>
+        )}
+      </div>
+    </div>
+    <span class="block px-5 mt-3 text-sm font-semibold tracking-widest text-gray-300 uppercase">
+      {formatTime(props.date)}
+    </span>
+    <p class="px-5 mt-3 text-2xl font-semibold text-gray-100">
+      {props.title}
+    </p>
+  </div>
+</a>

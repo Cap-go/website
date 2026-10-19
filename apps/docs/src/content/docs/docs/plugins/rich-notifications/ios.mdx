@@ -1,0 +1,14 @@
+---
+title: iOS setup
+description: "Categories, interruption levels, and permissions for @capgo/capacitor-rich-notifications."
+sidebar:
+  order: 3
+---
+
+No custom Info.plist keys are required for standard local notifications. Call `RichNotifications.requestPermission()` before showing notifications.
+
+Register action categories with `registerActions` and reference `categoryId` on each notification. Use `interruptionLevel` for delivery priority on iOS 15+.
+
+`timeSensitive` can break through Focus when the user allows **Time Sensitive Notifications** for your app in Settings. It is not enabled by the API alone.
+
+The `critical` interruption level requires Apple's Critical Alerts entitlement. Without it, use `timeSensitive` or `active`.

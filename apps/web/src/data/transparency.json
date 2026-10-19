@@ -1,0 +1,113 @@
+{
+  "updatedAt": "2026-10-19T03:06:09.006Z",
+  "advisories": {
+    "total": 132,
+    "severities": {
+      "medium": 53,
+      "high": 62,
+      "low": 11,
+      "critical": 6
+    },
+    "repos": [
+      {
+        "repo": "Cap-go/capgo",
+        "total": 128,
+        "severities": {
+          "medium": 51,
+          "high": 60,
+          "low": 11,
+          "critical": 6
+        }
+      },
+      {
+        "repo": "Cap-go/capacitor-updater",
+        "total": 4,
+        "severities": {
+          "high": 2,
+          "medium": 2
+        }
+      },
+      {
+        "repo": "Cap-go/CLI",
+        "total": 0,
+        "severities": {}
+      }
+    ]
+  },
+  "releases": [
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "capgo-20.0.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-20.0.0",
+      "publishedAt": "2026-10-19T02:48:25Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "notifications-8.1.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/notifications-8.1.0",
+      "publishedAt": "2026-10-19T01:17:51Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "capgo-19.0.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-19.0.0",
+      "publishedAt": "2026-10-19T01:17:25Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "cli-8.87.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.87.2",
+      "publishedAt": "2026-10-18T15:02:37Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "cli-8.87.1",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.87.1",
+      "publishedAt": "2026-10-18T13:33:34Z"
+    }
+  ],
+  "metrics": {
+    "live": {
+      "success_rate": 81.2,
+      "first_try_rate": 98,
+      "rollback_rate": 13.7,
+      "updated_at": "2026-10-19T02:13:59.847Z",
+      "daily": [
+        86.6,
+        85.7,
+        82.3,
+        81.2,
+        73.9,
+        70.5,
+        79.7,
+        80.6,
+        81.9,
+        78.8,
+        76.5,
+        78.3,
+        80.1,
+        80.3,
+        78.8,
+        75.1,
+        79.1,
+        81.6,
+        84.3,
+        83.1,
+        85.9,
+        83.3,
+        82.9,
+        81.5,
+        84.9,
+        83.5,
+        84.2,
+        85.1,
+        85.2,
+        82.7
+      ]
+    },
+    "builder": {
+      "success_rate": 74.3,
+      "updated_at": "2026-10-18T08:05:33.587Z"
+    }
+  }
+}

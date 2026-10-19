@@ -1,0 +1,151 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-background-task and schedule periodic background fetch work."
+sidebar:
+  order: 2
+---
+
+`@capgo/capacitor-background-task` lets a Capacitor app register named periodic jobs for sync, cache refreshes, analytics delivery, and other background fetch operations.
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-background-task` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-background-task
+bunx cap sync
+```
+
+## iOS Setup
+
+Add the background processing mode and permitted task identifier to `ios/App/App/Info.plist`:
+
+```xml
+<key>UIBackgroundModes</key>
+<array>
+  <string>processing</string>
+</array>
+<key>BGTaskSchedulerPermittedIdentifiers</key>
+<array>
+  <string>app.capgo.backgroundtask.processing</string>
+</array>
+```
+
+Then run:
+
+```bash
+bunx cap sync ios
+```
+
+## Import
+
+```typescript
+import { BackgroundTask, BackgroundTaskResult } from '@capgo/capacitor-background-task';
+```
+
+## Define A Task
+
+Define the callback at module scope so it is registered as soon as the app is started by the operating system.
+
+```typescript
+import { BackgroundTask, BackgroundTaskResult } from '@capgo/capacitor-background-task';
+
+const SYNC_TASK = 'sync-offline-data';
+
+BackgroundTask.defineTask(SYNC_TASK, async () => {
+  try {
+    await fetch('https://api.example.com/sync', { method: 'POST' });
+    return BackgroundTaskResult.Success;
+  } catch {
+    return BackgroundTaskResult.Failed;
+  }
+});
+```
+
+## Register The Schedule
+
+Call `registerTaskAsync` after your app has enough context to enable the background job.
+
+```typescript
+await BackgroundTask.registerTaskAsync(SYNC_TASK, {
+  minimumInterval: 30,
+  requiresNetwork: true,
+});
+```
+
+`minimumInterval` is in minutes. Android enforces a minimum of 15 minutes. iOS treats the value as an earliest begin date and may run later.
+
+## Check Status
+
+```typescript
+const status = await BackgroundTask.getStatusAsync();
+const isRegistered = await BackgroundTask.isTaskRegisteredAsync(SYNC_TASK);
+const registeredTasks = await BackgroundTask.getRegisteredTasksAsync();
+
+console.log({ status, isRegistered, registeredTasks });
+```
+
+## Trigger A Test Run
+
+Use the test trigger in development or QA. It calls every registered task immediately.
+
+```typescript
+await BackgroundTask.triggerTaskWorkerForTestingAsync();
+```
+
+## Unregister A Task
+
+```typescript
+await BackgroundTask.unregisterTaskAsync(SYNC_TASK);
+```
+
+## iOS Expiration
+
+iOS can stop a background task before your JavaScript work finishes. Listen for expiration events when cleanup or checkpointing matters.
+
+```typescript
+const expiration = await BackgroundTask.addExpirationListener((event) => {
+  console.warn('Background task expired', event.taskName, event.taskId);
+});
+
+await expiration.remove();
+```
+
+## React Native Background Task Compatibility
+
+The plugin also exposes a small compatibility layer for apps migrating from `react-native-background-task`.
+
+```typescript
+import { BackgroundTask } from '@capgo/capacitor-background-task';
+
+BackgroundTask.define(async () => {
+  await fetch('https://api.example.com/sync', { method: 'POST' });
+});
+
+await BackgroundTask.schedule({
+  period: 1800,
+});
+```
+
+## Production Notes
+
+- Background scheduling is opportunistic, not exact.
+- Keep work short and idempotent.
+- Persist any state you need before returning `BackgroundTaskResult.Success`.
+- Avoid relying on background tasks for user-visible deadlines or alarms.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Using @capgo/capacitor-background-task](/plugins/capacitor-background-task/) for the native capability in Using @capgo/capacitor-background-task, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

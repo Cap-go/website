@@ -1,0 +1,397 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-speech-recognition and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-speech-recognition` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-speech-recognition
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+```
+
+## API Overview
+
+### `available`
+
+Checks whether the native speech recognition service is usable on the current device.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.available();
+console.log(result);
+```
+
+### `isOnDeviceRecognitionAvailable`
+
+Checks whether the platform's newer on-device recognition path is available for the selected locale.
+
+This is the capability check you should use before enabling `useOnDeviceRecognition`.
+A `true` result means the current device, OS version, and locale can use the newer
+on-device path for that platform.
+
+Returns `false` when the device only supports the legacy recognizer path.
+
+Platform SDK docs:
+iOS: [Speech](https://developer.apple.com/documentation/speech)
+Android: [SpeechRecognizer](https://developer.android.com/reference/android/speech/SpeechRecognizer)
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.isOnDeviceRecognitionAvailable();
+console.log(result);
+```
+
+### `start`
+
+Begins capturing audio and transcribing speech.
+
+When `partialResults` is `true`, the returned promise resolves immediately and updates are
+streamed through the `partialResults` listener until the session ends.
+
+The default path keeps the legacy recognizer behavior for backward compatibility.
+Pass `useOnDeviceRecognition: true` only after checking
+.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.start();
+console.log(result);
+```
+
+### `stop`
+
+Stops listening and tears down native resources.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+await SpeechRecognition.stop();
+```
+
+### `forceStop`
+
+Force stops the current session.
+
+On Android, this first tries a normal stop and then falls back to destroy/recreate after `timeout`.
+On iOS, the current session is stopped immediately.
+
+If a partial transcript is cached, it is emitted through the `partialResults` listener with `forced: true`.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+await SpeechRecognition.forceStop();
+```
+
+### `getLastPartialResult`
+
+Gets the last cached partial transcription result.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.getLastPartialResult();
+console.log(result);
+```
+
+### `setPTTState`
+
+Updates the current push-to-talk button state.
+
+Use this together with `continuousPTT` or with a custom hold-to-talk flow.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+await SpeechRecognition.setPTTState({ held: true });
+```
+
+### `getSupportedLanguages`
+
+Gets the locales supported by the underlying recognizer.
+
+Android 13+ devices no longer expose this list; in that case `languages` is empty.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.getSupportedLanguages();
+console.log(result);
+```
+
+### `isListening`
+
+Returns whether the plugin is actively listening for speech.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.isListening();
+console.log(result);
+```
+
+### `checkPermissions`
+
+Gets the current permission state.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions`
+
+Requests the microphone + speech recognition permissions.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const result = await SpeechRecognition.requestPermissions();
+console.log(result);
+```
+
+## Type Reference
+
+### `SpeechRecognitionAvailability`
+```typescript
+export interface SpeechRecognitionAvailability {
+  available: boolean;
+}
+```
+
+### `SpeechRecognitionStartOptions`
+Configure how the recognizer behaves when calling .
+```typescript
+export interface SpeechRecognitionStartOptions {
+  /**
+   * Locale identifier such as `en-US`. When omitted the device language is used.
+   */
+  language?: string;
+  /**
+   * Maximum number of final matches returned by native APIs. Defaults to `5`.
+   */
+  maxResults?: number;
+  /**
+   * Prompt message shown inside the Android system dialog (ignored on iOS).
+   */
+  prompt?: string;
+  /**
+   * When `true`, Android shows the OS speech dialog instead of running inline recognition.
+   * Defaults to `false`.
+   */
+  popup?: boolean;
+  /**
+   * Emits partial transcription updates through the `partialResults` listener while audio is captured.
+   */
+  partialResults?: boolean;
+  /**
+   * Enables native punctuation handling where supported (iOS 16+).
+   */
+  addPunctuation?: boolean;
+  /**
+   * Opt in to the platform's newer on-device recognition path when available.
+   *
+   * On iOS 26+, this uses Apple's `SpeechAnalyzer` / `SpeechTranscriber` pipeline.
+   * On recent Android versions, this uses the on-device `SpeechRecognizer` path.
+   *
+   * It is intentionally opt-in so existing apps keep the legacy flow unless they choose
+   * to roll out the new behavior.
+   *
+   * Use {@link SpeechRecognitionPlugin.isOnDeviceRecognitionAvailable} before enabling it in production.
+   *
+   * Platform SDK docs:
+   * iOS: [Speech](https://developer.apple.com/documentation/speech),
+   * [SpeechAnalyzer](https://developer.apple.com/documentation/speech/speechanalyzer),
+   * [SpeechTranscriber](https://developer.apple.com/documentation/speech/speechtranscriber)
+   * Android: [SpeechRecognizer](https://developer.android.com/reference/android/speech/SpeechRecognizer)
+   *
+   * Defaults to `false`.
+   */
+  useOnDeviceRecognition?: boolean;
+  /**
+   * Allow a number of milliseconds of silence before splitting the recognition session into segments.
+   * Required to be greater than zero and currently supported on Android only.
+   */
+  allowForSilence?: number;
+  /**
+   * EXPERIMENTAL: Keep a PTT session alive across silence by restarting recognition while the button stays held.
+   *
+   * This restart behavior is implemented for Android inline recognition and iOS native recognition.
+   */
+  continuousPTT?: boolean;
+}
+```
+
+### `SpeechRecognitionMatches`
+```typescript
+export interface SpeechRecognitionMatches {
+  matches?: string[];
+}
+```
+
+### `ForceStopOptions`
+Options for .
+```typescript
+export interface ForceStopOptions {
+  /**
+   * Android only: timeout in milliseconds before forcing stop via destroy/recreate.
+   *
+   * On iOS, the current session is stopped immediately and this value is ignored.
+   *
+   * Defaults to `1500`.
+   */
+  timeout?: number;
+}
+```
+
+### `LastPartialResult`
+Result from .
+```typescript
+export interface LastPartialResult {
+  /**
+   * Whether a partial result is currently cached.
+   */
+  available: boolean;
+  /**
+   * The most recent transcript text known to the native recognizer.
+   */
+  text: string;
+  /**
+   * All current match alternatives when available.
+   */
+  matches?: string[];
+}
+```
+
+### `PTTStateOptions`
+Options for .
+```typescript
+export interface PTTStateOptions {
+  /**
+   * Whether the PTT button is currently held.
+   */
+  held: boolean;
+}
+```
+
+### `SpeechRecognitionLanguages`
+```typescript
+export interface SpeechRecognitionLanguages {
+  languages: string[];
+}
+```
+
+### `SpeechRecognitionListening`
+```typescript
+export interface SpeechRecognitionListening {
+  listening: boolean;
+}
+```
+
+### `SpeechRecognitionPermissionStatus`
+Permission map returned by `checkPermissions` and `requestPermissions`.
+```typescript
+export interface SpeechRecognitionPermissionStatus {
+  speechRecognition: PermissionState;
+}
+```
+
+### `SpeechRecognitionSegmentResultEvent`
+Raised whenever a segmented result is produced (Android only).
+```typescript
+export interface SpeechRecognitionSegmentResultEvent {
+  matches: string[];
+}
+```
+
+### `SpeechRecognitionPartialResultEvent`
+Raised whenever a partial transcription is produced.
+```typescript
+export interface SpeechRecognitionPartialResultEvent {
+  /**
+   * Current recognition matches when the native recognizer reports them.
+   *
+   * This can be omitted for forced or accumulated-only payloads.
+   */
+  matches?: string[];
+  /**
+   * Accumulated transcription from earlier continuous PTT cycles.
+   */
+  accumulated?: string;
+  /**
+   * Final accumulated text including the current result.
+   */
+  accumulatedText?: string;
+  /**
+   * `true` when the plugin is restarting recognition inside a continuous PTT session.
+   */
+  isRestarting?: boolean;
+  /**
+   * `true` when the payload was emitted by `forceStop()`.
+   */
+  forced?: boolean;
+}
+```
+
+### `SpeechRecognitionListeningEvent`
+Raised when the listening state changes.
+```typescript
+export interface SpeechRecognitionListeningEvent {
+  /**
+   * Finite state of the recognition session.
+   */
+  state?: ListeningFiniteState;
+  /**
+   * Unique identifier for the current listening session.
+   */
+  sessionId?: number;
+  /**
+   * Why this state transition occurred.
+   */
+  reason?: ListeningReason;
+  /**
+   * Error code when the transition is caused by an error.
+   */
+  errorCode?: string;
+  /**
+   * Backward-compatible binary state used by earlier releases.
+   */
+  status?: 'started' | 'stopped';
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-speech-recognition](/plugins/capacitor-speech-recognition/) for the native capability in Using @capgo/capacitor-speech-recognition, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

@@ -1,0 +1,255 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-alarm and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-alarm` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-alarm
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+```
+
+## Quick start
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.createAlarm({
+  hour: 7,
+  minute: 30,
+  label: 'Wake up',
+  skipUi: false,
+  vibrate: true
+});
+console.log('Alarm created:', result.success);
+```
+
+## Example: openAlarms
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.openAlarms();
+if (result.success) {
+  console.log('Alarms UI opened');
+}
+```
+
+## Example: getOSInfo
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const info = await CapgoAlarm.getOSInfo();
+console.log('Platform:', info.platform);
+console.log('Supports native alarms:', info.supportsNativeAlarms);
+if (info.platform === 'android') {
+  console.log('Can schedule exact alarms:', info.canScheduleExactAlarms);
+}
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `createAlarm`
+
+Create a native OS alarm using the platform clock app.
+On Android this uses the Alarm Clock intent; on iOS this uses AlarmKit if available (iOS 16+).
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.createAlarm({
+  hour: 7,
+  minute: 30,
+  label: 'Wake up',
+  skipUi: false,
+  vibrate: true
+});
+console.log('Alarm created:', result.success);
+```
+
+### `openAlarms`
+
+Open the platform's native alarm list UI, if available.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.openAlarms();
+if (result.success) {
+  console.log('Alarms UI opened');
+}
+```
+
+### `getOSInfo`
+
+Get information about the OS and capabilities.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const info = await CapgoAlarm.getOSInfo();
+console.log('Platform:', info.platform);
+console.log('Supports native alarms:', info.supportsNativeAlarms);
+if (info.platform === 'android') {
+  console.log('Can schedule exact alarms:', info.canScheduleExactAlarms);
+}
+```
+
+### `requestPermissions`
+
+Request relevant permissions for alarm usage on the platform.
+On Android, may route to settings for exact alarms.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.requestPermissions({ exactAlarm: true });
+if (result.granted) {
+  console.log('Permissions granted');
+} else {
+  console.log('Permissions denied');
+}
+```
+
+### `checkPermissions`
+
+Check the current permission state for native alarm access without triggering UI.
+On iOS this reports AlarmKit readiness; on Android it reports capability details.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const status = await CapgoAlarm.checkPermissions();
+console.log('AlarmKit allowed?', status.details?.alarmKit);
+```
+
+### `getAlarms`
+
+Get a list of alarms scheduled by this app.
+On iOS 26+, returns alarms from AlarmKit. On Android, this is not supported
+as the system does not provide an API to query alarms.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const { alarms } = await CapgoAlarm.getAlarms();
+console.log('Scheduled alarms:', alarms);
+alarms.forEach(alarm => {
+  console.log(`Alarm ${alarm.id}: ${alarm.hour}:${alarm.minute} - ${alarm.label}`);
+});
+```
+
+## Type Reference
+
+### `NativeAlarmCreateOptions`
+Options for creating a native OS alarm via the platform clock app.
+```typescript
+export interface NativeAlarmCreateOptions {
+  /** Hour of day in 24h format (0-23) */
+  hour: number;
+  /** Minute of hour (0-59) */
+  minute: number;
+  /** Optional label for the alarm */
+  label?: string;
+  /** Android only: attempt to skip UI if possible */
+  skipUi?: boolean;
+  /** Android only: set alarm to vibrate */
+  vibrate?: boolean;
+}
+```
+
+### `NativeActionResult`
+Result of a native action.
+```typescript
+export interface NativeActionResult {
+  /** Whether the action was successful */
+  success: boolean;
+  /** Optional message with additional information */
+  message?: string;
+}
+```
+
+### `OSInfo`
+Returned info about current OS and capabilities.
+```typescript
+export interface OSInfo {
+  /** Platform identifier: 'ios' | 'android' | 'web' */
+  platform: string;
+  /** OS version string */
+  version: string;
+  /** Whether the platform exposes a native alarm app integration */
+  supportsNativeAlarms: boolean;
+  /** Whether scheduling local notifications is supported */
+  supportsScheduledNotifications: boolean;
+  /** Android only: whether exact alarms are allowed */
+  canScheduleExactAlarms?: boolean;
+}
+```
+
+### `PermissionResult`
+Result of a permissions request.
+```typescript
+export interface PermissionResult {
+  /** Overall grant for requested scope */
+  granted: boolean;
+  /** Optional details by permission key */
+  details?: Record<string, boolean>;
+  /** Optional human readable diagnostic */
+  message?: string;
+}
+```
+
+### `AlarmInfo`
+Information about a scheduled alarm.
+```typescript
+export interface AlarmInfo {
+  /** Unique identifier for the alarm */
+  id: string;
+  /** Hour of day in 24h format (0-23) */
+  hour: number;
+  /** Minute of hour (0-59) */
+  minute: number;
+  /** Optional label for the alarm */
+  label?: string;
+  /** Whether the alarm is enabled */
+  enabled?: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-alarm](/plugins/capacitor-alarm/) for the native capability in Using @capgo/capacitor-alarm, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

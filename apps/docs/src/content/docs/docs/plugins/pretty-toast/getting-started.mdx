@@ -1,0 +1,98 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-pretty-toast and show native-first toast notifications."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-pretty-toast` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+npm install @capgo/capacitor-pretty-toast
+npx cap sync
+```
+
+## Import
+
+```ts
+import { toast } from '@capgo/capacitor-pretty-toast';
+```
+
+## Show A Toast
+
+```ts
+toast.success('Saved', {
+  message: 'Your changes are ready.',
+});
+```
+
+## Update A Loading Toast
+
+```ts
+const id = toast.loading('Uploading', {
+  message: 'Waiting for the server response.',
+});
+
+setTimeout(() => {
+  toast.update(id, {
+    title: 'Upload complete',
+    message: 'The file was stored successfully.',
+    icon: 'checkmark.circle.fill',
+    autoDismiss: true,
+  });
+}, 1500);
+```
+
+## Track A Promise
+
+```ts
+await toast.promise(uploadFile(), {
+  loading: {
+    title: 'Uploading',
+    message: 'Keep the app open while the file is sent.',
+  },
+  success: 'Uploaded',
+  error: 'Upload failed',
+});
+```
+
+## Icons And Images
+
+Use `icon` for a symbol name or raw SVG markup:
+
+```ts
+toast.info('New message', {
+  icon: 'message.fill',
+  message: 'Open the inbox to reply.',
+});
+```
+
+Use `iconSource` for URI-like images. It supports `https://`, `http://`, `file://`, `data:`, `blob:`, absolute file paths, or `{ uri }`.
+
+```ts
+toast.show({
+  title: 'Profile updated',
+  message: 'Your avatar changed.',
+  iconSource: 'https://example.com/avatar.png',
+});
+```
+
+`iconSource` takes precedence over `icon`.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

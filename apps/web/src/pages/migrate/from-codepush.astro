@@ -1,0 +1,68 @@
+---
+import ConversionLandingLayout from '@/components/conversion/ConversionLandingLayout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { pageDates, toIsoDate } from '@/data/pageDates'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const title = m.migrate_from_codepush_title({}, { locale })
+const description = m.migrate_from_codepush_meta_description({}, { locale })
+
+const dates = pageDates['migrate/from-codepush']
+const faq = [
+  { question: m.migrate_from_codepush_faq_q1({}, { locale }), answer: m.migrate_from_codepush_faq_a1({}, { locale }) },
+  { question: m.migrate_from_codepush_faq_q2({}, { locale }), answer: m.migrate_from_codepush_faq_a2({}, { locale }) },
+  { question: m.migrate_from_codepush_faq_q3({}, { locale }), answer: m.migrate_from_codepush_faq_a3({}, { locale }) },
+  { question: m.migrate_from_codepush_faq_q4({}, { locale }), answer: m.migrate_from_codepush_faq_a4({}, { locale }) },
+]
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [
+    createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+      name: title,
+      description,
+      url: Astro.url.href,
+      datePublished: toIsoDate(dates.publishedAt),
+      dateModified: toIsoDate(dates.updatedAt),
+      inLanguage: locale,
+    }),
+    createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faq }),
+  ],
+})
+
+const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
+
+const relatedLinks = [
+  { label: m.codepush_alt_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives/codepush') },
+  { label: m.review_codepush_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/codepush') },
+  { label: 'App Center migration (blog)', href: getRelativeLocaleUrl(locale, 'blog/appcenter-migration') },
+  { label: 'Moving from Microsoft App Center (blog)', href: getRelativeLocaleUrl(locale, 'blog/moving-from-microsoft-app-center-to-capgo') },
+]
+---
+
+<ConversionLandingLayout
+  locale={locale}
+  content={content}
+  heroTitle={m.migrate_from_codepush_hero_title({}, { locale })}
+  heroSubtitle={m.migrate_from_codepush_hero_subtitle({}, { locale })}
+  sections={[
+    {
+      title: m.migrate_from_codepush_steps_title({}, { locale }),
+      paragraphs: [m.migrate_from_codepush_steps_p1({}, { locale })],
+      listItems: [m.migrate_from_codepush_steps_li1({}, { locale }), m.migrate_from_codepush_steps_li2({}, { locale }), m.migrate_from_codepush_steps_li3({}, { locale })],
+    },
+  ]}
+  relatedLinks={relatedLinks}
+  faq={faq}
+  updatedAt={dates.updatedAt}
+/>

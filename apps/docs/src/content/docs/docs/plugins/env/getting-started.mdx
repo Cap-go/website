@@ -1,0 +1,58 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-env and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-env` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-env
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+```
+
+## API Overview
+
+### `getKey`
+
+Retrieves the value of a specific environment variable by key.
+
+This method fetches environment variables that were set during the native
+build process. The variables must be configured in the native project
+before they can be accessed at runtime.
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+
+const result = await Env.getKey({ key: 'API_URL' });
+console.log(result.value); // 'https://api.example.com'
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-env](/plugins/capacitor-env/) for the native capability in Using @capgo/capacitor-env, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

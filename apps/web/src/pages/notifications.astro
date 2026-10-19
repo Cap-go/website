@@ -1,0 +1,400 @@
+---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
+import '@/styles/lu-product.css'
+import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
+import NotificationsStory from '@/components/notifications/NotificationsStory.astro'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | Native Push Notifications for Capacitor Apps`
+const description = 'Send native iOS and Android push from Capgo, target users by external ID, update badges, trigger live update checks, and let your AI agent set it up.'
+const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
+const pluginUrl = getRelativeLocaleUrl(locale, 'plugins/capacitor-notifications')
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Notifications',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Native push notifications for Capacitor apps',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Native iOS and Android push delivery',
+    'Target users by external ID, tags, and attributes',
+    'Badge updates and open tracking',
+    'Silent push to trigger live update checks',
+    'Broadcasts and API sends',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.notifications),
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [softwareLdJson],
+})
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-notifications.png`,
+  ldJSON,
+}
+
+const heroStats = [
+  {
+    value: 'iOS + Android',
+    label: 'Native push delivery',
+  },
+  {
+    value: 'External ID',
+    label: 'Target known users',
+  },
+  {
+    value: 'Badge + events',
+    label: 'Track opens and state',
+  },
+  {
+    value: 'Update checks',
+    label: 'Silent push companion',
+  },
+  {
+    value: 'Next or set',
+    label: 'Install mode control',
+  },
+  {
+    value: 'Channel-aware',
+    label: 'Guide live updates',
+  },
+]
+
+const heroMeta = ['Provider setup in Capgo', 'Broadcasts and API sends', 'Progressive rollout companion']
+
+const outcomeCards = [
+  {
+    title: 'Reach the right devices',
+    text: 'Register devices with an external ID, tags, attributes, and consent so campaigns can target real product audiences instead of anonymous tokens.',
+  },
+  {
+    title: 'Move updates faster',
+    text: 'Use a silent notification to ask opted-in devices to check, download, and queue the latest Capgo bundle for the channel you choose.',
+  },
+  {
+    title: 'Prove what happened',
+    text: 'Track provider setup, campaigns, delivery events, opens, badge changes, and background update-check results from the Capgo console.',
+  },
+]
+
+const workflowSteps = [
+  {
+    title: 'Configure providers',
+    text: 'Add Android and iOS push credentials in the Capgo console, then run the notification setup so the native plugin and updater are wired together.',
+  },
+  {
+    title: 'Register recipients',
+    text: 'Attach external IDs, tags, attributes, consent, and badges from your app so support, growth, and release workflows share the same device identity.',
+  },
+  {
+    title: 'Send or trigger updates',
+    text: 'Broadcast alerts, send API notifications to one user, or push a background update check during a progressive rollout.',
+  },
+]
+
+const featureTiles = [
+  {
+    title: 'Provider control plane',
+    sub: 'Keep Android and iOS notification providers active from the same Capgo app settings screen used by your release team.',
+  },
+  {
+    title: 'Broadcast campaigns',
+    sub: 'Create alert, background, badge, or update-check campaigns when you need to reach every matching device.',
+  },
+  {
+    title: 'API sends',
+    sub: 'Send a notification to a known external ID and inspect the devices linked to that recipient before you trigger it.',
+  },
+  {
+    title: 'Badge management',
+    sub: 'Read, write, and sync app badge counts through the native plugin so notification state remains visible to users.',
+  },
+  {
+    title: 'Background callbacks',
+    sub: 'Handle foreground receives, notification opens, and background data notifications in your Capacitor app.',
+  },
+  {
+    title: 'Campaign stats',
+    sub: 'Follow campaign status, delivery results, opens, and update-check results without leaving the Capgo release workflow.',
+  },
+]
+
+const guidanceChecks = [
+  'Use alerts for user-facing messages and background campaigns for release operations.',
+  'Keep silent update checks paired with channels and progressive rollout controls so every device still follows your deployment rules.',
+  'Treat iOS background pushes as best-effort because the operating system can throttle delivery.',
+]
+---
+
+<Layout content={content}>
+  <div class="lu bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          First-party Capgo Notifications
+        </div>
+        <h1 class="hero-banner" aria-label="Native push notifications for Capacitor apps">
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">Capgo Notifications</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+          <span class="hero-banner-tag">Native push, silent update checks, and campaign visibility</span>
+        </h1>
+        <p class="lead hero-lead">
+          Message users, update badges, and trigger live-update checks from the same Capgo release workflow. Notifications now connect native push with progressive deployments
+          instead of leaving release teams to stitch it together.
+        </p>
+        <div class="hero-ctas">
+          <SignupCta id="notifications-hero-signup-cta" />
+          <p class="hero-cta-note">Native notifications work alongside Capgo Live Updates and channel rollouts.</p>
+        </div>
+        <div class="hero-meta">
+          {heroMeta.map((item) => (
+            <span>
+              <span class="check">+</span>
+              {item}
+            </span>
+          ))}
+        </div>
+        <div class="hero-strip">
+          {heroStats.map((item) => (
+            <div class="hero-strip-cell">
+              <p class="v">{item.value}</p>
+              <p class="k">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="notification-story">
+          <p class="sr-only">
+            Animated illustration: a Capgo console card composes an alert for the external ID user_8421, sends it, and the push lands on an iPhone lock screen and an Android home
+            screen. Delivered and opened counts tick up and the app badge moves from 2 to 3. The card then switches to a silent update check for the production channel, and both
+            devices download bundle 1.4.1 to install on next launch.
+          </p>
+          <NotificationsStory />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="outcomes">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">Release communication</div>
+          <h2 class="h2-section">Push is now part of the deployment loop.</h2>
+          <p class="lead">Capgo Notifications gives product teams the messaging surface they expect and gives release teams a native way to wake devices for live-update checks.</p>
+        </div>
+
+        <div class="outcome-grid">
+          {outcomeCards.map((card) => (
+            <article class="outcome-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="decision-box">
+          <h3>Use notifications when a release needs a nudge.</h3>
+          <ul class="decision-list">
+            <li>Tell users about a change that ships with a live update.</li>
+            <li>Ask devices to check for a bundle without waiting for the next app open.</li>
+            <li>Keep progressive rollout, channel, and install-mode controls in place.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-grid grain" id="workflow">
+      <div class="shell">
+        <div class="section-head section-head--narrow">
+          <div class="eyebrow eyebrow--blue">Workflow</div>
+          <h2 class="h2-section">From provider setup to targeted update checks.</h2>
+          <p class="lead">The notification plugin, Capgo console, and updater now work together for Capacitor apps.</p>
+        </div>
+
+        <div class="steps-grid">
+          {workflowSteps.map((step, index) => (
+            <article class="step-card">
+              <div class="step-num">{index + 1}</div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--blue">Feature set</div>
+          <h2 class="h2-section">Native notifications without a separate release stack.</h2>
+          <p class="lead">Capgo handles the surfaces that usually become one-off glue code around push, user targeting, and update nudges.</p>
+        </div>
+
+        <div class="bento bento--even">
+          <div class="tile tile-hero" aria-label="Capgo Notifications">
+            <div>
+              <div class="ttl">
+                <span class="name">Capgo Notifications</span>
+                <br />
+                <span class="tile-hero-sub-ttl">Native push for release teams</span>
+              </div>
+              <div class="sub">Ship alert, background, badge, and update-check campaigns from the same product console your team already uses for Capgo releases.</div>
+            </div>
+            <pre class="ascii">$ npx @capgo/cli@latest notifications setup
+provider ready | recipients linked | update check enabled</pre>
+          </div>
+
+          {featureTiles.map((tile) => (
+            <div class="tile">
+              <h3 class="ttl">
+                <span class="ttl-accent">{tile.title}</span>
+              </h3>
+              <p class="sub">{tile.sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="guidance">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">Rollout guidance</div>
+          <h2 class="h2-section">Use push to accelerate updates, not bypass controls.</h2>
+          <p class="lead">
+            Silent notifications can ask devices to check for a new bundle, while Capgo channels, install mode, and progressive rollout rules continue to decide what each device
+            can install.
+          </p>
+        </div>
+
+        <div class="guidance-grid">
+          <div>
+            <ul class="guidance-checks">
+              {guidanceChecks.map((check) => (
+                <li>{check}</li>
+              ))}
+            </ul>
+            <div class="hero-ctas" style="margin-top: 28px; align-items: flex-start;">
+              <HumanSupport class="mb-3" size="sm" align="start" />
+              <div class="hero-cta-buttons">
+                <a class="btn btn-md btn-primary" href={pricingUrl}>
+                  Compare plans
+                </a>
+                <a class="btn btn-md btn-ghost" href={pluginUrl}>
+                  View plugin page
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="guidance-panel">
+            <img
+              src="/landing-demos/console/notifications-push-update.webp"
+              alt="Capgo notifications console with iOS and Android push configured and push-triggered updates enabled for the production channel, installing on next launch"
+              width="1360"
+              height="740"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="guidance-cli">
+              <p class="guidance-cli-line">
+                <span class="mono">$</span> notification.kind = update_check
+              </p>
+              <p class="guidance-cli-warn">channel selected | install mode next</p>
+              <p class="guidance-cli-dim">progressive rollout still controls eligible devices</p>
+              <p class="guidance-cli-action">devices check, download, and queue the bundle</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-notifications-title"
+      eyebrow={m.agent_ready_notifications_eyebrow({}, { locale })}
+      title={m.agent_ready_notifications_title({}, { locale })}
+      subtitle={m.agent_ready_notifications_subtitle({}, { locale })}
+      prompts={[m.agent_ready_notifications_prompt_1({}, { locale }), m.agent_ready_notifications_prompt_2({}, { locale }), m.agent_ready_notifications_prompt_3({}, { locale })]}
+    />
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_notifications_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_notifications_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.notifications}
+      maxItems={2}
+    />
+
+    <section class="section final bg-grid grain" id="cta">
+      <div class="shell">
+        <h2>
+          <span class="name">Capgo Notifications</span>
+          <br />
+          Reach users and move releases forward.
+        </h2>
+        <p class="tagline">Add native push, badge control, campaign stats, and silent update checks to your Capacitor release workflow.</p>
+        <SignupCta id="notifications-final-signup-cta" humanSupport />
+        <div class="hero-meta hero-meta--cta">
+          <span>
+            <span class="check">+</span> Native iOS and Android push
+          </span>
+          <span>
+            <span class="check">+</span> Background update checks
+          </span>
+          <span>
+            <span class="check">+</span> Campaign stats
+          </span>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .notification-story {
+    margin-top: 46px;
+  }
+
+  @media (min-width: 981px) {
+    .bento--even > .tile:nth-last-child(-n + 2) {
+      grid-column: span 2;
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .notification-story {
+      margin-top: 34px;
+    }
+  }
+</style>

@@ -1,0 +1,331 @@
+---
+title: Channels
+description: "Learn how to manage and configure Live Update channels in Capgo, enabling seamless app updates by directing specific JS bundle builds to devices configured for those channels."
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+A Live Update channel points to a specific JS bundle build of your app that will be shared with any devices configured to listen to that channel for updates. When you [install the Capgo Live Updates SDK](/docs/getting-started/quickstart/) in your app, any native binary configured to that channel will check for available updates whenever the app is launched. You can change the build a channel points to at any time and can also roll back to previous builds if needed.
+
+<Aside type="caution" title="Channels Do Not Provide Confidentiality">
+Channels control update eligibility, not bundle secrecy. Even if a channel is private or self-assignment is disabled, any unencrypted bundle uploaded to Capgo should still be treated as a public asset delivered to clients. Encryption protects the delivery path and authenticity of updates, but shipped bundles can still be reverse engineered from the distributed app with enough effort because the public key is part of the client. See [Live Update encryption](/docs/live-updates/encryption/) for details.
+</Aside>
+
+## How a device picks a channel (precedence)
+
+When a device checks for an update, Capgo decides which channel to use in this strict order (highest priority first):
+
+1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins. Capgo removes the mapping 90 days after the last override write. See [Console and API overrides expire after 90 days](#console-and-api-overrides-expire-after-90-days).
+2. **Cloud override (per-device) via Dashboard or API** – Created when you change the device's channel in the dashboard or via API. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device override does. The same 90-day retention applies.
+3. **Plugin `setChannel()` local channel** – Created when the app calls `setChannel()` and the backend validates that the target channel allows self-assignment. The selected channel is stored locally on that device, takes effect instantly, and is not shown in the Device Override UI.
+
+<Aside type="tip" title="Instant Channel Switching with setChannel()">
+**Starting from plugin version 5.34.0, 6.34.0, 7.34.0, or 8.0.0** (depending on your major version), `setChannel()` works differently: it contacts the backend to **validate** that the channel is allowed (checking if self-assignment is enabled for that channel), then stores the channel **locally on the device** as `defaultChannel`. This means the new channel takes effect **instantly** for the next update check—no waiting for replication.
+
+Previously, `setChannel()` saved the channel override to the backend database (like Dashboard or API changes), and devices had to wait for data replication (up to 2 minutes) before the new channel was recognized. The new behavior only reads from the backend (for validation) and stores locally, making channel switches instant.
+
+Because `setChannel()` is local-only, it does **not** create a Device Override entry in the Capgo dashboard. The Device Override UI only shows overrides created from the dashboard or the Public API.
+
+**Note:** Even if a channel becomes disallowed after being set locally, the backend will still validate the channel during update checks, so security is maintained.
+
+**Important:** When channel changes are made via the Dashboard or API, there is still a replication lag of up to 2 minutes before all edge servers reflect the change. For instant channel switching, use `setChannel()` from your app code—it validates with the backend, then sets the channel locally for immediate effect.
+</Aside>
+4. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override/local channel exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
+5. **Cloud Default Channel (primary path ~99% of users)** – If you mark a default channel in the dashboard, all normal end‑users (no force, no Dashboard/API override, no plugin local channel, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary. If you have platform-specific defaults (for example, one iOS-only, one Android-only, one Electron-only), each device lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the device must match on steps 1–4 to receive updates.
+
+Best practice:
+- Treat 1–4 as exception / testing layers; when you set a cloud default, real users should flow into it. If you choose not to set one, be deliberate about how users attach (typically via `defaultChannel` in config or per-device overrides).
+- Only configure `defaultChannel` in binaries you explicitly ship to testers. Leaving it unset keeps production logic centralized in the dashboard.
+- Use `setChannel()` sparingly in production—mainly for QA or targeted diagnostics.
+
+If a channel is disabled for the platform (iOS/Android/Electron toggles) when it would otherwise be chosen, the selection process skips it and continues down the list.
+
+> Summary: Force > Dashboard/API Override > Plugin `setChannel()` local channel > Config `defaultChannel` > Cloud Default.
+
+## Console and API overrides expire after 90 days
+
+Forced mappings and Dashboard or Public API channel overrides are stored as per-device assignments in Capgo. A cleanup job deletes those assignments **90 days after the last override write**. Checking in for an update does not reset that clock. Only writing the override again (or deleting it yourself) changes the timestamp.
+
+This is not the same as [device inventory retention](/docs/webapp/devices/). Inventory removes devices that have not connected to Capgo for 90 days. Override cleanup removes the mapping even if the device is still active.
+
+For an assignment that is not removed by this cleanup:
+
+- Set `defaultChannel` in `capacitor.config.*` (survives reinstall; requires a new native binary to change later).
+- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. Reinstalling the app clears it, so the app must call `setChannel()` again if you still want that channel.
+
+The channel **Devices** tab and the device Override UI only list console and Public API assignments. They do not list every device on the channel, and they do not list local `setChannel()` assignments.
+
+<figure><img src="/channel-override-retention.webp" alt="Capgo channel Devices tab showing the Override retention popover: console overrides expire after 90 days" /><figcaption>Override retention notice on the channel Devices tab.</figcaption></figure>
+
+## Default Channel Behavior
+
+Setting a cloud default is optional, but it usually serves as the catch-all path for new devices. Without one, only devices that match on forced mappings, overrides, or a `defaultChannel` in the Capacitor config will receive updates. When you do choose to mark defaults, keep these patterns in mind:
+
+- **Single default (most common)** – If a channel has iOS, Android, and Electron enabled, it becomes the lone default; any device without overrides will attach here.
+- **Platform-specific defaults** – If you split channels by platform (for example, `ios-production` with only iOS enabled, `android-production` with only Android enabled, and `electron-production` with only Electron enabled), mark each one as the default for its platform. iOS devices go to the iOS default, Android devices go to the Android default, and Electron apps go to the Electron default.
+
+Remember that the cloud default and `defaultChannel` in `capacitor.config.*` both occupy the same decision layer. If you set a cloud default, you don't need to duplicate the value in your Capacitor config—leave `defaultChannel` empty for production builds. Reserve `defaultChannel` for binaries you intentionally ship to testers or QA when you want them to start on a non-production channel even if the cloud default is different.
+
+You can change defaults at any time in the dashboard. Open the channel, then **Manage in App settings**, which takes you to [App Information](/docs/webapp/main-app-page/#default-channel-configuration). The default is no longer a toggle on the channel page. When you swap a default, new devices obey the new routing immediately and existing devices follow the normal precedence rules the next time they check in.
+
+## Setting up a Channel
+
+During onboarding you create the first channel (most teams name it "Production"), but nothing is locked—you can rename or delete any channel at any time. To add additional channels later:
+
+1. Go to the "Channels" section of the Capgo dashboard 
+2. Click the "New Channel" button
+3. Enter a name for the channel and click "Create"
+
+Channel names can be anything you'd like. A common strategy is to match channels to your development stages, such as:
+
+- `Development` - for testing live updates on local devices or emulators
+- `QA` - for your QA team to verify updates before wider release
+- `Staging` - for final testing in a production-like environment 
+- `Production` - for the version of your app that end users receive from the app stores
+
+## Configuring the Channel in Your App
+
+With your channels created, you need to configure your app to listen to the appropriate channel. In this example, we'll use the `Development` channel.
+
+Open your `capacitor.config.ts` (or `capacitor.config.json`) file. Under the `plugins` section, optionally set `defaultChannel` for **test builds** (internal / QA). For production builds, prefer omitting it so devices use the Cloud Default unless explicitly overridden.
+
+```ts
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      // For a QA/TestFlight build – testers start on the Development channel automatically.
+      defaultChannel: 'Development',
+      // Production builds usually omit this so users attach to the Cloud Default channel.
+    },
+  },
+};
+```
+
+Next, build your web app and run `npx cap sync` to copy the updated config file to your iOS, Android, and Electron projects. If you skip this sync step, your native projects will continue to use whichever channel they were previously configured for.
+
+<Aside type="caution">
+Channel selection order: Force > Dashboard/API device override > Plugin `setChannel()` local channel > Config `defaultChannel` > Cloud Default.
+
+Use `defaultChannel` only in test/internal builds; leave it out for production so users follow the Cloud Default (when set) instead of duplicating the routing in native config.
+
+You can still force (pin) a device or apply an override later—those immediately supersede the config value.
+
+> Channel names are case sensitive.
+</Aside>
+
+
+## Channel Options and Strategies
+
+Channels have several options that control who can receive updates and how updates are delivered. The most important ones are below. You can configure these from the web app, the CLI, or the Public API.
+
+- Default channel: Optionally mark the channel or platform-specific channels that new devices attach to. In the console this lives on App Information (**Manage in App settings** from the channel page). See "Default Channel Behavior" for routing scenarios.
+- Platform filters: Enable or disable delivery to `iOS`, `Android`, or `Electron` devices per channel.
+- Disable auto downgrade under native: Prevents sending an update when the device’s native app version is newer than the channel’s bundle (for example, device on 1.2.3 while channel has 1.2.2).
+- Allow development builds: Permit updates to development builds (useful for testing). CLI: `--dev` / `--no-dev`.
+- Allow production builds: Permit updates to production (store) builds. Leave this on for channels that serve real users. CLI: `--prod` / `--no-prod`.
+- Allow emulator devices: Permit updates to emulators/simulators (useful for testing). CLI: `--emulator` / `--no-emulator`.
+- Allow physical devices: Permit updates to real phones and tablets. Leave this on for production channels. CLI: `--device` / `--no-device`.
+- Allow device self-assignment: Lets the app switch to this channel at runtime using `setChannel`. If disabled, `setChannel` will fail for this channel. CLI: `--self-assign` / `--no-self-assign`.
+- Download format: Choose whether devices download a full zip, only the changed delta files, or the best of both (`all`, `zip`, `delta`, `zip_from_builtin`, `delta_from_builtin`). See [Download format](/docs/webapp/channels/#download-format) for the console dropdown and when each mode is useful.
+
+### Progressive rollouts
+
+A channel can keep a stable bundle while gradually exposing a separate rollout target to a sticky device cohort. You can pause, resume, promote, roll back, and configure an automatic failure response without switching the channel for everyone. See [Progressive rollouts](/docs/live-updates/progressive-rollouts/) for the delivery model, dashboard workflow, API fields, and CLI commands.
+
+### Disable Auto Update strategies
+
+Use this to restrict which kinds of updates the channel will automatically deliver. Options:
+
+- major: Blocks a target bundle whose major version is higher than the device native baseline (`version_build`). Example: `1.2.3 -> 2.0.0` is blocked; `1.2.3 -> 1.9.0` is allowed.
+- minor: Blocks a target bundle whose major or minor version differs from `version_build`. Example: `1.2.3 -> 1.3.0` is blocked; `1.2.3 -> 1.2.4` is allowed.
+- patch: Strictest mode. Blocks any change to major, minor, or patch number. Only suffix changes are allowed while `MAJOR.MINOR.PATCH` stays identical. Examples: `1.0.0-beta.1 -> 1.0.0-beta.2` is allowed, `1.0.0+build.1 -> 1.0.0+build.2` is allowed, `1.0.0 -> 1.0.1` is blocked.
+- metadata: Require a minimum update version metadata on each bundle. Configure via CLI using `--min-update-version` or `--auto-min-update-version`. If missing, the channel is marked misconfigured and updates will be rejected until set.
+- none: Allow all updates according to [semver compatibility](/semver_tester/).
+
+These strategies compare the channel's target bundle against the native baseline sent as `version_build`, not the current downloaded bundle sent as `version_name`.
+
+Learn more details and examples in Disable updates strategy at /docs/cli/commands/#disable-updates-strategy.
+
+Example (CLI). The channel must already exist (`channel set` does not create it):
+
+```bash
+# Block major updates on the Production channel
+npx @capgo/cli@latest channel set production com.example.app \
+  --disable-auto-update major
+
+# Allow devices to self-assign to the Beta channel
+npx @capgo/cli@latest channel set beta com.example.app --self-assign
+
+# Production channel: store builds on real devices, no emulators
+npx @capgo/cli@latest channel set production com.example.app --prod --device --no-emulator
+```
+
+### Using setChannel() from Your App
+
+The `setChannel()` method allows your app to programmatically switch channels at runtime. This is particularly useful for:
+
+- QA/debug menus where testers can switch between channels
+- Beta program opt-in flows
+- Feature flag implementations
+- A/B testing scenarios
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Switch to the beta channel
+await CapacitorUpdater.setChannel({ channel: 'beta' });
+
+// Optionally trigger an immediate update check after switching
+await CapacitorUpdater.setChannel({
+  channel: 'beta',
+  triggerAutoUpdate: true
+});
+```
+
+<Aside type="note" title="How setChannel() Works (v5.34.0+ / v6.34.0+ / v7.34.0+ / v8.0.0+)">
+When `setChannel()` is called:
+
+1. **Backend validation (read-only)**: A request is sent to the Capgo backend to validate the channel is allowed (checking self-assignment permissions)
+2. **Local storage update**: If validation passes, the channel is saved to the device's local storage as `defaultChannel`
+3. **Instant effect**: The next update check uses the new channel immediately (no waiting for replication)
+
+**Why this matters:** In older versions, `setChannel()` saved the channel override to the backend database (same as Dashboard or API changes). Devices had to wait for backend replication (up to 2 minutes) before the channel change took effect. Now, `setChannel()` only reads from the backend (for validation) and stores locally, making channel switches instant.
+
+**Dashboard visibility:** A channel set with the plugin does not make the device appear as a Device Override in the Capgo UI. Only channel assignments created from the dashboard or the Public API are listed there. Use the dashboard or API when you need an admin-visible override.
+
+**Security note:** Even if a channel's permissions change after being set locally (e.g., self-assignment is disabled), the backend will still validate the channel during update checks, ensuring security is maintained.
+
+**Comparison of channel change methods:**
+
+| Method | Effect Time | Persisted Where | Shown in Device Override UI | Expires | Use Case |
+|--------|-------------|-----------------|------------------------------|---------|----------|
+| `setChannel()` from plugin | **Instant** | Device only (local) | No | No (until you change it or reinstall) | User-initiated channel switching in-app |
+| Dashboard device override | Up to 2 min | Backend database | Yes | 90 days after last override write | Admin-initiated changes for specific devices |
+| API channel assignment | Up to 2 min | Backend database | Yes | 90 days after last override write | Automated backend integrations |
+
+For the best user experience when building channel-switching UIs, always use the plugin's `setChannel()` method.
+
+Minimum versions for local-only channel switching: **5.34.0**, **6.34.0**, **7.34.0**, or **8.0.0** (depending on your major version). Each minor version number corresponds to the same feature set across all major versions (e.g., X.34.0 includes the same features whether X is 5, 6, 7, or 8). See [plugin installation](/docs/getting-started/add-an-app/) for version tags.
+</Aside>
+
+## Assigning a Bundle to a Channel
+
+To deploy a live update, you need to upload a new JS bundle build and assign it to a channel. You can do this in one step with the Capgo CLI:
+
+```shell
+npx @capgo/cli@latest bundle upload --channel=Development
+```
+
+This will upload your built web assets and set the new bundle as the active build for the `Development` channel. Any apps configured to listen to that channel will receive the update the next time they check for one.
+
+You can also assign builds to channels from the "Bundles" section of the Capgo dashboard. Click the menu icon next to a build and select "Assign to Channel" to choose the channel for that build.
+
+## Bundle Versioning and Channels
+
+It's important to note that bundles in Capgo are global to your app, not specific to individual channels. The same bundle can be assigned to multiple channels.
+
+When versioning your bundles, we recommend using [semantic versioning with Capgo's Semver Tester](/semver_tester/) and pre-release identifiers for channel-specific builds. For example, a beta release might be versioned as `1.2.3-beta.1`.
+
+In CI, if the local version was already uploaded, use `npx @capgo/cli@latest bundle upload --auto-bump` (optionally `major`, `minor`, `patch`/`fix`, `metadata`, or `ai`) so the CLI bumps from the channel's linked bundle until a free name is found. With `ai`, Workers AI infers the level from the local vs previous delta manifest (falls back to `patch` with no previous Capgo version). You cannot combine it with `--bundle`. See [CI/CD Integration](/docs/getting-started/cicd-integration/#auto-bump-when-the-local-version-is-already-on-capgo) and the [CLI reference](/docs/cli/reference/bundle/#bundle-upload).
+
+This approach has several benefits:
+
+- It clearly communicates the relationship between builds. `1.2.3-beta.1` is obviously a pre-release of `1.2.3`.
+- It allows for reusing version numbers across channels, reducing confusion.
+- It enables clear rollback paths. If you need to roll back from `1.2.3`, you know `1.2.2` is the previous stable release.
+
+Here's an example of how you might align your bundle versions with a typical channel setup:
+
+- `Development` channel: `1.2.3-dev.1`, `1.2.3-dev.2`, etc.
+- `QA` channel: `1.2.3-qa.1`, `1.2.3-qa.2`, etc.
+- `Staging` channel: `1.2.3-rc.1`, `1.2.3-rc.2`, etc.
+- `Production` channel: `1.2.3`, `1.2.4`, etc.
+
+Using [semver with pre-release identifiers](/semver_tester/) is a recommended approach, but not strictly required. The key is to find a versioning scheme that clearly communicates the relationships between your builds and aligns with your team's development process.
+
+## Rolling Back a Live Update
+
+If you deploy a live update that introduces a bug or otherwise needs to be reverted, you can easily roll back to a previous build. From the "Channels" section of the dashboard:
+
+<Steps>
+
+1. Click the name of the channel you want to roll back
+2. Find the build you want to revert to and click the crown icon
+![Rollback build](/select_bundle.webp)
+3. Confirm the action 
+
+</Steps>
+
+The selected build will immediately become the active build for that channel again. Apps will receive the rolled back version the next time they check for an update.
+
+## Automating Deployments
+
+For more advanced workflows, you can automate your live update deployments as part of your CI/CD pipeline. By integrating Capgo into your build process, you can automatically upload new bundles and assign them to channels whenever you push to certain branches or create new releases.
+
+Check out the [CI/CD Integration](/docs/getting-started/cicd-integration/) docs to learn more about automating Capgo live updates.
+
+### Least-privilege PR previews
+
+Use an **App Preview** API key when CI needs one temporary channel per pull request but must not manage existing main/default channels. The key remains bound to the owning organization and selected app; it simply has no organization-wide role. Each non-public preview channel it creates receives its own automatic, channel-scoped lifecycle permission.
+
+1. Have an organization administrator create a secure API key limited to the preview app and select **App Preview**. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows).
+2. Use a unique, non-public channel such as `pr-123`. Do not pass `--default`, `--self-assign`, rollout options, or `--delete-linked-bundle-on-upload`.
+3. Upload and promote the PR bundle in one command, then delete the owned channel and bundle when the PR closes:
+
+```bash
+APP_ID="com.example.app"
+PREVIEW_CHANNEL="pr-123"
+BUNDLE_VERSION="1.2.3-pr.123"
+
+npx @capgo/cli@latest bundle upload "$APP_ID" \
+  --apikey "$CAPGO_PREVIEW_KEY" \
+  --path ./dist \
+  --channel "$PREVIEW_CHANNEL" \
+  --bundle "$BUNDLE_VERSION"
+
+npx @capgo/cli@latest channel delete "$PREVIEW_CHANNEL" "$APP_ID" \
+  --apikey "$CAPGO_PREVIEW_KEY" \
+  --delete-bundle \
+  --success-if-not-found
+```
+
+`bundle upload --channel` creates a missing channel, uploads the bundle, and promotes it in one flow. Cleanup is atomic and ownership-checked: the key can delete only a channel it created and its linked, unshared bundle. It cannot change, promote, or delete an existing main/default channel, another preview key's channel, or another key's bundle.
+
+If reviewers need a QR code or preview URL, an administrator must enable previews once for the app:
+
+```bash
+npx @capgo/cli@latest app set "$APP_ID" --preview
+npx @capgo/cli@latest get-qr "$APP_ID" --channel "$PREVIEW_CHANNEL" --apikey "$CAPGO_PREVIEW_KEY" --url
+```
+
+An App Preview key cannot enable previews itself because it has no app-settings permission. In GitHub Actions, run secret-bearing preview jobs on `pull_request`, not `pull_request_target`, and restrict them to same-repository PRs with `github.event.pull_request.head.repo.full_name == github.repository`.
+
+## Deploying to a Device
+
+Now that you understand channels, you're ready to start deploying live updates to real devices. The basic process is:
+
+1. Install the Capgo SDK in your app
+2. Configure the app to listen to your desired channel
+3. Upload a build and assign it to that channel
+4. Launch the app and wait for the update!
+
+For a more detailed walkthrough, see the [Deploying Live Updates](/docs/getting-started/deploy/) guide. Happy updating!
+
+## Advanced Channel Usage: User Segmentation
+
+Channels can be used for more than just development stages. They're a powerful tool for user segmentation, enabling features like:
+
+- Feature flags for different user tiers
+- A/B testing
+- Gradual feature rollouts
+- Beta testing programs
+
+Learn how to implement these advanced use cases in our guide: [How to Segment Users by Plan and Channels for Feature Flags and A/B Testing](/blog/how-to-segment-users-by-plan-and-channels/).
+
+## Keep going from Channels
+
+If you are using **Channels** to plan channel routing and staged rollout, connect it with [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution, and [Capgo Environment Best Practices: Staging with One Mobile App ID](/blog/staging-environments-with-capgo-channels/) for the practical context in Capgo Environment Best Practices: Staging with One Mobile App ID.

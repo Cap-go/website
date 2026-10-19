@@ -1,0 +1,227 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-llm and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-llm` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-llm
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+```
+
+## Quick start
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+
+const { id: chatId } = await CapgoLLM.createChat();
+await CapgoLLM.sendMessage({ chatId, message: 'Summarize this error log.' });
+```
+
+Listen for `textFromAi`, `aiFinished`, and `generationError` on the chat session as documented in the plugin README.
+
+## Example: readiness before UI
+
+```typescript
+const { readiness } = await CapgoLLM.getReadiness();
+if (readiness !== 'ready') {
+  showModelDownloadScreen();
+}
+```
+
+## Example: download a custom model
+
+```typescript
+await CapgoLLM.downloadModel({ url: 'https://cdn.example.com/model.litertlm' });
+```
+
+## Common pitfalls
+
+- **Web offline**: MediaPipe GenAI loads from a CDN, cache the runtime and model for offline demos.
+- **Android Gemini Nano**: not on every device, handle fallback models.
+- **Streaming**: attach listeners before `sendMessage` so you do not miss tokens.
+
+## API Overview
+
+### `createChat`
+
+Creates a new chat session
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+
+const result = await CapgoLLM.createChat();
+console.log(result);
+```
+
+### `sendMessage`
+
+Sends a message to the AI in a specific chat session
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+
+await CapgoLLM.sendMessage({
+  chatId: 'chat-id-123',
+  message: 'Hello from Capacitor',
+});
+```
+
+### `getReadiness`
+
+Gets the readiness status of the LLM
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+
+const result = await CapgoLLM.getReadiness();
+console.log(result);
+```
+
+### `setModel`
+
+Sets the model configuration
+- iOS: Use "Apple Intelligence" as path for system model, or provide path to MediaPipe model
+- Android: Path to a MediaPipe model file (in assets or files directory)
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+
+await CapgoLLM.setModel({
+  path: 'path/to/file',
+  modelType: 'task',
+});
+```
+
+### `downloadModel`
+
+Downloads a model from a URL and saves it to the appropriate location
+- iOS: Downloads to the app's documents directory
+- Android: Downloads to the app's files directory
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+
+const result = await CapgoLLM.downloadModel({ url: 'https://example.com' });
+console.log(result);
+```
+
+## Type Reference
+
+### `ModelOptions`
+Model configuration options.
+```typescript
+export interface ModelOptions {
+  /** Model path or "Apple Intelligence" for iOS system model */
+  path: string;
+  /** Model file type/extension (e.g., "task", "bin", "litertlm"). If not provided, will be extracted from path. */
+  modelType?: string;
+  /** Maximum number of tokens the model handles */
+  maxTokens?: number;
+  /** Number of tokens the model considers at each step */
+  topk?: number;
+  /** Amount of randomness in generation (0.0-1.0) */
+  temperature?: number;
+  /** Random seed for generation */
+  randomSeed?: number;
+}
+```
+
+### `DownloadModelOptions`
+Options for downloading a model.
+```typescript
+export interface DownloadModelOptions {
+  /** URL of the model file to download */
+  url: string;
+  /** Optional: URL of companion file (e.g., .litertlm for Android) */
+  companionUrl?: string;
+  /** Optional: Custom filename (defaults to filename from URL) */
+  filename?: string;
+}
+```
+
+### `DownloadModelResult`
+Result of model download.
+```typescript
+export interface DownloadModelResult {
+  /** Path where the model was saved */
+  path: string;
+  /** Path where the companion file was saved (if applicable) */
+  companionPath?: string;
+}
+```
+
+### `TextFromAiEvent`
+Event data for text received from AI.
+```typescript
+export interface TextFromAiEvent {
+  /** The text content from AI - this is an incremental chunk, not the full text */
+  text: string;
+  /** The chat session ID */
+  chatId: string;
+  /** Whether this is a complete chunk (true) or partial streaming data (false) */
+  isChunk?: boolean;
+}
+```
+
+### `AiFinishedEvent`
+Event data for AI completion.
+```typescript
+export interface AiFinishedEvent {
+  /** The chat session ID that finished */
+  chatId: string;
+}
+```
+
+### `DownloadProgressEvent`
+Event data for download progress.
+```typescript
+export interface DownloadProgressEvent {
+  /** Percentage of download completed (0-100) */
+  progress: number;
+  /** Total bytes to download */
+  totalBytes?: number;
+  /** Bytes downloaded so far */
+  downloadedBytes?: number;
+}
+```
+
+### `ReadinessChangeEvent`
+Event data for readiness status changes.
+```typescript
+export interface ReadinessChangeEvent {
+  /** The readiness status */
+  readiness: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-llm](/plugins/capacitor-llm/) for the native capability in Using @capgo/capacitor-llm, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

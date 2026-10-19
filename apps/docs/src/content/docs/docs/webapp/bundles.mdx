@@ -1,0 +1,110 @@
+---
+title: "Bundles"
+description: "Learn how to manage bundles in Capgo. A bundle is a specific version of your application's code and assets. Discover how to view, link to channels, download, and delete bundles."
+sidebar:
+  order: 9
+---
+
+## Show all bundles
+
+In Capgo, a bundle represents a specific version of your application's code and assets, ready to be distributed to devices. First, let's take a look at the bundles page. You can access it by [clicking on your app](/docs/webapp/main-page/) and then [clicking on the bundles tab](/docs/webapp/main-app-page/).
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundles.webp" alt="bundle list" /><figcaption></figcaption></figure>
+
+The bundles list displays:
+- **Name**: The bundle version number
+- **Created at**: When the bundle was uploaded
+- **Channel**: Which channel (if any) the bundle is currently linked to
+- **Size**: The bundle file size
+- **Action**: Quick actions including link to channel (gear icon) and delete (trash icon)
+
+You can use the **Reload** button to refresh the list, **+ Add** to upload a new bundle, and **Filters** to narrow down the displayed bundles. A search box allows you to find bundles by name.
+
+## Delete a bundle
+
+There are two ways a bundle can be deleted:
+
+ - Normally
+ - Unsafely
+
+The Unsafe way of deleting a bundle was added into Capgo on August 12, 2024.
+
+The difference between the two ways is the ability to reuse the version number after the deletion.
+
+For example, if you delete a version `1.0.0` the normal way and later try to upload a `1.0.0` version, it will fail.
+If you delete this version via the unsafe delete, you will be able to upload a `1.0.0` version.
+
+:::danger
+Deleting a version unsafely and re-uploading it is REALLY dangerous.
+It can cause all sorts of bugs and unpredictable behaviour in the plugin.
+It should NEVER be used for bundles that have been used in a public channel.
+It is for this reason that deleting a version unsafely requires "super_admin" privileges
+:::
+
+## Storage, retention, and delivery
+
+### What counts toward storage?
+
+Storage includes the historical bundle versions and Delta assets retained for an app. A bundle linked to more than one channel or served from more than one region is still counted once for storage.
+
+### Can I control how long unused bundles are kept?
+
+Yes. Set the unused-bundle retention period for each app in the [App Information settings](/docs/webapp/main-app-page/#app-information). Bundles that are still linked to an active channel or rollout stay protected so they remain available for delivery and rollback.
+
+### Does regional replication multiply storage or bandwidth?
+
+No. Regional replication does not multiply storage. Capgo bandwidth is based on device downloads that are not served from the edge cache; cache-served deliveries do not count against Capgo bandwidth usage.
+
+## Managing a specific bundle
+
+Once you see the list of all bundles click on the one you want to manage. After you do that you should see something like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-info.webp" alt="bundle info" /><figcaption></figcaption></figure>
+
+The bundle detail page has three tabs:
+
+1. **Information**: Shows all bundle metadata and properties
+2. **Dependencies**: Lists the dependencies included in this bundle
+3. **History**: Shows the history of changes for this bundle
+
+### Bundle Information
+
+The Information tab displays the following details:
+
+- **Bundle number**: The version identifier (e.g., 12.87.1)
+- **ID**: The unique internal identifier for this bundle
+- **Created at**: When the bundle was first uploaded
+- **Updated at**: When the bundle was last modified
+- **Checksum**: The bundle's integrity hash (click to copy)
+- **Channel**: The channel this bundle is linked to (click to open channel or change it)
+- **Encryption**: Whether the bundle is encrypted
+- **CLI version**: The version of Capgo CLI used to upload this bundle
+- **Zip app bundle**: The compressed bundle size (click to download)
+- **Delta files**: Opens the list of delta files for this bundle, or shows **No delta files** when the bundle was uploaded as a full zip only
+- **Status**: Whether the bundle is Active or Inactive (click trash icon to delete)
+
+### Linking a bundle to a channel
+
+Click on the gear icon next to the Channel row or in the Action column to open the channel linking modal:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-change.webp" alt="bundle change" /><figcaption></figcaption></figure>
+
+The modal provides:
+1. **Search channel**: Filter available channels by name
+2. **Current bundle**: Shows the bundle version being linked
+3. **Available channels**: List of all channels with their details (ID, visibility, platforms, creation date). Channels marked as "current" indicate where this bundle is already linked. Public channels show a link icon.
+4. **Set bundle to channel**: Confirms the selection and assigns this bundle to the selected channel
+
+**Set bundle to channel:** Assigns this bundle to a chosen channel. On rollout-configured channels, the dialog title is **This channel uses progressive rollout** and you choose **Auto (recommended)**, **Rollout target**, or **Replace stable**. The banner explains that new uploads and links go to the rollout target unless you replace stable. See [Progressive rollouts](/docs/live-updates/progressive-rollouts/#upload-and-assign-bundles).
+
+To open a channel's dedicated page, click on the channel name link in the Channel row.
+
+To unlink a bundle from a channel, navigate to the channel's configuration page.
+
+### Downloading a bundle
+
+To download a bundle, click on the **Zip app bundle** size value in the Information tab. A confirmation dialog will appear, and upon confirmation, the bundle will be downloaded directly to your device.
+
+## Keep going from Bundles
+
+If you are using **Bundles** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

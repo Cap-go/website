@@ -1,0 +1,77 @@
+---
+title: "@capgo/capacitor-native-navigation"
+description: Native navbar, tabbar, and transition shell chrome for Capacitor apps that keep content in one WebView.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Render iOS and Android navigation chrome natively while JavaScript keeps owning routes, content, icons, labels, and bar state.
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-navigation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-navigation/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Native chrome" icon="puzzle">
+    Draw the top navigation bar and bottom tab bar with platform UI instead of web components.
+  </Card>
+  <Card title="Web-owned routes" icon="rocket">
+    Native emits user intent events, then your existing router changes the WebView content.
+  </Card>
+  <Card title="Serialized icons" icon="pencil">
+    Configure tabs and buttons with SVG, SF Symbol, bundled image, or Android drawable descriptors.
+  </Card>
+  <Card title="Native transition shell" icon="setting">
+    Capture the current WebView, update content in JavaScript, then finish with a native snapshot-to-WebView animation.
+  </Card>
+  <Card title="Zoom routes" icon="star">
+    Open card, grid, and media-detail routes with shared-element-style native zoom geometry.
+  </Card>
+</CardGrid>
+
+## Demo
+
+| Native shell | Tap flow |
+| :---: | :---: |
+| <img src="/plugins/demo/capacitor-native-navigation/demo.webp" alt="Animated native navigation shell demo showing native navbar, tabs, and WebView content" width="280" /> | <img src="/plugins/demo/capacitor-native-navigation/demo-navigation.webp" alt="Animated native navigation tap flow showing tab selection, push transition, and native back" width="280" /> |
+
+## Core API
+
+- `configure(options?)` enables the native chrome host and controls content insets.
+- `setNavbar(options)` updates native title, subtitle, back button, buttons, colors, transparency, and visibility.
+- `setTabbar(options)` updates tabs, selected tab, badges, labels, icons, colors, and visibility.
+- `beginTransition(options?)` captures the outgoing WebView before the JavaScript route change.
+- `finishTransition(options?)` animates from the captured snapshot to the live WebView after route content is ready.
+- `beginZoomTransition(target, options?)` and `finishZoomTransition(target?, options?)` are JavaScript helpers for zoom transitions from elements or rectangles.
+- `getPluginVersion()` returns the native implementation version marker.
+
+## Events
+
+- `navbarBack` fires when the native back affordance is tapped.
+- `navbarItemTap` fires when a native navbar action button is tapped.
+- `tabSelect` fires when a native tab is selected.
+- `safeAreaChanged` reports native bar and safe-area inset changes.
+- `transitionStart` and `transitionEnd` report native transition boundaries.
+
+## Platform Model
+
+iOS uses `UINavigationBar` and `UITabBar`. On iOS 26 and newer, the plugin lets the system render Liquid Glass behavior; older versions use native translucent/material fallbacks.
+
+Android uses an AppCompat toolbar and Material bottom navigation with edge-to-edge placement.
+
+The plugin does not create one native WebView per route. Version 1 keeps a single Capacitor WebView for bridge stability and lets native own only the frame, bar visuals, tab selection chrome, safe-area reporting, and transition shell.
+
+## Keep going from @capgo/capacitor-native-navigation
+
+If you are using **@capgo/capacitor-native-navigation** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

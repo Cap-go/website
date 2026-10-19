@@ -1,0 +1,54 @@
+name: Update Org README
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/web/src/config/plugins.ts'
+      - 'apps/web/src/data/github-stars.json'
+      - 'apps/web/src/data/npm-downloads.json'
+      - 'scripts/generate-plugins-readme.ts'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - name: Checkout website repo
+        uses: actions/checkout@v7
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Fetch latest data
+        run: |
+          bun run fetch:stars
+          bun run fetch:downloads
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Generate README
+        run: bun run generate:plugins-readme
+
+      - name: Push to Cap-go/.github
+        run: |
+          git clone https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/Cap-go/.github.git target-repo
+          cp apps/web/public/plugins-readme.md target-repo/profile/README.md
+          cd target-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add profile/README.md
+          git diff --staged --quiet || git commit -m "Update plugins README from website build"
+          git push

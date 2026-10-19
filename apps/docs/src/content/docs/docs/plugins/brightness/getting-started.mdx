@@ -1,0 +1,340 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-brightness and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-brightness` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-brightness
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+```
+
+## Quick start
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.getBrightness();
+console.log(result);
+```
+
+## Example: setBrightness
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+await CapgoBrightness.setBrightness({ brightness: 0.5 });
+```
+
+## Example: getSystemBrightness
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.getSystemBrightness();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `getBrightness`
+
+Get the current brightness level of the device's main screen.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.getBrightness();
+console.log(result);
+```
+
+### `setBrightness`
+
+Set the brightness level of the device's main screen.
+
+On iOS, the brightness will persist until the device is locked.
+On Android, the brightness only applies to the current activity.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+await CapgoBrightness.setBrightness({ brightness: 0.5 });
+```
+
+### `getSystemBrightness`
+
+Get the system-wide screen brightness.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.getSystemBrightness();
+console.log(result);
+```
+
+### `setSystemBrightness`
+
+Set the system-wide screen brightness.
+Requires WRITE_SETTINGS permission on Android.
+This also changes the brightness mode to MANUAL.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+await CapgoBrightness.setSystemBrightness({ brightness: 0.5 });
+```
+
+### `getSystemBrightnessMode`
+
+Get the current system brightness mode (automatic or manual).
+Requires WRITE_SETTINGS permission on Android.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.getSystemBrightnessMode();
+console.log(result);
+```
+
+### `setSystemBrightnessMode`
+
+Set the system brightness mode (automatic or manual).
+Requires WRITE_SETTINGS permission on Android.
+
+```typescript
+import { CapgoBrightness, BrightnessMode } from '@capgo/capacitor-brightness';
+
+await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.AUTOMATIC });
+```
+
+### `isUsingSystemBrightness`
+
+Check if the current activity is using the system-wide brightness value.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.isUsingSystemBrightness();
+console.log(result);
+```
+
+### `restoreSystemBrightness`
+
+Reset the brightness setting of the current activity to use the system-wide value.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+await CapgoBrightness.restoreSystemBrightness();
+```
+
+### `isAvailable`
+
+Check if the Brightness API is available on the current device.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.isAvailable();
+console.log(result);
+```
+
+### `checkPermissions`
+
+Check user's permissions for accessing system brightness.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions`
+
+Request permissions for accessing system brightness.
+On Android, this opens the system settings to grant WRITE_SETTINGS permission.
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+const result = await CapgoBrightness.requestPermissions();
+console.log(result);
+```
+
+## Type Reference
+
+### `GetBrightnessResult`
+Result of getBrightness or getSystemBrightness.
+```typescript
+export interface GetBrightnessResult {
+  /**
+   * The brightness value from 0 to 1.
+   * 0 is the minimum brightness, 1 is the maximum brightness.
+   *
+   * @since 8.0.0
+   */
+  brightness: number;
+}
+```
+
+### `SetBrightnessOptions`
+Options for setBrightness or setSystemBrightness.
+```typescript
+export interface SetBrightnessOptions {
+  /**
+   * The brightness value from 0 to 1.
+   * 0 is the minimum brightness, 1 is the maximum brightness.
+   *
+   * @since 8.0.0
+   */
+  brightness: number;
+}
+```
+
+### `GetBrightnessModeResult`
+Result of getSystemBrightnessMode.
+```typescript
+export interface GetBrightnessModeResult {
+  /**
+   * The current brightness mode.
+   *
+   * @since 8.0.0
+   */
+  mode: BrightnessMode;
+}
+```
+
+### `SetBrightnessModeOptions`
+Options for setSystemBrightnessMode.
+```typescript
+export interface SetBrightnessModeOptions {
+  /**
+   * The brightness mode to set.
+   * Cannot be set to UNKNOWN.
+   *
+   * @since 8.0.0
+   */
+  mode: BrightnessMode;
+}
+```
+
+### `IsUsingSystemBrightnessResult`
+Result of isUsingSystemBrightness.
+```typescript
+export interface IsUsingSystemBrightnessResult {
+  /**
+   * Whether the current activity is using the system-wide brightness value.
+   *
+   * @since 8.0.0
+   */
+  isUsing: boolean;
+}
+```
+
+### `IsAvailableResult`
+Result of isAvailable.
+```typescript
+export interface IsAvailableResult {
+  /**
+   * Whether the Brightness API is available on the current device.
+   *
+   * @since 8.0.0
+   */
+  available: boolean;
+}
+```
+
+### `PermissionStatus`
+Permission status result.
+```typescript
+export interface PermissionStatus {
+  /**
+   * Whether the permission to modify system brightness is granted.
+   *
+   * @since 8.0.0
+   */
+  brightness: PermissionState;
+}
+```
+
+### `GetPluginVersionResult`
+Result of getPluginVersion.
+```typescript
+export interface GetPluginVersionResult {
+  /**
+   * The native plugin version.
+   *
+   * @since 8.0.0
+   */
+  version: string;
+}
+```
+
+### `BrightnessMode`
+The brightness mode.
+```typescript
+export enum BrightnessMode {
+  /**
+   * The brightness mode is unknown.
+   *
+   * @since 8.0.0
+   */
+  UNKNOWN = 0,
+  /**
+   * The brightness is automatically adjusted by the system.
+   *
+   * @since 8.0.0
+   */
+  AUTOMATIC = 1,
+  /**
+   * The brightness is manually set by the user.
+   *
+   * @since 8.0.0
+   */
+  MANUAL = 2,
+}
+```
+
+### `PermissionState`
+Permission state.
+```typescript
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-brightness](/plugins/capacitor-brightness/) for the native capability in Using @capgo/capacitor-brightness, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

@@ -1,0 +1,121 @@
+---
+import type { GetStaticPaths } from 'astro'
+import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
+import Layout from '@/layouts/Layout.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import m from '@/copy/messages'
+import { alternativeCompetitors } from '@/data/alternatives'
+import type { AlternativeCategory, AlternativeCompetitor } from '@/data/alternatives/types'
+import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { toIsoDate } from '@/data/pageDates'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+export const getStaticPaths: GetStaticPaths = () => alternativeCompetitors.map((competitor) => ({ params: { slug: competitor.slug }, props: { competitor } }))
+
+interface Props {
+  competitor: AlternativeCompetitor
+}
+
+const { competitor } = Astro.props
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+
+const isExternal = (href: string) => /^https?:\/\//.test(href)
+const resolveHref = (href: string) => (isExternal(href) ? href : getRelativeLocaleUrl(locale, href))
+
+const ranking = competitor.alternatives.map((item) => ({
+  name: item.name,
+  text: item.text,
+  href: resolveHref(item.href),
+  external: isExternal(item.href),
+}))
+
+const testimonialsByCategory: Record<AlternativeCategory, keyof typeof productTestimonials> = {
+  framework: 'mobile',
+  'web-to-app': 'mobile',
+  'live-updates': 'liveUpdate',
+  'ci-cd': 'ciCd',
+}
+
+const siblings = alternativeCompetitors.filter((item) => item.category === competitor.category && item.slug !== competitor.slug).slice(0, 4)
+
+const related = [
+  ...siblings.map((item) => ({
+    label: m.alternatives_index_card_title({ competitor: item.name }, { locale }),
+    href: getRelativeLocaleUrl(locale, `alternatives/${item.slug}`),
+  })),
+  { label: m.live_update({}, { locale }), href: getRelativeLocaleUrl(locale, 'live-update') },
+  { label: m.native_build({}, { locale }), href: getRelativeLocaleUrl(locale, 'native-build') },
+  { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
+]
+
+const migration = {
+  ...competitor.migration,
+  links: [
+    { label: m.compare_quickstart_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/getting-started/quickstart/') },
+    { label: m.compare_plugins_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'plugins') },
+  ],
+}
+
+const title = competitor.metaTitle
+const description = competitor.metaDescription
+
+const content = {
+  title,
+  description,
+  canonical: pageUrl,
+  url: pageUrl,
+  image: `${config.baseUrl}/capgo_social.png`,
+  keywords: competitor.keywords,
+  ldJSON: createLdJsonGraph(
+    config,
+    createWebPageLdJson(config, {
+      name: title,
+      description,
+      url: pageUrl,
+      datePublished: toIsoDate(competitor.publishedAt),
+      dateModified: toIsoDate(competitor.updatedAt),
+      inLanguage: locale,
+    }),
+    {
+      includeOrganization: true,
+      additionalEntities: [
+        createItemListLdJson(config, {
+          url: pageUrl,
+          name: m.compare_rank_title({ count: ranking.length + 1, competitor: competitor.name }, { locale }),
+          items: [
+            { name: 'Capgo', url: config.baseUrl, description: m.compare_rank_capgo_text({}, { locale }) },
+            ...ranking.map((item) => ({ name: item.name, url: new URL(item.href, config.baseUrl).href, description: item.text })),
+          ],
+        }),
+        createFAQPageLdJson(config, {
+          url: pageUrl,
+          questions: competitor.faq,
+        }),
+      ],
+    },
+  ),
+}
+---
+
+<Layout content={content}>
+  <ComparisonPage
+    competitor={competitor.name}
+    eyebrow={competitor.eyebrow}
+    heading={competitor.heading}
+    lead={competitor.lead}
+    verdict={competitor.verdict}
+    rows={competitor.rows}
+    capgoRows={competitor.capgoRows}
+    sources={competitor.sources}
+    better={competitor.better}
+    ranking={ranking}
+    migration={migration}
+    faq={competitor.faq}
+    updatedAt={competitor.updatedAt}
+    testimonials={productTestimonials[testimonialsByCategory[competitor.category]]}
+    related={related}
+    secondaryCta={{ label: m.compare_quickstart_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/getting-started/quickstart/') }}
+  />
+</Layout>

@@ -1,0 +1,602 @@
+---
+title: iOS App Store Review Guidelines for IAP
+description: Complete guide to passing App Store review with in-app purchases and subscriptions, including common rejection reasons and best practices.
+sidebar:
+  order: 10
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import acceptedPermissionsImage from './ios-app-store-review-assets/accepted-permissions.png';
+import paywallLinksImage from './ios-app-store-review-assets/paywall-links.png';
+import policyLinksImage from './ios-app-store-review-assets/policy-links.png';
+import rejectedPermissionsImage from './ios-app-store-review-assets/rejected-permissions.webp';
+
+Getting your app approved on the App Store requires careful attention to Apple's guidelines, especially when implementing in-app purchases and subscriptions. This guide covers everything you need to know to pass review on your first submission.
+
+![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.webp)
+
+## Before You Submit
+
+### Finish App Store Connect Setup
+
+Before Apple reviews your purchase flow, make sure the app record itself is complete:
+
+- Add a **Privacy Policy URL** in App Store Connect
+- Add a **Support URL** that leads to real contact information for users
+- Complete the **age rating** questionnaire so the app is publishable
+- Add **App Review contact details** and clear reviewer notes
+- If login is required, provide a **demo account that does not expire during review**
+
+:::note
+Apple treats the support site as more than a placeholder link. It should contain real contact details so users can reach you about app issues, feedback, and feature requests.
+:::
+
+<img src={policyLinksImage.src} alt="App Store listing metadata with policy and support links" />
+
+### Prepare Real Screenshots
+
+- Use current screenshots from the actual build under review
+- For iPhone, `1290 x 2796` (6.7-inch) is the easiest default size
+- If your app runs on iPad, upload iPad screenshots too
+- Current accepted large iPad sizes include `2064 x 2752` (13-inch) and `2048 x 2732` (12.9-inch)
+- Never stretch iPhone screenshots to fake iPad support
+
+### Dry-Run the Reviewer Journey in TestFlight
+
+Run the exact path Apple will follow on a real device:
+
+- Install the latest build from TestFlight
+- Sign in with the review account you plan to provide
+- Reach the paywall without hidden gestures or debug menus
+- Complete purchase, restore, and manage-subscription flows
+- Verify the app still behaves correctly if permissions are denied
+
+## In-App Purchase Requirements
+
+### Pricing Transparency (Critical)
+
+Apple requires crystal-clear pricing disclosure before any purchase:
+
+**Must-Have Elements:**
+- Display exact price before purchase button
+- Show billing frequency (e.g., "$9.99/month")
+- Clearly state what users get for their money
+- Indicate when charges will occur
+
+**Common Rejection:**
+> "Subscription pricing must be clear and upfront."
+
+:::caution Price Consistency
+All prices must match across:
+- App Store metadata listing
+- In-app purchase screens
+- Subscription management screens
+
+Even a $1 discrepancy between store listing ($4.99) and app ($5.99) will trigger automatic rejection.
+:::
+
+### Subscription Plan Presentation
+
+**Required Disclosures:**
+- All available subscription tiers displayed together
+- Clear comparison of features per tier
+- No auto-defaulting to premium tiers through UI tricks
+- Easy-to-locate cancellation instructions
+
+![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.webp)
+
+<img src={paywallLinksImage.src} alt="Paywall with restore purchases and legal links" />
+
+**Example of Compliant UI:**
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+function SubscriptionScreen() {
+  return (
+    <div>
+      <h2>Choose Your Plan</h2>
+
+      {/* Show all tiers equally */}
+      <PlanCard
+        title="Basic"
+        price="$4.99/month"
+        features={['Feature A', 'Feature B']}
+      />
+      <PlanCard
+        title="Premium"
+        price="$9.99/month"
+        features={['All Basic', 'Feature C', 'Feature D']}
+        highlighted={false} // Don't force premium
+      />
+
+      {/* Clear cancellation info */}
+      <Text>
+        Cancel anytime in Settings > Subscriptions.
+        No refunds for partial periods.
+      </Text>
+    </div>
+  );
+}
+```
+
+### Restore Purchases
+
+**Required Implementation:**
+
+Every app with IAP must provide a way for users to restore previous purchases without contacting support.
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function restorePurchases() {
+  try {
+    await NativePurchases.restorePurchases();
+
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    const activeSub = purchases.find(
+      (purchase) => purchase.isActive && purchase.expirationDate,
+    );
+
+    if (activeSub) {
+      unlockPremiumFeatures();
+      showMessage('Purchases restored successfully!');
+      return;
+    }
+
+    const { purchases: iaps } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.INAPP,
+    });
+    const hasIap = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
+
+    showMessage(
+      hasIap ? 'Premium purchase restored!' : 'No previous purchases found.',
+    );
+  } catch (error) {
+    showError('Failed to restore purchases. Please try again.');
+  }
+}
+
+// Add a visible "Restore Purchases" button
+<Button onClick={restorePurchases}>
+  Restore Purchases
+</Button>
+```
+
+## Common Rejection Reasons
+
+### 1. App Crashes or Broken Functionality
+
+**Why It Fails:**
+- App crashes on launch
+- Purchase flow fails to complete
+- Features shown in screenshots don't work
+
+**Prevention:**
+- Test on real devices (not just simulators)
+- Test all subscription flows end-to-end
+- Verify receipt validation works
+- Check network error handling
+
+### 2. Metadata Mismatches
+
+**Why It Fails:**
+- Screenshots show features not in current build
+- Description mentions functionality that doesn't exist
+- Pricing in metadata differs from in-app pricing
+
+![Metadata Checklist](/native-purchases/review-guides/metadata-checklist.webp)
+
+**Prevention:**
+```typescript
+// Document exactly what's in each tier
+const SUBSCRIPTION_FEATURES = {
+  basic: ['Ad-free', 'Cloud sync', 'Basic themes'],
+  premium: ['Ad-free', 'Cloud sync', 'All themes', 'Priority support']
+};
+
+// Use these in both your app AND App Store description
+```
+
+### 3. Missing Permission Explanations
+
+**Why It Fails:**
+- Requesting camera/location/health without explanation
+- Permission requests buried multiple screens deep
+- Vague or generic permission descriptions
+
+**Prevention:**
+
+Update your `Info.plist` with clear explanations:
+
+<img src={rejectedPermissionsImage.src} alt="Permission copy that is too vague for review" />
+
+<img src={acceptedPermissionsImage.src} alt="Permission copy with clearer explanations" />
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>Camera access is needed to scan product barcodes for quick subscription upgrades.</string>
+
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Location helps us show relevant local content in your Premium subscription.</string>
+```
+
+### 4. Misleading Marketing
+
+**Why It Fails:**
+- Claims like "#1 app in world" without proof
+- "Unlimited" features that have hidden limits
+- Fake urgency tactics ("Only 2 spots left!")
+
+![Description Guidelines Examples](/native-purchases/review-guides/description-guidelines-1.webp)
+
+![Additional Description Guidelines](/native-purchases/review-guides/description-guidelines-2.webp)
+
+**Prevention:**
+- Be specific and factual in descriptions
+- Avoid superlatives without evidence
+- Don't pressure users with fake scarcity
+
+### 5. Hidden Cancellation Process
+
+**Why It Fails:**
+- No mention of how to cancel
+- Cancellation button hidden or obscured
+- Multi-step cancellation process without Apple's native flow
+
+**Prevention:**
+```typescript
+// Always inform users about cancellation
+function SubscriptionInfo() {
+  return (
+    <div>
+      <h3>How to Cancel</h3>
+      <ol>
+        <li>Open iPhone Settings</li>
+        <li>Tap your name at the top</li>
+        <li>Tap Subscriptions</li>
+        <li>Select this app and tap Cancel</li>
+      </ol>
+
+      <p>Or manage directly in the App Store app.</p>
+
+      <Button onClick={openSubscriptionManagement}>
+        Manage Subscription in Settings
+      </Button>
+    </div>
+  );
+}
+
+async function openSubscriptionManagement() {
+  // Direct link to iOS subscription management
+  await NativePurchases.showManageSubscriptions();
+}
+```
+
+## Privacy & Data Usage (Section 5.1.1)
+
+Apple has significantly tightened privacy requirements in 2025.
+
+### Required Disclosures
+
+**For Every Permission:**
+1. Why you need it (specific use case)
+2. When it will be used
+3. How data is stored/shared
+4. Whether it's optional or required
+
+### Example: Proper Permission Flow
+
+```typescript
+async function requestCameraPermission() {
+  // Show explanation BEFORE requesting
+  await showDialog({
+    title: 'Camera Access',
+    message: 'We need camera access to let you scan barcodes for quick product lookup. Your photos are never uploaded or stored.',
+    buttons: ['Not Now', 'Allow']
+  });
+
+  // Then request permission
+  const result = await Camera.requestPermissions();
+  return result.camera === 'granted';
+}
+```
+
+### Privacy Nutrition Labels
+
+Ensure your App Store privacy labels accurately reflect:
+- Purchase history collection
+- Email addresses (for receipts)
+- Device IDs (for fraud prevention)
+- Usage data (for analytics)
+
+:::warning
+Inaccurate privacy labels are a common rejection reason in 2025. Audit your data collection carefully.
+:::
+
+## Pre-Submission Checklist
+
+![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.webp)
+
+<Steps>
+
+1. **Test All Purchase Flows**
+   - Buy each subscription tier
+   - Test free trials
+   - Verify introductory offers apply correctly
+   - Test restore purchases
+   - Verify Family Sharing (if enabled)
+   - Test on multiple devices
+
+2. **Verify Pricing Consistency**
+   - Check App Store metadata matches in-app prices
+   - Verify all currencies are correct
+   - Confirm free trial durations match descriptions
+   - Check introductory offer terms are accurate
+
+3. **Review All Copy**
+   - Remove placeholder text
+   - Verify claims are testable
+   - Check grammar and spelling
+   - Ensure descriptions match current build
+   - Remove competitor mentions
+
+4. **Test Permissions**
+   - Request only necessary permissions
+   - Show clear explanations before requesting
+   - Test "Deny" flows (app should still work)
+   - Verify Info.plist descriptions are clear
+
+5. **Prepare Test Account**
+   - Create a review account that remains valid during review
+   - Document login credentials in App Review information
+   - Verify the reviewer can reach the paywall and complete the purchase flow
+   - Include extra accounts or app-specific switches in the Notes field if needed
+
+6. **Check Metadata**
+   - Screenshots match current UI
+   - Support URL includes real contact information
+   - Privacy policy URL is filled in
+   - Age rating matches the content in the build
+   - App preview video (if any) shows current version
+   - Description accurately describes features
+   - Privacy policy is accessible in-app and from the store listing
+
+7. **Write Detailed Review Notes**
+   ```
+   Contact:
+   Name: Jane Developer
+   Email: review@yourapp.com
+   Phone: +1 555-0100
+
+   Test Account:
+   Email: reviewer@test.com
+   Password: TestPass123!
+   This account does not expire during review.
+
+   Testing Instructions:
+   1. Log in with test account above
+   2. Tap "Upgrade to Premium" button
+   3. Select "Monthly Premium" subscription
+   4. Complete purchase (no charge in sandbox)
+   5. Verify premium features unlock
+
+   Note: Subscription pricing is clearly shown before purchase.
+   Cancellation instructions are in Settings > Account.
+   ```
+
+</Steps>
+
+## Review Timeline
+
+![App Store Review Timeline](/native-purchases/review-guides/review-timeline.webp)
+
+**Standard Review:** 24-48 hours
+**Peak Periods:** 3-5 days (App Store holiday releases)
+**Weekends:** No reviews processed
+**Expedited Review:** Available for critical bug fixes (request via App Store Connect)
+
+Common statuses you will see in App Store Connect:
+- `Waiting for Review`
+- `In Review`
+- `Pending Developer Release`
+- `Rejected`
+
+:::tip
+Submit early in the week to avoid weekend delays. Monday submissions typically get reviewed by Wednesday.
+:::
+
+## 2026 Submission Focus
+
+### Current Focus Areas
+
+**1. Subscription Clarity**
+- Side-by-side plan comparisons required
+- No "dark patterns" that hide cheaper options
+- Clear downgrade/upgrade paths
+
+**2. Metadata Accuracy**
+- Screenshots must match the build being reviewed
+- iPad screenshots are required if iPad support is enabled
+- Support URL and privacy policy should already be live before submission
+
+**3. Privacy and Review Detail Quality**
+- Privacy disclosures must match what your SDKs actually collect
+- App Review contact info and notes should be complete on the first submission
+- Demo credentials must stay valid for the full review window
+
+**4. Submission Readiness**
+- Apple updates minimum SDK requirements regularly, so confirm the current deadline before uploading a release build
+- TestFlight is the safest place to verify the exact reviewer path before you submit
+
+## Best Practices for Native Purchases Plugin
+
+### Implement Proper Error Handling
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function handlePurchase(productId: string) {
+  try {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: productId,
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    // Success
+    await validateReceiptOnServer(transaction.receipt);
+    showSuccess('Subscription activated!');
+    unlockFeatures();
+
+  } catch (error: any) {
+    // Handle specific error cases
+    if (error.code === 'USER_CANCELLED') {
+      // User cancelled - don't show error
+      console.log('Purchase cancelled by user');
+    } else if (error.code === 'PAYMENT_PENDING') {
+      showInfo('Payment is pending. Please check back later.');
+    } else if (error.code === 'PRODUCT_ALREADY_PURCHASED') {
+      // Restore instead
+      await NativePurchases.restorePurchases();
+    } else {
+      // Show user-friendly error
+      showError('Unable to complete purchase. Please try again.');
+    }
+  }
+}
+```
+
+### Display Loading States
+
+```typescript
+function PurchaseButton({ productId }: { productId: string }) {
+  const [loading, setLoading] = useState(false);
+
+  const handlePurchase = async () => {
+    setLoading(true);
+    try {
+      await NativePurchases.purchaseProduct({ productIdentifier: productId });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button onClick={handlePurchase} disabled={loading}>
+      {loading ? 'Processing...' : 'Subscribe Now'}
+    </button>
+  );
+}
+```
+
+### Show Terms Clearly
+
+```typescript
+function SubscriptionTerms() {
+  return (
+    <div className="terms">
+      <p>
+        Subscription automatically renews unless cancelled at least 24 hours
+        before the end of the current period.
+      </p>
+      <p>
+        Your account will be charged for renewal within 24 hours prior to
+        the end of the current period.
+      </p>
+      <p>
+        Subscriptions may be managed by the user and auto-renewal may be
+        turned off in Account Settings after purchase.
+      </p>
+      <p>
+        <a href="/terms">Terms of Service</a> |
+        <a href="/privacy/">Privacy Policy</a>
+      </p>
+    </div>
+  );
+}
+```
+
+## If Your App Gets Rejected
+
+### Steps to Resolve
+
+<Steps>
+
+1. **Read the rejection carefully**
+   - Note the specific guideline cited (e.g., 3.1.1, 5.1.1)
+   - Understand exactly what Apple flagged
+
+2. **Fix the issue thoroughly**
+   - Don't just patch - fix root cause
+   - Test the fix extensively
+   - Document what you changed
+
+3. **Respond in Resolution Center**
+   ```
+   Thank you for your feedback. I have addressed the issue:
+
+   Issue: Subscription pricing not clear upfront
+
+   Fix: Added explicit pricing display on subscription selection
+   screen showing "$9.99/month" before purchase button. Also added
+   cancellation instructions on the same screen.
+
+   The changes are in this submission and can be tested using the
+   provided test account.
+   ```
+
+4. **Resubmit promptly**
+   - Resubmissions are typically reviewed faster
+   - Usually within 24 hours
+
+</Steps>
+
+### Appeal Process
+
+If you believe the rejection is incorrect:
+
+![App Store Clarification Process](/native-purchases/review-guides/clarification-process.webp)
+
+1. Click "Appeal" in App Store Connect
+2. Provide clear evidence:
+   - Screenshots showing compliance
+   - References to specific guidelines
+   - Explanation of how you meet requirements
+3. Be professional and factual
+4. Include test account if functionality is hard to find
+
+![Request for Documents Example](/native-purchases/review-guides/request-documents.webp)
+
+## Additional Resources
+
+- [Apple App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)
+- [In-App Purchase Guidelines](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
+- [Subscriptions Best Practices](https://developer.apple.com/app-store/subscriptions/)
+- [App Store Connect Help](https://developer.apple.com/help/app-store-connect/)
+- [Screenshot Specifications](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications)
+- [Platform Version Information](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information)
+
+## Support
+
+If you're still having issues:
+- Review the [Native Purchases documentation](/docs/plugins/native-purchases/getting-started/)
+- Check [common troubleshooting issues](/docs/plugins/native-purchases/getting-started/#troubleshooting)
+- Contact Apple Developer Support for guideline clarifications
+
+### Need Expert Help?
+
+Struggling with app review or need personalized assistance? **[Book a consultation call with our team](https://book.capgo.app/consulting-services/)** for dedicated support with:
+
+- IAP implementation review and optimization
+- App Store review preparation and strategy
+- Submission checklist review
+- Rejection resolution and appeals
+- Complete testing and validation
+
+Our experts have successfully helped hundreds of apps pass review!
+
+## Keep going from iOS App Store Review Guidelines for IAP
+
+If you are using **iOS App Store Review Guidelines for IAP** to plan store approval and distribution, connect it with [Using @capgo/native-purchases](/plugins/capacitor-native-purchases/) for the native capability in Using @capgo/native-purchases, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, and [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market.

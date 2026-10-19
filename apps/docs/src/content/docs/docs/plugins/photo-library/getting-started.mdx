@@ -1,0 +1,306 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-photo-library and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-photo-library` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-photo-library
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+```
+
+## Quick start
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.checkAuthorization();
+console.log(result);
+```
+
+## Example: requestAuthorization
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.requestAuthorization();
+console.log(result);
+```
+
+## Example: getAlbums
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.getAlbums();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `checkAuthorization`
+
+Returns the current authorization status without prompting the user.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.checkAuthorization();
+console.log(result);
+```
+
+### `requestAuthorization`
+
+Requests access to the photo library if needed.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.requestAuthorization();
+console.log(result);
+```
+
+### `getAlbums`
+
+Retrieves the available albums.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.getAlbums();
+console.log(result);
+```
+
+### `getLibrary`
+
+Retrieves library assets along with URLs that can be displayed in the web view.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.getLibrary();
+console.log(result);
+```
+
+### `getPhotoUrl`
+
+Retrieves a displayable URL for the full resolution version of the asset.
+If you already called `getLibrary` with `includeFullResolutionData`, you normally
+do not need this method.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.getPhotoUrl({ id: 'id-123' });
+console.log(result);
+```
+
+### `getThumbnailUrl`
+
+Retrieves a displayable URL for a resized thumbnail of the asset.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.getThumbnailUrl({ id: 'id-123' });
+console.log(result);
+```
+
+### `pickMedia`
+
+Opens the native system picker so the user can select media without granting full photo library access.
+The selected files are copied into the application cache and returned with portable URLs.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const result = await PhotoLibrary.pickMedia();
+console.log(result);
+```
+
+## Type Reference
+
+### `PhotoLibraryAuthorizationState`
+```typescript
+export type PhotoLibraryAuthorizationState = 'authorized' | 'limited' | 'denied' | 'notDetermined';
+```
+
+### `PhotoLibraryAlbum`
+```typescript
+export interface PhotoLibraryAlbum {
+  id: string;
+  title: string;
+  assetCount: number;
+}
+```
+
+### `GetLibraryOptions`
+```typescript
+export interface GetLibraryOptions {
+  /**
+   * Number of assets to skip from the beginning of the query.
+   */
+  offset?: number;
+  /**
+   * Maximum number of assets to return. Omit to return everything that matches.
+   */
+  limit?: number;
+  /**
+   * Include images in the result. Defaults to `true`.
+   */
+  includeImages?: boolean;
+  /**
+   * Include videos in the result. Defaults to `false`.
+   */
+  includeVideos?: boolean;
+  /**
+   * Include information about the albums each asset belongs to. Defaults to `false`.
+   */
+  includeAlbumData?: boolean;
+  /**
+   * Include assets stored in the cloud (iCloud / Google Photos). Defaults to `true`.
+   */
+  includeCloudData?: boolean;
+  /**
+   * If `true`, use the original filenames reported by the OS when available.
+   */
+  useOriginalFileNames?: boolean;
+  /**
+   * Width of the generated thumbnails. Defaults to `512`.
+   */
+  thumbnailWidth?: number;
+  /**
+   * Height of the generated thumbnails. Defaults to `384`.
+   */
+  thumbnailHeight?: number;
+  /**
+   * JPEG quality for generated thumbnails (0-1). Defaults to `0.5`.
+   */
+  thumbnailQuality?: number;
+  /**
+   * When `true`, copies the full sized asset into the app cache and returns its URL.
+   * Defaults to `false`.
+   */
+  includeFullResolutionData?: boolean;
+}
+```
+
+### `GetLibraryResult`
+```typescript
+export interface GetLibraryResult {
+  assets: PhotoLibraryAsset[];
+  /**
+   * Total number of assets matching the query in the library. `assets.length` can be less
+   * than this value when pagination is used.
+   */
+  totalCount: number;
+  /** Whether more assets are available when using pagination. */
+  hasMore: boolean;
+}
+```
+
+### `PhotoLibraryFile`
+```typescript
+export interface PhotoLibraryFile {
+  /** Absolute path on the native file system. */
+  path: string;
+  /**
+   * URL that can be used inside a web view. Usually produced by `Capacitor.convertFileSrc(path)`.
+   */
+  webPath: string;
+  mimeType: string;
+  /** Size in bytes if known, otherwise `-1`. */
+  size: number;
+}
+```
+
+### `PickMediaOptions`
+```typescript
+export interface PickMediaOptions {
+  /**
+   * Maximum number of items the user can select. Use `0` to allow unlimited selection.
+   * Defaults to `1`.
+   */
+  selectionLimit?: number;
+  /** Allow the user to select images. Defaults to `true`. */
+  includeImages?: boolean;
+  /** Allow the user to select videos. Defaults to `false`. */
+  includeVideos?: boolean;
+  /** Width of the generated thumbnails for picked items. Defaults to `256`. */
+  thumbnailWidth?: number;
+  /** Height of the generated thumbnails for picked items. Defaults to `256`. */
+  thumbnailHeight?: number;
+  /** JPEG quality for generated thumbnails (0-1). Defaults to `0.7`. */
+  thumbnailQuality?: number;
+}
+```
+
+### `PickMediaResult`
+```typescript
+export interface PickMediaResult {
+  assets: PhotoLibraryAsset[];
+}
+```
+
+### `PhotoLibraryAsset`
+```typescript
+export interface PhotoLibraryAsset {
+  id: string;
+  fileName: string;
+  type: PhotoAssetType;
+  width: number;
+  height: number;
+  duration?: number;
+  creationDate?: string;
+  modificationDate?: string;
+  latitude?: number;
+  longitude?: number;
+  mimeType: string;
+  /** Size in bytes reported by the OS for the underlying asset, if available. */
+  size?: number;
+  albumIds?: string[];
+  thumbnail?: PhotoLibraryFile;
+  file?: PhotoLibraryFile;
+}
+```
+
+### `PhotoAssetType`
+```typescript
+export type PhotoAssetType = 'image' | 'video';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-photo-library](/plugins/capacitor-photo-library/) for the native capability in Using @capgo/capacitor-photo-library, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

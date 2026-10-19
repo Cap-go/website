@@ -1,0 +1,236 @@
+---
+title: Compliance
+description: "Learn about Capgo's privacy practices, data collection, security compliance, and how we protect your users' information during live updates."
+sidebar:
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo is designed with privacy, security, and compliance in mind. This document explains what data is collected, how it's used, and what measures are in place to protect your users' privacy and ensure regulatory compliance when using Capgo's live update service.
+
+## Data Collection Overview
+
+Capgo collects minimal data necessary to provide the live update service effectively. The data collection is focused on operational requirements rather than user tracking or analytics.
+
+### What Data is Collected
+
+Capgo collects only the data that is necessary to provide the live updates feature. When your app checks for updates or downloads new bundles, the following information is collected:
+
+- **App ID**: A unique identifier for your app that is used to associate the app with the correct account
+- **App Version Code**: The version code of the app that is used to determine which updates are compatible with the app
+- **App Version Name**: The version name of the app that is used for display purposes
+- **Platform**: The platform (iOS, Android, Electron) of the app that is used to determine which updates are compatible with the app
+- **Device ID**: A randomly generated, app-scoped device identifier used for live-update operation, update eligibility, de-duplication of monthly active devices, support, abuse prevention, and operational reliability. It is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers. On iOS, **v7.25.0+** keeps the ID through normal reinstalls using Keychain. On Android, use **v7.50.1+** (or **v5.50.1+** and **v6.50.1+** on those release lines); the ID is restored only when Android Backup/Restore retains the app preferences. Disabling backup, excluding those preferences, or clearing app data generates a new device ID.
+- **Bundle ID**: The unique identifier for the bundle that is currently installed on the device
+- **Channel Name**: The name of the channel that is selected to receive updates
+- **OS Version**: The version of the operating system that is used to determine which updates are compatible with the device
+- **Plugin Version**: The version of the @capgo/capacitor-updater plugin that is used to deliver updates to the device
+- **Request Country**: When available, the latest valid two-letter ISO 3166-1 code received from a Cloudflare-handled request for the device. It is not GPS or a location value supplied by your app.
+
+**Additional Technical Data:**
+- Update check timestamps
+- Download success/failure status
+- Bundle installation status
+- Rollback events and reasons
+- IP address (for geolocation and CDN optimization)
+
+<Aside type="note">
+You can verify the data that is collected by inspecting the source code of the @capgo/capacitor-updater plugin, which is open-source and available on [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo does not collect direct personal identifiers such as names, email addresses, or phone numbers. We treat the app-scoped device identifier as pseudonymous personal data where GDPR applies; it is not an advertising ID, is not derived from hardware identifiers, and is not used to track users across apps, websites, or Capgo customers.
+</Aside>
+
+### Endpoint Storage Detail
+
+The updater can use up to three configured endpoints for update checks, channel self-assignment, and statistics:
+
+- `updateUrl` (`/updates`) checks which bundle the device should receive. This endpoint is required for Capgo Cloud live updates.
+- `channelUrl` (`/channel_self`) reads and updates a device channel assignment.
+- `statsUrl` (`/stats`) sends explicit update lifecycle, health, and failure events. Set `statsUrl` to an empty string to disable these extra stats reports, or point it to a self-hosted endpoint or proxy you control. A proxy keeps statistics out of Capgo only when it terminates the payload instead of forwarding it. See the [self-hosted statistics endpoint contract](/docs/plugins/updater/self-hosted/handling-stats/).
+
+Disabling `statsUrl` changes only the explicit statistics path. `/updates` and `/channel_self` still need a stable, app-scoped `device_id` so Capgo can decide which update and channel apply and count monthly active devices for billing.
+
+When `statsUrl` is enabled, Capgo can store:
+
+| Record | Stored fields |
+| ------ | ------------- |
+| Billing MAU | `device_id`, `app_id`, `org_id`, `timestamp` |
+| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id`, optional request country code |
+| Stats event | `device_id`, `app_id`, `action`, `version_name`, `created_at` |
+
+When `statsUrl` is disabled but `updateUrl` remains enabled, Capgo can still store:
+
+| Record | Stored fields |
+| ------ | ------------- |
+| Billing MAU | `device_id`, `app_id`, `org_id`, `timestamp` |
+| Device inventory | `device_id`, `app_id`, `updated_at`, `platform`, `plugin_version`, `os_version`, `version_build`, `version_name`, `is_prod`, `is_emulator`, `default_channel`, `key_id`, optional `custom_id`, optional request country code |
+| Update-decision event | `device_id`, `app_id`, `action`, `version_name`, `created_at`; actions can include `get`, `noNew`, `missingBundle`, `cannotGetBundle`, platform/version blocking actions, and plan or channel errors |
+
+For native-version billing and charts, runtime telemetry can also include `platform` and `version_build` with MAU usage when the deployed billing store supports those fields. Newer stats telemetry can also include optional stats `metadata` when the app sends it.
+
+<Aside type="caution">
+For HIPAA-minimum deployments, do not send `custom_id`, disable `allow_device_custom_id` for the app, and do not send stats `metadata`. If you disable `statsUrl`, remember that `/updates` still stores the billing and update-decision data listed above.
+</Aside>
+
+The absolute minimum needed to bill MAU is a stable anonymous `device_id`, `app_id`, `org_id`, and a timestamp.
+
+### What Data is NOT Collected
+
+Capgo explicitly does not collect:
+
+- Personal user information or credentials
+- App usage analytics or user behavior data
+- Content from your app or user-generated data
+- Location data beyond general geographic region
+- Advertising IDs, hardware-derived identifiers, or identifiers used to track users across apps, websites, or Capgo customers
+- Biometric or sensitive personal data
+
+## Data Usage and Purpose
+
+The data collected by Capgo is used exclusively for:
+
+### Service Operation
+- Determining which updates are available for specific app versions
+- Optimizing content delivery through geographic CDN selection
+- Ensuring compatibility between updates and device capabilities
+- Managing update rollouts and channel assignments
+
+### Service Improvement
+- Monitoring update success rates and identifying issues
+- Optimizing download performance and reliability
+- Improving the overall update delivery system
+- Debugging and troubleshooting update failures
+
+### Security and Integrity
+- Preventing abuse and ensuring service availability
+- Validating update authenticity and integrity
+- Protecting against malicious or corrupted updates
+- Maintaining service security and stability
+
+## Data Storage and Retention
+
+### Storage Location
+- Update bundles and metadata are stored on secure cloud infrastructure
+- Data is distributed across multiple geographic regions for performance
+- Apps that need EU data residency can set `updateUrl` to `https://plugin.eu.capgo.app/updates`, `statsUrl` to `https://plugin.eu.capgo.app/stats`, and `channelUrl` to `https://plugin.eu.capgo.app/channel_self`. See [Data Location](/docs/live-updates/data-location/) for the exact configuration.
+- All data transmission is encrypted using industry-standard protocols (HTTPS/TLS)
+
+### Data Retention
+
+- Operational records are retained for service operation, security, billing, and support.
+- Bundle retention is configurable for each app in App Settings. Bundles that are linked to an active channel or rollout remain protected; unused bundles become eligible for removal under the app's selected retention rule.
+- Retained historical bundles and Delta assets contribute to storage usage. Regional replication does not multiply storage consumption.
+- Personal data, if any, is deleted according to applicable data protection laws.
+
+### Data Security
+
+- All data is encrypted in transit and at rest
+- Access to data is restricted to authorized personnel only
+- Regular security audits and monitoring are performed
+- Industry-standard security practices are followed
+- **SOC 2 Certification**: Capgo is currently SOC 2 Type II certified, ensuring the highest standards of security, availability, and confidentiality. View our compliance status at [trust.capgo.app](https://trust.capgo.app)
+- **ISO 27001**: Capgo is ISO 27001 certified. View our compliance status at [trust.capgo.app](https://trust.capgo.app)
+- **Continuous Code Auditing**: Every commit is automatically audited by [SonarCloud](https://sonarcloud.io/summary/overall?id=Cap-go_capacitor-updater&branch=main) for the [plugin](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main) and [backend](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main), ensuring code quality, security vulnerabilities detection, and maintainability
+- **Vulnerability Scanning**: Additional security scanning is performed by [Snyk](https://snyk.io/test/github/Cap-go/capgo) to detect and remediate security vulnerabilities in dependencies
+- **Infrastructure Security**: Our hosting infrastructure is continuously monitored and verified through [hosting security checks](https://hosting-checker.net/websites/api.capgo.app)
+- **AI-Powered Code Review**: Every pull request is reviewed by CodeRabbit AI to catch potential issues, security concerns, and maintain code quality standards
+
+## Privacy Controls
+
+### For App Developers
+As a Capgo user, you have control over:
+
+- **Channel Management**: Control which updates are distributed to which users
+- **Data Minimization**: Configure what device information is shared
+- **Geographic Controls**: Manage where your updates are distributed
+- **Retention Settings**: Control how long update data is retained
+
+### For End Users
+Your app users benefit from:
+
+- **Minimal Data Collection**: Only essential data for update delivery is collected
+- **No Tracking**: No cross-app or persistent user tracking
+- **Transparency**: This privacy policy explains exactly what data is collected
+- **Security**: All data transmission is encrypted and secure
+
+## Compliance and Legal
+
+### Data Protection Regulations
+
+Capgo is designed to support compliance with major data protection regulations, including:
+
+- **GDPR** (General Data Protection Regulation)
+- **CCPA** (California Consumer Privacy Act)
+- **COPPA** (Children's Online Privacy Protection Act)
+- Other applicable regional privacy laws
+
+### Current compliance documents
+
+- The [sub-processor list](https://capgo.app/subprocessors/) is Capgo's current public source of truth. It is kept up to date and lists each provider's purpose, processing location, transfer mechanism, and change history.
+- The [Data Processing Agreement](https://capgo.app/dpa/) is available for review.
+
+### App Store and Play Store considerations
+
+Capgo updates only the Capacitor web layer: JavaScript, HTML, CSS, and static assets. It does not change your native binary, native plugins, permissions, entitlements, or store metadata. Each app is reviewed on its own merits, so Capgo cannot guarantee an individual App Store or Play Store approval.
+
+Use live updates only for web-layer changes that remain within the store rules and your submitted app's scope. Ship a normal native release for native capabilities or material functionality changes. Review [Apple's App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) (including guideline 2.5.2) and [Google Play's Device and Network Abuse policy](https://support.google.com/googleplay/android-developer/answer/16559646) for your app before release.
+
+### Your Responsibilities
+
+As an app developer using Capgo, you should:
+
+- Include appropriate privacy disclosures in your app's privacy policy
+- Inform users about the use of live update services when required
+- Confirm that each planned update complies with applicable laws and store rules
+- Implement appropriate consent mechanisms if required
+
+<Aside type="tip">
+**Review your disclosures**: Capgo provides privacy controls and a documented data inventory, but you remain responsible for your app's privacy declarations and regional compliance requirements.
+</Aside>
+
+## Privacy by Design
+
+Capgo follows privacy-by-design principles:
+
+### Data Minimization
+- Only collect data that is absolutely necessary for service operation
+- Avoid collecting personal or sensitive information
+- Use aggregated and anonymized data where possible
+
+### Purpose Limitation
+- Use collected data only for the stated purposes
+- Do not repurpose data for unrelated activities
+- Maintain clear boundaries on data usage
+
+### Transparency
+- Provide clear information about data collection and usage
+- Make privacy practices easily accessible and understandable
+- Regularly update privacy documentation
+
+## Contact and Questions
+
+If you have questions about Capgo's privacy practices or need to report a privacy concern:
+
+- Review our full Privacy Policy at [capgo.app/privacy](https://capgo.app/privacy/)
+- View our security and compliance status at [capgo.app/trust](https://capgo.app/trust/)
+- Contact our privacy team through the support channels
+- Report any privacy-related issues through our security contact
+
+<Aside type="tip">
+Remember to update your own app's privacy policy to reflect the use of Capgo's live update service and any data collection that may occur as part of the update process.
+</Aside>
+
+## Best Practices for Privacy
+
+When implementing Capgo in your app:
+
+1. **Be Transparent**: Inform users about the live update functionality
+2. **Minimize Data**: Only enable data collection features you actually need
+3. **Secure Implementation**: Follow security best practices in your integration
+4. **Regular Reviews**: Periodically review your privacy practices and update policies
+5. **User Control**: Consider providing users with options to control update behavior
+
+By following these practices and understanding Capgo's privacy approach, you can provide your users with a secure, privacy-respecting live update experience.
+
+## Keep going from Compliance
+
+If you are using **Compliance** to plan security and compliance, connect it with [HIPAA Compliance](/docs/live-updates/hipaa-compliance/) for regulated telemetry controls, [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center, and [Organization Security](/docs/webapp/organization-security/) for the implementation detail in Organization Security.

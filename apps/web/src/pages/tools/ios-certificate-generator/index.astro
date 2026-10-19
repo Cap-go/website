@@ -1,0 +1,916 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ToolCatalog from '@/components/tools/ToolCatalog.astro'
+import ToolFaq from '@/components/tools/ToolFaq.astro'
+import ToolCodeBlock from '@/components/tools/ToolCodeBlock.astro'
+import ToolHowTo from '@/components/tools/ToolHowTo.astro'
+import ToolNativeBuildCta from '@/components/tools/ToolNativeBuildCta.astro'
+import ToolRelatedLinks from '@/components/tools/ToolRelatedLinks.astro'
+import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+import SignupCta from '@/components/SignupCta.astro'
+
+const title = 'iOS Certificate Generator: CSR and .p12 Without a Mac'
+const description =
+  'Free iOS certificate generator. Create an Apple CSR and private key, then convert the .cer to .p12 in your browser. No Mac or Keychain Access needed.'
+
+const faqItems = [
+  {
+    question: 'What does this iOS certificate generator create?',
+    answer:
+      'It creates a Certificate Signing Request (.csr) and the matching RSA 2048-bit private key (.pem). Upload the CSR to Apple Developer to get your Apple Distribution or Apple Development certificate (.cer), then combine the .cer with the private key into a .p12 file for Xcode, fastlane, CI, or Capgo Cloud Build.',
+  },
+  {
+    question: 'What is a Certificate Signing Request (CSR)?',
+    answer:
+      'A CSR is a small file that contains your public key and identity details (name, email, country), signed with your private key. Apple uses it to issue a signing certificate bound to that key. The private key never goes to Apple, which is why you must keep the .pem file this tool gives you.',
+  },
+  {
+    question: 'Can I create an iOS distribution certificate without a Mac?',
+    answer:
+      'Yes. Generate the CSR and private key here, upload the CSR in the Apple Developer portal from any browser, download the .cer, and convert it to .p12 with the converter in step 2 of this page. Everything works from Windows, Linux, or macOS, so Keychain Access is not required at any step.',
+  },
+  {
+    question: 'Which certificate type should I choose in Apple Developer?',
+    answer:
+      'Choose Apple Development to run builds on registered test devices from Xcode. Choose Apple Distribution to sign builds for the App Store, TestFlight, and ad hoc distribution. The same CSR works for either type; the type is selected in Apple Developer, not in this tool.',
+  },
+  {
+    question: 'Is the private key stored on the server?',
+    answer:
+      'No. In step 1, the CSR and private key are generated on demand by a stateless Capgo endpoint over HTTPS and returned straight to your browser with Cache-Control: no-store; they are never written to a database or kept after the response. Step 2, the .cer to .p12 converter, runs entirely in your browser and uploads nothing. If your policy requires local key generation, use the equivalent OpenSSL command on this page.',
+  },
+  {
+    question: 'Why do I need to convert the .cer file to .p12?',
+    answer:
+      'The .cer file Apple gives you only contains the public certificate. Signing an app also requires the private key, so build tools expect a .p12 file that bundles the certificate and private key behind a password.',
+  },
+  {
+    question: 'How do I convert a .cer to .p12?',
+    answer:
+      'Use step 2 on this page: select the .cer from Apple (DER or PEM), select the private key .pem used to create the CSR, enter a password, and select Build .p12 file. The browser checks that the certificate matches the key and builds a 3DES-encrypted .p12 that macOS Keychain, Xcode, and fastlane accept. Nothing is uploaded. You can also copy the .p12 as base64 for CI secrets.',
+  },
+  {
+    question: 'Do I need an Apple Developer account?',
+    answer:
+      'Yes. Uploading a CSR and issuing signing certificates requires a paid Apple Developer Program membership (99 USD per year, or the Enterprise program for in-house distribution). The CSR itself can be generated without an account.',
+  },
+  {
+    question: 'How long is an iOS signing certificate valid?',
+    answer:
+      'Apple Development and Apple Distribution certificates are valid for one year. Apps already live on the App Store keep working after the certificate expires or is revoked, but you need a new certificate and provisioning profile to sign the next build.',
+  },
+  {
+    question: 'Can I reuse the same CSR or private key?',
+    answer:
+      'You can, but a fresh key pair per certificate is safer and easier to rotate. What you must not do is mix them: a .cer only works with the exact private key that created its CSR. If the key is lost, revoke the certificate and generate a new CSR.',
+  },
+  {
+    question: 'Can I use this CSR for push notification (APNs) certificates?',
+    answer:
+      'Yes. Apple asks for a CSR when you create an APNs SSL certificate too. For new apps, an APNs authentication key (.p8) is usually simpler because it never expires and works for all your apps.',
+  },
+]
+
+const howToSteps = [
+  {
+    name: 'Generate the CSR and private key',
+    text: 'Enter your name, email, and two-letter country code in the form above and select Generate CSR and private key. Download both files and keep the private key safe.',
+  },
+  {
+    name: 'Create the certificate in Apple Developer',
+    text: 'Sign in to developer.apple.com, open Certificates, Identifiers & Profiles, select the plus button, and choose Apple Distribution or Apple Development.',
+  },
+  {
+    name: 'Upload the CSR and download the .cer',
+    text: 'Upload the ios-certificate-request.csr file, continue, and download the issued certificate, usually named distribution.cer or development.cer.',
+  },
+  {
+    name: 'Convert the .cer to a .p12 file',
+    text: 'Use the .cer to .p12 converter in step 2 of this page: select the .cer and the private key, set a password, and download the .p12. It runs in your browser, or use the OpenSSL command instead.',
+  },
+  {
+    name: 'Create a provisioning profile',
+    text: 'In Apple Developer, create an App Store, ad hoc, or development provisioning profile for your App ID and select the new certificate.',
+  },
+  {
+    name: 'Sign and ship your app',
+    text: 'Import the .p12 and profile into Xcode, fastlane, your CI secrets, or Capgo Cloud Build, then build and upload your app to TestFlight or the App Store.',
+  },
+]
+
+const opensslCsrCommand = `openssl req -new -newkey rsa:2048 -nodes \\
+  -keyout ios-private-key.pem \\
+  -out ios-certificate-request.csr \\
+  -subj "/emailAddress=jane@company.com/CN=Jane Doe/C=US"`
+
+const p12Snippet = `# 1. Convert Apple's DER .cer to PEM
+openssl x509 -inform DER -in distribution.cer -out distribution.pem
+
+# 2. Bundle the certificate and private key into a .p12
+#    -legacy (OpenSSL 3) keeps the file compatible with macOS Keychain.
+#    Drop it on OpenSSL 1.1 or LibreSSL, which do not support the flag.
+openssl pkcs12 -export -legacy \\
+  -inkey ios-private-key.pem \\
+  -in distribution.pem \\
+  -name "Apple Distribution" \\
+  -out distribution.p12`
+
+const capgoSnippet = `bunx @capgo/cli@latest build credentials save \\
+  --platform ios \\
+  --certificate ./distribution.p12 \\
+  --p12-password "your-p12-password" \\
+  --ios-provisioning-profile "com.example.app=./profile.mobileprovision" \\
+  --apple-team-id "TEAM123456"`
+
+const fastlaneSnippet = `import_certificate(
+  certificate_path: "distribution.p12",
+  certificate_password: ENV["P12_PASSWORD"],
+  keychain_name: "build.keychain",
+  keychain_password: ENV["KEYCHAIN_PASSWORD"]
+)`
+
+const ciSnippet = `# Encode the .p12 and profile for CI secrets
+base64 -i distribution.p12 | tr -d '\\n' > p12.base64
+base64 -i profile.mobileprovision | tr -d '\\n' > profile.base64
+
+# Check that the certificate and key match (both hashes must be equal)
+openssl x509 -noout -modulus -in distribution.pem | openssl md5
+openssl rsa -noout -modulus -in ios-private-key.pem | openssl md5`
+
+const troubleshooting = [
+  {
+    error: 'The password you entered is incorrect (Keychain import)',
+    fix: 'OpenSSL 3 encrypts .p12 files with algorithms that macOS Keychain can reject. Re-export the .p12 with OpenSSL 3 and the -legacy flag shown above.',
+  },
+  {
+    error: 'No certificate matches private key',
+    fix: 'The .cer was issued for a different CSR. Use the private key downloaded with that exact CSR, or revoke the certificate and start again with a new CSR.',
+  },
+  {
+    error: 'unable to load certificates',
+    fix: 'Apple delivers .cer files in DER format. Add -inform DER when converting the .cer with openssl x509.',
+  },
+  {
+    error: 'Provisioning profile does not include signing certificate',
+    fix: 'Profiles are tied to specific certificates. Edit or regenerate the provisioning profile after creating the new certificate, then download it again.',
+  },
+  {
+    error: 'You have reached the maximum number of certificates',
+    fix: 'Apple limits how many distribution certificates a team can hold. Revoke an unused one in Apple Developer. Live App Store apps are not affected.',
+  },
+  {
+    error: 'Certificate is not trusted in Keychain',
+    fix: 'Install the current Apple Worldwide Developer Relations (WWDR) intermediate certificate from Apple PKI, then import the .p12 again.',
+  },
+]
+
+const relatedLinks = [
+  {
+    title: 'Build and sign iOS and Android apps in the cloud with Capgo',
+    description: 'Upload your .p12 and provisioning profile, then run signed iOS and Android release builds from CI or the Capgo console.',
+    path: 'native-build',
+  },
+  {
+    title: 'iOS signing credentials and provisioning profiles',
+    description: 'Step-by-step setup of certificates, profiles, and App Store Connect API keys for cloud builds.',
+    path: 'docs/builder/ios',
+  },
+  {
+    title: 'Build an iOS app from Windows',
+    description: 'Ship a Capacitor iOS app to the App Store without owning a Mac.',
+    path: 'blog/build-ios-app-from-windows-capacitor-capgo-build',
+  },
+  {
+    title: 'Automatic Capacitor iOS build with GitHub Actions',
+    description: 'Store the .p12 and provisioning profile as secrets and sign every release in CI.',
+    path: 'blog/automatic-capacitor-ios-build-github-action',
+  },
+  {
+    title: 'Certificate management for app development',
+    description: 'Track expirations and rotate signing certificates before they block a release.',
+    path: 'blog/certificate-management',
+  },
+  {
+    title: 'Manage Apple Push Notification service certificates',
+    description: 'Create and renew APNs certificates, or switch to token-based .p8 keys.',
+    path: 'blog/apple-push-notification-service-certificates',
+  },
+]
+
+const softwareApplication = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo iOS Certificate Generator',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Web',
+  offers: {
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+})
+
+const faqLdJson = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  questions: faqItems,
+})
+
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const howToLdJson = createHowToLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  name: 'How to create an iOS distribution certificate without a Mac',
+  description: 'Generate a CSR and private key, issue an Apple certificate, and convert it to a .p12 file for Xcode, fastlane, CI, or cloud builds.',
+  totalTime: 'PT10M',
+  tools: ['Web browser', 'Apple Developer account', 'OpenSSL'],
+  steps: howToSteps,
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, softwareApplication, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+    { name: 'Tools', url: new URL('/tools/', Astro.locals.runtimeConfig.public.baseUrl).toString() },
+    { name: 'iOS Certificate Generator', url: Astro.url.href },
+  ],
+  additionalEntities: [faqLdJson, howToLdJson, webPage],
+})
+
+const content = {
+  title,
+  description,
+  keywords:
+    'ios certificate generator, create ios distribution certificate without mac, convert cer to p12, cer to p12 converter, ios csr generator, apple csr generator, generate p12 certificate, ios p12 without mac, apple distribution certificate, certificate signing request online, ios signing certificate windows',
+  ldJSON,
+}
+
+const benefits = [
+  'Create an Apple-ready CSR without Keychain Access or a Mac, from Windows, Linux, or macOS.',
+  'Works for Apple Distribution (App Store, TestFlight, ad hoc) and Apple Development certificates.',
+  'Convert the issued .cer to .p12 right on this page, in your browser, for Xcode, fastlane, CI, or Capgo Cloud Build.',
+]
+---
+
+<Layout content={content}>
+  <div class="hero-wash">
+  <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute top-10 left-0 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p class="text-sm font-semibold tracking-[0.3em] text-cyan-300 uppercase">Apple signing</p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">iOS Certificate Generator</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            Create an iOS distribution or development certificate without a Mac. Generate the Certificate Signing Request (CSR) and private key here, upload the CSR to Apple,
+            and turn the issued certificate into a .p12 file for signing.
+          </p>
+
+          <ul class="mt-8 space-y-3 text-sm leading-7 text-slate-200">
+            {
+              benefits.map((benefit) => (
+                <li class="flex gap-3">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-cyan-300" />
+                  <span>{benefit}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="#generator"
+              class="inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            >
+              Generate CSR now
+            </a>
+            <a
+              href="#how-to"
+              class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-white/5"
+            >
+              See the step-by-step guide
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Workflow</p>
+          <ol class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
+            <li><strong class="text-white">1.</strong> Enter the certificate subject details you want attached to the signing request.</li>
+            <li><strong class="text-white">2.</strong> Download the CSR and matching private key.</li>
+            <li><strong class="text-white">3.</strong> Upload the CSR in Apple Developer when creating your certificate.</li>
+            <li><strong class="text-white">4.</strong> Convert the issued .cer and the private key into a password-protected .p12 in step 2 below.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="generator" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Step 1</p>
+          <h2 class="mt-3 text-3xl font-bold text-white">Generate the CSR and private key</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">Use the same person or organization identity you want represented in the Apple certificate request.</p>
+
+          <form id="ios-certificate-form" class="mt-8 space-y-5">
+            <div>
+              <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-common-name">Full name</label>
+              <input
+                id="ios-common-name"
+                name="commonName"
+                required
+                class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                placeholder="Jane Doe"
+              />
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-email">Email</label>
+                <input
+                  id="ios-email"
+                  name="emailAddress"
+                  type="email"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="jane@company.com"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-country">Country code</label>
+                <input
+                  id="ios-country"
+                  name="countryName"
+                  required
+                  maxlength="2"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white uppercase transition outline-none focus:border-cyan-300/60"
+                  placeholder="US"
+                />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-organization">Organization</label>
+                <input
+                  id="ios-organization"
+                  name="organization"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Acme Mobile"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-organizational-unit">Organizational unit</label>
+                <input
+                  id="ios-organizational-unit"
+                  name="organizationalUnit"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Release Engineering"
+                />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-city">City</label>
+                <input
+                  id="ios-city"
+                  name="localityName"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Paris"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-state">State or province</label>
+                <input
+                  id="ios-state"
+                  name="stateOrProvinceName"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Ile-de-France"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="inline-flex w-full items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            >
+              Generate CSR and private key
+            </button>
+          </form>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-slate-950/80 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Output</p>
+          <h2 class="mt-3 text-3xl font-bold text-white">Your generated signing request</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">Nothing is shown until the CSR is generated. Once ready, download both files and store the private key securely.</p>
+
+          <div id="ios-certificate-error" class="mt-6 hidden rounded-2xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200"></div>
+          <div id="ios-certificate-empty" class="mt-8 rounded-3xl border border-dashed border-white/10 px-6 py-12 text-center text-sm text-slate-400">
+            Generate a certificate request to see the subject summary and download buttons here.
+          </div>
+
+          <div id="ios-certificate-result" class="mt-8 hidden">
+            <div id="ios-certificate-summary" class="rounded-3xl border border-white/10 bg-white/5 p-6"></div>
+            <div id="ios-certificate-downloads" class="mt-6 grid gap-4 sm:grid-cols-2"></div>
+            <div class="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-6 text-sm leading-7 text-slate-300">
+              Upload the CSR to Apple Developer and keep the private key outside Git. When Apple issues the <code class="text-cyan-200">.cer</code>,
+              <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href="#cer-to-p12">convert it to a .p12</a> in step 2.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cer-to-p12" class="border-t border-white/10 py-16 sm:py-20" aria-labelledby="cer-to-p12-title">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Step 2</p>
+          <h2 id="cer-to-p12-title" class="mt-3 text-3xl font-bold text-white">Convert your Apple .cer to .p12</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            After Apple issues your certificate, combine the <code class="text-cyan-200">.cer</code> with the private key from step 1 to get a password-protected
+            <code class="text-cyan-200">.p12</code> for Xcode, fastlane, CI, or Capgo Cloud Build.
+          </p>
+          <p class="mt-3 text-sm leading-7 text-slate-300">
+            <strong class="text-white">Runs entirely in your browser.</strong> Your certificate, private key, and password are read locally and never uploaded to any server.
+          </p>
+
+          <form id="p12-form" class="mt-8 space-y-5" method="dialog" novalidate>
+            <div>
+              <label class="mb-2 block text-sm font-medium text-slate-200" for="p12-certificate">Apple certificate (.cer)</label>
+              <input
+                id="p12-certificate"
+                name="certificate"
+                type="file"
+                accept=".cer,.crt,.der,.pem,application/x-x509-ca-cert,application/pkix-cert"
+                required
+                aria-describedby="p12-certificate-hint"
+                class="block w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-sm text-slate-200 file:mr-4 file:rounded-xl file:border-0 file:bg-cyan-400 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-950 focus:border-cyan-300/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+              />
+              <p id="p12-certificate-hint" class="mt-2 text-xs text-slate-400">The distribution.cer or development.cer file from Apple Developer. DER and PEM are both accepted.</p>
+            </div>
+
+            <div>
+              <label class="mb-2 block text-sm font-medium text-slate-200" for="p12-private-key">Private key (.pem or .key)</label>
+              <input
+                id="p12-private-key"
+                name="privateKey"
+                type="file"
+                accept=".pem,.key,.txt,application/x-pem-file"
+                required
+                aria-describedby="p12-private-key-hint"
+                class="block w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-sm text-slate-200 file:mr-4 file:rounded-xl file:border-0 file:bg-cyan-400 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-950 focus:border-cyan-300/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+              />
+              <p id="p12-private-key-hint" class="mt-2 text-xs text-slate-400">The ios-private-key.pem file downloaded with the CSR you uploaded to Apple.</p>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="p12-password">.p12 password</label>
+                <input
+                  id="p12-password"
+                  name="password"
+                  type="password"
+                  autocomplete="new-password"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="p12-password-confirm">Confirm password</label>
+                <input
+                  id="p12-password-confirm"
+                  name="passwordConfirm"
+                  type="password"
+                  autocomplete="new-password"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="inline-flex w-full items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-wait disabled:opacity-70"
+            >
+              Build .p12 file
+            </button>
+          </form>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-slate-950/80 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Output</p>
+          <h2 class="mt-3 text-3xl font-bold text-white">Your .p12 signing identity</h2>
+          <p id="p12-status" class="mt-4 text-sm leading-7 text-slate-300" role="status" aria-live="polite">
+            Select your .cer and private key, set a password, and build the .p12. It uses 3DES encryption with a SHA-1 MAC, the format macOS Keychain and Xcode accept.
+          </p>
+          <div id="p12-error" class="mt-6 hidden rounded-2xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200" role="alert"></div>
+
+          <div id="p12-result" class="mt-8 hidden">
+            <dl id="p12-summary" class="grid gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 sm:grid-cols-2"></dl>
+            <button
+              id="p12-download"
+              type="button"
+              class="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            >
+              Download .p12
+            </button>
+            <div class="mt-6">
+              <label class="mb-2 block text-sm font-medium text-slate-200" for="p12-base64">Base64 for CI secrets (for example BUILD_CERTIFICATE_BASE64)</label>
+              <textarea
+                id="p12-base64"
+                readonly
+                rows="4"
+                class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 font-mono text-xs break-all text-slate-200 outline-none focus:border-cyan-300/60"
+              ></textarea>
+              <button
+                id="p12-copy"
+                type="button"
+                class="mt-3 inline-flex items-center justify-center rounded-2xl border border-white/15 px-5 py-2 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-white/5"
+              >
+                Copy base64
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <article class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Basics</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">What is an iOS signing certificate?</h2>
+        <div class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <p>
+            Apple requires every iOS app to be code signed. A signing certificate proves the build comes from a member of your Apple Developer team, and iOS refuses to install
+            or launch apps whose signature it cannot trust.
+          </p>
+          <p>
+            Getting one takes three files. The <strong class="text-white">CSR</strong> (.csr) holds your public key and identity and goes to Apple. The
+            <strong class="text-white">private key</strong> (.pem) stays with you. The <strong class="text-white">certificate</strong> (.cer) is what Apple issues back. Build tools
+            then need the certificate and private key together as a <strong class="text-white">.p12</strong> file.
+          </p>
+          <p>
+            On a Mac, Keychain Access creates the CSR and hides the private key in your login keychain. This generator gives you both files directly, so you can create an Apple
+            Distribution or Apple Development certificate from Windows, Linux, or a CI runner, and you always know where the key is.
+          </p>
+        </div>
+      </article>
+
+      <article class="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Security and privacy</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">How your private key is handled</h2>
+        <ul class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <li>The CSR and RSA 2048-bit private key are created on demand by a stateless Capgo endpoint over HTTPS and returned directly to your browser.</li>
+          <li>Responses are sent with <code class="text-cyan-200">Cache-Control: no-store</code>. Nothing is saved to a database or kept after the response.</li>
+          <li>The CSR is signed with SHA-256, the format Apple Developer expects. Only the CSR is uploaded to Apple; the private key stays with you.</li>
+          <li>The .cer to .p12 converter runs entirely in your browser. Your certificate, private key, and password are never uploaded.</li>
+          <li>No account or sign-up is required, and requests are rate limited to prevent abuse.</li>
+        </ul>
+        <p class="mt-6 text-sm leading-7 text-slate-300">Prefer to generate the key locally? This OpenSSL command produces the same two files.</p>
+        <ToolCodeBlock label="Equivalent OpenSSL command" code={opensslCsrCommand} />
+      </article>
+    </div>
+  </section>
+
+  <ToolHowTo
+    title="How to create an iOS distribution certificate without a Mac"
+    intro="From CSR to a signed build on TestFlight. Every step works from a browser and a terminal on Windows, Linux, or macOS."
+    steps={howToSteps}
+  />
+
+  <section id="convert-p12" class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Use the output</p>
+        <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">Sign your iOS app with the .p12</h2>
+        <p class="mt-4 text-base leading-7 text-slate-300">
+          The fastest path is the <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href="#cer-to-p12">in-browser .cer to .p12 converter</a> above.
+          Prefer the command line? OpenSSL does the same job; it asks for an export password that becomes your .p12 password.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-xl font-bold text-white">Create the .p12 with OpenSSL</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">OpenSSL is preinstalled on macOS and most Linux distributions, and available on Windows through Git Bash or WSL.</p>
+          <ToolCodeBlock label="Convert .cer to .p12" code={p12Snippet} />
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-xl font-bold text-white">Capgo Cloud Build</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">
+            Save the .p12 and provisioning profile once, then <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}>build and sign iOS and Android apps in the cloud with Capgo</a>.
+          </p>
+          <ToolCodeBlock label="Capgo CLI" code={capgoSnippet} />
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-xl font-bold text-white">fastlane and Xcode</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">
+            On a Mac, double-click the .p12 to import it into Keychain and Xcode picks it up. On a CI runner, import it into a temporary keychain with fastlane.
+          </p>
+          <ToolCodeBlock label="Fastfile" code={fastlaneSnippet} />
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-xl font-bold text-white">CI secrets and key checks</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Encode signing files for GitHub Actions or GitLab secrets, and confirm the certificate matches the private key.</p>
+          <ToolCodeBlock label="base64 and OpenSSL" code={ciSnippet} />
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="troubleshooting" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Troubleshooting</p>
+        <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">Common iOS certificate errors and fixes</h2>
+      </div>
+      <dl class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          troubleshooting.map((item) => (
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <dt class="font-mono text-sm font-semibold text-rose-200">{item.error}</dt>
+              <dd class="mt-3 text-sm leading-7 text-slate-300">{item.fix}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="border-b border-white/10 bg-linear-to-b from-slate-950 to-slate-900 py-12 sm:py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8 sm:p-10">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">After signing</p>
+        <h2 class="mt-3 text-2xl font-bold text-white sm:text-3xl">Ship web fixes without another store round-trip</h2>
+        <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-300">
+          Once the native binary is signed, Capgo live updates can deliver Capacitor web-layer changes over the air: channels, rollback, and any CI/CD you already use.
+          Free to try when you are ready to wire OTA into the same release path.
+        </p>
+        <SignupCta id="ios-certificate-generator-signup-cta" align="start" humanSupport class="mt-8" />
+      </div>
+    </div>
+  </section>
+
+  <ToolFaq items={faqItems} title="iOS certificate generator FAQ" intro="Answers about CSRs, certificate types, .p12 conversion, Apple Developer accounts, and using certificates in CI or cloud builds." />
+
+  <ToolNativeBuildCta
+    accent="cyan"
+    description="Upload the .p12 and provisioning profile you create with this tool, trigger release builds from CI, and ship to TestFlight or the App Store without maintaining your own build farm."
+  />
+
+  <ToolRelatedLinks title="iOS signing and release guides" links={relatedLinks} />
+
+  <ToolCatalog current="ios-certificate-generator" />
+  </div>
+</Layout>
+
+<script>
+  import type { DownloadableFile } from '@/scripts/tool-client'
+  import { downloadFile, postJson } from '@/scripts/tool-client'
+
+  interface IosCertificateResponse {
+    summary: {
+      subject: string
+      keyType: string
+      hashAlgorithm: string
+    }
+    files: DownloadableFile[]
+  }
+
+  const form = document.getElementById('ios-certificate-form') as HTMLFormElement | null
+  const errorBox = document.getElementById('ios-certificate-error') as HTMLDivElement | null
+  const emptyState = document.getElementById('ios-certificate-empty') as HTMLDivElement | null
+  const result = document.getElementById('ios-certificate-result') as HTMLDivElement | null
+  const summary = document.getElementById('ios-certificate-summary') as HTMLDivElement | null
+  const downloads = document.getElementById('ios-certificate-downloads') as HTMLDivElement | null
+
+  let generatedFiles: DownloadableFile[] = []
+
+  const createSummaryItem = (label: string, value: string) => {
+    const wrapper = document.createElement('div')
+    const term = document.createElement('dt')
+    const detail = document.createElement('dd')
+
+    term.className = 'text-xs uppercase tracking-[0.25em] text-cyan-300'
+    term.textContent = label
+
+    detail.className = 'mt-2 text-sm leading-7 text-white'
+    detail.textContent = value
+
+    wrapper.append(term, detail)
+    return wrapper
+  }
+
+  const renderSummary = (response: IosCertificateResponse) => {
+    const list = document.createElement('dl')
+    list.className = 'grid gap-4 sm:grid-cols-3'
+    list.append(
+      createSummaryItem('Subject', response.summary.subject),
+      createSummaryItem('Key type', response.summary.keyType),
+      createSummaryItem('Hash', response.summary.hashAlgorithm),
+    )
+    summary?.replaceChildren(list)
+  }
+
+  const renderDownloads = (files: DownloadableFile[]) => {
+    const buttons = files.map((file, index) => {
+      const button = document.createElement('button')
+      const name = document.createElement('span')
+      const hint = document.createElement('span')
+
+      button.type = 'button'
+      button.dataset.fileIndex = String(index)
+      button.className = 'rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-left transition hover:border-cyan-300/50 hover:bg-white/8'
+
+      name.className = 'block text-sm font-semibold text-white'
+      name.textContent = file.fileName
+
+      hint.className = 'mt-2 block text-xs uppercase tracking-[0.2em] text-cyan-300'
+      hint.textContent = 'Download file'
+
+      button.append(name, hint)
+      return button
+    })
+
+    downloads?.replaceChildren(...buttons)
+  }
+
+  downloads?.addEventListener('click', (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-file-index]')
+    if (!target) return
+    const file = generatedFiles[Number.parseInt(target.dataset.fileIndex || '-1', 10)]
+    if (file) downloadFile(file)
+  })
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault()
+
+    if (!form || !errorBox || !emptyState || !result || !summary || !downloads) return
+
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null
+    const originalLabel = submitButton?.textContent || ''
+    if (submitButton) {
+      submitButton.disabled = true
+      submitButton.textContent = 'Generating...'
+    }
+
+    errorBox.classList.add('hidden')
+
+    try {
+      const formData = new FormData(form)
+      const payload = Object.fromEntries(formData.entries())
+      const response = await postJson<IosCertificateResponse>('/api/tools/ios-certificate-generator', payload)
+
+      generatedFiles = response.files
+      renderSummary(response)
+      renderDownloads(response.files)
+
+      emptyState.classList.add('hidden')
+      result.classList.remove('hidden')
+    } catch (error) {
+      errorBox.textContent = error instanceof Error ? error.message : 'The CSR generation failed.'
+      errorBox.classList.remove('hidden')
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false
+        submitButton.textContent = originalLabel
+      }
+    }
+  })
+</script>
+
+<script>
+  import { downloadFile } from '@/scripts/tool-client'
+
+  const p12Form = document.getElementById('p12-form') as HTMLFormElement | null
+  const p12Status = document.getElementById('p12-status') as HTMLParagraphElement | null
+  const p12Error = document.getElementById('p12-error') as HTMLDivElement | null
+  const p12Result = document.getElementById('p12-result') as HTMLDivElement | null
+  const p12Summary = document.getElementById('p12-summary') as HTMLDListElement | null
+  const p12Download = document.getElementById('p12-download') as HTMLButtonElement | null
+  const p12Base64 = document.getElementById('p12-base64') as HTMLTextAreaElement | null
+  const p12Copy = document.getElementById('p12-copy') as HTMLButtonElement | null
+
+  let p12File: { fileName: string; base64: string } | null = null
+
+  const showP12Error = (message: string) => {
+    if (!p12Error) return
+    p12Error.textContent = message
+    p12Error.classList.remove('hidden')
+  }
+
+  const addSummaryItem = (label: string, value: string) => {
+    const wrapper = document.createElement('div')
+    const term = document.createElement('dt')
+    const detail = document.createElement('dd')
+    term.className = 'text-xs uppercase tracking-[0.25em] text-cyan-300'
+    term.textContent = label
+    detail.className = 'mt-2 text-sm leading-7 break-words text-white'
+    detail.textContent = value
+    wrapper.append(term, detail)
+    p12Summary?.append(wrapper)
+  }
+
+  p12Form?.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    if (!p12Form || !p12Status || !p12Error || !p12Result || !p12Summary || !p12Base64) return
+
+    const formData = new FormData(p12Form)
+    const certificate = formData.get('certificate')
+    const privateKey = formData.get('privateKey')
+    const password = String(formData.get('password') ?? '')
+    const passwordConfirm = String(formData.get('passwordConfirm') ?? '')
+
+    p12Error.classList.add('hidden')
+    p12Error.textContent = ''
+
+    if (!(certificate instanceof File) || certificate.size === 0) {
+      showP12Error('Select the .cer certificate file you downloaded from Apple Developer.')
+      return
+    }
+    if (!(privateKey instanceof File) || privateKey.size === 0) {
+      showP12Error('Select the private key .pem file from step 1.')
+      return
+    }
+    if (!password) {
+      showP12Error('Enter a password to protect the .p12 file.')
+      return
+    }
+    if (password !== passwordConfirm) {
+      showP12Error('The two passwords do not match.')
+      return
+    }
+
+    const submitButton = p12Form.querySelector('button[type="submit"]') as HTMLButtonElement | null
+    const originalLabel = submitButton?.textContent || ''
+    if (submitButton) {
+      submitButton.disabled = true
+      submitButton.textContent = 'Building .p12...'
+    }
+    p12Status.textContent = 'Building your .p12 locally in this browser...'
+
+    try {
+      const { convertCertificateToP12 } = await import('@/lib/tools/p12')
+      const result = await convertCertificateToP12({
+        certificate: new Uint8Array(await certificate.arrayBuffer()),
+        privateKey: await privateKey.text(),
+        password,
+      })
+
+      p12File = { fileName: result.fileName, base64: result.base64 }
+      p12Summary.replaceChildren()
+      addSummaryItem('Certificate', result.summary.commonName)
+      if (result.summary.teamId) addSummaryItem('Team ID', result.summary.teamId)
+      addSummaryItem('Expires', result.summary.expiresAt.toISOString().slice(0, 10))
+      addSummaryItem('Encryption', '3DES, SHA-1 MAC')
+      p12Base64.value = result.base64
+      p12Result.classList.remove('hidden')
+
+      p12Status.textContent = result.summary.expired
+        ? `Built ${result.fileName}, but this certificate has expired. Create a new certificate in Apple Developer before signing.`
+        : `Built ${result.fileName}. The certificate matches your private key. Download it or copy the base64 value below.`
+    } catch (error) {
+      p12Result.classList.add('hidden')
+      p12File = null
+      p12Status.textContent = 'The .p12 could not be built.'
+      showP12Error(error instanceof Error ? error.message : 'The .p12 conversion failed.')
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false
+        submitButton.textContent = originalLabel
+      }
+    }
+  })
+
+  p12Download?.addEventListener('click', () => {
+    if (!p12File) return
+    downloadFile({ fileName: p12File.fileName, mimeType: 'application/x-pkcs12', encoding: 'base64', content: p12File.base64 })
+  })
+
+  p12Copy?.addEventListener('click', async () => {
+    if (!p12Base64 || !p12Status) return
+    try {
+      await navigator.clipboard.writeText(p12Base64.value)
+      p12Status.textContent = 'Base64 copied to the clipboard.'
+    } catch {
+      p12Base64.select()
+      p12Status.textContent = 'Copy failed. The base64 value is selected so you can copy it manually.'
+    }
+  })
+</script>

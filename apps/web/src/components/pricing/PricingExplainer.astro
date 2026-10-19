@@ -1,0 +1,119 @@
+---
+import m from '@/copy/messages'
+import { planYearlyPrice } from '@/lib/planCopy'
+import type { Database } from '@/services/supabase.types'
+
+type PlanRow = Database['public']['Tables']['plans']['Row']
+
+interface Props {
+  plans: PlanRow[]
+}
+
+const { plans } = Astro.props
+const locale = Astro.locals.locale
+
+const questions = [
+  { title: m.pricing_explainer_mau_title({}, { locale }), body: m.pricing_explainer_mau_body({}, { locale }) },
+  { title: m.pricing_explainer_limit_title({}, { locale }), body: m.pricing_explainer_limit_body({}, { locale }) },
+  { title: m.pricing_explainer_bandwidth_title({}, { locale }), body: m.pricing_explainer_bandwidth_body({}, { locale }) },
+  { title: m.pricing_explainer_build_title({}, { locale }), body: m.pricing_explainer_build_body({}, { locale }) },
+]
+
+const highlights = [m.pricing_explainer_seats({}, { locale }), m.pricing_explainer_cancel({}, { locale }), m.pricing_explainer_trial({}, { locale })]
+
+// EAS Update list prices from https://expo.dev/pricing (checked September 2026).
+// Graduated overage is $0.005 per MAU up to 200,000 MAU on Starter and Production.
+const easPlans = [
+  { name: 'Starter', price: 19, includedMau: 3_000 },
+  { name: 'Production', price: 199, includedMau: 50_000 },
+]
+const EAS_OVERAGE_PER_MAU = 0.005
+
+function easMonthlyCost(mau: number) {
+  return Math.min(...easPlans.map((plan) => plan.price + Math.max(0, mau - plan.includedMau) * EAS_OVERAGE_PER_MAU))
+}
+
+const paidPlans = plans.filter((plan) => plan.name !== 'Enterprise' && plan.mau > 0 && planYearlyPrice(plan) > 0).sort((a, b) => a.mau - b.mau)
+const rows = paidPlans
+  .filter((plan) => plan.mau <= 200_000)
+  .map((plan) => ({
+    mau: plan.mau,
+    capgoPlan: plan.name,
+    capgo: Math.round(planYearlyPrice(plan) / 12),
+    eas: Math.round(easMonthlyCost(plan.mau)),
+  }))
+
+const formatNumber = (value: number) => value.toLocaleString('en-US')
+---
+
+<section id="pricing-includes" class="mt-20 sm:mt-24" aria-labelledby="pricing-includes-heading">
+  <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+    <div>
+      <p class="font-mono text-sm font-semibold tracking-wide text-[#44BCFF] uppercase">{m.pricing_explainer_eyebrow({}, { locale })}</p>
+      <h2 id="pricing-includes-heading" class="mt-3 text-3xl leading-tight font-semibold tracking-tight text-white sm:text-4xl">
+        {m.pricing_explainer_title({}, { locale })}
+      </h2>
+      <p class="mt-4 text-base leading-7 text-gray-400">{m.pricing_explainer_lead({}, { locale })}</p>
+      <ul class="mt-6 grid gap-2">
+        {highlights.map((item) => (
+          <li class="flex items-center gap-2 text-sm font-medium text-gray-200">
+            <svg class="h-4 w-4 shrink-0 text-[#44BCFF]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <dl class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+      {questions.map((question) => (
+        <div class="border-t border-white/10 pt-5">
+          <dt class="text-base font-semibold text-white">{question.title}</dt>
+          <dd class="mt-2 text-sm leading-6 text-gray-400">{question.body}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
+  {rows.length > 0 && (
+    <div class="mt-16">
+      <h3 class="text-xl font-semibold text-white">{m.pricing_compare_title({}, { locale })}</h3>
+      <p class="mt-1 text-sm leading-6 text-gray-400">{m.pricing_compare_lead({}, { locale })}</p>
+      <div class="mt-5 overflow-x-auto">
+        <table class="w-full min-w-[28rem] text-left text-sm">
+          <thead class="border-b border-white/15 text-xs font-semibold tracking-wide text-gray-500 uppercase">
+            <tr>
+              <th scope="col" class="py-3 pr-4">
+                {m.pricing_compare_col_mau({}, { locale })}
+              </th>
+              <th scope="col" class="px-4 py-3 text-[#44BCFF]">
+                {m.pricing_compare_col_capgo({}, { locale })}
+              </th>
+              <th scope="col" class="px-4 py-3">
+                {m.pricing_compare_col_eas({}, { locale })}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10">
+            {rows.map((row) => (
+              <tr>
+                <th scope="row" class="py-4 pr-4 font-medium text-white">
+                  {formatNumber(row.mau)}
+                </th>
+                <td class="px-4 py-4">
+                  <span class="text-base font-semibold text-white">${formatNumber(row.capgo)}/mo</span>
+                  <span class="ml-1 text-gray-500">
+                    · {row.capgoPlan} {m.pricing_compare_plan_suffix({}, { locale })}
+                  </span>
+                </td>
+                <td class="px-4 py-4 text-gray-400">${formatNumber(row.eas)}/mo</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs leading-5 text-gray-500">{m.pricing_compare_note({}, { locale })}</p>
+    </div>
+  )}
+</section>

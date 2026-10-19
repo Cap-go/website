@@ -1,0 +1,273 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-zip and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-zip` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-zip
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+
+const listener = await CapacitorZip.addListener('progress', (event) => {
+  updateBar(event.loaded, event.total);
+});
+await CapacitorZip.zip({
+  source: 'file:///data/user/0/.../export/',
+  destination: 'file:///data/user/0/.../export.zip',
+});
+await listener.remove();
+```
+
+## Example: unpack an update bundle
+
+```typescript
+await CapacitorZip.unzip({
+  source: downloadedZipUri,
+  destination: unpackDirUri,
+});
+```
+
+## Common pitfalls
+
+- **Web zip**: `zip()` throws on web, offload compression to native or server.
+- **Android passwords**: AES passwords are Android only today, test archives on device.
+- **URI schemes**: use absolute `file://` paths native code can read.
+
+## API Overview
+
+### `zip`
+
+Compress a file or directory to create a ZIP archive.
+
+Creates a compressed archive from a source file or directory. The archive
+will include the entire directory structure if the source is a folder.
+
+Platform-specific notes:
+- iOS: Password protection is not supported. If a password is provided, it will be ignored and a warning will be logged.
+- Android: Supports AES-256 encryption when a password is provided.
+- Web: Not supported. Throws an error if called.
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+
+// Compress a directory without password
+await CapacitorZip.zip({
+  source: '/path/to/my-folder',
+  destination: '/path/to/output.zip'
+});
+```
+
+### `unzip`
+
+Extract a ZIP archive to a specified destination directory.
+
+Extracts all files and folders from a ZIP archive while preserving the
+directory structure. Creates the destination directory if it doesn't exist.
+
+Platform-specific notes:
+- iOS: Supports standard ZIP archives. Password-protected archives are extracted with the provided password.
+- Android: Supports AES-encrypted archives with password. Includes zip slip vulnerability protection.
+- Web: Downloads each file individually to the browser's download folder. Cannot create a directory structure.
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+
+// Extract a standard ZIP archive
+await CapacitorZip.unzip({
+  source: '/path/to/archive.zip',
+  destination: '/path/to/extract-folder'
+});
+```
+
+## Type Reference
+
+### `ZipOptions`
+Options for creating a ZIP archive.
+```typescript
+export interface ZipOptions {
+  /**
+   * Path to the file or directory to compress.
+   *
+   * This can be an absolute path or a path relative to the app's working directory.
+   * If the source is a directory, all its contents will be recursively compressed
+   * while preserving the directory structure.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths or content:// URIs for files accessible via the Android Storage Access Framework.
+   * - Web: Not supported.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/my-folder'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/file.pdf'
+   * @example 'file:///storage/emulated/0/Download/document.pdf'
+   */
+  source: string;
+
+  /**
+   * Path where the ZIP archive will be created.
+   *
+   * The destination path must include the .zip file extension. If the parent
+   * directory doesn't exist, it will be created automatically.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths. The plugin will create any missing parent directories.
+   * - Web: Not supported.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/archive.zip'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/backup.zip'
+   * @example 'file:///storage/emulated/0/Download/compressed.zip'
+   */
+  destination: string;
+
+  /**
+   * Optional password for encrypting the ZIP archive.
+   *
+   * When provided, the archive will be encrypted and require this password
+   * to extract. Uses AES-256 encryption on Android.
+   *
+   * Platform-specific notes:
+   * - iOS: Password protection is NOT supported. The password will be ignored and a warning will be logged.
+   * - Android: Supports AES-256 encryption via zip4j library. The password must be provided during extraction.
+   * - Web: Not supported.
+   *
+   * @since 7.0.0
+   * @example 'mySecurePassword123'
+   */
+  password?: string;
+
+  /**
+   * Whether to include the parent folder in the ZIP archive.
+   *
+   * When true (default), the source folder itself becomes the root directory in the archive.
+   * When false, only the contents of the source folder are included at the root level.
+   *
+   * This option only applies when the source is a directory. For single files, this option is ignored.
+   *
+   * @default true
+   * @since 8.0.5
+   * @example
+   * ```typescript
+   * // With includeParentFolder: true (default)
+   * // Source: /cache/temp/ containing [database.backup, media/]
+   * // ZIP contains: temp/database.backup, temp/media/
+   * await CapacitorZip.zip({
+   *   source: '/cache/temp',
+   *   destination: '/cache/backup.zip',
+   *   includeParentFolder: true
+   * });
+   * ```
+   * @example
+   * ```typescript
+   * // With includeParentFolder: false
+   * // Source: /cache/temp/ containing [database.backup, media/]
+   * // ZIP contains: database.backup, media/
+   * await CapacitorZip.zip({
+   *   source: '/cache/temp',
+   *   destination: '/cache/backup.zip',
+   *   includeParentFolder: false
+   * });
+   * ```
+   */
+  includeParentFolder?: boolean;
+}
+```
+
+### `UnzipOptions`
+Options for extracting a ZIP archive.
+```typescript
+export interface UnzipOptions {
+  /**
+   * Path to the ZIP archive to extract.
+   *
+   * The source must be a valid ZIP file. If the file doesn't exist or is
+   * corrupted, the operation will fail with an error.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths or content:// URIs for files accessible via the Android Storage Access Framework.
+   * - Web: Use HTTP/HTTPS URLs. The file will be fetched and extracted in the browser.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/archive.zip'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/backup.zip'
+   * @example 'file:///storage/emulated/0/Download/compressed.zip'
+   * @example 'https://example.com/files/archive.zip' (Web only)
+   */
+  source: string;
+
+  /**
+   * Path to the directory where files will be extracted.
+   *
+   * The destination directory will be created if it doesn't exist. All files
+   * and folders from the archive will be extracted while preserving the
+   * directory structure.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths. Includes protection against zip slip vulnerabilities.
+   * - Web: Not applicable. Files are downloaded individually to the browser's download folder.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/extracted'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/files'
+   * @example 'file:///storage/emulated/0/Download/extracted-files'
+   */
+  destination: string;
+
+  /**
+   * Optional password for decrypting password-protected archives.
+   *
+   * Required if the ZIP archive was encrypted with a password. If the password
+   * is incorrect, extraction will fail with an error.
+   *
+   * Platform-specific notes:
+   * - iOS: Supports password-protected ZIP archives.
+   * - Android: Supports AES-encrypted archives created with zip4j or standard password-protected ZIPs.
+   * - Web: Not supported. Password-protected archives cannot be extracted in the browser.
+   *
+   * @since 7.0.0
+   * @example 'mySecurePassword123'
+   */
+  password?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-zip](/plugins/capacitor-zip/) for the native capability in Using @capgo/capacitor-zip, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

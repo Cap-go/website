@@ -1,0 +1,452 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-data-storage-sqlite and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-data-storage-sqlite` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-data-storage-sqlite
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+```
+
+## Quick start
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.openStore({ database: 'app', encrypted: true });
+await CapgoCapacitorDataStorageSqlite.set({ key: 'session', value: JSON.stringify(session) });
+const { value } = await CapgoCapacitorDataStorageSqlite.get({ key: 'session' });
+```
+
+## Example: namespaced table
+
+```typescript
+await CapgoCapacitorDataStorageSqlite.setTable({ table: 'drafts' });
+await CapgoCapacitorDataStorageSqlite.set({ key: 'invoice-42', value: draftJson });
+```
+
+## Common pitfalls
+
+- **Open before use**: every read or write expects an open store handle.
+- **Encryption scope**: encryption applies to iOS and Android native stores, not the web IndexedDB path.
+- **Close on logout**: `clear()` plus `closeStore()` prevents stale data on shared devices.
+
+## API Overview
+
+### `openStore`
+
+Open a store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.openStore({
+  database: 'database',
+  table: 'table',
+  encrypted: false,
+  mode: 'encryption',
+  autoVacuum: 'none',
+});
+```
+
+### `closeStore`
+
+Close the Store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.closeStore({ database: 'database' });
+```
+
+### `isStoreOpen`
+
+Check if the Store is opened
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.isStoreOpen({ database: 'database' });
+console.log(result);
+```
+
+### `isStoreExists`
+
+Check if the Store exists
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.isStoreExists({ database: 'database' });
+console.log(result);
+```
+
+### `deleteStore`
+
+Delete a store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.deleteStore({
+  database: 'database',
+  table: 'table',
+  encrypted: false,
+  mode: 'encryption',
+  autoVacuum: 'none',
+});
+```
+
+### `setTable`
+
+Set or Add a table to an existing store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.setTable({ table: 'table' });
+```
+
+### `set`
+
+Store a data with given key and value
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.set({ key: 'key-123' });
+```
+
+### `get`
+
+Retrieve a data value for a given data key
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.get({ key: 'key-123' });
+console.log(result);
+```
+
+### `remove`
+
+Remove a data with given key
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.remove({ key: 'key-123' });
+```
+
+### `clear`
+
+Clear the Data Store (delete all keys)
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.clear();
+```
+
+### `iskey`
+
+Check if a data key exists
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.iskey({ key: 'key-123' });
+console.log(result);
+```
+
+### `keys`
+
+Get the data key list
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.keys();
+console.log(result);
+```
+
+### `values`
+
+Get the data value list
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.values();
+console.log(result);
+```
+
+### `filtervalues`
+
+Get the data value list for filter keys
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.filtervalues({ filter: 'filter' });
+console.log(result);
+```
+
+### `keysvalues`
+
+Get the data key/value pair list
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.keysvalues();
+console.log(result);
+```
+
+### `isTable`
+
+Check if a table exists
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.isTable({ table: 'table' });
+console.log(result);
+```
+
+### `tables`
+
+Get the table list for the current store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.tables();
+console.log(result);
+```
+
+### `deleteTable`
+
+Delete a table
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.deleteTable({ table: 'table' });
+```
+
+### `importFromJson`
+
+Import a database From a JSON
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.importFromJson({ jsonstring: 'jsonstring' });
+console.log(result);
+```
+
+### `isJsonValid`
+
+Check the validity of a JSON Object
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.isJsonValid({ jsonstring: 'jsonstring' });
+console.log(result);
+```
+
+### `exportToJson`
+
+Export the given database to a JSON Object
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+const result = await CapgoCapacitorDataStorageSqlite.exportToJson();
+console.log(result);
+```
+
+## Type Reference
+
+### `capOpenStorageOptions`
+```typescript
+export interface capOpenStorageOptions {
+  /**
+   * The storage database name
+   */
+  database?: string; // default:
+  //  ios, android: storageSQLite
+  //  web : storageIDB
+  /**
+   * The storage table name
+   */
+  table?: string; // default:
+  //  ios, android: storage_table
+  //  web: storage_store
+  /**
+   * Set to true for database encryption
+   */
+  encrypted?: boolean; // only for ios and android
+  /***
+   * Set the mode for database encryption
+   * ["encryption", "secret","newsecret"]
+   */
+  mode?: string; // only for ios and android
+}
+```
+
+### `capStorageOptions`
+```typescript
+export interface capStorageOptions {
+  /**
+   * The storage name
+   */
+  database: string;
+}
+```
+
+### `capDataStorageResult`
+```typescript
+export interface capDataStorageResult {
+  /**
+   * result set to true when successful else false
+   */
+  result?: boolean;
+  /**
+   * a returned message
+   */
+  message?: string;
+}
+```
+
+### `capTableStorageOptions`
+```typescript
+export interface capTableStorageOptions {
+  /**
+   * The storage table name
+   */
+  table: string;
+}
+```
+
+### `capDataStorageOptions`
+```typescript
+export interface capDataStorageOptions {
+  /**
+   * The data name
+   */
+  key: string;
+  /**
+   * The data value when required
+   */
+  value?: string;
+}
+```
+
+### `capValueResult`
+```typescript
+export interface capValueResult {
+  /**
+   * the data value for a given data key
+   */
+  value: string;
+}
+```
+
+### `capKeysResult`
+```typescript
+export interface capKeysResult {
+  /**
+   * the data key list as an Array
+   */
+  keys: string[];
+}
+```
+
+### `capValuesResult`
+```typescript
+export interface capValuesResult {
+  /**
+   * the data values list as an Array
+   */
+  values: string[];
+}
+```
+
+### `capFilterStorageOptions`
+```typescript
+export interface capFilterStorageOptions {
+  /**
+   * The filter data for filtering keys
+   *
+   * ['%filter', 'filter', 'filter%'] for
+   * [starts with filter, contains filter, ends with filter]
+   */
+  filter: string;
+}
+```
+
+### `capKeysValuesResult`
+```typescript
+export interface capKeysValuesResult {
+  /**
+   * the data keys/values list as an Array of {key:string,value:string}
+   */
+  keysvalues: any[];
+}
+```
+
+### `capTablesResult`
+```typescript
+export interface capTablesResult {
+  /**
+   * the tables list as an Array
+   */
+  tables: string[];
+}
+```
+
+### `capStoreImportOptions`
+```typescript
+export interface capStoreImportOptions {
+  /**
+   * Set the JSON object to import
+   *
+   */
+  jsonstring?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan storage and file handling, connect it with [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.

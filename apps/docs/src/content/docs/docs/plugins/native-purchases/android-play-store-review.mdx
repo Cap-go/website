@@ -1,0 +1,864 @@
+---
+title: Android Play Store Review Guidelines for IAP
+description: Complete guide to passing Google Play review with in-app purchases and subscriptions, including compliance requirements and best practices.
+sidebar:
+  order: 11
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Getting your Android app approved on Google Play requires compliance with Google's policies, especially for apps with in-app purchases and subscriptions. This guide covers everything you need to pass review successfully.
+
+## Release Path That Works
+
+<Steps>
+
+1. **Build a Signed Android App Bundle**
+
+   New Google Play apps should be uploaded as an Android App Bundle (`.aab`), not a sideloaded debug APK.
+
+   Keep your `versionCode` increasing on every upload and store your upload key safely if you use Play App Signing.
+
+   ![Android App Bundle flow](/native-build-assets/android-studio-select-android-app-bundle.webp)
+
+2. **Create the App Record in Play Console**
+
+   If you do not have a developer account yet, start with [Play Console signup](https://play.google.com/console/signup). Then, in **Home > Create app**, choose the language, app/game type, free/paid status, support email, and accept the required declarations.
+
+   Choose the free/paid setting carefully. Google lets you change a paid app to free later, but once an app has been offered for free, it cannot be switched to paid.
+
+   ![Create app in Play Console](/native-build-assets/google-play-console-create-app.webp)
+
+3. **Complete App Content and Store Listing**
+
+   Before production review, finish the required Play Console declarations:
+
+   - Privacy policy
+   - Ads
+   - App access
+   - Target audience and content
+   - Content rating
+   - Data Safety
+   - Sensitive permissions declarations, if applicable
+
+4. **Run a Play-Installed Test Track**
+
+   Start with **internal testing** for fast QA. If your developer account is a personal account created after November 13, 2023, you must also complete a **closed test** with at least 12 opted-in testers for 14 consecutive days before production access.
+
+   ![Internal testing in Play Console](/native-build-assets/google-play-console-internal-testing.webp)
+
+5. **Verify Billing End-to-End**
+
+   Install the app from Google Play, not from a locally exported APK. Then confirm that:
+
+   - Products load from Play correctly
+   - The purchase sheet shows a **test purchase** banner for license testers
+   - Entitlements unlock after purchase
+   - Restore and subscription management flows work
+
+</Steps>
+
+## Google Play Billing Requirements
+
+### Mandatory Billing System
+
+For digital goods and services, you **must** use Google Play's billing system:
+
+**Digital Goods (Must Use Play Billing):**
+- Subscriptions to premium features
+- In-app currency or credits
+- Digital content (ebooks, music, videos)
+- Game upgrades and power-ups
+- App unlocks and premium tiers
+
+**Physical Goods (Cannot Use Play Billing):**
+- Physical merchandise
+- Real-world services
+- One-time donations to nonprofits
+
+:::note Subscription Setup
+In Play Console, configure Android subscriptions using the current **subscription -> base plan -> offer** model. In `native-purchases`, pass the Base Plan ID with `planIdentifier`.
+:::
+
+### Implementation with Native Purchases
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Ensure billing is available on the device
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) throw new Error('Google Play Billing not available');
+
+// Fetch subscription products (Store data is required—never hardcode pricing)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly', 'premium_yearly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Plan identifiers are the Base Plan IDs you create in Google Play Console
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Purchase token for server validation:', transaction.purchaseToken);
+```
+
+## Transparency and Disclosure Requirements
+
+### Upfront Pricing Disclosure
+
+Google Play mandates clear disclosure of all costs before purchase:
+
+**Required Elements:**
+- Exact price in user's local currency
+- Billing frequency (monthly, yearly, etc.)
+- What's included in the subscription
+- Total cost for introductory offers
+- When charges will occur
+
+![UI Design Best Practices](/native-purchases/review-guides/ui-design-dos-donts.webp)
+
+**Example of Compliant UI:**
+```typescript
+function SubscriptionCard({ product }) {
+  return (
+    <div className="subscription-card">
+      <h3>{product.title}</h3>
+
+      {/* Show intro offer if available */}
+      {product.introductoryPrice && (
+        <div className="intro-offer">
+          <p className="intro-price">{product.introductoryPriceString}</p>
+          <p className="intro-period">
+            for {product.introductoryPricePeriod}
+          </p>
+        </div>
+      )}
+
+      {/* Regular price */}
+      <div className="regular-price">
+        <p className="price">{product.priceString}</p>
+        <p className="period">per {product.subscriptionPeriod}</p>
+      </div>
+
+      {/* Clear description */}
+      <p>{product.description}</p>
+
+      {/* Renewal terms */}
+      <p className="terms">
+        Renews automatically. Cancel anytime in Google Play.
+      </p>
+
+      <button onClick={() => handlePurchase(product)}>
+        Subscribe Now
+      </button>
+    </div>
+  );
+}
+```
+
+### Auto-Renewal Disclosure
+
+Before a subscription auto-renews, Google requires:
+- Clear notification that renewal will occur
+- Reminder of the price
+- Easy access to cancellation
+
+:::tip
+The native-purchases plugin works with Google Play to handle auto-renewal notifications automatically. Ensure your subscription products are properly configured in Google Play Console.
+:::
+
+### Cross-Platform Pricing Clarity
+
+If you sell the same entitlement on multiple platforms, keep the product naming, billing period, included benefits, and renewal language aligned so users are not surprised.
+
+Prices can legitimately differ because of taxes, local currency, or store economics, but the purchase UI must never hide those differences or imply a different renewal cost than the one Google Play will charge.
+
+## Privacy Policy Requirements
+
+### Mandatory Privacy Policy
+
+If your app includes in-app purchases, you must:
+
+1. **Link in Play Store Listing**
+   - Add privacy policy URL in Play Console
+   - Must be publicly accessible
+   - Must be in the same language as your app
+
+2. **Link Within App**
+   - Display privacy policy in app settings
+   - Show before collecting any user data
+   - Make easily discoverable
+
+**Example Implementation:**
+```typescript
+function SettingsScreen() {
+  const openPrivacyPolicy = () => {
+    window.open('https://yourapp.com/privacy', '_blank');
+  };
+
+  const openTerms = () => {
+    window.open('https://yourapp.com/terms', '_blank');
+  };
+
+  return (
+    <div>
+      <h2>Settings</h2>
+
+      <button onClick={openPrivacyPolicy}>
+        Privacy Policy
+      </button>
+
+      <button onClick={openTerms}>
+        Terms of Service
+      </button>
+
+      <button onClick={() => NativePurchases.manageSubscriptions()}>
+        Manage Subscriptions
+      </button>
+    </div>
+  );
+}
+```
+
+### Data Safety Section
+
+Google Play requires detailed disclosure in the Data Safety section:
+
+**For IAP Apps, Declare:**
+- Purchase history collection
+- Email addresses (for receipts)
+- Device IDs (for fraud prevention)
+- Payment information handling
+- Analytics data collection
+
+:::warning
+The Data Safety section is legally binding. Inaccurate declarations can result in app removal.
+:::
+
+## App Content Declarations
+
+Google Play review is not only about the binary. Before a production release, complete the declarations on **Policy and programs > App content**.
+
+**The minimum set to review carefully:**
+- **Privacy policy**: Public URL in Play Console, plus an in-app entry point when required
+- **Ads**: Declare whether the app contains ads
+- **App access**: Give reviewers working credentials or a clear test path if any screen is gated
+- **Target audience and content**: Match the real audience of the app
+- **Content ratings**: Complete the IARC questionnaire so the app is not marked unrated
+- **Data Safety**: Declare collection, sharing, and security practices accurately
+
+:::tip
+If a reviewer needs login credentials, 2FA steps, a region toggle, or a specific test account to access billing, put that in **App access** and in your release notes. Missing reviewer access is a common preventable rejection.
+:::
+
+## Common Rejection Reasons
+
+### 1. Missing or Incorrect Billing Implementation
+
+**Why It Fails:**
+- Not using Google Play Billing for digital goods
+- Using deprecated billing APIs
+- Implementing custom payment solutions for subscriptions
+
+**Prevention:**
+```typescript
+// ✅ Correct: Use native-purchases (uses Google Play Billing)
+await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  planIdentifier: 'monthly-plan',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// ❌ Wrong: Custom payment processor for subscriptions
+// await CustomPayment.charge(user, 9.99);
+```
+
+### 2. Unclear Pricing or Hidden Costs
+
+**Why It Fails:**
+- Price only shown after clicking purchase
+- Additional fees not disclosed upfront
+- Vague subscription terms
+
+**Prevention:**
+```typescript
+function PurchaseScreen({ product }) {
+  return (
+    <div>
+      {/* Show ALL costs upfront */}
+      <h2>Premium Subscription</h2>
+
+      <div className="pricing">
+        <p className="price">{product.priceString}/month</p>
+        <p className="taxes">Taxes may apply based on location</p>
+      </div>
+
+      <div className="features">
+        <h3>Includes:</h3>
+        <ul>
+          <li>Ad-free experience</li>
+          <li>Unlimited cloud storage</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+
+      <div className="terms">
+        <p>
+          Subscription renews automatically unless cancelled at least
+          24 hours before the end of the current period.
+        </p>
+        <p>
+          Manage or cancel in Google Play Subscriptions.
+        </p>
+      </div>
+
+      <button onClick={handlePurchase}>
+        Start Subscription
+      </button>
+    </div>
+  );
+}
+```
+
+### 3. Deceptive Subscription Patterns
+
+**Why It Fails:**
+- Pre-selecting premium options
+- Hiding cheaper alternatives
+- Making cancellation difficult
+- Fake urgency ("Only 3 spots left!")
+
+![Description Best Practices](/native-purchases/review-guides/description-guidelines-1.webp)
+
+![Marketing Guidelines](/native-purchases/review-guides/description-guidelines-2.webp)
+
+**Prevention:**
+- Display all subscription tiers equally
+- Make cancellation clear and accessible
+- Avoid countdown timers or fake scarcity
+- Don't use dark patterns to push expensive options
+
+### 4. Incomplete Testing
+
+**Why It Fails:**
+- App crashes when purchasing
+- Products don't load
+- Purchase confirmation doesn't show
+- Premium features don't unlock after purchase
+- Testing only happened on sideloaded builds instead of a Play-installed testing track
+
+**Prevention:**
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Comprehensive testing before submission
+async function testPurchaseFlow() {
+  try {
+    // 1. Test product loading
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: ['premium_monthly', 'premium_yearly'],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('✓ Products loaded:', products.length);
+
+    // 2. Test purchase flow
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: 'premium_monthly',
+      planIdentifier: 'monthly-plan',
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('✓ Purchase completed', transaction.transactionId);
+
+    // 3. Verify entitlements
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    if (
+      purchases.some(
+        (purchase) =>
+          purchase.productIdentifier === 'premium_monthly' &&
+          ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') &&
+          purchase.isAcknowledged,
+      )
+    ) {
+      console.log('✓ Premium features unlocked');
+    }
+
+    // 4. Test restore
+    await NativePurchases.restorePurchases();
+    console.log('✓ Restore works');
+
+  } catch (error) {
+    console.error('✗ Test failed:', error);
+  }
+}
+```
+
+### 5. Privacy Policy Violations
+
+**Why It Fails:**
+- No privacy policy link in app
+- Privacy policy not accessible
+- Data collection not disclosed
+- Data Safety section inaccurate
+
+**Prevention:**
+- Add privacy policy to Play Store listing
+- Include link in app settings
+- Accurately fill out Data Safety section
+- Update policy when adding new data collection
+
+## Alternative Billing Programs
+
+Google's alternative billing programs are region-specific and can change. If you want anything other than standard Google Play Billing, confirm the exact market eligibility, required APIs, and disclosure language in Play Console immediately before implementation.
+
+:::note
+For most apps, sticking to standard Google Play Billing is the simplest and lowest-risk path for review.
+:::
+
+## Subscription Management
+
+### Easy Cancellation
+
+Users must be able to:
+- View active subscriptions easily
+- Cancel without contacting support
+- Understand when cancellation takes effect
+
+**Implementation:**
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+function ManageSubscriptionButton() {
+  const openManagement = async () => {
+    try {
+      // Opens Google Play subscription management
+      await NativePurchases.manageSubscriptions();
+    } catch (error) {
+      // Fallback to direct URL
+      const playStoreUrl = 'https://play.google.com/store/account/subscriptions';
+      window.open(playStoreUrl, '_blank');
+    }
+  };
+
+  return (
+    <button onClick={openManagement}>
+      Manage Subscription in Google Play
+    </button>
+  );
+}
+```
+
+### Cancellation Grace Period
+
+**Required Disclosure:**
+- When does cancellation take effect?
+- Do users keep access until period ends?
+- Are partial refunds available?
+
+```typescript
+function CancellationInfo() {
+  return (
+    <div className="cancellation-info">
+      <h3>Cancellation Policy</h3>
+      <ul>
+        <li>Cancel anytime in Google Play</li>
+        <li>Access continues until end of billing period</li>
+        <li>No refunds for partial periods</li>
+        <li>Resubscribe anytime to regain access</li>
+      </ul>
+
+      <button onClick={() => NativePurchases.manageSubscriptions()}>
+        Manage in Google Play
+      </button>
+    </div>
+  );
+}
+```
+
+## Pre-Submission Checklist
+
+![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.webp)
+
+<Steps>
+
+1. **Verify Billing Implementation**
+   - Using Google Play Billing (via native-purchases)
+   - All subscription products created in Play Console
+   - Base plans and offers configured correctly
+   - Products are activated and published
+   - Pricing set for all target countries
+
+2. **Test Purchase Flows**
+   - Create license test account
+   - Install the build from a Play testing track
+   - Test each subscription tier
+   - Verify products load correctly
+   - Test purchase completion
+   - Confirm the **test purchase** banner appears
+   - Verify premium features unlock
+   - Test subscription restoration
+   - Test on multiple devices
+
+3. **Review All Copy**
+   - Pricing displayed clearly before purchase
+   - All fees disclosed upfront
+   - Subscription terms are clear
+   - Cancellation process explained
+   - No misleading claims
+
+4. **App Content and Privacy**
+   - Privacy policy linked in Play Console
+   - Privacy policy accessible in app
+   - Ads declaration completed
+   - App access instructions added if the app is gated
+   - Data Safety section completed accurately
+   - Permissions justified and documented
+
+5. **Content Rating and Audience**
+   - Complete content rating questionnaire
+   - Complete target audience and content section
+   - Ensure rating matches actual content
+   - Declare in-app purchases in questionnaire
+
+6. **Prepare Store Listing**
+   - App description accurate
+   - Short description is within 80 characters
+   - Full description is within 4000 characters
+   - At least 2 phone screenshots uploaded
+   - 1024x500 feature graphic uploaded
+   - Screenshots show current version
+   - All required assets uploaded
+
+</Steps>
+
+## Review Timeline
+
+**Production Access for New Personal Accounts:** Usually 7 days or less after you apply
+**First Production Review:** Often several days, sometimes longer if billing or policy questions are raised
+**Updates:** Often faster than a first release, but still reviewed
+**Appeals:** Plan for several days and provide exact fixes and reviewer instructions
+
+:::tip Rolling Reviews
+Unlike Apple, Google reviews apps continuously. Your app may go live at any time during the review period, not at a fixed time.
+:::
+
+## Testing Before Submission
+
+### License Testing
+
+1. **Add Test Account:**
+   - Go to Play Console
+   - Settings > License testing
+   - Add Gmail account for testing
+
+2. **Test in Sandbox:**
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Test purchases with license test account
+async function testInSandbox() {
+  const { isBillingSupported } = await NativePurchases.isBillingSupported();
+  if (!isBillingSupported) {
+    console.error('Billing not supported in this environment');
+    return;
+  }
+
+  // Fetch products (returns test pricing when using a license tester)
+  const { products } = await NativePurchases.getProducts({
+    productIdentifiers: ['premium_monthly'],
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Test products:', products);
+
+  // Make test purchase (no charge)
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'premium_monthly',
+    planIdentifier: 'monthly-plan',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Test purchase complete:', transaction.transactionId);
+}
+```
+
+3. **Verify Test Banner:**
+   - When purchasing with test account
+   - Should see "Test purchase" notification
+   - No real charges occur
+
+### Internal and Closed Testing Tracks
+
+Before production release:
+
+1. Create an **internal testing** track for fast QA or a **closed testing** track for broader testing
+2. Upload a signed `.aab` and publish the testing release
+3. Add tester email addresses and share the opt-in link
+4. Have testers install the build from Google Play
+5. Verify purchase flows work end-to-end on the Play-installed build
+6. If your personal developer account was created after November 13, 2023, keep at least 12 testers opted in to a closed test for 14 consecutive days before applying for production
+
+:::warning
+A sideloaded debug build is not a substitute for a Play-installed testing build when validating Google Play Billing.
+:::
+
+## Best Practices for Native Purchases
+
+### Handle All Purchase States
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function handlePurchase(productId: string, planIdentifier?: string) {
+  try {
+    setLoading(true);
+
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: productId,
+      planIdentifier,
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
+    });
+
+    console.log('Purchase token:', transaction.purchaseToken ?? transaction.receipt);
+
+    // Success - check entitlements from the store
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
+    });
+
+    const isOwned = purchases.some(
+      (purchase) =>
+        purchase.productIdentifier === productId &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
+
+    if (isOwned) {
+      unlockPremiumFeatures();
+      showSuccess('Premium activated!');
+    }
+
+  } catch (error: any) {
+    // Handle specific error cases
+    switch (error.code) {
+      case 'USER_CANCELLED':
+        // User backed out - no error needed
+        console.log('Purchase cancelled');
+        break;
+
+      case 'ITEM_ALREADY_OWNED':
+        // They already own it - restore instead
+        showInfo('You already own this! Restoring...');
+        await NativePurchases.restorePurchases();
+        break;
+
+      case 'ITEM_UNAVAILABLE':
+        showError('This subscription is currently unavailable. Please try again later.');
+        break;
+
+      case 'NETWORK_ERROR':
+        showError('Network error. Please check your connection and try again.');
+        break;
+
+      default:
+        showError('Purchase failed. Please try again.');
+        console.error('Purchase error:', error);
+    }
+  } finally {
+    setLoading(false);
+  }
+}
+```
+
+### Implement Restore Purchases
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+function RestorePurchasesButton() {
+  const [loading, setLoading] = useState(false);
+
+  const handleRestore = async () => {
+    setLoading(true);
+
+    try {
+      await NativePurchases.restorePurchases();
+
+      const { purchases } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.SUBS,
+      });
+
+      const hasSubscription = purchases.some(
+        (purchase) => purchase.productType === 'subs' && purchase.isAcknowledged,
+      );
+
+      if (hasSubscription) {
+        unlockPremiumFeatures();
+        showSuccess('Subscriptions restored!');
+        return;
+      }
+
+      // Check one-time unlocks if needed
+      const { purchases: iaps } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.INAPP,
+      });
+      const hasInApp = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
+
+      if (hasInApp) {
+        unlockPremiumFeatures();
+        showSuccess('Previous purchases restored!');
+        return;
+      }
+
+      showInfo('No previous purchases found.');
+    } catch (error) {
+      showError('Failed to restore purchases. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button onClick={handleRestore} disabled={loading}>
+      {loading ? 'Restoring...' : 'Restore Purchases'}
+    </button>
+  );
+}
+```
+
+### Check Subscription Status
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function checkSubscriptionStatus() {
+  try {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    const subscription = purchases.find(
+      (purchase) =>
+        purchase.productIdentifier === 'premium_monthly' &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
+
+    if (!subscription) {
+      showPaywall();
+      return;
+    }
+
+    console.log('Subscription active:', {
+      productId: subscription.productIdentifier,
+      expiresAt: subscription.expirationDate,
+      willRenew: subscription.willCancel === false,
+      purchaseToken: subscription.purchaseToken,
+    });
+
+    unlockPremiumFeatures();
+  } catch (error) {
+    console.error('Failed to check subscription:', error);
+  }
+}
+```
+
+## If Your App Gets Rejected
+
+### Common Policy Violations
+
+**Payments Policy:**
+- Not using Google Play Billing
+- Misleading subscription terms
+- Hidden costs
+
+**User Data Policy:**
+- Missing privacy policy
+- Inaccurate Data Safety declarations
+- Excessive permissions
+
+### Resolution Steps
+
+<Steps>
+
+1. **Review the Violation Notice**
+   - Read the specific policy cited
+   - Understand what Google flagged
+   - Check examples they provided
+
+2. **Fix the Issue**
+   - Address root cause, not just symptoms
+   - Test thoroughly after fix
+   - Document all changes made
+
+3. **Submit Appeal (if applicable)**
+
+   ![Clarification and Appeal Process](/native-purchases/review-guides/clarification-process.webp)
+
+   ```
+   Subject: Policy Violation Appeal - [App Name]
+
+   Dear Google Play Review Team,
+
+   I have received notification that my app violates [Policy X.Y].
+   I have made the following changes to comply:
+
+   1. [Specific change made]
+   2. [Specific change made]
+   3. [Specific change made]
+
+   The updated version [version number] addresses all concerns raised.
+
+   Test account for verification:
+   Email: test@example.com
+   Password: TestPass123
+
+   Thank you for your consideration.
+   ```
+
+   ![Request Documentation Example](/native-purchases/review-guides/request-documents.webp)
+
+4. **Resubmit or Update**
+   - Upload fixed version
+   - Resubmit for review
+   - Monitor status in Play Console
+
+</Steps>
+
+## Additional Resources
+
+- [Google Play Developer Policy Center](https://play.google.com/about/developer-content-policy/)
+- [Google Play Billing Documentation](https://developer.android.com/google/play/billing)
+- [Subscriptions Best Practices](https://developer.android.com/google/play/billing/subscriptions)
+- [Prepare Your App for Review](https://support.google.com/googleplay/android-developer/answer/9859455)
+- [Testing Requirements for New Personal Accounts](https://support.google.com/googleplay/android-developer/answer/14151465)
+- [Play Console Help](https://support.google.com/googleplay/android-developer/)
+
+## Need Expert Help?
+
+Navigating Play Store review can be complex, especially when you need to combine billing compliance, App content declarations, and testing-track setup. If you need personalized assistance:
+
+**[Book a consultation call with our team](https://book.capgo.app/consulting-services/)** for help with:
+- Complete Play Store review preparation
+- Testing track setup and tester recruitment
+- IAP implementation review
+- Data Safety and privacy compliance
+- Rejection troubleshooting and appeals
+- Complete app submission process
+
+Our experts have guided hundreds of apps through successful Play Store submissions and can help you navigate the current requirements.
+
+## Support
+
+Need help with implementation?
+- Review the [Native Purchases documentation](/docs/plugins/native-purchases/getting-started/)
+- Check [Android sandbox testing guide](/docs/plugins/native-purchases/android-sandbox-testing/)
+- Visit [Google Play Developer Support](https://support.google.com/googleplay/android-developer/)
+
+## Keep going from Android Play Store Review Guidelines for IAP
+
+If you are using **Android Play Store Review Guidelines for IAP** to plan security and compliance, connect it with [Using @capgo/native-purchases](/plugins/capacitor-native-purchases/) for the native capability in Using @capgo/native-purchases, [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, and [Capgo Security](/security/) for the product workflow in Capgo Security.

@@ -1,0 +1,78 @@
+---
+title: "@capgo/capacitor-native-audio"
+description: "A native plugin for native audio engine."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Low latency sound effects and streaming audio with preload, Now Playing controls, and background playback options."
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-audio/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-audio/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Use `@capgo/capacitor-native-audio` when your Capacitor app needs responsive playback for UI sounds, short clips, or music style sessions without juggling multiple native audio APIs. Preload assets, loop tracks, fade volume, stream remote URLs or HLS, and optionally show lock screen transport controls.
+
+Typical fits: game SFX, notification chimes, guided meditation, podcast players, and any flow that must coexist with other apps on the device audio session.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | AVFoundation, optional Now Playing and audio session categories |
+| Android | Yes | Media playback, notifications, optional foreground service for background |
+| Web | Partial | Core playback; some listener events are not emitted on web |
+
+## Core Capabilities
+
+- `configure` - Configure the audio player.
+- `preload` - Load an audio file.
+- `playOnce` - Play an audio file once with automatic cleanup.
+- `isPreloaded` - Check if an audio file is preloaded.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `configure` | Configure the audio player. |
+| `preload` | Load an audio file. |
+| `playOnce` | Play an audio file once with automatic cleanup. |
+| `isPreloaded` | Check if an audio file is preloaded. |
+| `play` | Play an audio file. |
+| `pause` | Pause an audio file. |
+| `resume` | Resume an audio file. |
+| `loop` | Stop an audio file. |
+| `stop` | Stop an audio file. |
+| `unload` | Unload an audio file. |
+| `setVolume` | Set the volume of an audio file. |
+| `setRate` | Set the rate of an audio file. |
+| `setCurrentTime` | Set the current time of an audio file. |
+| `getCurrentTime` | Get the current time of an audio file. |
+| `getDuration` | Get the duration of an audio file in seconds. |
+| `isPlaying` | Check if an audio file is playing. |
+| `addListener` | Listen for complete event. |
+| `addListener` | Listen for current time updates Emits every 100ms while audio is playing. |
+| `addListener` | Listen for playback state changes, including notification and lock-screen transport controls. Emitted by Android and iOS. The current Web implementation does not emit this event. |
+| `clearCache` | Clear the audio cache for remote audio files. |
+| `setDebugMode` | Set debug mode logging. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `deinitPlugin` | Deinitialize the plugin and restore original audio session settings This method stops all playing audio and reverts any audio session changes made by the plugin Use this when you need to ensure compatibility with other audio plugins. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-native-audio](https://github.com/Cap-go/capacitor-native-audio/).
+
+## Keep going from @capgo/capacitor-native-audio
+
+If you are using **@capgo/capacitor-native-audio** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-native-audio](/plugins/capacitor-native-audio/) for the native capability in Using @capgo/capacitor-native-audio, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

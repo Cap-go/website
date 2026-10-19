@@ -1,0 +1,414 @@
+---
+const { promptHtml, hidden = false } = Astro.props
+---
+
+<section class="ai-install-panel" data-open="false" hidden={hidden}>
+  <button type="button" class="ai-install-panel__toggle" aria-expanded="false">
+    <span class="ai-install-panel__heading">
+      <span class="ai-install-panel__eyebrow">AI setup prompt</span>
+      <span class="ai-install-panel__title">Prompt to setup with AI</span>
+      <span class="ai-install-panel__subtitle">Install, sync, and follow the full source guide from one copyable prompt.</span>
+    </span>
+    <span class="ai-install-panel__status">Copy-ready</span>
+    <span class="ai-install-panel__chevron" aria-hidden="true">
+      <span class="ai-install-panel__chevron-closed">↓</span>
+      <span class="ai-install-panel__chevron-open">↑</span>
+    </span>
+  </button>
+
+  <div class="ai-install-panel__body" hidden>
+    <div class="ai-install-panel__actions">
+      <div class="ai-install-panel__intro">
+        <p>Copy a setup prompt with the install steps and the full markdown guide for this plugin.</p>
+        <div class="ai-install-panel__chips" aria-hidden="true">
+          <span>Install</span>
+          <span>Sync</span>
+          <span>Source guide</span>
+        </div>
+      </div>
+      <button type="button" class="ai-install-panel__copy"> Copy for AI </button>
+    </div>
+
+    <div class="ai-install-panel__prompt-surface">
+      <div class="ai-install-panel__prompt-meta" aria-hidden="true">
+        <span class="ai-install-panel__prompt-label">Ready to paste</span>
+        <span class="ai-install-panel__prompt-note">Includes install, sync, and the source markdown guide.</span>
+      </div>
+
+      <pre>
+        <code set:html={promptHtml} />
+      </pre>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.ai-install-panel__toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.closest('.ai-install-panel')
+      const body = panel?.querySelector('.ai-install-panel__body')
+      const isOpen = button.getAttribute('aria-expanded') === 'true'
+      const nextOpen = !isOpen
+
+      button.setAttribute('aria-expanded', String(nextOpen))
+      panel?.setAttribute('data-open', String(nextOpen))
+
+      if (body instanceof HTMLElement) {
+        body.hidden = !nextOpen
+      }
+    })
+  })
+
+  document.querySelectorAll('.ai-install-panel__copy').forEach((button) => {
+    let resetTimer: number | undefined
+
+    button.addEventListener('click', async () => {
+      const panel = button.closest('.ai-install-panel')
+      const code = panel?.querySelector('pre code')
+      const content = code?.textContent?.trim()
+
+      if (!content) {
+        return
+      }
+
+      const originalText = button.textContent
+
+      const fallbackCopy = (value: string) => {
+        const textarea = document.createElement('textarea')
+        textarea.value = value
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.focus()
+        textarea.select()
+        const legacyCopy = Reflect.get(document, 'execCommand')
+        if (typeof legacyCopy !== 'function' || !legacyCopy.call(document, 'copy')) {
+          throw new Error('Fallback copy method failed')
+        }
+        document.body.removeChild(textarea)
+      }
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(content)
+        } else {
+          fallbackCopy(content)
+        }
+
+        button.textContent = 'Copied'
+      } catch {
+        try {
+          fallbackCopy(content)
+          button.textContent = 'Copied'
+        } catch {
+          button.textContent = 'Copy failed'
+        }
+      }
+
+      if (resetTimer) {
+        window.clearTimeout(resetTimer)
+      }
+
+      resetTimer = window.setTimeout(() => {
+        button.textContent = originalText ?? 'Copy for AI'
+      }, 2000)
+    })
+  })
+</script>
+
+<style>
+  .ai-install-panel {
+    margin-top: 1rem;
+    position: relative;
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 86%, var(--sl-color-text-accent) 14%);
+    border-radius: 1rem;
+    background:
+      radial-gradient(circle at top right, color-mix(in srgb, var(--sl-color-text-accent) 16%, transparent) 0, transparent 34%),
+      linear-gradient(180deg, color-mix(in srgb, var(--sl-color-bg-nav) 96%, white 4%), color-mix(in srgb, var(--sl-color-bg) 92%, var(--sl-color-bg-nav) 8%));
+    box-shadow:
+      0 18px 40px color-mix(in srgb, black 10%, transparent),
+      inset 0 1px 0 color-mix(in srgb, white 10%, transparent);
+    overflow: hidden;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .ai-install-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--sl-color-text-accent) 65%, white 35%), transparent);
+    pointer-events: none;
+  }
+
+  .ai-install-panel__toggle {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    color: inherit;
+    text-align: left;
+    font: inherit;
+    transition: background 0.2s ease;
+  }
+
+  .ai-install-panel__toggle:hover {
+    background: color-mix(in srgb, var(--sl-color-bg-nav) 88%, white 12%);
+  }
+
+  .ai-install-panel__heading {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .ai-install-panel__eyebrow {
+    color: var(--sl-color-text-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .ai-install-panel__title {
+    color: var(--sl-color-white);
+    font-size: 1.02rem;
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  .ai-install-panel__subtitle {
+    color: var(--sl-color-gray-3);
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+
+  .ai-install-panel__status {
+    border: 1px solid color-mix(in srgb, var(--sl-color-text-accent) 30%, var(--sl-color-gray-4) 70%);
+    border-radius: 999px;
+    padding: 0.32rem 0.62rem;
+    background: color-mix(in srgb, var(--sl-color-text-accent) 12%, transparent);
+    color: var(--sl-color-text-accent);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .ai-install-panel__chevron {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-text-accent) 24%, var(--sl-color-gray-5) 76%);
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--sl-color-bg-nav) 82%, white 18%);
+    color: var(--sl-color-text-accent);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .ai-install-panel__chevron-open {
+    display: none;
+  }
+
+  .ai-install-panel[data-open='true'] .ai-install-panel__toggle {
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 82%, var(--sl-color-text-accent) 18%);
+  }
+
+  .ai-install-panel[data-open='true'] {
+    border-color: color-mix(in srgb, var(--sl-color-text-accent) 26%, var(--sl-color-gray-5) 74%);
+    box-shadow:
+      0 22px 48px color-mix(in srgb, black 12%, transparent),
+      inset 0 1px 0 color-mix(in srgb, white 10%, transparent);
+  }
+
+  .ai-install-panel[data-open='true'] .ai-install-panel__chevron-closed {
+    display: none;
+  }
+
+  .ai-install-panel[data-open='true'] .ai-install-panel__chevron-open {
+    display: inline;
+  }
+
+  .ai-install-panel__body {
+    padding: 1rem 1.1rem 1.1rem;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, white 78%, var(--sl-color-bg-nav) 22%), color-mix(in srgb, var(--sl-color-bg-nav) 84%, white 16%)),
+      radial-gradient(circle at top left, color-mix(in srgb, var(--sl-color-text-accent) 12%, transparent), transparent 42%);
+  }
+
+  .ai-install-panel__actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .ai-install-panel__intro {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .ai-install-panel__actions p {
+    margin: 0;
+    color: var(--sl-color-text);
+    font-size: 0.93rem;
+    line-height: 1.5;
+  }
+
+  .ai-install-panel__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .ai-install-panel__chips span {
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-4) 82%, var(--sl-color-text-accent) 18%);
+    border-radius: 999px;
+    padding: 0.3rem 0.58rem;
+    background: color-mix(in srgb, var(--sl-color-bg-nav) 78%, white 22%);
+    color: var(--sl-color-gray-2);
+    font-size: 0.75rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .ai-install-panel__copy {
+    border: 1px solid color-mix(in srgb, var(--sl-color-text-accent) 56%, white 44%);
+    border-radius: 999px;
+    padding: 0.62rem 1rem;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--sl-color-text-accent) 88%, white 12%),
+      color-mix(in srgb, var(--sl-color-text-accent) 68%, var(--sl-color-bg-nav) 32%)
+    );
+    color: var(--sl-color-black);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--sl-color-text-accent) 24%, transparent);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .ai-install-panel__copy:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px color-mix(in srgb, var(--sl-color-text-accent) 28%, transparent);
+    filter: brightness(1.02);
+  }
+
+  .ai-install-panel__prompt-surface {
+    position: relative;
+    border: 1px solid color-mix(in srgb, var(--sl-color-text-accent) 18%, #0f172a 82%);
+    border-radius: 1rem;
+    background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.18), transparent 28%), linear-gradient(180deg, #17233b 0%, #101827 54%, #0b1220 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 18px 32px rgba(15, 23, 42, 0.18);
+    overflow: hidden;
+  }
+
+  .ai-install-panel__prompt-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-size:
+      100% 2.5rem,
+      2.5rem 100%;
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+  .ai-install-panel__prompt-meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.8rem 1rem 0;
+  }
+
+  .ai-install-panel__prompt-label {
+    border: 1px solid rgba(147, 197, 253, 0.34);
+    border-radius: 999px;
+    padding: 0.28rem 0.58rem;
+    background: rgba(59, 130, 246, 0.16);
+    color: #dbeafe;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .ai-install-panel__prompt-note {
+    color: rgba(226, 232, 240, 0.72);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .ai-install-panel pre {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    padding: 1rem 1rem 1.1rem;
+    background: transparent;
+    overflow-x: auto;
+  }
+
+  .ai-install-panel pre code {
+    display: block;
+    color: #eff6ff;
+    font-size: 0.9rem;
+    line-height: 1.72;
+    text-wrap: pretty;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  @media (max-width: 768px) {
+    .ai-install-panel__toggle {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+    }
+
+    .ai-install-panel__status {
+      display: none;
+    }
+
+    .ai-install-panel__actions {
+      flex-direction: column;
+    }
+
+    .ai-install-panel__prompt-meta {
+      align-items: flex-start;
+    }
+
+    .ai-install-panel__copy {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

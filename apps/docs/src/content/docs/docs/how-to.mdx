@@ -1,0 +1,61 @@
+---
+title: "How to"
+description: "A comprehensive guide to Capgo, offering detailed tutorials, insightful tips, and advanced techniques to enhance your effective usage of the platform"
+sidebar:
+  order: 1
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Capgo versioning policy"
+	description="How plugins, CLI, and Console are versioned, including LTS tags"
+	href="/docs/versioning/"
+/>
+
+<LinkCard
+	title="How version works in Capgo"
+	description="capgo.app"
+	href="https://capgo.app/blog/how-version-work-in-capgo/"
+/>
+
+<LinkCard
+	title="How to release major version in Capgo"
+	description="capgo.app"
+	href="https://capgo.app/blog/how-to-release-major-version-in-capgo/"
+/>
+
+<LinkCard
+	title="How to send specific update to one user or a group"
+	description="capgo.app"
+	href="https://capgo.app/blog/how-to-send-specific-version-to-users/"
+/>
+
+
+## CI / CD
+
+
+<LinkCard
+	title="Automatic build and release with GitHub Actions"
+	description="capgo.app"
+	href="https://capgo.app/blog/automatic-build-and-release-with-github-actions/"
+/>
+
+<LinkCard
+	title="Manage development and production build with GitHub Actions"
+	description="capgo.app"
+	href="https://capgo.app/blog/automatic-build-and-release-with-github-actions/"
+/>
+
+## Contributing
+
+
+<LinkCard
+	title="Contributing to Capgo open source"
+	description="github.com"
+	href="https://github.com/Cap-go/capgo/blob/main/CONTRIBUTING.md"
+/>
+
+## Keep going from How to
+
+If you are using **How to** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

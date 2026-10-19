@@ -1,0 +1,241 @@
+---
+title: Using Capgo in China
+description: "Learn how to configure Capgo Live Updates to work in China by using regional OST URLs for optimal performance and reliability."
+sidebar:
+  order: 11
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+If you're deploying your app to users in China, you'll need to configure Capgo to use regional OST (Object Storage Technology) URLs to ensure reliable and fast updates.
+
+## Why Use China-Specific URLs?
+
+Due to network infrastructure and regulations in China (the Great Firewall), direct connections to international servers can be slow or unreliable. Capgo provides dedicated OST URLs with data located in Hong Kong to minimize latency and ensure your users receive updates as quickly and reliably as possible.
+
+## Configuration
+
+To configure Capgo for China, you need to set three specific URLs in your Capacitor configuration file. These URLs point to Capgo's Hong Kong-based infrastructure.
+
+<Steps>
+
+1. Open your `capacitor.config.ts` file
+
+2. Add the following configuration to the `CapacitorUpdater` plugin section:
+
+    ```typescript
+    import { CapacitorConfig } from '@capacitor/cli';
+
+    const config: CapacitorConfig = {
+      plugins: {
+        CapacitorUpdater: {
+          autoUpdate: 'atBackground',
+          updateUrl: 'https://updater.capgo.com.cn/updates',
+          statsUrl: 'https://updater.capgo.com.cn/stats',
+          channelUrl: 'https://updater.capgo.com.cn/channel_self',
+        },
+      },
+    };
+
+    export default config;
+    ```
+
+3. Rebuild your app to apply the changes:
+
+    ```shell
+    npm run build
+    npx cap sync
+    ```
+
+</Steps>
+
+## Configuration Details
+
+Here's what each URL does:
+
+- **updateUrl**: `https://updater.capgo.com.cn/updates` - Used to check for and download available updates for your app
+- **statsUrl**: `https://updater.capgo.com.cn/stats` - Used to report analytics and usage statistics back to Capgo
+- **channelUrl**: `https://updater.capgo.com.cn/channel_self` - Used to retrieve channel configuration and determine which updates to apply
+
+<Aside type="tip">
+All three URLs must be configured together to ensure full functionality of the Capgo updater in China.
+</Aside>
+
+## Recommended Settings for China
+
+Due to network performance limitations caused by the Great Firewall of China, we have specific recommendations for apps deployed in mainland China:
+
+
+### Increase API Response Timeout
+
+The Capgo updater plugin aborts API calls when `responseTimeout` is exceeded (value is in **seconds**). Edge infrastructure in front of Capgo also treats about **3 seconds** as a failure budget for some paths.
+
+In mainland China, cross-border latency is often higher. Keep a higher `responseTimeout` so the plugin has enough room to finish update checks and downloads through `updater.capgo.com.cn` instead of failing early:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'atBackground',
+      // Seconds. Raise above the default (20) for China network conditions.
+      responseTimeout: 60,
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+<Aside type="tip">
+Prefer `responseTimeout: 60` (or higher) for China deployments. A low timeout does not make updates faster — it only causes the plugin to give up while the request may still succeed on Capgo's side.
+</Aside>
+
+### Use Background Updates
+
+We **strongly recommend using `autoUpdate: 'atBackground'`** for apps in China. Network connectivity in China is less performant than in other regions, and instant apply modes can lead to a poor user experience if downloads are interrupted or slow.
+
+Instead, use the default update behavior where updates download in the background and apply when the app backgrounds or restarts. This provides a more reliable experience for your users.
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'atBackground', // Recommended for China
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+<Aside type="caution">
+While our Hong Kong-based infrastructure helps minimize latency and improve reliability, network performance to mainland China can still be affected by the Great Firewall. Using background updates helps ensure updates complete successfully without disrupting the user experience.
+</Aside>
+
+## Complete Configuration Example
+
+Here's a complete example with recommended settings for apps deployed in China:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'My App',
+  webDir: 'dist',
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'atBackground', // Recommended for better reliability in China
+      responseTimeout: 60, // Seconds — give China network more room
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+
+export default config;
+```
+
+## Testing Your Configuration
+
+After configuring the China-specific URLs, you can verify that updates are working correctly:
+
+<Steps>
+
+1. Upload a new bundle to Capgo:
+
+    ```shell
+    npx @capgo/cli@latest bundle upload --channel=production
+    ```
+
+2. Install your app on a test device in China
+
+3. Monitor the update process:
+
+    ```shell
+    npx @capgo/cli@latest app debug
+    ```
+
+4. Check that updates are being downloaded from the China OST URLs
+
+</Steps>
+
+<Aside type="note">
+The update behavior and timing remain the same as with standard Capgo configuration. See the [Update Behavior](/docs/live-updates/update-behavior/) documentation for details on how and when updates are applied.
+</Aside>
+
+## Multi-Region Deployment
+
+If your app serves users both inside and outside China, you can use the Chinese domain configuration for all users worldwide. The `updater.capgo.com.cn` domain is resolved globally thanks to Alibaba DNS infrastructure, making it accessible both inside China and everywhere else in the world.
+
+### Using Chinese Domains Globally
+
+The Chinese domain URLs work seamlessly for multi-region apps:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'atBackground', // Recommended for China users
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+This single configuration will work for:
+- Users in mainland China (using Hong Kong-based infrastructure)
+- Users outside China (accessing the same infrastructure via Alibaba DNS)
+
+**Performance Considerations:**
+
+While the `.cn` domain is resolved globally through Alibaba DNS and works everywhere, it's slightly less performant for users outside China compared to the standard domain (`api.capgo.app`), which is resolved directly by Cloudflare where our backend is hosted. However, DNS resolution is fast, so the performance difference is minimal and won't significantly impact the user experience.
+
+<Aside type="tip">
+Using the `.cn` domain for all users simplifies your deployment and ensures consistent update behavior across all regions. You don't need separate builds or environment-based configurations. The small performance trade-off outside China is typically worth the simplified deployment.
+</Aside>
+
+### Alternative: Region-Specific Configurations
+
+If you prefer to optimize differently for each region, you can also consider:
+
+- Building separate app variants with different configurations
+- Using environment-based configuration to dynamically set the URLs
+- Creating different release channels for different regions
+
+If you need assistance with multi-region deployment strategies, please contact us at [support@capgo.app](mailto:support@capgo.app) or join our [Discord community](https://discord.capgo.app) for help.
+
+## Monitoring China Infrastructure
+
+You can monitor the health and status of Capgo's China-specific endpoints at [status.capgo.com.cn](https://status.capgo.com.cn/). Use this page to check for incidents, latency, and uptime of the China OST URLs before troubleshooting your app.
+
+## Troubleshooting
+
+If you experience issues with updates in China:
+
+1. **Verify your configuration** - Double-check that all three URLs are correctly set in your `capacitor.config.ts`
+2. **Raise `responseTimeout`** - Use at least `60` seconds in China so the plugin does not abort while the update request is still in flight
+3. **Check network connectivity** - Ensure your device can reach the `updater.capgo.com.cn` domain
+4. **Check the China status page** - Review [status.capgo.com.cn](https://status.capgo.com.cn/) for any ongoing incidents or degraded performance
+5. **Review logs** - Use `npx @capgo/cli@latest app debug` to check for error messages
+6. **Test updates** - Try uploading a new bundle and monitoring the download process
+7. **Contact support** - If issues persist, reach out to us at [support@capgo.app](mailto:support@capgo.app) or join our [Discord community](https://discord.capgo.app) for assistance
+
+<Aside type="caution">
+Make sure to use the `.cn` domain (`updater.capgo.com.cn`) and not the standard international domain when configuring for China.
+</Aside>
+
+## Next Steps
+
+- Learn about [Update Behavior](/docs/live-updates/update-behavior/) to customize when updates are applied
+- Explore [Channels](/docs/live-updates/channels/) to manage different release tracks
+- Review [Encryption](/docs/live-updates/encryption/) to secure your updates
+
+## Keep going from Using Capgo in China
+
+If you are using **Using Capgo in China** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

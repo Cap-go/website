@@ -1,0 +1,254 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-android-usagestatsmanager and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-android-usagestatsmanager` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-android-usagestatsmanager
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+const now = Date.now();
+const stats = await CapacitorUsageStatsManager.queryAndAggregateUsageStats({
+  beginTime: oneDayAgo,
+  endTime: now,
+  packageName: 'com.example.app',
+});
+
+for (const [packageName, usageData] of Object.entries(stats)) {
+  console.log(`${packageName}: ${usageData.totalTimeInForeground}ms`);
+}
+```
+
+## Example: queryUsageStats
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const startOfDay = new Date().setHours(0, 0, 0, 0);
+const { stats } = await CapacitorUsageStatsManager.queryUsageStats({
+  intervalType: 0, // INTERVAL_DAILY
+  beginTime: startOfDay,
+  endTime: Date.now(),
+  packageName: 'com.example.app',
+});
+stats.forEach((bucket) => {
+  console.log(`${bucket.packageName}: ${bucket.totalTimeInForeground}ms`);
+});
+```
+
+## Example: queryEvents
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const startOfDay = new Date().setHours(0, 0, 0, 0);
+const { events } = await CapacitorUsageStatsManager.queryEvents({
+  beginTime: startOfDay,
+  endTime: Date.now(),
+  packageName: 'com.example.app',
+});
+events.forEach((event) => {
+  console.log(`${event.packageName} type=${event.eventType} at ${event.timeStamp}`);
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `queryAndAggregateUsageStats`
+
+Queries and aggregates usage stats for the given time range.
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+const now = Date.now();
+const stats = await CapacitorUsageStatsManager.queryAndAggregateUsageStats({
+  beginTime: oneDayAgo,
+  endTime: now
+});
+
+for (const [packageName, usageData] of Object.entries(stats)) {
+  console.log(`${packageName}: ${usageData.totalTimeInForeground}ms`);
+}
+```
+
+### `isUsageStatsPermissionGranted`
+
+Checks if the usage stats permission is granted.
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const { granted } = await CapacitorUsageStatsManager.isUsageStatsPermissionGranted();
+if (!granted) {
+  await CapacitorUsageStatsManager.openUsageStatsSettings();
+}
+```
+
+### `openUsageStatsSettings`
+
+Open the usage stats settings screen.
+This will open the usage stats settings screen, which allows the user to grant the usage stats permission.
+This will always open the settings screen, even if the permission is already granted.
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+await CapacitorUsageStatsManager.openUsageStatsSettings();
+```
+
+### `queryAllPackages`
+
+Queries all installed packages on the device.
+Requires the QUERY_ALL_PACKAGES permission.
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const { packages } = await CapacitorUsageStatsManager.queryAllPackages();
+packages.forEach(pkg => {
+  console.log(`${pkg.appName} (${pkg.packageName}): v${pkg.versionName}`);
+});
+```
+
+## Type Reference
+
+### `UsageStatsOptions`
+Options for querying usage statistics.
+```typescript
+export interface UsageStatsOptions {
+  /**
+   * The inclusive beginning of the range of stats to include in the results.
+   * Defined in terms of "Unix time"
+   */
+  beginTime: number;
+
+  /**
+   * The exclusive end of the range of stats to include in the results.
+   * Defined in terms of "Unix time"
+   */
+  endTime: number;
+}
+```
+
+### `UsageStats`
+Usage statistics for an Android app.
+```typescript
+export interface UsageStats {
+  /**
+   * The first timestamp of the usage stats.
+   */
+  firstTimeStamp: number;
+  /**
+   * The last timestamp of the usage stats.
+   */
+  lastTimeStamp: number;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  lastTimeForegroundServiceUsed?: number;
+  /**
+   * The last time the app was used.
+   */
+  lastTimeUsed: number;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  lastTimeVisible?: number;
+  /**
+   * The name of the package.
+   */
+  packageName: string;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  totalForegroundServiceUsed?: number;
+  /**
+   * The total time the app was in the foreground.
+   */
+  totalTimeInForeground: number;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  totalTimeVisible?: number;
+}
+```
+
+### `UsageStatsPermissionResult`
+Result of a usage stats permission check.
+```typescript
+export interface UsageStatsPermissionResult {
+  /**
+   * Whether the usage stats permission is granted.
+   */
+  granted: boolean;
+}
+```
+
+### `PackageInfo`
+Represents basic information about an installed package.
+```typescript
+export interface PackageInfo {
+  /** Package name */
+  packageName: string;
+  /** App display name */
+  appName: string;
+  /** Version name string */
+  versionName: string;
+  /** Version code number */
+  versionCode: number;
+  /** First install time in milliseconds since epoch */
+  firstInstallTime: number;
+  /** Last update time in milliseconds since epoch */
+  lastUpdateTime: number;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-android-usagestatsmanager](/plugins/capacitor-android-usagestatsmanager/) for the native capability in Using @capgo/capacitor-android-usagestatsmanager, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

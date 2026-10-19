@@ -1,0 +1,144 @@
+---
+title: Getting Started
+description: Install and configure the Zebra DataWedge Capacitor plugin for Zebra Android devices.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+## Installation
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-zebra-datawedge` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-zebra-datawedge" pkgManagers={['bun']} />
+
+2. **Sync native platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['bun']} />
+
+3. **Configure DataWedge on the device**
+   - Create or pick a Zebra DataWedge profile associated with your app package.
+   - Enable `Intent Output`.
+   - Set `Intent delivery` to `Broadcast Intent`.
+   - Choose an action such as `app.capgo.zebra.SCAN`.
+
+4. **Review Android behavior**
+   - Read the [Android notes](/docs/plugins/zebra-datawedge/android/) before enabling soft triggers in production.
+</Steps>
+
+## Quick start
+
+```typescript
+import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
+
+await ZebraDataWedge.cloneProfile({
+  destProfileName: 'dest-profile',
+  sourceProfileName: 'source-profile',
+});
+```
+
+## Example: createProfile
+
+```typescript
+import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
+
+await ZebraDataWedge.createProfile({ profileName: 'profile' });
+```
+
+## Example: deleteProfile
+
+```typescript
+import { ZebraDataWedge } from '@capgo/capacitor-zebra-datawedge';
+
+await ZebraDataWedge.deleteProfile({ profileNames: ['profile'] });
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## Basic setup
+
+```typescript
+import {
+  DataWedgeConfigMode,
+  DataWedgePlugin,
+  ZebraConfiguration,
+  ZebraDataWedge,
+  ZebraRuntime,
+} from '@capgo/capacitor-zebra-datawedge';
+
+const intentAction = 'app.capgo.zebra.SCAN';
+
+await ZebraConfiguration.setConfig({
+  profileName: 'CapgoZebraProfile',
+  profileEnabled: true,
+  configMode: DataWedgeConfigMode.CREATE_IF_NOT_EXIST,
+  appList: [
+    {
+      packageName: 'com.example.app',
+      activityList: ['*'],
+    },
+  ],
+  pluginConfigs: [
+    {
+      pluginName: DataWedgePlugin.BARCODE,
+      resetConfig: true,
+      paramList: {
+        scanner_selection: 'auto',
+        scanner_input_enabled: 'true',
+      },
+    },
+    {
+      pluginName: DataWedgePlugin.INTENT,
+      resetConfig: true,
+      paramList: {
+        intent_output_enabled: 'true',
+        intent_action: intentAction,
+        intent_delivery: 2,
+      },
+    },
+  ],
+});
+
+await ZebraDataWedge.addListener('scan', (result) => {
+  console.log('Scanned', result.data, result.labelType);
+});
+
+const result = await ZebraRuntime.softScanTrigger(intentAction);
+console.log(result.data);
+```
+
+## Main runtime groups
+
+- `ZebraConfiguration` manages profiles and disabled-app settings.
+- `ZebraNotification` registers for DataWedge notification broadcasts such as scanner status and profile switches.
+- `ZebraQuery` reads active profiles, associated apps, scanner status, scanner lists, and version info.
+- `ZebraRuntime` enables or disables DataWedge, switches scanners, and triggers scans.
+
+## Platform scope
+
+- Android: fully supported on Zebra devices with DataWedge installed.
+- iOS: not available because DataWedge is Zebra Android specific.
+- Web: not available beyond API shape parity.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Using @capgo/capacitor-zebra-datawedge](/plugins/capacitor-zebra-datawedge/) for the native capability in Using @capgo/capacitor-zebra-datawedge, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

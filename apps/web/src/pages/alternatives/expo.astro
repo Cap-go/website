@@ -1,0 +1,188 @@
+---
+import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
+import Layout from '@/layouts/Layout.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import m from '@/copy/messages'
+import { pageDates, toIsoDate } from '@/data/pageDates'
+import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const dates = pageDates['alternatives/expo']
+const config = Astro.locals.runtimeConfig.public
+const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
+const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
+const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
+const ciCdUrl = getRelativeLocaleUrl(locale, 'ci_cd')
+const competitor = 'Expo Application Services'
+
+const faq = [
+  { question: m.compare_expo_faq_q1({}, { locale }), answer: m.compare_expo_faq_a1({}, { locale }) },
+  { question: m.compare_expo_faq_q2({}, { locale }), answer: m.compare_expo_faq_a2({}, { locale }) },
+  { question: m.compare_expo_faq_q3({}, { locale }), answer: m.compare_expo_faq_a3({}, { locale }) },
+  { question: m.compare_expo_faq_q4({}, { locale }), answer: m.compare_expo_faq_a4({}, { locale }) },
+  { question: m.compare_expo_faq_q5({}, { locale }), answer: m.compare_expo_faq_a5({}, { locale }) },
+  { question: m.compare_expo_faq_q6({}, { locale }), answer: m.compare_expo_faq_a6({}, { locale }) },
+  { question: m.compare_expo_faq_q7({}, { locale }), answer: m.compare_expo_faq_a7({}, { locale }) },
+  { question: m.compare_expo_faq_q8({}, { locale }), answer: m.compare_expo_faq_a8({}, { locale }) },
+]
+
+const serviceMap = [
+  {
+    easLabel: 'EAS Update',
+    capgoLabel: 'Capgo Live Updates',
+    text: m.compare_expo_map_update_text({}, { locale }),
+    href: liveUpdateUrl,
+    linkLabel: m.compare_expo_map_update_link({}, { locale }),
+  },
+  {
+    easLabel: 'EAS Build',
+    capgoLabel: 'Capgo Builder',
+    text: m.compare_expo_map_build_text({}, { locale }),
+    href: nativeBuildUrl,
+    linkLabel: m.compare_expo_map_build_link({}, { locale }),
+  },
+  {
+    easLabel: 'EAS Submit',
+    capgoLabel: m.compare_expo_map_submit_title({}, { locale }),
+    text: m.compare_expo_map_submit_text({}, { locale }),
+    href: nativeBuildUrl,
+    linkLabel: m.compare_expo_map_submit_link({}, { locale }),
+  },
+  {
+    easLabel: 'EAS Workflows',
+    capgoLabel: m.compare_expo_map_workflows_title({}, { locale }),
+    text: m.compare_expo_map_workflows_text({}, { locale }),
+    href: ciCdUrl,
+    linkLabel: m.compare_expo_map_workflows_link({}, { locale }),
+  },
+]
+
+const metaTitle = m.compare_expo_meta_title({}, { locale })
+const metaDescription = m.compare_expo_meta_description({}, { locale })
+
+const content = {
+  title: metaTitle,
+  description: metaDescription,
+  canonical: pageUrl,
+  url: pageUrl,
+  image: `${config.baseUrl}/capgo_social.png`,
+  keywords: 'Expo alternative, EAS alternative, Expo Application Services, EAS Update, EAS Build, EAS Submit, EAS Workflows, Capacitor live updates, Capgo',
+  ldJSON: createLdJsonGraph(
+    config,
+    createWebPageLdJson(config, {
+      name: metaTitle,
+      description: metaDescription,
+      url: pageUrl,
+      datePublished: toIsoDate(dates.publishedAt),
+      dateModified: toIsoDate(dates.updatedAt),
+      inLanguage: locale,
+    }),
+    {
+      includeOrganization: true,
+      additionalEntities: [
+        createFAQPageLdJson(config, {
+          url: pageUrl,
+          questions: faq,
+        }),
+        createItemListLdJson(config, {
+          url: pageUrl,
+          name: m.compare_expo_map_list_name({}, { locale }),
+          description: m.compare_expo_map_list_description({}, { locale }),
+          items: serviceMap.map((item) => ({
+            name: `${item.easLabel}: ${item.capgoLabel}`,
+            url: new URL(item.href, config.baseUrl).href,
+            description: item.text,
+          })),
+        }),
+      ],
+    },
+  ),
+}
+
+const sources = [
+  { label: m.compare_expo_source_pricing({}, { locale }), href: 'https://expo.dev/pricing' },
+  { label: m.compare_expo_source_services({}, { locale }), href: 'https://expo.dev/services' },
+  { label: m.compare_expo_source_update({}, { locale }), href: 'https://docs.expo.dev/eas-update/introduction/' },
+  { label: m.compare_expo_source_rollbacks({}, { locale }), href: 'https://docs.expo.dev/eas-update/rollbacks/' },
+  { label: m.compare_expo_source_updates_sdk({}, { locale }), href: 'https://docs.expo.dev/versions/latest/sdk/updates/' },
+  { label: m.compare_expo_source_hosting({}, { locale }), href: 'https://docs.expo.dev/eas/hosting/introduction/' },
+]
+
+const rows = {
+  pricing: { text: m.compare_expo_pricing({}, { locale }), sources: [1] },
+  ota: { text: m.compare_expo_ota({}, { locale }), sources: [3] },
+  native_builds: { text: m.compare_expo_native_builds({}, { locale }), sources: [2] },
+  frameworks: { text: m.compare_expo_frameworks({}, { locale }), sources: [2] },
+  open_source: { text: m.compare_expo_open_source({}, { locale }), sources: [1, 5] },
+  rollback: { text: m.compare_expo_rollback({}, { locale }), sources: [3, 4] },
+  support: { text: m.compare_expo_support({}, { locale }), sources: [1] },
+  company: { text: m.compare_expo_company({}, { locale }), sources: [1] },
+}
+
+const better = [
+  { title: m.compare_expo_better_1_title({}, { locale }), text: m.compare_expo_better_1_text({}, { locale }), sources: [2] },
+  { title: m.compare_expo_better_2_title({}, { locale }), text: m.compare_expo_better_2_text({}, { locale }), sources: [1] },
+  { title: m.compare_expo_better_3_title({}, { locale }), text: m.compare_expo_better_3_text({}, { locale }), sources: [6] },
+]
+
+const migration = {
+  title: m.compare_expo_migration_title({}, { locale }),
+  lead: m.compare_expo_migration_lead({}, { locale }),
+  steps: [
+    { title: m.compare_step_capacitor_title({}, { locale }), html: m.compare_step_capacitor_text({}, { locale }) },
+    { title: m.compare_step_install_title({}, { locale }), html: m.compare_step_install_text({}, { locale }) },
+    { title: m.compare_step_build_title({}, { locale }), html: m.compare_step_build_text({}, { locale }) },
+  ],
+  links: [
+    { label: m.compare_quickstart_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/getting-started/quickstart/') },
+    { label: m.compare_expo_blog_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'blog/alternative-to-expo') },
+  ],
+}
+
+const related = [
+  { label: m.live_update({}, { locale }), href: liveUpdateUrl },
+  { label: m.native_build({}, { locale }), href: nativeBuildUrl },
+  { label: m.compare_expo_blog_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'blog/alternative-to-expo') },
+  { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
+]
+---
+
+<Layout content={content}>
+  <ComparisonPage
+    updatedAt={dates.updatedAt}
+    competitor={competitor}
+    eyebrow={m.compare_expo_eyebrow({}, { locale })}
+    heading={m.compare_expo_h1({}, { locale })}
+    lead={m.compare_expo_lead({}, { locale })}
+    verdict={m.compare_expo_verdict({}, { locale })}
+    rows={rows}
+    sources={sources}
+    better={better}
+    migration={migration}
+    faq={faq}
+    testimonials={productTestimonials.nativeBuild.concat(productTestimonials.liveUpdate.slice(0, 1))}
+    related={related}
+    secondaryCta={{ label: m.compare_expo_secondary_cta({}, { locale }), href: liveUpdateUrl }}
+  >
+    <div slot="after-table" class="cmp-subsection">
+      <div class="section-head section-head--wide cmp-subhead">
+        <div class="eyebrow eyebrow--blue">{m.compare_expo_map_eyebrow({}, { locale })}</div>
+        <h3 class="cmp-h3">{m.compare_expo_map_title({}, { locale })}</h3>
+        <p class="lead">{m.compare_expo_map_lead({}, { locale })}</p>
+      </div>
+      <div class="cmp-card-grid cmp-card-grid--two">
+        {serviceMap.map((item) => (
+          <article class="cmp-card">
+            <span class="cmp-card-status">{item.easLabel}</span>
+            <h4 class="cmp-card-title">{item.capgoLabel}</h4>
+            <p>{item.text}</p>
+            <a class="cmp-card-link" href={item.href}>
+              {item.linkLabel}
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </ComparisonPage>
+</Layout>

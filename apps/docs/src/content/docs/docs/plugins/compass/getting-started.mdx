@@ -1,0 +1,258 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-compass and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-compass` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-compass
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+```
+
+## API Overview
+
+### `getCurrentHeading`
+
+Get the current compass heading in degrees.
+On iOS, the heading is updated in the background, and the latest value is returned.
+On Android, the heading is calculated when the method is called using accelerometer and magnetometer sensors.
+Not implemented on Web.
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+const { value } = await CapgoCompass.getCurrentHeading();
+console.log('Compass heading:', value, 'degrees');
+```
+
+### `startListening`
+
+Start listening for compass heading changes via events.
+This starts the compass sensors and emits 'headingChange' events.
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// With default throttling (100ms interval, 2° minimum change)
+await CapgoCompass.startListening();
+
+// With custom throttling for high-frequency updates
+await CapgoCompass.startListening({
+  minInterval: 50,      // 50ms between events
+  minHeadingChange: 1.0 // 1° minimum change
+});
+
+CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+```
+
+### `stopListening`
+
+Stop listening for compass heading changes.
+This stops the compass sensors and stops emitting events.
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+await CapgoCompass.stopListening();
+```
+
+### `checkPermissions`
+
+Check the current permission status for accessing compass data.
+On iOS, this checks location permission status.
+On Android, this always returns 'granted' as no permissions are required.
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+const status = await CapgoCompass.checkPermissions();
+console.log('Compass permission:', status.compass);
+```
+
+### `requestPermissions`
+
+Request permission to access compass data.
+On iOS, this requests location permission (required for heading data).
+On Android, this resolves immediately as no permissions are required.
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+const status = await CapgoCompass.requestPermissions();
+if (status.compass === 'granted') {
+  // Can now use compass
+}
+```
+
+### `watchAccuracy`
+
+Start monitoring compass accuracy.
+On Android, this monitors the magnetometer accuracy and emits accuracyChange events.
+Developers can listen to these events and implement their own UI for calibration prompts.
+On iOS and Web, this method does nothing as compass accuracy monitoring is not available.
+
+```typescript
+import { CapgoCompass, CompassAccuracy } from '@capgo/capacitor-compass';
+
+// Start monitoring accuracy
+await CapgoCompass.watchAccuracy();
+
+// Listen for accuracy changes and implement custom UI
+CapgoCompass.addListener('accuracyChange', (event) => {
+  console.log('Accuracy changed to:', event.accuracy);
+  if (event.accuracy < CompassAccuracy.MEDIUM) {
+    // Show your custom calibration UI
+  }
+});
+```
+
+### `unwatchAccuracy`
+
+Stop monitoring compass accuracy.
+This stops the accuracy monitoring.
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+await CapgoCompass.unwatchAccuracy();
+```
+
+### `getAccuracy`
+
+Get the current compass accuracy level.
+On Android, returns the current magnetometer sensor accuracy.
+On iOS and Web, always returns CompassAccuracy.UNKNOWN as accuracy monitoring is not available.
+
+```typescript
+import { CapgoCompass, CompassAccuracy } from '@capgo/capacitor-compass';
+
+const { accuracy } = await CapgoCompass.getAccuracy();
+if (accuracy < CompassAccuracy.MEDIUM) {
+  console.log('Compass needs calibration');
+}
+```
+
+## Type Reference
+
+### `CompassHeading`
+Result containing the compass heading value.
+```typescript
+export interface CompassHeading {
+  /** Compass heading in degrees (0-360) */
+  value: number;
+}
+```
+
+### `ListeningOptions`
+Options for configuring compass listening behavior.
+```typescript
+export interface ListeningOptions {
+  /**
+   * Minimum interval between heading change events in milliseconds.
+   * Lower values = more frequent updates but higher CPU/battery usage.
+   *
+   * @default 100
+   * @since 8.1.4
+   */
+  minInterval?: number;
+
+  /**
+   * Minimum heading change in degrees required to trigger an event.
+   * Lower values = more sensitive but more events.
+   * Handles wraparound (e.g., 359° to 1° = 2° change).
+   *
+   * @default 2.0
+   * @since 8.1.4
+   */
+  minHeadingChange?: number;
+}
+```
+
+### `HeadingChangeEvent`
+Event data for heading change events.
+```typescript
+export interface HeadingChangeEvent {
+  /** Compass heading in degrees (0-360) */
+  value: number;
+}
+```
+
+### `AccuracyChangeEvent`
+Event data for accuracy change events.
+```typescript
+export interface AccuracyChangeEvent {
+  /** Current accuracy level of the compass */
+  accuracy: CompassAccuracy;
+}
+```
+
+### `PermissionStatus`
+Permission status for compass plugin.
+```typescript
+export interface PermissionStatus {
+  /**
+   * Permission state for accessing compass/location data.
+   * On iOS, this requires location permission to access heading.
+   * On Android, no special permissions are required for compass sensors.
+   *
+   * @since 7.0.0
+   */
+  compass: PermissionState;
+}
+```
+
+### `CompassAccuracy`
+Compass accuracy level constants.
+```typescript
+export enum CompassAccuracy {
+  /** High accuracy - approximates to less than 5 degrees of error */
+  HIGH = 3,
+  /** Medium accuracy - approximates to less than 10 degrees of error */
+  MEDIUM = 2,
+  /** Low accuracy - approximates to less than 15 degrees of error */
+  LOW = 1,
+  /** Unreliable accuracy - approximates to more than 15 degrees of error */
+  UNRELIABLE = 0,
+  /** Unknown accuracy value */
+  UNKNOWN = -1,
+}
+```
+
+### `PermissionState`
+Permission state for compass access.
+```typescript
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-compass](/plugins/capacitor-compass/) for the native capability in Using @capgo/capacitor-compass, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

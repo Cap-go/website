@@ -1,0 +1,50 @@
+name: Bump Blog Updated Date
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  bump-blog-updated:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Skip if the commit message contains our auto-bump signature
+    if: "!contains(github.event.head_commit.message, 'chore: auto-bump updated_at dates')"
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Update blog dates
+        id: bump-blog-dates
+        run: bun run scripts/blogs/blog-updated-at.ts
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Check if there are any changes to commit
+          if [ -n "$(git status --porcelain)" ]; then
+            git add apps/web/src/content/blog/
+            git commit -m "chore: auto-bump updated_at dates for modified blog posts"
+            git push
+          else
+            echo "No changes to commit"
+          fi

@@ -1,0 +1,339 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-file-picker and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-file-picker` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-file-picker
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+```
+
+## API Overview
+
+### `pickFiles`
+
+Pick one or more files from the device.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const result = await CapgoFilePicker.pickFiles({
+  types: ['application/pdf', 'image/*'],
+  limit: 5,
+  readData: false
+});
+console.log('Picked files:', result.files);
+```
+
+### `pickImages`
+
+Pick one or more images from the gallery.
+Android/iOS only.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const result = await CapgoFilePicker.pickImages({
+  limit: 10,
+  readData: false
+});
+console.log('Picked images:', result.files);
+```
+
+### `pickVideos`
+
+Pick one or more videos from the gallery.
+Android/iOS only.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const result = await CapgoFilePicker.pickVideos({
+  limit: 3,
+  skipTranscoding: true
+});
+console.log('Picked videos:', result.files);
+```
+
+### `pickMedia`
+
+Pick one or more images or videos from the gallery.
+Android/iOS only.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const result = await CapgoFilePicker.pickMedia({
+  limit: 5,
+  readData: true
+});
+console.log('Picked media:', result.files);
+```
+
+### `pickDirectory`
+
+Pick a directory from the device.
+Android/iOS only.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const result = await CapgoFilePicker.pickDirectory();
+console.log('Selected directory:', result.path);
+```
+
+### `convertHeicToJpeg`
+
+Convert a HEIC image to JPEG format.
+iOS only.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const result = await CapgoFilePicker.convertHeicToJpeg({
+  path: '/path/to/image.heic',
+  quality: 0.9
+});
+console.log('Converted file:', result.path);
+```
+
+### `copyFile`
+
+Copy a file to a new location.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+await CapgoFilePicker.copyFile({
+  from: '/source/file.pdf',
+  to: '/destination/file.pdf',
+  overwrite: true
+});
+```
+
+### `checkPermissions`
+
+Check permissions for reading files.
+Android only.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const status = await CapgoFilePicker.checkPermissions();
+console.log('Read permission:', status.readExternalStorage);
+```
+
+### `requestPermissions`
+
+Request permissions for reading files.
+Android only.
+
+```typescript
+import { CapgoFilePicker } from '@capgo/capacitor-file-picker';
+
+const status = await CapgoFilePicker.requestPermissions();
+if (status.readExternalStorage === 'granted') {
+  console.log('Permission granted');
+}
+```
+
+## Type Reference
+
+### `PickFilesOptions`
+Options for picking files.
+```typescript
+export interface PickFilesOptions {
+  /**
+   * List of accepted MIME types or file extensions.
+   * On iOS, only MIME types are supported.
+   * Examples: ['image/*'], ['application/pdf'], ['.pdf', '.doc']
+   */
+  types?: string[];
+  /**
+   * Maximum number of files to pick.
+   * Set to 0 for unlimited (platform default).
+   * @default 0
+   */
+  limit?: number;
+  /**
+   * Whether to read the file data as base64.
+   * Note: Reading large files may cause memory issues.
+   * @default false
+   */
+  readData?: boolean;
+}
+```
+
+### `PickFilesResult`
+Result of picking files.
+```typescript
+export interface PickFilesResult {
+  /** Array of picked files */
+  files: PickedFile[];
+}
+```
+
+### `PickMediaOptions`
+Options for picking media (images/videos).
+```typescript
+export interface PickMediaOptions {
+  /**
+   * Maximum number of files to pick.
+   * Set to 0 for unlimited (platform default).
+   * @default 0
+   */
+  limit?: number;
+  /**
+   * Whether to read the file data as base64.
+   * Note: Reading large files may cause memory issues.
+   * @default false
+   */
+  readData?: boolean;
+  /**
+   * iOS only: Skip transcoding of videos.
+   * @default false
+   */
+  skipTranscoding?: boolean;
+  /**
+   * iOS 15+ only: Show ordered selection badges.
+   * @default false
+   */
+  ordered?: boolean;
+}
+```
+
+### `PickDirectoryResult`
+Result of picking a directory.
+```typescript
+export interface PickDirectoryResult {
+  /** The path to the selected directory */
+  path: string;
+}
+```
+
+### `ConvertHeicToJpegOptions`
+Options for converting HEIC to JPEG.
+```typescript
+export interface ConvertHeicToJpegOptions {
+  /** The path to the HEIC file to convert */
+  path: string;
+  /**
+   * The compression quality for JPEG (0.0 - 1.0).
+   * @default 0.9
+   */
+  quality?: number;
+}
+```
+
+### `ConvertHeicToJpegResult`
+Result of HEIC to JPEG conversion.
+```typescript
+export interface ConvertHeicToJpegResult {
+  /** The path to the converted JPEG file */
+  path: string;
+}
+```
+
+### `CopyFileOptions`
+Options for copying a file.
+```typescript
+export interface CopyFileOptions {
+  /** Source file path */
+  from: string;
+  /** Destination file path */
+  to: string;
+  /**
+   * Whether to overwrite if destination exists.
+   * @default false
+   */
+  overwrite?: boolean;
+}
+```
+
+### `PermissionStatus`
+Permission status for file access.
+```typescript
+export interface PermissionStatus {
+  /** Whether permission to read media files is granted */
+  readExternalStorage: PermissionState;
+  /** Whether permission to access media location is granted */
+  accessMediaLocation?: PermissionState;
+}
+```
+
+### `PickerDismissedListener`
+Listener callback for picker dismissed event.
+```typescript
+export type PickerDismissedListener = (event: null) => void;
+```
+
+### `PickedFile`
+Represents a picked file.
+```typescript
+export interface PickedFile {
+  /** The name of the file */
+  name: string;
+  /** The path to the file */
+  path?: string;
+  /** The MIME type of the file */
+  mimeType: string;
+  /** The size of the file in bytes */
+  size: number;
+  /**
+   * The base64 encoded data of the file.
+   * Only present if readData was true.
+   */
+  data?: string;
+  /**
+   * The Blob instance of the file.
+   * Web only.
+   */
+  blob?: Blob;
+  /** Width in pixels (images/videos only) */
+  width?: number;
+  /** Height in pixels (images/videos only) */
+  height?: number;
+  /** Duration in seconds (videos only) */
+  duration?: number;
+  /** Last modified timestamp in milliseconds */
+  modifiedAt?: number;
+}
+```
+
+### `PermissionState`
+Permission state values.
+```typescript
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan storage and file handling, connect it with [Using @capgo/capacitor-file-picker](/plugins/capacitor-file-picker/) for the native capability in Using @capgo/capacitor-file-picker, [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, and [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file.

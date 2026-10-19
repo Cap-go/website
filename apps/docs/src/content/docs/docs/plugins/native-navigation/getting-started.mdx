@@ -1,0 +1,316 @@
+---
+title: Getting Started
+description: Install @capgo/capacitor-native-navigation and render native navigation chrome over a Capacitor WebView.
+sidebar:
+  order: 2
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+## Installation
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-native-navigation` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-native-navigation" pkgManagers={['npm']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm']} />
+
+3. **Configure native chrome**
+
+   ```ts
+   import { NativeNavigation } from '@capgo/capacitor-native-navigation';
+
+   await NativeNavigation.configure({
+     contentInsetMode: 'css',
+     animationDuration: 360,
+     colors: {
+       tint: '#0f172a',
+       inactiveTint: '#64748b',
+     },
+   });
+   ```
+
+4. **Render the native navbar**
+
+   ```ts
+   await NativeNavigation.setNavbar({
+     title: 'Home',
+     subtitle: 'Native chrome',
+     transparent: true,
+     backButton: { visible: false },
+     rightItems: [
+       {
+         id: 'compose',
+         title: 'Compose',
+         icon: {
+           svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+         },
+       },
+     ],
+   });
+   ```
+
+5. **Render the native tabbar**
+
+   ```ts
+   await NativeNavigation.setTabbar({
+     selectedId: 'home',
+     labelVisibilityMode: 'selected',
+     icons: true,
+     colors: {
+       dynamic: true,
+       tint: '#0f172a',
+       inactiveTint: '#64748b',
+     },
+     tabs: [
+       {
+         id: 'home',
+         title: 'Home',
+         icon: {
+           svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 10v10h14V10"/></svg>',
+         },
+       },
+       {
+         id: 'settings',
+         title: 'Settings',
+         badge: '2',
+         icon: {
+           svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
+         },
+       },
+     ],
+   });
+   ```
+
+6. **Handle native intent events**
+
+   ```ts
+   await NativeNavigation.addListener('navbarBack', () => {
+     router.back();
+   });
+
+   await NativeNavigation.addListener('navbarItemTap', ({ id }) => {
+     if (id === 'compose') router.push('/compose');
+   });
+
+   await NativeNavigation.addListener('tabSelect', ({ id }) => {
+     router.push(`/${id}`);
+   });
+   ```
+</Steps>
+
+## Transition flow
+
+Native transitions are a transaction around your normal JavaScript route change:
+
+```ts
+const transition = await NativeNavigation.beginTransition({
+  direction: 'forward',
+});
+
+router.push('/detail');
+await router.ready?.();
+
+await NativeNavigation.setNavbar({
+  title: 'Detail',
+  backButton: { visible: true, title: 'Back' },
+});
+
+await NativeNavigation.finishTransition({
+  id: transition.id,
+  direction: 'forward',
+});
+```
+
+## Zoom transition
+
+Use the zoom helpers for card-to-detail or media-preview flows. Pass the tapped element before your router changes content, then finish after the detail page is ready.
+
+```ts
+import { beginZoomTransition, finishZoomTransition } from '@capgo/capacitor-native-navigation';
+
+const card = document.querySelector('[data-message-card]');
+if (card) {
+  const transition = await beginZoomTransition(card, { cornerRadius: 18 });
+
+  router.push('/message/42');
+  await router.ready?.();
+
+  await NativeNavigation.setNavbar({
+    title: 'Message',
+    backButton: { visible: true, title: 'Inbox' },
+  });
+
+  await finishZoomTransition(undefined, {
+    id: transition.id,
+    cornerRadius: 18,
+  });
+}
+```
+
+## Use with @capgo/capacitor-transitions
+
+Use Native Navigation for the native navbar, tabbar, safe-area insets, and native intent events. Use `@capgo/capacitor-transitions` for the WebView page stack underneath the native chrome.
+
+```bash
+npm install @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+npx cap sync
+```
+
+Initialize both packages once:
+
+```ts
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
+import '@capgo/capacitor-transitions';
+import { initTransitions, setupRouterOutlet, setDirection } from '@capgo/capacitor-transitions/react';
+
+initTransitions({ platform: 'auto' });
+
+const outlet = document.querySelector('cap-router-outlet');
+if (outlet) {
+  setupRouterOutlet(outlet, { platform: 'auto', swipeGesture: 'auto' });
+}
+
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+});
+```
+
+Keep `cap-router-outlet` focused on pages, not duplicate web bars:
+
+```html
+<cap-router-outlet platform="auto" swipe-gesture="auto">
+  <cap-page>
+    <cap-content slot="content" fullscreen>
+      <main class="page">Inbox content</main>
+    </cap-content>
+  </cap-page>
+</cap-router-outlet>
+```
+
+Drive both packages from the same router actions:
+
+```ts
+async function openMessage(id: string) {
+  setDirection('forward');
+  await router.push(`/messages/${id}`);
+  await NativeNavigation.setNavbar({
+    title: 'Message',
+    backButton: { visible: true, title: 'Inbox' },
+  });
+}
+
+await NativeNavigation.addListener('navbarBack', () => {
+  setDirection('back');
+  router.back();
+});
+
+await NativeNavigation.addListener('tabSelect', ({ id }) => {
+  setDirection('root');
+  router.push(`/${id}`);
+});
+```
+
+Pick one animation layer per route change. Let `@capgo/capacitor-transitions` animate normal page pushes, and use Native Navigation's zoom helpers only for shared-element or zoom routes.
+
+## CSS insets
+
+With `contentInsetMode: 'css'`, the plugin writes native bar dimensions to `document.documentElement`.
+
+```css
+.page {
+  padding-top: var(--cap-native-navigation-top);
+  padding-bottom: var(--cap-native-navigation-bottom);
+}
+```
+
+Available variables:
+
+- `--cap-native-navigation-top`
+- `--cap-native-navigation-right`
+- `--cap-native-navigation-bottom`
+- `--cap-native-navigation-left`
+- `--cap-native-navbar-height`
+- `--cap-native-tabbar-height`
+
+## Icon descriptors
+
+Icons must be serializable because native UI renders them. You can use cross-platform SVG, platform-specific SVG, SF Symbols, bundled iOS images, Android drawable resources, or bundled Android images.
+
+```ts
+const icon = {
+  svg: '<svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/></svg>',
+  width: 24,
+  height: 24,
+  template: true,
+  src: 'fallback_asset_name',
+  ios: {
+    svg: '<svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/></svg>',
+    sfSymbol: 'house.fill',
+    image: 'BundledAssetName',
+  },
+  android: {
+    svg: '<svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/></svg>',
+    resource: 'ic_menu_view',
+    image: 'bundled_drawable_name',
+  },
+};
+```
+
+Inline SVG supports the icon-focused subset used by common icon sets such as Lucide and Feather: `path`, `line`, `polyline`, `polygon`, `circle`, and `rect`. SVG icons are rendered as template images by default, so native tint colors can recolor them.
+
+## Optional web components
+
+The package can register custom elements for framework-agnostic declarative setup:
+
+```ts
+import { defineNativeNavigationElements } from '@capgo/capacitor-native-navigation';
+
+defineNativeNavigationElements();
+```
+
+```html
+<cap-native-navigation-provider enabled="true" content-inset-mode="css"></cap-native-navigation-provider>
+
+<cap-native-navbar
+  title="Home"
+  transparent
+  right-items='[{"id":"compose","title":"Compose","icon":{"svg":"<svg viewBox=\"0 0 24 24\"><path d=\"M12 20h9\"/></svg>"}}]'
+></cap-native-navbar>
+
+<cap-native-tabbar
+  selected-id="home"
+  tabs='[{"id":"home","title":"Home","icon":{"ios":{"sfSymbol":"house.fill"}}}]'
+></cap-native-tabbar>
+```
+
+<Aside type="note">
+  The web components are optional. React, Vue, Angular, Svelte, Solid, and vanilla apps can all use the imperative API directly.
+</Aside>
+
+## Platform notes
+
+- iOS renders `UINavigationBar` and `UITabBar`; iOS 26+ uses the system Liquid Glass bar behavior.
+- Android renders an AppCompat toolbar and Material bottom navigation.
+- Web fallback does not draw native bars. It mirrors events and inset variables for browser development.
+- The plugin keeps one full-screen Capacitor WebView. Native owns the frame, bars, safe-area reporting, and transition shell.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

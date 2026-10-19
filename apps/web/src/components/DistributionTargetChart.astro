@@ -1,0 +1,254 @@
+---
+import { formatPercent } from '@/lib/formatPercent'
+
+export interface TargetRow {
+  id: string
+  label: string
+  detail?: string
+  reach: number
+}
+
+interface Props {
+  platform: 'android' | 'ios'
+  rows: TargetRow[]
+  versionLabel: string
+  targetNoun: string
+  class?: string
+}
+
+const { platform, rows, versionLabel, targetNoun, class: className = '' } = Astro.props
+const sorted = [...rows].sort((a, b) => b.reach - a.reach)
+const defaultTarget = 95
+const defaultRow = [...sorted].filter((row) => row.reach >= defaultTarget).sort((a, b) => a.reach - b.reach)[0] ?? sorted[0]
+const barFrom = platform === 'android' ? 'from-green-400' : 'from-blue-400'
+const barTo = platform === 'android' ? 'to-blue-500' : 'to-cyan-400'
+const ring = platform === 'android' ? 'focus-visible:outline-green-300' : 'focus-visible:outline-blue-300'
+const accentText = platform === 'android' ? 'text-green-300' : 'text-blue-300'
+const rootId = `${platform}-target-chart`
+---
+
+<section
+  id={rootId}
+  class:list={['border-b border-white/10 bg-slate-950 py-16 sm:py-20', className]}
+  data-platform={platform}
+  data-rows={JSON.stringify(sorted)}
+  data-default-id={defaultRow?.id ?? ''}
+  data-default-target={String(defaultTarget)}
+  data-target-noun={targetNoun}
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <p class:list={['font-mono text-sm font-semibold tracking-wide uppercase', accentText]}>Choose your minimum</p>
+    <h2 class="mt-3 max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white">
+      What {targetNoun} covers your users?
+    </h2>
+    <p class="mt-3 max-w-[56ch] text-base text-pretty text-slate-400 sm:text-sm">
+      Pick a minimum {versionLabel}, or set the user coverage you need. The chart answers: if this is your floor, what share of devices can install your app.
+    </p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <label for={`${rootId}-version`} class="text-base font-medium text-white sm:text-sm">Minimum {versionLabel}</label>
+        <div class="inline-grid grid-cols-[1fr_--spacing(8)]">
+          <select
+            id={`${rootId}-version`}
+            name="minimumVersion"
+            class:list={[
+              'col-span-full row-start-1 w-full appearance-none rounded-xl border-0 bg-white/5 py-3 pr-8 pl-4 text-base text-white ring-1 ring-white/15 sm:text-sm',
+              ring,
+              'focus-visible:outline-2 focus-visible:-outline-offset-1',
+            ]}
+          >
+            {
+              sorted.map((row) => (
+                <option value={row.id} selected={row.id === defaultRow?.id}>
+                  {row.label} — {formatPercent(row.reach)}
+                </option>
+              ))
+            }
+          </select>
+          <svg viewBox="0 0 8 5" width="8" height="5" fill="none" class="pointer-events-none col-start-2 row-start-1 place-self-center text-slate-300" aria-hidden="true">
+            <path d="M.5.5 4 4 7.5.5" stroke="currentcolor"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <div class="flex items-end justify-between gap-3">
+          <label for={`${rootId}-percent`} class="text-base font-medium text-white sm:text-sm">Target coverage</label>
+          <div class="flex items-center gap-1">
+            <input
+              id={`${rootId}-percent-number`}
+              name="targetCoverageNumber"
+              type="number"
+              min="50"
+              max="99.9"
+              step="0.1"
+              value={String(defaultTarget)}
+              inputmode="decimal"
+              aria-label="Target coverage percent"
+              class:list={[
+                'w-20 rounded-lg border-0 bg-white/5 px-2 py-1.5 text-right font-mono text-base text-white tabular-nums ring-1 ring-white/15 sm:text-sm',
+                ring,
+                'focus-visible:outline-2 focus-visible:-outline-offset-1',
+              ]}
+            />
+            <span class="text-base text-slate-400 sm:text-sm" aria-hidden="true">%</span>
+          </div>
+        </div>
+        <input
+          id={`${rootId}-percent`}
+          name="targetCoverage"
+          type="range"
+          min="50"
+          max="99.9"
+          step="0.1"
+          value={String(defaultTarget)}
+          class:list={['w-full accent-current', accentText]}
+          aria-valuemin={50}
+          aria-valuemax={99.9}
+          aria-valuenow={defaultTarget}
+          aria-label="Target coverage slider"
+        />
+        <p class="text-base text-slate-400 sm:text-sm">
+          Finds the newest {versionLabel} that still reaches at least this many users. Use tenths for targets like 99.5% or 99.9%.
+        </p>
+      </div>
+    </div>
+
+    <div id={`${rootId}-result`} class="mt-8 rounded-2xl border border-white/10 bg-white/5 px-5 py-4" aria-live="polite">
+      <p id={`${rootId}-result-text`} class="text-base text-pretty text-slate-200 sm:text-sm">Loading target…</p>
+    </div>
+
+    <ul class="mt-10 divide-y divide-white/10 border-y border-white/10" role="list">
+      {
+        sorted.map((row) => (
+          <li>
+            <button
+              type="button"
+              data-row-id={row.id}
+              data-reach={String(row.reach)}
+              class:list={[
+                'grid w-full items-center gap-4 py-4 text-left sm:grid-cols-[minmax(10rem,220px)_1fr_5rem]',
+                'focus-visible:outline-2 focus-visible:outline-offset-2',
+                ring,
+              ]}
+            >
+              <div class="min-w-0">
+                <p class="font-medium text-white">{row.label}</p>
+                {row.detail && <p class="mt-1 text-base text-slate-400 sm:text-sm">{row.detail}</p>}
+              </div>
+              <div class="h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+                <div class:list={['h-full w-(--bar-width) rounded-full bg-linear-to-r', barFrom, barTo]} style={`--bar-width: ${Math.min(100, row.reach)}%`} />
+              </div>
+              <p class="text-right font-mono text-base font-semibold text-white tabular-nums sm:text-sm">{formatPercent(row.reach)}</p>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { formatPercent } from '../lib/formatPercent'
+
+  function initTargetChart(root: HTMLElement) {
+    type Row = { id: string; label: string; detail?: string; reach: number }
+    const rows = JSON.parse(root.dataset.rows || '[]') as Row[]
+    const versionSelect = root.querySelector<HTMLSelectElement>('select[name="minimumVersion"]')
+    const percentInput = root.querySelector<HTMLInputElement>('input[name="targetCoverage"]')
+    const resultText = root.querySelector<HTMLElement>('[id$="-result-text"]')
+    const targetNoun = root.dataset.targetNoun || 'target'
+    if (!versionSelect || !percentInput || !resultText) return
+
+    let syncing = false
+    const rowById = new Map(rows.map((row) => [row.id, row]))
+
+    function newestMeeting(target: number): Row | undefined {
+      return rows.filter((row) => row.reach >= target).sort((a, b) => a.reach - b.reach)[0]
+    }
+
+    function paintSelection(id: string) {
+      root.querySelectorAll<HTMLElement>('[data-row-id]').forEach((el) => {
+        const active = el.dataset.rowId === id
+        el.classList.toggle('bg-white/5', active)
+        el.setAttribute('aria-pressed', active ? 'true' : 'false')
+      })
+    }
+
+    function renderFromVersion(id: string) {
+      const row = rowById.get(id)
+      if (!row) return
+      paintSelection(id)
+      resultText!.textContent = `If you set ${row.label} as your minimum ${targetNoun}, you cover about ${formatPercent(row.reach)} of active devices.`
+    }
+
+    const percentNumber = root.querySelector<HTMLInputElement>('input[name="targetCoverageNumber"]')
+    const minTarget = 50
+    const maxTarget = 99.9
+
+    function clampTarget(value: number) {
+      if (!Number.isFinite(value)) return defaultTargetFallback()
+      return Math.min(maxTarget, Math.max(minTarget, Math.round(value * 10) / 10))
+    }
+
+    function defaultTargetFallback() {
+      return Number(root.dataset.defaultTarget || 95)
+    }
+
+    function formatTarget(value: number) {
+      return Number.isInteger(value) ? String(value) : value.toFixed(1)
+    }
+
+    function renderFromPercent(rawTarget: number) {
+      const target = clampTarget(rawTarget)
+      percentInput!.value = String(target)
+      if (percentNumber) percentNumber.value = formatTarget(target)
+      percentInput!.setAttribute('aria-valuenow', String(target))
+      const row = newestMeeting(target)
+      if (!row) {
+        resultText!.textContent = `No ${targetNoun} in this dataset reaches ${formatTarget(target)}%. Lower the coverage target.`
+        return
+      }
+      syncing = true
+      versionSelect!.value = row.id
+      syncing = false
+      paintSelection(row.id)
+      resultText!.textContent = `To cover at least ${formatTarget(target)}% of users, set your minimum ${targetNoun} to ${row.label} (${formatPercent(row.reach)} covered).`
+    }
+
+    versionSelect.addEventListener('change', () => {
+      if (syncing) return
+      renderFromVersion(versionSelect.value)
+    })
+
+    percentInput.addEventListener('input', () => {
+      renderFromPercent(Number(percentInput.value))
+    })
+
+    percentNumber?.addEventListener('input', () => {
+      renderFromPercent(Number(percentNumber.value))
+    })
+
+    percentNumber?.addEventListener('change', () => {
+      renderFromPercent(Number(percentNumber.value))
+    })
+
+    root.querySelectorAll<HTMLButtonElement>('[data-row-id]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.dataset.rowId
+        if (!id) return
+        syncing = true
+        versionSelect.value = id
+        syncing = false
+        renderFromVersion(id)
+      })
+    })
+
+    const initialTarget = Number(root.dataset.defaultTarget || percentInput.value)
+    percentInput.value = String(initialTarget)
+    renderFromPercent(initialTarget)
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-rows]').forEach(initTargetChart)
+</script>

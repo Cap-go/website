@@ -1,0 +1,87 @@
+---
+interface Props {
+  graph: string
+  ariaLabel?: string
+  fullWidth?: boolean
+}
+
+const { graph, ariaLabel, fullWidth = true } = Astro.props
+
+const containerStyle = fullWidth
+  ? "width: 100%; padding: 1rem 0; display: flex; justify-content: center;"
+  : "display: flex; justify-content: center; align-items: center; height: 100%;"
+
+const preStyle = fullWidth
+  ? "width: 100%; max-width: 900px;"
+  : ""
+---
+
+<script>
+  import mermaid from 'mermaid'
+
+  function initializeMermaid() {
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark'
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: isDarkTheme ? 'dark' : 'default',
+      fontSize: 18,
+    })
+  }
+
+  function saveOriginalContent() {
+    document.querySelectorAll('.mermaid').forEach((element) => {
+      if (!element.getAttribute('data-original-content')) {
+        element.setAttribute('data-original-content', element.innerHTML)
+      }
+    })
+  }
+
+  function resetAndRender() {
+    document.querySelectorAll('.mermaid').forEach((element) => {
+      const originalContent = element.getAttribute('data-original-content')
+      if (originalContent) {
+        element.removeAttribute('data-processed')
+        element.innerHTML = originalContent
+      }
+    })
+
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark'
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDarkTheme ? 'dark' : 'default',
+      fontSize: 18,
+    })
+
+    mermaid.run()
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeMermaid()
+    saveOriginalContent()
+  })
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'data-theme') {
+        resetAndRender()
+      }
+    })
+  })
+
+  if (typeof document !== 'undefined') {
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+  }
+</script>
+
+<div
+  style={containerStyle}
+  aria-live="polite"
+>
+  <pre
+    class="mermaid"
+    style={preStyle}
+    role="img"
+    aria-label={ariaLabel}
+    set:html={graph}
+  />
+</div>

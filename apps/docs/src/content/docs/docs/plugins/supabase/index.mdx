@@ -1,0 +1,61 @@
+---
+title: "@capgo/capacitor-supabase"
+description: "Native Supabase SDK integration for Capacitor with JWT access and basic database operations."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Native Supabase authentication, JWT access, and basic database helpers for Capacitor"
+  actions:
+    - text: Get started
+      link: /docs/plugins/supabase/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-supabase/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Native Supabase authentication, JWT access, and basic database helpers for Capacitor
+
+Start with `initialize()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
+
+## Core Capabilities
+
+- Native Supabase client initialization.
+- Email/password sign-in and sign-up.
+- OTP, magic link, OAuth, and session helpers.
+- Native auth state listeners.
+- JWT access for JavaScript or backend calls.
+- Basic native `select`, `insert`, `update`, and `delete` helpers.
+
+## Recommended Architecture
+
+| Concern | Recommended path |
+| --- | --- |
+| Authentication | Use `@capgo/capacitor-supabase`. |
+| Session persistence and refresh | Use `@capgo/capacitor-supabase`. |
+| Advanced database queries | Use `@supabase/supabase-js` with the native JWT. |
+| Realtime, Storage, Edge Functions | Use `@supabase/supabase-js`. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-supabase](https://github.com/Cap-go/capacitor-supabase/).
+
+## Keep going from @capgo/capacitor-supabase
+
+If you are using **@capgo/capacitor-supabase** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

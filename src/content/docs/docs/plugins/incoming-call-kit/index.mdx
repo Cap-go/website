@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-incoming-call-kit"
+description: Native incoming call UI for Capacitor with Android full-screen notifications and iOS CallKit.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Present a real native incoming call surface while keeping transport and media ownership in your own stack.
+  actions:
+    - text: Get started
+      link: /docs/plugins/incoming-call-kit/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-incoming-call-kit/
+      icon: external
+      variant: minimal
+---
+
+import PluginOverview from '@/components/doc/PluginOverview.astro';
+
+<PluginOverview
+  summary="Capgo's incoming call kit plugin is the native ringing layer for apps that already have push delivery and voice or video sessions handled elsewhere."
+  cards={[
+    {
+      title: 'Native call surfaces',
+      body: 'Show Android incoming call notifications with optional full-screen UI and iOS CallKit sheets from JavaScript.',
+    },
+    {
+      title: 'Typed lifecycle events',
+      body: 'Listen for callAccepted, callDeclined, callEnded, and callTimedOut with your original metadata attached.',
+    },
+    {
+      title: 'Push provider agnostic',
+      body: 'Bring your own FCM, PushKit, SIP, or backend trigger and call the plugin when you are ready to ring.',
+    },
+    {
+      title: 'Clear platform boundaries',
+      body: 'The plugin handles presentation only. Your app still owns the real audio or video session.',
+    },
+  ]}
+/>

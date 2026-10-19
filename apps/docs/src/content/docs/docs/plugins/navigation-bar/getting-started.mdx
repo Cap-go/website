@@ -1,0 +1,129 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-navigation-bar and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-navigation-bar` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-navigation-bar
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+```
+
+## Quick start
+
+Match the navigation bar to a dark header and light icons.
+
+```typescript
+import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+await NavigationBar.setNavigationBarColor({
+  color: '#0f172a',
+  darkButtons: false,
+});
+```
+
+## Example: immersive reader mode
+
+```typescript
+await NavigationBar.hide();
+// later, when leaving the reader
+await NavigationBar.show();
+```
+
+## Example: read current theme
+
+```typescript
+const { color, darkButtons } = await NavigationBar.getNavigationBarColor();
+```
+
+## Common pitfalls
+
+- **Android only**: there is no iOS navigation bar equivalent in this plugin.
+- **Edge to edge**: combine with your status bar and WebView safe area CSS so content is not covered when the bar is shown again.
+
+## API Overview
+
+### `setNavigationBarColor`
+
+Set the navigation bar color and button theme.
+
+```typescript
+import { NavigationBar, NavigationBarColor } from '@capgo/capacitor-navigation-bar';
+
+// Set to white with dark buttons
+await NavigationBar.setNavigationBarColor({
+  color: NavigationBarColor.WHITE,
+  darkButtons: true
+});
+
+// Set to custom color
+await NavigationBar.setNavigationBarColor({
+  color: '#FF5733',
+  darkButtons: false
+});
+
+// Set a custom divider color on Android 9+
+await NavigationBar.setNavigationBarColor({
+  color: NavigationBarColor.WHITE,
+  darkButtons: true,
+  dividerColor: '#D9D9D9'
+});
+```
+
+### `getNavigationBarColor`
+
+Get the current navigation bar color and button theme.
+
+```typescript
+import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+const { color, darkButtons } = await NavigationBar.getNavigationBarColor();
+console.log('Current color:', color);
+console.log('Using dark buttons:', darkButtons);
+```
+
+## Type Reference
+
+### `NavigationBarColor`
+Predefined navigation bar colors.
+```typescript
+export enum NavigationBarColor {
+  /** White color */
+  WHITE = '#FFFFFF',
+  /** Black color */
+  BLACK = '#000000',
+  /** Transparent color */
+  TRANSPARENT = 'transparent',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-navigation-bar](/plugins/capacitor-navigation-bar/) for the native capability in Using @capgo/capacitor-navigation-bar, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

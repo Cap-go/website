@@ -1,0 +1,415 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-intercom and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-intercom` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-intercom
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+```
+
+## Quick start
+
+Configure Intercom in `capacitor.config` or call `loadWithKeys()` before the APIs below.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.loadWithKeys({
+  appId: 'your-app-id',
+  apiKeyIOS: 'ios-api-key',
+  apiKeyAndroid: 'android-api-key',
+});
+await CapgoIntercom.registerIdentifiedUser({ userId: '42', email: 'user@example.com' });
+await CapgoIntercom.displayMessenger();
+```
+
+## Example: help center article
+
+```typescript
+await CapgoIntercom.displayArticle({ articleId: '12345' });
+```
+
+## Example: unread badge
+
+```typescript
+await CapgoIntercom.addListener('unreadCountDidChange', ({ count }) => {
+  setBadge(count);
+});
+```
+
+## Common pitfalls
+
+- **Keys**: call `loadWithKeys()` or configure Intercom keys before other APIs.
+- **Logout**: call `logout()` when the app user signs out to avoid leaking identity.
+- **Web**: messenger APIs are native only.
+
+## API Overview
+
+### `loadWithKeys`
+
+Initialize Intercom with API keys at runtime.
+Use this if you prefer not to configure keys in capacitor.config.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.loadWithKeys({
+  appId: 'app-id-123',
+  apiKeyIOS: 'api-key-ios',
+  apiKeyAndroid: 'api-key-android',
+});
+```
+
+### `registerIdentifiedUser`
+
+Register a known user with Intercom.
+At least one of userId or email must be provided.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.registerIdentifiedUser({
+  userId: 'user-id-123',
+  email: 'user@example.com',
+});
+```
+
+### `registerUnidentifiedUser`
+
+Register an anonymous user with Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.registerUnidentifiedUser();
+```
+
+### `updateUser`
+
+Update user attributes in Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.updateUser({ userId: 'user-id-123' });
+```
+
+### `logout`
+
+Log the user out of Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.logout();
+```
+
+### `logEvent`
+
+Log a custom event in Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.logEvent({ name: 'example' });
+```
+
+### `displayMessenger`
+
+Open the Intercom messenger.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displayMessenger();
+```
+
+### `displayMessageComposer`
+
+Open the message composer with a pre-filled message.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displayMessageComposer({ message: 'Hello from Capacitor' });
+```
+
+### `displayHelpCenter`
+
+Open the Intercom help center.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displayHelpCenter();
+```
+
+### `hideMessenger`
+
+Hide the Intercom messenger.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.hideMessenger();
+```
+
+### `displayLauncher`
+
+Show the Intercom launcher button.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displayLauncher();
+```
+
+### `hideLauncher`
+
+Hide the Intercom launcher button.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.hideLauncher();
+```
+
+### `displayInAppMessages`
+
+Enable in-app messages from Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displayInAppMessages();
+```
+
+### `hideInAppMessages`
+
+Disable in-app messages from Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.hideInAppMessages();
+```
+
+### `displayCarousel`
+
+Display a specific Intercom carousel.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displayCarousel({ carouselId: 'carousel-id-123' });
+```
+
+### `displayArticle`
+
+Display a specific Intercom article.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displayArticle({ articleId: 'article-id-123' });
+```
+
+### `displaySurvey`
+
+Display a specific Intercom survey.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.displaySurvey({ surveyId: 'survey-id-123' });
+```
+
+### `setUserHash`
+
+Set the HMAC for identity verification.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.setUserHash({ hmac: 'hmac' });
+```
+
+### `setUserJwt`
+
+Set JWT for secure messenger authentication.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.setUserJwt({ jwt: 'jwt' });
+```
+
+### `setBottomPadding`
+
+Set the bottom padding for the Intercom messenger UI.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.setBottomPadding({ value: 1 });
+```
+
+### `sendPushTokenToIntercom`
+
+Send a push notification token to Intercom.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.sendPushTokenToIntercom({ value: 'value' });
+```
+
+### `receivePush`
+
+Handle a received Intercom push notification.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.receivePush({});
+```
+
+### `getUnreadConversationCount`
+
+Get the number of unread conversations for the current user.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+const result = await CapgoIntercom.getUnreadConversationCount();
+console.log(result);
+```
+
+## Type Reference
+
+### `IntercomLoadOptions`
+```typescript
+export interface IntercomLoadOptions {
+  appId?: string;
+  apiKeyIOS?: string;
+  apiKeyAndroid?: string;
+}
+```
+
+### `IntercomIdentifiedUserOptions`
+```typescript
+export interface IntercomIdentifiedUserOptions {
+  userId?: string;
+  email?: string;
+}
+```
+
+### `IntercomUserUpdateOptions`
+```typescript
+export interface IntercomUserUpdateOptions {
+  userId?: string;
+  email?: string;
+  name?: string;
+  phone?: string;
+  languageOverride?: string;
+  customAttributes?: { [key: string]: any };
+  companies?: IntercomCompany[];
+}
+```
+
+### `IntercomLogEventOptions`
+```typescript
+export interface IntercomLogEventOptions {
+  name: string;
+  data?: { [key: string]: any };
+}
+```
+
+### `IntercomMessageComposerOptions`
+```typescript
+export interface IntercomMessageComposerOptions {
+  message: string;
+}
+```
+
+### `IntercomCarouselOptions`
+```typescript
+export interface IntercomCarouselOptions {
+  carouselId: string;
+}
+```
+
+### `IntercomArticleOptions`
+```typescript
+export interface IntercomArticleOptions {
+  articleId: string;
+}
+```
+
+### `IntercomSurveyOptions`
+```typescript
+export interface IntercomSurveyOptions {
+  surveyId: string;
+}
+```
+
+### `IntercomUserHashOptions`
+```typescript
+export interface IntercomUserHashOptions {
+  hmac: string;
+}
+```
+
+### `IntercomUserJwtOptions`
+```typescript
+export interface IntercomUserJwtOptions {
+  jwt: string;
+}
+```
+
+### `IntercomBottomPaddingOptions`
+```typescript
+export interface IntercomBottomPaddingOptions {
+  value: number;
+}
+```
+
+### `IntercomPushTokenOptions`
+```typescript
+export interface IntercomPushTokenOptions {
+  value: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-intercom](/plugins/capacitor-intercom/) for the native capability in Using @capgo/capacitor-intercom, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

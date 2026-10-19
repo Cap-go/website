@@ -1,0 +1,237 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-crisp and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-crisp` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-crisp
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.configure({ websiteID: 'your-website-id' });
+await CapacitorCrisp.setUser({ nickname: 'Ada', email: 'ada@example.com' });
+await CapacitorCrisp.openMessenger();
+```
+
+## Example: push token
+
+```typescript
+await CapacitorCrisp.registerPushToken({ token: apnsOrFcmToken });
+```
+
+## Common pitfalls
+
+- **Configure once**: call `configure()` before opening the messenger.
+- **Reset on logout**: `reset()` clears the Crisp session.
+- **Web**: push helpers are mobile only.
+
+## API Overview
+
+### `configure`
+
+Configure the Crisp SDK with your website ID.
+Must be called before using any other methods.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.configure({ websiteID: 'YOUR_WEBSITE_ID' });
+```
+
+### `openMessenger`
+
+Open the Crisp messenger chat window.
+Shows the chat interface to the user.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.openMessenger();
+```
+
+### `setTokenID`
+
+Set a unique token ID for the current user session.
+Used to identify and restore previous conversations.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.setTokenID({ tokenID: 'token-id-123' });
+```
+
+### `setUser`
+
+Set user information for the current session.
+Updates the user profile visible to support agents.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.setUser({
+  nickname: 'John Doe',
+  email: 'john@example.com',
+  phone: '+1234567890'
+});
+```
+
+### `pushEvent`
+
+Push a custom event to Crisp.
+Useful for tracking user actions and behavior.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.pushEvent({
+  name: 'completed_purchase',
+  color: 'green'
+});
+```
+
+### `setCompany`
+
+Set company information for the current session.
+Associates the user with a company in Crisp.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.setCompany({
+  name: 'Acme Corp',
+  url: 'https://acme.com',
+  employment: ['CEO', 'Executive'],
+  geolocation: ['USA', 'San Francisco']
+});
+```
+
+### `setInt`
+
+Set a custom integer data field.
+Stores numerical data associated with the user session.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.setInt({ key: 'user_level', value: 42 });
+```
+
+### `setString`
+
+Set a custom string data field.
+Stores text data associated with the user session.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.setString({ key: 'subscription_tier', value: 'premium' });
+```
+
+### `sendMessage`
+
+Send a message from the user to the chat.
+Programmatically send a message as if the user typed it.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.sendMessage({ value: 'Hello, I need help!' });
+```
+
+### `setSegment`
+
+Set a user segment for targeting and organization.
+Used to categorize users in the Crisp dashboard.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.setSegment({ segment: 'premium-users' });
+```
+
+### `reset`
+
+Reset the Crisp session.
+Clears all user data and starts a fresh session.
+Useful when user logs out.
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.reset();
+```
+
+## Type Reference
+
+### `ConfigureOptions`
+Configuration for initializing Crisp.
+```typescript
+export interface ConfigureOptions {
+  /**
+   * Your Crisp website ID from dashboard.
+   */
+  websiteID: string;
+  /**
+   * Optional - Locale to force in the Crisp chat widget (ISO 639-1), eg. `en`, `fr`, `es`.
+   * Web + Android: overrides the runtime locale. iOS follows the device/app locale.
+   */
+  locale?: string;
+  /**
+   * Optional - Unique token identifier for the user session continuity.
+   */
+  tokenID?: string;
+}
+```
+
+### `eventColor`
+Available colors for Crisp events. Used to visually categorize events in the Crisp dashboard.
+```typescript
+export type eventColor =
+  | 'red'
+  | 'orange'
+  | 'yellow'
+  | 'green'
+  | 'blue'
+  | 'purple'
+  | 'pink'
+  | 'brown'
+  | 'grey'
+  | 'black';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-crisp](/plugins/capacitor-crisp/) for the native capability in Using @capgo/capacitor-crisp, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

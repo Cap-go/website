@@ -1,0 +1,22 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "capgo-translation-real-test",
+  "account_id": "9ee3d7479a3c359681e3fab2c8cb22c0",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-05-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "ai": {
+    "binding": "AI",
+  },
+  "r2_buckets": [
+    {
+      "binding": "TRANSLATION_STORE",
+      "bucket_name": "capgo-translation-cache-development",
+    },
+  ],
+  "vars": {
+    "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
+    "TRANSLATION_TEST_MODE": "1",
+  },
+}

@@ -1,0 +1,52 @@
+---
+title: Firebase Google Login - General Setup
+description: Learn how to set up Google Sign-In with Firebase Authentication using the Capacitor Social Login plugin.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Introduction
+
+This guide will walk you through integrating Google Sign-In with Firebase Authentication using the Capacitor Social Login plugin. This setup allows you to use native Google Sign-In on mobile platforms while leveraging Firebase Auth for backend authentication.
+
+## Setup Steps
+
+<Steps>
+1. Please go to [console.cloud.google.com](https://console.cloud.google.com/)
+2. Select the project you want to use
+    <img src="/social-login-assets/firebase_project_select.webp" alt="Firebase Project Selector" />
+3. Go to the `Authentication` menu
+    1. Click on `build`
+    2. Click on `Authentication`
+    <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+4. Click on the `Get started` button
+    <img src="/social-login-assets/firebase_auth_start.webp" alt="Firebase Get Started Button" />
+5. Select EITHER `Email/Password` AND `Google` OR `Google` ONLY
+    :::note
+    I will select `Email/Password` AND `Google`, as I want to use both, but you could select only `Google`. This is something you can change later.
+    :::
+    <img src="/social-login-assets/firebase_google_email_auth.webp" alt="Firebase Select Email/Password and Google Button" />
+    <img src="/social-login-assets/firebase_auth_enable_email.webp" alt="Firebase enable email authentication" />
+    <img src="/social-login-assets/firebase_auth_enable_email_save.webp" alt="Firebase save enable google authentication" />
+    <img src="/social-login-assets/firebase_auth_add_provider_after_email.webp" alt="Firebase enable add provider button" />
+    <img src="/social-login-assets/firebase_auth_add_google_provider_after_email.webp" alt="Firebase add Google provider after having added email provider" />
+6. Enable the `Google` provider
+    <img src="/social-login-assets/firebase_auth_add_google_provider_enable.webp" alt="Firebase enable google authentication" />
+7. Add the support email
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth.webp" alt="Firebase add support email" />
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth_2.webp" alt="Firebase add support email part 2" />
+8. Change the `Public-facing name for project`.
+    :::note
+    This will be displayed to the users, so I recommend changing it to something more descriptive.
+    :::
+    <img src="/social-login-assets/firebase_auth_change_public_facing_name.webp" alt="Firebase change public facing name" />
+9. Click on the `Save` button
+    <img src="/social-login-assets/firebase_auth_save_google_auth.webp" alt="Firebase save public facing name" />
+</Steps>
+
+Voilà, you have now enabled Google Sign-In with Firebase Authentication 🎉
+
+## Keep going from Firebase Google Login - General Setup
+
+If you are using **Firebase Google Login - General Setup** to plan authentication and account flows, connect it with [Using @capgo/capacitor-social-login](/plugins/capacitor-social-login/) for the native capability in Using @capgo/capacitor-social-login, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

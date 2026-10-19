@@ -1,0 +1,36 @@
+---
+interface Download {
+  href: string
+  label: string
+  format: 'svg' | 'png'
+}
+
+interface Props {
+  title: string
+  description: string
+  previewClass?: string
+  previewSlot?: boolean
+  downloads: Download[]
+}
+
+const { title, description, previewClass = '', previewSlot = false, downloads } = Astro.props
+---
+
+<article class="flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+  <div class:list={['flex min-h-[140px] items-center justify-center p-8', previewClass]}>{previewSlot ? <slot name="preview" /> : <slot />}</div>
+  <div class="flex flex-1 flex-col border-t border-slate-100 p-6">
+    <h3 class="text-lg font-semibold text-slate-900">{title}</h3>
+    <p class="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+    <div class="mt-5 flex flex-wrap gap-2">
+      {downloads.map((file) => (
+        <a
+          href={file.href}
+          download
+          class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-300 hover:bg-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+        >
+          {file.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,52 @@
+---
+title: "@capgo/capacitor-mqtt"
+description: "Capacitor plugin for MQTT connectivity on Android and iOS."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Capacitor plugin for MQTT connectivity on Android and iOS."
+  actions:
+    - text: Get started
+      link: /docs/plugins/mqtt/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-mqtt/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Capacitor plugin for MQTT connectivity on Android and iOS.
+
+## Core Capabilities
+
+- `connect`
+- `disconnect`
+- `subscribe`
+- `publish`
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `connect` | See the source definitions for current behavior. |
+| `disconnect` | See the source definitions for current behavior. |
+| `subscribe` | See the source definitions for current behavior. |
+| `publish` | See the source definitions for current behavior. |
+| `addListener` | See the source definitions for current behavior. |
+| `addListener` | See the source definitions for current behavior. |
+| `addListener` | See the source definitions for current behavior. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-mqtt](https://github.com/Cap-go/capacitor-mqtt/).
+
+## Keep going from @capgo/capacitor-mqtt
+
+If you are using **@capgo/capacitor-mqtt** to plan native plugin work, connect it with [Using @capgo/capacitor-mqtt](/plugins/capacitor-mqtt/) for the native capability in Using @capgo/capacitor-mqtt, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

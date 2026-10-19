@@ -1,0 +1,55 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^https://developer.android.com/studio/*"
+    },
+    {
+      "pattern": "^https://api.capgo.app/stats"
+    },
+    {
+      "pattern": "^https://api.capgo.app/updates"
+    },
+    {
+      "pattern": "^https://x.com/*"
+    },
+    {
+      "pattern": "^https://twitter.com/*"
+    },
+    {
+      "pattern": "^https://www.indeed.com/*"
+    },
+    {
+      "pattern": "^https://litoarias.medium.com/*"
+    },
+    {
+      "pattern": "^https://medium.com/*"
+    },
+    {
+      "pattern": "^https://kick.com"
+    },
+    {
+      "pattern": "^https://opensource.org/license/*"
+    },
+    {
+      "pattern": "^https://foundation.mozilla.org/*"
+    },
+    {
+      "pattern": "^https://stackoverflow.com/questions/*"
+    }
+  ],
+  "httpHeaders": [
+    {
+      "urls": ["https://github.com/", "https://guides.github.com/", "https://help.github.com/", "https://docs.github.com/"],
+      "headers": {
+        "Accept-Encoding": "zstd, br, gzip, deflate",
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36"
+      }
+    }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "^/",
+      "replacement": "https://capgo.app/"
+    }
+  ]
+}

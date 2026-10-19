@@ -1,0 +1,1342 @@
+---
+import m from '@/copy/messages'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import Layout from '@/layouts/Layout.astro'
+import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
+import { emptyBuilderMetrics } from '@/lib/builderMetrics'
+import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { formatTrendTooltip, selectTrendRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const config = Astro.locals.runtimeConfig
+const metrics = emptyBuilderMetrics()
+const title = 'Capgo Native Build data | Builder trends'
+const description = 'Global native iOS and Android build success, processing time, and failure mix for the last 30 days. Rates and minutes only, not queue counts and not realtime.'
+const content = {
+  title,
+  description,
+  image: `${config.public.baseUrl}/landing-demos/builder-status.webp`,
+  ldJSON: createLdJsonGraph(config.public, createWebPageLdJson(config.public, { name: title, description, url: Astro.url.href }), { includeOrganization: true }),
+}
+
+const pending = !metrics.updated_at
+const updatedLabel = pending
+  ? 'Loading latest rates…'
+  : (() => {
+      const timestamp = new Date(metrics.updated_at)
+      return Number.isNaN(timestamp.getTime())
+        ? 'Updated moments ago'
+        : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
+    })()
+
+const topFailure = metrics.failures[0]
+const topFailureInfo = topFailure ? getBuilderFailureInfo(topFailure.reason) : null
+const topFailureLead = pending
+  ? 'Loading failure mix…'
+  : topFailureInfo
+    ? `${topFailureInfo.label} accounts for ${Math.ceil(topFailure.share)}% of failed jobs in this window.`
+    : 'Normalized categories across all apps.'
+
+function formatRate(value: number | null) {
+  if (pending || value === null) return '—'
+  return `${Number(value.toFixed(1))}%`
+}
+
+function failureRate(success: number | null) {
+  return success === null ? null : Number((100 - success).toFixed(1))
+}
+
+function formatDuration(seconds: number | null) {
+  if (pending || seconds === null) return '—'
+  if (seconds < 90) return `${Math.round(seconds)}s`
+  return `${(seconds / 60).toFixed(1)} min`
+}
+
+function platformOf(key: 'ios' | 'android') {
+  return (
+    metrics.platforms.find((item) => item.key === key) ?? {
+      key,
+      share: 0,
+      success_rate: null,
+      avg_process_seconds: null,
+      avg_queue_seconds: null,
+      top_failure: null,
+    }
+  )
+}
+
+function sliceDays<T extends { date: string }>(rows: T[], days: number) {
+  return rows.slice(Math.max(0, rows.length - days))
+}
+
+function chartScale(values: number[], kind: 'rate' | 'duration') {
+  if (!values.length) return kind === 'rate' ? { min: 0, max: 100 } : { min: 0, max: 300 }
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const pad = Math.max(kind === 'rate' ? 3 : 20, (max - min) * 0.25)
+  if (kind === 'rate') {
+    return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Math.min(100, Number((max + pad).toFixed(1))) }
+  }
+  return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Number((max + pad).toFixed(1)) }
+}
+
+function chartPoints(values: Array<number | null>, scale: { min: number; max: number }, width = 800, height = 260) {
+  const pad = { l: 44, r: 16, t: 16, b: 28 }
+  const innerW = width - pad.l - pad.r
+  const innerH = height - pad.t - pad.b
+  const span = Math.max(scale.max - scale.min, 1)
+  return values
+    .map((value, index) => {
+      if (value === null) return null
+      const x = pad.l + (values.length <= 1 ? innerW / 2 : (index / (values.length - 1)) * innerW)
+      const y = pad.t + (1 - (value - scale.min) / span) * innerH
+      return `${x.toFixed(1)},${y.toFixed(1)}`
+    })
+    .filter((point): point is string => point !== null)
+    .join(' ')
+}
+
+const ios = platformOf('ios')
+const android = platformOf('android')
+const chartRows = selectTrendRows(metrics, '1m')
+const rateValues = chartRows.flatMap((row) => [row.ios, row.android]).filter((value): value is number => value !== null)
+const chartRange = chartScale(rateValues, 'rate')
+const iosChart = chartPoints(
+  chartRows.map((row) => row.ios),
+  chartRange,
+)
+const androidChart = chartPoints(
+  chartRows.map((row) => row.android),
+  chartRange,
+)
+const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
+
+function trendTip(date: string, ios: number | null, android: number | null) {
+  return formatTrendTooltip(date, ios, android, formatRate)
+}
+
+const liveUpdateHref = getRelativeLocaleUrl(Astro.locals.locale, 'data')
+const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build')
+---
+
+<Layout content={content}>
+  <main class="data-page" data-metrics-endpoint={BUILDER_METRICS_PATH} aria-busy="true">
+    <section class="data-hero">
+      <div class="data-shell">
+        <div class="data-title-row">
+          <h1>Native Builds</h1>
+          <p class="data-badge" data-status-badge data-tone={pending ? 'loading' : 'operational'}><span aria-hidden="true"></span> {pending ? 'Loading' : 'Operational'}</p>
+        </div>
+        <p class="data-summary">Global iOS and Android builder success for the last 30 days. Each rate is finished jobs only, not a live queue, and not a build count.</p>
+        <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
+        <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
+        <div class="data-kpis" aria-label="Global builder reliability">
+          <div><p>Success</p><strong data-kpi="success-rate" translate="no">{formatRate(metrics.success_rate)}</strong></div>
+          <div><p>Process</p><strong data-kpi="process" translate="no">{formatDuration(metrics.avg_process_seconds)}</strong></div>
+          <div><p>Queue</p><strong data-kpi="queue" translate="no">{formatDuration(metrics.avg_queue_seconds)}</strong></div>
+          <div><p>Window</p><strong>30 days</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-section" aria-labelledby="platforms-title">
+      <div class="data-shell">
+        <div class="data-heading">
+          <div>
+            <p class="data-eyebrow">Platforms</p>
+            <h2 id="platforms-title">iOS and Android</h2>
+          </div>
+          <p>Success and failure over the last 30 days. The sparkline is one tick per UTC day, green at 70% or better.</p>
+        </div>
+        <div class="data-cards">
+          <article class="data-card" data-platform-card="ios">
+            <h3>
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path
+                  fill="currentColor"
+                  d="M16.4 12.7c0-2.4 2-3.4 2.1-3.5-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9s-1.9-.9-3.2-.8c-1.6.1-3.1.9-4 2.4-1.7 2.9-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2-.1 1.6-.8 3.1-.8s1.8.8 3.2.7c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.9zM14.3 5.9c.6-.8 1.1-1.9.9-3-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.8-.9 2.9 1.1.1 2.2-.5 2.9-1.4z"
+                ></path></svg
+              >
+              iOS
+            </h3>
+            <div class="data-card-stats">
+              <div>
+                <p>Success</p>
+                <strong data-kpi="ios-success" translate="no">{formatRate(ios.success_rate)}</strong>
+                <small data-process="ios">{formatDuration(ios.avg_process_seconds)} avg process</small>
+              </div>
+              <div>
+                <p>Failure</p>
+                <strong data-kpi="ios-failure" data-tone="poor" translate="no">{formatRate(failureRate(ios.success_rate))}</strong>
+                <small data-top-failure="ios">{pending ? 'Loading…' : ios.top_failure ? getBuilderFailureInfo(ios.top_failure.reason).label : 'No leading failure'}</small>
+              </div>
+            </div>
+            <div class="data-spark" data-spark="ios" role="img" aria-label="iOS daily success"></div>
+          </article>
+          <article class="data-card" data-platform-card="android">
+            <h3>
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path
+                  fill="currentColor"
+                  d="M17.6 9.5h.1c.8 0 1.4.6 1.4 1.4v6.4c0 .8-.6 1.4-1.4 1.4h-.1v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2H10.2v2.2c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-2.2h-.1c-.8 0-1.4-.6-1.4-1.4v-6.4c0-.8.6-1.4 1.4-1.4h10.3zM7.4 4.8l.8 1.4c1.1-.6 2.4-.9 3.8-.9s2.7.3 3.8.9l.8-1.4c.2-.4.7-.5 1.1-.3.4.2.5.7.3 1.1l-.7 1.3C18.6 8 19.5 9.6 19.5 11.4H4.5c0-1.8.9-3.4 2.3-4.5l-.7-1.3c-.2-.4-.1-.9.3-1.1.4-.2.9-.1 1.1.3zM9 12.2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+                ></path></svg
+              >
+              Android
+            </h3>
+            <div class="data-card-stats">
+              <div>
+                <p>Success</p>
+                <strong data-kpi="android-success" translate="no">{formatRate(android.success_rate)}</strong>
+                <small data-process="android">{formatDuration(android.avg_process_seconds)} avg process</small>
+              </div>
+              <div>
+                <p>Failure</p>
+                <strong data-kpi="android-failure" data-tone="poor" translate="no">{formatRate(failureRate(android.success_rate))}</strong>
+                <small data-top-failure="android"
+                  >{pending ? 'Loading…' : android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'}</small
+                >
+              </div>
+            </div>
+            <div class="data-spark" data-spark="android" role="img" aria-label="Android daily success"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-section data-section-muted" aria-labelledby="trend-title">
+      <div class="data-shell">
+        <div class="data-heading">
+          <div>
+            <p class="data-eyebrow">Trend</p>
+            <h2 id="trend-title">Builder success over time</h2>
+          </div>
+          <p>Hourly or daily iOS and Android rates, plus average processing time, depending on the selected window. Use 1D, 1W, 1M, or 3M to change the chart range. This chart is not a live feed.</p>
+        </div>
+        <p class="data-sr-only" data-trend-status aria-live="polite"></p>
+        <div class="data-trend" data-trend>
+          <div class="data-trend-head">
+            <p data-trend-label>Build success</p>
+            <div class="data-trend-controls">
+              <div class="data-periods" role="tablist" aria-label="Trend metric">
+                <button type="button" data-metric="rate" aria-selected="true">Success</button>
+                <button type="button" data-metric="duration">Process</button>
+              </div>
+              <p class="data-sr-only" id="trend-window-label">Trend window</p>
+              <div class="data-periods" role="group" aria-labelledby="trend-window-label">
+                {
+                  TREND_RANGE_OPTIONS.map((option) => (
+                    <button type="button" data-trend-range={option.key} aria-pressed={option.key === '1m' ? 'true' : 'false'}>
+                      {option.label}
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+          <div class="data-chart-skeleton" hidden={chartRows.length > 0}>
+            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+          </div>
+          <div class="data-trend-plot" translate="no">
+            <svg class="data-trend-svg" data-trend-svg viewBox="0 0 800 260" role="img" aria-label="iOS and Android build success">
+              <line x1="44" y1="16" x2="784" y2="16"></line>
+              <line x1="44" y1="124" x2="784" y2="124"></line>
+              <line x1="44" y1="232" x2="784" y2="232"></line>
+              <text data-trend-max x="0" y="20">{formatRate(chartRange.max)}</text>
+              <text data-trend-mid x="0" y="128">{formatRate(chartMid)}</text>
+              <text data-trend-min x="0" y="236">{formatRate(chartRange.min)}</text>
+              <polyline data-trend-line="ios" points={iosChart}></polyline>
+              <polyline data-trend-line="android" points={androidChart}></polyline>
+              <g data-trend-markers="ios"></g>
+              <g data-trend-markers="android"></g>
+              <text data-trend-start x="44" y="256">{chartRows[0]?.date ?? ''}</text>
+              <text data-trend-end x="784" y="256" text-anchor="end">{chartRows.at(-1)?.date ?? ''}</text>
+            </svg>
+            <div
+              class="data-trend-overlay"
+              data-trend-overlay
+              tabindex="0"
+              role="group"
+              aria-label="Builder success trend values. Move pointer across the chart or use arrow keys."
+              hidden={chartRows.length === 0}
+            >
+              <span class="data-trend-guide" data-trend-guide hidden aria-hidden="true"></span>
+              <span class="data-trend-tooltip" data-trend-tooltip hidden></span>
+            </div>
+          </div>
+          <div class="data-legend">
+            <span data-legend="ios">iOS</span>
+            <span data-legend="android">Android</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-section" aria-labelledby="failures-title">
+      <div class="data-shell data-split">
+        <div>
+          <p class="data-eyebrow">Failures</p>
+          <h2 id="failures-title">Top failure reasons</h2>
+          <p class="data-copy" data-failures-lead translate="no">{topFailureLead}</p>
+          <p class="data-copy data-copy-secondary">
+            Script errors come from the app repo. Timeouts, host failures, and missing runners are builder-side. Shares only, no job counts.
+          </p>
+          <p class="data-copy data-copy-secondary">
+            Need signed binaries? See <a class="data-inline-link" href={nativeBuildHref}>Native Builds</a>. Live Update install rates live on <a
+              class="data-inline-link"
+              href={liveUpdateHref}>Live Update data</a
+            >.
+          </p>
+        </div>
+        <ol class="data-failures" data-failures translate="no">
+          {
+            metrics.failures.length
+              ? metrics.failures.map((item, index) => {
+                  const info = getBuilderFailureInfo(item.reason)
+                  return (
+                    <li>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <div class="data-failure-copy">
+                        <strong>{info.label}</strong>
+                        <p>{info.explanation}</p>
+                      </div>
+                      <b>{Math.ceil(item.share)}%</b>
+                      <i aria-hidden="true">
+                        <em style={`--share: ${item.share}%`} />
+                      </i>
+                    </li>
+                  )
+                })
+              : pending
+                ? [<li class="data-empty">Loading failure mix…</li>]
+                : [<li class="data-empty">No failures in this window.</li>]
+          }
+        </ol>
+      </div>
+    </section>
+    <ProductTestimonials
+      variant="dark"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_data_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_data_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.nativeBuildData}
+    />
+  </main>
+</Layout>
+
+<script>
+  import { getBuilderFailureInfo } from '@/lib/builderFailureReasons'
+  import { normalizeBuilderMetrics, type BuilderMetrics } from '@/lib/builderMetrics'
+  import {
+    formatTrendAxisLabel,
+    formatTrendTooltip,
+    selectTrendRows,
+    sliceSparklineRows,
+    TREND_RANGE_OPTIONS,
+    trendHitLeftPercent,
+    trendNearestIndex,
+    trendRowUnit,
+    type TrendRangeKey,
+  } from '@/lib/metricsTrendChart'
+
+  function boot() {
+    const page = document.querySelector<HTMLElement>('.data-page')
+    const endpoint = page?.dataset.metricsEndpoint
+    const updated = page?.querySelector<HTMLElement>('[data-updated]')
+    const statusBadge = page?.querySelector<HTMLElement>('[data-status-badge]')
+    const kpiStatus = page?.querySelector<HTMLElement>('[data-kpi-status]')
+    const successRateKpi = page?.querySelector<HTMLElement>('[data-kpi="success-rate"]')
+    const processKpi = page?.querySelector<HTMLElement>('[data-kpi="process"]')
+    const queueKpi = page?.querySelector<HTMLElement>('[data-kpi="queue"]')
+    const iosSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="ios-success"]')
+    const iosFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="ios-failure"]')
+    const androidSuccessKpi = page?.querySelector<HTMLElement>('[data-kpi="android-success"]')
+    const androidFailureKpi = page?.querySelector<HTMLElement>('[data-kpi="android-failure"]')
+    const iosProcess = page?.querySelector<HTMLElement>('[data-process="ios"]')
+    const androidProcess = page?.querySelector<HTMLElement>('[data-process="android"]')
+    const iosTopFailure = page?.querySelector<HTMLElement>('[data-top-failure="ios"]')
+    const androidTopFailure = page?.querySelector<HTMLElement>('[data-top-failure="android"]')
+    const iosSpark = page?.querySelector<HTMLElement>('[data-spark="ios"]')
+    const androidSpark = page?.querySelector<HTMLElement>('[data-spark="android"]')
+    const trendLabel = page?.querySelector<HTMLElement>('[data-trend-label]')
+    const trendSvg = page?.querySelector<SVGElement>('[data-trend-svg]')
+    const trendIos = page?.querySelector<SVGPolylineElement>('[data-trend-line="ios"]')
+    const trendAndroid = page?.querySelector<SVGPolylineElement>('[data-trend-line="android"]')
+    const trendIosMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="ios"]')
+    const trendAndroidMarkers = page?.querySelector<SVGGElement>('[data-trend-markers="android"]')
+    const trendStart = page?.querySelector<SVGTextElement>('[data-trend-start]')
+    const trendEnd = page?.querySelector<SVGTextElement>('[data-trend-end]')
+    const trendMax = page?.querySelector<SVGTextElement>('[data-trend-max]')
+    const trendMid = page?.querySelector<SVGTextElement>('[data-trend-mid]')
+    const trendMin = page?.querySelector<SVGTextElement>('[data-trend-min]')
+    const trendOverlay = page?.querySelector<HTMLElement>('[data-trend-overlay]')
+    const trendTooltip = page?.querySelector<HTMLElement>('[data-trend-tooltip]')
+    const trendGuide = page?.querySelector<HTMLElement>('[data-trend-guide]')
+    const trendStatus = page?.querySelector<HTMLElement>('[data-trend-status]')
+    const dailySkeleton = page?.querySelector<HTMLElement>('.data-chart-skeleton')
+    const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
+    const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
+    const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
+    const metricButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-metric]') ?? [])]
+    const styleScopeAttributes = [...(page?.attributes ?? [])].map((attribute) => attribute.name).filter((name) => name.startsWith('data-astro-cid-'))
+    let trendRange: TrendRangeKey = '1m'
+    let metric: 'rate' | 'duration' = 'rate'
+    let latestMetrics: BuilderMetrics | null = null
+
+    function createScopedElement<K extends keyof HTMLElementTagNameMap>(tag: K) {
+      const element = document.createElement(tag)
+      for (const attribute of styleScopeAttributes) element.setAttribute(attribute, '')
+      return element
+    }
+
+    function formatRate(value: number | null) {
+      return value === null ? '—' : `${Number(value.toFixed(1))}%`
+    }
+
+    function formatDuration(seconds: number | null) {
+      if (seconds === null) return '—'
+      if (seconds < 90) return `${Math.round(seconds)}s`
+      return `${(seconds / 60).toFixed(1)} min`
+    }
+
+    function failureRate(success: number | null) {
+      return success === null ? null : Number((100 - success).toFixed(1))
+    }
+
+    function sparkTone(rate: number | null) {
+      if (rate === null) return 'empty'
+      return rate >= 70 ? 'good' : 'poor'
+    }
+
+    function sparkTip(date: string, rate: number | null) {
+      return `${date}: ${formatRate(rate)}`
+    }
+
+    function trendTip(date: string, ios: number | null, android: number | null) {
+      return formatTrendTooltip(date, ios, android, metric === 'rate' ? formatRate : formatDuration)
+    }
+
+    let trendRows: BuilderMetrics['daily_platforms'] = []
+    let trendFocusIndex = -1
+    const trendOverlayLabel = 'Builder success trend values. Move pointer across the chart or use arrow keys.'
+
+    function clampTrendTooltip(leftPercent: number) {
+      return Math.max(8, Math.min(92, leftPercent))
+    }
+
+    function trendStatusAnnounce(rows: BuilderMetrics['daily_platforms']) {
+      const metricLabel = metric === 'rate' ? 'Build success' : 'Processing time'
+      const rangeLabel = TREND_RANGE_OPTIONS.find((option) => option.key === trendRange)?.label ?? trendRange
+      if (!rows.length) return 'Builder trend unavailable'
+      const unit = trendRowUnit(rows, trendRange)
+      const dates = rows.length === 1 ? rows[0].date : `${rows[0]?.date} to ${rows.at(-1)?.date}`
+      return `${metricLabel} trend updated for ${rangeLabel}: ${rows.length} ${unit}${rows.length === 1 ? '' : 's'} (${dates})`
+    }
+
+    function clearTrendSelection(announce = '') {
+      trendFocusIndex = -1
+      if (trendTooltip) trendTooltip.hidden = true
+      if (trendGuide) trendGuide.hidden = true
+      if (trendStatus) trendStatus.textContent = announce
+      if (trendOverlay) trendOverlay.setAttribute('aria-label', trendOverlayLabel)
+    }
+
+    function showTrendPoint(index: number) {
+      if (!trendOverlay || !trendTooltip) return
+      const row = trendRows[index]
+      if (!row) {
+        trendTooltip.hidden = true
+        if (trendGuide) trendGuide.hidden = true
+        if (trendStatus) trendStatus.textContent = ''
+        return
+      }
+      const iosValue = metric === 'rate' ? row.ios : row.ios_process_seconds
+      const androidValue = metric === 'rate' ? row.android : row.android_process_seconds
+      const tooltip = trendTip(row.date, iosValue, androidValue)
+      const guideLeft = trendHitLeftPercent(index, trendRows.length)
+      const tooltipLeft = clampTrendTooltip(guideLeft)
+      trendFocusIndex = index
+      trendTooltip.textContent = tooltip
+      trendTooltip.hidden = false
+      trendTooltip.style.left = `${tooltipLeft}%`
+      if (trendGuide) {
+        trendGuide.hidden = false
+        trendGuide.style.left = `${guideLeft}%`
+      }
+      if (trendStatus) trendStatus.textContent = tooltip
+      trendOverlay.setAttribute('aria-label', tooltip)
+    }
+
+    function bindTrendOverlay() {
+      if (!trendOverlay) return
+      trendOverlay.addEventListener('pointermove', (event) => {
+        if (!trendRows.length) return
+        const rect = trendOverlay.getBoundingClientRect()
+        const index = trendNearestIndex(event.clientX, rect.left, rect.width, trendRows.length)
+        showTrendPoint(index)
+      })
+      trendOverlay.addEventListener('pointerleave', () => {
+        trendFocusIndex = -1
+        if (trendTooltip) trendTooltip.hidden = true
+        if (trendGuide) trendGuide.hidden = true
+        if (trendStatus) trendStatus.textContent = ''
+        trendOverlay.setAttribute('aria-label', trendOverlayLabel)
+      })
+      trendOverlay.addEventListener('keydown', (event) => {
+        if (!trendRows.length) return
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Home' && event.key !== 'End') return
+        event.preventDefault()
+        const next =
+          event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? trendRows.length - 1
+              : Math.max(0, Math.min(trendRows.length - 1, (trendFocusIndex < 0 ? 0 : trendFocusIndex) + (event.key === 'ArrowRight' ? 1 : -1)))
+        showTrendPoint(next)
+      })
+    }
+
+    bindTrendOverlay()
+
+    function platformOf(metrics: BuilderMetrics, key: 'ios' | 'android') {
+      return (
+        metrics.platforms.find((item) => item.key === key) ?? {
+          key,
+          share: 0,
+          success_rate: null,
+          avg_process_seconds: null,
+          avg_queue_seconds: null,
+          top_failure: null,
+        }
+      )
+    }
+
+    function sliceDays<T extends { date: string }>(rows: T[], days: number) {
+      return rows.slice(Math.max(0, rows.length - days))
+    }
+
+    function chartScale(values: number[], kind: 'rate' | 'duration') {
+      if (!values.length) return kind === 'rate' ? { min: 0, max: 100 } : { min: 0, max: 300 }
+      const min = Math.min(...values)
+      const max = Math.max(...values)
+      const pad = Math.max(kind === 'rate' ? 3 : 20, (max - min) * 0.25)
+      if (kind === 'rate') {
+        return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Math.min(100, Number((max + pad).toFixed(1))) }
+      }
+      return { min: Math.max(0, Number((min - pad).toFixed(1))), max: Number((max + pad).toFixed(1)) }
+    }
+
+    function chartPoints(values: Array<number | null>, scale: { min: number; max: number }, width = 800, height = 260) {
+      const pad = { l: 44, r: 16, t: 16, b: 28 }
+      const innerW = width - pad.l - pad.r
+      const innerH = height - pad.t - pad.b
+      const span = Math.max(scale.max - scale.min, 1)
+      return values
+        .map((value, index) => {
+          if (value === null) return null
+          const x = pad.l + (values.length <= 1 ? innerW / 2 : (index / (values.length - 1)) * innerW)
+          const y = pad.t + (1 - (value - scale.min) / span) * innerH
+          return `${x.toFixed(1)},${y.toFixed(1)}`
+        })
+        .filter((point): point is string => point !== null)
+        .join(' ')
+    }
+
+    function formatTick(value: number) {
+      return metric === 'rate' ? formatRate(value) : formatDuration(value)
+    }
+
+    function renderTrendMarker(group: SVGGElement | null | undefined, values: Array<number | null>, scale: { min: number; max: number }, show: boolean, fill: string) {
+      if (!group) return
+      group.replaceChildren()
+      if (!show) return
+      const coords = chartPoints(values, scale)
+      if (!coords) return
+      const [cx, cy] = coords.split(',')
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+      circle.setAttribute('cx', cx)
+      circle.setAttribute('cy', cy)
+      circle.setAttribute('r', '5')
+      circle.setAttribute('fill', fill)
+      group.append(circle)
+    }
+
+    function renderSpark(target: HTMLElement | null | undefined, rows: BuilderMetrics['daily_platforms'], key: 'ios' | 'android') {
+      if (!target) return
+      target.replaceChildren()
+      for (const row of rows) {
+        const tick = createScopedElement('i')
+        tick.dataset.tone = sparkTone(row[key])
+        tick.dataset.tip = sparkTip(row.date, row[key])
+        target.append(tick)
+      }
+    }
+
+    function trendReferenceDate(metrics: BuilderMetrics) {
+      const timestamp = new Date(metrics.updated_at)
+      return Number.isNaN(timestamp.getTime()) ? undefined : timestamp
+    }
+
+    function renderTrend(metrics: BuilderMetrics) {
+      const rows = selectTrendRows(metrics, trendRange, trendRange === '1d' ? trendReferenceDate(metrics) : undefined)
+      const iosValues = rows.map((row) => (metric === 'rate' ? row.ios : row.ios_process_seconds))
+      const androidValues = rows.map((row) => (metric === 'rate' ? row.android : row.android_process_seconds))
+      const values = [...iosValues, ...androidValues].filter((value): value is number => value !== null)
+      const scale = chartScale(values, metric === 'rate' ? 'rate' : 'duration')
+      const mid = Number(((scale.min + scale.max) / 2).toFixed(1))
+      if (trendLabel) trendLabel.textContent = metric === 'rate' ? 'Build success' : 'Processing time'
+      if (trendSvg) {
+        trendSvg.style.display = rows.length ? '' : 'none'
+        trendSvg.setAttribute('aria-label', metric === 'rate' ? 'iOS and Android build success' : 'iOS and Android processing time')
+      }
+      if (dailySkeleton) dailySkeleton.hidden = rows.length > 0
+      if (trendIos) trendIos.setAttribute('points', chartPoints(iosValues, scale))
+      if (trendAndroid) trendAndroid.setAttribute('points', chartPoints(androidValues, scale))
+      const showIosMarker = iosValues.filter((value): value is number => value !== null).length === 1
+      const showAndroidMarker = androidValues.filter((value): value is number => value !== null).length === 1
+      renderTrendMarker(trendIosMarkers, iosValues, scale, showIosMarker, '#60a5fa')
+      renderTrendMarker(trendAndroidMarkers, androidValues, scale, showAndroidMarker, '#34d399')
+      if (trendMax) trendMax.textContent = formatTick(scale.max)
+      if (trendMid) trendMid.textContent = formatTick(mid)
+      if (trendMin) trendMin.textContent = formatTick(scale.min)
+      if (trendStart) trendStart.textContent = formatTrendAxisLabel(rows[0]?.date ?? '', trendRange)
+      if (trendEnd) trendEnd.textContent = formatTrendAxisLabel(rows.at(-1)?.date ?? '', trendRange)
+      trendRows = rows
+      clearTrendSelection(trendStatusAnnounce(rows))
+      if (trendOverlay) trendOverlay.hidden = rows.length === 0
+    }
+
+    function renderFailures(metrics: BuilderMetrics) {
+      if (!failuresList) return
+      failuresList.replaceChildren()
+      const lead = metrics.failures[0]
+      if (failuresLead) {
+        if (lead) {
+          const info = getBuilderFailureInfo(lead.reason)
+          failuresLead.textContent = `${info.label} accounts for ${Math.ceil(lead.share)}% of failed jobs in this window.`
+        } else {
+          failuresLead.textContent = 'Normalized categories across all apps.'
+        }
+      }
+      for (const [index, item] of metrics.failures.entries()) {
+        const info = getBuilderFailureInfo(item.reason)
+        const row = createScopedElement('li')
+        const rank = createScopedElement('span')
+        rank.textContent = String(index + 1).padStart(2, '0')
+        const copy = createScopedElement('div')
+        copy.className = 'data-failure-copy'
+        const reason = createScopedElement('strong')
+        reason.textContent = info.label
+        const explanation = createScopedElement('p')
+        explanation.textContent = info.explanation
+        copy.append(reason, explanation)
+        const share = createScopedElement('b')
+        share.textContent = `${Math.ceil(item.share)}%`
+        const track = createScopedElement('i')
+        track.setAttribute('aria-hidden', 'true')
+        const fill = createScopedElement('em')
+        fill.style.setProperty('--share', `${item.share}%`)
+        track.append(fill)
+        row.append(rank, copy, share, track)
+        failuresList.append(row)
+      }
+      if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
+    }
+
+    function renderMetrics(metrics: BuilderMetrics) {
+      latestMetrics = metrics
+      const ios = platformOf(metrics, 'ios')
+      const android = platformOf(metrics, 'android')
+      if (successRateKpi) successRateKpi.textContent = formatRate(metrics.success_rate)
+      if (processKpi) processKpi.textContent = formatDuration(metrics.avg_process_seconds)
+      if (queueKpi) queueKpi.textContent = formatDuration(metrics.avg_queue_seconds)
+      if (iosSuccessKpi) iosSuccessKpi.textContent = formatRate(ios.success_rate)
+      if (iosFailureKpi) iosFailureKpi.textContent = formatRate(failureRate(ios.success_rate))
+      if (androidSuccessKpi) androidSuccessKpi.textContent = formatRate(android.success_rate)
+      if (androidFailureKpi) androidFailureKpi.textContent = formatRate(failureRate(android.success_rate))
+      if (iosProcess) iosProcess.textContent = `${formatDuration(ios.avg_process_seconds)} avg process`
+      if (androidProcess) androidProcess.textContent = `${formatDuration(android.avg_process_seconds)} avg process`
+      if (iosTopFailure) iosTopFailure.textContent = ios.top_failure ? getBuilderFailureInfo(ios.top_failure.reason).label : 'No leading failure'
+      if (androidTopFailure) androidTopFailure.textContent = android.top_failure ? getBuilderFailureInfo(android.top_failure.reason).label : 'No leading failure'
+      if (statusBadge) {
+        statusBadge.dataset.tone = 'operational'
+        if (statusBadge.lastChild) statusBadge.lastChild.textContent = ' Operational'
+      }
+      if (kpiStatus) {
+        kpiStatus.textContent = `Success ${formatRate(metrics.success_rate)}, process ${formatDuration(metrics.avg_process_seconds)}, queue ${formatDuration(metrics.avg_queue_seconds)}`
+      }
+      const sparkRows = sliceSparklineRows(metrics.daily_platforms)
+      renderSpark(iosSpark, sparkRows, 'ios')
+      renderSpark(androidSpark, sparkRows, 'android')
+      renderTrend(metrics)
+      renderFailures(metrics)
+      if (updated) {
+        const timestamp = new Date(metrics.updated_at)
+        updated.textContent = Number.isNaN(timestamp.getTime())
+          ? 'Updated moments ago'
+          : `Updated ${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(timestamp)} UTC`
+      }
+    }
+
+    function renderUnavailable() {
+      latestMetrics = null
+      if (updated) updated.textContent = 'Builder data is temporarily unavailable. Check back shortly.'
+      if (statusBadge) {
+        statusBadge.dataset.tone = 'unavailable'
+        if (statusBadge.lastChild) statusBadge.lastChild.textContent = ' Unavailable'
+      }
+      if (kpiStatus) kpiStatus.textContent = 'Builder metrics unavailable'
+      if (successRateKpi) successRateKpi.textContent = '—'
+      if (processKpi) processKpi.textContent = '—'
+      if (queueKpi) queueKpi.textContent = '—'
+      if (iosSuccessKpi) iosSuccessKpi.textContent = '—'
+      if (iosFailureKpi) iosFailureKpi.textContent = '—'
+      if (androidSuccessKpi) androidSuccessKpi.textContent = '—'
+      if (androidFailureKpi) androidFailureKpi.textContent = '—'
+      if (iosSpark) iosSpark.replaceChildren()
+      if (androidSpark) androidSpark.replaceChildren()
+      if (trendSvg) trendSvg.style.display = 'none'
+      if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
+      if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
+    }
+
+    async function fetchMetrics() {
+      if (!endpoint) throw new Error('Missing metrics endpoint')
+      const controller = new AbortController()
+      const timeoutId = window.setTimeout(() => controller.abort(), 10_000)
+      try {
+        const response = await fetch(endpoint, {
+          headers: { Accept: 'application/json' },
+          signal: controller.signal,
+          cache: 'default',
+        })
+        const payload = response.ok ? await response.json() : null
+        const metrics = normalizeBuilderMetrics(payload)
+        if (!metrics) throw new Error('Invalid metrics response')
+        writeCachedMetrics(payload)
+        return metrics
+      } finally {
+        window.clearTimeout(timeoutId)
+      }
+    }
+
+    const METRICS_CACHE_KEY = 'capgo-builder-metrics-v2'
+    const METRICS_CACHE_FRESH_MS = 5 * 60 * 1000
+    const METRICS_CACHE_STALE_MS = 24 * 60 * 60 * 1000
+
+    function readCachedMetrics(): { metrics: BuilderMetrics; fresh: boolean } | null {
+      try {
+        const raw = localStorage.getItem(METRICS_CACHE_KEY)
+        if (!raw) return null
+        const parsed = JSON.parse(raw) as { savedAt?: unknown; payload?: unknown }
+        if (typeof parsed.savedAt !== 'number') return null
+        const age = Date.now() - parsed.savedAt
+        if (age > METRICS_CACHE_STALE_MS) return null
+        const metrics = normalizeBuilderMetrics(parsed.payload)
+        if (!metrics) return null
+        return { metrics, fresh: age <= METRICS_CACHE_FRESH_MS }
+      } catch {
+        return null
+      }
+    }
+
+    function writeCachedMetrics(payload: unknown) {
+      try {
+        localStorage.setItem(METRICS_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }))
+      } catch {
+        // Ignore quota / private-mode failures.
+      }
+    }
+
+    async function loadMetrics() {
+      const cached = readCachedMetrics()
+      const initial = cached?.metrics
+
+      if (initial) {
+        renderMetrics(initial)
+        page?.setAttribute('aria-busy', 'false')
+      }
+
+      if (cached?.fresh) {
+        void fetchMetrics()
+          .then((metrics) => renderMetrics(metrics))
+          .catch(() => undefined)
+        return
+      }
+
+      try {
+        const metrics = await fetchMetrics()
+        renderMetrics(metrics)
+      } catch {
+        if (!initial) renderUnavailable()
+      } finally {
+        page?.setAttribute('aria-busy', 'false')
+      }
+    }
+
+    for (const button of trendRangeButtons) {
+      button.addEventListener('click', () => {
+        const next = button.dataset.trendRange
+        if (next !== '1d' && next !== '1w' && next !== '1m' && next !== '3m') return
+        trendRange = next
+        for (const item of trendRangeButtons) item.setAttribute('aria-pressed', item === button ? 'true' : 'false')
+        if (latestMetrics) renderTrend(latestMetrics)
+      })
+    }
+
+    for (const button of metricButtons) {
+      button.addEventListener('click', () => {
+        const next = button.dataset.metric
+        if (next !== 'rate' && next !== 'duration') return
+        metric = next
+        for (const item of metricButtons) item.ariaSelected = item === button ? 'true' : 'false'
+        if (latestMetrics) renderTrend(latestMetrics)
+      })
+    }
+
+    void loadMetrics()
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true })
+  else boot()
+</script>
+
+<style>
+  .data-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .data-page {
+    --line: rgb(255 255 255 / 11%);
+    --muted: #bdc9da;
+    color-scheme: only dark;
+    background: transparent;
+    color: white;
+    overflow: clip;
+  }
+  .data-shell {
+    width: min(1120px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+  .data-hero,
+  .data-section {
+    padding-block: 72px;
+  }
+  .data-hero {
+    background: transparent;
+    border-bottom: 1px solid var(--line);
+  }
+  .data-eyebrow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0 0 16px;
+    color: #8ec5ff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  h1,
+  h2 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  h1 {
+    max-width: 20ch;
+    font-size: clamp(2.5rem, 6vw, 4.75rem);
+  }
+  h2 {
+    max-width: 32ch;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  .data-summary {
+    max-width: 58ch;
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .data-updated {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    margin: 24px 0 0;
+    color: #91a2ba;
+    font-size: 0.875rem;
+  }
+  .data-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  .data-badge {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+    padding: 6px 12px;
+    border: 1px solid rgb(52 211 153 / 28%);
+    border-radius: 999px;
+    background: rgb(52 211 153 / 8%);
+    color: #86efac;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .data-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #34d399;
+    box-shadow: 0 0 0 4px rgb(52 211 153 / 12%);
+  }
+  .data-badge[data-tone='loading'] {
+    border-color: rgb(147 197 253 / 28%);
+    background: rgb(147 197 253 / 8%);
+    color: #93c5fd;
+  }
+  .data-badge[data-tone='loading'] span {
+    background: #60a5fa;
+    box-shadow: 0 0 0 4px rgb(96 165 250 / 12%);
+  }
+  .data-badge[data-tone='unavailable'] {
+    border-color: rgb(248 113 113 / 28%);
+    background: rgb(248 113 113 / 8%);
+    color: #fca5a5;
+  }
+  .data-badge[data-tone='unavailable'] span {
+    background: #f87171;
+    box-shadow: 0 0 0 4px rgb(248 113 113 / 12%);
+  }
+  .data-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .data-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgb(255 255 255 / 3%);
+  }
+  .data-card h3 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 0 0 20px;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .data-card h3 svg {
+    width: 18px;
+    height: 18px;
+  }
+  .data-card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .data-card-stats p {
+    margin: 0 0 6px;
+    color: #91a2ba;
+    font-size: 0.8rem;
+  }
+  .data-card-stats strong {
+    display: block;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
+  }
+  .data-card-stats strong[data-tone='poor'] {
+    color: #f0a0a0;
+  }
+  .data-card-stats small {
+    display: block;
+    margin-top: 6px;
+    color: #6f819b;
+    font-size: 0.75rem;
+  }
+  .data-spark {
+    display: flex;
+    gap: 3px;
+    align-items: end;
+    height: 28px;
+    overflow: visible;
+  }
+  .data-spark i {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    border-radius: 2px;
+    background: #34d399;
+  }
+  .data-spark i[data-tone='poor'] {
+    background: #f87171;
+  }
+  .data-spark i[data-tone='empty'] {
+    background: rgb(255 255 255 / 12%);
+  }
+  .data-spark i[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    z-index: 2;
+    padding: 6px 10px;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 999px;
+    background: #121820;
+    color: #f3f6fb;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+  .data-spark i:first-child[data-tip]::after {
+    left: 0;
+    transform: none;
+  }
+  .data-spark i:last-child[data-tip]::after {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+  .data-spark i[data-tip]:hover::after,
+  .data-spark i[data-tip]:focus-visible::after {
+    opacity: 1;
+  }
+  .data-trend {
+    padding: 20px 20px 12px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgb(255 255 255 / 3%);
+  }
+  .data-trend-plot {
+    position: relative;
+  }
+  .data-trend-overlay {
+    position: absolute;
+    inset: 0 0 10.769%;
+    border: 0;
+    background: transparent;
+    cursor: crosshair;
+  }
+  .data-trend-overlay:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: -2px;
+  }
+  .data-trend-guide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgb(147 197 253 / 45%);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .data-trend-tooltip {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    width: max-content;
+    max-width: min(280px, 80vw);
+    padding: 7px 9px;
+    border: 1px solid rgb(147 197 253 / 24%);
+    border-radius: 6px;
+    background: #111c2e;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
+    color: #f8fafc;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .data-trend-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .data-trend-head p {
+    margin: 0;
+    color: #d8e1ee;
+    font-size: 0.95rem;
+  }
+  .data-trend-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .data-periods {
+    display: flex;
+    gap: 6px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .data-periods button {
+    min-width: 52px;
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #91a2ba;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .data-periods button[aria-selected='true'],
+  .data-periods button[aria-pressed='true'] {
+    background: white;
+    color: #111827;
+  }
+  .data-periods button:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+  }
+  .data-trend-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .data-trend-svg line {
+    stroke: rgb(255 255 255 / 10%);
+    stroke-width: 1;
+  }
+  .data-trend-svg text {
+    fill: #6f819b;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+  .data-trend-svg polyline {
+    fill: none;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .data-trend-svg polyline[data-trend-line='ios'] {
+    stroke: #60a5fa;
+  }
+  .data-trend-svg polyline[data-trend-line='android'] {
+    stroke: #34d399;
+  }
+  .data-trend-svg g[data-trend-markers='ios'] :global(circle) {
+    fill: #60a5fa;
+  }
+  .data-trend-svg g[data-trend-markers='android'] :global(circle) {
+    fill: #34d399;
+  }
+  .data-legend {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    padding: 8px 0 4px;
+    color: #91a2ba;
+    font-size: 0.8rem;
+  }
+  .data-legend span::before {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    border-radius: 999px;
+    background: #60a5fa;
+    content: '';
+  }
+  .data-legend span[data-legend='android']::before {
+    background: #34d399;
+  }
+  .data-heading,
+  .data-split {
+    display: grid;
+    gap: 48px;
+  }
+  .data-heading {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    align-items: end;
+    margin-bottom: 40px;
+  }
+  .data-heading > p,
+  .data-copy {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .data-copy-secondary {
+    margin-top: 16px;
+    color: #91a2ba;
+    font-size: 0.95rem;
+  }
+  .data-inline-link {
+    color: #93c5fd;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .data-inline-link:hover,
+  .data-inline-link:focus-visible {
+    color: #bfdbfe;
+  }
+  .data-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 36px 0 0;
+    border-block: 1px solid var(--line);
+  }
+  .data-kpis div {
+    min-width: 0;
+    padding: 20px 24px;
+  }
+  .data-kpis > div:not(:first-child) {
+    border-left: 1px solid var(--line);
+  }
+  .data-kpis p {
+    margin: 0 0 8px;
+    color: #91a2ba;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .data-kpis strong {
+    display: block;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .data-section-muted {
+    background: #1a1a1a;
+    border-block: 1px solid var(--line);
+  }
+  .data-split {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+  .data-failures {
+    display: grid;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .data-failures li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 8px 12px;
+    align-items: start;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .data-failures li > span {
+    color: #6f819b;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+  }
+  .data-failure-copy {
+    min-width: 0;
+  }
+  .data-failures strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .data-failure-copy p {
+    margin: 6px 0 0;
+    color: #91a2ba;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+  .data-failures b {
+    color: #d8e1ee;
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+  }
+  .data-failures i {
+    grid-column: 2 / -1;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgb(255 255 255 / 7%);
+  }
+  .data-failures em {
+    display: block;
+    width: var(--share, 0%);
+    height: 100%;
+    border-radius: inherit;
+    background: #f59e0b;
+  }
+  .data-empty {
+    margin: 0;
+    color: #91a2ba;
+    font-size: 1rem;
+  }
+  .data-chart-skeleton {
+    display: flex;
+    gap: 5px;
+    align-items: end;
+    height: 240px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    background: rgb(255 255 255 / 2%);
+  }
+  .data-chart-skeleton div {
+    flex: 1;
+    height: 68%;
+    border-radius: 4px 4px 0 0;
+    background: rgb(148 163 184 / 12%);
+  }
+  @media (max-width: 720px) {
+    .data-hero,
+    .data-section {
+      padding-block: 52px;
+    }
+    .data-heading,
+    .data-split,
+    .data-cards {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .data-kpis {
+      grid-template-columns: 1fr 1fr;
+    }
+    .data-kpis > div:nth-child(2n + 1) {
+      border-left: 0;
+    }
+    .data-kpis > div:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+    .data-updated,
+    .data-kpis p {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
+<style is:global>
+  @import '@/styles/metrics-trend-mobile.css';
+</style>

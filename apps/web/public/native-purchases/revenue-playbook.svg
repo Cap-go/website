@@ -1,0 +1,32 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#F7FAFC"/>
+  <rect x="92" y="96" width="1416" height="708" rx="36" fill="#102A43"/>
+  <rect x="154" y="156" width="428" height="588" rx="42" fill="#F0F4F8"/>
+  <rect x="190" y="204" width="356" height="72" rx="18" fill="#D9E2EC"/>
+  <rect x="212" y="224" width="202" height="18" rx="9" fill="#486581"/>
+  <rect x="212" y="252" width="128" height="14" rx="7" fill="#829AB1"/>
+  <rect x="190" y="320" width="356" height="116" rx="24" fill="#FFFFFF"/>
+  <rect x="222" y="348" width="162" height="18" rx="9" fill="#102A43"/>
+  <rect x="222" y="382" width="292" height="12" rx="6" fill="#BCCCDC"/>
+  <rect x="222" y="408" width="236" height="12" rx="6" fill="#BCCCDC"/>
+  <rect x="190" y="462" width="356" height="116" rx="24" fill="#FFFFFF"/>
+  <rect x="222" y="490" width="182" height="18" rx="9" fill="#102A43"/>
+  <rect x="222" y="524" width="292" height="12" rx="6" fill="#BCCCDC"/>
+  <rect x="222" y="550" width="202" height="12" rx="6" fill="#BCCCDC"/>
+  <rect x="190" y="616" width="356" height="64" rx="18" fill="#2F80ED"/>
+  <text x="368" y="657" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">Start free trial</text>
+  <path d="M708 641C787 558 842 602 911 518C984 429 1037 475 1096 385C1163 281 1230 306 1304 214" stroke="#2F80ED" stroke-width="24" stroke-linecap="round"/>
+  <path d="M720 641H1346" stroke="#9FB3C8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M720 220V641" stroke="#9FB3C8" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="911" cy="518" r="20" fill="#F0B429"/>
+  <circle cx="1096" cy="385" r="20" fill="#F0B429"/>
+  <circle cx="1304" cy="214" r="20" fill="#F0B429"/>
+  <rect x="710" y="698" width="188" height="20" rx="10" fill="#BCCCDC"/>
+  <rect x="928" y="698" width="188" height="20" rx="10" fill="#BCCCDC"/>
+  <rect x="1146" y="698" width="188" height="20" rx="10" fill="#BCCCDC"/>
+  <text x="705" y="174" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="800" fill="#FFFFFF">App revenue playbook</text>
+  <text x="760" y="238" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="500" fill="#D9E2EC">Validate demand, ship one paywall,</text>
+  <text x="760" y="282" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="500" fill="#D9E2EC">and learn from purchase data.</text>
+  <rect x="760" y="326" width="238" height="62" rx="31" fill="#F0B429"/>
+  <text x="879" y="367" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#102A43">$1K MRR path</text>
+</svg>

@@ -1,0 +1,611 @@
+---
+import '@/styles/lu-product.css'
+import ReleaseExplainers from '@/components/explainers/ReleaseExplainers.astro'
+import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
+import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
+import Layout from '@/layouts/Layout.astro'
+import m, { type MessageValues } from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
+import SignupCta from '@/components/SignupCta.astro'
+import StorePolicySection from '@/components/StorePolicySection.astro'
+import StoreReachSection from '@/components/StoreReachSection.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import ProductVideoLoop from '@/components/ProductVideoLoop.astro'
+import { getProductScreens } from '@/config/productScreens'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+function copy(key: string, values: MessageValues = {}) {
+  return m[key](values, { locale })
+}
+
+const title = `${brand} | ${m.live_update_seo_title({}, { locale })}`
+const description = m.live_update_description({}, { locale })
+const dataUrl = getRelativeLocaleUrl(locale, 'data')
+const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Live Updates',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Over-the-air live updates for Capacitor apps',
+  operatingSystem: 'iOS, Android',
+  featureList: [
+    'Over-the-air JavaScript, HTML, CSS, and asset updates without app store review',
+    'Delta downloads and end-to-end encrypted, signed bundles',
+    'Dynamic channels, device overrides, and progressive rollouts',
+    'Automatic rollback when a bundle fails to start, plus one-click revert',
+    'Version targeting so each native version only receives compatible bundles',
+    'Works with Capacitor, Ionic, Cordova, and Electron apps',
+    'Open-source updater plugin (MPL-2.0) and backend (AGPL-3.0)',
+  ],
+  aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
+  reviews: toProductReviewLdJson(productTestimonials.liveUpdate),
+  offers: { price: '12', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+})
+
+const faqItems = [
+  { question: m.live_update_faq_q1({}, { locale }), answer: m.live_update_faq_a1({}, { locale }) },
+  { question: m.live_update_faq_q2({}, { locale }), answer: m.live_update_faq_a2({}, { locale }) },
+  { question: m.live_update_faq_q3({}, { locale }), answer: m.live_update_faq_a3({}, { locale }) },
+  { question: m.live_update_faq_q4({}, { locale }), answer: m.live_update_faq_a4({}, { locale }) },
+]
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [softwareLdJson, createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
+})
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-live-update.png`,
+  keywords: 'Capacitor live updates, Capacitor OTA, live updates, OTA updates, Ionic Capacitor, Capgo',
+  ldJSON,
+}
+
+const outcomeCards = [
+  {
+    title: m.live_update_outcome_card_recover_title({}, { locale }),
+    text: m.live_update_outcome_card_recover_text({}, { locale }),
+  },
+  {
+    title: m.live_update_outcome_card_control_title({}, { locale }),
+    text: m.live_update_outcome_card_control_text({}, { locale }),
+  },
+  {
+    title: m.live_update_outcome_card_prove_title({}, { locale }),
+    text: m.live_update_outcome_card_prove_text({}, { locale }),
+  },
+]
+
+const heroStats = [
+  {
+    value: m.live_update_hero_stat_recovery_value({}, { locale }),
+    label: m.live_update_hero_stat_recovery_label({}, { locale }),
+  },
+  {
+    value: m.home_uptime({}, { locale }),
+    label: m.live_update_hero_stat_uptime_label({}, { locale }),
+  },
+  {
+    value: m.live_update_hero_stat_channels_value({}, { locale }),
+    label: m.live_update_hero_stat_channels_label({}, { locale }),
+  },
+  {
+    value: m.live_update_hero_stat_global_value({}, { locale }),
+    label: m.live_update_hero_stat_global_label({}, { locale }),
+  },
+  {
+    value: m.live_update_hero_stat_latency_value({}, { locale }),
+    label: m.live_update_hero_stat_latency_label({}, { locale }),
+  },
+  {
+    value: m.live_update_hero_stat_logs_value({}, { locale }),
+    label: m.live_update_hero_stat_logs_label({}, { locale }),
+  },
+]
+
+const heroMeta = [m.home_uptime({}, { locale }), m.home_locations_active({}, { locale }), m.home_multi_provider_resilience({}, { locale })]
+
+const decisionCriteria = [m.live_update_decision_1({}, { locale }), m.live_update_decision_2({}, { locale }), m.live_update_decision_3({}, { locale })]
+
+const comparisonRows = [
+  {
+    label: copy('live_update_v2_comp_runtime_l'),
+    hook: copy('live_update_v2_comp_runtime_capgo_hook'),
+    capgo: copy('live_update_v2_comp_runtime_capgo'),
+    diy: copy('live_update_v2_comp_runtime_diy'),
+    capa: copy('live_update_v2_comp_runtime_capa'),
+  },
+  {
+    label: copy('live_update_v2_comp_rollback_l'),
+    hook: copy('live_update_v2_comp_rollback_capgo_hook'),
+    capgo: copy('live_update_v2_comp_rollback_capgo'),
+    diy: copy('live_update_v2_comp_rollback_diy'),
+    capa: copy('live_update_v2_comp_rollback_capa'),
+  },
+  {
+    label: copy('live_update_v2_comp_guard_l'),
+    hook: copy('live_update_v2_comp_guard_capgo_hook'),
+    capgo: copy('live_update_v2_comp_guard_capgo'),
+    diy: copy('live_update_v2_comp_guard_diy'),
+    capa: copy('live_update_v2_comp_guard_capa'),
+  },
+  {
+    label: copy('live_update_v2_comp_compat_l'),
+    hook: copy('live_update_v2_comp_compat_capgo_hook'),
+    capgo: copy('live_update_v2_comp_compat_capgo'),
+    diy: copy('live_update_v2_comp_compat_diy'),
+    capa: copy('live_update_v2_comp_compat_capa'),
+  },
+  {
+    label: copy('live_update_v2_comp_validate_l'),
+    hook: copy('live_update_v2_comp_validate_capgo_hook'),
+    capgo: copy('live_update_v2_comp_validate_capgo'),
+    diy: copy('live_update_v2_comp_validate_diy'),
+    capa: copy('live_update_v2_comp_validate_capa'),
+  },
+  {
+    label: copy('live_update_v2_comp_channels_l'),
+    hook: copy('live_update_v2_comp_channels_capgo_hook'),
+    capgo: copy('live_update_v2_comp_channels_capgo'),
+    diy: copy('live_update_v2_comp_channels_diy'),
+    capa: copy('live_update_v2_comp_channels_capa'),
+  },
+  {
+    label: copy('live_update_v2_comp_logs_l'),
+    hook: copy('live_update_v2_comp_logs_capgo_hook'),
+    capgo: copy('live_update_v2_comp_logs_capgo'),
+    diy: copy('live_update_v2_comp_logs_diy'),
+    capa: copy('live_update_v2_comp_logs_capa'),
+  },
+  {
+    label: copy('live_update_v2_comp_try_l'),
+    hook: copy('live_update_v2_comp_try_capgo_hook'),
+    capgo: copy('live_update_v2_comp_try_capgo'),
+    diy: copy('live_update_v2_comp_try_diy'),
+    capa: copy('live_update_v2_comp_try_capa'),
+  },
+]
+
+const observeUrl = getRelativeLocaleUrl(locale, 'observe')
+const controlScreens = getProductScreens(['rollout', 'channels', 'bundle-dependencies', 'device-history'])
+const releaseScreens = getProductScreens(['live-release', 'update-health', 'compatibility']).map((screen) => ({
+  ...screen,
+  href: observeUrl,
+  linkLabel: 'Explore Capgo Observe',
+}))
+
+const guidanceChecks = [m.live_update_guidance_check1({}, { locale }), m.live_update_guidance_check2({}, { locale }), m.live_update_guidance_check3({}, { locale })]
+
+const platformCards = [
+  {
+    title: m.live_update_platform_capacitor_title({}, { locale }),
+    text: m.live_update_platform_capacitor_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+  {
+    title: m.live_update_platform_cordova_title({}, { locale }),
+    text: m.live_update_platform_cordova_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/cordova-updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+  {
+    title: m.live_update_platform_electron_title({}, { locale }),
+    text: m.live_update_platform_electron_text({}, { locale }),
+    href: getRelativeLocaleUrl(locale, 'docs/plugins/electron-updater/getting-started'),
+    readMore: m.live_update_platform_read_more({}, { locale }),
+  },
+]
+
+const featureTiles = [
+  {
+    title: m.live_update_feature_breaking_detection({}, { locale }),
+    sub: m.live_update_feature_breaking_detection_desc({}, { locale }),
+  },
+  {
+    title: m.live_update_feature_auto_rollback({}, { locale }),
+    sub: m.live_update_feature_auto_rollback_desc({}, { locale }),
+  },
+  {
+    title: m.live_update_feature_preflight({}, { locale }),
+    sub: m.live_update_feature_preflight_desc({}, { locale }),
+  },
+  {
+    title: m.live_update_feature_encryption({}, { locale }),
+    sub: m.live_update_feature_encryption_desc({}, { locale }),
+  },
+  {
+    title: m.live_update_feature_self_healing({}, { locale }),
+    sub: m.live_update_feature_self_healing_desc({}, { locale }),
+  },
+  {
+    title: m.live_update_dynamic_title({}, { locale }),
+    sub: m.live_update_dynamic_desc({}, { locale }),
+  },
+  {
+    title: 'Push-triggered auto updates',
+    sub: 'Pair Capgo Notifications with Live Updates so a silent push can ask devices to check, download, and queue the latest bundle for the selected channel.',
+  },
+]
+---
+
+<Layout content={content}>
+  <div class="lu bg-ad">
+    <!-- HERO -->
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          {m.live_update_hero_badge({}, { locale })}
+        </div>
+        <h1 class="hero-banner" aria-label={m.live_update_hero_headline({}, { locale })}>
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">{m.live_update_hero_headline({}, { locale })}</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+          <span class="hero-banner-tag">{m.live_update_hero_tagline({}, { locale })}</span>
+        </h1>
+        <p class="lead hero-lead">{m.live_update_hero_subtitle({}, { locale })}</p>
+        <div class="hero-ctas">
+          <SignupCta id="live-update-hero-signup-cta" />
+        </div>
+        <div class="hero-meta">
+          {heroMeta.map((item) => (
+            <span>
+              <span class="check">✓</span>
+              {item}
+            </span>
+          ))}
+        </div>
+        <div class="hero-strip">
+          {heroStats.map((item) => (
+            <div class="hero-strip-cell">
+              <p class="v">{item.value}</p>
+              <p class="k">{item.label}</p>
+            </div>
+          ))}
+        </div>
+        <ProductVideoLoop
+          name="rollout-pause"
+          class="lu-hero-video"
+          label="Capgo console: a progressive rollout serving 4.8.1 to 25% of production devices is paused and resumed from the channel page"
+        />
+      </div>
+    </section>
+
+    <!-- STORE UPDATE VS LIVE UPDATE REACH -->
+    <StoreReachSection background="bg-transparent" />
+
+    <!-- SUPPORTED PLATFORMS -->
+    <section class="section" id="platforms">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.live_update_platforms_kicker({}, { locale })}</div>
+          <h2 class="h2-section">{m.live_update_platforms_title({}, { locale })}</h2>
+          <p class="lead">{m.live_update_platforms_desc({}, { locale })}</p>
+        </div>
+
+        <div class="outcome-grid platform-grid">
+          {platformCards.map((card) => (
+            <article class="outcome-card platform-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+              <a class="platform-link" href={card.href}>
+                {card.readMore} →
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTCOMES -->
+    <section class="section" id="outcomes">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.live_update_outcome_kicker({}, { locale })}</div>
+          <h2 class="h2-section">{m.live_update_outcome_title({}, { locale })}</h2>
+          <p class="lead">{m.live_update_outcome_desc({}, { locale })}</p>
+        </div>
+
+        <div class="outcome-grid">
+          {outcomeCards.map((card) => (
+            <article class="outcome-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="decision-box">
+          <h3>{m.live_update_decision_title({}, { locale })}</h3>
+          <ul class="decision-list">
+            {decisionCriteria.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLLOUT CONTROL -->
+    <section class="section" id="rollout-control">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">Release control</div>
+          <h2 class="h2-section">Decide who gets each update, and take it back fast</h2>
+          <p class="lead">Channels, progressive rollouts, native dependency checks, and per-device history, all in the console. Real screens from the Capgo demo app.</p>
+        </div>
+        <div style="margin-top: 44px;">
+          <ProductScreenTour screens={controlScreens} label="Capgo release control views" />
+        </div>
+      </div>
+    </section>
+
+    <!-- AFTER RELEASE -->
+    <section class="section bg-grid grain" id="after-release">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">After you ship</div>
+          <h2 class="h2-section">Watch every update land on real devices</h2>
+          <p class="lead">
+            Every live update comes with a release view: installs and failures as they happen, failures grouped by cause, and a warning when a bundle needs a new native build.
+          </p>
+        </div>
+        <div style="margin-top: 44px;">
+          <ProductScreenTour screens={releaseScreens} label="Capgo release monitoring views" />
+        </div>
+      </div>
+    </section>
+
+    <ProductVideoSection
+      variant="builder"
+      accent="blue"
+      youtubeId={productVideos.liveUpdate.youtubeId}
+      title={productVideos.liveUpdate.title}
+      description={productVideos.liveUpdate.description}
+    />
+
+    <!-- PROOF -->
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={copy('live_update_v2_proof_eyebrow')}
+      title={copy('live_update_v2_proof_title')}
+      description={copy('live_update_v2_proof_lead')}
+      testimonials={productTestimonials.liveUpdate}
+      maxItems={2}
+    />
+
+    <!-- BENTO FEATURES -->
+    <section class="section bg-grid grain" id="features">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--blue">{copy('live_update_v2_bento_eyebrow')}</div>
+          <h2 class="h2-section">{copy('live_update_v2_bento_title')}</h2>
+          <p class="lead">{copy('live_update_v2_bento_lead')}</p>
+        </div>
+
+        <div class="bento">
+          <div class="tile tile-hero" aria-label="Capgo Live Updates">
+            <div>
+              <div class="ttl">
+                <span class="name">Capgo Live Updates</span>
+                <br />
+                <span class="tile-hero-sub-ttl">{m.live_update_feature_native_engine({}, { locale })}</span>
+              </div>
+              <div class="sub">{m.live_update_feature_native_engine_desc({}, { locale })}</div>
+            </div>
+            <pre class="ascii">$ npx @capgo/cli bundle upload
+✔ validated · ✔ published · ✔ rolling out</pre>
+          </div>
+
+          {featureTiles.map((tile) => (
+            <div class="tile">
+              <h3 class="ttl">
+                <span class="ttl-accent">{tile.title}</span>
+              </h3>
+              <p class="sub">{tile.sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDANCE -->
+    <section class="section" id="guidance">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.live_update_guidance_kicker({}, { locale })}</div>
+          <h2 class="h2-section">{m.live_update_guidance_title({}, { locale })}</h2>
+          <p class="lead">{m.live_update_guidance_desc({}, { locale })}</p>
+        </div>
+
+        <div class="guidance-grid">
+          <div>
+            <ul class="guidance-checks">
+              {guidanceChecks.map((check) => (
+                <li>{check}</li>
+              ))}
+            </ul>
+            <div class="hero-ctas" style="margin-top: 28px; align-items: flex-start;">
+              <SignupCta id="live-update-guidance-signup-cta" align="start" />
+            </div>
+          </div>
+
+          <div class="guidance-panel">
+            <ProductVideoLoop
+              name="native-diff"
+              class="guidance-video"
+              label="Capgo console: comparing bundle 4.8.2-beta.1 with 4.8.0 flags changed native packages and marks the update as not compatible over the air"
+            />
+            <div class="guidance-cli">
+              <p class="guidance-cli-line">
+                <span class="mono">$</span> {m.live_update_guidance_cli_command({}, { locale })}
+              </p>
+              <p class="guidance-cli-warn">{m.live_update_guidance_cli_warning({}, { locale })}</p>
+              <p class="guidance-cli-dim">{m.live_update_guidance_cli_package({}, { locale })}</p>
+              <p class="guidance-cli-action">{m.live_update_guidance_cli_action({}, { locale })}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+
+    <ReleaseExplainers background="bg-transparent" />
+    <UpdateTypesSection background="bg-transparent" />
+    <StorePolicySection background="bg-transparent" />
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-live-update-title"
+      eyebrow={m.agent_ready_live_update_eyebrow({}, { locale })}
+      title={m.agent_ready_live_update_title({}, { locale })}
+      subtitle={m.agent_ready_live_update_subtitle({}, { locale })}
+      prompts={[m.agent_ready_live_update_prompt_1({}, { locale }), m.agent_ready_live_update_prompt_2({}, { locale }), m.agent_ready_live_update_prompt_3({}, { locale })]}
+    />
+
+    <section class="section" id="compare">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--blue">{copy('live_update_v2_comp_eyebrow')}</div>
+          <h2 class="h2-section">{copy('live_update_v2_comp_title')}</h2>
+          <p class="lead">{copy('live_update_v2_comp_lead')}</p>
+        </div>
+
+        <div class="comp-wrap">
+          <table class="comp comp-prose">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="us">Capgo Live Updates</th>
+                <th>
+                  {copy('live_update_v2_comp_h_diy')}
+                  <span class="th-sub">{copy('live_update_v2_comp_h_diy_sub')}</span>
+                </th>
+                <th>{copy('live_update_v2_comp_h_capa')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr>
+                  <td class="label">{row.label}</td>
+                  <td class="us">
+                    <span class="hook">{row.hook}</span> {row.capgo}
+                  </td>
+                  <td>{row.diy}</td>
+                  <td>{row.capa}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="comp-callout" role="note">
+          <p>{copy('live_update_v2_comp_callout')}</p>
+        </aside>
+
+        <p class="comp-footnote">{copy('live_update_v2_comp_footnote')}</p>
+      </div>
+    </section>
+
+    <section class="section" id="eas-update">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{copy('live_update_eas_eyebrow')}</div>
+          <h2 class="h2-section">{copy('live_update_eas_title')}</h2>
+          <p class="lead">{copy('live_update_eas_lead')}</p>
+        </div>
+        <div style="display: flex; justify-content: center; margin-top: 28px;">
+          <a class="btn btn-md btn-ghost" href={expoUrl}>
+            {copy('live_update_eas_cta')}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="live-update-faq-title">
+      <div class="shell">
+        <div class="section-head section-head--narrow">
+          <div class="eyebrow eyebrow--blue">{m.live_update_faq_eyebrow({}, { locale })}</div>
+          <h2 class="h2-section" id="live-update-faq-title">
+            {m.live_update_faq_title({}, { locale })}
+          </h2>
+          <p class="lead">{m.live_update_faq_desc({}, { locale })}</p>
+        </div>
+        <div class="faq">
+          {faqItems.map((item) => (
+            <details>
+              <summary>
+                {item.question}
+                <span class="plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <div class="ans" aria-live="polite">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section final bg-grid grain" id="cta">
+      <div class="shell">
+        <h2>
+          <span class="name">Capgo Live Updates</span>
+          <br />
+          {m.live_update_cta_title({}, { locale })}
+        </h2>
+        <p class="tagline">{m.live_update_cta_subtitle({}, { locale })}</p>
+        <SignupCta id="live-update-final-signup-cta" humanSupport />
+        <div class="hero-meta hero-meta--cta">
+          <span>
+            <span class="check">✓</span> {copy('live_update_v2_cta_meta1')}
+          </span>
+          <span>
+            <span class="check">✓</span> {copy('live_update_v2_cta_meta2')}
+          </span>
+          <span>
+            <span class="check">✓</span> {copy('live_update_v2_cta_meta3')}
+          </span>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  /* Classes are applied inside ProductVideoLoop, outside this component's scope. */
+  :global(.lu-hero-video) {
+    max-width: 1080px;
+    margin: 56px auto 0;
+  }
+
+  :global(.guidance-video) {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+</style>

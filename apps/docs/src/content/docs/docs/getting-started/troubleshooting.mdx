@@ -1,0 +1,181 @@
+---
+title: Troubleshooting
+description: "Resolve common issues encountered while using Capgo with detailed troubleshooting steps and advanced options for upload and debugging."
+sidebar:
+  order: 7
+  next: false
+  prev: false
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+Here are some common issues you might encounter while using Capgo and how to resolve them.
+
+<Card title="🚀 Need Expert Help?" icon="rocket">
+  <p>
+    Stuck with a complex issue? Our expert team is here to help! Get personalized support, code reviews, and custom solutions tailored to your specific needs.
+  </p>
+  <div style="margin-top: 1rem;">
+    <a href="/consulting/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s;">
+      Get Professional Support
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin:0">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </a>
+  </div>
+</Card>
+
+### Upload failures
+
+If your bundle upload fails, double check:
+- Your app ID in `capacitor.config.ts` matches your app in the Capgo dashboard
+- You're running the upload command from the root of your Capacitor project 
+- Your web assets are built and up to date
+
+#### Advanced upload options
+
+The Capgo CLI provides some additional flags to help with common upload issues:
+
+- `--tus`: Uses the [tus resumable upload protocol](https://tus.io/) for more reliable uploads of large bundles or on poor network connections. If your bundle is over 10MB or you're on a spotty connection, consider using `--tus`:
+  ```shell
+  npx @capgo/cli@latest bundle upload --tus
+  ```
+
+- `--package-json` and `--node-modules`: Tells Capgo where to find your root `package.json` and `node_modules` if your app uses a non-standard structure like a monorepo or npm workspace. Pass the path to the root `package.json` and the `--node_modules` path:
+  ```shell
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
+  ```
+  Capgo needs this information to correctly bundle your app's dependencies.
+
+You can combine these flags with other options like `--channel` as needed. See the [Capgo CLI docs](/docs/cli/) for full details on the available upload options.
+
+If you're still having trouble with uploads, reach out to [Capgo support](https://support.capgo.app) for further assistance.
+
+### Debugging Updates
+
+If you're encountering issues with live updates, the Capgo debug command is a helpful tool for troubleshooting. To use it:
+
+1. Run the following command in your project directory:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+2. Launch your app on a device or emulator and perform the action that should trigger an update (e.g. reopening the app after uploading a new bundle).
+
+3. Watch the output of the debug command. It will log information about the update process, including:
+   - When the app checks for an update
+   - If an update is found and what version it is
+   - Download and installation progress for the update
+   - Any errors that occur during the update process
+
+4. Use the debug logs to identify where the issue is occurring. For example:
+   - If no update is found, double check that your bundle was uploaded successfully and the app is configured to use the correct channel.
+   - If the update downloads but doesn't install, make sure you've called `CapacitorUpdater.notifyAppReady()` and that the app was fully closed and reopened.
+   - If you see an error message, look up that specific error in the Capgo docs or reach out to support for help.
+
+The debug command is especially useful for identifying issues with the update download and installation process. If the logs show the expected update version was found but not ultimately applied, focus your troubleshooting on the steps after the download.
+
+### Debugging with Native Logs
+
+In addition to the Capgo debug command, the native logs on Android, iOS, and Electron can provide valuable troubleshooting information, especially for issues on the native side of the update process.
+
+#### Android Logs
+
+To access the Android logs:
+
+1. Connect your device or start your emulator
+2. Open Android Studio and select "View > Tool Windows > Logcat" 
+3. In the Logcat window, filter the logs to just your app's process by selecting it from the dropdown at the top
+4. Look for any lines that include `Capgo` to find the SDK logs
+
+Alternatively, you can use the `adb logcat` command and grep for `Capgo` to filter the logs.
+
+The Capgo SDK will log key events during the update process, such as:
+- When an update check is initiated
+- If an update is found and what version it is
+- When the update download starts and completes
+- When the update installation is triggered
+- Any errors that occur during the native update steps
+
+Common Android-specific issues you might see in the logs include:
+- Network connectivity problems preventing the update download
+- File permissions errors when saving or reading the update bundle
+- Out of storage space for the update bundle
+- Failure to restart the app after the update is installed
+
+#### iOS Logs
+
+To access the iOS logs:
+
+1. Connect your device or start your simulator
+2. Open Xcode and go to "Window > Devices and Simulators"
+3. Select your device and click on "Open Console"
+4. In the console output, look for any lines that include `Capgo` to find the SDK logs
+
+You can also use the `log stream` command in the terminal and grep for `Capgo` to filter the logs.
+
+Similar to Android, the Capgo SDK will log key iOS-side events:
+- Update check initiation and result
+- Download start, progress, and completion
+- Installation trigger and result
+- Any errors during the native update process
+
+iOS-specific issues you might identify in the logs include:
+- SSL certificate problems when downloading the update
+- App transport security blocking the update download 
+- Insufficient storage space for the update bundle
+- Failure to properly extract or apply the update bundle
+
+#### Electron Logs
+
+For Electron apps, check both the main process and renderer process output:
+
+1. Run the Electron app from your terminal using your normal launch command (for example `bun run electron:dev` or `bun run electron:serve`) and watch the terminal output for startup, update checks, and network errors.
+2. Open DevTools in the renderer window (View → Toggle Developer Tools) and inspect console logs and failed network requests while reproducing the update flow.
+3. For packaged apps, check OS log tools for crashes or startup failures:
+   - **macOS**: open `Console.app` and filter on your app name
+   - **Windows**: open **Event Viewer** → **Windows Logs** → **Application**
+   - **Linux**: use your desktop log viewer or `journalctl` for your app process
+
+When debugging updates, compare messages from both main-process and renderer-process logs to separate Electron bootstrap issues from Capgo update lifecycle issues.
+
+Across platforms, the native logs provide a lower-level view into the update process, with more details on the native implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
+
+When troubleshooting a tricky live update problem, it's a good idea to capture both the Capgo debug logs and the native logs for a comprehensive picture of what's happening. The two logs together will give you the best chance of identifying and resolving the issue.
+
+### Updates not applying
+
+If you've uploaded a bundle but aren't seeing the changes on your device:
+- Make sure you've called `CapacitorUpdater.notifyAppReady()` in your app code as shown in the [quickstart](/docs/getting-started/quickstart/)
+- Check that your device is connected to the internet and the Capgo debug logs show the update was downloaded
+- Try fully closing and reopening the app, as updates are only applied on a fresh launch
+- Look for any errors in the native logs that might indicate a problem applying the update
+
+Refer to the [deploying live updates](/docs/getting-started/deploy/) guide for more details on the update process. If you're still stuck, use the `npx @capgo/cli@latest app debug` command and native logs to get more visibility into what's happening.
+
+### Common update failure codes
+
+If your logs show backend errors such as `disable_auto_update_to_major`, `semver_error`, or `cannot_update_via_private_channel`, use the dedicated guide:
+
+- [Common Update Problems](/docs/plugins/updater/commonproblems/)
+
+It explains what each common code means, why it happens, and how to fix it.
+
+## SDK Installation
+
+If you're having trouble installing the Capgo SDK, make sure:
+- Your app is using a supported version of Capacitor (4.0 or newer)
+- You've followed the [quickstart](/docs/getting-started/quickstart/) steps in order, including syncing your app after installing the SDK
+
+## CI/CD Integration 
+
+For issues with triggering Capgo uploads from your CI/CD pipeline:
+- Double check your Capgo authentication token is set up correctly 
+- Make sure you're running the upload command after your web assets are built
+- Check that the upload command is using the correct channel name for your target environment
+
+See the [CI/CD integration](/docs/getting-started/cicd-integration/) docs for more troubleshooting tips. You can also use the `npx @capgo/cli@latest app debug` command to confirm if your CI/CD-triggered updates are being received by the app.
+
+## Keep going from Troubleshooting
+
+If you are using **Troubleshooting** to plan storage and file handling, connect it with [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.

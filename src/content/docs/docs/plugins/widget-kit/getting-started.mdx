@@ -1,0 +1,329 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-widget-kit, create SVG frame/timer widgets, or sync full-native widgets with the app."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-widget-kit` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-widget-kit
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+```
+
+## Quick start
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const result = await CapgoWidgetKit.areActivitiesSupported();
+console.log(result);
+```
+
+## Example: startTemplateActivity
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const result = await CapgoWidgetKit.startTemplateActivity({
+  definition: {
+    id: 'id-123',
+    layouts: {},
+  },
+  state: {},
+});
+console.log(result);
+```
+
+## Example: startTemplateWidget
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const result = await CapgoWidgetKit.startTemplateWidget({
+  definition: {
+    id: 'id-123',
+    layouts: {},
+  },
+  state: {},
+});
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## iOS Setup
+
+For Live Activities and WidgetKit extensions, configure the native app first:
+
+- Use iOS 17+ for interactive Live Activity buttons when possible.
+- Add `NSSupportsLiveActivities` to the app `Info.plist` when using ActivityKit.
+- Add the same App Group to the app target and the widget extension target.
+- Set `CapgoWidgetKitAppGroup` in both `Info.plist` files to the shared App Group identifier.
+
+```xml
+<key>CapgoWidgetKitAppGroup</key>
+<string>group.app.capgo.widgetkit.exampleapp.widgetkit</string>
+```
+
+## Check Support
+
+```typescript
+const { supported, reason } = await CapgoWidgetKit.areActivitiesSupported();
+
+if (!supported) {
+  console.log('WidgetKit bridge unavailable:', reason);
+}
+```
+
+## Option 1: SVG Template Activity
+
+Use this mode when the widget can render resolved SVG. The plugin stores state, resolves placeholders, applies tap actions, switches SVG frames, and keeps timer state consistent.
+
+```typescript
+const { activity } = await CapgoWidgetKit.startTemplateActivity({
+  activityId: 'workout-session-1',
+  openUrl: 'myapp://workout/session-1',
+  state: {
+    title: 'Chest Day',
+    frame: 'summary',
+    restDurationMs: 90000,
+  },
+  definition: {
+    id: 'workout-card',
+    timers: [
+      {
+        id: 'rest',
+        durationPath: 'state.restDurationMs',
+      },
+    ],
+    actions: [
+      {
+        id: 'next-frame',
+        eventName: 'widget.frame.changed',
+        frameMutations: [
+          {
+            op: 'next',
+            path: 'frame',
+            surface: 'lockScreen',
+          },
+        ],
+      },
+      {
+        id: 'toggle-rest',
+        eventName: 'widget.timer.toggled',
+        timerMutations: [
+          {
+            op: 'toggle',
+            timerId: 'rest',
+          },
+        ],
+      },
+    ],
+    layouts: {
+      lockScreen: {
+        width: 100,
+        height: 40,
+        frameIdPath: 'state.frame',
+        frames: [
+          {
+            id: 'summary',
+            hotspots: [{ id: 'switch', actionId: 'next-frame', x: 0, y: 0, width: 100, height: 40 }],
+            svg: `<svg viewBox="0 0 100 40"><text x="6" y="22">{{state.title}}</text></svg>`,
+          },
+          {
+            id: 'timer',
+            hotspots: [{ id: 'pause-play', actionId: 'toggle-rest', x: 0, y: 0, width: 100, height: 40 }],
+            svg: `<svg viewBox="0 0 100 40"><text x="6" y="22">{{timers.rest.remainingText}}</text></svg>`,
+          },
+        ],
+      },
+    },
+  },
+});
+```
+
+### Run Actions From The App
+
+Native widgets can trigger the same actions through their hotspot/action wiring. The app can also run them directly:
+
+```typescript
+await CapgoWidgetKit.performTemplateAction({
+  activityId: activity.activityId,
+  actionId: 'toggle-rest',
+  sourceId: 'app-pause-play-button',
+});
+```
+
+### Process Widget Events
+
+Actions emit events so the app can process widget interactions after launch or resume:
+
+```typescript
+const { events } = await CapgoWidgetKit.listTemplateEvents({
+  activityId: activity.activityId,
+  unacknowledgedOnly: true,
+});
+
+for (const event of events) {
+  console.log('Widget event:', event.eventName, event.state, event.timers);
+}
+
+await CapgoWidgetKit.acknowledgeTemplateEvents({
+  activityId: activity.activityId,
+});
+```
+
+### Update Or End The Activity
+
+```typescript
+await CapgoWidgetKit.updateTemplateActivity({
+  activityId: activity.activityId,
+  state: {
+    title: 'Back Day',
+    frame: 'summary',
+    restDurationMs: 120000,
+  },
+});
+
+await CapgoWidgetKit.endTemplateActivity({
+  activityId: activity.activityId,
+  state: { title: 'Workout complete', frame: 'summary' },
+});
+```
+
+## Frame Mutations
+
+Frame mutations write the active frame id into state. A layout can then read it with `frameIdPath`.
+
+| Operation | Behavior |
+| --- | --- |
+| `set` | Set a specific frame id. Plain strings are treated as literal frame ids; `{{...}}` templates are resolved first. |
+| `next` | Move to the next frame from `frameIds` or the frames declared on `surface`. |
+| `previous` | Move to the previous frame. |
+| `toggle` | Toggle between the first two available frames, or between the current frame and `frameId`. |
+
+Invalid frame ids are ignored when the mutation has a known selectable frame list, so state stays aligned with the rendered surface.
+
+## Timer Mutations
+
+Timer mutations target a named timer from `definition.timers`.
+
+| Operation | Behavior |
+| --- | --- |
+| `start` / `restart` | Start from zero using the current duration. |
+| `pause` | Store elapsed time and clear `startedAt`. |
+| `resume` | Resume only paused timers. Stopped timers stay stopped until an explicit start or restart. |
+| `toggle` | Pause a running timer or resume a paused timer. |
+| `reset` | Clear elapsed time and return to idle. |
+| `stop` | Clear runtime progress and mark the timer stopped. |
+| `setDuration` | Recompute status after a duration change. |
+
+Timer bindings are available to SVG as `{{timers.<id>.remainingText}}`, `{{timers.<id>.elapsedMs}}`, `{{timers.<id>.status}}`, and related fields.
+
+## Option 2: Full-Native Widget Session
+
+Use this mode when the widget UI is built in native code. The plugin gives the app and widget a shared session record and a message queue.
+
+```typescript
+const { session } = await CapgoWidgetKit.startWidgetSession({
+  widgetId: 'native-session-1',
+  kind: 'workout-controls',
+  state: { isRunning: true, selectedSetId: 'set-1' },
+  metadata: { accent: '#00d69c' },
+});
+
+await CapgoWidgetKit.updateWidgetSession({
+  widgetId: session.widgetId,
+  merge: true,
+  state: { isRunning: false },
+});
+
+const { sessions } = await CapgoWidgetKit.listWidgetSessions();
+console.log('Known widget sessions:', sessions);
+```
+
+## Async Widget Messages
+
+Messages cover work that needs a later response, such as a widget asking the app to sync data.
+
+```typescript
+const { message } = await CapgoWidgetKit.sendWidgetMessage({
+  widgetId: session.widgetId,
+  direction: 'widgetToApp',
+  name: 'syncWorkoutSet',
+  payload: { setId: 'set-1' },
+  expectsResponse: true,
+});
+
+await CapgoWidgetKit.acknowledgeWidgetMessages({
+  messageIds: [message.messageId],
+});
+
+await CapgoWidgetKit.completeWidgetMessage({
+  messageId: message.messageId,
+  response: { synced: true },
+});
+```
+
+To fail the job, pass `error` instead of `response`:
+
+```typescript
+await CapgoWidgetKit.completeWidgetMessage({
+  messageId: message.messageId,
+  error: 'Network unavailable',
+});
+```
+
+`completeWidgetMessage` is idempotent. If the message is already completed or failed, repeated calls return the existing message snapshot.
+
+## Stop A Native Session
+
+```typescript
+await CapgoWidgetKit.stopWidgetSession({
+  widgetId: session.widgetId,
+  state: { isRunning: false },
+});
+```
+
+## API Groups
+
+| Group | APIs |
+| --- | --- |
+| Capability | `areActivitiesSupported`, `getPluginVersion` |
+| SVG activity lifecycle | `startTemplateActivity`, `updateTemplateActivity`, `endTemplateActivity`, `getTemplateActivity`, `listTemplateActivities` |
+| SVG actions and events | `performTemplateAction`, `listTemplateEvents`, `acknowledgeTemplateEvents` |
+| Native widget sessions | `startWidgetSession`, `updateWidgetSession`, `stopWidgetSession`, `getWidgetSession`, `listWidgetSessions` |
+| Native widget messages | `sendWidgetMessage`, `listWidgetMessages`, `acknowledgeWidgetMessages`, `completeWidgetMessage` |
+
+## Source Of Truth
+
+The full type reference lives in the plugin repository at [`src/definitions.ts`](https://github.com/Cap-go/capacitor-widget-kit/blob/main/src/definitions.ts).
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Using @capgo/capacitor-widget-kit](/plugins/capacitor-widget-kit/) for the native capability in Using @capgo/capacitor-widget-kit, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

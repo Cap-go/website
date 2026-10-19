@@ -1,0 +1,126 @@
+---
+title: Update Types
+description: "A comprehensive reference of all OTA update types Capgo provides: apply timing, delay conditions, version blocking, and delivery methods."
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo supports several types of over-the-air (OTA) updates. This page lists and explains all of them so you can choose the right combination for your app.
+
+## Apply Timing
+
+Controls **when** an update is applied after it is downloaded. The plugin checks for updates when the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that interval (default 10 minutes).
+
+| Type | Description | Use Case |
+|------|-------------|----------|
+| **autoUpdate: `atBackground`** | Check and download on each foreground check, apply when the app moves to background | Most apps; minimal disruption |
+| **autoUpdate: `atInstall`** | Apply immediately only after a fresh install or native app store update; otherwise use `atBackground` | New users get latest; existing users use background apply |
+| **autoUpdate: `onLaunch`** | Apply immediately only on cold start (killed → foreground); then fall back to `atBackground` | Balance between freshness and session stability |
+| **autoUpdate: `always`** | Check on every foreground transition and apply immediately whenever an update is available | Critical fixes, apps with simple state |
+| **autoUpdate: `onlyDownload`** | Check and download automatically, emit `updateAvailable`, and never apply automatically | Apps that show their own update prompt or control exactly when to call `set()` |
+
+Configure in `capacitor.config.ts`:
+
+```typescript
+plugins: {
+  CapacitorUpdater: {
+    autoUpdate: 'atBackground', // default; true is still accepted
+    // or: 'off' | 'atInstall' | 'onLaunch' | 'always' | 'onlyDownload'
+  }
+}
+```
+
+<Aside type="tip">
+For full details and splashscreen handling, see [Update Behavior](/docs/live-updates/update-behavior/).
+</Aside>
+
+## Delay Conditions
+
+Conditions that must be met **before** an update is installed. Use `setMultiDelay` to combine them (all conditions must be satisfied).
+
+| Condition | Description | Example |
+|-----------|-------------|---------|
+| **date** | Wait until after a specific date/time | Coordinate with server-side release |
+| **background** | Wait a minimum duration (ms) after app is backgrounded | Avoid applying during quick app switches |
+| **nativeVersion** | Require a minimum native binary version | Block updates on incompatible native code |
+| **kill** | Wait until the next app kill event | Apply only on full restart |
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    { kind: 'date', value: '2023-06-01T00:00:00.000Z' },
+    { kind: 'background', value: '60000' },
+  ],
+});
+```
+
+<Aside type="danger">
+The `kill` condition triggers after the first kill event, not the next background like the others. This will be fixed in a future release.
+</Aside>
+
+## Version Blocking (Channel Policy)
+
+Controls which [**semver updates**](/semver_tester/) a channel will auto-deliver. Set via `--disable-auto-update` on channels.
+
+| Strategy | Blocks | Allows | Use Case |
+|----------|--------|--------|----------|
+| **none** | Nothing | Any target bundle version | Default; full auto-update |
+| **major** | Higher major than `version_build`, for example `1.2.3 -> 2.0.0` | Same major, for example `1.2.3 -> 1.9.0` or `1.2.3 -> 1.2.4` | Prevent breaking changes from reaching old native code |
+| **minor** | Different major or minor than `version_build`, for example `1.2.3 -> 1.3.0` | Same major and minor, for example `1.2.3 -> 1.2.4` | Keep updates inside one native minor line |
+| **patch** | Any major, minor, or patch number change, for example `1.0.0 -> 1.0.1` | Only suffix changes while `MAJOR.MINOR.PATCH` stays identical, for example `1.0.0-beta.1 -> 1.0.0-beta.2` or `1.0.0+build.1 -> 1.0.0+build.2` | Strictest mode: no core version movement |
+| **metadata** | Missing `min_update_version`, or `version_build` below it | Target bundle whose `min_update_version` is less than or equal to `version_build` | Custom compatibility rules per bundle |
+
+These checks compare the target bundle against the native baseline sent as `version_build`, not the currently installed downloaded bundle sent as `version_name`.
+
+```bash
+npx @capgo/cli channel set production --disable-auto-update major
+```
+
+<Aside type="caution">
+`patch` and `metadata` require careful setup. See [CLI commands](/docs/cli/commands/#disable-updates-strategy) and [Version Targeting](/docs/live-updates/version-targeting/) for details.
+</Aside>
+
+## Delivery Types
+
+How the **bundle is transferred** to the device.
+
+| Type | Description | When to Use |
+|------|-------------|-------------|
+| **Full bundle** | Entire JS bundle is downloaded | First install, large changes, or when delta is unavailable |
+| **Delta** | Only changed files are downloaded | Most updates; faster and bandwidth-friendly |
+
+```bash
+# Full bundle (default)
+npx @capgo/cli bundle upload --channel production
+
+# Delta updates
+npx @capgo/cli bundle upload --channel production --delta
+```
+
+<Aside type="tip">
+When using instant apply modes (`atInstall`, `onLaunch`, or `always`), enable [Delta updates](/docs/live-updates/differentials/) to minimize download time and improve UX.
+</Aside>
+
+## Quick Reference
+
+| Category | Types |
+|----------|-------|
+| **Apply timing** | `off`, `atBackground`, `atInstall`, `onLaunch`, `always`, `onlyDownload` |
+| **Delay conditions** | `date`, `background`, `nativeVersion`, `kill` |
+| **Version blocking** | `none`, `major`, `minor`, `patch`, `metadata` |
+| **Delivery** | Full bundle, Delta |
+
+## Related
+
+- [Update Behavior](/docs/live-updates/update-behavior/) — Configure apply timing and delays
+- [Version Targeting](/docs/live-updates/version-targeting/) — Channel-based version routing
+- [Delta Updates](/docs/live-updates/differentials/) — Download only changed files
+- [Channels](/docs/live-updates/channels/) — Channel configuration and precedence
+
+## Keep going from Update Types
+
+If you are using **Update Types** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Getting Started](/docs/plugins/updater/getting-started/) for the implementation detail in Getting Started.

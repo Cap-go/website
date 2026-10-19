@@ -1,0 +1,32 @@
+---
+import { Icon } from '@astrojs/starlight/components'
+import type { StarlightIcon } from '@astrojs/starlight/types'
+
+interface Props {
+  icon?: StarlightIcon
+  customIcon?: string
+  title: string
+  size?: string
+  color?: string
+  href?: string
+}
+
+const { icon, customIcon, title, size = '1.333em', color, href } = Astro.props
+---
+
+<article class="micro-card sl-flex micro-card-clickable" style={color ? `--micro-card-icon-color: ${color};` : ''}>
+  <a href={href || '#'} class="micro-card-link">
+    <p class="title sl-flex">
+      {icon && <Icon name={icon as any} class="icon" size={size} />}
+      {
+        customIcon && (
+          <span class="custom-icon-wrapper" style={`font-size: ${size};`}>
+            <img src={customIcon} class="icon custom-icon" alt="" aria-hidden="true" />
+          </span>
+        )
+      }
+      <span set:html={title} />
+    </p>
+    <div class="body"><slot /></div>
+  </a>
+</article>

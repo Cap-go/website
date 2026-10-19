@@ -1,0 +1,83 @@
+---
+title: "@capgo/capacitor-transitions"
+description: Framework-agnostic Ionic-style page transitions and iOS edge swipe-back gestures for Capacitor apps without Ionic UI.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Add native-feeling route transitions and optional iOS edge swipe-back to Capacitor apps without adopting Ionic UI.
+  actions:
+    - text: Get started
+      link: /docs/plugins/transitions/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-transitions/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Ionic-style motion" icon="rocket">
+    Use iOS and Android route animations modeled after mobile navigation patterns without shipping Ionic components.
+  </Card>
+  <Card title="Swipe back" icon="setting">
+    Enable an iOS edge gesture that follows the finger and can auto-enable only inside native Capacitor iOS.
+  </Card>
+  <Card title="Framework agnostic" icon="puzzle">
+    Use web components directly or helpers for React, Vue, Angular, Svelte, and Solid.
+  </Card>
+  <Card title="No UI lock-in" icon="pencil">
+    Bring your own toolbar, content, footer, and router while the library coordinates transition layers.
+  </Card>
+</CardGrid>
+
+## When To Use It
+
+`@capgo/capacitor-transitions` is for apps that want Ionic-quality page motion without adopting Ionic's component system. It keeps navigation in your existing web router and animates page elements inside the Capacitor WebView.
+
+Use it when you need:
+
+- push, pop, and root route transitions that feel close to platform conventions
+- coordinated header, content, and footer motion
+- page caching for fast back navigation
+- an optional iOS edge swipe-back gesture that follows the user's finger
+- framework-specific setup helpers without a framework-specific router
+
+<Aside type="note">
+  This package does not render native UIKit or Android navigation chrome. For native navbars, tabbars, and native transition shells, use <a href="/docs/plugins/native-navigation/">@capgo/native-navigation</a>.
+</Aside>
+
+## Demo
+
+<figure>
+  <img src="/plugins/demo/capacitor-transitions/react-transition-demo.webp" alt="Animated React page transition demo showing forward and back navigation in a Capacitor-style shell" width="300" />
+  <figcaption>React transition flow</figcaption>
+</figure>
+
+## Core API
+
+- `<cap-router-outlet>` owns the animated route stack.
+- `<cap-page>` wraps each page.
+- `<cap-header>`, `<cap-content>`, and `<cap-footer>` identify the regions that should move together.
+- `initTransitions(options?)` initializes framework bindings.
+- `setDirection('forward' | 'back' | 'root' | 'none')` tells the next router update which animation to run.
+- `setupRouterOutlet(element, options?)` connects an outlet to lifecycle and gesture behavior.
+- `setupPage(element, callbacks?)` registers page lifecycle callbacks.
+
+## Platform Model
+
+`platform="auto"` chooses the iOS or Android animation profile from the runtime environment. You can force `platform="ios"` or `platform="android"` when testing.
+
+`swipe-gesture="auto"` uses Capacitor runtime helpers and enables the edge gesture only in native iOS Capacitor apps. Use `true` to force it on or `false` to disable it.
+
+The gesture is implemented in the web layer. It is designed to feel like Ionic's iOS swipe-back transition by driving animation progress from the pointer position, then finishing or cancelling based on distance and velocity.
+
+## Keep going from @capgo/capacitor-transitions
+
+If you are using **@capgo/capacitor-transitions** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-transitions](/plugins/capacitor-transitions/) for the native capability in Using @capgo/capacitor-transitions, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

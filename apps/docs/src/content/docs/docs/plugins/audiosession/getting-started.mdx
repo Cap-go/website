@@ -1,0 +1,137 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-audio-session and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-audio-session` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-audio-session
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { AudioSession } from '@capgo/capacitor-audio-session';
+```
+
+## API Overview
+
+### `currentOutputs`
+
+Get the current active audio output routes.
+
+On web and non-iOS platforms, this resolves to an empty array.
+
+```typescript
+import { AudioSession } from '@capgo/capacitor-audio-session';
+
+const result = await AudioSession.currentOutputs();
+console.log(result);
+```
+
+### `overrideOutput`
+
+Override the current audio output route.
+
+Use `speaker` to force playback through the built-in speaker, or
+`default` to restore the system-selected route.
+
+```typescript
+import { AudioSession } from '@capgo/capacitor-audio-session';
+
+const result = await AudioSession.overrideOutput('default');
+console.log(result);
+```
+
+## Type Reference
+
+### `AudioSessionPorts`
+Available audio output routes on iOS.
+```typescript
+export enum AudioSessionPorts {
+  AIR_PLAY = 'airplay',
+  BLUETOOTH_LE = 'bluetooth-le',
+  BLUETOOTH_HFP = 'bluetooth-hfp',
+  BLUETOOTH_A2DP = 'bluetooth-a2dp',
+  BUILT_IN_SPEAKER = 'builtin-speaker',
+  BUILT_IN_RECEIVER = 'builtin-receiver',
+  HDMI = 'hdmi',
+  HEADPHONES = 'headphones',
+  LINE_OUT = 'line-out',
+}
+```
+
+### `OutputOverrideType`
+Output override type. - `default`: Use the system-selected route. - `speaker`: Force playback through the built-in speaker.
+```typescript
+export type OutputOverrideType = 'default' | 'speaker';
+```
+
+### `OverrideResult`
+Result of an output override request.
+```typescript
+export type OverrideResult = {
+  success: boolean;
+  message: string;
+};
+```
+
+### `RouteChangeListener`
+Listener called when the audio route changes.
+```typescript
+export type RouteChangeListener = (reason: RouteChangeReasons) => void;
+```
+
+### `InterruptionListener`
+Listener called when the audio session is interrupted or ends.
+```typescript
+export type InterruptionListener = (type: InterruptionTypes) => void;
+```
+
+### `RouteChangeReasons`
+```typescript
+export enum RouteChangeReasons {
+  NEW_DEVICE_AVAILABLE = 'new-device-available',
+  OLD_DEVICE_UNAVAILABLE = 'old-device-unavailable',
+  CATEGORY_CHANGE = 'category-change',
+  OVERRIDE = 'override',
+  WAKE_FROM_SLEEP = 'wake-from-sleep',
+  NO_SUITABLE_ROUTE_FOR_CATEGORY = 'no-suitable-route-for-category',
+  ROUTE_CONFIGURATION_CHANGE = 'route-config-change',
+  UNKNOWN = 'unknown',
+}
+```
+
+### `InterruptionTypes`
+```typescript
+export enum InterruptionTypes {
+  BEGAN = 'began',
+  ENDED = 'ended',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-audio-session](/plugins/capacitor-audiosession/) for the native capability in Using @capgo/capacitor-audio-session, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

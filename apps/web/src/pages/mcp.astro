@@ -1,0 +1,137 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import CommandCode from '@/components/CommandCode.astro'
+import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import m from '@/copy/messages'
+import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
+import { HOSTED_MCP_URL } from '../../../shared/agentDiscovery'
+
+const locale = Astro.locals.locale
+const title = m.mcp_page_title({}, { locale })
+const description = m.mcp_page_meta_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo MCP',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'Model Context Protocol servers for Capgo',
+  featureList: [
+    'Hosted MCP server at api.capgo.app/mcp with OAuth or API key auth',
+    'Docs search tool for Capgo documentation',
+    'CLI MCP for bundle uploads and native builds',
+    'Works with Claude, ChatGPT, Cursor, and other MCP clients',
+  ],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [softwareLdJson],
+})
+
+const content = { title, description, ldJSON, image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png` }
+
+const hostedMcpDocsUrl = getRelativeLocaleUrl(locale, 'docs/ai/mcp')
+
+const relatedLinks = [
+  { label: m.mcp_page_links_hosted({}, { locale }), href: hostedMcpDocsUrl },
+  { label: m.mcp_page_links_manifest({}, { locale }), href: '/.well-known/mcp.json' },
+  { label: m.mcp_page_links_docs({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/cli/reference/mcp') },
+  { label: m.mcp_page_links_skills({}, { locale }), href: getRelativeLocaleUrl(locale, 'skills') },
+  { label: m.mcp_page_links_agents({}, { locale }), href: getRelativeLocaleUrl(locale, 'agents') },
+  { label: m.best_ai_tools_capacitor_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/ai-tools-for-capacitor') },
+  { label: m.mcp_page_links_openapi({}, { locale }), href: '/openapi.json' },
+  { label: m.contact({}, { locale }), href: getRelativeLocaleUrl(locale, 'contact') },
+]
+
+const cliMcpCommand = 'npx @capgo/cli@latest mcp'
+const claudeCodeCommand = `claude mcp add --transport http capgo ${HOSTED_MCP_URL}`
+const jsonConfig = JSON.stringify({ mcpServers: { capgo: { type: 'http', url: HOSTED_MCP_URL } } }, null, 2)
+const apiKeyConfig = JSON.stringify(
+  { mcpServers: { capgo: { type: 'http', url: HOSTED_MCP_URL, headers: { Authorization: 'Bearer <Capgo API key>' } } } },
+  null,
+  2,
+)
+
+const toolGroups = [
+  m.mcp_page_tools_account({}, { locale }),
+  m.mcp_page_tools_apps({}, { locale }),
+  m.mcp_page_tools_bundles({}, { locale }),
+  m.mcp_page_tools_channels({}, { locale }),
+  m.mcp_page_tools_devices({}, { locale }),
+  m.mcp_page_tools_stats({}, { locale }),
+  m.mcp_page_tools_builds({}, { locale }),
+  m.mcp_page_tools_webhooks({}, { locale }),
+  m.mcp_page_tools_notifications({}, { locale }),
+  m.mcp_page_tools_docs({}, { locale }),
+]
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{m.mcp_page_hero_title({}, { locale })}</h1>
+        <p class="mx-auto max-w-2xl text-xl text-gray-300">{m.mcp_page_hero_subtitle({}, { locale })}</p>
+      </div>
+
+      <div class="mb-8 space-y-8">
+        <div class="rounded-lg border border-emerald-400/30 bg-gray-800/50 p-6 sm:p-8">
+          <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_hosted_title({}, { locale })}</h2>
+          <div class="space-y-4 text-gray-300">
+            <p>{m.mcp_page_hosted_p1({}, { locale })}</p>
+            <p>{m.mcp_page_hosted_p2({}, { locale })}</p>
+            <p>
+              Endpoint: <code class="rounded bg-gray-950 px-2 py-1 text-emerald-300">{HOSTED_MCP_URL}</code>
+            </p>
+            <p>
+              <a
+                href={hostedMcpDocsUrl}
+                class="inline-flex items-center rounded-md bg-emerald-400 px-4 py-2 text-sm font-semibold text-gray-950 transition-colors hover:bg-emerald-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+              >
+                {m.mcp_page_hosted_cta({}, { locale })}
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+          <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_connect_title({}, { locale })}</h2>
+          <div class="space-y-4 text-gray-300">
+            <h3 class="text-lg font-semibold text-gray-100">{m.mcp_page_connect_claude_code({}, { locale })}</h3>
+            <CommandCode command={claudeCodeCommand} />
+            <h3 class="text-lg font-semibold text-gray-100">{m.mcp_page_connect_json({}, { locale })}</h3>
+            <pre class="overflow-x-auto rounded bg-gray-950 p-4 font-mono text-[13px] leading-6 text-emerald-200"><code>{jsonConfig}</code></pre>
+            <p>{m.mcp_page_connect_oauth({}, { locale })}</p>
+            <p>{m.mcp_page_connect_apikey({}, { locale })}</p>
+            <pre class="overflow-x-auto rounded bg-gray-950 p-4 font-mono text-[13px] leading-6 text-emerald-200"><code>{apiKeyConfig}</code></pre>
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+          <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_tools_title({}, { locale })}</h2>
+          <ul class="list-disc space-y-2 pl-5 text-gray-300">
+            {toolGroups.map((group) => <li>{group}</li>)}
+          </ul>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+          <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_cli_title({}, { locale })}</h2>
+          <p class="mb-4 text-gray-300">{m.mcp_page_cli_p1({}, { locale })}</p>
+          <CommandCode command={cliMcpCommand} />
+        </div>
+      </div>
+
+      <ConversionRelatedLinks title={m.mcp_page_links_title({}, { locale })} links={relatedLinks} />
+    </div>
+  </section>
+</Layout>

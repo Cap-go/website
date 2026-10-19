@@ -1,0 +1,154 @@
+---
+import { capgoAppStoreLinks } from '@/config/capgoAppStoreLinks'
+import { actions } from '@/config/plugins'
+import { getPluginPreviewQr, type PluginPreviewQr } from '@/config/pluginPreviewQrs'
+import { getPluginDocsSlugCandidates } from '@/services/pluginDocs'
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+
+const getRoute = (): StarlightRouteData | undefined => Astro.locals.starlightRoute as StarlightRouteData | undefined
+
+const routeId = getRoute()?.id ?? ''
+const pluginSlug = routeId.match(/(?:^|\/)plugins\/([^/]+)(?:\/.*)?$/)?.[1] ?? ''
+let plugin: (typeof actions)[number] | undefined
+let pluginCandidates: string[] = []
+let preview: PluginPreviewQr | undefined
+
+if (pluginSlug) {
+  for (const action of actions) {
+    const candidates = getPluginDocsSlugCandidates(action)
+    if (!candidates.includes(pluginSlug)) continue
+
+    plugin = action
+    pluginCandidates = candidates
+    break
+  }
+}
+
+if (plugin) {
+  for (const candidate of pluginCandidates) {
+    preview = getPluginPreviewQr(candidate)
+    if (preview) break
+  }
+}
+
+const imageAlt = plugin?.title ? `${plugin.title} plugin preview QR code` : 'Plugin preview QR code'
+const instruction = 'Download the Capgo app, then scan the QR code.'
+const storeLinks = [
+  { href: capgoAppStoreLinks.ios, label: 'App Store' },
+  { href: capgoAppStoreLinks.android, label: 'Google Play' },
+]
+---
+
+{
+  preview && (
+    <aside class="plugin-preview-qr" aria-label="Plugin example preview">
+      <div class="plugin-preview-qr__content">
+        <p class="plugin-preview-qr__eyebrow">Test on device</p>
+        <p class="plugin-preview-qr__copy">{instruction}</p>
+        <div class="plugin-preview-qr__stores">
+          {storeLinks.map((store) => (
+            <a class="plugin-preview-qr__store-link" href={store.href} target="_blank" rel="noopener noreferrer" aria-label={`Download Capgo on ${store.label}`}>
+              {store.label}
+            </a>
+          ))}
+        </div>
+      </div>
+      <a class="plugin-preview-qr__image-link" href={preview.webUrl} target="_blank" rel="noopener noreferrer" aria-label={`${plugin?.title ?? 'Plugin'} preview QR link`}>
+        <img src={preview.qr} alt={imageAlt} loading="lazy" decoding="async" />
+      </a>
+    </aside>
+  )
+}
+
+<style>
+  .plugin-preview-qr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0 1.5rem;
+    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 24%, transparent);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--sl-color-accent) 6%, var(--sl-color-bg));
+  }
+
+  .plugin-preview-qr__content {
+    min-width: 0;
+  }
+
+  .plugin-preview-qr__image-link {
+    display: block;
+    width: 7rem;
+    padding: 0.4rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    background: #fff;
+  }
+
+  .plugin-preview-qr__image-link:focus-visible,
+  .plugin-preview-qr__store-link:focus-visible {
+    outline: 2px solid var(--sl-color-accent-high);
+    outline-offset: 3px;
+  }
+
+  .plugin-preview-qr__image-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .plugin-preview-qr__eyebrow {
+    margin: 0;
+    color: var(--sl-color-accent-high);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .plugin-preview-qr__copy {
+    margin: 0.4rem 0 0;
+    color: var(--sl-color-gray-2);
+    line-height: 1.55;
+  }
+
+  .plugin-preview-qr__stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .plugin-preview-qr__store-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 30%, transparent);
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent);
+    color: var(--sl-color-white);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .plugin-preview-qr__store-link:hover {
+    border-color: color-mix(in srgb, var(--sl-color-accent) 55%, transparent);
+    background: color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
+    text-decoration: none;
+  }
+
+  @media (max-width: 520px) {
+    .plugin-preview-qr {
+      grid-template-columns: 1fr;
+    }
+
+    .plugin-preview-qr__image-link {
+      width: 9rem;
+    }
+  }
+</style>

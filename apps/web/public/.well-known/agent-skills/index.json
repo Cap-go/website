@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "capgo-public-api",
+      "type": "skill-md",
+      "description": "Use Capgo's public API docs and API-key authentication model to manage organizations, apps, channels, devices, bundles, statistics, and API keys.",
+      "url": "/.well-known/agent-skills/capgo-public-api/SKILL.md",
+      "digest": "sha256:90a17bf3e302532a455fdfff86ce156b6fb0c15be4e807f034a5d664bb9fc712"
+    },
+    {
+      "name": "capgo-mobile-signing-tools",
+      "type": "skill-md",
+      "description": "Use Capgo's browser-based signing tools to generate iOS CSRs, create Android keystores, and capture iPhone or iPad UDIDs.",
+      "url": "/.well-known/agent-skills/capgo-mobile-signing-tools/SKILL.md",
+      "digest": "sha256:468de87ad549972ee8801b7a1289dce660a8995f73408afd9647082c70f44080"
+    },
+    {
+      "name": "capgo-cli-mcp",
+      "type": "skill-md",
+      "description": "Connect to the hosted Capgo MCP server at api.capgo.app/mcp for account tools and docs search, or run the local Capgo CLI MCP server for bundle uploads and native builds.",
+      "url": "/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
+      "digest": "sha256:f8e2d28c261efe4e9021f2405f6b0b7acc7b3dcbd616380c849a0d45b2751a81"
+    },
+    {
+      "name": "capgo-site-routing",
+      "type": "skill-md",
+      "description": "Route developers to the right Capgo landing pages for pricing, native builds, signing tools, API docs, AI skills, and enterprise workflows.",
+      "url": "/.well-known/agent-skills/capgo-site-routing/SKILL.md",
+      "digest": "sha256:2778d1c3aae9416145572c445077352c656dba54f7b9131055c542648b90cd6f"
+    }
+  ]
+}

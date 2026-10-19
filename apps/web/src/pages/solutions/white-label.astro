@@ -1,0 +1,242 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m, { type MessageKey, type MessageValues } from '@/copy/messages'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
+import { getRelativeLocaleUrl } from '@/services/links'
+import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import SignupCta from '@/components/SignupCta.astro'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+function copy(key: MessageKey, values: MessageValues = {}) {
+  return m[key](values, { locale })
+}
+
+const title = brand + ' | ' + copy('solutions_white_label_page_title')
+const description = copy('solutions_white_label_page_description')
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
+
+const links = {
+  channels: { href: docs('live-updates/channels/'), label: copy('solutions_white_label_link_channels') },
+  setChannel: { href: docs('plugins/updater/api/') + '#setchannel', label: copy('solutions_white_label_link_setchannel') },
+  versionTargeting: { href: docs('live-updates/version-targeting/'), label: copy('solutions_white_label_link_version_targeting') },
+  buildOptions: { href: docs('builder/configuration/'), label: copy('solutions_white_label_link_build') },
+  builder: { href: docs('builder/'), label: copy('solutions_white_label_link_builder') },
+  rollbacks: { href: docs('live-updates/rollbacks/'), label: copy('solutions_white_label_link_rollbacks') },
+  compatibility: { href: docs('live-updates/compatibility/'), label: copy('solutions_white_label_link_compatibility') },
+}
+
+const howSteps = [
+  {
+    title: copy('solutions_white_label_how1_title'),
+    body: copy('solutions_white_label_how1_body'),
+    code: `npx @capgo/cli@latest channel add acme com.example.app --self-assign
+npx @capgo/cli@latest channel add globex com.example.app --self-assign`,
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: copy('solutions_white_label_how2_title'),
+    body: copy('solutions_white_label_how2_body'),
+    code: `npx @capgo/cli@latest bundle upload --channel acme
+npx @capgo/cli@latest bundle upload --channel globex`,
+    href: links.rollbacks.href,
+    linkLabel: links.rollbacks.label,
+  },
+  {
+    title: copy('solutions_white_label_how3_title'),
+    body: copy('solutions_white_label_how3_body'),
+    code: `import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+await CapacitorUpdater.setChannel({
+  channel: tenant.channel,
+  triggerAutoUpdate: true,
+})`,
+    href: links.setChannel.href,
+    linkLabel: links.setChannel.label,
+  },
+  {
+    title: copy('solutions_white_label_how4_title'),
+    body: copy('solutions_white_label_how4_body'),
+    code: `npx @capgo/cli@latest build request com.acme.app --platform android --android-flavor acme
+npx @capgo/cli@latest build request com.acme.app --platform ios --ios-scheme Acme`,
+    href: links.buildOptions.href,
+    linkLabel: links.buildOptions.label,
+  },
+]
+
+const faqItems = [
+  { question: copy('solutions_white_label_faq1_q'), answer: copy('solutions_white_label_faq1_a'), ...links.channels },
+  { question: copy('solutions_white_label_faq2_q'), answer: copy('solutions_white_label_faq2_a'), ...links.setChannel },
+  { question: copy('solutions_white_label_faq3_q'), answer: copy('solutions_white_label_faq3_a'), ...links.versionTargeting },
+  { question: copy('solutions_white_label_faq4_q'), answer: copy('solutions_white_label_faq4_a'), ...links.rollbacks },
+  { question: copy('solutions_white_label_faq5_q'), answer: copy('solutions_white_label_faq5_a'), ...links.builder },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'White-label mobile app release platform',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
+})
+
+const content = { title, description, ldJSON }
+
+const stats: { value: MessageKey; label: MessageKey }[] = [
+  { value: 'solutions_white_label_stat1_value', label: 'solutions_white_label_stat1_label' },
+  { value: 'solutions_white_label_stat2_value', label: 'solutions_white_label_stat2_label' },
+  { value: 'solutions_white_label_stat3_value', label: 'solutions_white_label_stat3_label' },
+]
+
+const pains: { title: MessageKey; desc: MessageKey }[] = [
+  { title: 'solutions_white_label_pain1_title', desc: 'solutions_white_label_pain1_desc' },
+  { title: 'solutions_white_label_pain2_title', desc: 'solutions_white_label_pain2_desc' },
+  { title: 'solutions_white_label_pain3_title', desc: 'solutions_white_label_pain3_desc' },
+]
+
+const examples: { title: MessageKey; desc: MessageKey; accent: string }[] = [
+  { title: 'solutions_white_label_example1_title', desc: 'solutions_white_label_example1_desc', accent: 'border-cyan-400/25 bg-cyan-500/10 text-cyan-100' },
+  { title: 'solutions_white_label_example2_title', desc: 'solutions_white_label_example2_desc', accent: 'border-amber-400/25 bg-amber-500/10 text-amber-100' },
+  { title: 'solutions_white_label_example3_title', desc: 'solutions_white_label_example3_desc', accent: 'border-emerald-400/25 bg-emerald-500/10 text-emerald-100' },
+]
+
+const systemCards: { title: MessageKey; desc: MessageKey; link: { href: string; label: string } }[] = [
+  { title: 'solutions_white_label_system1_title', desc: 'solutions_white_label_system1_desc', link: links.channels },
+  { title: 'solutions_white_label_system2_title', desc: 'solutions_white_label_system2_desc', link: links.setChannel },
+  { title: 'solutions_white_label_system3_title', desc: 'solutions_white_label_system3_desc', link: links.versionTargeting },
+  { title: 'solutions_white_label_system4_title', desc: 'solutions_white_label_system4_desc', link: links.buildOptions },
+]
+---
+
+<Layout content={content}>
+  <div class="product-hero">
+    <section class="border-b border-white/10 py-16 sm:py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div>
+            <p class="inline-flex min-h-11 items-center rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-4 text-sm font-semibold text-cyan-100">
+              {copy('solutions_white_label_badge')}
+            </p>
+            <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{copy('solutions_white_label_page_h1')}</h1>
+            <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{copy('solutions_white_label_page_lead')}</p>
+            <SignupCta align="start" class="mt-8" />
+            <div class="mt-10 grid gap-3 sm:grid-cols-3">
+              {stats.map((stat) => (
+                <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+                  <div class="text-2xl font-bold text-white">{copy(stat.value)}</div>
+                  <div class="mt-1 text-sm leading-6 text-slate-400">{copy(stat.label)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-white/10 bg-slate-900 p-4 shadow-2xl shadow-cyan-950/30">
+            <WhiteLabelIllustration class="text-cyan-400" aria-hidden="true" />
+            <div class="grid gap-3 border-t border-white/10 pt-4 sm:grid-cols-3">
+              <div class="rounded-lg bg-slate-800/80 p-3">
+                <p class="text-xs font-semibold text-slate-400 uppercase">{copy('solutions_white_label_visual_cell1_label')}</p>
+                <p class="mt-1 text-sm font-semibold text-white">{copy('solutions_white_label_visual_cell1_value')}</p>
+              </div>
+              <div class="rounded-lg bg-slate-800/80 p-3">
+                <p class="text-xs font-semibold text-slate-400 uppercase">{copy('solutions_white_label_visual_cell2_label')}</p>
+                <p class="mt-1 text-sm font-semibold text-white">{copy('solutions_white_label_visual_cell2_value')}</p>
+              </div>
+              <div class="rounded-lg bg-slate-800/80 p-3">
+                <p class="text-xs font-semibold text-slate-400 uppercase">{copy('solutions_white_label_visual_cell3_label')}</p>
+                <p class="mt-1 text-sm font-semibold text-white">{copy('solutions_white_label_visual_cell3_value')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-950 py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold text-red-300 uppercase">{copy('solutions_the_problem')}</p>
+          <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">{copy('solutions_white_label_problem_title')}</h2>
+        </div>
+        <div class="mt-10 grid gap-5 lg:grid-cols-3">
+          {pains.map((pain) => (
+            <article class="rounded-lg border border-red-400/20 bg-red-950/20 p-6">
+              <h3 class="text-xl font-bold text-white">{copy(pain.title)}</h3>
+              <p class="mt-3 leading-7 text-slate-300">{copy(pain.desc)}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-white/10 bg-slate-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold text-cyan-200 uppercase">{copy('solutions_white_label_example_label')}</p>
+          <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">{copy('solutions_white_label_example_title')}</h2>
+        </div>
+        <div class="mt-10 grid gap-5 lg:grid-cols-3">
+          {examples.map((example) => (
+            <article class={`rounded-lg border p-6 ${example.accent}`}>
+              <h3 class="text-xl font-bold text-white">{copy(example.title)}</h3>
+              <p class="mt-3 leading-7 text-slate-300">{copy(example.desc)}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-white/10 bg-slate-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold text-cyan-200 uppercase">{copy('solutions_the_solution')}</p>
+          <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">{copy('solutions_white_label_system_title')}</h2>
+          <p class="mt-4 text-lg leading-8 text-slate-300">{copy('solutions_white_label_system_lead')}</p>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {systemCards.map((card) => (
+            <article class="rounded-lg border border-white/10 bg-gray-950 p-6">
+              <h3 class="text-xl font-bold text-white">{copy(card.title)}</h3>
+              <p class="mt-3 leading-7 text-slate-300">{copy(card.desc)}</p>
+              <a href={card.link.href} class="mt-4 inline-flex text-sm font-semibold text-cyan-300 hover:text-white hover:underline">
+                {card.link.label}
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <SolutionHowItWorks
+      eyebrow={copy('solutions_how_it_works_eyebrow')}
+      title={copy('solutions_white_label_how_title')}
+      description={copy('solutions_white_label_how_desc')}
+      steps={howSteps}
+      docsTitle={copy('solutions_docs_title')}
+      docs={[links.channels, links.setChannel, links.versionTargeting, links.rollbacks, links.builder, links.buildOptions]}
+      class="bg-gray-950"
+    />
+
+    <SolutionAppExample solution="white-label" />
+    <ProductTestimonials eyebrow={copy('solutions_testimonials_eyebrow')} title={copy('solutions_testimonials_title')} testimonials={solutionTestimonials['white-label']} />
+    <SolutionFaq eyebrow={copy('solutions_faq_eyebrow')} title={copy('solutions_white_label_faq_title')} description={copy('solutions_white_label_faq_desc')} items={faqItems} />
+    <section class="bg-slate-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{copy('solutions_white_label_page_cta_title')}</h2>
+        <p class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-300">{copy('solutions_white_label_page_cta_subtitle')}</p>
+        <SignupCta lead={m.signup_cta_lead_white_label({}, { locale: Astro.locals.locale })} humanSupport enterprise class="mt-8" />
+      </div>
+    </section>
+  </div>
+</Layout>

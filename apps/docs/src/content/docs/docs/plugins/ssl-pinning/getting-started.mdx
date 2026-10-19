@@ -1,0 +1,102 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-ssl-pinning and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-ssl-pinning` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-ssl-pinning
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { SSLPinning } from '@capgo/capacitor-ssl-pinning';
+```
+
+## Quick start
+
+```typescript
+import { SSLPinning } from '@capgo/capacitor-ssl-pinning';
+
+const result = await SSLPinning.getConfiguration();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `getConfiguration`
+
+Returns the active native configuration visible to the plugin.
+
+```typescript
+import { SSLPinning } from '@capgo/capacitor-ssl-pinning';
+
+const result = await SSLPinning.getConfiguration();
+console.log(result);
+```
+
+## Type Reference
+
+### `SSLPinningConfigurationState`
+Static SSL pinning configuration currently visible to the plugin.
+```typescript
+export interface SSLPinningConfigurationState {
+  /**
+   * Whether at least one certificate is configured for native pinning.
+   */
+  configured: boolean;
+
+  /**
+   * Certificate paths from `capacitor.config.*` relative to the app root.
+   */
+  certs: string[];
+
+  /**
+   * Fully-qualified URLs that should bypass SSL pinning.
+   */
+  excludedDomains: string[];
+}
+```
+
+### `PluginVersionResult`
+Plugin version payload.
+```typescript
+export interface PluginVersionResult {
+  /**
+   * Version identifier returned by the platform implementation.
+   */
+  version: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan security and compliance, connect it with [Using @capgo/capacitor-ssl-pinning](/plugins/capacitor-ssl-pinning/) for the native capability in Using @capgo/capacitor-ssl-pinning, [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, and [Capgo Security](/security/) for the product workflow in Capgo Security.

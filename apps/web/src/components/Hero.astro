@@ -1,0 +1,75 @@
+---
+import m from '@/copy/messages'
+import SignupCta from '@/components/SignupCta.astro'
+import AppLogoStrip from '@/components/AppLogoStrip.astro'
+import HeroWorldMap from '@/components/HeroWorldMap.astro'
+---
+
+<section>
+  <div class="relative overflow-hidden">
+    <div class="hero-frame relative mx-auto flex max-w-7xl flex-col pb-8 md:pb-6 2xl:max-w-[90vw]">
+      <HeroWorldMap />
+      <div data-hero-copy class="relative z-10 mx-auto flex max-w-7xl flex-1 flex-col justify-center px-4 pt-10 text-center sm:px-6 sm:pt-12 lg:px-0">
+        <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-[1.08] xl:text-[clamp(5.25rem,9svh,7.5rem)]">
+          <span class="sr-only">Capgo. </span>
+          <span class="lg:whitespace-nowrap">{m.hero_title_line1({}, { locale: Astro.locals.locale })}</span>
+          <br />
+          <span class="text-azure-500">{m.hero_title_line2({}, { locale: Astro.locals.locale })}</span>
+        </h1>
+        <p class="font-inter mx-auto mt-6 max-w-3xl text-lg leading-8 text-balance text-gray-400 sm:text-xl xl:mt-8 xl:max-w-4xl xl:text-[clamp(1.25rem,2.2svh,1.625rem)] xl:leading-relaxed">
+          {m.hero_subtitle_v2({}, { locale: Astro.locals.locale })}
+        </p>
+        <SignupCta id="hero-signup-cta" class="mt-10 xl:mt-12" />
+      </div>
+      <!-- Map status line floats over the map, outside the copy flow. -->
+      <div class="map-hud-slot" aria-hidden="true">
+        <div data-map-hud class="map-hud"></div>
+      </div>
+      <AppLogoStrip />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Fill the first screen below the sticky header so the next section does not peek in. */
+  @media (min-width: 768px) {
+    .hero-frame {
+      min-height: calc(100svh - 4.75rem);
+    }
+  }
+  /* Anchor box for the map status pill: out of the text flow, floating over the map. */
+  .map-hud-slot {
+    display: none;
+  }
+  /* Small screens have no free space around the copy, so the pill only shows on desktop. */
+  @media (min-width: 1024px) {
+    .map-hud-slot {
+      display: block;
+      position: absolute;
+      z-index: 20;
+      right: 1.5rem;
+      top: 62%;
+      width: 0;
+      height: 0;
+    }
+    .map-hud-slot :global(.map-hud) {
+      left: auto;
+      right: 0;
+      flex-wrap: wrap;
+      row-gap: 2px;
+      /* The slot is 0px wide, so size to content or every item wraps onto its own line. */
+      width: max-content;
+      max-width: 340px;
+      border-radius: 14px;
+      transform: translate(0, -4px);
+    }
+    /* Route timing breakdown drops to its own second line, aligned past the dot. */
+    .map-hud-slot :global(.map-hud .map-hud-note) {
+      flex-basis: 100%;
+      padding-left: 14px;
+    }
+    .map-hud-slot :global(.map-hud.is-visible) {
+      transform: translate(0, 0);
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-home-indicator and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-home-indicator` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-home-indicator
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+```
+
+## Quick start
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.hide();
+```
+
+## Example: show
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.show();
+```
+
+## Example: isHidden
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+const { hidden } = await HomeIndicator.isHidden();
+if (hidden) {
+  console.log('Home indicator is hidden');
+} else {
+  console.log('Home indicator is visible');
+}
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `hide`
+
+Hide the home indicator at the bottom of the screen.
+
+This visually hides the iOS home indicator bar, providing a more immersive
+full-screen experience. Users can still swipe up to access home, but the
+indicator will not be visible until they start the gesture.
+
+iOS only. Has no effect on Android or web.
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.hide();
+```
+
+### `show`
+
+Show the home indicator at the bottom of the screen.
+
+This restores the default iOS home indicator visibility, making it
+always visible to the user. This is the default behavior.
+
+iOS only. Has no effect on Android or web.
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.show();
+```
+
+### `isHidden`
+
+Check whether the home indicator is currently hidden.
+
+Returns the current visibility state of the iOS home indicator.
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+const { hidden } = await HomeIndicator.isHidden();
+if (hidden) {
+  console.log('Home indicator is hidden');
+} else {
+  console.log('Home indicator is visible');
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-home-indicator](/plugins/capacitor-home-indicator/) for the native capability in Using @capgo/capacitor-home-indicator, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

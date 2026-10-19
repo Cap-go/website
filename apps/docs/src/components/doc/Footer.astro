@@ -1,0 +1,21 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro'
+import SignupCta from './SignupCta.astro'
+---
+
+<section class="docs-footer-cta" aria-label="Start with Capgo">
+  <SignupCta id="docs-footer-signup-cta" enterprise />
+</section>
+<Default>
+  <slot />
+</Default>
+
+<style>
+  .docs-footer-cta {
+    margin-top: 3rem;
+    padding: 2.5rem 1.5rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 1.25rem;
+    background: radial-gradient(ellipse at top, rgb(37 99 235 / 0.18), transparent 70%);
+  }
+</style>

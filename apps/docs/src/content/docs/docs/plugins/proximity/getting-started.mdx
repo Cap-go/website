@@ -1,0 +1,147 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-proximity and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-proximity` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-proximity
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+
+const { available } = await CapacitorProximity.getStatus();
+if (!available) return;
+
+await CapacitorProximity.enable();
+// start VoIP or voice playback UI
+```
+
+## Example: voice note playback
+
+```typescript
+await CapacitorProximity.enable();
+await playVoiceNote();
+await CapacitorProximity.disable();
+```
+
+## Common pitfalls
+
+- **Always disable**: call `disable()` in `finally` blocks so brightness restores after errors.
+- **Sensor less devices**: check `getStatus()` before showing ear proximity UX.
+- **Web**: proximity APIs are not exposed, keep calls native only.
+
+## API Overview
+
+### `enable`
+
+Enable proximity monitoring.
+
+On iOS this enables `UIDevice.isProximityMonitoringEnabled`.
+On Android this starts listening to `TYPE_PROXIMITY` and dims the current
+app window while the sensor is covered.
+
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+
+await CapacitorProximity.enable();
+```
+
+### `disable`
+
+Disable proximity monitoring.
+
+This restores the default app window behavior and stops sensor monitoring.
+
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+
+await CapacitorProximity.disable();
+```
+
+### `getStatus`
+
+Get the current sensor availability and plugin enabled state.
+
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+
+const status = await CapacitorProximity.getStatus();
+```
+
+## Type Reference
+
+### `ProximityStatusResult`
+Result returned by `getStatus()`.
+```typescript
+export interface ProximityStatusResult {
+  /**
+   * Whether the current device exposes a usable proximity sensor.
+   *
+   * @since 0.0.1
+   */
+  available: boolean;
+
+  /**
+   * Whether proximity monitoring is currently enabled by the plugin.
+   *
+   * @since 0.0.1
+   */
+  enabled: boolean;
+
+  /**
+   * Platform label returned by the native or web implementation.
+   *
+   * @since 0.0.1
+   */
+  platform: 'ios' | 'android' | 'web';
+}
+```
+
+### `PluginVersionResult`
+Result returned when requesting the plugin version.
+```typescript
+export interface PluginVersionResult {
+  /**
+   * Native plugin version string.
+   *
+   * @since 0.0.1
+   */
+  version: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-proximity](/plugins/capacitor-proximity/) for the native capability in Using @capgo/capacitor-proximity, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

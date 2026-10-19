@@ -1,0 +1,103 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-android-inline-install and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-android-inline-install` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-android-inline-install
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+```
+
+## API Overview
+
+### `startInlineInstall`
+
+Start an inline install flow using the Google Play overlay.
+
+Note: Only eligible apps can use Inline Install. See:
+https://play.google.com/console/about/guides/premium-growth-tools/
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+const result = await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.app',
+  referrer: 'my-referrer',
+  overlay: true,
+  fallback: true
+});
+
+if (result.started) {
+  console.log('Install flow started');
+  if (result.fallbackUsed) {
+    console.log('Using fallback Play Store link');
+  }
+}
+```
+
+## Type Reference
+
+### `StartInlineInstallOptions`
+Options for starting an inline install flow.
+```typescript
+export interface StartInlineInstallOptions {
+  /** Package name of the app to be installed (target app). */
+  id: string;
+  /** Referrer string to pass to Play. Optional but recommended. */
+  referrer?: string;
+  /**
+   * Package name of your app (caller). Defaults to the current app package
+   * if omitted.
+   */
+  callerId?: string;
+  /** Optional Custom Store Listing ID. */
+  csl_id?: string;
+  /** Whether to request the Play overlay. Defaults to true. */
+  overlay?: boolean;
+  /** If true, falls back to full Play Store deep link when overlay unavailable. Defaults to true. */
+  fallback?: boolean;
+}
+```
+
+### `StartInlineInstallResult`
+Result of starting an inline install flow.
+```typescript
+export interface StartInlineInstallResult {
+  /** True when the inline install intent has been started. */
+  started: boolean;
+  /** True if a fallback deep link was used instead of inline overlay. */
+  fallbackUsed?: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-android-inline-install](/plugins/capacitor-android-inline-install/) for the native capability in Using @capgo/capacitor-android-inline-install, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

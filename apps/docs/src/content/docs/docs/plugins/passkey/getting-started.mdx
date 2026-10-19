@@ -1,0 +1,136 @@
+---
+title: Getting Started
+description: Install @capgo/capacitor-passkey, configure the plugin once, and keep your browser-style WebAuthn code in a Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+## Installation
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-passkey` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-passkey" pkgManagers={['bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
+
+3. **Add the plugin config**
+
+   ```ts
+   import type { CapacitorConfig } from '@capacitor/cli';
+
+   const config: CapacitorConfig = {
+     appId: 'app.capgo.passkey.example',
+     appName: 'My App',
+     webDir: 'dist',
+     plugins: {
+       CapacitorPasskey: {
+         origin: 'https://signin.example.com',
+         autoShim: true,
+         domains: ['signin.example.com'],
+       },
+     },
+   };
+
+   export default config;
+   ```
+
+4. **Install the shim during bootstrap**
+
+   ```ts
+   import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+   await CapacitorPasskey.autoShimWebAuthn();
+   ```
+
+5. **Keep your normal WebAuthn flow**
+
+   ```ts
+   const registration = await navigator.credentials.create({
+     publicKey: registrationOptions,
+   });
+
+   const authentication = await navigator.credentials.get({
+     publicKey: requestOptions,
+   });
+   ```
+</Steps>
+
+## What the plugin config does
+
+The config is read from `plugins.CapacitorPasskey` in `capacitor.config.*`.
+
+- `origin`: primary HTTPS relying-party origin used by the shim and direct API
+- `domains`: extra relying-party hostnames to patch into native config during sync
+- `autoShim`: defaults to `true` and controls the native `cap sync` auto-configuration hook
+
+## What sync patches for you
+
+When you run `bunx cap sync`, the plugin updates the generated native host project:
+
+- iOS: associated domains entitlements and Xcode entitlements wiring when needed
+- Android: `asset_statements` metadata and the generated resource used by the manifest
+
+The hook does not publish your website trust files for you. You still need to host:
+
+- `https://your-domain/.well-known/apple-app-site-association`
+- `https://your-domain/.well-known/assetlinks.json`
+
+## Example: direct JSON API (no shim)
+
+When your backend already returns WebAuthn JSON, call the plugin methods directly.
+
+```ts
+import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+const registration = await CapacitorPasskey.createCredential({
+  publicKey: registrationOptionsFromServer,
+});
+
+const assertion = await CapacitorPasskey.getCredential({
+  publicKey: requestOptionsFromServer,
+});
+```
+
+Use `isSupported()` before showing passkey UI on older devices.
+
+## Platform guides
+
+<CardGrid>
+  <a href="/docs/plugins/passkey/ios/">
+    <Card title="iOS setup" icon="open-book">
+      Associated Domains and `apple-app-site-association`.
+    </Card>
+  </a>
+  <a href="/docs/plugins/passkey/android/">
+    <Card title="Android setup" icon="open-book">
+      Digital Asset Links and `assetlinks.json`.
+    </Card>
+  </a>
+  <a href="/docs/plugins/passkey/backend/">
+    <Card title="Backend notes" icon="open-book">
+      Origin validation and Android caveats.
+    </Card>
+  </a>
+</CardGrid>
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan authentication and account flows, connect it with [Using @capgo/capacitor-passkey](/plugins/capacitor-passkey/) for the native capability in Using @capgo/capacitor-passkey, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

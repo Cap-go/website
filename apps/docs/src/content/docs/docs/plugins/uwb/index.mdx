@@ -1,0 +1,65 @@
+---
+title: "@capgo/capacitor-uwb"
+description: Ultra-Wideband ranging for peer distance and direction on iOS Nearby Interaction and Android Jetpack UWB.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Ultra-Wideband ranging for peer distance and direction on iOS Nearby Interaction and Android Jetpack UWB"
+  image:
+    file: ~public/icons/plugins/uwb.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/uwb/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-uwb/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Overview
+
+Ultra-Wideband ranging for peer distance and direction on iOS Nearby Interaction and Android Jetpack UWB
+
+Start with `isAvailable()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | Partial | See getting started |
+
+## Core Capabilities
+
+- `isAvailable` - Check whether UWB is supported and currently available.
+- `getDiscoveryToken` - Get the local Nearby Interaction discovery token on iOS.
+- `startPeerSession` - Start an iOS peer ranging session.
+- `startControllerSession` - Start an Android controller session and return shareable parameters.
+- `startControleeSession` - Start an Android controlee session from controller parameters.
+- `stopSession` - Stop the active ranging session.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `isAvailable` | Check whether UWB is supported and currently available on the device. |
+| `getDiscoveryToken` | Get the local Nearby Interaction discovery token on iOS. |
+| `startPeerSession` | Start a Nearby Interaction peer session on iOS. |
+| `startControllerSession` | Start an Android UWB controller session and return shareable parameters. |
+| `startControleeSession` | Start an Android UWB controlee session with parameters from the controller. |
+| `stopSession` | Stop the active UWB ranging session. |
+| `addListener` | Listen for `rangingUpdate` and `sessionStateChanged` events. |
+| `getPluginVersion` | Get the current native plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-uwb](https://github.com/Cap-go/capacitor-uwb/).

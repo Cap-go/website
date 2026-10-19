@@ -1,0 +1,245 @@
+---
+title: "Devices"
+description: "Retrieve device metadata and manage private channel overrides through the Capgo API."
+sidebar:
+  order: 7
+---
+
+Devices are individual app installations that report updater metadata to Capgo. Use this API to retrieve that metadata or set and remove a device-specific private-channel override.
+
+:::note[Two 90-day policies]
+**Device inventory:** device records are retained for **90 days** from the last device activity. A device does not need to install an update to appear: updater and stats check-ins can refresh its metadata.
+
+**Channel overrides:** a POST override is removed **90 days after the last override write**, even if the device still checks in. Checking in does not reset that clock. To avoid that cleanup, set `defaultChannel` in Capacitor config (survives reinstall) or call `setChannel()` from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, `setChannel()` is local and is cleared on reinstall, so the app must call it again. Older plugins write a backend override that survives reinstall and is removed by this cleanup. See [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
+:::
+
+## Device metadata
+
+Each record can include the device ID, platform, updater and OS versions, native build, installed bundle, production and emulator state, custom ID, and channel override.
+
+When available, `country_code` is the latest valid two-letter ISO 3166-1 country code received from a Cloudflare-handled request for the device. It is not GPS or a location value supplied by your app. It can be `null` when unavailable; use a single-device lookup when you need this field.
+
+## Endpoints
+
+### POST
+
+`https://api.capgo.app/device/`
+
+Set a device-specific override to a **private** channel. To choose a bundle for a device, assign that bundle to the channel; direct per-device bundle overrides are not supported. The override expires 90 days after the last write unless you POST it again.
+
+#### Request body
+
+```typescript
+interface DeviceChannelOverride {
+  app_id: string; // reverse-domain app ID, for example com.example.app
+  device_id: string;
+  channel: string; // existing non-public channel name
+}
+```
+
+#### Example request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "com.example.app",
+    "device_id": "device_456",
+    "channel": "beta"
+  }' \
+  https://api.capgo.app/device/
+```
+
+Public channels cannot be used as device overrides.
+
+#### Success response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### GET
+
+`https://api.capgo.app/device/`
+
+Retrieve device metadata. Results are cursor-paginated when you omit `device_id`.
+
+#### Query parameters
+
+- `app_id`: Required reverse-domain app ID, such as `com.example.app`.
+- `device_id`: Optional device ID. When present, the response is a single device rather than a paginated list.
+- `customIdMode`: Optional boolean. Set to `true` to return only devices with a non-empty `custom_id`.
+- `cursor`: Optional cursor from the previous list response.
+- `limit`: Optional number of devices per page.
+
+#### Example requests
+
+```bash
+# Get the first page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=com.example.app"
+
+# Get one device, including its request-derived country when available
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=com.example.app&device_id=device_456"
+
+# Get only devices with a custom ID
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=com.example.app&customIdMode=true"
+
+# Get the next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=com.example.app&cursor=2024-01-01T00:00:00Z%7Cdevice_456"
+```
+
+#### Response types
+
+```typescript
+interface DeviceListResponse {
+  data: Device[];
+  nextCursor?: string;
+  hasMore: boolean;
+}
+
+interface Device {
+  updated_at: string;
+  device_id: string;
+  custom_id: string;
+  version?: number;
+  version_name: string | null;
+  channel?: string;
+  app_id: string;
+  platform: "ios" | "android" | "electron";
+  plugin_version: string;
+  os_version: string;
+  version_build: string;
+  is_prod: boolean;
+  is_emulator: boolean;
+  key_id: string | null;
+  install_source: string | null;
+  country_code: string | null;
+}
+```
+
+`country_code` is populated by a device-specific lookup when Capgo has stored a valid Cloudflare-derived country code. Requests without a valid country do not clear the last valid value; list responses may return `null` for this field.
+
+#### Example response (list)
+
+```json
+{
+  "data": [
+    {
+      "device_id": "device_456",
+      "custom_id": "test-device-1",
+      "version": 1,
+      "version_name": "1.0.0",
+      "app_id": "com.example.app",
+      "platform": "ios",
+      "plugin_version": "5.0.0",
+      "os_version": "17.0",
+      "version_build": "1",
+      "is_prod": true,
+      "is_emulator": false,
+      "key_id": null,
+      "install_source": null,
+      "country_code": null,
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "nextCursor": "2024-01-01T00:00:00Z|device_456",
+  "hasMore": true
+}
+```
+
+#### Example response (single device)
+
+```json
+{
+  "device_id": "device_456",
+  "custom_id": "test-device-1",
+  "version": 1,
+  "version_name": "1.0.0",
+  "app_id": "com.example.app",
+  "platform": "ios",
+  "plugin_version": "5.0.0",
+  "os_version": "17.0",
+  "version_build": "1",
+  "is_prod": true,
+  "is_emulator": false,
+  "key_id": "MIIB",
+  "install_source": null,
+  "country_code": "FR",
+  "updated_at": "2024-01-01T00:00:00Z",
+  "channel": "beta"
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/device/`
+
+Remove a device's channel override. The device will use its normal channel selection again; this endpoint does not delete its metadata record.
+
+#### Request body or query parameters
+
+```typescript
+interface DeviceOverrideRemoval {
+  app_id: string;
+  device_id: string;
+}
+```
+
+#### Example request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "com.example.app",
+    "device_id": "device_456"
+  }' \
+  https://api.capgo.app/device/
+```
+
+#### Success response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## Errors
+
+Errors use an HTTP error status and a JSON body with `error` and `message` fields. Common error codes include:
+
+- `invalid_app_id` when `app_id` is not a reverse-domain identifier.
+- `device_not_found` for an unknown device lookup.
+- `channel_not_found` when the requested channel does not exist.
+- `public_channel_override` when attempting to override a device to a public channel.
+- `invalid_version_id` when attempting a direct bundle override; use a channel instead.
+- `cannot_access_app` or `cannot_access_channel` when the API key lacks the required permission.
+
+## Common use cases
+
+1. **Move a test device to a private beta channel**
+
+   ```json
+   {
+     "app_id": "com.example.app",
+     "device_id": "device_456",
+     "channel": "beta"
+   }
+   ```
+
+2. **Reset a device to normal channel selection**
+
+   Use the `DELETE` endpoint with the app and device IDs.
+
+## Keep going from Devices
+
+If you are using **Devices** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

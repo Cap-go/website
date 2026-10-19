@@ -1,0 +1,456 @@
+---
+import m from '@/copy/messages'
+
+const locale = Astro.locals.locale
+const files = [
+  'index.html',
+  'main.js',
+  'vendor.js',
+  'polyfills.js',
+  'styles.css',
+  'cart.js',
+  'fonts.woff2',
+  'logo.svg',
+  'hero.webp',
+  'en.json',
+  'fr.json',
+  'router.js',
+  'checkout.js',
+  'icons.svg',
+  'chunk-a1.js',
+  'chunk-b2.js',
+]
+const changed = new Set(['cart.js', 'en.json', 'checkout.js'])
+---
+
+<div class="stage" data-stage aria-hidden="true">
+  <div class="inner">
+    <div class="side side-new">
+      <p class="side-head">
+        <span>{m.explainer_delta_new_bundle({}, { locale })}</span>
+        <span class="tag tag-new">1.0.1</span>
+      </p>
+      <div class="grid">
+        {
+          files.map((file, index) => (
+            <span class:list={['file', { changed: changed.has(file) }]} style={`--i:${index}`}>
+              <span class="file-name">{file}</span>
+              <span class="mark mark-same">=</span>
+              <span class="mark mark-diff">Δ</span>
+            </span>
+          ))
+        }
+        <span class="scan"></span>
+      </div>
+      <p class="side-foot">16 files · 4.2 MB</p>
+    </div>
+
+    <div class="middle">
+      <div class="lane">
+        <span class="track"></span>
+        <span class="packet">{m.explainer_delta_files_changed({}, { locale })}</span>
+      </div>
+      <div class="meters">
+        <div class="meter">
+          <p><span>{m.explainer_delta_full_bundle({}, { locale })}</span><span class="meter-value">4.2 MB</span></p>
+          <span class="meter-track"><i class="meter-full"></i></span>
+        </div>
+        <div class="meter meter-delta">
+          <p><span>{m.explainer_delta_delta({}, { locale })}</span><span class="meter-value"><span class="kb"></span> KB</span></p>
+          <span class="meter-track"><i class="meter-fill"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side side-device">
+      <p class="side-head">
+        <span>{m.explainer_delta_on_device({}, { locale })}</span>
+        <span class="tag tag-device"><span class="v-old">1.0.0</span><span class="v-new">1.0.1</span></span>
+      </p>
+      <div class="grid">
+        {
+          files.map((file, index) => (
+            <span class:list={['file', { changed: changed.has(file) }]} style={`--i:${index}`}>
+              <span class="file-name">{file}</span>
+            </span>
+          ))
+        }
+      </div>
+      <p class="side-foot verified">✓ {m.explainer_delta_verified({}, { locale })}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  @property --kb {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+  }
+  .stage {
+    container-type: inline-size;
+  }
+  .inner {
+    --blue: #44bcff;
+    --green: #4ade80;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 12.5em minmax(0, 1fr);
+    align-items: center;
+    gap: 1.6em;
+    padding: 3em;
+    min-height: 38em;
+    font-size: clamp(9px, 1.45cqw, 14px);
+    color: #e5e7eb;
+    background:
+      radial-gradient(40% 60% at 50% 55%, rgb(68 188 255 / 0.1), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.06) 1px, transparent 0) 0 0 / 2em 2em;
+  }
+  .side {
+    min-width: 0;
+    padding: 1.2em;
+    border-radius: 1.2em;
+    background: #14161b;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  .side-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    font-weight: 600;
+    color: #fff;
+  }
+  .tag {
+    position: relative;
+    padding: 0.15em 0.55em;
+    border-radius: 999px;
+    font:
+      700 0.8em/1.4 ui-monospace,
+      monospace;
+  }
+  .tag-new {
+    background: rgb(68 188 255 / 0.15);
+    color: var(--blue);
+  }
+  .tag-device {
+    display: grid;
+    background: rgb(255 255 255 / 0.08);
+    color: #d1d5db;
+    transition:
+      background 0.4s,
+      color 0.4s;
+  }
+  .v-old,
+  .v-new {
+    grid-area: 1 / 1;
+    transition: opacity 0.3s;
+  }
+  .v-new {
+    opacity: 0;
+  }
+  .s3 .tag-device {
+    background: rgb(74 222 128 / 0.15);
+    color: var(--green);
+    transition-delay: 1.6s;
+  }
+  .s3 .v-old {
+    opacity: 0;
+    transition-delay: 1.6s;
+  }
+  .s3 .v-new {
+    opacity: 1;
+    transition-delay: 1.6s;
+  }
+  .grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.45em;
+  }
+  .file {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    height: 3.6em;
+    padding: 0.45em 0.35em;
+    border-radius: 0.6em;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+    transition:
+      background 0.35s,
+      box-shadow 0.35s,
+      opacity 0.35s;
+  }
+  .file::before {
+    content: '';
+    position: absolute;
+    top: 0.5em;
+    left: 0.45em;
+    width: 1.1em;
+    height: 1.3em;
+    border-radius: 0.2em;
+    background: rgb(255 255 255 / 0.14);
+    clip-path: polygon(0 0, 65% 0, 100% 30%, 100% 100%, 0 100%);
+  }
+  .file-name {
+    overflow: hidden;
+    font:
+      0.68em/1.2 ui-monospace,
+      monospace;
+    color: #9ca3af;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mark {
+    position: absolute;
+    top: 0.35em;
+    right: 0.45em;
+    font:
+      700 0.85em/1 ui-monospace,
+      monospace;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .mark-same {
+    color: #6b7280;
+  }
+  .mark-diff {
+    color: var(--blue);
+  }
+
+  /* s0: new bundle arrives tile by tile */
+  .side-new .file {
+    opacity: 0;
+    transform: translateY(0.5em);
+    transition:
+      opacity 0.3s,
+      transform 0.3s,
+      background 0.35s,
+      box-shadow 0.35s;
+  }
+  .s0 .side-new .file {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--i) * 45ms);
+  }
+
+  /* s1: checksum scan */
+  .scan {
+    position: absolute;
+    top: -0.3em;
+    bottom: -0.3em;
+    left: 0;
+    width: 0.2em;
+    border-radius: 999px;
+    background: var(--blue);
+    box-shadow: 0 0 1.2em 0.3em rgb(68 188 255 / 0.6);
+    opacity: 0;
+  }
+  .s1 .scan {
+    animation: scan 1.4s ease-in-out 0.2s forwards;
+  }
+  @keyframes scan {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    10%,
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+  .s1 .side-new .file:not(.changed) {
+    opacity: 0.35;
+    transition-delay: calc(0.3s + (var(--i) % 4) * 0.3s);
+  }
+  .s1 .side-new .file:not(.changed) .mark-same,
+  .s1 .side-new .changed .mark-diff {
+    opacity: 1;
+    transition-delay: calc(0.3s + (var(--i) % 4) * 0.3s);
+  }
+  .s1 .side-new .changed {
+    background: rgb(68 188 255 / 0.16);
+    box-shadow:
+      inset 0 0 0 1px rgb(68 188 255 / 0.6),
+      0 0 1.2em rgb(68 188 255 / 0.25);
+    transition-delay: calc(0.3s + (var(--i) % 4) * 0.3s);
+  }
+  .s1 .side-new .changed .file-name {
+    color: #fff;
+  }
+
+  /* s2: only the changed files travel */
+  .middle {
+    display: grid;
+    gap: 2em;
+  }
+  .lane {
+    position: relative;
+    height: 2.6em;
+  }
+  .track {
+    position: absolute;
+    inset: 50% 0 auto;
+    border-top: 2px dashed rgb(255 255 255 / 0.14);
+  }
+  .packet {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    padding: 0.4em 0.75em;
+    border-radius: 999px;
+    background: var(--blue);
+    color: #04121c;
+    font-size: 0.85em;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 0 1.4em rgb(68 188 255 / 0.7);
+    opacity: 0;
+    translate: 0 -50%;
+  }
+  .s2 .packet {
+    animation: fly 1.3s cubic-bezier(0.5, 0, 0.3, 1) 0.3s forwards;
+  }
+  @keyframes fly {
+    0% {
+      left: -3em;
+      opacity: 0;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      left: calc(100% - 5em);
+      opacity: 0;
+    }
+  }
+  .meters {
+    display: grid;
+    gap: 1em;
+    opacity: 0.3;
+    transition: opacity 0.4s;
+  }
+  .s2 .meters {
+    opacity: 1;
+  }
+  .meter p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4em;
+    font-size: 0.85em;
+    color: #9ca3af;
+  }
+  .meter-value {
+    font-family: ui-monospace, monospace;
+    color: #d1d5db;
+  }
+  .meter-delta .meter-value {
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .meter-track {
+    display: block;
+    height: 0.55em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.08);
+    overflow: hidden;
+  }
+  .meter-track i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+  }
+  .meter-full {
+    width: 100%;
+    background: repeating-linear-gradient(-45deg, #4b5563 0 0.35em, #374151 0.35em 0.7em);
+  }
+  .meter-fill {
+    width: 0;
+    background: var(--blue);
+    box-shadow: 0 0 0.8em rgb(68 188 255 / 0.7);
+  }
+  .s2 .meter-fill {
+    width: 4.3%;
+    transition: width 1.3s ease 0.3s;
+  }
+  .kb {
+    --kb: 0;
+    counter-reset: kb var(--kb);
+  }
+  .kb::before {
+    content: counter(kb);
+  }
+  .s2 .kb {
+    --kb: 180;
+    transition: --kb 1.3s ease 0.3s;
+  }
+
+  /* s3: device rebuilds 1.0.1 */
+  .side-device .file.changed::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgb(74 222 128 / 0.18);
+    box-shadow: inset 0 0 0 1px rgb(74 222 128 / 0.6);
+    opacity: 0;
+    transform: scale(0.6);
+    transition:
+      opacity 0.35s,
+      transform 0.35s;
+  }
+  .s2 .side-device .file.changed::after {
+    opacity: 1;
+    transform: none;
+    transition-delay: 1.5s;
+  }
+  .s2 .side-device .file.changed .file-name {
+    color: #fff;
+    transition: color 0.3s 1.5s;
+  }
+  .s3 .side-device .file:not(.changed) {
+    animation: settle 0.5s ease calc(0.3s + var(--i) * 40ms) both;
+  }
+  @keyframes settle {
+    40% {
+      background: rgb(74 222 128 / 0.12);
+    }
+  }
+  .side-foot {
+    margin-top: 1em;
+    font:
+      0.85em/1.3 ui-monospace,
+      monospace;
+    color: #6b7280;
+  }
+  .verified {
+    color: var(--green);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .s3 .verified {
+    opacity: 1;
+    transition-delay: 1.3s;
+  }
+  .s3 .side-device {
+    box-shadow: inset 0 0 0 1px rgb(74 222 128 / 0.4);
+    transition: box-shadow 0.4s 1.3s;
+  }
+
+  @container (max-width: 560px) {
+    .inner {
+      min-height: 0;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 2em 1.5em;
+      font-size: clamp(9px, 2.8cqw, 12px);
+    }
+    .middle {
+      gap: 1.2em;
+    }
+  }
+</style>

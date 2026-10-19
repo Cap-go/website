@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "UVTJ336J2D.ee.forgr.capacitorgo",
+        "paths": ["*"]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+        "UVTJ336J2D.ee.forgr.capacitorgo"
+    ]
+  }
+}

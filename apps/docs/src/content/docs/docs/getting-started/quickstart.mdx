@@ -1,0 +1,141 @@
+---
+title: Overview 
+description: "Get started with Capgo by learning the key concepts and steps to integrate and deploy live updates to your app."
+sidebar:
+  order: 1
+next: true
+prev: false
+---
+
+import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
+
+The quickstart tutorial will walk you through the key concepts of Capgo! Concepts that will be explored include:
+
+<Steps>
+
+1. Adding an app to your Capgo account
+
+2. Integrating Capgo with your CI/CD
+
+3. Triggering bundle upload on Capgo by pushing commits 
+
+4. Configuring and customizing the Capgo bundle publishing
+
+5. Setting up your app to enable live updates via Capgo
+
+6. Deploying live updates to your app from Capgo
+
+</Steps>
+
+Simply follow the guide step-by-step, or navigate directly to the documentation for the component that interests you.
+
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/add-an-app/" ><Card title="Start the Tutorial" icon="rocket" >
+    Follow the quickstart tutorial and get up and running with Capgo in no time!
+  </Card></a>
+  <a href="/docs/getting-started/onboarding/"><Card title="CLI Onboarding Guide" icon="list-format">
+    Complete step-by-step guide for the interactive CLI onboarding process.
+  </Card></a>
+  <a href="/docs/getting-started/deploy/"><Card title="Ship updates" icon="pencil">
+    Ship updates to your app from the Capgo dashboard.
+  </Card></a>
+  <a href="/docs/getting-started/cicd-integration/"><Card title="Automate updates" icon="setting">
+    Integrate Capgo with your CI/CD and trigger bundle uploads on Capgo by pushing commits.
+  </Card></a>
+  <a href="/docs/getting-started/troubleshooting/"><Card title="Trouble Shooting" icon="open-book">
+    Common issues and how to solve them.
+  </Card></a>
+  <a href="/docs/getting-started/wrapping-up/"><Card title="Wrap Up" icon="approve-check">
+    Wrap up the tutorial and get a quick overview of what you've learned.
+  </Card></a>
+</CardGrid>
+
+<Aside type="tip">
+The Over-the-Air (OTA) update feature is applicable only for modifications made to HTML, CSS, and JavaScript files.
+
+If you make any changes to the native code, such as updates to Capacitor plugins, it is mandatory to resubmit the application to the app store for approval.
+</Aside>
+
+<Aside type="caution" title="Bundle Confidentiality">
+Treat every bundle uploaded to Capgo as a public web asset unless you enable Capgo encryption. Private channels control which devices are eligible to receive an update, but they do not make the uploaded bundle confidential. Encryption protects the delivery path and prevents third parties from producing valid encrypted updates, but shipped web assets can still be reverse engineered from the app with enough effort because the public key is distributed in the binary. See [Live Update encryption](/docs/live-updates/encryption/).
+</Aside>
+
+## Join Discord Community
+
+[Join the Capgo Discord Server!](https://discord.capgo.app)
+
+## Maintenance
+
+| Plugin version | Capacitor compatibility | Maintained        |
+| -------------- | ----------------------- | ----------------- |
+| v7.\*.\* (≥7.25.0)       | v7.\*.\*                | ✅ Fully supported                 |
+| v6.\*.\* (≥6.25.0)       | v6.\*.\*                | ✅ Fully supported |
+| v5.\*.\* (≥5.10.0)       | v5.\*.\*                | ✅ Fully supported |
+| v5.\*.\* (\<5.10.0)       | v5.\*.\*                | ⚠️ Deprecated |
+| v4.\*.\*       | v4.\*.\*                | ❌ No longer supported |
+| v3.\*.\*       | v3.\*.\*                | ❌ No longer supported     |
+| >= 8            | v4.\*.\*                | ⚠️ Deprecated due to versioning issues in our CI process     |
+
+## Store Guideline Compliance
+
+Android Google Play and iOS App Store have corresponding guidelines that have rules you should be aware of before integrating the Capacitor-updater solution within your application.
+
+### Google play
+
+Third paragraph of [Device and Network Abuse](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) topic describe that updating source code by any method other than Google Play's update mechanism is restricted. But this restriction does not apply to updating javascript bundles.
+> This restriction does not apply to code that runs in a virtual machine and has limited access to Android APIs (such as JavaScript in a webview or browser).
+
+That fully allows Capacitor-updater as it updates just the JS bundles and won't update native code.
+
+### App Store
+
+Paragraph **3.3.2**, since back in 2015's [Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/) fully allows performing over-the-air updates of JavaScript and assets -  and in its latest version (20170605) [downloadable here](https://developer.apple.com/terms/) this ruling is even broader:
+
+> Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS.
+
+Capacitor Updater allows you to follow these rules in full compliance so long as the update you push does not significantly deviate your product from its original App Store approved intent.
+
+To further remain in compliance with Apple's guidelines we suggest that App Store-distributed apps do not enable the `Force update` scenario, since in the [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) state that:
+
+> Apps must not force users to rate the app, review the app, download other apps, or other similar actions in order to access functionality, content, or use of the app.
+
+This is not a problem for the default behavior of background update, since it won't force the user to apply the new version until next time they close the app, but at least you should be aware of that role if you decide to show it.
+
+## Open source
+
+The plugin is under the LGPL-3.0 License and the back-end is AGPL-3.0 License.
+
+> 💡 LGPL-3.0 means if someone modifies the code of the plugin, it’s mandatory to publish it, in open-source with the same licensing. If you use the code without modification, that doesn’t concern you. See the issue below for more details check the link 👇
+
+<LinkCard
+	title="Licensing?"
+	href="https://github.com/Cap-go/capacitor-updater/issues/7"
+/>
+
+
+<LinkCard
+	title="Try GPTS Capgo to Get help instead of reading  the docs"
+	href="https://chat.openai.com/g/g-3dMwHbF2w-capgo-doc-gpt"
+/>
+
+
+> You can include it in your app without worrying
+
+## Final Notes
+
+If you self-host and find this tool useful, please consider supporting my work by becoming a [GitHub sponsor](https://github.com/sponsors/riderx/).
+
+I made a bet to open-source all the code I built here instead of paywalling it. By opening it up instead of fighting and hiding, I believe we can make the world a better place.
+
+To make this possible, it's necessary for all of us to do our part, including you 🥹. If Capgo cloud doesn't meet your needs, you can [back a bootstrapped maker on GitHub Sponsors](https://github.com/sponsors/riderx/) on your own terms.
+
+## Simple Maths
+
+The price of the basic plan: $14*12 = $168 a year.
+While average dev/hour = $60.
+That means that 3 hours wasted of dev time on self-host allows you to pay for a whole year, if you spent more than 3 hours you're losing money ^^
+
+## Keep going from Overview
+
+If you are using **Overview** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

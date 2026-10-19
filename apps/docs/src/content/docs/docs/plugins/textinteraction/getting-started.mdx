@@ -1,0 +1,113 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-textinteraction and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-textinteraction` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-textinteraction
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+```
+
+## Quick start
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+const result = await TextInteraction.toggle({ enabled: true });
+console.log(result);
+```
+
+## Example: isEnabled
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+const result = await TextInteraction.isEnabled();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `toggle`
+
+Toggle text interaction (selection) on the Capacitor WebView.
+
+⚠️ Disabling text interaction prevents all text input controls from working while disabled.
+Use it sparingly and re-enable when text entry is required.
+
+iOS only.
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+const result = await TextInteraction.toggle({ enabled: true });
+console.log(result);
+```
+
+## Type Reference
+
+### `TextInteractionOptions`
+```typescript
+export interface TextInteractionOptions {
+  /**
+   * Whether text interaction should be enabled or disabled. Disabling hides the
+   * magnifier lens reintroduced with iOS 15.
+   */
+  enabled: boolean;
+}
+```
+
+### `TextInteractionResult`
+```typescript
+export interface TextInteractionResult {
+  /**
+   * `true` when the platform supports toggling text interaction (iOS >= 14.5), otherwise `false`.
+   */
+  success: boolean;
+
+  /**
+   * Get the native Capacitor plugin version
+   *
+   * @returns {Promise<{ id: string }>} an Promise with version for this device
+   * @throws An error if the something went wrong
+   */
+  getPluginVersion(): Promise<{ version: string }>;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-textinteraction](/plugins/capacitor-textinteraction/) for the native capability in Using @capgo/capacitor-textinteraction, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

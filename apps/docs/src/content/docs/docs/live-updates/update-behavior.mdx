@@ -1,0 +1,231 @@
+---
+title: Update Behavior
+description: "Explore the comprehensive update behavior of Capgo, designed to deliver seamless updates to your app users without interrupting their experience."
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+When you release an update to your Capgo app, you probably want your users to receive that update as soon as possible. But you also don't want to disrupt their experience by forcing them to wait for a download or restart the app in the middle of a session.
+
+Capgo's update behavior is designed to strike a balance between delivering updates quickly and minimizing disruption to your users.
+
+## Default Update Flow
+
+By default, here's how Capgo handles app updates:
+
+<Steps>
+
+1. When the app moves to the foreground, the Capgo plugin checks to see if a new update is available. While the app stays open, it also checks again on a repeating timer controlled by `periodCheckDelay` (default 10 minutes).
+
+2. If an update is found, it's downloaded in the background while the user continues using the current version of the app.
+
+3. Once the download completes, Capgo waits for the user to background the app.
+
+4. When the user next brings the app to the foreground, they'll be running the updated version.
+
+</Steps>
+
+This flow ensures that users are always running the latest version of your app, without ever being interrupted by update prompts or forced to wait for downloads.
+
+<Aside type="tip">
+Capgo checks for updates whenever the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that interval (default 10 minutes).
+</Aside>
+
+## Why This Approach?
+
+Applying updates on a background or kill event has a few key benefits for user experience:
+
+- Users aren't interrupted by update prompts or forced to wait for downloads in the middle of a session.
+
+- Updates are applied seamlessly in between sessions, so the experience of launching the app is always fresh.
+
+- You can deliver updates frequently without worrying about disrupting active users.
+
+The main downside is that if a user backgrounds and quickly resumes your app, they may lose any unsaved state since the update was applied in between those actions.
+
+To mitigate this, we recommend:
+
+- Saving state frequently and restoring it gracefully when the app resumes.
+
+- Avoiding very frequent updates that modify large parts of the app state.
+
+- Considering customizing the update behavior for sensitive flows (see below).
+
+## Customizing When Updates Are Applied
+
+In some cases, you may want more control over exactly when an update is applied. For example, you might want to ensure a user completes an in-progress flow before updating, or coordinate an app update with a server-side change.
+
+Capgo provides a `setDelay` function that lets you specify conditions that must be met before an update is installed:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+This example would delay installing an update until after June 1, 2023 AND the app has been backgrounded for at least 60 seconds.
+
+The available delay conditions are:
+
+- `date`: Wait until after a specific date/time to apply the update.
+- `background`: Wait a minimum duration after the app is backgrounded to apply the update.
+- `nativeVersion`: Wait for a native binary with a minimum version to be installed before applying the update.
+- `kill`: Wait until the next app kill event to apply the update.
+
+You can mix and match these conditions to precisely control when an update is installed.
+
+<Aside type="danger">
+Note that the `kill` condition currently triggers the update after the first kill event, not the next background event like the other conditions. This inconsistency will be fixed in a future release.
+</Aside>
+
+## Applying Updates Immediately
+
+For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `autoUpdate` policy in your Capacitor config.
+
+<Aside type="caution" title="Required for instant apply: --delta, autoSplashscreen, and SplashScreen">
+`"atInstall"`, `"onLaunch"`, and `"always"` apply the update while the user is waiting. Use [Delta updates](/docs/live-updates/differentials/) so only changed files download. A full zip upload slows the user experience.
+
+These modes also require `@capacitor/splash-screen` and `autoSplashscreen: true` with `SplashScreen.launchAutoHide: false`. Without the splash plugin, the user can see a flicker or a stale UI while the update applies.
+
+When `autoUpdate` is set to `"atInstall"`, `"onLaunch"`, or `"always"` in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta updates automatically, and in interactive environments it prompts you to confirm before uploading. Legacy `directUpdate` config is still detected. Use `--no-delta` to force a full bundle upload.
+
+```shell
+npx @capgo/cli@latest bundle upload --delta
+```
+</Aside>
+
+`autoUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports these values:
+
+- `false` or `'off'`: Disable automatic update checks
+- `true` or `'atBackground'` (default): Check and download automatically on each foreground check, then apply the update the next time the app moves to background
+- `'atInstall'`: Apply immediately only after a fresh install or native app store update; otherwise use `"atBackground"` behavior
+- `'onLaunch'`: Apply immediately only when the app is brought to the foreground from a killed state (cold start). After that first check, fall back to `"atBackground"` behavior
+- `'always'`: Check on every foreground transition and apply immediately whenever an update is available
+- `'onlyDownload'`: Check and download automatically, emit `updateAvailable`, and never set the next bundle or apply an update automatically
+
+## Test a Native Build Without Live Updates
+
+See [Test Native Builds Without Live Updates](/docs/live-updates/testing-native-builds-without-live-updates/) for the native-version, channel-policy, and CI configuration safeguards.
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'always', // or 'atInstall' for updates only on app install/update
+      autoSplashscreen: true,
+      keepUrlPathAfterReload: true,
+    },
+    SplashScreen: {
+      launchAutoHide: false, // Required for instant apply with autoSplashscreen
+    },
+  },
+};
+
+export default config;
+```
+
+<Aside type="note">
+**Important**: instant apply modes only apply updates when the plugin actually checks for them. By default, checks run when the app moves to the foreground and on a repeating timer while the app stays open. `periodCheckDelay` controls that interval (default 10 minutes).
+</Aside>
+
+With `autoUpdate: 'always'`, Capgo checks on every foreground transition and immediately applies an update as soon as the download completes during that check, even if the user is actively using the app. Periodic checks controlled by `periodCheckDelay` can trigger the same immediate apply behavior while the app stays open.
+
+Note that because `autoUpdate` is a native configuration, instant apply modes require some additional handling in your JavaScript code.
+
+<Aside type="caution">
+Instant apply modes require `@capacitor/splash-screen` and `autoSplashscreen: true`. Set `launchAutoHide: false` in the SplashScreen configuration (as shown above) so the splash screen stays visible until the update finishes.
+</Aside>
+
+## Downloading Automatically Without Applying
+
+If you want Capgo to check and download updates automatically but never apply them automatically, use `autoUpdate: 'onlyDownload'`:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'onlyDownload',
+    },
+  },
+};
+```
+
+In this mode, the plugin emits `updateAvailable` after a bundle is downloaded. Your app can then decide when to call `CapacitorUpdater.set()` or show its own update prompt.
+
+## Automatic Splashscreen Handling
+
+Instant apply modes (`"atInstall"`, `"onLaunch"`, `"always"`) require `autoSplashscreen` and `@capacitor/splash-screen` (available since version 7.6.0). Install the plugin, then keep the splash visible until Capgo hides it:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'always', // or 'atInstall'
+      autoSplashscreen: true, // Automatically hide splashscreen
+      keepUrlPathAfterReload: true,
+    },
+    SplashScreen: {
+      launchAutoHide: false,
+    },
+  },
+};
+```
+
+When `autoSplashscreen` is enabled:
+- The plugin automatically hides the splashscreen when an update is applied
+- The plugin automatically hides the splashscreen when no update is needed
+- You don't need to manually listen for `appReady` events or call `SplashScreen.hide()`
+
+### Extra work after the splash hides
+
+Keep `autoSplashscreen: true`. If you need extra logic after the update is ready, listen for `appReady` as well. Do not skip the splash plugin or `autoSplashscreen` for this:
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Update is applied. autoSplashscreen already hid the splash.
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+The `appReady` event fires once the app has finished initializing and applying any pending updates.
+
+Set `keepUrlPathAfterReload` to `true` when using an instant apply mode. This preserves the current URL path when the app is reloaded due to an update.
+
+Using an instant apply mode can be useful for delivering critical bug fixes or security patches, but it comes with some tradeoffs:
+
+- The user may see a brief flicker or loading state as the update is applied if `@capacitor/splash-screen` is missing or `autoSplashscreen` is not enabled.
+- If the update modifies the app state or UI, the user may see a disruptive change in the middle of a session.
+- The user's location in the app may be lost if `keepUrlPathAfterReload` is not set, potentially disorienting them.
+- You'll need to carefully handle saving and restoring state to ensure a smooth transition.
+
+If you do enable instant apply, we recommend:
+
+- Uploading with `npx @capgo/cli@latest bundle upload --delta` so the download does not slow the user experience.
+- Installing `@capacitor/splash-screen` and setting `autoSplashscreen: true` with `launchAutoHide: false`.
+- Setting `keepUrlPathAfterReload` to `true` to preserve the user's location in the app.
+- Saving and restoring the app state as needed to avoid losing user progress.
+- Thoroughly testing your app's update behavior to ensure there are no jarring transitions, lost state, or disorienting location changes.
+
+In most cases, the default update behavior provides the best balance of delivering updates quickly and minimizing disruption. But for apps with specific needs, Capgo provides the flexibility to customize when and how updates are applied.
+
+## Keep going from Update Behavior
+
+If you are using **Update Behavior** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types, and [Getting Started](/docs/plugins/updater/getting-started/) for the implementation detail in Getting Started.

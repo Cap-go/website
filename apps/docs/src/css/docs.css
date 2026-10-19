@@ -1,0 +1,824 @@
+@layer base, starlight, theme, components, utilities;
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Match landing: navy + blue radial at the top, charcoal after the first screen. */
+:root:not([data-theme='light']) {
+  --sl-color-black: #1a1a1a;
+  --sl-color-bg: #1a1a1a;
+  --page-bg-gradient-dark:
+    radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%), linear-gradient(180deg, #0d1525 0%, #0d1525 58vh, #1a1a1a 100vh);
+}
+
+:root:not([data-theme='light']),
+:root:not([data-theme='light']) body {
+  background-color: #1a1a1a;
+}
+
+:root:not([data-theme='light']) body {
+  background-image: var(--page-bg-gradient-dark);
+  background-repeat: no-repeat;
+}
+
+@theme {
+  --font-sans: 'Atkinson Hyperlegible';
+  /* Your preferred code font. Starlight uses system monospace fonts by default. */
+  --font-mono: 'IBM Plex Mono';
+
+  /* Color for documentation */
+  --color-accent-50: var(--color-blue-50);
+  --color-accent-100: var(--color-blue-100);
+  --color-accent-200: var(--color-blue-200);
+  --color-accent-300: var(--color-blue-300);
+  --color-accent-400: var(--color-blue-400);
+  --color-accent-500: var(--color-blue-500);
+  --color-accent-600: var(--color-blue-600);
+  --color-accent-700: var(--color-blue-700);
+  --color-accent-800: var(--color-blue-800);
+  --color-accent-900: var(--color-blue-900);
+  --color-accent-950: var(--color-blue-950);
+
+  --color-gray-50: oklch(0.984 0.003 247.858);
+  --color-gray-100: oklch(0.968 0.007 247.896);
+  --color-gray-200: oklch(0.929 0.013 255.508);
+  --color-gray-300: oklch(0.869 0.022 252.894);
+  --color-gray-400: oklch(0.704 0.04 256.788);
+  --color-gray-500: oklch(0.554 0.046 257.417);
+  --color-gray-600: oklch(0.446 0.043 257.281);
+  --color-gray-700: oklch(0.372 0.044 257.287);
+  --color-gray-800: oklch(0.279 0.041 260.031);
+  --color-gray-900: oklch(0.208 0.042 265.755);
+  --color-gray-950: oklch(0.129 0.042 264.695);
+
+  /* Custom Font Sizes */
+  --font-size-tiny: 0.4rem;
+
+  /* Custom Breakpoints */
+  --breakpoint-tab: 361px;
+  --breakpoint-iv: 402px;
+  --breakpoint-ise: 667px;
+  --breakpoint-i8: 736px;
+  --breakpoint-i8p: 736px;
+  --breakpoint-ix: 812px;
+  --breakpoint-ip10: 1024px;
+  --breakpoint-ip12: 1112px;
+  --breakpoint-mbp: 1440px;
+  --breakpoint-4xl: 1920px;
+
+  /* Pumpkin Orange */
+  --color-pumpkin-orange-50: #ffa443;
+  --color-pumpkin-orange-100: #ff9a39;
+  --color-pumpkin-orange-200: #ff902f;
+  --color-pumpkin-orange-300: #ff8625;
+  --color-pumpkin-orange-400: #ff7c1b;
+  --color-pumpkin-orange-500: #ff7211;
+  --color-pumpkin-orange-600: #f56807;
+  --color-pumpkin-orange-700: #eb5e00;
+  --color-pumpkin-orange-800: #e15400;
+  --color-pumpkin-orange-900: #d74a00;
+
+  /* Muted Blue */
+  --color-muted-blue-50: #779dcc;
+  --color-muted-blue-100: #6d93c2;
+  --color-muted-blue-200: #6389b8;
+  --color-muted-blue-300: #597fae;
+  --color-muted-blue-400: #4f75a4;
+  --color-muted-blue-500: #456b9a;
+  --color-muted-blue-600: #3b6190;
+  --color-muted-blue-700: #315786;
+  --color-muted-blue-800: #274d7c;
+  --color-muted-blue-900: #1d4372;
+
+  /* Azure */
+  --color-azure-50: #43d0ff;
+  --color-azure-100: #39c6ff;
+  --color-azure-200: #2fbcff;
+  --color-azure-300: #25b2ff;
+  --color-azure-400: #1ba8ff;
+  --color-azure-500: #119eff;
+  --color-azure-600: #0794f5;
+  --color-azure-700: #008aeb;
+  --color-azure-800: #0080e1;
+  --color-azure-900: #0076d7;
+
+  /* Vista Blue */
+  --color-vista-blue-50: #baffd8;
+  --color-vista-blue-100: #b0fcce;
+  --color-vista-blue-200: #a6f2c4;
+  --color-vista-blue-300: #9ce8ba;
+  --color-vista-blue-400: #92deb0;
+  --color-vista-blue-500: #88d4a6;
+  --color-vista-blue-600: #7eca9c;
+  --color-vista-blue-700: #74c092;
+  --color-vista-blue-800: #6ab688;
+  --color-vista-blue-900: #60ac7e;
+
+  /* Dusk */
+  --color-dusk-50: #8384a3;
+  --color-dusk-100: #797a99;
+  --color-dusk-200: #6f708f;
+  --color-dusk-300: #656685;
+  --color-dusk-400: #5b5c7b;
+  --color-dusk-500: #515271;
+  --color-dusk-600: #474867;
+  --color-dusk-700: #3d3e5d;
+  --color-dusk-800: #333453;
+  --color-dusk-900: #292a49;
+
+  /* Powder Blue */
+  --color-powder-blue-50: #e8ffff;
+  --color-powder-blue-100: #deffff;
+  --color-powder-blue-200: #d4fbfe;
+  --color-powder-blue-300: #caf1f4;
+  --color-powder-blue-400: #c0e7ea;
+  --color-powder-blue-500: #b6dde0;
+  --color-powder-blue-600: #acd3d6;
+  --color-powder-blue-700: #a2c9cc;
+  --color-powder-blue-800: #98bfc2;
+  --color-powder-blue-900: #8eb5b8;
+
+  /* Corn Flower */
+  --color-corn-flower-50: #9aa8ff;
+  --color-corn-flower-100: #909eff;
+  --color-corn-flower-200: #8694ff;
+  --color-corn-flower-300: #7c8af5;
+  --color-corn-flower-400: #7280eb;
+  --color-corn-flower-500: #6876e1;
+  --color-corn-flower-600: #5e6cd7;
+  --color-corn-flower-700: #5462cd;
+  --color-corn-flower-800: #4a58c3;
+  --color-corn-flower-900: #404eb9;
+
+  /* Misty Rose */
+  --color-misty-rose-50: #ffffff;
+  --color-misty-rose-100: #ffffff;
+  --color-misty-rose-200: #fffff9;
+  --color-misty-rose-300: #fff8ef;
+  --color-misty-rose-400: #ffeee5;
+  --color-misty-rose-500: #f8e4db;
+  --color-misty-rose-600: #eedad1;
+  --color-misty-rose-700: #e4d0c7;
+  --color-misty-rose-800: #dac6bd;
+  --color-misty-rose-900: #d0bcb3;
+
+  /* Custom Black */
+  --color-black: #000000;
+  --color-black-light: #333333;
+  --color-black-dark: #373738;
+
+  /* Custom White */
+  --color-white: #ffffff;
+
+  /* Custom Grey */
+  --color-grey: #999999;
+  --color-grey-medium: #1e1e1e;
+  --color-grey-dark: #515271;
+
+  /* Custom Green */
+  --color-green: #88d4a6;
+}
+
+.starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
+  border-color: var(--color-gray-300);
+}
+@supports (border-color: color-mix(in srgb, --theme(--color-gray-500) 30%, transparent)) {
+  .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
+    border-color: color-mix(in srgb, var(--color-gray-500) 30%, transparent);
+  }
+}
+
+@supports (border-color: color-mix(in srgb, --theme(--color-gray-500) 12%, transparent)) {
+  .starlight-aside code:not(:where(.not-content *)) {
+    background-color: color-mix(in srgb, var(--color-gray-500) 12%, transparent);
+  }
+}
+
+@media (min-width: 50rem) {
+  .card-grid.stagger > :nth-child(2n) {
+    transform: translateY(var(--stagger-height));
+  }
+}
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* MicroCard component styles */
+.micro-card {
+  width: 33.333333333%;
+  --sl-card-border: var(--sl-color-blue);
+  --sl-card-bg: var(--sl-color-blue-low);
+  --sl-card-border-rgb: 62, 138, 204;
+  border: 2px solid var(--sl-color-gray-5);
+  background-color: var(--sl-color-black);
+  padding: clamp(0.5rem, calc(0.0625rem + 1.5vw), 1.25rem);
+  margin-top: 0;
+  flex-direction: column;
+  gap: clamp(0.25rem, calc(0.0625rem + 0.5vw), 0.5rem);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer !important;
+  overflow: hidden;
+}
+
+.micro-card-clickable:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  border-color: var(--sl-card-border);
+  background-color: hsl(224, 10%, 10%);
+}
+
+/* Light mode hover background */
+:root[data-theme='light'] .micro-card-clickable:hover {
+  background-color: hsl(224, 10%, 95%);
+}
+
+.micro-card-clickable:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(var(--sl-card-border-rgb), 0.12);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.micro-card-clickable:hover::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--sl-card-border);
+  border-radius: 2px;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: micro-card-pulse 1.5s infinite;
+  z-index: 2;
+}
+
+@keyframes micro-card-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--sl-card-border-rgb, 100, 100, 255), 0.6);
+    opacity: 1;
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--sl-card-border-rgb, 100, 100, 255), 0);
+    opacity: 0.7;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--sl-card-border-rgb, 100, 100, 255), 0);
+    opacity: 1;
+  }
+}
+
+.micro-card-clickable:active {
+  transform: translateY(0) scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease;
+}
+
+.micro-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 3;
+}
+
+.micro-card:nth-child(4n + 1) {
+  --sl-card-border: var(--sl-color-orange);
+  --sl-card-bg: var(--sl-color-orange-low);
+  --sl-card-border-rgb: 255, 146, 43;
+}
+.micro-card:nth-child(4n + 3) {
+  --sl-card-border: var(--sl-color-green);
+  --sl-card-bg: var(--sl-color-green-low);
+  --sl-card-border-rgb: 62, 204, 143;
+}
+.micro-card:nth-child(4n + 4) {
+  --sl-card-border: var(--sl-color-red);
+  --sl-card-bg: var(--sl-color-red-low);
+  --sl-card-border-rgb: 248, 113, 113;
+}
+.micro-card:nth-child(4n + 5) {
+  --sl-card-border: var(--sl-color-blue);
+  --sl-card-bg: var(--sl-color-blue-low);
+  --sl-card-border-rgb: 62, 138, 204;
+}
+.micro-card .title {
+  font-weight: 600;
+  font-size: var(--sl-text-h4);
+  color: var(--sl-color-white);
+  line-height: var(--sl-line-height-headings);
+  gap: 1rem;
+  align-items: center;
+}
+.micro-card .icon {
+  border: 1px solid var(--sl-card-border);
+  background-color: var(--sl-card-bg);
+  padding: 0.2em;
+  border-radius: 0.25rem;
+}
+.micro-card .body {
+  margin: 0;
+  font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
+}
+.custom-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+}
+
+.custom-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sl-markdown-content,
+.main-frame {
+  position: relative;
+}
+
+/* Sidebar transparent to show gradient - desktop only to prevent mobile overlay being see-through */
+@media (min-width: 50rem) {
+  .sidebar-pane {
+    background-color: transparent !important;
+    border-inline-end-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Dark mode sidebar border */
+  :root:not([data-theme='light']) .sidebar-pane {
+    border-inline-end-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Light mode sidebar border - more whitish/greyish */
+  :root[data-theme='light'] .sidebar-pane {
+    border-inline-end-color: rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+/* Header sits on the body wash in dark mode (no navy/charcoal seam). Light mode keeps a solid bar for the light logo. */
+.header {
+  background-color: #111827 !important;
+}
+
+:root:not([data-theme='light']) .header {
+  background-color: #0d1525 !important;
+  background-image: radial-gradient(1100px 640px at 50% -80px, rgba(59, 130, 246, 0.22) 0%, transparent 72%) !important;
+  background-repeat: no-repeat !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.header #language-menu-button {
+  height: 44.5px;
+  background-color: transparent !important;
+  border: none !important;
+  color: #eceef2 !important;
+}
+.header #language-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+@media (max-width: 50rem) {
+  .header button[data-open-modal],
+  .header .DocSearch-Button {
+    color: var(--sl-color-white) !important;
+  }
+}
+starlight-theme-select label {
+  color: #eceef2 !important;
+}
+starlight-theme-select label select {
+  border: none !important;
+}
+starlight-theme-select label select:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Make logo background transparent to blend with header */
+.header .site-title img,
+.header .logo img,
+.header img[src*='logo'] {
+  background-color: transparent !important;
+  mix-blend-mode: normal;
+  height: 5rem !important;
+  width: auto !important;
+}
+
+/* Ensure logo container is also transparent */
+.header .site-title,
+.header .logo {
+  background-color: transparent !important;
+}
+
+/* FrameworkSelector + ConditionalQuestionnaire styles.
+   These MUST live in this file (included via Starlight customCss config).
+   Astro drops component <style> blocks from MDX content pages during
+   static build — the HTML gets scoped class names but zero CSS rules
+   end up in the built CSS files. */
+
+.framework-selector {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+  gap: 10px;
+  margin: 1rem auto;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+}
+
+.framework-selector .framework-button {
+  flex: 0 0 calc(25% - 7.5px);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background-color: var(--sl-color-black);
+  color: var(--sl-color-white);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+  height: 120px;
+  max-width: 140px;
+  box-sizing: border-box;
+  margin: 0 !important;
+  --framework-border: var(--sl-color-blue);
+  --framework-border-rgb: 62, 138, 204;
+}
+
+.framework-selector .framework-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-color: var(--framework-border);
+  background-color: hsl(224, 10%, 10%);
+}
+
+:root[data-theme='light'] .framework-selector .framework-button:hover {
+  background-color: hsl(224, 10%, 95%);
+}
+
+.framework-selector .framework-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+}
+
+.framework-selector .framework-button.selected {
+  border-color: var(--framework-border);
+  background-color: var(--framework-border);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--framework-border-rgb), 0.4);
+}
+
+.framework-selector .framework-button:focus-visible {
+  outline: 2px solid var(--sl-color-blue);
+  outline-offset: 2px;
+}
+
+.framework-selector .framework-button:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(var(--framework-border-rgb), 0.12);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.framework-selector .framework-button[data-framework='js'] {
+  --framework-border: #fbbf24;
+  --framework-border-rgb: 251, 191, 36;
+}
+.framework-selector .framework-button[data-framework='js'].selected {
+  color: black;
+}
+.framework-selector .framework-button[data-framework='ts'] {
+  --framework-border: #2563eb;
+  --framework-border-rgb: 37, 99, 235;
+}
+.framework-selector .framework-button[data-framework='react'] {
+  --framework-border: #61dafb;
+  --framework-border-rgb: 97, 218, 251;
+}
+.framework-selector .framework-button[data-framework='angular'] {
+  --framework-border: #ef4444;
+  --framework-border-rgb: 239, 68, 68;
+}
+.framework-selector .framework-button[data-framework='vue'] {
+  --framework-border: #4fc08d;
+  --framework-border-rgb: 79, 192, 141;
+}
+.framework-selector .framework-button[data-framework='svelte'] {
+  --framework-border: #ff6b35;
+  --framework-border-rgb: 255, 107, 53;
+}
+.framework-selector .framework-button[data-framework='qwik'] {
+  --framework-border: #ac7ef4;
+  --framework-border-rgb: 172, 126, 244;
+}
+
+.framework-selector .framework-icon {
+  position: relative;
+  z-index: 2;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.framework-selector .framework-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.framework-selector .framework-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+  position: relative;
+  z-index: 2;
+  height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .framework-selector .framework-button {
+    flex: 0 0 calc(50% - 5px);
+    height: 100px;
+  }
+  .framework-selector .framework-icon {
+    height: 2rem;
+    width: 2rem;
+  }
+  .framework-selector .framework-name {
+    font-size: 0.75rem;
+    height: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .framework-selector .framework-button {
+    flex: 0 0 calc(100% - 0px);
+    max-width: 200px;
+  }
+}
+
+/* ConditionalQuestionnaire — scoped to #questionnaire-steps to avoid
+   overriding Starlight's own .sl-steps rules on other pages. */
+#questionnaire-steps .sl-steps {
+  --bullet-size: calc(var(--sl-line-height) * 1rem);
+  --bullet-margin: 0.375rem;
+  list-style: none;
+  counter-reset: steps-counter var(--sl-steps-start, 0);
+  padding-inline-start: 0;
+}
+
+#questionnaire-steps .sl-steps > ol {
+  list-style: none;
+  padding-inline-start: 0;
+  margin: 0;
+}
+
+#questionnaire-steps .sl-steps > ol > li {
+  counter-increment: steps-counter;
+  position: relative;
+  padding-inline-start: calc(var(--bullet-size) + 1rem);
+  padding-bottom: 1px;
+  min-height: calc(var(--bullet-size) + var(--bullet-margin));
+}
+
+#questionnaire-steps .sl-steps > ol > li + li {
+  margin-top: 0;
+}
+
+#questionnaire-steps .sl-steps > ol > li::before {
+  content: counter(steps-counter);
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: var(--bullet-size);
+  height: var(--bullet-size);
+  line-height: var(--bullet-size);
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  text-align: center;
+  color: var(--sl-color-white);
+  background-color: var(--sl-color-gray-6);
+  border-radius: 99rem;
+  box-shadow: inset 0 0 0 1px var(--sl-color-gray-5);
+}
+
+#questionnaire-steps .sl-steps > ol > li::after {
+  --guide-width: 1px;
+  content: '';
+  position: absolute;
+  top: calc(var(--bullet-size) + var(--bullet-margin));
+  bottom: var(--bullet-margin);
+  inset-inline-start: calc((var(--bullet-size) - var(--guide-width)) / 2);
+  width: var(--guide-width);
+  background-color: var(--sl-color-hairline-light);
+}
+
+#questionnaire-steps .sl-steps > ol > li > :first-child {
+  --lh: calc(1em * var(--sl-line-height));
+  --shift-y: calc(0.5 * (var(--bullet-size) - var(--lh)));
+  transform: translateY(var(--shift-y));
+  margin-bottom: var(--shift-y);
+}
+
+.question-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.question-btn {
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-gray-1);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: var(--sl-text-body);
+  margin: 0;
+}
+
+.question-btn:hover {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-gray-5);
+}
+
+.question-btn.selected {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-blue);
+  color: white;
+}
+
+.question-btn:focus-visible {
+  outline: 2px solid var(--sl-color-blue);
+  outline-offset: 2px;
+}
+
+.script-type-buttons {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.script-type-buttons .question-btn {
+  font-family: monospace;
+}
+
+.react-framework-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.react-framework-buttons .framework-button {
+  flex: 0 0 calc(25% - 7.5px);
+  max-width: 200px;
+  min-height: 120px;
+  padding: 1rem;
+  border: 2px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background-color: var(--sl-color-black);
+  color: var(--sl-color-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+}
+
+.react-framework-buttons .framework-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-framework-buttons .framework-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.react-framework-buttons .framework-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.react-framework-buttons .framework-button:hover {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-gray-6);
+}
+
+.react-framework-buttons .framework-button.selected {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-blue);
+  color: white;
+}
+
+.react-framework-buttons .framework-button:focus-visible {
+  outline: 2px solid var(--sl-color-blue);
+  outline-offset: 2px;
+}
+
+.questionnaire-warning {
+  margin-top: 1rem;
+}
+
+.questionnaire-code {
+  margin-top: 1rem;
+}
+
+.questionnaire-code pre {
+  background: var(--sl-color-gray-6);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.questionnaire-code code {
+  font-family: var(--sl-font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-1);
+  white-space: pre-wrap;
+  line-height: 1.1;
+  display: block;
+}
+
+.questionnaire-code .diff-line {
+  padding: 0 0.5rem;
+  margin: 0;
+  line-height: 1.1;
+  min-height: 1.1em;
+}
+
+.questionnaire-code .diff-added {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border-left: 3px solid #22c55e;
+  padding: 0 calc(0.5rem - 3px);
+  line-height: 1.1;
+  min-height: 1.1em;
+}
+
+.questionnaire-code .diff-removed {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-left: 3px solid #ef4444;
+  padding: 0 calc(0.5rem - 3px);
+  line-height: 1.1;
+  min-height: 1.1em;
+}

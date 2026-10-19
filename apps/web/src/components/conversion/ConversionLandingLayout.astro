@@ -1,0 +1,99 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import ConversionRelatedLinks from '@/components/conversion/ConversionRelatedLinks.astro'
+import type { ConversionLink } from '@/components/conversion/ConversionRelatedLinks.astro'
+import m from '@/copy/messages'
+import { formatPageDate } from '@/data/pageDates'
+
+export interface ConversionSection {
+  title: string
+  paragraphs: string[]
+  listItems?: string[]
+  htmlParagraphs?: string[]
+}
+
+interface Props {
+  content: {
+    title: string
+    description: string
+    keywords?: string
+    ldJSON?: unknown
+    image?: string
+  }
+  heroTitle: string
+  heroSubtitle: string
+  sections: ConversionSection[]
+  relatedLinks: ConversionLink[]
+  locale: string
+  /** Rendered as a visible FAQ; pass the same list to createFAQPageLdJson. */
+  faq?: Array<{ question: string; answer: string }>
+  /** Last content update, YYYY-MM-DD. */
+  updatedAt?: string
+}
+
+const { content, heroTitle, heroSubtitle, sections, relatedLinks, locale, faq = [], updatedAt } = Astro.props
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{heroTitle}</h1>
+        <p class="mx-auto max-w-2xl text-xl text-gray-300">{heroSubtitle}</p>
+        {updatedAt && (
+          <p class="mt-4 text-sm text-gray-400">
+            {m.page_last_updated({}, { locale })} <time datetime={updatedAt}>{formatPageDate(updatedAt, locale)}</time>
+          </p>
+        )}
+      </div>
+
+      <div class="mb-12 space-y-8">
+        {
+          sections.map((section) => (
+            <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+              <h2 class="mb-4 text-2xl font-bold text-gray-100">{section.title}</h2>
+              <div class="space-y-4 text-gray-300">
+                {section.paragraphs.map((p) => (
+                  <p>{p}</p>
+                ))}
+                {section.htmlParagraphs?.map((p) => (
+                  <p set:html={p} />
+                ))}
+                {section.listItems?.length ? (
+                  <ul class="ml-6 list-disc space-y-2 text-gray-400">
+                    {section.listItems.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      {faq.length > 0 && (
+        <section class="mb-12" aria-labelledby="conversion-faq-title">
+          <h2 id="conversion-faq-title" class="mb-6 text-2xl font-bold text-gray-100">
+            {m.compare_faq_title({}, { locale })}
+          </h2>
+          <dl class="space-y-4">
+            {faq.map((item) => (
+              <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+                <dt class="text-lg font-semibold text-gray-100">{item.question}</dt>
+                <dd class="mt-2 text-gray-300">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
+      <ConversionRelatedLinks title={m.conversion_related_links_title({}, { locale })} links={relatedLinks} />
+
+      <div class="mt-12 rounded-[1.45rem] bg-gray-800/80 px-8 py-10 text-center ring-1 ring-gray-700">
+        <SignupCta lead={m.signup_cta_lead_conversion({}, { locale: Astro.locals.locale })} id="conversion-signup-cta" humanSupport />
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,54 @@
+---
+title: Migrate from Ionic Identity Vault
+description: "Migrate Ionic Identity Vault credential-vault flows to Capgo Native Biometric: secure credential storage and biometric-protected reads."
+sidebar:
+  order: 11
+---
+
+Native Biometric provides a complete replacement for the secure credential-vault part of Ionic Identity Vault. It does more than prompt for biometrics: it saves, checks, retrieves, and deletes credentials with native Keychain or Keystore protection. With biometric access control enabled, protected reads require Face ID, Touch ID, or Android biometrics before your app receives the credential.
+
+Use Native Biometric directly for tokens and credential-vault flows. Your app decides when to request a protected read to apply its timeout and lifecycle policy. If you also need a broad encrypted database for data beyond credentials, add [Fast SQL](/docs/plugins/fast-sql/) or [Data Storage SQLite](/docs/plugins/data-storage-sqlite/); that is optional for a credential-vault migration.
+
+Automatic timeout locks and background privacy screens are application-layer policy, so preserve or recreate them in your app. Custom-passcode and memory-only vault modes are not supported by Native Biometric; use a separate application storage and encryption design if you need them.
+
+## Capgo replacements at a glance
+
+| Ionic enterprise plugin | Capgo replacement | Migration guide |
+| --- | --- | --- |
+| Secure Storage | [@capgo/capacitor-fast-sql](/docs/plugins/fast-sql/) or [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) | [Secure Storage migration](/docs/upgrade/from-ionic-secure-storage/) |
+| Auth Connect | [@capgo/capacitor-social-login](/docs/plugins/social-login/) | [Auth Connect migration](/docs/upgrade/from-ionic-auth-connect/) |
+| Identity Vault credential-vault flows | [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) — direct replacement | You are here |
+
+## What Native Biometric covers
+
+- **Secure credential vault:** save, retrieve, check, and delete credentials for a server or account.
+- **Biometric-gated unlock:** `getSecureCredentials` shows the native biometric prompt before protected credentials can be read.
+- **App-controlled lock policy:** call the protected read when the app resumes, after a timeout, or before a sensitive action.
+- **Separate identity prompt:** `verifyIdentity` supports device-passcode fallback on iOS; protected credential reads remain biometric-only.
+- **Access-control choices:** choose whether biometric enrollment changes invalidate protected credentials.
+
+## Migration steps
+
+1. **Install Native Biometric** and sync native code.
+
+```bash
+npm install @capgo/capacitor-native-biometric
+npx cap sync
+```
+
+2. **Save the access and refresh tokens or other credentials** with biometric access control enabled.
+3. **Use `getSecureCredentials` to unlock protected credentials** when the app resumes, after an inactivity timeout, or before a sensitive action.
+4. **Keep timeout and privacy-screen behavior in your app layer.** Custom-passcode and memory-only modes are unsupported by Native Biometric; use a separate application storage and encryption design if required.
+5. **Use `isCredentialsSaved` and `deleteCredentials`** for onboarding, locked-state, and logout flows.
+6. **Migrate stored secrets on first launch** by reading from Identity Vault and writing them with Native Biometric.
+7. **Remove Ionic Identity Vault** from your dependencies and native configuration.
+
+## Next steps
+
+- [Native Biometric getting started](/docs/plugins/native-biometric/getting-started/)
+- [Secure Storage migration](/docs/upgrade/from-ionic-secure-storage/)
+- [Auth Connect migration](/docs/upgrade/from-ionic-auth-connect/)
+
+## Keep going from Migrate from Ionic Identity Vault
+
+If you are using **Migrate from Ionic Identity Vault** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

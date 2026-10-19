@@ -1,0 +1,304 @@
+---
+title: "Organization Security"
+description: "Configure comprehensive security policies for your organization including 2FA enforcement, password policies, and API key controls to protect your apps and data."
+sidebar:
+  order: 11
+---
+
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
+
+Capgo provides comprehensive security controls that allow organization administrators to enforce security policies across all members. These features help you meet compliance requirements, protect sensitive data, and maintain a strong security posture.
+
+## Overview
+
+The Organization Security settings allow super admins to configure:
+
+- **Two-Factor Authentication (2FA) Enforcement** - Require all members to enable 2FA
+- **Password Policy** - Set password complexity requirements
+- **API Key Security** - Enforce secure API keys and expiration policies
+- **SSO (Enterprise only)** - SAML 2.0 single sign-on for your domain. Available on the Enterprise plan. See [SSO setup guide](/docs/webapp/enterprise-sso/).
+
+![Organization Security Settings](/org_security.webp)
+
+The Security page is organized into clearly labeled sections:
+1. **Security Tab** - Access all security settings from the Organization settings sidebar
+2. **2FA Enforcement** - Toggle and status display for two-factor authentication requirements
+3. **Password Policy** - Configure password complexity rules for organization members
+4. **API Key Policy** - Settings for secure API keys and expiration requirements
+5. **API Key Expiration** - Control whether API keys must have expiration dates
+
+<Aside type="note">
+
+Only users with **super_admin** role can configure organization security settings. Other members can view their compliance status but cannot modify the policies.
+
+</Aside>
+
+## Accessing Security Settings
+
+<Steps>
+
+1. Navigate to your organization settings by clicking on **Settings** in the sidebar
+2. Click on the **Organization** tab at the top of the settings page
+3. Select the **Security** tab from the organization navigation bar (highlighted with a shield icon)
+
+</Steps>
+
+## Two-Factor Authentication (2FA) Enforcement
+
+2FA enforcement requires all organization members to have two-factor authentication enabled on their accounts. This adds a critical layer of security by requiring both a password and a verification code.
+
+### What Happens When 2FA is Enforced
+
+- Members without 2FA are **immediately blocked** from accessing organization apps
+- Both the web dashboard and CLI enforce this requirement
+- New members must enable 2FA before they can access organization resources
+- The system tracks which members have 2FA enabled in real-time
+
+### Understanding the 2FA Status Panel
+
+The Security page displays a comprehensive **Members 2FA Status** panel that shows:
+
+- **Total Members** - The total number of members in your organization
+- **2FA Enabled** (green indicator) - Members who have successfully enabled two-factor authentication
+- **2FA Not Enabled** (orange warning indicator) - Members who still need to set up 2FA
+
+When members don't have 2FA enabled, they appear in a **Members Without 2FA** warning box. This box shows:
+- Each member's email address and their role in the organization
+- A **Copy Email List** button to quickly copy all affected email addresses for communication
+
+### Enabling 2FA Enforcement
+
+<Steps>
+
+1. Navigate to **Organization Settings > Security**
+2. Locate the **Require 2FA for All Members** section at the top of the page
+3. Review the **Members 2FA Status** panel to see which members will be affected
+4. If there are members without 2FA, use the **Copy Email List** button to notify them before enabling
+5. Toggle the switch next to **Require 2FA for All Members** to enable enforcement
+6. The toggle will show **Disabled** or **Enabled** status on the right side
+
+</Steps>
+
+<Aside type="caution">
+
+Before enabling 2FA enforcement:
+- Notify affected members in advance and share the [2FA setup guide](/docs/webapp/mfa/)
+- Give them time to enable 2FA on their accounts
+- Members without 2FA will lose access immediately when you enable enforcement
+- Consider reaching out to members listed in the "Members Without 2FA" warning box
+
+</Aside>
+
+### CLI Support for 2FA Enforcement
+
+You can also manage 2FA enforcement via the CLI:
+
+```shell
+# Enable 2FA enforcement
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
+
+# Disable 2FA enforcement
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
+
+# Check member 2FA status
+npx @capgo/cli organization members YOUR_ORG_ID
+```
+
+For detailed information about 2FA enforcement, see the [2FA Enforcement guide](/docs/webapp/2fa-enforcement/).
+
+## Password Policy
+
+Password policies allow you to enforce password complexity requirements for all organization members. When a member's password doesn't meet the policy requirements, they must update their password before accessing organization resources.
+
+The Password Policy section (marked with indicator **3** in the overview image) provides a simple toggle to enforce password requirements across your organization.
+
+### How Password Policy Works
+
+When you enable the password policy:
+- All organization members must meet the password complexity requirements
+- Users who don't meet the requirements will be locked out until they update their password
+- The policy applies to all members regardless of their role
+
+### Enabling Password Policy
+
+<Steps>
+
+1. Go to **Organization Settings > Security**
+2. Scroll down to find the **Password Policy** section
+3. Read the description: "Require organization members to use passwords that meet specific complexity requirements"
+4. Toggle the **Enforce Password Policy** switch to enable it
+5. The toggle description states: "When enabled, all organization members must meet the password requirements to access the organization"
+
+</Steps>
+
+### Available Password Requirements
+
+| Setting | Description | Range |
+|---------|-------------|-------|
+| **Minimum Length** | Minimum number of characters required | 6-128 characters |
+| **Require Uppercase** | Password must contain at least one uppercase letter (A-Z) | On/Off |
+| **Require Number** | Password must contain at least one digit (0-9) | On/Off |
+| **Require Special Character** | Password must contain at least one special character (!@#$%^&*, etc.) | On/Off |
+
+### Member Compliance Tracking
+
+When a password policy is active, you can monitor compliance:
+
+- **Total Members**: Number of members in your organization
+- **Compliant**: Members whose passwords meet the policy requirements
+- **Non-Compliant**: Members who need to update their passwords
+
+Non-compliant members are listed with their email addresses. You can copy the email list to notify them about the policy and required password changes.
+
+<Aside type="tip">
+
+When enabling a password policy for the first time, members with non-compliant passwords will be prompted to change their password on their next login. They won't be immediately locked out, but their access may be restricted until they comply.
+
+</Aside>
+
+### Best Practices for Password Policies
+
+- **Start with reasonable requirements**: A minimum of 10-12 characters with mixed case and numbers provides good security without being overly restrictive
+- **Communicate changes**: Notify your team before enabling new password requirements
+- **Allow transition time**: Give members time to update their passwords
+- **Consider password managers**: Recommend that team members use password managers to generate and store strong passwords
+
+## API Key Security
+
+Capgo provides two security controls for API keys: enforcing secure (hashed) API keys and requiring expiration dates. The API Key Policy section (marked with indicator **4** in the overview image) is identified by a key icon.
+
+### Enforce Secure API Keys
+
+The first option in the API Key Policy section is **Enforce Secure API Keys**. When enabled, this setting requires all API keys in your organization to be created using the secure/hashed format.
+
+Hashed API keys are more secure because:
+
+- The actual key value is never stored on our servers
+- Only you (and your systems) have access to the full key
+- Even if our database were compromised, your keys couldn't be used
+
+The toggle description states: "When enabled, only secure (hashed) API keys can access this organization. Plain-text API keys will be rejected."
+
+<Aside type="note">
+
+Existing legacy (non-hashed) API keys will continue to work, but members won't be able to create new non-hashed keys when this policy is enabled.
+
+</Aside>
+
+### Enabling Secure API Keys
+
+<Steps>
+
+1. Go to **Organization Settings > Security**
+2. Scroll down to find the **API Key Policy** section (look for the key icon)
+3. Locate the **Enforce Secure API Keys** toggle
+4. Toggle the switch to enable secure API key enforcement
+5. Existing keys are not affected; the policy applies to new key creation
+
+</Steps>
+
+### API Key Expiration Policy
+
+The second option (marked with indicator **5** in the overview image) is **Require API Key Expiration**. You can require all API keys to have an expiration date, limiting their validity period.
+
+This is a security best practice that:
+
+- Limits the window of exposure if a key is compromised
+- Ensures regular key rotation
+- Helps meet compliance requirements for credential management
+
+The toggle description states: "When enabled, all API keys for this organization must have an expiration date"
+
+### Configuring Expiration Policy
+
+<Steps>
+
+1. Go to **Organization Settings > Security**
+2. Find the **API Key Policy** section
+3. Locate the **Require API Key Expiration** toggle (below Enforce Secure API Keys)
+4. Toggle the switch to enable the expiration requirement
+5. Once enabled, set the **Maximum expiration days** (1-365 days)
+   - This limits how far in the future expiration dates can be set
+   - Example: Setting 90 days means keys can expire at most 90 days from creation
+
+</Steps>
+
+<Aside type="caution">
+
+When you enable the expiration requirement:
+- New API keys must have an expiration date
+- Existing keys without expiration continue to work
+- Consider auditing existing keys and rotating those without expiration
+
+</Aside>
+
+### Recommended API Key Policies
+
+| Use Case | Secure Keys | Expiration | Max Days |
+|----------|-------------|------------|----------|
+| **Development** | Recommended | Optional | 30-90 |
+| **CI/CD Pipelines** | Required | Required | 90-180 |
+| **Production** | Required | Required | 30-90 |
+| **Enterprise/Compliance** | Required | Required | 30-60 |
+
+## Compliance and Auditing
+
+Organization security features help you meet various compliance requirements:
+
+| Standard | Relevant Features |
+|----------|-------------------|
+| **SOC 2** | 2FA enforcement, password policies, API key controls |
+| **ISO 27001** | All security features help demonstrate access control |
+| **HIPAA** | Strong authentication and access management |
+| **GDPR** | Data protection through access controls |
+| **PCI DSS** | Multi-factor authentication, strong passwords |
+
+### Monitoring Compliance Status
+
+The Security dashboard provides real-time visibility into:
+- How many members have 2FA enabled
+- Password policy compliance across your organization
+- API key security adoption
+
+Use the "Copy email list" feature to easily export lists of non-compliant members for targeted communication.
+
+## Troubleshooting
+
+### "Access Denied: Security policy not met"
+
+**Problem**: A member cannot access the organization.
+
+**Solutions**:
+1. Check if 2FA is enforced - member needs to [enable 2FA](/docs/webapp/mfa/)
+2. Check if password policy is active - member needs to update their password
+3. Verify the member's compliance status in the Security dashboard
+
+### Cannot enable security features
+
+**Problem**: Security toggles are disabled or not responding.
+
+**Solutions**:
+- Ensure you have **super_admin** role in the organization
+- Check your network connection
+- Try refreshing the page
+- Contact support if the issue persists
+
+### API key creation fails
+
+**Problem**: Cannot create new API keys.
+
+**Solutions**:
+- If secure keys are enforced, ensure you're using the secure key creation flow
+- If expiration is required, set an expiration date within the allowed range
+- Check the maximum expiration days setting
+
+## Next Steps
+
+- [Set up 2FA on your account](/docs/webapp/mfa/)
+- [Learn about 2FA enforcement details](/docs/webapp/2fa-enforcement/)
+- [Manage API keys](/docs/webapp/api-keys/)
+- [Organization management](/docs/webapp/organization-system/)
+
+## Keep going from Organization Security
+
+If you are using **Organization Security** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

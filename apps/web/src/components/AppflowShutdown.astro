@@ -1,0 +1,64 @@
+---
+import m from '@/copy/messages'
+import HumanSupport from '@/components/HumanSupport.astro'
+import SignupCta from '@/components/SignupCta.astro'
+---
+
+<!-- Ionic Appflow shutdown notice and migration path, kept to one block -->
+<section class="bg-[#1a1a1a] py-16 sm:py-20 lg:py-24" aria-labelledby="appflow-shutdown-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="grid overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(70%_120%_at_0%_0%,rgb(68_188_255/0.1),transparent_60%)] lg:grid-cols-[minmax(0,1fr)_24rem]"
+    >
+      <div class="p-8 sm:p-12">
+        <p class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium tracking-wider text-white uppercase ring-1 ring-white/20 ring-inset">
+          {m.home_important_update_badge({}, { locale: Astro.locals.locale })}
+        </p>
+        <h2 id="appflow-shutdown-title" class="mt-6 text-3xl leading-tight font-bold tracking-tight text-balance text-white sm:text-4xl">
+          {m.home_appflow_shutdown_heading({}, { locale: Astro.locals.locale })}
+          <span class="text-[#44BCFF]">{m.home_capgo_here_to_stay({}, { locale: Astro.locals.locale })}</span>
+        </h2>
+        <p class="mt-5 max-w-2xl text-base leading-7 text-gray-300">
+          {m.home_appflow_notice_intro({}, { locale: Astro.locals.locale })}
+          {' '}
+          {m.home_appflow_bootstrapped_prefix({}, { locale: Astro.locals.locale })}{' '}
+          <strong class="font-semibold text-white">{m.home_appflow_bootstrapped_highlight({}, { locale: Astro.locals.locale })}</strong>.
+        </p>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {
+            [
+              m.home_bootstrapped_title({}, { locale: Astro.locals.locale }),
+              m.home_revenue_title({}, { locale: Astro.locals.locale }),
+              m.home_built_to_last_title({}, { locale: Astro.locals.locale }),
+            ].map((label) => (
+              <li class="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-3 py-1.5 text-sm text-gray-200 ring-1 ring-white/10">
+                <svg class="h-4 w-4 text-emerald-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                {label}
+              </li>
+            ))
+          }
+        </ul>
+        <SignupCta id="appflow-shutdown-signup-cta" humanSupport align="start" class="mt-8" />
+      </div>
+
+      <div class="flex flex-col items-center justify-center gap-6 bg-white p-8 sm:p-10">
+        <div class="flex flex-col items-center gap-4">
+          <img src="/appflow_logo.webp" alt="Appflow" class="h-8 w-auto" width="128" height="32" loading="lazy" />
+          <svg class="h-6 w-6 rotate-90 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </div>
+        <img src="/capgo_logo.webp" alt="Capgo" class="h-24 w-auto invert" width="200" height="64" loading="lazy" />
+        <HumanSupport tone="light" size="sm" />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,121 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-appinsights and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-appinsights` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-appinsights
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.init({
+  partnerId: 'partner-id-123',
+  partnerKey: 'partner-key-123',
+});
+```
+
+## Example: setUserId
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.setUserId({ userId: 'user-id-123' });
+```
+
+## Example: getState
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+const result = await CapacitorAppInsights.getState();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `init`
+
+Initialize the AppInsights SDK
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.init({
+  partnerId: 'partner-id-123',
+  partnerKey: 'partner-key-123',
+});
+```
+
+### `setUserId`
+
+Set or update the user ID after initialization
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.setUserId({ userId: 'user-id-123' });
+```
+
+### `getState`
+
+Get the current state of the SDK
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+const result = await CapacitorAppInsights.getState();
+console.log(result);
+```
+
+## Type Reference
+
+### `PanelSDKState`
+```typescript
+export interface PanelSDKState {
+  initCompleted: boolean; // SDK initialization status
+  jobScheduled: boolean; // Background job scheduling status
+  permissionAcquired: boolean; // Required permissions status
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-appinsights](/plugins/capacitor-appinsights/) for the native capability in Using @capgo/capacitor-appinsights, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

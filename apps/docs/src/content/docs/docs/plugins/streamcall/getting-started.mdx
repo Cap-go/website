@@ -1,0 +1,502 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-stream-call and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-stream-call` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-stream-call
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+```
+
+## Quick start
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.login({
+  token: 'your-token',
+  userId: 'user-123',
+  name: 'John Doe',
+  apiKey: 'your-api-key'
+});
+```
+
+## Example: logout
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.logout();
+```
+
+## Example: call
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.call({
+  userId: 'user-456',
+  type: 'video',
+  ring: true
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `login`
+
+Login to Stream Video service
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.login({
+  token: 'your-token',
+  userId: 'user-123',
+  name: 'John Doe',
+  apiKey: 'your-api-key'
+});
+```
+
+### `logout`
+
+Logout from Stream Video service
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.logout();
+```
+
+### `call`
+
+Initiate a call to another user
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.call({
+  userId: 'user-456',
+  type: 'video',
+  ring: true
+});
+```
+
+### `endCall`
+
+End the current call
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.endCall();
+```
+
+### `joinCall`
+
+Join an existing call
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.joinCall({ callId: 'call001', callType: 'default' });
+```
+
+### `setMicrophoneEnabled`
+
+Enable or disable microphone
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.setMicrophoneEnabled({ enabled: false });
+```
+
+### `setCameraEnabled`
+
+Enable or disable camera
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.setCameraEnabled({ enabled: false });
+```
+
+### `enableBluetooth`
+
+Enable bluetooth audio
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.enableBluetooth();
+```
+
+### `acceptCall`
+
+Accept an incoming call
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.acceptCall();
+```
+
+### `rejectCall`
+
+Reject an incoming call
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.rejectCall();
+```
+
+### `isCameraEnabled`
+
+Check if camera is enabled
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+const isCameraEnabled = await StreamCall.isCameraEnabled();
+console.log(isCameraEnabled);
+```
+
+### `getCallStatus`
+
+Get the current call status
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+const callStatus = await StreamCall.getCallStatus();
+console.log(callStatus);
+```
+
+### `getRingingCall`
+
+Get the current ringing call
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+const ringingCall = await StreamCall.getRingingCall();
+console.log(ringingCall);
+```
+
+### `toggleViews`
+
+Cycle through the available video layouts
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+const { newLayout } = await StreamCall.toggleViews();
+console.log(`Layout switched to ${newLayout}`);
+```
+
+### `setSpeaker`
+
+Set speakerphone on
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.setSpeaker({ name: 'speaker' });
+```
+
+### `switchCamera`
+
+Switch camera
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.switchCamera({ camera: 'back' });
+```
+
+### `getCallInfo`
+
+Get detailed information about an active call including caller details
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+const result = await StreamCall.getCallInfo({ callId: 'call-id-123' });
+console.log(result);
+```
+
+### `setDynamicStreamVideoApikey`
+
+Set a dynamic Stream Video API key that overrides the static one
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+await StreamCall.setDynamicStreamVideoApikey({ apiKey: 'new-api-key' });
+```
+
+### `getDynamicStreamVideoApikey`
+
+Get the currently set dynamic Stream Video API key
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+const result = await StreamCall.getDynamicStreamVideoApikey();
+if (result.hasDynamicKey) {
+  console.log('Dynamic API key:', result.apiKey);
+} else {
+  console.log('Using static API key from resources');
+}
+```
+
+### `getCurrentUser`
+
+Get the current user's information
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+const currentUser = await StreamCall.getCurrentUser();
+console.log(currentUser);
+```
+
+## Type Reference
+
+### `LoginOptions`
+```typescript
+export interface LoginOptions {
+  /** Stream Video API token */
+  token: string;
+  /** User ID for the current user */
+  userId: string;
+  /** Display name for the current user */
+  name: string;
+  /** Optional avatar URL for the current user */
+  imageURL?: string;
+  /** Stream Video API key */
+  apiKey: string;
+  /** ID of the HTML element where the video will be rendered */
+  magicDivId?: string;
+  pushNotificationsConfig?: PushNotificationsConfig;
+}
+```
+
+### `SuccessResponse`
+```typescript
+export interface SuccessResponse {
+  /** Whether the operation was successful */
+  success: boolean;
+  callId?: string;
+}
+```
+
+### `CallOptions`
+```typescript
+export interface CallOptions {
+  /** User ID of the person to call */
+  userIds: string[];
+  /** Type of call, defaults to 'default' */
+  type?: CallType;
+  /** Whether to ring the other user, defaults to true */
+  ring?: boolean;
+  /** Team name to call */
+  team?: string;
+  /** Whether to start the call with video enabled, defaults to false */
+  video?: boolean;
+  /** Custom data to be passed to the call */
+  custom?: Record<
+    string,
+    | string
+    | boolean
+    | number
+    | null
+    | Record<string, string | boolean | number | null>
+    | string[]
+    | boolean[]
+    | number[]
+  >;
+}
+```
+
+### `CallEvent`
+```typescript
+export interface CallEvent {
+  /** ID of the call */
+  callId: string;
+  /** Current state of the call */
+  state: CallState;
+  /** User ID of the participant in the call who triggered the event */
+  userId?: string;
+  /** Reason for the call state change, if applicable */
+  reason?: string;
+  /** Information about the caller (for incoming calls) */
+  caller?: CallMember;
+  /** List of call members */
+  members?: CallMember[];
+
+  custom?: Record<
+    string,
+    | string
+    | boolean
+    | number
+    | null
+    | Record<string, string | boolean | number | null>
+    | string[]
+    | boolean[]
+    | number[]
+  >;
+
+  count?: number;
+}
+```
+
+### `IncomingCallPayload`
+```typescript
+export interface IncomingCallPayload {
+  /** Full call CID (e.g. default:123) */
+  cid: string;
+  /** Event type (currently always "incoming") */
+  type: 'incoming';
+  /** Information about the caller */
+  caller?: CallMember;
+  /** Custom data to be passed to the call */
+  custom?: Record<
+    string,
+    | string
+    | boolean
+    | number
+    | null
+    | Record<string, string | boolean | number | null>
+    | string[]
+    | boolean[]
+    | number[]
+  >;
+
+  /**
+   * Get the native Capacitor plugin version
+   *
+   * @returns {Promise<{ id: string }>} an Promise with version for this device
+   * @throws An error if the something went wrong
+   */
+  getPluginVersion(): Promise<{ version: string }>;
+}
+```
+
+### `CameraEnabledResponse`
+```typescript
+export interface CameraEnabledResponse {
+  enabled: boolean;
+}
+```
+
+### `StreamCallLayout`
+```typescript
+export type StreamCallLayout = 'grid' | 'spotlight' | 'dynamic' | 'fullScreen' | 'fullscreen';
+```
+
+### `DynamicApiKeyResponse`
+```typescript
+export interface DynamicApiKeyResponse {
+  /** The dynamic API key if set, null if not */
+  apiKey: string | null;
+  /** Whether a dynamic key is currently set */
+  hasDynamicKey: boolean;
+}
+```
+
+### `CurrentUserResponse`
+```typescript
+export interface CurrentUserResponse {
+  /** User ID of the current user */
+  userId: string;
+  /** Display name of the current user */
+  name: string;
+  /** Avatar URL of the current user */
+  imageURL?: string;
+  /** Whether the user is currently logged in */
+  isLoggedIn: boolean;
+}
+```
+
+### `PushNotificationsConfig`
+```typescript
+export interface PushNotificationsConfig {
+  pushProviderName: string;
+  voipProviderName: string;
+}
+```
+
+### `CallType`
+```typescript
+export type CallType = 'default' | 'audio' | 'audio_room' | 'livestream' | 'development';
+```
+
+### `CallState`
+```typescript
+export type CallState =
+  // User-facing states
+  | 'idle'
+  | 'ringing'
+  | 'joining'
+  | 'reconnecting'
+  | 'joined'
+  | 'leaving'
+  | 'left'
+  // Event-specific states
+  | 'created'
+  | 'session_started'
+  | 'rejected'
+  | 'participant_counts'
+  | 'missed'
+  | 'accepted'
+  | 'ended'
+  | 'camera_enabled'
+  | 'camera_disabled'
+  | 'speaker_enabled'
+  | 'speaker_disabled'
+  | 'microphone_enabled'
+  | 'microphone_disabled'
+  | 'outgoing_call_ended'
+  | 'unknown';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-stream-call](/plugins/capacitor-streamcall/) for the native capability in Using @capgo/capacitor-stream-call, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

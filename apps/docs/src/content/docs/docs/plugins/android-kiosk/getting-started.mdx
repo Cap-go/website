@@ -1,0 +1,197 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-android-kiosk and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-android-kiosk` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-android-kiosk
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+```
+
+## API Overview
+
+### `isInKioskMode`
+
+Checks if the app is currently running in kiosk mode.
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+console.log('Kiosk mode active:', isInKioskMode);
+```
+
+### `isSetAsLauncher`
+
+Checks if the app is set as the device launcher (home app).
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+console.log('Is launcher:', isLauncher);
+```
+
+### `enterKioskMode`
+
+Enters kiosk mode, hiding system UI and blocking hardware buttons.
+Also starts a foreground keep-alive service so the app is less likely to be killed by the system.
+The app must be set as the device launcher for this to work effectively.
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+### `exitKioskMode`
+
+Exits kiosk mode, restoring normal system UI and hardware button functionality.
+Also stops the foreground keep-alive service started in enterKioskMode().
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+await CapacitorAndroidKiosk.exitKioskMode();
+console.log('Exited kiosk mode');
+```
+
+### `setAsLauncher`
+
+Opens the device's home screen settings to allow user to set this app as the launcher.
+This is required for full kiosk mode functionality.
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+await CapacitorAndroidKiosk.setAsLauncher();
+// User will be prompted to select this app as the home app
+```
+
+### `setAllowedKeys`
+
+Sets which hardware keys are allowed to function in kiosk mode.
+By default, all hardware keys are blocked in kiosk mode.
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// Allow volume keys only
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+```
+
+## Type Reference
+
+### `EnterKioskModeOptions`
+Optional flags for `enterKioskMode`.
+```typescript
+export interface EnterKioskModeOptions {
+  /**
+   * After reboot, start the app so you can call `enterKioskMode()` again. Best-effort only (OEM
+   * behavior, force-stop). Omit to keep the saved value. Cleared when you call `exitKioskMode()`.
+   */
+  restoreAfterReboot?: boolean;
+
+  /**
+   * Periodically tries to bring the app to the foreground. Skipped while the screen is off. Often
+   * blocked from the background on some devices—being the default launcher, relaxing battery limits,
+   * and allowing exact alarms (where required) improve odds. Omit to keep the saved value.
+   */
+  relaunch?: boolean;
+
+  /** Minutes between relaunch attempts when `relaunch` is on. Range 5–60; default 15. */
+  relaunchIntervalMinutes?: number;
+}
+```
+
+### `AllowedKeysOptions`
+Configuration options for allowed hardware keys in kiosk mode.
+```typescript
+export interface AllowedKeysOptions {
+  /**
+   * Allow volume up button
+   * @default false
+   */
+  volumeUp?: boolean;
+
+  /**
+   * Allow volume down button
+   * @default false
+   */
+  volumeDown?: boolean;
+
+  /**
+   * Allow back button
+   * @default false
+   */
+  back?: boolean;
+
+  /**
+   * Allow home button
+   * @default false
+   */
+  home?: boolean;
+
+  /**
+   * Allow recent apps button
+   * @default false
+   */
+  recent?: boolean;
+
+  /**
+   * Allow power button
+   * @default false
+   */
+  power?: boolean;
+
+  /**
+   * Allow camera button (if present)
+   * @default false
+   */
+  camera?: boolean;
+
+  /**
+   * Allow menu button (if present)
+   * @default false
+   */
+  menu?: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-android-kiosk](/plugins/capacitor-android-kiosk/) for the native capability in Using @capgo/capacitor-android-kiosk, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

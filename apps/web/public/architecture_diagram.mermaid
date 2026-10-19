@@ -1,0 +1,40 @@
+---
+config:
+  layout: dagre
+---
+flowchart TD
+ subgraph subGraph0["Entry points"]
+        CLI["Capgo CLI"]
+        ClientAPI["Client Backend"]
+        MobileApp["Mobile App Plugin"]
+        WebApp["Capgo Web App"]
+  end
+ subgraph subGraph1["Supabase Core"]
+        Auth["Supabase Auth"]
+        EdgeF["Supabase Edge Functions"]
+        PG["Postgres DB"]
+        PGF["PG Functions"]
+        QueueTable["Job Queue\n(PG Table)"]
+        Cron["PG Cron Tasks"]
+  end
+ subgraph subGraph2["Cloudflare Edge"]
+        CFWorker["Cloudflare Worker\n(Public API)"]
+        Updater["Cloudflare Worker\n(Mobile Updater)"]
+        Durable["Durable Object\n(tus uploader)"]
+        D1["D1 Cache"]
+        R2["R2 Bundle Storage"]
+        WAnalytics["Worker Analytics"]
+        R2Logs["R2 Log Push"]
+  end
+    CLI --> EdgeF & Durable
+    Durable --> R2
+    ClientAPI --> CFWorker
+    CFWorker --> PGF & PG
+    MobileApp --> Updater
+    Updater --> D1 & R2 & QueueTable & R2Logs
+    WebApp --> Auth & EdgeF
+    EdgeF --> PGF & PG
+    PGF --> PG
+    Cron --> PG
+    QueueTable --> PG
+    WAnalytics --> PG

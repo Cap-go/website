@@ -1,0 +1,277 @@
+---
+title: "Organization"
+description: "Manage your team, control access with role-based permissions, and organize your apps within your Capgo organization."
+sidebar:
+  order: 3
+---
+
+## What is the organization?
+
+The organization lets you share apps with your team while controlling exactly who can do what. Every Capgo account belongs to at least one organization, and you can create as many organizations as you need.
+
+Access is managed through **role-based access control (RBAC)**. Each team member is assigned a role — either at the organization level or scoped to a specific app — that determines what they can see and do. Channel access can be further fine-tuned with per-channel permission overrides.
+
+---
+
+## Organization Settings Overview
+
+<figure><img src="/org-settings-overview.webp" alt="Organization Settings Overview" /><figcaption></figcaption></figure>
+
+The Organization settings page is accessed by clicking **Settings** in the left sidebar, then selecting the **Organization** tab at the top. From there, you can navigate between the following sections:
+
+| Tab | Description |
+|-----|-------------|
+| General | View and edit organization name, logo, and management email |
+| Members | Manage team members and their permissions |
+| Groups | Create and manage groups of users for bulk role assignment |
+| API Keys | Manage API keys for programmatic access |
+| Plans | View and manage your subscription plan |
+| Credits | View and purchase additional credits |
+| Security | Configure security policies (2FA, password requirements) |
+| Usage | Monitor your organization's usage statistics |
+| Audit Logs | View activity logs for your organization |
+| Webhooks | Configure webhook integrations |
+| Billing | Manage billing information and invoices |
+
+### How to switch organizations
+
+Click on the **organization selector** dropdown near the top left of the sidebar to view and switch between organizations you have access to.
+
+---
+
+## Managing Members
+
+### Viewing members
+
+<figure><img src="/org-members-list.webp" alt="Organization Members List" /><figcaption></figcaption></figure>
+
+The Members section displays all users who have access to your organization with their:
+
+- **Member**: Avatar and name
+- **Role**: Current role (Super Admin, Admin, Billing Manager, or Member) with an **Active** or **Pending** badge
+- **Actions**: Edit role, manage app-level access, or remove from organization
+
+Active members are sorted by role priority. Pending invitations appear with an orange **Pending** badge.
+
+### Inviting a member
+
+1. Click the **+ Add** button in the Members section
+2. A **Select a role** modal will appear — choose the org-level role for the new member:
+
+<figure><img src="/org-members-assign-role.webp" alt="Select a role modal" /><figcaption></figcaption></figure>
+
+The available org-level roles are:
+- **Member** — Read-only access
+- **Billing Manager** — Billing-only access
+- **Admin** — Full administration (no billing, no deletion)
+- **Super Admin** — Complete control
+
+3. Click **Confirm**, then fill in the invitation form (email, optional first/last name, captcha) and click **Send invitation**.
+
+The invited user will receive an email with a magic link. When they accept, they will be added to the organization with the selected role.
+
+### Assigning app-level roles
+
+Beyond the org-level role, you can give a member access to specific apps with a more targeted role. Click the **Access Control** button (shield icon) next to a member to open the app access modal:
+
+<figure><img src="/org-members-app-access-control.webp" alt="Access Control modal" /><figcaption></figcaption></figure>
+
+From this modal you can:
+1. Search and select an app
+2. Choose an app-level role from the dropdown
+
+<figure><img src="/org-members-app-role-dropdown.webp" alt="App role dropdown" /><figcaption></figcaption></figure>
+
+The available app-level roles are:
+- **App Admin** — Full administration of an app
+- **App Developer** — Upload bundles, manage devices, but no destructive operations
+- **App Uploader** — Read app data and upload bundles
+- **App Reader** — Read-only access to an app
+
+
+
+
+3. Click **Assign** to grant the role.
+
+### Editing a member's role
+
+Click the edit button (wrench icon) next to a member to change their org-level role. The same **Select a role** modal will appear with the current role pre-selected.
+
+**Constraints:**
+
+- You cannot change the role of the organization creator
+- You cannot remove the last Super Admin — there must always be at least one
+- Promoting or demoting a Super Admin requires you to be a Super Admin yourself
+
+### Removing a member
+
+<figure><img src="/org-members-delete.webp" alt="Confirm Delete dialog" /><figcaption></figcaption></figure>
+
+Click the delete button (trash icon) next to a member. A confirmation dialog will appear warning that this action is not reversible. Click **Delete** to confirm. This revokes all their access to the organization, its apps, and its channels immediately.
+
+---
+
+## Roles overview
+
+Capgo uses **role-based access control** with roles organized by scope. You can assign a role at the **organization** level (access to everything), or scope it down to a single **app**. Channel access can be further customized with per-channel permission overrides.
+
+### Organization roles
+
+Assigned when you invite a member. They apply across the entire organization.
+
+| Role | Internal name | Description |
+|------|---------------|-------------|
+| **Super Admin** | `org_super_admin` | Full control — billing, deletion, transfer. Automatically granted to the org creator. |
+| **Admin** | `org_admin` | Full administration — manage members, apps, channels. No billing, no deletion. |
+| **Billing Manager** | `org_billing_admin` | Billing only — view/update payment, invoices, billing audit. No access to apps or members. |
+| **Member** | `org_member` | Read-only access across the org and all its apps. |
+
+### App roles
+
+Scoped to a single app. Use these when a team member should only work on one app, not the whole organization.
+
+| Role | Internal name | Description |
+|------|---------------|-------------|
+| **App Admin** | `app_admin` | Full control of one app — channels, devices, team. Cannot delete or transfer the app. |
+| **App Developer** | `app_developer` | Upload bundles, manage devices, trigger builds, update channels. No deletion or settings changes. |
+| **App Uploader** | `app_uploader` | Read access + upload new bundle versions. |
+| **App Reader** | `app_reader` | Read-only — stats, bundles, channels, logs, devices. |
+
+### Channel permission overrides
+
+By default, channel access is inherited from the app role. You can override specific channel permissions per user or group — for example, allowing an App Reader to also associate bundles on the `staging` channel. See [App-level access management](#app-level-access-management) below for how to configure this.
+
+:::tip
+For the full permission breakdown per role, the role hierarchy, and API/CLI usage, see [Access Control Reference](/docs/webapp/organization-roles/).
+:::
+
+---
+
+## App-level access management
+
+Each app has a dedicated **Access** tab where you can manage who has access to the app and what they can do — including app roles and per-channel permission overrides.
+
+### Viewing app access
+
+<figure><img src="/app-access-tab.webp" alt="App Access tab" /><figcaption></figcaption></figure>
+
+Navigate to your app and click the **Access** tab. The access list shows each user or group with their:
+- **Email** — the user's email (or group name)
+- **Role** — their app-level role (App Admin, App Developer, App Uploader, or App Reader)
+- **Granted at** — when the role was assigned
+- **Actions** — channel permissions (shield icon), edit role (wrench icon), and remove (trash icon)
+
+### Changing an app role
+
+Click the **edit** button (wrench icon) next to a user to change their app-level role:
+
+<figure><img src="/app-access-role-select.webp" alt="Select an app role" /><figcaption></figcaption></figure>
+
+Select the new role and click **Confirm**. The available roles are:
+- **App Developer** — Upload bundles, manage devices, but no destructive operations
+- **App Uploader** — Read app data and upload bundles
+- **App Reader** — Read-only access
+
+:::note
+**App Admin** is not shown in this modal because it is assigned from the organization-level Members page. See [Assigning app-level roles](#assigning-app-level-roles) above.
+:::
+
+### Overriding channel permissions
+
+Click the **channel permissions** button (shield icon) next to a user to override their default channel permissions:
+
+<figure><img src="/app-access-channel-permissions.webp" alt="Channel permissions modal" /><figcaption></figcaption></figure>
+
+The modal shows the user's current app role and lists all channels with three permissions that can be overridden individually:
+
+| Permission | Description |
+|-----------|-------------|
+| **Read** | View the channel and its current bundle |
+| **History** | View the bundle assignment history |
+| **Associate bundle** | Set or change the active bundle on the channel |
+
+Each permission defaults to **Default (allow)** — meaning it inherits from the app role. You can change any permission to explicitly **Allow** or **Deny** for a specific channel, giving you fine-grained control without changing the user's overall app role.
+
+---
+
+## Groups
+
+Groups let you assign roles to a set of users at once instead of managing each member individually. A group belongs to an organization and can hold role bindings at any scope — org or app.
+
+**Example:** Create a "QA Team" group, assign it the **App Developer** role on your production app, and every member of that group instantly gets Developer access to that app. When someone joins or leaves the team, just add or remove them from the group — no need to touch individual role bindings.
+
+### How groups work
+
+- A group is **org-scoped** — it belongs to one organization and cannot span multiple orgs.
+- You assign roles to a group the same way you assign roles to a user — the group appears as a principal in role bindings.
+- When a user's permissions are checked, their group memberships are automatically resolved. If any of their groups hold a role that grants the required permission, access is granted.
+- A user can belong to multiple groups, and permissions from all groups are combined.
+
+### Viewing groups
+
+<figure><img src="/org-groups-list.webp" alt="Groups list" /><figcaption></figcaption></figure>
+
+Navigate to the **Groups** tab in your organization settings. The groups list shows each group's **name**, **description**, **role**, **creation date**, and **actions** (edit or delete).
+
+### Creating a group
+
+Click the **+ Add** button to open the group creation page:
+
+<figure><img src="/org-groups-create.webp" alt="Create group page" /><figcaption></figcaption></figure>
+
+Fill in:
+1. **Name** (required) and **Description** (optional)
+2. **Organization role** — optionally assign an org-level role (None, Admin, Billing Manager, or Member)
+3. **Access Control** tab — assign app-level roles by clicking **+ Add App**, selecting an app, and choosing a role (e.g. App Uploader, App Developer)
+
+You need **Super Admin** or **Admin** to create groups.
+
+### Managing group members
+
+Click on a group to open its detail view. Switch to the **Members** tab:
+
+<figure><img src="/org-groups-detail.webp" alt="Group detail — Members tab" /><figcaption></figcaption></figure>
+
+From here you can view current members and their emails. Click **+ Add** to add members:
+
+<figure><img src="/org-groups-add-members.webp" alt="Add members to group" /><figcaption></figcaption></figure>
+
+The modal shows all organization members. Search by name, check the members you want to add, and click **Add members**.
+
+:::tip
+For API usage and technical details about groups, see [Access Control Reference — Groups](/docs/webapp/organization-roles/#groups).
+:::
+
+---
+
+## Billing
+
+Only **Super Admin** (`org_super_admin`) and **Billing Manager** (`org_billing_admin`) can manage billing. Plans are linked to an organization, not to your personal account.
+
+:::danger
+Buying a plan will ONLY affect the currently selected organization.
+:::
+
+---
+
+## FAQ
+
+### Can I create more than one organization?
+
+Yes. You can create as many organizations as you need and switch between them using the organization selector in the sidebar.
+
+### How do I configure security policies?
+
+Super Admins can configure 2FA enforcement, password policies, and API key security from the **Security** tab. See [Organization Security](/docs/webapp/organization-security/) for details.
+
+### Can I give someone access to only one app or channel?
+
+Yes — assign them an app-scoped role (like **App Developer** or **App Reader**) via the Members page or the app's Access tab. You can further fine-tune their access per channel using [channel permission overrides](#overriding-channel-permissions). See [Access Control Reference](/docs/webapp/organization-roles/) for the full list of roles.
+
+### What is the difference between Admin and App Admin?
+
+**Admin** (`org_admin`) has authority over the entire organization — all apps, all channels, all members. **App Admin** (`app_admin`) has the same level of control but only over one specific app and its channels. Use App Admin when you want to delegate full control of an app without giving access to the rest of the org.
+
+## Keep going from Organization
+
+If you are using **Organization** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

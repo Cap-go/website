@@ -1,0 +1,194 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-downloader and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-downloader` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-downloader
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+```
+
+## Quick start
+
+Download to a known folder, listen for progress, and resume after app restarts when supported.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const progressListener = await CapacitorDownloader.addListener('downloadProgress', (event) => {
+  if (event.id === 'offline-pack') {
+    console.log(event.progress);
+  }
+});
+
+const task = await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/large-pack.zip',
+  destination: 'downloads/offline-pack.zip',
+});
+```
+
+## Example: pause and resume
+
+```typescript
+await CapacitorDownloader.pause({ id: 'offline-pack' });
+await CapacitorDownloader.resume({ id: 'offline-pack' });
+```
+
+## Example: inspect finished file
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { Directory, Filesystem } from '@capacitor/filesystem';
+
+const relativePath = 'downloads/offline-pack.zip';
+const path =
+  Capacitor.getPlatform() === 'ios'
+    ? (await Filesystem.getUri({ directory: Directory.Documents, path: relativePath })).uri
+    : relativePath;
+
+const info = await CapacitorDownloader.getFileInfo({ path });
+```
+
+## Common pitfalls
+
+- **Storage destination**: pick a `destination` your app can read on each platform.
+- **Background**: downloads run on iOS and Android in the background. On Web, `download()` is not implemented; use a browser download flow instead.
+- **Status**: use `checkStatus` while the app process is still alive. On iOS, task IDs are not restored after relaunch.
+
+## API Overview
+
+### `download`
+
+Start a new download task.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const task = await CapacitorDownloader.download({
+  id: 'my-download',
+  url: 'https://example.com/file.pdf',
+  destination: 'downloads/file.pdf'
+});
+```
+
+### `pause`
+
+Pause an active download.
+Download can be resumed later from the same position.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+await CapacitorDownloader.pause({ id: 'id-123' });
+```
+
+### `resume`
+
+Resume a paused download.
+Continues from where it was paused.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+await CapacitorDownloader.resume({ id: 'id-123' });
+```
+
+### `stop`
+
+Stop and cancel a download permanently.
+Downloaded data will be deleted.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+await CapacitorDownloader.stop({ id: 'id-123' });
+```
+
+### `checkStatus`
+
+Check the current status of a download.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const result = await CapacitorDownloader.checkStatus({ id: 'id-123' });
+console.log(result);
+```
+
+### `getFileInfo`
+
+Get information about a downloaded file.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const result = await CapacitorDownloader.getFileInfo({ path: 'path/to/file' });
+console.log(result);
+```
+
+## Type Reference
+
+### `DownloadOptions`
+Configuration options for starting a download.
+```typescript
+export interface DownloadOptions {
+  /** Unique identifier for this download task */
+  id: string;
+  /** URL of the file to download */
+  url: string;
+  /** Local file path where the download will be saved */
+  destination: string;
+  /** Optional HTTP headers to include in the request */
+  headers?: { [key: string]: string };
+  /** Network type requirement for download */
+  network?: 'cellular' | 'wifi-only';
+  /** Download priority level */
+  priority?: 'high' | 'normal' | 'low';
+}
+```
+
+### `DownloadTask`
+Represents the current state and progress of a download task.
+```typescript
+export interface DownloadTask {
+  /** Unique identifier for the download task */
+  id: string;
+  /** Download progress from 0 to 100 */
+  progress: number;
+  /** Current state of the download */
+  state: 'PENDING' | 'RUNNING' | 'PAUSED' | 'DONE' | 'ERROR';
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-downloader](/plugins/capacitor-downloader/) for the native capability in Using @capgo/capacitor-downloader, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

@@ -1,0 +1,281 @@
+---
+import BrandLogo from '@/components/BrandLogo.astro'
+import m from '@/copy/messages'
+import { getLocalizedPath } from '@/services/locale-path'
+import { locales } from '@/services/locale'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const year = new Date().getFullYear()
+
+// Map locale codes to flag emojis
+const localeFlags: Record<string, string> = {
+  de: '🇩🇪',
+  en: '🇺🇸',
+  es: '🇪🇸',
+  fr: '🇫🇷',
+  id: '🇮🇩',
+  it: '🇮🇹',
+  ja: '🇯🇵',
+  ko: '🇰🇷',
+  zh: '🇨🇳',
+}
+
+const currentFlag = localeFlags[Astro.locals.locale] || '🇺🇸'
+
+interface FooterLink {
+  name: string
+  href: string
+  external?: boolean
+}
+
+const localeNames: Record<string, string> = {
+  de: 'Deutsch',
+  en: 'English',
+  es: 'Español',
+  fr: 'Français',
+  id: 'Bahasa Indonesia',
+  it: 'Italiano',
+  ja: '日本語',
+  ko: '한국어',
+  zh: '中文',
+}
+
+const columns: { title: string; links: FooterLink[] }[] = [
+  {
+    title: m.products({}, { locale: Astro.locals.locale }),
+    links: [
+      { name: m.live_update({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'live-update') },
+      { name: m.native_build({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'native-build') },
+      { name: 'Observe', href: getRelativeLocaleUrl(Astro.locals.locale, 'observe') },
+      { name: 'Notifications', href: getRelativeLocaleUrl(Astro.locals.locale, 'notifications') },
+      { name: m.app_mobile({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile') },
+      { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },
+      { name: m.integrations_badge({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'integrations') },
+      { name: m.cli_and_api({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli') },
+      { name: m.footer_hosted_mcp_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'docs/ai/mcp') },
+      { name: m.ci_cd_integration({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'ci_cd') },
+      { name: m.pricing({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'pricing') },
+      { name: m.enterprise_title({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise') },
+    ],
+  },
+  {
+    title: m.footer_col_resources({}, { locale: Astro.locals.locale }),
+    links: [
+      { name: m.documentation({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'docs') },
+      { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
+      { name: m.articles({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'articles') },
+      { name: 'Capacitor Skills', href: getRelativeLocaleUrl(Astro.locals.locale, 'skills') },
+      { name: m.footer_agents_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'agents') },
+      { name: m.community({}, { locale: Astro.locals.locale }), href: 'https://discord.capgo.app', external: true },
+      { name: m.chat({}, { locale: Astro.locals.locale }), href: 'https://support.capgo.app', external: true },
+      { name: 'Premium Support', href: getRelativeLocaleUrl(Astro.locals.locale, 'premium-support') },
+      { name: m.status({}, { locale: Astro.locals.locale }), href: 'https://status.capgo.app/', external: true },
+      { name: 'App store publishing costs', href: getRelativeLocaleUrl(Astro.locals.locale, 'cost/cost-to-publish-app-on-app-store') },
+      { name: 'App store refusal stories', href: getRelativeLocaleUrl(Astro.locals.locale, '/app-store-refusal-horror-story/') },
+      { name: m.awesome_capacitor({}, { locale: Astro.locals.locale }), href: 'https://github.com/riderx/awesome-capacitor/', external: true },
+      { name: m.top_app_by_framework({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'top_app') },
+    ],
+  },
+  {
+    title: m.footer_col_tools({}, { locale: Astro.locals.locale }),
+    links: [
+      { name: m.free_mobile_tools({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'tools') },
+      { name: 'Security Scanner', href: getRelativeLocaleUrl(Astro.locals.locale, 'security-scanner') },
+      { name: m.aasa_tester({}, { locale: Astro.locals.locale }), href: 'https://aasa-tester.capgo.app/', external: true },
+      { name: m.semver_tester({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'semver_tester') },
+      { name: 'Live Update data', href: getRelativeLocaleUrl(Astro.locals.locale, 'data') },
+      { name: 'Native Build data', href: getRelativeLocaleUrl(Astro.locals.locale, 'builder-data') },
+      { name: 'Android distribution chart', href: getRelativeLocaleUrl(Astro.locals.locale, 'android-distribution-chart') },
+      { name: 'iOS distribution chart', href: getRelativeLocaleUrl(Astro.locals.locale, 'ios-distribution-chart') },
+    ],
+  },
+  {
+    title: m.compare({}, { locale: Astro.locals.locale }),
+    links: [
+      { name: m.alternatives({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives') },
+      { name: m.capflow_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/ionic-appflow') },
+      { name: m.expo_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/expo') },
+      { name: m.median_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/median') },
+      { name: m.capwesome_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/capawesome') },
+      { name: m.alternatives_hub_codepush_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/codepush') },
+      { name: m.footer_voltbuilder_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives/voltbuilder') },
+      { name: m.footer_best_live_updates_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'best/capacitor-live-updates') },
+      { name: m.best_ai_tools_capacitor_title({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'best/ai-tools-for-capacitor') },
+      { name: m.footer_migrate_appflow_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'migrate/from-appflow') },
+      { name: m.footer_mcp_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'mcp') },
+      {
+        name: m.solutions_cordova_to_capacitor_ai_short({}, { locale: Astro.locals.locale }),
+        href: getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor-ai'),
+      },
+      { name: m.solutions_webapp_to_mobile_short({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'solutions/webapp-to-mobile') },
+    ],
+  },
+  {
+    title: m.company({}, { locale: Astro.locals.locale }),
+    links: [
+      { name: m.about({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'about') },
+      { name: m.brand_footer_link({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'brand') },
+      { name: m.contact({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contact') },
+      { name: m.trust({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'trust') },
+      { name: m.security_questionnaires({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'security-questionnaire') },
+      { name: 'HIPAA compliance', href: getRelativeLocaleUrl(Astro.locals.locale, 'hipaa-compliance') },
+      { name: m.consulting({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'consulting') },
+      { name: m.affiliate_kicker({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'affiliate') },
+      { name: m.jobs({}, { locale: Astro.locals.locale }), href: 'https://console.algora.io/org/capgo/bounties?status=open/', external: true },
+      { name: m.contributing({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contributing') },
+      { name: m.sponsor({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'sponsor') },
+      { name: m.imprint({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'imprint') },
+    ],
+  },
+  {
+    title: m.legal({}, { locale: Astro.locals.locale }),
+    links: [
+      { name: m.privacy({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'privacy') },
+      { name: m.terms({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'tos') },
+      { name: m.sla({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'sla') },
+      { name: m.support_policy({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'support-policy') },
+      { name: m.aup({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'aup') },
+      { name: m.security_txt({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'security') },
+      { name: m.bug_bounty({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'bug-bounty') },
+      { name: m.dp({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'dp') },
+      { name: m.dpa({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'dpa') },
+      { name: m.subprocessors({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'subprocessors') },
+      { name: m.eula({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'eula') },
+      { name: m.return_policy({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'return') },
+    ],
+  },
+]
+---
+
+<footer class="px-3 pb-3 sm:px-4 sm:pb-4" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">
+    {m.footer({}, { locale: Astro.locals.locale })}
+  </h2>
+  <div class="mx-auto max-w-[1400px] rounded-3xl border border-white/10 bg-[#121316] px-6 pt-14 pb-8 sm:px-10 lg:px-14 lg:pt-16">
+    <div class="grid gap-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10">
+      <div>
+        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label={m.capgo_home({}, { locale: Astro.locals.locale })} class="inline-flex">
+          <BrandLogo />
+        </a>
+        <p class="mt-5 max-w-60 text-[15px] leading-6 text-zinc-400">{m.footer_brand_tagline({}, { locale: Astro.locals.locale })}</p>
+        <a
+          href="https://status.capgo.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex items-center gap-2 font-mono text-xs tracking-widest text-zinc-400 uppercase transition-colors hover:text-white"
+        >
+          <span class="h-2 w-2 rounded-[2px] bg-emerald-500"></span>
+          {m.all_systems_normal({}, { locale: Astro.locals.locale })}
+        </a>
+        <div class="mt-6 flex items-center gap-3">
+          <img src="/soc2.svg" alt={m.soc2_compliant({}, { locale: Astro.locals.locale })} width="36" height="36" loading="lazy" class="h-9 w-auto opacity-70" />
+          <img src="/iso27001.svg" alt={m.iso27001_compliant({}, { locale: Astro.locals.locale })} width="36" height="36" loading="lazy" class="h-9 w-auto opacity-70" />
+          <img src="/gdpr.svg" alt={m.gdpr_compliant({}, { locale: Astro.locals.locale })} width="36" height="36" loading="lazy" class="h-9 w-auto opacity-70" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 xl:grid-cols-6">
+        {columns.map((column) => (
+          <div>
+            <h3 class="font-mono text-xs font-semibold tracking-widest text-white uppercase">{column.title}</h3>
+            <ul role="list" class="mt-5 space-y-3">
+              {column.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    class="text-sm text-zinc-400 transition-colors hover:text-white"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="font-mono text-xs text-zinc-400">&copy; Capgo {year} · Digital Shift OÜ · CodepushGo, LLC</p>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="relative">
+          <button
+            type="button"
+            id="language-dropdown-button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="language-dropdown"
+            aria-label={`${localeNames[Astro.locals.locale] ?? Astro.locals.locale.toUpperCase()}, ${m.footer_language_label({}, { locale: Astro.locals.locale })}`}
+            class="flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 font-mono text-xs text-zinc-300 transition-colors hover:border-white/30 hover:text-white"
+          >
+            <span aria-hidden="true">{currentFlag}</span>
+            {localeNames[Astro.locals.locale] ?? Astro.locals.locale.toUpperCase()}
+            <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path
+                fill-rule="evenodd"
+                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <div
+            id="language-dropdown"
+            class="absolute right-0 bottom-full z-50 mb-2 hidden w-48 overflow-hidden rounded-xl border border-white/10 bg-[#1c1d21] py-1 shadow-2xl shadow-black/50"
+          >
+            {locales.map((item) => (
+              <a
+                href={getLocalizedPath(item, Astro.url.pathname)}
+                id={`language_${item}`}
+                data-language={item}
+                lang={item}
+                aria-current={item === Astro.locals.locale ? 'true' : undefined}
+                class="flex items-center gap-2 px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white aria-[current=true]:text-white"
+              >
+                <span aria-hidden="true">{localeFlags[item] ?? ''}</span>
+                {localeNames[item] ?? item.toUpperCase()}
+              </a>
+            ))}
+          </div>
+        </div>
+        <a href="/llms.txt" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
+          llms.txt
+        </a>
+        <a href="/llms-full.txt" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
+          llms-full.txt
+        </a>
+        <a href="/feed.xml" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
+          RSS feed
+        </a>
+        <a href="/sitemap-index.xml" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
+          Sitemap
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const button = document.getElementById('language-dropdown-button')
+  const dropdown = document.getElementById('language-dropdown')
+  if (button && dropdown) {
+    button.addEventListener('click', () => {
+      const open = dropdown.classList.toggle('hidden') === false
+      button.setAttribute('aria-expanded', String(open))
+    })
+    document.addEventListener('click', (event) => {
+      if (!button.contains(event.target as Node) && !dropdown.contains(event.target as Node)) {
+        dropdown.classList.add('hidden')
+        button.setAttribute('aria-expanded', 'false')
+      }
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('hidden')
+        button.setAttribute('aria-expanded', 'false')
+        button.focus()
+      }
+    })
+  }
+</script>

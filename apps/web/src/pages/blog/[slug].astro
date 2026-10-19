@@ -1,0 +1,363 @@
+---
+import Blog from '@/components/Blog.astro'
+import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
+import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
+import GetStarted from '@/components/GetStarted.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import { HUMAN_EDITORIAL_TEAM, resolveAuthorUrl } from '@/config/blogEditorialTeam'
+import { isHumanBlogPost } from '@/lib/blogOrigin'
+import { formatTime } from '@/config/app'
+import Layout from '@/layouts/Layout.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createNewsArticleLdJson } from '@/lib/ldJson'
+import m from '@/copy/messages'
+import { defaultLocale, locales } from '@/services/locale'
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection, render } from 'astro:content'
+import { getRelativeLocaleUrl } from '@/services/links'
+import striptags from 'striptags'
+import { slug as slugify } from 'github-slugger'
+
+export const getStaticPaths: GetStaticPaths = async ({}) => {
+  const blogs = await getCollection('blog')
+  const allPublishedEntries: CollectionEntry<'blog'>[] = []
+  const blogPosts: { [k: string]: CollectionEntry<'blog'>[] } = {}
+  blogs.forEach((j) => {
+    if (j.data.published !== false) {
+      allPublishedEntries.push(j)
+      if (!blogPosts[j.data.slug]) blogPosts[j.data.slug] = []
+      blogPosts[j.data.slug].push(j)
+    }
+  })
+  return Object.entries(blogPosts).map(([slug, posts]) => ({
+    params: { slug },
+    props: { entries: posts, allPublishedEntries },
+  }))
+}
+
+if (!Astro.params.slug) return new Response(`Astro.params.slug is invalid for: ${Astro.url.pathname}`, { status: 404 })
+
+const { entries, allPublishedEntries } = Astro.props as { entries: CollectionEntry<'blog'>[]; allPublishedEntries: CollectionEntry<'blog'>[] }
+
+const entry = entries.find((j) => j.data.locale === Astro.locals.locale)
+
+if (!entry) {
+  if (Astro.locals.locale !== 'en') {
+    const enEntry = entries.find((j) => j.data.locale === 'en')
+    if (enEntry)
+      return new Response(
+        `<!doctype html>
+<html lang="${Astro.locals.locale}">
+<head>
+<meta charset="utf-8">
+<title>Redirecting to: /blog/${Astro.params.slug}</title>
+<meta http-equiv="refresh" content="0;url=/blog/${Astro.params.slug}/">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}/">
+</head>
+<body>
+	<a href="/blog/${Astro.params.slug}/">Redirecting to <code>/blog/${Astro.params.slug}/</code></a>
+</body>
+</html>`,
+        { status: 302, headers: { 'Content-Type': 'text/html', Location: `/blog/${Astro.params.slug}/` } },
+      )
+  }
+  return new Response(`entry is not found for: ${Astro.url.pathname}`, { status: 404 })
+}
+
+const related = allPublishedEntries.filter((j) => j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
+const entriesByLocale = new Map<string, CollectionEntry<'blog'>>(entries.map((localizedEntry) => [localizedEntry.data.locale, localizedEntry]))
+const fallbackEntry = entriesByLocale.get(defaultLocale) ?? entry
+const alternateVersions = locales.map((locale) => {
+  const alternateEntry = entriesByLocale.get(locale) ?? fallbackEntry
+  const slug = alternateEntry.data.slug
+  return {
+    slug,
+    locale,
+    url: locale === defaultLocale ? `${Astro.locals.runtimeConfig.public.baseUrl}/blog/${slug}/` : `${Astro.locals.runtimeConfig.public.baseUrl}/${locale}/blog/${slug}/`,
+  }
+})
+
+const { Content, headings } = await render(entry)
+const showEditorialByline = isHumanBlogPost(entry.data.origin)
+const authorUrl = resolveAuthorUrl(entry.data.author, entry.data.author_url)
+
+const dateModified = entry.data.updated_at
+const datePublished = entry.data.created_at
+
+const content: {
+  title?: string
+  description?: string
+  image?: string
+  author?: string
+  ldJSON?: Object
+  keywords?: string[]
+  alternateVersions?: any[]
+  ogType?: string
+  articlePublishedTime?: string
+  articleModifiedTime?: string
+  articleSection?: string
+  articleTags?: string[]
+} = {}
+
+if (entry.data.title) content['title'] = entry.data.title
+if (entry.data.description) content['description'] = entry.data.description
+if (entry.data.head_image) {
+  if (entry.data.head_image.startsWith('http')) content['image'] = entry.data.head_image
+  else content['image'] = `${Astro.locals.runtimeConfig.public.baseUrl}${entry.data.head_image || '/capgo_banner.webp'}`
+}
+if (entry.data.author) content['author'] = entry.data.author || 'Capgo'
+if (entry.data.keywords) content['keywords'] = entry.data.keywords.split(',') || []
+if (alternateVersions.length > 0) content['alternateVersions'] = alternateVersions
+
+// Add article-specific OG tags for better social sharing
+content['ogType'] = 'article'
+content['articlePublishedTime'] = new Date(datePublished).toISOString()
+content['articleModifiedTime'] = new Date(dateModified).toISOString()
+if (entry.data.tag) {
+  const tags = entry.data.tag.split(',').map((t: string) => t.trim())
+  content['articleSection'] = tags[0]
+  content['articleTags'] = tags
+}
+
+// Create improved ldJSON using helper function
+const articleUrl = new URL(getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`), Astro.locals.runtimeConfig.public.baseUrl).href
+
+const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
+  title: entry.data.title,
+  description: entry.data.description || '',
+  url: articleUrl,
+  image: content['image'] ? [content['image']] : undefined,
+  datePublished,
+  dateModified,
+  author: entry.data.author || 'Capgo',
+  authorUrl,
+  authorImage: entry.data.author_image_url,
+  keywords: entry.data.keywords ? entry.data.keywords.split(',').map((k) => k.trim()) : undefined,
+  articleSection: entry.data.tag ? entry.data.tag.split(',')[0]?.trim() : undefined,
+  articleBody: striptags(entry.rendered?.html || ''),
+  locale: Astro.locals.locale,
+})
+const faqItems = entry.data.faq
+content['ldJSON'] =
+  faqItems && faqItems.length > 0
+    ? createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
+        additionalEntities: [
+          createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+            url: articleUrl,
+            questions: faqItems,
+          }),
+        ],
+      })
+    : articleLdJson
+---
+
+<Layout content={content}>
+  <div class="product-hero flex w-full flex-col items-center">
+    <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
+      <div class="relative z-0 mx-auto pb-12">
+        <div class="relative max-w-(--breakpoint-sm)">
+          <div class="mt-4 flex flex-row flex-wrap items-center gap-3">
+            {
+              entry.data.tag.split(',').map((i) => (
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(i.trim())}`)}
+                  class="rounded-lg border border-gray-400 px-4 py-1.5 text-sm text-white hover:bg-white hover:text-black"
+                >
+                  {i.trim()}
+                </a>
+              ))
+            }
+            <time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">
+              {formatTime(entry.data.updated_at)}
+            </time>
+          </div>
+          <h1 class="font-display mt-8 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-tight">
+            {entry.data.title}
+          </h1>
+          <p class="mt-4 text-gray-400 sm:text-lg">{entry.data.description}</p>
+          {
+            showEditorialByline ? (
+              <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="mt-6 md:hidden" />
+            ) : (
+              <BlogAuthorByline
+                author={entry.data.author}
+                authorUrl={authorUrl}
+                authorImageUrl={entry.data.author_image_url}
+                showLabel={false}
+                class="mt-6 md:hidden"
+              />
+            )
+          }
+        </div>
+      </div>
+    </div>
+    <div class="relative w-full max-w-7xl overflow-clip px-8 sm:px-10 lg:px-12">
+      <div class="max-w-grid-width relative z-auto mx-auto grid grid-cols-3">
+        <div class="relative col-span-3 md:col-span-2">
+          <img
+            width="1536"
+            height="1024"
+            id="blogImage"
+            loading="eager"
+            decoding="async"
+            alt={entry.data.title}
+            src={entry.data.head_image}
+            class="rounded border border-white/5 object-cover"
+          />
+          <article class="prose prose-invert blog mt-8 min-w-full">
+            <Content />
+          </article>
+        </div>
+        <div class="right-0 hidden px-10 md:block">
+          {
+            showEditorialByline ? (
+              <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="relative pb-5" />
+            ) : (
+              <BlogAuthorByline author={entry.data.author} authorUrl={authorUrl} authorImageUrl={entry.data.author_image_url} class="relative pb-5" />
+            )
+          }
+          {
+            headings?.length > 0 ? (
+              <div id="staticToc" class="sticky top-16 pt-4 pb-8">
+                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4 pb-8" />
+                <div>
+                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
+                    <svg
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="lucide lucide-align-left h-4 w-4"
+                    >
+                      <line x1="21" x2="3" y1="6" y2="6" />
+                      <line x1="15" x2="3" y1="12" y2="12" />
+                      <line x1="17" x2="3" y1="18" y2="18" />
+                    </svg>
+                    {m.table_of_contents({}, { locale: Astro.locals.locale })}
+                  </p>
+                  <div class="mt-4 grid gap-4 border-l border-gray-600">
+                    {headings.map((k) => (
+                      <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-400`} href={`#${k.slug}`}>
+                        {k.text}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div class="sticky top-16 pt-4 pb-8">
+                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4" />
+              </div>
+            )
+          }
+        </div>
+      </div>
+      <GetStarted />
+      <div class="mx-auto max-w-xl text-center">
+        <p class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{m.latest_from_news({}, { locale: Astro.locals.locale })}</p>
+        <p class="mt-4 text-base leading-7 font-normal text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
+          {m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app({}, { locale: Astro.locals.locale })}
+        </p>
+      </div>
+      {
+        related.length > 0 && (
+          <div class="mt-8 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+            {related.map((article) => (
+              <Blog tag={article.data.tag} link={article.data.slug} title={article.data.title} date={article.data.created_at} image={article.data.head_image} />
+            ))}
+          </div>
+        )
+      }
+      <div class="my-12 text-center">
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
+          class="group inline-flex items-center text-sm font-semibold text-white transition-all duration-200 hover:text-gray-200 hover:underline"
+        >
+          {m.see_all_from_our_blog({}, { locale: Astro.locals.locale })}
+          <svg
+            class="ml-1 h-5 w-5 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Heading slugs may start with a digit (e.g. "1-foo"); getElementById avoids invalid CSS selectors.
+    const getTocLink = (headingId: string) => document.getElementById(`${headingId}-link`)
+
+    let currentTocHash = window.location.hash
+    let hashUpdateTimer: ReturnType<typeof setTimeout> | undefined
+
+    const scheduleHashUpdate = (hash: string) => {
+      if (hash === currentTocHash) return
+      if (hashUpdateTimer) clearTimeout(hashUpdateTimer)
+      hashUpdateTimer = setTimeout(() => {
+        hashUpdateTimer = undefined
+        if (hash === currentTocHash) return
+        currentTocHash = hash
+        history.replaceState(null, '', hash)
+      }, 150)
+    }
+
+    const observeArticleTitles = () => {
+      const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+      let activeHeading = null
+
+      for (let i = 0; i < headings.length; i++) {
+        const heading = headings[i]
+        const tmp = heading.getAttribute('id')
+        if (tmp) getTocLink(tmp)?.classList.remove('text-white')
+        const rect = heading.getBoundingClientRect()
+        if (rect.top <= 50) activeHeading = heading
+        else if (rect.top > 50 && activeHeading) break
+      }
+
+      if (activeHeading) {
+        const tmp = activeHeading.getAttribute('id')
+        if (tmp) {
+          getTocLink(tmp)?.classList.add('text-white')
+          scheduleHashUpdate(`#${tmp}`)
+        }
+      }
+    }
+
+    const handleScroll = () => {
+      const staticToc = document.querySelector('#staticToc')
+      const blogImage = document.querySelector('#blogImage')
+      const articleEnd = document.querySelector('article.prose')
+      if (staticToc && blogImage && articleEnd) {
+        const blogImageRect = blogImage.getBoundingClientRect()
+        const articleEndRect = articleEnd.getBoundingClientRect()
+        const staticTocRect = staticToc.getBoundingClientRect()
+        if (blogImageRect.bottom <= 0 && articleEndRect.bottom > staticTocRect.height) {
+          staticToc.classList.remove('sticky')
+          staticToc.classList.add('fixed', 'max-h-[50vh]', 'max-w-[30vw]', 'overflow-y-scroll')
+        } else {
+          staticToc.classList.add('sticky')
+          staticToc.classList.remove('fixed', 'max-h-[50vh]', 'max-w-[30vw]', 'overflow-y-scroll')
+        }
+      }
+      observeArticleTitles()
+    }
+
+    window.addEventListener('scroll', handleScroll)
+  })
+</script>

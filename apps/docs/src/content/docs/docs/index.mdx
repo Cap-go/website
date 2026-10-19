@@ -1,0 +1,78 @@
+---
+title: Welcome to Capgo Documentation
+description: Your comprehensive guide to Capgo Cloud live updates and our complete suite of Capacitor plugins for building powerful mobile apps.
+tableOfContents: false
+next: false
+hero:
+  tagline: Master Capgo Cloud for instant app updates and explore our comprehensive collection of Capacitor plugins to enhance your mobile development
+  actions:
+    - text: Get started with Capgo Cloud
+      link: /docs/getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: Browse All Plugins
+      link: /docs/plugins/
+      icon: puzzle
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { pluginCountLabel } from '@/config/plugins';
+
+## 🚀 Capgo Cloud - Live Updates Made Simple
+
+<CardGrid stagger>
+  <Card title="Instant Updates" icon="rocket">
+    Deploy JavaScript, HTML, and CSS updates directly to users without app store delays. Fix bugs and ship features in minutes, not days.
+  </Card>
+  <Card title="3-Step Integration" icon="pencil">
+    Get started with just `npx @capgo/cli@latest init [APIKEY]` and start pushing updates immediately with our simple integration.
+  </Card>
+  <Card title="Mobile & Desktop" icon="laptop">
+    Same live update system for Capacitor mobile apps and Electron desktop apps. One platform, all your apps.
+  </Card>
+  <Card title="Complete Guide" icon="open-book">
+    Learn everything from [quick setup](/docs/getting-started/quickstart/) to advanced deployment strategies in our comprehensive documentation.
+  </Card>
+</CardGrid>
+
+## 📚 What's in This Documentation
+
+<CardGrid>
+  <LinkCard
+    title="Capgo Cloud Setup"
+    description="Complete guides for integrating live updates, managing channels, CI/CD integration, and monitoring your deployments."
+    href="/docs/getting-started/quickstart/"
+  />
+  <LinkCard
+    title="Electron Updater"
+    description="Live updates for Electron desktop apps. Same powerful system, now for desktop applications."
+    href="/docs/plugins/electron-updater/"
+  />
+  <LinkCard
+    title={`${pluginCountLabel} Capacitor Plugins`}
+    description="Explore our collection of production-ready plugins for biometrics, purchases, camera, storage, and more native features."
+    href="/docs/plugins/"
+  />
+  <LinkCard
+    title="CLI & Public API"
+    description="Automate your workflow with our CLI tools and integrate Capgo into your existing systems with our REST API."
+    href="/docs/cli/"
+  />
+  <LinkCard
+    title="Enterprise Solutions"
+    description="Dedicated support, SLAs, custom features, and advanced security options for teams that need more."
+    href="/enterprise/"
+  />
+</CardGrid>
+
+## 🎯 Quick Links
+
+- **First time?** Start with the [5-minute quickstart](/docs/getting-started/quickstart/)
+- **Need a plugin?** Browse our [plugin collection](/docs/plugins/) or request [custom development](/consulting/)
+- **Having issues?** Check the [FAQ](/docs/faq/) or join our [Discord](https://discord.capgo.app)
+- **Enterprise needs?** Check our [enterprise solutions](/enterprise/) or [contact us](mailto:support@capgo.app)
+
+## Keep going from Welcome to Capgo Documentation
+
+If you are using **Welcome to Capgo Documentation** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-age-range"
+description: "Cross-platform age range detection. Google Play Age Signals on Android, Apple DeclaredAgeRange on iOS."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Cross-platform age range detection plugin."
+  actions:
+    - text: Get started
+      link: /docs/plugins/age-range/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-age-range/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Cross-platform age range detection plugin.
+
+## Core Capabilities
+
+- `requestAgeRange` - Request the user's age range.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `requestAgeRange` | Request the user's age range. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-age-range](https://github.com/Cap-go/capacitor-age-range/).
+
+## Keep going from @capgo/capacitor-age-range
+
+If you are using **@capgo/capacitor-age-range** to plan store approval and distribution, connect it with [Using @capgo/capacitor-age-range](/plugins/capacitor-age-range/) for the native capability in Using @capgo/capacitor-age-range, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/capacitor-native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/capacitor-native-market, and [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market.

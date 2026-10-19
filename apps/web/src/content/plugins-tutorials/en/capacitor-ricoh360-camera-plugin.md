@@ -1,0 +1,75 @@
+---
+locale: en
+---
+# Using @capgo/capacitor-ricoh360
+
+Provides an SDK for the Ricoh360 cameras for Capacitor.
+
+## Install
+
+```bash
+npm install @capgo/capacitor-ricoh360
+npx cap sync
+```
+
+## What This Plugin Exposes
+
+- `initialize` - Initializes the SDK with camera URL.
+- `getCameraAsset` - Retrieves a camera asset from a URL and returns it as base64.
+- `listFiles` - Lists files stored on the camera.
+- `capturePicture` - Captures a picture.
+
+## Example Usage
+
+### `initialize`
+
+Initializes the SDK with camera URL.
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
+
+const result = await Ricoh360Camera.initialize({ url: 'https://example.com' });
+console.log(result);
+```
+
+### `getCameraAsset`
+
+Retrieves a camera asset from a URL and returns it as base64.
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
+
+const result = await Ricoh360Camera.getCameraAsset({ url: 'https://example.com' });
+console.log(result);
+```
+
+### `listFiles`
+
+Lists files stored on the camera.
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
+
+const result = await Ricoh360Camera.listFiles();
+console.log(result);
+```
+
+### `capturePicture`
+
+Captures a picture.
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360';
+
+const result = await Ricoh360Camera.capturePicture();
+console.log(result);
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/
+- Docs: /docs/plugins/ricoh360-camera/
+
+## Keep going from Using @capgo/capacitor-ricoh360
+
+If you are using **@capgo/capacitor-ricoh360** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

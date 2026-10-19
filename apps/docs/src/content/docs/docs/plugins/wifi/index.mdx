@@ -1,0 +1,70 @@
+---
+title: "@capgo/capacitor-wifi"
+description: "Manage WiFi connectivity for your Capacitor app."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Manage WiFi connectivity for your Capacitor app"
+  actions:
+    - text: Get started
+      link: /docs/plugins/wifi/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-wifi/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Manage WiFi connectivity for your Capacitor app
+
+Start with `addNetwork()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
+
+## Core Capabilities
+
+- `addNetwork` - Show a system dialog to add a Wi-Fi network to the device. On Android SDK 30+, this opens the system Wi-Fi settings with the network pre-filled. On iOS, this connects to the network directly.
+- `connect` - Connect to a Wi-Fi network. On Android, this creates a temporary connection that doesn't route traffic through the network by default. Set autoRouteTraffic to true to bind app traffic to the connected network (useful for local/device-hosted APs). For a persistent connection on Android, use addNetwork() instead. On iOS, this creates a persistent connection.
+- `disconnect` - Disconnect from the current Wi-Fi network. On iOS, only disconnects from networks that were added via this plugin.
+- `getAvailableNetworks` - Get a list of available Wi-Fi networks from the last scan. Only available on Android.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `addNetwork` | Show a system dialog to add a Wi-Fi network to the device. On Android SDK 30+, this opens the system Wi-Fi settings with the network pre-filled. On iOS, this connects to the network directly. |
+| `connect` | Connect to a Wi-Fi network. On Android, this creates a temporary connection that doesn't route traffic through the network by default. Set autoRouteTraffic to true to bind app traffic to the connected network (useful for local/device-hosted APs). For a persistent connection on Android, use addNetwork() instead. On iOS, this creates a persistent connection. |
+| `disconnect` | Disconnect from the current Wi-Fi network. On iOS, only disconnects from networks that were added via this plugin. |
+| `getAvailableNetworks` | Get a list of available Wi-Fi networks from the last scan. Only available on Android. |
+| `getIpAddress` | Get the device's current IP address. Available on both Android and iOS. |
+| `getRssi` | Get the received signal strength indicator (RSSI) of the current network in dBm. Only available on Android. |
+| `getSsid` | Get the service set identifier (SSID) of the current network. Available on both Android and iOS. |
+| `getWifiInfo` | Get comprehensive information about the currently connected WiFi network. This method provides detailed network information including SSID, BSSID, IP address, frequency, link speed, and signal strength in a single call. On iOS, some fields may not be available and will be undefined. |
+| `isEnabled` | Check if Wi-Fi is enabled on the device. Only available on Android. |
+| `startScan` | Start scanning for Wi-Fi networks. Only available on Android. Results are delivered via the 'networksScanned' event listener. Note: May fail due to system throttling or hardware issues. |
+| `checkPermissions` | Check the current permission status for location access. Location permission is required for Wi-Fi operations on both platforms. |
+| `requestPermissions` | Request location permissions from the user. Location permission is required for Wi-Fi operations on both platforms. |
+| `addListener` | Add a listener for the 'networksScanned' event. Only available on Android. This event is fired when Wi-Fi scan results are available. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Get the native plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-wifi](https://github.com/Cap-go/capacitor-wifi/).
+
+## Keep going from @capgo/capacitor-wifi
+
+If you are using **@capgo/capacitor-wifi** to plan native plugin work, connect it with [Using @capgo/capacitor-wifi](/plugins/capacitor-wifi/) for the native capability in Using @capgo/capacitor-wifi, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

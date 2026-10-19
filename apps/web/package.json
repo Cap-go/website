@@ -1,0 +1,26 @@
+{
+  "name": "@capgo/web",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@nekuda/webmcp-sdk": "0.7.1",
+    "astro-icon": "1.2.0",
+    "sharp": "^0.35.4"
+  },
+  "devDependencies": {
+    "@iconify-json/heroicons": "1.2.3"
+  },
+  "scripts": {
+    "validate:agent-skills": "bun ../../scripts/validate-agent-skills-digests.mjs",
+    "astro": "astro",
+    "dev": "NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} astro dev",
+    "start": "NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} astro dev",
+    "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs",
+    "build": "bun run clean:build-cache && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} BUILD_CONCURRENCY=${BUILD_CONCURRENCY:-1} UV_THREADPOOL_SIZE=${UV_THREADPOOL_SIZE:-16} astro build && rm -rf dist/.prerender",
+    "check": "bun run validate:agent-skills && astro check",
+    "preview": "bun run build && bun run preview:worker",
+    "preview:astro": "astro preview",
+    "preview:worker": "wrangler dev",
+    "deploy": "wrangler deploy"
+  }
+}

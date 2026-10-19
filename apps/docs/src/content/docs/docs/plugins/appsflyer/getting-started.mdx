@@ -1,0 +1,636 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-appsflyer and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-appsflyer` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-appsflyer
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+import type {
+  AFAdRevenueData,
+  AFAndroidInAppPurchase,
+  AFAnonymizeUser,
+  AFAppendToDeepLink,
+  AFConsentData,
+  AFConsentOptions,
+  AFCuid,
+  AFCurrency,
+  AFData,
+  AFDisable,
+  AFEmails,
+  AFEnableTCFDataCollection,
+  AFEvent,
+  AFFbDAL,
+  AFFilters,
+  AFHost,
+  AFInit,
+  AFIosInAppPurchase,
+  AFLanguage,
+  AFLatLng,
+  AFLinkGenerator,
+  AFLogInvite,
+  AFOnelinkDomain,
+  AFOnelinkID,
+  AFPartnerData,
+  AFPath,
+  AFPhone,
+  AFPromotion,
+  AFPurchaseDetailsV2,
+  AFPushPayload,
+  AFUninstall,
+  AFUrls,
+} from '@capgo/capacitor-appsflyer';
+```
+
+## Quick start
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.initSDK({
+  devKey: 'dev-key-123',
+  appID: 'app-id-123',
+});
+console.log(result);
+```
+
+## Example: startSDK
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.startSDK();
+console.log(result);
+```
+
+## Example: logEvent
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.logEvent({ eventName: 'event' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `initSDK`
+
+Use this method to initialize and start AppsFlyer SDK. This API should be called as soon as the app launches.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.initSDK({
+  devKey: 'dev-key-123',
+  appID: 'app-id-123',
+});
+console.log(result);
+```
+
+### `startSDK`
+
+Use this method to start AppsFlyer SDK, only on manual start mode.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.startSDK();
+console.log(result);
+```
+
+### `logEvent`
+
+Log an in-app event.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.logEvent({ eventName: 'event' });
+console.log(result);
+```
+
+### `setCustomerUserId`
+
+Setting your own customer ID enables you to cross-reference your own unique ID with AppsFlyer's unique ID and other devices' IDs.
+This ID is available in raw-data reports and in the Postback APIs for cross-referencing with your internal IDs.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setCustomerUserId({ cuid: 'cuid' });
+```
+
+### `setCurrencyCode`
+
+Sets the currency used for in-app purchases. Provide a three-character ISO 4217 code.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setCurrencyCode({ currencyCode: 'USD' });
+```
+
+### `updateServerUninstallToken`
+
+Pass GCM/FCM tokens on Android or APNs tokens on iOS when another plugin collected them.
+Use this to forward uninstall measurement tokens to AppsFlyer.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.updateServerUninstallToken({ token: 'token-123' });
+```
+
+### `setAppInviteOneLink`
+
+Sets the OneLink ID used as the base link for invite attribution.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setAppInviteOneLink({ onelinkID: 'onelink-id-123' });
+```
+
+### `setOneLinkCustomDomain`
+
+Registers branded OneLink domains so AppsFlyer can resolve attribution parameters hidden in short links.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setOneLinkCustomDomain({ domains: ['example.com'] });
+```
+
+### `appendParametersToDeepLinkingURL`
+
+Enables attribution for App Links deep links without OneLink. Call this method before `startSDK()`.
+Include at least `pid` and `is_retargeting=true` in the parameters map.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.appendParametersToDeepLinkingURL({
+  contains: 'contains',
+  parameters: {},
+});
+```
+
+### `setResolveDeepLinkURLs`
+
+Use this when an AppsFlyer OneLink is wrapped inside another Universal Link.
+It lets the SDK resolve the wrapped URL so deep linking still works correctly.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setResolveDeepLinkURLs({ urls: ['https://example.com'] });
+```
+
+### `addPushNotificationDeepLinkPath`
+
+Configures how the SDK extracts deep link values from push notification payloads.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.addPushNotificationDeepLinkPath({ path: ['path/to/file'] });
+```
+
+### `setSharingFilter`
+
+Stops events from propagating to the specified AppsFlyer partners.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setSharingFilter({ filters: ['filter'] });
+```
+
+### `setSharingFilterForAllPartners`
+
+Stops events from propagating to all AppsFlyer partners. Overwrites setSharingFilter.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setSharingFilterForAllPartners();
+```
+
+### `setSharingFilterForPartners`
+
+Stops events from propagating to the specified AppsFlyer partners.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setSharingFilterForPartners({ filters: ['filter'] });
+```
+
+### `setAdditionalData`
+
+Sets additional key-value data to send to AppsFlyer.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setAdditionalData({ additionalData: {} });
+```
+
+### `getAppsFlyerUID`
+
+Get AppsFlyer's unique device ID (created for every new install of an app).
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.getAppsFlyerUID();
+console.log(result);
+```
+
+### `anonymizeUser`
+
+End User Opt-Out from AppsFlyer analytics (Anonymize user data).
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.anonymizeUser({ anonymizeUser: true });
+```
+
+### `stop`
+
+Once this API is invoked, our SDK no longer communicates with our servers and stops functioning.
+Useful when implementing user opt-in/opt-out.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.stop();
+console.log(result);
+```
+
+### `disableSKAdNetwork`
+
+Opt-out of SKAdNetwork
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.disableSKAdNetwork({ shouldDisable: true });
+```
+
+### `disableAdvertisingIdentifier`
+
+Disables collection of various Advertising IDs by the SDK. This includes Apple Identity for Advertisers (IDFA), Google Advertising ID (GAID), OAID and Amazon Advertising ID (AAID).
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.disableAdvertisingIdentifier({ shouldDisable: true });
+```
+
+### `disableCollectASA`
+
+Opt-out of Apple Search Ads attributions.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.disableCollectASA({ shouldDisable: true });
+```
+
+### `setHost`
+
+Set a custom host.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setHost({
+  hostPrefixName: 'host-prefix',
+  hostName: 'host',
+});
+```
+
+### `generateInviteLink`
+
+Allowing your existing users to invite their friends and contacts as new users to your app
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.generateInviteLink({ brandDomain: 'example.com' });
+console.log(result);
+```
+
+### `validateAndLogInAppPurchaseAndroid`
+
+API for server verification of in-app purchases. An af_purchase event with the relevant values will be automatically logged if the validation is successful.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.validateAndLogInAppPurchaseAndroid({
+  currency: 'USD',
+  publicKey: 'public-key-123',
+  signature: 'signature',
+  purchaseData: 'purchase-data',
+  price: 'price',
+});
+console.log(result);
+```
+
+### `validateAndLogInAppPurchaseIos`
+
+See the source definitions for the current contract.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.validateAndLogInAppPurchaseIos({
+  currency: 'USD',
+  inAppPurchase: 'in-app-purchase',
+  price: 'price',
+  transactionId: 'transaction-id-123',
+});
+console.log(result);
+```
+
+### `getSdkVersion`
+
+Get the AppsFlyer SDK version used in app.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.getSdkVersion();
+console.log(result);
+```
+
+### `enableFacebookDeferredApplinks`
+
+Enable the collection of Facebook Deferred AppLinks. Requires Facebook SDK and Facebook app on target/client device.
+This API must be invoked before initializing the AppsFlyer SDK in order to function properly.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.enableFacebookDeferredApplinks({ enableFacebookDAL: true });
+console.log(result);
+```
+
+### `sendPushNotificationData`
+
+Measure and get data from push-notification campaigns.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.sendPushNotificationData({ pushPayload: {} });
+```
+
+### `setCurrentDeviceLanguage`
+
+Set the language of the device. The data will be displayed in Raw Data Reports
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.setCurrentDeviceLanguage({ language: 'en-US' });
+console.log(result);
+```
+
+### `logCrossPromoteImpression`
+
+Logs an impression as part of a cross-promotion campaign. Make sure to use the promoted app ID as it appears in the AppsFlyer dashboard.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.logCrossPromoteImpression({
+  appID: 'app-id-123',
+  campaign: 'campaign',
+  parameters: {},
+});
+console.log(result);
+```
+
+### `setUserEmails`
+
+Set the user emails and encrypt them.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.setUserEmails({ emails: ['user@example.com'] });
+console.log(result);
+```
+
+### `logLocation`
+
+Manually log the location of the user
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.logLocation({
+  latitude: 48.8566,
+  longitude: 2.3522,
+});
+console.log(result);
+```
+
+### `setPhoneNumber`
+
+Will be sent as an SHA-256 encrypted string.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.setPhoneNumber({ phone: '+15555550123' });
+console.log(result);
+```
+
+### `setPartnerData`
+
+Allows sending custom data for partner integration purposes.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.setPartnerData({
+  data: {},
+  partnerId: 'partner-id-123',
+});
+console.log(result);
+```
+
+### `logInvite`
+
+Use to log a user-invite in-app event (af_invite).
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.logInvite({
+  eventParameters: {},
+  channel: 'channel',
+});
+console.log(result);
+```
+
+### `setDisableNetworkData`
+
+Use to opt-out of collecting the network operator name (carrier) and sim operator name from the device.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setDisableNetworkData({ shouldDisable: true });
+```
+
+### `enableTCFDataCollection`
+
+Use to opt-in/out the automatic collection of consent data, for users who use a CMP.
+Flag value will be persisted between app sessions.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.enableTCFDataCollection({ shouldEnableTCFDataCollection: true });
+```
+
+### `setConsentData`
+
+Use this to set user consent data manually.
+If your app doesn't use a CMP compatible with TCF v2.2, use the following method to manually provide the consent data directly to the SDK.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setConsentData({ data: { isUserSubjectToGDPR: true } });
+```
+
+### `logAdRevenue`
+
+By attributing ad revenue, app owners gain the complete view of user LTV and campaign ROI.
+Ad revenue is generated by displaying ads on rewarded videos, offer walls, interstitials, and banners in an app.
+You can use this method to log your ad revenue.
+
+```typescript
+import { AppsFlyer, MediationNetwork } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.logAdRevenue({
+  monetizationNetwork: 'monetization-network',
+  mediationNetwork: MediationNetwork.IRONSOURCE,
+  currencyIso4217Code: 'USD',
+  revenue: 1,
+});
+```
+
+### `setConsentDataV2`
+
+Use this to set user consent data manually.
+If your app doesn't use a CMP compatible with TCF v2.2, use the following method to manually provide the consent data directly to the SDK.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.setConsentDataV2({
+  isUserSubjectToGDPR: true,
+  hasConsentForDataUsage: true,
+  hasConsentForAdsPersonalization: true,
+  hasConsentForAdStorage: true,
+});
+```
+
+### `isSDKStarted`
+
+Use this method to check whether the AppsFlyer SDK has already been started in the current session.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.isSDKStarted();
+console.log(result);
+```
+
+### `isSDKStopped`
+
+Use this method to check whether the AppsFlyer SDK is currently stopped.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.isSDKStopped();
+console.log(result);
+```
+
+### `disableAppSetId`
+
+Disables AppSet ID collection. If called before SDK init, App Set ID will not be collected.
+If called after init, App Set ID will be collected but not sent in request payloads.
+Android only.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.disableAppSetId();
+```
+
+### `validateAndLogInAppPurchaseV2`
+
+API for server verification of in-app purchases V2.
+An af_purchase event with the relevant values will be automatically logged if the validation is successful.
+
+```typescript
+import { AppsFlyer, AFPurchaseType } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.validateAndLogInAppPurchaseV2({
+  purchaseDetails: {
+    purchaseType: AFPurchaseType.oneTimePurchase,
+    purchaseToken: 'purchase-token-123',
+    productId: 'product-id-123',
+  },
+});
+console.log(result);
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-appsflyer](/plugins/capacitor-appsflyer/) for the native capability in Using @capgo/capacitor-appsflyer, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

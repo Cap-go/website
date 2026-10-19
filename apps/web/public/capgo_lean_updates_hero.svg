@@ -1,0 +1,78 @@
+<svg width="2400" height="1350" viewBox="0 0 2400 1350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="222" y1="146" x2="2168" y2="1178" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F5F2"/>
+      <stop offset="1" stop-color="#ECEDEB"/>
+    </linearGradient>
+    <radialGradient id="glowLeft" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(560 650) rotate(90) scale(360 420)">
+      <stop stop-color="#CBD5E1" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#CBD5E1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowMid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1200 630) rotate(90) scale(360 420)">
+      <stop stop-color="#FACC15" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowRight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1840 650) rotate(90) scale(360 420)">
+      <stop stop-color="#34D399" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardDark" x1="420" y1="360" x2="780" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1C2C"/>
+      <stop offset="1" stop-color="#050B12"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="1225" y1="450" x2="1320" y2="642" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACC15"/>
+      <stop offset="1" stop-color="#FDE68A"/>
+    </linearGradient>
+    <filter id="shadowSoft" x="250" y="273" width="1900" height="650" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="22"/>
+      <feGaussianBlur stdDeviation="34"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.168627 0 0 0 0 0.196078 0 0 0 0 0.235294 0 0 0 0.12 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1" result="shape"/>
+    </filter>
+    <filter id="textShadow" x="0" y="0" width="2400" height="1350" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="0.4" result="effect1_foregroundBlur_1"/>
+    </filter>
+  </defs>
+
+  <rect width="2400" height="1350" fill="url(#bg)"/>
+  <circle cx="560" cy="650" r="420" fill="url(#glowLeft)"/>
+  <circle cx="1200" cy="630" r="420" fill="url(#glowMid)"/>
+  <circle cx="1840" cy="650" r="420" fill="url(#glowRight)"/>
+
+  <path d="M1170 183C1182 171 1201 171 1213 183L1246 216C1258 228 1249 248 1232 248H1151C1134 248 1125 228 1137 216L1170 183Z" fill="#4DA2F6"/>
+
+  <g filter="url(#shadowSoft)">
+    <rect x="340" y="360" width="420" height="420" rx="86" fill="url(#cardDark)"/>
+    <rect x="990" y="360" width="420" height="420" rx="86" fill="#FAFAF8"/>
+    <rect x="1640" y="360" width="420" height="420" rx="86" fill="#FAFAF8"/>
+  </g>
+
+  <g stroke="#FFFFFF" stroke-width="28" stroke-linecap="round">
+    <line x1="550" y1="455" x2="550" y2="685"/>
+    <line x1="435" y1="570" x2="665" y2="570"/>
+    <line x1="467" y1="487" x2="633" y2="653"/>
+    <line x1="467" y1="653" x2="633" y2="487"/>
+  </g>
+
+  <rect x="1082" y="476" width="106" height="126" rx="28" fill="#E5E7EB"/>
+  <rect x="1118" y="442" width="106" height="126" rx="28" fill="#D1D5DB"/>
+  <rect x="1152" y="410" width="106" height="126" rx="28" fill="#C3CBD6"/>
+  <path d="M1242 444C1246 431 1262 427 1271 437L1335 502C1342 510 1337 522 1326 522H1287L1300 586C1303 599 1288 608 1278 600L1165 503C1156 496 1161 481 1173 481H1215L1242 444Z" fill="url(#bolt)"/>
+
+  <circle cx="1850" cy="570" r="92" fill="#6EE7B7"/>
+  <path d="M1805 574L1836 605L1897 538" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1758 634C1783 676 1829 704 1882 704C1942 704 1993 667 2015 613" stroke="#A7F3D0" stroke-width="20" stroke-linecap="round"/>
+  <path d="M1938 626L2014 612L1979 691" fill="#A7F3D0"/>
+
+  <g filter="url(#textShadow)" fill="#8F949D" font-family="Helvetica, Arial, sans-serif" font-size="52" font-weight="700" text-anchor="middle">
+    <text x="550" y="965">Store Build</text>
+    <text x="1200" y="965">Delta OTA</text>
+    <text x="1850" y="965">Safe Rollout</text>
+  </g>
+</svg>

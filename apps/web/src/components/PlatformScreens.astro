@@ -1,0 +1,36 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getProductScreens } from '@/config/productScreens'
+
+const locale = Astro.locals.locale
+// Each tab links to the product page that sells that part of the platform.
+const link = (href: string, label: string) => ({ href: getRelativeLocaleUrl(locale, href), linkLabel: label })
+const screens = getProductScreens(['rollout', 'live-release', 'update-health', 'compatibility', 'builds', 'notifications']).map((screen) => ({
+  ...screen,
+  ...{
+    rollout: link('live-update', 'Explore Live Updates'),
+    'live-release': link('observe', m.platform_screens_cta({}, { locale })),
+    'update-health': link('observe', m.platform_screens_cta({}, { locale })),
+    compatibility: link('observe', m.platform_screens_cta({}, { locale })),
+    builds: link('native-build', 'Explore Native Build'),
+    notifications: link('notifications', 'Explore Notifications'),
+  }[screen.id],
+}))
+---
+
+<section class="bg-[#1a1a1a] pb-24 sm:pb-32" aria-labelledby="platform-screens-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.platform_screens_eyebrow({}, { locale })}</p>
+      <h2 id="platform-screens-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+        {m.platform_screens_title({}, { locale })}
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.platform_screens_subtitle({}, { locale })}</p>
+    </div>
+    <div class="mt-14">
+      <ProductScreenTour screens={screens} label={m.platform_screens_eyebrow({}, { locale })} />
+    </div>
+  </div>
+</section>

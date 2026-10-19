@@ -1,0 +1,52 @@
+---
+title: "Devices"
+description: "Manage your Capgo device inventory, filters, metadata, and device-specific channel overrides."
+sidebar:
+  order: 9
+---
+
+:::note[Two 90-day policies]
+**Device inventory:** devices that have not connected to Capgo for 90 days are removed from this list.
+
+**Channel overrides:** a forced mapping or dashboard/API channel override is removed 90 days after it was last written, even if the device still checks in. See [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
+:::
+
+## Show the list of all devices
+
+Open your app, then select the **Devices** tab.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="Capgo devices list" /><figcaption></figcaption></figure>
+
+1. **Devices tab** - Open the device inventory.
+2. **Filters** - Filter devices by:
+   - **Override** - Show devices with a dashboard or Public API channel override, or a custom version. Local [`setChannel()`](/docs/plugins/updater/api/#setchannel) assignments are not listed here.
+   - **Custom ID** - Show devices with a custom identifier.
+
+## Configure a device
+
+Select a device in the table to open its detail page.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-country-code.webp" alt="Capgo device details showing the request-derived country code" /><figcaption>A device detail page can show the latest request-derived country code.</figcaption></figure>
+
+1. **Information** - View the device ID, last update, platform, updater version, installed and native versions, OS version, emulator and production state, encryption-key prefix, and request country when available.
+2. **Deployments** - View the deployment history for this device.
+3. **Logs** - View logs associated with this device.
+4. **Channel override** - Route this device to a specific private channel from the dashboard. When set, it takes precedence over normal channel selection. Console and API overrides expire after 90 days. [`setChannel()`](/docs/plugins/updater/api/#setchannel) on current plugin versions is local and does not appear here.
+
+### Request country
+
+**Country** is the latest valid two-letter ISO 3166-1 code received from a Cloudflare-handled request for that device. It is not GPS or a location value sent by your app. Requests without a valid country do not clear the last valid value, and the field is absent when Capgo has no valid country for the device.
+
+### How device information is updated
+
+The updater and stats endpoints report device metadata when the app checks in. A device does not need to install an update to appear or refresh its details: an updater check that returns `no_new_version_available` can still record the reported metadata. Capgo skips redundant writes when that metadata has not changed, so **Last update** does not necessarily change after every check-in.
+
+Device metadata and MAU are different signals. See [Why my device number is different than my MAU?](/docs/faq/#why-my-device-number-is-different-than-my-mau) for the billing distinction.
+
+### Custom ID
+
+The `Custom ID` helps you associate a device with an identifier you recognize for your users. Set it from the device with `CapacitorUpdater.setCustomId({ customId: user })`.
+
+## Keep going from Devices
+
+If you are using **Devices** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

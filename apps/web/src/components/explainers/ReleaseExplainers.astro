@@ -1,0 +1,383 @@
+---
+import m from '@/copy/messages'
+import SceneNextLaunch from './SceneNextLaunch.astro'
+import SceneOtaBoundary from './SceneOtaBoundary.astro'
+import SceneDeltaUpdate from './SceneDeltaUpdate.astro'
+import SceneRollout from './SceneRollout.astro'
+
+const locale = Astro.locals.locale
+
+// Each step duration includes the time its transitions need plus a short hold so the caption can be read.
+const scenes = [
+  {
+    id: 'next-launch',
+    tab: m.explainer_tab_next_launch({}, { locale }),
+    Scene: SceneNextLaunch,
+    steps: [
+      { text: m.explainer_next_launch_step_1({}, { locale }), ms: 2800 },
+      { text: m.explainer_next_launch_step_2({}, { locale }), ms: 3400 },
+      { text: m.explainer_next_launch_step_3({}, { locale }), ms: 3400 },
+      { text: m.explainer_next_launch_step_4({}, { locale }), ms: 2800 },
+      { text: m.explainer_next_launch_step_5({}, { locale }), ms: 3000 },
+      { text: m.explainer_next_launch_step_6({}, { locale }), ms: 4200 },
+    ],
+  },
+  {
+    id: 'ota-boundary',
+    tab: m.explainer_tab_ota_boundary({}, { locale }),
+    Scene: SceneOtaBoundary,
+    steps: [
+      { text: m.explainer_ota_step_1({}, { locale }), ms: 3600 },
+      { text: m.explainer_ota_step_2({}, { locale }), ms: 3800 },
+      { text: m.explainer_ota_step_3({}, { locale }), ms: 4200 },
+      { text: m.explainer_ota_step_4({}, { locale }), ms: 4200 },
+    ],
+  },
+  {
+    id: 'delta',
+    tab: m.explainer_tab_delta({}, { locale }),
+    Scene: SceneDeltaUpdate,
+    steps: [
+      { text: m.explainer_delta_step_1({}, { locale }), ms: 2800 },
+      { text: m.explainer_delta_step_2({}, { locale }), ms: 3200 },
+      { text: m.explainer_delta_step_3({}, { locale }), ms: 3600 },
+      { text: m.explainer_delta_step_4({}, { locale }), ms: 4000 },
+    ],
+  },
+  {
+    id: 'rollout',
+    tab: m.explainer_tab_rollout({}, { locale }),
+    Scene: SceneRollout,
+    steps: [
+      { text: m.explainer_rollout_step_1({}, { locale }), ms: 2400 },
+      { text: m.explainer_rollout_step_2({}, { locale }), ms: 3000 },
+      { text: m.explainer_rollout_step_3({}, { locale }), ms: 3000 },
+      { text: m.explainer_rollout_step_4({}, { locale }), ms: 3400 },
+      { text: m.explainer_rollout_step_5({}, { locale }), ms: 3400 },
+      { text: m.explainer_rollout_step_6({}, { locale }), ms: 4000 },
+    ],
+  },
+]
+
+interface Props {
+  /** Section surface; pages with their own backdrop pass `bg-transparent`. */
+  background?: string
+}
+
+const { background = 'bg-[#1a1a1a]' } = Astro.props
+---
+
+<section class:list={[background, 'py-24 sm:py-32']} data-explainers aria-labelledby="explainers-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.explainer_eyebrow({}, { locale })}</p>
+      <h2 id="explainers-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+        {m.explainer_title({}, { locale })}
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.explainer_subtitle({}, { locale })}</p>
+    </div>
+
+    <div class="mt-12 flex items-center justify-center gap-3">
+      <div
+        role="tablist"
+        aria-label={m.explainer_tablist_label({}, { locale })}
+        class="flex max-w-full [scrollbar-width:none] gap-1 overflow-x-auto rounded-full bg-white/5 p-1 ring-1 ring-white/10"
+      >
+        {
+          scenes.map((scene, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`explainer-tab-${scene.id}`}
+              aria-controls={`explainer-panel-${scene.id}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              tabindex={index === 0 ? 0 : -1}
+              data-tab={index}
+              class="explainer-tab relative shrink-0 overflow-hidden rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap text-gray-400 transition-colors focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none aria-selected:bg-white/10 aria-selected:text-white [@media(hover:hover)]:hover:text-white"
+            >
+              <span class="explainer-tab-progress absolute inset-x-3 bottom-1 h-0.5 origin-left rounded-full bg-[#44BCFF]" aria-hidden="true" />
+              <span class="relative">{scene.tab}</span>
+            </button>
+          ))
+        }
+      </div>
+      <button
+        type="button"
+        data-explainer-toggle
+        data-label-pause={m.explainer_pause({}, { locale })}
+        data-label-play={m.explainer_play({}, { locale })}
+        aria-label={m.explainer_pause({}, { locale })}
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/5 text-gray-300 ring-1 ring-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none [@media(hover:hover)]:hover:bg-white/10 [@media(hover:hover)]:hover:text-white"
+      >
+        <svg class="explainer-icon-pause h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+          <rect x="3" y="2" width="3.5" height="12" rx="1"></rect>
+          <rect x="9.5" y="2" width="3.5" height="12" rx="1"></rect>
+        </svg>
+        <svg class="explainer-icon-play hidden h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M4 2.8v10.4a.8.8 0 0 0 1.2.7l8.6-5.2a.8.8 0 0 0 0-1.4L5.2 2.1A.8.8 0 0 0 4 2.8Z"></path>
+        </svg>
+      </button>
+    </div>
+
+    {
+      scenes.map((scene, index) => (
+        <div
+          role="tabpanel"
+          id={`explainer-panel-${scene.id}`}
+          aria-labelledby={`explainer-tab-${scene.id}`}
+          hidden={index !== 0}
+          data-panel={index}
+          data-durations={scene.steps.map((step) => step.ms).join(',')}
+          class="mt-8 grid gap-6 lg:min-h-[37rem] lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-center"
+        >
+          <div class="overflow-hidden rounded-3xl bg-[#101216] ring-1 ring-white/10">
+            <scene.Scene />
+          </div>
+          <ol class="explainer-steps grid gap-2" aria-label={m.explainer_steps_label({}, { locale })}>
+            {scene.steps.map((step, stepIndex) => (
+              <li>
+                <button
+                  type="button"
+                  data-step-button={stepIndex}
+                  class="explainer-step group flex w-full items-start gap-3 rounded-2xl px-4 py-3 text-left text-sm leading-6 text-gray-500 ring-1 ring-transparent transition-[background-color,color,box-shadow] focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none [@media(hover:hover)]:hover:text-gray-300"
+                >
+                  <span class="explainer-step-index mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-semibold ring-1 ring-white/15 transition-colors">
+                    {stepIndex + 1}
+                  </span>
+                  <span>{step.text}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+          <div class="-mt-3 flex justify-center gap-1 lg:hidden">
+            {scene.steps.map((_, stepIndex) => (
+              <button
+                type="button"
+                data-step-button={stepIndex}
+                aria-label={`${stepIndex + 1} / ${scene.steps.length}`}
+                class="explainer-dot flex h-8 w-8 items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
+              >
+                <span class="h-1.5 w-1.5 rounded-full bg-white/25 transition-[width,background-color]" />
+              </button>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .explainer-tab-progress {
+    transform: scaleX(var(--progress, 0));
+    opacity: 0;
+  }
+  .explainer-tab[aria-selected='true'] .explainer-tab-progress {
+    opacity: 1;
+  }
+  .explainer-step[aria-current='step'] {
+    background-color: rgb(255 255 255 / 0.06);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  }
+  .explainer-step[aria-current='step'] .explainer-step-index {
+    background-color: #44bcff;
+    color: #0b1220;
+    box-shadow: none;
+  }
+  @media (max-width: 1023px) {
+    .explainer-steps {
+      min-height: 5.5rem;
+    }
+    .explainer-steps li:not(:has([aria-current='step'])) {
+      display: none;
+    }
+  }
+  .explainer-dot[aria-current='step'] span {
+    width: 1.25rem;
+    background-color: #44bcff;
+  }
+  .explainer-dot[data-done] span {
+    background-color: rgb(68 188 255 / 0.5);
+  }
+  .explainer-step[data-done] {
+    color: rgb(209 213 219);
+  }
+  .explainer-step[data-done] .explainer-step-index {
+    color: #44bcff;
+    box-shadow: inset 0 0 0 1px rgb(68 188 255 / 0.5);
+  }
+</style>
+
+<style is:global>
+  [data-stage].is-cut,
+  [data-stage].is-cut * {
+    transition: none !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-stage],
+    [data-stage] * {
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+      animation-duration: 0s !important;
+      animation-delay: 0s !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  function initExplainers(root: HTMLElement) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-tab]'))
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-panel]'))
+    const toggle = root.querySelector<HTMLButtonElement>('[data-explainer-toggle]')
+    const durations = panels.map((panel) => (panel.dataset.durations ?? '').split(',').map(Number))
+    const totals = durations.map((list) => list.reduce((sum, ms) => sum + ms, 0))
+
+    let active = 0
+    let elapsed = 0
+    let lastTick = 0
+    let frame = 0
+    let inView = false
+    let userPaused = reduceMotion.matches
+    const renderedStep = panels.map(() => -1)
+
+    const stepStart = (sceneIndex: number, step: number) => durations[sceneIndex].slice(0, step).reduce((sum, ms) => sum + ms, 0)
+
+    const stepAt = (sceneIndex: number, time: number) => {
+      let acc = 0
+      for (let step = 0; step < durations[sceneIndex].length; step++) {
+        acc += durations[sceneIndex][step]
+        if (time < acc) return step
+      }
+      return durations[sceneIndex].length - 1
+    }
+
+    // Jumping backwards (or restarting) must not play reverse transitions, so we cut straight to the new state.
+    const setStep = (sceneIndex: number, step: number) => {
+      const panel = panels[sceneIndex]
+      const stage = panel.querySelector<HTMLElement>('[data-stage]')
+      if (!stage || renderedStep[sceneIndex] === step) return
+      const goingBack = step < renderedStep[sceneIndex]
+      if (goingBack) stage.classList.add('is-cut')
+      stage.dataset.step = String(step)
+      durations[sceneIndex].forEach((_, index) => stage.classList.toggle(`s${index}`, index <= step))
+      if (goingBack) {
+        void stage.offsetWidth
+        stage.classList.remove('is-cut')
+      }
+      panel.querySelectorAll<HTMLElement>('[data-step-button]').forEach((button) => {
+        const index = Number(button.dataset.stepButton)
+        if (index === step) button.setAttribute('aria-current', 'step')
+        else button.removeAttribute('aria-current')
+        button.toggleAttribute('data-done', index < step)
+      })
+      renderedStep[sceneIndex] = step
+    }
+
+    const render = () => {
+      setStep(active, stepAt(active, elapsed))
+      tabs[active].style.setProperty('--progress', String(Math.min(elapsed / totals[active], 1)))
+    }
+
+    const activate = (index: number, { focus = false } = {}) => {
+      tabs[active].style.setProperty('--progress', '0')
+      active = index
+      elapsed = 0
+      tabs.forEach((tab, tabIndex) => {
+        const selected = tabIndex === index
+        tab.setAttribute('aria-selected', String(selected))
+        tab.tabIndex = selected ? 0 : -1
+      })
+      panels.forEach((panel, panelIndex) => {
+        panel.hidden = panelIndex !== index
+      })
+      if (focus) tabs[index].focus()
+      if (reduceMotion.matches && userPaused) {
+        elapsed = totals[index] - 1
+      }
+      renderedStep[index] = Number.POSITIVE_INFINITY
+      render()
+    }
+
+    const isPlaying = () => !userPaused && inView && !document.hidden
+
+    const tick = (now: number) => {
+      frame = 0
+      if (!isPlaying()) return
+      elapsed += Math.min(now - lastTick, 1000)
+      lastTick = now
+      if (elapsed >= totals[active]) {
+        activate((active + 1) % panels.length)
+      } else {
+        render()
+      }
+      frame = requestAnimationFrame(tick)
+    }
+
+    const sync = () => {
+      if (isPlaying() && !frame) {
+        lastTick = performance.now()
+        frame = requestAnimationFrame(tick)
+      }
+      if (!isPlaying() && frame) {
+        cancelAnimationFrame(frame)
+        frame = 0
+      }
+      if (toggle) {
+        toggle.setAttribute('aria-label', (userPaused ? toggle.dataset.labelPlay : toggle.dataset.labelPause) ?? '')
+        toggle.querySelector('.explainer-icon-pause')?.classList.toggle('hidden', userPaused)
+        toggle.querySelector('.explainer-icon-play')?.classList.toggle('hidden', !userPaused)
+      }
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index))
+      tab.addEventListener('keydown', (event) => {
+        const keys: Record<string, number> = {
+          ArrowRight: (index + 1) % tabs.length,
+          ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+          Home: 0,
+          End: tabs.length - 1,
+        }
+        if (!(event.key in keys)) return
+        event.preventDefault()
+        activate(keys[event.key], { focus: true })
+      })
+    })
+
+    panels.forEach((panel, sceneIndex) => {
+      panel.querySelectorAll<HTMLElement>('[data-step-button]').forEach((button) => {
+        button.addEventListener('click', () => {
+          elapsed = stepStart(sceneIndex, Number(button.dataset.stepButton))
+          userPaused = true
+          render()
+          sync()
+        })
+      })
+    })
+
+    toggle?.addEventListener('click', () => {
+      userPaused = !userPaused
+      if (!userPaused && elapsed >= totals[active] - 1) activate((active + 1) % panels.length)
+      sync()
+    })
+
+    new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting
+        sync()
+      },
+      { threshold: 0.35 },
+    ).observe(root)
+
+    document.addEventListener('visibilitychange', sync)
+
+    activate(0)
+    sync()
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-explainers]').forEach(initExplainers)
+</script>

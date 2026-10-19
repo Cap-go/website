@@ -1,0 +1,259 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const content = {
+  title: 'iOS UDID Finder Result',
+  description: 'Review the UDID, model, serial number, and other identifiers captured from the device profile response.',
+  keywords: 'ios udid result, iphone udid response, ipad device identifier result, ios profile service result, tester device registration',
+  robots: 'noindex, nofollow',
+  ldJSON: undefined,
+}
+
+const toolHref = getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-udid-finder')
+const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/builder/ios/')
+---
+
+<Layout content={content} disableThirdPartyScripts>
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Device response</p>
+        <h1 class="mt-3 text-4xl font-bold text-white">iOS UDID Finder result</h1>
+        <p id="copy-status" class="sr-only" aria-live="polite"></p>
+        <p id="result-description" class="mt-4 text-sm leading-7 text-slate-300" aria-live="polite">
+          Waiting for a device response. If you just installed the profile, this page will populate automatically after the redirect completes.
+        </p>
+        <div id="result-rows" class="mt-8 space-y-4"></div>
+        <div id="result-empty" class="mt-8 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-6 text-sm leading-7 text-amber-100">
+          No device response was available for this session. Open this page through the profile-service redirect after installing the UDID profile on the device.
+        </div>
+
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <a
+            id="result-email"
+            class="hidden items-center justify-center rounded-2xl border border-fuchsia-300/40 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
+          >
+            Email these details
+          </a>
+          <a
+            href={toolHref}
+            class="inline-flex items-center justify-center rounded-2xl bg-fuchsia-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
+          >
+            Back to the UDID finder
+          </a>
+          <a
+            href={signingDocsHref}
+            class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
+          >
+            Continue to iOS signing docs
+          </a>
+        </div>
+        <p class="mt-8 text-xs leading-6 text-slate-400">
+          The profile only collects these identifiers. If it appears in Settings, General, VPN &amp; Device Management, you can remove it there at any time.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const UDID_RESULT_ENDPOINT = '/api/tools/ios-udid-finder/result'
+  const fields = [
+    ['UDID', 'udid'],
+    ['Device name', 'deviceName'],
+    ['Product', 'product'],
+    ['iOS version', 'version'],
+    ['Serial number', 'serial'],
+    ['IMEI', 'imei'],
+    ['MEID', 'meid'],
+  ]
+
+  const statusRegion = document.querySelector<HTMLElement>('#copy-status')
+  const description = document.querySelector<HTMLElement>('#result-description')
+  const rowsRoot = document.querySelector<HTMLElement>('#result-rows')
+  const emptyState = document.querySelector<HTMLElement>('#result-empty')
+  const emailLink = document.querySelector<HTMLAnchorElement>('#result-email')
+
+  function updateEmailLink(rows: ReadonlyArray<readonly [string, string]>): void {
+    if (!emailLink) return
+    const body = rows.map(([label, value]) => `${label}: ${value}`).join('\n')
+    emailLink.href = `mailto:?subject=${encodeURIComponent('My iOS device UDID')}&body=${encodeURIComponent(body)}`
+    emailLink.classList.remove('hidden')
+    emailLink.classList.add('inline-flex')
+  }
+
+  function announceCopyStatus(message: string): void {
+    if (statusRegion) {
+      statusRegion.textContent = message
+    }
+  }
+
+  function buildRow(label: string, value: string): HTMLDivElement {
+    const card = document.createElement('div')
+    card.className = 'rounded-2xl border border-white/10 bg-slate-950/70 p-5'
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'
+
+    const text = document.createElement('div')
+    const labelElement = document.createElement('p')
+    labelElement.className = 'text-xs tracking-[0.25em] text-fuchsia-300 uppercase'
+    labelElement.textContent = label
+
+    const valueElement = document.createElement('p')
+    valueElement.className = 'mt-2 font-mono text-sm break-all text-white'
+    valueElement.textContent = value
+
+    const button = document.createElement('button')
+    button.type = 'button'
+    button.className =
+      'inline-flex items-center justify-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5'
+    button.dataset.copyValue = value
+    button.textContent = 'Copy'
+
+    text.append(labelElement, valueElement)
+    wrapper.append(text, button)
+    card.append(wrapper)
+
+    return card
+  }
+
+  function renderPayload(payload: Record<string, string> | null): void {
+    if (!rowsRoot || !emptyState || !description) return
+
+    rowsRoot.replaceChildren()
+
+    const rows = fields.map(([label, key]) => [label, payload?.[key] ?? ''] as const).filter(([, value]) => Boolean(value))
+
+    if (payload?.udid && rows.length > 0) {
+      document.title = 'iOS UDID Finder Result | Device Identifier Received'
+      description.textContent = 'The backend received the device payload successfully. Copy the values you need for Apple Developer or your tester registry below.'
+      emptyState.classList.add('hidden')
+      rows.forEach(([label, value]) => rowsRoot.append(buildRow(label, value)))
+      updateEmailLink(rows)
+      bindCopyButtons()
+      return
+    }
+
+    document.title = 'iOS UDID Finder Result'
+    description.textContent = 'Waiting for a device response. If you just installed the profile, this page will populate automatically after the redirect completes.'
+    emptyState.classList.remove('hidden')
+  }
+
+  function payloadFromQuery(): Record<string, string> | null {
+    const value = new URLSearchParams(window.location.search).get('p')
+    if (!value) return null
+
+    try {
+      const bytes = Uint8Array.from(atob(value.replaceAll('-', '+').replaceAll('_', '/')), (char) => char.charCodeAt(0))
+      const parsed = JSON.parse(new TextDecoder().decode(bytes)) as Record<string, unknown>
+      if (!parsed || typeof parsed !== 'object' || typeof parsed.udid !== 'string' || !parsed.udid) {
+        return null
+      }
+
+      const url = new URL(window.location.href)
+      if (url.searchParams.has('p')) {
+        url.searchParams.delete('p')
+        window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`)
+      }
+
+      return {
+        udid: String(parsed.udid ?? ''),
+        deviceName: String(parsed.deviceName ?? ''),
+        product: String(parsed.product ?? ''),
+        version: String(parsed.version ?? ''),
+        serial: String(parsed.serial ?? ''),
+        imei: String(parsed.imei ?? ''),
+        meid: String(parsed.meid ?? ''),
+      }
+    } catch {
+      return null
+    }
+  }
+
+  async function loadPayload(): Promise<Record<string, string> | null> {
+    const fromQuery = payloadFromQuery()
+    if (fromQuery) {
+      // The result endpoint clears the backup cookie, so call it even when the link carried the data.
+      void fetch(UDID_RESULT_ENDPOINT, { credentials: 'same-origin', headers: { Accept: 'application/json' } }).catch(() => undefined)
+      return fromQuery
+    }
+
+    try {
+      const response = await fetch(UDID_RESULT_ENDPOINT, {
+        credentials: 'same-origin',
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+      if (!response.ok) return null
+      const data = await response.json()
+      if (!data || typeof data !== 'object' || !('payload' in data)) return null
+      const payload = data.payload
+      return payload && typeof payload === 'object' ? (payload as Record<string, string>) : null
+    } catch {
+      return null
+    }
+  }
+
+  async function copyText(value: string): Promise<void> {
+    const fallbackCopy = (): void => {
+      const helper = document.createElement('textarea')
+      helper.value = value
+      helper.setAttribute('readonly', 'true')
+      helper.style.position = 'absolute'
+      helper.style.opacity = '0'
+      document.body.append(helper)
+      helper.select()
+
+      const legacyCopy = Reflect.get(document, 'execCommand')
+      const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+
+      helper.remove()
+      if (!copied) {
+        throw new Error('Copy failed')
+      }
+    }
+
+    if (!navigator.clipboard?.writeText) {
+      fallbackCopy()
+      return
+    }
+
+    try {
+      await navigator.clipboard.writeText(value)
+    } catch {
+      fallbackCopy()
+    }
+  }
+
+  function bindCopyButtons(): void {
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-value]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const value = button.dataset.copyValue
+        if (!value) return
+
+        const original = button.textContent || 'Copy'
+
+        try {
+          await copyText(value)
+          button.textContent = 'Copied'
+          announceCopyStatus('Value copied to clipboard.')
+        } catch {
+          button.textContent = 'Copy failed'
+          announceCopyStatus('Copy to clipboard failed.')
+        }
+
+        window.setTimeout(() => {
+          button.textContent = original
+          announceCopyStatus('')
+        }, 1600)
+      })
+    })
+  }
+
+  void loadPayload().then((payload) => {
+    renderPayload(payload)
+  })
+</script>

@@ -1,0 +1,48 @@
+---
+title: "@capgo/capacitor-audio-session"
+description: "This capacitor plugin allows iOS applications to get notified audio about interrupts & route changes (for example when a headset is connected), and also query and override the audio device in use."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "iOS-only plugin to query and control the audio session output and listen to route changes and interruptions."
+  actions:
+    - text: Get started
+      link: /docs/plugins/audiosession/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-audiosession/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+iOS-only plugin to query and control the audio session output and listen to route changes and interruptions.
+
+## Core Capabilities
+
+- `currentOutputs` - Get the current active audio output routes.
+- `overrideOutput` - Override the current audio output route.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `currentOutputs` | Get the current active audio output routes. |
+| `overrideOutput` | Override the current audio output route. |
+| `addListener` | Listen for audio route changes (e.g. headset connected/disconnected). |
+| `addListener` | Listen for audio session interruptions (e.g. incoming call) and their end. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-audiosession](https://github.com/Cap-go/capacitor-audiosession/).
+
+## Keep going from @capgo/capacitor-audio-session
+
+If you are using **@capgo/capacitor-audio-session** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-audio-session](/plugins/capacitor-audiosession/) for the native capability in Using @capgo/capacitor-audio-session, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

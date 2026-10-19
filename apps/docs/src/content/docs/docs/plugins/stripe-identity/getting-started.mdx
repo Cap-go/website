@@ -1,0 +1,82 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-stripe-identity and start using its Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-stripe-identity
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
+```
+
+## Quick start
+
+```typescript
+import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
+
+await StripeIdentity.initialize({ publishableKey: 'publishable-key-123' });
+```
+
+## Example: create
+
+```typescript
+import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
+
+await StripeIdentity.create({
+  verificationId: 'verification-id-123',
+  ephemeralKeySecret: 'ephemeral-key-secret',
+});
+```
+
+## Example: present
+
+```typescript
+import { StripeIdentity } from '@capgo/capacitor-stripe-identity';
+
+await StripeIdentity.present();
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## Verification flow
+
+Create a VerificationSession on your backend, then pass the IDs to the plugin:
+
+```typescript
+await StripeIdentity.initialize({ publishableKey: 'pk_test_...' });
+
+await StripeIdentity.create({
+  verificationId: 'vs_...',
+  ephemeralKeySecret: 'ek_...',
+  clientSecret: 'vs_..._secret_...', // web only
+});
+
+await StripeIdentity.present();
+```
+
+## Example app
+
+```bash
+git clone https://github.com/Cap-go/capacitor-stripe-identity.git
+cd capacitor-stripe-identity/example-app
+bun install
+bun run start
+```
+
+
+## Source Of Truth
+
+This page documents the current public API from [Cap-go/capacitor-stripe-identity](https://github.com/Cap-go/capacitor-stripe-identity/).

@@ -1,0 +1,128 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-realtimekit and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-realtimekit` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-realtimekit
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+await CapacitorRealtimekit.initialize();
+```
+
+## Example: startMeeting
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+await CapacitorRealtimekit.startMeeting({
+  authToken: 'your-auth-token',
+  enableAudio: true,
+  enableVideo: true,
+});
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `initialize`
+
+Initializes the RealtimeKit plugin before using other methods.
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+await CapacitorRealtimekit.initialize();
+```
+
+### `startMeeting`
+
+Start a meeting using the built-in UI.
+Only available on Android and iOS.
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+await CapacitorRealtimekit.startMeeting({
+  authToken: 'your-auth-token',
+  enableAudio: true,
+  enableVideo: true,
+});
+```
+
+## Type Reference
+
+### `StartMeetingOptions`
+Configuration options for starting a meeting.
+```typescript
+export interface StartMeetingOptions {
+  /**
+   * Authentication token for the participant.
+   * This token is required to join the Cloudflare Calls meeting.
+   *
+   * @since 7.0.0
+   */
+  authToken: string;
+
+  /**
+   * Whether to join with audio enabled.
+   * Default is true.
+   *
+   * @default true
+   * @since 7.0.0
+   */
+  enableAudio?: boolean;
+
+  /**
+   * Whether to join with video enabled.
+   * Default is true.
+   *
+   * @default true
+   * @since 7.0.0
+   */
+  enableVideo?: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-realtimekit](/plugins/capacitor-realtimekit/) for the native capability in Using @capgo/capacitor-realtimekit, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

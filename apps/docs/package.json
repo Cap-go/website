@@ -1,0 +1,39 @@
+{
+  "name": "@capgo/docs",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@astrojs/cloudflare": "14.3.4",
+    "@astrojs/markdown-remark": "7.3.2",
+    "@astrojs/mdx": "8.0.3",
+    "@astrojs/sitemap": "3.7.4",
+    "@astrojs/starlight": "0.42.6",
+    "@astrojs/starlight-docsearch": "0.8.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "7.3.8",
+    "astro-icon": "1.2.0",
+    "sharp": "^0.35.4",
+    "starlight-llms-txt": "0.12.0",
+    "starlight-package-managers": "^0.13.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "^26.6.2",
+    "vite-plugin-static-copy": "^4.1.1",
+    "wrangler": "4.137.0",
+    "zod": "^4.6.5"
+  },
+  "scripts": {
+    "sync:public": "bun run ./scripts/sync_public.ts",
+    "astro": "astro",
+    "dev": "bun run sync:public && astro dev",
+    "start": "bun run sync:public && astro dev",
+    "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs .wrangler/deploy",
+    "build": "bun run sync:public && bun run clean:build-cache && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} BUILD_CONCURRENCY=${BUILD_CONCURRENCY:-1} UV_THREADPOOL_SIZE=${UV_THREADPOOL_SIZE:-16} astro build",
+    "check": "bun run sync:public && astro check",
+    "preview": "astro preview",
+    "preview:worker": "rm -rf .wrangler/deploy && wrangler dev",
+    "deploy": "rm -rf .wrangler/deploy && wrangler deploy"
+  }
+}

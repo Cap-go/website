@@ -1,0 +1,307 @@
+---
+import ComparisonPage from '@/components/comparison/ComparisonPage.astro'
+import ProductScreenTour from '@/components/ProductScreenTour.astro'
+import { getProductScreens } from '@/config/productScreens'
+import Layout from '@/layouts/Layout.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import m from '@/copy/messages'
+import { pageDates, toIsoDate } from '@/data/pageDates'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const dates = pageDates['alternatives/capawesome']
+const config = Astro.locals.runtimeConfig.public
+const title = m.capwesome_title({}, { locale })
+const description = m.capwesome_meta_description({}, { locale })
+const competitor = 'Capawesome Cloud'
+const faq = [{ question: m.appflow_faq_q6({}, { locale }), answer: m.appflow_faq_a6({}, { locale }) }]
+
+const ldJSON = createLdJsonGraph(
+  config,
+  createServiceLdJson(config, {
+    name: title,
+    description,
+    url: Astro.url.href,
+    serviceType: 'Software Development Service',
+    areaServed: ['Worldwide'],
+  }),
+  {
+    includeOrganization: true,
+    additionalEntities: [
+      createWebPageLdJson(config, {
+        name: title,
+        description,
+        url: Astro.url.href,
+        datePublished: toIsoDate(dates.publishedAt),
+        dateModified: toIsoDate(dates.updatedAt),
+        inLanguage: locale,
+      }),
+      createFAQPageLdJson(config, { url: Astro.url.href, questions: faq }),
+    ],
+  },
+)
+
+const content = {
+  title,
+  description,
+  image: `${config.baseUrl}/social/capgo-vs-capawesome.png`,
+  keywords: 'Capawesome alternative, Capawesome Cloud vs Capgo, Capacitor live updates, Capgo',
+  ldJSON,
+}
+
+const sources = [
+  { label: m.compare_capawesome_source_pricing({}, { locale }), href: 'https://capawesome.io/cloud/pricing/' },
+  { label: m.compare_capawesome_source_cloud({}, { locale }), href: 'https://capawesome.io/cloud/' },
+  { label: m.compare_capawesome_source_live_updates({}, { locale }), href: 'https://capawesome.io/cloud/live-updates/' },
+  { label: m.compare_capawesome_source_github({}, { locale }), href: 'https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/live-update' },
+  { label: m.compare_capawesome_source_about({}, { locale }), href: 'https://capawesome.io/about/' },
+  { label: m.compare_capawesome_source_logs({}, { locale }), href: 'https://capawesome.io/docs/cloud/live-updates/logs/' },
+  { label: m.compare_capawesome_source_rollouts({}, { locale }), href: 'https://capawesome.io/docs/cloud/live-updates/rollouts/' },
+  { label: m.compare_capawesome_source_bundles({}, { locale }), href: 'https://capawesome.io/docs/cloud/live-updates/bundles/' },
+  { label: m.compare_capawesome_source_ai({}, { locale }), href: 'https://capawesome.io/docs/ai/mcp/capawesome/' },
+  {
+    label: m.compare_capawesome_source_plugin_code({}, { locale }),
+    href: 'https://github.com/capawesome-team/capacitor-plugins/blob/5fdc1f1ae0eff92710efe21c08978ee23ec253c1/packages/live-update/ios/Plugin/LiveUpdate.swift',
+  },
+]
+
+const rows = {
+  pricing: { text: m.compare_capawesome_pricing({}, { locale }), sources: [1] },
+  ota: { text: m.compare_capawesome_ota({}, { locale }), sources: [3] },
+  native_builds: { text: m.compare_capawesome_native_builds({}, { locale }), sources: [1, 2] },
+  frameworks: { text: m.compare_capawesome_frameworks({}, { locale }), sources: [2] },
+  open_source: { text: m.compare_capawesome_open_source({}, { locale }), sources: [4, 3] },
+  rollback: { text: m.compare_capawesome_rollback({}, { locale }), sources: [3] },
+  support: { text: m.compare_capawesome_support({}, { locale }), sources: [1] },
+  company: { text: m.compare_capawesome_company({}, { locale }), sources: [5, 2] },
+}
+
+// What Capgo shows after a release that Capawesome Cloud does not document. Source numbers index `sources`.
+const delta = [
+  {
+    label: m.compare_capawesome_delta_source_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_source_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_source_them({}, { locale }),
+    sources: [10, 6],
+  },
+  {
+    label: m.compare_capawesome_delta_plan_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_plan_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_plan_them({}, { locale }),
+    sources: [1],
+  },
+  {
+    label: m.compare_capawesome_delta_live_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_live_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_live_them({}, { locale }),
+    sources: [3],
+  },
+  {
+    label: m.compare_capawesome_delta_native_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_native_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_native_them({}, { locale }),
+    sources: [10],
+  },
+  {
+    label: m.compare_capawesome_delta_failures_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_failures_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_failures_them({}, { locale }),
+    sources: [6],
+  },
+  {
+    label: m.compare_capawesome_delta_device_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_device_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_device_them({}, { locale }),
+    sources: [6],
+  },
+  {
+    label: m.compare_capawesome_delta_rollout_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_rollout_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_rollout_them({}, { locale }),
+    sources: [7, 3],
+  },
+  {
+    label: m.compare_capawesome_delta_compat_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_compat_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_compat_them({}, { locale }),
+    sources: [8],
+  },
+  {
+    label: m.compare_capawesome_delta_audit_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_audit_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_audit_them({}, { locale }),
+    sources: [1],
+  },
+  {
+    label: m.compare_capawesome_delta_price_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_price_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_price_them({}, { locale }),
+    sources: [1],
+  },
+  {
+    label: m.compare_capawesome_delta_push_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_push_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_push_them({}, { locale }),
+    sources: [2],
+  },
+  {
+    label: m.compare_capawesome_delta_ai_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_ai_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_ai_them({}, { locale }),
+    sources: [9],
+  },
+  {
+    label: m.compare_capawesome_delta_infra_label({}, { locale }),
+    capgo: m.compare_capawesome_delta_infra_capgo({}, { locale }),
+    them: m.compare_capawesome_delta_infra_them({}, { locale }),
+    sources: [1],
+  },
+]
+
+const observeScreens = getProductScreens(['live-release', 'update-health', 'native-health', 'rollout', 'compatibility', 'device-history'])
+
+const better = [
+  { title: m.compare_capawesome_better_1_title({}, { locale }), text: m.compare_capawesome_better_1_text({}, { locale }), sources: [1] },
+  { title: m.compare_capawesome_better_2_title({}, { locale }), text: m.compare_capawesome_better_2_text({}, { locale }), sources: [3] },
+  { title: m.compare_capawesome_better_3_title({}, { locale }), text: m.compare_capawesome_better_3_text({}, { locale }), sources: [2] },
+]
+
+const migration = {
+  title: m.capwesome_migration_title({}, { locale }),
+  lead: m.capwesome_migration_intro({}, { locale }),
+  steps: [
+    { title: m.capwesome_migration_step1({}, { locale }), html: m.compare_capawesome_step1_text({}, { locale }) },
+    { title: m.capwesome_migration_step2({}, { locale }), html: m.compare_capawesome_step2_text({}, { locale }) },
+    { title: m.capwesome_migration_step3({}, { locale }), html: m.compare_capawesome_step3_text({}, { locale }) },
+  ],
+  links: [
+    { label: m.compare_migration_docs_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawesome-to-capgo/') },
+    { label: m.migrate_from_capawesome_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-capawesome') },
+  ],
+}
+
+const related = [
+  { label: m.review_capawesome_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'reviews/capawesome') },
+  { label: m.migrate_from_capawesome_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'migrate/from-capawesome') },
+  { label: m.best_capacitor_live_updates_title({}, { locale }), href: getRelativeLocaleUrl(locale, 'best/capacitor-live-updates') },
+  { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
+]
+---
+
+<Layout content={content}>
+  <ComparisonPage
+    updatedAt={dates.updatedAt}
+    competitor={competitor}
+    eyebrow={m.compare_capawesome_eyebrow({}, { locale })}
+    heading={m.capwesome_hero_title({}, { locale })}
+    lead={m.compare_capawesome_lead({}, { locale })}
+    verdict={m.compare_capawesome_verdict({}, { locale })}
+    rows={rows}
+    sources={sources}
+    better={better}
+    migration={migration}
+    testimonials={productTestimonials.liveUpdate}
+    reviewWall
+    related={related}
+    faq={faq}
+    secondaryCta={{ label: m.compare_migration_docs_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawesome-to-capgo/') }}
+  >
+    <div slot="after-table" class="cmp-observe">
+      <div class="section-head section-head--wide">
+        <div class="eyebrow eyebrow--blue">{m.compare_capawesome_obs_eyebrow({}, { locale })}</div>
+        <h2 class="h2-section">{m.compare_capawesome_obs_title({}, { locale })}</h2>
+        <p class="lead">{m.compare_capawesome_obs_lead({}, { locale })}</p>
+      </div>
+      <div class="cmp-observe-tour">
+        <ProductScreenTour screens={observeScreens} label={m.compare_capawesome_obs_title({}, { locale })} />
+      </div>
+
+      <h3 class="cmp-observe-delta-title">{m.compare_capawesome_delta_title({}, { locale })}</h3>
+      <div class="comp-wrap">
+        <table class="comp comp-prose cmp-table">
+          <caption class="cmp-caption">{m.compare_capawesome_delta_caption({}, { locale })}</caption>
+          <colgroup>
+            <col class="cmp-col-label" />
+            <col class="cmp-col-val" />
+            <col class="cmp-col-val" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">{m.compare_col_area({}, { locale })}</th>
+              <th scope="col" class="us">
+                Capgo
+              </th>
+              <th scope="col">{competitor}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {delta.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td class="us">
+                  <span class="cmp-cell-label" aria-hidden="true">
+                    Capgo
+                  </span>
+                  {row.capgo}
+                </td>
+                <td class="them">
+                  <span class="cmp-cell-label" aria-hidden="true">
+                    {competitor}
+                  </span>
+                  {row.them}
+                  {row.sources.map((n) => (
+                    <a class="cmp-ref" href={`#cmp-src-${n}`} aria-label={m.compare_source_ref_label({ n, source: sources[n - 1]?.label ?? '' }, { locale })}>
+                      [{n}]
+                    </a>
+                  ))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="cmp-observe-pace">
+        {m.compare_capawesome_pace({}, { locale })}{' '}
+        <a href="https://github.com/Cap-go/capgo.app/pulls?q=is%3Apr+is%3Amerged" target="_blank" rel="noopener noreferrer">
+          {m.compare_capawesome_pace_link({}, { locale })} →
+        </a>
+      </p>
+    </div>
+  </ComparisonPage>
+</Layout>
+
+<style>
+  .cmp-observe {
+    margin-top: 96px;
+  }
+
+  .cmp-observe-tour {
+    margin-top: 40px;
+  }
+
+  .cmp-observe-delta-title {
+    margin: 72px 0 20px;
+    color: #fff;
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .cmp-observe-pace {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 15px;
+  }
+
+  .cmp-observe-pace a {
+    color: rgba(191, 219, 254, 0.9);
+    font-weight: 700;
+  }
+
+  @media (max-width: 720px) {
+    .cmp-observe {
+      margin-top: 64px;
+    }
+  }
+</style>

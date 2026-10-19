@@ -1,0 +1,80 @@
+---
+title: "@capgo/capacitor-intercom"
+description: "Intercom Capacitor plugin."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Intercom messenger, help center, and in-app messaging for Capacitor iOS and Android apps."
+  actions:
+    - text: Get started
+      link: /docs/plugins/intercom/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-intercom/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-intercom` wraps the official Intercom mobile SDKs so support, onboarding, and lifecycle campaigns stay native while your app shell stays Capacitor. Identify users, open the messenger, log events, and show help center content from JavaScript.
+
+## Platform support
+
+| Platform | Support |
+| --- | --- |
+| iOS | Intercom iOS SDK |
+| Android | Intercom Android SDK |
+| Web | Not supported |
+
+## Core Capabilities
+
+- `loadWithKeys` - Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config.
+- `registerIdentifiedUser` - Register a known user with Intercom. At least one of userId or email must be provided.
+- `registerUnidentifiedUser` - Register an anonymous user with Intercom.
+- `updateUser` - Update user attributes in Intercom.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `loadWithKeys` | Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config. |
+| `registerIdentifiedUser` | Register a known user with Intercom. At least one of userId or email must be provided. |
+| `registerUnidentifiedUser` | Register an anonymous user with Intercom. |
+| `updateUser` | Update user attributes in Intercom. |
+| `logout` | Log the user out of Intercom. |
+| `logEvent` | Log a custom event in Intercom. |
+| `displayMessenger` | Open the Intercom messenger. |
+| `displayMessageComposer` | Open the message composer with a pre-filled message. |
+| `displayHelpCenter` | Open the Intercom help center. |
+| `hideMessenger` | Hide the Intercom messenger. |
+| `displayLauncher` | Show the Intercom launcher button. |
+| `hideLauncher` | Hide the Intercom launcher button. |
+| `displayInAppMessages` | Enable in-app messages from Intercom. |
+| `hideInAppMessages` | Disable in-app messages from Intercom. |
+| `displayCarousel` | Display a specific Intercom carousel. |
+| `displayArticle` | Display a specific Intercom article. |
+| `displaySurvey` | Display a specific Intercom survey. |
+| `setUserHash` | Set the HMAC for identity verification. |
+| `setUserJwt` | Set JWT for secure messenger authentication. |
+| `setBottomPadding` | Set the bottom padding for the Intercom messenger UI. |
+| `sendPushTokenToIntercom` | Send a push notification token to Intercom. |
+| `receivePush` | Handle a received Intercom push notification. |
+| `getUnreadConversationCount` | Get the number of unread conversations for the current user. |
+| `addListener` | Listen for when the Intercom window is shown. |
+| `addListener` | Listen for when the Intercom window is hidden. |
+| `addListener` | Listen for changes in the unread conversation count. |
+| `removeAllListeners` | Remove all event listeners. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-intercom](https://github.com/Cap-go/capacitor-intercom/).
+
+## Keep going from @capgo/capacitor-intercom
+
+If you are using **@capgo/capacitor-intercom** to plan native plugin work, connect it with [Using @capgo/capacitor-intercom](/plugins/capacitor-intercom/) for the native capability in Using @capgo/capacitor-intercom, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

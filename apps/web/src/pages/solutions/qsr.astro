@@ -1,0 +1,658 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import SignupCta from '@/components/SignupCta.astro'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
+
+const title = `${brand} | ${m.solutions_qsr_title({}, { locale })}`
+const description = m.solutions_qsr_description({}, { locale })
+
+const links = {
+  ci: { href: docs('live-updates/integrations/github-actions/'), label: m.solutions_qsr_link_ci({}, { locale }) },
+  integrations: { href: docs('live-updates/integrations/'), label: m.solutions_qsr_link_integrations({}, { locale }) },
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_qsr_link_channels({}, { locale }) },
+  updateBehavior: { href: docs('live-updates/update-behavior/'), label: m.solutions_qsr_link_update_behavior({}, { locale }) },
+  rollouts: { href: docs('live-updates/progressive-rollouts/'), label: m.solutions_qsr_link_rollouts({}, { locale }) },
+  rollbacks: { href: docs('live-updates/rollbacks/'), label: m.solutions_qsr_link_rollbacks({}, { locale }) },
+  roles: { href: docs('webapp/organization-roles/'), label: m.solutions_qsr_link_roles({}, { locale }) },
+  kiosk: { href: docs('plugins/android-kiosk/'), label: m.solutions_qsr_link_kiosk({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_qsr_link_compatibility({}, { locale }) },
+}
+
+const ciCode = `# .github/workflows/capgo-launch.yml
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 15 11 *' # 06:00 UTC on 15 Nov, your launch time
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: npm ci && npm run build
+      - run: npx @capgo/cli@latest bundle upload --channel production --delta
+        env:
+          CAPGO_TOKEN: \${{ secrets.CAPGO_TOKEN }}`
+
+const brandsCode = `# one app ID per brand, same web codebase
+npx @capgo/cli@latest bundle upload com.yourgroup.brand-a --channel production
+npx @capgo/cli@latest bundle upload com.yourgroup.brand-b --channel production`
+
+const marketCode = `// in the app, after the user or kiosk picks a market
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+await CapacitorUpdater.setChannel({ channel: 'market-uk' })`
+
+const kioskCode = `// capacitor.config.ts
+CapacitorUpdater: { autoUpdate: 'onlyDownload' }
+
+// kiosk app
+let next
+CapacitorUpdater.addListener('updateAvailable', ({ bundle }) => {
+  next = bundle
+})
+
+// when the kiosk is back on its idle screen
+if (next) await CapacitorUpdater.set({ id: next.id })`
+
+const howSteps = [
+  {
+    title: m.solutions_qsr_how1_title({}, { locale }),
+    body: m.solutions_qsr_how1_body({}, { locale }),
+    code: 'npx @capgo/cli@latest channel add market-uk --self-assign',
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_qsr_how2_title({}, { locale }),
+    body: m.solutions_qsr_how2_body({}, { locale }),
+    code: 'npx @capgo/cli@latest bundle upload --channel market-uk --delta --rollout 10',
+    href: links.rollouts.href,
+    linkLabel: links.rollouts.label,
+  },
+  {
+    title: m.solutions_qsr_how3_title({}, { locale }),
+    body: m.solutions_qsr_how3_body({}, { locale }),
+    code: 'npx @capgo/cli@latest channel set market-uk --rollout-promote',
+    href: links.rollouts.href,
+    linkLabel: links.rollouts.label,
+  },
+  {
+    title: m.solutions_qsr_how4_title({}, { locale }),
+    body: m.solutions_qsr_how4_body({}, { locale }),
+    code: 'npx @capgo/cli@latest channel set market-uk --rollout-rollback',
+    href: links.rollbacks.href,
+    linkLabel: links.rollbacks.label,
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_qsr_faq1_q({}, { locale }), answer: m.solutions_qsr_faq1_a({}, { locale }), ...links.ci },
+  { question: m.solutions_qsr_faq2_q({}, { locale }), answer: m.solutions_qsr_faq2_a({}, { locale }), ...links.updateBehavior },
+  { question: m.solutions_qsr_faq3_q({}, { locale }), answer: m.solutions_qsr_faq3_a({}, { locale }), ...links.channels },
+  { question: m.solutions_qsr_faq4_q({}, { locale }), answer: m.solutions_qsr_faq4_a({}, { locale }), ...links.rollbacks },
+  { question: m.solutions_qsr_faq5_q({}, { locale }), answer: m.solutions_qsr_faq5_a({}, { locale }), ...links.compatibility },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
+})
+
+const content = { title, description, ldJSON }
+---
+
+<Layout content={content}>
+  <div class="product-hero">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+      <div class="pointer-events-none absolute inset-0 overflow-hidden">
+        <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
+          <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"></div>
+          <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl"></div>
+        </div>
+      </div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
+          <div class="mb-8 inline-flex items-center rounded-full border border-orange-400/40 bg-orange-500/10 px-4 py-2 text-sm font-medium text-orange-200">
+            <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            {m.solutions_qsr_badge({}, { locale })}
+          </div>
+
+          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{m.solutions_qsr_hero_title({}, { locale })}</h1>
+
+          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_qsr_hero_subtitle({}, { locale })}</p>
+
+          <SignupCta lead={m.signup_cta_lead_qsr_hero({}, { locale: Astro.locals.locale })} enterprise class="mt-8" />
+        </div>
+      </div>
+    </section>
+
+    <!-- The QSR Reality -->
+    <section class="bg-gray-800 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-16 max-w-3xl text-center">
+          <p class="mb-4 text-sm font-semibold tracking-wide text-orange-400 uppercase">{m.solutions_qsr_reality_label({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_qsr_reality_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
+          <!-- Launch Day Nightmare -->
+          <div class="rounded-2xl border border-red-500/30 bg-gray-900 p-8">
+            <h3 class="mb-6 flex items-center gap-2 text-xl font-bold text-red-400">
+              <svg aria-hidden="true" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
+              </svg>
+              {m.solutions_qsr_nightmare_title({}, { locale })}
+            </h3>
+            <div class="space-y-4 text-gray-300">
+              <p>{m.solutions_qsr_nightmare_para1({}, { locale })}</p>
+              <p>{m.solutions_qsr_nightmare_para2({}, { locale })}</p>
+              <p class="font-medium text-red-300">{m.solutions_qsr_nightmare_para3({}, { locale })}</p>
+            </div>
+          </div>
+
+          <!-- Pain Points -->
+          <div class="space-y-4">
+            <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_qsr_pain1_title({}, { locale })}</h3>
+                  <p class="text-sm text-gray-400">{m.solutions_qsr_pain1_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_qsr_pain2_title({}, { locale })}</h3>
+                  <p class="text-sm text-gray-400">{m.solutions_qsr_pain2_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_qsr_pain3_title({}, { locale })}</h3>
+                  <p class="text-sm text-gray-400">{m.solutions_qsr_pain3_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-500/20">
+                  <svg aria-hidden="true" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="mb-1 text-lg font-bold text-white">{m.solutions_qsr_pain4_title({}, { locale })}</h3>
+                  <p class="text-sm text-gray-400">{m.solutions_qsr_pain4_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Grid -->
+    <section class="bg-gray-900 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-16 max-w-3xl text-center">
+          <p class="mb-4 text-sm font-semibold tracking-wide text-orange-400 uppercase">{m.solutions_qsr_usecases_label({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_qsr_usecases_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Ordering & Delivery -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-all hover:border-orange-500/50">
+            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-orange-500/20">
+              <svg aria-hidden="true" class="h-7 w-7 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_qsr_usecase1_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_qsr_usecase1_desc({}, { locale })}</p>
+          </div>
+
+          <!-- Loyalty & Rewards -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-all hover:border-orange-500/50">
+            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-yellow-500/20">
+              <svg aria-hidden="true" class="h-7 w-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_qsr_usecase2_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_qsr_usecase2_desc({}, { locale })}</p>
+          </div>
+
+          <!-- Store Locator & Pickup -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-all hover:border-orange-500/50">
+            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-green-500/20">
+              <svg aria-hidden="true" class="h-7 w-7 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_qsr_usecase3_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_qsr_usecase3_desc({}, { locale })}</p>
+          </div>
+
+          <!-- Personalized Promotions -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-all hover:border-orange-500/50">
+            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-purple-500/20">
+              <svg aria-hidden="true" class="h-7 w-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_qsr_usecase4_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_qsr_usecase4_desc({}, { locale })}</p>
+          </div>
+
+          <!-- In-Store Kiosks -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-all hover:border-orange-500/50">
+            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/20">
+              <svg aria-hidden="true" class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_qsr_usecase5_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_qsr_usecase5_desc({}, { locale })}</p>
+          </div>
+
+          <!-- Multi-Brand Apps -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-all hover:border-orange-500/50">
+            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-red-500/20">
+              <svg aria-hidden="true" class="h-7 w-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_qsr_usecase6_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_qsr_usecase6_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="bg-gray-800 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-16 max-w-3xl text-center">
+          <p class="mb-4 text-sm font-semibold tracking-wide text-orange-400 uppercase">{m.solutions_qsr_solution_label({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_qsr_solutions_title({}, { locale })}</h2>
+        </div>
+
+        <div class="space-y-12">
+          <!-- Solution 1: CI uploads -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
+            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+              <div>
+                <div class="mb-6 flex items-center gap-3">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-orange-500/20">
+                    <svg aria-hidden="true" class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{m.solutions_qsr_sol1_title({}, { locale })}</h3>
+                </div>
+                <p class="mb-6 text-gray-300">{m.solutions_qsr_sol1_desc({}, { locale })}</p>
+                <ul class="space-y-3">
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol1_point1({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol1_point2({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol1_point3({}, { locale })}
+                  </li>
+                </ul>
+                <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+                  <a href={links.ci.href} class="text-blue-300 hover:text-white hover:underline">
+                    {links.ci.label}
+                  </a>
+                  <a href={links.integrations.href} class="text-blue-300 hover:text-white hover:underline">
+                    {links.integrations.label}
+                  </a>
+                </div>
+              </div>
+              <div class="min-w-0 rounded-xl bg-gray-800 p-6">
+                <pre class="overflow-x-auto text-sm leading-6 whitespace-pre-wrap text-gray-300 [overflow-wrap:anywhere]"><code>{ciCode}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 2: Multi-Brand Management -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
+            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+              <div class="order-2 min-w-0 rounded-xl bg-gray-800 p-6 lg:order-1">
+                <pre class="overflow-x-auto text-sm leading-6 whitespace-pre-wrap text-gray-300 [overflow-wrap:anywhere]"><code>{brandsCode}</code></pre>
+              </div>
+              <div class="order-1 lg:order-2">
+                <div class="mb-6 flex items-center gap-3">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-500/20">
+                    <svg aria-hidden="true" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{m.solutions_qsr_sol2_title({}, { locale })}</h3>
+                </div>
+                <p class="mb-6 text-gray-300">{m.solutions_qsr_sol2_desc({}, { locale })}</p>
+                <ul class="space-y-3">
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol2_point1({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol2_point2({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol2_point3({}, { locale })}
+                  </li>
+                </ul>
+                <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+                  <a href={links.roles.href} class="text-blue-300 hover:text-white hover:underline">
+                    {links.roles.label}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 3: Market channels -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
+            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+              <div>
+                <div class="mb-6 flex items-center gap-3">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20">
+                    <svg aria-hidden="true" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{m.solutions_qsr_sol3_title({}, { locale })}</h3>
+                </div>
+                <p class="mb-6 text-gray-300">{m.solutions_qsr_sol3_desc({}, { locale })}</p>
+                <ul class="space-y-3">
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol3_point1({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol3_point2({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol3_point3({}, { locale })}
+                  </li>
+                </ul>
+                <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+                  <a href={links.channels.href} class="text-blue-300 hover:text-white hover:underline">
+                    {links.channels.label}
+                  </a>
+                  <a href={links.rollouts.href} class="text-blue-300 hover:text-white hover:underline">
+                    {links.rollouts.label}
+                  </a>
+                </div>
+              </div>
+              <div class="min-w-0 rounded-xl bg-gray-800 p-6">
+                <pre class="overflow-x-auto text-sm leading-6 whitespace-pre-wrap text-gray-300 [overflow-wrap:anywhere]"><code>{marketCode}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 4: Kiosks -->
+          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
+            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+              <div class="order-2 min-w-0 rounded-xl bg-gray-800 p-6 lg:order-1">
+                <div class="mb-4 flex items-center gap-2">
+                  <div class="h-3 w-3 rounded-full bg-gray-500"></div>
+                  <div class="h-3 w-3 rounded-full bg-gray-500"></div>
+                  <div class="h-3 w-3 rounded-full bg-gray-500"></div>
+                  <span class="ml-2 text-sm text-gray-500">kiosk updates</span>
+                </div>
+                <pre class="overflow-x-auto text-sm leading-6 whitespace-pre-wrap text-gray-300 [overflow-wrap:anywhere]"><code>{kioskCode}</code></pre>
+              </div>
+              <div class="order-1 lg:order-2">
+                <div class="mb-6 flex items-center gap-3">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
+                    <svg aria-hidden="true" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{m.solutions_qsr_sol4_title({}, { locale })}</h3>
+                </div>
+                <p class="mb-6 text-gray-300">{m.solutions_qsr_sol4_desc({}, { locale })}</p>
+                <ul class="space-y-3">
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol4_point1({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol4_point2({}, { locale })}
+                  </li>
+                  <li class="flex items-center gap-3 text-gray-300">
+                    <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {m.solutions_qsr_sol4_point3({}, { locale })}
+                  </li>
+                </ul>
+                <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+                  <a href={links.kiosk.href} class="text-blue-300 hover:text-white hover:underline">
+                    {links.kiosk.label}
+                  </a>
+                  <a href={links.updateBehavior.href} class="text-blue-300 hover:text-white hover:underline">
+                    {links.updateBehavior.label}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-gray-900 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <dl class="grid grid-cols-2 gap-8 lg:grid-cols-4">
+          <div class="flex flex-col-reverse text-center">
+            <dt class="mt-2 text-gray-400">{m.solutions_qsr_stat1({}, { locale })}</dt>
+            <dd class="text-4xl font-bold text-orange-400 lg:text-5xl">1B+</dd>
+          </div>
+          <div class="flex flex-col-reverse text-center">
+            <dt class="mt-2 text-gray-400">{m.solutions_qsr_stat2({}, { locale })}</dt>
+            <dd class="text-4xl font-bold text-orange-400 lg:text-5xl">~50ms</dd>
+          </div>
+          <div class="flex flex-col-reverse text-center">
+            <dt class="mt-2 text-gray-400">{m.solutions_qsr_stat3({}, { locale })}</dt>
+            <dd class="text-4xl font-bold text-orange-400 lg:text-5xl">90M+</dd>
+          </div>
+          <div class="flex flex-col-reverse text-center">
+            <dt class="mt-2 text-gray-400">{m.solutions_qsr_stat4({}, { locale })}</dt>
+            <dd class="text-4xl font-bold text-orange-400 lg:text-5xl">4.7K+</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_qsr_how_title({}, { locale })}
+      description={m.solutions_qsr_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.channels, links.rollouts, links.rollbacks, links.updateBehavior, links.integrations, links.roles, links.kiosk]}
+      class="bg-gray-900 border-t border-white/10"
+    />
+
+    <SolutionAppExample solution="qsr" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.qsr}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_qsr_faq_title({}, { locale })}
+      description={m.solutions_qsr_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- CTA Section -->
+    <section class="bg-gray-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-orange-600 to-red-600 px-8 py-16 sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg
+              aria-hidden="true"
+              class="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1463 360"
+            >
+              <path class="text-opacity-40 text-orange-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-opacity-20 text-red-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_qsr_cta_title({}, { locale })}</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-lg text-orange-100">{m.solutions_qsr_cta_subtitle({}, { locale })}</p>
+            <SignupCta lead={m.signup_cta_lead_qsr({}, { locale: Astro.locals.locale })} humanSupport enterprise class="mt-8" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

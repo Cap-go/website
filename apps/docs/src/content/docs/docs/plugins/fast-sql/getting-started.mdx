@@ -1,0 +1,242 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-fast-sql and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-fast-sql` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-fast-sql
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+```
+
+## API Overview
+
+### `connect`
+
+Initialize the database connection and start the HTTP server.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const conn = await CapgoCapacitorFastSql.connect({ database: 'myapp' });
+console.log('Connected on port:', conn.port);
+```
+
+### `disconnect`
+
+Close database connection and stop the HTTP server.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.disconnect({ database: 'myapp' });
+```
+
+### `getServerInfo`
+
+Get the HTTP server port and token for direct communication.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const info = await CapgoCapacitorFastSql.getServerInfo({ database: 'myapp' });
+console.log('Server port:', info.port);
+```
+
+### `execute`
+
+Execute a SQL query via Capacitor bridge (for simple queries).
+For better performance with large datasets, use the HTTP protocol directly via SQLConnection class.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const result = await CapgoCapacitorFastSql.execute({
+  database: 'myapp',
+  statement: 'SELECT * FROM users WHERE age > ?',
+  params: [18]
+});
+console.log('Rows:', result.rows);
+```
+
+### `beginTransaction`
+
+Begin a database transaction.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.beginTransaction({ database: 'myapp' });
+// Execute multiple operations
+await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
+```
+
+### `commitTransaction`
+
+Commit the current transaction.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
+```
+
+### `rollbackTransaction`
+
+Rollback the current transaction.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+try {
+  await CapgoCapacitorFastSql.beginTransaction({ database: 'myapp' });
+  // Operations...
+  await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
+} catch (error) {
+  await CapgoCapacitorFastSql.rollbackTransaction({ database: 'myapp' });
+}
+```
+
+### `configureWeb`
+
+Configure web-specific options for the sql.js WASM module.
+
+Call this **before** the first `connect()` call to load sql.js from a
+locally bundled path instead of the default CDN. This method is a no-op
+on iOS and Android.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+// Configure once at app startup (web only)
+await CapgoCapacitorFastSql.configureWeb({
+  sqlJsUrl: '/assets/sql-wasm.js',
+  wasmUrl: '/assets/sql-wasm.wasm',
+});
+const db = await FastSQL.connect({ database: 'myapp' });
+```
+
+## Type Reference
+
+### `SQLConnectionOptions`
+Database connection options.
+```typescript
+export interface SQLConnectionOptions {
+  /**
+   * Database name (file will be created in app data directory)
+   */
+  database: string;
+
+  /**
+   * Enable encryption (iOS/Android only)
+   */
+  encrypted?: boolean;
+
+  /**
+   * Encryption key (required if encrypted is true)
+   */
+  encryptionKey?: string;
+
+  /**
+   * Read-only mode
+   */
+  readOnly?: boolean;
+}
+```
+
+### `SQLValue`
+SQL value types supported by the plugin.
+```typescript
+export type SQLValue = string | number | boolean | null | Uint8Array;
+```
+
+### `SQLResult`
+Result of a SQL query execution.
+```typescript
+export interface SQLResult {
+  /**
+   * Rows returned by the query (for SELECT statements)
+   */
+  rows: SQLRow[];
+
+  /**
+   * Number of rows affected by the query (for INSERT/UPDATE/DELETE)
+   */
+  rowsAffected: number;
+
+  /**
+   * ID of the last inserted row (for INSERT statements with auto-increment)
+   */
+  insertId?: number;
+}
+```
+
+### `IsolationLevel`
+Transaction isolation levels.
+```typescript
+export enum IsolationLevel {
+  ReadUncommitted = 'READ UNCOMMITTED',
+  ReadCommitted = 'READ COMMITTED',
+  RepeatableRead = 'REPEATABLE READ',
+  Serializable = 'SERIALIZABLE',
+}
+```
+
+### `WebConfig`
+Web platform configuration for the sql.js WASM module. Use with `configureWeb()` to load sql.js from a locally bundled path instead of the default CDN.
+```typescript
+export interface WebConfig {
+  /**
+   * URL to the sql.js JavaScript file (`sql-wasm.js`).
+   * When omitted, the plugin loads from the cdnjs CDN.
+   * @example '/assets/sql-wasm.js'
+   */
+  sqlJsUrl?: string;
+
+  /**
+   * URL to the sql.js WebAssembly binary (`sql-wasm.wasm`).
+   * When omitted, the plugin loads from the cdnjs CDN.
+   * @example '/assets/sql-wasm.wasm'
+   */
+  wasmUrl?: string;
+}
+```
+
+### `SQLRow`
+SQL row result - values indexed by column name.
+```typescript
+export interface SQLRow {
+  [column: string]: SQLValue;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-fast-sql](/plugins/capacitor-fast-sql/) for the native capability in Using @capgo/capacitor-fast-sql, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

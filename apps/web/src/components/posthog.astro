@@ -1,0 +1,153 @@
+---
+---
+
+<script is:inline>
+  // @ts-nocheck
+  !(function (t, e) {
+    var o, n, p, r
+    e.__SV ||
+      (window.posthog && window.posthog.__loaded) ||
+      ((window.posthog = e),
+      (e._i = []),
+      (e.init = function (i, s, a) {
+        function g(t, e) {
+          var o = e.split('.')
+          ;(2 == o.length && ((t = t[o[0]]), (e = o[1])),
+            (t[e] = function () {
+              t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+            }))
+        }
+        ;(((p = t.createElement('script')).type = 'text/javascript'),
+          (p.crossOrigin = 'anonymous'),
+          (p.async = !0),
+          (p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js'),
+          (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r))
+        var u = e
+        for (
+          void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+            u.people = u.people || [],
+            u.toString = function (t) {
+              var e = 'posthog'
+              return ('posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e)
+            },
+            u.people.toString = function () {
+              return u.toString(1) + '.people (stub)'
+            },
+            o =
+              'init rs ls yi ns us ts ss capture Hi calculateEventProperties vs register register_once register_for_session unregister unregister_for_session gs getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty fs ds createPersonProfile ps Qr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing hs debug O cs getPageViewId captureTraceFeedback captureTraceMetric Kr'.split(
+                ' ',
+              ),
+            n = 0;
+          n < o.length;
+          n++
+        )
+          g(u, o[n])
+        e._i.push([i, s, a])
+      }),
+      (e.__SV = 1))
+  })(document, window.posthog || [])
+  posthog.init('phc_VwWolDCQHVlAFmRbGjkjV8LTp0xw3SgzJq0D2ZN0lce', {
+    // PostHog managed reverse proxy (EU) on our own domain, see docs/posthog-proxy-setup.md
+    api_host: 'https://psthg.capgo.app',
+    ui_host: 'https://eu.posthog.com',
+    defaults: '2025-11-30',
+    person_profiles: 'always',
+    capture_pageview: false,
+    // The Cloudflare version split owns assignment; avoid a second independent flag evaluation.
+    advanced_disable_feature_flags: true,
+    loaded: function (ph) {
+      function signupSourceFromAttribution(data) {
+        if (data.ref) return data.ref
+        if (data.utm_source) return data.utm_source
+        var path = data.first_touch_path
+        var type = data.first_touch_type
+        if (!path || !type) return undefined
+        var segments = path.split('/').filter(Boolean)
+        if (type === 'home') return 'home'
+        if (type === 'pricing') return 'pricing'
+        if (type === 'console') return 'console'
+        if (type === 'cli') return 'cli'
+        if (type === 'blog') {
+          var blogSlug = segments[segments.indexOf('blog') + 1]
+          return blogSlug ? 'blog:' + blogSlug : 'blog'
+        }
+        if (type === 'docs') {
+          var docsIndex = segments.indexOf('docs')
+          var section = docsIndex >= 0 ? segments.slice(docsIndex + 1).join('/') : ''
+          return section ? 'docs:' + section : 'docs'
+        }
+        if (type === 'plugin') {
+          var pluginSlug = segments[segments.indexOf('plugins') + 1]
+          return pluginSlug ? 'plugin:' + pluginSlug : 'plugin'
+        }
+        if (type === 'solutions') {
+          var solutionsIndex = segments.indexOf('solutions')
+          var rest = solutionsIndex >= 0 ? segments.slice(solutionsIndex + 1).join('/') : ''
+          return rest ? 'solutions:' + rest : 'solutions'
+        }
+        var compact = segments.join('/')
+        return compact ? 'other:' + compact : 'other'
+      }
+      function readAttributionStorageJson() {
+        try {
+          var match = document.cookie.match(/(?:^|; )capgo_attribution=([^;]*)/)
+          if (match) {
+            try {
+              return JSON.parse(decodeURIComponent(match[1]))
+            } catch (e) {}
+          }
+        } catch (e) {}
+        try {
+          var stored = localStorage.getItem('capgo_attribution')
+          if (stored) return JSON.parse(stored)
+        } catch (e2) {}
+        return null
+      }
+      function readAttributionPropsFromCookie() {
+        try {
+          var data = readAttributionStorageJson()
+          if (!data) return {}
+          var props = {}
+          if (data.ref) {
+            props.signup_ref = data.ref
+            if (typeof data.ref === 'string' && data.ref.indexOf('plugin_') === 0) {
+              props.signup_plugin = data.ref.slice('plugin_'.length)
+            }
+          }
+          if (data.utm_source) props.first_utm_source = data.utm_source
+          if (data.utm_medium) props.first_utm_medium = data.utm_medium
+          if (data.utm_campaign) props.first_utm_campaign = data.utm_campaign
+          if (data.first_touch_type) props.first_touch_type = data.first_touch_type
+          if (data.first_touch_path) props.first_touch_path = data.first_touch_path
+          var signupSource = signupSourceFromAttribution(data)
+          if (signupSource) props.signup_source = signupSource
+          return props
+        } catch (e) {
+          return {}
+        }
+      }
+      const attributionProps = typeof window.__capgoGetAttributionPostHogProps === 'function' ? window.__capgoGetAttributionPostHogProps() : readAttributionPropsFromCookie()
+      if (attributionProps && Object.keys(attributionProps).length) {
+        ph.register_once(attributionProps)
+        if (ph.people && typeof ph.people.set_once === 'function') {
+          ph.people.set_once(attributionProps)
+        }
+      }
+      // Branch A/B test (docs/abtest.md): the Worker version that served this page tags it.
+      const read = (name) => document.querySelector('meta[name="' + name + '"]')?.content
+      const flag = read('capgo-ab-flag')
+      const variant = read('capgo-ab-variant')
+      if (flag && variant) {
+        ph.register({ ['$feature/' + flag]: variant })
+        const exposedKey = 'capgo_ab_exposed:' + flag + ':' + variant
+        let exposed = false
+        try {
+          exposed = sessionStorage.getItem(exposedKey) === '1'
+          sessionStorage.setItem(exposedKey, '1')
+        } catch {}
+        if (!exposed) ph.capture('$feature_flag_called', { $feature_flag: flag, $feature_flag_response: variant })
+      }
+      ph.capture('$pageview')
+    },
+  })
+</script>

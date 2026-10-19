@@ -1,0 +1,59 @@
+---
+import m from '@/copy/messages'
+import SignupCta from '@/components/SignupCta.astro'
+---
+
+<section class="bg-[#1a1a1a] pt-24 pb-12 sm:pt-32 sm:pb-16">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.how_it_works_badge({}, { locale: Astro.locals.locale })}</p>
+      <h2 class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-6xl">
+        {m.how_it_works_title({}, { locale: Astro.locals.locale })}
+        <br />
+        {m.how_it_works_title_line2({}, { locale: Astro.locals.locale })}
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-gray-400">{m.how_it_works_subtitle({}, { locale: Astro.locals.locale })}</p>
+    </div>
+
+    <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
+        <div class="relative top-30 left-8 mb-8 flex h-64 items-center justify-center">
+          <img src="/how-it-works/how-it-works-install.webp" alt="" width="324" height="441" loading="lazy" decoding="async" class="max-w-none" />
+        </div>
+        <div class="text-center">
+          <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card1_title({}, { locale: Astro.locals.locale })}</h3>
+          <p class="mt-4 text-sm leading-6 text-gray-400">
+            {m.how_it_works_card1_desc_part1({}, { locale: Astro.locals.locale })}
+            <br class="hidden lg:inline" />
+            {m.how_it_works_card1_desc_part2({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
+        <div class="mb-8 flex h-64 items-center justify-center">
+          <img src="/how-it-works/how-it-works-publish.webp" alt="" width="324" height="420" loading="lazy" decoding="async" class="relative top-25 max-w-none" />
+        </div>
+        <div class="text-center">
+          <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card2_title({}, { locale: Astro.locals.locale })}</h3>
+          <p class="mt-4 text-sm leading-6 text-gray-400">{m.home_deploy_cli_desc({}, { locale: Astro.locals.locale })}</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
+        <div class="mb-8 flex h-64 items-center justify-center">
+          <img src="/how-it-works/how-it-works-update.webp" alt="" width="239" height="288" loading="lazy" decoding="async" class="relative top-10 max-w-none" />
+        </div>
+        <div class="text-center">
+          <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card3_title({}, { locale: Astro.locals.locale })}</h3>
+          <p class="mt-4 text-sm leading-6 text-gray-400">{m.home_users_get_update_desc({}, { locale: Astro.locals.locale })}</p>
+        </div>
+      </div>
+    </div>
+
+    <SignupCta id="how-it-works-signup-cta" class="mt-16" />
+  </div>
+</section>

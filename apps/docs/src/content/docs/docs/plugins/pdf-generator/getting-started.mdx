@@ -1,0 +1,125 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-pdf-generator and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-pdf-generator` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-pdf-generator
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+```
+
+## Quick start
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+
+const result = await PdfGenerator.fromURL({ url: 'https://example.com' });
+console.log(result);
+```
+
+## Example: fromData
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+
+const result = await PdfGenerator.fromData({ data: 'data' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `fromURL`
+
+Generates a PDF from the provided URL.
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+
+const result = await PdfGenerator.fromURL({ url: 'https://example.com' });
+console.log(result);
+```
+
+### `fromData`
+
+Generates a PDF from a raw HTML string.
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+
+const result = await PdfGenerator.fromData({ data: 'data' });
+console.log(result);
+```
+
+## Type Reference
+
+### `PdfGeneratorFromUrlOptions`
+```typescript
+export interface PdfGeneratorFromUrlOptions extends PdfGeneratorCommonOptions {
+  url: string;
+}
+```
+
+### `PdfGeneratorResult`
+```typescript
+export type PdfGeneratorResult =
+  | {
+      type: 'base64';
+      base64: string;
+    }
+  | {
+      type: 'share';
+      completed: boolean;
+    };
+```
+
+### `PdfGeneratorFromDataOptions`
+```typescript
+export interface PdfGeneratorFromDataOptions extends PdfGeneratorCommonOptions {
+  /**
+   * HTML document to render.
+   */
+  data: string;
+  /**
+   * Base URL to use when resolving relative resources inside the HTML string.
+   * When omitted, `about:blank` is used.
+   */
+  baseUrl?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan storage and file handling, connect it with [Using @capgo/capacitor-pdf-generator](/plugins/capacitor-pdf-generator/) for the native capability in Using @capgo/capacitor-pdf-generator, [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, and [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file.

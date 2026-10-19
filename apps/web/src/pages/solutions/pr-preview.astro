@@ -1,0 +1,516 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
+import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { solutionTestimonials } from '@/config/productTestimonials'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import SignupCta from '@/components/SignupCta.astro'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
+
+const title = `${brand} | ${m.solutions_pr_preview_title({}, { locale })}`
+const description = m.solutions_pr_preview_description({}, { locale })
+
+const links = {
+  channels: { href: docs('live-updates/channels/'), label: m.solutions_pr_link_channels({}, { locale }) },
+  apiKeys: { href: docs('webapp/api-keys/'), label: m.solutions_pr_link_api_keys({}, { locale }) },
+  github: { href: docs('live-updates/integrations/github-actions/'), label: m.solutions_pr_link_github({}, { locale }) },
+  integrations: { href: docs('live-updates/integrations/'), label: m.solutions_pr_link_integrations({}, { locale }) },
+  qr: { href: docs('cli/reference/get-qr/'), label: m.solutions_pr_link_qr({}, { locale }) },
+  channelCli: { href: docs('cli/reference/channel/'), label: m.solutions_pr_link_channel_cli({}, { locale }) },
+  compatibility: { href: docs('live-updates/compatibility/'), label: m.solutions_pr_link_compatibility({}, { locale }) },
+  setChannel: { href: docs('plugins/updater/api/'), label: m.solutions_pr_link_set_channel({}, { locale }) },
+}
+
+const howSteps = [
+  {
+    title: m.solutions_pr_how1_title({}, { locale }),
+    body: m.solutions_pr_how1_body({}, { locale }),
+    code: `# once, run by an admin (not the preview key)
+npx @capgo/cli@latest app set com.example.app --preview`,
+    href: links.apiKeys.href,
+    linkLabel: links.apiKeys.label,
+  },
+  {
+    title: m.solutions_pr_how2_title({}, { locale }),
+    body: m.solutions_pr_how2_body({}, { locale }),
+    code: `npx @capgo/cli@latest bundle upload com.example.app \\
+  --apikey "$CAPGO_PREVIEW_KEY" \\
+  --path ./dist \\
+  --channel "pr-$PR_NUMBER" \\
+  --bundle "1.2.3-pr.$PR_NUMBER.$GITHUB_RUN_NUMBER"`,
+    href: links.channels.href,
+    linkLabel: links.channels.label,
+  },
+  {
+    title: m.solutions_pr_how3_title({}, { locale }),
+    body: m.solutions_pr_how3_body({}, { locale }),
+    code: `npx @capgo/cli@latest get-qr com.example.app \\
+  --channel "pr-$PR_NUMBER" \\
+  --apikey "$CAPGO_PREVIEW_KEY" \\
+  --url`,
+    href: links.qr.href,
+    linkLabel: links.qr.label,
+  },
+  {
+    title: m.solutions_pr_how4_title({}, { locale }),
+    body: m.solutions_pr_how4_body({}, { locale }),
+    code: `npx @capgo/cli@latest channel delete \\
+  "pr-$PR_NUMBER" com.example.app \\
+  --apikey "$CAPGO_PREVIEW_KEY" \\
+  --delete-bundle \\
+  --success-if-not-found`,
+    href: links.channelCli.href,
+    linkLabel: links.channelCli.label,
+  },
+]
+
+const roles = [
+  {
+    title: m.solutions_pr_preview_teams_qa({}, { locale }),
+    iconBg: 'bg-blue-500/20',
+    iconColor: 'text-blue-400',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    benefits: [m.solutions_pr_qa_benefit1({}, { locale }), m.solutions_pr_qa_benefit2({}, { locale }), m.solutions_pr_qa_benefit3({}, { locale })],
+  },
+  {
+    title: m.solutions_pr_preview_teams_pm({}, { locale }),
+    iconBg: 'bg-amber-500/20',
+    iconColor: 'text-amber-400',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+    benefits: [m.solutions_pr_pm_benefit1({}, { locale }), m.solutions_pr_pm_benefit2({}, { locale }), m.solutions_pr_pm_benefit3({}, { locale })],
+  },
+  {
+    title: m.solutions_pr_preview_teams_dev({}, { locale }),
+    iconBg: 'bg-emerald-500/20',
+    iconColor: 'text-emerald-400',
+    icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+    benefits: [m.solutions_pr_dev_benefit1({}, { locale }), m.solutions_pr_dev_benefit2({}, { locale }), m.solutions_pr_dev_benefit3({}, { locale })],
+  },
+]
+
+const compareRows = [
+  {
+    label: m.solutions_pr_compare_build_time({}, { locale }),
+    tf: m.solutions_pr_compare_build_time_tf({}, { locale }),
+    capgo: m.solutions_pr_compare_build_time_capgo({}, { locale }),
+  },
+  {
+    label: m.solutions_pr_compare_switch_builds({}, { locale }),
+    tf: m.solutions_pr_compare_switch_builds_tf({}, { locale }),
+    capgo: m.solutions_pr_compare_switch_builds_capgo({}, { locale }),
+  },
+  {
+    label: m.solutions_pr_compare_setup({}, { locale }),
+    tf: m.solutions_pr_compare_setup_tf({}, { locale }),
+    capgo: m.solutions_pr_compare_setup_capgo({}, { locale }),
+  },
+  {
+    label: m.solutions_pr_compare_native({}, { locale }),
+    tf: m.solutions_pr_compare_native_tf({}, { locale }),
+    capgo: m.solutions_pr_compare_native_capgo({}, { locale }),
+  },
+]
+
+const problemSteps = [
+  { title: m.solutions_pr_problem_step1_title({}, { locale }), desc: m.solutions_pr_problem_step1_desc({}, { locale }) },
+  { title: m.solutions_pr_problem_step2_title({}, { locale }), desc: m.solutions_pr_problem_step2_desc({}, { locale }) },
+  { title: m.solutions_pr_problem_step3_title({}, { locale }), desc: m.solutions_pr_problem_step3_desc({}, { locale }) },
+  { title: m.solutions_pr_problem_step4_title({}, { locale }), desc: m.solutions_pr_problem_step4_desc({}, { locale }) },
+]
+
+const costs = [
+  {
+    value: m.solutions_pr_cost_processing_value({}, { locale }),
+    label: m.solutions_pr_testflight_processing({}, { locale }),
+    explanation: m.solutions_pr_processing_explanation({}, { locale }),
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    value: m.solutions_pr_cost_rebuild_value({}, { locale }),
+    label: m.solutions_pr_cost_rebuild_label({}, { locale }),
+    explanation: m.solutions_pr_cost_rebuild_explanation({}, { locale }),
+    icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+  },
+  {
+    value: m.solutions_pr_cost_stale_value({}, { locale }),
+    label: m.solutions_pr_cost_stale_label({}, { locale }),
+    explanation: m.solutions_pr_cost_stale_explanation({}, { locale }),
+    icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+  },
+]
+
+const faqItems = [
+  { question: m.solutions_pr_faq1_q({}, { locale }), answer: m.solutions_pr_faq1_a({}, { locale }), ...links.compatibility },
+  { question: m.solutions_pr_faq2_q({}, { locale }), answer: m.solutions_pr_faq2_a({}, { locale }), ...links.apiKeys },
+  { question: m.solutions_pr_faq3_q({}, { locale }), answer: m.solutions_pr_faq3_a({}, { locale }), ...links.qr },
+  { question: m.solutions_pr_faq4_q({}, { locale }), answer: m.solutions_pr_faq4_a({}, { locale }), ...links.channelCli },
+  { question: m.solutions_pr_faq5_q({}, { locale }), answer: m.solutions_pr_faq5_a({}, { locale }), ...links.integrations },
+].map(({ label, ...item }) => ({ ...item, linkLabel: label }))
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
+})
+
+const content = { title, description, ldJSON }
+
+const checkIcon = 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
+---
+
+<Layout content={content}>
+  <div class="product-hero">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
+          <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"></div>
+          <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl"></div>
+        </div>
+      </div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
+          <div class="mb-8 inline-flex items-center rounded-full border border-purple-400/40 bg-purple-500/10 px-4 py-2 text-sm font-medium text-purple-200">
+            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            {m.solutions_pr_preview({}, { locale })}
+          </div>
+
+          <h1 class="text-4xl leading-tight font-bold text-balance text-white sm:text-5xl lg:text-6xl">{m.solutions_pr_preview_hero_title({}, { locale })}</h1>
+
+          <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-pretty text-gray-300">{m.solutions_pr_preview_hero_subtitle({}, { locale })}</p>
+
+          <SignupCta enterprise class="mt-8" />
+
+          <!-- Key points -->
+          <ul class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
+            {[m.solutions_pr_no_testflight({}, { locale }), m.solutions_pr_instant_testing({}, { locale }), m.solutions_pr_auto_cleanup({}, { locale })].map((point) => (
+              <li class="flex items-center gap-2">
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d={checkIcon} clip-rule="evenodd" />
+                </svg>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Problem -->
+    <section id="pr-problem" class="bg-gray-800 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-16 max-w-3xl text-center">
+          <p class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_the_problem({}, { locale })}</p>
+          <h2 class="text-3xl font-bold text-balance text-white sm:text-4xl">{m.solutions_pr_problem_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div class="rounded-2xl border border-red-500/30 bg-gray-900 p-6 sm:p-8">
+            <h3 class="mb-6 text-xl font-bold text-white">{m.solutions_pr_traditional_workflow({}, { locale })}</h3>
+
+            <ol class="space-y-6">
+              {problemSteps.map((step, index) => (
+                <li class="flex items-start gap-4">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-500/20" aria-hidden="true">
+                    <span class="font-bold text-red-400">{index + 1}</span>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-white">{step.title}</p>
+                    <p class="mt-1 text-sm text-gray-400">{step.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            <div class="mt-8 rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+              <p class="font-medium text-red-300">{m.solutions_pr_problem_result({}, { locale })}</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="mb-6 text-xl font-bold text-white">{m.solutions_pr_real_cost({}, { locale })}</h3>
+
+            <div class="space-y-6">
+              {costs.map((cost) => (
+                <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+                  <div class="mb-3 flex items-center gap-4">
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-500/20">
+                      <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={cost.icon} />
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-2xl font-bold text-white">{cost.value}</p>
+                      <p class="text-gray-400">{cost.label}</p>
+                    </div>
+                  </div>
+                  <p class="text-sm text-gray-400">{cost.explanation}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SolutionHowItWorks
+      eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
+      title={m.solutions_pr_how_title({}, { locale })}
+      description={m.solutions_pr_how_desc({}, { locale })}
+      steps={howSteps}
+      docsTitle={m.solutions_docs_title({}, { locale })}
+      docs={[links.channels, links.apiKeys, links.github, links.integrations, links.qr, links.channelCli, links.compatibility]}
+      class="bg-gray-900"
+    />
+
+    <!-- How Testers Switch Channels -->
+    <section id="pr-switch" class="bg-gray-900 pb-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 class="mb-4 text-center text-2xl font-bold text-balance text-white">{m.solutions_pr_how_testers_switch({}, { locale })}</h2>
+        <p class="mx-auto mb-8 max-w-3xl text-center text-sm text-pretty text-gray-400">{m.solutions_pr_how_testers_switch_note({}, { locale })}</p>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="flex min-w-0 flex-col rounded-2xl border border-gray-700 bg-gray-800 p-6">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
+                <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">{m.solutions_pr_shake_menu({}, { locale })}</h3>
+            </div>
+            <p class="mb-4 text-sm text-gray-400">{m.solutions_pr_shake_menu_desc({}, { locale })}</p>
+            <pre class="mt-auto overflow-x-auto rounded-lg bg-gray-900 p-3 text-sm whitespace-pre-wrap [overflow-wrap:anywhere]"><code class="text-gray-300"><span class="text-gray-500">// capacitor.config.ts (internal builds)</span>
+CapacitorUpdater: {'{'}
+  shakeMenu: true,
+{'}'}</code></pre>
+          </div>
+
+          <div class="flex min-w-0 flex-col rounded-2xl border border-gray-700 bg-gray-800 p-6">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
+                <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">{m.solutions_pr_programmatic({}, { locale })}</h3>
+            </div>
+            <p class="mb-4 text-sm text-gray-400">{m.solutions_pr_programmatic_desc({}, { locale })}</p>
+            <pre class="mt-auto overflow-x-auto rounded-lg bg-gray-900 p-3 text-sm whitespace-pre-wrap [overflow-wrap:anywhere]"><code class="text-gray-300">import {'{'} CapacitorUpdater {'}'} from '@capgo/capacitor-updater'
+
+await CapacitorUpdater.setChannel({'{'}
+  channel: 'pr-123',
+  triggerAutoUpdate: true,
+{'}'})</code></pre>
+            <a href={links.setChannel.href} class="mt-4 inline-flex text-sm font-semibold text-purple-400 hover:text-white hover:underline">
+              {links.setChannel.label}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who Benefits -->
+    <section id="pr-roles" class="bg-gray-800 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-16 max-w-3xl text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_pr_teams_title({}, { locale })}</h2>
+          <p class="mt-4 text-xl text-pretty text-gray-400">{m.solutions_pr_teams_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {roles.map((role) => (
+            <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
+              <div class:list={['mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-xl', role.iconBg]}>
+                <svg class:list={['h-8 w-8', role.iconColor]} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={role.icon} />
+                </svg>
+              </div>
+              <h3 class="mb-4 text-center text-xl font-bold text-white">{role.title}</h3>
+              <ul class="space-y-3">
+                {role.benefits.map((benefit) => (
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fill-rule="evenodd" d={checkIcon} clip-rule="evenodd" />
+                    </svg>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section id="pr-compare" class="bg-gray-900 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+          <h2 class="text-3xl font-bold text-balance text-white sm:text-4xl">{m.solutions_pr_compare_title({}, { locale })}</h2>
+        </div>
+
+        <ul class="mx-auto max-w-4xl space-y-4 sm:hidden">
+          {compareRows.map((row) => (
+            <li class="rounded-2xl border border-gray-700 bg-gray-800 p-5">
+              <h3 class="text-base font-semibold text-white">{row.label}</h3>
+              <dl class="mt-3 space-y-3 text-sm">
+                <div>
+                  <dt class="font-medium text-gray-400">{m.solutions_pr_compare_traditional({}, { locale })}</dt>
+                  <dd class="mt-1 text-gray-300">{row.tf}</dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-purple-400">{m.solutions_pr_compare_capgo({}, { locale })}</dt>
+                  <dd class="mt-1 text-purple-100">{row.capgo}</dd>
+                </div>
+              </dl>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mx-auto hidden max-w-4xl overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 sm:block">
+          <table class="w-full text-left">
+            <thead class="bg-gray-800">
+              <tr>
+                <th scope="col" class="p-4">
+                  <span class="sr-only">{m.solutions_pr_compare_task({}, { locale })}</span>
+                </th>
+                <th scope="col" class="border-l border-gray-700 p-4 font-bold text-gray-400">
+                  {m.solutions_pr_compare_traditional({}, { locale })}
+                </th>
+                <th scope="col" class="border-l border-purple-500/50 bg-purple-500/10 p-4 font-bold text-purple-400">
+                  {m.solutions_pr_compare_capgo({}, { locale })}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {compareRows.map((row) => (
+                <tr class="border-t border-gray-700 bg-gray-900">
+                  <th scope="row" class="p-4 font-medium text-gray-300">
+                    {row.label}
+                  </th>
+                  <td class="border-l border-gray-700 p-4 text-gray-400">{row.tf}</td>
+                  <td class="border-l border-gray-700 p-4 text-green-400">{row.capgo}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Solutions -->
+    <section class="bg-gray-800 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+          <h2 class="text-2xl font-bold text-white sm:text-3xl">{m.solutions_related_by_role({}, { locale })}</h2>
+          <p class="mt-4 text-gray-400">{m.solutions_related_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <a href={getRelativeLocaleUrl(locale, 'enterprise')} class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-purple-500/50">
+            <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
+              <svg class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-white transition-colors group-hover:text-purple-400">{m.solutions_enterprise_short({}, { locale })}</h3>
+            <p class="mt-1 text-sm text-gray-400">{m.solutions_enterprise_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/startups')} class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-purple-500/50">
+            <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
+              <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-white transition-colors group-hover:text-purple-400">{m.solutions_startups_short({}, { locale })}</h3>
+            <p class="mt-1 text-sm text-gray-400">{m.solutions_startups_tagline({}, { locale })}</p>
+          </a>
+
+          <a
+            href={getRelativeLocaleUrl(locale, 'solutions/solo-developers')}
+            class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-purple-500/50"
+          >
+            <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
+              <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-white transition-colors group-hover:text-purple-400">{m.solutions_solo_short({}, { locale })}</h3>
+            <p class="mt-1 text-sm text-gray-400">{m.solutions_solo_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/agencies')} class="group rounded-xl border border-gray-700 bg-gray-900 p-6 transition-all hover:border-purple-500/50">
+            <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/20">
+              <svg class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-white transition-colors group-hover:text-purple-400">{m.solutions_agencies_short({}, { locale })}</h3>
+            <p class="mt-1 text-sm text-gray-400">{m.solutions_agencies_tagline({}, { locale })}</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <SolutionAppExample solution="pr-preview" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['pr-preview']}
+    />
+    <SolutionFaq
+      eyebrow={m.solutions_faq_eyebrow({}, { locale })}
+      title={m.solutions_pr_faq_title({}, { locale })}
+      description={m.solutions_pr_faq_desc({}, { locale })}
+      items={faqItems}
+    />
+
+    <!-- Final CTA -->
+    <section class="bg-gray-900 py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-purple-600 to-violet-700 px-8 py-16 sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-opacity-40 text-purple-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-opacity-20 text-violet-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_pr_final_cta_title({}, { locale })}</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-lg text-purple-100">{m.solutions_pr_final_cta_subtitle({}, { locale })}</p>
+            <SignupCta lead={m.signup_cta_lead_pr_preview({}, { locale: Astro.locals.locale })} humanSupport class="mt-8" />
+            <p class="mt-6 text-sm text-purple-200">{m.solutions_pr_final_cta_note({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

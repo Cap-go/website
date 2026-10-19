@@ -1,0 +1,605 @@
+---
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+import m from '@/copy/messages'
+import { resolveMessageLocale } from '@/services/message-locale'
+
+const route = Astro.locals.starlightRoute as StarlightRouteData
+const { editUrl, id: pageSlug } = route
+const messageLocale = resolveMessageLocale(route.locale, Astro.currentLocale)
+const repoSourcePath = route.entry?.filePath ? `apps/docs/${route.entry.filePath}` : ''
+const markdownSourceUrl = repoSourcePath ? `https://raw.githubusercontent.com/Cap-go/website/refs/heads/main/${repoSourcePath}` : ''
+
+const translations = {
+  copyPage: m.copy_page({}, { locale: messageLocale }),
+  copyPageOptions: m.copy_page_options({}, { locale: messageLocale }),
+  copyPageAsMarkdown: m.copy_page_as_markdown({}, { locale: messageLocale }),
+  viewAsMarkdown: m.view_as_markdown({}, { locale: messageLocale }),
+  viewPageAsPlainText: m.view_page_as_plain_text({}, { locale: messageLocale }),
+  openInChatgpt: m.open_in_chatgpt({}, { locale: messageLocale }),
+  openInClaude: m.open_in_claude({}, { locale: messageLocale }),
+  openInPerplexity: m.open_in_perplexity({}, { locale: messageLocale }),
+  askQuestionsAboutPage: m.ask_questions_about_page({}, { locale: messageLocale }),
+  copied: m.copied({}, { locale: messageLocale }),
+  failedToCopy: m.failed_to_copy({}, { locale: messageLocale }),
+}
+---
+
+<div class="copy-page-container">
+  <button class="copy-page-button" aria-label={translations.copyPageOptions} data-page-slug={pageSlug}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+    </svg>
+    <span>{translations.copyPage}</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="chevron"
+    >
+      <path d="m6 9 6 6 6-6"></path>
+    </svg>
+  </button>
+
+  <div class="copy-page-menu" role="menu" hidden>
+    <button class="menu-item copy-markdown" role="menuitem">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+      </svg>
+      <div>
+        <div class="menu-item-title">{translations.copyPage}</div>
+        <div class="menu-item-subtitle">{translations.copyPageAsMarkdown}</div>
+      </div>
+    </button>
+
+    <a class="menu-item view-markdown" role="menuitem" target="_blank" rel="noopener noreferrer">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <text x="2" y="18" font-size="20" font-weight="bold" fill="currentColor">M↓</text>
+      </svg>
+      <div>
+        <div class="menu-item-title">{translations.viewAsMarkdown}</div>
+        <div class="menu-item-subtitle">{translations.viewPageAsPlainText}</div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="external-icon"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" x2="21" y1="14" y2="3"></line>
+      </svg>
+    </a>
+
+    <button class="menu-item open-chatgpt" role="menuitem">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 16v-4"></path>
+        <path d="M12 8h.01"></path>
+      </svg>
+      <div>
+        <div class="menu-item-title">{translations.openInChatgpt}</div>
+        <div class="menu-item-subtitle">{translations.askQuestionsAboutPage}</div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="external-icon"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" x2="21" y1="14" y2="3"></line>
+      </svg>
+    </button>
+
+    <button class="menu-item open-claude" role="menuitem">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+        <path d="M2 17l10 5 10-5"></path>
+        <path d="M2 12l10 5 10-5"></path>
+      </svg>
+      <div>
+        <div class="menu-item-title">{translations.openInClaude}</div>
+        <div class="menu-item-subtitle">{translations.askQuestionsAboutPage}</div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="external-icon"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" x2="21" y1="14" y2="3"></line>
+      </svg>
+    </button>
+
+    <button class="menu-item open-perplexity" role="menuitem">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      <div>
+        <div class="menu-item-title">{translations.openInPerplexity}</div>
+        <div class="menu-item-subtitle">{translations.askQuestionsAboutPage}</div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="external-icon"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" x2="21" y1="14" y2="3"></line>
+      </svg>
+    </button>
+  </div>
+
+  <span class="copy-page-feedback sr-only" role="status" aria-live="polite" aria-atomic="true"></span>
+</div>
+
+<script is:inline define:vars={{ translations, editUrl: editUrl?.toString() ?? '', markdownSourceUrl }}>
+  const getMenuItems = (menu) => Array.from(menu.querySelectorAll('.menu-item')).filter((item) => item instanceof HTMLElement && !item.hasAttribute('disabled'))
+
+  const closeMenu = (menu, restoreFocus = false) => {
+    menu.hidden = true
+
+    if (restoreFocus && menu.previousElementSibling instanceof HTMLElement) {
+      menu.previousElementSibling.focus()
+    }
+  }
+
+  const closeOtherMenus = (currentMenu) => {
+    document.querySelectorAll('.copy-page-menu').forEach((menu) => {
+      if (menu !== currentMenu && menu instanceof HTMLElement) closeMenu(menu)
+    })
+  }
+
+  const openMenu = (menu) => {
+    closeOtherMenus(menu)
+    menu.hidden = false
+    getMenuItems(menu)[0]?.focus()
+  }
+
+  // Toggle menu visibility
+  const buttons = document.querySelectorAll('.copy-page-button')
+  buttons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation()
+      const menu = button.nextElementSibling
+      if (!(menu instanceof HTMLElement)) return
+
+      if (menu.hidden) {
+        openMenu(menu)
+      } else {
+        closeMenu(menu)
+      }
+    })
+
+    button.addEventListener('keydown', (e) => {
+      const menu = button.nextElementSibling
+      if (!(menu instanceof HTMLElement)) return
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        openMenu(menu)
+      }
+
+      if (e.key === 'Escape' && !menu.hidden) {
+        e.preventDefault()
+        closeMenu(menu, true)
+      }
+    })
+  })
+
+  document.querySelectorAll('.copy-page-menu').forEach((menu) => {
+    menu.addEventListener('keydown', (e) => {
+      if (!(menu instanceof HTMLElement)) return
+
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        closeMenu(menu, true)
+        return
+      }
+
+      if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return
+
+      const items = getMenuItems(menu)
+      if (items.length === 0) return
+
+      e.preventDefault()
+
+      const currentIndex = items.indexOf(document.activeElement)
+      const nextIndex =
+        e.key === 'Home' ? 0 : e.key === 'End' ? items.length - 1 : e.key === 'ArrowUp' ? (currentIndex - 1 + items.length) % items.length : (currentIndex + 1) % items.length
+
+      items[nextIndex]?.focus()
+    })
+  })
+
+  // Close menu when clicking outside
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.copy-page-menu').forEach((menu) => {
+      menu.hidden = true
+    })
+  })
+
+  // Copy page as markdown
+  document.querySelectorAll('.copy-markdown').forEach((btn) => {
+    let resetTimer
+
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      const pageSlug = document.querySelector('.copy-page-button')?.getAttribute('data-page-slug')
+      if (!pageSlug) {
+        console.error('Page slug not found')
+        return
+      }
+
+      const title = btn.querySelector('.menu-item-title')
+      const originalText = title?.textContent
+      const container = btn.closest('.copy-page-container')
+      const feedback = container?.querySelector('.copy-page-feedback')
+
+      function updateFeedback(message) {
+        if (feedback instanceof HTMLElement) {
+          feedback.textContent = message
+        }
+      }
+
+      function resetFeedback() {
+        if (resetTimer) {
+          window.clearTimeout(resetTimer)
+        }
+
+        resetTimer = window.setTimeout(() => {
+          if (title) {
+            title.textContent = originalText || translations.copyPage
+          }
+          updateFeedback('')
+        }, 2000)
+      }
+
+      function fallbackCopy(value) {
+        const textarea = document.createElement('textarea')
+        textarea.value = value
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.focus()
+        textarea.select()
+
+        const legacyCopy = Reflect.get(document, 'execCommand')
+        const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+
+        document.body.removeChild(textarea)
+
+        if (!copied) {
+          throw new Error('Fallback copy method also failed')
+        }
+      }
+
+      try {
+        // Disable button during operation
+        btn.disabled = true
+
+        // Try multiple paths for the markdown file
+        const paths = [
+          `/${pageSlug}.md`, // Built/copied version
+          `/src/content/docs/${pageSlug}.mdx`, // Dev mode .mdx
+          `/src/content/docs/${pageSlug}.md`, // Dev mode .md
+        ]
+
+        if (markdownSourceUrl) {
+          paths.push(markdownSourceUrl)
+        }
+
+        let content = ''
+        let fetchSuccess = false
+
+        for (const mdPath of paths) {
+          try {
+            console.log('Trying to fetch from:', mdPath)
+            const response = await fetch(mdPath)
+            if (response.ok) {
+              content = await response.text()
+              console.log('Successfully fetched from:', mdPath, 'Length:', content.length)
+              fetchSuccess = true
+              break
+            }
+          } catch (err) {
+            console.log('Failed to fetch from:', mdPath)
+          }
+        }
+
+        if (!fetchSuccess || !content) {
+          throw new Error('Failed to fetch markdown from any source')
+        }
+
+        if (!navigator.clipboard?.writeText) {
+          fallbackCopy(content)
+        } else {
+          try {
+            await navigator.clipboard.writeText(content)
+          } catch (clipboardError) {
+            console.error('Clipboard API failed, trying fallback:', clipboardError)
+            fallbackCopy(content)
+          }
+        }
+        console.log('Copied to clipboard successfully')
+
+        // Show success feedback
+        updateFeedback(translations.copied)
+        if (title) {
+          title.textContent = translations.copied
+        }
+        resetFeedback()
+      } catch (error) {
+        console.error('Failed to copy:', error)
+        updateFeedback(translations.failedToCopy)
+        if (title) {
+          title.textContent = translations.failedToCopy
+        }
+        resetFeedback()
+      } finally {
+        btn.disabled = false
+      }
+    })
+  })
+
+  // View as Markdown - set the href to local .md file
+  document.querySelectorAll('.view-markdown').forEach((link) => {
+    if (markdownSourceUrl) {
+      link.href = markdownSourceUrl
+      return
+    }
+
+    const pageSlug = document.querySelector('.copy-page-button')?.getAttribute('data-page-slug')
+    if (pageSlug) {
+      link.href = `/${pageSlug}.md`
+    }
+  })
+
+  // Get markdown URL - use absolute URL for AI assistants
+  function getMarkdownUrl() {
+    if (markdownSourceUrl) return markdownSourceUrl
+
+    const pageSlug = document.querySelector('.copy-page-button')?.getAttribute('data-page-slug')
+    if (!pageSlug) return window.location.href
+    const baseUrl = window.location.origin
+    return `${baseUrl}/${pageSlug}.md`
+  }
+
+  // Open in AI assistants - pass markdown URL
+  document.querySelectorAll('.open-chatgpt').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const markdownUrl = getMarkdownUrl()
+      window.open(`https://chat.openai.com/?q=${encodeURIComponent(`Please help me understand this documentation: ${markdownUrl}`)}`, '_blank')
+    })
+  })
+
+  document.querySelectorAll('.open-claude').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const markdownUrl = getMarkdownUrl()
+      window.open(`https://claude.ai/new?q=${encodeURIComponent(`Please help me understand this documentation: ${markdownUrl}`)}`, '_blank')
+    })
+  })
+
+  document.querySelectorAll('.open-perplexity').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const markdownUrl = getMarkdownUrl()
+      window.open(`https://www.perplexity.ai/?q=${encodeURIComponent(`Please help me understand this documentation: ${markdownUrl}`)}`, '_blank')
+    })
+  })
+</script>
+
+<style>
+  .copy-page-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .copy-page-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    color: var(--sl-color-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .copy-page-button:hover {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .copy-page-button:focus-visible {
+    outline: 2px solid var(--sl-color-text-accent);
+    outline-offset: 2px;
+  }
+
+  .copy-page-button .chevron {
+    transition: transform 0.2s;
+  }
+
+  .copy-page-button:hover .chevron {
+    transform: translateY(1px);
+  }
+
+  .copy-page-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    min-width: 20rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    padding: 0.5rem;
+    z-index: 1000;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 0.375rem;
+    color: var(--sl-color-text);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .menu-item:hover,
+  .menu-item:focus-visible {
+    background: var(--sl-color-gray-6);
+  }
+
+  .menu-item:focus-visible {
+    outline: 2px solid var(--sl-color-text-accent);
+    outline-offset: -2px;
+  }
+
+  .menu-item > svg:first-child {
+    flex-shrink: 0;
+    color: var(--sl-color-text-accent);
+  }
+
+  .menu-item > div {
+    flex: 1;
+  }
+
+  .menu-item-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .menu-item-subtitle {
+    font-size: 0.75rem;
+    color: var(--sl-color-gray-3);
+    line-height: 1.25;
+  }
+
+  .external-icon {
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .copy-page-menu {
+      right: auto;
+      left: 0;
+      width: min(20rem, calc(100vw - 2rem));
+      min-width: 0;
+    }
+  }
+</style>

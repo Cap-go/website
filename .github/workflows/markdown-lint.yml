@@ -1,0 +1,30 @@
+name: Check Markdown links
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every first day at 00:00 AM every month.
+    - cron: '0 0 * * *'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          filter: blob:none
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          retry-after: 10
+          use-quiet-mode: yes
+          use-verbose-mode: yes
+          config-file: .github/workflows/markdown.links.config.json

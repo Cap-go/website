@@ -1,0 +1,284 @@
+---
+title: Trigger Native Builds from the CI UI
+description: Run Capgo Build on demand from the GitHub Actions, GitLab, Bitbucket, or Azure DevOps UI — no git tag or push required.
+sidebar:
+  order: 10
+  label: Trigger from CI UI
+---
+
+import { Steps, Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Sometimes you need a signed iOS or Android binary without merging a PR or cutting a release tag — a QA build, a store resubmit, or a one-off TestFlight. Every major code host can start a pipeline from its web UI. This guide shows how to wire that UI to Capgo Build.
+
+## What You Get
+
+<CardGrid>
+  <Card title="No Git Ceremony" icon="rocket">
+    Click Run workflow / Run pipeline. Capgo Build compiles from the branch you pick.
+  </Card>
+  <Card title="Safe Inputs" icon="setting">
+    Platform and build mode use constrained choices where the host supports them (GitHub / Bitbucket / Azure). GitLab variables remain editable per run unless you define [pipeline inputs](https://docs.gitlab.com/ee/ci/yaml/#specinputs) with `options`.
+  </Card>
+  <Card title="Same Secrets as CI" icon="approve-check">
+    Reuse the Capgo Build credentials already in your repo. Nothing new on laptops.
+  </Card>
+</CardGrid>
+
+## Prerequisites
+
+- Capgo Build working once locally or in CI — see [Getting Started](/docs/builder/getting-started/)
+- Signing secrets already in the host (for GitHub, [export with the CLI and `gh secret set -f`](/docs/builder/github-actions/#setup))
+- `CAPGO_TOKEN` stored as a masked secret / CI variable
+
+## GitHub Actions
+
+GitHub's **Actions** tab can start any workflow that declares `workflow_dispatch`.
+
+### 1. Add the workflow
+
+```yaml
+# .github/workflows/capgo-build-manual.yml
+name: Capgo Build (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: Platform to build
+        required: true
+        default: both
+        type: choice
+        options: [ios, android, both]
+      mode:
+        description: Build mode
+        required: true
+        default: debug
+        type: choice
+        options: [debug, release]
+      ref_note:
+        description: Optional note for the run summary
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.mode == 'release' && 'production' || 'build-debug' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(inputs.platform == 'both' && '["ios","android"]' || format('["{0}"]', inputs.platform)) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync ${{ matrix.platform }}
+
+      - name: Capgo Build
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          CAPGO_IOS_PROVISIONING_MAP: ${{ secrets.CAPGO_IOS_PROVISIONING_MAP }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+        run: |
+          EXTRA=""
+          if [ "${{ inputs.mode }}" = "debug" ] && [ "${{ matrix.platform }}" = "android" ]; then
+            EXTRA="--no-playstore-upload --output-upload"
+          fi
+          npx @capgo/cli@latest build request com.example.app \
+            --platform ${{ matrix.platform }} \
+            --build-mode ${{ inputs.mode }} \
+            $EXTRA
+```
+
+### 2. Run it from the UI
+
+<Steps>
+
+1. Open the GitHub repository in the browser
+2. Go to **Actions**
+3. Select **Capgo Build (Manual)**
+4. Click **Run workflow**
+5. Pick the branch, platform, and mode
+6. Confirm **Run workflow**
+
+</Steps>
+
+Anyone with **write** access can start a build. The sample maps `release` runs to a GitHub Environment named `production` — create that environment and add required reviewers so store builds wait for approval. Without `environment:` on the job, environment protection rules never apply.
+
+<Aside type="tip">
+Prefer the API or another tool to click the button? Use [`gh workflow run`](https://cli.github.com/manual/gh_workflow_run) or see [Trigger Builds via Webhook](/docs/builder/webhooks/) for `repository_dispatch`.
+</Aside>
+
+## GitLab CI
+
+GitLab can run a job from **Build → Pipelines → Run pipeline** when the job is available for that branch.
+
+```yaml
+# Job fragment for .gitlab-ci.yml
+stages:
+  - build
+
+variables:
+  APP_ID: com.example.app
+  PLATFORM: android   # override from Run pipeline UI
+  BUILD_MODE: debug
+
+capgo_native_manual:
+  stage: build
+  when: manual
+  script:
+    - npm ci
+    - npm run build
+    - npx cap sync "$PLATFORM"
+    - |
+      npx @capgo/cli@latest build request "$APP_ID" \
+        --platform "$PLATFORM" \
+        --build-mode "$BUILD_MODE"
+  rules:
+    # Actions / Pipelines UI → manual play button
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: manual
+    # Pipeline trigger token / webhook → run automatically
+    - if: '$CI_PIPELINE_SOURCE == "trigger"'
+      when: on_success
+    - when: never
+```
+
+<Steps>
+
+1. Open the GitLab project
+2. Go to **Build → Pipelines → Run pipeline**
+3. Choose the branch
+4. Optionally set `PLATFORM` / `BUILD_MODE` variables for this run
+5. Start the pipeline, then click the play button on **capgo_native_manual**
+
+</Steps>
+
+`when: manual` keeps the job from firing on every push; the web UI (or a [pipeline trigger token](/docs/builder/webhooks/#gitlab-pipeline-trigger)) starts it on demand.
+
+## Bitbucket Pipelines
+
+Use a custom pipeline so the Bitbucket UI can pass variables:
+
+```yaml
+# bitbucket-pipelines.yml
+pipelines:
+  custom:
+    capgo-native-build:
+      - variables:
+          - name: PLATFORM
+            default: android
+            allowed-values:
+              - ios
+              - android
+          - name: BUILD_MODE
+            default: debug
+            allowed-values:
+              - debug
+              - release
+      - step:
+          name: Capgo Build
+          image: node:24
+          script:
+            - npm ci
+            - npm run build
+            - npx cap sync "$PLATFORM"
+            - npx @capgo/cli@latest build request com.example.app --platform "$PLATFORM" --build-mode "$BUILD_MODE"
+```
+
+Run it from **Pipelines → Run pipeline → Custom: capgo-native-build**. Store `CAPGO_TOKEN` and signing material under **Repository settings → Pipelines → Repository variables**.
+
+## Azure DevOps
+
+```yaml
+# azure-pipelines-capgo-manual.yml
+trigger: none   # disable CI push triggers
+pr: none        # also disable PR triggers (GitHub/Bitbucket-backed projects)
+
+parameters:
+  - name: platform
+    displayName: Platform
+    type: string
+    default: android
+    values:
+      - ios
+      - android
+  - name: buildMode
+    displayName: Build mode
+    type: string
+    default: debug
+    values:
+      - debug
+      - release
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '24.x'
+  - script: |
+      npm ci
+      npm run build
+      npx cap sync ${{ parameters.platform }}
+      npx @capgo/cli@latest build request com.example.app \
+        --platform ${{ parameters.platform }} \
+        --build-mode ${{ parameters.buildMode }}
+    env:
+      CAPGO_TOKEN: $(CAPGO_TOKEN)
+      # map other signing secrets from Library → Variable groups
+```
+
+`trigger: none` and `pr: none` keep the pipeline off automatic CI/PR runs so it starts from **Pipelines → Run pipeline** (or a webhook). If the project uses Azure Repos branch policies that queue this pipeline, disable that policy separately. Add `CAPGO_TOKEN` and signing values to a variable group marked secret.
+
+## Recommended Inputs
+
+| Input | Suggested values | Notes |
+|-------|------------------|-------|
+| Platform | `ios`, `android`, `both` | Matrix when `both` |
+| Mode | `debug`, `release` | Debug + `--output-upload` for QA links |
+| iOS distribution | `app_store`, `ad_hoc` | Ad-hoc never submits to App Store |
+
+For downloadable QA artifacts, combine debug Android with `--no-playstore-upload --output-upload` and read the URL with [`build last-output`](/docs/builder/github-actions/#read-the-build-output-url-and-qr-code).
+
+## Security Notes
+
+- Prefer environment protection rules (GitHub) or protected variables (GitLab) for `release` builds that submit to stores.
+- Do not put signing passwords in workflow `inputs` — only in secrets/variables.
+- Limit who can run workflows with repository roles and team permissions (write access is required on GitHub). Branch protection alone does not control **Run workflow**; add an in-workflow authorization check if only a narrower group may start builds.
+
+## Related Guides
+
+<CardGrid>
+  <LinkCard
+    title="GitHub Actions (full setup)"
+    description="Export credentials and push/tag workflows."
+    href="/docs/builder/github-actions/"
+  />
+  <LinkCard
+    title="Auto OTA or Native"
+    description="Let CI choose live update vs Capgo Build on every push."
+    href="/docs/builder/ci-ota-or-native/"
+  />
+  <LinkCard
+    title="Trigger via Webhook"
+    description="Call the same pipelines from an admin dashboard over HTTP."
+    href="/docs/builder/webhooks/"
+  />
+</CardGrid>

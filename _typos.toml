@@ -1,0 +1,77 @@
+[files]
+extend-exclude = [
+    # Historical localized blog slug keys (intentional foreign-language path aliases)
+    "apps/shared/legacyPathRedirects.ts",
+    # Nightly snapshots of remote data (Stripe IDs, store app names, release notes, sponsor names)
+    "apps/web/src/data/capgo-plans.json",
+    "apps/web/src/data/capgo-credits.json",
+    "apps/web/src/data/store-top.json",
+    "apps/web/src/data/github-releases.json",
+    "apps/web/src/data/github-sponsors.json",
+    "apps/web/test/hoffman-conversion-redirects.test.js",
+    "public/**/*_tye.png",
+    "apps/web/public/**/*_tye.png",
+    "apps/docs/public/**/*_tye.png",
+    ".github/assets/readme-banner-preview.png",
+    "loadedVectorStore/**",
+    "src/pages/**",
+    "apps/web/src/pages/**",
+    "src/services/supabase.types.ts",
+    "src/components/**",
+    "apps/web/src/components/**",
+    "apps/docs/src/components/**",
+    "apps/web/src/config/productVideos.ts",
+    "public/",
+    "apps/web/public/",
+    "apps/docs/public/",
+]
+
+[default]
+extend-ignore-re = [
+    # Ignore URLs
+    "https?://\\S+",
+    # Cloudflare data center (IATA airport) codes in the hero world map config
+    "colo: '[A-Z]{3}'",
+    # IndexNow verification key
+    "ue6dw2uu67eum6y2m8en775jjf1qhe1r",
+]
+
+[default.extend-words]
+# These are proper names, not typos
+Longe = "Longe"
+Damon = "Damon"
+Synopsys = "Synopsys"
+Appy = "Appy"  # Appy Pie (brand name)
+
+# Acronyms and technical terms
+ASO = "ASO"  # App Store Optimization
+ITMS = "ITMS"  # iTunes Music Store
+SME = "SME"  # Small and midsize enterprise
+Hashi = "Hashi"  # HashiCorp (brand name)
+formatable = "formatable"  # NFC event literal from upstream API
+PLUGABLE = "PLUGABLE"  # Zebra DataWedge enum literal from upstream API
+jus = "jus"  # Brazilian justice app package namespace
+Programm = "Programm"  # German app-store title term in TV-Programm
+BLUTOOTH = "BLUTOOTH"  # Upstream Android intent literal from capacitor-intent-launcher
+# Translation keys/identifiers - these should remain as-is
+udid = "udid"  # iOS device UDID (technical term)
+UDID = "UDID"  # iOS device UDID (technical term)
+RTO = "RTO"  # Recovery Time Objective
+Sanbox = "Sanbox"  # Legacy copy key kept for runtime compatibility
+framworks = "framworks"  # Legacy copy key kept for runtime compatibility
+youre = "youre"  # Legacy copy key kept for runtime compatibility
+Entreprise = "Entreprise"  # French nav label used in translation-worker regression tests
+Blogue = "Blogue"  # French nav label used in translation-worker regression tests
+
+# OpenSSL command flags
+passin = "passin"  # OpenSSL password input flag
+
+
+[default.extend-identifiers]
+# Keep "PNGs" whole; otherwise typos splits it into "PN" + "Gs" and flags "PN" -> "ON"
+PNGs = "PNGs"
+# Field of View acronym; otherwise typos splits it into "Fo" + "V"
+FoV = "FoV"
+# Keep "OTPs" whole; otherwise typos splits it into "OT" + "Ps" and flags "OT" -> "TO"
+OTPs = "OTPs"
+OTP = "OTP"

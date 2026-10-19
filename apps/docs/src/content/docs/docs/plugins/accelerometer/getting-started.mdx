@@ -1,0 +1,211 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-accelerometer and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-accelerometer` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-accelerometer
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+await CapacitorAccelerometer.startMeasurementUpdates();
+await CapacitorAccelerometer.addListener('measurement', ({ x, y, z }) => {
+  detectShake(x, y, z);
+});
+```
+
+## Example: web permission
+
+On web, request motion access through `requestPermissions()` before expecting non zero samples.
+
+## Common pitfalls
+
+- **Web zeros**: before the first motion event, `getMeasurement()` returns zeros.
+- **Stop streaming**: `stopMeasurementUpdates()` when leaving the screen.
+- **Units**: use the plugin documented axis convention for your game math.
+
+## API Overview
+
+### `getMeasurement`
+
+Get the most recent accelerometer sample that was recorded by the native layer.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+const result = await CapacitorAccelerometer.getMeasurement();
+console.log(result);
+```
+
+### `isAvailable`
+
+Check if the current device includes an accelerometer sensor.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+const result = await CapacitorAccelerometer.isAvailable();
+console.log(result);
+```
+
+### `startMeasurementUpdates`
+
+Begin streaming accelerometer updates to the JavaScript layer.
+
+Call `addListener` with the `measurement` event to receive the updates.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+await CapacitorAccelerometer.startMeasurementUpdates();
+```
+
+### `stopMeasurementUpdates`
+
+Stop streaming accelerometer updates started via `startMeasurementUpdates`.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+await CapacitorAccelerometer.stopMeasurementUpdates();
+```
+
+### `checkPermissions`
+
+Return the current permission state for accessing motion data.
+
+On platforms without explicit permissions this resolves to `granted`.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+const result = await CapacitorAccelerometer.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions`
+
+Request permission to access motion data if supported by the platform.
+
+```typescript
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+const result = await CapacitorAccelerometer.requestPermissions();
+console.log(result);
+```
+
+## Type Reference
+
+### `GetMeasurementResult`
+Alias for the most recent measurement.
+```typescript
+export type GetMeasurementResult = Measurement;
+```
+
+### `IsAvailableResult`
+Result returned by `isAvailable`.
+```typescript
+export interface IsAvailableResult {
+  /**
+   * Whether an accelerometer sensor is available on the device.
+   *
+   * @since 1.0.0
+   */
+  isAvailable: boolean;
+}
+```
+
+### `PermissionStatus`
+Permission information returned by `checkPermissions` and `requestPermissions`.
+```typescript
+export interface PermissionStatus {
+  /**
+   * The permission state for accessing motion data on the current platform.
+   *
+   * @since 1.0.0
+   */
+  accelerometer: AccelerometerPermissionState;
+}
+```
+
+### `MeasurementEvent`
+Event payload emitted when `startMeasurementUpdates` is active.
+```typescript
+export type MeasurementEvent = Measurement;
+```
+
+### `Measurement`
+The x, y and z axis acceleration values reported by the device motion sensors.
+```typescript
+export interface Measurement {
+  /**
+   * The acceleration on the x-axis in G's.
+   *
+   * @since 1.0.0
+   */
+  x: number;
+
+  /**
+   * The acceleration on the y-axis in G's.
+   *
+   * @since 1.0.0
+   */
+  y: number;
+
+  /**
+   * The acceleration on the z-axis in G's.
+   *
+   * @since 1.0.0
+   */
+  z: number;
+}
+```
+
+### `AccelerometerPermissionState`
+Permission state union including `limited` for platforms that can throttle motion access.
+```typescript
+export type AccelerometerPermissionState = PermissionState | 'limited';
+```
+
+### `PermissionState`
+Platform permission states supported by Capacitor.
+```typescript
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-accelerometer](/plugins/capacitor-accelerometer/) for the native capability in Using @capgo/capacitor-accelerometer, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

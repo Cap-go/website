@@ -1,0 +1,301 @@
+---
+import '@/styles/mobile-app-product.css'
+import ProductAppExamples from '@/components/ProductAppExamples.astro'
+import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import { productVideos } from '@/config/productVideos'
+import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import { productTestimonials } from '@/config/productTestimonials'
+import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import SignupCta from '@/components/SignupCta.astro'
+import AgentReadySection from '@/components/AgentReadySection.astro'
+
+const locale = Astro.locals.locale
+
+const title = 'Capgo mobile app | Preview builds and manage live updates on the go'
+const description =
+  'Use the Capgo mobile app to preview bundles on real devices, share QR previews, follow native builds, and check the releases your AI agent shipped.'
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-app-mobile.png`,
+}
+
+const storeLinks = [
+  {
+    href: 'https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go',
+    image: '/play-store-button.webp',
+    alt: 'Get Capgo on Google Play',
+  },
+  {
+    href: 'https://apps.apple.com/pt/app/capgo/id1602316563',
+    image: '/app-store-button.webp',
+    alt: 'Download Capgo on the App Store',
+  },
+]
+
+const highlights = [
+  ['Preview', 'Share QR codes or deep links so teammates, QA testers, or users can open previews on their devices.'],
+  ['Test', 'Apply saved previews, update them, or reset to the live app.'],
+  ['Watch', 'Check native build status, duration, output, and errors.'],
+]
+
+const capabilities = [
+  {
+    title: 'Preview a build on the device that will run it',
+    description: 'Open a bundle or channel preview from the dashboard or CLI, scan the QR code, and apply it directly inside the Capgo app for a real-device check.',
+  },
+  {
+    title: 'Keep multiple previews ready for QA',
+    description: 'Saved previews let testers switch between build candidates, update a preview, delete stale ones, and return to the main app without rebuilding.',
+  },
+  {
+    title: 'Follow native builds away from your desk',
+    description: 'The build view shows platform, build mode, status, duration, output details, and errors so you can react before the release window closes.',
+  },
+  {
+    title: 'See compatibility before choosing the release path',
+    description: 'Compatibility events surface dependency changes, unresolved devices, rollback options, and the moment a native rebuild is the safer path.',
+  },
+  {
+    title: 'Manage live updates on the go',
+    description: 'Check apps, channels, bundles, and current release state from your phone when production needs a fast decision.',
+  },
+  {
+    title: 'Share CLI and dashboard QR previews',
+    description: 'Send the same QR code or deep link to your team, QA group, or selected users so they can test the exact build on their own device.',
+  },
+]
+
+const workflow = [
+  ['Create a shareable preview', 'Generate a bundle or channel preview from Capgo, the dashboard, or the CLI QR preview flow.'],
+  ['Share it with testers', 'Send the QR code or deep link to teammates, QA, or selected users, then let them start the preview in the Capgo app.'],
+  ['Test and decide', 'Switch saved previews, inspect compatibility, watch build status, and either ship OTA or prepare a native build.'],
+]
+
+const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysmarter', 'com.polleverywhere.mobile']
+---
+
+<Layout content={content}>
+  <div class="ma bg-ad">
+    <section class="section hero bg-grid grain" id="top">
+      <div class="shell">
+        <div class="beta-badge">
+          <span class="dot"></span>
+          Capgo mobile app
+        </div>
+        <h1 class="hero-banner" aria-label="Capgo mobile app">
+          <span class="hbv-underlined">
+            <span class="hbv-u-name">Capgo mobile app</span>
+            <span class="hbv-u-rule"></span>
+          </span>
+        </h1>
+        <p class="lead hero-lead">
+          Preview builds directly on a real device, share QR tests with teams or users, follow native build status, and manage release decisions from your phone.
+        </p>
+        <div class="hero-ctas">
+          <div class="store-row">
+            {
+              storeLinks.map((store) => (
+                <a href={store.href} target="_blank" rel="noopener noreferrer">
+                  <img src={store.image} alt={store.alt} loading="eager" decoding="async" />
+                </a>
+              ))
+            }
+          </div>
+          <a class="btn btn-lg btn-ghost" href="#preview">See the app ↓</a>
+        </div>
+        <div class="hero-strip">
+          {
+            highlights.map(([label, text]) => (
+              <div class="hero-strip-cell">
+                <p class="k">{label}</p>
+                <p class="v">{text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-grid grain" id="preview">
+      <div class="shell">
+        <div class="rv-one">
+          <div class="rv-one-mark">Capgo mobile app</div>
+          <p class="rv-one-line">Scan a preview, test on a real device, and track the release from your phone.</p>
+        </div>
+
+        <div class="phone-showcase">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <img
+                id="capgo-mobile-preview-demo"
+                src="/capgo-mobile-preview-demo.webp"
+                data-poster="/capgo-mobile-preview-demo-poster.webp"
+                alt="Screen recording of the Capgo mobile app previewing a bundle on a real device"
+                width="720"
+                height="1280"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <script is:inline>
+              ;(() => {
+                const img = document.getElementById('capgo-mobile-preview-demo')
+                if (!img) return
+                const demoSrc = '/capgo-mobile-preview-demo.webp'
+                const posterSrc = img.dataset.poster ?? '/capgo-mobile-preview-demo-poster.webp'
+                const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+                const apply = () => {
+                  img.src = mq.matches ? posterSrc : demoSrc
+                }
+                apply()
+                mq.addEventListener('change', apply)
+              })()
+            </script>
+          </div>
+
+          <div class="phone-cards">
+            <div class="phone-card phone-card--accent">
+              <p class="phone-card-label">Preview ready</p>
+              <p class="phone-card-title">bundle 1.8.4</p>
+              <p class="phone-card-text">Apply this preview, keep it saved for QA, or reset to the production bundle.</p>
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-row">
+                <p class="phone-card-label">Native build</p>
+                <span class="phone-card-badge">success</span>
+              </div>
+              <dl class="phone-card-grid">
+                <div>
+                  <dt>Platform</dt>
+                  <dd>iOS</dd>
+                </div>
+                <div>
+                  <dt>Output</dt>
+                  <dd>IPA ready</dd>
+                </div>
+              </dl>
+            </div>
+            <div class="phone-card">
+              <p class="phone-card-label">Compatibility</p>
+              <p class="phone-card-text">Dependency change detected. Review affected channels before shipping OTA.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="cyan"
+      eyebrow={m.mobile_v2_proof_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.mobile_v2_proof_title({}, { locale: Astro.locals.locale })}
+      description={m.mobile_v2_proof_lead({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.mobile}
+      maxItems={2}
+    />
+  </div>
+
+  <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Release control in your pocket</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Built for CapacitorJS apps when a laptop is not open</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
+          The mobile app is not just a companion view. It is the fastest way to prove a live update on-device, keep QA previews organized, and check whether a native build is still
+          moving.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {
+          capabilities.map((capability) => (
+            <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-200 ring-1 ring-cyan-300/25">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 4.153a.75.75 0 0 1 .143 1.051l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.142Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold tracking-tight text-white">{capability.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-300">{capability.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <ProductVideoSection youtubeId={productVideos.mobileApp.youtubeId} title={productVideos.mobileApp.title} description={productVideos.mobileApp.description} />
+
+  <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Preview workflow</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">From release candidate to real-device proof</h2>
+        <p class="mt-5 text-base leading-7 text-pretty text-slate-300">
+          Capgo preview links move from CLI or dashboard to the mobile app without a handoff. Share a QR code, let teammates or selected users test, and decide with the same
+          release context.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 lg:grid-cols-3">
+        {
+          workflow.map(([title, text], index) => (
+            <article class="flex min-h-full flex-col rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-sm font-semibold text-white">{index + 1}</div>
+              <h3 class="mt-5 text-lg leading-6 font-semibold tracking-tight text-white">{title}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-300">{text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <AgentReadySection
+    headingId="agent-ready-mobile-app-title"
+    eyebrow={m.agent_ready_mobile_app_eyebrow({}, { locale })}
+    title={m.agent_ready_mobile_app_title({}, { locale })}
+    subtitle={m.agent_ready_mobile_app_subtitle({}, { locale })}
+    prompts={[m.agent_ready_mobile_app_prompt_1({}, { locale }), m.agent_ready_mobile_app_prompt_2({}, { locale }), m.agent_ready_mobile_app_prompt_3({}, { locale })]}
+  />
+
+  <ProductAppExamples
+    title="Capacitor apps prove the release loop at real scale"
+    description="Capgo is built for teams shipping Capacitor apps where real-device validation, fast rollback, and clear release state matter before every production move."
+    appIds={appExampleIds}
+  />
+
+  <section class="bg-[#1a1a1a] py-16 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+      <div>
+        <p class="font-mono text-sm font-semibold tracking-wide text-cyan-300 uppercase">Start testing on-device</p>
+        <h2 class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">Download the app and connect it to your Capgo account.</h2>
+        <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300">
+          Use it with preview QR codes, live update channels, and native build outputs from the rest of your Capgo release flow.
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+        {
+          storeLinks.map((store) => (
+            <a
+              href={store.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex w-fit transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
+            >
+              <img src={store.image} alt={store.alt} class="h-14 w-auto sm:h-16" loading="lazy" decoding="async" />
+            </a>
+          ))
+        }
+        <SignupCta id="app-mobile-signup-cta" humanSupport align="start" class="mt-4" />
+      </div>
+    </div>
+  </section>
+</Layout>

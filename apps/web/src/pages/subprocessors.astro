@@ -1,0 +1,221 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import { defaultLocale } from '@/services/locale'
+
+const locale = Astro.locals.locale
+const title = [Astro.locals.runtimeConfig.public.brand, m.subprocessors({}, { locale })].join(' | ')
+const description = m.subprocessors_description({}, { locale })
+
+const content = { title, description }
+
+const subprocessors = [
+  {
+    name: 'Supabase, Inc.',
+    purpose: 'Primary database, authentication, account data, application metadata, bundle metadata, and device identifiers.',
+    location: 'London, United Kingdom',
+    transfer: 'UK adequacy for UK hosting; EU Standard Contractual Clauses (SCCs) where applicable',
+  },
+  {
+    name: 'Cloudflare, Inc.',
+    purpose:
+      'Edge CDN, Workers runtime, Durable Objects, R2 storage, security services, and delivery of live updates. On customer opt-in, AI-assisted build-log diagnostics via Cloudflare Workers AI; logs are processed for the request and are not retained for training.',
+    location: 'Global, including USA',
+    transfer: 'EU-US Data Privacy Framework (DPF-certified); EU Standard Contractual Clauses (SCCs) as fallback',
+  },
+  {
+    name: 'Google Cloud',
+    purpose: 'Database read replicas and regional infrastructure for service availability and latency.',
+    location: 'Hong Kong, Tokyo, Sydney, Johannesburg, Milan, Jeddah, Mumbai, Sao Paulo, and Columbus',
+    transfer: 'EU Standard Contractual Clauses (SCCs); adequacy decisions where applicable; EU-US DPF/SCCs for US processing',
+  },
+  {
+    name: 'Scaleway SAS',
+    purpose: 'Build infrastructure, including macOS build runners, build artifacts, source files needed for native builds, and workflow data.',
+    location: 'Paris, France, EU',
+    transfer: 'Adequacy (EU)',
+  },
+]
+
+const controllerSideRecipients = ['Stripe', 'Bento', 'PostHog', 'CodeRabbit', 'SonarCloud']
+
+const scopeNotes = [
+  {
+    title: 'Apple and Google',
+    body: "For app store publishing, Capgo acts as an API pass-through to the customer's own developer accounts. Apple and Google are independent controllers with a direct contractual relationship with the customer.",
+  },
+  {
+    title: 'Controller-side recipients',
+    body: `Services used by Capgo for its own business purposes, such as payments, email, product analytics, support, error monitoring, or internal code quality. Current examples include ${controllerSideRecipients.join(', ')}.`,
+  },
+  {
+    title: 'Customer CI and source control',
+    body: "Customer CI platforms (for example GitHub Actions, GitLab CI, or Bitbucket Pipelines) and source control run in the customer's environment. Capgo does not link customer source repositories or pull source code from GitHub or other hosts on the customer's behalf. Customers call Capgo from CI with API tokens; bundles, native build inputs, and artifacts are submitted through the Capgo CLI or API. Those providers are governed by the customer's relationship with them, not as Capgo DPA sub-processors for repository access.",
+  },
+  {
+    title: 'Other customer-selected integrations',
+    body: "Webhook destinations or other third-party services configured by the customer are governed by the customer's relationship with those providers unless Capgo explicitly acts as processor for that integration.",
+  },
+]
+
+const changeHistory = [
+  {
+    date: '2026-10-05',
+    change:
+      'Removed GitHub, Inc. from the DPA sub-processor list. Capgo does not offer repository linking or pull source from customer GitHub; customer CI submits data to Capgo with API tokens. Clarified customer CI and source control under Not Covered By This List.',
+  },
+  {
+    date: '2026-06-04',
+    change:
+      'Rewrite: sub-processor list scoped to customer data processed by Capgo as processor; controller-side recipients and internal engineering services separated from the DPA sub-processor list.',
+  },
+  {
+    date: '2026-06-04',
+    change: 'Cloudflare scope clarified: opt-in AI-assisted build-log diagnostics via Cloudflare Workers AI.',
+  },
+  {
+    date: '2026-05-29',
+    change: 'Previous update: Supabase location clarified, Google Cloud regions listed, PostHog and Scaleway added, PlanetScale, Sentry, and Depot removed.',
+  },
+]
+---
+
+<Layout content={content}>
+  <div class="mx-auto w-full max-w-6xl px-4 py-10 text-slate-100 sm:px-6 sm:py-14 lg:px-8">
+    <div class="max-w-3xl">
+      {locale !== defaultLocale && (
+        <p class="mb-5 rounded-md border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-sm leading-6 text-amber-100">
+          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
+          legal matters.
+        </p>
+      )}
+      <p class="text-sm font-semibold tracking-wide text-cyan-300 uppercase">Legal</p>
+      <h1 class="mt-3 text-4xl font-bold tracking-normal text-white sm:text-5xl">{m.subprocessors_title({}, { locale })}</h1>
+      <p class="mt-5 text-lg leading-8 text-slate-300">
+        DPA-scoped sub-processors used to operate Capgo cloud services, with processing purpose, location, and transfer mechanism.
+      </p>
+    </div>
+
+    <dl class="mt-8 grid gap-3 sm:grid-cols-3">
+      <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
+        <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">{m.last_update({}, { locale })}</dt>
+        <dd class="mt-1 text-base font-semibold text-white">October 5, 2026</dd>
+      </div>
+      <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
+        <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Effective Date</dt>
+        <dd class="mt-1 text-base font-semibold text-white">July 4, 2026</dd>
+      </div>
+      <div class="rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
+        <dt class="text-xs font-semibold tracking-wide text-slate-400 uppercase">Notice Period</dt>
+        <dd class="mt-1 text-base font-semibold text-white">30 days</dd>
+      </div>
+    </dl>
+
+    <section class="mt-12 max-w-3xl">
+      <h2 class="text-2xl font-semibold text-white">1. Introduction</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>
+          This list contains the sub-processors engaged by Capgo, operated by Digital Shift OÜ and CodepushGo, LLC, for the provision of Capgo cloud services. It forms part of the Data Processing
+          Agreement.
+        </p>
+        <p>
+          The listed sub-processors process customer data on behalf of Capgo, including account data, application metadata, bundle metadata, device identifiers, source files
+          submitted for native builds, build artifacts, workflow data, and delivery data transmitted through the cloud services.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-white">2. Not Covered By This List</h2>
+        <p class="mt-4 text-base leading-8 text-slate-300">These services are not treated as Capgo sub-processors for the DPA list unless Capgo explicitly acts as processor.</p>
+      </div>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
+        {scopeNotes.map((item) => (
+          <article class="rounded-md border border-white/10 bg-slate-950/60 p-5">
+            <h3 class="text-base font-semibold text-white">{item.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-300">{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12 max-w-3xl">
+      <h2 class="text-2xl font-semibold text-white">3. Change Notification</h2>
+      <div class="mt-4 space-y-4 text-base leading-8 text-slate-300">
+        <p>
+          Capgo will notify customers at least 30 days before the intended engagement of a new sub-processor or a material change to an existing sub-processor, unless an urgent
+          security, availability, or legal requirement requires faster action.
+        </p>
+        <p>Customers may object to a new or changed sub-processor on reasonable data-protection grounds under the Data Processing Agreement.</p>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-white">4. Current Sub-processors</h2>
+        <p class="mt-4 text-base leading-8 text-slate-300">Customer data processed by Capgo as processor may pass through the following vendors.</p>
+      </div>
+      <div class="mt-6 overflow-x-auto rounded-md border border-white/10">
+        <table class="min-w-[960px] border-collapse text-left text-sm">
+          <caption class="sr-only">Current sub-processors with processing locations and transfer mechanisms</caption>
+          <thead class="bg-white/[0.06] text-xs tracking-wide text-slate-300 uppercase">
+            <tr>
+              <th scope="col" class="w-48 px-4 py-3 font-semibold">
+                Name
+              </th>
+              <th scope="col" class="px-4 py-3 font-semibold">
+                Purpose / categories of data processed
+              </th>
+              <th scope="col" class="w-56 px-4 py-3 font-semibold">
+                Processing location
+              </th>
+              <th scope="col" class="w-72 px-4 py-3 font-semibold">
+                Transfer mechanism
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10 bg-slate-950/50 text-slate-300">
+            {subprocessors.map((item) => (
+              <tr class="align-top">
+                <td class="px-4 py-4 font-semibold text-white">{item.name}</td>
+                <td class="px-4 py-4 leading-6">{item.purpose}</td>
+                <td class="px-4 py-4 leading-6">{item.location}</td>
+                <td class="px-4 py-4 leading-6">{item.transfer}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-white">5. Change History</h2>
+      </div>
+      <div class="mt-6 overflow-x-auto rounded-md border border-white/10">
+        <table class="min-w-[720px] border-collapse text-left text-sm">
+          <caption class="sr-only">History of changes to the sub-processor list</caption>
+          <thead class="bg-white/[0.06] text-xs tracking-wide text-slate-300 uppercase">
+            <tr>
+              <th scope="col" class="w-40 px-4 py-3 font-semibold">
+                Date
+              </th>
+              <th scope="col" class="px-4 py-3 font-semibold">
+                Change
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10 bg-slate-950/50 text-slate-300">
+            {changeHistory.map((item) => (
+              <tr class="align-top">
+                <td class="px-4 py-4 font-semibold text-white">{item.date}</td>
+                <td class="px-4 py-4 leading-6">{item.change}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</Layout>

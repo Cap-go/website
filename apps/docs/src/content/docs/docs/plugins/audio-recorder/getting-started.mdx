@@ -1,0 +1,384 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-audio-recorder and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-audio-recorder` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-audio-recorder
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+```
+
+## Quick start
+
+Request the microphone, record, then stop and read the native file URI (or web `Blob`).
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+const mic = await CapacitorAudioRecorder.requestPermissions();
+if (mic.recordAudio !== 'granted') {
+  throw new Error('Microphone permission required');
+}
+
+await CapacitorAudioRecorder.startRecording({
+  sampleRate: 44100,
+  bitRate: 128000,
+  resetToPlaybackOnStop: true, // iOS only: restore playback-friendly audio session after stop
+});
+
+const { uri, blob, duration } = await CapacitorAudioRecorder.stopRecording();
+const clipRef = Capacitor.getPlatform() === 'web' ? blob : uri;
+console.log('Saved clip', clipRef, duration);
+```
+
+## Example: voice memo with pause
+
+```typescript
+await CapacitorAudioRecorder.startRecording();
+// user taps pause during a long note
+await CapacitorAudioRecorder.pauseRecording();
+await CapacitorAudioRecorder.resumeRecording();
+const clip = await CapacitorAudioRecorder.stopRecording();
+```
+
+`pauseRecording` is available on Android (API 24+), iOS, and Web.
+
+## Example: live level meter
+
+Poll `getCurrentAmplitude()` on a timer (about 60 to 100 ms) while status is `RECORDING`. Values are normalized `0` to `1`, but the underlying signal differs by platform (peak on Android, average power on iOS, RMS on Web). Apply a small per platform scale if you need visual parity.
+
+```typescript
+const tick = async () => {
+  const { status } = await CapacitorAudioRecorder.getRecordingStatus();
+  if (status !== 'RECORDING') return;
+  const { value } = await CapacitorAudioRecorder.getCurrentAmplitude();
+  updateMeterUi(value);
+};
+```
+
+## Example: discard a take
+
+```typescript
+await CapacitorAudioRecorder.startRecording();
+await CapacitorAudioRecorder.cancelRecording(); // no file persisted
+```
+
+## Common pitfalls
+
+- **Web vs native return shape**: Android and iOS return `uri` from `stopRecording`. Web returns `blob` (and may omit `uri`).
+- **Quiet playback on iOS after recording**: set `resetToPlaybackOnStop: true` in `startRecording` if users play back the clip inside the same session.
+- **Background capture**: the plugin does not enable background audio by itself. On iOS, add the Audio background mode when you need recording while locked.
+- **Do not spam amplitude**: each `getCurrentAmplitude` call crosses the bridge. Use a UI interval, not a tight loop.
+
+## API Overview
+
+### `startRecording`
+
+Start recording audio using the device microphone.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.startRecording();
+```
+
+### `pauseRecording`
+
+Pause the ongoing recording. Only available on Android (API 24+), iOS, and Web.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.pauseRecording();
+```
+
+### `resumeRecording`
+
+Resume a previously paused recording.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.resumeRecording();
+```
+
+### `stopRecording`
+
+Stop the current recording and persist the recorded audio.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+const result = await CapacitorAudioRecorder.stopRecording();
+console.log(result);
+```
+
+### `cancelRecording`
+
+Cancel the current recording and discard any captured audio.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.cancelRecording();
+```
+
+### `getRecordingStatus`
+
+Retrieve the current recording status.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+const result = await CapacitorAudioRecorder.getRecordingStatus();
+console.log(result);
+```
+
+### `getCurrentAmplitude`
+
+Retrieve the current input amplitude (microphone level) as a normalized
+number in the `[0, 1]` range.
+
+Intended for driving live visualizations such as VU meters or waveforms
+while recording. Returns `0` when no recording is active. Designed for
+UI-rate polling — a 60–100 ms interval is a good starting point for a
+waveform. Avoid calling it in a tight loop; each call crosses the
+JS/native bridge.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+const result = await CapacitorAudioRecorder.getCurrentAmplitude();
+console.log(result);
+```
+
+### `checkPermissions`
+
+Return the current permission state for accessing the microphone.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+const result = await CapacitorAudioRecorder.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions`
+
+Request permission to access the microphone.
+
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+const result = await CapacitorAudioRecorder.requestPermissions();
+console.log(result);
+```
+
+## Type Reference
+
+### `StartRecordingOptions`
+Options accepted by .
+```typescript
+export interface StartRecordingOptions {
+  /**
+   * The audio session category options for recording. Only available on iOS.
+   *
+   * @since 1.0.0
+   */
+  audioSessionCategoryOptions?: AudioSessionCategoryOption[];
+
+  /**
+   * The audio session mode for recording. Only available on iOS.
+   *
+   * @since 1.0.0
+   */
+  audioSessionMode?: AudioSessionMode;
+
+  /**
+   * The audio bit rate in bytes per second.
+   * Only available on Android and iOS.
+   *
+   * @since 1.0.0
+   */
+  bitRate?: number;
+
+  /**
+   * The audio sample rate in Hz.
+   * Only available on Android and iOS.
+   *
+   * @since 1.0.0
+   */
+  sampleRate?: number;
+}
+```
+
+### `StopRecordingResult`
+Result returned by .
+```typescript
+export interface StopRecordingResult {
+  /**
+   * The recorded audio as a Blob. Only available on Web.
+   *
+   * @since 1.0.0
+   */
+  blob?: Blob;
+
+  /**
+   * The duration of the recording in milliseconds.
+   *
+   * @since 1.0.0
+   */
+  duration?: number;
+
+  /**
+   * The URI pointing to the recorded file. Only available on Android and iOS.
+   *
+   * @since 1.0.0
+   */
+  uri?: string;
+}
+```
+
+### `GetRecordingStatusResult`
+Result returned by .
+```typescript
+export interface GetRecordingStatusResult {
+  /**
+   * The current recording status.
+   *
+   * @since 1.0.0
+   */
+  status: RecordingStatus;
+}
+```
+
+### `GetCurrentAmplitudeResult`
+Result returned by .
+```typescript
+export interface GetCurrentAmplitudeResult {
+  /**
+   * The current input amplitude normalized to the `[0, 1]` range, where `0`
+   * represents silence and `1` represents the maximum level the platform can
+   * report. The value is `0` when no recording is active.
+   *
+   * Note: the source signal differs between platforms — Android reports the
+   * peak sample amplitude since the last call, iOS reports the average power
+   * in dB converted to linear, and Web reports the RMS of the latest frame.
+   * Consumers that need cross-platform parity may want to apply a
+   * per-platform scaling curve.
+   *
+   * @since 8.1.0
+   */
+  value: number;
+}
+```
+
+### `PermissionStatus`
+Permission information returned by and .
+```typescript
+export interface PermissionStatus {
+  /**
+   * The permission state for audio recording.
+   *
+   * @since 1.0.0
+   */
+  recordAudio: PermissionState;
+}
+```
+
+### `RecordingErrorEvent`
+Event emitted when an error occurs during recording.
+```typescript
+export interface RecordingErrorEvent {
+  /**
+   * The error message.
+   *
+   * @since 1.0.0
+   */
+  message: string;
+}
+```
+
+### `RecordingStoppedEvent`
+Event emitted when a recording completes.
+```typescript
+export type RecordingStoppedEvent = StopRecordingResult;
+```
+
+### `AudioSessionCategoryOption`
+Audio session category options available on iOS.
+```typescript
+export enum AudioSessionCategoryOption {
+  AllowAirPlay = 'ALLOW_AIR_PLAY',
+  AllowBluetooth = 'ALLOW_BLUETOOTH',
+  AllowBluetoothA2DP = 'ALLOW_BLUETOOTH_A2DP',
+  DefaultToSpeaker = 'DEFAULT_TO_SPEAKER',
+  DuckOthers = 'DUCK_OTHERS',
+  InterruptSpokenAudioAndMixWithOthers = 'INTERRUPT_SPOKEN_AUDIO_AND_MIX_WITH_OTHERS',
+  MixWithOthers = 'MIX_WITH_OTHERS',
+  OverrideMutedMicrophoneInterruption = 'OVERRIDE_MUTED_MICROPHONE_INTERRUPTION',
+}
+```
+
+### `AudioSessionMode`
+Audio session modes available on iOS.
+```typescript
+export enum AudioSessionMode {
+  Default = 'DEFAULT',
+  GameChat = 'GAME_CHAT',
+  Measurement = 'MEASUREMENT',
+  SpokenAudio = 'SPOKEN_AUDIO',
+  VideoChat = 'VIDEO_CHAT',
+  VideoRecording = 'VIDEO_RECORDING',
+  VoiceChat = 'VOICE_CHAT',
+}
+```
+
+### `RecordingStatus`
+The recording status.
+```typescript
+export enum RecordingStatus {
+  Inactive = 'INACTIVE',
+  Recording = 'RECORDING',
+  Paused = 'PAUSED',
+}
+```
+
+### `PermissionState`
+Platform permission states supported by Capacitor.
+```typescript
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-audio-recorder](/plugins/capacitor-audio-recorder/) for the native capability in Using @capgo/capacitor-audio-recorder, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

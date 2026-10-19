@@ -1,0 +1,212 @@
+name: PR Validation
+
+concurrency:
+  group: pr-validation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+  push:
+    branches:
+      - renovate/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  changes:
+    name: Detect changed areas
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      web: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.web == 'true' }}
+      docs: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.docs == 'true' }}
+      translation: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.translation == 'true' }}
+      outrank: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.outrank == 'true' }}
+      distrib: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.distrib == 'true' }}
+    steps:
+      # Pull requests are diffed through the GitHub API, so only pushes need a checkout.
+      - if: github.event_name == 'push'
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - id: filter
+        if: github.event_name != 'workflow_dispatch'
+        # v3.0.2
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
+        with:
+          filters: |
+            web:
+              - 'apps/web/**'
+              - 'apps/shared/**'
+              - 'scripts/**'
+              - 'configs.json'
+              - 'package.json'
+              - 'bun.lock'
+              - '.github/workflows/test.yml'
+              - '.github/workflows/deploy-web.yml'
+            docs:
+              - 'apps/docs/**'
+              - 'apps/shared/**'
+              - 'apps/web/public/**'
+              - 'apps/web/src/config/plugins.ts'
+              - 'configs.json'
+              - 'package.json'
+              - 'bun.lock'
+              - '.github/workflows/test.yml'
+              - '.github/workflows/deploy-docs.yml'
+            translation:
+              - 'apps/translation-worker/**'
+              - 'package.json'
+              - 'bun.lock'
+              - '.github/workflows/test.yml'
+              - '.github/workflows/deploy-translation.yml'
+            outrank:
+              - 'apps/outrank-worker/**'
+              - 'package.json'
+              - 'bun.lock'
+              - '.github/workflows/test.yml'
+              - '.github/workflows/deploy-outrank-worker.yml'
+            distrib:
+              - 'apps/distrib-worker/**'
+              - 'package.json'
+              - 'bun.lock'
+              - '.github/workflows/test.yml'
+              - '.github/workflows/deploy-distrib-worker.yml'
+
+  web:
+    name: Web Build + SEO + Contrast
+    needs: changes
+    if: needs.changes.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      NODE_OPTIONS: '--max-old-space-size=16384'
+      UV_THREADPOOL_SIZE: '32'
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.3
+      - name: Cache Astro build
+        uses: actions/cache@v5
+        with:
+          path: |
+            apps/web/.astro
+            node_modules/.astro
+            node_modules/.cache
+          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/shared/**', 'scripts/**', 'configs.json') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
+            ${{ runner.os }}-astro-web-
+      - name: Cache Playwright browsers
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+      - run: bun install --frozen-lockfile
+      - name: Install Playwright Chromium
+        run: node ./node_modules/playwright/cli.js install chromium
+      - run: bun run ci:verify:web
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+
+  docs:
+    name: Docs Build
+    needs: changes
+    if: needs.changes.outputs.docs == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      NODE_OPTIONS: '--max-old-space-size=16384'
+      UV_THREADPOOL_SIZE: '32'
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.3
+      - name: Cache Astro build
+        uses: actions/cache@v5
+        with:
+          path: |
+            apps/docs/.astro
+            node_modules/.astro
+            node_modules/.cache
+          key: ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/docs/**', 'apps/shared/**', 'apps/web/public/**', 'apps/web/src/config/plugins.ts', 'configs.json') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-
+            ${{ runner.os }}-astro-docs-
+      - run: bun install --frozen-lockfile
+      - run: bun run ci:verify:docs
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+
+  translation:
+    name: Translation Worker Check
+    needs: changes
+    if: needs.changes.outputs.translation == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.3
+      - run: bun install --frozen-lockfile
+      - run: bun run ci:verify:translation
+
+  outrank:
+    name: Outrank Worker Check
+    needs: changes
+    if: needs.changes.outputs.outrank == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.3
+      - run: bun install --frozen-lockfile
+      - run: bun run ci:verify:outrank
+
+  distrib:
+    name: Distrib Worker Check
+    needs: changes
+    if: needs.changes.outputs.distrib == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.3
+      - run: bun install --frozen-lockfile
+      - run: bun run ci:verify:distrib
+

@@ -1,0 +1,193 @@
+---
+import { baseDomain, structuredData } from '@/config/app'
+import { appName } from '@/constants'
+import m from '@/copy/messages'
+import { generateAlternateVersions } from '@/lib/alternateVersions'
+import { ensureLdJsonContext } from '@/lib/ldJson'
+
+const rawLocale = (Astro.locals.locale || 'en').toString().toLowerCase()
+// Paraglide message functions use a narrower locale union than the app router.
+// Cast once here to avoid repeating casts and keep runtime behavior unchanged.
+const messageLocale = Astro.locals.locale as any
+
+const {
+  ldJSON = structuredData,
+  title = m.website_title({}, { locale: messageLocale }),
+  description = m.website_description({}, { locale: messageLocale }),
+  url = Astro.url,
+  image = `${Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin}/capgo_social.png`,
+  canonical = Astro.url,
+  author = `Martin DONADIEU`,
+  keywords = m.website_keywords({}, { locale: messageLocale }),
+  audio = null,
+  alternateVersions = generateAlternateVersions(Astro),
+  // Article-specific props for blog posts
+  ogType = 'website',
+  articlePublishedTime = null,
+  articleModifiedTime = null,
+  articleSection = null,
+  articleTags = null,
+  robots = 'index, follow',
+  markdownAlternate = null,
+} = Astro.props
+
+const localeName_to_OGP = {
+  en: 'en_US',
+  de: 'de_DE',
+  es: 'es_ES',
+  fr: 'fr_FR',
+  id: 'id_ID',
+  it: 'it_IT',
+  ja: 'ja_JP',
+  ko: 'ko_KR',
+  pl: 'pl_PL',
+  zh: 'zh_CN',
+} as const
+
+const localeOGP = localeName_to_OGP[rawLocale as keyof typeof localeName_to_OGP] ?? localeName_to_OGP.en
+
+const toStringUrl = (value: unknown): string | null => {
+  if (!value) return null
+  if (typeof value === 'string') return value
+  if (value instanceof URL) return value.toString()
+  if (typeof (value as any)?.toString === 'function') return (value as any).toString()
+  return null
+}
+
+const titleString = typeof title === 'string' && title.trim().length > 0 ? title : m.website_title({}, { locale: messageLocale })
+const descriptionString = typeof description === 'string' && description.trim().length > 0 ? description : m.website_description({}, { locale: messageLocale })
+const defaultDescription = m.website_description({}, { locale: messageLocale })
+
+const urlString = toStringUrl(url) || Astro.url.toString()
+const canonicalString = toStringUrl(canonical) || urlString
+
+const baseUrl = Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin
+const rawImage = typeof image === 'string' ? image : toStringUrl(image)
+const imageUrl = rawImage ? new URL(rawImage, baseUrl).toString() : new URL('/capgo_social.png', baseUrl).toString()
+
+const getImageMimeType = (img: string): string | null => {
+  const withoutQuery = img.split('?')[0].toLowerCase()
+  if (withoutQuery.endsWith('.png')) return 'image/png'
+  if (withoutQuery.endsWith('.jpg') || withoutQuery.endsWith('.jpeg')) return 'image/jpeg'
+  if (withoutQuery.endsWith('.webp')) return 'image/webp'
+  if (withoutQuery.endsWith('.gif')) return 'image/gif'
+  if (withoutQuery.endsWith('.svg')) return 'image/svg+xml'
+  return null
+}
+
+const imageMimeType = getImageMimeType(imageUrl)
+
+const normalizeMetaDescription = (value: string) => value.replace(/\s+/g, ' ').replace(/"/g, "'").trim()
+
+const minDescriptionLength = 120
+const maxDescriptionLength = 159
+const shortDescriptionSuffix = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
+
+const buildMetaDescription = (value: string) => {
+  let nextDescription = normalizeMetaDescription(value)
+  const normalizedDefaultDescription = normalizeMetaDescription(defaultDescription)
+
+  if (nextDescription.length < minDescriptionLength && normalizedDefaultDescription && nextDescription !== normalizedDefaultDescription) {
+    nextDescription = nextDescription + ' - ' + normalizedDefaultDescription
+  }
+
+  if (nextDescription.length < minDescriptionLength) {
+    nextDescription = nextDescription + ' - ' + shortDescriptionSuffix
+  }
+
+  if (nextDescription.length > maxDescriptionLength) nextDescription = nextDescription.substring(0, maxDescriptionLength - 3) + '...'
+
+  return nextDescription
+}
+
+const displayDescription = buildMetaDescription(descriptionString)
+
+const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
+---
+
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title="Capgo" href="https://capgo.app/feed.xml" />
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="generator" content={Astro.generator} />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content={baseDomain()} />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="keywords" content={keywords} />
+
+<link rel="canonical" href={canonicalString} />
+{
+  markdownAlternate && (
+    <link rel="alternate" type="text/markdown" href={new URL(markdownAlternate, baseUrl).toString()} />
+  )
+}
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
+<link rel="icon" href="/favicon.ico?v=3" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg?v=3" color="#001827" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Hreflang tags for internationalization -->
+{alternateVersions &&
+  alternateVersions.length > 0 &&
+  alternateVersions.map((version: { locale: string; url: string }) => <link rel="alternate" hreflang={version.locale} href={version.url} />)}
+{alternateVersions && alternateVersions.length > 0 && (
+  <link rel="alternate" hreflang="x-default" href={alternateVersions.find((v: { locale: string }) => v.locale === 'en')?.url || alternateVersions[0].url} />
+)}
+
+<!-- Primary Meta Tags -->
+<title set:html={titleString}></title>
+<meta name="title" content={titleString} />
+<meta name="author" content={author} />
+<meta name="description" content={displayDescription} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:url" content={urlString} />
+<meta property="og:title" content={titleString} />
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content={localeOGP} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:secure_url" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={titleFix} />
+{imageMimeType && <meta property="og:image:type" content={imageMimeType} />}
+<meta property="og:article:author" content={author} />
+{articlePublishedTime && <meta property="article:published_time" content={articlePublishedTime} />}
+{articleModifiedTime && <meta property="article:modified_time" content={articleModifiedTime} />}
+{articleSection && <meta property="article:section" content={articleSection} />}
+{articleTags && articleTags.map((tag: string) => <meta property="article:tag" content={tag} />)}
+<meta name="robots" content={robots} />
+{audio && (
+  <>
+    <meta property="og:audio" content={audio} />
+    <meta property="og:audio:type" content="audio/mpeg" />
+  </>
+)}
+<meta property="og:site_name" content={baseDomain()} />
+<meta property="og:description" content={displayDescription} />
+
+<!-- Twitter -->
+<meta name="twitter:url" content={urlString} />
+<meta name="twitter:site" content="@Capgo_app" />
+<meta name="twitter:title" content={titleString} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:app:id:iphone" content="1602316563" />
+<meta name="twitter:app:name:iphone" content={appName} />
+<meta name="twitter:creator" content="@martindonadieu" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content={displayDescription} />
+<meta name="twitter:app:id:googleplay" content="ee.forgr.capgo" />
+<meta name="twitter:app:name:googleplay" content={appName} />
+
+<!-- @ts-ignore -->
+<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ensureLdJsonContext(ldJSON))}></script>

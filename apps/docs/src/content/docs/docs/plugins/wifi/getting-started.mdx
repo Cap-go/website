@@ -1,0 +1,582 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-wifi and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-wifi` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-wifi
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorWifi, NetworkSecurityType } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.addNetwork({
+  ssid: 'MyNetwork',
+  password: 'mypassword',
+  isHiddenSsid: false,
+  securityType: NetworkSecurityType.WPA2_PSK
+});
+```
+
+## Example: connect
+
+```typescript
+import { CapacitorWifi, WifiConnectionErrorCode } from '@capgo/capacitor-wifi';
+
+try {
+  await CapacitorWifi.connect({
+    ssid: 'MyNetwork',
+    password: 'mypassword',
+    autoRouteTraffic: true, // Android only
+    timeoutMs: 30000,
+  });
+} catch (error: any) {
+  switch (error.code) {
+    case WifiConnectionErrorCode.WIFI_DISABLED:
+      // Ask the user to enable Wi-Fi
+      break;
+    case WifiConnectionErrorCode.PERMISSION_DENIED:
+      // Request the required permission
+      break;
+    default:
+      // Generic connection error
+      break;
+  }
+}
+```
+
+## Example: disconnect
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.disconnect();
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `addNetwork`
+
+Show a system dialog to add a Wi-Fi network to the device.
+On Android SDK 30+, this opens the system Wi-Fi settings with the network pre-filled.
+On iOS, this connects to the network directly.
+
+```typescript
+import { CapacitorWifi, NetworkSecurityType } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.addNetwork({
+  ssid: 'MyNetwork',
+  password: 'mypassword',
+  isHiddenSsid: false,
+  securityType: NetworkSecurityType.WPA2_PSK
+});
+```
+
+### `connect`
+
+Connect to a Wi-Fi network.
+On Android, this creates a temporary connection that doesn't route traffic through the network by default.
+Set autoRouteTraffic to true to bind app traffic to the connected network (useful for local/device-hosted APs).
+For a persistent connection on Android, use addNetwork() instead.
+On iOS, this creates a persistent connection.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.connect({
+  ssid: 'MyNetwork',
+  password: 'mypassword',
+  autoRouteTraffic: true // Android only: route app traffic through this network
+});
+```
+
+### `disconnect`
+
+Disconnect from the current Wi-Fi network.
+On iOS, only disconnects from networks that were added via this plugin.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.disconnect();
+```
+
+### `getAvailableNetworks`
+
+Get a list of available Wi-Fi networks from the last scan.
+Only available on Android.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const { networks } = await CapacitorWifi.getAvailableNetworks();
+networks.forEach(network => {
+  console.log(`SSID: ${network.ssid}, Signal: ${network.rssi} dBm`);
+});
+```
+
+### `getIpAddress`
+
+Get the device's current IP address.
+Available on both Android and iOS.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const { ipAddress } = await CapacitorWifi.getIpAddress();
+console.log('IP Address:', ipAddress);
+```
+
+### `getRssi`
+
+Get the received signal strength indicator (RSSI) of the current network in dBm.
+Only available on Android.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const { rssi } = await CapacitorWifi.getRssi();
+console.log('Signal strength:', rssi, 'dBm');
+```
+
+### `getSsid`
+
+Get the service set identifier (SSID) of the current network.
+Available on both Android and iOS.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const { ssid } = await CapacitorWifi.getSsid();
+console.log('Connected to:', ssid);
+```
+
+### `getWifiInfo`
+
+Get comprehensive information about the currently connected WiFi network.
+This method provides detailed network information including SSID, BSSID, IP address,
+frequency, link speed, and signal strength in a single call.
+On iOS, some fields may not be available and will be undefined.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const info = await CapacitorWifi.getWifiInfo();
+console.log('Network:', info.ssid);
+console.log('BSSID:', info.bssid);
+console.log('IP:', info.ip);
+console.log('Frequency:', info.frequency, 'MHz');
+console.log('Speed:', info.linkSpeed, 'Mbps');
+console.log('Signal:', info.signalStrength);
+```
+
+### `isEnabled`
+
+Check if Wi-Fi is enabled on the device.
+Only available on Android.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const { enabled } = await CapacitorWifi.isEnabled();
+console.log('WiFi is', enabled ? 'enabled' : 'disabled');
+```
+
+### `startScan`
+
+Start scanning for Wi-Fi networks.
+Only available on Android.
+Results are delivered via the 'networksScanned' event listener.
+Note: May fail due to system throttling or hardware issues.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.addListener('networksScanned', () => {
+  console.log('Scan completed');
+});
+await CapacitorWifi.startScan();
+```
+
+### `checkPermissions`
+
+Check the current permission status for location access.
+Location permission is required for Wi-Fi operations on both platforms.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const status = await CapacitorWifi.checkPermissions();
+console.log('Location permission:', status.location);
+```
+
+### `requestPermissions`
+
+Request location permissions from the user.
+Location permission is required for Wi-Fi operations on both platforms.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const status = await CapacitorWifi.requestPermissions();
+if (status.location === 'granted') {
+  console.log('Permission granted');
+}
+```
+
+## Type Reference
+
+### `AddNetworkOptions`
+Options for adding a network.
+```typescript
+export interface AddNetworkOptions {
+  /**
+   * The SSID of the network to add
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
+
+  /**
+   * The password for the network (optional for open networks)
+   *
+   * @since 7.0.0
+   */
+  password?: string;
+
+  /**
+   * Whether the network is hidden (Android only)
+   *
+   * @since 7.0.0
+   * @default false
+   */
+  isHiddenSsid?: boolean;
+
+  /**
+   * The security type of the network (Android only)
+   *
+   * @since 7.0.0
+   * @default NetworkSecurityType.WPA2_PSK
+   */
+  securityType?: NetworkSecurityType;
+}
+```
+
+### `ConnectOptions`
+Options for connecting to a network.
+```typescript
+export interface ConnectOptions {
+  /**
+   * The SSID of the network to connect to
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
+
+  /**
+   * The password for the network (optional for open networks)
+   *
+   * @since 7.0.0
+   */
+  password?: string;
+
+  /**
+   * Whether the network is hidden (Android only)
+   *
+   * @since 7.0.0
+   * @default false
+   */
+  isHiddenSsid?: boolean;
+
+  /**
+   * Whether to automatically route app traffic through the connected Wi-Fi network (Android only)
+   * When enabled, it binds the app process to the connected network using ConnectivityManager.bindProcessToNetwork()
+   * This is useful for connecting to local/device-hosted APs (e.g., ESP32, IoT devices) that don't have internet access.
+   *
+   * @since 7.0.0
+   * @default false
+   */
+  autoRouteTraffic?: boolean;
+}
+```
+
+### `DisconnectOptions`
+Options for disconnecting from a network.
+```typescript
+export interface DisconnectOptions {
+  /**
+   * The SSID of the network to disconnect from (optional)
+   *
+   * @since 7.0.0
+   */
+  ssid?: string;
+}
+```
+
+### `GetAvailableNetworksResult`
+Result from getAvailableNetworks().
+```typescript
+export interface GetAvailableNetworksResult {
+  /**
+   * List of available networks
+   *
+   * @since 7.0.0
+   */
+  networks: Network[];
+}
+```
+
+### `GetIpAddressResult`
+Result from getIpAddress().
+```typescript
+export interface GetIpAddressResult {
+  /**
+   * The device's IP address
+   *
+   * @since 7.0.0
+   */
+  ipAddress: string;
+}
+```
+
+### `GetRssiResult`
+Result from getRssi().
+```typescript
+export interface GetRssiResult {
+  /**
+   * The signal strength in dBm
+   *
+   * @since 7.0.0
+   */
+  rssi: number;
+}
+```
+
+### `GetSsidResult`
+Result from getSsid().
+```typescript
+export interface GetSsidResult {
+  /**
+   * The SSID of the current network
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
+}
+```
+
+### `WifiInfo`
+Comprehensive WiFi information.
+```typescript
+export interface WifiInfo {
+  /**
+   * The SSID (network name) of the current network
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
+
+  /**
+   * The BSSID (MAC address) of the access point.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  bssid?: string;
+
+  /**
+   * The device's IP address on the network
+   *
+   * @since 7.0.0
+   */
+  ip: string;
+
+  /**
+   * The network frequency in MHz.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  frequency?: number;
+
+  /**
+   * The connection speed in Mbps.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  linkSpeed?: number;
+
+  /**
+   * The signal strength (0-100).
+   * Calculated from RSSI on Android.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  signalStrength?: number;
+}
+```
+
+### `IsEnabledResult`
+Result from isEnabled().
+```typescript
+export interface IsEnabledResult {
+  /**
+   * Whether Wi-Fi is enabled
+   *
+   * @since 7.0.0
+   */
+  enabled: boolean;
+}
+```
+
+### `PermissionStatus`
+Permission status.
+```typescript
+export interface PermissionStatus {
+  /**
+   * Location permission state
+   *
+   * @since 7.0.0
+   */
+  location: PermissionState;
+}
+```
+
+### `RequestPermissionsOptions`
+Options for requesting permissions.
+```typescript
+export interface RequestPermissionsOptions {
+  /**
+   * Permissions to request
+   *
+   * @since 7.0.0
+   */
+  permissions?: 'location'[];
+}
+```
+
+### `NetworkSecurityType`
+Network security types.
+```typescript
+export enum NetworkSecurityType {
+  /**
+   * Open network with no security
+   *
+   * @since 7.0.0
+   */
+  OPEN = 0,
+
+  /**
+   * WEP security
+   *
+   * @since 7.0.0
+   */
+  WEP = 1,
+
+  /**
+   * WPA/WPA2 Personal (PSK)
+   *
+   * @since 7.0.0
+   */
+  WPA2_PSK = 2,
+
+  /**
+   * WPA/WPA2/WPA3 Enterprise (EAP)
+   *
+   * @since 7.0.0
+   */
+  EAP = 3,
+
+  /**
+   * WPA3 Personal (SAE)
+   *
+   * @since 7.0.0
+   */
+  SAE = 4,
+
+  /**
+   * WPA3 Enterprise
+   *
+   * @since 7.0.0
+   */
+  WPA3_ENTERPRISE = 5,
+
+  /**
+   * WPA3 Enterprise 192-bit mode
+   *
+   * @since 7.0.0
+   */
+  WPA3_ENTERPRISE_192_BIT = 6,
+
+  /**
+   * Passpoint network
+   *
+   * @since 7.0.0
+   */
+  PASSPOINT = 7,
+
+  /**
+   * Enhanced Open (OWE)
+   *
+   * @since 7.0.0
+   */
+  OWE = 8,
+
+  /**
+   * WAPI PSK
+   *
+   * @since 7.0.0
+   */
+  WAPI_PSK = 9,
+
+  /**
+   * WAPI Certificate
+   *
+   * @since 7.0.0
+   */
+  WAPI_CERT = 10,
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-wifi](/plugins/capacitor-wifi/) for the native capability in Using @capgo/capacitor-wifi, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

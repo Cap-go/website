@@ -1,0 +1,38 @@
+---
+title: "Placing CapacitorUpdater.notifyAppReady() call correctly"
+description: How to properly place the CapacitorUpdater.notifyAppReady() call in your app to ensure correct auto-update flow.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import ConditionalQuestionnaire from '@/components/ConditionalQuestionnaire.astro'
+
+The placement of the `CapacitorUpdater.notifyAppReady()` call is crucial for the correct auto-update flow.
+
+
+If not done correctly, the app will not be able to update to the latest version. Each version that does not call `notifyAppReady()` within 10 seconds will be marked as invalid and will be replaced by the previous valid version or the default (built-in) version.
+
+
+In this guide we will show you how to properly place the `notifyAppReady()` call in your app to ensure correct auto-update flow.
+
+### `notifyAppReady()` Call Placement questionnaire
+
+<ConditionalQuestionnaire />
+
+
+<div style="margin-top: 3rem;">
+<Aside type="note">
+If you cannot find your framework in the questionnaire, please don't hesitate to ask on our [Discord](https://discord.capgo.app).
+</Aside>
+</div>
+
+## Keep going from Placing CapacitorUpdater.notifyAppReady() call correctly
+
+If you are using **Placing CapacitorUpdater.notifyAppReady() call correctly** to plan native plugin work, connect it with [Using @capgo/capacitor-updater](/plugins/capacitor-updater/) for the native capability in Using @capgo/capacitor-updater, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

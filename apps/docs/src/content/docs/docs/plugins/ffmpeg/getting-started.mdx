@@ -1,0 +1,233 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-ffmpeg and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-ffmpeg` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-ffmpeg
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+```
+
+## API Overview
+
+### `getCapabilities`
+
+Return the machine-readable capability matrix for the current platform.
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+const result = await CapacitorFFmpeg.getCapabilities();
+console.log(result);
+```
+
+### `reencodeVideo`
+
+Queue a video re-encode job.
+
+On iOS, the returned promise resolves when the native layer accepts the job.
+Final success or failure is delivered through the `progress` listener.
+
+Android and web currently reject with `UNIMPLEMENTED`.
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+const result = await CapacitorFFmpeg.reencodeVideo({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  width: 1080,
+  height: 1920,
+});
+console.log(result);
+```
+
+### `convertImage`
+
+Convert a still image into another format.
+
+iOS currently supports `jpeg` and `.png`.
+Android currently supports `.webp`, `jpeg`, and `.png`.
+Web currently rejects with `UNIMPLEMENTED`.
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+const result = await CapacitorFFmpeg.convertImage({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  format: 'webp',
+});
+console.log(result);
+```
+
+### `convertAudio`
+
+Convert audio into another container or codec.
+
+iOS currently supports `m4a`.
+Android and web currently reject with `UNIMPLEMENTED`.
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+const result = await CapacitorFFmpeg.convertAudio({
+  inputPath: 'path/to/file',
+  outputPath: 'path/to/file',
+  format: 'm4a',
+});
+console.log(result);
+```
+
+## Type Reference
+
+### `FFmpegCapabilitiesResult`
+```typescript
+export interface FFmpegCapabilitiesResult {
+  platform: string;
+  features: FFmpegCapabilitiesFeatures;
+}
+```
+
+### `ReencodeVideoOptions`
+```typescript
+export interface ReencodeVideoOptions {
+  inputPath: string;
+  outputPath: string;
+  width: number;
+  height: number;
+  bitrate?: number;
+}
+```
+
+### `FFmpegAcceptedJob`
+```typescript
+export interface FFmpegAcceptedJob {
+  jobId: string;
+  status: 'queued';
+}
+```
+
+### `ConvertImageOptions`
+```typescript
+export interface ConvertImageOptions {
+  inputPath: string;
+  outputPath: string;
+  format: ImageOutputFormat;
+  /**
+   * Compression quality in the inclusive range `0.0..1.0`.
+   *
+   * Native platforms reject values outside that range.
+   */
+  quality?: number;
+}
+```
+
+### `ConvertImageResult`
+```typescript
+export interface ConvertImageResult {
+  outputPath: string;
+  format: ImageOutputFormat;
+}
+```
+
+### `ConvertAudioOptions`
+```typescript
+export interface ConvertAudioOptions {
+  inputPath: string;
+  outputPath: string;
+  format: AudioOutputFormat;
+}
+```
+
+### `ConvertAudioResult`
+```typescript
+export interface ConvertAudioResult {
+  outputPath: string;
+  format: AudioOutputFormat;
+}
+```
+
+### `FFmpegProgressEvent`
+```typescript
+export interface FFmpegProgressEvent {
+  jobId: string;
+  /**
+   * Normalized progress as a floating-point value in the inclusive range `0.0..1.0`.
+   */
+  progress: number;
+  state: FFmpegProgressState;
+  message?: string;
+  outputPath?: string;
+  /**
+   * Legacy alias kept for compatibility while callers migrate to `jobId`.
+   */
+  fileId?: string;
+}
+```
+
+### `PluginVersionResult`
+```typescript
+export interface PluginVersionResult {
+  version: string;
+}
+```
+
+### `FFmpegCapabilitiesFeatures`
+```typescript
+export interface FFmpegCapabilitiesFeatures {
+  getPluginVersion: FFmpegCapability;
+  getCapabilities: FFmpegCapability;
+  reencodeVideo: FFmpegCapability;
+  convertImage: FFmpegCapability;
+  convertAudio?: FFmpegCapability;
+  progressEvents: FFmpegCapability;
+  probeMedia: FFmpegCapability;
+  generateThumbnail: FFmpegCapability;
+  extractAudio: FFmpegCapability;
+  remux: FFmpegCapability;
+  trim: FFmpegCapability;
+}
+```
+
+### `ImageOutputFormat`
+```typescript
+export type ImageOutputFormat = '.webp' | 'jpeg' | '.png';
+```
+
+### `AudioOutputFormat`
+```typescript
+export type AudioOutputFormat = 'm4a';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-ffmpeg](/plugins/capacitor-ffmpeg/) for the native capability in Using @capgo/capacitor-ffmpeg, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

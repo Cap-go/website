@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1188 715" role="img" aria-labelledby="title desc">
+  <title id="title">Apple App Review message asking who will be the users of this app</title>
+  <desc id="desc">A local reproduction of an Apple App Review refusal message shared by Adrien.</desc>
+  <defs>
+    <filter id="redacted-blur">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <rect width="1188" height="715" fill="#f7f7f8"/>
+  <rect x="0" y="0" width="1188" height="34" fill="#ffffff"/>
+  <path d="M8 10l5 6 6-6" fill="none" stroke="#0066cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="28" y="20" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#111111">Apple</text>
+  <text x="80" y="20" font-family="Inter, Arial, sans-serif" font-size="13" fill="#666666">Aujourd'hui a 10:56</text>
+
+  <text x="20" y="47" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">Hello,</text>
+  <text x="20" y="86" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">Thank you for your efforts to follow our guidelines. There are some outstanding issues that still need your attention.</text>
+  <text x="20" y="125" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">If you have any questions, we are here to help. Reply to this message in App Store Connect and let us know.</text>
+
+  <text x="20" y="171" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#171717">Review Environment</text>
+  <text x="20" y="206" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">Submission ID:</text>
+  <rect x="116" y="194" width="300" height="16" rx="4" fill="#737373" opacity="0.55" filter="url(#redacted-blur)"/>
+  <text x="20" y="226" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">Review date: May 29, 2026</text>
+  <text x="20" y="246" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">Review Device: iPad Air 11-inch (M3)</text>
+  <text x="20" y="266" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">Version reviewed: 1.0 (3)</text>
+
+  <text x="20" y="311" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#171717">Guideline 2.1 - Information Needed</text>
+  <text x="20" y="366" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">We need more information to continue the review.</text>
+  <text x="20" y="406" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#333333">Next Steps</text>
+  <text x="20" y="445" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">Provide detailed answers to the following questions:</text>
+  <text x="20" y="486" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">- Who will be the users of this app?</text>
+
+  <text x="20" y="551" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#171717">Support</text>
+  <text x="20" y="586" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">- Reply to this message in your preferred language if you need assistance. If you need additional support, use the</text>
+  <text x="708" y="586" font-family="Inter, Arial, sans-serif" font-size="13" fill="#0066cc">Contact Us module.</text>
+  <text x="20" y="606" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">- Consult with fellow developers and Apple engineers on the</text>
+  <text x="418" y="606" font-family="Inter, Arial, sans-serif" font-size="13" fill="#0066cc">Apple Developer Forums.</text>
+  <text x="20" y="626" font-family="Inter, Arial, sans-serif" font-size="13" fill="#333333">- Provide feedback on this message and your review experience by</text>
+  <text x="472" y="626" font-family="Inter, Arial, sans-serif" font-size="13" fill="#0066cc">completing a short survey.</text>
+  <line x1="20" y1="677" x2="1188" y2="677" stroke="#d4d4d8" stroke-width="1"/>
+</svg>

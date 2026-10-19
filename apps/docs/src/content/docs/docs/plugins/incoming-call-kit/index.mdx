@@ -1,0 +1,69 @@
+---
+title: "@capgo/capacitor-incoming-call-kit"
+description: "Capacitor plugin for native incoming call UI with Android full-screen notifications and iOS CallKit."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Present native incoming-call UI with iOS CallKit and Android full-screen notifications"
+  actions:
+    - text: Get started
+      link: /docs/plugins/incoming-call-kit/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-incoming-call-kit/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Present native incoming-call UI with iOS CallKit and Android full-screen notifications
+
+Start with `showIncomingCall()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | Partial | See getting started |
+
+## Core Capabilities
+
+- `showIncomingCall` - Displays the native incoming call UI.
+- `endCall` - Ends a specific tracked call.
+- `endAllCalls` - Ends every tracked call.
+- `getActiveCalls` - Returns the currently tracked calls.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `showIncomingCall` | Displays the native incoming call UI. |
+| `endCall` | Ends a specific tracked call. |
+| `endAllCalls` | Ends every tracked call. |
+| `getActiveCalls` | Returns the currently tracked calls. |
+| `checkPermissions` | Returns the current permission state for notifications and full-screen intents. |
+| `requestPermissions` | Requests the notification permission when the platform supports it. |
+| `requestFullScreenIntentPermission` | Opens the Android 14+ full-screen intent settings page when available. |
+| `getPluginVersion` | Returns the native implementation version marker. |
+| `addListener` | Fired after the call has been handed to the native platform UI. |
+| `addListener` | Fired when the user accepts the call from native UI. |
+| `addListener` | Fired when the user declines the call from native UI. |
+| `addListener` | Fired when a call ends through the API or a platform action. |
+| `addListener` | Fired when an unanswered call reaches its configured timeout. |
+| `removeAllListeners` | Removes every native listener registered by the plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-incoming-call-kit](https://github.com/Cap-go/capacitor-incoming-call-kit/).
+
+## Keep going from @capgo/capacitor-incoming-call-kit
+
+If you are using **@capgo/capacitor-incoming-call-kit** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-incoming-call-kit](/plugins/capacitor-incoming-call-kit/) for the native capability in Using @capgo/capacitor-incoming-call-kit, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

@@ -1,0 +1,96 @@
+---
+title: "Add an App"
+description: "Add an app to your Capgo account, and install the plugin in your app"
+sidebar:
+  order: 3
+prev: true
+next: true
+---
+
+import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Requirements
+
+Before getting started with Capgo, make sure you have:
+- A Capacitor app installed and configured. [Learn how to set up Capacitor](https://capacitorjs.com/docs/getting-started/)
+- Node.js 20 or later installed
+- One of the following development environments:
+  - **macOS** with Xcode (for iOS development) and/or Android Studio (for Android development)
+  - **Linux** with Android Studio (for Android development)
+  - **Windows** with Android Studio (for Android development)
+
+<Aside type="note">
+Using Cordova instead of Capacitor? Create the Capgo app the same way, then install [`@capgo/cordova-updater`](/docs/plugins/cordova-updater/getting-started/) in your Cordova project instead of the Capacitor plugin.
+</Aside>
+
+## Introduction to Capgo
+<YouTubeEmbed id="NzXXKoyhTIo" title="Capgo in 15 min" />
+
+## Live updates are 3 step away
+
+
+### Guided setup
+
+<Steps>
+
+1. Create your account at [https://capgo.app/register](https://capgo.app/register/).
+![signup screenshot](/signup.webp "signup screenshot")
+
+2. Use the Init commands to get started <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> You will be presented with a series of questions. Provide the necessary answers to complete the automated setup.
+
+3. Deploy a live update
+
+</Steps>
+
+<Aside type="tip">By following these steps, you'll be up and running in no time. If you need any further assistance during the process, our support team is [here to help](https://support.capgo.app). Happy onboarding!</Aside>
+
+<LinkCard href="/docs/getting-started/onboarding/" title="Detailed Onboarding Guide" description="See the complete step-by-step guide for the CLI onboarding process" />
+<LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Learn how to deploy a live update to your app" />
+
+### Manual setup
+
+In case the init command doesn't work for you, you can manually add an app.
+
+<Steps>
+
+1. Connect the CLI to your account: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Add the app to your account with this command: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Install the plugin in your app: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Configure the plugin in your `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": "atBackground",\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [See all available options](/docs/plugins/updater/settings/). This information will be inferred if not provided.
+
+5. Call the init method as early as possible in your app: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+
+6. Deploy a live update
+
+</Steps>
+
+<Aside type="note" title="Installing for older Capacitor versions">
+The command above (step 3) installs the latest version (v8.x) for Capacitor 8. For older Capacitor versions, use the appropriate npm tag:
+
+```bash
+# Capacitor 7
+npm i @capgo/capacitor-updater@lts-v7
+
+# Capacitor 6
+npm i @capgo/capacitor-updater@lts-v6
+
+# Capacitor 5
+npm i @capgo/capacitor-updater@lts-v5
+
+# Capacitor 4
+npm i @capgo/capacitor-updater@lts-v4
+```
+
+Each plugin major version matches the Capacitor major version (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5, v4 → Capacitor 4). When the latest line is `8.3.4`, the matching LTS line is `7.3.4` with the same features and bug fixes. The updater receives monthly mirrored LTS backports for `v7`/`v6`/`v5`; `lts-v4` remains available for Capacitor 4 outside that cadence. Other Capgo plugins are backported on demand.
+
+The Capgo CLI major does **not** need to match the plugin or Capacitor major — always use `npx @capgo/cli@latest`. See [Capgo versioning](/docs/versioning/) for the full policy.
+</Aside>
+
+## Keep going from Add an App
+
+If you are using **Add an App** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

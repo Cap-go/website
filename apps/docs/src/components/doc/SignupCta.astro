@@ -1,0 +1,195 @@
+---
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+import m from '@/copy/messages'
+import { resolveMessageLocale } from '@/services/message-locale'
+
+interface Props {
+  /** Stable id on the signup link, used for analytics autocapture filtering. */
+  id: string
+  /** Compact layout for the narrow right sidebar. */
+  compact?: boolean
+  /** Show the "Enterprise needs? Talk to our team" line. */
+  enterprise?: boolean
+}
+
+const { id, compact = false, enterprise = false } = Astro.props
+const route = Astro.locals.starlightRoute as StarlightRouteData | undefined
+const locale = resolveMessageLocale(route?.locale, Astro.currentLocale)
+const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
+const avatars = ['/avatars/jordan-96.webp', '/avatars/martin-96.webp', '/avatars/valeria-96.webp']
+---
+
+<div class:list={['docs-signup-cta not-content', compact && 'compact']}>
+  <div class="docs-signup-cta-pitch">
+    <p class="docs-signup-cta-title">
+      {m.hero_title_line1({}, { locale })} <span>{m.hero_title_line2({}, { locale })}</span>
+    </p>
+    <p class="docs-signup-cta-description">{m.hero_subtitle_v2({}, { locale })}</p>
+  </div>
+  <a id={id} href="/register/" class="docs-signup-cta-button" aria-describedby={`${id}-note`}>
+    {m.hero_cta_try_free({}, { locale })}
+  </a>
+  <p id={`${id}-note`} class="docs-signup-cta-note">
+    {trialNote}
+  </p>
+  {enterprise && (
+    <div class="docs-signup-cta-enterprise">
+      <span class="docs-signup-cta-avatars" aria-hidden="true">
+        {avatars.map((src) => (
+          <img src={src} alt="" width="32" height="32" loading="lazy" decoding="async" />
+        ))}
+      </span>
+      <p>
+        {m.enterprise_needs_prompt({}, { locale })}{' '}
+        <a href="https://book.capgo.app/demo/" target="_blank" rel="noopener noreferrer">
+          {m.enterprise_talk_to_team({}, { locale })}
+        </a>
+      </p>
+    </div>
+  )}
+</div>
+
+<style>
+  .docs-signup-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.875rem;
+    text-align: center;
+  }
+
+  .docs-signup-cta.compact {
+    align-items: flex-start;
+    gap: 0.5rem;
+    text-align: left;
+  }
+
+  .docs-signup-cta-pitch {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    max-width: 36rem;
+  }
+
+  .docs-signup-cta-pitch p {
+    margin: 0;
+  }
+
+  .docs-signup-cta-title {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .docs-signup-cta-title span {
+    color: #44bcff;
+  }
+
+  .docs-signup-cta-description {
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-base);
+    line-height: 1.5;
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-pitch {
+    margin-bottom: 0.25rem;
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-title {
+    font-size: var(--sl-text-base);
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-description {
+    font-size: var(--sl-text-xs);
+  }
+
+  .docs-signup-cta .docs-signup-cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: #2563eb;
+    padding: 0.875rem 2rem;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow:
+      0 10px 15px -3px rgb(37 99 235 / 0.2),
+      0 0 32px rgb(68 188 255 / 0.35);
+    transition:
+      background-color 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .docs-signup-cta .docs-signup-cta-button:hover {
+    background: #3b82f6;
+    color: #fff;
+    box-shadow:
+      0 10px 15px -3px rgb(37 99 235 / 0.25),
+      0 0 44px rgb(68 188 255 / 0.5);
+  }
+
+  .docs-signup-cta .docs-signup-cta-button:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+  }
+
+  .docs-signup-cta-note {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-sm);
+    line-height: 1.5;
+  }
+
+  .docs-signup-cta.compact .docs-signup-cta-note {
+    font-size: var(--sl-text-xs);
+  }
+
+  .docs-signup-cta-enterprise {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+  }
+
+  .docs-signup-cta-enterprise p {
+    margin: 0;
+  }
+
+  .docs-signup-cta-enterprise a {
+    color: var(--sl-color-white);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .docs-signup-cta-enterprise a:hover {
+    text-decoration: underline;
+  }
+
+  .docs-signup-cta-avatars {
+    display: flex;
+  }
+
+  .docs-signup-cta-avatars img {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--sl-color-black);
+    border-radius: 9999px;
+    object-fit: cover;
+  }
+
+  .docs-signup-cta-avatars img + img {
+    margin-left: -0.5rem;
+  }
+</style>

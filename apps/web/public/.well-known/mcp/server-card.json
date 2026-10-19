@@ -1,0 +1,28 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json",
+  "version": "1.0",
+  "protocolVersion": "2025-11-25",
+  "serverInfo": {
+    "name": "capgo",
+    "title": "Capgo MCP Server",
+    "version": "1.0.0"
+  },
+  "description": "Hosted Streamable HTTP MCP server for Capgo: manage apps, bundles, channels and progressive rollouts, devices, statistics and Observe, native builds, webhooks and push notifications, and search the Capgo docs.",
+  "documentationUrl": "https://capgo.app/docs/ai/mcp/",
+  "websiteUrl": "https://capgo.app/mcp/",
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://api.capgo.app/mcp"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    }
+  },
+  "authentication": {
+    "required": true,
+    "schemes": ["oauth2", "bearer"],
+    "oauthProtectedResourceMetadata": "https://api.capgo.app/.well-known/oauth-protected-resource/mcp"
+  },
+  "instructions": "Connect to https://api.capgo.app/mcp with Streamable HTTP. Sign in with OAuth, or send `Authorization: Bearer <Capgo API key>`. Start with capgo_whoami and capgo_list_apps, and use capgo_search_docs for documentation. To upload local bundle files or request native builds, run `npx @capgo/cli@latest mcp` after login."
+}

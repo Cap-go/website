@@ -1,0 +1,70 @@
+---
+title: "@capgo/native-purchases"
+description: "In-app Subscriptions Made Easy."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "In-app Subscriptions Made Easy."
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-purchases/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-purchases/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/native-purchases` wraps **StoreKit 2** and **Google Play Billing** with one Capacitor API for subscriptions, consumables, and restore flows. Load product metadata from the stores, purchase in app, and refresh entitlements without maintaining separate native bridges.
+
+Choose this plugin when you want first party billing without a third party subscription SDK.
+
+## Platform support
+
+| Platform | Billing stack |
+| --- | --- |
+| iOS | StoreKit 2 |
+| Android | Google Play Billing 7+ |
+
+## Core Capabilities
+
+- Native in-app purchases and subscriptions with StoreKit 2 and Google Play Billing.
+- Product metadata loaded directly from the stores, including localized titles and prices.
+- iOS StoreKit pricing terms for monthly subscriptions with 12-month commitments.
+- Purchase, restore, entitlement refresh, and native subscription management flows.
+- App Transaction helpers for migration from older business models.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `restorePurchases` | Restores a user's previous and links their appUserIDs to any user's also using those . |
+| `getAppTransaction` | Gets the App Transaction information, which provides details about when the user originally downloaded or purchased the app. |
+| `isEntitledToOldBusinessModel` | Compares the original app version from the App Transaction against a target version to determine if the user is entitled to features from an earlier business model. |
+| `purchaseProduct` | Starts the native purchase flow. On supported iOS versions, pass `billingPlanType: 'monthly'` to purchase a monthly billing plan with a 12-month commitment. |
+| `getProducts` | Gets product info associated with product identifiers. On supported iOS versions, subscription products can include `pricingTerms`. |
+| `getProduct` | Gets the product info for a single product identifier. |
+| `isBillingSupported` | Check if billing is supported for the current device. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `getPurchases` | Gets all the user's purchases (both in-app purchases and subscriptions). This method queries the platform's purchase history for the current user. |
+| `manageSubscriptions` | Opens the platform's native subscription management page. This allows users to view, modify, or cancel their subscriptions. |
+| `acknowledgePurchase` | Manually acknowledge/finish a purchase transaction. |
+| `consumePurchase` | Consume an in-app purchase on Android. |
+| `addListener` | Listen for StoreKit transaction updates delivered by Apple's Transaction.updates. Fires on app launch if there are unfinished transactions, and for any updates afterward. iOS only. |
+| `addListener` | Listen for StoreKit transaction verification failures delivered by Apple's Transaction.updates. Fires when the verification result is unverified. iOS only. |
+| `removeAllListeners` | Remove all registered listeners. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-native-purchases](https://github.com/Cap-go/capacitor-native-purchases/).
+
+## Keep going from @capgo/native-purchases
+
+If you are using **@capgo/native-purchases** to plan payments and purchases, connect it with [Using @capgo/native-purchases](/plugins/capacitor-native-purchases/) for the native capability in Using @capgo/native-purchases, [Capgo Pricing](/pricing/) for the product workflow in Capgo Pricing, [Payment system](/docs/webapp/payment/) for the implementation detail in Payment system, [Getting Started](/docs/plugins/native-purchases/getting-started/) for the implementation detail in Getting Started, and [Revenue Playbook](/docs/plugins/native-purchases/revenue-playbook/) for the implementation detail in Revenue Playbook.

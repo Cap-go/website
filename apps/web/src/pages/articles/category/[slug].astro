@@ -1,0 +1,32 @@
+---
+import BlogListing from '@/components/BlogListing.astro'
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import { filterBlogPosts } from '@/lib/blog'
+import { slug as slugify } from 'github-slugger'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const publishedPosts = filterBlogPosts(await getCollection('blog'), { origin: 'ai' })
+  const tags: { [k: string]: CollectionEntry<'blog'>[] } = {}
+  publishedPosts.forEach((article) =>
+    article.data.tag.split(',').forEach((rawTag) => {
+      const tag = rawTag.trim()
+      if (!tag) return
+      if (!tags[tag]) tags[tag] = []
+      tags[tag].push(article)
+    }),
+  )
+  return Object.entries(tags).map(([tag, posts]) => ({ params: { slug: slugify(tag) }, props: { posts, currentCategory: tag } }))
+}
+
+const allPosts = Astro.props.posts as CollectionEntry<'blog'>[]
+const currentCategory = Astro.props.currentCategory as string
+const categorySourcePosts = filterBlogPosts(await getCollection('blog'), {
+  origin: 'ai',
+  locale: Astro.locals.locale,
+})
+const localePosts = allPosts.filter((post) => post.data.locale === Astro.locals.locale)
+---
+
+<BlogListing allPosts={localePosts} categorySourcePosts={categorySourcePosts} currentCategory={currentCategory} listingOrigin="ai" />

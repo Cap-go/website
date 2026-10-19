@@ -1,0 +1,95 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+
+const title = [Astro.locals.runtimeConfig.public.brand, m.aup({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.read_our_aup({}, { locale: Astro.locals.locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div class="prose-sm prose prose-invert m-auto py-8">
+    <h1>{m.aup({}, { locale: Astro.locals.locale })}</h1>
+    <p><em>{m.last_update({}, { locale: Astro.locals.locale })}: 07/09/2024</em></p>
+    <p>
+      {m.aup_intro({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.aup_no_illegal_use({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.aup_no_illegal_use_desc({}, { locale: Astro.locals.locale })}
+    </p>
+    <ul>
+      <li>
+        <strong>{m.illegal_activities({}, { locale: Astro.locals.locale })}</strong>
+        {m.illegal_activities_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>
+        <strong>{m.infringing_content({}, { locale: Astro.locals.locale })}</strong>
+        {m.infringing_content_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>
+        <strong>{m.offensive_content({}, { locale: Astro.locals.locale })}</strong>
+        {m.offensive_content_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>
+        <strong>{m.harmful_content({}, { locale: Astro.locals.locale })}</strong>
+        {m.harmful_content_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>
+        <strong>{m.platform_compliance({}, { locale: Astro.locals.locale })}</strong>
+        {m.platform_compliance_desc({}, { locale: Astro.locals.locale })}
+      </li>
+    </ul>
+    <h2>{m.aup_no_security_violations({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.aup_no_security_violations_desc({}, { locale: Astro.locals.locale })}
+    </p>
+    <ul>
+      <li>
+        <strong>{m.unauthorized_access({}, { locale: Astro.locals.locale })}</strong>
+        {m.unauthorized_access_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li><strong>{m.interception({}, { locale: Astro.locals.locale })}</strong></li>
+      <li>
+        <strong>{m.falsification_of_origin({}, { locale: Astro.locals.locale })}</strong>
+        {m.falsification_of_origin_desc({}, { locale: Astro.locals.locale })}
+      </li>
+    </ul>
+    <h2>{m.aup_no_network_abuse({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.aup_no_network_abuse_desc({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li><strong>{m.monitoring_crawling({}, { locale: Astro.locals.locale })}</strong>{m.monitoring_crawling_desc({}, { locale: Astro.locals.locale })}</li>
+      <li>
+        <strong>{m.denial_of_service({}, { locale: Astro.locals.locale })}</strong>
+        {m.denial_of_service_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>
+        <strong>{m.intentional_interference({}, { locale: Astro.locals.locale })}</strong>
+        {m.intentional_interference_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>
+        <strong>{m.operation_of_network_services({}, { locale: Astro.locals.locale })}</strong>
+        {m.operation_of_network_services_desc({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>
+        <strong>{m.avoiding_system_restrictions({}, { locale: Astro.locals.locale })}</strong>
+        {m.avoiding_system_restrictions_desc({}, { locale: Astro.locals.locale })}
+      </li>
+    </ul>
+    <h2>{m.aup_no_email_abuse({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.aup_no_email_abuse_desc({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.aup_monitoring_enforcement({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.aup_monitoring_enforcement_desc({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>{m.investigate_violations({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.remove_modify_content({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+    <p>
+      {m.report_violations_desc({}, { locale: Astro.locals.locale })}
+      {m.report_violations_desc_2({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.aup_reporting_violations({}, { locale: Astro.locals.locale })}</h2>
+    <p set:html={m.aup_reporting_violations_desc({}, { locale: Astro.locals.locale })} />
+  </div>
+</Layout>

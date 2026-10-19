@@ -1,0 +1,238 @@
+---
+title: Common Update Problems
+description: Understand common Capgo live-update failure codes, what causes them, and how to fix them quickly.
+sidebar:
+  order: 7
+---
+
+When an update check fails, Capgo usually returns an `error` code and a `message` in the `/updates` response. This page explains the most common failures and the fastest fixes.
+
+## Read this first
+
+- `no_new_version_available` is a normal state, not a failure.
+- Many "update found but not applied" reports are policy/configuration refusals rather than cache lag, especially when the response includes an explicit `error` code.
+- Use `npx @capgo/cli@latest app debug` while reproducing the issue to see request/response details.
+
+## Common failure codes
+
+### `provider_infrastructure_request_blocked`
+
+**Cause**
+
+The app has **Block provider infrastructure requests** enabled and the request originated from a known Google or Apple datacenter IP range. Capgo blocks these requests on `/updates`, `/stats`, and `/channel_self` to prevent provider-originated traffic from being treated as device traffic.
+
+**Fix**
+
+- Reproduce the update from a physical device on a normal user network.
+- Do not use cloud-hosted probes or provider datacenter runners for updater, stats, or channel-self checks while this protection is enabled.
+- If that traffic is intentional, open your app's **Information** tab and turn off **Block provider infrastructure requests**. Re-enable it when the test is complete.
+
+New apps have this protection enabled by default. Apps created before the setting was introduced keep it disabled until you enable it.
+
+**Response details**
+
+- `/updates` preserves the updater response contract and returns HTTP `200`. Its body includes `error`, `message`, `kind: "blocked"`, and `provider` (`"google"` or `"apple"`).
+- `/stats` and `/channel_self` return HTTP `429` with the same error code. Treat this as an intentional policy block, not a transient retry condition.
+
+### `disable_auto_update_to_major`
+
+**Cause**
+
+Your channel blocks major upgrades (`disable_auto_update = major`) and the target bundle major is above the device baseline version.
+
+**Typical symptom**
+
+`version: 1.0.8` with `old: 0.0.0` means the device reports baseline `0.0.0`, so major upgrades are rejected.
+
+**How to interpret it**
+
+The backend compares major versions using device baseline `old` and target `version`.
+
+- If target is `1.0.1`, baseline major must be `1` (for example `1.0.0`).
+- If target is `10.0.1`, baseline major must be `10` (for example `10.0.0`).
+
+**Fix option A (recommended): align device baseline major**
+
+Set `plugins.CapacitorUpdater.version` in `capacitor.config.*` so its **MAJOR** matches the bundle MAJOR you want to deliver (for example `1.0.0` for `1.0.1`, `10.0.0` for `10.0.1`).
+
+Then apply this config to the installed app once:
+
+1. Run `npx cap sync`.
+2. Rebuild and reinstall the native app.
+
+**Fix option B: relax channel policy**
+
+Allow cross-major auto-updates in channel settings (only if that rollout strategy is intentional).
+
+Related docs:
+- [Version Targeting: Disable Auto-Update Across Major Versions](/docs/live-updates/version-targeting/#disable-auto-update-across-major-versions)
+- [Channels: Disable Auto Update strategies](/docs/live-updates/channels/#disable-auto-update-strategies)
+
+### `disable_auto_update_to_minor` / `disable_auto_update_to_patch`
+
+**Cause**
+
+Channel policy is stricter (`minor` or `patch`) than the update being offered.
+
+- `minor` blocks when the target bundle has a different major or minor than the device native baseline (`version_build`). Example: `1.2.3 -> 1.3.0` is blocked.
+- `patch` blocks any major, minor, or patch number change from `version_build`. Only suffix changes are allowed while `MAJOR.MINOR.PATCH` stays identical, such as `1.0.0-beta.1 -> 1.0.0-beta.2` or `1.0.0+build.1 -> 1.0.0+build.2`.
+
+**Fix**
+
+- Upload a bundle compatible with the current policy, or
+- change channel policy in dashboard/CLI.
+
+Related docs:
+- [Channels: Disable Auto Update strategies](/docs/live-updates/channels/#disable-auto-update-strategies)
+
+### `disable_auto_update_to_metadata`
+
+**Cause**
+
+Channel uses metadata-based targeting (`version_number`) and the device baseline is below required `min_update_version`.
+
+**Fix**
+
+- Align device baseline (`CapacitorUpdater.version`) with installed native app version, or
+- adjust `min_update_version` / channel strategy.
+
+Related docs:
+- [Channels: Disable Auto Update strategies](/docs/live-updates/channels/#disable-auto-update-strategies)
+
+### `disable_auto_update_under_native`
+
+**Cause**
+
+Channel prevents downgrades below the native baseline.
+
+**Fix**
+
+- Upload a bundle version greater than or equal to native baseline, or
+- disable "under native" downgrade protection for that channel.
+
+Related docs:
+- [Version Targeting: Auto-Downgrade Prevention](/docs/live-updates/version-targeting/#strategy-4-auto-downgrade-prevention)
+
+### `cannot_update_via_private_channel`
+
+**Cause**
+
+Selected/default channel does not allow device self-assignment.
+
+**Fix**
+
+- Use a different channel with self-assignment enabled, or
+- make the channel public / enable self-assignment.
+
+Related docs:
+- [Channels: Using setChannel() from Your App](/docs/live-updates/channels/#using-setchannel-from-your-app)
+
+### `unknown_version_build` / `semver_error`
+
+**Cause**
+
+Device baseline version is missing (`unknown`) or not [valid semver](/semver_tester/).
+
+**Fix**
+
+- Set `plugins.CapacitorUpdater.version` to a [valid semver](/semver_tester/) like `1.2.3`.
+- Sync and rebuild native app.
+
+Related docs:
+- [Channels: Bundle Versioning and Channels](/docs/live-updates/channels/#bundle-versioning-and-channels)
+- [Troubleshooting: Updates not applying](/docs/getting-started/troubleshooting/#updates-not-applying)
+
+### `unsupported_plugin_version`
+
+**Cause**
+
+Updater plugin version is too old for current backend requirements.
+
+**Fix**
+
+- Upgrade `@capgo/capacitor-updater`.
+- Run `npx cap sync`.
+- Rebuild and reinstall native app.
+
+### `disabled_platform_ios` / `disabled_platform_android`
+
+**Cause**
+
+Channel has updates disabled for that platform.
+
+**Fix**
+
+- Enable platform toggle on the channel.
+
+### `disable_prod_build` / `disable_dev_build` / `disable_device` / `disable_emulator`
+
+**Cause**
+
+Channel disallows current build type or runtime target.
+
+**Fix**
+
+- Align channel options (`allow_prod`, `allow_dev`, `allow_device`, `allow_emulator`) with your test target.
+
+### `key_id_mismatch`
+
+**Cause**
+
+Bundle encryption key and device key differ.
+
+**Fix**
+
+- Use the same encryption key/public key across app config and bundle encryption workflow.
+
+### `no_channel` / `null_channel_data`
+
+**Cause**
+
+No valid channel was resolved for the device.
+
+**Fix**
+
+- Set a cloud default channel, or
+- set `defaultChannel` in test builds, or
+- assign channel override for device.
+
+Related docs:
+- [Channels](/docs/live-updates/channels/)
+
+### `on_premise_app`
+
+**Cause**
+
+The backend returned HTTP 429 with `on_premise_app`. This happens in three situations:
+
+1. **App ID does not exist in Capgo** — the `app_id` sent by the device is not registered, so the backend has no record of it.
+2. **App is flagged as on-premise** — the app exists but is configured for self-hosted updates, so the Capgo cloud endpoint refuses to serve it.
+3. **Organization plan is cancelled** — the app's organization no longer has an active subscription.
+
+**Common mistake**
+
+A typo in `plugins.CapacitorUpdater.appId` (in `capacitor.config.ts`) or a mismatch with the app ID registered in the Capgo dashboard. The backend cannot distinguish "unknown app" from "on-premise app", so it returns the same error code.
+
+**Fix**
+
+- Verify the `app_id` matches exactly what is shown in the Capgo dashboard (case-sensitive).
+- If the app is not registered yet, run `npx @capgo/cli@latest app add`.
+- If the app is intentionally on-premise, set `plugins.CapacitorUpdater.updateUrl` to your self-hosted update endpoint instead of the Capgo cloud URL.
+- If the organization plan expired, renew or upgrade the plan.
+
+## Quick diagnostic checklist
+
+1. Confirm app ID and channel are correct for the build.
+2. Confirm `CapacitorUpdater.version` matches installed native app version.
+3. Confirm channel policy (`disable_auto_update`) matches intended rollout.
+4. Confirm platform/build target toggles allow this device.
+5. Run `npx @capgo/cli@latest app debug` and read backend error code.
+
+## Need more help?
+
+- [Troubleshooting](/docs/getting-started/troubleshooting/)
+- [How to get support](/docs/getting-help/)
+
+## Keep going from Common Update Problems
+
+If you are using **Common Update Problems** to plan native plugin work, connect it with [Using @capgo/capacitor-updater](/plugins/capacitor-updater/) for the native capability in Using @capgo/capacitor-updater, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

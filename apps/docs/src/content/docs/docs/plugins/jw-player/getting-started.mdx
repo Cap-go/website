@@ -1,0 +1,253 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-jw-player and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-jw-player` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-jw-player
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+```
+
+## API Overview
+
+### `initialize`
+
+Initialize the JW Player
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.initialize({ licenseKey: 'license-key-123' });
+```
+
+### `play`
+
+Play a video
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.play({
+  mediaUrl: 'https://example.com',
+  mediaType: 'video',
+});
+```
+
+### `pause`
+
+Pause the currently playing media
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.pause();
+```
+
+### `resume`
+
+Resume the currently paused media
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.resume();
+```
+
+### `stop`
+
+Stop the currently playing media
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.stop();
+```
+
+### `seekTo`
+
+Seek to a specific position in the currently playing media
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.seekTo({ time: 10 });
+```
+
+### `setVolume`
+
+Set the volume level
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setVolume({ volume: 0.5 });
+```
+
+### `getPosition`
+
+Get the current position in the media
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+const result = await JwPlayer.getPosition();
+console.log(result);
+```
+
+### `getState`
+
+Get the current player state
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+const result = await JwPlayer.getState();
+console.log(result);
+```
+
+### `setSpeed`
+
+Set the playback speed
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setSpeed({ speed: 1 });
+```
+
+### `setPlaylistIndex`
+
+Set the current item in the playlist by index
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setPlaylistIndex({ index: 1 });
+```
+
+### `loadPlaylist`
+
+Load a playlist
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.loadPlaylist({ playlistUrl: 'https://example.com' });
+```
+
+### `loadPlaylistWithItems`
+
+Load a playlist with items
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.loadPlaylistWithItems({ playlist: [] });
+```
+
+### `getAudioTracks`
+
+Get available audio tracks
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+const result = await JwPlayer.getAudioTracks();
+console.log(result);
+```
+
+### `getCurrentAudioTrack`
+
+Get the current audio track
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+const result = await JwPlayer.getCurrentAudioTrack();
+console.log(result);
+```
+
+### `setCurrentAudioTrack`
+
+Set the current audio track
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setCurrentAudioTrack({ index: 1 });
+```
+
+### `getCaptions`
+
+Get the available captions/subtitles
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+const result = await JwPlayer.getCaptions();
+console.log(result);
+```
+
+### `getCurrentCaptions`
+
+Get the current captions/subtitles track
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+const result = await JwPlayer.getCurrentCaptions();
+console.log(result);
+```
+
+### `setCurrentCaptions`
+
+Set the current captions/subtitles track
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setCurrentCaptions({ index: 1 });
+```
+
+### `currentPlaylist`
+
+Get the current playlist
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+const result = await JwPlayer.currentPlaylist();
+console.log(result);
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-jw-player](/plugins/capacitor-jw-player/) for the native capability in Using @capgo/capacitor-jw-player, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

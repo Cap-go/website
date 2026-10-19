@@ -1,0 +1,97 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-shake and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-shake` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-shake
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorShake } from '@capgo/capacitor-shake';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorShake } from '@capgo/capacitor-shake';
+
+const listener = await CapacitorShake.addListener('shake', () => {
+  openFeedbackSheet();
+});
+
+// on logout or route leave
+await listener.remove();
+```
+
+## Example: throttle in app code
+
+Shake can fire in bursts. Debounce before opening modals or calling APIs.
+
+## Common pitfalls
+
+- **Web**: there is no shake API in mobile browsers through this plugin.
+- **Listener cleanup**: remove listeners when leaving the screen to avoid duplicate handlers.
+- **Android vs iOS**: sensitivity differs, test on real hardware.
+
+## API Overview
+
+### `addListener`
+
+Listen for shake event on the device.
+
+Registers a listener that will be called whenever a shake gesture is detected.
+The shake detection uses the device's accelerometer to identify shake patterns.
+
+```typescript
+import { CapacitorShake } from '@capgo/capacitor-shake';
+
+const listener = await CapacitorShake.addListener('shake', () => {
+  console.log('Shake detected!');
+});
+
+// To remove the listener:
+await listener.remove();
+```
+
+### `getPluginVersion`
+
+Get the native Capacitor plugin version.
+
+Returns the current version of the native plugin implementation.
+
+```typescript
+import { CapacitorShake } from '@capgo/capacitor-shake';
+
+const { version } = await CapacitorShake.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-shake](/plugins/capacitor-shake/) for the native capability in Using @capgo/capacitor-shake, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

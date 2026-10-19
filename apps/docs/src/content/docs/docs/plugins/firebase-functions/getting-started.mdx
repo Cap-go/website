@@ -1,0 +1,219 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-functions and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-firebase-functions` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-firebase-functions
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+```
+
+## Quick start
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByName({ name: 'myFunction' });
+console.log(result);
+```
+
+## Example: callByUrl
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByUrl({
+  url: 'https://us-central1-my-project.cloudfunctions.net/myFunction',
+});
+console.log(result);
+```
+
+## Example: useEmulator
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+await FirebaseFunctions.useEmulator({ host: "127.0.0.1" });
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `callByName`
+
+Call a callable function by name.
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByName({ name: 'myFunction' });
+console.log(result);
+```
+
+### `callByUrl`
+
+Call a callable function by URL.
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByUrl({
+  url: 'https://us-central1-my-project.cloudfunctions.net/myFunction',
+});
+console.log(result);
+```
+
+### `useEmulator`
+
+Instrument your app to talk to the Cloud Functions emulator.
+
+On Android, the cleartext traffic must be allowed. On the Capacitor configuration:
+```
+{
+  server: {
+    cleartext: true
+  }
+}
+```
+**The cleartext traffic is not intended for use in production.**
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+await FirebaseFunctions.useEmulator({ host: "127.0.0.1" });
+```
+
+## Type Reference
+
+### `CallByNameOptions`
+```typescript
+export interface CallByNameOptions<RequestData = unknown> extends CallOptions<RequestData> {
+  /**
+   * The name of the callable function.
+   *
+   * @example 'myFunction'
+   * @since 6.1.0
+   */
+  name: string;
+  /**
+   * The region of the callable function.
+   *
+   * @example 'us-central1'
+   * @since 6.1.0
+   */
+  region?: string;
+}
+```
+
+### `CallByNameResult`
+```typescript
+export type CallByNameResult<ResponseData = unknown> = CallResult<ResponseData>;
+```
+
+### `CallByUrlOptions`
+```typescript
+export interface CallByUrlOptions<RequestData = unknown> extends CallOptions<RequestData> {
+  /**
+   * The URL of the callable function.
+   *
+   * @example 'https://us-central1-my-project.cloudfunctions.net/myFunction'
+   * @since 6.1.0
+   */
+  url: string;
+}
+```
+
+### `CallByUrlResult`
+```typescript
+export type CallByUrlResult<ResponseData = unknown> = CallResult<ResponseData>;
+```
+
+### `UseEmulatorOptions`
+```typescript
+export interface UseEmulatorOptions {
+  /**
+   * The emulator host without any port or scheme.
+   *
+   * Note when using a Android Emulator device: 10.0.2.2 is the special IP address to connect to the 'localhost' of the host computer.
+   *
+   * @since 6.1.0
+   * @example "127.0.0.1"
+   */
+  host: string;
+  /**
+   * The emulator port.
+   *
+   * @since 6.1.0
+   * @default 5001
+   * @example 5001
+   */
+  port?: number;
+  /**
+   * The region the callable functions are located in or a custom domain hosting the callable functions.
+   *
+   * @example 'us-central1'
+   * @example 'https://mydomain.com'
+   */
+  regionOrCustomDomain?: string;
+}
+```
+
+### `GetPluginVersionResult`
+```typescript
+export interface GetPluginVersionResult {
+  /**
+   * The semantic version of this plugin.
+   *
+   * @since 8.0.1
+   */
+  version: string;
+}
+```
+
+### `CallResult`
+```typescript
+export interface CallResult<ResponseData = unknown> {
+  /**
+   * The result of the callable function.
+   *
+   * @since 6.1.0
+   */
+  data: ResponseData;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

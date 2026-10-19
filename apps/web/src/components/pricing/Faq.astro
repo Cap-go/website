@@ -1,0 +1,93 @@
+---
+import m from '@/copy/messages'
+import { getPricingFaqSections } from '@/lib/pricingFaq'
+
+const sections = getPricingFaqSections(Astro.locals.locale)
+---
+
+<section class="bg-[#1a1a1a] py-10 sm:py-16 lg:py-24">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">{m.questions_and_answers({}, { locale: Astro.locals.locale })}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-200">{m.explore_common_questions({}, { locale: Astro.locals.locale })}</p>
+    </div>
+
+    {sections.map((section) => (
+      <div class="mx-auto mt-16 max-w-3xl">
+        <div class="mb-8 text-center">
+          <h3 class="mb-2 cursor-default text-2xl font-semibold text-white transition-colors duration-200 hover:text-blue-400">{section.title}</h3>
+          <p class="text-sm text-gray-200">{section.subtitle}</p>
+        </div>
+
+        <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 shadow-xl shadow-black/20">
+          {section.items.map((item) => (
+            <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id={item.id}>
+              <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
+                <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400">{item.question}</span>
+                <svg
+                  class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="bg-gray-950/40 px-8 pt-2 pb-6">
+                <div class="leading-relaxed text-gray-200">
+                  {item.intro && <p class="mb-3">{item.intro}</p>}
+                  {item.paragraphs ? (
+                    <div class="space-y-3">
+                      {item.paragraphs.map((paragraph) =>
+                        paragraph.link ? (
+                          <p>
+                            {paragraph.link.beforeLink}
+                            <a class="text-blue-400 underline decoration-1 underline-offset-2 transition-colors hover:text-blue-300" href={paragraph.link.href}>
+                              {paragraph.link.label}
+                            </a>
+                          </p>
+                        ) : (
+                          <p>{paragraph.text}</p>
+                        ),
+                      )}
+                    </div>
+                  ) : (
+                    item.answer && <p>{item.answer}</p>
+                  )}
+                  {item.listItems && (
+                    <ul class="mb-4 list-inside list-disc space-y-2">
+                      {item.listItems.map((entry) => (
+                        <li>
+                          <strong>{entry.label}</strong>
+                          {entry.text}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {item.href && item.linkLabel && (
+                    <a href={item.href} class="text-blue-400 underline transition-colors hover:text-blue-300">
+                      {item.linkLabel}
+                      {item.id === 'faq-cancel' ? ' →' : ''}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <div class="mt-12 flex items-center justify-center md:mt-20">
+      <div class="rounded-full bg-gray-800 px-8 py-4 text-center">
+        <p class="text-gray-50">
+          {m.didnt_find_answer({}, { locale: Astro.locals.locale })}
+          <a class="text-blue-400 underline decoration-1 underline-offset-2 transition-colors hover:text-blue-300 focus:text-blue-300" href="https://support.capgo.app">
+            {m.contact_support({}, { locale: Astro.locals.locale })}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

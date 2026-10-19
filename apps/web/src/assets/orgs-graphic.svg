@@ -1,0 +1,81 @@
+<svg width="580" height="480" viewBox="0 0 580 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="card-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1d24" />
+      <stop offset="100%" stop-color="#0d1016" />
+    </linearGradient>
+    <filter id="blur-back">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" />
+    </filter>
+  </defs>
+
+  <!-- Card 1: R&D Team (Back Left) -->
+  <g transform="translate(80, 80)" opacity="0.4">
+    <rect x="0" y="0" width="320" height="200" rx="16" fill="#1a1d24" stroke="#333" stroke-width="1" transform="skewY(-10)"/>
+    <g transform="skewY(-10) translate(24, 24)">
+        <circle cx="16" cy="16" r="16" stroke="#4b5563" stroke-width="1.5"/>
+        <path d="M16 11a5 5 0 1 0 0 10 5 5 0 0 0 0-10z" fill="#4b5563"/>
+        <path d="M8 26c0-4 3.5-6 8-6s8 2 8 6" stroke="#4b5563" stroke-width="1.5" stroke-linecap="round"/>
+        
+        <text x="44" y="21" fill="#9ca3af" font-family="system-ui, sans-serif" font-size="16" font-weight="500">R&amp;D Team</text>
+        
+        <text x="0" y="60" fill="#6b7280" font-family="system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5">ACCOUNT</text>
+        <text x="0" y="88" fill="#e5e7eb" font-family="system-ui, sans-serif" font-size="24" font-weight="700">Natalie</text>
+        
+        <rect x="0" y="110" width="272" height="12" rx="4" fill="#374151" opacity="0.3"/>
+        <rect x="0" y="135" width="180" height="12" rx="4" fill="#374151" opacity="0.3"/>
+    </g>
+  </g>
+
+  <!-- Card 2: Acme Corp (Middle) -->
+  <g transform="translate(150, 110)" opacity="0.7">
+    <rect x="0" y="0" width="320" height="200" rx="16" fill="#1a1d24" stroke="#333" stroke-width="1" transform="skewY(-10)"/>
+    <g transform="skewY(-10) translate(24, 24)">
+        <circle cx="16" cy="16" r="16" stroke="#6b7280" stroke-width="1.5"/>
+        <path d="M16 11a5 5 0 1 0 0 10 5 5 0 0 0 0-10z" fill="#6b7280"/>
+        <path d="M8 26c0-4 3.5-6 8-6s8 2 8 6" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+
+        <text x="44" y="21" fill="#d1d5db" font-family="system-ui, sans-serif" font-size="16" font-weight="500">Acme Corp</text>
+        
+        <text x="0" y="60" fill="#6b7280" font-family="system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5">ACCOUNT</text>
+        <text x="0" y="88" fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="700">Joseph</text>
+        
+        <rect x="0" y="110" width="272" height="12" rx="4" fill="#4b5563" opacity="0.4"/>
+        <rect x="0" y="135" width="180" height="12" rx="4" fill="#4b5563" opacity="0.4"/>
+    </g>
+  </g>
+
+  <!-- Card 3: Sesame Devs (Front) -->
+  <g transform="translate(220, 140)">
+    <!-- Card Background -->
+    <rect x="0" y="0" width="320" height="200" rx="16" fill="#0f1115" stroke="#3b82f6" stroke-width="2" transform="skewY(-10)"/>
+    
+    <!-- Content -->
+    <g transform="skewY(-10) translate(24, 24)">
+        <!-- Icon -->
+        <circle cx="16" cy="16" r="16" stroke="#4b5563" stroke-width="1.5"/>
+        <path d="M16 11a5 5 0 1 0 0 10 5 5 0 0 0 0-10z" fill="#4b5563"/>
+        <path d="M8 26c0-4 3.5-6 8-6s8 2 8 6" stroke="#4b5563" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- Header -->
+        <text x="44" y="21" fill="#e5e7eb" font-family="system-ui, sans-serif" font-size="16" font-weight="500">Sesame Devs</text>
+        
+        <!-- Account Section -->
+        <text x="0" y="60" fill="#9ca3af" font-family="system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5">ACCOUNT</text>
+        <text x="0" y="90" fill="#ffffff" font-family="system-ui, sans-serif" font-size="28" font-weight="700">Mike Smith</text>
+        
+        <!-- Divider -->
+        <line x1="0" y1="115" x2="272" y2="115" stroke="#1f2937" stroke-width="1"/>
+        
+        <!-- Permissions -->
+        <text x="0" y="138" fill="#d1d5db" font-family="system-ui, sans-serif" font-size="13">Permissions</text>
+        <text x="272" y="138" fill="#d1d5db" font-family="system-ui, sans-serif" font-size="13" text-anchor="end">Full access</text>
+        
+        <!-- Divider -->
+        <line x1="0" y1="155" x2="272" y2="155" stroke="#1f2937" stroke-width="1"/>
+        
+        <!-- Settings -->
+        <text x="0" y="178" fill="#d1d5db" font-family="system-ui, sans-serif" font-size="13">Settings</text>
+    </g>
+  </g>
+</svg>

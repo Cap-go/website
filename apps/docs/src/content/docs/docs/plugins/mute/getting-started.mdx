@@ -1,0 +1,92 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-mute and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-mute` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-mute
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { Mute } from '@capgo/capacitor-mute';
+```
+
+## Quick start
+
+```typescript
+import { Mute } from '@capgo/capacitor-mute';
+
+const { value } = await Mute.isMuted();
+if (value) {
+  showVisualAlert();
+} else {
+  await playNotificationSound();
+}
+```
+
+## Example: gate sounds in a game
+
+Poll mute state when entering a level or when the user returns from Control Center, because the hardware switch can change without an app event.
+
+## Common pitfalls
+
+- **No web support**: guard Capacitor web builds with `Capacitor.getPlatform() === 'web'`.
+- **Not volume**: mute reflects ringer or hardware mute, not media volume sliders.
+- **Android modes**: vibrate only or silent modes still count as muted for alert sounds.
+
+## API Overview
+
+### `isMuted`
+
+Check if the device mute switch is enabled.
+
+```typescript
+import { Mute } from '@capgo/capacitor-mute';
+
+const { value } = await Mute.isMuted();
+if (value) {
+  console.log('Device is muted');
+} else {
+  console.log('Device is not muted');
+}
+```
+
+## Type Reference
+
+### `MuteResponse`
+Response from mute status check.
+```typescript
+export interface MuteResponse {
+  /** True if device is muted, false otherwise */
+  value: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-mute](/plugins/capacitor-mute/) for the native capability in Using @capgo/capacitor-mute, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

@@ -1,0 +1,24 @@
+---
+import type { Agent } from '@/data/agents'
+
+interface Props {
+  agent: Pick<Agent, 'name' | 'logo' | 'monogram' | 'color'>
+  alt: string
+  size?: 'md' | 'lg'
+}
+
+const { agent, alt, size = 'md' } = Astro.props
+const box = size === 'lg' ? 'h-16 w-16 rounded-2xl' : 'h-12 w-12 rounded-xl'
+const image = size === 'lg' ? 'h-9 w-9' : 'h-7 w-7'
+const px = size === 'lg' ? 36 : 28
+---
+
+<span class:list={['flex shrink-0 items-center justify-center border border-white/10', box]} style={`background-color: ${agent.color}`}>
+  {agent.logo ? (
+    <img src={agent.logo} alt={alt} width={px} height={px} class={image} loading={size === 'lg' ? 'eager' : 'lazy'} decoding="async" />
+  ) : (
+    <span role="img" aria-label={alt} class:list={['font-bold text-white', size === 'lg' ? 'text-2xl' : 'text-lg']}>
+      {agent.monogram}
+    </span>
+  )}
+</span>

@@ -1,0 +1,721 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-youtube-player and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-youtube-player` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-youtube-player
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+```
+
+## Quick start
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.initialize({
+  playerId: 'my-player',
+  videoId: 'dQw4w9WgXcQ',
+  playerSize: { width: 640, height: 360 },
+  privacyEnhanced: true
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## Fix YouTube Referer Blocking in the Main WebView
+
+If YouTube works inside the plugin but fails when the same app loads YouTube pages, embeds, or APIs through Capacitor's main WebView, enable `patchRefererHeader` in your Capacitor config.
+
+When enabled, the plugin patches Capacitor during sync/update so intercepted YouTube requests include a valid `Referer` header.
+
+```json
+{
+  "plugins": {
+    "YoutubePlayer": {
+      "patchRefererHeader": true,
+      "refererHeader": "https://www.youtube.com"
+    }
+  }
+}
+```
+
+- Only `youtube.com`, `youtube-nocookie.com`, and `youtu.be` requests are affected.
+- Requests that already define a `Referer` header keep their original value.
+- `refererHeader` is optional and defaults to `https://www.youtube.com`.
+- Supported on Capacitor `8.x` for installed iOS and Android platforms.
+
+## API Overview
+
+### `initialize`
+
+Initialize a new YouTube player instance.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.initialize({
+  playerId: 'my-player',
+  videoId: 'dQw4w9WgXcQ',
+  playerSize: { width: 640, height: 360 },
+  privacyEnhanced: true
+});
+```
+
+### `destroy`
+
+Destroy a player instance and free resources.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.destroy({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `stopVideo`
+
+Stop video playback and cancel loading.
+Use this sparingly - pauseVideo() is usually preferred.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.stopVideo({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `playVideo`
+
+Play the currently cued or loaded video.
+Final player state will be PLAYING (1).
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.playVideo({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `pauseVideo`
+
+Pause the currently playing video.
+Final player state will be PAUSED (2), unless already ENDED (0).
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.pauseVideo({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `seekTo`
+
+Seek to a specific time in the video.
+If player is paused, it remains paused. If playing, continues playing.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.seekTo({
+  playerId: 'player-id-123',
+  seconds: 10,
+  allowSeekAhead: true,
+});
+console.log(result);
+```
+
+### `loadVideoById`
+
+Load and play a video by its YouTube ID.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.loadVideoById({
+  playerId: 'player-id-123',
+  options: { videoId: 'video-id-123' },
+});
+console.log(result);
+```
+
+### `cueVideoById`
+
+Cue a video by ID without playing it.
+Loads thumbnail and prepares player, but doesn't request video until playVideo() called.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.cueVideoById({
+  playerId: 'player-id-123',
+  options: { videoId: 'video-id-123' },
+});
+console.log(result);
+```
+
+### `loadVideoByUrl`
+
+Load and play a video by its full URL.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.loadVideoByUrl({
+  playerId: 'player-id-123',
+  options: { mediaContentUrl: 'https://example.com' },
+});
+console.log(result);
+```
+
+### `cueVideoByUrl`
+
+Cue a video by URL without playing it.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.cueVideoByUrl({
+  playerId: 'player-id-123',
+  options: { mediaContentUrl: 'https://example.com' },
+});
+console.log(result);
+```
+
+### `cuePlaylist`
+
+Cue a playlist without playing it.
+Loads playlist and prepares first video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.cuePlaylist({
+  playerId: 'player-id-123',
+  playlistOptions: { listType: 'playlist' },
+});
+console.log(result);
+```
+
+### `loadPlaylist`
+
+Load and play a playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.loadPlaylist({
+  playerId: 'player-id-123',
+  playlistOptions: { listType: 'playlist' },
+});
+console.log(result);
+```
+
+### `nextVideo`
+
+Play the next video in the playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.nextVideo({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `previousVideo`
+
+Play the previous video in the playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.previousVideo({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `playVideoAt`
+
+Play a specific video in the playlist by index.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.playVideoAt({
+  playerId: 'player-id-123',
+  index: 1,
+});
+console.log(result);
+```
+
+### `mute`
+
+Mute the player audio.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.mute({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `unMute`
+
+Unmute the player audio.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.unMute({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `isMuted`
+
+Check if the player is currently muted.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.isMuted({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setVolume`
+
+Set the player volume level.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.setVolume({
+  playerId: 'player-id-123',
+  volume: 0.5,
+});
+console.log(result);
+```
+
+### `getVolume`
+
+Get the current player volume level.
+Returns volume even if player is muted.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getVolume({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setSize`
+
+Set the player dimensions in pixels.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.setSize({
+  playerId: 'player-id-123',
+  width: 1080,
+  height: 1920,
+});
+console.log(result);
+```
+
+### `getPlaybackRate`
+
+Get the current playback rate.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getPlaybackRate({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setPlaybackRate`
+
+Set the playback speed.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.setPlaybackRate({
+  playerId: 'player-id-123',
+  suggestedRate: 1,
+});
+console.log(result);
+```
+
+### `getAvailablePlaybackRates`
+
+Get list of available playback rates for current video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getAvailablePlaybackRates({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setLoop`
+
+Enable or disable playlist looping.
+When enabled, playlist will restart from beginning after last video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.setLoop({
+  playerId: 'player-id-123',
+  loopPlaylists: true,
+});
+console.log(result);
+```
+
+### `setShuffle`
+
+Enable or disable playlist shuffle.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.setShuffle({
+  playerId: 'player-id-123',
+  shufflePlaylist: true,
+});
+console.log(result);
+```
+
+### `getVideoLoadedFraction`
+
+Get the fraction of the video that has been buffered.
+More reliable than deprecated getVideoBytesLoaded/getVideoBytesTotal.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getVideoLoadedFraction({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getPlayerState`
+
+Get the current state of the player.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getPlayerState({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getAllPlayersEventsState`
+
+Get event states for all active players.
+Useful for tracking multiple player instances.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getAllPlayersEventsState();
+console.log(result);
+```
+
+### `getCurrentTime`
+
+Get the current playback position in seconds.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getCurrentTime({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `toggleFullScreen`
+
+Toggle fullscreen mode on or off.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.toggleFullScreen({
+  playerId: 'player-id-123',
+  isFullScreen: true,
+});
+console.log(result);
+```
+
+### `getPlaybackQuality`
+
+Get the current playback quality.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getPlaybackQuality({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setPlaybackQuality`
+
+Set the suggested playback quality.
+Actual quality may differ based on network conditions.
+
+```typescript
+import { YoutubePlayer, IPlaybackQuality } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.setPlaybackQuality({
+  playerId: 'player-id-123',
+  suggestedQuality: IPlaybackQuality.SMALL,
+});
+console.log(result);
+```
+
+### `getAvailableQualityLevels`
+
+Get list of available quality levels for current video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getAvailableQualityLevels({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getDuration`
+
+Get the duration of the current video in seconds.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getDuration({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getVideoUrl`
+
+Get the YouTube.com URL for the current video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getVideoUrl({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getVideoEmbedCode`
+
+Get the embed code for the current video.
+Returns HTML iframe embed code.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getVideoEmbedCode({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getPlaylist`
+
+Get array of video IDs in the current playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getPlaylist({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getPlaylistIndex`
+
+Get the index of the currently playing video in the playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getPlaylistIndex({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getIframe`
+
+Get the iframe DOM element for the player.
+Web platform only.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+const result = await YoutubePlayer.getIframe({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `addEventListener`
+
+Add an event listener to the player.
+Web platform only.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+YoutubePlayer.addEventListener({
+  playerId: 'my-player',
+  eventName: 'onStateChange',
+  listener: (event) => {
+  console.log('Player state:', event.data);
+  },
+});
+```
+
+### `removeEventListener`
+
+Remove an event listener from the player.
+Web platform only.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.removeEventListener({
+  playerId: 'player-id-123',
+  eventName: 'onReady',
+  listener: (event) => {
+    console.log(event);
+  },
+});
+```
+
+## Type Reference
+
+### `PlayerIdOptions`
+```typescript
+export interface PlayerIdOptions {
+  playerId: string;
+}
+```
+
+### `SeekToOptions`
+```typescript
+export interface SeekToOptions extends PlayerIdOptions {
+  playerId: string;
+  seconds: number;
+  allowSeekAhead: boolean;
+}
+```
+
+### `VideoByIdMethodOptions`
+```typescript
+export interface VideoByIdMethodOptions extends PlayerIdOptions {
+  playerId: string;
+  options: IVideoOptionsById;
+}
+```
+
+### `VideoByUrlMethodOptions`
+```typescript
+export interface VideoByUrlMethodOptions extends PlayerIdOptions {
+  playerId: string;
+  options: IVideoOptionsByUrl;
+}
+```
+
+### `PlaylistMethodOptions`
+```typescript
+export interface PlaylistMethodOptions extends PlayerIdOptions {
+  playerId: string;
+  playlistOptions: IPlaylistOptions;
+}
+```
+
+### `PlayVideoAtOptions`
+```typescript
+export interface PlayVideoAtOptions extends PlayerIdOptions {
+  playerId: string;
+  index: number;
+}
+```
+
+### `SetVolumeOptions`
+```typescript
+export interface SetVolumeOptions extends PlayerIdOptions {
+  playerId: string;
+  volume: number;
+}
+```
+
+### `SetSizeOptions`
+```typescript
+export interface SetSizeOptions extends PlayerIdOptions {
+  playerId: string;
+  width: number;
+  height: number;
+}
+```
+
+### `SetPlaybackRateOptions`
+```typescript
+export interface SetPlaybackRateOptions extends PlayerIdOptions {
+  playerId: string;
+  suggestedRate: number;
+}
+```
+
+### `SetLoopOptions`
+```typescript
+export interface SetLoopOptions extends PlayerIdOptions {
+  playerId: string;
+  loopPlaylists: boolean;
+}
+```
+
+### `SetShuffleOptions`
+```typescript
+export interface SetShuffleOptions extends PlayerIdOptions {
+  playerId: string;
+  shufflePlaylist: boolean;
+}
+```
+
+### `ToggleFullScreenOptions`
+```typescript
+export interface ToggleFullScreenOptions extends PlayerIdOptions {
+  playerId: string;
+  isFullScreen: boolean | null | undefined;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-youtube-player](/plugins/capacitor-youtube-player/) for the native capability in Using @capgo/capacitor-youtube-player, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

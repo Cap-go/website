@@ -1,0 +1,24 @@
+---
+import { Card, CardGrid } from '@astrojs/starlight/components'
+
+interface PluginOverviewCard {
+  body: string
+  title: string
+}
+
+interface Props {
+  cards: PluginOverviewCard[]
+  summary: string
+}
+
+const { cards, summary } = Astro.props as Props
+---
+
+<section aria-live="polite" aria-labelledby="plugin-overview-heading">
+  <h2 id="plugin-overview-heading" class="sr-only">Plugin overview</h2>
+  <p>{summary}</p>
+
+  <CardGrid stagger>
+    {cards.map((card) => <Card title={card.title}>{card.body}</Card>)}
+  </CardGrid>
+</section>

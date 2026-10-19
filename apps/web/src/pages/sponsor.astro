@@ -1,0 +1,77 @@
+---
+import { getSponsors } from '@/lib/siteData'
+import Layout from '@/layouts/Layout.astro'
+import SponsorLogo from '@/components/SponsorLogo.astro'
+import m from '@/copy/messages'
+
+const sponsors = getSponsors()
+const bakerSponsors = sponsors.filter((sponsor) => sponsor.tier === 'baker')
+const silverSponsors = sponsors.filter((sponsor) => sponsor.tier === 'silver')
+const goldSponsors = sponsors.filter((sponsor) => sponsor.tier === 'gold')
+const platinumSponsors = sponsors.filter((sponsor) => sponsor.tier === 'platinum')
+---
+
+<Layout>
+  <div class="min-h-screen px-4 py-16 text-white sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <h1 class="mb-4 text-4xl font-bold">{m.sponsor_title({}, { locale: Astro.locals.locale })}</h1>
+      <p class="mb-8 max-w-3xl text-xl text-gray-300">
+        {m.sponsor_description({}, { locale: Astro.locals.locale })}
+      </p>
+      <a
+        href="https://github.com/sponsors/riderx"
+        class="mb-16 inline-block rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-colors duration-300 hover:bg-gray-200"
+      >
+        {m.become_a_sponsor({}, { locale: Astro.locals.locale })}
+      </a>
+      {
+        platinumSponsors.length > 0 && (
+          <div class="mb-16">
+            <h2 class="mb-8 text-2xl font-bold">{m.tier_platinum({}, { locale: Astro.locals.locale })}</h2>
+            <div class="-mt-4 grid grid-cols-2 gap-8 gap-x-4 sm:grid-cols-3 md:grid-cols-4">
+              {platinumSponsors.map((sponsor) => (
+                <SponsorLogo size={24} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+      {
+        goldSponsors.length > 0 && (
+          <div>
+            <h2 class="mb-8 text-2xl font-bold">{m.tier_gold({}, { locale: Astro.locals.locale })}</h2>
+            <div class="-mt-4 grid grid-cols-3 gap-8 gap-x-4 sm:grid-cols-4 md:grid-cols-5">
+              {goldSponsors.map((sponsor) => (
+                <SponsorLogo size={20} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+      {
+        silverSponsors.length > 0 && (
+          <div>
+            <h2 class="mb-8 text-2xl font-bold">{m.tier_silver({}, { locale: Astro.locals.locale })}</h2>
+            <div class="-mt-4 grid grid-cols-4 gap-8 gap-x-4 sm:grid-cols-5 md:grid-cols-6">
+              {silverSponsors.map((sponsor) => (
+                <SponsorLogo size={16} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+      {
+        bakerSponsors.length > 0 && (
+          <div>
+            <h2 class="mb-8 text-2xl font-bold">{m.tier_baker({}, { locale: Astro.locals.locale })}</h2>
+            <div class="ml-12 flex flex-wrap gap-8">
+              {bakerSponsors.map((sponsor) => (
+                <SponsorLogo size={14} name={sponsor.name} logo={sponsor.imageUrl} url={sponsor.url} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Layout>

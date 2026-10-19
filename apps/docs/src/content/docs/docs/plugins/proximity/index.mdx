@@ -1,0 +1,62 @@
+---
+title: "@capgo/capacitor-proximity"
+description: Enable native proximity monitoring in your Capacitor app for near-ear, face-down, and sensor-covered flows.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Enable native proximity monitoring so your app can react when the device is held to the ear, covered by a hand, or placed face down.
+  image:
+    file: ~public/icons/plugins/proximity.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/proximity/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-proximity/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Overview
+
+`@capgo/capacitor-proximity` wraps native proximity monitoring so VoIP, voice note, and support call screens can react when the device is near a face or hand. Enable monitoring during a call flow and disable it when the user leaves the screen.
+
+On iOS the plugin toggles `UIDevice` proximity monitoring. On Android it listens to `TYPE_PROXIMITY` and dims the window while the sensor is covered.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | `UIDevice` proximity monitoring |
+| Android | Yes | Proximity sensor with screen dimming |
+| Web | No | Not available |
+
+## Core Capabilities
+
+- `enable` - Enable proximity monitoring.
+- `disable` - Disable proximity monitoring.
+- `getStatus` - Get the current sensor availability and plugin enabled state.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `enable` | Enable proximity monitoring. |
+| `disable` | Disable proximity monitoring. |
+| `getStatus` | Get the current sensor availability and plugin enabled state. |
+| `getPluginVersion` | Get the current native plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-proximity](https://github.com/Cap-go/capacitor-proximity/).
+
+## Keep going from @capgo/capacitor-proximity
+
+If you are using **@capgo/capacitor-proximity** to plan native plugin work, connect it with [Using @capgo/capacitor-proximity](/plugins/capacitor-proximity/) for the native capability in Using @capgo/capacitor-proximity, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

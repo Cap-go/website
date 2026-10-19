@@ -1,0 +1,143 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-app-tracking-transparency and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-app-tracking-transparency` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-app-tracking-transparency
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+```
+
+## Quick start
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+const { status } = await AppTrackingTransparency.getStatus();
+if (status === 'authorized') {
+  console.log('Tracking is authorized');
+}
+```
+
+## Example: requestPermission
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+const { status } = await AppTrackingTransparency.requestPermission();
+switch (status) {
+  case 'authorized':
+    console.log('User authorized tracking');
+    break;
+  case 'denied':
+    console.log('User denied tracking');
+    break;
+  case 'restricted':
+    console.log('Tracking is restricted');
+    break;
+  case 'notDetermined':
+    console.log('Status not determined');
+    break;
+}
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `getStatus`
+
+Gets the current tracking authorization status without prompting the user.
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+const { status } = await AppTrackingTransparency.getStatus();
+if (status === 'authorized') {
+  console.log('Tracking is authorized');
+}
+```
+
+### `requestPermission`
+
+Requests user authorization to access app-related data for tracking.
+Displays the native iOS tracking permission dialog.
+
+Note: This method will only show the dialog once. Subsequent calls
+will return the stored authorization status without showing the dialog.
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+const { status } = await AppTrackingTransparency.requestPermission();
+switch (status) {
+  case 'authorized':
+    console.log('User authorized tracking');
+    break;
+  case 'denied':
+    console.log('User denied tracking');
+    break;
+  case 'restricted':
+    console.log('Tracking is restricted');
+    break;
+  case 'notDetermined':
+    console.log('Status not determined');
+    break;
+}
+```
+
+## Type Reference
+
+### `AppTrackingStatusResponse`
+Response object containing the tracking authorization status.
+```typescript
+export interface AppTrackingStatusResponse {
+  /**
+   * The current tracking authorization status.
+   *
+   * @since 1.0.0
+   */
+  status: AppTrackingStatus;
+}
+```
+
+### `AppTrackingStatus`
+Possible values for the tracking authorization status.
+```typescript
+export type AppTrackingStatus = 'authorized' | 'denied' | 'notDetermined' | 'restricted';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-app-tracking-transparency](/plugins/capacitor-app-tracking-transparency/) for the native capability in Using @capgo/capacitor-app-tracking-transparency, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

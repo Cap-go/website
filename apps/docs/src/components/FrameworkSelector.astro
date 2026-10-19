@@ -1,0 +1,86 @@
+---
+// FrameworkSelector.astro - Framework selection buttons for conditional steps
+import m from '@/copy/messages'
+import { resolveMessageLocale } from '@/services/message-locale'
+
+interface FrameworkOption {
+  id: string
+  nameKey: string
+  icon: string
+}
+
+const frameworks: FrameworkOption[] = [
+  { id: 'js', nameKey: 'framework_js_dom', icon: '/icons/js.svg' },
+  { id: 'ts', nameKey: 'framework_ts_dom', icon: '/icons/ts.svg' },
+  { id: 'react', nameKey: 'framework_react', icon: '/icons/react.svg' },
+  { id: 'angular', nameKey: 'framework_angular', icon: '/icons/angular.svg' },
+  { id: 'vue', nameKey: 'framework_vue', icon: '/icons/vue.svg' },
+  { id: 'svelte', nameKey: 'framework_svelte', icon: '/icons/svelte.svg' },
+  { id: 'qwik', nameKey: 'framework_qwik', icon: '/icons/qwik.svg' },
+]
+
+const getRouteLocale = (): string | undefined => {
+  try {
+    return Astro.locals.starlightRoute?.locale
+  } catch {
+    return undefined
+  }
+}
+
+const messageLocale = resolveMessageLocale(getRouteLocale(), Astro.currentLocale)
+
+const getFrameworkName = (key: string) => {
+  const translations: Record<string, string> = {
+    framework_js_dom: m.framework_js_dom({}, { locale: messageLocale }),
+    framework_ts_dom: m.framework_ts_dom({}, { locale: messageLocale }),
+    framework_react: m.framework_react({}, { locale: messageLocale }),
+    framework_angular: m.framework_angular({}, { locale: messageLocale }),
+    framework_vue: m.framework_vue({}, { locale: messageLocale }),
+    framework_svelte: m.framework_svelte({}, { locale: messageLocale }),
+    framework_qwik: m.framework_qwik({}, { locale: messageLocale }),
+  }
+  return translations[key] || key
+}
+---
+
+<div class="framework-selector">
+  {
+    frameworks.map((framework) => {
+      const name = getFrameworkName(framework.nameKey)
+      return (
+        <button class="framework-button" data-framework={framework.id} aria-label={`Select ${name}`}>
+          <div class="framework-icon">
+            <img src={framework.icon} alt={name} />
+          </div>
+          <div class="framework-name">{name}</div>
+        </button>
+      )
+    })
+  }
+</div>
+
+<!-- Styles live in src/css/docs.css (Astro drops component <style> blocks from MDX pages during build) -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const frameworkButtons = document.querySelectorAll('.framework-button')
+
+    frameworkButtons.forEach((button) => {
+      button.addEventListener('click', function (event) {
+        const clickedButton = event.currentTarget as HTMLElement
+
+        // Remove selected class from all buttons
+        frameworkButtons.forEach((btn) => btn.classList.remove('selected'))
+
+        // Add selected class to clicked button
+        clickedButton.classList.add('selected')
+
+        // Trigger the conditional step visibility
+        const customEvent = new CustomEvent('frameworkSelected', {
+          detail: { framework: clickedButton.getAttribute('data-framework') },
+        })
+        document.dispatchEvent(customEvent)
+      })
+    })
+  })
+</script>

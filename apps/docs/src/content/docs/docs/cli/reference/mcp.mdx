@@ -1,0 +1,55 @@
+---
+title: 🔹 mcp
+description: "🤖 Start the Capgo MCP (Model Context Protocol) server for AI agent integration."
+sidebar_label: mcp
+sidebar:
+  order: 19
+---
+
+🤖 Start the Capgo MCP (Model Context Protocol) server for AI agent integration.
+
+```bash
+npx @capgo/cli@latest mcp
+```
+
+This command starts a **local stdio** MCP server that exposes Capgo account tools for AI agents.
+The server is designed for non-interactive, programmatic use after `npx @capgo/cli@latest login`.
+
+Use this local server when the agent needs files on your machine: uploading a bundle, requesting a native build, or running `doctor` and `probe`.
+
+For everything else, the **[hosted MCP server](/docs/ai/mcp/)** at `https://api.capgo.app/mcp` needs no install. Paste the URL into Claude.ai, ChatGPT, Cursor, VS Code, Lovable, or any remote MCP client and sign in with OAuth (or send `Authorization: Bearer <Capgo API key>`). It covers apps, bundles, channels and rollouts, devices, statistics, Observe, native build status and logs, webhooks, and push notifications. See [Hosted vs local MCP](/docs/ai/mcp/#hosted-vs-local-mcp).
+
+The hosted server also has `capgo_search_docs` for searching the Capgo documentation. Its machine-readable manifest is at [https://capgo.app/.well-known/mcp.json](https://capgo.app/.well-known/mcp.json), and [capgo.app/mcp](https://capgo.app/mcp/) explains which server to use.
+
+Available local tools include:
+
+- `capgo_list_apps`, `capgo_add_app`, `capgo_update_app`, `capgo_delete_app`
+- `capgo_upload_bundle`, `capgo_list_bundles`, `capgo_delete_bundle`, `capgo_cleanup_bundles`
+- `capgo_list_channels`, `capgo_add_channel`, `capgo_update_channel`, `capgo_delete_channel`
+- `capgo_get_current_bundle`, `capgo_check_compatibility`
+- `capgo_list_organizations`, `capgo_add_organization`
+- `capgo_star_repository`, `capgo_star_all_repositories`
+- `capgo_get_account_id`, `capgo_doctor`, `capgo_get_stats`
+- `capgo_request_build`, `capgo_generate_encryption_keys`
+
+## Example configuration
+
+Add the following configuration to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "capgo": {
+      "command": "npx",
+      "args": ["@capgo/cli", "mcp"]
+    }
+  }
+}
+```
+
+**Example:**
+
+```bash
+npx @capgo/cli mcp
+```
+

@@ -1,0 +1,65 @@
+---
+title: "@capgo/capacitor-live-reload"
+description: "Capacitor plugin to live reload Capacitor apps from a remote Vite dev server."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Connect to your dev server for instant hot reloading during development"
+  actions:
+    - text: Get started
+      link: /docs/plugins/live-reload/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-live-reload/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Connect to your dev server for instant hot reloading during development
+
+Start with `configureServer()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
+
+## Core Capabilities
+
+- `configureServer` - Store remote dev server settings used for subsequent connections.
+- `connect` - Establish a WebSocket connection if one is not already active.
+- `disconnect` - Close the current WebSocket connection and disable auto reconnect.
+- `getStatus` - Returns the current connection status.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `configureServer` | Store remote dev server settings used for subsequent connections. |
+| `connect` | Establish a WebSocket connection if one is not already active. |
+| `disconnect` | Close the current WebSocket connection and disable auto reconnect. |
+| `getStatus` | Returns the current connection status. |
+| `reload` | Trigger a full reload of the Capacitor WebView. |
+| `reloadFile` | Reload a single file/module if the runtime supports it (falls back to full reload). |
+| `addListener` | Listen to incoming reload events emitted by the server. |
+| `addListener` | Listen to socket status changes (connected/disconnected). |
+| `removeAllListeners` | Remove all registered listeners. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-live-reload](https://github.com/Cap-go/capacitor-live-reload/).
+
+## Keep going from @capgo/capacitor-live-reload
+
+If you are using **@capgo/capacitor-live-reload** to plan native plugin work, connect it with [Using @capgo/capacitor-live-reload](/plugins/capacitor-live-reload/) for the native capability in Using @capgo/capacitor-live-reload, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

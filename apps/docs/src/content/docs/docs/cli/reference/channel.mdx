@@ -1,0 +1,185 @@
+---
+title: 📢 channel
+description: "📢 Manage distribution channels for app updates in Capgo Cloud, controlling how updates are delivered to devices."
+sidebar_label: channel
+sidebar:
+  order: 10
+---
+
+📢 Manage distribution channels for app updates in Capgo Cloud, controlling how updates are delivered to devices.
+
+
+### <a id="channel-add"></a> ➕ **Add**
+
+**Alias:** `a`
+
+```bash
+npx @capgo/cli@latest channel add
+```
+
+➕ Create a new channel for app distribution in Capgo Cloud to manage update delivery.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel add production com.example.app --default
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-d** | <code>boolean</code> | Set the channel as default |
+| **--self-assign** | <code>boolean</code> | Allow device to self-assign to this channel |
+| **-a** | <code>string</code> | API key to link to your account |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="channel-delete"></a> 🗑️ **Delete**
+
+**Alias:** `d`
+
+```bash
+npx @capgo/cli@latest channel delete
+```
+
+🗑️ Delete a channel from Capgo Cloud, optionally removing associated bundles to free up resources.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel delete production com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a** | <code>string</code> | API key to link to your account |
+| **--delete-bundle** | <code>boolean</code> | Delete the bundle associated with the channel. An App Preview key can atomically delete only its own preview channel and linked, unshared bundle. |
+| **--success-if-not-found** | <code>boolean</code> | Success if the channel is not found |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+:::caution
+Use an organization- and app-bound **App Preview** API key with `--delete-bundle` only for a non-public PR preview channel. The command uses a narrow atomic cleanup route: it succeeds only for the channel and linked, unshared bundle that key created. The key cannot use it on an existing default/main channel, another preview key's channel, or another key's bundle, and it still does not receive general `bundle.delete`. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for setup.
+:::
+
+### <a id="channel-list"></a> 📋 **List**
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest channel list
+```
+
+📋 List all channels configured for an app in Capgo Cloud to review distribution settings.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel list com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a** | <code>string</code> | API key to link to your account |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="channel-currentBundle"></a> 📦 **CurrentBundle**
+
+```bash
+npx @capgo/cli@latest channel currentBundle
+```
+
+📦 Get the current bundle linked to a specific channel in Capgo Cloud for update tracking.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel currentBundle production com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-c** | <code>string</code> | Channel to get the current bundle from |
+| **-a** | <code>string</code> | API key to link to your account |
+| **--quiet** | <code>boolean</code> | Only print the bundle version |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="channel-set"></a> ⚙️ **Set**
+
+**Alias:** `s`
+
+```bash
+npx @capgo/cli@latest channel set
+```
+
+⚙️ Configure settings for a channel, such as linking a bundle, setting update strategies (major, minor, metadata, patch, none), or device targeting (iOS, Android, dev, prod, emulator, device).
+One channel must be default.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app --bundle 1.0.0 --state default
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a** | <code>string</code> | API key to link to your account |
+| **-b** | <code>string</code> | Bundle version number of the file to set |
+| **-s** | <code>string</code> | Set the state of the channel, default or normal |
+| **--latest-remote** | <code>boolean</code> | Get the latest bundle uploaded in capgo cloud and set it to the channel |
+| **--latest** | <code>boolean</code> | Get the latest version key in the package.json to set it to the channel |
+| **--downgrade** | <code>boolean</code> | Allow to downgrade to version under native one |
+| **--no-downgrade** | <code>boolean</code> | Disable downgrade to version under native one |
+| **--ios** | <code>boolean</code> | Allow sending update to iOS devices |
+| **--no-ios** | <code>boolean</code> | Disable sending update to iOS devices |
+| **--android** | <code>boolean</code> | Allow sending update to Android devices |
+| **--no-android** | <code>boolean</code> | Disable sending update to Android devices |
+| **--self-assign** | <code>boolean</code> | Allow device to self-assign to this channel |
+| **--no-self-assign** | <code>boolean</code> | Disable devices to self-assign to this channel |
+| **--disable-auto-update** | <code>string</code> | Block updates by type: major, minor, metadata, patch, or none (allows all) |
+| **--update-package** | <code>string</code> | Serve zip, delta, or both: all, zip, delta, zip_from_builtin, or delta_from_builtin |
+| **--rollout-bundle** | <code>string</code> | Bundle version to release gradually on this channel |
+| **--rollout-percentage** | <code>string</code> | Rollout percentage from 0 to 100 |
+| **--rollout-percentage-bps** | <code>string</code> | Rollout percentage in basis points from 0 to 10000 |
+| **--rollout-enable** | <code>boolean</code> | Enable the configured rollout |
+| **--rollout-disable** | <code>boolean</code> | Disable the configured rollout |
+| **--rollout-pause** | <code>boolean</code> | Pause rollout exposure without rolling back selected devices |
+| **--rollout-resume** | <code>boolean</code> | Resume a paused rollout |
+| **--rollout-rollback** | <code>boolean</code> | Clear rollout state and return devices to stable |
+| **--rollout-promote** | <code>boolean</code> | Promote rollout target to stable and clear rollout state |
+| **--rollout-cache-ttl-seconds** | <code>string</code> | Cloudflare rollout decision cache TTL in seconds |
+| **--auto-pause-enabled** | <code>boolean</code> | Enable rollout auto-pause policy |
+| **--auto-pause-disabled** | <code>boolean</code> | Disable rollout auto-pause policy |
+| **--auto-pause-window-minutes** | <code>string</code> | Stats window for rollout auto-pause |
+| **--auto-pause-failure-rate-bps** | <code>string</code> | Failure-rate threshold in basis points |
+| **--auto-pause-confidence** | <code>string</code> | Confidence level between 0 and 1 |
+| **--auto-pause-min-attempts** | <code>string</code> | Minimum install plus fail attempts before auto-pause can trigger |
+| **--auto-pause-min-failures** | <code>string</code> | Minimum failures before auto-pause can trigger |
+| **--auto-pause-action** | <code>string</code> | Auto-pause action: pause, rollback, or notify |
+| **--auto-pause-cooldown-minutes** | <code>string</code> | Cooldown before auto-pause can trigger again |
+| **--dev** | <code>boolean</code> | Allow sending update to development devices |
+| **--no-dev** | <code>boolean</code> | Disable sending update to development devices |
+| **--prod** | <code>boolean</code> | Allow sending update to production devices |
+| **--no-prod** | <code>boolean</code> | Disable sending update to production devices |
+| **--emulator** | <code>boolean</code> | Allow sending update to emulator devices |
+| **--no-emulator** | <code>boolean</code> | Disable sending update to emulator devices |
+| **--device** | <code>boolean</code> | Allow sending update to physical devices |
+| **--no-device** | <code>boolean</code> | Disable sending update to physical devices |
+| **--qr-preview** | <code>boolean</code> | Print a terminal QR code for this channel preview after updating it |
+| **--send-update-notification** | <code>boolean</code> | Send a native update-check notification to devices after updating the linked channel bundle |
+| **--package-json** | <code>string</code> | Paths to package.json files for monorepos (comma-separated) |
+| **--ignore-metadata-check** | <code>boolean</code> | Ignore checking node_modules compatibility if present in the bundle |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+

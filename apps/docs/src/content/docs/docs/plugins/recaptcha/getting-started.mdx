@@ -1,0 +1,94 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-recaptcha and generate reCAPTCHA tokens in a Capacitor app."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-recaptcha` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-recaptcha
+bunx cap sync
+```
+
+## Configure Site Keys
+
+Create platform keys in Google Cloud reCAPTCHA, then add them to `capacitor.config.ts`.
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+import '@capgo/capacitor-recaptcha';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    Recaptcha: {
+      androidSiteKey: 'ANDROID_SITE_KEY',
+      iosSiteKey: 'IOS_SITE_KEY',
+      webSiteKey: 'WEB_SITE_KEY',
+      enterprise: true,
+    },
+  },
+};
+
+export default config;
+```
+
+`androidSiteKey`, `iosSiteKey`, and `webSiteKey` override the shared `siteKey`. You can also pass a `siteKey` directly to `load()` or `execute()` when the key depends on your environment.
+
+## Generate A Token
+
+```ts
+import { Recaptcha } from '@capgo/capacitor-recaptcha';
+
+const { token } = await Recaptcha.execute({
+  action: 'login',
+});
+
+await fetch('/api/recaptcha-assessment', {
+  method: 'POST',
+  headers: { 'content-type': 'application/json' },
+  body: JSON.stringify({ token, action: 'login' }),
+});
+```
+
+`execute()` calls `load()` automatically when the client is not ready, so an explicit preload step is optional.
+
+## Web Standard reCAPTCHA v3
+
+Set `enterprise: false` to load Google's standard Web reCAPTCHA v3 script.
+
+```ts
+const { token } = await Recaptcha.execute({
+  siteKey: 'WEB_V3_SITE_KEY',
+  enterprise: false,
+  action: 'signup',
+});
+```
+
+On Android and iOS, Google's native mobile SDK path is Enterprise/mobile only. Passing `enterprise: false` on native platforms is rejected so a standard Web v3 key is not used accidentally.
+
+## Migration Notes
+
+The plugin accepts the old Cordova option aliases `sitekeyAndroid` and `sitekeyWeb` in call options and Capacitor config. It also accepts `sitekeyIos` and `sitekeyIOS` as iOS migration aliases. Prefer the Capacitor config names for new code.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan authentication and account flows, connect it with [Using @capgo/capacitor-recaptcha](/plugins/capacitor-recaptcha/) for the native capability in Using @capgo/capacitor-recaptcha, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

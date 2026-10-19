@@ -1,0 +1,102 @@
+---
+locale: en
+---
+# Using @capgo/capacitor-intent-launcher
+
+Capacitor Intent Launcher Plugin for launching Android intents and opening system settings on both Android and iOS.
+
+## Install
+
+```bash
+bun add @capgo/capacitor-intent-launcher
+bunx cap sync
+```
+
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
+
+## Import
+
+```typescript
+import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
+```
+
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `startActivityAsync` | Starts an Android activity for the given action. |
+| `openIOSSettings` | Opens iOS settings screen. |
+| `openApplication` | Opens an application by its package name. |
+| `getApplicationIconAsync` | Gets the application icon as a base64-encoded PNG string. |
+
+## Examples
+
+### `startActivityAsync()`
+
+Starts an Android activity for the given action.
+
+```typescript
+import { IntentLauncher, ActivityAction } from '@capgo/capacitor-intent-launcher';
+
+// Open location settings
+const result = await IntentLauncher.startActivityAsync({
+  action: ActivityAction.LOCATION_SOURCE_SETTINGS
+});
+
+// Open a specific app settings
+const result = await IntentLauncher.startActivityAsync({
+  action: ActivityAction.APPLICATION_DETAILS_SETTINGS,
+  data: 'package:com.example.app'
+});
+```
+
+### `openIOSSettings()`
+
+Opens iOS settings screen.
+
+```typescript
+import { IntentLauncher, IOSSettings } from '@capgo/capacitor-intent-launcher';
+
+// Open app settings (recommended - officially supported by Apple)
+await IntentLauncher.openIOSSettings({ option: IOSSettings.App });
+
+// Open WiFi settings (may not work in all iOS versions)
+await IntentLauncher.openIOSSettings({ option: IOSSettings.WiFi });
+```
+
+### `openApplication()`
+
+Opens an application by its package name.
+
+```typescript
+import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
+
+// Open Gmail app
+await IntentLauncher.openApplication({ packageName: 'com.google.android.gm' });
+```
+
+### `getApplicationIconAsync()`
+
+Gets the application icon as a base64-encoded PNG string.
+
+```typescript
+import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
+
+const { icon } = await IntentLauncher.getApplicationIconAsync({
+  packageName: 'com.google.android.gm'
+});
+if (icon) {
+  const img = document.createElement('img');
+  img.src = icon;
+}
+```
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-intent-launcher/)
+- [Documentation](/docs/plugins/intent-launcher/)
+- [API reference](/docs/plugins/intent-launcher/getting-started/)
+
+## Keep going from Using @capgo/capacitor-intent-launcher
+
+If you are using **Using @capgo/capacitor-intent-launcher** to plan dashboard and API operations, connect it with [@capgo/capacitor-intent-launcher](/docs/plugins/intent-launcher/) for the implementation detail in @capgo/capacitor-intent-launcher, [Getting Started](/docs/plugins/intent-launcher/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

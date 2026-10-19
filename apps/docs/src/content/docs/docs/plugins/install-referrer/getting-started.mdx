@@ -1,0 +1,81 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-install-referrer and read install attribution data in a Capacitor app."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-install-referrer` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-install-referrer
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { InstallReferrer } from '@capgo/capacitor-install-referrer';
+```
+
+## Read Attribution Details
+
+```typescript
+const result = await InstallReferrer.getReferrer();
+
+if (result.platform === 'android') {
+  console.log('Install referrer:', result.referrer);
+  console.log('Click timestamp:', result.clickTimestampSeconds);
+  console.log('Install timestamp:', result.installBeginTimestampSeconds);
+}
+
+if (result.platform === 'ios') {
+  console.log('AdServices token:', result.attributionToken);
+}
+```
+
+## Fetch Apple Attribution On iOS
+
+If you want native code to call Apple's attribution endpoint, pass `fetchAppleAttribution`.
+
+```typescript
+const result = await InstallReferrer.getReferrer({
+  fetchAppleAttribution: true,
+  appleAttributionRetryCount: 3,
+  appleAttributionRetryDelayMs: 5000,
+});
+
+// result.appleAttribution is the parsed Apple attribution response.
+// See the iOS attribution page for the Apple-provided payload fields.
+console.log(result.appleAttribution);
+```
+
+Apple can return `404` while attribution data is still being prepared for a valid token. The retry options control how often the native plugin retries before rejecting. See [iOS attribution](/docs/plugins/install-referrer/ios/) for platform details.
+
+## Compatibility Alias
+
+`GetReferrer()` is available for apps migrating from `cap-play-install-referrer`.
+
+```typescript
+const result = await InstallReferrer.GetReferrer();
+```
+
+New code should use `getReferrer()`.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Using @capgo/capacitor-install-referrer](/plugins/capacitor-install-referrer/) for the native capability in Using @capgo/capacitor-install-referrer, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

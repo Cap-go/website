@@ -1,0 +1,63 @@
+---
+title: "@capgo/capacitor-llm"
+description: "Adds support for locally run LLMs in Capacitor."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "LLM Plugin interface for interacting with on-device language models."
+  actions:
+    - text: Get started
+      link: /docs/plugins/llm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-llm/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-llm` runs **on device** chat models without sending prompts to your server. iOS can use Apple Intelligence or LiteRT bundles. Android targets Gemini Nano where available or LiteRT `.litertlm` models. Web uses Gemma through MediaPipe GenAI (CDN runtime, local model file).
+
+## Platform support
+
+| Platform | Backends |
+| --- | --- |
+| iOS | Apple Intelligence, custom `.litertlm` |
+| Android | Gemini Nano, LiteRT, legacy MediaPipe `.task` fallback |
+| Web | Gemma via `@mediapipe/tasks-genai` |
+
+## Core Capabilities
+
+- `createChat` - Creates a new chat session.
+- `sendMessage` - Sends a message to the AI in a specific chat session.
+- `getReadiness` - Gets the readiness status of the LLM.
+- `setModel` - Sets the model configuration - iOS: Use "Apple Intelligence" as path for system model, or provide path to MediaPipe model - Android: Path to a MediaPipe model file (in assets or files directory).
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `createChat` | Creates a new chat session. |
+| `sendMessage` | Sends a message to the AI in a specific chat session. |
+| `getReadiness` | Gets the readiness status of the LLM. |
+| `setModel` | Sets the model configuration - iOS: Use "Apple Intelligence" as path for system model, or provide path to MediaPipe model - Android: Path to a MediaPipe model file (in assets or files directory). |
+| `downloadModel` | Downloads a model from a URL and saves it to the appropriate location - iOS: Downloads to the app's documents directory - Android: Downloads to the app's files directory. |
+| `addListener` | Adds a listener for text received from AI. |
+| `addListener` | Adds a listener for AI completion events. |
+| `addListener` | Adds a listener for model download progress events. |
+| `addListener` | Adds a listener for readiness status changes. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-llm](https://github.com/Cap-go/capacitor-llm/).
+
+## Keep going from @capgo/capacitor-llm
+
+If you are using **@capgo/capacitor-llm** to plan migration and enterprise operations, connect it with [Using @capgo/capacitor-llm](/plugins/capacitor-llm/) for the native capability in Using @capgo/capacitor-llm, [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, and [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting.

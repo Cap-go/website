@@ -1,0 +1,210 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-barometer and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-barometer` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-barometer
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+await CapacitorBarometer.startMeasurementUpdates();
+await CapacitorBarometer.addListener('measurement', (event) => {
+  console.log('hPa', event.pressure);
+});
+```
+
+## Example: single reading
+
+Call `startMeasurementUpdates()` first. `getMeasurement()` returns `0` until the first sensor event arrives.
+
+## Common pitfalls
+
+- **Web**: treat as unavailable, `isAvailable()` is false.
+- **iOS relative altitude**: only meaningful while updates run.
+- **Battery**: call `stopMeasurementUpdates()` when done.
+
+## API Overview
+
+### `getMeasurement`
+
+Get the most recent barometer reading captured by the native layer.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+const result = await CapacitorBarometer.getMeasurement();
+console.log(result);
+```
+
+### `isAvailable`
+
+Check if the current device includes a barometer sensor.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+const result = await CapacitorBarometer.isAvailable();
+console.log(result);
+```
+
+### `startMeasurementUpdates`
+
+Begin streaming barometer updates to the JavaScript layer.
+
+Call `addListener` with the `measurement` event to receive the updates.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+await CapacitorBarometer.startMeasurementUpdates();
+```
+
+### `stopMeasurementUpdates`
+
+Stop the continuous updates started via `startMeasurementUpdates`.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+await CapacitorBarometer.stopMeasurementUpdates();
+```
+
+### `checkPermissions`
+
+Return the current permission state for accessing barometer data.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+const result = await CapacitorBarometer.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions`
+
+Request permission to access barometer data if required by the platform.
+
+```typescript
+import { CapacitorBarometer } from '@capgo/capacitor-barometer';
+
+const result = await CapacitorBarometer.requestPermissions();
+console.log(result);
+```
+
+## Type Reference
+
+### `GetMeasurementResult`
+Alias for the most recent pressure sample.
+```typescript
+export type GetMeasurementResult = Measurement;
+```
+
+### `IsAvailableResult`
+Result returned by `isAvailable`.
+```typescript
+export interface IsAvailableResult {
+  /**
+   * Indicates whether the device exposes a barometer sensor.
+   *
+   * @since 1.0.0
+   */
+  isAvailable: boolean;
+}
+```
+
+### `PermissionStatus`
+Permission information returned by `checkPermissions` and `requestPermissions`.
+```typescript
+export interface PermissionStatus {
+  /**
+   * The permission state for accessing barometer measurements on the current platform.
+   *
+   * @since 1.0.0
+   */
+  barometer: BarometerPermissionState;
+}
+```
+
+### `MeasurementEvent`
+Event payload emitted when `startMeasurementUpdates` is active.
+```typescript
+export type MeasurementEvent = Measurement;
+```
+
+### `Measurement`
+Air pressure and relative altitude values sampled from the device barometer.
+```typescript
+export interface Measurement {
+  /**
+   * The static air pressure in hectopascals (hPa).
+   *
+   * @since 1.0.0
+   */
+  pressure: number;
+
+  /**
+   * The change in altitude relative to the time updates started.
+   * Only available on iOS; Android will always return `0`.
+   *
+   * @since 1.0.0
+   */
+  relativeAltitude: number;
+
+  /**
+   * The timestamp of the measurement in milliseconds since the Unix epoch.
+   *
+   * @since 1.0.0
+   */
+  timestamp: number;
+}
+```
+
+### `BarometerPermissionState`
+Permission state union including `limited` for platforms that can throttle sensor access.
+```typescript
+export type BarometerPermissionState = PermissionState | 'limited';
+```
+
+### `PermissionState`
+Platform permission states supported by Capacitor.
+```typescript
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-barometer](/plugins/capacitor-barometer/) for the native capability in Using @capgo/capacitor-barometer, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

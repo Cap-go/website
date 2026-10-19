@@ -1,0 +1,460 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-is-root and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-is-root` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-is-root
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+```
+
+## Quick start
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const { result } = await IsRoot.isRooted();
+if (result) {
+  blockSensitiveFlow();
+}
+```
+
+## Example: Android emulator signal
+
+Emulator detection is not part of default `isRooted()`. Call it explicitly when policy requires it.
+
+```typescript
+const { result } = await IsRoot.isRunningOnEmulator();
+```
+
+## Example: deeper Android audit
+
+```typescript
+const checks = await Promise.all([
+  IsRoot.detectRootManagementApps(),
+  IsRoot.checkForSuBinary(),
+]);
+```
+
+## Common pitfalls
+
+- **iOS simulator**: always reports not jailbroken, test on device.
+- **False positives**: pair root checks with server side risk scoring, not hard crashes alone.
+- **Play policy**: blocking all rooted users may conflict with your store category, document UX.
+
+## API Overview
+
+### `isRooted`
+
+Performs the default root/jailbreak detection checks.
+
+This is the recommended method for basic root/jailbreak detection.
+It runs a combination of the most reliable detection heuristics for the platform.
+Works on both Android and iOS.
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const { result } = await IsRoot.isRooted();
+if (result) {
+  console.log('Device is rooted/jailbroken');
+} else {
+  console.log('Device is not rooted/jailbroken');
+}
+```
+
+### `isRootedWithBusyBox`
+
+Extends the default detection with BusyBox specific checks (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.isRootedWithBusyBox();
+console.log(result);
+```
+
+### `detectRootManagementApps`
+
+Detects if known root management applications are present (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.detectRootManagementApps();
+console.log(result);
+```
+
+### `detectPotentiallyDangerousApps`
+
+Detects potentially dangerous applications commonly found on rooted devices (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.detectPotentiallyDangerousApps();
+console.log(result);
+```
+
+### `detectTestKeys`
+
+Detects debug/test build tags (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.detectTestKeys();
+console.log(result);
+```
+
+### `checkForBusyBoxBinary`
+
+Checks whether a BusyBox binary exists on the device (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkForBusyBoxBinary();
+console.log(result);
+```
+
+### `checkForSuBinary`
+
+Checks whether a `su` binary is present (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkForSuBinary();
+console.log(result);
+```
+
+### `checkSuExists`
+
+Detects if the `su` binary can be executed (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkSuExists();
+console.log(result);
+```
+
+### `checkForRWPaths`
+
+Detects world writable system paths (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkForRWPaths();
+console.log(result);
+```
+
+### `checkForDangerousProps`
+
+Detects dangerous system properties (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkForDangerousProps();
+console.log(result);
+```
+
+### `checkForRootNative`
+
+Executes RootBeer native checks (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkForRootNative();
+console.log(result);
+```
+
+### `detectRootCloakingApps`
+
+Detects applications that can hide root (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.detectRootCloakingApps();
+console.log(result);
+```
+
+### `isSelinuxFlagInEnabled`
+
+Checks the SELinux enforcement state (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.isSelinuxFlagInEnabled();
+console.log(result);
+```
+
+### `isExistBuildTags`
+
+Detects test build tags on the OS image (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.isExistBuildTags();
+console.log(result);
+```
+
+### `doesSuperuserApkExist`
+
+Detects if superuser APKs are installed (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.doesSuperuserApkExist();
+console.log(result);
+```
+
+### `isExistSUPath`
+
+Checks for known `su` binary locations (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.isExistSUPath();
+console.log(result);
+```
+
+### `checkDirPermissions`
+
+Detects writable directories that should be protected (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkDirPermissions();
+console.log(result);
+```
+
+### `checkExecutingCommands`
+
+Executes `which su` style commands to detect root (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkExecutingCommands();
+console.log(result);
+```
+
+### `checkInstalledPackages`
+
+Detects suspicious installed packages (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkInstalledPackages();
+console.log(result);
+```
+
+### `checkforOverTheAirCertificates`
+
+Detects tampered OTA certificates (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkforOverTheAirCertificates();
+console.log(result);
+```
+
+### `isRunningOnEmulator`
+
+Detects common emulator fingerprints (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.isRunningOnEmulator();
+console.log(result);
+```
+
+### `simpleCheckEmulator`
+
+Performs a lightweight emulator check (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.simpleCheckEmulator();
+console.log(result);
+```
+
+### `simpleCheckSDKBF86`
+
+Detects x86 emulator fingerprints (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.simpleCheckSDKBF86();
+console.log(result);
+```
+
+### `simpleCheckQRREFPH`
+
+Detects QC reference phone builds (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.simpleCheckQRREFPH();
+console.log(result);
+```
+
+### `simpleCheckBuild`
+
+Detects build host anomalies (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.simpleCheckBuild();
+console.log(result);
+```
+
+### `checkGenymotion`
+
+Detects Genymotion emulator fingerprints (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkGenymotion();
+console.log(result);
+```
+
+### `checkGeneric`
+
+Detects generic emulator fingerprints (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkGeneric();
+console.log(result);
+```
+
+### `checkGoogleSDK`
+
+Detects Google SDK emulator fingerprints (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.checkGoogleSDK();
+console.log(result);
+```
+
+### `togetDeviceInfo`
+
+Returns device information collected during detection.
+
+Provides additional context and metadata about the device that was
+gathered during the root detection process. Useful for debugging
+and logging purposes.
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const deviceInfo = await IsRoot.togetDeviceInfo();
+console.log('Device info:', deviceInfo);
+```
+
+### `isRootedWithEmulator`
+
+Extends the default detection with emulator heuristics (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.isRootedWithEmulator();
+console.log(result);
+```
+
+### `isRootedWithBusyBoxWithEmulator`
+
+Extends the BusyBox detection with emulator heuristics (Android only).
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const result = await IsRoot.isRootedWithBusyBoxWithEmulator();
+console.log(result);
+```
+
+## Type Reference
+
+### `DetectionResult`
+Result returned by root/jailbreak detection methods.
+```typescript
+export interface DetectionResult {
+  /**
+   * `true` when the associated heuristic detects root/jailbreak artifacts.
+   * `false` when no root/jailbreak indicators are found.
+   *
+   * @since 1.0.0
+   */
+  result: boolean;
+}
+```
+
+### `DeviceInfo`
+Device information collected during detection.
+```typescript
+export interface DeviceInfo {
+  /**
+   * Arbitrary key/value device metadata populated by the native implementation.
+   * Contents vary by platform and detection methods used.
+   *
+   * @since 1.0.0
+   */
+  [key: string]: any;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-is-root](/plugins/capacitor-is-root/) for the native capability in Using @capgo/capacitor-is-root, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

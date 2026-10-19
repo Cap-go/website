@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Social login flow">
+  <title>Social login flow</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="262" cy="52" r="20" fill="#44BCFF" opacity="0.28"/>
+      <rect x="108" y="64" width="104" height="88" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+      <path d="M136 112 H184" stroke="#44BCFF" stroke-width="3" stroke-linecap="round"/>
+      <path d="M168 96 L184 112 L168 128" fill="none" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 0)"/>
+</svg>

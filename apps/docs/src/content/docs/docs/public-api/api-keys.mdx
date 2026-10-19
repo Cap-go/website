@@ -1,0 +1,137 @@
+---
+title: "API Keys"
+description: "Comprehensive documentation for API Keys, detailing authentication, RBAC permissions, and management within Capgo"
+sidebar:
+  order: 9
+---
+
+API keys are used to authenticate requests to the Capgo API. Keys are organization-specific and can be assigned RBAC roles for fine-grained access control. Each key can also have an optional expiration date and can be created as a "secure" (hashed) key where the plain-text value is only shown once.
+
+## Using an API key
+
+Use the authentication header documented by the endpoint. For API-key requests, `authorization` is accepted:
+
+```bash
+curl -H "authorization: YOUR_API_KEY" https://api.capgo.app/...
+```
+
+Some endpoints also accept a dedicated key header. The [Channels API](/docs/public-api/channels/) accepts `authorization` or `capgkey`; use one of those headers for preview-channel automation.
+
+## RBAC Permissions
+
+API keys use the same role-based access control (RBAC) system as user accounts. When creating or managing keys through the web app or API, you assign roles at two levels:
+
+- **Organization role** — Defines the key's baseline permissions across the entire organization (for example, `org_admin` or `org_member`).
+- **App roles** — Per-app permissions (for example, `app_admin`, `app_developer`, `app_uploader`, `app_reader`, or `app_preview`).
+
+If an API key has explicit role bindings, **only those bindings** are evaluated for permission checks. The key owner's personal permissions are not inherited by the key.
+
+### Preview channel automation
+
+Bind `app_preview` only to the preview app for CI that creates a temporary, non-public preview channel, uploads and promotes a bundle, then deletes both.
+
+```json
+{
+  "name": "PR preview key",
+  "hashed": true,
+  "bindings": [
+    {
+      "role_name": "app_preview",
+      "scope_type": "app",
+      "org_id": "<OWNING_ORG_UUID>",
+      "app_id": "<APP_UUID>"
+    }
+  ]
+}
+```
+`org_id` is the UUID of the app's owning organization. `app_id` is the app record's internal UUID, not the public app identifier used by CLI commands (for example, `com.example.app`). The binding remains organization-bound even when the key has no organization-wide role.
+
+The app-level `app_preview` role includes only `app.read`, `app.read_bundles`, `app.upload_bundle`, and `app.create_channel`. When that key creates a channel, Capgo automatically adds a `channel_preview` binding on the newly created channel. That child binding grants `channel.read`, `channel.promote_bundle`, and `channel.delete` only for the channel the key created.
+
+`app_preview` retains `app.read`, so this is not strict channel-read isolation: the key may enumerate channel metadata in the selected app. The automatic child binding limits **lifecycle mutations** to the channel the key created.
+
+Capgo records the App Preview key that uploaded each bundle. The key can promote only its own bundle to each preview channel it creates. It has no channel lifecycle access to an existing default/main channel, a channel created by another preview key, or another key's bundle. For this workflow, omit `public` and never use `--default`.
+
+Use `channel delete <preview-channel> <public-app-id> --delete-bundle` for cleanup. This is an atomic, ownership-checked preview cleanup route; it removes only the calling key's preview channel and linked bundle. `app_preview` does not grant generic `bundle.delete`.
+
+For the dashboard setup and a complete CLI example, see [Use an App Preview key for preview workflows](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows).
+
+{/* [SCREENSHOT: capgo_apikeys_rbac_diagram.webp] — Diagram showing the RBAC hierarchy: org roles → app roles → API key permissions */}
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_rbac_diagram.webp" alt="A diagram explaining how RBAC API key permissions work" /><figcaption></figcaption></figure>
+
+:::note
+Keys without role bindings fall back to a legacy mode-based system (`read`, `upload`, `write`, `all`). These modes are deprecated — use RBAC roles instead.
+:::
+
+## Organization creation permission
+
+Creating organizations with an API key now uses an explicit global permission: `org.create`.
+
+This permission is separate from normal org/app role bindings because a new organization does not exist yet when `POST /organization/` is called. To create organizations with an API key:
+
+- The API key must include `org.create` in `global_permissions`.
+- The same API key must also have a current organization-scoped `org_admin` or `org_super_admin` binding.
+- New API keys do not receive `org.create` by default. Enable **Allow creating organizations** when creating or editing an RBAC API key in the dashboard.
+- Existing write-capable org admin/super admin API keys were backfilled with `org.create` so existing integrations can continue creating organizations.
+
+When an API key creates an organization, Capgo automatically assigns that same API key as `org_super_admin` on the newly created organization. This lets the integration manage the organization it just created without needing a separate manual role binding.
+
+If you create an API key through the API, include `global_permissions` alongside the org admin binding:
+
+```json
+{
+  "name": "Provisioning key",
+  "hashed": true,
+  "bindings": [
+    {
+      "role_name": "org_admin",
+      "scope_type": "org",
+      "org_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "global_permissions": ["org.create"]
+}
+```
+
+`org.create` only applies to creating organizations. Deleting an organization still requires delete permission on the target organization, typically through `org_super_admin`.
+
+## Secure (Hashed) Keys
+
+When creating a secure key, the server generates the key material and returns the plain-text value once. Only a hash is stored. This means:
+
+- The plain-text key **cannot be retrieved** after creation.
+- Regeneration produces a new plain-text key (shown once) and updates the stored hash.
+- Hashed keys are recommended for production use.
+
+Some organizations enforce hashed keys via the `enforce_hashed_api_keys` org policy.
+
+## Expiration
+
+Keys can have an optional expiration date. Expired keys are rejected at the permission check layer.
+
+Organization policies can enforce:
+- **Mandatory expiration** (`require_apikey_expiration`) — All new keys must have an expiry.
+- **Maximum TTL** (`max_apikey_expiration_days`) — The expiry cannot be further than N days from now.
+
+## Security Best Practices
+
+1. **Principle of Least Privilege**: Assign the most restrictive role that still allows your integration to function
+2. **Regular Rotation**: Rotate your API keys periodically using the regenerate feature
+3. **Secure Storage**: Store API keys securely and never commit them to version control
+4. **Use Hashed Keys**: Create secure (hashed) keys for production integrations
+5. **Set Expiration**: Always set an expiration date on keys used for temporary or CI/CD access
+6. **Scope Restrictions**: Restrict keys to specific apps with the minimum required role
+
+## Common Use Cases
+
+1. **CI/CD Integration**: Create keys scoped to specific apps with the `app_uploader` or `app_developer` role, and set an expiration date.
+2. **PR Preview Channels**: Use `app_preview` on only the preview app or apps when CI needs to upload a bundle, create a temporary channel, and atomically clean up its own channel and bundle.
+3. **Deployment Automation**: Use keys with the `app_developer` role for automated deployment scripts.
+4. **Monitoring Tools**: Create keys with the `app_reader` role for external monitoring integrations.
+5. **Admin Access**: Use keys with the `org_admin` role sparingly for administrative tools.
+6. **Third-Party Integrations**: Create keys restricted to specific apps with the minimum required role.
+7. **Organization Provisioning**: Use an `org_admin` or `org_super_admin` RBAC key with `org.create` only for trusted automation that needs to create organizations.
+
+## Keep going from API Keys
+
+If you are using **API Keys** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication, and [SSO (Enterprise)](/docs/webapp/enterprise-sso/) for the implementation detail in SSO (Enterprise).

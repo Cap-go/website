@@ -1,0 +1,114 @@
+---
+title: "@capgo/capacitor-inappbrowser"
+description: "Native in-app browser for Capacitor with managed WebViews, native UI layering, private sessions, proxying, downloads, popups, and app messaging."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Native in-app browser for Capacitor with managed WebViews, native UI layering, private sessions, proxying, downloads, popups, and app messaging."
+  actions:
+    - text: Get started
+      link: /docs/plugins/inappbrowser/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-inappbrowser/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-inappbrowser` gives Capacitor apps two browser paths: `open()` for the system browser experience and `openWebView()` for a managed native WebView that your app can size, hide, message, script, proxy, and layer with Ionic UI.
+
+Use it when the page needs more than a simple external browser: OAuth and checkout flows, embedded support portals, payment screens, video calls, document portals, interactive web apps, or any flow where your app needs native controls around live web content.
+
+<span title="Renamed from @capgo/inappbrowser to @capgo/capacitor-inappbrowser.">Package name changed.</span>
+
+## Common Use Cases
+
+- Present Ionic or Capacitor UI above a live browser page with `toBack`, `sendToBack()`, `bringToFront()`, `transparentBackground`, and `dispatchInputEvent()`.
+- Build partial-screen browsers, bottom sheets, and picture-in-picture webviews with `width`, `height`, `x`, `y`, and `updateDimensions()`.
+- Let users tap the Capacitor app outside a custom-size browser frame on Android and iOS.
+- Run checkout, login, support, or account-switching flows without persistent website storage using `persistWebViewData: false` and `clearAllBrowsingData()`.
+- Keep multiple browser instances loaded with `hidden`, `hide()`, and `show()` while preserving page state.
+- Embed advanced web apps that need request proxying, file uploads, downloads, popup control, Google Pay support, `_blank` link handling, and app-to-page messaging.
+
+## Core Capabilities
+
+- `open` - Opens a URL in Chrome Custom Tabs on Android or `SFSafariViewController` on iOS.
+- `openWebView` - Opens a managed native WebView with custom toolbar, sizing, native navigation, messaging, scripting, proxy, downloads, popups, and data controls.
+- `sendToBack` / `bringToFront` - Moves a managed browser behind or above the Capacitor host WebView.
+- `dispatchInputEvent` - Forwards click, touch, and scroll events to a browser that is behind native app UI.
+- `updateDimensions` - Changes the managed WebView size and position without reloading the page.
+- `hide` / `show` - Keeps managed WebViews loaded while removing or restoring their native presentation.
+- `postMessage` / `executeScript` - Connects the Capacitor app with JavaScript running inside the managed page.
+- `clearAllBrowsingData` / `persistWebViewData` - Controls cookie, cache, storage, IndexedDB, and session persistence.
+- `handleDownloads`, proxy rules, and popup events - Support document portals, upload flows, payment pages, and embedded web apps.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `goBack` | Navigates back in the WebView's history if possible. |
+| `open` | Open url in a new window fullscreen, on android it use chrome custom tabs, on ios it use SFSafariViewController. |
+| `clearCookies` | Clear cookies of url When `id` is omitted, applies to all open webviews. |
+| `clearAllCookies` | Clear all cookies When `id` is omitted, applies to all open webviews. |
+| `clearCache` | Clear cache When `id` is omitted, applies to all open webviews. |
+| `clearAllBrowsingData` | Clears cookies, cache, local storage, session storage, IndexedDB, and other browsing data from the default store and managed WebViews. |
+| `getCookies` | Get cookies for a specific URL. |
+| `close` | Close the webview. When `id` is omitted, closes the active webview. |
+| `hide` | Hide the webview without closing it. Use show() to bring it back. When `id` is omitted, targets the active webview. |
+| `show` | Show a previously hidden webview. When `id` is omitted, targets the active webview. |
+| `sendToBack` | Moves the native browser behind the Capacitor host WebView so app UI can appear above it. |
+| `bringToFront` | Moves a browser that was behind the host WebView back to the front. |
+| `dispatchInputEvent` | Dispatches click, touch, or scroll input to a managed browser; coordinates are relative to the browser viewport. |
+| `openWebView` | Open url in a new webview with toolbars, and enhanced capabilities, like camera access, file access, listen events, inject javascript, bi directional communication, etc. |
+| `executeScript` | Injects JavaScript code into the InAppBrowser window. When `id` is omitted, executes in all open webviews. |
+| `postMessage` | Sends an event to the webview (in-app browser). Listen in the page with `window.addEventListener('messageFromNative', listenerFunc)`. The `detail` payload must be JSON-serializable. When `id` is omitted, broadcasts to all open webviews. |
+| `takeScreenshot` | Captures the current webview viewport as a PNG screenshot. When `id` is omitted, targets the active webview. |
+| `setUrl` | Sets the URL of the webview. When `id` is omitted, targets the active webview. |
+| `addListener` | Listen for url change, only for openWebView. |
+| `addListener` | Listen for `buttonNearDoneClick`; the payload contains the webview `id`. |
+| `addListener` | Listen for close click only for openWebView. |
+| `addListener` | Will be triggered when user clicks on confirm button when disclaimer is required, works with openWebView shareDisclaimer and closeModal. |
+| `addListener` | Fires when the webview sends an event back to the app. Use `window.mobileApp.postMessage(...)` in the page, and keep the payload JSON-serializable. |
+| `addListener` | Will be triggered whenever a screenshot is captured from the plugin API, the native screenshot button, or the injected JavaScript bridge. |
+| `addListener` | Will be triggered when page is loaded. |
+| `addListener` | Will be triggered when page load error. |
+| `addListener` | Will be triggered after native download handling saves a file locally. Enable this with `handleDownloads: true` when opening the webview. |
+| `addListener` | Will be triggered when native download handling fails. Enable this with `handleDownloads: true` when opening the webview. |
+| `addListener` | Will be triggered whenever a page opens a popup/new window. Use the returned popup id with `executeScript`, `postMessage`, `show`, `hide`, and `close`. |
+| `addListener` | Listen for proxied requests delegated by the native runtime. Prefer `addProxyHandler()` instead of calling this directly. |
+| `addListener` | Listen for JavaScript console output emitted by the managed page. Enable this with `captureConsoleLogs: true` when opening the webview. |
+| `handleProxyRequest` | Internal method used by `addProxyHandler()` to send a proxy decision back to native. Forward the original `phase` when replying to a manual `proxyRequest` listener. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `reload` | Reload the current web page. |
+| `updateDimensions` | Update the dimensions of the webview. Allows changing the size and position of the webview at runtime. When `id` is omitted, targets the active webview. |
+| `setEnabledSafeTopMargin` | Sets the enabled safe top margin of the webview at runtime. When `id` is omitted, targets the active webview. On Web, this method is a no-op and resolves without changing layout. |
+| `setEnabledSafeBottomMargin` | Sets the enabled safe bottom margin of the webview at runtime. When `id` is omitted, targets the active webview. On Web, this method is a no-op and resolves without changing layout. |
+| `openSecureWindow` | Opens a secure OAuth2 window. On web, return the redirected URL through a `BroadcastChannel`; on mobile, register a custom redirect URI in your app configuration. See the getting-started guide for the full HTML, Info.plist, and AndroidManifest examples. |
+
+
+## Reference Values
+
+Use these values with toolbar options when opening an in-app browser or WebView.
+
+### Toolbar Types
+
+| Value | User will find |
+| --- | --- |
+| `activity` | Simple toolbar with close and share controls. |
+| `compact` | Simple toolbar with a close control. |
+| `navigation` | Full navigation toolbar with back and forward controls. |
+| `blank` | No toolbar. |
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-inappbrowser](https://github.com/Cap-go/capacitor-inappbrowser/).
+
+## Keep going from @capgo/capacitor-inappbrowser
+
+If you are using **@capgo/capacitor-inappbrowser** to plan native plugin work, connect it with [Using @capgo/capacitor-inappbrowser](/plugins/capacitor-inappbrowser/) for the native capability in Using @capgo/capacitor-inappbrowser, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

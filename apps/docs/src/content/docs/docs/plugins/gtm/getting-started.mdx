@@ -1,0 +1,136 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-gtm and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-gtm` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-gtm
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+```
+
+## Quick start
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.push({
+  event: 'purchase',
+  parameters: {
+    value: 99.99,
+    currency: 'USD'
+  }
+});
+```
+
+## Example: setUserProperty
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `initialize`
+
+Initializes Google Tag Manager with the specified container ID.
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.initialize({ containerId: 'container-id-123' });
+```
+
+### `push`
+
+Pushes an event to the Google Tag Manager dataLayer.
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.push({
+  event: 'purchase',
+  parameters: {
+    value: 99.99,
+    currency: 'USD'
+  }
+});
+```
+
+### `setUserProperty`
+
+Sets a user property in the Google Tag Manager dataLayer.
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+```
+
+### `getValue`
+
+Gets a value from the Google Tag Manager dataLayer.
+Searches through the dataLayer for the most recent value of the specified key.
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+const result = await GoogleTagManager.getValue({ key: 'key-123' });
+console.log(result);
+```
+
+### `reset`
+
+Resets the Google Tag Manager instance and clears all data.
+This will remove all data from the dataLayer and require re-initialization.
+
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
+
+await GoogleTagManager.reset();
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-gtm](/plugins/capacitor-gtm/) for the native capability in Using @capgo/capacitor-gtm, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

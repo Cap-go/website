@@ -1,0 +1,102 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-android-sms-retriever and use Android SMS Retriever in a Capacitor app."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-android-sms-retriever` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-android-sms-retriever
+bunx cap sync android
+```
+
+## Import
+
+```typescript
+import { AndroidSmsRetriever } from '@capgo/capacitor-android-sms-retriever';
+```
+
+## Android Requirements
+
+SMS Retriever requires Google Play services on the Android device. The plugin does not request `READ_SMS` or `RECEIVE_SMS` permissions.
+
+Your verification SMS must include the app hash returned by `getHashString()`. Generate the hash for the signing key used to distribute the app. Debug, release, and Play App Signing builds can have different hashes.
+
+## Listen For A Verification SMS
+
+```typescript
+import { AndroidSmsRetriever } from '@capgo/capacitor-android-sms-retriever';
+
+const received = await AndroidSmsRetriever.addListener('smsReceived', ({ message }) => {
+  const code = message.match(/\b\d{6}\b/)?.[0];
+  console.log('Verification code:', code);
+});
+
+const timeout = await AndroidSmsRetriever.addListener('smsRetrieverTimeout', () => {
+  console.log('SMS Retriever timed out');
+});
+
+const errors = await AndroidSmsRetriever.addListener('smsRetrieverError', ({ message }) => {
+  console.error('SMS Retriever error:', message);
+});
+
+await AndroidSmsRetriever.startWatch();
+
+// Remove listeners when the verification flow is done.
+await received.remove();
+await timeout.remove();
+await errors.remove();
+```
+
+## Stop Watching
+
+```typescript
+await AndroidSmsRetriever.stopWatch();
+```
+
+## Get The App Hash
+
+```typescript
+const { hash } = await AndroidSmsRetriever.getHashString();
+console.log(hash);
+```
+
+Use this hash at the end of the verification SMS sent by your backend.
+
+## Request A Phone Number Hint
+
+```typescript
+const { phoneNumber } = await AndroidSmsRetriever.getPhoneNumber();
+console.log(phoneNumber);
+```
+
+Android shows the native Phone Number Hint UI and returns the phone number selected by the user.
+
+## Example SMS
+
+```text
+<#> 123456 is your verification code.
+FA+9qCX9VSu
+```
+
+Replace the final line with the hash for your app signing key.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Using @capgo/capacitor-android-sms-retriever](/plugins/capacitor-android-sms-retriever/) for the native capability in Using @capgo/capacitor-android-sms-retriever, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

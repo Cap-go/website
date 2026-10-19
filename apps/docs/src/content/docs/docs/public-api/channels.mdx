@@ -1,0 +1,355 @@
+---
+title: "Channels"
+description: "Guide to managing app update channels in Capgo, covering bundle (version) control, platform targeting, and update policies."
+sidebar:
+  order: 6
+---
+
+Channels are the core mechanism for managing app updates in Capgo. They allow you to control how and when your users receive updates, enabling features like A/B testing, staged rollouts, and platform-specific updates.
+
+## Understanding Channels
+
+A channel represents a distribution track for your app updates. Each channel can be configured with specific rules and constraints:
+
+- **Bundle (version) Control**: Specify which bundle (version) users receive
+- **Platform Targeting**: Target specific platforms (iOS/Android/Electron)
+- **Update Policies**: Control how updates are delivered
+- **Device Restrictions**: Manage which devices can access updates
+
+## Channel Configuration Options
+
+- **public**: Set as default channel for new devices.
+- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the channel's stable bundle.
+- **disableAutoUpdate**: Control update behavior (`major`, `minor`, `metadata`, `patch`, or `none`).
+- **updatePackage**: Control whether devices download a zip, a delta, or both (`all`, `zip`, `delta`, `zip_from_builtin`, or `delta_from_builtin`). See [Download format](/docs/webapp/channels/#download-format).
+- **ios/android/electron**: Enable or disable delivery by platform.
+- **allow_device_self_set**: Let devices choose their channel.
+- **allow_emulator**, **allow_device**, **allow_dev**, **allow_prod**: Control which device and build types receive updates.
+- **Progressive rollout**: Keep a stable bundle while exposing a target bundle to a sticky cohort. See [Progressive rollouts](/docs/live-updates/progressive-rollouts/).
+
+## Best Practices
+
+1. **Testing Channel**: Maintain a testing channel for internal validation
+2. **Staged Rollout**: Use multiple channels for gradual update deployment
+3. **Platform Separation**: Create separate channels for iOS, Android, and Electron when needed
+4. **Bundle (version) Control**: Use [semantic versioning](/semver_tester/) for clear update paths
+
+## Endpoints
+
+### POST
+
+`https://api.capgo.app/channel/`
+
+Create or update a channel configuration.
+
+#### Request Body
+
+```typescript
+type DisableAutoUpdate = "major" | "minor" | "metadata" | "patch" | "none"
+type AutoPauseAction = "pause" | "rollback" | "notify"
+
+interface ChannelSet {
+  app_id: string
+  channel: string
+  version?: string | null // stable bundle name
+  public?: boolean
+  disableAutoUpdateUnderNative?: boolean
+  disableAutoUpdate?: DisableAutoUpdate
+  updatePackage?: "all" | "zip" | "delta" | "zip_from_builtin" | "delta_from_builtin"
+  ios?: boolean
+  android?: boolean
+  electron?: boolean
+  allow_device_self_set?: boolean
+  allow_emulator?: boolean
+  allow_device?: boolean
+  allow_dev?: boolean
+  allow_prod?: boolean
+
+  // Progressive rollout (camelCase is preferred)
+  rolloutVersion?: string | number | null // target bundle name or ID
+  rolloutPercentage?: number // 0–100
+  rolloutPercentageBps?: number // 0–10000; takes precedence when both are set
+  rolloutEnabled?: boolean
+  rolloutPaused?: boolean // input-only convenience flag
+  rolloutPausedAt?: string | null // ISO timestamp or null
+  rolloutPauseReason?: string | null
+  rolloutCacheTtlSeconds?: number // 60–31536000
+  rollback?: boolean
+  promoteToStable?: boolean
+
+  // Rollout auto-pause policy
+  autoPauseEnabled?: boolean
+  autoPauseWindowMinutes?: number
+  autoPauseFailureRateBps?: number | null
+  autoPauseConfidence?: number
+  autoPauseMinAttempts?: number | null
+  autoPauseMinFailures?: number | null
+  autoPauseAction?: AutoPauseAction
+  autoPauseCooldownMinutes?: number
+}
+```
+
+For rollout and auto-pause fields, the API also accepts the equivalent `snake_case` form, such as `rollout_version` or `auto_pause_enabled`. `updatePackage` also accepts `update_package`. If both forms are supplied, the camelCase value wins. `rollback` is camelCase only.
+
+A rollout target requires an existing channel. It must have a stable bundle already assigned or receive one through `version` in the same POST request. `rollback` and `promoteToStable` are terminal actions; do not combine them with one another.
+
+#### Example Request
+
+Configure a 5% rollout for an existing `production` channel whose stable bundle is already set:
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "com.example.app",
+    "channel": "production",
+    "rolloutVersion": "1.3.0",
+    "rolloutPercentage": 5,
+    "rolloutEnabled": true,
+    "rolloutCacheTtlSeconds": 2592000,
+    "autoPauseEnabled": true,
+    "autoPauseFailureRateBps": 500,
+    "autoPauseMinAttempts": 100,
+    "autoPauseAction": "pause"
+  }' \
+  https://api.capgo.app/channel/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+POST is an upsert and returns only its status. Make a GET request to read the resulting channel configuration.
+
+#### App Preview key boundary
+
+For a least-privilege PR preview, authenticate this endpoint with `authorization: $CAPGO_API_KEY` or `capgkey: $CAPGO_API_KEY`. The `x-api-key` header is not accepted by the Channels API.
+
+An `app_preview` key can create a new non-public preview channel. Creation automatically gives that key a channel-scoped lifecycle binding for that channel only. The role does not include `channel.update_settings`, so it cannot use POST to update an existing channel, including an existing default or main channel.
+
+Leave `public` unset (or set it to `false`) for PR preview channels. Use `bundle upload --channel` for the creation and upload flow instead of treating POST as a general preview-channel upsert.
+
+### GET
+
+`https://api.capgo.app/channel/`
+
+Retrieve channel information. Returns 50 channels per page. Without `channel`, the response is an array. With `channel`, the response is one channel object.
+
+#### Query Parameters
+- `app_id`: Required. The ID of your app
+- `page`: Optional. Page number for pagination
+- `channel`: Optional. Specific channel name to retrieve
+
+#### Example Requests
+
+```bash
+# Get all channels
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=com.example.app"
+
+# Get a specific channel
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=com.example.app&channel=production"
+
+# Get the next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=com.example.app&page=1"
+```
+
+#### Response Type
+
+```typescript
+interface Channel {
+  id: number
+  created_at: string
+  updated_at: string
+  name: string
+  app_id: string
+  created_by: string
+  public: boolean
+  disableAutoUpdateUnderNative: boolean
+  disableAutoUpdate: DisableAutoUpdate
+  updatePackage: "all" | "zip" | "delta" | "zip_from_builtin" | "delta_from_builtin"
+  allow_device_self_set: boolean
+  allow_emulator: boolean
+  allow_device: boolean
+  allow_dev: boolean
+  allow_prod: boolean
+  version: { id: number, name: string } | null // stable bundle
+
+  // These three response identifiers intentionally use snake_case.
+  rollout_version: number | null
+  rollout_id: string
+  rollout_version_info: { id: number, name: string } | null
+
+  rolloutPercentageBps: number
+  rolloutEnabled: boolean
+  rolloutPausedAt: string | null
+  rolloutPauseReason: string | null
+  rolloutCacheTtlSeconds: number
+  autoPauseEnabled: boolean
+  autoPauseWindowMinutes: number
+  autoPauseFailureRateBps: number | null
+  autoPauseConfidence: number
+  autoPauseMinAttempts: number | null
+  autoPauseMinFailures: number | null
+  autoPauseAction: AutoPauseAction
+  autoPauseCooldownMinutes: number
+  autoPauseLastTriggeredAt: string | null
+  autoPauseLastCheckedAt: string | null
+}
+```
+
+`rolloutPaused` is an input-only shortcut and is not returned. A paused rollout is represented by a non-null `rolloutPausedAt`.
+
+#### Example Response
+
+```json
+[
+  {
+    "id": 1,
+    "name": "production",
+    "app_id": "com.example.app",
+    "updatePackage": "all",
+    "version": { "id": 1, "name": "1.2.0" },
+    "rollout_version": 2,
+    "rollout_id": "e60c19c9-2e65-4e0d-bc06-d1f5b4f96276",
+    "rollout_version_info": { "id": 2, "name": "1.3.0" },
+    "rolloutPercentageBps": 500,
+    "rolloutEnabled": true,
+    "rolloutPausedAt": null,
+    "rolloutCacheTtlSeconds": 2592000,
+    "autoPauseEnabled": true,
+    "autoPauseFailureRateBps": 500,
+    "autoPauseAction": "pause"
+  }
+]
+```
+
+### DELETE
+
+`https://api.capgo.app/channel/`
+
+Delete a channel. Note that this will affect all devices using this channel.
+
+#### Request Body
+
+```typescript
+interface Channel {
+  channel: string
+  app_id: string
+  delete_bundle?: boolean // also delete the linked bundle
+}
+```
+
+#### Example Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "app_id": "com.example.app",
+    "channel": "beta"
+  }' \
+  https://api.capgo.app/channel/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+#### App Preview cleanup
+
+With `delete_bundle: true`, an `app_preview` key can atomically clean up only a channel it created and its linked, unshared bundle. The key does not receive general `bundle.delete` permission.
+
+```bash
+curl -X DELETE \
+  -H "capgkey: $CAPGO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "com.example.app",
+    "channel": "pr-123",
+    "delete_bundle": true
+  }' \
+  https://api.capgo.app/channel/
+```
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// Channel not found
+{
+  "error": "Channel not found",
+  "status": "KO"
+}
+
+// Invalid bundle (version) format
+{
+  "error": "Invalid version format. Use semantic versioning",
+  "status": "KO"
+}
+
+// Invalid update policy
+{
+  "error": "Invalid disableAutoUpdate value",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage channels",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Beta Testing**
+```typescript
+{
+  "app_id": "com.example.app",
+  "channel": "beta",
+  "version": "1.2.0-beta",
+  "public": false,
+  "allow_emulator": true,
+  "allow_dev": true
+}
+```
+
+2. **Production Rollout**
+```typescript
+{
+  "app_id": "com.example.app",
+  "channel": "production",
+  "version": "1.2.0",
+  "public": true,
+  "disableAutoUpdate": "minor"
+}
+```
+
+3. **Platform-Specific Updates**
+```typescript
+{
+  "app_id": "com.example.app",
+  "channel": "ios-hotfix",
+  "version": "1.2.1",
+  "ios": true,
+  "android": false
+}
+```
+
+## Keep going from Channels
+
+If you are using **Channels** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution, and [Capgo Environment Best Practices: Staging with One Mobile App ID](/blog/staging-environments-with-capgo-channels/) for the practical context in Capgo Environment Best Practices: Staging with One Mobile App ID.

@@ -1,0 +1,56 @@
+---
+title: "@capgo/capacitor-nativegeocoder"
+description: "Capacitor plugin for native forward and reverse geocoding."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Forward and reverse geocode with native iOS and Android APIs, plus Google Geocoding on web."
+  actions:
+    - text: Get started
+      link: /docs/plugins/nativegeocoder/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-nativegeocoder/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Convert GPS coordinates into postal addresses for display, or turn user typed addresses into map pins. Cap results with `maxResults`, honor locale preferences on native platforms, and supply a Google API key for web forward and reverse lookups.
+
+Typical fits: delivery apps, store locators, check in flows, and autocomplete backends that need structured address components.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Core Location geocoder |
+| Android | Yes | Android `Geocoder` |
+| Web | Yes | Google Geocoding API with `apiKey` |
+
+## Core Capabilities
+
+- `reverseGeocode` - Convert latitude and longitude to an address.
+- `forwardGeocode` - Convert an address to latitude and longitude.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `reverseGeocode` | Convert latitude and longitude to an address. |
+| `forwardGeocode` | Convert an address to latitude and longitude. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder/).
+
+## Keep going from @capgo/capacitor-nativegeocoder
+
+If you are using **@capgo/capacitor-nativegeocoder** to plan native plugin work, connect it with [Using @capgo/capacitor-nativegeocoder](/plugins/capacitor-nativegeocoder/) for the native capability in Using @capgo/capacitor-nativegeocoder, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

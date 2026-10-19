@@ -1,0 +1,363 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-remote-config and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-firebase-remote-config` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-firebase-remote-config
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+```
+
+## Quick start
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.activate();
+```
+
+## Example: fetchAndActivate
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.fetchAndActivate();
+```
+
+## Example: fetchConfig
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.fetchConfig();
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `activate`
+
+Make the last fetched configuration available to the getters.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.activate();
+```
+
+### `fetchAndActivate`
+
+Perform fetch and activate operations.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.fetchAndActivate();
+```
+
+### `fetchConfig`
+
+Fetch and cache configuration from the Remote Config service.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.fetchConfig();
+```
+
+### `getBoolean`
+
+Get the value for the given key as a boolean.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+const result = await FirebaseRemoteConfig.getBoolean({ key: 'key-123' });
+console.log(result);
+```
+
+### `getNumber`
+
+Get the value for the given key as a number.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+const result = await FirebaseRemoteConfig.getNumber({ key: 'key-123' });
+console.log(result);
+```
+
+### `getString`
+
+Get the value for the given key as a string.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+const result = await FirebaseRemoteConfig.getString({ key: 'key-123' });
+console.log(result);
+```
+
+### `getInfo`
+
+Get information about the last fetch operation.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+const result = await FirebaseRemoteConfig.getInfo();
+console.log(result);
+```
+
+### `setMinimumFetchInterval`
+
+Set the minimum fetch interval.
+
+Only available for Web.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.setMinimumFetchInterval({ minimumFetchIntervalInSeconds: 43200 });
+```
+
+### `setSettings`
+
+Set the remote config settings.
+
+On Android, the settings values are persisted in SharedPreferences.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.setSettings({
+  fetchTimeoutInSeconds: 60,
+  minimumFetchIntervalInSeconds: 43200,
+});
+```
+
+### `addConfigUpdateListener`
+
+Add a listener for the config update event.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+const result = await FirebaseRemoteConfig.addConfigUpdateListener((event, error) => {
+  console.log(event);
+});
+console.log(result);
+```
+
+### `removeConfigUpdateListener`
+
+Remove a listener for the config update event.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseRemoteConfig } from '@capgo/capacitor-firebase-remote-config';
+
+await FirebaseRemoteConfig.removeConfigUpdateListener({ id: 'id-123' });
+```
+
+## Type Reference
+
+### `FetchConfigOptions`
+```typescript
+export interface FetchConfigOptions {
+  /**
+   * Define the maximum age in seconds of an entry in the config cache before it is considered stale.
+   * During development, it's recommended to set a relatively low minimum fetch interval.
+   *
+   * Only available for Android and iOS.
+   *
+   * @since 1.3.0
+   * @default 43200
+   * @see https://firebase.google.com/docs/reference/js/firebase.remoteconfig.RemoteConfigSettings#minimumfetchintervalmillis
+   */
+  minimumFetchIntervalInSeconds?: number;
+}
+```
+
+### `GetBooleanOptions`
+```typescript
+export type GetBooleanOptions = GetOptions;
+```
+
+### `GetBooleanResult`
+```typescript
+export interface GetBooleanResult {
+  /**
+   * The value for the given key as a boolean.
+   *
+   * @since 1.3.0
+   */
+  value: boolean;
+  /**
+   * Indicates at which source this value came from.
+   *
+   * Only available for Android and iOS.
+   *
+   * @since 1.3.0
+   */
+  source?: GetValueSource;
+}
+```
+
+### `GetNumberOptions`
+```typescript
+export type GetNumberOptions = GetOptions;
+```
+
+### `GetNumberResult`
+```typescript
+export interface GetNumberResult {
+  /**
+   * The value for the given key as a number.
+   *
+   * @since 1.3.0
+   */
+  value: number;
+  /**
+   * Indicates at which source this value came from.
+   *
+   * Only available for Android and iOS.
+   *
+   * @since 1.3.0
+   */
+  source?: GetValueSource;
+}
+```
+
+### `GetStringOptions`
+```typescript
+export type GetStringOptions = GetOptions;
+```
+
+### `GetStringResult`
+```typescript
+export interface GetStringResult {
+  /**
+   * The value for the given key as a string.
+   *
+   * @since 1.3.0
+   */
+  value: string;
+  /**
+   * Indicates at which source this value came from.
+   *
+   * Only available for Android and iOS.
+   *
+   * @since 1.3.0
+   */
+  source?: GetValueSource;
+}
+```
+
+### `GetInfoResult`
+```typescript
+export interface GetInfoResult {
+  /**
+   * The Unix timestamp in milliseconds of the last successful fetch, or -1 if no fetch has occurred or initialization is incomplete.
+   * @since 7.5.0
+   * @example 1762864760
+   */
+  lastFetchTime: number;
+  /**
+   * The status of the last fetch attempt.
+   * @since 7.5.0
+   * @example 1
+   */
+  lastFetchStatus: LastFetchStatus;
+}
+```
+
+### `SetMinimumFetchIntervalOptions`
+```typescript
+export interface SetMinimumFetchIntervalOptions {
+  /**
+   * Define the maximum age in seconds of an entry in the config cache before it is considered stale.
+   * During development, it's recommended to set a relatively low minimum fetch interval.
+   *
+   * @since 1.3.0
+   * @default 43200
+   * @see https://firebase.google.com/docs/reference/js/remote-config.remoteconfigsettings#remoteconfigsettingsminimumfetchintervalmillis
+   */
+  minimumFetchIntervalInSeconds: number;
+}
+```
+
+### `SetSettingsOptions`
+```typescript
+export interface SetSettingsOptions {
+  /**
+   * Defines the maximum amount of milliseconds to wait for a response when fetching configuration from the Remote Config server.
+   *
+   * @since 6.2.0
+   * @default 60
+   * @see https://firebase.google.com/docs/reference/js/remote-config.remoteconfigsettings#remoteconfigsettingsfetchtimeoutmillis
+   */
+  fetchTimeoutInSeconds?: number;
+  /**
+   * Define the maximum age in seconds of an entry in the config cache before it is considered stale.
+   * During development, it's recommended to set a relatively low minimum fetch interval.
+   *
+   * @since 6.2.0
+   * @default 43200
+   * @see https://firebase.google.com/docs/reference/js/remote-config.remoteconfigsettings#remoteconfigsettingsminimumfetchintervalmillis
+   */
+  minimumFetchIntervalInSeconds?: number;
+}
+```
+
+### `AddConfigUpdateListenerOptionsCallback`
+```typescript
+export type AddConfigUpdateListenerOptionsCallback = (
+  event: AddConfigUpdateListenerOptionsCallbackEvent | null,
+  error: any,
+) => void;
+```
+
+### `CallbackId`
+```typescript
+export type CallbackId = string;
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

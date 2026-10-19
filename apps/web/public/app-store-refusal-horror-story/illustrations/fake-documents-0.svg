@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Document with seal">
+  <title>Document with seal</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="264" cy="156" r="20" fill="#44BCFF" opacity="0.22"/>
+      <path d="M96 48 H200 L224 72 V152 H96 Z" fill="#111827" stroke="#374151" stroke-width="2"/>
+      <circle cx="184" cy="120" r="20" fill="none" stroke="#44BCFF" stroke-width="2"/>
+      <path d="M176 120 L182 126 L192 112" fill="none" stroke="#44BCFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+</svg>

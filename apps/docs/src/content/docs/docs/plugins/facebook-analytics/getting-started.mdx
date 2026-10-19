@@ -1,0 +1,129 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-facebook-analytics and log Meta/Facebook App Events from Capacitor."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-facebook-analytics` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-facebook-analytics
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import {
+  FacebookAnalytics,
+  FacebookEventName,
+  FacebookEventParameterName,
+} from '@capgo/capacitor-facebook-analytics';
+```
+
+## Native Setup
+
+Configure your Meta app id and client token in the native app. The plugin does not create these values for you.
+
+### iOS
+
+Add your Meta values to `Info.plist`:
+
+```xml
+<key>FacebookAppID</key>
+<string>YOUR_FACEBOOK_APP_ID</string>
+<key>FacebookClientToken</key>
+<string>YOUR_FACEBOOK_CLIENT_TOKEN</string>
+<key>FacebookDisplayName</key>
+<string>YOUR_APP_NAME</string>
+```
+
+### Android
+
+Add your Meta values to `AndroidManifest.xml`:
+
+```xml
+<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+<meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token" />
+```
+
+Add the string resources in `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+<string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+```
+
+## Enable Advertiser Tracking
+
+Call this after your consent flow allows tracking.
+
+```typescript
+await FacebookAnalytics.enableAdvertiserTracking();
+```
+
+On iOS 17 and above, FBSDK v17+ reads App Tracking Transparency directly. Use your app's ATT flow before logging tracking-dependent events.
+
+## Log A Standard Event
+
+```typescript
+await FacebookAnalytics.logEvent({
+  event: FacebookEventName.CompletedRegistration,
+  params: {
+    [FacebookEventParameterName.RegistrationMethod]: 'email',
+  },
+});
+```
+
+## Log A Value Event With Currency
+
+```typescript
+await FacebookAnalytics.logEvent({
+  event: FacebookEventName.AddedToCart,
+  valueToSum: 19.99,
+  currency: 'USD',
+  params: {
+    [FacebookEventParameterName.ContentType]: 'product',
+    [FacebookEventParameterName.ContentId]: 'sku-123',
+  },
+});
+```
+
+## Log A Purchase
+
+```typescript
+await FacebookAnalytics.logPurchase({
+  amount: 9.99,
+  currency: 'USD',
+});
+```
+
+## Read Tracking Status
+
+```typescript
+const { status } = await FacebookAnalytics.getAdvertiserTrackingStatus();
+console.log('Advertiser tracking enabled:', status);
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Using @capgo/capacitor-facebook-analytics](/plugins/capacitor-facebook-analytics/) for the native capability in Using @capgo/capacitor-facebook-analytics, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

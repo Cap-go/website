@@ -1,0 +1,52 @@
+---
+import m from '@/copy/messages'
+import type { EditorialTeamMember } from '@/config/blogEditorialTeam'
+
+interface Props {
+  members: EditorialTeamMember[]
+  class?: string
+}
+
+const { members, class: className } = Astro.props
+const locale = Astro.locals.locale
+
+const roleLabel = (role: EditorialTeamMember['role']) => {
+  if (role === 'writer') return m.blog_role_writer({}, { locale })
+  if (role === 'reviewer') return m.blog_role_reviewer({}, { locale })
+  return m.blog_role_editor({}, { locale })
+}
+---
+
+<div class:list={['flex flex-col gap-y-4', className]}>
+  <p class="text-sm text-gray-400">{m.article_credits({}, { locale })}</p>
+  {
+    members.map((member) => {
+      const content = (
+        <>
+          <img
+            width="36"
+            height="36"
+            loading="lazy"
+            decoding="async"
+            alt=""
+            aria-hidden="true"
+            src={member.imageUrl}
+            class="blur-0 rounded-full transition-all group-hover:brightness-90"
+          />
+          <div class="flex min-w-0 flex-col">
+            <p class="text-sm font-medium whitespace-nowrap text-gray-400">{member.name}</p>
+            <p class="text-sm text-gray-400">{roleLabel(member.role)}</p>
+          </div>
+        </>
+      )
+
+      return member.profileUrl ? (
+        <a class="group flex items-center space-x-3" href={member.profileUrl}>
+          {content}
+        </a>
+      ) : (
+        <div class="group flex items-center space-x-3">{content}</div>
+      )
+    })
+  }
+</div>

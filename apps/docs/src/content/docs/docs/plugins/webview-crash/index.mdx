@@ -1,0 +1,87 @@
+---
+title: "@capgo/capacitor-webview-crash"
+description: "Detect recovered WebView crashes, restart dead WebViews natively, recycle long-running WebViews on a fixed interval, and let JavaScript request a native WebView replacement before memory pressure turns into an OOM."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Restart crashed WebViews natively and recycle long-running WebViews on a fixed interval"
+  actions:
+    - text: Get started
+      link: /docs/plugins/webview-crash/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-webview-crash/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Restart crashed WebViews natively and recycle long-running WebViews on a fixed interval
+
+Start with `getPendingCrashInfo()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | Partial | See getting started |
+
+## Core Capabilities
+
+- Native crash restart - Restarts the WebView from iOS or Android when the renderer process dies.
+- Scheduled restart - Recycles long-running WebViews on a native timer using `restartIntervalMs` or a wall-clock `restartCron`.
+- Manual native restart - Lets JavaScript request a fresh native WebView with `restartWebView()` without doing a page reload.
+- Typed Capacitor config - Exposes `WebViewCrashPluginConfig` for `plugins.WebViewCrash` in `capacitor.config.ts`.
+- `getPendingCrashInfo` - Returns the stored native crash or restart marker, or `null` when nothing is pending.
+- `clearPendingCrashInfo` - Clears the stored marker after your app has restored its state.
+- `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
+- `addListener` - Fires `webViewRestoredAfterCrash` for crash markers and `webViewRestoredAfterRestart` for any native restart marker.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getPendingCrashInfo` | Returns the stored native crash or restart marker, or `null` when nothing is pending. |
+| `clearPendingCrashInfo` | Clears the stored marker after your app has restored its state. |
+| `simulateCrashRecovery` | Creates a fake crash marker so recovery flows can be tested locally. |
+| `restartWebView` | Writes `reason: 'manualRestart'` and asks native code to create a fresh WebView. |
+| `addListener` | Fires `webViewRestoredAfterCrash` or `webViewRestoredAfterRestart` when a listener attaches and a matching marker is still pending. |
+| `removeAllListeners` | Removes all plugin listeners. |
+
+## Config Type
+
+The plugin augments Capacitor's `PluginsConfig` with a typed `WebViewCrash` config entry:
+
+```typescript
+export interface WebViewCrashPluginConfig {
+  restartOnCrash?: boolean;
+  restartIntervalMs?: number;
+  restartCron?: string;
+  restartAfterCrashDelayMs?: number;
+}
+```
+
+## Notes
+
+- This plugin detects recovery after a WebView crash. It does not prevent the underlying crash.
+- The recovered JavaScript runtime is new, so any in-memory state from the previous WebView is already gone when this API fires.
+- Scheduled restarts write `reason: 'periodicRestart'`; manual restarts write `reason: 'manualRestart'`. Persist unsaved state before enabling short restart intervals, cron schedules, or calling `restartWebView()`.
+- `restartCron` uses 5-field cron syntax in the device local timezone, for example `0 3 * * *` for a daily 03:00 restart. Do not configure both schedules at once: native initialization throws a fatal config error when `restartCron` is set and `restartIntervalMs` is greater than `0`.
+- On Android, extra fields such as `didCrash` and `rendererPriorityAtExit` may be available.
+- On iOS, the plugin records `appState` when the terminated WebView process is observed. Manual and scheduled restarts rebuild the Capacitor bridge view so a new `WKWebView` is created.
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-webview-crash](https://github.com/Cap-go/capacitor-webview-crash/).
+
+## Keep going from @capgo/capacitor-webview-crash
+
+If you are using **@capgo/capacitor-webview-crash** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-webview-crash](/plugins/capacitor-webview-crash/) for the native capability in Using @capgo/capacitor-webview-crash, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

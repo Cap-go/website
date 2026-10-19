@@ -1,0 +1,114 @@
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"
+  Link: </openapi.json>; rel="service-desc"; type="application/openapi+json"
+  Link: </.well-known/capgo-public-api-openapi.json>; rel="service-desc"; type="application/openapi+json"
+  Link: </.well-known/capgo-tools-openapi.json>; rel="service-desc"; type="application/openapi+json"
+  Link: </docs/public-api/>; rel="service-doc"; type="text/html"
+  Link: </tools/>; rel="service-doc"; type="text/html"
+  Link: </.well-known/mcp.json>; rel="describedby"; type="application/json"
+  Link: </llms.txt>; rel="describedby"; type="text/plain"
+
+/assets/*
+  cache-control: max-age=31536000
+  cache-control: immutable
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+  Link: <https://api.capgo.app/>; rel="item"
+  Link: <https://capgo.app/api/tools/>; rel="item"
+
+/.well-known/capgo-public-api-openapi.json
+  Content-Type: application/openapi+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
+/.well-known/capgo-tools-openapi.json
+  Content-Type: application/openapi+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
+/.well-known/mcp-registry-auth
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/.well-known/openai-apps-challenge
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/.well-known/tool-api-status.json
+  Content-Type: application/health+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
+/.well-known/agent-skills/index.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
+/.well-known/agent-skills/*/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+
+/.well-known/mcp/server-card.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Allow-Headers: Content-Type
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
+/plugins.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+  Link: </plugins.json>; rel="alternate"; type="application/json"
+
+/pricing.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+  Link: </pricing/>; rel="alternate"; type="text/html"
+
+/pricing/
+  Link: </pricing.md>; rel="alternate"; type="text/markdown"
+
+/plugins/
+  Link: </plugins.md>; rel="alternate"; type="text/markdown"
+
+/plugins.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+  Link: </plugins.md>; rel="alternate"; type="text/markdown"
+
+/sitemap.xml
+  Content-Type: text/xml
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin
+  Content-Security-Policy: default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()
+  Link: </docs/public-api/>; rel="service-doc"; type="text/html"

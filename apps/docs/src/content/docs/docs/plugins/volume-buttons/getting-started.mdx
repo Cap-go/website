@@ -1,0 +1,144 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-volume-buttons and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-volume-buttons` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-volume-buttons
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+```
+
+## Quick start
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+const listener = await VolumeButtons.addListener(
+  'volumeButtonPressed',
+  (event) => {
+    console.log(`Volume ${event.direction} button pressed`);
+  }
+);
+
+// Remove listener when done
+await listener.remove();
+```
+
+## Example: removeAllListeners
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+await VolumeButtons.removeAllListeners();
+```
+
+## Example: getPluginVersion
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+const { version } = await VolumeButtons.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `addListener`
+
+Listen for presses on the hardware volume buttons.
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+const listener = await VolumeButtons.addListener(
+  'volumeButtonPressed',
+  (event) => {
+    console.log(`Volume ${event.direction} button pressed`);
+  }
+);
+
+// Remove listener when done
+await listener.remove();
+```
+
+### `removeAllListeners`
+
+Removes all listeners for this plugin.
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+await VolumeButtons.removeAllListeners();
+```
+
+### `getPluginVersion`
+
+Get the native Capacitor plugin version.
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+const { version } = await VolumeButtons.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Type Reference
+
+### `VolumeButtonListener`
+Listener function for volume button events.
+```typescript
+export type VolumeButtonListener = (event: VolumeButtonPressed) => void;
+```
+
+### `VolumeButtonPressed`
+Event data for volume button press.
+```typescript
+export interface VolumeButtonPressed {
+  /** Direction of the button press */
+  direction: VolumeButtonDirection;
+}
+```
+
+### `VolumeButtonDirection`
+Direction of volume button press.
+```typescript
+export type VolumeButtonDirection = 'up' | 'down';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-volume-buttons](/plugins/capacitor-volume-buttons/) for the native capability in Using @capgo/capacitor-volume-buttons, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

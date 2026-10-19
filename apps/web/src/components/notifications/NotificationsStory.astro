@@ -1,0 +1,1434 @@
+---
+/**
+ * Decorative, looping CSS-only story of what Capgo Notifications can do:
+ * compose an alert for an external ID, deliver it to iOS + Android, track the
+ * open and badge, then send a silent update check that downloads a new bundle.
+ * The whole illustration is aria-hidden; the parent provides the sr-only text.
+ * Without motion (prefers-reduced-motion) the base styles show a final state.
+ */
+const bell =
+  'M10 2.5a4.5 4.5 0 0 0-4.5 4.5v2.4c0 .6-.2 1.2-.6 1.7L3.7 12.6c-.5.6-.1 1.4.7 1.4h11.2c.8 0 1.2-.8.7-1.4l-1.2-1.5c-.4-.5-.6-1.1-.6-1.7V7A4.5 4.5 0 0 0 10 2.5ZM8 15.5a2 2 0 0 0 4 0'
+---
+
+<div class="ns" aria-hidden="true">
+  <div class="ns-inner">
+    <!-- Console card -->
+    <div class="ns-card">
+      <div class="ns-card-head">
+        <span class="ns-card-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d={bell}></path></svg>
+        </span>
+        <span class="ns-card-title">Send notification</span>
+        <span class="ns-card-app">com.demo.app</span>
+      </div>
+
+      <div class="ns-seg">
+        <span class="ns-seg-ind"></span>
+        <span>Alert</span>
+        <span>Badge</span>
+        <span>Update check</span>
+      </div>
+
+      <div class="ns-stack ns-body">
+        <div class="ns-variant ns-va">
+          <div class="ns-field ns-f-title">
+            <span class="ns-lbl">Title</span>
+            <span class="ns-val"><span class="ns-type">Your order has shipped</span></span>
+          </div>
+          <div class="ns-field ns-f-msg">
+            <span class="ns-lbl">Message</span>
+            <span class="ns-val ns-msg">Tap to track the delivery.</span>
+          </div>
+          <div class="ns-field ns-f-target">
+            <span class="ns-lbl">Recipient</span>
+            <span class="ns-chips">
+              <span class="ns-chip ns-chip-id"><b>External ID</b> user_8421</span>
+              <span class="ns-chip ns-chip-dev">iOS + Android · 2 devices</span>
+            </span>
+          </div>
+        </div>
+        <div class="ns-variant ns-vb">
+          <div class="ns-silent">
+            <span class="ns-silent-dot"></span>
+            Silent background push
+          </div>
+          <div class="ns-row2">
+            <div class="ns-field">
+              <span class="ns-lbl">Channel</span>
+              <span class="ns-val">production</span>
+            </div>
+            <div class="ns-field">
+              <span class="ns-lbl">Install mode</span>
+              <span class="ns-val">Next launch</span>
+            </div>
+          </div>
+          <div class="ns-field">
+            <span class="ns-lbl">Audience</span>
+            <span class="ns-chips">
+              <span class="ns-chip">Channel production</span>
+              <span class="ns-chip">iOS + Android</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ns-send">
+        <span class="ns-stack ns-send-labels">
+          <span class="ns-l ns-l1">Send notification</span>
+          <span class="ns-l ns-l2"><i class="ns-spin"></i>Sending…</span>
+          <span class="ns-l ns-l3">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"></path></svg>
+            Delivered
+          </span>
+          <span class="ns-l ns-l4">Send update check</span>
+          <span class="ns-l ns-l5">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"></path></svg>
+            Update check sent
+          </span>
+        </span>
+        <span class="ns-cursor">
+          <svg viewBox="0 0 20 20"><path d="M4 2.5v13.2l3.4-3.2 2.3 5 2.2-1-2.3-4.9h4.7L4 2.5Z" fill="#0f172a" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"></path></svg
+          >
+        </span>
+      </div>
+
+      <div class="ns-stack ns-stats">
+        <div class="ns-stat-row ns-sa">
+          <div class="ns-stat"><span class="ns-k">Delivered</span><span class="ns-v"><span class="ns-cnt ns-c-deliv"></span>/2</span></div>
+          <div class="ns-stat"><span class="ns-k">Opened</span><span class="ns-v"><span class="ns-cnt ns-c-open"></span></span></div>
+          <div class="ns-stat"><span class="ns-k">Badge</span><span class="ns-v"><span class="ns-cnt ns-c-badge"></span></span></div>
+        </div>
+        <div class="ns-stat-row ns-sb">
+          <div class="ns-stat"><span class="ns-k">Checks</span><span class="ns-v"><span class="ns-cnt ns-c-check"></span></span></div>
+          <div class="ns-stat"><span class="ns-k">Downloaded</span><span class="ns-v"><span class="ns-cnt ns-c-dl"></span></span></div>
+          <div class="ns-stat"><span class="ns-k">Bundle</span><span class="ns-v">1.4.1</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery path -->
+    <div class="ns-wire">
+      <span class="ns-wire-label">APNs · FCM</span>
+      <span class="ns-wire-line"><i class="ns-packet"></i></span>
+    </div>
+
+    <!-- Devices -->
+    <div class="ns-devices">
+      <div class="ns-device">
+        <div class="ns-phone ns-ios">
+          <div class="ns-screen">
+            <span class="ns-island"></span>
+            <span class="ns-ping"></span>
+            <p class="ns-ios-date">Tuesday, June 10</p>
+            <p class="ns-ios-time">9:41</p>
+            <div class="ns-banner ns-ios-banner">
+              <span class="ns-app-icon"
+                ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={bell}></path></svg></span
+              >
+              <span class="ns-banner-text">
+                <span class="ns-banner-meta"><b>Demo App</b><span>now</span></span>
+                <span class="ns-banner-title">Your order has shipped</span>
+                <span class="ns-banner-body">Tap to track the delivery.</span>
+              </span>
+              <span class="ns-tap"></span>
+            </div>
+            <span class="ns-ios-bottom"><i></i><i></i></span>
+            <span class="ns-home-ind"></span>
+          </div>
+        </div>
+        <div class="ns-tag">
+          <span class="ns-tag-os">iOS</span>
+          <span class="ns-stack ns-tag-state">
+            <span class="ns-t ns-t-old">bundle 1.4.0</span>
+            <span class="ns-t ns-t-prog"><span class="ns-bar"><i></i></span>downloading</span>
+            <span class="ns-t ns-t-new">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"></path></svg>
+              1.4.1 downloaded
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="ns-device">
+        <div class="ns-phone ns-android">
+          <div class="ns-screen">
+            <span class="ns-punch"></span>
+            <span class="ns-ping"></span>
+            <div class="ns-and-status"><span>9:41</span><span class="ns-and-icons"><i></i><i></i><i></i></span></div>
+            <p class="ns-and-clock">9:41</p>
+            <p class="ns-and-date">Tue, Jun 10</p>
+            <div class="ns-grid">
+              <i></i><i></i><i></i><i></i>
+              <i></i><i></i>
+              <span class="ns-grid-app">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={bell}></path></svg>
+                <span class="ns-badge ns-stack"><span class="ns-b2">2</span><span class="ns-b3">3</span></span>
+              </span>
+              <i></i>
+            </div>
+            <div class="ns-banner ns-and-banner">
+              <span class="ns-app-icon ns-app-icon-sm"
+                ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={bell}></path></svg></span
+              >
+              <span class="ns-banner-text">
+                <span class="ns-banner-meta"><b>Demo App</b><span>· now</span></span>
+                <span class="ns-banner-title">Your order has shipped</span>
+                <span class="ns-banner-body">Tap to track the delivery.</span>
+              </span>
+            </div>
+            <span class="ns-nav-pill"></span>
+          </div>
+        </div>
+        <div class="ns-tag">
+          <span class="ns-tag-os">Android</span>
+          <span class="ns-stack ns-tag-state">
+            <span class="ns-t ns-t-old">bundle 1.4.0</span>
+            <span class="ns-t ns-t-prog"><span class="ns-bar"><i></i></span>downloading</span>
+            <span class="ns-t ns-t-new">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"></path></svg>
+              1.4.1 downloaded
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @property --n {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+  }
+
+  .ns {
+    --dur: 18s;
+    --blue: #60a5fa;
+    --blue-strong: #2563eb;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    container-type: inline-size;
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    border: 1px solid rgb(255 255 255 / 0.09);
+    border-radius: 22px;
+    overflow: hidden;
+    background:
+      radial-gradient(60% 70% at 70% 45%, rgb(96 165 250 / 0.12), transparent 70%),
+      radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.05) 1px, transparent 0) 0 0 / 22px 22px,
+      linear-gradient(180deg, #0d1628 0%, #0a111f 100%);
+    box-shadow: 0 30px 80px rgb(0 0 0 / 0.35);
+    text-align: left;
+  }
+
+  .ns-inner {
+    display: grid;
+    grid-template-columns: 24em 6em auto;
+    align-items: center;
+    justify-content: center;
+    padding: 3em 2.5em;
+    font-size: clamp(9px, 1.5cqw, 15px);
+    line-height: 1.3;
+    color: var(--ink);
+    animation: ns-fade var(--dur) infinite;
+  }
+
+  .ns-stack {
+    display: grid;
+  }
+  .ns-stack > * {
+    grid-area: 1 / 1;
+  }
+
+  /* ---------- Console card ---------- */
+  .ns-card {
+    position: relative;
+    background: #fff;
+    border-radius: 1.1em;
+    padding: 1.2em;
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.6),
+      0 1.6em 3em rgb(0 0 0 / 0.35);
+  }
+  .ns-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding-bottom: 0.9em;
+    border-bottom: 1px solid var(--line);
+  }
+  .ns-card-icon {
+    display: grid;
+    place-items: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.55em;
+    background: #eff6ff;
+    color: var(--blue-strong);
+  }
+  .ns-card-icon svg {
+    width: 1.1em;
+    height: 1.1em;
+  }
+  .ns-card-title {
+    font-weight: 700;
+    font-size: 1.05em;
+  }
+  .ns-card-app {
+    margin-left: auto;
+    font-family: var(--lu-font-mono, ui-monospace, monospace);
+    font-size: 0.72em;
+    color: var(--muted);
+  }
+
+  .ns-seg {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 0.9em;
+    padding: 0.2em;
+    border-radius: 0.6em;
+    background: #f1f5f9;
+    font-size: 0.78em;
+    font-weight: 600;
+    color: var(--muted);
+    text-align: center;
+  }
+  .ns-seg > span:not(.ns-seg-ind) {
+    position: relative;
+    padding: 0.45em 0;
+  }
+  .ns-seg-ind {
+    position: absolute;
+    top: 0.2em;
+    bottom: 0.2em;
+    left: 0.2em;
+    width: calc((100% - 0.4em) / 3);
+    border-radius: 0.45em;
+    background: #fff;
+    box-shadow: 0 1px 3px rgb(15 23 42 / 0.12);
+    animation: ns-seg var(--dur) infinite;
+  }
+
+  .ns-body {
+    margin-top: 0.9em;
+  }
+  .ns-variant {
+    display: grid;
+    gap: 0.6em;
+    align-content: start;
+  }
+  .ns-va {
+    animation: ns-va var(--dur) infinite;
+  }
+  .ns-vb {
+    opacity: 0;
+    visibility: hidden;
+    animation: ns-vb var(--dur) infinite;
+  }
+  .ns-field {
+    display: grid;
+    gap: 0.25em;
+    min-width: 0;
+  }
+  .ns-row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6em;
+  }
+  .ns-lbl {
+    font-size: 0.7em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ns-val {
+    display: block;
+    padding: 0.5em 0.65em;
+    border: 1px solid var(--line);
+    border-radius: 0.5em;
+    font-size: 0.88em;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .ns-f-title .ns-val {
+    animation: ns-focus var(--dur) infinite;
+  }
+  .ns-type {
+    display: inline-block;
+    animation: ns-type var(--dur) infinite;
+  }
+  .ns-msg {
+    animation: ns-msg var(--dur) infinite;
+  }
+  .ns-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+  }
+  .ns-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    padding: 0.3em 0.6em;
+    border-radius: 999px;
+    background: #f1f5f9;
+    font-size: 0.78em;
+    color: #334155;
+    white-space: nowrap;
+  }
+  .ns-chip b {
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .ns-chip-id {
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-family: var(--lu-font-mono, ui-monospace, monospace);
+  }
+  .ns-chip-id b {
+    font-family: var(--lu-font-display, sans-serif);
+  }
+  .ns-f-target .ns-chip {
+    animation: ns-chip var(--dur) infinite;
+  }
+  .ns-silent {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em 0.65em;
+    border-radius: 0.5em;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    font-size: 0.82em;
+    color: #334155;
+  }
+  .ns-silent-dot {
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 0 0.25em rgb(96 165 250 / 0.2);
+  }
+
+  /* Send button */
+  .ns-send {
+    position: relative;
+    display: grid;
+    margin-top: 1em;
+    border-radius: 0.6em;
+    background: var(--blue-strong);
+    color: #fff;
+    font-size: 0.9em;
+    font-weight: 600;
+    animation: ns-press var(--dur) infinite;
+  }
+  .ns-send-labels {
+    justify-items: center;
+    padding: 0.75em 0;
+  }
+  .ns-l {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    opacity: 0;
+  }
+  .ns-l svg {
+    width: 1em;
+    height: 1em;
+  }
+  .ns-l1 {
+    animation: ns-l1 var(--dur) infinite;
+  }
+  .ns-l2 {
+    animation: ns-l2 var(--dur) infinite;
+  }
+  .ns-l3 {
+    opacity: 1;
+    animation: ns-l3 var(--dur) infinite;
+  }
+  .ns-l4 {
+    animation: ns-l4 var(--dur) infinite;
+  }
+  .ns-l5 {
+    animation: ns-l5 var(--dur) infinite;
+  }
+  .ns-spin {
+    width: 0.9em;
+    height: 0.9em;
+    border-radius: 50%;
+    border: 2px solid rgb(255 255 255 / 0.35);
+    border-top-color: #fff;
+    animation: ns-rot 0.8s linear infinite;
+  }
+  .ns-cursor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    opacity: 0;
+    pointer-events: none;
+    animation: ns-cursor var(--dur) infinite;
+  }
+  .ns-cursor svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.25));
+  }
+
+  /* Stats */
+  .ns-stats {
+    margin-top: 1em;
+    padding-top: 0.9em;
+    border-top: 1px solid var(--line);
+  }
+  .ns-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+  }
+  .ns-sa {
+    animation: ns-va var(--dur) infinite;
+  }
+  .ns-sb {
+    opacity: 0;
+    visibility: hidden;
+    animation: ns-vb var(--dur) infinite;
+  }
+  .ns-stat {
+    display: grid;
+    gap: 0.15em;
+  }
+  .ns-k {
+    font-size: 0.68em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ns-v {
+    font-size: 1.35em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .ns-cnt {
+    counter-reset: n var(--n);
+  }
+  .ns-cnt::after {
+    content: counter(n);
+  }
+  .ns-c-deliv {
+    --n: 2;
+    animation: ns-c-deliv var(--dur) infinite;
+  }
+  .ns-c-open {
+    --n: 1;
+    animation: ns-c-open var(--dur) infinite;
+  }
+  .ns-c-badge {
+    --n: 3;
+    animation: ns-c-badge var(--dur) infinite;
+  }
+  .ns-c-check {
+    --n: 842;
+    animation: ns-c-check var(--dur) infinite;
+  }
+  .ns-c-dl {
+    --n: 816;
+    animation: ns-c-dl var(--dur) infinite;
+  }
+
+  /* ---------- Wire ---------- */
+  .ns-wire {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.5em;
+    padding: 0 0.6em;
+  }
+  .ns-wire-label {
+    font-family: var(--lu-font-mono, ui-monospace, monospace);
+    font-size: 0.68em;
+    letter-spacing: 0.04em;
+    color: rgb(255 255 255 / 0.45);
+    white-space: nowrap;
+  }
+  .ns-wire-line {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, rgb(96 165 250 / 0.45) 0 4px, transparent 4px 8px);
+  }
+  .ns-packet {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.55em;
+    height: 0.55em;
+    margin-top: -0.275em;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 0 0.25em rgb(96 165 250 / 0.18);
+    opacity: 0;
+    animation: ns-packet var(--dur) infinite;
+  }
+
+  /* ---------- Devices ---------- */
+  .ns-devices {
+    display: flex;
+    gap: 1.8em;
+    align-items: flex-start;
+  }
+  .ns-device {
+    display: grid;
+    justify-items: center;
+    gap: 0.9em;
+  }
+  .ns-phone {
+    width: 12.5em;
+    height: 26em;
+    padding: 0.45em;
+    border-radius: 2.2em;
+    background: #1f2430;
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.1),
+      inset 0 0 0 1px rgb(0 0 0 / 0.5),
+      0 1.5em 3em rgb(0 0 0 / 0.4);
+  }
+  .ns-android {
+    border-radius: 1.7em;
+  }
+  .ns-screen {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 1.8em;
+    color: #fff;
+    text-align: center;
+  }
+  .ns-ios .ns-screen {
+    background:
+      radial-gradient(90% 55% at 80% 100%, rgb(96 165 250 / 0.45), transparent 70%), radial-gradient(80% 50% at 10% 20%, rgb(37 99 235 / 0.35), transparent 70%),
+      linear-gradient(170deg, #1e3a8a 0%, #0f1b3d 55%, #0a1226 100%);
+  }
+  .ns-android .ns-screen {
+    border-radius: 1.3em;
+    background: radial-gradient(90% 55% at 20% 100%, rgb(68 188 255 / 0.3), transparent 70%), linear-gradient(200deg, #1b2a4a 0%, #111a30 60%, #0b1224 100%);
+  }
+  .ns-island {
+    position: absolute;
+    top: 0.55em;
+    left: 50%;
+    width: 4.2em;
+    height: 1.2em;
+    margin-left: -2.1em;
+    border-radius: 999px;
+    background: #000;
+  }
+  .ns-punch {
+    position: absolute;
+    top: 0.6em;
+    left: 50%;
+    width: 0.75em;
+    height: 0.75em;
+    margin-left: -0.375em;
+    border-radius: 50%;
+    background: #000;
+  }
+  .ns-ping {
+    position: absolute;
+    top: 0.6em;
+    left: 50%;
+    width: 1em;
+    height: 1em;
+    margin-left: -0.5em;
+    border-radius: 50%;
+    border: 1.5px solid var(--blue);
+    opacity: 0;
+    animation: ns-ping var(--dur) infinite;
+  }
+  .ns-ios-date {
+    margin: 3em 0 0;
+    font-size: 0.78em;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.8);
+  }
+  .ns-ios-time {
+    margin: 0;
+    font-size: 4.2em;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: rgb(255 255 255 / 0.92);
+  }
+  .ns-ios-bottom {
+    position: absolute;
+    left: 1.4em;
+    right: 1.4em;
+    bottom: 1.6em;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ns-ios-bottom i {
+    width: 2.1em;
+    height: 2.1em;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.14);
+  }
+  .ns-home-ind,
+  .ns-nav-pill {
+    position: absolute;
+    bottom: 0.5em;
+    left: 50%;
+    width: 4.6em;
+    height: 0.25em;
+    margin-left: -2.3em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.75);
+  }
+
+  .ns-banner {
+    position: absolute;
+    left: 0.55em;
+    right: 0.55em;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55em;
+    padding: 0.65em 0.7em;
+    text-align: left;
+    color: var(--ink);
+  }
+  .ns-ios-banner {
+    top: 11.2em;
+    border-radius: 1.1em;
+    background: rgb(245 247 250 / 0.9);
+    box-shadow: 0 0.6em 1.4em rgb(0 0 0 / 0.25);
+    animation: ns-ios-banner var(--dur) infinite;
+  }
+  .ns-and-banner {
+    top: 1.9em;
+    border-radius: 1em;
+    background: #f8fafc;
+    box-shadow: 0 0.6em 1.4em rgb(0 0 0 / 0.3);
+    animation: ns-and-banner var(--dur) infinite;
+  }
+  .ns-app-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.5em;
+    background: linear-gradient(160deg, #3b82f6, #1d4ed8);
+    color: #fff;
+  }
+  .ns-app-icon svg {
+    width: 1.1em;
+    height: 1.1em;
+  }
+  .ns-app-icon-sm {
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+  }
+  .ns-app-icon-sm svg {
+    width: 0.9em;
+    height: 0.9em;
+  }
+  .ns-banner-text {
+    display: grid;
+    min-width: 0;
+    gap: 0.1em;
+  }
+  .ns-banner-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.4em;
+    font-size: 0.66em;
+    color: var(--muted);
+  }
+  .ns-and-banner .ns-banner-meta {
+    justify-content: flex-start;
+  }
+  .ns-banner-meta b {
+    font-weight: 600;
+    color: #334155;
+  }
+  .ns-banner-title {
+    font-size: 0.76em;
+    font-weight: 700;
+  }
+  .ns-banner-body {
+    font-size: 0.72em;
+    color: #334155;
+  }
+  .ns-tap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2.6em;
+    height: 2.6em;
+    margin: -1.3em 0 0 -1.3em;
+    border-radius: 50%;
+    background: rgb(15 23 42 / 0.18);
+    opacity: 0;
+    animation: ns-tap var(--dur) infinite;
+  }
+
+  /* Android home */
+  .ns-and-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55em 1em 0;
+    font-size: 0.66em;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .ns-and-icons {
+    display: flex;
+    gap: 0.3em;
+  }
+  .ns-and-icons i {
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 0.15em;
+    background: rgb(255 255 255 / 0.7);
+  }
+  .ns-and-clock {
+    margin: 2.4em 0 0;
+    font-size: 3.2em;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .ns-and-date {
+    margin: 0.4em 0 0;
+    font-size: 0.74em;
+    color: rgb(255 255 255 / 0.75);
+  }
+  .ns-grid {
+    position: absolute;
+    left: 1.1em;
+    right: 1.1em;
+    bottom: 2em;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8em 0.6em;
+  }
+  .ns-grid > i,
+  .ns-grid-app {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.12);
+  }
+  .ns-grid-app {
+    position: relative;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(160deg, #3b82f6, #1d4ed8);
+  }
+  .ns-grid-app svg {
+    width: 55%;
+    height: 55%;
+    color: #fff;
+  }
+  .ns-badge {
+    position: absolute;
+    top: -0.35em;
+    right: -0.35em;
+    place-items: center;
+    min-width: 1.35em;
+    height: 1.35em;
+    border-radius: 999px;
+    background: #ef4444;
+    box-shadow: 0 0 0 0.15em #111a30;
+    font-size: 0.72em;
+    font-weight: 700;
+    color: #fff;
+    animation: ns-badge-pop var(--dur) infinite;
+  }
+  .ns-b2 {
+    opacity: 0;
+    animation: ns-b2 var(--dur) infinite;
+  }
+  .ns-b3 {
+    animation: ns-b3 var(--dur) infinite;
+  }
+
+  /* Device tags */
+  .ns-tag {
+    display: grid;
+    justify-items: center;
+    gap: 0.35em;
+    font-size: 0.78em;
+  }
+  .ns-tag-os {
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.45);
+  }
+  .ns-tag-state {
+    justify-items: center;
+  }
+  .ns-t {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.35em 0.75em;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    background: rgb(255 255 255 / 0.04);
+    font-family: var(--lu-font-mono, ui-monospace, monospace);
+    font-size: 0.92em;
+    color: rgb(255 255 255 / 0.7);
+    white-space: nowrap;
+    opacity: 0;
+  }
+  .ns-t svg {
+    width: 1em;
+    height: 1em;
+  }
+  .ns-t-old {
+    animation: ns-t-old var(--dur) infinite;
+  }
+  .ns-t-prog {
+    animation: ns-t-prog var(--dur) infinite;
+  }
+  .ns-t-new {
+    opacity: 1;
+    border-color: rgb(96 165 250 / 0.45);
+    background: rgb(96 165 250 / 0.1);
+    color: #bfdbfe;
+    animation: ns-t-new var(--dur) infinite;
+  }
+  .ns-bar {
+    position: relative;
+    width: 3.2em;
+    height: 0.3em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.12);
+    overflow: hidden;
+  }
+  .ns-bar i {
+    position: absolute;
+    inset: 0;
+    background: var(--blue);
+    transform-origin: left;
+    animation: ns-bar var(--dur) infinite;
+  }
+
+  /* ---------- Narrow layout ---------- */
+  @container (max-width: 700px) {
+    .ns-inner {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      gap: 1.6em;
+      padding: 1.4em 1em 1.8em;
+      font-size: clamp(8px, 3.5cqw, 14px);
+    }
+    .ns-card {
+      width: 100%;
+      max-width: 26em;
+    }
+    .ns-wire {
+      display: none;
+    }
+    .ns-devices {
+      gap: 1.2em;
+    }
+    .ns-phone {
+      width: 11.6em;
+      height: 24em;
+    }
+    .ns-ios-banner {
+      top: 10.2em;
+    }
+  }
+
+  /* ---------- Timeline (percentages of --dur) ---------- */
+  @keyframes ns-fade {
+    0% {
+      opacity: 0;
+    }
+    2.5%,
+    96% {
+      opacity: 1;
+    }
+    99.5%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-seg {
+    0%,
+    48% {
+      transform: translateX(0);
+    }
+    51%,
+    100% {
+      transform: translateX(200%);
+    }
+  }
+  @keyframes ns-va {
+    0%,
+    48% {
+      opacity: 1;
+      visibility: visible;
+    }
+    50.5%,
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  @keyframes ns-vb {
+    0%,
+    50% {
+      opacity: 0;
+      visibility: hidden;
+    }
+    52.5%,
+    100% {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  @keyframes ns-focus {
+    0%,
+    1.5% {
+      border-color: var(--line);
+      box-shadow: none;
+    }
+    2%,
+    12% {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 0.2em rgb(96 165 250 / 0.18);
+    }
+    13%,
+    100% {
+      border-color: var(--line);
+      box-shadow: none;
+    }
+  }
+  @keyframes ns-type {
+    0%,
+    2% {
+      clip-path: inset(0 100% 0 0);
+    }
+    11%,
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes ns-msg {
+    0%,
+    11.5% {
+      opacity: 0;
+      transform: translateY(0.3em);
+    }
+    14%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes ns-chip {
+    0%,
+    14% {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    16.5%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes ns-cursor {
+    0%,
+    17% {
+      opacity: 0;
+      transform: translate(7em, 4em);
+    }
+    18% {
+      opacity: 1;
+      transform: translate(7em, 4em);
+    }
+    23% {
+      transform: translate(0, 0);
+    }
+    24% {
+      transform: translate(0, 0) scale(0.85);
+    }
+    25.5% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    28% {
+      opacity: 0;
+      transform: translate(0.6em, 0.6em);
+    }
+    53% {
+      opacity: 0;
+      transform: translate(7em, 4em);
+    }
+    54% {
+      opacity: 1;
+      transform: translate(7em, 4em);
+    }
+    59% {
+      transform: translate(0, 0);
+    }
+    60% {
+      transform: translate(0, 0) scale(0.85);
+    }
+    61.5% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    64%,
+    100% {
+      opacity: 0;
+      transform: translate(0.6em, 0.6em);
+    }
+  }
+  @keyframes ns-press {
+    0%,
+    23.5%,
+    25.5%,
+    59.5%,
+    61.5%,
+    100% {
+      transform: none;
+      background: var(--blue-strong);
+    }
+    24.5%,
+    60.5% {
+      transform: scale(0.97);
+      background: #1d4ed8;
+    }
+  }
+  @keyframes ns-l1 {
+    0%,
+    24.5% {
+      opacity: 1;
+    }
+    25%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-l2 {
+    0%,
+    24.5% {
+      opacity: 0;
+    }
+    25%,
+    29% {
+      opacity: 1;
+    }
+    29.5%,
+    60.5% {
+      opacity: 0;
+    }
+    61%,
+    65% {
+      opacity: 1;
+    }
+    65.5%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-l3 {
+    0%,
+    29% {
+      opacity: 0;
+    }
+    29.5%,
+    48% {
+      opacity: 1;
+    }
+    49%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-l4 {
+    0%,
+    49% {
+      opacity: 0;
+    }
+    50%,
+    60.5% {
+      opacity: 1;
+    }
+    61%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-l5 {
+    0%,
+    65% {
+      opacity: 0;
+    }
+    65.5%,
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes ns-packet {
+    0%,
+    25% {
+      opacity: 0;
+      left: 0;
+    }
+    25.5% {
+      opacity: 1;
+      left: 0;
+    }
+    28.5% {
+      opacity: 1;
+      left: calc(100% - 0.55em);
+    }
+    29.5% {
+      opacity: 0;
+      left: calc(100% - 0.55em);
+    }
+    61% {
+      opacity: 0;
+      left: 0;
+    }
+    61.5% {
+      opacity: 1;
+      left: 0;
+    }
+    64.5% {
+      opacity: 1;
+      left: calc(100% - 0.55em);
+    }
+    65.5%,
+    100% {
+      opacity: 0;
+      left: calc(100% - 0.55em);
+    }
+  }
+  @keyframes ns-ios-banner {
+    0%,
+    29% {
+      opacity: 0;
+      transform: translateY(-1.2em) scale(0.96);
+    }
+    31%,
+    38.5% {
+      opacity: 1;
+      transform: none;
+    }
+    40.5%,
+    100% {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+  }
+  @keyframes ns-tap {
+    0%,
+    36.5% {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    37.5% {
+      opacity: 1;
+      transform: scale(0.8);
+    }
+    39.5%,
+    100% {
+      opacity: 0;
+      transform: scale(1.3);
+    }
+  }
+  @keyframes ns-and-banner {
+    0%,
+    30% {
+      opacity: 0;
+      transform: translateY(-120%);
+    }
+    32%,
+    45% {
+      opacity: 1;
+      transform: none;
+    }
+    47.5%,
+    100% {
+      opacity: 0;
+      transform: translateY(-120%);
+    }
+  }
+  @keyframes ns-ping {
+    0%,
+    65% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    65.5% {
+      opacity: 1;
+      transform: scale(0.6);
+    }
+    68.5%,
+    100% {
+      opacity: 0;
+      transform: scale(3.2);
+    }
+  }
+  @keyframes ns-b2 {
+    0%,
+    32% {
+      opacity: 1;
+    }
+    32.5%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-b3 {
+    0%,
+    32% {
+      opacity: 0;
+    }
+    32.5%,
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes ns-badge-pop {
+    0%,
+    32% {
+      transform: none;
+    }
+    33% {
+      transform: scale(1.3);
+    }
+    34.5%,
+    100% {
+      transform: none;
+    }
+  }
+  @keyframes ns-t-old {
+    0%,
+    65.5% {
+      opacity: 1;
+    }
+    66.5%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-t-prog {
+    0%,
+    66% {
+      opacity: 0;
+    }
+    67%,
+    76% {
+      opacity: 1;
+    }
+    77%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ns-bar {
+    0%,
+    67% {
+      transform: scaleX(0);
+    }
+    76%,
+    100% {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes ns-t-new {
+    0%,
+    76.5% {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    78%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes ns-c-deliv {
+    0%,
+    29.5% {
+      --n: 0;
+    }
+    32%,
+    100% {
+      --n: 2;
+    }
+  }
+  @keyframes ns-c-open {
+    0%,
+    38.5% {
+      --n: 0;
+    }
+    39%,
+    100% {
+      --n: 1;
+    }
+  }
+  @keyframes ns-c-badge {
+    0%,
+    32% {
+      --n: 2;
+    }
+    32.5%,
+    100% {
+      --n: 3;
+    }
+  }
+  @keyframes ns-c-check {
+    0%,
+    65.5% {
+      --n: 0;
+    }
+    74%,
+    100% {
+      --n: 842;
+    }
+  }
+  @keyframes ns-c-dl {
+    0%,
+    67% {
+      --n: 0;
+    }
+    80%,
+    100% {
+      --n: 816;
+    }
+  }
+  @keyframes ns-rot {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ns *,
+    .ns-inner {
+      animation: none !important;
+    }
+  }
+</style>

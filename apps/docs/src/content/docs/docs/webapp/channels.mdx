@@ -1,0 +1,197 @@
+---
+title: "Channels"
+description: "Channels are a way to manage your app's updates. Each channel can have one version. This allows you to have multiple versions of your app in production at the same time."
+sidebar:
+  order: 8
+---
+
+## How Capgo chooses a channel (precedence)
+
+When a device asks Capgo for an update, the channel it will use is decided in the following order (highest priority first):
+
+1. **Forced device mapping**: If the device ID is explicitly forced to a channel (the **Devices** tab on the channel page), that channel always wins. Forced mappings are console/API overrides. Capgo removes them 90 days after the last override write. See [Console and API overrides expire](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
+2. **Cloud override (Dashboard or Public API)**: Changing a device's channel in the dashboard or via the Public API writes an override tied to that device ID. Reinstalling the app does **not** clear it; deleting the override does. The same 90-day retention applies.
+3. **Plugin `setChannel()` (local)**: On current plugin versions, [`setChannel()`](/docs/plugins/updater/api/#setchannel) stores the channel on the device after backend validation. It is not a dashboard override. Reinstalling the app clears it; the app must call `setChannel()` again if you still want that channel.
+4. **Capacitor config `defaultChannel` (test build default)**: For internal / beta / test builds you can set `defaultChannel` (legacy key `channel`) in `capacitor.config.*` so test devices start on a pre-release channel (e.g. `beta`, `pr-123`). If absent, the device will proceed to the cloud default. Production builds usually leave this unset.
+5. **Cloud Default Channel (primary strategy for ~99% of users)**: The main production channel virtually all real users land on. Any new device without a force, without an override, without a local `setChannel()`, and without a config `defaultChannel` uses this. Changing it rolls out (or rolls back) for everyone in seconds, with no new binary.
+
+Why the **cloud default** is the main path:
+- Instant rollout or rollback without rebuilding or re‑publishing native binaries.
+- One place to manage iOS, Android, and Electron behavior.
+- Safer: you can confirm bundles exist and settings are correct before switching default.
+- Auditable changes (team members can see who changed what in the UI / logs).
+Design principle: Layers above (force / override / config) are *exceptions* (debug single user, QA switching, test build defaults). Normal users flow to the cloud default.
+
+Changing the *cloud default* channel affects *new* normal devices that:
+- Are not forced
+- Do not already have a cloud override
+- Do not have an app-level `defaultChannel` defined
+
+If a test build ships with `defaultChannel: 'beta'` and you later change the cloud default to `production`, devices that started on `beta` via the config stay there until a higher-priority assignment applies, or until you ship a binary without `defaultChannel`. Deleting a force, cloud override, or local `setChannel()` assignment does not remove the config value; that fallback stays until the new binary.
+
+Devices stay on their current channel unless you:
+- Force them to another channel (console or Public API).
+- Change the cloud override in the dashboard or Public API.
+- Call `setChannel()` (local assignment on current plugin versions).
+- Remove / archive the channel they are on (then they will fall back through the precedence again at next check).
+- Wait until a console/API override expires after 90 days.
+- Reinstall the app, which clears a local `setChannel()` assignment but not a console/API override.
+
+If a channel is disabled for a platform (see iOS / Android / Electron toggles) and would otherwise have been selected, the selection skips it and falls back to the next rule.
+
+> Note: Setting `defaultChannel` means changing it requires a new binary; use it intentionally for test/QA, not for general production control.
+
+### Capacitor config example
+
+```ts
+// capacitor.config.ts
+// Example: a TestFlight or internal QA build defaults to the beta channel.
+const config = {
+  plugins: {
+    CapacitorUpdater: {
+      defaultChannel: 'beta', // Test build default. Omit in production so users attach to cloud default.
+      // legacy key: channel
+    },
+  },
+};
+export default config;
+```
+
+If you later change the dashboard default to `production`, devices already on another channel (via config, override, or force) will NOT move automatically; only fresh devices (or those whose override/force you clear) pick it up.
+
+---
+
+## Managing channels
+
+First, let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page/) and then [clicking on the channels tab](/docs/webapp/main-app-page/).
+
+
+<figure><img src="/channels.webp" alt="channel list" /><figcaption></figcaption></figure>
+
+## Creating a channel
+
+As you can see, there exists a plus button in the lower right corner. (`1` in the image) Clicking on it will open a modal where you can create a new channel.
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modal.webp" alt="new channel" /><figcaption></figcaption></figure>
+
+Then after you click on `Add` a new channel should appear in the list.
+<figure><img src="/post-channel-create.webp" alt="after channel create" /><figcaption></figcaption></figure>
+
+## What does misconfigured mean?
+Sometimes the configuration of a channel is not valid. In that case, you will get a big warning and the `Misconfigured` column will say `Yes` for one or more of the channels.
+You can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+
+## Deleting a channel
+
+To delete a channel from the web app, open the **Channels** tab for your app and find the channel row. In the **Action** column, click the trash icon, then click **Delete** in the confirmation dialog.
+
+<figure><img src="/channel-delete-action.webp" alt="Channel row action column showing the delete trash icon" /><figcaption></figcaption></figure>
+
+If the trash icon is not visible, your account does not have the `channel.delete` permission for that app. Ask an organization or app admin to grant a role that can delete channels, or delete the channel with an API key that has permission:
+
+```bash
+npx @capgo/cli@latest channel delete <channel-name> <app-id>
+```
+
+An organization- and app-bound **App Preview** key can atomically delete only the non-public preview channel and bundle it created with `channel delete <preview-channel> <app-id> --delete-bundle`. It cannot change or delete an existing default/main channel, another preview key's channel, or another key's bundle. See [API Keys](/docs/webapp/api-keys/#use-an-app-preview-key-for-preview-workflows) for the least-privilege setup.
+
+## Managing a channel
+
+Click the channel name to open the channel page. It is a full page with tabs, not a modal.
+
+<figure><img src="/channel_settings.webp" alt="Channel settings" /><figcaption></figcaption></figure>
+
+### Channel tabs
+
+- **Dashboard**: Adoption of the current bundle and install stats for this channel.
+- **Information**: Channel settings listed below, plus progressive rollout and Test Update API.
+- **Devices**: Forced mappings created from the console or Public API only. It does not list every device currently on the channel, and it does not list devices that used [`setChannel()`](/docs/plugins/updater/api/#setchannel). See [Console and API overrides expire](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
+- **History**: Setting and bundle changes for this channel.
+- **Preview**: In-browser and native preview of the linked bundle. Enable bundle preview in [App Information](/docs/webapp/main-app-page/#app-information) first.
+
+### Information settings
+
+Stay on the **Information** tab. Settings appear in this order:
+
+First, **Default download channel** is a status badge, not a toggle. **Active** means this channel is the cloud default for new devices. Click **Manage in App settings** to change the default on [App Information](/docs/webapp/main-app-page/#default-channel-configuration). For platform-specific defaults (one for iOS, one for Android, and one for Electron), see that same section.
+
+Second the `IOS` setting. If this is false then iOS devices will not be allowed to download updates from this channel.
+
+Third is the `Android` setting. If this is false then Android devices will not be allowed to download updates from this channel.
+
+Fourth is the `Electron` setting. If this is false then Electron apps will not be allowed to download updates from this channel.
+
+Fifth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+
+Sixth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+
+Seventh is the `Download format` setting. It chooses whether devices download a full zip, only the changed delta files, or the best of both. See [Download format](#download-format).
+
+Eighth is `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has `prod` set to false will be rejected. This is mostly useful for testing purposes.
+
+Ninth is `Allow production build`. If this is false then production (store) builds will not receive updates from this channel. Leave this on for channels that serve real users.
+
+Tenth is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
+
+Eleventh is `Allow physical devices`. If this is false then Capgo will reject update requests from real phones and tablets. Leave this on for production channels.
+
+Twelfth is `Allow devices to self dissociate/associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available. If this is set to false and you try to call [setChannel](/docs/plugins/updater/api/#setchannel) with this channel then the call will fail.
+
+### Test Update API
+
+At the bottom of the **Information** tab, expand **Test Update API**. Capgo shows a curl command against `/updates` for a sample device on this channel.
+
+Changes can take up to 60 seconds to show in the API because of caching. If the channel cannot be tested, the console warns you: the channel needs at least one platform (iOS or Android), production builds, physical devices, and either to be the default download channel or to allow device self-assignment.
+
+### Send update notification
+
+After you change the linked bundle, the console can ask to **Send update notification**. That queues a silent push so devices on the channel check for the new bundle now. Configure Android and iOS push credentials on the app Notifications tab first.
+
+## Console and API overrides expire
+
+Forced mappings and Dashboard/Public API channel overrides are removed **90 days** after the last override write. Last device check-in does not reset that clock. For an assignment that survives that cleanup, set `defaultChannel` in your Capacitor config (survives reinstall, needs a new binary to change) or call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app (avoids the 90-day cleanup, but reinstall clears it so the app must call `setChannel()` again).
+
+<figure><img src="/channel-override-retention.webp" alt="Capgo channel Devices tab showing the Override retention popover: console overrides expire after 90 days" /><figcaption>Override retention on the channel Devices tab. The same notice appears when you force a device ID onto the channel.</figcaption></figure>
+
+This is separate from [device inventory retention](/docs/webapp/devices/). Inventory removes devices that have not connected to Capgo for 90 days. Override cleanup removes the mapping even if the device is still active. Full detail: [Console and API overrides expire after 90 days](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
+
+## Download format
+
+Open a channel and stay on the **Information** tab. **Download format** is in the settings list, under Disable auto update.
+
+<figure><img src="/channel-update-package.webp" alt="Download format dropdown on a Capgo channel showing Zip + delta, Full zip only, Delta only, Full zip from store build only, and Delta from store build only" /><figcaption>Download format on the channel Information tab. New channels default to Zip + delta.</figcaption></figure>
+
+This setting chooses what Capgo sends when a device on this channel checks for an update. Leave **Zip + delta** unless you need to force one type.
+
+| Label in the console | CLI / API value | What devices download |
+| --- | --- | --- |
+| **Zip + delta (default)** | `all` | Each device gets the best package it supports. Devices on a plugin version with Delta support download only the changed delta files when the bundle has them. Only devices on an old plugin version without Delta support, or bundles uploaded without delta files, fall back to the full zip. |
+| **Full zip only** | `zip` | Every device downloads the whole bundle zip, even when delta files exist. |
+| **Delta only** | `delta` | Only the changed delta files. Devices on an old plugin version without Delta support still receive the full zip when the bundle has one. |
+| **Full zip from store build only** | `zip_from_builtin` | Full zip only while the device is still on the store build. After the first live update, Capgo serves zip + delta again. |
+| **Delta from store build only** | `delta_from_builtin` | Delta only while the device is still on the store build. After the first live update, Capgo serves zip + delta again. |
+
+With **Zip + delta**, seeing some full zip downloads is expected. They come from devices still running an older native build with a plugin version without Delta support (below `5.10.0`, `6.25.0`, or `7.0.35` for their major version). See [Delta updates](/docs/live-updates/differentials/#which-devices-get-delta-and-which-get-the-full-zip).
+
+The **store build** is the web assets shipped inside the App Store or Play Store binary, before any Capgo update. Use a `from store build only` mode when the first update off the store build should be full zip only or delta only, and later updates can use both.
+
+Capgo will not pair a zip-only channel with a delta-only bundle, or the reverse. The console, CLI, and [Channels API](/docs/public-api/channels/) refuse the save and tell you to upload the missing package or switch the mode.
+
+You can set the same value from the CLI. The channel must already exist:
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app --update-package zip
+```
+
+Valid values: `all`, `zip`, `delta`, `zip_from_builtin`, `delta_from_builtin`.
+
+## Progressive rollouts
+
+The channel **Information** tab includes a **Progressive rollout** section with **Rollout target** and **Stable fallback**, **Change rollout target**, **Apply percentage**, and actions **Complete rollout**, **Rollback rollout**, **Enable rollout**, **Disable rollout**, **Pause rollout**, and **Resume rollout**.
+
+<figure><img src="/progressive-rollout.webp" alt="Progressive rollout controls in a Capgo channel" /><figcaption>Progressive rollout controls appear at the top of the channel Information tab.</figcaption></figure>
+
+Read [Progressive rollouts](/docs/live-updates/progressive-rollouts/) before enabling one. That guide covers upload routing (**Auto (recommended)** / **Rollout target** / **Replace stable**; CLI `--stable` / API `target: "stable"` to override), the **This channel uses progressive rollout** bundle-link dialog, and a safe workflow with [Observe](/docs/webapp/observe/) and [Log Insights](/docs/webapp/log-insights/).
+
+## Keep going from Channels
+
+If you are using **Channels** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution, and [Capgo Environment Best Practices: Staging with One Mobile App ID](/blog/staging-environments-with-capgo-channels/) for the practical context in Capgo Environment Best Practices: Staging with One Mobile App ID.

@@ -1,0 +1,73 @@
+---
+title: 🔐 key
+description: "🔐 Manage encryption keys for secure bundle distribution in Capgo Cloud, supporting end-to-end encryption with RSA and AES combination."
+sidebar_label: key
+sidebar:
+  order: 9
+---
+
+🔐 Manage encryption keys for secure bundle distribution in Capgo Cloud, supporting end-to-end encryption with RSA and AES combination.
+
+### <a id="key-save"></a> 🔹 **Save**
+
+```bash
+npx @capgo/cli@latest key save
+```
+
+💾 Save the public key in the Capacitor config, useful for CI environments.
+Recommended not to commit the key for security.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest key save --key ./path/to/key.pub
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-f,** | <code>string</code> | Force generate a new one |
+| **--key** | <code>string</code> | Key path to save in Capacitor config |
+| **--key-data** | <code>string</code> | Key data to save in Capacitor config |
+
+### <a id="key-create"></a> 🔨 **Create**
+
+```bash
+npx @capgo/cli@latest key create
+```
+
+🔨 Create RSA key pair for end-to-end encryption.
+Creates .capgo_key_v2 (private) and .capgo_key_v2.pub (public) in project root.
+Public key is saved to capacitor.config for mobile app decryption.
+NEVER commit the private key - store it securely!
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest key create
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-f,** | <code>string</code> | Force generate a new one |
+
+### <a id="key-delete_old"></a> 🗑️ **Delete_old**
+
+```bash
+npx @capgo/cli@latest key delete_old
+```
+
+🧹 Delete the old encryption key from the Capacitor config to ensure only the current key is used.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest key delete_old
+```
+
+## Keep going from key
+
+If you are using **key** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

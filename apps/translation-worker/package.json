@@ -1,0 +1,14 @@
+{
+  "name": "@capgo/translation-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit && bun run test:parser",
+    "test:parser": "bun run scripts/verify-parser.ts",
+    "check:blog-hash-drift": "bun run scripts/check-blog-translation-hash-drift.ts",
+    "test": "bun run test:real",
+    "test:real": "bun run scripts/verify-real-ai.ts",
+    "dev": "wrangler dev -c wrangler.jsonc -c ../web/wrangler.jsonc -c ../docs/wrangler.jsonc",
+    "deploy": "wrangler deploy"
+  }
+}

@@ -1,0 +1,52 @@
+---
+title: "@capgo/capacitor-file-compressor"
+description: "Capacitor plugin for efficient image compression supporting PNG, JPEG, and WebP formats across iOS, Android, and Web platforms."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Capacitor File Compressor Plugin interface for image compression."
+  actions:
+    - text: Get started
+      link: /docs/plugins/file-compressor/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-file-compressor/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-file-compressor` resizes and re-encodes images **on device** before upload. Control max width, height, quality, and output format (JPEG, PNG, WebP, plus HEIF on iOS). EXIF is stripped for privacy.
+
+## Platform support
+
+| Platform | Engine |
+| --- | --- |
+| iOS | ImageIO |
+| Android | `Bitmap` |
+| Web | Canvas |
+
+## Core Capabilities
+
+- `compressImage` - Compresses an image file with specified dimensions and quality settings.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `compressImage` | Compresses an image file with specified dimensions and quality settings. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-file-compressor](https://github.com/Cap-go/capacitor-file-compressor/).
+
+## Keep going from @capgo/capacitor-file-compressor
+
+If you are using **@capgo/capacitor-file-compressor** to plan storage and file handling, connect it with [Using @capgo/capacitor-file-compressor](/plugins/capacitor-file-compressor/) for the native capability in Using @capgo/capacitor-file-compressor, [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, and [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file.

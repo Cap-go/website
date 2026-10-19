@@ -1,0 +1,45 @@
+---
+title: "Tech support for Capgo"
+description: "How to get tech support for Capgo and our updater, please follow this guide to get help when the doc and our articles are not enough"
+sidebar:
+  order: 1
+---
+
+## Support by discord
+
+Capgo has an official [discord server](https://discord.capgo.app). Getting tech support there is likely one of the fastest ways to get a response.
+
+Here is a crash course:
+
+Step 1 - go to the `questions` channel
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/discord-questions.webp" alt="Ask on discord" /><figcaption></figcaption></figure>
+
+Step 2 - create your thread
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/discord-newquestion.webp" alt="Create a question on discord" /><figcaption></figcaption></figure>
+
+Step 3 - Describe your problem and select the relevant tags
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/discord-new-post.webp" alt="Create a post on discord" /><figcaption></figcaption></figure>
+
+
+Step 4 - Share your secure account id (optional)
+
+This will allow the capgo staff to take a look at your account. Sharing this id is safe, as it was designed to be shared publicly.
+
+To share this, please go to [capgo's settings](https://console.capgo.app/dashboard/settings/account/). There please click on `copy account id`.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/share-secure-id.webp" alt="Share your id without leaking your info" /><figcaption></figcaption></figure>
+
+This will copy the secure account id to the clipboard. Please include that in your discord post.
+
+## Support by email
+
+This is the slowest way to get support. Please use the discord server first.
+
+If you need to contact us by email, please send an email to support@capgo.app.
+
+## Keep going from Tech support for Capgo
+
+If you are using **Tech support for Capgo** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

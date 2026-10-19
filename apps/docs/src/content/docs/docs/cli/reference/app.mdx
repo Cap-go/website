@@ -1,0 +1,171 @@
+---
+title: 📱 app
+description: "📱 Manage your Capgo app settings and configurations in Capgo Cloud."
+sidebar_label: app
+sidebar:
+  order: 9
+---
+
+📱 Manage your Capgo app settings and configurations in Capgo Cloud.
+
+
+### <a id="app-add"></a> ➕ **Add**
+
+**Alias:** `a`
+
+```bash
+npx @capgo/cli@latest app add
+```
+
+➕ Add a new app to Capgo Cloud with a unique app ID in the format com.test.app.
+All options can be guessed from config if not provided.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app add com.example.app --name "My App" --icon ./icon.png
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n** | <code>string</code> | App name for display in Capgo Cloud |
+| **-i** | <code>string</code> | App icon path for display in Capgo Cloud |
+| **-a** | <code>string</code> | API key to link to your account |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="app-delete"></a> 🗑️ **Delete**
+
+```bash
+npx @capgo/cli@latest app delete
+```
+
+🗑️ Delete an app from Capgo Cloud, optionally specifying a version to delete only that bundle.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app delete com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a** | <code>string</code> | API key to link to your account |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="app-list"></a> 📋 **List**
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest app list
+```
+
+📋 List all apps registered under your account in Capgo Cloud.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app list
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a** | <code>string</code> | API key to link to your account |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="app-debug"></a> 🐞 **Debug**
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+🐞 Listen for live update events in Capgo Cloud to debug your app.
+Optionally target a specific device for detailed diagnostics.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app debug com.example.app --device DEVICE_ID
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a** | <code>string</code> | API key to link to your account |
+| **-d** | <code>string</code> | The specific device ID to debug |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="app-setting"></a> ⚙️ **Setting**
+
+```bash
+npx @capgo/cli@latest app setting
+```
+
+⚙️ Modify Capacitor configuration programmatically.
+Specify setting path (e.g., plugins.CapacitorUpdater.defaultChannel) with --string or --bool.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app setting plugins.CapacitorUpdater.defaultChannel --string "Production"
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **--bool** | <code>string</code> | A value for the setting to modify as a boolean, ex: --bool true |
+| **--string** | <code>string</code> | A value for the setting to modify as a string, ex: --string "Production" |
+
+### <a id="app-set"></a> ⚙️ **Set**
+
+**Alias:** `s`
+
+```bash
+npx @capgo/cli@latest app set
+```
+
+⚙️ Update settings for an existing app in Capgo Cloud, such as name, icon, or retention period for bundles.
+Retention of 0 means infinite storage.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app set com.example.app --name "Updated App" --retention 30
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n** | <code>string</code> | App name for display in Capgo Cloud |
+| **-i** | <code>string</code> | Local image file path (png, jpg, webp, svg) used as the app icon in Capgo Cloud |
+| **-a** | <code>string</code> | API key to link to your account |
+| **-r** | <code>string</code> | Days to keep old bundles (0 = infinite, default: 0) |
+| **--expose-metadata** | <code>string</code> | Expose bundle metadata (link and comment) to the plugin (true/false, default: false) |
+| **--preview** | <code>boolean</code> | Enable bundle and channel preview QR codes for this app |
+| **--no-preview** | <code>boolean</code> | Disable bundle and channel preview QR codes for this app |
+| **--allow-device-custom-id** | <code>boolean</code> | Allow devices to set a custom device ID for this app |
+| **--no-allow-device-custom-id** | <code>boolean</code> | Disallow custom device IDs for this app |
+| **--block-provider-infra-requests** | <code>boolean</code> | Block provider infrastructure requests for this app |
+| **--no-block-provider-infra-requests** | <code>boolean</code> | Allow provider infrastructure requests for this app |
+| **--build-timeout-minutes** | <code>string</code> | Native build timeout in minutes (5-360, default: 15) |
+| **--ios-store-url** | <code>string</code> | iOS App Store URL for this app |
+| **--android-store-url** | <code>string</code> | Google Play Store URL for this app |
+| **--default-upload-channel** | <code>string</code> | Default upload channel name for this app |
+| **--default-download-channel** | <code>string</code> | Default download channel name for this app (sets channel public=true) |
+| **--disable-download-channels** | <code>boolean</code> | Disable Capgo download channels for this app (sets all channels public=false) |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo development) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+

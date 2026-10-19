@@ -1,0 +1,79 @@
+---
+locale: en
+---
+# Using @capgo/capacitor-social-login
+
+All social logins in one plugin for Web, iOS, and Android. It supports Google, Apple, Facebook, Twitter/X, and generic OAuth2/OIDC providers such as GitHub, Microsoft Entra ID, Auth0, Okta, and Keycloak.
+
+## Install
+
+```bash
+npm install @capgo/capacitor-social-login
+npx cap sync
+```
+
+## What This Plugin Exposes
+
+- `initialize` - Initialize the plugin.
+- `login` - Login with the selected provider.
+- `logout` - Logout.
+- `isLoggedIn` - IsLoggedIn.
+
+## Example Usage
+
+### `initialize`
+
+Initialize the plugin.
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.initialize({ telegram: { botId: '123456789' } });
+```
+
+### `login`
+
+Login with the selected provider.
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+const result = await SocialLogin.login({
+  provider: 'facebook',
+  options: { permissions: ['permission'] },
+});
+// The result holds sensitive values: use it without logging it.
+```
+
+### `logout`
+
+Logout.
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.logout({} as {
+    provider: 'apple' | 'google' | 'facebook' | 'twitter' | 'oauth2';
+    providerId?: string;
+  });
+```
+
+### `isLoggedIn`
+
+IsLoggedIn.
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+const result = await SocialLogin.isLoggedIn({ provider: 'apple' });
+console.log(result);
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-social-login/
+- Docs: /docs/plugins/social-login/
+
+## Keep going from Using @capgo/capacitor-social-login
+
+If you are using **Using @capgo/capacitor-social-login** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [Getting Started](/docs/plugins/social-login/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

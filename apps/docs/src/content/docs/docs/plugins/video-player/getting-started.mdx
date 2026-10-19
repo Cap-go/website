@@ -1,0 +1,552 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-video-player and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-video-player` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-video-player
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+```
+
+## Quick start
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.initPlayer({ mode: 'fullscreen' });
+console.log(result);
+```
+
+## Example: isPlaying
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.isPlaying({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+## Example: play
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.play({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `initPlayer`
+
+Initialize a video player
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.initPlayer({ mode: 'fullscreen' });
+console.log(result);
+```
+
+### `isPlaying`
+
+Return if a given playerId is playing
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.isPlaying({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `play`
+
+Play the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.play({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `pause`
+
+Pause the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.pause({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getDuration`
+
+Get the duration of the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.getDuration({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `getCurrentTime`
+
+Get the current time of the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.getCurrentTime({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setCurrentTime`
+
+Set the current time to seek the current video to from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.setCurrentTime({
+  playerId: 'player-id-123',
+  seektime: 10,
+});
+console.log(result);
+```
+
+### `getVolume`
+
+Get the volume of the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.getVolume({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setVolume`
+
+Set the volume of the current video to from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.setVolume({ volume: 0.5 });
+console.log(result);
+```
+
+### `getMuted`
+
+Get the muted of the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.getMuted({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `setMuted`
+
+Set the muted of the current video to from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.setMuted({ muted: true });
+console.log(result);
+```
+
+### `setRate`
+
+Set the rate of the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.setRate({ rate: 1 });
+console.log(result);
+```
+
+### `getRate`
+
+Get the rate of the current video from a given playerId
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.getRate({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+### `stopAllPlayers`
+
+Stop all players playing
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.stopAllPlayers();
+console.log(result);
+```
+
+### `showController`
+
+Show controller
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.showController();
+console.log(result);
+```
+
+### `isControllerIsFullyVisible`
+
+isControllerIsFullyVisible
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.isControllerIsFullyVisible();
+console.log(result);
+```
+
+### `exitPlayer`
+
+Exit player
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.exitPlayer();
+console.log(result);
+```
+
+## Type Reference
+
+### `capVideoPlayerOptions`
+```typescript
+export interface capVideoPlayerOptions {
+  /**
+   * Player mode
+   *  - "fullscreen"
+   *  - "embedded" (Web only)
+   */
+  mode?: string;
+  /**
+   * The url of the video to play
+   */
+  url?: string;
+  /**
+   * The url of subtitle associated with the video
+   */
+  subtitle?: string;
+  /**
+   * The language of subtitle
+   * see https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers
+   */
+  language?: string;
+  /**
+   * SubTitle Options
+   */
+  subtitleOptions?: SubTitleOptions;
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Initial playing rate
+   */
+  rate?: number;
+  /**
+   * Exit on VideoEnd (iOS, Android)
+   * default: true
+   */
+  exitOnEnd?: boolean;
+  /**
+   * Loop on VideoEnd when exitOnEnd false (iOS, Android)
+   * default: false
+   */
+  loopOnEnd?: boolean;
+  /**
+   * Picture in Picture Enable (iOS, Android)
+   * default: true
+   */
+  pipEnabled?: boolean;
+  /**
+   * Background Mode Enable (iOS, Android)
+   * default: true
+   */
+  bkmodeEnabled?: boolean;
+  /**
+   * Show Controls Enable (iOS, Android)
+   * default: true
+   */
+  showControls?: boolean;
+  /**
+   * Display Mode ["all", "portrait", "landscape"] (iOS, Android)
+   * default: "all"
+   */
+  displayMode?: string;
+  /**
+   * Component Tag or DOM Element Tag (React app)
+   */
+  componentTag?: string;
+  /**
+   * Player Width (mode "embedded" only)
+   */
+  width?: number;
+  /**
+   * Player height (mode "embedded" only)
+   */
+  height?: number;
+  /**
+   * Headers for the request (iOS, Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * Title shown in the player (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   */
+  title?: string;
+  /**
+   * Subtitle shown below the title in the player (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   */
+  smallTitle?: string;
+  /**
+   * ExoPlayer Progress Bar and Spinner color (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   * Must be a valid hex color code
+   * default: #FFFFFF
+   */
+  accentColor?: string;
+  /**
+   * Chromecast enable/disable (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   * default: true
+   */
+  chromecast?: boolean;
+  /**
+   * Artwork url to be shown in Chromecast player
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   * default: ""
+   */
+  artwork?: string;
+  /**
+   * DRM configuration for protected content (iOS: FairPlay, Android: Widevine)
+   */
+  drm?: DrmOptions;
+}
+```
+
+### `capVideoPlayerResult`
+```typescript
+export interface capVideoPlayerResult {
+  /**
+   * result set to true when successful else false
+   */
+  result?: boolean;
+  /**
+   * method name
+   */
+  method?: string;
+  /**
+   * value returned
+   */
+  value?: any;
+  /**
+   * message string
+   */
+  message?: string;
+}
+```
+
+### `capVideoPlayerIdOptions`
+```typescript
+export interface capVideoPlayerIdOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+}
+```
+
+### `capVideoTimeOptions`
+```typescript
+export interface capVideoTimeOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Video time value you want to seek to
+   */
+  seektime?: number;
+}
+```
+
+### `capVideoVolumeOptions`
+```typescript
+export interface capVideoVolumeOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Volume value between [0 - 1]
+   */
+  volume?: number;
+}
+```
+
+### `capVideoMutedOptions`
+```typescript
+export interface capVideoMutedOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Muted value true or false
+   */
+  muted?: boolean;
+}
+```
+
+### `capVideoRateOptions`
+```typescript
+export interface capVideoRateOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Rate value
+   */
+  rate?: number;
+}
+```
+
+### `SubTitleOptions`
+```typescript
+export interface SubTitleOptions {
+  /**
+   * Foreground Color in RGBA (default rgba(255,255,255,1)
+   */
+  foregroundColor?: string;
+  /**
+   * Background Color in RGBA (default rgba(0,0,0,1)
+   */
+  backgroundColor?: string;
+  /**
+   * Font Size in pixels (default 16)
+   */
+  fontSize?: number;
+
+  /**
+   * Get the native Capacitor plugin version
+   *
+   * @returns {Promise<{ id: string }>} an Promise with version for this device
+   * @throws An error if the something went wrong
+   */
+  getPluginVersion(): Promise<{ version: string }>;
+}
+```
+
+### `DrmOptions`
+```typescript
+export interface DrmOptions {
+  /**
+   * FairPlay DRM configuration (iOS)
+   */
+  fairplay?: FairPlayDrmOptions;
+  /**
+   * PlayReady DRM configuration
+   */
+  playready?: PlayreadyDrmOptions;
+  /**
+   * Widevine DRM configuration (Android)
+   */
+  widevine?: WidevineDrmOptions;
+}
+```
+
+### `FairPlayDrmOptions`
+```typescript
+export interface FairPlayDrmOptions {
+  /**
+   * The URL to fetch the FairPlay certificate
+   */
+  certificateUrl?: string;
+  /**
+   * The URL to send the SPC and receive the CKC license (FairPlay license server URL)
+   */
+  contentKeySpcUrl?: string;
+}
+```
+
+### `PlayreadyDrmOptions`
+```typescript
+export interface PlayreadyDrmOptions {
+  /**
+   * The URL to fetch the PlayReady license
+   */
+  certificateUrl?: string;
+}
+```
+
+### `WidevineDrmOptions`
+```typescript
+export interface WidevineDrmOptions {
+  /**
+   * The URL to fetch the Widevine license
+   */
+  certificateUrl?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

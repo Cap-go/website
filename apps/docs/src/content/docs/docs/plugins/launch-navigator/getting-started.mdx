@@ -1,0 +1,260 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-launch-navigator and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-launch-navigator` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-launch-navigator
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+```
+
+## Quick start
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: { app: 'google_maps' },
+});
+```
+
+## Example: let the user pick a map app
+
+```typescript
+const { apps } = await LaunchNavigator.getAvailableApps();
+// render chooser UI, then navigate with options.app set to the selection
+```
+
+## Example: geocode first
+
+Use `@capgo/capacitor-nativegeocoder` `forwardGeocode()` to turn an address into `[lat, lng]` before calling `navigate()`.
+
+## Common pitfalls
+
+- **Coordinates only**: street addresses are not accepted by `navigate()`.
+- **Web**: opens an external maps link, not an installed app.
+- **Icons**: cache with `getAppIcons()` and refresh when the user installs a new maps app.
+
+## API Overview
+
+### `navigate`
+
+Navigate to a location using latitude and longitude
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+await LaunchNavigator.navigate({ destination: [48.8566, 2.3522] });
+```
+
+### `isAppAvailable`
+
+Check if a specific navigation app is available
+
+```typescript
+import { LaunchNavigator, IOSNavigationApp } from '@capgo/capacitor-launch-navigator';
+
+const result = await LaunchNavigator.isAppAvailable({ app: IOSNavigationApp.APPLE_MAPS });
+console.log(result);
+```
+
+### `getAvailableApps`
+
+Get list of available navigation apps on the device
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+const result = await LaunchNavigator.getAvailableApps();
+console.log(result);
+```
+
+### `getSupportedApps`
+
+Get list of supported apps for the current platform
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+const result = await LaunchNavigator.getSupportedApps();
+console.log(result);
+```
+
+### `getDefaultApp`
+
+Get the name of the default app for navigation
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+const result = await LaunchNavigator.getDefaultApp();
+console.log(result);
+```
+
+## Type Reference
+
+### `NavigateOptions`
+Options for navigation.
+```typescript
+export interface NavigateOptions {
+  /**
+   * Starting location coordinates [latitude, longitude]
+   */
+  start?: [number, number];
+
+  /**
+   * Starting location name
+   */
+  startName?: string;
+
+  /**
+   * Destination name (will be ignored since we only support coordinates)
+   */
+  destinationName?: string;
+
+  /**
+   * Transport mode
+   */
+  transportMode?: TransportMode;
+
+  /**
+   * Specific app to launch (if not specified, will use default or prompt)
+   */
+  app?: IOSNavigationApp | AndroidNavigationApp | string;
+
+  /**
+   * Launch mode
+   */
+  launchMode?: LaunchMode;
+
+  /**
+   * Additional parameters specific to certain apps
+   */
+  extras?: Record<string, any>;
+
+  /**
+   * Enable debug logging
+   */
+  enableDebug?: boolean;
+}
+```
+
+### `IOSNavigationApp`
+Available navigation apps for iOS.
+```typescript
+export enum IOSNavigationApp {
+  APPLE_MAPS = 'apple_maps',
+  GOOGLE_MAPS = 'google_maps',
+  WAZE = 'waze',
+  CITYMAPPER = 'citymapper',
+  GARMIN_NAVIGON = 'garmin_navigon',
+  TRANSIT_APP = 'transit_app',
+  YANDEX_NAVIGATOR = 'yandex',
+  UBER = 'uber',
+  TOMTOM = 'tomtom',
+  SYGIC = 'sygic',
+  HERE_MAPS = 'here',
+  MOOVIT = 'moovit',
+  LYFT = 'lyft',
+  MAPS_ME = 'mapsme',
+  CABIFY = 'cabify',
+  BAIDU = 'baidu',
+  GAODE = 'gaode',
+  TAXI_99 = '99taxi',
+}
+```
+
+### `AndroidNavigationApp`
+Available navigation apps for Android.
+```typescript
+export enum AndroidNavigationApp {
+  GOOGLE_MAPS = 'google_maps',
+  WAZE = 'waze',
+  CITYMAPPER = 'citymapper',
+  UBER = 'uber',
+  YANDEX = 'yandex',
+  SYGIC = 'sygic',
+  HERE_MAPS = 'here',
+  MOOVIT = 'moovit',
+  LYFT = 'lyft',
+  MAPS_ME = 'mapsme',
+  CABIFY = 'cabify',
+  BAIDU = 'baidu',
+  GAODE = 'gaode',
+}
+```
+
+### `AvailableApp`
+Result of checking app availability.
+```typescript
+export interface AvailableApp {
+  /**
+   * App identifier
+   */
+  app: string;
+
+  /**
+   * Display name of the app
+   */
+  name: string;
+
+  /**
+   * Whether the app is available on the device
+   */
+  available: boolean;
+}
+```
+
+### `TransportMode`
+Transport modes.
+```typescript
+export enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  BICYCLING = 'bicycling',
+  TRANSIT = 'transit',
+}
+```
+
+### `LaunchMode`
+Launch modes.
+```typescript
+export enum LaunchMode {
+  MAPS = 'maps',
+  TURN_BY_TURN = 'turn_by_turn',
+  GEO = 'geo',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-launch-navigator](/plugins/capacitor-launch-navigator/) for the native capability in Using @capgo/capacitor-launch-navigator, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

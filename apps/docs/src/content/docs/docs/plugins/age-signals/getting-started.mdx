@@ -1,0 +1,175 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-android-age-signals and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-android-age-signals` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-android-age-signals
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { AgeSignals } from '@capgo/capacitor-android-age-signals';
+```
+
+## Quick start
+
+```typescript
+import { AgeSignals } from '@capgo/capacitor-android-age-signals';
+
+const result = await AgeSignals.checkAgeSignals();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `checkAgeSignals`
+
+Request the current Play Age Signals for the active user.
+
+Only available on Android devices with Google Play installed.
+
+```typescript
+import { AgeSignals } from '@capgo/capacitor-android-age-signals';
+
+const result = await AgeSignals.checkAgeSignals();
+console.log(result);
+```
+
+## Type Reference
+
+### `CheckAgeSignalsResult`
+Structured result returned by .
+```typescript
+export interface CheckAgeSignalsResult {
+  /**
+   * The user's verification status as reported by Google Play.
+   *
+   * @since 0.0.1
+   */
+  userStatus: UserStatus;
+  /**
+   * Inclusive lower bound of the supervised user's age range.
+   *
+   * Present only when `userStatus` is `SUPERVISED`, `SUPERVISED_APPROVAL_PENDING`, or `SUPERVISED_APPROVAL_DENIED`.
+   *
+   * @since 0.0.1
+   * @example 13
+   */
+  ageLower?: number;
+  /**
+   * Inclusive upper bound of the supervised user's age range.
+   *
+   * Present only when `userStatus` is `SUPERVISED`, `SUPERVISED_APPROVAL_PENDING`, or `SUPERVISED_APPROVAL_DENIED`
+   * and the user's age is reported as less than 18.
+   *
+   * @since 0.0.1
+   * @example 15
+   */
+  ageUpper?: number;
+  /**
+   * Effective date for the most recent significant change that received guardian approval.
+   *
+   * Present only when `userStatus` is `SUPERVISED_APPROVAL_PENDING` or `SUPERVISED_APPROVAL_DENIED`.
+   *
+   * @since 0.0.1
+   * @example "2024-01-15"
+   */
+  mostRecentApprovalDate?: string;
+  /**
+   * Identifier assigned to supervised installs in Google Play for revocation notifications.
+   *
+   * Present only when `userStatus` is `SUPERVISED`, `SUPERVISED_APPROVAL_PENDING`, or `SUPERVISED_APPROVAL_DENIED`.
+   *
+   * @since 0.0.1
+   * @example "abc123xyz"
+   */
+  installId?: string;
+}
+```
+
+### `UserStatus`
+Status values reported by Google Play Age Signals.
+```typescript
+export enum UserStatus {
+  /**
+   * The user is over 18 and their age has been verified by Google.
+   *
+   * @since 0.0.1
+   */
+  Verified = 'VERIFIED',
+  /**
+   * The user has a supervised Google Account managed by a guardian.
+   *
+   * Use `ageLower` and `ageUpper` to determine the user's age range.
+   *
+   * @since 0.0.1
+   */
+  Supervised = 'SUPERVISED',
+  /**
+   * The supervised user has pending significant changes awaiting guardian approval.
+   *
+   * Use `ageLower` and `ageUpper` to determine the user's age range and `mostRecentApprovalDate`
+   * to identify the most recent approved change.
+   *
+   * @since 0.0.1
+   */
+  SupervisedApprovalPending = 'SUPERVISED_APPROVAL_PENDING',
+  /**
+   * The supervised user's guardian denied one or more significant changes.
+   *
+   * Use `ageLower` and `ageUpper` to determine the user's age range and `mostRecentApprovalDate`
+   * to identify the last approved change.
+   *
+   * @since 0.0.1
+   */
+  SupervisedApprovalDenied = 'SUPERVISED_APPROVAL_DENIED',
+  /**
+   * The user is not verified or supervised in supported regions.
+   *
+   * You should prompt the user to resolve their status in the Play Store.
+   *
+   * @since 0.0.1
+   */
+  Unknown = 'UNKNOWN',
+  /**
+   * All other users return this value.
+   *
+   * @since 0.0.1
+   */
+  Empty = 'EMPTY',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

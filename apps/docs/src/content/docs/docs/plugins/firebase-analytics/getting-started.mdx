@@ -1,0 +1,422 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-analytics and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-firebase-analytics` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-firebase-analytics
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+```
+
+## Quick start
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+const result = await FirebaseAnalytics.getAppInstanceId();
+console.log(result);
+```
+
+## Example: getSessionId
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+const result = await FirebaseAnalytics.getSessionId();
+console.log(result);
+```
+
+## Example: setConsent
+
+```typescript
+import { FirebaseAnalytics, ConsentStatus, ConsentType } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setConsent({
+  type: ConsentType.AdPersonalization,
+  status: ConsentStatus.Granted,
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `getAppInstanceId`
+
+Retrieves the app instance id.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+const result = await FirebaseAnalytics.getAppInstanceId();
+console.log(result);
+```
+
+### `getSessionId`
+
+Retrieves the current session id (`ga_session_id`).
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+const result = await FirebaseAnalytics.getSessionId();
+console.log(result);
+```
+
+### `setConsent`
+
+Sets the user's consent mode.
+
+```typescript
+import { FirebaseAnalytics, ConsentStatus, ConsentType } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setConsent({
+  type: ConsentType.AdPersonalization,
+  status: ConsentStatus.Granted,
+});
+```
+
+### `setUserId`
+
+Sets the user ID property.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setUserId({ userId: 'user-id-123' });
+```
+
+### `setUserProperty`
+
+Sets a custom user property to a given value.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setUserProperty({
+  key: 'key-123',
+  value: 'value',
+});
+```
+
+### `setCurrentScreen`
+
+Sets the current screen name.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setCurrentScreen({ screenName: 'screen' });
+```
+
+### `logEvent`
+
+Logs an app event.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.logEvent({ name: 'example' });
+```
+
+### `setSessionTimeoutDuration`
+
+Sets the duration of inactivity that terminates the current session.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setSessionTimeoutDuration({ duration: 1800 });
+```
+
+### `setEnabled`
+
+Enables/disables automatic data collection.
+The value does not apply until the next run of the app.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setEnabled({ enabled: true });
+```
+
+### `isEnabled`
+
+Returns whether or not automatic data collection is enabled.
+
+Only available for Web.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+const result = await FirebaseAnalytics.isEnabled();
+console.log(result);
+```
+
+### `resetAnalyticsData`
+
+Clears all analytics data for this app from the device.
+Resets the app instance id.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.resetAnalyticsData();
+```
+
+### `initiateOnDeviceConversionMeasurementWithEmailAddress`
+
+Initiates on-device conversion measurement with an email address.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithEmailAddress({ emailAddress: 'user@example.com' });
+```
+
+### `initiateOnDeviceConversionMeasurementWithPhoneNumber`
+
+Initiates on-device conversion measurement with a phone number.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithPhoneNumber({ phoneNumber: '+15555550123' });
+```
+
+### `initiateOnDeviceConversionMeasurementWithHashedEmailAddress`
+
+Initiates on-device conversion measurement with a hashed email address.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedEmailAddress({ emailAddressToHash: 'user@example.com' });
+```
+
+### `initiateOnDeviceConversionMeasurementWithHashedPhoneNumber`
+
+Initiates on-device conversion measurement with a hashed phone number.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedPhoneNumber({ phoneNumberToHash: '+15555550123' });
+```
+
+## Type Reference
+
+### `GetAppInstanceIdResult`
+```typescript
+export interface GetAppInstanceIdResult {
+  /**
+   * The app instance id.
+   *
+   * Not defined if `FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE` has been set to `FirebaseAnalytics.ConsentStatus.DENIED`.
+   *
+   * @since 1.4.0
+   */
+  appInstanceId?: string;
+}
+```
+
+### `GetSessionIdResult`
+```typescript
+export interface GetSessionIdResult {
+  /**
+   * The current session id.
+   *
+   * Matches Firebase Analytics `ga_session_id`.
+   *
+   * Not defined if `FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE` has been set to `FirebaseAnalytics.ConsentStatus.DENIED`.
+   *
+   * @since 8.0.1
+   */
+  sessionId?: number;
+}
+```
+
+### `SetConsentOptions`
+```typescript
+export interface SetConsentOptions {
+  /**
+   * The consent type.
+   *
+   * @since 6.0.0
+   */
+  type: ConsentType;
+  /**
+   * The consent status.
+   *
+   * @since 6.0.0
+   */
+  status: ConsentStatus;
+}
+```
+
+### `SetUserIdOptions`
+```typescript
+export interface SetUserIdOptions {
+  /**
+   * @since 0.1.0
+   */
+  userId: string | null;
+}
+```
+
+### `SetUserPropertyOptions`
+```typescript
+export interface SetUserPropertyOptions {
+  /**
+   * @since 0.1.0
+   */
+  key: string;
+  /**
+   * @since 0.1.0
+   */
+  value: string | null;
+}
+```
+
+### `SetCurrentScreenOptions`
+```typescript
+export interface SetCurrentScreenOptions {
+  /**
+   * @since 0.1.0
+   */
+  screenName: string | null;
+  /**
+   * Only available for Android and iOS.
+   *
+   * @default null
+   * @since 0.1.0
+   */
+  screenClassOverride?: string | null;
+}
+```
+
+### `LogEventOptions`
+```typescript
+export interface LogEventOptions {
+  /**
+   * The event name.
+   *
+   * @since 0.1.0
+   */
+  name: string;
+  /**
+   * The optional event params.
+   *
+   * @since 0.1.0
+   */
+  params?: { [key: string]: any };
+}
+```
+
+### `SetSessionTimeoutDurationOptions`
+```typescript
+export interface SetSessionTimeoutDurationOptions {
+  /**
+   * Duration in seconds.
+   *
+   * @default 1800
+   * @since 0.1.0
+   */
+  duration: number;
+}
+```
+
+### `SetEnabledOptions`
+```typescript
+export interface SetEnabledOptions {
+  /**
+   * @since 0.1.0
+   */
+  enabled: boolean;
+}
+```
+
+### `IsEnabledResult`
+```typescript
+export interface IsEnabledResult {
+  /**
+   * @since 0.1.0
+   */
+  enabled: boolean;
+}
+```
+
+### `InitiateOnDeviceConversionMeasurementWithEmailAddressOptions`
+```typescript
+export interface InitiateOnDeviceConversionMeasurementWithEmailAddressOptions {
+  /**
+   * The email address to initiate on-device conversion measurement with.
+   *
+   * @since 7.2.0
+   */
+  emailAddress: string;
+}
+```
+
+### `InitiateOnDeviceConversionMeasurementWithPhoneNumberOptions`
+```typescript
+export interface InitiateOnDeviceConversionMeasurementWithPhoneNumberOptions {
+  /**
+   * The phone number to initiate on-device conversion measurement with.
+   *
+   * @since 7.2.0
+   */
+  phoneNumber: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

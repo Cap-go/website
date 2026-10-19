@@ -1,0 +1,36 @@
+---
+title: "Settings"
+description: "How to change the user settings, manage your info, name and email change your picture and more from your Capgo account"
+sidebar:
+  order: 6
+---
+
+## How to get to the settings page
+
+First click on **your name and picture**. Then click on **Settings**.
+
+<figure><img src="/settings-go.webp" alt="open settings" /><figcaption></figcaption></figure>
+
+## Changing the user settings
+
+To change any user setting you can just fill out the form in the account and then click on **Update**.
+
+<figure><img src="/account-save.webp" alt="save change in account" /><figcaption></figcaption></figure>
+
+Then a confirmation should appear.
+
+<figure><img src="/account-updated.webp" alt="account updated" /><figcaption></figcaption></figure>
+
+## Changing the password
+
+To change the password go to the settings page and click on **Password**. Then fill in the form and click on **Update**.
+
+<figure><img src="/update-passwd.webp" alt="update password" /><figcaption></figcaption></figure>
+
+When the password does not follow the capgo password security rules then you will get an error message.
+
+<figure><img src="/passwd-error.webp" alt="wrong password" /><figcaption></figcaption></figure>
+
+## Keep going from Settings
+
+If you are using **Settings** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

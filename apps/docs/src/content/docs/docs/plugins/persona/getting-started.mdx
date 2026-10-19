@@ -1,0 +1,317 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-intune and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-intune` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-intune
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+```
+
+## Quick start
+
+```typescript
+import { Persona } from '@capgo/capacitor-persona';
+
+await Persona.startInquiry({});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `acquireToken`
+
+Present the Microsoft sign-in flow and return an access token plus the account metadata.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.acquireToken({ scopes: ['openid'] });
+// The result holds sensitive values: use it without logging it.
+```
+
+### `acquireTokenSilent`
+
+Acquire a token from the MSAL cache for a previously signed-in user.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.acquireTokenSilent({
+  scopes: ['openid'],
+  accountId: 'acquireToken',
+});
+// The result holds sensitive values: use it without logging it.
+```
+
+### `registerAndEnrollAccount`
+
+Register a previously authenticated account with Intune and start enrollment.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.registerAndEnrollAccount({ accountId: 'account-id-123' });
+```
+
+### `loginAndEnrollAccount`
+
+Ask Intune to authenticate and enroll a user without first requesting an app token.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.loginAndEnrollAccount();
+```
+
+### `enrolledAccount`
+
+Return the currently enrolled Intune account, if one is available.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.enrolledAccount();
+console.log(result);
+```
+
+### `deRegisterAndUnenrollAccount`
+
+Deregister the account from Intune and trigger selective wipe when applicable.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.deRegisterAndUnenrollAccount({ accountId: 'account-id-123' });
+```
+
+### `logoutOfAccount`
+
+Sign the user out of MSAL without unenrolling the Intune account.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.logoutOfAccount({ accountId: 'account-id-123' });
+```
+
+### `appConfig`
+
+Fetch the remote Intune app configuration for a managed account.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.appConfig({ accountId: 'account-id-123' });
+console.log(result);
+```
+
+### `getPolicy`
+
+Fetch the currently effective Intune app protection policy for a managed account.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.getPolicy({ accountId: 'account-id-123' });
+console.log(result);
+```
+
+### `groupName`
+
+Convenience helper that resolves the `GroupName` app configuration value when present.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.groupName({ accountId: 'account-id-123' });
+console.log(result);
+```
+
+### `sdkVersion`
+
+Return the native Intune and MSAL SDK versions bundled by this plugin.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const result = await IntuneMAM.sdkVersion();
+console.log(result);
+```
+
+### `displayDiagnosticConsole`
+
+Show the native Intune diagnostics UI.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.displayDiagnosticConsole();
+```
+
+## Type Reference
+
+### `AcquireTokenOptions`
+Interactive token acquisition options.
+```typescript
+export interface AcquireTokenOptions {
+  /**
+   * Scopes to request, for example `https://graph.microsoft.com/.default`.
+   */
+  scopes: string[];
+
+  /**
+   * When true, always show the Microsoft account picker or sign-in UI.
+   *
+   * @default false
+   */
+  forcePrompt?: boolean;
+
+  /**
+   * Optional login hint for the interactive sign-in flow.
+   */
+  loginHint?: string;
+}
+```
+
+### `IntuneMAMAcquireToken`
+```typescript
+export interface IntuneMAMAcquireToken {
+  accountId: string;
+  accessToken: string;
+  accountIdentifier: string;
+  idToken?: string;
+  username?: string;
+  tenantId?: string;
+  authority?: string;
+}
+```
+
+### `AcquireTokenSilentOptions`
+Silent token acquisition options.
+```typescript
+export interface AcquireTokenSilentOptions {
+  /**
+   * Scopes to request, for example `https://graph.microsoft.com/.default`.
+   */
+  scopes: string[];
+
+  /**
+   * Microsoft Entra object ID returned by `acquireToken` or `enrolledAccount`.
+   */
+  accountId: string;
+
+  /**
+   * When true, bypass the cached access token and request a fresh one.
+   *
+   * @default false
+   */
+  forceRefresh?: boolean;
+}
+```
+
+### `RegisterAndEnrollAccountOptions`
+```typescript
+export interface RegisterAndEnrollAccountOptions {
+  /**
+   * Microsoft Entra object ID returned by `acquireToken`.
+   */
+  accountId: string;
+}
+```
+
+### `IntuneMAMUser`
+```typescript
+export interface IntuneMAMUser {
+  accountId: string;
+  accountIdentifier?: string;
+  username?: string;
+  tenantId?: string;
+  authority?: string;
+}
+```
+
+### `IntuneMAMAppConfig`
+```typescript
+export interface IntuneMAMAppConfig {
+  accountId: string;
+  fullData: Record<string, string>[];
+  values: Record<string, string>;
+  conflicts: string[];
+}
+```
+
+### `IntuneMAMPolicy`
+```typescript
+export interface IntuneMAMPolicy {
+  accountId: string;
+  isPinRequired?: boolean;
+  isManagedBrowserRequired?: boolean;
+  isScreenCaptureAllowed?: boolean;
+  isContactSyncAllowed?: boolean;
+  isAppSharingAllowed?: boolean;
+  isFileEncryptionRequired?: boolean;
+  notificationPolicy?: string;
+}
+```
+
+### `IntuneMAMGroupName`
+```typescript
+export interface IntuneMAMGroupName {
+  accountId: string;
+  groupName?: string;
+}
+```
+
+### `IntuneMAMVersionInfo`
+```typescript
+export interface IntuneMAMVersionInfo {
+  platform: 'ios' | 'android';
+  intuneSdkVersion: string;
+  msalVersion?: string;
+}
+```
+
+### `IntuneMAMChangeEvent`
+```typescript
+export interface IntuneMAMChangeEvent {
+  accountId?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-intune](/plugins/capacitor-persona/) for the native capability in Using @capgo/capacitor-intune, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

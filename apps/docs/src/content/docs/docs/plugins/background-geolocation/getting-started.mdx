@@ -1,0 +1,425 @@
+---
+title: Getting Started
+description: "Install @capgo/background-geolocation for background location tracking and native geofencing."
+sidebar:
+  order: 2
+---
+
+
+`@capgo/background-geolocation` combines precise background location tracking with native geofencing for iOS and Android. Use it for delivery zones, stores, job sites, campuses, check-ins, route alerts, and any workflow that needs enter or exit events even when the WebView is not running.
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/background-geolocation` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/background-geolocation
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+```
+
+## Quick start
+
+Request background location permission, start updates with a user visible Android notification message, and POST fixes to your API from native code.
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+await BackgroundGeolocation.requestPermissions({
+  permissions: ['location', 'backgroundLocation', 'notification'],
+});
+
+await BackgroundGeolocation.start(
+  {
+    backgroundMessage: 'Tracking delivery route',
+    backgroundTitle: 'Location active',
+    requestPermissions: true,
+    stale: false,
+    url: 'https://api.example.com/locations',
+    headers: { Authorization: 'Bearer fleet-token' },
+    distanceFilter: 25,
+  },
+  (location, error) => {
+    if (error) {
+      console.error('Location error', error);
+      return;
+    }
+    if (location) {
+      console.log('Fix', location.latitude, location.longitude);
+    }
+  },
+);
+```
+
+Each fix is delivered in parallel to JavaScript (while the WebView is alive) and to `url` with `"source": "native"` in the JSON body.
+
+## Example: geofence webhook
+
+```typescript
+await BackgroundGeolocation.setupGeofencing({
+  url: 'https://api.example.com/geofence-hit',
+  backgroundLocation: true,
+});
+```
+
+On Android, declare `ACCESS_BACKGROUND_LOCATION` in your manifest when you need background geofence POSTs (see the native geofencing section below).
+
+```typescript
+await BackgroundGeolocation.addGeofence({
+  identifier: 'warehouse',
+  latitude: 32.7,
+  longitude: -117.1,
+  radius: 200,
+});
+```
+
+## Example: stop tracking
+
+```typescript
+await BackgroundGeolocation.stop();
+```
+
+## Common pitfalls
+
+- **Android notification**: background updates require `backgroundMessage` (and title) so users see why location is active.
+- **Stale fixes**: set `stale: false` when you need GPS fresh fixes only.
+- **Permissions**: request `backgroundLocation` separately on modern Android versions.
+
+## API Overview
+
+### `start`
+
+To start listening for changes in the device's location, call this method.
+A Promise is returned to indicate that it finished the call. The callback will be called every time a new location
+is available, or if there was an error when calling this method. Don't rely on promise rejection for this.
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+await BackgroundGeolocation.start(
+  {
+    backgroundMessage: "App is using your location in the background",
+    backgroundTitle: "Location Service",
+    requestPermissions: true,
+    stale: false,
+    distanceFilter: 10
+  },
+  (location, error) => {
+    if (error) {
+      console.error('Location error:', error);
+      return;
+    }
+    if (location) {
+      console.log('New location:', location.latitude, location.longitude);
+    }
+  }
+);
+```
+
+### `stop`
+
+Stops location updates.
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+await BackgroundGeolocation.stop();
+```
+
+### `openSettings`
+
+Opens the device's location settings page.
+Useful for directing users to enable location services or adjust permissions.
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+// Direct user to location settings
+await BackgroundGeolocation.openSettings();
+```
+
+### `setPlannedRoute`
+
+Plays a sound file when the user deviates from the planned route.
+This should be used to play a sound (in the background too, only for native).
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+await BackgroundGeolocation.setPlannedRoute({
+  soundFile: "notification.mp3",
+  route: [[-74.0060, 40.7128], [-118.2437, 34.0522]]
+});
+```
+
+### Native geofencing
+
+Geofencing runs in the native layer, so iOS and Android can trigger enter and exit events without relying on the WebView to stay awake. Configure an HTTP or HTTPS webhook URL when your backend must receive transitions even while the app UI is suspended.
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+await BackgroundGeolocation.setupGeofencing({
+  url: 'https://api.example.com/geofences',
+  notifyOnEntry: true,
+  notifyOnExit: true,
+  payload: { userId: '123' },
+});
+
+await BackgroundGeolocation.addGeofence({
+  identifier: 'store-42',
+  latitude: 37.33182,
+  longitude: -122.03118,
+  radius: 150,
+  payload: { storeId: '42' },
+});
+
+const handle = await BackgroundGeolocation.addListener(
+  'geofenceTransition',
+  (event) => {
+    console.log(event.identifier, event.transition);
+  },
+);
+
+const errorHandle = await BackgroundGeolocation.addListener(
+  'geofenceError',
+  (event) => {
+    console.error(event.identifier, event.message);
+  },
+);
+
+const { regions } = await BackgroundGeolocation.getMonitoredGeofences();
+console.log(regions);
+
+await BackgroundGeolocation.removeGeofence({ identifier: 'store-42' });
+await handle.remove();
+await errorHandle.remove();
+```
+
+On iOS, geofencing requires Always location authorization. On Android 10 and newer, add background location permission to your app manifest when you need background geofencing:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+```
+
+## Type Reference
+
+### `StartOptions`
+The options for configuring for location updates.
+```typescript
+export interface StartOptions {
+  /**
+   * If the "backgroundMessage" option is defined, the plugin will
+   * provide location updates whether the app is in the background or the
+   * foreground. If it is not defined, location updates are only
+   * guaranteed in the foreground. This is true on both platforms.
+   *
+   * On Android, a notification must be shown to continue receiving
+   * location updates in the background. This option specifies the text of
+   * that notification.
+   *
+   * @since 7.0.9
+   * @example "Getting your location to provide better service"
+   */
+  backgroundMessage?: string;
+  /**
+   * The title of the notification mentioned above.
+   *
+   * @since 7.0.9
+   * @default "Using your location"
+   * @example "Location Service"
+   */
+  backgroundTitle?: string;
+  /**
+   * Whether permissions should be requested from the user automatically,
+   * if they are not already granted.
+   *
+   * @since 7.0.9
+   * @default true
+   * @example
+   * // Auto-request permissions
+   * requestPermissions: true
+   *
+   * // Don't auto-request, handle manually
+   * requestPermissions: false
+   */
+  requestPermissions?: boolean;
+  /**
+   * If "true", stale locations may be delivered while the device
+   * obtains a GPS fix. You are responsible for checking the "time"
+   * property. If "false", locations are guaranteed to be up to date.
+   *
+   * @since 7.0.9
+   * @default false
+   * @example
+   * // Allow stale locations for faster initial response
+   * stale: true
+   *
+   * // Only fresh locations
+   * stale: false
+   */
+  stale?: boolean;
+  /**
+   * The distance in meters that the device must move before a new location update is triggered.
+   * This is used to filter out small movements and reduce the number of updates.
+   *
+   * @since 7.0.9
+   * @default 0
+   * @example
+   * // Update every 10 meters
+   * distanceFilter: 10
+   *
+   * // Update on any movement
+   * distanceFilter: 0
+   */
+  distanceFilter?: number;
+}
+```
+
+### `Location`
+Represents a geographical location with various attributes. Contains all the standard location properties returned by GPS/network providers.
+```typescript
+export interface Location {
+  /**
+   * Latitude in degrees.
+   * Range: -90.0 to +90.0
+   *
+   * @since 7.0.0
+   * @example 40.7128
+   */
+  latitude: number;
+  /**
+   * Longitude in degrees.
+   * Range: -180.0 to +180.0
+   *
+   * @since 7.0.0
+   * @example -74.0060
+   */
+  longitude: number;
+  /**
+   * Radius of horizontal uncertainty in metres, with 68% confidence.
+   * Lower values indicate more accurate location.
+   *
+   * @since 7.0.0
+   * @example 5.0
+   */
+  accuracy: number;
+  /**
+   * Metres above sea level (or null if not available).
+   *
+   * @since 7.0.0
+   * @example 10.5
+   */
+  altitude: number | null;
+  /**
+   * Vertical uncertainty in metres, with 68% confidence (or null if not available).
+   *
+   * @since 7.0.0
+   * @example 3.0
+   */
+  altitudeAccuracy: number | null;
+  /**
+   * `true` if the location was simulated by software, rather than GPS.
+   * Useful for detecting mock locations in development or testing.
+   *
+   * @since 7.0.0
+   * @example false
+   */
+  simulated: boolean;
+  /**
+   * Deviation from true north in degrees (or null if not available).
+   * Range: 0.0 to 360.0
+   *
+   * @since 7.0.0
+   * @example 45.5
+   */
+  bearing: number | null;
+  /**
+   * Speed in metres per second (or null if not available).
+   *
+   * @since 7.0.0
+   * @example 2.5
+   */
+  speed: number | null;
+  /**
+   * Time the location was produced, in milliseconds since the unix epoch.
+   * Use this to check if a location is stale when using stale: true.
+   *
+   * @since 7.0.0
+   * @example 1640995200000
+   */
+  time: number | null;
+}
+```
+
+### `CallbackError`
+Error object that may be passed to the location start callback. Extends the standard Error with optional error codes.
+```typescript
+export interface CallbackError extends Error {
+  /**
+   * Optional error code for more specific error handling.
+   *
+   * @since 7.0.0
+   * @example "PERMISSION_DENIED"
+   */
+  code?: string;
+}
+```
+
+### `SetPlannedRouteOptions`
+```typescript
+export interface SetPlannedRouteOptions {
+  /**
+   * The name of the sound file to play.
+   * Must be a valid sound relative path in the app's public folder to work for both web and native platforms.
+   * There's no need to include the public folder in the path.
+   * @since 7.0.10
+   * @example "notification.mp3"
+   * */
+  soundFile: string;
+  /**
+   * The planned route as an array of longitude and latitude pairs.
+   * Each pair represents a point on the route.
+   * This is used to define a route that the user can follow.
+   * The route is used to play a sound when the user deviates from it.
+   * @since 7.0.11
+   * @example [[-74.0060, 40.7128], [-118.2437, 34.0522]]
+   */
+  route: [number, number][];
+
+  /**
+   * The distance in meters that the user must deviate from the planned route to trigger the sound.
+   * This is used to determine how far off the route the user can be before the sound is played.
+   * If not specified, a default value of 50 meters is used.
+   * @since 7.0.11
+   * @default 50
+   * @example 50
+   */
+  distance: number;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Using @capgo/background-geolocation](/plugins/capacitor-background-geolocation/) for the native capability in Using @capgo/background-geolocation, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

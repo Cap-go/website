@@ -1,0 +1,114 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-native-market and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-native-market` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+npm install @capgo/capacitor-native-market
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { NativeMarket } from '@capgo/capacitor-native-market';
+```
+
+## API Overview
+
+### `openStoreListing`
+
+Launch app listing page in Play Store (Android) or App Store (iOS).
+
+```typescript
+import { NativeMarket } from '@capgo/capacitor-native-market';
+
+// Open app in store
+await NativeMarket.openStoreListing({
+  appId: 'com.example.app'
+});
+
+// Open app in specific country store (iOS only)
+await NativeMarket.openStoreListing({
+  appId: 'com.example.app',
+  country: 'IT'
+});
+```
+
+### `openDevPage`
+
+Deep-link directly to a developer's page in the Play Store.
+Android only.
+
+```typescript
+import { NativeMarket } from '@capgo/capacitor-native-market';
+
+await NativeMarket.openDevPage({
+  devId: 'Google+LLC'
+});
+```
+
+### `openCollection`
+
+Link users to a collection or top charts in the Play Store.
+Android only.
+
+```typescript
+import { NativeMarket } from '@capgo/capacitor-native-market';
+
+await NativeMarket.openCollection({
+  name: 'featured'
+});
+```
+
+### `openEditorChoicePage`
+
+Link users to Editor's choice page in the Play Store.
+Android only.
+
+```typescript
+import { NativeMarket } from '@capgo/capacitor-native-market';
+
+await NativeMarket.openEditorChoicePage({
+  editorChoice: 'editorial_fitness_apps_us'
+});
+```
+
+### `search`
+
+Search the Play Store with custom search terms.
+Android only.
+
+```typescript
+import { NativeMarket } from '@capgo/capacitor-native-market';
+
+await NativeMarket.search({
+  terms: 'fitness apps'
+});
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

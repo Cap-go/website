@@ -1,0 +1,241 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-sim and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-sim` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-sim
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+```
+
+## Quick start
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const { simCards } = await Sim.getSimCards();
+simCards.forEach((sim, index) => {
+  console.log(`SIM ${index + 1}:`);
+  console.log(`  Carrier: ${sim.carrierName}`);
+  console.log(`  Country: ${sim.isoCountryCode}`);
+  console.log(`  MCC: ${sim.mobileCountryCode}`);
+  console.log(`  MNC: ${sim.mobileNetworkCode}`);
+});
+```
+
+## Example: checkPermissions
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.checkPermissions();
+if (status.readSimCard === 'granted') {
+  console.log('Permission granted');
+} else {
+  console.log('Permission not granted');
+}
+```
+
+## Example: requestPermissions
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.requestPermissions();
+if (status.readSimCard === 'granted') {
+  // Now you can call getSimCards()
+  const simCards = await Sim.getSimCards();
+}
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `getSimCards`
+
+Get information from the device's SIM cards.
+
+Retrieves details about all SIM cards installed in the device.
+On dual-SIM devices, returns information for both SIM cards.
+Requires READ_PHONE_STATE permission on Android.
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const { simCards } = await Sim.getSimCards();
+simCards.forEach((sim, index) => {
+  console.log(`SIM ${index + 1}:`);
+  console.log(`  Carrier: ${sim.carrierName}`);
+  console.log(`  Country: ${sim.isoCountryCode}`);
+  console.log(`  MCC: ${sim.mobileCountryCode}`);
+  console.log(`  MNC: ${sim.mobileNetworkCode}`);
+});
+```
+
+### `checkPermissions`
+
+Check permission to access SIM card information.
+
+Checks if the app has permission to read SIM card data.
+On Android, checks READ_PHONE_STATE permission.
+On iOS, the status is always granted.
+On Web, the status is always denied.
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.checkPermissions();
+if (status.readSimCard === 'granted') {
+  console.log('Permission granted');
+} else {
+  console.log('Permission not granted');
+}
+```
+
+### `requestPermissions`
+
+Request permission to access SIM card information.
+
+Prompts the user to grant permission to read SIM card data.
+On Android, requests READ_PHONE_STATE permission.
+On iOS, the status is always granted without prompting.
+On Web, the status remains denied.
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.requestPermissions();
+if (status.readSimCard === 'granted') {
+  // Now you can call getSimCards()
+  const simCards = await Sim.getSimCards();
+}
+```
+
+## Type Reference
+
+### `GetSimCardsResult`
+Result returned by .
+```typescript
+export interface GetSimCardsResult {
+  simCards: SimCard[];
+}
+```
+
+### `PermissionStatus`
+Result of a permission check or request.
+```typescript
+export interface PermissionStatus {
+  readSimCard: PermissionState;
+}
+```
+
+### `SimCard`
+A SIM card description.
+```typescript
+export interface SimCard {
+  /**
+   * Android only: Phone number for this SIM slot, when available.
+   *
+   * @since 1.0.0
+   */
+  number?: string;
+
+  /**
+   * Android only: Unique subscription identifier.
+   *
+   * @since 1.1.0
+   */
+  subscriptionId?: string;
+
+  /**
+   * Android only: Physical SIM slot index for this subscription.
+   *
+   * @since 1.1.0
+   */
+  simSlotIndex?: number;
+
+  /**
+   * iOS only: Indicates whether the carrier supports VoIP.
+   *
+   * @since 1.0.0
+   */
+  allowsVOIP?: boolean;
+
+  /**
+   * Display name of the cellular service provider.
+   *
+   * On iOS 16.4+ the system may return placeholder values such as `--`.
+   * See https://github.com/jonz94/capacitor-sim/issues/8 for details.
+   *
+   * @since 1.0.0
+   */
+  carrierName: string;
+
+  /**
+   * ISO 3166-1 alpha-2 country code of the service provider.
+   *
+   * On iOS 16.4+ the system may return an empty string or `--`.
+   * See https://github.com/jonz94/capacitor-sim/issues/8 for details.
+   *
+   * @since 1.0.0
+   */
+  isoCountryCode: string;
+
+  /**
+   * Mobile Country Code (MCC) of the service provider.
+   *
+   * On iOS 16.4+ the system may return placeholder values such as `65535`.
+   * See https://github.com/jonz94/capacitor-sim/issues/8 for details.
+   *
+   * @since 1.0.0
+   */
+  mobileCountryCode: string;
+
+  /**
+   * Mobile Network Code (MNC) of the service provider.
+   *
+   * On iOS 16.4+ the system may return placeholder values such as `65535`.
+   * See https://github.com/jonz94/capacitor-sim/issues/8 for details.
+   *
+   * @since 1.0.0
+   */
+  mobileNetworkCode: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-sim](/plugins/capacitor-sim/) for the native capability in Using @capgo/capacitor-sim, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

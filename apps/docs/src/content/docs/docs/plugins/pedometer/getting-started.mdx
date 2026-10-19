@@ -1,0 +1,316 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-pedometer and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-pedometer` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-pedometer
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+```
+
+## Quick start
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+await CapacitorPedometer.requestPermissions();
+await CapacitorPedometer.startMeasurementUpdates();
+
+await CapacitorPedometer.addListener('measurement', (event) => {
+  updateStepCount(event.numberOfSteps);
+});
+```
+
+## Example: iOS history query
+
+```typescript
+const sample = await CapacitorPedometer.getMeasurement({
+  startDate: start.toISOString(),
+  endDate: end.toISOString(),
+});
+```
+
+## Common pitfalls
+
+- **Permissions**: motion on iOS, `ACTIVITY_RECOGNITION` on Android.
+- **Web**: not available, hide step UI on web builds.
+- **Stop updates**: call `stopMeasurementUpdates()` to save battery.
+
+## API Overview
+
+### `getMeasurement`
+
+Get pedometer measurements for a specified time range.
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+const result = await CapacitorPedometer.getMeasurement();
+console.log(result);
+```
+
+### `isAvailable`
+
+Check which pedometer features are available on this device.
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+const result = await CapacitorPedometer.isAvailable();
+console.log(result);
+```
+
+### `startMeasurementUpdates`
+
+Start receiving real-time pedometer measurement updates.
+
+On **Android** and **iOS**, the `measurement` event is only fired after calling `startMeasurementUpdates()`.
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+await CapacitorPedometer.startMeasurementUpdates();
+```
+
+### `stopMeasurementUpdates`
+
+Stop receiving real-time pedometer measurement updates.
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+await CapacitorPedometer.stopMeasurementUpdates();
+```
+
+### `checkPermissions`
+
+Check permission to access pedometer data.
+
+On **Android**, this checks the `ACTIVITY_RECOGNITION` permission.
+On **iOS**, this checks the motion usage permission.
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+const result = await CapacitorPedometer.checkPermissions();
+console.log(result);
+```
+
+### `requestPermissions`
+
+Request permission to access pedometer data.
+
+On **Android**, this requests the `ACTIVITY_RECOGNITION` permission.
+On **iOS**, this requests motion usage permission.
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+const result = await CapacitorPedometer.requestPermissions();
+console.log(result);
+```
+
+## Type Reference
+
+### `GetMeasurementOptions`
+```typescript
+export interface GetMeasurementOptions {
+  /**
+   * The start time for the measurement query (milliseconds since epoch).
+   *
+   * Required on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  start?: number;
+
+  /**
+   * The end time for the measurement query (milliseconds since epoch).
+   *
+   * Required on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  end?: number;
+}
+```
+
+### `Measurement`
+```typescript
+export interface Measurement {
+  /**
+   * The number of steps taken by the user.
+   *
+   * @since 0.0.1
+   */
+  numberOfSteps?: number;
+
+  /**
+   * The estimated distance (in meters) traveled by the user.
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  distance?: number;
+
+  /**
+   * The approximate number of floors ascended.
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  floorsAscended?: number;
+
+  /**
+   * The approximate number of floors descended.
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  floorsDescended?: number;
+
+  /**
+   * The current pace (in seconds per meter).
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  currentPace?: number;
+
+  /**
+   * The current cadence (steps per second).
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  currentCadence?: number;
+
+  /**
+   * The average active pace (in seconds per meter).
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  averageActivePace?: number;
+
+  /**
+   * The start time of this measurement (milliseconds since epoch).
+   *
+   * @since 0.0.1
+   */
+  startDate?: number;
+
+  /**
+   * The end time of this measurement (milliseconds since epoch).
+   *
+   * @since 0.0.1
+   */
+  endDate?: number;
+}
+```
+
+### `IsAvailableResult`
+```typescript
+export interface IsAvailableResult {
+  /**
+   * Whether step counting is available.
+   *
+   * @since 0.0.1
+   */
+  stepCounting: boolean;
+
+  /**
+   * Whether distance measurement is available.
+   *
+   * Only `true` on **iOS** devices that support distance tracking.
+   *
+   * @since 0.0.1
+   */
+  distance: boolean;
+
+  /**
+   * Whether pace measurement is available.
+   *
+   * Only `true` on **iOS** devices that support pace tracking.
+   *
+   * @since 0.0.1
+   */
+  pace: boolean;
+
+  /**
+   * Whether cadence measurement is available.
+   *
+   * Only `true` on **iOS** devices that support cadence tracking.
+   *
+   * @since 0.0.1
+   */
+  cadence: boolean;
+
+  /**
+   * Whether floor counting is available.
+   *
+   * Only `true` on **iOS** devices that support floor tracking.
+   *
+   * @since 0.0.1
+   */
+  floorCounting: boolean;
+}
+```
+
+### `PermissionStatus`
+```typescript
+export interface PermissionStatus {
+  /**
+   * Permission state for activity recognition.
+   *
+   * On **Android**, this is the `ACTIVITY_RECOGNITION` permission.
+   * On **iOS**, this is the motion usage permission.
+   *
+   * @since 0.0.1
+   */
+  activityRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+}
+```
+
+### `MeasurementEvent`
+```typescript
+export type MeasurementEvent = Measurement;
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-pedometer](/plugins/capacitor-pedometer/) for the native capability in Using @capgo/capacitor-pedometer, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

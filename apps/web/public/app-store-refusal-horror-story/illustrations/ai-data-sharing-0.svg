@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="AI data sharing nodes">
+  <title>AI data sharing nodes</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="52" cy="52" r="18" fill="#44BCFF" opacity="0.32"/>
+      <rect x="72" y="88" width="48" height="48" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+      <rect x="200" y="72" width="56" height="56" rx="14" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+      <path d="M120 112 H200" stroke="#44BCFF" stroke-width="2" stroke-dasharray="6 4" opacity="0.5"/>
+      <circle cx="228" cy="100" r="8" fill="#44BCFF" opacity="0.5"/>
+</svg>

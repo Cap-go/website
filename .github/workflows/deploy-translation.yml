@@ -1,0 +1,94 @@
+name: Deploy Translation Worker
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-translation
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/translation-worker/**'
+      - 'package.json'
+      - 'bun.lock'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.3
+      - name: Cache bun modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      - run: bun install --frozen-lockfile
+      - run: bun run ci:verify:translation
+      - name: Ensure translation queues exist
+        run: |
+          ensure_queue() {
+            queue="$1"
+            set +e
+            output="$(bunx wrangler queues create "$queue" 2>&1)"
+            status=$?
+            set -e
+            printf '%s\n' "$output"
+            if [ "$status" -eq 0 ]; then
+              return 0
+            fi
+            printf '%s\n' "$output" | grep -Eiq "already exists|already taken|already.*${queue}"
+          }
+
+          ensure_queue capgo-translation-refresh
+          ensure_queue capgo-translation-priority-refresh
+          ensure_queue capgo-translation-refresh-development
+          ensure_queue capgo-translation-priority-refresh-development
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Ensure translation cache buckets exist
+        run: |
+          ensure_bucket() {
+            bucket="$1"
+            set +e
+            output="$(bunx wrangler r2 bucket create "$bucket" 2>&1)"
+            status=$?
+            set -e
+            printf '%s\n' "$output"
+            if [ "$status" -eq 0 ]; then
+              return 0
+            fi
+            printf '%s\n' "$output" | grep -Eiq "already exists|already.*${bucket}"
+          }
+
+          ensure_bucket capgo-translation-cache
+          ensure_bucket capgo-translation-cache-development
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Verify real translation runtime
+        run: bun run verify:real-translation
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - run: bun run deploy:translation
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

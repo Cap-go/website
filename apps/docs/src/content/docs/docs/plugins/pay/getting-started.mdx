@@ -1,0 +1,317 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-pay and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-pay` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-pay
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+```
+
+## Quick start
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const result = await Pay.isPayAvailable();
+console.log(result);
+```
+
+## Example: requestPayment
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const result = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant-identifier-123',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    paymentSummaryItems: [
+      {
+        label: 'Hello from Capacitor',
+        amount: 'amount',
+      },
+    ],
+    supportedNetworks: ['AmEx'],
+  },
+});
+// The result holds sensitive values: use it without logging it.
+```
+
+## Example: updateApplePayShipping
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+await Pay.updateApplePayShipping({
+  selectionId: 'selection-id-123',
+  paymentSummaryItems: [
+    {
+      label: 'Hello from Capacitor',
+      amount: 'amount',
+    },
+  ],
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `isPayAvailable`
+
+Checks whether native pay is available on the current platform.
+On iOS this evaluates Apple Pay, on Android it evaluates Google Pay.
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const result = await Pay.isPayAvailable();
+console.log(result);
+```
+
+### `requestPayment`
+
+Presents the native pay sheet for the current platform.
+Provide the Apple Pay configuration on iOS and the Google Pay configuration on Android.
+
+This promise is the completion path on both platforms.
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const result = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant-identifier-123',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    paymentSummaryItems: [
+      {
+        label: 'Hello from Capacitor',
+        amount: 'amount',
+      },
+    ],
+    supportedNetworks: ['AmEx'],
+  },
+});
+// The result holds sensitive values: use it without logging it.
+```
+
+## Type Reference
+
+### `PayAvailabilityOptions`
+```typescript
+export interface PayAvailabilityOptions {
+  apple?: ApplePayAvailabilityOptions;
+  google?: GooglePayAvailabilityOptions;
+}
+```
+
+### `PayAvailabilityResult`
+```typescript
+export interface PayAvailabilityResult {
+  available: boolean;
+  platform: PayPlatform;
+  apple?: ApplePayAvailabilityResult;
+  google?: GooglePayAvailabilityResult;
+}
+```
+
+### `PayPaymentOptions`
+```typescript
+export interface PayPaymentOptions {
+  apple?: ApplePayPaymentOptions;
+  google?: GooglePayPaymentOptions;
+}
+```
+
+### `PayPaymentResult`
+```typescript
+export type PayPaymentResult = ApplePayRequestPaymentResult | GooglePayRequestPaymentResult;
+```
+
+### `ApplePayAvailabilityOptions`
+```typescript
+export interface ApplePayAvailabilityOptions {
+  /**
+   * Optional list of payment networks you intend to use.
+   * Passing networks determines the return value of `canMakePaymentsUsingNetworks`.
+   */
+  supportedNetworks?: ApplePayNetwork[];
+}
+```
+
+### `GooglePayAvailabilityOptions`
+```typescript
+export interface GooglePayAvailabilityOptions {
+  /**
+   * Environment used to construct the Google Payments client. Defaults to `'test'`.
+   */
+  environment?: GooglePayEnvironment;
+  /**
+   * Raw `IsReadyToPayRequest` JSON as defined by the Google Pay API.
+   * Supply the card networks and auth methods you intend to support at runtime.
+   *
+   * @see https://developers.google.com/pay/api/android/reference/request-objects#IsReadyToPayRequest
+   */
+  isReadyToPayRequest?: GooglePayIsReadyToPayRequest;
+}
+```
+
+### `PayPlatform`
+```typescript
+export type PayPlatform = 'ios' | 'android' | 'web';
+```
+
+### `ApplePayAvailabilityResult`
+```typescript
+export interface ApplePayAvailabilityResult {
+  /**
+   * Indicates whether the device can make Apple Pay payments in general.
+   */
+  canMakePayments: boolean;
+  /**
+   * Indicates whether the device can make Apple Pay payments with the supplied networks.
+   */
+  canMakePaymentsUsingNetworks: boolean;
+}
+```
+
+### `GooglePayAvailabilityResult`
+```typescript
+export interface GooglePayAvailabilityResult {
+  /**
+   * Whether the user is able to provide payment information through the Google Pay payment sheet.
+   */
+  isReady: boolean;
+  /**
+   * The current user's ability to pay with one or more of the payment methods specified in `IsReadyToPayRequest.allowedPaymentMethods`.
+   *
+   * This property only exists if `IsReadyToPayRequest.existingPaymentMethodRequired` was set to `true`. The property value will always be `true` if the request is configured for a test environment.
+   */
+  paymentMethodPresent: boolean | undefined;
+}
+```
+
+### `ApplePayPaymentOptions`
+```typescript
+export interface ApplePayPaymentOptions {
+  /**
+   * Merchant identifier created in the Apple Developer portal.
+   */
+  merchantIdentifier: string;
+  /**
+   * Two-letter ISO 3166 country code.
+   */
+  countryCode: string;
+  /**
+   * Three-letter ISO 4217 currency code.
+   */
+  currencyCode: string;
+  /**
+   * Payment summary items displayed in the Apple Pay sheet.
+   */
+  paymentSummaryItems: ApplePaySummaryItem[];
+  /**
+   * Card networks to support.
+   */
+  supportedNetworks: ApplePayNetwork[];
+  /**
+   * Merchant payment capabilities. Defaults to ['3DS'] when omitted.
+   */
+  merchantCapabilities?: ApplePayMerchantCapability[];
+  /**
+   * Contact fields that must be supplied for shipping.
+   */
+  requiredShippingContactFields?: ApplePayContactField[];
+  /**
+   * Contact fields that must be supplied for billing.
+   */
+  requiredBillingContactFields?: ApplePayContactField[];
+  /**
+   * Controls the shipping flow presented to the user.
+   */
+  shippingType?: ApplePayShippingType;
+  /**
+   * Optional ISO 3166 country codes where the merchant is supported.
+   */
+  supportedCountries?: string[];
+  /**
+   * Optional opaque application data passed back in the payment token.
+   */
+  applicationData?: string;
+
+  /**
+   * Recurring payment configuration (iOS 16+).
+   */
+  recurringPaymentRequest?: ApplePayRecurringPaymentRequest;
+}
+```
+
+### `GooglePayPaymentOptions`
+```typescript
+export interface GooglePayPaymentOptions {
+  /**
+   * Environment used to construct the Google Payments client. Defaults to `'test'`.
+   */
+  environment?: GooglePayEnvironment;
+  /**
+   * Raw `PaymentDataRequest` JSON as defined by the Google Pay API.
+   * Provide transaction details, merchant info, and tokenization parameters.
+   *
+   * @see https://developers.google.com/pay/api/android/reference/request-objects#PaymentDataRequest
+   */
+  paymentDataRequest: GooglePayPaymentDataRequest;
+}
+```
+
+### `ApplePayRequestPaymentResult`
+```typescript
+export interface ApplePayRequestPaymentResult {
+  /**
+   * Platform that resolved the payment request.
+   */
+  platform: 'ios';
+  /**
+   * Apple Pay payment payload.
+   */
+  apple: ApplePayPaymentResult;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-pay](/plugins/capacitor-pay/) for the native capability in Using @capgo/capacitor-pay, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

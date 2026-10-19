@@ -1,0 +1,53 @@
+---
+title: "@capgo/capacitor-native-market"
+description: "A native market plugin for linking to google play or app store."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Capacitor Native Market Plugin for opening app store listings and pages."
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-market/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-market/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Capacitor Native Market Plugin for opening app store listings and pages.
+
+<span title="Renamed from @capgo/native-market to @capgo/capacitor-native-market.">Package name changed.</span>
+
+## Core Capabilities
+
+- `openStoreListing` - Launch app listing page in Play Store (Android) or App Store (iOS).
+- `openDevPage` - Deep-link directly to a developer's page in the Play Store. Android only.
+- `openCollection` - Link users to a collection or top charts in the Play Store. Android only.
+- `openEditorChoicePage` - Link users to Editor's choice page in the Play Store. Android only.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `openStoreListing` | Launch app listing page in Play Store (Android) or App Store (iOS). |
+| `openDevPage` | Deep-link directly to a developer's page in the Play Store. Android only. |
+| `openCollection` | Link users to a collection or top charts in the Play Store. Android only. |
+| `openEditorChoicePage` | Link users to Editor's choice page in the Play Store. Android only. |
+| `search` | Search the Play Store with custom search terms. Android only. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-native-market](https://github.com/Cap-go/capacitor-native-market/).
+
+## Keep going from @capgo/capacitor-native-market
+
+If you are using **@capgo/capacitor-native-market** to plan store approval and distribution, connect it with [Using @capgo/capacitor-native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/capacitor-native-market, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide, and [Google Play Staged Rollouts: How It Works](/blog/google-play-staged-rollouts-how-it-works/) for the practical context in Google Play Staged Rollouts: How It Works.

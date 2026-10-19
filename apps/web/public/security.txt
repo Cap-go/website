@@ -1,0 +1,8 @@
+Contact: https://github.com/Cap-go/capgo.app/security/advisories/new
+Contact: https://github.com/Cap-go/capacitor-updater/security/advisories/new
+Contact: https://github.com/Cap-go/CLI/security/advisories/new
+Expires: 2027-09-12T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://capgo.app/.well-known/security.txt
+Policy: https://capgo.app/security/
+Acknowledgments: https://capgo.app/bug-bounty/

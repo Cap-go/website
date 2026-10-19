@@ -1,0 +1,188 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "capgo-translation",
+  "account_id": "9ee3d7479a3c359681e3fab2c8cb22c0",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-05-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "dependencies_instrumentation": {
+    "enabled": true,
+  },
+  "workers_dev": false,
+  "limits": {
+    "cpu_ms": 300000,
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "TRANSLATION_COORDINATOR",
+        "class_name": "TranslationCoordinator",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1_translation_coordinator",
+      "new_classes": ["TranslationCoordinator"],
+    },
+  ],
+  "ai": {
+    "binding": "AI",
+  },
+  "r2_buckets": [
+    {
+      "binding": "TRANSLATION_STORE",
+      "bucket_name": "capgo-translation-cache",
+    },
+  ],
+  "vars": {
+    "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
+  },
+  "queues": {
+    "producers": [
+      {
+        "binding": "TRANSLATION_QUEUE",
+        "queue": "capgo-translation-refresh",
+      },
+      {
+        "binding": "TRANSLATION_PRIORITY_QUEUE",
+        "queue": "capgo-translation-priority-refresh",
+      },
+    ],
+    "consumers": [
+      {
+        "queue": "capgo-translation-priority-refresh",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 3,
+        "retry_delay": 15,
+        "max_concurrency": 4,
+      },
+      {
+        "queue": "capgo-translation-refresh",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 3,
+        "retry_delay": 60,
+        "max_concurrency": 2,
+      },
+    ],
+  },
+  "services": [
+    {
+      "binding": "WEB",
+      "service": "capgo-website",
+    },
+    {
+      "binding": "DOCS",
+      "service": "capgo-docs",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+  },
+  "routes": [
+    { "pattern": "capgo.app/de", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/de/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/es", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/es/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/fr", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/fr/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/id", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/id/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/it", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/it/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ja", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ja/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ko", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ko/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/zh", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/zh/*", "zone_name": "capgo.app" },
+  ],
+  "env": {
+    "development": {
+      "limits": {
+        "cpu_ms": 300000,
+      },
+      "durable_objects": {
+        "bindings": [
+          {
+            "name": "TRANSLATION_COORDINATOR",
+            "class_name": "TranslationCoordinator",
+          },
+        ],
+      },
+      "ai": {
+        "binding": "AI",
+      },
+      "vars": {
+        "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
+      },
+      "r2_buckets": [
+        {
+          "binding": "TRANSLATION_STORE",
+          "bucket_name": "capgo-translation-cache-development",
+        },
+      ],
+      "queues": {
+        "producers": [
+          {
+            "binding": "TRANSLATION_QUEUE",
+            "queue": "capgo-translation-refresh-development",
+          },
+          {
+            "binding": "TRANSLATION_PRIORITY_QUEUE",
+            "queue": "capgo-translation-priority-refresh-development",
+          },
+        ],
+        "consumers": [
+          {
+            "queue": "capgo-translation-priority-refresh-development",
+            "max_batch_size": 1,
+            "max_batch_timeout": 1,
+            "max_retries": 3,
+            "retry_delay": 15,
+            "max_concurrency": 4,
+          },
+          {
+            "queue": "capgo-translation-refresh-development",
+            "max_batch_size": 1,
+            "max_batch_timeout": 1,
+            "max_retries": 3,
+            "retry_delay": 60,
+            "max_concurrency": 2,
+          },
+        ],
+      },
+      "services": [
+        {
+          "binding": "WEB",
+          "service": "capgo-website-development",
+        },
+        {
+          "binding": "DOCS",
+          "service": "capgo-docs-development",
+        },
+      ],
+      "routes": [
+        { "pattern": "development.capgo.app/de", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/de/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/es", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/es/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/fr", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/fr/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/id", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/id/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/it", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/it/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ja", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ja/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ko", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ko/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/zh", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/zh/*", "zone_name": "capgo.app" },
+      ],
+    },
+  },
+}

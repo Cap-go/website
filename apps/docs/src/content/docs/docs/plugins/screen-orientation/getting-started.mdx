@@ -1,0 +1,314 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-screen-orientation and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-screen-orientation` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-screen-orientation
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+```
+
+## Quick start
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+const result = await ScreenOrientation.orientation();
+console.log('Current orientation:', result.type);
+```
+
+## Example: lock
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+// Standard lock
+await ScreenOrientation.lock({ orientation: 'landscape' });
+
+// Lock with motion tracking on iOS
+await ScreenOrientation.lock({
+  orientation: 'portrait',
+  bypassOrientationLock: true
+});
+```
+
+## Example: unlock
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+await ScreenOrientation.unlock();
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
+## API Overview
+
+### `orientation`
+
+Get the current screen orientation.
+
+Returns the current orientation of the device screen.
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+const result = await ScreenOrientation.orientation();
+console.log('Current orientation:', result.type);
+```
+
+### `lock`
+
+Lock the screen orientation to a specific type.
+
+Locks the screen to the specified orientation.
+On iOS, if bypassOrientationLock is true, it will also start
+tracking physical device orientation using motion sensors.
+
+Note: The UI will still respect the user's orientation lock setting.
+Motion tracking allows you to detect how the device is physically held
+even when the UI doesn't rotate.
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+// Standard lock
+await ScreenOrientation.lock({ orientation: 'landscape' });
+
+// Lock with motion tracking on iOS
+await ScreenOrientation.lock({
+  orientation: 'portrait',
+  bypassOrientationLock: true
+});
+```
+
+### `unlock`
+
+Unlock the screen orientation.
+
+Allows the screen to rotate freely based on device position.
+Also stops any motion-based orientation tracking if it was enabled.
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+await ScreenOrientation.unlock();
+```
+
+### `startOrientationTracking`
+
+Start tracking device orientation using motion sensors.
+
+This method is useful when you want to track the device's physical
+orientation independently from the screen orientation lock.
+It uses Core Motion on iOS to detect orientation changes.
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+await ScreenOrientation.startOrientationTracking({
+  bypassOrientationLock: true
+});
+
+// Listen for changes
+ScreenOrientation.addListener('screenOrientationChange', (result) => {
+  console.log('Orientation changed:', result.type);
+});
+```
+
+### `stopOrientationTracking`
+
+Stop tracking device orientation using motion sensors.
+
+Stops the motion-based orientation tracking if it was started.
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+await ScreenOrientation.stopOrientationTracking();
+```
+
+### `isOrientationLocked`
+
+Check if device orientation lock is currently enabled.
+
+This method compares the physical device orientation (from motion sensors)
+with the UI orientation. If they differ, orientation lock is enabled.
+
+Note: This requires motion tracking to be active via
+startOrientationTracking() or lock() with bypassOrientationLock: true.
+Works on both iOS (Core Motion) and Android (Accelerometer).
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+// Start motion tracking first
+await ScreenOrientation.startOrientationTracking({
+  bypassOrientationLock: true
+});
+
+// Check lock status
+const status = await ScreenOrientation.isOrientationLocked();
+if (status.locked) {
+  console.log('Orientation lock is ON');
+  console.log('Physical:', status.physicalOrientation);
+  console.log('UI:', status.uiOrientation);
+}
+```
+
+## Type Reference
+
+### `ScreenOrientationResult`
+Result returned by the orientation() method.
+```typescript
+export interface ScreenOrientationResult {
+  /**
+   * The current orientation type.
+   *
+   * @since 1.0.0
+   */
+  type: OrientationType;
+}
+```
+
+### `OrientationLockOptions`
+Options for locking the screen orientation.
+```typescript
+export interface OrientationLockOptions {
+  /**
+   * The orientation type to lock to.
+   *
+   * @since 1.0.0
+   */
+  orientation: OrientationLockType;
+
+  /**
+   * Whether to track physical device orientation using motion sensors.
+   * When true, uses device motion sensors to detect the true physical
+   * orientation of the device, even when the device orientation lock is enabled.
+   *
+   * **Important:** This does NOT bypass the UI orientation lock.
+   * The screen will still respect the user's orientation lock setting.
+   * This option only affects orientation detection/tracking - you'll receive
+   * orientation change events based on how the device is physically held,
+   * but the UI will not rotate if orientation lock is enabled.
+   *
+   * Supported on iOS (Core Motion) and Android (Accelerometer).
+   *
+   * @default false
+   * @since 1.0.0
+   */
+  bypassOrientationLock?: boolean;
+}
+```
+
+### `StartOrientationTrackingOptions`
+Options for starting orientation tracking using motion sensors.
+```typescript
+export interface StartOrientationTrackingOptions {
+  /**
+   * Whether to track physical device orientation using motion sensors.
+   * When true, uses device motion sensors to detect the true physical
+   * orientation of the device, even when the device orientation lock is enabled.
+   *
+   * **Important:** This does NOT bypass the UI orientation lock.
+   * This only enables detection of the physical orientation.
+   *
+   * Supported on iOS (Core Motion) and Android (Accelerometer).
+   *
+   * @default false
+   * @since 1.0.0
+   */
+  bypassOrientationLock?: boolean;
+}
+```
+
+### `OrientationLockStatusResult`
+Result returned by the isOrientationLocked() method.
+```typescript
+export interface OrientationLockStatusResult {
+  /**
+   * Whether the device orientation lock is currently enabled.
+   *
+   * This is determined by comparing the physical device orientation
+   * (from motion sensors) with the UI orientation. If they differ,
+   * orientation lock is enabled.
+   *
+   * Available on iOS (Core Motion) and Android (Accelerometer) when motion tracking is active.
+   *
+   * @since 1.0.0
+   */
+  locked: boolean;
+
+  /**
+   * The physical orientation of the device from motion sensors.
+   * Available when motion tracking is active (iOS and Android).
+   *
+   * @since 1.0.0
+   */
+  physicalOrientation?: OrientationType;
+
+  /**
+   * The current UI orientation reported by the system.
+   *
+   * @since 1.0.0
+   */
+  uiOrientation: OrientationType;
+}
+```
+
+### `OrientationType`
+Orientation type that describes the orientation state of the device.
+```typescript
+export type OrientationType = 'portrait-primary' | 'portrait-secondary' | 'landscape-primary' | 'landscape-secondary';
+```
+
+### `OrientationLockType`
+Orientation lock type that can be used to lock the device orientation.
+```typescript
+export type OrientationLockType =
+  | 'any'
+  | 'natural'
+  | 'landscape'
+  | 'portrait'
+  | 'portrait-primary'
+  | 'portrait-secondary'
+  | 'landscape-primary'
+  | 'landscape-secondary';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-screen-orientation](/plugins/capacitor-screen-orientation/) for the native capability in Using @capgo/capacitor-screen-orientation, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

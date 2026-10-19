@@ -1,0 +1,253 @@
+---
+title: Ionic Auth Connect Migration to @capgo/capacitor-social-login
+description: Migrate from Ionic Auth Connect to Capgo Social Login with OAuth2 and provider-native sign-in.
+sidebar:
+  order: 5
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Overview
+
+Capgo Social Login replaces Ionic Auth Connect with a provider-native OAuth2 flow for Google, Apple, Facebook, and other identity providers. It supports multiple providers in one plugin and works across iOS, Android, and Web.
+
+## Why this works
+
+The plugin includes an Auth Connect compatibility wrapper named `SocialLoginAuthConnect`. It maps familiar Ionic Auth Connect provider IDs onto the built-in OAuth2 engine, so you can keep using names such as `auth0`, `azure`, and `okta`.
+
+## Install
+
+```bash
+npm install @capgo/capacitor-social-login
+npx cap sync
+```
+
+## Replace your imports
+
+```typescript
+// Before
+import { AuthConnect } from '@ionic-enterprise/auth-connect';
+
+// After
+import { SocialLoginAuthConnect } from '@capgo/capacitor-social-login';
+```
+
+## Initialize providers
+
+Use the `authConnect` presets when you want the same provider IDs that Ionic Auth Connect used:
+
+```typescript
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    auth0: {
+      domain: 'https://your-tenant.auth0.com',
+      clientId: 'your-auth0-client-id',
+      redirectUrl: 'myapp://oauth/auth0',
+      audience: 'https://your-api.example.com',
+    },
+    azure: {
+      tenantId: 'common',
+      clientId: 'your-azure-client-id',
+      redirectUrl: 'myapp://oauth/azure',
+    },
+    cognito: {
+      domain: 'https://your-domain.auth.region.amazoncognito.com',
+      clientId: 'your-cognito-client-id',
+      redirectUrl: 'myapp://oauth/cognito',
+    },
+    okta: {
+      issuer: 'https://dev-12345.okta.com/oauth2/default',
+      clientId: 'your-okta-client-id',
+      redirectUrl: 'myapp://oauth/okta',
+    },
+    onelogin: {
+      issuer: 'https://your-tenant.onelogin.com/oidc/2',
+      clientId: 'your-onelogin-client-id',
+      redirectUrl: 'myapp://oauth/onelogin',
+    },
+  },
+});
+```
+
+## Supported provider IDs
+
+- `auth0`
+- `azure`
+- `cognito`
+- `okta`
+- `onelogin`
+
+## Login, logout, and token access
+
+```typescript
+const result = await SocialLoginAuthConnect.login({
+  provider: 'auth0',
+});
+
+const status = await SocialLoginAuthConnect.isLoggedIn({
+  provider: 'auth0',
+});
+
+const code = await SocialLoginAuthConnect.getAuthorizationCode({
+  provider: 'auth0',
+});
+
+await SocialLoginAuthConnect.logout({
+  provider: 'auth0',
+});
+```
+
+## Provider-specific preset examples
+
+### Auth0 preset example
+
+```typescript
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    auth0: {
+      domain: 'https://your-tenant.auth0.com',
+      clientId: 'your-auth0-client-id',
+      redirectUrl: 'myapp://oauth/auth0',
+      audience: 'https://your-api.example.com',
+    },
+  },
+});
+
+const auth0Result = await SocialLoginAuthConnect.login({
+  provider: 'auth0',
+});
+
+console.log(auth0Result.result.idToken);
+```
+
+### Azure preset example
+
+```typescript
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    azure: {
+      tenantId: 'common',
+      clientId: 'your-azure-client-id',
+      redirectUrl: 'myapp://oauth/azure',
+    },
+  },
+});
+
+const azureResult = await SocialLoginAuthConnect.login({
+  provider: 'azure',
+});
+
+console.log(azureResult.result.resourceData);
+```
+
+### Cognito preset example
+
+```typescript
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    cognito: {
+      domain: 'https://your-domain.auth.region.amazoncognito.com',
+      clientId: 'your-cognito-client-id',
+      redirectUrl: 'myapp://oauth/cognito',
+    },
+  },
+});
+
+const cognitoResult = await SocialLoginAuthConnect.login({
+  provider: 'cognito',
+});
+
+console.log(cognitoResult.result.idToken);
+```
+
+### Okta preset example
+
+```typescript
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    okta: {
+      issuer: 'https://dev-12345.okta.com/oauth2/default',
+      clientId: 'your-okta-client-id',
+      redirectUrl: 'myapp://oauth/okta',
+    },
+  },
+});
+
+const oktaResult = await SocialLoginAuthConnect.login({
+  provider: 'okta',
+});
+
+console.log(oktaResult.result.resourceData);
+```
+
+### OneLogin preset example
+
+```typescript
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    onelogin: {
+      issuer: 'https://your-tenant.onelogin.com/oidc/2',
+      clientId: 'your-onelogin-client-id',
+      redirectUrl: 'myapp://oauth/onelogin',
+    },
+  },
+});
+
+const oneloginResult = await SocialLoginAuthConnect.login({
+  provider: 'onelogin',
+});
+
+console.log(oneloginResult.result.idToken);
+```
+
+## Overriding endpoints
+
+Each preset creates a default OAuth2 configuration from `domain` or `issuer`. If your tenant uses custom endpoints, override them directly:
+
+```typescript
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    onelogin: {
+      issuer: 'https://your-tenant.onelogin.com/oidc/2',
+      clientId: 'your-onelogin-client-id',
+      redirectUrl: 'myapp://oauth/onelogin',
+      authorizationBaseUrl: 'https://your-tenant.onelogin.com/oidc/2/auth',
+      accessTokenEndpoint: 'https://your-tenant.onelogin.com/oidc/2/token',
+      resourceUrl: 'https://your-tenant.onelogin.com/oidc/2/me',
+      logoutUrl: 'https://your-tenant.onelogin.com/oidc/2/logout',
+    },
+  },
+});
+```
+
+## Direct OAuth2 configuration
+
+If you do not want presets, configure the same providers directly in the generic OAuth2 docs:
+
+- [OAuth2 and OIDC provider guide](/docs/plugins/social-login/oauth2/)
+
+## Migration notes
+
+<Steps>
+1. **The compatibility layer is OAuth2-based**
+   It keeps the provider names, not Ionic's native implementation details.
+
+2. **Refresh tokens still depend on scopes**
+   Request `offline_access` or the provider-specific equivalent when you need refresh tokens.
+
+3. **Custom endpoints can override presets**
+   If the preset is close but not exact, override only the endpoints that differ.
+
+4. **Direct `oauth2` entries win**
+   If you define both `authConnect.auth0` and `oauth2.auth0`, the direct `oauth2` config takes precedence.
+</Steps>
+
+## Related Documentation
+
+- [Social Login getting started](/docs/plugins/social-login/getting-started/)
+- [OAuth2 and OIDC providers](/docs/plugins/social-login/oauth2/)
+- [Migrate from Ionic Auth Connect](/docs/upgrade/from-ionic-auth-connect/)
+- [Ionic enterprise plugins migration solution](/solutions/ionic-enterprise-plugins/)
+
+## Keep going from Ionic Auth Connect Migration to @capgo/capacitor-social-login
+
+If you are using **Ionic Auth Connect Migration to @capgo/capacitor-social-login** to plan authentication and account flows, connect it with [Using @capgo/capacitor-social-login](/plugins/capacitor-social-login/) for the native capability in Using @capgo/capacitor-social-login, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

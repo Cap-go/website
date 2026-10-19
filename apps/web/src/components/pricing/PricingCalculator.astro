@@ -1,0 +1,385 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import type { Database } from '@/services/supabase.types'
+import type { CreditStep } from '@/lib/pricingCalculator'
+
+interface Props {
+  plans: Database['public']['Tables']['plans']['Row'][]
+  credits: CreditStep[]
+}
+
+const { plans, credits } = Astro.props
+const locale = Astro.locals.locale
+
+const calculatorPlans = plans
+  .filter((plan) => plan.name !== 'Free')
+  .map((plan) => ({
+    id: plan.id,
+    name: plan.name,
+    mau: plan.mau || 0,
+    bandwidth: plan.bandwidth || 0,
+    storage: plan.storage || 0,
+    price_m: plan.price_m || 0,
+    price_y: plan.price_y || 0,
+  }))
+  .sort((a, b) => a.price_m - b.price_m)
+
+const steps = credits
+  .filter((step) => ['mau', 'bandwidth', 'storage'].includes(step.type))
+  .map(({ step_min, step_max, price_per_unit, type, unit_factor }) => ({ step_min, step_max, price_per_unit, type, unit_factor }))
+
+const perMonth = `/${m.month({}, { locale }).toLowerCase()}`
+const inputClass =
+  'h-9 w-28 rounded-lg border border-transparent bg-transparent px-2 text-right text-base text-gray-300 tabular-nums transition-colors hover:border-white/10 focus:border-white/20 focus:bg-white/5 focus:text-white focus:ring-2 focus:ring-blue-500/30 focus:outline-none'
+const sliderClass = 'pricing-calculator-range mt-5 w-full cursor-pointer appearance-none bg-transparent'
+const usageRows = [
+  { key: 'mau', label: m.mau({}, { locale }) },
+  { key: 'bandwidth', label: m.bandwidth({}, { locale }) },
+  { key: 'storage', label: m.pricing_calculator_storage({}, { locale }) },
+]
+---
+
+<>
+  <button
+    type="button"
+    data-pricing-calculator-open
+    class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-950 shadow-sm ring-1 ring-gray-100 transition-colors hover:border-gray-300 hover:bg-gray-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none sm:w-auto"
+  >
+    <svg class="h-4 w-4 shrink-0 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+      ></path>
+    </svg>
+    {m.pricing_calculator_cta({}, { locale })}
+  </button>
+
+  <dialog
+    id="pricing-calculator-modal"
+    class="pricing-calculator-modal fixed inset-0 z-[100] m-0 h-dvh max-h-none w-full max-w-none border-0 bg-transparent p-0 backdrop:bg-gray-950/50 open:flex open:items-end open:justify-center sm:open:items-center sm:open:p-4"
+    aria-labelledby="pricing-calculator-title"
+  >
+    <div
+      class="flex max-h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-[#111214] text-white shadow-2xl shadow-black/60 sm:max-h-[90dvh] sm:rounded-3xl"
+    >
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-3 px-5 pt-5 pb-4 sm:px-8 sm:pt-7">
+        <div class="min-w-0 flex-1">
+          <h2 id="pricing-calculator-title" class="flex items-center gap-3 font-mono text-base font-semibold tracking-wider text-white uppercase sm:text-lg">
+            <svg class="h-5 w-5 shrink-0 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="3"></rect>
+              <path stroke-linecap="round" d="M7.5 9h4M9.5 7v4M13.5 16.5h3.5M7.5 16.5l3-3M10.5 16.5l-3-3M16.5 7.5l-3 3"></path>
+            </svg>
+            {m.pricing_calculator_cta({}, { locale })}
+          </h2>
+          <p class="mt-1 text-sm text-gray-400">{m.pricing_calculator_subtitle({}, { locale })}</p>
+        </div>
+        <fieldset class="order-last flex w-full shrink-0 rounded-full bg-white/5 p-1 ring-1 ring-white/10 sm:order-none sm:w-auto">
+          <legend class="sr-only">{m.pricing_calculator_billing_period({}, { locale })}</legend>
+          <label
+            class="flex min-h-8 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500"
+          >
+            <span>{m.monthly_plan({}, { locale })}</span>
+            <input type="radio" name="pricing-calculator-billing" value="monthly" data-pricing-calculator-billing checked class="sr-only" />
+          </label>
+          <label
+            class="group flex min-h-8 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500"
+          >
+            <span>{m.yearly_plan({}, { locale })}</span>
+            <span class="rounded-full bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-bold text-blue-300">{m.yearly_two_months_free({}, { locale })}</span>
+            <input type="radio" name="pricing-calculator-billing" value="yearly" data-pricing-calculator-billing class="sr-only" />
+          </label>
+        </fieldset>
+        <button
+          type="button"
+          data-pricing-calculator-close
+          autofocus
+          class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-gray-300 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          aria-label={m.pricing_calculator_close({}, { locale })}
+        >
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="min-h-0 flex-1 overflow-y-auto px-5 pb-6 sm:px-8 sm:pb-8">
+        <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:gap-10">
+          <div class="space-y-6">
+            <div class="space-y-3">
+              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
+                <div class="flex items-center justify-between gap-3">
+                  <label for="pricing-calculator-mau" class="text-base font-semibold text-white">
+                    {m.monthly_active_users_mau({}, { locale })}
+                  </label>
+                  <input id="pricing-calculator-mau" data-pricing-calculator-mau type="number" inputmode="numeric" min="0" step="1" value="10000" class={inputClass} />
+                </div>
+                <input type="range" min="0" step="1" data-pricing-calculator-mau-range class={sliderClass} aria-label={m.monthly_active_users_mau({}, { locale })} />
+                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_mau_hint({}, { locale })}</p>
+              </div>
+              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
+                <div class="flex items-center justify-between gap-3">
+                  <label for="pricing-calculator-updates" class="text-base font-semibold text-white">
+                    {m.updates_per_month({}, { locale })}
+                  </label>
+                  <input id="pricing-calculator-updates" data-pricing-calculator-updates type="number" inputmode="numeric" min="0" step="1" value="4" class={inputClass} />
+                </div>
+                <input type="range" min="0" step="1" data-pricing-calculator-updates-range class={sliderClass} aria-label={m.updates_per_month({}, { locale })} />
+                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_updates_hint({}, { locale })}</p>
+              </div>
+              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
+                <div class="flex items-center justify-between gap-3">
+                  <label for="pricing-calculator-size" class="text-base font-semibold text-white">
+                    {m.update_size_mb({}, { locale })}
+                  </label>
+                  <input id="pricing-calculator-size" data-pricing-calculator-size type="number" inputmode="decimal" min="0" step="0.1" value="4" class={inputClass} />
+                </div>
+                <input type="range" min="0" step="1" data-pricing-calculator-size-range class={sliderClass} aria-label={m.update_size_mb({}, { locale })} />
+                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_size_hint({}, { locale })}</p>
+              </div>
+            </div>
+
+            <fieldset>
+              <legend class="mb-3 font-mono text-xs font-semibold tracking-wider text-gray-400 uppercase">{m.pricing_calculator_choose_plan({}, { locale })}</legend>
+              <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {calculatorPlans.map((plan) => (
+                  <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2 transition-colors hover:border-white/20 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
+                    <input type="radio" name="pricing-calculator-plan" value={plan.id} data-pricing-calculator-plan class="sr-only" />
+                    <span class="text-sm font-semibold text-white">{plan.name}</span>
+                    <span class="text-xs text-gray-400 tabular-nums">
+                      <span data-pricing-calculator-plan-price={plan.id}>${plan.price_m}</span>
+                      {perMonth}
+                    </span>
+                    <span
+                      data-pricing-calculator-best-fit={plan.id}
+                      hidden
+                      class="absolute -top-2 right-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-semibold text-gray-950"
+                    >
+                      {m.pricing_calculator_best_fit({}, { locale })}
+                    </span>
+                  </label>
+                ))}
+                <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-dashed border-white/15 px-3 py-2 transition-colors hover:border-white/25 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
+                  <input type="radio" name="pricing-calculator-plan" value="credits" data-pricing-calculator-plan class="sr-only" />
+                  <span class="text-sm font-semibold text-white">{m.pricing_calculator_credits_only({}, { locale })}</span>
+                  <span class="text-xs text-gray-400">$0{perMonth}</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="space-y-2 text-sm text-gray-400" data-pricing-calculator-notes>
+              <p data-pricing-calculator-yearly-note hidden>
+                {m.pricing_calculator_yearly_note({}, { locale })}
+              </p>
+              <p data-pricing-calculator-credits-note hidden>
+                {m.pricing_calculator_credits_only_note({}, { locale })}
+              </p>
+            </div>
+          </div>
+
+          <aside
+            class="flex flex-col self-start rounded-2xl border border-white/10 p-6 sm:p-8 md:sticky md:top-0"
+            aria-label={m.pricing_calculator_estimated_total({}, { locale })}
+          >
+            <div aria-live="polite">
+              <p class="font-mono text-xs tracking-wider text-gray-400 uppercase">{m.pricing_calculator_estimated_total({}, { locale })}</p>
+              <p class="mt-2 text-3xl font-semibold tracking-tight text-white" data-pricing-calculator-plan-row>
+                <span data-pricing-calculator-plan-name>—</span>
+              </p>
+              <p class="mt-4 flex items-baseline gap-2">
+                <span class="text-5xl font-semibold tracking-tight text-white tabular-nums" data-pricing-calculator-total>
+                  —
+                </span>
+                <span class="font-mono text-xs tracking-wider text-gray-400 uppercase">{perMonth}</span>
+              </p>
+              <dl class="mt-5 space-y-2 border-t border-white/10 pt-4 text-sm">
+                <div class="flex justify-between gap-3" data-pricing-calculator-plan-row>
+                  <dt class="text-gray-400">
+                    <span data-pricing-calculator-plan-name>—</span>
+                  </dt>
+                  <dd class="font-medium text-gray-200 tabular-nums" data-pricing-calculator-plan-cost>
+                    —
+                  </dd>
+                </div>
+                <div class="flex justify-between gap-3">
+                  <dt class="text-gray-400">{m.pricing_calculator_extra_usage({}, { locale })}</dt>
+                  <dd class="font-medium text-gray-200 tabular-nums" data-pricing-calculator-credits>
+                    —
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <h3 class="mt-7 font-mono text-xs tracking-wider text-gray-400 uppercase">{m.pricing_calculator_usage_vs_plan({}, { locale })}</h3>
+            <ul class="mt-3 space-y-3">
+              {usageRows.map((row) => (
+                <li data-pricing-calculator-usage={row.key} class="flex gap-3">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"></path>
+                  </svg>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-baseline justify-between gap-3 text-sm">
+                      <span class="text-gray-200">{row.label}</span>
+                      <span class="text-gray-300 tabular-nums">
+                        <span data-usage-used>—</span>
+                        <span class="text-gray-500" data-usage-included-wrap>
+                          {' / '}
+                          <span data-usage-included>—</span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
+                      <div data-usage-bar class="h-full rounded-full bg-blue-600 transition-[width] duration-200" style="width: 0%" />
+                    </div>
+                    <p class="mt-1 text-xs text-amber-400" data-usage-over hidden>
+                      <span class="font-semibold tabular-nums" data-usage-over-value /> {m.pricing_calculator_over_plan({}, { locale })}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-8 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#111214] focus:outline-none"
+            >
+              {m.days_free_trial({}, { locale })}
+            </a>
+          </aside>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-4 border-t border-white/10 bg-[#0b0c0e] px-5 py-3 text-white md:hidden" aria-hidden="true">
+        <div>
+          <p class="text-[11px] text-gray-400">
+            <span data-pricing-calculator-plan-name>—</span>
+          </p>
+          <p class="flex items-baseline gap-1.5">
+            <span class="text-2xl font-semibold tabular-nums" data-pricing-calculator-total>
+              —
+            </span>
+            <span class="font-mono text-[10px] tracking-wider text-gray-400 uppercase">{perMonth}</span>
+          </p>
+        </div>
+        <a
+          href={getRelativeLocaleUrl(locale, 'register')}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabindex="-1"
+          class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-gray-950"
+        >
+          {m.days_free_trial({}, { locale })}
+        </a>
+      </div>
+    </div>
+  </dialog>
+</>
+
+<script id="pricing-calculator-data" type="application/json" set:html={JSON.stringify({ plans: calculatorPlans, steps })}></script>
+<script>
+  import { setupPricingCalculator } from './pricing-calculator.client.ts'
+
+  function initPricingCalculator() {
+    const data = document.getElementById('pricing-calculator-data')?.textContent
+    if (data) setupPricingCalculator(JSON.parse(data))
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPricingCalculator)
+  } else {
+    initPricingCalculator()
+  }
+</script>
+
+<style>
+  .pricing-calculator-modal::backdrop {
+    background: rgb(0 0 0 / 0.7);
+  }
+  .pricing-calculator-range {
+    --fill: 0%;
+    height: 22px;
+  }
+  .pricing-calculator-range::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, rgb(209 213 219) var(--fill), rgb(255 255 255 / 0.1) var(--fill));
+  }
+  .pricing-calculator-range::-moz-range-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.1);
+  }
+  .pricing-calculator-range::-moz-range-progress {
+    height: 6px;
+    border-radius: 9999px;
+    background: rgb(209 213 219);
+  }
+  .pricing-calculator-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
+    border-radius: 9999px;
+    border: 2px solid #fff;
+    background: rgb(59 130 246);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
+    transition: transform 120ms ease-out;
+  }
+  .pricing-calculator-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    border: 2px solid #fff;
+    background: rgb(59 130 246);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
+  }
+  .pricing-calculator-range:active::-webkit-slider-thumb {
+    transform: scale(1.1);
+  }
+  .pricing-calculator-range:focus {
+    outline: none;
+  }
+  .pricing-calculator-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px rgb(59 130 246 / 0.45);
+  }
+  .pricing-calculator-range:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 4px rgb(59 130 246 / 0.45);
+  }
+  .pricing-calculator-modal input[type='number']::-webkit-inner-spin-button,
+  .pricing-calculator-modal input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .pricing-calculator-modal input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  .pricing-calculator-modal:not([open]) {
+    display: none;
+  }
+
+  .pricing-calculator-modal[open] {
+    animation: pricing-calculator-fade-in 180ms ease-out;
+  }
+
+  @keyframes pricing-calculator-fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-calculator-modal[open] {
+      animation: none;
+    }
+  }
+</style>

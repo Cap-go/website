@@ -1,0 +1,84 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+
+const title = [Astro.locals.runtimeConfig.public.brand, m.support_policy_title({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.support_policy_description({}, { locale: Astro.locals.locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div class="prose-sm prose prose-invert m-auto py-8">
+    <h1>{m.support_policy_title({}, { locale: Astro.locals.locale })}</h1>
+    <p>
+      {m.support_policy_intro({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.support_policy_scope_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.support_policy_scope_intro({}, { locale: Astro.locals.locale })}</p>
+    <h3>{m.support_policy_configuration_issues_title({}, { locale: Astro.locals.locale })}</h3>
+    <ul>
+      <li>{m.support_policy_configuration_issues_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_configuration_issues_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_configuration_issues_3({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+    <h3>{m.support_policy_troubleshooting_title({}, { locale: Astro.locals.locale })}</h3>
+    <ul>
+      <li>{m.support_policy_troubleshooting_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_troubleshooting_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_troubleshooting_3({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+    <h3>{m.support_policy_not_covered_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.support_policy_not_covered_intro({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>{m.support_policy_not_covered_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_not_covered_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_not_covered_3({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+    <p>{m.support_policy_billing_support({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.support_policy_limited_support_intro({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>{m.support_policy_limited_support_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_limited_support_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_limited_support_3({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+    <h2>{m.support_policy_official_channels_title({}, { locale: Astro.locals.locale })}</h2>
+    <ul>
+      <li>{m.support_policy_official_channels_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.support_policy_official_channels_2({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+    <p>
+      {m.support_policy_official_channels_note({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.support_policy_code_debugging({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>
+      {m.support_policy_community_response({}, { locale: Astro.locals.locale })}
+    </p>
+    <p>{m.support_policy_team_participation({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.support_policy_sla_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.support_policy_sla_desc({}, { locale: Astro.locals.locale })}
+      <a href="https://capgo.app/sla/">https://capgo.app/sla/</a>
+    </p>
+    <h2>{m.support_policy_proactive_monitoring_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>
+      {m.support_policy_proactive_monitoring_desc({}, { locale: Astro.locals.locale })}
+    </p>
+    <h2>{m.support_policy_premium_support_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.support_policy_premium_support_desc({}, { locale: Astro.locals.locale })}</p>
+
+    <h2 id="service-disruption-and-ending">{m.support_policy_service_disruption_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.support_policy_service_disruption_intro({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.support_policy_service_disruption_timeout({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li set:html={m.support_policy_service_disruption_if_capgo_down({}, { locale: Astro.locals.locale })} />
+      <li set:html={m.support_policy_service_disruption_if_billing_stopped({}, { locale: Astro.locals.locale })} />
+      <li set:html={m.support_policy_service_disruption_if_over_limit({}, { locale: Astro.locals.locale })} />
+    </ul>
+    <p>{m.support_policy_service_disruption_outro({}, { locale: Astro.locals.locale })}</p>
+
+    <p><a href="mailto:martin@capgo.app">martin@capgo.app</a></p>
+  </div>
+</Layout>

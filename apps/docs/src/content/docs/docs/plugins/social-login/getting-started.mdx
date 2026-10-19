@@ -1,0 +1,224 @@
+---
+title: Getting Started
+description: Discover how to install and configure the Capacitor Social Login plugin to enhance your app's authentication with seamless integration for Google, Apple, Facebook, and generic OAuth2 logins.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+## Installation
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+npx skills add https://github.com/cap-go/capacitor-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `cap-go/capacitor-skills` to install the `@capgo/capacitor-social-login` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+<Steps>
+1. **Install the package**
+
+   ```bash
+   bun add @capgo/capacitor-social-login
+   ```
+
+2. **Sync with native projects**
+
+   ```bash
+   bunx cap sync
+   ```
+
+3. **Initialize in app startup**
+
+   ```typescript
+   import { SocialLogin } from '@capgo/capacitor-social-login';
+
+   await SocialLogin.initialize({
+     google: {
+       webClientId: 'your-google-web-client-id',
+       iOSClientId: 'your-google-ios-client-id',
+       iOSServerClientId: 'your-google-web-client-id',
+       mode: 'online',
+     },
+     apple: {
+       clientId: 'your-apple-service-id',
+       useProperTokenExchange: true,
+       useBroadcastChannel: true,
+     },
+     facebook: {
+       appId: 'your-facebook-app-id',
+     },
+     twitter: {
+       clientId: 'your-twitter-client-id',
+       redirectUrl: 'myapp://oauth/twitter',
+     },
+     oauth2: {
+       github: {
+         appId: 'your-github-client-id',
+         authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+         accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+         redirectUrl: 'myapp://oauth/github',
+         scope: 'read:user user:email',
+         pkceEnabled: true,
+       },
+     },
+   });
+   ```
+</Steps>
+
+## When teams pick this plugin
+
+- One package for Google, Apple, Facebook, Twitter/X, and custom OAuth2 or OIDC providers.
+- Android Google Sign-In through Credential Manager instead of deprecated community plugins.
+- Ionic Auth Connect style providers through the documented compatibility layer.
+- Apps that must share login code between mobile and web builds.
+
+## Core flow examples
+
+### Login
+
+```typescript
+await SocialLogin.login({
+  provider: 'google',
+  options: { scopes: ['profile', 'email'] },
+});
+
+await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',
+    scope: 'read:user user:email',
+  },
+});
+```
+
+### Session checks
+
+```typescript
+const status = await SocialLogin.isLoggedIn({ provider: 'google' });
+await SocialLogin.logout({ provider: 'google' });
+```
+
+### Auth codes and refresh
+
+```typescript
+// For providers that support this mode
+const authCodeResult = await SocialLogin.getAuthorizationCode({ provider: 'google' });
+await SocialLogin.refresh({ provider: 'google', options: {} as never });
+```
+
+### Advanced helpers
+
+```typescript
+const jwt = await SocialLogin.decodeIdToken({
+  idToken: 'eyJhbGciOi...',
+});
+
+const { date } = await SocialLogin.getAccessTokenExpirationDate({
+  accessTokenExpirationDate: Date.now() + 3600 * 1000,
+});
+
+const expired = await SocialLogin.isAccessTokenExpired({
+  accessTokenExpirationDate: Date.now() + 1000,
+});
+
+const active = await SocialLogin.isRefreshTokenAvailable({ refreshToken: 'a-token' });
+```
+
+## Provider-specific notes
+
+### Google offline mode
+
+`google.mode: 'offline'` returns `serverAuthCode` from login. In this mode logout, isLoggedIn, getAuthorizationCode, and refresh are not available.
+
+Use `serverAuthCode` only as input to your backend token exchange. If you need to call `SocialLogin.refresh()` in the app, use `google.mode: 'online'` instead.
+
+### Apple
+
+Set `useProperTokenExchange: true` for strict token handling and `useBroadcastChannel: true` for Android simplified setup.
+
+### OAuth2 web redirect flow
+
+Use `OAuth2LoginOptions.flow: 'redirect'` for web flows that navigate away from the page.
+
+## Dynamic provider dependencies
+
+You can configure which providers to include to reduce native app size. This is most useful when your app only needs specific providers.
+
+Add provider configuration to `capacitor.config.ts`:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'MyApp',
+  webDir: 'dist',
+  plugins: {
+    SocialLogin: {
+      providers: {
+        google: true,
+        facebook: true,
+        apple: true,
+        twitter: false,
+      },
+      logLevel: 1,
+    },
+  },
+};
+
+export default config;
+```
+
+Provider values mean:
+
+- `true`: the provider is enabled and its native dependencies are bundled.
+- `false`: the provider is disabled and its native dependencies are not bundled.
+
+Important details:
+
+- Run `bunx cap sync` after changing provider configuration.
+- If no provider configuration is supplied, all providers default to `true` for backward compatibility.
+- Disabling a provider with `false` makes it unavailable at runtime, even if that provider only uses system APIs.
+- This configuration only affects iOS and Android; it does not affect Web.
+- Apple Sign-In on Android uses OAuth without external SDK dependencies.
+- Twitter/X uses standard OAuth 2.0 without external SDK dependencies.
+
+To include only Google Sign-In and Apple Sign-In:
+
+```typescript
+plugins: {
+  SocialLogin: {
+    providers: {
+      google: true,
+      facebook: false,
+      apple: true,
+      twitter: false,
+    },
+  },
+}
+```
+
+## Related documentation
+
+- [Integrations overview](/docs/plugins/social-login/integrations/)
+- [Better Auth integration](/docs/plugins/social-login/better-auth/)
+- [OAuth2 and OIDC providers](/docs/plugins/social-login/oauth2/)
+- [Troubleshooting](/docs/plugins/social-login/troubleshooting/)
+- [Privacy manifest and iOS URL handlers](/docs/plugins/social-login/privacy-and-ios-handlers/)
+- [Migrate from Ionic Auth Connect](/docs/upgrade/from-ionic-auth-connect/)
+- [Social Login Auth Connect migration guide](/docs/plugins/social-login/migrations/ionic-auth-connect/)
+- [Migrate legacy providers](/docs/plugins/social-login/migrations/google/)
+- [Ionic enterprise plugins migration solution](/solutions/ionic-enterprise-plugins/)
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan authentication and account flows, connect it with [Using @capgo/capacitor-social-login](/plugins/capacitor-social-login/) for the native capability in Using @capgo/capacitor-social-login, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

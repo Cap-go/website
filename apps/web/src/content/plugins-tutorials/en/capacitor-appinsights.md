@@ -1,0 +1,75 @@
+---
+locale: en
+---
+# Using @capgo/capacitor-appinsights
+
+A wrapper around the https://github.com/apptopia/appinsights SDK.
+
+## Install
+
+```bash
+bun add @capgo/capacitor-appinsights
+bunx cap sync
+```
+
+`bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
+
+## Import
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+```
+
+## API at a glance
+
+| Method | Description |
+| --- | --- |
+| `init` | Initialize the AppInsights SDK. |
+| `setUserId` | Set or update the user ID after initialization. |
+| `getState` | Get the current state of the SDK. |
+
+## Examples
+
+### `init()`
+
+Initialize the AppInsights SDK.
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.init({
+  partnerId: 'partner-id-123',
+  partnerKey: 'partner-key-123',
+});
+```
+
+### `setUserId()`
+
+Set or update the user ID after initialization.
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+await CapacitorAppInsights.setUserId({ userId: 'user-id-123' });
+```
+
+### `getState()`
+
+Get the current state of the SDK.
+
+```typescript
+import { CapacitorAppInsights } from '@capgo/capacitor-appinsights';
+
+const result = await CapacitorAppInsights.getState();
+console.log(result);
+```
+
+## Full reference
+
+- [GitHub repository](https://github.com/Cap-go/capacitor-appinsights/)
+- [Documentation](/docs/plugins/appinsights/)
+- [API reference](/docs/plugins/appinsights/getting-started/)
+
+## Keep going from Using @capgo/capacitor-appinsights
+
+If you are using **Using @capgo/capacitor-appinsights** to plan native plugin work, connect it with [@capgo/capacitor-appinsights](/docs/plugins/appinsights/) for the implementation detail in @capgo/capacitor-appinsights, [Getting Started](/docs/plugins/appinsights/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

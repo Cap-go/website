@@ -1,0 +1,63 @@
+---
+title: Wrapping up
+description: "Wrap up your Capgo journey with a concise overview of key concepts and next steps, ensuring a solid foundation for future exploration and mastery."
+sidebar:
+  order: 8
+  next: false
+  prev: false
+draft: false
+---
+
+import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
+
+Now that you have completed the quickstart guide, you should have a basic understanding of the key concepts of Capgo! The key concepts you have learned in this guide are:
+
+<Steps>
+1. Adding an app to your Capgo account
+
+2. Integrating Capgo with your CI/CD pipeline 
+
+3. Triggering bundle uploads to Capgo on new commits
+
+4. Configuring your app to enable live updates with the Capgo SDK
+
+5. Deploying live updates to your app from the Capgo dashboard
+</Steps>
+
+But there's still more to learn about Capgo! Continue exploring the docs or check out some of these key topics:
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/after-onboarding-setup-checklist/">
+    <Card title="One time setup checklist" icon="approve-check">
+      One-time channel, CI, and delta upload setup for production.
+    </Card>
+  </a>
+
+  <a href="/docs/getting-started/cicd-integration/">
+    <Card title="CI/CD Integration" icon="gitlab">
+      Already have a CI/CD pipeline? Learn how to incorporate Capgo into your existing workflow.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/">
+    <Card title="Live Updates" icon="cloud-download">
+      Dive deeper into Capgo's live update features and best practices.
+    </Card>
+  </a>
+
+  <a href="/docs/faq/">  
+    <Card title="FAQ" icon="open-book">
+      Find answers to common questions about Capgo.
+    </Card>
+  </a>
+
+  <a href="/docs/getting-started/troubleshooting/">
+    <Card title="Troubleshooting" icon="error">
+      Get help with common issues that can come up while using Capgo.
+    </Card>
+  </a>
+</CardGrid>
+
+## Keep going from Wrapping up
+
+If you are using **Wrapping up** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

@@ -1,0 +1,76 @@
+---
+title: "@capgo/capacitor-ibeacon"
+description: "iBeacon plugin for Capacitor - proximity detection and beacon region monitoring."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "iBeacon plugin for Capacitor - proximity detection and beacon region monitoring"
+  actions:
+    - text: Get started
+      link: /docs/plugins/ibeacon/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-ibeacon/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+iBeacon plugin for Capacitor - proximity detection and beacon region monitoring
+
+Start with `startMonitoringForRegion()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
+
+## Core Capabilities
+
+- `startMonitoringForRegion` - Start monitoring for a beacon region. Triggers events when entering/exiting the region.
+- `stopMonitoringForRegion` - Stop monitoring for a beacon region.
+- `startRangingBeaconsInRegion` - Start ranging beacons in a region. Provides continuous distance updates.
+- `stopRangingBeaconsInRegion` - Stop ranging beacons in a region.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `startMonitoringForRegion` | Start monitoring for a beacon region. Triggers events when entering/exiting the region. |
+| `stopMonitoringForRegion` | Stop monitoring for a beacon region. |
+| `startRangingBeaconsInRegion` | Start ranging beacons in a region. Provides continuous distance updates. |
+| `stopRangingBeaconsInRegion` | Stop ranging beacons in a region. |
+| `startAdvertising` | Start advertising the device as an iBeacon (iOS only). |
+| `stopAdvertising` | Stop advertising the device as an iBeacon (iOS only). |
+| `requestWhenInUseAuthorization` | Request "When In Use" location authorization (required for ranging/monitoring). |
+| `requestAlwaysAuthorization` | Request "Always" location authorization (required for background monitoring). |
+| `getAuthorizationStatus` | Get current location authorization status. |
+| `isBluetoothEnabled` | Check if Bluetooth is enabled on the device. |
+| `isRangingAvailable` | Check if ranging is available on the device. |
+| `enableARMAFilter` | Enable ARMA filtering for distance calculations (Android only). |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `enableBackgroundMode` | Enable or disable background beacon scanning mode (Android only). This enables a foreground service for reliable background beacon detection. Must be called after requesting "Always" location authorization. |
+| `setBackgroundScanPeriod` | Configure background scan periods (Android only). Controls how often and how long the device scans for beacons when in background. |
+| `addListener` | Listen for beacon ranging events. |
+| `addListener` | Listen for region enter events. |
+| `addListener` | Listen for region exit events. |
+| `addListener` | Listen for region state determination events. |
+| `addListener` | Listen for monitoring failure events. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-ibeacon](https://github.com/Cap-go/capacitor-ibeacon/).
+
+## Keep going from @capgo/capacitor-ibeacon
+
+If you are using **@capgo/capacitor-ibeacon** to plan native plugin work, connect it with [Using @capgo/capacitor-ibeacon](/plugins/capacitor-ibeacon/) for the native capability in Using @capgo/capacitor-ibeacon, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.
