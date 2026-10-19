@@ -32,6 +32,26 @@ npx cap sync
 import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 ```
 
+## Quick start: hosted checkout in a managed WebView
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+await InAppBrowser.openWebView({
+  url: 'https://billing.example.com/checkout',
+  toolbarType: 'navigation',
+  title: 'Checkout',
+});
+
+InAppBrowser.addListener('urlChangeEvent', (event) => {
+  if (event.url.includes('/success')) {
+    InAppBrowser.close();
+  }
+});
+```
+
+Use `open()` instead when you want Safari View Controller or Chrome Custom Tabs without embedding a full native WebView stack.
+
 ## Choose the Browser Mode
 
 Use `open()` when you want the platform browser surface: Chrome Custom Tabs on Android and `SFSafariViewController` on iOS. Use `openWebView()` when your app needs to control the native WebView: custom size, toolbar, app messaging, JavaScript injection, downloads, proxying, popups, hidden instances, or UI layering.

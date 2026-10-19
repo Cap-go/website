@@ -32,6 +32,42 @@ bunx cap sync
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 ```
 
+## Quick start
+
+Configure Intercom in `capacitor.config` or call `loadWithKeys()` before the APIs below.
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.loadWithKeys({
+  appId: 'your-app-id',
+  apiKeyIOS: 'ios-api-key',
+  apiKeyAndroid: 'android-api-key',
+});
+await CapgoIntercom.registerIdentifiedUser({ userId: '42', email: 'user@example.com' });
+await CapgoIntercom.displayMessenger();
+```
+
+## Example: help center article
+
+```typescript
+await CapgoIntercom.displayArticle({ articleId: '12345' });
+```
+
+## Example: unread badge
+
+```typescript
+await CapgoIntercom.addListener('unreadCountDidChange', ({ count }) => {
+  setBadge(count);
+});
+```
+
+## Common pitfalls
+
+- **Keys**: call `loadWithKeys()` or configure Intercom keys before other APIs.
+- **Logout**: call `logout()` when the app user signs out to avoid leaking identity.
+- **Web**: messenger APIs are native only.
+
 ## API Overview
 
 ### `loadWithKeys`

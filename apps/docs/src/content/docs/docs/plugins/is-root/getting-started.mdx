@@ -32,6 +32,40 @@ bunx cap sync
 import { IsRoot } from '@capgo/capacitor-is-root';
 ```
 
+## Quick start
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+const { result } = await IsRoot.isRooted();
+if (result) {
+  blockSensitiveFlow();
+}
+```
+
+## Example: Android emulator signal
+
+Emulator detection is not part of default `isRooted()`. Call it explicitly when policy requires it.
+
+```typescript
+const { result } = await IsRoot.isRunningOnEmulator();
+```
+
+## Example: deeper Android audit
+
+```typescript
+const checks = await Promise.all([
+  IsRoot.detectRootManagementApps(),
+  IsRoot.checkForSuBinary(),
+]);
+```
+
+## Common pitfalls
+
+- **iOS simulator**: always reports not jailbroken, test on device.
+- **False positives**: pair root checks with server side risk scoring, not hard crashes alone.
+- **Play policy**: blocking all rooted users may conflict with your store category, document UX.
+
 ## API Overview
 
 ### `isRooted`

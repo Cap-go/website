@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin to scan document iOS and Android."
+  tagline: "Native document scanning with edge detection on iOS and Android."
   actions:
     - text: Get started
       link: /docs/plugins/document-scanner/getting-started/
@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Capacitor plugin to scan document iOS and Android.
+`@capgo/capacitor-document-scanner` opens the **system document camera** (VisionKit on iOS, ML Kit on Android), detects page edges, corrects perspective, and returns cleaned images. Ship receipt capture, ID scanning, or contract onboarding without building a custom camera UI.
+
+## Platform support
+
+| Platform | Support |
+| --- | --- |
+| iOS | Yes, VisionKit document camera |
+| Android | Yes, ML Kit document scanner |
+| Web | No, `scanDocument()` is unimplemented on web |
 
 ## Core Capabilities
 

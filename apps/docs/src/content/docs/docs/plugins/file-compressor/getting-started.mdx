@@ -32,6 +32,38 @@ bunx cap sync
 import { FileCompressor } from '@capgo/capacitor-file-compressor';
 ```
 
+## Quick start
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+
+const result = await FileCompressor.compressImage({
+  path: photoUri,
+  width: 1280,
+  quality: 0.8,
+  mimeType: 'image/jpeg',
+});
+
+await uploadFile(result.path);
+```
+
+## Example: web `Blob` input
+
+```typescript
+const result = await FileCompressor.compressImage({
+  blob: pickedFile,
+  quality: 0.75,
+  width: 1024,
+  mimeType: 'image/webp',
+});
+```
+
+## Common pitfalls
+
+- **No upscaling**: dimensions only shrink large images.
+- **PNG size**: PNG has no quality knob, output can exceed source size.
+- **EXIF**: metadata is stripped, do not rely on orientation tags after compression.
+
 ## API Overview
 
 ### `compressImage`
