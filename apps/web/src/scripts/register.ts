@@ -78,11 +78,16 @@ function normalizeName(name: string): string {
 async function trackOpenAIRegistration(userId: string | undefined) {
   const oaiq = (window as any).oaiq
   if (!oaiq) return
+  let eventId: string | undefined
   try {
     const user: Record<string, string> = {
       email_sha256: await sha256Hex(email.value.trim().toLowerCase()),
     }
-    if (userId) user.external_id_sha256 = await sha256Hex(userId.trim())
+    if (userId) {
+      user.external_id_sha256 = await sha256Hex(userId.trim())
+      // event_id reuses the hash so a server-side event can dedupe without exposing the raw ID
+      eventId = `registration_${user.external_id_sha256}`
+    }
     const first = normalizeName(firstName.value)
     if (first) user.first_name_sha256 = await sha256Hex(first)
     const last = normalizeName(lastName.value)
@@ -91,7 +96,7 @@ async function trackOpenAIRegistration(userId: string | undefined) {
   } catch (error) {
     console.error('OpenAI pixel user data error', error)
   }
-  if (userId) oaiq('measure', 'registration_completed', { type: 'customer_action' }, { event_id: `registration_${userId}` })
+  if (eventId) oaiq('measure', 'registration_completed', { type: 'customer_action' }, { event_id: eventId })
   else oaiq('measure', 'registration_completed', { type: 'customer_action' })
 }
 

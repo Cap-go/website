@@ -75,8 +75,8 @@ export const GET: APIRoute = async () => {
     ].filter((billing) => billing.price > 0)
 
     return billings.map((billing) => ({
-      item_id: `capgo-${slug}-${billing.key}`,
-      group_id: `capgo-${slug}`,
+      item_id: `capgo-${plan.id}-${billing.key}`,
+      group_id: `capgo-${plan.id}`,
       listing_has_variations: 'true',
       variant_dict: JSON.stringify({ billing: billing.label }),
       title: `Capgo ${plan.name} plan — ${billing.label.toLowerCase()} billing`,
