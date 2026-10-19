@@ -32,6 +32,38 @@ bunx cap sync
 import { NavigationBar } from '@capgo/capacitor-navigation-bar';
 ```
 
+## Quick start
+
+Match the navigation bar to a dark header and light icons.
+
+```typescript
+import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+await NavigationBar.setNavigationBarColor({
+  color: '#0f172a',
+  darkButtons: false,
+});
+```
+
+## Example: immersive reader mode
+
+```typescript
+await NavigationBar.hide();
+// later, when leaving the reader
+await NavigationBar.show();
+```
+
+## Example: read current theme
+
+```typescript
+const { color, darkButtons } = await NavigationBar.getNavigationBarColor();
+```
+
+## Common pitfalls
+
+- **Android only**: there is no iOS navigation bar equivalent in this plugin.
+- **Edge to edge**: combine with your status bar and WebView safe area CSS so content is not covered when the bar is shown again.
+
 ## API Overview
 
 ### `setNavigationBarColor`

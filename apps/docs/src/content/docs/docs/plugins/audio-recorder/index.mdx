@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin contract for recording audio."
+  tagline: "Record voice clips on iOS, Android, and web with pause, level meters, and native file output."
   actions:
     - text: Get started
       link: /docs/plugins/audio-recorder/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor plugin contract for recording audio.
+Use `@capgo/capacitor-audio-recorder` when your Capacitor app needs microphone capture without bolting on a separate native module per platform. Start and stop clips, pause mid take, poll input level for waveforms, and listen for recording errors while users move between foreground and background (with the right native entitlements).
+
+Typical fits: voice memos, in app audio messages, field notes, lightweight podcast capture, and speech first features that must work in the mobile WebView and in mobile browsers.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | AVFoundation capture, optional `resetToPlaybackOnStop` to avoid quiet playback after recording |
+| Android | Yes | `MediaRecorder`, pause or resume on API 24+ |
+| Web | Yes | Browser `MediaRecorder`, `stopRecording` returns a `Blob` instead of a file URI |
 
 ## Core Capabilities
 

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "The main interface for the CameraPreview plugin."
+  tagline: "Live camera preview, capture, zoom lenses, and barcode scanning over your WebView."
   actions:
     - text: Get started
       link: /docs/plugins/camera-preview/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-The main interface for the CameraPreview plugin.
+`@capgo/camera-preview` renders a **native camera layer** behind or above your WebView with continuous preview, still capture, flash control, aspect ratio, and optional **barcode scanning**. Build scan to pay, AR style overlays, custom shutter UX, and vision workflows without sending users to the stock camera app.
+
+Pair with `@capgo/capacitor-uploader` to upload captures from disk paths instead of loading full buffers in JavaScript.
+
+## Platform support
+
+| Platform | Notes |
+| --- | --- |
+| iOS | Multi lens devices, pinch zoom, barcode formats via native scanner |
+| Android | CameraX preview, configurable capture resolution |
+| Web | Limited support, see plugin README for current web surface |
 
 ## Core Capabilities
 
