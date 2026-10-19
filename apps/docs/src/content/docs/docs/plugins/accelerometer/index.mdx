@@ -37,7 +37,7 @@ hero:
 - `getMeasurement` - Get the most recent accelerometer sample that was recorded by the native layer.
 - `isAvailable` - Check if the current device includes an accelerometer sensor.
 - `startMeasurementUpdates` - Begin streaming accelerometer updates to the JavaScript layer.
-- `stopMeasurementUpdates` - Stop streaming accelerometer updates started via .
+- `stopMeasurementUpdates` - Stop streaming accelerometer updates started via `startMeasurementUpdates`.
 
 ## Public API
 
@@ -46,7 +46,7 @@ hero:
 | `getMeasurement` | Get the most recent accelerometer sample that was recorded by the native layer. |
 | `isAvailable` | Check if the current device includes an accelerometer sensor. |
 | `startMeasurementUpdates` | Begin streaming accelerometer updates to the JavaScript layer. |
-| `stopMeasurementUpdates` | Stop streaming accelerometer updates started via . |
+| `stopMeasurementUpdates` | Stop streaming accelerometer updates started via `startMeasurementUpdates`. |
 | `checkPermissions` | Return the current permission state for accessing motion data. |
 | `requestPermissions` | Request permission to access motion data if supported by the platform. |
 | `addListener` | Listen for measurement updates. |

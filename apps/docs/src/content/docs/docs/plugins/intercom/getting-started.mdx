@@ -34,9 +34,16 @@ import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
 ## Quick start
 
+Configure Intercom in `capacitor.config` or call `loadWithKeys()` before the APIs below.
+
 ```typescript
 import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
+await CapgoIntercom.loadWithKeys({
+  appId: 'your-app-id',
+  apiKeyIOS: 'ios-api-key',
+  apiKeyAndroid: 'android-api-key',
+});
 await CapgoIntercom.registerIdentifiedUser({ userId: '42', email: 'user@example.com' });
 await CapgoIntercom.displayMessenger();
 ```

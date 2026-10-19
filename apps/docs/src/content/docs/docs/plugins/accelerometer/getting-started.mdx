@@ -81,7 +81,7 @@ console.log(result);
 
 Begin streaming accelerometer updates to the JavaScript layer.
 
-Call  with the `measurement` event to receive the updates.
+Call `addListener` with the `measurement` event to receive the updates.
 
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
@@ -91,7 +91,7 @@ await CapacitorAccelerometer.startMeasurementUpdates();
 
 ### `stopMeasurementUpdates`
 
-Stop streaming accelerometer updates started via .
+Stop streaming accelerometer updates started via `startMeasurementUpdates`.
 
 ```typescript
 import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
@@ -132,7 +132,7 @@ export type GetMeasurementResult = Measurement;
 ```
 
 ### `IsAvailableResult`
-Result returned by .
+Result returned by `isAvailable`.
 ```typescript
 export interface IsAvailableResult {
   /**
@@ -145,7 +145,7 @@ export interface IsAvailableResult {
 ```
 
 ### `PermissionStatus`
-Permission information returned by and .
+Permission information returned by `checkPermissions` and `requestPermissions`.
 ```typescript
 export interface PermissionStatus {
   /**
@@ -158,7 +158,7 @@ export interface PermissionStatus {
 ```
 
 ### `MeasurementEvent`
-Event payload emitted when is active.
+Event payload emitted when `startMeasurementUpdates` is active.
 ```typescript
 export type MeasurementEvent = Measurement;
 ```
