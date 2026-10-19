@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Hidden or undocumented features">
+  <title>Hidden or undocumented features</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="48" cy="156" r="18" fill="#44BCFF" opacity="0.25"/>
+  <rect x="100" y="48" width="120" height="104" rx="10" fill="#111827" stroke="#FB923C" stroke-width="2"/>
+  <rect x="116" y="64" width="88" height="12" rx="4" fill="#374151"/>
+  <rect x="116" y="84" width="72" height="12" rx="4" fill="#374151"/>
+  <rect x="116" y="104" width="56" height="12" rx="4" fill="#374151"/>
+  <path d="M228 72 L248 92 L228 112 L208 92 Z" fill="#111827" stroke="#FB923C" stroke-width="2"/>
+  <path d="M218 92 H238 M228 82 V102" stroke="#FB923C" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="228" cy="92" r="3" fill="#FB923C"/>
+</svg>
