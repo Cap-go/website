@@ -1,23 +1,20 @@
 import { expect, test } from 'bun:test'
 import { resolveNotFoundRecoveryRedirect } from '../../shared/notFoundRecovery.ts'
 
-test('category pages redirect to listing', () => {
-  expect(resolveNotFoundRecoveryRedirect('/fr/blog/category/native-vs-web-apps/')).toBe('/fr/blog/')
-  expect(resolveNotFoundRecoveryRedirect('/ko/articles/category/marketing/')).toBe('/ko/articles/')
-})
+const CASES = [
+  ['/fr/blog/category/native-vs-web-apps/', '/fr/blog/'],
+  ['/ko/articles/category/marketing/', '/ko/articles/'],
+  ['/blog/kysely-capacitor-sqlite/fast-sql-dialect', '/blog/kysely-capacitor-sqlite/'],
+  ['/it/blog/drizzle-orm-capacitor-sqlite/db/', '/it/blog/drizzle-orm-capacitor-sqlite/'],
+  ['/plugins/capacitor-firebase-analytics/', '/docs/plugins/firebase-analytics/'],
+  ['/id/plugins/capacitor-firebase-messaging', '/id/docs/plugins/firebase-messaging/'],
+  ['/solutions', '/solutions/startups/'],
+  ['/fr/live-updates/', '/fr/docs/live-updates/'],
+  ['/fr/cli/reference/build/', '/fr/docs/cli/reference/build/'],
+]
 
-test('blog nested segments redirect to parent post', () => {
-  expect(resolveNotFoundRecoveryRedirect('/blog/kysely-capacitor-sqlite/fast-sql-dialect')).toBe('/blog/kysely-capacitor-sqlite/')
-  expect(resolveNotFoundRecoveryRedirect('/it/blog/drizzle-orm-capacitor-sqlite/db/')).toBe('/it/blog/drizzle-orm-capacitor-sqlite/')
-})
-
-test('firebase plugin slugs redirect to docs', () => {
-  expect(resolveNotFoundRecoveryRedirect('/plugins/capacitor-firebase-analytics/')).toBe('/docs/plugins/firebase-analytics/')
-  expect(resolveNotFoundRecoveryRedirect('/id/plugins/capacitor-firebase-messaging')).toBe('/id/docs/plugins/firebase-messaging/')
-})
-
-test('static recovery paths', () => {
-  expect(resolveNotFoundRecoveryRedirect('/solutions')).toBe('/solutions/startups/')
-  expect(resolveNotFoundRecoveryRedirect('/fr/live-updates/')).toBe('/fr/docs/live-updates/')
-  expect(resolveNotFoundRecoveryRedirect('/fr/cli/reference/build/')).toBe('/fr/docs/cli/reference/build/')
-})
+for (const [from, to] of CASES) {
+  test(`resolveNotFoundRecoveryRedirect ${from} → ${to}`, () => {
+    expect(resolveNotFoundRecoveryRedirect(from)).toBe(to)
+  })
+}
