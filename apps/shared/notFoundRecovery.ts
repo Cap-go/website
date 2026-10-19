@@ -14,6 +14,9 @@ const FIREBASE_PLUGIN_DOC_SLUG: Record<string, string> = {
   'capacitor-firebase-storage': 'firebase-storage',
 }
 
+const BLOG_NESTED_SEGMENT_PATTERN = /^\/blog\/([^/]+)\/([^/]+)\/?$/
+const FIREBASE_PLUGIN_PATH_PATTERN = /^\/plugins\/(capacitor-firebase-[^/]+)\/?$/
+
 const STATIC_NOT_FOUND_REDIRECTS: Record<string, string> = {
   '/solutions': '/solutions/startups/',
   '/live-updates': '/docs/live-updates/',
@@ -31,14 +34,14 @@ export function resolveCategoryListingRedirect(pathname: string): string | null 
 /** Code-snippet paths crawled from blog posts, e.g. /blog/my-post/some-file.ts */
 export function resolveBlogNestedSegmentRedirect(pathname: string): string | null {
   const { localePrefix, path } = splitLocalePath(pathname)
-  const match = path.match(/^\/blog\/([^/]+)\/([^/]+)\/?$/)
+  const match = BLOG_NESTED_SEGMENT_PATTERN.exec(path)
   if (!match || match[1] === 'category') return null
   return `${localePrefix}/blog/${match[1]}/`
 }
 
 export function resolveFirebasePluginDocsRedirect(pathname: string): string | null {
   const { localePrefix, path } = splitLocalePath(pathname)
-  const match = path.match(/^\/plugins\/(capacitor-firebase-[^/]+)\/?$/)
+  const match = FIREBASE_PLUGIN_PATH_PATTERN.exec(path)
   if (!match) return null
   const docsSlug = FIREBASE_PLUGIN_DOC_SLUG[match[1]]
   if (!docsSlug) return null
@@ -57,7 +60,8 @@ export function resolveStaticNotFoundRedirect(pathname: string): string | null {
 export function resolveCliDocsRedirect(pathname: string): string | null {
   const { localePrefix, path } = splitLocalePath(pathname)
   if (!path.startsWith('/cli/')) return null
-  return `${localePrefix}/docs${path.endsWith('/') ? path : `${path}/`}`
+  const docsPath = path.endsWith('/') ? path : `${path}/`
+  return `${localePrefix}/docs${docsPath}`
 }
 
 export function resolveNotFoundRecoveryRedirect(pathname: string): string | null {
