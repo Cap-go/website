@@ -32,6 +32,28 @@ bunx cap sync
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+await CapacitorCrisp.configure({ websiteID: 'your-website-id' });
+await CapacitorCrisp.setUser({ nickname: 'Ada', email: 'ada@example.com' });
+await CapacitorCrisp.openMessenger();
+```
+
+## Example: push token
+
+```typescript
+await CapacitorCrisp.registerPushToken({ token: apnsOrFcmToken });
+```
+
+## Common pitfalls
+
+- **Configure once**: call `configure()` before opening the messenger.
+- **Reset on logout**: `reset()` clears the Crisp session.
+- **Web**: push helpers are mobile only.
+
 ## API Overview
 
 ### `configure`

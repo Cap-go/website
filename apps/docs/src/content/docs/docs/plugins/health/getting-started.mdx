@@ -32,6 +32,76 @@ bunx cap sync
 import { Health } from '@capgo/capacitor-health';
 ```
 
+## Quick start
+
+Check availability, request read access for the types you need, then query a date range.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+async function loadTodaysSteps() {
+  const { available, reason } = await Health.isAvailable();
+  if (!available) {
+    console.warn('Health data not available', reason);
+    return;
+  }
+
+  await Health.requestAuthorization({
+    read: ['steps', 'heartRate'],
+    write: ['weight'],
+  });
+
+  const today = await Health.readSamples({
+    dataType: 'steps',
+    startDate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+    endDate: new Date().toISOString(),
+    limit: 500,
+  });
+
+  return today;
+}
+```
+
+## Example: Android history beyond 30 days
+
+Health Connect caps historical reads unless the user grants `READ_HEALTH_DATA_HISTORY`. Opt in with `requestHistoryAccess: true` and declare the permission in your Android manifest:
+
+```xml
+<uses-permission android:name="android.permission.health.READ_HEALTH_DATA_HISTORY" />
+```
+
+```typescript
+await Health.requestAuthorization({
+  read: ['steps'],
+  requestHistoryAccess: true,
+});
+```
+
+Inspect `historyAccessAvailable` and `historyAccessAuthorized` on the result to decide whether to show a settings deep link.
+
+## Example: log a weight sample
+
+```typescript
+await Health.saveSample({
+  dataType: 'weight',
+  value: 72.4,
+  unit: 'kilogram',
+  startDate: new Date().toISOString(),
+  endDate: new Date().toISOString(),
+});
+```
+
+## Example: sleep with stages
+
+Request `sleep` in `read`, then read samples for a night window. When the platform exposes stage data, samples can include `SleepStage` segments (`deep`, `rem`, `light`, etc.).
+
+## Common pitfalls
+
+- **Authorization is per data type**: request every `HealthDataType` you read or write up front.
+- **Android Health Connect install state**: use `isAvailable` and `openHealthConnectSettings` when the provider is missing or disabled.
+- **History permission is Android only**: ignored on iOS, which does not use the 30 day cap.
+- **Check before prompt**: use `checkAuthorization` to render UI before calling `requestAuthorization` again.
+
 ## API Overview
 
 ### `isAvailable`
@@ -169,6 +239,11 @@ export interface AuthorizationOptions {
   read?: HealthDataType[];
   /** Data types that should be writable after authorization. */
   write?: HealthDataType[];
+  /**
+   * Android only: request access to health data older than 30 days.
+   * Requires `android.permission.health.READ_HEALTH_DATA_HISTORY` in the manifest.
+   */
+  requestHistoryAccess?: boolean;
 }
 ```
 

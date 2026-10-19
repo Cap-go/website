@@ -22,14 +22,22 @@ hero:
 
 ## Overview
 
-Capacitor plugin contract for working with the device accelerometer.
+`@capgo/capacitor-accelerometer` exposes device acceleration for games, fitness form checks, and gesture experiments. Stream `measurement` events on iOS, Android, and supported mobile browsers.
+
+## Platform support
+
+| Platform | Support |
+| --- | --- |
+| iOS | Core Motion |
+| Android | `SensorManager` |
+| Web | Device motion events when permitted |
 
 ## Core Capabilities
 
 - `getMeasurement` - Get the most recent accelerometer sample that was recorded by the native layer.
 - `isAvailable` - Check if the current device includes an accelerometer sensor.
 - `startMeasurementUpdates` - Begin streaming accelerometer updates to the JavaScript layer.
-- `stopMeasurementUpdates` - Stop streaming accelerometer updates started via .
+- `stopMeasurementUpdates` - Stop streaming accelerometer updates started via `startMeasurementUpdates`.
 
 ## Public API
 
@@ -38,7 +46,7 @@ Capacitor plugin contract for working with the device accelerometer.
 | `getMeasurement` | Get the most recent accelerometer sample that was recorded by the native layer. |
 | `isAvailable` | Check if the current device includes an accelerometer sensor. |
 | `startMeasurementUpdates` | Begin streaming accelerometer updates to the JavaScript layer. |
-| `stopMeasurementUpdates` | Stop streaming accelerometer updates started via . |
+| `stopMeasurementUpdates` | Stop streaming accelerometer updates started via `startMeasurementUpdates`. |
 | `checkPermissions` | Return the current permission state for accessing motion data. |
 | `requestPermissions` | Request permission to access motion data if supported by the platform. |
 | `addListener` | Listen for measurement updates. |
