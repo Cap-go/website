@@ -13,7 +13,7 @@ import { Steps } from '@astrojs/starlight/components';
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -50,8 +50,11 @@ console.log(result);
 ```typescript
 import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
 
-const result = await DeviceIntegrity.getWidevineFingerprint();
-console.log(result);
+const capabilities = await DeviceIntegrity.getCapabilities();
+if (capabilities.widevine.fingerprintAvailable) {
+  const result = await DeviceIntegrity.getWidevineFingerprint();
+  console.log(result);
+}
 ```
 
 ## Example: prepareAttestation
@@ -59,13 +62,19 @@ console.log(result);
 ```typescript
 import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
 
-const result = await DeviceIntegrity.prepareAttestation();
-console.log(result);
+const capabilities = await DeviceIntegrity.getCapabilities();
+const attestationSupported =
+  capabilities.appAttest.supported || capabilities.playIntegrity.supported;
+
+if (attestationSupported) {
+  const result = await DeviceIntegrity.prepareAttestation();
+  console.log(result);
+}
 ```
 
 ## Common pitfalls
 
-- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
 - **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Why use this plugin

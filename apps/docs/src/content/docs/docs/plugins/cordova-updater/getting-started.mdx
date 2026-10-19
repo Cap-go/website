@@ -50,13 +50,15 @@ This guide walks you through adding `@capgo/cordova-updater` to a Cordova app so
 ## Quick start
 
 ```javascript
-await cordova.plugins.CapgoUpdater.notifyAppReady();
+document.addEventListener('deviceready', async () => {
+  await cordova.plugins.Updater.notifyAppReady();
+});
 ```
 
 ## Common pitfalls
 
 - Do not use cordova-plugin-ionic-webview with this plugin.
-- Call notifyAppReady after boot.
+- Call `notifyAppReady()` as soon as your bundle loads—before heavy UI work delays the rollback window.
 - Keep Cordova scheme settings correct.
 
 ## JavaScript usage

@@ -54,13 +54,15 @@ If you prefer Manual Setup, install the plugin by running the following commands
 ## Quick start
 
 ```typescript
-import { ElectronUpdater } from '@capgo/electron-updater';
-await ElectronUpdater.notifyAppReady();
+import { requireUpdater } from '@capgo/electron-updater/renderer';
+
+const updater = requireUpdater();
+await updater.notifyAppReady();
 ```
 
 ## Common pitfalls
 
-- Call notifyAppReady after UI boots.
+- Call `notifyAppReady()` early on launch—within the configured timeout—before slow UI initialization.
 - Match Capgo signing in the main process.
 - Set update channels before shipping.
 

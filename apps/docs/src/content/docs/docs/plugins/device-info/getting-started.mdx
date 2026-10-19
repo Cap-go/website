@@ -14,7 +14,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -26,8 +26,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 For a manual setup, install the package and sync the native projects:
 
 ```bash
-bun add @capgo/capacitor-device-info
-bunx cap sync
+npm install @capgo/capacitor-device-info
+npx cap sync
 ```
 
 ## Import
@@ -66,7 +66,7 @@ console.log(result);
 ## Common pitfalls
 
 - **Listeners**: remove handles when screens unmount.
-- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
 - **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Read one snapshot

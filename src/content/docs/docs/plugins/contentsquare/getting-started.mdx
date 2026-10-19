@@ -34,6 +34,23 @@ If you prefer Manual Setup, install the plugin by running the following commands
   </ul>
 </PluginSetupSteps>
 
+## Quick start
+
+```typescript
+import { ContentsquarePlugin } from '@capgo/capacitor-contentsquare';
+
+// Only call optIn() after the user has granted analytics consent.
+if (userGrantedAnalyticsConsent) {
+  await ContentsquarePlugin.optIn();
+}
+```
+
+## Common pitfalls
+
+- Respect consent before optIn.
+- Configure dashboard keys.
+- Follow replay privacy rules.
+
 ## Basic usage
 
 ```typescript
@@ -49,7 +66,7 @@ await ContentsquarePlugin.sendTransaction({
   transactionId: 'order-123',
 });
 
-await ContentsquarePlugin.sendDynamicVar({
+await ContentsquarePlugin.sendDynamicVarWithStringValue({
   dynVarKey: 'store',
   dynVarValue: 'rome',
 });

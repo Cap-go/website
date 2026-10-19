@@ -12,7 +12,7 @@ import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -38,7 +38,11 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```typescript
 import { ContentsquarePlugin } from '@capgo/capacitor-contentsquare';
-await ContentsquarePlugin.optIn();
+
+// Only call optIn() after the user has granted analytics consent.
+if (userGrantedAnalyticsConsent) {
+  await ContentsquarePlugin.optIn();
+}
 ```
 
 ## Common pitfalls
@@ -62,7 +66,7 @@ await ContentsquarePlugin.sendTransaction({
   transactionId: 'order-123',
 });
 
-await ContentsquarePlugin.sendDynamicVar({
+await ContentsquarePlugin.sendDynamicVarWithStringValue({
   dynVarKey: 'store',
   dynVarValue: 'rome',
 });
