@@ -5725,6 +5725,7 @@ const messages = {
     "Apps may download interpreted code if it doesn't change the app's primary purpose, create a storefront for other code or apps, or bypass signing, the sandbox, or other OS security features.",
   store_policy_apple_label: 'Apple Developer Program License Agreement',
   store_policy_eyebrow: 'App Store & Google Play',
+  store_policy_explained_link: 'Full answer',
   store_policy_faq_cta: 'Read the store policy FAQ',
   store_policy_google_body:
     "Apps can't update their own native code outside Google Play. Code that runs in an interpreter or virtual machine, such as JavaScript in a WebView, is explicitly exempt.",
@@ -5743,6 +5744,7 @@ const messages = {
   store_policy_rule_ota: 'Ship web-layer changes over the air: JavaScript, HTML, CSS, and assets.',
   store_policy_rule_purpose: 'Keep every update within the purpose you submitted for review.',
   store_policy_rules_label: 'Stay inside the rules',
+  store_policy_stacks_link: 'Allowed stacks',
   store_policy_title: 'Will Apple or Google reject OTA updates?',
   store_reach_eyebrow: 'Approved is not installed',
   store_reach_title: 'A store update reaches users when their phone decides. A live update reaches them at the next app open.',
