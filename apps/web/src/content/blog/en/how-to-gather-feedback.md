@@ -116,7 +116,7 @@ Avoid double-barreled wording such as “How easy was onboarding and account set
 
 For teams choosing between interviews, usability sessions, surveys, and behavioral analysis, a practical overview of [methods for user research](https://figr.design/blog/user-research-methods) can help match the research method to the question. Your survey shouldn't try to replace an interview when the team needs detailed exploration. Likewise, an interview is excessive when a single event-triggered rating can validate a narrow release decision.
 
-Store the response with the event that caused it. That makes it possible to connect a low rating to an actual workflow rather than to a vague memory of the product. It also gives churn analysis a more useful input than a generic satisfaction score, particularly when paired with [user churn analysis](https://capgo.app/blog/user-churn-analysis/).
+Store the response with the event that caused it. That makes it possible to connect a low rating to an actual workflow rather than to a vague memory of the product. It also gives churn analysis a more useful input than a generic satisfaction score, particularly when paired with [app performance metrics](https://capgo.app/blog/app-performance-metrics/).
 
 <a id="sampling-segmentation-and-reading-the-numbers"></a>
 ## Sampling, Segmentation, and Reading the Numbers

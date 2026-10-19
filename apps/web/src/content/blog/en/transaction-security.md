@@ -125,7 +125,7 @@ If you work on treasury workflows, [mitigating check fraud risks](https://visban
 <a id="system-flaws-show-up-in-update-and-api-pipelines"></a>
 ### System flaws show up in update and API pipelines
 
-API abuse, insecure storage, and weak app update paths create a different class of threat. A compromised update pipeline can turn a trusted app into the delivery mechanism. For mobile and cross-platform teams, [app vulnerability scanning](https://capgo.app/blog/app-vulnerability-scanning/) belongs in the same conversation as transaction controls, because findings only matter when they map back to the flows that move money or approval authority.
+API abuse, insecure storage, and weak app update paths create a different class of threat. A compromised update pipeline can turn a trusted app into the delivery mechanism. For mobile and cross-platform teams, [app vulnerability scanning](https://capgo.app/blog/how-ota-updates-affect-app-store-security/) belongs in the same conversation as transaction controls, because findings only matter when they map back to the flows that move money or approval authority.
 
 A useful threat model for transaction security stays blunt. If an attacker cannot steal the money directly, they will try to redirect it, replay it, or get a human to bless the wrong thing. The defenses have to stop all three.
 

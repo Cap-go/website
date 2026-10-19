@@ -109,7 +109,7 @@ Security testing must cover the app, its native plugins, its update pipeline, an
 
 Inspect transport security, certificate validation, authentication, token storage, permissions, deep links, local databases, clipboard behavior, and exported Android components. Confirm that personally identifiable information isn't exposed in debug logs, crash payloads, analytics events, or update diagnostics. Review the permissions requested at first launch and after an update, including behavior when a user grants, denies, or later revokes access.
 
-For regulated products, map the test evidence to the applicable controls. A healthcare app may need a different privacy review from an e-commerce app, but both should verify that an update doesn't remove an existing security control or introduce an unsafe dependency. Use the OWASP Mobile Application Security Verification Standard as a review framework, and include update delivery in penetration-testing scope. The [mobile app vulnerability scanning guide](https://capgo.app/blog/app-vulnerability-scanning/) can help structure that work.
+For regulated products, map the test evidence to the applicable controls. A healthcare app may need a different privacy review from an e-commerce app, but both should verify that an update doesn't remove an existing security control or introduce an unsafe dependency. Use the OWASP Mobile Application Security Verification Standard as a review framework, and include update delivery in penetration-testing scope. The [app quality assurance guide](https://capgo.app/blog/app-quality-assurance/) can help structure that work.
 
 <a id="protect-the-release-mechanism"></a>
 ### Protect the release mechanism

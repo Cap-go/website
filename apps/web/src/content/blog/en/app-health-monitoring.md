@@ -24,7 +24,7 @@ Healthy apps don't stay healthy by accident. They stay healthy because the team 
 
 Teams that invest in monitoring usually make better decisions elsewhere too. They tighten release discipline, clarify ownership, and reduce the amount of guesswork in debugging. Good tooling helps, but the bigger shift is operational. You stop waiting for users to tell you the app is broken.
 
-If your current setup is mostly console logs, app store reviews, and support escalations, fix that first. Then improve the developer workflow around it. A good starting point is looking at how teams structure their tooling and feedback loops in [modern developer experience setups for app teams](https://capgo.app/blog/developer-experience-tools/).
+If your current setup is mostly console logs, app store reviews, and support escalations, fix that first. Then improve the developer workflow around it. A good starting point is looking at how teams structure their tooling and feedback loops in [modern developer experience setups for app teams](https://capgo.app/blog/developer-experience/).
 
 ## Table of Contents
 - [Introduction Why App Health Matters More Than Ever](#introduction-why-app-health-matters-more-than-ever)
@@ -59,7 +59,7 @@ App health monitoring is now a baseline engineering discipline. Teams shipping J
 
 That last part gets missed. Many teams monitor crashes, latency, and API failures, then treat the delivery path for fixes as a separate concern. In practice, the release pipeline has health too. If you can detect a regression but need days to get a fix through app store review, users still sit in the blast radius. If you can ship a targeted patch quickly, a production issue stays small.
 
-This is one reason strong monitoring improves engineering velocity, not just reliability. Teams with clear telemetry and a dependable release path can ship smaller changes, detect regressions earlier, and fix the right version instead of rolling back blindly. Good [developer experience tools for release and debugging workflows](https://capgo.app/blog/developer-experience-tools/) reduce the time between noticing a problem and correcting it in production.
+This is one reason strong monitoring improves engineering velocity, not just reliability. Teams with clear telemetry and a dependable release path can ship smaller changes, detect regressions earlier, and fix the right version instead of rolling back blindly. Good [developer experience tools for release and debugging workflows](https://capgo.app/blog/developer-experience/) reduce the time between noticing a problem and correcting it in production.
 
 The pressure is highest in products users rely on repeatedly, but the pattern is universal. Healthcare, commerce, fintech, internal operations tools, and customer portals all lose trust when failures stay invisible or fixes move too slowly. Monitoring protects uptime. It also protects release confidence, support quality, and the team's ability to recover without drama.
 

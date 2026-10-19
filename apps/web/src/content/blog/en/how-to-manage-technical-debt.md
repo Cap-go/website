@@ -245,7 +245,7 @@ Create a telemetry dashboard that shows crash-free sessions, p95 latency, time t
 
 Add CI quality gates for changed code, dependency updates, tests, and bundle size. Select one high-payback item and use branch by abstraction or a similarly contained pattern. Enable a controlled update and rollback path before the next risky refactor, then run a mid-program retrospective that compares planned capacity with debt-related interruptions.
 
-For developer productivity, [developer productivity practices](https://capgo.app/blog/developer-productivity/) are most useful when they connect individual workflow improvements to delivery and reliability measures. Faster typing or shorter builds matter less if the team still spends release day investigating an opaque failure.
+For developer productivity, [developer productivity practices](https://capgo.app/blog/developer-experience/) are most useful when they connect individual workflow improvements to delivery and reliability measures. Faster typing or shorter builds matter less if the team still spends release day investigating an opaque failure.
 
 <a id="days-61-through-90-make-the-process-compound"></a>
 ### Days 61 through 90 make the process compound
