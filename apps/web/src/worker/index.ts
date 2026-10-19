@@ -7,6 +7,7 @@ import {
   prefersMarkdown,
 } from '../../../shared/agentDiscovery'
 import { isGonePath } from '../../../shared/gonePaths'
+import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
@@ -356,6 +357,10 @@ export function staticLegacyRedirect(request: Request, pathname: string): Respon
   if (localizedLegacyTarget) {
     return redirectToPath(request, localizedLegacyTarget)
   }
+  const recoveryTarget = resolveNotFoundRecoveryRedirect(pathname)
+  if (recoveryTarget) {
+    return redirectToPath(request, recoveryTarget)
+  }
   return null
 }
 
@@ -408,6 +413,11 @@ async function brandedGoneResponse(request: Request, env: Env, pathname: string)
 }
 
 async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  const recoveryTarget = resolveNotFoundRecoveryRedirect(pathname)
+  if (recoveryTarget) {
+    return redirectToPath(request, recoveryTarget)
+  }
+
   const { localePrefix, path } = splitLocalePath(pathname)
 
   const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
@@ -426,15 +436,6 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
       if (await assetExists(env, request, target)) {
         return redirectToPath(request, target)
       }
-    }
-  }
-
-  const categoryMatch = path.match(/^\/blog\/category\/([^/]+)\/?$/)
-  if (categoryMatch) {
-    const slug = categoryMatch[1]
-    const target = `${localePrefix}/blog/${slug}/`
-    if (await assetExists(env, request, target)) {
-      return redirectToPath(request, target)
     }
   }
 

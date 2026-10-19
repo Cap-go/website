@@ -424,6 +424,10 @@ export function decorateAttributionLinks(root: ParentNode = document): void {
     const next = appendAttributionToUrl(href, data!, window.location.href)
     if (next !== href) {
       el.setAttribute('href', next)
+      const rel = (el.getAttribute('rel') ?? '').trim()
+      if (!/\bnofollow\b/i.test(rel)) {
+        el.setAttribute('rel', rel ? `${rel} nofollow` : 'nofollow')
+      }
     }
   })
 }
