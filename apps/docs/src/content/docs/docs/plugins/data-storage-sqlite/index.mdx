@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "SQLite Storage of key/value strings pair."
+  tagline: "Encrypted friendly key value storage backed by SQLite on native and IndexedDB on web."
   actions:
     - text: Get started
       link: /docs/plugins/data-storage-sqlite/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-SQLite Storage of key/value strings pair.
+Open a named store, set keys, and query values without writing SQL by hand. Switch tables inside a store, migrate JSON payloads, and enable encryption on iOS and Android when you need at rest protection beyond the OS sandbox.
+
+Typical fits: offline settings, draft forms, cached API payloads, and feature flags that must survive process restarts.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | SQLite via community storage layer |
+| Android | Yes | SQLite with optional encryption |
+| Web | Yes | IndexedDB backed implementation |
 
 ## Core Capabilities
 

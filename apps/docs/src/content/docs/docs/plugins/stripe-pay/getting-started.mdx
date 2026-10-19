@@ -18,6 +18,28 @@ bunx cap sync
 import { Stripe } from '@capgo/capacitor-stripe-pay';
 ```
 
+## Quick start
+
+```typescript
+import { Stripe } from '@capgo/capacitor-stripe-pay';
+
+await Stripe.initialize({ publishableKey: 'publishable-key-123' });
+```
+
+## Example: handleURLCallback
+
+```typescript
+import { Stripe } from '@capgo/capacitor-stripe-pay';
+
+await Stripe.handleURLCallback({ url: 'https://example.com' });
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
 ## Subscriptions and in-app purchases
 
 For App Store / Play Store subscriptions and entitlements, use [@capgo/native-purchases](/docs/plugins/native-purchases/) instead of this plugin.

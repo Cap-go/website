@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-permissions
-npx cap sync
+bun add @capgo/capacitor-permissions
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,37 @@ npx cap sync
 ```typescript
 import { Permissions } from '@capgo/capacitor-permissions';
 ```
+
+## Quick start
+
+```typescript
+import { Permissions } from '@capgo/capacitor-permissions';
+
+const { status } = await Permissions.check({ permission: 'camera' });
+```
+
+## Example: request
+
+```typescript
+import { Permissions } from '@capgo/capacitor-permissions';
+
+const { status } = await Permissions.request({ permission: 'notifications' });
+```
+
+## Example: checkMultiple
+
+```typescript
+import { Permissions } from '@capgo/capacitor-permissions';
+
+const { statuses } = await Permissions.checkMultiple({
+  permissions: ['camera', 'microphone'],
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Platform setup
 

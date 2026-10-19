@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,32 @@ bunx cap sync
 ```typescript
 import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+await CapacitorRealtimekit.initialize();
+```
+
+## Example: startMeeting
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+await CapacitorRealtimekit.startMeeting({
+  authToken: 'your-auth-token',
+  enableAudio: true,
+  enableVideo: true,
+});
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

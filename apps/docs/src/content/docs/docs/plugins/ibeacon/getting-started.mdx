@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,45 @@ bunx cap sync
 ```typescript
 import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+await CapacitorIbeacon.startMonitoringForRegion({
+  identifier: 'MyBeaconRegion',
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+});
+```
+
+## Example: stopMonitoringForRegion
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+await CapacitorIbeacon.stopMonitoringForRegion({
+  identifier: 'MyBeaconRegion',
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+});
+```
+
+## Example: startRangingBeaconsInRegion
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+await CapacitorIbeacon.startRangingBeaconsInRegion({
+  identifier: 'MyBeaconRegion',
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

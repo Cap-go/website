@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,38 @@ bunx cap sync
 ```typescript
 import { VideoPlayer } from '@capgo/capacitor-video-player';
 ```
+
+## Quick start
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.initPlayer({ mode: 'fullscreen' });
+console.log(result);
+```
+
+## Example: isPlaying
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.isPlaying({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+## Example: play
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+const result = await VideoPlayer.play({ playerId: 'player-id-123' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Control screen brightness on iOS and Android."
+  tagline: "Control device screen brightness programmatically with support for app-specific and system-wide control"
   actions:
     - text: Get started
       link: /docs/plugins/brightness/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Control screen brightness on iOS and Android.
+Control device screen brightness programmatically with support for app-specific and system-wide control
+
+Start with `getBrightness()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,39 @@ bunx cap sync
 ```typescript
 import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
 ```
+
+## Quick start
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+
+const result = await WebviewGuardian.startMonitoring();
+console.log(result);
+```
+
+## Example: stopMonitoring
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+
+const result = await WebviewGuardian.stopMonitoring();
+console.log(result);
+```
+
+## Example: getState
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+
+const result = await WebviewGuardian.getState();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

@@ -32,6 +32,28 @@ bunx cap sync
 import { MuxPlayer } from '@capgo/capacitor-mux-player';
 ```
 
+## Quick start
+
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+
+const { active } = await MuxPlayer.isActive();
+if (active) return;
+await MuxPlayer.play({
+  playbackId: 'YOUR_PLAYBACK_ID',
+});
+```
+
+## Example: signed playback
+
+Pass the playback token your backend mints for DRM or signed policies, as documented in the plugin README.
+
+## Common pitfalls
+
+- **Single player**: check `isActive()` before calling `play()` again.
+- **Dismiss cleanup**: listen for dismissal if you must resume inline WebView video afterward.
+- **Tokens expire**: refresh signed JWTs server side before long sessions.
+
 ## API Overview
 
 ### `play`

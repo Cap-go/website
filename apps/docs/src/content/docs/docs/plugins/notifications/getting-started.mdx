@@ -15,6 +15,19 @@ sidebar:
 - iOS and/or Android platform push authority for the app.
 - `@capgo/capacitor-updater` if you want silent push update checks.
 
+## Quick start
+
+```typescript
+import { CapacitorNotifications } from '@capgo/capacitor-notifications';
+await CapacitorNotifications.register({ customerUserId: 'signed-id' });
+```
+
+## Common pitfalls
+
+- Use signed customerUserId values from your backend.
+- Request notification permission before registering.
+- Verify Capgo credentials in the dashboard.
+
 ## 1. Configure Capgo Platform Credentials
 
 Open the app in Capgo, then go to **Notifications**.

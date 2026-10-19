@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -25,6 +25,40 @@ If you prefer Manual Setup, install the plugin by running the following commands
 bun add @capgo/capacitor-verisoul
 bunx cap sync
 ```
+
+## Quick start
+
+```typescript
+import { Verisoul } from '@capgo/capacitor-verisoul';
+
+await Verisoul.configure({
+  environment: 'dev',
+  projectId: 'project-id-123',
+});
+```
+
+## Example: getSessionId
+
+```typescript
+import { Verisoul } from '@capgo/capacitor-verisoul';
+
+const result = await Verisoul.getSessionId();
+console.log(result);
+```
+
+## Example: reinitialize
+
+```typescript
+import { Verisoul } from '@capgo/capacitor-verisoul';
+
+await Verisoul.reinitialize();
+```
+
+## Common pitfalls
+
+- **Initialize once**: run setup during app bootstrap.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Configure Verisoul
 
