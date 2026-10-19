@@ -39,12 +39,20 @@ Start an upload, subscribe to `events`, and track the returned upload `id`.
 ```typescript
 import { Uploader } from '@capgo/capacitor-uploader';
 
-const listener = await Uploader.addListener('events', (event) => {
+let uploadId = '';
+
+const listener = await Uploader.addListener('events', async (event) => {
+  if (event.id !== uploadId) return;
+
   if (event.name === 'uploading') {
     console.log(event.payload.percent);
   }
-  if (event.name === 'completed') {
-    listener.remove();
+
+  if (event.name === 'completed' || event.name === 'failed') {
+    if (event.eventId) {
+      await Uploader.acknowledgeEvent({ eventId: event.eventId });
+    }
+    await listener.remove();
   }
 });
 
@@ -55,6 +63,7 @@ const { id } = await Uploader.startUpload({
   headers: { Authorization: 'Bearer token' },
   maxRetries: 3,
 });
+uploadId = id;
 ```
 
 ## Example: presigned S3 PUT

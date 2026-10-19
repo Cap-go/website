@@ -46,15 +46,26 @@ await BackgroundGeolocation.requestPermissions({
   permissions: ['location', 'backgroundLocation', 'notification'],
 });
 
-await BackgroundGeolocation.start({
-  backgroundMessage: 'Tracking delivery route',
-  backgroundTitle: 'Location active',
-  requestPermissions: true,
-  stale: false,
-  url: 'https://api.example.com/locations',
-  headers: { Authorization: 'Bearer fleet-token' },
-  distanceFilter: 25,
-});
+await BackgroundGeolocation.start(
+  {
+    backgroundMessage: 'Tracking delivery route',
+    backgroundTitle: 'Location active',
+    requestPermissions: true,
+    stale: false,
+    url: 'https://api.example.com/locations',
+    headers: { Authorization: 'Bearer fleet-token' },
+    distanceFilter: 25,
+  },
+  (location, error) => {
+    if (error) {
+      console.error('Location error', error);
+      return;
+    }
+    if (location) {
+      console.log('Fix', location.latitude, location.longitude);
+    }
+  },
+);
 ```
 
 Each fix is delivered in parallel to JavaScript (while the WebView is alive) and to `url` with `"source": "native"` in the JSON body.
@@ -63,9 +74,14 @@ Each fix is delivered in parallel to JavaScript (while the WebView is alive) and
 
 ```typescript
 await BackgroundGeolocation.setupGeofencing({
-  webhookUrl: 'https://api.example.com/geofence-hit',
+  url: 'https://api.example.com/geofence-hit',
+  backgroundLocation: true,
 });
+```
 
+On Android, declare `ACCESS_BACKGROUND_LOCATION` in your manifest when you need background geofence POSTs (see the native geofencing section below).
+
+```typescript
 await BackgroundGeolocation.addGeofence({
   identifier: 'warehouse',
   latitude: 32.7,

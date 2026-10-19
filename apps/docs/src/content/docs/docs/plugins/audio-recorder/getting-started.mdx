@@ -37,6 +37,7 @@ import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 Request the microphone, record, then stop and read the native file URI (or web `Blob`).
 
 ```typescript
+import { Capacitor } from '@capacitor/core';
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
 const mic = await CapacitorAudioRecorder.requestPermissions();
@@ -50,8 +51,9 @@ await CapacitorAudioRecorder.startRecording({
   resetToPlaybackOnStop: true, // iOS only: restore playback-friendly audio session after stop
 });
 
-const { uri, duration } = await CapacitorAudioRecorder.stopRecording();
-console.log('Saved clip', uri, duration);
+const { uri, blob, duration } = await CapacitorAudioRecorder.stopRecording();
+const clipRef = Capacitor.getPlatform() === 'web' ? blob : uri;
+console.log('Saved clip', clipRef, duration);
 ```
 
 ## Example: voice memo with pause

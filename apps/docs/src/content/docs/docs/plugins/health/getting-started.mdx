@@ -39,28 +39,36 @@ Check availability, request read access for the types you need, then query a dat
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-const { available, reason } = await Health.isAvailable();
-if (!available) {
-  console.warn('Health data not available', reason);
-  return;
+async function loadTodaysSteps() {
+  const { available, reason } = await Health.isAvailable();
+  if (!available) {
+    console.warn('Health data not available', reason);
+    return;
+  }
+
+  await Health.requestAuthorization({
+    read: ['steps', 'heartRate'],
+    write: ['weight'],
+  });
+
+  const today = await Health.readSamples({
+    dataType: 'steps',
+    startDate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+    endDate: new Date().toISOString(),
+    limit: 500,
+  });
+
+  return today;
 }
-
-await Health.requestAuthorization({
-  read: ['steps', 'heartRate'],
-  write: ['weight'],
-});
-
-const today = await Health.readSamples({
-  dataType: 'steps',
-  startDate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-  endDate: new Date().toISOString(),
-  limit: 500,
-});
 ```
 
 ## Example: Android history beyond 30 days
 
-Health Connect caps historical reads unless the user grants `READ_HEALTH_DATA_HISTORY`. Opt in when you request authorization and declare the permission in your app manifest as documented in `AuthorizationOptions`.
+Health Connect caps historical reads unless the user grants `READ_HEALTH_DATA_HISTORY`. Opt in with `requestHistoryAccess: true` and declare the permission in your Android manifest:
+
+```xml
+<uses-permission android:name="android.permission.health.READ_HEALTH_DATA_HISTORY" />
+```
 
 ```typescript
 await Health.requestAuthorization({
@@ -231,6 +239,11 @@ export interface AuthorizationOptions {
   read?: HealthDataType[];
   /** Data types that should be writable after authorization. */
   write?: HealthDataType[];
+  /**
+   * Android only: request access to health data older than 30 days.
+   * Requires `android.permission.health.READ_HEALTH_DATA_HISTORY` in the manifest.
+   */
+  requestHistoryAccess?: boolean;
 }
 ```
 

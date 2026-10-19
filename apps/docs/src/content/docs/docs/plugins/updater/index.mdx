@@ -33,7 +33,7 @@ Capgo live updates are not limited to Capacitor. Use the same backend and CLI wi
 
 ## Overview
 
-`@capgo/capacitor-updater` ships **JavaScript bundle updates** to production Capacitor apps without waiting on store review. Download signed bundles in the background, gate rollout with channels and delay rules, and roll back instantly when `notifyAppReady` fails.
+`@capgo/capacitor-updater` ships **JavaScript bundle updates** to production Capacitor apps without waiting on store review. Download signed bundles in the background, gate rollout with channels and delay rules, and roll back if `notifyAppReady()` is not called within the configured `appReadyTimeout`.
 
 Typical uses: hotfix production bugs, staged betas per channel, A/B UI experiments, and emergency rollback to the builtin bundle.
 

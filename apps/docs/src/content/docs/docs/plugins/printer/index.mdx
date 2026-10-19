@@ -30,7 +30,7 @@ hero:
 | --- | --- |
 | iOS | `UIPrintInteractionController` |
 | Android | `PrintManager` |
-| Web | Browser print dialog via blob URLs |
+| Web | Browser print dialog (`printBase64` and `printHtml` use blob URLs; `printWebView` prints the page directly) |
 
 Prefer `printFile` for large assets. `printBase64` decodes in memory and can crash on files above about 5 MB (documented on the method).
 

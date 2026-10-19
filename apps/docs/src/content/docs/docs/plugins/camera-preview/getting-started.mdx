@@ -46,12 +46,12 @@ await CameraPreview.start({
 });
 
 const { value } = await CameraPreview.capture({ quality: 90 });
-console.log('Photo path', value);
+console.log('Photo base64', value);
 
 await CameraPreview.stop();
 ```
 
-Mount a full screen element with `id="cameraPreview"` in your HTML.
+Mount a full-screen element with `id="cameraPreview"` in your HTML, and make the route or app background transparent so the native preview behind the WebView is visible (for example `ion-content { --background: transparent; }` on Ionic routes).
 
 ## Example: barcode overlay
 
@@ -63,10 +63,18 @@ await CameraPreview.startBarcodeScanner({
   detectionInterval: 400,
 });
 
-CameraPreview.addListener('barcodeScanned', (event) => {
+let handled = false;
+const barcodeListener = await CameraPreview.addListener('barcodeScanned', async (event) => {
+  if (handled) return;
   const code = event.barcodes[0]?.value;
-  if (code) handleScan(code);
+  if (!code) return;
+  handled = true;
+  await CameraPreview.stopBarcodeScanner();
+  await handleScan(code);
 });
+
+// When leaving the screen:
+await barcodeListener.remove();
 ```
 
 ## Example: flip camera and flash

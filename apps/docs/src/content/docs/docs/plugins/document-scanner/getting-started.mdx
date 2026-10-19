@@ -35,11 +35,11 @@ import { DocumentScanner } from '@capgo/capacitor-document-scanner';
 ## Quick start
 
 ```typescript
-import { DocumentScanner } from '@capgo/capacitor-document-scanner';
+import { DocumentScanner, ResponseType } from '@capgo/capacitor-document-scanner';
 
 const result = await DocumentScanner.scanDocument({
   maxNumDocuments: 1,
-  responseType: 'imageFilePath',
+  responseType: ResponseType.ImageFilePath,
 });
 
 if (result.status === 'success' && result.scannedImages?.length) {
@@ -62,8 +62,10 @@ Up to 24 pages per session are supported by the native scanners.
 ## Example: tuned Android cleanup
 
 ```typescript
+import { ScannerMode } from '@capgo/capacitor-document-scanner';
+
 await DocumentScanner.scanDocument({
-  scannerMode: 'full',
+  scannerMode: ScannerMode.Full,
   brightness: 0.1,
   contrast: 1.2,
 });
