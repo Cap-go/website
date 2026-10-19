@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -35,6 +35,38 @@ import {
   FacebookEventParameterName,
 } from '@capgo/capacitor-facebook-analytics';
 ```
+
+## Quick start
+
+```typescript
+import { FacebookAnalytics } from '@capgo/capacitor-facebook-analytics';
+
+await FacebookAnalytics.initAppEvents();
+```
+
+## Example: logEvent
+
+```typescript
+import { FacebookAnalytics } from '@capgo/capacitor-facebook-analytics';
+
+await FacebookAnalytics.logEvent({ event: "fb_mobile_complete_registration" });
+```
+
+## Example: logPurchase
+
+```typescript
+import { FacebookAnalytics } from '@capgo/capacitor-facebook-analytics';
+
+await FacebookAnalytics.logPurchase({
+  amount: 1,
+  currency: "USD",
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Native Setup
 

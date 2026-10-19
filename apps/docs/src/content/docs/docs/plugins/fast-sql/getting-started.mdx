@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,37 @@ bunx cap sync
 ```typescript
 import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const conn = await CapgoCapacitorFastSql.connect({ database: 'myapp' });
+console.log('Connected on port:', conn.port);
+```
+
+## Example: disconnect
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.disconnect({ database: 'myapp' });
+```
+
+## Example: getServerInfo
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const info = await CapgoCapacitorFastSql.getServerInfo({ database: 'myapp' });
+console.log('Server port:', info.port);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
