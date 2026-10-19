@@ -104,7 +104,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "@astrojs/compiler-rs": "0.5.1",
+    "@astrojs/compiler-rs": "0.5.2",
     "@axe-core/playwright": "^4.13.0",
     "@capgo/seo-checker": "^0.0.13",
     "@cloudflare/vite-plugin": "1.58.0",
