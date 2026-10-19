@@ -32,6 +32,21 @@ bunx cap sync
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.requestPermissions();
+const { contacts } = await CapacitorContacts.getContacts();
+```
+
+## Common pitfalls
+
+- **Rationale**: explain why contacts access is needed before the dialog.
+- **Pagination**: avoid loading entire address books at once.
+- **Writes**: creating contacts needs write permission.
+
 ## API Overview
 
 ### `countContacts`

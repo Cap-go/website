@@ -32,6 +32,22 @@ bunx cap sync
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+await CapacitorShareTarget.addListener('shareReceived', (event) => {
+  routeSharedPayload(event.title, event.texts, event.files);
+});
+```
+
+## Common pitfalls
+
+- **Native setup**: intents only work after manifest and Xcode steps in the README.
+- **Cold start**: buffer shares until your router is ready.
+- **File URIs**: copy to app storage before upload, access may expire.
+
 ## API Overview
 
 ### `addListener`

@@ -26,6 +26,21 @@ bun add @capgo/capacitor-recaptcha
 bunx cap sync
 ```
 
+## Quick start
+
+```typescript
+import { Recaptcha } from '@capgo/capacitor-recaptcha';
+
+const { token } = await Recaptcha.execute({ action: 'login' });
+await verifyOnServer(token, 'login');
+```
+
+## Common pitfalls
+
+- **Server verify**: tokens are short lived, assess with Google before trusting clients.
+- **Keys**: set per platform site keys in config.
+- **Enterprise flag**: must match key type in Google Cloud.
+
 ## Configure Site Keys
 
 Create platform keys in Google Cloud reCAPTCHA, then add them to `capacitor.config.ts`.

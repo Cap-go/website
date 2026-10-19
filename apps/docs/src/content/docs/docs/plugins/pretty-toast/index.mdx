@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Show native-looking toast notifications on iOS, Android, and Web with queueing, updates, actions, icons, and promise states."
+  tagline: "Native styled toasts with loading and promise helpers."
   actions:
     - text: Get started
       link: /docs/plugins/pretty-toast/getting-started/
@@ -22,9 +22,15 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-pretty-toast` provides a `toast.*` API for native-first toast notifications in Capacitor apps. It renders native overlays on iOS and Android and a DOM renderer on Web.
+Use `toast.success()` and `toast.loading()` instead of blocking alerts for lightweight feedback.
 
-Use it for success messages, errors, loading states, long-running promise feedback, and action toasts that should feel integrated with the platform.
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native surface |
+| Android | Yes | Material style |
+| Web | Yes | DOM fallback |
 
 ## Demo
 

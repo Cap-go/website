@@ -32,6 +32,22 @@ bunx cap sync
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 ```
 
+## Quick start
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+await SpeechRecognition.requestPermissions();
+await SpeechRecognition.start({ language: 'en-US', partialResults: true });
+await SpeechRecognition.addListener('partialResults', ({ matches }) => setTranscript(matches[0] ?? ''));
+```
+
+## Common pitfalls
+
+- **Cleanup**: remove listeners when leaving the screen.
+- **Locales**: use BCP 47 tags matching your UI.
+- **Web**: guard unavailable browsers.
+
 ## API Overview
 
 ### `available`

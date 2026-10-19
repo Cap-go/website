@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor Share Target Plugin interface."
+  tagline: "Receive text, links, and files shared into your Capacitor app."
   actions:
     - text: Get started
       link: /docs/plugins/share-target/getting-started/
@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Capacitor Share Target Plugin interface.
+Listen for `shareReceived` so Android and iOS share sheets can hand content to JavaScript without custom share extensions per MIME type.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Share extension setup in Xcode |
+| Android | Yes | Intent filters in manifest |
+| Web | No | Use PWA share target separately |
 
 ## Core Capabilities
 

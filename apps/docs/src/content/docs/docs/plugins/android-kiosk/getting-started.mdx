@@ -32,6 +32,20 @@ bunx cap sync
 import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+## Common pitfalls
+
+- **Launcher**: set the app as default launcher for reliable kiosk lock.
+- **MDM**: validate escape hatches before shipping fleet builds.
+- **iOS**: not supported.
+
 ## API Overview
 
 ### `isInKioskMode`

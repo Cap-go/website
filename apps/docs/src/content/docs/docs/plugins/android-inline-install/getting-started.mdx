@@ -32,6 +32,24 @@ bunx cap sync
 import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
 ```
 
+## Quick start
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.companion',
+  overlay: true,
+  fallback: true,
+});
+```
+
+## Common pitfalls
+
+- **Play only**: sideloaded APKs cannot inline install.
+- **versionCode**: must exceed the installed build.
+- **Dismissal**: handle cancel without infinite retry loops.
+
 ## API Overview
 
 ### `startInlineInstall`

@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-native-market
-npx cap sync
+bun add @capgo/capacitor-native-market
+bunx cap sync
 ```
 
 ## Import
@@ -31,6 +31,26 @@ npx cap sync
 ```typescript
 import { NativeMarket } from '@capgo/capacitor-native-market';
 ```
+
+## Quick start
+
+```typescript
+import { NativeMarket } from '@capgo/capacitor-native-market';
+
+await NativeMarket.openStoreListing({ appId: 'com.example.app' });
+```
+
+## Example: Play Store search (Android)
+
+```typescript
+await NativeMarket.search({ terms: 'fitness tracker' });
+```
+
+## Common pitfalls
+
+- **Bundle vs package**: iOS uses App Store bundle id, Android uses application id.
+- **Android only**: guard `openDevPage` and `openCollection` with `Capacitor.getPlatform()`.
+- **External UI**: store UI opens outside your WebView, plan return deep links separately.
 
 ## API Overview
 

@@ -32,6 +32,20 @@ bunx cap sync
 import { AgeRange } from '@capgo/capacitor-age-range';
 ```
 
+## Quick start
+
+```typescript
+import { AgeRange } from '@capgo/capacitor-age-range';
+
+const result = await AgeRange.requestAgeRange({ ageGates: [13, 16, 18] });
+```
+
+## Common pitfalls
+
+- **Not ID proof**: signals aid compliance UX, not government ID.
+- **Unknown status**: design defaults for older OS versions.
+- **Disclosures**: document usage in privacy policies.
+
 ## API Overview
 
 ### `requestAgeRange`

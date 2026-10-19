@@ -32,6 +32,26 @@ bunx cap sync
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 ```
 
+## Quick start
+
+```typescript
+import { MqttBridge } from '@capgo/capacitor-mqtt';
+
+await MqttBridge.connect({
+  serverURI: 'wss://broker.example.com',
+  port: 443,
+  clientId: 'cap-app-1',
+  setAutomaticReconnect: true,
+});
+await MqttBridge.subscribe({ topic: 'devices/telemetry', qos: 1 });
+```
+
+## Common pitfalls
+
+- **TLS**: match `serverURI` scheme with broker requirements.
+- **Background**: reconnect after Android suspends the WebView.
+- **QoS**: higher QoS costs battery on cellular links.
+
 ## API Overview
 
 ### `connect`

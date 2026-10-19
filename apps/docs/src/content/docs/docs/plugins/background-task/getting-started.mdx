@@ -55,6 +55,12 @@ bunx cap sync ios
 import { BackgroundTask, BackgroundTaskResult } from '@capgo/capacitor-background-task';
 ```
 
+## Common pitfalls
+
+- **Module scope**: register `defineTask` before `registerTaskAsync`.
+- **iOS ids**: match `BGTaskSchedulerPermittedIdentifiers` entries.
+- **Intervals**: OS may delay jobs beyond `minimumInterval`.
+
 ## Define A Task
 
 Define the callback at module scope so it is registered as soon as the app is started by the operating system.

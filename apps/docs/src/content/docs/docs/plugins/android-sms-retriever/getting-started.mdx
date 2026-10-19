@@ -26,6 +26,24 @@ bun add @capgo/capacitor-android-sms-retriever
 bunx cap sync android
 ```
 
+## Quick start
+
+```typescript
+import { AndroidSmsRetriever } from '@capgo/capacitor-android-sms-retriever';
+
+await AndroidSmsRetriever.addListener('smsReceived', ({ message }) => {
+  const code = message.match(/\b\d{6}\b/)?.[0];
+  if (code) submitCode(code);
+});
+await AndroidSmsRetriever.startWatch();
+```
+
+## Common pitfalls
+
+- **Hash**: SMS templates must include the app retriever hash.
+- **Timeout**: restart watch when users request a new code.
+- **Play services**: required on device.
+
 ## Import
 
 ```typescript

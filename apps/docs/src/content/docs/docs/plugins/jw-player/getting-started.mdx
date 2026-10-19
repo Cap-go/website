@@ -32,6 +32,21 @@ bunx cap sync
 import { JwPlayer } from '@capgo/capacitor-jw-player';
 ```
 
+## Quick start
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.initialize({ licenseKey: 'YOUR_JW_LICENSE' });
+await JwPlayer.play({ mediaUrl: 'https://cdn.example.com/stream.m3u8', mediaType: 'video' });
+```
+
+## Common pitfalls
+
+- **License**: valid JW license required before `initialize()`.
+- **DRM**: pass DRM configs from your backend, never embed secrets.
+- **Audio**: coordinate with `@capgo/capacitor-audiosession` on iOS.
+
 ## API Overview
 
 ### `initialize`

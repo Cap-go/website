@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Read one app-targeted verification SMS without SMS permissions and request SIM phone number hints on Android."
+  tagline: "Read one app targeted SMS OTP on Android without SMS permissions."
   actions:
     - text: Get started
       link: /docs/plugins/android-sms-retriever/getting-started/
@@ -22,9 +22,15 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-android-sms-retriever` wraps Google Play services SMS Retriever and Phone Number Hint APIs for Android-only Capacitor verification flows.
+Start the retriever, listen for `smsReceived`, and parse OTP hashes your server includes in the SMS body.
 
-The plugin lets your app listen for a single verification SMS addressed to your app without requesting SMS permissions. It can also show Android's native Phone Number Hint UI so users can choose a SIM-based phone number without typing it manually.
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | No | Use autofill or passkeys |
+| Android | Yes | SMS Retriever API |
+| Web | No | Not applicable |
 
 ## Core Capabilities
 

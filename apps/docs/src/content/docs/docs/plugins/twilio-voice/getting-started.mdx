@@ -32,6 +32,21 @@ bunx cap sync
 import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+await CapacitorTwilioVoice.login({ accessToken: tokenFromBackend });
+await CapacitorTwilioVoice.makeCall({ to: '+15551234567' });
+```
+
+## Common pitfalls
+
+- **Token TTL**: refresh Twilio tokens before expiry.
+- **Inbound**: configure VoIP push on iOS.
+- **Mic permission**: request before placing calls.
+
 ## API Overview
 
 ### `login`

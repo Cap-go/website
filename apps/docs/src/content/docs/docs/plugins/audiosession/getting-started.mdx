@@ -32,6 +32,20 @@ bunx cap sync
 import { AudioSession } from '@capgo/capacitor-audio-session';
 ```
 
+## Quick start
+
+```typescript
+import { AudioSession } from '@capgo/capacitor-audiosession';
+
+await AudioSession.overrideOutput('speaker');
+```
+
+## Common pitfalls
+
+- **iOS focus**: routing APIs target iOS audio session behavior.
+- **Restore**: call `overrideOutput('default')` after calls end.
+- **Ordering**: configure before Twilio or media plugins start.
+
 ## API Overview
 
 ### `currentOutputs`
