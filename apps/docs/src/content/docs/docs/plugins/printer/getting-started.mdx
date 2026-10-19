@@ -32,6 +32,38 @@ bunx cap sync
 import { Printer } from '@capgo/capacitor-printer';
 ```
 
+## Quick start
+
+Print a PDF that already lives on disk (preferred for large files).
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+await Printer.printFile({
+  path: 'file:///data/user/0/.../invoice.pdf',
+  name: 'Invoice #1042',
+});
+```
+
+## Example: HTML receipt
+
+```typescript
+await Printer.printHtml({
+  html: '<h1>Thank you</h1><p>Total: $42.00</p>',
+  name: 'Receipt',
+});
+```
+
+## Example: avoid huge base64 payloads
+
+`printBase64` decodes entire files in memory. For assets above about 5 MB, write to a temp file and call `printFile` instead.
+
+## Common pitfalls
+
+- **Memory**: large base64 strings can crash the app on low RAM devices.
+- **Web**: printing uses the browser dialog, layout differs from native print controllers.
+- **Paths**: Android accepts `file://` and app relative paths as documented on `printFile`.
+
 ## API Overview
 
 ### `printBase64`

@@ -32,6 +32,51 @@ bunx cap sync
 import { DocumentScanner } from '@capgo/capacitor-document-scanner';
 ```
 
+## Quick start
+
+```typescript
+import { DocumentScanner } from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  maxNumDocuments: 1,
+  responseType: 'imageFilePath',
+});
+
+if (result.status === 'success' && result.scannedImages?.length) {
+  await uploadReceipt(result.scannedImages[0]);
+}
+```
+
+## Example: multi page packet
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  maxNumDocuments: 12,
+  letUserAdjustCrop: true,
+  reviewCapturedDocument: true,
+});
+```
+
+Up to 24 pages per session are supported by the native scanners.
+
+## Example: tuned Android cleanup
+
+```typescript
+await DocumentScanner.scanDocument({
+  scannerMode: 'full',
+  brightness: 0.1,
+  contrast: 1.2,
+});
+```
+
+`scannerMode` and ML cleanup options are Android only. See plugin options in `scanDocument` for the full list.
+
+## Common pitfalls
+
+- **Web**: plan a fallback (file picker or manual photo) because scanning is native only.
+- **User cancel**: `status` can be `cancel` with no images, handle it like any other dismiss.
+- **Output type**: choose `imageFilePath` or base64 via `responseType` before you wire uploads.
+
 ## API Overview
 
 ### `scanDocument`

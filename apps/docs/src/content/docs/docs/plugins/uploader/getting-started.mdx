@@ -32,6 +32,63 @@ bunx cap sync
 import { Uploader } from '@capgo/capacitor-uploader';
 ```
 
+## Quick start
+
+Start an upload, subscribe to `events`, and track the returned upload `id`.
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+const listener = await Uploader.addListener('events', (event) => {
+  if (event.name === 'uploading') {
+    console.log(event.payload.percent);
+  }
+  if (event.name === 'completed') {
+    listener.remove();
+  }
+});
+
+const { id } = await Uploader.startUpload({
+  filePath: 'file:///data/user/0/.../scan.jpg',
+  serverUrl: 'https://api.example.com/v1/assets',
+  method: 'POST',
+  headers: { Authorization: 'Bearer token' },
+  maxRetries: 3,
+});
+```
+
+## Example: presigned S3 PUT
+
+`PUT` uploads support a single file. Use the presigned URL as `serverUrl` and set `method: 'PUT'`.
+
+```typescript
+await Uploader.startUpload({
+  filePath: capturedUri,
+  serverUrl: presignedUrl,
+  method: 'PUT',
+  headers: { 'Content-Type': 'image/jpeg' },
+});
+```
+
+## Example: multipart form with extra fields
+
+```typescript
+await Uploader.uploadMultipart({
+  url: 'https://api.example.com/upload',
+  filePath: localPath,
+  fieldName: 'file',
+  fields: { userId: '42', kind: 'receipt' },
+  headers: { Authorization: 'Bearer token' },
+});
+```
+
+## Common pitfalls
+
+- **Multiple files**: use the `files` array on `startUpload` for one multipart request. `PUT` cannot send multiple bodies.
+- **Web background**: uploads stop if the user closes the tab. Use native platforms when completion must survive app backgrounding.
+- **Cancel**: call `removeUpload({ id })` with the id from `startUpload`.
+- **Progress**: always attach the `events` listener before starting, or you can miss early progress.
+
 ## API Overview
 
 ### `startUpload`

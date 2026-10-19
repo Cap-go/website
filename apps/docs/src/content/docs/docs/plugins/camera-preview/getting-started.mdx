@@ -32,6 +32,56 @@ bunx cap sync
 import { CameraPreview } from '@capgo/camera-preview';
 ```
 
+## Quick start
+
+Start a rear camera preview behind your UI, capture a still, then stop to release the camera.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.start({
+  position: 'rear',
+  parent: 'cameraPreview',
+  toBack: true,
+});
+
+const { value } = await CameraPreview.capture({ quality: 90 });
+console.log('Photo path', value);
+
+await CameraPreview.stop();
+```
+
+Mount a full screen element with `id="cameraPreview"` in your HTML.
+
+## Example: barcode overlay
+
+```typescript
+await CameraPreview.start({ position: 'rear', toBack: true });
+
+await CameraPreview.startBarcodeScanner({
+  formats: ['qr_code', 'code_128'],
+  detectionInterval: 400,
+});
+
+CameraPreview.addListener('barcodeScanned', (event) => {
+  const code = event.barcodes[0]?.value;
+  if (code) handleScan(code);
+});
+```
+
+## Example: flip camera and flash
+
+```typescript
+await CameraPreview.flip();
+await CameraPreview.setFlashMode({ flashMode: 'torch' });
+```
+
+## Common pitfalls
+
+- **Permissions**: request camera (and microphone if you record video) before `start`.
+- **Lifecycle**: call `stop()` when leaving the route or the next screen may fail to open the camera.
+- **Web**: verify supported APIs in the plugin README before relying on preview in mobile browsers.
+
 ## API Overview
 
 ### `start`

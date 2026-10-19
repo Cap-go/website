@@ -35,6 +35,57 @@ bunx cap sync
 import { BackgroundGeolocation } from '@capgo/background-geolocation';
 ```
 
+## Quick start
+
+Request background location permission, start updates with a user visible Android notification message, and POST fixes to your API from native code.
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+await BackgroundGeolocation.requestPermissions({
+  permissions: ['location', 'backgroundLocation', 'notification'],
+});
+
+await BackgroundGeolocation.start({
+  backgroundMessage: 'Tracking delivery route',
+  backgroundTitle: 'Location active',
+  requestPermissions: true,
+  stale: false,
+  url: 'https://api.example.com/locations',
+  headers: { Authorization: 'Bearer fleet-token' },
+  distanceFilter: 25,
+});
+```
+
+Each fix is delivered in parallel to JavaScript (while the WebView is alive) and to `url` with `"source": "native"` in the JSON body.
+
+## Example: geofence webhook
+
+```typescript
+await BackgroundGeolocation.setupGeofencing({
+  webhookUrl: 'https://api.example.com/geofence-hit',
+});
+
+await BackgroundGeolocation.addGeofence({
+  identifier: 'warehouse',
+  latitude: 32.7,
+  longitude: -117.1,
+  radius: 200,
+});
+```
+
+## Example: stop tracking
+
+```typescript
+await BackgroundGeolocation.stop();
+```
+
+## Common pitfalls
+
+- **Android notification**: background updates require `backgroundMessage` (and title) so users see why location is active.
+- **Stale fixes**: set `stale: false` when you need GPS fresh fixes only.
+- **Permissions**: request `backgroundLocation` separately on modern Android versions.
+
 ## API Overview
 
 ### `start`

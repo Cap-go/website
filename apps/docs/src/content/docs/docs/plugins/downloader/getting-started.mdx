@@ -32,6 +32,45 @@ bunx cap sync
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 ```
 
+## Quick start
+
+Download to a known folder, listen for progress, and resume after app restarts when supported.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const task = await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/large-pack.zip',
+  destination: 'downloads/offline-pack.zip',
+});
+
+CapacitorDownloader.addListener('progress', (event) => {
+  if (event.id === task.id) {
+    console.log(event.progress);
+  }
+});
+```
+
+## Example: pause and resume
+
+```typescript
+await CapacitorDownloader.pause({ id: 'offline-pack' });
+await CapacitorDownloader.resume({ id: 'offline-pack' });
+```
+
+## Example: inspect finished file
+
+```typescript
+const info = await CapacitorDownloader.getFileInfo({ path: 'downloads/offline-pack.zip' });
+```
+
+## Common pitfalls
+
+- **Storage destination**: pick a `destination` your app can read on each platform.
+- **Background**: native downloads continue in background on mobile, web downloads require the page to stay open.
+- **Status**: use `checkStatus` after relaunch to reconcile in flight tasks.
+
 ## API Overview
 
 ### `download`
