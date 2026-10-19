@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -65,6 +65,42 @@ import type {
   AFUrls,
 } from '@capgo/capacitor-appsflyer';
 ```
+
+## Quick start
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.initSDK({
+  devKey: 'dev-key-123',
+  appID: 'app-id-123',
+});
+console.log(result);
+```
+
+## Example: startSDK
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.startSDK();
+console.log(result);
+```
+
+## Example: logEvent
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+const result = await AppsFlyer.logEvent({ eventName: 'event' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

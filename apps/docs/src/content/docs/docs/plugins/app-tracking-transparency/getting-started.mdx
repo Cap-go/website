@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,44 @@ bunx cap sync
 ```typescript
 import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
 ```
+
+## Quick start
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+const { status } = await AppTrackingTransparency.getStatus();
+if (status === 'authorized') {
+  console.log('Tracking is authorized');
+}
+```
+
+## Example: requestPermission
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+const { status } = await AppTrackingTransparency.requestPermission();
+switch (status) {
+  case 'authorized':
+    console.log('User authorized tracking');
+    break;
+  case 'denied':
+    console.log('User denied tracking');
+    break;
+  case 'restricted':
+    console.log('Tracking is restricted');
+    break;
+  case 'notDetermined':
+    console.log('Status not determined');
+    break;
+}
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

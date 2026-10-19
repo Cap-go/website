@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,62 @@ bunx cap sync
 ```typescript
 import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+const now = Date.now();
+const stats = await CapacitorUsageStatsManager.queryAndAggregateUsageStats({
+  beginTime: oneDayAgo,
+  endTime: now,
+  packageName: 'com.example.app',
+});
+
+for (const [packageName, usageData] of Object.entries(stats)) {
+  console.log(`${packageName}: ${usageData.totalTimeInForeground}ms`);
+}
+```
+
+## Example: queryUsageStats
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const startOfDay = new Date().setHours(0, 0, 0, 0);
+const { stats } = await CapacitorUsageStatsManager.queryUsageStats({
+  intervalType: 0, // INTERVAL_DAILY
+  beginTime: startOfDay,
+  endTime: Date.now(),
+  packageName: 'com.example.app',
+});
+stats.forEach((bucket) => {
+  console.log(`${bucket.packageName}: ${bucket.totalTimeInForeground}ms`);
+});
+```
+
+## Example: queryEvents
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const startOfDay = new Date().setHours(0, 0, 0, 0);
+const { events } = await CapacitorUsageStatsManager.queryEvents({
+  beginTime: startOfDay,
+  endTime: Date.now(),
+  packageName: 'com.example.app',
+});
+events.forEach((event) => {
+  console.log(`${event.packageName} type=${event.eventType} at ${event.timeStamp}`);
+});
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

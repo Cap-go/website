@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,43 @@ bunx cap sync
 ```typescript
 import { AdMob } from '@capgo/capacitor-admob';
 ```
+
+## Quick start
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.start();
+```
+
+## Example: configure
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 0.5
+});
+```
+
+## Example: configRequest
+
+```typescript
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.PG,
+  tagForChildDirectedTreatment: true,
+  testDeviceIds: ['test-device-id']
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
