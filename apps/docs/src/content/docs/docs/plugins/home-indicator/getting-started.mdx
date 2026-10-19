@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-home-indicator
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,40 @@ bunx cap sync
 ```typescript
 import { HomeIndicator } from '@capgo/capacitor-home-indicator';
 ```
+
+## Quick start
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.hide();
+```
+
+## Example: show
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.show();
+```
+
+## Example: isHidden
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+const { hidden } = await HomeIndicator.isHidden();
+if (hidden) {
+  console.log('Home indicator is hidden');
+} else {
+  console.log('Home indicator is visible');
+}
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

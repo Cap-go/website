@@ -59,6 +59,12 @@ const { enabled } = await PrivacyScreen.isEnabled();
 console.log('Privacy screen enabled:', enabled);
 ```
 
+## Common pitfalls
+
+- **Temporary disable**: re enable immediately after support or payment flows that require screenshots.
+- **Android overlays**: dim overlay behavior is configurable, read the Android doc page before changing defaults.
+- **Web parity**: `isEnabled()` on web reflects the in memory flag only, not OS level protection.
+
 ## When to disable it temporarily
 
 Use `disable()` only when the current screen should remain visible in system previews or be capturable by the user, for example:

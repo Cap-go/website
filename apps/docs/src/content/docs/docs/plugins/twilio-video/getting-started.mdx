@@ -32,6 +32,20 @@ bunx cap sync
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 ```
 
+## Quick start
+
+```typescript
+import { TwilioVideo } from '@capgo/capacitor-twilio-video';
+await TwilioVideo.login({ accessToken: 'token' });
+await TwilioVideo.joinRoom({ roomName: 'room' });
+```
+
+## Common pitfalls
+
+- Mint tokens on your server only.
+- Request camera and microphone permissions.
+- Handle iOS audio interruptions.
+
 ## API Overview
 
 ### `login`

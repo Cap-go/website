@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-firebase-functions
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,39 @@ bunx cap sync
 ```typescript
 import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
 ```
+
+## Quick start
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByName({ name: 'myFunction' });
+console.log(result);
+```
+
+## Example: callByUrl
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+const result = await FirebaseFunctions.callByUrl({
+  url: 'https://us-central1-my-project.cloudfunctions.net/myFunction',
+});
+console.log(result);
+```
+
+## Example: useEmulator
+
+```typescript
+import { FirebaseFunctions } from '@capgo/capacitor-firebase-functions';
+
+await FirebaseFunctions.useEmulator({ host: "127.0.0.1" });
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,60 @@ bunx cap sync
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorWifi, NetworkSecurityType } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.addNetwork({
+  ssid: 'MyNetwork',
+  password: 'mypassword',
+  isHiddenSsid: false,
+  securityType: NetworkSecurityType.WPA2_PSK
+});
+```
+
+## Example: connect
+
+```typescript
+import { CapacitorWifi, WifiConnectionErrorCode } from '@capgo/capacitor-wifi';
+
+try {
+  await CapacitorWifi.connect({
+    ssid: 'MyNetwork',
+    password: 'mypassword',
+    autoRouteTraffic: true, // Android only
+    timeoutMs: 30000,
+  });
+} catch (error: any) {
+  switch (error.code) {
+    case WifiConnectionErrorCode.WIFI_DISABLED:
+      // Ask the user to enable Wi-Fi
+      break;
+    case WifiConnectionErrorCode.PERMISSION_DENIED:
+      // Request the required permission
+      break;
+    default:
+      // Generic connection error
+      break;
+  }
+}
+```
+
+## Example: disconnect
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.disconnect();
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 
