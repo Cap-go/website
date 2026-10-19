@@ -289,6 +289,7 @@ const pluginEntries = [
 
 const pluginItems = [
   linkItem('Getting Started', '/docs/plugins/'),
+  linkItem('Siri, Shortcuts, and widgets', '/docs/plugins/siri-shortcuts-widgets-and-intents/'),
   updaterPluginSection,
   ...pluginEntries.map((entry) => (Array.isArray(entry) ? pluginDoc(entry[0], entry[1], entry[2] ?? []) : entry)),
   linkItem('👋 Get a custom plugin', '/consulting/'),
