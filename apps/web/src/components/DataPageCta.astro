@@ -1,0 +1,67 @@
+---
+import SignupCta from '@/components/SignupCta.astro'
+
+interface Props {
+  /** Stable id passed to the signup link for analytics. */
+  id: string
+  eyebrow: string
+  title: string
+  description: string
+}
+
+const { id, eyebrow, title, description } = Astro.props
+const titleId = `${id}-title`
+---
+
+<section class="data-page-cta" aria-labelledby={titleId}>
+  <div class="data-page-cta-shell">
+    <p class="data-page-cta-eyebrow">{eyebrow}</p>
+    <h2 id={titleId}>{title}</h2>
+    <p class="data-page-cta-description">{description}</p>
+    <SignupCta id={id} humanSupport />
+  </div>
+</section>
+
+<style>
+  .data-page-cta {
+    padding: 88px 20px 104px;
+    border-top: 1px solid rgb(255 255 255 / 11%);
+    background: radial-gradient(ellipse at top, rgb(142 197 255 / 12%), transparent 65%);
+    color: white;
+  }
+  .data-page-cta-shell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .data-page-cta-eyebrow {
+    margin: 0 0 16px;
+    color: #8ec5ff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .data-page-cta h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .data-page-cta-description {
+    max-width: 560px;
+    margin: 20px 0 32px;
+    color: #bdc9da;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  @media (max-width: 720px) {
+    .data-page-cta {
+      padding-block: 64px 80px;
+    }
+  }
+</style>

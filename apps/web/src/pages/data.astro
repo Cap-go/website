@@ -1,5 +1,6 @@
 ---
 import m from '@/copy/messages'
+import DataPageCta from '@/components/DataPageCta.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
@@ -506,6 +507,12 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       title={m.proof_data_title({}, { locale: Astro.locals.locale })}
       description={m.proof_data_desc({}, { locale: Astro.locals.locale })}
       testimonials={productTestimonials.liveUpdateData}
+    />
+    <DataPageCta
+      id="data-final-signup-cta"
+      eyebrow="Ship faster"
+      title="Get these numbers for your own app"
+      description="Push JavaScript, HTML and CSS fixes to your Capacitor users in minutes, with rollbacks, channels and the same delivery tracking shown on this page."
     />
   </main>
 </Layout>
