@@ -1,99 +1,150 @@
-# ChatGPT context: AI app builder to mobile ads
+# ChatGPT Ads: AI app builder to mobile
 
-Paste everything below the line into ChatGPT, then ask for ads, targeting, or variants for one builder at a time.
+Format follows OpenAI's Ads Manager docs: one ad group per landing page, context hints at the ad group level, and several ads per group, each with a different angle.
 
----
+- Ad title: 16–24 characters recommended, 50 max. Ad copy: 32–48 recommended, 100 max. Counts are in brackets.
+- Image: square PNG or JPG, 1200×1200 max.
+- Objective: Conversions, on `registration_completed`. Start with one ad group, then add the others.
+- Bulk upload: paste the `context_hints` JSON as is (the list replaces the old one, it doesn't merge).
+- capgo.app allows OAI-AdsBot and OAI-SearchBot (robots.txt allows all crawlers, checked 2026-10-20).
 
-You are helping me run paid ads for Capgo. Use only the facts in this brief. If a claim is not here, do not use it. Ask me before inventing numbers, customer names, or features.
+## Ad group: Lovable to mobile
 
-## Product
+Landing page: `https://capgo.app/solutions/lovable-to-mobile/?utm_source=chatgpt&utm_medium=paid&utm_campaign=builder_to_mobile_lovable`
 
-Capgo (capgo.app) helps people ship a web app as a real iOS and Android app.
+Context hints:
 
-- **Capacitor** wraps the existing web app in native iOS and Android projects. The app code stays the same.
-- **Capgo Build** makes signed iOS and Android builds in the cloud. iOS builds run on cloud Macs, so the user needs no Mac and no Xcode. A typical native build takes 2–3 minutes. Signed builds upload to App Store Connect and Google Play for review.
-- **Capgo Live Updates** ship later web changes (UI, copy, bug fixes) straight to installed apps, without a new store review. New plugins or permissions still need a new store build.
-- **Capgo MCP server and skills** let AI coding agents (Claude Code, Codex, Cursor) run the release steps.
+```json
+[
+  "Publish a Lovable web app to the App Store and Google Play without owning a Mac",
+  "For Lovable builders on Windows or Linux who need signed iOS builds made on cloud Macs",
+  "When a Lovable app works in the browser and users start asking for an app they can install",
+  "Keep building in Lovable after launch and push web changes to installed apps without a new store review",
+  "Lovable projects synced to GitHub, where each Publish can reach installed apps as a live update",
+  "14-day free trial with no credit card, then plans from $14 per month for native builds and live updates"
+]
+```
 
-Price: 14-day unlimited free trial, no credit card required. Paid plans from $14/month, or $146/year. The user also pays Apple ($99/year developer account) and Google ($25 one time). Capgo does not replace those accounts.
+Ads:
 
-## The buyer
+| Title | Copy |
+|---|---|
+| Lovable app to App Store (24) | Turn your Lovable app into iOS and Android apps. (48) |
+| Lovable to iOS, no Mac (22) | iOS builds run on cloud Macs. No Xcode needed. (46) |
+| Lovable app on Google Play (26) | A typical native build takes 2–3 minutes. (41) |
+| Update Lovable apps live (24) | Ship web fixes to installed apps without review. (48) |
+| Try it free for 14 days (23) | Builds and live updates for Lovable. No card. (45) |
 
-A founder, solo maker, or small team who built a web app with an AI app builder (Lovable, Base44, Bolt, Replit, or v0). They are often not a mobile developer, and many have no Mac. The app works in the browser. Now they want it on the App Store and Google Play, because users expect an app icon, push notifications, and device features.
+## Ad group: Base44 to mobile
 
-What blocks them:
+Landing page: `https://capgo.app/solutions/base44-to-mobile/?utm_source=chatgpt&utm_medium=paid&utm_campaign=builder_to_mobile_base44`
 
-1. The builder makes a web app. It cannot publish to the App Store.
-2. Signing, Xcode, Android Studio, and store uploads happen outside the builder. iOS normally needs a Mac.
-3. After launch, every change waits on store review, often 24–48 hours.
+Context hints:
 
-What they want to hear: "your {Builder} app, on the App Store and Google Play, without a Mac, and you keep editing it in {Builder}."
+```json
+[
+  "Publish a Base44 web app to the App Store and Google Play without owning a Mac",
+  "For Base44 builders on Windows or Linux who need signed iOS builds made on cloud Macs",
+  "When a Base44 app works in the browser and users start asking for an app they can install",
+  "Keep building in Base44 after launch and push web changes to installed apps without a new store review",
+  "Base44 apps on the Builder plan or higher, exported through GitHub sync or a ZIP download",
+  "14-day free trial with no credit card, then plans from $14 per month for native builds and live updates"
+]
+```
 
-## One page per builder
+Ads:
 
-Each ad must name one builder and send traffic to that builder's page. Never mix builders in one ad.
+| Title | Copy |
+|---|---|
+| Base44 app to App Store (23) | Turn your Base44 app into iOS and Android apps. (47) |
+| Base44 to iOS, no Mac (21) | iOS builds run on cloud Macs. No Xcode needed. (46) |
+| Base44 app on Google Play (25) | A typical native build takes 2–3 minutes. (41) |
+| Update Base44 apps live (23) | Ship web fixes to installed apps without review. (48) |
+| Try it free for 14 days (23) | Builds and live updates for Base44. No card. (44) |
 
-| Builder | Landing page | How the code gets out | Notes for copy |
-|---|---|---|---|
-| Lovable | https://capgo.app/solutions/lovable-to-mobile/ | GitHub sync | Each Publish in Lovable can reach installed apps as a live update. Supabase backend keeps working. |
-| Base44 | https://capgo.app/solutions/base44-to-mobile/ | GitHub sync or ZIP export | Export needs the Base44 Builder plan or higher. Base44 backend keeps working. |
-| Bolt (bolt.new) | https://capgo.app/solutions/bolt-to-mobile/ | GitHub repo | Keeps the web app as is, so no rewrite in React Native or Expo. |
-| Replit | https://capgo.app/solutions/replit-to-mobile/ | Replit Shell or Git pane | The Capgo CLI runs in the Replit Shell, so it all works in the browser. |
-| v0 (Vercel) | https://capgo.app/solutions/v0-to-mobile/ | GitHub, then a Next.js static export | Server code stays on Vercel. shadcn/ui components work on mobile. |
+## Ad group: Bolt to mobile
 
-## What the landing page shows on the first screen
+Landing page: `https://capgo.app/solutions/bolt-to-mobile/?utm_source=chatgpt&utm_medium=paid&utm_campaign=builder_to_mobile_bolt`
 
-The ad must use the same words, so the visitor knows they are in the right place.
+Context hints:
 
-- Badge: "For {Builder} builders: no Mac, no Xcode"
-- Headline (H1): "Turn your {Builder} app into iOS and Android apps"
-- Lead: "Export your {Builder} project, wrap it with Capacitor, and build signed App Store and Google Play apps with Capgo Build. No Mac needed. After launch, changes you make in {Builder} reach installed apps as live updates."
-- Stats: "No Mac" (needed for iOS builds), "2–3 min" (typical native build), "Live updates" (for changes made in {Builder})
-- Button: "Get started for free", with "14-day unlimited free trial. No credit card required."
+```json
+[
+  "Publish a Bolt web app to the App Store and Google Play without owning a Mac",
+  "For Bolt builders on Windows or Linux who need signed iOS builds made on cloud Macs",
+  "When a Bolt app works in the browser and users start asking for an app they can install",
+  "Keep building in Bolt after launch and push web changes to installed apps without a new store review",
+  "Bolt web apps that should stay web apps on mobile, without a rewrite in React Native or Expo",
+  "14-day free trial with no credit card, then plans from $14 per month for native builds and live updates"
+]
+```
 
-## Rules for ad copy
+Ads:
 
-- The first sentence of the primary text is the H1, word for word, with the builder name.
-- Use "Sign up" or "Learn more" as the platform CTA.
-- Allowed claims: no Mac, no Xcode, cloud iOS builds, 2–3 min typical native build, signed App Store and Google Play builds, live updates without store review for web changes, 14-day free trial, no credit card.
-- Do not claim: "no code" (users run a few CLI commands, or let an AI agent run them), "1 click", "instant App Store approval", "guaranteed approval", "free forever", "skip Apple review" for the first release, an Apple or Google partnership, an official partnership with any builder, user or download counts, or any price other than the ones above.
-- Apple and Google still review the first store release. Live updates cover later web changes only.
-- Keep it plain: short sentences, no hype words ("revolutionary", "seamless", "game-changer"), no emoji, no exclamation marks.
-- Limits: Meta headline ≤ 40 characters, Google RSA headline ≤ 30, Google description ≤ 90. Show character counts.
+| Title | Copy |
+|---|---|
+| Bolt app to App Store (21) | Turn your Bolt app into iOS and Android apps. (45) |
+| Bolt to iOS, no Mac (19) | iOS builds run on cloud Macs. No Xcode needed. (46) |
+| Bolt app on Google Play (23) | A typical native build takes 2–3 minutes. (41) |
+| Update Bolt apps live (21) | Ship web fixes to installed apps without review. (48) |
+| Try it free for 14 days (23) | Builds and live updates for Bolt. No card. (42) |
 
-## Targeting signals
+## Ad group: Replit to mobile
 
-Use these to describe who should see the ad, or which conversations or searches it should show next to.
+Landing page: `https://capgo.app/solutions/replit-to-mobile/?utm_source=chatgpt&utm_medium=paid&utm_campaign=builder_to_mobile_replit`
 
-People who:
+Context hints:
 
-- Built or are building an app with Lovable, Base44, Bolt, Replit Agent, or v0
-- Call themselves "vibe coders", indie hackers, solo founders, no-code or low-code makers
-- Follow or use Supabase, Vercel, Next.js, Vite, React, Tailwind, shadcn/ui, Cursor, Claude Code
-- Are on Windows or Linux and want an iOS app
+```json
+[
+  "Publish a Replit web app to the App Store and Google Play without owning a Mac",
+  "For Replit builders on Windows or Linux who need signed iOS builds made on cloud Macs",
+  "When a Replit app works in the browser and users start asking for an app they can install",
+  "Keep building in Replit after launch and push web changes to installed apps without a new store review",
+  "Replit apps where the whole build runs from the Replit Shell in the browser",
+  "14-day free trial with no credit card, then plans from $14 per month for native builds and live updates"
+]
+```
 
-Intent phrases (searches, or questions asked to an AI assistant):
+Ads:
 
-- "how do I put my {Builder} app on the App Store"
-- "{Builder} app to iOS" / "{Builder} mobile app" / "{Builder} Android app"
-- "convert {Builder} app to native app"
-- "publish web app to App Store without a Mac"
-- "build iOS app on Windows"
-- "turn React / Next.js / Vite app into mobile app"
-- "Capacitor App Store build without Xcode"
-- "update my app without App Store review"
+| Title | Copy |
+|---|---|
+| Replit app to App Store (23) | Turn your Replit app into iOS and Android apps. (47) |
+| Replit to iOS, no Mac (21) | iOS builds run on cloud Macs. No Xcode needed. (46) |
+| Replit app on Google Play (25) | A typical native build takes 2–3 minutes. (41) |
+| Update Replit apps live (23) | Ship web fixes to installed apps without review. (48) |
+| Try it free for 14 days (23) | Builds and live updates for Replit. No card. (44) |
 
-Exclude: people who want a native rewrite in Swift or Kotlin, Flutter developers, React Native or Expo apps (Capgo is for web apps wrapped with Capacitor), and agencies looking for someone to build the app for them.
+## Ad group: v0 to mobile
 
-## Measurement
+Landing page: `https://capgo.app/solutions/v0-to-mobile/?utm_source=chatgpt&utm_medium=paid&utm_campaign=builder_to_mobile_v0`
 
-The conversion that matters is `registration_completed` (account created). Run one builder at a time on a small budget. Judge each builder on cost per `registration_completed` before spending more. Tag links with `utm_campaign=builder_to_mobile_{builder}` (for example, `builder_to_mobile_base44`).
+Context hints:
 
-## What I will ask you
+```json
+[
+  "Publish a v0 web app to the App Store and Google Play without owning a Mac",
+  "For v0 builders on Windows or Linux who need signed iOS builds made on cloud Macs",
+  "When a v0 app works in the browser and users start asking for an app they can install",
+  "Keep building in v0 after launch and push web changes to installed apps without a new store review",
+  "v0 Next.js apps shipped as a static export, with server code staying on Vercel",
+  "14-day free trial with no credit card, then plans from $14 per month for native builds and live updates"
+]
+```
 
-- 3 ad variants for one builder (primary text, headline, description), following the rules above
-- Google search headlines and descriptions with character counts
-- Targeting or keyword lists for one builder
-- A review of ad copy I wrote, flagging anything that breaks the rules above
+Ads:
 
-I may paste existing variants as a style reference. Match their tone and length.
+| Title | Copy |
+|---|---|
+| v0 app to App Store (19) | Turn your v0 app into iOS and Android apps. (43) |
+| v0 to iOS, no Mac (17) | iOS builds run on cloud Macs. No Xcode needed. (46) |
+| v0 app on Google Play (21) | A typical native build takes 2–3 minutes. (41) |
+| Update v0 apps live (19) | Ship web fixes to installed apps without review. (48) |
+| Try it free for 14 days (23) | Builds and live updates for v0. No card. (40) |
+
+## If you ask ChatGPT for more variants
+
+Paste this:
+
+> Write 5 more ChatGPT ads for the "{Builder} to mobile" ad group above. Title 16–24 characters, copy 32–48 characters, show counts. Each ad needs a new angle, and the copy must add information, not repeat the title. Only use these facts: no Mac or Xcode needed, iOS builds run on cloud Macs, typical native build takes 2–3 minutes, signed App Store and Google Play builds, live updates for web changes after launch, 14-day free trial, no credit card, plans from $14 per month. Never say "no code", "1 click", "guaranteed approval", or "free forever". Apple and Google still review the first release.
