@@ -73,7 +73,7 @@ A useful planning habit is to write output specifications before arguing about v
 
 **Compute** is where your app logic runs. That may be containers on Kubernetes, serverless functions, managed app platforms, or a mix. For mobile backends, compute planning should focus on startup latency, concurrency behavior, regional placement, and failure isolation. A bursty push-triggered workload may fit serverless. A chat service with long-lived connections may need containerized services with careful autoscaling.
 
-**Storage** covers relational databases, caches, object storage, and search indexes. Mobile systems tend to create awkward storage patterns because clients sync intermittently and retry aggressively. Plan for idempotency, conflict handling, retention, and backup restore drills. Also plan encrypted storage patterns on-device and server-side. Teams working through mobile data protection trade-offs often benefit from guidance like this review of [secure database storage patterns for apps](https://capgo.app/blog/secure-database-storage/).
+**Storage** covers relational databases, caches, object storage, and search indexes. Mobile systems tend to create awkward storage patterns because clients sync intermittently and retry aggressively. Plan for idempotency, conflict handling, retention, and backup restore drills. Also plan encrypted storage patterns on-device and server-side. Teams working through mobile data protection trade-offs often benefit from guidance like [encrypting SQLite in Capacitor apps](https://capgo.app/blog/encrypt-sqlite-database-capacitor/).
 
 **Networking** is the layer mobile teams underestimate most often. It includes load balancers, API gateways, CDNs, TLS termination, WAF rules, and edge caching. Last-mile delivery lives here. If your asset bundles, images, feature flags, and config payloads aren't served efficiently across regions, users experience slowness even if your core API is healthy.
 
@@ -159,7 +159,7 @@ Focus on the risks that matter first:
 - **Version incompatibility:** New API assumptions that break older app versions still active in the field.
 - **Third-party fragility:** Auth providers, payment SDKs, push vendors, and analytics tools can degrade your app without touching your code.
 
-For enterprise teams, a formal [app risk assessment process](https://capgo.app/blog/app-risk-assessment/) helps force these conversations before incident review does. The point isn't bureaucracy. It's making hidden assumptions visible.
+For enterprise teams, a formal [OTA security checklist for Capacitor apps](https://capgo.app/blog/ota-security-checklist-for-capacitor-apps/) helps force these conversations before incident review does. The point isn't bureaucracy. It's making hidden assumptions visible.
 
 > If you can't disable a bad release in minutes, your deployment process is carrying more risk than your codebase.
 

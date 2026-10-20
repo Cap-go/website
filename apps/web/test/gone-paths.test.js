@@ -9,6 +9,8 @@ const GONE_PATHS = [
   '/blog/how-to-delete-icon/',
   '/blog/native-base-picker/',
   '/blog/react-native-alert/',
+  '/blog/secure-database-storage/',
+  '/blog/transaction-security/',
   '/blog/user-adoption-metrics/',
   '/blog/user-churn-analysis/',
   '/blog/what-is-a-micro-frontend/',
@@ -26,6 +28,11 @@ for (const gone of GONE_PATHS) {
     }
   })
 }
+
+test('isGonePath does not match retired app-risk-assessment (301 redirect)', () => {
+  expect(isGonePath('/blog/app-risk-assessment/')).toBe(false)
+  expect(isGonePath('/de/blog/app-risk-assessment/')).toBe(false)
+})
 
 test('isGonePath does not match unrelated paths', () => {
   expect(isGonePath('/blog/capacitor-comprehensive-guide/')).toBe(false)

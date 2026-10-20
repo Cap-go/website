@@ -25,6 +25,8 @@ const GONE_PATHS = new Set<string>([
   '/blog/how-to-delete-icon',
   '/blog/native-base-picker',
   '/blog/react-native-alert',
+  '/blog/secure-database-storage',
+  '/blog/transaction-security',
   '/blog/user-adoption-metrics',
   '/blog/user-churn-analysis',
   '/blog/what-is-a-micro-frontend',

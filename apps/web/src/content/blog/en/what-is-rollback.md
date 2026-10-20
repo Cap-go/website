@@ -125,7 +125,7 @@ PostgreSQL shows what a transactional rollback does. `ROLLBACK` aborts the curre
 <a id="design-migrations-to-move-forward"></a>
 ### Design migrations to move forward
 
-A safer release design keeps application versions and schema changes compatible during a transition. Teams should also document [secure database storage practices](https://capgo.app/blog/secure-database-storage/) alongside schema compatibility, access controls, and recovery procedures.
+A safer release design keeps application versions and schema changes compatible during a transition. Teams should also document [SQLite encryption practices for Capacitor apps](https://capgo.app/blog/encrypt-sqlite-database-capacitor/) alongside schema compatibility, access controls, and recovery procedures.
 
 An expand-and-contract migration commonly follows this sequence:
 

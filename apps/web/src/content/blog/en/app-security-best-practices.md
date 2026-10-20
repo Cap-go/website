@@ -125,7 +125,7 @@ Never place backend secrets in bundled files. Review offline caches, crash repor
 
 A useful test scenario is a compromised renderer or rooted device. Ask what the attacker can read, which native calls they can invoke, and whether the backend will accept a sensitive action without additional authorization. Runtime trust enforcement matters because only **41% of organizations use app attestation**, according to industry material on [mobile app trust and attestation](https://nhimg.org/articles/mobile-app-security-predictions-for-2026-hinge-on-trust-and-attestation/). That leaves a practical gap at the API boundary.
 
-Use attestation, session risk signals, and server-side authorization for high-value operations. For storage design patterns, review [secure database storage for applications](https://capgo.app/blog/secure-database-storage/) and also consider the infrastructure around your domain, including [SSL certificate installation](https://appjet.ai/blog/installing-ssl-certificates).
+Use attestation, session risk signals, and server-side authorization for high-value operations. For storage design patterns, review [encrypting SQLite in Capacitor apps](https://capgo.app/blog/encrypt-sqlite-database-capacitor/) and also consider the infrastructure around your domain, including [SSL certificate installation](https://appjet.ai/blog/installing-ssl-certificates).
 
 <a id="6-input-validation-and-output-encoding"></a>
 ## 6. Input Validation and Output Encoding

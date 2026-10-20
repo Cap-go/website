@@ -46,7 +46,7 @@ It does not protect against:
 - an attacker who can extract the key, which is why key storage matters more than the cipher,
 - data you also keep in plaintext elsewhere: logs, `localStorage`, caches, analytics events.
 
-iOS and Android already encrypt app storage when the device is locked. SQLCipher adds a layer that does not depend on the device passcode and that survives backups. It is worth it for health, finance, and anything regulated. For a broader view of storage threats, see [secure database storage](/blog/secure-database-storage/).
+iOS and Android already encrypt app storage when the device is locked. SQLCipher adds a layer that does not depend on the device passcode and that survives backups. It is worth it for health, finance, and anything regulated. For a broader view of storage threats, account for backups, logs, and plaintext caches outside SQLite.
 
 ## Prerequisites
 
