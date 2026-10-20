@@ -1,20 +1,21 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
   markdownNotFoundResponse,
-  MCP_ENDPOINT_PATHS,
   MCP_MANIFEST_PATHS,
   OPENAPI_ALIAS_PATHS,
   OPENAPI_ASSET_PATH,
   prefersMarkdown,
-  prefersMcpMarketingHtml,
 } from '../../../shared/agentDiscovery'
+import { isGonePath } from '../../../shared/gonePaths'
+import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
+import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
-import { handleMcpManifestRequest, handleMcpRequest } from './mcp'
+import { handleMcpManifestRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
@@ -297,7 +298,9 @@ function redirectToPath(request: Request, pathname: string, status = 301): Respo
   const hashIndex = pathname.indexOf('#')
   const pathOnly = hashIndex === -1 ? pathname : pathname.slice(0, hashIndex)
   const hash = hashIndex === -1 ? '' : pathname.slice(hashIndex)
-  return Response.redirect(new URL(`${pathOnly}${url.search}${hash}`, request.url).toString(), status)
+  const target = new URL(`${pathOnly}${hash}`, request.url)
+  if (!target.search) target.search = url.search
+  return Response.redirect(target.toString(), status)
 }
 
 async function assetExists(env: Env, request: Request, pathname: string): Promise<boolean> {
@@ -363,15 +366,22 @@ function shouldServeBrandedNotFound(pathname: string): boolean {
   return true
 }
 
-async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
-  if (prefersMarkdown(request)) return markdownNotFoundResponse(request)
+async function brandedErrorPageResponse(
+  request: Request,
+  env: Env,
+  pathname: string,
+  assetPath: string,
+  status: 404 | 410,
+  statusText: 'Not Found' | 'Gone',
+): Promise<Response | null> {
+  if (status === 404 && prefersMarkdown(request)) return markdownNotFoundResponse(request)
 
   const { localePrefix } = splitLocalePath(pathname)
-  const notFound = await env.ASSETS.fetch(new URL('/404.html', request.url))
-  if (!(notFound.ok || notFound.status === 404)) return null
+  const asset = await env.ASSETS.fetch(new URL(assetPath, request.url))
+  if (!(asset.ok || asset.status === status)) return null
 
   const isHead = request.method === 'HEAD'
-  let body = isHead ? null : await notFound.text()
+  let body = isHead ? null : await asset.text()
   if (!isHead && localePrefix && typeof body === 'string') {
     body = body
       .replaceAll('href="/"', `href="${localePrefix}/"`)
@@ -379,18 +389,31 @@ async function brandedNotFoundResponse(request: Request, env: Env, pathname: str
       .replaceAll('href="/plugins/"', `href="${localePrefix}/plugins/"`)
   }
 
-  const headers = new Headers(notFound.headers)
+  const headers = new Headers(asset.headers)
   headers.set('Content-Type', 'text/html; charset=utf-8')
   headers.append('Vary', 'Accept')
   headers.delete('Content-Length')
   return new Response(body, {
-    status: 404,
-    statusText: 'Not Found',
+    status,
+    statusText,
     headers,
   })
 }
 
+async function brandedNotFoundResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  return brandedErrorPageResponse(request, env, pathname, '/404.html', 404, 'Not Found')
+}
+
+async function brandedGoneResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  return brandedErrorPageResponse(request, env, pathname, '/410/index.html', 410, 'Gone')
+}
+
 async function notFoundLegacyRedirect(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  const recoveryTarget = resolveNotFoundRecoveryRedirect(pathname)
+  if (recoveryTarget) {
+    return redirectToPath(request, recoveryTarget)
+  }
+
   const { localePrefix, path } = splitLocalePath(pathname)
 
   const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
@@ -412,15 +435,6 @@ async function notFoundLegacyRedirect(request: Request, env: Env, pathname: stri
     }
   }
 
-  const categoryMatch = path.match(/^\/blog\/category\/([^/]+)\/?$/)
-  if (categoryMatch) {
-    const slug = categoryMatch[1]
-    const target = `${localePrefix}/blog/${slug}/`
-    if (await assetExists(env, request, target)) {
-      return redirectToPath(request, target)
-    }
-  }
-
   return null
 }
 
@@ -438,32 +452,7 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
   })
 }
 
-async function mcpMarketingHtmlResponse(request: Request, env: Env): Promise<Response | null> {
-  if (request.method !== 'GET' && request.method !== 'HEAD') return null
-  if (!prefersMcpMarketingHtml(request)) return null
-  const assetUrl = new URL('/mcp/index.html', request.url)
-  const assetRequest = new Request(assetUrl.toString(), {
-    method: request.method,
-    headers: request.headers,
-  })
-  const asset = await env.ASSETS.fetch(assetRequest)
-  if (!asset.ok) return null
-  const headers = new Headers(asset.headers)
-  headers.set('Content-Type', 'text/html; charset=utf-8')
-  headers.append('Vary', 'Accept')
-  return new Response(request.method === 'HEAD' ? null : asset.body, {
-    status: asset.status,
-    statusText: asset.statusText,
-    headers,
-  })
-}
-
 export async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
-  if (MCP_ENDPOINT_PATHS.has(pathname)) {
-    const marketing = await mcpMarketingHtmlResponse(request, env)
-    if (marketing) return marketing
-    return handleMcpRequest(request)
-  }
   if (MCP_MANIFEST_PATHS.has(pathname)) return handleMcpManifestRequest(request)
   if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)
   return null
@@ -477,6 +466,10 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
   if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
   const staticRedirect = staticLegacyRedirect(request, pathname)
   if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)
+  if (isGonePath(pathname)) {
+    const goneResponse = await brandedGoneResponse(request, env, pathname)
+    if (goneResponse) return trackAICrawler(request, goneResponse, ctx)
+  }
   const toolRouteResponse = await handleToolApiRequest(
     request,
     {
@@ -490,6 +483,10 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
   const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
   if (routeResponse) return trackAICrawler(request, routeResponse, ctx)
   const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
+  const permanentTrailingSlashTarget = permanentTrailingSlashLocation(request.url, assetResponse)
+  if (permanentTrailingSlashTarget) {
+    return trackAICrawler(request, redirectToPath(request, permanentTrailingSlashTarget), ctx)
+  }
   if (assetResponse.status === 404) {
     const legacyRedirect = await notFoundLegacyRedirect(request, env, pathname)
     if (legacyRedirect) return trackAICrawler(request, legacyRedirect, ctx)

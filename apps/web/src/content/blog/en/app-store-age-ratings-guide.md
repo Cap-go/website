@@ -1,29 +1,40 @@
 ---
 slug: app-store-age-ratings-guide
-title: App Store Age Ratings Guide for iOS and Android
-description: A comprehensive guide to understanding and setting age ratings for your mobile apps on both the Apple App Store and Google Play Store, including the new 2025 iOS rating system updates.
+title: App Store Age Ratings Guide for iOS and Android (2026)
+description: How Apple’s 4+, 9+, 13+, 16+, and 18+ ratings and Google Play IARC work in 2026, what changed after the January 31, 2026 questionnaire deadline, and how to update ratings in App Store Connect.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-29T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-10-15T12:23:24.000Z
 head_image: /apple_appstore.webp
 head_image_alt: "App Store Age Ratings Guide for iOS and Android Capgo blog illustration"
-keywords: age ratings, app store, google play, content ratings, IARC, parental controls, app classification, ios age ratings, android age ratings
+keywords: age ratings, app store, google play, content ratings, IARC, parental controls, app classification, ios age ratings, android age ratings, App Store Connect age rating questionnaire
 tag: Development, App Store, Best Practices
 published: true
 locale: en
 origin: human
 next_blog: ''
+faq:
+  - question: What age rating tiers does Apple use on the App Store in 2026?
+    answer: Apple assigns global age ratings of 4+, 9+, 13+, 16+, or 18+ based on your App Store Connect questionnaire answers. Regional ratings can differ where local rules apply.
+  - question: What if I missed the January 31, 2026 age rating questionnaire deadline?
+    answer: Apple required updated questionnaire responses by that date to avoid an interruption when submitting app updates in App Store Connect. If you still have not completed the questionnaire, finish it under App Information before your next update can be processed.
+  - question: How do I change my app’s age rating after launch?
+    answer: In App Store Connect, open your app, go to App Information, click Edit next to Age Rating, walk through the questionnaire again, and save. The listing updates without shipping a new binary unless App Review asks for a new build.
+  - question: Do creator apps or mini app platforms have extra age rating rules?
+    answer: Yes. Apple’s November 13, 2025 App Review Guidelines update requires creator apps and apps that serve software not embedded in the binary to let users flag content above the app’s age rating and to restrict that content using verified or declared age.
 ---
 
-Setting the correct age rating for your mobile app is one of the most critical yet often misunderstood aspects of app store submission. With Apple's major overhaul of the age rating system in 2025 and Google Play's continued use of the IARC (International Age Rating Coalition) system, understanding how age ratings work on both platforms has never been more important.
+**Quick answer:** In 2026, Apple rates apps at **4+, 9+, 13+, 16+, or 18+** from the questionnaire in App Store Connect; Google Play still uses **IARC** for regional ratings. The **January 31, 2026** deadline to answer Apple’s updated questions has passed: complete any missing responses before you submit updates, and revisit answers when content or social features change. Creator and mini app platforms must also follow Apple’s [November 13, 2025 App Review Guidelines update](https://developer.apple.com/news/?id=ey6d8onl) on age-appropriate access.
 
-This comprehensive guide walks you through everything you need to know about age ratings for both iOS and Android apps in 2025, including the new rating categories, how to complete the questionnaires, common mistakes to avoid, and best practices to ensure your app receives the appropriate rating.
+Setting the correct age rating for your mobile app is one of the most critical yet often misunderstood aspects of app store submission. Apple rolled out its expanded rating scale and questionnaire in 2025, and in 2026 those ratings are what customers and parental controls rely on. Google Play still uses the IARC (International Age Rating Coalition) system for regional classifications.
+
+This guide covers age ratings for iOS and Android apps in **2026**: Apple’s five tiers, what changed after the questionnaire deadline, how to update ratings in App Store Connect, Google Play’s IARC flow, common mistakes, and the App Review Guidelines changes that tie ratings to creator and hosted content.
 
 ## Why Age Ratings Matter
 
-Age ratings aren't just a formality—they have significant implications for your app's success:
+Age ratings are not just a formality. They have significant implications for your app's success:
 
 ### Impact on Discoverability
 
@@ -59,7 +70,7 @@ Apple uses its own proprietary rating system where:
 - Developers answer questions directly in App Store Connect
 - Apple assigns ratings based on the responses
 - Ratings are relatively consistent across regions
-- The system was completely overhauled in 2025 with new categories
+- Apple expanded the scale in 2025; the five tiers below are what you use in 2026
 
 ### Google Play's IARC System (Coalition-Based)
 
@@ -69,13 +80,13 @@ Google Play uses the International Age Rating Coalition (IARC) where:
 - Different regions see different rating systems (ESRB in North America, PEGI in Europe, etc.)
 - The underlying questionnaire remains consistent
 
-## Apple App Store Age Ratings (2025 Update)
+## Apple App Store Age Ratings in 2026
 
-Apple made significant changes to its age rating system in 2025, introducing new categories and a more comprehensive questionnaire.
+Apple’s 2025 update added **13+**, **16+**, and **18+** alongside existing **4+** and **9+** ratings, plus new questionnaire topics (in-app controls, capabilities, medical or wellness content, and violent themes). In 2026 you maintain those answers in App Store Connect and adjust them when your app changes.
 
-### The New Rating Categories
+### The five Apple rating tiers
 
-As of 2025, Apple's age rating system includes five categories:
+Apple’s App Store age rating system includes five categories:
 
 #### 4+ (Ages 4 and Up)
 **For apps containing no objectionable material**
@@ -146,7 +157,7 @@ This new rating replaces the old 12+ category and reflects modern content standa
 #### 16+ (Ages 16 and Up)
 **New rating category for moderately mature content**
 
-This is a brand new category introduced in 2025 to better differentiate between teen and mature content.
+This tier separates moderately mature content from the 18+ band Apple introduced with the 2025 rating refresh.
 
 **Allowed Content:**
 - Frequent/intense realistic violence (short of graphic depictions)
@@ -181,9 +192,9 @@ This rating replaces the old 17+ and indicates content suitable only for adults.
 - Real-money gambling apps
 - Uncensored news or documentary apps
 
-### The 2025 iOS Age Rating Questionnaire
+### The App Store Connect age rating questionnaire
 
-Apple's updated questionnaire is more comprehensive than ever, covering four main categories:
+Apple’s questionnaire covers four main areas (in-app controls, capabilities, medical or wellness topics, and content themes). Apple also asks whether your app includes **social media capabilities** (redistribution, amplification, or interaction with user-generated content through a feed or similar discovery). Those answers feed **Time Allowance** grouping for parents and can add a **Social Media** content descriptor on your product page ([age ratings reference](https://developer.apple.com/help/app-store-connect/reference/age-ratings-values-and-definitions/), [social media questionnaire news](https://developer.apple.com/news/?id=tlur8uvi)).
 
 #### 1. In-App Controls
 
@@ -313,7 +324,7 @@ The traditional content assessment covering six main areas:
 5. **Review the Generated Rating**
    - Apple shows you the rating before you submit
    - If it seems too high or too low, review your answers
-   - Don't try to "game" the system—inaccurate ratings lead to rejection
+   - Don't try to "game" the system. Inaccurate ratings lead to rejection
 
 6. **Document Your Decisions**
    - Keep notes on why you answered each question as you did
@@ -322,11 +333,37 @@ The traditional content assessment covering six main areas:
 
 </Steps>
 
-### Important Deadline for Existing Apps
+### After the January 31, 2026 questionnaire deadline
 
-**Critical:** All developers must provide responses to the updated age rating questions for each of their apps by **January 31, 2026**.
+Apple asked every developer to [answer the updated age rating questions for each app by January 31, 2026](https://developer.apple.com/news/?id=ks775ehf) to **avoid an interruption when submitting app updates** in App Store Connect. That deadline has passed.
 
-Failure to do so will result in an interruption when submitting app updates in App Store Connect. Apple will not process any updates until the new questionnaire is completed.
+**If you completed the questionnaire on time:** Your app’s global and regional ratings reflect those answers. Keep them accurate when you add social features, user-generated content, ads, web views, or AI-generated output. You can raise the displayed rating above Apple’s calculated value if your terms require a higher minimum age ([override to a higher age rating](https://developer.apple.com/help/app-store-connect/manage-app-information/set-an-app-age-rating/)).
+
+**If you did not finish by January 31, 2026:** Expect App Store Connect to block new versions until you complete the questionnaire for that app. Open **App Information**, use **Set Up Age Ratings** or **Edit** under **Age Ratings**, answer every section (in-app controls, capabilities, medical or wellness topics, content themes), then **Save**. No store listing change ships until you save valid responses.
+
+**How to update your rating later (any time):**
+
+<Steps>
+
+1. Sign in to [App Store Connect](https://appstoreconnect.apple.com/) and select your app.
+2. Under **General**, open **App Information**.
+3. Click **Edit** at the top of the page (or **Edit** next to **Age Ratings**).
+4. Walk through the questionnaire with your **current** app content in mind, including ads and user-generated content.
+5. Click **Save**. Ratings update on the App Store without a new binary in most cases; App Review may contact you if answers conflict with the build.
+
+</Steps>
+
+When you fix policy or moderation issues in your web layer, [Capgo live updates](/blog/capacitor-live-updates-staying-compliant-with-apple/) can help ship compliant bug fixes and content changes faster while native or rating-questionnaire updates still go through the stores.
+
+### App Review Guidelines update (November 13, 2025)
+
+On [November 13, 2025](https://developer.apple.com/news/?id=ey6d8onl), Apple revised the [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) with several changes that intersect age ratings:
+
+- **[Guideline 1.2.1(a)](https://developer.apple.com/app-store/review/guidelines/#user-generated-content):** Creator apps must let users **identify content that exceeds the app’s age rating** and must use an **age restriction mechanism** based on verified or declared age to block underage users from that content.
+- **[Guideline 4.7.5](https://developer.apple.com/app-store/review/guidelines/#third-party-software):** Apps that offer software **not embedded in the binary** (for example HTML5 or JavaScript mini apps) must provide the same flagging and age-restriction behavior.
+- **Guideline 4.7** clarifies that HTML5 and JavaScript mini apps and mini games fall under the third-party software rules; **4.7.2** limits exposing native APIs to that software without Apple’s permission.
+
+These rules sit alongside your App Store Connect questionnaire answers: under-reporting mature or user-generated content risks rejection under **Section 1.2 User-Generated Content** and safety rules, not only a mismatched badge on the product page.
 
 ### iOS Age Rating Best Practices
 
@@ -926,8 +963,8 @@ With the rise of AI-generated content, age ratings have become more complex:
 **Challenge:**
 AI can generate unpredictable content, making it difficult to guarantee age-appropriate output.
 
-**Apple's Guidance (2025):**
-Developers must consider how AI features, including chatbots and assistants, might produce sensitive content when determining age ratings.
+**Apple's guidance:**
+Developers must consider how AI features, including chatbots and assistants, might produce sensitive content when determining age ratings ([July 24, 2025 age ratings news](https://developer.apple.com/news/?id=ks775ehf)).
 
 **Best Practices:**
 - Implement content filters on AI outputs
@@ -939,10 +976,10 @@ Developers must consider how AI features, including chatbots and assistants, mig
 
 **Example:**
 An AI chatbot app:
-- Must be rated at least 13+
-- Should be 17+/18+ if AI can discuss mature topics
-- Needs robust content filtering
-- Should have reporting mechanisms
+- Rate the app from the **frequency and intensity** of sensitive content the model can surface (violence, sexual themes, profanity, substances, horror, gambling), not from a single example prompt
+- A **13+** or **16+** rating may fit when mature topics are infrequent or mild and match your questionnaire answers
+- Reserve **18+** for cases where AI output can meet Apple’s **18+** descriptors (for example frequent or intense sexual content, prolonged graphic violence, or real-money gambling)
+- Still plan for filtering, testing, and reporting even when the assigned rating is lower
 
 ### Apps with Web Browsing
 
@@ -1160,7 +1197,7 @@ Before submitting your app, review this comprehensive checklist:
 2. **Consider Everything**: Rate based on all possible content, not just typical use
 3. **Update Regularly**: Review rating before every major feature addition
 4. **Document Decisions**: Keep records of why you chose each answer
-5. **Meet Deadline**: Complete new questionnaire by January 31, 2026
+5. **Stay current**: Revisit the questionnaire after the January 31, 2026 deadline whenever features or content change
 
 ### For Android Apps
 
@@ -1188,7 +1225,8 @@ Before submitting your app, review this comprehensive checklist:
 **Apple:**
 - [Age Ratings Reference](https://developer.apple.com/help/app-store-connect/reference/age-ratings-values-and-definitions/)
 - [Setting an App Age Rating](https://developer.apple.com/help/app-store-connect/manage-app-information/set-an-app-age-rating/)
-- [Updated Age Ratings Announcement](https://developer.apple.com/news/?id=ks775ehf)
+- [Updated Age Ratings Announcement (July 24, 2025)](https://developer.apple.com/news/?id=ks775ehf)
+- [App Review Guidelines update (November 13, 2025)](https://developer.apple.com/news/?id=ey6d8onl)
 - [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)
 
 **Google:**
@@ -1220,7 +1258,7 @@ Age ratings are a critical component of app store success that go far beyond sim
 
 **Key Takeaways:**
 
-1. **Apple's 2025 changes** introduce new rating categories (13+, 16+, 18+) and a more comprehensive questionnaire. All developers must update their ratings by January 31, 2026.
+1. **Apple’s five tiers in 2026** are 4+, 9+, 13+, 16+, and 18+, driven by the App Store Connect questionnaire introduced in 2025. The January 31, 2026 response deadline has passed; incomplete apps cannot submit updates until the questionnaire is finished.
 
 2. **Google's IARC system** provides multiple regional ratings from a single questionnaire, making international distribution simpler but requiring careful attention to regional variations.
 
@@ -1232,7 +1270,18 @@ Age ratings are a critical component of app store success that go far beyond sim
 
 6. **Regular updates** to your age rating are essential as you add features, change content, or modify your app's capabilities.
 
-Remember: An accurate age rating protects users, keeps you compliant with laws and regulations, and ultimately builds trust with your audience. Don't view it as a barrier to downloads—view it as an essential part of responsible app development.
+Remember: An accurate age rating protects users, keeps you compliant with laws and regulations, and ultimately builds trust with your audience. Treat it as part of responsible app development, not a shortcut to more downloads.
+
+## Frequently asked questions
+
+**What age rating tiers does Apple use in 2026?**  
+4+, 9+, 13+, 16+, and 18+, plus optional regional values where required.
+
+**What if I missed the January 31, 2026 deadline?**  
+Complete the questionnaire under **App Information** before App Store Connect will accept your next update.
+
+**How do creator or mini app platforms comply?**  
+Follow [Guidelines 1.2.1(a) and 4.7.5](https://developer.apple.com/news/?id=ey6d8onl): flag above-rating content and enforce age limits with verified or declared age.
 
 ## Need Help with Your App Submission?
 
@@ -1246,7 +1295,7 @@ Getting your age rating right is just one part of successful app store submissio
 
 ---
 
-*After your app is approved, keep it updated effortlessly with [Capgo's live update solution](/docs/getting-started/quickstart/)—push updates to your users without waiting for app store review.*
+*After your app is approved, ship web-layer fixes with [Capgo live updates](/docs/getting-started/quickstart/) while keeping questionnaire answers and native changes aligned with App Review.*
 
 ## Keep going from App Store Age Ratings Guide for iOS and Android
 

@@ -23,7 +23,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
 ```bash
 bun add @capgo/capacitor-firebase-authentication
-bunx cap sync
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,43 @@ bunx cap sync
 ```typescript
 import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
 ```
+
+## Quick start
+
+```typescript
+import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
+
+await FirebaseAuthentication.applyActionCode({ oobCode: 'oob-code' });
+```
+
+## Example: confirmPasswordReset
+
+```typescript
+import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
+
+await FirebaseAuthentication.confirmPasswordReset({
+  oobCode: 'oob-code',
+  newPassword: 'new-password',
+});
+```
+
+## Example: confirmVerificationCode
+
+```typescript
+import { FirebaseAuthentication } from '@capgo/capacitor-firebase-authentication';
+
+const result = await FirebaseAuthentication.confirmVerificationCode({
+  verificationId: 'phoneCodeSent',
+  verificationCode: 'phoneCodeSent',
+});
+// The result holds sensitive values: use it without logging it.
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

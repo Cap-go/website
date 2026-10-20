@@ -22,7 +22,16 @@ hero:
 
 ## Overview
 
-Capacitor Navigation Bar Plugin for customizing the Android navigation bar.
+`@capgo/capacitor-navigation-bar` styles the **Android system navigation bar** (color, light or dark buttons, immersive hide and show). Use it when your Capacitor shell is full screen and the default gray bar clashes with your brand.
+
+iOS has no software navigation bar. Plugin calls reject on iOS, so guard Android-only code paths or handle the rejection.
+
+## Platform support
+
+| Platform | Support |
+| --- | --- |
+| Android | Yes, API 24+ |
+| iOS | No system navigation bar to customize |
 
 ## Core Capabilities
 

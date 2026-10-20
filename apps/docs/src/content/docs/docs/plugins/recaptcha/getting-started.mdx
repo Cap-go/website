@@ -22,9 +22,26 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-recaptcha
-bunx cap sync
+npm install @capgo/capacitor-recaptcha
+npx cap sync
 ```
+
+## Quick start
+
+Configure site keys in `capacitor.config.ts` first, then execute an action and verify the token on your backend.
+
+```typescript
+import { Recaptcha } from '@capgo/capacitor-recaptcha';
+
+const { token } = await Recaptcha.execute({ action: 'login' });
+await verifyOnServer(token, 'login');
+```
+
+## Common pitfalls
+
+- **Server verify**: tokens are short lived, assess with Google before trusting clients.
+- **Keys**: set per platform site keys in config.
+- **Enterprise flag**: must match key type in Google Cloud.
 
 ## Configure Site Keys
 

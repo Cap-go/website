@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor API that mirrors the public surface of `rudder-sdk-cordova`."
+  tagline: "Ship RudderStack analytics, identity, and screen tracking from Capacitor with native SDK delivery."
   actions:
     - text: Get started
       link: /docs/plugins/rudderstack/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor API that mirrors the public surface of `rudder-sdk-cordova`.
+Initialize the RudderStack native SDK once, then `identify`, `track`, and `screen` from your shared TypeScript layer. The plugin forwards events to iOS and Android native pipelines with flushing, advertising ID hooks, and anonymous ID control for privacy conscious rollouts.
+
+Typical fits: product analytics, funnel tracking, experiment assignment, and customer data platform routing without maintaining separate native RudderStack integrations.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native RudderStack iOS SDK |
+| Android | Yes | Native RudderStack Android SDK |
+| Web | See repo | Use RudderStack web SDK alongside Capacitor web builds |
 
 ## Core Capabilities
 

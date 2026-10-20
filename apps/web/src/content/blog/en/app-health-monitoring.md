@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-15T08:25:48.156Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-15T12:22:05.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/8a55b7f9-fdfe-4441-84fd-2660d8223ef4/app-health-monitoring-app-monitoring.jpg'
 head_image_alt: 'App Health Monitoring: A Guide for JS & Mobile Apps'
 keywords: 'app health monitoring, mobile app monitoring, capacitorjs, javascript performance, live updates'
@@ -24,7 +24,7 @@ Healthy apps don't stay healthy by accident. They stay healthy because the team 
 
 Teams that invest in monitoring usually make better decisions elsewhere too. They tighten release discipline, clarify ownership, and reduce the amount of guesswork in debugging. Good tooling helps, but the bigger shift is operational. You stop waiting for users to tell you the app is broken.
 
-If your current setup is mostly console logs, app store reviews, and support escalations, fix that first. Then improve the developer workflow around it. A good starting point is looking at how teams structure their tooling and feedback loops in [modern developer experience setups for app teams](https://capgo.app/blog/developer-experience-tools/).
+If your current setup is mostly console logs, app store reviews, and support escalations, fix that first. Then improve the developer workflow around it. A good starting point is looking at how teams structure their tooling and feedback loops in [modern developer experience setups for app teams](https://capgo.app/blog/developer-experience/).
 
 ## Table of Contents
 - [Introduction Why App Health Matters More Than Ever](#introduction-why-app-health-matters-more-than-ever)
@@ -59,7 +59,7 @@ App health monitoring is now a baseline engineering discipline. Teams shipping J
 
 That last part gets missed. Many teams monitor crashes, latency, and API failures, then treat the delivery path for fixes as a separate concern. In practice, the release pipeline has health too. If you can detect a regression but need days to get a fix through app store review, users still sit in the blast radius. If you can ship a targeted patch quickly, a production issue stays small.
 
-This is one reason strong monitoring improves engineering velocity, not just reliability. Teams with clear telemetry and a dependable release path can ship smaller changes, detect regressions earlier, and fix the right version instead of rolling back blindly. Good [developer experience tools for release and debugging workflows](https://capgo.app/blog/developer-experience-tools/) reduce the time between noticing a problem and correcting it in production.
+This is one reason strong monitoring improves engineering velocity, not just reliability. Teams with clear telemetry and a dependable release path can ship smaller changes, detect regressions earlier, and fix the right version instead of rolling back blindly. Good [developer experience tools for release and debugging workflows](https://capgo.app/blog/developer-experience/) reduce the time between noticing a problem and correcting it in production.
 
 The pressure is highest in products users rely on repeatedly, but the pattern is universal. Healthcare, commerce, fintech, internal operations tools, and customer portals all lose trust when failures stay invisible or fixes move too slowly. Monitoring protects uptime. It also protects release confidence, support quality, and the team's ability to recover without drama.
 
@@ -187,7 +187,7 @@ If you're comparing vendors or deciding what to combine in your stack, this roun
 
 Context is what turns telemetry into evidence. Every event you care about should carry enough metadata to answer the first round of debugging questions without a follow-up release. That usually means platform, OS, app version, release channel, device characteristics, screen or feature name, and dependency state.
 
-A common trade-off is whether to build most of this yourself or rely on hosted products. Third-party platforms get you faster dashboards and alerting. Custom pipelines give more control over schema, retention, and privacy boundaries. Many teams end up hybrid. They use a commercial error and tracing product, then add focused instrumentation for release events and app-specific workflows. For React Native teams thinking through this stack, [this Sentry setup guide for React Native](https://capgo.app/blog/sentry-react-native/) is a practical example of how one layer fits into a broader telemetry architecture.
+A common trade-off is whether to build most of this yourself or rely on hosted products. Third-party platforms get you faster dashboards and alerting. Custom pipelines give more control over schema, retention, and privacy boundaries. Many teams end up hybrid. They use a commercial error and tracing product, then add focused instrumentation for release events and app-specific workflows. For React Native teams thinking through this stack, a commercial error and tracing product is a practical layer in the broader telemetry architecture outlined here.
 
 The architecture is good when engineers can answer a support question with evidence, not guesswork.
 

@@ -315,6 +315,14 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 
     yearlyRadio?.addEventListener('change', () => updatePrices(true))
     monthlyRadio?.addEventListener('change', () => updatePrices(false))
+
+    // Preselect billing from ?billing=monthly|yearly (used by ad/product feed links)
+    const billing = new URLSearchParams(window.location.search).get('billing')
+    const billingRadio = billing === 'monthly' ? monthlyRadio : billing === 'yearly' ? yearlyRadio : null
+    if (billingRadio && !billingRadio.checked) {
+      billingRadio.checked = true
+      billingRadio.dispatchEvent(new Event('change'))
+    }
   })
 </script>
 

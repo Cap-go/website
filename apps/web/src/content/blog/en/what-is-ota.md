@@ -176,7 +176,7 @@ In regulated teams, OTA is a governance decision before it's a delivery decision
 
 That matters because compliance teams don't just ask “did users get the update?” They ask whether the delivery path changed the risk profile, whether the release can be reconstructed later, and whether the app still behaves like the version that was approved.
 
-[Capgo's enterprise app management overview](https://capgo.app/blog/enterprise-app-management/) is a practical companion if your org needs OTA release history, channel control, and operational visibility without turning every patch into a store submission.
+[Capgo's enterprise overview](https://capgo.app/enterprise/) is a practical companion if your org needs OTA release history, channel control, and operational visibility without turning every patch into a store submission.
 
 The rule of thumb is simple. Use OTA for **JavaScript fixes, copy updates, asset changes, and configuration tweaks**. Use a store release for **native plugin updates, permission changes, SDK migrations, and major feature additions**. If the change would surprise a reviewer, it probably belongs in the store.
 

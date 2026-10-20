@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "A native plugin for native audio engine."
+  tagline: "Low latency sound effects and streaming audio with preload, Now Playing controls, and background playback options."
   actions:
     - text: Get started
       link: /docs/plugins/native-audio/getting-started/
@@ -22,9 +22,17 @@ hero:
 
 ## Overview
 
-A native plugin for native audio engine.
+Use `@capgo/capacitor-native-audio` when your Capacitor app needs responsive playback for UI sounds, short clips, or music style sessions without juggling multiple native audio APIs. Preload assets, loop tracks, fade volume, stream remote URLs or HLS, and optionally show lock screen transport controls.
 
-<span title="Renamed from @capgo/native-audio to @capgo/capacitor-native-audio.">Package name changed.</span>
+Typical fits: game SFX, notification chimes, guided meditation, podcast players, and any flow that must coexist with other apps on the device audio session.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | AVFoundation, optional Now Playing and audio session categories |
+| Android | Yes | Media playback, notifications, optional foreground service for background |
+| Web | Partial | Core playback; some listener events are not emitted on web |
 
 ## Core Capabilities
 

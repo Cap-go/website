@@ -57,6 +57,7 @@ const pluginEntries = [
   ['Android SMS Retriever', 'android-sms-retriever'],
   ['Android Usage Stats', 'android-usagestatsmanager'],
   ['App Attest', 'app-attest', [linkItem('iOS setup', '/docs/plugins/app-attest/ios'), linkItem('Android setup', '/docs/plugins/app-attest/android')]],
+  ['App Intents', 'app-intents'],
   ['App Tracking Transparency', 'app-tracking-transparency'],
   ['AppInsights', 'appinsights'],
   ['AppsFlyer', 'appsflyer'],
@@ -289,6 +290,7 @@ const pluginEntries = [
 
 const pluginItems = [
   linkItem('Getting Started', '/docs/plugins/'),
+  linkItem('Siri, Shortcuts, and widgets', '/docs/plugins/siri-shortcuts-widgets-and-intents/'),
   updaterPluginSection,
   ...pluginEntries.map((entry) => (Array.isArray(entry) ? pluginDoc(entry[0], entry[1], entry[2] ?? []) : entry)),
   linkItem('👋 Get a custom plugin', '/consulting/'),

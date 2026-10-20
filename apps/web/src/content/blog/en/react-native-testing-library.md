@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-09-09T08:22:29.910Z
-updated_at: 2026-09-09T08:25:40.000Z
+updated_at: 2026-10-15T12:22:05.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/65e1a1bf-4039-4166-878b-a5ea088c9117/react-native-testing-library-illustration.jpg'
 head_image_alt: React Native Testing Library How to Test Apps Right
 keywords: 'react native testing library, react native testing, jest testing, mobile app testing, capacitor testing'
@@ -274,7 +274,7 @@ A dependable CI job installs from the lockfile, runs the same Jest command used 
 
 CI-only failures need an environment comparison before a component rewrite. Check Node, the package manager, Jest worker settings, timer configuration, and environment variables. Reproduce the same command locally where possible, then reduce the failing test to the smallest interaction that exposes the difference.
 
-Observability covers a different gap. A tool such as [Sentry for React Native](https://capgo.app/blog/sentry-react-native/) supplies production error context that mocked component tests cannot reproduce, including failures tied to real devices and native integrations.
+Observability covers a different gap. [App health monitoring](https://capgo.app/blog/app-health-monitoring/) supplies production error context that mocked component tests cannot reproduce, including failures tied to real devices and native integrations.
 
 Security-sensitive journeys need a second boundary. Use component tests for validation and state transitions, then add device-level coverage for the handoff and native behavior. For one-time-code flows, consult guidance on how to [test SMS verification flows](https://sms-activate.app/blog/platform-integration-testing) when that integration forms part of the journey.
 

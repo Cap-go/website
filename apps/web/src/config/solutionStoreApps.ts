@@ -15,7 +15,7 @@ const solutionStoreAppRows = [
   [
     'gov.fema.mobile.android',
     'FEMA',
-    'https://play-lh.googleusercontent.com/SpHNsTxIGUOZN2rghOEcJFCHc2vOFMI6GqiIp6zfSEvi-1sGRRPm0tTRDa9oGFgfPjW99VrpCTF2b_Ua2Yi8744',
+    '/store-app-icons/gov.fema.mobile.android.webp',
     'https://play.google.com/store/apps/details?id=gov.fema.mobile.android',
     'WEATHER',
     1649325,
@@ -24,7 +24,7 @@ const solutionStoreAppRows = [
   [
     'au.com.hotdoc.android.hotdoc',
     'HotDoc',
-    'https://play-lh.googleusercontent.com/YP3F0StAPaPeVfC2QDtP6qJviIrymUKUHClyQzfSZHsWjW8s6f5djHfaai37iAS6wg',
+    '/store-app-icons/au.com.hotdoc.android.hotdoc.webp',
     'https://play.google.com/store/apps/details?id=au.com.hotdoc.android.hotdoc',
     'MEDICAL',
     2055327,
@@ -33,7 +33,7 @@ const solutionStoreAppRows = [
   [
     'br.com.beneficiario.odontoprev',
     'Odontoprev',
-    'https://play-lh.googleusercontent.com/-VO9joxW9BAc1pUY1pnIx_GaFnHmNED4-GxQP1IUCfgVo8YIqJj0cpODKqAWSZp6cg',
+    '/store-app-icons/br.com.beneficiario.odontoprev.webp',
     'https://play.google.com/store/apps/details?id=br.com.beneficiario.odontoprev',
     'MEDICAL',
     1871596,
@@ -42,7 +42,7 @@ const solutionStoreAppRows = [
   [
     'br.com.oi.tecnicovirtual',
     'Técnico Virtual – Suporte Técn',
-    'https://play-lh.googleusercontent.com/Z6dllHB0cJ7mRTder7aN95E9eU-jyuChCVRKQOiVpvuieQjyh3gcswY19J3e_c6t',
+    '/store-app-icons/br.com.oi.tecnicovirtual.webp',
     'https://play.google.com/store/apps/details?id=br.com.oi.tecnicovirtual&hl=en&gl=us',
     'Tools',
     10336382,
@@ -51,7 +51,7 @@ const solutionStoreAppRows = [
   [
     'br.gov.datasus.cnsdigital',
     'Conecte SUS',
-    'https://play-lh.googleusercontent.com/_ItDzVkRcYdSviiAzBB4KECwSfbP7ZfklGjIYMPMrVHGCi1CRcr6qsztHfADDU0IGqDM',
+    '/store-app-icons/br.gov.datasus.cnsdigital.webp',
     'https://play.google.com/store/apps/details?id=br.gov.datasus.cnsdigital',
     'MEDICAL',
     27678757,
@@ -60,7 +60,7 @@ const solutionStoreAppRows = [
   [
     'br.jus.tse.eleitoral.etitulo',
     'e-Título',
-    'https://play-lh.googleusercontent.com/2K6urTCerr6loFfG7pNP3wRqM3HVpT4xMyCa4BSGwqqm_olC2hoN8fCFOPDryc9kwE8',
+    '/store-app-icons/br.jus.tse.eleitoral.etitulo.webp',
     'https://play.google.com/store/apps/details?id=br.jus.tse.eleitoral.etitulo',
     'SOCIAL',
     54855118,
@@ -69,7 +69,7 @@ const solutionStoreAppRows = [
   [
     'br.jus.tse.resultados',
     'Resultados',
-    'https://play-lh.googleusercontent.com/rKvQQroGJA86vCG0eDqVeFZsltKxMlQWvmH-nFN-tRBYANShKEQKEPeK7G7NrTyX4g',
+    '/store-app-icons/br.jus.tse.resultados.webp',
     'https://play.google.com/store/apps/details?id=br.jus.tse.resultados&hl=en&gl=us',
     'Tools',
     14975218,
@@ -78,7 +78,7 @@ const solutionStoreAppRows = [
   [
     'com.IndianBank.IndOASIS',
     'IndOASIS Indian Bank MobileApp',
-    'https://play-lh.googleusercontent.com/LGtygldnmgC4ji-3ZqfU78iXolZbVw1fjHOxKlmsOui2ZjltZg4TkHzEkO2-yCnSprZf',
+    '/store-app-icons/com.IndianBank.IndOASIS.webp',
     'https://play.google.com/store/apps/details?id=com.IndianBank.IndOASIS',
     'FINANCE',
     15436092,
@@ -87,7 +87,7 @@ const solutionStoreAppRows = [
   [
     'com.dennys.mobile',
     "Denny's",
-    'https://play-lh.googleusercontent.com/x7yKSH2i3m3mqiBwd2hVrojVq2c-GpiKIFbo2Q3PFdvgj_Z4i6Cb26lUhLVbEf5BIaeu',
+    '/store-app-icons/com.dennys.mobile.webp',
     'https://play.google.com/store/apps/details?id=com.dennys.mobile',
     'FOOD_AND_DRINK',
     1727335,
@@ -96,7 +96,7 @@ const solutionStoreAppRows = [
   [
     'com.freelancer.android.messenger',
     'Freelancer: Hire & Find Jobs',
-    'https://play-lh.googleusercontent.com/DK7BGyOA_2Z_oYvoPRdC4f8JnURBCE1pDKPyEXd0B190U2p57Fr9LifujFegPAG6MA',
+    '/store-app-icons/com.freelancer.android.messenger.webp',
     'https://play.google.com/store/apps/details?id=com.freelancer.android.messenger',
     'BUSINESS',
     8941852,
@@ -105,7 +105,7 @@ const solutionStoreAppRows = [
   [
     'com.greetingsisland.sam',
     'Invitation Maker Card Design',
-    'https://play-lh.googleusercontent.com/9dU02jjAkV7HXxK5AOYMqkJEsZ4In8YWBI2F6XH8l4BnT-vNxUwI16Ms3FfeEcs6Up4',
+    '/store-app-icons/com.greetingsisland.sam.webp',
     'https://play.google.com/store/apps/details?id=com.greetingsisland.sam',
     'EVENTS',
     19967814,
@@ -114,7 +114,7 @@ const solutionStoreAppRows = [
   [
     'com.infrasoft.uboi',
     'Vyom - Union Bank of India',
-    'https://play-lh.googleusercontent.com/mlL6e-9TQL_vIcOt79KCDzArLc_hyWJYKDGKKP2bwGe0q3EJS0HRFJuz41d2n-Xvng',
+    '/store-app-icons/com.infrasoft.uboi.webp',
     'https://play.google.com/store/apps/details?id=com.infrasoft.uboi',
     'FINANCE',
     27979178,
@@ -123,7 +123,7 @@ const solutionStoreAppRows = [
   [
     'com.jackintheboxinc.JackMobileApp',
     'Jack in the Box® - Order Food',
-    'https://play-lh.googleusercontent.com/0nYXXrfykZoepAyeF-SUmh8NXCiIptd8bPKZlKueJ0RBA6HXtSRCPmA4hcwADvwmVrc',
+    '/store-app-icons/com.jackintheboxinc.JackMobileApp.webp',
     'https://play.google.com/store/apps/details?id=com.jackintheboxinc.JackMobileApp',
     'Food & Drink',
     2702012,
@@ -132,7 +132,7 @@ const solutionStoreAppRows = [
   [
     'com.jernung.infinite.jpn',
     'Infinite Japanese',
-    'https://play-lh.googleusercontent.com/19818WQw8abVv7uXuJZyA6cGyM7HP17Zh-_2PqDT5-9w8DEeJbOg-7Ip1X70rf7AbrT_',
+    '/store-app-icons/com.jernung.infinite.jpn.webp',
     'https://play.google.com/store/apps/details?id=com.jernung.infinite.jpn&hl=en&gl=us',
     'Educational',
     1804981,
@@ -141,7 +141,7 @@ const solutionStoreAppRows = [
   [
     'com.kai.kaiticketing',
     'KAI Access: Train Booking App',
-    'https://play-lh.googleusercontent.com/dnFOQqguRQB6G0BVca-YNaPGYDfgTOK3BGvlyOr4s6w-6-U17V2iYnLKmgau865mWOs',
+    '/store-app-icons/com.kai.kaiticketing.webp',
     'https://play.google.com/store/apps/details?id=com.kai.kaiticketing',
     'TRAVEL_AND_LOCAL',
     13496796,
@@ -150,7 +150,7 @@ const solutionStoreAppRows = [
   [
     'com.morrisons.matchandmore.app',
     'My Morrisons',
-    'https://play-lh.googleusercontent.com/9IKXGc-hU9LvQn7Bhvv6b5kUe6PsPmsnBs9TpDtFZfK_scJ-7QkR8oE8RDgP5FGeHnY',
+    '/store-app-icons/com.morrisons.matchandmore.app.webp',
     'https://play.google.com/store/apps/details?id=com.morrisons.matchandmore.app',
     'SHOPPING',
     2824658,
@@ -159,7 +159,7 @@ const solutionStoreAppRows = [
   [
     'com.mushroomcloud.cars',
     'Cars.co.za',
-    'https://play-lh.googleusercontent.com/WUYcnzz9FG4MTxg98F98km6LYVK3_EhJsQP_hs8m4K902F39iDuomosyhRGIQPxj0_3b',
+    '/store-app-icons/com.mushroomcloud.cars.webp',
     'https://play.google.com/store/apps/details?id=com.mushroomcloud.cars',
     'AUTO_AND_VEHICLES',
     1886114,
@@ -168,7 +168,7 @@ const solutionStoreAppRows = [
   [
     'com.orange.miorange',
     'Mi Orange',
-    'https://play-lh.googleusercontent.com/NXY743Tphk0kApA9B34LMcOxBotwPrxawdbANUHGTyj2kUVVxmXNm2eX4FDDcaWB6-E',
+    '/store-app-icons/com.orange.miorange.webp',
     'https://play.google.com/store/apps/details?id=com.orange.miorange',
     'TOOLS',
     9336196,
@@ -177,7 +177,7 @@ const solutionStoreAppRows = [
   [
     'com.orange.mobile.orangemoney',
     'Orange Money Sénégal',
-    'https://play-lh.googleusercontent.com/T4ZLP7nx1kM6oXacVqAlCqQ5d11xc1NPdC9i3iofouWGIuXXo9QW0FsQJGA01AEblDRo',
+    '/store-app-icons/com.orange.mobile.orangemoney.webp',
     'https://play.google.com/store/apps/details?id=com.orange.mobile.orangemoney',
     'FINANCE',
     2574366,
@@ -186,7 +186,7 @@ const solutionStoreAppRows = [
   [
     'com.paylocity.paylocitymobile',
     'Paylocity Mobile',
-    'https://play-lh.googleusercontent.com/oTtp5ay3Ht12U7sSv1ixCaXgqIjyiYLUgo4eoze4d9mxgpCgMl76-uc4ouoVrIPR9G0',
+    '/store-app-icons/com.paylocity.paylocitymobile.webp',
     'https://play.google.com/store/apps/details?id=com.paylocity.paylocitymobile',
     'BUSINESS',
     3132112,
@@ -195,7 +195,7 @@ const solutionStoreAppRows = [
   [
     'de.tvspielfilm',
     'TV SPIELFILM - TV-Programm',
-    'https://play-lh.googleusercontent.com/leo6t9uMZUdgwmQNZnk1gqjwV04reFKWmoAjuimPK9k5_Zbzoky_7mrNrfXsULognS8',
+    '/store-app-icons/de.tvspielfilm.webp',
     'https://play.google.com/store/apps/details?id=de.tvspielfilm',
     'ENTERTAINMENT',
     12126454,
@@ -204,7 +204,7 @@ const solutionStoreAppRows = [
   [
     'com.polleverywhere.mobile',
     'Poll Everywhere',
-    'https://play-lh.googleusercontent.com/gVe6IqmsUdPZPI0jS6dSSmEgBNIpAgBbwJlx51lSe_isN8yjNoiXMvxJtqdc64H0RQ',
+    '/store-app-icons/com.polleverywhere.mobile.webp',
     'https://play.google.com/store/apps/details?id=com.polleverywhere.mobile',
     'BUSINESS',
     1135271,
@@ -213,7 +213,7 @@ const solutionStoreAppRows = [
   [
     'com.studysmarter',
     'StudySmarter - School & uni',
-    'https://play-lh.googleusercontent.com/j2qPOVSwqKIdUCZJjFN4yF-GulBon9moWrM3qUFDFgZCQ6Fjzv97a26OASWmL5JfYw',
+    '/store-app-icons/com.studysmarter.webp',
     'https://play.google.com/store/apps/details?id=com.studysmarter',
     'EDUCATION',
     6480843,
@@ -222,7 +222,7 @@ const solutionStoreAppRows = [
   [
     'com.swisscom.myswisscom',
     'My Swisscom',
-    'https://play-lh.googleusercontent.com/a_ElP-zHCheGbkYICNzsqOXqdGAKLbJ-eEq6ukQWj3xfhwc7EjOSI0_WQAi_9zUI_5sl',
+    '/store-app-icons/com.swisscom.myswisscom.webp',
     'https://play.google.com/store/apps/details?id=com.swisscom.myswisscom',
     'PRODUCTIVITY',
     1758453,
@@ -231,7 +231,7 @@ const solutionStoreAppRows = [
   [
     'com.wegmans.wegmansapp',
     'Wegmans',
-    'https://play-lh.googleusercontent.com/FffojmhAqdpRPWU-DoJDNk0D2zlhCOEVPFm2fQ-RIFxlML1yIIH0UXwEpjsoSNA1kY_e',
+    '/store-app-icons/com.wegmans.wegmansapp.webp',
     'https://play.google.com/store/apps/details?id=com.wegmans.wegmansapp',
     'SHOPPING',
     1286319,
@@ -240,7 +240,7 @@ const solutionStoreAppRows = [
   [
     'com.windyty.android',
     'Windy.com - Weather Forecast',
-    'https://play-lh.googleusercontent.com/qXBOdC6WVNPPZso8m5_Z_lCiNTG130ZwHAumXlLpF5r9yaPYICJw9tGGtPt5v9yh35E',
+    '/store-app-icons/com.windyty.android.webp',
     'https://play.google.com/store/apps/details?id=com.windyty.android',
     'WEATHER',
     32919408,
@@ -249,7 +249,7 @@ const solutionStoreAppRows = [
   [
     'de.burgerking.kingfinder',
     'BURGER KING®',
-    'https://play-lh.googleusercontent.com/PDSuJ9JjikJ2kNqMoKFEOJ6NpX7_SNXJuW7ixBRiqR_ptEBjjYn5JFm3W4DO7zHMQ5M',
+    '/store-app-icons/de.burgerking.kingfinder.webp',
     'https://play.google.com/store/apps/details?id=de.burgerking.kingfinder',
     'APPLICATION',
     14264075,
@@ -258,7 +258,7 @@ const solutionStoreAppRows = [
   [
     'gt.com.tigosports',
     'Tigo Sports Guatemala',
-    'https://play-lh.googleusercontent.com/KH-g_YGtjU5GdfVyNZlvi40ld8mN0Nf5KQuRxRvGd_McffdR7wA95zLDn7eV0khH_0o',
+    '/store-app-icons/gt.com.tigosports.webp',
     'https://play.google.com/store/apps/details?id=gt.com.tigosports',
     'SPORTS',
     1569649,
@@ -267,7 +267,7 @@ const solutionStoreAppRows = [
   [
     'net.bitburst.pollpay',
     'Poll Pay: Money for Surveys',
-    'https://play-lh.googleusercontent.com/0ChVi4ei7TtNUdAase4IK61Gbm010dCM5AlQVMobw32ZLG_bZyF-u3ToYU032N9XDXQ',
+    '/store-app-icons/net.bitburst.pollpay.webp',
     'https://play.google.com/store/apps/details?id=net.bitburst.pollpay',
     'LIFESTYLE',
     11295030,
@@ -276,7 +276,7 @@ const solutionStoreAppRows = [
   [
     'net.groceryshopping.SproutsFarmersMarket',
     'Sprouts',
-    'https://play-lh.googleusercontent.com/08bY9GrB1UtfY8T6DGbJgea8NaDkF-XMOFvjLfjqYF-KhJphiNlwznohXyKhvfljdkk',
+    '/store-app-icons/net.groceryshopping.SproutsFarmersMarket.webp',
     'https://play.google.com/store/apps/details?id=net.groceryshopping.SproutsFarmersMarket',
     'SHOPPING',
     1350282,
@@ -285,7 +285,7 @@ const solutionStoreAppRows = [
   [
     'org.lichess.mobileapp',
     'lichess • Free Online Chess',
-    'https://play-lh.googleusercontent.com/5bZvh2nmZ-2B-kcKTuATofj5bhscTrJqveAHGYVoJKalfFOMEgx2VnyOth7oJ8bJzQ',
+    '/store-app-icons/org.lichess.mobileapp.webp',
     'https://play.google.com/store/apps/details?id=org.lichess.mobileapp',
     'GAME_BOARD',
     11343228,
@@ -294,7 +294,7 @@ const solutionStoreAppRows = [
   [
     'com.shelf.app',
     'Shelf: App Curator',
-    'https://play-lh.googleusercontent.com/oqim9MReED2iC6SgJ12qpK5fE2aLwrJ7tVJVZScVc9WksCeaO3T3u0EcKJo42apxfyXQKuJI5zA95iummqu3',
+    '/store-app-icons/com.shelf.app.webp',
     'https://play.google.com/store/apps/details?id=com.shelf.app&hl=en&gl=us',
     'Tools',
     15338,
@@ -303,7 +303,7 @@ const solutionStoreAppRows = [
   [
     'ua.vodafone.myvodafone',
     'My Vodafone',
-    'https://play-lh.googleusercontent.com/xuGh4YAt0sOfSJJbfd3unyYKWvcgVZ1xxy62UwICVxct9f53kvT0-xnwVvIpOMSRrgg',
+    '/store-app-icons/ua.vodafone.myvodafone.webp',
     'https://play.google.com/store/apps/details?id=ua.vodafone.myvodafone',
     'TOOLS',
     11056716,
@@ -312,7 +312,7 @@ const solutionStoreAppRows = [
   [
     'uk.co.parentmail.parentmail',
     'IRIS ParentMail',
-    'https://play-lh.googleusercontent.com/f_kS--49imp8pRbkLC6rQAZ2kiFCr2s39kyn0L_d_boV23sKRTQI8JVQAhPe_smk2jQ',
+    '/store-app-icons/uk.co.parentmail.parentmail.webp',
     'https://play.google.com/store/apps/details?id=uk.co.parentmail.parentmail',
     'Education',
     1245646,

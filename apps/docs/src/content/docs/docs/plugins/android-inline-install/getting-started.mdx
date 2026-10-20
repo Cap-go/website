@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-android-inline-install
-bunx cap sync
+npm install @capgo/capacitor-android-inline-install
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,24 @@ bunx cap sync
 ```typescript
 import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
 ```
+
+## Quick start
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.companion',
+  overlay: true,
+  fallback: true,
+});
+```
+
+## Common pitfalls
+
+- **Play only**: sideloaded APKs cannot inline install.
+- **versionCode**: must exceed the installed build.
+- **Dismissal**: handle cancel without infinite retry loops.
 
 ## API Overview
 

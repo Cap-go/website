@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native diagnostics for blocked ports, captive portals, WebSockets, download speed, and packet loss."
+  tagline: "Run native network diagnostics for URL reachability, TCP ports, WebSocket handshakes, speed, and packet loss"
   actions:
     - text: Get started
       link: /docs/plugins/network-diagnostics/getting-started/
@@ -22,9 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-network-diagnostics` helps support teams diagnose restricted Wi-Fi, access point, carrier, firewall, captive portal, DNS, and proxy problems from the same native network stack used by the app.
+Run native network diagnostics for URL reachability, TCP ports, WebSocket handshakes, speed, and packet loss
 
-Use it when a user can open the app but cannot reach a specific API, TCP port, WebSocket endpoint, or download URL from a locked-down network.
+Start with `getNetworkStatus()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

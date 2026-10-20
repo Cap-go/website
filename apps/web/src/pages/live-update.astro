@@ -12,6 +12,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
+import StoreReachSection from '@/components/StoreReachSection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import ProductVideoLoop from '@/components/ProductVideoLoop.astro'
@@ -289,6 +290,9 @@ const featureTiles = [
         />
       </div>
     </section>
+
+    <!-- STORE UPDATE VS LIVE UPDATE REACH -->
+    <StoreReachSection background="bg-transparent" />
 
     <!-- SUPPORTED PLATFORMS -->
     <section class="section" id="platforms">

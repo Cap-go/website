@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-17T13:13:25.271Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-15T12:22:05.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e5e0c2a2-3827-4b5d-9be1-822239c1943e/incident-management-process-cover-design.jpg'
 head_image_alt: Your Guide to the Incident Management Process
 keywords: 'incident management process, devops, sre, incident response, capacitorjs'
@@ -316,7 +316,7 @@ Teams often use these terms interchangeably, but they serve different purposes.
 
 **Playbooks** describe how to run the incident. They cover severity declaration, role assignment, communication cadence, escalation paths, and closure rules.
 
-**Runbooks** describe how to perform a specific operational task. Restart this worker. Roll back this service. Disable this feature flag. Verify this queue drains. For mobile, a runbook might cover investigating a bad asset bundle or validating client crash spikes in [Sentry for React Native workflows](https://capgo.app/blog/sentry-react-native/).
+**Runbooks** describe how to perform a specific operational task. Restart this worker. Roll back this service. Disable this feature flag. Verify this queue drains. For mobile, a runbook might cover investigating a bad asset bundle or validating client crash spikes using [app health monitoring](https://capgo.app/blog/app-health-monitoring/).
 
 A simple split works well:
 

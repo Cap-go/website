@@ -36,6 +36,39 @@ npx cap sync
 import { DeviceInfo } from '@capgo/capacitor-device-info';
 ```
 
+## Quick start
+
+```typescript
+import { DeviceInfo } from '@capgo/capacitor-device-info';
+
+const result = await DeviceInfo.getInfo();
+console.log(result);
+```
+
+## Example: startMonitoring
+
+```typescript
+import { DeviceInfo } from '@capgo/capacitor-device-info';
+
+const result = await DeviceInfo.startMonitoring();
+console.log(result);
+```
+
+## Example: stopMonitoring
+
+```typescript
+import { DeviceInfo } from '@capgo/capacitor-device-info';
+
+const result = await DeviceInfo.stopMonitoring();
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
 ## Read one snapshot
 
 ```typescript

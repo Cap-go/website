@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-09T07:41:26.498Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-15T12:22:05.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/7cb66856-7798-477d-a170-9ca7124052ec/textinput-react-native-guide.jpg'
 head_image_alt: 'Mastering TextInput React Native: The Complete 2026 Guide'
 keywords: 'textinput react native, react native, react native forms, mobile development, react native guide'
@@ -542,7 +542,7 @@ The fix is usually simpler than the debugging path:
 - **Try memoization strategically:** Stabilizing parent renders can reduce the glitch surface.
 - **Use `multiline={true}` only if it matches the field's behavior:** It can work as a patch, but don't add it blindly.
 
-If you want to catch these issues earlier in production debugging, this [guide to using Sentry with React Native](https://capgo.app/blog/sentry-react-native/) is helpful for tightening feedback loops around UI regressions.
+If you want to catch these issues earlier in production debugging, [app health monitoring for mobile and JS apps](https://capgo.app/blog/app-health-monitoring/) is helpful for tightening feedback loops around UI regressions.
 
 <a id="performance-when-many-inputs-re-render"></a>
 ### Performance when many inputs re-render

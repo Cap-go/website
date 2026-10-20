@@ -1,4 +1,5 @@
 ---
+import { getStoreTop } from '@/lib/siteData'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { renameCat, shortNumber, plausibleStoreShare } from '@/services/misc'
@@ -8,29 +9,9 @@ const description = m.top_native_script_apps({}, { locale: Astro.locals.locale }
 
 const content = { title, description }
 
-interface App {
-  url: string
-  title: string
-  icon: string
-  category: string
-  installs: number
-}
-
-let apps: App[] = []
-let usage = 0.13
-
 const others = ['top_capacitor_app', 'top_flutter_app', 'top_cordova_app']
 
-try {
-  const response = await fetch(`https://api.capgo.app/private/store_top?mode=nativeScript`)
-  if (response.ok) {
-    const data = await response.json()
-    apps = data.apps
-    usage = data.usage
-  }
-} catch (error) {
-  console.error('Failed to fetch apps:', error)
-}
+const { apps, usage } = getStoreTop('nativeScript') ?? { apps: [], usage: 0.13 }
 const storeShare = plausibleStoreShare(usage)
 ---
 

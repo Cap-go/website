@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Cross-platform age range detection plugin."
+  tagline: "Read age range signals from Google Play and Apple."
   actions:
     - text: Get started
       link: /docs/plugins/age-range/getting-started/
@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Cross-platform age range detection plugin.
+Call `requestAgeRange()` before showing social, commerce, or UGC features that require age gating.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Declared Age Range when available |
+| Android | Yes | Play Age Signals |
+| Web | No | Use server side checks |
 
 ## Core Capabilities
 

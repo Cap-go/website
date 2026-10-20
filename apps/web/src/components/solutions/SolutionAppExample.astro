@@ -31,7 +31,7 @@ const showExampleCtas = solution === 'enterprise'
           <p class="text-sm font-semibold tracking-wide text-[#44BCFF] uppercase">{copy('solution_app_examples_eyebrow')}</p>
           <h2 class="mt-4 text-3xl leading-tight font-semibold tracking-tight text-balance text-white sm:text-5xl">{copy(example.headlineKey)}</h2>
           <p class="mt-5 text-base leading-7 text-pretty text-gray-400 sm:text-lg">{copy(example.useCaseKey)}</p>
-          {showExampleCtas && <SignupCta lead={m.signup_cta_lead_solution_examples({}, { locale: Astro.locals.locale })} id="solution-app-examples-signup-cta" enterprise align="start" class="mt-6" />}
+          {showExampleCtas && <SignupCta lead={m.signup_cta_lead_solution_examples({}, { locale: Astro.locals.locale })} id="solution-app-examples-signup-cta" variant="team" align="start" class="mt-6" />}
         </div>
 
         <div class="solution-app-examples-body mt-12">
@@ -110,7 +110,14 @@ const showExampleCtas = solution === 'enterprise'
               </ul>
             </div>
 
-            <SignupCta lead={m.signup_cta_lead_solution_release_lane({}, { locale: Astro.locals.locale })} id="solution-app-examples-cta-signup" humanSupport align="start" class="lg:items-center lg:text-center" />
+            <SignupCta
+              lead={showExampleCtas ? undefined : m.signup_cta_lead_solution_release_lane({}, { locale: Astro.locals.locale })}
+              variant={showExampleCtas ? 'team' : 'signup'}
+              id="solution-app-examples-cta-signup"
+              humanSupport
+              align="start"
+              class="lg:items-center lg:text-center"
+            />
           </aside>
         </div>
       </div>

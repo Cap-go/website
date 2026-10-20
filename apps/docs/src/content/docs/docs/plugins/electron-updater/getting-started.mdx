@@ -40,7 +40,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 1. Install the package:
 
    ```bash
-   bun add @capgo/electron-updater
+   npm install @capgo/electron-updater
    ```
 
 2. Get your App ID from the Capgo dashboard. If you haven't created an app yet, run:
@@ -50,6 +50,21 @@ If you prefer Manual Setup, install the plugin by running the following commands
    ```
 
 </Steps>
+
+## Quick start
+
+```typescript
+import { requireUpdater } from '@capgo/electron-updater/renderer';
+
+const updater = requireUpdater();
+await updater.notifyAppReady();
+```
+
+## Common pitfalls
+
+- Call `notifyAppReady()` early on launch—within the configured timeout—before slow UI initialization.
+- Match Capgo signing in the main process.
+- Set update channels before shipping.
 
 ## Setup
 

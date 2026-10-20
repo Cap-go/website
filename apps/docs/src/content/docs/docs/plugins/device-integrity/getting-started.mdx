@@ -36,6 +36,47 @@ If you prefer Manual Setup, install the plugin by running the following commands
    - iOS: enable the App Attest capability in Xcode for attestation APIs.
 </Steps>
 
+## Quick start
+
+```typescript
+import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
+
+const result = await DeviceIntegrity.getCapabilities();
+console.log(result);
+```
+
+## Example: getWidevineFingerprint
+
+```typescript
+import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
+
+const capabilities = await DeviceIntegrity.getCapabilities();
+if (capabilities.widevine.fingerprintAvailable) {
+  const result = await DeviceIntegrity.getWidevineFingerprint();
+  console.log(result);
+}
+```
+
+## Example: prepareAttestation
+
+```typescript
+import { DeviceIntegrity } from '@capgo/capacitor-device-integrity';
+
+const capabilities = await DeviceIntegrity.getCapabilities();
+const attestationSupported =
+  capabilities.appAttest.supported || capabilities.playIntegrity.supported;
+
+if (attestationSupported) {
+  const result = await DeviceIntegrity.prepareAttestation();
+  console.log(result);
+}
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+
 ## Why use this plugin
 
 Use one API to collect integrity signals during sign-up, login, or high-risk actions:

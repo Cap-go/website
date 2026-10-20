@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="App quality and paused payouts">
+  <title>App quality and paused payouts</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="52" cy="48" r="20" fill="#44BCFF" opacity="0.22"/>
+  <path d="M160 36 L208 54 V98 C208 132 160 158 160 158 C160 158 112 132 112 98 V54 Z" fill="#111827" stroke="#4ADE80" stroke-width="2"/>
+  <path d="M160 72 V112 M136 92 H184" stroke="#4ADE80" stroke-width="3" stroke-linecap="round"/>
+  <rect x="200" y="108" width="88" height="56" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="244" cy="136" r="18" fill="none" stroke="#F87171" stroke-width="2"/>
+  <rect x="236" y="128" width="16" height="16" rx="2" fill="#F87171" opacity="0.35"/>
+  <path d="M228 152 H260" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M232 160 H256" stroke="#6B7280" stroke-width="2" stroke-linecap="round"/>
+</svg>

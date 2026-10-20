@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-23T08:26:36.407Z
-updated_at: 2026-09-17T13:36:23.000Z
+updated_at: 2026-10-15T12:22:05.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/dae89c53-9e9e-43c0-b2e0-ac2d1e922f96/expo-push-notification-guide-2026.jpg'
 head_image_alt: Master Expo Push Notification Guide 2026
 keywords: 'expo push notification, react native, expo, mobile development, push notifications'
@@ -94,7 +94,7 @@ A lot of Expo push pain starts before the first permission prompt. If your proje
 
 ![A modern laptop on a wooden desk displaying configuration code files for a project setup.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/61588b92-edfb-4964-8e60-54d8a52f1095/expo-push-notification-laptop-setup.jpg)
 
-Start with the right libraries installed and a development environment that matches your build path. If you're working beyond Expo Go, it helps to align your local workflow with a [custom Expo development client setup](https://capgo.app/blog/expo-development-client/), because notification behavior often needs to be validated in a build that mirrors production more closely than a quick sandbox run.
+Start with the right libraries installed and a development environment that matches your build path. If you're working beyond Expo Go, it helps to align your release workflow with [Capgo's Expo EAS alternative guide](https://capgo.app/blog/alternative-to-expo/), because notification behavior often needs to be validated in a build that mirrors production more closely than a quick sandbox run.
 
 <a id="install-the-notification-packages"></a>
 ### Install the notification packages

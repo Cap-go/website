@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T06:27:15.652Z",
+  "updatedAt": "2026-10-20T03:06:06.301Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -36,47 +36,43 @@
   },
   "releases": [
     {
-      "repo": "Cap-go/capacitor-updater",
-      "tag": "8.53.0",
-      "url": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.53.0",
-      "publishedAt": "2026-10-14T17:32:57Z"
+      "repo": "Cap-go/capgo.app",
+      "tag": "capgo-20.5.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-20.5.0",
+      "publishedAt": "2026-10-19T20:55:22Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.82.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.82.1",
-      "publishedAt": "2026-10-14T15:24:15Z"
+      "tag": "cli-8.89.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.89.0",
+      "publishedAt": "2026-10-19T20:53:38Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-16.9.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.9.1",
-      "publishedAt": "2026-10-14T12:59:13Z"
+      "tag": "cli-8.88.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.88.0",
+      "publishedAt": "2026-10-19T10:52:18Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-16.9.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.9.0",
-      "publishedAt": "2026-10-14T10:16:48Z"
+      "tag": "cli-8.87.3",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.87.3",
+      "publishedAt": "2026-10-19T04:26:17Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-16.8.4",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-16.8.4",
-      "publishedAt": "2026-10-14T09:22:26Z"
+      "tag": "notifications-8.1.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/notifications-8.1.0",
+      "publishedAt": "2026-10-19T01:17:51Z"
     }
   ],
   "metrics": {
     "live": {
-      "success_rate": 81,
-      "first_try_rate": 97.9,
-      "rollback_rate": 12.2,
-      "updated_at": "2026-10-15T01:16:44.444Z",
+      "success_rate": 81.2,
+      "first_try_rate": 98,
+      "rollback_rate": 13.7,
+      "updated_at": "2026-10-19T19:05:06.999Z",
       "daily": [
-        83,
-        82.4,
-        81.3,
-        84,
         86.6,
         85.7,
         82.3,
@@ -102,12 +98,16 @@
         82.9,
         81.5,
         84.9,
-        83.5
+        83.5,
+        84.2,
+        85.1,
+        85.2,
+        82.7
       ]
     },
     "builder": {
-      "success_rate": 73.1,
-      "updated_at": "2026-10-15T01:16:44.453Z"
+      "success_rate": 74.6,
+      "updated_at": "2026-10-19T18:25:13.332Z"
     }
   }
 }

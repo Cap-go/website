@@ -32,6 +32,29 @@ bunx cap sync
 import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
 ```
 
+## Quick start
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.openStore({ database: 'app', encrypted: true });
+await CapgoCapacitorDataStorageSqlite.set({ key: 'session', value: JSON.stringify(session) });
+const { value } = await CapgoCapacitorDataStorageSqlite.get({ key: 'session' });
+```
+
+## Example: namespaced table
+
+```typescript
+await CapgoCapacitorDataStorageSqlite.setTable({ table: 'drafts' });
+await CapgoCapacitorDataStorageSqlite.set({ key: 'invoice-42', value: draftJson });
+```
+
+## Common pitfalls
+
+- **Open before use**: every read or write expects an open store handle.
+- **Encryption scope**: encryption applies to iOS and Android native stores, not the web IndexedDB path.
+- **Close on logout**: `clear()` plus `closeStore()` prevents stale data on shared devices.
+
 ## API Overview
 
 ### `openStore`

@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-file-sharer
-bunx cap sync
+npm install @capgo/capacitor-file-sharer
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,36 @@ bunx cap sync
 ```typescript
 import { FileSharer } from '@capgo/capacitor-file-sharer';
 ```
+
+## Quick start
+
+```typescript
+import { FileSharer } from '@capgo/capacitor-file-sharer';
+
+await FileSharer.share({
+  filename: 'report.pdf',
+  contentType: 'application/pdf',
+  base64Data: reportBase64,
+});
+```
+
+## Example: save
+
+```typescript
+import { FileSharer } from '@capgo/capacitor-file-sharer';
+
+const result = await FileSharer.save({
+  filename: 'report.pdf',
+  contentType: 'application/pdf',
+  base64Data: reportBase64,
+});
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## Share A Base64 File
 

@@ -79,6 +79,8 @@ test('registration without profile names preserves referral attribution and the 
     navigator: { userAgent: 'test', maxTouchPoints: 0 },
     URLSearchParams,
     URL,
+    crypto,
+    TextEncoder,
     setTimeout: (callback: () => void) => callback(),
   })
   await Promise.resolve()
@@ -97,7 +99,15 @@ test('registration without profile names preserves referral attribution and the 
     },
   ])
   expect(captures.map(({ event }) => event)).toEqual(['website_signup_submit', 'user_signed_up'])
-  expect(adsConversions).toEqual([['measure', 'registration_completed', { type: 'customer_action' }]])
+  const sha256Hex = async (value: string) => {
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value))
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('')
+  }
+  const hashedId = await sha256Hex('fake-user-id')
+  expect(adsConversions).toEqual([
+    ['init', { user: { email_sha256: await sha256Hex('signup@example.com'), external_id_sha256: hashedId } }],
+    ['measure', 'registration_completed', { type: 'customer_action' }, { event_id: `registration_${hashedId}` }],
+  ])
   expect(captures[1].properties.signup_source).toBe('plugin_example')
   expect(referrals).toEqual([{ email: 'signup@example.com', externalUserId: 'fake-user-id' }])
   const redirect = new URL(windowStub.location.href)

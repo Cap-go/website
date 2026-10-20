@@ -222,7 +222,7 @@ For CI/CD, common choices are **GitHub Actions**, **GitLab CI**, **CircleCI**, *
 
 On the observability side, teams often combine **Datadog**, **Grafana**, **Prometheus**, **OpenTelemetry**, **Sentry**, **New Relic**, and cloud-native logging. The key isn't tool count. It's correlation. You need to connect backend errors, mobile crashes, release versions, feature flags, and deployment events into one usable timeline.
 
-Developer workflow quality matters too. A carefully selected toolbox reduces infrastructure mistakes because engineers can reproduce environments, inspect releases, and understand failures faster. This roundup of [developer experience tools for modern app teams](https://capgo.app/blog/developer-experience-tools/) is useful if your delivery process still depends on tribal knowledge.
+Developer workflow quality matters too. A carefully selected toolbox reduces infrastructure mistakes because engineers can reproduce environments, inspect releases, and understand failures faster. This roundup of [developer experience tools for modern app teams](https://capgo.app/blog/developer-experience/) is useful if your delivery process still depends on tribal knowledge.
 
 For client instrumentation, SDK quality matters because mobile insight is only useful if it respects app performance and gives teams actionable context. A practical reference is [Halo AI's SDK for mobile insights](https://www.haloagents.ai/blog/sdk-for-mobile), especially for teams evaluating what should run on-device versus what belongs in backend analytics.
 

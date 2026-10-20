@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-10-20T00:37:53.000Z
 head_image: /bolt_capacitor.webp
 head_image_alt: ">- Capgo blog illustration"
 keywords: Bolt.new, Capacitor, mobile app development, React, Vue, export project, native mobile apps
@@ -22,6 +22,8 @@ next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 ## Introduction
 
 [Bolt.new](https://bolt.new/) is an innovative AI-powered development platform that can generate full-stack web applications using various frameworks like React, Vue, Svelte, and more. But what if you want to bring your Bolt.new creation to mobile devices? In this comprehensive tutorial, we'll show you how to export your Bolt.new project and transform it into native mobile apps using [Capacitor](https://capacitorjs.com/).
+
+> **Short version:** the [Bolt to iOS and Android page](/solutions/bolt-to-mobile/) sums up the whole path on one screen: export, Capacitor, cloud builds without a Mac, and live updates.
 
 Whether your Bolt.new project uses React, Vue, or another supported framework, this guide will help you create native iOS and Android apps with access to device features like camera, storage, and push notifications.
 

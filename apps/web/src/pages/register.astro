@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
 import 'toastify-js/src/toastify.css'
 import RatingSummary from '@/components/RatingSummary.astro'
 import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
@@ -26,10 +27,12 @@ const initialsOf = (name: string) =>
     .slice(0, 2)
     .map((word) => word[0]?.toUpperCase() ?? '')
     .join('')
+const registerCanonical = new URL(getRelativeLocaleUrl(Astro.locals.locale, 'register'), Astro.site ?? Astro.url.origin).toString()
 const content = {
   title,
   description,
   keywords: 'Capgo register, sign up, create account, Capacitor live updates, OTA updates',
+  canonical: registerCanonical,
 }
 ---
 

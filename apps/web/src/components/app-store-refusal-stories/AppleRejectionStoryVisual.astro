@@ -1,0 +1,52 @@
+---
+import type { AppleRejectionStory } from '@/data/app-store-refusal-stories/types'
+import {
+  getStoryIllustrationVariant,
+  getStoryPrimaryIllustrationTag,
+  illustrationAssetPath,
+  storyIllustrationAlt,
+} from '@/data/app-store-refusal-stories/illustrations'
+import { getAppleRejectionStoryMedia } from '@/data/app-store-refusal-stories/storyMedia'
+
+interface Props {
+  story: AppleRejectionStory
+  allStories: AppleRejectionStory[]
+  class?: string
+}
+
+const { story, allStories, class: className = '' } = Astro.props
+
+const media = getAppleRejectionStoryMedia(story.id)
+const tag = getStoryPrimaryIllustrationTag(story)
+const variant = getStoryIllustrationVariant(story, allStories)
+const fallbackSrc = illustrationAssetPath(tag, variant)
+const fallbackAlt = storyIllustrationAlt(story)
+---
+
+<figure class:list={['overflow-hidden rounded-xl border border-white/10 bg-gray-900', className]}>
+  {
+    media ? (
+      <img
+        src={media.src}
+        alt={media.alt}
+        width={media.width}
+        height={media.height}
+        loading="lazy"
+        decoding="async"
+        class="w-full max-h-[min(70vh,960px)] object-contain object-top bg-gray-950"
+        style={`aspect-ratio: ${media.width} / ${media.height}`}
+        sizes="(min-width: 1024px) 560px, 100vw"
+      />
+    ) : (
+      <img
+        src={fallbackSrc}
+        alt={fallbackAlt}
+        width={320}
+        height={200}
+        loading="lazy"
+        decoding="async"
+        class="aspect-[16/10] w-full object-cover"
+      />
+    )
+  }
+</figure>

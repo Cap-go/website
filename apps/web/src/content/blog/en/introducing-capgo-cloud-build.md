@@ -1,31 +1,36 @@
 ---
 slug: introducing-capgo-cloud-build
-title: Introducing Capgo Cloud Build - Build Native Apps Without the Hassle
+title: Cloud iOS Builds Without a Mac for Capacitor and CI
 description: >-
-  Build your Capacitor apps for iOS and Android in the cloud, just like Expo.
-  No need for local Xcode or Android Studio - submit directly to app stores from your CLI.
+  Build and sign iOS and Android Capacitor apps from any CI with no Mac needed.
+  One CLI step after cap sync, with optional App Store and Play submit.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-11-19T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-10-14T09:00:00.000Z
 head_image: /blog-images/introducing-capgo-cloud-build.webp
-head_image_alt: "Introducing Capgo Cloud Build - Build Native Apps Without the Hassle Capgo blog illustration"
-keywords: cloud build, native build, capacitor, iOS build, Android build, CI/CD, app store, play store
+head_image_alt: Cloud iOS builds without a Mac for Capacitor and CI Capgo blog illustration
+keywords: ios cloud build, cloud build ios, build ios app without mac, Capacitor cloud build, Capgo Build, android cloud build
 tag: Product
 published: true
 locale: en
 origin: human
+faq:
+  - question: How does Capgo Build help Capacitor teams?
+    answer: After your web build and cap sync, the Capgo CLI uploads the prepared native project, streams compile logs to your terminal, and returns signed iOS and Android binaries or uploads them when you configure App Store Connect and Play credentials.
+  - question: What is Capgo?
+    answer: Capgo is a release platform for Capacitor apps. Capgo Build handles signed native binaries and store submission. Capgo Live Updates ship JavaScript and asset changes between native releases.
 ---
 
-We're excited to announce **Capgo Cloud Build** - a new way to build your Capacitor apps for iOS and Android directly in the cloud, without the need for local development environments or CI/CD infrastructure.
+**Capgo Cloud Build** helps Capacitor teams build and sign iOS and Android apps without owning a Mac. Keep your web build, tests, and `npx cap sync` in your existing pipeline, then call [Capgo Build](/native-build/) in one CLI step for signed binaries and optional store submit. For the product overview and pricing, see [Capgo Native Builds](/native-build/). Task-level answers live in the [Capacitor iOS without a Mac FAQ](/blog/capacitor-ios-development-without-mac-faq/).
 
 ## The Problem We're Solving
 
 Building native mobile apps has always been a pain point for web developers. You need:
 
 - **Local Development Tools**: Install and maintain Xcode (30+ GB) and Android Studio on your machine
-- **Mac Hardware**: iOS builds require a Mac, which can be expensive or impossible on Linux/Windows CI runners
+- **Mac access**: Shipping iOS builds traditionally required Mac access on every developer machine and release path
 - **CI/CD Configuration**: Set up complex GitHub Actions or other CI/CD workflows with build caching, credentials management, and more
 - **Dependency Management**: Keep build tools, SDKs, and certificates up to date across environments
 
@@ -242,7 +247,7 @@ No surprise fees, no minimum commitments. You only pay for what you use.
 
 One important principle of Capgo Cloud Build: **we only build the native parts**.
 
-Your JavaScript, HTML, and CSS stay on your side. We never process, inspect, or store your web code. You're responsible for building your web assets locally (using `npm run build` or your preferred build tool), and we handle the native compilation.
+Your web source code and dependency installation stay on your side. After `cap sync`, the compiled JavaScript, HTML, and CSS in the native project are uploaded and used for the build, then temporary project data is cleaned up. You're responsible for building your web assets locally (using `npm run build` or your preferred build tool), and we handle the native compilation.
 
 This separation is intentional:
 - **Better security** - Your application logic never leaves your control
@@ -288,6 +293,16 @@ We're building Capgo Cloud Build to be the simplest, most developer-friendly way
 
 Happy building!
 
+## FAQ
+
+### How does Capgo Build help Capacitor teams?
+
+After your web build and cap sync, the Capgo CLI uploads the prepared native project, streams compile logs to your terminal, and returns signed iOS and Android binaries or uploads them when you configure App Store Connect and Play credentials.
+
+### What is Capgo?
+
+Capgo is a release platform for Capacitor apps. Capgo Build handles signed native binaries and store submission. Capgo Live Updates ship JavaScript and asset changes between native releases.
+
 ---
 
 ## Learn More
@@ -299,6 +314,6 @@ Happy building!
 - [Android Build Configuration](/docs/builder/android/)
 - [Join our Discord](https://discord.com/invite/VnYRvBfgA6)
 
-## Keep going from Introducing Capgo Cloud Build - Build Native Apps Without the Hassle
+## Keep going from Cloud iOS Builds Without a Mac for Capacitor and CI
 
-If you are using **Introducing Capgo Cloud Build - Build Native Apps Without the Hassle** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.
+If you are using **Cloud iOS Builds Without a Mac for Capacitor and CI** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

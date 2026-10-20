@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-fast-sql
-bunx cap sync
+npm install @capgo/capacitor-fast-sql
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,37 @@ bunx cap sync
 ```typescript
 import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const conn = await CapgoCapacitorFastSql.connect({ database: 'myapp' });
+console.log('Connected on port:', conn.port);
+```
+
+## Example: disconnect
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.disconnect({ database: 'myapp' });
+```
+
+## Example: getServerInfo
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const info = await CapgoCapacitorFastSql.getServerInfo({ database: 'myapp' });
+console.log('Server port:', info.port);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `npx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

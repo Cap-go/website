@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,49 @@ bunx cap sync
 ```typescript
 import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
 ```
+
+## Quick start
+
+```typescript
+import { IntentLauncher, ActivityAction } from '@capgo/capacitor-intent-launcher';
+
+// Open location settings
+const result = await IntentLauncher.startActivityAsync({
+  action: ActivityAction.LOCATION_SOURCE_SETTINGS
+});
+
+// Open a specific app settings
+const result = await IntentLauncher.startActivityAsync({
+  action: ActivityAction.APPLICATION_DETAILS_SETTINGS,
+  data: 'package:com.example.app'
+});
+```
+
+## Example: openIOSSettings
+
+```typescript
+import { IntentLauncher, IOSSettings } from '@capgo/capacitor-intent-launcher';
+
+// Open app settings (recommended - officially supported by Apple)
+await IntentLauncher.openIOSSettings({ option: IOSSettings.App });
+
+// Open WiFi settings (may not work in all iOS versions)
+await IntentLauncher.openIOSSettings({ option: IOSSettings.WiFi });
+```
+
+## Example: openApplication
+
+```typescript
+import { IntentLauncher } from '@capgo/capacitor-intent-launcher';
+
+// Open Gmail app
+await IntentLauncher.openApplication({ packageName: 'com.google.android.gm' });
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

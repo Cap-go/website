@@ -404,6 +404,23 @@ assert(localizedLinksHtml.includes('href="/fr/support-policy/"'), 'Link rewrite 
 assert(localizedLinksHtml.includes('href="/fr/docs/cli/"'), 'Link rewrite did not keep CLI docs root links')
 assert(localizedLinksHtml.includes('href="/fr/docs/builder/ios/"'), 'Link rewrite did not canonicalize legacy build docs links')
 assert(localizedLinksHtml.includes('href="/fr/#faq"'), 'Link rewrite did not localize root anchor links')
+
+const pendingEnglishCanonicalHtml = __translationWorkerTest.rewriteMetadataForEnglishCanonical(
+  `<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="canonical" href="https://capgo.app/fr/docs/" />
+    <link rel="alternate" hreflang="fr" href="https://capgo.app/fr/docs/" />
+    <link rel="alternate" hreflang="en" href="https://capgo.app/docs/" />
+    <meta property="og:url" content="https://capgo.app/fr/docs/" />
+  </head>
+  <body><h1>Read our guides</h1></body>
+</html>`,
+  new URL('https://capgo.app/fr/docs/'),
+)
+assert(pendingEnglishCanonicalHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'Pending English canonical rewrite did not point at the English URL')
+assert(!pendingEnglishCanonicalHtml.includes('hreflang='), 'Pending English canonical rewrite must remove hreflang alternates')
+assert(pendingEnglishCanonicalHtml.includes('property="og:url" content="https://capgo.app/docs/"'), 'Pending English canonical rewrite did not update og:url')
 assert(localizedLinksHtml.includes('href="#local"'), 'Link rewrite changed same-page anchors')
 assert(localizedLinksHtml.includes('href="https://github.com/Cap-go/capgo"'), 'Link rewrite changed an external URL')
 assert(localizedLinksHtml.includes('href="mailto:hello@capgo.app"'), 'Link rewrite changed a mail link')
@@ -520,20 +537,29 @@ try {
           items?: Array<{ text: string; context?: string }>
         }
         capturedAiPayload = payload
-        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
-        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
         assert(!payload.texts, 'Translation AI request still used legacy texts[] payload')
-
-        const aboutItem = payload.items.find((item) => item.text === 'About')
-        if (aboutItem) {
-          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
-        }
 
         const translateText = (text: string) => {
           if (text.includes('Read our guides')) return 'Leggi le guide'
           if (text.includes('Docs title')) return 'Titolo doc'
           if (text === 'About') return 'Chi siamo'
+          if (text.includes('App initialization step by step guide')) return 'App-Initialisierung Schritt-für-Schritt-Anleitung'
+          if (text.includes('Learn how to initialize an app step by step')) {
+            return 'Neue deutsche Meta-Beschreibung fuer den Initialisierungsworkflow.'
+          }
           return 'IT ' + text
+        }
+
+        if (typeof payload.text === 'string') {
+          return { response: translateText(payload.text) }
+        }
+
+        assert(Array.isArray(payload.items), 'Translation AI request did not send items[] with context support')
+        assert(typeof payload.pagePath === 'string' && payload.pagePath.length > 0, 'Translation AI request missed pagePath')
+
+        const aboutItem = payload.items.find((item) => item.text === 'About')
+        if (aboutItem) {
+          assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
 
         const sourceTexts = payload.items.map((item) => item.text)
@@ -570,29 +596,49 @@ try {
       },
     },
   }
+  const crawlerRequest = new Request('https://capgo.app/fr/docs/', {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+    },
+  })
+  const crawlerPendingResponse = await worker.fetch(crawlerRequest, env as any)
+  const crawlerPendingHtml = await crawlerPendingResponse.text()
+
+  assert(crawlerPendingResponse.status === 200, 'A crawler translation cache miss must not return a temporary 503')
+  assert(crawlerPendingResponse.headers.get('Retry-After') === null, 'A crawler translation cache miss must not advertise Retry-After')
+  assert(
+    crawlerPendingResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-canonical',
+    'A crawler translation cache miss did not report the English canonical fallback',
+  )
+  assert(crawlerPendingHtml.includes('Read our guides'), 'A crawler translation cache miss did not keep English source content available')
+  assert(crawlerPendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'A crawler translation cache miss did not point canonical at the English URL')
+  assert(!crawlerPendingHtml.includes('hreflang="fr"'), 'A crawler translation cache miss must not self-claim the localized hreflang')
+  assert(translationJobs.length === 1, 'A crawler translation cache miss did not enqueue the localized document')
+
   const request = new Request('https://capgo.app/it/docs/')
   const pendingResponse = await worker.fetch(request, env as any)
+  const pendingHtml = await pendingResponse.text()
 
-  assert(pendingResponse.status === 503, 'A translation cache miss did not return a temporary localized response')
+  assert(pendingResponse.status === 200, 'A translation cache miss must not return a temporary 503')
   assert(pendingResponse.headers.get('Location') === null, 'A translation cache miss redirected visitors away from the localized URL')
-  assert(pendingResponse.headers.get('Refresh') === '5', 'A translation cache miss did not schedule a localized retry')
-  assert(pendingResponse.headers.get('Retry-After') === '5', 'A translation cache miss did not advertise when to retry')
+  assert(pendingResponse.headers.get('Retry-After') === null, 'A translation cache miss must not advertise Retry-After')
   assert(pendingResponse.headers.get('X-Capgo-Translation-Cache') === 'MISS', 'A translation cache miss did not report its cache state')
-  assert(pendingResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-retry', 'A translation cache miss did not report the retry fallback')
-  assert((await pendingResponse.text()).includes('Read our guides'), 'A translation cache miss did not keep the source document available while it is translated')
-  assert(translationJobs.length === 1, 'A translation cache miss did not enqueue the localized document')
-  assert(translationJobs[0]?.url === 'https://capgo.app/it/docs/', 'The cache-miss job lost the localized URL')
-  assert(translationJobs[0]?.locale === 'it', 'The cache-miss job lost the requested locale')
-  assert(translationJobs[0]?.reason === 'miss', 'The cache-miss job did not identify the cache-miss reason')
+  assert(pendingResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-canonical', 'A translation cache miss did not report the English canonical fallback')
+  assert(pendingHtml.includes('Read our guides'), 'A translation cache miss did not keep the source document available while it is translated')
+  assert(pendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'A translation cache miss did not point canonical at the English URL')
+  assert(translationJobs.length === 2, 'A translation cache miss did not enqueue the localized document')
+  assert(translationJobs[1]?.url === 'https://capgo.app/it/docs/', 'The cache-miss job lost the localized URL')
+  assert(translationJobs[1]?.locale === 'it', 'The cache-miss job lost the requested locale')
+  assert(translationJobs[1]?.reason === 'miss', 'The cache-miss job did not identify the cache-miss reason')
 
   const pendingHeadResponse = await worker.fetch(new Request(request.url, { method: 'HEAD' }), env as any)
-  assert(pendingHeadResponse.status === 503, 'A HEAD translation cache miss did not match the GET temporary response')
+  assert(pendingHeadResponse.status === 200, 'A HEAD translation cache miss did not match the GET temporary response')
   assert(pendingHeadResponse.headers.get('Location') === null, 'A HEAD translation cache miss redirected visitors away from the localized URL')
-  assert(pendingHeadResponse.headers.get('Refresh') === '5', 'A HEAD translation cache miss did not schedule a localized retry')
+  assert(pendingHeadResponse.headers.get('Retry-After') === null, 'A HEAD translation cache miss must not advertise Retry-After')
   assert((await pendingHeadResponse.text()) === '', 'A HEAD translation cache miss returned a response body')
-  assert(translationJobs.length === 1, 'A HEAD translation cache miss enqueued a duplicate localized document')
+  assert(translationJobs.length === 2, 'A HEAD translation cache miss enqueued a duplicate localized document')
 
-  await worker.queue({ messages: [{ body: translationJobs[0] as any }] }, env as any)
+  await worker.queue({ messages: [{ body: translationJobs[1] as any }] }, env as any)
   assert(capturedAiPayload !== null, 'Translation AI mock never received a request payload')
   assert(Array.isArray(capturedAiPayload.items), 'Queued translation did not send items[]')
   assert(capturedAiPayload.pagePath === '/it/docs/', 'Queued translation used the wrong pagePath')
@@ -613,6 +659,7 @@ try {
 <html lang="de">
   <head>
     <title>App-Initialisierung</title>
+    <meta name="description" content="Alte deutsche Beschreibung für App-Initialisierung.">
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App-Initialisierung"}</script>
   </head>
   <body>
@@ -624,7 +671,8 @@ try {
   const currentBlogHtml = `<!doctype html>
 <html lang="en">
   <head>
-    <title>App initialization</title>
+    <title>App initialization step by step guide</title>
+    <meta name="description" content="Learn how to initialize an app step by step with the latest workflow.">
     <script type="application/ld+json" id="seo-schema-graph">{"headline":"App initialization"}</script>
   </head>
   <body>
@@ -663,6 +711,9 @@ try {
   assert(staleBlogResponse.status === 200, 'A stale localized blog was not served successfully')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A stale localized blog did not report STALE')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A stale localized blog did not sync current English scripts')
+  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Meta') === 'synced', 'A stale localized blog did not sync current English meta')
+  assert(staleBlogBody.includes('App-Initialisierung Schritt-für-Schritt-Anleitung'), 'STALE localized blog did not refresh the translated title')
+  assert(staleBlogBody.includes('Neue deutsche Meta-Beschreibung fuer den Initialisierungsworkflow'), 'STALE localized blog did not refresh the translated meta description')
   assert(staleBlogBody.includes('App-Initialisierung Schritt für Schritt'), 'Script sync on STALE wipe translated heading')
   assert(staleBlogBody.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync on STALE wipe translated paragraph')
   assert(staleBlogBody.includes('"headline":"App-Initialisierung"'), 'Script sync on STALE replaced translated JSON-LD')

@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-file
-bunx cap sync
+npm install @capgo/capacitor-file
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,41 @@ bunx cap sync
 ```typescript
 import { CapacitorFile } from '@capgo/capacitor-file';
 ```
+
+## Quick start
+
+```typescript
+import { CapacitorFile, FileSystemType } from '@capgo/capacitor-file';
+
+const result = await CapacitorFile.requestFileSystem({ type: FileSystemType.TEMPORARY });
+console.log(result);
+```
+
+## Example: resolveLocalFileSystemURL
+
+```typescript
+import { CapacitorFile } from '@capgo/capacitor-file';
+
+const result = await CapacitorFile.resolveLocalFileSystemURL({
+  url: 'file:///data/user/0/com.example.app/files/report.pdf',
+});
+console.log(result);
+```
+
+## Example: getFile
+
+```typescript
+import { CapacitorFile } from '@capgo/capacitor-file';
+
+const result = await CapacitorFile.getFile({ path: 'path/to/file' });
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

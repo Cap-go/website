@@ -32,6 +32,32 @@ bunx cap sync
 import { CapacitorProximity } from '@capgo/capacitor-proximity';
 ```
 
+## Quick start
+
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+
+const { available } = await CapacitorProximity.getStatus();
+if (!available) return;
+
+await CapacitorProximity.enable();
+// start VoIP or voice playback UI
+```
+
+## Example: voice note playback
+
+```typescript
+await CapacitorProximity.enable();
+await playVoiceNote();
+await CapacitorProximity.disable();
+```
+
+## Common pitfalls
+
+- **Always disable**: call `disable()` in `finally` blocks so brightness restores after errors.
+- **Sensor less devices**: check `getStatus()` before showing ear proximity UX.
+- **Web**: proximity APIs are not exposed, keep calls native only.
+
 ## API Overview
 
 ### `enable`

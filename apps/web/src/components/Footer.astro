@@ -71,7 +71,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
       { name: 'Premium Support', href: getRelativeLocaleUrl(Astro.locals.locale, 'premium-support') },
       { name: m.status({}, { locale: Astro.locals.locale }), href: 'https://status.capgo.app/', external: true },
       { name: 'App store publishing costs', href: getRelativeLocaleUrl(Astro.locals.locale, 'cost/cost-to-publish-app-on-app-store') },
-      { name: 'App store refusal stories', href: getRelativeLocaleUrl(Astro.locals.locale, 'app-store-refusal-horror-story') },
+      { name: 'App store refusal stories', href: getRelativeLocaleUrl(Astro.locals.locale, '/app-store-refusal-horror-story/') },
       { name: m.awesome_capacitor({}, { locale: Astro.locals.locale }), href: 'https://github.com/riderx/awesome-capacitor/', external: true },
       { name: m.top_app_by_framework({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'top_app') },
     ],
@@ -198,7 +198,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
     </div>
 
     <div class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-      <p class="font-mono text-xs text-zinc-400">&copy; Capgo {year} · Digital Shift OÜ</p>
+      <p class="font-mono text-xs text-zinc-400">&copy; Capgo {year} · Digital Shift OÜ · CodepushGo, LLC</p>
       <div class="flex flex-wrap items-center gap-4">
         <div class="relative">
           <button

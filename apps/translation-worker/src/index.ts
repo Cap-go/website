@@ -1,6 +1,9 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
+import { isGonePath } from '../../shared/gonePaths'
+import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
+import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -182,6 +185,7 @@ const TRANSLATION_WORD_COUNT_RETRIES = 2
 const TRANSLATION_WORD_COUNT_ATTEMPTS = TRANSLATION_WORD_COUNT_RETRIES + 1
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
+const TRANSLATION_META_HEADER = 'X-Capgo-Translation-Meta'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const EXECUTABLE_SCRIPT_TYPES = new Set(['', 'module', 'text/javascript', 'application/javascript', 'text/ecmascript', 'application/ecmascript'])
 const WORKER_OWNED_SCRIPT_IDS = new Set(['capgo-edge-language-selector-hash'])
@@ -261,30 +265,6 @@ const STATIC_PREFIXES = [
   '/live-update-metrics.json',
   '/builder-metrics.json',
 ]
-const IGNORED_TRANSLATION_QUERY_KEYS = new Set([
-  '_branch_match_id',
-  '_branch_referrer',
-  '_gl',
-  '_hsenc',
-  '_hsmi',
-  'fbclid',
-  'gad_source',
-  'gbraid',
-  'gclid',
-  'igshid',
-  'mc_cid',
-  'mc_eid',
-  'msclkid',
-  'ref',
-  'ref_src',
-  'session',
-  'session_id',
-  'sessionid',
-  'twclid',
-  'wbraid',
-  'yclid',
-])
-
 function escapeHtmlText(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
@@ -360,6 +340,8 @@ function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string)
 }
 
 function rewriteRedirectPath(pathname: string): string {
+  const appleRejectionTarget = resolveAppleRejectionStoriesPathRedirect(pathname)
+  if (appleRejectionTarget) return appleRejectionTarget
   const legacyTarget = resolveLegacyPathRedirect(pathname)
   if (legacyTarget) return legacyTarget
   if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
@@ -511,11 +493,6 @@ function isTranslatedResponseFreshForJob(response: Response, job: TranslationJob
   return !job.sourceHash || readTranslationSourceHash(response) === job.sourceHash
 }
 
-function shouldIgnoreTranslationQueryParam(name: string): boolean {
-  const normalizedName = name.toLowerCase()
-  return normalizedName.startsWith('utm_') || IGNORED_TRANSLATION_QUERY_KEYS.has(normalizedName)
-}
-
 function normalizedTranslationSearchParams(requestUrl: URL): URLSearchParams {
   const entries: [string, string][] = []
   requestUrl.searchParams.forEach((value, name) => {
@@ -644,6 +621,55 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
     'X-Capgo-Translation-Fallback': 'temporary-english-redirect',
   })
   return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
+}
+
+async function temporaryEnglishCrawlerResponse(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+  locale: Locale,
+  isHead = false,
+): Promise<Response> {
+  const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
+  if (isRedirect(originResponse)) {
+    return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  }
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    const localizedHtml = rewriteMetadataForEnglishCanonical(sourceHtml, requestUrl)
+    const headers = new Headers(originResponse.headers)
+    headers.set('Content-Type', 'text/html; charset=utf-8')
+    headers.set('X-Capgo-Translation-Fallback', 'temporary-english-canonical')
+    headers.delete('Content-Length')
+    return withResponseHeaders(
+      new Response(isHead ? null : localizedHtml, {
+        status: originResponse.status,
+        statusText: originResponse.statusText,
+        headers,
+      }),
+      'BYPASS',
+      isHead,
+    )
+  }
+  if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+
+  const sourceHtml = await originResponse.text()
+  const localizedHtml = rewriteMetadataForEnglishCanonical(sourceHtml, requestUrl)
+  const headers = new Headers(originResponse.headers)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.set('X-Capgo-Translation-Fallback', 'temporary-english-canonical')
+  headers.delete('Content-Length')
+  headers.delete('Refresh')
+  headers.delete('Retry-After')
+  return withResponseHeaders(
+    new Response(isHead ? null : localizedHtml, {
+      status: 200,
+      statusText: 'OK',
+      headers,
+    }),
+    'MISS',
+    isHead,
+  )
 }
 
 async function temporaryEnglishRetryResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
@@ -1295,6 +1321,125 @@ function applyAnchoredScriptInsertions(html: string, groups: ScriptInsertionGrou
 function insertSyncedEnglishScripts(html: string, extras: HtmlScript[], englishScripts: HtmlScript[], pairedEnglish: Set<HtmlScript>): string {
   if (extras.length === 0) return html
   return applyAnchoredScriptInsertions(html, groupExtraEnglishScripts(extras, englishScripts, pairedEnglish))
+}
+
+function readDocumentTitle(html: string): string | null {
+  const opening = findNamedTag(html, 0, '<title')
+  if (!opening) return null
+  const closing = findClosingTag(html, opening.end, 'title')
+  if (!closing) return null
+  const title = html.slice(opening.end, closing.index).trim()
+  return title.length > 0 ? title : null
+}
+
+function setDocumentTitle(html: string, title: string): string {
+  const opening = findNamedTag(html, 0, '<title')
+  if (!opening) return html
+  const closing = findClosingTag(html, opening.end, 'title')
+  if (!closing) return html
+  return `${html.slice(0, opening.end)}${title}${html.slice(closing.index)}`
+}
+
+type TranslatableMetaField = {
+  keyName: 'name' | 'property'
+  keyValue: string
+  metaKey: string
+}
+
+function collectTranslatableMetaFields(html: string): TranslatableMetaField[] {
+  const fields: TranslatableMetaField[] = []
+  const seenMetaKeys = new Set<string>()
+  let cursor = 0
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) break
+
+    if (tagNameOf(nextTag.tag) === 'meta') {
+      const metaKey = getMetaKey(nextTag.tag)
+      const content = readAttributeValue(nextTag.tag, 'content')
+      if (metaKey && content && TRANSLATABLE_META.has(metaKey) && !seenMetaKeys.has(metaKey)) {
+        const keyName = readAttributeValue(nextTag.tag, 'name') ? 'name' : 'property'
+        const keyValue = readAttributeValue(nextTag.tag, keyName) ?? metaKey
+        seenMetaKeys.add(metaKey)
+        fields.push({ keyName, keyValue, metaKey })
+      }
+    }
+
+    cursor = nextTag.end
+  }
+
+  return fields
+}
+
+async function syncTranslatableMetaFromEnglish(
+  env: Env,
+  translatedHtml: string,
+  englishHtml: string,
+  locale: Locale,
+  pagePath: string,
+): Promise<{ html: string; changed: boolean }> {
+  const targetLanguage = LANGUAGE_NAMES[locale]
+  const translationCache = new Map<string, string>()
+  let html = translatedHtml
+  let changed = false
+
+  const translateCached = async (text: string): Promise<string> => {
+    const cached = translationCache.get(text)
+    if (cached) return cached
+    const translated = await translateSingleText(env, targetLanguage, text, pagePath)
+    translationCache.set(text, translated)
+    return translated
+  }
+
+  const englishTitle = readDocumentTitle(englishHtml)
+  if (englishTitle) {
+    const translatedTitle = await translateCached(englishTitle)
+    if (translatedTitle && translatedTitle !== readDocumentTitle(html)) {
+      html = setDocumentTitle(html, translatedTitle)
+      changed = true
+    }
+  }
+
+  for (const field of collectTranslatableMetaFields(englishHtml)) {
+    let cursor = 0
+    let sourceContent: string | null = null
+
+    while (cursor < englishHtml.length) {
+      const nextTag = findNextHtmlTag(englishHtml, cursor)
+      if (!nextTag) break
+      if (tagNameOf(nextTag.tag) === 'meta' && getMetaKey(nextTag.tag) === field.metaKey) {
+        sourceContent = readAttributeValue(nextTag.tag, 'content')
+        break
+      }
+      cursor = nextTag.end
+    }
+
+    if (!sourceContent) continue
+
+    const translatedContent = await translateCached(sourceContent)
+    const currentContent = (() => {
+      let metaCursor = 0
+      while (metaCursor < html.length) {
+        const nextTag = findNextHtmlTag(html, metaCursor)
+        if (!nextTag) break
+        if (tagNameOf(nextTag.tag) === 'meta' && getMetaKey(nextTag.tag) === field.metaKey) {
+          return readAttributeValue(nextTag.tag, 'content')
+        }
+        metaCursor = nextTag.end
+      }
+      return null
+    })()
+
+    if (translatedContent && translatedContent !== currentContent) {
+      html = setMetaContent(html, field.keyName, field.keyValue, translatedContent)
+      changed = true
+    }
+  }
+
+  if (changed) html = expandShortMetaDescriptions(html, locale)
+
+  return { html, changed }
 }
 
 function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: string): string {
@@ -2599,7 +2744,7 @@ function findOpeningTag(html: string, tagName: string): { index: number; end: nu
   return findNamedTag(html, 0, `<${tagName}`)
 }
 
-function updateHtmlLang(html: string, locale: Locale): string {
+function updateHtmlLangAttribute(html: string, lang: string): string {
   const htmlTag = findOpeningTag(html, 'html')
   if (!htmlTag) return html
 
@@ -2607,13 +2752,17 @@ function updateHtmlLang(html: string, locale: Locale): string {
   let updatedTag = htmlTag.tag
 
   if (langAttribute) {
-    updatedTag = `${htmlTag.tag.slice(0, langAttribute.valueStart)}${locale}${htmlTag.tag.slice(langAttribute.valueEnd)}`
+    updatedTag = `${htmlTag.tag.slice(0, langAttribute.valueStart)}${lang}${htmlTag.tag.slice(langAttribute.valueEnd)}`
   } else {
     const insertIndex = htmlTag.tag.endsWith('/>') ? htmlTag.tag.length - 2 : htmlTag.tag.length - 1
-    updatedTag = `${htmlTag.tag.slice(0, insertIndex)} lang="${locale}"${htmlTag.tag.slice(insertIndex)}`
+    updatedTag = `${htmlTag.tag.slice(0, insertIndex)} lang="${lang}"${htmlTag.tag.slice(insertIndex)}`
   }
 
   return `${html.slice(0, htmlTag.index)}${updatedTag}${html.slice(htmlTag.end)}`
+}
+
+function updateHtmlLang(html: string, locale: Locale): string {
+  return updateHtmlLangAttribute(html, locale)
 }
 
 function replaceTagAttributeValue(tag: string, attrName: string, value: string): string | null {
@@ -2766,6 +2915,20 @@ function languageSelectorHashScript(): string {
   });
 })();
 </script>`
+}
+
+function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): string {
+  const basePath = stripLocalePrefix(requestUrl.pathname)
+  const englishUrl = localizedAbsoluteUrl(requestUrl, DEFAULT_LOCALE, basePath)
+  let rewritten = updateHtmlLangAttribute(html, DEFAULT_LOCALE)
+
+  rewritten = removeTagsByAttribute(rewritten, 'link', 'rel', 'alternate')
+  rewritten = setLinkRel(rewritten, 'canonical', `<link rel="canonical" href="${escapeHtmlAttribute(englishUrl)}" />`)
+  rewritten = setMetaContent(rewritten, 'property', 'og:url', englishUrl)
+  rewritten = setMetaContent(rewritten, 'property', 'twitter:url', englishUrl)
+  rewritten = setMetaContent(rewritten, 'name', 'twitter:url', englishUrl)
+
+  return rewritten
 }
 
 function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale): string {
@@ -3154,6 +3317,17 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
     const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
     if (englishHtml && knownSourceHash !== (await translationSourceHash(locale, englishHtml))) {
       let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
+      try {
+        const syncedMeta = await syncTranslatableMetaFromEnglish(env, syncedHtml, englishHtml, locale, requestUrl.pathname)
+        syncedHtml = syncedMeta.html
+        if (syncedMeta.changed) responseHeaders.set(TRANSLATION_META_HEADER, 'synced')
+      } catch (error) {
+        console.error('Failed to sync translatable meta from current English source', {
+          pathname: requestUrl.pathname,
+          locale,
+          error: errorMessage(error),
+        })
+      }
       if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
         syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
       }
@@ -3252,7 +3426,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
 
   const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
   if (!enqueued) return temporaryEnglishRedirectResponse(requestUrl, isHead)
-  return await temporaryEnglishRetryResponse(request, env, requestUrl, locale, isHead)
+  return await temporaryEnglishCrawlerResponse(request, env, requestUrl, locale, isHead)
 }
 
 function jsonResponse(body: unknown, status = 200): Response {
@@ -3583,9 +3757,14 @@ export const __translationWorkerTest = {
   isNavGuardSegment,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
+  isCrawlerRequest,
   rewriteMetadataAndLinks,
+  rewriteMetadataForEnglishCanonical,
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,
+  syncTranslatableMetaFromEnglish,
+  readDocumentTitle,
+  collectTranslatableMetaFields,
   translationLengthViolation,
   translationWordCount,
   translationWordCountViolation,
@@ -3608,7 +3787,22 @@ export default {
     }
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
-      return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
+      const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
+      if (isRedirect(originResponse)) {
+        return trackAICrawler(
+          request,
+          withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'),
+          ctx,
+        )
+      }
+      return trackAICrawler(request, originResponse, ctx)
+    }
+
+    if (isGonePath(requestUrl.pathname)) {
+      const source = await loadSourceHtml(request, env, requestUrl, locale)
+      if (source.type === 'response') {
+        return trackAICrawler(request, withResponseHeaders(source.response, 'BYPASS', request.method === 'HEAD'), ctx)
+      }
     }
 
     const englishPath = stripLocalePrefix(requestUrl.pathname)

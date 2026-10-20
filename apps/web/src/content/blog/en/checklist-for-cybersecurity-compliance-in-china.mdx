@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-13T05:14:08.592Z
-updated_at: 2026-06-18T14:21:30.000Z
+updated_at: 2026-10-17T10:55:00.000Z
 head_image: /blog-images/checklist-for-cybersecurity-compliance-in-china.webp
 head_image_alt: "Checklist for Cybersecurity Compliance in China Capgo blog illustration"
 keywords: China cybersecurity, compliance checklist, data protection, personal information law, security regulations
@@ -41,7 +41,13 @@ Stay compliant by securing user data, maintaining proper documentation, and foll
 
 ### China Cybersecurity Law (CSL)
 
-The China Cybersecurity Law (CSL) lays out fundamental requirements for maintaining network security. These include real-name registration, implementing strong security measures, conducting regular assessments, and promptly reporting incidents. Recent amendments, set to take effect in March 2025, introduce stricter penalties for violations to align with evolving data protection standards [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/).
+The China Cybersecurity Law (CSL) lays out fundamental requirements for maintaining network security. These include real-name registration, implementing strong security measures, conducting regular assessments, and promptly reporting incidents. A draft amendment was published for comment in March 2025 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/). The enacted revision was adopted on October 28, 2025, and took effect on January 1, 2026, with stricter penalties for violations.
+
+Chinese data rules can reach apps run from outside China: PIPL applies to processing of personal information of people in mainland China when the purpose is to offer them products or services or to analyze their behavior. Data localization is narrower than a blanket rule. The CSL requires critical information infrastructure operators to store personal information and important data collected in China locally, and PIPL adds a similar requirement for processors that handle personal information above thresholds set by the [Cyberspace Administration of China](https://www.cac.gov.cn/) (CAC). Cross-border transfers can use several routes, such as a CAC security assessment, the standard contract, or certification, and some transfers are exempt, so check which route applies to your data volumes and types.
+
+Network operators, including app developers, should also plan for [multi-factor authentication](https://capgo.app/docs/webapp/mfa/) on sensitive systems, backup and recovery for critical data, standardized user data export, and monitoring or auditing of processing activity.
+
+Depending on what the app does, some assessments may apply before or after launch: a **personal information protection impact assessment** under PIPL when processing sensitive personal information, using automated decision making, or transferring data abroad; a **CAC security assessment** when cross-border transfers cross the regulatory thresholds or involve important data; and a **cybersecurity review** when a critical information infrastructure operator buys network products or services that may affect national security. Most apps will not need all of them.
 
 ### Personal Information Protection Law (PIPL)
 
@@ -157,7 +163,7 @@ To register with the MIIT, developers need to prepare the following:
 -   Documentation of network security assessments
 -   A personal information protection impact assessment
 
-The standard review process typically takes 7–10 business days. However, foreign developers often face extended processing times - up to 2–3 months - due to the requirement of working through a local entity. These steps build upon earlier technical safeguards to ensure both data security and user privacy.
+The standard review process typically takes 7 to 10 business days. However, foreign developers often face extended processing times, up to 2 to 3 months, due to the requirement of working through a local entity. These steps build upon earlier technical safeguards to ensure both data security and user privacy.
 
 ### Security Testing Requirements
 

@@ -26,6 +26,14 @@ hero:
 
 The feature is designed to avoid a high-cardinality notification device table in Capgo Postgres. Postgres stores only low-cardinality control plane data such as app settings, platform credential metadata, campaign drafts, schedules, and aggregate campaign records. Active device state and notification events are append-only Analytics Engine rows.
 
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | APNs via Capgo |
+| Android | Yes | FCM via Capgo |
+| Web | No | Use web push separately |
+
 ## What Capgo Stores
 
 | Data | Where it lives | Why |

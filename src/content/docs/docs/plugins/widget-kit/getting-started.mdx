@@ -10,7 +10,7 @@ sidebar:
 You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
 
 ```bash
-npx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
 ```
 
 Then use the following prompt:
@@ -31,6 +31,50 @@ bunx cap sync
 ```typescript
 import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const result = await CapgoWidgetKit.areActivitiesSupported();
+console.log(result);
+```
+
+## Example: startTemplateActivity
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const result = await CapgoWidgetKit.startTemplateActivity({
+  definition: {
+    id: 'id-123',
+    layouts: {},
+  },
+  state: {},
+});
+console.log(result);
+```
+
+## Example: startTemplateWidget
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const result = await CapgoWidgetKit.startTemplateWidget({
+  definition: {
+    id: 'id-123',
+    layouts: {},
+  },
+  state: {},
+});
+console.log(result);
+```
+
+## Common pitfalls
+
+- **Native sync**: run `bunx cap sync` after plugin upgrades.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## iOS Setup
 
@@ -153,6 +197,8 @@ await CapgoWidgetKit.acknowledgeTemplateEvents({
   activityId: activity.activityId,
 });
 ```
+
+On iOS, widget extension buttons can invoke bundled `LiveActivityIntent` helpers (`CapgoTemplateActionIntent`) that write to the same event log. That is separate from Siri shortcut phrases or the Shortcuts app. See [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/).
 
 ### Update Or End The Activity
 

@@ -1,6 +1,7 @@
 import { expect, test } from 'bun:test'
-import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
+import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect.ts'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
+import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
 import { staticLegacyRedirect } from '../src/worker/index.ts'
 
 function staticLegacyRedirectLocation(url) {
@@ -53,12 +54,47 @@ for (const locale of NON_DEFAULT_LOCALE_CODES) {
   })
 }
 
+const BLOG_LEGACY_REDIRECTS = [
+  ['/blog/uptime-guarantee/', '/sla/'],
+  ['/blog/developer-experience-tools/', '/blog/developer-experience/'],
+  ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
+]
+
 test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
   expect(staticLegacyRedirectLocation('https://capgo.app/build-status/')).toBe('/builder-data/')
   expect(staticLegacyRedirectLocation('https://capgo.app/fr/build-status')).toBe('/fr/builder-data/')
 })
 
+for (const [from, to] of BLOG_LEGACY_REDIRECTS) {
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+    expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+  })
+}
+
 test('/eas/ was never a public competitor page (no redirect)', () => {
   expect(resolveLegacyPathRedirect('/eas/')).toBeNull()
   expect(staticLegacyRedirectLocation('https://capgo.app/eas/')).toBeNull()
+})
+
+const APPLE_REJECTION_STORIES_REDIRECTS = [
+  ['/apple-rejection-stories/', '/app-store-refusal-horror-story/'],
+  ['/apple-rejection-stories/screenshots/foo.webp', '/app-store-refusal-horror-story/screenshots/foo.webp'],
+  ['/apple-rejection-stories/future-story-slug/', '/app-store-refusal-horror-story/future-story-slug/'],
+]
+
+for (const [from, to] of APPLE_REJECTION_STORIES_REDIRECTS) {
+  test(`resolveAppleRejectionStoriesPathRedirect ${from} → ${to}`, () => {
+    expect(resolveAppleRejectionStoriesPathRedirect(from)).toBe(to)
+    expect(resolveAppleRejectionStoriesPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+  })
+
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+    expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+  })
+}
+
+test('resolveLegacyPathRedirect /apple-rejection-stories/ → /app-store-refusal-horror-story/', () => {
+  expect(resolveLegacyPathRedirect('/apple-rejection-stories/')).toBe('/app-store-refusal-horror-story/')
 })

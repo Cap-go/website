@@ -1,4 +1,5 @@
 ---
+import { getCredits, getPlans } from '@/lib/siteData'
 import CommandCode from '@/components/CommandCode.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
@@ -83,17 +84,8 @@ const mcpClients = [
 const title = `${brand} | ${copy('native_build_seo_title')}`
 const description = copy('native_build_builder_description')
 
-let plansAll: Plan[] = []
-let credits: Credit[] = []
-
-try {
-  const [plansResponse, creditsResponse] = await Promise.all([fetch(`${config.public.baseApiUrl}/private/plans`), fetch(`${config.public.baseApiUrl}/private/credits`)])
-
-  plansAll = plansResponse.ok ? await plansResponse.json() : []
-  credits = creditsResponse.ok ? await creditsResponse.json() : []
-} catch (error) {
-  console.warn('Unable to load Capgo Builder pricing data', error)
-}
+const plansAll: Plan[] = getPlans()
+const credits: Credit[] = getCredits<Credit>()
 
 const plans = plansAll.filter((plan) => plan.name !== 'Free')
 const buildCredits = credits.filter((credit) => credit.type === 'build_time').sort((a, b) => a.step_min - b.step_min)
@@ -1323,7 +1315,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
       /* Restrained system: one accent (blue) + neutrals.
-                 Green only for literal success, red only for literal errors. */
+                   Green only for literal success, red only for literal errors. */
       --nb-accent: #60a5fa;
       --nb-accent-strong: #93c5fd;
       --nb-accent-bg: rgba(96, 165, 250, 0.08);
@@ -1653,7 +1645,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-               as lines stream in AND never shows a scrollbar. */
+                 as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }

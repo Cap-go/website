@@ -32,6 +32,29 @@ bunx cap sync
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 ```
 
+## Listen early (cold start)
+
+Register `shareReceived` as soon as your app boots, before routing users into screens that consume shared content. On iOS the native layer retains the event until JavaScript consumes it, which covers shares that arrive while the WebView is still starting.
+
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+const shareListener = await CapacitorShareTarget.addListener('shareReceived', (event) => {
+  routeSharedPayload(event.title, event.texts, event.files);
+});
+
+// When tearing down the handler:
+await shareListener.remove();
+```
+
+Configure `appGroupId` in `capacitor.config` and mirror the same App Group in your Share Extension. See the plugin README on GitHub for extension sample code.
+
+## Common pitfalls
+
+- **Native setup**: intents only work after manifest and Xcode steps in the README.
+- **Cold start**: buffer shares until your router is ready.
+- **File URIs**: copy to app storage before upload, access may expire.
+
 ## API Overview
 
 ### `addListener`
