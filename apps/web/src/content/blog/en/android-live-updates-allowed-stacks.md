@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-19T00:00:00.000Z
-updated_at: 2026-10-19T00:00:00.000Z
+updated_at: 2026-10-20T00:21:49.000Z
 head_image: /playstore.webp
 head_image_alt: "Which stacks can use live updates on Android? Capgo blog illustration"
 keywords: Android live updates, OTA updates, Google Play policy, Capacitor, React Native, Flutter, Kotlin, Cordova, Ionic, code push

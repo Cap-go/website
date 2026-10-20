@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-19T00:00:00.000Z
-updated_at: 2026-10-19T00:00:00.000Z
+updated_at: 2026-10-20T00:21:49.000Z
 head_image: /apple_appstore.webp
 head_image_alt: "Which stacks can use live updates on iOS? Capgo blog illustration"
 keywords: iOS live updates, OTA updates, Capacitor, React Native, Flutter, Swift, Cordova, Ionic, App Store guideline 2.5.2, code push
