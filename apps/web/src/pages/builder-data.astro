@@ -1,6 +1,6 @@
 ---
 import m from '@/copy/messages'
-import DataCat from '@/components/DataCat.astro'
+import DataPageCta from '@/components/DataPageCta.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
@@ -323,7 +323,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       description={m.proof_data_desc({}, { locale: Astro.locals.locale })}
       testimonials={productTestimonials.nativeBuildData}
     />
-    <DataCat />
+    <DataPageCta
+      id="builder-data-final-signup-cta"
+      eyebrow="Build in the cloud"
+      title="Build your iOS and Android apps without a Mac"
+      description="Run native Capacitor builds on Capgo's cloud builders and ship straight to the App Store and Google Play, with the reliability tracked on this page."
+    />
   </main>
 </Layout>
 
