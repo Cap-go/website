@@ -221,3 +221,17 @@ Descriptions:
 
 - Export your v0 code, wrap it with Capacitor, and build store apps in the cloud. (79)
 - No Mac or Xcode. Signed iOS and Android builds in 2–3 min. Then ship live updates. (82)
+
+## ChatGPT ads (OpenAI Ads Manager)
+
+One campaign per builder, one ad group, three ads. Title ≤ 24, copy ≤ 48. Each ad has its own square image (1080×1080) in `apps/web/public/ads/builder-to-mobile/`, named `{builder}-{variant}.png`:
+
+| Variant | Title | Copy | Image |
+|---|---|---|---|
+| `a_store` | {Builder} app to App Store | Turn your {Builder} app into iOS and Android apps | Phone with App Store and Google Play buttons |
+| `b_nomac` | {Builder} to iOS, no Mac | No Mac, no Xcode. Signed builds in the cloud. | Terminal running `build request --platform ios` |
+| `c_updates` | Ship {Builder} to stores | Each {Builder} change ships as a live update | One web change updating three phones |
+
+Image URL: `https://capgo.app/ads/builder-to-mobile/{builder}-{variant}.png`
+
+Tracking URL: `https://capgo.app/solutions/{builder}-to-mobile/?utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=builder_to_mobile_{builder}&utm_content={variant}`
