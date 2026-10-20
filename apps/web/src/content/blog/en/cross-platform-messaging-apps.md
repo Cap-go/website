@@ -72,7 +72,7 @@ WhatsApp works well when you need outbound notifications, support conversations,
 
 The trade-off is control. Business messaging isn't just “turn on chat.” Template approvals, category rules, and policy enforcement shape what you can send and when. Metadata also has different privacy characteristics than message content, so regulated teams still need a real data review.
 
-If you're building mobile products that need to connect messaging workflows across platforms, it's worth following broader [cross-platform app implementation patterns](https://capgo.app/blog/category/capacitor/). Start with the official [WhatsApp website](https://www.whatsapp.com).
+If you're building mobile products that need to connect messaging workflows across platforms, it's worth following broader [cross-platform app implementation patterns](https://capgo.app/blog/). Start with the official [WhatsApp website](https://www.whatsapp.com).
 
 <a id="2-telegram"></a>
 ## 2. Telegram
@@ -120,7 +120,7 @@ Here's where teams run into friction:
 - **Ecosystem depth is narrower:** There are fewer native business integrations and less appetite for turning the platform into an all-purpose operations hub.
 - **User adoption can be the blocker:** Strong privacy doesn't solve the reach problem if customers or external partners don't use it.
 
-For regulated mobile teams, Signal is also a useful reference point when discussing broader [app security practices for cross-platform products](https://capgo.app/blog/category/security/). Start from the official [Signal website](https://signal.org).
+For regulated mobile teams, Signal is also a useful reference point when discussing broader [app security practices for cross-platform products](https://capgo.app/blog/). Start from the official [Signal website](https://signal.org).
 
 <a id="4-discord"></a>
 ## 4. Discord
