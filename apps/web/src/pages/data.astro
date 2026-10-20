@@ -9,6 +9,7 @@ import { emptyLiveUpdateMetrics } from '@/lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_PATH } from '@/lib/publicLiveUpdateMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { formatTrendTooltip, selectTrendRows, sliceSparklineRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
 const metrics = emptyLiveUpdateMetrics()
@@ -127,6 +128,7 @@ const chartRange = chartScale(chartRows)
 const iosChart = chartPoints(chartRows, 'ios', chartRange)
 const androidChart = chartPoints(chartRows, 'android', chartRange)
 const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
+const builderDataHref = getRelativeLocaleUrl(Astro.locals.locale, 'builder-data')
 ---
 
 <Layout content={content}>
@@ -138,6 +140,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
           <p class="data-badge" data-status-badge data-tone={pending ? 'loading' : 'operational'}><span aria-hidden="true"></span> {pending ? 'Loading' : 'Operational'}</p>
         </div>
         <p class="data-summary">Global install success for the last 30 days. Each rate is one app, device, and UTC day, not a live queue, and not a build count.</p>
+        <p class="data-crosslink">Building binaries in the cloud? See <a class="data-inline-link" href={builderDataHref}>Native Build reliability data</a>.</p>
         <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
         <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
         <div class="data-kpis" aria-label="Global reliability">
@@ -428,7 +431,10 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
             trust the numbers.
           </p>
           <p class="data-copy data-copy-secondary">
-            Code meanings follow our <a class="data-inline-link" href="/docs/webapp/logs/">logs docs</a>.
+            Code meanings follow our <a class="data-inline-link" href="/docs/webapp/logs/">logs docs</a>. Cloud build success rates live on <a
+              class="data-inline-link"
+              href={builderDataHref}>Native Build data</a
+            >.
           </p>
         </div>
         <ol class="data-failures" data-failures aria-live="polite" translate="no">
@@ -1151,6 +1157,12 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
     font-size: 1.125rem;
     line-height: 1.6;
     text-wrap: pretty;
+  }
+  .data-crosslink {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
   .data-updated {
     display: flex;
