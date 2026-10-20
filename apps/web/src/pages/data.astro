@@ -1,5 +1,6 @@
 ---
 import m from '@/copy/messages'
+import DataCat from '@/components/DataCat.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
@@ -507,6 +508,7 @@ const chartMid = Number(((chartRange.min + chartRange.max) / 2).toFixed(1))
       description={m.proof_data_desc({}, { locale: Astro.locals.locale })}
       testimonials={productTestimonials.liveUpdateData}
     />
+    <DataCat />
   </main>
 </Layout>
 
