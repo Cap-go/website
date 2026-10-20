@@ -134,7 +134,7 @@ The deciding factors are rarely the pattern diagrams. Team structure, experience
 
 Architecture also shapes delivery economics. If a change can live entirely inside a presentation or data adapter, a team may ship it through a live update channel. If the same change touches native dependencies, payment flows, or security-sensitive code, the safer path is a full native release with the right review and recovery steps. That is the same reason [fixing blocked payment methods for apps](https://marketingforapps.com/blog/meta-ad-account-payment-method-blocked) belongs in the architecture conversation, because release constraints decide which layer can absorb change and which layer cannot.
 
-Data safety belongs in that same conversation. If a pattern forces sensitive records, tokens, or local caches to sit too close to the UI, the team pays for it later in debugging and compliance work. A practical reference for that boundary is [secure database storage guidance for mobile apps](https://capgo.app/blog/secure-database-storage/), which fits naturally with the question of where persistent data should live and how much of it should be exposed to the presentation layer.
+Data safety belongs in that same conversation. If a pattern forces sensitive records, tokens, or local caches to sit too close to the UI, the team pays for it later in debugging and compliance work. A practical reference for that boundary is [encrypting SQLite in Capacitor apps](https://capgo.app/blog/encrypt-sqlite-database-capacitor/), which fits naturally with the question of where persistent data should live and how much of it should be exposed to the presentation layer.
 
 The most defensible choice is the one your team can explain, test, and evolve without re-litigating the same design arguments every sprint. If the team can draw the boundary on a whiteboard and agree on where release risk sits, the pattern is probably doing its job.
 
@@ -154,7 +154,7 @@ That shape keeps network access centralized and avoids inconsistent handling acr
 
 > **Why this matters:** one path for authentication and persistence reduces bugs more than any framework choice, because it cuts duplicate logic at the point where state becomes expensive.
 
-If secure persistence is part of your client, keep it in the architecture plan, not as an afterthought. A practical companion guide is [Capgo's note on secure database storage](https://capgo.app/blog/secure-database-storage/), especially if your app stores tokens, drafts, or cached records locally.
+If secure persistence is part of your client, keep it in the architecture plan, not as an afterthought. A practical companion guide is [Capgo's note on encrypting SQLite in Capacitor apps](https://capgo.app/blog/encrypt-sqlite-database-capacitor/), especially if your app stores tokens, drafts, or cached records locally.
 
 <a id="a-simple-ownership-rule"></a>
 ### A simple ownership rule

@@ -3,12 +3,15 @@ import { isGonePath } from '../../shared/gonePaths.ts'
 
 const GONE_PATHS = [
   '/blog/app-cohort-analysis/',
+  '/blog/app-risk-assessment/',
   '/blog/app-vulnerability-scanning/',
   '/blog/developer-productivity/',
   '/blog/enterprise-app-management/',
   '/blog/how-to-delete-icon/',
   '/blog/native-base-picker/',
   '/blog/react-native-alert/',
+  '/blog/secure-database-storage/',
+  '/blog/transaction-security/',
   '/blog/user-adoption-metrics/',
   '/blog/user-churn-analysis/',
   '/blog/what-is-a-micro-frontend/',
