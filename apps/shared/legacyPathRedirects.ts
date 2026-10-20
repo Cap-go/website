@@ -15,6 +15,7 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/expo': '/alternatives/expo/',
   '/median': '/alternatives/median/',
   '/codepush': '/alternatives/codepush/',
+  '/solutions/lovable-vibecoding-to-mobile': '/solutions/lovable-to-mobile/',
   '/compare/capgo-vs-capawesome': '/alternatives/capawesome/',
   '/compare/capgo-vs-appflow': '/alternatives/ionic-appflow/',
   '/compare/capgo-vs-expo': '/alternatives/expo/',

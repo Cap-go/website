@@ -23,6 +23,8 @@ next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 
 [Lovable](https://lovable.dev/) is an AI app builder that turns prompts into working React apps in minutes. You can ship in the browser fast — but what if you want your app on the App Store and Google Play, sitting on home screens like every other native app?
 
+> **Short version:** the [Lovable to iOS and Android page](/solutions/lovable-to-mobile/) sums up the whole path on one screen: export, Capacitor, cloud builds without a Mac, and live updates.
+
 This guide walks through the full path: export from Lovable, wrap the web app with [Capacitor](https://capacitorjs.com/), build signed iOS and Android binaries in the cloud with **[Capgo Builder](https://capgo.app/native-build/)** (no Mac required), add a real native feature, and push a layout fix over the air with **Capgo Live Updates**.
 
 We use [Cursor](https://cursor.sh/) throughout — its AI can run most of the terminal commands for you if you prefer not to type them manually.
