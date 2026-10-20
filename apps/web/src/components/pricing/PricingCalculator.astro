@@ -1,5 +1,6 @@
 ---
 import m from '@/copy/messages'
+import OfferText from '@/components/OfferText.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import type { Database } from '@/services/supabase.types'
 import type { CreditStep } from '@/lib/pricingCalculator'
@@ -246,7 +247,7 @@ const usageRows = [
               rel="noopener noreferrer"
               class="mt-8 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#111214] focus:outline-none"
             >
-              {m.days_free_trial({}, { locale })}
+              <OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText>
             </a>
           </aside>
         </div>
@@ -271,7 +272,7 @@ const usageRows = [
           tabindex="-1"
           class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-gray-950"
         >
-          {m.days_free_trial({}, { locale })}
+          <OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText>
         </a>
       </div>
     </div>
