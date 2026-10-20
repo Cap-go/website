@@ -1,4 +1,5 @@
 export const appleRejectionStoryTagStyles: Record<string, string> = {
+  '1-2': 'border-pink-400/50 bg-pink-600/15 text-pink-50',
   '1-4-2': 'border-pink-300/50 bg-pink-500/15 text-pink-100',
   '4-3': 'border-rose-300/50 bg-rose-500/15 text-rose-100',
   '4-2-6': 'border-fuchsia-300/50 bg-fuchsia-500/15 text-fuchsia-100',

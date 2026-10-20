@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Equal feedback without ranking people">
+  <title>Equal feedback without ranking people</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="52" cy="48" r="18" fill="#44BCFF" opacity="0.32"/>
+  <rect x="56" y="56" width="88" height="112" rx="12" fill="#111827" stroke="#F472B6" stroke-width="2"/>
+  <circle cx="100" cy="96" r="20" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+  <path d="M76 132 H124 M88 148 H112" stroke="#6B7280" stroke-width="2" stroke-linecap="round"/>
+  <rect x="176" y="56" width="88" height="112" rx="12" fill="#111827" stroke="#F472B6" stroke-width="2"/>
+  <circle cx="220" cy="96" r="20" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+  <path d="M196 132 H244 M208 148 H232" stroke="#6B7280" stroke-width="2" stroke-linecap="round"/>
+  <path d="M148 104 H172" stroke="#44BCFF" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+</svg>
