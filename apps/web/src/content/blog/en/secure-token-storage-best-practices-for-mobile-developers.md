@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-27T04:28:18.512Z
-updated_at: 2026-10-20T12:45:25.888Z
+updated_at: 2026-10-20T12:47:48.000Z
 head_image: /blog-images/secure-token-storage-best-practices-for-mobile-developers.webp
 head_image_alt: 'Secure Token Storage: Best Practices for Mobile Developers'
 keywords: ''
