@@ -90,7 +90,7 @@ Join us here 👇
 
 ### Alternative Comparisons
 - [Alternative to Expo EAS](/blog/alternative-to-expo/) - Comparison with Expo's update service
-- [Alternative to Voltbuilder](/blog/alternative-to-voltbuilder/) - How Capgo compares to Voltbuilder
+- [Voltbuilder alternative](/alternatives/voltbuilder/) - How Capgo compares to Voltbuilder
 - [Migrating from Microsoft App Center](/blog/appcenter-migration/) - Transition guide from App Center
 
 ### CI/CD & Build Automation

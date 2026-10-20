@@ -54,8 +54,6 @@ const content = {
   image: `${config.baseUrl}/capgo_social.png`,
 }
 
-const blogUrl = getRelativeLocaleUrl(locale, 'blog/alternative-to-voltbuilder')
-
 const sources = [
   { label: m.compare_voltbuilder_source_plans({}, { locale }), href: 'https://volt.build/plan/' },
   { label: m.compare_voltbuilder_source_home({}, { locale }), href: 'https://volt.build/' },
@@ -91,12 +89,14 @@ const migration = {
   ],
   links: [
     { label: m.compare_quickstart_cta({}, { locale }), href: getRelativeLocaleUrl(locale, 'docs/getting-started/quickstart/') },
-    { label: m.voltbuilder_alt_blog_cta({}, { locale }), href: blogUrl },
+    {
+      label: m.solutions_builder_to_mobile_link_github_actions({}, { locale }),
+      href: getRelativeLocaleUrl(locale, 'docs/live-updates/integrations/github-actions/'),
+    },
   ],
 }
 
 const related = [
-  { label: m.voltbuilder_alt_blog_cta({}, { locale }), href: blogUrl },
   { label: m.live_update({}, { locale }), href: getRelativeLocaleUrl(locale, 'live-update') },
   { label: m.native_build({}, { locale }), href: getRelativeLocaleUrl(locale, 'native-build') },
   { label: m.alternatives({}, { locale }), href: getRelativeLocaleUrl(locale, 'alternatives') },
