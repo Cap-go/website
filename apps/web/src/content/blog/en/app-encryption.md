@@ -17,7 +17,7 @@ next_blog: ''
 ---
 A healthcare startup can spend months designing a secure mobile workflow, then discover that a jailbroken tester's phone exposed patient records through screenshots and local caches. At the same time, a debug build of the team's Electron administration panel might ship with an API key embedded in its bundle. Both incidents involve encryption, but neither is solved by adding one encryption library.
 
-**App encryption is a system of decisions.** Teams must decide how data is protected while stored, how it moves between systems, where keys live, what an attacker can learn from the application package, how the runtime responds to tampering, and how signed updates preserve those guarantees. A useful starting point is an app risk assessment that maps sensitive data, trust boundaries, client capabilities, and likely abuse paths.
+**App encryption is a system of decisions.** Teams must decide how data is protected while stored, how it moves between systems, where keys live, what an attacker can learn from the application package, how the runtime responds to tampering, and how signed updates preserve those guarantees. A useful starting point is an [OTA security checklist for Capacitor apps](https://capgo.app/blog/ota-security-checklist-for-capacitor-apps/) that maps sensitive data, trust boundaries, client capabilities, and likely abuse paths.
 
 Mobile and cross-platform applications face an unusually exposed environment. Devices leave the office, builds can be copied or sideloaded, local files may be inspected, and reverse-engineering tools are widely available. The sections below build the model step by step, from storage and transport to platform key protection, client-side secrecy, compliance, and release operations.
 

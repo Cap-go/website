@@ -55,6 +55,7 @@ for (const locale of NON_DEFAULT_LOCALE_CODES) {
 }
 
 const BLOG_LEGACY_REDIRECTS = [
+  ['/blog/app-risk-assessment/', '/blog/ota-security-checklist-for-capacitor-apps/'],
   ['/blog/uptime-guarantee/', '/sla/'],
   ['/blog/developer-experience-tools/', '/blog/developer-experience/'],
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],

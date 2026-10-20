@@ -159,7 +159,7 @@ Focus on the risks that matter first:
 - **Version incompatibility:** New API assumptions that break older app versions still active in the field.
 - **Third-party fragility:** Auth providers, payment SDKs, push vendors, and analytics tools can degrade your app without touching your code.
 
-For enterprise teams, a formal app risk assessment process helps force these conversations before incident review does. The point isn't bureaucracy. It's making hidden assumptions visible.
+For enterprise teams, a formal [OTA security checklist for Capacitor apps](https://capgo.app/blog/ota-security-checklist-for-capacitor-apps/) helps force these conversations before incident review does. The point isn't bureaucracy. It's making hidden assumptions visible.
 
 > If you can't disable a bad release in minutes, your deployment process is carrying more risk than your codebase.
 

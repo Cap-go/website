@@ -19,7 +19,6 @@ import { splitLocalePath } from './localizedLegacyPathRedirect'
  */
 const GONE_PATHS = new Set<string>([
   '/blog/app-cohort-analysis',
-  '/blog/app-risk-assessment',
   '/blog/app-vulnerability-scanning',
   '/blog/developer-productivity',
   '/blog/enterprise-app-management',
