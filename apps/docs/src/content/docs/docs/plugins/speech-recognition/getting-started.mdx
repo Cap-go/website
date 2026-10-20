@@ -42,7 +42,7 @@ import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 await SpeechRecognition.requestPermissions();
 
 const partialListener = await SpeechRecognition.addListener('partialResults', ({ matches }) => {
-  setTranscript(matches[0] ?? '');
+  setTranscript(matches?.[0] ?? '');
 });
 
 await SpeechRecognition.start({ language: 'en-US', partialResults: true });

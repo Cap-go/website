@@ -40,8 +40,8 @@ Connect with TLS, enable automatic reconnect, then subscribe to the telemetry to
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 
 await MqttBridge.connect({
-  serverURI: 'wss://broker.example.com',
-  port: 443,
+  serverURI: 'ssl://broker.example.com',
+  port: 8883,
   clientId: 'cap-app-1',
   username: 'device-user',
   password: 'device-secret',
