@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "iOS-only plugin to query and control the audio session output and listen to route changes and interruptions."
+  tagline: "Configure iOS audio routing for playback and VoIP."
   actions:
     - text: Get started
       link: /docs/plugins/audiosession/getting-started/
@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-iOS-only plugin to query and control the audio session output and listen to route changes and interruptions.
+Read active outputs and override speaker routes before other audio plugins fight over AVAudioSession.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | AVAudioSession routing |
+| Android | No | No audio routing; `currentOutputs()` and `overrideOutput()` are iOS-only |
+| Web | No | Browser policies differ |
 
 ## Core Capabilities
 

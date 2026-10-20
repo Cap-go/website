@@ -32,6 +32,20 @@ npx cap sync
 import { toast } from '@capgo/capacitor-pretty-toast';
 ```
 
+## Quick start
+
+```typescript
+import { toast } from '@capgo/capacitor-pretty-toast';
+
+toast.success('Saved', { message: 'Draft synced.' });
+```
+
+## Common pitfalls
+
+- **Loading ids**: keep ids when calling `toast.update()`.
+- **Debouncing**: rapid errors should collapse into one toast.
+- **Branding**: tune icons and colors per platform.
+
 ## Show A Toast
 
 ```ts

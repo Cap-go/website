@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-mqtt
-bunx cap sync
+npm install @capgo/capacitor-mqtt
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,33 @@ bunx cap sync
 ```typescript
 import { MqttBridge } from '@capgo/capacitor-mqtt';
 ```
+
+## Quick start
+
+Connect with TLS, enable automatic reconnect, then subscribe to the telemetry topic your backend publishes.
+
+```typescript
+import { MqttBridge } from '@capgo/capacitor-mqtt';
+
+await MqttBridge.connect({
+  serverURI: 'ssl://broker.example.com',
+  port: 8883,
+  clientId: 'cap-app-1',
+  username: 'device-user',
+  password: 'device-secret',
+  setCleanSession: true,
+  connectionTimeout: 30,
+  keepAliveInterval: 60,
+  setAutomaticReconnect: true,
+});
+await MqttBridge.subscribe({ topic: 'devices/telemetry', qos: 1 });
+```
+
+## Common pitfalls
+
+- **TLS**: match `serverURI` scheme with broker requirements.
+- **Background**: reconnect after Android suspends the WebView.
+- **QoS**: higher QoS costs battery on cellular links.
 
 ## API Overview
 

@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Expo-style named background tasks for Capacitor apps, backed by Android WorkManager and iOS BGTaskScheduler."
+  tagline: "Periodic background fetch tasks on iOS and Android."
   actions:
     - text: Get started
       link: /docs/plugins/background-task/getting-started/
@@ -22,9 +22,15 @@ hero:
 
 ## Overview
 
-Use `@capgo/capacitor-background-task` when your Capacitor app needs periodic background fetch work such as sync, cache refreshes, inbox polling, analytics flushing, or lightweight maintenance jobs.
+Define module scope tasks, schedule intervals, and return results the OS understands for sync and cache warming.
 
-The plugin follows the practical feature set of Expo BackgroundTask with named tasks, persistent registration, status checks, unregistering, a development trigger, and iOS expiration events.
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | BGTaskScheduler identifiers in Info.plist |
+| Android | Yes | WorkManager style jobs |
+| Web | No | Use service workers |
 
 ## Core Capabilities
 

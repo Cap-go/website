@@ -22,9 +22,35 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-android-sms-retriever
-bunx cap sync android
+npm install @capgo/capacitor-android-sms-retriever
+npx cap sync android
 ```
+
+## Quick start
+
+Listen for the one-time SMS, extract the OTP, then start the retriever before the user requests a code.
+
+```typescript
+import { AndroidSmsRetriever } from '@capgo/capacitor-android-sms-retriever';
+
+const smsListener = await AndroidSmsRetriever.addListener('smsReceived', ({ message }) => {
+  const code = message.match(/\b\d{4,8}\b/)?.[0];
+  if (code) submitCode(code);
+  // The SMS also ends with your 11-character app hash; validate it separately from the OTP.
+});
+
+await AndroidSmsRetriever.startWatch();
+
+// When the flow completes:
+await smsListener.remove();
+await AndroidSmsRetriever.stopWatch();
+```
+
+## Common pitfalls
+
+- **Hash**: SMS templates must include the app retriever hash.
+- **Timeout**: restart watch when users request a new code.
+- **Play services**: required on device.
 
 ## Import
 
