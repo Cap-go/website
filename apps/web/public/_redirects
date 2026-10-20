@@ -326,6 +326,26 @@
 /zh/blog/capgo-vs-capawesome-comparing-ota-update-plugins /zh/alternatives/capawesome/ 301
 /zh/blog/capgo-vs-capawesome-comparing-ota-update-plugins/ /zh/alternatives/capawesome/ 301
 
+# Voltbuilder blog aliases (with/without trailing slash + locales)
+/blog/alternative-to-voltbuilder /alternatives/voltbuilder/ 301
+/blog/alternative-to-voltbuilder/ /alternatives/voltbuilder/ 301
+/de/blog/alternative-to-voltbuilder /de/alternatives/voltbuilder/ 301
+/de/blog/alternative-to-voltbuilder/ /de/alternatives/voltbuilder/ 301
+/es/blog/alternative-to-voltbuilder /es/alternatives/voltbuilder/ 301
+/es/blog/alternative-to-voltbuilder/ /es/alternatives/voltbuilder/ 301
+/fr/blog/alternative-to-voltbuilder /fr/alternatives/voltbuilder/ 301
+/fr/blog/alternative-to-voltbuilder/ /fr/alternatives/voltbuilder/ 301
+/id/blog/alternative-to-voltbuilder /id/alternatives/voltbuilder/ 301
+/id/blog/alternative-to-voltbuilder/ /id/alternatives/voltbuilder/ 301
+/it/blog/alternative-to-voltbuilder /it/alternatives/voltbuilder/ 301
+/it/blog/alternative-to-voltbuilder/ /it/alternatives/voltbuilder/ 301
+/ja/blog/alternative-to-voltbuilder /ja/alternatives/voltbuilder/ 301
+/ja/blog/alternative-to-voltbuilder/ /ja/alternatives/voltbuilder/ 301
+/ko/blog/alternative-to-voltbuilder /ko/alternatives/voltbuilder/ 301
+/ko/blog/alternative-to-voltbuilder/ /ko/alternatives/voltbuilder/ 301
+/zh/blog/alternative-to-voltbuilder /zh/alternatives/voltbuilder/ 301
+/zh/blog/alternative-to-voltbuilder/ /zh/alternatives/voltbuilder/ 301
+
 # Bulk legacy blog slug renames live in apps/shared/legacyPathRedirects.ts
 # (web + translation workers). Do not re-add them here: CF _redirects has a 100 dynamic-rule
 # cap, and any splat earlier in this file makes later rules count as dynamic.

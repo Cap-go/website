@@ -25,6 +25,9 @@ const REDIRECTS = [
   ['/compare/capgo-vs-expo/', '/alternatives/expo/'],
   ['/compare/capgo-vs-codepush/', '/alternatives/codepush/'],
   ['/best-ionic-live-update-service/', '/best/capacitor-live-updates/'],
+  ['/blog/alternative-to-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternativa-a-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternative-a-voltbuilder/', '/alternatives/voltbuilder/'],
 ]
 
 for (const [from, to] of REDIRECTS) {

@@ -61,6 +61,12 @@ const BLOG_LEGACY_REDIRECTS = [
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
 ]
 
+const VOLTBUILDER_BLOG_REDIRECTS = [
+  ['/blog/alternative-to-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternativa-a-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternative-a-voltbuilder/', '/alternatives/voltbuilder/'],
+]
+
 test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
   expect(staticLegacyRedirectLocation('https://capgo.app/build-status/')).toBe('/builder-data/')
   expect(staticLegacyRedirectLocation('https://capgo.app/fr/build-status')).toBe('/fr/builder-data/')
@@ -70,6 +76,19 @@ for (const [from, to] of BLOG_LEGACY_REDIRECTS) {
   test(`staticLegacyRedirect ${from} → ${to}`, () => {
     expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
     expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+  })
+}
+
+for (const [from, to] of VOLTBUILDER_BLOG_REDIRECTS) {
+  test(`resolveLegacyPathRedirect ${from} → ${to}`, () => {
+    expect(resolveLegacyPathRedirect(from)).toBe(to)
+    expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+  })
+
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+    expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+    expect(staticLegacyRedirectLocation(`https://capgo.app/es${from.replace(/\/$/, '')}`)).toBe(`/es${to}`)
   })
 }
 

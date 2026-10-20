@@ -1158,7 +1158,8 @@ const messages = {
   compare_voltbuilder_frameworks: 'Cordova and Capacitor projects.',
   compare_voltbuilder_lead:
     'For teams that turn a web project into store-ready Android and iOS apps. VoltBuilder builds the binaries; Capgo builds them too and keeps shipping web changes after the app is live.',
-  compare_voltbuilder_migration_lead: 'You can keep VoltBuilder for builds and add Capgo live updates, or move builds to Capgo Builder as well.',
+  compare_voltbuilder_migration_lead:
+    'You can keep VoltBuilder for builds and add Capgo live updates, or move builds to Capgo Builder as well. VoltBuilder is not a full CI pipeline; many teams pair Capgo with GitHub Actions for test and release automation.',
   compare_voltbuilder_migration_title: 'Add Capgo to a VoltBuilder project',
   compare_voltbuilder_native_builds: 'Upload a zip and get store-ready Android and iOS builds, with upload to Google Play and App Store Connect. No Mac required.',
   compare_voltbuilder_open_source: 'Hosted build service. VoltBuilder deletes passwords, certificates, and source code after each build.',
@@ -6846,9 +6847,9 @@ const messages = {
   codepush_alt_migrate_title: 'Leave CodePush / App Center',
   codepush_alt_migrate_p1:
     'Export your release habits, remove CodePush SDK wiring, and point Capacitor builds at Capgo channels. Our migration hub links App Center blog posts and step-by-step docs.',
-  voltbuilder_alt_title: 'Voltbuilder Alternative | Capgo Live Updates',
+  voltbuilder_alt_title: 'Voltbuilder Alternative | Capgo vs VoltBuilder',
   voltbuilder_alt_meta_description:
-    'Voltbuilder alternative for teams that need Cordova or Capacitor cloud builds plus OTA live updates, channels, rollback, and device logs from Capgo.',
+    'Voltbuilder alternative: compare Capgo and VoltBuilder for Cordova and Capacitor cloud builds, OTA live updates, channels, rollback, and device logs.',
   voltbuilder_alt_hero_title: 'Voltbuilder alternative for Capacitor live updates',
   voltbuilder_alt_blog_cta: 'Read the Voltbuilder alternative blog post',
   review_appflow_title: 'Ionic Appflow review for Capacitor teams',
