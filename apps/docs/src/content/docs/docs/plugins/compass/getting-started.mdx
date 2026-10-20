@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-compass
-bunx cap sync
+npm install @capgo/capacitor-compass
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,48 @@ bunx cap sync
 ```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
 ```
+
+## Quick start
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+const { value } = await CapgoCompass.getCurrentHeading();
+console.log('Compass heading:', value, 'degrees');
+```
+
+## Example: startListening
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// With default throttling (100ms interval, 2° minimum change)
+await CapgoCompass.startListening();
+
+// With custom throttling for high-frequency updates
+await CapgoCompass.startListening({
+  minInterval: 50,      // 50ms between events
+  minHeadingChange: 1.0 // 1° minimum change
+});
+
+CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+```
+
+## Example: stopListening
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+await CapgoCompass.stopListening();
+```
+
+## Common pitfalls
+
+- **Permissions**: call `checkPermissions()` then `requestPermissions()` when needed.
+- **Listeners**: remove handles when screens unmount.
+- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
 
 ## API Overview
 

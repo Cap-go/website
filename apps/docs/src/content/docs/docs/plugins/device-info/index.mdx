@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Device metrics and onboard sensor snapshots for dashboards, diagnostics, and runtime monitoring."
+  tagline: "Read CPU, memory, GPU, storage, thermal state, and onboard sensor metrics from Capacitor apps"
   actions:
     - text: Get started
       link: /docs/plugins/device-info/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-device-info` reads device health and hardware metrics from Capacitor apps. It can return one snapshot on demand or stream periodic updates through `deviceInfoUpdate` listeners for charts and operational dashboards.
+Read CPU, memory, GPU, storage, thermal state, and onboard sensor metrics from Capacitor apps
+
+Start with `getInfo()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | Partial | See getting started |
 
 ## Compatibility
 

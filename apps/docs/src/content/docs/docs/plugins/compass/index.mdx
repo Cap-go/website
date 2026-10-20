@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor Compass Plugin interface for reading device compass heading."
+  tagline: "Read device compass heading in degrees with continuous updates and permission handling"
   actions:
     - text: Get started
       link: /docs/plugins/compass/getting-started/
@@ -22,7 +22,17 @@ hero:
 
 ## Overview
 
-Capacitor Compass Plugin interface for reading device compass heading.
+Read device compass heading in degrees with continuous updates and permission handling
+
+Start with `getCurrentHeading()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 
