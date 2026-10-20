@@ -1,19 +1,31 @@
 ---
-import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORAGE_KEY } from '@/lib/attribution'
+import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORAGE_KEY, DIRECT_OFFER, OFFER_QUERY_PARAM } from '@/lib/attribution'
 ---
 
-<!-- First-touch capture runs synchronously so attribution survives fast navigation to /register. -->
+<!--
+  First-touch capture runs synchronously so attribution survives fast navigation to /register.
+  It also flags paid-ads visitors (`?offer=direct`, persisted first touch) with data-offer="direct" on the root element
+  before first paint, so data-trial-copy / data-direct-copy swap without a flash (see global.css).
+-->
 <script
   is:inline
   define:vars={{
     cookieName: ATTRIBUTION_COOKIE_NAME,
     storageKey: ATTRIBUTION_STORAGE_KEY,
     maxAge: ATTRIBUTION_MAX_AGE_SECONDS,
+    offerParam: OFFER_QUERY_PARAM,
+    directOffer: DIRECT_OFFER,
   }}
 >
   ;(function () {
     try {
-      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign']
+      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign', 'offer']
+
+      function markDirectOffer() {
+        try {
+          document.documentElement.setAttribute('data-offer', directOffer)
+        } catch (e6) {}
+      }
 
       function readStoredJson() {
         var cookieData = null
@@ -39,7 +51,9 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
         if (!source || typeof source !== 'object') return out
         for (var ti = 0; ti < tracked.length; ti++) {
           var tk = tracked[ti]
-          if (source[tk]) out[tk] = source[tk]
+          if (!source[tk]) continue
+          if (tk === 'offer' && source[tk] !== directOffer) continue
+          out[tk] = source[tk]
         }
         return out
       }
@@ -68,6 +82,8 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (!path) path = '/'
 
       var params = new URLSearchParams(location.search)
+      var urlOffer = (params.get(offerParam) || '').trim() === directOffer
+      if (urlOffer) markDirectOffer()
       var incoming = {
         first_touch_type: classifyTouchType(path),
         first_touch_path: path,
@@ -80,6 +96,7 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (utmSource) incoming.utm_source = utmSource
       if (utmMedium) incoming.utm_medium = utmMedium
       if (utmCampaign) incoming.utm_campaign = utmCampaign
+      if (urlOffer) incoming.offer = directOffer
 
       var stores = readStoredJson()
       var cookieFields = pickTracked(stores && stores.cookie)
@@ -121,8 +138,10 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (!data.utm_source && incoming.utm_source) data.utm_source = incoming.utm_source
       if (!data.utm_medium && incoming.utm_medium) data.utm_medium = incoming.utm_medium
       if (!data.utm_campaign && incoming.utm_campaign) data.utm_campaign = incoming.utm_campaign
+      if (!data.offer && incoming.offer) data.offer = incoming.offer
+      if (data.offer === directOffer) markDirectOffer()
 
-      if (!data.first_touch_type && !data.first_touch_path && !data.ref && !data.utm_source && !data.utm_medium && !data.utm_campaign) {
+      if (!data.first_touch_type && !data.first_touch_path && !data.ref && !data.utm_source && !data.utm_medium && !data.utm_campaign && !data.offer) {
         return
       }
 

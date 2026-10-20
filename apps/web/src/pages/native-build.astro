@@ -12,6 +12,7 @@ import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
+import OfferText from '@/components/OfferText.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import { getProductScreens } from '@/config/productScreens'
 
@@ -182,6 +183,8 @@ const comparisonRows = [
   {
     label: copy('native_build_v2_comp_try_l'),
     hook: copy('native_build_v2_comp_try_capgo_hook'),
+    // Paid-ads visitors (offer=direct) have no free trial: show the money-back guarantee instead.
+    hookDirect: copy('native_build_v2_comp_try_capgo_hook_direct'),
     capgo: copy('native_build_v2_comp_try_capgo'),
     diy: copy('native_build_v2_comp_try_diy'),
     capa: copy('native_build_v2_comp_try_capa'),
@@ -1033,7 +1036,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                 <tr>
                   <td class="label">{row.label}</td>
                   <td class="us">
-                    <span class="hook">{row.hook}</span> {row.capgo}
+                    <span class="hook">{row.hookDirect ? <OfferText direct={row.hookDirect}>{row.hook}</OfferText> : row.hook}</span> {row.capgo}
                   </td>
                   <td>{row.diy}</td>
                   <td>{row.capa}</td>
@@ -1164,7 +1167,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
           <div class="section-head">
             <div class="eyebrow">{copy('native_build_builder_pricing_eyebrow')}</div>
             <h2 class="h2-section">{copy('native_build_builder_pricing_title')}</h2>
-            <p class="lead">{copy('native_build_builder_pricing_text')}</p>
+            <p class="lead">
+              <OfferText direct={copy('native_build_builder_pricing_text_direct')}>{copy('native_build_builder_pricing_text')}</OfferText>
+            </p>
           </div>
 
           <div class="pricing-grid">
@@ -1181,7 +1186,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                 <p class="tier-billing">{yearlyBilling(plan)}</p>
                 <p class="tier-billing">{monthlyPrice(plan)}</p>
                 <a class:list={['btn btn-md', plan.name === 'Maker' ? 'btn-primary' : 'btn-ghost']} href={registerUrl}>
-                  {copy('native_build_builder_plan_trial')}
+                  <OfferText direct={copy('direct_offer_cta_get_started')}>{copy('native_build_builder_plan_trial')}</OfferText>
                 </a>
                 <ul>
                   <li>{buildTimeDisplay(plan.build_time_unit, plan.name)}</li>
@@ -1283,11 +1288,11 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         <p class="tagline">{copy('native_build_v2_cta_tagline')}</p>
         <SignupCta id="native-build-final-signup-cta" humanSupport />
         <div class="hero-meta hero-meta--cta">
-          <span>
+          <span data-trial-copy>
             <span class="check">✓</span> {copy('native_build_v2_cta_meta1')}
           </span>
           <span>
-            <span class="check">✓</span> {copy('native_build_v2_cta_meta2')}
+            <span class="check">✓</span> <OfferText direct={copy('direct_offer_guarantee')}>{copy('native_build_v2_cta_meta2')}</OfferText>
           </span>
           <span>
             <span class="check">✓</span> {copy('native_build_v2_cta_meta3')}
@@ -1315,7 +1320,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       --cap-blue-600: #2563eb;
       --cap-blue-700: #1d4ed8;
       /* Restrained system: one accent (blue) + neutrals.
-                   Green only for literal success, red only for literal errors. */
+                     Green only for literal success, red only for literal errors. */
       --nb-accent: #60a5fa;
       --nb-accent-strong: #93c5fd;
       --nb-accent-bg: rgba(96, 165, 250, 0.08);
@@ -1645,7 +1650,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       color: var(--terminal-fg);
       white-space: pre-wrap;
       /* Fixed height, tall enough for the full build log, so it never grows/jumps
-                 as lines stream in AND never shows a scrollbar. */
+                   as lines stream in AND never shows a scrollbar. */
       height: 560px;
       overflow: hidden;
     }

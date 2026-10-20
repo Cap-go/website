@@ -2,6 +2,12 @@ import { splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 
 export type FirstTouchType = 'blog' | 'docs' | 'plugin' | 'pricing' | 'home' | 'solutions' | 'console' | 'cli' | 'other'
 
+/** Paid-ads offer: visitors landing with `?offer=direct` get a pay-first plan (no free trial). */
+export type CapgoOffer = 'direct'
+
+export const OFFER_QUERY_PARAM = 'offer'
+export const DIRECT_OFFER: CapgoOffer = 'direct'
+
 export type CapgoAttribution = {
   ref?: string
   utm_source?: string
@@ -9,19 +15,25 @@ export type CapgoAttribution = {
   utm_campaign?: string
   first_touch_type?: FirstTouchType
   first_touch_path?: string
+  offer?: CapgoOffer
 }
 
 export const ATTRIBUTION_COOKIE_NAME = 'capgo_attribution'
 export const ATTRIBUTION_STORAGE_KEY = 'capgo_attribution'
 export const ATTRIBUTION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60
 
-const TRACKED_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'first_touch_type', 'first_touch_path'] as const
+const TRACKED_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'first_touch_type', 'first_touch_path', 'offer'] as const
+
+/** Only `direct` is a recognised offer; any other value is ignored. */
+export function normalizeOffer(value: unknown): CapgoOffer | undefined {
+  return typeof value === 'string' && value.trim() === DIRECT_OFFER ? DIRECT_OFFER : undefined
+}
 
 const QUERY_PARAM_KEYS = [...TRACKED_KEYS, 'signup_source'] as const
 
 export function hasAttributionValues(data: CapgoAttribution | null | undefined): boolean {
   if (!data) return false
-  return Boolean(data.ref || data.utm_source || data.utm_medium || data.utm_campaign || data.first_touch_type || data.first_touch_path)
+  return Boolean(data.ref || data.utm_source || data.utm_medium || data.utm_campaign || data.first_touch_type || data.first_touch_path || data.offer)
 }
 
 export function parseAttributionFromSearch(search: string): CapgoAttribution {
@@ -34,6 +46,8 @@ export function parseAttributionFromSearch(search: string): CapgoAttribution {
       data[key] = value
     }
   }
+  const offer = normalizeOffer(params.get(OFFER_QUERY_PARAM))
+  if (offer) data.offer = offer
   return data
 }
 
@@ -145,6 +159,7 @@ export function toPostHogAttributionProps(data: CapgoAttribution): Record<string
   if (data.first_touch_path) props.first_touch_path = data.first_touch_path
   const signupSource = deriveSignupSource(data)
   if (signupSource) props.signup_source = signupSource
+  if (data.offer) props.signup_offer = data.offer
   return props
 }
 
@@ -162,6 +177,9 @@ export function deserializeAttribution(raw: string | null | undefined): CapgoAtt
       if (typeof value === 'string' && value.trim()) {
         if (key === 'first_touch_type') {
           data.first_touch_type = value.trim() as FirstTouchType
+        } else if (key === 'offer') {
+          const offer = normalizeOffer(value)
+          if (offer) data.offer = offer
         } else {
           data[key] = value.trim()
         }
@@ -181,6 +199,9 @@ export function pickTrackedAttributionFields(record: Record<string, unknown> | C
     if (typeof value === 'string' && value.trim()) {
       if (key === 'first_touch_type') {
         data.first_touch_type = value.trim() as FirstTouchType
+      } else if (key === 'offer') {
+        const offer = normalizeOffer(value)
+        if (offer) data.offer = offer
       } else {
         data[key] = value.trim()
       }
@@ -224,6 +245,10 @@ export function mergeAttribution(existing: CapgoAttribution | null | undefined, 
   const merged: CapgoAttribution = { ...base, ...resolveFirstTouchPair(base, incoming) }
   for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign'] as const) {
     if (!merged[key] && incoming[key]) merged[key] = incoming[key]
+  }
+  if (!merged.offer) {
+    const offer = normalizeOffer(incoming.offer)
+    if (offer) merged.offer = offer
   }
   return reconcileLegacyFirstTouchPair(merged)
 }
@@ -388,6 +413,7 @@ export function getSignupUserMetadataForRegistration(): Record<string, string> {
   if (props.first_utm_source) metadata.utm_source = props.first_utm_source
   if (props.first_utm_medium) metadata.utm_medium = props.first_utm_medium
   if (props.first_utm_campaign) metadata.utm_campaign = props.first_utm_campaign
+  if (merged.offer) metadata.offer = merged.offer
   return metadata
 }
 
@@ -409,6 +435,7 @@ export function getSignupAttributionForEvents(): Record<string, string> {
   if (props.signup_source) events.signup_source = props.signup_source
   if (props.first_touch_type) events.first_touch_type = props.first_touch_type
   if (props.first_touch_path) events.first_touch_path = props.first_touch_path
+  if (props.signup_offer) events.signup_offer = props.signup_offer
   return events
 }
 
@@ -447,6 +474,10 @@ export function startAttributionLinkDecoration(): void {
 
   const observer = new MutationObserver(() => run())
   observer.observe(document.documentElement, { childList: true, subtree: true })
+}
+
+export function hasDirectOffer(data: CapgoAttribution | null | undefined): boolean {
+  return data?.offer === DIRECT_OFFER
 }
 
 export const __attributionQueryParamKeys = QUERY_PARAM_KEYS

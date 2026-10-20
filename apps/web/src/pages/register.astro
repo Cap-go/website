@@ -56,8 +56,19 @@ const content = {
             </a>
           </p>
           <p class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-300">
-            <span class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
-            <span class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">{m.no_credit_card_required({}, { locale: Astro.locals.locale })}</span>
+            <span data-trial-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.days_free_trial({}, { locale: Astro.locals.locale })}
+            </span>
+            <span data-trial-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.no_credit_card_required({}, { locale: Astro.locals.locale })}
+            </span>
+            <!-- Paid-ads visitors (offer=direct, persisted from the landing page) pay first, backed by a money-back guarantee. -->
+            <span data-direct-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.direct_offer_guarantee({}, { locale: Astro.locals.locale })}
+            </span>
+            <span data-direct-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}
+            </span>
           </p>
 
           <form id="registerForm" class="mt-6 space-y-4">
