@@ -6359,7 +6359,7 @@ const messages = {
     'Connect the Capgo hosted MCP server to your agent and ask it to publish. It sets the listing, icon and keys, starts the build and follows the logs with the same tools the console uses.',
   website_live_publish_mcp_title: 'From your AI agent, over MCP',
   website_live_publish_own_body:
-    'Keep it. Add @capgo/capacitor-updater and turn on websiteMode. notifyAppReady() runs automatically once the page shows content. Ship the app with your own build, and Web2App updates it from your site the same way.',
+    'Keep it. Add @capgo/capacitor-updater, turn on autoUpdate, and call notifyAppReady() once your app has rendered. Ship the app with your own build, and Web2App updates it from your site the same way.',
   website_live_publish_own_title: 'Already have a Capacitor project?',
   website_live_publish_title: 'Publish to the stores from the console or from your AI agent',
   website_live_publish_ui_body:

@@ -83,7 +83,11 @@ const highlights: MessageKey[] = ['website_live_pricing_unlimited_updates', 'web
       if (monthlyNote) monthlyNote.style.display = isYearly ? 'none' : ''
       if (yearlyDiscount) yearlyDiscount.style.display = isYearly ? '' : 'none'
     }
-    document.getElementById('yearly')?.addEventListener('change', () => update(true))
-    document.getElementById('monthly')?.addEventListener('change', () => update(false))
+    const yearlyRadio = document.getElementById('yearly')
+    const monthlyRadio = document.getElementById('monthly')
+    yearlyRadio?.addEventListener('change', () => update(true))
+    monthlyRadio?.addEventListener('change', () => update(false))
+    if (monthlyRadio?.checked) update(false)
+    else if (yearlyRadio?.checked) update(true)
   })
 </script>

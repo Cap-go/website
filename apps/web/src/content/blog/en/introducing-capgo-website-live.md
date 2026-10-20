@@ -48,7 +48,7 @@ Your deployed website becomes the source of truth for the app.
 
 1. In the Capgo console, you create the app, choose Web2App and enter the address where the site is deployed. Capgo checks that it is a static build the app can keep offline.
 2. You pick the app name and icon and add your App Store Connect and Google Play keys. Capgo builds the store app from its Capacitor template and submits it for review. You still need your own developer accounts, and Apple and Google still review the app.
-3. Already have a Capacitor project? Add the `@capgo/capacitor-updater` plugin, set `websiteMode: true` in its Capacitor config and ship it yourself. `notifyAppReady()` runs automatically once the page shows content.
+3. Already have a Capacitor project? Add the `@capgo/capacitor-updater` plugin, set `autoUpdate: true` in its Capacitor config and ship it yourself. Call `CapacitorUpdater.notifyAppReady()` once your app has rendered.
 
 After that you deploy your site the way you already do, on Vercel, Netlify, Cloudflare Pages or anything else that serves static files. When the app checks for an update, it asks Capgo two things: is this app allowed to update, and which domain should it use. Then it downloads the files straight from your website and applies them right away.
 
