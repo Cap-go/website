@@ -198,6 +198,8 @@ await CapgoWidgetKit.acknowledgeTemplateEvents({
 });
 ```
 
+On iOS, widget extension buttons can invoke bundled `LiveActivityIntent` helpers (`CapgoTemplateActionIntent`) that write to the same event log. That is separate from Siri shortcut phrases or the Shortcuts app. See [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/).
+
 ### Update Or End The Activity
 
 ```typescript

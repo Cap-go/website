@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Native integrity signals for fraud and abuse detection in Capacitor apps."
+  tagline: "Device integrity and fraud signals with Widevine, Play Integrity, App Attest, and DeviceCheck"
   actions:
     - text: Get started
       link: /docs/plugins/device-integrity/getting-started/
@@ -22,11 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-device-integrity` exposes native integrity capabilities for Capacitor:
+Device integrity and fraud signals with Widevine, Play Integrity, App Attest, and DeviceCheck
 
-- Android: Widevine DRM fingerprint and Play Integrity Standard attestation
-- iOS: Apple App Attest and DeviceCheck
-- Web: reports unsupported capabilities (no native signals)
+Start with `getCapabilities()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | Partial | See getting started |
 
 ## Core Capabilities
 

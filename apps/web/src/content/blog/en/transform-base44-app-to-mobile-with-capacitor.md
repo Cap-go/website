@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-06-24T00:00:00.000Z
-updated_at: 2026-09-30T18:14:17.000Z
+updated_at: 2026-10-20T00:37:53.000Z
 head_image: /base44-capacitor.webp
 head_image_alt: "Base44 to Native Mobile Apps with Capacitor Capgo blog illustration"
 keywords: Base44, Capacitor, mobile app development, React, export project, native mobile apps, Capgo Builder, vibe coding
@@ -22,6 +22,8 @@ next_blog: transform-lovable-dev-app-to-mobile-with-capacitor
 ## Introduction
 
 [Base44](https://base44.com/) is an AI-powered app builder that generates full React applications from prompts. You can ship a working product in the browser fast — but what if you want it on iOS and Android? In this tutorial, we show how to export your Base44 project and turn it into native mobile apps with [Capacitor](https://capacitorjs.com/), then ship signed store binaries with **[Capgo Builder](https://capgo.app/native-build/)** — no Mac required for iOS.
+
+> **Short version:** the [Base44 to iOS and Android page](/solutions/base44-to-mobile/) sums up the whole path on one screen: export, Capacitor, cloud builds without a Mac, and live updates.
 
 By the end of this guide, your Base44 app runs natively on iOS and Android with access to device features like camera, storage, and push notifications.
 

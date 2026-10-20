@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-share-target
-npx cap sync
+bun add @capgo/capacitor-share-target
+bunx cap sync
 ```
 
 ## Import
@@ -32,9 +32,9 @@ npx cap sync
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 ```
 
-## Quick start
+## Listen early (cold start)
 
-Register a `shareReceived` listener before routing users into screens that consume shared content.
+Register `shareReceived` as soon as your app boots, before routing users into screens that consume shared content. On iOS the native layer retains the event until JavaScript consumes it, which covers shares that arrive while the WebView is still starting.
 
 ```typescript
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
@@ -46,6 +46,8 @@ const shareListener = await CapacitorShareTarget.addListener('shareReceived', (e
 // When tearing down the handler:
 await shareListener.remove();
 ```
+
+Configure `appGroupId` in `capacitor.config` and mirror the same App Group in your Share Extension. See the plugin README on GitHub for extension sample code.
 
 ## Common pitfalls
 

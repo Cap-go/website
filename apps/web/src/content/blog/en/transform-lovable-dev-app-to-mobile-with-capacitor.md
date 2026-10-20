@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-09-30T18:14:17.000Z
+updated_at: 2026-10-20T00:37:53.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Convert your Lovable app to iOS and Android with Capacitor Capgo blog illustration"
 keywords: Lovable, Lovable.dev, Capacitor, mobile app development, React, Vite, export project, native mobile apps, Capgo Builder, live updates, vibe coding, Cursor
@@ -22,6 +22,8 @@ next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 ## Introduction
 
 [Lovable](https://lovable.dev/) is an AI app builder that turns prompts into working React apps in minutes. You can ship in the browser fast — but what if you want your app on the App Store and Google Play, sitting on home screens like every other native app?
+
+> **Short version:** the [Lovable to iOS and Android page](/solutions/lovable-to-mobile/) sums up the whole path on one screen: export, Capacitor, cloud builds without a Mac, and live updates.
 
 This guide walks through the full path: export from Lovable, wrap the web app with [Capacitor](https://capacitorjs.com/), build signed iOS and Android binaries in the cloud with **[Capgo Builder](https://capgo.app/native-build/)** (no Mac required), add a real native feature, and push a layout fix over the air with **Capgo Live Updates**.
 

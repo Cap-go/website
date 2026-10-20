@@ -1,0 +1,204 @@
+---
+title: Siri, Shortcuts, Widgets, and System Intents
+description: "How Capgo Capacitor plugins relate to iOS App Intents, WidgetKit, Live Activities, Android intents, and share targets. Honest scope versus tools like expo-app-intents."
+sidebar:
+  order: 1
+  label: "Siri, Shortcuts, and widgets"
+---
+
+Expo recently shipped [expo-app-intents](https://expo.dev/blog/introducing-expo-app-intents/), which wires Apple's **App Intents** framework to JavaScript: Siri and Shortcuts phrases, runtime entity catalogs, Apple app schemas for Apple Intelligence, Spotlight indexing, and a native queue for invocations that arrive before JavaScript starts.
+
+[@capgo/capacitor-app-intents](/docs/plugins/app-intents/) is the Capacitor bridge for Apple **App Intents**: Siri and Shortcuts phrases (via compile time codegen), runtime entity catalogs, Spotlight indexing, Home Screen quick actions, and a pending invocation queue for cold starts. Widget Kit, Live Activities, Share Target, and Intent Launcher still cover **adjacent** surfaces. This page maps how they fit together so you can ship system integrations without mixing Android `Intent` APIs with Apple App Intents.
+
+## Quick map
+
+| System surface | Capgo plugin | What the plugin actually does |
+| --- | --- | --- |
+| Home Screen widgets, Lock Screen Live Activities, Dynamic Island (SVG or native widget code) | [@capgo/capacitor-widget-kit](/docs/plugins/widget-kit/) | Persist template activities, run declarative actions, log widget or Live Activity taps, sync full-native widget sessions over App Groups. |
+| Live Activities with JSON layout trees | [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) | Start, update, and end ActivityKit activities from Capacitor; timer sequences; shared images in App Group. |
+| Receive shares from other apps | [@capgo/capacitor-share-target](/docs/plugins/share-target/) | `shareReceived` events for title, text, and files via Android intents or an iOS Share Extension plus App Group. |
+| Open Android settings or activities; open iOS Settings URLs | [@capgo/capacitor-intent-launcher](/docs/plugins/intent-launcher/) | `startActivityAsync`, `openIOSSettings`, `openApplication`. This is **not** Apple App Intents. |
+| Siri phrases, Shortcuts, Spotlight, quick actions, App Intent queue | [@capgo/capacitor-app-intents](/docs/plugins/app-intents/) | Dispatch bridge, `setEntityCatalog`, `indexSpotlightEntities`, `setHomeScreenShortcutItems`, `getPendingInvocations`, `useAppIntentsListener`. iOS 16+. |
+| On-device LLM (Apple Intelligence on supported iPhones) | [@capgo/capacitor-llm](/docs/plugins/llm/) | Chat and model APIs. No App Intent or schema bridge. |
+
+## Comparison with expo-app-intents
+
+Use this table when evaluating parity. Rows marked **partial** mean only a narrow slice overlaps.
+
+| expo-app-intents capability | Capgo today |
+| --- | --- |
+| Custom actions in Siri and the Shortcuts app with spoken phrases | **Yes** with [@capgo/capacitor-app-intents](/docs/plugins/app-intents/). Phrases are **compile time literals** in generated Swift (`AppShortcutsProvider`), not runtime JavaScript strings. |
+| Shortcut parameters backed by JS entity catalogs (`AppEntity`, `EntityQuery`) | **Yes** with [@capgo/capacitor-app-intents](/docs/plugins/app-intents/) via `setEntityCatalog()` and native `EntityQuery` wiring. |
+| Apple app schemas (for example mail draft intents for Apple Intelligence) | **Partial.** App Intents exposes `performAppleSchemaTemplate` as a **JavaScript queue only** (no native Mail API). You implement compose UI or deep links in your app. |
+| Spotlight indexing and searchable app content | **Yes** with [@capgo/capacitor-app-intents](/docs/plugins/app-intents/) via `indexSpotlightEntities()` (`CSSearchableItem`, plus `IndexedEntity` on iOS 18+). |
+| Associate onscreen content with entities for system intelligence | **Partial.** Entity catalogs power Shortcuts parameters; full onscreen association APIs are not exposed yet. |
+| Native queue for actions fired before JavaScript is ready | **Yes** for App Intents via [@capgo/capacitor-app-intents](/docs/plugins/app-intents/) (`getPendingInvocations`, `appIntentInvoked`). Share Target and Widget Kit still use their own retention models for shares and template events. |
+| Interactive Live Activity or widget buttons via App Intents | **Partial.** Widget Kit ships `CapgoTemplateActionIntent` and `CompleteSetIntent` as `LiveActivityIntent` types for **template** hotspot and workout actions on iOS 17+. They update native state and the event log; they do not expose arbitrary Siri phrases from JavaScript. |
+| WidgetKit and ActivityKit from app JavaScript | **Yes.** Widget Kit and Live Activities plugins (see below). |
+| Android `Intent` actions (settings, VIEW, SEND, and similar) | **Yes** for launching and receiving via Intent Launcher and Share Target. |
+
+## Widget Kit: widgets, Live Activities, and template actions
+
+`@capgo/capacitor-widget-kit` is the closest match to **system-visible UI** outside your WebView. You can drive Lock Screen and Dynamic Island surfaces from Capacitor, render Home Screen widgets from SVG templates or native Swift/Kotlin code, and process taps after the fact.
+
+### Start a template Live Activity and handle actions in JavaScript
+
+Register a listener when the app boots, then poll or call after `App` resume because widget taps may run while the WebView is still loading:
+
+```typescript
+import { App } from '@capacitor/app';
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const ACTIVITY_ID = 'order-tracker';
+
+async function drainTemplateEvents() {
+  const { events } = await CapgoWidgetKit.listTemplateEvents({
+    activityId: ACTIVITY_ID,
+    unacknowledgedOnly: true,
+  });
+
+  for (const event of events) {
+    if (event.actionId === 'mark-delivered') {
+      // Update your app state from event.state or event.payload
+    }
+    await CapgoWidgetKit.acknowledgeTemplateEvents({
+      eventIds: [event.eventId],
+    });
+  }
+}
+
+await CapgoWidgetKit.startTemplateActivity({
+  activityId: ACTIVITY_ID,
+  state: { status: 'On the way' },
+  definition: {
+    id: 'delivery-card',
+    actions: [
+      {
+        id: 'mark-delivered',
+        eventName: 'delivery.marked',
+      },
+    ],
+    layouts: {
+      lockScreen: {
+        width: 200,
+        height: 80,
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80"><text x="8" y="40">{{state.status}}</text></svg>',
+        hotspots: [
+          {
+            id: 'deliver',
+            actionId: 'mark-delivered',
+            x: 120,
+            y: 20,
+            width: 70,
+            height: 40,
+            label: 'Mark delivered',
+          },
+        ],
+      },
+    },
+  },
+});
+
+App.addListener('resume', () => {
+  void drainTemplateEvents();
+});
+
+void drainTemplateEvents();
+```
+
+On iOS, interactive controls in the widget extension can call the bundled `CapgoTemplateActionIntent` (`LiveActivityIntent`). That path updates stored template state and appends to the same event log your JavaScript reads. It is **not** the same as adding a user-visible Shortcut phrase in the Shortcuts app.
+
+See [Widget Kit getting started](/docs/plugins/widget-kit/getting-started/) for App Group setup and full-native widget sessions.
+
+## Live Activities: JSON layouts from Capacitor
+
+`@capgo/capacitor-live-activities` focuses on **ActivityKit** with declarative layout JSON (text, images, timers, gauges, Dynamic Island regions). It does not register App Intents or Siri shortcuts.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { supported } = await CapgoLiveActivities.areActivitiesSupported();
+if (!supported) {
+  return;
+}
+
+const { activityId } = await CapgoLiveActivities.startActivity({
+  layout: {
+    type: 'container',
+    direction: 'vertical',
+    children: [
+      { type: 'text', content: 'Order {{orderId}}', fontWeight: 'bold' },
+      { type: 'text', content: '{{status}}' },
+    ],
+  },
+  data: { orderId: '42', status: 'Preparing' },
+});
+
+await CapgoLiveActivities.updateActivity({
+  activityId,
+  data: { orderId: '42', status: 'Out for delivery' },
+});
+```
+
+Choose **Live Activities** when you want the layout DSL and image helpers. Choose **Widget Kit** when you need Home Screen widgets, SVG frames, or the template event log and `LiveActivityIntent` buttons.
+
+## Share Target: incoming shares (not outgoing Shortcuts)
+
+`@capgo/capacitor-share-target` lets other apps send content **into** your app. On iOS you add a Share Extension that writes to an App Group; the main app plugin reads and clears that payload and emits `shareReceived`.
+
+Cold start is handled on iOS: the native plugin calls `notifyListeners(..., retainUntilConsumed: true)` so the first JavaScript listener still receives the event.
+
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+await CapacitorShareTarget.addListener('shareReceived', (event) => {
+  const firstText = event.texts[0] ?? '';
+  const firstFile = event.files[0];
+  console.log(event.title, firstText, firstFile?.uri);
+});
+```
+
+This complements Android `SEND` intent filters. It does **not** publish share shortcuts or Siri actions from your app.
+
+## Intent Launcher: Android intents and iOS Settings (not App Intents)
+
+The name is easy to confuse with Apple **App Intents**. `@capgo/capacitor-intent-launcher` only launches **Android** activities (including `ActivityAction.CREATE_SHORTCUT` for legacy launcher shortcuts) and opens **iOS Settings** URL schemes.
+
+```typescript
+import { IntentLauncher, ActivityAction, IOSSettings } from '@capgo/capacitor-intent-launcher';
+
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.WIFI_SETTINGS,
+});
+
+await IntentLauncher.openIOSSettings({ option: IOSSettings.App });
+```
+
+For Siri, the Shortcuts app, and `AppIntent` types, use [@capgo/capacitor-app-intents](/docs/plugins/app-intents/). Intent Launcher only launches Android activities and iOS Settings URLs.
+
+## Suggested combinations
+
+| Goal | Start here |
+| --- | --- |
+| Lock Screen plus Dynamic Island with SVG and tap logging | [Widget Kit](/docs/plugins/widget-kit/) |
+| Rich layout JSON and timer sequences | [Live Activities](/docs/plugins/live-activities/) |
+| User shares a link or file into your app | [Share Target](/docs/plugins/share-target/) |
+| Deep link user to WiFi or app settings | [Intent Launcher](/docs/plugins/intent-launcher/) |
+| Siri phrase that runs your JS handler with entity parameters | [App Intents](/docs/plugins/app-intents/) (codegen for phrases, `setEntityCatalog`, `useAppIntentsListener`) |
+
+## Remaining gaps (for planning)
+
+| Area | Status |
+| --- | --- |
+| Widget Kit custom `AppShortcut` phrases tied to the template event log | Widget Kit still bundles `LiveActivityIntent` helpers only; arbitrary Siri phrases belong in App Intents codegen. |
+| Share Target polling API | Events only today; use `addListener('shareReceived')` early on boot. |
+| Native Apple Mail schema intents | Not available to third party apps; App Intents queues a JS handler instead. |
+| Android App Intents parity | App Intents is iOS 16+ only; Android returns a clear error. |
+
+## Keep going
+
+- [App Intents overview](/docs/plugins/app-intents/)
+- [Widget Kit overview](/docs/plugins/widget-kit/)
+- [Live Activities overview](/docs/plugins/live-activities/)
+- [Share Target overview](/docs/plugins/share-target/)
+- [Intent Launcher overview](/docs/plugins/intent-launcher/)

@@ -1,7 +1,9 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { isGonePath } from '../../shared/gonePaths'
+import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
+import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -263,30 +265,6 @@ const STATIC_PREFIXES = [
   '/live-update-metrics.json',
   '/builder-metrics.json',
 ]
-const IGNORED_TRANSLATION_QUERY_KEYS = new Set([
-  '_branch_match_id',
-  '_branch_referrer',
-  '_gl',
-  '_hsenc',
-  '_hsmi',
-  'fbclid',
-  'gad_source',
-  'gbraid',
-  'gclid',
-  'igshid',
-  'mc_cid',
-  'mc_eid',
-  'msclkid',
-  'ref',
-  'ref_src',
-  'session',
-  'session_id',
-  'sessionid',
-  'twclid',
-  'wbraid',
-  'yclid',
-])
-
 function escapeHtmlText(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
@@ -362,6 +340,8 @@ function localizedAbsoluteUrl(requestUrl: URL, locale: string, basePath: string)
 }
 
 function rewriteRedirectPath(pathname: string): string {
+  const appleRejectionTarget = resolveAppleRejectionStoriesPathRedirect(pathname)
+  if (appleRejectionTarget) return appleRejectionTarget
   const legacyTarget = resolveLegacyPathRedirect(pathname)
   if (legacyTarget) return legacyTarget
   if (pathname === '/docs/cli/overview' || pathname === '/docs/cli/overview/') return '/docs/cli/'
@@ -513,11 +493,6 @@ function isTranslatedResponseFreshForJob(response: Response, job: TranslationJob
   return !job.sourceHash || readTranslationSourceHash(response) === job.sourceHash
 }
 
-function shouldIgnoreTranslationQueryParam(name: string): boolean {
-  const normalizedName = name.toLowerCase()
-  return normalizedName.startsWith('utm_') || IGNORED_TRANSLATION_QUERY_KEYS.has(normalizedName)
-}
-
 function normalizedTranslationSearchParams(requestUrl: URL): URLSearchParams {
   const entries: [string, string][] = []
   requestUrl.searchParams.forEach((value, name) => {
@@ -648,9 +623,17 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
   return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
 }
 
-async function temporaryEnglishCrawlerResponse(request: Request, env: Env, requestUrl: URL, isHead = false): Promise<Response> {
+async function temporaryEnglishCrawlerResponse(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+  locale: Locale,
+  isHead = false,
+): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
-  if (isRedirect(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+  if (isRedirect(originResponse)) {
+    return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  }
   if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
     const sourceHtml = await originResponse.text()
     const localizedHtml = rewriteMetadataForEnglishCanonical(sourceHtml, requestUrl)
@@ -3443,8 +3426,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
 
   const enqueued = await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
   if (!enqueued) return temporaryEnglishRedirectResponse(requestUrl, isHead)
-  if (isCrawlerRequest(request)) return await temporaryEnglishCrawlerResponse(request, env, requestUrl, isHead)
-  return await temporaryEnglishRetryResponse(request, env, requestUrl, locale, isHead)
+  return await temporaryEnglishCrawlerResponse(request, env, requestUrl, locale, isHead)
 }
 
 function jsonResponse(body: unknown, status = 200): Response {
@@ -3805,7 +3787,15 @@ export default {
     }
 
     if (shouldBypassTranslation(requestUrl.pathname)) {
-      return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
+      const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
+      if (isRedirect(originResponse)) {
+        return trackAICrawler(
+          request,
+          withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'),
+          ctx,
+        )
+      }
+      return trackAICrawler(request, originResponse, ctx)
     }
 
     if (isGonePath(requestUrl.pathname)) {
