@@ -17,4 +17,4 @@ export function storyIllustrationAlt(story: AppleRejectionStory): string {
 }
 
 export const illustrationAssetPath = (tag: AppleRejectionStoryTag, variant: number) =>
-  `/apple-rejection-stories/illustrations/${tag}-${variant}.svg`
+  `/app-store-refusal-horror-story/illustrations/${tag}-${variant}.svg`

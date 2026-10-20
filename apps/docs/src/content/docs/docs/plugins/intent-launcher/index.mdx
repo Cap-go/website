@@ -22,7 +22,9 @@ hero:
 
 ## Overview
 
-Launch Android intents, open system settings, and interact with other apps using the Intent system
+`@capgo/capacitor-intent-launcher` launches **Android** activities (settings screens, `VIEW`, `CREATE_SHORTCUT`, and other `ActivityAction` values) and opens **iOS Settings** via URL schemes. The word "intent" here means the Android `Intent` class, **not** Apple **App Intents** (`AppIntent`, Siri, or the Shortcuts app).
+
+For Apple App Intents, Siri phrases, and JavaScript entity catalogs, use [@capgo/capacitor-app-intents](/docs/plugins/app-intents/). See [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/) for how Capgo plugins map to system surfaces.
 
 Start with `startActivityAsync()` and the other core methods listed below.
 

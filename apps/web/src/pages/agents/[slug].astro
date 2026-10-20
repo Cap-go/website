@@ -9,6 +9,7 @@ import AgentLogo from '@/components/agents/AgentLogo.astro'
 import { CAPGO_MARK_PATH, CAPGO_MARK_TRANSFORM, CAPGO_MARK_VIEWBOX } from '@/config/capgoMark'
 import m, { type MessageKey, type MessageValues } from '@/copy/messages'
 import { agents, getAgent, type Agent, type ReleaseStage } from '@/data/agents'
+import { appBuilders } from '@/data/appBuilders'
 import { createFAQPageLdJson, createHowToLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -121,7 +122,9 @@ const relatedLinks = [
   { label: copy('agents_page_related_cli'), href: getRelativeLocaleUrl(locale, 'capgo-cli') },
   ...(isBuilder
     ? [
-        { label: copy('agents_page_related_lovable'), href: getRelativeLocaleUrl(locale, 'solutions/lovable-vibecoding-to-mobile') },
+        appBuilders.some((builder) => builder.slug === agent.slug)
+          ? { label: m.solutions_builder_to_mobile_h1({ builder: agent.name }, { locale }), href: getRelativeLocaleUrl(locale, `solutions/${agent.slug}-to-mobile`) }
+          : { label: copy('agents_page_related_lovable'), href: getRelativeLocaleUrl(locale, 'solutions/lovable-to-mobile') },
         { label: copy('agents_page_related_webapp'), href: getRelativeLocaleUrl(locale, 'solutions/webapp-to-mobile') },
       ]
     : []),

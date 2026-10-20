@@ -1,0 +1,61 @@
+---
+title: "@capgo/capacitor-app-intents"
+description: "Siri, Shortcuts, Spotlight, Home Screen quick actions, and Apple App Intents for Capacitor apps with a JavaScript dispatch bridge."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Ship Siri phrases, Shortcuts, Spotlight, Home Screen quick actions, and entity catalogs from Capacitor with a cold start safe invocation queue."
+  actions:
+    - text: Get started
+      link: /docs/plugins/app-intents/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-app-intents/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-app-intents` connects Apple **App Intents** to your Capacitor JavaScript layer: drain a pending queue on cold start, publish entity catalogs for Shortcuts parameters, index Spotlight content, set Home Screen quick actions, and listen for `appIntentInvoked` events. Siri shortcut **phrases** are compile time literals in generated Swift, not runtime strings.
+
+Pair this plugin with [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/) when you also use Widget Kit, Live Activities, Share Target, or Intent Launcher.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | iOS 16 and later |
+| Android | No | Methods reject with a clear error |
+| Web | No | Guard with Capacitor.getPlatform() |
+
+## Core Capabilities
+
+- `getPendingInvocations` - Return invocations queued before JavaScript was ready.
+- `removePendingInvocation` - Remove one pending invocation after your handler processes it.
+- `setEntityCatalog` - Persist an entity catalog for a given type string.
+- `setHomeScreenShortcutItems` - Replace Home Screen quick actions (UIApplicationShortcutItems).
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getPendingInvocations` | Return invocations queued before JavaScript was ready. |
+| `removePendingInvocation` | Remove one pending invocation after your handler processes it. |
+| `setEntityCatalog` | Persist an entity catalog for a given type string. |
+| `setHomeScreenShortcutItems` | Replace Home Screen quick actions (UIApplicationShortcutItems). |
+| `indexSpotlightEntities` | Index Spotlight items for your app domain. |
+| `removeSpotlightEntities` | Remove Spotlight items by id. |
+| `performAppleSchemaTemplate` | Queue a JavaScript handler for an alpha Apple schema template. |
+| `addListener` | Listen for `appIntentInvoked` when a new invocation is queued. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Native plugin version string. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-app-intents](https://github.com/Cap-go/capacitor-app-intents/).

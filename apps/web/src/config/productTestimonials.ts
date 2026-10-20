@@ -112,7 +112,7 @@ export const solutionTestimonials = {
   fintech: [sergiu, noTone, kapil],
   healthcare: [sergiu, kapil, noTone],
   'ionic-enterprise-plugins': [mikolaj, sergiu],
-  'lovable-vibecoding-to-mobile': [sikafanka, kapil, luis],
+  'app-builder-to-mobile': [sikafanka, kapil, luis],
   'pr-preview': [nate, michael, noTone],
   'production-updates': [sergiu, kapil, michael],
   qsr: [kapil, sergiu, noTone],

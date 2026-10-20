@@ -1,13 +1,13 @@
 ---
-import AppleRejectionStoryCard from '@/components/apple-rejection-stories/AppleRejectionStoryCard.astro'
-import AppleRejectionStoriesCta from '@/components/apple-rejection-stories/AppleRejectionStoriesCta.astro'
+import AppleRejectionStoryCard from '@/components/app-store-refusal-stories/AppleRejectionStoryCard.astro'
+import AppleRejectionStoriesCta from '@/components/app-store-refusal-stories/AppleRejectionStoriesCta.astro'
 import {
   appleRejectionStories,
   appleRejectionStoryTagLabels,
   appleRejectionStoryTags,
   appleRejectionStoriesContentPath,
-} from '@/data/apple-rejection-stories'
-import { appleRejectionStoryTagStyles } from '@/data/apple-rejection-stories/tagStyles'
+} from '@/data/app-store-refusal-stories'
+import { appleRejectionStoryTagStyles } from '@/data/app-store-refusal-stories/tagStyles'
 
 const storyCount = appleRejectionStories.length
 const githubStoriesUrl = `https://github.com/Cap-go/website/tree/main/${appleRejectionStoriesContentPath}`
@@ -85,7 +85,7 @@ const storiesAfterMidCta = appleRejectionStories.slice(3)
             <AppleRejectionStoryCard story={story} allStories={appleRejectionStories} tagStyles={appleRejectionStoryTagStyles} />
           ))}
           <li class="list-none lg:hidden">
-            <AppleRejectionStoriesCta id="apple-rejection-stories-mid-cta" />
+            <AppleRejectionStoriesCta id="app-store-refusal-horror-story-mid-cta" />
           </li>
           {storiesAfterMidCta.map((story) => (
             <AppleRejectionStoryCard story={story} allStories={appleRejectionStories} tagStyles={appleRejectionStoryTagStyles} />
@@ -93,7 +93,7 @@ const storiesAfterMidCta = appleRejectionStories.slice(3)
         </ol>
 
         <div class="mt-10 hidden lg:block xl:hidden">
-          <AppleRejectionStoriesCta id="apple-rejection-stories-tablet-cta" />
+          <AppleRejectionStoriesCta id="app-store-refusal-horror-story-tablet-cta" />
         </div>
 
         <div class="mt-12 rounded-2xl border border-white/10 bg-gray-950 p-6 sm:p-8">
@@ -118,7 +118,7 @@ const storiesAfterMidCta = appleRejectionStories.slice(3)
       </div>
 
       <div class="hidden xl:sticky xl:top-24 xl:col-start-3 xl:block xl:self-start">
-        <AppleRejectionStoriesCta id="apple-rejection-stories-sidebar-cta" />
+        <AppleRejectionStoriesCta id="app-store-refusal-horror-story-sidebar-cta" />
       </div>
     </div>
   </div>

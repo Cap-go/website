@@ -13,7 +13,7 @@ export type SolutionAppExampleKey =
   | 'fintech'
   | 'healthcare'
   | 'ionic-enterprise-plugins'
-  | 'lovable-vibecoding-to-mobile'
+  | 'app-builder-to-mobile'
   | 'pr-preview'
   | 'production-updates'
   | 'qsr'
@@ -170,7 +170,7 @@ export const solutionAppExamples = {
       'solution_app_examples_ionic_enterprise_plugins_play_3',
     ],
   },
-  'lovable-vibecoding-to-mobile': {
+  'app-builder-to-mobile': {
     labelKey: 'solution_app_examples_lovable_vibecoding_to_mobile_label',
     headlineKey: 'solution_app_examples_lovable_vibecoding_to_mobile_headline',
     useCaseKey: 'solution_app_examples_lovable_vibecoding_to_mobile_use_case',
