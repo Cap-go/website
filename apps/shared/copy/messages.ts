@@ -3226,7 +3226,7 @@ const messages = {
   plan_payasyougo_desc: 'For large apps that need SSO, SLAs, and compliance',
   plan_solo_desc: 'For indie developers shipping their first app',
   plan_team_desc: 'For product teams shipping to 100,000 users',
-  plans_that_scale_with_your_business: '14 days free, no credit card. Scale to millions.',
+  plans_that_scale_with_your_business: 'Capgo pricing: live updates from free to millions of users',
   plans_that_scale_with_your_business_description: "Every dollar saved extends your runway. No credit card required. Upgrade when you're ready.",
   platform_compliance: 'Platform compliance.',
   platform_compliance_desc: 'Any activities that are deemed unacceptable by the platforms used by the Capgo Site and Services.',
