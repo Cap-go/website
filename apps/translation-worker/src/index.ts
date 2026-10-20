@@ -4,6 +4,7 @@ import { isGonePath } from '../../shared/gonePaths'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
+import { MANUAL_TRANSLATIONS } from './manualTranslations'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -2275,6 +2276,17 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
   throw new Error(`Translation JSON mode failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
+/** Use reviewed manual translations when available; send only the remaining strings to the model. */
+async function translateBatchForLocale(env: Env, locale: Locale, batch: string[], pagePath = ''): Promise<string[]> {
+  const manual = MANUAL_TRANSLATIONS[locale]
+  if (!manual) return await translateBatch(env, LANGUAGE_NAMES[locale], batch, pagePath)
+
+  const missing = batch.filter((text) => !Object.hasOwn(manual, text))
+  const machine = missing.length > 0 ? await translateBatch(env, LANGUAGE_NAMES[locale], missing, pagePath) : []
+  let machineIndex = 0
+  return batch.map((text) => (Object.hasOwn(manual, text) ? manual[text] : machine[machineIndex++]))
+}
+
 async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
   try {
     return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath)
@@ -2643,8 +2655,21 @@ async function sha256Hex(value: string): Promise<string> {
   return [...new Uint8Array(digest)].map((item) => item.toString(16).padStart(2, '0')).join('')
 }
 
+const manualTranslationsHashes = new Map<Locale, Promise<string>>()
+
+/** Changes when the locale's manual translations change, so only that locale's pages refresh. */
+function manualTranslationsHash(locale: Locale): Promise<string> {
+  let hash = manualTranslationsHashes.get(locale)
+  if (!hash) {
+    hash = sha256Hex(JSON.stringify(MANUAL_TRANSLATIONS[locale] ?? {}))
+    manualTranslationsHashes.set(locale, hash)
+  }
+  return hash
+}
+
 async function translationSourceHash(locale: Locale, sourceHtml: string): Promise<string> {
-  return await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${sourceHtml}`)
+  // ponytail: any manual-translation edit refreshes every page of that locale; hash only the entries a page uses if refresh volume hurts.
+  return await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${await manualTranslationsHash(locale)}:${sourceHtml}`)
 }
 
 function setLinkRel(html: string, rel: string, tag: string): string {
@@ -3082,7 +3107,7 @@ async function refreshCacheIncrementally(
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
   while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
-    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex], requestUrl.pathname)
+    const translatedBatch = await translateBatchForLocale(env, locale, batches[batchIndex], requestUrl.pathname)
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
     batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
@@ -3746,6 +3771,7 @@ export const __translationWorkerTest = {
   assertRenderedNavLinkIntegrity,
   bodyTranslationStats,
   buildBatches,
+  translateBatchForLocale,
   cacheKeyFor,
   sourceCheckKeyFor,
   collectRenderedNavLinks,

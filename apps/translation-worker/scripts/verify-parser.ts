@@ -958,3 +958,26 @@ try {
     delete (globalThis as { caches?: unknown }).caches
   }
 }
+
+{
+  // Manual translations win; only the remaining strings reach the model, and order is kept.
+  const { MANUAL_TRANSLATIONS } = await import('../src/manualTranslations')
+  const manualSource = Object.keys(MANUAL_TRANSLATIONS.fr ?? {}).find((text) => text.split(/\s+/).length > 3)
+  assert(manualSource, 'French manual translations are empty')
+  const modelInputs: string[] = []
+  const manualEnv = {
+    AI: {
+      run: async (_model: string, input: { messages: Array<{ content: string }> }) => {
+        const payload = JSON.parse(input.messages[input.messages.length - 1]?.content ?? '{}') as { items?: Array<{ text: string }>; text?: string }
+        const texts = payload.items?.map((item) => item.text) ?? [payload.text ?? '']
+        modelInputs.push(...texts)
+        return payload.items ? { response: JSON.stringify({ translations: texts.map((text) => `Texte ${text}`) }) } : { response: `Texte ${payload.text}` }
+      },
+    },
+  }
+  const machineSource = 'A sentence nobody reviewed by hand yet'
+  const result = await __translationWorkerTest.translateBatchForLocale(manualEnv as never, 'fr', [machineSource, manualSource], '/')
+  assert(result[1] === MANUAL_TRANSLATIONS.fr?.[manualSource], 'Manual French translation was not used')
+  assert(result[0] === `Texte ${machineSource}`, 'Unreviewed string did not go through the model in order')
+  assert(!modelInputs.includes(manualSource), 'Manually translated string was still sent to the model')
+}
