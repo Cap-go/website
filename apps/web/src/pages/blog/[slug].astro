@@ -2,6 +2,7 @@
 import Blog from '@/components/Blog.astro'
 import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
 import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
+import BlogProductCta from '@/components/BlogProductCta.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import SignupCta from '@/components/SignupCta.astro'
 import { HUMAN_EDITORIAL_TEAM, resolveAuthorUrl } from '@/config/blogEditorialTeam'
@@ -208,6 +209,7 @@ content['ldJSON'] =
           <article class="prose prose-invert blog mt-8 min-w-full">
             <Content />
           </article>
+          <BlogProductCta tag={entry.data.tag} />
         </div>
         <div class="right-0 hidden px-10 md:block">
           {

@@ -1,0 +1,40 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  /** Comma-separated blog tags from the post frontmatter. */
+  tag: string
+}
+
+// Build/store topics point to Native Build; everything else to Live Updates, the core offer.
+const NATIVE_BUILD_TAGS = new Set(['ios', 'android', 'app store', 'google play', 'ci/cd'])
+
+const { tag } = Astro.props as Props
+const locale = Astro.locals.locale
+const tags = tag.split(',').map((t) => t.trim().toLowerCase())
+const isNativeBuild = tags.some((t) => NATIVE_BUILD_TAGS.has(t)) && !tags.includes('updates')
+
+const product = isNativeBuild
+  ? {
+      href: 'native-build',
+      name: m.platform_native_build_name({}, { locale }),
+      tagline: m.menu_native_build_tagline({}, { locale }),
+      desc: m.platform_native_build_desc({}, { locale }),
+    }
+  : {
+      href: 'live-update',
+      name: m.platform_live_update_name({}, { locale }),
+      tagline: m.menu_live_update_tagline({}, { locale }),
+      desc: m.platform_live_update_desc({}, { locale }),
+    }
+---
+
+<aside id="blog-product-cta" data-product={product.href} class="mt-10 rounded-2xl border border-azure-500/30 bg-azure-500/5 p-6" aria-label={`Capgo ${product.name}`}>
+  <p class="text-sm font-semibold tracking-wide text-azure-400 uppercase">Capgo {product.name}</p>
+  <p class="mt-2 text-xl font-semibold text-white">{product.tagline}</p>
+  <p class="mt-2 text-gray-300">{product.desc}</p>
+  <a href={getRelativeLocaleUrl(locale, product.href)} class="mt-4 inline-flex items-center font-semibold text-azure-400 underline underline-offset-4 hover:text-white">
+    {m.learn_more({}, { locale })}: Capgo {product.name}
+  </a>
+</aside>
