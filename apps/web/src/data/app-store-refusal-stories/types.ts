@@ -1,4 +1,5 @@
 export type AppleRejectionStoryTag =
+  | '1-2'
   | '1-4-2'
   | '4-3'
   | '4-2-6'
@@ -25,6 +26,7 @@ export type AppleRejectionStoryTag =
   | 'kids-category'
 
 export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string> = {
+  '1-2': 'Guideline 1.2',
   '1-4-2': 'Guideline 1.4.2',
   '4-3': 'Guideline 4.3',
   '4-2-6': 'Guideline 4.2.6',

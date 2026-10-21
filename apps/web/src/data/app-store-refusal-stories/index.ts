@@ -17,6 +17,7 @@ export const appleRejectionStoryBatches = [
 ]
 
 export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
+  '1-2',
   '1-4-2',
   '4-3',
   '4-2-6',
