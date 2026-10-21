@@ -5,7 +5,9 @@
   "dependencies": {
     "@nekuda/webmcp-sdk": "0.7.1",
     "astro-icon": "1.2.0",
-    "sharp": "^0.35.4"
+    "http-message-sig": "^0.3.0",
+    "sharp": "^0.35.4",
+    "web-bot-auth": "0.2.0"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "1.2.3"
