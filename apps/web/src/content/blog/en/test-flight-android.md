@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-30T06:58:17.170Z
-updated_at: 2026-10-21T09:30:00.000Z
+updated_at: 2026-10-21T12:27:52.000Z
 head_image: /blog-images/test-flight-android.webp
 head_image_alt: '''TestFlight for Android: Google Play and Firebase Alternatives'' Capgo blog illustration'
 keywords: >-
