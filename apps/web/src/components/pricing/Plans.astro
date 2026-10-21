@@ -124,7 +124,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             </span>
             <span data-direct-copy>
               <span aria-hidden="true">{m.direct_offer_cta_get_started({}, { locale: Astro.locals.locale })}</span>
-              <span class="sr-only">{m.direct_offer_plan_cta_aria({ plan: plan.name }, { locale: Astro.locals.locale })}</span>
+              <span class="sr-only">{m.direct_offer_plan_cta_aria_label({ plan: plan.name }, { locale: Astro.locals.locale })}</span>
             </span>
           </a>
           {plan.name === 'Enterprise' && (

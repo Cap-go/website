@@ -180,7 +180,8 @@ const comparisonRows = [
     label: copy('live_update_v2_comp_try_l'),
     hook: copy('live_update_v2_comp_try_capgo_hook'),
     capgo: copy('live_update_v2_comp_try_capgo'),
-    // Paid-ads visitors (offer=direct) have no free trial: show the money-back guarantee instead.
+    // Paid-ads visitors (offer=direct) pay first, so the row becomes "Money-back guarantee" instead of "Try before you pay".
+    labelDirect: copy('live_update_v2_comp_try_l_direct'),
     capgoDirect: copy('direct_offer_guarantee_note'),
     diy: copy('live_update_v2_comp_try_diy'),
     capa: copy('live_update_v2_comp_try_capa'),
@@ -511,7 +512,7 @@ const featureTiles = [
             <tbody>
               {comparisonRows.map((row) => (
                 <tr>
-                  <td class="label">{row.label}</td>
+                  <td class="label">{row.labelDirect ? <OfferText direct={row.labelDirect}>{row.label}</OfferText> : row.label}</td>
                   <td class="us">
                     <span class="hook">{row.hook}</span> {row.capgoDirect ? <OfferText direct={row.capgoDirect}>{row.capgo}</OfferText> : row.capgo}
                   </td>

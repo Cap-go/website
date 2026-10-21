@@ -183,7 +183,8 @@ const comparisonRows = [
   {
     label: copy('native_build_v2_comp_try_l'),
     hook: copy('native_build_v2_comp_try_capgo_hook'),
-    // Paid-ads visitors (offer=direct) have no free trial: show the money-back guarantee instead.
+    // Paid-ads visitors (offer=direct) pay first, so the row becomes "Money-back guarantee" instead of "Try before you pay".
+    labelDirect: copy('native_build_v2_comp_try_l_direct'),
     hookDirect: copy('native_build_v2_comp_try_capgo_hook_direct'),
     capgo: copy('native_build_v2_comp_try_capgo'),
     diy: copy('native_build_v2_comp_try_diy'),
@@ -1034,7 +1035,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             <tbody>
               {comparisonRows.map((row) => (
                 <tr>
-                  <td class="label">{row.label}</td>
+                  <td class="label">{row.labelDirect ? <OfferText direct={row.labelDirect}>{row.label}</OfferText> : row.label}</td>
                   <td class="us">
                     <span class="hook">{row.hookDirect ? <OfferText direct={row.hookDirect}>{row.hook}</OfferText> : row.hook}</span> {row.capgo}
                   </td>
