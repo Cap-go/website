@@ -4,6 +4,7 @@ import { isGonePath } from '../../shared/gonePaths'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
+import { translationStyleGuide } from './style-guides'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -15,7 +16,10 @@ type AiMessage = {
 }
 
 type AiBinding = {
-  run(model: string, input: { messages: AiMessage[]; temperature?: number; max_tokens?: number; response_format?: unknown }): Promise<unknown>
+  run(
+    model: string,
+    input: { messages: AiMessage[]; temperature?: number; max_tokens?: number; response_format?: unknown; chat_template_kwargs?: { enable_thinking: boolean } },
+  ): Promise<unknown>
 }
 
 type WorkerService = {
@@ -92,6 +96,7 @@ interface Env {
   TRANSLATION_COORDINATOR?: DurableObjectNamespaceBinding
   TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
+  TRANSLATION_REVIEW_MODEL?: string
   TRANSLATION_TEST_MODE?: string
 }
 
@@ -161,14 +166,20 @@ function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecut
 }
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
-const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
+// Picked from a French benchmark against Workers AI models (see the PR introducing it).
+// Gemma 4 drafts fast and cheap with thinking disabled, and stays on the default
+// 300 requests/minute tier; paid-plan models such as DeepSeek V4 are capped at 20.
+const DEFAULT_MODEL = '@cf/google/gemma-4-26b-a4b-it'
+// Hybrid reasoning models think before answering by default. Translation does not need
+// it (same benchmark score, a fraction of the latency); the optional review pass keeps it.
+const THINKING_MODEL_PREFIXES = ['@cf/deepseek-ai/deepseek-v4', '@cf/google/gemma-4', '@cf/qwen/qwen3', '@cf/zai-org/glm-'] as const
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-09-23-short-ui-length-defer-v1'
+const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
@@ -198,6 +209,8 @@ const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
 const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
+// A placeholder left after restore belongs to another segment and must never reach the page.
+const STRAY_PLACEHOLDER_PATTERN = /__CAPGO_KEEP_\d+__/
 const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
@@ -2118,6 +2131,7 @@ function protectTranslationTokens(value: string): {
         if (!restored.includes(placeholder)) throw new Error(`Translation dropped protected token: ${token}`)
         restored = restored.split(placeholder).join(token)
       }
+      if (STRAY_PLACEHOLDER_PATTERN.test(restored)) throw new Error('Translation dropped protected token: stray placeholder')
       return restored
     },
     restoreOrSource(translated: string): { text: string; missingTokens: string[] } {
@@ -2130,27 +2144,68 @@ function protectTranslationTokens(value: string): {
         }
         restored = restored.split(placeholder).join(token)
       }
+      if (STRAY_PLACEHOLDER_PATTERN.test(restored)) missingTokens.push('stray placeholder')
       return missingTokens.length > 0 ? { text: value, missingTokens } : { text: restored, missingTokens }
     },
   }
 }
 
+// Items are keyed by id instead of returned as an array: with arrays, a dropped or merged
+// item shifted every later translation onto the wrong segment (and leaked placeholders).
+function translationItemId(index: number): string {
+  return `t${index}`
+}
+
 function translationBatchJsonSchema(batchLength: number): Record<string, unknown> {
+  const ids = Array.from({ length: batchLength }, (_, index) => translationItemId(index))
   return {
     type: 'object',
     additionalProperties: false,
     properties: {
       translations: {
-        type: 'array',
-        minItems: batchLength,
-        maxItems: batchLength,
-        items: {
-          type: 'string',
-        },
+        type: 'object',
+        additionalProperties: false,
+        properties: Object.fromEntries(ids.map((id) => [id, { type: 'string' }])),
+        required: ids,
       },
     },
     required: ['translations'],
   }
+}
+
+function keyedTranslationsFromUnknown(value: unknown, batchLength: number): string[] | null {
+  const record = recordOf(value)
+  const translations = recordOf(record?.translations) ?? record
+  if (!translations) return null
+  const keyed = Array.from({ length: batchLength }, (_, index) => translations[translationItemId(index)])
+  return keyed.every((item): item is string => typeof item === 'string') ? keyed : null
+}
+
+function parseKeyedTranslations(rawValue: unknown, batchLength: number): string[] | null {
+  const direct = keyedTranslationsFromUnknown(rawValue, batchLength)
+  if (direct) return direct
+  if (typeof rawValue === 'string') {
+    const parsed = keyedTranslationsFromUnknown(parseJsonValue(stripJsonFence(rawValue)), batchLength)
+    if (parsed) return parsed
+  }
+  return parseTranslationArray(rawValue)
+}
+
+function aiRequestOptions(model: string): { chat_template_kwargs?: { enable_thinking: boolean } } {
+  return THINKING_MODEL_PREFIXES.some((prefix) => model.startsWith(prefix)) ? { chat_template_kwargs: { enable_thinking: false } } : {}
+}
+
+function translationBriefSystemHint(targetLanguage: string): string {
+  return [
+    `You are a senior native ${targetLanguage} software localizer for Capgo, a developer-tools company. The result must read as if a native developer wrote it in ${targetLanguage}: translate meaning, not words.`,
+    'Placeholders like __CAPGO_KEEP_0__ stand for names such as Capgo or Live Update: move them wherever target-language word order needs them (for example "Live Update data" becomes "Données Live Update" in French).',
+    'Never translate CLI commands, code, or terminal output such as "capgo bundle upload" or "npx @capgo/cli".',
+  ].join(' ')
+}
+
+// Some models emit typographic hyphens and spaces (U+2011, U+202F) that break search and copy-paste.
+function normalizeTranslatedText(text: string): string {
+  return text.replace(/\u2011/g, '-').replace(/\u202F/g, '\u00A0')
 }
 
 function translationContextSystemHint(): string {
@@ -2172,8 +2227,50 @@ function applyFrenchArticleElision(text: string): string {
 }
 
 function polishTranslatedText(targetLanguage: string, text: string): string {
-  if (targetLanguage === 'French') return applyFrenchArticleElision(text)
-  return text
+  const normalized = normalizeTranslatedText(text)
+  if (targetLanguage === 'French') return applyFrenchArticleElision(normalized)
+  return normalized
+}
+
+// Optional second pass (TRANSLATION_REVIEW_MODEL): a reviewer model fixes the drafts
+// against the same style guide, with its reasoning left on. Any failure keeps the drafts.
+async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: Array<{ id: string; text: string; context?: string }>, drafts: string[]): Promise<string[]> {
+  const reviewModel = env.TRANSLATION_REVIEW_MODEL?.trim()
+  if (!reviewModel) return drafts
+  try {
+    const result = await env.AI.run(reviewModel, {
+      temperature: 0,
+      max_tokens: 16384,
+      response_format: {
+        type: 'json_schema',
+        json_schema: translationBatchJsonSchema(items.length),
+      },
+      messages: [
+        {
+          role: 'system',
+          content: [
+            `You are a senior native ${targetLanguage} reviewer for Capgo website copy. Each item has the English text, optional context, and a draft ${targetLanguage} translation.`,
+            'Fix mistranslations, wrong terminology, literal or unnatural phrasing, grammar and agreement errors, English Title Case, untranslated English, and translated product names. Keep the draft when it is already correct and natural.',
+            translationLengthSystemHint(),
+            'Copy every placeholder like __CAPGO_KEEP_0__ exactly as written.',
+            translationStyleGuide(targetLanguage),
+            `Return a JSON object with exactly one key named "translations" mapping every item id to the final translation.`,
+          ].join(' '),
+        },
+        {
+          role: 'user',
+          content: JSON.stringify({ targetLanguage, items: items.map((item, index) => ({ ...item, draft: drafts[index] })) }),
+        },
+      ],
+    })
+    const payload = extractAiPayload(result)
+    const reviewed = keyedTranslationsFromUnknown(typeof payload === 'string' ? parseJsonValue(stripJsonFence(payload)) : payload, items.length)
+    if (!reviewed) throw new Error('Review model returned invalid JSON')
+    return reviewed.map((text, index) => (text.trim() ? text : drafts[index]))
+  } catch (error) {
+    console.warn('Translation review failed; keeping drafts', { targetLanguage, error: errorMessage(error) })
+    return drafts
+  }
 }
 
 async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
@@ -2188,10 +2285,11 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
     try {
       const items = protectedBatch.map((item, index) => {
         const context = contexts[index]
-        return context ? { text: item.text, context } : { text: item.text }
+        return context ? { id: translationItemId(index), text: item.text, context } : { id: translationItemId(index), text: item.text }
       })
 
       const result = await env.AI.run(model, {
+        ...aiRequestOptions(model),
         temperature: 0,
         max_tokens: 8192,
         response_format: {
@@ -2203,6 +2301,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
             role: 'system',
             content: [
               'You translate Capgo website copy for the target locale.',
+              translationBriefSystemHint(targetLanguage),
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
               translationContextSystemHint(),
@@ -2211,7 +2310,8 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
-              `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${uniqueBatch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
+              translationStyleGuide(targetLanguage),
+              `Return a JSON object with exactly one key named "translations". Its value must be an object mapping every input item id (${translationItemId(0)} to ${translationItemId(uniqueBatch.length - 1)}) to the translated text of that item only. Do not return Markdown, comments, or explanations.`,
               attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
             ]
               .filter(Boolean)
@@ -2230,7 +2330,8 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       })
 
       payload = extractAiPayload(result)
-      const translated = parseTranslationArray(payload)
+      const drafted = parseKeyedTranslations(payload, uniqueBatch.length)
+      const translated = drafted && drafted.length === uniqueBatch.length ? await reviewTranslatedBatch(env, targetLanguage, items, drafted) : drafted
       if (!translated) {
         lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
       } else if (translated.length !== uniqueBatch.length) {
@@ -2311,6 +2412,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
     let payload: unknown = ''
     try {
       const result = await env.AI.run(model, {
+        ...aiRequestOptions(model),
         temperature: 0,
         max_tokens: Math.min(2048, Math.max(256, text.length * 3 + 128)),
         messages: [
@@ -2318,6 +2420,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             role: 'system',
             content: [
               'You translate one Capgo website string for the target locale.',
+              translationBriefSystemHint(targetLanguage),
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               translationContextSystemHint(),
               translationGrammarSystemHint(),
@@ -2328,6 +2431,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
               enforceWordCount && attempt > 1
                 ? 'Your previous translation used too many or too few words for this short UI string. Shorten or tighten the wording while keeping the same meaning.'
                 : '',
+              translationStyleGuide(targetLanguage),
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
             ]
               .filter(Boolean)
@@ -3738,6 +3842,11 @@ export class TranslationCoordinator {
 }
 
 export const __translationWorkerTest = {
+  aiRequestOptions,
+  parseKeyedTranslations,
+  protectTranslationTokens,
+  translationBatchJsonSchema,
+  translationStyleGuide,
   TRANSLATION_CACHE_VERSION,
   applyFrenchArticleElision,
   polishTranslatedText,

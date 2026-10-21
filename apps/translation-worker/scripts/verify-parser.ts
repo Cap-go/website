@@ -171,7 +171,22 @@ assert(
 )
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('short-ui-length-defer-v1'), 'Cache version was not bumped for short UI length guard deferral')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('deepseek-style-guides-v1'), 'Cache version was not bumped for the DeepSeek model and style guides')
+
+const keyedSchema = __translationWorkerTest.translationBatchJsonSchema(2) as { properties: { translations: { required: string[] } } }
+assert(keyedSchema.properties.translations.required.join(',') === 't0,t1', 'Batch schema did not require one translation per item id')
+assert(__translationWorkerTest.parseKeyedTranslations('{"translations":{"t1":"Deux","t0":"Un"}}', 2)?.join('|') === 'Un|Deux', 'Keyed translations were not mapped back by item id')
+assert(__translationWorkerTest.parseKeyedTranslations({ translations: ['Un', 'Deux'] }, 2)?.join('|') === 'Un|Deux', 'Legacy array translations stopped parsing')
+assert(__translationWorkerTest.parseKeyedTranslations('{"translations":{"t0":"Un"}}', 2) === null, 'A keyed response missing an item id was accepted')
+const strayPlaceholder = __translationWorkerTest.protectTranslationTokens('zipping 16 files').restoreOrSource('npx @__CAPGO_KEEP_0__/cli bundle upload')
+assert(strayPlaceholder.text === 'zipping 16 files' && strayPlaceholder.missingTokens.length === 1, 'A stray placeholder from another segment reached the page')
+assert(__translationWorkerTest.translationStyleGuide('French').includes('channel -> canal'), 'French prompt lost its glossary')
+assert(!__translationWorkerTest.translationStyleGuide('German').includes('channel -> canal'), 'French glossary leaked into another language')
+assert(
+  __translationWorkerTest.aiRequestOptions('@cf/deepseek-ai/deepseek-v4.1-flash-1017').chat_template_kwargs?.enable_thinking === false,
+  'Thinking was not disabled for DeepSeek translation requests',
+)
+assert(!('chat_template_kwargs' in __translationWorkerTest.aiRequestOptions('@cf/meta/llama-3.1-8b-instruct-fast')), 'Thinking options were sent to a non-reasoning model')
 
 assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')
 assert(__translationWorkerTest.translationWordCount('Évitez l\u2019attente de l\u2019App Store.') === 5, 'Word count did not count elided French words')
@@ -534,7 +549,7 @@ try {
           pagePath?: string
           texts?: string[]
           text?: string
-          items?: Array<{ text: string; context?: string }>
+          items?: Array<{ id?: string; text: string; context?: string }>
         }
         capturedAiPayload = payload
         assert(!payload.texts, 'Translation AI request still used legacy texts[] payload')
@@ -562,10 +577,13 @@ try {
           assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
 
-        const sourceTexts = payload.items.map((item) => item.text)
+        assert(
+          payload.items.every((item) => typeof item.id === 'string'),
+          'Translation AI request did not send item ids',
+        )
         return {
           response: JSON.stringify({
-            translations: sourceTexts.map((text) => translateText(text)),
+            translations: Object.fromEntries(payload.items.map((item) => [item.id, translateText(item.text)])),
           }),
         }
       },
