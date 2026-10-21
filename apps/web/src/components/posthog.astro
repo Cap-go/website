@@ -121,6 +121,9 @@
           if (data.first_touch_path) props.first_touch_path = data.first_touch_path
           var signupSource = signupSourceFromAttribution(data)
           if (signupSource) props.signup_source = signupSource
+          // Paid-ads offer, only while unexpired (180 days after capture, see lib/attribution.ts).
+          var offerAt = typeof data.offer_at === 'string' ? Date.parse(data.offer_at) : NaN
+          if (data.offer === 'direct' && isFinite(offerAt) && Date.now() - offerAt < 180 * 24 * 60 * 60 * 1000) props.signup_offer = 'direct'
           return props
         } catch (e) {
           return {}

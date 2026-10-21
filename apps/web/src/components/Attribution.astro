@@ -6,6 +6,7 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
   First-touch capture runs synchronously so attribution survives fast navigation to /register.
   It also flags paid-ads visitors (`?offer=direct`, persisted first touch) with data-offer="direct" on the root element
   before first paint, so data-trial-copy / data-direct-copy swap without a flash (see global.css).
+  The offer is stored with its capture time (`offer_at`) and expires 180 days after capture, even if the cookie is rewritten later.
 -->
 <script
   is:inline
@@ -19,7 +20,16 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
 >
   ;(function () {
     try {
-      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign', 'offer']
+      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign']
+      var now = Date.now()
+
+      function isOfferFresh(capturedAt) {
+        if (typeof capturedAt !== 'string') return false
+        var captured = Date.parse(capturedAt)
+        if (!isFinite(captured)) return false
+        var age = now - captured
+        return age > -86400000 && age < maxAge * 1000
+      }
 
       function markDirectOffer() {
         try {
@@ -52,8 +62,11 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
         for (var ti = 0; ti < tracked.length; ti++) {
           var tk = tracked[ti]
           if (!source[tk]) continue
-          if (tk === 'offer' && source[tk] !== directOffer) continue
           out[tk] = source[tk]
+        }
+        if (source.offer === directOffer && isOfferFresh(source.offer_at)) {
+          out.offer = directOffer
+          out.offer_at = source.offer_at
         }
         return out
       }
@@ -82,7 +95,7 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (!path) path = '/'
 
       var params = new URLSearchParams(location.search)
-      var urlOffer = (params.get(offerParam) || '').trim() === directOffer
+      var urlOffer = params.get(offerParam) === directOffer
       if (urlOffer) markDirectOffer()
       var incoming = {
         first_touch_type: classifyTouchType(path),
@@ -96,7 +109,10 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (utmSource) incoming.utm_source = utmSource
       if (utmMedium) incoming.utm_medium = utmMedium
       if (utmCampaign) incoming.utm_campaign = utmCampaign
-      if (urlOffer) incoming.offer = directOffer
+      if (urlOffer) {
+        incoming.offer = directOffer
+        incoming.offer_at = new Date(now).toISOString()
+      }
 
       var stores = readStoredJson()
       var cookieFields = pickTracked(stores && stores.cookie)
@@ -107,6 +123,12 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
         if (ck === 'first_touch_type' || ck === 'first_touch_path') continue
         if (cookieFields[ck]) data[ck] = cookieFields[ck]
         else if (storageFields[ck]) data[ck] = storageFields[ck]
+      }
+      // Offer and its capture time travel together; an expired offer was already dropped by pickTracked.
+      var offerSource = cookieFields.offer ? cookieFields : storageFields.offer ? storageFields : incoming.offer ? incoming : null
+      if (offerSource) {
+        data.offer = offerSource.offer
+        data.offer_at = offerSource.offer_at
       }
       var cookiePair =
         cookieFields.first_touch_type && cookieFields.first_touch_path ? { first_touch_type: cookieFields.first_touch_type, first_touch_path: cookieFields.first_touch_path } : null
@@ -138,7 +160,6 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (!data.utm_source && incoming.utm_source) data.utm_source = incoming.utm_source
       if (!data.utm_medium && incoming.utm_medium) data.utm_medium = incoming.utm_medium
       if (!data.utm_campaign && incoming.utm_campaign) data.utm_campaign = incoming.utm_campaign
-      if (!data.offer && incoming.offer) data.offer = incoming.offer
       if (data.offer === directOffer) markDirectOffer()
 
       if (!data.first_touch_type && !data.first_touch_path && !data.ref && !data.utm_source && !data.utm_medium && !data.utm_campaign && !data.offer) {

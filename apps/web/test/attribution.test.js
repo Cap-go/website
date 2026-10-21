@@ -9,6 +9,7 @@ import {
   getSignupUserMetadataForRegistration,
   hasAttributionValues,
   hasDirectOffer,
+  isOfferFresh,
   isRegisterOrConsoleLink,
   mergeAttribution,
   mergeFirstTouch,
@@ -172,9 +173,14 @@ test('appendAttributionToUrl adds signup_source from landing page when ref is ab
   expect(appendAttributionToUrl('/register/', data)).toBe('/register/?first_touch_type=pricing&first_touch_path=%2Fpricing%2F&signup_source=pricing')
 })
 
-test('parseAttributionFromSearch only accepts offer=direct', () => {
-  expect(parseAttributionFromSearch('?offer=direct&utm_source=google')).toEqual({ utm_source: 'google', offer: 'direct' })
-  expect(parseAttributionFromSearch('?offer=%20direct%20')).toEqual({ offer: 'direct' })
+const NOW = Date.parse('2026-06-01T00:00:00.000Z')
+const NOW_ISO = new Date(NOW).toISOString()
+const DAY_MS = 24 * 60 * 60 * 1000
+const RECENT_ISO = new Date(Date.now() - DAY_MS).toISOString()
+
+test('parseAttributionFromSearch only accepts offer=direct and stamps the capture time', () => {
+  expect(parseAttributionFromSearch('?offer=direct&utm_source=google', NOW)).toEqual({ utm_source: 'google', offer: 'direct', offer_at: NOW_ISO })
+  expect(parseAttributionFromSearch('?offer=%20direct%20')).toEqual({})
   expect(parseAttributionFromSearch('?offer=free')).toEqual({})
   expect(parseAttributionFromSearch('?offer=DIRECT')).toEqual({})
   expect(parseAttributionFromSearch('?offer=')).toEqual({})
@@ -182,6 +188,8 @@ test('parseAttributionFromSearch only accepts offer=direct', () => {
 
 test('normalizeOffer ignores anything but direct', () => {
   expect(normalizeOffer('direct')).toBe('direct')
+  expect(normalizeOffer(' direct ')).toBeUndefined()
+  expect(normalizeOffer('Direct')).toBeUndefined()
   expect(normalizeOffer('trial')).toBeUndefined()
   expect(normalizeOffer(undefined)).toBeUndefined()
   expect(normalizeOffer(1)).toBeUndefined()
@@ -194,35 +202,53 @@ test('offer alone counts as attribution worth persisting', () => {
   expect(hasDirectOffer(null)).toBe(false)
 })
 
-test('deserializeAttribution keeps a stored direct offer and drops unknown offers', () => {
-  expect(deserializeAttribution('{"offer":"direct","first_touch_type":"solutions","first_touch_path":"/solutions/build-without-mac/"}')).toEqual({
-    offer: 'direct',
+test('isOfferFresh expires offers 180 days after capture', () => {
+  expect(isOfferFresh(NOW_ISO, NOW)).toBe(true)
+  expect(isOfferFresh(new Date(NOW - 179 * DAY_MS).toISOString(), NOW)).toBe(true)
+  expect(isOfferFresh(new Date(NOW - 180 * DAY_MS).toISOString(), NOW)).toBe(false)
+  expect(isOfferFresh(new Date(NOW + 30 * DAY_MS).toISOString(), NOW)).toBe(false)
+  expect(isOfferFresh(undefined, NOW)).toBe(false)
+  expect(isOfferFresh('not-a-date', NOW)).toBe(false)
+})
+
+test('deserializeAttribution keeps a fresh direct offer and drops unknown, untimestamped or expired offers', () => {
+  const stored = { offer: 'direct', offer_at: NOW_ISO, first_touch_type: 'solutions', first_touch_path: '/solutions/build-without-mac/' }
+  expect(deserializeAttribution(JSON.stringify(stored), NOW)).toEqual(stored)
+  expect(deserializeAttribution(JSON.stringify(stored), NOW + 181 * DAY_MS)).toEqual({
     first_touch_type: 'solutions',
     first_touch_path: '/solutions/build-without-mac/',
   })
+  expect(deserializeAttribution('{"offer":"direct"}', NOW)).toBeNull()
   expect(deserializeAttribution('{"offer":"free","ref":"x"}')).toEqual({ ref: 'x' })
   expect(deserializeAttribution('{"offer":"free"}')).toBeNull()
 })
 
 test('mergeAttribution keeps first-touch fields and survives navigation to /register', () => {
-  const landing = buildFirstTouchAttribution('?offer=direct&utm_source=google', '/live-update/')
-  const stored = mergeAttribution(null, landing)
-  expect(stored).toEqual({ offer: 'direct', utm_source: 'google', first_touch_type: 'other', first_touch_path: '/live-update/' })
+  const landing = buildFirstTouchAttribution('?offer=direct&utm_source=google', '/live-update/', NOW)
+  const stored = mergeAttribution(null, landing, NOW)
+  expect(stored).toEqual({ offer: 'direct', offer_at: NOW_ISO, utm_source: 'google', first_touch_type: 'other', first_touch_path: '/live-update/' })
   // Second page view on /register/ without query params keeps the stored offer.
-  expect(mergeAttribution(stored, buildFirstTouchAttribution('', '/register/'))).toEqual(stored)
+  expect(mergeAttribution(stored, buildFirstTouchAttribution('', '/register/', NOW + DAY_MS), NOW + DAY_MS)).toEqual(stored)
+  // Revisiting with ?offer=direct does not renew the capture time.
+  expect(mergeAttribution(stored, buildFirstTouchAttribution('?offer=direct', '/', NOW + 100 * DAY_MS), NOW + 100 * DAY_MS).offer_at).toBe(NOW_ISO)
+  // Past 180 days the stored offer is dropped; a new ad click starts a new window.
+  const later = NOW + 200 * DAY_MS
+  expect(mergeAttribution(stored, buildFirstTouchAttribution('', '/', later), later).offer).toBeUndefined()
+  expect(mergeAttribution(stored, buildFirstTouchAttribution('?offer=direct', '/', later), later).offer_at).toBe(new Date(later).toISOString())
   // An organic first touch later picks up the ad offer.
-  expect(mergeAttribution({ first_touch_type: 'home', first_touch_path: '/' }, { offer: 'direct' })).toEqual({
+  expect(mergeAttribution({ first_touch_type: 'home', first_touch_path: '/' }, { offer: 'direct', offer_at: NOW_ISO }, NOW)).toEqual({
     first_touch_type: 'home',
     first_touch_path: '/',
     offer: 'direct',
+    offer_at: NOW_ISO,
   })
   // Garbage incoming offers are ignored.
   expect(mergeAttribution({ ref: 'x' }, { offer: 'free' })).toEqual({ ref: 'x' })
 })
 
 test('mergeStoredAttributionSlices reads offer from either cookie or localStorage', () => {
-  expect(mergeStoredAttributionSlices(null, { offer: 'direct' })).toEqual({ offer: 'direct' })
-  expect(mergeStoredAttributionSlices({ offer: 'direct' }, null)).toEqual({ offer: 'direct' })
+  expect(mergeStoredAttributionSlices(null, { offer: 'direct', offer_at: RECENT_ISO })).toEqual({ offer: 'direct', offer_at: RECENT_ISO })
+  expect(mergeStoredAttributionSlices({ offer: 'direct', offer_at: RECENT_ISO }, null)).toEqual({ offer: 'direct', offer_at: RECENT_ISO })
 })
 
 test('toPostHogAttributionProps exposes signup_offer', () => {
@@ -234,7 +260,7 @@ test('toPostHogAttributionProps exposes signup_offer', () => {
 })
 
 test('appendAttributionToUrl forwards offer=direct to register and console links', () => {
-  expect(appendAttributionToUrl('/register/', { offer: 'direct' })).toBe('/register/?offer=direct')
+  expect(appendAttributionToUrl('/register/', { offer: 'direct', offer_at: NOW_ISO })).toBe('/register/?offer=direct')
   expect(appendAttributionToUrl('https://console.capgo.app/login/', { offer: 'direct', utm_source: 'google' })).toBe(
     'https://console.capgo.app/login/?utm_source=google&offer=direct&signup_source=google',
   )
@@ -262,7 +288,7 @@ function withBrowserGlobals(search, pathname, cookie, run) {
 }
 
 test('getSignupUserMetadataForRegistration and events include the stored direct offer on /register', () => {
-  const cookie = `capgo_attribution=${encodeURIComponent(JSON.stringify({ offer: 'direct', utm_source: 'google', first_touch_type: 'other', first_touch_path: '/live-update/' }))}`
+  const cookie = `capgo_attribution=${encodeURIComponent(JSON.stringify({ offer: 'direct', offer_at: RECENT_ISO, utm_source: 'google', first_touch_type: 'other', first_touch_path: '/live-update/' }))}`
   withBrowserGlobals('', '/register/', cookie, () => {
     expect(getSignupUserMetadataForRegistration()).toEqual({
       signup_source: 'google',
@@ -286,6 +312,15 @@ test('registration metadata reads offer=direct straight from the register URL an
     expect(getSignupAttributionForEvents().signup_offer).toBe('direct')
   })
   withBrowserGlobals('?offer=trial', '/register/', '', () => {
+    expect(getSignupUserMetadataForRegistration().offer).toBeUndefined()
+    expect(getSignupAttributionForEvents().signup_offer).toBeUndefined()
+  })
+})
+
+test('an expired stored offer is not sent at registration', () => {
+  const expired = new Date(Date.now() - 181 * DAY_MS).toISOString()
+  const cookie = `capgo_attribution=${encodeURIComponent(JSON.stringify({ offer: 'direct', offer_at: expired, utm_source: 'google' }))}`
+  withBrowserGlobals('', '/register/', cookie, () => {
     expect(getSignupUserMetadataForRegistration().offer).toBeUndefined()
     expect(getSignupAttributionForEvents().signup_offer).toBeUndefined()
   })
