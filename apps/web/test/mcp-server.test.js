@@ -84,7 +84,7 @@ test('GET /.well-known/oauth-protected-resource serves RFC 9728 metadata for cap
   expect(response?.headers.get('Content-Type')).toContain('application/json')
   const metadata = await response?.json()
   expect(metadata.resource).toBe('https://capgo.app')
-  expect(metadata.authorization_servers).toEqual(['https://api.capgo.app'])
+  expect(metadata.authorization_servers).toEqual(['https://capgo.app'])
   expect(metadata.scopes_supported).toEqual(['capgo'])
   expect(metadata.bearer_methods_supported).toEqual(['header'])
 })

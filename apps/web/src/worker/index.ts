@@ -19,7 +19,7 @@ import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
 import { handleAgentCardRequest, handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
-import { handleAuthorizationServerMetadataRequest, handleJwksRequest, OAUTH_AUTHORIZATION_SERVER_PATH, OAUTH_JWKS_PATH } from './oauth-discovery'
+import { handleAuthorizationServerMetadataRequest, OAUTH_AUTHORIZATION_SERVER_PATH } from './oauth-discovery'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
 import { handleSignaturesDirectoryRequest, HTTP_MESSAGE_SIGNATURES_DIRECTORY, signedFetch } from './web-bot-auth'
@@ -463,7 +463,6 @@ export async function agentSurfaceResponse(request: Request, env: Env, pathname:
   if (A2A_AGENT_CARD_PATHS.has(pathname)) return handleAgentCardRequest(request)
   if (pathname === OAUTH_PROTECTED_RESOURCE_PATH) return handleOAuthProtectedResourceRequest(request)
   if (pathname === OAUTH_AUTHORIZATION_SERVER_PATH) return handleAuthorizationServerMetadataRequest(request, ctx)
-  if (pathname === OAUTH_JWKS_PATH) return handleJwksRequest(request)
   if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)
   if (pathname === HTTP_MESSAGE_SIGNATURES_DIRECTORY) return handleSignaturesDirectoryRequest(request, env)
   return null

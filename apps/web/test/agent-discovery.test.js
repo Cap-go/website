@@ -26,7 +26,7 @@ test('auth.md documents agent audience, registration methods, and credential use
   expect(AUTH_MD_MARKDOWN.split('\n')[0]).toMatch(/^# .*auth\.md/)
   expect(AUTH_MD_MARKDOWN).toContain('## Audience')
   expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/.well-known/oauth-protected-resource/mcp')
-  expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/.well-known/oauth-authorization-server')
+  expect(AUTH_MD_MARKDOWN).toContain('https://capgo.app/.well-known/oauth-authorization-server')
   expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/mcp/oauth/register')
   expect(AUTH_MD_MARKDOWN).toContain('Authorization: Bearer')
   expect(AUTH_MD_MARKDOWN).toContain('x-api-key')

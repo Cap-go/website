@@ -81,11 +81,15 @@ Capgo is not a generic AI coding assistant and not a prompt-to-app builder. It i
 
 export const AUTH_MD_PATH = '/auth.md'
 export const OAUTH_PROTECTED_RESOURCE_URL = `${CAPGO_API_ORIGIN}/.well-known/oauth-protected-resource/mcp`
-export const OAUTH_AUTHORIZATION_SERVER_URL = `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`
+/** OAuth issuer for the hosted MCP server. Its endpoints live on CAPGO_API_ORIGIN. */
+export const OAUTH_ISSUER = CAPGO_ORIGIN
+export const OAUTH_AUTHORIZATION_SERVER_URL = `${OAUTH_ISSUER}/.well-known/oauth-authorization-server`
+/** Source of the authorization server metadata that capgo.app serves at OAUTH_AUTHORIZATION_SERVER_URL. */
+export const OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URL = `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`
 
 export const AUTH_MD_MARKDOWN = `# Capgo auth.md
 
-> How AI agents get credentials for Capgo. Machine-readable OAuth metadata lives on the API origin, \`${CAPGO_API_ORIGIN}\`.
+> How AI agents get credentials for Capgo. The OAuth issuer is \`${OAUTH_ISSUER}\`; the OAuth endpoints and the MCP server live on \`${CAPGO_API_ORIGIN}\`.
 
 ## Audience
 
@@ -105,7 +109,7 @@ Agents always act on behalf of a human Capgo account. There is no anonymous or a
 The hosted MCP server at \`${HOSTED_MCP_URL}\` is an OAuth protected resource.
 
 - Protected resource metadata: [${OAUTH_PROTECTED_RESOURCE_URL}](${OAUTH_PROTECTED_RESOURCE_URL})
-- Authorization server metadata (issuer \`${CAPGO_API_ORIGIN}\`): [${OAUTH_AUTHORIZATION_SERVER_URL}](${OAUTH_AUTHORIZATION_SERVER_URL})
+- Authorization server metadata (issuer \`${OAUTH_ISSUER}\`): [${OAUTH_AUTHORIZATION_SERVER_URL}](${OAUTH_AUTHORIZATION_SERVER_URL})
 - Client registration: dynamic client registration (RFC 7591) at \`${CAPGO_API_ORIGIN}/mcp/oauth/register\`, or a Client ID Metadata Document URL as the \`client_id\`
 - Grant: \`authorization_code\` with PKCE (\`S256\`), public clients (\`token_endpoint_auth_method: none\`)
 - Scope: \`capgo\`
@@ -208,7 +212,7 @@ export function oauthProtectedResourceMetadata() {
   return {
     resource: CAPGO_ORIGIN,
     resource_name: 'Capgo',
-    authorization_servers: [CAPGO_API_ORIGIN],
+    authorization_servers: [OAUTH_ISSUER],
     scopes_supported: ['capgo'],
     bearer_methods_supported: ['header'],
     resource_documentation: `${CAPGO_ORIGIN}${AUTH_MD_PATH}`,
@@ -236,7 +240,7 @@ export function a2aAgentCard() {
       oauth2: {
         oauth2SecurityScheme: {
           description: 'OAuth 2.1 authorization code flow with PKCE. Clients can register dynamically.',
-          oauth2MetadataUrl: `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`,
+          oauth2MetadataUrl: OAUTH_AUTHORIZATION_SERVER_URL,
           flows: {
             authorizationCode: {
               authorizationUrl: `${CAPGO_API_ORIGIN}/mcp/oauth/authorize`,
