@@ -159,6 +159,7 @@ jobs:
             ${{ runner.os }}-playwright-
 
       - run: bun install --frozen-lockfile
+      - run: bun run lint
       - name: Install Playwright Chromium
         run: node ./node_modules/playwright/cli.js install chromium
       - run: bun run clean:build-cache

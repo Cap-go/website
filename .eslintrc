@@ -1,4 +1,0 @@
-{
-  "extends": "@antfu",
-  "ignorePatterns": ["types/supabase.types.ts"]
-}
