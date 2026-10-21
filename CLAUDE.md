@@ -133,12 +133,19 @@ Exclusion types (from most to least specific):
 3. `ruleId` + `elementPattern` - Rule for specific element content
 4. `ruleId` - Disable entire rule (use config.rules.disabled instead)
 
+## Linting and Type Checking
+
+- Lint with oxlint (`.oxlintrc.json`); ESLint is not used.
+- The workers (`apps/*-worker`) type-check with the native TypeScript 7 `tsc`.
+- `apps/web` and `apps/docs` use `astro check`, which still needs TypeScript 6 (root `typescript` devDependency) until `@astrojs/check` supports TS 7.
+
 ## Common Commands
 
 ```bash
 bun run dev           # Start development server
 bun run build         # Build for production
 bun run preview       # Preview production build
+bun run lint          # Lint with oxlint (bun run lint:fix to autofix)
 bun run seo:check     # Run SEO checker manually
 bun run seo:check:json  # Output as JSON
 bun run seo:check:report  # Save report to file

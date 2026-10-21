@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "oxc",
+    "import"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/.astro/**",
+    "**/.wrangler/**",
+    "**/public/**",
+    "**/node_modules/**",
+    "**/supabase.types.ts",
+    "output/**"
+  ],
+  "rules": {
+    "typescript/triple-slash-reference": "off"
+  }
+}
