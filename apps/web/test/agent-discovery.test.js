@@ -1,6 +1,7 @@
 import { expect, test } from 'bun:test'
 import {
   AGENT_NOT_FOUND_MARKDOWN,
+  AUTH_MD_MARKDOWN,
   HOSTED_MCP_TOOL_GROUPS,
   HOSTED_MCP_URL,
   LLMS_WHEN_TO_USE_PATHS,
@@ -19,6 +20,18 @@ test('markdown 404 body points agents at sitemap, llms.txt, openapi, and docs', 
   expect(AGENT_NOT_FOUND_MARKDOWN).toContain('https://capgo.app/openapi.json')
   expect(AGENT_NOT_FOUND_MARKDOWN).toContain('https://capgo.app/docs/')
   expect(AGENT_NOT_FOUND_MARKDOWN).toContain('## When to use Capgo')
+})
+
+test('auth.md documents agent audience, registration methods, and credential use', () => {
+  expect(AUTH_MD_MARKDOWN.split('\n')[0]).toMatch(/^# .*auth\.md/)
+  expect(AUTH_MD_MARKDOWN).toContain('## Audience')
+  expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/.well-known/oauth-protected-resource/mcp')
+  expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/.well-known/oauth-authorization-server')
+  expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/mcp/oauth/register')
+  expect(AUTH_MD_MARKDOWN).toContain('Authorization: Bearer')
+  expect(AUTH_MD_MARKDOWN).toContain('x-api-key')
+  expect(WHEN_TO_USE_MARKDOWN).toContain('https://capgo.app/auth.md')
+  expect(AGENT_NOT_FOUND_MARKDOWN).toContain('https://capgo.app/auth.md')
 })
 
 test('prefers markdown only when Accept ranks markdown over HTML', () => {
