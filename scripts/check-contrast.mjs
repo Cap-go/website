@@ -168,16 +168,33 @@ async function pricingCtaIssues(page, label = '') {
   return samples.filter((sample) => sample.ratio < CTA_RATIO).map((sample) => ({ ...sample, text: `${sample.text}${label}` }))
 }
 
-async function scanRoute(page, route, url) {
+async function scanRoute(page, route) {
   const axe = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze()
   const issues = ghostIssuesFromAxe(axe)
   if (route === '/pricing/') {
     issues.push(...(await pricingCtaIssues(page)))
-    // Paid-ads visitors (offer=direct) see the "Get started" label variant.
-    await page.goto(`${url}?offer=direct`, { waitUntil: 'load', timeout: 120000 })
-    issues.push(...(await pricingCtaIssues(page, ' (offer=direct)')))
   }
   return issues
+}
+
+/**
+ * Paid-ads visitors (offer=direct) see the "Get started" / money-back variant of /pricing/.
+ * The offer is persisted in a cookie and localStorage, so scan it in a throwaway browser context:
+ * the shared context used for every other route must keep scanning normal visitors.
+ */
+async function scanDirectOfferPricing(browser, url) {
+  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+  try {
+    const page = await context.newPage()
+    await page.goto(`${url}?offer=direct`, { waitUntil: 'load', timeout: 120000 })
+    const label = ' (offer=direct)'
+    const axe = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze()
+    const issues = ghostIssuesFromAxe(axe).map((issue) => ({ ...issue, text: `${issue.text}${label}` }))
+    issues.push(...(await pricingCtaIssues(page, label)))
+    return issues
+  } finally {
+    await context.close()
+  }
 }
 
 function formatIssue(route, issue) {
@@ -210,7 +227,8 @@ async function main() {
       if (!title || title.toLowerCase().includes('not found')) {
         throw new Error(`Failed to render ${route} (title: "${title}")`)
       }
-      const issues = await scanRoute(page, route, url)
+      const issues = await scanRoute(page, route)
+      if (route === '/pricing/') issues.push(...(await scanDirectOfferPricing(browser, url)))
       if (issues.length === 0) {
         console.log(`ok  ${route}`)
         continue
