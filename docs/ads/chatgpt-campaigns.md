@@ -7,6 +7,8 @@ Every link carries `offer=direct`. With it, the site replaces the free trial cop
 
 Limits: title ≤ 24, copy ≤ 48. Images are 1080×1080 PNG in `apps/web/public/ads/chatgpt/`, one per ad, served at `https://capgo.app/ads/chatgpt/{campaign}-{variant}.png`.
 
+**Before importing:** deploy the website first. The image URLs return 404 until this branch is live on capgo.app, and Ads Manager rejects ads whose image cannot be fetched. Check with `curl -sI https://capgo.app/ads/chatgpt/lovable-a_store.png`.
+
 ## CapgoChatGPTLovableToMobile
 
 Landing page: https://capgo.app/solutions/lovable-to-mobile/
