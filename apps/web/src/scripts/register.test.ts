@@ -67,8 +67,9 @@ test('registration without profile names preserves referral attribution and the 
       first_touch_type: 'plugin',
       first_touch_path: '/plugins/example/',
       signup_source: 'plugin_example',
+      offer: 'direct',
     }),
-    getSignupAttributionForEvents: () => ({ signup_source: 'plugin_example' }),
+    getSignupAttributionForEvents: () => ({ signup_source: 'plugin_example', signup_offer: 'direct' }),
     getRegistrationDevice: () => ({ registration_device_type: 'desktop' }),
     registerUser: async (request: unknown) => {
       signupRequests.push(request)
@@ -96,6 +97,7 @@ test('registration without profile names preserves referral attribution and the 
       first_touch_type: 'plugin',
       first_touch_path: '/plugins/example/',
       signup_source: 'plugin_example',
+      offer: 'direct',
     },
   ])
   expect(captures.map(({ event }) => event)).toEqual(['website_signup_submit', 'user_signed_up'])
@@ -109,6 +111,7 @@ test('registration without profile names preserves referral attribution and the 
     ['measure', 'registration_completed', { type: 'customer_action' }, { event_id: `registration_${hashedId}` }],
   ])
   expect(captures[1].properties.signup_source).toBe('plugin_example')
+  expect(captures[1].properties.signup_offer).toBe('direct')
   expect(referrals).toEqual([{ email: 'signup@example.com', externalUserId: 'fake-user-id' }])
   const redirect = new URL(windowStub.location.href)
   expect(redirect.origin).toBe('https://console.capgo.app')

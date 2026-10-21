@@ -16,7 +16,9 @@ const CONFIG_PATH = path.join(ROOT, 'visual-diff.config.json')
 const PORT = 4175
 const CTA_RATIO = 4.5
 const GHOST_RATIO = 2
-const PRICING_CTA = '[data-plan] a[aria-label^="Start"]'
+// Plan CTAs render a trial label and a paid-ads (offer=direct) label; CSS shows one of them.
+// Measure the visible variant so both the normal and direct pricing pages are covered.
+const PRICING_CTA = '[data-plan] a[data-plan-cta] > span:visible'
 
 function installChromium() {
   const playwrightCli = path.join(ROOT, 'node_modules', 'playwright', 'cli.js')
@@ -158,18 +160,23 @@ function ghostIssuesFromAxe(results) {
   })
 }
 
-async function pricingCtaIssues(page) {
+async function pricingCtaIssues(page, label = '') {
   const samples = await contrastSamples(page, PRICING_CTA)
   if (samples.length === 0) {
-    return [{ selector: PRICING_CTA, text: 'pricing plan CTAs missing from built page', ratio: 0 }]
+    return [{ selector: PRICING_CTA, text: `pricing plan CTAs missing from built page${label}`, ratio: 0 }]
   }
-  return samples.filter((sample) => sample.ratio < CTA_RATIO)
+  return samples.filter((sample) => sample.ratio < CTA_RATIO).map((sample) => ({ ...sample, text: `${sample.text}${label}` }))
 }
 
-async function scanRoute(page, route) {
+async function scanRoute(page, route, url) {
   const axe = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze()
   const issues = ghostIssuesFromAxe(axe)
-  if (route === '/pricing/') issues.push(...(await pricingCtaIssues(page)))
+  if (route === '/pricing/') {
+    issues.push(...(await pricingCtaIssues(page)))
+    // Paid-ads visitors (offer=direct) see the "Get started" label variant.
+    await page.goto(`${url}?offer=direct`, { waitUntil: 'load', timeout: 120000 })
+    issues.push(...(await pricingCtaIssues(page, ' (offer=direct)')))
+  }
   return issues
 }
 
@@ -197,12 +204,13 @@ async function main() {
     const page = await context.newPage()
     await assertProductHeroCtaCanary(page)
     for (const route of suite.routes) {
-      await page.goto(`http://127.0.0.1:${PORT}${route}`, { waitUntil: 'load', timeout: 120000 })
+      const url = `http://127.0.0.1:${PORT}${route}`
+      await page.goto(url, { waitUntil: 'load', timeout: 120000 })
       const title = await page.title()
       if (!title || title.toLowerCase().includes('not found')) {
         throw new Error(`Failed to render ${route} (title: "${title}")`)
       }
-      const issues = await scanRoute(page, route)
+      const issues = await scanRoute(page, route, url)
       if (issues.length === 0) {
         console.log(`ok  ${route}`)
         continue
