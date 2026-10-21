@@ -23,30 +23,38 @@ export interface WebBotAuthEnv {
   WEB_BOT_AUTH_PRIVATE_JWK?: string
 }
 
-let cachedSigner: { source: string; signer: Promise<WebBotSigner | null> } | null = null
+let cachedSigner: { source: string; publicX: string | undefined; signer: Promise<WebBotSigner | null> } | null = null
 
-async function loadSigner(source: string): Promise<WebBotSigner | null> {
+async function loadSigner(source: string, publicJwk: JsonWebKey): Promise<WebBotSigner | null> {
   try {
     const jwk = JSON.parse(source) as JsonWebKey
-    if (jwk.x !== WEB_BOT_AUTH_PUBLIC_JWK.x) {
+    if (jwk.x !== publicJwk.x) {
       console.error('WEB_BOT_AUTH_PRIVATE_JWK does not match the published public key')
       return null
     }
-    return await signerFromJWK(jwk)
+    // WebCrypto exports Ed25519 keys with alg "Ed25519", which web-bot-auth rejects; keep only the key material.
+    return await signerFromJWK({ kty: jwk.kty, crv: jwk.crv, x: jwk.x, d: jwk.d })
   } catch (error) {
-    console.error('Invalid WEB_BOT_AUTH_PRIVATE_JWK:', error)
+    // Never log the error itself: JSON parse errors can echo fragments of the secret.
+    console.error('Invalid WEB_BOT_AUTH_PRIVATE_JWK:', error instanceof Error ? error.name : 'unknown error')
     return null
   }
 }
 
-export function getWebBotSigner(env: WebBotAuthEnv): Promise<WebBotSigner | null> {
+export function getWebBotSigner(env: WebBotAuthEnv, publicJwk: JsonWebKey = WEB_BOT_AUTH_PUBLIC_JWK): Promise<WebBotSigner | null> {
   const source = env.WEB_BOT_AUTH_PRIVATE_JWK?.trim()
   if (!source) return Promise.resolve(null)
-  if (cachedSigner?.source !== source) cachedSigner = { source, signer: loadSigner(source) }
+  if (cachedSigner?.source !== source || cachedSigner.publicX !== publicJwk.x) {
+    cachedSigner = { source, publicX: publicJwk.x, signer: loadSigner(source, publicJwk) }
+  }
   return cachedSigner.signer
 }
 
-export async function handleSignaturesDirectoryRequest(request: Request, env: WebBotAuthEnv): Promise<Response> {
+export async function handleSignaturesDirectoryRequest(
+  request: Request,
+  env: WebBotAuthEnv,
+  publicJwk: JsonWebKey = WEB_BOT_AUTH_PUBLIC_JWK,
+): Promise<Response> {
   if (request.method !== 'GET' && request.method !== 'HEAD') {
     return new Response(null, { status: 405, headers: { Allow: 'GET, HEAD' } })
   }
@@ -58,7 +66,7 @@ export async function handleSignaturesDirectoryRequest(request: Request, env: We
     'Access-Control-Allow-Methods': 'GET, HEAD',
   })
 
-  const signer = await getWebBotSigner(env)
+  const signer = await getWebBotSigner(env, publicJwk)
   if (signer) {
     const created = Math.floor(Date.now() / 1000)
     const fields = await createSignature(
@@ -80,15 +88,21 @@ export async function handleSignaturesDirectoryRequest(request: Request, env: We
     headers.set('Signature-Input', fields.signatureInput)
   }
 
-  const body = request.method === 'HEAD' ? null : JSON.stringify({ keys: [WEB_BOT_AUTH_PUBLIC_JWK] })
+  const body = request.method === 'HEAD' ? null : JSON.stringify({ keys: [publicJwk] })
   return new Response(body, { status: 200, headers })
 }
 
 /** fetch() that signs the request with Web Bot Auth when the signing key is configured. */
-export async function signedFetch(env: WebBotAuthEnv, input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+export async function signedFetch(
+  env: WebBotAuthEnv,
+  input: RequestInfo | URL,
+  init?: RequestInit,
+  options: { publicJwk?: JsonWebKey; fetchImpl?: typeof fetch } = {},
+): Promise<Response> {
+  const { publicJwk = WEB_BOT_AUTH_PUBLIC_JWK, fetchImpl = fetch } = options
   const request = new Request(input, init)
-  const signer = await getWebBotSigner(env)
-  if (!signer) return fetch(request)
+  const signer = await getWebBotSigner(env, publicJwk)
+  if (!signer) return fetchImpl(request)
 
   request.headers.set('Signature-Agent', SIGNATURE_AGENT_HEADER_VALUE)
   const now = new Date()
@@ -100,5 +114,5 @@ export async function signedFetch(env: WebBotAuthEnv, input: RequestInfo | URL, 
   })
   request.headers.set('Signature', fields.signature)
   request.headers.set('Signature-Input', fields.signatureInput)
-  return fetch(request)
+  return fetchImpl(request)
 }

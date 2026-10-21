@@ -1,6 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
-  A2A_AGENT_CARD_PATHS,
   markdownNotFoundResponse,
   OAUTH_PROTECTED_RESOURCE_PATH,
   MCP_MANIFEST_PATHS,
@@ -17,7 +16,7 @@ import { withAbTest } from './abtest'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
-import { handleAgentCardRequest, handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
+import { handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
 import { handleAuthorizationServerMetadataRequest, OAUTH_AUTHORIZATION_SERVER_PATH } from './oauth-discovery'
 import { handleReadmeBanner } from './readme-banner'
@@ -195,7 +194,6 @@ const HOMEPAGE_LINK_HEADERS: LinkDefinition[] = [
   { href: '/docs/public-api/', rel: 'service-doc', type: 'text/html' },
   { href: '/openapi.json', rel: 'service-desc', type: 'application/openapi+json' },
   { href: '/.well-known/mcp.json', rel: 'describedby', type: 'application/json' },
-  { href: '/.well-known/agent-card.json', rel: 'describedby', type: 'application/json' },
   { href: '/llms.txt', rel: 'describedby', type: 'text/plain' },
 ]
 
@@ -460,7 +458,6 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
 
 export async function agentSurfaceResponse(request: Request, env: Env, pathname: string, ctx?: BackgroundContext): Promise<Response | null> {
   if (MCP_MANIFEST_PATHS.has(pathname)) return handleMcpManifestRequest(request)
-  if (A2A_AGENT_CARD_PATHS.has(pathname)) return handleAgentCardRequest(request)
   if (pathname === OAUTH_PROTECTED_RESOURCE_PATH) return handleOAuthProtectedResourceRequest(request)
   if (pathname === OAUTH_AUTHORIZATION_SERVER_PATH) return handleAuthorizationServerMetadataRequest(request, ctx)
   if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)

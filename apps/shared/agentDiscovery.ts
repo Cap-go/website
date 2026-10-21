@@ -219,54 +219,6 @@ export function oauthProtectedResourceMetadata() {
   }
 }
 
-export const A2A_AGENT_CARD_PATHS = new Set(['/.well-known/agent-card.json', '/.well-known/agent.json'])
-export const MCP_PROTOCOL_VERSION = '2025-11-25'
-/** Custom A2A binding (spec section 5.8): the agent is reached over MCP Streamable HTTP, not A2A JSON-RPC/gRPC/REST. */
-export const MCP_STREAMABLE_HTTP_BINDING = `https://modelcontextprotocol.io/specification/${MCP_PROTOCOL_VERSION}/basic/transports#streamable-http`
-
-/** A2A Agent Card (https://a2a-protocol.org/latest/specification/#441-agentcard) for the hosted Capgo MCP server. */
-export function a2aAgentCard() {
-  return {
-    name: 'Capgo',
-    description:
-      'Capgo, the AI-ready platform to build, ship, and maintain Capacitor apps. This agent is the hosted Capgo MCP server: manage apps, bundles, channels and rollouts, devices, statistics, native builds, webhooks and push notifications, and search the Capgo docs. It speaks MCP over Streamable HTTP, not A2A JSON-RPC, gRPC or HTTP+JSON.',
-    version: '1.0.0',
-    supportedInterfaces: [{ url: HOSTED_MCP_URL, protocolBinding: MCP_STREAMABLE_HTTP_BINDING, protocolVersion: '1.0' }],
-    provider: { organization: `Capgo (${CAPGO_LEGAL_NAME})`, url: CAPGO_ORIGIN },
-    documentationUrl: MCP_DOCS_URL,
-    iconUrl: `${CAPGO_ORIGIN}/icon-512.png`,
-    capabilities: { streaming: false, pushNotifications: false, extendedAgentCard: false },
-    securitySchemes: {
-      oauth2: {
-        oauth2SecurityScheme: {
-          description: 'OAuth 2.1 authorization code flow with PKCE. Clients can register dynamically.',
-          oauth2MetadataUrl: OAUTH_AUTHORIZATION_SERVER_URL,
-          flows: {
-            authorizationCode: {
-              authorizationUrl: `${CAPGO_API_ORIGIN}/mcp/oauth/authorize`,
-              tokenUrl: `${CAPGO_API_ORIGIN}/mcp/oauth/token`,
-              scopes: { capgo: 'Act on the Capgo account that approves the client' },
-              pkceRequired: true,
-            },
-          },
-        },
-      },
-      apiKey: {
-        httpAuthSecurityScheme: { description: `Capgo API key. See ${CAPGO_ORIGIN}/auth.md`, scheme: 'Bearer' },
-      },
-    },
-    securityRequirements: [{ schemes: { oauth2: { list: ['capgo'] } } }, { schemes: { apiKey: { list: [] } } }],
-    defaultInputModes: ['application/json'],
-    defaultOutputModes: ['application/json'],
-    skills: HOSTED_MCP_TOOL_GROUPS.map(({ id, title, description }) => ({
-      id: `capgo-${id}`,
-      name: title,
-      description,
-      tags: ['capgo', 'capacitor', id],
-    })),
-  }
-}
-
 function parseAcceptQuality(params: string[]): number {
   let q = 1
   for (const param of params) {
