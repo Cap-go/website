@@ -6,8 +6,8 @@ import 'toastify-js/src/toastify.css'
 import RatingSummary from '@/components/RatingSummary.astro'
 import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
 
-const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
-const CLOUDFLARE_TURNSTILE_SITE_KEY = captchaKey
+// Static pages read the CI secret at build time; import.meta.env only exposes .env-file values here.
+const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY || process.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
 
 const title = `${Astro.locals.runtimeConfig.public.brand} | ${m.register_title({}, { locale: Astro.locals.locale })}`
