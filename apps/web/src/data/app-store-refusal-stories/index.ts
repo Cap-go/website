@@ -25,6 +25,7 @@ export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   '3-1-3',
   '5-1-1',
   '5-1-2',
+  '5-2-3',
   '5-6-4',
   '5-6',
   '2-5-19',
@@ -39,6 +40,7 @@ export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   'simulated-gambling',
   'fake-documents',
   'ai-data-sharing',
+  'kids-category',
 ]
 
 export type { AppleRejectionStory, AppleRejectionStoryTag } from './types'
