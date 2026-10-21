@@ -20,7 +20,7 @@ You're probably at the point where the app works, users have signed in, and prod
 
 That's where Expo push notifications are either pleasantly simple or surprisingly fragile.
 
-Expo gives React Native teams a practical layer over APNs and FCM, which is exactly why so many teams use it. But the gap between a demo and a production-ready implementation is real. Token lifecycle, permission timing, listener setup, payload design, and backend cleanup all matter. If you're also shipping frequent app logic changes, the need for operational discipline gets even sharper, especially if your retention work depends on reliable messaging and release velocity. That's the same broader concern behind [mobile app user retention work](https://capgo.app/blog/app-user-retention/): delivery is only useful if the user experience around it is predictable.
+Expo gives React Native teams a practical layer over APNs and FCM, which is exactly why so many teams use it. But the gap between a demo and a production-ready implementation is real. Token lifecycle, permission timing, listener setup, payload design, and backend cleanup all matter. If you're also shipping frequent app logic changes, the need for operational discipline gets even sharper, especially if your retention work depends on reliable messaging and release velocity. Delivery is only useful if the user experience around it is predictable.
 
 <a id="the-foundation-for-engaging-users-with-expo-push-notifications"></a>
 

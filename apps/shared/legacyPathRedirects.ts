@@ -40,6 +40,8 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/how-to-use-capacitor-with-nextjs': '/blog/nextjs-mobile-app-capacitor-from-scratch/',
   '/blog/gestione-dei-changelog-di-capacitor-guida-completa': '/blog/capacitor-comprehensive-guide/#is-there-enterprise-specific-support-available',
   '/blog/about-open-source': '/blog/open-source/',
+  '/blog/app-access-management': '/blog/how-rbac-secures-ota-updates-in-capacitor-apps/',
+  '/blog/app-behavior-tracking': '/blog/capgo-plugin-for-custom-event-tracking/',
   '/blog/app-risk-assessment': '/blog/ota-security-checklist-for-capacitor-apps/',
   '/blog/expo-development-client': '/blog/alternative-to-expo/',
   '/blog/privacy-manifest-for-capacitor-apps-guide': '/blog/privacy-manifest-for-ios-apps/',
