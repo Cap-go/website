@@ -14,6 +14,7 @@ import Enterprise from '@/components/enterprise.astro'
 import SignupCta from '@/components/SignupCta.astro'
 import OfferText from '@/components/OfferText.astro'
 import AiPricingPrompt from '@/components/pricing/AiPricingPrompt.astro'
+import CurrencySelector from '@/components/pricing/CurrencySelector.astro'
 import { planMonthlyPrice, planYearlyPrice } from '@/lib/planCopy'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { capgoReviews } from '@/config/productTestimonials'
@@ -306,6 +307,7 @@ if (plans.length > 0) {
           </h2>
           <SignupCta id="pricing-final-signup-cta" enterprise humanSupport class="mt-8" />
           <AiPricingPrompt />
+          <CurrencySelector />
         </div>
       </section>
     </section>

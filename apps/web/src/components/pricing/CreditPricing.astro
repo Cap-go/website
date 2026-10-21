@@ -128,7 +128,7 @@ function formatPrice(price: number): string {
                         : `${m.next({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max - credit.step_min, type, credit.unit_factor)}`}
                   </div>
                   <div class="text-right text-sm leading-6 font-semibold text-gray-950">
-                    ${formatPrice(credit.price_per_unit)} {getUnitLabel(type)}
+                    <span data-price-amount={credit.price_per_unit} data-price-format="unit">${formatPrice(credit.price_per_unit)}</span> {getUnitLabel(type)}
                   </div>
                 </div>
               ))}
