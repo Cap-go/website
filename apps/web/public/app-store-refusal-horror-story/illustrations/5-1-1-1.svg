@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Sign in purchase and delete flows">
+  <title>Sign in purchase and delete flows</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="48" cy="52" r="18" fill="#44BCFF" opacity="0.28"/>
+  <rect x="56" y="56" width="72" height="88" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M92 88 C92 76 108 76 108 88 V96 H76 V88 Z" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <circle cx="92" cy="72" r="10" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <rect x="144" y="56" width="72" height="88" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <text x="180" y="108" text-anchor="middle" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="32" font-weight="700">$</text>
+  <rect x="232" y="56" width="72" height="88" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <path d="M256 96 H280 M268 84 V108" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+</svg>

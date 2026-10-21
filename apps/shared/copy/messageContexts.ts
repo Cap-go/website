@@ -3199,6 +3199,7 @@ export const messageContexts = {
   page_not_found_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page 404.astro. Message key `page_not_found_title` (Page Not Found Title).',
   password_label: 'Page/area: Capgo marketing website. Role: UI label. Seen in: page register.astro. Message key `password_label` (Password Label).',
   password_placeholder: 'Page/area: Capgo marketing website. Role: Form input placeholder. Seen in: page register.astro. Message key `password_placeholder` (Password Placeholder).',
+  password_requirements: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page register.astro. Message key `password_requirements` (Password Requirements).',
   pay_as_you_go_plan: 'Product/plan name and navigation label for Enterprise. Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page sla.astro. Message key `pay_as_you_go_plan` (Pay As You Go Plan).',
   per_added_gb: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/PriceDetails.astro. Message key `per_added_gb` (Per Added Gb).',
   per_added_user: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/PriceDetails.astro. Message key `per_added_user` (Per Added User).',

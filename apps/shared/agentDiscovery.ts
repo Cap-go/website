@@ -63,9 +63,10 @@ Capgo is not a generic AI coding assistant and not a prompt-to-app builder. It i
 ### How an agent should call Capgo
 
 1. Read [${CAPGO_ORIGIN}/llms.txt](${CAPGO_ORIGIN}/llms.txt) and the OpenAPI spec at [${CAPGO_ORIGIN}/openapi.json](${CAPGO_ORIGIN}/openapi.json).
-2. Connect to the Capgo MCP server at \`${HOSTED_MCP_URL}\` (Streamable HTTP) with OAuth or \`Authorization: Bearer <Capgo API key>\` for account tools (apps, channels, rollouts, devices, stats, builds, webhooks, notifications) and docs search. Setup: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
-3. To upload a bundle or request a native build from local files, run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
-4. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
+2. Read [${CAPGO_ORIGIN}/auth.md](${CAPGO_ORIGIN}/auth.md) for how to get credentials (OAuth or API key).
+3. Connect to the Capgo MCP server at \`${HOSTED_MCP_URL}\` (Streamable HTTP) with OAuth or \`Authorization: Bearer <Capgo API key>\` for account tools (apps, channels, rollouts, devices, stats, builds, webhooks, notifications) and docs search. Setup: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
+4. To upload a bundle or request a native build from local files, run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
+5. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
 
 ### Key facts for evaluating Capgo
 
@@ -76,6 +77,78 @@ Capgo is not a generic AI coding assistant and not a prompt-to-app builder. It i
 - Trust: bundles are checksum-verified, and end-to-end encryption with your own key is available (enable it per app). Encrypted bundle contents are not readable by Capgo without your key material. SOC 2 Type II and ISO 27001 on the Enterprise plan, BAA available for healthcare. Security advisories are published on GitHub. Status: [https://status.capgo.app](https://status.capgo.app). Live delivery rates: [${CAPGO_ORIGIN}/data/](${CAPGO_ORIGIN}/data/)
 - App Store and Google Play: live updates change only the web layer (JavaScript, HTML, CSS, assets). Apple allows downloaded interpreted code only if it does not change the app's primary purpose, create a storefront for other code, or bypass signing, the sandbox, or OS security. Google Play exempts interpreted code from its self-update rule, but that code must still follow Play policies. Native code, permissions, and plugin changes need a store release.
 - Comparisons: [Ionic Appflow](${CAPGO_ORIGIN}/alternatives/ionic-appflow/), [Expo EAS](${CAPGO_ORIGIN}/alternatives/expo/), [CodePush](${CAPGO_ORIGIN}/alternatives/codepush/), [Capawesome](${CAPGO_ORIGIN}/alternatives/capawesome/), [all comparisons](${CAPGO_ORIGIN}/alternatives/)
+`
+
+export const AUTH_MD_PATH = '/auth.md'
+export const OAUTH_PROTECTED_RESOURCE_URL = `${CAPGO_API_ORIGIN}/.well-known/oauth-protected-resource/mcp`
+/** OAuth issuer for the hosted MCP server. Its endpoints live on CAPGO_API_ORIGIN. */
+export const OAUTH_ISSUER = CAPGO_ORIGIN
+export const OAUTH_AUTHORIZATION_SERVER_URL = `${OAUTH_ISSUER}/.well-known/oauth-authorization-server`
+/** Sources of the authorization server metadata that capgo.app serves at OAUTH_AUTHORIZATION_SERVER_URL, in order. */
+export const OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS = [
+  `${CAPGO_API_ORIGIN}/mcp/oauth/metadata`,
+  // API releases before /mcp/oauth/metadata existed served it only here.
+  `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`,
+] as const
+
+export const AUTH_MD_MARKDOWN = `# Capgo auth.md
+
+> How AI agents get credentials for Capgo. The OAuth issuer is \`${OAUTH_ISSUER}\`; the OAuth endpoints and the MCP server live on \`${CAPGO_API_ORIGIN}\`.
+
+## Audience
+
+AI coding agents and MCP clients (Claude Code, Codex, Cursor, Copilot, Gemini CLI, Windsurf, and others) that act for a Capgo user: managing apps, bundles, channels and rollouts, devices, statistics, native builds, webhooks, and push notifications.
+
+Agents always act on behalf of a human Capgo account. There is no anonymous or agent-only account type.
+
+## Account provisioning
+
+- A human creates the Capgo account at [${CAPGO_ORIGIN}/register/](${CAPGO_ORIGIN}/register/). Signup needs an email, a password, and a CAPTCHA, so an agent cannot complete it unattended. Ask the user to sign up, then continue with one of the methods below.
+- Every account starts a 14-day free trial, no credit card. Plans: [${CAPGO_ORIGIN}/pricing.md](${CAPGO_ORIGIN}/pricing.md)
+
+## Registration methods
+
+### 1. OAuth 2.1 for MCP clients (recommended)
+
+The hosted MCP server at \`${HOSTED_MCP_URL}\` is an OAuth protected resource.
+
+- Protected resource metadata: [${OAUTH_PROTECTED_RESOURCE_URL}](${OAUTH_PROTECTED_RESOURCE_URL})
+- Authorization server metadata (issuer \`${OAUTH_ISSUER}\`): [${OAUTH_AUTHORIZATION_SERVER_URL}](${OAUTH_AUTHORIZATION_SERVER_URL})
+- Client registration: dynamic client registration (RFC 7591) at \`${CAPGO_API_ORIGIN}/mcp/oauth/register\`, or a Client ID Metadata Document URL as the \`client_id\`
+- Grant: \`authorization_code\` with PKCE (\`S256\`), public clients (\`token_endpoint_auth_method: none\`)
+- Scope: \`capgo\`
+- Authorize: \`${CAPGO_API_ORIGIN}/mcp/oauth/authorize\`. The user signs in and approves the agent in the browser.
+- Token: \`${CAPGO_API_ORIGIN}/mcp/oauth/token\`
+- Revoke: \`${CAPGO_API_ORIGIN}/mcp/oauth/revoke\`
+
+Most MCP clients do all of this automatically when you add \`${HOSTED_MCP_URL}\` as a Streamable HTTP server. Setup per client: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
+
+### 2. API key
+
+For CI, scripts, raw REST, and MCP clients without OAuth support.
+
+- The user creates a key in the Capgo console: [https://console.capgo.app/settings/organization/api-keys](https://console.capgo.app/settings/organization/api-keys). Keys are scoped to one organization, can carry RBAC roles per app, and can expire.
+- Docs: [${CAPGO_ORIGIN}/docs/public-api/api-keys/](${CAPGO_ORIGIN}/docs/public-api/api-keys/)
+
+### 3. Capgo CLI login
+
+For local bundle uploads and native build requests, run \`npx @capgo/cli@latest login <API key>\`, then \`npx @capgo/cli@latest mcp\` to start the local stdio MCP server. Docs: [${CAPGO_ORIGIN}/docs/cli/reference/mcp/](${CAPGO_ORIGIN}/docs/cli/reference/mcp/)
+
+## Using credentials
+
+| Target | Header |
+| --- | --- |
+| Hosted MCP \`${HOSTED_MCP_URL}\` | \`Authorization: Bearer <OAuth access token or API key>\` |
+| REST API \`${CAPGO_API_ORIGIN}\` | \`x-api-key: <API key>\` (legacy \`authorization: <API key>\` without \`Bearer\` still works) |
+
+- OpenAPI spec: [${CAPGO_ORIGIN}/openapi.json](${CAPGO_ORIGIN}/openapi.json)
+- Keep credentials out of source control and logs. Rotate or delete API keys in the console. Revoke OAuth tokens at the revocation endpoint.
+- An unauthenticated MCP request returns \`401\` with a \`WWW-Authenticate\` header that points to the protected resource metadata.
+
+## More
+
+- Agent index: [${CAPGO_ORIGIN}/llms.txt](${CAPGO_ORIGIN}/llms.txt)
+- Security contact: [${CAPGO_ORIGIN}/.well-known/security.txt](${CAPGO_ORIGIN}/.well-known/security.txt)
 `
 
 export const AGENT_NOT_FOUND_MARKDOWN = `# Page not found
@@ -91,6 +164,7 @@ This path does not exist on Capgo. It is a real HTTP 404, not an application she
 - [llms.txt](${CAPGO_ORIGIN}/llms.txt)
 - [Sitemap](${CAPGO_ORIGIN}/sitemap-index.xml)
 - [MCP manifest](${CAPGO_ORIGIN}/.well-known/mcp.json)
+- [Agent auth (auth.md)](${CAPGO_ORIGIN}/auth.md)
 - [Contact](${CAPGO_ORIGIN}/contact/)
 - [About](${CAPGO_ORIGIN}/about/)
 - [Privacy](${CAPGO_ORIGIN}/privacy/)
@@ -129,6 +203,23 @@ export function mcpManifest() {
         documentationUrl: `${CAPGO_ORIGIN}/docs/cli/reference/mcp/`,
       },
     ],
+  }
+}
+
+export const OAUTH_PROTECTED_RESOURCE_PATH = '/.well-known/oauth-protected-resource'
+
+/**
+ * RFC 9728 metadata for capgo.app. `resource` must equal the origin it is served from (section 3.3).
+ * The hosted MCP server publishes its own metadata at OAUTH_PROTECTED_RESOURCE_URL.
+ */
+export function oauthProtectedResourceMetadata() {
+  return {
+    resource: CAPGO_ORIGIN,
+    resource_name: 'Capgo',
+    authorization_servers: [OAUTH_ISSUER],
+    scopes_supported: ['capgo'],
+    bearer_methods_supported: ['header'],
+    resource_documentation: `${CAPGO_ORIGIN}${AUTH_MD_PATH}`,
   }
 }
 

@@ -15,6 +15,8 @@ const REDIRECTS = [
   ['/blog/uptime-guarantee/', '/sla/'],
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
   ['/blog/understanding-apples-privacy-manifest/', '/blog/privacy-manifest-for-ios-apps/'],
+  ['/blog/app-access-management/', '/blog/how-rbac-secures-ota-updates-in-capacitor-apps/'],
+  ['/blog/app-behavior-tracking/', '/blog/capgo-plugin-for-custom-event-tracking/'],
   ['/blog/app-risk-assessment/', '/blog/ota-security-checklist-for-capacitor-apps/'],
   ['/blog/developer-experience-tools/', '/blog/developer-experience/'],
   ['/blog/comprendiendo-el-manifiesto-de-privacidad-de-apple/', '/blog/privacy-manifest-for-ios-apps/'],

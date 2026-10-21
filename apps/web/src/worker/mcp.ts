@@ -1,29 +1,26 @@
-import { mcpManifest } from '../../../shared/agentDiscovery'
+import { mcpManifest, oauthProtectedResourceMetadata } from '../../../shared/agentDiscovery'
+import { WELL_KNOWN_CORS_HEADERS, wellKnownMethodGuard } from './well-known'
 
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Accept',
-}
-
-/** /.well-known/mcp.json: points MCP clients at the hosted server on api.capgo.app. */
-export function handleMcpManifestRequest(request: Request): Response {
-  if (request.method === 'OPTIONS') {
-    return new Response(null, { status: 204, headers: CORS_HEADERS })
-  }
-  if (request.method !== 'GET' && request.method !== 'HEAD') {
-    return new Response(JSON.stringify({ error: 'Method not allowed.' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', Allow: 'GET, HEAD, OPTIONS', ...CORS_HEADERS },
-    })
-  }
-  const body = request.method === 'HEAD' ? null : JSON.stringify(mcpManifest())
+function wellKnownJsonResponse(request: Request, document: unknown): Response {
+  const guard = wellKnownMethodGuard(request)
+  if (guard) return guard
+  const body = request.method === 'HEAD' ? null : JSON.stringify(document)
   return new Response(body, {
     status: 200,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'public, max-age=3600',
-      ...CORS_HEADERS,
+      ...WELL_KNOWN_CORS_HEADERS,
     },
   })
+}
+
+/** /.well-known/mcp.json: points MCP clients at the hosted server on api.capgo.app. */
+export function handleMcpManifestRequest(request: Request): Response {
+  return wellKnownJsonResponse(request, mcpManifest())
+}
+
+/** /.well-known/oauth-protected-resource: RFC 9728 metadata naming the Capgo authorization server. */
+export function handleOAuthProtectedResourceRequest(request: Request): Response {
+  return wellKnownJsonResponse(request, oauthProtectedResourceMetadata())
 }

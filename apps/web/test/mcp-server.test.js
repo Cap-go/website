@@ -48,3 +48,15 @@ test('server card points at the hosted MCP server', () => {
   expect(card.instructions).toContain('https://api.capgo.app/mcp')
   expect(JSON.stringify(card)).not.toMatch(/"https:\/\/capgo\.app\/mcp"/)
 })
+
+test('GET /.well-known/oauth-protected-resource serves RFC 9728 metadata for capgo.app', async () => {
+  const pathname = '/.well-known/oauth-protected-resource'
+  const response = await agentSurfaceResponse(new Request(`https://capgo.app${pathname}`), mockAssetsEnv, pathname)
+  expect(response?.status).toBe(200)
+  expect(response?.headers.get('Content-Type')).toContain('application/json')
+  const metadata = await response?.json()
+  expect(metadata.resource).toBe('https://capgo.app')
+  expect(metadata.authorization_servers).toEqual(['https://capgo.app'])
+  expect(metadata.scopes_supported).toEqual(['capgo'])
+  expect(metadata.bearer_methods_supported).toEqual(['header'])
+})

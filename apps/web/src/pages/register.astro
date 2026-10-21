@@ -95,10 +95,15 @@ const content = {
                 name="password"
                 type="password"
                 autocomplete="new-password"
+                passwordrules="minlength: 6; required: lower; required: upper; required: digit; required: [-!@#$%^&*_+=?];"
+                aria-describedby="password-requirements"
                 required
                 class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
                 placeholder={m.password_placeholder({}, { locale: Astro.locals.locale })}
               />
+              <p id="password-requirements" class="mt-1.5 text-xs text-slate-400">
+                {m.password_requirements({}, { locale: Astro.locals.locale })}
+              </p>
             </div>
             {enableCaptcha && <div class="cf-turnstile" data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY} data-size="flexible" data-theme="dark" />}
             <button

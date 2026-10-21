@@ -6,9 +6,10 @@ function client(fetch: (input: RequestInfo | URL, options?: RequestInit) => Prom
   const source = readFileSync(new URL('./registration.ts', import.meta.url), 'utf8')
     .replace(/^import .*\n/gm, '')
     .replace(/^export /gm, '')
-  return runInNewContext(`${new Bun.Transpiler({ loader: 'ts' }).transformSync(source)}\n({ registerUser, RegisterApiError })`, {
+  return runInNewContext(`${new Bun.Transpiler({ loader: 'ts' }).transformSync(source)}\n({ registerUser, RegisterApiError, getPasswordRequirementErrors })`, {
     fetch,
     AbortSignal,
+    TextEncoder,
     useRuntimeConfig: () => ({ public: { baseApiUrl: 'https://api.example.com/' } }),
   })
 }
@@ -56,6 +57,28 @@ test('API errors preserve their code and incomplete success responses cannot red
       expect((error as { code: string }).code).toBe(code)
     }
   }
+})
+
+test('password policy errors from the API are shown instead of the generic message', async () => {
+  const { registerUser } = client(async () =>
+    Response.json(
+      { error: 'invalid_request', message: 'Invalid registration request', errors: ['Password must contain at least one special character'] },
+      { status: 400 },
+    ),
+  )
+  await expect(registerUser({ email: 'signup@example.com', password: 'Abcdef123' })).rejects.toThrow('Password must contain at least one special character')
+})
+
+test('client-side password check mirrors the API policy', () => {
+  const { getPasswordRequirementErrors } = client(async () => Response.json(session))
+  expect(getPasswordRequirementErrors('Password123!')).toEqual([])
+  expect(getPasswordRequirementErrors('xY7kq2mPzR9wB4n')).toEqual(['one special character (for example ! @ # - _ ?)'])
+  expect(getPasswordRequirementErrors('abc')).toEqual([
+    'at least 6 characters',
+    'one uppercase letter',
+    'one number',
+    'one special character (for example ! @ # - _ ?)',
+  ])
 })
 
 test('registration rejects redirects without forwarding credentials to their target', async () => {

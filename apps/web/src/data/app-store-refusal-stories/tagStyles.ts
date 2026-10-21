@@ -1,4 +1,5 @@
 export const appleRejectionStoryTagStyles: Record<string, string> = {
+  '1-2': 'border-pink-400/50 bg-pink-600/15 text-pink-50',
   '1-4-2': 'border-pink-300/50 bg-pink-500/15 text-pink-100',
   '4-3': 'border-rose-300/50 bg-rose-500/15 text-rose-100',
   '4-2-6': 'border-fuchsia-300/50 bg-fuchsia-500/15 text-fuchsia-100',
@@ -7,6 +8,7 @@ export const appleRejectionStoryTagStyles: Record<string, string> = {
   '3-1-3': 'border-lime-400/50 bg-lime-600/15 text-lime-200',
   '5-1-1': 'border-blue-300/50 bg-blue-500/15 text-blue-100',
   '5-1-2': 'border-cyan-300/50 bg-cyan-500/15 text-cyan-100',
+  '5-2-3': 'border-teal-400/50 bg-teal-600/15 text-teal-100',
   '5-6-4': 'border-green-300/50 bg-green-500/15 text-green-100',
   '5-6': 'border-red-300/50 bg-red-500/15 text-red-100',
   '2-5-19': 'border-orange-300/50 bg-orange-500/15 text-orange-100',
@@ -21,4 +23,5 @@ export const appleRejectionStoryTagStyles: Record<string, string> = {
   'simulated-gambling': 'border-yellow-300/50 bg-yellow-500/15 text-yellow-100',
   'fake-documents': 'border-stone-300/50 bg-stone-500/15 text-stone-100',
   'ai-data-sharing': 'border-purple-300/50 bg-purple-500/15 text-purple-100',
+  'kids-category': 'border-pink-400/50 bg-pink-600/15 text-pink-100',
 }

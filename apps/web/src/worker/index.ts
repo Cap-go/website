@@ -1,6 +1,7 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
   markdownNotFoundResponse,
+  OAUTH_PROTECTED_RESOURCE_PATH,
   MCP_MANIFEST_PATHS,
   OPENAPI_ALIAS_PATHS,
   OPENAPI_ASSET_PATH,
@@ -15,10 +16,12 @@ import { withAbTest } from './abtest'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
-import { handleMcpManifestRequest } from './mcp'
+import { handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
+import { handleAuthorizationServerMetadataRequest, OAUTH_AUTHORIZATION_SERVER_PATH } from './oauth-discovery'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
+import { handleSignaturesDirectoryRequest, HTTP_MESSAGE_SIGNATURES_DIRECTORY, signedFetch } from './web-bot-auth'
 
 interface Env {
   AB_FLAG?: string
@@ -33,6 +36,7 @@ interface Env {
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string
+  WEB_BOT_AUTH_PRIVATE_JWK?: string
 }
 
 const JSON_HEADERS = {
@@ -110,7 +114,7 @@ async function handleSponsors(env: Env): Promise<Response> {
   `
 
   try {
-    const response = await fetch('https://api.github.com/graphql', {
+    const response = await signedFetch(env, 'https://api.github.com/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -160,9 +164,9 @@ async function handleSponsors(env: Env): Promise<Response> {
   }
 }
 
-async function handleStatus(): Promise<Response> {
+async function handleStatus(env: Env): Promise<Response> {
   try {
-    const response = await fetch('https://status.capgo.app/status.json')
+    const response = await signedFetch(env, 'https://status.capgo.app/status.json')
     if (!response.ok) {
       console.error('Status API error:', response.status, response.statusText)
       return webJson({ indicator: 'unknown', uptime: 'N/A' }, 500)
@@ -203,7 +207,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   },
   '/status.json': {
     methods: ['GET'],
-    handle: async () => await handleStatus(),
+    handle: async (_request, env) => await handleStatus(env),
   },
   '/readme-banner.svg': {
     methods: ['GET', 'HEAD'],
@@ -452,9 +456,12 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
   })
 }
 
-export async function agentSurfaceResponse(request: Request, env: Env, pathname: string): Promise<Response | null> {
+export async function agentSurfaceResponse(request: Request, env: Env, pathname: string, ctx?: BackgroundContext): Promise<Response | null> {
   if (MCP_MANIFEST_PATHS.has(pathname)) return handleMcpManifestRequest(request)
+  if (pathname === OAUTH_PROTECTED_RESOURCE_PATH) return handleOAuthProtectedResourceRequest(request)
+  if (pathname === OAUTH_AUTHORIZATION_SERVER_PATH) return handleAuthorizationServerMetadataRequest(request, ctx)
   if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)
+  if (pathname === HTTP_MESSAGE_SIGNATURES_DIRECTORY) return handleSignaturesDirectoryRequest(request, env)
   return null
 }
 
@@ -462,7 +469,7 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
   const mtaStsResponse = handleMtaStsRequest(request)
   if (mtaStsResponse) return mtaStsResponse
   const pathname = new URL(request.url).pathname
-  const agentSurface = await agentSurfaceResponse(request, env, pathname)
+  const agentSurface = await agentSurfaceResponse(request, env, pathname, ctx)
   if (agentSurface) return trackAICrawler(request, agentSurface, ctx)
   const staticRedirect = staticLegacyRedirect(request, pathname)
   if (staticRedirect) return trackAICrawler(request, staticRedirect, ctx)

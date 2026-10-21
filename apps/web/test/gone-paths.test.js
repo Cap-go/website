@@ -3,6 +3,7 @@ import { isGonePath } from '../../shared/gonePaths.ts'
 
 const GONE_PATHS = [
   '/blog/app-cohort-analysis/',
+  '/blog/app-user-retention/',
   '/blog/app-vulnerability-scanning/',
   '/blog/developer-productivity/',
   '/blog/enterprise-app-management/',
@@ -32,6 +33,16 @@ for (const gone of GONE_PATHS) {
 test('isGonePath does not match retired app-risk-assessment (301 redirect)', () => {
   expect(isGonePath('/blog/app-risk-assessment/')).toBe(false)
   expect(isGonePath('/de/blog/app-risk-assessment/')).toBe(false)
+})
+
+test('isGonePath does not match retired app-access-management (301 redirect)', () => {
+  expect(isGonePath('/blog/app-access-management/')).toBe(false)
+  expect(isGonePath('/de/blog/app-access-management/')).toBe(false)
+})
+
+test('isGonePath does not match retired app-behavior-tracking (301 redirect)', () => {
+  expect(isGonePath('/blog/app-behavior-tracking/')).toBe(false)
+  expect(isGonePath('/de/blog/app-behavior-tracking/')).toBe(false)
 })
 
 test('isGonePath does not match unrelated paths', () => {

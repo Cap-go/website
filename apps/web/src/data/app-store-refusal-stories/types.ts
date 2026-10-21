@@ -1,4 +1,5 @@
 export type AppleRejectionStoryTag =
+  | '1-2'
   | '1-4-2'
   | '4-3'
   | '4-2-6'
@@ -7,6 +8,7 @@ export type AppleRejectionStoryTag =
   | '3-1-3'
   | '5-1-1'
   | '5-1-2'
+  | '5-2-3'
   | '5-6-4'
   | '5-6'
   | '2-5-19'
@@ -21,8 +23,10 @@ export type AppleRejectionStoryTag =
   | 'simulated-gambling'
   | 'fake-documents'
   | 'ai-data-sharing'
+  | 'kids-category'
 
 export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string> = {
+  '1-2': 'Guideline 1.2',
   '1-4-2': 'Guideline 1.4.2',
   '4-3': 'Guideline 4.3',
   '4-2-6': 'Guideline 4.2.6',
@@ -31,6 +35,7 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   '3-1-3': 'Guideline 3.1.3',
   '5-1-1': 'Guideline 5.1.1',
   '5-1-2': 'Guideline 5.1.2',
+  '5-2-3': 'Guideline 5.2.3 Audio/Video Downloading',
   '5-6-4': 'Guideline 5.6.4',
   '5-6': 'Guideline 5.6 Developer Code of Conduct',
   '2-5-19': 'Guideline 2.5.19 Hidden Features',
@@ -45,6 +50,7 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   'simulated-gambling': 'Simulated gambling',
   'fake-documents': 'Fake documents',
   'ai-data-sharing': 'AI data sharing',
+  'kids-category': 'Kids category',
 }
 
 export type AppleRejectionStoryPlatform = 'iOS' | 'Apple Developer Program' | 'Google Play'

@@ -55,6 +55,8 @@ for (const locale of NON_DEFAULT_LOCALE_CODES) {
 }
 
 const BLOG_LEGACY_REDIRECTS = [
+  ['/blog/app-access-management/', '/blog/how-rbac-secures-ota-updates-in-capacitor-apps/'],
+  ['/blog/app-behavior-tracking/', '/blog/capgo-plugin-for-custom-event-tracking/'],
   ['/blog/app-risk-assessment/', '/blog/ota-security-checklist-for-capacitor-apps/'],
   ['/blog/uptime-guarantee/', '/sla/'],
   ['/blog/developer-experience-tools/', '/blog/developer-experience/'],
