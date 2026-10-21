@@ -29,7 +29,7 @@
     "build": "bun run clean:build-cache && bun run build:docs && bun run build:web",
     "build:after": "bun run repair_sitemap && bun run scripts/run-parallel.ts \"bun run seo:check\" \"bun run contrast:check\"",
     "verify:after:web": "bun run scripts/run-parallel.ts \"cd apps/web && bun run check\" \"bun run build:after\"",
-    "ci:verify:web": "bun test apps/web/src/worker/abtest.test.ts apps/web/src/lib/unifiedRss.test.ts apps/web/test/attribution.test.js && bun run clean:build-cache && bun run build:web && bun run verify:after:web",
+    "ci:verify:web": "bun test apps/web/src/worker/abtest.test.ts apps/web/src/lib/unifiedRss.test.ts apps/web/test/attribution.test.js apps/web/src/scripts/register.test.ts apps/web/src/services/registration.test.ts && bun run clean:build-cache && bun run build:web && bun run verify:after:web",
     "ci:verify:docs": "bun run check:docs-mirror && cd apps/docs && bun run check && cd ../.. && bun run build:docs",
     "generate:message-contexts": "bun run scripts/generate-message-contexts.ts",
     "ci:verify:translation": "cd apps/translation-worker && bun run check",
