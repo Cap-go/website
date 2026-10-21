@@ -3,8 +3,7 @@ slug: test-flight-android
 title: 'TestFlight for Android: Android Equivalent for Beta Testing'
 description: >-
   No TestFlight for Android. Google Play internal and closed testing tracks are
-  the official equivalent; Firebase App Distribution gets builds to testers
-  faster. Compare both workflows.
+  the official equivalent; Firebase App Distribution speeds up beta builds.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -21,7 +20,7 @@ locale: en
 origin: ai
 next_blog: ''
 ---
-There is no **TestFlight app for Android**. Apple never shipped TestFlight on Android, and Google does not offer a single TestFlight-style tester app. The official Android equivalent is **Google Play Console** testing tracks (**internal**, **closed**, and **open** testing), with **Firebase App Distribution** as the usual way to push beta builds to testers faster than store-only workflows.
+There is no **TestFlight app for Android**. Apple never shipped TestFlight on Android, and Google Play does not provide one unified TestFlight-style tester app (testers install builds through Play testing enrollment instead). The official Android equivalent is **Google Play Console** testing tracks (**internal**, **closed**, and **open** testing), with **Firebase App Distribution** and the **Firebase App Tester** app as the usual way to push beta builds to testers faster than store-only workflows.
 
 If you've just moved over from iOS, this is usually the moment where the Android release process feels oddly fragmented. On iPhone, “send it through TestFlight” is a clear instruction. On Android, the answer depends on what you need: a fast internal build loop, a managed public beta, or a way to patch a live app after release without waiting on the store again.
 
@@ -65,7 +64,7 @@ If your team wants a broader map of tools beyond Google's defaults, this roundup
 
 Google Play Console is the official Android answer for beta distribution. It's less “one app for testers” and more “a set of controlled lanes” inside your release pipeline. That ends up being more flexible, but it also means you need to be explicit about who gets what build and why.
 
-Google's release philosophy is also more testing-centered than many teams expect. Google emphasizes that app testing should happen continuously before public release because it enables **rapid feedback**, **early failure detection**, and safer refactoring, as outlined in Google's [launch checklist for Android apps](https://developer.android.com/distribute/best-practices/launch/launch-checklist).
+Google's release philosophy is also more testing-centered than many teams expect. Google emphasizes that app testing should happen continuously before public release because it enables **rapid feedback**, **early failure detection**, and safer refactoring, as outlined in Google's [Android testing guidance](https://developer.android.com/training/testing).
 
 ![An infographic showing the four stages of Google Play Console testing tracks from internal to production.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/475a57c9-f634-471a-9d9a-b1a9871abcf0/test-flight-android-testing-tracks.jpg)
 
