@@ -6238,14 +6238,14 @@ const messages = {
   website_live_compat_title: 'Works with websites built with',
   website_live_cta_primary: 'Start with Web2App',
   website_live_cta_secondary: 'See all plans',
-  website_live_cta_subtitle: '$12 per month, or $120 per year with two months free. One price per organization, however many devices install your app.',
+  website_live_cta_subtitle: '{monthly} per month, or {yearly} per year with two months free. One price per organization, however many devices install your app.',
   website_live_cta_title: 'Turn your website into an app, then keep deploying',
-  website_live_description: 'Capgo Web2App turns your deployed website into iOS and Android apps, submits them for review and updates them on every deploy. $12/month.',
+  website_live_description: 'Capgo Web2App turns your deployed website into iOS and Android apps, submits them for review and updates them on every deploy. {monthly}/month.',
   website_live_faq1_a:
     'Yes, within the same rules as any Capgo live update. Apple lets apps download interpreted code such as JavaScript as long as it does not change the primary purpose of the app, bypass the security of the operating system, or create a store or storefront for other Applications (section 3.3.1(B) of the Apple Developer Program License Agreement). Google Play allows JavaScript in a WebView under its executable-code rules, and any interpreted code loaded at runtime must follow Google Play policies. Web2App only downloads HTML, CSS and JavaScript that runs in the same WebView as your shipped app. Guideline 4.2 is a separate point: Apple expects an app to offer more than a repackaged website, so give it real app value. Each app is reviewed on its own, so nobody can promise approval.',
   website_live_faq1_q: 'Is this allowed on the App Store and Google Play?',
   website_live_faq2_a:
-    'The updater calls notifyAppReady() automatically once a new version shows content. If that never happens, the app goes back to the version that last worked. Fix the site, deploy again, and devices pick up the fix on their next check.',
+    'In website mode the updater calls notifyAppReady() for you once a new version shows content, both in the Web2App template and in your own Capacitor project. If that never happens, the app goes back to the version that last worked. Fix the site, deploy again, and devices pick up the fix on their next check.',
   website_live_faq2_q: 'What happens if a deploy breaks the app?',
   website_live_faq3_a:
     'Only if the site is a static client build. Web2App downloads the same files Capacitor bundles into the app, so pages rendered on a server have nothing to download. A Next.js static export works. Next.js server pages, or any SSR shell, do not.',
@@ -6341,7 +6341,7 @@ const messages = {
   website_live_oldway_eyebrow: 'Before and after',
   website_live_oldway_title: 'Getting a website into the stores used to be a project',
   website_live_phone_aria_label: 'Your website shown inside the iOS app',
-  website_live_price_note: 'per organization, or $120/year (2 months free)',
+  website_live_price_note: 'per organization, or {yearly}/year (2 months free)',
   website_live_price_per_month: '/month',
   website_live_pricing_body:
     'Already deploy a static web app? Web2App turns it into iOS and Android apps, builds and submits them for you, and updates them straight from your website. No uploads, no CLI, unlimited updates and devices. It skips channels, stats and encryption, which is why it costs a fraction of a full plan.',
@@ -6359,7 +6359,7 @@ const messages = {
     'Connect the Capgo hosted MCP server to your agent and ask it to publish. It sets the listing, icon and keys, starts the build and follows the logs with the same tools the console uses.',
   website_live_publish_mcp_title: 'From your AI agent, over MCP',
   website_live_publish_own_body:
-    'Keep it. Add @capgo/capacitor-updater, turn on autoUpdate, and call notifyAppReady() once your app has rendered. Ship the app with your own build, and Web2App updates it from your site the same way.',
+    'Keep it. Add @capgo/capacitor-updater and turn on websiteMode with autoUpdate. notifyAppReady() runs automatically once the page shows content. Ship the app with your own build, and Web2App updates it from your site the same way.',
   website_live_publish_own_title: 'Already have a Capacitor project?',
   website_live_publish_title: 'Publish to the stores from the console or from your AI agent',
   website_live_publish_ui_body:
@@ -6387,7 +6387,7 @@ const messages = {
   website_live_row_native_builds: 'Native builds of your own Capacitor project',
   website_live_row_price: 'Price',
   website_live_row_price_full: 'Solo, Maker, Team and Enterprise plans',
-  website_live_row_price_live: '$12/month or $120/year',
+  website_live_row_price_live: '{monthly}/month or {yearly}/year',
   website_live_row_rollback: 'Automatic rollback when a new version fails to start',
   website_live_row_rollouts: 'Staged and percentage rollouts',
   website_live_row_source: 'Where updates come from',

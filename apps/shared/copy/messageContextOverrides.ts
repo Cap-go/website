@@ -5,7 +5,7 @@
 import type { MessageKey } from './messages'
 
 export const messageContextOverrides = {
-  // website_live_* keys are Web2App copy; generator PREFIX + web2app_* humanize labels apply to all keys.
+  // website_live_* keys are Web2App copy; the generator maps their page label and humanized name (web2app_*) from the website_live_ prefix.
   // Add per-key overrides here only when a specific string needs extra translator guidance.
   live_update_hero_headline:
     'SEO product H1. Keep the product name "Capacitor Live Updates" and the acronym OTA in parentheses. Do not replace OTA with a long translated phrase in the headline.',

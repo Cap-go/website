@@ -127,12 +127,12 @@ const SUFFIX_ROLE: Array<{ test: (key: string) => boolean; role: string }> = [
   { test: (key) => /_title$|_headline$|_heading$/.test(key), role: 'Section or page heading' },
   { test: (key) => /_subtitle$|_tagline$|_eyebrow$/.test(key), role: 'Section subtitle or tagline' },
   { test: (key) => /_cta$|_button$|_link_text$|_link$/.test(key), role: 'Call-to-action button or link label' },
+  { test: (key) => /_aria_label$/.test(key), role: 'Accessible aria-label for assistive tech' },
   { test: (key) => /_label$|_name$/.test(key), role: 'UI label' },
   { test: (key) => /_faq_/.test(key) || /_question$/.test(key), role: 'FAQ question or answer' },
   { test: (key) => /_li\d+$|_item_\d+$|_point_/.test(key) || /_play_\d+$/.test(key), role: 'Bullet list item' },
   { test: (key) => /_note$|_footnote$/.test(key), role: 'Supporting note or footnote' },
   { test: (key) => /_placeholder$/.test(key), role: 'Form input placeholder' },
-  { test: (key) => /_aria_label$/.test(key), role: 'Accessible aria-label for assistive tech' },
   { test: (key) => /_alt$/.test(key), role: 'Image alt text' },
 ]
 
