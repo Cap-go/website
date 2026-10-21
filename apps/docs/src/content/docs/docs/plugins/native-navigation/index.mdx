@@ -49,7 +49,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ## Core API
 
 - `configure(options?)` enables the native chrome host and controls content insets.
-- `setNavbar(options)` updates native title, subtitle, back button, buttons, colors, transparency, and visibility.
+- `setNavbar(options)` updates native title, subtitle, back button, buttons, colors, transparency, visibility, and multi-level segment rows under the bar (`segments`).
 - `setTabbar(options)` updates tabs, selected tab, badges, labels, icons, colors, and visibility.
 - `beginTransition(options?)` captures the outgoing WebView before the JavaScript route change.
 - `finishTransition(options?)` animates from the captured snapshot to the live WebView after route content is ready.
@@ -60,6 +60,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 - `navbarBack` fires when the native back affordance is tapped.
 - `navbarItemTap` fires when a native navbar action button is tapped.
+- `navbarSegmentSelect` fires when an item in a navbar segment row is selected.
 - `tabSelect` fires when a native tab is selected.
 - `safeAreaChanged` reports native bar and safe-area inset changes.
 - `transitionStart` and `transitionEnd` report native transition boundaries.

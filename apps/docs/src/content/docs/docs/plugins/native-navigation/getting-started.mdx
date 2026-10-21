@@ -115,6 +115,55 @@ If you prefer Manual Setup, install the plugin by running the following commands
    ```
 </Steps>
 
+## Multi-level navbar with segment rows
+
+Pass `segments` to `setNavbar` to stack rows of native segments under the bar, for example a scope switcher on top and section tabs below it. Rows draw top to bottom and each one adds 44pt (iOS) or 48dp (Android) to the navbar and to the reported insets. iOS uses `UISegmentedControl` and glass pills; Android uses Material segmented buttons and filter chips.
+
+<img src="/plugins/demo/capacitor-native-navigation/navbar-segments.webp" alt="iOS native navbar with an Account / Organization segmented control and a scrolling row of section chips" width="320" />
+
+```ts
+const sections = {
+  account: ['General', 'Notifications', 'Password', 'Two-factor'],
+  organization: ['General', 'Members', 'Plans', 'Usage', 'Credits', 'Billing', 'Security', 'Webhooks'],
+};
+const selection = { scope: 'account', section: 'general' };
+
+const renderNavbar = () =>
+  NativeNavigation.setNavbar({
+    title: 'Settings',
+    segments: [
+      {
+        id: 'scope',
+        selectedId: selection.scope,
+        items: [
+          { id: 'account', title: 'Account' },
+          { id: 'organization', title: 'Organization' },
+        ],
+      },
+      {
+        id: 'section',
+        style: 'scroll', // scrolling chips; `auto` uses `segmented` for up to 4 items
+        selectedId: selection.section,
+        items: sections[selection.scope].map((title) => ({ id: title.toLowerCase(), title })),
+      },
+    ],
+  });
+
+await NativeNavigation.addListener('navbarSegmentSelect', async ({ groupId, id }) => {
+  if (groupId === 'scope') {
+    selection.scope = id;
+    selection.section = 'general'; // the second level depends on the first one
+  } else {
+    selection.section = id;
+  }
+  await renderNavbar();
+});
+
+await renderNavbar();
+```
+
+Selection moves natively when the user taps, but every `setNavbar` call applies `selectedId` again. Keep the selected ids in your state and pass them on every later `setNavbar` call; to reject a selection, send the previous `selectedId`. Items also accept `icon`, `accessibilityLabel`, and `enabled`. Pass `segments: []` to remove the rows. Available since 8.13.0.
+
 ## Transition flow
 
 Native transitions are a transaction around your normal JavaScript route change:
