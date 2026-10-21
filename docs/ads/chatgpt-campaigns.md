@@ -73,7 +73,7 @@ Landing page: https://capgo.app/native-build/
 
 | Variant | Title | Copy | Image | Links |
 |---|---|---|---|---|
-| `a_command` | Ship without the Mac (20) | One command builds signed iOS and Android apps (46) | Terminal running `npx @capgo/cli build request --platform ios` | [image](https://capgo.app/ads/chatgpt/native-build-a_command.png) · [tracking URL](https://capgo.app/native-build/?offer=direct&utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=chatgpt_nativebuild&utm_content=a_command) |
+| `a_command` | Ship without the Mac (20) | One command builds a signed iOS app. No Mac. (44) | Terminal running `npx @capgo/cli build request --platform ios` | [image](https://capgo.app/ads/chatgpt/native-build-a_command.png) · [tracking URL](https://capgo.app/native-build/?offer=direct&utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=chatgpt_nativebuild&utm_content=a_command) |
 | `b_cloud` | iOS cloud builds (16) | Capacitor iOS builds on cloud Macs. No Xcode. (45) | Terminal with signed Android and iOS builds | [image](https://capgo.app/ads/chatgpt/native-build-b_cloud.png) · [tracking URL](https://capgo.app/native-build/?offer=direct&utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=chatgpt_nativebuild&utm_content=b_cloud) |
 | `c_qr` | Share builds by QR code (23) | Share a build with a QR code. No TestFlight. (44) | QR code with install checklist | [image](https://capgo.app/ads/chatgpt/native-build-c_qr.png) · [tracking URL](https://capgo.app/native-build/?offer=direct&utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=chatgpt_nativebuild&utm_content=c_qr) |
 
