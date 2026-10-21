@@ -27,6 +27,3 @@ export function formatMau(value: number) {
   return new Intl.NumberFormat('en-US').format(value)
 }
 
-export function formatUsd(value: number) {
-  return `$${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.round(value))}`
-}

@@ -47,12 +47,12 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
   return highlights
 }
 
-function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
-  if (yearly) {
-    const price = (yearlyPrice / 12).toFixed(0)
-    return name === 'Enterprise' && !enterpriseScale ? `$${price}+` : `$${price}`
-  }
-  return name === 'Enterprise' && !enterpriseScale ? `$${monthlyPrice}+` : `$${monthlyPrice}`
+function priceAmount(monthlyPrice: number, yearlyPrice: number) {
+  return yearly ? Math.round(yearlyPrice / 12) : monthlyPrice
+}
+
+function priceSuffix(name: string) {
+  return name === 'Enterprise' && !enterpriseScale ? '+' : ''
 }
 
 function buildTimeDisplay(buildTimeSeconds: number) {
@@ -95,13 +95,19 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 
         <div class="mt-6 lg:mt-8">
           <div class="flex items-end gap-1">
-            <p class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl" data-price aria-live="polite">
-              {priceDisplay(plan.price_m, plan.price_y, plan.name)}
+            <p
+              class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl"
+              data-price
+              data-price-amount={priceAmount(plan.price_m, plan.price_y)}
+              data-price-suffix={priceSuffix(plan.name)}
+              aria-live="polite"
+            >
+              ${priceAmount(plan.price_m, plan.price_y)}{priceSuffix(plan.name)}
             </p>
             <p class="pb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">/{m.month({}, { locale: Astro.locals.locale })}</p>
           </div>
           <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-yearly-price style={yearly ? '' : 'display: none'}>
-            {m.billed_annually_at({}, { locale: Astro.locals.locale })} $<span data-yearly-total>{numberWithSpaces(plan.price_y)}</span>
+            {m.billed_annually_at({}, { locale: Astro.locals.locale })} <span data-price-amount={plan.price_y}>${numberWithSpaces(plan.price_y)}</span>
           </p>
           <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-monthly-price style={yearly ? 'display: none' : ''}>
             {m.billed_monthly({}, { locale: Astro.locals.locale })}
@@ -239,6 +245,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
       </div>
     ))}
   </div>
+  <p class="mt-3 text-center text-xs text-gray-400" data-currency-note hidden>
+    {m.pricing_currency_estimate_note({}, { locale: Astro.locals.locale })}
+    <a href="#currency" class="font-semibold text-blue-400 underline-offset-2 hover:underline">{m.pricing_currency_change({}, { locale: Astro.locals.locale })}</a>
+  </p>
 </section>
 
 {enterpriseScale && enterprisePlan && (
@@ -273,7 +283,8 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         const monthlyPriceElement = planElement.querySelector('[data-monthly-price]')
 
         if (priceElement) {
-          const price = isYearly ? (plan.price_y / 12).toFixed() : plan.price_m
+          const price = isYearly ? Math.round(plan.price_y / 12) : plan.price_m
+          priceElement.setAttribute('data-price-amount', String(price))
           priceElement.textContent = planName === 'Enterprise' ? `$${price}+` : `$${price}`
         }
 
@@ -285,6 +296,8 @@ function buildTimeDisplay(buildTimeSeconds: number) {
           monthlyPriceElement.style.display = isYearly ? 'none' : ''
         }
       })
+      // Re-applies the visitor's display currency, see src/scripts/currency.ts.
+      document.dispatchEvent(new Event('capgo:prices-updated'))
     }
 
     // Handle FAQ info icon clicks
@@ -335,7 +348,8 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 </script>
 
 <script>
-  import { ENTERPRISE_MAU_STOPS, enterpriseMonthlyCredits, formatMau, formatUsd, type CreditStep } from '@/lib/enterpriseScale'
+  import { ENTERPRISE_MAU_STOPS, enterpriseMonthlyCredits, formatMau, type CreditStep } from '@/lib/enterpriseScale'
+  import { formatMoney, onCurrencyChange } from '@/scripts/currency'
 
   function initEnterpriseScale() {
     const card = document.querySelector<HTMLElement>('[data-enterprise-scale]')
@@ -361,7 +375,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
       const mauLabel = formatMau(targetMau)
 
       const price = query('[data-price]')
-      if (price) price.textContent = formatUsd(base + credits)
+      if (price) {
+        price.dataset.priceAmount = String(base + credits)
+        price.textContent = formatMoney(base + credits)
+      }
       const mau = query('[data-enterprise-mau]')
       if (mau) mau.textContent = `${mauLabel} MAU`
       const highlight = query('[data-enterprise-mau-highlight]')
@@ -380,6 +397,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
     slider.addEventListener('input', update)
     yearlyRadio?.addEventListener('change', update)
     monthlyRadio?.addEventListener('change', update)
+    onCurrencyChange(update)
     update()
   }
 
