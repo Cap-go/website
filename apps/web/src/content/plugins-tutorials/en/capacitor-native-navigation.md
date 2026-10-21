@@ -52,7 +52,9 @@ await NativeNavigation.setNavbar({
 
 Pass `segments` to `setNavbar` to stack rows of native segments under the bar, for example a scope switcher on top and section tabs below it. Rows draw top to bottom and each one adds 44pt (iOS) or 48dp (Android) to the navbar and to the reported insets. iOS uses `UISegmentedControl` and glass pills; Android uses Material segmented buttons and filter chips.
 
-<img src="/plugins/demo/capacitor-native-navigation/navbar-segments-demo.webp" alt="iOS recording: tapping Account sections, switching to Organization swaps the second row to eight scrolling chips, selecting Billing, then back to Account" width="280" />
+| iOS | Android |
+| :---: | :---: |
+| <img src="/plugins/demo/capacitor-native-navigation/navbar-segments-demo.webp" alt="iOS recording: tapping Account sections, switching to Organization swaps the second row to eight scrolling chips, selecting Billing" width="160" /> | <img src="/plugins/demo/capacitor-native-navigation/navbar-segments-android.webp" alt="Android recording: segmented Account / Organization row over scrolling section chips, switching scope and selecting Billing" width="160" /> |
 
 ```ts
 const sections = {
