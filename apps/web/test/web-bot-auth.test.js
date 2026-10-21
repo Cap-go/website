@@ -29,6 +29,10 @@ test('signatures directory HEAD has no body and rejects other methods', async ()
   expect(await head.text()).toBe('')
   const post = await handleSignaturesDirectoryRequest(new Request(directoryUrl, { method: 'POST' }), {})
   expect(post.status).toBe(405)
+  expect(post.headers.get('Cache-Control')).toBe('no-store')
+  const options = await handleSignaturesDirectoryRequest(new Request(directoryUrl, { method: 'OPTIONS' }), {})
+  expect(options.status).toBe(204)
+  expect(options.headers.get('Access-Control-Allow-Origin')).toBe('*')
 })
 
 test('a private key that does not match the published key is ignored', async () => {
@@ -92,14 +96,17 @@ test('signedFetch sends unsigned requests when no key is configured', async () =
 })
 
 test('a malformed private key never reaches the logs', async () => {
-  const secret = '{"kty":"OKP","d":"super-secret-material"'
-  const errors = []
-  const original = console.error
-  console.error = (...args) => errors.push(args.map(String).join(' '))
+  // Not JSON: the parser error message echoes the source text, so logging it would leak the secret.
+  const secret = 'supersecretkeymaterial'
+  expect(() => JSON.parse(secret)).toThrow(/supersecre/)
+  const logged = []
+  const originals = { error: console.error, warn: console.warn, log: console.log }
+  for (const level of Object.keys(originals)) console[level] = (...args) => logged.push(args.map(String).join(' '))
   try {
     expect(await getWebBotSigner({ WEB_BOT_AUTH_PRIVATE_JWK: secret })).toBeNull()
   } finally {
-    console.error = original
+    Object.assign(console, originals)
   }
-  expect(errors.join('\n')).not.toContain('super-secret-material')
+  expect(logged.length).toBeGreaterThan(0)
+  expect(logged.join('\n')).not.toContain('supersecre')
 })

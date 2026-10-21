@@ -2,6 +2,7 @@ import { component, createSignature } from 'http-message-sig'
 import { generateNonce, HTTP_MESSAGE_SIGNATURES_DIRECTORY, sign } from 'web-bot-auth'
 import { signerFromJWK } from 'web-bot-auth/crypto'
 import type { WebBotSigner } from 'web-bot-auth'
+import { WELL_KNOWN_CORS_HEADERS, wellKnownMethodGuard } from './well-known'
 
 export { HTTP_MESSAGE_SIGNATURES_DIRECTORY }
 
@@ -55,15 +56,13 @@ export async function handleSignaturesDirectoryRequest(
   env: WebBotAuthEnv,
   publicJwk: JsonWebKey = WEB_BOT_AUTH_PUBLIC_JWK,
 ): Promise<Response> {
-  if (request.method !== 'GET' && request.method !== 'HEAD') {
-    return new Response(null, { status: 405, headers: { Allow: 'GET, HEAD' } })
-  }
+  const guard = wellKnownMethodGuard(request)
+  if (guard) return guard
 
   const headers = new Headers({
     'Content-Type': DIRECTORY_CONTENT_TYPE,
     'Cache-Control': `public, max-age=${DIRECTORY_MAX_AGE_SECONDS}`,
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, HEAD',
+    ...WELL_KNOWN_CORS_HEADERS,
   })
 
   const signer = await getWebBotSigner(env, publicJwk)
