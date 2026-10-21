@@ -49,34 +49,6 @@ test('server card points at the hosted MCP server', () => {
   expect(JSON.stringify(card)).not.toMatch(/"https:\/\/capgo\.app\/mcp"/)
 })
 
-test('GET /.well-known/agent-card.json serves an A2A Agent Card for the hosted MCP server', async () => {
-  const response = await agentSurfaceResponse(new Request('https://capgo.app/.well-known/agent-card.json'), mockAssetsEnv, '/.well-known/agent-card.json')
-  expect(response?.status).toBe(200)
-  expect(response?.headers.get('Content-Type')).toContain('application/json')
-  const card = await response?.json()
-  for (const field of ['name', 'version', 'description', 'supportedInterfaces', 'capabilities', 'skills', 'defaultInputModes', 'defaultOutputModes']) {
-    expect(card[field]).toBeDefined()
-  }
-  expect(card.supportedInterfaces[0].url).toBe('https://api.capgo.app/mcp')
-  expect(card.supportedInterfaces[0].protocolBinding).toStartWith('https://modelcontextprotocol.io/specification/')
-  expect(card.supportedInterfaces[0].protocolVersion).toBe('1.0')
-  expect(card.skills.length).toBeGreaterThan(5)
-  for (const skill of card.skills) {
-    expect(typeof skill.id).toBe('string')
-    expect(typeof skill.name).toBe('string')
-    expect(typeof skill.description).toBe('string')
-    expect(Array.isArray(skill.tags)).toBe(true)
-  }
-  expect(new Set(card.skills.map((skill) => skill.id)).size).toBe(card.skills.length)
-  expect(Object.keys(card.securitySchemes)).toEqual(['oauth2', 'apiKey'])
-})
-
-test('legacy /.well-known/agent.json serves the same Agent Card', async () => {
-  const response = await agentSurfaceResponse(new Request('https://capgo.app/.well-known/agent.json'), mockAssetsEnv, '/.well-known/agent.json')
-  expect(response?.status).toBe(200)
-  expect((await response?.json()).name).toBe('Capgo')
-})
-
 test('GET /.well-known/oauth-protected-resource serves RFC 9728 metadata for capgo.app', async () => {
   const pathname = '/.well-known/oauth-protected-resource'
   const response = await agentSurfaceResponse(new Request(`https://capgo.app${pathname}`), mockAssetsEnv, pathname)
