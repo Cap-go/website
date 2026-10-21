@@ -3210,6 +3210,7 @@ const messages = {
   page_not_found_title: 'Page Not Found - Error 404',
   password_label: 'Password',
   password_placeholder: 'Enter your password',
+  password_requirements: 'At least 6 characters, with an uppercase letter, a lowercase letter, a number and a special character.',
   pay_as_you_go_plan: 'Enterprise',
   per_added_gb: 'per added GiB',
   per_added_user: 'per added user',

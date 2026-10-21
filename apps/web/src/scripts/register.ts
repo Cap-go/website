@@ -1,5 +1,5 @@
 import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
-import { RegisterApiError, registerUser } from '@/services/registration'
+import { formatPasswordRequirementErrors, getPasswordRequirementErrors, RegisterApiError, registerUser } from '@/services/registration'
 import { getRegistrationDevice } from '@/services/registration-device'
 import Toastify from 'toastify-js'
 
@@ -64,6 +64,19 @@ form?.addEventListener('submit', async (e) => {
       },
     }).showToast()
   }
+
+  const passwordErrors = getPasswordRequirementErrors(password.value)
+  if (passwordErrors.length > 0) {
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'validation', code: 'weak_password' })
+    password.setAttribute('aria-invalid', 'true')
+    password.focus()
+    return Toastify({
+      text: formatPasswordRequirementErrors(passwordErrors),
+      duration: 8000,
+      style: { background: '#e7000b' },
+    }).showToast()
+  }
+  password.removeAttribute('aria-invalid')
 
   if (document.querySelector('.cf-turnstile') && !getCaptchaId()) {
     return Toastify({

@@ -32,6 +32,32 @@ export class RegisterApiError extends Error {
   }
 }
 
+// Mirrors the password policy enforced by the /auth/register API so users see what is missing before submitting.
+const PASSWORD_MIN_LENGTH = 6
+const PASSWORD_MAX_BYTES = 72
+const PASSWORD_SPECIAL_CHARACTERS = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/
+
+export function getPasswordRequirementErrors(password: string): string[] {
+  const errors: string[] = []
+  if (password.length < PASSWORD_MIN_LENGTH) errors.push(`at least ${PASSWORD_MIN_LENGTH} characters`)
+  if (!/[a-z]/.test(password)) errors.push('one lowercase letter')
+  if (!/[A-Z]/.test(password)) errors.push('one uppercase letter')
+  if (!/\d/.test(password)) errors.push('one number')
+  if (!PASSWORD_SPECIAL_CHARACTERS.test(password)) errors.push('one special character (for example ! @ # - _ ?)')
+  if (new TextEncoder().encode(password).length > PASSWORD_MAX_BYTES) errors.push(`no more than ${PASSWORD_MAX_BYTES} bytes`)
+  return errors
+}
+
+export function formatPasswordRequirementErrors(errors: string[]): string {
+  return `Your password must contain ${errors.join(', ')}.`
+}
+
+function getApiErrorMessage(data: any): string {
+  const details = Array.isArray(data?.errors) ? data.errors.filter((error: unknown) => typeof error === 'string' && error) : []
+  if (details.length > 0) return details.join('. ')
+  return data?.message || 'Unable to create account. Please try again.'
+}
+
 export async function registerUser(input: RegisterUserInput, baseApiUrl = useRuntimeConfig().public.baseApiUrl): Promise<RegisterUserResult> {
   const response = await fetch(`${baseApiUrl.replace(/\/$/, '')}/auth/register`, {
     method: 'POST',
@@ -42,7 +68,7 @@ export async function registerUser(input: RegisterUserInput, baseApiUrl = useRun
   })
   const data = await response.json().catch(() => null)
   if (!response.ok) {
-    throw new RegisterApiError(data?.message || 'Unable to create account. Please try again.', data?.error)
+    throw new RegisterApiError(getApiErrorMessage(data), data?.error)
   }
   if (
     typeof data?.user?.id !== 'string' ||
