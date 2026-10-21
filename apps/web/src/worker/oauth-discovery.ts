@@ -1,4 +1,4 @@
-import { OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URL, OAUTH_ISSUER } from '../../../shared/agentDiscovery'
+import { OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS, OAUTH_ISSUER } from '../../../shared/agentDiscovery'
 import { cachedJsonResponse } from './cached-json'
 import type { BackgroundContext } from './types'
 import { WELL_KNOWN_CORS_HEADERS, wellKnownMethodGuard } from './well-known'
@@ -11,11 +11,18 @@ const METADATA_TTL_SECONDS = 3600
  * The API generates it (MCP_OAUTH_ISSUER); only metadata naming this issuer is served.
  */
 export async function loadAuthorizationServerMetadata(fetchImpl: typeof fetch = fetch): Promise<Record<string, unknown>> {
-  const response = await fetchImpl(OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URL, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(5000) })
-  if (!response.ok) throw new Error(`Authorization server metadata returned ${response.status}`)
-  const metadata = (await response.json()) as Record<string, unknown>
-  if (metadata.issuer !== OAUTH_ISSUER) throw new Error(`Unexpected issuer ${String(metadata.issuer)}`)
-  return metadata
+  const failures: string[] = []
+  for (const url of OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS) {
+    const response = await fetchImpl(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(5000) })
+    if (!response.ok) {
+      failures.push(`${url} returned ${response.status}`)
+      continue
+    }
+    const metadata = (await response.json()) as Record<string, unknown>
+    if (metadata.issuer === OAUTH_ISSUER) return metadata
+    failures.push(`${url} has issuer ${String(metadata.issuer)}`)
+  }
+  throw new Error(`No authorization server metadata for ${OAUTH_ISSUER}: ${failures.join('; ')}`)
 }
 
 export async function handleAuthorizationServerMetadataRequest(request: Request, ctx?: BackgroundContext): Promise<Response> {

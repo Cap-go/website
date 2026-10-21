@@ -84,8 +84,12 @@ export const OAUTH_PROTECTED_RESOURCE_URL = `${CAPGO_API_ORIGIN}/.well-known/oau
 /** OAuth issuer for the hosted MCP server. Its endpoints live on CAPGO_API_ORIGIN. */
 export const OAUTH_ISSUER = CAPGO_ORIGIN
 export const OAUTH_AUTHORIZATION_SERVER_URL = `${OAUTH_ISSUER}/.well-known/oauth-authorization-server`
-/** Source of the authorization server metadata that capgo.app serves at OAUTH_AUTHORIZATION_SERVER_URL. */
-export const OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URL = `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`
+/** Sources of the authorization server metadata that capgo.app serves at OAUTH_AUTHORIZATION_SERVER_URL, in order. */
+export const OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS = [
+  `${CAPGO_API_ORIGIN}/mcp/oauth/metadata`,
+  // API releases before /mcp/oauth/metadata existed served it only here.
+  `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`,
+] as const
 
 export const AUTH_MD_MARKDOWN = `# Capgo auth.md
 
