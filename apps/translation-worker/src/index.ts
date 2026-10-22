@@ -166,9 +166,9 @@ function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecut
 }
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
-// Picked from a French benchmark against Workers AI models (see the PR introducing it).
-// Gemma 4 drafts fast and cheap with thinking disabled, and stays on the default
-// 300 requests/minute tier; paid-plan models such as DeepSeek V4 are capped at 20.
+// Picked from a French benchmark against Workers AI models (see the PR introducing it):
+// Gemma 4 drafts fast and cheap with thinking disabled, then TRANSLATION_REVIEW_MODEL
+// (DeepSeek V4.1 Flash in wrangler.jsonc) reviews the drafts against the style guide.
 const DEFAULT_MODEL = '@cf/google/gemma-4-26b-a4b-it'
 // Hybrid reasoning models think before answering by default. Translation does not need
 // it (same benchmark score, a fraction of the latency); the optional review pass keeps it.
@@ -2242,24 +2242,15 @@ function polishTranslatedText(targetLanguage: string, text: string): string {
 
 // Optional second pass (TRANSLATION_REVIEW_MODEL): a reviewer model fixes the drafts
 // against the same style guide, with its reasoning left on. Any failure keeps the drafts.
-// TRANSLATION_REVIEW_MODEL is a comma-separated list tried in order: DeepSeek reviews
-// best but is capped at 20 requests/minute, so a rate-limited review falls back to the next model.
-function translationReviewModels(env: Env): string[] {
-  return (env.TRANSLATION_REVIEW_MODEL ?? '')
-    .split(',')
-    .map((model) => model.trim())
-    .filter(Boolean)
-}
-
-async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: Array<{ id: string; text: string; context?: string }>, drafts: string[]): Promise<string[]> {
-  for (const reviewModel of translationReviewModels(env)) {
-    try {
-      return await reviewTranslatedBatchWithModel(env, reviewModel, targetLanguage, items, drafts)
-    } catch (error) {
-      console.warn('Translation review failed', { targetLanguage, reviewModel, error: errorMessage(error) })
-    }
+async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<string[]> {
+  const reviewModel = env.TRANSLATION_REVIEW_MODEL?.trim()
+  if (!reviewModel) return drafts
+  try {
+    return await reviewTranslatedBatchWithModel(env, reviewModel, targetLanguage, items, drafts)
+  } catch (error) {
+    console.warn('Translation review failed; keeping drafts', { targetLanguage, reviewModel, error: errorMessage(error) })
+    return drafts
   }
-  return drafts
 }
 
 type ReviewItem = { id: string; text: string; context?: string }
@@ -3931,7 +3922,6 @@ export class TranslationCoordinator {
 export const __translationWorkerTest = {
   translateBatchWithMemory,
   translationMemoryKey,
-  translationReviewModels,
   TRANSLATION_MEMORY_VERSION,
   aiRequestOptions,
   parseKeyedTranslations,

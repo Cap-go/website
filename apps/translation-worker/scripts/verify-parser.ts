@@ -1020,8 +1020,4 @@ try {
   assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('de', sharedFooter, '')), 'Translation memory keys must be per locale')
   assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('fr', sharedFooter, 'footer link')), 'Translation memory keys must include context')
   assert(frenchKey.includes(__translationWorkerTest.TRANSLATION_MEMORY_VERSION), 'Translation memory keys must include the memory version')
-
-  type ReviewEnv = Parameters<typeof __translationWorkerTest.translationReviewModels>[0]
-  const reviewChain = __translationWorkerTest.translationReviewModels({ TRANSLATION_REVIEW_MODEL: ' @cf/a , @cf/b ,' } as unknown as ReviewEnv)
-  assert(reviewChain.join('|') === '@cf/a|@cf/b', 'Review model list was not parsed in order')
 }
