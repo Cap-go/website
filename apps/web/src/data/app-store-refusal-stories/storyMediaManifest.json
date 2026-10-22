@@ -152,5 +152,14 @@
   },
   "kids-story-app-terms-link-and-data-questions": null,
   "sign-in-buy-delete-three-fixes": null,
-  "internet-radio-content-rights-5-2-3": null
+  "internet-radio-content-rights-5-2-3": null,
+  "six-rejections-then-4-3-call": null,
+  "unsigned-agreement-rejection-two-weeks": null,
+  "crash-on-new-macos-free-vm": null,
+  "twelve-days-waiting-expedite-twice": {
+    "src": "/app-store-refusal-horror-story/screenshots/twelve-days-waiting-expedite-twice.webp",
+    "alt": "App Store Connect App Review screen showing an iOS 1.0 submission in Waiting for Review with five subscriptions, app icons and names redacted",
+    "width": 1306,
+    "height": 1290
+  }
 }

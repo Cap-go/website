@@ -163,9 +163,9 @@ const drawers = {
 }
 
 const maxVariants = {
-  '4-3': 7,
-  '2-1': 2,
-  'endless-review': 4,
+  '4-3': 10,
+  '2-1': 4,
+  'endless-review': 5,
   'account-termination': 2,
   '4-2-6': 1,
   '3-1-2': 1,
@@ -174,7 +174,7 @@ const maxVariants = {
   'login-requirement': 1,
   login: 1,
   'objectionable-content': 1,
-  'enrollment-account': 1,
+  'enrollment-account': 2,
   'simulated-gambling': 1,
   'fake-documents': 1,
   'ai-data-sharing': 1,
