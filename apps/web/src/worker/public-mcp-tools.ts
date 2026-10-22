@@ -85,7 +85,7 @@ async function searchDocs(query: string, limit: number, requestUrl: string, fetc
   const results = []
   for (const hit of data.hits) {
     const url = URL.parse(hit.url)
-    if (!url || url.origin !== 'https://capgo.app' || !url.pathname.startsWith('/docs/') || seen.has(url.href)) continue
+    if (url?.origin !== 'https://capgo.app' || !url.pathname.startsWith('/docs/') || seen.has(url.href)) continue
     seen.add(url.href)
     const title = Object.entries(hit.hierarchy ?? {})
       .filter(([level, text]) => level !== 'lvl0' && text)
@@ -139,7 +139,7 @@ export async function callPublicTool(params: unknown, requestUrl: string, fetchI
           description,
           category,
           repository: href,
-          url: `https://capgo.app/plugins/${new URL(href).pathname.split('/').filter(Boolean).at(-1)}/`,
+          url: `https://capgo.app/plugins/${new URL(href).pathname.split('/').findLast((part) => part.length > 0)}/`,
         })),
       })
     }

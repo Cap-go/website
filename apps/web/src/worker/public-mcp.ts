@@ -60,9 +60,7 @@ async function readBody(request: Request): Promise<string | null> {
   return new TextDecoder().decode(body)
 }
 
-export async function handlePublicMcp(request: Request, env: PublicMcpEnv, fetchImpl: typeof fetch = fetch, cache?: Cache): Promise<Response> {
-  if (request.method === 'OPTIONS') return response(null, 204)
-  if (request.method !== 'POST') return response({ error: 'Use POST for stateless Streamable HTTP MCP requests.' }, 405, { Allow: 'POST, OPTIONS' })
+async function checkRateLimit(request: Request, env: PublicMcpEnv): Promise<Response | null> {
   // Cloudflare sets CF-Connecting-IP. Never use a caller-supplied forwarding header as the key.
   const ip = request.headers.get('CF-Connecting-IP')
   if (!env.PUBLIC_MCP_RATE_LIMITER || !ip) return error(-32603, 'Public MCP rate limiting unavailable', 503)
@@ -72,6 +70,14 @@ export async function handlePublicMcp(request: Request, env: PublicMcpEnv, fetch
   } catch {
     return error(-32603, 'Public MCP rate limiting unavailable', 503)
   }
+  return null
+}
+
+export async function handlePublicMcp(request: Request, env: PublicMcpEnv, fetchImpl: typeof fetch = fetch, cache?: Cache): Promise<Response> {
+  if (request.method === 'OPTIONS') return response(null, 204)
+  if (request.method !== 'POST') return response({ error: 'Use POST for stateless Streamable HTTP MCP requests.' }, 405, { Allow: 'POST, OPTIONS' })
+  const rateLimitResponse = await checkRateLimit(request, env)
+  if (rateLimitResponse) return rateLimitResponse
   if (request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json') return error(-32600, 'Content-Type must be application/json', 415)
   const version = request.headers.get('MCP-Protocol-Version')
   if (version && !protocolVersions.includes(version)) return error(-32600, 'Unsupported MCP protocol version')
