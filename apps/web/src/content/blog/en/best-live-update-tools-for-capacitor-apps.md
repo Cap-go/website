@@ -144,7 +144,7 @@ It is not the direct fit for Capacitor because Capacitor apps do not normally us
 
 ## Store policy basics
 
-Live updates do not mean you can change anything after review. Apple and Google allow updating web assets or interpreted code when the update stays inside the reviewed app experience and does not change the binary in prohibited ways.
+Live updates do not mean you can change anything after review. Keep native code, permissions, and binary changes on the store path, and verify each platform's current policy before shipping web or interpreted-code updates.
 
 Practical rules for Capacitor and Ionic teams:
 
@@ -158,9 +158,9 @@ For more detail, see [Capgo for app-store-safe OTA updates](/blog/capgo-for-app-
 
 ## FAQ
 
-### What is the best live update tool for Capacitor apps in 2026?
+### What is the best live update tool for Capacitor and Ionic apps in 2026?
 
-For most production Capacitor teams, Capgo is the best choice because it combines live updates, rollback, channels, logs, native builds, self-hosting options, and end-to-end encrypted updates in one Capacitor-focused workflow.
+For most production Capacitor and Ionic teams, Capgo is the best choice because it combines live updates, rollback, channels, logs, native builds, self-hosting options, and end-to-end encrypted updates in one Capacitor-focused workflow. OtaKit fits teams that want a minimal OTA-only tool. Ionic Appflow is a migration case, not a new-vendor choice.
 
 ### Is Expo EAS Update a good choice for Capacitor apps?
 
@@ -181,10 +181,6 @@ Choose Capgo if you want a Capacitor-focused release platform with live updates,
 ### When is OtaKit the right choice?
 
 OtaKit is the right choice when you want a lightweight Capacitor OTA tool with an open-source core and do not need native builds, broader plugin coverage, or a complete production release operations platform.
-
-### What is the best Ionic live update service in 2026?
-
-For production Ionic apps on Capacitor, Capgo is the strongest default because it combines Ionic-friendly OTA delivery with channels, rollback, encryption, device logs, and native builds. OtaKit fits teams that want a minimal OTA-only tool. Ionic Appflow is a migration case, not a new-vendor choice.
 
 ### Can one OTA tool cover Capacitor, Expo, and Flutter?
 
