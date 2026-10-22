@@ -1,16 +1,16 @@
 ---
 slug: setup-supabase-with-capacitor-social-login
-title: 'Setup Supabase Authentication with Capacitor Social Login Plugin'
+title: 'Capacitor, Supabase, and Social Auth in React'
 description: >-
-  Learn how to integrate Supabase authentication with the Capgo Social Login plugin for seamless Google, Apple, and Facebook authentication in your Capacitor app.
+  Step-by-step React and Capacitor tutorial for Supabase authentication with @capgo/capacitor-social-login. Native Google and Apple sign-in, nonce-safe signInWithIdToken, and a Vite app you can ship to mobile.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-27T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
-head_image: /supabase_social_login.webp
-head_image_alt: "'Setup Supabase Authentication with Capacitor Social Login Plugin' Capgo blog illustration"
-keywords: Supabase, Capacitor, social login, authentication, Google, Apple, Facebook, mobile app development, OAuth
+updated_at: 2026-10-22T21:30:00.000Z
+head_image: /blog-images/setup-supabase-react-auth-flow.webp
+head_image_alt: Diagram of React app, Capgo Social Login plugin, Google ID token, and Supabase Auth session
+keywords: Supabase, Capacitor, React, social login, authentication, Google, Apple, signInWithIdToken, Vite, mobile app development
 tag: Tutorial
 published: true
 locale: en
@@ -18,7 +18,72 @@ origin: human
 next_blog: ''
 ---
 
-Setting up authentication in mobile apps can be complex, but combining **Supabase** with the **Capgo Social Login plugin** makes it straightforward. This tutorial will guide you through integrating social authentication (Google, Apple, Facebook) with Supabase in your Capacitor app.
+Ship native Google and Apple sign-in in a **React** app, back it with **Supabase Auth**, and wrap the same UI in **Capacitor** without fighting mobile browser redirects. **Capgo Social Login** (`@capgo/capacitor-social-login`) handles the native provider sheets; you exchange the provider ID token for a Supabase session with `signInWithIdToken`.
+
+This article extends our existing Supabase + Social Login guide with a full **React + Vite** walkthrough (project layout, providers, routes, Capacitor wiring). For provider dashboards and platform keys, keep using the [Supabase integration docs](/docs/plugins/social-login/supabase/introduction/) and the [Google + Supabase general setup](/docs/plugins/social-login/supabase/google/general/). Related posts: [Google sign-in with Capacitor](/blog/how-to-sign-in-with-google-using-capacitor/), [Apple sign-in with Capacitor](/blog/how-to-sign-in-with-apple-using-capacitor/), and [authentication options in Capacitor](/blog/how-to-add-authentication-to-a-capacitor-app/).
+
+## Table of contents
+
+- [What you will build](#what-you-will-build)
+- [Overall authentication flow](#overall-authentication-flow)
+- [Baseline React (Vite) application](#baseline-react-vite-application)
+- [Supabase project and Google provider](#step-2-setup-supabase-project)
+- [Configure providers in Supabase](#step-3-configure-social-providers-in-supabase)
+- [Initialize the Social Login plugin](#step-4-configure-the-social-login-plugin)
+- [Supabase client and React auth layer](#react-supabase-client-and-auth-layer)
+- [Login UI and protected routes](#react-login-ui-and-protected-routes)
+- [Add Capacitor to the React app](#add-capacitor-to-the-react-app)
+- [Platform configuration](#step-8-platform-specific-configuration)
+- [Database access with RLS](#step-9-using-supabase-database-with-authenticated-users)
+- [Known issues and troubleshooting](#known-issues-and-troubleshooting)
+- [Security considerations](#important-security-considerations)
+
+## What you will build
+
+- A **Vite + React + TypeScript** web app with sign-in buttons and a signed-in debug view
+- **Supabase Auth** sessions created from native **Google** (and optional **Apple**) ID tokens
+- The same bundle running inside **Capacitor** on iOS and Android
+- A nonce-safe Google flow aligned with the [plugin example app](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+
+## Overall authentication flow
+
+With `@capgo/capacitor-social-login`, the mobile app does **not** rely on `signInWithOAuth` redirects inside the WebView. The native SDK returns an **ID token**; Supabase validates it and issues its own JWT.
+
+![Flow from React UI through Capgo Social Login and Google to Supabase Auth](/blog-images/setup-supabase-react-auth-flow.webp)
+
+On **web**, you can still use the same plugin (see [Google web setup](/docs/plugins/social-login/google/web/)). Handle any OAuth return URLs in your router if you add a browser fallback later.
+
+## Baseline React (Vite) application
+
+Create a fresh app (or reuse an existing React codebase):
+
+```bash
+bun create vite capgo-supabase-auth --template react-ts
+cd capgo-supabase-auth
+bun install
+bun add @supabase/supabase-js @capgo/capacitor-social-login react-router-dom
+```
+
+Start the dev server:
+
+```bash
+bun run dev
+```
+
+![Local Vite dev server after installing Supabase and Social Login](/blog-images/setup-supabase-react-vite-dev.webp)
+
+Target folder layout:
+
+![Suggested src layout for Supabase auth helpers and React pages](/blog-images/setup-supabase-react-project-structure.webp)
+
+Add environment variables in `.env.local` (never commit secrets):
+
+```bash
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-public-key
+VITE_GOOGLE_WEB_CLIENT_ID=your-web-client-id.apps.googleusercontent.com
+VITE_GOOGLE_IOS_CLIENT_ID=your-ios-client-id.apps.googleusercontent.com
+```
 
 ## Why Use Supabase with Social Login?
 
@@ -43,13 +108,15 @@ Before starting, ensure you have:
 First, install the Capgo Social Login plugin:
 
 ```bash
-npm install @capgo/capacitor-social-login
-npx cap sync
+bun add @capgo/capacitor-social-login
+bunx cap sync
 ```
 
 See the [Social Login](https://capgo.app/plugins/capacitor-social-login/) and [Supabase](https://capgo.app/plugins/capacitor-supabase/) plugin pages for platform-specific setup.
 
 ## Step 2: Setup Supabase Project
+
+![Supabase dashboard checklist for enabling Google with ID token sign-in](/blog-images/setup-supabase-react-supabase-checklist.webp)
 
 ### Create and Configure Your Supabase Project
 
@@ -111,16 +178,15 @@ This guide covers:
 
 **After completing the Google setup, configure it in Supabase:**
 
+Follow the [Supabase + Google general guide](/docs/plugins/social-login/supabase/google/general/) for screenshots of each dashboard click.
+
 1. **Enable Google provider in Supabase**:
    - In your Supabase dashboard, go to **Authentication > Providers**
    - Find **Google** and toggle it **ON**
-   - Fill in the configuration:
-     - **Client ID**: Your Google OAuth **Web** Client ID (from the Google Cloud Console)
-     - **Client Secret**: Your Google OAuth **Web** Client Secret  
-     - **Redirect URL**: `https://your-project-ref.supabase.co/auth/v1/callback` (auto-filled)
-   - Click **"Save"**
+   - Add the **Web**, **iOS**, and **Android** client IDs you created in Google Cloud (skip platforms you do not ship)
+   - Click **Save**
 
-**Important**: Use the **Web Client ID** and **Web Client Secret** in Supabase, even if you're building a mobile app. The mobile client IDs are used separately in the plugin configuration.
+**Important for this React tutorial:** when you use `signInWithIdToken` with `@capgo/capacitor-social-login`, you do **not** need the OAuth **client secret** or callback URL fields for Google. Register all client IDs Supabase will accept when validating tokens from each platform.
 
 ### Setting up Apple Authentication in Supabase
 
@@ -279,6 +345,8 @@ await SocialLogin.initialize({
 - `limitedLogin: true` enables Facebook's privacy-focused Limited Login feature (iOS only)
 - **Important**: See our [Facebook setup guide](/docs/plugins/social-login/facebook/#limited-login-ios-only) for detailed Limited Login information, including ATT considerations
 
+![Initialize @capgo/capacitor-social-login once when the React app boots](/blog-images/setup-supabase-react-plugin-init.webp)
+
 ### Complete Plugin Initialization
 
 Here's how to initialize all providers together:
@@ -290,7 +358,7 @@ export async function initializeSocialLogin() {
   await SocialLogin.initialize({
     google: {
       webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
-      mode: 'offline'
+      mode: 'online'
     },
     facebook: {
       appId: 'YOUR_FACEBOOK_APP_ID',
@@ -312,24 +380,24 @@ export async function initializeSocialLogin() {
 - The credentials here are from the **original providers**, not from Supabase
 - Make sure the provider credentials match what you configured in Supabase
 
-## Step 5: Setup Supabase Client
+## React Supabase client and auth layer
 
-Install the Supabase client:
+Install the Supabase client if you have not already:
 
 ```bash
-npm install @supabase/supabase-js
+bun add @supabase/supabase-js
 ```
 
-Create a Supabase service:
+Create a single client for the whole React tree:
 
 ```typescript
-// services/supabase.ts
+// src/lib/supabaseClient.ts
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://your-project-ref.supabase.co';
-const supabaseKey = 'your-anon-public-key';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseKey, {
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
@@ -338,207 +406,300 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
 });
 ```
 
-## Step 6: Implement Authentication Flow
+### Nonce helpers for Google + Supabase
 
-Create an authentication service that combines both:
+Supabase expects a **raw nonce** in `signInWithIdToken` and a **SHA-256 digest** passed to Google. The [Supabase Google guide](/docs/plugins/social-login/supabase/google/general/) documents the full flow. Minimal helpers:
 
 ```typescript
-// services/auth.ts
+// src/auth/nonce.ts
+export function getUrlSafeNonce(): string {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+export async function sha256Hex(message: string): Promise<string> {
+  const data = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer), (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+export async function createGoogleNoncePair(): Promise<{ rawNonce: string; nonceDigest: string }> {
+  const rawNonce = getUrlSafeNonce();
+  const nonceDigest = await sha256Hex(rawNonce);
+  return { rawNonce, nonceDigest };
+}
+```
+
+Wire Social Login + Supabase in one module (pattern from the [example `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)):
+
+```typescript
+// src/auth/socialLogin.ts
 import { SocialLogin } from '@capgo/capacitor-social-login';
-import { supabase } from './supabase';
+import { supabase } from '../lib/supabaseClient';
+import { createGoogleNoncePair } from './nonce';
 
-export class AuthService {
-  
-  async initializeSocialLogin() {
-    await SocialLogin.initialize({
-      google: {
-        webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
-      },
-      facebook: {
-        appId: 'YOUR_FACEBOOK_APP_ID',
-        clientToken: 'YOUR_FACEBOOK_CLIENT_TOKEN',
-      },
-      apple: {} // iOS configuration
-    });
-  }
+let initialized = false;
 
-  async signInWithGoogle() {
-    try {
-      const result = await SocialLogin.login({
-        provider: 'google',
-        options: {
-          scopes: ['email', 'profile']
-        }
-      });
-
-      const googleResult = result.result;
-      if (!googleResult) {
-        throw new Error('Google login failed');
-      }
-
-      // GoogleLoginResponse is a union type - check responseType to determine flow
-      if (googleResult.responseType === 'online') {
-        // Online mode: use idToken directly with Supabase
-        const { data, error } = await supabase.auth.signInWithIdToken({
-          provider: 'google',
-          token: googleResult.idToken!,
-        });
-        if (error) throw error;
-        return data;
-      } else {
-        // Offline mode: exchange serverAuthCode on your backend
-        // Your backend should exchange the code for tokens and create a Supabase session
-        const response = await fetch('/api/auth/google', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ serverAuthCode: googleResult.serverAuthCode })
-        });
-        return response.json();
-      }
-    } catch (error) {
-      console.error('Google sign-in error:', error);
-      throw error;
-    }
-  }
-
-  async signInWithApple() {
-    try {
-      const result = await SocialLogin.login({
-        provider: 'apple',
-        options: {
-          scopes: ['email', 'name']
-        }
-      });
-
-      const { data, error } = await supabase.auth.signInWithIdToken({
-        provider: 'apple',
-        token: result.result?.identityToken!,
-      });
-
-      if (error) throw error;
-      return data;
-    } catch (error) {
-      console.error('Apple sign-in error:', error);
-      throw error;
-    }
-  }
-
-  async signInWithFacebook() {
-    try {
-      const result = await SocialLogin.login({
-        provider: 'facebook',
-        options: {
-          permissions: ['email', 'public_profile']
-        }
-      });
-
-      const fbResult = result.result;
-      if (!fbResult?.accessToken?.token) {
-        throw new Error('Facebook login failed - no access token received');
-      }
-
-      // Facebook uses accessToken for Supabase authentication
-      const { data, error } = await supabase.auth.signInWithIdToken({
-        provider: 'facebook',
-        token: fbResult.accessToken.token,
-      });
-
-      if (error) throw error;
-      return data;
-    } catch (error) {
-      console.error('Facebook sign-in error:', error);
-      throw error;
-    }
-  }
-
-  async signOut() {
-    // Sign out from Supabase
-    await supabase.auth.signOut();
-    
-    // Optionally sign out from social providers
-    await SocialLogin.logout({
-      provider: 'google' // or 'apple', 'facebook'
-    });
-  }
-
-  getCurrentUser() {
-    return supabase.auth.getUser();
-  }
-
-  onAuthStateChange(callback: (event: string, session: any) => void) {
-    return supabase.auth.onAuthStateChange(callback);
-  }
-}
-
-export const authService = new AuthService();
-```
-
-## Step 7: Implement in Your App
-
-Initialize the service and handle authentication:
-
-```typescript
-// main.ts or app component
-import { authService } from './services/auth';
-
-async function initializeApp() {
-  await authService.initializeSocialLogin();
-  
-  // Listen to auth state changes
-  authService.onAuthStateChange((event, session) => {
-    if (event === 'SIGNED_IN') {
-      console.log('User signed in:', session.user);
-      // Redirect to authenticated area
-    } else if (event === 'SIGNED_OUT') {
-      console.log('User signed out');
-      // Redirect to login
-    }
+export async function ensureSocialLoginInitialized(): Promise<void> {
+  if (initialized) return;
+  await SocialLogin.initialize({
+    google: {
+      webClientId: import.meta.env.VITE_GOOGLE_WEB_CLIENT_ID,
+      iOSClientId: import.meta.env.VITE_GOOGLE_IOS_CLIENT_ID,
+      mode: 'online',
+    },
+    apple: {},
   });
+  initialized = true;
 }
 
-initializeApp();
+export async function signInWithGoogleSupabase() {
+  await ensureSocialLoginInitialized();
+  const { rawNonce, nonceDigest } = await createGoogleNoncePair();
+
+  const result = await SocialLogin.login({
+    provider: 'google',
+    options: {
+      scopes: ['email', 'profile'],
+      nonce: nonceDigest,
+    },
+  });
+
+  const googleResult = result.result;
+  if (!googleResult || googleResult.responseType !== 'online' || !googleResult.idToken) {
+    throw new Error('Google login did not return an ID token');
+  }
+
+  const { data, error } = await supabase.auth.signInWithIdToken({
+    provider: 'google',
+    token: googleResult.idToken,
+    nonce: rawNonce,
+  });
+
+  if (error) throw error;
+  return data;
+}
+
+export async function signInWithAppleSupabase() {
+  await ensureSocialLoginInitialized();
+  const result = await SocialLogin.login({
+    provider: 'apple',
+    options: { scopes: ['email', 'name'] },
+  });
+
+  const identityToken = result.result?.identityToken;
+  if (!identityToken) throw new Error('Apple login did not return an identity token');
+
+  const { data, error } = await supabase.auth.signInWithIdToken({
+    provider: 'apple',
+    token: identityToken,
+  });
+
+  if (error) throw error;
+  return data;
+}
+
+export async function signOutEverywhere() {
+  await supabase.auth.signOut();
+  await SocialLogin.logout({ provider: 'google' });
+}
 ```
 
-Create login buttons in your UI:
+Expose session state to components:
 
-```typescript
-// Login component
-async function handleGoogleLogin() {
-  try {
-    const user = await authService.signInWithGoogle();
-    console.log('Signed in with Google:', user);
-  } catch (error) {
-    console.error('Login failed:', error);
-  }
+```tsx
+// src/auth/useAuth.tsx
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import type { Session } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabaseClient';
+import { ensureSocialLoginInitialized } from './socialLogin';
+
+type AuthContextValue = {
+  session: Session | null;
+  loading: boolean;
+};
+
+const AuthContext = createContext<AuthContextValue | null>(null);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    void ensureSocialLoginInitialized();
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setLoading(false);
+    });
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      setSession(nextSession);
+    });
+    return () => subscription.subscription.unsubscribe();
+  }, []);
+
+  const value = useMemo(() => ({ session, loading }), [session, loading]);
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-async function handleAppleLogin() {
-  try {
-    const user = await authService.signInWithApple();
-    console.log('Signed in with Apple:', user);
-  } catch (error) {
-    console.error('Login failed:', error);
-  }
-}
-
-async function handleFacebookLogin() {
-  try {
-    const user = await authService.signInWithFacebook();
-    console.log('Signed in with Facebook:', user);
-  } catch (error) {
-    console.error('Login failed:', error);
-  }
-}
-
-async function handleLogout() {
-  try {
-    await authService.signOut();
-    console.log('Signed out successfully');
-  } catch (error) {
-    console.error('Logout failed:', error);
-  }
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used inside AuthProvider');
+  return ctx;
 }
 ```
+
+## React login UI and protected routes
+
+![Sample login screen with Google and Apple buttons in a mobile layout](/blog-images/setup-supabase-react-login-ui.webp)
+
+Login panel:
+
+```tsx
+// src/components/LoginPanel.tsx
+import { useState } from 'react';
+import { signInWithAppleSupabase, signInWithGoogleSupabase } from '../auth/socialLogin';
+
+export function LoginPanel() {
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const run = async (action: () => Promise<unknown>) => {
+    setBusy(true);
+    setError(null);
+    try {
+      await action();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Sign-in failed');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div>
+      <button type="button" disabled={busy} onClick={() => run(signInWithGoogleSupabase)}>
+        Continue with Google
+      </button>
+      <button type="button" disabled={busy} onClick={() => run(signInWithAppleSupabase)}>
+        Continue with Apple
+      </button>
+      {error ? <p role="alert">{error}</p> : null}
+    </div>
+  );
+}
+```
+
+Session debug view (replace with your real account UI later):
+
+```tsx
+// src/components/SessionDebug.tsx
+import { useEffect, useState } from 'react';
+import type { User } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabaseClient';
+import { signOutEverywhere } from '../auth/socialLogin';
+
+export function SessionDebug() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+  }, []);
+
+  return (
+    <div>
+      <button type="button" onClick={() => signOutEverywhere()}>Sign out</button>
+      <pre>{JSON.stringify(user, null, 2)}</pre>
+    </div>
+  );
+}
+```
+
+![Signed-in session JSON in a React debug panel](/blog-images/setup-supabase-react-session-debug.webp)
+
+Routes with `react-router-dom`:
+
+```tsx
+// src/App.tsx
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { AuthProvider, useAuth } from './auth/useAuth';
+import { LoginPanel } from './components/LoginPanel';
+import { SessionDebug } from './components/SessionDebug';
+
+function HomePage() {
+  const { session, loading } = useAuth();
+  if (loading) return <p>Loading…</p>;
+  if (session) return <Navigate to="/account" replace />;
+  return <LoginPanel />;
+}
+
+function AccountPage() {
+  const { session, loading } = useAuth();
+  if (loading) return <p>Loading…</p>;
+  if (!session) return <Navigate to="/" replace />;
+  return <SessionDebug />;
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/account" element={<AccountPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
+```
+
+Mount the app in `main.tsx` as usual. After a successful provider login, `onAuthStateChange` updates `session` and React Router sends the user to `/account`.
+
+### Optional: Facebook
+
+Facebook follows the same `signInWithIdToken` pattern with the access token from the plugin. See [Facebook setup](/docs/plugins/social-login/facebook/) and the provider block in [Step 4](#step-4-configure-the-social-login-plugin).
+
+## Add Capacitor to the React app
+
+Build the web bundle, then add native projects:
+
+```bash
+bun run build
+bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android
+bunx cap init "Capgo Auth Demo" com.example.authdemo --web-dir dist
+bunx cap add ios
+bunx cap add android
+```
+
+![Capacitor hosts the Vite build while native SDKs handle social login](/blog-images/setup-supabase-react-capacitor-wrap.webp)
+
+Sync after each web build:
+
+```bash
+bun run build
+bunx cap sync
+```
+
+Open the native IDE when you are ready to test on devices:
+
+```bash
+bunx cap open ios
+bunx cap open android
+```
+
+Complete Google and Apple platform steps before testing on hardware:
+
+- [Google Android](/docs/plugins/social-login/google/android/)
+- [Google iOS](/docs/plugins/social-login/google/ios/)
+- [Apple iOS](/docs/plugins/social-login/apple/ios/)
+
+### Deep links and Universal Links
+
+Tutorials that call `supabase.auth.signInWithOAuth` inside a WebView often need **Universal Links** or **App Links** so the OS returns control to the app after Google redirects. The **ID token** flow in this guide avoids that class of redirect loops on mobile.
+
+You may still configure deep links for other features (password reset emails, magic links, marketing URLs). Add the same paths to **Authentication > URL Configuration** in Supabase and to your `apple-app-site-association` / Android intent filters when you add those flows.
 
 ## Step 8: Platform-Specific Configuration
 
@@ -661,19 +822,30 @@ async function updateUserProfile(updates: any) {
 4. **Validate tokens** on your backend if needed
 5. **Handle token refresh** automatically with Supabase
 
-## Troubleshooting Common Issues
+## Known issues and troubleshooting
 
-### Token Mismatch Errors
-- Ensure your OAuth provider configurations match between the social login plugin and Supabase
-- Check that redirect URLs are correctly configured
+### Nonce mismatch on Google (especially iOS)
 
-### Platform-Specific Issues
-- iOS: Verify your bundle ID matches your Apple Developer configuration
-- Android: Ensure SHA1 fingerprints are correctly added to Google Console
+If Supabase returns a nonce error, Google may have returned a cached ID token. Log out from Google through the plugin, retry once, and confirm you pass `nonceDigest` to `SocialLogin.login` and `rawNonce` to `signInWithIdToken`. The [example app](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) retries after `SocialLogin.logout`.
 
-### Authentication Flow Interruptions
-- Implement proper error handling for network issues
-- Add loading states during authentication
+### Token audience errors
+
+Register every Google client ID (web, iOS, Android) in the Supabase Google provider. The `aud` claim in the ID token must match one of them.
+
+### OAuth redirect tutorials vs this guide
+
+Blog posts that use `signInWithOAuth` in a WebView can fail on mobile when the redirect opens Safari instead of your app. Prefer native login + `signInWithIdToken` for Capacitor, or follow [Social Login web setup](/docs/plugins/social-login/google/web/) for browser redirects.
+
+### Platform-specific checks
+
+- iOS: bundle ID and URL schemes from [Google iOS setup](/docs/plugins/social-login/google/ios/)
+- Android: SHA-1 fingerprints in [Google Android setup](/docs/plugins/social-login/google/android/)
+- See [plugin troubleshooting](/docs/plugins/social-login/troubleshooting/) for consolidated fixes
+
+### Token mismatch and network errors
+
+- Align provider credentials between Google Cloud, Supabase, and `SocialLogin.initialize`
+- Surface loading and error states in React (see `LoginPanel` above)
 
 ## Conclusion
 
