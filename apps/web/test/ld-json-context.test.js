@@ -296,6 +296,11 @@ test('toLdJsonBlocks splits a @graph into typed blocks that keep their @id links
     expect(block['@graph']).toBeUndefined()
   }
   expect(blocks.map((block) => block['@type'])).toEqual(expect.arrayContaining(['SoftwareApplication', 'Organization', 'WebSite']))
+  const organization = blocks.find((block) => block['@type'] === 'Organization')
+  expect(organization['@id']).toBe(capgoOrganizationId(mockConfig.baseUrl))
+  for (const node of graph['@graph']) {
+    expect(blocks.find((block) => block['@type'] === node['@type'])['@id']).toBe(node['@id'])
+  }
 })
 
 test('toLdJsonBlocks keeps standalone schemas and flattens arrays', () => {
@@ -303,4 +308,16 @@ test('toLdJsonBlocks keeps standalone schemas and flattens arrays', () => {
   expect(toLdJsonBlocks(article)).toEqual([{ '@context': 'https://schema.org', ...article }])
   expect(toLdJsonBlocks([article, createLdJsonGraph(mockConfig, article, { includeOrganization: true })])).toHaveLength(3)
   expect(toLdJsonBlocks(null)).toEqual([])
+})
+
+test('toLdJsonBlocks keeps named graphs whole, accepts object graphs and merges node contexts', () => {
+  const named = { '@context': 'https://schema.org', '@id': 'https://capgo.app/#graph', '@graph': [{ '@type': 'Thing', name: 'x' }] }
+  expect(toLdJsonBlocks(named)).toEqual([named])
+
+  expect(toLdJsonBlocks({ '@context': 'https://schema.org', '@graph': { '@type': 'Thing', name: 'x' } })).toEqual([
+    { '@context': 'https://schema.org', '@type': 'Thing', name: 'x' },
+  ])
+
+  const [block] = toLdJsonBlocks({ '@context': 'https://schema.org', '@graph': [{ '@context': { extra: 'https://example.com/extra' }, '@type': 'Thing', extra: 1 }] })
+  expect(block['@context']).toEqual(['https://schema.org', { extra: 'https://example.com/extra' }])
 })

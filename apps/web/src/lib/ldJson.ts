@@ -124,11 +124,20 @@ export function toLdJsonBlocks(data: unknown): unknown[] {
   if (Array.isArray(data)) return data.flatMap((item) => toLdJsonBlocks(item))
 
   const obj = data as Record<string, unknown>
-  if (Array.isArray(obj['@graph'])) {
-    const { '@graph': graph, '@context': context = SCHEMA_ORG_CONTEXT } = obj
-    return (graph as unknown[]).filter((node) => node && typeof node === 'object').map((node) => ({ '@context': context, ...(node as object) }))
-  }
-  return [ensureLdJsonContext(obj)]
+  const graph = obj['@graph']
+  // A named graph (@id) or one with extra members is data, not just a wrapper: keep it as one block.
+  const isPlainWrapper = Object.keys(obj).every((key) => key === '@context' || key === '@graph')
+  if (graph == null || typeof graph !== 'object' || !isPlainWrapper) return [ensureLdJsonContext(obj)]
+
+  const context = obj['@context'] ?? SCHEMA_ORG_CONTEXT
+  const nodes = Array.isArray(graph) ? graph : [graph]
+  return nodes
+    .filter((node): node is Record<string, unknown> => node != null && typeof node === 'object' && !Array.isArray(node))
+    .map((node) => {
+      const { '@context': nodeContext, ...rest } = node
+      // Node-local contexts extend the inherited one instead of replacing it (JSON-LD context arrays apply in order).
+      return { '@context': nodeContext === undefined ? context : [context, nodeContext].flat(), ...rest }
+    })
 }
 
 /**

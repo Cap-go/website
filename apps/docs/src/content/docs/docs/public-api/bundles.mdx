@@ -615,31 +615,44 @@ curl -X PUT \
 
 ## Error Handling
 
+All errors use the standard error format described in the [API overview](/docs/public-api/).
+
 Common error scenarios and their responses:
 
 ```json
-// Bundle not found
+// app_id is not a reverse-domain identifier
 {
-  "error": "Bundle not found",
-  "status": "KO"
+  "error": "invalid_app_id",
+  "message": "App ID must be a reverse domain string",
+  "moreInfo": { "app_id": "my app" }
 }
 
-// Invalid bundle (version) format
+// Deleting a bundle without access to the app
 {
-  "error": "Invalid version format",
-  "status": "KO"
+  "error": "cannot_delete_bundle",
+  "message": "You can't access this app",
+  "moreInfo": { "app_id": "com.example.app" }
 }
 
-// Storage error
+// Deleting a bundle that a channel still uses
 {
-  "error": "Failed to delete bundle from storage",
-  "status": "KO"
+  "error": "cannot_delete_linked_version",
+  "message": "Cannot delete a bundle linked to a channel",
+  "moreInfo": { "app_id": "com.example.app", "version": "1.0.0" }
 }
 
-// Permission denied
+// Creating a bundle whose version is not valid semver
 {
-  "error": "Insufficient permissions to manage bundles",
-  "status": "KO"
+  "error": "invalid_version_format",
+  "message": "Version must be valid semver format (e.g., 1.0.0, 1.0.0-alpha.1)",
+  "moreInfo": { "version": "v1" }
+}
+
+// Setting a channel to a bundle that does not exist
+{
+  "error": "cannot_find_version",
+  "message": "Cannot find version",
+  "moreInfo": {}
 }
 ```
 

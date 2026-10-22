@@ -47,6 +47,7 @@ test('public API declares OAuth 2.0 with named scopes that match the authorizati
   expect(CapgoBearerAuth).toMatchObject({ type: 'http', scheme: 'bearer' })
   expect(spec.security).toContainEqual({ CapgoOAuth: ['capgo'] })
   expect(spec.security).toContainEqual({ CapgoApiKeyAuth: [] })
+  expect(spec.security).toContainEqual({ CapgoBearerAuth: [] })
   expect(spec.info.description).not.toContain('rather than OAuth')
 })
 

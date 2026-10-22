@@ -286,31 +286,37 @@ curl -X DELETE \
 
 ## Error Handling
 
+All errors use the standard error format described in the [API overview](/docs/public-api/).
+
 Common error scenarios and their responses:
 
 ```json
-// Channel not found
+// The API key has no access to the app
 {
-  "error": "Channel not found",
-  "status": "KO"
+  "error": "cannot_access_app",
+  "message": "You can't access this app",
+  "moreInfo": { "app_id": "com.example.app" }
 }
 
-// Invalid bundle (version) format
+// Invalid disableAutoUpdate value
 {
-  "error": "Invalid version format. Use semantic versioning",
-  "status": "KO"
+  "error": "invalid_disable_auto_update",
+  "message": "Disable auto update must be major, minor, patch, version_number, metadata, or none",
+  "moreInfo": { "disableAutoUpdate": "always" }
 }
 
-// Invalid update policy
+// Rollout percentage out of range
 {
-  "error": "Invalid disableAutoUpdate value",
-  "status": "KO"
+  "error": "invalid_rollout_percentage",
+  "message": "Rollout percentage must be between 0 and 100",
+  "moreInfo": { "rolloutPercentage": 150 }
 }
 
-// Permission denied
+// DELETE without a channel name
 {
-  "error": "Insufficient permissions to manage channels",
-  "status": "KO"
+  "error": "missing_channel_name",
+  "message": "You must provide a channel name",
+  "moreInfo": {}
 }
 ```
 
