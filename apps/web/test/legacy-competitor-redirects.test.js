@@ -1,7 +1,10 @@
 import { expect, test } from 'bun:test'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect.ts'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
-import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
+import {
+  NON_DEFAULT_LOCALE_CODES,
+  resolveLocalizedLegacyRedirectPath,
+} from '../../shared/localizedLegacyPathRedirect.ts'
 import { staticLegacyRedirect } from '../src/worker/index.ts'
 
 function staticLegacyRedirectLocation(url) {
@@ -93,6 +96,9 @@ for (const [from, to] of LIVE_UPDATE_ROUNDUP_REDIRECTS) {
   test(`resolveLegacyPathRedirect ${from} → ${to}`, () => {
     expect(resolveLegacyPathRedirect(from)).toBe(to)
     expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+    for (const locale of NON_DEFAULT_LOCALE_CODES) {
+      expect(resolveLocalizedLegacyRedirectPath(`/${locale}${from}`)).toBe(`/${locale}${to}`)
+    }
   })
 
   test(`staticLegacyRedirect ${from} → ${to}`, () => {
