@@ -121,14 +121,16 @@ test('transport handles notifications, methods, malformed JSON, batch rejection,
 })
 
 test('uses Cloudflare client IP for rate limiting and fails closed if unavailable', async () => {
+  let capturedKey
   const limited = await handlePublicMcp(request('{}', { 'X-Forwarded-For': '198.51.100.2' }), {
     PUBLIC_MCP_RATE_LIMITER: {
       limit: async ({ key }) => {
-        expect(key).toBe('192.0.2.1')
+        capturedKey = key
         return { success: false }
       },
     },
   })
+  expect(capturedKey).toBe('192.0.2.1')
   expect(limited.status).toBe(429)
   expect(limited.headers.get('retry-after')).toBe('60')
   expect((await handlePublicMcp(request('{}'), {})).status).toBe(503)
