@@ -1,30 +1,32 @@
-import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
   markdownNotFoundResponse,
-  OAUTH_PROTECTED_RESOURCE_PATH,
   MCP_MANIFEST_PATHS,
+  OAUTH_PROTECTED_RESOURCE_PATH,
   OPENAPI_ALIAS_PATHS,
   OPENAPI_ASSET_PATH,
   prefersMarkdown,
 } from '../../../shared/agentDiscovery'
 import { isGonePath } from '../../../shared/gonePaths'
-import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
+import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
 import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRedirect'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
+import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
+import { workerCache } from './cached-json'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
 import { handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
 import { handleMtaStsRequest } from './mta-sts'
 import { handleAuthorizationServerMetadataRequest, OAUTH_AUTHORIZATION_SERVER_PATH } from './oauth-discovery'
+import { handlePublicMcp, PUBLIC_MCP_PATH, type PublicMcpEnv } from './public-mcp'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
 import { handleSignaturesDirectoryRequest, HTTP_MESSAGE_SIGNATURES_DIRECTORY, signedFetch } from './web-bot-auth'
 
-interface Env {
+interface Env extends PublicMcpEnv {
   AB_FLAG?: string
   AB_VARIANT?: string
   ASSETS: {
@@ -460,6 +462,7 @@ async function openApiAliasResponse(request: Request, env: Env): Promise<Respons
 }
 
 export async function agentSurfaceResponse(request: Request, env: Env, pathname: string, ctx?: BackgroundContext): Promise<Response | null> {
+  if (pathname === PUBLIC_MCP_PATH || pathname === `${PUBLIC_MCP_PATH}/`) return handlePublicMcp(request, env, fetch, typeof caches === 'undefined' ? undefined : workerCache())
   if (MCP_MANIFEST_PATHS.has(pathname)) return handleMcpManifestRequest(request)
   if (pathname === OAUTH_PROTECTED_RESOURCE_PATH) return handleOAuthProtectedResourceRequest(request)
   if (pathname === OAUTH_AUTHORIZATION_SERVER_PATH) return handleAuthorizationServerMetadataRequest(request, ctx)

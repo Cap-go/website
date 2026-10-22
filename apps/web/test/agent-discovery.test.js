@@ -6,8 +6,8 @@ import {
   HOSTED_MCP_TOOL_GROUPS,
   HOSTED_MCP_URL,
   LLMS_WHEN_TO_USE_PATHS,
-  WHEN_TO_USE_MARKDOWN,
   OPENAPI_ALIAS_PATHS,
+  WHEN_TO_USE_MARKDOWN,
   markdownNotFoundResponse,
   prefersMarkdown,
   withLlmsWhenToUse,
@@ -78,10 +78,12 @@ test('OpenAPI aliases include the conventional audit paths', () => {
   expect(OPENAPI_ALIAS_PATHS.has('/.well-known/openapi.json')).toBe(true)
 })
 
-test('agent guidance only advertises the hosted MCP server', () => {
+test('agent guidance distinguishes public discovery from the authenticated hosted MCP server', () => {
   expect(HOSTED_MCP_URL).toBe('https://api.capgo.app/mcp')
   expect(WHEN_TO_USE_MARKDOWN).toContain('https://api.capgo.app/mcp')
-  expect(WHEN_TO_USE_MARKDOWN).not.toMatch(/https:\/\/capgo\.app\/mcp/)
+  expect(WHEN_TO_USE_MARKDOWN).toContain('https://capgo.app/mcp/public')
+  expect(WHEN_TO_USE_MARKDOWN).toContain('without credentials')
+  expect(WHEN_TO_USE_MARKDOWN).toContain('with OAuth or')
   const ids = HOSTED_MCP_TOOL_GROUPS.map((group) => group.id)
   expect(new Set(ids).size).toBe(ids.length)
   expect(ids).toContain('docs')

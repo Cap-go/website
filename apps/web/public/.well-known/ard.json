@@ -27,6 +27,24 @@
       ]
     },
     {
+      "identifier": "urn:air:capgo.app:mcp:public",
+      "displayName": "Capgo Public Docs and Tools MCP",
+      "type": "application/mcp-server-card+json",
+      "url": "https://capgo.app/mcp/public/server-card.json",
+      "description": "Search Capgo docs, discover plugins, and find free browser tools without an account.",
+      "representativeQueries": [
+        "search the Capgo docs for progressive rollout",
+        "find a Capacitor biometric plugin",
+        "find a free Android keystore generator"
+      ],
+      "tags": [
+        "mcp",
+        "documentation",
+        "plugins",
+        "free-tools"
+      ]
+    },
+    {
       "identifier": "urn:air:capgo.app:api:public",
       "displayName": "Capgo Public API",
       "type": "application/openapi+json",

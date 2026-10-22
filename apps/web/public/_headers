@@ -91,6 +91,14 @@
   Access-Control-Expose-Headers: Link, ETag
   Cache-Control: public, max-age=3600
 
+/mcp/public/server-card.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Allow-Headers: Content-Type
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
 /plugins.md
   Content-Type: text/markdown; charset=utf-8
   Access-Control-Allow-Origin: *
