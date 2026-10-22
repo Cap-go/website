@@ -28,6 +28,8 @@ Set your production default in [App Information](/docs/webapp/main-app-page/#def
 
 ### 2. Let a device choose a channel
 
+This walkthrough uses the local-channel behavior available in updater **5.34.0+**, **6.34.0+**, **7.34.0+**, or **8.0.0+** for your plugin's major version. Older versions wrote a backend override instead; those assignments follow the [console and API override retention rules](#console-and-api-overrides-expire-after-90-days).
+
 A tester enables beta updates inside your app. Your app calls `CapacitorUpdater.setChannel({ channel: 'beta', triggerAutoUpdate: true })`. Capgo checks that `beta` allows device self-assignment, then the plugin saves the choice locally for future update checks. Other devices keep their existing routing.
 
 <video controls playsinline preload="none" width="1280" height="800" poster="/channel-videos/device-self-assignment.webp" class="my-4 w-full rounded-xl" aria-label="Animation: a tester opts into beta and Capgo validates device self-assignment">
@@ -37,7 +39,7 @@ A tester enables beta updates inside your app. Your app calls `CapacitorUpdater.
 
 [Download the device self-assignment video (MP4)](/channel-videos/device-self-assignment.mp4).
 
-Enable **Allow devices to self dissociate/associate** on the target channel before using [`setChannel()`](#using-setchannel-from-your-app). This local choice does not create a console override, and reinstalling the app clears it.
+Enable **Allow devices to self dissociate/associate** on the target channel before using [`setChannel()`](#using-setchannel-from-your-app). This local choice does not create a console override. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the choice can survive reinstall when the operating system restores app data. Call [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear the local choice; console and API overrides still follow the precedence below.
 
 ### 3. Assign one device from the console
 
@@ -98,7 +100,7 @@ This is not the same as [device inventory retention](/docs/webapp/devices/). Inv
 For an assignment that is not removed by this cleanup:
 
 - Set `defaultChannel` in `capacitor.config.*` (survives reinstall; requires a new native binary to change later).
-- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. Reinstalling the app clears it, so the app must call `setChannel()` again if you still want that channel.
+- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the assignment can survive reinstall when the operating system restores app data. Use [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear it explicitly.
 
 The channel **Devices** tab and the device Override UI only list console and Public API assignments. They do not list every device on the channel, and they do not list local `setChannel()` assignments.
 
@@ -248,7 +250,7 @@ When `setChannel()` is called:
 
 | Method | Effect Time | Persisted Where | Shown in Device Override UI | Expires | Use Case |
 |--------|-------------|-----------------|------------------------------|---------|----------|
-| `setChannel()` from plugin | **Instant** | Device only (local) | No | No (until you change it or reinstall) | User-initiated channel switching in-app |
+| `setChannel()` from plugin | **Instant** | Device only (local) | No | No automatic expiry; clear with `unsetChannel()` (reinstall may preserve it) | User-initiated channel switching in-app |
 | Dashboard device override | Up to 2 min | Backend database | Yes | 90 days after last override write | Admin-initiated changes for specific devices |
 | API channel assignment | Up to 2 min | Backend database | Yes | 90 days after last override write | Automated backend integrations |
 

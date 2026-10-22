@@ -1,3 +1,18 @@
+Music covered by this dedication
+===============================
+
+Track: Dust on the Morning Keys
+Author / collection: btahir / Open Lo-Fi
+Release: v1.0.0 (dust-on-the-morning-keys.mp3 inside openlofi.zip)
+Source: https://github.com/btahir/open-lofi/releases/tag/v1.0.0
+Author's dedication: "I'm now donating them to the public domain."
+Dedication source: https://github.com/btahir/open-lofi/blob/49a4aa7266a5974ea721007db1349d5cde2a6c44/README.md
+License source: https://github.com/btahir/open-lofi/blob/49a4aa7266a5974ea721007db1349d5cde2a6c44/LICENSE
+
+The channel walkthrough videos use edited excerpts of this track. The CC0
+text below is reproduced from the source license; this dedication applies
+to the music, not to the Capgo animations or documentation.
+
 CC0 1.0 Universal
 
 Statement of Purpose
