@@ -28,7 +28,7 @@ Set your production default in [App Information](/docs/webapp/main-app-page/#def
 
 ### 2. Let a device choose a channel
 
-This walkthrough uses `setChannel()` and `unsetChannel()` on Android and iOS; these methods are not supported in the browser. It uses the local-channel behavior available in updater **5.34.0+**, **6.34.0+**, **7.34.0+**, or **8.0.0+** for your plugin's major version. Older versions wrote a backend override instead; those assignments follow the [console and API override retention rules](#console-and-api-overrides-expire-after-90-days).
+This walkthrough uses `setChannel()` and `unsetChannel()` from `@capgo/capacitor-updater` on Android and iOS; these methods are not supported in the browser. It uses the local-channel behavior available in updater **5.34.0+**, **6.34.0+**, **7.34.0+**, or **8.0.0+** for your plugin's major version. Older versions wrote a backend override instead; those assignments follow the [console and API override retention rules](#console-and-api-overrides-expire-after-90-days).
 
 A tester enables beta updates inside your app. Your app calls `CapacitorUpdater.setChannel({ channel: 'beta', triggerAutoUpdate: true })`. Capgo checks that `beta` allows device self-assignment, then the plugin saves the choice locally for future update checks. Other devices keep their existing routing.
 
@@ -213,7 +213,7 @@ npx @capgo/cli@latest channel set production com.example.app --prod --device --n
 
 ### Using setChannel() from Your App
 
-The `setChannel()` method allows your Android or iOS app to programmatically switch channels at runtime. This is particularly useful for:
+The `@capgo/capacitor-updater` method `setChannel()` allows your Android or iOS app to programmatically switch channels at runtime. This is particularly useful for:
 
 - QA/debug menus where testers can switch between channels
 - Beta program opt-in flows
