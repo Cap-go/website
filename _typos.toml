@@ -21,8 +21,6 @@ extend-exclude = [
     "apps/web/src/components/**",
     "apps/docs/src/components/**",
     "apps/web/src/config/productVideos.ts",
-    # French glossary for the translation worker (appareil, sur, ...)
-    "apps/translation-worker/src/style-guides.ts",
     "public/",
     "apps/web/public/",
     "apps/docs/public/",
@@ -39,6 +37,9 @@ extend-ignore-re = [
 ]
 
 [default.extend-words]
+# French words in the translation style guides.
+appareil = "appareil"
+sur = "sur"
 # These are proper names, not typos
 Longe = "Longe"
 Damon = "Damon"
