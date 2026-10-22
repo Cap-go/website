@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-22T06:51:04.667Z
-updated_at: 2026-10-22T06:51:06.593Z
+updated_at: 2026-10-22T06:53:41.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/843d873e-4041-473c-95c0-875f1920e4ee/over-the-air-updates-mobile-updates.jpg'
 head_image_alt: 'Over the Air Updates: A Complete Guide for Mobile Teams'
 keywords: 'over the air updates, OTA updates, Capacitor updates, mobile app updates, live updates'
