@@ -132,4 +132,4 @@ Standalone CodePush can work for teams prepared to self-host and maintain it. It
 
 ## Keep going
 
-If you are planning a migration, connect this article with [Migrating from App Center to Capgo](/blog/appcenter-migration/), [Moving from Microsoft App Center to Capgo](/blog/moving-from-microsoft-app-center-to-capgo/), [Best Live Update Tools for Capacitor Apps in 2026](/blog/best-live-update-tools-for-capacitor-apps/), [Capgo Live Updates](/live-update/), and [Capgo Native Builds](/native-build/).
+If you are planning a migration, connect this article with [Migrating from App Center to Capgo](/blog/appcenter-migration/), [Moving from Microsoft App Center to Capgo](/blog/moving-from-microsoft-app-center-to-capgo/), [Best Capacitor and Ionic Live Update Tools in 2026](/blog/best-live-update-tools-for-capacitor-apps/), [Capgo Live Updates](/live-update/), and [Capgo Native Builds](/native-build/).

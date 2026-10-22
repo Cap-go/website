@@ -63,6 +63,13 @@ const BLOG_LEGACY_REDIRECTS = [
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
 ]
 
+const LIVE_UPDATE_ROUNDUP_REDIRECTS = [
+  ['/blog/best-live-updates-system-for-mobile-app/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-ionic-live-update-service/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-capacitor-ota-updates/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-over-the-air-app-updates-saas/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+]
+
 const VOLTBUILDER_BLOG_REDIRECTS = [
   ['/blog/alternative-to-voltbuilder/', '/alternatives/voltbuilder/'],
   ['/blog/alternativa-a-voltbuilder/', '/alternatives/voltbuilder/'],
@@ -75,6 +82,18 @@ test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
 })
 
 for (const [from, to] of BLOG_LEGACY_REDIRECTS) {
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+    expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+  })
+}
+
+for (const [from, to] of LIVE_UPDATE_ROUNDUP_REDIRECTS) {
+  test(`resolveLegacyPathRedirect ${from} → ${to}`, () => {
+    expect(resolveLegacyPathRedirect(from)).toBe(to)
+    expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+  })
+
   test(`staticLegacyRedirect ${from} → ${to}`, () => {
     expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
     expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
