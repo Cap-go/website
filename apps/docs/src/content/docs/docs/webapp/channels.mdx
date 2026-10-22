@@ -38,6 +38,7 @@ Devices stay on their current channel unless you:
 - Remove / archive the channel they are on (then they will fall back through the precedence again at next check).
 - Wait until a console/API override expires after 90 days.
 - Call [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear a local `setChannel()` assignment. This does not remove a console/API override or an app-configured `defaultChannel`; normal precedence applies again.
+- Reinstall the app, which can clear a local assignment on older updater versions or when app data is not restored. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so restored app data can preserve the local choice. Console/API overrides are unaffected.
 
 If a channel is disabled for a platform (see iOS / Android / Electron toggles) and would otherwise have been selected, the selection skips it and falls back to the next rule.
 
