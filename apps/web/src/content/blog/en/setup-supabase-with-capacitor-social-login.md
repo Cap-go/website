@@ -438,6 +438,7 @@ Wire Social Login + Supabase in one module (pattern from the [example `supabaseA
 
 ```typescript
 // src/auth/socialLogin.ts
+import { Capacitor } from '@capacitor/core';
 import { SocialLogin } from '@capgo/capacitor-social-login';
 import { supabase } from '../lib/supabaseClient';
 import { createGoogleNoncePair } from './nonce';
@@ -452,10 +453,13 @@ export function ensureSocialLoginInitialized(): Promise<void> {
         iOSClientId: import.meta.env.VITE_GOOGLE_IOS_CLIENT_ID,
         mode: 'online',
       },
-      apple: {
-        clientId: import.meta.env.VITE_APPLE_SERVICE_ID,
-        redirectUrl: import.meta.env.VITE_APPLE_REDIRECT_URL,
-      },
+      apple:
+        Capacitor.getPlatform() === 'ios'
+          ? {}
+          : {
+              clientId: import.meta.env.VITE_APPLE_SERVICE_ID,
+              redirectUrl: import.meta.env.VITE_APPLE_REDIRECT_URL,
+            },
     }).catch((error) => {
       initialization = null;
       throw error;
@@ -519,7 +523,7 @@ export async function signOutEverywhere() {
 }
 ```
 
-On **iOS**, native Sign in with Apple can use the capability alone. On **Android** and **web**, the `clientId` and `redirectUrl` values above must match [Apple Android setup](/docs/plugins/social-login/apple/android/) and your Supabase Apple provider.
+On **iOS**, leave the `apple` block empty so the plugin uses your bundle ID audience. On **Android** and **web**, pass the Apple **Service ID** and redirect URL from [Apple Android setup](/docs/plugins/social-login/apple/android/). Register both the iOS App ID and Service ID with Supabase when you ship multiple platforms.
 
 Expose session state to components:
 
