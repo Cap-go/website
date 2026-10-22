@@ -28,8 +28,8 @@ use the URL above if your client does not accept this example.
 - `capgo_search_docs`: pass `query` and optionally `limit` from 1 to 20, default 8.
   Returns English documentation titles, URLs, and short snippets from the same
   search index as the docs search box. Fetch a returned URL for the full page.
-- `capgo_list_plugins`: optionally pass `query`, `category`, `offset`, and `limit`
-  from 1 to 50, default 20. Returns registry-derived package names, descriptions,
+- `capgo_list_plugins`: optionally pass `query`, `category`, `offset` (0 to
+  10000, default 0) and `limit` (1 to 50, default 20). Returns registry-derived package names, descriptions,
   categories, repository URLs, and plugin pages. Use `nextOffset` to paginate.
   See the [live plugin directory](https://capgo.app/plugins/).
 - `capgo_list_free_tools`: pass `{}`. Returns browser-tool links and guidance for

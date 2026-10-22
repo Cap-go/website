@@ -21,18 +21,24 @@ const freeToolsInput = z.object({}).strict()
 export const publicTools = [
   {
     name: 'capgo_search_docs',
+    // Queries the external docs search index.
+    openWorldHint: true,
     title: 'Search Capgo docs',
     description: 'Search English Capgo documentation. Returns page titles, URLs, and snippets. No account needed.',
     inputSchema: searchInput,
   },
   {
     name: 'capgo_list_plugins',
+    // Reads only data bundled with the site.
+    openWorldHint: false,
     title: 'Find Capgo plugins',
     description: 'Search the current Capgo plugin registry by name, description, or category. Paginate with offset and limit. No account needed.',
     inputSchema: pluginsInput,
   },
   {
     name: 'capgo_list_free_tools',
+    // Reads only data bundled with the site.
+    openWorldHint: false,
     title: 'Find free signing tools',
     description: 'List free Capgo browser tools with usage guidance. Discovery only: does not generate keys, certificates, or device profiles.',
     inputSchema: freeToolsInput,

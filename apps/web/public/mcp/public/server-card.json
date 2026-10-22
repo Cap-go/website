@@ -1,26 +1,26 @@
 {
-  "name": "app.capgo/public",
-  "title": "Capgo Public Docs and Tools",
-  "version": "1.0.0",
-  "description": "Search Capgo docs, discover plugins, and find free browser tools without an account.",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json",
+  "version": "1.0",
+  "protocolVersion": "2025-11-25",
   "serverInfo": {
     "name": "capgo-public",
+    "title": "Capgo Public Docs and Tools",
     "version": "1.0.0"
   },
-  "protocolVersion": "2025-11-25",
-  "serverUrl": "https://capgo.app/mcp/public",
-  "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://capgo.app/mcp/public"
-    }
-  ],
+  "description": "Search Capgo docs, discover plugins, and find free browser tools without an account.",
+  "documentationUrl": "https://capgo.app/mcp/public.md",
+  "websiteUrl": "https://capgo.app/mcp/",
   "transport": {
     "type": "streamable-http",
     "url": "https://capgo.app/mcp/public"
   },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    }
+  },
   "authentication": {
     "required": false
   },
-  "documentationUrl": "https://capgo.app/mcp/public.md"
+  "instructions": "Connect to https://capgo.app/mcp/public with Streamable HTTP; no account or credentials needed. Tools: capgo_search_docs, capgo_list_plugins and capgo_list_free_tools. Account operations (apps, bundles, channels, builds) need the authenticated server at https://api.capgo.app/mcp."
 }

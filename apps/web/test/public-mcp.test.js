@@ -40,6 +40,12 @@ test('initializes and lists only public tools through the website worker without
     expect(tool.annotations).toMatchObject({ readOnlyHint: true, destructiveHint: false })
     expect(tool.inputSchema.type).toBe('object')
   }
+  // Only docs search reaches an external service; the plugin and free-tool lists are bundled data.
+  expect(Object.fromEntries(listed.result.tools.map((tool) => [tool.name, tool.annotations.openWorldHint]))).toEqual({
+    capgo_search_docs: true,
+    capgo_list_plugins: false,
+    capgo_list_free_tools: false,
+  })
   const protectedCall = await rpc('tools/call', { name: 'capgo_list_apps', arguments: {} })
   expect(protectedCall.result.isError).toBe(true)
 })
@@ -186,4 +192,17 @@ test('catalogs and agent guidance advertise the public endpoint alongside protec
     const catalog = JSON.parse(readFileSync(new URL(`../public/.well-known/${name}.json`, import.meta.url)))
     expect(catalog.entries.some((entry) => entry.url === `${PUBLIC_MCP_URL}/server-card.json`)).toBe(true)
   }
+})
+
+test('the public server card follows the same MCP Server Card v1 shape as the authenticated one', () => {
+  const read = (path) => JSON.parse(readFileSync(new URL(`../public/${path}`, import.meta.url), 'utf8'))
+  const publicCard = read('mcp/public/server-card.json')
+  const protectedCard = read('.well-known/mcp/server-card.json')
+  expect(publicCard.$schema).toBe(protectedCard.$schema)
+  expect(Object.keys(publicCard).sort()).toEqual(Object.keys(protectedCard).sort())
+  expect(publicCard).toMatchObject({
+    serverInfo: { name: 'capgo-public' },
+    transport: { type: 'streamable-http', url: PUBLIC_MCP_URL },
+    authentication: { required: false },
+  })
 })

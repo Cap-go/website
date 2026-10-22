@@ -109,10 +109,10 @@ export async function handlePublicMcp(request: Request, env: PublicMcpEnv, fetch
       return result({})
     case 'tools/list':
       return result({
-        tools: publicTools.map(({ inputSchema, ...tool }) => ({
+        tools: publicTools.map(({ inputSchema, openWorldHint, ...tool }) => ({
           ...tool,
           inputSchema: z.toJSONSchema(inputSchema, { io: 'input' }),
-          annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
+          annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint },
         })),
       })
     case 'tools/call':
