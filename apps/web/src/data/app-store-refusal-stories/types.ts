@@ -53,7 +53,7 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   'kids-category': 'Kids category',
 }
 
-export type AppleRejectionStoryPlatform = 'iOS' | 'Apple Developer Program' | 'Google Play'
+export type AppleRejectionStoryPlatform = 'iOS' | 'macOS' | 'Apple Developer Program' | 'Google Play'
 
 export interface AppleRejectionStory {
   id: string
