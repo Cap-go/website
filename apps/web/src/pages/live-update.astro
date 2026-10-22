@@ -602,8 +602,9 @@ const featureTiles = [
 
 <style>
   /* Classes are applied inside ProductVideoLoop, outside this component's scope. */
-  :global(.lu-hero-video) {
-    max-width: 1080px;
+  /* Scoped to .lu so it outranks the component's own `margin: 0`. Width matches .hero-strip. */
+  .lu :global(.lu-hero-video) {
+    max-width: 960px;
     margin: 56px auto 0;
   }
 
