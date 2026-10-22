@@ -1,6 +1,7 @@
 ---
 import m from '@/copy/messages'
 import { getPricingFaqSections } from '@/lib/pricingFaq'
+import OfferText from '@/components/OfferText.astro'
 
 const sections = getPricingFaqSections(Astro.locals.locale)
 ---
@@ -15,8 +16,10 @@ const sections = getPricingFaqSections(Astro.locals.locale)
     {sections.map((section) => (
       <div class="mx-auto mt-16 max-w-3xl">
         <div class="mb-8 text-center">
-          <h3 class="mb-2 cursor-default text-2xl font-semibold text-white transition-colors duration-200 hover:text-blue-400">{section.title}</h3>
-          <p class="text-sm text-gray-200">{section.subtitle}</p>
+          <h3 class="mb-2 cursor-default text-2xl font-semibold text-white transition-colors duration-200 hover:text-blue-400">
+            {section.titleDirect ? <OfferText direct={section.titleDirect}>{section.title}</OfferText> : section.title}
+          </h3>
+          <p class="text-sm text-gray-200">{section.subtitleDirect ? <OfferText direct={section.subtitleDirect}>{section.subtitle}</OfferText> : section.subtitle}</p>
         </div>
 
         <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 shadow-xl shadow-black/20">
@@ -53,7 +56,7 @@ const sections = getPricingFaqSections(Astro.locals.locale)
                       )}
                     </div>
                   ) : (
-                    item.answer && <p>{item.answer}</p>
+                    item.answer && <p>{item.answerDirect ? <OfferText direct={item.answerDirect}>{item.answer}</OfferText> : item.answer}</p>
                   )}
                   {item.listItems && (
                     <ul class="mb-4 list-inside list-disc space-y-2">

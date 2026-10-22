@@ -221,3 +221,7 @@ Descriptions:
 
 - Export your v0 code, wrap it with Capacitor, and build store apps in the cloud. (79)
 - No Mac or Xcode. Signed iOS and Android builds in 2–3 min. Then ship live updates. (82)
+
+## ChatGPT ads
+
+See [chatgpt-campaigns.md](chatgpt-campaigns.md).

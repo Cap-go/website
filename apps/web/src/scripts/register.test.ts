@@ -13,7 +13,7 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     const values: Record<string, unknown> = {
       registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
       email: { value: 'test@example.com' },
-      password: { value: 'test-password' },
+      password: { value: 'test-password', setAttribute() {}, removeAttribute() {}, focus() {} },
     }
     runInNewContext(transpiled, {
       document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => (captchaEnabled ? {} : null) },
@@ -22,6 +22,8 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
         throw new Error('Stop the test before any auth IO')
       },
       RegisterApiError: Error,
+      getPasswordRequirementErrors: () => [],
+      formatPasswordRequirementErrors: () => '',
       getSignupUserMetadataForRegistration: () => ({}),
       getSignupAttributionForEvents: () => ({}),
       getRegistrationDevice: () => ({}),
@@ -48,7 +50,7 @@ test('registration without profile names preserves referral attribution and the 
   const values: Record<string, unknown> = {
     registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
     email: { value: 'signup@example.com' },
-    password: { value: 'test-password' },
+    password: { value: 'test-password', setAttribute() {}, removeAttribute() {}, focus() {} },
   }
   const signupRequests: any[] = []
   const captures: any[] = []
@@ -67,14 +69,17 @@ test('registration without profile names preserves referral attribution and the 
       first_touch_type: 'plugin',
       first_touch_path: '/plugins/example/',
       signup_source: 'plugin_example',
+      offer: 'direct',
     }),
-    getSignupAttributionForEvents: () => ({ signup_source: 'plugin_example' }),
+    getSignupAttributionForEvents: () => ({ signup_source: 'plugin_example', signup_offer: 'direct' }),
     getRegistrationDevice: () => ({ registration_device_type: 'desktop' }),
     registerUser: async (request: unknown) => {
       signupRequests.push(request)
       return { user: { id: 'fake-user-id' }, session: { access_token: 'fake-access', refresh_token: 'fake-refresh' } }
     },
     RegisterApiError: Error,
+    getPasswordRequirementErrors: () => [],
+    formatPasswordRequirementErrors: () => '',
     window: windowStub,
     navigator: { userAgent: 'test', maxTouchPoints: 0 },
     URLSearchParams,
@@ -96,6 +101,7 @@ test('registration without profile names preserves referral attribution and the 
       first_touch_type: 'plugin',
       first_touch_path: '/plugins/example/',
       signup_source: 'plugin_example',
+      offer: 'direct',
     },
   ])
   expect(captures.map(({ event }) => event)).toEqual(['website_signup_submit', 'user_signed_up'])
@@ -109,6 +115,7 @@ test('registration without profile names preserves referral attribution and the 
     ['measure', 'registration_completed', { type: 'customer_action' }, { event_id: `registration_${hashedId}` }],
   ])
   expect(captures[1].properties.signup_source).toBe('plugin_example')
+  expect(captures[1].properties.signup_offer).toBe('direct')
   expect(referrals).toEqual([{ email: 'signup@example.com', externalUserId: 'fake-user-id' }])
   const redirect = new URL(windowStub.location.href)
   expect(redirect.origin).toBe('https://console.capgo.app')
@@ -132,7 +139,7 @@ test('a failed API request restores signup for retry without reporting success',
   const values: Record<string, unknown> = {
     registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
     email: { value: 'signup@example.com' },
-    password: { value: 'Password123!' },
+    password: { value: 'Password123!', setAttribute() {}, removeAttribute() {}, focus() {} },
   }
   runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
     document: { getElementById: (id: string) => values[id], querySelector: () => ({}) },
@@ -141,6 +148,8 @@ test('a failed API request restores signup for retry without reporting success',
       throw new TypeError('Network unavailable')
     },
     RegisterApiError: class extends Error {},
+    getPasswordRequirementErrors: () => [],
+    formatPasswordRequirementErrors: () => '',
     getSignupUserMetadataForRegistration: () => ({}),
     getSignupAttributionForEvents: () => ({}),
     getRegistrationDevice: () => ({}),

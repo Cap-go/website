@@ -11,6 +11,7 @@ import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import OfferText from '@/components/OfferText.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import StoreReachSection from '@/components/StoreReachSection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
@@ -179,6 +180,9 @@ const comparisonRows = [
     label: copy('live_update_v2_comp_try_l'),
     hook: copy('live_update_v2_comp_try_capgo_hook'),
     capgo: copy('live_update_v2_comp_try_capgo'),
+    // Paid-ads visitors (offer=direct) pay first, so the row becomes "Money-back guarantee" instead of "Try before you pay".
+    labelDirect: copy('live_update_v2_comp_try_l_direct'),
+    capgoDirect: copy('direct_offer_guarantee_note'),
     diy: copy('live_update_v2_comp_try_diy'),
     capa: copy('live_update_v2_comp_try_capa'),
   },
@@ -508,9 +512,9 @@ const featureTiles = [
             <tbody>
               {comparisonRows.map((row) => (
                 <tr>
-                  <td class="label">{row.label}</td>
+                  <td class="label">{row.labelDirect ? <OfferText direct={row.labelDirect}>{row.label}</OfferText> : row.label}</td>
                   <td class="us">
-                    <span class="hook">{row.hook}</span> {row.capgo}
+                    <span class="hook">{row.hook}</span> {row.capgoDirect ? <OfferText direct={row.capgoDirect}>{row.capgo}</OfferText> : row.capgo}
                   </td>
                   <td>{row.diy}</td>
                   <td>{row.capa}</td>
@@ -588,7 +592,7 @@ const featureTiles = [
             <span class="check">✓</span> {copy('live_update_v2_cta_meta2')}
           </span>
           <span>
-            <span class="check">✓</span> {copy('live_update_v2_cta_meta3')}
+            <span class="check">✓</span> <OfferText direct={copy('direct_offer_guarantee')}>{copy('live_update_v2_cta_meta3')}</OfferText>
           </span>
         </div>
       </div>

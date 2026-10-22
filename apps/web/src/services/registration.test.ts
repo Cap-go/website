@@ -23,7 +23,14 @@ test('registration posts nameless signup, CAPTCHA, device and referral fields to
     return Response.json(session)
   })
   expect(
-    await registerUser({ email: ' signup@example.com ', password: 'Password123!', captcha_token: 'captcha', ref: 'readme-example', registration_device_type: 'desktop' }),
+    await registerUser({
+      email: ' signup@example.com ',
+      password: 'Password123!',
+      captcha_token: 'captcha',
+      ref: 'readme-example',
+      offer: 'direct',
+      registration_device_type: 'desktop',
+    }),
   ).toEqual(session)
   expect(requests[0].url).toBe('https://api.example.com/auth/register')
   expect(requests[0].options.method).toBe('POST')
@@ -32,6 +39,7 @@ test('registration posts nameless signup, CAPTCHA, device and referral fields to
     password: 'Password123!',
     captcha_token: 'captcha',
     ref: 'readme-example',
+    offer: 'direct',
     registration_device_type: 'desktop',
   })
 })
