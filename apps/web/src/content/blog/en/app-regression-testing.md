@@ -120,7 +120,7 @@ Run critical smoke checks first. If sign-in or app launch fails, stop deeper sui
 <a id="automate-stable-journeys-not-every-gesture"></a>
 ### Automate stable journeys, not every gesture
 
-Choose automation targets that are repeatable, observable, and valuable. Unit tests can cover business rules, Jest can validate JavaScript modules, and device frameworks can exercise native behavior and UI flows. Teams working on JavaScript logic can use [Jest unit testing practices](https://capgo.app/blog/jest-unit-testing/) to keep fast checks close to the code.
+Choose automation targets that are repeatable, observable, and valuable. Unit tests can cover business rules, Jest can validate JavaScript modules, and device frameworks can exercise native behavior and UI flows. Teams working on JavaScript logic can use [unit tests in JavaScript](https://capgo.app/blog/unit-tests-javascript/) to keep fast checks close to the code.
 
 A maintainable end-to-end test should:
 
