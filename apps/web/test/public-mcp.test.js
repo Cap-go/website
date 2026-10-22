@@ -55,7 +55,38 @@ test('plugin discovery searches and paginates the real registry', async () => {
   const search = content(await rpc('tools/call', { name: 'capgo_list_plugins', arguments: { query: 'biometric', category: 'auth-security' } }))
   expect(search.plugins.some((plugin) => plugin.package === '@capgo/capacitor-native-biometric')).toBe(true)
   expect(search.plugins.every((plugin) => plugin.category === 'auth-security')).toBe(true)
-  expect(search.plugins[0].url).toStartWith('https://capgo.app/plugins/')
+  // Without the prerendered directory the tool links nothing rather than guessing a page URL.
+  expect(search.plugins.every((plugin) => plugin.url === undefined)).toBe(true)
+})
+
+test('plugin page URLs come from the prerendered directory, so plugins without a page get none', async () => {
+  const withPage = actions.find((plugin) => plugin.name === '@capgo/capacitor-native-biometric')
+  const withoutPage = actions.find((plugin) => plugin.name === '@capgo/capacitor-device-integrity') ?? actions.find((plugin) => plugin !== withPage)
+  const directory = {
+    plugins: [
+      { urls: { github: withPage.href, capgo: 'https://capgo.app/plugins/capacitor-native-biometric/', docs: 'https://capgo.app/docs/plugins/native-biometric/' } },
+      { urls: { github: withoutPage.href } },
+    ],
+  }
+  const requested = []
+  const assetsEnv = {
+    ...env,
+    ASSETS: {
+      fetch: async (input) => {
+        requested.push(new URL(input.url ?? input).pathname)
+        return new Response(JSON.stringify(directory), { headers: { 'Content-Type': 'application/json' } })
+      },
+    },
+  }
+  const call = async (name) => {
+    const response = await handlePublicMcp(request({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'capgo_list_plugins', arguments: { query: name } } }), assetsEnv)
+    return content(await response.json()).plugins.find((plugin) => plugin.package === name)
+  }
+  expect(await call(withPage.name)).toMatchObject({ url: 'https://capgo.app/plugins/capacitor-native-biometric/', docs: 'https://capgo.app/docs/plugins/native-biometric/' })
+  const missing = await call(withoutPage.name)
+  expect(missing.url).toBeUndefined()
+  expect(missing.repository).toBe(withoutPage.href)
+  expect(requested).toEqual(['/plugins.json', '/plugins.json'])
 })
 
 test('free tools return existing browser destinations and local signing guidance', async () => {

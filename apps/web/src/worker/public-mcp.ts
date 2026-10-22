@@ -7,6 +7,8 @@ const MAX_BODY_BYTES = 16 * 1024
 
 export interface PublicMcpEnv {
   PUBLIC_MCP_RATE_LIMITER?: { limit(options: { key: string }): Promise<{ success: boolean }> }
+  /** Static assets, used to read the prerendered /plugins.json (which plugins have a capgo.app page). */
+  ASSETS?: { fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> }
 }
 
 const messageSchema = z.object({
@@ -114,7 +116,7 @@ export async function handlePublicMcp(request: Request, env: PublicMcpEnv, fetch
         })),
       })
     case 'tools/call':
-      return result(await callPublicTool({ ...params, arguments: params.arguments ?? {} }, request.url, fetchImpl, cache))
+      return result(await callPublicTool({ ...params, arguments: params.arguments ?? {} }, request.url, fetchImpl, cache, env.ASSETS))
     default:
       return response({ jsonrpc: '2.0', id, error: { code: -32601, message: 'Method not found' } })
   }

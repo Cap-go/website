@@ -110,7 +110,28 @@ function textResult(value: unknown, isError = false) {
   return { content: [{ type: 'text', text: JSON.stringify(value) }], ...(isError ? { isError: true } : {}) }
 }
 
-export async function callPublicTool(params: unknown, requestUrl: string, fetchImpl: typeof fetch, cache?: Cache) {
+type AssetFetcher = { fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> }
+
+const pluginDirectoryEntry = z.object({ urls: z.object({ github: z.string(), capgo: z.string().optional(), docs: z.string().optional() }) })
+const pluginDirectory = z.object({ plugins: z.array(pluginDirectoryEntry) })
+
+/**
+ * capgo.app/plugins/<slug>/ only exists for plugins with a tutorial or demo, which the build records in the
+ * prerendered /plugins.json. Read it from the static assets so the tool never links to a missing page.
+ */
+async function loadPluginPages(requestUrl: string, assets?: AssetFetcher): Promise<Map<string, { capgo?: string; docs?: string }>> {
+  if (!assets) return new Map()
+  try {
+    const response = await assets.fetch(new Request(new URL('/plugins.json', requestUrl)))
+    if (!response.ok) return new Map()
+    const { plugins } = pluginDirectory.parse(await response.json())
+    return new Map(plugins.map(({ urls }) => [urls.github, { capgo: urls.capgo, docs: urls.docs }]))
+  } catch {
+    return new Map()
+  }
+}
+
+export async function callPublicTool(params: unknown, requestUrl: string, fetchImpl: typeof fetch, cache?: Cache, assets?: AssetFetcher) {
   const command = commands.safeParse(params)
   if (!command.success) return textResult({ error: 'Unknown public tool or invalid arguments', details: z.prettifyError(command.error) }, true)
   switch (command.data.name) {
@@ -124,6 +145,7 @@ export async function callPublicTool(params: unknown, requestUrl: string, fetchI
     case 'capgo_list_plugins': {
       const { query, category, offset, limit } = command.data.arguments
       const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
+      const pages = await loadPluginPages(requestUrl, assets)
       const matches = actions.filter(
         (plugin) => (!category || plugin.category === category) && terms.every((term) => `${plugin.name} ${plugin.title} ${plugin.description}`.toLowerCase().includes(term)),
       )
@@ -139,7 +161,8 @@ export async function callPublicTool(params: unknown, requestUrl: string, fetchI
           description,
           category,
           repository: href,
-          url: `https://capgo.app/plugins/${new URL(href).pathname.split('/').findLast((part) => part.length > 0)}/`,
+          url: pages.get(href)?.capgo,
+          docs: pages.get(href)?.docs,
         })),
       })
     }
