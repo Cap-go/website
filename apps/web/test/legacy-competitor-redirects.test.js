@@ -63,6 +63,7 @@ const BLOG_LEGACY_REDIRECTS = [
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
 ]
 
+// English slug redirects; locale prefixes are applied in staticLegacyRedirect.
 const LIVE_UPDATE_ROUNDUP_REDIRECTS = [
   ['/blog/best-live-updates-system-for-mobile-app/', '/blog/best-live-update-tools-for-capacitor-apps/'],
   ['/blog/best-ionic-live-update-service/', '/blog/best-live-update-tools-for-capacitor-apps/'],
