@@ -96,7 +96,9 @@ for (const [from, to] of LIVE_UPDATE_ROUNDUP_REDIRECTS) {
 
   test(`staticLegacyRedirect ${from} → ${to}`, () => {
     expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
-    expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+    for (const locale of NON_DEFAULT_LOCALE_CODES) {
+      expect(staticLegacyRedirectLocation(`https://capgo.app/${locale}${from}`)).toBe(`/${locale}${to}`)
+    }
   })
 }
 

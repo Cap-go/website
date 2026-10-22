@@ -144,7 +144,7 @@ It is not the direct fit for Capacitor because Capacitor apps do not normally us
 
 ## Store policy basics
 
-Live updates do not mean you can change anything after review. Keep native code, permissions, and binary changes on the store path, and verify each platform's current policy before shipping web or interpreted-code updates.
+Live updates do not mean you can change anything after review. Keep native code, permissions, and binary changes on the store path. Downloaded interpreted code must not change the app's primary purpose, bypass signing or sandbox security, or create an in-app software store. Web-layer updates still sit inside those limits. Verify each platform's current policy before you ship an OTA bundle.
 
 Practical rules for Capacitor and Ionic teams:
 
@@ -184,7 +184,7 @@ OtaKit is the right choice when you want a lightweight Capacitor OTA tool with a
 
 ### Can one OTA tool cover Capacitor, Expo, and Flutter?
 
-No. Capacitor and Ionic apps need a web-bundle updater such as Capgo, Capawesome Cloud, or OtaKit. Expo and React Native apps need Expo EAS Update. Flutter apps need Shorebird.
+No. Capacitor and Ionic apps need a web-bundle updater such as Capgo, Capawesome Cloud, or OtaKit. Expo or React Native projects that use `expo-updates` typically use Expo EAS Update. Other React Native stacks need their own updater. Flutter apps need Shorebird.
 
 ## Sources
 
