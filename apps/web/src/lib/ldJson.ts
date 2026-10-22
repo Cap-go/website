@@ -129,7 +129,8 @@ export function toLdJsonBlocks(data: unknown): unknown[] {
   const isPlainWrapper = Object.keys(obj).every((key) => key === '@context' || key === '@graph')
   if (graph == null || typeof graph !== 'object' || !isPlainWrapper) return [ensureLdJsonContext(obj)]
 
-  const context = obj['@context'] ?? SCHEMA_ORG_CONTEXT
+  // An explicit @context: null is a valid context reset, so default only when the key is absent.
+  const context = '@context' in obj ? obj['@context'] : SCHEMA_ORG_CONTEXT
   const nodes = Array.isArray(graph) ? graph : [graph]
   return nodes
     .filter((node): node is Record<string, unknown> => node != null && typeof node === 'object' && !Array.isArray(node))

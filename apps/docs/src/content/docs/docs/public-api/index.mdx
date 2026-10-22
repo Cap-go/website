@@ -39,7 +39,7 @@ curl -H "x-api-key: YOUR_API_KEY" -H "capgo_api: 2025-10-01" https://api.capgo.a
 
 Without the header you get the default version, currently `2025-10-01`. Changes within a version are additive: new endpoints, new optional parameters and new response fields. A breaking change ships as a new dated version, and clients pinned to an older date keep the old behavior. An unknown or malformed version returns `400 unsupported_capgo_api_version` or `400 invalid_capgo_api_version`.
 
-Removing an operation or field is a breaking change, so it only happens in a new dated version. Before that, the operation is marked `deprecated: true` in the [OpenAPI spec](https://capgo.app/openapi.json), its responses carry a `Deprecation` header ([RFC 9745](https://www.rfc-editor.org/rfc/rfc9745)) and a `Sunset` header ([RFC 8594](https://www.rfc-editor.org/rfc/rfc8594)) with the date the old behavior ends, and the change is announced in the [release notes](https://github.com/Cap-go/capgo.app/releases).
+Removing an operation or field is a breaking change, so it only happens in a new dated version. Nothing is deprecated today. When something is, the operation will be marked `deprecated: true` in the [OpenAPI spec](https://capgo.app/openapi.json), its responses will carry a `Deprecation` header ([RFC 9745](https://www.rfc-editor.org/rfc/rfc9745)) and a `Sunset` header ([RFC 8594](https://www.rfc-editor.org/rfc/rfc8594)) with the date the old behavior ends, and the change will be announced in the [release notes](https://github.com/Cap-go/capgo.app/releases).
 
 ## Rate Limiting
 

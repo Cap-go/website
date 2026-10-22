@@ -320,4 +320,6 @@ test('toLdJsonBlocks keeps named graphs whole, accepts object graphs and merges 
 
   const [block] = toLdJsonBlocks({ '@context': 'https://schema.org', '@graph': [{ '@context': { extra: 'https://example.com/extra' }, '@type': 'Thing', extra: 1 }] })
   expect(block['@context']).toEqual(['https://schema.org', { extra: 'https://example.com/extra' }])
+
+  expect(toLdJsonBlocks({ '@context': null, '@graph': [{ '@type': 'Thing' }] })).toEqual([{ '@context': null, '@type': 'Thing' }])
 })
