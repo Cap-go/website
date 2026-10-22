@@ -83,6 +83,8 @@ VITE_SUPABASE_URL=https://your-project-ref.supabase.co
 VITE_SUPABASE_ANON_KEY=your-anon-public-key
 VITE_GOOGLE_WEB_CLIENT_ID=your-web-client-id.apps.googleusercontent.com
 VITE_GOOGLE_IOS_CLIENT_ID=your-ios-client-id.apps.googleusercontent.com
+VITE_APPLE_SERVICE_ID=com.yourapp.signin
+VITE_APPLE_REDIRECT_URL=https://your-project-ref.supabase.co/auth/v1/callback
 ```
 
 ## Why Use Supabase with Social Login?
@@ -109,8 +111,9 @@ First, install the Capgo Social Login plugin:
 
 ```bash
 bun add @capgo/capacitor-social-login
-bunx cap sync
 ```
+
+Run `bunx cap sync` **after** you add Capacitor and native platforms in [Add Capacitor to the React app](#add-capacitor-to-the-react-app). The Vite-only walkthrough below works in the browser before that step.
 
 See the [Social Login](https://capgo.app/plugins/capacitor-social-login/) and [Supabase](https://capgo.app/plugins/capacitor-supabase/) plugin pages for platform-specific setup.
 
@@ -439,19 +442,26 @@ import { SocialLogin } from '@capgo/capacitor-social-login';
 import { supabase } from '../lib/supabaseClient';
 import { createGoogleNoncePair } from './nonce';
 
-let initialized = false;
+let initialization: Promise<void> | null = null;
 
-export async function ensureSocialLoginInitialized(): Promise<void> {
-  if (initialized) return;
-  await SocialLogin.initialize({
-    google: {
-      webClientId: import.meta.env.VITE_GOOGLE_WEB_CLIENT_ID,
-      iOSClientId: import.meta.env.VITE_GOOGLE_IOS_CLIENT_ID,
-      mode: 'online',
-    },
-    apple: {},
-  });
-  initialized = true;
+export function ensureSocialLoginInitialized(): Promise<void> {
+  if (!initialization) {
+    initialization = SocialLogin.initialize({
+      google: {
+        webClientId: import.meta.env.VITE_GOOGLE_WEB_CLIENT_ID,
+        iOSClientId: import.meta.env.VITE_GOOGLE_IOS_CLIENT_ID,
+        mode: 'online',
+      },
+      apple: {
+        clientId: import.meta.env.VITE_APPLE_SERVICE_ID,
+        redirectUrl: import.meta.env.VITE_APPLE_REDIRECT_URL,
+      },
+    }).catch((error) => {
+      initialization = null;
+      throw error;
+    });
+  }
+  return initialization;
 }
 
 export async function signInWithGoogleSupabase() {
@@ -502,9 +512,14 @@ export async function signInWithAppleSupabase() {
 
 export async function signOutEverywhere() {
   await supabase.auth.signOut();
-  await SocialLogin.logout({ provider: 'google' });
+  await Promise.all([
+    SocialLogin.logout({ provider: 'google' }),
+    SocialLogin.logout({ provider: 'apple' }),
+  ]);
 }
 ```
+
+On **iOS**, native Sign in with Apple can use the capability alone. On **Android** and **web**, the `clientId` and `redirectUrl` values above must match [Apple Android setup](/docs/plugins/social-login/apple/android/) and your Supabase Apple provider.
 
 Expose session state to components:
 
