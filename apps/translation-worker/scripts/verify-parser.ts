@@ -171,7 +171,27 @@ assert(
 )
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('short-ui-length-defer-v1'), 'Cache version was not bumped for short UI length guard deferral')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('deepseek-style-guides-v1'), 'Cache version was not bumped for the DeepSeek model and style guides')
+
+const keyedSchema = __translationWorkerTest.translationBatchJsonSchema(2) as { properties: { translations: { required: string[] } } }
+assert(keyedSchema.properties.translations.required.join(',') === 't0,t1', 'Batch schema did not require one translation per item id')
+assert(__translationWorkerTest.parseKeyedTranslations('{"translations":{"t1":"Deux","t0":"Un"}}', 2)?.join('|') === 'Un|Deux', 'Keyed translations were not mapped back by item id')
+assert(__translationWorkerTest.parseKeyedTranslations({ translations: ['Un', 'Deux'] }, 2)?.join('|') === 'Un|Deux', 'Legacy array translations stopped parsing')
+assert(__translationWorkerTest.parseKeyedTranslations('{"translations":{"t0":"Un"}}', 2) === null, 'A keyed response missing an item id was accepted')
+const strayPlaceholder = __translationWorkerTest.protectTranslationTokens('zipping 16 files').restoreOrSource('npx @__CAPGO_KEEP_0__/cli bundle upload')
+assert(strayPlaceholder.text === 'zipping 16 files' && strayPlaceholder.missingTokens.length === 1, 'A stray placeholder reached the page')
+// A segment with its own placeholder that also receives another segment's index.
+const ownedPlaceholder = __translationWorkerTest.protectTranslationTokens('Deploy with Capgo')
+assert(ownedPlaceholder.text.includes('__CAPGO_KEEP_0__'), 'Capgo was not protected in the fixture')
+const crossSegment = ownedPlaceholder.restoreOrSource('Déployer avec __CAPGO_KEEP_0__ __CAPGO_KEEP_1__')
+assert(crossSegment.text === 'Deploy with Capgo' && crossSegment.missingTokens.join() === 'stray placeholder', 'A placeholder from another segment reached the page')
+assert(__translationWorkerTest.translationStyleGuide('French').includes('channel -> canal'), 'French prompt lost its glossary')
+assert(!__translationWorkerTest.translationStyleGuide('German').includes('channel -> canal'), 'French glossary leaked into another language')
+assert(
+  __translationWorkerTest.aiRequestOptions('@cf/deepseek-ai/deepseek-v4.1-flash-1017').chat_template_kwargs?.enable_thinking === false,
+  'Thinking was not disabled for DeepSeek translation requests',
+)
+assert(!('chat_template_kwargs' in __translationWorkerTest.aiRequestOptions('@cf/meta/llama-3.1-8b-instruct-fast')), 'Thinking options were sent to a non-reasoning model')
 
 assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')
 assert(__translationWorkerTest.translationWordCount('Évitez l\u2019attente de l\u2019App Store.') === 5, 'Word count did not count elided French words')
@@ -534,7 +554,7 @@ try {
           pagePath?: string
           texts?: string[]
           text?: string
-          items?: Array<{ text: string; context?: string }>
+          items?: Array<{ id?: string; text: string; context?: string }>
         }
         capturedAiPayload = payload
         assert(!payload.texts, 'Translation AI request still used legacy texts[] payload')
@@ -562,10 +582,13 @@ try {
           assert(typeof aboutItem.context === 'string' && aboutItem.context.includes('navigation'), 'About item missed translator context')
         }
 
-        const sourceTexts = payload.items.map((item) => item.text)
+        assert(
+          payload.items.every((item) => typeof item.id === 'string'),
+          'Translation AI request did not send item ids',
+        )
         return {
           response: JSON.stringify({
-            translations: sourceTexts.map((text) => translateText(text)),
+            translations: Object.fromEntries(payload.items.map((item) => [item.id, translateText(item.text)])),
           }),
         }
       },
@@ -957,4 +980,117 @@ try {
   } else {
     delete (globalThis as { caches?: unknown }).caches
   }
+}
+
+{
+  // Translation memory: a segment already translated (on this page or any other) is never sent to Workers AI again.
+  const memoryStore = new Map<string, string>()
+  const aiInputs: string[] = []
+  const memoryEnv = {
+    AI: {
+      run: async (_model: string, input: { messages: Array<{ content: string }> }) => {
+        const userContent = input.messages[1].content
+        aiInputs.push(userContent)
+        const { items } = JSON.parse(userContent) as { items: Array<{ id: string; text: string }> }
+        return { response: JSON.stringify({ translations: Object.fromEntries(items.map((item) => [item.id, `Fr ${item.text}`])) }) }
+      },
+    },
+    TRANSLATION_STORE: {
+      get: async (key: string) => (memoryStore.has(key) ? { text: async () => memoryStore.get(key) as string } : null),
+      put: async (key: string, value: string) => {
+        memoryStore.set(key, value)
+      },
+      delete: async (key: string) => {
+        memoryStore.delete(key)
+      },
+    },
+  } as unknown as Parameters<typeof __translationWorkerTest.translateBatchWithMemory>[0]
+
+  const sharedFooter = 'Ship live updates to every Capacitor app you maintain.'
+  const firstPage = await __translationWorkerTest.translateBatchWithMemory(memoryEnv, 'fr', [sharedFooter, 'The first page explains how channels route devices.'])
+  assert(firstPage[0] === `Fr ${sharedFooter}`, 'Translation memory did not return the first translation')
+  assert(memoryStore.size === 2, 'Translation memory did not store translated segments')
+
+  aiInputs.length = 0
+  const editedPage = await __translationWorkerTest.translateBatchWithMemory(memoryEnv, 'fr', [sharedFooter, 'A brand new paragraph was added to this page today.'])
+  assert(editedPage[0] === `Fr ${sharedFooter}`, 'Translation memory did not reuse a remembered segment')
+  assert(editedPage[1] === 'Fr A brand new paragraph was added to this page today.', 'Translation memory did not translate the new segment')
+  assert(aiInputs.length === 1 && !aiInputs[0].includes(sharedFooter), 'Translation memory sent a remembered segment to Workers AI')
+
+  aiInputs.length = 0
+  await __translationWorkerTest.translateBatchWithMemory(memoryEnv, 'fr', [sharedFooter])
+  assert(aiInputs.length === 0, 'Translation memory called Workers AI for a fully remembered batch')
+
+  const frenchKey = await __translationWorkerTest.translationMemoryKey('fr', sharedFooter, '')
+  assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('de', sharedFooter, '')), 'Translation memory keys must be per locale')
+  assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('fr', sharedFooter, 'footer link')), 'Translation memory keys must include context')
+  assert(frenchKey.includes(__translationWorkerTest.TRANSLATION_MEMORY_VERSION), 'Translation memory keys must include the memory version')
+}
+
+{
+  // Fallbacks are served but not remembered; reviewed output, even unchanged English, is.
+  type MemoryTestItem = { id: string; text: string; draft?: string }
+  const createMemoryEnv = (draft: (text: string) => string, review?: (item: MemoryTestItem) => string) => {
+    const store = new Map<string, string>()
+    const env = {
+      TRANSLATION_REVIEW_MODEL: review ? 'reviewer' : undefined,
+      AI: {
+        run: async (model: string, input: { messages: Array<{ content: string }> }) => {
+          const payload = JSON.parse(input.messages[1].content) as { items?: MemoryTestItem[]; text?: string }
+          if (!payload.items) return { response: draft(payload.text ?? '') }
+          if (model === 'reviewer') {
+            if (!review) throw new Error('unexpected review')
+            return { response: JSON.stringify({ translations: Object.fromEntries(payload.items.map((item) => [item.id, review(item)])) }) }
+          }
+          return { response: JSON.stringify({ translations: Object.fromEntries(payload.items.map((item) => [item.id, draft(item.text)])) }) }
+        },
+      },
+      TRANSLATION_STORE: {
+        get: async (key: string) => (store.has(key) ? { text: async () => store.get(key) as string } : null),
+        put: async (key: string, value: string) => {
+          store.set(key, value)
+        },
+      },
+    } as unknown as Parameters<typeof __translationWorkerTest.translateBatchWithMemory>[0]
+    return { env, store }
+  }
+
+  const label = 'Deploy with Capgo today'
+  const dropped = createMemoryEnv((text) => (text.includes('__CAPGO_KEEP_0__') ? 'Déployer avec Capgo dès aujourd’hui' : text))
+  const droppedResult = await __translationWorkerTest.translateBatchWithMemory(dropped.env, 'fr', [label])
+  assert(droppedResult[0] === label && dropped.store.size === 0, 'A short English fallback after a dropped placeholder was remembered')
+
+  const kept = createMemoryEnv((text) => text)
+  await __translationWorkerTest.translateBatchWithMemory(kept.env, 'fr', ['Capgo CLI'])
+  assert([...kept.store.values()].join() === 'Capgo CLI', 'A name the model kept in English was not remembered')
+
+  const unchangedLabel = createMemoryEnv((text) => text)
+  await __translationWorkerTest.translateBatchWithMemory(unchangedLabel.env, 'fr', ['Pricing'])
+  assert(unchangedLabel.store.size === 0, 'An untranslated short label was remembered')
+
+  const nativeBuild = __translationWorkerTest.protectTranslationTokens('Ship with Native Build, then a native build')
+  assert(nativeBuild.text === 'Ship with __CAPGO_KEEP_0__, then a native build', 'Native Build was not protected with exact case, or generic native build was')
+  assert(
+    !__translationWorkerTest.keepsTranslationPlaceholders('Use __CAPGO_KEEP_0__', 'Utiliser __CAPGO_KEEP_0__ __CAPGO_KEEP_0__'),
+    'A review that repeated a placeholder was accepted',
+  )
+
+  const reviewDropsToken = createMemoryEnv(
+    (text) => text.replace('Deploy with', 'Déployer avec').replace(' today', ' dès aujourd’hui'),
+    () => 'Déployer avec Capgo dès aujourd’hui',
+  )
+  const reviewDropsTokenResult = await __translationWorkerTest.translateBatchWithMemory(reviewDropsToken.env, 'fr', [label])
+  assert(
+    reviewDropsTokenResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewDropsToken.store.size === 1,
+    'A review that dropped a placeholder replaced the draft with English',
+  )
+
+  const reviewFails = createMemoryEnv(
+    (text) => text.replace('Deploy with', 'Déployer avec').replace(' today', ' dès aujourd’hui'),
+    () => {
+      throw new Error('review unavailable')
+    },
+  )
+  const reviewFailsResult = await __translationWorkerTest.translateBatchWithMemory(reviewFails.env, 'fr', [label])
+  assert(reviewFailsResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewFails.store.size === 0, 'An unreviewed draft was remembered')
 }
