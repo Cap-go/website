@@ -186,7 +186,7 @@ const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
 // Bump this when the prompt, style guides or models change to translate everything
 // again. Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages
 // are rebuilt from memory without new AI calls.
-const TRANSLATION_MEMORY_VERSION = '2026-10-22-style-guides-v1'
+const TRANSLATION_MEMORY_VERSION = '2026-10-22-style-guides-v2'
 const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
@@ -221,6 +221,8 @@ const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
 const STRAY_PLACEHOLDER_PATTERN = /__CAPGO_KEEP_\d+__/
 const STRAY_PLACEHOLDER_GLOBAL_PATTERN = /__CAPGO_KEEP_\d+__/g
 const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
+// Product names matched with exact case: "Native Build" is the product, "native build" is generic copy.
+const CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS = ['Native Build'] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -2094,6 +2096,11 @@ function isProtectedTokenBoundary(value: string, index: number): boolean {
 }
 
 function protectedTokenAt(value: string, index: number): string | null {
+  for (const token of CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS) {
+    if (!value.startsWith(token, index)) continue
+    if (!isProtectedTokenBoundary(value, index - 1) || !isProtectedTokenBoundary(value, index + token.length)) continue
+    return token
+  }
   const lowerValue = value.toLowerCase()
   for (const token of PROTECTED_TRANSLATION_TOKENS) {
     if (!lowerValue.startsWith(token.toLowerCase(), index)) continue
@@ -2249,11 +2256,10 @@ async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: Re
   }
 }
 
-// True when the translation has exactly the source's placeholders, none dropped or invented.
+// True when the translation has exactly the source's placeholders, none dropped, repeated or invented.
 function keepsTranslationPlaceholders(source: string, translated: string): boolean {
-  const sourceTokens = new Set(source.match(STRAY_PLACEHOLDER_GLOBAL_PATTERN) ?? [])
-  const translatedTokens = new Set(translated.match(STRAY_PLACEHOLDER_GLOBAL_PATTERN) ?? [])
-  return [...sourceTokens].every((token) => translatedTokens.has(token)) && [...translatedTokens].every((token) => sourceTokens.has(token))
+  const placeholders = (value: string) => (value.match(STRAY_PLACEHOLDER_GLOBAL_PATTERN) ?? []).sort().join()
+  return placeholders(source) === placeholders(translated)
 }
 
 type ReviewItem = { id: string; text: string; context?: string }
@@ -2342,7 +2348,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
             content: JSON.stringify({
               targetLanguage,
               pagePath: pagePath || undefined,
-              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              protectedTokens: [...PROTECTED_TRANSLATION_TOKENS, ...CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS],
               items,
             }),
           },
@@ -2438,6 +2444,12 @@ async function writeTranslationMemoryEntry(env: Env, key: string, translated: st
   }
 }
 
+// Unchanged English output is only remembered for segments made of protected names
+// ("Capgo CLI"); an unchanged label like "Pricing" is a miss that a later refresh retries.
+function isOnlyProtectedNames(source: string): boolean {
+  return !/\p{L}/u.test(protectTranslationTokens(source).text.replace(STRAY_PLACEHOLDER_GLOBAL_PATTERN, ''))
+}
+
 // Translates a batch of page segments, reusing every segment already in translation memory.
 async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[], pagePath = ''): Promise<string[]> {
   const contexts = resolveTranslationContexts(batch)
@@ -2456,7 +2468,12 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
       const source = batch[batchIndex]
       const text = translated[translatedIndex]
       translations[batchIndex] = text ?? source
-      const remember = text !== undefined && text.trim() && !STRAY_PLACEHOLDER_PATTERN.test(text) && !notRemembered.has(source)
+      const remember =
+        text !== undefined &&
+        text.trim() &&
+        !STRAY_PLACEHOLDER_PATTERN.test(text) &&
+        !notRemembered.has(source) &&
+        (normalizedTranslationValue(text) !== normalizedTranslationValue(source) || isOnlyProtectedNames(source))
       if (remember) await writeTranslationMemoryEntry(env, keys[batchIndex], text)
     }),
   )
@@ -2475,6 +2492,9 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[],
     })
   }
 
+  // Single-text mode skips the review pass: with a reviewer configured these are unreviewed
+  // drafts, served now but not remembered so a later refresh runs the full pipeline.
+  if (env.TRANSLATION_REVIEW_MODEL?.trim()) for (const text of batch) notRemembered?.add(text)
   return await translateBatchIndividually(env, targetLanguage, batch, pagePath, notRemembered)
 }
 
@@ -2529,7 +2549,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             content: JSON.stringify({
               targetLanguage,
               pagePath: pagePath || undefined,
-              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              protectedTokens: [...PROTECTED_TRANSLATION_TOKENS, ...CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS],
               text: protectedText.text,
               context: context || undefined,
             }),
@@ -3932,6 +3952,7 @@ export class TranslationCoordinator {
 
 export const __translationWorkerTest = {
   translateBatchWithMemory,
+  keepsTranslationPlaceholders,
   translationMemoryKey,
   TRANSLATION_MEMORY_VERSION,
   aiRequestOptions,

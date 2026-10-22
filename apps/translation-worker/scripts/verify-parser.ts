@@ -1064,6 +1064,17 @@ try {
   await __translationWorkerTest.translateBatchWithMemory(kept.env, 'fr', ['Capgo CLI'])
   assert([...kept.store.values()].join() === 'Capgo CLI', 'A name the model kept in English was not remembered')
 
+  const unchangedLabel = createMemoryEnv((text) => text)
+  await __translationWorkerTest.translateBatchWithMemory(unchangedLabel.env, 'fr', ['Pricing'])
+  assert(unchangedLabel.store.size === 0, 'An untranslated short label was remembered')
+
+  const nativeBuild = __translationWorkerTest.protectTranslationTokens('Ship with Native Build, then a native build')
+  assert(nativeBuild.text === 'Ship with __CAPGO_KEEP_0__, then a native build', 'Native Build was not protected with exact case, or generic native build was')
+  assert(
+    !__translationWorkerTest.keepsTranslationPlaceholders('Use __CAPGO_KEEP_0__', 'Utiliser __CAPGO_KEEP_0__ __CAPGO_KEEP_0__'),
+    'A review that repeated a placeholder was accepted',
+  )
+
   const reviewDropsToken = createMemoryEnv(
     (text) => text.replace('Deploy with', 'Déployer avec').replace(' today', ' dès aujourd’hui'),
     () => 'Déployer avec Capgo dès aujourd’hui',
