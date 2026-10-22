@@ -1,12 +1,12 @@
 {
   "repositoryCount": 142,
   "contributorCount": 604,
-  "versionCount": 16039,
-  "releaseCount": 6916,
-  "closedIssueCount": 1743,
-  "mergedPullRequestCount": 9099,
-  "resolvedItemCount": 10842,
-  "totalStars": 3154,
+  "versionCount": 16081,
+  "releaseCount": 6934,
+  "closedIssueCount": 1753,
+  "mergedPullRequestCount": 9170,
+  "resolvedItemCount": 10923,
+  "totalStars": 3158,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -21,10 +21,10 @@
       "url": "https://github.com/Cap-go/capacitor-native-navigation",
       "stars": 41,
       "contributors": 4,
-      "versionTags": 65,
-      "releases": 61,
+      "versionTags": 67,
+      "releases": 63,
       "closedIssues": 13,
-      "mergedPullRequests": 65
+      "mergedPullRequests": 67
     },
     "Cap-go/capacitor-native-map": {
       "url": "https://github.com/Cap-go/capacitor-native-map",
@@ -39,10 +39,10 @@
       "url": "https://github.com/Cap-go/capacitor-native-loader",
       "stars": 3,
       "contributors": 2,
-      "versionTags": 12,
+      "versionTags": 13,
       "releases": 12,
       "closedIssues": 0,
-      "mergedPullRequests": 9
+      "mergedPullRequests": 10
     },
     "Cap-go/capacitor-asset-cache": {
       "url": "https://github.com/Cap-go/capacitor-asset-cache",
@@ -66,10 +66,10 @@
       "url": "https://github.com/Cap-go/capacitor-transitions",
       "stars": 25,
       "contributors": 3,
-      "versionTags": 44,
-      "releases": 41,
+      "versionTags": 45,
+      "releases": 42,
       "closedIssues": 5,
-      "mergedPullRequests": 47
+      "mergedPullRequests": 48
     },
     "Cap-go/capacitor-sheets": {
       "url": "https://github.com/Cap-go/capacitor-sheets",
@@ -84,19 +84,19 @@
       "url": "https://github.com/Cap-go/capacitor-native-biometric",
       "stars": 88,
       "contributors": 30,
-      "versionTags": 92,
-      "releases": 64,
-      "closedIssues": 53,
-      "mergedPullRequests": 58
+      "versionTags": 93,
+      "releases": 65,
+      "closedIssues": 54,
+      "mergedPullRequests": 59
     },
     "Cap-go/capacitor-camera-preview": {
       "url": "https://github.com/Cap-go/capacitor-camera-preview",
       "stars": 52,
       "contributors": 52,
-      "versionTags": 417,
-      "releases": 123,
-      "closedIssues": 88,
-      "mergedPullRequests": 300
+      "versionTags": 421,
+      "releases": 127,
+      "closedIssues": 94,
+      "mergedPullRequests": 306
     },
     "Cap-go/capacitor-calendar": {
       "url": "https://github.com/Cap-go/capacitor-calendar",
@@ -136,21 +136,21 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 875,
+      "stars": 876,
       "contributors": 54,
-      "versionTags": 790,
-      "releases": 234,
-      "closedIssues": 265,
-      "mergedPullRequests": 532
+      "versionTags": 793,
+      "releases": 237,
+      "closedIssues": 266,
+      "mergedPullRequests": 536
     },
     "Cap-go/capgo": {
       "url": "https://github.com/Cap-go/capgo",
       "stars": 211,
       "contributors": 30,
-      "versionTags": 5756,
+      "versionTags": 5779,
       "releases": 1000,
       "closedIssues": 419,
-      "mergedPullRequests": 2528
+      "mergedPullRequests": 2576
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -262,12 +262,12 @@
     },
     "Cap-go/capacitor-inappbrowser": {
       "url": "https://github.com/Cap-go/capacitor-inappbrowser",
-      "stars": 133,
+      "stars": 134,
       "contributors": 43,
-      "versionTags": 546,
-      "releases": 195,
-      "closedIssues": 218,
-      "mergedPullRequests": 438
+      "versionTags": 549,
+      "releases": 198,
+      "closedIssues": 219,
+      "mergedPullRequests": 441
     },
     "Cap-go/capacitor-mqtt": {
       "url": "https://github.com/Cap-go/capacitor-mqtt",
@@ -343,7 +343,7 @@
     },
     "Cap-go/capacitor-native-purchases": {
       "url": "https://github.com/Cap-go/capacitor-native-purchases",
-      "stars": 49,
+      "stars": 50,
       "contributors": 13,
       "versionTags": 295,
       "releases": 117,
@@ -390,10 +390,10 @@
       "url": "https://github.com/Cap-go/capacitor-social-login",
       "stars": 219,
       "contributors": 24,
-      "versionTags": 347,
-      "releases": 131,
+      "versionTags": 348,
+      "releases": 132,
       "closedIssues": 176,
-      "mergedPullRequests": 261
+      "mergedPullRequests": 262
     },
     "Cap-go/capacitor-passkey": {
       "url": "https://github.com/Cap-go/capacitor-passkey",
@@ -417,10 +417,10 @@
       "url": "https://github.com/Cap-go/capacitor-ricoh360-camera-plugin",
       "stars": 9,
       "contributors": 3,
-      "versionTags": 55,
-      "releases": 42,
+      "versionTags": 56,
+      "releases": 43,
       "closedIssues": 0,
-      "mergedPullRequests": 18
+      "mergedPullRequests": 19
     },
     "Cap-go/capacitor-rich-notifications": {
       "url": "https://github.com/Cap-go/capacitor-rich-notifications",
@@ -492,7 +492,7 @@
       "versionTags": 32,
       "releases": 29,
       "closedIssues": 1,
-      "mergedPullRequests": 30
+      "mergedPullRequests": 31
     },
     "Cap-go/capacitor-app-intents": {
       "url": "https://github.com/Cap-go/capacitor-app-intents",
@@ -532,7 +532,7 @@
     },
     "Cap-go/capacitor-background-geolocation": {
       "url": "https://github.com/Cap-go/capacitor-background-geolocation",
-      "stars": 28,
+      "stars": 29,
       "contributors": 12,
       "versionTags": 95,
       "releases": 77,
@@ -570,10 +570,10 @@
       "url": "https://github.com/Cap-go/capacitor-env",
       "stars": 11,
       "contributors": 4,
-      "versionTags": 64,
-      "releases": 60,
+      "versionTags": 65,
+      "releases": 61,
       "closedIssues": 5,
-      "mergedPullRequests": 38
+      "mergedPullRequests": 39
     },
     "Cap-go/capacitor-ffmpeg": {
       "url": "https://github.com/Cap-go/capacitor-ffmpeg",
@@ -1083,10 +1083,10 @@
       "url": "https://github.com/Cap-go/capacitor-zip",
       "stars": 6,
       "contributors": 2,
-      "versionTags": 36,
-      "releases": 34,
-      "closedIssues": 6,
-      "mergedPullRequests": 17
+      "versionTags": 37,
+      "releases": 35,
+      "closedIssues": 7,
+      "mergedPullRequests": 18
     },
     "Cap-go/capacitor-zebra-datawedge": {
       "url": "https://github.com/Cap-go/capacitor-zebra-datawedge",
