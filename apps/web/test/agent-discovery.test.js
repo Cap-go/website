@@ -144,11 +144,11 @@ test('Personal Agent Protocol discovery names Capgo without claiming unimplement
 })
 
 test('auth.md documents the service_auth registration flow with the real endpoints', () => {
-  expect(AUTH_MD_MARKDOWN).toContain('POST https://api.capgo.app/agent/identity')
+  expect(AUTH_MD_MARKDOWN).toContain('POST https://capgo.app/agent/identity')
   expect(AUTH_MD_MARKDOWN).toContain('{"type":"service_auth","login_hint":"user@example.com"}')
-  expect(AUTH_MD_MARKDOWN).toContain('POST https://api.capgo.app/agent/identity/claim')
+  expect(AUTH_MD_MARKDOWN).toContain('POST https://capgo.app/agent/identity/claim')
   expect(AUTH_MD_MARKDOWN).toContain('grant_type=urn:workos:agent-auth:grant-type:claim&claim_token=clm_...')
-  expect(AUTH_MD_MARKDOWN).toContain('POST https://api.capgo.app/mcp/oauth/revoke')
+  expect(AUTH_MD_MARKDOWN).toContain('POST https://capgo.app/oauth2/revoke')
   for (const error of ['authorization_pending', 'slow_down', 'expired_token', 'access_denied', 'anonymous_not_enabled', 'issuer_not_enabled', 'invalid_login_hint']) {
     expect(AUTH_MD_MARKDOWN).toContain(`\`${error}\``)
   }

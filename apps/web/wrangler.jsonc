@@ -24,6 +24,13 @@
   "vars": {
     "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
   },
+  // auth.md agent registration on capgo.app is served by the API worker (see src/worker/agent-auth-proxy.ts).
+  "services": [
+    {
+      "binding": "CAPGO_API",
+      "service": "capgo_api-prod",
+    },
+  ],
   "routes": [
     {
       "pattern": "capgo.app",
