@@ -1,7 +1,10 @@
 import { expect, test } from 'bun:test'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect.ts'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
-import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
+import {
+  NON_DEFAULT_LOCALE_CODES,
+  resolveLocalizedLegacyRedirectPath,
+} from '../../shared/localizedLegacyPathRedirect.ts'
 import { staticLegacyRedirect } from '../src/worker/index.ts'
 
 function staticLegacyRedirectLocation(url) {
@@ -63,6 +66,14 @@ const BLOG_LEGACY_REDIRECTS = [
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
 ]
 
+// English slug redirects; locale prefixes are applied in staticLegacyRedirect.
+const LIVE_UPDATE_ROUNDUP_REDIRECTS = [
+  ['/blog/best-live-updates-system-for-mobile-app/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-ionic-live-update-service/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-capacitor-ota-updates/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-over-the-air-app-updates-saas/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+]
+
 const VOLTBUILDER_BLOG_REDIRECTS = [
   ['/blog/alternative-to-voltbuilder/', '/alternatives/voltbuilder/'],
   ['/blog/alternativa-a-voltbuilder/', '/alternatives/voltbuilder/'],
@@ -78,6 +89,23 @@ for (const [from, to] of BLOG_LEGACY_REDIRECTS) {
   test(`staticLegacyRedirect ${from} → ${to}`, () => {
     expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
     expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+  })
+}
+
+for (const [from, to] of LIVE_UPDATE_ROUNDUP_REDIRECTS) {
+  test(`resolveLegacyPathRedirect ${from} → ${to}`, () => {
+    expect(resolveLegacyPathRedirect(from)).toBe(to)
+    expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+    for (const locale of NON_DEFAULT_LOCALE_CODES) {
+      expect(resolveLocalizedLegacyRedirectPath(`/${locale}${from}`)).toBe(`/${locale}${to}`)
+    }
+  })
+
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+    for (const locale of NON_DEFAULT_LOCALE_CODES) {
+      expect(staticLegacyRedirectLocation(`https://capgo.app/${locale}${from}`)).toBe(`/${locale}${to}`)
+    }
   })
 }
 

@@ -30,6 +30,10 @@ const REDIRECTS = [
   ['/blog/alternative-to-voltbuilder/', '/alternatives/voltbuilder/'],
   ['/blog/alternativa-a-voltbuilder/', '/alternatives/voltbuilder/'],
   ['/blog/alternative-a-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/best-live-updates-system-for-mobile-app/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-ionic-live-update-service/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-capacitor-ota-updates/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-over-the-air-app-updates-saas/', '/blog/best-live-update-tools-for-capacitor-apps/'],
 ]
 
 for (const [from, to] of REDIRECTS) {
