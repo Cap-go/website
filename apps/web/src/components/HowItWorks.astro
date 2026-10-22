@@ -19,7 +19,7 @@ import SignupCta from '@/components/SignupCta.astro'
       <!-- Card 1 -->
       <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
         <div class="relative top-30 left-8 mb-8 flex h-64 items-center justify-center">
-          <img src="/how-it-works/how-it-works-install.webp" alt="" width="324" height="441" loading="lazy" decoding="async" class="max-w-none" />
+          <img src="/how-it-works/how-it-works-install.webp" alt={m.how_it_works_install_image_alt({}, { locale: Astro.locals.locale })} width="324" height="441" loading="lazy" decoding="async" class="max-w-none" />
         </div>
         <div class="text-center">
           <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card1_title({}, { locale: Astro.locals.locale })}</h3>
@@ -34,7 +34,7 @@ import SignupCta from '@/components/SignupCta.astro'
       <!-- Card 2 -->
       <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
         <div class="mb-8 flex h-64 items-center justify-center">
-          <img src="/how-it-works/how-it-works-publish.webp" alt="" width="324" height="420" loading="lazy" decoding="async" class="relative top-25 max-w-none" />
+          <img src="/how-it-works/how-it-works-publish.webp" alt={m.how_it_works_publish_image_alt({}, { locale: Astro.locals.locale })} width="324" height="420" loading="lazy" decoding="async" class="relative top-25 max-w-none" />
         </div>
         <div class="text-center">
           <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card2_title({}, { locale: Astro.locals.locale })}</h3>
@@ -45,7 +45,7 @@ import SignupCta from '@/components/SignupCta.astro'
       <!-- Card 3 -->
       <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
         <div class="mb-8 flex h-64 items-center justify-center">
-          <img src="/how-it-works/how-it-works-update.webp" alt="" width="239" height="288" loading="lazy" decoding="async" class="relative top-10 max-w-none" />
+          <img src="/how-it-works/how-it-works-update.webp" alt={m.how_it_works_update_image_alt({}, { locale: Astro.locals.locale })} width="239" height="288" loading="lazy" decoding="async" class="relative top-10 max-w-none" />
         </div>
         <div class="text-center">
           <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card3_title({}, { locale: Astro.locals.locale })}</h3>

@@ -6,44 +6,44 @@ import { getTotalStars } from '@/services/github'
 
 // Every logo in /public/logo_cloud, split into three rows for the scrolling wall.
 const appLogos = [
-  'kick',
-  'suez',
-  'nana',
-  'pizza_hut',
-  'remnote',
-  'revel',
-  'vella',
-  'irec',
-  'our_living',
-  'shelf',
-  'janitor',
-  'snowqueen',
-  'codere',
-  'poplin',
-  'torchys',
-  'livance',
-  'happypal',
-  'felix_health',
-  'ajeer',
-  'gartner_health',
-  'leaderboard',
-  'marketplace',
-  'nx',
-  'oneclick',
-  'pixiesset',
-  'plataforma',
-  'public_square',
-  'seaport',
-  'vaia',
-  'styleseat',
-  'huckleberry',
-  'superfrete',
-  'somtoday',
-  '360player',
-  'rocket_lawyer',
-  '12go',
-  'finax',
-  'vestwell',
+  { slug: 'kick', name: 'Kick' },
+  { slug: 'suez', name: 'Suez' },
+  { slug: 'nana', name: 'Nana' },
+  { slug: 'pizza_hut', name: 'Pizza Hut' },
+  { slug: 'remnote', name: 'RemNote' },
+  { slug: 'revel', name: 'Hello Revel' },
+  { slug: 'vella', name: 'Vella' },
+  { slug: 'irec', name: 'IREC' },
+  { slug: 'our_living', name: 'OurLiving' },
+  { slug: 'shelf', name: 'Shelf' },
+  { slug: 'janitor', name: 'Janitor' },
+  { slug: 'snowqueen', name: 'Snowqueen' },
+  { slug: 'codere', name: 'Codere' },
+  { slug: 'poplin', name: 'Poplin' },
+  { slug: 'torchys', name: "Torchy's Tacos" },
+  { slug: 'livance', name: 'Livance' },
+  { slug: 'happypal', name: 'HappyPal' },
+  { slug: 'felix_health', name: 'Felix Health' },
+  { slug: 'ajeer', name: 'Ajeer' },
+  { slug: 'gartner_health', name: 'Gartner Health' },
+  { slug: 'leaderboard', name: 'Leaderboard' },
+  { slug: 'marketplace', name: 'Marketplace by Compass Group' },
+  { slug: 'nx', name: 'Nx' },
+  { slug: 'oneclick', name: 'OneClick' },
+  { slug: 'pixiesset', name: 'Pixieset' },
+  { slug: 'plataforma', name: 'Plataforma 10' },
+  { slug: 'public_square', name: 'Public Square' },
+  { slug: 'seaport', name: 'Seaport' },
+  { slug: 'vaia', name: 'Vaia' },
+  { slug: 'styleseat', name: 'StyleSeat' },
+  { slug: 'huckleberry', name: 'Huckleberry' },
+  { slug: 'superfrete', name: 'SuperFrete' },
+  { slug: 'somtoday', name: 'Somtoday' },
+  { slug: '360player', name: '360Player' },
+  { slug: 'rocket_lawyer', name: 'Rocket Lawyer' },
+  { slug: '12go', name: '12Go' },
+  { slug: 'finax', name: 'Finax' },
+  { slug: 'vestwell', name: 'Vestwell' },
 ]
 const appLogoRows = [0, 1, 2].map((row) => appLogos.filter((_, index) => index % 3 === row))
 
@@ -121,7 +121,7 @@ const totalStars = getTotalStars()
             <div class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
               {[...row, ...row].map((logo) => (
                 <span class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#2B2D30] ring-1 ring-white/5">
-                  <img src={`/logo_cloud/${logo}_logo.webp`} alt="" class="h-full w-full object-contain p-1.5" loading="lazy" decoding="async" />
+                  <img src={`/logo_cloud/${logo.slug}_logo.webp`} alt={`${logo.name} app icon`} class="h-full w-full object-contain p-1.5" loading="lazy" decoding="async" />
                 </span>
               ))}
             </div>
@@ -254,7 +254,7 @@ const totalStars = getTotalStars()
   </div>
 </section>
 
-<style>
+<style is:global>
   .app-wall {
     mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
   }

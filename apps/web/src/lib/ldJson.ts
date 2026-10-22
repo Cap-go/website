@@ -115,6 +115,23 @@ export function ensureLdJsonContext(data: unknown): unknown {
 }
 
 /**
+ * Split ld+json into standalone blocks, one per entity, each with its own @context.
+ * A single @graph block is valid JSON-LD, but many crawlers and agent scanners only read
+ * the top-level @type, so they see no types at all. @id references still link the blocks.
+ */
+export function toLdJsonBlocks(data: unknown): unknown[] {
+  if (data == null || typeof data !== 'object') return []
+  if (Array.isArray(data)) return data.flatMap((item) => toLdJsonBlocks(item))
+
+  const obj = data as Record<string, unknown>
+  if (Array.isArray(obj['@graph'])) {
+    const { '@graph': graph, '@context': context = SCHEMA_ORG_CONTEXT } = obj
+    return (graph as unknown[]).filter((node) => node && typeof node === 'object').map((node) => ({ '@context': context, ...(node as object) }))
+  }
+  return [ensureLdJsonContext(obj)]
+}
+
+/**
  * Create a complete Organization schema for Capgo
  */
 export function createCapgoOrganization(config: RuntimeConfig['public']): Organization {
