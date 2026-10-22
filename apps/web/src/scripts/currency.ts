@@ -36,6 +36,9 @@ function storedCurrency(): CurrencyCode | null {
   }
 }
 
+// The manual choice for this page view; kept in memory too so it survives blocked storage.
+let manualCurrency: CurrencyCode | null = storedCurrency()
+
 function pageLocale() {
   return document.documentElement.lang || 'en-US'
 }
@@ -45,7 +48,7 @@ export function getCurrencyState(): Readonly<CurrencyState> {
 }
 
 export function hasManualCurrency() {
-  return storedCurrency() !== null
+  return manualCurrency !== null
 }
 
 /** Converts an amount between currencies; falls back to the original amount when a rate is missing. */
@@ -84,6 +87,7 @@ function applyCurrency(currency: CurrencyCode) {
 
 /** Sets a manual currency, or clears the override (back to location-based) when `null`. */
 export function setCurrency(currency: CurrencyCode | null) {
+  manualCurrency = currency
   try {
     if (currency) localStorage.setItem(CURRENCY_STORAGE_KEY, currency)
     else localStorage.removeItem(CURRENCY_STORAGE_KEY)
@@ -111,7 +115,7 @@ export function initCurrency(): Promise<void> {
       console.warn('Currency conversion unavailable', error)
     }
     state.ready = true
-    applyCurrency(storedCurrency() ?? state.detected)
+    applyCurrency(manualCurrency ?? state.detected)
   })()
   return loading
 }

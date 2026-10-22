@@ -17,12 +17,12 @@ const locale = Astro.locals.locale
       <option value="auto" class="text-gray-950" data-currency-auto-option>{m.pricing_currency_auto({}, { locale })}</option>
       {SUPPORTED_CURRENCIES.map((code) => (
         <option value={code} class="text-gray-950">
-          {code} · {currencyName(code)}
+          {code} · {currencyName(code, locale)}
         </option>
       ))}
     </select>
   </div>
-  <p id="currency-select-hint" class="text-xs leading-5 text-gray-500">{m.pricing_currency_hint({}, { locale })}</p>
+  <p id="currency-select-hint" class="text-xs leading-5 text-gray-400">{m.pricing_currency_hint({}, { locale })}</p>
 </div>
 
 <script>

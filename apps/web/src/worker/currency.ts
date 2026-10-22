@@ -7,12 +7,13 @@ export const CURRENCY_PATH = CURRENCY_ENDPOINT
 // ECB reference rates publish once per working day.
 const RATES_CACHE_PATH = '/currency-rates.json'
 const RATES_CACHE_TTL_SECONDS = 6 * 60 * 60
+const RATES_FETCH_TIMEOUT_MS = 5000
 const RATES_SOURCE_URL = `https://api.frankfurter.dev/v1/latest?base=${BASE_CURRENCY}&symbols=${SUPPORTED_CURRENCIES.filter((code) => code !== BASE_CURRENCY).join(',')}`
 
 type RatesSnapshot = { date: string | null; rates: CurrencyRates }
 
 async function loadRates(): Promise<RatesSnapshot> {
-  const response = await fetch(RATES_SOURCE_URL, { headers: { Accept: 'application/json' } })
+  const response = await fetch(RATES_SOURCE_URL, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(RATES_FETCH_TIMEOUT_MS) })
   if (!response.ok) throw new Error(`Exchange rates request failed: ${response.status}`)
   const data = (await response.json()) as { date?: string; rates?: Record<string, number> }
   const rates: CurrencyRates = { [BASE_CURRENCY]: 1 }
@@ -25,9 +26,9 @@ async function loadRates(): Promise<RatesSnapshot> {
 
 function requestCountry(request: Request): string | null {
   const cf = (request as Request & { cf?: { country?: string } }).cf
-  const country = cf?.country || request.headers.get('CF-IPCountry')
+  const country = (cf?.country || request.headers.get('CF-IPCountry'))?.toUpperCase()
   // XX = unknown, T1 = Tor.
-  return country && /^[A-Z]{2}$/i.test(country) && country !== 'XX' && country !== 'T1' ? country.toUpperCase() : null
+  return country && /^[A-Z]{2}$/.test(country) && country !== 'XX' && country !== 'T1' ? country : null
 }
 
 export async function handleCurrency(request: Request, ctx?: BackgroundContext): Promise<Response> {
