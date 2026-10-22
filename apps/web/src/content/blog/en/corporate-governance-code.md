@@ -54,7 +54,7 @@ The problem isn't just regulatory exposure. **Unclear governance creates three p
 - **Opaque accountability:** the board approves an outcome, but the minutes don't show who tested the assumptions or owned the follow-up.
 - **Silent conflicts of interest:** a relationship is known informally but never declared, assessed, recorded, or managed.
 
-A governance code turns those risks into defined actions. It can require directors to declare interests before discussion, specify which committee reviews a transaction, establish how the chair handles dissent, and set out what the board must disclose. For companies dealing with wider regulatory obligations, a clear governance structure also makes it easier to connect board decisions with operational controls, as the practical distinction between governance and [compliance checks in CI/CD for Capacitor apps](https://capgo.app/blog/compliance-checks-in-cicd-for-capacitor-apps/) becomes easier to manage.
+A governance code turns those risks into defined actions. It can require directors to declare interests before discussion, specify which committee reviews a transaction, establish how the chair handles dissent, and set out what the board must disclose. For companies dealing with wider regulatory obligations, a clear governance structure also makes it easier to connect board decisions with operational controls, as the practical distinction between governance and regulatory compliance becomes easier to manage.
 
 ![A flowchart diagram illustrating the importance of having a written corporate governance code for board decision making.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/720284ee-a73a-41e2-bef4-f7771c777c68/corporate-governance-code-governance-process.jpg)
 
