@@ -16,11 +16,11 @@ const FRENCH_STYLE_GUIDE = `French (France) style guide:
 - Address the reader with "vous". Use sentence case for headings, buttons and navigation (capitalise only the first word and proper nouns), never English Title Case.
 - Marketing headlines and CTAs may use the imperative ("Déployez en quelques minutes"); buttons, menu items and UI actions use the infinitive ("Parler à un humain").
 - Get gender and agreement right. Use natural word order ("les 12 derniers mois").
-- Typography: space before : ; ? ! ; French quotes « » ; decimal comma (4,2 Mo); prices as "0,05 $"; GB/GiB -> Go, MB -> Mo.
+- Typography: space before : ; ? ! ; French quotes « » ; decimal comma (4,2 Mo); prices as "0,05 $"; GB -> Go, GiB -> Gio, MB -> Mo.
 Glossary (English -> French, mandatory):
 - AI -> IA (agents IA, compétences IA); AI agent -> agent IA
 - bundle -> bundle (le bundle, les bundles); JS bundle -> bundle JS
-- build (noun) -> build (le build); cloud build -> build cloud; native build -> build natif; build time -> temps de build; to build an app -> compiler
+- build (noun) -> build (le build); cloud build -> build cloud; Native Build (Capgo product) stays Native Build; build time -> temps de build; to build an app -> compiler
 - channel -> canal (pl. canaux). Never "chaîne".
 - release (noun) -> release or version; never "mise à jour" when it means a version
 - live update(s) -> live update(s) or "mise à jour OTA". Never "mise à jour en direct".

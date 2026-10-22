@@ -179,7 +179,12 @@ assert(__translationWorkerTest.parseKeyedTranslations('{"translations":{"t1":"De
 assert(__translationWorkerTest.parseKeyedTranslations({ translations: ['Un', 'Deux'] }, 2)?.join('|') === 'Un|Deux', 'Legacy array translations stopped parsing')
 assert(__translationWorkerTest.parseKeyedTranslations('{"translations":{"t0":"Un"}}', 2) === null, 'A keyed response missing an item id was accepted')
 const strayPlaceholder = __translationWorkerTest.protectTranslationTokens('zipping 16 files').restoreOrSource('npx @__CAPGO_KEEP_0__/cli bundle upload')
-assert(strayPlaceholder.text === 'zipping 16 files' && strayPlaceholder.missingTokens.length === 1, 'A stray placeholder from another segment reached the page')
+assert(strayPlaceholder.text === 'zipping 16 files' && strayPlaceholder.missingTokens.length === 1, 'A stray placeholder reached the page')
+// A segment with its own placeholder that also receives another segment's index.
+const ownedPlaceholder = __translationWorkerTest.protectTranslationTokens('Deploy with Capgo')
+assert(ownedPlaceholder.text.includes('__CAPGO_KEEP_0__'), 'Capgo was not protected in the fixture')
+const crossSegment = ownedPlaceholder.restoreOrSource('Déployer avec __CAPGO_KEEP_0__ __CAPGO_KEEP_1__')
+assert(crossSegment.text === 'Deploy with Capgo' && crossSegment.missingTokens.join() === 'stray placeholder', 'A placeholder from another segment reached the page')
 assert(__translationWorkerTest.translationStyleGuide('French').includes('channel -> canal'), 'French prompt lost its glossary')
 assert(!__translationWorkerTest.translationStyleGuide('German').includes('channel -> canal'), 'French glossary leaked into another language')
 assert(
@@ -1020,4 +1025,61 @@ try {
   assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('de', sharedFooter, '')), 'Translation memory keys must be per locale')
   assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('fr', sharedFooter, 'footer link')), 'Translation memory keys must include context')
   assert(frenchKey.includes(__translationWorkerTest.TRANSLATION_MEMORY_VERSION), 'Translation memory keys must include the memory version')
+}
+
+{
+  // Fallbacks are served but not remembered; reviewed output, even unchanged English, is.
+  type MemoryTestItem = { id: string; text: string; draft?: string }
+  const createMemoryEnv = (draft: (text: string) => string, review?: (item: MemoryTestItem) => string) => {
+    const store = new Map<string, string>()
+    const env = {
+      TRANSLATION_REVIEW_MODEL: review ? 'reviewer' : undefined,
+      AI: {
+        run: async (model: string, input: { messages: Array<{ content: string }> }) => {
+          const payload = JSON.parse(input.messages[1].content) as { items?: MemoryTestItem[]; text?: string }
+          if (!payload.items) return { response: draft(payload.text ?? '') }
+          if (model === 'reviewer') {
+            if (!review) throw new Error('unexpected review')
+            return { response: JSON.stringify({ translations: Object.fromEntries(payload.items.map((item) => [item.id, review(item)])) }) }
+          }
+          return { response: JSON.stringify({ translations: Object.fromEntries(payload.items.map((item) => [item.id, draft(item.text)])) }) }
+        },
+      },
+      TRANSLATION_STORE: {
+        get: async (key: string) => (store.has(key) ? { text: async () => store.get(key) as string } : null),
+        put: async (key: string, value: string) => {
+          store.set(key, value)
+        },
+      },
+    } as unknown as Parameters<typeof __translationWorkerTest.translateBatchWithMemory>[0]
+    return { env, store }
+  }
+
+  const label = 'Deploy with Capgo today'
+  const dropped = createMemoryEnv((text) => (text.includes('__CAPGO_KEEP_0__') ? 'Déployer avec Capgo dès aujourd’hui' : text))
+  const droppedResult = await __translationWorkerTest.translateBatchWithMemory(dropped.env, 'fr', [label])
+  assert(droppedResult[0] === label && dropped.store.size === 0, 'A short English fallback after a dropped placeholder was remembered')
+
+  const kept = createMemoryEnv((text) => text)
+  await __translationWorkerTest.translateBatchWithMemory(kept.env, 'fr', ['Capgo CLI'])
+  assert([...kept.store.values()].join() === 'Capgo CLI', 'A name the model kept in English was not remembered')
+
+  const reviewDropsToken = createMemoryEnv(
+    (text) => text.replace('Deploy with', 'Déployer avec').replace(' today', ' dès aujourd’hui'),
+    () => 'Déployer avec Capgo dès aujourd’hui',
+  )
+  const reviewDropsTokenResult = await __translationWorkerTest.translateBatchWithMemory(reviewDropsToken.env, 'fr', [label])
+  assert(
+    reviewDropsTokenResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewDropsToken.store.size === 1,
+    'A review that dropped a placeholder replaced the draft with English',
+  )
+
+  const reviewFails = createMemoryEnv(
+    (text) => text.replace('Deploy with', 'Déployer avec').replace(' today', ' dès aujourd’hui'),
+    () => {
+      throw new Error('review unavailable')
+    },
+  )
+  const reviewFailsResult = await __translationWorkerTest.translateBatchWithMemory(reviewFails.env, 'fr', [label])
+  assert(reviewFailsResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewFails.store.size === 0, 'An unreviewed draft was remembered')
 }

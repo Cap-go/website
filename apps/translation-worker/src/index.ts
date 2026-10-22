@@ -1,7 +1,7 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { isGonePath } from '../../shared/gonePaths'
-import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
 import { translationStyleGuide } from './style-guides'
@@ -219,6 +219,7 @@ const AI_OUTPUT_PREVIEW_CHARS = 240
 const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
 // A placeholder left after restore belongs to another segment and must never reach the page.
 const STRAY_PLACEHOLDER_PATTERN = /__CAPGO_KEEP_\d+__/
+const STRAY_PLACEHOLDER_GLOBAL_PATTERN = /__CAPGO_KEEP_\d+__/g
 const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
@@ -644,13 +645,7 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
   return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
 }
 
-async function temporaryEnglishCrawlerResponse(
-  request: Request,
-  env: Env,
-  requestUrl: URL,
-  locale: Locale,
-  isHead = false,
-): Promise<Response> {
+async function temporaryEnglishCrawlerResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) {
     return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
@@ -2241,16 +2236,24 @@ function polishTranslatedText(targetLanguage: string, text: string): string {
 }
 
 // Optional second pass (TRANSLATION_REVIEW_MODEL): a reviewer model fixes the drafts
-// against the same style guide, with its reasoning left on. Any failure keeps the drafts.
-async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<string[]> {
+// against the same style guide, with its reasoning left on. Any failure keeps the drafts,
+// flagged as unreviewed so they are not stored in translation memory.
+async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<{ translations: string[]; reviewed: boolean }> {
   const reviewModel = env.TRANSLATION_REVIEW_MODEL?.trim()
-  if (!reviewModel) return drafts
+  if (!reviewModel) return { translations: drafts, reviewed: true }
   try {
-    return await reviewTranslatedBatchWithModel(env, reviewModel, targetLanguage, items, drafts)
+    return { translations: await reviewTranslatedBatchWithModel(env, reviewModel, targetLanguage, items, drafts), reviewed: true }
   } catch (error) {
     console.warn('Translation review failed; keeping drafts', { targetLanguage, reviewModel, error: errorMessage(error) })
-    return drafts
+    return { translations: drafts, reviewed: false }
   }
+}
+
+// True when the translation has exactly the source's placeholders, none dropped or invented.
+function keepsTranslationPlaceholders(source: string, translated: string): boolean {
+  const sourceTokens = new Set(source.match(STRAY_PLACEHOLDER_GLOBAL_PATTERN) ?? [])
+  const translatedTokens = new Set(translated.match(STRAY_PLACEHOLDER_GLOBAL_PATTERN) ?? [])
+  return [...sourceTokens].every((token) => translatedTokens.has(token)) && [...translatedTokens].every((token) => sourceTokens.has(token))
 }
 
 type ReviewItem = { id: string; text: string; context?: string }
@@ -2284,10 +2287,13 @@ async function reviewTranslatedBatchWithModel(env: Env, reviewModel: string, tar
   const payload = extractAiPayload(result)
   const reviewed = keyedTranslationsFromUnknown(typeof payload === 'string' ? parseJsonValue(stripJsonFence(payload)) : payload, items.length)
   if (!reviewed) throw new Error('Review model returned invalid JSON')
-  return reviewed.map((text, index) => (text.trim() ? text : drafts[index]))
+  // A reviewed item that drops or invents a placeholder keeps its draft instead of falling back to English.
+  return reviewed.map((text, index) => (text.trim() && keepsTranslationPlaceholders(items[index].text, text) ? text : drafts[index]))
 }
 
-async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
+// notRemembered collects the sources whose output is a fallback (English source, unreviewed
+// draft), so translation memory does not store it.
+async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = '', notRemembered?: Set<string>): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const { uniqueBatch, expandIndexes } = dedupeBatchForTranslation(batch)
@@ -2345,7 +2351,9 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
 
       payload = extractAiPayload(result)
       const drafted = parseKeyedTranslations(payload, uniqueBatch.length)
-      const translated = drafted && drafted.length === uniqueBatch.length ? await reviewTranslatedBatch(env, targetLanguage, items, drafted) : drafted
+      const review = drafted && drafted.length === uniqueBatch.length ? await reviewTranslatedBatch(env, targetLanguage, items, drafted) : null
+      const translated = review ? review.translations : drafted
+      const fallbackSources = new Set<string>(review && !review.reviewed ? uniqueBatch : [])
       if (!translated) {
         lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
       } else if (translated.length !== uniqueBatch.length) {
@@ -2354,6 +2362,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
         const restored = translated.map((text, index) => {
           const result = protectedBatch[index].restoreOrSource(text)
           if (result.missingTokens.length > 0) {
+            fallbackSources.add(uniqueBatch[index])
             console.warn('Translation kept source after protected token drop', {
               targetLanguage,
               index,
@@ -2367,9 +2376,11 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
         assertTranslatedBatch(targetLanguage, uniqueBatch, restored)
         const guarded = guardTranslatedBatchLengths(uniqueBatch, restored, targetLanguage)
         for (let index = 0; index < guarded.length; index += 1) {
+          if (guarded[index] !== restored[index]) fallbackSources.add(uniqueBatch[index])
           if (!shouldEnforceTranslationWordCount(uniqueBatch[index])) continue
-          guarded[index] = await translateSingleText(env, targetLanguage, uniqueBatch[index], pagePath, guarded[index])
+          guarded[index] = await translateSingleText(env, targetLanguage, uniqueBatch[index], pagePath, guarded[index], fallbackSources)
         }
+        for (const source of fallbackSources) notRemembered?.add(source)
         return expandDedupedBatchTranslations(guarded, expandIndexes)
       }
     } catch (error) {
@@ -2418,13 +2429,6 @@ async function readTranslationMemoryEntry(env: Env, key: string): Promise<string
   }
 }
 
-// A long segment left in English is a fallback (dropped placeholder, failed model call), not a
-// translation: it is not remembered, so the next refresh of the page gets another chance.
-function shouldRememberTranslation(source: string, translated: string): boolean {
-  if (!translated.trim() || STRAY_PLACEHOLDER_PATTERN.test(translated)) return false
-  return !(shouldCheckUnchangedTranslation(source) && normalizedTranslationValue(source) === normalizedTranslationValue(translated))
-}
-
 async function writeTranslationMemoryEntry(env: Env, key: string, translated: string): Promise<void> {
   rememberInIsolate(key, translated)
   try {
@@ -2443,20 +2447,25 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
   if (missingIndexes.length === 0) return translations as string[]
 
   const missingTexts = missingIndexes.map((index) => batch[index])
-  const translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath)
+  // Fallbacks (English kept after a dropped placeholder or length violation, drafts whose
+  // review failed) are served but not remembered, so the next refresh retries them.
+  const notRemembered = new Set<string>()
+  const translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath, notRemembered)
   await Promise.all(
     missingIndexes.map(async (batchIndex, translatedIndex) => {
-      const text = translated[translatedIndex] ?? batch[batchIndex]
-      translations[batchIndex] = text
-      if (shouldRememberTranslation(batch[batchIndex], text)) await writeTranslationMemoryEntry(env, keys[batchIndex], text)
+      const source = batch[batchIndex]
+      const text = translated[translatedIndex]
+      translations[batchIndex] = text ?? source
+      const remember = text !== undefined && text.trim() && !STRAY_PLACEHOLDER_PATTERN.test(text) && !notRemembered.has(source)
+      if (remember) await writeTranslationMemoryEntry(env, keys[batchIndex], text)
     }),
   )
   return translations as string[]
 }
 
-async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
+async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = '', notRemembered?: Set<string>): Promise<string[]> {
   try {
-    return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath)
+    return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath, notRemembered)
   } catch (error) {
     const message = errorMessage(error)
     console.warn('Translation batch JSON failed; falling back to single-text translation', {
@@ -2466,10 +2475,10 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[],
     })
   }
 
-  return await translateBatchIndividually(env, targetLanguage, batch, pagePath)
+  return await translateBatchIndividually(env, targetLanguage, batch, pagePath, notRemembered)
 }
 
-async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = '', seedCandidate?: string): Promise<string> {
+async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = '', seedCandidate?: string, notRemembered?: Set<string>): Promise<string> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedText = protectTranslationTokens(text)
@@ -2589,6 +2598,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
       error: lastError.message,
       sourcePreview: aiPayloadPreview(text),
     })
+    notRemembered?.add(text)
     return text
   }
 
@@ -2598,16 +2608,17 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
       error: lastError.message,
       sourcePreview: aiPayloadPreview(text),
     })
+    notRemembered?.add(text)
     return text
   }
 
   throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
+async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[], pagePath = '', notRemembered?: Set<string>): Promise<string[]> {
   const translated: string[] = []
   for (const text of batch) {
-    translated.push(await translateSingleText(env, targetLanguage, text, pagePath))
+    translated.push(await translateSingleText(env, targetLanguage, text, pagePath, undefined, notRemembered))
   }
   return translated
 }
@@ -3979,11 +3990,7 @@ export default {
     if (shouldBypassTranslation(requestUrl.pathname)) {
       const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
       if (isRedirect(originResponse)) {
-        return trackAICrawler(
-          request,
-          withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'),
-          ctx,
-        )
+        return trackAICrawler(request, withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'), ctx)
       }
       return trackAICrawler(request, originResponse, ctx)
     }
