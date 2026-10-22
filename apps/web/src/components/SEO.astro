@@ -125,6 +125,7 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="keywords" content={keywords} />
 
 <link rel="canonical" href={canonicalString} />
+<link rel="ai-catalog" type="application/json" href="/.well-known/ai-catalog.json" />
 {
   markdownAlternate && (
     <link rel="alternate" type="text/markdown" href={new URL(markdownAlternate, baseUrl).toString()} />

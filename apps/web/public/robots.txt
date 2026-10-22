@@ -4,5 +4,6 @@ Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 Sitemap: https://capgo.app/sitemap-index.xml
 Sitemap: https://capgo.app/sitemap-docs-index.xml
+Agentmap: https://capgo.app/.well-known/ai-catalog.json
 
 #DaumWebMasterTool:4c48e893ccc836281d344e308b3d95ac1fd5ff159feea79f43580bec456cdb66:zgfNBpWN9qxCw+eDaoF1MQ==

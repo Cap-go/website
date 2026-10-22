@@ -1,4 +1,5 @@
 import { expect, test } from 'bun:test'
+import { existsSync, readFileSync } from 'node:fs'
 import {
   AGENT_NOT_FOUND_MARKDOWN,
   AUTH_MD_MARKDOWN,
@@ -106,4 +107,38 @@ test('organization schema includes postal address and support contact', () => {
     email: 'support@capgo.app',
   })
   expect(org.legalName).toBe('Digital Shift OÜ')
+})
+
+const catalogFile = (name) => JSON.parse(readFileSync(new URL(`../public/.well-known/${name}`, import.meta.url), 'utf8'))
+
+test('ARD ai-catalog lists Capgo agent resources with valid entries', () => {
+  const catalog = catalogFile('ai-catalog.json')
+  // ard.json is the current ARD path; ai-catalog.json the predecessor that scanners still read.
+  expect(catalogFile('ard.json')).toEqual(catalog)
+  expect(catalog.specVersion).toBeTruthy()
+  expect(catalog.host).toMatchObject({ displayName: 'Capgo', identifier: 'did:web:capgo.app' })
+  expect(catalog.entries.length).toBeGreaterThan(0)
+  const identifiers = new Set()
+  for (const entry of catalog.entries) {
+    expect(entry.identifier).toMatch(/^urn:air:capgo\.app:[a-z0-9-]+:[a-z0-9-]+$/)
+    expect(identifiers.has(entry.identifier)).toBe(false)
+    identifiers.add(entry.identifier)
+    expect(entry.displayName).toBeTruthy()
+    expect(entry.type).toMatch(/^application\/[a-z0-9.+-]+$/)
+    expect('url' in entry !== 'data' in entry).toBe(true)
+    expect(entry.representativeQueries.length).toBeGreaterThanOrEqual(2)
+    expect(entry.representativeQueries.length).toBeLessThanOrEqual(5)
+    const local = entry.url.replace('https://capgo.app/', '')
+    expect(existsSync(new URL(`../public/${local}`, import.meta.url)), entry.url).toBe(true)
+  }
+  const skills = JSON.parse(readFileSync(new URL('../public/.well-known/agent-skills/index.json', import.meta.url), 'utf8')).skills
+  for (const skill of skills) expect(identifiers.has(`urn:air:capgo.app:skill:${skill.name}`), skill.name).toBe(true)
+})
+
+test('robots.txt points agents at the ARD catalog', () => {
+  expect(readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8')).toContain('Agentmap: https://capgo.app/.well-known/ai-catalog.json')
+})
+
+test('Personal Agent Protocol discovery names Capgo without claiming unimplemented interfaces', () => {
+  expect(catalogFile('poppy.json')).toEqual({ protocol_version: '0.1', organization: { name: 'Capgo', domain: 'capgo.app' }, web: {} })
 })
