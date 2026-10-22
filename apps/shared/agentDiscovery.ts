@@ -6,8 +6,9 @@ export const OPENAPI_ALIAS_PATHS = new Set(['/openapi.json', '/.well-known/opena
 
 export const MCP_MANIFEST_PATHS = new Set(['/mcp.json', '/.well-known/mcp.json'])
 
-/** The only Capgo remote MCP server. capgo.app/mcp is a human page that explains it. */
+/** Authenticated account MCP server. capgo.app/mcp is its human-facing setup page. */
 export const HOSTED_MCP_URL = `${CAPGO_API_ORIGIN}/mcp`
+export const PUBLIC_MCP_URL = `${CAPGO_ORIGIN}/mcp/public`
 export const MCP_DOCS_URL = `${CAPGO_ORIGIN}/docs/ai/mcp/`
 
 export const HOSTED_MCP_TOOL_GROUPS = [
@@ -64,9 +65,10 @@ Capgo is not a generic AI coding assistant and not a prompt-to-app builder. It i
 
 1. Read [${CAPGO_ORIGIN}/llms.txt](${CAPGO_ORIGIN}/llms.txt) and the OpenAPI spec at [${CAPGO_ORIGIN}/openapi.json](${CAPGO_ORIGIN}/openapi.json).
 2. Read [${CAPGO_ORIGIN}/auth.md](${CAPGO_ORIGIN}/auth.md) for how to get credentials (OAuth or API key).
-3. Connect to the Capgo MCP server at \`${HOSTED_MCP_URL}\` (Streamable HTTP) with OAuth or \`Authorization: Bearer <Capgo API key>\` for account tools (apps, channels, rollouts, devices, stats, builds, webhooks, notifications) and docs search. Setup: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
-4. To upload a bundle or request a native build from local files, run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
-5. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
+3. For public docs search, plugin discovery, and free browser-tool guidance, connect to \`${PUBLIC_MCP_URL}\` without credentials. Setup: [public MCP guide](${CAPGO_ORIGIN}/mcp/public.md).
+4. Connect to the Capgo MCP server at \`${HOSTED_MCP_URL}\` (Streamable HTTP) with OAuth or \`Authorization: Bearer <Capgo API key>\` for account tools (apps, channels, rollouts, devices, stats, builds, webhooks, notifications) and docs search. Setup: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
+5. To upload a bundle or request a native build from local files, run \`npx @capgo/cli@latest mcp\` locally after \`npx @capgo/cli@latest login\`.
+6. For raw REST, send header \`x-api-key: <key>\` to \`${CAPGO_API_ORIGIN}\`. Legacy \`authorization: <key>\` (no Bearer prefix) is still accepted.
 
 ### Key facts for evaluating Capgo
 
@@ -295,6 +297,16 @@ export function mcpManifest() {
       tools: {},
     },
     toolGroups: HOSTED_MCP_TOOL_GROUPS.map(({ title, description }) => ({ title, description })),
+    publicServers: [
+      {
+        name: 'capgo-public',
+        description: 'Search docs, find plugins, and discover free browser tools without an account.',
+        transport: { type: 'streamable-http', url: PUBLIC_MCP_URL },
+        authentication: { required: false },
+        serverCard: `${CAPGO_ORIGIN}/mcp/public/server-card.json`,
+        documentationUrl: `${CAPGO_ORIGIN}/mcp/public.md`,
+      },
+    ],
     localServers: [
       {
         name: 'capgo-cli',
@@ -398,5 +410,3 @@ export function withLlmsWhenToUse(body: string): string {
   const rest = body.slice(insertAt).replace(/^\n+/, '\n\n')
   return `${body.slice(0, insertAt)}\n\n${WHEN_TO_USE_MARKDOWN}${rest}`
 }
-
-

@@ -1,0 +1,26 @@
+{
+  "name": "app.capgo/public",
+  "title": "Capgo Public Docs and Tools",
+  "version": "1.0.0",
+  "description": "Search Capgo docs, discover plugins, and find free browser tools without an account.",
+  "serverInfo": {
+    "name": "capgo-public",
+    "version": "1.0.0"
+  },
+  "protocolVersion": "2025-11-25",
+  "serverUrl": "https://capgo.app/mcp/public",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://capgo.app/mcp/public"
+    }
+  ],
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://capgo.app/mcp/public"
+  },
+  "authentication": {
+    "required": false
+  },
+  "documentationUrl": "https://capgo.app/mcp/public.md"
+}
