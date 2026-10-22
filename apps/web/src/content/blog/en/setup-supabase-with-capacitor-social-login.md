@@ -442,7 +442,7 @@ import { SocialLogin } from '@capgo/capacitor-social-login';
 import { supabase } from '../lib/supabaseClient';
 import { createGoogleNoncePair } from './nonce';
 
-function isAppleLoginConfigured(): boolean {
+export function isAppleLoginConfigured(): boolean {
   const platform = Capacitor.getPlatform();
   if (platform === 'ios') return true;
   const serviceId = import.meta.env.VITE_APPLE_SERVICE_ID;
@@ -545,6 +545,9 @@ export async function signInWithGoogleSupabase() {
 }
 
 export async function signInWithAppleSupabase() {
+  if (!isAppleLoginConfigured()) {
+    throw new Error('Apple sign-in is not configured for this platform');
+  }
   await ensureSocialLoginInitialized();
   const result = await SocialLogin.login({
     provider: 'apple',
@@ -635,11 +638,16 @@ Login panel:
 ```tsx
 // src/components/LoginPanel.tsx
 import { useState } from 'react';
-import { signInWithAppleSupabase, signInWithGoogleSupabase } from '../auth/socialLogin';
+import {
+  isAppleLoginConfigured,
+  signInWithAppleSupabase,
+  signInWithGoogleSupabase,
+} from '../auth/socialLogin';
 
 export function LoginPanel() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const showApple = isAppleLoginConfigured();
 
   const run = async (action: () => Promise<unknown>) => {
     setBusy(true);
@@ -658,9 +666,11 @@ export function LoginPanel() {
       <button type="button" disabled={busy} onClick={() => run(signInWithGoogleSupabase)}>
         Continue with Google
       </button>
-      <button type="button" disabled={busy} onClick={() => run(signInWithAppleSupabase)}>
-        Continue with Apple
-      </button>
+      {showApple ? (
+        <button type="button" disabled={busy} onClick={() => run(signInWithAppleSupabase)}>
+          Continue with Apple
+        </button>
+      ) : null}
       {error ? <p role="alert">{error}</p> : null}
     </div>
   );
