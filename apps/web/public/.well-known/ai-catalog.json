@@ -1,0 +1,91 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Capgo",
+    "identifier": "did:web:capgo.app",
+    "url": "https://capgo.app"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:capgo.app:mcp:capgo",
+      "displayName": "Capgo MCP server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://capgo.app/.well-known/mcp/server-card.json",
+      "description": "Hosted Streamable HTTP MCP server at https://api.capgo.app/mcp: manage Capacitor apps, live update bundles, channels and rollouts, devices, statistics, native builds, webhooks and push notifications, and search the Capgo docs. OAuth 2.0 sign-in.",
+      "representativeQueries": [
+        "roll out a Capacitor live update to 10% of devices",
+        "list the bundles and channels of my Capgo app",
+        "check why my iOS native build failed",
+        "search the Capgo docs for channel overrides"
+      ],
+      "tags": [
+        "capacitor",
+        "live-updates",
+        "ota",
+        "mobile",
+        "mcp"
+      ]
+    },
+    {
+      "identifier": "urn:air:capgo.app:api:public",
+      "displayName": "Capgo Public API",
+      "type": "application/openapi+json",
+      "url": "https://capgo.app/.well-known/capgo-public-api-openapi.json",
+      "description": "REST API (OpenAPI 3.1) for Capgo organizations, apps, channels, bundles, devices, statistics and API keys.",
+      "representativeQueries": [
+        "create a Capgo channel with the REST API",
+        "upload bundle metadata to Capgo",
+        "get Capgo app statistics for the last 30 days"
+      ],
+      "tags": [
+        "capacitor",
+        "rest-api",
+        "openapi"
+      ]
+    },
+    {
+      "identifier": "urn:air:capgo.app:skill:capgo-public-api",
+      "displayName": "Capgo Public API skill",
+      "type": "application/agent-skills+md",
+      "url": "https://capgo.app/.well-known/agent-skills/capgo-public-api/SKILL.md",
+      "description": "Use Capgo's public API docs and authentication model to manage organizations, apps, channels, devices, bundles, statistics, and API keys.",
+      "representativeQueries": [
+        "automate Capgo releases from a script",
+        "call the Capgo API with an API key"
+      ]
+    },
+    {
+      "identifier": "urn:air:capgo.app:skill:capgo-cli-mcp",
+      "displayName": "Capgo CLI and MCP skill",
+      "type": "application/agent-skills+md",
+      "url": "https://capgo.app/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
+      "description": "Connect to the hosted Capgo MCP server at api.capgo.app/mcp, or run the local Capgo CLI MCP server for bundle uploads and native builds.",
+      "representativeQueries": [
+        "connect my coding agent to Capgo",
+        "upload a Capacitor bundle from my agent"
+      ]
+    },
+    {
+      "identifier": "urn:air:capgo.app:skill:capgo-mobile-signing-tools",
+      "displayName": "Capgo mobile signing tools skill",
+      "type": "application/agent-skills+md",
+      "url": "https://capgo.app/.well-known/agent-skills/capgo-mobile-signing-tools/SKILL.md",
+      "description": "Use Capgo's browser-based signing tools to generate iOS CSRs, create Android keystores, and capture iPhone or iPad UDIDs.",
+      "representativeQueries": [
+        "generate an iOS certificate signing request",
+        "create an Android keystore online"
+      ]
+    },
+    {
+      "identifier": "urn:air:capgo.app:skill:capgo-site-routing",
+      "displayName": "Capgo site routing skill",
+      "type": "application/agent-skills+md",
+      "url": "https://capgo.app/.well-known/agent-skills/capgo-site-routing/SKILL.md",
+      "description": "Route developers to the right Capgo pages for pricing, native builds, signing tools, API docs, AI skills, and enterprise workflows.",
+      "representativeQueries": [
+        "where is Capgo pricing",
+        "find the Capgo native build docs"
+      ]
+    }
+  ]
+}

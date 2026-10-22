@@ -181,37 +181,37 @@ curl -H "authorization: your-api-key" \
 
 ## Error Handling
 
+All errors use the standard error format described in the [API overview](/docs/public-api/).
+
 Common error scenarios and their responses:
 
 ```json
-// Invalid body
+// The API key cannot read this app (HTTP 401)
 {
-  "status": "Invalid body",
-  "error": "Invalid date format or missing parameters"
+  "error": "no_access_to_app",
+  "message": "No access to app",
+  "moreInfo": { "data": "6aa76066-55ef-4238-ade6-0b32334a4097" }
 }
 
-// Permission denied
+// The API key cannot read this organization (HTTP 401)
 {
-  "status": "You can't access this app",
-  "error": "Insufficient permissions to access statistics"
+  "error": "no_access_to_organization",
+  "message": "No access to organization",
+  "moreInfo": { "data": "6aa76066-55ef-4238-ade6-0b32334a4097" }
 }
 
-// Permission denied for organization
+// Organization statistics require an active plan (HTTP 402)
 {
-  "status": "You can't access this organization",
-  "error": "Insufficient permissions to access organization statistics"
+  "error": "subscription_required",
+  "message": "Organization subscription required or plan invalid",
+  "moreInfo": { "orgId": "046a36ac-e03c-4590-9257-bd6c9dba9ee8", "isPayingAndGoodPlan": false }
 }
 
-// No organizations found for user statistics
+// User statistics when the user belongs to no organization (HTTP 401)
 {
-  "status": "No organizations found",
-  "error": "No organizations found"
-}
-
-// Internal server error
-{
-  "status": "Cannot get app statistics",
-  "error": "Internal server error message"
+  "error": "no_organizations_found",
+  "message": "No organizations found",
+  "moreInfo": { "data": "6aa76066-55ef-4238-ade6-0b32334a4097" }
 }
 ```
 

@@ -52,6 +52,24 @@
   Access-Control-Expose-Headers: Link, ETag
   Cache-Control: public, max-age=3600
 
+/.well-known/ai-catalog.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+
+/.well-known/ard.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+
+/.well-known/poppy.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
+
 /.well-known/agent-skills/index.json
   Content-Type: application/json; charset=utf-8
   Access-Control-Allow-Origin: *

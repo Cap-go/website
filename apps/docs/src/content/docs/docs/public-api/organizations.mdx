@@ -116,11 +116,13 @@ curl -X POST \
 
 #### Permission Error
 
-If the API key does not have `org.create`, the API returns:
+If the API key does not have `org.create`, the API returns `403`:
 
 ```json
 {
-  "error": "permission_denied"
+  "error": "permission_denied",
+  "message": "Permission denied: org.create",
+  "moreInfo": {}
 }
 ```
 
@@ -198,25 +200,44 @@ curl -X DELETE \
 
 ## Error Handling
 
+All errors use the standard error format described in the [API overview](/docs/public-api/).
+
 Common error scenarios and their responses:
 
 ```json
-// Invalid API key
+// Missing or invalid API key (HTTP 401)
 {
-  "error": "Invalid API key",
-  "status": "KO"
+  "error": "invalid_apikey",
+  "message": "Invalid apikey",
+  "moreInfo": {}
 }
 
-// Missing required field
+// The API key has no access to the requested organization
 {
-  "error": "Name is required",
-  "status": "KO"
+  "error": "invalid_org_id",
+  "message": "You can't access this organization",
+  "moreInfo": { "org_id": "046a36ac-e03c-4590-9257-bd6c9dba9ee8" }
 }
 
-// Insufficient permissions
+// The organization requires API keys with an expiration date (HTTP 401)
 {
-  "error": "Admin role required",
-  "status": "KO"
+  "error": "org_requires_expiring_key",
+  "message": "This organization requires API keys with an expiration date. Please use a different key or update this key with an expiration date.",
+  "moreInfo": {}
+}
+
+// Creating an organization without the org.create permission (HTTP 403)
+{
+  "error": "permission_denied",
+  "message": "Permission denied: org.create",
+  "moreInfo": {}
+}
+
+// max_apikey_expiration_days out of range on update
+{
+  "error": "invalid_max_expiration_days",
+  "message": "Maximum expiration days must be between 1 and 365",
+  "moreInfo": {}
 }
 ```
 

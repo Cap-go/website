@@ -91,59 +91,159 @@ export const OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS = [
   `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`,
 ] as const
 
+const AGENT_IDENTITY_ENDPOINT = `${CAPGO_API_ORIGIN}/agent/identity`
+const AGENT_CLAIM_ENDPOINT = `${CAPGO_API_ORIGIN}/agent/identity/claim`
+const OAUTH_TOKEN_ENDPOINT = `${CAPGO_API_ORIGIN}/mcp/oauth/token`
+const OAUTH_REVOCATION_ENDPOINT = `${CAPGO_API_ORIGIN}/mcp/oauth/revoke`
+const AGENT_AUTH_CLAIM_GRANT = 'urn:workos:agent-auth:grant-type:claim'
+
 export const AUTH_MD_MARKDOWN = `# Capgo auth.md
 
-> How AI agents get credentials for Capgo. The OAuth issuer is \`${OAUTH_ISSUER}\`; the OAuth endpoints and the MCP server live on \`${CAPGO_API_ORIGIN}\`.
+> How AI agents get credentials for Capgo. Capgo implements the [auth.md agent registration protocol](https://workos.com/auth-md) (v0.6) with the \`service_auth\` method: you register with the user's email, the user confirms a six-digit code in the Capgo console, and you receive a Capgo API key. The OAuth issuer is \`${OAUTH_ISSUER}\`; the endpoints and the MCP server live on \`${CAPGO_API_ORIGIN}\`.
 
 ## Audience
 
 AI coding agents and MCP clients (Claude Code, Codex, Cursor, Copilot, Gemini CLI, Windsurf, and others) that act for a Capgo user: managing apps, bundles, channels and rollouts, devices, statistics, native builds, webhooks, and push notifications.
 
-Agents always act on behalf of a human Capgo account. There is no anonymous or agent-only account type.
+Agents always act on behalf of a human Capgo account. Capgo has no anonymous or agent-only accounts, so \`anonymous\` registration is not offered, and no ID-JAG provider is trusted yet.
 
-## Account provisioning
+## Step 1: Discover
 
-- A human creates the Capgo account at [${CAPGO_ORIGIN}/register/](${CAPGO_ORIGIN}/register/). Signup needs an email, a password, and a CAPTCHA, so an agent cannot complete it unattended. Ask the user to sign up, then continue with one of the methods below.
-- Every account starts a 14-day free trial, no credit card. Plans: [${CAPGO_ORIGIN}/pricing.md](${CAPGO_ORIGIN}/pricing.md)
+1. Fetch the protected resource metadata: [${OAUTH_PROTECTED_RESOURCE_URL}](${OAUTH_PROTECTED_RESOURCE_URL}). A \`401\` from \`${HOSTED_MCP_URL}\` points there in its \`WWW-Authenticate\` header.
+2. Fetch the authorization server metadata: [${OAUTH_AUTHORIZATION_SERVER_URL}](${OAUTH_AUTHORIZATION_SERVER_URL}). Its \`agent_auth\` block lists:
+   - \`skill\`: this document
+   - \`identity_endpoint\`: \`${AGENT_IDENTITY_ENDPOINT}\`
+   - \`claim_endpoint\`: \`${AGENT_CLAIM_ENDPOINT}\`
+   - \`identity_types_supported\`: \`["service_auth"]\`
+   - The token endpoint (\`${OAUTH_TOKEN_ENDPOINT}\`) accepts \`${AGENT_AUTH_CLAIM_GRANT}\`.
 
-## Registration methods
+## Step 2: Pick a method
 
-### 1. OAuth 2.1 for MCP clients (recommended)
+Use \`service_auth\`. Never guess the user's Capgo email from git config, environment variables or earlier sessions: ask the user to confirm the exact address. If they have no account yet, they can create one while confirming (every account starts a 14-day free trial, no credit card).
 
-The hosted MCP server at \`${HOSTED_MCP_URL}\` is an OAuth protected resource.
+Before registering, tell the user that you will ask Capgo for access to their account with scope \`capgo\`, and get their consent.
 
-- Protected resource metadata: [${OAUTH_PROTECTED_RESOURCE_URL}](${OAUTH_PROTECTED_RESOURCE_URL})
-- Authorization server metadata (issuer \`${OAUTH_ISSUER}\`): [${OAUTH_AUTHORIZATION_SERVER_URL}](${OAUTH_AUTHORIZATION_SERVER_URL})
-- Client registration: dynamic client registration (RFC 7591) at \`${CAPGO_API_ORIGIN}/mcp/oauth/register\`, or a Client ID Metadata Document URL as the \`client_id\`
-- Grant: \`authorization_code\` with PKCE (\`S256\`), public clients (\`token_endpoint_auth_method: none\`)
-- Scope: \`capgo\`
-- Authorize: \`${CAPGO_API_ORIGIN}/mcp/oauth/authorize\`. The user signs in and approves the agent in the browser.
-- Token: \`${CAPGO_API_ORIGIN}/mcp/oauth/token\`
-- Revoke: \`${CAPGO_API_ORIGIN}/mcp/oauth/revoke\`
+## Step 3: Register
 
-Most MCP clients do all of this automatically when you add \`${HOSTED_MCP_URL}\` as a Streamable HTTP server. Setup per client: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
+\`\`\`http
+POST ${AGENT_IDENTITY_ENDPOINT}
+Content-Type: application/json
 
-### 2. API key
+{"type":"service_auth","login_hint":"user@example.com"}
+\`\`\`
 
-For CI, scripts, raw REST, and MCP clients without OAuth support.
+Response (200):
 
-- The user creates a key in the Capgo console: [https://console.capgo.app/settings/organization/api-keys](https://console.capgo.app/settings/organization/api-keys). Keys are scoped to one organization, can carry RBAC roles per app, and can expire.
-- Docs: [${CAPGO_ORIGIN}/docs/public-api/api-keys/](${CAPGO_ORIGIN}/docs/public-api/api-keys/)
+\`\`\`json
+{
+  "registration_id": "reg_...",
+  "registration_type": "service_auth",
+  "claim_url": "${AGENT_CLAIM_ENDPOINT}",
+  "claim_token": "clm_...",
+  "claim_token_expires": "<timestamp, 24 hours>",
+  "post_claim_scopes": ["capgo"],
+  "claim": {
+    "user_code": "123456",
+    "expires_in": 600,
+    "verification_uri": "https://console.capgo.app/agent/claim?claim_attempt_token=...",
+    "interval": 5
+  }
+}
+\`\`\`
 
-### 3. Capgo CLI login
+\`claim_token\` is returned once. Keep it in memory for the ceremony and do not persist it.
 
-For local bundle uploads and native build requests, run \`npx @capgo/cli@latest login <API key>\`, then \`npx @capgo/cli@latest mcp\` to start the local stdio MCP server. Docs: [${CAPGO_ORIGIN}/docs/cli/reference/mcp/](${CAPGO_ORIGIN}/docs/cli/reference/mcp/)
+## Step 4: Claim ceremony
 
-## Using credentials
+Show the user \`verification_uri\` and \`user_code\` in one message, for example:
+
+> Open this link, sign in to Capgo (or sign up), and enter this code: **123456**
+> https://console.capgo.app/agent/claim?claim_attempt_token=...
+
+The code goes into the Capgo page, not back to you. On that page the user, signed in as the email you registered, enters the code and picks which organizations you may manage. Capgo then mints a dedicated API key that expires within 90 days.
+
+Poll the token endpoint, no faster than \`interval\` seconds:
+
+\`\`\`http
+POST ${OAUTH_TOKEN_ENDPOINT}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=${AGENT_AUTH_CLAIM_GRANT}&claim_token=clm_...
+\`\`\`
+
+| Response | Meaning |
+| --- | --- |
+| \`authorization_pending\` | The user has not finished. Keep polling. |
+| \`slow_down\` | Add at least 5 seconds to your interval. |
+| \`expired_token\` | The code (10 minutes) or the registration (24 hours) expired. Get a fresh code (below), or register again. |
+| \`access_denied\` | The user refused. Do not retry without asking them. |
+| \`invalid_grant\` | Unknown or already used \`claim_token\`. Register again. |
+
+Success (200), returned once:
+
+\`\`\`json
+{ "access_token": "<Capgo API key>", "token_type": "Bearer", "scope": "capgo", "expires_in": 7776000 }
+\`\`\`
+
+To get a fresh code for the same registration:
+
+\`\`\`http
+POST ${AGENT_CLAIM_ENDPOINT}
+Content-Type: application/json
+
+{"claim_token":"clm_...","email":"user@example.com"}
+\`\`\`
+
+The response has a new \`claim_attempt\` block with the same fields as \`claim\`. \`claim_expired\` (410) means the registration is gone: register again.
+
+## Step 5: Use the access token
+
+The access token is a regular Capgo API key. There is no identity assertion or JWT-bearer refresh: when \`expires_in\` runs out, or a request returns \`401\`, register again.
 
 | Target | Header |
 | --- | --- |
-| Hosted MCP \`${HOSTED_MCP_URL}\` | \`Authorization: Bearer <OAuth access token or API key>\` |
-| REST API \`${CAPGO_API_ORIGIN}\` | \`x-api-key: <API key>\` (legacy \`authorization: <API key>\` without \`Bearer\` still works) |
+| Hosted MCP \`${HOSTED_MCP_URL}\` | \`Authorization: Bearer <access_token>\` |
+| REST API \`${CAPGO_API_ORIGIN}\` | \`Authorization: Bearer <access_token>\` or \`x-api-key: <access_token>\` |
 
 - OpenAPI spec: [${CAPGO_ORIGIN}/openapi.json](${CAPGO_ORIGIN}/openapi.json)
-- Keep credentials out of source control and logs. Rotate or delete API keys in the console. Revoke OAuth tokens at the revocation endpoint.
-- An unauthenticated MCP request returns \`401\` with a \`WWW-Authenticate\` header that points to the protected resource metadata.
+- Keep credentials out of source control and logs.
+
+## Revocation
+
+Revoke the key with [RFC 7009](https://www.rfc-editor.org/rfc/rfc7009) (200 even for unknown tokens):
+
+\`\`\`http
+POST ${OAUTH_REVOCATION_ENDPOINT}
+Content-Type: application/x-www-form-urlencoded
+
+token=<access_token>&token_type_hint=access_token
+\`\`\`
+
+The user can also delete the key at any time in the Capgo console.
+
+## Errors at the identity endpoint
+
+| Error | What to do |
+| --- | --- |
+| \`invalid_login_hint\` | \`login_hint\` must be an email address. |
+| \`anonymous_not_enabled\` | Use \`service_auth\`. |
+| \`issuer_not_enabled\` | Capgo does not accept ID-JAG assertions. Use \`service_auth\`. |
+| \`invalid_claim_token\`, \`claimed_or_in_flight\`, \`claim_expired\` | At the claim endpoint: register again, or keep polling an approved registration. |
+| \`rate_limited\` (429) | Back off and retry later. |
+
+## Other ways to connect
+
+### OAuth 2.1 for MCP clients
+
+Most MCP clients log in by themselves when you add \`${HOSTED_MCP_URL}\` as a Streamable HTTP server: dynamic client registration at \`${CAPGO_API_ORIGIN}/mcp/oauth/register\` (or a Client ID Metadata Document URL as \`client_id\`), \`authorization_code\` with PKCE \`S256\`, scope \`capgo\`. Setup per client: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
+
+### API key created by the user
+
+For CI and scripts: the user creates a key at [https://console.capgo.app/settings/organization/api-keys](https://console.capgo.app/settings/organization/api-keys). Keys carry RBAC roles per organization, app or channel, and can expire. Docs: [${CAPGO_ORIGIN}/docs/public-api/api-keys/](${CAPGO_ORIGIN}/docs/public-api/api-keys/)
+
+### Capgo CLI
+
+For local bundle uploads and native build requests, run \`npx @capgo/cli@latest login <API key>\`, then \`npx @capgo/cli@latest mcp\` to start the local stdio MCP server. Docs: [${CAPGO_ORIGIN}/docs/cli/reference/mcp/](${CAPGO_ORIGIN}/docs/cli/reference/mcp/)
 
 ## More
 

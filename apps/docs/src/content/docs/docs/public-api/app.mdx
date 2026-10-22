@@ -226,36 +226,44 @@ curl -X DELETE \
 
 ## Error Handling
 
+All errors use the standard error format described in the [API overview](/docs/public-api/).
+
 Common error scenarios and their responses:
 
 ```json
-// App not found
+// Missing or invalid API key (HTTP 401)
 {
-  "error": "App not found",
-  "status": "KO"
+  "error": "invalid_apikey",
+  "message": "Invalid apikey",
+  "moreInfo": {}
 }
 
-// Duplicate custom ID
+// app_id is not a reverse-domain identifier
 {
-  "error": "Custom ID already in use",
-  "status": "KO"
+  "error": "invalid_app_id",
+  "message": "App ID must be a reverse domain string",
+  "moreInfo": { "app_id": "my app" }
 }
 
-// Invalid parameters
+// The API key has no access to this app (HTTP 401)
 {
-  "error": "Invalid app configuration",
-  "status": "KO"
+  "error": "cannot_access_app",
+  "message": "You can't access this app",
+  "moreInfo": { "app_id": "com.example.app" }
 }
 
-// Permission denied
+// Creating an app in an organization the key cannot write to (HTTP 403)
 {
-  "error": "Insufficient permissions to manage app",
-  "status": "KO"
+  "error": "cannot_access_organization",
+  "message": "You can't access this organization",
+  "moreInfo": { "org_id": "046a36ac-e03c-4590-9257-bd6c9dba9ee8" }
 }
 
-// Organization access denied
+// Retention above the two-year limit on update
 {
-  "status": "You do not have access to this organization"
+  "error": "retention_to_big",
+  "message": "Retention cannot be bigger than 63113903 (2 years)",
+  "moreInfo": { "retention": 99999999 }
 }
 ```
 
