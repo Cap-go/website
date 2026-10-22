@@ -39,7 +39,7 @@ A tester enables beta updates inside your app. Your app calls `CapacitorUpdater.
 
 [Download the device self-assignment video (MP4)](/channel-videos/device-self-assignment.mp4).
 
-Enable **Allow devices to self dissociate/associate** on the target channel before using [`setChannel()`](#using-setchannel-from-your-app). This local choice does not create a console override. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the choice can survive reinstall when the operating system restores app data. Call [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear the local choice; console and API overrides still follow the precedence below.
+Enable **Allow devices to self dissociate/associate** on the target channel before using [`setChannel()`](#using-setchannel-from-your-app). This local choice does not create a console override. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the choice can survive reinstall only when the operating system restores app data and `persistDefaultChannelOnReinstall` remains `true`. Call [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear the local choice; console and API overrides still follow the precedence below.
 
 ### 3. Assign one device from the console
 
@@ -100,7 +100,7 @@ This is not the same as [device inventory retention](/docs/webapp/devices/). Inv
 For an assignment that is not removed by this cleanup:
 
 - Set `defaultChannel` in `capacitor.config.*` (survives reinstall; requires a new native binary to change later).
-- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the assignment can survive reinstall when the operating system restores app data. Use [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear it explicitly.
+- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the assignment can survive reinstall only when the operating system restores app data and `persistDefaultChannelOnReinstall` remains `true`. Use [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear it explicitly.
 
 The channel **Devices** tab and the device Override UI only list console and Public API assignments. They do not list every device on the channel, and they do not list local `setChannel()` assignments.
 
