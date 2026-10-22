@@ -15,7 +15,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | Capacitor Skills for AI Agents`
 const description = 'Open-source Capacitor and Capgo skills for AI agents. Install in Codex, Claude Code, Cursor, Windsurf, Gemini CLI, and other agent tools.'
 
-const content = { title, description }
+const content = { title, description, image: `${Astro.locals.runtimeConfig.public.baseUrl}/social/capgo-skills.png` }
 const repositoryUrl = 'https://github.com/Cap-go/capgo-skills'
 const quickInstallCommand = 'npx skills add Cap-go/capgo-skills'
 const genericInstallAgents = ['Codex', 'Cursor', 'Windsurf', 'GitHub Copilot', 'Other skills-compatible agents']
