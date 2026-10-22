@@ -40,10 +40,12 @@ function buildTimeDisplay(buildTimeSeconds: number) {
   return `${buildTimeMinutes} ${m.build_minutes({}, { locale: Astro.locals.locale })}`
 }
 
-function priceDisplay(plan: Database['public']['Tables']['plans']['Row']) {
-  const yearlyMonthly = (plan.price_y / 12).toFixed(0)
-  const suffix = plan.name === 'Enterprise' ? '+' : ''
-  return `$${yearlyMonthly}${suffix}/mo yearly or $${plan.price_m}${suffix}/mo monthly`
+function priceParts(plan: Database['public']['Tables']['plans']['Row']) {
+  return {
+    yearlyMonthly: Math.round(plan.price_y / 12),
+    monthly: plan.price_m,
+    suffix: plan.name === 'Enterprise' ? '+' : '',
+  }
 }
 
 function included(planName: string, names: string[]) {
@@ -369,7 +371,12 @@ const rows: CompareSection[] = [
                     <span class="rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
                   )}
                 </div>
-                <p class="mt-2 text-xs leading-5 font-medium text-gray-600">{priceDisplay(plan)}</p>
+                <p class="mt-2 text-xs leading-5 font-medium text-gray-600">
+                  <span data-price-amount={priceParts(plan).yearlyMonthly} data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).yearlyMonthly}${priceParts(plan).suffix}`}</span>/mo
+                  yearly or
+                  <span data-price-amount={priceParts(plan).monthly} data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).monthly}${priceParts(plan).suffix}`}</span>/mo
+                  monthly
+                </p>
               </th>
             ))}
           </tr>

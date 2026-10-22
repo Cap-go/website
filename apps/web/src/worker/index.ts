@@ -14,6 +14,7 @@ import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRed
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
+import { CURRENCY_PATH, handleCurrency } from './currency'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
 import { handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
@@ -228,6 +229,10 @@ const routeDefinitions: Record<string, RouteDefinition> = {
       if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
+  },
+  [CURRENCY_PATH]: {
+    methods: ['GET', 'HEAD'],
+    handle: async (request, _env, ctx) => await handleCurrency(request, ctx),
   },
   [GITHUB_RELEASES_PATH]: {
     methods: ['GET', 'HEAD'],
