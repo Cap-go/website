@@ -30,3 +30,17 @@ test('metadata naming another issuer is never served from capgo.app', async () =
   await expect(loadAuthorizationServerMetadata(fakeFetch({ [METADATA_URL]: [oldIssuer], [WELL_KNOWN_URL]: [oldIssuer] }))).rejects.toThrow()
   await expect(loadAuthorizationServerMetadata(fakeFetch({}))).rejects.toThrow()
 })
+
+test('the auth.md agent_auth block from the API is served unchanged', async () => {
+  const withAgentAuth = {
+    ...upstream,
+    grant_types_supported: ['authorization_code', 'urn:workos:agent-auth:grant-type:claim'],
+    agent_auth: {
+      skill: 'https://capgo.app/auth.md',
+      identity_endpoint: 'https://api.capgo.app/agent/identity',
+      claim_endpoint: 'https://api.capgo.app/agent/identity/claim',
+      identity_types_supported: ['service_auth'],
+    },
+  }
+  expect(await loadAuthorizationServerMetadata(fakeFetch({ [METADATA_URL]: [withAgentAuth] }))).toEqual(withAgentAuth)
+})
