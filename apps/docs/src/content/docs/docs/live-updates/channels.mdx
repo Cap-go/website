@@ -9,6 +9,53 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 A Live Update channel points to a specific JS bundle build of your app that will be shared with any devices configured to listen to that channel for updates. When you [install the Capgo Live Updates SDK](/docs/getting-started/quickstart/) in your app, any native binary configured to that channel will check for available updates whenever the app is launched. You can change the build a channel points to at any time and can also roll back to previous builds if needed.
 
+## Channels in action
+
+Think of a channel as a named pointer to an update: `production` can serve your released app while `beta` serves testers. These three short videos show how a device ends up on a channel. Each has optional background music and no narration; the explanations below cover the same steps.
+
+### 1. Use the default channel
+
+A device running `v1.1.0` asks Capgo for an update. With no device assignment or app-configured channel, Capgo checks the cloud default, `production`, and returns its `v1.2.0` bundle. The `dev` and `staging` channels keep their own bundles without affecting this device.
+
+<video controls playsinline preload="none" width="1280" height="800" poster="/channel-videos/default-routing.webp" class="my-4 w-full rounded-xl" aria-label="Animation: a device receives an update from the default production channel">
+  <source src="/channel-videos/default-routing.mp4" type="video/mp4" />
+  <a href="/channel-videos/default-routing.mp4">Download the default channel video</a>.
+</video>
+
+[Download the default channel video (MP4)](/channel-videos/default-routing.mp4).
+
+Set your production default in [App Information](/docs/webapp/main-app-page/#default-channel-configuration). Normal production builds can leave `defaultChannel` unset so you can manage that routing from Capgo.
+
+### 2. Let a device choose a channel
+
+This walkthrough uses `setChannel()` and `unsetChannel()` from `@capgo/capacitor-updater` on Android and iOS; these methods are not supported in the browser. It uses the local-channel behavior available in updater **5.34.0+**, **6.34.0+**, **7.34.0+**, or **8.0.0+** for your plugin's major version. Older versions wrote a backend override instead; those assignments follow the [console and API override retention rules](#console-and-api-overrides-expire-after-90-days).
+
+A tester enables beta updates inside your app. Your app calls `CapacitorUpdater.setChannel({ channel: 'beta', triggerAutoUpdate: true })`. Capgo checks that `beta` allows device self-assignment, then the plugin saves the choice locally for future update checks. Other devices keep their existing routing.
+
+<video controls playsinline preload="none" width="1280" height="800" poster="/channel-videos/device-self-assignment.webp" class="my-4 w-full rounded-xl" aria-label="Animation: a tester opts into beta and Capgo validates device self-assignment">
+  <source src="/channel-videos/device-self-assignment.mp4" type="video/mp4" />
+  <a href="/channel-videos/device-self-assignment.mp4">Download the device self-assignment video</a>.
+</video>
+
+[Download the device self-assignment video (MP4)](/channel-videos/device-self-assignment.mp4).
+
+Enable **Allow devices to self dissociate/associate** on the target channel before using [`setChannel()`](#using-setchannel-from-your-app). This local choice does not create a console override. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the choice can survive reinstall only when the operating system restores app data and `persistDefaultChannelOnReinstall` remains `true`. Call [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear the local choice; console and API overrides still follow the precedence below.
+
+### 3. Assign one device from the console
+
+In the Capgo console, open **Apps**, select your app, open **Devices**, and select a device. Change its **Channel override** to `dev`. Capgo now routes that device to `dev`, while the app's cloud default remains `production`.
+
+<video controls playsinline preload="none" width="1280" height="800" poster="/channel-videos/console-device-override.webp" class="my-4 w-full rounded-xl" aria-label="Animation: assigning a device to the dev channel through the Capgo console">
+  <source src="/channel-videos/console-device-override.mp4" type="video/mp4" />
+  <a href="/channel-videos/console-device-override.mp4">Download the console device override video</a>.
+</video>
+
+[Download the console device override video (MP4)](/channel-videos/console-device-override.mp4).
+
+Use an override for targeted testing or support. It takes priority over the device's local channel and the cloud default, unless a forced mapping is present. Console and API overrides [expire 90 days after the last override write](#console-and-api-overrides-expire-after-90-days).
+
+Ready to try it? [Create a channel in the console](/docs/webapp/channels/#creating-a-channel), then [upload a bundle](/docs/getting-started/deploy/) for it to serve.
+
 <Aside type="caution" title="Channels Do Not Provide Confidentiality">
 Channels control update eligibility, not bundle secrecy. Even if a channel is private or self-assignment is disabled, any unencrypted bundle uploaded to Capgo should still be treated as a public asset delivered to clients. Encryption protects the delivery path and authenticity of updates, but shipped bundles can still be reverse engineered from the distributed app with enough effort because the public key is part of the client. See [Live Update encryption](/docs/live-updates/encryption/) for details.
 </Aside>
@@ -53,7 +100,7 @@ This is not the same as [device inventory retention](/docs/webapp/devices/). Inv
 For an assignment that is not removed by this cleanup:
 
 - Set `defaultChannel` in `capacitor.config.*` (survives reinstall; requires a new native binary to change later).
-- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. Reinstalling the app clears it, so the app must call `setChannel()` again if you still want that channel.
+- Call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app. On plugin 5.34.0 / 6.34.0 / 7.34.0 / 8.0.0 and later, that assignment is local and is not removed by this cleanup. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the assignment can survive reinstall only when the operating system restores app data and `persistDefaultChannelOnReinstall` remains `true`. Use [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear it explicitly.
 
 The channel **Devices** tab and the device Override UI only list console and Public API assignments. They do not list every device on the channel, and they do not list local `setChannel()` assignments.
 
@@ -166,7 +213,7 @@ npx @capgo/cli@latest channel set production com.example.app --prod --device --n
 
 ### Using setChannel() from Your App
 
-The `setChannel()` method allows your app to programmatically switch channels at runtime. This is particularly useful for:
+The `@capgo/capacitor-updater` method `setChannel()` allows your Android or iOS app to programmatically switch channels at runtime. This is particularly useful for:
 
 - QA/debug menus where testers can switch between channels
 - Beta program opt-in flows
@@ -203,7 +250,7 @@ When `setChannel()` is called:
 
 | Method | Effect Time | Persisted Where | Shown in Device Override UI | Expires | Use Case |
 |--------|-------------|-----------------|------------------------------|---------|----------|
-| `setChannel()` from plugin | **Instant** | Device only (local) | No | No (until you change it or reinstall) | User-initiated channel switching in-app |
+| `setChannel()` from plugin | **Instant** | Device only (local) | No | No automatic expiry; clear with `unsetChannel()` (reinstall may preserve it) | User-initiated channel switching in-app |
 | Dashboard device override | Up to 2 min | Backend database | Yes | 90 days after last override write | Admin-initiated changes for specific devices |
 | API channel assignment | Up to 2 min | Backend database | Yes | 90 days after last override write | Automated backend integrations |
 

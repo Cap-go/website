@@ -5,13 +5,17 @@ sidebar:
   order: 8
 ---
 
+New to channels? [Watch three short channel walkthroughs](/docs/live-updates/channels/#channels-in-action) to see default routing, device self-assignment, and console overrides in action.
+
+The `@capgo/capacitor-updater` methods `setChannel()` and `unsetChannel()` in this guide are supported only on Android and iOS. They do not change channel routing in browser previews.
+
 ## How Capgo chooses a channel (precedence)
 
 When a device asks Capgo for an update, the channel it will use is decided in the following order (highest priority first):
 
 1. **Forced device mapping**: If the device ID is explicitly forced to a channel (the **Devices** tab on the channel page), that channel always wins. Forced mappings are console/API overrides. Capgo removes them 90 days after the last override write. See [Console and API overrides expire](/docs/live-updates/channels/#console-and-api-overrides-expire-after-90-days).
 2. **Cloud override (Dashboard or Public API)**: Changing a device's channel in the dashboard or via the Public API writes an override tied to that device ID. Reinstalling the app does **not** clear it; deleting the override does. The same 90-day retention applies.
-3. **Plugin `setChannel()` (local)**: On current plugin versions, [`setChannel()`](/docs/plugins/updater/api/#setchannel) stores the channel on the device after backend validation. It is not a dashboard override. Reinstalling the app clears it; the app must call `setChannel()` again if you still want that channel.
+3. **Plugin `setChannel()` (local)**: On current plugin versions, [`setChannel()`](/docs/plugins/updater/api/#setchannel) stores the channel on the device after backend validation. It is not a dashboard override. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so the choice can survive reinstall only when the operating system restores app data and `persistDefaultChannelOnReinstall` remains `true`. Call [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear the local choice explicitly.
 4. **Capacitor config `defaultChannel` (test build default)**: For internal / beta / test builds you can set `defaultChannel` (legacy key `channel`) in `capacitor.config.*` so test devices start on a pre-release channel (e.g. `beta`, `pr-123`). If absent, the device will proceed to the cloud default. Production builds usually leave this unset.
 5. **Cloud Default Channel (primary strategy for ~99% of users)**: The main production channel virtually all real users land on. Any new device without a force, without an override, without a local `setChannel()`, and without a config `defaultChannel` uses this. Changing it rolls out (or rolls back) for everyone in seconds, with no new binary.
 
@@ -35,7 +39,8 @@ Devices stay on their current channel unless you:
 - Call `setChannel()` (local assignment on current plugin versions).
 - Remove / archive the channel they are on (then they will fall back through the precedence again at next check).
 - Wait until a console/API override expires after 90 days.
-- Reinstall the app, which clears a local `setChannel()` assignment but not a console/API override.
+- Call [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear a local `setChannel()` assignment. This does not remove a console/API override or an app-configured `defaultChannel`; normal precedence applies again.
+- Reinstall the app, which can clear a local assignment on older updater versions or when app data is not restored. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so restored app data can preserve the local choice only while this option remains `true`. Console/API overrides are unaffected.
 
 If a channel is disabled for a platform (see iOS / Android / Electron toggles) and would otherwise have been selected, the selection skips it and falls back to the next rule.
 
@@ -134,7 +139,7 @@ Tenth is the `Allow Emulators`. If this is false then Capgo will disallow any up
 
 Eleventh is `Allow physical devices`. If this is false then Capgo will reject update requests from real phones and tablets. Leave this on for production channels.
 
-Twelfth is `Allow devices to self dissociate/associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available. If this is set to false and you try to call [setChannel](/docs/plugins/updater/api/#setchannel) with this channel then the call will fail.
+Twelfth is `Allow devices to self dissociate/associate`. If this is true then the [setChannel](/docs/plugins/updater/api/#setchannel) method will be available on Android and iOS. If this is set to false and you try to call [setChannel](/docs/plugins/updater/api/#setchannel) with this channel then the call will fail.
 
 ### Test Update API
 
@@ -148,7 +153,7 @@ After you change the linked bundle, the console can ask to **Send update notific
 
 ## Console and API overrides expire
 
-Forced mappings and Dashboard/Public API channel overrides are removed **90 days** after the last override write. Last device check-in does not reset that clock. For an assignment that survives that cleanup, set `defaultChannel` in your Capacitor config (survives reinstall, needs a new binary to change) or call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from the app (avoids the 90-day cleanup, but reinstall clears it so the app must call `setChannel()` again).
+Forced mappings and Dashboard/Public API channel overrides are removed **90 days** after the last override write. Last device check-in does not reset that clock. For an assignment that survives that cleanup, set `defaultChannel` in your Capacitor config (survives reinstall, needs a new binary to change) or call [`setChannel()`](/docs/plugins/updater/api/#setchannel) from an Android or iOS app using `@capgo/capacitor-updater` **5.34.0+**, **6.34.0+**, **7.34.0+**, or **8.0.0+** for your plugin's major version. These versions store the assignment locally, so it avoids the 90-day cleanup. Earlier versions write a backend override subject to the same cleanup. On Android and iOS with updater 8.51.0 and later, `persistDefaultChannelOnReinstall` defaults to `true`, so a local selection can also survive reinstall only when the operating system restores app data and `persistDefaultChannelOnReinstall` remains `true`. A reinstall with `persistDefaultChannelOnReinstall: false` can clear that local selection even if app data is restored. Use [`unsetChannel()`](/docs/plugins/updater/api/#unsetchannel) to clear that local selection explicitly.
 
 <figure><img src="/channel-override-retention.webp" alt="Capgo channel Devices tab showing the Override retention popover: console overrides expire after 90 days" /><figcaption>Override retention on the channel Devices tab. The same notice appears when you force a device ID onto the channel.</figcaption></figure>
 
