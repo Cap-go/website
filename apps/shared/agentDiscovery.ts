@@ -91,15 +91,16 @@ export const OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS = [
   `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`,
 ] as const
 
-const AGENT_IDENTITY_ENDPOINT = `${CAPGO_API_ORIGIN}/agent/identity`
-const AGENT_CLAIM_ENDPOINT = `${CAPGO_API_ORIGIN}/agent/identity/claim`
-const OAUTH_TOKEN_ENDPOINT = `${CAPGO_API_ORIGIN}/mcp/oauth/token`
-const OAUTH_REVOCATION_ENDPOINT = `${CAPGO_API_ORIGIN}/mcp/oauth/revoke`
+// Agent registration lives on the issuer origin; capgo.app forwards these paths to the API worker.
+const AGENT_IDENTITY_ENDPOINT = `${OAUTH_ISSUER}/agent/identity`
+const AGENT_CLAIM_ENDPOINT = `${OAUTH_ISSUER}/agent/identity/claim`
+const OAUTH_TOKEN_ENDPOINT = `${OAUTH_ISSUER}/oauth2/token`
+const OAUTH_REVOCATION_ENDPOINT = `${OAUTH_ISSUER}/oauth2/revoke`
 const AGENT_AUTH_CLAIM_GRANT = 'urn:workos:agent-auth:grant-type:claim'
 
 export const AUTH_MD_MARKDOWN = `# Capgo auth.md
 
-> How AI agents get credentials for Capgo. Capgo implements the [auth.md agent registration protocol](https://workos.com/auth-md) (v0.6) with the \`service_auth\` method: you register with the user's email, the user confirms a six-digit code in the Capgo console, and you receive a Capgo API key. The OAuth issuer is \`${OAUTH_ISSUER}\`; the endpoints and the MCP server live on \`${CAPGO_API_ORIGIN}\`.
+> How AI agents get credentials for Capgo. Capgo implements the [auth.md agent registration protocol](https://workos.com/auth-md) (v0.6) with the \`service_auth\` method: you register with the user's email, the user confirms a six-digit code in the Capgo console, and you receive a Capgo API key. Registration runs on the OAuth issuer \`${OAUTH_ISSUER}\`; the MCP server and REST API live on \`${CAPGO_API_ORIGIN}\`.
 
 ## Audience
 
@@ -112,10 +113,10 @@ Agents always act on behalf of a human Capgo account. Capgo has no anonymous or 
 1. Fetch the protected resource metadata: [${OAUTH_PROTECTED_RESOURCE_URL}](${OAUTH_PROTECTED_RESOURCE_URL}). A \`401\` from \`${HOSTED_MCP_URL}\` points there in its \`WWW-Authenticate\` header.
 2. Fetch the authorization server metadata: [${OAUTH_AUTHORIZATION_SERVER_URL}](${OAUTH_AUTHORIZATION_SERVER_URL}). Its \`agent_auth\` block lists:
    - \`skill\`: this document
-   - \`identity_endpoint\`: \`${AGENT_IDENTITY_ENDPOINT}\`
-   - \`claim_endpoint\`: \`${AGENT_CLAIM_ENDPOINT}\`
-   - \`identity_types_supported\`: \`["service_auth"]\`
-   - The token endpoint (\`${OAUTH_TOKEN_ENDPOINT}\`) accepts \`${AGENT_AUTH_CLAIM_GRANT}\`.
+   - \`identity_endpoint\`: \`${AGENT_IDENTITY_ENDPOINT}\` (also published as \`register_uri\`, its auth.md v0.1 name)
+   - \`claim_endpoint\`: \`${AGENT_CLAIM_ENDPOINT}\` (also published as \`claim_uri\`)
+   - \`identity_types_supported\`: \`["service_auth", "identity_assertion"]\`, where \`identity_assertion\` only accepts \`verified_email\`, the pre-v0.6 form of the same email flow
+   - Poll \`${OAUTH_TOKEN_ENDPOINT}\` with \`${AGENT_AUTH_CLAIM_GRANT}\`. It is the same token endpoint as \`${CAPGO_API_ORIGIN}/mcp/oauth/token\` in the metadata; either URL works.
 
 ## Step 2: Pick a method
 

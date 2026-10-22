@@ -1,3 +1,4 @@
+import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import {
   markdownNotFoundResponse,
@@ -37,6 +38,8 @@ interface Env {
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string
   WEB_BOT_AUTH_PRIVATE_JWK?: string
+  /** Service binding to the Capgo API worker (capgo_api-prod) for the auth.md agent registration paths. */
+  CAPGO_API?: import('./agent-auth-proxy').ServiceBinding
 }
 
 const JSON_HEADERS = {
@@ -462,6 +465,8 @@ export async function agentSurfaceResponse(request: Request, env: Env, pathname:
   if (pathname === OAUTH_AUTHORIZATION_SERVER_PATH) return handleAuthorizationServerMetadataRequest(request, ctx)
   if (OPENAPI_ALIAS_PATHS.has(pathname)) return openApiAliasResponse(request, env)
   if (pathname === HTTP_MESSAGE_SIGNATURES_DIRECTORY) return handleSignaturesDirectoryRequest(request, env)
+  const agentAuthPath = agentAuthUpstreamPath(pathname)
+  if (agentAuthPath) return proxyAgentAuthRequest(request, agentAuthPath, env.CAPGO_API)
   return null
 }
 
