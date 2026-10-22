@@ -3,17 +3,13 @@
   "info": {
     "title": "Capgo Public API",
     "summary": "REST API for managing Capgo organizations, apps, live update channels, bundles, devices, analytics, and API keys.",
-    "description": "Use this API to automate Capgo Cloud instead of clicking through the dashboard.\n\n## Authentication\n\nSend a Capgo API key in the `x-api-key` header, or as `Authorization: Bearer <key>`. The legacy `authorization` header with the raw key (no Bearer prefix) is still accepted. Generate keys at https://console.capgo.app/settings/organization/api-keys. Each key carries role bindings (organization, app or channel roles such as `org_admin`, `app_developer` or `app_reader`), so a key only reaches the organizations, apps and channels it was granted.\n\nAgents can also get a key through OAuth 2.0: authorization code with PKCE (S256) and dynamic client registration, issuer `https://capgo.app` (metadata at https://capgo.app/.well-known/oauth-authorization-server). The user picks which organizations to grant on the consent screen, and the access token is a Capgo API key sent as a Bearer token. The only OAuth scope is `capgo`; access is narrowed by the organizations the user selects, not by scope.\n\n## Versioning and deprecation\n\nThe current version is v1, served under `https://api.capgo.app/v1`. The unversioned paths serve the same v1 handlers for existing integrations. Changes within v1 are additive: new endpoints, new optional parameters and new response fields. A breaking change ships under a new path prefix (`/v2`). Before an operation is removed it is marked `deprecated: true` in this spec, its responses carry the `Deprecation` header (RFC 9745) and a `Sunset` header (RFC 8594) with the removal date, and the change is announced in the release notes at https://github.com/Cap-go/capgo.app/releases.\n\n## Rate limits\n\nEach API key may send 2,000 requests per minute (20,000 per minute on bundle upload routes). Responses report the quota with the `RateLimit-Policy` and `RateLimit` headers (IETF draft-ietf-httpapi-ratelimit-headers), for example `RateLimit-Policy: \"apikey\";q=2000;w=60` and `RateLimit: \"apikey\";r=1995;t=42` (r = requests left, t = seconds until the window resets). An IP address that sends 20 invalid keys within 15 minutes is blocked for 15 minutes. A 429 response includes `Retry-After` in seconds.\n\n## Errors\n\nEvery error response is JSON with a machine-readable `error` code, a human-readable `message`, and optional `moreInfo` details, for example `{\"error\":\"invalid_apikey\",\"message\":\"Invalid apikey\",\"moreInfo\":{}}`.",
-    "version": "1.0.0"
+    "description": "Use this API to automate Capgo Cloud instead of clicking through the dashboard.\n\n## Authentication\n\nSend a Capgo API key in the `x-api-key` header, or as `Authorization: Bearer <key>`. The legacy `authorization` header with the raw key (no Bearer prefix) is still accepted. Generate keys at https://console.capgo.app/settings/organization/api-keys. Each key carries role bindings (organization, app or channel roles such as `org_admin`, `app_developer` or `app_reader`), so a key only reaches the organizations, apps and channels it was granted.\n\nAgents can also get a key through OAuth 2.0: authorization code with PKCE (S256) and dynamic client registration, issuer `https://capgo.app` (metadata at https://capgo.app/.well-known/oauth-authorization-server). The user picks which organizations to grant on the consent screen, and the access token is a Capgo API key sent as a Bearer token. The only OAuth scope is `capgo`; access is narrowed by the organizations the user selects, not by scope.\n\n## Versioning and deprecation\n\nThe API is versioned by date. Pin a version with the `capgo_api` request header, for example `capgo_api: 2025-10-01`; without the header you get the default version, currently `2025-10-01`. Changes within a version are additive: new endpoints, new optional parameters and new response fields. A breaking change ships as a new dated version, and clients pinned to an older date keep the old behavior. An unknown or malformed version is rejected with `400 unsupported_capgo_api_version` or `400 invalid_capgo_api_version`. Before an operation is removed it is marked `deprecated: true` in this spec, its responses carry the `Deprecation` header (RFC 9745) and a `Sunset` header (RFC 8594) with the removal date, and the change is announced in the release notes at https://github.com/Cap-go/capgo.app/releases.\n\n## Rate limits\n\nEach API key may send 2,000 requests per minute (20,000 per minute on bundle upload routes). Responses report the quota with the `RateLimit-Policy` and `RateLimit` headers (IETF draft-ietf-httpapi-ratelimit-headers), for example `RateLimit-Policy: \"apikey\";q=2000;w=60` and `RateLimit: \"apikey\";r=1995;t=42` (r = requests left, t = seconds until the window resets). An IP address that sends 20 invalid keys within 15 minutes is blocked for 15 minutes. A 429 response includes `Retry-After` in seconds.\n\n## Errors\n\nEvery error response is JSON with a machine-readable `error` code, a human-readable `message`, and optional `moreInfo` details, for example `{\"error\":\"invalid_apikey\",\"message\":\"Invalid apikey\",\"moreInfo\":{}}`.",
+    "version": "2025-10-01"
   },
   "servers": [
     {
-      "url": "https://api.capgo.app/v1",
-      "description": "Production, API version 1"
-    },
-    {
       "url": "https://api.capgo.app",
-      "description": "Production, unversioned paths (same handlers as v1)"
+      "description": "Production"
     }
   ],
   "externalDocs": {
@@ -86,6 +82,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -341,7 +340,12 @@
             }
           }
         },
-        "description": "Create a new organization owned by the authenticated account. Requires a name and returns a status payload when the organization is stored."
+        "description": "Create a new organization owned by the authenticated account. Requires a name and returns a status payload when the organization is stored.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -482,7 +486,12 @@
             }
           }
         },
-        "description": "Update organization metadata such as name or settings. Admin access on the target organization is required."
+        "description": "Update organization metadata such as name or settings. Admin access on the target organization is required.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -498,6 +507,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -623,6 +635,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -871,7 +886,12 @@
             }
           }
         },
-        "description": "Invite a user to an organization or change an existing member role. Use this instead of separate invite and update endpoints."
+        "description": "Invite a user to an organization or change an existing member role. Use this instead of separate invite and update endpoints.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -1012,7 +1032,12 @@
             }
           }
         },
-        "description": "Remove a member from an organization so they lose dashboard and API access scoped through that membership."
+        "description": "Remove a member from an organization so they lose dashboard and API access scoped through that membership.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       }
     },
     "/app/": {
@@ -1036,6 +1061,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -1284,7 +1312,12 @@
             }
           }
         },
-        "description": "Register a new Capgo app under an organization. The `app_id` you send becomes the stable identifier used by the updater plugin and later API routes."
+        "description": "Register a new Capgo app under an organization. The `app_id` you send becomes the stable identifier used by the updater plugin and later API routes.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       }
     },
     "/app/{appId}": {
@@ -1297,6 +1330,9 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AppIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -1415,6 +1451,9 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AppIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "requestBody": {
@@ -1561,6 +1600,9 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/AppIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -1783,7 +1825,12 @@
             }
           }
         },
-        "description": "List API keys available to the authenticated account so an agent can see existing key names without revealing secret material."
+        "description": "List API keys available to the authenticated account so an agent can see existing key names without revealing secret material.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -1924,7 +1971,12 @@
             }
           }
         },
-        "description": "Create a new API key with a selected permission mode (`read`, `upload`, `write`, or `all`). The secret is returned once at creation time."
+        "description": "Create a new API key with a selected permission mode (`read`, `upload`, `write`, or `all`). The secret is returned once at creation time.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       }
     },
     "/apikey/{id}/": {
@@ -1942,6 +1994,9 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -2078,6 +2133,9 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -2326,7 +2384,12 @@
             }
           }
         },
-        "description": "Create or update a channel configuration: default bundle, public/private access, disable auto-update, and rollout policy."
+        "description": "Create or update a channel configuration: default bundle, public/private access, disable auto-update, and rollout policy.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -2467,7 +2530,12 @@
             }
           }
         },
-        "description": "Delete one channel from an app. Devices on that channel fall back according to app defaults after deletion."
+        "description": "Delete one channel from an app. Devices on that channel fall back according to app defaults after deletion.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       }
     },
     "/device/": {
@@ -2504,6 +2572,9 @@
           },
           {
             "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -2759,7 +2830,12 @@
             }
           }
         },
-        "description": "Assign a device to a specific channel or bundle override so that device stops following the default channel."
+        "description": "Assign a device to a specific channel or bundle override so that device stops following the default channel.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -2900,7 +2976,12 @@
             }
           }
         },
-        "description": "Remove a device-specific channel or bundle override so the device follows the app default channel again."
+        "description": "Remove a device-specific channel or bundle override so the device follows the app default channel again.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       }
     },
     "/bundle/": {
@@ -2941,6 +3022,9 @@
               "type": "integer",
               "minimum": 1
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -3210,7 +3294,12 @@
             }
           }
         },
-        "description": "Register a new bundle from an externally hosted zip URL plus checksum. This does not by itself make the bundle live on a channel."
+        "description": "Register a new bundle from an externally hosted zip URL plus checksum. This does not by itself make the bundle live on a channel.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -3351,7 +3440,12 @@
             }
           }
         },
-        "description": "Attach an existing bundle to a channel so devices on that channel download it on the next update check."
+        "description": "Attach an existing bundle to a channel so devices on that channel download it on the next update check.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -3492,7 +3586,12 @@
             }
           }
         },
-        "description": "Delete one bundle or all bundles for an app. Bundles still assigned to a channel should be unassigned first."
+        "description": "Delete one bundle or all bundles for an app. Bundles still assigned to a channel should be unassigned first.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       }
     },
     "/bundle/metadata": {
@@ -3635,7 +3734,12 @@
             }
           }
         },
-        "description": "Update bundle metadata such as an external release link or comment without changing the zip bytes."
+        "description": "Update bundle metadata such as an external release link or comment without changing the zip bytes.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ]
       }
     },
     "/statistics/app/{appId}/": {
@@ -3654,6 +3758,9 @@
           },
           {
             "$ref": "#/components/parameters/ToDateParam"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -3801,6 +3908,9 @@
           },
           {
             "$ref": "#/components/parameters/ToDateParam"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -3961,6 +4071,9 @@
               "type": "boolean",
               "default": false
             }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -4105,6 +4218,9 @@
           },
           {
             "$ref": "#/components/parameters/ToDateParam"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
           }
         ],
         "responses": {
@@ -4323,6 +4439,18 @@
           "type": "string",
           "format": "date"
         }
+      },
+      "CapgoApiVersion": {
+        "name": "capgo_api",
+        "in": "header",
+        "required": false,
+        "description": "Date-based API version to pin. Defaults to the current version when omitted.",
+        "schema": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "default": "2025-10-01"
+        },
+        "example": "2025-10-01"
       }
     },
     "responses": {

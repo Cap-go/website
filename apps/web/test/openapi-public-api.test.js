@@ -6,8 +6,7 @@ const HTTP_METHODS = new Set(['get', 'put', 'post', 'delete', 'options', 'head',
 test('public API OpenAPI spec is complete enough for function calling', () => {
   expect(spec.openapi).toStartWith('3.')
   expect(spec.info.title).toContain('Capgo')
-  expect(spec.servers[0].url).toBe('https://api.capgo.app/v1')
-  expect(spec.servers[1].url).toBe('https://api.capgo.app')
+  expect(spec.servers).toEqual([{ url: 'https://api.capgo.app', description: 'Production' }])
   expect(spec.components.securitySchemes.CapgoApiKeyAuth.name).toBe('x-api-key')
 
   const operationIds = new Set()
@@ -73,9 +72,14 @@ test('responses document the rate-limit headers and 429 Retry-After', () => {
   expect(spec.info.description).toContain('2,000 requests per minute')
 })
 
-test('public API publishes a versioning and deprecation policy', () => {
-  expect(spec.info.version).toBe('1.0.0')
-  expect(spec.info.description).toContain('https://api.capgo.app/v1')
+test('public API documents date-based versioning through the capgo_api header', () => {
+  expect(spec.components.parameters.CapgoApiVersion).toMatchObject({ name: 'capgo_api', in: 'header', required: false })
+  expect(spec.components.parameters.CapgoApiVersion.schema.default).toBe(spec.info.version)
+  for (const [name, operation] of operations()) {
+    expect(operation.parameters, name).toContainEqual({ $ref: '#/components/parameters/CapgoApiVersion' })
+  }
+  expect(spec.info.description).toContain('`capgo_api: 2025-10-01`')
   expect(spec.info.description).toContain('`Deprecation` header (RFC 9745)')
   expect(spec.info.description).toContain('`Sunset` header (RFC 8594)')
+  expect(JSON.stringify(spec)).not.toContain('/v1')
 })
