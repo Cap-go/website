@@ -327,6 +327,8 @@ function redirectToAbsolute(url: string, status = 301): Response {
 const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
   'capacitor-supabase': '/docs/plugins/supabase/',
   supabase: '/docs/plugins/supabase/',
+  'capacitor-neon': '/docs/plugins/neon/',
+  neon: '/docs/plugins/neon/',
   'capacitor-pretty-toast': '/docs/plugins/pretty-toast/',
   'pretty-toast': '/docs/plugins/pretty-toast/',
   'capacitor-sheets': '/docs/plugins/sheets/',

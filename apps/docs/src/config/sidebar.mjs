@@ -143,6 +143,7 @@ const pluginEntries = [
   ['Native Market', 'native-market'],
   ['Native Navigation', 'native-navigation'],
   ['Native Map', 'native-map', [linkItem('iOS setup', '/docs/plugins/native-map/ios'), linkItem('Android setup', '/docs/plugins/native-map/android')]],
+  ['Neon', 'neon'],
   [
     'Network Diagnostics',
     'network-diagnostics',
