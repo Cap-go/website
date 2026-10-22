@@ -976,3 +976,52 @@ try {
     delete (globalThis as { caches?: unknown }).caches
   }
 }
+
+{
+  // Translation memory: a segment already translated (on this page or any other) is never sent to Workers AI again.
+  const memoryStore = new Map<string, string>()
+  const aiInputs: string[] = []
+  const memoryEnv = {
+    AI: {
+      run: async (_model: string, input: { messages: Array<{ content: string }> }) => {
+        const userContent = input.messages[1].content
+        aiInputs.push(userContent)
+        const { items } = JSON.parse(userContent) as { items: Array<{ id: string; text: string }> }
+        return { response: JSON.stringify({ translations: Object.fromEntries(items.map((item) => [item.id, `Fr ${item.text}`])) }) }
+      },
+    },
+    TRANSLATION_STORE: {
+      get: async (key: string) => (memoryStore.has(key) ? { text: async () => memoryStore.get(key) as string } : null),
+      put: async (key: string, value: string) => {
+        memoryStore.set(key, value)
+      },
+      delete: async (key: string) => {
+        memoryStore.delete(key)
+      },
+    },
+  } as unknown as Parameters<typeof __translationWorkerTest.translateBatchWithMemory>[0]
+
+  const sharedFooter = 'Ship live updates to every Capacitor app you maintain.'
+  const firstPage = await __translationWorkerTest.translateBatchWithMemory(memoryEnv, 'fr', [sharedFooter, 'The first page explains how channels route devices.'])
+  assert(firstPage[0] === `Fr ${sharedFooter}`, 'Translation memory did not return the first translation')
+  assert(memoryStore.size === 2, 'Translation memory did not store translated segments')
+
+  aiInputs.length = 0
+  const editedPage = await __translationWorkerTest.translateBatchWithMemory(memoryEnv, 'fr', [sharedFooter, 'A brand new paragraph was added to this page today.'])
+  assert(editedPage[0] === `Fr ${sharedFooter}`, 'Translation memory did not reuse a remembered segment')
+  assert(editedPage[1] === 'Fr A brand new paragraph was added to this page today.', 'Translation memory did not translate the new segment')
+  assert(aiInputs.length === 1 && !aiInputs[0].includes(sharedFooter), 'Translation memory sent a remembered segment to Workers AI')
+
+  aiInputs.length = 0
+  await __translationWorkerTest.translateBatchWithMemory(memoryEnv, 'fr', [sharedFooter])
+  assert(aiInputs.length === 0, 'Translation memory called Workers AI for a fully remembered batch')
+
+  const frenchKey = await __translationWorkerTest.translationMemoryKey('fr', sharedFooter, '')
+  assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('de', sharedFooter, '')), 'Translation memory keys must be per locale')
+  assert(frenchKey !== (await __translationWorkerTest.translationMemoryKey('fr', sharedFooter, 'footer link')), 'Translation memory keys must include context')
+  assert(frenchKey.includes(__translationWorkerTest.TRANSLATION_MEMORY_VERSION), 'Translation memory keys must include the memory version')
+
+  type ReviewEnv = Parameters<typeof __translationWorkerTest.translationReviewModels>[0]
+  const reviewChain = __translationWorkerTest.translationReviewModels({ TRANSLATION_REVIEW_MODEL: ' @cf/a , @cf/b ,' } as unknown as ReviewEnv)
+  assert(reviewChain.join('|') === '@cf/a|@cf/b', 'Review model list was not parsed in order')
+}

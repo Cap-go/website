@@ -180,6 +180,14 @@ const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
 const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
+// Translation memory: every translated segment is stored in R2 by a hash of its text
+// and context, so a page edit only sends new or edited segments to Workers AI, and the
+// header, footer and other repeated copy are translated once for the whole site.
+// Bump this when the prompt, style guides or models change to translate everything
+// again. Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages
+// are rebuilt from memory without new AI calls.
+const TRANSLATION_MEMORY_VERSION = '2026-10-22-style-guides-v1'
+const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
@@ -2234,43 +2242,58 @@ function polishTranslatedText(targetLanguage: string, text: string): string {
 
 // Optional second pass (TRANSLATION_REVIEW_MODEL): a reviewer model fixes the drafts
 // against the same style guide, with its reasoning left on. Any failure keeps the drafts.
+// TRANSLATION_REVIEW_MODEL is a comma-separated list tried in order: DeepSeek reviews
+// best but is capped at 20 requests/minute, so a rate-limited review falls back to the next model.
+function translationReviewModels(env: Env): string[] {
+  return (env.TRANSLATION_REVIEW_MODEL ?? '')
+    .split(',')
+    .map((model) => model.trim())
+    .filter(Boolean)
+}
+
 async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: Array<{ id: string; text: string; context?: string }>, drafts: string[]): Promise<string[]> {
-  const reviewModel = env.TRANSLATION_REVIEW_MODEL?.trim()
-  if (!reviewModel) return drafts
-  try {
-    const result = await env.AI.run(reviewModel, {
-      temperature: 0,
-      max_tokens: 16384,
-      response_format: {
-        type: 'json_schema',
-        json_schema: translationBatchJsonSchema(items.length),
-      },
-      messages: [
-        {
-          role: 'system',
-          content: [
-            `You are a senior native ${targetLanguage} reviewer for Capgo website copy. Each item has the English text, optional context, and a draft ${targetLanguage} translation.`,
-            'Fix mistranslations, wrong terminology, literal or unnatural phrasing, grammar and agreement errors, English Title Case, untranslated English, and translated product names. Keep the draft when it is already correct and natural.',
-            translationLengthSystemHint(),
-            'Copy every placeholder like __CAPGO_KEEP_0__ exactly as written.',
-            translationStyleGuide(targetLanguage),
-            `Return a JSON object with exactly one key named "translations" mapping every item id to the final translation.`,
-          ].join(' '),
-        },
-        {
-          role: 'user',
-          content: JSON.stringify({ targetLanguage, items: items.map((item, index) => ({ ...item, draft: drafts[index] })) }),
-        },
-      ],
-    })
-    const payload = extractAiPayload(result)
-    const reviewed = keyedTranslationsFromUnknown(typeof payload === 'string' ? parseJsonValue(stripJsonFence(payload)) : payload, items.length)
-    if (!reviewed) throw new Error('Review model returned invalid JSON')
-    return reviewed.map((text, index) => (text.trim() ? text : drafts[index]))
-  } catch (error) {
-    console.warn('Translation review failed; keeping drafts', { targetLanguage, error: errorMessage(error) })
-    return drafts
+  for (const reviewModel of translationReviewModels(env)) {
+    try {
+      return await reviewTranslatedBatchWithModel(env, reviewModel, targetLanguage, items, drafts)
+    } catch (error) {
+      console.warn('Translation review failed', { targetLanguage, reviewModel, error: errorMessage(error) })
+    }
   }
+  return drafts
+}
+
+type ReviewItem = { id: string; text: string; context?: string }
+
+async function reviewTranslatedBatchWithModel(env: Env, reviewModel: string, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<string[]> {
+  const result = await env.AI.run(reviewModel, {
+    temperature: 0,
+    max_tokens: 16384,
+    response_format: {
+      type: 'json_schema',
+      json_schema: translationBatchJsonSchema(items.length),
+    },
+    messages: [
+      {
+        role: 'system',
+        content: [
+          `You are a senior native ${targetLanguage} reviewer for Capgo website copy. Each item has the English text, optional context, and a draft ${targetLanguage} translation.`,
+          'Fix mistranslations, wrong terminology, literal or unnatural phrasing, grammar and agreement errors, English Title Case, untranslated English, and translated product names. Keep the draft when it is already correct and natural.',
+          translationLengthSystemHint(),
+          'Copy every placeholder like __CAPGO_KEEP_0__ exactly as written.',
+          translationStyleGuide(targetLanguage),
+          `Return a JSON object with exactly one key named "translations" mapping every item id to the final translation.`,
+        ].join(' '),
+      },
+      {
+        role: 'user',
+        content: JSON.stringify({ targetLanguage, items: items.map((item, index) => ({ ...item, draft: drafts[index] })) }),
+      },
+    ],
+  })
+  const payload = extractAiPayload(result)
+  const reviewed = keyedTranslationsFromUnknown(typeof payload === 'string' ? parseJsonValue(stripJsonFence(payload)) : payload, items.length)
+  if (!reviewed) throw new Error('Review model returned invalid JSON')
+  return reviewed.map((text, index) => (text.trim() ? text : drafts[index]))
 }
 
 async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
@@ -2374,6 +2397,70 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
   }
 
   throw new Error(`Translation JSON mode failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
+}
+
+const isolateTranslationMemory = new Map<string, string>()
+
+function rememberInIsolate(key: string, translated: string): void {
+  if (isolateTranslationMemory.size >= TRANSLATION_MEMORY_ISOLATE_ENTRIES) {
+    const oldestKey = isolateTranslationMemory.keys().next().value
+    if (oldestKey !== undefined) isolateTranslationMemory.delete(oldestKey)
+  }
+  isolateTranslationMemory.set(key, translated)
+}
+
+async function translationMemoryKey(locale: Locale, text: string, context: string): Promise<string> {
+  return `memory/${TRANSLATION_MEMORY_VERSION}/${locale}/${await sha256Hex(JSON.stringify([text, context]))}.txt`
+}
+
+async function readTranslationMemoryEntry(env: Env, key: string): Promise<string | null> {
+  const cached = isolateTranslationMemory.get(key)
+  if (cached !== undefined) return cached
+  try {
+    const object = await env.TRANSLATION_STORE.get(key)
+    const translated = object ? await object.text() : null
+    if (translated) rememberInIsolate(key, translated)
+    return translated || null
+  } catch (error) {
+    console.warn('Translation memory read failed', { key, error: errorMessage(error) })
+    return null
+  }
+}
+
+// A long segment left in English is a fallback (dropped placeholder, failed model call), not a
+// translation: it is not remembered, so the next refresh of the page gets another chance.
+function shouldRememberTranslation(source: string, translated: string): boolean {
+  if (!translated.trim() || STRAY_PLACEHOLDER_PATTERN.test(translated)) return false
+  return !(shouldCheckUnchangedTranslation(source) && normalizedTranslationValue(source) === normalizedTranslationValue(translated))
+}
+
+async function writeTranslationMemoryEntry(env: Env, key: string, translated: string): Promise<void> {
+  rememberInIsolate(key, translated)
+  try {
+    await env.TRANSLATION_STORE.put(key, translated)
+  } catch (error) {
+    console.warn('Translation memory write failed', { key, error: errorMessage(error) })
+  }
+}
+
+// Translates a batch of page segments, reusing every segment already in translation memory.
+async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[], pagePath = ''): Promise<string[]> {
+  const contexts = resolveTranslationContexts(batch)
+  const keys = await Promise.all(batch.map((text, index) => translationMemoryKey(locale, text, contexts[index] ?? '')))
+  const translations = await Promise.all(keys.map((key) => readTranslationMemoryEntry(env, key)))
+  const missingIndexes = translations.flatMap((translated, index) => (translated === null ? [index] : []))
+  if (missingIndexes.length === 0) return translations as string[]
+
+  const missingTexts = missingIndexes.map((index) => batch[index])
+  const translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath)
+  await Promise.all(
+    missingIndexes.map(async (batchIndex, translatedIndex) => {
+      const text = translated[translatedIndex] ?? batch[batchIndex]
+      translations[batchIndex] = text
+      if (shouldRememberTranslation(batch[batchIndex], text)) await writeTranslationMemoryEntry(env, keys[batchIndex], text)
+    }),
+  )
+  return translations as string[]
 }
 
 async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
@@ -3186,7 +3273,7 @@ async function refreshCacheIncrementally(
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
   while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
-    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex], requestUrl.pathname)
+    const translatedBatch = await translateBatchWithMemory(env, locale, batches[batchIndex], requestUrl.pathname)
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
     batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
@@ -3842,6 +3929,10 @@ export class TranslationCoordinator {
 }
 
 export const __translationWorkerTest = {
+  translateBatchWithMemory,
+  translationMemoryKey,
+  translationReviewModels,
+  TRANSLATION_MEMORY_VERSION,
   aiRequestOptions,
   parseKeyedTranslations,
   protectTranslationTokens,
