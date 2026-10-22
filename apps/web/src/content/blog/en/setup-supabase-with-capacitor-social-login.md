@@ -209,12 +209,11 @@ This guide covers:
 1. **Enable Apple provider in Supabase**:
    - Go to **Authentication > Providers** and toggle **Apple** ON
    - Fill in the configuration:
-     - **Client ID**: Your Service ID identifier (e.g., `com.yourapp.signin`)
-     - **Client Secret**: Generate this JWT using your Apple private key (see [Supabase Apple docs](https://supabase.com/docs/guides/auth/social-login/auth-apple) for the JWT format)
-     - **Redirect URL**: `https://your-project-ref.supabase.co/auth/v1/callback` (auto-filled)
-   - Click **"Save"**
+     - **Client ID**: Your iOS App ID and Apple Service ID when you ship both platforms, comma separated (for example `com.yourapp,com.yourapp.signin`). iOS tokens use the App ID audience; Android and web use the Service ID. See [Supabase Apple general](/docs/plugins/social-login/supabase/apple/general/).
+     - For this tutorial's `signInWithIdToken` flow with `@capgo/capacitor-social-login`, you do **not** need an OAuth client secret or Supabase OAuth callback URL in the Apple provider form.
+   - Click **Save**
 
-**Note**: Apple authentication setup is the most complex due to Apple's requirements for Service IDs, private keys, and JWT generation. Follow our documentation carefully for each platform.
+**Note**: Apple authentication setup is the most complex due to Apple's requirements for Service IDs, private keys, and platform-specific redirect URLs. Follow our documentation carefully for each platform.
 
 ### Setting up Facebook Authentication in Supabase
 
@@ -286,8 +285,8 @@ await SocialLogin.initialize({
     // Optional: iOS Client ID for iOS-specific features
     iOSClientId: 'YOUR_IOS_CLIENT_ID.apps.googleusercontent.com',
     
-    // Optional: Request offline access for refresh tokens
-    mode: 'offline'
+    // Use online mode so the plugin returns an idToken for Supabase
+    mode: 'online'
   }
 });
 ```
@@ -443,6 +442,18 @@ import { SocialLogin } from '@capgo/capacitor-social-login';
 import { supabase } from '../lib/supabaseClient';
 import { createGoogleNoncePair } from './nonce';
 
+function isAppleLoginConfigured(): boolean {
+  const platform = Capacitor.getPlatform();
+  if (platform === 'ios') return true;
+  const serviceId = import.meta.env.VITE_APPLE_SERVICE_ID;
+  if (!serviceId) return false;
+  if (platform === 'android') {
+    return Boolean(import.meta.env.VITE_SUPABASE_APPLE_CALLBACK_URL);
+  }
+  if (platform === 'web') return true;
+  return false;
+}
+
 function buildApplePluginConfig() {
   const platform = Capacitor.getPlatform();
 
@@ -467,18 +478,27 @@ function buildApplePluginConfig() {
   return {};
 }
 
+function isGoogleNonceMismatch(error: { message?: string }): boolean {
+  return (error.message ?? '').toLowerCase().includes('nonce');
+}
+
 let initialization: Promise<void> | null = null;
 
 export function ensureSocialLoginInitialized(): Promise<void> {
   if (!initialization) {
-    initialization = SocialLogin.initialize({
+    const initOptions: Parameters<typeof SocialLogin.initialize>[0] = {
       google: {
         webClientId: import.meta.env.VITE_GOOGLE_WEB_CLIENT_ID,
         iOSClientId: import.meta.env.VITE_GOOGLE_IOS_CLIENT_ID,
         mode: 'online',
       },
-      apple: buildApplePluginConfig(),
-    }).catch((error) => {
+    };
+
+    if (isAppleLoginConfigured()) {
+      initOptions.apple = buildApplePluginConfig();
+    }
+
+    initialization = SocialLogin.initialize(initOptions).catch((error) => {
       initialization = null;
       throw error;
     });
@@ -486,7 +506,7 @@ export function ensureSocialLoginInitialized(): Promise<void> {
   return initialization;
 }
 
-export async function signInWithGoogleSupabase() {
+async function signInWithGoogleSupabaseOnce(allowNonceRetry: boolean) {
   await ensureSocialLoginInitialized();
   const { rawNonce, nonceDigest } = await createGoogleNoncePair();
 
@@ -509,8 +529,19 @@ export async function signInWithGoogleSupabase() {
     nonce: rawNonce,
   });
 
-  if (error) throw error;
+  if (error) {
+    if (allowNonceRetry && isGoogleNonceMismatch(error)) {
+      await SocialLogin.logout({ provider: 'google' });
+      return signInWithGoogleSupabaseOnce(false);
+    }
+    throw error;
+  }
+
   return data;
+}
+
+export async function signInWithGoogleSupabase() {
+  return signInWithGoogleSupabaseOnce(true);
 }
 
 export async function signInWithAppleSupabase() {
@@ -541,11 +572,13 @@ export async function signOutEverywhere() {
 }
 ```
 
-**Apple `initialize` by platform** (see [Supabase Apple general](/docs/plugins/social-login/supabase/Apple/general/), [Android](/docs/plugins/social-login/supabase/Apple/android/), [Web](/docs/plugins/social-login/supabase/Apple/web/)):
+**Apple `initialize` by platform** (see [Supabase Apple general](/docs/plugins/social-login/supabase/apple/general/), [Android](/docs/plugins/social-login/supabase/apple/android/), [Web](/docs/plugins/social-login/supabase/apple/web/)):
 
 - **iOS**: `buildApplePluginConfig()` returns `{}`. Native Sign in with Apple uses your bundle ID. No `redirectUrl`.
-- **Android**: `clientId` is your Apple Service ID. `redirectUrl` is your Supabase Edge Function (`apple-signin-callback`). Deploy the function, set Apple Return URL to that endpoint, and add the app deep link intent filter so the flow can return to the WebView ([Android Supabase Apple guide](/docs/plugins/social-login/supabase/Apple/android/)).
-- **Web**: `clientId` is your Service ID. `redirectUrl` is `window.location.href`, which must match a Return URL in Apple Developer Portal ([Web Supabase Apple guide](/docs/plugins/social-login/supabase/Apple/web/)).
+- **Android**: `clientId` is your Apple Service ID. `redirectUrl` is your Supabase Edge Function (`apple-signin-callback`). Deploy the function, set Apple Return URL to that endpoint, and add the app deep link intent filter so the flow can return to the WebView ([Android Supabase Apple guide](/docs/plugins/social-login/supabase/apple/android/)).
+- **Web**: `clientId` is your Service ID. `redirectUrl` is `window.location.href`, which must match a Return URL in Apple Developer Portal ([Web Supabase Apple guide](/docs/plugins/social-login/supabase/apple/web/)).
+
+`ensureSocialLoginInitialized()` adds the `apple` provider only when `isAppleLoginConfigured()` is true, so a Google-only setup does not pass empty Android or web Apple credentials.
 
 The plugin returns `result.idToken` on all platforms (`AppleProviderResponse` in `@capgo/capacitor-social-login`). Register both iOS App ID and Service ID in Supabase when you ship multiple platforms.
 
