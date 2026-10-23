@@ -18,11 +18,7 @@ export async function withVideoRange(request: Request, response: Response): Prom
   if ([match[1], match[2]].some((part) => part && !Number.isSafeInteger(Number(part)))) return full
 
   const validator = request.headers.get('If-Range')
-  if (validator) {
-    const etagMatches = validator.startsWith('"') && validator === full.headers.get('ETag')
-    const dateMatches = Number.isFinite(Date.parse(validator)) && validator === full.headers.get('Last-Modified')
-    if (!etagMatches && !dateMatches) return full
-  }
+  if (validator && !matchesIfRange(validator, full.headers)) return full
 
   const body = await full.arrayBuffer()
   const size = body.byteLength
@@ -38,4 +34,10 @@ export async function withVideoRange(request: Request, response: Response): Prom
   headers.set('Content-Range', `bytes ${start}-${end}/${size}`)
   headers.set('Content-Length', String(end - start + 1))
   return new Response(body.slice(start, end + 1), { status: 206, headers })
+}
+
+function matchesIfRange(validator: string, headers: Headers): boolean {
+  const etagMatches = validator.startsWith('"') && validator === headers.get('ETag')
+  const dateMatches = Number.isFinite(Date.parse(validator)) && validator === headers.get('Last-Modified')
+  return etagMatches || dateMatches
 }
