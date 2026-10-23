@@ -310,20 +310,32 @@ await SocialLogin.initialize({
 });
 ```
 
-**For Android/Web** (requires Service ID):
+**For Android/Web** (requires Service ID). Use the same redirect rules as `buildApplePluginConfig()` in the React walkthrough:
+
 ```typescript
+import { Capacitor } from '@capacitor/core';
+
+const platform = Capacitor.getPlatform();
+
 await SocialLogin.initialize({
-  apple: {
-    clientId: 'YOUR_SERVICE_ID', // The Service ID from Apple Developer Portal
-    redirectUrl: 'https://your-project-ref.supabase.co/auth/v1/callback'
-  }
+  apple:
+    platform === 'android'
+      ? {
+          clientId: 'YOUR_SERVICE_ID',
+          redirectUrl:
+            'https://your-project-ref.supabase.co/functions/v1/apple-signin-callback',
+        }
+      : {
+          clientId: 'YOUR_SERVICE_ID',
+          redirectUrl: window.location.href,
+        },
 });
 ```
 
 **Key points for Apple:**
 - iOS uses native Sign in with Apple (no extra config needed)
-- Android/Web requires the Service ID you created in Apple Developer Portal
-- The `redirectUrl` should match what you configured in both Apple Developer Portal and Supabase
+- Android uses your Service ID and the Supabase `apple-signin-callback` Edge Function URL
+- Web uses your Service ID and `window.location.href`, which must match Apple Return URLs
 
 ### Facebook Plugin Configuration
 
@@ -367,10 +379,9 @@ export async function initializeSocialLogin() {
       clientToken: 'YOUR_FACEBOOK_CLIENT_TOKEN',
     },
     apple: {
-      // iOS: no config needed
-      // Android/Web: uncomment the lines below
-      // clientId: 'YOUR_SERVICE_ID',
-      // redirectUrl: 'https://your-project-ref.supabase.co/auth/v1/callback'
+      // Prefer buildApplePluginConfig() from the React walkthrough.
+      // Android: redirectUrl = Supabase apple-signin-callback Edge Function
+      // Web: redirectUrl = window.location.href
     }
   });
 }
@@ -597,6 +608,7 @@ import { ensureSocialLoginInitialized } from './socialLogin';
 type AuthContextValue = {
   session: Session | null;
   loading: boolean;
+  initError: string | null;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -604,9 +616,12 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [initError, setInitError] = useState<string | null>(null);
 
   useEffect(() => {
-    void ensureSocialLoginInitialized();
+    void ensureSocialLoginInitialized().catch((error) => {
+      setInitError(error instanceof Error ? error.message : 'Social login failed to initialize');
+    });
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
@@ -617,7 +632,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.subscription.unsubscribe();
   }, []);
 
-  const value = useMemo(() => ({ session, loading }), [session, loading]);
+  const value = useMemo(() => ({ session, loading, initError }), [session, loading, initError]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -643,8 +658,10 @@ import {
   signInWithAppleSupabase,
   signInWithGoogleSupabase,
 } from '../auth/socialLogin';
+import { useAuth } from '../auth/useAuth';
 
 export function LoginPanel() {
+  const { initError } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const showApple = isAppleLoginConfigured();
@@ -671,6 +688,7 @@ export function LoginPanel() {
           Continue with Apple
         </button>
       ) : null}
+      {initError ? <p role="alert">{initError}</p> : null}
       {error ? <p role="alert">{error}</p> : null}
     </div>
   );
@@ -783,7 +801,7 @@ Complete Google and Apple platform steps before testing on hardware:
 
 ### Deep links and Universal Links
 
-Tutorials that call `supabase.auth.signInWithOAuth` inside a WebView often need **Universal Links** or **App Links** so the OS returns control to the app after Google redirects. The **ID token** flow in this guide avoids that class of redirect loops on mobile.
+Tutorials that call `supabase.auth.signInWithOAuth` inside a WebView often need **Universal Links** or **App Links** so the OS returns control to the app after Google redirects. Native **Google** sign-in with an **ID token** avoids that redirect loop because the plugin never opens a browser OAuth round trip. **Apple on Android** is different: it still uses the Edge Function redirect and an app **deep link** intent filter so the WebView can resume after Apple login.
 
 You may still configure deep links for other features (password reset emails, magic links, marketing URLs). Add the same paths to **Authentication > URL Configuration** in Supabase and to your `apple-app-site-association` / Android intent filters when you add those flows.
 
