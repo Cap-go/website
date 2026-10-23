@@ -600,7 +600,15 @@ Expose session state to components:
 
 ```tsx
 // src/auth/useAuth.tsx
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
 import { ensureSocialLoginInitialized } from './socialLogin';
@@ -609,6 +617,7 @@ type AuthContextValue = {
   session: Session | null;
   loading: boolean;
   initError: string | null;
+  clearInitError: () => void;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -619,9 +628,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [initError, setInitError] = useState<string | null>(null);
 
   useEffect(() => {
-    void ensureSocialLoginInitialized().catch((error) => {
-      setInitError(error instanceof Error ? error.message : 'Social login failed to initialize');
-    });
+    void ensureSocialLoginInitialized()
+      .then(() => setInitError(null))
+      .catch((error) => {
+        setInitError(error instanceof Error ? error.message : 'Social login failed to initialize');
+      });
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
@@ -632,7 +643,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.subscription.unsubscribe();
   }, []);
 
-  const value = useMemo(() => ({ session, loading, initError }), [session, loading, initError]);
+  const clearInitError = useCallback(() => setInitError(null), []);
+
+  const value = useMemo(
+    () => ({ session, loading, initError, clearInitError }),
+    [session, loading, initError, clearInitError],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -661,7 +677,7 @@ import {
 import { useAuth } from '../auth/useAuth';
 
 export function LoginPanel() {
-  const { initError } = useAuth();
+  const { initError, clearInitError } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const showApple = isAppleLoginConfigured();
@@ -671,6 +687,7 @@ export function LoginPanel() {
     setError(null);
     try {
       await action();
+      clearInitError();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Sign-in failed');
     } finally {
