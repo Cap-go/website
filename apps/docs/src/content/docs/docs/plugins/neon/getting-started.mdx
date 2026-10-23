@@ -78,13 +78,21 @@ console.log('JWT available', Boolean(session?.accessToken));
 
 ## Sign Up
 
+If **Verify email at sign-up** is enabled for your branch, `signUp()` returns no session until the user confirms the emailed code with `verifyOtp({ type: 'signup' })`.
+
 ```ts
 import { CapacitorNeon } from '@capgo/capacitor-neon';
 
-const { session, user } = await CapacitorNeon.signUp({
+await CapacitorNeon.signUp({
   email: 'newuser@example.com',
   password: 'password123',
   name: 'John Doe',
+});
+
+await CapacitorNeon.verifyOtp({
+  email: 'newuser@example.com',
+  token: '123456',
+  type: 'signup',
 });
 ```
 
