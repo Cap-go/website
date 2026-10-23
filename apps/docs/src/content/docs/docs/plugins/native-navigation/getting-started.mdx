@@ -355,6 +355,31 @@ defineNativeNavigationElements();
   The web components are optional. React, Vue, Angular, Svelte, Solid, and vanilla apps can all use the imperative API directly.
 </Aside>
 
+## iPhone Duo (iOS 27)
+
+On iPhone Duo, iOS often places the system tab bar and status bar in a **vertical side rail**. `env(safe-area-inset-top)` can be `0` while `left` or `right` grows. Test folded, open, landscape, and Split View poses in Xcode Device Hub.
+
+Native Navigation uses real `UINavigationBar` and `UITabBar`, so **system tab bars follow the rail**. The **curve** tab bar shape stays on the bottom; the center action keeps a circular cradle when the window widens.
+
+| Folded, system tabs | Open, rail |
+| :---: | :---: |
+| <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-folded-system.webp" alt="iPhone Duo folded with the system tab bar in the side rail" width="200" /> | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-open-system.webp" alt="iPhone Duo open with the system tab bar in the side rail" width="240" /> |
+
+With `contentInsetMode: 'css'`, combine plugin variables with CSS env insets:
+
+```css
+main {
+  padding-top: calc(var(--cap-native-navigation-top) + env(safe-area-inset-top, 0px));
+  padding-right: calc(var(--cap-native-navigation-right) + env(safe-area-inset-right, 0px));
+  padding-bottom: calc(var(--cap-native-navigation-bottom) + env(safe-area-inset-bottom, 0px));
+  padding-left: calc(var(--cap-native-navigation-left) + env(safe-area-inset-left, 0px));
+}
+```
+
+Listen for `safeAreaChanged` (or `capNativeNavigation:safeAreaChanged` on `window`) when the rail side or fold state changes. On hosted system tab bars, `insets.tabbarHeight` may be `0` to avoid double bottom padding; use `insets.systemTabbarHeight` or `--cap-native-system-tabbar-height` for FAB offsets.
+
+Capacitor-wide guidance (viewport-fit, System Bars, Status Bar, testing): [Supporting iPhone Duo in Capacitor apps](https://capgo.app/blog/capacitor-iphone-duo-safe-area-guide/).
+
 ## Platform notes
 
 - iOS renders `UINavigationBar` and `UITabBar`; iOS 26+ uses the system Liquid Glass bar behavior.
