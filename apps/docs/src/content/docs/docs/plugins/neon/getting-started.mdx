@@ -1,0 +1,181 @@
+---
+title: Getting Started
+description: "Install and initialize the native Neon Capacitor plugin."
+sidebar:
+  order: 2
+---
+
+## Install
+
+You can use our AI-Assisted Setup to install the plugin. Add the Capgo skills to your AI tool using the following command:
+
+```bash
+bunx skills add https://github.com/Cap-go/capgo-skills --skill capacitor-plugins
+```
+
+Then use the following prompt:
+
+```text
+Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@capgo/capacitor-neon` plugin in my project.
+```
+
+If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
+
+```bash
+bun add @capgo/capacitor-neon
+bunx cap sync
+```
+
+## Neon Setup
+
+1. Enable **Neon Auth** on your branch (Console > Auth, or `neon neon-auth enable`).
+2. Enable the **Data API** on the same branch if you want the database helpers (Console > Data API, with Neon Auth as the provider).
+3. Copy the **Auth URL** and **Data API URL** from the Console.
+
+Neon Auth only accepts requests from trusted origins. Localhost is trusted by default, and the plugin sends `Origin: https://localhost`, so a new branch works without changes. If you turn off localhost, add one of your domains as a trusted domain and pass it as `origin` to `initialize()`.
+
+## iOS setup
+
+No additional setup is required for email and OTP sign-in. The plugin uses URLSession and the Keychain, with no third-party dependencies.
+
+For OAuth, set `redirectTo` to a trusted `https` Universal Link that opens your app. Neon Auth rejects custom URL schemes as `redirectTo`. If you use a custom scheme in the app, host a trusted HTTPS callback page that forwards the `neon_auth_session_verifier` query parameter to that scheme.
+
+## Android setup
+
+No additional setup is required for email and OTP sign-in. The plugin works with the Capacitor 8 default minimum SDK of 24 (Android 7.0).
+
+For OAuth, set `redirectTo` to a trusted `https` App Link that opens your app. Neon Auth rejects custom URL schemes as `redirectTo`. If you use a custom scheme in the app, host a trusted HTTPS callback page that forwards the `neon_auth_session_verifier` query parameter to that scheme.
+
+## Quick start
+
+```typescript
+import { CapacitorNeon } from '@capgo/capacitor-neon';
+
+await CapacitorNeon.initialize({
+  authUrl: 'https://ep-xxx.neonauth.us-east-2.aws.neon.tech/neondb/auth',
+  dataApiUrl: 'https://ep-xxx.apirest.us-east-2.aws.neon.tech/neondb/rest/v1'
+});
+```
+
+## Example: signInWithPassword
+
+```typescript
+import { CapacitorNeon } from '@capgo/capacitor-neon';
+
+const { session, user } = await CapacitorNeon.signInWithPassword({
+  email: 'user@example.com',
+  password: 'password123'
+});
+console.log('Signed in', user?.id, Boolean(session?.accessToken));
+```
+
+## Example: signUp
+
+```typescript
+import { CapacitorNeon } from '@capgo/capacitor-neon';
+
+const { session, user } = await CapacitorNeon.signUp({
+  email: 'newuser@example.com',
+  password: 'password123',
+  name: 'John Doe'
+});
+```
+
+## Common pitfalls
+
+- **Listeners**: remove handles when screens unmount.
+- **Initialize once**: run setup during app bootstrap.
+- **OAuth redirects**: Neon Auth only redirects to `http` or `https` URLs on a trusted domain, so `myapp://` callbacks are rejected. Use a Universal Link or App Link, or a page on a trusted domain that forwards the `neon_auth_session_verifier` query parameter to your app's URL scheme.
+- **Source of truth**: trust [`src/definitions.ts`](https://github.com/Cap-go/capacitor-neon/blob/main/src/definitions.ts) in the GitHub repo.
+
+## Android Minimum SDK
+
+The Android implementation works with the Capacitor 8 default of Android 7.0. Keep `minSdkVersion = 24` or newer in `android/variables.gradle`.
+
+## Initialize The Client
+
+```ts
+import { CapacitorNeon } from '@capgo/capacitor-neon';
+
+await CapacitorNeon.initialize({
+  authUrl: 'https://ep-xxx.neonauth.us-east-2.aws.neon.tech/neondb/auth',
+  dataApiUrl: 'https://ep-xxx.apirest.us-east-2.aws.neon.tech/neondb/rest/v1',
+});
+```
+
+## Sign In And Access The JWT
+
+```ts
+const { session, user } = await CapacitorNeon.signInWithPassword({
+  email: 'user@example.com',
+  password: 'password123',
+});
+
+console.log('User', user?.id);
+console.log('JWT available', Boolean(session?.accessToken));
+```
+
+## Listen For Auth Changes
+
+```ts
+const listener = await CapacitorNeon.addListener('authStateChange', ({ event, session }) => {
+  console.log('Auth event', event);
+  console.log('Current JWT available', Boolean(session?.accessToken));
+});
+
+// Call listener.remove() when the screen unmounts.
+```
+
+## Pair Native Auth With neon-js
+
+Install the JavaScript client when you use this pattern:
+
+```bash
+bun add @neondatabase/neon-js
+```
+
+```ts
+import { CapacitorNeon } from '@capgo/capacitor-neon';
+import { createClient } from '@neondatabase/neon-js';
+
+const neon = createClient({
+  dataApi: {
+    url: 'https://ep-xxx.apirest.us-east-2.aws.neon.tech/neondb/rest/v1',
+    getToken: async () => (await CapacitorNeon.getSession()).session?.accessToken ?? null,
+  },
+});
+
+const { data } = await neon.from('table').select('*');
+console.log('Row count', data?.length ?? 0);
+```
+
+## Native Database Helpers
+
+```ts
+const { data, error } = await CapacitorNeon.select({
+  table: 'users',
+  columns: 'id, name, email',
+  filter: { active: true },
+  limit: 10,
+  orderBy: 'created_at',
+  ascending: false,
+});
+
+if (error) {
+  console.error('Select failed', error);
+} else {
+  console.log('Rows returned', data?.length ?? 0);
+}
+```
+
+When no one is signed in, the database helpers use an anonymous Data API token, so row-level security policies for the `anonymous` role apply.
+
+## Recommended Usage
+
+- Use this plugin for authentication and session management.
+- Keep advanced querying in `@neondatabase/neon-js`.
+- Pass the native JWT into the JavaScript client, Neon Functions, or your own API whenever you need it.
+
+## Keep going from Getting Started
+
+If you are using **Getting Started** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

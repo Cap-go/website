@@ -87,6 +87,7 @@ Plugin Network Diagnostics|native network diagnostics plugin for URL reachabilit
 Plugin Notifications|native push notifications, badges, campaign stats, device lookup, and silent live-update checks|docs/plugins/notifications/**
 Plugin Native Purchases|in-app purchases, subscriptions, paywalls, revenue playbook, and monetization plugin|docs/plugins/native-purchases/**
 Plugin Navigation Bar|Android navigation bar customization plugin|docs/plugins/navigation-bar/**
+Plugin Neon|Neon Auth, JWT access, and Data API helpers plugin|docs/plugins/neon/**
 Plugin NFC|NFC reading and writing plugin|docs/plugins/nfc/**
 Plugin Pay|Apple Pay and Google Pay integration plugin|docs/plugins/pay/**
 Plugin Passkey|browser-style WebAuthn passkey plugin that handles native calls and host patching|docs/plugins/passkey/**

@@ -1,0 +1,70 @@
+---
+title: "@capgo/capacitor-neon"
+description: "Native Neon Auth and Data API integration for Capacitor with JWT access and basic database operations."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Native Neon Auth, JWT access, and basic Data API helpers for Capacitor"
+  actions:
+    - text: Get started
+      link: /docs/plugins/neon/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-neon/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Native Neon Auth, JWT access, and basic Data API helpers for Capacitor
+
+Start with `initialize()`; see [Getting Started](/docs/plugins/neon/getting-started/) for the core methods and examples.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
+
+## Compatibility
+
+| Plugin version | Capacitor compatibility | Maintained |
+| --- | --- | --- |
+| v8.\*.\* | v8.\*.\* | Yes |
+
+The plugin major version matches Capacitor (plugin v8 for Capacitor 8). Only the latest major version is actively maintained.
+
+## Core Capabilities
+
+- Native [Neon Auth](https://neon.com/docs/auth/overview) client initialization.
+- Email/password sign-in and sign-up.
+- Email OTP, OAuth (Google, GitHub, Vercel), and session helpers.
+- Native auth state listeners.
+- JWT access for JavaScript or backend calls.
+- Anonymous Data API tokens for signed-out users.
+- Basic native `select`, `insert`, `update`, and `delete` helpers through the Neon Data API.
+
+## Recommended Architecture
+
+| Concern | Recommended path |
+| --- | --- |
+| Authentication | Use `@capgo/capacitor-neon`. |
+| Session persistence and refresh | Use `@capgo/capacitor-neon`. |
+| Advanced database queries | Use `@neondatabase/neon-js` with the native JWT. |
+| Neon Functions or your own API | Send the native JWT as a `Bearer` token. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-neon](https://github.com/Cap-go/capacitor-neon/).
+
+## Keep going from @capgo/capacitor-neon
+
+If you are using **@capgo/capacitor-neon** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.
