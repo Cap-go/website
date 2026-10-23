@@ -153,7 +153,7 @@ Watch the workflow in action:
 
 <iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/M4CXOocovZ4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-The [deployment automation guide](https://capgo.app/blog/deployment-automation/) provides implementation context for turning these practices into repeatable delivery. For Capacitor teams, the practical distinction remains important: native changes still require a binary release, while eligible web-layer changes can follow a controlled live-update path and reach users without waiting for store review.
+The [deployment automation guide](https://capgo.app/blog/app-release-automation/) provides implementation context for turning these practices into repeatable delivery. For Capacitor teams, the practical distinction remains important: native changes still require a binary release, while eligible web-layer changes can follow a controlled live-update path and reach users without waiting for store review.
 
 <a id="how-capgo-enables-faster-releases-for-cross-platform-apps"></a>
 ## How Capgo Enables Faster Releases for Cross-Platform Apps

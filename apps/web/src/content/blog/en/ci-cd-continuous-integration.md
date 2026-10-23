@@ -92,7 +92,7 @@ Packaging is the shipping container. The pipeline assigns a version, collects me
 <a id="5-deploy"></a>
 ### 5. Deploy
 
-Deployment is the delivery truck. It can upload an iOS build to TestFlight, send an Android bundle to an internal Play track, or publish a web bundle to a controlled live-update channel. Deployment automation only helps when the package is trustworthy and the destination is explicit. [Deployment automation guidance for Capacitor projects](https://capgo.app/blog/deployment-automation/) provides a useful reference for connecting these steps.
+Deployment is the delivery truck. It can upload an iOS build to TestFlight, send an Android bundle to an internal Play track, or publish a web bundle to a controlled live-update channel. Deployment automation only helps when the package is trustworthy and the destination is explicit. [Deployment automation guidance for Capacitor projects](https://capgo.app/blog/app-release-automation/) provides a useful reference for connecting these steps.
 
 ![A diagram illustrating the five essential building blocks of a CI/CD pipeline including source, build, test, deploy, and monitor.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/11ee2e45-71c9-460b-9c70-0ad686db9bc1/ci-cd-continuous-integration-pipeline-steps.jpg)
 
