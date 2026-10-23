@@ -1,7 +1,5 @@
 import channelVideoSizes from './channel-video-sizes.json'
 
-declare const FixedLengthStream: new (length: number) => TransformStream<Uint8Array, Uint8Array>
-
 /** Add seekable byte ranges to the static binding's full channel-video responses. */
 export async function withVideoRange(request: Request, response: Response): Promise<Response> {
   const path = new URL(request.url).pathname as keyof typeof channelVideoSizes
@@ -15,13 +13,12 @@ export async function withVideoRange(request: Request, response: Response): Prom
   const match = range?.match(/^bytes=(\d*)-(\d*)$/i)
   // A server may ignore malformed or multipart ranges and send the full file.
   if (!match || (!match[1] && !match[2])) return full
-  if ([match[1], match[2]].some((part) => part && !Number.isSafeInteger(Number(part)))) return full
 
   const validator = request.headers.get('If-Range')
   if (validator && !matchesIfRange(validator, full.headers)) return full
 
-  const start = match[1] ? Number(match[1]) : Math.max(0, size - Number(match[2]))
-  const end = match[1] && match[2] ? Math.min(Number(match[2]), size - 1) : size - 1
+  const start = match[1] ? boundedPosition(match[1], size) : Math.max(0, size - boundedPosition(match[2], size))
+  const end = match[1] && match[2] ? Math.min(boundedPosition(match[2], size), size - 1) : size - 1
   const headers = full.headers
   if (start >= size || end < start) {
     await full.body?.cancel().catch(() => {})
@@ -44,6 +41,12 @@ function canRangeVideo(request: Request, response: Response): boolean {
     !!response.headers.get('Content-Type')?.toLowerCase().startsWith('video/') &&
     (response.headers.get('Content-Encoding') ?? 'identity').toLowerCase() === 'identity'
   )
+}
+
+/** Clamp decimal positions before converting to Number, preserving huge ranges. */
+function boundedPosition(value: string, size: number): number {
+  const position = BigInt(value)
+  return position > BigInt(size) ? size : Number(position)
 }
 
 /** Accept only a known, exact byte length before attempting a partial response. */
@@ -95,5 +98,8 @@ function rangeStream(body: ReadableStream<Uint8Array>, start: number, end: numbe
     { highWaterMark: 0 },
   )
   // Workers needs its native stream to retain Content-Length; Bun uses headers.
-  return typeof FixedLengthStream === 'undefined' ? stream : stream.pipeThrough(new FixedLengthStream(end - start + 1))
+  const { FixedLengthStream: NativeFixedLengthStream } = globalThis as typeof globalThis & {
+    FixedLengthStream?: new (length: number) => TransformStream<Uint8Array, Uint8Array>
+  }
+  return NativeFixedLengthStream === undefined ? stream : stream.pipeThrough(new NativeFixedLengthStream(end - start + 1))
 }

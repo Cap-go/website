@@ -51,6 +51,8 @@ describe('channel video byte ranges', () => {
     ['bytes=0-0', 0, 0],
     ['Bytes=10-19', 10, 19],
     ['BYTES=10-19', 10, 19],
+    ['bytes=10-9007199254740993', 10, 99],
+    ['bytes=-9007199254740993', 0, 99],
   ])('handles %s', async (range, start, end) => {
     const response = await request(range)
     expect(response.status).toBe(206)
@@ -58,14 +60,17 @@ describe('channel video byte ranges', () => {
     expect(new Uint8Array(await response.arrayBuffer())).toEqual(bytes.slice(start, end + 1))
   })
 
-  test.each(['bytes=100-', 'bytes=500-600', 'bytes=-0', 'bytes=20-10'])('rejects unsatisfiable %s', async (range) => {
-    const response = await request(range)
-    expect(response.status).toBe(416)
-    expect(response.headers.get('Content-Range')).toBe('bytes */100')
-    expect((await response.arrayBuffer()).byteLength).toBe(0)
-  })
+  test.each(['bytes=100-', 'bytes=500-600', 'bytes=-0', 'bytes=20-10', 'bytes=9007199254740992-', 'bytes=9007199254740993-9007199254740999'])(
+    'rejects unsatisfiable %s',
+    async (range) => {
+      const response = await request(range)
+      expect(response.status).toBe(416)
+      expect(response.headers.get('Content-Range')).toBe('bytes */100')
+      expect((await response.arrayBuffer()).byteLength).toBe(0)
+    },
+  )
 
-  test.each([undefined, 'bytes=-', 'bytes=oops', 'items=0-1', 'bytes=0-1,5-6', 'bytes=9007199254740992-'])('ignores unsupported range %s', async (range) => {
+  test.each([undefined, 'bytes=-', 'bytes=oops', 'items=0-1', 'bytes=0-1,5-6'])('ignores unsupported range %s', async (range) => {
     const response = await request(range)
     expect(response.status).toBe(200)
     expect(response.headers.get('Content-Range')).toBeNull()
