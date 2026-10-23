@@ -49,7 +49,11 @@ Safe area env variables only apply when the viewport covers the full display:
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 ```
 
-Pad **interactive** content per edge. Let backgrounds bleed edge to edge when you want immersion:
+Pad **interactive** content per edge. Let backgrounds bleed edge to edge when you want immersion.
+
+Pick **one** inset owner for the whole app. The two snippets below are **alternatives**, not a pair to combine.
+
+#### Option A: per-page shell
 
 ```css
 .page {
@@ -61,7 +65,7 @@ Pad **interactive** content per edge. Let backgrounds bleed edge to edge when yo
 }
 ```
 
-Pick **one** inset owner for the whole app: pad `html` site-wide **or** pad a layout shell such as `.page` / `main`, not both recipes at once.
+Skip Option B when you use Option A.
 
 On scroll views, inset the **content**, not only the outer scroll container, so backgrounds can scroll full width while text and buttons stay clear of the rail.
 
@@ -88,10 +92,9 @@ export default config;
 ```
 
 - **`insetsHandling: 'css'`** (default on Android): injects `--safe-area-inset-*` CSS variables when the WebView env values are wrong (older Android WebView builds).
-- Use the **fallback pattern** from the [System Bars docs](https://capacitorjs.com/docs/apis/system-bars):
+- Option B (site-wide shell) uses the **fallback pattern** from the [System Bars docs](https://capacitorjs.com/docs/apis/system-bars). Skip Option A when you use Option B.
 
 ```css
-/* Alternative to per-page `.page` padding: one site-wide shell on html */
 html {
   padding-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
   padding-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
@@ -151,6 +154,8 @@ window.visualViewport?.addEventListener('resize', onGeometryChange);
 window.visualViewport?.addEventListener('scroll', onGeometryChange);
 onGeometryChange();
 ```
+
+The scroll listener covers visual-viewport pans that change `offsetLeft` / `offsetTop` without resizing width or height (for example keyboard-driven viewport shifts on iOS).
 
 On Android, include `density` in `android:configChanges` on your main activity so foldables and display size changes do not destroy the WebView. Capacitor 8 templates document this in the [Capacitor 8 upgrade guide](/blog/upgrade-capacitor-app-to-capacitor-8/).
 
@@ -218,7 +223,7 @@ await NativeNavigation.configure({
 - `--cap-native-tabbar-height`
 - `--cap-native-system-tabbar-height` (nominal tab bar height when `tabbarHeight` is `0` for hosted system bars)
 
-Example layout (plugin variables already include native bar overlap and UIKit safe-area edges; do not add env padding on the same edges):
+When Native Navigation owns the bars, use **only** the plugin variables below. They already include native bar overlap and UIKit safe-area edges. Do not also apply Option A or Option B env padding on the same edges.
 
 ```css
 main {
