@@ -46,51 +46,12 @@ No additional setup is required for email and OTP sign-in. The plugin works with
 
 For OAuth, set `redirectTo` to a trusted `https` App Link that opens your app. Neon Auth rejects custom URL schemes as `redirectTo`. If you use a custom scheme in the app, host a trusted HTTPS callback page that forwards the `neon_auth_session_verifier` query parameter to that scheme.
 
-## Quick start
-
-```typescript
-import { CapacitorNeon } from '@capgo/capacitor-neon';
-
-await CapacitorNeon.initialize({
-  authUrl: 'https://ep-xxx.neonauth.us-east-2.aws.neon.tech/neondb/auth',
-  dataApiUrl: 'https://ep-xxx.apirest.us-east-2.aws.neon.tech/neondb/rest/v1'
-});
-```
-
-## Example: signInWithPassword
-
-```typescript
-import { CapacitorNeon } from '@capgo/capacitor-neon';
-
-const { session, user } = await CapacitorNeon.signInWithPassword({
-  email: 'user@example.com',
-  password: 'password123'
-});
-console.log('Signed in', user?.id, Boolean(session?.accessToken));
-```
-
-## Example: signUp
-
-```typescript
-import { CapacitorNeon } from '@capgo/capacitor-neon';
-
-const { session, user } = await CapacitorNeon.signUp({
-  email: 'newuser@example.com',
-  password: 'password123',
-  name: 'John Doe'
-});
-```
-
 ## Common pitfalls
 
 - **Listeners**: remove handles when screens unmount.
 - **Initialize once**: run setup during app bootstrap.
-- **OAuth redirects**: Neon Auth only redirects to `http` or `https` URLs on a trusted domain, so `myapp://` callbacks are rejected. Use a Universal Link or App Link, or a page on a trusted domain that forwards the `neon_auth_session_verifier` query parameter to your app's URL scheme.
+- **OAuth redirects**: Neon Auth only accepts trusted `https` URLs for `redirectTo` (plain `http` only for local testing on trusted localhost). Custom URL schemes are rejected. Use a Universal Link or App Link, or a trusted HTTPS page that forwards the `neon_auth_session_verifier` query parameter to your app's URL scheme.
 - **Source of truth**: trust [`src/definitions.ts`](https://github.com/Cap-go/capacitor-neon/blob/main/src/definitions.ts) in the GitHub repo.
-
-## Android Minimum SDK
-
-The Android implementation works with the Capacitor 8 default of Android 7.0. Keep `minSdkVersion = 24` or newer in `android/variables.gradle`.
 
 ## Initialize The Client
 
@@ -113,6 +74,28 @@ const { session, user } = await CapacitorNeon.signInWithPassword({
 
 console.log('User', user?.id);
 console.log('JWT available', Boolean(session?.accessToken));
+```
+
+## Sign Up
+
+If **Verify email at sign-up** is enabled for your branch, `signUp()` returns no session until the user confirms the emailed code.
+
+```ts
+import { CapacitorNeon } from '@capgo/capacitor-neon';
+
+const { session } = await CapacitorNeon.signUp({
+  email: 'newuser@example.com',
+  password: 'password123',
+  name: 'John Doe',
+});
+
+if (!session) {
+  await CapacitorNeon.verifyOtp({
+    email: 'newuser@example.com',
+    token: '123456',
+    type: 'signup',
+  });
+}
 ```
 
 ## Listen For Auth Changes

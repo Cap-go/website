@@ -3,7 +3,7 @@ locale: en
 ---
 # Using @capgo/capacitor-neon
 
-Capacitor Neon Plugin for native Neon Auth and Data API integration.
+Capacitor Neon Plugin for native iOS and Android Neon Auth and Data API integration. For web apps, use `@neondatabase/neon-js`.
 
 ## Install
 
@@ -45,7 +45,9 @@ import { CapacitorNeon } from '@capgo/capacitor-neon';
 
 ### `initialize()`
 
-Initialize the Neon client with your branch URLs. Must be called before any other methods.
+Enable **Neon Auth** on your Neon branch first, then copy the Auth URL and Data API URL from the Console. Enable the **Data API** too if you use the database helpers. See [Getting started](/docs/plugins/neon/getting-started/#neon-setup) for the full setup steps.
+
+Initialize the Neon client with those URLs. Must be called before any other methods.
 
 ```typescript
 import { CapacitorNeon } from '@capgo/capacitor-neon';
@@ -98,6 +100,8 @@ const { token, expiresAt } = await CapacitorNeon.getAnonymousToken();
 
 Sign in with an OAuth provider. Opens the provider's authentication page.
 
+On iOS, set `redirectTo` to a trusted `https` Universal Link that opens your app directly. On Android, use a trusted `https` App Link. Neon Auth rejects custom URL schemes as `redirectTo`. If you use a custom URL scheme on either platform, set `redirectTo` to a trusted HTTPS bounce page URL that forwards `neon_auth_session_verifier` to your app. See [Getting started](/docs/plugins/neon/getting-started/) for platform OAuth setup.
+
 ```typescript
 import { CapacitorNeon } from '@capgo/capacitor-neon';
 
@@ -107,7 +111,7 @@ await CapacitorNeon.signInWithOAuth({
 });
 ```
 
-`redirectTo` must be an `http` or `https` URL on a trusted domain in Neon Auth that opens your app.
+`redirectTo` must be an `https` URL on a trusted domain in Neon Auth that opens your app. Plain `http` is only for local testing on trusted localhost.
 
 ### `signInWithOtp()`
 

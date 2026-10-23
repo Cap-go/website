@@ -154,5 +154,6 @@
   "@capgo/capacitor-brightness": 81513,
   "@capgo/capacitor-light-sensor": 80550,
   "@capgo/capacitor-video-thumbnails": 80601,
-  "@capgo/capacitor-intent-launcher": 89130
+  "@capgo/capacitor-intent-launcher": 89130,
+  "@capgo/capacitor-neon": 0
 }

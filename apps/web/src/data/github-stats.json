@@ -1,8 +1,8 @@
 {
-  "repositoryCount": 142,
+  "repositoryCount": 143,
   "contributorCount": 604,
-  "versionCount": 16106,
-  "releaseCount": 6936,
+  "versionCount": 16107,
+  "releaseCount": 6937,
   "closedIssueCount": 1753,
   "mergedPullRequestCount": 9202,
   "resolvedItemCount": 10955,
@@ -916,6 +916,15 @@
       "releases": 20,
       "closedIssues": 2,
       "mergedPullRequests": 12
+    },
+    "Cap-go/capacitor-neon": {
+      "url": "https://github.com/Cap-go/capacitor-neon",
+      "stars": 0,
+      "contributors": 1,
+      "versionTags": 1,
+      "releases": 1,
+      "closedIssues": 0,
+      "mergedPullRequests": 0
     },
     "Cap-go/capacitor-incoming-call-kit": {
       "url": "https://github.com/Cap-go/capacitor-incoming-call-kit",
