@@ -18,8 +18,6 @@ export type Scene = {
   html: string
 }
 
-const pluginCount = `${Math.floor(actions.length / 10) * 10}+`
-
 // ---- Timeline helpers -------------------------------------------------------------------------------------------
 
 /** One CSS animation entry: keyframes `name` starting at `at` seconds, held before and after. */
