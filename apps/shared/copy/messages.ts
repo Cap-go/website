@@ -295,7 +295,8 @@ const messages = {
   signup_cta_lead_build_without_mac: 'Build and sign your Capacitor iOS app on Capgo cloud Macs.',
   solutions_builder_to_mobile_badge: 'For {builder} builders: no Mac, no Xcode',
   solutions_builder_to_mobile_cta_subtitle: 'Start the 14-day free trial, export your {builder} project, and request your first iOS and Android builds from the CLI.',
-  solutions_builder_to_mobile_cta_subtitle_direct: 'Pick a plan with a 14-day money-back guarantee, export your {builder} project, and request your first iOS and Android builds from the CLI.',
+  solutions_builder_to_mobile_cta_subtitle_direct:
+    'Pick a plan with a 14-day money-back guarantee, export your {builder} project, and request your first iOS and Android builds from the CLI.',
   solutions_builder_to_mobile_cta_title: 'Put your {builder} app in the stores',
   solutions_builder_to_mobile_description:
     'Turn your {builder} app into iOS and Android apps. Export the code, wrap it with Capacitor, build store apps without a Mac, and ship live updates.',
@@ -2673,7 +2674,7 @@ const messages = {
     'With end-to-end encryption enabled, bundles are encrypted with your keys before upload. Capgo stores ciphertext and cannot read the contents; only your app can decrypt what you ship.',
   live_update_faq_q5: "Does Apple's remote code execution rule apply to Capgo live updates?",
   live_update_faq_a5:
-    'No. App Review Guideline 2.5.2 forbids downloading, installing, or executing code that introduces or changes features or functionality. Apple still allows interpreted JavaScript, HTML, and CSS under the Apple Developer Program License Agreement section 3.3.1(B) when it does not change your app\'s primary purpose, bypass OS security, or create a storefront. Capgo only swaps those web assets inside the WebView or JavaScriptCore engine you already ship. It does not download native binaries, dynamic libraries, or bytecode, and it is not a Guideline 4.7 mini app platform. Native plugin, permission, and entitlement changes still require a store-reviewed binary.',
+    'Capgo is designed for the interpreted web layer, not for downloading executable native code after review. App Review Guideline 2.5.2 forbids code that introduces or changes features or functionality, while Apple Developer Program License Agreement section 3.3.1(B) still permits interpreted JavaScript, HTML, and CSS when your app keeps the same primary purpose, respects OS security, and does not become a storefront. Capgo swaps signed web assets inside the WebView or JavaScriptCore engine you already ship. It does not deliver native binaries or dynamic libraries. If your app advertises a catalog of mini apps or similar software not embedded in the binary, Guideline 4.7 may apply and you should review those rules with counsel. Native plugin, permission, and entitlement changes still require a store-reviewed binary.',
   live_update_dynamic_bullet1_prefix: 'Add an in-app “Update Track” menu: list channels and let testers jump from',
   live_update_dynamic_bullet1_suffix: 'in seconds (no reinstall).',
   live_update_dynamic_bullet2: 'Spin up a pull-request channel per feature, route QA or beta users there, then snap them back to prod when approved.',
@@ -4117,7 +4118,8 @@ const messages = {
   solutions_webapp_to_mobile_prompt_copy: 'Copy prompt',
   solutions_webapp_to_mobile_cta_primary: 'See the steps',
   solutions_webapp_to_mobile_cta_subtitle: 'Start the 14-day free trial, wrap your app with Capacitor, and request your first iOS and Android builds from the CLI.',
-  solutions_webapp_to_mobile_cta_subtitle_direct: 'Pick a plan with a 14-day money-back guarantee, wrap your app with Capacitor, and request your first iOS and Android builds from the CLI.',
+  solutions_webapp_to_mobile_cta_subtitle_direct:
+    'Pick a plan with a 14-day money-back guarantee, wrap your app with Capacitor, and request your first iOS and Android builds from the CLI.',
   solutions_webapp_to_mobile_cta_title: 'Put your web app in the stores',
   solutions_webapp_to_mobile_description:
     'Wrap your existing web app with Capacitor, build signed iOS and Android apps with Capgo Build, publish to the App Store and Google Play, and ship web changes as live updates.',
@@ -5739,7 +5741,7 @@ const messages = {
     "Apps may download interpreted code if it doesn't change the app's primary purpose, create a storefront for other code or apps, or bypass signing, the sandbox, or other OS security features.",
   store_policy_rce_title: 'Apple remote code reviews and Capgo',
   store_policy_rce_body:
-    'Apple enforces Guideline 2.5.2 against apps that download code to add or change functionality after review, including dynamic native loading and remote scripts that call private APIs. Capgo is outside that scope: it delivers signed JavaScript, HTML, CSS, and assets to the interpreter already embedded in your Capacitor app, which section 3.3.1(B) of the Apple Developer Program License Agreement explicitly allows.',
+    'Apple enforces Guideline 2.5.2 against apps that download code to add or change functionality after review, including dynamic native loading and remote scripts that call private APIs. Capgo is designed to deliver signed JavaScript, HTML, CSS, and assets only to the interpreter already embedded in your Capacitor app, within the interpreted-code conditions in section 3.3.1(B) of the Apple Developer Program License Agreement. Your team must still keep each update inside the app purpose you submitted for review.',
   store_policy_rce_link: 'Read how Capgo fits Apple and Google rules',
   store_policy_apple_label: 'Apple Developer Program License Agreement',
   store_policy_eyebrow: 'App Store & Google Play',

@@ -86,17 +86,28 @@ const rules = [
             </div>
             <p class="mt-4 text-sm leading-6 text-gray-300">{policy.body}</p>
             <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-              <a href={policy.explainedHref} class="inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!">
+              <a
+                href={policy.explainedHref}
+                class="inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"
+              >
                 {m.store_policy_explained_link({}, { locale })}
                 <span class="sr-only">: {policy.store}</span>
                 <span aria-hidden="true">→</span>
               </a>
-              <a href={policy.stacksHref} class="inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!">
+              <a
+                href={policy.stacksHref}
+                class="inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"
+              >
                 {m.store_policy_stacks_link({}, { locale })}
                 <span class="sr-only">: {policy.store}</span>
                 <span aria-hidden="true">→</span>
               </a>
-              <a href={policy.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!">
+              <a
+                href={policy.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"
+              >
                 {m.store_policy_official_link({}, { locale })}
                 <span class="sr-only">: {policy.store}</span>
                 <span aria-hidden="true">↗</span>

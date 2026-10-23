@@ -176,7 +176,7 @@ Use live updates only for web-layer changes that remain within the store rules a
 
 ### Apple remote code execution and Capgo
 
-Apple has stepped up enforcement of apps that can change behavior after App Review. The published rules are not new for Capacitor teams, but the language reviewers use in rejection emails often mentions **Guideline 2.5.2** and **Apple Developer Program License Agreement section 3.3.1(B)** together. Understanding both is what separates a compliant live update workflow from a remote code risk.
+Review teams often cite **Guideline 2.5.2** and **Apple Developer Program License Agreement section 3.3.1(B)** together when they believe an app can change behavior after App Review. Understanding both helps you separate a compliant Capacitor live update workflow from a remote code risk. This section summarizes how Capgo fits those published rules; it is not legal advice.
 
 #### What Apple prohibits (Guideline 2.5.2)
 
@@ -199,13 +199,13 @@ The [Apple Developer Program License Agreement](https://developer.apple.com/supp
 2. does not bypass signing, sandbox, or other security features of the operating system, and
 3. for App Store apps, does not create a store or storefront for other applications.
 
-Capacitor apps already rely on this exception. The native shell you submit to the App Store embeds WebKit or JavaScriptCore. Live updates that refresh the web bundle inside that shell stay on the interpreted-code path when each release keeps the same product purpose you disclosed to Apple.
+The native shell you submit to the App Store embeds WebKit or JavaScriptCore. Live updates that refresh the web bundle inside that shell are intended to stay on the interpreted-code path when each release keeps the same product purpose you disclosed to Apple and meets the three conditions above.
 
-#### Guideline 4.7 is a different scenario
+#### When Guideline 4.7 may apply
 
-In [November 2025](https://developer.apple.com/news/?id=ey6d8onl), Apple clarified [Guideline 4.7](https://developer.apple.com/app-store/review/guidelines/#third-party-software) for apps that offer HTML5 and JavaScript mini apps, mini games, chatbots, plug-ins, and similar software that is not embedded in the binary. Those apps must catalog third-party experiences and follow additional rules (including age restriction for software above the app's rating).
+In [November 2025](https://developer.apple.com/news/?id=ey6d8onl), Apple clarified [Guideline 4.7](https://developer.apple.com/app-store/review/guidelines/#third-party-software) for apps that offer HTML5 and JavaScript mini apps, mini games, chatbots, plug-ins, and similar software that is not embedded in the binary. Ownership of the software does not determine whether 4.7 applies. What matters is the experience you advertise: if people can discover, launch, or switch between multiple distinct software experiences inside your app, you may need to meet the extra 4.7 rules (catalog indexing, age restriction for content above your rating, and related requirements).
 
-Capgo does not turn your Capacitor app into an open mini app store. You ship bundles for **your** app, signed for **your** channels, consumed only by **your** users. That is the same OTA pattern Ionic and Capacitor teams have used for years, not a 4.7 software marketplace.
+Capgo is an update mechanism. It does not by itself make your app a 4.7 host, but it can deliver bundles to different channels. If your product behaves like a mini app platform or white-label host, work with counsel to confirm your App Store positioning and disclosures before relying on OTA delivery.
 
 #### How Capgo maps to the rules
 
@@ -224,7 +224,7 @@ Capgo does not turn your Capacitor app into an open mini app store. You ship bun
 - Upload a new binary when you add plugins, permissions, entitlements, or native dependencies.
 - Document live updates in App Review notes when reviewers ask how your app updates itself.
 
-Capgo helps teams ship web-layer fixes in minutes while keeping native releases on the store review path. No update tool can guarantee Apple approval, but staying inside 3.3.1(B) and 2.5.2 is exactly how Capgo is designed to operate.
+Capgo helps teams ship web-layer fixes in minutes while keeping native releases on the store review path. No update tool can guarantee Apple approval. Review the Apple guidelines and license terms for your app, and consult counsel when in doubt.
 
 ### Your Responsibilities
 
