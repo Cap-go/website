@@ -45,7 +45,7 @@ import { CapacitorNeon } from '@capgo/capacitor-neon';
 
 ### `initialize()`
 
-Enable **Neon Auth** and the **Data API** on your Neon branch first, then copy the Auth URL and Data API URL from the Console. See [Getting started](/docs/plugins/neon/getting-started/#neon-setup) for the full setup steps.
+Enable **Neon Auth** on your Neon branch first, then copy the Auth URL and Data API URL from the Console. Enable the **Data API** too if you use the database helpers. See [Getting started](/docs/plugins/neon/getting-started/#neon-setup) for the full setup steps.
 
 Initialize the Neon client with those URLs. Must be called before any other methods.
 
