@@ -98,7 +98,7 @@ Whether your app can ship over-the-air updates on iOS depends on one question: i
 
 | Stack | How the code runs on iOS | Live updates allowed? | Tooling |
 | --- | --- | --- | --- |
-| **Capacitor** | JavaScript, HTML, CSS in WKWebView (WebKit) | Yes | [Capgo](/live-update/), Ionic Appflow |
+| **Capacitor** | JavaScript, HTML, CSS in WKWebView (WebKit) | Yes | [Capgo](/live-update/) |
 | **Ionic** (on Capacitor) | Same as Capacitor | Yes | [Capgo](/live-update/) |
 | **Cordova** | JavaScript in WKWebView | Yes | [Capgo after migrating to Capacitor](/solutions/cordova-to-capacitor/), legacy Cordova plugins |
 | **React Native / Expo** | JavaScript bundle on Hermes or JavaScriptCore | Yes, JavaScript only | Expo Updates, self-hosted CodePush alternatives |
@@ -112,7 +112,7 @@ Whether your app can ship over-the-air updates on iOS depends on one question: i
 
 ### Capacitor, Ionic and Cordova: fully covered
 
-Your entire UI and business logic is JavaScript running in WKWebView, Apple's own WebKit engine. Apple's rules were written with exactly this case in mind, and guideline 4.7 explicitly accepts HTML5 and JavaScript content not embedded in the binary.
+Your app's web UI and JavaScript business logic run in `WKWebView`, while the native shell and plugins remain native. Apple's Developer Program License Agreement section 3.3.1(B) permits downloaded interpreted code only when it preserves the app's primary purpose, does not create a code storefront, and does not bypass OS security. Guideline 4.7 separately governs apps offering HTML5 and JavaScript mini apps and adds additional requirements.
 
 A live update replaces the web bundle. The native shell, plugins and permissions stay the ones Apple reviewed. That is why Capgo is compliant by design: it cannot change native code even if you wanted it to. New native plugins or permissions still need an App Store release.
 

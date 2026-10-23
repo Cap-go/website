@@ -94,7 +94,7 @@ Whether your app can ship over-the-air updates on Android depends on one questio
 
 | Stack | How the code runs on Android | Live updates allowed? | Tooling |
 | --- | --- | --- | --- |
-| **Capacitor** | JavaScript, HTML, CSS in the Android WebView | Yes | [Capgo](/live-update/), Ionic Appflow |
+| **Capacitor** | JavaScript, HTML, CSS in the Android WebView | Yes | [Capgo](/live-update/) |
 | **Ionic** (on Capacitor) | Same as Capacitor | Yes | [Capgo](/live-update/) |
 | **Cordova** | JavaScript in the Android WebView | Yes | [Capgo after migrating to Capacitor](/solutions/cordova-to-capacitor/), legacy Cordova plugins |
 | **React Native / Expo** | JavaScript bundle on Hermes | Yes, JavaScript only | Expo Updates, self-hosted CodePush alternatives |
