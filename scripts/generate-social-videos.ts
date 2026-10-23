@@ -1,7 +1,7 @@
 /**
  * Render the og:video motion pieces for the landing and product pages into apps/web/public/social/videos/.
  * Scenes live in scripts/social-videos/scenes.ts (storyboards) and stage.css (shared look). Each scene is loaded in
- * headless Chromium, every CSS animation is paused and seeked to the frame time, and the frames are encoded to a
+ * headless Chromium, every CSS animation is paused and moved to the frame time, and the frames are encoded to a
  * muted H.264 MP4 that autoplays in X, LinkedIn, Slack, and iMessage previews.
  * Pages pick these files up through apps/web/src/config/ogVideos.ts.
  * Usage: bun run generate:social-videos [slug ...]
