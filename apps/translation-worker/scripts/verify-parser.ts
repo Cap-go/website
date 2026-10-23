@@ -185,6 +185,14 @@ const ownedPlaceholder = __translationWorkerTest.protectTranslationTokens('Deplo
 assert(ownedPlaceholder.text.includes('__CAPGO_KEEP_0__'), 'Capgo was not protected in the fixture')
 const crossSegment = ownedPlaceholder.restoreOrSource('Déployer avec __CAPGO_KEEP_0__ __CAPGO_KEEP_1__')
 assert(crossSegment.text === 'Deploy with Capgo' && crossSegment.missingTokens.join() === 'stray placeholder', 'A placeholder from another segment reached the page')
+const cliCommand = __translationWorkerTest.protectTranslationTokens('npx @capgo/cli bundle upload')
+assert(cliCommand.text === 'npx __CAPGO_KEEP_0__ bundle upload', 'An npm package name was split into several placeholders')
+assert(cliCommand.restoreOrSource('npx ____CAPGO_KEEP_0__ bundle upload').text === 'npx @capgo/cli bundle upload', 'Extra underscores around a placeholder leaked into the page')
+assert(__translationWorkerTest.protectTranslationTokens('capgo bundle upload').text === '__CAPGO_KEEP_0__', 'A Capgo CLI command was sent for translation')
+assert(
+  __translationWorkerTest.protectTranslationTokens('Ship with Capgo app today').text === 'Ship with __CAPGO_KEEP_0__ app today',
+  'Capitalised prose was treated as a CLI command',
+)
 assert(__translationWorkerTest.translationStyleGuide('French').includes('channel -> canal'), 'French prompt lost its glossary')
 assert(!__translationWorkerTest.translationStyleGuide('German').includes('channel -> canal'), 'French glossary leaked into another language')
 assert(

@@ -57,7 +57,10 @@
         "max_batch_timeout": 1,
         "max_retries": 3,
         "retry_delay": 15,
-        "max_concurrency": 4,
+        // Each job runs one page batch at a time (Gemma draft, then DeepSeek review,
+        // 30-60 s). 12 + 6 concurrent jobs stays under the 50 requests/minute
+        // DeepSeek cap that prepaid AI Gateway credits allow.
+        "max_concurrency": 12,
       },
       {
         "queue": "capgo-translation-refresh",
@@ -65,7 +68,7 @@
         "max_batch_timeout": 1,
         "max_retries": 3,
         "retry_delay": 60,
-        "max_concurrency": 2,
+        "max_concurrency": 6,
       },
     ],
   },
