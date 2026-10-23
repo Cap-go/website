@@ -34,6 +34,18 @@ bunx cap sync
 
 Neon Auth only accepts requests from trusted origins. Localhost is trusted by default, and the plugin sends `Origin: https://localhost`, so a new branch works without changes. If you turn off localhost, add one of your domains as a trusted domain and pass it as `origin` to `initialize()`.
 
+## iOS setup
+
+No additional setup is required for email and OTP sign-in. The plugin uses URLSession and the Keychain, with no third-party dependencies.
+
+For OAuth, set up a Universal Link or a custom URL scheme for the `redirectTo` URL you pass to `signInWithOAuth()`.
+
+## Android setup
+
+No additional setup is required for email and OTP sign-in. The plugin works with the Capacitor 8 default minimum SDK of 24 (Android 7.0).
+
+For OAuth, set up an App Link or a custom URL scheme for the `redirectTo` URL you pass to `signInWithOAuth()`.
+
 ## Quick start
 
 ```typescript
@@ -54,7 +66,7 @@ const { session, user } = await CapacitorNeon.signInWithPassword({
   email: 'user@example.com',
   password: 'password123'
 });
-console.log('JWT:', session?.accessToken);
+console.log('Signed in', user?.id, Boolean(session?.accessToken));
 ```
 
 ## Example: signUp
@@ -74,7 +86,7 @@ const { session, user } = await CapacitorNeon.signUp({
 - **Listeners**: remove handles when screens unmount.
 - **Initialize once**: run setup during app bootstrap.
 - **OAuth redirects**: Neon Auth only redirects to `http` or `https` URLs on a trusted domain, so `myapp://` callbacks are rejected. Use a Universal Link or App Link, or a page on a trusted domain that forwards the `neon_auth_session_verifier` query parameter to your app's URL scheme.
-- **Source of truth**: trust `src/definitions.ts` in the GitHub repo.
+- **Source of truth**: trust [`src/definitions.ts`](https://github.com/Cap-go/capacitor-neon/blob/main/src/definitions.ts) in the GitHub repo.
 
 ## Android Minimum SDK
 
@@ -111,12 +123,19 @@ const listener = await CapacitorNeon.addListener('authStateChange', ({ event, se
   console.log('Current JWT available', Boolean(session?.accessToken));
 });
 
-await listener.remove();
+// Call listener.remove() when the screen unmounts.
 ```
 
 ## Pair Native Auth With neon-js
 
+Install the JavaScript client when you use this pattern:
+
+```bash
+bun add @neondatabase/neon-js
+```
+
 ```ts
+import { CapacitorNeon } from '@capgo/capacitor-neon';
 import { createClient } from '@neondatabase/neon-js';
 
 const neon = createClient({
@@ -127,7 +146,7 @@ const neon = createClient({
 });
 
 const { data } = await neon.from('table').select('*');
-console.log(data);
+console.log('Row count', data?.length ?? 0);
 ```
 
 ## Native Database Helpers
@@ -142,7 +161,11 @@ const { data, error } = await CapacitorNeon.select({
   ascending: false,
 });
 
-console.log(data, error);
+if (error) {
+  console.error('Select failed', error);
+} else {
+  console.log('Rows returned', data?.length ?? 0);
+}
 ```
 
 When no one is signed in, the database helpers use an anonymous Data API token, so row-level security policies for the `anonymous` role apply.

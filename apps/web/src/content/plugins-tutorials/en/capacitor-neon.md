@@ -67,7 +67,7 @@ const { session, user } = await CapacitorNeon.signInWithPassword({
   email: 'user@example.com',
   password: 'password123'
 });
-console.log('JWT:', session?.accessToken);
+console.log('Signed in', user?.id, Boolean(session?.accessToken));
 ```
 
 ### `signUp()`
@@ -137,4 +137,5 @@ The table above lists the 16 core methods. Listener and version helpers, and the
 
 - [GitHub repository](https://github.com/Cap-go/capacitor-neon/)
 - [Documentation](/docs/plugins/neon/)
-- [API reference](/docs/plugins/neon/getting-started/)
+- [TypeScript API (`definitions.ts`)](https://github.com/Cap-go/capacitor-neon/blob/main/src/definitions.ts)
+- [Getting started](/docs/plugins/neon/getting-started/)
