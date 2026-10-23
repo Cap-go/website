@@ -917,6 +917,15 @@
       "closedIssues": 2,
       "mergedPullRequests": 12
     },
+    "Cap-go/capacitor-neon": {
+      "url": "https://github.com/Cap-go/capacitor-neon",
+      "stars": 0,
+      "contributors": 1,
+      "versionTags": 1,
+      "releases": 1,
+      "closedIssues": 0,
+      "mergedPullRequests": 0
+    },
     "Cap-go/capacitor-incoming-call-kit": {
       "url": "https://github.com/Cap-go/capacitor-incoming-call-kit",
       "stars": 5,
