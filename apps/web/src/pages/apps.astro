@@ -195,7 +195,7 @@ const linkClass = 'inline-flex items-center justify-center rounded-lg px-4 py-2 
           <p class="mt-3 text-gray-300">{m.oss_apps_section_lede({}, { locale })}</p>
         </div>
 
-        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
           {apps.map((app) => (
             <article class="overflow-hidden rounded-lg border border-gray-700/80 bg-gray-950/45">
               <div class="grid grid-cols-2 gap-2 bg-gray-950/80 p-3">
@@ -218,6 +218,21 @@ const linkClass = 'inline-flex items-center justify-center rounded-lg px-4 py-2 
                 </div>
                 <h3 class="font-pj text-2xl font-bold text-white">{app.name}</h3>
                 <p class="mt-3 leading-relaxed text-gray-300">{app.summary}</p>
+                <div class="mt-5">
+                  <h4 class="text-sm font-semibold text-white">{m.oss_apps_plugins_label({}, { locale })}</h4>
+                  <ul class="mt-2 flex flex-wrap gap-1.5">
+                    {app.plugins.map((plugin) => (
+                      <li>
+                        <a
+                          href={getRelativeLocaleUrl(locale, `plugins/${plugin.slug}`)}
+                          class="inline-flex min-h-8 items-center rounded-full border border-gray-600 px-2.5 text-xs font-medium text-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300 [@media(hover:hover)]:hover:border-blue-300/70 [@media(hover:hover)]:hover:text-white"
+                        >
+                          {plugin.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <p class="mt-3 truncate font-mono text-xs text-gray-400">{app.repo}</p>
                 <div class="mt-5 flex flex-wrap gap-2">
                   <a
