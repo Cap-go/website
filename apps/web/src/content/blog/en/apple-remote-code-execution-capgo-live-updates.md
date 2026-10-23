@@ -21,7 +21,7 @@ next_blog: do-apple-allow-live-updates
 faq:
   - question: Does Apple's remote code execution rule ban Capgo?
     answer: >-
-      No for typical Capacitor use. Guideline 2.5.2 blocks downloading or executing
+      For typical Capacitor use, Capgo stays on the interpreted-code path. Guideline 2.5.2 blocks downloading or executing
       code that introduces or changes app features after review, especially native
       code and dynamic loading. Capgo delivers signed JavaScript, HTML, CSS, and
       assets into the WebView or JavaScriptCore engine already in your binary, which
