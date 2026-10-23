@@ -38,13 +38,13 @@ Neon Auth only accepts requests from trusted origins. Localhost is trusted by de
 
 No additional setup is required for email and OTP sign-in. The plugin uses URLSession and the Keychain, with no third-party dependencies.
 
-For OAuth, set up a Universal Link or a custom URL scheme for the `redirectTo` URL you pass to `signInWithOAuth()`.
+For OAuth, set `redirectTo` to a trusted `https` Universal Link that opens your app. Neon Auth rejects custom URL schemes as `redirectTo`. If you use a custom scheme in the app, host a trusted HTTPS callback page that forwards the `neon_auth_session_verifier` query parameter to that scheme.
 
 ## Android setup
 
 No additional setup is required for email and OTP sign-in. The plugin works with the Capacitor 8 default minimum SDK of 24 (Android 7.0).
 
-For OAuth, set up an App Link or a custom URL scheme for the `redirectTo` URL you pass to `signInWithOAuth()`.
+For OAuth, set `redirectTo` to a trusted `https` App Link that opens your app. Neon Auth rejects custom URL schemes as `redirectTo`. If you use a custom scheme in the app, host a trusted HTTPS callback page that forwards the `neon_auth_session_verifier` query parameter to that scheme.
 
 ## Quick start
 
