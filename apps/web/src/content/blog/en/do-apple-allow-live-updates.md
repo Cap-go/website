@@ -36,7 +36,7 @@ faq:
       Frameworks whose app logic is interpreted code: Capacitor, Cordova and Ionic (JavaScript in WebKit), React Native and Expo (JavaScript bundle), and NativeScript. Flutter needs a third-party interpreter such as Shorebird. Native Swift, Objective-C, .NET MAUI and Kotlin Multiplatform apps cannot update their code over the air.
   - question: Can a native Swift app use live updates?
     answer: >-
-      Not for code. Swift compiles to machine code, and Apple forbids downloading native code. A Swift app can still update data, remote config, images and server-driven UI, but new logic needs an App Store release.
+      Not for native code. Swift compiles to machine code, and Apple forbids downloading replacement native code. A Swift app can still download and run interpreted code, such as JavaScript through JavaScriptCore, when it meets Apple's conditions. It can also update data, remote config, images and server-driven UI, but new native logic needs an App Store release.
   - question: Can Flutter apps use live updates on iOS?
     answer: >-
       Not out of the box. Flutter compiles Dart ahead of time to native code on iOS. Shorebird adds a Dart interpreter for patched code so updates run as interpreted code, which is how it stays inside Apple's rules.
@@ -104,7 +104,7 @@ Whether your app can ship over-the-air updates on iOS depends on one question: i
 | **React Native / Expo** | JavaScript bundle on Hermes or JavaScriptCore | Yes, JavaScript only | Expo Updates, self-hosted CodePush alternatives |
 | **NativeScript** | JavaScript on an embedded engine | Yes, JavaScript only | Limited, mostly self-built |
 | **Flutter** | Dart compiled AOT to machine code | Only through an interpreter | Shorebird (Dart interpreter for patches) |
-| **Native Swift / Objective-C** | Machine code | No | Remote config and server-driven UI only |
+| **Native Swift / Objective-C** | Machine code | No for native code; yes for JavaScript in WebKit or JavaScriptCore | Remote config and server-driven UI |
 | **.NET MAUI / Xamarin** | C# compiled AOT to machine code | No | Remote config only |
 | **Kotlin / Compose Multiplatform** | Kotlin/Native compiled to machine code | No | Remote config only |
 | **Unity / Unreal** | C# via IL2CPP or C++, compiled | No for code, yes for content | Asset bundles, scripted content (Lua) |
@@ -126,9 +126,9 @@ Any change to native modules, the React Native version, or `Info.plist` needs a 
 
 On iOS, Flutter compiles Dart ahead of time to ARM machine code. Downloading new machine code is forbidden, so stock Flutter cannot use live updates. Shorebird solves this by running patched Dart code in an interpreter, which brings it under the interpreted code exception. Read more in [live updates for Flutter apps](/blog/live-updates-for-flutter-app/).
 
-### Native Swift, .NET MAUI, Kotlin Multiplatform: no code updates
+### Native Swift, .NET MAUI, Kotlin Multiplatform: no native code updates
 
-These stacks produce machine code. There is no compliant way to download new logic. What you can do over the air is change data: remote config, feature flags for features already reviewed, server-driven UI, images and copy.
+These stacks produce native machine code. They cannot download replacement native code. A native app may still download and execute interpreted code, such as JavaScript through JavaScriptCore, when it meets Apple's conditions. What you can also do over the air is change data: remote config, feature flags for features already reviewed, server-driven UI, images and copy.
 
 ### Unity and game engines: content yes, code no
 

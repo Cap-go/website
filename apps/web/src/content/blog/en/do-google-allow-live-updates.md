@@ -36,7 +36,7 @@ faq:
       Frameworks whose app logic is interpreted code: Capacitor, Cordova and Ionic (JavaScript in the WebView), React Native and Expo (JavaScript bundle), and NativeScript. Flutter relies on Shorebird, which runs patches through the Dart VM. Native Kotlin and Java apps cannot download new code outside Google Play.
   - question: Can a Kotlin or Java app use live updates?
     answer: >-
-      Not for code. Google Play bans downloading dex, JAR or .so files from outside Google Play. Native apps can use remote config, server-driven UI, or Play Feature Delivery, which downloads modules through Google Play itself.
+      Not for native code. Google Play bans downloading dex, JAR or .so files from outside Google Play. A Kotlin or Java app that hosts a WebView can update its JavaScript, HTML and CSS. Other native apps can use remote config, server-driven UI, or Play Feature Delivery, which downloads modules through Google Play itself.
   - question: Can Flutter apps use live updates on Android?
     answer: >-
       Stock Flutter cannot, because Dart is compiled to a native library. Shorebird adds code push and states it complies with Google Play policy by running updates in the Dart virtual machine. Check its documentation for the current approach.
@@ -106,7 +106,7 @@ Whether your app can ship over-the-air updates on Android depends on one questio
 | **React Native / Expo** | JavaScript bundle on Hermes | Yes, JavaScript only | Expo Updates, self-hosted CodePush alternatives |
 | **NativeScript** | JavaScript on V8 | Yes, JavaScript only | Limited, mostly self-built |
 | **Flutter** | Dart compiled AOT into a native library | Only through a VM or interpreter | Shorebird |
-| **Native Kotlin / Java** | dex bytecode on ART | No | Remote config, Play Feature Delivery |
+| **Native Kotlin / Java** | dex bytecode on ART | No for native code; yes for JavaScript in a WebView | Remote config, Play Feature Delivery |
 | **Kotlin / Compose Multiplatform** | dex bytecode on ART | No | Remote config, Play Feature Delivery |
 | **.NET MAUI / Xamarin** | .NET runtime plus native libraries shipped in the APK | No | Remote config only |
 | **Unity / Unreal** | C# via IL2CPP or C++, compiled | No for code, yes for content | Asset bundles, Play Asset Delivery, scripted content (Lua) |
@@ -128,7 +128,7 @@ Flutter compiles Dart ahead of time into `libapp.so`. Downloading a new `.so` is
 
 ### Native Kotlin, Java and Kotlin Multiplatform: no code updates
 
-Loading downloaded dex or JAR files with `DexClassLoader` is the exact behavior the policy bans. Google's own alternative is [Play Feature Delivery](https://developer.android.com/guide/playcore/feature-delivery), which downloads code modules through Google Play. Outside of that, you are limited to remote config, feature flags and server-driven UI.
+Loading downloaded dex or JAR files with `DexClassLoader` is the exact behavior the policy bans. Google's own alternative is [Play Feature Delivery](https://developer.android.com/guide/playcore/feature-delivery), which downloads code modules through Google Play. Otherwise, native code cannot change. A Kotlin or Java app that hosts JavaScript in a WebView can still update that code, because the policy exempts interpreted code. Other native logic is limited to remote config, feature flags and server-driven UI.
 
 ### Unity and game engines: content yes, code no
 
@@ -136,7 +136,7 @@ Game code is compiled. Asset bundles and Play Asset Delivery handle content, and
 
 ### Web wrappers and Trusted Web Activities: live by nature
 
-A Trusted Web Activity or WebView wrapper loads your website, so it updates every time you deploy. Google Play accepts TWAs. You lose offline support and native plugins, which is where a bundled Capacitor app with live updates fits better.
+A Trusted Web Activity or WebView wrapper loads your website, so it updates every time you deploy. Google Play accepts TWAs. Offline caching and native bridges depend on what that wrapper implements: a TWA can use your PWA service worker, and a WebView shell can expose JavaScript bridges if you build them. A bundled Capacitor app ships the web bundle in the APK and adds a consistent plugin layer for live updates.
 
 ### What no stack can do on Android
 
