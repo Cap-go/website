@@ -1,0 +1,601 @@
+/* Shared look for the og:video motion pieces. Every animation is a CSS animation whose delay is its position on the
+   timeline: the renderer pauses them all and seeks currentTime frame by frame, so nothing here depends on wall time. */
+@font-face {
+  font-family: Satoshi;
+  src: url('../../apps/web/public/fonts/satoshi/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+}
+
+:root {
+  --accent: #3b82f6;
+  --accent-2: #8b5cf6;
+  --good: #22c55e;
+  --bad: #ef4444;
+  --ink: #f8fafc;
+  --muted: #94a3b8;
+  --panel: #0b1222;
+  --line: rgba(255, 255, 255, 0.1);
+  --snap: cubic-bezier(0.2, 1.4, 0.3, 1);
+  --out: cubic-bezier(0.16, 1, 0.3, 1);
+  --mono: 'SF Mono', Menlo, Monaco, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 1280px;
+  height: 672px;
+  overflow: hidden;
+  background: #04060c;
+  color: var(--ink);
+  font-family: Satoshi, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(1200px 700px at 50% 120%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%), #04060c;
+}
+
+.glow {
+  position: absolute;
+  width: 760px;
+  height: 760px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.38;
+  background: var(--accent);
+  animation: drift 9s ease-in-out -2s infinite alternate;
+}
+
+.glow.two {
+  background: var(--accent-2);
+  right: -260px;
+  bottom: -380px;
+  opacity: 0.28;
+  animation-duration: 7s;
+  animation-direction: alternate-reverse;
+}
+
+.glow.one {
+  left: -300px;
+  top: -420px;
+}
+
+.grid {
+  position: absolute;
+  inset: -2px;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(800px 500px at 50% 50%, black, transparent 75%);
+  animation: gridPan 8s linear infinite;
+}
+
+.shot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.huge {
+  font-size: 150px;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.big {
+  font-size: 104px;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+}
+
+.mid {
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.small {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+}
+
+.accent {
+  color: var(--accent);
+  text-shadow: 0 0 60px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.good {
+  color: var(--good);
+}
+
+.bad {
+  color: var(--bad);
+}
+
+.word {
+  display: inline-block;
+}
+
+.strike {
+  position: relative;
+  display: inline-block;
+}
+
+.strike .line {
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  top: 52%;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--bad);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 28px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.pill.hot {
+  background: color-mix(in srgb, var(--bad) 18%, transparent);
+  border-color: color-mix(in srgb, var(--bad) 55%, transparent);
+  color: #fecaca;
+}
+
+.pill.ok {
+  background: color-mix(in srgb, var(--good) 16%, transparent);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+  color: #bbf7d0;
+}
+
+.pill.brand {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: #fff;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 18px currentColor;
+}
+
+.panel {
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)), var(--panel);
+  box-shadow:
+    0 40px 120px -30px color-mix(in srgb, var(--accent) 55%, transparent),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+
+.terminal {
+  text-align: left;
+  padding: 0 0 26px;
+  font-family: var(--mono);
+  font-size: 28px;
+  line-height: 1.55;
+  overflow: hidden;
+}
+
+.terminal .bar {
+  display: flex;
+  gap: 10px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+
+.terminal .bar i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+.terminal .bar i:nth-child(2) {
+  background: #f59e0b;
+}
+
+.terminal .bar i:nth-child(3) {
+  background: #22c55e;
+}
+
+.terminal .ln {
+  padding: 0 30px;
+  white-space: pre;
+}
+
+.prompt {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ok-line {
+  color: #86efac;
+}
+
+.dim {
+  color: var(--muted);
+}
+
+.caret::after {
+  content: '▋';
+  color: var(--accent);
+  margin-left: 2px;
+}
+
+.phone {
+  position: relative;
+  width: 300px;
+  height: 610px;
+  border-radius: 54px;
+  background: #000;
+  border: 11px solid #1e2638;
+  box-shadow:
+    0 50px 140px -30px color-mix(in srgb, var(--accent) 70%, transparent),
+    0 0 0 2px #2c364d;
+  overflow: hidden;
+  text-align: left;
+}
+
+.phone .notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 96px;
+  height: 28px;
+  margin-left: -48px;
+  border-radius: 20px;
+  background: #000;
+  z-index: 5;
+}
+
+.phone .screen {
+  position: absolute;
+  inset: 0;
+  padding: 58px 18px 18px;
+  background: linear-gradient(180deg, #111827, #0b1020);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.app-card {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.toast {
+  border-radius: 20px;
+  padding: 14px 16px;
+  background: rgba(30, 41, 59, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.toast .ico {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: var(--accent);
+}
+
+.toast small {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.mark {
+  width: 120px;
+  height: 120px;
+  border-radius: 34px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 90%, white), var(--accent));
+  box-shadow: 0 30px 90px -10px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
+.mark svg {
+  width: 72px;
+  height: 72px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 38px;
+  border-radius: 999px;
+  background: #fff;
+  color: #04060c;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Keyframes: names are referenced by the timeline helpers in scenes.ts. */
+@keyframes drift {
+  to {
+    transform: translate(220px, 140px) scale(1.15);
+  }
+}
+
+@keyframes gridPan {
+  to {
+    background-position: 64px 64px;
+  }
+}
+
+@keyframes shotIn {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: blur(14px);
+  }
+}
+
+@keyframes shotOut {
+  to {
+    opacity: 0;
+    transform: scale(0.94);
+    filter: blur(14px);
+  }
+}
+
+@keyframes slam {
+  0% {
+    opacity: 0;
+    transform: translateY(90px) scale(0.9);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02);
+    filter: blur(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes zoomPunch {
+  0% {
+    opacity: 0;
+    transform: scale(2.4);
+    filter: blur(20px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.96);
+    filter: blur(0);
+  }
+}
+
+@keyframes fromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-160px);
+  }
+}
+
+@keyframes fromRight {
+  from {
+    opacity: 0;
+    transform: translateX(160px);
+  }
+}
+
+@keyframes fromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(140px);
+  }
+}
+
+@keyframes fromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-90px) scale(0.92);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  15% {
+    transform: translate(-14px, 4px) rotate(-1.5deg);
+  }
+  30% {
+    transform: translate(12px, -4px) rotate(1.5deg);
+  }
+  45% {
+    transform: translate(-10px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(8px, -2px) rotate(1deg);
+  }
+  75% {
+    transform: translate(-4px, 0) rotate(0);
+  }
+}
+
+@keyframes strikeDraw {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 26px transparent;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes toGood {
+  to {
+    background: var(--good);
+    box-shadow: 0 0 16px var(--good);
+  }
+}
+
+@keyframes toBad {
+  to {
+    background: var(--bad);
+    box-shadow: 0 0 16px var(--bad);
+  }
+}
+
+@keyframes toAccent {
+  to {
+    background: var(--accent);
+    box-shadow: 0 0 16px var(--accent);
+  }
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--len);
+  }
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(200px);
+  }
+}
+
+@keyframes press {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.88);
+  }
+}
+
+@keyframes kenBurns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
