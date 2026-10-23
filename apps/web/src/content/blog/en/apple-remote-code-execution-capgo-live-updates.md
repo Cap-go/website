@@ -3,14 +3,16 @@ slug: apple-remote-code-execution-capgo-live-updates
 title: Apple Remote Code Rules and Capgo Live Updates
 description: >-
   App Review Guideline 2.5.2, ADPLA 3.3.1(B), and the 2025 Guideline 4.7 mini app
-  clarification target native remote code and open software catalogs, not signed
-  JavaScript bundles inside your Capacitor WebView. Here is how Capgo fits.
+  clarification target native remote code and open software catalogs. Signed JavaScript
+  in your Capacitor WebView can still qualify as interpreted code when you keep the
+  app's reviewed purpose, respect OS security, and stay within ADPLA 3.3.1(C). Here is
+  how Capgo fits that model.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-23T20:00:00.000Z
 updated_at: 2026-10-23T20:00:00.000Z
-head_image: /blog-images/apple-remote-code-execution-capgo-live-updates.webp
+head_image: /blog-images/apple-remote-code-execution-capgo-live-updates.png
 head_image_alt: "Apple remote code execution rules and Capgo live updates Capgo blog illustration"
 keywords: Apple, App Store, Guideline 2.5.2, remote code execution, Capgo, Capacitor live updates, OTA, ADPLA 3.3.1, Guideline 4.7, WebView, compliance
 tag: Tutorial
