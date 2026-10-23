@@ -1,3 +1,4 @@
+// Hoffman conversion legacy redirect coverage (default + locale-prefixed paths).
 import { expect, test } from 'bun:test'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
 import {
