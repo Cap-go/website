@@ -1,7 +1,7 @@
 {
   "https://github.com/Cap-go/capacitor-native-market/": 18,
-  "https://github.com/Cap-go/capacitor-native-navigation/": 41,
-  "https://github.com/Cap-go/capacitor-native-map/": 0,
+  "https://github.com/Cap-go/capacitor-native-navigation/": 42,
+  "https://github.com/Cap-go/capacitor-native-map/": 2,
   "https://github.com/Cap-go/capacitor-native-loader/": 3,
   "https://github.com/Cap-go/capacitor-asset-cache/": 4,
   "https://github.com/Cap-go/capacitor-auto/": 3,
@@ -30,7 +30,7 @@
   "https://github.com/Cap-go/capacitor-nativegeocoder/": 41,
   "https://github.com/Cap-go/capacitor-inappbrowser/": 134,
   "https://github.com/Cap-go/capacitor-mqtt/": 5,
-  "https://github.com/Cap-go/capacitor-mock-location-detector/": 3,
+  "https://github.com/Cap-go/capacitor-mock-location-detector/": 4,
   "https://github.com/Cap-go/capacitor-mute/": 16,
   "https://github.com/Cap-go/capacitor-native-audio/": 79,
   "https://github.com/Cap-go/capacitor-shake/": 21,
