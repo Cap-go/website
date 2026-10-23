@@ -1,5 +1,10 @@
+// Hoffman conversion legacy redirect coverage (default + locale-prefixed paths).
 import { expect, test } from 'bun:test'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
+import {
+  NON_DEFAULT_LOCALE_CODES,
+  resolveLocalizedLegacyRedirectPath,
+} from '../../shared/localizedLegacyPathRedirect.ts'
 
 const REDIRECTS = [
   ['/blog/expo-development-client/', '/blog/alternative-to-expo/'],
@@ -21,6 +26,11 @@ const REDIRECTS = [
   ['/blog/jest-unit-testing/', '/blog/unit-tests-javascript/'],
   ['/blog/understanding-regulatory-compliance/', '/blog/compliance-checks-in-cicd-for-capacitor-apps/'],
   ['/blog/what-is-incident-response/', '/blog/incident-response-guide/'],
+  ['/blog/deployment-automation/', '/blog/app-release-automation/'],
+  ['/blog/app-security-best-practices/', '/blog/5-security-best-practices-for-mobile-app-live-updates/'],
+  ['/blog/updating-from-capacitor-4-to-capacitor-5/', '/blog/upgrade-capacitor-app-to-capacitor-8/'],
+  ['/blog/aggiornamento-da-capacitor-4-a-capacitor-5/', '/blog/upgrade-capacitor-app-to-capacitor-8/'],
+  ['/blog/mise-a-jour-de-capacitor-4-vers-capacitor-5/', '/blog/upgrade-capacitor-app-to-capacitor-8/'],
   ['/blog/developer-experience-tools/', '/blog/developer-experience/'],
   ['/blog/comprendiendo-el-manifiesto-de-privacidad-de-apple/', '/blog/privacy-manifest-for-ios-apps/'],
   ['/blog/das-datenschutzmanifest-von-apple-verstehen/', '/blog/privacy-manifest-for-ios-apps/'],
@@ -43,5 +53,8 @@ for (const [from, to] of REDIRECTS) {
   test(`resolveLegacyPathRedirect ${from} → ${to}`, () => {
     expect(resolveLegacyPathRedirect(from)).toBe(to)
     expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+    for (const locale of NON_DEFAULT_LOCALE_CODES) {
+      expect(resolveLocalizedLegacyRedirectPath(`/${locale}${from}`)).toBe(`/${locale}${to}`)
+    }
   })
 }
