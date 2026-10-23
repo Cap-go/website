@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-27T00:00:00.000Z
-updated_at: 2026-10-23T01:11:14.000Z
+updated_at: 2026-10-23T09:46:15.000Z
 head_image: /blog-images/setup-supabase-react-auth-flow.png
 head_image_alt: Diagram of React app, Capgo Social Login plugin, Google ID token, and Supabase Auth session
 keywords: Supabase, Capacitor, React, social login, authentication, Google, Apple, signInWithIdToken, Vite, mobile app development
