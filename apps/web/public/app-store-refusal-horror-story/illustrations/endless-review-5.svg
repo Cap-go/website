@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Long review wait clock">
+  <title>Long review wait clock</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="52" cy="48" r="20" fill="#44BCFF" opacity="0.3"/>
+      <circle cx="160" cy="104" r="56" fill="none" stroke="#374151" stroke-width="3"/>
+      <path d="M160 48 V104 L200 124" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M216 88 A56 56 0 0 1 160 160" fill="none" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" opacity="1"/>
+</svg>

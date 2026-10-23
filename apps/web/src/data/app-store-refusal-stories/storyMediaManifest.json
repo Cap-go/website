@@ -74,6 +74,7 @@
   "reviewer-could-not-follow-2-1": null,
   "same-letter-twice-4-3": null,
   "seven-questions-2-1": null,
+  "seven-template-apps-4-3-same-minute": null,
   "sign-up-required-not-big-app": {
     "src": "/app-store-refusal-horror-story/screenshots/sign-up-required-not-big-app.webp",
     "alt": "Blurred post from a developer whose social app was rejected for requiring sign up",
@@ -97,6 +98,12 @@
     "alt": "App Store Connect list with app names and icons blurred, most marked rejected",
     "width": 1200,
     "height": 636
+  },
+  "stuck-ten-days-resubmit-approved-30-minutes": {
+    "src": "/app-store-refusal-horror-story/screenshots/stuck-ten-days-resubmit-approved-30-minutes.webp",
+    "alt": "App Store Connect Status History on iOS showing Waiting for Review, In Review, and Ready for Distribution all marked Today",
+    "width": 390,
+    "height": 844
   },
   "subscription-price-prominence-3-1-2": {
     "src": "/app-store-refusal-horror-story/screenshots/subscription-price-prominence-3-1-2.webp",
@@ -151,6 +158,7 @@
     "height": 965
   },
   "kids-story-app-terms-link-and-data-questions": null,
+  "launch-week-permission-button-and-screenshot-prices": null,
   "sign-in-buy-delete-three-fixes": null,
   "internet-radio-content-rights-5-2-3": null,
   "six-rejections-then-4-3-call": null,
