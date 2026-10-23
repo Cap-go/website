@@ -53,7 +53,7 @@ Pad **interactive** content per edge. Let backgrounds bleed edge to edge when yo
 
 Pick **one** inset owner for the whole app. The two snippets below are **alternatives**, not a pair to combine.
 
-#### Option A: per-page shell
+### Option A: per-page shell
 
 ```css
 .page {
@@ -283,7 +283,7 @@ Context:
 - @capacitor/status-bar: only if the app already uses it; setOverlaysWebView must match CSS padding strategy.
 - Do not double-apply Capacitor margin adjustment, full-page env padding, and native navigation CSS variables.
 - On resize and visualViewport resize, recompute any cached inset or FAB positions.
-- If the app uses @capgo/capacitor-native-navigation: contentInsetMode css, listen for safeAreaChanged, pad with --cap-native-navigation-* only (no duplicate env on the same edges); verify system tab bar rail poses in the iOS 27 Duo simulator.
+- If the app uses @capgo/capacitor-native-navigation: contentInsetMode css, listen for safeAreaChanged, pad with max(var(--cap-native-navigation-*, 0px), env(safe-area-inset-*, 0px)) per edge (not sum); verify system tab bar rail poses in the iOS 27 Duo simulator.
 - If the app uses custom HTML headers or tab bars, add left/right safe padding on every screen and document that bars will not move into the rail.
 
 Deliverables:
