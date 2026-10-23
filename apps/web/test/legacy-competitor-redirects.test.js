@@ -85,6 +85,12 @@ test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
   expect(staticLegacyRedirectLocation('https://capgo.app/fr/build-status')).toBe('/fr/builder-data/')
 })
 
+test('staticLegacyRedirect /website-live/ → /web2app/', () => {
+  expect(staticLegacyRedirectLocation('https://capgo.app/website-live/')).toBe('/web2app/')
+  expect(staticLegacyRedirectLocation('https://capgo.app/website-live')).toBe('/web2app/')
+  expect(staticLegacyRedirectLocation('https://capgo.app/fr/website-live')).toBe('/fr/web2app/')
+})
+
 for (const [from, to] of BLOG_LEGACY_REDIRECTS) {
   test(`staticLegacyRedirect ${from} → ${to}`, () => {
     expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)

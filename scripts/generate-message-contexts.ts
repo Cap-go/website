@@ -56,7 +56,8 @@ function extractMessages(source: string): MessageMap {
 }
 
 function humanizeKey(key: string): string {
-  return key
+  const keyForLabel = key.startsWith('website_live_') ? key.replace(/^website_live_/, 'web2app_') : key
+  return keyForLabel
     .replace(/_/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase())
     .replace(/\bSeo\b/g, 'SEO')
@@ -73,6 +74,7 @@ function humanizeKey(key: string): string {
     .replace(/\bSla\b/g, 'SLA')
     .replace(/\bTos\b/g, 'Terms of Service')
     .replace(/\bAup\b/g, 'Acceptable Use Policy')
+    .replace(/\bWeb2app\b/g, 'Web2App')
 }
 
 const PREFIX_CONTEXT: Array<{ test: (key: string) => boolean; label: string }> = [
@@ -81,6 +83,10 @@ const PREFIX_CONTEXT: Array<{ test: (key: string) => boolean; label: string }> =
   { test: (key) => key.startsWith('native_build_'), label: 'Capgo Builder / native cloud build product page' },
   { test: (key) => key.startsWith('native_'), label: 'Native build / Capgo Builder marketing copy' },
   { test: (key) => key.startsWith('live_update_'), label: 'Live updates product page' },
+  {
+    test: (key) => key.startsWith('website_live_'),
+    label: 'Capgo Web2App product page (/web2app/) and Web2App pricing card',
+  },
   { test: (key) => key.startsWith('enterprise_'), label: 'Enterprise product/pricing page' },
   { test: (key) => key.startsWith('alternatives_'), label: 'Capacitor live-update alternatives comparison page' },
   { test: (key) => key.startsWith('appflow_'), label: 'Appflow comparison / migration marketing copy' },
@@ -118,13 +124,15 @@ const SUFFIX_ROLE: Array<{ test: (key: string) => boolean; role: string }> = [
   { test: (key) => /_meta_description$|_description$/.test(key) && key.includes('meta'), role: 'SEO meta description' },
   { test: (key) => /_meta_title$|_seo_title$/.test(key), role: 'SEO page title' },
   { test: (key) => /_description$/.test(key), role: 'Supporting description paragraph or meta description' },
-  { test: (key) => /_title$|_headline$|_heading$/.test(key), role: 'Section or page heading' },
+  { test: (key) => /_title$|_headline$|_heading$|_h1$/.test(key), role: 'Section or page heading' },
   { test: (key) => /_subtitle$|_tagline$|_eyebrow$/.test(key), role: 'Section subtitle or tagline' },
   { test: (key) => /_cta$|_button$|_link_text$|_link$/.test(key), role: 'Call-to-action button or link label' },
   // Must precede the generic `_label` rule, which would otherwise match aria labels first.
   { test: (key) => /_aria_label$/.test(key), role: 'Accessible aria-label for assistive tech' },
   { test: (key) => /_label$|_name$/.test(key), role: 'UI label' },
-  { test: (key) => /_faq_/.test(key) || /_question$/.test(key), role: 'FAQ question or answer' },
+  { test: (key) => /_faq\d+_q$/.test(key), role: 'FAQ question' },
+  { test: (key) => /_faq\d+_a$/.test(key), role: 'FAQ answer' },
+  { test: (key) => /_faq(?:_|\d+_)/.test(key) || /_question$/.test(key), role: 'FAQ question or answer' },
   { test: (key) => /_li\d+$|_item_\d+$|_point_/.test(key) || /_play_\d+$/.test(key), role: 'Bullet list item' },
   { test: (key) => /_note$|_footnote$/.test(key), role: 'Supporting note or footnote' },
   { test: (key) => /_placeholder$/.test(key), role: 'Form input placeholder' },
@@ -260,7 +268,7 @@ function buildContext(key: string, text: string, files: string[] | undefined): s
     return [shortHint, `Page/area: ${page}.`, `Role: ${role}.`, usage, keyHint].filter(Boolean).join(' ')
   }
 
-  const preserve = /Capgo|Capacitor|Appflow|CodePush|OTA|CLI|SDK|API|npm|bun|GitHub|Cloudflare|Supabase|Discord/.test(text)
+  const preserve = /Capgo|Capacitor|Appflow|CodePush|OTA|CLI|SDK|API|npm|bun|GitHub|Cloudflare|Supabase|Discord|Web2App/.test(text)
     ? 'Preserve Capgo product/brand and developer terms exactly.'
     : ''
 
