@@ -78,7 +78,6 @@ const config: CapacitorConfig = {
   plugins: {
     SystemBars: {
       insetsHandling: 'css',
-      initialViewportFitValueHint: 'cover',
     },
   },
 };
@@ -257,7 +256,7 @@ Task: Make this Capacitor app safe for iPhone Duo (iOS 27 foldable).
 Context:
 - Read https://capgo.app/blog/capacitor-iphone-duo-safe-area-guide/ and Expo's https://expo.dev/blog/supporting-iphone-duo for platform behavior.
 - One WebView. Use viewport-fit=cover and per-edge env(safe-area-inset-*) padding for interactive content; backgrounds may ignore safe areas.
-- Capacitor 8: configure plugins.SystemBars (insetsHandling css, initialViewportFitValueHint cover). Use var(--safe-area-inset-*, env(...)) fallbacks on Android.
+- Capacitor 8: configure plugins.SystemBars (insetsHandling css). Set viewport-fit=cover in index.html. Use var(--safe-area-inset-*, env(...)) fallbacks on Android.
 - @capacitor/status-bar: only if the app already uses it; setOverlaysWebView must match CSS padding strategy.
 - Do not double-apply Capacitor margin adjustment, full-page env padding, and native navigation CSS variables.
 - On resize and visualViewport resize, recompute any cached inset or FAB positions.
