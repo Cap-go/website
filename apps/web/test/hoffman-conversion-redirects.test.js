@@ -47,6 +47,8 @@ const REDIRECTS = [
   ['/blog/best-ionic-live-update-service/', '/blog/best-live-update-tools-for-capacitor-apps/'],
   ['/blog/best-capacitor-ota-updates/', '/blog/best-live-update-tools-for-capacitor-apps/'],
   ['/blog/best-over-the-air-app-updates-saas/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/ios-live-updates-allowed-stacks/', '/blog/do-apple-allow-live-updates/'],
+  ['/blog/android-live-updates-allowed-stacks/', '/blog/do-google-allow-live-updates/'],
 ]
 
 for (const [from, to] of REDIRECTS) {
