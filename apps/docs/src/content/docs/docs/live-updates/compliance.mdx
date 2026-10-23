@@ -203,7 +203,7 @@ The native shell you submit to the App Store embeds WebKit or JavaScriptCore. Re
 
 #### License Agreement section 3.3.1(C) (additional features)
 
-Section **3.3.1(C)** of the [Apple Developer Program License Agreement](https://developer.apple.com/support/terms/apple-developer-program-license-agreement/) states that, without Apple's prior written approval (except as permitted elsewhere in the agreement), an Application may not provide, unlock, or enable additional features or functionality through distribution mechanisms other than the App Store, Custom App Distribution, or TestFlight.
+Section **3.3.1(C)** of the [Apple Developer Program License Agreement](https://developer.apple.com/support/terms/apple-developer-program-license-agreement/) states that, without Apple's prior written approval or as permitted under section **3.3.9(A)** (In-App Purchase API), an Application may not provide, unlock, or enable additional features or functionality through distribution mechanisms other than the App Store, Custom App Distribution, or TestFlight.
 
 Apple's published text does not spell out how that clause interacts with every interpreted-code OTA bundle. Whether a specific Capgo release triggers 3.3.1(C) is a legal judgment for your team and counsel, not something Capgo can decide for you.
 
@@ -226,7 +226,7 @@ Capgo is an update mechanism. It does not by itself make your app a 4.7 host, bu
 #### Practical checklist before you ship an OTA bundle
 
 - Confirm the change is limited to the web layer and matches the app Apple reviewed.
-- Confirm the update does not provide, unlock, or enable additional features or functionality outside the App Store, Custom App Distribution, or TestFlight without Apple's prior written approval (license agreement section 3.3.1(C)). Whether that restriction applies to your interpreted-code OTA bundle is for your legal review.
+- Confirm the update does not provide, unlock, or enable additional features or functionality outside the App Store, Custom App Distribution, or TestFlight without Apple's prior written approval or a permitted section 3.3.9(A) use (license agreement section 3.3.1(C)). Whether that restriction applies to your interpreted-code OTA bundle is for your legal review.
 - Keep pricing, purchases, and regulated flows inside reviewed native or store-compliant flows.
 - Upload a new binary when you add plugins, permissions, entitlements, or native dependencies.
 - Document live updates in App Review notes when reviewers ask how your app updates itself.
