@@ -2,7 +2,8 @@
 import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import m from '@/copy/messages'
-import { generateAlternateVersions } from '@/lib/alternateVersions'
+import { ogVideoHeight, ogVideos, ogVideoWidth } from '@/config/ogVideos'
+import { generateAlternateVersions, getLocaleBasePath } from '@/lib/alternateVersions'
 import { toLdJsonBlocks } from '@/lib/ldJson'
 
 const rawLocale = (Astro.locals.locale || 'en').toString().toLowerCase()
@@ -20,6 +21,8 @@ const {
   author = `Martin DONADIEU`,
   keywords = m.website_keywords({}, { locale: messageLocale }),
   audio = null,
+  // Autoplaying og:video preview; defaults to the product loop configured for this page in config/ogVideos.ts.
+  video = ogVideos[getLocaleBasePath(Astro)]?.url ?? null,
   alternateVersions = generateAlternateVersions(Astro),
   // Article-specific props for blog posts
   ogType = 'website',
@@ -76,6 +79,7 @@ const getImageMimeType = (img: string): string | null => {
 }
 
 const imageMimeType = getImageMimeType(imageUrl)
+const videoUrl = video ? new URL(video, baseUrl).toString() : null
 
 const normalizeMetaDescription = (value: string) => value.replace(/\s+/g, ' ').replace(/"/g, "'").trim()
 
@@ -173,6 +177,15 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
   <>
     <meta property="og:audio" content={audio} />
     <meta property="og:audio:type" content="audio/mpeg" />
+  </>
+)}
+{videoUrl && (
+  <>
+    <meta property="og:video" content={videoUrl} />
+    <meta property="og:video:secure_url" content={videoUrl} />
+    <meta property="og:video:type" content="video/mp4" />
+    <meta property="og:video:width" content={String(ogVideoWidth)} />
+    <meta property="og:video:height" content={String(ogVideoHeight)} />
   </>
 )}
 <meta property="og:site_name" content={baseDomain()} />

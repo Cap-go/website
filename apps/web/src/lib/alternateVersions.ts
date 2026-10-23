@@ -6,8 +6,8 @@ export interface AlternateVersion {
   url: string
 }
 
-export function generateAlternateVersions(astro: AstroGlobal): AlternateVersion[] {
-  const baseUrl = astro.locals.runtimeConfig.public.baseUrl
+/** Page path without its locale prefix, always wrapped in slashes (e.g. `/live-update/`). */
+export function getLocaleBasePath(astro: AstroGlobal): string {
   const pathname = astro.url.pathname
 
   // Remove current locale from pathname to get the base path
@@ -26,6 +26,13 @@ export function generateAlternateVersions(astro: AstroGlobal): AlternateVersion[
   if (!basePath.endsWith('/')) {
     basePath = `${basePath}/`
   }
+
+  return basePath
+}
+
+export function generateAlternateVersions(astro: AstroGlobal): AlternateVersion[] {
+  const baseUrl = astro.locals.runtimeConfig.public.baseUrl
+  const basePath = getLocaleBasePath(astro)
 
   return locales.map((locale) => ({
     locale,
