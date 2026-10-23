@@ -1,48 +1,14 @@
 import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
+import { formatPasswordRequirementErrors, getPasswordRequirementErrors, RegisterApiError, registerUser } from '@/services/registration'
 import { getRegistrationDevice } from '@/services/registration-device'
-import { getRemoteConfig, isSupabaseConfigured, useSupabase } from '@/services/supabase'
 import Toastify from 'toastify-js'
 
 const form = document.getElementById('registerForm')
 const email = document.getElementById('email') as HTMLInputElement
-const firstName = document.getElementById('firstName') as HTMLInputElement
-const lastName = document.getElementById('lastName') as HTMLInputElement
 const password = document.getElementById('password') as HTMLInputElement
 const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement
 
-const configReady = getRemoteConfig()
 let isSubmitting = false
-
-if (submitButton) {
-  submitButton.disabled = true
-}
-
-configReady
-  .then((cfg) => {
-    if (isSupabaseConfigured(cfg)) {
-      if (!isSubmitting && submitButton) {
-        submitButton.disabled = false
-      }
-      return
-    }
-    if (!isSubmitting) {
-      showConfigError()
-    }
-  })
-  .catch(() => {
-    if (!isSubmitting) {
-      showConfigError()
-    }
-  })
-
-function showConfigError() {
-  return Toastify({
-    text: 'Unable to load registration service. Please refresh the page and try again.',
-    style: {
-      background: '#e7000b',
-    },
-  }).showToast()
-}
 
 function getCaptchaId() {
   if (!(window as any).turnstile) {
@@ -57,21 +23,9 @@ function isValidEmail(email: string): boolean {
   return emailRegex.test(email)
 }
 
-function isValidName(name: string): boolean {
-  // Allow Unicode letters from all languages, spaces, hyphens, and apostrophes
-  // Rejects numbers, URLs, and most special characters while supporting international names
-  const nameRegex = /^[\p{L}\s'-]+$/u
-  return nameRegex.test(name) && name.trim().length > 0
-}
-
 async function sha256Hex(value: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value))
   return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('')
-}
-
-// OpenAI pixel name normalization: lowercase, drop whitespace and ASCII punctuation, keep non-ASCII
-function normalizeName(name: string): string {
-  return name.toLowerCase().replace(/[\s!-/:-@[-`{-~]/g, '')
 }
 
 // Send hashed user data to the OpenAI ads pixel before the conversion so it can be matched
@@ -88,10 +42,6 @@ async function trackOpenAIRegistration(userId: string | undefined) {
       // event_id reuses the hash so a server-side event can dedupe without exposing the raw ID
       eventId = `registration_${user.external_id_sha256}`
     }
-    const first = normalizeName(firstName.value)
-    if (first) user.first_name_sha256 = await sha256Hex(first)
-    const last = normalizeName(lastName.value)
-    if (last) user.last_name_sha256 = await sha256Hex(last)
     oaiq('init', { user })
   } catch (error) {
     console.error('OpenAI pixel user data error', error)
@@ -115,25 +65,18 @@ form?.addEventListener('submit', async (e) => {
     }).showToast()
   }
 
-  // Validate first name
-  if (!isValidName(firstName.value)) {
+  const passwordErrors = getPasswordRequirementErrors(password.value)
+  if (passwordErrors.length > 0) {
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'validation', code: 'weak_password' })
+    password.setAttribute('aria-invalid', 'true')
+    password.focus()
     return Toastify({
-      text: 'First name can only contain letters, spaces, hyphens, and apostrophes',
-      style: {
-        background: '#e7000b',
-      },
+      text: formatPasswordRequirementErrors(passwordErrors),
+      duration: 8000,
+      style: { background: '#e7000b' },
     }).showToast()
   }
-
-  // Validate last name
-  if (!isValidName(lastName.value)) {
-    return Toastify({
-      text: 'Last name can only contain letters, spaces, hyphens, and apostrophes',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
+  password.removeAttribute('aria-invalid')
 
   if (document.querySelector('.cf-turnstile') && !getCaptchaId()) {
     return Toastify({
@@ -145,80 +88,22 @@ form?.addEventListener('submit', async (e) => {
   isSubmitting = true
   submitButton.disabled = true
 
-  const cfg = await configReady
-  if (!isSupabaseConfigured(cfg)) {
-    isSubmitting = false
-    return showConfigError()
-  }
-
-  let supabase
+  let user
   try {
-    supabase = useSupabase()
-  } catch {
-    isSubmitting = false
-    return showConfigError()
-  }
-  const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
-  if (errorDeleted) {
-    console.error(errorDeleted)
-    isSubmitting = false
-    submitButton.disabled = false
-    return Toastify({
-      text: 'Unable to verify account status. Please try again.',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  if (!deleted) {
+    user = await registerUser({
+      email: email.value,
+      password: password.value,
+      captcha_token: getCaptchaId() || undefined,
+      ...getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints),
+      ...getSignupUserMetadataForRegistration(),
+    })
+  } catch (error) {
     isSubmitting = false
     submitButton.disabled = false
-    return Toastify({
-      text: 'Account is in error, please contact support at support@capgo.app',
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  const registrationDevice = getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)
-  const { data: user, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-    options: {
-      captchaToken: getCaptchaId(),
-      data: {
-        first_name: firstName.value,
-        last_name: lastName.value,
-        ...registrationDevice,
-        ...getSignupUserMetadataForRegistration(),
-      },
-    },
-  })
-  if (error) {
-    isSubmitting = false
-    submitButton.disabled = false
-    console.error('Supabase signup error', error)
     ;(window as any).turnstile?.reset?.()
-    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code: error.code ?? 'unknown' })
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code: error instanceof RegisterApiError ? error.code : 'transport' })
     return Toastify({
-      text: error.message,
-      style: {
-        background: '#e7000b',
-      },
-    }).showToast()
-  }
-  if (error || !user) {
-    isSubmitting = false
-    submitButton.disabled = false
-    return
-  }
-  const session = await supabase.auth.getSession()
-  if (session.error) {
-    isSubmitting = false
-    submitButton.disabled = false
-    console.error('Supabase session error', session.error)
-    return Toastify({
-      text: session.error.message,
+      text: error instanceof RegisterApiError ? error.message : 'Unable to create account. Please try again.',
       style: {
         background: '#e7000b',
       },
@@ -232,20 +117,19 @@ form?.addEventListener('submit', async (e) => {
     ;(window as any).posthog.capture('user_signed_up', {
       signup_confirmation: 'client',
       email: email.value,
-      first_name: firstName.value,
-      last_name: lastName.value,
       ...getSignupAttributionForEvents(),
     })
   }
   if ((window as any).Affonso?.signup) {
-    const fullName = `${firstName.value} ${lastName.value}`.trim()
     ;(window as any).Affonso.signup({
       email: email.value,
-      externalUserId: (user as any)?.user?.id,
-      name: fullName || undefined,
+      externalUserId: user.user.id,
     })
   }
-  const consoleUrl = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
+  const consoleUrl = new URL('https://console.capgo.app/login/')
+  consoleUrl.searchParams.set('access_token', user.session.access_token)
+  consoleUrl.searchParams.set('refresh_token', user.session.refresh_token)
+  consoleUrl.searchParams.set('to', '/app')
   await new Promise((resolve) => setTimeout(resolve, 400))
-  window.location.href = consoleUrl
+  window.location.href = consoleUrl.toString()
 })

@@ -72,7 +72,7 @@ Good release notes help in three ways:
 
 > **Practical rule:** If a user can't tell whether a release affects them within a few seconds, the note is written for the team, not the customer.
 
-This is especially important in products with recurring updates. Frequent change without clear communication feels unstable. Frequent change with clear communication feels active and responsive. That difference influences adoption, customer confidence, and retention over time. Teams thinking about engagement should treat release communication as part of the same system as onboarding and habit formation, not as separate admin work. That's also why release messaging belongs in the broader conversation about [improving app user retention](https://capgo.app/blog/app-user-retention/).
+This is especially important in products with recurring updates. Frequent change without clear communication feels unstable. Frequent change with clear communication feels active and responsive. That difference influences adoption, customer confidence, and retention over time. Teams thinking about engagement should treat release communication as part of the same system as onboarding and habit formation, not as separate admin work.
 
 <a id="what-weak-notes-look-like"></a>
 ### What weak notes look like

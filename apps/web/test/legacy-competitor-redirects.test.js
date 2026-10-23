@@ -1,7 +1,10 @@
 import { expect, test } from 'bun:test'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect.ts'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects.ts'
-import { NON_DEFAULT_LOCALE_CODES } from '../../shared/localizedLegacyPathRedirect.ts'
+import {
+  NON_DEFAULT_LOCALE_CODES,
+  resolveLocalizedLegacyRedirectPath,
+} from '../../shared/localizedLegacyPathRedirect.ts'
 import { staticLegacyRedirect } from '../src/worker/index.ts'
 
 function staticLegacyRedirectLocation(url) {
@@ -55,9 +58,26 @@ for (const locale of NON_DEFAULT_LOCALE_CODES) {
 }
 
 const BLOG_LEGACY_REDIRECTS = [
+  ['/blog/app-access-management/', '/blog/how-rbac-secures-ota-updates-in-capacitor-apps/'],
+  ['/blog/app-behavior-tracking/', '/blog/capgo-plugin-for-custom-event-tracking/'],
+  ['/blog/app-risk-assessment/', '/blog/ota-security-checklist-for-capacitor-apps/'],
   ['/blog/uptime-guarantee/', '/sla/'],
   ['/blog/developer-experience-tools/', '/blog/developer-experience/'],
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
+]
+
+// English slug redirects; locale prefixes are applied in staticLegacyRedirect.
+const LIVE_UPDATE_ROUNDUP_REDIRECTS = [
+  ['/blog/best-live-updates-system-for-mobile-app/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-ionic-live-update-service/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-capacitor-ota-updates/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-over-the-air-app-updates-saas/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+]
+
+const VOLTBUILDER_BLOG_REDIRECTS = [
+  ['/blog/alternative-to-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternativa-a-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternative-a-voltbuilder/', '/alternatives/voltbuilder/'],
 ]
 
 test('staticLegacyRedirect /build-status/ → /builder-data/', () => {
@@ -75,6 +95,36 @@ for (const [from, to] of BLOG_LEGACY_REDIRECTS) {
   test(`staticLegacyRedirect ${from} → ${to}`, () => {
     expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
     expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+  })
+}
+
+for (const [from, to] of LIVE_UPDATE_ROUNDUP_REDIRECTS) {
+  test(`resolveLegacyPathRedirect ${from} → ${to}`, () => {
+    expect(resolveLegacyPathRedirect(from)).toBe(to)
+    expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+    for (const locale of NON_DEFAULT_LOCALE_CODES) {
+      expect(resolveLocalizedLegacyRedirectPath(`/${locale}${from}`)).toBe(`/${locale}${to}`)
+    }
+  })
+
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+    for (const locale of NON_DEFAULT_LOCALE_CODES) {
+      expect(staticLegacyRedirectLocation(`https://capgo.app/${locale}${from}`)).toBe(`/${locale}${to}`)
+    }
+  })
+}
+
+for (const [from, to] of VOLTBUILDER_BLOG_REDIRECTS) {
+  test(`resolveLegacyPathRedirect ${from} → ${to}`, () => {
+    expect(resolveLegacyPathRedirect(from)).toBe(to)
+    expect(resolveLegacyPathRedirect(from.replace(/\/$/, ''))).toBe(to)
+  })
+
+  test(`staticLegacyRedirect ${from} → ${to}`, () => {
+    expect(staticLegacyRedirectLocation(`https://capgo.app${from}`)).toBe(to)
+    expect(staticLegacyRedirectLocation(`https://capgo.app/de${from}`)).toBe(`/de${to}`)
+    expect(staticLegacyRedirectLocation(`https://capgo.app/es${from.replace(/\/$/, '')}`)).toBe(`/es${to}`)
   })
 }
 

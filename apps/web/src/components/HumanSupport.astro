@@ -21,7 +21,7 @@ const avatarPx = size === 'sm' ? 20 : 28
   <span>{m.home_hero_human_support({}, { locale: Astro.locals.locale })}</span>
   <img
     src="/avatars/martin-96.webp"
-    alt=""
+    alt={m.team_member_avatar_alt({ name: 'Martin' }, { locale: Astro.locals.locale })}
     width={avatarPx}
     height={avatarPx}
     class:list={[avatarClass, 'rounded-full object-cover ring-2 ring-white/15']}

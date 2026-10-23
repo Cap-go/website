@@ -6,11 +6,18 @@
     "width": 552,
     "height": 1200
   },
+  "byok-cloud-models-3-1-1": null,
   "att-rejection-startup-risk-5-1-2": {
     "src": "/app-store-refusal-horror-story/screenshots/att-rejection-startup-risk-5-1-2.webp",
     "alt": "Blurred post from a founder describing a tracking transparency rejection",
     "width": 560,
     "height": 626
+  },
+  "companion-app-trial-3-1-3-f": {
+    "src": "/app-store-refusal-horror-story/screenshots/companion-app-trial-3-1-3-f.webp",
+    "alt": "App Review Board appeal response citing guidelines 3.1.1 and 3.1.3(f) about a free companion app and a 14 day trial",
+    "width": 1199,
+    "height": 365
   },
   "crowded-category-4-3": null,
   "entertainment-sound-saturated-4-3": {
@@ -42,6 +49,7 @@
   "metadata-iap-checkboxes": null,
   "metadata-loop-launch-week": null,
   "nine-then-eight-days-review": null,
+  "outfit-comparison-winner-1-2": null,
   "objectionable-content-resubmit": {
     "src": "/app-store-refusal-horror-story/screenshots/objectionable-content-resubmit.webp",
     "alt": "Blurred post with a pending account termination notice for repeated resubmissions",
@@ -141,5 +149,17 @@
     "alt": "Apple rejection message citing guideline 5.6 Developer Code of Conduct about hidden features during review, app header redacted",
     "width": 1720,
     "height": 965
+  },
+  "kids-story-app-terms-link-and-data-questions": null,
+  "sign-in-buy-delete-three-fixes": null,
+  "internet-radio-content-rights-5-2-3": null,
+  "six-rejections-then-4-3-call": null,
+  "unsigned-agreement-rejection-two-weeks": null,
+  "crash-on-new-macos-free-vm": null,
+  "twelve-days-waiting-expedite-twice": {
+    "src": "/app-store-refusal-horror-story/screenshots/twelve-days-waiting-expedite-twice.webp",
+    "alt": "App Store Connect App Review screen showing an iOS 1.0 submission in Waiting for Review with five subscriptions, app icons and names redacted",
+    "width": 1306,
+    "height": 1290
   }
 }

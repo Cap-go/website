@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Integrates the Twilio Voice SDK into Capacitor."
+  tagline: "Place and receive VoIP calls with Twilio Voice."
   actions:
     - text: Get started
       link: /docs/plugins/twilio-voice/getting-started/
@@ -22,7 +22,15 @@ hero:
 
 ## Overview
 
-Integrates the Twilio Voice SDK into Capacitor.
+Login with access tokens, place calls with `makeCall()`, and control mute and speaker from JavaScript.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | CallKit per README |
+| Android | Yes | ConnectionService |
+| Web | No | `login()` and `makeCall()` throw on Web |
 
 ## Core Capabilities
 

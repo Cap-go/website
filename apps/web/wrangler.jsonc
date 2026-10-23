@@ -21,9 +21,23 @@
       "database_id": "b5b45f7a-9129-441e-bca2-0aaf6f7f51f3",
     },
   ],
+  "ratelimits": [
+    {
+      "name": "PUBLIC_MCP_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 60, "period": 60 },
+    },
+  ],
   "vars": {
     "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
   },
+  // auth.md agent registration on capgo.app is served by the API worker (see src/worker/agent-auth-proxy.ts).
+  "services": [
+    {
+      "binding": "CAPGO_API",
+      "service": "capgo_api-prod",
+    },
+  ],
   "routes": [
     {
       "pattern": "capgo.app",
@@ -40,6 +54,14 @@
   ],
   "env": {
     "development": {
+      "ratelimits": [
+        {
+          "name": "PUBLIC_MCP_RATE_LIMITER",
+          "namespace_id": "1002",
+          "simple": { "limit": 60, "period": 60 },
+        },
+      ],
+
       "d1_databases": [
         {
           "binding": "BUILDER_DB",
@@ -48,7 +70,7 @@
         },
       ],
       "vars": {
-            "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
+        "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
       },
       "routes": [
         {

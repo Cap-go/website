@@ -27,6 +27,8 @@ export type PricingFaqItem = {
   id?: string
   question: string
   answer: string
+  /** Visible answer for paid-ads visitors on the direct offer (no free trial). Not used in JSON-LD. */
+  answerDirect?: string
   intro?: string
   paragraphs?: PricingFaqParagraph[]
   listItems?: PricingFaqListItem[]
@@ -37,6 +39,9 @@ export type PricingFaqItem = {
 export type PricingFaqSection = {
   title: string
   subtitle: string
+  /** Visible title/subtitle for paid-ads visitors on the direct offer (no free trial). */
+  titleDirect?: string
+  subtitleDirect?: string
   items: PricingFaqItem[]
 }
 
@@ -202,10 +207,13 @@ export function buildPricingFaqSections(locale: Locales, urls: PricingFaqUrls): 
     {
       title: 'Trial & Support',
       subtitle: 'Free trials, discounts, and getting help',
+      titleDirect: m.pricing_faq_trial_support_title_direct({}, { locale }),
+      subtitleDirect: m.pricing_faq_trial_support_subtitle_direct({}, { locale }),
       items: [
         {
           question: m.unsure_about_active_users({}, { locale }),
           answer: m.free_trial_explanation({}, { locale }),
+          answerDirect: m.free_trial_explanation_direct({}, { locale }),
         },
         {
           question: m.do_you_offer_discounts_for_students_non_profits_or_startups({}, { locale }),

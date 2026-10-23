@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Log Meta/Facebook App Events, purchases, value-bearing standard events, and advertiser tracking status from Capacitor."
+  tagline: "Meta/Facebook App Events analytics with standard events, purchase logging, currency parameters, and advertiser tracking controls"
   actions:
     - text: Get started
       link: /docs/plugins/facebook-analytics/getting-started/
@@ -22,9 +22,17 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-facebook-analytics` wraps Meta App Events for Capacitor apps on iOS and Android.
+Meta/Facebook App Events analytics with standard events, purchase logging, currency parameters, and advertiser tracking controls
 
-Use it to log standard Facebook events, custom events, purchases, and value-bearing events with currency metadata. It also exposes advertiser tracking controls for Android and legacy iOS, while reporting App Tracking Transparency authorization on iOS 17 and above.
+Start with `initAppEvents()` and the other core methods listed below.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Native |
+| Android | Yes | Native |
+| Web | No | Guard with Capacitor.getPlatform() |
 
 ## Core Capabilities
 

@@ -1,5 +1,6 @@
 ---
 import m from '@/copy/messages'
+import DataPageCta from '@/components/DataPageCta.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import Layout from '@/layouts/Layout.astro'
@@ -130,6 +131,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           <p class="data-badge" data-status-badge data-tone={pending ? 'loading' : 'operational'}><span aria-hidden="true"></span> {pending ? 'Loading' : 'Operational'}</p>
         </div>
         <p class="data-summary">Global iOS and Android builder success for the last 30 days. Each rate is finished jobs only, not a live queue, and not a build count.</p>
+        <p class="data-crosslink">Shipping over-the-air updates? See <a class="data-inline-link" href={liveUpdateHref}>Live Update delivery data</a>.</p>
         <p class="data-updated" data-updated aria-live="polite" translate="no">{updatedLabel}</p>
         <p class="data-sr-only" data-kpi-status aria-live="polite"></p>
         <div class="data-kpis" aria-label="Global builder reliability">
@@ -321,6 +323,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       title={m.proof_data_title({}, { locale: Astro.locals.locale })}
       description={m.proof_data_desc({}, { locale: Astro.locals.locale })}
       testimonials={productTestimonials.nativeBuildData}
+    />
+    <DataPageCta
+      id="builder-data-final-signup-cta"
+      eyebrow="Build in the cloud"
+      title="Build your iOS and Android apps without a Mac"
+      description="Run native Capacitor builds on Capgo's cloud builders and ship straight to the App Store and Google Play, with the reliability tracked on this page."
     />
   </main>
 </Layout>
@@ -866,6 +874,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     font-size: 1.125rem;
     line-height: 1.6;
     text-wrap: pretty;
+  }
+  .data-crosslink {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
   .data-updated {
     display: flex;

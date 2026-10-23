@@ -2,8 +2,9 @@
 import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import m from '@/copy/messages'
-import { generateAlternateVersions } from '@/lib/alternateVersions'
-import { ensureLdJsonContext } from '@/lib/ldJson'
+import { ogVideoHeight, ogVideos, ogVideoWidth } from '@/config/ogVideos'
+import { generateAlternateVersions, getLocaleBasePath } from '@/lib/alternateVersions'
+import { toLdJsonBlocks } from '@/lib/ldJson'
 
 const rawLocale = (Astro.locals.locale || 'en').toString().toLowerCase()
 // Paraglide message functions use a narrower locale union than the app router.
@@ -20,6 +21,8 @@ const {
   author = `Martin DONADIEU`,
   keywords = m.website_keywords({}, { locale: messageLocale }),
   audio = null,
+  // Autoplaying og:video preview; defaults to the product loop configured for this page in config/ogVideos.ts.
+  video = ogVideos[getLocaleBasePath(Astro)]?.url ?? null,
   alternateVersions = generateAlternateVersions(Astro),
   // Article-specific props for blog posts
   ogType = 'website',
@@ -76,6 +79,7 @@ const getImageMimeType = (img: string): string | null => {
 }
 
 const imageMimeType = getImageMimeType(imageUrl)
+const videoUrl = video ? new URL(video, baseUrl).toString() : null
 
 const normalizeMetaDescription = (value: string) => value.replace(/\s+/g, ' ').replace(/"/g, "'").trim()
 
@@ -125,6 +129,8 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="keywords" content={keywords} />
 
 <link rel="canonical" href={canonicalString} />
+<link rel="ard" type="application/json" href="/.well-known/ard.json" />
+<link rel="ai-catalog" type="application/json" href="/.well-known/ai-catalog.json" />
 {
   markdownAlternate && (
     <link rel="alternate" type="text/markdown" href={new URL(markdownAlternate, baseUrl).toString()} />
@@ -173,6 +179,15 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
     <meta property="og:audio:type" content="audio/mpeg" />
   </>
 )}
+{videoUrl && (
+  <>
+    <meta property="og:video" content={videoUrl} />
+    <meta property="og:video:secure_url" content={videoUrl} />
+    <meta property="og:video:type" content="video/mp4" />
+    <meta property="og:video:width" content={String(ogVideoWidth)} />
+    <meta property="og:video:height" content={String(ogVideoHeight)} />
+  </>
+)}
 <meta property="og:site_name" content={baseDomain()} />
 <meta property="og:description" content={displayDescription} />
 
@@ -190,4 +205,4 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="twitter:app:name:googleplay" content={appName} />
 
 <!-- @ts-ignore -->
-<script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ensureLdJsonContext(ldJSON))}></script>
+{toLdJsonBlocks(ldJSON).map((block) => <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />)}

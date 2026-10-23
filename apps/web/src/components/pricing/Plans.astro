@@ -113,11 +113,19 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Start ${plan.name} free trial`}
+            data-plan-cta
             class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             role="button"
           >
-            {m.days_free_trial({}, { locale: Astro.locals.locale })}
+            <!-- Accessible name stays "Start {plan} free trial" for normal visitors; direct-offer (paid ads) visitors get "Get started". -->
+            <span data-trial-copy>
+              <span aria-hidden="true">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
+              <span class="sr-only">{`Start ${plan.name} free trial`}</span>
+            </span>
+            <span data-direct-copy>
+              <span aria-hidden="true">{m.direct_offer_cta_get_started({}, { locale: Astro.locals.locale })}</span>
+              <span class="sr-only">{m.direct_offer_plan_cta_aria_label({ plan: plan.name }, { locale: Astro.locals.locale })}</span>
+            </span>
           </a>
           {plan.name === 'Enterprise' && (
             <a

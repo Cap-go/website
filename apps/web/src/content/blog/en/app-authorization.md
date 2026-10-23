@@ -59,7 +59,7 @@ There are three actors to keep straight:
 
 In practice, app authorization also overlaps with stronger access controls such as MFA. As of January 2023, **about 66% of users globally were using MFA**, and **83% of over 1,000 surveyed SME IT professionals required MFA for access to all company resources in a 2024 JumpCloud survey** according to [JumpCloud's MFA statistics roundup](https://jumpcloud.com/blog/multi-factor-authentication-statistics). That doesn't replace authorization, but it does raise the baseline for who gets to request access in the first place.
 
-If your team is sorting out roles, scopes, and delegated access, this overview of [app access management patterns](https://capgo.app/blog/app-access-management/) is a useful companion to the implementation choices discussed here.
+If your team is sorting out roles, scopes, and delegated access, this guide on [how RBAC secures OTA updates in Capacitor apps](https://capgo.app/blog/how-rbac-secures-ota-updates-in-capacitor-apps/) is a useful companion to the implementation choices discussed here.
 
 <a id="the-building-blocks-of-authorization"></a>
 ## The Building Blocks of Authorization

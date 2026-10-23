@@ -6,8 +6,8 @@ import 'toastify-js/src/toastify.css'
 import RatingSummary from '@/components/RatingSummary.astro'
 import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
 
-const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
-const CLOUDFLARE_TURNSTILE_SITE_KEY = captchaKey
+// Static pages read the CI secret at build time; import.meta.env only exposes .env-file values here.
+const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY || process.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
 
 const title = `${Astro.locals.runtimeConfig.public.brand} | ${m.register_title({}, { locale: Astro.locals.locale })}`
@@ -56,8 +56,19 @@ const content = {
             </a>
           </p>
           <p class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-300">
-            <span class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
-            <span class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">{m.no_credit_card_required({}, { locale: Astro.locals.locale })}</span>
+            <span data-trial-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.days_free_trial({}, { locale: Astro.locals.locale })}
+            </span>
+            <span data-trial-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.no_credit_card_required({}, { locale: Astro.locals.locale })}
+            </span>
+            <!-- Paid-ads visitors (offer=direct, persisted from the landing page) pay first, backed by a money-back guarantee. -->
+            <span data-direct-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.direct_offer_guarantee({}, { locale: Astro.locals.locale })}
+            </span>
+            <span data-direct-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
+              {m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}
+            </span>
           </p>
 
           <form id="registerForm" class="mt-6 space-y-4">
@@ -75,36 +86,6 @@ const content = {
                 placeholder={m.email_placeholder({}, { locale: Astro.locals.locale })}
               />
             </div>
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label for="firstName" class="block text-sm font-medium text-slate-300">
-                  {m.first_name_label({}, { locale: Astro.locals.locale })}
-                </label>
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  autocomplete="given-name"
-                  required
-                  class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
-                  placeholder={m.first_name_placeholder({}, { locale: Astro.locals.locale })}
-                />
-              </div>
-              <div>
-                <label for="lastName" class="block text-sm font-medium text-slate-300">
-                  {m.last_name_label({}, { locale: Astro.locals.locale })}
-                </label>
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  autocomplete="family-name"
-                  required
-                  class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
-                  placeholder={m.last_name_placeholder({}, { locale: Astro.locals.locale })}
-                />
-              </div>
-            </div>
             <div>
               <label for="password" class="block text-sm font-medium text-slate-300">
                 {m.password_label({}, { locale: Astro.locals.locale })}
@@ -114,10 +95,15 @@ const content = {
                 name="password"
                 type="password"
                 autocomplete="new-password"
+                passwordrules="minlength: 6; required: lower; required: upper; required: digit; required: [-!@#$%^&*_+=?];"
+                aria-describedby="password-requirements"
                 required
                 class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
                 placeholder={m.password_placeholder({}, { locale: Astro.locals.locale })}
               />
+              <p id="password-requirements" class="mt-1.5 text-xs text-slate-400">
+                {m.password_requirements({}, { locale: Astro.locals.locale })}
+              </p>
             </div>
             {enableCaptcha && <div class="cf-turnstile" data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY} data-size="flexible" data-theme="dark" />}
             <button

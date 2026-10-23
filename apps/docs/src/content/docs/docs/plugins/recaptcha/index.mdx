@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Generate reCAPTCHA and reCAPTCHA Enterprise tokens on Web, Android, and iOS before sensitive backend requests."
+  tagline: "Generate reCAPTCHA Enterprise or v3 tokens on mobile and web."
   actions:
     - text: Get started
       link: /docs/plugins/recaptcha/getting-started/
@@ -22,9 +22,15 @@ hero:
 
 ## Overview
 
-`@capgo/capacitor-recaptcha` loads Google reCAPTCHA on each Capacitor platform and returns a token for a named action.
+Configure site keys in `capacitor.config.ts`, run `execute()` for actions like login, and verify tokens on your backend.
 
-Use it before sensitive requests such as login, signup, checkout, password reset, or abuse-prone form submissions. Send the token to your backend and create a reCAPTCHA assessment there.
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Enterprise mobile SDK |
+| Android | Yes | Enterprise mobile SDK |
+| Web | Yes | Enterprise or v3 |
 
 ## Core Capabilities
 

@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Use Capgo's public API docs and API-key authentication model to manage organizations, apps, channels, devices, bundles, statistics, and API keys.",
       "url": "/.well-known/agent-skills/capgo-public-api/SKILL.md",
-      "digest": "sha256:90a17bf3e302532a455fdfff86ce156b6fb0c15be4e807f034a5d664bb9fc712"
+      "digest": "sha256:b882f8ca78cefcccaf1056902e4c8e9268aa468b20ee1d95790c2dc2eb599f14"
     },
     {
       "name": "capgo-mobile-signing-tools",

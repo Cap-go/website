@@ -20,7 +20,7 @@ A channel represents a distribution track for your app updates. Each channel can
 
 - **public**: Set as default channel for new devices.
 - **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the channel's stable bundle.
-- **disableAutoUpdate**: Control update behavior (`major`, `minor`, `metadata`, `patch`, or `none`).
+- **disableAutoUpdate**: Control update behavior (`major`, `minor`, `patch`, `version_number`, or `none`). `metadata` is accepted as an alias of `version_number`.
 - **updatePackage**: Control whether devices download a zip, a delta, or both (`all`, `zip`, `delta`, `zip_from_builtin`, or `delta_from_builtin`). See [Download format](/docs/webapp/channels/#download-format).
 - **ios/android/electron**: Enable or disable delivery by platform.
 - **allow_device_self_set**: Let devices choose their channel.
@@ -45,7 +45,7 @@ Create or update a channel configuration.
 #### Request Body
 
 ```typescript
-type DisableAutoUpdate = "major" | "minor" | "metadata" | "patch" | "none"
+type DisableAutoUpdate = "major" | "minor" | "patch" | "version_number" | "metadata" | "none"
 type AutoPauseAction = "pause" | "rollback" | "notify"
 
 interface ChannelSet {
@@ -286,31 +286,37 @@ curl -X DELETE \
 
 ## Error Handling
 
+All errors use the standard error format described in the [API overview](/docs/public-api/).
+
 Common error scenarios and their responses:
 
 ```json
-// Channel not found
+// The API key has no access to the app
 {
-  "error": "Channel not found",
-  "status": "KO"
+  "error": "cannot_access_app",
+  "message": "You can't access this app",
+  "moreInfo": { "app_id": "com.example.app" }
 }
 
-// Invalid bundle (version) format
+// Invalid disableAutoUpdate value
 {
-  "error": "Invalid version format. Use semantic versioning",
-  "status": "KO"
+  "error": "invalid_disable_auto_update",
+  "message": "Disable auto update must be major, minor, patch, version_number, metadata, or none",
+  "moreInfo": { "disableAutoUpdate": "always" }
 }
 
-// Invalid update policy
+// Rollout percentage out of range
 {
-  "error": "Invalid disableAutoUpdate value",
-  "status": "KO"
+  "error": "invalid_rollout_percentage",
+  "message": "Rollout percentage must be between 0 and 100",
+  "moreInfo": { "rolloutPercentage": 150 }
 }
 
-// Permission denied
+// DELETE without a channel name
 {
-  "error": "Insufficient permissions to manage channels",
-  "status": "KO"
+  "error": "missing_channel_name",
+  "message": "You must provide a channel name",
+  "moreInfo": {}
 }
 ```
 

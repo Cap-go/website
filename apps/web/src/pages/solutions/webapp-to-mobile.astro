@@ -6,6 +6,7 @@ import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
 import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import OfferText from '@/components/OfferText.astro'
 import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
@@ -305,7 +306,9 @@ Inspect the app and return:
     <section class="bg-slate-900 py-16 sm:py-20">
       <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <h2 class="text-3xl font-semibold text-white sm:text-4xl">{copy('solutions_webapp_to_mobile_cta_title')}</h2>
-        <p class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-300">{copy('solutions_webapp_to_mobile_cta_subtitle')}</p>
+        <p class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-300">
+          <OfferText direct={copy('solutions_webapp_to_mobile_cta_subtitle_direct')}>{copy('solutions_webapp_to_mobile_cta_subtitle')}</OfferText>
+        </p>
         <SignupCta lead={m.signup_cta_lead_webapp_to_mobile({}, { locale: Astro.locals.locale })} humanSupport enterprise class="mt-8" />
       </div>
     </section>

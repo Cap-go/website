@@ -14,15 +14,25 @@ export const appleRejectionStoryBatches = [
     publishedOn: '2026-10-19',
     storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-1').length,
   },
+  {
+    id: 'batch-2',
+    label: 'Batch 2',
+    publishedOn: '2026-10-22',
+    storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-2').length,
+  },
 ]
 
 export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
+  '1-2',
   '1-4-2',
   '4-3',
   '4-2-6',
+  '3-1-1',
   '3-1-2',
+  '3-1-3',
   '5-1-1',
   '5-1-2',
+  '5-2-3',
   '5-6-4',
   '5-6',
   '2-5-19',
@@ -37,6 +47,7 @@ export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   'simulated-gambling',
   'fake-documents',
   'ai-data-sharing',
+  'kids-category',
 ]
 
 export type { AppleRejectionStory, AppleRejectionStoryTag } from './types'

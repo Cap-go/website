@@ -16,7 +16,8 @@
     },
   ],
   "vars": {
-    "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
+    "TRANSLATION_MODEL": "@cf/google/gemma-4-26b-a4b-it",
+    "TRANSLATION_REVIEW_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
     "TRANSLATION_TEST_MODE": "1",
   },
 }

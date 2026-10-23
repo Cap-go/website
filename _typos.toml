@@ -37,6 +37,9 @@ extend-ignore-re = [
 ]
 
 [default.extend-words]
+# French words in the translation style guides.
+appareil = "appareil"
+sur = "sur"
 # These are proper names, not typos
 Longe = "Longe"
 Damon = "Damon"

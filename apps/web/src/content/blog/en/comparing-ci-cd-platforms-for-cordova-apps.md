@@ -107,7 +107,7 @@ Possible for the iOS half only. A `ci_scripts/ci_post_clone.sh` hook installs No
 
 ### VoltBuilder
 
-A build service rather than a CI: you upload a zip of your project with signing files, and it returns store-ready binaries for Cordova and Capacitor projects. No Git triggers, pipelines, or live updates. Useful for small teams without a CI. See [Alternative to VoltBuilder](/blog/alternative-to-voltbuilder/).
+A build service rather than a CI: you upload a zip of your project with signing files, and it returns store-ready binaries for Cordova and Capacitor projects. No Git triggers, pipelines, or live updates. Useful for small teams without a CI. See the [Voltbuilder alternative](/alternatives/voltbuilder/) comparison page.
 
 ### Ionic Appflow
 

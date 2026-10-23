@@ -5,7 +5,7 @@ export const SIGNUP_PREFILL_KEY = 'capgo:webmcp:signup-prefill'
 const STOP_WORDS = new Set(['the', 'and', 'for', 'with', 'how', 'what', 'does', 'can', 'you', 'your', 'are', 'capgo', 'use', 'from', 'that', 'this', 'into', 'about'])
 
 type Section = { title: string; text: string }
-type SignupPrefill = { email?: string; firstName?: string; lastName?: string }
+type SignupPrefill = { email?: string }
 
 let docsPromise: Promise<Section[]> | undefined
 
@@ -167,13 +167,11 @@ export const startSignup = defineTool<SignupPrefill>({
   source: 'merchant_authored',
   intent: 'act',
   description:
-    'Open the Capgo free account signup form and prefill the visitor email, first name, and last name when provided. Use when the visitor wants to create a Capgo account or start a trial. Does NOT create the account: the visitor must choose a password, pass the captcha, and press the submit button themselves. Returns the signup URL and which fields were prefilled.',
+    'Open the Capgo free account signup form and prefill the visitor email when provided. Name is collected later in the Capgo console onboarding. Use when the visitor wants to create a Capgo account or start a trial. Does NOT create the account: the visitor must choose a password, pass the captcha, and press the submit button themselves. Returns the signup URL and which fields were prefilled.',
   inputSchema: {
     type: 'object',
     properties: {
       email: { type: 'string', format: 'email' },
-      firstName: { type: 'string' },
-      lastName: { type: 'string' },
     },
     additionalProperties: false,
   },

@@ -177,43 +177,44 @@ curl -X DELETE \
 
 ## Error Handling
 
+All errors use the standard error format described in the [API overview](/docs/public-api/).
+
 Common error scenarios and their responses:
 
 ```json
-// Member not found
+// The API key has no access to the organization
 {
-  "error": "Member not found",
-  "status": "KO"
+  "error": "cannot_access_organization",
+  "message": "You can't access this organization",
+  "moreInfo": { "orgId": "046a36ac-e03c-4590-9257-bd6c9dba9ee8" }
 }
 
-// Invalid role
+// Unknown role on update
 {
-  "error": "Invalid role specified",
-  "status": "KO"
+  "error": "invalid_role",
+  "message": "Invalid role",
+  "moreInfo": { "role": "owner" }
 }
 
-// Permission denied
+// Changing the role of the user who owns the API key
 {
-  "error": "Insufficient permissions to manage members",
-  "status": "KO"
+  "error": "cannot_change_own_role",
+  "message": "You cannot change your own role",
+  "moreInfo": {}
 }
 
-// Cannot remove last admin
+// Removing a user who is not a member (HTTP 404)
 {
-  "error": "Cannot remove the last admin from the organization",
-  "status": "KO"
+  "error": "organization_member_not_found",
+  "message": "User is not a member of this organization",
+  "moreInfo": { "orgId": "046a36ac-e03c-4590-9257-bd6c9dba9ee8", "email": "user@example.com" }
 }
 
-// Invalid email
+// Removing the last super admin
 {
-  "error": "Invalid email format",
-  "status": "KO"
-}
-
-// Member already exists
-{
-  "error": "Member already exists in organization",
-  "status": "KO"
+  "error": "CANNOT_REMOVE_LAST_SUPER_ADMIN",
+  "message": "Cannot remove the last super admin from the organization",
+  "moreInfo": { "orgId": "046a36ac-e03c-4590-9257-bd6c9dba9ee8" }
 }
 ```
 

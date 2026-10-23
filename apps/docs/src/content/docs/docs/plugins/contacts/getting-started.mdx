@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-contacts
-bunx cap sync
+npm install @capgo/capacitor-contacts
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,24 @@ bunx cap sync
 ```typescript
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 ```
+
+## Quick start
+
+Request access, then load contacts with a sensible page size instead of the entire address book.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.requestPermissions();
+const { contacts } = await CapacitorContacts.getContacts({ limit: 50, offset: 0 });
+// Increase offset by limit for the next page instead of loading the full address book.
+```
+
+## Common pitfalls
+
+- **Rationale**: explain why contacts access is needed before the dialog.
+- **Pagination**: avoid loading entire address books at once.
+- **Writes**: creating contacts needs write permission.
 
 ## API Overview
 

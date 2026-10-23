@@ -284,3 +284,17 @@ body,
     cursor: pointer;
   }
 }
+
+/*
+ * Paid-ads direct offer (no free trial). Attribution.astro sets <html data-offer="direct"> before first paint
+ * when the visitor arrived with ?offer=direct (or has it in stored first-touch attribution).
+ * - data-trial-copy: trial / free wording, hidden for direct-offer visitors.
+ * - data-direct-copy: replacement wording, hidden for everyone else.
+ */
+[data-offer='direct'] [data-trial-copy] {
+  display: none !important;
+}
+
+html:not([data-offer='direct']) [data-direct-copy] {
+  display: none !important;
+}

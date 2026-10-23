@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor Share Target Plugin interface."
+  tagline: "Receive text, links, and files shared into your Capacitor app."
   actions:
     - text: Get started
       link: /docs/plugins/share-target/getting-started/
@@ -29,6 +29,14 @@ On iOS, shared payloads use `notifyListeners(..., retainUntilConsumed: true)` so
 This plugin does **not** create Siri shortcuts or Shortcuts app actions. For those, use [@capgo/capacitor-app-intents](/docs/plugins/app-intents/). It is unrelated to [@capgo/capacitor-intent-launcher](/docs/plugins/intent-launcher/) (Android activities and iOS Settings).
 
 See [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/) for a full comparison with expo-app-intents-style features.
+
+## Platform support
+
+| Platform | Support | Notes |
+| --- | --- | --- |
+| iOS | Yes | Share extension setup in Xcode |
+| Android | Yes | Intent filters in manifest |
+| Web | No | Use PWA share target separately |
 
 ## Core Capabilities
 

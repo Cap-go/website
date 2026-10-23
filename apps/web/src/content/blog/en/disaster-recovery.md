@@ -133,7 +133,7 @@ If the app is small, low risk, and rarely changes, a simpler standby model may b
 
 For code and assets, teams often need more than database backups. They need versioned application bundles, configuration snapshots, and a way to restore the exact client state users were on when the incident began. Object storage works well for retained artifacts, while block-level snapshots fit lower-level system recovery. The important part is not the storage brand, it's keeping each artifact tied to a known release state.
 
-If your stack includes sensitive data, the storage story needs to be explicit. The [secure database storage guidance from Capgo](https://capgo.app/blog/secure-database-storage/) is relevant here because recovery plans that ignore storage hygiene usually inherit restore problems later.
+If your stack includes sensitive data, the storage story needs to be explicit. The [Capgo guide to encrypting SQLite in Capacitor apps](https://capgo.app/blog/encrypt-sqlite-database-capacitor/) is relevant here because recovery plans that ignore storage hygiene usually inherit restore problems later.
 
 <a id="compare-strategies-by-recovery-outcome"></a>
 ### Compare strategies by recovery outcome

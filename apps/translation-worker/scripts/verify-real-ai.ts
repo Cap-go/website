@@ -26,7 +26,7 @@ type ProbePayload = {
 }
 
 const WORKER_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const MODEL = process.env.TRANSLATION_REAL_TEST_MODEL || '@cf/meta/llama-3.1-8b-instruct-fast'
+const MODEL = process.env.TRANSLATION_REAL_TEST_MODEL || '@cf/google/gemma-4-26b-a4b-it'
 const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '240000', 10)
 const REQUEST_TIMEOUT_MS = Math.min(60_000, TIMEOUT_MS)
 const LOG_LIMIT = 16_000

@@ -10,5 +10,8 @@
     "test:real": "bun run scripts/verify-real-ai.ts",
     "dev": "wrangler dev -c wrangler.jsonc -c ../web/wrangler.jsonc -c ../docs/wrangler.jsonc",
     "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
   }
 }

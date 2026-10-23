@@ -20,6 +20,12 @@ hero:
       variant: minimal
 ---
 
+| iOS (Apple MapKit) | Android (Google Maps) |
+| :---: | :---: |
+| <img src="/plugins/demo/capacitor-native-map/demo-tour-ios.webp" alt="iOS simulator recording with Apple MapKit: store locator pins, delivery zones, a route, 500 clustered markers, a tilted 3D camera, and satellite map types" width="260" /> | <img src="/plugins/demo/capacitor-native-map/demo-tour-android.webp" alt="Android emulator recording with Google Maps: store locator pins, delivery zones, a route, 500 clustered markers, a tilted 3D camera, and satellite map types" width="260" /> |
+
+The same TypeScript code runs on both platforms. These recordings come from the [example app](https://github.com/Cap-go/capacitor-native-map/tree/main/example-app)'s demo tour, running on a real iOS simulator and Android emulator. The code for each step is in the [README demos](https://github.com/Cap-go/capacitor-native-map#demos-for-ios-and-android).
+
 ## Overview
 
 @capgo/capacitor-native-map gives you one TypeScript API for native map performance on mobile and Google Maps JS on web. Create embedded maps in a DOM container, or use **background mode** (`toBack`) to draw the map behind a transparent WebView and build branded UI in HTML.
@@ -60,7 +66,7 @@ hero:
 | `addPolygons` / `removePolygons` | Add or remove polygon overlays. |
 | `addPolylines` / `removePolylines` | Add or remove polylines. |
 | `addCircles` / `removeCircles` | Add or remove circles. |
-| `addTileOverlay` / `removeTileOverlay` | Custom tile layers (Android and web; partial support on iOS). |
+| `addTileOverlay` / `removeTileOverlay` | Custom tile layers (Android and web; iOS rejects with `UNAVAILABLE`). |
 | `enableClustering` / `disableClustering` | Marker clustering with optional minimum cluster size. |
 | `enableCurrentLocation` | Show the user location dot when permission allows. |
 | `enableIndoorMaps` / `enableTrafficLayer` | Toggle indoor maps and traffic (platform-dependent). |

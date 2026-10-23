@@ -2,6 +2,12 @@ import { splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 
 export type FirstTouchType = 'blog' | 'docs' | 'plugin' | 'pricing' | 'home' | 'solutions' | 'console' | 'cli' | 'other'
 
+/** Paid-ads offer: visitors landing with `?offer=direct` get a pay-first plan (no free trial). */
+export type CapgoOffer = 'direct'
+
+export const OFFER_QUERY_PARAM = 'offer'
+export const DIRECT_OFFER: CapgoOffer = 'direct'
+
 export type CapgoAttribution = {
   ref?: string
   utm_source?: string
@@ -9,22 +15,51 @@ export type CapgoAttribution = {
   utm_campaign?: string
   first_touch_type?: FirstTouchType
   first_touch_path?: string
+  offer?: CapgoOffer
+  /** ISO timestamp of when the offer was first captured; the offer expires ATTRIBUTION_MAX_AGE_SECONDS later. */
+  offer_at?: string
 }
 
 export const ATTRIBUTION_COOKIE_NAME = 'capgo_attribution'
 export const ATTRIBUTION_STORAGE_KEY = 'capgo_attribution'
 export const ATTRIBUTION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60
 
-const TRACKED_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'first_touch_type', 'first_touch_path'] as const
+const TRACKED_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'first_touch_type', 'first_touch_path', 'offer', 'offer_at'] as const
+/** Keys forwarded to register/console links. `offer_at` stays client-side: the offer is re-stamped when it is captured from a URL. */
+const LINK_PARAM_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'first_touch_type', 'first_touch_path', 'offer'] as const
 
-const QUERY_PARAM_KEYS = [...TRACKED_KEYS, 'signup_source'] as const
+/** Only the exact value `direct` is a recognised offer; anything else (including padded or upper-case variants) is ignored. */
+export function normalizeOffer(value: unknown): CapgoOffer | undefined {
+  return value === DIRECT_OFFER ? DIRECT_OFFER : undefined
+}
+
+/** Tolerated clock skew for a capture timestamp that is slightly in the future. */
+const OFFER_CLOCK_SKEW_MS = 24 * 60 * 60 * 1000
+
+/** True when `capturedAt` is a valid timestamp less than ATTRIBUTION_MAX_AGE_SECONDS old. Offers without a timestamp are expired. */
+export function isOfferFresh(capturedAt: unknown, now: number = Date.now()): boolean {
+  if (typeof capturedAt !== 'string') return false
+  const captured = Date.parse(capturedAt)
+  if (!Number.isFinite(captured)) return false
+  const age = now - captured
+  return age > -OFFER_CLOCK_SKEW_MS && age < ATTRIBUTION_MAX_AGE_SECONDS * 1000
+}
+
+/** Returns the offer and its capture timestamp when the offer is recognised and not expired. */
+function pickFreshOffer(record: { offer?: unknown; offer_at?: unknown }, now: number): Pick<CapgoAttribution, 'offer' | 'offer_at'> {
+  const offer = normalizeOffer(record.offer)
+  if (!offer || !isOfferFresh(record.offer_at, now)) return {}
+  return { offer, offer_at: record.offer_at as string }
+}
+
+const QUERY_PARAM_KEYS = [...LINK_PARAM_KEYS, 'signup_source'] as const
 
 export function hasAttributionValues(data: CapgoAttribution | null | undefined): boolean {
   if (!data) return false
-  return Boolean(data.ref || data.utm_source || data.utm_medium || data.utm_campaign || data.first_touch_type || data.first_touch_path)
+  return Boolean(data.ref || data.utm_source || data.utm_medium || data.utm_campaign || data.first_touch_type || data.first_touch_path || data.offer)
 }
 
-export function parseAttributionFromSearch(search: string): CapgoAttribution {
+export function parseAttributionFromSearch(search: string, now: number = Date.now()): CapgoAttribution {
   const normalized = search.startsWith('?') ? search.slice(1) : search
   const params = new URLSearchParams(normalized)
   const data: CapgoAttribution = {}
@@ -33,6 +68,11 @@ export function parseAttributionFromSearch(search: string): CapgoAttribution {
     if (value) {
       data[key] = value
     }
+  }
+  const offer = normalizeOffer(params.get(OFFER_QUERY_PARAM))
+  if (offer) {
+    data.offer = offer
+    data.offer_at = new Date(now).toISOString()
   }
   return data
 }
@@ -65,9 +105,9 @@ export function parseFirstTouchFromPathname(pathname: string): Pick<CapgoAttribu
   }
 }
 
-export function buildFirstTouchAttribution(search: string, pathname: string): CapgoAttribution {
+export function buildFirstTouchAttribution(search: string, pathname: string, now: number = Date.now()): CapgoAttribution {
   return {
-    ...parseAttributionFromSearch(search),
+    ...parseAttributionFromSearch(search, now),
     ...parseFirstTouchFromPathname(pathname),
   }
 }
@@ -145,6 +185,7 @@ export function toPostHogAttributionProps(data: CapgoAttribution): Record<string
   if (data.first_touch_path) props.first_touch_path = data.first_touch_path
   const signupSource = deriveSignupSource(data)
   if (signupSource) props.signup_source = signupSource
+  if (data.offer) props.signup_offer = data.offer
   return props
 }
 
@@ -152,32 +193,24 @@ export function serializeAttribution(data: CapgoAttribution): string {
   return JSON.stringify(data)
 }
 
-export function deserializeAttribution(raw: string | null | undefined): CapgoAttribution | null {
+export function deserializeAttribution(raw: string | null | undefined, now: number = Date.now()): CapgoAttribution | null {
   if (!raw) return null
   try {
-    const parsed = JSON.parse(raw) as Record<string, unknown>
-    const data: CapgoAttribution = {}
-    for (const key of TRACKED_KEYS) {
-      const value = parsed[key]
-      if (typeof value === 'string' && value.trim()) {
-        if (key === 'first_touch_type') {
-          data.first_touch_type = value.trim() as FirstTouchType
-        } else {
-          data[key] = value.trim()
-        }
-      }
-    }
+    const parsed = JSON.parse(raw) as unknown
+    if (!parsed || typeof parsed !== 'object') return null
+    const data = pickTrackedAttributionFields(parsed as Record<string, unknown>, now)
     return hasAttributionValues(data) ? data : null
   } catch {
     return null
   }
 }
 
-export function pickTrackedAttributionFields(record: Record<string, unknown> | CapgoAttribution | null | undefined): CapgoAttribution {
+export function pickTrackedAttributionFields(record: Record<string, unknown> | CapgoAttribution | null | undefined, now: number = Date.now()): CapgoAttribution {
   const data: CapgoAttribution = {}
   if (!record) return data
   for (const key of TRACKED_KEYS) {
-    const value = record[key]
+    if (key === 'offer' || key === 'offer_at') continue
+    const value = (record as Record<string, unknown>)[key]
     if (typeof value === 'string' && value.trim()) {
       if (key === 'first_touch_type') {
         data.first_touch_type = value.trim() as FirstTouchType
@@ -186,7 +219,7 @@ export function pickTrackedAttributionFields(record: Record<string, unknown> | C
       }
     }
   }
-  return data
+  return { ...data, ...pickFreshOffer(record as Record<string, unknown>, now) }
 }
 
 export function reconcileLegacyFirstTouchPair(data: CapgoAttribution): CapgoAttribution {
@@ -219,12 +252,14 @@ function resolveFirstTouchPair(existing: CapgoAttribution, incoming: CapgoAttrib
   return {}
 }
 
-export function mergeAttribution(existing: CapgoAttribution | null | undefined, incoming: CapgoAttribution): CapgoAttribution {
-  const base = pickTrackedAttributionFields(existing ?? null)
+export function mergeAttribution(existing: CapgoAttribution | null | undefined, incoming: CapgoAttribution, now: number = Date.now()): CapgoAttribution {
+  const base = pickTrackedAttributionFields(existing ?? null, now)
   const merged: CapgoAttribution = { ...base, ...resolveFirstTouchPair(base, incoming) }
   for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign'] as const) {
     if (!merged[key] && incoming[key]) merged[key] = incoming[key]
   }
+  // First touch wins: a stored, unexpired offer keeps its original capture time (no renewal on revisit).
+  if (!merged.offer) Object.assign(merged, pickFreshOffer(incoming, now))
   return reconcileLegacyFirstTouchPair(merged)
 }
 
@@ -261,7 +296,7 @@ export function isRegisterOrConsoleLink(href: string, baseUrl = 'https://capgo.a
 
 export function attributionLinkParams(data: CapgoAttribution): Record<string, string> {
   const params: Record<string, string> = {}
-  for (const key of TRACKED_KEYS) {
+  for (const key of LINK_PARAM_KEYS) {
     const value = data[key]
     if (value) params[key] = value
   }
@@ -388,6 +423,7 @@ export function getSignupUserMetadataForRegistration(): Record<string, string> {
   if (props.first_utm_source) metadata.utm_source = props.first_utm_source
   if (props.first_utm_medium) metadata.utm_medium = props.first_utm_medium
   if (props.first_utm_campaign) metadata.utm_campaign = props.first_utm_campaign
+  if (merged.offer) metadata.offer = merged.offer
   return metadata
 }
 
@@ -409,6 +445,7 @@ export function getSignupAttributionForEvents(): Record<string, string> {
   if (props.signup_source) events.signup_source = props.signup_source
   if (props.first_touch_type) events.first_touch_type = props.first_touch_type
   if (props.first_touch_path) events.first_touch_path = props.first_touch_path
+  if (props.signup_offer) events.signup_offer = props.signup_offer
   return events
 }
 
@@ -447,6 +484,10 @@ export function startAttributionLinkDecoration(): void {
 
   const observer = new MutationObserver(() => run())
   observer.observe(document.documentElement, { childList: true, subtree: true })
+}
+
+export function hasDirectOffer(data: CapgoAttribution | null | undefined): boolean {
+  return data?.offer === DIRECT_OFFER
 }
 
 export const __attributionQueryParamKeys = QUERY_PARAM_KEYS

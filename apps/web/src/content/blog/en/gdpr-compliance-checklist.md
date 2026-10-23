@@ -143,7 +143,7 @@ Examples from real app operations include:
 
 Those workflows aren't intrinsically non-compliant. They just need explicit review before they become default infrastructure behavior.
 
-A practical way to structure this is to map the data flow first, then score the privacy impact of each decision point. Teams using Capgo can use this [app risk assessment guide](https://capgo.app/blog/app-risk-assessment/) to frame rollout, telemetry, and rollback questions in operational terms.
+A practical way to structure this is to map the data flow first, then score the privacy impact of each decision point. Teams using Capgo can use this [OTA security checklist for Capacitor apps](https://capgo.app/blog/ota-security-checklist-for-capacitor-apps/) to frame rollout, telemetry, and rollback questions in operational terms.
 
 Here's a useful explainer on the risk mindset behind privacy assessments:
 

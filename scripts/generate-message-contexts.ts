@@ -127,6 +127,7 @@ const SUFFIX_ROLE: Array<{ test: (key: string) => boolean; role: string }> = [
   { test: (key) => /_title$|_headline$|_heading$/.test(key), role: 'Section or page heading' },
   { test: (key) => /_subtitle$|_tagline$|_eyebrow$/.test(key), role: 'Section subtitle or tagline' },
   { test: (key) => /_cta$|_button$|_link_text$|_link$/.test(key), role: 'Call-to-action button or link label' },
+  // Must precede the generic `_label` rule, which would otherwise match aria labels first.
   { test: (key) => /_aria_label$/.test(key), role: 'Accessible aria-label for assistive tech' },
   { test: (key) => /_label$|_name$/.test(key), role: 'UI label' },
   { test: (key) => /_faq_/.test(key) || /_question$/.test(key), role: 'FAQ question or answer' },

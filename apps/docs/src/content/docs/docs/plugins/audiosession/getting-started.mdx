@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-audio-session
-bunx cap sync
+npm install @capgo/capacitor-audio-session
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,20 @@ bunx cap sync
 ```typescript
 import { AudioSession } from '@capgo/capacitor-audio-session';
 ```
+
+## Quick start
+
+```typescript
+import { AudioSession } from '@capgo/capacitor-audio-session';
+
+await AudioSession.overrideOutput('speaker');
+```
+
+## Common pitfalls
+
+- **iOS focus**: routing APIs target iOS audio session behavior.
+- **Restore**: call `overrideOutput('default')` after calls end.
+- **Ordering**: configure before Twilio or media plugins start.
 
 ## API Overview
 

@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-speech-recognition
-bunx cap sync
+npm install @capgo/capacitor-speech-recognition
+npx cap sync
 ```
 
 ## Import
@@ -31,6 +31,32 @@ bunx cap sync
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
 ```
+
+## Quick start
+
+Request the microphone, attach a `partialResults` listener, then start a session with streaming updates.
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+await SpeechRecognition.requestPermissions();
+
+const partialListener = await SpeechRecognition.addListener('partialResults', ({ matches }) => {
+  setTranscript(matches?.[0] ?? '');
+});
+
+await SpeechRecognition.start({ language: 'en-US', partialResults: true });
+
+// When leaving the screen:
+await SpeechRecognition.stop();
+await partialListener.remove();
+```
+
+## Common pitfalls
+
+- **Cleanup**: remove listeners when leaving the screen.
+- **Locales**: use BCP 47 tags matching your UI.
+- **Web**: not supported; use a browser speech API separately if you need Web-only dictation.
 
 ## API Overview
 

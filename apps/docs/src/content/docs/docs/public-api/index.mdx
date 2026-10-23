@@ -11,7 +11,7 @@ This is the documentation of the public API of Capgo cloud. The API allows you t
 
 ## Authentication
 
-All API endpoints require authentication. To authenticate your requests, add your API key in the `x-api-key` header.
+All API endpoints require authentication. To authenticate your requests, add your API key in the `x-api-key` header, or send it as `Authorization: Bearer YOUR_API_KEY`.
 
 Example:
 
@@ -25,15 +25,37 @@ curl -H "x-api-key: YOUR_API_KEY" https://api.capgo.app/organization/
 	href="https://console.capgo.app/settings/organization/api-keys"
 />
 
-The `authorization` header is still accepted for legacy API keys, but `x-api-key` is the recommended header for all key types, including secure hashed keys.
+The `authorization` header with the raw key (no `Bearer` prefix) is still accepted for legacy integrations, but `x-api-key` is the recommended header for all key types, including secure hashed keys.
+
+AI agents and other OAuth clients can get a key through OAuth 2.0 (authorization code with PKCE and dynamic client registration). The issuer is `https://capgo.app`, with metadata at `https://capgo.app/.well-known/oauth-authorization-server`. The user picks which organizations to grant, and the access token is a Capgo API key sent as a Bearer token.
+
+## Versioning
+
+The API is versioned by date. Pin a version with the `capgo_api` request header:
+
+```bash
+curl -H "x-api-key: YOUR_API_KEY" -H "capgo_api: 2025-10-01" https://api.capgo.app/organization/
+```
+
+Without the header you get the default version, currently `2025-10-01`. Changes within a version are additive: new endpoints, new optional parameters and new response fields. A breaking change ships as a new dated version, and clients pinned to an older date keep the old behavior. An unknown or malformed version returns `400 unsupported_capgo_api_version` or `400 invalid_capgo_api_version`.
+
+Removing an operation or field is a breaking change, so it only happens in a new dated version. Nothing is deprecated today. When something is, the operation will be marked `deprecated: true` in the [OpenAPI spec](https://capgo.app/openapi.json), its responses will carry a `Deprecation` header ([RFC 9745](https://www.rfc-editor.org/rfc/rfc9745)) and a `Sunset` header ([RFC 8594](https://www.rfc-editor.org/rfc/rfc8594)) with the date the old behavior ends, and the change will be announced in the [release notes](https://github.com/Cap-go/capgo.app/releases).
 
 ## Rate Limiting
 
 The API implements rate limiting to ensure fair usage. Current limits are:
-- 100 requests per minute for standard accounts
-- 1000 requests per minute for enterprise accounts
+- 2,000 requests per minute per API key
+- 20,000 requests per minute per API key on bundle upload routes
+- 20 invalid API keys per IP address within 15 minutes, after which the IP is blocked for 15 minutes
 
-If you exceed these limits, you'll receive a 429 (Too Many Requests) response.
+Every response reports the quota with the `RateLimit-Policy` and `RateLimit` headers ([IETF draft](https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/)):
+
+```http
+RateLimit-Policy: "apikey";q=2000;w=60
+RateLimit: "apikey";r=1995;t=42
+```
+
+`q` is the quota, `w` the window in seconds, `r` the requests left and `t` the seconds until the window resets. If you exceed a limit, you'll receive a 429 (Too Many Requests) response with a `Retry-After` header in seconds.
 
 ### Device channel changes
 
@@ -47,7 +69,7 @@ These limits are not account-wide. If your channel switcher can return to a rece
 
 ## Response Format
 
-All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include an `error` field with a description of what went wrong.
+All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include a machine-readable `error` code, a human-readable `message`, and optional `moreInfo` details.
 
 Example success response:
 ```json
@@ -60,8 +82,9 @@ Example success response:
 Example error response:
 ```json
 {
-  "error": "Invalid API key",
-  "status": "KO"
+  "error": "invalid_apikey",
+  "message": "Invalid apikey",
+  "moreInfo": {}
 }
 ```
 

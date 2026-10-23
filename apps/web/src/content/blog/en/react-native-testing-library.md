@@ -124,7 +124,7 @@ TypeScript needs the same attention. Make sure Jest transforms `.ts` and `.tsx` 
 
 The release chronology is useful when diagnosing older setup advice. The project lists **127 releases**, with **v14.0.1 tagged on 2026-06-23**, while **v12.9.0, released on 2024-11-27, added official support for React Native 0.77 and Expo 52**. The v14 alpha line in March 2025 moved to Universal Test Renderer from deprecated React Test Renderer and prepared for React 19-only support. These details appear in the [RNTL release history](https://github.com/callstack/react-native-testing-library/releases), so don't copy a renderer dependency from an outdated tutorial without checking your app's versions.
 
-For a practical Jest foundation, compare your configuration against this [Jest unit testing guide](https://capgo.app/blog/jest-unit-testing/), then run one small component test before adding navigation and native mocks.
+For a practical Jest foundation, compare your configuration against this [unit tests in JavaScript guide](https://capgo.app/blog/unit-tests-javascript/), then run one small component test before adding navigation and native mocks.
 
 ![An infographic showing the five-step installation path for setting up the React Native Testing Library project.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/82d29a79-071c-4e3b-b479-522cbdcac031/react-native-testing-library-installation-process.jpg)
 

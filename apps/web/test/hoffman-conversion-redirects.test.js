@@ -15,6 +15,12 @@ const REDIRECTS = [
   ['/blog/uptime-guarantee/', '/sla/'],
   ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
   ['/blog/understanding-apples-privacy-manifest/', '/blog/privacy-manifest-for-ios-apps/'],
+  ['/blog/app-access-management/', '/blog/how-rbac-secures-ota-updates-in-capacitor-apps/'],
+  ['/blog/app-behavior-tracking/', '/blog/capgo-plugin-for-custom-event-tracking/'],
+  ['/blog/app-risk-assessment/', '/blog/ota-security-checklist-for-capacitor-apps/'],
+  ['/blog/jest-unit-testing/', '/blog/unit-tests-javascript/'],
+  ['/blog/understanding-regulatory-compliance/', '/blog/compliance-checks-in-cicd-for-capacitor-apps/'],
+  ['/blog/what-is-incident-response/', '/blog/incident-response-guide/'],
   ['/blog/developer-experience-tools/', '/blog/developer-experience/'],
   ['/blog/comprendiendo-el-manifiesto-de-privacidad-de-apple/', '/blog/privacy-manifest-for-ios-apps/'],
   ['/blog/das-datenschutzmanifest-von-apple-verstehen/', '/blog/privacy-manifest-for-ios-apps/'],
@@ -24,6 +30,13 @@ const REDIRECTS = [
   ['/compare/capgo-vs-expo/', '/alternatives/expo/'],
   ['/compare/capgo-vs-codepush/', '/alternatives/codepush/'],
   ['/best-ionic-live-update-service/', '/best/capacitor-live-updates/'],
+  ['/blog/alternative-to-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternativa-a-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/alternative-a-voltbuilder/', '/alternatives/voltbuilder/'],
+  ['/blog/best-live-updates-system-for-mobile-app/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-ionic-live-update-service/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-capacitor-ota-updates/', '/blog/best-live-update-tools-for-capacitor-apps/'],
+  ['/blog/best-over-the-air-app-updates-saas/', '/blog/best-live-update-tools-for-capacitor-apps/'],
 ]
 
 for (const [from, to] of REDIRECTS) {

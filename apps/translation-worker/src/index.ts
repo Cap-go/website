@@ -1,9 +1,10 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { isGonePath } from '../../shared/gonePaths'
-import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
+import { translationStyleGuide } from './style-guides'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
 
@@ -15,7 +16,10 @@ type AiMessage = {
 }
 
 type AiBinding = {
-  run(model: string, input: { messages: AiMessage[]; temperature?: number; max_tokens?: number; response_format?: unknown }): Promise<unknown>
+  run(
+    model: string,
+    input: { messages: AiMessage[]; temperature?: number; max_tokens?: number; response_format?: unknown; chat_template_kwargs?: { enable_thinking: boolean } },
+  ): Promise<unknown>
 }
 
 type WorkerService = {
@@ -92,6 +96,7 @@ interface Env {
   TRANSLATION_COORDINATOR?: DurableObjectNamespaceBinding
   TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
+  TRANSLATION_REVIEW_MODEL?: string
   TRANSLATION_TEST_MODE?: string
 }
 
@@ -161,14 +166,28 @@ function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecut
 }
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
-const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
+// Picked from a French benchmark against Workers AI models (see the PR introducing it):
+// Gemma 4 drafts fast and cheap with thinking disabled, then TRANSLATION_REVIEW_MODEL
+// (DeepSeek V4.1 Flash in wrangler.jsonc) reviews the drafts against the style guide.
+const DEFAULT_MODEL = '@cf/google/gemma-4-26b-a4b-it'
+// Hybrid reasoning models think before answering by default. Translation does not need
+// it (same benchmark score, a fraction of the latency); the optional review pass keeps it.
+const THINKING_MODEL_PREFIXES = ['@cf/deepseek-ai/deepseek-v4', '@cf/google/gemma-4', '@cf/qwen/qwen3', '@cf/zai-org/glm-'] as const
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-09-23-short-ui-length-defer-v1'
+const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
+// Translation memory: every translated segment is stored in R2 by a hash of its text
+// and context, so a page edit only sends new or edited segments to Workers AI, and the
+// header, footer and other repeated copy are translated once for the whole site.
+// Bump this when the prompt, style guides or models change to translate everything
+// again. Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages
+// are rebuilt from memory without new AI calls.
+const TRANSLATION_MEMORY_VERSION = '2026-10-23-style-guides-v3'
+const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
@@ -198,7 +217,18 @@ const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
 const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
+// A placeholder left after restore belongs to another segment and must never reach the page.
+const STRAY_PLACEHOLDER_PATTERN = /__CAPGO_KEEP_\d+__/
+const STRAY_PLACEHOLDER_GLOBAL_PATTERN = /__CAPGO_KEEP_\d+__/g
 const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
+// Product names matched with exact case: "Native Build" is the product, "native build" is generic copy.
+const CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS = ['Native Build'] as const
+// Kept whole so the model never sees half a command: npm package names (@capgo/cli,
+// @capgo/capacitor-updater@7) and Capgo CLI commands ("capgo bundle upload").
+const PROTECTED_TRANSLATION_PATTERNS = [
+  /@[a-z0-9][a-z0-9-]*\/[a-z0-9][a-z0-9.-]*(?:@[\w.-]+)?/y,
+  /capgo (?:app|bundle|channel|build|init|login|doctor|key|organisation|organization|account|probe)(?: (?:upload|list|delete|cleanup|set|add|encrypt|decrypt|compatibility|zip|request|create|current|debug|setting|credentials))?/y,
+] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -250,7 +280,6 @@ const STATIC_PREFIXES = [
   '/_docs/',
   '/api/',
   '/assets/',
-  '/capgo',
   '/favicon',
   '/fonts/',
   '/icons/',
@@ -623,13 +652,7 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
   return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
 }
 
-async function temporaryEnglishCrawlerResponse(
-  request: Request,
-  env: Env,
-  requestUrl: URL,
-  locale: Locale,
-  isHead = false,
-): Promise<Response> {
+async function temporaryEnglishCrawlerResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) {
     return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
@@ -2078,6 +2101,16 @@ function isProtectedTokenBoundary(value: string, index: number): boolean {
 }
 
 function protectedTokenAt(value: string, index: number): string | null {
+  for (const pattern of PROTECTED_TRANSLATION_PATTERNS) {
+    pattern.lastIndex = index
+    const matched = pattern.exec(value)?.[0]
+    if (matched && isProtectedTokenBoundary(value, index - 1) && isProtectedTokenBoundary(value, index + matched.length)) return matched
+  }
+  for (const token of CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS) {
+    if (!value.startsWith(token, index)) continue
+    if (!isProtectedTokenBoundary(value, index - 1) || !isProtectedTokenBoundary(value, index + token.length)) continue
+    return token
+  }
   const lowerValue = value.toLowerCase()
   for (const token of PROTECTED_TRANSLATION_TOKENS) {
     if (!lowerValue.startsWith(token.toLowerCase(), index)) continue
@@ -2110,18 +2143,25 @@ function protectTranslationTokens(value: string): {
     index += token.length
   }
 
+  // Models sometimes pad a placeholder with extra underscores ("/____CAPGO_KEEP_1__"),
+  // which would leave "__" next to the restored token. Trim them unless the source
+  // itself has underscores touching a placeholder.
+  const sourceHasPaddedPlaceholder = /_{3,}CAPGO_KEEP_|CAPGO_KEEP_\d+_{3,}/.test(text)
+  const normalizePlaceholders = (translated: string) => (sourceHasPaddedPlaceholder ? translated : translated.replace(/_{2,}CAPGO_KEEP_(\d+)_{2,}/g, '__CAPGO_KEEP_$1__'))
+
   return {
     text,
     restore(translated: string): string {
-      let restored = translated
+      let restored = normalizePlaceholders(translated)
       for (const [placeholder, token] of replacements) {
         if (!restored.includes(placeholder)) throw new Error(`Translation dropped protected token: ${token}`)
         restored = restored.split(placeholder).join(token)
       }
+      if (STRAY_PLACEHOLDER_PATTERN.test(restored)) throw new Error('Translation dropped protected token: stray placeholder')
       return restored
     },
     restoreOrSource(translated: string): { text: string; missingTokens: string[] } {
-      let restored = translated
+      let restored = normalizePlaceholders(translated)
       const missingTokens: string[] = []
       for (const [placeholder, token] of replacements) {
         if (!restored.includes(placeholder)) {
@@ -2130,27 +2170,68 @@ function protectTranslationTokens(value: string): {
         }
         restored = restored.split(placeholder).join(token)
       }
+      if (STRAY_PLACEHOLDER_PATTERN.test(restored)) missingTokens.push('stray placeholder')
       return missingTokens.length > 0 ? { text: value, missingTokens } : { text: restored, missingTokens }
     },
   }
 }
 
+// Items are keyed by id instead of returned as an array: with arrays, a dropped or merged
+// item shifted every later translation onto the wrong segment (and leaked placeholders).
+function translationItemId(index: number): string {
+  return `t${index}`
+}
+
 function translationBatchJsonSchema(batchLength: number): Record<string, unknown> {
+  const ids = Array.from({ length: batchLength }, (_, index) => translationItemId(index))
   return {
     type: 'object',
     additionalProperties: false,
     properties: {
       translations: {
-        type: 'array',
-        minItems: batchLength,
-        maxItems: batchLength,
-        items: {
-          type: 'string',
-        },
+        type: 'object',
+        additionalProperties: false,
+        properties: Object.fromEntries(ids.map((id) => [id, { type: 'string' }])),
+        required: ids,
       },
     },
     required: ['translations'],
   }
+}
+
+function keyedTranslationsFromUnknown(value: unknown, batchLength: number): string[] | null {
+  const record = recordOf(value)
+  const translations = recordOf(record?.translations) ?? record
+  if (!translations) return null
+  const keyed = Array.from({ length: batchLength }, (_, index) => translations[translationItemId(index)])
+  return keyed.every((item): item is string => typeof item === 'string') ? keyed : null
+}
+
+function parseKeyedTranslations(rawValue: unknown, batchLength: number): string[] | null {
+  const direct = keyedTranslationsFromUnknown(rawValue, batchLength)
+  if (direct) return direct
+  if (typeof rawValue === 'string') {
+    const parsed = keyedTranslationsFromUnknown(parseJsonValue(stripJsonFence(rawValue)), batchLength)
+    if (parsed) return parsed
+  }
+  return parseTranslationArray(rawValue)
+}
+
+function aiRequestOptions(model: string): { chat_template_kwargs?: { enable_thinking: boolean } } {
+  return THINKING_MODEL_PREFIXES.some((prefix) => model.startsWith(prefix)) ? { chat_template_kwargs: { enable_thinking: false } } : {}
+}
+
+function translationBriefSystemHint(targetLanguage: string): string {
+  return [
+    `You are a senior native ${targetLanguage} software localizer for Capgo, a developer-tools company. The result must read as if a native developer wrote it in ${targetLanguage}: translate meaning, not words.`,
+    'Placeholders like __CAPGO_KEEP_0__ stand for names such as Capgo or Live Update: move them wherever target-language word order needs them (for example "Live Update data" becomes "Données Live Update" in French).',
+    'Never translate CLI commands, code, or terminal output such as "capgo bundle upload" or "npx @capgo/cli".',
+  ].join(' ')
+}
+
+// Some models emit typographic hyphens and spaces (U+2011, U+202F) that break search and copy-paste.
+function normalizeTranslatedText(text: string): string {
+  return text.replace(/\u2011/g, '-').replace(/\u202F/g, '\u00A0')
 }
 
 function translationContextSystemHint(): string {
@@ -2172,11 +2253,69 @@ function applyFrenchArticleElision(text: string): string {
 }
 
 function polishTranslatedText(targetLanguage: string, text: string): string {
-  if (targetLanguage === 'French') return applyFrenchArticleElision(text)
-  return text
+  const normalized = normalizeTranslatedText(text)
+  if (targetLanguage === 'French') return applyFrenchArticleElision(normalized)
+  return normalized
 }
 
-async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
+// Optional second pass (TRANSLATION_REVIEW_MODEL): a reviewer model fixes the drafts
+// against the same style guide, with its reasoning left on. Any failure keeps the drafts,
+// flagged as unreviewed so they are not stored in translation memory.
+async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<{ translations: string[]; reviewed: boolean }> {
+  const reviewModel = env.TRANSLATION_REVIEW_MODEL?.trim()
+  if (!reviewModel) return { translations: drafts, reviewed: true }
+  try {
+    return { translations: await reviewTranslatedBatchWithModel(env, reviewModel, targetLanguage, items, drafts), reviewed: true }
+  } catch (error) {
+    console.warn('Translation review failed; keeping drafts', { targetLanguage, reviewModel, error: errorMessage(error) })
+    return { translations: drafts, reviewed: false }
+  }
+}
+
+// True when the translation has exactly the source's placeholders, none dropped, repeated or invented.
+function keepsTranslationPlaceholders(source: string, translated: string): boolean {
+  const placeholders = (value: string) => (value.match(STRAY_PLACEHOLDER_GLOBAL_PATTERN) ?? []).sort().join()
+  return placeholders(source) === placeholders(translated)
+}
+
+type ReviewItem = { id: string; text: string; context?: string }
+
+async function reviewTranslatedBatchWithModel(env: Env, reviewModel: string, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<string[]> {
+  const result = await env.AI.run(reviewModel, {
+    temperature: 0,
+    max_tokens: 16384,
+    response_format: {
+      type: 'json_schema',
+      json_schema: translationBatchJsonSchema(items.length),
+    },
+    messages: [
+      {
+        role: 'system',
+        content: [
+          `You are a senior native ${targetLanguage} reviewer for Capgo website copy. Each item has the English text, optional context, and a draft ${targetLanguage} translation.`,
+          'Fix mistranslations, wrong terminology, literal or unnatural phrasing, grammar and agreement errors, English Title Case, untranslated English, and translated product names. Keep the draft when it is already correct and natural.',
+          translationLengthSystemHint(),
+          'Copy every placeholder like __CAPGO_KEEP_0__ exactly as written.',
+          translationStyleGuide(targetLanguage),
+          `Return a JSON object with exactly one key named "translations" mapping every item id to the final translation.`,
+        ].join(' '),
+      },
+      {
+        role: 'user',
+        content: JSON.stringify({ targetLanguage, items: items.map((item, index) => ({ ...item, draft: drafts[index] })) }),
+      },
+    ],
+  })
+  const payload = extractAiPayload(result)
+  const reviewed = keyedTranslationsFromUnknown(typeof payload === 'string' ? parseJsonValue(stripJsonFence(payload)) : payload, items.length)
+  if (!reviewed) throw new Error('Review model returned invalid JSON')
+  // A reviewed item that drops or invents a placeholder keeps its draft instead of falling back to English.
+  return reviewed.map((text, index) => (text.trim() && keepsTranslationPlaceholders(items[index].text, text) ? text : drafts[index]))
+}
+
+// notRemembered collects the sources whose output is a fallback (English source, unreviewed
+// draft), so translation memory does not store it.
+async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[], pagePath = '', notRemembered?: Set<string>): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const { uniqueBatch, expandIndexes } = dedupeBatchForTranslation(batch)
@@ -2188,10 +2327,11 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
     try {
       const items = protectedBatch.map((item, index) => {
         const context = contexts[index]
-        return context ? { text: item.text, context } : { text: item.text }
+        return context ? { id: translationItemId(index), text: item.text, context } : { id: translationItemId(index), text: item.text }
       })
 
       const result = await env.AI.run(model, {
+        ...aiRequestOptions(model),
         temperature: 0,
         max_tokens: 8192,
         response_format: {
@@ -2203,6 +2343,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
             role: 'system',
             content: [
               'You translate Capgo website copy for the target locale.',
+              translationBriefSystemHint(targetLanguage),
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
               translationContextSystemHint(),
@@ -2211,7 +2352,8 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, Live Update, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
-              `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${uniqueBatch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
+              translationStyleGuide(targetLanguage),
+              `Return a JSON object with exactly one key named "translations". Its value must be an object mapping every input item id (${translationItemId(0)} to ${translationItemId(uniqueBatch.length - 1)}) to the translated text of that item only. Do not return Markdown, comments, or explanations.`,
               attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
             ]
               .filter(Boolean)
@@ -2222,7 +2364,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
             content: JSON.stringify({
               targetLanguage,
               pagePath: pagePath || undefined,
-              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              protectedTokens: [...PROTECTED_TRANSLATION_TOKENS, ...CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS],
               items,
             }),
           },
@@ -2230,7 +2372,10 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       })
 
       payload = extractAiPayload(result)
-      const translated = parseTranslationArray(payload)
+      const drafted = parseKeyedTranslations(payload, uniqueBatch.length)
+      const review = drafted && drafted.length === uniqueBatch.length ? await reviewTranslatedBatch(env, targetLanguage, items, drafted) : null
+      const translated = review ? review.translations : drafted
+      const fallbackSources = new Set<string>(review && !review.reviewed ? uniqueBatch : [])
       if (!translated) {
         lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
       } else if (translated.length !== uniqueBatch.length) {
@@ -2239,6 +2384,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
         const restored = translated.map((text, index) => {
           const result = protectedBatch[index].restoreOrSource(text)
           if (result.missingTokens.length > 0) {
+            fallbackSources.add(uniqueBatch[index])
             console.warn('Translation kept source after protected token drop', {
               targetLanguage,
               index,
@@ -2252,9 +2398,11 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
         assertTranslatedBatch(targetLanguage, uniqueBatch, restored)
         const guarded = guardTranslatedBatchLengths(uniqueBatch, restored, targetLanguage)
         for (let index = 0; index < guarded.length; index += 1) {
+          if (guarded[index] !== restored[index]) fallbackSources.add(uniqueBatch[index])
           if (!shouldEnforceTranslationWordCount(uniqueBatch[index])) continue
-          guarded[index] = await translateSingleText(env, targetLanguage, uniqueBatch[index], pagePath, guarded[index])
+          guarded[index] = await translateSingleText(env, targetLanguage, uniqueBatch[index], pagePath, guarded[index], fallbackSources)
         }
+        for (const source of fallbackSources) notRemembered?.add(source)
         return expandDedupedBatchTranslations(guarded, expandIndexes)
       }
     } catch (error) {
@@ -2275,9 +2423,82 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
   throw new Error(`Translation JSON mode failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
+const isolateTranslationMemory = new Map<string, string>()
+
+function rememberInIsolate(key: string, translated: string): void {
+  if (isolateTranslationMemory.size >= TRANSLATION_MEMORY_ISOLATE_ENTRIES) {
+    const oldestKey = isolateTranslationMemory.keys().next().value
+    if (oldestKey !== undefined) isolateTranslationMemory.delete(oldestKey)
+  }
+  isolateTranslationMemory.set(key, translated)
+}
+
+async function translationMemoryKey(locale: Locale, text: string, context: string): Promise<string> {
+  return `memory/${TRANSLATION_MEMORY_VERSION}/${locale}/${await sha256Hex(JSON.stringify([text, context]))}.txt`
+}
+
+async function readTranslationMemoryEntry(env: Env, key: string): Promise<string | null> {
+  const cached = isolateTranslationMemory.get(key)
+  if (cached !== undefined) return cached
   try {
-    return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath)
+    const object = await env.TRANSLATION_STORE.get(key)
+    const translated = object ? await object.text() : null
+    if (translated) rememberInIsolate(key, translated)
+    return translated || null
+  } catch (error) {
+    console.warn('Translation memory read failed', { key, error: errorMessage(error) })
+    return null
+  }
+}
+
+async function writeTranslationMemoryEntry(env: Env, key: string, translated: string): Promise<void> {
+  rememberInIsolate(key, translated)
+  try {
+    await env.TRANSLATION_STORE.put(key, translated)
+  } catch (error) {
+    console.warn('Translation memory write failed', { key, error: errorMessage(error) })
+  }
+}
+
+// Unchanged English output is only remembered for segments made of protected names
+// ("Capgo CLI"); an unchanged label like "Pricing" is a miss that a later refresh retries.
+function isOnlyProtectedNames(source: string): boolean {
+  return !/\p{L}/u.test(protectTranslationTokens(source).text.replace(STRAY_PLACEHOLDER_GLOBAL_PATTERN, ''))
+}
+
+// Translates a batch of page segments, reusing every segment already in translation memory.
+async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[], pagePath = ''): Promise<string[]> {
+  const contexts = resolveTranslationContexts(batch)
+  const keys = await Promise.all(batch.map((text, index) => translationMemoryKey(locale, text, contexts[index] ?? '')))
+  const translations = await Promise.all(keys.map((key) => readTranslationMemoryEntry(env, key)))
+  const missingIndexes = translations.flatMap((translated, index) => (translated === null ? [index] : []))
+  if (missingIndexes.length === 0) return translations as string[]
+
+  const missingTexts = missingIndexes.map((index) => batch[index])
+  // Fallbacks (English kept after a dropped placeholder or length violation, drafts whose
+  // review failed) are served but not remembered, so the next refresh retries them.
+  const notRemembered = new Set<string>()
+  const translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath, notRemembered)
+  await Promise.all(
+    missingIndexes.map(async (batchIndex, translatedIndex) => {
+      const source = batch[batchIndex]
+      const text = translated[translatedIndex]
+      translations[batchIndex] = text ?? source
+      const remember =
+        text !== undefined &&
+        text.trim() &&
+        !STRAY_PLACEHOLDER_PATTERN.test(text) &&
+        !notRemembered.has(source) &&
+        (normalizedTranslationValue(text) !== normalizedTranslationValue(source) || isOnlyProtectedNames(source))
+      if (remember) await writeTranslationMemoryEntry(env, keys[batchIndex], text)
+    }),
+  )
+  return translations as string[]
+}
+
+async function translateBatch(env: Env, targetLanguage: string, batch: string[], pagePath = '', notRemembered?: Set<string>): Promise<string[]> {
+  try {
+    return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath, notRemembered)
   } catch (error) {
     const message = errorMessage(error)
     console.warn('Translation batch JSON failed; falling back to single-text translation', {
@@ -2287,10 +2508,13 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[],
     })
   }
 
-  return await translateBatchIndividually(env, targetLanguage, batch, pagePath)
+  // Single-text mode skips the review pass: with a reviewer configured these are unreviewed
+  // drafts, served now but not remembered so a later refresh runs the full pipeline.
+  if (env.TRANSLATION_REVIEW_MODEL?.trim()) for (const text of batch) notRemembered?.add(text)
+  return await translateBatchIndividually(env, targetLanguage, batch, pagePath, notRemembered)
 }
 
-async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = '', seedCandidate?: string): Promise<string> {
+async function translateSingleText(env: Env, targetLanguage: string, text: string, pagePath = '', seedCandidate?: string, notRemembered?: Set<string>): Promise<string> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
   const protectedText = protectTranslationTokens(text)
@@ -2311,6 +2535,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
     let payload: unknown = ''
     try {
       const result = await env.AI.run(model, {
+        ...aiRequestOptions(model),
         temperature: 0,
         max_tokens: Math.min(2048, Math.max(256, text.length * 3 + 128)),
         messages: [
@@ -2318,6 +2543,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             role: 'system',
             content: [
               'You translate one Capgo website string for the target locale.',
+              translationBriefSystemHint(targetLanguage),
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               translationContextSystemHint(),
               translationGrammarSystemHint(),
@@ -2328,6 +2554,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
               enforceWordCount && attempt > 1
                 ? 'Your previous translation used too many or too few words for this short UI string. Shorten or tighten the wording while keeping the same meaning.'
                 : '',
+              translationStyleGuide(targetLanguage),
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
             ]
               .filter(Boolean)
@@ -2338,7 +2565,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             content: JSON.stringify({
               targetLanguage,
               pagePath: pagePath || undefined,
-              protectedTokens: PROTECTED_TRANSLATION_TOKENS,
+              protectedTokens: [...PROTECTED_TRANSLATION_TOKENS, ...CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS],
               text: protectedText.text,
               context: context || undefined,
             }),
@@ -2407,6 +2634,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
       error: lastError.message,
       sourcePreview: aiPayloadPreview(text),
     })
+    notRemembered?.add(text)
     return text
   }
 
@@ -2416,16 +2644,17 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
       error: lastError.message,
       sourcePreview: aiPayloadPreview(text),
     })
+    notRemembered?.add(text)
     return text
   }
 
   throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
-async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[], pagePath = ''): Promise<string[]> {
+async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[], pagePath = '', notRemembered?: Set<string>): Promise<string[]> {
   const translated: string[] = []
   for (const text of batch) {
-    translated.push(await translateSingleText(env, targetLanguage, text, pagePath))
+    translated.push(await translateSingleText(env, targetLanguage, text, pagePath, undefined, notRemembered))
   }
   return translated
 }
@@ -3082,7 +3311,7 @@ async function refreshCacheIncrementally(
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
   while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
-    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex], requestUrl.pathname)
+    const translatedBatch = await translateBatchWithMemory(env, locale, batches[batchIndex], requestUrl.pathname)
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
     batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
@@ -3738,6 +3967,16 @@ export class TranslationCoordinator {
 }
 
 export const __translationWorkerTest = {
+  translateBatchWithMemory,
+  shouldBypassTranslation,
+  keepsTranslationPlaceholders,
+  translationMemoryKey,
+  TRANSLATION_MEMORY_VERSION,
+  aiRequestOptions,
+  parseKeyedTranslations,
+  protectTranslationTokens,
+  translationBatchJsonSchema,
+  translationStyleGuide,
   TRANSLATION_CACHE_VERSION,
   applyFrenchArticleElision,
   polishTranslatedText,
@@ -3789,11 +4028,7 @@ export default {
     if (shouldBypassTranslation(requestUrl.pathname)) {
       const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
       if (isRedirect(originResponse)) {
-        return trackAICrawler(
-          request,
-          withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'),
-          ctx,
-        )
+        return trackAICrawler(request, withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'), ctx)
       }
       return trackAICrawler(request, originResponse, ctx)
     }

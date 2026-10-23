@@ -260,7 +260,7 @@ A regulated pipeline should make these controls visible:
 
 The risk isn't that a team ships quickly. The risk is shipping without observability, rollback capability, or change tracking. A slow manual process can still release an untested or misconfigured change, while an automated process can block it consistently before production.
 
-For mobile teams in fintech or healthcare, continuous delivery may mean an automated bundle pipeline with a documented approval gate. That still delivers the main benefit, which is a perpetually ready release, without forcing the organization to remove controls that its risk model requires. Teams working through those requirements can use [regulatory compliance considerations for Capacitor applications](https://capgo.app/blog/understanding-regulatory-compliance/) as part of their release design.
+For mobile teams in fintech or healthcare, continuous delivery may mean an automated bundle pipeline with a documented approval gate. That still delivers the main benefit, which is a perpetually ready release, without forcing the organization to remove controls that its risk model requires. Teams working through those requirements can use [compliance checks in CI/CD for Capacitor apps](https://capgo.app/blog/compliance-checks-in-cicd-for-capacitor-apps/) as part of their release design.
 
 > Safety comes from evidence, controlled exposure, and recovery. It doesn't come from making every deployment manual.
 

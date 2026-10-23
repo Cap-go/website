@@ -115,6 +115,33 @@ export function ensureLdJsonContext(data: unknown): unknown {
 }
 
 /**
+ * Split ld+json into standalone blocks, one per entity, each with its own @context.
+ * A single @graph block is valid JSON-LD, but many crawlers and agent scanners only read
+ * the top-level @type, so they see no types at all. @id references still link the blocks.
+ */
+export function toLdJsonBlocks(data: unknown): unknown[] {
+  if (data == null || typeof data !== 'object') return []
+  if (Array.isArray(data)) return data.flatMap((item) => toLdJsonBlocks(item))
+
+  const obj = data as Record<string, unknown>
+  const graph = obj['@graph']
+  // A named graph (@id) or one with extra members is data, not just a wrapper: keep it as one block.
+  const isPlainWrapper = Object.keys(obj).every((key) => key === '@context' || key === '@graph')
+  if (graph == null || typeof graph !== 'object' || !isPlainWrapper) return [ensureLdJsonContext(obj)]
+
+  // An explicit @context: null is a valid context reset, so default only when the key is absent.
+  const context = '@context' in obj ? obj['@context'] : SCHEMA_ORG_CONTEXT
+  const nodes = Array.isArray(graph) ? graph : [graph]
+  return nodes
+    .filter((node): node is Record<string, unknown> => node != null && typeof node === 'object' && !Array.isArray(node))
+    .map((node) => {
+      const { '@context': nodeContext, ...rest } = node
+      // Node-local contexts extend the inherited one instead of replacing it (JSON-LD context arrays apply in order).
+      return { '@context': nodeContext === undefined ? context : [context, nodeContext].flat(), ...rest }
+    })
+}
+
+/**
  * Create a complete Organization schema for Capgo
  */
 export function createCapgoOrganization(config: RuntimeConfig['public']): Organization {

@@ -1,0 +1,17 @@
+---
+/**
+ * Renders trial wording plus its paid-ads "direct offer" replacement.
+ * Global CSS shows exactly one of them: the slot for normal visitors, `direct` when <html data-offer="direct">.
+ * Both are static HTML, so there is no flash and normal visitors see the original copy unchanged.
+ */
+interface Props {
+  direct: string
+}
+
+const { direct } = Astro.props
+---
+
+<span data-trial-copy>
+  <slot />
+</span>
+<span data-direct-copy>{direct}</span>

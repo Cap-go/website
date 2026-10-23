@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Kids category privacy review">
+  <title>Kids category privacy review</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="268" cy="44" r="22" fill="#44BCFF" opacity="0.25"/>
+  <rect x="64" y="48" width="192" height="112" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="120" cy="88" r="20" fill="none" stroke="#F472B6" stroke-width="2"/>
+  <path d="M104 118 C104 100 136 100 136 118 V128 H104 Z" fill="none" stroke="#F472B6" stroke-width="2"/>
+  <rect x="168" y="72" width="72" height="10" rx="5" fill="#9CA3AF" opacity="0.45"/>
+  <rect x="168" y="92" width="56" height="10" rx="5" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="168" y="112" width="64" height="10" rx="5" fill="#44BCFF" opacity="0.35"/>
+  <rect x="168" y="132" width="48" height="10" rx="5" fill="#9CA3AF" opacity="0.35"/>
+</svg>
