@@ -100,7 +100,7 @@ const { token, expiresAt } = await CapacitorNeon.getAnonymousToken();
 
 Sign in with an OAuth provider. Opens the provider's authentication page.
 
-On iOS, `redirectTo` must be a trusted `https` Universal Link. On Android, use a trusted `https` App Link. Neon Auth rejects custom URL schemes as `redirectTo`. For a custom scheme, host a trusted HTTPS callback page that forwards `neon_auth_session_verifier` to your app. See [Getting started](/docs/plugins/neon/getting-started/) for platform OAuth setup.
+On iOS, set `redirectTo` to a trusted `https` Universal Link that opens your app directly. If you use a custom URL scheme, set `redirectTo` to a trusted HTTPS bounce page URL that forwards `neon_auth_session_verifier` to your app. On Android, use a trusted `https` App Link. Neon Auth rejects custom URL schemes as `redirectTo`. See [Getting started](/docs/plugins/neon/getting-started/) for platform OAuth setup.
 
 ```typescript
 import { CapacitorNeon } from '@capgo/capacitor-neon';
