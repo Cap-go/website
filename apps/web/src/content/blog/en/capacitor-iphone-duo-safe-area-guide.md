@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-23T00:00:00.000Z
-updated_at: 2026-10-23T00:00:00.000Z
+updated_at: 2026-10-23T22:32:27.000Z
 head_image: /blog-images/capacitor-iphone-duo-safe-area-guide.png
 head_image_alt: iPhone Duo open in landscape with the system tab bar as a vertical side rail
 keywords: Capacitor, iPhone Duo, safe area, viewport-fit, System Bars, native navigation, foldable iPhone, WebView
