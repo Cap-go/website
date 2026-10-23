@@ -321,6 +321,9 @@ async function renderVideo(video: SocialVideo, output: string) {
 }
 
 const requested = new Set(process.argv.slice(2))
+const knownSlugs = new Set(videos.map((video) => video.slug))
+const unknownSlugs = [...requested].filter((slug) => !knownSlugs.has(slug))
+if (unknownSlugs.length > 0) throw new Error(`Unknown video slug: ${unknownSlugs.join(', ')}. Known slugs: ${[...knownSlugs].join(', ')}`)
 const outputs = new Map(Object.values(ogVideos).map((entry) => [entry.slug, entry.url]))
 
 for (const video of videos) {
