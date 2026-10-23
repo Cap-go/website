@@ -7235,7 +7235,7 @@ const messages = {
   oss_apps_source_cta: 'Browse Capgo on GitHub',
   oss_apps_stack_title: 'Built on the Capgo stack',
   oss_apps_stack_body:
-    'These apps use Capacitor, Capgo live updates, and native plugins we maintain. JavaScript changes ship over the air. Native changes go through Capgo Cloud Build.',
+    'These apps use Capacitor, Capgo live updates, and native plugins we maintain. JavaScript changes ship over the air. Native changes ship as a new store build. Simple Fest, Monday Quest, BeWise, and Mimesis use Capgo Cloud Build. Forgr ships its iOS build as an Xcode archive to TestFlight.',
   oss_apps_stack_cta: 'Browse the plugins',
   oss_apps_section_title: 'The apps',
   oss_apps_section_lede: 'Screenshots from the shipping apps. Store buttons open the live listing.',
