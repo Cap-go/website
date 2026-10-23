@@ -7,7 +7,7 @@
  * Usage: bun run generate:social-videos [slug ...]
  */
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -16,6 +16,8 @@ import { ogVideoHeight, ogVideos, ogVideoWidth } from '../apps/web/src/config/og
 import { scenes, type Scene } from './social-videos/scenes'
 
 const fps = 30
+// Previews must stay light: crawlers and feeds fetch the whole file before playing it.
+const maxBytes = 1_000_000
 const sceneDir = resolve('scripts/social-videos')
 const publicDir = resolve('apps/web/public')
 
@@ -105,6 +107,8 @@ async function renderScene(browser: Awaited<ReturnType<typeof chromium.launch>>,
       '-an',
       output,
     ])
+    const bytes = statSync(output).size
+    if (bytes > maxBytes) throw new Error(`${output} is ${bytes} bytes, over the ${maxBytes} byte budget. Shorten the scene or simplify its motion.`)
   } finally {
     rmSync(dir, { recursive: true, force: true })
   }

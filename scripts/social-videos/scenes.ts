@@ -18,6 +18,16 @@ export type Scene = {
   html: string
 }
 
+/** Turn a display metric such as `1B+` into the number to count up to and the suffix to keep. */
+function metricCount(value: string) {
+  const match = /^([\d.]+)([KMB]?)(\+?)$/.exec(value)
+  if (!match) throw new Error(`Unsupported metric format: ${value}`)
+  const scale = { '': 1, K: 1_000, M: 1_000_000, B: 1_000_000_000 }[match[2] as '' | 'K' | 'M' | 'B']
+  return { to: Math.round(Number(match[1]) * scale), suffix: match[3] }
+}
+
+const updatesPerMonth = metricCount(siteMetrics.updatesPerMonth)
+
 // ---- Timeline helpers -------------------------------------------------------------------------------------------
 
 /** One CSS animation entry: keyframes `name` starting at `at` seconds, held before and after. */
@@ -130,7 +140,7 @@ const home = scene(
     5.9,
     7.4,
     `<div class="small" ${anim(a('fadeIn', 5.95))}>Capgo ships</div>
-     <div class="huge accent" style="font-size:132px">${count(1_000_000_000, 6.0, 0.9, '+')}</div>
+     <div class="huge accent" style="font-size:132px">${count(updatesPerMonth.to, 6.0, 0.9, updatesPerMonth.suffix)}</div>
      <div class="mid">${w('updates every month', 6.3, '', 'fromBottom')}</div>
      <div class="row" style="margin-top:8px">
        <span class="pill brand" ${anim(a('pop', 6.6, 0.4, 'var(--snap)'))}>${siteMetrics.devices} devices</span>
