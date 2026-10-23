@@ -24,6 +24,7 @@ import { handleAuthorizationServerMetadataRequest, OAUTH_AUTHORIZATION_SERVER_PA
 import { handlePublicMcp, PUBLIC_MCP_PATH, type PublicMcpEnv } from './public-mcp'
 import { handleReadmeBanner } from './readme-banner'
 import type { BackgroundContext } from './types'
+import { withVideoRange } from './video-ranges'
 import { handleSignaturesDirectoryRequest, HTTP_MESSAGE_SIGNATURES_DIRECTORY, signedFetch } from './web-bot-auth'
 
 interface Env extends PublicMcpEnv {
@@ -511,6 +512,9 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
     }
   }
   if (isGlobalCssPath(pathname)) return trackAICrawler(request, withGlobalCssCacheHeaders(assetResponse), ctx)
+  if (pathname.startsWith('/channel-videos/') && pathname.endsWith('.mp4')) {
+    return trackAICrawler(request, await withVideoRange(request, assetResponse), ctx)
+  }
   if (pathname === '/' || pathname === '/index.html') {
     return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), ctx)
   }
