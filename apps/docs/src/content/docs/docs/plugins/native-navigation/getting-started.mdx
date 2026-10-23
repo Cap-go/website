@@ -357,7 +357,7 @@ defineNativeNavigationElements();
 
 ## iPhone Duo (iOS 27)
 
-On iPhone Duo, iOS often places the system tab bar and status bar in a **vertical side rail**. `env(safe-area-inset-top)` can be `0` while `left` or `right` grows. Test folded, open, landscape, and Split View poses in Xcode Device Hub.
+On iPhone Duo, iOS often places the system tab bar and status bar in a **vertical side rail**. `env(safe-area-inset-top)` can be `0` while `left` or `right` grows. Set `viewport-fit=cover` on your viewport meta tag when you pad with CSS env anywhere in the app. Test folded, open, landscape, and Split View poses in Xcode Device Hub.
 
 Native Navigation uses real `UINavigationBar` and `UITabBar`, so **system tab bars follow the rail**. The **curve** tab bar shape stays on the bottom; the center action keeps a circular cradle when the window widens.
 
@@ -365,7 +365,7 @@ Native Navigation uses real `UINavigationBar` and `UITabBar`, so **system tab ba
 | :---: | :---: |
 | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-folded-system.webp" alt="iPhone Duo folded with the system tab bar in the side rail" width="200" /> | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-open-system.webp" alt="iPhone Duo open with the system tab bar in the side rail" width="240" /> |
 
-With `contentInsetMode: 'css'`, combine plugin variables with CSS env insets:
+With `contentInsetMode: 'css'`, pad web content with plugin variables only (they already include native bar overlap and UIKit safe-area edges):
 
 ```css
 main {
