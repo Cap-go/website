@@ -280,7 +280,6 @@ const STATIC_PREFIXES = [
   '/_docs/',
   '/api/',
   '/assets/',
-  '/capgo',
   '/favicon',
   '/fonts/',
   '/icons/',
@@ -3969,6 +3968,7 @@ export class TranslationCoordinator {
 
 export const __translationWorkerTest = {
   translateBatchWithMemory,
+  shouldBypassTranslation,
   keepsTranslationPlaceholders,
   translationMemoryKey,
   TRANSLATION_MEMORY_VERSION,

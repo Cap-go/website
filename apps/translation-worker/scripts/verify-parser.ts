@@ -185,6 +185,8 @@ const ownedPlaceholder = __translationWorkerTest.protectTranslationTokens('Deplo
 assert(ownedPlaceholder.text.includes('__CAPGO_KEEP_0__'), 'Capgo was not protected in the fixture')
 const crossSegment = ownedPlaceholder.restoreOrSource('Déployer avec __CAPGO_KEEP_0__ __CAPGO_KEEP_1__')
 assert(crossSegment.text === 'Deploy with Capgo' && crossSegment.missingTokens.join() === 'stray placeholder', 'A placeholder from another segment reached the page')
+assert(!__translationWorkerTest.shouldBypassTranslation('/fr/capgo-cli/'), 'The Capgo CLI product page skipped translation')
+assert(__translationWorkerTest.shouldBypassTranslation('/fr/capgo-feature-image.webp'), 'A Capgo image was sent through translation')
 const cliCommand = __translationWorkerTest.protectTranslationTokens('npx @capgo/cli bundle upload')
 assert(cliCommand.text === 'npx __CAPGO_KEEP_0__ bundle upload', 'An npm package name was split into several placeholders')
 assert(cliCommand.restoreOrSource('npx ____CAPGO_KEEP_0__ bundle upload').text === 'npx @capgo/cli bundle upload', 'Extra underscores around a placeholder leaked into the page')
