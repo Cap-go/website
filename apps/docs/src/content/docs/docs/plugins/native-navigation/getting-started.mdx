@@ -365,14 +365,14 @@ Native Navigation uses real `UINavigationBar` and `UITabBar`, so **system tab ba
 | :---: | :---: |
 | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-folded-system.webp" alt="iPhone Duo folded with the system tab bar in the side rail" width="200" /> | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-open-system.webp" alt="iPhone Duo open with the system tab bar in the side rail" width="240" /> |
 
-With `contentInsetMode: 'css'`, pad web content with plugin variables only (they already include native bar overlap and UIKit safe-area edges):
+With `contentInsetMode: 'css'`, pad web content with plugin variables. Use `max()` with env fallbacks per edge so layout stays correct when a plugin variable is `0` without summing duplicate insets:
 
 ```css
 main {
-  padding-top: var(--cap-native-navigation-top);
-  padding-right: var(--cap-native-navigation-right);
-  padding-bottom: var(--cap-native-navigation-bottom);
-  padding-left: var(--cap-native-navigation-left);
+  padding-top: max(var(--cap-native-navigation-top, 0px), env(safe-area-inset-top, 0px));
+  padding-right: max(var(--cap-native-navigation-right, 0px), env(safe-area-inset-right, 0px));
+  padding-bottom: max(var(--cap-native-navigation-bottom, 0px), env(safe-area-inset-bottom, 0px));
+  padding-left: max(var(--cap-native-navigation-left, 0px), env(safe-area-inset-left, 0px));
 }
 ```
 

@@ -223,16 +223,18 @@ await NativeNavigation.configure({
 - `--cap-native-tabbar-height`
 - `--cap-native-system-tabbar-height` (nominal tab bar height when `tabbarHeight` is `0` for hosted system bars)
 
-When Native Navigation owns the bars, use **only** the plugin variables below. They already include native bar overlap and UIKit safe-area edges. Do not also apply Option A or Option B env padding on the same edges.
+When Native Navigation owns the bars, pad with the plugin variables below. They already include native bar overlap and UIKit safe-area edges when a bar is active. Use `max()` with env fallbacks so edges stay correct when a variable is `0` (for example hosted system tab bars) without **adding** plugin and env padding together.
 
 ```css
 main {
-  padding-top: var(--cap-native-navigation-top);
-  padding-right: var(--cap-native-navigation-right);
-  padding-bottom: var(--cap-native-navigation-bottom);
-  padding-left: var(--cap-native-navigation-left);
+  padding-top: max(var(--cap-native-navigation-top, 0px), env(safe-area-inset-top, 0px));
+  padding-right: max(var(--cap-native-navigation-right, 0px), env(safe-area-inset-right, 0px));
+  padding-bottom: max(var(--cap-native-navigation-bottom, 0px), env(safe-area-inset-bottom, 0px));
+  padding-left: max(var(--cap-native-navigation-left, 0px), env(safe-area-inset-left, 0px));
 }
 ```
+
+Do not also apply Option A or Option B padding on the same `main` element.
 
 On iOS 26+ with a **system-hosted** tab bar, `tabbarHeight` in plugin insets can be **`0`** so web content is not lifted twice. Use `--cap-native-system-tabbar-height` when you need spacing for floating actions above the rail.
 
