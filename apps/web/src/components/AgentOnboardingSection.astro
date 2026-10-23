@@ -1,0 +1,77 @@
+---
+import m from '@/copy/messages'
+
+const locale = Astro.locals.locale
+// Console signup, where new accounts choose "Set up with your AI agent".
+const registerUrl = 'https://console.capgo.app/register/'
+const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
+
+const steps = [
+  {
+    title: m.agent_onboarding_step1_title({}, { locale }),
+    desc: m.agent_onboarding_step1_desc({}, { locale }),
+  },
+  {
+    title: m.agent_onboarding_step2_title({}, { locale }),
+    desc: m.agent_onboarding_step2_desc({}, { locale }),
+    code: "npx install-mcp 'npx @capgo/cli@latest mcp'",
+  },
+  {
+    title: m.agent_onboarding_step3_title({}, { locale }),
+    desc: m.agent_onboarding_step3_desc({}, { locale }),
+  },
+]
+---
+
+<section class="bg-[#1a1a1a] py-24 sm:py-32" aria-labelledby="agent-onboarding-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.agent_onboarding_eyebrow({}, { locale })}</p>
+      <h2 id="agent-onboarding-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+        {m.agent_onboarding_title({}, { locale })}
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.agent_onboarding_subtitle({}, { locale })}</p>
+    </div>
+
+    <ol class="mt-16 grid gap-4 lg:grid-cols-3">
+      {steps.map((step, index) => (
+        <li class="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+          <span class="flex items-center gap-3">
+            <span
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#44BCFF]/10 font-mono text-sm font-semibold text-[#44BCFF] ring-1 ring-[#44BCFF]/20"
+              aria-hidden="true"
+            >
+              {index + 1}
+            </span>
+            <h3 class="text-base font-semibold text-white">{step.title}</h3>
+          </span>
+          <p class:list={['mt-3 text-sm leading-6 text-gray-400', step.code && 'mb-5']}>{step.desc}</p>
+          {step.code && (
+            <code class="mt-auto block rounded-lg border border-white/10 bg-black/40 px-3 py-2 font-mono text-xs break-all text-gray-300">
+              <span class="text-gray-600" aria-hidden="true">
+                {'$ '}
+              </span>
+              {step.code}
+            </code>
+          )}
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-12 flex flex-col items-center gap-4 text-center">
+      <a
+        id="agent-onboarding-signup-cta"
+        href={registerUrl}
+        aria-describedby="agent-onboarding-signup-note"
+        class="font-pj inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white no-underline shadow-lg shadow-blue-600/20 transition-colors duration-200 hover:bg-blue-500 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none"
+      >
+        {m.agent_onboarding_cta({}, { locale })}
+        <span aria-hidden="true">→</span>
+      </a>
+      <p id="agent-onboarding-signup-note" class="font-inter m-0 text-sm leading-6 text-gray-300">
+        {trialNote}
+      </p>
+      <p class="m-0 max-w-xl text-sm leading-6 text-gray-500">{m.agent_onboarding_manual_note({}, { locale })}</p>
+    </div>
+  </div>
+</section>

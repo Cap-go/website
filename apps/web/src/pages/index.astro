@@ -16,6 +16,7 @@ import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import AskAiSection from '@/components/AskAiSection.astro'
 import RiskDebtSection from '@/components/RiskDebtSection.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
+import AgentOnboardingSection from '@/components/AgentOnboardingSection.astro'
 import { getAbsoluteLocaleUrl } from '@/services/links'
 import { planMonthlyPrice, planYearlyPrice } from '@/lib/planCopy'
 import { getPlans } from '@/lib/siteData'
@@ -33,6 +34,7 @@ const pricingUrl = getAbsoluteLocaleUrl(config.public.baseUrl, locale, '/pricing
 const homepageFeatureList = [
   'Capacitor skills for AI coding agents (Claude Code, Codex, Cursor, Copilot, Gemini CLI)',
   'Hosted and local MCP servers for Capacitor app management',
+  'Onboarding with your AI coding agent: one prompt sets up live updates or native builds through the Capgo MCP server',
   'Maintained Capacitor plugins for native features',
   'Migration to Capacitor and Capacitor major version upgrades',
   'Cloud native iOS and Android builds',
@@ -89,6 +91,7 @@ const content = {
   <div>
     <Hero />
     <ProblemSolution />
+    <AgentOnboardingSection />
     <PlatformOverview />
     <PlatformScreens />
     <AgentReadySection showAudienceSwitch />
