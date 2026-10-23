@@ -619,9 +619,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [initError, setInitError] = useState<string | null>(null);
 
   useEffect(() => {
-    void ensureSocialLoginInitialized().catch((error) => {
-      setInitError(error instanceof Error ? error.message : 'Social login failed to initialize');
-    });
+    void ensureSocialLoginInitialized()
+      .then(() => setInitError(null))
+      .catch((error) => {
+        setInitError(error instanceof Error ? error.message : 'Social login failed to initialize');
+      });
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
