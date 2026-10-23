@@ -186,7 +186,7 @@ const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
 // Bump this when the prompt, style guides or models change to translate everything
 // again. Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages
 // are rebuilt from memory without new AI calls.
-const TRANSLATION_MEMORY_VERSION = '2026-10-22-style-guides-v2'
+const TRANSLATION_MEMORY_VERSION = '2026-10-23-style-guides-v3'
 const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
@@ -223,6 +223,12 @@ const STRAY_PLACEHOLDER_GLOBAL_PATTERN = /__CAPGO_KEEP_\d+__/g
 const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 // Product names matched with exact case: "Native Build" is the product, "native build" is generic copy.
 const CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS = ['Native Build'] as const
+// Kept whole so the model never sees half a command: npm package names (@capgo/cli,
+// @capgo/capacitor-updater@7) and Capgo CLI commands ("capgo bundle upload").
+const PROTECTED_TRANSLATION_PATTERNS = [
+  /@[a-z0-9][a-z0-9-]*\/[a-z0-9][a-z0-9.-]*(?:@[\w.-]+)?/y,
+  /capgo (?:app|bundle|channel|build|init|login|doctor|key|organisation|organization|account|probe)(?: (?:upload|list|delete|cleanup|set|add|encrypt|decrypt|compatibility|zip|request|create|current|debug|setting|credentials))?/y,
+] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -2096,6 +2102,11 @@ function isProtectedTokenBoundary(value: string, index: number): boolean {
 }
 
 function protectedTokenAt(value: string, index: number): string | null {
+  for (const pattern of PROTECTED_TRANSLATION_PATTERNS) {
+    pattern.lastIndex = index
+    const matched = pattern.exec(value)?.[0]
+    if (matched && isProtectedTokenBoundary(value, index - 1) && isProtectedTokenBoundary(value, index + matched.length)) return matched
+  }
   for (const token of CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS) {
     if (!value.startsWith(token, index)) continue
     if (!isProtectedTokenBoundary(value, index - 1) || !isProtectedTokenBoundary(value, index + token.length)) continue
@@ -2133,10 +2144,16 @@ function protectTranslationTokens(value: string): {
     index += token.length
   }
 
+  // Models sometimes pad a placeholder with extra underscores ("/____CAPGO_KEEP_1__"),
+  // which would leave "__" next to the restored token. Trim them unless the source
+  // itself has underscores touching a placeholder.
+  const sourceHasPaddedPlaceholder = /_{3,}CAPGO_KEEP_|CAPGO_KEEP_\d+_{3,}/.test(text)
+  const normalizePlaceholders = (translated: string) => (sourceHasPaddedPlaceholder ? translated : translated.replace(/_{2,}CAPGO_KEEP_(\d+)_{2,}/g, '__CAPGO_KEEP_$1__'))
+
   return {
     text,
     restore(translated: string): string {
-      let restored = translated
+      let restored = normalizePlaceholders(translated)
       for (const [placeholder, token] of replacements) {
         if (!restored.includes(placeholder)) throw new Error(`Translation dropped protected token: ${token}`)
         restored = restored.split(placeholder).join(token)
@@ -2145,7 +2162,7 @@ function protectTranslationTokens(value: string): {
       return restored
     },
     restoreOrSource(translated: string): { text: string; missingTokens: string[] } {
-      let restored = translated
+      let restored = normalizePlaceholders(translated)
       const missingTokens: string[] = []
       for (const [placeholder, token] of replacements) {
         if (!restored.includes(placeholder)) {
