@@ -20,7 +20,7 @@ export type Scene = {
 
 /** Turn a display metric such as `1B+` into the number to count up to and the suffix to keep. */
 function metricCount(value: string) {
-  const match = /^([\d.]+)([KMB]?)(\+?)$/.exec(value)
+  const match = /^(\d+(?:\.\d+)?)([KMB]?)(\+?)$/.exec(value)
   if (!match) throw new Error(`Unsupported metric format: ${value}`)
   const scale = { '': 1, K: 1_000, M: 1_000_000, B: 1_000_000_000 }[match[2] as '' | 'K' | 'M' | 'B']
   return { to: Math.round(Number(match[1]) * scale), suffix: match[3] }
