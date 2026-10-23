@@ -43,7 +43,8 @@ const config: CapacitorConfig = {
     CapacitorUpdater: {
       autoUpdate: true,
       websiteMode: true,
-      // notifyAppReady() is called for you once the page shows content.
+      // websiteMode (Web2App): needs @capgo/capacitor-updater with website mode.
+      // Updates apply immediately; notifyAppReady() runs once content shows (websiteAutoNotifyReady).
       // A version that never becomes ready rolls back to the last good one.
     },
   },

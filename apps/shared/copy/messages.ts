@@ -6426,9 +6426,6 @@ const messages = {
   website_live_upgrade_body:
     'When you want channels, stats, encryption or CI uploads, open your app settings in the Capgo console and switch to the full Capgo experience. A guided onboarding walks you through the setup and every hidden feature comes back.',
   website_live_upgrade_title: 'Outgrow it? Switch from app settings.',
-  website_live_url_aria_label: 'Create a Capgo account and add your website',
-  website_live_url_button: 'Get started',
-  website_live_url_placeholder: 'your-website.com',
   website_title: 'Capacitor Live Update - Capgo Cloud',
   welcome_to_capgo: 'Welcome to Capgo',
   what_does_build_time_refer_to: 'What does "build time" refer to in the plans?',
