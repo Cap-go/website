@@ -13,6 +13,7 @@ export const appleRejectionStoryTagStyles: Record<string, string> = {
   '5-6': 'border-red-300/50 bg-red-500/15 text-red-100',
   '2-5-19': 'border-orange-300/50 bg-orange-500/15 text-orange-100',
   '2-1': 'border-sky-300/50 bg-sky-500/15 text-sky-100',
+  '2-3-7': 'border-violet-200/50 bg-violet-400/15 text-violet-50',
   metadata: 'border-violet-300/50 bg-violet-500/15 text-violet-100',
   'endless-review': 'border-amber-300/50 bg-amber-500/15 text-amber-100',
   'account-termination': 'border-red-400/50 bg-red-500/20 text-red-100',
