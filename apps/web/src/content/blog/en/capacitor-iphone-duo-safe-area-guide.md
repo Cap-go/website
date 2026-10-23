@@ -10,7 +10,7 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-23T00:00:00.000Z
 updated_at: 2026-10-23T00:00:00.000Z
-head_image: /plugins/demo/capacitor-native-navigation/iphone-duo-open-system.webp
+head_image: /blog-images/capacitor-iphone-duo-safe-area-guide.png
 head_image_alt: iPhone Duo open in landscape with the system tab bar as a vertical side rail
 keywords: Capacitor, iPhone Duo, safe area, viewport-fit, System Bars, native navigation, foldable iPhone, WebView
 tag: Development, Mobile, iOS
@@ -54,12 +54,14 @@ Pad **interactive** content per edge. Let backgrounds bleed edge to edge when yo
 ```css
 .page {
   min-height: 100dvh;
-  padding-top: env(safe-area-inset-top);
-  padding-right: env(safe-area-inset-right);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
+  padding-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+  padding-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
+  padding-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  padding-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
 }
 ```
+
+Pick **one** inset owner for the whole app: pad `html` site-wide **or** pad a layout shell such as `.page` / `main`, not both recipes at once.
 
 On scroll views, inset the **content**, not only the outer scroll container, so backgrounds can scroll full width while text and buttons stay clear of the rail.
 
@@ -89,6 +91,7 @@ export default config;
 - Use the **fallback pattern** from the [System Bars docs](https://capacitorjs.com/docs/apis/system-bars):
 
 ```css
+/* Alternative to per-page `.page` padding: one site-wide shell on html */
 html {
   padding-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
   padding-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
@@ -135,8 +138,12 @@ function onGeometryChange() {
   const vv = window.visualViewport;
   const width = vv?.width ?? window.innerWidth;
   const height = vv?.height ?? window.innerHeight;
+  const offsetLeft = vv?.offsetLeft ?? 0;
+  const offsetTop = vv?.offsetTop ?? 0;
   document.documentElement.style.setProperty('--app-vv-width', `${width}px`);
   document.documentElement.style.setProperty('--app-vv-height', `${height}px`);
+  document.documentElement.style.setProperty('--app-vv-offset-left', `${offsetLeft}px`);
+  document.documentElement.style.setProperty('--app-vv-offset-top', `${offsetTop}px`);
 }
 
 window.addEventListener('resize', onGeometryChange);
@@ -152,7 +159,16 @@ On Android, include `density` in `android:configChanges` on your main activity s
 Use **live** width to branch layout, not `screen.width` captured once at startup:
 
 ```ts
-const compact = window.matchMedia('(max-width: 600px)').matches;
+const compactQuery = window.matchMedia('(max-width: 600px)');
+
+function readCompactWidth() {
+  return compactQuery.matches;
+}
+
+compactQuery.addEventListener('change', () => {
+  document.documentElement.dataset.widthClass = readCompactWidth() ? 'compact' : 'regular';
+});
+document.documentElement.dataset.widthClass = readCompactWidth() ? 'compact' : 'regular';
 ```
 
 In CSS, prefer flex and grid with `minmax()` over fixed `100vw` widths. `100vw` often ignores scrollbars and rail asymmetry and causes horizontal overflow.
@@ -202,14 +218,14 @@ await NativeNavigation.configure({
 - `--cap-native-tabbar-height`
 - `--cap-native-system-tabbar-height` (nominal tab bar height when `tabbarHeight` is `0` for hosted system bars)
 
-Example layout:
+Example layout (plugin variables already include native bar overlap and UIKit safe-area edges; do not add env padding on the same edges):
 
 ```css
 main {
-  padding-top: calc(var(--cap-native-navigation-top) + env(safe-area-inset-top, 0px));
-  padding-right: calc(var(--cap-native-navigation-right) + env(safe-area-inset-right, 0px));
-  padding-bottom: calc(var(--cap-native-navigation-bottom) + env(safe-area-inset-bottom, 0px));
-  padding-left: calc(var(--cap-native-navigation-left) + env(safe-area-inset-left, 0px));
+  padding-top: var(--cap-native-navigation-top);
+  padding-right: var(--cap-native-navigation-right);
+  padding-bottom: var(--cap-native-navigation-bottom);
+  padding-left: var(--cap-native-navigation-left);
 }
 ```
 
