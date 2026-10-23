@@ -1,5 +1,5 @@
 ---
-import { ossApps, type OssAppLicense } from '@/config/ossApps'
+import { ossApps, type OssApp, type OssAppLicense, type OssAppScreenshot } from '@/config/ossApps'
 import Layout from '@/layouts/Layout.astro'
 import { createItemListLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import m from '@/copy/messages'
@@ -41,52 +41,46 @@ const licenseLabel: Record<OssAppLicense, string> = {
   public: m.oss_apps_license_public({}, { locale }),
 }
 
-const copyById = {
-  autobrowse: {
-    kind: m.oss_apps_kind_browser({}, { locale }),
-    summary: m.oss_apps_autobrowse_description({}, { locale }),
-    alts: [m.oss_apps_autobrowse_chat_alt({}, { locale }), m.oss_apps_autobrowse_home_alt({}, { locale })],
-  },
-  simplefest: {
-    kind: m.oss_apps_kind_events({}, { locale }),
-    summary: m.oss_apps_simplefest_description({}, { locale }),
-    alts: [m.oss_apps_simplefest_home_alt({}, { locale }), m.oss_apps_simplefest_scan_alt({}, { locale })],
-  },
-  mondayquest: {
-    kind: m.oss_apps_kind_habits({}, { locale }),
-    summary: m.oss_apps_mondayquest_description({}, { locale }),
-    alts: [m.oss_apps_mondayquest_today_alt({}, { locale }), m.oss_apps_mondayquest_track_alt({}, { locale })],
-  },
-  bewise: {
-    kind: m.oss_apps_kind_quotes({}, { locale }),
-    summary: m.oss_apps_bewise_description({}, { locale }),
-    alts: [m.oss_apps_bewise_today_alt({}, { locale }), m.oss_apps_bewise_widget_alt({}, { locale })],
-  },
-  mimesis: {
-    kind: m.oss_apps_kind_game({}, { locale }),
-    summary: m.oss_apps_mimesis_description({}, { locale }),
-    alts: [m.oss_apps_mimesis_playing_alt({}, { locale }), m.oss_apps_mimesis_themes_alt({}, { locale })],
-  },
-  forgr: {
-    kind: m.oss_apps_kind_tools({}, { locale }),
-    summary: m.oss_apps_forgr_description({}, { locale }),
-    alts: [m.oss_apps_forgr_home_alt({}, { locale }), m.oss_apps_forgr_chat_alt({}, { locale })],
-  },
-} as const
+type AppCopyKey = OssApp['kindKey'] | OssApp['summaryKey'] | OssAppScreenshot['altKey']
 
-const apps = ossApps.map((app) => {
-  const copy = copyById[app.id]
-  return {
-    ...app,
-    kind: copy.kind,
-    summary: copy.summary,
-    licenseLabel: licenseLabel[app.license],
-    screenshots: app.screenshots.map((screenshot, index) => ({
-      ...screenshot,
-      alt: copy.alts[index],
-    })),
-  }
-})
+// Literal calls stay here so the translation scanner still records each key.
+const copyByKey = {
+  oss_apps_kind_browser: m.oss_apps_kind_browser({}, { locale }),
+  oss_apps_kind_events: m.oss_apps_kind_events({}, { locale }),
+  oss_apps_kind_habits: m.oss_apps_kind_habits({}, { locale }),
+  oss_apps_kind_quotes: m.oss_apps_kind_quotes({}, { locale }),
+  oss_apps_kind_game: m.oss_apps_kind_game({}, { locale }),
+  oss_apps_kind_tools: m.oss_apps_kind_tools({}, { locale }),
+  oss_apps_autobrowse_description: m.oss_apps_autobrowse_description({}, { locale }),
+  oss_apps_simplefest_description: m.oss_apps_simplefest_description({}, { locale }),
+  oss_apps_mondayquest_description: m.oss_apps_mondayquest_description({}, { locale }),
+  oss_apps_bewise_description: m.oss_apps_bewise_description({}, { locale }),
+  oss_apps_mimesis_description: m.oss_apps_mimesis_description({}, { locale }),
+  oss_apps_forgr_description: m.oss_apps_forgr_description({}, { locale }),
+  oss_apps_autobrowse_chat_alt: m.oss_apps_autobrowse_chat_alt({}, { locale }),
+  oss_apps_autobrowse_home_alt: m.oss_apps_autobrowse_home_alt({}, { locale }),
+  oss_apps_simplefest_home_alt: m.oss_apps_simplefest_home_alt({}, { locale }),
+  oss_apps_simplefest_scan_alt: m.oss_apps_simplefest_scan_alt({}, { locale }),
+  oss_apps_mondayquest_today_alt: m.oss_apps_mondayquest_today_alt({}, { locale }),
+  oss_apps_mondayquest_track_alt: m.oss_apps_mondayquest_track_alt({}, { locale }),
+  oss_apps_bewise_today_alt: m.oss_apps_bewise_today_alt({}, { locale }),
+  oss_apps_bewise_widget_alt: m.oss_apps_bewise_widget_alt({}, { locale }),
+  oss_apps_mimesis_playing_alt: m.oss_apps_mimesis_playing_alt({}, { locale }),
+  oss_apps_mimesis_themes_alt: m.oss_apps_mimesis_themes_alt({}, { locale }),
+  oss_apps_forgr_home_alt: m.oss_apps_forgr_home_alt({}, { locale }),
+  oss_apps_forgr_chat_alt: m.oss_apps_forgr_chat_alt({}, { locale }),
+} satisfies Record<AppCopyKey, string>
+
+const apps = ossApps.map((app) => ({
+  ...app,
+  kind: copyByKey[app.kindKey],
+  summary: copyByKey[app.summaryKey],
+  licenseLabel: licenseLabel[app.license],
+  screenshots: app.screenshots.map((screenshot) => ({
+    ...screenshot,
+    alt: copyByKey[screenshot.altKey],
+  })),
+}))
 
 const directoryStats = [
   { label: m.oss_apps_stat_apps({}, { locale }), value: String(apps.length) },
@@ -213,7 +207,7 @@ const linkClass = 'inline-flex items-center justify-center rounded-lg px-4 py-2 
                     alt={screenshot.alt}
                     loading="lazy"
                     decoding="async"
-                    class="aspect-[9/16] w-full rounded-md bg-gray-900 object-cover object-top"
+                    class="h-auto w-full rounded-md bg-gray-900"
                   />
                 ))}
               </div>
@@ -224,7 +218,7 @@ const linkClass = 'inline-flex items-center justify-center rounded-lg px-4 py-2 
                 </div>
                 <h3 class="font-pj text-2xl font-bold text-white">{app.name}</h3>
                 <p class="mt-3 leading-relaxed text-gray-300">{app.summary}</p>
-                <p class="mt-3 truncate font-mono text-xs text-gray-500">{app.repo}</p>
+                <p class="mt-3 truncate font-mono text-xs text-gray-400">{app.repo}</p>
                 <div class="mt-5 flex flex-wrap gap-2">
                   <a
                     href={app.website}
