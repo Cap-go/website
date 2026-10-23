@@ -175,6 +175,22 @@ Capgo delivers changes only to the Capacitor web layer: the HTML, CSS, JavaScrip
 
 Use a native store release for every native change and for material changes that could affect the app's reviewed purpose or functionality. Keep live updates within the app experience you submitted and disclosed to users.
 
+### Does Apple's remote code execution enforcement affect Capgo?[](https://capgo.app/docs/faq/#does-apples-remote-code-execution-enforcement-affect-capgo "Direct link to Does Apple's remote code execution enforcement affect Capgo?")
+
+No. Capgo is built for the interpreted web layer Apple already allows in Capacitor apps, not for downloading executable native code after review.
+
+Apple's [App Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements) says apps may not "download, install, or execute code which introduces or changes features or functionality of the app." Review teams cite that rule, together with the Apple Developer Program License Agreement **section 3.3.1(B)** on executable code, when they reject apps that use remote resources to change behavior after approval. Typical examples include `dlopen`, `dlsym`, `performSelector:`, or remote scripts that reach private APIs.
+
+That enforcement does **not** target compliant Capacitor live updates. The same license agreement allows **interpreted code** to be downloaded when it:
+
+- does not change the app's primary purpose,
+- does not bypass signing, sandbox, or other OS security features, and
+- does not create a store or storefront for other applications.
+
+Capgo only replaces the JavaScript, HTML, CSS, and static assets that already run inside your app's WebView or JavaScriptCore engine. It does not ship native binaries, machine code, dynamic libraries, or plugins, and it does not expose a marketplace of third-party mini apps. [Guideline 4.7](https://developer.apple.com/app-store/review/guidelines/#third-party-software) (clarified in [November 2025](https://developer.apple.com/news/?id=ey6d8onl) for HTML5 and JavaScript mini apps) governs a different pattern: apps that host open-ended software catalogs. A single Capacitor product updating its own reviewed web bundle is not that model.
+
+Ship native capabilities, permissions, entitlements, and material functionality changes through a normal App Store binary. Use Capgo for web-layer fixes and improvements that stay within the app you submitted. See [Apple remote code execution and Capgo](/docs/live-updates/compliance/#apple-remote-code-execution-and-capgo) for a longer compliance breakdown.
+
 ### Does Capgo guarantee App Store or Google Play approval?[](https://capgo.app/docs/faq/#does-capgo-guarantee-app-store-or-google-play-approval "Direct link to Does Capgo guarantee App Store or Google Play approval?")
 
 No. Apple and Google review each app and release on its own facts, and Capgo cannot guarantee an individual approval or review outcome. Your team remains responsible for the app's content, disclosures, update scope, and compliance with the current store policies.

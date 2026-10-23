@@ -174,6 +174,58 @@ Capgo updates only the Capacitor web layer: JavaScript, HTML, CSS, and static as
 
 Use live updates only for web-layer changes that remain within the store rules and your submitted app's scope. Ship a normal native release for native capabilities or material functionality changes. Review [Apple's App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) (including guideline 2.5.2) and [Google Play's Device and Network Abuse policy](https://support.google.com/googleplay/android-developer/answer/16559646) for your app before release.
 
+### Apple remote code execution and Capgo
+
+Apple has stepped up enforcement of apps that can change behavior after App Review. The published rules are not new for Capacitor teams, but the language reviewers use in rejection emails often mentions **Guideline 2.5.2** and **Apple Developer Program License Agreement section 3.3.1(B)** together. Understanding both is what separates a compliant live update workflow from a remote code risk.
+
+#### What Apple prohibits (Guideline 2.5.2)
+
+[App Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements) requires apps to be self-contained in their bundles and states that apps may not "download, install, or execute code which introduces or changes features or functionality of the app, including other apps."
+
+Apple applies that rule to mechanisms that can alter native behavior after approval, such as:
+
+- downloading compiled native code, frameworks, or plugins,
+- resolving symbols at runtime (`dlopen`, `dlsym`, and similar APIs),
+- calling Objective-C methods dynamically to reach private APIs (`performSelector:`, `method_exchangeImplementations()`, and related patterns), and
+- running remote scripts whose purpose is to change app behavior beyond the reviewed experience.
+
+Those patterns are what recent "remote code execution" review messages target. They are not descriptions of replacing HTML, CSS, and JavaScript inside an embedded WebView.
+
+#### What Apple still allows (License Agreement section 3.3.1(B))
+
+The [Apple Developer Program License Agreement](https://developer.apple.com/support/terms/apple-developer-program-license-agreement/) section **3.3.1(B)** ("Executable Code") is the interpreted-code carve-out. In the current agreement text, an application generally may not download or install executable code, **except** that interpreted code may be downloaded when it:
+
+1. does not change the primary purpose of the application by providing features inconsistent with the intended and advertised purpose,
+2. does not bypass signing, sandbox, or other security features of the operating system, and
+3. for App Store apps, does not create a store or storefront for other applications.
+
+Capacitor apps already rely on this exception. The native shell you submit to the App Store embeds WebKit or JavaScriptCore. Live updates that refresh the web bundle inside that shell stay on the interpreted-code path when each release keeps the same product purpose you disclosed to Apple.
+
+#### Guideline 4.7 is a different scenario
+
+In [November 2025](https://developer.apple.com/news/?id=ey6d8onl), Apple clarified [Guideline 4.7](https://developer.apple.com/app-store/review/guidelines/#third-party-software) for apps that offer HTML5 and JavaScript mini apps, mini games, chatbots, plug-ins, and similar software that is not embedded in the binary. Those apps must catalog third-party experiences and follow additional rules (including age restriction for software above the app's rating).
+
+Capgo does not turn your Capacitor app into an open mini app store. You ship bundles for **your** app, signed for **your** channels, consumed only by **your** users. That is the same OTA pattern Ionic and Capacitor teams have used for years, not a 4.7 software marketplace.
+
+#### How Capgo maps to the rules
+
+| Concern | Capgo behavior |
+| ------- | -------------- |
+| Executable native code | Not downloaded or executed. Native code changes require a new store binary. |
+| Interpreted web assets | JavaScript, HTML, CSS, fonts, images, and other static assets replace the in-app web bundle only. |
+| Primary purpose | Your team controls scope. Ship material new capabilities through review, not OTA. |
+| Security | Bundles are signed and can be end-to-end encrypted. The updater does not bypass iOS sandboxing or code signing. |
+| Storefront | Capgo channels distribute updates to your app; they do not publish unrelated third-party apps inside your binary. |
+
+#### Practical checklist before you ship an OTA bundle
+
+- Confirm the change is limited to the web layer and matches the app Apple reviewed.
+- Keep pricing, purchases, and regulated flows inside reviewed native or store-compliant flows.
+- Upload a new binary when you add plugins, permissions, entitlements, or native dependencies.
+- Document live updates in App Review notes when reviewers ask how your app updates itself.
+
+Capgo helps teams ship web-layer fixes in minutes while keeping native releases on the store review path. No update tool can guarantee Apple approval, but staying inside 3.3.1(B) and 2.5.2 is exactly how Capgo is designed to operate.
+
 ### Your Responsibilities
 
 As an app developer using Capgo, you should:

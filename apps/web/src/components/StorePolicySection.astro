@@ -10,6 +10,7 @@ interface Props {
 const { background = 'bg-[#1a1a1a]' } = Astro.props
 const locale = Astro.locals.locale
 const faqUrl = `${getRelativeLocaleUrl(locale, 'docs/faq')}#how-does-this-relate-to-the-appplay-store-review-process-or-policies`
+const complianceUrl = `${getRelativeLocaleUrl(locale, 'docs/live-updates/compliance/')}#apple-remote-code-execution-and-capgo`
 
 const policies = [
   {
@@ -103,6 +104,18 @@ const rules = [
             </div>
           </article>
         ))}
+
+        <article class="rounded-2xl border border-[#44BCFF]/25 bg-[#44BCFF]/[0.06] p-6">
+          <h3 class="text-sm font-semibold text-white">{m.store_policy_rce_title({}, { locale })}</h3>
+          <p class="mt-3 text-sm leading-6 text-gray-300">{m.store_policy_rce_body({}, { locale })}</p>
+          <a
+            href={complianceUrl}
+            class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF] [@media(hover:hover)]:hover:text-white!"
+          >
+            {m.store_policy_rce_link({}, { locale })}
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
 
         <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
           <h3 class="font-mono text-xs font-semibold tracking-widest text-gray-400 uppercase">{m.store_policy_rules_label({}, { locale })}</h3>

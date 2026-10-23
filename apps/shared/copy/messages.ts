@@ -2671,6 +2671,9 @@ const messages = {
   live_update_faq_q4: 'Can Capgo read my update bundles?',
   live_update_faq_a4:
     'With end-to-end encryption enabled, bundles are encrypted with your keys before upload. Capgo stores ciphertext and cannot read the contents; only your app can decrypt what you ship.',
+  live_update_faq_q5: "Does Apple's remote code execution rule apply to Capgo live updates?",
+  live_update_faq_a5:
+    'No. App Review Guideline 2.5.2 forbids downloading, installing, or executing code that introduces or changes features or functionality. Apple still allows interpreted JavaScript, HTML, and CSS under the Apple Developer Program License Agreement section 3.3.1(B) when it does not change your app\'s primary purpose, bypass OS security, or create a storefront. Capgo only swaps those web assets inside the WebView or JavaScriptCore engine you already ship. It does not download native binaries, dynamic libraries, or bytecode, and it is not a Guideline 4.7 mini app platform. Native plugin, permission, and entitlement changes still require a store-reviewed binary.',
   live_update_dynamic_bullet1_prefix: 'Add an in-app “Update Track” menu: list channels and let testers jump from',
   live_update_dynamic_bullet1_suffix: 'in seconds (no reinstall).',
   live_update_dynamic_bullet2: 'Spin up a pull-request channel per feature, route QA or beta users there, then snap them back to prod when approved.',
@@ -5734,6 +5737,10 @@ const messages = {
   risk_debt_support_body: 'Talk directly to the team that builds Capgo. Real answers from engineers, not a ticket queue.',
   store_policy_apple_body:
     "Apps may download interpreted code if it doesn't change the app's primary purpose, create a storefront for other code or apps, or bypass signing, the sandbox, or other OS security features.",
+  store_policy_rce_title: 'Apple remote code reviews and Capgo',
+  store_policy_rce_body:
+    'Apple enforces Guideline 2.5.2 against apps that download code to add or change functionality after review, including dynamic native loading and remote scripts that call private APIs. Capgo is outside that scope: it delivers signed JavaScript, HTML, CSS, and assets to the interpreter already embedded in your Capacitor app, which section 3.3.1(B) of the Apple Developer Program License Agreement explicitly allows.',
+  store_policy_rce_link: 'Read how Capgo fits Apple and Google rules',
   store_policy_apple_label: 'Apple Developer Program License Agreement',
   store_policy_eyebrow: 'App Store & Google Play',
   store_policy_explained_link: 'Full answer',
