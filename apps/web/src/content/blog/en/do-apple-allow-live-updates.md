@@ -10,7 +10,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2026-10-23T00:00:00.000Z
-head_image: /blog-images/do-apple-allow-live-updates.webp
+head_image: /blog-images/do-apple-allow-live-updates.png
 head_image_alt: "Does Apple Allow Live Updates Without App Store Review? Capgo blog illustration"
 keywords: Apple, App Store, live updates, OTA updates, guideline 2.5.2, Capacitor, React Native, Flutter, Swift, Cordova, Ionic, interpreted code, app review
 tag: Tutorial
@@ -92,7 +92,7 @@ If you follow that, live updates are a normal part of shipping an iOS app. React
 
 ## Which stacks can do it on iOS?
 
-Whether your app can ship over-the-air updates on iOS depends on one question: is your app logic interpreted at runtime, or compiled to machine code? JavaScript and other interpreted code, yes. Swift, Objective-C, C++ and anything compiled ahead of time, no.
+Whether your app can ship over-the-air updates on iOS depends on one question: is your app logic interpreted at runtime? JavaScript and other interpreted code, yes. Swift, Objective-C and C++ compiled to machine code, no. AOT-compiled frameworks such as Flutter qualify only through an interpreter.
 
 ### iOS live update compatibility by stack
 

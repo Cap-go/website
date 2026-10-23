@@ -10,7 +10,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
 updated_at: 2026-10-23T00:00:00.000Z
-head_image: /blog-images/do-google-allow-live-updates.webp
+head_image: /blog-images/do-google-allow-live-updates.png
 head_image_alt: "Does Google Allow Live Updates Without Play Store Review? Capgo blog illustration"
 keywords: Google Play, Android, live updates, OTA updates, device and network abuse policy, Capacitor, React Native, Flutter, Kotlin, Cordova, Ionic, interpreted code
 tag: Tutorial
@@ -24,25 +24,19 @@ faq:
       Yes, for interpreted code. Google Play's Device and Network Abuse policy bans downloading executable code such as dex, JAR or .so files outside Google Play, but explicitly exempts code running in a virtual machine or interpreter, such as JavaScript in a WebView.
   - question: Is Capgo compliant with Google Play policy?
     answer: >-
-      Yes. Capgo only updates the JavaScript, HTML and CSS of a Capacitor app, which runs in the Android WebView. It never downloads dex, JAR or native libraries. The updated code must still follow every other Google Play policy.
+      Yes. Google Play's policy uses "JavaScript in a webview" as its own example of allowed downloaded code. Capgo only updates the JavaScript, HTML and CSS of a Capacitor app in the Android WebView. It never downloads dex, JAR or native libraries. The updated code must still follow every other Google Play policy.
   - question: Can I update native Android code over the air?
     answer: >-
-      No. Kotlin, Java and native libraries must ship through Google Play, either as a new release or through Play Feature Delivery. Only interpreted code can be updated from your own server.
+      Not for native code. Kotlin, Java and native libraries must ship through Google Play, either as a new release or through Play Feature Delivery. A Kotlin or Java app that hosts a WebView can still update its JavaScript, HTML and CSS from your server. Only interpreted code can be updated that way.
   - question: Is Google stricter or looser than Apple on live updates?
     answer: >-
       Looser in wording. Google's exemption for interpreted code is written into the policy itself, with JavaScript in a WebView as the example. Apple allows the same thing but adds conditions about the app's primary purpose. In practice the same Capgo setup is compliant on both stores.
   - question: Which Android frameworks can use live updates?
     answer: >-
       Frameworks whose app logic is interpreted code: Capacitor, Cordova and Ionic (JavaScript in the WebView), React Native and Expo (JavaScript bundle), and NativeScript. Flutter relies on Shorebird, which runs patches through the Dart VM. Native Kotlin and Java apps cannot download new code outside Google Play.
-  - question: Can a Kotlin or Java app use live updates?
-    answer: >-
-      Not for native code. Google Play bans downloading dex, JAR or .so files from outside Google Play. A Kotlin or Java app that hosts a WebView can update its JavaScript, HTML and CSS. Other native apps can use remote config, server-driven UI, or Play Feature Delivery, which downloads modules through Google Play itself.
   - question: Can Flutter apps use live updates on Android?
     answer: >-
       Stock Flutter cannot, because Dart is compiled to a native library. Shorebird adds code push and states it complies with Google Play policy by running updates in the Dart virtual machine. Check its documentation for the current approach.
-  - question: Is Capacitor compliant with Google Play for live updates?
-    answer: >-
-      Yes. Google Play's policy uses "JavaScript in a webview" as its own example of allowed downloaded code. Capgo updates only that layer of a Capacitor app and never touches native code.
 ---
 
 **Short answer: yes, Google Play allows live updates of interpreted code.** You can push new JavaScript, HTML and CSS to an Android app without a new Play Store review. You cannot download native code such as dex, JAR or `.so` files.
@@ -94,7 +88,7 @@ In practice:
 
 ## Which stacks can do it on Android?
 
-Whether your app can ship over-the-air updates on Android depends on one question: is your app logic interpreted at runtime, or compiled to Android bytecode or machine code? JavaScript and other interpreted code, yes. Kotlin, Java, dex, JAR and native libraries, no.
+Whether your app can ship over-the-air updates on Android depends on one question: is your app logic interpreted at runtime? JavaScript and other interpreted code, yes. Downloaded dex, JAR and native `.so` files, no. AOT-compiled frameworks such as Flutter qualify only through a VM or interpreter.
 
 ### Android live update compatibility by stack
 
