@@ -572,6 +572,8 @@ export const messageContexts = {
   brand_asset_icon_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page brand.astro. Message key `brand_asset_icon_title` (Brand Asset Icon Title).',
   brand_asset_transparent_desc: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page brand.astro. Message key `brand_asset_transparent_desc` (Brand Asset Transparent Desc).',
   brand_asset_transparent_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page brand.astro. Message key `brand_asset_transparent_title` (Brand Asset Transparent Title).',
+  brand_asset_youtube_banner_desc: 'Brand page description of the 2560×1440 YouTube channel banner. Keep YouTube, 2560×1440, and Capgo unchanged. The lockup is placed inside the area YouTube shows on phones, desktops, and TVs.',
+  brand_asset_youtube_banner_title: 'Brand page asset heading for the YouTube channel banner download. Keep the word YouTube unchanged.',
   brand_boilerplate: 'Page/area: Capgo marketing website. Role: Long marketing or legal paragraph. Seen in: page brand.astro. Preserve Capgo product/brand and developer terms exactly. Message key `brand_boilerplate` (Brand Boilerplate).',
   brand_colors_heading: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page brand.astro. Message key `brand_colors_heading` (Brand Colors Heading).',
   brand_colors_intro: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page brand.astro. Preserve Capgo product/brand and developer terms exactly. Message key `brand_colors_intro` (Brand Colors Intro).',
