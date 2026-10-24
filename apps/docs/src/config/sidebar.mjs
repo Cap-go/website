@@ -321,4 +321,5 @@ export const docsSidebar = [
   linkItem('How to get support', '/docs/getting-help/'),
   linkItem('💬 Consult us', '/consulting/'),
   linkItem('LLMs-full.txt', 'https://capgo.app/llms-full.txt'),
+  linkItem('LLMs-small.txt', 'https://capgo.app/llms-small.txt'),
 ]
