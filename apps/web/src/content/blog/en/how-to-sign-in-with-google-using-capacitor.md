@@ -25,7 +25,7 @@ faq:
   - question: "Can I request extra Google scopes like Calendar or Drive?"
     answer: "Yes. Pass them in options.scopes when calling login. On Android, custom scopes require the MainActivity change described in this guide, otherwise the plugin rejects the call. Sensitive and restricted scopes also require Google verification before you can ship to the public."
   - question: "Does this work with Firebase Authentication, Supabase or Neon?"
-    answer: "Yes for Firebase and Supabase. Take result.idToken from the plugin and pass it to signInWithCredential in Firebase or signInWithIdToken in Supabase. Use the Web client ID as webClientId, since that is the audience those services expect. Neon Auth runs Google sign-in as an OAuth redirect instead, so use signInWithOAuth from @capgo/capacitor-neon."
+    answer: "Yes for Firebase and Supabase. Take result.idToken from the plugin and pass it to signInWithCredential in Firebase or signInWithIdToken in Supabase. Use the Web client ID as webClientId, since that is the audience those services expect. For Neon Auth, Google sign-in is an OAuth redirect, so call signInWithOAuth from @capgo/capacitor-neon with a trusted https Universal Link or App Link as redirectTo, because Neon Auth rejects custom URL schemes."
 ---
 
 To add Google Sign-In to a Capacitor app, create a Web, an iOS and one or more Android OAuth client IDs in Google Cloud, install `@capgo/capacitor-social-login`, call `SocialLogin.initialize({ google: { webClientId, iOSClientId } })`, then `SocialLogin.login({ provider: 'google' })`. Android uses Google's Credential Manager, iOS uses the Google Sign-In SDK, and the web uses Google Identity Services. All three return an ID token you verify on your server.
