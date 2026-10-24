@@ -157,6 +157,7 @@ When no one is signed in, the database helpers use an anonymous Data API token, 
 
 - Use this plugin for authentication and session management.
 - Keep advanced querying in `@neondatabase/neon-js`.
+- Keep [Object Storage](https://neon.com/docs/storage/authentication) and [AI Gateway](https://neon.com/docs/ai-gateway/authentication) calls in a Neon Function or your own API. Both use branch credentials that must stay out of the app bundle. Authenticate requests to Neon Functions before accessing these services; their URLs are public.
 - Pass the native JWT into the JavaScript client, Neon Functions, or your own API whenever you need it.
 
 ## Keep going from Getting Started
