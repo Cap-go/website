@@ -1,6 +1,54 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.95.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.1",
+    "pubDate": "2026-10-23T10:59:56.000Z",
+    "description": "🆕 Changelog Added Console API consolidation : Route all console data and authentication through the Capgo API, removing the direct Supabase dependency from the console. Changed Faster plugin stats : Serve responses for snippet plugins at the edge to reduce latency. Fixed AI init setup notices : Print final setup notices after AI guided init sessions complete. Usage credit org retention : Prevent organizations that purchased usage credits from being incorrectly included in canceled account cl..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.13.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.2",
+    "pubDate": "2026-10-23T21:43:10.000Z",
+    "description": "🆕 Changelog Fixed Allowed CORS headers for console image uploads, resolving browser security errors that could prevent image uploads from completing successfully. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.13.1...capgo 22.13.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.13.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.1",
+    "pubDate": "2026-10-23T17:19:24.000Z",
+    "description": "🆕 Changelog Fixed Improved localization consistency by replacing fragmented translation keys with full sentence keys, resulting in clearer and more natural translations. Restored missing translation keys and prevented role capability lists from collapsing, so role permissions now display fully across all supported languages. Updated the Devices list default period to 7 days , bringing the initial view in line with expected time ranges. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.13.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.0",
+    "pubDate": "2026-10-23T13:50:13.000Z",
+    "description": "🆕 Changelog Added Locked role edits for SSO managed roles. Roles that are controlled by SSO role mapping can no longer be edited manually. This change prevents conflicts between your identity provider's role assignments and local changes, keeping access control consistent across your organization. Migration note: If you previously edited roles that are now managed by SSO, update the role mappings in your SSO identity provider instead. Manual role edits for SSO managed roles will no longer ta..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.12.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.4",
+    "pubDate": "2026-10-23T10:49:29.000Z",
+    "description": "🆕 Changelog Fixed Prevented organizations with purchased usage credits from being incorrectly removed during canceled subscription cleanup. Organizations that have bought usage credits will now remain active rather than being treated as canceled accounts. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.12.3...capgo 22.12.4"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.12.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.3",
+    "pubDate": "2026-10-23T10:14:05.000Z",
+    "description": "🆕 Changelog Fixed Kept the first build checklist inline with setup instructions so contributors can follow one continuous guide when preparing their first build. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.12.2...capgo 22.12.3"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.12.2",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.2",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.2",
@@ -270,54 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.0.0",
     "pubDate": "2026-10-21T09:45:55.000Z",
     "description": "🆕 Changelog Added BREAKING: New signups now register through the registration API, and all new users are asked for their first and last name during onboarding. If you maintain a custom signup flow or server rendered registration page, update it to use the new API. Changed Refined the collapsed sidebar rail with tighter spacing and a clear group separator, making compact navigation easier to scan. Self hosted the Inter font and split the Supabase SDK into its own chunk, reducing external depe..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-21.2.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.2.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.2.1",
-    "pubDate": "2026-10-21T02:25:21.000Z",
-    "description": "🆕 Changelog Security Resolved a Content Security Policy issue that blocked Stripe.js from loading in the console, restoring support for embedded checkout. Changed Updated frontend linting tooling to TypeScript 7.1 with oxlint and oxlint plugin vize for improved code quality and consistency. Slimmed the test suite by removing obsolete tests and merging overlapping coverage to improve maintainability and runtime performance. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-21.2.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.2.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.2.0",
-    "pubDate": "2026-10-21T01:37:13.000Z",
-    "description": "🆕 Changelog Added Integrated Stripe billing directly inside Capgo — manage subscriptions, payments, and billing workflows within the Capgo platform without relying on external Stripe portals. Changed Refreshed the auto synced Graphify code graph to keep codebase visualizations and dependency insights up to date. Fixed Restored CLI host configuration compatibility — the CLI now uses instead of the removed flag. Update any scripts or commands from to . Improved snippet delivery for apps that b..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.90.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.90.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.90.1",
-    "pubDate": "2026-10-21T00:01:36.000Z",
-    "description": "🆕 Changelog Changed Refactored the CLI to communicate exclusively with the versioned Capgo API and removed the Supabase SDK dependency. This aligns the CLI with a single, versioned backend interface, making API interactions more predictable and easier to maintain. Breaking change / migration: If you previously relied on or configured the CLI through Supabase specific settings, migrate those configurations to the Capgo API equivalents. Removed an unused index from read replica manifests. This..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.90.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.90.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.90.0",
-    "pubDate": "2026-10-20T16:23:59.000Z",
-    "description": "🆕 Changelog Added Parallel onboarding progress with prioritized setup notices — The CLI onboarding experience now loads progress updates in parallel and surfaces setup notices more prominently, so users can spot and complete critical next steps faster. AI setup prompt on every onboarding task — Onboarding now offers an AI driven guidance prompt for each setup task, making configuration easier to complete. One setup task at a time — Onboarding presents a single setup task per step, reducing c..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-21.1.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.1.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.1.3",
-    "pubDate": "2026-10-21T01:05:52.000Z",
-    "description": "🆕 Changelog Changed Refactored the CLI to communicate exclusively with the versioned Capgo API instead of relying on the Supabase SDK. This simplifies the client architecture, improves reliability, and ensures the CLI stays aligned with the public API surface. Removed Removed the Supabase SDK dependency from the CLI. If you previously relied on Supabase specific configurations or direct Supabase interactions from the CLI, update your setup to use the supported Capgo API endpoints. 🔗 Full Ch..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-21.1.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.1.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-21.1.2",
-    "pubDate": "2026-10-20T21:11:42.000Z",
-    "description": "🆕 Changelog Changed Removed an unused manifest index from read replicas to reduce storage overhead and improve query efficiency. Refreshed the internal Graphify code graph so code relationship mappings stay current with the latest source changes. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 21.1.1...capgo 21.1.2"
   },
   {
     "category": "release",
@@ -950,6 +950,14 @@
     "guid": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.17",
     "pubDate": "2026-10-19T12:13:40.000Z",
     "description": "🆕 Changelog Changed Updated development dependency to v1.4.3 for improved build performance and compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor navigation bar/compare/8.2.16...8.2.17"
+  },
+  {
+    "category": "release",
+    "title": "capacitor-neon 8.1.0",
+    "link": "https://github.com/Cap-go/capacitor-neon/releases/tag/8.1.0",
+    "guid": "https://github.com/Cap-go/capacitor-neon/releases/tag/8.1.0",
+    "pubDate": "2026-10-23T10:48:28.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor neon/compare/8.1.0...8.1.0"
   },
   {
     "category": "release",
