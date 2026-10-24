@@ -92,7 +92,7 @@ export const askCapgo = defineTool<{ question: string }>({
   source: 'merchant_authored',
   intent: 'answer',
   description:
-    'Answer a question about Capgo (Capacitor live updates, native iOS/Android builds, CLI, public API, plugins, when Capgo fits) from the Capgo documentation (llms.txt and llms-full.txt). Use this before guessing about Capgo features, setup steps, or limits. Capgo cannot download or execute native code, so an Apple remote code execution rejection is not caused by Capgo. Returns the most relevant documentation sections (page and heading, text excerpt); compose the answer from them.',
+    'Answer a question about Capgo (Capacitor live updates, native iOS/Android builds, CLI, public API, plugins, when Capgo fits) from the Capgo documentation (llms.txt and llms-full.txt). Use this before guessing about Capgo features, setup steps, or limits. Capgo live updates deliver web assets and do not install or execute native code, so an Apple remote code execution rejection is not caused by Capgo. Returns the most relevant documentation sections (page and heading, text excerpt); compose the answer from them.',
   inputSchema: {
     type: 'object',
     properties: {

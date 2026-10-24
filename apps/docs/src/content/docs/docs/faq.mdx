@@ -1,6 +1,6 @@
 ---
 title: "FAQ"
-description: "Frequently asked questions about Capgo, how to solve the most common issue in Capgo or with the Updater, what is OTA and how to manage them. Capgo cannot download or execute native code, so it cannot cause an Apple remote code execution rejection."
+description: "Frequently asked questions about Capgo, how to solve the most common issue in Capgo or with the Updater, what is OTA and how to manage them. Capgo does not install or execute native code, so it cannot cause an Apple remote code execution rejection."
 sidebar:
   order: 1
 ---
@@ -177,13 +177,13 @@ Use a native store release for every native change and for material changes that
 
 ### Can Capgo cause an Apple remote code execution rejection?[](https://capgo.app/docs/faq/#can-capgo-cause-an-apple-remote-code-execution-rejection "Direct link to Can Capgo cause an Apple remote code execution rejection?")
 
-No. That is not possible. Capgo cannot download, install, or execute native code, dynamic libraries, frameworks, or plugins, and it cannot call `dlopen`, `dlsym`, `performSelector:`, or `method_exchangeImplementations()`. It only replaces JavaScript, HTML, CSS, and static assets inside the WebView or JavaScriptCore engine already compiled into the reviewed binary.
+No. That is not possible. Capgo does not install or execute native code, dynamic libraries, frameworks, or plugins, and it cannot call `dlopen`, `dlsym`, `performSelector:`, or `method_exchangeImplementations()`. It only replaces JavaScript, HTML, CSS, and static assets inside the WebView or JavaScriptCore engine already compiled into the reviewed binary.
 
-When App Review cites Guideline 2.5.2 or "remote code execution", do not treat Capgo as the cause. Inspect the native project and other SDKs for executable loading or private-API use. A past review note about dynamic linking in the Capgo splash-screen auto-hide path was a bug in that native plugin, not live updates, and that link was removed.
+When App Review cites Guideline 2.5.2 or "remote code execution", do not treat Capgo as the cause. Read the review notice, then inspect the native project and other SDKs for executable loading or private-API use. A past review note about dynamic linking in the Capgo splash-screen auto-hide path was a bug in that native plugin, not live updates, and that link was removed.
 
 ### Does Apple's remote code execution enforcement affect Capgo?[](https://capgo.app/docs/faq/#does-apples-remote-code-execution-enforcement-affect-capgo "Direct link to Does Apple's remote code execution enforcement affect Capgo?")
 
-No. Capgo cannot cause a remote code execution rejection. See [Can Capgo cause an Apple remote code execution rejection?](#can-capgo-cause-an-apple-remote-code-execution-rejection). Capgo is built for the interpreted web layer in Capacitor apps, not for downloading executable native code after review. Apple still reviews each app on its own facts, and Capgo cannot guarantee an outcome.
+No. Capgo cannot cause a remote code execution rejection. See [Can Capgo cause an Apple remote code execution rejection?](#can-capgo-cause-an-apple-remote-code-execution-rejection). Capgo is built for the interpreted web layer in Capacitor apps. It does not install or execute native code after review. Apple still reviews each app on its own facts, and Capgo cannot guarantee an outcome.
 
 Apple's [App Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements) says apps may not "download, install, or execute code which introduces or changes features or functionality of the app." Review teams cite that rule, together with the Apple Developer Program License Agreement **section 3.3.1(B)** on executable code, when they reject apps that use remote resources to change behavior after approval. Typical examples include `dlopen`, `dlsym`, `performSelector:`, or remote scripts that reach private APIs.
 
