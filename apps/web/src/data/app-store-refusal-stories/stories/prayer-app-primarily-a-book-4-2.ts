@@ -1,6 +1,9 @@
-import { batch4Story } from '../batch4Factory'
+import type { AppleRejectionStory } from '../types'
 
-export const story = batch4Story('prayer-app-primarily-a-book-4-2', 55, {
+export const story: AppleRejectionStory = {
+  id: 'prayer-app-primarily-a-book-4-2',
+  batchId: 'batch-4',
+  sortOrder: 55,
   title: 'Prayer app rejected as primarily a book under 4.2',
   guidelineLabel: 'Guideline 4.2 Minimum Functionality',
   tags: ['4-2'],
@@ -10,4 +13,4 @@ export const story = batch4Story('prayer-app-primarily-a-book-4-2', 55, {
   resolution: 'Not stated.',
   lesson:
     'If a reviewer reads your app as static content, the interactive features may not be visible in the first minutes of review. Show them on the first screens and screenshots and list them in the review notes, with steps to reach each one.',
-})
+}

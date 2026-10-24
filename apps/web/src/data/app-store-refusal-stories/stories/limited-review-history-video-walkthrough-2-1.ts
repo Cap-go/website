@@ -1,6 +1,9 @@
-import { batch4Story } from '../batch4Factory'
+import type { AppleRejectionStory } from '../types'
 
-export const story = batch4Story('limited-review-history-video-walkthrough-2-1', 53, {
+export const story: AppleRejectionStory = {
+  id: 'limited-review-history-video-walkthrough-2-1',
+  batchId: 'batch-4',
+  sortOrder: 53,
   title: 'Limited review history: device recording and paid feature walkthrough',
   guidelineLabel: 'Guideline 2.1 Information Needed',
   tags: ['2-1'],
@@ -10,4 +13,4 @@ export const story = batch4Story('limited-review-history-video-walkthrough-2-1',
   resolution: 'The developer was preparing the recording and answers at the time of posting. Outcome not known.',
   lesson:
     'Passing Google Play review says nothing about Apple. If your developer account is new or has few past submissions, prepare a real device recording, a paid feature walkthrough, and a list of third party services before you submit.',
-})
+}
