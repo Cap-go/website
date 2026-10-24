@@ -27,14 +27,14 @@ faq:
   - question: 'Can you change app icons on iPhone?'
     answer: >-
       Yes. On a supported iOS version you can restyle every Home Screen app icon
-      with Dark, Tinted, Clear, or larger icons from Customize. To use your own
-      image for one app, add a Shortcuts launcher to the Home Screen with a
-      custom photo.
+      with Light, Dark, Auto, Tinted, Clear, or larger icons from Customize. To
+      use your own image for one app, add a Shortcuts launcher to the Home Screen
+      with a custom photo.
   - question: 'How do I change all app icons at once on iPhone?'
     answer: >-
       Touch and hold the Home Screen background until icons jiggle, tap Edit,
-      choose Customize, then pick Dark, Auto, Clear, Tinted, or the larger icon
-      size. Apple documents this in its Home Screen customization guide.
+      choose Customize, then pick Light, Dark, Auto, Clear, Tinted, or the larger
+      icon size. Apple documents this in its Home Screen customization guide.
   - question: 'How do I use a custom picture as an app icon on iPhone?'
     answer: >-
       Create a shortcut that opens the app, open its details, tap Add to Home
@@ -51,7 +51,7 @@ faq:
       UIApplication.setAlternateIconName through a native bridge. The web layer
       triggers the switch; icon assets stay in the native bundle.
 ---
-**You can change app icons on iPhone in two ways.** On current iOS versions, touch and hold the Home Screen, open **Customize**, and apply **Dark**, **Tinted**, **Clear**, or **larger** icons to every supported app at once ([Apple's Home Screen guide](https://support.apple.com/guide/iphone/customize-apps-and-widgets-on-the-home-screen-iph385473442/ios)). To use your own photo for one app, build a **Shortcuts** launcher and **Add to Home Screen** with a custom image ([Apple's Shortcuts guide](https://support.apple.com/guide/shortcuts/add-a-shortcut-to-the-home-screen-apd735880972/ios)). App developers can also ship **alternate icons** inside the app through Apple's native API, including from [Capacitor with a native bridge](/blog/implementing-native-bridge-for-ios-in-capacitor/).
+**You can change app icons on iPhone in two ways.** On current iOS versions, touch and hold the Home Screen, open **Customize**, and apply **Light**, **Dark**, **Tinted**, **Clear**, or **larger** icons to every supported app at once ([Apple's Home Screen guide](https://support.apple.com/guide/iphone/customize-apps-and-widgets-on-the-home-screen-iph385473442/ios)). To use your own photo for one app, build a **Shortcuts** launcher and **Add to Home Screen** with a custom image ([Apple's Shortcuts guide](https://support.apple.com/guide/shortcuts/add-a-shortcut-to-the-home-screen-apd735880972/ios)). App developers can also ship **alternate icons** inside the app through Apple's native API, including from [Capacitor with a native bridge](/blog/implementing-native-bridge-for-ios-in-capacitor/).
 
 The sections below walk through each path, when to pick it, and what breaks if you choose wrong.
 
@@ -75,6 +75,7 @@ The sections below walk through each path, when to pick it, and what breaks if y
   - [Expose icon switching to TypeScript](#expose-icon-switching-to-typescript)
   - [Wire it into an Ionic settings screen](#wire-it-into-an-ionic-settings-screen)
 - [The Future of Personalization is Collaborative](#the-future-of-personalization-is-collaborative)
+- [Frequently asked questions](#frequently-asked-questions)
 
 ## Your Guide to iPhone App Icon Customization
 
@@ -96,16 +97,17 @@ The cleanest answer depends on what you want. If you want system-level styling t
 <a id="use-apples-built-in-iphone-controls"></a>
 ### Use Apple's built-in iPhone controls
 
-Apple documents native Home Screen icon styling in [Customize apps and widgets on the iPhone Home Screen](https://support.apple.com/guide/iphone/customize-apps-and-widgets-on-the-home-screen-iph385473442/ios). You can make icons **larger**, switch them to **Dark** or **Auto**, make them **Clear** (translucent), or apply a **Tinted** color from your wallpaper.
+Apple documents native Home Screen icon styling in [Customize apps and widgets on the iPhone Home Screen](https://support.apple.com/guide/iphone/customize-apps-and-widgets-on-the-home-screen-iph385473442/ios). You can make icons **larger**, switch them to **Light**, **Dark**, or **Auto**, make them **Clear** (translucent), or apply a **Tinted** color.
 
 The built-in process matches Apple's steps:
 
 1. Go to the **Home Screen**.
 2. **Touch and hold the Home Screen background** until the icons begin to jiggle.
 3. Tap **Edit**, then choose **Customize**.
-4. Tap **Dark**, **Auto**, **Clear**, or **Tinted**, or tap the control to make icons **larger** (app names hide in large size).
-5. For **Tinted** or **Clear**, pick **Light**, **Dark**, or **Auto** when prompted.
-6. Tap **Done** or press the Home button to exit jiggle mode.
+4. Tap **Light**, **Dark**, **Auto**, **Clear**, or **Tinted**, or tap the control to make icons **larger** (app names hide in large size).
+5. If you chose **Tinted**, use the color and saturation sliders. You can also use the eyedropper to sample a color from your wallpaper, then pick **Light**, **Dark**, or **Auto**.
+6. If you chose **Clear**, pick **Light**, **Dark**, or **Auto** when prompted.
+7. Tap **Done** or press the Home button to exit jiggle mode.
 
 This method is the best starting point because it's native. You aren't making fake launchers. You're changing how supported icons are presented by the system itself.
 
@@ -115,7 +117,7 @@ A few practical notes matter:
 - **Limited for custom artwork:** You can style icons, but you can't point an app to any random image from your Photos library through this menu.
 - **Safer for daily-use apps:** Mail, Messages, and other badge-heavy apps behave more naturally when you leave them as real app icons.
 
-If you're pairing icon tinting with wallpaper and widgets, pick a wallpaper first. The **Tinted** eyedropper reads colors from it, so the icons look more intentional.
+If you're pairing icon tinting with wallpaper and widgets, pick a wallpaper first. The optional **Tinted** eyedropper can sample a color from it so the icons match your theme.
 
 The Shortcuts method still matters because it solves a different problem.
 
@@ -417,6 +419,40 @@ For developers, alternate icons are no longer just a seasonal gimmick. They're p
 That matters even more in hybrid stacks. Native capability and web-driven product iteration don't have to compete. Teams can keep the icon switch in iOS where it belongs, then improve the surrounding settings experience over time with careful release practices and segmented rollout thinking, especially in apps that already use [real-time updates with user segmentation](https://capgo.app/blog/real-time-updates-with-user-segmentation/).
 
 The bigger trend is healthy. Apple has made Home Screen customization more native. Users expect more control. Developers can now meet that expectation cleanly, whether they ship pure Swift apps or Capacitor apps with a native bridge under the hood.
+
+<a id="frequently-asked-questions"></a>
+
+## Frequently asked questions
+
+::: faq
+### Can you change app icons on iPhone?
+
+Yes. On a supported iOS version you can restyle every Home Screen app icon with Light, Dark, Auto, Tinted, Clear, or larger icons from Customize. To use your own image for one app, add a Shortcuts launcher to the Home Screen with a custom photo.
+:::
+
+::: faq
+### How do I change all app icons at once on iPhone?
+
+Touch and hold the Home Screen background until icons jiggle, tap Edit, choose Customize, then pick Light, Dark, Auto, Clear, Tinted, or the larger icon size. Apple documents this in its [Home Screen customization guide](https://support.apple.com/guide/iphone/customize-apps-and-widgets-on-the-home-screen-iph385473442/ios).
+:::
+
+::: faq
+### How do I use a custom picture as an app icon on iPhone?
+
+Create a shortcut that opens the app, open its details, tap Add to Home Screen, tap the icon, and choose a photo or file. That adds a Home Screen icon with your image. It is a shortcut launcher, not a change to the App Store icon.
+:::
+
+::: faq
+### Do Shortcuts app icons show notification badges?
+
+Usually not reliably. A Home Screen shortcut is a separate launcher, so unread counts and badges from the real app often do not appear on the custom icon. Use Apple built-in styling for mail, chat, and task apps.
+:::
+
+::: faq
+### Can Capacitor apps let users pick alternate icons?
+
+Yes, when the iOS target defines alternate icons in Info.plist and exposes `UIApplication.setAlternateIconName` through a native bridge. The web layer triggers the switch; icon assets stay in the native bundle.
+:::
 
 ---
 
