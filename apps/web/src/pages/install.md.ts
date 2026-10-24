@@ -79,6 +79,7 @@ export const GET: APIRoute = () => {
     `- Plugins: ${baseUrl}/plugins.md`,
     `- Site index: ${baseUrl}/llms.txt`,
     `- Full docs dump: ${baseUrl}/llms-full.txt`,
+    `- Compact docs dump for training: ${baseUrl}/llms-small.txt`,
     `- Public API: ${baseUrl}/openapi.json`,
     '- Support: https://discord.capgo.app',
     '',
