@@ -187,6 +187,52 @@ const crossSegment = ownedPlaceholder.restoreOrSource('Déployer avec __CAPGO_KE
 assert(crossSegment.text === 'Deploy with Capgo' && crossSegment.missingTokens.join() === 'stray placeholder', 'A placeholder from another segment reached the page')
 assert(!__translationWorkerTest.shouldBypassTranslation('/fr/capgo-cli/'), 'The Capgo CLI product page skipped translation')
 assert(__translationWorkerTest.shouldBypassTranslation('/fr/capgo-feature-image.webp'), 'A Capgo image was sent through translation')
+assert(__translationWorkerTest.shouldBypassTranslation('/fr/speculation-rules.json'), 'The speculation rules file would be translated if the early route disappeared')
+assert(__translationWorkerTest.isSpeedBrainRulesPath('/fr/speculation-rules.json'), 'French speculation rules path was not recognized')
+assert(__translationWorkerTest.isSpeedBrainRulesPath('/de/speculation-rules.json'), 'German speculation rules path was not recognized')
+assert(!__translationWorkerTest.isSpeedBrainRulesPath('/speculation-rules.json'), 'An unlocalized speculation rules path was treated as a worker route')
+assert(!__translationWorkerTest.isSpeedBrainRulesPath('/fr/pricing/'), 'A translated page was treated as the speculation rules file')
+
+const speedBrainRules = await worker.fetch(new Request('https://capgo.app/fr/speculation-rules.json'), {} as any)
+assert(speedBrainRules.status === 200, 'Speculation rules route did not return 200')
+assert(
+  speedBrainRules.headers.get('Content-Type') === 'application/speculationrules+json; charset=utf-8',
+  'Speculation rules route used a content type Chrome will reject',
+)
+assert((await speedBrainRules.text()) === '{}', 'Speculation rules route did not return an empty ruleset')
+const speedBrainRulesHead = await worker.fetch(new Request('https://capgo.app/ja/speculation-rules.json', { method: 'HEAD' }), {} as any)
+assert(speedBrainRulesHead.status === 200, 'Speculation rules HEAD did not return 200')
+assert((await speedBrainRulesHead.text()) === '', 'Speculation rules HEAD included a body')
+const speedBrainRulesPost = await worker.fetch(new Request('https://capgo.app/fr/speculation-rules.json', { method: 'POST' }), {} as any)
+assert(speedBrainRulesPost.status === 405, 'Speculation rules POST was not rejected')
+
+const speedBrainHtml = __translationWorkerTest.withResponseHeaders(
+  new Response('<html></html>', {
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Speculation-Rules': '"/cdn-cgi/speculation"',
+    },
+  }),
+  'HIT',
+  'fr',
+  false,
+)
+assert(
+  speedBrainHtml.headers.get('Speculation-Rules') === '"/fr/speculation-rules.json"',
+  'Translated HTML kept Cloudflare Speed Brain speculation rules',
+)
+const speedBrainJson = __translationWorkerTest.withResponseHeaders(
+  new Response('{"ok":true}', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Speculation-Rules': '"/cdn-cgi/speculation"',
+    },
+  }),
+  'HIT',
+  'fr',
+  false,
+)
+assert(speedBrainJson.headers.get('Speculation-Rules') === null, 'A non-HTML response kept speculation rules')
 const cliCommand = __translationWorkerTest.protectTranslationTokens('npx @capgo/cli bundle upload')
 assert(cliCommand.text === 'npx __CAPGO_KEEP_0__ bundle upload', 'An npm package name was split into several placeholders')
 assert(cliCommand.restoreOrSource('npx ____CAPGO_KEEP_0__ bundle upload').text === 'npx @capgo/cli bundle upload', 'Extra underscores around a placeholder leaked into the page')
@@ -656,6 +702,10 @@ try {
   assert(pendingResponse.headers.get('Location') === null, 'A translation cache miss redirected visitors away from the localized URL')
   assert(pendingResponse.headers.get('Retry-After') === null, 'A translation cache miss must not advertise Retry-After')
   assert(pendingResponse.headers.get('X-Capgo-Translation-Cache') === 'MISS', 'A translation cache miss did not report its cache state')
+  assert(
+    pendingResponse.headers.get('Speculation-Rules') === '"/it/speculation-rules.json"',
+    'A translated HTML response did not opt out of Cloudflare Speed Brain',
+  )
   assert(pendingResponse.headers.get('X-Capgo-Translation-Fallback') === 'temporary-english-canonical', 'A translation cache miss did not report the English canonical fallback')
   assert(pendingHtml.includes('Read our guides'), 'A translation cache miss did not keep the source document available while it is translated')
   assert(pendingHtml.includes('rel="canonical" href="https://capgo.app/docs/"'), 'A translation cache miss did not point canonical at the English URL')
@@ -832,6 +882,7 @@ try {
   const jsonHitResponse = await worker.fetch(new Request(jsonHitUrl), blogEnv as any)
   const jsonHitBody = await jsonHitResponse.text()
   assert(jsonHitResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A cached JSON HIT did not report HIT')
+  assert(jsonHitResponse.headers.get('Speculation-Rules') === null, 'A cached JSON HIT advertised speculation rules')
   assert(jsonHitResponse.headers.get('X-Capgo-Translation-Scripts') !== 'synced', 'A cached JSON HIT entered HTML script sync')
   assert(jsonHitBody === '{"ok":true}', 'A cached JSON HIT was rewritten as HTML')
   assert(fetchesBeforeJsonHit === blogOriginFetches, 'A cached JSON HIT fetched the English origin')
