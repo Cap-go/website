@@ -56,6 +56,8 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/understanding-regulatory-compliance': '/blog/compliance-checks-in-cicd-for-capacitor-apps/',
   '/blog/activar-modo-desarrollador-ios16': '/blog/enable-ios-developer-mode-ios16/',
   '/blog/actualizaciones-en-tiempo-real-con-segmentación-de-usuarios': '/blog/real-time-updates-with-user-segmentation/',
+  '/blog/android-live-updates-allowed-stacks': '/blog/do-google-allow-live-updates/',
+  '/blog/ios-live-updates-allowed-stacks': '/blog/do-apple-allow-live-updates/',
   '/blog/actualizaciones-en-vivo-en-apple': '/blog/do-apple-allow-live-updates/',
   '/blog/actualizaciones-en-vivo-para-aplicacion-flutter': '/blog/live-updates-for-flutter-app/',
   '/blog/actualizaciones-en-vivo-permitidas-por-google': '/blog/do-google-allow-live-updates/',
