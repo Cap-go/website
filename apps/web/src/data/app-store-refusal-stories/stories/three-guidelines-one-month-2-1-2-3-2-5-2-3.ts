@@ -1,9 +1,6 @@
-import type { AppleRejectionStory } from '../types'
+import { batch4Story } from '../batch4Factory'
 
-export const story: AppleRejectionStory = {
-  id: 'three-guidelines-one-month-2-1-2-3-2-5-2-3',
-  batchId: 'batch-4',
-  sortOrder: 54,
+export const story = batch4Story('three-guidelines-one-month-2-1-2-3-2-5-2-3', 54, {
   title: 'First submission: 2.1, then 2.3.2, then 5.2.3 over a month',
   guidelineLabel: 'Guidelines 2.1, 2.3.2, and 5.2.3',
   tags: ['2-1', '2-3-2', '5-2-3', 'endless-review'],
@@ -13,4 +10,4 @@ export const story: AppleRejectionStory = {
   resolution: 'Still waiting, more than a month after the first submission.',
   lesson:
     'Every round trip can surface a new guideline, and each one can cost a week or more. Before a first submission, read the metadata rules (2.3) and any content rights rules that apply to you (5.2), not only the completeness rules (2.1), and fix everything you can find in one build.',
-}
+})

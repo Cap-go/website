@@ -1,9 +1,6 @@
-import type { AppleRejectionStory } from '../types'
+import { batch4Story } from '../batch4Factory'
 
-export const story: AppleRejectionStory = {
-  id: 'age-rating-2-3-6-nothing-to-change',
-  batchId: 'batch-4',
-  sortOrder: 52,
+export const story = batch4Story('age-rating-2-3-6-nothing-to-change', 52, {
   title: 'Age rating rejection when Connect already matched',
   guidelineLabel: 'Guideline 2.3.6',
   tags: ['2-3-6'],
@@ -14,4 +11,4 @@ export const story: AppleRejectionStory = {
     'They changed nothing in Connect, replied to the reviewer that the settings already matched, and resubmitted. The app was approved a few hours later.',
   lesson:
     'A 2.3.6 note can be wrong about your current settings. Check App Store Connect before changing anything, and if it already matches, say so clearly in your reply instead of guessing at a fix.',
-}
+})
