@@ -7,32 +7,17 @@ export const appleRejectionStories: AppleRejectionStory[] = Object.values(storyM
   .map((module) => module.story)
   .sort((left, right) => left.sortOrder - right.sortOrder)
 
-export const appleRejectionStoryBatches = [
-  {
-    id: 'batch-1',
-    label: 'Batch 1',
-    publishedOn: '2026-10-19',
-    storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-1').length,
-  },
-  {
-    id: 'batch-2',
-    label: 'Batch 2',
-    publishedOn: '2026-10-22',
-    storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-2').length,
-  },
-  {
-    id: 'batch-3',
-    label: 'Batch 3',
-    publishedOn: '2026-10-23',
-    storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-3').length,
-  },
-  {
-    id: 'batch-4',
-    label: 'Batch 4',
-    publishedOn: '2026-10-24',
-    storyCount: appleRejectionStories.filter((story) => story.batchId === 'batch-4').length,
-  },
-]
+const appleRejectionStoryBatchDefinitions = [
+  { id: 'batch-1', label: 'Batch 1', publishedOn: '2026-10-19' },
+  { id: 'batch-2', label: 'Batch 2', publishedOn: '2026-10-22' },
+  { id: 'batch-3', label: 'Batch 3', publishedOn: '2026-10-23' },
+  { id: 'batch-4', label: 'Batch 4', publishedOn: '2026-10-24' },
+] as const
+
+export const appleRejectionStoryBatches = appleRejectionStoryBatchDefinitions.map((batch) => ({
+  ...batch,
+  storyCount: appleRejectionStories.filter((story) => story.batchId === batch.id).length,
+}))
 
 export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   '1-2',
