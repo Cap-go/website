@@ -128,7 +128,7 @@ For a web app, expect to enter:
 
 Those values must be exact. For a web credential, Google expects the full scheme and hostname, such as `https://www.example.com`, rather than a loose domain concept.
 
-For mobile platforms, the shape is different. Android registration requires package-level identity and ownership verification, while iOS uses its own platform identifiers. If you're combining Google auth with another auth layer, [this Capacitor social login setup with Supabase](https://capgo.app/blog/setup-supabase-with-capacitor-social-login/) is a useful example of how these pieces often fit together.
+For mobile platforms, the shape is different. Android registration requires package-level identity and ownership verification, while iOS uses its own platform identifiers. If you're combining Google auth with another auth layer, [this Capacitor social login setup with Supabase](https://capgo.app/blog/setup-supabase-with-capacitor-social-login/) is a useful example of how these pieces often fit together. For Neon Auth, the [Neon plugin setup](https://capgo.app/docs/plugins/neon/getting-started/) covers the Google OAuth redirect.
 
 This walkthrough is a decent visual reference if you want to compare the UI while you click through:
 
