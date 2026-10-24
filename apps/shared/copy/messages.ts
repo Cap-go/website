@@ -5746,6 +5746,7 @@ const messages = {
   store_policy_rce_body:
     'Apple enforces Guideline 2.5.2 against apps that download code to add or change functionality after review, including dynamic native loading and remote scripts that call private APIs. Capgo is designed to deliver signed JavaScript, HTML, CSS, and assets only to the interpreter already embedded in your Capacitor app, within the interpreted-code conditions in section 3.3.1(B) of the Apple Developer Program License Agreement. Your team must still keep each update inside the app purpose you submitted for review.',
   store_policy_rce_link: 'Read how Capgo fits Apple and Google rules',
+  store_policy_rce_blog_link: 'Blog: Apple remote code rules and Capgo',
   store_policy_apple_label: 'Apple Developer Program License Agreement',
   store_policy_eyebrow: 'App Store & Google Play',
   store_policy_explained_link: 'Full answer',
