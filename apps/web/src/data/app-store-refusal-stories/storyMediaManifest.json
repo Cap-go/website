@@ -178,5 +178,11 @@
   },
   "limited-review-history-video-walkthrough-2-1": null,
   "three-guidelines-one-month-2-1-2-3-2-5-2-3": null,
-  "prayer-app-primarily-a-book-4-2": null
+  "prayer-app-primarily-a-book-4-2": null,
+  "openai-in-metadata-china-guideline-5": {
+    "src": "/app-store-refusal-horror-story/screenshots/openai-in-metadata-china-guideline-5.webp",
+    "alt": "App Review rejection under Guideline 5 Legal citing OpenAI in metadata and China generative AI licensing requirements",
+    "width": 1200,
+    "height": 534
+  }
 }
