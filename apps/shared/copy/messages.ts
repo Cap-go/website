@@ -5746,6 +5746,7 @@ const messages = {
   store_policy_rce_body:
     'Capgo cannot cause an Apple remote code execution rejection. That is not possible. Capgo does not install or execute native code. It delivers signed JavaScript, HTML, CSS, and assets only to the interpreter already in your Capacitor app. Guideline 2.5.2 targets dynamic native loading and remote scripts that call private APIs, which Capgo does not do. Your team must still keep each web update inside the app purpose you submitted for review.',
   store_policy_rce_link: 'Read how Capgo fits Apple and Google rules',
+  store_policy_rce_blog_link: 'Blog: Apple remote code rules and Capgo',
   store_policy_apple_label: 'Apple Developer Program License Agreement',
   store_policy_eyebrow: 'App Store & Google Play',
   store_policy_explained_link: 'Full answer',
