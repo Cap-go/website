@@ -2,8 +2,8 @@
 slug: apple-remote-code-execution-capgo-live-updates
 title: Apple Remote Code Rules and Capgo Live Updates
 description: >-
-  App Review Guideline 2.5.2, ADPLA 3.3.1(B), and the 2025 Guideline 4.7 mini app
-  clarification target native remote code and open software catalogs. Signed JavaScript
+  App Review Guideline 2.5.2, ADPLA 3.3.1(B), and the 2025 Guideline 4.7 mini-app
+  clarification cover native remote code, interpreted-code exceptions, and mini-app catalogs. Signed JavaScript
   in your Capacitor WebView can still qualify as interpreted code when you keep the
   app's reviewed purpose, respect OS security, and stay within ADPLA 3.3.1(C). Here is
   how Capgo fits that model.
