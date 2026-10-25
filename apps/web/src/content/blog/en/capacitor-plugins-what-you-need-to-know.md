@@ -222,7 +222,7 @@ Using `capacitor doctor` regularly can help catch potential problems early, ensu
 
 ## Summary
 
-Capacitor plugins connect web and native capabilities through their core design, making [cross-platform app development](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) more efficient [\[6\]](https://capacitorjs.jp/blog/how-capacitor-works). This architecture equips developers with the tools they need to build advanced applications while maintaining the speed and performance of native apps.
+Capacitor plugins connect web and native capabilities through their core design, making [cross-platform app development](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/) more efficient [\[6\]](https://capacitorjs.jp/blog/how-capacitor-works). This architecture equips developers with the tools they need to build advanced applications while maintaining the speed and performance of native apps.
 
 To keep plugins running smoothly, it's important to understand their categories and how they are maintained:
 

@@ -17,7 +17,7 @@ origin: ai
 next_blog: ''
 ---
 
-**Build failures in [Capacitor](https://capacitorjs.com/) CI/CD pipelines can disrupt [mobile app development](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/), costing time and money.** Here’s a quick guide to common issues and how to fix them:
+**Build failures in [Capacitor](https://capacitorjs.com/) CI/CD pipelines can disrupt [mobile app development](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/), costing time and money.** Here’s a quick guide to common issues and how to fix them:
 
 ### Key Problems and Solutions:
 

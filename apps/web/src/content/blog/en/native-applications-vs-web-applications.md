@@ -234,7 +234,7 @@ A product team has six weeks to ship mobile access before a sales launch. That d
 
 A retail or grocery app lives or dies on repeat usage. Browsing needs to feel fast, checkout cannot feel fragile, and push notifications, saved sessions, and loyalty flows usually matter more than architectural purity.
 
-In this case, hybrid is often the practical default. It gives the team an installed app, access to common device features, and one shared product surface for the flows that change every week. Native still makes sense if the roadmap depends on advanced animation, camera-heavy experiences, complex background work, or platform-specific optimization tied directly to conversion. Teams weighing those trade-offs usually benefit from a [cross-platform mobile app development guide for product teams](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/), especially before committing to separate iOS and Android tracks.
+In this case, hybrid is often the practical default. It gives the team an installed app, access to common device features, and one shared product surface for the flows that change every week. Native still makes sense if the roadmap depends on advanced animation, camera-heavy experiences, complex background work, or platform-specific optimization tied directly to conversion. Teams weighing those trade-offs usually benefit from a [cross-platform mobile app development guide for product teams](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/), especially before committing to separate iOS and Android tracks.
 
 <a id="internal-enterprise-dashboard"></a>
 ### Internal enterprise dashboard
@@ -279,7 +279,7 @@ A lot of teams also benefit from reading practical guidance on how multi-platfor
 
 ![A checklist table titled App Architecture Decision Framework 2026 used to compare native, web, and hybrid applications.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/cb347e79-d348-4b53-9744-bae69f84a746/native-applications-vs-web-applications-architecture-framework.jpg)
 
-In 2026, the smartest framing for development isn't native versus web. It's **native, web, or hybrid based on performance needs, device requirements, and update strategy**. If your release model matters as much as your runtime, start from that reality. A solid [cross-platform mobile app development guide](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) can help your team evaluate that path with fewer assumptions.
+In 2026, the smartest framing for development isn't native versus web. It's **native, web, or hybrid based on performance needs, device requirements, and update strategy**. If your release model matters as much as your runtime, start from that reality. A solid [cross-platform mobile app development guide](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/) can help your team evaluate that path with fewer assumptions.
 
 ---
 

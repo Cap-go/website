@@ -93,7 +93,7 @@ A PWA lets a team publish web changes without waiting for an app-store release. 
 
 Native release channels provide more separation between versions. Store review and user adoption introduce delay, but they also create a deliberate checkpoint. Teams can stage a release, monitor crashes, and maintain compatibility with older versions while users update over time.
 
-For CapacitorJS teams, Capgo provides a live-update path for signed JavaScript, CSS, copy, configuration, and asset bundles. It supports targeted channels, per-device logs, adoption and failure metrics, version history, and rollback protection. That model is described in this [overview of live updates for Capacitor applications](https://capgo.app/blog/new-deal-pwa/). It should complement store governance, not replace careful testing or platform review where native code changes.
+For CapacitorJS teams, Capgo provides a live-update path for signed JavaScript, CSS, copy, configuration, and asset bundles. It supports targeted channels, per-device logs, adoption and failure metrics, version history, and rollback protection. That model is described in this [overview of live updates for Capacitor applications](https://capgo.app/blog/over-the-air-updates/). It should complement store governance, not replace careful testing or platform review where native code changes.
 
 <a id="offline-behavior-and-developer-workflow"></a>
 ### Offline behavior and developer workflow

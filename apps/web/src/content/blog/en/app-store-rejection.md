@@ -130,7 +130,7 @@ Use Review Notes to remove reviewer guesswork:
 - **Purchases:** Identify sandbox products, restore steps, and where the reviewer can test entitlements.
 - **Changes:** State the rejection cause, the specific fix, and the test path that verifies it.
 
-A focused submission workflow is also documented in [App Store review management guidance](https://capgo.app/blog/app-store-review-management/). Keep the note factual. It should help a reviewer verify the change in minutes, not persuade them with launch urgency.
+A focused submission workflow is also documented in [App Store review management guidance](https://capgo.app/blog/how-to-pass-app-store-review-2026/). Keep the note factual. It should help a reviewer verify the change in minutes, not persuade them with launch urgency.
 
 <iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/_EUbAWiOBf8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 

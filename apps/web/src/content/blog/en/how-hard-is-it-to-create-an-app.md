@@ -151,7 +151,7 @@ If you're not building solo, cost quickly becomes a staffing problem. You're not
 
 For early planning, salary benchmarks help more than generic “agency vs freelancer” advice. A practical place to compare hiring assumptions is [nexus IT's guide for tech salaries](https://nexusitgroup.com/software-development-salary-guide/), especially if you're deciding between internal hiring and external delivery.
 
-Another hidden cost comes from duplicated effort across platforms. If your team can reuse most of the UI and business logic, the economics improve. If you split into separate iOS and Android codebases too early, coordination overhead grows with every feature, every bug, and every release. That's why many teams evaluate a [cross-platform mobile app development guide](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) before locking in architecture.
+Another hidden cost comes from duplicated effort across platforms. If your team can reuse most of the UI and business logic, the economics improve. If you split into separate iOS and Android codebases too early, coordination overhead grows with every feature, every bug, and every release. That's why many teams evaluate a [cross-platform mobile app development guide](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/) before locking in architecture.
 
 A useful staffing reality check:
 
