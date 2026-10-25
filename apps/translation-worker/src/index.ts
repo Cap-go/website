@@ -186,7 +186,7 @@ const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
 // Bump this when the prompt, style guides or models change to translate everything
 // again. Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages
 // are rebuilt from memory without new AI calls.
-const TRANSLATION_MEMORY_VERSION = '2026-10-23-style-guides-v3'
+const TRANSLATION_MEMORY_VERSION = '2026-10-25-style-guides-v4'
 const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
@@ -231,12 +231,16 @@ const STRAY_PLACEHOLDER_GLOBAL_PATTERN = /__CAPGO_KEEP_\d+__/g
 const PROTECTED_TRANSLATION_TOKENS = ['Live Update', 'Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 // Product names matched with exact case: "Native Build" is the product, "native build" is generic copy.
 const CASE_SENSITIVE_PROTECTED_TRANSLATION_TOKENS = ['Native Build'] as const
-// Kept whole so the model never sees half a command: npm package names (@capgo/cli,
-// @capgo/capacitor-updater@7) and Capgo CLI commands ("capgo bundle upload").
+// Kept whole so the model never sees half a command: Capgo CLI commands with their
+// subcommands and flags ("npx @capgo/cli@latest bundle upload --channel production",
+// "capgo build init --platform ios"), then any npm package name (@capgo/capacitor-updater).
+// Subcommands come from the CLI's command list, so prose after a command is not swallowed.
+const CAPGO_CLI_WORDS =
+  'ios-provisioning|sync-ios-version|members-invite|members-remove|compatibility|currentBundle|notifications|members-role|organisation|organization|credentials|releaseType|apple-key|star-all|versions|account|channel|cleanup|decrypt|encrypt|members|metrics|migrate|observe|prescan|promote|request|setting|summary|bundle|create|delete|device|doctor|events|export|get-qr|manage|needed|routes|update|upload|whoami|build|clear|debug|login|probe|setup|init|list|save|star|add|app|get|key|mcp|run|set|zip'
 const PROTECTED_TRANSLATION_PATTERNS = [
+  new RegExp(`(?:(?:npx|bunx) )?(?:@capgo/cli(?:@[\\w.-]+)?|capgo)(?: (?:${CAPGO_CLI_WORDS})(?![\\w-]))+(?: --?[a-zA-Z][\\w-]*(?:[ =](?!-)[\\w.|/@:-]+)?)*`, 'y'),
   /@[a-z0-9][a-z0-9-]*\/[a-z0-9][a-z0-9.-]*(?:@[\w.-]+)?/y,
-  /capgo (?:app|bundle|channel|build|init|login|doctor|key|organisation|organization|account|probe)(?: (?:upload|list|delete|cleanup|set|add|encrypt|decrypt|compatibility|zip|request|create|current|debug|setting|credentials))?/y,
-] as const
+]
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
