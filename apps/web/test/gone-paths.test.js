@@ -45,6 +45,11 @@ test('isGonePath does not match retired app-behavior-tracking (301 redirect)', (
   expect(isGonePath('/de/blog/app-behavior-tracking/')).toBe(false)
 })
 
+test('isGonePath does not match retired app-health-check (301 redirect)', () => {
+  expect(isGonePath('/blog/app-health-check/')).toBe(false)
+  expect(isGonePath('/de/blog/app-health-check/')).toBe(false)
+})
+
 test('isGonePath does not match unrelated paths', () => {
   expect(isGonePath('/blog/capacitor-comprehensive-guide/')).toBe(false)
   expect(isGonePath('/blog/what-is-a-micro-frontend-extra/')).toBe(false)

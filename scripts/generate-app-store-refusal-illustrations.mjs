@@ -167,11 +167,35 @@ const drawers = {
       <path d="M192 100h24" stroke="${ACCENT}" stroke-width="3" stroke-linecap="round" opacity="0.85"/>`,
       'Screenshot metadata frames',
     ),
+  '2-3-6': (v) =>
+    wrap(
+      `${accentDot(52, 44, 20, 0.3)}
+      <rect x="96" y="56" width="128" height="88" rx="12" fill="${INK}" stroke="${MUTED}" stroke-width="2"/>
+      <text x="160" y="108" text-anchor="middle" fill="${ACCENT}" font-family="system-ui,sans-serif" font-size="36" font-weight="700">18+</text>
+      <path d="M120 132h80" stroke="${SOFT}" stroke-width="3" stroke-linecap="round" opacity="${0.45 + v * 0.1}"/>`,
+      'Age rating metadata',
+    ),
+  '2-3-2': (v) =>
+    wrap(
+      `${accentDot(270, 160, 18, 0.25)}
+      <rect x="72" y="44" width="176" height="112" rx="10" fill="${INK}" stroke="${MUTED}" stroke-width="2"/>
+      <path d="M96 72h120 M96 96h96 M96 120h108" stroke="${SOFT}" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="220" cy="88" r="10" fill="${ACCENT}" opacity="${0.5 + v * 0.15}"/>`,
+      'App metadata lines',
+    ),
+  '4-2': (v) =>
+    wrap(
+      `${accentDot(48, 152, 22, 0.28)}
+      <rect x="108" y="52" width="104" height="96" rx="8" fill="${INK}" stroke="${MUTED}" stroke-width="2"/>
+      <path d="M128 76h64 M128 96h48 M128 116h56" stroke="${SOFT}" stroke-width="3" stroke-linecap="round"/>
+      <rect x="${140 + v * 4}" y="128" width="40" height="8" rx="4" fill="${ACCENT}" opacity="0.75"/>`,
+      'Minimum functionality book block',
+    ),
 }
 
 const maxVariants = {
   '4-3': 11,
-  '2-1': 4,
+  '2-1': 6,
   'endless-review': 6,
   'account-termination': 2,
   '4-2-6': 1,
@@ -186,6 +210,9 @@ const maxVariants = {
   'fake-documents': 1,
   'ai-data-sharing': 1,
   '2-3-7': 1,
+  '2-3-6': 1,
+  '2-3-2': 1,
+  '4-2': 1,
 }
 
 await mkdir(outDir, { recursive: true })

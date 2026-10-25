@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Minimum functionality book block">
+  <title>Minimum functionality book block</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="48" cy="152" r="22" fill="#44BCFF" opacity="0.28"/>
+      <rect x="108" y="52" width="104" height="96" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+      <path d="M128 76h64 M128 96h48 M128 116h56" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+      <rect x="140" y="128" width="40" height="8" rx="4" fill="#44BCFF" opacity="0.75"/>
+</svg>

@@ -1,11 +1,11 @@
 {
-  "repositoryCount": 142,
-  "contributorCount": 604,
-  "versionCount": 16106,
-  "releaseCount": 6936,
+  "repositoryCount": 143,
+  "contributorCount": 605,
+  "versionCount": 16113,
+  "releaseCount": 6937,
   "closedIssueCount": 1753,
-  "mergedPullRequestCount": 9202,
-  "resolvedItemCount": 10955,
+  "mergedPullRequestCount": 9211,
+  "resolvedItemCount": 10964,
   "totalStars": 3162,
   "repositories": {
     "Cap-go/capacitor-native-market": {
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 211,
       "contributors": 30,
-      "versionTags": 5802,
+      "versionTags": 5808,
       "releases": 1000,
       "closedIssues": 419,
-      "mergedPullRequests": 2605
+      "mergedPullRequests": 2613
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -916,6 +916,15 @@
       "releases": 20,
       "closedIssues": 2,
       "mergedPullRequests": 12
+    },
+    "Cap-go/capacitor-neon": {
+      "url": "https://github.com/Cap-go/capacitor-neon",
+      "stars": 0,
+      "contributors": 3,
+      "versionTags": 1,
+      "releases": 1,
+      "closedIssues": 0,
+      "mergedPullRequests": 1
     },
     "Cap-go/capacitor-incoming-call-kit": {
       "url": "https://github.com/Cap-go/capacitor-incoming-call-kit",

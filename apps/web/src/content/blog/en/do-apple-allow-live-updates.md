@@ -9,15 +9,15 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2026-10-20T00:21:49.000Z
-head_image: /apple_appstore.webp
+updated_at: 2026-10-23T00:00:00.000Z
+head_image: /blog-images/do-apple-allow-live-updates.png
 head_image_alt: "Does Apple Allow Live Updates Without App Store Review? Capgo blog illustration"
-keywords: Apple, App Store, live updates, OTA updates, guideline 2.5.2, Capacitor, interpreted code, app review
+keywords: Apple, App Store, live updates, OTA updates, guideline 2.5.2, Capacitor, React Native, Flutter, Swift, Cordova, Ionic, interpreted code, app review
 tag: Tutorial
 published: true
 locale: en
 origin: human
-next_blog: ios-live-updates-allowed-stacks
+next_blog: do-google-allow-live-updates
 faq:
   - question: Does Apple allow live updates without App Store review?
     answer: >-
@@ -31,6 +31,18 @@ faq:
   - question: Can Apple reject my app for using live updates?
     answer: >-
       Apple does not reject apps for the act of updating JavaScript. Rejections and removals happen when updates are used to change the app's purpose or hide behavior from reviewers. Thousands of apps ship live updates through Capgo, Expo and similar tools.
+  - question: Which iOS frameworks can use live updates?
+    answer: >-
+      Frameworks whose app logic is interpreted code: Capacitor, Cordova and Ionic (JavaScript in WebKit), React Native and Expo (JavaScript bundle), and NativeScript. Flutter needs a third-party interpreter such as Shorebird. Native Swift, Objective-C, .NET MAUI and Kotlin Multiplatform apps cannot update their code over the air.
+  - question: Can a native Swift app use live updates?
+    answer: >-
+      Not for native code. Swift compiles to machine code, and Apple forbids downloading replacement native code. A Swift app can still download and run interpreted code, such as JavaScript through JavaScriptCore, when it meets Apple's conditions. It can also update data, remote config, images and server-driven UI, but new native logic needs an App Store release.
+  - question: Can Flutter apps use live updates on iOS?
+    answer: >-
+      Not out of the box. Flutter compiles Dart ahead of time to native code on iOS. Shorebird adds a Dart interpreter for patched code so updates run as interpreted code, which is how it stays inside Apple's rules.
+  - question: Is Capacitor the safest stack for live updates on iOS?
+    answer: >-
+      It is the cleanest case. The whole app UI and logic run as JavaScript inside Apple's own WebKit engine, which is exactly the type of code Apple's rules exempt. Capgo updates that layer and leaves the native binary untouched.
 ---
 
 **Short answer: yes, Apple allows live updates, within limits.** You can push new JavaScript, HTML and CSS to an iOS app without a new App Store review, as long as the update does not change what the app is. You cannot download native code.
@@ -80,12 +92,64 @@ If you follow that, live updates are a normal part of shipping an iOS app. React
 
 ## Which stacks can do it on iOS?
 
-The rule allows interpreted code, so it depends on how your framework runs your code. Capacitor, Cordova and Ionic are fully covered because they run in WebKit. React Native can update its JavaScript bundle. Native Swift apps cannot. The full breakdown, stack by stack, is in [which stacks can use live updates on iOS](/blog/ios-live-updates-allowed-stacks/).
+Whether your app can ship over-the-air updates on iOS depends on one question: is your app logic interpreted at runtime? JavaScript and other interpreted code, yes. Swift, Objective-C and C++ compiled to machine code, no. AOT-compiled frameworks such as Flutter qualify only through an interpreter.
+
+### iOS live update compatibility by stack
+
+| Stack | How the code runs on iOS | Live updates allowed? | Tooling |
+| --- | --- | --- | --- |
+| **Capacitor** | JavaScript, HTML, CSS in WKWebView (WebKit) | Yes | [Capgo](/live-update/) |
+| **Ionic** (on Capacitor) | Same as Capacitor | Yes | [Capgo](/live-update/) |
+| **Cordova** | JavaScript in WKWebView | Yes | [Capgo after migrating to Capacitor](/solutions/cordova-to-capacitor/), legacy Cordova plugins |
+| **React Native / Expo** | JavaScript bundle on Hermes or JavaScriptCore | Yes, JavaScript only | Expo Updates, self-hosted CodePush alternatives |
+| **NativeScript** | JavaScript on an embedded engine | Yes, JavaScript only | Limited, mostly self-built |
+| **Flutter** | Dart compiled AOT to machine code | Only through an interpreter | Shorebird (Dart interpreter for patches) |
+| **Native Swift / Objective-C** | Machine code | No for native code; yes for JavaScript in WebKit or JavaScriptCore | Remote config and server-driven UI |
+| **.NET MAUI / Xamarin** | C# compiled AOT to machine code | No | Remote config only |
+| **Kotlin / Compose Multiplatform** | Kotlin/Native compiled to machine code | No | Remote config only |
+| **Unity / Unreal** | C# via IL2CPP or C++, compiled | No for code, yes for content | Asset bundles, scripted content (Lua) |
+| **Web wrapper (remote URL)** | Website loaded in a WebView | Always live, but review risk | None needed, see note below |
+
+### Capacitor, Ionic and Cordova: fully covered
+
+Your app's web UI and JavaScript business logic run in `WKWebView`, while the native shell and plugins remain native. Apple's Developer Program License Agreement section 3.3.1(B) permits downloaded interpreted code only when it preserves the app's primary purpose, does not create a code storefront, and does not bypass OS security. Guideline 4.7 separately governs apps offering HTML5 and JavaScript mini apps and adds additional requirements.
+
+A live update replaces the web bundle. The native shell, plugins and permissions stay the ones Apple reviewed. That is why Capgo is compliant by design: it cannot change native code even if you wanted it to. New native plugins or permissions still need an App Store release.
+
+### React Native and Expo: JavaScript yes, native modules no
+
+React Native runs your JavaScript bundle on Hermes or JavaScriptCore. That bundle is interpreted code and can be updated over the air, which is what Expo Updates and Microsoft CodePush (retired in 2025) were built for. [Teams leaving CodePush](/migrate/from-codepush/) need a replacement.
+
+Any change to native modules, the React Native version, or `Info.plist` needs a new binary.
+
+### Flutter: only through an interpreter
+
+On iOS, Flutter compiles Dart ahead of time to ARM machine code. Downloading new machine code is forbidden, so stock Flutter cannot use live updates. Shorebird solves this by running patched Dart code in an interpreter, which brings it under the interpreted code exception. Read more in [live updates for Flutter apps](/blog/live-updates-for-flutter-app/).
+
+### Native Swift, .NET MAUI, Kotlin Multiplatform: no native code updates
+
+These stacks produce native machine code. They cannot download replacement native code. A native app may still download and execute interpreted code, such as JavaScript through JavaScriptCore, when it meets Apple's conditions. What you can also do over the air is change data: remote config, feature flags for features already reviewed, server-driven UI, images and copy.
+
+### Unity and game engines: content yes, code no
+
+Game code is compiled. Asset bundles (levels, art, balancing data) are content and can be downloaded. Embedded scripting languages like Lua are interpreted code and follow the same rules as JavaScript.
+
+### Remote URL wrappers: live, but risky for review
+
+An app that only loads your website in a WebView is "updated" every time you deploy the site. The problem is not guideline 2.5.2 but guideline 4.2 (minimum functionality): Apple rejects apps that are just a website in a frame. Bundling the web app with Capacitor, adding native features, and using live updates avoids that.
+
+### What no stack can do on iOS
+
+Whatever your framework, a live update cannot:
+
+- Download native code, frameworks or dynamic libraries
+- Add new permissions or entitlements
+- Change the app into something the App Store listing does not describe
+- Turn on features that were hidden from App Review
 
 ## Where to go next
 
 - **Android answer:** [Does Google allow live updates without Play Store review?](/blog/do-google-allow-live-updates/)
-- **Stack by stack:** [iOS](/blog/ios-live-updates-allowed-stacks/) and [Android](/blog/android-live-updates-allowed-stacks/)
 - **Enforcement in detail:** [How Apple enforces OTA update restrictions](/blog/how-apple-enforces-ota-update-restrictions/)
 - **Approval workflow:** [Capacitor OTA updates: App Store approval guide](/blog/capacitor-ota-updates-app-store-approval-guide/)
 - **Real rejection stories:** [App Store refusal horror stories](/app-store-refusal-horror-story/)

@@ -169,5 +169,14 @@
     "alt": "App Store Connect App Review screen showing an iOS 1.0 submission in Waiting for Review with five subscriptions, app icons and names redacted",
     "width": 1306,
     "height": 1290
-  }
+  },
+  "age-rating-2-3-6-nothing-to-change": {
+    "src": "/app-store-refusal-horror-story/screenshots/age-rating-2-3-6-nothing-to-change.webp",
+    "alt": "App Review rejection message citing guideline 2.3.6 about age rating and accurate metadata",
+    "width": 931,
+    "height": 427
+  },
+  "limited-review-history-video-walkthrough-2-1": null,
+  "three-guidelines-one-month-2-1-2-3-2-5-2-3": null,
+  "prayer-app-primarily-a-book-4-2": null
 }

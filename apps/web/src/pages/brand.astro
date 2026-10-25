@@ -125,6 +125,22 @@ const donts = [
           </BrandAssetCard>
 
           <BrandAssetCard
+            title={m.brand_asset_youtube_banner_title({}, { locale })}
+            description={m.brand_asset_youtube_banner_desc({}, { locale })}
+            previewClass="bg-[#002444]"
+            downloads={[{ href: `${assetBase}/capgo-youtube-banner.png`, label: m.brand_download_png({}, { locale }), format: 'png' }]}
+          >
+            <img
+              src={`${assetBase}/capgo-youtube-banner.png`}
+              alt="Capgo logo sized for a YouTube channel banner"
+              class="h-24 w-full rounded-xl object-cover object-center"
+              width="2560"
+              height="1440"
+              loading="lazy"
+            />
+          </BrandAssetCard>
+
+          <BrandAssetCard
             title={m.brand_asset_transparent_title({}, { locale })}
             description={m.brand_asset_transparent_desc({}, { locale })}
             previewClass="bg-slate-900"

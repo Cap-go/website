@@ -206,6 +206,14 @@ const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
 const TRANSLATION_META_HEADER = 'X-Capgo-Translation-Meta'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
+// Same-origin rules file served by this worker. Cloudflare Speed Brain adds
+// `Speculation-Rules: "/cdn-cgi/speculation"` unless the response already has that
+// header. Chrome then prefetches links on mousedown. Prefetches of Worker routes
+// get 503 "prefetch refused: disabled for worker requests", and Chromium aborts the
+// real click navigation that was joined to that prefetch. An empty ruleset keeps
+// Speed Brain from replacing the header.
+// https://developers.cloudflare.com/speed/optimization/content/speed-brain/
+const SPEED_BRAIN_RULES_PATH = '/speculation-rules.json'
 const EXECUTABLE_SCRIPT_TYPES = new Set(['', 'module', 'text/javascript', 'application/javascript', 'text/ecmascript', 'application/ecmascript'])
 const WORKER_OWNED_SCRIPT_IDS = new Set(['capgo-edge-language-selector-hash'])
 const MAX_HTML_BYTES = 1_500_000
@@ -626,7 +634,34 @@ async function translationStoreKey(kind: 'pages' | 'state', requestUrl: URL, loc
   return `${kind}/${TRANSLATION_CACHE_VERSION}/${locale}/${urlHash}.json`
 }
 
-function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'STALE' | 'BYPASS', isHead = false): Response {
+function isSpeedBrainRulesPath(pathname: string): boolean {
+  return extractLocale(pathname) !== null && stripLocalePrefix(pathname) === SPEED_BRAIN_RULES_PATH
+}
+
+function speedBrainRulesHeaderValue(locale: Locale): string {
+  return `"/${locale}${SPEED_BRAIN_RULES_PATH}"`
+}
+
+function speedBrainRulesResponse(isHead: boolean): Response {
+  return new Response(isHead ? null : '{}', {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/speculationrules+json; charset=utf-8',
+      'Cache-Control': 'public, max-age=86400',
+      'X-Content-Type-Options': 'nosniff',
+    },
+  })
+}
+
+function applySpeedBrainOptOut(headers: Headers, locale: Locale | null): void {
+  if (locale && headers.get('Content-Type')?.toLowerCase().includes('text/html')) {
+    headers.set('Speculation-Rules', speedBrainRulesHeaderValue(locale))
+    return
+  }
+  headers.delete('Speculation-Rules')
+}
+
+function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'STALE' | 'BYPASS', locale: Locale | null, isHead = false): Response {
   const headers = new Headers(response.headers)
   headers.set('Cache-Control', CLIENT_NO_STORE)
   headers.set('CDN-Cache-Control', CLIENT_NO_STORE)
@@ -637,6 +672,7 @@ function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'S
   headers.delete('ETag')
   headers.delete('Last-Modified')
   headers.delete('Content-Length')
+  applySpeedBrainOptOut(headers, locale)
   return new Response(isHead ? null : response.body, {
     status: response.status,
     statusText: response.statusText,
@@ -649,13 +685,13 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
     Location: localizedPath(requestUrl.pathname, DEFAULT_LOCALE) + requestUrl.search,
     'X-Capgo-Translation-Fallback': 'temporary-english-redirect',
   })
-  return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
+  return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', extractLocale(requestUrl.pathname), isHead)
 }
 
 async function temporaryEnglishCrawlerResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) {
-    return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+    return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', locale, isHead)
   }
   if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
     const sourceHtml = await originResponse.text()
@@ -671,10 +707,11 @@ async function temporaryEnglishCrawlerResponse(request: Request, env: Env, reque
         headers,
       }),
       'BYPASS',
+      locale,
       isHead,
     )
   }
-  if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+  if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', locale, isHead)
 
   const sourceHtml = await originResponse.text()
   const localizedHtml = rewriteMetadataForEnglishCanonical(sourceHtml, requestUrl)
@@ -691,13 +728,14 @@ async function temporaryEnglishCrawlerResponse(request: Request, env: Env, reque
       headers,
     }),
     'MISS',
+    locale,
     isHead,
   )
 }
 
 async function temporaryEnglishRetryResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, isHead = false): Promise<Response> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
-  if (isRedirect(originResponse)) return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', isHead)
+  if (isRedirect(originResponse)) return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', locale, isHead)
   if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
     const sourceHtml = await originResponse.text()
     return withResponseHeaders(
@@ -712,10 +750,11 @@ async function temporaryEnglishRetryResponse(request: Request, env: Env, request
         locale,
       ),
       'BYPASS',
+      locale,
       isHead,
     )
   }
-  if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', isHead)
+  if (!originResponse.ok || !isHtmlResponse(originResponse)) return withResponseHeaders(originResponse, 'BYPASS', locale, isHead)
 
   const headers = new Headers(originResponse.headers)
   headers.set('Refresh', String(TRANSLATION_RETRY_SECONDS))
@@ -728,6 +767,7 @@ async function temporaryEnglishRetryResponse(request: Request, env: Env, request
       headers,
     }),
     'MISS',
+    locale,
     isHead,
   )
 }
@@ -3528,8 +3568,8 @@ function scheduleTranslatedSourceCheck(ctx: WorkerExecutionContext | undefined, 
 }
 
 async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, cacheState: 'HIT' | 'STALE', isHead: boolean): Promise<Response> {
-  if (isHead) return withResponseHeaders(translatedResponse, cacheState, true)
-  if (!isHtmlResponse(translatedResponse)) return withResponseHeaders(translatedResponse, cacheState, false)
+  if (isHead) return withResponseHeaders(translatedResponse, cacheState, locale, true)
+  if (!isHtmlResponse(translatedResponse)) return withResponseHeaders(translatedResponse, cacheState, locale, false)
 
   const status = translatedResponse.status
   const statusText = translatedResponse.statusText
@@ -3539,7 +3579,7 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
   const translatedHtml = await translatedResponse.text()
 
   if (cacheState === 'HIT' && Date.now() - translatedAt < TRANSLATION_SOURCE_CHECK_SECONDS * 1000) {
-    return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+    return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, locale, false)
   }
 
   try {
@@ -3561,7 +3601,7 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
         syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
       }
       if (syncedHtml !== translatedHtml) responseHeaders.set(TRANSLATION_SCRIPTS_HEADER, 'synced')
-      return withResponseHeaders(new Response(syncedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+      return withResponseHeaders(new Response(syncedHtml, { status, statusText, headers: responseHeaders }), cacheState, locale, false)
     }
   } catch (error) {
     console.error('Failed to sync executable scripts from current English source', {
@@ -3571,7 +3611,7 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
     })
   }
 
-  return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, false)
+  return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, locale, false)
 }
 
 async function processTranslationJob(job: TranslationJob, env: Env): Promise<void> {
@@ -3969,6 +4009,8 @@ export class TranslationCoordinator {
 export const __translationWorkerTest = {
   translateBatchWithMemory,
   shouldBypassTranslation,
+  isSpeedBrainRulesPath,
+  withResponseHeaders,
   keepsTranslationPlaceholders,
   translationMemoryKey,
   TRANSLATION_MEMORY_VERSION,
@@ -4017,6 +4059,13 @@ export default {
       return trackAICrawler(request, await handleTranslationTestRequest(request, env, requestUrl), ctx)
     }
 
+    if (isSpeedBrainRulesPath(requestUrl.pathname)) {
+      if (request.method !== 'GET' && request.method !== 'HEAD') {
+        return new Response(null, { status: 405, headers: { Allow: 'GET, HEAD' } })
+      }
+      return speedBrainRulesResponse(request.method === 'HEAD')
+    }
+
     const locale = extractLocale(requestUrl.pathname)
 
     if (!locale) return trackAICrawler(request, await fetchEnglishOrigin(request, env, requestUrl), ctx)
@@ -4028,7 +4077,20 @@ export default {
     if (shouldBypassTranslation(requestUrl.pathname)) {
       const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
       if (isRedirect(originResponse)) {
-        return trackAICrawler(request, withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', request.method === 'HEAD'), ctx)
+        return trackAICrawler(request, withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', locale, request.method === 'HEAD'), ctx)
+      }
+      if (isHtmlResponse(originResponse)) {
+        const headers = new Headers(originResponse.headers)
+        applySpeedBrainOptOut(headers, locale)
+        return trackAICrawler(
+          request,
+          new Response(request.method === 'HEAD' ? null : originResponse.body, {
+            status: originResponse.status,
+            statusText: originResponse.statusText,
+            headers,
+          }),
+          ctx,
+        )
       }
       return trackAICrawler(request, originResponse, ctx)
     }
@@ -4036,7 +4098,7 @@ export default {
     if (isGonePath(requestUrl.pathname)) {
       const source = await loadSourceHtml(request, env, requestUrl, locale)
       if (source.type === 'response') {
-        return trackAICrawler(request, withResponseHeaders(source.response, 'BYPASS', request.method === 'HEAD'), ctx)
+        return trackAICrawler(request, withResponseHeaders(source.response, 'BYPASS', locale, request.method === 'HEAD'), ctx)
       }
     }
 

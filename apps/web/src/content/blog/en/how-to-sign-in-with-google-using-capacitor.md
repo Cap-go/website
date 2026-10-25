@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T03:59:51.000Z
+updated_at: 2026-10-25T00:21:37.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: "Google Sign-In account picker inside a Capacitor app using the Capgo Social Login plugin"
 keywords: google sign in capacitor, capacitor google login, ionic google auth, credential manager capacitor, google id token, capacitor social login, 28444 developer console is not set up correctly
@@ -24,8 +24,8 @@ faq:
     answer: "Google Play re-signs your app with the Play App Signing key, so the SHA-1 on users' devices differs from your upload or debug key. Create an extra Android OAuth client with the SHA-1 from Play Console > App integrity > App signing key certificate."
   - question: "Can I request extra Google scopes like Calendar or Drive?"
     answer: "Yes. Pass them in options.scopes when calling login. On Android, custom scopes require the MainActivity change described in this guide, otherwise the plugin rejects the call. Sensitive and restricted scopes also require Google verification before you can ship to the public."
-  - question: "Does this work with Firebase Authentication or Supabase?"
-    answer: "Yes. Take result.idToken from the plugin and pass it to signInWithCredential in Firebase or signInWithIdToken in Supabase. Use the Web client ID as webClientId, since that is the audience those services expect."
+  - question: "Does this work with Firebase Authentication, Supabase or Neon?"
+    answer: "Yes for Firebase and Supabase. Take result.idToken from the plugin and pass it to signInWithCredential in Firebase or signInWithIdToken in Supabase. Use the Web client ID as webClientId, since that is the audience those services expect. For Neon Auth, Google sign-in is an OAuth redirect, so call signInWithOAuth from @capgo/capacitor-neon with a trusted https Universal Link or App Link as redirectTo, because Neon Auth rejects custom URL schemes."
 ---
 
 To add Google Sign-In to a Capacitor app, create a Web, an iOS and one or more Android OAuth client IDs in Google Cloud, install `@capgo/capacitor-social-login`, call `SocialLogin.initialize({ google: { webClientId, iOSClientId } })`, then `SocialLogin.login({ provider: 'google' })`. Android uses Google's Credential Manager, iOS uses the Google Sign-In SDK, and the web uses Google Identity Services. All three return an ID token you verify on your server.
@@ -312,7 +312,7 @@ export async function verifyGoogleToken(idToken: string) {
 }
 ```
 
-Use `sub` as the stable user key. Only link an existing account by email when `email_verified` is `true`. Accepting both client IDs as audience keeps tokens from every platform valid. Then issue your own session. If you use a managed backend, follow [Supabase with Capacitor Social Login](/blog/setup-supabase-with-capacitor-social-login/) or the [Firebase Google guide](/docs/plugins/social-login/firebase/introduction/).
+Use `sub` as the stable user key. Only link an existing account by email when `email_verified` is `true`. Accepting both client IDs as audience keeps tokens from every platform valid. Then issue your own session. If you use a managed backend, follow [Supabase with Capacitor Social Login](/blog/setup-supabase-with-capacitor-social-login/) or the [Firebase Google guide](/docs/plugins/social-login/firebase/introduction/). [Neon Auth](https://neon.com/docs/auth/guides/setup-oauth) handles Google through an OAuth redirect, which [@capgo/capacitor-neon](/docs/plugins/neon/getting-started/) runs natively.
 
 ## Troubleshooting
 

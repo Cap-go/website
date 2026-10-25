@@ -1,6 +1,6 @@
 ---
 title: Compliance
-description: "Learn about Capgo's privacy practices, data collection, security compliance, and how we protect your users' information during live updates."
+description: "Learn about Capgo's privacy practices, data collection, and security compliance. Capgo does not install or execute native code, so an Apple remote code execution rejection is not caused by Capgo."
 sidebar:
   order: 6
 ---
@@ -176,6 +176,8 @@ Use live updates only for web-layer changes that remain within the store rules a
 
 ### Apple remote code execution and Capgo
 
+Capgo cannot cause an Apple remote code execution rejection. That is not possible. Capgo does not install or execute native code, dynamic libraries, frameworks, or plugins, and it cannot call `dlopen`, `dlsym`, `performSelector:`, or `method_exchangeImplementations()`. It only replaces JavaScript, HTML, CSS, and static assets inside the WebView or JavaScriptCore engine already compiled into the reviewed binary. When App Review cites Guideline 2.5.2 or remote code execution, do not attribute that finding to Capgo. Read the review notice, then inspect the native project and other SDKs for executable loading or private-API use. A past review note about dynamic linking in the Capgo splash-screen auto-hide path was a bug in that native plugin, not live updates, and that link was removed.
+
 Review teams often cite **Guideline 2.5.2** and **Apple Developer Program License Agreement section 3.3.1(B)** together when they believe an app can change behavior after App Review. Understanding both helps you separate a compliant Capacitor live update workflow from a remote code risk. This section summarizes how Capgo fits those published rules; it is not legal advice. For a longer narrative with FAQ schema, see [Apple remote code rules and Capgo live updates](/blog/apple-remote-code-execution-capgo-live-updates/).
 
 #### What Apple prohibits (Guideline 2.5.2)
@@ -217,7 +219,7 @@ Capgo is an update mechanism. It does not by itself make your app a 4.7 host, bu
 
 | Concern | Capgo behavior |
 | ------- | -------------- |
-| Executable native code | Not downloaded or executed. Native code changes require a new store binary. |
+| Executable native code | Impossible. Capgo does not install or execute native code. Native code changes require a new store binary. |
 | Interpreted web assets | JavaScript, HTML, CSS, fonts, images, and other static assets replace the in-app web bundle only. |
 | Primary purpose | Your team controls scope. Ship material new capabilities through review, not OTA. |
 | Security | Bundles are signed and can be end-to-end encrypted. The updater does not bypass iOS sandboxing or code signing. |
