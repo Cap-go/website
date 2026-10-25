@@ -9,9 +9,9 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-23T00:00:00.000Z
-updated_at: 2026-10-23T22:32:27.000Z
+updated_at: 2026-10-25T00:07:33.000Z
 head_image: /blog-images/capacitor-iphone-duo-safe-area-guide.png
-head_image_alt: iPhone Duo open in landscape with the system tab bar as a vertical side rail
+head_image_alt: iPhone Duo open in landscape with native bars in the side rail, and open in portrait with the tab bar along the bottom
 keywords: Capacitor, iPhone Duo, safe area, viewport-fit, System Bars, native navigation, foldable iPhone, WebView
 tag: Development, Mobile, iOS
 published: true
@@ -26,6 +26,8 @@ Apple's foldable iPhone Duo changes how system chrome and safe areas work. [Expo
 
 On many poses iOS moves the status bar, navigation bar, and tab bar into a **vertical side rail** on the leading or trailing edge. Horizontal bars still appear in portrait on the open inner display and in classic phone layouts.
 
+The image above is the open display. Landscape stacks the toolbar and the tab bar in the rail. Portrait puts the toolbar back on top and the tab bar back on the bottom.
+
 For web content inside a Capacitor WebView, the important shifts are:
 
 - **`env(safe-area-inset-top)` can be `0`** when the status bar lives in the rail, not under the notch.
@@ -34,6 +36,10 @@ For web content inside a Capacitor WebView, the important shifts are:
 - **Native tab bars follow the rail** when you use `UITabBar` (or Capgo Native Navigation with the system tab bar). Custom fixed HTML tab bars do not.
 
 Treat the folded outer display as **compact width** and the open inner display as **regular width**. Widen layouts instead of swapping to a different app shell.
+
+![A mail app on iPhone Duo in three poses. Folded, the toolbar and tab bar stack in a vertical rail on the right. In Split View, each window keeps a rail on its outer edge. Open in portrait, the toolbar runs along the top and the tab bar sits in a pill along the bottom.](/blog-images/iphone-duo/where-bars-go.webp)
+
+Where the system bars go: a rail on the right when the device is folded, on the outer edge of each window in Split View, and horizontal bars again on the open display in portrait.
 
 ## Requirements
 
@@ -70,6 +76,11 @@ Skip Option B when you use Option A.
 On scroll views, inset the **content**, not only the outer scroll container, so backgrounds can scroll full width while text and buttons stay clear of the rail.
 
 Use **four independent values**. Do not assume `padding-left` equals `padding-right`. In RTL, the rail stays on the camera side; read both `left` and `right` env values.
+
+Two spots are easy to miss:
+
+- A horizontal scroller inside an already padded page still needs its own end padding. Otherwise the last card slides under the rail.
+- A floating button set to `right: 16px` ignores the rail. Add the live left or right inset, and recompute it when the window resizes.
 
 For Tailwind apps, [@capgo/tailwind-capacitor](https://github.com/Cap-go/tailwind-capacitor) exposes `pt-safe`, `px-safe`, and related utilities instead of repeating env() everywhere.
 
@@ -191,17 +202,17 @@ Expo's guide recommends native `Stack` and `NativeTabs` so iOS owns rail placeme
 
 If you must keep HTML chrome, audit every screen for **left and right** env padding, not only top and bottom.
 
+![The same screen with a fixed HTML header and bottom tabs. Folded, the header and tabs stay in the classic rectangles and only avoid the rail. Open in portrait, they stay on the top and the bottom.](/blog-images/iphone-duo/html-vs-native.webp)
+
+Fixed HTML chrome does not follow the rail. It stays in the top and bottom safe rectangles. Native bars, drawn by UIKit or by @capgo/capacitor-native-navigation, move with the system.
+
 ## @capgo/capacitor-native-navigation on iPhone Duo
 
-Native Navigation draws real `UINavigationBar` and `UITabBar` (or Material bars on Android) over one Capacitor WebView. On iOS 27 with iPhone Duo, **system tab bars move into the side rail** in folded and many landscape poses. The plugin's **curve** tab bar shape stays on the bottom edge; the center action keeps a circular cradle while the window widens.
+Native Navigation draws real `UINavigationBar` and `UITabBar` (or Material bars on Android) over one Capacitor WebView. On iOS 27 with iPhone Duo, **system tab bars move into the side rail** in folded and many landscape poses. The plugin's **curve** tab bar shape stays on the bottom edge. The center action keeps a circular cradle while the window widens.
 
-| Folded, system tab bar | Open, system tab bar in rail |
-| --- | --- |
-| <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-folded-system.webp" alt="iPhone Duo folded with the system tab bar as a vertical side rail" width="220" /> | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-open-system.webp" alt="iPhone Duo open in landscape with the system tab bar as a vertical side rail" width="280" /> |
+![Two open landscape layouts from @capgo/capacitor-native-navigation. On the left, the system tab bar sits in the side rail. On the right, the curve tab bar stays along the bottom, and the center action sits in a circular cradle.](/blog-images/iphone-duo/system-vs-curve.webp)
 
-| Open, curved center tab bar | Unfold animation |
-| --- | --- |
-| <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-open-center.webp" alt="iPhone Duo open with curved bottom tab bar and circular center button" width="280" /> | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-unfold.webp" alt="iPhone Duo unfolding while the center camera cradle stays circular" width="280" /> |
+Left, the system tab bar is in the rail. Right, the curve tab bar stays on the bottom and the center action keeps its cradle.
 
 ### Configure once
 

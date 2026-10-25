@@ -361,9 +361,7 @@ On iPhone Duo, iOS often places the system tab bar and status bar in a **vertica
 
 Native Navigation uses real `UINavigationBar` and `UITabBar`, so **system tab bars follow the rail**. The **curve** tab bar shape stays on the bottom; the center action keeps a circular cradle when the window widens.
 
-| Folded, system tabs | Open, rail |
-| :---: | :---: |
-| <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-folded-system.webp" alt="iPhone Duo folded with the system tab bar in the side rail" width="200" /> | <img src="/plugins/demo/capacitor-native-navigation/iphone-duo-open-system.webp" alt="iPhone Duo open with the system tab bar in the side rail" width="240" /> |
+![Two open landscape layouts. On the left, the system tab bar sits in the side rail. On the right, the curve tab bar stays along the bottom, and the center action sits in a circular cradle.](/blog-images/iphone-duo/system-vs-curve.webp)
 
 With `contentInsetMode: 'css'`, pad web content with plugin variables. Use `max()` with env fallbacks per edge so layout stays correct when a plugin variable is `0` without summing duplicate insets:
 
