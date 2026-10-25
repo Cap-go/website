@@ -11,7 +11,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-23T20:00:00.000Z
-updated_at: 2026-10-23T20:00:00.000Z
+updated_at: 2026-10-25T10:17:03.000Z
 head_image: /blog-images/apple-remote-code-execution-capgo-live-updates.png
 head_image_alt: "Apple remote code execution rules and Capgo live updates Capgo blog illustration"
 keywords: Apple, App Store, Guideline 2.5.2, remote code execution, Capgo, Capacitor live updates, OTA, ADPLA 3.3.1, Guideline 4.7, WebView, compliance
