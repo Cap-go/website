@@ -148,7 +148,7 @@ const messages = {
   agent_onboarding_eyebrow: 'AI-agent onboarding',
   agent_onboarding_manual_note: 'Prefer to do it yourself? The console always keeps a manual setup button.',
   agent_onboarding_step1_desc:
-    'Create your account and choose Set up with your AI agent. Pick Live Updates, Capgo Builder for native cloud builds, or both. Not sure? Your agent checks your project and asks at most two questions before recommending one.',
+    'Create your account and choose "With my AI agent". Pick Live Updates, Capgo Builder for native cloud builds, or both. Not sure? Your agent checks your project and asks at most two questions before recommending one.',
   agent_onboarding_step1_title: 'Sign up and pick your goal',
   agent_onboarding_step2_desc:
     'Paste it into Claude Code, Cursor, Codex, Windsurf, or any coding agent. It logs the Capgo CLI in with a dedicated API key and installs the Capgo MCP server, which guides your agent through registering the app, installing the updater, and shipping the first bundle or setting up Builder.',
@@ -305,7 +305,7 @@ const messages = {
   signup_cta_lead_pr_preview: 'Try Capgo PR previews: each pull request on its own live update channel.',
   signup_cta_lead_qsr_hero: 'Ship menu and promo changes as Capgo live updates, routed by market.',
   signup_cta_lead_qsr: 'Route Capgo live updates to each market and roll back if ordering breaks.',
-  signup_cta_lead_agents: 'Sign up, choose Set up with your AI agent, and paste one prompt into your agent. It sets up Capgo in your app for you.',
+  signup_cta_lead_agents: 'Sign up, choose "With my AI agent", and paste one prompt into your agent. It sets up Capgo in your app for you.',
   signup_cta_lead_build_without_mac: 'Build and sign your Capacitor iOS app on Capgo cloud Macs.',
   solutions_builder_to_mobile_badge: 'For {builder} builders: no Mac, no Xcode',
   solutions_builder_to_mobile_cta_subtitle: 'Start the 14-day free trial, export your {builder} project, and request your first iOS and Android builds from the CLI.',
@@ -7103,7 +7103,7 @@ const messages = {
   mcp_page_cli_p1:
     'Bundle uploads, native build requests, doctor, and probe need your project files, so they run through npx @capgo/cli@latest mcp after login. See /docs/cli/reference/mcp/ and /skills/.',
   mcp_page_cli_onboarding:
-    'New to Capgo? Sign up and choose Set up with your AI agent. The console gives you one prompt that logs the CLI in, installs this MCP server, and starts its onboarding tools, which guide your agent through registering the app, installing the updater, and the first bundle upload or Capgo Builder setup.',
+    'New to Capgo? Sign up and choose "With my AI agent". The console gives you one prompt that logs the CLI in, installs this MCP server, and starts its onboarding tools, which guide your agent through registering the app, installing the updater, and the first bundle upload or Capgo Builder setup.',
   mcp_page_cli_onboarding_cta: 'Get started with your AI agent',
   mcp_page_links_title: 'Documentation',
   mcp_page_links_manifest: 'MCP manifest (/.well-known/mcp.json)',

@@ -23,7 +23,7 @@ export const GET: APIRoute = () => {
     '',
     '- Ask the user for a Capgo API key. Never invent one and never commit it.',
     '- New users sign up at https://console.capgo.app/register/ (14-day free trial, no credit card).',
-    '- Easiest path for new users: after signing up, choose "Set up with your AI agent". The console creates the organization and shows one prompt to paste into you. It logs the CLI in with a dedicated API key, installs the Capgo MCP server (`npx install-mcp \'npx @capgo/cli@latest mcp\'`), and starts the MCP onboarding tools, which guide you through the steps below. If the user already has that prompt, follow it instead of this file.',
+    '- Easiest path for new users: after signing up, choose "With my AI agent". The console creates the organization and shows one prompt to paste into you. It logs the CLI in with a dedicated API key, installs the Capgo MCP server (`npx install-mcp \'npx @capgo/cli@latest mcp\'`), and starts the MCP onboarding tools, which guide you through the steps below. If the user already has that prompt, follow it instead of this file.',
     '- API keys live at https://console.capgo.app/settings/organization/api-keys',
     '',
     '## 2. Run the onboarding',
