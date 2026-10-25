@@ -221,26 +221,18 @@ Before handing a test phone to someone else, also tap **Revoke USB debugging aut
 
 ## Frequently asked questions
 
-::: faq
 ### How many times do I tap Build number on Android 14 or 15?
 
 Seven times in a row on **Build number** (or **OS version** / **MIUI version** on Xiaomi). After the third or fourth tap, Android usually shows a countdown toast. Enter your device PIN, pattern, or password when prompted, then open **Developer options** from Settings.
-:::
 
-::: faq
 ### Where is Build number on Samsung?
 
 **Settings > About phone > Software information > Build number**. Tap it seven times, confirm your PIN, then find **Developer options** at the bottom of the main Settings list.
-:::
 
-::: faq
 ### How do I pair wireless debugging?
 
 Turn on **Wireless debugging** in Developer options, open it, and choose **Pair device with pairing code**. On your computer run `adb pair <ip>:<pairing-port>`, enter the six-digit code, then `adb connect <ip>:<debug-port>` using the address shown on the Wireless debugging main screen (not the pairing port).
-:::
 
-::: faq
 ### Can I enable developer options on a work phone?
 
 Usually not without IT approval. Managed devices block the Build number gesture or show **This action is unavailable**. Use a personal or dedicated test handset for `adb` and USB debugging.
-:::
