@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T03:05:53.198Z",
+  "updatedAt": "2026-10-25T03:06:05.476Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -36,34 +36,34 @@
   },
   "releases": [
     {
-      "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.13.2",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.2",
-      "publishedAt": "2026-10-23T21:43:10Z"
+      "repo": "Cap-go/capacitor-updater",
+      "tag": "8.54.0",
+      "url": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.0",
+      "publishedAt": "2026-10-25T00:14:49Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.13.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.1",
-      "publishedAt": "2026-10-23T17:19:24Z"
+      "tag": "cli-8.95.3",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.3",
+      "publishedAt": "2026-10-24T20:44:06Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.13.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.0",
-      "publishedAt": "2026-10-23T13:50:13Z"
+      "tag": "cli-8.95.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.2",
+      "publishedAt": "2026-10-24T16:02:22Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.95.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.1",
-      "publishedAt": "2026-10-23T10:59:56Z"
+      "tag": "capgo-22.14.1",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.14.1",
+      "publishedAt": "2026-10-24T14:27:37Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.12.4",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.4",
-      "publishedAt": "2026-10-23T10:49:29Z"
+      "tag": "capgo-22.14.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.14.0",
+      "publishedAt": "2026-10-24T13:20:50Z"
     }
   ],
   "metrics": {
@@ -71,7 +71,7 @@
       "success_rate": 82.1,
       "first_try_rate": 98.1,
       "rollback_rate": 15.7,
-      "updated_at": "2026-10-24T03:05:41.430Z",
+      "updated_at": "2026-10-24T18:06:21.396Z",
       "daily": [
         70.5,
         79.7,
@@ -107,7 +107,7 @@
     },
     "builder": {
       "success_rate": 75.9,
-      "updated_at": "2026-10-24T03:05:41.447Z"
+      "updated_at": "2026-10-24T18:06:22.850Z"
     }
   }
 }

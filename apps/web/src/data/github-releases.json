@@ -1,6 +1,46 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.95.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.3",
+    "pubDate": "2026-10-24T20:44:06.000Z",
+    "description": "🆕 Changelog Changed Updated CLI generated documentation to reflect the latest commands and options. Fixed Enabled the missing OTA checklist during CLI onboarding so Over the Air setup prompts now appear correctly when configuring the CLI. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.95.2...cli 8.95.3"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.95.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.2",
+    "pubDate": "2026-10-24T16:02:22.000Z",
+    "description": "🆕 Changelog Added Console queries now run as the caller's role , aligning query permissions with the authenticated user's access level SSO managed roles can now be locked against manual edits , preventing conflicts between identity provider role mappings and local changes Changed Improved console performance by folding caller role setup into the query transaction, reducing round trips Default device list period changed to 7 days , giving a more useful recent history view out of the box Fixed..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.14.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.14.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.14.1",
+    "pubDate": "2026-10-24T14:27:37.000Z",
+    "description": "🆕 Changelog Changed Improved console performance by folding caller role setup into the transaction BEGIN step. This reduces startup overhead for console operations and ensures the caller’s role is applied immediately at the start of each transaction. No breaking changes or migration steps are required. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.14.0...capgo 22.14.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.14.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.14.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.14.0",
+    "pubDate": "2026-10-24T13:20:50.000Z",
+    "description": "🆕 Changelog Added Console query execution now uses the caller's role. Queries run in the console are executed with the permissions and privileges of the user who initiated them, rather than with an elevated or default service role. Enforced least privilege access for console operations. This ensures users can only view and interact with data their role is explicitly authorized to access, reducing the risk of accidental exposure or unauthorized actions. Changed Console behavior may be more re..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.13.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.13.3",
+    "pubDate": "2026-10-24T07:25:35.000Z",
+    "description": "🆕 Changelog Fixed Emitted real bundle events during onboarding, ensuring bundle lifecycle notifications are accurate and reliable. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.13.2...capgo 22.13.3"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.95.1",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.1",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.1",
@@ -280,46 +320,6 @@
     "description": "🆕 Changelog Added Enabled trial users to change their plan before their payment card auto starts at the end of the trial. Added backup payment card support and recommendations to billing settings. Started collecting a payment card at activation and transitioned trial users to the onboarding plan when the trial ends. Surfaced passed over onboarding setup steps and allowed users to explicitly skip them. Fixed Compacted the secure API key column and added a lock icon for clearer visual distinct..."
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.1.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.1.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.1.1",
-    "pubDate": "2026-10-21T13:11:21.000Z",
-    "description": "🆕 Changelog Changed Refreshed the Graphify code graph to keep code intelligence, dependency analysis, and navigation synchronized with the latest codebase changes. Fixed Bounded the deleted lookup transaction so abandoned file lookups can no longer pin connections, preventing connection leaks and improving stability during file heavy workloads. ( 3806) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.91.0...capgo 22.1.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.1.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.1.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.1.0",
-    "pubDate": "2026-10-21T12:42:35.000Z",
-    "description": "🆕 Changelog Added MCP OAuth issuer updated to for a more consistent and trustworthy authentication experience. If you have existing MCP integrations, you may need to re authorize them after this change. App size limit emails now include the recommended bundle size when a bundle exceeds the allowed size, making it easier to identify the right target and optimize future uploads. Fixed Organization failure status is now triggered only when a subscription charge fails , preventing orgs from bein..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.0.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.0.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.0.2",
-    "pubDate": "2026-10-21T12:07:31.000Z",
-    "description": "🆕 Changelog Fixed Fixed an issue where edge cache could pin stale responses served by lagging replicas. Cached edge responses now stay consistent with the latest data, preventing users from seeing outdated answers. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.0.1...capgo 22.0.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.0.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.0.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.0.1",
-    "pubDate": "2026-10-21T11:47:08.000Z",
-    "description": "🆕 Changelog Fixed Stopped pinning read transactions to the primary database through Hyperdrive, allowing reads to be distributed normally and reducing load on the primary writer. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.0.0...capgo 22.0.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.0.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.0.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.0.0",
-    "pubDate": "2026-10-21T09:45:55.000Z",
-    "description": "🆕 Changelog Added BREAKING: New signups now register through the registration API, and all new users are asked for their first and last name during onboarding. If you maintain a custom signup flow or server rendered registration page, update it to use the new API. Changed Refined the collapsed sidebar rail with tighter spacing and a clear group separator, making compact navigation easier to scan. Self hosted the Inter font and split the Supabase SDK into its own chunk, reducing external depe..."
-  },
-  {
     "category": "release",
     "title": "capacitor-accelerometer 8.0.52",
     "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.52",
@@ -593,11 +593,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-document-scanner 8.4.14",
-    "link": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.14",
-    "guid": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.14",
-    "pubDate": "2026-10-19T12:04:33.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.3, improving build stability and compatibility. Refreshed the dependency lock file to ensure consistent and reproducible installations. 🔗 Full Changelog : https://github.com/Cap go/capacitor document scanner/compare/8.4.13...8.4.14"
+    "title": "capacitor-document-scanner 8.4.15",
+    "link": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.15",
+    "guid": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.15",
+    "pubDate": "2026-10-24T13:48:28.000Z",
+    "description": "🆕 Changelog Fixed Removed the VisionKit method swizzling logic from the default iOS binary, reducing app size and avoiding unnecessary framework dependencies. 🔗 Full Changelog : https://github.com/Cap go/capacitor document scanner/compare/8.4.14...8.4.15"
   },
   {
     "category": "release",
@@ -721,11 +721,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-inappbrowser 8.26.1",
-    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.26.1",
-    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.26.1",
-    "pubDate": "2026-10-21T17:21:26.000Z",
-    "description": "🆕 Changelog Fixed Resolved implicit strong self capture warnings on iOS, resulting in cleaner build logs and fewer compiler warnings. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.26.0...8.26.1"
+    "title": "capacitor-inappbrowser 8.26.2",
+    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.26.2",
+    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.26.2",
+    "pubDate": "2026-10-24T13:25:30.000Z",
+    "description": "🆕 Changelog Fixed Made iOS HTTP proxy method swizzling opt in via Capacitor sync options ( 759). Apps that do not require HTTP proxy functionality will no longer have their networking stack unexpectedly modified. Migration note : If your app relies on HTTP proxy behavior on iOS, enable it in your Capacitor sync configuration; it is no longer enabled by default. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.26.1...8.26.2"
   },
   {
     "category": "release",
@@ -921,11 +921,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-navigation 8.13.2",
-    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.13.2",
-    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.13.2",
-    "pubDate": "2026-10-21T13:35:07.000Z",
-    "description": "🆕 Changelog Changed Moved navbar segment demos to the top of the README, making them easier to find and explore. Added an Android screen recording to the README for clearer visual guidance on usage. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.13.1...8.13.2"
+    "title": "capacitor-native-navigation 8.14.0",
+    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.14.0",
+    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.14.0",
+    "pubDate": "2026-10-25T02:39:19.000Z",
+    "description": "🆕 Changelog Added Added search to the top navigation bar so users can quickly find pages or content without leaving their current view ( 89). Added improved tab alignment for a more consistent and scannable tabbed interface. Added an enhanced sidebar for quicker navigation access and clearer content organization. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.13.3...8.14.0"
   },
   {
     "category": "release",
@@ -1201,11 +1201,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-speech-recognition 8.4.4",
-    "link": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.4.4",
-    "guid": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.4.4",
-    "pubDate": "2026-10-16T14:39:10.000Z",
-    "description": "🆕 Changelog Fixed Fixed an issue on Android where checking availability could be performed off the main thread, leading to inconsistent behavior or runtime failures. The availability check now runs reliably on the main thread, improving stability when initializing speech recognition. 🔗 Full Changelog : https://github.com/Cap go/capacitor speech recognition/compare/8.4.3...8.4.4"
+    "title": "capacitor-speech-recognition 8.4.5",
+    "link": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.4.5",
+    "guid": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.4.5",
+    "pubDate": "2026-10-24T14:44:47.000Z",
+    "description": "🆕 Changelog Fixed Preserved the final dictation content when is called while partial recognition results are still pending. Previously, any transcript text recognized after the last partial flush could be lost when dictation ended. 🔗 Full Changelog : https://github.com/Cap go/capacitor speech recognition/compare/8.4.4...8.4.5"
   },
   {
     "category": "release",
@@ -1289,11 +1289,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-updater 8.53.1",
-    "link": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.53.1",
-    "guid": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.53.1",
-    "pubDate": "2026-10-20T21:15:20.000Z",
-    "description": "🆕 Changelog Fixed install background downloaded bundles while the app is in the background, so updates apply without requiring the app to stay active keep the previous bundle active when a background reload fails, preventing the app from getting stuck on a broken update report the installed bundle correctly when handing over stats from background/headless tasks to the plugin Android : fix stats ownership handover between the plugin and background/headless processes to prevent lost or duplica..."
+    "title": "capacitor-updater 8.54.0",
+    "link": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.0",
+    "guid": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.0",
+    "pubDate": "2026-10-25T00:14:49.000Z",
+    "description": "🆕 Changelog Added Added and download gates so you can control the security and minimum baseline requirements for downloaded bundles. is enabled by default; if you currently serve updates over plain HTTP, migrate to HTTPS or explicitly set to avoid blocked downloads. Changed Improved native update check reliability by keeping up to 32 manifest files in flight and automatically recovering transient failures. Updated documentation with App Store review guidelines and best practices for splash s..."
   },
   {
     "category": "release",
