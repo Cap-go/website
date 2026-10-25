@@ -332,6 +332,6 @@ Auth changes are rarely native. Trusted origins and providers are server config,
 
 ## Related guides
 
-- [How to add authentication to a Capacitor app](/blog/how-to-add-authentication-to-a-capacitor-app/) compares Better Auth with Firebase, Supabase and hosted identity providers.
+- [How to add authentication to a Capacitor app](/blog/how-to-add-authentication-to-a-capacitor-app/) compares Better Auth with Firebase, Supabase, Neon Auth (managed Better Auth) and hosted identity providers.
 - [Biometric authentication in Capacitor apps](/blog/biometric-authentication-in-capacitor-apps/) for unlocking a stored session with Face ID or fingerprint.
 - [Social Login plugin](/plugins/capacitor-social-login/) for the native Google, Apple and Facebook flows.

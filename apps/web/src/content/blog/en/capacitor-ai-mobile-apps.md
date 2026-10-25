@@ -42,7 +42,7 @@ Capacitor is not magic. If you are doing heavy 3D, ultra-high-performance graphi
 Before comparing stacks, it helps to be explicit about what “AI mobile app” usually means in practice. Most AI apps are a blend of:
 
 * A fast iteration UI (onboarding, paywall, settings, conversation view, history, templates).
-* A model gateway (OpenAI, Anthropic, Google, OpenRouter, self-hosted, etc.).
+* A model gateway (OpenAI, Anthropic, Google, OpenRouter, Neon AI Gateway, self-hosted, etc.).
 * Product safety and quality loops (prompt updates, refusal tuning, content filtering, reporting).
 * Retrieval (RAG), personalization, memory, and data connections (files, calendars, CRM, notes).
 * Multi-modal input/output (voice, camera, screenshots, image generation).

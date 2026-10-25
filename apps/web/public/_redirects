@@ -442,6 +442,10 @@
 /plugins/capacitor-supabase/ /docs/plugins/supabase/ 301
 /plugins/supabase /docs/plugins/supabase/ 301
 /plugins/supabase/ /docs/plugins/supabase/ 301
+/plugins/capacitor-neon /docs/plugins/neon/ 301
+/plugins/capacitor-neon/ /docs/plugins/neon/ 301
+/plugins/neon /docs/plugins/neon/ 301
+/plugins/neon/ /docs/plugins/neon/ 301
 /plugins/capacitor-pretty-toast /docs/plugins/pretty-toast/ 301
 /plugins/capacitor-pretty-toast/ /docs/plugins/pretty-toast/ 301
 /plugins/pretty-toast /docs/plugins/pretty-toast/ 301
