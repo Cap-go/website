@@ -25,7 +25,7 @@ faq:
   - question: "How do I pair wireless debugging on Android?"
     answer: "In Developer options, turn on Wireless debugging, open it, and choose Pair device with pairing code. On your computer run adb pair with the IP and port from the pairing dialog, enter the six-digit code, then adb connect using the IP and port on the main Wireless debugging screen. Phone and computer must be on the same Wi-Fi."
   - question: "How do I turn developer options off?"
-    answer: "Open Developer options and switch off Use developer options at the top. On Samsung, toggle Developer options off. USB debugging and other switches reset. Revoke USB debugging authorizations before you lend the phone to someone else."
+    answer: "Open Developer options and switch off Use developer options at the top. On Samsung, toggle Developer options off. This disables most developer options, but individual settings may remain configured. Revoke USB debugging authorizations before you lend the phone to someone else."
 ---
 
 **Settings** > **About phone** > tap **Build number** **seven times** > enter your **PIN** (or pattern). You see a message that you are a developer. Open **Developer options** and turn on **USB debugging** or **Wireless debugging** when you need `adb`, Android Studio, or a Capacitor run on a real device. Steps are the same on **Android 14, 15 and 16**; only the path to **Build number** changes by brand (table below).
@@ -91,7 +91,7 @@ Xiaomi adds two extra switches you usually need for development: **Install via U
 2. Tap **Build number** seven times.
 3. Go to **Settings > System & updates > Developer options**.
 
-On Huawei devices, also set the USB connection mode to **File transfer** when you plug in, otherwise `adb` may not see the device.
+If `adb` does not see a Huawei device over USB, set the USB connection mode to **File transfer** when you plug it in.
 
 ## Build number missing or "This action is unavailable"
 
@@ -209,7 +209,7 @@ Then try a different cable and a port directly on the computer instead of a hub.
 1. Open **Developer options**.
 2. Toggle **Use developer options** (or **Developer options** on Samsung) at the top to off.
 
-The menu stays visible on some devices but every switch inside resets to default. To hide the menu completely, go to **Settings > Apps > Settings > Storage** and clear storage for the Settings app. That resets other settings preferences too, so it is rarely worth it.
+The menu may stay visible on some devices, and individual toggles can keep their last value even when developer options is off. To hide the menu completely, go to **Settings > Apps > Settings > Storage** and clear storage for the Settings app. That resets other settings preferences too, so it is rarely worth it.
 
 Before handing a test phone to someone else, also tap **Revoke USB debugging authorizations** so old computers can no longer connect.
 
