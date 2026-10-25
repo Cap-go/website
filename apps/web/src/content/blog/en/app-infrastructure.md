@@ -97,7 +97,7 @@ Each path has its own failure mode. Store distribution can delay a native fix. A
 
 A practical stack has **nine related layers**, although teams may implement several of them with the same service. Define the job of each layer before choosing products. Otherwise, tool selection hides missing responsibilities.
 
-1. **Build and CI/CD** turns source code into reproducible artifacts. It installs dependencies, runs tests, bundles JavaScript, compiles native shells, signs packages, and records the exact inputs used for a release. A dependable [deployment automation workflow](https://capgo.app/blog/deployment-automation/) should make the same steps repeatable for every target platform.
+1. **Build and CI/CD** turns source code into reproducible artifacts. It installs dependencies, runs tests, bundles JavaScript, compiles native shells, signs packages, and records the exact inputs used for a release. A dependable [deployment automation workflow](https://capgo.app/blog/app-release-automation/) should make the same steps repeatable for every target platform.
 
 2. **Release and update delivery** decides how an artifact reaches users. Store submission, enterprise distribution, sideloading, desktop installers, and runtime bundle delivery each have different controls. The release layer needs versioning, audience targeting, approvals, and a clear distinction between mandatory and optional updates.
 

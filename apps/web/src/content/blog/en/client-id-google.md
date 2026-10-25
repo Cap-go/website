@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-03T09:15:23.535Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-25T00:21:37.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e3751602-0124-4684-ad22-20a67d988230/client-id-google-guide.jpg'
 head_image_alt: 'Get Your Client Id Google: A Guide for 2026'
 keywords: 'client id google, google oauth, google cloud console, api credentials, capacitorjs'
@@ -128,7 +128,7 @@ For a web app, expect to enter:
 
 Those values must be exact. For a web credential, Google expects the full scheme and hostname, such as `https://www.example.com`, rather than a loose domain concept.
 
-For mobile platforms, the shape is different. Android registration requires package-level identity and ownership verification, while iOS uses its own platform identifiers. If you're combining Google auth with another auth layer, [this Capacitor social login setup with Supabase](https://capgo.app/blog/setup-supabase-with-capacitor-social-login/) is a useful example of how these pieces often fit together.
+For mobile platforms, the shape is different. Android registration requires package-level identity and ownership verification, while iOS uses its own platform identifiers. If you're combining Google auth with another auth layer, [this Capacitor social login setup with Supabase](https://capgo.app/blog/setup-supabase-with-capacitor-social-login/) is a useful example of how these pieces often fit together. For Neon Auth, the [Neon plugin setup](https://capgo.app/docs/plugins/neon/getting-started/) explains the trusted `https` `redirectTo` rules for OAuth, but you still register the redirect URI in Google's console.
 
 This walkthrough is a decent visual reference if you want to compare the UI while you click through:
 

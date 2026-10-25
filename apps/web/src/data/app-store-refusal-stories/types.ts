@@ -13,6 +13,10 @@ export type AppleRejectionStoryTag =
   | '5-6'
   | '2-5-19'
   | '2-1'
+  | '2-3-6'
+  | '2-3-2'
+  | '2-3-7'
+  | '4-2'
   | 'metadata'
   | 'endless-review'
   | 'account-termination'
@@ -40,6 +44,10 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   '5-6': 'Guideline 5.6 Developer Code of Conduct',
   '2-5-19': 'Guideline 2.5.19 Hidden Features',
   '2-1': 'Guideline 2.1',
+  '2-3-6': 'Guideline 2.3.6',
+  '2-3-2': 'Guideline 2.3.2',
+  '2-3-7': 'Guideline 2.3.7',
+  '4-2': 'Guideline 4.2',
   metadata: 'Metadata and IAP',
   'endless-review': 'Endless review',
   'account-termination': 'Account termination',

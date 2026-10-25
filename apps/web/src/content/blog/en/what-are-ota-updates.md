@@ -178,6 +178,6 @@ A good OTA decision is usually boring in the best way. Classify the change, choo
 - **Can CI/CD trigger releases through an API?** Manual shipping does not scale well.
 - **Does it support differential updates?** That can help, but only if integrity checks stay intact.
 
-If you're comparing platforms, [deployment automation patterns](https://capgo.app/blog/deployment-automation/) are a good way to judge whether the tool fits real release engineering or just marketing copy. That's especially relevant for teams that need automation without giving up control.
+If you're comparing platforms, [deployment automation patterns](https://capgo.app/blog/app-release-automation/) are a good way to judge whether the tool fits real release engineering or just marketing copy. That's especially relevant for teams that need automation without giving up control.
 
 Capgo is one option in this space for CapacitorJS teams that need signed web-bundle updates, channel-based rollout, rollback, and release telemetry. If your team is trying to separate OTA-safe changes from store-bound changes, visit [Capgo](https://capgo.app) and see whether its workflow matches the way you ship.

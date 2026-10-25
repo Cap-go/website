@@ -1,6 +1,6 @@
 ---
 title: Compliance
-description: "Learn about Capgo's privacy practices, data collection, security compliance, and how we protect your users' information during live updates."
+description: "Learn about Capgo's privacy practices, data collection, and security compliance. Capgo does not install or execute native code, so an Apple remote code execution rejection is not caused by Capgo."
 sidebar:
   order: 6
 ---
@@ -173,6 +173,67 @@ Capgo is designed to support compliance with major data protection regulations, 
 Capgo updates only the Capacitor web layer: JavaScript, HTML, CSS, and static assets. It does not change your native binary, native plugins, permissions, entitlements, or store metadata. Each app is reviewed on its own merits, so Capgo cannot guarantee an individual App Store or Play Store approval.
 
 Use live updates only for web-layer changes that remain within the store rules and your submitted app's scope. Ship a normal native release for native capabilities or material functionality changes. Review [Apple's App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) (including guideline 2.5.2) and [Google Play's Device and Network Abuse policy](https://support.google.com/googleplay/android-developer/answer/16559646) for your app before release.
+
+### Apple remote code execution and Capgo
+
+Capgo cannot cause an Apple remote code execution rejection. That is not possible. Capgo does not install or execute native code, dynamic libraries, frameworks, or plugins, and it cannot call `dlopen`, `dlsym`, `performSelector:`, or `method_exchangeImplementations()`. It only replaces JavaScript, HTML, CSS, and static assets inside the WebView or JavaScriptCore engine already compiled into the reviewed binary. When App Review cites Guideline 2.5.2 or remote code execution, do not attribute that finding to Capgo. Read the review notice, then inspect the native project and other SDKs for executable loading or private-API use. A past review note about dynamic linking in the Capgo splash-screen auto-hide path was a bug in that native plugin, not live updates, and that link was removed.
+
+Review teams often cite **Guideline 2.5.2** and **Apple Developer Program License Agreement section 3.3.1(B)** together when they believe an app can change behavior after App Review. Understanding both helps you separate a compliant Capacitor live update workflow from a remote code risk. This section summarizes how Capgo fits those published rules; it is not legal advice.
+
+#### What Apple prohibits (Guideline 2.5.2)
+
+[App Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements) requires apps to be self-contained in their bundles and states that apps may not "download, install, or execute code which introduces or changes features or functionality of the app, including other apps."
+
+Apple applies that rule to mechanisms that can alter native behavior after approval, such as:
+
+- downloading compiled native code, frameworks, or plugins,
+- resolving symbols at runtime (`dlopen`, `dlsym`, and similar APIs),
+- calling Objective-C methods dynamically to reach private APIs (`performSelector:`, `method_exchangeImplementations()`, and related patterns), and
+- running remote scripts whose purpose is to change app behavior beyond the reviewed experience.
+
+Those patterns are what recent "remote code execution" review messages target. They are not descriptions of replacing HTML, CSS, and JavaScript inside an embedded WebView.
+
+#### What Apple still allows (License Agreement section 3.3.1(B))
+
+The [Apple Developer Program License Agreement](https://developer.apple.com/support/terms/apple-developer-program-license-agreement/) section **3.3.1(B)** ("Executable Code") is the interpreted-code carve-out. In the current agreement text, an application generally may not download or install executable code, **except** that interpreted code may be downloaded when it:
+
+1. does not change the primary purpose of the application by providing features inconsistent with the intended and advertised purpose,
+2. does not bypass signing, sandbox, or other security features of the operating system, and
+3. for App Store apps, does not create a store or storefront for other applications.
+
+The native shell you submit to the App Store embeds WebKit or JavaScriptCore. Refreshing that web bundle over the air may qualify as interpreted code under section 3.3.1(B) only when your release meets the three conditions above **and** your team has assessed the other license and App Review rules that apply to your app, including section 3.3.1(C) below. Keeping the same product purpose is necessary but not sufficient on its own.
+
+#### License Agreement section 3.3.1(C) (additional features)
+
+Section **3.3.1(C)** of the [Apple Developer Program License Agreement](https://developer.apple.com/support/terms/apple-developer-program-license-agreement/) states that, without Apple's prior written approval or as permitted under section **3.3.9(A)** (In-App Purchase API), an Application may not provide, unlock, or enable additional features or functionality through distribution mechanisms other than the App Store, Custom App Distribution, or TestFlight.
+
+Apple's published text does not spell out how that clause interacts with every interpreted-code OTA bundle. Whether a specific Capgo release triggers 3.3.1(C) is a legal judgment for your team and counsel, not something Capgo can decide for you.
+
+#### When Guideline 4.7 may apply
+
+In [November 2025](https://developer.apple.com/news/?id=ey6d8onl), Apple clarified [Guideline 4.7](https://developer.apple.com/app-store/review/guidelines/#third-party-software) for apps that offer HTML5 and JavaScript mini apps, mini games, chatbots, plug-ins, and similar software that is not embedded in the binary. Ownership of the software does not determine whether 4.7 applies. What matters is the experience you advertise: if people can discover, launch, or switch between multiple distinct software experiences inside your app, you may need to meet the extra 4.7 rules (catalog indexing, age restriction for content above your rating, and related requirements).
+
+Capgo is an update mechanism. It does not by itself make your app a 4.7 host, but it can deliver bundles to different channels. If your product behaves like a mini app platform or white-label host, work with counsel to confirm your App Store positioning and disclosures before relying on OTA delivery.
+
+#### How Capgo maps to the rules
+
+| Concern | Capgo behavior |
+| ------- | -------------- |
+| Executable native code | Impossible. Capgo does not install or execute native code. Native code changes require a new store binary. |
+| Interpreted web assets | JavaScript, HTML, CSS, fonts, images, and other static assets replace the in-app web bundle only. |
+| Primary purpose | Your team controls scope. Ship material new capabilities through review, not OTA. |
+| Security | Bundles are signed and can be end-to-end encrypted. The updater does not bypass iOS sandboxing or code signing. |
+| Storefront | Capgo channels distribute updates to your app; they do not publish unrelated third-party apps inside your binary. |
+
+#### Practical checklist before you ship an OTA bundle
+
+- Confirm the change is limited to the web layer and matches the app Apple reviewed.
+- Confirm the update does not provide, unlock, or enable additional features or functionality outside the App Store, Custom App Distribution, or TestFlight without Apple's prior written approval or a permitted section 3.3.9(A) use (license agreement section 3.3.1(C)). Whether that restriction applies to your interpreted-code OTA bundle is for your legal review.
+- Keep pricing, purchases, and regulated flows inside reviewed native or store-compliant flows.
+- Upload a new binary when you add plugins, permissions, entitlements, or native dependencies.
+- Document live updates in App Review notes when reviewers ask how your app updates itself.
+
+Capgo helps teams ship web-layer fixes in minutes while keeping native releases on the store review path. No update tool can guarantee Apple approval. Review the Apple guidelines and license terms for your app, and consult counsel when in doubt.
 
 ### Your Responsibilities
 

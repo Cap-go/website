@@ -67,6 +67,8 @@ const redirectRows: RedirectRow[] = [
   ['/docs/plugins/ricoh360-camera-plugin', '/docs/plugins/ricoh360-camera/', 301],
   ['/docs/plugins/capacitor-supabase', '/docs/plugins/supabase/', 301],
   ['/docs/plugins/capacitor-supabase/', '/docs/plugins/supabase/', 301],
+  ['/docs/plugins/capacitor-neon', '/docs/plugins/neon/', 301],
+  ['/docs/plugins/capacitor-neon/', '/docs/plugins/neon/', 301],
   ['/docs/plugins/capacitor-pretty-toast', '/docs/plugins/pretty-toast/', 301],
   ['/docs/plugins/capacitor-pretty-toast/', '/docs/plugins/pretty-toast/', 301],
   ['/docs/plugins/capacitor-sheets', '/docs/plugins/sheets/', 301],

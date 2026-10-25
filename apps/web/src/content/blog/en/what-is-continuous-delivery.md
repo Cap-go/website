@@ -107,7 +107,7 @@ The pipeline should store the exact artifact that passed validation. Rebuilding 
 
 Deployment automation publishes the validated artifact to the intended environment. It should apply configuration consistently, record who or what initiated the action, and expose a clear status when a stage fails. Teams can use a deployment service, CI workflow, or a platform-specific release system, but the process shouldn't depend on a sequence of manual commands.
 
-The [deployment automation guidance for Capacitor teams](https://capgo.app/blog/deployment-automation/) covers the operational side of moving validated changes through environments.
+The [deployment automation guidance for Capacitor teams](https://capgo.app/blog/app-release-automation/) covers the operational side of moving validated changes through environments.
 
 ![A diagram illustrating the five stages of a continuous delivery pipeline, including build, test, and deployment.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/0aa505df-f010-4696-8890-6355b2c8d323/what-is-continuous-delivery-pipeline.jpg)
 

@@ -143,6 +143,7 @@ const pluginEntries = [
   ['Native Market', 'native-market'],
   ['Native Navigation', 'native-navigation'],
   ['Native Map', 'native-map', [linkItem('iOS setup', '/docs/plugins/native-map/ios'), linkItem('Android setup', '/docs/plugins/native-map/android')]],
+  ['Neon', 'neon'],
   [
     'Network Diagnostics',
     'network-diagnostics',
@@ -320,4 +321,5 @@ export const docsSidebar = [
   linkItem('How to get support', '/docs/getting-help/'),
   linkItem('💬 Consult us', '/consulting/'),
   linkItem('LLMs-full.txt', 'https://capgo.app/llms-full.txt'),
+  linkItem('LLMs-small.txt', 'https://capgo.app/llms-small.txt'),
 ]

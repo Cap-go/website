@@ -109,7 +109,7 @@ Start by automating the work that creates the most variance. Tests, linting, sta
 
 A mobile CI/CD guide recommends keeping the full build, test, and sign cycle under **15 minutes**. ([Mobile app deployment and release engineering guide](https://cursa.app/en/article/mobile-app-deployment-release-engineering-a-practical-guide-to-shipping-android-and-ios-apps)) That isn't a universal law, but it's a useful operating benchmark. Short pipelines make small releases practical. Long pipelines encourage batching, and batching increases the number of changes that must be diagnosed when something fails.
 
-The most common delay isn't compilation. It's waiting for a human to interpret a result, repair a credential issue, approve a promotion, or repeat a step the system could have recorded once. The [deployment automation guidance for mobile teams](https://capgo.app/blog/deployment-automation/) is most useful when applied to those handoffs, not only to build commands.
+The most common delay isn't compilation. It's waiting for a human to interpret a result, repair a credential issue, approve a promotion, or repeat a step the system could have recorded once. App release automation is most useful when applied to those handoffs, not only to build commands.
 
 <a id="app-store-releases-versus-instant-live-updates"></a>
 ## App Store Releases Versus Instant Live Updates

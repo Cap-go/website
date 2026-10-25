@@ -88,6 +88,7 @@ const products: Product[] = [
     name: m.platform_plugins_name({}, { locale }),
     tagline: m.menu_plugins_tagline({}, { locale }),
     desc: m.platform_plugins_desc({}, { locale }),
+    extra: { href: 'apps', label: m.oss_apps_nav({}, { locale }) },
     groupStart: true,
   },
   {
@@ -299,13 +300,16 @@ const ionicRows = [
           <p class="line-clamp-2 text-xs leading-5 text-slate-400">{product.desc}</p>
           <div class="flex shrink-0 items-center gap-3 text-xs font-semibold">
             {product.extra && (
-              <a href={getRelativeLocaleUrl(locale, product.extra.href)} class="text-slate-400 transition-colors hover:text-white">
+              <a
+                href={getRelativeLocaleUrl(locale, product.extra.href)}
+                class="rounded-md text-slate-400 transition-colors hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#44BCFF]"
+              >
                 {product.extra.label}
               </a>
             )}
             <a
               href={getRelativeLocaleUrl(locale, product.href)}
-              class="inline-flex items-center gap-1 rounded-md bg-[#44BCFF] px-2.5 py-1.5 text-[#04121c] transition-colors hover:bg-white"
+              class="inline-flex items-center gap-1 rounded-md bg-[#44BCFF] px-2.5 py-1.5 text-[#04121c] transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {m.menu_explore({}, { locale })} <span aria-hidden="true">→</span>
             </a>
@@ -967,9 +971,51 @@ const ionicRows = [
       })
     }
 
+    const previewLinks = (index: number) => Array.from(previews[index].querySelectorAll<HTMLAnchorElement>('a'))
+
+    const focusPreviewLink = (index: number, edge: 'first' | 'last') => {
+      activate(index)
+      const links = previewLinks(index)
+      const link = edge === 'first' ? links[0] : links[links.length - 1]
+      link?.focus()
+    }
+
+    // Preview links sit after the whole product list, so Tab from Plugins would land on
+    // Ionic and hide the Open apps link. Step into the active preview, then back out.
     items.forEach((item, index) => {
       item.addEventListener('pointerenter', () => activate(index))
       item.addEventListener('focus', () => activate(index))
+      item.addEventListener('keydown', (event) => {
+        if (event.key !== 'Tab' || event.altKey || event.metaKey || event.ctrlKey) return
+        if (event.shiftKey) {
+          if (index === 0) return
+          event.preventDefault()
+          focusPreviewLink(index - 1, 'last')
+          return
+        }
+        event.preventDefault()
+        focusPreviewLink(index, 'first')
+      })
+    })
+
+    previews.forEach((preview, index) => {
+      preview.addEventListener('keydown', (event) => {
+        if (event.key !== 'Tab' || event.altKey || event.metaKey || event.ctrlKey) return
+        const links = previewLinks(index)
+        const linkIndex = links.indexOf(document.activeElement as HTMLAnchorElement)
+        if (linkIndex === -1) return
+        if (event.shiftKey) {
+          if (linkIndex !== 0) return
+          event.preventDefault()
+          items[index].focus()
+          return
+        }
+        const next = items[index + 1]
+        if (linkIndex === links.length - 1 && next) {
+          event.preventDefault()
+          next.focus()
+        }
+      })
     })
   })
 </script>

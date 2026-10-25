@@ -106,6 +106,7 @@ const PREFIX_CONTEXT: Array<{ test: (key: string) => boolean; label: string }> =
   { test: (key) => key.startsWith('cli_'), label: 'CLI product or documentation marketing copy' },
   { test: (key) => key.startsWith('consulting_'), label: 'Consulting services page' },
   { test: (key) => key.startsWith('plugins_') || key.startsWith('powerful_app_plugins'), label: 'Plugins directory / plugins marketing page' },
+  { test: (key) => key.startsWith('oss_apps_'), label: 'Open apps directory page' },
   { test: (key) => key.startsWith('footer_'), label: 'Site footer navigation or footer blurb' },
   { test: (key) => key.startsWith('home_'), label: 'Homepage marketing copy' },
   { test: (key) => key.startsWith('problem_') || key.startsWith('ps_'), label: 'Homepage problem/solution section' },

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T03:59:51.000Z
+updated_at: 2026-10-25T00:21:37.000Z
 head_image: /signup.webp
 head_image_alt: "Sign-up screen of a Capacitor app backed by Better Auth"
 keywords: better auth capacitor, better-auth ionic, better auth mobile app, better auth bearer plugin, capacitor authentication self hosted, better auth google sign in capacitor, better auth apple sign in
@@ -332,6 +332,6 @@ Auth changes are rarely native. Trusted origins and providers are server config,
 
 ## Related guides
 
-- [How to add authentication to a Capacitor app](/blog/how-to-add-authentication-to-a-capacitor-app/) compares Better Auth with Firebase, Supabase and hosted identity providers.
+- [How to add authentication to a Capacitor app](/blog/how-to-add-authentication-to-a-capacitor-app/) compares Better Auth with Firebase, Supabase, Neon Auth (managed Better Auth) and hosted identity providers.
 - [Biometric authentication in Capacitor apps](/blog/biometric-authentication-in-capacitor-apps/) for unlocking a stored session with Face ID or fingerprint.
 - [Social Login plugin](/plugins/capacitor-social-login/) for the native Google, Apple and Facebook flows.

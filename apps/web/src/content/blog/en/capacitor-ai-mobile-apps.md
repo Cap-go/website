@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-10-25T00:21:37.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Why Capacitor Is the Best Way to Build AI Mobile Apps Right Now Capgo blog illustration"
 keywords: Capacitor, Capgo, AI mobile apps, LLM apps, live updates, OTA updates, React Native, Flutter, native iOS, native Android
@@ -42,7 +42,7 @@ Capacitor is not magic. If you are doing heavy 3D, ultra-high-performance graphi
 Before comparing stacks, it helps to be explicit about what “AI mobile app” usually means in practice. Most AI apps are a blend of:
 
 * A fast iteration UI (onboarding, paywall, settings, conversation view, history, templates).
-* A model gateway (OpenAI, Anthropic, Google, OpenRouter, self-hosted, etc.).
+* A model gateway (OpenAI, Anthropic, Google, OpenRouter, Neon AI Gateway, self-hosted, etc.).
 * Product safety and quality loops (prompt updates, refusal tuning, content filtering, reporting).
 * Retrieval (RAG), personalization, memory, and data connections (files, calendars, CRM, notes).
 * Multi-modal input/output (voice, camera, screenshots, image generation).

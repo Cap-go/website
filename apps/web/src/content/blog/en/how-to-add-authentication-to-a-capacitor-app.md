@@ -1,15 +1,15 @@
 ---
 slug: how-to-add-authentication-to-a-capacitor-app
 title: "How to Add Authentication to a Capacitor App (2026)"
-description: "Compare every way to add authentication to a Capacitor app: native Google and Apple login, OIDC SSO, Firebase, Supabase, Better Auth, passkeys and biometrics."
+description: "Compare every way to add authentication to a Capacitor app: native Google/Apple login, OIDC SSO, Firebase, Supabase, Neon, Better Auth, passkeys, biometrics."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T03:59:51.000Z
+updated_at: 2026-10-25T00:21:37.000Z
 head_image: /mfa-login.webp
 head_image_alt: "Login screen of a Capacitor app offering social, SSO and passkey sign-in"
-keywords: capacitor authentication, add authentication to capacitor app, ionic capacitor login, capacitor social login, capacitor oauth, capacitor passkeys, capacitor biometric login, capacitor firebase auth, capacitor supabase auth
+keywords: capacitor authentication, add authentication to capacitor app, ionic capacitor login, capacitor social login, capacitor oauth, capacitor passkeys, capacitor biometric login, capacitor firebase auth, capacitor supabase auth, capacitor neon auth
 tag: Guides, Security, Capacitor
 published: true
 locale: en
@@ -28,7 +28,7 @@ faq:
     answer: "Yes. @capgo/capacitor-social-login v8 targets Capacitor 8 and runs on iOS, Android and web. The Google and Apple providers use Google Identity Services and Apple JS on the web, and the OAuth2 engine uses a popup or redirect."
 ---
 
-To add authentication to a Capacitor app, pick an identity source (your own backend, a hosted service like Firebase or Supabase, an OIDC provider like Auth0, Okta or Entra ID, or a self-hosted library like Better Auth), use native plugins for anything that opens a provider login page, verify tokens on a server, and store the resulting session in the Keychain or Keystore. Biometrics and passkeys then make the next sign-in fast.
+To add authentication to a Capacitor app, pick an identity source (your own backend, a hosted service like Firebase, Supabase or Neon, an OIDC provider like Auth0, Okta or Entra ID, or a self-hosted library like Better Auth), use native plugins for anything that opens a provider login page, verify tokens on a server, and store the resulting session in the Keychain or Keystore. Biometrics and passkeys then make the next sign-in fast.
 
 This guide maps every common option to the right Capacitor plugin and flow, with code for the parts that are the same in every app: the login call, token verification, session storage and biometric unlock. It is up to date for Capacitor 8 in October 2026. Each provider has its own step-by-step guide linked below.
 
@@ -66,6 +66,7 @@ So every flow below uses either a native SDK (Apple, Google, Facebook) or a syst
 | Microsoft Entra ID | Microsoft 365 organizations | `@capgo/capacitor-social-login` (OAuth2) | Validate access tokens, Graph | [Entra ID guide](/blog/how-to-sign-in-with-azure-entra-id-using-capacitor/) |
 | Better Auth | Self-hosted, own user database | `better-auth` client + Social Login | Run the Better Auth server | [Better Auth guide](/blog/how-to-use-better-auth-in-capacitor-apps/) |
 | Supabase Auth | Postgres backend with built-in auth | Social Login + `supabase-js` | Minimal | [Supabase guide](/blog/setup-supabase-with-capacitor-social-login/) |
+| Neon Auth | Neon Postgres with managed Better Auth | `@capgo/capacitor-neon` | Minimal | [Neon plugin docs](/docs/plugins/neon/) |
 | Firebase Authentication | Apps already on Firebase | `@capgo/capacitor-firebase-authentication` | Minimal | [Firebase docs](/docs/plugins/firebase-authentication/) |
 | Passkeys | Passwordless login on your own domain | `@capgo/capacitor-passkey` | WebAuthn server | [Passkey docs](/docs/plugins/passkey/) |
 | Email and password | Simple apps, own backend | None (HTTP) | Hashing, reset, rate limits | This article |
@@ -124,11 +125,12 @@ const { result } = await SocialLogin.login({
 
 You can register several providers in the same map and pick one with `providerId`, which is how multi-tenant B2B apps let each customer bring their own IdP. The plugin also handles refresh (`SocialLogin.refresh`), logout with `id_token_hint`, and an Ionic Auth Connect compatible wrapper (`SocialLoginAuthConnect`) for teams migrating off Auth Connect. Provider walkthroughs: [Auth0](/blog/how-to-sign-in-with-auth0-using-capacitor/), [Okta](/blog/how-to-sign-in-with-okta-using-capacitor/), [Entra ID](/blog/how-to-sign-in-with-azure-entra-id-using-capacitor/). For the protocol background, see [5 steps to implement OAuth2 in Capacitor apps](/blog/5-steps-to-implement-oauth2-in-capacitor-apps/).
 
-## Hosted backends: Firebase and Supabase
+## Hosted backends: Firebase, Supabase and Neon
 
-If your data already lives in Firebase or Supabase, use their auth so security rules and row-level security work without extra glue.
+If your data already lives in Firebase, Supabase or Neon, use their auth so security rules and row-level security work without extra glue.
 
 - **Supabase**: get an ID token with the Social Login plugin and call `supabase.auth.signInWithIdToken({ provider: 'google', token })`. Supabase verifies it and returns a session. Full setup: [Supabase with Capacitor Social Login](/blog/setup-supabase-with-capacitor-social-login/).
+- **Neon**: [Neon Auth](https://neon.com/docs/auth/overview) is managed Better Auth that lives on your Neon branch. `@capgo/capacitor-neon` signs users in natively with email and password, email OTP, or Google, GitHub and Vercel OAuth in the system browser. It returns a JWT for the [Neon Data API](https://neon.com/docs/data-api/overview), so row-level security applies. Full setup: [Neon plugin docs](/docs/plugins/neon/getting-started/).
 - **Firebase**: either use `@capgo/capacitor-firebase-authentication`, which wraps the native Firebase Auth SDKs, or get an ID token with Social Login and create a Firebase credential from it in the JS SDK. See the [Firebase Google login docs](/docs/plugins/social-login/firebase/introduction/).
 
 ## Self-hosted: Better Auth
@@ -260,6 +262,7 @@ With `accessControl` set, the OS releases the value only after a successful biom
 | Sell to companies that use Microsoft 365 | Entra ID via OAuth2 provider |
 | Need many enterprise IdPs per customer | Auth0 or Okta as a broker, or several OAuth2 providers by `providerId` |
 | Already use Supabase or Firebase | Their auth with native ID token sign-in |
+| Already use Neon | Neon Auth through `@capgo/capacitor-neon` |
 | Want your own user table without a vendor | Better Auth |
 | Want passwordless | Passkeys, with a fallback such as email magic link |
 | Need fast re-login | Biometric unlock of a stored session, on top of any of the above |
