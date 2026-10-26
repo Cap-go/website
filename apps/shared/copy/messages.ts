@@ -859,7 +859,7 @@ const messages = {
   compare_capawesome_faq_a2:
     'Live Updates plans start at $9/month for 1K MAU ($29 at 10K, $79 at 50K, $249 at 250K). Platform plans with native builds start at $19/month ($49, $149, $499). Yearly billing includes two months free. Paid plans include a 14-day free trial.',
   compare_capawesome_faq_a3:
-    'Capawesome Cloud is paid after the 14-day trial. Open source Capacitor SDKs and the CLI are free to use; the hosted cloud is not. Capawesome also offers a free plan for qualifying open source projects.',
+    'Capawesome Cloud plans are paid after the 14-day trial, except for qualifying open source projects accepted into its free program. Open source Capacitor SDKs and the CLI are free to use.',
   compare_capawesome_faq_a4:
     'Both deliver Capacitor live updates with channels, signing, and rollback. Capawesome Cloud sells separate Live Updates, Platform, and SDK plans. Capgo bundles live updates, native builds, Observe, and push on one plan, with device-reported release health and rollouts that auto-pause when failure rates spike.',
   compare_capawesome_faq_q1: 'What is Capawesome?',
