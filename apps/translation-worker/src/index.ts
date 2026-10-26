@@ -3673,18 +3673,20 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
   const isHead = request.method === 'HEAD'
   const priority = shouldUsePriorityTranslationQueue(request)
 
-  if (cachedResponse) {
-    const translatedAt = readTranslatedAt(cachedResponse)
-    const isStale = Date.now() - translatedAt > FRESH_MS
-    if (isStale) {
-      scheduleTranslationBackgroundTask(ctx, enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority))
-    } else {
-      scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, cachedResponse, priority)
-    }
-    return await serveTranslatedCachedPage(env, requestUrl, locale, cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
+  const cachedTranslatedAt = cachedResponse ? readTranslatedAt(cachedResponse) : 0
+  if (cachedResponse && Date.now() - cachedTranslatedAt <= FRESH_MS) {
+    scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, cachedResponse, priority)
+    return await serveTranslatedCachedPage(env, requestUrl, locale, cachedResponse, 'HIT', isHead)
   }
 
+  // The edge cache is per colo: a refresh run elsewhere only updates R2, so a
+  // stale edge copy must defer to a newer R2 copy instead of living on.
   const storedResponse = await readStoredTranslatedResponse(env, requestUrl, locale)
+  if (cachedResponse && (!storedResponse || readTranslatedAt(storedResponse) <= cachedTranslatedAt)) {
+    scheduleTranslationBackgroundTask(ctx, enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority))
+    return await serveTranslatedCachedPage(env, requestUrl, locale, cachedResponse, 'STALE', isHead)
+  }
+
   if (storedResponse) {
     const translatedAt = readTranslatedAt(storedResponse)
     const isStale = Date.now() - translatedAt > FRESH_MS
