@@ -54,7 +54,7 @@ function upstream(body, status = 200) {
   return { calls, fetchImpl }
 }
 
-test('live update metrics are the Capgo API payload, unchanged', async () => {
+test('live update metrics are the normalized Capgo API payload', async () => {
   const { calls, fetchImpl } = upstream(liveUpdatePayload)
   const response = await handleLiveUpdateMetrics(new Request('https://capgo.app/live-update-metrics.json'), { LIVE_UPDATE_METRICS_URL: 'https://api.example.test/live' }, undefined, fetchImpl)
   expect(response.status).toBe(200)
@@ -62,12 +62,18 @@ test('live update metrics are the Capgo API payload, unchanged', async () => {
   expect(calls).toEqual(['https://api.example.test/live'])
 })
 
-test('builder metrics are the builder payload, unchanged', async () => {
+test('builder metrics are the normalized builder payload', async () => {
   const { calls, fetchImpl } = upstream(builderPayload)
   const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, fetchImpl)
   expect(response.status).toBe(200)
   expect(await response.json()).toEqual(builderPayload)
   expect(calls).toEqual(['https://builder.example.test/stats/public'])
+})
+
+test('out-of-range upstream values are clamped before anyone reads them', async () => {
+  const { fetchImpl } = upstream({ ...builderPayload, success_rate: 150 })
+  const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, fetchImpl)
+  expect((await response.json()).success_rate).toBe(100)
 })
 
 test('metrics are unavailable without an upstream URL', async () => {

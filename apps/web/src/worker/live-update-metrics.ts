@@ -19,9 +19,10 @@ export async function handleLiveUpdateMetrics(request: Request, env: LiveUpdateM
     LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS,
     async () => {
       const payload = await fetchUpstreamJson(url, fetchImpl)
-      // A malformed answer must not replace the last good payload.
-      if (!normalizeLiveUpdateMetrics(payload)) throw new Error('Invalid live update metrics payload')
-      return payload
+      // A malformed answer must not replace the last good payload; every reader gets the normalized one.
+      const metrics = normalizeLiveUpdateMetrics(payload)
+      if (!metrics) throw new Error('Invalid live update metrics payload')
+      return metrics
     },
     'Live update metrics are temporarily unavailable',
     ctx,

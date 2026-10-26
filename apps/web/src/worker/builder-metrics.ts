@@ -19,9 +19,10 @@ export async function handleBuilderMetrics(request: Request, env: BuilderMetrics
     BUILDER_METRICS_CACHE_TTL_SECONDS,
     async () => {
       const payload = await fetchUpstreamJson(url, fetchImpl)
-      // A malformed answer must not replace the last good payload.
-      if (!normalizeBuilderMetrics(payload)) throw new Error('Invalid builder metrics payload')
-      return payload
+      // A malformed answer must not replace the last good payload; every reader gets the normalized one.
+      const metrics = normalizeBuilderMetrics(payload)
+      if (!metrics) throw new Error('Invalid builder metrics payload')
+      return metrics
     },
     'Builder metrics are temporarily unavailable',
     ctx,
