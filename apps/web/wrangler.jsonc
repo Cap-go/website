@@ -14,13 +14,6 @@
     "run_worker_first": true,
   },
   "workers_dev": false,
-  "d1_databases": [
-    {
-      "binding": "BUILDER_DB",
-      "database_name": "capgo_builder",
-      "database_id": "b5b45f7a-9129-441e-bca2-0aaf6f7f51f3",
-    },
-  ],
   "ratelimits": [
     {
       "name": "PUBLIC_MCP_RATE_LIMITER",
@@ -28,8 +21,10 @@
       "simple": { "limit": 60, "period": 60 },
     },
   ],
+  // /data and /builder-data only cache metrics computed by the Capgo API and the builder.
   "vars": {
-    "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
+    "LIVE_UPDATE_METRICS_URL": "https://api.capgo.app/private/website_stats/live_updates",
+    "BUILDER_METRICS_URL": "https://builder.capgo.app/stats/public",
   },
   // auth.md agent registration on capgo.app is served by the API worker (see src/worker/agent-auth-proxy.ts).
   "services": [
@@ -61,16 +56,9 @@
           "simple": { "limit": 60, "period": 60 },
         },
       ],
-
-      "d1_databases": [
-        {
-          "binding": "BUILDER_DB",
-          "database_name": "capgo_builder_preprod",
-          "database_id": "65fd13c8-1963-4a5b-8df0-a87ef4146a33",
-        },
-      ],
       "vars": {
-        "CF_ACCOUNT_ANALYTICS_ID": "9ee3d7479a3c359681e3fab2c8cb22c0",
+        "LIVE_UPDATE_METRICS_URL": "https://api.capgo.app/private/website_stats/live_updates",
+        "BUILDER_METRICS_URL": "https://builder-preprod.capgo.app/stats/public",
       },
       "routes": [
         {
