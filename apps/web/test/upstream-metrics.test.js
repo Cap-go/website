@@ -95,5 +95,12 @@ test('an upstream error or malformed payload is unavailable, never cached', asyn
   const builder = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, malformed.fetchImpl)
   expect(builder.status).toBe(503)
   expect((await builder.json()).error).toBe('Builder metrics are temporarily unavailable')
+
+  // Normalizers would turn these into a 0% success rate.
+  const { success_rate: _rate, ...withoutRate } = builderPayload
+  const noRate = upstream(withoutRate)
+  expect((await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, noRate.fetchImpl)).status).toBe(503)
+  const emptyLive = upstream({ updated_at: '', daily: [], failures: [] })
+  expect((await handleLiveUpdateMetrics(new Request('https://capgo.app/live-update-metrics.json'), { LIVE_UPDATE_METRICS_URL: 'https://api.example.test/live' }, undefined, emptyLive.fetchImpl)).status).toBe(503)
   expect(puts).toBe(0)
 })

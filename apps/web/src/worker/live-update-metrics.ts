@@ -2,7 +2,7 @@ import { normalizeLiveUpdateMetrics } from '../lib/liveUpdateMetrics'
 import { LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS, LIVE_UPDATE_METRICS_PATH } from '../lib/publicLiveUpdateMetrics'
 import { cachedJsonResponse, unavailableJson } from './cached-json'
 import type { BackgroundContext } from './types'
-import { fetchUpstreamJson } from './upstream-json'
+import { fetchUpstreamJson, hasMetricHeadline } from './upstream-json'
 
 export interface LiveUpdateMetricsEnv {
   // Capgo GET /private/website_stats/live_updates.
@@ -20,7 +20,7 @@ export async function handleLiveUpdateMetrics(request: Request, env: LiveUpdateM
     async () => {
       const payload = await fetchUpstreamJson(url, fetchImpl)
       // A malformed answer must not replace the last good payload; every reader gets the normalized one.
-      const metrics = normalizeLiveUpdateMetrics(payload)
+      const metrics = hasMetricHeadline(payload) ? normalizeLiveUpdateMetrics(payload) : null
       if (!metrics) throw new Error('Invalid live update metrics payload')
       return metrics
     },
