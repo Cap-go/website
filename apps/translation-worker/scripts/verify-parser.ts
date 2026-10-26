@@ -230,7 +230,7 @@ assert(speedBrainJson.headers.get('Speculation-Rules') === null, 'A non-HTML res
 const packageName = __translationWorkerTest.protectTranslationTokens('Install @capgo/capacitor-updater first')
 assert(packageName.text === 'Install __CAPGO_KEEP_0__ first', 'An npm package name was split into several placeholders')
 assert(
-  packageName.restoreOrSource('Installez d’abord ____CAPGO_KEEP_0__').text === 'Installez d’abord @capgo/capacitor-updater',
+  packageName.restoreOrSource('Installez ____CAPGO_KEEP_0__ ici').text === 'Installez @capgo/capacitor-updater ici',
   'Extra underscores around a placeholder leaked into the page',
 )
 assert(__translationWorkerTest.protectTranslationTokens('capgo bundle upload').text === '__CAPGO_KEEP_0__', 'A Capgo CLI command was sent for translation')
