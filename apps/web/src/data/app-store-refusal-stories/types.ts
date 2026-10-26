@@ -15,6 +15,7 @@ export type AppleRejectionStoryTag =
   | '2-1'
   | '2-3-6'
   | '2-3-10'
+  | '2-3-1'
   | '2-3-2'
   | '5-0'
   | '2-3-7'
@@ -48,6 +49,7 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   '2-1': 'Guideline 2.1',
   '2-3-6': 'Guideline 2.3.6',
   '2-3-10': 'Guideline 2.3.10',
+  '2-3-1': 'Guideline 2.3.1',
   '2-3-2': 'Guideline 2.3.2',
   '5-0': 'Guideline 5 Legal',
   '2-3-7': 'Guideline 2.3.7',

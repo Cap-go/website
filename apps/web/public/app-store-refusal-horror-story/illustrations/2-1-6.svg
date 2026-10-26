@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Long review queue">
+  <title>Long review queue</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="52" cy="48" r="20" fill="#44BCFF" opacity="0.3"/>
+  <rect x="88" y="56" width="144" height="88" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="160" cy="100" r="28" fill="none" stroke="#44BCFF" stroke-width="3"/>
+  <path d="M160 82v22l14 8" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M108 148h104" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M124 148v8M160 148v8M196 148v8" stroke="#FB923C" stroke-width="3" stroke-linecap="round"/>
+</svg>

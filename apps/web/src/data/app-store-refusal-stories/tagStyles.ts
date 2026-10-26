@@ -15,6 +15,7 @@ export const appleRejectionStoryTagStyles: Record<string, string> = {
   '2-1': 'border-sky-300/50 bg-sky-500/15 text-sky-100',
   '2-3-6': 'border-indigo-200/50 bg-indigo-400/15 text-indigo-50',
   '2-3-10': 'border-indigo-300/50 bg-indigo-500/15 text-indigo-100',
+  '2-3-1': 'border-indigo-200/50 bg-indigo-400/15 text-indigo-50',
   '2-3-2': 'border-violet-300/50 bg-violet-500/15 text-violet-100',
   '5-0': 'border-blue-400/50 bg-blue-600/15 text-blue-100',
   '2-3-7': 'border-violet-200/50 bg-violet-400/15 text-violet-50',
