@@ -1,11 +1,11 @@
 {
   "repositoryCount": 143,
   "contributorCount": 605,
-  "versionCount": 16125,
-  "releaseCount": 6943,
+  "versionCount": 16141,
+  "releaseCount": 6944,
   "closedIssueCount": 1755,
-  "mergedPullRequestCount": 9224,
-  "resolvedItemCount": 10979,
+  "mergedPullRequestCount": 9239,
+  "resolvedItemCount": 10994,
   "totalStars": 3183,
   "repositories": {
     "Cap-go/capacitor-native-market": {
@@ -21,10 +21,10 @@
       "url": "https://github.com/Cap-go/capacitor-native-navigation",
       "stars": 43,
       "contributors": 4,
-      "versionTags": 69,
-      "releases": 65,
+      "versionTags": 70,
+      "releases": 66,
       "closedIssues": 13,
-      "mergedPullRequests": 69
+      "mergedPullRequests": 70
     },
     "Cap-go/capacitor-native-map": {
       "url": "https://github.com/Cap-go/capacitor-native-map",
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 211,
       "contributors": 30,
-      "versionTags": 5814,
+      "versionTags": 5829,
       "releases": 1000,
       "closedIssues": 419,
-      "mergedPullRequests": 2619
+      "mergedPullRequests": 2633
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
