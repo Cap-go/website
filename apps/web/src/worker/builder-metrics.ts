@@ -2,7 +2,7 @@ import { normalizeBuilderMetrics } from '../lib/builderMetrics'
 import { BUILDER_METRICS_CACHE_TTL_SECONDS, BUILDER_METRICS_PATH } from '../lib/publicBuilderMetrics'
 import { cachedJsonResponse, unavailableJson } from './cached-json'
 import type { BackgroundContext } from './types'
-import { fetchUpstreamJson, hasMetricHeadline } from './upstream-json'
+import { fetchUpstreamJson, isValidMetricPayload } from './upstream-json'
 
 export interface BuilderMetricsEnv {
   // Builder GET /stats/public.
@@ -20,7 +20,7 @@ export async function handleBuilderMetrics(request: Request, env: BuilderMetrics
     async () => {
       const payload = await fetchUpstreamJson(url, fetchImpl)
       // A malformed answer must not replace the last good payload; every reader gets the normalized one.
-      const metrics = hasMetricHeadline(payload) ? normalizeBuilderMetrics(payload) : null
+      const metrics = isValidMetricPayload(payload, ['daily_platforms']) ? normalizeBuilderMetrics(payload) : null
       if (!metrics) throw new Error('Invalid builder metrics payload')
       return metrics
     },

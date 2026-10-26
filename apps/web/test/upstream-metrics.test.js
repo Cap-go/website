@@ -102,5 +102,10 @@ test('an upstream error or malformed payload is unavailable, never cached', asyn
   expect((await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, noRate.fetchImpl)).status).toBe(503)
   const emptyLive = upstream({ updated_at: '', daily: [], failures: [] })
   expect((await handleLiveUpdateMetrics(new Request('https://capgo.app/live-update-metrics.json'), { LIVE_UPDATE_METRICS_URL: 'https://api.example.test/live' }, undefined, emptyLive.fetchImpl)).status).toBe(503)
+  // Normalizers would drop these rows and publish an empty chart.
+  const badLiveRow = upstream({ ...liveUpdatePayload, daily: [null] })
+  expect((await handleLiveUpdateMetrics(new Request('https://capgo.app/live-update-metrics.json'), { LIVE_UPDATE_METRICS_URL: 'https://api.example.test/live' }, undefined, badLiveRow.fetchImpl)).status).toBe(503)
+  const badBuilderRow = upstream({ ...builderPayload, daily_platforms: [{ ios: 80 }] })
+  expect((await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, badBuilderRow.fetchImpl)).status).toBe(503)
   expect(puts).toBe(0)
 })
