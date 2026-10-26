@@ -78,8 +78,8 @@
   "optionalDependenciesComment": "Hoist @bruits/satteri-linux-x64-{gnu,musl} for docs prerender CI. Keep these pins in lockstep with satteri resolved via astro -> @astrojs/markdown-satteri -> satteri in bun.lock; bump both together.",
   "typescriptComment": "Root typescript stays on 6.x only because @astrojs/check (astro check for apps/web and apps/docs) needs the classic JS compiler API, which TypeScript 7 no longer ships. The plain-TS workers (apps/*-worker) use the native TypeScript 7 tsc via their own devDependency. Bump the root once @astrojs/check supports TS 7.",
   "dependencies": {
-    "@astrojs/cloudflare": "14.3.4",
-    "@astrojs/mdx": "8.0.3",
+    "@astrojs/cloudflare": "14.4.2",
+    "@astrojs/mdx": "8.1.1",
     "@astrojs/sitemap": "3.7.4",
     "@astrojs/starlight": "0.42.6",
     "@astrojs/starlight-docsearch": "0.8.0",
@@ -89,7 +89,7 @@
     "@supabase/supabase-js": "^2.117.1",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "7.3.8",
+    "astro": "7.4.2",
     "astro-icon": "1.2.0",
     "bowser": "^2.14.1",
     "github-slugger": "^2.0.0",
@@ -107,7 +107,7 @@
     "toastify-js": "^1.12.0"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.10",
+    "@astrojs/check": "0.9.12",
     "@astrojs/compiler-rs": "0.5.2",
     "@axe-core/playwright": "^4.13.0",
     "@capgo/seo-checker": "^0.0.13",
