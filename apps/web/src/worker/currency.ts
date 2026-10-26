@@ -1,8 +1,8 @@
-import { BASE_CURRENCY, CURRENCY_ENDPOINT, currencyForCountry, isSupportedCurrency, SUPPORTED_CURRENCIES, type CurrencyPayload, type CurrencyRates } from '../lib/currency'
+import { BASE_CURRENCY, currencyForCountry, isSupportedCurrency, SUPPORTED_CURRENCIES, type CurrencyPayload, type CurrencyRates } from '../lib/currency'
 import { cachedJsonResponse } from './cached-json'
 import type { BackgroundContext } from './types'
 
-export const CURRENCY_PATH = CURRENCY_ENDPOINT
+export { CURRENCY_ENDPOINT as CURRENCY_PATH } from '../lib/currency'
 
 // ECB reference rates publish once per working day.
 const RATES_CACHE_PATH = '/currency-rates.json'
