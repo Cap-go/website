@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
 import { buildContiguousDailyPlatformRows, selectTrendRows, TREND_HISTORY_DAYS } from '../src/lib/metricsTrendChart.ts'
-import { buildPublicLiveUpdateQueries, getPublicLiveUpdateMetrics } from '../src/lib/publicLiveUpdateMetrics.ts'
+import { buildPublicLiveUpdateQueries, getPublicLiveUpdateMetrics, legacyDownloadFailPluginSql } from '../src/lib/publicLiveUpdateMetrics.ts'
 
 const prodSnapshot = JSON.parse(readFileSync(new URL('./fixtures/live-update-metrics-prod-2026-09-24.json', import.meta.url), 'utf8'))
 
@@ -35,6 +35,20 @@ test('buildPublicLiveUpdateQueries only counts download_fail when an update was 
     expect(query).toContain("max(if(blob2 IN ('get', 'download_0', 'download_zip_start', 'download_manifest_start', 'download_complete', 'set_next'), 1, 0)) AS offered")
     expect(query).toContain('sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures')
   }
+})
+
+test('failure breakdowns drop download_fail of plugins that also send it for a failed update check', () => {
+  const queries = buildPublicLiveUpdateQueries(new Date('2026-09-17T00:00:00.000Z'))
+  const notLegacy = `NOT (blob2 = 'download_fail' AND ${legacyDownloadFailPluginSql('blob7')})`
+  for (const query of [queries.failures, queries.platformsFailure, queries.countriesFailure, queries.versionsFailure, queries.package]) expect(query).toContain(notLegacy)
+})
+
+test('legacyDownloadFailPluginSql matches plugins before 6.53.0, 7.53.0 and 8.53.0', () => {
+  const patterns = [...legacyDownloadFailPluginSql('blob7').matchAll(/LIKE '([^']+)'/g)].map((match) => match[1])
+  const like = (value, pattern) => new RegExp(`^${pattern.replaceAll('.', '\\.').replaceAll('%', '.*').replaceAll('_', '.')}$`).test(value)
+  const isLegacy = (version) => patterns.some((pattern) => like(version, pattern))
+  for (const version of ['5.10.3', '6.0.0', '6.52.9', '7.17.0', '8.9.12', '8.51.16', '8.52.0']) expect(isLegacy(version)).toBe(true)
+  for (const version of ['6.53.0', '7.53.0', '8.53.0', '8.60.0', '8.100.0', '9.0.0', '10.1.0', '']) expect(isLegacy(version)).toBe(false)
 })
 
 test('buildPublicLiveUpdateQueries keeps KPI windows at 30 days and trend platforms at 90 days', () => {

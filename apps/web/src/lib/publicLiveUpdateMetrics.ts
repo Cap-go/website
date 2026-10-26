@@ -72,6 +72,18 @@ const PUBLIC_FAILURE_ACTIONS = [
 // Events proving an update was offered to the device or a download actually ran that day.
 const PUBLIC_OFFER_ACTIONS = ['get', 'download_0', 'download_zip_start', 'download_manifest_start', 'download_complete', 'set_next'] as const
 const PUBLIC_ZIP_FAIL_ACTIONS = ['unzip_fail', 'download_fail'] as const
+
+// Updater plugins before 6.53.0, 7.53.0 and 8.53.0 also send download_fail for a failed update check,
+// against the bundle the device already runs, so it never names a failed update. Same rule as the Capgo backend
+// (legacyDownloadFail.ts): majors 0 to 5, and minors 0 to 52 of majors 6, 7 and 8. LIKE only, for Analytics Engine.
+export function legacyDownloadFailPluginSql(column: string) {
+  const patterns = ['0', '1', '2', '3', '4', '5'].map((major) => `${major}.%`)
+  for (const major of [6, 7, 8])
+    patterns.push(`${major}._.%`, `${major}.1_.%`, `${major}.2_.%`, `${major}.3_.%`, `${major}.4_.%`, `${major}.50.%`, `${major}.51.%`, `${major}.52.%`)
+  return `(${patterns.map((pattern) => `${column} LIKE '${pattern}'`).join(' OR ')})`
+}
+
+const NOT_LEGACY_DOWNLOAD_FAIL = `NOT (blob2 = 'download_fail' AND ${legacyDownloadFailPluginSql('blob7')})`
 const PUBLIC_DELTA_FAIL_ACTIONS = ['download_manifest_file_fail', 'download_manifest_checksum_fail', 'download_manifest_brotli_fail', 'manifest_path_fail'] as const
 
 function pad2(value: number) {
@@ -196,6 +208,8 @@ export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
   const deltaFailActions = PUBLIC_DELTA_FAIL_ACTIONS.map((action) => `'${action}'`).join(', ')
   const day = `formatDateTime(toStartOfInterval(timestamp, INTERVAL '1' DAY), '%Y-%m-%d')`
   const hour = `formatDateTime(toStartOfInterval(timestamp, INTERVAL '1' HOUR), '%Y-%m-%d %H:00')`
+  // Failure breakdowns count every failure log, so they drop download_fail of those plugins.
+  const isBreakdownFailure = `blob2 IN (${failureActions}) AND ${NOT_LEGACY_DOWNLOAD_FAIL}`
   const outcomeBase = buildOutcomeBase(window, failureActions, day)
   const trendOutcomeBase = buildOutcomeBase(trendWindow, failureActions, day)
   const hourlyOutcomeBase = buildOutcomeBase(hourlyWindow, failureActions, hour)
@@ -203,19 +217,19 @@ export function buildPublicLiveUpdateQueries(referenceDate = new Date()) {
   return {
     outcomes: `SELECT date, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures, sum(if(succeeded = 1 AND install_failed = 0 AND download_failed = 0, 1, 0)) AS first_tries FROM (${outcomeBase}) GROUP BY date`,
     rollback: `SELECT sum(has_reset) AS rollbacks, sum(if(has_set + has_reset > 0, 1, 0)) AS outcomes FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'reset', 1, 0)) AS has_reset, max(if(blob2 = 'set', 1, 0)) AS has_set FROM app_log WHERE ${window} AND blob2 IN ('set', 'reset') GROUP BY date, app_id, device_id)`,
-    package: `SELECT sum(if(zip_ok = 1, 1, 0)) AS zip_successes, sum(if(zip_ok = 0 AND zip_fail = 1, 1, 0)) AS zip_failures, sum(if(delta_ok = 1, 1, 0)) AS delta_successes, sum(if(delta_ok = 0 AND delta_fail = 1, 1, 0)) AS delta_failures FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'download_zip_complete', 1, 0)) AS zip_ok, max(if(blob2 IN (${zipFailActions}), 1, 0)) AS zip_fail, max(if(blob2 = 'download_manifest_complete', 1, 0)) AS delta_ok, max(if(blob2 IN (${deltaFailActions}), 1, 0)) AS delta_fail FROM app_log WHERE ${window} AND blob2 IN ('download_zip_complete', 'download_manifest_complete', ${zipFailActions}, ${deltaFailActions}) GROUP BY date, app_id, device_id)`,
-    failures: `SELECT action, count() AS devices FROM (SELECT ${day} AS date, blob2 AS action, index1 AS app_id, blob1 AS device_id FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, action, app_id, device_id) GROUP BY action`,
+    package: `SELECT sum(if(zip_ok = 1, 1, 0)) AS zip_successes, sum(if(zip_ok = 0 AND zip_fail = 1, 1, 0)) AS zip_failures, sum(if(delta_ok = 1, 1, 0)) AS delta_successes, sum(if(delta_ok = 0 AND delta_fail = 1, 1, 0)) AS delta_failures FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, max(if(blob2 = 'download_zip_complete', 1, 0)) AS zip_ok, max(if(blob2 IN (${zipFailActions}) AND ${NOT_LEGACY_DOWNLOAD_FAIL}, 1, 0)) AS zip_fail, max(if(blob2 = 'download_manifest_complete', 1, 0)) AS delta_ok, max(if(blob2 IN (${deltaFailActions}), 1, 0)) AS delta_fail FROM app_log WHERE ${window} AND blob2 IN ('download_zip_complete', 'download_manifest_complete', ${zipFailActions}, ${deltaFailActions}) GROUP BY date, app_id, device_id)`,
+    failures: `SELECT action, count() AS devices FROM (SELECT ${day} AS date, blob2 AS action, index1 AS app_id, blob1 AS device_id FROM app_log WHERE ${window} AND ${isBreakdownFailure} GROUP BY date, action, app_id, device_id) GROUP BY action`,
     platformsShare: `SELECT platform, count() AS devices FROM (SELECT double1 AS platform, index1 AS app_id, blob1 AS device_id FROM device_usage WHERE ${window} AND double1 IN (0.0, 1.0, 2.0) GROUP BY platform, app_id, device_id) GROUP BY platform`,
     platformsDaily: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${trendOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
     platformsHourly: `SELECT date, platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${hourlyOutcomeBase}) WHERE platform IN ('ios', 'android') GROUP BY date, platform`,
     platformsOutcome: `SELECT platform AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${outcomeBase}) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform`,
-    platformsFailure: `SELECT platform AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob5, timestamp) AS platform FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform, action`,
+    platformsFailure: `SELECT platform AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob5, timestamp) AS platform FROM app_log WHERE ${window} AND ${isBreakdownFailure} GROUP BY date, app_id, device_id, action) WHERE platform IN ('ios', 'android', 'electron') GROUP BY platform, action`,
     countriesShare: `SELECT country AS key, count() AS devices FROM (SELECT index1 AS app_id, blob1 AS device_id, argMax(blob10, timestamp) AS country FROM device_info WHERE ${window} AND blob10 != '' GROUP BY app_id, device_id) WHERE country != '' GROUP BY country`,
     countriesOutcome: `SELECT country AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${outcomeBase}) WHERE country != '' GROUP BY country`,
-    countriesFailure: `SELECT country AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob6, timestamp) AS country FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE country != '' GROUP BY country, action`,
+    countriesFailure: `SELECT country AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob6, timestamp) AS country FROM app_log WHERE ${window} AND ${isBreakdownFailure} GROUP BY date, app_id, device_id, action) WHERE country != '' GROUP BY country, action`,
     versionsShare: `SELECT version AS key, count() AS devices FROM (SELECT index1 AS app_id, blob1 AS device_id, argMax(blob3, timestamp) AS version FROM device_info WHERE ${window} AND blob3 != '' GROUP BY app_id, device_id) WHERE version != '' GROUP BY version`,
     versionsOutcome: `SELECT plugin_version AS key, sum(succeeded) AS successes, sum(if(succeeded = 0 AND (install_failed = 1 OR (download_failed = 1 AND offered = 1)), 1, 0)) AS failures FROM (${outcomeBase}) WHERE plugin_version != '' GROUP BY plugin_version`,
-    versionsFailure: `SELECT plugin_version AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob7, timestamp) AS plugin_version FROM app_log WHERE ${window} AND blob2 IN (${failureActions}) GROUP BY date, app_id, device_id, action) WHERE plugin_version != '' GROUP BY plugin_version, action`,
+    versionsFailure: `SELECT plugin_version AS key, action, count() AS devices FROM (SELECT ${day} AS date, index1 AS app_id, blob1 AS device_id, blob2 AS action, argMax(blob7, timestamp) AS plugin_version FROM app_log WHERE ${window} AND ${isBreakdownFailure} GROUP BY date, app_id, device_id, action) WHERE plugin_version != '' GROUP BY plugin_version, action`,
   }
 }
 
