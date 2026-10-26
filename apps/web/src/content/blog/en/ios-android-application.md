@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-26T07:05:44.922Z
-updated_at: 2026-10-26T07:05:46.325Z
+updated_at: 2026-10-26T07:08:13.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/d9019826-d4c4-410d-bf7f-ccdddc4a0508/ios-android-application-mobile-development.jpg'
 head_image_alt: 'iOS Android Application: Build, Ship and Update in 2026'
 keywords: 'iOS Android application, Capacitor app, cross-platform mobile, App Store review, live updates'
