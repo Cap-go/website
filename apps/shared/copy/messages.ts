@@ -1215,7 +1215,7 @@ const messages = {
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
   capwesome_hero_title: 'Capawesome alternative for Capacitor live updates',
   capwesome_meta_description:
-    'Compare Capawesome Cloud and Capgo for Capacitor live updates, native builds, and pricing. Live Updates from $9/mo, Platform from $19/mo, 14-day trial.',
+    'Compare Capawesome Cloud and Capgo for Capacitor live updates, native builds, and pricing. Live Updates from $9/month, Platform from $19/month, 14-day trial.',
   capwesome_migration_intro: "If you're on Capawesome and considering Capgo, migration is straightforward. The Capacitor update plugin architecture is similar.",
   capwesome_migration_step1: 'Swap the plugin package',
   capwesome_migration_step2: 'Update config (minor differences)',

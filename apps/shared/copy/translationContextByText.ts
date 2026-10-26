@@ -2073,10 +2073,10 @@ export const translationContextByText: Record<string, string> = {
     'Page/area: Capgo marketing website. Role: Section subtitle or tagline. Seen in: page alternatives/capawesome.astro. Message key `compare_capawesome_eyebrow` (Compare Capawesome Eyebrow).',
   'Capawesome Cloud combines plugin maintenance with hosted live updates and CI-style workflows tied to their ecosystem.':
     'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page reviews/capawesome.astro. Message key `review_capawesome_what_p1` (Review Capawesome What P1).',
-  'Capawesome Cloud is paid after the 14-day trial. Open source Capacitor SDKs and the CLI are free to use; the hosted cloud is not. Capawesome also offers a free plan for qualifying open source projects.':
-    'Page/area: Capgo marketing website. Role: FAQ question or answer. Seen in: page alternatives/capawesome.astro. Preserve Capgo product/brand and developer terms exactly. Message key `compare_capawesome_faq_a3` (Compare Capawesome FAQ A3).',
   'Capawesome Cloud overview':
     'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page alternatives.astro, page alternatives/capawesome.astro. Message key `compare_capawesome_source_cloud` (Compare Capawesome Source Cloud).',
+  'Capawesome Cloud plans are paid after the 14-day trial, except for qualifying open source projects accepted into its free program. Open source Capacitor SDKs and the CLI are free to use.':
+    'Page/area: Capgo marketing website. Role: FAQ question or answer. Seen in: page alternatives/capawesome.astro. Preserve Capgo product/brand and developer terms exactly. Message key `compare_capawesome_faq_a3` (Compare Capawesome FAQ A3).',
   'Capawesome Cloud pricing':
     'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page alternatives.astro, page alternatives/capawesome.astro. Message key `compare_capawesome_source_pricing` (Compare Capawesome Source Pricing).',
   'Capawesome Cloud review for Capacitor teams':
