@@ -2871,7 +2871,7 @@ export const translationContextByText: Record<string, string> = {
     'Page/area: Capgo solutions marketing page. Role: Website copy sentence. Seen in: page solutions/production-updates.astro. Preserve Capgo product/brand and developer terms exactly. Message key `solutions_usecase3_desc` (Solutions Usecase3 Desc).',
   'Compare active users across Android, iOS, and Electron before promoting the next build.':
     'Page/area: Homepage landing product feature section. Role: Website copy sentence. Message key `landing_monitoring_user_pop_desc` (Landing Monitoring User Pop Desc).',
-  'Compare Capawesome Cloud and Capgo for Capacitor live updates, native builds, and pricing. Live Updates from $9/mo, Platform from $19/mo, 14-day trial.':
+  'Compare Capawesome Cloud and Capgo for Capacitor live updates, native builds, and pricing. Live Updates from $9/month, Platform from $19/month, 14-day trial.':
     'Page/area: Capawesome comparison page. Role: SEO meta description. Seen in: page alternatives/capawesome.astro. Preserve Capgo product/brand and developer terms exactly. Message key `capwesome_meta_description` (Capwesome Meta Description).',
   'Compare Capgo pricing for live updates, native builds, notifications, and Observe. No per-seat fees—scale by MAU, bandwidth, and storage.':
     'Page/area: Pricing page or plan calculator UI. Role: Supporting description paragraph or meta description. Seen in: page pricing.astro. Preserve Capgo product/brand and developer terms exactly. Message key `pricing_description` (Pricing Description).',
