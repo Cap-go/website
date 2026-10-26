@@ -57,6 +57,8 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
+const MIN_ELECTRON_SHARE = 1
+
 function percentage(value: unknown) {
   const number = typeof value === 'number' ? value : Number(value)
   return Number.isFinite(number) ? Math.max(0, Math.min(100, number)) : 0
@@ -144,6 +146,8 @@ export function normalizeLiveUpdateMetrics(value: unknown): LiveUpdateMetrics | 
       }))
       .filter((item) => item.share > 0)
   }
+  // Electron usage is tiny next to mobile; keep it visible as at least 1% instead of rounding to 0%.
+  platforms = platforms.map((item) => (item.key === 'electron' ? { ...item, share: Math.max(MIN_ELECTRON_SHARE, item.share) } : item))
 
   const countries = Array.isArray(value.countries) ? value.countries.map(normalizeBreakdown).filter((item): item is BreakdownMetric => item !== null) : []
 
