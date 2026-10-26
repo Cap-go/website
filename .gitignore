@@ -32,4 +32,3 @@ seo-report.sarif
 .visual-diff/
 
 # Generated local D1 fixture for builder-data screenshots
-apps/web/test/fixtures/builder-metrics-d1-seed.sql

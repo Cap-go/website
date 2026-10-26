@@ -34,9 +34,8 @@ interface Env extends PublicMcpEnv {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
   PERSONAL_ACCESS_TOKEN?: string
-  CF_ACCOUNT_ANALYTICS_ID?: string
-  CF_ANALYTICS_TOKEN?: string
-  BUILDER_DB?: import('../lib/builderMetricsD1').BuilderD1Database
+  LIVE_UPDATE_METRICS_URL?: string
+  BUILDER_METRICS_URL?: string
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string

@@ -1,27 +1,28 @@
-import {
-  getPublicLiveUpdateMetrics,
-  LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS,
-  LIVE_UPDATE_METRICS_PATH,
-} from '../lib/publicLiveUpdateMetrics'
+import { normalizeLiveUpdateMetrics } from '../lib/liveUpdateMetrics'
+import { LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS, LIVE_UPDATE_METRICS_PATH } from '../lib/publicLiveUpdateMetrics'
 import { cachedJsonResponse, unavailableJson } from './cached-json'
 import type { BackgroundContext } from './types'
+import { fetchUpstreamJson } from './upstream-json'
 
 export interface LiveUpdateMetricsEnv {
-  CF_ACCOUNT_ANALYTICS_ID?: string
-  CF_ANALYTICS_TOKEN?: string
+  // Capgo GET /private/website_stats/live_updates.
+  LIVE_UPDATE_METRICS_URL?: string
 }
 
-export async function handleLiveUpdateMetrics(request: Request, env: LiveUpdateMetricsEnv, ctx?: BackgroundContext): Promise<Response> {
-  const accountId = env.CF_ACCOUNT_ANALYTICS_ID?.trim()
-  const token = env.CF_ANALYTICS_TOKEN?.trim()
-  if (!accountId || !token)
-    return unavailableJson('Live update metrics are temporarily unavailable')
+export async function handleLiveUpdateMetrics(request: Request, env: LiveUpdateMetricsEnv, ctx?: BackgroundContext, fetchImpl?: typeof fetch): Promise<Response> {
+  const url = env.LIVE_UPDATE_METRICS_URL?.trim()
+  if (!url) return unavailableJson('Live update metrics are temporarily unavailable')
 
   return cachedJsonResponse(
     request,
     LIVE_UPDATE_METRICS_PATH,
     LIVE_UPDATE_METRICS_CACHE_TTL_SECONDS,
-    () => getPublicLiveUpdateMetrics({ accountId, token }),
+    async () => {
+      const payload = await fetchUpstreamJson(url, fetchImpl)
+      // A malformed answer must not replace the last good payload.
+      if (!normalizeLiveUpdateMetrics(payload)) throw new Error('Invalid live update metrics payload')
+      return payload
+    },
     'Live update metrics are temporarily unavailable',
     ctx,
   )
