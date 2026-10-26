@@ -2,6 +2,7 @@ import { expect, test } from 'bun:test'
 import { isGonePath } from '../../shared/gonePaths.ts'
 
 const GONE_PATHS = [
+  '/blog/corporate-governance-code/',
   '/blog/app-cohort-analysis/',
   '/blog/app-user-retention/',
   '/blog/app-vulnerability-scanning/',
@@ -48,6 +49,16 @@ test('isGonePath does not match retired app-behavior-tracking (301 redirect)', (
 test('isGonePath does not match retired app-health-check (301 redirect)', () => {
   expect(isGonePath('/blog/app-health-check/')).toBe(false)
   expect(isGonePath('/de/blog/app-health-check/')).toBe(false)
+})
+
+test('isGonePath does not match retired what-is-observability (301 redirect)', () => {
+  expect(isGonePath('/blog/what-is-observability/')).toBe(false)
+  expect(isGonePath('/de/blog/what-is-observability/')).toBe(false)
+})
+
+test('isGonePath does not match retired multi-platform-software-development (301 redirect)', () => {
+  expect(isGonePath('/blog/multi-platform-software-development/')).toBe(false)
+  expect(isGonePath('/de/blog/multi-platform-software-development/')).toBe(false)
 })
 
 test('isGonePath does not match unrelated paths', () => {
