@@ -64,3 +64,22 @@ test('normalizeLiveUpdateMetrics treats missing new rates as null', () => {
   expect(metrics?.delta_success_rate).toBeNull()
   expect(metrics?.daily_platforms).toEqual([])
 })
+
+test('normalizeLiveUpdateMetrics shows Electron usage as at least 1%', () => {
+  const metrics = normalizeLiveUpdateMetrics({
+    ...base,
+    platforms: [
+      { key: 'ios', share: 68.4, success_rate: 84.3, top_failure: null },
+      { key: 'android', share: 31.5, success_rate: 79.9, top_failure: null },
+      { key: 'electron', share: 0, success_rate: 99.9, top_failure: null },
+    ],
+    countries: [],
+    updater_versions: [],
+  })
+
+  expect(metrics?.platforms.map((item) => [item.key, item.share])).toEqual([
+    ['ios', 68.4],
+    ['android', 31.5],
+    ['electron', 1],
+  ])
+})
