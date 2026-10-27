@@ -1,21 +1,29 @@
 ---
 slug: app-store-age-ratings-guide
-title: App Store Age Ratings Guide for iOS and Android (2026)
-description: How Apple’s 4+, 9+, 13+, 16+, and 18+ ratings and Google Play IARC work in 2026, what changed after the January 31, 2026 questionnaire deadline, and how to update ratings in App Store Connect.
+title: How to Change App Age Rating on iPhone and Android
+description: Set app age limits on iPhone (Screen Time) and Android (Play controls). How developers set store ratings in App Store Connect and Google Play.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-29T00:00:00.000Z
-updated_at: 2026-10-15T12:23:24.000Z
+updated_at: 2026-10-27T10:00:00.000Z
 head_image: /apple_appstore.webp
-head_image_alt: "App Store Age Ratings Guide for iOS and Android Capgo blog illustration"
-keywords: age ratings, app store, google play, content ratings, IARC, parental controls, app classification, ios age ratings, android age ratings, App Store Connect age rating questionnaire
+head_image_alt: "How to change app age rating on iPhone and Android Capgo blog illustration"
+keywords: app age rating, device age rating, app age rating setting, how to change app age rating, age rating iphone, android age rating, Screen Time, parental controls, app store, google play, IARC, App Store Connect
 tag: Development, App Store, Best Practices
 published: true
 locale: en
 origin: human
 next_blog: ''
 faq:
+  - question: What is an app age rating on my phone?
+    answer: It is the maturity label on each app in the App Store or Google Play, such as 4+, 13+, Teen, or Mature. Your device parental controls use that label to block or allow downloads. You change the limit in Screen Time or Play settings, not on the app listing itself.
+  - question: How do I change the app age rating limit on iPhone or iPad?
+    answer: Open Settings, tap Screen Time, then Content & Privacy Restrictions and turn the switch on. Tap App Store, Media, Web & Games, then Apps, and choose the highest age rating you allow. For a child in Family Sharing you can also use Settings, Family, your child’s name, then Content & Privacy Restrictions.
+  - question: How do I change app age rating restrictions on Android?
+    answer: On the device, open the Google Play app, tap your profile, Settings, Family, Content restrictions, then set a parental controls PIN and choose the highest Apps and Games rating allowed. If the child uses Family Link, open the Family Link app, select the child, tap Controls, Google Play, then set filters for each content type.
+  - question: What does device age rating or Declared Age Range mean on Apple devices?
+    answer: Device age rating usually means the maximum App Store rating allowed in Screen Time. Age Range for Apps (Declared Age Range) is separate. Parents manage it under Settings, your name, Personal Information, Age Range for Apps, or for a child under Settings, Family, the child account, Apple Account and Password, Age Range for Apps. You can set sharing to always, ask first, or never.
   - question: What age rating tiers does Apple use on the App Store in 2026?
     answer: Apple assigns global age ratings of 4+, 9+, 13+, 16+, or 18+ based on your App Store Connect questionnaire answers. Regional ratings can differ where local rules apply.
   - question: What if I missed the January 31, 2026 age rating questionnaire deadline?
@@ -26,7 +34,52 @@ faq:
     answer: Yes. Apple’s November 13, 2025 App Review Guidelines update requires creator apps and apps that serve software not embedded in the binary to let users flag content above the app’s age rating and to restrict that content using verified or declared age.
 ---
 
-**Quick answer:** In 2026, Apple rates apps at **4+, 9+, 13+, 16+, or 18+** from the questionnaire in App Store Connect; Google Play still uses **IARC** for regional ratings. The **January 31, 2026** deadline to answer Apple’s updated questions has passed: complete any missing responses before you submit updates, and revisit answers when content or social features change. Creator and mini app platforms must also follow Apple’s [November 13, 2025 App Review Guidelines update](https://developer.apple.com/news/?id=ey6d8onl) on age-appropriate access.
+**Quick answer:** An **app age rating** is the maturity label on each listing in the App Store or Google Play (for example **4+**, **13+**, **Teen**, or **Mature**). On your **iPhone, iPad, or Android phone**, you change the **highest rating allowed** in parental controls, not the label on a single app. Use **Screen Time** content restrictions on Apple devices and **Google Play content restrictions** or **Family Link** on Android. **Developers** set the store rating in [App Store Connect](#how-to-complete-the-ios-age-rating-questionnaire) or the [Play Console IARC questionnaire](#how-to-complete-the-iarc-questionnaire).
+
+## Change app age rating limits on your device
+
+People often search for **app age rating settings** when they want to block mature apps on a family phone. That is different from changing how a developer rates their own app in the stores.
+
+### iPhone and iPad (Screen Time)
+
+Apple documents these steps under [content and privacy restrictions in the App Store](https://support.apple.com/guide/iphone/iph3dfd91de/ios):
+
+<Steps>
+
+1. Open **Settings**, tap **Screen Time**, then **Content & Privacy Restrictions**.
+2. Turn on **Content & Privacy Restrictions** (enter your Screen Time passcode if prompted).
+3. Tap **App Store, Media, Web & Games**, then **Apps**.
+4. Choose the highest age rating available on your device. The available values depend on your iOS version. Apps above that rating are blocked or need parent approval when [Ask to Buy](https://support.apple.com/en-us/125399) applies.
+
+</Steps>
+
+For a **child in Family Sharing**, you can also open **Settings**, tap **Family**, select your child, then **Content & Privacy Restrictions** and pick age-based limits ([set up parental controls](https://support.apple.com/en-us/105121)).
+
+### Android (Google Play and Family Link)
+
+To limit downloads by maturity on a device, Google describes [Play content restrictions](https://support.google.com/googleplay/answer/1075738):
+
+<Steps>
+
+1. Open the **Google Play** app, tap your **profile** icon, then **Settings**.
+2. Tap **Family**, then **Content restrictions**.
+3. Follow the prompts to set a **parental controls PIN**, then choose the highest **Apps & Games** rating you allow.
+
+</Steps>
+
+If the child’s Google Account is managed with **Family Link**, open the **Family Link** app, select the child, tap **Controls**, then **Google Play**, and set filters for each content type ([Family Link help](https://support.google.com/families/answer/7101025)).
+
+Content restrictions filter **new** downloads and purchases. Apps already installed may still open until you block them in Family Link.
+
+### Device age rating and Declared Age Range (Apple)
+
+**Device age rating** in everyday use usually means the **maximum App Store age rating** you allow in Screen Time, as in the steps above.
+
+**Age Range for Apps** (Apple also calls this **Declared Age Range** in [developer documentation](https://developer.apple.com/documentation/declaredagerange)) lets an account share only an **age range** with an app, not a birth date. For your account, open **Settings**, tap your name, **Personal Information**, then **Age Range for Apps**, and tap **Share with Apps**. For a child in Family Sharing, use **Settings**, **Family**, the child’s account, **Apple Account and Password**, then **Age Range for Apps**. See [Share your age range with apps](https://support.apple.com/en-us/122770).
+
+### If you develop or publish apps
+
+You do **not** change your app’s store badge from the phone settings above. Set or update the listing rating in App Store Connect and Google Play Console. See [How to Complete the iOS Age Rating Questionnaire](#how-to-complete-the-ios-age-rating-questionnaire), [How to Complete the IARC Questionnaire](#how-to-complete-the-iarc-questionnaire), and [Changing Your Age Rating](#changing-your-age-rating).
 
 Setting the correct age rating for your mobile app is one of the most critical yet often misunderstood aspects of app store submission. Apple rolled out its expanded rating scale and questionnaire in 2025, and in 2026 those ratings are what customers and parental controls rely on. Google Play still uses the IARC (International Age Rating Coalition) system for regional classifications.
 
@@ -1273,6 +1326,18 @@ Age ratings are a critical component of app store success that go far beyond sim
 Remember: An accurate age rating protects users, keeps you compliant with laws and regulations, and ultimately builds trust with your audience. Treat it as part of responsible app development, not a shortcut to more downloads.
 
 ## Frequently asked questions
+
+**What is an app age rating on my phone?**  
+It is the maturity label on each app in the store. Parental controls use that label to block or allow downloads. You change the limit in Screen Time or Play settings.
+
+**How do I change the app age rating limit on iPhone?**  
+Use **Settings** > **Screen Time** > **Content & Privacy Restrictions** > **App Store, Media, Web & Games** > **Apps**, then pick the highest rating you allow.
+
+**How do I change app age rating restrictions on Android?**  
+Use **Google Play** > profile **Settings** > **Family** > **Content restrictions**, or **Family Link** > child > **Controls** > **Google Play**.
+
+**What does device age rating mean?**  
+Usually the maximum App Store or Play maturity level allowed on that device. **Age Range for Apps** on Apple is separate and is managed under **Personal Information** or the child’s **Apple Account and Password** settings, not Screen Time.
 
 **What age rating tiers does Apple use in 2026?**  
 4+, 9+, 13+, 16+, and 18+, plus optional regional values where required.
