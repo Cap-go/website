@@ -42,7 +42,7 @@ jobs:
       - run: bun install --frozen-lockfile --ignore-scripts
       - run: bun run scrape:distribution-charts
       - name: Commit changes if data differs
-        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
+        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
         with:
           commit_message: 'chore: update Android and iOS distribution data'
           file_pattern: 'apps/web/src/data/android-distribution.json apps/web/src/data/ios-distribution.json'

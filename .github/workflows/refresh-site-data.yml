@@ -95,7 +95,7 @@ jobs:
           done
       - name: Commit changes if data differs
         id: commit
-        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
+        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
         with:
           commit_message: 'chore: refresh site data snapshots'
           file_pattern: 'apps/web/src/data/github-stars.json apps/web/src/data/github-stats.json apps/web/src/data/transparency.json apps/web/src/data/website-stats.json apps/web/src/data/npm-downloads.json apps/web/src/data/capgo-plans.json apps/web/src/data/capgo-credits.json apps/web/src/data/store-top.json apps/web/src/data/github-sponsors.json apps/web/src/data/github-releases.json'
