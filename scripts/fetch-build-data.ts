@@ -68,10 +68,20 @@ function minorUnitDivisor(currency: string) {
   return 100
 }
 
-function toMajorUnits({ month, year }: AmountSet): AmountSet {
-  const convert = (amounts: Record<string, number>) =>
-    Object.fromEntries(Object.entries(amounts).map(([currency, amount]) => [currency, amount / minorUnitDivisor(currency)]))
-  return { month: convert(month), year: convert(year) }
+// Validates one plan/tier entry of the catalog and converts it; any bad amount fails the whole snapshot.
+function toMajorUnits(label: string, set: Partial<AmountSet> | undefined): AmountSet {
+  const convert = (interval: 'month' | 'year') => {
+    const amounts: unknown = set?.[interval]
+    if (!amounts || typeof amounts !== 'object' || Array.isArray(amounts)) throw new Error(`plan_prices ${label}.${interval} is missing`)
+    return Object.fromEntries(
+      Object.entries(amounts).map(([currency, amount]) => {
+        if (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 0) throw new Error(`plan_prices ${label}.${interval}.${currency} is not a valid amount`)
+        const code = currency.toLowerCase()
+        return [code, amount / minorUnitDivisor(code)]
+      }),
+    )
+  }
+  return { month: convert('month'), year: convert('year') }
 }
 
 // Every plan's Stripe price in every currency, plus the Solo regional (PPP) tiers, from the public
@@ -84,7 +94,7 @@ async function fetchPlanPrices() {
     plans: Object.fromEntries(
       entries.map(([plan, { tiers, ...prices }]) => [
         plan,
-        { ...toMajorUnits(prices), ...(tiers ? { tiers: Object.fromEntries(Object.entries(tiers).map(([tier, set]) => [tier, toMajorUnits(set)])) } : {}) },
+        { ...toMajorUnits(plan, prices), ...(tiers ? { tiers: Object.fromEntries(Object.entries(tiers).map(([tier, set]) => [tier, toMajorUnits(`${plan}.${tier}`, set)])) } : {}) },
       ]),
     ),
   }
