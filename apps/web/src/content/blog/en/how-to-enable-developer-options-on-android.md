@@ -1,34 +1,34 @@
 ---
 slug: how-to-enable-developer-options-on-android
-title: "How to Enable Developer Options on Android (2026)"
-description: "Enable Android developer mode on Pixel, Samsung, Xiaomi, OnePlus and Huawei, turn on USB and wireless debugging, fix adb issues, and turn it off again."
+title: "Developer Options on Android 14, 15 and 16: Enable in 30 Seconds"
+description: "Enable developer mode on Pixel, Samsung and Xiaomi: Settings, About phone, tap Build number 7 times, enter PIN. USB and wireless debugging pairing, and fixes when Build number is missing."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T03:59:51.000Z
+updated_at: 2026-10-25T10:00:00.000Z
 head_image: /android-studio-run.webp
 head_image_alt: "Running an app from Android Studio on a device with developer options enabled"
-keywords: enable android developer mode, android developer options, usb debugging, wireless debugging, adb pair, enable developer mode samsung, enable developer options xiaomi, turn off developer options
+keywords: developer options android 14, android 14 developer mode, developer options android 15, developer options android 16, enable android developer mode, android developer options, usb debugging, wireless debugging, how to pair wireless debugging, adb pair, enable developer mode samsung, enable developer options xiaomi, hyperos developer options, build number missing, this action is unavailable, turn off developer options
 tag: Android, Tutorial, Development
 published: true
 locale: en
 origin: human
 next_blog: ''
 faq:
-  - question: "How do I enable developer mode on Android?"
-    answer: "Open Settings, go to About phone, and tap Build number seven times. Enter your PIN if asked. A message confirms you are now a developer, and Developer options appears under Settings > System (Pixel) or at the bottom of Settings (Samsung)."
-  - question: "Is it safe to enable developer options?"
-    answer: "Yes, enabling the menu changes nothing by itself. The risk comes from individual settings such as USB debugging, which lets an authorized computer install apps and read data. Turn USB debugging off when you are not developing and revoke old authorizations."
-  - question: "Do I need developer options to install an APK?"
-    answer: "No. Installing an APK from a file only requires allowing the source app (browser, file manager) to install unknown apps. Developer options and USB debugging are needed when you install from a computer with adb, Android Studio or the Capacitor CLI."
-  - question: "Why is my phone not showing up in adb devices?"
-    answer: "Check that USB debugging is on, the cable supports data, the USB mode is not charge-only, and that you accepted the RSA fingerprint prompt on the phone. On Windows install the OEM USB driver. Then run adb kill-server and adb devices again."
-  - question: "Can I use wireless debugging instead of a cable?"
-    answer: "Yes, on Android 11 and later. Enable Wireless debugging in Developer options, choose Pair device with pairing code, run adb pair with the shown IP, port and code, then adb connect to the IP and port shown on the Wireless debugging screen. Both devices must be on the same Wi-Fi network."
+  - question: "How do I enable developer options on Android 14, 15 or 16?"
+    answer: "Open Settings, go to About phone, and tap Build number seven times. Enter your PIN if asked. Developer options appears under Settings > System > Developer options on Pixel, at the bottom of Settings on Samsung, or under Additional settings on Xiaomi."
+  - question: "How do I enable developer options without Build number?"
+    answer: "On Samsung, tap Build number under Settings > About phone > Software information, not the Android version line. On Xiaomi HyperOS, tap OS version seven times; on older MIUI, tap MIUI version. Use Settings search and type build number if the menu moved on your update."
+  - question: "Why does Android say This action is unavailable when I tap Build number?"
+    answer: "Common causes are a work profile or company-managed device, a guest user profile, parental or admin restrictions, or tapping the wrong field such as Android version instead of Build number. Switch to the personal owner profile, sign out of Guest, or ask IT for an unmanaged test phone."
+  - question: "How do I pair wireless debugging on Android?"
+    answer: "In Developer options, turn on Wireless debugging, open it, and choose Pair device with pairing code. On your computer run adb pair with the IP and port from the pairing dialog, enter the six-digit code, then adb connect using the IP and port on the main Wireless debugging screen. Phone and computer must be on the same Wi-Fi."
+  - question: "How do I turn developer options off?"
+    answer: "Open Developer options and switch off Use developer options at the top. On Samsung, toggle Developer options off. This disables most developer options, but individual settings may remain configured. Revoke USB debugging authorizations before you lend the phone to someone else."
 ---
 
-To enable developer mode on Android, open **Settings > About phone** and tap **Build number** seven times, then enter your PIN. A **Developer options** menu appears, where you can turn on **USB debugging** or **Wireless debugging** so Android Studio, `adb` or `bunx cap run android` can install and debug your app. The exact path to Build number depends on the manufacturer, so the steps for each brand are below.
+**Settings** > **About phone** > tap **Build number** **seven times** > enter your **PIN** (or pattern). You see a message that you are a developer. Open **Developer options** and turn on **USB debugging** or **Wireless debugging** when you need `adb`, Android Studio, or a Capacitor run on a real device. Steps are the same on **Android 14, 15 and 16**; only the path to **Build number** changes by brand (table below).
 
 ## What developer options do (and what they don't)
 
@@ -91,11 +91,19 @@ Xiaomi adds two extra switches you usually need for development: **Install via U
 2. Tap **Build number** seven times.
 3. Go to **Settings > System & updates > Developer options**.
 
-On Huawei devices, also set the USB connection mode to **File transfer** when you plug in, otherwise `adb` may not see the device. If you plan to ship to these phones, read [how to publish a Capacitor app on Huawei AppGallery](/blog/publish-capacitor-app-on-huawei-appgallery/), because many of them have no Google Play services.
+If `adb` does not see a Huawei device over USB, set the USB connection mode to **File transfer** when you plug it in.
 
-### Work profiles and managed devices
+## Build number missing or "This action is unavailable"
 
-If your company manages the phone, the admin can block developer options. You will see "Developer options are not available for this user". Ask IT for a test device rather than trying to work around the policy.
+**Wrong line in About phone.** Tapping **Android version** or **Security patch level** does not enable developer mode. On Samsung use **Software information > Build number**. On Xiaomi use **OS version** or **MIUI version**, not the generic model name at the top.
+
+**Work profile or managed device.** Phones enrolled in work or school policies often block developer options. You may see **Developer options are not available for this user** or **This action is unavailable** when you tap Build number. Open Settings > **Accounts** and confirm you are on the **personal** profile, not Work. Ask IT for a dedicated test device instead of bypassing policy.
+
+**Guest user.** Switch to your main user: **Settings > System > Multiple users** (path varies), sign out of **Guest**, then repeat the seven taps on the owner account.
+
+**Parental controls and restricted profiles.** Family Link or a restricted secondary user can hide Build number or block the unlock gesture. Use an unrestricted owner account.
+
+**Still stuck.** Reboot, install pending system updates, then search Settings for **build number** again. If the device is second-hand and still locked down, the previous owner or carrier may have left enterprise controls in place.
 
 ## Turn on USB debugging
 
@@ -162,7 +170,7 @@ For a faster loop, use live reload so the app loads your dev server over the net
 bunx cap run android -l --external
 ```
 
-The phone needs to reach your machine's IP for this to work. When you want testers outside your network to see changes without reinstalling, look at [Capgo live updates](/live-update/) instead of a dev server.
+The phone needs to reach your machine's IP for this to work.
 
 To read native logs while the app runs:
 
@@ -201,7 +209,7 @@ Then try a different cable and a port directly on the computer instead of a hub.
 1. Open **Developer options**.
 2. Toggle **Use developer options** (or **Developer options** on Samsung) at the top to off.
 
-The menu stays visible on some devices but every switch inside resets to default. To hide the menu completely, go to **Settings > Apps > Settings > Storage** and clear storage for the Settings app. That resets other settings preferences too, so it is rarely worth it.
+The menu may stay visible on some devices, and individual toggles can keep their last value even when developer options is off. To hide the menu completely, go to **Settings > Apps > Settings > Storage** and clear storage for the Settings app. That resets other settings preferences too, so it is rarely worth it.
 
 Before handing a test phone to someone else, also tap **Revoke USB debugging authorizations** so old computers can no longer connect.
 
@@ -211,6 +219,20 @@ Before handing a test phone to someone else, also tap **Revoke USB debugging aut
 - Some banking and payment apps refuse to run while developer options or USB debugging are on. Turn them off on your personal phone when you are done.
 - Never ship a release build with `android:debuggable="true"`. Capacitor release builds are not debuggable by default.
 
-## The iOS equivalent
+## Frequently asked questions
 
-iPhones have their own **Developer Mode** switch that you need before running development or ad hoc builds. See [how to enable Developer Mode on iOS](/blog/enable-ios-developer-mode-ios16/). To get builds onto testers' phones without cables, read [how to distribute iOS and Android apps to testers](/blog/distribute-ios-and-android-apps-to-testers/).
+### How many times do I tap Build number on Android 14 or 15?
+
+Seven times in a row on **Build number** (or **OS version** / **MIUI version** on Xiaomi). After the third or fourth tap, Android usually shows a countdown toast. Enter your device PIN, pattern, or password when prompted, then open **Developer options** from Settings.
+
+### Where is Build number on Samsung?
+
+**Settings > About phone > Software information > Build number**. Tap it seven times, confirm your PIN, then find **Developer options** at the bottom of the main Settings list.
+
+### How do I pair wireless debugging?
+
+Turn on **Wireless debugging** in Developer options, open it, and choose **Pair device with pairing code**. On your computer run `adb pair <ip>:<pairing-port>`, enter the six-digit code, then `adb connect <ip>:<debug-port>` using the address shown on the Wireless debugging main screen (not the pairing port).
+
+### Can I enable developer options on a work phone?
+
+Usually not without IT approval. Managed devices block the Build number gesture or show **This action is unavailable**. Use a personal or dedicated test handset for `adb` and USB debugging.
