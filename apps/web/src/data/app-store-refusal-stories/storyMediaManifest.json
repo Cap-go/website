@@ -121,6 +121,12 @@
   "terminated-before-first-review": null,
   "too-many-rejected-versions": null,
   "twenty-day-reject-loop": null,
+  "twenty-five-days-then-2-1-and-5-1-2": {
+    "src": "/app-store-refusal-horror-story/screenshots/twenty-five-days-then-2-1-and-5-1-2.webp",
+    "alt": "App Store Connect submission table showing iOS App 1.0 rejected under guidelines 2.1 App Completeness and 5.1.2 Data Use and Sharing, app icon redacted",
+    "width": 1200,
+    "height": 285
+  },
   "two-months-after-one-rejection": {
     "src": "/app-store-refusal-horror-story/screenshots/two-months-after-one-rejection.webp",
     "alt": "Blurred post from a developer whose app has been stuck in review for months",
@@ -144,6 +150,12 @@
     "alt": "App Store Connect subscription page with a Delete Image dialog showing an error, subscription name and image blurred",
     "width": 1600,
     "height": 1110
+  },
+  "hidden-staking-feature-2-3-1-a": {
+    "src": "/app-store-refusal-horror-story/screenshots/hidden-staking-feature-2-3-1-a.webp",
+    "alt": "App Review rejection under guideline 2.3.1(a) citing hidden monetary staking and stake forfeiture not described in metadata",
+    "width": 1200,
+    "height": 605
   },
   "gym-owner-app-4-3-three-rejections": {
     "src": "/app-store-refusal-horror-story/screenshots/gym-owner-app-4-3-three-rejections.webp",
