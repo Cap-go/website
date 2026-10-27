@@ -49,6 +49,7 @@ OTA gives you a second delivery lane for eligible application-layer changes. The
 OTA is not a shortcut around review. It is a controlled path for the parts of the app that can change without replacing the native shell. That means the central question is not whether an update is small, but whether it stays inside the boundary that the store and your runtime already allow.
 
 <a id="what-ota-really-means-beyond-the-acronym"></a>
+
 ## Over the air updates: what OTA really means
 
 OTA stands for **over-the-air**. In practice, it means the update reaches a device or app remotely over the internet, instead of through a cable, a manual reinstall, or a new physical package. For mobile apps, that usually means the native shell stays in place while the runtime pulls fresh web-layer assets such as **JavaScript, CSS, text, configuration, and other permitted resources**. [Capgo's explanation of live updates for Capacitor](https://capgo.app/blog/how-live-updates-for-capacitor-work/)

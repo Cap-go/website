@@ -405,8 +405,8 @@ const featureTiles = [
       <div class="shell">
         <div class="section-head">
           <div class="eyebrow eyebrow--blue">{copy('live_update_v2_bento_eyebrow')}</div>
-          <h2 class="h2-section">{copy('live_update_v2_bento_title')}</h2>
-          <p class="lead">{copy('live_update_v2_bento_lead')}</p>
+          <h2 class="h2-section">{copy('live_update_features_title')}</h2>
+          <p class="lead">{copy('live_update_features_subtitle')}</p>
         </div>
 
         <div class="bento">
@@ -477,7 +477,12 @@ const featureTiles = [
 
     <!-- HOW IT WORKS -->
 
-    <ReleaseExplainers background="bg-transparent" />
+    <ReleaseExplainers
+      background="bg-transparent"
+      eyebrow={copy('live_update_v2_how_eyebrow')}
+      title={copy('live_update_how_it_works_title')}
+      subtitle={copy('live_update_how_it_works_subtitle')}
+    />
     <UpdateTypesSection background="bg-transparent" />
     <StorePolicySection background="bg-transparent" />
     <AgentReadySection
