@@ -1,0 +1,48 @@
+<svg width="415" height="843" viewBox="0 0 415 843" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Adapted from @sneas/telephone's iPhone 16 Max frame.
+    Copyright (c) 2024 Dimah Snisarenko — MIT License.
+    https://github.com/sneas/telephone
+  -->
+  <defs>
+    <linearGradient id="titanium" x1="18" y1="28" x2="397" y2="816" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F5EF"/>
+      <stop offset="0.16" stop-color="#A7A39B"/>
+      <stop offset="0.42" stop-color="#F0ECE3"/>
+      <stop offset="0.72" stop-color="#817E76"/>
+      <stop offset="1" stop-color="#E3DED5"/>
+    </linearGradient>
+    <linearGradient id="button" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#6D6A64"/>
+      <stop offset="0.42" stop-color="#F0ECE3"/>
+      <stop offset="1" stop-color="#85817A"/>
+    </linearGradient>
+    <filter id="camera-glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="1.4"/>
+    </filter>
+    <mask id="titanium-ring">
+      <rect x="3" width="409" height="843" rx="62" fill="white"/>
+      <rect x="15" y="12" width="385" height="819" rx="50" fill="black"/>
+    </mask>
+    <mask id="black-bezel">
+      <rect x="7" y="4" width="401" height="835" rx="58" fill="white"/>
+      <rect x="15" y="12" width="385" height="819" rx="50" fill="black"/>
+    </mask>
+  </defs>
+
+  <path d="M415 248C415 246.895 414.105 246 413 246H410V345H413C414.105 345 415 344.105 415 343V248Z" fill="url(#button)"/>
+  <path d="M0 151C0 149.895 0.895 149 2 149H5V180H2C0.895 180 0 179.105 0 178V151Z" fill="url(#button)"/>
+  <path d="M0 211C0 209.895 0.895 209 2 209H5V265H2C0.895 265 0 264.105 0 263V211Z" fill="url(#button)"/>
+  <path d="M0 284C0 282.895 0.895 282 2 282H5V338H2C0.895 338 0 337.105 0 336V284Z" fill="url(#button)"/>
+
+  <rect x="3" width="409" height="843" rx="62" fill="url(#titanium)" mask="url(#titanium-ring)"/>
+  <rect x="3.75" y="0.75" width="407.5" height="841.5" rx="61.25" stroke="#4D4944" stroke-width="1.5"/>
+  <rect x="7.5" y="4.5" width="400" height="834" rx="57.5" stroke="white" stroke-opacity="0.66"/>
+  <rect x="7" y="4" width="401" height="835" rx="58" fill="#030303" mask="url(#black-bezel)"/>
+
+  <rect x="152" y="24" width="110" height="31" rx="15.5" fill="#030303"/>
+  <circle cx="245.62" cy="39.62" r="9.62" fill="#0E0B0F"/>
+  <circle cx="245.62" cy="39.62" r="5.35" fill="#171526"/>
+  <circle cx="245.62" cy="39.62" r="3.2" fill="#10102D"/>
+  <circle cx="244.4" cy="38.25" r="1.1" fill="#5A577A" filter="url(#camera-glow)"/>
+</svg>

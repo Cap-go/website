@@ -4,6 +4,7 @@ import type { CreditStep } from '@/lib/pricingCalculator'
 import type { Database } from '@/services/supabase.types'
 import { PRICING_AGENT_POLICY_MARKDOWN } from '../../../shared/pricingAgentPolicies'
 import type { APIRoute } from 'astro'
+import { web2appPriceValues } from '@/config/web2app'
 
 export const prerender = true
 
@@ -72,6 +73,10 @@ export const GET: APIRoute = async () => {
     '| Plan | Monthly billing | Yearly billing | Monthly active users | Bandwidth | Storage | Native build time |',
     '| --- | --- | --- | --- | --- | --- | --- |',
     ...planRows,
+    '',
+    '## Web2App',
+    '',
+    `Capgo Web2App: ${web2appPriceValues.monthly}/month or ${web2appPriceValues.yearly}/year per organization. Turns your deployed static website into iOS and Android apps that update themselves straight from that website (no CLI, no bundle uploads). Unlimited updates and devices, no MAU limit, no bandwidth billing, automatic rollback if a new version fails to start. Capgo builds the iOS and Android store app from its Capacitor template and submits it for review, from the console or the Capgo MCP server (you bring the Apple and Google developer accounts and store keys). Not included: channels, staged rollouts, update stats and device logs, end-to-end encryption, bundle history, native builds of your own project. Switch to a full plan from app settings at any time. Details: ${baseUrl}/web2app/`,
     '',
     '## Pay-as-you-go usage tiers',
     '',

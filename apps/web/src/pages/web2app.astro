@@ -1,0 +1,658 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import m, { type MessageKey, type MessageValues } from '@/copy/messages'
+import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { WEB2APP_MONTHLY_PRICE, WEB2APP_YEARLY_PRICE, web2appPriceValues } from '@/config/web2app'
+import { createFAQPageLdJson, createLdJsonGraph, createProductLdJson, createServiceLdJson } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const brand = config.brand
+
+function copy(key: MessageKey, values: MessageValues = {}) {
+  return m[key]({ ...web2appPriceValues, ...values }, { locale })
+}
+
+const productName = 'Capgo Web2App'
+const title = brand + ' | ' + copy('website_live_title')
+const description = copy('website_live_description')
+const registerUrl = 'https://console.capgo.app/register/'
+const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
+const docs = (path: string) => getRelativeLocaleUrl(locale, `docs/${path}`)
+
+const links = {
+  updater: { href: docs('plugins/updater/'), label: '@capgo/capacitor-updater' },
+  notify: { href: docs('plugins/updater/notify-app-ready/'), label: copy('website_live_link_notify') },
+  compliance: { href: docs('live-updates/compliance/'), label: copy('website_live_link_compliance') },
+  pricing: { href: pricingUrl, label: copy('website_live_cta_secondary') },
+  mcp: { href: getRelativeLocaleUrl(locale, 'mcp'), label: copy('website_live_link_mcp') },
+}
+
+const ownProjectInstall = `bun add @capgo/capacitor-updater
+bunx cap sync`
+
+const ownProjectConfig = `// capacitor.config.ts
+import type { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app', // must match the app id in Capgo
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      websiteMode: true,
+      // websiteMode (Web2App): needs @capgo/capacitor-updater with website mode.
+      // Updates apply immediately; notifyAppReady() runs once content shows (websiteAutoNotifyReady).
+      // A version that never becomes ready rolls back to the last good one.
+    },
+  },
+}
+
+export default config`
+
+const mcpCode = `> Publish my Web2App app com.example.app to the App Store
+
+capgo_check_website_live            static build, offline files
+capgo_update_website_live_store     name, version, website
+capgo_set_website_live_icon         one PNG, or the website icon
+capgo_set_website_live_ios_keys     App Store Connect API key
+capgo_set_website_live_android_keys Play service account, upload key
+capgo_publish_website_live_app      build, upload, submit for review
+capgo_get_build_status              follow the build`
+
+const steps: { title: MessageKey; body: MessageKey }[] = [
+  { title: 'website_live_how1_title', body: 'website_live_how1_body' },
+  { title: 'website_live_how2_title', body: 'website_live_how2_body' },
+  { title: 'website_live_how4_title', body: 'website_live_how4_body' },
+]
+
+const reassurance: MessageKey[] = ['website_live_reassure1', 'website_live_reassure2', 'website_live_reassure3']
+
+const builtWith: { src: string; alt: string; width: number; height: number }[] = [
+  { src: '/web2app/logos/lovable.svg', alt: 'Lovable', width: 950, height: 173 },
+  { src: '/web2app/logos/bolt.svg', alt: 'Bolt', width: 85, height: 24 },
+  { src: '/web2app/logos/v0.svg', alt: 'v0', width: 24, height: 12 },
+  { src: '/web2app/logos/cursor.svg', alt: 'Cursor', width: 810, height: 205 },
+  { src: '/web2app/logos/replit.svg', alt: 'Replit', width: 1133, height: 321 },
+  { src: '/web2app/logos/base44.svg', alt: 'Base44', width: 111, height: 26 },
+]
+
+const frameworks: { src: string; name: string }[] = [
+  { src: '/icons/vite.svg', name: 'Vite' },
+  { src: '/icons/react.svg', name: 'React' },
+  { src: '/icons/vue.svg', name: 'Vue' },
+]
+
+const oldWay: MessageKey[] = ['website_live_old1', 'website_live_old2', 'website_live_old3']
+const nowWay: MessageKey[] = ['website_live_now1', 'website_live_now2', 'website_live_now3']
+
+const features: { title: MessageKey; body: MessageKey }[] = [
+  { title: 'website_live_feat1_title', body: 'website_live_feat1_body' },
+  { title: 'website_live_feat2_title', body: 'website_live_feat2_body' },
+  { title: 'website_live_feat3_title', body: 'website_live_feat3_body' },
+  { title: 'website_live_feat4_title', body: 'website_live_feat4_body' },
+  { title: 'website_live_feat5_title', body: 'website_live_feat5_body' },
+  { title: 'website_live_feat6_title', body: 'website_live_feat6_body' },
+]
+
+const consoleItems: MessageKey[] = ['website_live_publish_ui_item1', 'website_live_publish_ui_item2', 'website_live_publish_ui_item3', 'website_live_publish_ui_item4']
+
+const limits: MessageKey[] = ['website_live_limits1', 'website_live_limits2', 'website_live_limits3', 'website_live_limits4']
+
+const fitGood: MessageKey[] = ['website_live_fit_good1', 'website_live_fit_good2', 'website_live_fit_good3', 'website_live_fit_good4']
+const fitBad: MessageKey[] = ['website_live_fit_bad1', 'website_live_fit_bad2', 'website_live_fit_bad3', 'website_live_fit_bad4']
+
+const audiences: { title: MessageKey; desc: MessageKey }[] = [
+  { title: 'website_live_for1_title', desc: 'website_live_for1_desc' },
+  { title: 'website_live_for2_title', desc: 'website_live_for2_desc' },
+  { title: 'website_live_for3_title', desc: 'website_live_for3_desc' },
+]
+
+const faqItems = [
+  { question: copy('website_live_faq1_q'), answer: copy('website_live_faq1_a'), href: links.compliance.href, linkLabel: links.compliance.label },
+  { question: copy('website_live_faq2_q'), answer: copy('website_live_faq2_a'), href: links.notify.href, linkLabel: links.notify.label },
+  { question: copy('website_live_faq3_q'), answer: copy('website_live_faq3_a') },
+  { question: copy('website_live_faq4_q'), answer: copy('website_live_faq4_a') },
+  { question: copy('website_live_faq5_q'), answer: copy('website_live_faq5_a') },
+  { question: copy('website_live_faq6_q'), answer: copy('website_live_faq6_a') },
+  { question: copy('website_live_faq8_q'), answer: copy('website_live_faq8_a') },
+  { question: copy('website_live_faq9_q'), answer: copy('website_live_faq9_a'), href: links.mcp.href, linkLabel: links.mcp.label },
+  { question: copy('website_live_faq7_q'), answer: copy('website_live_faq7_a'), href: links.pricing.href, linkLabel: links.pricing.label },
+]
+
+const serviceLdJson = createServiceLdJson(config, {
+  name: title,
+  description,
+  url: Astro.url.href,
+  serviceType: 'Website to iOS and Android app publishing and updates',
+  areaServed: ['Worldwide'],
+})
+
+const productLdJson = createProductLdJson(config, {
+  name: productName,
+  description,
+  url: Astro.url.href,
+  sku: 'capgo-web2app',
+  offers: [
+    {
+      name: 'Web2App monthly',
+      price: String(WEB2APP_MONTHLY_PRICE),
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceSpecifications: [{ price: String(WEB2APP_MONTHLY_PRICE), billingPeriod: 'monthly' }],
+    },
+    {
+      name: 'Web2App yearly',
+      price: String(WEB2APP_YEARLY_PRICE),
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceSpecifications: [{ price: String(WEB2APP_YEARLY_PRICE), billingPeriod: 'yearly' }],
+    },
+  ],
+})
+
+const ldJSON = createLdJsonGraph(config, serviceLdJson, {
+  includeOrganization: true,
+  additionalEntities: [productLdJson, createFAQPageLdJson(config, { url: Astro.url.href, questions: faqItems })],
+})
+
+const content = { title, description, ldJSON }
+
+type Cell = boolean | MessageKey
+const rows: { label: MessageKey; live: Cell; full: Cell }[] = [
+  { label: 'website_live_row_price', live: 'website_live_row_price_live', full: 'website_live_row_price_full' },
+  { label: 'website_live_row_source', live: 'website_live_row_source_live', full: 'website_live_row_source_full' },
+  { label: 'website_live_row_updates', live: 'website_live_row_updates_value', full: 'website_live_row_updates_value' },
+  { label: 'website_live_row_devices', live: 'website_live_row_devices_live', full: 'website_live_row_devices_full' },
+  { label: 'website_live_row_bandwidth', live: 'website_live_row_bandwidth_live', full: 'website_live_row_bandwidth_full' },
+  { label: 'website_live_row_store_app', live: 'website_live_row_store_app_live', full: 'website_live_row_store_app_full' },
+  { label: 'website_live_row_rollback', live: true, full: true },
+  { label: 'website_live_row_channels', live: false, full: true },
+  { label: 'website_live_row_rollouts', live: false, full: true },
+  { label: 'website_live_row_stats', live: false, full: true },
+  { label: 'website_live_row_encryption', live: false, full: true },
+  { label: 'website_live_row_history', live: false, full: true },
+  { label: 'website_live_row_native_builds', live: false, full: true },
+]
+
+const notIncluded: MessageKey[] = rows.filter((row) => row.live === false).map((row) => row.label)
+
+const primaryButton =
+  'inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]'
+const secondaryButton =
+  'inline-flex min-h-11 items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]'
+const eyebrow = 'font-mono text-xs font-semibold tracking-[0.14em] text-[#44BCFF] uppercase'
+---
+
+<Layout content={content}>
+  <div class="product-hero">
+    <section aria-labelledby="web2app-hero-title" class="relative overflow-hidden border-b border-white/10 py-14 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
+          <div class="min-w-0 text-center lg:text-left">
+            <p class="inline-flex min-h-9 items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] py-1 pr-4 pl-1 text-sm text-slate-200">
+              <span class="rounded-full bg-[#44BCFF] px-2.5 py-0.5 text-xs font-semibold text-gray-950">{copy('website_live_badge')}</span>
+              <span>
+                Capgo <strong class="font-semibold text-white">Web2App</strong>
+              </span>
+            </p>
+            <h1 id="web2app-hero-title" class="mx-auto mt-6 max-w-3xl text-4xl leading-[1.05] font-bold tracking-tight text-balance text-white sm:text-5xl lg:mx-0 lg:text-6xl">
+              {copy('website_live_h1')}
+            </h1>
+            <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-pretty text-slate-300 lg:mx-0">{copy('website_live_lead')}</p>
+
+            <a id="web2app-hero-register" href={registerUrl} class:list={[primaryButton, 'mx-auto mt-9 lg:mx-0']}>
+              {copy('website_live_cta_primary')}
+            </a>
+
+            <ul class="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-slate-400 lg:justify-start">
+              {reassurance.map((key) => (
+                <li class="inline-flex items-center gap-2">
+                  <svg class="h-4 w-4 shrink-0 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                  {copy(key)}
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+              <span class="basis-full text-xs font-semibold tracking-wide text-slate-400 uppercase sm:basis-auto">{copy('website_live_stores_label')}</span>
+              <img src="/web2app/store-badges/download-on-the-app-store.svg" alt="App Store" width="120" height="40" class="h-10 w-auto" loading="eager" />
+              <img src="/web2app/store-badges/get-it-on-google-play.svg" alt="Google Play" width="135" height="40" class="h-10 w-auto" loading="eager" />
+            </div>
+          </div>
+
+          <div class="relative mx-auto w-full max-w-[280px] sm:max-w-[320px]">
+            <div aria-hidden="true" class="absolute inset-x-[-30%] top-[10%] bottom-[10%] -z-10 bg-[radial-gradient(closest-side,rgba(68,188,255,0.28),transparent)]"></div>
+            <div role="img" aria-label={copy('website_live_phone_aria_label')} class="relative aspect-[415/843] w-full drop-shadow-[0_30px_45px_rgba(0,0,0,0.55)]">
+              <div aria-hidden="true" class="absolute top-[1.423%] left-[3.614%] h-[97.153%] w-[92.771%] overflow-hidden rounded-[13%/6.11%] bg-[#f7f5f0]">
+                <div class="flex h-full flex-col px-[7%] pt-[17%] pb-[5%]">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1.5">
+                      <span class="h-5 w-5 rounded-md bg-[#ff5a36]"></span>
+                      <span class="h-2 w-12 rounded-full bg-[#17171c]"></span>
+                    </div>
+                    <span class="flex flex-col gap-1">
+                      <span class="h-0.5 w-4 rounded-full bg-[#17171c]"></span>
+                      <span class="h-0.5 w-4 rounded-full bg-[#17171c]"></span>
+                    </span>
+                  </div>
+                  <div class="mt-6 rounded-2xl bg-[#17171c] p-4">
+                    <span class="block h-2 w-16 rounded-full bg-[#ff5a36]"></span>
+                    <span class="mt-3 block h-3.5 w-full rounded-full bg-white"></span>
+                    <span class="mt-2 block h-3.5 w-3/4 rounded-full bg-white"></span>
+                    <span class="mt-4 block h-1.5 w-full rounded-full bg-[#ffffff66]"></span>
+                    <span class="mt-1.5 block h-1.5 w-5/6 rounded-full bg-[#ffffff66]"></span>
+                    <span class="mt-4 inline-block h-6 w-24 rounded-full bg-white"></span>
+                  </div>
+                  <div class="mt-4 grid grid-cols-2 gap-3">
+                    <div class="rounded-xl bg-white p-3 shadow-sm">
+                      <span class="block h-10 rounded-lg bg-[#ffd9cc]"></span>
+                      <span class="mt-2 block h-1.5 w-3/4 rounded-full bg-[#2b2b33]"></span>
+                      <span class="mt-1.5 block h-1.5 w-1/2 rounded-full bg-[#c9c9d1]"></span>
+                    </div>
+                    <div class="rounded-xl bg-white p-3 shadow-sm">
+                      <span class="block h-10 rounded-lg bg-[#cdeffd]"></span>
+                      <span class="mt-2 block h-1.5 w-3/4 rounded-full bg-[#2b2b33]"></span>
+                      <span class="mt-1.5 block h-1.5 w-1/2 rounded-full bg-[#c9c9d1]"></span>
+                    </div>
+                  </div>
+                  <div class="mt-4 space-y-2.5">
+                    {[0, 1, 2].map((row) => (
+                      <div class:list={['flex items-center gap-2.5 rounded-xl bg-white p-2.5 shadow-sm', row === 2 && 'max-sm:hidden']}>
+                        <span class="h-7 w-7 shrink-0 rounded-full bg-[#e3e3e8]"></span>
+                        <span class="flex-1">
+                          <span class="block h-1.5 w-2/3 rounded-full bg-[#2b2b33]"></span>
+                          <span class="mt-1.5 block h-1.5 w-1/3 rounded-full bg-[#c9c9d1]"></span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="mt-auto flex justify-around rounded-2xl bg-white py-2.5 shadow-sm">
+                    <span class="h-4 w-4 rounded-md bg-[#ff5a36]"></span>
+                    <span class="h-4 w-4 rounded-md bg-[#c9c9d1]"></span>
+                    <span class="h-4 w-4 rounded-md bg-[#c9c9d1]"></span>
+                    <span class="h-4 w-4 rounded-md bg-[#c9c9d1]"></span>
+                  </div>
+                </div>
+              </div>
+              <img class="pointer-events-none absolute inset-0 h-full w-full" src="/web2app/devices/iphone-16-max-frame.svg" alt="" width="415" height="843" loading="eager" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="built-with-title" class="border-b border-white/10 bg-gray-950 py-10">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 id="built-with-title" class="text-center font-mono text-xs font-semibold tracking-[0.14em] text-slate-400 uppercase">
+          {copy('website_live_compat_title')}
+        </h2>
+        <ul class="mt-7 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-12">
+          {builtWith.map((logo) => (
+            <li>
+              <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} loading="lazy" class="h-6 w-auto max-w-32 opacity-80 brightness-0 invert sm:h-7" />
+            </li>
+          ))}
+          {frameworks.map((item) => (
+            <li class="inline-flex items-center gap-2 text-lg font-semibold text-slate-200">
+              <img src={item.src} alt="" width="28" height="28" loading="lazy" class="h-6 w-6 sm:h-7 sm:w-7" />
+              {item.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section id="how-it-works" aria-labelledby="how-it-works-title" class="scroll-mt-20 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class={eyebrow}>{copy('website_live_how_title')}</p>
+          <h2 id="how-it-works-title" class="mt-4 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+            {copy('website_live_steps_title')}
+          </h2>
+          <p class="mt-5 text-lg leading-8 text-slate-300">{copy('website_live_how_desc')}</p>
+        </div>
+        <ol class="mt-12 grid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] md:grid-cols-3">
+          {steps.map((step, index) => (
+            <li class="flex min-w-0 flex-col border-white/10 p-6 not-first:border-t sm:p-8 md:not-first:border-t-0 md:not-first:border-l">
+              <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white font-mono text-xs font-semibold text-gray-950" aria-hidden="true">
+                {index + 1}
+              </span>
+              <h3 class="mt-5 text-xl leading-7 font-semibold text-white">{copy(step.title)}</h3>
+              <p class="mt-3 leading-7 text-pretty text-slate-400">{copy(step.body)}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="mt-4 grid items-center gap-4 rounded-2xl border border-[#44BCFF]/30 bg-[#44BCFF]/10 p-6 sm:p-8 md:grid-cols-[auto_1fr_auto]">
+          <span class="flex h-11 w-11 items-center justify-center rounded-full bg-[#44BCFF]/20 text-[#44BCFF]" aria-hidden="true">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+              ></path>
+            </svg>
+          </span>
+          <div>
+            <h3 class="text-xl font-semibold text-white">{copy('website_live_how5_title')}</h3>
+            <p class="mt-2 leading-7 text-slate-300">{copy('website_live_how5_body')}</p>
+          </div>
+          <a
+            href={links.notify.href}
+            class="text-sm font-semibold text-[#44BCFF] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#44BCFF]"
+          >
+            {links.notify.label}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="old-way-title" class="border-y border-white/10 bg-gray-950 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class={eyebrow}>{copy('website_live_oldway_eyebrow')}</p>
+          <h2 id="old-way-title" class="mt-4 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+            {copy('website_live_oldway_title')}
+          </h2>
+        </div>
+        <div class="mt-12 grid gap-5 lg:grid-cols-2">
+          <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8">
+            <h3 class="font-mono text-sm font-semibold tracking-wide text-slate-400 uppercase">{copy('website_live_old_label')}</h3>
+            <ol class="mt-6 space-y-5">
+              {oldWay.map((key, index) => (
+                <li class="flex items-start gap-4">
+                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/15 font-mono text-xs text-slate-400" aria-hidden="true">
+                    {index + 1}
+                  </span>
+                  <span class="leading-7 text-slate-400 line-through decoration-white/30">{copy(key)}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="rounded-2xl border border-[#44BCFF]/40 bg-[#44BCFF]/10 p-6 sm:p-8">
+            <h3 class="font-mono text-sm font-semibold tracking-wide text-[#9fdcff] uppercase">{copy('website_live_now_label')}</h3>
+            <ol class="mt-6 space-y-5">
+              {nowWay.map((key, index) => (
+                <li class="flex items-start gap-4">
+                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#44BCFF] font-mono text-xs font-semibold text-gray-950" aria-hidden="true">
+                    {index + 1}
+                  </span>
+                  <span class="leading-7 text-white">{copy(key)}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="features-title" class="py-16 sm:py-24">
+      <div class="mx-auto grid max-w-7xl items-start gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <div class="lg:sticky lg:top-24">
+          <p class={eyebrow}>{copy('website_live_feat_eyebrow')}</p>
+          <h2 id="features-title" class="mt-4 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+            {copy('website_live_feat_title')}
+          </h2>
+          <p class="mt-5 max-w-md text-lg leading-8 text-slate-300">{copy('website_live_feat_desc')}</p>
+          <a id="web2app-features-register" href={registerUrl} class:list={[primaryButton, 'mt-8']}>
+            {copy('website_live_cta_primary')}
+          </a>
+        </div>
+        <ol class="border-t border-white/10">
+          {features.map((feature, index) => (
+            <li class="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-4 border-b border-white/10 px-2 py-6 transition-colors hover:bg-white/[0.03] sm:grid-cols-[3.5rem_minmax(0,1fr)] sm:px-4">
+              <span class="pt-1 font-mono text-xs tracking-widest text-slate-500" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 class="text-xl font-semibold text-white">{copy(feature.title)}</h3>
+                <p class="mt-2 leading-7 text-slate-400">{copy(feature.body)}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="store-publishing" aria-labelledby="store-publishing-title" class="scroll-mt-20 border-t border-white/10 bg-gray-950 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class={eyebrow}>{copy('website_live_publish_eyebrow')}</p>
+          <h2 id="store-publishing-title" class="mt-4 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+            {copy('website_live_publish_title')}
+          </h2>
+          <p class="mt-5 text-lg leading-8 text-slate-300">{copy('website_live_publish_desc')}</p>
+        </div>
+        <div class="mt-12 grid gap-5 lg:grid-cols-2">
+          <article class="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-white">{copy('website_live_publish_ui_title')}</h3>
+            <p class="mt-3 leading-7 text-slate-300">{copy('website_live_publish_ui_body')}</p>
+            <ul class="mt-5 mb-6 space-y-3">
+              {consoleItems.map((key) => (
+                <li class="flex items-start gap-3 leading-7 text-slate-200">
+                  <svg class="mt-1.5 h-4 w-4 shrink-0 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                  <span>{copy(key)}</span>
+                </li>
+              ))}
+            </ul>
+            <a id="web2app-publish-register" href={registerUrl} class:list={[primaryButton, 'mt-auto self-start']}>
+              {copy('website_live_cta_primary')}
+            </a>
+          </article>
+          <article class="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-white">{copy('website_live_publish_mcp_title')}</h3>
+            <p class="mt-3 leading-7 text-slate-300">{copy('website_live_publish_mcp_body')}</p>
+            <pre class="mt-5 overflow-x-auto rounded-lg border border-white/10 bg-black/40 p-4 text-left text-[13px] leading-6 text-gray-200"><code>{mcpCode}</code></pre>
+            <a
+              href={links.mcp.href}
+              class="mt-5 text-sm font-semibold text-[#44BCFF] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#44BCFF]"
+            >
+              {links.mcp.label}
+            </a>
+          </article>
+        </div>
+        <div class="mt-5 grid gap-5 lg:grid-cols-2">
+          <article class="min-w-0 rounded-2xl border border-amber-400/30 bg-amber-500/10 p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-amber-100">{copy('website_live_limits_title')}</h3>
+            <p class="mt-3 leading-7 text-slate-300">{copy('website_live_limits_desc')}</p>
+            <ul class="mt-4 space-y-3">
+              {limits.map((key) => (
+                <li class="flex items-start gap-3 leading-7 text-slate-200">
+                  <span aria-hidden="true" class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-300"></span>
+                  <span>{copy(key)}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+          <article class="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-white">{copy('website_live_publish_own_title')}</h3>
+            <p class="mt-3 leading-7 text-slate-300">{copy('website_live_publish_own_body')}</p>
+            <pre class="mt-5 overflow-x-auto rounded-lg border border-white/10 bg-black/40 p-4 text-left text-[13px] leading-6 text-gray-200"><code>{ownProjectInstall}</code></pre>
+            <pre class="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-black/40 p-4 text-left text-[13px] leading-6 text-gray-200"><code>{ownProjectConfig}</code></pre>
+            <a
+              href={links.updater.href}
+              class="mt-5 text-sm font-semibold text-[#44BCFF] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#44BCFF]"
+            >
+              {links.updater.label}
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" aria-labelledby="fit-title" class="scroll-mt-20 border-t border-white/10 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class={eyebrow}>{copy('website_live_for_eyebrow')}</p>
+          <h2 id="fit-title" class="mt-4 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+            {copy('website_live_for_title')}
+          </h2>
+        </div>
+        <div class="mt-12 grid gap-5 lg:grid-cols-3">
+          {audiences.map((item) => (
+            <article class="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <h3 class="text-lg font-bold text-white">{copy(item.title)}</h3>
+              <p class="mt-3 leading-7 text-slate-400">{copy(item.desc)}</p>
+            </article>
+          ))}
+        </div>
+        <div class="mt-14">
+          <h3 class="text-2xl font-bold text-white">{copy('website_live_requirement_title')}</h3>
+          <p class="mt-3 max-w-3xl leading-7 text-slate-300">{copy('website_live_requirement_body')}</p>
+          <div class="mt-6 grid gap-5 md:grid-cols-2">
+            <div class="rounded-2xl border border-emerald-400/25 bg-emerald-500/10 p-6">
+              <h4 class="text-lg font-bold text-emerald-100">{copy('website_live_fit_good_title')}</h4>
+              <ul class="mt-4 space-y-3">
+                {fitGood.map((key) => (
+                  <li class="flex items-start gap-3 leading-7 text-slate-200">
+                    <svg class="mt-1.5 h-4 w-4 shrink-0 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                    <span>{copy(key)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="rounded-2xl border border-rose-400/25 bg-rose-500/10 p-6">
+              <h4 class="text-lg font-bold text-rose-100">{copy('website_live_fit_bad_title')}</h4>
+              <ul class="mt-4 space-y-3">
+                {fitBad.map((key) => (
+                  <li class="flex items-start gap-3 leading-7 text-slate-200">
+                    <svg class="mt-1.5 h-4 w-4 shrink-0 text-rose-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                    <span>{copy(key)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compare" aria-labelledby="compare-title" class="scroll-mt-20 border-y border-white/10 bg-gray-950 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class={eyebrow}>{copy('website_live_compare_eyebrow')}</p>
+          <h2 id="compare-title" class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
+            {copy('website_live_compare_title')}
+          </h2>
+          <p class="mt-5 text-lg leading-8 text-slate-300">{copy('website_live_compare_desc')}</p>
+        </div>
+        <div class="mt-12 overflow-x-auto rounded-2xl border border-white/10">
+          <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+            <thead class="bg-white/[0.04]">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold text-slate-300">
+                  {copy('website_live_table_feature')}
+                </th>
+                <th scope="col" class="px-4 py-3 font-semibold text-cyan-100">
+                  Web2App
+                </th>
+                <th scope="col" class="px-4 py-3 font-semibold text-slate-300">
+                  {copy('website_live_compare_full')}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr class="border-t border-white/10">
+                  <th scope="row" class="px-4 py-3 font-medium text-white">
+                    {copy(row.label)}
+                  </th>
+                  {[row.live, row.full].map((cell) => (
+                    <td class="px-4 py-3 text-slate-300">
+                      {typeof cell === 'string' ? (
+                        copy(cell)
+                      ) : cell ? (
+                        <span class="inline-flex items-center gap-2 text-emerald-300">
+                          <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                          </svg>
+                          {copy('website_live_table_included')}
+                        </span>
+                      ) : (
+                        <span class="inline-flex items-center gap-2 text-slate-400">
+                          <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                          </svg>
+                          {copy('website_live_table_not_included')}
+                        </span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-12 grid gap-10 lg:grid-cols-2">
+          <div>
+            <h2 id="not-included-title" class="text-2xl font-bold text-white sm:text-3xl">
+              {copy('website_live_not_title')}
+            </h2>
+            <p class="mt-4 leading-7 text-slate-300">{copy('website_live_not_desc')}</p>
+            <ul class="mt-6 space-y-3">
+              {notIncluded.map((key) => (
+                <li class="flex items-start gap-3 text-slate-300">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+                  <span>{copy(key)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="self-start rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-white">{copy('website_live_upgrade_title')}</h2>
+            <p class="mt-4 leading-7 text-slate-300">{copy('website_live_upgrade_body')}</p>
+            <a href={pricingUrl} class:list={[secondaryButton, 'mt-6']}>
+              {copy('website_live_cta_secondary')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SolutionFaq
+      eyebrow={copy('solutions_faq_eyebrow')}
+      title={copy('website_live_faq_title')}
+      description={copy('website_live_faq_desc')}
+      items={faqItems}
+      class="border-b border-white/10"
+    />
+
+    <section id="pricing" aria-labelledby="web2app-cta-title" class="bg-gray-950 py-16 sm:py-24">
+      <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1 text-sm text-slate-200">
+          Capgo <strong class="font-semibold text-white">Web2App</strong>
+        </p>
+        <h2 id="web2app-cta-title" class="mt-6 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+          {copy('website_live_cta_title')}
+        </h2>
+        <p class="mt-8 flex items-end justify-center gap-1">
+          <span class="text-5xl font-semibold tracking-tight text-white">{web2appPriceValues.monthly}</span>
+          <span class="pb-1 text-sm font-medium text-slate-400">{copy('website_live_price_per_month')}</span>
+        </p>
+        <p class="mt-2 text-sm text-slate-400">{copy('website_live_price_note')}</p>
+        <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-300">{copy('website_live_cta_subtitle')}</p>
+        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <a id="web2app-final-register" href={registerUrl} class={primaryButton}>
+            {copy('website_live_cta_primary')}
+          </a>
+          <a href={pricingUrl} class={secondaryButton}>
+            {copy('website_live_cta_secondary')}
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
