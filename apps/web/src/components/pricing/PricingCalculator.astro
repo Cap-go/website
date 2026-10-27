@@ -17,6 +17,7 @@ const calculatorPlans = plans
   .filter((plan) => plan.name !== 'Free')
   .map((plan) => ({
     id: plan.id,
+    stripeId: plan.stripe_id,
     name: plan.name,
     mau: plan.mau || 0,
     bandwidth: plan.bandwidth || 0,
@@ -164,7 +165,7 @@ const usageRows = [
                 <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-dashed border-white/15 px-3 py-2 transition-colors hover:border-white/25 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
                   <input type="radio" name="pricing-calculator-plan" value="credits" data-pricing-calculator-plan class="sr-only" />
                   <span class="text-sm font-semibold text-white">{m.pricing_calculator_credits_only({}, { locale })}</span>
-                  <span class="text-xs text-gray-400">$0{perMonth}</span>
+                  <span class="text-xs text-gray-400"><span data-price-amount="0">$0</span>{perMonth}</span>
                 </label>
               </div>
             </fieldset>

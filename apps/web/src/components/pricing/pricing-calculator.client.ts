@@ -1,7 +1,8 @@
+import { formatDisplay, onCurrencyChange, planAmount, usdToDisplay } from '@/scripts/currency'
 import { deriveUsage, estimateCost, getPlanMonthlyPrice, recommendPlan, type CreditStep, type PricingPlan } from '@/lib/pricingCalculator'
 
 export type PricingCalculatorData = {
-  plans: PricingPlan[]
+  plans: (PricingPlan & { stripeId?: string })[]
   steps: CreditStep[]
 }
 
@@ -26,9 +27,9 @@ function formatGiB(num: number) {
   return `${num.toFixed(2)} GiB`
 }
 
-function formatUsd(value: number) {
-  const digits = value > 0 && value < 10 && !Number.isInteger(value) ? 2 : 0
-  return `$${value.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits })}`
+// Amounts are in the display currency, see localized() below.
+function formatAmount(value: number) {
+  return formatDisplay(value, 'cents')
 }
 
 function nearestStopIndex(stops: number[], value: number) {
@@ -39,7 +40,21 @@ function nearestStopIndex(stops: number[], value: number) {
   return best
 }
 
-export function setupPricingCalculator({ plans, steps }: PricingCalculatorData) {
+// Plans at their Stripe price for the visitor's currency and regional tier (as on the plan cards);
+// credit rates are converted at the rate Stripe sells the plans at.
+function localized({ plans, steps }: PricingCalculatorData) {
+  return {
+    plans: plans.map((plan) => ({
+      ...plan,
+      price_m: (plan.stripeId ? planAmount(plan.stripeId, 'month') : null) ?? usdToDisplay(plan.price_m),
+      price_y: (plan.stripeId ? planAmount(plan.stripeId, 'year') : null) ?? usdToDisplay(plan.price_y),
+    })),
+    steps: steps.map((step) => ({ ...step, price_per_unit: usdToDisplay(step.price_per_unit) })),
+  }
+}
+
+export function setupPricingCalculator(data: PricingCalculatorData) {
+  let { plans, steps } = localized(data)
   const modalElement = document.getElementById('pricing-calculator-modal')
   if (!(modalElement instanceof HTMLDialogElement)) return
   const modal = modalElement
@@ -106,14 +121,14 @@ export function setupPricingCalculator({ plans, steps }: PricingCalculatorData) 
     const estimate = estimateCost(steps, usage, plan, yearly)
 
     for (const candidate of plans) {
-      setText(`[data-pricing-calculator-plan-price="${candidate.id}"]`, formatUsd(Math.round(getPlanMonthlyPrice(candidate, yearly))))
+      setText(`[data-pricing-calculator-plan-price="${candidate.id}"]`, formatAmount(Math.round(getPlanMonthlyPrice(candidate, yearly))))
       all<HTMLElement>(`[data-pricing-calculator-best-fit="${candidate.id}"]`).forEach((badge) => (badge.hidden = candidate.id !== recommended?.id))
     }
 
-    setText('[data-pricing-calculator-total]', steps.length || !plan ? formatUsd(estimate.totalMonthly) : '—')
+    setText('[data-pricing-calculator-total]', steps.length || !plan ? formatAmount(estimate.totalMonthly) : '—')
     setText('[data-pricing-calculator-plan-name]', plan?.name ?? '')
-    setText('[data-pricing-calculator-plan-cost]', formatUsd(estimate.planMonthly))
-    setText('[data-pricing-calculator-credits]', steps.length ? formatUsd(estimate.creditsMonthly) : '—')
+    setText('[data-pricing-calculator-plan-cost]', formatAmount(estimate.planMonthly))
+    setText('[data-pricing-calculator-credits]', steps.length ? formatAmount(estimate.creditsMonthly) : '—')
     all<HTMLElement>('[data-pricing-calculator-plan-row]').forEach((row) => (row.hidden = !plan))
     all<HTMLElement>('[data-pricing-calculator-yearly-note]').forEach((note) => (note.hidden = !(plan && yearly)))
     all<HTMLElement>('[data-pricing-calculator-credits-note]').forEach((note) => (note.hidden = !!plan))
@@ -200,6 +215,10 @@ export function setupPricingCalculator({ plans, steps }: PricingCalculatorData) 
     }),
   )
   all<HTMLInputElement>('[data-pricing-calculator-billing]').forEach((input) => input.addEventListener('change', update))
+  onCurrencyChange(() => {
+    ;({ plans, steps } = localized(data))
+    update()
+  })
 
   update()
 

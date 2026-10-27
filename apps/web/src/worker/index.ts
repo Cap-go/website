@@ -16,6 +16,7 @@ import { withAbTest } from './abtest'
 import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { workerCache } from './cached-json'
+import { CURRENCY_PATH, handleCurrency } from './currency'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
 import { handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
@@ -234,6 +235,10 @@ const routeDefinitions: Record<string, RouteDefinition> = {
       if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
+  },
+  [CURRENCY_PATH]: {
+    methods: ['GET', 'HEAD'],
+    handle: async (request) => handleCurrency(request),
   },
   [GITHUB_RELEASES_PATH]: {
     methods: ['GET', 'HEAD'],
