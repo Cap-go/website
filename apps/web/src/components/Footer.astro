@@ -4,8 +4,12 @@ import m from '@/copy/messages'
 import { getLocalizedPath } from '@/services/locale-path'
 import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from '@/services/links'
+import { useRuntimeConfig } from '@/config/app'
+import { PLAN_PRICES_PATH } from '@/lib/currency'
 
 const year = new Date().getFullYear()
+// Read by the pricing page, which fills and shows the currency picker (src/scripts/currency-selector.ts).
+const planPricesUrl = `${useRuntimeConfig().public.baseApiUrl}${PLAN_PRICES_PATH}`
 
 // Map locale codes to flag emojis
 const localeFlags: Record<string, string> = {
@@ -240,6 +244,40 @@ const columns: { title: string; links: FooterLink[] }[] = [
             ))}
           </div>
         </div>
+        <!-- Shown only on pages with prices, once the backend lists more than one currency. -->
+        <div class="relative" id="currency" data-currency-selector data-plan-prices-url={planPricesUrl} hidden>
+          <button
+            type="button"
+            id="currency-dropdown-button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="currency-dropdown"
+            data-currency-label={m.pricing_currency_label({}, { locale: Astro.locals.locale })}
+            class="flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 font-mono text-xs text-zinc-300 transition-colors hover:border-white/30 hover:text-white"
+          >
+            <span data-currency-current>USD</span>
+            <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path
+                fill-rule="evenodd"
+                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <div
+            id="currency-dropdown"
+            data-currency-options
+            class="absolute right-0 bottom-full z-50 mb-2 hidden max-h-80 w-64 overflow-y-auto rounded-xl border border-white/10 bg-[#1c1d21] py-1 shadow-2xl shadow-black/50"
+          >
+            <button
+              type="button"
+              data-currency-option="auto"
+              class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-zinc-300 hover:bg-white/5 hover:text-white aria-[current=true]:text-white"
+            >
+              {m.pricing_currency_auto({}, { locale: Astro.locals.locale })}
+            </button>
+          </div>
+        </div>
         <a href="/llms.txt" class="font-mono text-xs text-zinc-400 transition-colors hover:text-white">
           llms.txt
         </a>
@@ -258,9 +296,12 @@ const columns: { title: string; links: FooterLink[] }[] = [
 </footer>
 
 <script>
-  const button = document.getElementById('language-dropdown-button')
-  const dropdown = document.getElementById('language-dropdown')
-  if (button && dropdown) {
+  // Language and currency pickers share the same dropdown behavior.
+  for (const [button, dropdown] of [
+    [document.getElementById('language-dropdown-button'), document.getElementById('language-dropdown')],
+    [document.getElementById('currency-dropdown-button'), document.getElementById('currency-dropdown')],
+  ]) {
+    if (!button || !dropdown) continue
     button.addEventListener('click', () => {
       const open = dropdown.classList.toggle('hidden') === false
       button.setAttribute('aria-expanded', String(open))

@@ -1404,7 +1404,6 @@ const messages = {
   pricing_currency_auto: 'Based on your location',
   pricing_currency_change: 'Change currency',
   pricing_currency_estimate_note: 'Plan prices are what you pay in this currency. Usage and credit amounts are estimates at the same rate.',
-  pricing_currency_hint: 'Plan prices come straight from our Stripe prices in each currency. Usage and credit amounts are estimates.',
   pricing_currency_label: 'Display prices in',
   pricing_regional_discount: '{percent}% regional discount',
   pricing_regional_discount_note: 'Priced for your country. Checkout needs a card and billing address from there.',
