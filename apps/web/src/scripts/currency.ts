@@ -91,6 +91,16 @@ export function hasRegionalDiscount(planId: string): boolean {
   return state.tier !== FULL_PRICE_TIER && !!snapshot.plans[planId]?.tiers?.[state.tier]
 }
 
+/** Converts a USD amount (usage, credits) to the display currency, at the rate Stripe sells the plans at. */
+export function usdToDisplay(amountUsd: number): number {
+  return amountUsd * (usdRatio(state.currency) ?? 1)
+}
+
+/** Formats an amount already in the display currency. */
+export function formatDisplay(amount: number, format: PriceFormat = 'whole'): string {
+  return formatPrice(amount, usdRatio(state.currency) === null ? BASE_CURRENCY : state.currency, format, pageLocale())
+}
+
 /** Formats a USD amount (usage, credits) in the display currency. */
 export function formatMoney(amountUsd: number, format: PriceFormat = 'whole'): string {
   const ratio = usdRatio(state.currency)

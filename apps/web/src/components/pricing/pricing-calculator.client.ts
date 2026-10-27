@@ -1,8 +1,8 @@
-import { formatMoney, onCurrencyChange } from '@/scripts/currency'
+import { formatDisplay, onCurrencyChange, planAmount, usdToDisplay } from '@/scripts/currency'
 import { deriveUsage, estimateCost, getPlanMonthlyPrice, recommendPlan, type CreditStep, type PricingPlan } from '@/lib/pricingCalculator'
 
 export type PricingCalculatorData = {
-  plans: PricingPlan[]
+  plans: (PricingPlan & { stripeId?: string })[]
   steps: CreditStep[]
 }
 
@@ -27,8 +27,9 @@ function formatGiB(num: number) {
   return `${num.toFixed(2)} GiB`
 }
 
+// Amounts are in the display currency, see localized() below.
 function formatAmount(value: number) {
-  return formatMoney(value, 'cents')
+  return formatDisplay(value, 'cents')
 }
 
 function nearestStopIndex(stops: number[], value: number) {
@@ -39,7 +40,21 @@ function nearestStopIndex(stops: number[], value: number) {
   return best
 }
 
-export function setupPricingCalculator({ plans, steps }: PricingCalculatorData) {
+// Plans at their Stripe price for the visitor's currency and regional tier (as on the plan cards);
+// credit rates are converted at the rate Stripe sells the plans at.
+function localized({ plans, steps }: PricingCalculatorData) {
+  return {
+    plans: plans.map((plan) => ({
+      ...plan,
+      price_m: (plan.stripeId ? planAmount(plan.stripeId, 'month') : null) ?? usdToDisplay(plan.price_m),
+      price_y: (plan.stripeId ? planAmount(plan.stripeId, 'year') : null) ?? usdToDisplay(plan.price_y),
+    })),
+    steps: steps.map((step) => ({ ...step, price_per_unit: usdToDisplay(step.price_per_unit) })),
+  }
+}
+
+export function setupPricingCalculator(data: PricingCalculatorData) {
+  let { plans, steps } = localized(data)
   const modalElement = document.getElementById('pricing-calculator-modal')
   if (!(modalElement instanceof HTMLDialogElement)) return
   const modal = modalElement
@@ -200,7 +215,10 @@ export function setupPricingCalculator({ plans, steps }: PricingCalculatorData) 
     }),
   )
   all<HTMLInputElement>('[data-pricing-calculator-billing]').forEach((input) => input.addEventListener('change', update))
-  onCurrencyChange(update)
+  onCurrencyChange(() => {
+    ;({ plans, steps } = localized(data))
+    update()
+  })
 
   update()
 

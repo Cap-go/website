@@ -17,6 +17,7 @@ const calculatorPlans = plans
   .filter((plan) => plan.name !== 'Free')
   .map((plan) => ({
     id: plan.id,
+    stripeId: plan.stripe_id,
     name: plan.name,
     mau: plan.mau || 0,
     bandwidth: plan.bandwidth || 0,
