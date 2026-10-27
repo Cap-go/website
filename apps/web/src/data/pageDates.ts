@@ -7,7 +7,7 @@ export interface PageDates {
 }
 
 export const pageDates = {
-  'alternatives/capawesome': { publishedAt: '2025-09-24', updatedAt: '2026-10-08' },
+  'alternatives/capawesome': { publishedAt: '2025-09-24', updatedAt: '2026-10-26' },
   'alternatives/codepush': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
   'alternatives/expo': { publishedAt: '2026-06-18', updatedAt: '2026-09-30' },
   'alternatives/ionic-appflow': { publishedAt: '2025-09-24', updatedAt: '2026-09-30' },

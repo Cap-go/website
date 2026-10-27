@@ -606,8 +606,7 @@ const messages = {
   brand: 'Brand',
   brand_asset_banner_navy_desc: 'Primary horizontal lockup: white icon and wordmark on Capgo banner navy. Use for social headers, partner pages, and dark backgrounds.',
   brand_asset_banner_navy_title: 'Logo on navy banner',
-  brand_asset_youtube_banner_desc:
-    '2560×1440 YouTube channel art. The white lockup sits inside the area YouTube shows on every device, on Capgo banner navy.',
+  brand_asset_youtube_banner_desc: '2560×1440 YouTube channel art. The white lockup sits inside the area YouTube shows on every device, on Capgo banner navy.',
   brand_asset_youtube_banner_title: 'YouTube channel banner',
   brand_asset_dark_desc: 'Navy lockup for light backgrounds, press PDFs, and documents. Keep clear space around the mark.',
   brand_asset_dark_title: 'Logo for light backgrounds',
@@ -855,8 +854,20 @@ const messages = {
   compare_capawesome_company: 'Capawesome (Genz IT Solutions GmbH), based in Germany. Live updates launched in 2024.',
   compare_capawesome_eyebrow: 'Capawesome Cloud alternative',
   compare_capawesome_frameworks: 'Capacitor, Ionic, and Cordova.',
+  compare_capawesome_faq_a1:
+    'Capawesome is a mobile DevOps platform from Genz IT Solutions in Germany: 100+ open source Capacitor SDKs, a CLI, and Capawesome Cloud for OTA live updates, cloud native builds, and app store publishing.',
+  compare_capawesome_faq_a2:
+    'Live Updates plans start at $9/month for 1K MAU ($29 at 10K, $79 at 50K, $249 at 250K). Platform plans with native builds start at $19/month ($49, $149, $499). Yearly billing includes two months free. Paid plans include a 14-day free trial.',
+  compare_capawesome_faq_a3:
+    'Capawesome Cloud plans are paid after the 14-day trial, except for qualifying open source projects accepted into its free program. Open source Capacitor SDKs and the CLI are free to use.',
+  compare_capawesome_faq_a4:
+    'Both deliver Capacitor live updates with channels, signing, and rollback. Capawesome Cloud sells separate Live Updates, Platform, and SDK plans. Capgo bundles live updates, native builds, Observe, and push on one plan, with device-reported release health and rollouts that auto-pause when failure rates spike.',
+  compare_capawesome_faq_q1: 'What is Capawesome?',
+  compare_capawesome_faq_q2: 'How much does Capawesome cost?',
+  compare_capawesome_faq_q3: 'Is Capawesome free?',
+  compare_capawesome_faq_q4: 'How does Capawesome Cloud compare to Capgo?',
   compare_capawesome_lead:
-    'Both ship live updates and native builds for Capacitor. The difference is what happens after you ship: Capgo shows each release landing on real devices, explains why updates fail, checks native compatibility before upload, and pauses a bad rollout on its own. Built for teams and AI agents that ship every week.',
+    'Capawesome is a Capacitor mobile platform with 100+ open source SDKs and Capawesome Cloud for OTA live updates, cloud native builds, and app store publishing. Capgo is an independent Capacitor live update service with native build minutes, device-level release observability, and push notifications on one MAU-based plan. Both ship live updates for Capacitor; Capgo shows each release on real devices, explains why updates fail, checks native compatibility before upload, and pauses bad rollouts on its own. Built for teams and AI agents that ship every week.',
   compare_capawesome_native_builds: 'Cloud iOS and Android builds on Platform plans, from 200 to 5,000 build minutes per month, plus store publishing.',
   compare_capawesome_obs_eyebrow: 'After you ship',
   compare_capawesome_obs_title: 'See what every release does on real devices',
@@ -1204,14 +1215,14 @@ const messages = {
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
   capwesome_hero_title: 'Capawesome alternative for Capacitor live updates',
   capwesome_meta_description:
-    'Capawesome alternative with Capgo: signed OTA bundles, channels, rollback, device logs, and optional end-to-end encryption Capgo cannot read when enabled.',
+    'Compare Capawesome Cloud and Capgo for Capacitor live updates, builds, and pricing. Optional E2E encryption Capgo cannot read when enabled.',
   capwesome_migration_intro: "If you're on Capawesome and considering Capgo, migration is straightforward. The Capacitor update plugin architecture is similar.",
   capwesome_migration_step1: 'Swap the plugin package',
   capwesome_migration_step2: 'Update config (minor differences)',
   capwesome_migration_step3: 'Update your upload process',
   capwesome_migration_title: 'Thinking of switching?',
   capwesome_nav_label: 'Capawesome vs Capgo',
-  capwesome_title: 'Capawesome Alternative | Capgo for Capacitor OTA',
+  capwesome_title: 'Capawesome vs Capgo: Cloud pricing and live updates',
   carbon_removal: '1% of our revenue goes to carbon removal.',
   centralized_management: 'Centralized Management',
   channel_management: 'Channel management',
