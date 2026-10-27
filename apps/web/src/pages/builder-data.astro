@@ -12,6 +12,10 @@ import { formatTrendTooltip, selectTrendRows, TREND_RANGE_OPTIONS } from '@/lib/
 
 // The toolchain shares are daily only: no hourly 1D window.
 const SHARE_RANGE_OPTIONS = TREND_RANGE_OPTIONS.filter((option) => option.key !== '1d')
+const SHARE_CHARTS = [
+  { key: 'xcode', title: 'Xcode version per day' },
+  { key: 'dependency', title: 'CocoaPods vs SPM per day' },
+] as const
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
@@ -348,72 +352,42 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         </div>
       </div>
       <div class="data-shell data-toolchain-trends">
-        <div class="data-trend data-share-trend" data-share-trend="xcode">
-          <div class="data-trend-head">
-            <p id="xcode-trend-title">Xcode version per day</p>
-            <div class="data-periods" role="group" aria-label="Xcode version per day window">
-              {
-                SHARE_RANGE_OPTIONS.map((option) => (
-                  <button type="button" data-share-range={option.key} aria-pressed={option.key === '1m' ? 'true' : 'false'}>
-                    {option.label}
-                  </button>
-                ))
-              }
+        {
+          SHARE_CHARTS.map((chart) => (
+            <div class="data-trend data-share-trend" data-share-trend={chart.key}>
+              <div class="data-trend-head">
+                <p id={`${chart.key}-trend-title`}>{chart.title}</p>
+                <div class="data-periods" role="group" aria-label={`${chart.title} window`}>
+                  {SHARE_RANGE_OPTIONS.map((option) => (
+                    <button type="button" data-share-range={option.key} aria-pressed={option.key === '1m' ? 'true' : 'false'}>
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <p class="data-sr-only" data-share-status aria-live="polite"></p>
+              <p class="data-empty" data-share-empty>{pending ? 'Loading…' : 'No data in this window.'}</p>
+              <div class="data-trend-plot" data-share-plot translate="no" hidden>
+                <svg class="data-trend-svg" viewBox="0 0 800 260" role="img" aria-labelledby={`${chart.key}-trend-title`}>
+                  <line x1="44" y1="16" x2="784" y2="16" />
+                  <line x1="44" y1="124" x2="784" y2="124" />
+                  <line x1="44" y1="232" x2="784" y2="232" />
+                  <text x="0" y="20">100%</text>
+                  <text x="0" y="128">50%</text>
+                  <text x="0" y="236">0%</text>
+                  <g data-share-lines />
+                  <text data-share-start x="44" y="256" />
+                  <text data-share-end x="784" y="256" text-anchor="end" />
+                </svg>
+                <div class="data-trend-overlay" data-share-overlay tabindex="0" role="group" aria-label={`${chart.title} values. Move pointer across the chart or use arrow keys.`}>
+                  <span class="data-trend-guide" data-share-guide hidden aria-hidden="true" />
+                  <span class="data-trend-tooltip" data-share-tooltip hidden />
+                </div>
+              </div>
+              <div class="data-legend" data-share-legend translate="no" />
             </div>
-          </div>
-          <p class="data-empty" data-share-empty>{pending ? 'Loading…' : 'No data in this window.'}</p>
-          <div class="data-trend-plot" data-share-plot translate="no" hidden>
-            <svg class="data-trend-svg" viewBox="0 0 800 260" role="img" aria-labelledby="xcode-trend-title">
-              <line x1="44" y1="16" x2="784" y2="16"></line>
-              <line x1="44" y1="124" x2="784" y2="124"></line>
-              <line x1="44" y1="232" x2="784" y2="232"></line>
-              <text x="0" y="20">100%</text>
-              <text x="0" y="128">50%</text>
-              <text x="0" y="236">0%</text>
-              <g data-share-lines></g>
-              <text data-share-start x="44" y="256"></text>
-              <text data-share-end x="784" y="256" text-anchor="end"></text>
-            </svg>
-            <div class="data-trend-overlay" data-share-overlay tabindex="0" role="group" aria-label="Xcode version per day values. Move pointer across the chart or use arrow keys.">
-              <span class="data-trend-guide" data-share-guide hidden aria-hidden="true"></span>
-              <span class="data-trend-tooltip" data-share-tooltip hidden></span>
-            </div>
-          </div>
-          <div class="data-legend" data-share-legend translate="no"></div>
-        </div>
-        <div class="data-trend data-share-trend" data-share-trend="dependency">
-          <div class="data-trend-head">
-            <p id="dependency-trend-title">CocoaPods vs SPM per day</p>
-            <div class="data-periods" role="group" aria-label="CocoaPods vs SPM per day window">
-              {
-                SHARE_RANGE_OPTIONS.map((option) => (
-                  <button type="button" data-share-range={option.key} aria-pressed={option.key === '1m' ? 'true' : 'false'}>
-                    {option.label}
-                  </button>
-                ))
-              }
-            </div>
-          </div>
-          <p class="data-empty" data-share-empty>{pending ? 'Loading…' : 'No data in this window.'}</p>
-          <div class="data-trend-plot" data-share-plot translate="no" hidden>
-            <svg class="data-trend-svg" viewBox="0 0 800 260" role="img" aria-labelledby="dependency-trend-title">
-              <line x1="44" y1="16" x2="784" y2="16"></line>
-              <line x1="44" y1="124" x2="784" y2="124"></line>
-              <line x1="44" y1="232" x2="784" y2="232"></line>
-              <text x="0" y="20">100%</text>
-              <text x="0" y="128">50%</text>
-              <text x="0" y="236">0%</text>
-              <g data-share-lines></g>
-              <text data-share-start x="44" y="256"></text>
-              <text data-share-end x="784" y="256" text-anchor="end"></text>
-            </svg>
-            <div class="data-trend-overlay" data-share-overlay tabindex="0" role="group" aria-label="CocoaPods vs SPM per day values. Move pointer across the chart or use arrow keys.">
-              <span class="data-trend-guide" data-share-guide hidden aria-hidden="true"></span>
-              <span class="data-trend-tooltip" data-share-tooltip hidden></span>
-            </div>
-          </div>
-          <div class="data-legend" data-share-legend translate="no"></div>
-        </div>
+          ))
+        }
       </div>
     </section>
     <ProductTestimonials
@@ -490,14 +464,17 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const dependencyShares = page?.querySelector<HTMLOListElement>('[data-dependency-shares]')
     function shareChart(key: 'xcode' | 'dependency') {
       const root = page?.querySelector<HTMLElement>(`[data-share-trend="${key}"]`)
+      const overlay = root?.querySelector<HTMLElement>('[data-share-overlay]')
       return {
         root,
+        status: root?.querySelector<HTMLElement>('[data-share-status]'),
+        defaultLabel: overlay?.getAttribute('aria-label') ?? '',
         plot: root?.querySelector<HTMLElement>('[data-share-plot]'),
         empty: root?.querySelector<HTMLElement>('[data-share-empty]'),
         lines: root?.querySelector<SVGGElement>('[data-share-lines]'),
         start: root?.querySelector<SVGTextElement>('[data-share-start]'),
         end: root?.querySelector<SVGTextElement>('[data-share-end]'),
-        overlay: root?.querySelector<HTMLElement>('[data-share-overlay]'),
+        overlay,
         guide: root?.querySelector<HTMLElement>('[data-share-guide]'),
         tooltip: root?.querySelector<HTMLElement>('[data-share-tooltip]'),
         legend: root?.querySelector<HTMLElement>('[data-share-legend]'),
@@ -811,6 +788,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       chart.focus = -1
       if (chart.tooltip) chart.tooltip.hidden = true
       if (chart.guide) chart.guide.hidden = true
+      if (chart.status) chart.status.textContent = ''
+      chart.overlay?.setAttribute('aria-label', chart.defaultLabel)
     }
 
     function showSharePoint(key: keyof typeof shareCharts, index: number) {
@@ -828,6 +807,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         chart.guide.style.left = `${left}%`
       }
       chart.overlay?.setAttribute('aria-label', tip)
+      if (chart.status) chart.status.textContent = tip
     }
 
     function bindShareChart(key: keyof typeof shareCharts) {
@@ -895,7 +875,6 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       }
       if (chart.start) chart.start.textContent = chart.rows[0]?.date ?? ''
       if (chart.end) chart.end.textContent = chart.rows.at(-1)?.date ?? ''
-      chart.overlay?.setAttribute('aria-label', `${chart.root?.querySelector('[id$="-trend-title"]')?.textContent ?? 'Toolchain'} from ${chart.rows[0]?.date} to ${chart.rows.at(-1)?.date}. Move pointer across the chart or use arrow keys.`)
     }
 
     function dependencyLabel(key: 'spm' | 'cocoapods') {
