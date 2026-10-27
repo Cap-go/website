@@ -44,7 +44,6 @@ export default defineConfig({
       proxy: {
         '/live-update-metrics.json': { target: 'https://capgo.app', changeOrigin: true },
         '/builder-metrics.json': { target: 'https://capgo.app', changeOrigin: true },
-        '/currency.json': { target: 'https://capgo.app', changeOrigin: true },
       },
     },
   },

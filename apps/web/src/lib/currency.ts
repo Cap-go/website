@@ -1,46 +1,49 @@
-// Display currencies for the pricing page. Plan prices are the exact amounts of the Capgo Stripe prices
-// (currency_options), snapshotted nightly by scripts/fetch-build-data.ts into data/capgo-plan-prices.json.
-// Nothing is converted with exchange rates: a currency is offered only when Stripe sells every plan in it.
+// Display currencies for the pricing page. Prices come from the Capgo backend
+// (GET /private/plan_prices/public): the exact Stripe amounts Checkout sells to the visitor's country,
+// including the Solo regional (PPP) discount. Nothing is converted with exchange rates.
 
 export const BASE_CURRENCY = 'usd'
-export const CURRENCY_ENDPOINT = '/currency.json'
 export const CURRENCY_STORAGE_KEY = 'capgo_currency'
+export const PLAN_PRICES_PATH = '/private/plan_prices/public'
 
-// Regional (purchasing power) price tiers, as in Cap-go/capgo country_price_tier.ts. Most expensive first.
-export const PRICE_TIERS = ['p100', 'p85', 'p70', 'p60', 'p50'] as const
-export type PriceTier = (typeof PRICE_TIERS)[number]
-export const FULL_PRICE_TIER: PriceTier = 'p100'
+// Regional price tiers, as in Cap-go/capgo country_price_tier.ts. The backend reports the discount percent.
+export const DISCOUNT_TIERS = ['p85', 'p70', 'p60', 'p50'] as const
 
-// Major-unit amounts keyed by lowercase ISO 4217 code.
+// Stripe smallest-unit amounts keyed by lowercase ISO 4217 code.
 export type PriceAmounts = Record<string, number>
-export type PlanPriceSet = { month: PriceAmounts; year: PriceAmounts }
-// `tiers` holds the regional discount prices (plans.regional_price_ids); plans without them sell the full price everywhere.
-export type PlanPrices = PlanPriceSet & { tiers?: Partial<Record<PriceTier, PlanPriceSet>> }
 // Keyed by plan product id (plans.stripe_id).
-export type PlanPricesSnapshot = { plans: Record<string, PlanPrices> }
+export type PlanPriceAmounts = Record<string, { month: PriceAmounts; year: PriceAmounts }>
 
-export type CurrencyPayload = {
-  country: string | null
-  // Local currency of the country; the page only uses it when Stripe sells every plan in it.
+export type PlanPricesResponse = {
+  // False when some Stripe prices failed to load.
+  complete: boolean
+  // Currencies every plan is sold in for this visitor.
+  currencies: string[]
+  // The visitor's local currency when Stripe sells it, otherwise USD; null when nothing is sold.
   currency: string | null
-  tier: PriceTier
-}
-
-export function isPriceTier(value: unknown): value is PriceTier {
-  return typeof value === 'string' && (PRICE_TIERS as readonly string[]).includes(value)
+  // Prices at the visitor's regional tier.
+  prices: PlanPriceAmounts
+  // Regional discount on the plans listed in regularPrices, only sold in `currencies`.
+  discount: { percent: number; country: string | null; currencies: string[] } | null
+  // Full prices of the discounted plans (strike-through, and the price in other currencies).
+  regularPrices: PlanPriceAmounts
 }
 
 // p85 -> 15 (% off the full price).
-export function tierDiscountPercent(tier: PriceTier): number {
+export function tierDiscountPercent(tier: (typeof DISCOUNT_TIERS)[number]): number {
   return 100 - Number(tier.slice(1))
 }
 
-// Currencies every plan is sold in, monthly and yearly. Falls back to USD when the snapshot is empty.
-export function commonCurrencies(snapshot: PlanPricesSnapshot): string[] {
-  const sets = Object.values(snapshot.plans).flatMap((plan) => [plan.month, plan.year])
-  if (!sets.length) return [BASE_CURRENCY]
-  const currencies = Object.keys(sets[0]).filter((currency) => sets.every((amounts) => currency in amounts))
-  return currencies.includes(BASE_CURRENCY) ? currencies.sort((a, b) => a.localeCompare(b)) : [BASE_CURRENCY]
+// Same special cases as Cap-go/capgo supabase/functions/shared/stripe-amount.ts (ISK and UGX stay
+// two-decimal in the Stripe API). https://docs.stripe.com/currencies#special-cases
+const ZERO_DECIMAL_CURRENCIES = new Set(['bif', 'clp', 'djf', 'gnf', 'jpy', 'kmf', 'krw', 'mga', 'pyg', 'rwf', 'vnd', 'vuv', 'xaf', 'xof', 'xpf'])
+const THREE_DECIMAL_CURRENCIES = new Set(['bhd', 'jod', 'kwd', 'omr', 'tnd'])
+
+export function stripeAmountToMajorUnits(amount: number, currency: string): number {
+  const code = currency.toLowerCase()
+  if (ZERO_DECIMAL_CURRENCIES.has(code)) return amount
+  if (THREE_DECIMAL_CURRENCIES.has(code)) return amount / 1000
+  return amount / 100
 }
 
 export type PriceFormat = 'whole' | 'cents' | 'unit'

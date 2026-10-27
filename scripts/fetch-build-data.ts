@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 
 /**
- * Snapshots the remote data that static pages render (plans, Stripe plan prices per currency, credits,
- * store rankings, GitHub sponsors, GitHub releases for /feed.xml) into apps/web/src/data/*.json.
+ * Snapshots the remote data that static pages render (plans, credits, store rankings,
+ * GitHub sponsors, GitHub releases for /feed.xml) into apps/web/src/data/*.json.
  * The nightly refresh-site-data workflow runs this; builds only read the JSON files,
  * so a deploy never waits on (or breaks because of) a third-party API.
  *
@@ -52,52 +52,6 @@ async function fetchPlans() {
   const plans = await getJson<unknown[]>(`${BASE_API_URL}/private/plans`)
   if (!Array.isArray(plans) || plans.length === 0) throw new Error('plans response is empty')
   return plans
-}
-
-// Stripe amounts are in the currency's smallest unit. Same special cases as Cap-go/capgo
-// supabase/functions/shared/stripe-amount.ts (ISK and UGX stay two-decimal in the API).
-// https://docs.stripe.com/currencies#special-cases
-const ZERO_DECIMAL_CURRENCIES = new Set(['bif', 'clp', 'djf', 'gnf', 'jpy', 'kmf', 'krw', 'mga', 'pyg', 'rwf', 'vnd', 'vuv', 'xaf', 'xof', 'xpf'])
-const THREE_DECIMAL_CURRENCIES = new Set(['bhd', 'jod', 'kwd', 'omr', 'tnd'])
-
-type AmountSet = { month: Record<string, number>; year: Record<string, number> }
-
-function minorUnitDivisor(currency: string) {
-  if (ZERO_DECIMAL_CURRENCIES.has(currency)) return 1
-  if (THREE_DECIMAL_CURRENCIES.has(currency)) return 1000
-  return 100
-}
-
-// Validates one plan/tier entry of the catalog and converts it; any bad amount fails the whole snapshot.
-function toMajorUnits(label: string, set: Partial<AmountSet> | undefined): AmountSet {
-  const convert = (interval: 'month' | 'year') => {
-    const amounts: unknown = set?.[interval]
-    if (!amounts || typeof amounts !== 'object' || Array.isArray(amounts)) throw new Error(`plan_prices ${label}.${interval} is missing`)
-    return Object.fromEntries(
-      Object.entries(amounts).map(([currency, amount]) => {
-        if (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 0) throw new Error(`plan_prices ${label}.${interval}.${currency} is not a valid amount`)
-        const code = currency.toLowerCase()
-        return [code, amount / minorUnitDivisor(code)]
-      }),
-    )
-  }
-  return { month: convert('month'), year: convert('year') }
-}
-
-// Every plan's Stripe price in every currency, plus the Solo regional (PPP) tiers, from the public
-// Capgo catalog (private/plan_prices without an org): the same amounts Checkout charges.
-async function fetchPlanPrices() {
-  const catalog = await getJson<{ complete?: boolean; plans?: Record<string, AmountSet & { tiers?: Record<string, AmountSet> }> }>(`${BASE_API_URL}/private/plan_prices`)
-  const entries = Object.entries(catalog.plans ?? {})
-  if (!catalog.complete || entries.length === 0) throw new Error('plan_prices catalog is incomplete')
-  return {
-    plans: Object.fromEntries(
-      entries.map(([plan, { tiers, ...prices }]) => [
-        plan,
-        { ...toMajorUnits(plan, prices), ...(tiers ? { tiers: Object.fromEntries(Object.entries(tiers).map(([tier, set]) => [tier, toMajorUnits(`${plan}.${tier}`, set)])) } : {}) },
-      ]),
-    ),
-  }
 }
 
 async function fetchCredits() {
@@ -155,7 +109,6 @@ const OPTIONAL_SOURCES = new Set(['github-sponsors.json'])
 
 const SOURCES: Record<string, () => Promise<unknown>> = {
   'capgo-plans.json': fetchPlans,
-  'capgo-plan-prices.json': fetchPlanPrices,
   'capgo-credits.json': fetchCredits,
   'store-top.json': fetchStoreTop,
   'github-sponsors.json': fetchSponsors,

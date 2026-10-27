@@ -1,15 +1,14 @@
 ---
 import m from '@/copy/messages'
-import planPrices from '@/data/capgo-plan-prices.json'
-import { commonCurrencies, currencyName, type PlanPricesSnapshot } from '@/lib/currency'
+import { useRuntimeConfig } from '@/config/app'
+import { PLAN_PRICES_PATH } from '@/lib/currency'
 
 const locale = Astro.locals.locale
-// Only currencies Stripe sells every plan in.
-const currencies = commonCurrencies(planPrices as PlanPricesSnapshot)
+const planPricesUrl = `${useRuntimeConfig().public.baseApiUrl}${PLAN_PRICES_PATH}`
 ---
 
-{currencies.length > 1 && (
-<div id="currency" class="mx-auto mt-10 flex max-w-xl flex-col items-center gap-2 text-center" data-currency-selector>
+<!-- Hidden until the backend lists more than one currency Stripe sells every plan in. -->
+<div id="currency" class="mx-auto mt-10 flex max-w-xl flex-col items-center gap-2 text-center" data-currency-selector data-plan-prices-url={planPricesUrl} hidden>
   <div class="flex flex-wrap items-center justify-center gap-3">
     <label for="currency-select" class="text-sm font-medium text-gray-300">{m.pricing_currency_label({}, { locale })}</label>
     <select
@@ -19,31 +18,34 @@ const currencies = commonCurrencies(planPrices as PlanPricesSnapshot)
       class="min-h-11 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-white/30 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/40 focus:outline-none"
     >
       <option value="auto" class="text-gray-950" data-currency-auto-option>{m.pricing_currency_auto({}, { locale })}</option>
-      {currencies.map((code) => (
-        <option value={code} class="text-gray-950">
-          {code.toUpperCase()} · {currencyName(code, locale)}
-        </option>
-      ))}
     </select>
   </div>
   <p id="currency-select-hint" class="text-xs leading-5 text-gray-400">{m.pricing_currency_hint({}, { locale })}</p>
 </div>
-)}
 
 <script>
+  import { currencyName } from '@/lib/currency'
   import { getCurrencyState, hasManualCurrency, initCurrency, onCurrencyChange, setCurrency } from '@/scripts/currency'
 
   function initCurrencySelector() {
-    const select = document.querySelector<HTMLSelectElement>('[data-currency-select]')
-    // The regional (Solo) price still depends on the visitor's location when only USD is sold.
-    if (!select) return void initCurrency()
+    const container = document.querySelector<HTMLElement>('[data-currency-selector]')
+    const select = container?.querySelector<HTMLSelectElement>('[data-currency-select]')
+    // The regional (Solo) price still depends on the visitor's location without the selector.
+    if (!container || !select) return void initCurrency()
     const autoOption = select.querySelector<HTMLOptionElement>('[data-currency-auto-option]')
     const autoLabel = autoOption?.textContent ?? ''
+    const locale = document.documentElement.lang || 'en-US'
 
     const sync = () => {
-      const { currency, detected } = getCurrencyState()
+      const { currency, currencies, detected } = getCurrencyState()
+      if (select.options.length !== currencies.length + 1) {
+        const options = currencies.map((code) => new Option(`${code.toUpperCase()} · ${currencyName(code, locale)}`, code))
+        options.forEach((option) => option.classList.add('text-gray-950'))
+        select.replaceChildren(...(autoOption ? [autoOption] : []), ...options)
+      }
       if (autoOption) autoOption.textContent = `${autoLabel} (${detected.toUpperCase()})`
       select.value = hasManualCurrency() ? currency : 'auto'
+      container.hidden = currencies.length < 2
     }
 
     select.addEventListener('change', () => setCurrency(select.value === 'auto' ? null : select.value))

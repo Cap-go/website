@@ -69,7 +69,7 @@ jobs:
         id: downloads
         continue-on-error: true
         run: NPM_DOWNLOADS_REFRESH=true bun run fetch:downloads
-      - name: Fetch plans, Stripe plan prices, credits, store rankings, sponsors, and GitHub releases
+      - name: Fetch plans, credits, store rankings, sponsors, and GitHub releases
         id: build_data
         continue-on-error: true
         run: bun run fetch:build-data
@@ -98,7 +98,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
         with:
           commit_message: 'chore: refresh site data snapshots'
-          file_pattern: 'apps/web/src/data/github-stars.json apps/web/src/data/github-stats.json apps/web/src/data/transparency.json apps/web/src/data/website-stats.json apps/web/src/data/npm-downloads.json apps/web/src/data/capgo-plans.json apps/web/src/data/capgo-plan-prices.json apps/web/src/data/capgo-credits.json apps/web/src/data/store-top.json apps/web/src/data/github-sponsors.json apps/web/src/data/github-releases.json'
+          file_pattern: 'apps/web/src/data/github-stars.json apps/web/src/data/github-stats.json apps/web/src/data/transparency.json apps/web/src/data/website-stats.json apps/web/src/data/npm-downloads.json apps/web/src/data/capgo-plans.json apps/web/src/data/capgo-credits.json apps/web/src/data/store-top.json apps/web/src/data/github-sponsors.json apps/web/src/data/github-releases.json'
       - name: Deploy the refreshed data
         if: steps.commit.outputs.changes_detected == 'true'
         env:
