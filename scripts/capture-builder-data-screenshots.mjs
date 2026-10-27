@@ -1,35 +1,26 @@
 #!/usr/bin/env bun
 /**
- * Captures /builder-data/ chart crops using the production D1 rollup snapshot and real metrics pipeline.
+ * Captures /builder-data/ chart crops from the live builder metrics (BUILDER_METRICS_URL, default production).
  */
 import { mkdirSync, statSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { chromium } from 'playwright'
 import { $ } from 'bun'
-import { fetchPublicBuilderMetricsFromD1 } from '../apps/web/src/lib/builderMetricsD1.ts'
-import { BUILDER_METRICS_PROD_SNAPSHOT_AT, loadBuilderMetricsProdSnapshot } from './builder-metrics-prod-snapshot.mjs'
 
 const webDir = resolve(import.meta.dir, '../apps/web')
 const distDir = resolve(webDir, 'dist')
 const assetsDir = resolve(import.meta.dir, '../.github/pull-request-assets')
 const port = 8791
 const baseUrl = `http://127.0.0.1:${port}`
-const referenceDate = new Date(BUILDER_METRICS_PROD_SNAPSHOT_AT)
+const builderMetricsUrl = process.env.BUILDER_METRICS_URL ?? 'https://builder.capgo.app/stats/public'
 
 mkdirSync(assetsDir, { recursive: true })
 
 await $`bun run build`.cwd(webDir).env({ ...process.env, BUILD_CONCURRENCY: '1' })
 
-const snapshot = loadBuilderMetricsProdSnapshot()
-const metricsPayload = await fetchPublicBuilderMetricsFromD1({
-  db: { prepare: () => ({ bind: () => ({ all: async () => ({ results: [] }) }) }) },
-  now: referenceDate,
-  client: {
-    async queryAggregatedRollups() {
-      return snapshot.rows
-    },
-  },
-})
+const metricsResponse = await fetch(builderMetricsUrl)
+if (!metricsResponse.ok) throw new Error(`${builderMetricsUrl} HTTP ${metricsResponse.status}`)
+const metricsPayload = await metricsResponse.json()
 
 function resolveDistPath(pathname) {
   let filePath = pathname

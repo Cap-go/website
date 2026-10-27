@@ -31,8 +31,5 @@ seo-report.sarif
 # Visual regression artifacts (local only)
 .visual-diff/
 
-# Generated local D1 fixture for builder-data screenshots
-apps/web/test/fixtures/builder-metrics-d1-seed.sql
-
 # Local Playwright MCP session logs
 .playwright-mcp/
