@@ -783,8 +783,15 @@ try {
     }),
   )
   let blogOriginFetches = 0
+  let blogAiCalls = 0
   const blogEnv = {
     ...env,
+    AI: {
+      run: async (...args: Parameters<typeof env.AI.run>) => {
+        blogAiCalls += 1
+        return await env.AI.run(...args)
+      },
+    },
     WEB: {
       fetch: async () => {
         blogOriginFetches += 1
@@ -802,9 +809,8 @@ try {
   assert(staleBlogResponse.status === 200, 'A stale localized blog was not served successfully')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Cache') === 'STALE', 'A stale localized blog did not report STALE')
   assert(staleBlogResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A stale localized blog did not sync current English scripts')
-  assert(staleBlogResponse.headers.get('X-Capgo-Translation-Meta') === 'synced', 'A stale localized blog did not sync current English meta')
-  assert(staleBlogBody.includes('App-Initialisierung Schritt-für-Schritt-Anleitung'), 'STALE localized blog did not refresh the translated title')
-  assert(staleBlogBody.includes('Neue deutsche Meta-Beschreibung fuer den Initialisierungsworkflow'), 'STALE localized blog did not refresh the translated meta description')
+  assert(blogAiCalls === 0, 'A stale localized blog called Workers AI on the response path')
+  assert(staleBlogBody.includes('<title>App-Initialisierung</title>'), 'A stale localized blog changed its cached title on the response path')
   assert(staleBlogBody.includes('App-Initialisierung Schritt für Schritt'), 'Script sync on STALE wipe translated heading')
   assert(staleBlogBody.includes('Übersetzter Anleitungstext bleibt erhalten.'), 'Script sync on STALE wipe translated paragraph')
   assert(staleBlogBody.includes('"headline":"App-Initialisierung"'), 'Script sync on STALE replaced translated JSON-LD')
@@ -873,6 +879,45 @@ try {
   const agedHitReuseResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
   assert(agedHitReuseResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A repeated 10-minute HIT lost script sync')
   assert(blogOriginFetches === fetchesAfterAgedHit, 'A repeated 10-minute HIT did not reuse the cached English source')
+
+  // A queue job in another datacenter refreshed R2: a stale edge copy must give way to it.
+  const r2RefreshedUrl = new URL('https://capgo.app/de/blog/r2-refreshed-elsewhere/')
+  const r2RefreshedCacheKey = __translationWorkerTest.cacheKeyFor(r2RefreshedUrl, 'de')
+  cacheEntries.set(__translationWorkerTest.sourceCheckKeyFor(r2RefreshedUrl, 'de').url, new Response('already-checked'))
+  cacheEntries.set(
+    r2RefreshedCacheKey.url,
+    new Response('<!doctype html><html lang="de"><head><title>Alt</title></head><body><p>Alte Fassung</p></body></html>', {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=604800',
+        'X-Capgo-Translated-At': String(Date.now() - 4 * 24 * 60 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'f'.repeat(64),
+      },
+    }),
+  )
+  storedTranslations.set(
+    await __translationWorkerTest.translationStoreKey('pages', r2RefreshedUrl, 'de'),
+    JSON.stringify({
+      cacheVersion: __translationWorkerTest.TRANSLATION_CACHE_VERSION,
+      locale: 'de',
+      sourceHash: 'f'.repeat(64),
+      translatedAt: Date.now() - 60 * 1000,
+      status: 200,
+      statusText: 'OK',
+      headers: [['content-type', 'text/html; charset=utf-8']],
+      bodyEncoding: 'text',
+      body: '<!doctype html><html lang="de"><head><title>Neu</title></head><body><p>Neue Fassung</p></body></html>',
+    }),
+  )
+  const jobsBeforeR2Refresh = translationJobs.length
+  const r2RefreshedResponse = await worker.fetch(new Request(r2RefreshedUrl), blogEnv as any)
+  const r2RefreshedBody = await r2RefreshedResponse.text()
+  assert(r2RefreshedResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A stale edge copy did not give way to a fresh R2 copy')
+  assert(r2RefreshedBody.includes('Neue Fassung'), 'A stale edge copy was served although R2 had a newer translation')
+  assert(translationJobs.length === jobsBeforeR2Refresh, 'A fresh R2 copy still enqueued a stale retranslation')
+  const repopulatedEdgeCopy = cacheEntries.get(r2RefreshedCacheKey.url)
+  assert((await repopulatedEdgeCopy?.clone().text())?.includes('Neue Fassung'), 'A fresh R2 copy did not replace the stale edge copy')
+  assert(repopulatedEdgeCopy?.headers.get('Cache-Control') === 'public, max-age=600', 'Edge copies must stay short-lived so other datacenters pick up R2 refreshes')
 
   const jsonHitUrl = new URL('https://capgo.app/de/blog/json-hit-skip-script-sync/')
   cacheEntries.set(__translationWorkerTest.sourceCheckKeyFor(jsonHitUrl, 'de').url, new Response('already-checked'))
