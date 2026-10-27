@@ -63,7 +63,7 @@ Keep a version history for every bundle, including its approval, configuration, 
 <a id="2-use-cross-platform-frameworks-for-code-reuse"></a>
 ## 2. Use Cross-Platform Frameworks for Code Reuse
 
-Cross-platform development improves release reliability when the shared layer has a defined boundary. CapacitorJS and Ionic let teams reuse web skills and application logic across iOS, Android, and web surfaces. Our [cross-platform mobile app development guide](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) covers how to structure that shared layer.
+Cross-platform development improves release reliability when the shared layer has a defined boundary. CapacitorJS and Ionic let teams reuse web skills and application logic across iOS, Android, and web surfaces. Our [cross-platform mobile app development guide](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/) covers how to structure that shared layer.
 
 Reuse domain logic, data handling, validation, and stable interface patterns. Keep native adapters explicit wherever operating systems differ. For example, camera permission flows require platform-specific handling: iOS permission prompts and settings behavior differ from Android's permission model, so a shared abstraction needs separate adapters and tests rather than one assumed flow.
 

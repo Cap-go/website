@@ -68,7 +68,7 @@ A Capacitor application adds a specific complication. JavaScript and CSS may be 
 
 Apple's review queue also affects release planning. Apple allows at most **two submissions under review at the same time on a platform**, one app version and one item such as an In-App Event, according to its [submission guidance](https://developer.apple.com/distribute/app-review/). Batching release-critical changes into one queue position creates avoidable risk. Stage the app version first, complete App Review Information before submission, and keep native changes separate from web-layer fixes where possible.
 
-A web-layer fix can often ship through controlled live updates, provided it does not alter native capabilities or violate Apple's rules. Native changes still belong in the normal review queue. Teams can document ownership, status checks, and response procedures with [App Store review management](https://capgo.app/blog/app-store-review-management/), so a rejection produces a controlled fix instead of an emergency rebuild.
+A web-layer fix can often ship through controlled live updates, provided it does not alter native capabilities or violate Apple's rules. Native changes still belong in the normal review queue. Teams can document ownership, status checks, and response procedures with [App Store review management](https://capgo.app/blog/how-to-pass-app-store-review-2026/), so a rejection produces a controlled fix instead of an emergency rebuild.
 
 <a id="prerequisites-that-prevent-signing-failures"></a>
 ## Prerequisites That Prevent Signing Failures

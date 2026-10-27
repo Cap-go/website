@@ -52,6 +52,13 @@ const REDIRECTS = [
   ['/blog/best-over-the-air-app-updates-saas/', '/blog/best-live-update-tools-for-capacitor-apps/'],
   ['/blog/ios-live-updates-allowed-stacks/', '/blog/do-apple-allow-live-updates/'],
   ['/blog/android-live-updates-allowed-stacks/', '/blog/do-google-allow-live-updates/'],
+  ['/blog/new-deal-pwa/', '/blog/pwa-vs-native-apps/'],
+  ['/blog/cross-platform-mobile-app-development-guide-2024/', '/blog/cross-platform-mobile-app-development-vs-native/'],
+  [
+    "/blog/guide-du-développement-d'applications-mobiles-multiplateformes-2024/",
+    '/blog/cross-platform-mobile-app-development-vs-native/',
+  ],
+  ['/blog/app-store-review-management/', '/blog/how-to-pass-app-store-review-2026/'],
 ]
 
 for (const [from, to] of REDIRECTS) {

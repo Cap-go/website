@@ -81,7 +81,7 @@ For example, retail POS systems that implement detailed logging of authenticatio
 
 ## Implementation Steps
 
-To ensure PCI DSS compliance in [mobile app development](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/), it's essential to embed strong security measures at every stage of the CI/CD pipeline. Here's how to do it effectively.
+To ensure PCI DSS compliance in [mobile app development](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/), it's essential to embed strong security measures at every stage of the CI/CD pipeline. Here's how to do it effectively.
 
 ### Security in CI/CD Pipeline
 

@@ -112,7 +112,7 @@ A button color is easy. A new payment flow, a different consent screen, changed 
 
 Google Play in app updates aren't the same mechanism as a Capacitor web bundle update, but the urgency model is instructive. [Google Play's flexible update flow downloads and installs in the background while the user continues using the app, whereas the immediate flow blocks interaction until the update is installed and the app restarts](https://developer.android.com/guide/playcore/in-app-updates). Google also exposes an update priority value from **0 through 5** through the Play Developer API.
 
-Borrow that thinking. Routine interface changes shouldn't interrupt a session. A security fix that makes continued use unsafe deserves a more forceful path, and in many cases a native store release with clear [app store review management](https://capgo.app/blog/app-store-review-management) rather than a silent web patch.
+Borrow that thinking. Routine interface changes shouldn't interrupt a session. A security fix that makes continued use unsafe deserves a more forceful path, and in many cases a native store release with clear [app store review management](https://capgo.app/blog/how-to-pass-app-store-review-2026/) rather than a silent web patch.
 
 <a id="ota-vs-store-release-decision-matrix"></a>
 ### OTA vs Store Release Decision Matrix
