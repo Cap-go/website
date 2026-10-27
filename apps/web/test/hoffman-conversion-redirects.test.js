@@ -29,6 +29,8 @@ const REDIRECTS = [
   ['/blog/jest-unit-testing/', '/blog/unit-tests-javascript/'],
   ['/blog/understanding-regulatory-compliance/', '/blog/compliance-checks-in-cicd-for-capacitor-apps/'],
   ['/blog/what-is-incident-response/', '/blog/incident-response-guide/'],
+  ['/blog/how-mobile-apps-stay-compliant-with-us-privacy-laws/', '/blog/us-privacy-laws-mobile-app-checklist/'],
+  ['/blog/disaster-recovery/', '/blog/incident-response-guide/'],
   ['/blog/deployment-automation/', '/blog/app-release-automation/'],
   ['/blog/app-security-best-practices/', '/blog/5-security-best-practices-for-mobile-app-live-updates/'],
   ['/blog/updating-from-capacitor-4-to-capacitor-5/', '/blog/upgrade-capacitor-app-to-capacitor-8/'],
