@@ -23,7 +23,7 @@ faq:
   - question: How do I change app age rating restrictions on Android?
     answer: On the device, open the Google Play app, tap your profile, Settings, Family, Content restrictions, then set a parental controls PIN and choose the highest Apps and Games rating allowed. If the child uses Family Link, open the Family Link app, select the child, tap Controls, Google Play, then set filters for each content type.
   - question: What does device age rating or Declared Age Range mean on Apple devices?
-    answer: Device settings control which store-rated apps someone can download. Declared Age Range is separate. With a parent’s permission, a child account can share only an age range with an app, not their birth date, so developers can offer age-appropriate features. Parents choose always, per app, or never in Screen Time settings.
+    answer: Device age rating usually means the maximum App Store rating allowed in Screen Time. Age Range for Apps (Declared Age Range) is separate. Parents manage it under Settings, your name, Personal Information, Age Range for Apps, or for a child under Settings, Family, the child account, Apple Account and Password, Age Range for Apps. You can set sharing to always, ask first, or never.
   - question: What age rating tiers does Apple use on the App Store in 2026?
     answer: Apple assigns global age ratings of 4+, 9+, 13+, 16+, or 18+ based on your App Store Connect questionnaire answers. Regional ratings can differ where local rules apply.
   - question: What if I missed the January 31, 2026 age rating questionnaire deadline?
@@ -49,7 +49,7 @@ Apple documents these steps under [content and privacy restrictions in the App S
 1. Open **Settings**, tap **Screen Time**, then **Content & Privacy Restrictions**.
 2. Turn on **Content & Privacy Restrictions** (enter your Screen Time passcode if prompted).
 3. Tap **App Store, Media, Web & Games**, then **Apps**.
-4. Choose the highest age rating you allow (for example **12+** or **17+**). Apps above that rating are blocked or need parent approval when [Ask to Buy](https://support.apple.com/en-us/125399) applies.
+4. Choose the highest age rating available on your device. The available values depend on your iOS version. Apps above that rating are blocked or need parent approval when [Ask to Buy](https://support.apple.com/en-us/125399) applies.
 
 </Steps>
 
@@ -75,7 +75,7 @@ Content restrictions filter **new** downloads and purchases. Apps already instal
 
 **Device age rating** in everyday use usually means the **maximum App Store age rating** you allow in Screen Time, as in the steps above.
 
-**Declared Age Range** is a separate Apple feature: with a parent’s choice, a child account can share only an **age range** with an app (not their birth date) so developers can tailor experiences. Parents control sharing in Screen Time. Learn more in Apple’s [Declared Age Range](https://developer.apple.com/documentation/declaredagerange) documentation and [parent-focused overview](https://www.apple.com/newsroom/2025/06/apple-expands-tools-to-help-parents-protect-kids-and-teens-online/).
+**Age Range for Apps** (Apple also calls this **Declared Age Range** in [developer documentation](https://developer.apple.com/documentation/declaredagerange)) lets an account share only an **age range** with an app, not a birth date. For your account, open **Settings**, tap your name, **Personal Information**, then **Age Range for Apps**, and tap **Share with Apps**. For a child in Family Sharing, use **Settings**, **Family**, the child’s account, **Apple Account and Password**, then **Age Range for Apps**. See [Share your age range with apps](https://support.apple.com/en-us/122770).
 
 ### If you develop or publish apps
 
@@ -1337,7 +1337,7 @@ Use **Settings** > **Screen Time** > **Content & Privacy Restrictions** > **App 
 Use **Google Play** > profile **Settings** > **Family** > **Content restrictions**, or **Family Link** > child > **Controls** > **Google Play**.
 
 **What does device age rating mean?**  
-Usually the maximum App Store or Play maturity level allowed on that device. **Declared Age Range** on Apple lets a child share only an age band with apps, with parent approval.
+Usually the maximum App Store or Play maturity level allowed on that device. **Age Range for Apps** on Apple is separate and is managed under **Personal Information** or the child’s **Apple Account and Password** settings, not Screen Time.
 
 **What age rating tiers does Apple use in 2026?**  
 4+, 9+, 13+, 16+, and 18+, plus optional regional values where required.
