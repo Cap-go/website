@@ -1,15 +1,15 @@
 ---
 slug: ultimate-guide-to-app-store-compliant-ota-updates
-title: "OTA Apps: App Store and Google Play Rules for iOS and Android"
-description: "OTA apps push JavaScript, HTML, and CSS without a new store binary. Learn Apple Guideline 2.5.2, Google Play limits, and how to ship compliant iOS and Android OTA updates."
+title: "OTA App Updates: App Store and Google Play Rules"
+description: "OTA updates for mobile apps ship JavaScript, HTML, and CSS without a new store binary. Learn over the air updates vs phone system patches, Apple Guideline 2.5.2, and compliant OTA apps on iOS and Android."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-28T05:46:14.390Z
 updated_at: 2026-10-17T13:38:45.000Z
 head_image: /blog-images/ultimate-guide-to-app-store-compliant-ota-updates.webp
-head_image_alt: "OTA apps and App Store compliance for iOS and Android Capgo blog illustration"
-keywords: ota app, ota apps, ota ios, ios ota, apple ota, app store compliant ota, ota updates iphone, mobile app updates, google play ota
+head_image_alt: "OTA app updates and App Store compliance for iOS and Android Capgo blog illustration"
+keywords: ota updates, ota app, ota apps, over the air updates, ota updates iphone, capacitor ota, ionic ota, capacitor live updates, app store compliant ota, google play ota
 tag: Development, Mobile, Updates
 published: true
 locale: en
@@ -28,7 +28,7 @@ faq:
     answer: "Google Play is generally faster and less strict on minor updates, but it still bans bypassing the store for executable changes that belong in a new release. Treat OTA as a web-layer lane on both platforms and keep native changes in the binary release path."
 ---
 
-An **OTA app** delivers **over-the-air (OTA) updates** to the web layer inside a reviewed native shell: JavaScript, HTML, CSS, and assets can change without replacing the whole store binary. On iPhone and iPad, **Apple App Review Guideline 2.5.2** is the line to respect: apps may not download or execute code that introduces or changes features or functionality, so compliant OTA stays limited to interpreted web-layer fixes that match the app Apple reviewed. This guide covers those App Store and Google Play rules end to end. For what OTA means in plain language, read [OTA apps explained](https://capgo.app/blog/what-is-ota-update/). To ship Capacitor live updates with Capgo, see [Capacitor live updates](https://capgo.app/live-update/).
+**OTA updates** for mobile apps are **over the air updates** to the web layer inside a reviewed native shell: JavaScript, HTML, CSS, and assets can change without replacing the whole store binary. That is different from phone **system OTA updates**, which patch iOS or Android itself. An **OTA app** is any app built to receive those app-level deliveries safely after install. This guide covers App Store and Google Play rules for **OTA app updates** on iPhone and Android. For definitions and delivery mechanics, read [what is an OTA update](https://capgo.app/blog/what-is-ota-update/). To monitor rollouts, see [OTA monitoring for Capacitor apps](https://capgo.app/blog/monitor-ota-updates-in-capacitor-apps/). To ship **Capacitor live updates** with Capgo, see [Capacitor OTA updates](https://capgo.app/live-update/).
 
 ### Key Takeaways:
 
@@ -94,7 +94,7 @@ The main advantages include:
 
 These features make OTA updates incredibly useful for maintaining and improving apps in real time.
 
-## Can You Perform OTA Updates for iOS Apps? Apple Guidelines Explained
+## OTA update iPhone and iOS apps: Apple guidelines explained
 
 <iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -216,11 +216,11 @@ As of February 27, 2025, Capgo reported delivering 502.0 million updates worldwi
 
 With security measures in place, the next step is ensuring a smooth update experience for your users.
 
-## [Capgo](https://capgo.app/): OTA Update Platform
+## Capacitor live updates, Ionic OTA, and the Capgo platform
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-28.jpg?auto=compress)
 
-Capgo offers a reliable way to handle app store-compliant over-the-air (OTA) updates, building on the practices mentioned earlier.
+[Capgo](https://capgo.app/) offers a reliable way to handle app store-compliant **Capacitor OTA** and **Ionic OTA** deliveries, building on the practices mentioned earlier.
 
 ### Capgo Key Features
 
