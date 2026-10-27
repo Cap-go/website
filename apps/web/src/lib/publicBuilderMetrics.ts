@@ -23,6 +23,12 @@ export type BuilderDailyPlatformMetric = {
   android_process_seconds: number | null
 }
 
+export type BuilderXcodeVersionMetric = { version: string; share: number }
+
+export type IosDependencyManagerKey = 'spm' | 'cocoapods'
+
+export type BuilderDependencyManagerMetric = { key: IosDependencyManagerKey; share: number }
+
 export type PublicBuilderMetrics = {
   success_rate: number
   avg_process_seconds: number | null
@@ -34,4 +40,8 @@ export type PublicBuilderMetrics = {
   hourly_platforms: BuilderDailyPlatformMetric[]
   failures: BuilderFailureMetric[]
   platforms: BuilderPlatformMetric[]
+  /** Share of the iOS builds of the period by Xcode major. */
+  xcode_versions: BuilderXcodeVersionMetric[]
+  /** Share of the iOS builds of the period using SPM or CocoaPods, as sent by the CLI. */
+  ios_dependency_managers: BuilderDependencyManagerMetric[]
 }

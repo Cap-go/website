@@ -317,6 +317,34 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         </ol>
       </div>
     </section>
+
+    <section class="data-section data-section-muted" aria-labelledby="toolchain-title">
+      <div class="data-shell data-split">
+        <div>
+          <p class="data-eyebrow">iOS toolchain</p>
+          <h2 id="toolchain-title">Xcode and dependency managers</h2>
+          <p class="data-copy" data-toolchain-lead translate="no">{pending ? 'Loading toolchain mix…' : 'No iOS toolchain data in this window.'}</p>
+          <p class="data-copy data-copy-secondary">
+            Share of iOS builds over the last 30 days. Xcode is the version that built the app. CocoaPods or Swift Package Manager is what the Capgo CLI found in the
+            project; builds from older CLI versions don't report it. Shares only, no build counts.
+          </p>
+        </div>
+        <div class="data-toolchain">
+          <div>
+            <h3 id="xcode-shares-title">Xcode version</h3>
+            <ol class="data-failures data-shares" data-xcode-shares aria-labelledby="xcode-shares-title" translate="no">
+              <li class="data-empty">{pending ? 'Loading…' : 'No data in this window.'}</li>
+            </ol>
+          </div>
+          <div>
+            <h3 id="dependency-shares-title">CocoaPods vs SPM</h3>
+            <ol class="data-failures data-shares" data-dependency-shares aria-labelledby="dependency-shares-title" translate="no">
+              <li class="data-empty">{pending ? 'Loading…' : 'No data in this window.'}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
     <ProductTestimonials
       variant="dark"
       eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
@@ -385,6 +413,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const dailySkeleton = page?.querySelector<HTMLElement>('.data-chart-skeleton')
     const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
+    const toolchainLead = page?.querySelector<HTMLElement>('[data-toolchain-lead]')
+    const xcodeShares = page?.querySelector<HTMLOListElement>('[data-xcode-shares]')
+    const dependencyShares = page?.querySelector<HTMLOListElement>('[data-dependency-shares]')
     const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
     const metricButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-metric]') ?? [])]
     const styleScopeAttributes = [...(page?.attributes ?? [])].map((attribute) => attribute.name).filter((name) => name.startsWith('data-astro-cid-'))
@@ -652,6 +683,42 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
+    function renderShares(list: HTMLOListElement | null | undefined, items: Array<{ label: string; share: number }>, empty: string) {
+      if (!list) return
+      list.replaceChildren()
+      for (const item of items) {
+        const row = createScopedElement('li')
+        const label = createScopedElement('strong')
+        label.textContent = item.label
+        const share = createScopedElement('b')
+        share.textContent = `${Math.round(item.share)}%`
+        const track = createScopedElement('i')
+        track.setAttribute('aria-hidden', 'true')
+        const fill = createScopedElement('em')
+        fill.style.setProperty('--share', `${item.share}%`)
+        track.append(fill)
+        row.append(label, share, track)
+        list.append(row)
+      }
+      if (!items.length) list.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: empty }))
+    }
+
+    function renderToolchain(metrics: BuilderMetrics) {
+      const xcode = metrics.xcode_versions.map((item) => ({ label: `Xcode ${item.version}`, share: item.share }))
+      const managers = metrics.ios_dependency_managers.map((item) => ({ label: item.key === 'spm' ? 'Swift Package Manager' : 'CocoaPods', share: item.share }))
+      renderShares(xcodeShares, xcode, 'No data in this window.')
+      renderShares(dependencyShares, managers, 'No data in this window.')
+      if (toolchainLead) {
+        const topXcode = [...xcode].sort((a, b) => b.share - a.share)[0]
+        const topManager = [...managers].sort((a, b) => b.share - a.share)[0]
+        const parts = [
+          topXcode ? `${topXcode.label} built ${Math.round(topXcode.share)}% of iOS builds` : '',
+          topManager ? `${Math.round(topManager.share)}% use ${topManager.label}` : '',
+        ].filter(Boolean)
+        toolchainLead.textContent = parts.length ? `${parts.join(', and ')} in this window.` : 'No iOS toolchain data in this window.'
+      }
+    }
+
     function renderMetrics(metrics: BuilderMetrics) {
       latestMetrics = metrics
       const ios = platformOf(metrics, 'ios')
@@ -679,6 +746,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       renderSpark(androidSpark, sparkRows, 'android')
       renderTrend(metrics)
       renderFailures(metrics)
+      renderToolchain(metrics)
       if (updated) {
         const timestamp = new Date(metrics.updated_at)
         updated.textContent = Number.isNaN(timestamp.getTime())
@@ -707,6 +775,9 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (trendSvg) trendSvg.style.display = 'none'
       if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
       if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
+      if (toolchainLead) toolchainLead.textContent = 'Toolchain data is temporarily unavailable.'
+      renderShares(xcodeShares, [], 'Temporarily unavailable.')
+      renderShares(dependencyShares, [], 'Temporarily unavailable.')
     }
 
     async function fetchMetrics() {
@@ -1304,6 +1375,28 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     border-radius: inherit;
     background: #f59e0b;
   }
+  .data-toolchain {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .data-toolchain h3 {
+    margin: 0 0 16px;
+    color: #91a2ba;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .data-shares li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .data-shares i {
+    grid-column: 1 / -1;
+  }
+  .data-shares em {
+    background: #60a5fa;
+  }
   .data-empty {
     margin: 0;
     color: #91a2ba;
@@ -1331,6 +1424,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     }
     .data-heading,
     .data-split,
+    .data-toolchain,
     .data-cards {
       grid-template-columns: 1fr;
       gap: 24px;

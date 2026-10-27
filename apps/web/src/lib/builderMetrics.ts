@@ -1,4 +1,11 @@
-import type { BuilderDailyPlatformMetric, BuilderFailureMetric, BuilderPlatformMetric, PublicBuilderMetrics } from './publicBuilderMetrics'
+import type {
+  BuilderDailyPlatformMetric,
+  BuilderDependencyManagerMetric,
+  BuilderFailureMetric,
+  BuilderPlatformMetric,
+  BuilderXcodeVersionMetric,
+  PublicBuilderMetrics,
+} from './publicBuilderMetrics'
 
 export type BuilderMetrics = PublicBuilderMetrics & { source?: 'api' | 'cache' }
 
@@ -41,6 +48,16 @@ function normalizePlatform(value: unknown): BuilderPlatformMetric | null {
   }
 }
 
+function normalizeXcodeVersion(value: unknown): BuilderXcodeVersionMetric | null {
+  if (!isRecord(value) || typeof value.version !== 'string' || !/^\d+$/.test(value.version)) return null
+  return { version: value.version, share: percentage(value.share) }
+}
+
+function normalizeDependencyManager(value: unknown): BuilderDependencyManagerMetric | null {
+  if (!isRecord(value) || (value.key !== 'spm' && value.key !== 'cocoapods')) return null
+  return { key: value.key, share: percentage(value.share) }
+}
+
 function normalizePlatformTrendRows(value: unknown) {
   if (!Array.isArray(value)) return []
   return value
@@ -69,6 +86,8 @@ export function emptyBuilderMetrics(): BuilderMetrics {
     hourly_platforms: [],
     failures: [],
     platforms: [],
+    xcode_versions: [],
+    ios_dependency_managers: [],
   }
 }
 
@@ -89,6 +108,13 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
 
   const failures = value.failures.map(normalizeFailure).filter((item): item is BuilderFailureMetric => item !== null)
   const platforms = value.platforms.map(normalizePlatform).filter((item): item is BuilderPlatformMetric => item !== null)
+  // Older builder payloads have no toolchain shares: the page then shows none.
+  const xcode_versions = (Array.isArray(value.xcode_versions) ? value.xcode_versions : [])
+    .map(normalizeXcodeVersion)
+    .filter((item): item is BuilderXcodeVersionMetric => item !== null)
+  const ios_dependency_managers = (Array.isArray(value.ios_dependency_managers) ? value.ios_dependency_managers : [])
+    .map(normalizeDependencyManager)
+    .filter((item): item is BuilderDependencyManagerMetric => item !== null)
 
   return {
     success_rate: percentage(value.success_rate),
@@ -101,5 +127,7 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
     hourly_platforms,
     failures,
     platforms,
+    xcode_versions,
+    ios_dependency_managers,
   }
 }

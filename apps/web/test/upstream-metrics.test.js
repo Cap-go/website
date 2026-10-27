@@ -34,6 +34,14 @@ const builderPayload = {
   hourly_platforms: [],
   failures: [{ reason: 'script_failure', share: 100 }],
   platforms: [],
+  xcode_versions: [
+    { version: '27', share: 19.5 },
+    { version: '26', share: 80.5 },
+  ],
+  ios_dependency_managers: [
+    { key: 'spm', share: 73.4 },
+    { key: 'cocoapods', share: 26.6 },
+  ],
 }
 
 let previousCaches
@@ -68,6 +76,24 @@ test('builder metrics are the normalized builder payload', async () => {
   expect(response.status).toBe(200)
   expect(await response.json()).toEqual(builderPayload)
   expect(calls).toEqual(['https://builder.example.test/stats/public'])
+})
+
+test('builder toolchain shares drop unknown entries and default to none on older payloads', async () => {
+  const noisy = upstream({
+    ...builderPayload,
+    xcode_versions: [{ version: '26', share: 80 }, { version: '26.0.1', share: 10 }, null],
+    ios_dependency_managers: [{ key: 'spm', share: 70 }, { key: 'carthage', share: 30 }],
+  })
+  const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, noisy.fetchImpl)
+  const body = await response.json()
+  expect(body.xcode_versions).toEqual([{ version: '26', share: 80 }])
+  expect(body.ios_dependency_managers).toEqual([{ key: 'spm', share: 70 }])
+
+  const { xcode_versions: _xcode, ios_dependency_managers: _managers, ...older } = builderPayload
+  const legacy = upstream(older)
+  const legacyBody = await (await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, legacy.fetchImpl)).json()
+  expect(legacyBody.xcode_versions).toEqual([])
+  expect(legacyBody.ios_dependency_managers).toEqual([])
 })
 
 test('out-of-range upstream values are clamped before anyone reads them', async () => {
