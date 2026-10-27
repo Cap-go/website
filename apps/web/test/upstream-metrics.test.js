@@ -42,6 +42,10 @@ const builderPayload = {
     { key: 'spm', share: 73.4 },
     { key: 'cocoapods', share: 26.6 },
   ],
+  daily_ios_toolchain: [
+    { date: '2026-10-25', xcode_versions: [], ios_dependency_managers: [] },
+    { date: '2026-10-26', xcode_versions: [{ version: '26', share: 100 }], ios_dependency_managers: [{ key: 'spm', share: 100 }] },
+  ],
 }
 
 let previousCaches
@@ -83,17 +87,20 @@ test('builder toolchain shares drop unknown entries and default to none on older
     ...builderPayload,
     xcode_versions: [{ version: '26', share: 80 }, { version: '26.0.1', share: 10 }, null],
     ios_dependency_managers: [{ key: 'spm', share: 70 }, { key: 'carthage', share: 30 }],
+    daily_ios_toolchain: [{ date: '2026-10-26', xcode_versions: [{ version: 'beta', share: 5 }, { version: '27', share: 95 }], ios_dependency_managers: 'spm' }, { xcode_versions: [] }, null],
   })
   const response = await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, noisy.fetchImpl)
   const body = await response.json()
   expect(body.xcode_versions).toEqual([{ version: '26', share: 80 }])
   expect(body.ios_dependency_managers).toEqual([{ key: 'spm', share: 70 }])
+  expect(body.daily_ios_toolchain).toEqual([{ date: '2026-10-26', xcode_versions: [{ version: '27', share: 95 }], ios_dependency_managers: [] }])
 
-  const { xcode_versions: _xcode, ios_dependency_managers: _managers, ...older } = builderPayload
+  const { xcode_versions: _xcode, ios_dependency_managers: _managers, daily_ios_toolchain: _daily, ...older } = builderPayload
   const legacy = upstream(older)
   const legacyBody = await (await handleBuilderMetrics(new Request('https://capgo.app/builder-metrics.json'), { BUILDER_METRICS_URL: 'https://builder.example.test/stats/public' }, undefined, legacy.fetchImpl)).json()
   expect(legacyBody.xcode_versions).toEqual([])
   expect(legacyBody.ios_dependency_managers).toEqual([])
+  expect(legacyBody.daily_ios_toolchain).toEqual([])
 })
 
 test('out-of-range upstream values are clamped before anyone reads them', async () => {

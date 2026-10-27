@@ -344,6 +344,22 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
           </div>
         </div>
       </div>
+      <div class="data-shell data-toolchain data-toolchain-trends">
+        <figure class="data-stack-figure">
+          <figcaption id="xcode-trend-title">Xcode version per day</figcaption>
+          <ul class="data-legend" data-stack-legend="xcode" translate="no"></ul>
+          <div class="data-stack" data-stack="xcode" role="img" aria-labelledby="xcode-trend-title" aria-describedby="xcode-trend-summary"></div>
+          <p class="data-stack-axis" data-stack-axis="xcode" translate="no"></p>
+          <p class="data-sr-only" id="xcode-trend-summary" data-stack-summary="xcode"></p>
+        </figure>
+        <figure class="data-stack-figure">
+          <figcaption id="dependency-trend-title">CocoaPods vs SPM per day</figcaption>
+          <ul class="data-legend" data-stack-legend="dependency" translate="no"></ul>
+          <div class="data-stack" data-stack="dependency" role="img" aria-labelledby="dependency-trend-title" aria-describedby="dependency-trend-summary"></div>
+          <p class="data-stack-axis" data-stack-axis="dependency" translate="no"></p>
+          <p class="data-sr-only" id="dependency-trend-summary" data-stack-summary="dependency"></p>
+        </figure>
+      </div>
     </section>
     <ProductTestimonials
       variant="dark"
@@ -416,6 +432,15 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const toolchainLead = page?.querySelector<HTMLElement>('[data-toolchain-lead]')
     const xcodeShares = page?.querySelector<HTMLOListElement>('[data-xcode-shares]')
     const dependencyShares = page?.querySelector<HTMLOListElement>('[data-dependency-shares]')
+    function stackChart(key: 'xcode' | 'dependency') {
+      return {
+        chart: page?.querySelector<HTMLElement>(`[data-stack="${key}"]`),
+        legend: page?.querySelector<HTMLUListElement>(`[data-stack-legend="${key}"]`),
+        axis: page?.querySelector<HTMLElement>(`[data-stack-axis="${key}"]`),
+        summary: page?.querySelector<HTMLElement>(`[data-stack-summary="${key}"]`),
+      }
+    }
+    const stackCharts = { xcode: stackChart('xcode'), dependency: stackChart('dependency') }
     const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
     const metricButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-metric]') ?? [])]
     const styleScopeAttributes = [...(page?.attributes ?? [])].map((attribute) => attribute.name).filter((name) => name.startsWith('data-astro-cid-'))
@@ -703,9 +728,94 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (!items.length) list.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: empty }))
     }
 
+    const XCODE_COLORS = ['#60a5fa', '#a78bfa', '#34d399', '#f472b6', '#94a3b8']
+    const DEPENDENCY_COLORS: Record<string, string> = { 'Swift Package Manager': '#60a5fa', CocoaPods: '#f59e0b' }
+
+    type StackDay = { date: string; segments: Array<{ label: string; share: number }> }
+
+    function describeSegments(segments: StackDay['segments']) {
+      return segments.map((segment) => `${segment.label} ${Math.round(segment.share)}%`).join(', ')
+    }
+
+    /** One 100% stacked column per UTC day, from the first day with data to the end of the window. */
+    function renderStack(target: ReturnType<typeof stackChart>, days: StackDay[], order: string[], colorOf: (label: string) => string, empty = 'No data in this window.') {
+      const { chart, legend, axis, summary } = target
+      if (!chart) return
+      const first = days.findIndex((day) => day.segments.length > 0)
+      const rows = first === -1 ? [] : days.slice(first)
+      chart.replaceChildren()
+      legend?.replaceChildren()
+      if (axis) axis.textContent = ''
+      if (summary) summary.textContent = empty
+      if (!rows.length) {
+        chart.append(Object.assign(createScopedElement('p'), { className: 'data-empty', textContent: empty }))
+        return
+      }
+      const present = new Set(rows.flatMap((day) => day.segments.map((segment) => segment.label)))
+      const labels = order.filter((label) => present.has(label))
+      for (const label of labels) {
+        const item = createScopedElement('li')
+        const swatch = createScopedElement('i')
+        swatch.setAttribute('aria-hidden', 'true')
+        swatch.style.background = colorOf(label)
+        item.append(swatch, label)
+        legend?.append(item)
+      }
+      for (const day of rows) {
+        const column = createScopedElement('span')
+        column.title = `${day.date}: ${day.segments.length ? describeSegments(day.segments) : 'no data'}`
+        for (const segment of day.segments) {
+          if (segment.share <= 0) continue
+          const bar = createScopedElement('i')
+          bar.style.height = `${segment.share}%`
+          bar.style.background = colorOf(segment.label)
+          column.append(bar)
+        }
+        chart.append(column)
+      }
+      const last = rows.at(-1)?.date ?? ''
+      if (axis) axis.textContent = rows.length === 1 ? last : `${rows[0].date} – ${last}`
+      const latest = rows.findLast((day) => day.segments.length > 0)
+      if (summary && latest) summary.textContent = `From ${rows[0].date} to ${last}. Latest day with data (${latest.date}): ${describeSegments(latest.segments)}.`
+    }
+
+    function dependencyLabel(key: 'spm' | 'cocoapods') {
+      return key === 'spm' ? 'Swift Package Manager' : 'CocoaPods'
+    }
+
+    function renderToolchainTrends(metrics: BuilderMetrics) {
+      // Newest Xcode first, the same color for a version on every day.
+      const versions = [...new Set(metrics.daily_ios_toolchain.flatMap((day) => day.xcode_versions.map((item) => item.version)))].sort((a, b) => Number(b) - Number(a))
+      renderStack(
+        stackCharts.xcode,
+        metrics.daily_ios_toolchain.map((day) => ({
+          date: day.date,
+          segments: versions.flatMap((version) => {
+            const item = day.xcode_versions.find((entry) => entry.version === version)
+            return item ? [{ label: `Xcode ${version}`, share: item.share }] : []
+          }),
+        })),
+        versions.map((version) => `Xcode ${version}`),
+        (label) => XCODE_COLORS[Math.min(versions.indexOf(label.replace('Xcode ', '')), XCODE_COLORS.length - 1)],
+      )
+      renderStack(
+        stackCharts.dependency,
+        metrics.daily_ios_toolchain.map((day) => ({
+          date: day.date,
+          segments: (['spm', 'cocoapods'] as const).flatMap((key) => {
+            const item = day.ios_dependency_managers.find((entry) => entry.key === key)
+            return item ? [{ label: dependencyLabel(key), share: item.share }] : []
+          }),
+        })),
+        Object.keys(DEPENDENCY_COLORS),
+        (label) => DEPENDENCY_COLORS[label] ?? '#94a3b8',
+      )
+    }
+
     function renderToolchain(metrics: BuilderMetrics) {
+      renderToolchainTrends(metrics)
       const xcode = metrics.xcode_versions.map((item) => ({ label: `Xcode ${item.version}`, share: item.share }))
-      const managers = metrics.ios_dependency_managers.map((item) => ({ label: item.key === 'spm' ? 'Swift Package Manager' : 'CocoaPods', share: item.share }))
+      const managers = metrics.ios_dependency_managers.map((item) => ({ label: dependencyLabel(item.key), share: item.share }))
       renderShares(xcodeShares, xcode, 'No data in this window.')
       renderShares(dependencyShares, managers, 'No data in this window.')
       if (toolchainLead) {
@@ -778,6 +888,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (toolchainLead) toolchainLead.textContent = 'Toolchain data is temporarily unavailable.'
       renderShares(xcodeShares, [], 'Temporarily unavailable.')
       renderShares(dependencyShares, [], 'Temporarily unavailable.')
+      for (const target of Object.values(stackCharts)) renderStack(target, [], [], () => '', 'Temporarily unavailable.')
     }
 
     async function fetchMetrics() {
@@ -1387,6 +1498,73 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+  .data-toolchain-trends {
+    margin-top: 40px;
+  }
+  .data-stack-figure {
+    min-width: 0;
+    margin: 0;
+  }
+  .data-stack-figure figcaption {
+    color: #91a2ba;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .data-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    justify-content: flex-start;
+    margin: 12px 0;
+    padding: 0;
+    list-style: none;
+    color: #d8e1ee;
+    font-size: 0.85rem;
+  }
+  .data-legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .data-legend i {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .data-stack {
+    display: flex;
+    gap: 2px;
+    align-items: stretch;
+    height: 160px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    background: rgb(255 255 255 / 2%);
+  }
+  .data-stack > span {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column-reverse;
+    min-width: 2px;
+    max-width: 24px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: rgb(255 255 255 / 4%);
+  }
+  .data-stack > span > i {
+    display: block;
+    flex: none;
+  }
+  .data-stack .data-empty {
+    margin: auto;
+  }
+  .data-stack-axis {
+    margin: 6px 0 0;
+    color: #6f819b;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
   }
   .data-shares li {
     grid-template-columns: minmax(0, 1fr) auto;
