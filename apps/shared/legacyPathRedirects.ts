@@ -43,6 +43,8 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/app-access-management': '/blog/how-rbac-secures-ota-updates-in-capacitor-apps/',
   '/blog/app-behavior-tracking': '/blog/capgo-plugin-for-custom-event-tracking/',
   '/blog/app-health-check': '/blog/app-health-monitoring/',
+  '/blog/what-is-observability': '/blog/app-health-monitoring/',
+  '/blog/multi-platform-software-development': '/blog/cross-platform-mobile-app-development-vs-native/',
   '/blog/app-risk-assessment': '/blog/ota-security-checklist-for-capacitor-apps/',
   '/blog/app-security-best-practices': '/blog/5-security-best-practices-for-mobile-app-live-updates/',
   '/blog/expo-development-client': '/blog/alternative-to-expo/',

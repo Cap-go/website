@@ -16,6 +16,8 @@ const REDIRECTS = [
   ['/blog/what-is-enabled-by-the-continuous-delivery-pipeline/', '/blog/what-is-continuous-delivery/'],
   ['/blog/what-is-soc-2-certification/', '/security-questionnaire/'],
   ['/blog/app-health-check/', '/blog/app-health-monitoring/'],
+  ['/blog/what-is-observability/', '/blog/app-health-monitoring/'],
+  ['/blog/multi-platform-software-development/', '/blog/cross-platform-mobile-app-development-vs-native/'],
   ['/blog/how-chinas-cybersecurity-law-impacts-app-developers/', '/blog/how-chinas-data-laws-impact-app-store-submissions/'],
   ['/blog/wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt/', '/blog/how-chinas-data-laws-impact-app-store-submissions/'],
   ['/blog/uptime-guarantee/', '/sla/'],
