@@ -29,6 +29,12 @@ export type IosDependencyManagerKey = 'spm' | 'cocoapods'
 
 export type BuilderDependencyManagerMetric = { key: IosDependencyManagerKey; share: number }
 
+export type BuilderDailyToolchainMetric = {
+  date: string
+  xcode_versions: BuilderXcodeVersionMetric[]
+  ios_dependency_managers: BuilderDependencyManagerMetric[]
+}
+
 export type PublicBuilderMetrics = {
   success_rate: number
   avg_process_seconds: number | null
@@ -44,4 +50,6 @@ export type PublicBuilderMetrics = {
   xcode_versions: BuilderXcodeVersionMetric[]
   /** Share of the iOS builds of the period using SPM or CocoaPods, as sent by the CLI. */
   ios_dependency_managers: BuilderDependencyManagerMetric[]
+  /** The same shares for each UTC day of the daily trend. */
+  daily_ios_toolchain: BuilderDailyToolchainMetric[]
 }
