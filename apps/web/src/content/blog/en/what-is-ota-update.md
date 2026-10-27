@@ -23,14 +23,14 @@ You've probably lived this already. A broken checkout label, a typo in a product
 
 ## Table of Contents
 - [The Waiting Problem Every Mobile Team Knows](#the-waiting-problem-every-mobile-team-knows)
-- [What OTA Really Means Beyond the Acronym](#what-ota-really-means-beyond-the-acronym)
+- [Over the air updates: what OTA really means](#what-ota-really-means-beyond-the-acronym)
   - [Two meanings people mix together](#two-meanings-people-mix-together)
 - [Full Packages, Differential Patches, and Snapshots](#full-packages-differential-patches-and-snapshots)
   - [Picking the shape that matches the app](#picking-the-shape-that-matches-the-app)
 - [Signing, Transport, and Rollback as Security Basics](#signing-transport-and-rollback-as-security-basics)
   - [Each control blocks a different attack](#each-control-blocks-a-different-attack)
   - [Rollback is part of security, not an emergency add-on](#rollback-is-part-of-security-not-an-emergency-add-on)
-- [Capacitor, Ionic, Electron, and Native Apps Side by Side](#capacitor-ionic-electron-and-native-apps-side-by-side)
+- [Capacitor live updates, Ionic OTA, and native apps side by side](#capacitor-ionic-electron-and-native-apps-side-by-side)
   - [A quick platform-by-platform view](#a-quick-platform-by-platform-view)
   - [Use a checklist before you call something OTA](#use-a-checklist-before-you-call-something-ota)
 - [Rollout Channels and Rollback as an Operational Loop](#rollout-channels-and-rollback-as-an-operational-loop)
