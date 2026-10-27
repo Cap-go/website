@@ -1,6 +1,110 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.97.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.3",
+    "pubDate": "2026-10-27T00:37:53.000Z",
+    "description": "🆕 Changelog Added Added support for serving images exclusively from Cloudflare R2 for improved reliability and reduced origin load ( 3922). Bundle manifest files can now be sorted by name, size, or checksum ( 3912). Added clearer messaging for legacy plugins when failed update checks are intentionally ignored ( 3914). Changed Improved queue dispatch reliability by sending only readable messages and preserving Cloudflare IDs when messages fail ( 3918). Updated agent documentation to clarify t..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.19.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.1",
+    "pubDate": "2026-10-27T01:59:41.000Z",
+    "description": "🆕 Changelog Security Strengthened login security by forwarding the real client IP to Supabase Auth and enforcing Turnstile verification in the authentication relay, helping prevent abuse and improve fraud detection. Changed Improved the Supabase to R2 image migration by making it significantly faster and adding live progress feedback, so large image transfers are easier to track and complete. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.97.3...capgo 22.19.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.19.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.0",
+    "pubDate": "2026-10-27T00:51:07.000Z",
+    "description": "🆕 Changelog Changed Serve storage images from Cloudflare R2 only for improved reliability and performance. Removed Removed Sign in with Apple authentication. Users who previously signed in with Apple must switch to email/password or another supported identity provider before signing in again. Fixed Set strict owner only file permissions when writing the E2E private key through the CLI. Keep the public user profile email address synchronized with the authentication provider email. Security Re..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.18.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.2",
+    "pubDate": "2026-10-26T23:19:56.000Z",
+    "description": "🆕 Changelog Fixed Reduced Cloudflare API usage to stay within rate limits, preventing stats collection from being throttled or failing. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.18.1...capgo 22.18.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.18.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.1",
+    "pubDate": "2026-10-26T23:13:06.000Z",
+    "description": "🆕 Changelog Changed Improved queue dispatch performance by processing only readable pgmq messages, reducing unnecessary overhead. Preserved Cloudflare IDs for failed queue messages to simplify failure tracking and debugging. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.18.0...capgo 22.18.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.18.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.0",
+    "pubDate": "2026-10-26T20:02:47.000Z",
+    "description": "🆕 Changelog Added Improved update check messaging for legacy plugins : Added clear explanations when failed update checks are ignored because you are using legacy Capacitor plugins. This helps you understand why update errors may not surface on older plugin versions and whether an upgrade is needed. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.4...capgo 22.18.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.17.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.4",
+    "pubDate": "2026-10-26T17:44:39.000Z",
+    "description": "🆕 Changelog Fixed Updated number, currency, and date formatting to follow the selected UI language, ensuring these formats stay consistent with the rest of the interface language. ( 3880) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.3...capgo 22.17.4"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.17.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.3",
+    "pubDate": "2026-10-26T17:15:28.000Z",
+    "description": "🆕 Changelog Fixed Fixed an issue where the Choose call to action was missing on billing plan cards for organizations without an active plan, making it easier to select a subscription. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.2...capgo 22.17.3"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.17.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.2",
+    "pubDate": "2026-10-26T14:39:47.000Z",
+    "description": "🆕 Changelog Fixed Corrected an issue where legacy update check events were incorrectly counted as bundle failures in statistics, improving the accuracy of bundle failure metrics. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.1...capgo 22.17.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.17.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.1",
+    "pubDate": "2026-10-26T13:48:55.000Z",
+    "description": "🆕 Changelog Fixed Corrected the display of encrypted bundle checksums to show the SHA 256 hash type, making it easier to verify bundle integrity. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.0...capgo 22.17.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.17.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.0",
+    "pubDate": "2026-10-26T13:37:49.000Z",
+    "description": "🆕 Changelog Added Sort bundle manifest files by name, size, or checksum, making it easier to locate and compare specific files in a bundle. Changed Updated agent documentation to clarify that read replicas are hosted on Google Cloud SQL rather than PlanetScale, ensuring deployment architecture is accurately described. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.7...capgo 22.17.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.16.7",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.7",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.7",
+    "pubDate": "2026-10-26T12:11:17.000Z",
+    "description": "🆕 Changelog Fixed Ensured the support usernames prompt stays behind billing dialogs, preventing it from covering payment and billing forms during checkout. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.6...capgo 22.16.7"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.16.6",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.6",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.6",
+    "pubDate": "2026-10-26T10:33:11.000Z",
+    "description": "🆕 Changelog Changed Updated Stripe documentation to clarify which services consume the legacy trial Bento event. This helps users understand event routing and identify dependencies when migrating away from the legacy event. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.5...capgo 22.16.6"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.16.5",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.5",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.5",
@@ -216,116 +320,12 @@
     "description": "🆕 Changelog Fixed Fixed an issue where console images served through the image proxy failed to load when the source URL returned a redirect. Redirect responses are now followed correctly, so images display as expected. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.12.1...capgo 22.12.2"
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.12.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.1",
-    "pubDate": "2026-10-23T01:37:05.000Z",
-    "description": "🆕 Changelog Changed Improved performance of plugin endpoints by answering requests at the edge ( 3821). This reduces latency and provides faster access to plugin statistics. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.12.0...capgo 22.12.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.12.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.12.0",
-    "pubDate": "2026-10-23T01:18:13.000Z",
-    "description": "🆕 Changelog Changed Routed all console data and authentication through the Capgo API. The console now communicates exclusively with the Capgo API for data operations and user authentication, replacing direct Supabase client interactions. This creates a more consistent, centralized access model and simplifies the console's relationship with backend services. Removed Direct Supabase integration from the console. The console no longer relies on Supabase for data or authentication. If you previo..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.95.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.95.0",
-    "pubDate": "2026-10-22T23:28:28.000Z",
-    "description": "🆕 Changelog Added Added an AI first onboarding flow that guides new users through Capgo MCP setup right after signup, reducing manual configuration and helping you reach a production ready state faster. Introduced more natural sounding console translations, reviewed with Gemma 4 and GPT OSS against locale specific style guides, so CLI messages and prompts now feel native to your language. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.94.0...cli 8.95.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.94.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.94.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.94.0",
-    "pubDate": "2026-10-22T21:44:40.000Z",
-    "description": "🆕 Changelog Added Directed setup and plan notices to AI assistants, making CLI output more useful for automation tools and AI powered workflows. Fixed Respected explore banner eligibility rules in onboarding, so the banner is only shown to qualified users. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.93.0...cli 8.94.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.93.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.93.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.93.0",
-    "pubDate": "2026-10-22T20:35:33.000Z",
-    "description": "🆕 Changelog Added Display setup notices in GitHub Actions to surface required CLI configuration steps during CI workflows. Add an optional CI/CD setup guide during onboarding to help configure automated pipelines. Enable OpenAI Ads paid conversion tracking and plan first onboarding for direct offer organizations. Introduce auth.md agent registration to the API, returning rate limit headers and supporting both and Bearer API key authentication. Changed Update generated CLI documentation to re..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.92.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.3",
-    "pubDate": "2026-10-22T16:00:53.000Z",
-    "description": "🆕 Changelog Removed Removed the unused bundle finalization endpoint ( 3850). Standard bundle workflows are unaffected; direct integrations that called this endpoint should remove those references. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.92.2...cli 8.92.3"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.92.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.2",
-    "pubDate": "2026-10-22T15:25:34.000Z",
-    "description": "🆕 Changelog Added Added explanatory guidance to the empty Channels page, helping users understand what channels are and how to get started. ( 3840) Changed Improved performance for bundle delete, cleanup, and listing operations by moving the processing work into the API. This reduces local overhead and provides faster, more reliable results. ( 3831) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.92.1...cli 8.92.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.92.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.1",
-    "pubDate": "2026-10-22T14:30:16.000Z",
-    "description": "🆕 Changelog Fixed Send background scan analytics from the coordinator : Resolved an issue where background scan analytics were not being reported correctly. This ensures accurate tracking and visibility into background scan usage and performance. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.92.0...cli 8.92.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.92.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.92.0",
-    "pubDate": "2026-10-22T09:25:31.000Z",
-    "description": "🆕 Changelog Added Added an org wide Native Builds tab to the dashboard, giving teams a centralized view of native build activity. Added backup payment card support and recommendations to keep subscriptions active when a primary card fails. Added a billing flow that collects a card at plan activation and automatically starts the onboarding plan when the trial ends. Allowed trial users to change plans before their card is automatically charged at the end of the trial. Surfaced skipped onboardi..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.9.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.9.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.9.0",
-    "pubDate": "2026-10-22T16:16:35.000Z",
-    "description": "🆕 Changelog Added Added rate limit headers to API responses, making it easier to monitor request quotas and retry windows. Added support for and token authentication schemes, providing more flexibility when authenticating API clients. Changed Updated agent registration documentation in to clarify the authentication setup flow. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.92.3...capgo 22.9.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.8.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.8.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.8.0",
-    "pubDate": "2026-10-22T15:28:19.000Z",
-    "description": "🆕 Changelog Added Added helpful guidance on the empty Channels page to explain what channels are and how to get started ( 3840). Changed Improved CLI performance and reliability by moving bundle delete, cleanup, and listing operations into the API ( 3831). 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.92.1...capgo 22.8.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.7.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.7.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.7.0",
-    "pubDate": "2026-10-22T14:04:37.000Z",
-    "description": "🆕 Changelog Added Billing: Start plan from trial and reset usage — Trial organizations can now start their paid plan immediately and reset their usage counters, giving them control over when billing begins and ensuring usage aligns with their plan cycle. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.6.3...capgo 22.7.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.6.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.6.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.6.3",
-    "pubDate": "2026-10-22T12:33:35.000Z",
-    "description": "🆕 Changelog Changed Improved cleanup of pull request preview bundles through the REST API to keep preview environments tidy. Fixed Restored the Bento event so checkout start actions are tracked again in analytics. Fixed an issue that prevented users from accepting invitations when pending membership data could not be read. Updated the builder onboarding flow to display an existing checklist instead of the introduction screen when a checklist is already available. 🔗 Full Changelog : https://..."
-  },
-  {
     "category": "release",
-    "title": "capacitor-accelerometer 8.0.52",
-    "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.52",
-    "guid": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.52",
-    "pubDate": "2026-10-19T12:14:20.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime to v1.4.3 to incorporate the latest stability and performance improvements Refreshed dependency lock file to ensure consistent and reproducible installations 🔗 Full Changelog : https://github.com/Cap go/capacitor accelerometer/compare/8.0.51...8.0.52"
+    "title": "capacitor-accelerometer 8.0.53",
+    "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.53",
+    "guid": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.53",
+    "pubDate": "2026-10-26T12:21:20.000Z",
+    "description": "🆕 Changelog Changed Updated the toolchain dependency to v1.4.4 to stay current with upstream improvements and fixes ( 55). Refreshed the dependency lock file to ensure package versions remain consistent and reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor accelerometer/compare/8.0.52...8.0.53"
   },
   {
     "category": "release",
@@ -353,11 +353,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-android-age-signals 8.1.27",
-    "link": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.27",
-    "guid": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.27",
-    "pubDate": "2026-10-19T12:14:18.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.3 for improved build performance and compatibility. Performed dependency lock file maintenance to ensure reproducible installs and the latest compatible package versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor android age signals/compare/8.1.26...8.1.27"
+    "title": "capacitor-android-age-signals 8.1.28",
+    "link": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.28",
+    "guid": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.28",
+    "pubDate": "2026-10-26T12:43:15.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.4, ensuring compatibility with the latest Bun tooling improvements and fixes. Refreshed the dependency lock file to keep transitive dependencies current and maintain reproducible builds. 🔗 Full Changelog : https://github.com/Cap go/capacitor android age signals/compare/8.1.27...8.1.28"
   },
   {
     "category": "release",
@@ -385,19 +385,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-android-usagestatsmanager 8.2.12",
-    "link": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.12",
-    "guid": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.12",
-    "pubDate": "2026-10-19T12:07:50.000Z",
-    "description": "🆕 Changelog Changed Updated bun runtime dependency to v1.4.3 for improved stability and compatibility Refreshed dependency lock file to ensure consistent installations and incorporate transitive dependency updates 🔗 Full Changelog : https://github.com/Cap go/capacitor android usagestatsmanager/compare/8.2.11...8.2.12"
+    "title": "capacitor-android-usagestatsmanager 8.2.13",
+    "link": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.13",
+    "guid": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.13",
+    "pubDate": "2026-10-26T12:25:20.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.4, bringing the latest compatibility improvements and tooling enhancements. Refreshed dependency lock file to ensure consistent and reproducible installs across environments. 🔗 Full Changelog : https://github.com/Cap go/capacitor android usagestatsmanager/compare/8.2.12...8.2.13"
   },
   {
     "category": "release",
-    "title": "capacitor-app-attest 8.2.15",
-    "link": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.15",
-    "guid": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.15",
-    "pubDate": "2026-10-19T07:21:18.000Z",
-    "description": "🆕 Changelog Changed Updated dependencies to their latest compatible versions through routine lock file maintenance, ensuring the project continues to receive upstream patches and improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor app attest/compare/8.2.14...8.2.15"
+    "title": "capacitor-app-attest 8.2.16",
+    "link": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.16",
+    "guid": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.16",
+    "pubDate": "2026-10-26T06:54:08.000Z",
+    "description": "🆕 Changelog Fixed Prevented pull request beta comment CI jobs from stalling when duplicate Renovate runs occur, ensuring faster and more reliable status feedback on PRs. Changed Updated dependency lock file with maintenance changes to keep the project current and secure. 🔗 Full Changelog : https://github.com/Cap go/capacitor app attest/compare/8.2.15...8.2.16"
   },
   {
     "category": "release",
@@ -417,11 +417,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-appinsights 8.0.56",
-    "link": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.56",
-    "guid": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.56",
-    "pubDate": "2026-10-19T12:19:51.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to v1.4.3 for improved stability and compatibility. Refreshed the dependency lock file to ensure consistent and reproducible installs. 🔗 Full Changelog : https://github.com/Cap go/capacitor appinsights/compare/8.0.55...8.0.56"
+    "title": "capacitor-appinsights 8.0.57",
+    "link": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.57",
+    "guid": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.57",
+    "pubDate": "2026-10-26T12:30:01.000Z",
+    "description": "🆕 Changelog Changed Updated runtime dependency to version 1.4.4 to incorporate the latest improvements, bug fixes, and performance enhancements. Performed routine dependency lock file maintenance to keep package resolutions current and consistent. 🔗 Full Changelog : https://github.com/Cap go/capacitor appinsights/compare/8.0.56...8.0.57"
   },
   {
     "category": "release",
@@ -449,11 +449,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-audiosession 8.1.5",
-    "link": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.5",
-    "guid": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.5",
-    "pubDate": "2026-10-19T12:04:58.000Z",
-    "description": "🆕 Changelog Changed Updated TypeScript to v6. Projects consuming bundled type definitions may need to upgrade to TypeScript 6.0 or later. If you rely on these types, update your TypeScript dependency before upgrading. Updated Bun runtime dependency to v1.4.3 , incorporating the latest Bun fixes and improvements. Refreshed lock file to ensure reproducible builds and keep transitive dependencies consistent. 🔗 Full Changelog : https://github.com/Cap go/capacitor audiosession/compare/8.1.4...8.1.5"
+    "title": "capacitor-audiosession 8.1.6",
+    "link": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.6",
+    "guid": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.6",
+    "pubDate": "2026-10-26T12:27:00.000Z",
+    "description": "🆕 Changelog Changed Updated bundled Bun runtime to v1.4.4 for improved performance, stability, and compatibility. Refreshed the dependency lock file to ensure reproducible installs and keep transitive dependencies current. Fixed No user facing bug fixes in this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor audiosession/compare/8.1.5...8.1.6"
   },
   {
     "category": "release",
@@ -473,11 +473,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-background-geolocation 8.4.14",
-    "link": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.4.14",
-    "guid": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.4.14",
-    "pubDate": "2026-10-15T03:07:49.000Z",
-    "description": "🆕 Changelog Changed Updated project documentation for improved clarity and accuracy. Upgraded development dependencies to ESLint 10 and TypeScript 6 to stay current with linting and type checking standards. Streamlined the README by removing the consulting call to action. 🔗 Full Changelog : https://github.com/Cap go/capacitor background geolocation/compare/8.4.13...8.4.14"
+    "title": "capacitor-background-geolocation 8.5.0",
+    "link": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.5.0",
+    "guid": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.5.0",
+    "pubDate": "2026-10-27T01:36:44.000Z",
+    "description": "🆕 Changelog Added Added opt in SQLite location log for storing device location history locally, providing a privacy focused alternative to external location services. Changed Updated Bun runtime dependency to v1.4.4 to incorporate the latest stability and performance improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor background geolocation/compare/8.4.14...8.5.0"
   },
   {
     "category": "release",
@@ -561,11 +561,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-data-storage-sqlite 8.0.57",
-    "link": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.57",
-    "guid": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.57",
-    "pubDate": "2026-10-19T12:12:23.000Z",
-    "description": "🆕 Changelog Changed Updated runtime dependency to v1.4.3 for improved stability and compatibility. Refreshed lock file to ensure reproducible installs and latest compatible dependency versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor data storage sqlite/compare/8.0.56...8.0.57"
+    "title": "capacitor-data-storage-sqlite 8.0.58",
+    "link": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.58",
+    "guid": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.58",
+    "pubDate": "2026-10-26T12:12:45.000Z",
+    "description": "🆕 Changelog Changed Updated to version 1.4.4 for improved tooling stability and compatibility. Refreshed dependency lock files to ensure consistent and reproducible installs. 🔗 Full Changelog : https://github.com/Cap go/capacitor data storage sqlite/compare/8.0.57...8.0.58"
   },
   {
     "category": "release",
@@ -593,27 +593,27 @@
   },
   {
     "category": "release",
-    "title": "capacitor-document-scanner 8.4.15",
-    "link": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.15",
-    "guid": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.15",
-    "pubDate": "2026-10-24T13:48:28.000Z",
-    "description": "🆕 Changelog Fixed Removed the VisionKit method swizzling logic from the default iOS binary, reducing app size and avoiding unnecessary framework dependencies. 🔗 Full Changelog : https://github.com/Cap go/capacitor document scanner/compare/8.4.14...8.4.15"
+    "title": "capacitor-document-scanner 8.4.16",
+    "link": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.16",
+    "guid": "https://github.com/Cap-go/capacitor-document-scanner/releases/tag/8.4.16",
+    "pubDate": "2026-10-26T12:33:56.000Z",
+    "description": "🆕 Changelog Changed Refreshed the dependency lock file to ensure repeatable installations and pull in the latest compatible patches. Updated the Bun runtime dependency to the latest release for improved stability and compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor document scanner/compare/8.4.15...8.4.16"
   },
   {
     "category": "release",
-    "title": "capacitor-downloader 8.3.16",
-    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.16",
-    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.16",
-    "pubDate": "2026-10-19T07:03:58.000Z",
-    "description": "🆕 Changelog Changed Updated the dependency lock file to the latest resolved versions, helping keep the project stable and compatible with upstream fixes. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.3.15...8.3.16"
+    "title": "capacitor-downloader 8.3.17",
+    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.17",
+    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.17",
+    "pubDate": "2026-10-26T07:01:30.000Z",
+    "description": "🆕 Changelog Changed Updated project dependencies to their latest compatible versions through lock file maintenance, improving overall stability and reliability. Notes No new features, bug fixes, or breaking changes are included in this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.3.16...8.3.17"
   },
   {
     "category": "release",
-    "title": "capacitor-env 8.1.49",
-    "link": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.49",
-    "guid": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.49",
-    "pubDate": "2026-10-21T17:18:46.000Z",
-    "description": "🆕 Changelog Fixed iOS : Resolved a compiler warning when retrieving key values, improving code reliability and future compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor env/compare/8.1.48...8.1.49"
+    "title": "capacitor-env 8.1.50",
+    "link": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.50",
+    "guid": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.50",
+    "pubDate": "2026-10-26T12:28:57.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to its latest release for improved stability and compatibility. Refreshed the dependency lock file to keep installed dependencies consistent and reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor env/compare/8.1.49...8.1.50"
   },
   {
     "category": "release",
@@ -625,11 +625,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-fast-sql 8.2.14",
-    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.14",
-    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.14",
-    "pubDate": "2026-10-19T12:16:25.000Z",
-    "description": "🆕 Changelog Fixed Updated Robolectric testing dependency to v4.17, resolving underlying bugs and improving Android test reliability. ( 83) Changed Upgraded Bun tooling dependency to v1.4.3, bringing the latest performance improvements and fixes. ( 82) 🔗 Full Changelog : https://github.com/Cap go/capacitor fast sql/compare/8.2.13...8.2.14"
+    "title": "capacitor-fast-sql 8.2.15",
+    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.15",
+    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.15",
+    "pubDate": "2026-10-26T12:34:55.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun dependency to the latest patch release ( 84), bringing in the latest fixes and improvements for users running the project with Bun. Refreshed the dependency lock file to ensure consistent and reproducible installations across environments. 🔗 Full Changelog : https://github.com/Cap go/capacitor fast sql/compare/8.2.14...8.2.15"
   },
   {
     "category": "release",
@@ -641,11 +641,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-file-compressor 8.1.16",
-    "link": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.16",
-    "guid": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.16",
-    "pubDate": "2026-10-19T07:35:02.000Z",
-    "description": "🆕 Changelog Changed Updated dependency lock file to latest compatible resolved versions; no functional changes are expected. 🔗 Full Changelog : https://github.com/Cap go/capacitor file compressor/compare/8.1.15...8.1.16"
+    "title": "capacitor-file-compressor 8.1.17",
+    "link": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.17",
+    "guid": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.17",
+    "pubDate": "2026-10-26T12:15:31.000Z",
+    "description": "🆕 Changelog Changed Upgraded Bun runtime dependency to v1.4.4. Refreshed dependency lock file. 🔗 Full Changelog : https://github.com/Cap go/capacitor file compressor/compare/8.1.16...8.1.17"
   },
   {
     "category": "release",
@@ -673,11 +673,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-flash 8.0.49",
-    "link": "https://github.com/Cap-go/capacitor-flash/releases/tag/8.0.49",
-    "guid": "https://github.com/Cap-go/capacitor-flash/releases/tag/8.0.49",
-    "pubDate": "2026-10-19T12:03:30.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime to version 1.4.3 to improve compatibility and incorporate the latest patches ( 121) Refreshed lock file dependencies as part of routine maintenance 🔗 Full Changelog : https://github.com/Cap go/capacitor flash/compare/8.0.48...8.0.49"
+    "title": "capacitor-flash 8.0.50",
+    "link": "https://github.com/Cap-go/capacitor-flash/releases/tag/8.0.50",
+    "guid": "https://github.com/Cap-go/capacitor-flash/releases/tag/8.0.50",
+    "pubDate": "2026-10-26T12:20:26.000Z",
+    "description": "🆕 Changelog Changed Updated the bundled Bun runtime dependency to v1.4.4 for improved stability and compatibility. Refreshed the dependency lock file to ensure reproducible installs and pull in the latest transitive updates. 🔗 Full Changelog : https://github.com/Cap go/capacitor flash/compare/8.0.49...8.0.50"
   },
   {
     "category": "release",
@@ -689,11 +689,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-health 8.11.12",
-    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.11.12",
-    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.11.12",
-    "pubDate": "2026-10-15T02:16:29.000Z",
-    "description": "🆕 Changelog Changed Refreshed project documentation for improved clarity and accuracy. Upgraded development tooling to ESLint 10 and TypeScript 6. This is an internal toolchain update and should not affect runtime behavior, but contributors may need to update their local tooling to match. Removed Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor health/compare/8.11.11...8.11.12"
+    "title": "capacitor-health 8.11.13",
+    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.11.13",
+    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.11.13",
+    "pubDate": "2026-10-26T12:14:39.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to the latest patch release for runtime stability and performance improvements. Updated the GitHub Actions workflow action to a newer release for improved CI reliability and Node.js setup behavior. Refreshed dependency lock files to ensure reproducible installs and incorporate compatible transitive updates. 🔗 Full Changelog : https://github.com/Cap go/capacitor health/compare/8.11.12...8.11.13"
   },
   {
     "category": "release",
@@ -705,11 +705,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-ibeacon 8.1.45",
-    "link": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.45",
-    "guid": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.45",
-    "pubDate": "2026-10-19T12:05:23.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.3. Refreshed lock file and bumped dependencies to their latest compatible versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor ibeacon/compare/8.1.44...8.1.45"
+    "title": "capacitor-ibeacon 8.1.46",
+    "link": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.46",
+    "guid": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.46",
+    "pubDate": "2026-10-26T12:31:41.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun dependency to the latest patch release for improved compatibility and stability. Refreshed the dependency lock file to ensure reproducible installs and incorporate recent maintenance updates. 🔗 Full Changelog : https://github.com/Cap go/capacitor ibeacon/compare/8.1.45...8.1.46"
   },
   {
     "category": "release",
@@ -745,11 +745,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-intent-launcher 8.3.40",
-    "link": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.40",
-    "guid": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.40",
-    "pubDate": "2026-10-19T12:00:46.000Z",
-    "description": "🆕 Changelog Changed Updated runtime dependency to v1.4.3 for improved stability and compatibility. Refreshed lock file to keep installed dependencies in sync and ensure reproducible builds. 🔗 Full Changelog : https://github.com/Cap go/capacitor intent launcher/compare/8.3.39...8.3.40"
+    "title": "capacitor-intent-launcher 8.3.41",
+    "link": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.41",
+    "guid": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.41",
+    "pubDate": "2026-10-26T12:14:12.000Z",
+    "description": "🆕 Changelog Changed Updated development dependency to v1.4.4, ensuring compatibility with the latest runtime tooling. Performed routine lock file maintenance to keep installed dependencies current. 🔗 Full Changelog : https://github.com/Cap go/capacitor intent launcher/compare/8.3.40...8.3.41"
   },
   {
     "category": "release",
@@ -785,11 +785,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-jw-player 8.0.59",
-    "link": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.59",
-    "guid": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.59",
-    "pubDate": "2026-10-19T12:01:08.000Z",
-    "description": "🆕 Changelog Fixed Updated JW Player to v4.27.1 to resolve playback related issues from the previous version. Changed Updated build tooling (Bun) to v1.4.3 for improved development pipeline stability. 🔗 Full Changelog : https://github.com/Cap go/capacitor jw player/compare/8.0.58...8.0.59"
+    "title": "capacitor-jw-player 8.0.60",
+    "link": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.60",
+    "guid": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.60",
+    "pubDate": "2026-10-26T12:27:24.000Z",
+    "description": "🆕 Changelog Changed Updated to v26, bringing the latest TypeScript type definitions for Node.js and improving type accuracy in development tooling. Updated the minimum Bun runtime/development dependency to v1.4.4, ensuring compatibility with recent Bun releases and tooling improvements. Migration notes TypeScript users should verify their code against the latest Node.js type definitions; some older or deprecated type signatures may no longer be available after the update. Projects using Bun ..."
   },
   {
     "category": "release",
@@ -801,11 +801,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-launch-navigator 8.1.4",
-    "link": "https://github.com/Cap-go/capacitor-launch-navigator/releases/tag/8.1.4",
-    "guid": "https://github.com/Cap-go/capacitor-launch-navigator/releases/tag/8.1.4",
-    "pubDate": "2026-10-19T12:07:48.000Z",
-    "description": "🆕 Changelog Changed Updated the bundled Bun runtime dependency to v1.4.3 to benefit from the latest upstream improvements and fixes. Refreshed the dependency lock file to keep installed package versions consistent and builds reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor launch navigator/compare/8.1.3...8.1.4"
+    "title": "capacitor-launch-navigator 8.1.5",
+    "link": "https://github.com/Cap-go/capacitor-launch-navigator/releases/tag/8.1.5",
+    "guid": "https://github.com/Cap-go/capacitor-launch-navigator/releases/tag/8.1.5",
+    "pubDate": "2026-10-26T12:09:19.000Z",
+    "description": "🆕 Changelog Changed Updated runtime dependency to v1.4.4, bringing the latest bug fixes and performance improvements. Refreshed the lock file to keep dependency resolutions consistent and ensure reproducible installs. 🔗 Full Changelog : https://github.com/Cap go/capacitor launch navigator/compare/8.1.4...8.1.5"
   },
   {
     "category": "release",
@@ -841,11 +841,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-media-session 8.1.5",
-    "link": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.5",
-    "guid": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.5",
-    "pubDate": "2026-10-19T12:02:22.000Z",
-    "description": "🆕 Changelog Changed Updated project dependencies and refreshed the lock file for improved build consistency and reproducibility. Updated Bun runtime dependency to v1.4.3 for the latest improvements and compatibility fixes. 🔗 Full Changelog : https://github.com/Cap go/capacitor media session/compare/8.1.4...8.1.5"
+    "title": "capacitor-media-session 8.1.6",
+    "link": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.6",
+    "guid": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.6",
+    "pubDate": "2026-10-26T12:36:31.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime to v1.4.4 for improved stability and compatibility. Refreshed lock file constraints to ensure consistent dependency resolution across installs. 🔗 Full Changelog : https://github.com/Cap go/capacitor media session/compare/8.1.5...8.1.6"
   },
   {
     "category": "release",
@@ -865,11 +865,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-mute 8.1.15",
-    "link": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.15",
-    "guid": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.15",
-    "pubDate": "2026-10-19T12:07:18.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.3 to incorporate the latest improvements and fixes. Refreshed the dependency lock file to ensure consistent and reliable package resolution. 🔗 Full Changelog : https://github.com/Cap go/capacitor mute/compare/8.1.14...8.1.15"
+    "title": "capacitor-mute 8.1.16",
+    "link": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.16",
+    "guid": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.16",
+    "pubDate": "2026-10-26T12:24:35.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.4 for improved compatibility and reliability Refreshed dependency lock file to pull in the latest upstream patch updates and ensure reproducible builds 🔗 Full Changelog : https://github.com/Cap go/capacitor mute/compare/8.1.15...8.1.16"
   },
   {
     "category": "release",
@@ -913,19 +913,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-market 8.0.54",
-    "link": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.54",
-    "guid": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.54",
-    "pubDate": "2026-10-19T12:15:17.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to v1.4.3 to maintain compatibility with the latest tooling improvements. Refreshed the dependency lock file to keep installed packages aligned with declared versions and improve build reproducibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor native market/compare/8.0.53...8.0.54"
+    "title": "capacitor-native-market 8.0.55",
+    "link": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.55",
+    "guid": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.55",
+    "pubDate": "2026-10-26T12:12:49.000Z",
+    "description": "🆕 Changelog Changed Upgraded the Bun runtime dependency to v1.4.4 for the latest improvements and fixes Refreshed dependency lock files to ensure reproducible installs Added No new features in this release. Deprecated No deprecations in this release. Removed No removals in this release. Fixed No bug fixes in this release. Security No security changes in this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native market/compare/8.0.54...8.0.55"
   },
   {
     "category": "release",
-    "title": "capacitor-native-navigation 8.15.0",
-    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.15.0",
-    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.15.0",
-    "pubDate": "2026-10-25T11:06:29.000Z",
-    "description": "🆕 Changelog Added Added support for the iPhone Duo vertical rail layout, aligning the app’s interface with the device’s design conventions for larger iPhone screens. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.14.0...8.15.0"
+    "title": "capacitor-native-navigation 8.15.1",
+    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.15.1",
+    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.15.1",
+    "pubDate": "2026-10-26T22:16:09.000Z",
+    "description": "🆕 Changelog Fixed Fixed an issue on Android where safe area insets were double counted when a WebView parent had padding, improving layout accuracy. ( 95) Improved SVG path parsing on Android by normalizing compact arc flags, making vector graphics with arcs render more reliably. ( 94) 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.15.0...8.15.1"
   },
   {
     "category": "release",
@@ -937,19 +937,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-nativegeocoder 8.0.58",
-    "link": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.58",
-    "guid": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.58",
-    "pubDate": "2026-10-19T12:00:45.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to v1.4.3, bringing in the latest stability and performance improvements. Refreshed the dependency lock file to ensure compatible and up to date transitive packages. 🔗 Full Changelog : https://github.com/Cap go/capacitor nativegeocoder/compare/8.0.57...8.0.58"
+    "title": "capacitor-nativegeocoder 8.0.59",
+    "link": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.59",
+    "guid": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.59",
+    "pubDate": "2026-10-26T12:31:45.000Z",
+    "description": "🆕 Changelog Changed Upgraded Bun to v1.4.4 to leverage the latest runtime improvements and maintain development tooling consistency. Refreshed lock files to keep dependencies pinned to their latest compatible versions and ensure reproducible installs. 🔗 Full Changelog : https://github.com/Cap go/capacitor nativegeocoder/compare/8.0.58...8.0.59"
   },
   {
     "category": "release",
-    "title": "capacitor-navigation-bar 8.2.17",
-    "link": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.17",
-    "guid": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.17",
-    "pubDate": "2026-10-19T12:13:40.000Z",
-    "description": "🆕 Changelog Changed Updated development dependency to v1.4.3 for improved build performance and compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor navigation bar/compare/8.2.16...8.2.17"
+    "title": "capacitor-navigation-bar 8.2.18",
+    "link": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.18",
+    "guid": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.18",
+    "pubDate": "2026-10-26T12:34:38.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.4 for improved compatibility and performance. Refreshed dependency lock file to ensure reproducible installs and pull in latest upstream fixes. 🔗 Full Changelog : https://github.com/Cap go/capacitor navigation bar/compare/8.2.17...8.2.18"
   },
   {
     "category": "release",
@@ -969,19 +969,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-nfc 8.3.4",
-    "link": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.4",
-    "guid": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.4",
-    "pubDate": "2026-10-19T12:09:21.000Z",
-    "description": "🆕 Changelog Changed Updated runtime dependencies to Bun 1.4.3 — incorporates the latest fixes and stability improvements. Refreshed the dependency lock file as part of routine maintenance — helps keep builds reproducible and secure. Fixed No user facing bug fixes in this release. Added No new features in this release. Deprecated Nothing deprecated. Removed Nothing removed. Security No security specific changes. 🔗 Full Changelog : https://github.com/Cap go/capacitor nfc/compare/8.3.3...8.3.4"
+    "title": "capacitor-nfc 8.3.5",
+    "link": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.5",
+    "guid": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.5",
+    "pubDate": "2026-10-26T12:26:40.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun dependency to v1.4.4, ensuring compatibility with the latest Bun runtime fixes and improvements. ( 76) Refreshed the dependency lock file to pull in latest compatible updates and keep installations consistent across environments. 🔗 Full Changelog : https://github.com/Cap go/capacitor nfc/compare/8.3.4...8.3.5"
   },
   {
     "category": "release",
-    "title": "capacitor-passkey 8.5.7",
-    "link": "https://github.com/Cap-go/capacitor-passkey/releases/tag/8.5.7",
-    "guid": "https://github.com/Cap-go/capacitor-passkey/releases/tag/8.5.7",
-    "pubDate": "2026-10-15T03:17:34.000Z",
-    "description": "🆕 Changelog Changed Migrated the development toolchain to ESLint 10 and TypeScript 6 to take advantage of the latest linting rules and type checking improvements. Contributors and downstream projects may need to align their local tool versions with these releases. Updated project documentation with revised guidance and examples. Removed Removed the consulting call to action from the README to keep project documentation focused on user guidance and library usage. 🔗 Full Changelog : https://g..."
+    "title": "capacitor-passkey 8.5.8",
+    "link": "https://github.com/Cap-go/capacitor-passkey/releases/tag/8.5.8",
+    "guid": "https://github.com/Cap-go/capacitor-passkey/releases/tag/8.5.8",
+    "pubDate": "2026-10-26T22:19:23.000Z",
+    "description": "🆕 Changelog Fixed Android: Mapped Credential Manager cancellation to the standard DOM exception for consistent error handling and clearer cancellation signals. 🔗 Full Changelog : https://github.com/Cap go/capacitor passkey/compare/8.5.7...8.5.8"
   },
   {
     "category": "release",
@@ -1001,11 +1001,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-pdf-generator 8.0.47",
-    "link": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.47",
-    "guid": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.47",
-    "pubDate": "2026-10-19T12:18:25.000Z",
-    "description": "🆕 Changelog Changed Updated the runtime dependency to v1.4.3, bringing in the latest fixes and improvements for builds and scripts. Refreshed the dependency lock file to incorporate the latest transitive dependency updates and patches. 🔗 Full Changelog : https://github.com/Cap go/capacitor pdf generator/compare/8.0.46...8.0.47"
+    "title": "capacitor-pdf-generator 8.0.48",
+    "link": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.48",
+    "guid": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.48",
+    "pubDate": "2026-10-26T12:29:36.000Z",
+    "description": "🆕 Changelog Changed Upgraded Bun runtime dependency to v1.4.4 for the latest improvements and fixes. Performed routine lock file maintenance to keep dependency versions consistent and secure. 🔗 Full Changelog : https://github.com/Cap go/capacitor pdf generator/compare/8.0.47...8.0.48"
   },
   {
     "category": "release",
@@ -1017,11 +1017,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-pedometer 8.0.51",
-    "link": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.51",
-    "guid": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.51",
-    "pubDate": "2026-10-19T12:05:38.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime to v1.4.3, incorporating the latest runtime improvements and fixes Refreshed dependency lock file to ensure consistent and reproducible package resolution 🔗 Full Changelog : https://github.com/Cap go/capacitor pedometer/compare/8.0.50...8.0.51"
+    "title": "capacitor-pedometer 8.0.52",
+    "link": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.52",
+    "guid": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.52",
+    "pubDate": "2026-10-26T12:21:19.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun dependency to v1.4.4, bringing in the latest stability and performance improvements. Refreshed dependency lock files to keep installed packages up to date and builds reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor pedometer/compare/8.0.51...8.0.52"
   },
   {
     "category": "release",
@@ -1033,11 +1033,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-persistent-account 8.0.48",
-    "link": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.48",
-    "guid": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.48",
-    "pubDate": "2026-10-19T12:05:19.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to v1.4.3 to pick up the latest upstream fixes and compatibility improvements. Refreshed the dependency lockfile to keep installed packages in sync with declared versions and ensure consistent, reproducible builds. 🔗 Full Changelog : https://github.com/Cap go/capacitor persistent account/compare/8.0.47...8.0.48"
+    "title": "capacitor-persistent-account 8.0.49",
+    "link": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.49",
+    "guid": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.49",
+    "pubDate": "2026-10-26T12:11:37.000Z",
+    "description": "🆕 Changelog Changed Updated dependency to v1.4.4, upgrading the runtime and toolchain used for builds and development. Refreshed the lock file to keep installed dependencies aligned and reproducible. Fixed No bug fixes in this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor persistent account/compare/8.0.48...8.0.49"
   },
   {
     "category": "release",
@@ -1105,11 +1105,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-realtimekit 8.0.42",
-    "link": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.42",
-    "guid": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.42",
-    "pubDate": "2026-10-19T12:03:08.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to v1.4.3 Refreshed the dependency lock file to ensure consistent package resolution across installs 🔗 Full Changelog : https://github.com/Cap go/capacitor realtimekit/compare/8.0.41...8.0.42"
+    "title": "capacitor-realtimekit 8.0.43",
+    "link": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.43",
+    "guid": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.43",
+    "pubDate": "2026-10-26T12:13:15.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.4 for improved stability and compatibility. Performed dependency lock file maintenance to ensure consistent installs. 🔗 Full Changelog : https://github.com/Cap go/capacitor realtimekit/compare/8.0.42...8.0.43"
   },
   {
     "category": "release",
@@ -1153,43 +1153,43 @@
   },
   {
     "category": "release",
-    "title": "capacitor-screen-recorder 8.4.4",
-    "link": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.4",
-    "guid": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.4",
-    "pubDate": "2026-10-19T07:25:14.000Z",
-    "description": "🆕 Changelog Changed Updated project dependencies to their latest compatible versions through lock file maintenance, ensuring continued compatibility and incorporating upstream improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor screen recorder/compare/8.4.3...8.4.4"
+    "title": "capacitor-screen-recorder 8.4.5",
+    "link": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.5",
+    "guid": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.5",
+    "pubDate": "2026-10-26T12:12:38.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime to v1.4.4 — incorporates patches from v1.4.3 and v1.4.4 for the latest bug fixes and runtime improvements. Refreshed the lock file — ensures dependency resolution stays reproducible and pulls in compatible patch updates. 🔗 Full Changelog : https://github.com/Cap go/capacitor screen recorder/compare/8.4.4...8.4.5"
   },
   {
     "category": "release",
-    "title": "capacitor-shake 8.0.52",
-    "link": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.52",
-    "guid": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.52",
-    "pubDate": "2026-10-19T12:15:10.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to the latest patch release, bringing underlying performance, stability, and compatibility improvements. Refreshed the dependency lock file to pull in the latest compatible transitive updates and improve build reproducibility. No user action or migration steps are required for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor shake/compare/8.0.51...8.0.52"
+    "title": "capacitor-shake 8.0.53",
+    "link": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.53",
+    "guid": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.53",
+    "pubDate": "2026-10-26T12:31:20.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to v1.4.4 ( 189) to pick up the latest stability and performance improvements. Refreshed the dependency lock file to ensure consistent and reproducible installations. 🔗 Full Changelog : https://github.com/Cap go/capacitor shake/compare/8.0.52...8.0.53"
   },
   {
     "category": "release",
-    "title": "capacitor-share-target 8.0.63",
-    "link": "https://github.com/Cap-go/capacitor-share-target/releases/tag/8.0.63",
-    "guid": "https://github.com/Cap-go/capacitor-share-target/releases/tag/8.0.63",
-    "pubDate": "2026-10-19T12:01:52.000Z",
-    "description": "🆕 Changelog Changed Updated Bun runtime dependency to v1.4.3, bringing in the latest fixes and improvements. Refreshed the dependency lock file to ensure consistent and reliable installs. Fixed Addressed indirect dependency issues through lock file maintenance. 🔗 Full Changelog : https://github.com/Cap go/capacitor share target/compare/8.0.62...8.0.63"
+    "title": "capacitor-share-target 8.0.64",
+    "link": "https://github.com/Cap-go/capacitor-share-target/releases/tag/8.0.64",
+    "guid": "https://github.com/Cap-go/capacitor-share-target/releases/tag/8.0.64",
+    "pubDate": "2026-10-26T12:26:44.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime to v1.4.4, bringing the latest performance improvements, bug fixes, and tooling enhancements. Refreshed dependency lock file as part of routine maintenance to ensure consistent and reproducible installs. 🔗 Full Changelog : https://github.com/Cap go/capacitor share target/compare/8.0.63...8.0.64"
   },
   {
     "category": "release",
-    "title": "capacitor-sheets v8.2.4",
-    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.4",
-    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.4",
-    "pubDate": "2026-10-19T12:02:24.000Z",
-    "description": "🆕 Changelog Changed Updated Gradle to v8.14.6 to benefit from the latest build tool improvements, fixes, and compatibility updates. 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.3...v8.2.4"
+    "title": "capacitor-sheets v8.2.5",
+    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.5",
+    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.5",
+    "pubDate": "2026-10-26T07:09:49.000Z",
+    "description": "🆕 Changelog Changed Updated to v1.2.15, bringing in the latest upstream improvements and fixes for WebAssembly builds. 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.4...v8.2.5"
   },
   {
     "category": "release",
-    "title": "capacitor-sim 8.0.49",
-    "link": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.49",
-    "guid": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.49",
-    "pubDate": "2026-10-19T12:14:33.000Z",
-    "description": "🆕 Changelog Changed Updated the runtime dependency to v1.4.3, bringing in the latest bug fixes and performance improvements. Refreshed the lock file to ensure consistent dependency resolution and reproducible installs. Deprecated N/A Removed N/A Fixed N/A Security N/A 🔗 Full Changelog : https://github.com/Cap go/capacitor sim/compare/8.0.48...8.0.49"
+    "title": "capacitor-sim 8.0.50",
+    "link": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.50",
+    "guid": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.50",
+    "pubDate": "2026-10-26T12:30:16.000Z",
+    "description": "🆕 Changelog Changed Updated the runtime dependency to v1.4.4, incorporating the latest tooling improvements and fixes. Refreshed lock file dependencies to ensure more consistent and reproducible builds. 🔗 Full Changelog : https://github.com/Cap go/capacitor sim/compare/8.0.49...8.0.50"
   },
   {
     "category": "release",
@@ -1225,11 +1225,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-streamcall 8.0.74",
-    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.74",
-    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.74",
-    "pubDate": "2026-10-19T12:14:07.000Z",
-    "description": "🆕 Changelog Changed Updated to v1.43.4, bringing the latest improvements and fixes for video call functionality. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.73...8.0.74"
+    "title": "capacitor-streamcall 8.0.75",
+    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.75",
+    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.75",
+    "pubDate": "2026-10-26T06:49:10.000Z",
+    "description": "🆕 Changelog Changed Updated to v1.44.0. This ensures the video functionality stays in sync with the latest upstream SDK improvements, bug fixes, and features. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.74...8.0.75"
   },
   {
     "category": "release",
@@ -1265,19 +1265,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-textinteraction 8.1.5",
-    "link": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.5",
-    "guid": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.5",
-    "pubDate": "2026-10-19T12:19:56.000Z",
-    "description": "🆕 Changelog Changed Updated build tooling dependencies, including Bun to v1.4.3, to incorporate the latest runtime and toolchain improvements. Refreshed dependency lock file to ensure consistent package resolution and pick up available transitive dependency updates. 🔗 Full Changelog : https://github.com/Cap go/capacitor textinteraction/compare/8.1.4...8.1.5"
+    "title": "capacitor-textinteraction 8.1.6",
+    "link": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.6",
+    "guid": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.6",
+    "pubDate": "2026-10-26T12:16:04.000Z",
+    "description": "🆕 Changelog Changed Updated Bun runtime dependency to version 1.4.4 for improved stability and compatibility. Refreshed dependency lock file maintenance to keep installed dependencies consistent and up to date. 🔗 Full Changelog : https://github.com/Cap go/capacitor textinteraction/compare/8.1.5...8.1.6"
   },
   {
     "category": "release",
-    "title": "capacitor-transitions v8.3.6",
-    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.6",
-    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.6",
-    "pubDate": "2026-10-21T07:32:35.000Z",
-    "description": "🆕 Changelog Changed Updated @capgo/cli dependency to v8.90.2 to incorporate the latest patches and improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.5...v8.3.6"
+    "title": "capacitor-transitions v8.3.7",
+    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.7",
+    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.7",
+    "pubDate": "2026-10-26T12:14:48.000Z",
+    "description": "🆕 Changelog Changed Updated to v8.97.2 — keeps CLI tooling current with the latest improvements and fixes from the Capgo ecosystem. Updated to v1.4.4 — brings in the latest runtime and dependency manager fixes for improved stability and performance. Added, Deprecated, Removed, Fixed, Security No changes in this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.6...v8.3.7"
   },
   {
     "category": "release",
@@ -1345,11 +1345,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-watch 8.1.17",
-    "link": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.1.17",
-    "guid": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.1.17",
-    "pubDate": "2026-10-19T12:15:37.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime to the latest stable release, bringing in upstream fixes and performance improvements. Refreshed the dependency lock file to ensure consistent package installations and keep transitive dependencies in sync with upstream changes. 🔗 Full Changelog : https://github.com/Cap go/capacitor watch/compare/8.1.16...8.1.17"
+    "title": "capacitor-watch 8.1.18",
+    "link": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.1.18",
+    "guid": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.1.18",
+    "pubDate": "2026-10-26T12:30:09.000Z",
+    "description": "🆕 Changelog Changed Updated lock file dependencies to their latest compatible versions, ensuring improved stability and security. Upgraded Bun runtime dependency to v1.4.4 for the latest patches and performance improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor watch/compare/8.1.17...8.1.18"
   },
   {
     "category": "release",
@@ -1377,11 +1377,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-wechat 8.0.54",
-    "link": "https://github.com/Cap-go/capacitor-wechat/releases/tag/8.0.54",
-    "guid": "https://github.com/Cap-go/capacitor-wechat/releases/tag/8.0.54",
-    "pubDate": "2026-10-19T11:56:25.000Z",
-    "description": "🆕 Changelog Changed Updated build tooling dependency to v1.4.3 Performed lock file maintenance to keep dependencies current 🔗 Full Changelog : https://github.com/Cap go/capacitor wechat/compare/8.0.53...8.0.54"
+    "title": "capacitor-wechat 8.0.55",
+    "link": "https://github.com/Cap-go/capacitor-wechat/releases/tag/8.0.55",
+    "guid": "https://github.com/Cap-go/capacitor-wechat/releases/tag/8.0.55",
+    "pubDate": "2026-10-26T12:33:23.000Z",
+    "description": "🆕 Changelog Changed Updated the Bun dependency to v1.4.4 to incorporate the latest runtime improvements, bug fixes, and performance enhancements. Refreshed the lock file to keep installed dependencies consistent, secure, and aligned with the updated toolchain. 🔗 Full Changelog : https://github.com/Cap go/capacitor wechat/compare/8.0.54...8.0.55"
   },
   {
     "category": "release",
@@ -1401,11 +1401,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-youtube-player 8.3.13",
-    "link": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.13",
-    "guid": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.13",
-    "pubDate": "2026-10-19T11:55:41.000Z",
-    "description": "🆕 Changelog Changed Updated the dependency lock file to the latest compatible versions, keeping the project's dependency tree current and resolving stale lockfile entries. Upgraded the Bun runtime/toolchain dependency to v1.4.3 for improved stability, performance, and compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor youtube player/compare/8.3.12...8.3.13"
+    "title": "capacitor-youtube-player 8.3.14",
+    "link": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.14",
+    "guid": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.14",
+    "pubDate": "2026-10-26T12:17:35.000Z",
+    "description": "🆕 Changelog Changed Updated Bun development dependency to v1.4.4 to maintain tooling compatibility and stability. Performed lock file maintenance to keep installed dependencies current and consistent. 🔗 Full Changelog : https://github.com/Cap go/capacitor youtube player/compare/8.3.13...8.3.14"
   },
   {
     "category": "release",
