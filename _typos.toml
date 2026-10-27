@@ -4,10 +4,7 @@ extend-exclude = [
     "apps/shared/legacyPathRedirects.ts",
     # Nightly snapshots of remote data (Stripe IDs, store app names, release notes, sponsor names)
     "apps/web/src/data/capgo-plans.json",
-    "apps/web/src/data/capgo-plan-prices.json",
     "apps/web/src/data/capgo-credits.json",
-    # ISO country and currency codes copied from Cap-go/capgo
-    "apps/web/src/lib/regionalPricing.ts",
     "apps/web/src/data/store-top.json",
     "apps/web/src/data/github-releases.json",
     "apps/web/src/data/github-sponsors.json",
