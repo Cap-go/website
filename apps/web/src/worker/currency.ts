@@ -1,28 +1,7 @@
-import { BASE_CURRENCY, currencyForCountry, isSupportedCurrency, SUPPORTED_CURRENCIES, type CurrencyPayload, type CurrencyRates } from '../lib/currency'
-import { cachedJsonResponse } from './cached-json'
-import type { BackgroundContext } from './types'
+import type { CurrencyPayload } from '../lib/currency'
+import { currencyForCountry, priceTierForCountry } from '../lib/regionalPricing'
 
 export { CURRENCY_ENDPOINT as CURRENCY_PATH } from '../lib/currency'
-
-// ECB reference rates publish once per working day.
-const RATES_CACHE_PATH = '/currency-rates.json'
-const RATES_CACHE_TTL_SECONDS = 6 * 60 * 60
-const RATES_FETCH_TIMEOUT_MS = 5000
-const RATES_SOURCE_URL = `https://api.frankfurter.dev/v1/latest?base=${BASE_CURRENCY}&symbols=${SUPPORTED_CURRENCIES.filter((code) => code !== BASE_CURRENCY).join(',')}`
-
-type RatesSnapshot = { date: string | null; rates: CurrencyRates }
-
-async function loadRates(): Promise<RatesSnapshot> {
-  const response = await fetch(RATES_SOURCE_URL, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(RATES_FETCH_TIMEOUT_MS) })
-  if (!response.ok) throw new Error(`Exchange rates request failed: ${response.status}`)
-  const data = (await response.json()) as { date?: string; rates?: Record<string, number> }
-  const rates: CurrencyRates = { [BASE_CURRENCY]: 1 }
-  for (const [code, rate] of Object.entries(data.rates ?? {})) {
-    if (isSupportedCurrency(code) && Number.isFinite(rate) && rate > 0) rates[code] = rate
-  }
-  if (Object.keys(rates).length < 2) throw new Error('Exchange rates response had no usable rates')
-  return { date: data.date ?? null, rates }
-}
 
 function requestCountry(request: Request): string | null {
   const cf = (request as Request & { cf?: { country?: string } }).cf
@@ -31,18 +10,10 @@ function requestCountry(request: Request): string | null {
   return country && /^[A-Z]{2}$/.test(country) && country !== 'XX' && country !== 'T1' ? country : null
 }
 
-export async function handleCurrency(request: Request, ctx?: BackgroundContext): Promise<Response> {
+// The visitor's local currency and regional price tier. Amounts come from the Stripe snapshot on the page.
+export function handleCurrency(request: Request): Response {
   const country = requestCountry(request)
-  const ratesResponse = await cachedJsonResponse(request, RATES_CACHE_PATH, RATES_CACHE_TTL_SECONDS, loadRates, 'Exchange rates are temporarily unavailable', ctx)
-  const snapshot: RatesSnapshot = ratesResponse.ok ? await ratesResponse.json() : { date: null, rates: { [BASE_CURRENCY]: 1 } }
-  const detected = currencyForCountry(country)
-  const payload: CurrencyPayload = {
-    country,
-    // Never suggest a currency we cannot convert to.
-    currency: snapshot.rates[detected] ? detected : BASE_CURRENCY,
-    rates: snapshot.rates,
-    date: snapshot.date,
-  }
+  const payload: CurrencyPayload = { country, currency: currencyForCountry(country), tier: priceTierForCountry(country) }
   return new Response(request.method === 'HEAD' ? null : JSON.stringify(payload), {
     status: 200,
     headers: {

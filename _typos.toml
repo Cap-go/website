@@ -4,7 +4,10 @@ extend-exclude = [
     "apps/shared/legacyPathRedirects.ts",
     # Nightly snapshots of remote data (Stripe IDs, store app names, release notes, sponsor names)
     "apps/web/src/data/capgo-plans.json",
+    "apps/web/src/data/capgo-plan-prices.json",
     "apps/web/src/data/capgo-credits.json",
+    # ISO country and currency codes copied from Cap-go/capgo
+    "apps/web/src/lib/regionalPricing.ts",
     "apps/web/src/data/store-top.json",
     "apps/web/src/data/github-releases.json",
     "apps/web/src/data/github-sponsors.json",
@@ -32,8 +35,6 @@ extend-ignore-re = [
     "https?://\\S+",
     # Cloudflare data center (IATA airport) codes in the hero world map config
     "colo: '[A-Z]{3}'",
-    # ISO 3166 country code for the Faroe Islands in the pricing currency map
-    "FO: 'DKK'",
     # IndexNow verification key
     "ue6dw2uu67eum6y2m8en775jjf1qhe1r",
 ]
@@ -62,6 +63,7 @@ BLUTOOTH = "BLUTOOTH"  # Upstream Android intent literal from capacitor-intent-l
 udid = "udid"  # iOS device UDID (technical term)
 UDID = "UDID"  # iOS device UDID (technical term)
 RTO = "RTO"  # Recovery Time Objective
+jod = "jod"  # Jordanian dinar (ISO 4217 code, Stripe amounts)
 Sanbox = "Sanbox"  # Legacy copy key kept for runtime compatibility
 framworks = "framworks"  # Legacy copy key kept for runtime compatibility
 youre = "youre"  # Legacy copy key kept for runtime compatibility

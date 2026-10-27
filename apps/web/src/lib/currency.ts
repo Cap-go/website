@@ -1,111 +1,54 @@
-// Display currencies for the pricing page. Capgo bills in USD; other currencies are converted
-// estimates using daily ECB reference rates (served by the worker at CURRENCY_ENDPOINT).
+// Display currencies for the pricing page. Plan prices are the exact amounts of the Capgo Stripe prices
+// (currency_options), snapshotted nightly by scripts/fetch-build-data.ts into data/capgo-plan-prices.json.
+// Nothing is converted with exchange rates: a currency is offered only when Stripe sells every plan in it.
 
-export const BASE_CURRENCY = 'USD'
+export const BASE_CURRENCY = 'usd'
 export const CURRENCY_ENDPOINT = '/currency.json'
 export const CURRENCY_STORAGE_KEY = 'capgo_currency'
 
-// Every code here must exist in the ECB reference rate set used by the worker.
-export const SUPPORTED_CURRENCIES = [
-  'USD',
-  'EUR',
-  'GBP',
-  'CAD',
-  'AUD',
-  'NZD',
-  'CHF',
-  'JPY',
-  'CNY',
-  'HKD',
-  'SGD',
-  'KRW',
-  'INR',
-  'IDR',
-  'MYR',
-  'PHP',
-  'THB',
-  'BRL',
-  'MXN',
-  'SEK',
-  'NOK',
-  'DKK',
-  'ISK',
-  'PLN',
-  'CZK',
-  'HUF',
-  'RON',
-  'TRY',
-  'ILS',
-  'ZAR',
-] as const
+// Regional (purchasing power) price tiers, as in Cap-go/capgo country_price_tier.ts. Most expensive first.
+export const PRICE_TIERS = ['p100', 'p85', 'p70', 'p60', 'p50'] as const
+export type PriceTier = (typeof PRICE_TIERS)[number]
+export const FULL_PRICE_TIER: PriceTier = 'p100'
 
-export type CurrencyCode = (typeof SUPPORTED_CURRENCIES)[number]
-
-const EURO_COUNTRIES = [
-  'AD', 'AT', 'BE', 'BG', 'CY', 'DE', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'IE', 'IT', 'LT', 'LU', 'LV', 'MC', 'ME', 'MT', 'NL', 'PT', 'SI', 'SK', 'SM', 'VA', 'XK',
-  'GF', 'GP', 'MQ', 'RE', 'YT', 'PM', 'BL', 'MF', 'AX',
-]
-
-const COUNTRY_CURRENCY: Record<string, CurrencyCode> = {
-  ...Object.fromEntries(EURO_COUNTRIES.map((country) => [country, 'EUR'])),
-  GB: 'GBP',
-  GG: 'GBP',
-  JE: 'GBP',
-  IM: 'GBP',
-  CA: 'CAD',
-  AU: 'AUD',
-  NZ: 'NZD',
-  CH: 'CHF',
-  LI: 'CHF',
-  JP: 'JPY',
-  CN: 'CNY',
-  HK: 'HKD',
-  SG: 'SGD',
-  KR: 'KRW',
-  IN: 'INR',
-  ID: 'IDR',
-  MY: 'MYR',
-  PH: 'PHP',
-  TH: 'THB',
-  BR: 'BRL',
-  MX: 'MXN',
-  SE: 'SEK',
-  NO: 'NOK',
-  DK: 'DKK',
-  FO: 'DKK',
-  GL: 'DKK',
-  IS: 'ISK',
-  PL: 'PLN',
-  CZ: 'CZK',
-  HU: 'HUF',
-  RO: 'RON',
-  TR: 'TRY',
-  IL: 'ILS',
-  ZA: 'ZAR',
-}
-
-export function isSupportedCurrency(code: unknown): code is CurrencyCode {
-  return typeof code === 'string' && (SUPPORTED_CURRENCIES as readonly string[]).includes(code)
-}
-
-export function currencyForCountry(country: string | null | undefined): CurrencyCode {
-  return (country && COUNTRY_CURRENCY[country.toUpperCase()]) || BASE_CURRENCY
-}
-
-export type CurrencyRates = Partial<Record<CurrencyCode, number>>
+// Major-unit amounts keyed by lowercase ISO 4217 code.
+export type PriceAmounts = Record<string, number>
+export type PlanPriceSet = { month: PriceAmounts; year: PriceAmounts }
+// `tiers` holds the regional discount prices (plans.regional_price_ids); plans without them sell the full price everywhere.
+export type PlanPrices = PlanPriceSet & { tiers?: Partial<Record<PriceTier, PlanPriceSet>> }
+// Keyed by plan product id (plans.stripe_id).
+export type PlanPricesSnapshot = { plans: Record<string, PlanPrices> }
 
 export type CurrencyPayload = {
   country: string | null
-  currency: CurrencyCode
-  rates: CurrencyRates
-  date: string | null
+  // Local currency of the country; the page only uses it when Stripe sells every plan in it.
+  currency: string | null
+  tier: PriceTier
+}
+
+export function isPriceTier(value: unknown): value is PriceTier {
+  return typeof value === 'string' && (PRICE_TIERS as readonly string[]).includes(value)
+}
+
+// p85 -> 15 (% off the full price).
+export function tierDiscountPercent(tier: PriceTier): number {
+  return 100 - Number(tier.slice(1))
+}
+
+// Currencies every plan is sold in, monthly and yearly. Falls back to USD when the snapshot is empty.
+export function commonCurrencies(snapshot: PlanPricesSnapshot): string[] {
+  const sets = Object.values(snapshot.plans).flatMap((plan) => [plan.month, plan.year])
+  if (!sets.length) return [BASE_CURRENCY]
+  const currencies = Object.keys(sets[0]).filter((currency) => sets.every((amounts) => currency in amounts))
+  return currencies.includes(BASE_CURRENCY) ? currencies.sort((a, b) => a.localeCompare(b)) : [BASE_CURRENCY]
 }
 
 export type PriceFormat = 'whole' | 'cents' | 'unit'
 
 // `whole` for plan prices, `cents` for totals that may be small, `unit` for per-MAU/GiB credit rates.
 export function formatPrice(amount: number, currency: string, format: PriceFormat = 'whole', locale = 'en-US'): string {
-  const options: Intl.NumberFormatOptions = { style: 'currency', currency, currencyDisplay: 'narrowSymbol' }
+  const code = currency.toUpperCase()
+  const options: Intl.NumberFormatOptions = { style: 'currency', currency: code, currencyDisplay: 'narrowSymbol' }
   if (format === 'unit' && amount > 0 && amount < 1) {
     options.maximumSignificantDigits = 3
   } else if (format === 'whole' || (format === 'cents' && (amount >= 10 || Number.isInteger(amount)))) {
@@ -119,14 +62,14 @@ export function formatPrice(amount: number, currency: string, format: PriceForma
   try {
     return new Intl.NumberFormat(locale, options).format(format === 'whole' ? Math.round(amount) : amount)
   } catch {
-    return `${currency} ${amount}`
+    return `${code} ${amount}`
   }
 }
 
 export function currencyName(code: string, locale = 'en-US'): string {
   try {
-    return new Intl.DisplayNames([locale], { type: 'currency' }).of(code) ?? code
+    return new Intl.DisplayNames([locale], { type: 'currency' }).of(code.toUpperCase()) ?? code.toUpperCase()
   } catch {
-    return code
+    return code.toUpperCase()
   }
 }

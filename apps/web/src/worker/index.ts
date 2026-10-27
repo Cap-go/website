@@ -238,7 +238,7 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   },
   [CURRENCY_PATH]: {
     methods: ['GET', 'HEAD'],
-    handle: async (request, _env, ctx) => await handleCurrency(request, ctx),
+    handle: async (request) => handleCurrency(request),
   },
   [GITHUB_RELEASES_PATH]: {
     methods: ['GET', 'HEAD'],

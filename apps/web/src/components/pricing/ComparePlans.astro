@@ -372,9 +372,9 @@ const rows: CompareSection[] = [
                   )}
                 </div>
                 <p class="mt-2 text-xs leading-5 font-medium text-gray-600">
-                  <span data-price-amount={priceParts(plan).yearlyMonthly} data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).yearlyMonthly}${priceParts(plan).suffix}`}</span>/mo
+                  <span data-price-amount={priceParts(plan).yearlyMonthly} data-price-plan={plan.stripe_id} data-price-interval="year-monthly" data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).yearlyMonthly}${priceParts(plan).suffix}`}</span>/mo
                   yearly or
-                  <span data-price-amount={priceParts(plan).monthly} data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).monthly}${priceParts(plan).suffix}`}</span>/mo
+                  <span data-price-amount={priceParts(plan).monthly} data-price-plan={plan.stripe_id} data-price-interval="month" data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).monthly}${priceParts(plan).suffix}`}</span>/mo
                   monthly
                 </p>
               </th>
