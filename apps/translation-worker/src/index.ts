@@ -175,6 +175,10 @@ const DEFAULT_MODEL = '@cf/google/gemma-4-26b-a4b-it'
 const THINKING_MODEL_PREFIXES = ['@cf/deepseek-ai/deepseek-v4', '@cf/google/gemma-4', '@cf/qwen/qwen3', '@cf/zai-org/glm-'] as const
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
+// caches.default is per datacenter while queue jobs run in whatever datacenter picks
+// them up, so a refreshed page only lands in R2 and that one datacenter's cache. Keep
+// edge copies short-lived so every datacenter picks up R2 refreshes quickly.
+const EDGE_CACHE_SECONDS = 10 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
@@ -204,7 +208,6 @@ const TRANSLATION_WORD_COUNT_RETRIES = 2
 const TRANSLATION_WORD_COUNT_ATTEMPTS = TRANSLATION_WORD_COUNT_RETRIES + 1
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const TRANSLATION_SCRIPTS_HEADER = 'X-Capgo-Translation-Scripts'
-const TRANSLATION_META_HEADER = 'X-Capgo-Translation-Meta'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 // Same-origin rules file served by this worker. Cloudflare Speed Brain adds
 // `Speculation-Rules: "/cdn-cgi/speculation"` unless the response already has that
@@ -1399,14 +1402,6 @@ function readDocumentTitle(html: string): string | null {
   return title.length > 0 ? title : null
 }
 
-function setDocumentTitle(html: string, title: string): string {
-  const opening = findNamedTag(html, 0, '<title')
-  if (!opening) return html
-  const closing = findClosingTag(html, opening.end, 'title')
-  if (!closing) return html
-  return `${html.slice(0, opening.end)}${title}${html.slice(closing.index)}`
-}
-
 type TranslatableMetaField = {
   keyName: 'name' | 'property'
   keyValue: string
@@ -1437,76 +1432,6 @@ function collectTranslatableMetaFields(html: string): TranslatableMetaField[] {
   }
 
   return fields
-}
-
-async function syncTranslatableMetaFromEnglish(
-  env: Env,
-  translatedHtml: string,
-  englishHtml: string,
-  locale: Locale,
-  pagePath: string,
-): Promise<{ html: string; changed: boolean }> {
-  const targetLanguage = LANGUAGE_NAMES[locale]
-  const translationCache = new Map<string, string>()
-  let html = translatedHtml
-  let changed = false
-
-  const translateCached = async (text: string): Promise<string> => {
-    const cached = translationCache.get(text)
-    if (cached) return cached
-    const translated = await translateSingleText(env, targetLanguage, text, pagePath)
-    translationCache.set(text, translated)
-    return translated
-  }
-
-  const englishTitle = readDocumentTitle(englishHtml)
-  if (englishTitle) {
-    const translatedTitle = await translateCached(englishTitle)
-    if (translatedTitle && translatedTitle !== readDocumentTitle(html)) {
-      html = setDocumentTitle(html, translatedTitle)
-      changed = true
-    }
-  }
-
-  for (const field of collectTranslatableMetaFields(englishHtml)) {
-    let cursor = 0
-    let sourceContent: string | null = null
-
-    while (cursor < englishHtml.length) {
-      const nextTag = findNextHtmlTag(englishHtml, cursor)
-      if (!nextTag) break
-      if (tagNameOf(nextTag.tag) === 'meta' && getMetaKey(nextTag.tag) === field.metaKey) {
-        sourceContent = readAttributeValue(nextTag.tag, 'content')
-        break
-      }
-      cursor = nextTag.end
-    }
-
-    if (!sourceContent) continue
-
-    const translatedContent = await translateCached(sourceContent)
-    const currentContent = (() => {
-      let metaCursor = 0
-      while (metaCursor < html.length) {
-        const nextTag = findNextHtmlTag(html, metaCursor)
-        if (!nextTag) break
-        if (tagNameOf(nextTag.tag) === 'meta' && getMetaKey(nextTag.tag) === field.metaKey) {
-          return readAttributeValue(nextTag.tag, 'content')
-        }
-        metaCursor = nextTag.end
-      }
-      return null
-    })()
-
-    if (translatedContent && translatedContent !== currentContent) {
-      html = setMetaContent(html, field.keyName, field.keyValue, translatedContent)
-      changed = true
-    }
-  }
-
-  if (changed) html = expandShortMetaDescriptions(html, locale)
-
-  return { html, changed }
 }
 
 function syncExecutableScriptsFromEnglish(translatedHtml: string, englishHtml: string): string {
@@ -2859,6 +2784,15 @@ async function readStoredTranslatedResponse(env: Env, requestUrl: URL, locale: L
   })
 }
 
+async function readStoredTranslatedResponseSafely(env: Env, requestUrl: URL, locale: Locale): Promise<Response | null> {
+  try {
+    return await readStoredTranslatedResponse(env, requestUrl, locale)
+  } catch (error) {
+    console.error('Failed to read translated page from R2', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+    return null
+  }
+}
+
 async function writeStoredTranslatedResponse(env: Env, requestUrl: URL, locale: Locale, response: Response): Promise<void> {
   const key = await translationStoreKey('pages', requestUrl, locale)
   const headers: [string, string][] = []
@@ -2881,14 +2815,20 @@ async function writeStoredTranslatedResponse(env: Env, requestUrl: URL, locale: 
   await env.TRANSLATION_STORE.put(key, JSON.stringify(stored))
 }
 
+function withEdgeCacheTtl(response: Response): Response {
+  const headers = new Headers(response.headers)
+  headers.set('Cache-Control', `public, max-age=${EDGE_CACHE_SECONDS}`)
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+}
+
 async function cacheTranslatedResponse(env: Env, requestUrl: URL, locale: Locale, cacheKey: Request, response: Response): Promise<void> {
   await writeStoredTranslatedResponse(env, requestUrl, locale, response.clone())
-  await caches.default.put(cacheKey, response)
+  await caches.default.put(cacheKey, withEdgeCacheTtl(response))
 }
 
 async function repopulateTranslatedPageCacheSafely(cacheKey: Request, response: Response, requestUrl: URL, locale: Locale): Promise<void> {
   try {
-    await caches.default.put(cacheKey, response)
+    await caches.default.put(cacheKey, withEdgeCacheTtl(response))
   } catch (error) {
     console.error('Failed to repopulate translated page cache from R2', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
   }
@@ -3589,18 +3529,9 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
   try {
     const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
     if (englishHtml && knownSourceHash !== (await translationSourceHash(locale, englishHtml))) {
+      // Only cheap, AI-free syncing here: title and meta tags are retranslated by the
+      // queued refresh, never while the visitor waits.
       let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
-      try {
-        const syncedMeta = await syncTranslatableMetaFromEnglish(env, syncedHtml, englishHtml, locale, requestUrl.pathname)
-        syncedHtml = syncedMeta.html
-        if (syncedMeta.changed) responseHeaders.set(TRANSLATION_META_HEADER, 'synced')
-      } catch (error) {
-        console.error('Failed to sync translatable meta from current English source', {
-          pathname: requestUrl.pathname,
-          locale,
-          error: errorMessage(error),
-        })
-      }
       if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
         syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
       }
@@ -3669,9 +3600,18 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
 
 async function serveTranslated(request: Request, env: Env, requestUrl: URL, locale: Locale, ctx?: WorkerExecutionContext): Promise<Response> {
   const cacheKey = cacheKeyFor(requestUrl, locale)
-  const cachedResponse = await caches.default.match(cacheKey)
   const isHead = request.method === 'HEAD'
   const priority = shouldUsePriorityTranslationQueue(request)
+
+  let cachedResponse = await caches.default.match(cacheKey)
+  if (cachedResponse && Date.now() - readTranslatedAt(cachedResponse) > FRESH_MS) {
+    // A queue job in another datacenter may already have refreshed this page in R2.
+    const storedResponse = await readStoredTranslatedResponseSafely(env, requestUrl, locale)
+    if (storedResponse && readTranslatedAt(storedResponse) > readTranslatedAt(cachedResponse)) {
+      await repopulateTranslatedPageCacheSafely(cacheKey, storedResponse.clone(), requestUrl, locale)
+      cachedResponse = storedResponse
+    }
+  }
 
   if (cachedResponse) {
     const translatedAt = readTranslatedAt(cachedResponse)
@@ -4033,6 +3973,7 @@ export const __translationWorkerTest = {
   buildBatches,
   cacheKeyFor,
   sourceCheckKeyFor,
+  translationStoreKey,
   collectRenderedNavLinks,
   collectSegments,
   dedupeBatchForTranslation,
@@ -4047,7 +3988,6 @@ export const __translationWorkerTest = {
   rewriteMetadataForEnglishCanonical,
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,
-  syncTranslatableMetaFromEnglish,
   readDocumentTitle,
   collectTranslatableMetaFields,
   translationLengthViolation,
