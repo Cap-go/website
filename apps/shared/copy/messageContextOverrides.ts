@@ -8,8 +8,9 @@ export const messageContextOverrides = {
   // Example:
   // updates: 'Pricing calculator metric label for monthly OTA update volume, not a nav item.',
   live_update_hero_headline:
-    'SEO product H1. Keep the product name "Capacitor Live Updates" and the acronym OTA in parentheses. Do not replace OTA with a long translated phrase in the headline.',
-  live_update_hero_title: 'Same meaning as live_update_hero_headline: Capacitor Live Updates (OTA). Used as document title context.',
+    'SEO product H1 for the live-update page. English: "Capacitor OTA updates for hybrid apps". Keep Capacitor, OTA, and hybrid apps clear; OTA may stay as the acronym in headlines. Do not replace OTA with an overly long translated phrase.',
+  live_update_hero_title:
+    'Same meaning as live_update_hero_headline: Capacitor OTA updates for hybrid apps. Used as document title context.',
   live_update_hero_subtitle:
     'Answer-first hero paragraph under the H1. Explain OTA live updates for Capacitor (web bundle changes without a new store binary) and mention Capgo channels, rollback, and device logs.',
   brand_asset_youtube_banner_title:
