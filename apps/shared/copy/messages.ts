@@ -2738,7 +2738,7 @@ const messages = {
   live_update_features_title: 'The complete system for Capacitor OTA updates',
   live_update_get_started: 'Get Started',
   live_update_hero_badge: 'Capgo Live Updates',
-  live_update_hero_headline: 'Capacitor OTA updates for hybrid apps',
+  live_update_hero_headline: 'Capacitor Live Updates (OTA)',
   live_update_hero_tagline: 'Ship web-layer fixes without waiting on store review.',
   live_update_hero_cta: 'Start shipping',
   live_update_hero_subtitle:
@@ -2757,7 +2757,7 @@ const messages = {
   live_update_hero_stat_latency_value: '~50ms typical',
   live_update_hero_stat_latency_label: 'Ultra-low latency',
   live_update_hero_stat_validation_value: 'CLI safety checks',
-  live_update_hero_title: 'Capacitor OTA updates for hybrid apps',
+  live_update_hero_title: 'Capacitor Live Updates (OTA)',
   live_update_how_it_works_subtitle: 'Automatic when you want speed. Manual when you need control. Safety checks at every step.',
   live_update_how_it_works_title: 'How Capacitor OTA updates work',
   live_update_logs_bullet1: 'Per-device timelines highlight stalled downloads, checksum issues, or missing notifyAppReady().',
@@ -3269,7 +3269,8 @@ const messages = {
   plugin_is_missing: 'Plugin is missing',
   platform_overview_eyebrow: 'THE CAPGO PLATFORM',
   platform_overview_title: 'One platform for the whole release cycle',
-  platform_overview_subtitle: 'Start with live updates. Add native builds, monitoring, and plugins when you need them. One account, one CLI, one dashboard.',
+  platform_overview_subtitle:
+    'Start with <a href="{liveUpdateUrl}" class="text-azure-500 underline hover:text-azure-400">Capacitor OTA updates</a>. Add native builds, monitoring, and plugins when you need them. One account, one CLI, one dashboard. For store policy, read our <a href="{otaGuideUrl}" class="text-azure-500 underline hover:text-azure-400">App Store compliant OTA updates guide</a>.',
   platform_group_ship: 'Ship',
   platform_screens_eyebrow: 'Inside the console',
   platform_screens_title: 'See the whole release cycle in one console',
