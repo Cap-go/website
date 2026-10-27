@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-25T10:00:00.000Z
+updated_at: 2026-10-27T04:09:43.000Z
 head_image: /android-studio-run.webp
 head_image_alt: "Running an app from Android Studio on a device with developer options enabled"
 keywords: developer options android 14, android 14 developer mode, developer options android 15, developer options android 16, enable android developer mode, android developer options, usb debugging, wireless debugging, how to pair wireless debugging, adb pair, enable developer mode samsung, enable developer options xiaomi, hyperos developer options, build number missing, this action is unavailable, turn off developer options
