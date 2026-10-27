@@ -29,6 +29,7 @@ const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfi
     'Hosted MCP server at api.capgo.app/mcp with OAuth or API key auth',
     'Docs search tool for Capgo documentation',
     'CLI MCP for bundle uploads and native builds',
+    'Guided onboarding tools that set up a new app from your coding agent',
     'Works with Claude, ChatGPT, Cursor, and other MCP clients',
   ],
 })
@@ -128,6 +129,15 @@ const toolGroups = [
           <h2 class="mb-4 text-2xl font-bold text-gray-100">{m.mcp_page_cli_title({}, { locale })}</h2>
           <p class="mb-4 text-gray-300">{m.mcp_page_cli_p1({}, { locale })}</p>
           <CommandCode command={cliMcpCommand} />
+          <p class="mt-6 mb-4 text-gray-300">{m.mcp_page_cli_onboarding({}, { locale })}</p>
+          <a
+            id="mcp-agent-onboarding-cta"
+            href="https://console.capgo.app/register/"
+            class="inline-flex items-center gap-1 rounded-md bg-emerald-400 px-4 py-2 text-sm font-semibold text-gray-950 transition-colors hover:bg-emerald-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+          >
+            {m.mcp_page_cli_onboarding_cta({}, { locale })}
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
 

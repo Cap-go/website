@@ -61,6 +61,16 @@ test('isGonePath does not match retired multi-platform-software-development (301
   expect(isGonePath('/de/blog/multi-platform-software-development/')).toBe(false)
 })
 
+test('isGonePath does not match retired how-mobile-apps-stay-compliant-with-us-privacy-laws (301 redirect)', () => {
+  expect(isGonePath('/blog/how-mobile-apps-stay-compliant-with-us-privacy-laws/')).toBe(false)
+  expect(isGonePath('/de/blog/how-mobile-apps-stay-compliant-with-us-privacy-laws/')).toBe(false)
+})
+
+test('isGonePath does not match retired disaster-recovery (301 redirect)', () => {
+  expect(isGonePath('/blog/disaster-recovery/')).toBe(false)
+  expect(isGonePath('/de/blog/disaster-recovery/')).toBe(false)
+})
+
 test('isGonePath does not match unrelated paths', () => {
   expect(isGonePath('/blog/capacitor-comprehensive-guide/')).toBe(false)
   expect(isGonePath('/blog/what-is-a-micro-frontend-extra/')).toBe(false)
