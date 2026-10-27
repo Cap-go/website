@@ -710,10 +710,10 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       renderShares(dependencyShares, managers, 'No data in this window.')
       if (toolchainLead) {
         const topXcode = [...xcode].sort((a, b) => b.share - a.share)[0]
-        const spm = metrics.ios_dependency_managers.find((item) => item.key === 'spm')
+        const topManager = [...managers].sort((a, b) => b.share - a.share)[0]
         const parts = [
           topXcode ? `${topXcode.label} built ${Math.round(topXcode.share)}% of iOS builds` : '',
-          spm ? `${Math.round(spm.share)}% use Swift Package Manager` : '',
+          topManager ? `${Math.round(topManager.share)}% use ${topManager.label}` : '',
         ].filter(Boolean)
         toolchainLead.textContent = parts.length ? `${parts.join(', and ')} in this window.` : 'No iOS toolchain data in this window.'
       }
