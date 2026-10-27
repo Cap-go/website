@@ -62,11 +62,15 @@ const THREE_DECIMAL_CURRENCIES = new Set(['bhd', 'jod', 'kwd', 'omr', 'tnd'])
 
 type AmountSet = { month: Record<string, number>; year: Record<string, number> }
 
+function minorUnitDivisor(currency: string) {
+  if (ZERO_DECIMAL_CURRENCIES.has(currency)) return 1
+  if (THREE_DECIMAL_CURRENCIES.has(currency)) return 1000
+  return 100
+}
+
 function toMajorUnits({ month, year }: AmountSet): AmountSet {
   const convert = (amounts: Record<string, number>) =>
-    Object.fromEntries(
-      Object.entries(amounts).map(([currency, amount]) => [currency, amount / (ZERO_DECIMAL_CURRENCIES.has(currency) ? 1 : THREE_DECIMAL_CURRENCIES.has(currency) ? 1000 : 100)]),
-    )
+    Object.fromEntries(Object.entries(amounts).map(([currency, amount]) => [currency, amount / minorUnitDivisor(currency)]))
   return { month: convert(month), year: convert(year) }
 }
 
