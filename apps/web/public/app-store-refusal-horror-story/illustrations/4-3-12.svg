@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Stacked app cards, guideline 4.3 spam">
+  <title>Stacked app cards, guideline 4.3 spam</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="40" cy="52" r="26" fill="#44BCFF" opacity="0.28"/><circle cx="278" cy="148" r="16" fill="#44BCFF" opacity="0.32"/><rect x="92" y="52" width="136" height="48" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/><rect x="98" y="66" width="128" height="48" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/><rect x="104" y="80" width="120" height="48" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+      <path d="M80 156h160" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="5 7" opacity="0.5"/>
+</svg>

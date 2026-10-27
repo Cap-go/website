@@ -48,6 +48,12 @@
   },
   "metadata-iap-checkboxes": null,
   "metadata-loop-launch-week": null,
+  "new-features-then-4-3-a-extended-review-warning": {
+    "src": "/app-store-refusal-horror-story/screenshots/new-features-then-4-3-a-extended-review-warning.webp",
+    "alt": "App Review rejection under Guideline 4.3(a) Design Spam with an extended review warning about repeated submissions",
+    "width": 2048,
+    "height": 975
+  },
   "nine-then-eight-days-review": null,
   "outfit-comparison-winner-1-2": null,
   "objectionable-content-resubmit": {
@@ -65,6 +71,7 @@
   "play-hotfix-behind-review-queue": null,
   "play-permission-policy-review": null,
   "portfolio-flagged-4-3": null,
+  "rejected-in-three-minutes-4-3-b-appeal-silence": null,
   "rejected-same-minute-4-3": {
     "src": "/app-store-refusal-horror-story/screenshots/rejected-same-minute-4-3.webp",
     "alt": "Spam rejection email listing guideline 4.3 and 4.2.6 questions",
@@ -93,6 +100,7 @@
     "width": 828,
     "height": 461
   },
+  "studio-account-flagged-one-app-like-a-website": null,
   "stalled-queue-then-4-3-wave": {
     "src": "/app-store-refusal-horror-story/screenshots/stalled-queue-then-4-3-wave.webp",
     "alt": "App Store Connect list with app names and icons blurred, most marked rejected",
@@ -189,6 +197,7 @@
     "height": 427
   },
   "limited-review-history-video-walkthrough-2-1": null,
+  "title-update-then-3-2-f-termination-notice": null,
   "three-guidelines-one-month-2-1-2-3-2-5-2-3": null,
   "prayer-app-primarily-a-book-4-2": null,
   "openai-in-metadata-china-guideline-5": {
