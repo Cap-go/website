@@ -19,6 +19,13 @@ const benefits = [
   m.menu_native_build_tagline({}, { locale: Astro.locals.locale }),
   m.menu_observe_tagline({}, { locale: Astro.locals.locale }),
 ]
+const passwordRules = [
+  { key: 'length', label: m.password_rule_length({}, { locale: Astro.locals.locale }) },
+  { key: 'lowercase', label: m.password_rule_lowercase({}, { locale: Astro.locals.locale }) },
+  { key: 'uppercase', label: m.password_rule_uppercase({}, { locale: Astro.locals.locale }) },
+  { key: 'number', label: m.password_rule_number({}, { locale: Astro.locals.locale }) },
+  { key: 'special', label: m.password_rule_special({}, { locale: Astro.locals.locale }) },
+]
 const initialsOf = (name: string) =>
   name
     .replace(/@.*/, '')
@@ -71,7 +78,7 @@ const content = {
             </span>
           </p>
 
-          <form id="registerForm" class="mt-6 space-y-4">
+          <form id="registerForm" class="mt-6 space-y-4" data-captcha-required={m.register_captcha_required({}, { locale: Astro.locals.locale })}>
             <div>
               <label for="email" class="block text-sm font-medium text-slate-300">
                 {m.email_label({}, { locale: Astro.locals.locale })}
@@ -90,20 +97,61 @@ const content = {
               <label for="password" class="block text-sm font-medium text-slate-300">
                 {m.password_label({}, { locale: Astro.locals.locale })}
               </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autocomplete="new-password"
-                passwordrules="minlength: 6; required: lower; required: upper; required: digit; required: [-!@#$%^&*_+=?];"
-                aria-describedby="password-requirements"
-                required
-                class="mt-1.5 block w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
-                placeholder={m.password_placeholder({}, { locale: Astro.locals.locale })}
-              />
-              <p id="password-requirements" class="mt-1.5 text-xs text-slate-400">
-                {m.password_requirements({}, { locale: Astro.locals.locale })}
-              </p>
+              <div class="relative mt-1.5">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="new-password"
+                  passwordrules="minlength: 6; required: lower; required: upper; required: digit; required: [-!@#$%^&*_+=?];"
+                  aria-describedby="password-requirements"
+                  required
+                  class="block w-full rounded-xl border border-white/10 bg-white/[0.04] py-2.5 pr-12 pl-3.5 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-[#44BCFF]/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-[#44BCFF]/30 focus:outline-none"
+                  placeholder={m.password_placeholder({}, { locale: Astro.locals.locale })}
+                />
+                <button
+                  type="button"
+                  id="password-toggle"
+                  aria-controls="password"
+                  aria-pressed="false"
+                  aria-label={m.password_show({}, { locale: Astro.locals.locale })}
+                  data-label-show={m.password_show({}, { locale: Astro.locals.locale })}
+                  data-label-hide={m.password_hide({}, { locale: Astro.locals.locale })}
+                  class="absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-xl text-slate-400 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
+                >
+                  <svg data-eye-open class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.04 12.32a1 1 0 0 1 0-.64C3.42 7.51 7.36 4.5 12 4.5c4.64 0 8.57 3 9.96 7.18a1 1 0 0 1 0 .64C20.58 16.49 16.64 19.5 12 19.5c-4.64 0-8.57-3-9.96-7.18Z"
+                    />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  </svg>
+                  <svg data-eye-closed class="hidden h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.98 8.22A10.48 10.48 0 0 0 2.04 12c1.38 4.18 5.32 7.5 9.96 7.5 1.99 0 3.86-.55 5.45-1.52M6.23 6.23A10.45 10.45 0 0 1 12 4.5c4.64 0 8.57 3 9.96 7.18a10.5 10.5 0 0 1-4.19 5.55M6.23 6.23 3 3m3.23 3.23 3.65 3.65m7.89 7.89L21 21m-3.23-3.23-3.65-3.65m0 0a3 3 0 1 0-4.24-4.24m4.24 4.24L9.88 9.88"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <ul id="password-requirements" class="mt-2 grid grid-cols-1 gap-x-3 gap-y-1 text-xs text-slate-400 sm:grid-cols-2">
+                {passwordRules.map((rule) => (
+                  <li data-password-rule={rule.key} class="password-rule flex items-center gap-1.5">
+                    <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        data-rule-check
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                      <circle data-rule-dot cx="10" cy="10" r="3" />
+                    </svg>
+                    <span>{rule.label}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             {enableCaptcha && <div class="cf-turnstile" data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY} data-size="flexible" data-theme="dark" />}
             <button
@@ -238,6 +286,18 @@ const content = {
   .review-dot[aria-current='true'] span {
     width: 1.25rem;
     background-color: #44bcff;
+  }
+  .password-rule [data-rule-check] {
+    display: none;
+  }
+  .password-rule.is-met {
+    color: #6ee7b7;
+  }
+  .password-rule.is-met [data-rule-check] {
+    display: inline;
+  }
+  .password-rule.is-met [data-rule-dot] {
+    display: none;
   }
   @media (prefers-reduced-motion: reduce) {
     .review-slide {

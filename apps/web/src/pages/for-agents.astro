@@ -77,8 +77,8 @@ const content = {
         <p class="sr-only" aria-live="polite" data-copy-status></p>
         <p class="text-sm leading-7 text-slate-400">
           # new to capgo? sign up at
-          <a id="for-agents-onboarding-cta" href="https://console.capgo.app/register/" class="inline-block text-[#44BCFF] underline-offset-4 hover:underline">
-            console.capgo.app/register
+          <a id="for-agents-onboarding-cta" href={getRelativeLocaleUrl(locale, 'register')} class="inline-block text-[#44BCFF] underline-offset-4 hover:underline">
+            capgo.app/register
           </a>
           and choose "With my AI agent" to get a prompt that installs the Capgo MCP and walks your agent through setup.
         </p>

@@ -23,6 +23,7 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
       },
       RegisterApiError: Error,
       getPasswordRequirementErrors: () => [],
+      getPasswordRuleStatus: () => ({}),
       formatPasswordRequirementErrors: () => '',
       getSignupUserMetadataForRegistration: () => ({}),
       getSignupAttributionForEvents: () => ({}),
@@ -37,8 +38,8 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     expect(button.disabled).toBe(false)
     await handler({ preventDefault() {} })
     expect(authCalls).toBe(captchaEnabled ? 0 : 1)
-    if (captchaEnabled) expect(toasts).toEqual(['Security verification is not ready. Please wait a moment and try again, or refresh the page.'])
-    else expect(toasts.some((text) => text.includes('Security verification'))).toBe(false)
+    if (captchaEnabled) expect(toasts).toEqual(['Check “Verify you are human” above, then tap Sign up again.'])
+    else expect(toasts.some((text) => text.includes('Verify you are human'))).toBe(false)
     if (captchaEnabled) expect(button.disabled).toBe(false)
   }
 })
@@ -79,6 +80,7 @@ test('registration without profile names preserves referral attribution and the 
     },
     RegisterApiError: Error,
     getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
     formatPasswordRequirementErrors: () => '',
     window: windowStub,
     navigator: { userAgent: 'test', maxTouchPoints: 0 },
@@ -149,6 +151,7 @@ test('a failed API request restores signup for retry without reporting success',
     },
     RegisterApiError: class extends Error {},
     getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
     formatPasswordRequirementErrors: () => '',
     getSignupUserMetadataForRegistration: () => ({}),
     getSignupAttributionForEvents: () => ({}),

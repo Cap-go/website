@@ -1,5 +1,5 @@
 import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
-import { formatPasswordRequirementErrors, getPasswordRequirementErrors, RegisterApiError, registerUser } from '@/services/registration'
+import { formatPasswordRequirementErrors, getPasswordRequirementErrors, getPasswordRuleStatus, RegisterApiError, registerUser } from '@/services/registration'
 import { getRegistrationDevice } from '@/services/registration-device'
 import Toastify from 'toastify-js'
 
@@ -9,6 +9,27 @@ const password = document.getElementById('password') as HTMLInputElement
 const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement
 
 let isSubmitting = false
+
+const CAPTCHA_REQUIRED_FALLBACK = 'Check “Verify you are human” above, then tap Sign up again.'
+
+// Tick each password rule as it is met, so nobody learns the policy from a failed submit.
+function syncPasswordRules() {
+  const status = getPasswordRuleStatus(password?.value ?? '')
+  document.querySelectorAll<HTMLElement>('[data-password-rule]').forEach((item) => {
+    item.classList.toggle('is-met', Boolean(status[item.dataset.passwordRule as keyof typeof status]))
+  })
+}
+password?.addEventListener?.('input', syncPasswordRules)
+
+const passwordToggle = document.getElementById('password-toggle') as HTMLButtonElement | null
+passwordToggle?.addEventListener('click', () => {
+  const show = password.type === 'password'
+  password.type = show ? 'text' : 'password'
+  passwordToggle.setAttribute('aria-pressed', String(show))
+  passwordToggle.setAttribute('aria-label', (show ? passwordToggle.dataset.labelHide : passwordToggle.dataset.labelShow) ?? '')
+  passwordToggle.querySelector('[data-eye-open]')?.classList.toggle('hidden', show)
+  passwordToggle.querySelector('[data-eye-closed]')?.classList.toggle('hidden', !show)
+})
 
 function getCaptchaId() {
   if (!(window as any).turnstile) {
@@ -78,9 +99,13 @@ form?.addEventListener('submit', async (e) => {
   }
   password.removeAttribute('aria-invalid')
 
-  if (document.querySelector('.cf-turnstile') && !getCaptchaId()) {
+  const captchaWidget = document.querySelector('.cf-turnstile')
+  if (captchaWidget && !getCaptchaId()) {
+    // The usual cause is an unticked "Verify you are human" box: point at it instead of suggesting a refresh that wipes the form.
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'validation', code: 'captcha_missing' })
+    ;(captchaWidget as HTMLElement).scrollIntoView?.({ block: 'center', behavior: 'smooth' })
     return Toastify({
-      text: 'Security verification is not ready. Please wait a moment and try again, or refresh the page.',
+      text: (form as HTMLElement | null)?.dataset?.captchaRequired || CAPTCHA_REQUIRED_FALLBACK,
       style: { background: '#e7000b' },
     }).showToast()
   }

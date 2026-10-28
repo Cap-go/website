@@ -148,7 +148,7 @@ Integrating Capgo into your Quasar app is a straightforward process that empower
 
 **Sign Up and Access the Capgo Dashboard**:
 
-It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://console.capgo.app/register/).
+It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://capgo.app/register/).
 
 **Install the Capgo SDK**:
 

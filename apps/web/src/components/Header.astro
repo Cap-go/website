@@ -15,6 +15,9 @@ const brandPageUrl = getRelativeLocaleUrl(locale, 'brand/')
 // Enterprise buyers get the sales CTA in the header instead of the self-serve trial.
 const isEnterprisePage = getRelativeLocaleUrl(locale, 'enterprise').replace(/\/$/, '') === Astro.url.pathname.replace(/\/$/, '')
 const navCtaHref = isEnterprisePage ? 'https://book.capgo.app/enterprise-inquiry/' : getRelativeLocaleUrl(locale, 'register')
+// The sales booking page is external; the trial sign-up stays in the same tab so phones keep their back button.
+const navCtaTarget = isEnterprisePage ? '_blank' : undefined
+const navCtaRel = isEnterprisePage ? 'noopener noreferrer' : undefined
 const navCtaLabel = isEnterprisePage ? m.enterprise_talk_to_team({}, { locale }) : m.nav_cta_start_free({}, { locale })
 // Paid-ads visitors (offer=direct) have no free trial, so the self-serve CTA drops the "free" wording for them.
 const navCtaDirectLabel = isEnterprisePage ? null : m.direct_offer_cta_get_started({}, { locale })
@@ -296,8 +299,8 @@ const mobileLinks = [
         <a
           data-guest-auth-link
           href={navCtaHref}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={navCtaTarget}
+          rel={navCtaRel}
           aria-label={isEnterprisePage ? navCtaLabel : undefined}
           class="font-pj flex h-11 items-center gap-2 rounded-2xl bg-white px-4 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
           role="button"
@@ -443,8 +446,8 @@ const mobileLinks = [
           <a
             data-guest-auth-link
             href={navCtaHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={navCtaTarget}
+            rel={navCtaRel}
             class="font-pj flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200"
           >
             {isEnterprisePage && <TeamAvatars loading={false} />}

@@ -132,7 +132,7 @@ const toolGroups = [
           <p class="mt-6 mb-4 text-gray-300">{m.mcp_page_cli_onboarding({}, { locale })}</p>
           <a
             id="mcp-agent-onboarding-cta"
-            href="https://console.capgo.app/register/"
+            href={getRelativeLocaleUrl(locale, 'register')}
             class="inline-flex items-center gap-1 rounded-md bg-emerald-400 px-4 py-2 text-sm font-semibold text-gray-950 transition-colors hover:bg-emerald-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
           >
             {m.mcp_page_cli_onboarding_cta({}, { locale })}

@@ -1,9 +1,10 @@
 ---
 import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
-// Console signup, where new accounts choose "With my AI agent".
-const registerUrl = 'https://console.capgo.app/register/'
+// Website signup; the console then offers "With my AI agent" to new accounts.
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
 
 const steps = [
