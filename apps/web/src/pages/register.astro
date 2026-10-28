@@ -4,7 +4,9 @@ import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import 'toastify-js/src/toastify.css'
 import RatingSummary from '@/components/RatingSummary.astro'
-import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
+import { capgoReviews, hasRealAvatar } from '@/config/productTestimonials'
+import { customerApps } from '@/config/customerApps'
+import { getTotalStars } from '@/services/github'
 import { getPlans } from '@/lib/siteData'
 import { planYearlyPrice } from '@/lib/planCopy'
 
@@ -16,11 +18,26 @@ const title = `${Astro.locals.runtimeConfig.public.brand} | ${m.register_title({
 const description = m.register_description
   ? m.register_description({}, { locale: Astro.locals.locale })
   : 'Create your free Capgo account and start deploying live updates to your Capacitor apps in minutes.'
-const benefits = [
-  m.menu_live_update_tagline({}, { locale: Astro.locals.locale }),
-  m.menu_native_build_tagline({}, { locale: Astro.locals.locale }),
-  m.menu_observe_tagline({}, { locale: Astro.locals.locale }),
+// The right column answers "what do I get, how much work is it, who else uses it" next to the form.
+const nextSteps = [
+  { title: m.register_step_account_title({}, { locale: Astro.locals.locale }), body: m.register_step_account_body({}, { locale: Astro.locals.locale }) },
+  {
+    title: m.register_step_init_title({}, { locale: Astro.locals.locale }),
+    body: m.register_step_init_body({}, { locale: Astro.locals.locale }),
+    command: 'npx @capgo/cli@latest init',
+  },
+  { title: m.register_step_ship_title({}, { locale: Astro.locals.locale }), body: m.register_step_ship_body({}, { locale: Astro.locals.locale }) },
 ]
+const trustedBy = m.app_strip_stats(
+  {
+    teams: m.companies_logo_stat_companies_value({}, { locale: Astro.locals.locale }),
+    devices: m.companies_logo_stat_devices_value({}, { locale: Astro.locals.locale }),
+    stars: `${Number(getTotalStars()).toLocaleString('en-US')}+`,
+  },
+  { locale: Astro.locals.locale },
+)
+const featuredApps = customerApps.slice(0, 8)
+const featuredReviews = capgoReviews.slice(0, 2)
 const passwordRules = [
   { key: 'length', label: m.password_rule_length({}, { locale: Astro.locals.locale }) },
   { key: 'lowercase', label: m.password_rule_lowercase({}, { locale: Astro.locals.locale }) },
@@ -70,7 +87,7 @@ const content = {
 <Layout content={content}>
   <div class="hero-wash">
     <section class="relative overflow-hidden px-4 pt-10 pb-24 sm:pt-16">
-      <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
+      <div class="relative mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
         <div class="rounded-3xl border border-white/10 bg-[#101216]/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl sm:p-8">
           <h1 class="text-3xl font-bold tracking-tight text-white">{m.register_title({}, { locale: Astro.locals.locale })}</h1>
           <p class="mt-2 text-sm text-slate-400">
@@ -255,86 +272,78 @@ const content = {
           </a>
         </div>
 
-        <div class="text-white">
-          <RatingSummary />
-          <ul class="mt-6 space-y-3">
-            {benefits.map((benefit) => (
-              <li class="flex items-center gap-3 text-base text-slate-200">
-                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#44BCFF]/15 text-[#44BCFF] ring-1 ring-[#44BCFF]/30">
-                  <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+        <div class="text-white lg:pt-4">
+          <h2 class="text-2xl font-bold tracking-tight text-balance text-white sm:text-3xl">{m.register_next_title({}, { locale: Astro.locals.locale })}</h2>
+          <ol class="mt-6 space-y-5">
+            {nextSteps.map((step, index) => (
+              <li class="flex gap-4">
+                <span
+                  class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#44BCFF]/15 text-sm font-bold text-[#44BCFF] ring-1 ring-[#44BCFF]/30"
+                  aria-hidden="true"
+                >
+                  {index + 1}
                 </span>
-                {benefit}
+                <div class="min-w-0">
+                  <h3 class="text-base font-semibold text-white">{step.title}</h3>
+                  <p class="mt-1 text-sm leading-6 text-slate-400">{step.body}</p>
+                  {step.command && (
+                    <code class="mt-2 inline-block max-w-full overflow-x-auto rounded-lg border border-white/10 bg-black/40 px-3 py-1.5 font-mono text-[13px] whitespace-nowrap text-slate-200">
+                      <span class="text-slate-500 select-none" aria-hidden="true">
+                        $&nbsp;
+                      </span>
+                      {step.command}
+                    </code>
+                  )}
+                </div>
               </li>
             ))}
-          </ul>
+          </ol>
 
-          <div class="mt-10" data-review-carousel aria-roledescription="carousel" aria-label="Customer reviews">
-            <div class="grid">
-              {allTestimonials.map((item, index) => (
-                <figure
-                  class:list={['review-slide flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 [grid-area:1/1] sm:p-8', { 'is-active': index === 0 }]}
-                  data-review-slide={index}
-                  aria-roledescription="slide"
-                  aria-label={`${index + 1} / ${allTestimonials.length}`}
-                  aria-hidden={index === 0 ? undefined : 'true'}
-                >
-                  <div class="flex gap-0.5 text-amber-300" role="img" aria-label={`${item.rating} out of 5 stars`}>
-                    {Array.from({ length: item.rating }).map(() => (
-                      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <blockquote class="mt-4 flex-1 text-lg leading-8 text-pretty text-white">&ldquo;{item.quote}&rdquo;</blockquote>
-                  <figcaption class="mt-6 flex items-center gap-3">
+          <section class="mt-10" aria-labelledby="register-trusted-title">
+            <h2 id="register-trusted-title" class="text-sm font-semibold text-slate-300">
+              {trustedBy}
+            </h2>
+            <ul class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4" role="list">
+              {featuredApps.map((app) => (
+                <li class="flex min-w-0 items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] p-2">
+                  <img src={app.icon} alt="" width="32" height="32" loading="lazy" decoding="async" class="h-8 w-8 shrink-0 rounded-lg object-cover" />
+                  <span class="min-w-0 leading-tight">
+                    <span class="block truncate text-sm font-semibold text-white">{app.name}</span>
+                    <span class="block text-xs text-slate-400">{m.app_strip_installs({ count: app.installs }, { locale: Astro.locals.locale })}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section class="mt-10" aria-label={m.register_reviews_label({}, { locale: Astro.locals.locale })}>
+            <RatingSummary showCustomers={false} />
+            <div class="mt-4 grid gap-3 xl:grid-cols-2">
+              {featuredReviews.map((item) => (
+                <figure class="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                  <blockquote class="flex-1 text-[15px] leading-6 text-pretty text-slate-200">&ldquo;{item.quote}&rdquo;</blockquote>
+                  <figcaption class="mt-4 flex items-center gap-3">
                     {hasRealAvatar(item.avatar) ? (
-                      <img src={item.avatar} alt="" width="44" height="44" loading="lazy" decoding="async" class="h-11 w-11 rounded-full object-cover ring-1 ring-white/15" />
+                      <img src={item.avatar} alt="" width="36" height="36" loading="lazy" decoding="async" class="h-9 w-9 rounded-full object-cover ring-1 ring-white/15" />
                     ) : item.logo ? (
-                      <img
-                        src={item.logo}
-                        alt=""
-                        width="44"
-                        height="44"
-                        loading="lazy"
-                        decoding="async"
-                        class="h-11 w-11 rounded-xl bg-white object-contain ring-1 ring-white/15"
-                      />
+                      <img src={item.logo} alt="" width="36" height="36" loading="lazy" decoding="async" class="h-9 w-9 rounded-lg bg-white object-contain ring-1 ring-white/15" />
                     ) : (
                       <span
-                        class="flex h-11 w-11 items-center justify-center rounded-full bg-white/[0.06] text-sm font-semibold text-slate-300 ring-1 ring-white/10"
+                        class="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.06] text-xs font-semibold text-slate-300 ring-1 ring-white/10"
                         aria-hidden="true"
                       >
                         {initialsOf(item.name)}
                       </span>
                     )}
-                    <span>
+                    <span class="min-w-0">
                       <cite class="block text-sm font-semibold text-white not-italic">{item.name}</cite>
-                      <span class="block text-sm text-slate-400">{item.role}</span>
+                      <span class="block text-xs text-slate-400">{item.role}</span>
                     </span>
                   </figcaption>
                 </figure>
               ))}
             </div>
-            <div class="mt-4 flex gap-1.5">
-              {allTestimonials.map((item, index) => (
-                <button
-                  type="button"
-                  data-review-dot={index}
-                  aria-label={`Show review from ${item.name}`}
-                  aria-current={index === 0 ? 'true' : undefined}
-                  class="review-dot flex h-6 w-6 items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
-                >
-                  <span class="h-1.5 w-1.5 rounded-full bg-white/25 transition-[width,background-color]" />
-                </button>
-              ))}
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </section>
@@ -342,27 +351,6 @@ const content = {
 </Layout>
 
 <style>
-  .review-slide {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(6px);
-    transition:
-      opacity 0.4s ease,
-      transform 0.4s ease,
-      visibility 0s linear 0.4s;
-  }
-  .review-slide.is-active {
-    opacity: 1;
-    visibility: inherit;
-    transform: none;
-    transition:
-      opacity 0.4s ease,
-      transform 0.4s ease;
-  }
-  .review-dot[aria-current='true'] span {
-    width: 1.25rem;
-    background-color: #44bcff;
-  }
   .password-rule [data-rule-check] {
     display: none;
   }
@@ -375,56 +363,7 @@ const content = {
   .password-rule.is-met [data-rule-dot] {
     display: none;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .review-slide {
-      transition: none;
-    }
-  }
 </style>
-
-<script>
-  // Rotate customer reviews: random start each visit, pause while hovered or focused.
-  document.querySelectorAll<HTMLElement>('[data-review-carousel]').forEach((carousel) => {
-    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-review-slide]'))
-    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-review-dot]'))
-    if (slides.length < 2) return
-    let current = 0
-    let timer = 0
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    const show = (index: number) => {
-      current = (index + slides.length) % slides.length
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('is-active', i === current)
-        if (i === current) slide.removeAttribute('aria-hidden')
-        else slide.setAttribute('aria-hidden', 'true')
-      })
-      dots.forEach((dot, i) => {
-        if (i === current) dot.setAttribute('aria-current', 'true')
-        else dot.removeAttribute('aria-current')
-      })
-    }
-    const stop = () => window.clearInterval(timer)
-    const start = () => {
-      stop()
-      if (!reduceMotion) timer = window.setInterval(() => show(current + 1), 6000)
-    }
-
-    dots.forEach((dot, i) =>
-      dot.addEventListener('click', () => {
-        show(i)
-        start()
-      }),
-    )
-    carousel.addEventListener('pointerenter', stop)
-    carousel.addEventListener('pointerleave', start)
-    carousel.addEventListener('focusin', stop)
-    carousel.addEventListener('focusout', start)
-
-    show(Math.floor(Math.random() * slides.length))
-    start()
-  })
-</script>
 
 <script>
   import '@/scripts/register'
