@@ -1,5 +1,6 @@
 {
   "account-required-for-device-paid-feature-5-1-1": null,
+  "ai-consent-in-terms-not-enough-5-1-1-5-1-2": null,
   "ai-data-sharing-no-consent": {
     "src": "/app-store-refusal-horror-story/screenshots/ai-data-sharing-no-consent.webp",
     "alt": "Rejection message asking the app to disclose and get consent before sending personal data to a third party AI service",
@@ -13,6 +14,7 @@
     "width": 560,
     "height": 626
   },
+  "cloud-gaming-client-3-1-1-purchases-in-stream": null,
   "companion-app-trial-3-1-3-f": {
     "src": "/app-store-refusal-horror-story/screenshots/companion-app-trial-3-1-3-f.webp",
     "alt": "App Review Board appeal response citing guidelines 3.1.1 and 3.1.3(f) about a free companion app and a 14 day trial",
@@ -67,6 +69,12 @@
     "alt": "Two blurred live apps in App Store Connect, both Ready for Distribution with App Review issues flagged",
     "width": 1200,
     "height": 400
+  },
+  "paywall-fix-then-3-2-f-termination-within-a-week": {
+    "src": "/app-store-refusal-horror-story/screenshots/paywall-fix-then-3-2-f-termination-within-a-week.webp",
+    "alt": "Apple message titled Pending Termination Notice about an Apple Developer Program membership",
+    "width": 1179,
+    "height": 918
   },
   "play-hotfix-behind-review-queue": null,
   "play-permission-policy-review": null,
@@ -181,6 +189,7 @@
   "launch-week-permission-button-and-screenshot-prices": null,
   "sign-in-buy-delete-three-fixes": null,
   "internet-radio-content-rights-5-2-3": null,
+  "ipad-login-failed-during-backend-outage": null,
   "six-rejections-then-4-3-call": null,
   "unsigned-agreement-rejection-two-weeks": null,
   "crash-on-new-macos-free-vm": null,

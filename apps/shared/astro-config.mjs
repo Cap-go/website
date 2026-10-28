@@ -19,13 +19,13 @@ function withSitemapLastMod(item, pageLastModDates) {
   return item
 }
 
-export function buildSharedAstroBaseConfig({ siteDomain, defaultLocale, cpuCount, build = {} }) {
+export function buildSharedAstroBaseConfig({ siteDomain, defaultLocale, cpuCount, build = {}, compressHTML = false }) {
   const { output = 'server', ...buildOptions } = build
   const baseConfig = {
     trailingSlash: 'always',
     site: `https://${siteDomain}`,
     output,
-    compressHTML: false,
+    compressHTML,
     i18n: {
       locales: [defaultLocale],
       defaultLocale,

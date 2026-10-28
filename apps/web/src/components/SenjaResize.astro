@@ -1,0 +1,30 @@
+---
+// Sizes a Senja wall iframe to its content. The resizer script only loads once the wall nears the viewport.
+interface Props {
+  frameId: string
+}
+const { frameId } = Astro.props
+---
+
+<script is:inline define:vars={{ frameId }}>
+  ;(function () {
+    var frame = document.getElementById(frameId)
+    if (!frame) return
+    var resize = function () {
+      window.iFrameResize({ log: false, checkOrigin: false }, frame)
+    }
+    new IntersectionObserver(
+      function (entries, observer) {
+        if (!entries[0].isIntersecting) return
+        observer.disconnect()
+        if (typeof window.iFrameResize === 'function') return resize()
+        var script = document.createElement('script')
+        script.src = 'https://widget.senja.io/js/iframeResizer.min.js'
+        script.async = true
+        script.onload = resize
+        document.head.appendChild(script)
+      },
+      { rootMargin: '800px 0px' },
+    ).observe(frame)
+  })()
+</script>

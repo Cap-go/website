@@ -6,8 +6,7 @@ import m from '@/copy/messages'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import { planDescriptionToText } from '@/lib/planCopy'
 import { ENTERPRISE_MAU_STOPS, formatMau, type CreditStep } from '@/lib/enterpriseScale'
-import planPrices from '@/data/capgo-plan-prices.json'
-import { PRICE_TIERS, tierDiscountPercent, type PlanPricesSnapshot } from '@/lib/currency'
+import { DISCOUNT_TIERS, tierDiscountPercent } from '@/lib/currency'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -47,12 +46,6 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
   }
 
   return highlights
-}
-
-// Regional (PPP) discount tiers Stripe sells this plan at (Solo); the worker tells the page which one applies.
-function discountTiers(plan: Database['public']['Tables']['plans']['Row']) {
-  const tiers = (planPrices as PlanPricesSnapshot).plans[plan.stripe_id]?.tiers ?? {}
-  return PRICE_TIERS.filter((tier) => tier in tiers)
 }
 
 function priceAmount(monthlyPrice: number, yearlyPrice: number) {
@@ -117,7 +110,8 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             </p>
             <p class="pb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">/{m.month({}, { locale: Astro.locals.locale })}</p>
           </div>
-          {discountTiers(plan).length > 0 && (
+          {/* Regional (PPP) discount: the backend says which plans and tier apply to the visitor (Solo). */}
+          {plan.name !== 'Enterprise' && (
             <div class="mt-2 space-y-1" data-regional-discount={plan.stripe_id} hidden>
               <p class="flex flex-wrap items-center gap-2 text-sm">
                 <span class="sr-only">{m.pricing_regular_price({}, { locale: Astro.locals.locale })}</span>
@@ -131,7 +125,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                 >
                   ${priceAmount(plan.price_m, plan.price_y)}
                 </s>
-                {discountTiers(plan).map((tier) => (
+                {DISCOUNT_TIERS.map((tier) => (
                   <span class="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-700" data-regional-discount-tier={tier} hidden>
                     {m.pricing_regional_discount({ percent: String(tierDiscountPercent(tier)) }, { locale: Astro.locals.locale })}
                   </span>
@@ -151,8 +145,6 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         <div class="mt-6 space-y-3">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-            target="_blank"
-            rel="noopener noreferrer"
             data-plan-cta
             class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             role="button"

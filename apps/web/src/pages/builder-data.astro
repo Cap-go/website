@@ -9,6 +9,13 @@ import { emptyBuilderMetrics } from '@/lib/builderMetrics'
 import { BUILDER_METRICS_PATH } from '@/lib/publicBuilderMetrics'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { formatTrendTooltip, selectTrendRows, TREND_RANGE_OPTIONS } from '@/lib/metricsTrendChart'
+
+// The toolchain shares are daily only: no hourly 1D window.
+const SHARE_RANGE_OPTIONS = TREND_RANGE_OPTIONS.filter((option) => option.key !== '1d')
+const SHARE_CHARTS = [
+  { key: 'xcode', title: 'Xcode version per day' },
+  { key: 'dependency', title: 'CocoaPods vs SPM per day' },
+] as const
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const config = Astro.locals.runtimeConfig
@@ -317,6 +324,72 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
         </ol>
       </div>
     </section>
+
+    <section class="data-section data-section-muted" aria-labelledby="toolchain-title">
+      <div class="data-shell data-split">
+        <div>
+          <p class="data-eyebrow">iOS toolchain</p>
+          <h2 id="toolchain-title">Xcode and dependency managers</h2>
+          <p class="data-copy" data-toolchain-lead translate="no">{pending ? 'Loading toolchain mix…' : 'No iOS toolchain data in this window.'}</p>
+          <p class="data-copy data-copy-secondary">
+            Share of iOS builds over the last 30 days. Xcode is the version that built the app. CocoaPods or Swift Package Manager is what the Capgo CLI found in the
+            project; builds from older CLI versions don't report it. Shares only, no build counts.
+          </p>
+        </div>
+        <div class="data-toolchain">
+          <div>
+            <h3 id="xcode-shares-title">Xcode version</h3>
+            <ol class="data-failures data-shares" data-xcode-shares aria-labelledby="xcode-shares-title" translate="no">
+              <li class="data-empty">{pending ? 'Loading…' : 'No data in this window.'}</li>
+            </ol>
+          </div>
+          <div>
+            <h3 id="dependency-shares-title">CocoaPods vs SPM</h3>
+            <ol class="data-failures data-shares" data-dependency-shares aria-labelledby="dependency-shares-title" translate="no">
+              <li class="data-empty">{pending ? 'Loading…' : 'No data in this window.'}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="data-shell data-toolchain-trends">
+        {
+          SHARE_CHARTS.map((chart) => (
+            <div class="data-trend data-share-trend" data-share-trend={chart.key}>
+              <div class="data-trend-head">
+                <p id={`${chart.key}-trend-title`}>{chart.title}</p>
+                <div class="data-periods" role="group" aria-label={`${chart.title} window`}>
+                  {SHARE_RANGE_OPTIONS.map((option) => (
+                    <button type="button" data-share-range={option.key} aria-pressed={option.key === '1m' ? 'true' : 'false'}>
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <p class="data-sr-only" data-share-status aria-live="polite"></p>
+              <p class="data-empty" data-share-empty>{pending ? 'Loading…' : 'No data in this window.'}</p>
+              <div class="data-trend-plot" data-share-plot translate="no" hidden>
+                <svg class="data-trend-svg" viewBox="0 0 800 260" role="img" aria-labelledby={`${chart.key}-trend-title`}>
+                  <line x1="44" y1="16" x2="784" y2="16" />
+                  <line x1="44" y1="124" x2="784" y2="124" />
+                  <line x1="44" y1="232" x2="784" y2="232" />
+                  <text x="0" y="20">100%</text>
+                  <text x="0" y="128">50%</text>
+                  <text x="0" y="236">0%</text>
+                  <g data-share-lines />
+                  <text data-share-start x="44" y="256" />
+                  <text data-share-end x="784" y="256" text-anchor="end" />
+                </svg>
+                <div class="data-trend-overlay" data-share-overlay tabindex="0" role="group" aria-label={`${chart.title} values. Move pointer across the chart or use arrow keys.`}>
+                  <span class="data-trend-guide" data-share-guide hidden aria-hidden="true" />
+                  <span class="data-trend-tooltip" data-share-tooltip hidden />
+                </div>
+              </div>
+              <div class="data-legend" data-share-legend translate="no" />
+            </div>
+          ))
+        }
+      </div>
+    </section>
     <ProductTestimonials
       variant="dark"
       eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
@@ -344,6 +417,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     TREND_RANGE_OPTIONS,
     trendHitLeftPercent,
     trendNearestIndex,
+    trendRangeDays,
     trendRowUnit,
     type TrendRangeKey,
   } from '@/lib/metricsTrendChart'
@@ -385,6 +459,33 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     const dailySkeleton = page?.querySelector<HTMLElement>('.data-chart-skeleton')
     const failuresLead = page?.querySelector<HTMLElement>('[data-failures-lead]')
     const failuresList = page?.querySelector<HTMLOListElement>('[data-failures]')
+    const toolchainLead = page?.querySelector<HTMLElement>('[data-toolchain-lead]')
+    const xcodeShares = page?.querySelector<HTMLOListElement>('[data-xcode-shares]')
+    const dependencyShares = page?.querySelector<HTMLOListElement>('[data-dependency-shares]')
+    function shareChart(key: 'xcode' | 'dependency') {
+      const root = page?.querySelector<HTMLElement>(`[data-share-trend="${key}"]`)
+      const overlay = root?.querySelector<HTMLElement>('[data-share-overlay]')
+      return {
+        root,
+        status: root?.querySelector<HTMLElement>('[data-share-status]'),
+        defaultLabel: overlay?.getAttribute('aria-label') ?? '',
+        plot: root?.querySelector<HTMLElement>('[data-share-plot]'),
+        empty: root?.querySelector<HTMLElement>('[data-share-empty]'),
+        lines: root?.querySelector<SVGGElement>('[data-share-lines]'),
+        start: root?.querySelector<SVGTextElement>('[data-share-start]'),
+        end: root?.querySelector<SVGTextElement>('[data-share-end]'),
+        overlay,
+        guide: root?.querySelector<HTMLElement>('[data-share-guide]'),
+        tooltip: root?.querySelector<HTMLElement>('[data-share-tooltip]'),
+        legend: root?.querySelector<HTMLElement>('[data-share-legend]'),
+        ranges: [...(root?.querySelectorAll<HTMLButtonElement>('[data-share-range]') ?? [])],
+        range: '1m' as TrendRangeKey,
+        rows: [] as ShareDay[],
+        focus: -1,
+      }
+    }
+    type ShareDay = { date: string; values: Record<string, number> | null }
+    const shareCharts = { xcode: shareChart('xcode'), dependency: shareChart('dependency') }
     const trendRangeButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-trend-range]') ?? [])]
     const metricButtons = [...(page?.querySelectorAll<HTMLButtonElement>('[data-metric]') ?? [])]
     const styleScopeAttributes = [...(page?.attributes ?? [])].map((attribute) => attribute.name).filter((name) => name.startsWith('data-astro-cid-'))
@@ -652,6 +753,174 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (!metrics.failures.length) failuresList.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'No failures in this window.' }))
     }
 
+    function renderShares(list: HTMLOListElement | null | undefined, items: Array<{ label: string; share: number }>, empty: string) {
+      if (!list) return
+      list.replaceChildren()
+      for (const item of items) {
+        const row = createScopedElement('li')
+        const label = createScopedElement('strong')
+        label.textContent = item.label
+        const share = createScopedElement('b')
+        share.textContent = `${Math.round(item.share)}%`
+        const track = createScopedElement('i')
+        track.setAttribute('aria-hidden', 'true')
+        const fill = createScopedElement('em')
+        fill.style.setProperty('--share', `${item.share}%`)
+        track.append(fill)
+        row.append(label, share, track)
+        list.append(row)
+      }
+      if (!items.length) list.append(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: empty }))
+    }
+
+    const XCODE_COLORS = ['#60a5fa', '#a78bfa', '#34d399', '#f472b6', '#94a3b8']
+    const DEPENDENCY_COLORS: Record<string, string> = { 'Swift Package Manager': '#60a5fa', CocoaPods: '#f59e0b' }
+    const SHARE_SCALE = { min: 0, max: 100 }
+    const shareSeries: Record<keyof typeof shareCharts, Array<{ label: string; color: string }>> = { xcode: [], dependency: [] }
+    let shareDays: Record<keyof typeof shareCharts, ShareDay[]> = { xcode: [], dependency: [] }
+
+    function shareTip(row: ShareDay, series: Array<{ label: string }>) {
+      if (!row.values) return `${row.date} · no data`
+      return [row.date, ...series.map((item) => `${item.label} ${formatRate(row.values?.[item.label] ?? 0)}`)].join(' · ')
+    }
+
+    function hideShareTooltip(chart: ReturnType<typeof shareChart>) {
+      chart.focus = -1
+      if (chart.tooltip) chart.tooltip.hidden = true
+      if (chart.guide) chart.guide.hidden = true
+      if (chart.status) chart.status.textContent = ''
+      chart.overlay?.setAttribute('aria-label', chart.defaultLabel)
+    }
+
+    function showSharePoint(key: keyof typeof shareCharts, index: number) {
+      const chart = shareCharts[key]
+      const row = chart.rows[index]
+      if (!row || !chart.tooltip) return hideShareTooltip(chart)
+      const tip = shareTip(row, shareSeries[key])
+      const left = trendHitLeftPercent(index, chart.rows.length)
+      chart.focus = index
+      chart.tooltip.textContent = tip
+      chart.tooltip.hidden = false
+      chart.tooltip.style.left = `${clampTrendTooltip(left)}%`
+      if (chart.guide) {
+        chart.guide.hidden = false
+        chart.guide.style.left = `${left}%`
+      }
+      chart.overlay?.setAttribute('aria-label', tip)
+      if (chart.status) chart.status.textContent = tip
+    }
+
+    function bindShareChart(key: keyof typeof shareCharts) {
+      const chart = shareCharts[key]
+      const overlay = chart.overlay
+      if (overlay) {
+        overlay.addEventListener('pointermove', (event) => {
+          if (!chart.rows.length) return
+          const rect = overlay.getBoundingClientRect()
+          showSharePoint(key, trendNearestIndex(event.clientX, rect.left, rect.width, chart.rows.length))
+        })
+        overlay.addEventListener('pointerleave', () => hideShareTooltip(chart))
+        overlay.addEventListener('keydown', (event) => {
+          if (!chart.rows.length) return
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Home' && event.key !== 'End') return
+          event.preventDefault()
+          const last = chart.rows.length - 1
+          const step = event.key === 'ArrowRight' ? 1 : -1
+          const next = event.key === 'Home' ? 0 : event.key === 'End' ? last : Math.max(0, Math.min(last, (chart.focus < 0 ? 0 : chart.focus) + step))
+          showSharePoint(key, next)
+        })
+      }
+      for (const button of chart.ranges) {
+        button.addEventListener('click', () => {
+          chart.range = (button.dataset.shareRange as TrendRangeKey) ?? '1m'
+          for (const item of chart.ranges) item.setAttribute('aria-pressed', item === button ? 'true' : 'false')
+          drawShareChart(key)
+        })
+      }
+    }
+
+    /** Lines of each series' daily share on a fixed 0–100% scale, from the first day with data in the window. */
+    function drawShareChart(key: keyof typeof shareCharts, empty = 'No data in this window.') {
+      const chart = shareCharts[key]
+      const series = shareSeries[key]
+      const windowRows = sliceDays(shareDays[key], trendRangeDays(chart.range))
+      const first = windowRows.findIndex((row) => row.values !== null)
+      chart.rows = first === -1 ? [] : windowRows.slice(first)
+      hideShareTooltip(chart)
+      const hasData = chart.rows.length > 0 && series.length > 0
+      if (chart.plot) chart.plot.hidden = !hasData
+      if (chart.empty) {
+        chart.empty.hidden = hasData
+        chart.empty.textContent = empty
+      }
+      chart.lines?.replaceChildren()
+      chart.legend?.replaceChildren()
+      if (!hasData) return
+      for (const item of series) {
+        const values = chart.rows.map((row) => (row.values ? (row.values[item.label] ?? 0) : null))
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'polyline')
+        for (const name of styleScopeAttributes) line.setAttribute(name, '')
+        line.setAttribute('points', chartPoints(values, SHARE_SCALE))
+        line.style.stroke = item.color
+        chart.lines?.append(line)
+        if (values.filter((value) => value !== null).length === 1) {
+          const marker = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+          renderTrendMarker(marker, values, SHARE_SCALE, true, item.color)
+          chart.lines?.append(marker)
+        }
+        const legend = createScopedElement('span')
+        legend.textContent = item.label
+        legend.style.setProperty('--legend-color', item.color)
+        chart.legend?.append(legend)
+      }
+      if (chart.start) chart.start.textContent = chart.rows[0]?.date ?? ''
+      if (chart.end) chart.end.textContent = chart.rows.at(-1)?.date ?? ''
+    }
+
+    function dependencyLabel(key: 'spm' | 'cocoapods') {
+      return key === 'spm' ? 'Swift Package Manager' : 'CocoaPods'
+    }
+
+    function renderToolchainTrends(metrics: BuilderMetrics) {
+      // Newest Xcode first, with the same color on every day.
+      const versions = [...new Set(metrics.daily_ios_toolchain.flatMap((day) => day.xcode_versions.map((item) => item.version)))].sort((a, b) => Number(b) - Number(a))
+      shareSeries.xcode = versions.map((version, index) => ({ label: `Xcode ${version}`, color: XCODE_COLORS[Math.min(index, XCODE_COLORS.length - 1)] }))
+      const managers = (['spm', 'cocoapods'] as const).filter((key) => metrics.daily_ios_toolchain.some((day) => day.ios_dependency_managers.some((item) => item.key === key)))
+      shareSeries.dependency = managers.map((key) => ({ label: dependencyLabel(key), color: DEPENDENCY_COLORS[dependencyLabel(key)] }))
+      shareDays = {
+        xcode: metrics.daily_ios_toolchain.map((day) => ({
+          date: day.date,
+          values: day.xcode_versions.length ? Object.fromEntries(day.xcode_versions.map((item) => [`Xcode ${item.version}`, item.share])) : null,
+        })),
+        dependency: metrics.daily_ios_toolchain.map((day) => ({
+          date: day.date,
+          values: day.ios_dependency_managers.length ? Object.fromEntries(day.ios_dependency_managers.map((item) => [dependencyLabel(item.key), item.share])) : null,
+        })),
+      }
+      drawShareChart('xcode')
+      drawShareChart('dependency')
+    }
+
+    bindShareChart('xcode')
+    bindShareChart('dependency')
+
+    function renderToolchain(metrics: BuilderMetrics) {
+      renderToolchainTrends(metrics)
+      const xcode = metrics.xcode_versions.map((item) => ({ label: `Xcode ${item.version}`, share: item.share }))
+      const managers = metrics.ios_dependency_managers.map((item) => ({ label: dependencyLabel(item.key), share: item.share }))
+      renderShares(xcodeShares, xcode, 'No data in this window.')
+      renderShares(dependencyShares, managers, 'No data in this window.')
+      if (toolchainLead) {
+        const topXcode = [...xcode].sort((a, b) => b.share - a.share)[0]
+        const topManager = [...managers].sort((a, b) => b.share - a.share)[0]
+        const parts = [
+          topXcode ? `${topXcode.label} built ${Math.round(topXcode.share)}% of iOS builds` : '',
+          topManager ? `${Math.round(topManager.share)}% use ${topManager.label}` : '',
+        ].filter(Boolean)
+        toolchainLead.textContent = parts.length ? `${parts.join(', and ')} in this window.` : 'No iOS toolchain data in this window.'
+      }
+    }
+
     function renderMetrics(metrics: BuilderMetrics) {
       latestMetrics = metrics
       const ios = platformOf(metrics, 'ios')
@@ -679,6 +948,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       renderSpark(androidSpark, sparkRows, 'android')
       renderTrend(metrics)
       renderFailures(metrics)
+      renderToolchain(metrics)
       if (updated) {
         const timestamp = new Date(metrics.updated_at)
         updated.textContent = Number.isNaN(timestamp.getTime())
@@ -707,6 +977,12 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
       if (trendSvg) trendSvg.style.display = 'none'
       if (failuresLead) failuresLead.textContent = 'Failure data is temporarily unavailable.'
       if (failuresList) failuresList.replaceChildren(Object.assign(createScopedElement('li'), { className: 'data-empty', textContent: 'Failure data is temporarily unavailable.' }))
+      if (toolchainLead) toolchainLead.textContent = 'Toolchain data is temporarily unavailable.'
+      renderShares(xcodeShares, [], 'Temporarily unavailable.')
+      renderShares(dependencyShares, [], 'Temporarily unavailable.')
+      shareDays = { xcode: [], dependency: [] }
+      drawShareChart('xcode', 'Temporarily unavailable.')
+      drawShareChart('dependency', 'Temporarily unavailable.')
     }
 
     async function fetchMetrics() {
@@ -1175,7 +1451,7 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     height: 8px;
     margin-right: 6px;
     border-radius: 999px;
-    background: #60a5fa;
+    background: var(--legend-color, #60a5fa);
     content: '';
   }
   .data-legend span[data-legend='android']::before {
@@ -1304,6 +1580,41 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     border-radius: inherit;
     background: #f59e0b;
   }
+  .data-toolchain {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .data-toolchain h3 {
+    margin: 0 0 16px;
+    color: #91a2ba;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .data-toolchain-trends {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .data-share-trend {
+    min-width: 0;
+  }
+  .data-share-trend > .data-empty {
+    padding: 48px 0;
+    text-align: center;
+  }
+  .data-shares li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .data-shares i {
+    grid-column: 1 / -1;
+  }
+  .data-shares em {
+    background: #60a5fa;
+  }
   .data-empty {
     margin: 0;
     color: #91a2ba;
@@ -1331,6 +1642,8 @@ const nativeBuildHref = getRelativeLocaleUrl(Astro.locals.locale, 'native-build'
     }
     .data-heading,
     .data-split,
+    .data-toolchain,
+    .data-toolchain-trends,
     .data-cards {
       grid-template-columns: 1fr;
       gap: 24px;

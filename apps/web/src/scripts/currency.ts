@@ -1,49 +1,43 @@
-import planPricesData from '@/data/capgo-plan-prices.json'
 import {
   BASE_CURRENCY,
-  commonCurrencies,
-  CURRENCY_ENDPOINT,
   CURRENCY_STORAGE_KEY,
   formatPrice,
-  FULL_PRICE_TIER,
-  isPriceTier,
-  type CurrencyPayload,
-  type PlanPricesSnapshot,
+  stripeAmountToMajorUnits,
+  type PlanPriceAmounts,
+  type PlanPricesResponse,
   type PriceFormat,
-  type PriceTier,
 } from '@/lib/currency'
 
 // Shows every `[data-price-amount]` element in the visitor's currency. Markup keeps the USD amount so the
 // server-rendered HTML (and crawlers) stay in USD:
 //   <span data-price-amount="14" data-price-plan="prod_x" data-price-interval="month">$14</span>
-// Plan prices (data-price-plan + data-price-interval: month | year | year-monthly) are the exact Stripe
-// amounts for the currency and the visitor's regional tier; data-price-full shows the undiscounted price.
+// Prices come from the Capgo backend (`[data-plan-prices-url]`, GET /private/plan_prices/public): plan prices
+// (data-price-plan + data-price-interval: month | year | year-monthly) are the exact Stripe amounts sold to
+// the visitor's country, including the regional discount; data-price-full shows the undiscounted price.
 // Other amounts (usage, credits) and data-price-extra are converted at the rate Stripe sells the plans at.
 // Scripts that change a price at runtime update the data attributes and call renderPrices().
 
 export const CURRENCY_CHANGE_EVENT = 'capgo:currency-change'
 
-const snapshot = planPricesData as PlanPricesSnapshot
-export const AVAILABLE_CURRENCIES = commonCurrencies(snapshot)
-
 type CurrencyState = {
   currency: string
   detected: string
-  tier: PriceTier
+  // Currencies Stripe sells every plan in for this visitor; USD until the backend answers.
+  currencies: string[]
   ready: boolean
 }
 
-const state: CurrencyState = { currency: BASE_CURRENCY, detected: BASE_CURRENCY, tier: FULL_PRICE_TIER, ready: false }
+const state: CurrencyState = { currency: BASE_CURRENCY, detected: BASE_CURRENCY, currencies: [BASE_CURRENCY], ready: false }
+let catalog: PlanPricesResponse | null = null
 let loading: Promise<void> | null = null
 
 function isAvailable(currency: unknown): currency is string {
-  return typeof currency === 'string' && AVAILABLE_CURRENCIES.includes(currency)
+  return typeof currency === 'string' && state.currencies.includes(currency)
 }
 
 function storedCurrency(): string | null {
   try {
-    const value = localStorage.getItem(CURRENCY_STORAGE_KEY)
-    return isAvailable(value) ? value : null
+    return localStorage.getItem(CURRENCY_STORAGE_KEY)
   } catch {
     return null
   }
@@ -64,31 +58,42 @@ export function hasManualCurrency() {
   return manualCurrency !== null
 }
 
+// Full Stripe prices of every plan (the discounted plans' regular prices replace their regional ones).
+function fullPrices(): PlanPriceAmounts {
+  return catalog ? { ...catalog.prices, ...catalog.regularPrices } : {}
+}
+
 // Local units per USD: the ratio of the full Stripe plan prices, the same rate Checkout sells at.
 function usdRatio(currency: string): number | null {
   if (currency === BASE_CURRENCY) return 1
   let local = 0
   let usd = 0
-  for (const plan of Object.values(snapshot.plans)) {
+  for (const plan of Object.values(fullPrices())) {
     for (const amounts of [plan.month, plan.year]) {
       if (amounts[currency] === undefined || !amounts[BASE_CURRENCY]) continue
-      local += amounts[currency]
-      usd += amounts[BASE_CURRENCY]
+      local += stripeAmountToMajorUnits(amounts[currency], currency)
+      usd += stripeAmountToMajorUnits(amounts[BASE_CURRENCY], BASE_CURRENCY)
     }
   }
   return usd ? local / usd : null
 }
 
-/** Stripe price of a plan in the display currency, at the visitor's regional tier unless `full`. */
-export function planAmount(planId: string, interval: 'month' | 'year', full = false): number | null {
-  const plan = snapshot.plans[planId]
-  const prices = (!full && plan?.tiers?.[state.tier]) || plan
-  return prices?.[interval][state.currency] ?? null
+// A regional price is only sold in the region's currencies; any other currency pays the full price.
+function discountApplies(): boolean {
+  return !!catalog?.discount?.currencies.includes(state.currency)
 }
 
-/** True when the visitor's regional tier makes this plan cheaper than its full price. */
+/** True when the visitor's regional discount makes this plan cheaper in the display currency. */
 export function hasRegionalDiscount(planId: string): boolean {
-  return state.tier !== FULL_PRICE_TIER && !!snapshot.plans[planId]?.tiers?.[state.tier]
+  return discountApplies() && !!catalog?.regularPrices[planId]
+}
+
+/** Stripe price of a plan in the display currency (major units), discounted unless `full`. */
+export function planAmount(planId: string, interval: 'month' | 'year', full = false): number | null {
+  if (!catalog) return null
+  const prices = (full || !discountApplies()) && catalog.regularPrices[planId] ? catalog.regularPrices : catalog.prices
+  const amount = prices[planId]?.[interval][state.currency]
+  return amount === undefined ? null : stripeAmountToMajorUnits(amount, state.currency)
 }
 
 /** Converts a USD amount (usage, credits) to the display currency, at the rate Stripe sells the plans at. */
@@ -127,7 +132,8 @@ export function renderPrices(root: ParentNode = document) {
   })
   document.querySelectorAll<HTMLElement>('[data-regional-discount]').forEach((discount) => {
     discount.hidden = !hasRegionalDiscount(discount.dataset.regionalDiscount ?? '')
-    discount.querySelectorAll<HTMLElement>('[data-regional-discount-tier]').forEach((badge) => (badge.hidden = badge.dataset.regionalDiscountTier !== state.tier))
+    const tier = `p${100 - (catalog?.discount?.percent ?? 0)}`
+    discount.querySelectorAll<HTMLElement>('[data-regional-discount-tier]').forEach((badge) => (badge.hidden = badge.dataset.regionalDiscountTier !== tier))
   })
   document.querySelectorAll<HTMLElement>('[data-currency-note]').forEach((note) => (note.hidden = state.currency === BASE_CURRENCY))
   document.querySelectorAll<HTMLElement>('[data-currency-code]').forEach((element) => (element.textContent = state.currency.toUpperCase()))
@@ -158,16 +164,22 @@ export function onCurrencyChange(listener: (currency: string) => void) {
 export function initCurrency(): Promise<void> {
   loading ??= (async () => {
     try {
-      const response = await fetch(CURRENCY_ENDPOINT, { headers: { Accept: 'application/json' } })
-      if (!response.ok) throw new Error(`Currency request failed: ${response.status}`)
-      const payload = (await response.json()) as CurrencyPayload
-      state.detected = isAvailable(payload.currency) ? payload.currency : BASE_CURRENCY
-      state.tier = isPriceTier(payload.tier) ? payload.tier : FULL_PRICE_TIER
+      const url = document.querySelector<HTMLElement>('[data-plan-prices-url]')?.dataset.planPricesUrl
+      if (!url) throw new Error('No plan prices URL on the page')
+      const response = await fetch(url, { headers: { Accept: 'application/json' } })
+      if (!response.ok) throw new Error(`Plan prices request failed: ${response.status}`)
+      const data = (await response.json()) as PlanPricesResponse
+      // A partial catalog could show a plan in a currency it is not sold in: keep the USD page.
+      if (!data.complete || !data.currencies?.includes(BASE_CURRENCY)) throw new Error('Plan prices are incomplete')
+      catalog = data
+      state.currencies = data.currencies
+      state.detected = isAvailable(data.currency) ? data.currency : BASE_CURRENCY
     } catch (error) {
-      // Without the visitor's location the page keeps the full USD prices it was rendered with.
+      // Without the backend prices the page keeps the full USD prices it was rendered with.
       console.warn('Local pricing unavailable', error)
     }
     state.ready = true
+    if (!isAvailable(manualCurrency)) manualCurrency = null
     applyCurrency(manualCurrency ?? state.detected)
   })()
   return loading

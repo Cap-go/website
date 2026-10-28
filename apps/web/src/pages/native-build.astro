@@ -358,6 +358,111 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
       </div>
     </section>
 
+    <!-- ============================================ ONBOARDING WIZARD ============================================ -->
+    <section class="section" id="onboarding">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--green">{copy('native_build_v2_wiz_eyebrow')}</div>
+          <h2 class="h2-section">
+            {copy('native_build_v2_wiz_title_prefix')}
+            <span class="accent-green">{copy('native_build_v2_wiz_title_time')}.</span>
+          </h2>
+          <p class="lead">{copy('native_build_v2_wiz_lead')}</p>
+          <div class="onboarding-cmd-row">
+            <code class="onboarding-cmd">
+              <span class="ocm-prompt">$</span> bunx <span class="ocm-pkg">@capgo/cli@latest</span> build init <span class="ocm-flag">--platform</span>
+              <span class="ocm-val" id="ocm-platform">
+                ios
+              </span>
+            </code>
+            <div class="onboarding-platform-toggle" role="group" aria-label="Platform">
+              <button class="opt active" data-platform="ios" type="button" aria-pressed="true">
+                iOS
+              </button>
+              <button class="opt" data-platform="android" type="button" aria-pressed="false">
+                Android
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="wizard" id="wizard" data-platform="ios">
+          <div class="wizard-steps" role="group" aria-label="Setup steps">
+            <button class="wizard-step active" data-platform="ios" type="button">
+              <span class="num">1</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s1_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s1_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="ios" type="button">
+              <span class="num">2</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s2_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s2_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="ios" type="button">
+              <span class="num">3</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s3_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s3_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="ios" type="button">
+              <span class="num">4</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_ios_s4_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_ios_s4_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step active" data-platform="android" type="button" hidden>
+              <span class="num">1</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s1_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s1_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="android" type="button" hidden>
+              <span class="num">2</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s2_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s2_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="android" type="button" hidden>
+              <span class="num">3</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s3_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s3_d')}</span>
+              </span>
+            </button>
+            <button class="wizard-step" data-platform="android" type="button" hidden>
+              <span class="num">4</span>
+              <span>
+                <span class="lbl">{copy('native_build_v2_wiz_and_s4_l')}</span>
+                <span class="dsc">{copy('native_build_v2_wiz_and_s4_d')}</span>
+              </span>
+            </button>
+          </div>
+          <div class="wizard-stage" id="wizard-stage"></div>
+        </div>
+
+        <div class="wizard-before-after">
+          <span class="ba b" id="ba-before">
+            {copy('native_build_v2_wiz_ios_before')}
+          </span>
+          <span class="ba-arrow">→</span>
+          <span class="ba a" id="ba-after">
+            {copy('native_build_v2_wiz_ios_after')}
+          </span>
+        </div>
+        <p class="wizard-macos-note" style="margin-top:18px;text-align:center;font-size:13px;opacity:.55">
+          {copy('native_build_v2_wiz_macos_note')}
+        </p>
+      </div>
+    </section>
+
     <!-- ============================================ CONSOLE ============================================ -->
     <section class="section" id="console">
       <div class="shell">
@@ -371,25 +476,6 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         </div>
       </div>
     </section>
-
-    <ProductVideoSection
-      variant="builder"
-      accent="blue"
-      youtubeId={productVideos.nativeBuild.youtubeId}
-      title={productVideos.nativeBuild.title}
-      description={productVideos.nativeBuild.description}
-    />
-
-    <!-- ============================================ PROOF ============================================ -->
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={copy('native_build_v2_proof_eyebrow')}
-      title={copy('native_build_v2_proof_title')}
-      description={copy('native_build_v2_proof_lead')}
-      testimonials={productTestimonials.nativeBuild}
-      maxItems={2}
-    />
 
     <!-- ============================================ BENTO ============================================ -->
     <section class="section" id="features">
@@ -554,6 +640,97 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </div>
 
         <p class="bento-hint">{copy('native_build_v2_bento_hint')}</p>
+      </div>
+    </section>
+
+    <!-- ============================================ AI DEBUG ============================================ -->
+    <section class="section" id="ai-debug">
+      <div class="shell">
+        <div class="section-head">
+          <div class="eyebrow eyebrow--green">{copy('native_build_v2_aidebug_eyebrow')}</div>
+          <h2 class="h2-section">{copy('native_build_v2_aidebug_title')}</h2>
+          <p class="lead">{copy('native_build_v2_aidebug_lead')}</p>
+        </div>
+
+        <div class="aidebug-grid">
+          <div class="aidebug-termcol">
+            <div class="terminal-frame aidebug-term">
+              <div class="terminal-bar">
+                <span class="dot r"></span>
+                <span class="dot y"></span>
+                <span class="dot g"></span>
+                <span class="title">capgo build request --platform ios</span>
+              </div>
+              <div class="terminal-body aidebug-body" aria-label="Example of an AI-assisted build failure diagnosis">
+                <span class="row">
+                  <span class="pain-prompt">$ </span>
+                  <span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>
+                </span>
+                <span class="row">
+                  <span class="dim">[CapApp]</span> Creating App.xcarchive
+                </span>
+                <span class="row">
+                  <span class="err">✖ Archive failed: Command CodeSign failed with a nonzero exit code</span>
+                </span>
+                <span class="row">
+                  <span class="err">&nbsp;&nbsp;error: No profile matching 'com.acme.app' found for team ABC123</span>
+                </span>
+                <span class="row ai-head">
+                  <span class="kw">?</span> Choose AI analysis <span class="ghost">(optional)</span>
+                </span>
+                <span class="row" data-menu-selected>
+                  <span class="ok">✔</span> <span class="val">Capgo AI</span>
+                </span>
+                <span class="row menu-extra">
+                  <span class="dim">&nbsp;&nbsp;Local AI · write the prompt to a file</span>
+                </span>
+                <span class="row menu-extra" data-collapse>
+                  <span class="dim">&nbsp;&nbsp;Skip</span>
+                </span>
+                <span class="row ai-head" data-ai-spin>
+                  <span class="ok">✔</span> <span class="ghost">Capgo AI finished</span>
+                </span>
+                <span class="row">
+                  <span class="ok">◆ Likely cause</span>
+                </span>
+                <span class="row">
+                  <span class="ghost">Your App Store provisioning profile doesn't include the bundle ID com.acme.app.</span>
+                </span>
+                <span class="row ai-head">
+                  <span class="ok">◆ Fix</span>
+                </span>
+                <span class="row">
+                  <span class="ghost">Regenerate the profile for that bundle ID, or run </span>
+                  <span class="cmd">capgo build init --platform ios</span>
+                </span>
+                <span class="row">
+                  <span class="ghost">to recreate certificate + profile automatically, then re-run the build.</span>
+                </span>
+              </div>
+            </div>
+            <div class="demo-controls aidebug-controls">
+              <span>Optional. Only runs if you choose Capgo AI.</span>
+              <button class="demo-replay" id="aidebug-replay" type="button">
+                ⟲ Replay
+              </button>
+            </div>
+          </div>
+
+          <ul class="aidebug-points">
+            <li>
+              <h3>{copy('native_build_v2_aidebug_p1_t')}</h3>
+              <p>{copy('native_build_v2_aidebug_p1_d')}</p>
+            </li>
+            <li>
+              <h3>{copy('native_build_v2_aidebug_p2_t')}</h3>
+              <p>{copy('native_build_v2_aidebug_p2_d')}</p>
+            </li>
+            <li>
+              <h3>{copy('native_build_v2_aidebug_p3_t')}</h3>
+              <p>{copy('native_build_v2_aidebug_p3_d')}</p>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -727,110 +904,24 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       </div>
     </section>
 
-    <!-- ============================================ ONBOARDING WIZARD ============================================ -->
-    <section class="section" id="onboarding">
-      <div class="shell">
-        <div class="section-head section-head--wide">
-          <div class="eyebrow eyebrow--green">{copy('native_build_v2_wiz_eyebrow')}</div>
-          <h2 class="h2-section">
-            {copy('native_build_v2_wiz_title_prefix')}
-            <span class="accent-green">{copy('native_build_v2_wiz_title_time')}.</span>
-          </h2>
-          <p class="lead">{copy('native_build_v2_wiz_lead')}</p>
-          <div class="onboarding-cmd-row">
-            <code class="onboarding-cmd">
-              <span class="ocm-prompt">$</span> bunx <span class="ocm-pkg">@capgo/cli@latest</span> build init <span class="ocm-flag">--platform</span>
-              <span class="ocm-val" id="ocm-platform">
-                ios
-              </span>
-            </code>
-            <div class="onboarding-platform-toggle" role="group" aria-label="Platform">
-              <button class="opt active" data-platform="ios" type="button" aria-pressed="true">
-                iOS
-              </button>
-              <button class="opt" data-platform="android" type="button" aria-pressed="false">
-                Android
-              </button>
-            </div>
-          </div>
-        </div>
+    <ProductVideoSection
+      variant="builder"
+      accent="blue"
+      youtubeId={productVideos.nativeBuild.youtubeId}
+      title={productVideos.nativeBuild.title}
+      description={productVideos.nativeBuild.description}
+    />
 
-        <div class="wizard" id="wizard" data-platform="ios">
-          <div class="wizard-steps" role="group" aria-label="Setup steps">
-            <button class="wizard-step active" data-platform="ios" type="button">
-              <span class="num">1</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_ios_s1_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_ios_s1_d')}</span>
-              </span>
-            </button>
-            <button class="wizard-step" data-platform="ios" type="button">
-              <span class="num">2</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_ios_s2_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_ios_s2_d')}</span>
-              </span>
-            </button>
-            <button class="wizard-step" data-platform="ios" type="button">
-              <span class="num">3</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_ios_s3_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_ios_s3_d')}</span>
-              </span>
-            </button>
-            <button class="wizard-step" data-platform="ios" type="button">
-              <span class="num">4</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_ios_s4_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_ios_s4_d')}</span>
-              </span>
-            </button>
-            <button class="wizard-step active" data-platform="android" type="button" hidden>
-              <span class="num">1</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_and_s1_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_and_s1_d')}</span>
-              </span>
-            </button>
-            <button class="wizard-step" data-platform="android" type="button" hidden>
-              <span class="num">2</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_and_s2_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_and_s2_d')}</span>
-              </span>
-            </button>
-            <button class="wizard-step" data-platform="android" type="button" hidden>
-              <span class="num">3</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_and_s3_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_and_s3_d')}</span>
-              </span>
-            </button>
-            <button class="wizard-step" data-platform="android" type="button" hidden>
-              <span class="num">4</span>
-              <span>
-                <span class="lbl">{copy('native_build_v2_wiz_and_s4_l')}</span>
-                <span class="dsc">{copy('native_build_v2_wiz_and_s4_d')}</span>
-              </span>
-            </button>
-          </div>
-          <div class="wizard-stage" id="wizard-stage"></div>
-        </div>
-
-        <div class="wizard-before-after">
-          <span class="ba b" id="ba-before">
-            {copy('native_build_v2_wiz_ios_before')}
-          </span>
-          <span class="ba-arrow">→</span>
-          <span class="ba a" id="ba-after">
-            {copy('native_build_v2_wiz_ios_after')}
-          </span>
-        </div>
-        <p class="wizard-macos-note" style="margin-top:18px;text-align:center;font-size:13px;opacity:.55">
-          {copy('native_build_v2_wiz_macos_note')}
-        </p>
-      </div>
-    </section>
+    <!-- ============================================ PROOF ============================================ -->
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={copy('native_build_v2_proof_eyebrow')}
+      title={copy('native_build_v2_proof_title')}
+      description={copy('native_build_v2_proof_lead')}
+      testimonials={productTestimonials.nativeBuild}
+      maxItems={2}
+    />
 
     <!-- ============================================ ASK AI / MCP ============================================ -->
     <section class="section" id="ask-ai">
@@ -1070,97 +1161,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       </div>
     </section>
 
-    <!-- ============================================ AI DEBUG ============================================ -->
-    <section class="section" id="ai-debug">
-      <div class="shell">
-        <div class="section-head">
-          <div class="eyebrow eyebrow--green">{copy('native_build_v2_aidebug_eyebrow')}</div>
-          <h2 class="h2-section">{copy('native_build_v2_aidebug_title')}</h2>
-          <p class="lead">{copy('native_build_v2_aidebug_lead')}</p>
-        </div>
-
-        <div class="aidebug-grid">
-          <div class="aidebug-termcol">
-            <div class="terminal-frame aidebug-term">
-              <div class="terminal-bar">
-                <span class="dot r"></span>
-                <span class="dot y"></span>
-                <span class="dot g"></span>
-                <span class="title">capgo build request --platform ios</span>
-              </div>
-              <div class="terminal-body aidebug-body" aria-label="Example of an AI-assisted build failure diagnosis">
-                <span class="row">
-                  <span class="pain-prompt">$ </span>
-                  <span class="cmd">capgo build request</span> <span class="flag">--platform</span> <span class="val">ios</span>
-                </span>
-                <span class="row">
-                  <span class="dim">[CapApp]</span> Creating App.xcarchive
-                </span>
-                <span class="row">
-                  <span class="err">✖ Archive failed: Command CodeSign failed with a nonzero exit code</span>
-                </span>
-                <span class="row">
-                  <span class="err">&nbsp;&nbsp;error: No profile matching 'com.acme.app' found for team ABC123</span>
-                </span>
-                <span class="row ai-head">
-                  <span class="kw">?</span> Choose AI analysis <span class="ghost">(optional)</span>
-                </span>
-                <span class="row" data-menu-selected>
-                  <span class="ok">✔</span> <span class="val">Capgo AI</span>
-                </span>
-                <span class="row menu-extra">
-                  <span class="dim">&nbsp;&nbsp;Local AI · write the prompt to a file</span>
-                </span>
-                <span class="row menu-extra" data-collapse>
-                  <span class="dim">&nbsp;&nbsp;Skip</span>
-                </span>
-                <span class="row ai-head" data-ai-spin>
-                  <span class="ok">✔</span> <span class="ghost">Capgo AI finished</span>
-                </span>
-                <span class="row">
-                  <span class="ok">◆ Likely cause</span>
-                </span>
-                <span class="row">
-                  <span class="ghost">Your App Store provisioning profile doesn't include the bundle ID com.acme.app.</span>
-                </span>
-                <span class="row ai-head">
-                  <span class="ok">◆ Fix</span>
-                </span>
-                <span class="row">
-                  <span class="ghost">Regenerate the profile for that bundle ID, or run </span>
-                  <span class="cmd">capgo build init --platform ios</span>
-                </span>
-                <span class="row">
-                  <span class="ghost">to recreate certificate + profile automatically, then re-run the build.</span>
-                </span>
-              </div>
-            </div>
-            <div class="demo-controls aidebug-controls">
-              <span>Optional. Only runs if you choose Capgo AI.</span>
-              <button class="demo-replay" id="aidebug-replay" type="button">
-                ⟲ Replay
-              </button>
-            </div>
-          </div>
-
-          <ul class="aidebug-points">
-            <li>
-              <h3>{copy('native_build_v2_aidebug_p1_t')}</h3>
-              <p>{copy('native_build_v2_aidebug_p1_d')}</p>
-            </li>
-            <li>
-              <h3>{copy('native_build_v2_aidebug_p2_t')}</h3>
-              <p>{copy('native_build_v2_aidebug_p2_d')}</p>
-            </li>
-            <li>
-              <h3>{copy('native_build_v2_aidebug_p3_t')}</h3>
-              <p>{copy('native_build_v2_aidebug_p3_d')}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <!-- ============================================ PRICING (live plans) ============================================ -->
     {plans.length > 0 && (
       <section class="section" id="pricing">
@@ -1249,6 +1249,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
         </div>
       </section>
     )}
+
     <!-- ============================================ FAQ ============================================ -->
     <section class="section" id="faq">
       <div class="shell">

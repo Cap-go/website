@@ -1,52 +1,57 @@
----
-import m from '@/copy/messages'
-import planPrices from '@/data/capgo-plan-prices.json'
-import { commonCurrencies, currencyName, type PlanPricesSnapshot } from '@/lib/currency'
-
-const locale = Astro.locals.locale
-// Only currencies Stripe sells every plan in.
-const currencies = commonCurrencies(planPrices as PlanPricesSnapshot)
----
-
-{currencies.length > 1 && (
-<div id="currency" class="mx-auto mt-10 flex max-w-xl flex-col items-center gap-2 text-center" data-currency-selector>
-  <div class="flex flex-wrap items-center justify-center gap-3">
-    <label for="currency-select" class="text-sm font-medium text-gray-300">{m.pricing_currency_label({}, { locale })}</label>
-    <select
-      id="currency-select"
-      data-currency-select
-      aria-describedby="currency-select-hint"
-      class="min-h-11 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-white/30 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/40 focus:outline-none"
-    >
-      <option value="auto" class="text-gray-950" data-currency-auto-option>{m.pricing_currency_auto({}, { locale })}</option>
-      {currencies.map((code) => (
-        <option value={code} class="text-gray-950">
-          {code.toUpperCase()} · {currencyName(code, locale)}
-        </option>
-      ))}
-    </select>
-  </div>
-  <p id="currency-select-hint" class="text-xs leading-5 text-gray-400">{m.pricing_currency_hint({}, { locale })}</p>
-</div>
-)}
-
+<!-- Fills and shows the footer currency picker (Footer.astro) on pages with prices. -->
 <script>
+  import { currencyName } from '@/lib/currency'
   import { getCurrencyState, hasManualCurrency, initCurrency, onCurrencyChange, setCurrency } from '@/scripts/currency'
 
-  function initCurrencySelector() {
-    const select = document.querySelector<HTMLSelectElement>('[data-currency-select]')
-    // The regional (Solo) price still depends on the visitor's location when only USD is sold.
-    if (!select) return void initCurrency()
-    const autoOption = select.querySelector<HTMLOptionElement>('[data-currency-auto-option]')
-    const autoLabel = autoOption?.textContent ?? ''
+  const OPTION_CLASS = 'flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-zinc-300 hover:bg-white/5 hover:text-white aria-[current=true]:text-white'
 
-    const sync = () => {
-      const { currency, detected } = getCurrencyState()
-      if (autoOption) autoOption.textContent = `${autoLabel} (${detected.toUpperCase()})`
-      select.value = hasManualCurrency() ? currency : 'auto'
+  function initCurrencySelector() {
+    const container = document.querySelector<HTMLElement>('[data-currency-selector]')
+    const button = container?.querySelector<HTMLButtonElement>('#currency-dropdown-button')
+    const list = container?.querySelector<HTMLElement>('[data-currency-options]')
+    // The regional (Solo) price still depends on the visitor's location without the picker.
+    if (!container || !button || !list) return void initCurrency()
+    const autoOption = list.querySelector<HTMLButtonElement>('[data-currency-option="auto"]')
+    const autoLabel = autoOption?.textContent?.trim() ?? ''
+    const locale = document.documentElement.lang || 'en-US'
+
+    const close = () => {
+      list.classList.add('hidden')
+      button.setAttribute('aria-expanded', 'false')
     }
 
-    select.addEventListener('change', () => setCurrency(select.value === 'auto' ? null : select.value))
+    const sync = () => {
+      const { currency, currencies, detected } = getCurrencyState()
+      if (list.querySelectorAll('[data-currency-option]').length !== currencies.length + 1) {
+        const options = currencies.map((code) => {
+          const option = document.createElement('button')
+          option.type = 'button'
+          option.className = OPTION_CLASS
+          option.dataset.currencyOption = code
+          option.textContent = `${code.toUpperCase()} · ${currencyName(code, locale)}`
+          return option
+        })
+        list.replaceChildren(...(autoOption ? [autoOption] : []), ...options)
+      }
+      if (autoOption) autoOption.textContent = `${autoLabel} (${detected.toUpperCase()})`
+      const selected = hasManualCurrency() ? currency : 'auto'
+      list.querySelectorAll<HTMLElement>('[data-currency-option]').forEach((option) => {
+        if (option.dataset.currencyOption === selected) option.setAttribute('aria-current', 'true')
+        else option.removeAttribute('aria-current')
+      })
+      const current = container.querySelector('[data-currency-current]')
+      if (current) current.textContent = currency.toUpperCase()
+      button.setAttribute('aria-label', `${currencyName(currency, locale)}, ${button.dataset.currencyLabel ?? ''}`)
+      container.hidden = currencies.length < 2
+    }
+
+    list.addEventListener('click', (event) => {
+      const option = (event.target as HTMLElement).closest<HTMLElement>('[data-currency-option]')
+      if (!option) return
+      setCurrency(option.dataset.currencyOption === 'auto' ? null : (option.dataset.currencyOption ?? null))
+      close()
+      button.focus()
+    })
     onCurrencyChange(sync)
     initCurrency().then(sync)
   }

@@ -1,5 +1,5 @@
 import { getSignupAttributionForEvents, getSignupUserMetadataForRegistration } from '@/lib/attribution'
-import { formatPasswordRequirementErrors, getPasswordRequirementErrors, RegisterApiError, registerUser } from '@/services/registration'
+import { formatPasswordRequirementErrors, getPasswordRequirementErrors, getPasswordRuleStatus, RegisterApiError, registerUser } from '@/services/registration'
 import { getRegistrationDevice } from '@/services/registration-device'
 import Toastify from 'toastify-js'
 
@@ -9,6 +9,86 @@ const password = document.getElementById('password') as HTMLInputElement
 const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement
 
 let isSubmitting = false
+
+const NETWORK_ERROR_FALLBACK = 'We could not reach Capgo. Check your connection or VPN and tap Sign up again. If it keeps failing, email support@capgo.app.'
+const PASSWORD_REVEAL_LENGTH = 6
+const CAPTCHA_REQUIRED_FALLBACK = 'Check “Verify you are human” above, then tap Sign up again.'
+
+// The rule checklist stays out of the way until a password is wrong: leaving the field with missing rules,
+// typing a full-length password that still misses one, or submitting. Once shown it ticks rules live and
+// hides again when every rule is met.
+const passwordRequirements = document.getElementById('password-requirements') as HTMLElement | null
+let passwordRulesRevealed = false
+
+function passwordRulesMet() {
+  return Object.values(getPasswordRuleStatus(password?.value ?? '')).every(Boolean)
+}
+
+function syncPasswordRules() {
+  const status = getPasswordRuleStatus(password?.value ?? '')
+  document.querySelectorAll<HTMLElement>('[data-password-rule]').forEach((item) => {
+    item.classList.toggle('is-met', Boolean(status[item.dataset.passwordRule as keyof typeof status]))
+  })
+  if (passwordRequirements) passwordRequirements.hidden = !passwordRulesRevealed || passwordRulesMet()
+}
+
+function revealPasswordRules() {
+  passwordRulesRevealed = true
+  syncPasswordRules()
+}
+
+password?.addEventListener?.('input', () => {
+  if (!passwordRulesRevealed && password.value.length >= PASSWORD_REVEAL_LENGTH && !passwordRulesMet()) passwordRulesRevealed = true
+  syncPasswordRules()
+})
+password?.addEventListener?.('blur', () => {
+  if (password.value && !passwordRulesMet()) revealPasswordRules()
+})
+
+const passwordToggle = document.getElementById('password-toggle') as HTMLButtonElement | null
+passwordToggle?.addEventListener('click', () => {
+  const show = password.type === 'password'
+  password.type = show ? 'text' : 'password'
+  passwordToggle.setAttribute('aria-pressed', String(show))
+  passwordToggle.setAttribute('aria-label', (show ? passwordToggle.dataset.labelHide : passwordToggle.dataset.labelShow) ?? '')
+  passwordToggle.querySelector('[data-eye-open]')?.classList.toggle('hidden', show)
+  passwordToggle.querySelector('[data-eye-closed]')?.classList.toggle('hidden', !show)
+})
+
+// Turnstile can fail on its own (timeouts, blocked iframes, flaky networks). Retry quietly a couple of times,
+// then tell the visitor what to change, instead of asking them to tick a box that never appeared.
+const captchaStatus = document.getElementById('captcha-status') as HTMLElement | null
+const CAPTCHA_AUTO_RETRIES = 2
+let captchaFailures = 0
+
+function setCaptchaStatus(text: string | undefined) {
+  if (!captchaStatus) return
+  captchaStatus.textContent = text ?? ''
+  captchaStatus.classList.toggle('hidden', !text)
+}
+
+document.addEventListener?.('capgo-turnstile', (event) => {
+  const { kind, code } = (event as CustomEvent<{ kind: string; code?: string }>).detail ?? {}
+  const turnstile = (window as any).turnstile
+  if (kind === 'success') {
+    setCaptchaStatus(undefined)
+    return
+  }
+  if (kind === 'expired') {
+    turnstile?.reset?.()
+    return
+  }
+  captchaFailures++
+  ;(window as any).posthog?.capture('website_signup_error', { stage: 'captcha', code: `turnstile_${kind}`, turnstile_code: code, attempt: captchaFailures })
+  if (captchaFailures <= CAPTCHA_AUTO_RETRIES) {
+    setCaptchaStatus(captchaStatus?.dataset.retrying)
+    window.setTimeout(() => turnstile?.reset?.(), 1500)
+  } else {
+    setCaptchaStatus(captchaStatus?.dataset.blocked)
+  }
+})
+
+const emailExistsAlert = document.getElementById('email-exists-alert') as HTMLElement | null
 
 function getCaptchaId() {
   if (!(window as any).turnstile) {
@@ -54,6 +134,7 @@ form?.addEventListener('submit', async (e) => {
   e.preventDefault()
   if (isSubmitting || submitButton.disabled) return
   ;(window as any).posthog?.capture('website_signup_submit')
+  if (emailExistsAlert) emailExistsAlert.hidden = true
 
   // Validate email format
   if (!isValidEmail(email.value.trim())) {
@@ -70,6 +151,8 @@ form?.addEventListener('submit', async (e) => {
     ;(window as any).posthog?.capture('website_signup_error', { stage: 'validation', code: 'weak_password' })
     password.setAttribute('aria-invalid', 'true')
     password.focus()
+    // Missing rules show in the checklist under the field; only the byte limit, which it does not list, needs a toast.
+    if (!passwordRulesMet()) return revealPasswordRules()
     return Toastify({
       text: formatPasswordRequirementErrors(passwordErrors),
       duration: 8000,
@@ -78,9 +161,13 @@ form?.addEventListener('submit', async (e) => {
   }
   password.removeAttribute('aria-invalid')
 
-  if (document.querySelector('.cf-turnstile') && !getCaptchaId()) {
+  const captchaWidget = document.querySelector('.cf-turnstile')
+  if (captchaWidget && !getCaptchaId()) {
+    // The usual cause is an unticked "Verify you are human" box: point at it instead of suggesting a refresh that wipes the form.
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'validation', code: 'captcha_missing' })
+    ;(captchaWidget as HTMLElement).scrollIntoView?.({ block: 'center', behavior: 'smooth' })
     return Toastify({
-      text: 'Security verification is not ready. Please wait a moment and try again, or refresh the page.',
+      text: (form as HTMLElement | null)?.dataset?.captchaRequired || CAPTCHA_REQUIRED_FALLBACK,
       style: { background: '#e7000b' },
     }).showToast()
   }
@@ -90,25 +177,40 @@ form?.addEventListener('submit', async (e) => {
 
   let user
   try {
+    // Bounded inside getRegistrationDevice: a slow or failed parser download never blocks the signup.
+    const device = await Promise.resolve(getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)).catch(() => ({}))
     user = await registerUser({
       email: email.value,
       password: password.value,
       captcha_token: getCaptchaId() || undefined,
-      ...getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints),
+      ...device,
       ...getSignupUserMetadataForRegistration(),
     })
   } catch (error) {
     isSubmitting = false
     submitButton.disabled = false
     ;(window as any).turnstile?.reset?.()
-    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code: error instanceof RegisterApiError ? error.code : 'transport' })
+    const code = error instanceof RegisterApiError ? error.code : 'transport'
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code })
+    // An existing account is not a failure to retry: point straight at sign in and password reset.
+    if ((code === 'email_exists' || code === 'user_already_exists') && emailExistsAlert) {
+      emailExistsAlert.hidden = false
+      return
+    }
+    if (code === 'weak_password') {
+      password.setAttribute('aria-invalid', 'true')
+      password.focus()
+    }
     return Toastify({
-      text: error instanceof RegisterApiError ? error.message : 'Unable to create account. Please try again.',
+      text: code === 'transport' ? (form as HTMLElement | null)?.dataset?.networkError || NETWORK_ERROR_FALLBACK : (error as Error).message,
+      duration: code === 'transport' || code === 'weak_password' ? 8000 : 3000,
       style: {
         background: '#e7000b',
       },
     }).showToast()
   }
+  // Trackers load after the page; a fast signup waits briefly for them so the conversion is still recorded.
+  await (window as any).capgoThirdParty?.ready(1500)
   await trackOpenAIRegistration((user as any)?.user?.id)
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })

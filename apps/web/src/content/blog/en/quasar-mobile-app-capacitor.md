@@ -6,7 +6,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-28T03:22:48.000Z
 head_image: /quasar_capgo.webp
 head_image_alt: "'Creating Mobile Apps with live updates, Quasar and Capacitor.' Capgo blog illustration"
 keywords: Quasar, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -148,7 +148,7 @@ Integrating Capgo into your Quasar app is a straightforward process that empower
 
 **Sign Up and Access the Capgo Dashboard**:
 
-It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://console.capgo.app/register/).
+It’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](https://capgo.app/register/).
 
 **Install the Capgo SDK**:
 

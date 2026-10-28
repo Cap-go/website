@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-16T00:00:00.000Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-10-28T03:22:48.000Z
 head_image: /open_source_main.webp
 head_image_alt: "Learn about what open source is and why it’s important! Capgo blog illustration"
 keywords: Open Source, Capgo, philosophy, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -138,7 +138,7 @@ As you know, open-source technologies have multiple advantages. They are availab
 
 These are all principles we adhere to in Capgo! We're an open source live update system for Capacitor apps whose mission is to live update the Capacitor apps. We allows you to deploy updates to your users without the need to re-install the app. We're a cloud-based service, but you can also self-host it.
 
-Why not try it for yourself? [Try our free version](https://console.capgo.app/register/) and [contribute to our ever-evolving open-source project](https://github.com/Cap-go/) - we’d be happy to have you on board!
+Why not try it for yourself? [Try our free version](https://capgo.app/register/) and [contribute to our ever-evolving open-source project](https://github.com/Cap-go/) - we’d be happy to have you on board!
 
 <div class="mx-auto">
   <img src="/capgo_banner.webp" alt="capgo_banner">

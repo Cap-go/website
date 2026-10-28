@@ -16,7 +16,6 @@ import { withAbTest } from './abtest'
 import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { workerCache } from './cached-json'
-import { CURRENCY_PATH, handleCurrency } from './currency'
 import { GITHUB_RELEASES_PATH, handleGithubReleases } from './github-releases'
 import { handleLiveUpdateMetrics, LIVE_UPDATE_METRICS_PATH } from './live-update-metrics'
 import { handleMcpManifestRequest, handleOAuthProtectedResourceRequest } from './mcp'
@@ -35,9 +34,8 @@ interface Env extends PublicMcpEnv {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
   PERSONAL_ACCESS_TOKEN?: string
-  CF_ACCOUNT_ANALYTICS_ID?: string
-  CF_ANALYTICS_TOKEN?: string
-  BUILDER_DB?: import('../lib/builderMetricsD1').BuilderD1Database
+  LIVE_UPDATE_METRICS_URL?: string
+  BUILDER_METRICS_URL?: string
   IOS_UDID_PROFILE_SIGNING_CERT_PEM?: string
   IOS_UDID_PROFILE_SIGNING_KEY_PEM?: string
   IOS_UDID_PROFILE_SIGNING_CHAIN_PEM?: string
@@ -235,10 +233,6 @@ const routeDefinitions: Record<string, RouteDefinition> = {
       if (request.method === 'HEAD') return new Response(null, { status: response.status, headers: response.headers })
       return response
     },
-  },
-  [CURRENCY_PATH]: {
-    methods: ['GET', 'HEAD'],
-    handle: async (request) => handleCurrency(request),
   },
   [GITHUB_RELEASES_PATH]: {
     methods: ['GET', 'HEAD'],

@@ -23,6 +23,7 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
       },
       RegisterApiError: Error,
       getPasswordRequirementErrors: () => [],
+      getPasswordRuleStatus: () => ({}),
       formatPasswordRequirementErrors: () => '',
       getSignupUserMetadataForRegistration: () => ({}),
       getSignupAttributionForEvents: () => ({}),
@@ -37,8 +38,8 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     expect(button.disabled).toBe(false)
     await handler({ preventDefault() {} })
     expect(authCalls).toBe(captchaEnabled ? 0 : 1)
-    if (captchaEnabled) expect(toasts).toEqual(['Security verification is not ready. Please wait a moment and try again, or refresh the page.'])
-    else expect(toasts.some((text) => text.includes('Security verification'))).toBe(false)
+    if (captchaEnabled) expect(toasts).toEqual(['Check “Verify you are human” above, then tap Sign up again.'])
+    else expect(toasts.some((text) => text.includes('Verify you are human'))).toBe(false)
     if (captchaEnabled) expect(button.disabled).toBe(false)
   }
 })
@@ -79,6 +80,7 @@ test('registration without profile names preserves referral attribution and the 
     },
     RegisterApiError: Error,
     getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
     formatPasswordRequirementErrors: () => '',
     window: windowStub,
     navigator: { userAgent: 'test', maxTouchPoints: 0 },
@@ -149,6 +151,7 @@ test('a failed API request restores signup for retry without reporting success',
     },
     RegisterApiError: class extends Error {},
     getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
     formatPasswordRequirementErrors: () => '',
     getSignupUserMetadataForRegistration: () => ({}),
     getSignupAttributionForEvents: () => ({}),
@@ -165,4 +168,134 @@ test('a failed API request restores signup for retry without reporting success',
   expect(captures).toEqual(['website_signup_submit', 'website_signup_error'])
   await handler({ preventDefault() {} })
   expect(calls).toBe(2)
+})
+
+function runRegisterWithApiError(error: unknown) {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
+  const toasts: string[] = []
+  const alert = { hidden: true }
+  const values: Record<string, unknown> = {
+    registerForm: {
+      dataset: { networkError: 'Localized network error' },
+      querySelector: () => ({ disabled: false }),
+      addEventListener: (_name: string, callback: typeof handler) => (handler = callback),
+    },
+    email: { value: 'signup@example.com' },
+    password: { value: 'Password123!', setAttribute() {}, removeAttribute() {}, focus() {} },
+    'email-exists-alert': alert,
+  }
+  class RegisterApiError extends Error {
+    constructor(
+      message: string,
+      readonly code = 'unknown',
+    ) {
+      super(message)
+    }
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelector: () => null },
+    registerUser: async () => {
+      throw typeof error === 'function' ? error(RegisterApiError) : error
+    },
+    RegisterApiError,
+    getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
+    formatPasswordRequirementErrors: () => '',
+    getSignupUserMetadataForRegistration: () => ({}),
+    getSignupAttributionForEvents: () => ({}),
+    getRegistrationDevice: () => ({}),
+    Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
+    window: { location: { href: '', search: '' } },
+    navigator: {},
+    URLSearchParams,
+  })
+  return { submit: () => handler({ preventDefault() {} }), toasts, alert }
+}
+
+test('an existing account shows the sign-in and reset links instead of an error toast', async () => {
+  const run = runRegisterWithApiError((ApiError: any) => new ApiError('User already registered', 'email_exists'))
+  await run.submit()
+  expect(run.alert.hidden).toBe(false)
+  expect(run.toasts).toEqual([])
+})
+
+test('a network failure explains what to check instead of a generic error', async () => {
+  const run = runRegisterWithApiError(new TypeError('Failed to fetch'))
+  await run.submit()
+  expect(run.toasts).toEqual(['Localized network error'])
+  expect(run.alert.hidden).toBe(true)
+})
+
+test('an API password rejection shows the server reason', async () => {
+  const run = runRegisterWithApiError((ApiError: any) => new ApiError('This password appeared in a data breach. Choose a different one.', 'weak_password'))
+  await run.submit()
+  expect(run.toasts).toEqual(['This password appeared in a data breach. Choose a different one.'])
+})
+
+test('the password rules stay hidden until the password is wrong', async () => {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  const listeners: Record<string, () => void> = {}
+  const list = { hidden: true }
+  const password = {
+    value: '',
+    addEventListener: (name: string, callback: () => void) => (listeners[name] = callback),
+    setAttribute() {},
+    removeAttribute() {},
+    focus() {},
+  }
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => ({ disabled: false }), addEventListener() {} },
+    email: { value: '' },
+    password,
+    'password-requirements': list,
+  }
+  const rules = (value: string) => ({
+    length: value.length >= 6,
+    lowercase: /[a-z]/.test(value),
+    uppercase: /[A-Z]/.test(value),
+    number: /\d/.test(value),
+    special: /[!@#]/.test(value),
+  })
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => null },
+    getPasswordRuleStatus: rules,
+    getPasswordRequirementErrors: () => [],
+    formatPasswordRequirementErrors: () => '',
+    window: { location: { search: '' } },
+    navigator: {},
+    URLSearchParams,
+  })
+  const type = (value: string) => {
+    password.value = value
+    listeners.input()
+  }
+  type('abc')
+  expect(list.hidden).toBe(true)
+  listeners.blur()
+  expect(list.hidden).toBe(false)
+  type('Abcdef1!')
+  expect(list.hidden).toBe(true)
+})
+
+test('a full-length password that misses a rule shows the rules while typing', async () => {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  const listeners: Record<string, () => void> = {}
+  const list = { hidden: true }
+  const password = { value: '', addEventListener: (name: string, callback: () => void) => (listeners[name] = callback) }
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => ({ disabled: false }), addEventListener() {} },
+    password,
+    'password-requirements': list,
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => null },
+    getPasswordRuleStatus: (value: string) => ({ length: value.length >= 6, uppercase: /[A-Z]/.test(value) }),
+    window: { location: { search: '' } },
+    navigator: {},
+    URLSearchParams,
+  })
+  password.value = 'abcdef'
+  listeners.input()
+  expect(list.hidden).toBe(false)
 })

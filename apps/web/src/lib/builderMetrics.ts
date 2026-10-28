@@ -1,4 +1,12 @@
-import type { BuilderDailyPlatformMetric, BuilderFailureMetric, BuilderPlatformMetric, PublicBuilderMetrics } from './publicBuilderMetrics'
+import type {
+  BuilderDailyPlatformMetric,
+  BuilderDailyToolchainMetric,
+  BuilderDependencyManagerMetric,
+  BuilderFailureMetric,
+  BuilderPlatformMetric,
+  BuilderXcodeVersionMetric,
+  PublicBuilderMetrics,
+} from './publicBuilderMetrics'
 
 export type BuilderMetrics = PublicBuilderMetrics & { source?: 'api' | 'cache' }
 
@@ -41,6 +49,35 @@ function normalizePlatform(value: unknown): BuilderPlatformMetric | null {
   }
 }
 
+function normalizeXcodeVersion(value: unknown): BuilderXcodeVersionMetric | null {
+  if (!isRecord(value) || typeof value.version !== 'string' || !/^\d+$/.test(value.version)) return null
+  return { version: value.version, share: percentage(value.share) }
+}
+
+function normalizeDependencyManager(value: unknown): BuilderDependencyManagerMetric | null {
+  if (!isRecord(value) || (value.key !== 'spm' && value.key !== 'cocoapods')) return null
+  return { key: value.key, share: percentage(value.share) }
+}
+
+function normalizeXcodeVersions(value: unknown) {
+  return (Array.isArray(value) ? value : []).map(normalizeXcodeVersion).filter((item): item is BuilderXcodeVersionMetric => item !== null)
+}
+
+function normalizeDependencyManagers(value: unknown) {
+  return (Array.isArray(value) ? value : []).map(normalizeDependencyManager).filter((item): item is BuilderDependencyManagerMetric => item !== null)
+}
+
+function normalizeToolchainTrendRows(value: unknown): BuilderDailyToolchainMetric[] {
+  if (!Array.isArray(value)) return []
+  return value
+    .filter((item): item is Record<string, unknown> & { date: string } => isRecord(item) && typeof item.date === 'string')
+    .map((item) => ({
+      date: item.date,
+      xcode_versions: normalizeXcodeVersions(item.xcode_versions),
+      ios_dependency_managers: normalizeDependencyManagers(item.ios_dependency_managers),
+    }))
+}
+
 function normalizePlatformTrendRows(value: unknown) {
   if (!Array.isArray(value)) return []
   return value
@@ -69,6 +106,9 @@ export function emptyBuilderMetrics(): BuilderMetrics {
     hourly_platforms: [],
     failures: [],
     platforms: [],
+    xcode_versions: [],
+    ios_dependency_managers: [],
+    daily_ios_toolchain: [],
   }
 }
 
@@ -89,6 +129,10 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
 
   const failures = value.failures.map(normalizeFailure).filter((item): item is BuilderFailureMetric => item !== null)
   const platforms = value.platforms.map(normalizePlatform).filter((item): item is BuilderPlatformMetric => item !== null)
+  // Older builder payloads have no toolchain shares: the page then shows none.
+  const xcode_versions = normalizeXcodeVersions(value.xcode_versions)
+  const ios_dependency_managers = normalizeDependencyManagers(value.ios_dependency_managers)
+  const daily_ios_toolchain = normalizeToolchainTrendRows(value.daily_ios_toolchain)
 
   return {
     success_rate: percentage(value.success_rate),
@@ -101,5 +145,8 @@ export function normalizeBuilderMetrics(value: unknown): BuilderMetrics | null {
     hourly_platforms,
     failures,
     platforms,
+    xcode_versions,
+    ios_dependency_managers,
+    daily_ios_toolchain,
   }
 }

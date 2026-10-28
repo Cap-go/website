@@ -4,17 +4,16 @@ import ProblemSolution from '@/components/ProblemSolution.astro'
 import Testimonials from '@/components/Testimonials.astro'
 import WhyCapgo from '@/components/WhyCapgo.astro'
 import SharedNumbers from '@/components/SharedNumbers.astro'
-import TransparencySection from '@/components/TransparencySection.astro'
 import Hero from '@/components/Hero.astro'
 import m from '@/copy/messages'
 import HowItWorks from '@/components/HowItWorks.astro'
 import PlatformOverview from '@/components/PlatformOverview.astro'
 import PlatformScreens from '@/components/PlatformScreens.astro'
-import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
 import { createHomepageLdJsonGraph, type HomepageLdJsonOffers } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import AskAiSection from '@/components/AskAiSection.astro'
-import RiskDebtSection from '@/components/RiskDebtSection.astro'
+import TrustSection from '@/components/TrustSection.astro'
+import PricingTeaser from '@/components/PricingTeaser.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import AgentOnboardingSection from '@/components/AgentOnboardingSection.astro'
 import { getAbsoluteLocaleUrl } from '@/services/links'
@@ -89,20 +88,20 @@ const content = {
 
 <Layout content={content}>
   <div>
+    <!-- Sales narrative: promise → proof → problem → solution → product → benefits → validation → objections → pricing → CTA -->
     <Hero />
+    <SharedNumbers />
     <ProblemSolution />
-    <AgentOnboardingSection />
+    <HowItWorks />
     <PlatformOverview />
     <PlatformScreens />
-    <AgentReadySection showAudienceSwitch />
-    <HowItWorks />
-    <RiskDebtSection />
-    <GlobalInfrastructure />
-    <SharedNumbers />
-    <TransparencySection />
     <WhyCapgo />
     <Testimonials />
+    <AgentReadySection showAudienceSwitch />
+    <TrustSection />
     <AppflowShutdown />
+    <PricingTeaser id="home-pricing" />
+    <AgentOnboardingSection />
     <AskAiSection />
   </div>
 

@@ -6,11 +6,11 @@ function client(fetch: (input: RequestInfo | URL, options?: RequestInit) => Prom
   const source = readFileSync(new URL('./registration.ts', import.meta.url), 'utf8')
     .replace(/^import .*\n/gm, '')
     .replace(/^export /gm, '')
-  return runInNewContext(`${new Bun.Transpiler({ loader: 'ts' }).transformSync(source)}\n({ registerUser, RegisterApiError, getPasswordRequirementErrors })`, {
+  return runInNewContext(`${new Bun.Transpiler({ loader: 'ts' }).transformSync(source)}\n({ registerUser, RegisterApiError, getPasswordRequirementErrors, getPasswordRuleStatus })`, {
     fetch,
     AbortSignal,
     TextEncoder,
-    useRuntimeConfig: () => ({ public: { baseApiUrl: 'https://api.example.com/' } }),
+    getBaseApiUrl: () => 'https://api.example.com/',
   })
 }
 
@@ -111,4 +111,13 @@ test('registration rejects redirects without forwarding credentials to their tar
       target.stop(true)
     }
   }
+})
+
+test('password rule status ticks each rule independently for the live checklist', () => {
+  const { getPasswordRuleStatus } = client(async () => Response.json(session))
+  // Compare via JSON: objects from the vm context have a different prototype.
+  const status = (password: string) => JSON.parse(JSON.stringify(getPasswordRuleStatus(password)))
+  expect(status('')).toEqual({ length: false, lowercase: false, uppercase: false, number: false, special: false })
+  expect(status('mypassword1')).toEqual({ length: true, lowercase: true, uppercase: false, number: true, special: false })
+  expect(status('MyPassword1!')).toEqual({ length: true, lowercase: true, uppercase: true, number: true, special: true })
 })

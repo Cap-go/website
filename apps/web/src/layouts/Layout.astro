@@ -6,6 +6,7 @@ import Affonso from '../components/Affonso.astro'
 import Attribution from '../components/Attribution.astro'
 import OpenAIPixel from '../components/OpenAIPixel.astro'
 import PostHog from '../components/posthog.astro'
+import ThirdPartyLoader from '../components/ThirdPartyLoader.astro'
 import WebMcpTools from '../components/WebMcpTools.astro'
 import globalStylesHref from '../css/global.css?url'
 import productSurfaceHref from '../styles/product-surface.css?url'
@@ -21,13 +22,14 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
 <!doctype html>
 <html lang={Astro.locals.locale.toLowerCase()}>
   <head>
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/satoshi/Satoshi-Variable.woff2" crossorigin />
+    <!-- No Satoshi preload: most text uses the system stack, and on slow links the 42 KB font delayed first paint. font-display: swap covers the few headings. -->
     <link rel="stylesheet" href={globalStylesHref} />
     <link rel="stylesheet" href={productSurfaceHref} />
     <SEO {...content} />
     <meta name="naver-site-verification" content="e6891f007259d77b20bd76a17d11404d83755855" />
     <slot name="head" />
     <Attribution />
+    {enableThirdPartyScripts && <ThirdPartyLoader />}
     {enableThirdPartyScripts && <PostHog />}
     {enableThirdPartyScripts && <Affonso />}
     {enableThirdPartyScripts && <OpenAIPixel />}
@@ -46,27 +48,17 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
       </main>
       {!hideChrome && <Footer />}
     </div>
-    {enableThirdPartyScripts && (
-      <script
-        is:inline
-        async="true"
-        defer="true"
-        data-domain="capgo.app"
-        src="https://pls.digitalshift-ee.workers.dev/js/script.outbound-links.js"
-        data-api="https://pls.digitalshift-ee.workers.dev/api/event"
-      ></script>
-    )}
     <WebMcpTools />
-    {enableThirdPartyScripts && <script is:inline type="text/javascript" src="https://widget.senja.io/js/iframeResizer.min.js" defer></script>}
-    {enableThirdPartyScripts && (
-      <script
-        is:inline
-        defer
-        data-website-id="dfid_hu0aLqOvk52g6hykzIZei"
-        data-domain="capgo.app"
-        data-api-url="https://dtf.capgo.app/api/events"
-        src="https://dtf.capgo.app/js/script.js"
-      ></script>
-    )}
+    {enableThirdPartyScripts && <script is:inline>
+      window.capgoThirdParty.load('https://pls.digitalshift-ee.workers.dev/js/script.outbound-links.js', {
+        'data-domain': 'capgo.app',
+        'data-api': 'https://pls.digitalshift-ee.workers.dev/api/event',
+      })
+      window.capgoThirdParty.load('https://dtf.capgo.app/js/script.js', {
+        'data-website-id': 'dfid_hu0aLqOvk52g6hykzIZei',
+        'data-domain': 'capgo.app',
+        'data-api-url': 'https://dtf.capgo.app/api/events',
+      })
+    </script>}
   </body>
 </html>

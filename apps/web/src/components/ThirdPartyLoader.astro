@@ -1,0 +1,62 @@
+---
+// Queues third-party tags until the page has loaded and gone idle, or the visitor first interacts.
+// Slow connections then spend their bandwidth on our HTML, CSS, fonts and hero image instead of analytics.
+---
+
+<script is:inline>
+  ;(function () {
+    var queue = []
+    var pending = []
+    var triggers = ['pointerdown', 'keydown', 'touchstart']
+    function inject(src, attrs) {
+      pending.push(
+        new Promise(function (resolve) {
+          var script = document.createElement('script')
+          script.src = src
+          script.async = true
+          for (var name in attrs) script.setAttribute(name, attrs[name])
+          script.onload = script.onerror = function () {
+            resolve()
+          }
+          document.head.appendChild(script)
+        }),
+      )
+    }
+    function start() {
+      if (!queue) return
+      triggers.forEach(function (type) {
+        removeEventListener(type, start, true)
+      })
+      var tags = queue
+      queue = null
+      tags.forEach(function (tag) {
+        inject(tag[0], tag[1])
+      })
+    }
+    window.capgoThirdParty = {
+      load: function (src, attrs) {
+        if (queue) queue.push([src, attrs || {}])
+        else inject(src, attrs || {})
+      },
+      // Loads the queued tags now and resolves once they ran (or failed), capped at `timeout` ms.
+      ready: function (timeout) {
+        start()
+        return Promise.race([
+          Promise.all(pending),
+          new Promise(function (resolve) {
+            setTimeout(resolve, timeout || 2000)
+          }),
+        ])
+      },
+    }
+    triggers.forEach(function (type) {
+      addEventListener(type, start, { capture: true, passive: true })
+    })
+    function idle() {
+      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 3000 })
+      else setTimeout(start, 1500)
+    }
+    if (document.readyState === 'complete') idle()
+    else addEventListener('load', idle, { once: true })
+  })()
+</script>

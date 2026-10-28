@@ -1,0 +1,113 @@
+---
+import m from '@/copy/messages'
+import SignupCta from '@/components/SignupCta.astro'
+import OfferText from '@/components/OfferText.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { getPlans } from '@/lib/siteData'
+import { planDescriptionToText, planYearlyPrice } from '@/lib/planCopy'
+
+interface Props {
+  /** Stable id prefix for the signup CTA, used for analytics autocapture filtering. */
+  id: string
+  /** Section surface; pages with their own backdrop pass `bg-transparent`. */
+  background?: string
+}
+
+const { id, background = 'bg-[#1a1a1a]' } = Astro.props
+const locale = Astro.locals.locale
+const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
+const titleId = `${id}-title`
+
+// Short preview of the live plans; the full grid, calculator and credits stay on /pricing.
+// Prices render in USD, then src/scripts/currency.ts swaps in the Stripe price sold to the visitor's
+// country (currency + regional discount), exactly like the pricing page.
+const plans = getPlans()
+  .filter((plan) => plan.name !== 'Free' && Number.isFinite(plan.price_y))
+  .map((plan) => ({
+    name: plan.name,
+    stripeId: plan.stripe_id,
+    popular: plan.name === 'Maker',
+    price: Math.round(planYearlyPrice(plan) / 12),
+    mau: `${plan.mau.toLocaleString(locale)}${plan.name === 'Enterprise' ? '+' : ''}`,
+    description: planDescriptionToText(plan.description, locale),
+  }))
+---
+
+{
+  plans.length > 0 && (
+    <section class:list={[background, 'py-20 sm:py-24']} aria-labelledby={titleId}>
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.pricing({}, { locale })}</p>
+          <h2 id={titleId} class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
+            {m.pricing_teaser_title({}, { locale })}
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">
+            <OfferText direct={m.plans_that_scale_with_your_business_direct({}, { locale })}>{m.plans_that_scale_with_your_business({}, { locale })}</OfferText>
+          </p>
+        </div>
+
+        <ul class="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4" role="list">
+          {plans.map((plan) => (
+            <li
+              class:list={[
+                'flex flex-col rounded-2xl border p-6',
+                plan.popular ? 'border-[#44BCFF]/50 bg-[#44BCFF]/[0.06]' : 'border-white/10 bg-white/[0.03]',
+              ]}
+            >
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="text-base font-semibold text-white">{plan.name}</h3>
+                {plan.popular && (
+                  <span class="rounded-full bg-[#44BCFF]/10 px-2.5 py-0.5 text-xs font-medium text-[#44BCFF] ring-1 ring-[#44BCFF]/30">
+                    {m.most_popular({}, { locale })}
+                  </span>
+                )}
+              </div>
+              <p class="mt-4 flex flex-wrap items-baseline gap-x-1">
+                <span
+                  class="text-4xl font-bold tracking-tight whitespace-nowrap text-white tabular-nums"
+                  data-price-amount={plan.price}
+                  data-price-plan={plan.stripeId}
+                  data-price-interval="year-monthly"
+                >
+                  {`$${plan.price}`}
+                </span>
+                <span class="text-sm text-gray-400">{m.pricing_teaser_per_month({}, { locale })}</span>
+              </p>
+              {plan.stripeId && (
+                <p class="mt-1 text-sm text-gray-400" data-regional-discount={plan.stripeId} hidden>
+                  <span class="sr-only">{m.pricing_regular_price({}, { locale })}</span>
+                  <s data-price-full data-price-amount={plan.price} data-price-plan={plan.stripeId} data-price-interval="year-monthly">
+                    {`$${plan.price}`}
+                  </s>
+                </p>
+              )}
+              <p class="mt-4 font-mono text-sm text-gray-200">
+                {plan.mau} {m.monthly_active_users({}, { locale })}
+              </p>
+              <p class="mt-2 text-sm leading-6 text-gray-400">{plan.description}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-12 flex flex-col items-center gap-6">
+          <SignupCta id={`${id}-signup-cta`} />
+          <a
+            href={pricingUrl}
+            class="text-sm font-semibold text-[#44BCFF]! focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
+          >
+            {m.pricing_teaser_link({}, { locale })} <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  import { initCurrency } from '@/scripts/currency'
+
+  // Shared with the pricing page: one fetch per page, then every [data-price-amount] is localized.
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => void initCurrency())
+  else void initCurrency()
+</script>

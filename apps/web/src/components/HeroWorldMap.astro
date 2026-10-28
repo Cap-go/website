@@ -10,8 +10,8 @@ const { width, height } = worldMapSize
   data-hero-map
 >
   <div class="hero-map-canvas relative" style={`aspect-ratio: ${width} / ${height}`}>
-    <!-- Static raster keeps LCP fast; the canvas takes over once the dot data is parsed. -->
-    <img src="/world-dots.webp" alt="" width="1680" height="855" decoding="async" fetchpriority="high" class="map-raster absolute inset-0 h-full w-full opacity-[0.14]" />
+    <!-- Static raster keeps LCP fast; the canvas takes over once the dot data is parsed. Normal priority: it is decorative and must not compete with CSS on slow links. -->
+    <img src="/world-dots.webp" alt="" width="1680" height="855" decoding="async" class="map-raster absolute inset-0 h-full w-full opacity-[0.14]" />
     <canvas class="map-live absolute inset-0 h-full w-full"></canvas>
     {capgoRegions.map((region, index) => (
       <span class="map-pin" data-pin={index} style={`left: ${((region.x / width) * 100).toFixed(2)}%; top: ${((region.y / height) * 100).toFixed(2)}%; --i: ${index}`}>
@@ -86,6 +86,11 @@ const { width, height } = worldMapSize
     glowHost.prepend(glow)
 
     let dots = new Float32Array(0)
+    // Dots grouped into map cells. Cells no highlight reaches reuse a cached path instead of per-dot math every frame.
+    const CELL = 8 // map units
+    let cellDots: number[][] = []
+    let cellBox: { l: number; t: number; r: number; b: number }[] = []
+    let cellPaths: Path2D[] = []
     let scale = 1
     let dpr = 1
     let cssW = 0
@@ -145,8 +150,42 @@ const { width, height } = worldMapSize
       canvas.width = Math.round(cssW * dpr)
       canvas.height = Math.round(cssH * dpr)
       scale = cssW / worldMapSize.width
+      buildCellPaths()
       measureText()
       kick()
+    }
+
+    const groupCells = () => {
+      const cols = Math.ceil(worldMapSize.width / CELL)
+      const groups = new Map<number, number[]>()
+      for (let i = 0; i < dots.length; i += 2) {
+        const key = Math.floor(dots[i + 1] / CELL) * cols + Math.floor(dots[i] / CELL)
+        const group = groups.get(key)
+        if (group) group.push(i)
+        else groups.set(key, [i])
+      }
+      cellDots = [...groups.values()]
+    }
+
+    const buildCellPaths = () => {
+      const radius = 0.21 * scale
+      cellBox = []
+      cellPaths = cellDots.map((indices) => {
+        const path = new Path2D()
+        const box = { l: Infinity, t: Infinity, r: -Infinity, b: -Infinity }
+        for (const i of indices) {
+          const x = dots[i] * scale
+          const y = dots[i + 1] * scale
+          path.moveTo(x + radius, y)
+          path.arc(x, y, radius, 0, Math.PI * 2)
+          box.l = Math.min(box.l, x)
+          box.t = Math.min(box.t, y)
+          box.r = Math.max(box.r, x)
+          box.b = Math.max(box.b, y)
+        }
+        cellBox.push(box)
+        return path
+      })
     }
 
     // Line boxes of the hero copy in canvas coordinates. Highlights, routes and markers fade out under them so the text stays readable.
@@ -446,32 +485,49 @@ const { width, height } = worldMapSize
       const spotScale = ping && pingPhase(now) < 1 ? 0.15 : SPOT_STRENGTH
       const lit: number[] = []
       const base = new Path2D()
-      for (let i = 0; i < dots.length; i += 2) {
-        const x = dots[i] * scale
-        const y = dots[i + 1] * scale
-        const dist = Math.hypot(x - eased.x, y - eased.y)
-        let spot = 0
-        if (eased.presence > 0.01 && dist < SPOT_RADIUS) {
-          const f = 1 - dist / SPOT_RADIUS
-          spot = f * f * (3 - 2 * f) * eased.presence * spotScale
-        }
-        let wave = 0
+      // A cell needs per-dot work only if the spotlight or a ripple band (±3 band widths, where the wave is ~0) can reach it.
+      const reaches = (box: { l: number; t: number; r: number; b: number }) => {
+        const nearest = (x: number, y: number) => Math.hypot(Math.max(box.l - x, 0, x - box.r), Math.max(box.t - y, 0, y - box.b))
+        const farthest = (x: number, y: number) => Math.hypot(Math.max(x - box.l, box.r - x), Math.max(y - box.t, box.b - y))
+        if (eased.presence > 0.01 && nearest(eased.x, eased.y) < SPOT_RADIUS) return true
         for (const ripple of ripples) {
-          const age = (now - ripple.start) / 1600
-          const band = (Math.hypot(x - ripple.x, y - ripple.y) - age * ripple.reach) / 22
-          wave += Math.exp(-band * band) * (1 - age) * ripple.strength
+          const front = ((now - ripple.start) / 1600) * ripple.reach
+          if (nearest(ripple.x, ripple.y) <= front + 66 && farthest(ripple.x, ripple.y) >= front - 66) return true
         }
-        let energy = Math.min(1, spot + wave)
-        if (energy >= 0.02) {
-          const keep = 1 - textMask(x, y)
-          energy *= keep
-          spot *= keep
+        return false
+      }
+      for (let c = 0; c < cellDots.length; c++) {
+        if (!reaches(cellBox[c])) {
+          base.addPath(cellPaths[c])
+          continue
         }
-        if (energy < 0.02) {
-          base.moveTo(x + radius, y)
-          base.arc(x, y, radius, 0, Math.PI * 2)
-        } else {
-          lit.push(i, energy, spot, dist)
+        for (const i of cellDots[c]) {
+          const x = dots[i] * scale
+          const y = dots[i + 1] * scale
+          const dist = Math.hypot(x - eased.x, y - eased.y)
+          let spot = 0
+          if (eased.presence > 0.01 && dist < SPOT_RADIUS) {
+            const f = 1 - dist / SPOT_RADIUS
+            spot = f * f * (3 - 2 * f) * eased.presence * spotScale
+          }
+          let wave = 0
+          for (const ripple of ripples) {
+            const age = (now - ripple.start) / 1600
+            const band = (Math.hypot(x - ripple.x, y - ripple.y) - age * ripple.reach) / 22
+            wave += Math.exp(-band * band) * (1 - age) * ripple.strength
+          }
+          let energy = Math.min(1, spot + wave)
+          if (energy >= 0.02) {
+            const keep = 1 - textMask(x, y)
+            energy *= keep
+            spot *= keep
+          }
+          if (energy < 0.02) {
+            base.moveTo(x + radius, y)
+            base.arc(x, y, radius, 0, Math.PI * 2)
+          } else {
+            lit.push(i, energy, spot, dist)
+          }
         }
       }
 
@@ -593,6 +649,7 @@ const { width, height } = worldMapSize
         for (const match of svg.matchAll(/M([\d.]+) ([\d.]+)h0/g)) coords.push(Number(match[1]), Number(match[2]))
         if (!coords.length) return
         dots = Float32Array.from(coords)
+        groupCells()
       } catch {
         return
       }

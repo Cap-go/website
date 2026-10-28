@@ -1,15 +1,15 @@
 [
   {
     "created_at": "2022-05-31T10:58:34+00:00",
-    "updated_at": "2026-10-17T15:42:17.408669+00:00",
+    "updated_at": "2026-10-27T03:40:09.007797+00:00",
     "name": "Solo",
     "description": "plan.solo.desc",
     "price_m": 14,
     "price_y": 146,
     "stripe_id": "prod_LQIzwwVu6oMmAz",
     "id": "526e11d8-3c51-4581-ac92-4770c602f47c",
-    "price_m_id": "price_1KkINoGH46eYKnWwwEi97h1B",
-    "price_y_id": "price_1KjSNTGH46eYKnWwofmXyBZn",
+    "price_m_id": "price_1UUwaeGH46eYKnWwikQlk8Y8",
+    "price_y_id": "price_1UUwapGH46eYKnWwXVBNFJsM",
     "storage": 20,
     "bandwidth": 100,
     "mau": 2000,
@@ -18,21 +18,71 @@
     "credit_id": "prod_TINXCAiTb8Vsxc",
     "native_build_concurrency": 2,
     "stripe_id_us": "prod_VDt1FTF7XJxyMR",
-    "price_m_id_us": "price_1UDRGPLr632EP5z4ufTRBBzf",
-    "price_y_id_us": "price_1UDRGULr632EP5z4OcZr5xpe",
-    "credit_id_us": "prod_VDt2YB5GrYFnII"
+    "price_m_id_us": "price_1UUwcBLr632EP5z4vsqW3Tm3",
+    "price_y_id_us": "price_1UUwcMLr632EP5z4pOicTG4d",
+    "credit_id_us": "prod_VDt2YB5GrYFnII",
+    "alt_price_m_ids": [
+      "price_1UUwcILr632EP5z4kKSTSjP0",
+      "price_1UUwcKLr632EP5z4Qpny9Utl",
+      "price_1UUwcELr632EP5z413Gk4SQ8",
+      "price_1UUwamGH46eYKnWwHrWIu0pc",
+      "price_1KkINoGH46eYKnWwwEi97h1B",
+      "price_1UDRGPLr632EP5z4ufTRBBzf",
+      "price_1UUwcGLr632EP5z43hGImJHf",
+      "price_1UUwanGH46eYKnWwKvCMscEf",
+      "price_1UUwakGH46eYKnWwTqUAhU4F",
+      "price_1UUwaiGH46eYKnWwRN2sZwtA"
+    ],
+    "alt_price_y_ids": [
+      "price_1UUwcTLr632EP5z4zLghNyFO",
+      "price_1UUwaxGH46eYKnWwwmPm9ucX",
+      "price_1UUwatGH46eYKnWwDfEM6YiL",
+      "price_1UUwcVLr632EP5z4b3iWS6mZ",
+      "price_1UUwcRLr632EP5z4hz1v6pNj",
+      "price_1KjSNTGH46eYKnWwofmXyBZn",
+      "price_1UUwazGH46eYKnWwIMXUE2bK",
+      "price_1UUwavGH46eYKnWwyAoi81OT",
+      "price_1UUwcPLr632EP5z44C8bYwvE",
+      "price_1UDRGULr632EP5z4OcZr5xpe"
+    ],
+    "regional_price_ids": {
+      "p50": {
+        "price_m_id": "price_1UUwaiGH46eYKnWwRN2sZwtA",
+        "price_y_id": "price_1UUwatGH46eYKnWwDfEM6YiL",
+        "price_m_id_us": "price_1UUwcELr632EP5z413Gk4SQ8",
+        "price_y_id_us": "price_1UUwcPLr632EP5z44C8bYwvE"
+      },
+      "p60": {
+        "price_m_id": "price_1UUwakGH46eYKnWwTqUAhU4F",
+        "price_y_id": "price_1UUwavGH46eYKnWwyAoi81OT",
+        "price_m_id_us": "price_1UUwcGLr632EP5z43hGImJHf",
+        "price_y_id_us": "price_1UUwcRLr632EP5z4hz1v6pNj"
+      },
+      "p70": {
+        "price_m_id": "price_1UUwamGH46eYKnWwHrWIu0pc",
+        "price_y_id": "price_1UUwaxGH46eYKnWwwmPm9ucX",
+        "price_m_id_us": "price_1UUwcILr632EP5z4kKSTSjP0",
+        "price_y_id_us": "price_1UUwcTLr632EP5z4zLghNyFO"
+      },
+      "p85": {
+        "price_m_id": "price_1UUwanGH46eYKnWwKvCMscEf",
+        "price_y_id": "price_1UUwazGH46eYKnWwIMXUE2bK",
+        "price_m_id_us": "price_1UUwcKLr632EP5z4Qpny9Utl",
+        "price_y_id_us": "price_1UUwcVLr632EP5z4b3iWS6mZ"
+      }
+    }
   },
   {
     "created_at": "2022-05-31T10:59:55+00:00",
-    "updated_at": "2026-10-17T15:42:17.408669+00:00",
+    "updated_at": "2026-10-27T03:40:09.007797+00:00",
     "name": "Maker",
     "description": "plan.maker.desc",
     "price_m": 39,
     "price_y": 396,
     "stripe_id": "prod_LQIzozukEwDZDM",
     "id": "440cfd69-0cfd-486e-b59b-cb99f7ae76a0",
-    "price_m_id": "price_1KjSNPGH46eYKnWwVGG5HI5V",
-    "price_y_id": "price_1NsEbJGH46eYKnWwkOoCqT95",
+    "price_m_id": "price_1UUwaHGH46eYKnWwLIx4RLTA",
+    "price_y_id": "price_1UUwaSGH46eYKnWwciOD6FPL",
     "storage": 50,
     "bandwidth": 1000,
     "mau": 10000,
@@ -41,21 +91,30 @@
     "credit_id": "prod_TINXCAiTb8Vsxc",
     "native_build_concurrency": 3,
     "stripe_id_us": "prod_VDt2cnktX7IDVV",
-    "price_m_id_us": "price_1UDRGQLr632EP5z4YI3A5cPV",
-    "price_y_id_us": "price_1UDRGSLr632EP5z45R9qxkU8",
-    "credit_id_us": "prod_VDt2YB5GrYFnII"
+    "price_m_id_us": "price_1UUwbqLr632EP5z4uNWoVy9j",
+    "price_y_id_us": "price_1UUwc0Lr632EP5z4gf5d5SVF",
+    "credit_id_us": "prod_VDt2YB5GrYFnII",
+    "alt_price_m_ids": [
+      "price_1KjSNPGH46eYKnWwVGG5HI5V",
+      "price_1UDRGQLr632EP5z4YI3A5cPV"
+    ],
+    "alt_price_y_ids": [
+      "price_1UDRGSLr632EP5z45R9qxkU8",
+      "price_1NsEbJGH46eYKnWwkOoCqT95"
+    ],
+    "regional_price_ids": {}
   },
   {
     "created_at": "2022-05-31T11:01:56+00:00",
-    "updated_at": "2026-10-17T15:42:17.408669+00:00",
+    "updated_at": "2026-10-27T03:40:09.007797+00:00",
     "name": "Team",
     "description": "plan.team.desc",
     "price_m": 99,
     "price_y": 998,
     "stripe_id": "prod_LQIzm2NGzayzXi",
     "id": "abd76414-8f90-49a5-b3a4-8ff4d2e12c77",
-    "price_m_id": "price_1KjSNKGH46eYKnWw32bhz1xX",
-    "price_y_id": "price_1KjSNKGH46eYKnWwx0pSkXE6",
+    "price_m_id": "price_1UUwb1GH46eYKnWwkzg0rWnP",
+    "price_y_id": "price_1UUwbDGH46eYKnWwQUX32Fzb",
     "storage": 100,
     "bandwidth": 10000,
     "mau": 100000,
@@ -64,21 +123,30 @@
     "credit_id": "prod_TINXCAiTb8Vsxc",
     "native_build_concurrency": 4,
     "stripe_id_us": "prod_VDt2xM7OyLzhqV",
-    "price_m_id_us": "price_1UDRGSLr632EP5z4n0Npf7P1",
-    "price_y_id_us": "price_1UDRGSLr632EP5z4jYu6vC42",
-    "credit_id_us": "prod_VDt2YB5GrYFnII"
+    "price_m_id_us": "price_1UUwcXLr632EP5z4iew5VirD",
+    "price_y_id_us": "price_1UUwciLr632EP5z49j8WcWQk",
+    "credit_id_us": "prod_VDt2YB5GrYFnII",
+    "alt_price_m_ids": [
+      "price_1KjSNKGH46eYKnWw32bhz1xX",
+      "price_1UDRGSLr632EP5z4n0Npf7P1"
+    ],
+    "alt_price_y_ids": [
+      "price_1KjSNKGH46eYKnWwx0pSkXE6",
+      "price_1UDRGSLr632EP5z4jYu6vC42"
+    ],
+    "regional_price_ids": {}
   },
   {
     "created_at": "2022-08-24T16:07:00+00:00",
-    "updated_at": "2026-10-17T15:42:17.408669+00:00",
+    "updated_at": "2026-10-27T03:40:09.007797+00:00",
     "name": "Enterprise",
     "description": "plan.payasyougo.desc",
     "price_m": 249,
     "price_y": 2490,
     "stripe_id": "prod_MIy30G5ywsjiUu",
     "id": "745d7ab3-6cd6-4d65-b257-de6782d5ba50",
-    "price_m_id": "price_1On9Z7GH46eYKnWws8CBfcHQ",
-    "price_y_id": "price_1Sdu3rGH46eYKnWwK9x8sdK4",
+    "price_m_id": "price_1UUwZuGH46eYKnWwoBF1Wjo9",
+    "price_y_id": "price_1UUwa6GH46eYKnWw95XJawmq",
     "storage": 200,
     "bandwidth": 100000,
     "mau": 1000000,
@@ -87,8 +155,17 @@
     "credit_id": "prod_TINXCAiTb8Vsxc",
     "native_build_concurrency": 6,
     "stripe_id_us": "prod_VDt2pia049SqpU",
-    "price_m_id_us": "price_1UDRGaLr632EP5z4D02F4rLu",
-    "price_y_id_us": "price_1UDRGcLr632EP5z4IxDyZuUK",
-    "credit_id_us": "prod_VDt2YB5GrYFnII"
+    "price_m_id_us": "price_1UUwbULr632EP5z4Kn9Fe0Zj",
+    "price_y_id_us": "price_1UUwbeLr632EP5z4fFSSWXja",
+    "credit_id_us": "prod_VDt2YB5GrYFnII",
+    "alt_price_m_ids": [
+      "price_1UDRGaLr632EP5z4D02F4rLu",
+      "price_1On9Z7GH46eYKnWws8CBfcHQ"
+    ],
+    "alt_price_y_ids": [
+      "price_1UDRGcLr632EP5z4IxDyZuUK",
+      "price_1Sdu3rGH46eYKnWwK9x8sdK4"
+    ],
+    "regional_price_ids": {}
   }
 ]
