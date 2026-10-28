@@ -39,6 +39,19 @@ const PASSWORD_MIN_LENGTH = 6
 const PASSWORD_MAX_BYTES = 72
 const PASSWORD_SPECIAL_CHARACTERS = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/
 
+export type PasswordRule = 'length' | 'lowercase' | 'uppercase' | 'number' | 'special'
+
+// Drives the live checklist under the password field so mobile users fix the password before submitting.
+export function getPasswordRuleStatus(password: string): Record<PasswordRule, boolean> {
+  return {
+    length: password.length >= PASSWORD_MIN_LENGTH,
+    lowercase: /[a-z]/.test(password),
+    uppercase: /[A-Z]/.test(password),
+    number: /\d/.test(password),
+    special: PASSWORD_SPECIAL_CHARACTERS.test(password),
+  }
+}
+
 export function getPasswordRequirementErrors(password: string): string[] {
   const errors: string[] = []
   if (password.length < PASSWORD_MIN_LENGTH) errors.push(`at least ${PASSWORD_MIN_LENGTH} characters`)
