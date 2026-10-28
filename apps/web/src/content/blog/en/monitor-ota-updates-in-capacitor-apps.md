@@ -90,12 +90,12 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 // Listen for update events
 CapacitorUpdater.addListener('updateAvailable', (info) => {
-  console.log('New update available:', info.version)
+  console.log('New update available:', info.bundle.version)
 })
 
 // Track installation progress
 CapacitorUpdater.addListener('downloadComplete', (info) => {
-  console.log('Update downloaded:', info.version)
+  console.log('Update downloaded:', info.bundle.version)
 })
 ```
 
@@ -121,14 +121,19 @@ Here’s an example of how to configure auto-rollback:
 
 ```typescript
 try {
+  const latest = await CapacitorUpdater.getLatest()
+  if (!latest.url) throw new Error('No downloadable update is available')
   await CapacitorUpdater.download({
-    version: 'latest'
+    url: latest.url,
+    version: latest.version
   })
 } catch (error) {
-  // Automatically trigger rollback
-  await CapacitorUpdater.rollback()
+  // Explicit rollback to the last successful bundle
+  await CapacitorUpdater.reset({ toLastSuccessful: true })
 }
 ```
+
+A failed `download()` call does not roll back on its own. Automatic rollback happens when an activated bundle never calls `notifyAppReady()`.
 
 This approach has proven reliable, with 750 apps currently using Capgo's system in production [\[1\]](https://capgo.app/). Its broad adoption highlights the dependability of these error-handling tools.
 
@@ -143,10 +148,9 @@ Keep a close eye on OTA update performance by monitoring key metrics like succes
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-// Set up performance tracking
-CapacitorUpdater.addListener('updateStats', (stats) => {
-  console.log('Download speed:', stats.downloadSpeed)
-  console.log('Success rate:', stats.successRate)
+// Track download progress during rollout
+CapacitorUpdater.addListener('download', (info) => {
+  console.log('Download progress:', info.percent)
 })
 ```
 
@@ -161,11 +165,11 @@ Phased rollouts help minimize risks by gradually releasing updates to specific u
 To complement phased rollouts, secure update delivery is critical. Enable secure update verification using the following code:
 
 ```typescript
-// Enable secure update verification
+// Configure publicKey in capacitor.config for signed bundles, then download with checksum
 await CapacitorUpdater.download({
-  version: 'latest',
-  validateSignature: true,
-  checksum: true
+  url: 'https://example.com/update.zip',
+  version: '1.2.3',
+  checksum: '<expected-sha256-checksum>'
 })
 ```
 
