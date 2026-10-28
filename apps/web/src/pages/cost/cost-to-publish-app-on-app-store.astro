@@ -5,31 +5,35 @@ import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/l
 import SignupCta from '@/components/SignupCta.astro'
 
 const locale = Astro.locals.locale
-const brand = Astro.locals.runtimeConfig.public.brand
 
-const title = `${brand} | Cost to Publish an App on the App Store`
-const description =
-  'Understand developer fees, revenue share, and launch expenses for the Apple App Store and Google Play. Compare costs and plan your release budget.'
+const title = 'App Publishing Cost: $99/yr App Store, $25 Google Play'
+const description = 'App Store: $99 USD/year (Apple Developer Program). Google Play: $25 USD one-time. Excludes Mac, design, backend, and 15% or 30% store commission.'
 
 const faqItems = [
   {
-    question: 'How much does it cost to publish an app on the App Store?',
+    question: 'How much does it cost to put an app on the App Store?',
     answer:
-      'Apple requires an annual developer membership to publish on the App Store. Additional costs depend on your stack, backend, and launch needs.',
+      'Apple charges $99 USD per membership year for the Apple Developer Program, which you need to publish on the App Store. Eligible nonprofits, accredited educational institutions, and government entities can request an Apple fee waiver.',
   },
   {
-    question: 'Do I need to pay Google Play every year?',
-    answer: 'No. Google Play charges a one-time developer registration fee for most accounts.',
+    question: 'What is the iOS app publish cost?',
+    answer:
+      'The iOS app publish cost is $99 USD per year for an Apple Developer Program membership. That fee covers App Store distribution and developer tools, not a Mac, Xcode hardware, or revenue share on sales.',
   },
   {
-    question: 'What commission do Apple and Google charge?',
+    question: 'What is the app publishing cost for Apple and Google Play?',
     answer:
-      'Both stores take a revenue share on paid apps and in-app purchases. Reduced rates may apply to qualifying developers and subscriptions.',
+      'Without an Apple fee waiver, publishing on both stores costs $124 in standard developer fees: $99 USD per year for Apple and a $25 USD one-time Google Play Console registration fee. With an approved Apple waiver, the first-year total can be $25.',
   },
   {
-    question: 'Can I update my app without a full store review?',
+    question: 'What is the app store app publish cost on Google Play?',
     answer:
-      'Store updates go through review, but web-layer changes can be delivered faster with tools like Capgo after your app is approved.',
+      'Google Play charges a $25 USD one-time registration fee when you create a Play Console developer account. You do not pay an annual Google developer fee to keep publishing updates.',
+  },
+  {
+    question: 'What commission do Apple and Google charge on app sales?',
+    answer:
+      'Apple typically takes 30% of paid app downloads and in-app purchases on the App Store. The App Store Small Business Program can reduce that share to 15% for eligible developers. Auto-renewable subscriptions can also drop to 15% after one year of paid service, even if you are not in that program. Google Play fees depend on market, transaction type, and install age. In the US, EEA, UK, Australia, and Japan, the first $1 million in annual earnings often qualifies for a 10% service fee plus applicable Play Billing fees. Standard rates above that tier include 10% on auto-renewing subscriptions and 20% or 25% on other transactions for new or existing installs, plus Play Billing fees where they apply.',
   },
 ]
 
@@ -176,384 +180,414 @@ const resources = [
 <Layout content={content}>
   <div class="font-light">
     <div class="hero-wash relative overflow-hidden">
-    <div class="absolute inset-0 -z-10">
-      <div class="absolute -top-40 right-0 w-[520px] h-[520px] rounded-full bg-blue-500/20 blur-[140px] animate-float"></div>
-      <div class="absolute top-20 -left-32 w-[420px] h-[420px] rounded-full bg-emerald-500/15 blur-[140px] animate-float-slow"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.18),transparent_55%)]"></div>
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute -top-40 right-0 w-[520px] h-[520px] rounded-full bg-blue-500/20 blur-[140px] animate-float"></div>
+        <div class="absolute top-20 -left-32 w-[420px] h-[420px] rounded-full bg-emerald-500/15 blur-[140px] animate-float-slow"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.18),transparent_55%)]"></div>
+      </div>
+
+      <section class="relative px-4 pt-16 pb-20 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium tracking-[0.2em] text-slate-200 uppercase rounded-full border border-white/10 bg-white/5">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+              App store publishing costs
+            </div>
+            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">Cost to publish an app on the App Store</h1>
+            <div class="p-5 max-w-2xl border border-white/10 rounded-2xl bg-slate-950/50">
+              <p class="text-xs font-medium tracking-[0.18em] text-emerald-300 uppercase">Quick answer</p>
+              <p class="mt-3 text-base text-slate-100">
+                To publish on the Apple App Store, pay <strong class="font-semibold text-white">$99 USD per year</strong> for the Apple Developer Program. Google Play charges a{' '}
+                <strong class="font-semibold text-white">$25 USD one-time</strong> registration fee for Play Console. Those fees only cover store access and submission, not a Mac
+                for iOS builds, design, backend hosting, test devices, or the <strong class="font-semibold text-white">15% or 30%</strong> commission Apple and Google take on paid
+                sales and in-app purchases.
+              </p>
+              <div class="mt-4 overflow-x-auto">
+                <table class="w-full text-sm text-left border-collapse">
+                  <caption class="sr-only">Official app store publishing fees</caption>
+                  <thead>
+                    <tr class="border-b border-white/10 text-slate-400">
+                      <th scope="col" class="py-2 pr-4 font-medium">
+                        Store
+                      </th>
+                      <th scope="col" class="py-2 pr-4 font-medium">
+                        Developer fee
+                      </th>
+                      <th scope="col" class="py-2 font-medium">
+                        Included
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-slate-200">
+                    <tr class="border-b border-white/5">
+                      <th scope="row" class="py-3 pr-4 font-semibold text-white">
+                        Apple App Store (iOS)
+                      </th>
+                      <td class="py-3 pr-4">$99 USD / year</td>
+                      <td class="py-3">App Store listing, TestFlight, certificates</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="py-3 pr-4 font-semibold text-white">
+                        Google Play (Android)
+                      </th>
+                      <td class="py-3 pr-4">$25 USD one-time</td>
+                      <td class="py-3">Play Console, production releases</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="mt-3 text-xs text-slate-400">Source: Apple Developer Program enrollment and Google Play Console registration (fees may vary by region and currency).</p>
+            </div>
+            <p class="text-lg text-slate-300 max-w-2xl">Use the breakdown below for revenue share, optional launch costs, and how to keep shipping after approval with Capgo.</p>
+            <SignupCta lead="After launch, Capgo live updates ship fixes without another store review." id="cost-publish-hero-signup-cta" align="start" />
+            <div class="grid gap-4 pt-4 sm:grid-cols-3">
+              <div class="p-4 border border-white/10 rounded-2xl bg-white/5">
+                <p class="text-xs font-medium tracking-[0.18em] text-slate-300 uppercase">Apple developer fee</p>
+                <p class="mt-2 text-2xl font-bold text-white">$99/year</p>
+              </div>
+              <div class="p-4 border border-white/10 rounded-2xl bg-white/5">
+                <p class="text-xs font-medium tracking-[0.18em] text-slate-300 uppercase">Google Play fee</p>
+                <p class="mt-2 text-2xl font-bold text-white">$25 one-time</p>
+              </div>
+              <div class="p-4 border border-white/10 rounded-2xl bg-white/5">
+                <p class="text-xs font-medium tracking-[0.18em] text-slate-300 uppercase">Store review</p>
+                <p class="mt-2 text-2xl font-bold text-white">1-3 days</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400">Fees and review times vary by region and app category. Always confirm the latest program terms before you submit.</p>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -top-6 right-6 w-40 h-40 bg-blue-500/30 blur-[90px] -z-10"></div>
+            <div class="p-6 border shadow-2xl border-white/10 rounded-3xl bg-slate-900/70 backdrop-blur">
+              <div class="flex items-start justify-between">
+                <div>
+                  <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Standard first year</p>
+                  <p class="mt-3 text-4xl font-bold text-white">$124</p>
+                  <p class="mt-2 text-sm text-slate-300">Apple + Google fees without an Apple waiver</p>
+                </div>
+                <div class="px-3 py-1 text-xs font-medium text-emerald-200 rounded-full bg-emerald-500/15 border border-emerald-400/30">Baseline budget</div>
+              </div>
+              <div class="grid gap-4 mt-8">
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-white/5">
+                  <div>
+                    <p class="text-sm font-bold text-white">App Store submission</p>
+                    <p class="text-xs text-slate-400">Annual membership</p>
+                  </div>
+                  <p class="text-lg font-bold text-white">$99</p>
+                </div>
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-white/5">
+                  <div>
+                    <p class="text-sm font-bold text-white">Google Play Console</p>
+                    <p class="text-xs text-slate-400">One-time registration</p>
+                  </div>
+                  <p class="text-lg font-bold text-white">$25</p>
+                </div>
+              </div>
+              <div class="mt-8 p-4 rounded-2xl border border-white/10 bg-white/5">
+                <p class="text-sm text-slate-300">Launch with Capgo to keep shipping updates without waiting on store reviews.</p>
+                <a href={getRelativeLocaleUrl(locale, '/pricing/')} class="inline-flex items-center mt-4 text-sm font-bold text-blue-200 transition hover:text-white">
+                  See Capgo pricing
+                  <span aria-hidden="true" class="ml-2">
+                    -&gt;
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <section class="relative px-4 pt-16 pb-20 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        <div class="space-y-6">
-          <div class="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium tracking-[0.2em] text-slate-200 uppercase rounded-full border border-white/10 bg-white/5">
-            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
-            App store publishing costs
+    <section class="py-16 bg-slate-950">
+      <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
+          <div class="space-y-4">
+            <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Publish smarter</p>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">Capgo keeps your app moving after launch</h2>
+            <p class="text-base text-slate-300">
+              Store submissions are just the beginning. Capgo helps you ship fixes, features, and experiments after approval without sacrificing user trust.
+            </p>
           </div>
-          <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Cost to publish an app on the App Store
-          </h1>
-          <p class="text-lg text-slate-300 max-w-2xl">
-            Get a clean breakdown of developer fees, revenue share, and launch expenses for Apple and Google. Plan your release budget and avoid surprises before you submit.
-          </p>
-          <SignupCta lead="After launch, Capgo live updates ship fixes without another store review." id="cost-publish-hero-signup-cta" align="start" />
-          <div class="grid gap-4 pt-4 sm:grid-cols-3">
-            <div class="p-4 border border-white/10 rounded-2xl bg-white/5">
-              <p class="text-xs font-medium tracking-[0.18em] text-slate-300 uppercase">Apple developer fee</p>
-              <p class="mt-2 text-2xl font-bold text-white">$99/year</p>
-            </div>
-            <div class="p-4 border border-white/10 rounded-2xl bg-white/5">
-              <p class="text-xs font-medium tracking-[0.18em] text-slate-300 uppercase">Google Play fee</p>
-              <p class="mt-2 text-2xl font-bold text-white">$25 one-time</p>
-            </div>
-            <div class="p-4 border border-white/10 rounded-2xl bg-white/5">
-              <p class="text-xs font-medium tracking-[0.18em] text-slate-300 uppercase">Store review</p>
-              <p class="mt-2 text-2xl font-bold text-white">1-3 days</p>
-            </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {capgoBenefits.map((benefit) => (
+              <div class="p-5 border border-white/10 rounded-2xl bg-slate-900/60">
+                <h3 class="text-lg font-bold text-white">{benefit.title}</h3>
+                <p class="mt-2 text-sm text-slate-300">{benefit.description}</p>
+              </div>
+            ))}
           </div>
-          <p class="text-xs text-slate-400">
-            Fees and review times vary by region and app category. Always confirm the latest program terms before you submit.
-          </p>
         </div>
+      </div>
+    </section>
 
-        <div class="relative">
-          <div class="absolute -top-6 right-6 w-40 h-40 bg-blue-500/30 blur-[90px] -z-10"></div>
-          <div class="p-6 border shadow-2xl border-white/10 rounded-3xl bg-slate-900/70 backdrop-blur">
-            <div class="flex items-start justify-between">
+    <section class="py-16 bg-linear-to-b from-slate-900 via-slate-950 to-slate-950">
+      <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Quick comparison</p>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">Apple App Store vs Google Play</h2>
+          </div>
+          <p class="text-sm text-slate-400">Use this as a baseline. Your totals depend on revenue and services.</p>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          {comparisonCards.map((card) => (
+            <div class="relative overflow-hidden border border-white/10 rounded-3xl bg-slate-900/60">
+              <div class={`absolute inset-0 bg-linear-to-br ${card.accent}`} aria-hidden="true"></div>
+              <div class="relative p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="text-xl font-bold text-white">{card.name}</h3>
+                    <p class="text-sm text-slate-400">{card.subtitle}</p>
+                  </div>
+                  <span class="px-3 py-1 text-xs font-medium text-slate-200 rounded-full bg-white/10 border border-white/10">{card.badge}</span>
+                </div>
+                <div class="grid gap-4 mt-6 sm:grid-cols-2">
+                  <div>
+                    <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Developer fee</p>
+                    <p class="mt-2 text-2xl font-bold text-white">{card.fee}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Commission</p>
+                    <p class="mt-2 text-2xl font-bold text-white">{card.commission}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Review</p>
+                    <p class="mt-2 text-base font-bold text-white">{card.review}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Submissions</p>
+                    <p class="mt-2 text-base font-bold text-white">{card.updates}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="fee-calculator" class="py-16 bg-slate-950">
+      <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
+        <div class="p-6 border border-white/10 rounded-3xl bg-slate-900/70">
+          <div class="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+            <div>
+              <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Annual fee calculator</p>
+              <h2 class="mt-3 text-3xl font-bold text-white">Estimate your developer account fees</h2>
+              <p class="mt-4 text-sm text-slate-300">This is the minimum cost to publish. It excludes revenue share, backend services, and production tooling.</p>
+              <fieldset class="mt-6">
+                <legend class="text-sm font-medium text-slate-300">Select platforms</legend>
+                <div class="grid gap-3 mt-3 sm:grid-cols-3">
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="platform-fee" value="ios" checked />
+                    <div class="p-4 text-sm font-medium text-white border border-white/10 rounded-2xl bg-slate-950/60 peer-checked:border-blue-400/50 peer-checked:bg-blue-500/10">
+                      iOS only
+                      <span class="block mt-1 text-xs font-normal text-slate-400">Apple Developer Program</span>
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="platform-fee" value="android" />
+                    <div class="p-4 text-sm font-medium text-white border border-white/10 rounded-2xl bg-slate-950/60 peer-checked:border-emerald-400/50 peer-checked:bg-emerald-500/10">
+                      Android only
+                      <span class="block mt-1 text-xs font-normal text-slate-400">Google Play Console</span>
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input class="sr-only peer" type="radio" name="platform-fee" value="both" />
+                    <div class="p-4 text-sm font-medium text-white border border-white/10 rounded-2xl bg-slate-950/60 peer-checked:border-purple-400/50 peer-checked:bg-purple-500/10">
+                      Both stores
+                      <span class="block mt-1 text-xs font-normal text-slate-400">Apple + Google</span>
+                    </div>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="flex flex-col justify-between p-6 border border-white/10 rounded-2xl bg-slate-950/60">
               <div>
-                <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">First-year minimum</p>
-                <p class="mt-3 text-4xl font-bold text-white">$124</p>
-                <p class="mt-2 text-sm text-slate-300">Apple + Google developer fees</p>
+                <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Your estimate</p>
+                <p class="mt-4 text-4xl font-bold text-white" data-fee-total>
+                  $99
+                </p>
+                <p class="mt-2 text-sm text-slate-300" data-fee-detail>
+                  Apple Developer Program
+                </p>
               </div>
-              <div class="px-3 py-1 text-xs font-medium text-emerald-200 rounded-full bg-emerald-500/15 border border-emerald-400/30">
-                Baseline budget
+              <div class="mt-6 pt-6 border-t border-white/10">
+                <p class="text-xs text-slate-400">Fees do not include revenue share or additional tooling. Consider backend hosting, analytics, and compliance costs.</p>
               </div>
-            </div>
-            <div class="grid gap-4 mt-8">
-              <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-white/5">
-                <div>
-                  <p class="text-sm font-bold text-white">App Store submission</p>
-                  <p class="text-xs text-slate-400">Annual membership</p>
-                </div>
-                <p class="text-lg font-bold text-white">$99</p>
-              </div>
-              <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-white/5">
-                <div>
-                  <p class="text-sm font-bold text-white">Google Play Console</p>
-                  <p class="text-xs text-slate-400">One-time registration</p>
-                </div>
-                <p class="text-lg font-bold text-white">$25</p>
-              </div>
-            </div>
-            <div class="mt-8 p-4 rounded-2xl border border-white/10 bg-white/5">
-              <p class="text-sm text-slate-300">Launch with Capgo to keep shipping updates without waiting on store reviews.</p>
-              <a
-                href={getRelativeLocaleUrl(locale, '/pricing/')}
-                class="inline-flex items-center mt-4 text-sm font-bold text-blue-200 transition hover:text-white"
-              >
-                See Capgo pricing
-                <span aria-hidden="true" class="ml-2">-&gt;</span>
-              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </div>
 
-  <section class="py-16 bg-slate-950">
-    <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-        <div class="space-y-4">
-          <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Publish smarter</p>
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">Capgo keeps your app moving after launch</h2>
-          <p class="text-base text-slate-300">
-            Store submissions are just the beginning. Capgo helps you ship fixes, features, and experiments after approval without sacrificing user trust.
-          </p>
-        </div>
-        <div class="grid gap-4 sm:grid-cols-2">
-          {capgoBenefits.map((benefit) => (
-            <div class="p-5 border border-white/10 rounded-2xl bg-slate-900/60">
-              <h3 class="text-lg font-bold text-white">{benefit.title}</h3>
-              <p class="mt-2 text-sm text-slate-300">{benefit.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-16 bg-linear-to-b from-slate-900 via-slate-950 to-slate-950">
-    <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Quick comparison</p>
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">Apple App Store vs Google Play</h2>
-        </div>
-        <p class="text-sm text-slate-400">Use this as a baseline. Your totals depend on revenue and services.</p>
-      </div>
-      <div class="grid gap-6 lg:grid-cols-2">
-        {comparisonCards.map((card) => (
-          <div class="relative overflow-hidden border border-white/10 rounded-3xl bg-slate-900/60">
-            <div class={`absolute inset-0 bg-linear-to-br ${card.accent}`} aria-hidden="true"></div>
-            <div class="relative p-6">
-              <div class="flex items-center justify-between">
-                <div>
-                  <h3 class="text-xl font-bold text-white">{card.name}</h3>
-                  <p class="text-sm text-slate-400">{card.subtitle}</p>
-                </div>
-                <span class="px-3 py-1 text-xs font-medium text-slate-200 rounded-full bg-white/10 border border-white/10">
-                  {card.badge}
-                </span>
-              </div>
-              <div class="grid gap-4 mt-6 sm:grid-cols-2">
-                <div>
-                  <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Developer fee</p>
-                  <p class="mt-2 text-2xl font-bold text-white">{card.fee}</p>
-                </div>
-                <div>
-                  <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Commission</p>
-                  <p class="mt-2 text-2xl font-bold text-white">{card.commission}</p>
-                </div>
-                <div>
-                  <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Review</p>
-                  <p class="mt-2 text-base font-bold text-white">{card.review}</p>
-                </div>
-                <div>
-                  <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Submissions</p>
-                  <p class="mt-2 text-base font-bold text-white">{card.updates}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="fee-calculator" class="py-16 bg-slate-950">
-    <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
-      <div class="p-6 border border-white/10 rounded-3xl bg-slate-900/70">
-        <div class="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
-          <div>
-            <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Annual fee calculator</p>
-            <h2 class="mt-3 text-3xl font-bold text-white">Estimate your developer account fees</h2>
-            <p class="mt-4 text-sm text-slate-300">
-              This is the minimum cost to publish. It excludes revenue share, backend services, and production tooling.
+    <section class="py-16 bg-slate-950">
+      <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div class="space-y-4">
+            <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Revenue share</p>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">Commission rates to plan for</h2>
+            <p class="text-base text-slate-300">
+              Store commission applies to paid apps, in-app purchases, and subscriptions sold through the stores. Apple and Google use different schedules, and small business
+              programs can reduce Apple rates.
             </p>
-            <fieldset class="mt-6">
-              <legend class="text-sm font-medium text-slate-300">Select platforms</legend>
-              <div class="grid gap-3 mt-3 sm:grid-cols-3">
-                <label class="cursor-pointer">
-                  <input class="sr-only peer" type="radio" name="platform-fee" value="ios" checked />
-                  <div class="p-4 text-sm font-medium text-white border border-white/10 rounded-2xl bg-slate-950/60 peer-checked:border-blue-400/50 peer-checked:bg-blue-500/10">
-                    iOS only
-                    <span class="block mt-1 text-xs font-normal text-slate-400">Apple Developer Program</span>
-                  </div>
-                </label>
-                <label class="cursor-pointer">
-                  <input class="sr-only peer" type="radio" name="platform-fee" value="android" />
-                  <div class="p-4 text-sm font-medium text-white border border-white/10 rounded-2xl bg-slate-950/60 peer-checked:border-emerald-400/50 peer-checked:bg-emerald-500/10">
-                    Android only
-                    <span class="block mt-1 text-xs font-normal text-slate-400">Google Play Console</span>
-                  </div>
-                </label>
-                <label class="cursor-pointer">
-                  <input class="sr-only peer" type="radio" name="platform-fee" value="both" />
-                  <div class="p-4 text-sm font-medium text-white border border-white/10 rounded-2xl bg-slate-950/60 peer-checked:border-purple-400/50 peer-checked:bg-purple-500/10">
-                    Both stores
-                    <span class="block mt-1 text-xs font-normal text-slate-400">Apple + Google</span>
-                  </div>
-                </label>
-              </div>
-            </fieldset>
           </div>
-          <div class="flex flex-col justify-between p-6 border border-white/10 rounded-2xl bg-slate-950/60">
-            <div>
-              <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Your estimate</p>
-              <p class="mt-4 text-4xl font-bold text-white" data-fee-total>$99</p>
-              <p class="mt-2 text-sm text-slate-300" data-fee-detail>Apple Developer Program</p>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
+              <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Apple standard rate</p>
+              <p class="mt-3 text-3xl font-bold text-white">30%</p>
+              <p class="mt-2 text-sm text-slate-300">
+                Common App Store share on paid downloads and in-app purchases. Small Business Program members and year-two auto-renewable subscriptions can pay 15% instead.
+              </p>
             </div>
-            <div class="mt-6 pt-6 border-t border-white/10">
-              <p class="text-xs text-slate-400">
-                Fees do not include revenue share or additional tooling. Consider backend hosting, analytics, and compliance costs.
+            <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
+              <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Google Play (US example)</p>
+              <p class="mt-3 text-3xl font-bold text-white">10 to 25%</p>
+              <p class="mt-2 text-sm text-slate-300">
+                US example: 10% on the first $1 million in annual earnings, then standard rates such as 10% on subscriptions and 20% or 25% on other purchases by install type, plus
+                Play Billing fees where they apply.
               </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-16 bg-slate-950">
-    <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div class="space-y-4">
-          <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Revenue share</p>
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">Commission rates to plan for</h2>
-          <p class="text-base text-slate-300">
-            Store commission applies to paid apps, in-app purchases, and subscriptions sold through the stores. Small business programs can reduce the rate.
-          </p>
-        </div>
-        <div class="grid gap-4 sm:grid-cols-2">
-          <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
-            <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Standard rate</p>
-            <p class="mt-3 text-3xl font-bold text-white">30%</p>
-            <p class="mt-2 text-sm text-slate-300">Typical revenue share for most app sales and subscriptions.</p>
-          </div>
-          <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
-            <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Reduced rate</p>
-            <p class="mt-3 text-3xl font-bold text-white">15%</p>
-            <p class="mt-2 text-sm text-slate-300">Available for qualifying developers and some subscriptions.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-16 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950">
-    <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Hidden costs</p>
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">Extra expenses to budget for</h2>
-        </div>
-        <p class="text-sm text-slate-400">Most teams spend more on launch assets and infrastructure than on store fees.</p>
-      </div>
-      <div class="grid gap-4 md:grid-cols-2">
-        {extraCosts.map((cost) => (
-          <div class="p-5 border border-white/10 rounded-2xl bg-slate-900/70">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-bold text-white">{cost.title}</h3>
-              <span class="text-sm font-medium text-emerald-200">{cost.range}</span>
-            </div>
-            <p class="mt-2 text-sm text-slate-300">{cost.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="publish-checklist" class="py-16 bg-slate-950">
-    <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="grid gap-10 lg:grid-cols-2">
-        <div class="space-y-4">
-          <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Launch checklist</p>
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">How to publish your app</h2>
-          <p class="text-base text-slate-300">
-            Follow these steps to submit your app. Prepare credentials early to avoid delays during review.
-          </p>
-        </div>
-        <div class="grid gap-6 sm:grid-cols-2">
-          <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/70">
-            <h3 class="text-lg font-bold text-white">Apple App Store</h3>
-            <ol class="mt-4 space-y-3 text-sm text-slate-300 list-decimal list-inside">
-              {publishSteps.apple.map((step) => (
-                <li>{step}</li>
-              ))}
-            </ol>
-          </div>
-          <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/70">
-            <h3 class="text-lg font-bold text-white">Google Play</h3>
-            <ol class="mt-4 space-y-3 text-sm text-slate-300 list-decimal list-inside">
-              {publishSteps.google.map((step) => (
-                <li>{step}</li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-16 bg-slate-950">
-    <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="p-8 border border-white/10 rounded-3xl bg-linear-to-br from-blue-500/10 via-slate-900/80 to-slate-900">
-        <div class="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+    <section class="py-16 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p class="text-xs font-medium tracking-[0.2em] text-blue-200 uppercase">After launch</p>
-            <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">Keep shipping without store delays</h2>
-            <p class="mt-4 text-base text-slate-200">
-              Every store update adds review time. Capgo helps you deliver web updates instantly while keeping native releases for the moments that truly need them.
-            </p>
-            <SignupCta id="cost-publish-after-launch-signup-cta" align="start" class="mt-8" />
+            <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Hidden costs</p>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">Extra expenses to budget for</h2>
           </div>
+          <p class="text-sm text-slate-400">Most teams spend more on launch assets and infrastructure than on store fees.</p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {extraCosts.map((cost) => (
+            <div class="p-5 border border-white/10 rounded-2xl bg-slate-900/70">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-white">{cost.title}</h3>
+                <span class="text-sm font-medium text-emerald-200">{cost.range}</span>
+              </div>
+              <p class="mt-2 text-sm text-slate-300">{cost.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="publish-checklist" class="py-16 bg-slate-950">
+      <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-2">
           <div class="space-y-4">
-            {resources.map((resource) => (
-              <a
-                href={resource.href}
-                class="block p-4 border border-white/10 rounded-2xl bg-slate-950/60 transition hover:border-white/30"
-              >
-                <p class="text-base font-bold text-white">{resource.title}</p>
-                <p class="mt-2 text-sm text-slate-300">{resource.description}</p>
-              </a>
-            ))}
+            <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Launch checklist</p>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">How to publish your app</h2>
+            <p class="text-base text-slate-300">Follow these steps to submit your app. Prepare credentials early to avoid delays during review.</p>
+          </div>
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/70">
+              <h3 class="text-lg font-bold text-white">Apple App Store</h3>
+              <ol class="mt-4 space-y-3 text-sm text-slate-300 list-decimal list-inside">
+                {publishSteps.apple.map((step) => (
+                  <li>{step}</li>
+                ))}
+              </ol>
+            </div>
+            <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/70">
+              <h3 class="text-lg font-bold text-white">Google Play</h3>
+              <ol class="mt-4 space-y-3 text-sm text-slate-300 list-decimal list-inside">
+                {publishSteps.google.map((step) => (
+                  <li>{step}</li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-16 bg-slate-950">
-    <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">FAQ</p>
-          <h2 class="text-3xl font-bold text-white sm:text-4xl">Common questions about publishing costs</h2>
+    <section class="py-16 bg-slate-950">
+      <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="p-8 border border-white/10 rounded-3xl bg-linear-to-br from-blue-500/10 via-slate-900/80 to-slate-900">
+          <div class="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+            <div>
+              <p class="text-xs font-medium tracking-[0.2em] text-blue-200 uppercase">After launch</p>
+              <h2 class="mt-3 text-3xl font-bold text-white sm:text-4xl">Keep shipping without store delays</h2>
+              <p class="mt-4 text-base text-slate-200">
+                Every store update adds review time. Capgo helps you deliver web updates instantly while keeping native releases for the moments that truly need them.
+              </p>
+              <SignupCta id="cost-publish-after-launch-signup-cta" align="start" class="mt-8" />
+            </div>
+            <div class="space-y-4">
+              {resources.map((resource) => (
+                <a href={resource.href} class="block p-4 border border-white/10 rounded-2xl bg-slate-950/60 transition hover:border-white/30">
+                  <p class="text-base font-bold text-white">{resource.title}</p>
+                  <p class="mt-2 text-sm text-slate-300">{resource.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <p class="text-sm text-slate-400">Still unsure? We can help you plan your release timeline.</p>
       </div>
-      <div class="grid gap-4 lg:grid-cols-2">
-        {faqItems.map((item) => (
-          <details class="group p-5 border border-white/10 rounded-2xl bg-slate-900/70">
-            <summary class="flex items-center justify-between cursor-pointer list-none">
-              <span class="text-base font-bold text-white">{item.question}</span>
-              <span class="flex items-center justify-center w-8 h-8 text-lg font-bold text-slate-300 border border-white/10 rounded-full group-open:rotate-45 transition">
-                +
-              </span>
-            </summary>
-            <p class="mt-4 text-sm text-slate-300">{item.answer}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-16 bg-slate-950">
-    <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
-      <div class="p-8 text-center border border-white/10 rounded-3xl bg-white/5">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">Ready to ship your app with confidence?</h2>
-        <p class="mt-4 text-base text-slate-300">
-          Start with Capgo to move faster after approval and keep your release costs predictable.
-        </p>
-        <SignupCta id="cost-publish-final-signup-cta" humanSupport class="mt-8" />
+    <section class="py-16 bg-slate-950">
+      <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">FAQ</p>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">Common questions about publishing costs</h2>
+          </div>
+          <p class="text-sm text-slate-400">Still unsure? We can help you plan your release timeline.</p>
+        </div>
+        <div class="grid gap-4 lg:grid-cols-2">
+          {faqItems.map((item) => (
+            <details class="group p-5 border border-white/10 rounded-2xl bg-slate-900/70">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <span class="text-base font-bold text-white">{item.question}</span>
+                <span class="flex items-center justify-center w-8 h-8 text-lg font-bold text-slate-300 border border-white/10 rounded-full group-open:rotate-45 transition">+</span>
+              </summary>
+              <p class="mt-4 text-sm text-slate-300">{item.answer}</p>
+            </details>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="py-16 bg-slate-950">
+      <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
+        <div class="p-8 text-center border border-white/10 rounded-3xl bg-white/5">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">Ready to ship your app with confidence?</h2>
+          <p class="mt-4 text-base text-slate-300">Start with Capgo to move faster after approval and keep your release costs predictable.</p>
+          <SignupCta id="cost-publish-final-signup-cta" humanSupport class="mt-8" />
+        </div>
+      </div>
+    </section>
 
     <script is:inline>
-    const feeMap = {
-      ios: { total: 99, detail: 'Apple Developer Program' },
-      android: { total: 25, detail: 'Google Play Console' },
-      both: { total: 124, detail: 'Apple + Google developer fees' },
-    }
-
-    const radios = document.querySelectorAll('input[name="platform-fee"]')
-    const totalEl = document.querySelector('[data-fee-total]')
-    const detailEl = document.querySelector('[data-fee-detail]')
-
-    if (totalEl && detailEl) {
-      const update = () => {
-        const selected = document.querySelector('input[name="platform-fee"]:checked')
-        if (!selected) return
-        const data = feeMap[selected.value]
-        if (!data) return
-        totalEl.textContent = `$${data.total}`
-        detailEl.textContent = data.detail
+      const feeMap = {
+        ios: { total: 99, detail: 'Apple Developer Program' },
+        android: { total: 25, detail: 'Google Play Console' },
+        both: { total: 124, detail: 'Apple + Google developer fees' },
       }
 
-      radios.forEach((radio) => radio.addEventListener('change', update))
-      update()
-    }
+      const radios = document.querySelectorAll('input[name="platform-fee"]')
+      const totalEl = document.querySelector('[data-fee-total]')
+      const detailEl = document.querySelector('[data-fee-detail]')
+
+      if (totalEl && detailEl) {
+        const update = () => {
+          const selected = document.querySelector('input[name="platform-fee"]:checked')
+          if (!selected) return
+          const data = feeMap[selected.value]
+          if (!data) return
+          totalEl.textContent = `$${data.total}`
+          detailEl.textContent = data.detail
+        }
+
+        radios.forEach((radio) => radio.addEventListener('change', update))
+        update()
+      }
     </script>
   </div>
 </Layout>
