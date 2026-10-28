@@ -64,6 +64,8 @@ export const GET: APIRoute = async () => {
     '- Every plan starts with a 14-day unlimited free trial. No credit card required.',
     '- There is no free plan after the trial.',
     '- Yearly billing is about 20% cheaper than monthly.',
+    '- Solo has purchasing power parity (PPP) pricing: 15%, 30%, 40%, or 50% off in 227 countries and territories, based on World Bank 2025 price levels, charged in local currency. The prices below are the full USD prices; the pricing page shows each visitor the price for their country. The discount needs a card and billing address from that country, so a VPN alone does not unlock it.',
+    '- Maker, Team, and Enterprise are the same price in every country.',
     '- Usage above a plan allowance is billed with the pay-as-you-go tiers below, or you can move to a bigger plan.',
     `- Enterprise (SSO, SLA, SOC 2 Type II, ISO 27001, self-hosting options, custom limits): talk to the team at https://book.capgo.app/demo/ or see ${baseUrl}/enterprise/`,
     '',

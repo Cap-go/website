@@ -221,7 +221,7 @@ export function buildPricingFaqSections(locale: Locales, urls: PricingFaqUrls): 
         },
         {
           question: m.do_you_have_purchasing_power_parity_pricing({}, { locale }),
-          answer: m.no_ppp_available_at_this_time({}, { locale }),
+          answer: m.ppp_solo_plan_answer({}, { locale }),
         },
       ],
     },
