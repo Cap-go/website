@@ -291,7 +291,7 @@ body:has(.ma) {
   background-size: cover;
   background-position: center;
 }
-.ma .phone-screen img {
+.ma .phone-screen video {
   display: block;
   width: 100%;
   height: 100%;

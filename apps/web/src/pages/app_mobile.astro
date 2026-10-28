@@ -129,30 +129,34 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
         <div class="phone-showcase">
           <div class="phone-frame">
             <div class="phone-screen">
-              <img
+              <!-- Muted MP4 loop (≈0.6 MB) instead of the old 4.9 MB animated WebP. preload="none" keeps it off the
+                   critical path: only the poster loads with the page, the video starts once the phone is on screen. -->
+              <video
                 id="capgo-mobile-preview-demo"
-                src="/capgo-mobile-preview-demo.webp"
-                data-poster="/capgo-mobile-preview-demo-poster.webp"
-                alt="Screen recording of the Capgo mobile app previewing a bundle on a real device"
-                width="720"
-                height="1280"
-                loading="eager"
-                decoding="async"
-              />
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="/capgo-mobile-preview-demo-poster.webp"
+                width="540"
+                height="960"
+                aria-label="Screen recording of the Capgo mobile app previewing a bundle on a real device"
+              >
+                <source src="/capgo-mobile-preview-demo.mp4" type="video/mp4" />
+              </video>
             </div>
-            <script is:inline>
-              ;(() => {
-                const img = document.getElementById('capgo-mobile-preview-demo')
-                if (!img) return
-                const demoSrc = '/capgo-mobile-preview-demo.webp'
-                const posterSrc = img.dataset.poster ?? '/capgo-mobile-preview-demo-poster.webp'
-                const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-                const apply = () => {
-                  img.src = mq.matches ? posterSrc : demoSrc
-                }
-                apply()
-                mq.addEventListener('change', apply)
-              })()
+            <script>
+              const demo = document.getElementById('capgo-mobile-preview-demo') as HTMLVideoElement | null
+              const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+              if (demo) {
+                new IntersectionObserver(
+                  ([entry]) => {
+                    if (entry.isIntersecting && !reduceMotion.matches) demo.play().catch(() => {})
+                    else demo.pause()
+                  },
+                  { threshold: 0.35 },
+                ).observe(demo)
+              }
             </script>
           </div>
 
