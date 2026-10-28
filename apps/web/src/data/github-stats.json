@@ -1,12 +1,12 @@
 {
   "repositoryCount": 143,
   "contributorCount": 605,
-  "versionCount": 16196,
-  "releaseCount": 6986,
-  "closedIssueCount": 1758,
-  "mergedPullRequestCount": 9341,
-  "resolvedItemCount": 11099,
-  "totalStars": 3185,
+  "versionCount": 16215,
+  "releaseCount": 6988,
+  "closedIssueCount": 1760,
+  "mergedPullRequestCount": 9375,
+  "resolvedItemCount": 11135,
+  "totalStars": 3184,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -136,7 +136,7 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 877,
+      "stars": 876,
       "contributors": 54,
       "versionTags": 794,
       "releases": 238,
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 211,
       "contributors": 30,
-      "versionTags": 5842,
+      "versionTags": 5859,
       "releases": 1000,
-      "closedIssues": 419,
-      "mergedPullRequests": 2660
+      "closedIssues": 420,
+      "mergedPullRequests": 2692
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -777,10 +777,10 @@
       "url": "https://github.com/Cap-go/capacitor-speech-recognition",
       "stars": 18,
       "contributors": 7,
-      "versionTags": 38,
-      "releases": 36,
-      "closedIssues": 8,
-      "mergedPullRequests": 25
+      "versionTags": 39,
+      "releases": 37,
+      "closedIssues": 9,
+      "mergedPullRequests": 26
     },
     "Cap-go/capacitor-textinteraction": {
       "url": "https://github.com/Cap-go/capacitor-textinteraction",
@@ -1254,10 +1254,10 @@
       "url": "https://github.com/Cap-go/capacitor-widget-kit",
       "stars": 10,
       "contributors": 4,
-      "versionTags": 16,
-      "releases": 15,
+      "versionTags": 17,
+      "releases": 16,
       "closedIssues": 3,
-      "mergedPullRequests": 18
+      "mergedPullRequests": 19
     },
     "Cap-go/capacitor-brightness": {
       "url": "https://github.com/Cap-go/capacitor-brightness",
