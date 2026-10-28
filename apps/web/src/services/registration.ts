@@ -1,4 +1,4 @@
-import { useRuntimeConfig } from '@/config/app'
+import { getBaseApiUrl } from '@/config/urls'
 
 export interface RegisterUserInput {
   email: string
@@ -73,7 +73,7 @@ function getApiErrorMessage(data: any): string {
   return data?.message || 'Unable to create account. Please try again.'
 }
 
-export async function registerUser(input: RegisterUserInput, baseApiUrl = useRuntimeConfig().public.baseApiUrl): Promise<RegisterUserResult> {
+export async function registerUser(input: RegisterUserInput, baseApiUrl = getBaseApiUrl()): Promise<RegisterUserResult> {
   const response = await fetch(`${baseApiUrl.replace(/\/$/, '')}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

@@ -10,7 +10,7 @@ function client(fetch: (input: RequestInfo | URL, options?: RequestInit) => Prom
     fetch,
     AbortSignal,
     TextEncoder,
-    useRuntimeConfig: () => ({ public: { baseApiUrl: 'https://api.example.com/' } }),
+    getBaseApiUrl: () => 'https://api.example.com/',
   })
 }
 
