@@ -154,7 +154,7 @@ CapacitorUpdater.addListener('download', (info) => {
 })
 ```
 
-Use these insights to guide your staged deployment plans effectively.
+For production success rates and delivery metrics, configure `statsUrl` in the updater plugin settings. Use these insights to guide your staged deployment plans effectively.
 
 ### Phased Update Rollouts
 
