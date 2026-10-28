@@ -157,7 +157,8 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
                 }
                 new IntersectionObserver(
                   ([entry]) => {
-                    onScreen = entry.isIntersecting
+                    // The first callback can report a sliver below the threshold as intersecting.
+                    onScreen = entry.isIntersecting && entry.intersectionRatio >= 0.35
                     sync()
                   },
                   { threshold: 0.35 },

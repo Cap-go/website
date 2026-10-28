@@ -33,6 +33,13 @@ const poster = `${base}-poster.webp`
     <source src={`${base}.webm`} type="video/webm" />
     <source src={`${base}.mp4`} type="video/mp4" />
   </video>
+  {!eager && (
+    <noscript>
+      {/* Without JS the lazy poster is never set, so show it as an image in place of the empty video. */}
+      <style is:inline>.video-loop video[data-poster]{display:none!important}</style>
+      <img src={poster} alt={label} width="1280" height="800" loading="lazy" decoding="async" />
+    </noscript>
+  )}
 </figure>
 
 <script>
@@ -41,7 +48,7 @@ const poster = `${base}-poster.webp`
     (entries) => {
       for (const entry of entries) {
         const video = entry.target as HTMLVideoElement
-        if (entry.isIntersecting && !reduceMotion.matches) video.play().catch(() => {})
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35 && !reduceMotion.matches) video.play().catch(() => {})
         else video.pause()
       }
     },
@@ -76,7 +83,8 @@ const poster = `${base}-poster.webp`
       0 0 0 6px rgba(255, 255, 255, 0.025);
   }
 
-  .video-loop video {
+  .video-loop video,
+  .video-loop img {
     display: block;
     width: 100%;
     height: auto;
