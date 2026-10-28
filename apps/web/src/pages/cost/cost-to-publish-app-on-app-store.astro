@@ -33,7 +33,7 @@ const faqItems = [
   {
     question: 'What commission do Apple and Google charge on app sales?',
     answer:
-      'Apple typically takes 30% of paid app downloads, in-app purchases, and subscriptions sold through the App Store. Qualifying developers and some subscriptions may qualify for a 15% rate under the App Store small business program. Google Play fees depend on the market, transaction type, and whether the install is new or existing. In the US, EEA, UK, Australia, and Japan, auto-renewing subscriptions pay 10%, and other transactions pay 20% for new installs or 25% for existing installs, plus a 5% billing fee for Play Billing purchases.',
+      'Apple typically takes 30% of paid app downloads and in-app purchases on the App Store. The App Store Small Business Program can reduce that share to 15% for eligible developers. Auto-renewable subscriptions can also drop to 15% after one year of paid service, even if you are not in that program. Google Play fees depend on market, transaction type, and install age. In the US, EEA, UK, Australia, and Japan, the first $1 million in annual earnings often qualifies for a 10% service fee plus applicable Play Billing fees. Standard rates above that tier include 10% on auto-renewing subscriptions and 20% or 25% on other transactions for new or existing installs, plus Play Billing fees where they apply.',
   },
 ]
 
@@ -436,12 +436,17 @@ const resources = [
             <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
               <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Apple standard rate</p>
               <p class="mt-3 text-3xl font-bold text-white">30%</p>
-              <p class="mt-2 text-sm text-slate-300">Common App Store share on paid downloads, in-app purchases, and subscriptions before small business discounts.</p>
+              <p class="mt-2 text-sm text-slate-300">
+                Common App Store share on paid downloads and in-app purchases. Small Business Program members and year-two auto-renewable subscriptions can pay 15% instead.
+              </p>
             </div>
             <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
               <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Google Play (US example)</p>
               <p class="mt-3 text-3xl font-bold text-white">10 to 25%</p>
-              <p class="mt-2 text-sm text-slate-300">Depends on subscription vs other purchases and new vs existing installs, plus a 5% Play Billing fee where it applies.</p>
+              <p class="mt-2 text-sm text-slate-300">
+                US example: 10% on the first $1 million in annual earnings, then standard rates such as 10% on subscriptions and 20% or 25% on other purchases by install type, plus
+                Play Billing fees where they apply.
+              </p>
             </div>
           </div>
         </div>
