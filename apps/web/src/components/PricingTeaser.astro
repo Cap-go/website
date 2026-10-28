@@ -1,6 +1,7 @@
 ---
 import m from '@/copy/messages'
 import SignupCta from '@/components/SignupCta.astro'
+import OfferText from '@/components/OfferText.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { getPlans } from '@/lib/siteData'
 import { planDescriptionToText, planYearlyPrice } from '@/lib/planCopy'
@@ -18,13 +19,15 @@ const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 const titleId = `${id}-title`
 
 // Short preview of the live plans; the full grid, calculator and credits stay on /pricing.
+// Prices render in USD, then src/scripts/currency.ts swaps in the Stripe price sold to the visitor's
+// country (currency + regional discount), exactly like the pricing page.
 const plans = getPlans()
   .filter((plan) => plan.name !== 'Free' && Number.isFinite(plan.price_y))
   .map((plan) => ({
     name: plan.name,
+    stripeId: plan.stripe_id,
     popular: plan.name === 'Maker',
     price: Math.round(planYearlyPrice(plan) / 12),
-    suffix: plan.name === 'Enterprise' ? '+' : '',
     mau: `${plan.mau.toLocaleString(locale)}${plan.name === 'Enterprise' ? '+' : ''}`,
     description: planDescriptionToText(plan.description, locale),
   }))
@@ -39,7 +42,9 @@ const plans = getPlans()
           <h2 id={titleId} class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
             {m.pricing_teaser_title({}, { locale })}
           </h2>
-          <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">{m.plans_that_scale_with_your_business({}, { locale })}</p>
+          <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">
+            <OfferText direct={m.plans_that_scale_with_your_business_direct({}, { locale })}>{m.plans_that_scale_with_your_business({}, { locale })}</OfferText>
+          </p>
         </div>
 
         <ul class="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4" role="list">
@@ -59,9 +64,24 @@ const plans = getPlans()
                 )}
               </div>
               <p class="mt-4 flex flex-wrap items-baseline gap-x-1">
-                <span class="text-4xl font-bold tracking-tight whitespace-nowrap text-white tabular-nums">{`$${plan.price}${plan.suffix}`}</span>
+                <span
+                  class="text-4xl font-bold tracking-tight whitespace-nowrap text-white tabular-nums"
+                  data-price-amount={plan.price}
+                  data-price-plan={plan.stripeId}
+                  data-price-interval="year-monthly"
+                >
+                  {`$${plan.price}`}
+                </span>
                 <span class="text-sm text-gray-400">{m.pricing_teaser_per_month({}, { locale })}</span>
               </p>
+              {plan.stripeId && (
+                <p class="mt-1 text-sm text-gray-400" data-regional-discount={plan.stripeId} hidden>
+                  <span class="sr-only">{m.pricing_regular_price({}, { locale })}</span>
+                  <s data-price-full data-price-amount={plan.price} data-price-plan={plan.stripeId} data-price-interval="year-monthly">
+                    {`$${plan.price}`}
+                  </s>
+                </p>
+              )}
               <p class="mt-4 font-mono text-sm text-gray-200">
                 {plan.mau} {m.monthly_active_users({}, { locale })}
               </p>
@@ -83,3 +103,11 @@ const plans = getPlans()
     </section>
   )
 }
+
+<script>
+  import { initCurrency } from '@/scripts/currency'
+
+  // Shared with the pricing page: one fetch per page, then every [data-price-amount] is localized.
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => void initCurrency())
+  else void initCurrency()
+</script>
