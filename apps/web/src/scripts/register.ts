@@ -10,6 +10,7 @@ const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonE
 
 let isSubmitting = false
 
+const NETWORK_ERROR_FALLBACK = 'We could not reach Capgo. Check your connection or VPN and tap Sign up again. If it keeps failing, email support@capgo.app.'
 const CAPTCHA_REQUIRED_FALLBACK = 'Check “Verify you are human” above, then tap Sign up again.'
 
 // Tick each password rule as it is met, so nobody learns the policy from a failed submit.
@@ -30,6 +31,41 @@ passwordToggle?.addEventListener('click', () => {
   passwordToggle.querySelector('[data-eye-open]')?.classList.toggle('hidden', show)
   passwordToggle.querySelector('[data-eye-closed]')?.classList.toggle('hidden', !show)
 })
+
+// Turnstile can fail on its own (timeouts, blocked iframes, flaky networks). Retry quietly a couple of times,
+// then tell the visitor what to change, instead of asking them to tick a box that never appeared.
+const captchaStatus = document.getElementById('captcha-status') as HTMLElement | null
+const CAPTCHA_AUTO_RETRIES = 2
+let captchaFailures = 0
+
+function setCaptchaStatus(text: string | undefined) {
+  if (!captchaStatus) return
+  captchaStatus.textContent = text ?? ''
+  captchaStatus.classList.toggle('hidden', !text)
+}
+
+document.addEventListener?.('capgo-turnstile', (event) => {
+  const { kind, code } = (event as CustomEvent<{ kind: string; code?: string }>).detail ?? {}
+  const turnstile = (window as any).turnstile
+  if (kind === 'success') {
+    setCaptchaStatus(undefined)
+    return
+  }
+  if (kind === 'expired') {
+    turnstile?.reset?.()
+    return
+  }
+  captchaFailures++
+  ;(window as any).posthog?.capture('website_signup_error', { stage: 'captcha', code: `turnstile_${kind}`, turnstile_code: code, attempt: captchaFailures })
+  if (captchaFailures <= CAPTCHA_AUTO_RETRIES) {
+    setCaptchaStatus(captchaStatus?.dataset.retrying)
+    window.setTimeout(() => turnstile?.reset?.(), 1500)
+  } else {
+    setCaptchaStatus(captchaStatus?.dataset.blocked)
+  }
+})
+
+const emailExistsAlert = document.getElementById('email-exists-alert') as HTMLElement | null
 
 function getCaptchaId() {
   if (!(window as any).turnstile) {
@@ -75,6 +111,7 @@ form?.addEventListener('submit', async (e) => {
   e.preventDefault()
   if (isSubmitting || submitButton.disabled) return
   ;(window as any).posthog?.capture('website_signup_submit')
+  if (emailExistsAlert) emailExistsAlert.hidden = true
 
   // Validate email format
   if (!isValidEmail(email.value.trim())) {
@@ -126,9 +163,20 @@ form?.addEventListener('submit', async (e) => {
     isSubmitting = false
     submitButton.disabled = false
     ;(window as any).turnstile?.reset?.()
-    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code: error instanceof RegisterApiError ? error.code : 'transport' })
+    const code = error instanceof RegisterApiError ? error.code : 'transport'
+    ;(window as any).posthog?.capture('website_signup_error', { stage: 'auth', code })
+    // An existing account is not a failure to retry: point straight at sign in and password reset.
+    if ((code === 'email_exists' || code === 'user_already_exists') && emailExistsAlert) {
+      emailExistsAlert.hidden = false
+      return
+    }
+    if (code === 'weak_password') {
+      password.setAttribute('aria-invalid', 'true')
+      password.focus()
+    }
     return Toastify({
-      text: error instanceof RegisterApiError ? error.message : 'Unable to create account. Please try again.',
+      text: code === 'transport' ? (form as HTMLElement | null)?.dataset?.networkError || NETWORK_ERROR_FALLBACK : (error as Error).message,
+      duration: code === 'transport' || code === 'weak_password' ? 8000 : 3000,
       style: {
         background: '#e7000b',
       },
