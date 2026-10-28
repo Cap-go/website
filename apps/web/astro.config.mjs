@@ -23,6 +23,8 @@ export default defineConfig({
     siteDomain: SITE_DOMAIN,
     defaultLocale,
     cpuCount: CPU_COUNT,
+    // Minified HTML is ~6% smaller over the wire; the web build stays fast enough to afford it.
+    compressHTML: true,
     build: {
       output: 'static',
     },

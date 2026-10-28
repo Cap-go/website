@@ -10,11 +10,8 @@
     }
     q.q = []
     w.oaiq = q
-    var j = d.createElement(s)
-    j.async = 1
-    j.src = u
-    var f = d.getElementsByTagName(s)[0]
-    f.parentNode.insertBefore(j, f)
+    // Calls queue on the stub until ThirdPartyLoader injects the SDK.
+    w.capgoThirdParty.load(u)
   })(window, document, 'script', 'https://bzrcdn.openai.com/sdk/oaiq.min.js')
   oaiq('init', { pixelId: '5Fiq7Kwp18THe1MThKS7GL', debug: true })
 </script>

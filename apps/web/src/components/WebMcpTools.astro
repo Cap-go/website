@@ -1,3 +1,16 @@
 <script>
-  import '@/webmcp/entry'
+  // Agents expose WebMCP via navigator/document.modelContext (natively or from an extension that may inject it late).
+  // Regular visitors never download the tool registry.
+  const hasModelContext = () => 'modelContext' in navigator || 'modelContext' in document
+  const load = () => import('@/webmcp/entry')
+  if (hasModelContext()) void load()
+  else
+    addEventListener(
+      'load',
+      () =>
+        setTimeout(() => {
+          if (hasModelContext()) void load()
+        }, 1000),
+      { once: true },
+    )
 </script>

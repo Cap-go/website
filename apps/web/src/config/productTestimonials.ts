@@ -21,7 +21,7 @@ const luis: ProductTestimonial = {
   quote: 'Since I started using Capgo everything is faster, and I can give my users the time they deserve without neglecting my daily life.',
   name: 'Luis Dominguez',
   role: 'El que paga, Anirol',
-  avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/6a0da579-d9e2-43a4-bc6b-26dddd689c1e_1000040166.png',
+  avatar: '/testimonial-avatars/luis.webp',
   rating: 5,
 }
 
@@ -63,7 +63,7 @@ const mikolaj: ProductTestimonial = {
   quote: 'We originally discovered Capgo through its plugins, and that turned out to be a great entry point into a much more efficient release process for our team.',
   name: 'Mikołaj Wilczek',
   role: 'Principal Mobile Platform Engineer, Tellent',
-  avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/cd659df9-70a5-43f5-bbfd-c11f5c6cec7e_avatar.png',
+  avatar: '/testimonial-avatars/mikolaj.webp',
   rating: 5,
   logo: '/testimonial-logos/tellent.png',
 }
@@ -72,7 +72,7 @@ const michael: ProductTestimonial = {
   quote: 'Great job on the updater plugin. It works flawlessly for me, and live updates are a super accelerator for quick testing turnaround.',
   name: 'Michael Haberler',
   role: 'nethead emeritors',
-  avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/f79c80c6-8a49-4972-88b4-7ec68ea92822_avatar.png',
+  avatar: '/testimonial-avatars/michael.webp',
   rating: 5,
 }
 
@@ -80,7 +80,7 @@ const sergiu: ProductTestimonial = {
   quote: 'The Capgo Capacitor Updater plugin completely transformed how we ship updates. What used to take days now takes just minutes.',
   name: 'Sergiu S',
   role: 'Lead Developer, drivolino GmbH',
-  avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/98496c09-8f14-45ec-a8fc-21c2f76bf2ca_photo_2024-04-28_17-25-58.jpg',
+  avatar: '/testimonial-avatars/sergiu.webp',
   rating: 5,
   logo: '/testimonial-logos/drivolino.png',
 }

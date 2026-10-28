@@ -5,6 +5,7 @@ import AppLogoStrip from '@/components/AppLogoStrip.astro'
 import SignupCta from '@/components/SignupCta.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
+import SenjaResize from '@/components/SenjaResize.astro'
 import type { ProductTestimonial } from '@/config/productTestimonials'
 import m from '@/copy/messages'
 import { formatPageDate } from '@/data/pageDates'
@@ -311,13 +312,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
             class="min-h-100"
           ></iframe>
         </div>
-        <script is:inline>
-          document.addEventListener('DOMContentLoaded', function () {
-            if (typeof iFrameResize === 'function') {
-              iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-Ngmn41b')
-            }
-          })
-        </script>
+        <SenjaResize frameId="wall-of-love-Ngmn41b" />
       </div>
     </section>
   )}

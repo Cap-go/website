@@ -152,11 +152,13 @@ form?.addEventListener('submit', async (e) => {
 
   let user
   try {
+    // A failed parser download must not block the signup itself.
+    const device = await Promise.resolve(getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)).catch(() => ({}))
     user = await registerUser({
       email: email.value,
       password: password.value,
       captcha_token: getCaptchaId() || undefined,
-      ...getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints),
+      ...device,
       ...getSignupUserMetadataForRegistration(),
     })
   } catch (error) {
@@ -182,6 +184,8 @@ form?.addEventListener('submit', async (e) => {
       },
     }).showToast()
   }
+  // Trackers load after the page; a fast signup waits briefly for them so the conversion is still recorded.
+  await (window as any).capgoThirdParty?.ready(1500)
   await trackOpenAIRegistration((user as any)?.user?.id)
   if ((window as any).datafast) {
     ;(window as any).datafast('signup', { email: email.value })
