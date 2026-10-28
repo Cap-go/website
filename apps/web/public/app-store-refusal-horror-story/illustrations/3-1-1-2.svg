@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Streaming client and in-app purchase">
+  <title>Streaming client and in-app purchase</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="268" cy="156" r="22" fill="#44BCFF" opacity="0.28"/>
+  <rect x="56" y="52" width="120" height="96" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <path d="M80 76 H152 M80 96 H136 M80 116 H144" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="116" cy="88" r="10" fill="#44BCFF" opacity="0.35"/>
+  <rect x="188" y="64" width="76" height="72" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="226" y="108" text-anchor="middle" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="22" font-weight="700">IAP</text>
+  <path d="M176 100 H188" stroke="#F87171" stroke-width="2" stroke-dasharray="4 3"/>
+</svg>
