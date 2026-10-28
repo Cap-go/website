@@ -1,15 +1,15 @@
 ---
 slug: monitor-ota-updates-in-capacitor-apps
-title: Monitor OTA Updates in Capacitor Apps
-description: Learn how to effectively monitor OTA updates in mobile apps for fast, secure, and reliable deployments.
+title: OTA Monitoring App Guide for Capacitor OTA Updates
+description: Use an OTA monitoring app to track Capacitor live updates, errors, and rollbacks. Monitor OTA updates in production with channels, analytics, and secure delivery.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-05T01:34:45.665Z
 updated_at: 2026-08-25T01:16:42.000Z
 head_image: /blog-images/monitor-ota-updates-in-capacitor-apps.webp
-head_image_alt: "Monitor OTA Updates in Capacitor Apps Capgo blog illustration"
-keywords: OTA updates, app monitoring, error tracking, real-time analytics, mobile app development
+head_image_alt: "OTA monitoring app dashboard for Capacitor OTA updates Capgo blog illustration"
+keywords: ota monitoring app, ota updates, capacitor live updates, capacitor ota, app monitoring, error tracking, real-time analytics
 tag: Development, Security, Updates
 published: true
 locale: en
@@ -17,7 +17,7 @@ origin: ai
 next_blog: ''
 ---
 
-**Want to update your app without waiting for app store approvals?** OTA (Over-The-Air) updates let you push fixes and features directly to users in real-time. With tools like [Capgo](https://capgo.app/), you can monitor update performance, track errors, and even roll back bad updates instantly.
+An **OTA monitoring app** tracks **OTA updates** after you ship **Capacitor live updates** or other **over the air updates** to production. You can watch download success, catch errors early, and roll back a bad bundle without waiting on store review. If you need definitions first, read [what is an OTA update](https://capgo.app/blog/what-is-ota-update/). For store compliance boundaries, see [OTA app updates and App Store rules](https://capgo.app/blog/ultimate-guide-to-app-store-compliant-ota-updates/). [Capgo](https://capgo.app/) bundles monitoring with channels, analytics, and rollback on the [Capacitor OTA updates](https://capgo.app/live-update/) product page.
 
 ### Key Benefits of Monitoring OTA Updates:
 
@@ -35,7 +35,7 @@ next_blog: ''
 
 Capgo has already managed **23.5M updates across 750 apps** with fast download speeds (114ms for a 5MB bundle). Start monitoring your updates today for smoother app management.
 
-## Setting Up Update Monitoring
+## Setting up your OTA monitoring app
 
 Here's how to set up OTA update monitoring for your app:
 
@@ -90,12 +90,12 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 // Listen for update events
 CapacitorUpdater.addListener('updateAvailable', (info) => {
-  console.log('New update available:', info.version)
+  console.log('New update available:', info.bundle.version)
 })
 
 // Track installation progress
 CapacitorUpdater.addListener('downloadComplete', (info) => {
-  console.log('Update downloaded:', info.version)
+  console.log('Update downloaded:', info.bundle.version)
 })
 ```
 
@@ -121,18 +121,23 @@ Here’s an example of how to configure auto-rollback:
 
 ```typescript
 try {
+  const latest = await CapacitorUpdater.getLatest()
+  if (!latest.url) throw new Error('No downloadable update is available')
   await CapacitorUpdater.download({
-    version: 'latest'
+    url: latest.url,
+    version: latest.version
   })
 } catch (error) {
-  // Automatically trigger rollback
-  await CapacitorUpdater.rollback()
+  // Explicit rollback to the last successful bundle
+  await CapacitorUpdater.reset({ toLastSuccessful: true })
 }
 ```
 
+A failed `download()` call does not roll back on its own. Automatic rollback happens when an activated bundle never calls `notifyAppReady()`.
+
 This approach has proven reliable, with 750 apps currently using Capgo's system in production [\[1\]](https://capgo.app/). Its broad adoption highlights the dependability of these error-handling tools.
 
-## Monitoring Guidelines
+## OTA monitoring app guidelines for production
 
 These guidelines leverage Capgo's monitoring tools to make every update measurable, secure, and carefully deployed.
 
@@ -143,14 +148,13 @@ Keep a close eye on OTA update performance by monitoring key metrics like succes
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-// Set up performance tracking
-CapacitorUpdater.addListener('updateStats', (stats) => {
-  console.log('Download speed:', stats.downloadSpeed)
-  console.log('Success rate:', stats.successRate)
+// Track download progress during rollout
+CapacitorUpdater.addListener('download', (info) => {
+  console.log('Download progress:', info.percent)
 })
 ```
 
-Use these insights to guide your staged deployment plans effectively.
+For production success rates and delivery metrics, configure `statsUrl` in the updater plugin settings. Use these insights to guide your staged deployment plans effectively.
 
 ### Phased Update Rollouts
 
@@ -161,11 +165,11 @@ Phased rollouts help minimize risks by gradually releasing updates to specific u
 To complement phased rollouts, secure update delivery is critical. Enable secure update verification using the following code:
 
 ```typescript
-// Enable secure update verification
+// Configure publicKey in capacitor.config for signed bundles, then download with checksum
 await CapacitorUpdater.download({
-  version: 'latest',
-  validateSignature: true,
-  checksum: true
+  url: 'https://example.com/update.zip',
+  version: '1.2.3',
+  checksum: '<expected-sha256-checksum>'
 })
 ```
 

@@ -51,7 +51,16 @@ const groups = [
       <h2 id="platform-overview-title" class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
         {m.platform_overview_title({}, { locale })}
       </h2>
-      <p class="mt-6 text-lg leading-8 text-pretty text-gray-400">{m.platform_overview_subtitle({}, { locale })}</p>
+      <p
+        class="mt-6 text-lg leading-8 text-pretty text-gray-400"
+        set:html={m.platform_overview_subtitle(
+          {
+            liveUpdateUrl: getRelativeLocaleUrl(locale, 'live-update/'),
+            otaGuideUrl: getRelativeLocaleUrl(locale, 'blog/ultimate-guide-to-app-store-compliant-ota-updates/'),
+          },
+          { locale },
+        )}
+      />
       <div class="mt-8">
         <StackChips />
       </div>
