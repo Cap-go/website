@@ -1,7 +1,7 @@
 ---
 import '@/styles/lu-product.css'
 import ReleaseExplainers from '@/components/explainers/ReleaseExplainers.astro'
-import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
+import PricingTeaser from '@/components/PricingTeaser.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import { productVideos } from '@/config/productVideos'
@@ -66,6 +66,7 @@ const faqItems = [
   { question: m.live_update_faq_q3({}, { locale }), answer: m.live_update_faq_a3({}, { locale }) },
   { question: m.live_update_faq_q4({}, { locale }), answer: m.live_update_faq_a4({}, { locale }) },
   { question: m.live_update_faq_q5({}, { locale }), answer: m.live_update_faq_a5({}, { locale }) },
+  { question: m.live_update_faq_q6({}, { locale }), answer: m.live_update_faq_a6({}, { locale }) },
 ]
 
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
@@ -299,29 +300,6 @@ const featureTiles = [
     <!-- STORE UPDATE VS LIVE UPDATE REACH -->
     <StoreReachSection background="bg-transparent" />
 
-    <!-- SUPPORTED PLATFORMS -->
-    <section class="section" id="platforms">
-      <div class="shell">
-        <div class="section-head section-head--wide">
-          <div class="eyebrow eyebrow--blue">{m.live_update_platforms_kicker({}, { locale })}</div>
-          <h2 class="h2-section">{m.live_update_platforms_title({}, { locale })}</h2>
-          <p class="lead">{m.live_update_platforms_desc({}, { locale })}</p>
-        </div>
-
-        <div class="outcome-grid platform-grid">
-          {platformCards.map((card) => (
-            <article class="outcome-card platform-card">
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-              <a class="platform-link" href={card.href}>
-                {card.readMore} →
-              </a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <!-- OUTCOMES -->
     <section class="section" id="outcomes">
       <div class="shell">
@@ -347,6 +325,33 @@ const featureTiles = [
               <li>{item}</li>
             ))}
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+
+    <ReleaseExplainers background="bg-transparent" />
+
+    <!-- SUPPORTED PLATFORMS -->
+    <section class="section" id="platforms">
+      <div class="shell">
+        <div class="section-head section-head--wide">
+          <div class="eyebrow eyebrow--blue">{m.live_update_platforms_kicker({}, { locale })}</div>
+          <h2 class="h2-section">{m.live_update_platforms_title({}, { locale })}</h2>
+          <p class="lead">{m.live_update_platforms_desc({}, { locale })}</p>
+        </div>
+
+        <div class="outcome-grid platform-grid">
+          {platformCards.map((card) => (
+            <article class="outcome-card platform-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+              <a class="platform-link" href={card.href}>
+                {card.readMore} →
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -380,25 +385,6 @@ const featureTiles = [
         </div>
       </div>
     </section>
-
-    <ProductVideoSection
-      variant="builder"
-      accent="blue"
-      youtubeId={productVideos.liveUpdate.youtubeId}
-      title={productVideos.liveUpdate.title}
-      description={productVideos.liveUpdate.description}
-    />
-
-    <!-- PROOF -->
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={copy('live_update_v2_proof_eyebrow')}
-      title={copy('live_update_v2_proof_title')}
-      description={copy('live_update_v2_proof_lead')}
-      testimonials={productTestimonials.liveUpdate}
-      maxItems={2}
-    />
 
     <!-- BENTO FEATURES -->
     <section class="section bg-grid grain" id="features">
@@ -434,6 +420,34 @@ const featureTiles = [
         </div>
       </div>
     </section>
+
+    <ProductVideoSection
+      variant="builder"
+      accent="blue"
+      youtubeId={productVideos.liveUpdate.youtubeId}
+      title={productVideos.liveUpdate.title}
+      description={productVideos.liveUpdate.description}
+    />
+
+    <!-- PROOF -->
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={copy('live_update_v2_proof_eyebrow')}
+      title={copy('live_update_v2_proof_title')}
+      description={copy('live_update_v2_proof_lead')}
+      testimonials={productTestimonials.liveUpdate}
+      maxItems={2}
+    />
+
+    <AgentReadySection
+      background="bg-transparent"
+      headingId="agent-ready-live-update-title"
+      eyebrow={m.agent_ready_live_update_eyebrow({}, { locale })}
+      title={m.agent_ready_live_update_title({}, { locale })}
+      subtitle={m.agent_ready_live_update_subtitle({}, { locale })}
+      prompts={[m.agent_ready_live_update_prompt_1({}, { locale }), m.agent_ready_live_update_prompt_2({}, { locale }), m.agent_ready_live_update_prompt_3({}, { locale })]}
+    />
 
     <!-- GUIDANCE -->
     <section class="section" id="guidance">
@@ -474,20 +488,6 @@ const featureTiles = [
         </div>
       </div>
     </section>
-
-    <!-- HOW IT WORKS -->
-
-    <ReleaseExplainers background="bg-transparent" />
-    <UpdateTypesSection background="bg-transparent" />
-    <StorePolicySection background="bg-transparent" />
-    <AgentReadySection
-      background="bg-transparent"
-      headingId="agent-ready-live-update-title"
-      eyebrow={m.agent_ready_live_update_eyebrow({}, { locale })}
-      title={m.agent_ready_live_update_title({}, { locale })}
-      subtitle={m.agent_ready_live_update_subtitle({}, { locale })}
-      prompts={[m.agent_ready_live_update_prompt_1({}, { locale }), m.agent_ready_live_update_prompt_2({}, { locale }), m.agent_ready_live_update_prompt_3({}, { locale })]}
-    />
 
     <section class="section" id="compare">
       <div class="shell">
@@ -547,6 +547,10 @@ const featureTiles = [
         </div>
       </div>
     </section>
+
+    <StorePolicySection background="bg-transparent" />
+
+    <PricingTeaser id="live-update-pricing" background="bg-transparent" />
 
     <section class="section" id="faq" aria-labelledby="live-update-faq-title">
       <div class="shell">
