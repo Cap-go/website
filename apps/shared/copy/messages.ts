@@ -3264,7 +3264,7 @@ const messages = {
   register_email_exists_sign_in: 'Sign in',
   register_email_exists_reset: 'Reset your password',
   register_network_error: 'We could not reach Capgo. Check your connection or VPN and tap Sign up again. If it keeps failing, email support@capgo.app.',
-  register_pricing_from: 'Paid plans from {price}/month after the trial.',
+  register_pricing_from: 'Paid plans from {price}/mo, billed yearly, after the trial.',
   register_pricing_link: 'See pricing',
   pay_as_you_go_plan: 'Enterprise',
   per_added_gb: 'per added GiB',
