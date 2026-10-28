@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-25T05:30:47.000Z
-updated_at: 2026-10-25T05:30:47.000Z
+updated_at: 2026-10-28T22:47:43.000Z
 head_image: /capgo_banner.png
 head_image_alt: 'Engineers planning QA, beta, and production channels for a Capacitor OTA release.'
 keywords: ''
