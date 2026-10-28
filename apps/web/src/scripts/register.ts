@@ -152,7 +152,7 @@ form?.addEventListener('submit', async (e) => {
 
   let user
   try {
-    // A failed parser download must not block the signup itself.
+    // Bounded inside getRegistrationDevice: a slow or failed parser download never blocks the signup.
     const device = await Promise.resolve(getRegistrationDevice(navigator.userAgent, navigator.maxTouchPoints)).catch(() => ({}))
     user = await registerUser({
       email: email.value,
