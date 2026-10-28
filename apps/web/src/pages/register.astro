@@ -6,7 +6,7 @@ import 'toastify-js/src/toastify.css'
 import RatingSummary from '@/components/RatingSummary.astro'
 import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
 import { getPlans } from '@/lib/siteData'
-import { planMonthlyPrice } from '@/lib/planCopy'
+import { planYearlyPrice } from '@/lib/planCopy'
 
 // Static pages read the CI secret at build time; import.meta.env only exposes .env-file values here.
 const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY || process.env.CLOUDFLARE_TURNSTILE_SITE_KEY
@@ -37,10 +37,15 @@ const initialsOf = (name: string) =>
     .map((word) => word[0]?.toUpperCase() ?? '')
     .join('')
 // Visitors leave the form to check the price, so show the cheapest paid plan right under the trial badges.
-const paidPrices = getPlans()
-  .map(planMonthlyPrice)
-  .filter((price) => price > 0)
-const lowestMonthlyPrice = paidPrices.length > 0 ? Math.min(...paidPrices) : null
+// Same figure as the pricing page default (yearly billing, per month). The HTML keeps the USD price;
+// src/scripts/currency.ts swaps in the Stripe price sold to the visitor's country, regional discount included.
+const cheapestPlan = getPlans()
+  .filter((plan) => plan.name !== 'Free' && planYearlyPrice(plan) > 0)
+  .sort((a, b) => planYearlyPrice(a) - planYearlyPrice(b))[0]
+const cheapestMonthlyUsd = cheapestPlan ? Math.round(planYearlyPrice(cheapestPlan) / 12) : null
+// Split the sentence around {price} so the amount can be its own live-price element in any translation.
+const PRICE_SLOT = '\u0000'
+const [pricingFromBefore, pricingFromAfter = ''] = m.register_pricing_from({ price: PRICE_SLOT }, { locale: Astro.locals.locale }).split(PRICE_SLOT)
 const pricingUrl = getRelativeLocaleUrl(Astro.locals.locale, 'pricing')
 const registerCanonical = new URL(getRelativeLocaleUrl(Astro.locals.locale, 'register'), Astro.site ?? Astro.url.origin).toString()
 const content = {
@@ -94,9 +99,20 @@ const content = {
               {m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}
             </span>
           </p>
-          {lowestMonthlyPrice !== null && (
+          {cheapestPlan && cheapestMonthlyUsd !== null && (
             <p data-trial-copy class="mt-3 text-xs text-slate-400">
-              {m.register_pricing_from({ price: `$${lowestMonthlyPrice}` }, { locale: Astro.locals.locale })}{' '}
+              {/* One expression, so formatting cannot add a space between the amount and the sentence. */}
+              {[
+                pricingFromBefore,
+                <span
+                  class="font-semibold text-slate-200"
+                  data-price-amount={cheapestMonthlyUsd}
+                  data-price-plan={cheapestPlan.stripe_id}
+                  data-price-interval="year-monthly"
+                  set:text={`$${cheapestMonthlyUsd}`}
+                />,
+                pricingFromAfter,
+              ]}{' '}
               <a href={pricingUrl} target="_blank" rel="noopener" class="font-semibold text-slate-300 underline underline-offset-2 hover:text-white">
                 {m.register_pricing_link({}, { locale: Astro.locals.locale })}
               </a>
@@ -412,4 +428,8 @@ const content = {
 
 <script>
   import '@/scripts/register'
+  import { initCurrency } from '@/scripts/currency'
+
+  // Show the starting price in the visitor's currency; it stays in USD if the prices endpoint is unavailable.
+  initCurrency()
 </script>
