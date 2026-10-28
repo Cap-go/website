@@ -3185,6 +3185,25 @@ async function purgeTranslatedPageCache(env: Env, requestUrl: URL, locale: Local
   }
 }
 
+async function fetchBrandedGoneShellHtml(request: Request, env: Env, requestUrl: URL): Promise<string | null> {
+  let shellUrl = new URL(requestUrl)
+  shellUrl.pathname = '/410/'
+  let originResponse = await env.WEB.fetch(createOriginRequest(request, shellUrl))
+
+  for (let hops = 0; hops < 3 && isRedirect(originResponse); hops += 1) {
+    const location = originResponse.headers.get('Location')
+    if (!location) break
+    shellUrl = new URL(location, shellUrl)
+    originResponse = await env.WEB.fetch(createOriginRequest(request, shellUrl))
+  }
+
+  if (isHtmlResponse(originResponse) && (originResponse.ok || originResponse.status === 404 || originResponse.status === 410)) {
+    return await originResponse.text()
+  }
+
+  return null
+}
+
 async function serveGonePathResponse(
   request: Request,
   env: Env,
@@ -3195,20 +3214,13 @@ async function serveGonePathResponse(
 ): Promise<Response> {
   scheduleTranslationBackgroundTask(ctx, purgeTranslatedPageCache(env, requestUrl, locale))
 
-  const shellUrl = new URL(requestUrl)
-  shellUrl.pathname = '/410/index.html'
-  const originResponse = await env.WEB.fetch(createOriginRequest(request, shellUrl))
-  if (isRedirect(originResponse)) {
-    return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', locale, isHead)
-  }
-
-  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
-    const sourceHtml = await originResponse.text()
+  const sourceHtml = await fetchBrandedGoneShellHtml(request, env, requestUrl)
+  if (sourceHtml) {
     const response = createTranslatedHtmlResponse(
       new Response(sourceHtml, {
         status: 410,
         statusText: 'Gone',
-        headers: originResponse.headers,
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
       }),
       sourceHtml,
       requestUrl,
