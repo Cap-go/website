@@ -1389,6 +1389,8 @@ const messages = {
   plugins_priority_body: 'Customers on any Capgo plan get their plugin bug fixes and feature requests handled first by the team that maintains them.',
   plugins_priority_cta: 'See plans',
   plugins_priority_title: 'Priority support with a Capgo plan',
+  ppp_solo_plan_answer:
+    'Yes, on the Solo plan. Solo is priced by country with purchasing power parity: 15%, 30%, 40%, or 50% off in 227 countries and territories, based on World Bank 2025 price levels, and charged in your local currency. The pricing page shows the price for your country automatically. The discount follows your country, so checkout needs a card and billing address from there; a VPN alone does not unlock it. Maker, Team, and Enterprise are the same price everywhere.',
   pricing_compare_col_capgo: 'Capgo',
   pricing_compare_col_eas: 'EAS Update',
   pricing_compare_col_mau: 'Monthly active users',
@@ -3187,7 +3189,6 @@ const messages = {
   no_commitment_required: 'No commitment required',
   no_credit_card_required: 'No credit card required',
   no_discounts_available_at_this_time: 'No, we do not offer discounts at this time.',
-  no_ppp_available_at_this_time: 'No, we do not offer PPP at this time.',
   no_responsibility_disclaimer_text:
     'The information on the Service is provided with the understanding that the Company is not herein engaged in rendering legal, accounting, tax, or other professional advice and services. As such, it should not be used as a substitute for consultation with professional accounting, tax, legal or other competent advisers.',
   no_responsibility_disclaimer_title: 'No Responsibility Disclaimer',
