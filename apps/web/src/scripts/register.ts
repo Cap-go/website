@@ -11,16 +11,39 @@ const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonE
 let isSubmitting = false
 
 const NETWORK_ERROR_FALLBACK = 'We could not reach Capgo. Check your connection or VPN and tap Sign up again. If it keeps failing, email support@capgo.app.'
+const PASSWORD_REVEAL_LENGTH = 6
 const CAPTCHA_REQUIRED_FALLBACK = 'Check “Verify you are human” above, then tap Sign up again.'
 
-// Tick each password rule as it is met, so nobody learns the policy from a failed submit.
+// The rule checklist stays out of the way until a password is wrong: leaving the field with missing rules,
+// typing a full-length password that still misses one, or submitting. Once shown it ticks rules live and
+// hides again when every rule is met.
+const passwordRequirements = document.getElementById('password-requirements') as HTMLElement | null
+let passwordRulesRevealed = false
+
+function passwordRulesMet() {
+  return Object.values(getPasswordRuleStatus(password?.value ?? '')).every(Boolean)
+}
+
 function syncPasswordRules() {
   const status = getPasswordRuleStatus(password?.value ?? '')
   document.querySelectorAll<HTMLElement>('[data-password-rule]').forEach((item) => {
     item.classList.toggle('is-met', Boolean(status[item.dataset.passwordRule as keyof typeof status]))
   })
+  if (passwordRequirements) passwordRequirements.hidden = !passwordRulesRevealed || passwordRulesMet()
 }
-password?.addEventListener?.('input', syncPasswordRules)
+
+function revealPasswordRules() {
+  passwordRulesRevealed = true
+  syncPasswordRules()
+}
+
+password?.addEventListener?.('input', () => {
+  if (!passwordRulesRevealed && password.value.length >= PASSWORD_REVEAL_LENGTH && !passwordRulesMet()) passwordRulesRevealed = true
+  syncPasswordRules()
+})
+password?.addEventListener?.('blur', () => {
+  if (password.value && !passwordRulesMet()) revealPasswordRules()
+})
 
 const passwordToggle = document.getElementById('password-toggle') as HTMLButtonElement | null
 passwordToggle?.addEventListener('click', () => {
@@ -128,6 +151,8 @@ form?.addEventListener('submit', async (e) => {
     ;(window as any).posthog?.capture('website_signup_error', { stage: 'validation', code: 'weak_password' })
     password.setAttribute('aria-invalid', 'true')
     password.focus()
+    // Missing rules show in the checklist under the field; only the byte limit, which it does not list, needs a toast.
+    if (!passwordRulesMet()) return revealPasswordRules()
     return Toastify({
       text: formatPasswordRequirementErrors(passwordErrors),
       duration: 8000,

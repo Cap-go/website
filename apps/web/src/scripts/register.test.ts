@@ -232,3 +232,70 @@ test('an API password rejection shows the server reason', async () => {
   await run.submit()
   expect(run.toasts).toEqual(['This password appeared in a data breach. Choose a different one.'])
 })
+
+test('the password rules stay hidden until the password is wrong', async () => {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  const listeners: Record<string, () => void> = {}
+  const list = { hidden: true }
+  const password = {
+    value: '',
+    addEventListener: (name: string, callback: () => void) => (listeners[name] = callback),
+    setAttribute() {},
+    removeAttribute() {},
+    focus() {},
+  }
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => ({ disabled: false }), addEventListener() {} },
+    email: { value: '' },
+    password,
+    'password-requirements': list,
+  }
+  const rules = (value: string) => ({
+    length: value.length >= 6,
+    lowercase: /[a-z]/.test(value),
+    uppercase: /[A-Z]/.test(value),
+    number: /\d/.test(value),
+    special: /[!@#]/.test(value),
+  })
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => null },
+    getPasswordRuleStatus: rules,
+    getPasswordRequirementErrors: () => [],
+    formatPasswordRequirementErrors: () => '',
+    window: { location: { search: '' } },
+    navigator: {},
+    URLSearchParams,
+  })
+  const type = (value: string) => {
+    password.value = value
+    listeners.input()
+  }
+  type('abc')
+  expect(list.hidden).toBe(true)
+  listeners.blur()
+  expect(list.hidden).toBe(false)
+  type('Abcdef1!')
+  expect(list.hidden).toBe(true)
+})
+
+test('a full-length password that misses a rule shows the rules while typing', async () => {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  const listeners: Record<string, () => void> = {}
+  const list = { hidden: true }
+  const password = { value: '', addEventListener: (name: string, callback: () => void) => (listeners[name] = callback) }
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => ({ disabled: false }), addEventListener() {} },
+    password,
+    'password-requirements': list,
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => null },
+    getPasswordRuleStatus: (value: string) => ({ length: value.length >= 6, uppercase: /[A-Z]/.test(value) }),
+    window: { location: { search: '' } },
+    navigator: {},
+    URLSearchParams,
+  })
+  password.value = 'abcdef'
+  listeners.input()
+  expect(list.hidden).toBe(false)
+})
