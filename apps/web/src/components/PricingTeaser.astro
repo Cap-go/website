@@ -1,6 +1,7 @@
 ---
 import m from '@/copy/messages'
 import SignupCta from '@/components/SignupCta.astro'
+import OfferText from '@/components/OfferText.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { getPlans } from '@/lib/siteData'
 import { planDescriptionToText, planYearlyPrice } from '@/lib/planCopy'
@@ -41,7 +42,9 @@ const plans = getPlans()
           <h2 id={titleId} class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
             {m.pricing_teaser_title({}, { locale })}
           </h2>
-          <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">{m.plans_that_scale_with_your_business({}, { locale })}</p>
+          <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">
+            <OfferText direct={m.plans_that_scale_with_your_business_direct({}, { locale })}>{m.plans_that_scale_with_your_business({}, { locale })}</OfferText>
+          </p>
         </div>
 
         <ul class="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4" role="list">
