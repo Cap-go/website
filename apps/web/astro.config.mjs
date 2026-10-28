@@ -5,6 +5,7 @@ import config from '../../configs.json'
 import { buildSharedAstroBaseConfig, buildSharedIntegrations, buildSharedViteConfig } from '../shared/astro-config.mjs'
 import { buildPluginIcons, getBuildConcurrency, getPageLastModDates, normalizeDirectoryPath } from '../shared/astro-utils.mjs'
 import { defaultLocale } from './src/services/locale'
+import minifyInlineScripts from './integrations/minifyInlineScripts.mjs'
 
 const CPU_COUNT = getBuildConcurrency()
 const SRC_DIR = `${normalizeDirectoryPath(fileURLToPath(new URL('./src/', import.meta.url)))}/`
@@ -37,6 +38,7 @@ export default defineConfig({
       customSitemaps: [`https://${SITE_DOMAIN}/sitemap-docs-0.xml`],
     }),
     mdx(),
+    minifyInlineScripts(),
   ],
   vite: {
     ...viteConfig,
