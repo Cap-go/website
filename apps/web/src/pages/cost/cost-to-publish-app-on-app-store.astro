@@ -22,7 +22,8 @@ const faqItems = [
   },
   {
     question: 'What is the app publishing cost for Apple and Google Play?',
-    answer: 'Publishing on both stores costs at least $124 in official developer fees: $99 USD per year for Apple and a $25 USD one-time Google Play Console registration fee.',
+    answer:
+      'Without an Apple fee waiver, publishing on both stores costs $124 in standard developer fees: $99 USD per year for Apple and a $25 USD one-time Google Play Console registration fee. With an approved Apple waiver, the first-year total can be $25.',
   },
   {
     question: 'What is the app store app publish cost on Google Play?',
@@ -32,7 +33,7 @@ const faqItems = [
   {
     question: 'What commission do Apple and Google charge on app sales?',
     answer:
-      'Apple and Google typically take 30% of paid app downloads, in-app purchases, and subscriptions sold through their stores. Qualifying developers and some subscriptions may qualify for a 15% rate under each store small business program.',
+      'Apple typically takes 30% of paid app downloads, in-app purchases, and subscriptions sold through the App Store. Qualifying developers and some subscriptions may qualify for a 15% rate under the App Store small business program. Google Play fees depend on the market, transaction type, and whether the install is new or existing. In the US, EEA, UK, Australia, and Japan, auto-renewing subscriptions pay 10%, and other transactions pay 20% for new installs or 25% for existing installs, plus a 5% billing fee for Play Billing purchases.',
   },
 ]
 
@@ -261,9 +262,9 @@ const resources = [
             <div class="p-6 border shadow-2xl border-white/10 rounded-3xl bg-slate-900/70 backdrop-blur">
               <div class="flex items-start justify-between">
                 <div>
-                  <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">First-year minimum</p>
+                  <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Standard first year</p>
                   <p class="mt-3 text-4xl font-bold text-white">$124</p>
-                  <p class="mt-2 text-sm text-slate-300">Apple + Google developer fees</p>
+                  <p class="mt-2 text-sm text-slate-300">Apple + Google fees without an Apple waiver</p>
                 </div>
                 <div class="px-3 py-1 text-xs font-medium text-emerald-200 rounded-full bg-emerald-500/15 border border-emerald-400/30">Baseline budget</div>
               </div>
@@ -427,19 +428,20 @@ const resources = [
             <p class="text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">Revenue share</p>
             <h2 class="text-3xl font-bold text-white sm:text-4xl">Commission rates to plan for</h2>
             <p class="text-base text-slate-300">
-              Store commission applies to paid apps, in-app purchases, and subscriptions sold through the stores. Small business programs can reduce the rate.
+              Store commission applies to paid apps, in-app purchases, and subscriptions sold through the stores. Apple and Google use different schedules, and small business
+              programs can reduce Apple rates.
             </p>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
             <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
-              <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Standard rate</p>
+              <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Apple standard rate</p>
               <p class="mt-3 text-3xl font-bold text-white">30%</p>
-              <p class="mt-2 text-sm text-slate-300">Typical revenue share for most app sales and subscriptions.</p>
+              <p class="mt-2 text-sm text-slate-300">Common App Store share on paid downloads, in-app purchases, and subscriptions before small business discounts.</p>
             </div>
             <div class="p-6 border border-white/10 rounded-2xl bg-slate-900/60">
-              <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Reduced rate</p>
-              <p class="mt-3 text-3xl font-bold text-white">15%</p>
-              <p class="mt-2 text-sm text-slate-300">Available for qualifying developers and some subscriptions.</p>
+              <p class="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">Google Play (US example)</p>
+              <p class="mt-3 text-3xl font-bold text-white">10 to 25%</p>
+              <p class="mt-2 text-sm text-slate-300">Depends on subscription vs other purchases and new vs existing installs, plus a 5% Play Billing fee where it applies.</p>
             </div>
           </div>
         </div>
