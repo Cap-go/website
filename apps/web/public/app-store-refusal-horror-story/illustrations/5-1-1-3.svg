@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="In-app AI consent">
+  <title>In-app AI consent</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="270" cy="44" r="18" fill="#44BCFF" opacity="0.28"/>
+  <rect x="88" y="48" width="144" height="104" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="108" y="72" width="16" height="16" rx="3" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M132 80h88 M132 100h72 M132 120h80" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+  <rect x="108" y="132" width="56" height="10" rx="5" fill="#44BCFF" opacity="0.35"/>
+</svg>
