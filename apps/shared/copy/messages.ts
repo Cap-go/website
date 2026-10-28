@@ -879,8 +879,7 @@ const messages = {
   compare_capawesome_faq_q2: 'How much does Capawesome cost?',
   compare_capawesome_faq_q3: 'Is Capawesome free?',
   compare_capawesome_faq_q4: 'How does Capawesome Cloud compare to Capgo?',
-  compare_capawesome_lead:
-    'Capawesome is a Capacitor mobile platform with 100+ open source SDKs and Capawesome Cloud for OTA live updates, cloud native builds, and app store publishing. Capgo is an independent Capacitor live update service with native build minutes, device-level release observability, and push notifications on one MAU-based plan. Both ship live updates for Capacitor; Capgo shows each release on real devices, explains why updates fail, checks native compatibility before upload, and pauses bad rollouts on its own. Built for teams and AI agents that ship every week.',
+  compare_capawesome_lead: 'Both ship Capacitor live updates. Capgo adds real-device release health, native builds, and push notifications on one plan.',
   compare_capawesome_native_builds: 'Cloud iOS and Android builds on Platform plans, from 200 to 5,000 build minutes per month, plus store publishing.',
   compare_capawesome_obs_eyebrow: 'After you ship',
   compare_capawesome_obs_title: 'See what every release does on real devices',
@@ -953,8 +952,7 @@ const messages = {
     'Set <code>CapacitorUpdater</code> options in <code>capacitor.config.ts</code> and call <code>notifyAppReady()</code> on launch. Channels live in the Capgo dashboard or API.',
   compare_capawesome_step3_text: 'Replace the Capawesome deploy step in CI with <code>npx @capgo/cli@latest bundle upload</code>.',
   compare_capawesome_support: 'Community chat on every plan. Email support from Professional (Live Updates) or Starter (Platform), and priority support on Business.',
-  compare_capawesome_verdict:
-    'Choose Capgo if you ship often and want real statistics from real devices, not network guesses. One plan includes live updates, native build minutes, Observe, and push notifications, and costs less than Capawesome plans that include builds, with the same or more users at every tier, billed monthly or yearly. Add audit logs on every plan and update checks served from 9 regions. Capawesome suits teams that release a few times a year and want fewer changes to their tooling.',
+  compare_capawesome_verdict: 'Pick Capgo if you ship often and want to see what each release does on real devices. Pick Capawesome if you release a few times a year.',
   compare_capgo_company: 'Independent and bootstrapped, founded in 2021. 9,400+ teams, 4.7K+ apps, and 90M+ devices. SOC 2 Type II and ISO 27001 on the Enterprise plan.',
   compare_capgo_frameworks:
     'Capacitor apps built with React, Vue, Angular, Svelte, Ionic, or any web framework. Live updates also work for Cordova and Electron. Not for React Native.',
@@ -1226,9 +1224,8 @@ const messages = {
   capgo_usage_explanation:
     'You can exclude development builds and emulators from production update channels. That controls update delivery, not MAU: a build can still count when it contacts Capgo. To keep it out of production usage, build it with live updates disabled and do not call Capgo endpoints. Learn more about this',
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
-  capwesome_hero_title: 'Capawesome alternative for Capacitor live updates',
-  capwesome_meta_description:
-    'Compare Capawesome Cloud and Capgo for Capacitor live updates, builds, and pricing. Optional E2E encryption Capgo cannot read when enabled.',
+  capwesome_hero_title: 'Capgo vs Capawesome Cloud',
+  capwesome_meta_description: 'Capgo vs Capawesome Cloud compared: pricing, live updates, native builds, and release health, with sources. See which fits your Capacitor app.',
   capwesome_migration_intro: "If you're on Capawesome and considering Capgo, migration is straightforward. The Capacitor update plugin architecture is similar.",
   capwesome_migration_step1: 'Swap the plugin package',
   capwesome_migration_step2: 'Update config (minor differences)',
