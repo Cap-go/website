@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import 'toastify-js/src/toastify.css'
-import RatingSummary from '@/components/RatingSummary.astro'
-import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
+import { capgoReviews, hasRealAvatar } from '@/config/productTestimonials'
+import { customerApps } from '@/config/customerApps'
 import { getPlans } from '@/lib/siteData'
 import { planYearlyPrice } from '@/lib/planCopy'
 
@@ -16,11 +16,26 @@ const title = `${Astro.locals.runtimeConfig.public.brand} | ${m.register_title({
 const description = m.register_description
   ? m.register_description({}, { locale: Astro.locals.locale })
   : 'Create your free Capgo account and start deploying live updates to your Capacitor apps in minutes.'
-const benefits = [
-  m.menu_live_update_tagline({}, { locale: Astro.locals.locale }),
-  m.menu_native_build_tagline({}, { locale: Astro.locals.locale }),
-  m.menu_observe_tagline({}, { locale: Astro.locals.locale }),
+// The right column answers "what do I get, how much work is it, who else uses it" next to the form.
+const nextSteps = [
+  { title: m.register_step_account_title({}, { locale: Astro.locals.locale }), body: m.register_step_account_body({}, { locale: Astro.locals.locale }) },
+  {
+    title: m.register_step_init_title({}, { locale: Astro.locals.locale }),
+    body: m.register_step_init_body({}, { locale: Astro.locals.locale }),
+    command: 'npx @capgo/cli@latest init',
+  },
+  { title: m.register_step_ship_title({}, { locale: Astro.locals.locale }), body: m.register_step_ship_body({}, { locale: Astro.locals.locale }) },
 ]
+const trustedBy = m.register_trusted_by(
+  {
+    teams: m.companies_logo_stat_companies_value({}, { locale: Astro.locals.locale }),
+    devices: m.companies_logo_stat_devices_value({}, { locale: Astro.locals.locale }),
+  },
+  { locale: Astro.locals.locale },
+)
+const featuredApps = customerApps.slice(0, 6)
+// One review: Sergiu's quote is the most concrete ("days to minutes") and has a real portrait.
+const featuredReview = capgoReviews[0]
 const passwordRules = [
   { key: 'length', label: m.password_rule_length({}, { locale: Astro.locals.locale }) },
   { key: 'lowercase', label: m.password_rule_lowercase({}, { locale: Astro.locals.locale }) },
@@ -36,7 +51,7 @@ const initialsOf = (name: string) =>
     .slice(0, 2)
     .map((word) => word[0]?.toUpperCase() ?? '')
     .join('')
-// Visitors leave the form to check the price, so show the cheapest paid plan right under the trial badges.
+// Visitors left the form to check the price, so the cheapest paid plan sits in the small print under the button.
 // Same figure as the pricing page default (yearly billing, per month). The HTML keeps the USD price;
 // src/scripts/currency.ts swaps in the Stripe price sold to the visitor's country, regional discount included.
 const cheapestPlan = getPlans()
@@ -70,58 +85,30 @@ const content = {
 <Layout content={content}>
   <div class="hero-wash">
     <section class="relative overflow-hidden px-4 pt-10 pb-24 sm:pt-16">
-      <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
+      <div class="relative mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
         <div class="rounded-3xl border border-white/10 bg-[#101216]/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl sm:p-8">
           <h1 class="text-3xl font-bold tracking-tight text-white">{m.register_title({}, { locale: Astro.locals.locale })}</h1>
-          <p class="mt-2 text-sm text-slate-400">
-            {m.already_have_account({}, { locale: Astro.locals.locale })}
-            <a
-              href="https://console.capgo.app/login/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-semibold text-[#44BCFF] underline-offset-4 hover:text-white hover:underline"
-            >
-              {m.sign_in({}, { locale: Astro.locals.locale })}
-            </a>
-          </p>
-          <p class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-300">
-            <span data-trial-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
-              {m.days_free_trial({}, { locale: Astro.locals.locale })}
+          <!-- One value line instead of badges. Paid-ads visitors (offer=direct) pay first, backed by a money-back guarantee. -->
+          <p class="mt-2 text-[15px] text-slate-300">
+            <span data-trial-copy>
+              <span class="whitespace-nowrap">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
+              <span class="text-slate-500" aria-hidden="true">
+                {' · '}
+              </span>
+              <span class="whitespace-nowrap">{m.no_credit_card_required({}, { locale: Astro.locals.locale })}</span>
             </span>
-            <span data-trial-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
-              {m.no_credit_card_required({}, { locale: Astro.locals.locale })}
-            </span>
-            <!-- Paid-ads visitors (offer=direct, persisted from the landing page) pay first, backed by a money-back guarantee. -->
-            <span data-direct-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
-              {m.direct_offer_guarantee({}, { locale: Astro.locals.locale })}
-            </span>
-            <span data-direct-copy class="rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10">
-              {m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}
+            <span data-direct-copy>
+              <span class="whitespace-nowrap">{m.direct_offer_guarantee({}, { locale: Astro.locals.locale })}</span>
+              <span class="text-slate-500" aria-hidden="true">
+                {' · '}
+              </span>
+              <span class="whitespace-nowrap">{m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}</span>
             </span>
           </p>
-          {cheapestPlan && cheapestMonthlyUsd !== null && (
-            <p data-trial-copy class="mt-3 text-xs text-slate-400">
-              {/* One expression, so formatting cannot add a space between the amount and the sentence. */}
-              {[
-                pricingFromBefore,
-                <span
-                  class="font-semibold text-slate-200"
-                  data-price-amount={cheapestMonthlyUsd}
-                  data-price-plan={cheapestPlan.stripe_id}
-                  data-price-interval="year-monthly"
-                  set:text={`$${cheapestMonthlyUsd}`}
-                />,
-                pricingFromAfter,
-              ]}{' '}
-              <a href={pricingUrl} target="_blank" rel="noopener" class="font-semibold text-slate-300 underline underline-offset-2 hover:text-white">
-                {m.register_pricing_link({}, { locale: Astro.locals.locale })}
-              </a>
-            </p>
-          )}
 
           <form
             id="registerForm"
-            class="mt-6 space-y-4"
+            class="mt-7 space-y-4"
             data-captcha-required={m.register_captcha_required({}, { locale: Astro.locals.locale })}
             data-network-error={m.register_network_error({}, { locale: Astro.locals.locale })}
           >
@@ -182,7 +169,7 @@ const content = {
                   </svg>
                 </button>
               </div>
-              <ul id="password-requirements" class="mt-2 grid grid-cols-1 gap-x-3 gap-y-1 text-xs text-slate-400 sm:grid-cols-2">
+              <ul id="password-requirements" hidden aria-live="polite" class="mt-2 grid grid-cols-1 gap-x-3 gap-y-1 text-xs text-slate-400 sm:grid-cols-2">
                 {passwordRules.map((rule) => (
                   <li data-password-rule={rule.key} class="password-rule flex items-center gap-1.5">
                     <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -206,6 +193,7 @@ const content = {
                   data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY}
                   data-size="flexible"
                   data-theme="dark"
+                  data-appearance="interaction-only"
                   data-callback="capgoTurnstileSuccess"
                   data-error-callback="capgoTurnstileError"
                   data-expired-callback="capgoTurnstileExpired"
@@ -236,105 +224,113 @@ const content = {
             >
               {m.sign_up_button({}, { locale: Astro.locals.locale })}
             </button>
-            <p
-              class="text-center text-xs text-slate-500 [&_a]:text-slate-300 [&_a]:underline [&_a]:underline-offset-2"
-              set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })}
-            />
+            <div class="space-y-1 text-center text-xs leading-5 text-slate-500">
+              {cheapestPlan && cheapestMonthlyUsd !== null && (
+                <p data-trial-copy>
+                  {/* One expression, so formatting cannot add a space between the amount and the sentence. */}
+                  {[
+                    pricingFromBefore,
+                    <span
+                      class="font-medium text-slate-300"
+                      data-price-amount={cheapestMonthlyUsd}
+                      data-price-plan={cheapestPlan.stripe_id}
+                      data-price-interval="year-monthly"
+                      set:text={`$${cheapestMonthlyUsd}`}
+                    />,
+                    pricingFromAfter,
+                  ]}{' '}
+                  <a href={pricingUrl} target="_blank" rel="noopener" class="text-slate-300 underline underline-offset-2 hover:text-white">
+                    {m.register_pricing_link({}, { locale: Astro.locals.locale })}
+                  </a>
+                </p>
+              )}
+              <p class="[&_a]:text-slate-300 [&_a]:underline [&_a]:underline-offset-2" set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })} />
+            </div>
           </form>
 
-          <div class="mt-6 flex items-center gap-3 text-xs text-slate-500">
-            <span class="h-px flex-1 bg-white/10"></span>
-            {m.need_help({}, { locale: Astro.locals.locale })}
-            <span class="h-px flex-1 bg-white/10"></span>
+          <div class="mt-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/10 pt-5 text-sm text-slate-400">
+            <p>
+              {m.already_have_account({}, { locale: Astro.locals.locale })}{' '}
+              <a href="https://console.capgo.app/login/" class="font-semibold text-[#44BCFF] underline-offset-4 hover:text-white hover:underline">
+                {m.sign_in({}, { locale: Astro.locals.locale })}
+              </a>
+            </p>
+            <a href="https://support.capgo.app" class="text-slate-400 underline-offset-4 hover:text-white hover:underline">
+              {m.register_contact_support({}, { locale: Astro.locals.locale })}
+            </a>
           </div>
-          <a
-            href="https://support.capgo.app"
-            class="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/10 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/5"
-          >
-            {m.open_support({}, { locale: Astro.locals.locale })}
-          </a>
         </div>
 
-        <div class="text-white">
-          <RatingSummary />
-          <ul class="mt-6 space-y-3">
-            {benefits.map((benefit) => (
-              <li class="flex items-center gap-3 text-base text-slate-200">
-                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#44BCFF]/15 text-[#44BCFF] ring-1 ring-[#44BCFF]/30">
-                  <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+        <div class="text-white lg:pt-4">
+          <h2 class="text-2xl font-bold tracking-tight text-balance text-white sm:text-3xl">{m.register_next_title({}, { locale: Astro.locals.locale })}</h2>
+          <ol class="mt-6 space-y-6">
+            {nextSteps.map((step, index) => (
+              <li class="flex gap-4">
+                <span
+                  class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#44BCFF]/15 text-sm font-bold text-[#44BCFF] ring-1 ring-[#44BCFF]/30"
+                  aria-hidden="true"
+                >
+                  {index + 1}
                 </span>
-                {benefit}
+                <div class="min-w-0">
+                  <h3 class="text-base font-semibold text-white">{step.title}</h3>
+                  <p class="mt-1 text-sm leading-6 text-slate-400">{step.body}</p>
+                  {step.command && (
+                    <code class="mt-2 inline-block max-w-full overflow-x-auto rounded-lg border border-white/10 bg-black/40 px-3 py-1.5 font-mono text-[13px] whitespace-nowrap text-slate-200">
+                      <span class="text-slate-500 select-none" aria-hidden="true">
+                        $&nbsp;
+                      </span>
+                      {step.command}
+                    </code>
+                  )}
+                </div>
               </li>
             ))}
-          </ul>
+          </ol>
 
-          <div class="mt-10" data-review-carousel aria-roledescription="carousel" aria-label="Customer reviews">
-            <div class="grid">
-              {allTestimonials.map((item, index) => (
-                <figure
-                  class:list={['review-slide flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 [grid-area:1/1] sm:p-8', { 'is-active': index === 0 }]}
-                  data-review-slide={index}
-                  aria-roledescription="slide"
-                  aria-label={`${index + 1} / ${allTestimonials.length}`}
-                  aria-hidden={index === 0 ? undefined : 'true'}
-                >
-                  <div class="flex gap-0.5 text-amber-300" role="img" aria-label={`${item.rating} out of 5 stars`}>
-                    {Array.from({ length: item.rating }).map(() => (
-                      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <blockquote class="mt-4 flex-1 text-lg leading-8 text-pretty text-white">&ldquo;{item.quote}&rdquo;</blockquote>
-                  <figcaption class="mt-6 flex items-center gap-3">
-                    {hasRealAvatar(item.avatar) ? (
-                      <img src={item.avatar} alt="" width="44" height="44" loading="lazy" decoding="async" class="h-11 w-11 rounded-full object-cover ring-1 ring-white/15" />
-                    ) : item.logo ? (
-                      <img
-                        src={item.logo}
-                        alt=""
-                        width="44"
-                        height="44"
-                        loading="lazy"
-                        decoding="async"
-                        class="h-11 w-11 rounded-xl bg-white object-contain ring-1 ring-white/15"
-                      />
-                    ) : (
-                      <span
-                        class="flex h-11 w-11 items-center justify-center rounded-full bg-white/[0.06] text-sm font-semibold text-slate-300 ring-1 ring-white/10"
-                        aria-hidden="true"
-                      >
-                        {initialsOf(item.name)}
-                      </span>
-                    )}
-                    <span>
-                      <cite class="block text-sm font-semibold text-white not-italic">{item.name}</cite>
-                      <span class="block text-sm text-slate-400">{item.role}</span>
-                    </span>
-                  </figcaption>
-                </figure>
+          <div class="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
+            <ul class="flex gap-1.5" role="list" aria-label={trustedBy}>
+              {featuredApps.map((app) => (
+                <li>
+                  <img
+                    src={app.icon}
+                    alt={app.name}
+                    title={app.name}
+                    width="32"
+                    height="32"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-8 w-8 rounded-lg object-cover ring-1 ring-white/10"
+                  />
+                </li>
               ))}
-            </div>
-            <div class="mt-4 flex gap-1.5">
-              {allTestimonials.map((item, index) => (
-                <button
-                  type="button"
-                  data-review-dot={index}
-                  aria-label={`Show review from ${item.name}`}
-                  aria-current={index === 0 ? 'true' : undefined}
-                  class="review-dot flex h-6 w-6 items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:outline-none"
-                >
-                  <span class="h-1.5 w-1.5 rounded-full bg-white/25 transition-[width,background-color]" />
-                </button>
-              ))}
-            </div>
+            </ul>
+            <p class="text-sm text-slate-400">{trustedBy}</p>
           </div>
+
+          <figure class="mt-8 border-l-2 border-[#44BCFF]/40 pl-5">
+            <div class="flex gap-0.5 text-amber-300" role="img" aria-label={m.rating_summary_aria({ rating: featuredReview.rating.toFixed(1) }, { locale: Astro.locals.locale })}>
+              {Array.from({ length: featuredReview.rating }).map(() => (
+                <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
+                </svg>
+              ))}
+            </div>
+            <blockquote class="mt-3 text-base leading-7 text-pretty text-slate-200">&ldquo;{featuredReview.quote}&rdquo;</blockquote>
+            <figcaption class="mt-4 flex items-center gap-3">
+              {hasRealAvatar(featuredReview.avatar) ? (
+                <img src={featuredReview.avatar} alt="" width="36" height="36" loading="lazy" decoding="async" class="h-9 w-9 rounded-full object-cover ring-1 ring-white/15" />
+              ) : (
+                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.06] text-xs font-semibold text-slate-300 ring-1 ring-white/10" aria-hidden="true">
+                  {initialsOf(featuredReview.name)}
+                </span>
+              )}
+              <span class="min-w-0">
+                <cite class="block text-sm font-semibold text-white not-italic">{featuredReview.name}</cite>
+                <span class="block text-xs text-slate-400">{featuredReview.role}</span>
+              </span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -342,27 +338,6 @@ const content = {
 </Layout>
 
 <style>
-  .review-slide {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(6px);
-    transition:
-      opacity 0.4s ease,
-      transform 0.4s ease,
-      visibility 0s linear 0.4s;
-  }
-  .review-slide.is-active {
-    opacity: 1;
-    visibility: inherit;
-    transform: none;
-    transition:
-      opacity 0.4s ease,
-      transform 0.4s ease;
-  }
-  .review-dot[aria-current='true'] span {
-    width: 1.25rem;
-    background-color: #44bcff;
-  }
   .password-rule [data-rule-check] {
     display: none;
   }
@@ -375,56 +350,7 @@ const content = {
   .password-rule.is-met [data-rule-dot] {
     display: none;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .review-slide {
-      transition: none;
-    }
-  }
 </style>
-
-<script>
-  // Rotate customer reviews: random start each visit, pause while hovered or focused.
-  document.querySelectorAll<HTMLElement>('[data-review-carousel]').forEach((carousel) => {
-    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-review-slide]'))
-    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-review-dot]'))
-    if (slides.length < 2) return
-    let current = 0
-    let timer = 0
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    const show = (index: number) => {
-      current = (index + slides.length) % slides.length
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('is-active', i === current)
-        if (i === current) slide.removeAttribute('aria-hidden')
-        else slide.setAttribute('aria-hidden', 'true')
-      })
-      dots.forEach((dot, i) => {
-        if (i === current) dot.setAttribute('aria-current', 'true')
-        else dot.removeAttribute('aria-current')
-      })
-    }
-    const stop = () => window.clearInterval(timer)
-    const start = () => {
-      stop()
-      if (!reduceMotion) timer = window.setInterval(() => show(current + 1), 6000)
-    }
-
-    dots.forEach((dot, i) =>
-      dot.addEventListener('click', () => {
-        show(i)
-        start()
-      }),
-    )
-    carousel.addEventListener('pointerenter', stop)
-    carousel.addEventListener('pointerleave', start)
-    carousel.addEventListener('focusin', stop)
-    carousel.addEventListener('focusout', start)
-
-    show(Math.floor(Math.random() * slides.length))
-    start()
-  })
-</script>
 
 <script>
   import '@/scripts/register'
