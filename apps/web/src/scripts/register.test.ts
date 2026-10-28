@@ -169,3 +169,66 @@ test('a failed API request restores signup for retry without reporting success',
   await handler({ preventDefault() {} })
   expect(calls).toBe(2)
 })
+
+function runRegisterWithApiError(error: unknown) {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
+  const toasts: string[] = []
+  const alert = { hidden: true }
+  const values: Record<string, unknown> = {
+    registerForm: {
+      dataset: { networkError: 'Localized network error' },
+      querySelector: () => ({ disabled: false }),
+      addEventListener: (_name: string, callback: typeof handler) => (handler = callback),
+    },
+    email: { value: 'signup@example.com' },
+    password: { value: 'Password123!', setAttribute() {}, removeAttribute() {}, focus() {} },
+    'email-exists-alert': alert,
+  }
+  class RegisterApiError extends Error {
+    constructor(
+      message: string,
+      readonly code = 'unknown',
+    ) {
+      super(message)
+    }
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelector: () => null },
+    registerUser: async () => {
+      throw typeof error === 'function' ? error(RegisterApiError) : error
+    },
+    RegisterApiError,
+    getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
+    formatPasswordRequirementErrors: () => '',
+    getSignupUserMetadataForRegistration: () => ({}),
+    getSignupAttributionForEvents: () => ({}),
+    getRegistrationDevice: () => ({}),
+    Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
+    window: { location: { href: '', search: '' } },
+    navigator: {},
+    URLSearchParams,
+  })
+  return { submit: () => handler({ preventDefault() {} }), toasts, alert }
+}
+
+test('an existing account shows the sign-in and reset links instead of an error toast', async () => {
+  const run = runRegisterWithApiError((ApiError: any) => new ApiError('User already registered', 'email_exists'))
+  await run.submit()
+  expect(run.alert.hidden).toBe(false)
+  expect(run.toasts).toEqual([])
+})
+
+test('a network failure explains what to check instead of a generic error', async () => {
+  const run = runRegisterWithApiError(new TypeError('Failed to fetch'))
+  await run.submit()
+  expect(run.toasts).toEqual(['Localized network error'])
+  expect(run.alert.hidden).toBe(true)
+})
+
+test('an API password rejection shows the server reason', async () => {
+  const run = runRegisterWithApiError((ApiError: any) => new ApiError('This password appeared in a data breach. Choose a different one.', 'weak_password'))
+  await run.submit()
+  expect(run.toasts).toEqual(['This password appeared in a data breach. Choose a different one.'])
+})

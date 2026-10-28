@@ -5,6 +5,8 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import 'toastify-js/src/toastify.css'
 import RatingSummary from '@/components/RatingSummary.astro'
 import { allTestimonials, hasRealAvatar } from '@/config/productTestimonials'
+import { getPlans } from '@/lib/siteData'
+import { planMonthlyPrice } from '@/lib/planCopy'
 
 // Static pages read the CI secret at build time; import.meta.env only exposes .env-file values here.
 const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY || process.env.CLOUDFLARE_TURNSTILE_SITE_KEY
@@ -34,6 +36,12 @@ const initialsOf = (name: string) =>
     .slice(0, 2)
     .map((word) => word[0]?.toUpperCase() ?? '')
     .join('')
+// Visitors leave the form to check the price, so show the cheapest paid plan right under the trial badges.
+const paidPrices = getPlans()
+  .map(planMonthlyPrice)
+  .filter((price) => price > 0)
+const lowestMonthlyPrice = paidPrices.length > 0 ? Math.min(...paidPrices) : null
+const pricingUrl = getRelativeLocaleUrl(Astro.locals.locale, 'pricing')
 const registerCanonical = new URL(getRelativeLocaleUrl(Astro.locals.locale, 'register'), Astro.site ?? Astro.url.origin).toString()
 const content = {
   title,
@@ -43,6 +51,15 @@ const content = {
 }
 ---
 
+{enableCaptcha && <script is:inline>
+  // Defined before api.js loads: Turnstile resolves these callback names when it renders the widget.
+  ;['Success', 'Error', 'Expired', 'Timeout'].forEach(function (kind) {
+    window['capgoTurnstile' + kind] = function (detail) {
+      document.dispatchEvent(new CustomEvent('capgo-turnstile', { detail: { kind: kind.toLowerCase(), code: detail } }))
+      return kind === 'Error'
+    }
+  })
+</script>}
 {enableCaptcha && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 
 <Layout content={content}>
@@ -77,8 +94,21 @@ const content = {
               {m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}
             </span>
           </p>
+          {lowestMonthlyPrice !== null && (
+            <p data-trial-copy class="mt-3 text-xs text-slate-400">
+              {m.register_pricing_from({ price: `$${lowestMonthlyPrice}` }, { locale: Astro.locals.locale })}{' '}
+              <a href={pricingUrl} target="_blank" rel="noopener" class="font-semibold text-slate-300 underline underline-offset-2 hover:text-white">
+                {m.register_pricing_link({}, { locale: Astro.locals.locale })}
+              </a>
+            </p>
+          )}
 
-          <form id="registerForm" class="mt-6 space-y-4" data-captcha-required={m.register_captcha_required({}, { locale: Astro.locals.locale })}>
+          <form
+            id="registerForm"
+            class="mt-6 space-y-4"
+            data-captcha-required={m.register_captcha_required({}, { locale: Astro.locals.locale })}
+            data-network-error={m.register_network_error({}, { locale: Astro.locals.locale })}
+          >
             <div>
               <label for="email" class="block text-sm font-medium text-slate-300">
                 {m.email_label({}, { locale: Astro.locals.locale })}
@@ -153,7 +183,37 @@ const content = {
                 ))}
               </ul>
             </div>
-            {enableCaptcha && <div class="cf-turnstile" data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY} data-size="flexible" data-theme="dark" />}
+            {enableCaptcha && (
+              <div>
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={CLOUDFLARE_TURNSTILE_SITE_KEY}
+                  data-size="flexible"
+                  data-theme="dark"
+                  data-callback="capgoTurnstileSuccess"
+                  data-error-callback="capgoTurnstileError"
+                  data-expired-callback="capgoTurnstileExpired"
+                  data-timeout-callback="capgoTurnstileTimeout"
+                />
+                <p
+                  id="captcha-status"
+                  class="mt-2 hidden text-xs text-amber-300"
+                  aria-live="polite"
+                  data-retrying={m.register_captcha_retrying({}, { locale: Astro.locals.locale })}
+                  data-blocked={m.register_captcha_blocked({}, { locale: Astro.locals.locale })}
+                />
+              </div>
+            )}
+            <div id="email-exists-alert" role="alert" hidden class="rounded-xl border border-amber-400/30 bg-amber-400/10 px-3.5 py-3 text-sm text-amber-100">
+              {m.register_email_exists({}, { locale: Astro.locals.locale })}{' '}
+              <a href="https://console.capgo.app/login/" class="font-semibold text-white underline underline-offset-2">
+                {m.register_email_exists_sign_in({}, { locale: Astro.locals.locale })}
+              </a>
+              {' · '}
+              <a href="https://console.capgo.app/forgot_password/" class="font-semibold text-white underline underline-offset-2">
+                {m.register_email_exists_reset({}, { locale: Astro.locals.locale })}
+              </a>
+            </div>
             <button
               type="submit"
               class="flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-600 px-4 text-[15px] font-semibold text-white shadow-lg shadow-blue-600/20 transition-colors hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-[#44BCFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101216] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"

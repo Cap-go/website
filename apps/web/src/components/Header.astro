@@ -14,6 +14,8 @@ const locale = Astro.locals.locale
 const brandPageUrl = getRelativeLocaleUrl(locale, 'brand/')
 // Enterprise buyers get the sales CTA in the header instead of the self-serve trial.
 const isEnterprisePage = getRelativeLocaleUrl(locale, 'enterprise').replace(/\/$/, '') === Astro.url.pathname.replace(/\/$/, '')
+// The sign-up page is where the CTA leads: a second sign-up button there only pulls people off the form.
+const isRegisterPage = getRelativeLocaleUrl(locale, 'register').replace(/\/$/, '') === Astro.url.pathname.replace(/\/$/, '')
 const navCtaHref = isEnterprisePage ? 'https://book.capgo.app/enterprise-inquiry/' : getRelativeLocaleUrl(locale, 'register')
 // The sales booking page is external; the trial sign-up stays in the same tab so phones keep their back button.
 const navCtaTarget = isEnterprisePage ? '_blank' : undefined
@@ -296,18 +298,20 @@ const mobileLinks = [
         </nav>
       </div>
       <div class="hidden shrink-0 items-center md:flex">
-        <a
-          data-guest-auth-link
-          href={navCtaHref}
-          target={navCtaTarget}
-          rel={navCtaRel}
-          aria-label={isEnterprisePage ? navCtaLabel : undefined}
-          class="font-pj flex h-11 items-center gap-2 rounded-2xl bg-white px-4 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
-          role="button"
-        >
-          {isEnterprisePage && <TeamAvatars loading={false} />}
-          {navCtaDirectLabel ? <OfferText direct={navCtaDirectLabel}>{navCtaLabel}</OfferText> : navCtaLabel}
-        </a>
+        {!isRegisterPage && (
+          <a
+            data-guest-auth-link
+            href={navCtaHref}
+            target={navCtaTarget}
+            rel={navCtaRel}
+            aria-label={isEnterprisePage ? navCtaLabel : undefined}
+            class="font-pj flex h-11 items-center gap-2 rounded-2xl bg-white px-4 text-sm font-semibold whitespace-nowrap text-gray-950 shadow-lg shadow-black/30 transition-colors hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
+            role="button"
+          >
+            {isEnterprisePage && <TeamAvatars loading={false} />}
+            {navCtaDirectLabel ? <OfferText direct={navCtaDirectLabel}>{navCtaLabel}</OfferText> : navCtaLabel}
+          </a>
+        )}
         <a
           data-console-auth-link
           hidden
@@ -439,20 +443,25 @@ const mobileLinks = [
             href="https://console.capgo.app/login/"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex min-h-12 items-center justify-center rounded-xl border border-white/10 text-[15px] font-semibold text-white transition-colors hover:bg-white/5"
+            class:list={[
+              'flex min-h-12 items-center justify-center rounded-xl border border-white/10 text-[15px] font-semibold text-white transition-colors hover:bg-white/5',
+              { 'col-span-2': isRegisterPage },
+            ]}
           >
             {m.login({}, { locale: Astro.locals.locale })}
           </a>
-          <a
-            data-guest-auth-link
-            href={navCtaHref}
-            target={navCtaTarget}
-            rel={navCtaRel}
-            class="font-pj flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200"
-          >
-            {isEnterprisePage && <TeamAvatars loading={false} />}
-            {navCtaDirectLabel ? <OfferText direct={navCtaDirectLabel}>{navCtaLabel}</OfferText> : navCtaLabel}
-          </a>
+          {!isRegisterPage && (
+            <a
+              data-guest-auth-link
+              href={navCtaHref}
+              target={navCtaTarget}
+              rel={navCtaRel}
+              class="font-pj flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200"
+            >
+              {isEnterprisePage && <TeamAvatars loading={false} />}
+              {navCtaDirectLabel ? <OfferText direct={navCtaDirectLabel}>{navCtaLabel}</OfferText> : navCtaLabel}
+            </a>
+          )}
           <a
             data-console-auth-link
             hidden
