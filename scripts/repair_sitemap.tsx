@@ -2,6 +2,7 @@ import { XMLParser } from 'fast-xml-parser'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { SitemapStream, streamToPromise } from 'sitemap'
+import { isGonePath } from '../apps/shared/gonePaths.ts'
 import { defaultLocale, locales } from '../apps/web/src/services/locale'
 
 interface SitemapUrl {
@@ -51,7 +52,12 @@ function isAllowedSitemapUrl(item: SitemapUrl): boolean {
   const url = new URL(item.loc)
   const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`
   const basePath = stripLocalePath(pathname)
-  return !EXCLUDED_SITEMAP_PATHS.has(basePath) && !REDIRECTED_SITEMAP_PATHS.has(basePath)
+  return (
+    !EXCLUDED_SITEMAP_PATHS.has(basePath) &&
+    !REDIRECTED_SITEMAP_PATHS.has(basePath) &&
+    !isGonePath(pathname) &&
+    !isGonePath(basePath)
+  )
 }
 
 function expandLocalizedUrls(urls: SitemapUrl[]): SitemapUrl[] {

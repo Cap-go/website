@@ -21,6 +21,14 @@ const GONE_PATHS = [
   '/blog/what-is-a-micro-frontend/',
 ]
 
+const RETIRED_BLOG_SLUGS = [
+  '/blog/how-to-manage-technical-debt/',
+  '/blog/knowledge-sharing-in-teams/',
+  '/blog/minimum-viable-product-example/',
+]
+
+const SUPPORTED_NON_EN_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh']
+
 for (const gone of GONE_PATHS) {
   test(`isGonePath matches English blog URL ${gone}`, () => {
     expect(isGonePath(gone)).toBe(true)
@@ -33,6 +41,15 @@ for (const gone of GONE_PATHS) {
     }
   })
 }
+
+test('isGonePath matches all locale prefixes for the three retired blog posts', () => {
+  for (const slug of RETIRED_BLOG_SLUGS) {
+    for (const locale of SUPPORTED_NON_EN_LOCALES) {
+      expect(isGonePath(`/${locale}${slug}`)).toBe(true)
+      expect(isGonePath(`/${locale}${slug.replace(/\/$/, '')}`)).toBe(true)
+    }
+  }
+})
 
 test('isGonePath does not match retired app-risk-assessment (301 redirect)', () => {
   expect(isGonePath('/blog/app-risk-assessment/')).toBe(false)

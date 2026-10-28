@@ -1,6 +1,7 @@
 import worker, { __translationWorkerTest, TranslationCoordinator } from '../src/index'
 import messages from '../../shared/copy/messages'
 import { messageContextOverrides } from '../../shared/copy/messageContextOverrides'
+import { isGonePath } from '../../shared/gonePaths.ts'
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message)
@@ -194,6 +195,8 @@ assert(__translationWorkerTest.isSpeedBrainRulesPath('/fr/speculation-rules.json
 assert(__translationWorkerTest.isSpeedBrainRulesPath('/de/speculation-rules.json'), 'German speculation rules path was not recognized')
 assert(!__translationWorkerTest.isSpeedBrainRulesPath('/speculation-rules.json'), 'An unlocalized speculation rules path was treated as a worker route')
 assert(!__translationWorkerTest.isSpeedBrainRulesPath('/fr/pricing/'), 'A translated page was treated as the speculation rules file')
+assert(isGonePath('/de/blog/minimum-viable-product-example/'), 'Localized retired blog URL was not marked gone')
+assert(!isGonePath('/de/blog/capacitor-comprehensive-guide/'), 'Active localized blog URL was marked gone')
 
 const speedBrainRules = await worker.fetch(new Request('https://capgo.app/fr/speculation-rules.json'), {} as any)
 assert(speedBrainRules.status === 200, 'Speculation rules route did not return 200')

@@ -3165,6 +3165,61 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
   return rewritten
 }
 
+async function purgeTranslatedPageCache(env: Env, requestUrl: URL, locale: Locale): Promise<void> {
+  const cacheKey = cacheKeyFor(requestUrl, locale)
+  try {
+    await caches.default.delete(cacheKey)
+    await caches.default.delete(pendingKeyFor(requestUrl, locale))
+    await caches.default.delete(sourceCheckKeyFor(requestUrl, locale))
+    await caches.default.delete(englishSourceHtmlKeyFor(requestUrl))
+  } catch (error) {
+    console.error('Failed to purge translated page edge cache', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+  }
+
+  try {
+    const key = await translationStoreKey('pages', requestUrl, locale)
+    await env.TRANSLATION_STORE.delete(key)
+    await deletePartialTranslationStateSafely(env, requestUrl, locale)
+  } catch (error) {
+    console.error('Failed to purge translated page from R2', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+  }
+}
+
+async function serveGonePathResponse(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+  locale: Locale,
+  ctx: WorkerExecutionContext | undefined,
+  isHead: boolean,
+): Promise<Response> {
+  scheduleTranslationBackgroundTask(ctx, purgeTranslatedPageCache(env, requestUrl, locale))
+
+  const shellUrl = new URL(requestUrl)
+  shellUrl.pathname = '/410/index.html'
+  const originResponse = await env.WEB.fetch(createOriginRequest(request, shellUrl))
+  if (isRedirect(originResponse)) {
+    return withResponseHeaders(localizeRedirect(originResponse, requestUrl, locale), 'BYPASS', locale, isHead)
+  }
+
+  if (isHtmlResponse(originResponse) && (originResponse.status === 404 || originResponse.status === 410)) {
+    const sourceHtml = await originResponse.text()
+    const response = createTranslatedHtmlResponse(
+      new Response(sourceHtml, {
+        status: 410,
+        statusText: 'Gone',
+        headers: originResponse.headers,
+      }),
+      sourceHtml,
+      requestUrl,
+      locale,
+    )
+    return withResponseHeaders(response, 'BYPASS', locale, isHead)
+  }
+
+  return withResponseHeaders(new Response(isHead ? null : 'Gone', { status: 410, statusText: 'Gone' }), 'BYPASS', locale, isHead)
+}
+
 async function loadSourceHtml(request: Request, env: Env, requestUrl: URL, locale: Locale): Promise<SourceHtmlResult> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
   if (isRedirect(originResponse)) return { type: 'response', response: localizeRedirect(originResponse, requestUrl, locale) }
@@ -4040,10 +4095,11 @@ export default {
     }
 
     if (isGonePath(requestUrl.pathname)) {
-      const source = await loadSourceHtml(request, env, requestUrl, locale)
-      if (source.type === 'response') {
-        return trackAICrawler(request, withResponseHeaders(source.response, 'BYPASS', locale, request.method === 'HEAD'), ctx)
-      }
+      return trackAICrawler(
+        request,
+        await serveGonePathResponse(request, env, requestUrl, locale, ctx, request.method === 'HEAD'),
+        ctx,
+      )
     }
 
     const englishPath = stripLocalePrefix(requestUrl.pathname)
