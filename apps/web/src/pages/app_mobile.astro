@@ -149,13 +149,20 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
               const demo = document.getElementById('capgo-mobile-preview-demo') as HTMLVideoElement | null
               const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
               if (demo) {
+                let onScreen = false
+                // Re-evaluated when the phone scrolls in or out and when the reduced-motion preference changes.
+                const sync = () => {
+                  if (onScreen && !reduceMotion.matches) demo.play().catch(() => {})
+                  else demo.pause()
+                }
                 new IntersectionObserver(
                   ([entry]) => {
-                    if (entry.isIntersecting && !reduceMotion.matches) demo.play().catch(() => {})
-                    else demo.pause()
+                    onScreen = entry.isIntersecting
+                    sync()
                   },
                   { threshold: 0.35 },
                 ).observe(demo)
+                reduceMotion.addEventListener('change', sync)
               }
             </script>
           </div>
