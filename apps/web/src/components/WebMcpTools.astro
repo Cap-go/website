@@ -7,10 +7,15 @@
   else
     addEventListener(
       'load',
-      () =>
-        setTimeout(() => {
+      () => {
+        // Extensions can inject the context after load: poll once a second for 10s, stopping as soon as it appears.
+        let checks = 0
+        const timer = setInterval(() => {
           if (hasModelContext()) void load()
-        }, 1000),
+          else if (++checks < 10) return
+          clearInterval(timer)
+        }, 1000)
+      },
       { once: true },
     )
 </script>
