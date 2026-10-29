@@ -12,7 +12,7 @@ const highlights = [
 ]
 ---
 
-<div class="flex min-w-0 flex-col bg-white p-6 lg:min-h-[580px] lg:p-7 xl:p-6" data-plan="Pay as you go">
+<div class="flex min-w-0 flex-col bg-white p-6 sm:row-span-3 sm:grid sm:grid-rows-subgrid lg:min-h-[580px] lg:p-7 xl:p-6" data-plan="Pay as you go">
   <div class="min-h-24">
     <h3 class="text-2xl font-semibold tracking-tight text-balance text-gray-950">{m.pricing_pay_as_you_go({}, { locale })}</h3>
     <p class="mt-3 text-base/6 text-pretty text-gray-600 sm:text-sm/6">{m.pricing_prepaid_description({}, { locale })}</p>
@@ -28,30 +28,32 @@ const highlights = [
     <p class="mt-2 min-h-10 text-base/5 font-medium text-pretty text-gray-600 sm:text-sm/5">{m.pricing_prepaid_annual_example({}, { locale })}</p>
   </div>
 
-  <a
-    href={getRelativeLocaleUrl(locale, 'register')}
-    class="mt-6 inline-flex min-h-17 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-  >
-    {m.pricing_prepaid_cta({}, { locale })}
-  </a>
+  <div class="flex min-w-0 flex-col">
+    <a
+      href={getRelativeLocaleUrl(locale, 'register')}
+      class="mt-6 inline-flex min-h-17 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+    >
+      {m.pricing_prepaid_cta({}, { locale })}
+    </a>
 
-  <div class="mt-10 lg:mt-12">
-    <p class="text-sm font-semibold text-gray-500">{m.pricing_prepaid_how_it_works({}, { locale })}</p>
-    <ul class="mt-5 space-y-4 text-base/6 text-gray-700 sm:text-sm/6">
-      {highlights.map((highlight) => (
-        <li class="flex items-start gap-3">
-          <Icon name="check" class="size-4 h-lh shrink-0 fill-gray-500" aria-hidden="true" />
-          <span class="min-w-0">{highlight}</span>
-        </li>
-      ))}
-    </ul>
+    <div class="mt-10 lg:mt-12">
+      <p class="text-sm font-semibold text-gray-500">{m.pricing_prepaid_how_it_works({}, { locale })}</p>
+      <ul class="mt-5 space-y-4 text-base/6 text-gray-700 sm:text-sm/6">
+        {highlights.map((highlight) => (
+          <li class="flex items-start gap-3">
+            <Icon name="check" class="size-4 h-lh shrink-0 fill-gray-500" aria-hidden="true" />
+            <span class="min-w-0">{highlight}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <a
+      href="#credit-pricing"
+      class="mt-auto inline-flex min-h-11 items-center gap-2 pt-10 text-sm font-semibold text-gray-600 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+    >
+      {m.pricing_prepaid_see_rates({}, { locale })}
+      <span aria-hidden="true">→</span>
+    </a>
   </div>
-
-  <a
-    href="#credit-pricing"
-    class="mt-auto inline-flex min-h-11 items-center gap-2 pt-10 text-sm font-semibold text-gray-600 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-  >
-    {m.pricing_prepaid_see_rates({}, { locale })}
-    <span aria-hidden="true">→</span>
-  </a>
 </div>
