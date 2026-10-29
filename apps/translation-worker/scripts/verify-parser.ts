@@ -1,5 +1,6 @@
 import worker, { __translationWorkerTest, TranslationCoordinator } from '../src/index'
 import messages from '../../shared/copy/messages'
+import { messageContextOverrides } from '../../shared/copy/messageContextOverrides'
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message)
@@ -376,6 +377,10 @@ assert(pricingSegments.includes(pricingReassurance), 'Parser split the complete 
 assert(!pricingSegments.some((text) => text.includes('$5')), 'Parser should leave the currency amount for the currency renderer')
 const pricingContexts = __translationWorkerTest.resolveTranslationContexts([pricingIntroduction, pricingReassurance])
 assert(pricingContexts.every((context) => typeof context === 'string' && context.length > 0), 'Pricing sentences must each match their translator context')
+for (const [messageKey, expectedContext] of Object.entries(messageContextOverrides)) {
+  const [actualContext] = __translationWorkerTest.resolveTranslationContexts([messages[messageKey]()])
+  assert(actualContext?.includes(expectedContext), `Runtime translation lookup is missing the manual context for ${messageKey}`)
+}
 const pricingTranslated = __translationWorkerTest.renderTranslatedHtml(pricingParsed.parts, pricingParsed.segments, pricingParsed.segments.map((segment) => `FR: ${segment.text}`))
 assert(pricingTranslated.includes(`FR: ${pricingIntroduction}`), 'Renderer dropped the complete translated annual-budget introduction')
 assert(pricingTranslated.includes('translate="no">$5</strong>'), 'Renderer changed the independently formatted credit amount')
