@@ -1,6 +1,7 @@
 {
   "account-required-for-device-paid-feature-5-1-1": null,
   "ai-consent-in-terms-not-enough-5-1-1-5-1-2": null,
+  "ai-couple-photos-1-1-twice-then-termination-notice": null,
   "ai-data-sharing-no-consent": {
     "src": "/app-store-refusal-horror-story/screenshots/ai-data-sharing-no-consent.webp",
     "alt": "Rejection message asking the app to disclose and get consent before sending personal data to a third party AI service",
@@ -8,6 +9,7 @@
     "height": 1200
   },
   "byok-cloud-models-3-1-1": null,
+  "calendar-client-iphone-2-3-7-5-2-5-4-8-after-mac": null,
   "att-rejection-startup-risk-5-1-2": {
     "src": "/app-store-refusal-horror-story/screenshots/att-rejection-startup-risk-5-1-2.webp",
     "alt": "Blurred post from a founder describing a tracking transparency rejection",
@@ -36,6 +38,7 @@
     "height": 320
   },
   "family-controls-checkbox-five-rejections": null,
+  "first-version-3-1-2-c-then-siri-text-rejected-in-42-seconds": null,
   "fake-documents-pdf-editor": {
     "src": "/app-store-refusal-horror-story/screenshots/fake-documents-pdf-editor.webp",
     "alt": "Rejection text saying the app could be used to create fake official documents",
@@ -206,6 +209,12 @@
     "height": 427
   },
   "limited-review-history-video-walkthrough-2-1": null,
+  "library-update-eight-rejections-then-termination-notice": {
+    "src": "/app-store-refusal-horror-story/screenshots/library-update-eight-rejections-then-termination-notice.webp",
+    "alt": "Apple message titled Pending Termination Notice, citing repeated guideline violations in an attempt to evade the review process",
+    "width": 1170,
+    "height": 516
+  },
   "title-update-then-3-2-f-termination-notice": null,
   "three-guidelines-one-month-2-1-2-3-2-5-2-3": null,
   "prayer-app-primarily-a-book-4-2": null,
