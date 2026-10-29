@@ -5,8 +5,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import 'toastify-js/src/toastify.css'
 import { capgoReviews, hasRealAvatar } from '@/config/productTestimonials'
 import { customerApps } from '@/config/customerApps'
-import { getPlans } from '@/lib/siteData'
-import { planYearlyPrice } from '@/lib/planCopy'
+import PayAsYouGoCopy from '@/components/pricing/PayAsYouGoCopy.astro'
 
 // Static pages read the CI secret at build time; import.meta.env only exposes .env-file values here.
 const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY || process.env.CLOUDFLARE_TURNSTILE_SITE_KEY
@@ -51,16 +50,6 @@ const initialsOf = (name: string) =>
     .slice(0, 2)
     .map((word) => word[0]?.toUpperCase() ?? '')
     .join('')
-// Visitors left the form to check the price, so the cheapest paid plan sits in the small print under the button.
-// Same figure as the pricing page default (yearly billing, per month). The HTML keeps the USD price;
-// src/scripts/currency.ts swaps in the Stripe price sold to the visitor's country, regional discount included.
-const cheapestPlan = getPlans()
-  .filter((plan) => plan.name !== 'Free' && planYearlyPrice(plan) > 0)
-  .sort((a, b) => planYearlyPrice(a) - planYearlyPrice(b))[0]
-const cheapestMonthlyUsd = cheapestPlan ? Math.round(planYearlyPrice(cheapestPlan) / 12) : null
-// Split the sentence around {price} so the amount can be its own live-price element in any translation.
-const PRICE_SLOT = '\u0000'
-const [pricingFromBefore, pricingFromAfter = ''] = m.register_pricing_from({ price: PRICE_SLOT }, { locale: Astro.locals.locale }).split(PRICE_SLOT)
 const pricingUrl = getRelativeLocaleUrl(Astro.locals.locale, 'pricing')
 const registerCanonical = new URL(getRelativeLocaleUrl(Astro.locals.locale, 'register'), Astro.site ?? Astro.url.origin).toString()
 const content = {
@@ -225,25 +214,12 @@ const content = {
               {m.sign_up_button({}, { locale: Astro.locals.locale })}
             </button>
             <div class="space-y-1 text-center text-xs leading-5 text-slate-500">
-              {cheapestPlan && cheapestMonthlyUsd !== null && (
-                <p data-trial-copy>
-                  {/* One expression, so formatting cannot add a space between the amount and the sentence. */}
-                  {[
-                    pricingFromBefore,
-                    <span
-                      class="font-medium text-slate-300"
-                      data-price-amount={cheapestMonthlyUsd}
-                      data-price-plan={cheapestPlan.stripe_id}
-                      data-price-interval="year-monthly"
-                      set:text={`$${cheapestMonthlyUsd}`}
-                    />,
-                    pricingFromAfter,
-                  ]}{' '}
-                  <a href={pricingUrl} target="_blank" rel="noopener" class="text-slate-300 underline underline-offset-2 hover:text-white">
-                    {m.register_pricing_link({}, { locale: Astro.locals.locale })}
-                  </a>
-                </p>
-              )}
+              <p class="text-sm leading-6 text-slate-400">
+                <PayAsYouGoCopy />{' '}
+                <a href={pricingUrl} target="_blank" rel="noopener" class="text-slate-300 underline underline-offset-2 hover:text-white">
+                  {m.register_pricing_link({}, { locale: Astro.locals.locale })}
+                </a>
+              </p>
               <p class="[&_a]:text-slate-300 [&_a]:underline [&_a]:underline-offset-2" set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })} />
             </div>
           </form>

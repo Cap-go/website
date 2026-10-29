@@ -7,6 +7,7 @@ import TeamAvatars from '@/components/TeamAvatars.astro'
 import { planDescriptionToText } from '@/lib/planCopy'
 import { ENTERPRISE_MAU_STOPS, formatMau, type CreditStep } from '@/lib/enterpriseScale'
 import { DISCOUNT_TIERS, tierDiscountPercent } from '@/lib/currency'
+import PayAsYouGoPlan from './PayAsYouGoPlan.astro'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -74,12 +75,14 @@ function buildTimeDisplay(buildTimeSeconds: number) {
   <h2 id="plans-heading" class="sr-only">
     {m.pricing_plans_heading({}, { locale: Astro.locals.locale })}
   </h2>
-  <div class="grid grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm sm:grid-cols-2 lg:grid-cols-4">
+  <div class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 shadow-sm sm:grid-cols-2 xl:grid-cols-5">
+    <PayAsYouGoPlan />
     {pricing.map((plan) => (
       <div
         class:list={[
-          'relative flex flex-col border-b border-gray-200 bg-white p-6 sm:border-r lg:min-h-[580px] lg:border-b-0 lg:p-7',
-          plan.name === 'Maker' ? 'bg-blue-50/40' : '',
+          'relative flex min-w-0 flex-col p-6 lg:min-h-[580px] lg:p-7 xl:p-6',
+          plan.name === 'Maker' ? 'bg-blue-50' : 'bg-white',
+          plan.name === 'Enterprise' ? 'sm:col-span-2 xl:col-span-1' : '',
         ]}
         data-plan={plan.name}
         data-enterprise-scale={plan.name === 'Enterprise' && enterpriseScale ? '' : undefined}
@@ -97,7 +100,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         <div class="mt-6 lg:mt-8">
           <div class="flex items-end gap-1">
             <p
-              class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl"
+              class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl xl:text-4xl"
               data-price
               data-price-toggle
               data-price-amount={priceAmount(plan.price_m, plan.price_y)}
@@ -106,7 +109,8 @@ function buildTimeDisplay(buildTimeSeconds: number) {
               data-price-suffix={priceSuffix(plan.name)}
               aria-live="polite"
             >
-              ${priceAmount(plan.price_m, plan.price_y)}{priceSuffix(plan.name)}
+              ${priceAmount(plan.price_m, plan.price_y)}
+              {priceSuffix(plan.name)}
             </p>
             <p class="pb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">/{m.month({}, { locale: Astro.locals.locale })}</p>
           </div>
@@ -134,10 +138,13 @@ function buildTimeDisplay(buildTimeSeconds: number) {
               <p class="text-xs leading-5 text-gray-600">{m.pricing_regional_discount_note({}, { locale: Astro.locals.locale })}</p>
             </div>
           )}
-          <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-yearly-price style={yearly ? '' : 'display: none'}>
-            {m.billed_annually_at({}, { locale: Astro.locals.locale })} <span data-price-amount={plan.price_y} data-price-plan={plan.stripe_id} data-price-interval="year">${numberWithSpaces(plan.price_y)}</span>
+          <p class="mt-2 min-h-10 text-xs font-medium text-gray-500" data-yearly-price style={yearly ? '' : 'display: none'}>
+            {m.billed_annually_at({}, { locale: Astro.locals.locale })}{' '}
+            <span data-price-amount={plan.price_y} data-price-plan={plan.stripe_id} data-price-interval="year">
+              ${numberWithSpaces(plan.price_y)}
+            </span>
           </p>
-          <p class="mt-2 min-h-5 text-xs font-medium text-gray-500" data-monthly-price style={yearly ? 'display: none' : ''}>
+          <p class="mt-2 min-h-10 text-xs font-medium text-gray-500" data-monthly-price style={yearly ? 'display: none' : ''}>
             {m.billed_monthly({}, { locale: Astro.locals.locale })}
           </p>
         </div>
@@ -146,7 +153,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             data-plan-cta
-            class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            class="inline-flex min-h-17 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             role="button"
           >
             <!-- Accessible name stays "Start {plan} free trial" for normal visitors; direct-offer (paid ads) visitors get "Get started". -->
@@ -165,10 +172,12 @@ function buildTimeDisplay(buildTimeSeconds: number) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Talk to our team"
-              class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold whitespace-nowrap text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              class="inline-flex min-h-11 w-full flex-wrap items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               role="button"
             >
-              <TeamAvatars />
+              <span class="shrink-0 xl:hidden">
+                <TeamAvatars />
+              </span>
               <span>Talk to our team</span>
             </a>
           )}
@@ -273,7 +282,9 @@ function buildTimeDisplay(buildTimeSeconds: number) {
   </div>
   <p class="mt-3 text-center text-xs text-gray-400" data-currency-note hidden>
     {m.pricing_currency_estimate_note({}, { locale: Astro.locals.locale })}
-    <a href="#currency" class="font-semibold text-blue-400 underline-offset-2 hover:underline">{m.pricing_currency_change({}, { locale: Astro.locals.locale })}</a>
+    <a href="#currency" class="font-semibold text-blue-400 underline-offset-2 hover:underline">
+      {m.pricing_currency_change({}, { locale: Astro.locals.locale })}
+    </a>
   </p>
 </section>
 
