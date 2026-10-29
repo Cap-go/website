@@ -75,6 +75,8 @@ jobs:
         run: bun run fetch:build-data
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Check annual pay-as-you-go example
+        run: bun test apps/web/test/pricing-pay-as-you-go.test.js
       # Fetch timestamps change on every run; skip files where nothing else changed.
       - name: Drop timestamp-only changes
         run: |
