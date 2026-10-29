@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-29T07:14:52.829Z
-updated_at: 2026-10-29T07:14:55.172Z
+updated_at: 2026-10-29T07:17:48.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/77db9c1b-afd1-4700-a227-95b6e38b7890/mobile-app-development-for-healthcare-medical-app.jpg'
 head_image_alt: Mobile App Development for Healthcare in 2026
 keywords: 'mobile app development for healthcare, HIPAA compliance, mHealth security, FHIR integration, healthcare apps'
