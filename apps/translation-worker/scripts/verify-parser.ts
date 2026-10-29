@@ -983,6 +983,7 @@ try {
   assert(fetchesBeforeJsonHit === blogOriginFetches, 'A cached JSON HIT fetched the English origin')
   await new Promise((resolve) => setTimeout(resolve, 25))
 
+  // Gone-path regression: edge cache plus serialized R2, then R2-only stale translation.
   const goneBlogUrl = new URL('https://capgo.app/fr/blog/minimum-viable-product-example/')
   const goneBlogCacheKey = __translationWorkerTest.cacheKeyFor(goneBlogUrl, 'fr')
   const cachedGoneBlogHtml = `<!doctype html><html lang="fr"><head><title>Produit minimum viable</title></head><body><p>Contenu retire encore en cache</p></body></html>`
