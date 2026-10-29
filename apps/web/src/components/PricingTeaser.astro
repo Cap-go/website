@@ -1,8 +1,7 @@
 ---
 import m from '@/copy/messages'
 import SignupCta from '@/components/SignupCta.astro'
-import OfferText from '@/components/OfferText.astro'
-import PayAsYouGoOffer from '@/components/pricing/PayAsYouGoOffer.astro'
+import PayAsYouGoCopy from '@/components/pricing/PayAsYouGoCopy.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { getPlans } from '@/lib/siteData'
 import { planDescriptionToText, planYearlyPrice } from '@/lib/planCopy'
@@ -43,12 +42,8 @@ const plans = getPlans()
           {m.pricing_teaser_title({}, { locale })}
         </h2>
         <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">
-          <OfferText direct={m.plans_that_scale_with_your_business_direct({}, { locale })}>{m.plans_that_scale_with_your_business({}, { locale })}</OfferText>
+          <PayAsYouGoCopy />
         </p>
-      </div>
-
-      <div class="mx-auto mt-8 max-w-3xl">
-        <PayAsYouGoOffer />
       </div>
 
       <ul class="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4" role="list">

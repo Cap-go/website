@@ -5,10 +5,8 @@
 import type { MessageKey } from './messages'
 
 export const messageContextOverrides = {
-  pricing_prepaid_headline:
-    'Pay-as-you-go offer on the homepage, pricing page, and registration page. Keep {price} unchanged. This is a low-usage annual cost example, not a fixed-price annual plan or unlimited usage promise.',
-  pricing_prepaid_details:
-    'Clarify that prepaid credits work without a subscription, expire after 12 months, and may last a year only with low usage. Higher usage requires a top-up; never imply unlimited access for the headline price.',
+  pricing_prepaid_summary:
+    'Inline pricing introduction on the homepage and pricing page, and reassurance below the registration button. Keep {price} unchanged. The balance can cover a year only for light usage; it is not a fixed annual plan, unlimited usage, or a monthly fee. No subscription is required.',
   // Example:
   // updates: 'Pricing calculator metric label for monthly OTA update volume, not a nav item.',
   live_update_hero_headline:

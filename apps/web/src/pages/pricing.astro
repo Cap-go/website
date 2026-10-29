@@ -4,7 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import PricingCalculator from '@/components/pricing/PricingCalculator.astro'
 import ComparePlans from '@/components/pricing/ComparePlans.astro'
 import CreditPricing from '@/components/pricing/CreditPricing.astro'
-import PayAsYouGoOffer from '@/components/pricing/PayAsYouGoOffer.astro'
+import PayAsYouGoCopy from '@/components/pricing/PayAsYouGoCopy.astro'
 import Faq from '@/components/pricing/Faq.astro'
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from '@/services/links'
 import Plans from '@/components/pricing/Plans.astro'
@@ -95,13 +95,9 @@ if (plans.length > 0) {
               {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
             </OfferText>
           </h1>
-          <p class="font-pj mx-auto mt-4 max-w-2xl text-base leading-7 font-normal text-gray-400 sm:text-lg">
-            Live Updates, Native Builds, Notifications, Observe, App Store Publishing, plugins, and Automations in one platform.
+          <p class="font-pj mx-auto mt-4 max-w-2xl text-base leading-7 font-normal text-gray-300 sm:text-lg">
+            <PayAsYouGoCopy />
           </p>
-        </div>
-
-        <div class="mx-auto mb-8 max-w-3xl">
-          <PayAsYouGoOffer />
         </div>
 
         <div class="mx-auto mb-5 flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:justify-between">
