@@ -1428,7 +1428,7 @@ const messages = {
   pricing_explainer_trial: '14-day trial, no credit card',
   pricing_explainer_trial_direct: '14-day money-back guarantee',
   pricing_pay_as_you_go: 'Pay as you go',
-  pricing_prepaid_summary: 'Pay as you go. {price} can cover a year of light usage—no subscription required.',
+  pricing_prepaid_summary: 'Pay as you go. {price} can cover a year of light usage. No subscription required.',
   pricing_credits_cover_usage:
     'Buy prepaid credits without a subscription. Credits are valid for 12 months; your cost depends on usage. Top up when needed, or use credits on top of a plan when you exceed included limits.',
   pricing_calculator_best_fit: 'Best fit',
