@@ -48,6 +48,7 @@ Appy = "Appy"  # Appy Pie (brand name)
 
 # Acronyms and technical terms
 ASO = "ASO"  # App Store Optimization
+EHR = "EHR"
 ITMS = "ITMS"  # iTunes Music Store
 SME = "SME"  # Small and midsize enterprise
 Hashi = "Hashi"  # HashiCorp (brand name)
