@@ -999,7 +999,20 @@ try {
     }),
   )
   const goneStoreKey = await __translationWorkerTest.translationStoreKey('pages', goneBlogUrl, 'fr')
-  storedTranslations.set(goneStoreKey, cachedGoneBlogHtml)
+  storedTranslations.set(
+    goneStoreKey,
+    JSON.stringify({
+      cacheVersion: __translationWorkerTest.TRANSLATION_CACHE_VERSION,
+      locale: 'fr',
+      sourceHash: 'g'.repeat(64),
+      translatedAt: Date.now() - 10 * 60 * 1000,
+      status: 200,
+      statusText: 'OK',
+      headers: [['content-type', 'text/html; charset=utf-8']],
+      bodyEncoding: 'text',
+      body: cachedGoneBlogHtml,
+    }),
+  )
   const goneEnv = {
     ...env,
     WEB: {
@@ -1027,6 +1040,37 @@ try {
   await Promise.all(goneBackgroundTasks)
   assert(!cacheEntries.has(goneBlogCacheKey.url), 'Gone path cleanup did not purge the edge translation cache')
   assert(!storedTranslations.has(goneStoreKey), 'Gone path cleanup did not purge the R2 translation store')
+
+  const goneR2OnlyUrl = new URL('https://capgo.app/de/blog/app-user-retention/')
+  const goneR2OnlyStoreKey = await __translationWorkerTest.translationStoreKey('pages', goneR2OnlyUrl, 'de')
+  const staleR2OnlyBody = '<!doctype html><html lang="de"><head><title>Alte Retention Uebersetzung</title></head><body><p>Veraltete R2 Uebersetzung</p></body></html>'
+  storedTranslations.set(
+    goneR2OnlyStoreKey,
+    JSON.stringify({
+      cacheVersion: __translationWorkerTest.TRANSLATION_CACHE_VERSION,
+      locale: 'de',
+      sourceHash: 'h'.repeat(64),
+      translatedAt: Date.now() - 10 * 60 * 1000,
+      status: 200,
+      statusText: 'OK',
+      headers: [['content-type', 'text/html; charset=utf-8']],
+      bodyEncoding: 'text',
+      body: staleR2OnlyBody,
+    }),
+  )
+  const goneR2OnlyBackgroundTasks: Promise<unknown>[] = []
+  const goneR2OnlyCtx = {
+    waitUntil: (task: Promise<unknown>) => {
+      goneR2OnlyBackgroundTasks.push(task)
+    },
+  }
+  const goneR2OnlyResponse = await worker.fetch(new Request(goneR2OnlyUrl), goneEnv as any, goneR2OnlyCtx as any)
+  const goneR2OnlyBody = await goneR2OnlyResponse.text()
+  assert(goneR2OnlyResponse.status === 410, 'A localized gone URL with R2-only cache did not return 410')
+  assert(goneR2OnlyBody.includes('This page was removed'), 'A localized gone URL with R2-only cache did not serve the branded gone shell')
+  assert(!goneR2OnlyBody.includes('Veraltete R2 Uebersetzung'), 'A localized gone URL served a valid R2 translation instead of the gone shell')
+  await Promise.all(goneR2OnlyBackgroundTasks)
+  assert(!storedTranslations.has(goneR2OnlyStoreKey), 'Gone path cleanup did not purge the R2-only translation store')
 
   const originalConsoleError = console.error
   let enqueueFailureResponse: Response | null = null
