@@ -1,7 +1,6 @@
 ---
 import m from '@/copy/messages'
 import SignupCta from '@/components/SignupCta.astro'
-import PayAsYouGoCopy from '@/components/pricing/PayAsYouGoCopy.astro'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { getPlans } from '@/lib/siteData'
 import { planDescriptionToText, planYearlyPrice } from '@/lib/planCopy'
@@ -41,23 +40,46 @@ const plans = getPlans()
         <h2 id={titleId} class="mt-2 text-3xl font-bold tracking-tight text-balance text-white sm:text-5xl">
           {m.pricing_teaser_title({}, { locale })}
         </h2>
-        <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">
-          <PayAsYouGoCopy />
-        </p>
+        <p class="mt-6 text-lg leading-8 text-pretty text-gray-300">{m.pricing_payment_options({}, { locale })}</p>
       </div>
 
-      <ul class="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4" role="list">
+      <ul class="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 xl:grid-cols-5" role="list">
+        <li class="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/3 p-6" data-plan="Pay as you go">
+          <div class="flex min-h-10 items-center">
+            <h3 class="text-base font-semibold text-white">{m.pricing_pay_as_you_go({}, { locale })}</h3>
+          </div>
+          <p class="mt-4 flex flex-wrap items-baseline gap-x-1 xl:min-h-16 xl:content-start">
+            <strong
+              class="text-4xl font-semibold tracking-tight whitespace-nowrap text-white tabular-nums xl:text-3xl"
+              data-price-amount="5"
+              data-price-format="currency"
+              translate="no"
+            >
+              $5
+            </strong>
+            <span class="text-sm text-gray-400">{m.pricing_prepaid_price_unit({}, { locale })}</span>
+          </p>
+          <p class="mt-4 font-mono text-base text-gray-200 sm:text-sm">{m.pricing_prepaid_annual_example({}, { locale })}</p>
+          <p class="mt-2 text-base/6 text-gray-400 sm:text-sm/6">{m.pricing_prepaid_no_subscription_required({}, { locale })}</p>
+        </li>
         {plans.map((plan) => (
-          <li class:list={['flex flex-col rounded-2xl border p-6', plan.popular ? 'border-[#44BCFF]/50 bg-[#44BCFF]/[0.06]' : 'border-white/10 bg-white/[0.03]']}>
-            <div class="flex items-center justify-between gap-2">
+          <li
+            class:list={[
+              'flex min-w-0 flex-col rounded-2xl border p-6',
+              plan.popular ? 'border-[#44BCFF]/50 bg-[#44BCFF]/6' : 'border-white/10 bg-white/3',
+              plan.name === 'Enterprise' && 'sm:col-span-2 xl:col-span-1',
+            ]}
+            data-plan={plan.name}
+          >
+            <div class="flex min-h-10 flex-wrap items-center justify-between gap-2">
               <h3 class="text-base font-semibold text-white">{plan.name}</h3>
               {plan.popular && (
                 <span class="rounded-full bg-[#44BCFF]/10 px-2.5 py-0.5 text-xs font-medium text-[#44BCFF] ring-1 ring-[#44BCFF]/30">{m.most_popular({}, { locale })}</span>
               )}
             </div>
-            <p class="mt-4 flex flex-wrap items-baseline gap-x-1">
+            <p class="mt-4 flex flex-wrap items-baseline gap-x-1 xl:min-h-16 xl:content-start">
               <span
-                class="text-4xl font-bold tracking-tight whitespace-nowrap text-white tabular-nums"
+                class="text-4xl font-bold tracking-tight whitespace-nowrap text-white tabular-nums xl:text-3xl"
                 data-price-amount={plan.price}
                 data-price-plan={plan.stripeId}
                 data-price-interval="year-monthly"
