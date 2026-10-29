@@ -1,8 +1,13 @@
 ---
 import m from '@/copy/messages'
 
-const priceSlot = '\u0000'
-const [beforePrice, afterPrice = ''] = m.pricing_prepaid_summary({ price: priceSlot }, { locale: Astro.locals.locale }).split(priceSlot)
+const locale = Astro.locals.locale
 ---
 
-{[beforePrice, <strong class="font-semibold text-white" data-price-amount="5" set:text="$5" />, afterPrice]}
+{[
+  <span>{m.pricing_prepaid_summary({}, { locale })}</span>,
+  ' ',
+  <strong class="font-semibold text-white" data-price-amount="5" data-price-format="currency" translate="no" set:text="$5" />,
+  '. ',
+  <span>{m.pricing_prepaid_no_subscription_required({}, { locale })}</span>,
+]}

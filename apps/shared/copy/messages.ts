@@ -1439,7 +1439,8 @@ const messages = {
   pricing_prepaid_validity: 'Credits valid for 12 months',
   pricing_prepaid_top_up: 'Top up whenever you need',
   pricing_prepaid_see_rates: 'See usage rates',
-  pricing_prepaid_summary: 'Pay as you go. {price} can cover a year of light usage. No subscription required.',
+  pricing_prepaid_summary: 'Pay as you go. A year of light usage can cost this little:',
+  pricing_prepaid_no_subscription_required: 'No subscription required.',
   pricing_credits_cover_usage:
     'Buy prepaid credits without a subscription. Credits are valid for 12 months; your cost depends on usage. Top up when needed, or use credits on top of a plan when you exceed included limits.',
   pricing_calculator_best_fit: 'Best fit',

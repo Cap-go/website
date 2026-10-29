@@ -6,7 +6,7 @@ import type { MessageKey } from './messages'
 
 export const messageContextOverrides = {
   pricing_prepaid_summary:
-    'Inline pricing introduction on the homepage and reassurance below the registration button. Keep {price} unchanged. The balance can cover a year only for light usage; it is not a fixed annual plan, unlimited usage, or a monthly fee. No subscription is required.',
+    'Complete introduction on the homepage and below the registration button. A standalone localized prepaid-credit amount follows the colon, then a separate no-subscription sentence. Translate the entire introduction as one unit. Only light usage can fit this annual budget; it is not a fixed annual plan, unlimited usage, or a monthly fee.',
   pricing_prepaid_annual_example:
     'Qualifier immediately below the localized $5 prepaid-credit amount in the Pay as you go tier. That balance can cover a year only for light usage. This is not a fixed annual plan, unlimited usage, a monthly fee, or a guaranteed annual bill.',
   pricing_prepaid_cta: 'Registration link for the Pay as you go tier. Creates an account before purchasing prepaid credits; it does not directly charge or create a subscription.',
