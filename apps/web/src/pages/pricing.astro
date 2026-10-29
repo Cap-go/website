@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import PricingCalculator from '@/components/pricing/PricingCalculator.astro'
 import ComparePlans from '@/components/pricing/ComparePlans.astro'
 import CreditPricing from '@/components/pricing/CreditPricing.astro'
+import PayAsYouGoOffer from '@/components/pricing/PayAsYouGoOffer.astro'
 import Faq from '@/components/pricing/Faq.astro'
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from '@/services/links'
 import Plans from '@/components/pricing/Plans.astro'
@@ -99,6 +100,10 @@ if (plans.length > 0) {
           </p>
         </div>
 
+        <div class="mx-auto mb-8 max-w-3xl">
+          <PayAsYouGoOffer />
+        </div>
+
         <div class="mx-auto mb-5 flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:justify-between">
           <div class="flex shrink-0 justify-center lg:justify-start">{plans && plans.length > 0 && <PricingCalculator plans={plans} credits={credits} />}</div>
 
@@ -116,7 +121,9 @@ if (plans.length > 0) {
               class="group flex min-h-9 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-300 transition has-checked:bg-white has-checked:text-gray-950 has-checked:shadow-sm has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-[#0d1525]"
             >
               <span>{m.yearly_plan({}, { locale: Astro.locals.locale })}</span>
-              <span class="rounded-full bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-bold text-blue-300 group-has-checked:bg-blue-100 group-has-checked:text-blue-700">{m.yearly_two_months_free({}, { locale })}</span>
+              <span class="rounded-full bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-bold text-blue-300 group-has-checked:bg-blue-100 group-has-checked:text-blue-700">
+                {m.yearly_two_months_free({}, { locale })}
+              </span>
               <input id="yearly" type="radio" checked={yearly} name="pricing-plans" class="sr-only" />
             </label>
           </fieldset>

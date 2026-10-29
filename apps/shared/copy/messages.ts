@@ -1428,7 +1428,8 @@ const messages = {
   pricing_explainer_trial: '14-day trial, no credit card',
   pricing_explainer_trial_direct: '14-day money-back guarantee',
   pricing_pay_as_you_go: 'Pay as you go',
-  pricing_credits_cover_usage: 'Use credits pay-as-you-go with no plan, or on top of your plan when you exceed included limits.',
+  pricing_credits_cover_usage:
+    'No subscription required. Buy prepaid credits and pay only for the usage you need. You can also use credits on top of a plan when you exceed included limits.',
   pricing_calculator_best_fit: 'Best fit',
   pricing_calculator_choose_plan: 'Plan',
   pricing_calculator_credits_only_note: 'No plan: all usage is paid with credits.',
@@ -3265,7 +3266,11 @@ const messages = {
   register_email_exists_sign_in: 'Sign in',
   register_email_exists_reset: 'Reset your password',
   register_network_error: 'We could not reach Capgo. Check your connection or VPN and tap Sign up again. If it keeps failing, email support@capgo.app.',
-  register_pricing_from: 'Paid plans from {price}/mo, billed yearly, after the trial.',
+  pricing_prepaid_headline: 'Light usage? Think {price} a year, not a monthly bill.',
+  pricing_prepaid_details:
+    'Start with prepaid credits, not a subscription. Credits are valid for 12 months. A small app can run for a year on this balance; your actual cost depends on usage. Top up when you need more.',
+  pricing_prepaid_rates: 'See pay-as-you-go rates',
+  register_pricing_from: 'Prefer a subscription? Plans from {price}/mo, billed yearly, after the trial.',
   register_pricing_link: 'See pricing',
   register_next_title: 'From sign-up to your first live update',
   register_step_account_title: 'Create your account',

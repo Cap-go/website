@@ -7,6 +7,7 @@ import { capgoReviews, hasRealAvatar } from '@/config/productTestimonials'
 import { customerApps } from '@/config/customerApps'
 import { getPlans } from '@/lib/siteData'
 import { planYearlyPrice } from '@/lib/planCopy'
+import PayAsYouGoOffer from '@/components/pricing/PayAsYouGoOffer.astro'
 
 // Static pages read the CI secret at build time; import.meta.env only exposes .env-file values here.
 const CLOUDFLARE_TURNSTILE_SITE_KEY = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY || process.env.CLOUDFLARE_TURNSTILE_SITE_KEY
@@ -105,6 +106,10 @@ const content = {
               <span class="whitespace-nowrap">{m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}</span>
             </span>
           </p>
+
+          <div class="mt-5">
+            <PayAsYouGoOffer compact />
+          </div>
 
           <form
             id="registerForm"
