@@ -983,6 +983,51 @@ try {
   assert(fetchesBeforeJsonHit === blogOriginFetches, 'A cached JSON HIT fetched the English origin')
   await new Promise((resolve) => setTimeout(resolve, 25))
 
+  const goneBlogUrl = new URL('https://capgo.app/fr/blog/minimum-viable-product-example/')
+  const goneBlogCacheKey = __translationWorkerTest.cacheKeyFor(goneBlogUrl, 'fr')
+  const cachedGoneBlogHtml = `<!doctype html><html lang="fr"><head><title>Produit minimum viable</title></head><body><p>Contenu retire encore en cache</p></body></html>`
+  const staleEnglishGoneBlogHtml = `<!doctype html><html lang="en"><head><title>Minimum viable product example</title></head><body><p>Stale English blog still live at origin</p></body></html>`
+  const brandedGoneShellHtml = `<!doctype html><html lang="en"><head><title>Gone</title><link rel="canonical" href="https://capgo.app/410/" /></head><body><p>This page was removed</p></body></html>`
+  cacheEntries.set(
+    goneBlogCacheKey.url,
+    new Response(cachedGoneBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now() - 10 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'g'.repeat(64),
+      },
+    }),
+  )
+  const goneStoreKey = await __translationWorkerTest.translationStoreKey('pages', goneBlogUrl, 'fr')
+  storedTranslations.set(goneStoreKey, cachedGoneBlogHtml)
+  const goneEnv = {
+    ...env,
+    WEB: {
+      fetch: async (request: Request) => {
+        const url = new URL(request.url)
+        if (url.pathname === '/410/' || url.pathname === '/410/index.html') {
+          return new Response(brandedGoneShellHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+        }
+        return new Response(staleEnglishGoneBlogHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+      },
+    },
+  }
+  const goneBackgroundTasks: Promise<unknown>[] = []
+  const goneCtx = {
+    waitUntil: (task: Promise<unknown>) => {
+      goneBackgroundTasks.push(task)
+    },
+  }
+  const goneResponse = await worker.fetch(new Request(goneBlogUrl), goneEnv as any, goneCtx as any)
+  const goneBody = await goneResponse.text()
+  assert(goneResponse.status === 410, 'A localized gone URL with stale caches did not return 410')
+  assert(goneResponse.headers.get('X-Capgo-Translation-Cache') === 'BYPASS', 'A localized gone URL did not bypass translation cache')
+  assert(goneBody.includes('This page was removed'), 'A localized gone URL did not serve the branded gone shell')
+  assert(!goneBody.includes('Contenu retire encore en cache'), 'A localized gone URL served cached translation instead of the gone shell')
+  await Promise.all(goneBackgroundTasks)
+  assert(!cacheEntries.has(goneBlogCacheKey.url), 'Gone path cleanup did not purge the edge translation cache')
+  assert(!storedTranslations.has(goneStoreKey), 'Gone path cleanup did not purge the R2 translation store')
+
   const originalConsoleError = console.error
   let enqueueFailureResponse: Response | null = null
   try {
