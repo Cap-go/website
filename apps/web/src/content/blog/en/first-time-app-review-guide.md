@@ -1,23 +1,38 @@
 ---
 slug: first-time-app-review-guide
-title: The Complete First-Time App Review Guide for 2026 - iOS and Android
-description: A comprehensive guide for first-time app developers on passing App Store and Play Store reviews, including login requirements, privacy policies, and current Google Play testing requirements.
+title: App Review Guidelines 2026, First-Time Checklist for Apple and Google Play
+description: App review guidelines for first submissions in 2026. Apple App Store and Google Play review times, guideline sections, demo accounts, privacy, and common rejection reasons.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-10-29T10:31:00.000Z
 head_image: /app-review-guide.webp
-head_image_alt: "The Complete First-Time App Review Guide for 2026 - iOS and Android Capgo blog illustration"
-keywords: app store review, play store review, app submission, privacy policy, terms and conditions, social login, app testing, android review, ios review
+head_image_alt: App review guidelines 2026 first-time checklist for Apple App Store and Google Play Capgo blog illustration
+keywords: app review guidelines, app review guide, app store review guidelines, google play review, app review process, app store review, play store review, app submission, privacy policy, first time app review
 tag: Development, App Store, Best Practices
 published: true
 locale: en
 origin: human
 next_blog: ''
+faq:
+  - question: What are app review guidelines?
+    answer: App review guidelines are the rules Apple and Google use before an app goes live. Apple publishes the App Store Review Guidelines in five sections, Safety, Performance, Business, Design, and Legal. Google Play uses the Developer Program Policies and Play Console checks such as content rating, Data safety, and target API level. Your listing, binaries, privacy disclosures, and in-app behavior must match what you submit.
+  - question: How long does app review take in 2026?
+    answer: Apple says App Review works around the clock and typically reviews at least 50% of submissions in under 24 hours and 90% in under 48 hours. Incomplete submissions can take longer. Google Play usually publishes standard updates as soon as possible after review. For some developer accounts Google warns review can take up to seven days or longer in exceptional cases. New personal Play Console accounts may also need closed testing before production.
+  - question: What are the main Apple App Store review guideline sections?
+    answer: Apple groups the App Store Review Guidelines into Safety, Performance, Business, Design, and Legal. Performance includes 2.1 App Completeness and 2.3 Accurate Metadata. Legal includes 5.1 Privacy. Apple reports that a large share of unresolved review issues relate to guideline 2.1, crashes, broken links, placeholder content, or missing review information.
+  - question: What does Google Play check during app review?
+    answer: Google reviews your app bundle, store listing, content rating, Data safety form, and policy compliance before production access. Personal developer accounts created after November 13, 2023 must run closed testing with at least 12 testers for 14 consecutive days before applying for production. Updates to apps already on Play generally follow the same policy review path with standard publishing.
+  - question: What are the most common first-time app rejection reasons?
+    answer: On Apple, frequent first-submission issues include 2.1 App Completeness, crashes, non-working demo logins, or broken support and privacy links, 2.3 Accurate Metadata when screenshots or descriptions do not match the build, and 5.1 Privacy when the privacy policy or permission strings are missing or inaccurate. On Google Play, rejections often involve policy violations, incomplete Data safety or content rating answers, or skipping required testing for new personal accounts. For guideline 4.2 Minimum Functionality and 4.3 Spam on iOS, use a focused follow-up guide rather than repeating that checklist here.
+  - question: Where should I start before my first App Store or Play submission?
+    answer: Confirm account enrollment and store listing assets, publish an HTTPS privacy policy, complete Apple privacy nutrition labels or Google Data safety honestly, and test on real devices with the same demo account you will give reviewers. Budget for Google closed testing if your Play Console account requires it. For App Store fee context see the cost to publish on the App Store page, for age ratings see the app store age ratings guide, and for Apple guideline 4.2 and 4.3 deep dives see how to pass App Store review in 2026.
 ---
 
-Submitting your first app to the App Store or Play Store can feel overwhelming. With constantly evolving guidelines and stricter enforcement in 2026, getting your app approved requires careful attention to detail. This comprehensive guide walks you through everything you need to know to pass review on your first submission for both iOS and Android platforms.
+**Quick answer:** **App review guidelines** are the rules Apple and Google enforce before your app goes live. Apple’s [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) are organized into **Safety, Performance, Business, Design, and Legal**. Google Play reviews your release against the [Developer Program Policies](https://support.google.com/googleplay/android-developer/answer/9858738) plus Play Console requirements such as content rating and Data safety. **Review times:** Apple states App Review works around the clock and typically completes at least **50% of submissions within 24 hours** and **90% within 48 hours** ([App Review](https://developer.apple.com/distribute/app-review/)). Google says some accounts may wait **up to seven days or longer** in exceptional cases ([Publish your app](https://support.google.com/googleplay/android-developer/answer/9859751)). **First-time rejections** often trace to **2.1 App Completeness** (crashes, broken links, bad demo accounts), **2.3 Accurate Metadata**, and **5.1 Privacy** on iOS, plus incomplete Play policy or testing steps on Android. For **guideline 4.2 and 4.3** strategy, read [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/). For ratings and parental controls, see the [app store age ratings guide](/blog/app-store-age-ratings-guide/). For enrollment fees, see [cost to publish an app on the App Store](/cost/cost-to-publish-app-on-app-store/).
+
+Submitting your first app to the App Store or Play Store can feel overwhelming. With constantly evolving guidelines and stricter enforcement in 2026, getting your app approved requires careful attention to detail. This checklist walks you through what reviewers check on a first submission for both iOS and Android, with deeper Apple rejection playbooks in our [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/) guide when you need guideline-level detail beyond this overview.
 
 ## Understanding the Review Process in 2026
 
@@ -25,12 +40,14 @@ Both Apple and Google have significantly tightened their review processes in rec
 
 ### iOS App Store Review Timeline
 
-- **Standard Review**: 24-48 hours
-- **Peak Periods**: 3-5 days (especially during holiday seasons)
-- **Weekends**: No reviews processed
-- **Expedited Review**: Available for critical bug fixes (must be requested through App Store Connect)
+Apple publishes timing on its [App Review](https://developer.apple.com/distribute/app-review/) page:
 
-**Pro Tip**: Submit early in the week (Monday-Tuesday) to avoid weekend delays. Monday submissions typically get reviewed by Wednesday.
+- **Typical timing**: At least 50% of submissions reviewed in less than 24 hours, and 90% in less than 48 hours
+- **Incomplete submissions**: Review may be delayed or fail if metadata, demo access, or compliance answers are missing
+- **Complex apps**: Apple notes that apps needing greater scrutiny can take longer ([After You Submit](https://developer.apple.com/app-store/review/guidelines/#after-you-submit))
+- **Expedited Review**: Available for critical bug fixes or time-bound events when you request it in App Store Connect
+
+Plan for the published averages, not anecdotal queue spikes, and treat every missing review note as a delay risk.
 
 ### App Store Connect Statuses You'll See
 
@@ -42,11 +59,12 @@ Both Apple and Google have significantly tightened their review processes in rec
 
 ### Google Play Store Review Timeline (2026 Update)
 
-- **Initial Review**: 3-7 days (significantly longer than previous years)
-- **Closed Testing Gate**: 14 days minimum for affected new personal Play Console accounts before you can request production access
-- **Production Review After Testing**: Usually another 3-7 days after the closed testing requirement is complete
-- **Updates to Existing Apps**: 1-3 days
-- **Policy Violations**: Can extend to 14+ days if additional review is triggered
+Google documents review timing in [Publish your app](https://support.google.com/googleplay/android-developer/answer/9859751):
+
+- **Standard publishing**: Updates are processed and published as soon as possible after review
+- **Extended review**: For some developer accounts, Google may take **up to seven days or longer in exceptional cases**
+- **Closed testing gate**: Personal accounts created after November 13, 2023 need at least **12 testers** and **14 consecutive days** of closed testing before production access
+- **After testing**: Production review still runs against Play policies before the app goes live
 
 **Important Update**: Google now requires substantially more rigorous testing for some new Play Console accounts, which we'll cover in detail below.
 
@@ -1044,7 +1062,9 @@ Privacy Nutrition Labels.
 
 **Rejection: "Doesn't comply with 4.2 - Minimum Functionality"**
 
-This is trickier. It means your app doesn't do enough to warrant being an app. Response:
+This is trickier. It means your app doesn't do enough to warrant being an app. Read [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/) for a full 4.2 and 4.3 response playbook. Example appeal text:
+
+Response:
 
 ```
 Thank you for the feedback. I'd like to clarify the app's
@@ -1136,6 +1156,26 @@ When submitting updates:
 - [PrivacyPolicies.com](https://www.privacypolicies.com/)
 - [Free Privacy Policy](https://www.freeprivacypolicy.com/)
 
+## Frequently asked questions
+
+**What are app review guidelines?**  
+They are Apple’s [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and Google’s [Developer Program Policies](https://support.google.com/googleplay/android-developer/answer/9858738). Reviewers check your binary, metadata, privacy disclosures, and account setup before release.
+
+**How long does app review take in 2026?**  
+Apple targets 50% of submissions within 24 hours and 90% within 48 hours. Google may take up to seven days or longer for some accounts. New personal Play Console accounts also need 14 days of closed testing when that rule applies.
+
+**What are Apple’s five guideline sections?**  
+Safety, Performance, Business, Design, and Legal. Performance covers completeness and metadata (including 2.3). Legal covers privacy (including 5.1).
+
+**What should I fix before my first submission?**  
+Working demo logins, HTTPS privacy and support links, honest privacy labels, real-device testing, and store assets that match the build. Complete the [age rating questionnaire](/blog/app-store-age-ratings-guide/) on both stores when it applies to your app.
+
+**Where do guideline 4.2 and 4.3 fit?**  
+Those are Apple Design rejections for thin or duplicate apps. Use [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/) for that scope, not this checklist.
+
+**What does publishing cost on Apple?**  
+See [cost to publish an app on the App Store](/cost/cost-to-publish-app-on-app-store/) for current enrollment and listing fees.
+
 ## Need Help with Your App Review?
 
 If you're feeling overwhelmed or want expert guidance to ensure your app passes review on the first try, we're here to help!
@@ -1172,6 +1212,6 @@ Good luck with your app launch! Remember, even if you get rejected, it's a learn
 
 *Need help with implementing live updates after your app is approved? Check out [Capgo's live update solution](/docs/getting-started/quickstart/) for seamless app updates without app store review.*
 
-## Keep going from The Complete First-Time App Review Guide for 2026 - iOS and Android
+## Keep going from App Review Guidelines 2026
 
-If you are using **The Complete First-Time App Review Guide for 2026 - iOS and Android** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.
+If you are using this **app review guidelines** checklist to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.
