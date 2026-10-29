@@ -50,6 +50,7 @@ Synopsys = "Synopsys"
 Appy = "Appy"  # Appy Pie (brand name)
 
 # Acronyms and technical terms
+EHR = "EHR"  # Electronic health record
 ASO = "ASO"  # App Store Optimization
 EHR = "EHR"
 ITMS = "ITMS"  # iTunes Music Store
