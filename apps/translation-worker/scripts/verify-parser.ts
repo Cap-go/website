@@ -205,14 +205,17 @@ const goneShellLocalized = __translationWorkerTest.rewriteMetadataAndLinks(
   'fr',
   { preserveDocumentLanguage: true },
 )
-assert(goneShellLocalized.includes('lang="en"'), 'Branded gone shell document language was rewritten without translating content')
-assert(goneShellLocalized.includes('href="https://capgo.app/fr/blog/minimum-viable-product-example/"'), 'Branded gone shell canonical was not localized')
+assert(/<html\b[^>]*\blang="en"/.test(goneShellLocalized), 'Branded gone shell document language was rewritten without translating content')
+assert(
+  /<link\b[^>]*\brel="canonical"[^>]*\bhref="https:\/\/capgo\.app\/fr\/blog\/minimum-viable-product-example\/"/.test(goneShellLocalized),
+  'Branded gone shell canonical was not localized',
+)
 const goneShellDefaultLang = __translationWorkerTest.rewriteMetadataAndLinks(
   goneShellHtml,
   new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'),
   'fr',
 )
-assert(goneShellDefaultLang.includes('lang="fr"'), 'Translated pages should still rewrite document language by default')
+assert(/<html\b[^>]*\blang="fr"/.test(goneShellDefaultLang), 'Translated pages should still rewrite document language by default')
 
 const speedBrainRules = await worker.fetch(new Request('https://capgo.app/fr/speculation-rules.json'), {} as any)
 assert(speedBrainRules.status === 200, 'Speculation rules route did not return 200')
