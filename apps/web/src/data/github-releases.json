@@ -1,6 +1,158 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.99.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.0",
+    "pubDate": "2026-10-29T02:00:36.000Z",
+    "description": "🆕 Changelog Added Added flag to the CLI so you can upload only debug symbols instead of full artifacts. ( 3978) Changed Improved console performance by bounding bundle removal audit lookups. ( 3980) Migrated backend database calls from PostgREST/supabase js wrappers to direct PostgreSQL for increased reliability and performance. ( 3971) Fixed Fixed the onboarding sidebar so the checklist navigation stays open while navigating through steps. ( 3981) 🔗 Full Changelog : https://github.com/Cap ..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.27.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.2",
+    "pubDate": "2026-10-29T02:42:23.000Z",
+    "description": "🆕 Changelog Fixed Fixed proxy browser requests to ChatGPT model in the Assistant, restoring reliable model access for browser based users. Fixed guide app ID conflict recovery in onboarding AI prompts, ensuring the AI correctly handles existing app identifiers during setup. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.27.1...capgo 22.27.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.27.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.1",
+    "pubDate": "2026-10-29T02:22:56.000Z",
+    "description": "🆕 Changelog Changed Improved delta upload efficiency by deduplicating upload sessions, reducing redundant data and lowering database overhead. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.99.0...capgo 22.27.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.27.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.0",
+    "pubDate": "2026-10-29T02:02:55.000Z",
+    "description": "🆕 Changelog Added Added CLI option that uploads only debug symbols, giving you more control over what gets uploaded with each release. Fixed Fixed the onboarding sidebar checklist so it stays open during navigation, making it easier to track your setup progress without losing your place. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.8...capgo 22.27.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.8",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.8",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.8",
+    "pubDate": "2026-10-29T01:36:43.000Z",
+    "description": "🆕 Changelog Changed Improved bundle removal performance in the console by limiting how far back audit logs are queried during cleanup. This reduces memory and CPU usage when deleting bundles, making large cleanup operations faster and more reliable. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.7...capgo 22.26.8"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.98.6",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.6",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.6",
+    "pubDate": "2026-10-28T21:08:40.000Z",
+    "description": "🆕 Changelog Changed Improved database performance by storing delta file paths as parts and hashes as bytes, reducing storage overhead and speeding up delta related operations. Fixed Updated the MCP integration to ask for the author of OTA test changes and prevent automatic injection of the Capgo banner, ensuring cleaner generated output and proper change attribution. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.98.5...cli 8.98.6"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.98.5",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.5",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.5",
+    "pubDate": "2026-10-28T19:08:00.000Z",
+    "description": "🆕 Changelog Fixed Prevented MCP agents from becoming unrecoverable when errors occur, so failed agent steps no longer leave the interface in a dead end. Updated error messages to provide actionable next steps instead of directing users to the browser console. Replaced Tailwind/DaisyUI classes that produced no CSS, restoring the intended visual styling across affected UI components. Changed Improved database upload performance by skipping delta files that are already stored before the upload ..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.98.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.4",
+    "pubDate": "2026-10-28T18:08:33.000Z",
+    "description": "🆕 Changelog Added Offer a retention discount when canceling a monthly plan. Bill customers in the Americas and Asia Pacific through the US entity. Add an AI agent option for native builds; onboarding now defaults to AI driven setup unless the user chose manual. Let organizations invite teammates and surface AI agent alternatives during onboarding, with a unified flow for new orgs. Add row by row repair of replication gaps in live subscriber read replicas. Roll out Delta Storage v2, storing o..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.7",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.7",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.7",
+    "pubDate": "2026-10-28T22:33:17.000Z",
+    "description": "🆕 Changelog Added Added direct Postgres access for backend table reads and remote procedure calls, removing the extra API translation layer. Added more reliable transactional behavior for database operations that previously depended on PostgREST/supabase js roundtrips. Changed Migrated backend data access from PostgREST/supabase js to direct Postgres connections to improve query performance, stability, and consistency. Reduced backend complexity by eliminating the PostgREST/supabase js inter..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.6",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.6",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.6",
+    "pubDate": "2026-10-28T21:10:28.000Z",
+    "description": "🆕 Changelog Fixed MCP OTA test workflow no longer adds the Capgo banner automatically , ensuring the generated output only contains the intended changes. MCP now prompts for who is making the OTA test change , improving accountability and traceability during updates. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.5...capgo 22.26.6"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.4",
+    "pubDate": "2026-10-28T19:12:24.000Z",
+    "description": "🆕 Changelog Fixed Resolved an issue where the agent could become stuck in an unrecoverable state after encountering errors, improving reliability during failures. Changed Improved upload performance by skipping delta files that are already stored before inserting new upload records, reducing redundant processing. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.3...capgo 22.26.4"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.3",
+    "pubDate": "2026-10-28T18:23:19.000Z",
+    "description": "🆕 Changelog Fixed Made error messages actionable by providing clear next steps instead of instructing users to check the browser console. Replaced Tailwind and DaisyUI classes that produced no CSS so UI components render as intended. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.98.4...capgo 22.26.3"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.2",
+    "pubDate": "2026-10-28T18:08:53.000Z",
+    "description": "🆕 Changelog Fixed Assistant : Allow OpenAI hosts through the console Content Security Policy so ChatGPT sign in works reliably. Internationalization : Translate hardcoded strings on the 404, scan, account deletion, and email change screens for full locale coverage. Internationalization : Load the active locale before components mount and cache translation catalogs by checksum to prevent flickering and reduce redundant fetches. UI : Add dark mode support to so error states match the rest of t..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.1",
+    "pubDate": "2026-10-28T16:46:32.000Z",
+    "description": "🆕 Changelog Fixed Reordered the onboarding setup checklist to prioritize tasks by importance, making it easier for new users to know which steps to complete first. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.0...capgo 22.26.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.26.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.0",
+    "pubDate": "2026-10-28T15:36:38.000Z",
+    "description": "🆕 Changelog Added Added a discount offer to encourage monthly plan subscribers to stay instead of canceling. Added the US billing entity option for customers in the Americas and Asia Pacific regions. Changed Improved database performance by bounding audit log access checks and filtering app metrics cache rebuilds to only relevant changes. Fixed Fixed the Cloudflare Turnstile widget so it appears only when an interactive challenge is required, reducing unnecessary interruptions. 🔗 Full Chang..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.25.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.3",
+    "pubDate": "2026-10-28T13:05:08.000Z",
+    "description": "🆕 Changelog Fixed Auth : Return a clear error instead of a generic 500 response when GoTrue rejects a password, making it easier to identify and fix password issues. Plugin : Read from the EU replica when a regional replica falls more than 10 minutes behind, reducing the risk of serving stale data. Alerts : Prevent Discord alerts from being posted by preprod workers, cutting down false positive noise and keeping production alerts actionable. 🔗 Full Changelog : https://github.com/Cap go/capg..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.25.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.2",
+    "pubDate": "2026-10-28T11:19:28.000Z",
+    "description": "🆕 Changelog Changed Improved performance of access control queries for apps and usage credit resources by switching to set based readable row level security sets. This reduces query latency and improves scalability when reading these records. No action is required. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.25.1...capgo 22.25.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.25.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.1",
+    "pubDate": "2026-10-28T09:55:40.000Z",
+    "description": "🆕 Changelog Fixed Fixed a bug where an app could be incorrectly reported as on premise when its owner lookup failed. Apps are now classified as on premise only when ownership is successfully verified, preventing misclassification during lookup failures. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.25.0...capgo 22.25.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.25.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.0",
+    "pubDate": "2026-10-28T03:38:04.000Z",
+    "description": "🆕 Changelog Added Introduced an AI agent option for native builds during onboarding. The flow now recommends the AI agent by default and falls back to manual setup only when the user explicitly selects it. Fixed Repaired a synchronization gap in read replica live subscribers so that subscriber data stays consistent row by row. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.24.2...capgo 22.25.0"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.24.2",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.24.2",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.24.2",
@@ -166,158 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.4",
     "pubDate": "2026-10-26T17:44:39.000Z",
     "description": "🆕 Changelog Fixed Updated number, currency, and date formatting to follow the selected UI language, ensuring these formats stay consistent with the rest of the interface language. ( 3880) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.3...capgo 22.17.4"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.17.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.3",
-    "pubDate": "2026-10-26T17:15:28.000Z",
-    "description": "🆕 Changelog Fixed Fixed an issue where the Choose call to action was missing on billing plan cards for organizations without an active plan, making it easier to select a subscription. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.2...capgo 22.17.3"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.17.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.2",
-    "pubDate": "2026-10-26T14:39:47.000Z",
-    "description": "🆕 Changelog Fixed Corrected an issue where legacy update check events were incorrectly counted as bundle failures in statistics, improving the accuracy of bundle failure metrics. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.1...capgo 22.17.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.17.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.1",
-    "pubDate": "2026-10-26T13:48:55.000Z",
-    "description": "🆕 Changelog Fixed Corrected the display of encrypted bundle checksums to show the SHA 256 hash type, making it easier to verify bundle integrity. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.0...capgo 22.17.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.17.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.0",
-    "pubDate": "2026-10-26T13:37:49.000Z",
-    "description": "🆕 Changelog Added Sort bundle manifest files by name, size, or checksum, making it easier to locate and compare specific files in a bundle. Changed Updated agent documentation to clarify that read replicas are hosted on Google Cloud SQL rather than PlanetScale, ensuring deployment architecture is accurately described. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.7...capgo 22.17.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.7",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.7",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.7",
-    "pubDate": "2026-10-26T12:11:17.000Z",
-    "description": "🆕 Changelog Fixed Ensured the support usernames prompt stays behind billing dialogs, preventing it from covering payment and billing forms during checkout. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.6...capgo 22.16.7"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.6",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.6",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.6",
-    "pubDate": "2026-10-26T10:33:11.000Z",
-    "description": "🆕 Changelog Changed Updated Stripe documentation to clarify which services consume the legacy trial Bento event. This helps users understand event routing and identify dependencies when migrating away from the legacy event. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.5...capgo 22.16.6"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.5",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.5",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.5",
-    "pubDate": "2026-10-26T01:15:08.000Z",
-    "description": "🆕 Changelog Fixed Fixed endpoint responses for native app versions that include prerelease or build metadata (for example, or ). Version statistics now return correctly for these versions instead of being omitted or failing. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.4...capgo 22.16.5"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.4",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.4",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.4",
-    "pubDate": "2026-10-26T00:19:46.000Z",
-    "description": "🆕 Changelog Fixed Limited IP based network lookups to Google and Apple networks only, reducing unnecessary third party requests and improving user privacy when verifying app store update sources. ( 3898) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.3...capgo 22.16.4"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.3",
-    "pubDate": "2026-10-26T00:09:47.000Z",
-    "description": "🆕 Changelog Changed Refactored snippet provider network handling to store networks as a unique set, preventing duplicate entries and improving consistency. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.97.2...capgo 22.16.3"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.97.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.2",
-    "pubDate": "2026-10-25T23:10:50.000Z",
-    "description": "🆕 Changelog Fixed Updated the wording of the agent trial message shown for cloud builds and added it to the Builder todo list, so builders see a clear, consistent trial notice during cloud builds. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.97.1...cli 8.97.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.97.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.1",
-    "pubDate": "2026-10-25T21:34:18.000Z",
-    "description": "🆕 Changelog Fixed Resolved an issue where dynamic import helpers in the CLI were not available on first use, ensuring dynamic module loading works correctly from the initial invocation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.97.0...cli 8.97.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.97.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.0",
-    "pubDate": "2026-10-25T20:18:54.000Z",
-    "description": "🆕 Changelog Added Added plain text trial next steps for AI agents in the CLI, making post trial guidance easier to read and act on. Exposed MCP setup instructions below the Builder checklist during onboarding. Fixed Fixed onboarding checklist tracking so the app ready step is automatically inferred as complete when the todo list is read. Security Ensured permission checks are never answered from the Hyperdrive cache, preventing stale or incorrect authorization decisions. 🔗 Full Changelog : ..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.96.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.96.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.96.1",
-    "pubDate": "2026-10-25T15:44:21.000Z",
-    "description": "🆕 Changelog Fixed CLI : Ensured setup guidance appears only after the Builder wizard completes, so new users aren't confused by out of order instructions. Onboarding : Updated Bento milestone tracking to capture progress from completed todo steps, making onboarding status more accurate for new users. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.96.0...cli 8.96.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.96.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.96.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.96.0",
-    "pubDate": "2026-10-25T14:32:22.000Z",
-    "description": "🆕 Changelog Added Added support for opening the trial card prompt directly from a console deep link. Changed Improved API performance and reliability by pinning API workers next to the primary database. Rolled out the new email templates to all intents and completed the new emails v2 A/B test. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.95.3...cli 8.96.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.2",
-    "pubDate": "2026-10-25T19:08:15.000Z",
-    "description": "🆕 Changelog Fixed Onboarding readiness detection — The onboarding flow now correctly infers the app ready step when the todo list is read, ensuring users are guided to the appropriate next step without manual intervention. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.1...capgo 22.16.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.1",
-    "pubDate": "2026-10-25T19:01:26.000Z",
-    "description": "🆕 Changelog Fixed Ensured permission checks are never served from the Hyperdrive cache. Permission checks now bypass the cache so access decisions always reflect the latest user rights, preventing stale cache results from granting or denying access incorrectly. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.16.0...capgo 22.16.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.16.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.16.0",
-    "pubDate": "2026-10-25T18:48:18.000Z",
-    "description": "🆕 Changelog Added Exposed MCP setup below the Builder checklist in onboarding, making it easier to discover and configure MCP as you work through the getting started flow. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.96.1...capgo 22.16.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.15.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.15.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.15.1",
-    "pubDate": "2026-10-25T14:56:56.000Z",
-    "description": "🆕 Changelog Fixed Fixed onboarding milestone tracking so Bento milestones are now sent when onboarding todo steps are completed. This keeps milestone based communications and automations in sync with user progress. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.96.0...capgo 22.15.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.15.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.15.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.15.0",
-    "pubDate": "2026-10-25T14:33:56.000Z",
-    "description": "🆕 Changelog Added Added the ability to open the trial card prompt directly from a console deep link, making it easier to start a trial from external links or integrations. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.14.4...capgo 22.15.0"
   },
   {
     "category": "release",
@@ -721,11 +721,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-inappbrowser 8.26.2",
-    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.26.2",
-    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.26.2",
-    "pubDate": "2026-10-24T13:25:30.000Z",
-    "description": "🆕 Changelog Fixed Made iOS HTTP proxy method swizzling opt in via Capacitor sync options ( 759). Apps that do not require HTTP proxy functionality will no longer have their networking stack unexpectedly modified. Migration note : If your app relies on HTTP proxy behavior on iOS, enable it in your Capacitor sync configuration; it is no longer enabled by default. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.26.1...8.26.2"
+    "title": "capacitor-inappbrowser 8.27.0",
+    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.0",
+    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.0",
+    "pubDate": "2026-10-28T19:22:53.000Z",
+    "description": "🆕 Changelog Security Added trusted origin enforcement for JavaScript bridges. Only web content served from configured trusted origins can now invoke native bridges, which helps prevent malicious pages from accessing app capabilities. Breaking change / Migration: If your app relies on JavaScript bridges from non trusted origins, you must add those origins to your trusted origins configuration. Bridges are no longer injected for untrusted origins. Changed Updated to 8.2.6 for the latest bug fi..."
   },
   {
     "category": "release",
@@ -921,11 +921,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-navigation 8.15.1",
-    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.15.1",
-    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.15.1",
-    "pubDate": "2026-10-26T22:16:09.000Z",
-    "description": "🆕 Changelog Fixed Fixed an issue on Android where safe area insets were double counted when a WebView parent had padding, improving layout accuracy. ( 95) Improved SVG path parsing on Android by normalizing compact arc flags, making vector graphics with arcs render more reliably. ( 94) 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.15.0...8.15.1"
+    "title": "capacitor-native-navigation 8.16.0",
+    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.0",
+    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.0",
+    "pubDate": "2026-10-28T17:16:32.000Z",
+    "description": "🆕 Changelog Added Android leading navigation slot now displays the first left item — improves navigation affordance in the top app bar by surfacing the primary left side action or icon. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.15.2...8.16.0"
   },
   {
     "category": "release",

@@ -41,7 +41,7 @@
   "https://github.com/Cap-go/capacitor-data-storage-sqlite/": 106,
   "https://github.com/Cap-go/capacitor-android-usagestatsmanager/": 10,
   "https://github.com/Cap-go/capacitor-streamcall/": 16,
-  "https://github.com/Cap-go/capacitor-autofill-save-password/": 19,
+  "https://github.com/Cap-go/capacitor-autofill-save-password/": 18,
   "https://github.com/Cap-go/capacitor-social-login/": 222,
   "https://github.com/Cap-go/capacitor-passkey/": 5,
   "https://github.com/Cap-go/capacitor-jw-player/": 11,
@@ -72,7 +72,7 @@
   "https://github.com/Cap-go/capacitor-launch-navigator/": 10,
   "https://github.com/Cap-go/capacitor-live-activities/": 8,
   "https://github.com/Cap-go/capacitor-live-reload/": 11,
-  "https://github.com/Cap-go/capacitor-llm/": 44,
+  "https://github.com/Cap-go/capacitor-llm/": 43,
   "https://github.com/Cap-go/capacitor-media-session/": 11,
   "https://github.com/Cap-go/capacitor-mux-player/": 11,
   "https://github.com/Cap-go/capacitor-pay/": 13,
@@ -103,7 +103,7 @@
   "https://github.com/Cap-go/capacitor-supabase/": 8,
   "https://github.com/Cap-go/capacitor-neon/": 0,
   "https://github.com/Cap-go/capacitor-incoming-call-kit/": 5,
-  "https://github.com/Cap-go/capacitor-install-referrer/": 4,
+  "https://github.com/Cap-go/capacitor-install-referrer/": 5,
   "https://github.com/Cap-go/capacitor-android-age-signals/": 9,
   "https://github.com/Cap-go/capacitor-barometer/": 8,
   "https://github.com/Cap-go/capacitor-accelerometer/": 10,
@@ -141,7 +141,7 @@
   "https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage": 6,
   "https://github.com/Cap-go/capacitor-plus/": 22,
   "https://github.com/Cap-go/capacitor-compass/": 6,
-  "https://github.com/Cap-go/capacitor-file/": 5,
+  "https://github.com/Cap-go/capacitor-file/": 6,
   "https://github.com/Cap-go/capacitor-file-sharer/": 2,
   "https://github.com/Cap-go/capacitor-bluetooth-low-energy/": 9,
   "https://github.com/Cap-go/capacitor-keep-awake/": 6,
@@ -152,5 +152,5 @@
   "https://github.com/Cap-go/capacitor-brightness/": 5,
   "https://github.com/Cap-go/capacitor-light-sensor/": 5,
   "https://github.com/Cap-go/capacitor-video-thumbnails/": 6,
-  "https://github.com/Cap-go/capacitor-intent-launcher/": 9
+  "https://github.com/Cap-go/capacitor-intent-launcher/": 8
 }
