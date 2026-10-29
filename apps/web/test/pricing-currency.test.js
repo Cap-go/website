@@ -14,3 +14,13 @@ test('formats Stripe currency codes', () => {
   expect(formatPrice(1900, 'jpy', 'whole', 'en-US')).toBe('¥1,900')
   expect(tierDiscountPercent('p60')).toBe(40)
 })
+
+test.each([
+  [4.45, 'eur', '€4.45'],
+  [22.35, 'eur', '€22.35'],
+  [5, 'usd', '$5'],
+  [750.4, 'jpy', '¥750'],
+  [1.234, 'kwd', 'KWD\u00a01.234'],
+])('preserves currency precision for prepaid balances: %s %s', (amount, currency, expected) => {
+  expect(formatPrice(amount, currency, 'currency', 'en-US')).toBe(expected)
+})

@@ -46,13 +46,15 @@ export function stripeAmountToMajorUnits(amount: number, currency: string): numb
   return amount / 100
 }
 
-export type PriceFormat = 'whole' | 'cents' | 'unit'
+export type PriceFormat = 'whole' | 'cents' | 'unit' | 'currency'
 
 // `whole` for plan prices, `cents` for totals that may be small, `unit` for per-MAU/GiB credit rates.
 export function formatPrice(amount: number, currency: string, format: PriceFormat = 'whole', locale = 'en-US'): string {
   const code = currency.toUpperCase()
   const options: Intl.NumberFormatOptions = { style: 'currency', currency: code, currencyDisplay: 'narrowSymbol' }
-  if (format === 'unit' && amount > 0 && amount < 1) {
+  if (format === 'currency') {
+    options.minimumFractionDigits = 0
+  } else if (format === 'unit' && amount > 0 && amount < 1) {
     options.maximumSignificantDigits = 3
   } else if (format === 'whole' || (format === 'cents' && (amount >= 10 || Number.isInteger(amount)))) {
     options.minimumFractionDigits = 0

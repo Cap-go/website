@@ -1,0 +1,13 @@
+---
+import m from '@/copy/messages'
+
+const locale = Astro.locals.locale
+---
+
+{[
+  <span>{m.pricing_prepaid_summary({}, { locale })}</span>,
+  ' ',
+  <strong class="font-semibold text-white" data-price-amount="5" data-price-format="currency" translate="no" set:text="$5" />,
+  '. ',
+  <span>{m.pricing_prepaid_no_subscription_required({}, { locale })}</span>,
+]}

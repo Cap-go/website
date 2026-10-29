@@ -1,4 +1,6 @@
 import worker, { __translationWorkerTest, TranslationCoordinator } from '../src/index'
+import messages from '../../shared/copy/messages'
+import { messageContextOverrides } from '../../shared/copy/messageContextOverrides'
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message)
@@ -364,6 +366,24 @@ assert(
   noTranslateRaw.includes('class="notranslate"') && noTranslateRaw.includes('<p>Keep metrics English</p>') && noTranslateRaw.includes('</div>'),
   'Parser did not preserve notranslate fragment as raw HTML',
 )
+
+const pricingIntroduction = messages.pricing_prepaid_summary()
+const pricingReassurance = messages.pricing_prepaid_no_subscription_required()
+const pricingHtml = `<html><body><p><span>${pricingIntroduction}</span> <strong data-price-amount="5" data-price-format="currency" translate="no">$5</strong>. <span>${pricingReassurance}</span></p></body></html>`
+const pricingParsed = __translationWorkerTest.collectSegments(pricingHtml)
+const pricingSegments = pricingParsed.segments.filter((segment) => segment.inBody).map((segment) => segment.text)
+assert(pricingSegments.includes(pricingIntroduction), 'Parser split the complete annual-budget introduction')
+assert(pricingSegments.includes(pricingReassurance), 'Parser split the complete no-subscription reassurance')
+assert(!pricingSegments.some((text) => text.includes('$5')), 'Parser should leave the currency amount for the currency renderer')
+const pricingContexts = __translationWorkerTest.resolveTranslationContexts([pricingIntroduction, pricingReassurance])
+assert(pricingContexts.every((context) => typeof context === 'string' && context.length > 0), 'Pricing sentences must each match their translator context')
+for (const [messageKey, expectedContext] of Object.entries(messageContextOverrides)) {
+  const [actualContext] = __translationWorkerTest.resolveTranslationContexts([messages[messageKey]()])
+  assert(actualContext?.includes(expectedContext), `Runtime translation lookup is missing the manual context for ${messageKey}`)
+}
+const pricingTranslated = __translationWorkerTest.renderTranslatedHtml(pricingParsed.parts, pricingParsed.segments, pricingParsed.segments.map((segment) => `FR: ${segment.text}`))
+assert(pricingTranslated.includes(`FR: ${pricingIntroduction}`), 'Renderer dropped the complete translated annual-budget introduction')
+assert(pricingTranslated.includes('translate="no">$5</strong>'), 'Renderer changed the independently formatted credit amount')
 
 const skipAttrHtml = `<!doctype html><html><body><section translate="no" title="Metric region label"><p>99%</p></section></body></html>`
 const skipAttrParsed = __translationWorkerTest.collectSegments(skipAttrHtml)
