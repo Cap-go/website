@@ -198,6 +198,22 @@ assert(!__translationWorkerTest.isSpeedBrainRulesPath('/fr/pricing/'), 'A transl
 assert(isGonePath('/de/blog/minimum-viable-product-example/'), 'Localized retired blog URL was not marked gone')
 assert(!isGonePath('/de/blog/capacitor-comprehensive-guide/'), 'Active localized blog URL was marked gone')
 
+const goneShellHtml = '<html lang="en"><head><title>Gone</title><link rel="canonical" href="https://capgo.app/410/" /></head><body><p>Removed</p></body></html>'
+const goneShellLocalized = __translationWorkerTest.rewriteMetadataAndLinks(
+  goneShellHtml,
+  new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'),
+  'fr',
+  { preserveDocumentLanguage: true },
+)
+assert(goneShellLocalized.includes('lang="en"'), 'Branded gone shell document language was rewritten without translating content')
+assert(goneShellLocalized.includes('href="https://capgo.app/fr/blog/minimum-viable-product-example/"'), 'Branded gone shell canonical was not localized')
+const goneShellDefaultLang = __translationWorkerTest.rewriteMetadataAndLinks(
+  goneShellHtml,
+  new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'),
+  'fr',
+)
+assert(goneShellDefaultLang.includes('lang="fr"'), 'Translated pages should still rewrite document language by default')
+
 const speedBrainRules = await worker.fetch(new Request('https://capgo.app/fr/speculation-rules.json'), {} as any)
 assert(speedBrainRules.status === 200, 'Speculation rules route did not return 200')
 assert(speedBrainRules.headers.get('Content-Type') === 'application/speculationrules+json; charset=utf-8', 'Speculation rules route used a content type Chrome will reject')

@@ -3144,10 +3144,15 @@ function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): stri
   return rewritten
 }
 
-function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale): string {
+function rewriteMetadataAndLinks(
+  html: string,
+  requestUrl: URL,
+  locale: Locale,
+  options?: { preserveDocumentLanguage?: boolean },
+): string {
   const basePath = stripLocalePrefix(requestUrl.pathname)
   const localizedUrl = localizedAbsoluteUrl(requestUrl, locale, basePath)
-  let rewritten = updateHtmlLang(html, locale)
+  let rewritten = options?.preserveDocumentLanguage ? html : updateHtmlLang(html, locale)
 
   rewritten = removeTagsByAttribute(rewritten, 'link', 'rel', 'alternate')
   rewritten = setLinkRel(rewritten, 'canonical', `<link rel="canonical" href="${escapeHtmlAttribute(localizedUrl)}" />`)
@@ -3185,23 +3190,34 @@ async function purgeTranslatedPageCache(env: Env, requestUrl: URL, locale: Local
   }
 }
 
-async function fetchBrandedGoneShellHtml(request: Request, env: Env, requestUrl: URL): Promise<string | null> {
-  let shellUrl = new URL(requestUrl)
-  shellUrl.pathname = '/410/'
-  let originResponse = await env.WEB.fetch(createOriginRequest(request, shellUrl))
+async function fetchBrandedGoneShellHtml(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+): Promise<{ html: string; headers: Headers } | null> {
+  try {
+    let shellUrl = new URL(requestUrl)
+    shellUrl.pathname = '/410/'
+    let originResponse = await env.WEB.fetch(new Request(createOriginRequest(request, shellUrl), { method: 'GET' }))
 
-  for (let hops = 0; hops < 3 && isRedirect(originResponse); hops += 1) {
-    const location = originResponse.headers.get('Location')
-    if (!location) break
-    shellUrl = new URL(location, shellUrl)
-    originResponse = await env.WEB.fetch(createOriginRequest(request, shellUrl))
+    for (let hops = 0; hops < 3 && isRedirect(originResponse); hops += 1) {
+      const location = originResponse.headers.get('Location')
+      if (!location) break
+      shellUrl = new URL(location, shellUrl)
+      originResponse = await env.WEB.fetch(new Request(createOriginRequest(request, shellUrl), { method: 'GET' }))
+    }
+
+    if (isHtmlResponse(originResponse) && (originResponse.ok || originResponse.status === 404 || originResponse.status === 410)) {
+      const headers = new Headers(originResponse.headers)
+      headers.set('Content-Type', 'text/html; charset=utf-8')
+      return { html: await originResponse.text(), headers }
+    }
+
+    return null
+  } catch (error) {
+    console.error('Failed to fetch branded gone shell', { pathname: requestUrl.pathname, error: errorMessage(error) })
+    return null
   }
-
-  if (isHtmlResponse(originResponse) && (originResponse.ok || originResponse.status === 404 || originResponse.status === 410)) {
-    return await originResponse.text()
-  }
-
-  return null
 }
 
 async function serveGonePathResponse(
@@ -3214,17 +3230,18 @@ async function serveGonePathResponse(
 ): Promise<Response> {
   scheduleTranslationBackgroundTask(ctx, purgeTranslatedPageCache(env, requestUrl, locale))
 
-  const sourceHtml = await fetchBrandedGoneShellHtml(request, env, requestUrl)
-  if (sourceHtml) {
+  const shell = await fetchBrandedGoneShellHtml(request, env, requestUrl)
+  if (shell) {
     const response = createTranslatedHtmlResponse(
-      new Response(sourceHtml, {
+      new Response(shell.html, {
         status: 410,
         statusText: 'Gone',
-        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+        headers: shell.headers,
       }),
-      sourceHtml,
+      shell.html,
       requestUrl,
       locale,
+      { preserveDocumentLanguage: true },
     )
     return withResponseHeaders(response, 'BYPASS', locale, isHead)
   }
@@ -3267,8 +3284,14 @@ async function loadSourceHtml(request: Request, env: Env, requestUrl: URL, local
   return { type: 'html', originResponse, sourceHtml }
 }
 
-function createTranslatedHtmlResponse(originResponse: Response, translatedHtml: string, requestUrl: URL, locale: Locale): Response {
-  const localizedHtml = rewriteMetadataAndLinks(translatedHtml, requestUrl, locale)
+function createTranslatedHtmlResponse(
+  originResponse: Response,
+  translatedHtml: string,
+  requestUrl: URL,
+  locale: Locale,
+  options?: { preserveDocumentLanguage?: boolean },
+): Response {
+  const localizedHtml = rewriteMetadataAndLinks(translatedHtml, requestUrl, locale, options)
   const headers = new Headers(originResponse.headers)
   headers.set('Content-Type', 'text/html; charset=utf-8')
   headers.delete('Content-Length')
