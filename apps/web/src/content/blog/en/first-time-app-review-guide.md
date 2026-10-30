@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-10-29T10:31:00.000Z
+updated_at: 2026-10-30T16:11:32.000Z
 head_image: /app-review-guide.webp
 head_image_alt: App review guidelines 2026 first-time checklist for Apple App Store and Google Play Capgo blog illustration
 keywords: app review guidelines, app review guide, app store review guidelines, google play review, app review process, app store review, play store review, app submission, privacy policy, first time app review
