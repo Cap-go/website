@@ -23,14 +23,14 @@ faq:
   - question: What are the main Apple App Store review guideline sections?
     answer: Apple groups the App Store Review Guidelines into Safety, Performance, Business, Design, and Legal. Performance includes 2.1 App Completeness and 2.3 Accurate Metadata. Legal includes 5.1 Privacy. Apple reports that a large share of unresolved review issues relate to guideline 2.1, crashes, broken links, placeholder content, or missing review information.
   - question: What does Google Play check during app review?
-    answer: Google reviews your app bundle, store listing, content rating, Data safety form, and policy compliance before production access. Personal developer accounts created after November 13, 2023 must run closed testing with at least 12 testers for 14 consecutive days before applying for production. Updates to apps already on Play generally follow the same policy review path with standard publishing.
+    answer: Google reviews your app bundle, store listing, content rating, Data safety form, and policy compliance before production access. Personal developer accounts created after November 13, 2023 must run closed testing with at least 12 testers who remain opted in continuously for at least 14 consecutive days before applying for production. Updates to apps already on Play generally follow the same policy review path with standard publishing.
   - question: What are the most common first-time app rejection reasons?
     answer: On Apple, frequent first-submission issues include 2.1 App Completeness, crashes, non-working demo logins, or broken support and privacy links, 2.3 Accurate Metadata when screenshots or descriptions do not match the build, and 5.1 Privacy when the privacy policy or permission strings are missing or inaccurate. On Google Play, rejections often involve policy violations, incomplete Data safety or content rating answers, or skipping required testing for new personal accounts. For guideline 4.2 Minimum Functionality and 4.3 Spam on iOS, use a focused follow-up guide rather than repeating that checklist here.
   - question: Where should I start before my first App Store or Play submission?
     answer: Confirm account enrollment and store listing assets, publish an HTTPS privacy policy, complete Apple privacy nutrition labels or Google Data safety honestly, and test on real devices with the same demo account you will give reviewers. Budget for Google closed testing if your Play Console account requires it. For App Store fee context see the cost to publish on the App Store page, for age ratings see the app store age ratings guide, and for Apple guideline 4.2 and 4.3 deep dives see how to pass App Store review in 2026.
 ---
 
-**Quick answer:** **App review guidelines** are the rules Apple and Google enforce before your app goes live. Apple’s [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) are organized into **Safety, Performance, Business, Design, and Legal**. Google Play reviews your release against the [Developer Program Policies](https://support.google.com/googleplay/android-developer/answer/9858738) plus Play Console requirements such as content rating and Data safety. **Review times:** Apple states App Review works around the clock and typically completes at least **50% of submissions within 24 hours** and **90% within 48 hours** ([App Review](https://developer.apple.com/distribute/app-review/)). Google says some accounts may wait **up to seven days or longer** in exceptional cases ([Publish your app](https://support.google.com/googleplay/android-developer/answer/9859751)). **First-time rejections** often trace to **2.1 App Completeness** (crashes, broken links, bad demo accounts), **2.3 Accurate Metadata**, and **5.1 Privacy** on iOS, plus incomplete Play policy or testing steps on Android. For **guideline 4.2 and 4.3** strategy, read [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/). For ratings and parental controls, see the [app store age ratings guide](/blog/app-store-age-ratings-guide/). For enrollment fees, see [cost to publish an app on the App Store](/cost/cost-to-publish-app-on-app-store/).
+**Quick answer:** **App review guidelines** are the rules Apple and Google enforce before your app goes live. Apple’s [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) are organized into **Safety, Performance, Business, Design, and Legal**. Google Play reviews your release against the [Developer Program Policies](https://support.google.com/googleplay/android-developer/answer/9858738) plus Play Console requirements such as content rating and Data safety. **Review times:** Apple states App Review works around the clock and typically completes at least **50% of submissions within 24 hours** and **90% within 48 hours** ([App Review](https://developer.apple.com/distribute/app-review/)). Google says some accounts may wait **up to seven days or longer** in exceptional cases ([Publish your app](https://support.google.com/googleplay/android-developer/answer/9859751)). New personal Play Console accounts may also need at least **12 testers who stay opted in continuously for 14 consecutive days** in closed testing before production. **First-time rejections** often trace to **2.1 App Completeness** (crashes, broken links, bad demo accounts), **2.3 Accurate Metadata**, and **5.1 Privacy** on iOS, plus incomplete Play policy or testing steps on Android. For **guideline 4.2 and 4.3** strategy, read [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/). For ratings and parental controls, see the [app store age ratings guide](/blog/app-store-age-ratings-guide/). For enrollment fees, see [cost to publish an app on the App Store](/cost/cost-to-publish-app-on-app-store/).
 
 Submitting your first app to the App Store or Play Store can feel overwhelming. With constantly evolving guidelines and stricter enforcement in 2026, getting your app approved requires careful attention to detail. This checklist walks you through what reviewers check on a first submission for both iOS and Android, with deeper Apple rejection playbooks in our [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/) guide when you need guideline-level detail beyond this overview.
 
@@ -45,7 +45,7 @@ Apple publishes timing on its [App Review](https://developer.apple.com/distribut
 - **Typical timing**: At least 50% of submissions reviewed in less than 24 hours, and 90% in less than 48 hours
 - **Incomplete submissions**: Review may be delayed or fail if metadata, demo access, or compliance answers are missing
 - **Complex apps**: Apple notes that apps needing greater scrutiny can take longer ([After You Submit](https://developer.apple.com/app-store/review/guidelines/#after-you-submit))
-- **Expedited Review**: Available for critical bug fixes or time-bound events when you request it in App Store Connect
+- **Expedited Review**: Available for critical bug fixes or time-bound events after you submit through App Store Connect and send the request through [Apple's expedited review form](https://developer.apple.com/contact/app-store/?topic=expedite)
 
 Plan for the published averages, not anecdotal queue spikes, and treat every missing review note as a delay risk.
 
@@ -63,7 +63,7 @@ Google documents review timing in [Publish your app](https://support.google.com/
 
 - **Standard publishing**: Updates are processed and published as soon as possible after review
 - **Extended review**: For some developer accounts, Google may take **up to seven days or longer in exceptional cases**
-- **Closed testing gate**: Personal accounts created after November 13, 2023 need at least **12 testers** and **14 consecutive days** of closed testing before production access
+- **Closed testing gate**: Personal accounts created after November 13, 2023 need at least **12 testers who remain opted in continuously for at least 14 consecutive days** of closed testing before production access
 - **After testing**: Production review still runs against Play policies before the app goes live
 
 **Important Update**: Google now requires substantially more rigorous testing for some new Play Console accounts, which we'll cover in detail below.
@@ -97,8 +97,8 @@ This is the change that catches most first-time Android publishers off guard:
 If your Google Play developer account is a **personal account created after November 13, 2023**, you must complete a closed testing period before the app can go to production:
 
 **Requirements**:
-- **Minimum 12 Testers**: You must recruit at least 12 opted-in testers
-- **14-Day Testing Period**: The app must remain in closed testing for a minimum of 14 consecutive days
+- **Minimum 12 Testers**: You must have at least 12 testers who remain opted in continuously
+- **14-Day Testing Period**: Those testers must remain opted in while the app is in closed testing for a minimum of 14 consecutive days
 - **Production Access Application**: After the testing period, you still need to apply for production access in Play Console
 - **Feedback Collection**: You should document the issues found, fixes made, and how testers used the app
 
@@ -139,7 +139,7 @@ If your Google Play developer account is a **personal account created after Nove
    - Fix any critical issues before promotion
 
 5. **Promote to Production**
-   - After 14 days with 12+ opted-in testers
+   - After at least 14 consecutive days with 12+ testers who stayed opted in continuously
    - Apply for production access from the Play Console dashboard
    - Review all crash reports and feedback
    - Create production release and submit for final review
@@ -750,7 +750,7 @@ Already covered above, but absolutely critical for Android approval.
 
 ### Closed Testing Track (Current Requirement)
 
-This is the big one for newly created personal developer accounts: the 12 tester, 14-day requirement detailed earlier in this guide.
+This is the big one for newly created personal developer accounts: the 12 tester continuous opt-in, 14-day requirement detailed earlier in this guide.
 
 **Timeline**:
 1. Week 1: Recruit testers, set up closed testing
@@ -860,7 +860,7 @@ Before you hit submit, go through this comprehensive checklist:
 - [ ] Target API 35 or higher
 - [ ] Content rating questionnaire completed
 - [ ] Feature graphic uploaded
-- [ ] Closed testing completed if your Play Console account requires it (12 testers, 14 days)
+- [ ] Closed testing completed if your Play Console account requires it (12 testers opted in continuously, 14 consecutive days)
 - [ ] Crash reports from testing reviewed and fixed
 - [ ] No references to iOS or other platforms
 
@@ -868,7 +868,7 @@ Before you hit submit, go through this comprehensive checklist:
 
 - [ ] 12+ testers recruited if your Play account requires closed testing
 - [ ] Closed testing track created
-- [ ] 14 consecutive days of testing completed
+- [ ] 12+ testers remained opted in continuously for 14 consecutive days
 - [ ] Testers actually used the app (not just installed)
 - [ ] Crash monitoring enabled during testing
 - [ ] Critical bugs from testing fixed
@@ -1162,7 +1162,7 @@ When submitting updates:
 They are Apple’s [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and Google’s [Developer Program Policies](https://support.google.com/googleplay/android-developer/answer/9858738). Reviewers check your binary, metadata, privacy disclosures, and account setup before release.
 
 **How long does app review take in 2026?**  
-Apple targets 50% of submissions within 24 hours and 90% within 48 hours. Google may take up to seven days or longer for some accounts. New personal Play Console accounts also need 14 days of closed testing when that rule applies.
+Apple targets 50% of submissions within 24 hours and 90% within 48 hours. Google may take up to seven days or longer for some accounts. New personal Play Console accounts also need at least 12 testers who remain opted in continuously for at least 14 consecutive days of closed testing when that rule applies.
 
 **What are Apple’s five guideline sections?**  
 Safety, Performance, Business, Design, and Legal. Performance covers completeness and metadata (including 2.3). Legal covers privacy (including 5.1).
