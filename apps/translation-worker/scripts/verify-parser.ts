@@ -1,6 +1,7 @@
 import worker, { __translationWorkerTest, TranslationCoordinator } from '../src/index'
 import messages from '../../shared/copy/messages'
 import { messageContextOverrides } from '../../shared/copy/messageContextOverrides'
+import { isGonePath } from '../../shared/gonePaths.ts'
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message)
@@ -194,6 +195,27 @@ assert(__translationWorkerTest.isSpeedBrainRulesPath('/fr/speculation-rules.json
 assert(__translationWorkerTest.isSpeedBrainRulesPath('/de/speculation-rules.json'), 'German speculation rules path was not recognized')
 assert(!__translationWorkerTest.isSpeedBrainRulesPath('/speculation-rules.json'), 'An unlocalized speculation rules path was treated as a worker route')
 assert(!__translationWorkerTest.isSpeedBrainRulesPath('/fr/pricing/'), 'A translated page was treated as the speculation rules file')
+assert(isGonePath('/de/blog/minimum-viable-product-example/'), 'Localized retired blog URL was not marked gone')
+assert(!isGonePath('/de/blog/capacitor-comprehensive-guide/'), 'Active localized blog URL was marked gone')
+
+const goneShellHtml = '<html lang="en"><head><title>Gone</title><link rel="canonical" href="https://capgo.app/410/" /></head><body><p>Removed</p></body></html>'
+const goneShellLocalized = __translationWorkerTest.rewriteMetadataAndLinks(
+  goneShellHtml,
+  new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'),
+  'fr',
+  { preserveDocumentLanguage: true },
+)
+assert(/<html\b[^>]*\blang="en"/.test(goneShellLocalized), 'Branded gone shell document language was rewritten without translating content')
+assert(
+  /<link\b[^>]*\brel="canonical"[^>]*\bhref="https:\/\/capgo\.app\/fr\/blog\/minimum-viable-product-example\/"/.test(goneShellLocalized),
+  'Branded gone shell canonical was not localized',
+)
+const goneShellDefaultLang = __translationWorkerTest.rewriteMetadataAndLinks(
+  goneShellHtml,
+  new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'),
+  'fr',
+)
+assert(/<html\b[^>]*\blang="fr"/.test(goneShellDefaultLang), 'Translated pages should still rewrite document language by default')
 
 const speedBrainRules = await worker.fetch(new Request('https://capgo.app/fr/speculation-rules.json'), {} as any)
 assert(speedBrainRules.status === 200, 'Speculation rules route did not return 200')
@@ -960,6 +982,96 @@ try {
   assert(jsonHitBody === '{"ok":true}', 'A cached JSON HIT was rewritten as HTML')
   assert(fetchesBeforeJsonHit === blogOriginFetches, 'A cached JSON HIT fetched the English origin')
   await new Promise((resolve) => setTimeout(resolve, 25))
+
+  // Gone-path regression: edge cache plus serialized R2, then R2-only stale translation.
+  const goneBlogUrl = new URL('https://capgo.app/fr/blog/minimum-viable-product-example/')
+  const goneBlogCacheKey = __translationWorkerTest.cacheKeyFor(goneBlogUrl, 'fr')
+  const cachedGoneBlogHtml = `<!doctype html><html lang="fr"><head><title>Produit minimum viable</title></head><body><p>Contenu retire encore en cache</p></body></html>`
+  const staleEnglishGoneBlogHtml = `<!doctype html><html lang="en"><head><title>Minimum viable product example</title></head><body><p>Stale English blog still live at origin</p></body></html>`
+  const brandedGoneShellHtml = `<!doctype html><html lang="en"><head><title>Gone</title><link rel="canonical" href="https://capgo.app/410/" /></head><body><p>This page was removed</p></body></html>`
+  cacheEntries.set(
+    goneBlogCacheKey.url,
+    new Response(cachedGoneBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now() - 10 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': 'g'.repeat(64),
+      },
+    }),
+  )
+  const goneStoreKey = await __translationWorkerTest.translationStoreKey('pages', goneBlogUrl, 'fr')
+  storedTranslations.set(
+    goneStoreKey,
+    JSON.stringify({
+      cacheVersion: __translationWorkerTest.TRANSLATION_CACHE_VERSION,
+      locale: 'fr',
+      sourceHash: 'g'.repeat(64),
+      translatedAt: Date.now() - 10 * 60 * 1000,
+      status: 200,
+      statusText: 'OK',
+      headers: [['content-type', 'text/html; charset=utf-8']],
+      bodyEncoding: 'text',
+      body: cachedGoneBlogHtml,
+    }),
+  )
+  const goneEnv = {
+    ...env,
+    WEB: {
+      fetch: async (request: Request) => {
+        const url = new URL(request.url)
+        if (url.pathname === '/410/' || url.pathname === '/410/index.html') {
+          return new Response(brandedGoneShellHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+        }
+        return new Response(staleEnglishGoneBlogHtml, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+      },
+    },
+  }
+  const goneBackgroundTasks: Promise<unknown>[] = []
+  const goneCtx = {
+    waitUntil: (task: Promise<unknown>) => {
+      goneBackgroundTasks.push(task)
+    },
+  }
+  const goneResponse = await worker.fetch(new Request(goneBlogUrl), goneEnv as any, goneCtx as any)
+  const goneBody = await goneResponse.text()
+  assert(goneResponse.status === 410, 'A localized gone URL with stale caches did not return 410')
+  assert(goneResponse.headers.get('X-Capgo-Translation-Cache') === 'BYPASS', 'A localized gone URL did not bypass translation cache')
+  assert(goneBody.includes('This page was removed'), 'A localized gone URL did not serve the branded gone shell')
+  assert(!goneBody.includes('Contenu retire encore en cache'), 'A localized gone URL served cached translation instead of the gone shell')
+  await Promise.all(goneBackgroundTasks)
+  assert(!cacheEntries.has(goneBlogCacheKey.url), 'Gone path cleanup did not purge the edge translation cache')
+  assert(!storedTranslations.has(goneStoreKey), 'Gone path cleanup did not purge the R2 translation store')
+
+  const goneR2OnlyUrl = new URL('https://capgo.app/de/blog/app-user-retention/')
+  const goneR2OnlyStoreKey = await __translationWorkerTest.translationStoreKey('pages', goneR2OnlyUrl, 'de')
+  const staleR2OnlyBody = '<!doctype html><html lang="de"><head><title>Alte Retention Uebersetzung</title></head><body><p>Veraltete R2 Uebersetzung</p></body></html>'
+  storedTranslations.set(
+    goneR2OnlyStoreKey,
+    JSON.stringify({
+      cacheVersion: __translationWorkerTest.TRANSLATION_CACHE_VERSION,
+      locale: 'de',
+      sourceHash: 'h'.repeat(64),
+      translatedAt: Date.now() - 10 * 60 * 1000,
+      status: 200,
+      statusText: 'OK',
+      headers: [['content-type', 'text/html; charset=utf-8']],
+      bodyEncoding: 'text',
+      body: staleR2OnlyBody,
+    }),
+  )
+  const goneR2OnlyBackgroundTasks: Promise<unknown>[] = []
+  const goneR2OnlyCtx = {
+    waitUntil: (task: Promise<unknown>) => {
+      goneR2OnlyBackgroundTasks.push(task)
+    },
+  }
+  const goneR2OnlyResponse = await worker.fetch(new Request(goneR2OnlyUrl), goneEnv as any, goneR2OnlyCtx as any)
+  const goneR2OnlyBody = await goneR2OnlyResponse.text()
+  assert(goneR2OnlyResponse.status === 410, 'A localized gone URL with R2-only cache did not return 410')
+  assert(goneR2OnlyBody.includes('This page was removed'), 'A localized gone URL with R2-only cache did not serve the branded gone shell')
+  assert(!goneR2OnlyBody.includes('Veraltete R2 Uebersetzung'), 'A localized gone URL served a valid R2 translation instead of the gone shell')
+  await Promise.all(goneR2OnlyBackgroundTasks)
+  assert(!storedTranslations.has(goneR2OnlyStoreKey), 'Gone path cleanup did not purge the R2-only translation store')
 
   const originalConsoleError = console.error
   let enqueueFailureResponse: Response | null = null
