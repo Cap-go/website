@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Account termination">
+  <title>Account termination</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="272" cy="44" r="20" fill="#44BCFF" opacity="0.22"/>
+  <rect x="88" y="48" width="144" height="104" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <path d="M136 88 L184 112 M184 88 L136 112" stroke="#44BCFF" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+  <rect x="112" y="128" width="96" height="8" rx="4" fill="#9CA3AF" opacity="0.4"/>
+</svg>

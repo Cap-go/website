@@ -53,6 +53,12 @@
   },
   "metadata-iap-checkboxes": null,
   "metadata-loop-launch-week": null,
+  "name-rejection-fixed-then-3-2-f-termination-a-year-later": {
+    "src": "/app-store-refusal-horror-story/screenshots/name-rejection-fixed-then-3-2-f-termination-a-year-later.webp",
+    "alt": "App Store Connect review history showing version 1.0 rejected twice then approved, and a later update approved, with user names blacked out",
+    "width": 913,
+    "height": 801
+  },
   "new-features-then-4-3-a-extended-review-warning": {
     "src": "/app-store-refusal-horror-story/screenshots/new-features-then-4-3-a-extended-review-warning.webp",
     "alt": "App Review rejection under Guideline 4.3(a) Design Spam with an extended review warning about repeated submissions",
@@ -90,6 +96,7 @@
     "height": 825
   },
   "reviewer-could-not-follow-2-1": null,
+  "reviewer-license-hid-paywall-2-1-then-china-ai-rejection": null,
   "same-letter-twice-4-3": null,
   "seven-questions-2-1": null,
   "seven-template-apps-4-3-same-minute": null,
@@ -99,6 +106,7 @@
     "width": 560,
     "height": 500
   },
+  "solo-game-4-3-4-2-6-twice-nine-answers-no-reply": null,
   "simulated-gambling-staking": {
     "src": "/app-store-refusal-horror-story/screenshots/simulated-gambling-staking.webp",
     "alt": "Rejection notice saying simulated gambling apps need an organization account",
