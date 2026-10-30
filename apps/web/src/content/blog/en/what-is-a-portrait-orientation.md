@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-14T09:50:54.053Z
-updated_at: 2026-10-30T10:00:00.000Z
+updated_at: 2026-10-30T16:12:48.000Z
 head_image: /blog-images/what-is-a-portrait-orientation.webp
 head_image_alt: Portrait and landscape phone frames illustrating vertical vs horizontal screen orientation
 keywords: >-
