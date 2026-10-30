@@ -1,11 +1,43 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.99.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.1",
+    "pubDate": "2026-10-29T13:23:06.000Z",
+    "description": "🆕 Changelog Fixed Resolved agent project context across every MCP tool so multi tool workflows operate against the correct project instead of losing context. Restored missing data when reading Cloudflare device records so device inventory details are complete again. Fixed a race condition when creating channels concurrently so parallel API calls no longer fail unexpectedly. Ensured browser based ChatGPT model requests in the assistant are correctly proxied, restoring assistant model access. ..."
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.99.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.0",
     "pubDate": "2026-10-29T02:00:36.000Z",
     "description": "🆕 Changelog Added Added flag to the CLI so you can upload only debug symbols instead of full artifacts. ( 3978) Changed Improved console performance by bounding bundle removal audit lookups. ( 3980) Migrated backend database calls from PostgREST/supabase js wrappers to direct PostgreSQL for increased reliability and performance. ( 3971) Fixed Fixed the onboarding sidebar so the checklist navigation stays open while navigating through steps. ( 3981) 🔗 Full Changelog : https://github.com/Cap ..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.27.5",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.5",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.5",
+    "pubDate": "2026-10-29T13:25:31.000Z",
+    "description": "🆕 Changelog Changed Updated generated CLI documentation to reflect the latest command and option changes. Fixed Resolved inconsistent project context resolution across MCP agent tools, improving reliability when tools operate within project specific contexts. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.27.4...capgo 22.27.5"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.27.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.4",
+    "pubDate": "2026-10-29T12:22:39.000Z",
+    "description": "🆕 Changelog Fixed Resolved missing on devices read from Cloudflare Device records fetched via Cloudflare now correctly include the field, so dashboards, APIs, and downstream integrations that rely on this value will display complete and consistent device information. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.27.3...capgo 22.27.4"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.27.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.3",
+    "pubDate": "2026-10-29T11:10:12.000Z",
+    "description": "🆕 Changelog Fixed Resolved a race condition that could cause failures when multiple clients attempted to create channels at the same time, making channel creation more reliable under concurrent load. Security Masked alert API keys so that sensitive values are no longer exposed in alert payloads. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.27.2...capgo 22.27.3"
   },
   {
     "category": "changelog",
@@ -286,38 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.0",
     "pubDate": "2026-10-27T00:51:07.000Z",
     "description": "🆕 Changelog Changed Serve storage images from Cloudflare R2 only for improved reliability and performance. Removed Removed Sign in with Apple authentication. Users who previously signed in with Apple must switch to email/password or another supported identity provider before signing in again. Fixed Set strict owner only file permissions when writing the E2E private key through the CLI. Keep the public user profile email address synchronized with the authentication provider email. Security Re..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.18.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.2",
-    "pubDate": "2026-10-26T23:19:56.000Z",
-    "description": "🆕 Changelog Fixed Reduced Cloudflare API usage to stay within rate limits, preventing stats collection from being throttled or failing. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.18.1...capgo 22.18.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.18.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.1",
-    "pubDate": "2026-10-26T23:13:06.000Z",
-    "description": "🆕 Changelog Changed Improved queue dispatch performance by processing only readable pgmq messages, reducing unnecessary overhead. Preserved Cloudflare IDs for failed queue messages to simplify failure tracking and debugging. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.18.0...capgo 22.18.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.18.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.18.0",
-    "pubDate": "2026-10-26T20:02:47.000Z",
-    "description": "🆕 Changelog Added Improved update check messaging for legacy plugins : Added clear explanations when failed update checks are ignored because you are using legacy Capacitor plugins. This helps you understand why update errors may not surface on older plugin versions and whether an upgrade is needed. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.4...capgo 22.18.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.17.4",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.4",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.17.4",
-    "pubDate": "2026-10-26T17:44:39.000Z",
-    "description": "🆕 Changelog Fixed Updated number, currency, and date formatting to follow the selected UI language, ensuring these formats stay consistent with the rest of the interface language. ( 3880) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.17.3...capgo 22.17.4"
   },
   {
     "category": "release",

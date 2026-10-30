@@ -1,160 +1,160 @@
 {
-  "updatedAt": "2025-12-01T00:00:00.000Z",
+  "updatedAt": "2026-10-01T00:00:00.000Z",
   "source": "Composables Android Distribution Chart",
   "sourceUrl": "https://composables.com/android-distribution-chart",
-  "fetchedAt": "2026-10-12T07:29:41.763Z",
+  "fetchedAt": "2026-10-30T07:04:04.842Z",
   "apiDistribution": [
-    {
-      "version": "Android 5 (Lollipop)",
-      "api": 21,
-      "distribution": 0.1
-    },
     {
       "version": "Android 5.1 (Lollipop)",
       "api": 22,
-      "distribution": 0.3
+      "distribution": 0.2
     },
     {
       "version": "Android 6 (Marshmallow)",
       "api": 23,
-      "distribution": 0.4
+      "distribution": 0.3
     },
     {
       "version": "Android 7 (Nougat)",
       "api": 24,
-      "distribution": 0.4
+      "distribution": 0.2
     },
     {
       "version": "Android 7.1 (Nougat)",
       "api": 25,
-      "distribution": 0.4
+      "distribution": 0.2
     },
     {
       "version": "Android 8 (Oreo)",
       "api": 26,
-      "distribution": 0.8
+      "distribution": 0.5
     },
     {
       "version": "Android 8.1 (Oreo)",
       "api": 27,
-      "distribution": 2.3
+      "distribution": 1.5
     },
     {
       "version": "Android 9 (Pie)",
       "api": 28,
-      "distribution": 4.5
+      "distribution": 3.1
     },
     {
       "version": "Android 10 (Q)",
       "api": 29,
-      "distribution": 7.8
+      "distribution": 5.7
     },
     {
       "version": "Android 11 (R)",
       "api": 30,
-      "distribution": 13.7
+      "distribution": 10.5
     },
     {
       "version": "Android 12 (S)",
       "api": 31,
-      "distribution": 11.4
+      "distribution": 9.6
     },
     {
       "version": "Android 13 (T)",
       "api": 33,
-      "distribution": 13.9
+      "distribution": 11.8
     },
     {
       "version": "Android 14 (U)",
       "api": 34,
-      "distribution": 17.2
+      "distribution": 15.3
     },
     {
       "version": "Android 15 (V)",
       "api": 35,
-      "distribution": 19.3
+      "distribution": 14.7
     },
     {
       "version": "Android 16 (B)",
       "api": 36,
-      "distribution": 7.4
+      "distribution": 25.4
+    },
+    {
+      "version": "Android 17 (C)",
+      "api": 37,
+      "distribution": 0.9
     }
   ],
   "cumulativeDistribution": [
     {
-      "version": "Android 5 (Lollipop)",
-      "api": 21,
-      "distribution": 99.9
-    },
-    {
       "version": "Android 5.1 (Lollipop)",
       "api": 22,
-      "distribution": 99.8
+      "distribution": 99.9
     },
     {
       "version": "Android 6 (Marshmallow)",
       "api": 23,
-      "distribution": 99.5
+      "distribution": 99.7
     },
     {
       "version": "Android 7 (Nougat)",
       "api": 24,
-      "distribution": 99.1
+      "distribution": 99.4
     },
     {
       "version": "Android 7.1 (Nougat)",
       "api": 25,
-      "distribution": 98.7
+      "distribution": 99.2
     },
     {
       "version": "Android 8 (Oreo)",
       "api": 26,
-      "distribution": 98.3
+      "distribution": 99
     },
     {
       "version": "Android 8.1 (Oreo)",
       "api": 27,
-      "distribution": 97.5
+      "distribution": 98.5
     },
     {
       "version": "Android 9 (Pie)",
       "api": 28,
-      "distribution": 95.2
+      "distribution": 97
     },
     {
       "version": "Android 10 (Q)",
       "api": 29,
-      "distribution": 90.7
+      "distribution": 93.9
     },
     {
       "version": "Android 11 (R)",
       "api": 30,
-      "distribution": 82.9
+      "distribution": 88.2
     },
     {
       "version": "Android 12 (S)",
       "api": 31,
-      "distribution": 69.2
+      "distribution": 77.7
     },
     {
       "version": "Android 13 (T)",
       "api": 33,
-      "distribution": 57.8
+      "distribution": 68.1
     },
     {
       "version": "Android 14 (U)",
       "api": 34,
-      "distribution": 43.9
+      "distribution": 56.3
     },
     {
       "version": "Android 15 (V)",
       "api": 35,
-      "distribution": 26.7
+      "distribution": 41
     },
     {
       "version": "Android 16 (B)",
       "api": 36,
-      "distribution": 7.4
+      "distribution": 26.3
+    },
+    {
+      "version": "Android 17 (C)",
+      "api": 37,
+      "distribution": 0.9
     }
   ]
 }
