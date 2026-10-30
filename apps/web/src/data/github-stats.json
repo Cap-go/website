@@ -1,12 +1,12 @@
 {
   "repositoryCount": 143,
   "contributorCount": 606,
-  "versionCount": 16238,
+  "versionCount": 16244,
   "releaseCount": 6991,
   "closedIssueCount": 1763,
-  "mergedPullRequestCount": 9407,
-  "resolvedItemCount": 11170,
-  "totalStars": 3183,
+  "mergedPullRequestCount": 9414,
+  "resolvedItemCount": 11177,
+  "totalStars": 3185,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -136,7 +136,7 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 876,
+      "stars": 878,
       "contributors": 54,
       "versionTags": 794,
       "releases": 238,
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 211,
       "contributors": 30,
-      "versionTags": 5879,
+      "versionTags": 5885,
       "releases": 1000,
       "closedIssues": 420,
-      "mergedPullRequests": 2721
+      "mergedPullRequests": 2728
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -532,7 +532,7 @@
     },
     "Cap-go/capacitor-background-geolocation": {
       "url": "https://github.com/Cap-go/capacitor-background-geolocation",
-      "stars": 29,
+      "stars": 28,
       "contributors": 12,
       "versionTags": 96,
       "releases": 78,
@@ -1090,7 +1090,7 @@
     },
     "Cap-go/capacitor-zip": {
       "url": "https://github.com/Cap-go/capacitor-zip",
-      "stars": 6,
+      "stars": 5,
       "contributors": 2,
       "versionTags": 37,
       "releases": 35,
@@ -1099,7 +1099,7 @@
     },
     "Cap-go/capacitor-zebra-datawedge": {
       "url": "https://github.com/Cap-go/capacitor-zebra-datawedge",
-      "stars": 4,
+      "stars": 5,
       "contributors": 3,
       "versionTags": 14,
       "releases": 14,
@@ -1252,7 +1252,7 @@
     },
     "Cap-go/capacitor-widget-kit": {
       "url": "https://github.com/Cap-go/capacitor-widget-kit",
-      "stars": 10,
+      "stars": 11,
       "contributors": 4,
       "versionTags": 17,
       "releases": 16,
