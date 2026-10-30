@@ -21,7 +21,6 @@ const REDIRECTS = [
   ['/blog/how-chinas-cybersecurity-law-impacts-app-developers/', '/blog/how-chinas-data-laws-impact-app-store-submissions/'],
   ['/blog/wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt/', '/blog/how-chinas-data-laws-impact-app-store-submissions/'],
   ['/blog/uptime-guarantee/', '/sla/'],
-  ['/blog/what-is-a-portrait-orientation/', '/docs/plugins/screen-orientation/'],
   ['/blog/understanding-apples-privacy-manifest/', '/blog/privacy-manifest-for-ios-apps/'],
   ['/blog/app-access-management/', '/blog/how-rbac-secures-ota-updates-in-capacitor-apps/'],
   ['/blog/app-behavior-tracking/', '/blog/capgo-plugin-for-custom-event-tracking/'],
