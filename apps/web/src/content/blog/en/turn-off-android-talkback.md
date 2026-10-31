@@ -125,29 +125,21 @@ More detail lives in [Get started on Android with TalkBack](https://support.goog
 
 ## Frequently asked questions
 
-::: faq
 ### What is the fastest way to turn off TalkBack on Android?
 
 Press and hold both volume keys for about 3 seconds, confirming again if prompted. You can also say Hey Google, turn off TalkBack when Assistant is set up.
-:::
 
-::: faq
 ### How do I turn off TalkBack on Samsung?
 
 Use the volume up and volume down shortcut for at least 3 seconds, or open Settings, Accessibility, TalkBack (or Screen reader, Voice Assistant on older One UI), double tap the switch, then double tap Turn off.
-:::
 
-::: faq
 ### Why does TalkBack keep turning on?
 
 The volume or accessibility shortcut is usually still enabled. After TalkBack is off, disable TalkBack shortcut under Settings, Accessibility, TalkBack.
-:::
 
-::: faq
 ### How do I turn TalkBack back on?
 
 Hold both volume keys, say Hey Google, turn on TalkBack, or enable Use TalkBack under Settings, Accessibility, TalkBack.
-:::
 
 ## Keep going from How to Turn off and Use TalkBack on Android Devices
 
