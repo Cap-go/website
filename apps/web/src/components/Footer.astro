@@ -50,6 +50,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
     links: [
       { name: m.live_update({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'live-update') },
       { name: m.native_build({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'native-build') },
+      { name: 'Simulator', href: getRelativeLocaleUrl(Astro.locals.locale, 'simulator') },
       { name: 'Observe', href: getRelativeLocaleUrl(Astro.locals.locale, 'observe') },
       { name: 'Notifications', href: getRelativeLocaleUrl(Astro.locals.locale, 'notifications') },
       { name: m.app_mobile({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile') },
