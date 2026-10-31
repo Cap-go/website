@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Third party store metadata">
+  <title>Third party store metadata</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="268" cy="148" r="22" fill="#44BCFF" opacity="0.24"/>
+  <rect x="88" y="48" width="144" height="104" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="108" y="72" width="104" height="10" rx="5" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="108" y="92" width="88" height="10" rx="5" fill="#9CA3AF" opacity="0.35"/>
+  <path d="M104 118h112" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M108 112 L216 124" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Demo account removed">
+  <title>Demo account removed</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="272" cy="44" r="18" fill="#44BCFF" opacity="0.26"/>
+  <rect x="84" y="52" width="152" height="96" rx="14" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="112" y="84" width="96" height="12" rx="6" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="112" y="104" width="96" height="12" rx="6" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <path d="M148 124h24" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M196 72 L228 104 M228 72 L196 104" stroke="#44BCFF" stroke-width="3" stroke-linecap="round"/>
+</svg>
