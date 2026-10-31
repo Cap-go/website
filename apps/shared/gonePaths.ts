@@ -14,8 +14,9 @@ import { splitLocalePath } from './localizedLegacyPathRedirect'
  * on the request are ignored.
  *
  * Runtime: the web worker serves the branded shell from `/410/index.html` with status
- * 410. The translation worker bypasses cached translations for gone paths and localizes
- * the same 410 HTML for non-English locales.
+ * 410. The translation worker serves the same shell for gone paths (including when
+ * cached translations or stale English HTML would otherwise return 200) and purges
+ * stored translations for that locale URL.
  */
 const GONE_PATHS = new Set<string>([
   '/blog/corporate-governance-code',

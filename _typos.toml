@@ -37,6 +37,9 @@ extend-ignore-re = [
 ]
 
 [default.extend-words]
+# Electronic health record acronym
+EHR = "EHR"
+EHRs = "EHRs"
 # French words in the translation style guides.
 appareil = "appareil"
 sur = "sur"
@@ -48,7 +51,6 @@ Appy = "Appy"  # Appy Pie (brand name)
 
 # Acronyms and technical terms
 ASO = "ASO"  # App Store Optimization
-EHR = "EHR"  # Electronic Health Record
 ITMS = "ITMS"  # iTunes Music Store
 SME = "SME"  # Small and midsize enterprise
 Hashi = "Hashi"  # HashiCorp (brand name)

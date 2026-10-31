@@ -1,6 +1,7 @@
 {
   "account-required-for-device-paid-feature-5-1-1": null,
   "ai-consent-in-terms-not-enough-5-1-1-5-1-2": null,
+  "ai-couple-photos-1-1-twice-then-termination-notice": null,
   "ai-data-sharing-no-consent": {
     "src": "/app-store-refusal-horror-story/screenshots/ai-data-sharing-no-consent.webp",
     "alt": "Rejection message asking the app to disclose and get consent before sending personal data to a third party AI service",
@@ -8,6 +9,7 @@
     "height": 1200
   },
   "byok-cloud-models-3-1-1": null,
+  "calendar-client-iphone-2-3-7-5-2-5-4-8-after-mac": null,
   "att-rejection-startup-risk-5-1-2": {
     "src": "/app-store-refusal-horror-story/screenshots/att-rejection-startup-risk-5-1-2.webp",
     "alt": "Blurred post from a founder describing a tracking transparency rejection",
@@ -22,6 +24,7 @@
     "height": 365
   },
   "crowded-category-4-3": null,
+  "demo-account-deleted-five-minutes-then-recording-found-sales-copy": null,
   "entertainment-sound-saturated-4-3": {
     "src": "/app-store-assets/adrien-saturated-category-refusal.svg",
     "alt": "Apple App Review message saying the app did not differ enough from similar apps in a saturated category",
@@ -36,6 +39,7 @@
     "height": 320
   },
   "family-controls-checkbox-five-rejections": null,
+  "first-version-3-1-2-c-then-siri-text-rejected-in-42-seconds": null,
   "fake-documents-pdf-editor": {
     "src": "/app-store-refusal-horror-story/screenshots/fake-documents-pdf-editor.webp",
     "alt": "Rejection text saying the app could be used to create fake official documents",
@@ -50,6 +54,12 @@
   },
   "metadata-iap-checkboxes": null,
   "metadata-loop-launch-week": null,
+  "name-rejection-fixed-then-3-2-f-termination-a-year-later": {
+    "src": "/app-store-refusal-horror-story/screenshots/name-rejection-fixed-then-3-2-f-termination-a-year-later.webp",
+    "alt": "App Store Connect review history showing version 1.0 rejected twice then approved, and a later update approved, with user names blacked out",
+    "width": 913,
+    "height": 801
+  },
   "new-features-then-4-3-a-extended-review-warning": {
     "src": "/app-store-refusal-horror-story/screenshots/new-features-then-4-3-a-extended-review-warning.webp",
     "alt": "App Review rejection under Guideline 4.3(a) Design Spam with an extended review warning about repeated submissions",
@@ -87,6 +97,7 @@
     "height": 825
   },
   "reviewer-could-not-follow-2-1": null,
+  "reviewer-license-hid-paywall-2-1-then-china-ai-rejection": null,
   "same-letter-twice-4-3": null,
   "seven-questions-2-1": null,
   "seven-template-apps-4-3-same-minute": null,
@@ -96,6 +107,7 @@
     "width": 560,
     "height": 500
   },
+  "solo-game-4-3-4-2-6-twice-nine-answers-no-reply": null,
   "simulated-gambling-staking": {
     "src": "/app-store-refusal-horror-story/screenshots/simulated-gambling-staking.webp",
     "alt": "Rejection notice saying simulated gambling apps need an organization account",
@@ -137,6 +149,12 @@
   "terminated-before-first-review": null,
   "too-many-rejected-versions": null,
   "twenty-day-reject-loop": null,
+  "twenty-four-days-then-2-1-information-needed-recording": {
+    "src": "/app-store-refusal-horror-story/screenshots/twenty-four-days-then-2-1-information-needed-recording.webp",
+    "alt": "App Review message for Guideline 2.1 Information Needed listing a screen recording on a physical device and five other required answers",
+    "width": 1197,
+    "height": 566
+  },
   "twenty-five-days-then-2-1-and-5-1-2": {
     "src": "/app-store-refusal-horror-story/screenshots/twenty-five-days-then-2-1-and-5-1-2.webp",
     "alt": "App Store Connect submission table showing iOS App 1.0 rejected under guidelines 2.1 App Completeness and 5.1.2 Data Use and Sharing, app icon redacted",
@@ -191,7 +209,19 @@
   "internet-radio-content-rights-5-2-3": null,
   "ipad-login-failed-during-backend-outage": null,
   "six-rejections-then-4-3-call": null,
+  "six-approved-updates-then-routine-update-3-2-f-termination": {
+    "src": "/app-store-refusal-horror-story/screenshots/six-approved-updates-then-routine-update-3-2-f-termination.webp",
+    "alt": "App Store Connect review list with one submission In Review and six earlier submissions marked Review Completed",
+    "width": 716,
+    "height": 598
+  },
   "unsigned-agreement-rejection-two-weeks": null,
+  "user-uploads-app-google-play-mention-2-3-10-then-two-weeks-waiting": {
+    "src": "/app-store-refusal-horror-story/screenshots/user-uploads-app-google-play-mention-2-3-10-then-two-weeks-waiting.webp",
+    "alt": "App Review message citing Guideline 2.3.10 Accurate Metadata and asking to remove Google Play references",
+    "width": 1206,
+    "height": 1224
+  },
   "crash-on-new-macos-free-vm": null,
   "twelve-days-waiting-expedite-twice": {
     "src": "/app-store-refusal-horror-story/screenshots/twelve-days-waiting-expedite-twice.webp",
@@ -206,6 +236,12 @@
     "height": 427
   },
   "limited-review-history-video-walkthrough-2-1": null,
+  "library-update-eight-rejections-then-termination-notice": {
+    "src": "/app-store-refusal-horror-story/screenshots/library-update-eight-rejections-then-termination-notice.webp",
+    "alt": "Apple message titled Pending Termination Notice, citing repeated guideline violations in an attempt to evade the review process",
+    "width": 1170,
+    "height": 516
+  },
   "title-update-then-3-2-f-termination-notice": null,
   "three-guidelines-one-month-2-1-2-3-2-5-2-3": null,
   "prayer-app-primarily-a-book-4-2": null,

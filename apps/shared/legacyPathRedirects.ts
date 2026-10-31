@@ -55,7 +55,6 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   '/blog/how-chinas-cybersecurity-law-impacts-app-developers': '/blog/how-chinas-data-laws-impact-app-store-submissions/',
   '/blog/how-mobile-apps-stay-compliant-with-us-privacy-laws': '/blog/us-privacy-laws-mobile-app-checklist/',
   '/blog/uptime-guarantee': '/sla/',
-  '/blog/what-is-a-portrait-orientation': '/docs/plugins/screen-orientation/',
   '/blog/what-is-incident-response': '/blog/incident-response-guide/',
   '/blog/understanding-apples-privacy-manifest': '/blog/privacy-manifest-for-ios-apps/',
   '/blog/understanding-regulatory-compliance': '/blog/compliance-checks-in-cicd-for-capacitor-apps/',
