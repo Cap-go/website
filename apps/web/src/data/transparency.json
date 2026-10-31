@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T03:05:06.102Z",
+  "updatedAt": "2026-10-31T03:04:45.021Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -37,6 +37,18 @@
   "releases": [
     {
       "repo": "Cap-go/capgo.app",
+      "tag": "capgo-22.28.5",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.5",
+      "publishedAt": "2026-10-30T16:47:13Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "capgo-22.28.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.0",
+      "publishedAt": "2026-10-30T09:23:11Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
       "tag": "capgo-22.27.5",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.5",
       "publishedAt": "2026-10-29T13:25:31Z"
@@ -49,18 +61,6 @@
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.27.4",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.4",
-      "publishedAt": "2026-10-29T12:22:39Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.27.3",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.27.3",
-      "publishedAt": "2026-10-29T11:10:12Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
       "tag": "cli-8.99.0",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.0",
       "publishedAt": "2026-10-29T02:00:36Z"
@@ -68,13 +68,11 @@
   ],
   "metrics": {
     "live": {
-      "success_rate": 83.1,
+      "success_rate": 84.1,
       "first_try_rate": 98.3,
-      "rollback_rate": 16.5,
-      "updated_at": "2026-10-29T17:29:17.067Z",
+      "rollback_rate": 15.3,
+      "updated_at": "2026-10-31T03:04:32.988Z",
       "daily": [
-        76.3,
-        78.2,
         79.9,
         80.7,
         78.7,
@@ -102,12 +100,14 @@
         82.7,
         84.7,
         84.3,
-        83.8
+        83.8,
+        87.6,
+        88
       ]
     },
     "builder": {
-      "success_rate": 76.9,
-      "updated_at": "2026-10-29T15:06:41.276Z"
+      "success_rate": 77.2,
+      "updated_at": "2026-10-31T03:04:33.013Z"
     }
   }
 }

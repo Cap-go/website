@@ -1,6 +1,14 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.28.5",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.5",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.5",
+    "pubDate": "2026-10-30T16:47:13.000Z",
+    "description": "🆕 Changelog Fixed Resolved a CI issue that blocked production deploys during read replica schema synchronization, restoring reliable release deployments. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.28.4...capgo 22.28.5"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.99.1",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.1",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.1",
@@ -14,6 +22,14 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.0",
     "pubDate": "2026-10-29T02:00:36.000Z",
     "description": "🆕 Changelog Added Added flag to the CLI so you can upload only debug symbols instead of full artifacts. ( 3978) Changed Improved console performance by bounding bundle removal audit lookups. ( 3980) Migrated backend database calls from PostgREST/supabase js wrappers to direct PostgreSQL for increased reliability and performance. ( 3971) Fixed Fixed the onboarding sidebar so the checklist navigation stays open while navigating through steps. ( 3981) 🔗 Full Changelog : https://github.com/Cap ..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.28.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.0",
+    "pubDate": "2026-10-30T09:23:11.000Z",
+    "description": "🆕 Changelog Added Added email notifications for users running older CLI versions, prompting them to upgrade before PostgREST support is removed. Added recovery guidance for the Xcode 27 simulator to help users restore a working test environment. Changed Improved onboarding performance by reusing request read authorization, reducing redundant work during app setup. Updated the generated CLI documentation to reflect the latest commands and options. Deprecated Deprecated PostgREST support for o..."
   },
   {
     "category": "changelog",
@@ -302,22 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.20.0",
     "pubDate": "2026-10-27T03:42:16.000Z",
     "description": "🆕 Changelog Added Local currency Solo plan pricing with regional discounts. Solo plan prices are now shown in your local currency and include a regional discount applied automatically based on your region, making pricing more transparent and affordable. No action is required; the updated pricing is reflected during plan selection and checkout. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.19.1...capgo 22.20.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.19.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.1",
-    "pubDate": "2026-10-27T01:59:41.000Z",
-    "description": "🆕 Changelog Security Strengthened login security by forwarding the real client IP to Supabase Auth and enforcing Turnstile verification in the authentication relay, helping prevent abuse and improve fraud detection. Changed Improved the Supabase to R2 image migration by making it significantly faster and adding live progress feedback, so large image transfers are easier to track and complete. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.97.3...capgo 22.19.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.19.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.19.0",
-    "pubDate": "2026-10-27T00:51:07.000Z",
-    "description": "🆕 Changelog Changed Serve storage images from Cloudflare R2 only for improved reliability and performance. Removed Removed Sign in with Apple authentication. Users who previously signed in with Apple must switch to email/password or another supported identity provider before signing in again. Fixed Set strict owner only file permissions when writing the E2E private key through the CLI. Keep the public user profile email address synchronized with the authentication provider email. Security Re..."
   },
   {
     "category": "release",
