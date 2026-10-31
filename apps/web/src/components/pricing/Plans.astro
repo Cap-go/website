@@ -80,7 +80,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
     {pricing.map((plan) => (
       <div
         class:list={[
-          'relative flex min-w-0 flex-col p-6 lg:min-h-[580px] lg:p-7 xl:p-6',
+          'relative flex min-w-0 flex-col p-6 sm:row-span-3 sm:grid sm:grid-rows-subgrid lg:min-h-[580px] lg:p-7 xl:p-6',
           plan.name === 'Maker' ? 'bg-blue-50' : 'bg-white',
           plan.name === 'Enterprise' ? 'sm:col-span-2 xl:col-span-1' : '',
         ]}
@@ -149,72 +149,97 @@ function buildTimeDisplay(buildTimeSeconds: number) {
           </p>
         </div>
 
-        <div class="mt-6 space-y-3">
-          <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-            data-plan-cta
-            class="inline-flex min-h-17 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            role="button"
-          >
-            <!-- Accessible name stays "Start {plan} free trial" for normal visitors; direct-offer (paid ads) visitors get "Get started". -->
-            <span data-trial-copy>
-              <span aria-hidden="true">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
-              <span class="sr-only">{`Start ${plan.name} free trial`}</span>
-            </span>
-            <span data-direct-copy>
-              <span aria-hidden="true">{m.direct_offer_cta_get_started({}, { locale: Astro.locals.locale })}</span>
-              <span class="sr-only">{m.direct_offer_plan_cta_aria_label({ plan: plan.name }, { locale: Astro.locals.locale })}</span>
-            </span>
-          </a>
-          {plan.name === 'Enterprise' && (
+        <div class="flex min-w-0 flex-col">
+          <div class="mt-6 space-y-3">
             <a
-              href="https://book.capgo.app/enterprise-inquiry/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Talk to our team"
-              class="inline-flex min-h-11 w-full flex-wrap items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              data-plan-cta
+              class="inline-flex min-h-17 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               role="button"
             >
-              <span class="shrink-0 xl:hidden">
-                <TeamAvatars />
+              <!-- Accessible name stays "Start {plan} free trial" for normal visitors; direct-offer (paid ads) visitors get "Get started". -->
+              <span data-trial-copy>
+                <span aria-hidden="true">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
+                <span class="sr-only">{`Start ${plan.name} free trial`}</span>
               </span>
-              <span>Talk to our team</span>
+              <span data-direct-copy>
+                <span aria-hidden="true">{m.direct_offer_cta_get_started({}, { locale: Astro.locals.locale })}</span>
+                <span class="sr-only">{m.direct_offer_plan_cta_aria_label({ plan: plan.name }, { locale: Astro.locals.locale })}</span>
+              </span>
             </a>
-          )}
-        </div>
-
-        {plan.name === 'Enterprise' && enterpriseScale && (
-          <div class="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-3" data-enterprise-scale-box>
-            <div class="mb-2 flex items-center justify-between gap-2">
-              <label for="enterprise-mau-slider" class="text-xs font-medium text-gray-600">
-                {m.monthly_active_users({}, { locale: Astro.locals.locale })}
-              </label>
-              <span class="text-sm font-bold text-blue-700 notranslate" translate="no" data-enterprise-mau>
-                {formatMau(ENTERPRISE_MAU_STOPS[enterpriseMauIndex])} {m.mau({}, { locale: Astro.locals.locale })}
-              </span>
-            </div>
-            <input
-              id="enterprise-mau-slider"
-              type="range"
-              min="0"
-              max={ENTERPRISE_MAU_STOPS.length - 1}
-              step="1"
-              value={enterpriseMauIndex}
-              class="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-300 accent-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              aria-valuetext={`${formatMau(ENTERPRISE_MAU_STOPS[enterpriseMauIndex])} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`}
-              data-enterprise-mau-slider
-            />
-            <div class="mt-1 flex justify-between text-[11px] text-gray-500 notranslate" translate="no" aria-hidden="true">
-              <span>{formatMau(ENTERPRISE_MAU_STOPS[0])}</span>
-              <span>{formatMau(ENTERPRISE_MAU_STOPS[ENTERPRISE_MAU_STOPS.length - 1])}+</span>
-            </div>
+            {plan.name === 'Enterprise' && (
+              <a
+                href="https://book.capgo.app/enterprise-inquiry/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Talk to our team"
+                class="inline-flex min-h-11 w-full flex-wrap items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-3 py-3 text-center text-sm font-semibold text-gray-900 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+                role="button"
+              >
+                <span class="shrink-0">
+                  <TeamAvatars />
+                </span>
+                <span>Talk to our team</span>
+              </a>
+            )}
           </div>
-        )}
 
-        <div class="mt-10 lg:mt-12">
-          <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Includes:</p>
-          <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-700">
-            {planHighlights(plan).map((highlight, index) => (
+          {plan.name === 'Enterprise' && enterpriseScale && (
+            <div class="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-3" data-enterprise-scale-box>
+              <div class="mb-2 flex items-center justify-between gap-2">
+                <label for="enterprise-mau-slider" class="text-xs font-medium text-gray-600">
+                  {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+                </label>
+                <span class="text-sm font-bold text-blue-700 notranslate" translate="no" data-enterprise-mau>
+                  {formatMau(ENTERPRISE_MAU_STOPS[enterpriseMauIndex])} {m.mau({}, { locale: Astro.locals.locale })}
+                </span>
+              </div>
+              <input
+                id="enterprise-mau-slider"
+                type="range"
+                min="0"
+                max={ENTERPRISE_MAU_STOPS.length - 1}
+                step="1"
+                value={enterpriseMauIndex}
+                class="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-300 accent-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+                aria-valuetext={`${formatMau(ENTERPRISE_MAU_STOPS[enterpriseMauIndex])} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`}
+                data-enterprise-mau-slider
+              />
+              <div class="mt-1 flex justify-between text-[11px] text-gray-500 notranslate" translate="no" aria-hidden="true">
+                <span>{formatMau(ENTERPRISE_MAU_STOPS[0])}</span>
+                <span>{formatMau(ENTERPRISE_MAU_STOPS[ENTERPRISE_MAU_STOPS.length - 1])}+</span>
+              </div>
+            </div>
+          )}
+
+          <div class="mt-10 lg:mt-12">
+            <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Includes:</p>
+            <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-700">
+              {planHighlights(plan).map((highlight, index) => (
+                <li class="flex items-start gap-3">
+                  <svg
+                    class="mt-1 h-4 w-4 shrink-0 text-gray-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                  {plan.name === 'Enterprise' && enterpriseScale && index === 0 ? (
+                    <span>
+                      <span class="notranslate" translate="no" data-enterprise-mau-highlight>
+                        {numberWithSpaces(plan.mau)}
+                      </span>{' '}
+                      {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+                    </span>
+                  ) : (
+                    <span>{highlight}</span>
+                  )}
+                </li>
+              ))}
               <li class="flex items-start gap-3">
                 <svg
                   class="mt-1 h-4 w-4 shrink-0 text-gray-500"
@@ -227,56 +252,33 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
-                {plan.name === 'Enterprise' && enterpriseScale && index === 0 ? (
-                  <span>
-                    <span class="notranslate" translate="no" data-enterprise-mau-highlight>
-                      {numberWithSpaces(plan.mau)}
-                    </span>{' '}
-                    {m.monthly_active_users({}, { locale: Astro.locals.locale })}
-                  </span>
-                ) : (
-                  <span>{highlight}</span>
-                )}
+                <span class="inline-flex items-center gap-1.5">
+                  {m.home_hero_human_support({}, { locale: Astro.locals.locale })}
+                  <img
+                    src="/avatars/martin-96.webp"
+                    alt=""
+                    width="20"
+                    height="20"
+                    class="h-5 w-5 rounded-full object-cover ring-1 ring-gray-200"
+                    loading="lazy"
+                    decoding="async"
+                    aria-hidden="true"
+                  />
+                </span>
               </li>
-            ))}
-            <li class="flex items-start gap-3">
-              <svg
-                class="mt-1 h-4 w-4 shrink-0 text-gray-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-              </svg>
-              <span class="inline-flex items-center gap-1.5">
-                {m.home_hero_human_support({}, { locale: Astro.locals.locale })}
-                <img
-                  src="/avatars/martin-96.webp"
-                  alt=""
-                  width="20"
-                  height="20"
-                  class="h-5 w-5 rounded-full object-cover ring-1 ring-gray-200"
-                  loading="lazy"
-                  decoding="async"
-                  aria-hidden="true"
-                />
-              </span>
-            </li>
-          </ul>
-        </div>
+            </ul>
+          </div>
 
-        <a
-          href="#compare-plans"
-          class="mt-auto inline-flex min-h-11 items-center gap-2 pt-10 text-sm font-semibold text-gray-600 transition-colors hover:text-blue-700 focus:text-blue-700 focus:outline-none"
-        >
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0 5.25-5.25M12 19l-5.25-5.25" />
-          </svg>
-          <span>View all features</span>
-        </a>
+          <a
+            href="#compare-plans"
+            class="mt-auto inline-flex min-h-11 items-center gap-2 pt-10 text-sm font-semibold text-gray-600 transition-colors hover:text-blue-700 focus:text-blue-700 focus:outline-none"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0 5.25-5.25M12 19l-5.25-5.25" />
+            </svg>
+            <span>View all features</span>
+          </a>
+        </div>
       </div>
     ))}
   </div>
