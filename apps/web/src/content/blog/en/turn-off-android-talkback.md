@@ -51,7 +51,7 @@ faq:
 
 TalkBack is Google's built-in screen reader on Android. It reads the screen aloud and changes how taps and swipes work, which helps when you cannot see the display but confuses people who turned it on by accident.
 
-**To turn TalkBack off right now:** press and hold **both volume keys** for about **3 seconds** (confirm again if the phone prompts you), or say **"Hey Google, turn off TalkBack"** if Google Assistant is ready. Those two options work on most phones without opening Settings.
+**To turn TalkBack off right now:** press and hold **both volume keys** for about **3 seconds** (confirm again if the phone prompts you) when the TalkBack volume shortcut is enabled, or say **"Hey Google, turn off TalkBack"** when Google Assistant is set up. If the shortcut does nothing, use Settings below or try the other method.
 
 ## Quick steps to turn off TalkBack
 
