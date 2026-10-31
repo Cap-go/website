@@ -49,7 +49,7 @@ faq:
       open Settings, Accessibility, TalkBack, and turn on Use TalkBack.
 ---
 
-TalkBack is Google's built in screen reader on Android. It reads the screen aloud and changes how taps and swipes work, which helps when you cannot see the display but confuses people who turned it on by accident.
+TalkBack is Google's built-in screen reader on Android. It reads the screen aloud and changes how taps and swipes work, which helps when you cannot see the display but confuses people who turned it on by accident.
 
 **To turn TalkBack off right now:** press and hold **both volume keys** for about **3 seconds** (confirm again if the phone prompts you), or say **"Hey Google, turn off TalkBack"** if Google Assistant is ready. Those two options work on most phones without opening Settings.
 
@@ -119,7 +119,7 @@ On first enable, Android may open the TalkBack tutorial. You can reopen it later
 - **Previous item:** Swipe left with one finger.
 - **Activate:** Double tap with one finger.
 - **Scroll:** Swipe up or down with two fingers.
-- **TalkBack menu:** Three finger tap, or swipe down then right on many devices (including Samsung Galaxy on updated Android).
+- **TalkBack menu:** Three-finger tap, or swipe down then right on many devices (including Samsung Galaxy on updated Android).
 
 More detail lives in [Get started on Android with TalkBack](https://support.google.com/accessibility/android/answer/6283677) from Google.
 
