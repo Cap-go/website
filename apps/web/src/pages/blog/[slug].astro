@@ -159,37 +159,25 @@ content['ldJSON'] =
       <div class="relative z-0 mx-auto pb-12">
         <div class="relative max-w-(--breakpoint-sm)">
           <div class="mt-4 flex flex-row flex-wrap items-center gap-3">
-            {
-              entry.data.tag.split(',').map((i) => (
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(i.trim())}`)}
-                  class="rounded-lg border border-gray-400 px-4 py-1.5 text-sm text-white hover:bg-white hover:text-black"
-                >
-                  {i.trim()}
-                </a>
-              ))
-            }
+            {entry.data.tag.split(',').map((i) => (
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(i.trim())}`)}
+                class="rounded-lg border border-gray-400 px-4 py-1.5 text-sm text-white hover:bg-white hover:text-black"
+              >
+                {i.trim()}
+              </a>
+            ))}
             <time datetime={new Date(entry.data.updated_at).toISOString()} class="text-sm text-white">
               {formatTime(entry.data.updated_at)}
             </time>
           </div>
-          <h1 class="font-display mt-8 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-tight">
-            {entry.data.title}
-          </h1>
+          <h1 class="font-display mt-8 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-tight">{entry.data.title}</h1>
           <p class="mt-4 text-gray-400 sm:text-lg">{entry.data.description}</p>
-          {
-            showEditorialByline ? (
-              <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="mt-6 md:hidden" />
-            ) : (
-              <BlogAuthorByline
-                author={entry.data.author}
-                authorUrl={authorUrl}
-                authorImageUrl={entry.data.author_image_url}
-                showLabel={false}
-                class="mt-6 md:hidden"
-              />
-            )
-          }
+          {showEditorialByline ? (
+            <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="mt-6 md:hidden" />
+          ) : (
+            <BlogAuthorByline author={entry.data.author} authorUrl={authorUrl} authorImageUrl={entry.data.author_image_url} showLabel={false} class="mt-6 md:hidden" />
+          )}
         </div>
       </div>
     </div>
@@ -202,7 +190,7 @@ content['ldJSON'] =
             id="blogImage"
             loading="eager"
             decoding="async"
-            alt={entry.data.title}
+            alt={entry.data.head_image_alt ?? entry.data.title}
             src={entry.data.head_image}
             class="rounded border border-white/5 object-cover"
           />
@@ -212,52 +200,48 @@ content['ldJSON'] =
           <BlogProductCta tag={entry.data.tag} />
         </div>
         <div class="right-0 hidden px-10 md:block">
-          {
-            showEditorialByline ? (
-              <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="relative pb-5" />
-            ) : (
-              <BlogAuthorByline author={entry.data.author} authorUrl={authorUrl} authorImageUrl={entry.data.author_image_url} class="relative pb-5" />
-            )
-          }
-          {
-            headings?.length > 0 ? (
-              <div id="staticToc" class="sticky top-16 pt-4 pb-8">
-                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4 pb-8" />
-                <div>
-                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
-                    <svg
-                      width="24"
-                      height="24"
-                      fill="none"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="lucide lucide-align-left h-4 w-4"
-                    >
-                      <line x1="21" x2="3" y1="6" y2="6" />
-                      <line x1="15" x2="3" y1="12" y2="12" />
-                      <line x1="17" x2="3" y1="18" y2="18" />
-                    </svg>
-                    {m.table_of_contents({}, { locale: Astro.locals.locale })}
-                  </p>
-                  <div class="mt-4 grid gap-4 border-l border-gray-600">
-                    {headings.map((k) => (
-                      <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-400`} href={`#${k.slug}`}>
-                        {k.text}
-                      </a>
-                    ))}
-                  </div>
+          {showEditorialByline ? (
+            <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="relative pb-5" />
+          ) : (
+            <BlogAuthorByline author={entry.data.author} authorUrl={authorUrl} authorImageUrl={entry.data.author_image_url} class="relative pb-5" />
+          )}
+          {headings?.length > 0 ? (
+            <div id="staticToc" class="sticky top-16 pt-4 pb-8">
+              <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4 pb-8" />
+              <div>
+                <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="lucide lucide-align-left h-4 w-4"
+                  >
+                    <line x1="21" x2="3" y1="6" y2="6" />
+                    <line x1="15" x2="3" y1="12" y2="12" />
+                    <line x1="17" x2="3" y1="18" y2="18" />
+                  </svg>
+                  {m.table_of_contents({}, { locale: Astro.locals.locale })}
+                </p>
+                <div class="mt-4 grid gap-4 border-l border-gray-600">
+                  {headings.map((k) => (
+                    <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-400`} href={`#${k.slug}`}>
+                      {k.text}
+                    </a>
+                  ))}
                 </div>
               </div>
-            ) : (
-              <div class="sticky top-16 pt-4 pb-8">
-                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4" />
-              </div>
-            )
-          }
+            </div>
+          ) : (
+            <div class="sticky top-16 pt-4 pb-8">
+              <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4" />
+            </div>
+          )}
         </div>
       </div>
       <GetStarted />
@@ -267,15 +251,13 @@ content['ldJSON'] =
           {m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app({}, { locale: Astro.locals.locale })}
         </p>
       </div>
-      {
-        related.length > 0 && (
-          <div class="mt-8 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-            {related.map((article) => (
-              <Blog tag={article.data.tag} link={article.data.slug} title={article.data.title} date={article.data.created_at} image={article.data.head_image} />
-            ))}
-          </div>
-        )
-      }
+      {related.length > 0 && (
+        <div class="mt-8 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          {related.map((article) => (
+            <Blog tag={article.data.tag} link={article.data.slug} title={article.data.title} date={article.data.created_at} image={article.data.head_image} />
+          ))}
+        </div>
+      )}
       <div class="my-12 text-center">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
