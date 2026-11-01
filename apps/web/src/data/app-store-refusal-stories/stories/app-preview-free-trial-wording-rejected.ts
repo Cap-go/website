@@ -6,7 +6,7 @@ export const story: AppleRejectionStory = {
   sortOrder: 85,
   title: 'An app preview said free trial available, and the update was rejected',
   guidelineLabel: 'App preview metadata (price reference)',
-  tags: ['metadata', '3-1-3'],
+  tags: ['metadata'],
   platform: 'iOS',
   body:
     'An indie developer submitted an update whose app preview video included the words free trial available. Apple rejected the update, treating any mention of free in the preview as a price reference. The developer re-cut the video and resubmitted.',
