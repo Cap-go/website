@@ -8,6 +8,7 @@
     "width": 552,
     "height": 1200
   },
+  "ai-translation-added-misreadable-keyword-rejected": null,
   "byok-cloud-models-3-1-1": null,
   "calendar-client-iphone-2-3-7-5-2-5-4-8-after-mac": null,
   "att-rejection-startup-risk-5-1-2": {
@@ -23,6 +24,7 @@
     "width": 1199,
     "height": 365
   },
+  "app-preview-free-trial-wording-rejected": null,
   "crowded-category-4-3": null,
   "demo-account-deleted-five-minutes-then-recording-found-sales-copy": null,
   "entertainment-sound-saturated-4-3": {
@@ -54,6 +56,7 @@
   },
   "metadata-iap-checkboxes": null,
   "metadata-loop-launch-week": null,
+  "movie-picker-posters-4-1-a-after-fifteen-days": null,
   "name-rejection-fixed-then-3-2-f-termination-a-year-later": {
     "src": "/app-store-refusal-horror-story/screenshots/name-rejection-fixed-then-3-2-f-termination-a-year-later.webp",
     "alt": "App Store Connect review history showing version 1.0 rejected twice then approved, and a later update approved, with user names blacked out",
@@ -215,6 +218,12 @@
     "width": 716,
     "height": 598
   },
+  "ten-year-indie-four-approved-updates-then-3-2-f-notice-14-months-later": {
+    "src": "/app-store-refusal-horror-story/screenshots/ten-year-indie-four-approved-updates-then-3-2-f-notice-14-months-later.webp",
+    "alt": "App Store Connect Pending Termination Notice citing section 3.2(f), listing five iOS versions as applicable",
+    "width": 1200,
+    "height": 639
+  },
   "unsigned-agreement-rejection-two-weeks": null,
   "user-uploads-app-google-play-mention-2-3-10-then-two-weeks-waiting": {
     "src": "/app-store-refusal-horror-story/screenshots/user-uploads-app-google-play-mention-2-3-10-then-two-weeks-waiting.webp",
@@ -243,6 +252,12 @@
     "height": 516
   },
   "title-update-then-3-2-f-termination-notice": null,
+  "title-keyword-3-2-f-termination-appeal-cites-streaming-references": {
+    "src": "/app-store-refusal-horror-story/screenshots/title-keyword-3-2-f-termination-appeal-cites-streaming-references.webp",
+    "alt": "App Review Board appeal response confirming termination under section 3.2(f) for misleading references to streaming services",
+    "width": 1161,
+    "height": 1200
+  },
   "three-guidelines-one-month-2-1-2-3-2-5-2-3": null,
   "prayer-app-primarily-a-book-4-2": null,
   "openai-in-metadata-china-guideline-5": {
