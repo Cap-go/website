@@ -17,20 +17,20 @@ origin: ai
 next_blog: ''
 faq:
   - question: How do staged rollouts work in Google Play Console and how do I increase rollout percentage?
-    answer: A staged rollout sends an app update to a percentage of users on Production, Open testing, or Closed testing. Google chooses eligible users at random. The percentage does not increase by itself. On the Releases tab, select Manage rollout, then Update rollout, change the percentage, and click Confirm update. To reach a full rollout, raise the percentage to 100%.
+    answer: A staged rollout sends an app update to a percentage of eligible users on Production, Open testing, or Closed testing. Google assigns the staged update at random among users eligible for that track. The percentage does not increase by itself. On the Releases tab, select Manage rollout, then Update rollout, change the percentage, and click Confirm update. To reach a full rollout, raise the percentage to 100%. Staged percentages apply only when you ship an update, not the first release on a track.
   - question: How do staged rollouts work for Android apps from 10% to 100%?
-    answer: Play Console does not require 10% as a starting point. You enter a rollout percentage when you start the release, then increase it over time with Manage rollout and Update rollout until you confirm 100%. Staged rollouts apply only to app updates, not the first production publish. Wait between increases while you check Android vitals, ANRs, and reviews.
+    answer: Play Console does not require 10% as a starting point. You enter a rollout percentage when you start an update release, then increase it over time with Manage rollout and Update rollout until you confirm 100%. Google documents staged rollouts for app updates only, not the first release on Production, Open testing, or Closed testing. Wait between increases while you check Android vitals, ANRs, and feedback.
   - question: What does halt rollout mean in Google Play?
-    answer: Halt rollout stops sending the staged version to new users. On the Releases tab, choose Manage rollout, then Halt rollout. Users who already installed the staged version stay on that version. No additional users receive it until you resume. If the bundle is bad, ship a new release with a higher versionCode instead of relying on halt alone.
+    answer: Halt rollout stops sending the staged version to any additional users who have not already received it. On the Releases tab, choose Manage rollout, then Halt rollout. Users who already installed the staged version stay on that version. If the bundle is bad, ship a new release with a higher versionCode instead of relying on halt alone.
   - question: How do I resume a halted Google Play staged rollout?
     answer: Open the same track, go to Releases, select Manage rollout, then Resume rollout. Set the rollout percentage and click Confirm update. Google documents that halt and resume affect the same user group as before the halt.
   - question: What is a full rollout on Google Play?
     answer: A full rollout means the release is available to 100% of users on that track in the countries you target. Increase the staged rollout percentage to 100% with Manage rollout and Update rollout, or roll out without staging when policy allows. Google recommends updating store listing changes after the release reaches 100% when listing updates are tied to the release.
   - question: What should I monitor during an Android staged rollout?
-    answer: Google recommends watching crash reports and user feedback during a live staged rollout. In Play Console, use Android vitals for crash rate and ANRs after installs, the pre-launch report before wide exposure, and ratings and reviews for the version. Many teams wait between percentage increases until metrics look stable.
+    answer: Google recommends watching crash reports and user feedback during a live staged rollout. In Play Console, use Android vitals for crash rate and ANRs after installs and the pre-launch report before wide exposure. On Production, watch public ratings and reviews for the version. On Open or Closed testing, prioritize tester feedback channels rather than treating the rollout like a full public launch. Many teams wait between percentage increases until metrics look stable.
 ---
 
-**Quick answer:** A **Google Play staged rollout** ships an **app update** to a **percentage of users** on **Production**, **Open testing**, or **Closed testing** before you reach a **full rollout** at **100%**. Google [does not use staged percentages for your first production publish](https://support.google.com/googleplay/android-developer/answer/6346149); they apply to **updates** after users already have the app. **Start:** create a release with a new Android App Bundle, pick a rollout percentage on the review step, and click **Start rollout** ([Prepare and roll out a release](https://support.google.com/googleplay/android-developer/answer/9859348)). **Increase:** **Releases** tab → **Manage rollout** → **Update rollout** → set a higher percentage → **Confirm update** (the percentage [does not rise automatically](https://support.google.com/googleplay/android-developer/answer/6346149)). **Halt:** **Manage rollout** → **Halt rollout** (no new users get the build; [users who already updated stay on it](https://support.google.com/googleplay/android-developer/answer/6346149)). **Resume:** **Manage rollout** → **Resume rollout** → set percentage → **Confirm update**. **Full rollout:** increase to **100%** with **Update rollout**. For [Capacitor](https://capacitorjs.com/) apps, pair store rollouts with [Capgo channels](https://capgo.app/docs/live-updates/channels/) and [progressive rollouts](https://capgo.app/docs/live-updates/progressive-rollouts/) for live web updates between native releases, and see [TestFlight and Android testing tracks](/blog/test-flight-android/) for pre-production discipline.
+**Quick answer:** A **Google Play staged rollout** ships an **app update** to a **percentage of eligible users** on **Production**, **Open testing**, or **Closed testing** before you reach a **full rollout** at **100%**. Google [limits staged percentages to app updates](https://support.google.com/googleplay/android-developer/answer/6346149), not the **first release on a track** (including the first Open or Closed testing publish). **Start:** create a release with a new Android App Bundle, pick a rollout percentage on the review step for an update, and click **Start rollout** ([Prepare and roll out a release](https://support.google.com/googleplay/android-developer/answer/9859348)). **Increase:** **Releases** tab → **Manage rollout** → **Update rollout** → set a higher percentage → **Confirm update** (the percentage [does not rise automatically](https://support.google.com/googleplay/android-developer/answer/6346149)). **Halt:** **Manage rollout** → **Halt rollout** ([no additional users receive the staged version](https://support.google.com/googleplay/android-developer/answer/6346149); users who already updated stay on it). **Resume:** **Manage rollout** → **Resume rollout** → set percentage → **Confirm update**. **Full rollout:** increase to **100%** with **Update rollout**. For [Capacitor](https://capacitorjs.com/) apps, pair store rollouts with [Capgo channels](https://capgo.app/docs/live-updates/channels/) and [progressive rollouts](https://capgo.app/docs/live-updates/progressive-rollouts/) for live web updates between native releases, and see [TestFlight and Android testing tracks](/blog/test-flight-android/) for pre-production discipline.
 
 ## Play Console tracks in 2026
 
@@ -55,14 +55,14 @@ Google's [Release app updates with staged rollouts](https://support.google.com/g
 2. Create or edit a release and upload an **Android App Bundle** whose `versionCode` is higher than the release already on that track. Play serves the highest compatible `versionCode` across every track a user is eligible for, so a newer Production build can override a lower testing-track build for the same user.
 3. On the review step for an **update**, select a **rollout percentage** ([Prepare and roll out a release](https://support.google.com/googleplay/android-developer/answer/9859348)).
 4. Click **Start rollout**.
-5. Monitor Android vitals, crashes, and reviews.
+5. Monitor Android vitals, crashes, and track-appropriate feedback (tester notes on testing tracks, public reviews on Production).
 6. **Increase** the percentage with **Manage rollout** → **Update rollout** → **Confirm update**.
 7. **Halt** or **resume** from **Manage rollout** when you need to pause or continue.
 8. Promote to **100%** for a **full rollout** when metrics look healthy.
 
 Important constraints from Google's documentation:
 
-- Rollout users are chosen by Google at random; you cannot hand-pick individuals in the console UI.
+- For staged rollouts, Google assigns the update at random among users eligible for that track; you cannot pick which users receive the staged build in Play Console. Inviting Closed testing testers is separate from staged rollout assignment.
 - Finish or discard conflicting draft releases on a track before starting another rollout; resolve outstanding staged releases or remove unpublished changes first ([Prepare and roll out a release](https://support.google.com/googleplay/android-developer/answer/9859348)).
 - You cannot force users to install immediately; they update when Play delivers the release.
 - Production staged rollouts can target **specific countries or regions**; testing tracks follow the track's tester rules.
@@ -79,7 +79,8 @@ Google does not publish a required percentage ladder. Teams usually **start smal
 | Crash rate (after users install) | Play Console Android vitals |
 | ANRs (after users install) | Play Console Android vitals |
 | Pre-launch checks (before wide rollout) | Play Console pre-launch report on test devices |
-| User reviews | Store listing feedback for the version |
+| User reviews (Production staged rollout) | Store listing ratings and reviews for the version |
+| Tester feedback (Open or Closed testing) | Testing track feedback and email or group channels |
 | Backend errors | Your API dashboards correlated with version headers |
 
 Google's [staged rollout tips](https://support.google.com/googleplay/android-developer/answer/6346149) recommend closely monitoring **crash reports** and **user feedback** during a live rollout. Wait long enough between percentage jumps to gather signal; many teams hold at least a day on early production percentages.
@@ -88,7 +89,7 @@ If a native bug ships, **halt** the Play rollout and publish a fixed bundle with
 
 ## Halting a rollout and users who already updated
 
-**Halt rollout** means Play stops offering the staged version to **new** users. [Users who already received the staged version remain on that version](https://support.google.com/googleplay/android-developer/answer/6346149). They do not automatically roll back to the previous production build through the halt action alone.
+**Halt rollout** means Play stops offering the staged version to **any additional users** who have not already received it. [Users who already received the staged version remain on that version](https://support.google.com/googleplay/android-developer/answer/6346149). They do not automatically roll back to the previous production build through the halt action alone.
 
 Steps on the web console: open the track → **Releases** → **Manage rollout** → **Halt rollout**.
 
@@ -127,13 +128,13 @@ You ship an update to a fraction of track users. Open **Releases**, choose **Man
 Start with the percentage you choose at **Start rollout**, monitor vitals and reviews, then repeat **Update rollout** until you confirm **100%** for a full rollout.
 
 **What does halt rollout mean on Google Play?**  
-It stops new users from receiving the staged build. Users who already updated keep that version until they install something else you publish.
+It stops any additional users from receiving the staged build. Users who already updated keep that version until they install something else you publish.
 
 **How do I resume after a halt?**  
 Use **Manage rollout** → **Resume rollout**, set the percentage, and **Confirm update**. Google applies halt and resume to the same user cohort.
 
 **What should I watch during a gradual mobile app rollout?**  
-Crash reports, ANRs in Android vitals, pre-launch results, and public reviews for the version receiving the rollout.
+Crash reports, ANRs in Android vitals, pre-launch results, tester feedback on Open or Closed testing, and public reviews when the staged rollout runs on Production.
 
 **What is a full rollout?**  
 The release is served to **100%** of users on that track in your targeted countries, usually by setting the staged percentage to **100%** with **Update rollout**.
