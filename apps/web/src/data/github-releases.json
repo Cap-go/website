@@ -521,11 +521,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-camera-preview 8.14.2",
-    "link": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.14.2",
-    "guid": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.14.2",
-    "pubDate": "2026-10-21T14:12:12.000Z",
-    "description": "🆕 Changelog Fixed iOS : Resolved a stability issue during capture stop/cleanup that could cause crashes or memory safety errors when lifecycle cleanup overlapped with in progress operations. Stopping captures on iOS is now more reliable. 🔗 Full Changelog : https://github.com/Cap go/capacitor camera preview/compare/8.14.1...8.14.2"
+    "title": "capacitor-camera-preview 8.14.3",
+    "link": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.14.3",
+    "guid": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.14.3",
+    "pubDate": "2026-10-31T12:04:28.000Z",
+    "description": "🆕 Changelog Fixed Fixed an iOS crash that could occur when stopping the camera session by serializing mutations, improving camera stability. ( 483) Changed Updated internal development dependencies: to v7 and to v1.4.4. ( 480, 481) 🔗 Full Changelog : https://github.com/Cap go/capacitor camera preview/compare/8.14.2...8.14.3"
   },
   {
     "category": "release",
