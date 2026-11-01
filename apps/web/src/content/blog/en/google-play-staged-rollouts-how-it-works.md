@@ -89,7 +89,7 @@ If a native bug ships, **halt** the Play rollout and publish a fixed bundle with
 
 ## Halting a rollout and users who already updated
 
-**Halt rollout** means Play stops offering the staged version to **any additional users** who have not already received it. [Users who already received the staged version remain on that version](https://support.google.com/googleplay/android-developer/answer/6346149). They do not automatically roll back to the previous production build through the halt action alone.
+**Halt rollout** means Play stops offering the staged version to **any additional users** who have not already received it. [Users who already received the staged version remain on that version](https://support.google.com/googleplay/android-developer/answer/6346149). They do not automatically roll back through the halt action alone.
 
 Steps on the web console: open the track → **Releases** → **Manage rollout** → **Halt rollout**.
 
