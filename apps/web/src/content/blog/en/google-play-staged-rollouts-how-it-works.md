@@ -1,6 +1,6 @@
 ---
 slug: google-play-staged-rollouts-how-it-works
-title: Google Play Staged Rollout: Play Console Steps to 100%
+title: "Google Play Staged Rollout: Play Console Steps to 100%"
 description: How Google Play staged rollouts work in Play Console. Start a percentage rollout, increase it, halt or resume, and reach full rollout at 100%. Monitor crashes and reviews.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
