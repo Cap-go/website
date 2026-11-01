@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Localized metadata keywords">
+  <title>Localized metadata keywords</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="48" cy="56" r="18" fill="#44BCFF" opacity="0.24"/>
+  <rect x="76" y="48" width="168" height="104" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="96" y="72" width="56" height="10" rx="5" fill="#44BCFF" opacity="0.55"/>
+  <rect x="96" y="92" width="72" height="10" rx="5" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="96" y="112" width="48" height="10" rx="5" fill="#9CA3AF" opacity="0.35"/>
+  <path d="M168 72 L208 92" stroke="#44BCFF" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+</svg>
