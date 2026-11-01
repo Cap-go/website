@@ -160,6 +160,28 @@ Upload to development (--delta)
 | Non-semver bundle names | Follow [semantic versioning](/docs/live-updates/channels/#bundle-versioning-and-channels) and validate in the [SemVer tester](/semver_tester/) |
 | Changing versioning scheme over time | Keep semver; use pre-release labels for extra builds (`1.8.0-20260629.1`) |
 | Metadata / preview enabled without reason | Leave off by default |
+| "New version available" message on a fresh install | Skip it when `current()` returns `bundle.id === "builtin"` (see below) |
+
+---
+
+## App Store review: no update message on a fresh install
+
+Apple accepts apps that use Capgo. Reviewers reject the UI around it: a "new version available" or "updating" message shown at first launch.
+
+The reviewer installs your store binary. It is older than the latest bundle on your channel, so the first check finds a bundle right away. If your app shows a message on `updateAvailable`, the reviewer sees it.
+
+Right after a fresh install or a native store update, the app runs the shipped bundle and `current()` returns `bundle.id === "builtin"`. Skip your message in that case:
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const { bundle } = await CapacitorUpdater.current()
+if (bundle.id !== 'builtin') {
+  showNewVersionMessage()
+}
+```
+
+In any visible UI, avoid the words "update", "live update", "OTA", "downloading", and "installing". See [compliance](/docs/live-updates/compliance/).
 
 ---
 
