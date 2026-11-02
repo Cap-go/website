@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2026-10-31T10:25:55.000Z
+updated_at: 2026-11-02T12:25:12.000Z
 head_image: /android_talkback.webp
 head_image_alt: How to turn off TalkBack on Android phones and tablets
 keywords: TalkBack, turn off TalkBack, disable TalkBack Android, TalkBack deaktivieren, desactivar TalkBack, Samsung TalkBack, Hey Google TalkBack, Android screen reader, accessibility
