@@ -4,9 +4,9 @@
   "versionCount": 16250,
   "releaseCount": 6992,
   "closedIssueCount": 1764,
-  "mergedPullRequestCount": 9429,
-  "resolvedItemCount": 11193,
-  "totalStars": 3187,
+  "mergedPullRequestCount": 9431,
+  "resolvedItemCount": 11195,
+  "totalStars": 3190,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -136,7 +136,7 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 880,
+      "stars": 881,
       "contributors": 54,
       "versionTags": 794,
       "releases": 238,
@@ -150,7 +150,7 @@
       "versionTags": 5890,
       "releases": 1000,
       "closedIssues": 420,
-      "mergedPullRequests": 2742
+      "mergedPullRequests": 2744
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -334,7 +334,7 @@
     },
     "Cap-go/capacitor-home-indicator": {
       "url": "https://github.com/Cap-go/capacitor-home-indicator",
-      "stars": 12,
+      "stars": 13,
       "contributors": 3,
       "versionTags": 174,
       "releases": 64,
@@ -658,7 +658,7 @@
     },
     "Cap-go/capacitor-llm": {
       "url": "https://github.com/Cap-go/capacitor-llm",
-      "stars": 43,
+      "stars": 44,
       "contributors": 3,
       "versionTags": 73,
       "releases": 45,
