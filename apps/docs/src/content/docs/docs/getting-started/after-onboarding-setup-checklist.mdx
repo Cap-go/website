@@ -168,7 +168,9 @@ Upload to development (--delta)
 
 Apple accepts apps that use Capgo. Reviewers reject the UI around it: a "new version available" or "updating" message shown at first launch.
 
-The reviewer installs your store binary. It is older than the latest bundle on your channel, so the first check finds a bundle right away. If your app shows a message on `updateAvailable`, the reviewer sees it.
+This mostly affects self-hosted and manual setups, where your app runs its own version check and shows its own prompt.
+
+The reviewer installs your store binary. It is older than your latest bundle, so the first check (your own server call, or the `updateAvailable` listener) finds a bundle right away. If your app shows a message then, the reviewer sees it.
 
 Right after a fresh install or a native store update, the app runs the shipped bundle and `current()` returns `bundle.id === "builtin"`. Skip your message in that case:
 
