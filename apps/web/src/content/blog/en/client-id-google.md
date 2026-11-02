@@ -250,7 +250,7 @@ The page origin is not listed under **Authorized JavaScript origins** for the We
 
 **At least one client id is required when Google sign-in is enabled (Supabase, Firebase, and similar dashboards)**
 
-The provider toggle is on but the **Web client ID** field is empty or pasted from the wrong project. Create OAuth clients in Google Cloud Console, paste the Web client ID into the provider settings, add the Android and iOS client IDs to the Supabase provider settings when you ship those platforms, configure the native clients, then save. For Supabase plus Capacitor, follow [Capacitor social login setup with Supabase](https://capgo.app/blog/setup-supabase-with-capacitor-social-login/).
+The provider toggle is on but the **Web client ID** field is empty or pasted from the wrong project. Create OAuth clients in Google Cloud Console. For Supabase, enter the Web, Android, and iOS client IDs as a comma-separated list, with the Web client ID first, when you ship those platforms. Configure the native clients, then save. For Supabase plus Capacitor, follow [Capacitor social login setup with Supabase](https://capgo.app/blog/setup-supabase-with-capacitor-social-login/).
 
 **DEVELOPER_ERROR, error 10, or sign-in works in debug but fails in production on Android**
 
