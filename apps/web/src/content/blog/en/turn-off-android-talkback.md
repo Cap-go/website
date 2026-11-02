@@ -1,65 +1,145 @@
 ---
 slug: turn-off-android-talkback
-title: How to Turn off and Use TalkBack on Android Devices
+title: How to Turn Off TalkBack on Android (Fast Steps, Samsung, Voice)
 description: >-
-  Step-by-step guide on enabling and navigating with TalkBack, the built-in
-  Android screen reader for visually impaired users.
+  Turn off TalkBack on Android with the volume key shortcut, Hey Google, or
+  Settings. Samsung One UI paths, fixes when the screen is stuck, and how to
+  turn TalkBack back on.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-10-31T10:25:55.000Z
 head_image: /android_talkback.webp
-head_image_alt: "How to Turn off and Use TalkBack on Android Devices Capgo blog illustration"
-keywords: Android, TalkBack, screen reader, visually impaired, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
+head_image_alt: How to turn off TalkBack on Android phones and tablets
+keywords: TalkBack, turn off TalkBack, disable TalkBack Android, TalkBack deaktivieren, desactivar TalkBack, Samsung TalkBack, Hey Google TalkBack, Android screen reader, accessibility
 tag: Android
 published: true
 locale: en
 origin: human
 next_blog: ''
+faq:
+  - question: What is the fastest way to turn off TalkBack on Android?
+    answer: >-
+      Press and hold both volume keys for about 3 seconds. If your phone asks you
+      to confirm, press and hold both volume keys again for 3 seconds. You can
+      also say Hey Google, turn off TalkBack when Google Assistant is set up.
+  - question: How do I turn off TalkBack on a Samsung Galaxy phone?
+    answer: >-
+      On One UI 3.1 and later, use the same volume up and volume down shortcut
+      for at least 3 seconds, or open Settings, Accessibility, TalkBack, focus
+      the Use TalkBack switch with one tap, double tap to open it, then double
+      tap Turn off. Older Samsung software may label the feature Voice Assistant
+      under Screen reader instead of TalkBack.
+  - question: Why does TalkBack keep turning on by itself?
+    answer: >-
+      TalkBack often starts from the volume key shortcut or the accessibility
+      shortcut after it was enabled once. After you turn TalkBack off, open
+      Settings, Accessibility, TalkBack, and turn off TalkBack shortcut so the
+      buttons do not enable it again by accident.
+  - question: How do I use Settings while TalkBack is on?
+    answer: >-
+      Move focus with one finger swipes left or right, activate with a double
+      tap, and scroll lists with two fingers. Open Settings, Accessibility, then
+      TalkBack, focus the Use TalkBack switch, double tap it, then double tap
+      Turn off in the confirmation dialog.
+  - question: How do I turn TalkBack back on?
+    answer: >-
+      Use the same volume key shortcut, say Hey Google, turn on TalkBack, or
+      open Settings, Accessibility, TalkBack, and turn on Use TalkBack.
 ---
 
-TalkBack is an essential feature for visually impaired users, integrated into Android devices. It's a gesture-based screen reader that vocalizes the content of your screen, assisting in navigation and interaction with different elements. Here's a comprehensive guide on how to enable and use TalkBack.
+TalkBack is Google's built-in screen reader on Android. It reads the screen aloud and changes how taps and swipes work, which helps when you cannot see the display but confuses people who turned it on by accident.
 
-## How to Turn On TalkBack
+**To turn TalkBack off right now:** press and hold **both volume keys** for about **3 seconds** (confirm again if the phone prompts you) when the TalkBack volume shortcut is enabled, or say **"Hey Google, turn off TalkBack"** when Google Assistant is set up. If the shortcut does nothing, use Settings below or try the other method.
 
-There are several methods to activate TalkBack on your Android device:
+## Quick steps to turn off TalkBack
 
-### Using Volume Keys
+1. **Volume shortcut (fastest):** Press and hold volume up and volume down together for about 3 seconds. If you hear a prompt, hold both keys again for 3 seconds to confirm. Google documents this shortcut in [Turn on TalkBack](https://support.google.com/accessibility/android/answer/6007100) help.
+2. **Google Assistant:** Say "Hey Google," then "Turn off TalkBack" or "OK Google, turn off TalkBack."
+3. **Settings:** Open **Settings**, **Accessibility**, **TalkBack**, then turn off **Use TalkBack**. With TalkBack active, focus an item with one tap, **double tap** to activate, and **scroll with two fingers**. Google's [Turn off TalkBack](https://support.google.com/accessibility/answer/14252950) guide walks through this path step by step.
 
-1. Locate the volume keys on the side of your device.
-2. Press and hold both volume keys simultaneously for 3 seconds.
-3. You'll hear a spoken prompt to confirm the action. Press and hold the volume keys for another 3 seconds to confirm.
+## Turn off TalkBack with the volume keys
 
-### Via Google Assistant
+During setup, Android lets you enable TalkBack by holding both volume buttons. After setup, the same gesture usually toggles TalkBack off when the **TalkBack shortcut** is enabled.
 
-1. Activate Google Assistant by saying, "Hey Google."
-2. Simply command, "Turn on TalkBack," or "Turn off TalkBack," depending on your need.
+If nothing happens, the shortcut may be off. Use Google Assistant or Settings instead, then enable **TalkBack shortcut** under **Settings**, **Accessibility**, **TalkBack** only if you want the volume keys to control TalkBack later.
 
-### Through Device Settings
+## Turn off TalkBack with Google Assistant
 
-1. Open the `Settings` app on your device.
-2. Scroll down and select `Accessibility`.
-3. Tap on `TalkBack`.
-4. Toggle the `Use TalkBack` switch to turn it on or off.
+1. Say **"Hey Google"** (or use your Assistant gesture).
+2. Say **"Turn off TalkBack."**
 
-## Navigating with TalkBack
+Assistant must already be set up on the device. This matches [Google's TalkBack help](https://support.google.com/accessibility/android/answer/6007100) for toggling TalkBack by voice.
 
-Once TalkBack is active, your device will provide auditory feedback as you navigate. Here's how to interact with your device using TalkBack:
+## Turn off TalkBack in Settings
 
-- **Next Item**: Swipe right to move to the next item.
-- **Previous Item**: Swipe left to go back to the previous item.
-- **Activate**: Double-tap anywhere on the screen to activate the selected item.
-- **Explore by Touch**: Drag your finger across the screen to have items read out loud as you touch them.
-- **Scroll**: Use two fingers to swipe up or down to scroll through pages.
-- **TalkBack Menu**: Tap the screen with three fingers to open additional TalkBack options.
-- **Adjust Reading Controls**: Change reading settings by swiping left or right with three fingers.
+1. Open **Settings**.
+2. Tap **Accessibility**, then **TalkBack**.
+3. Turn off **Use TalkBack**. With TalkBack on, double tap the switch and confirm **Turn off**.
 
-## Turning Off TalkBack
+Menu names can vary slightly by Android version and manufacturer, but **Accessibility** and **TalkBack** are consistent on stock Android and most OEM skins.
 
-If you need to disable TalkBack, you can use any of the methods mentioned above. The volume key shortcut is particularly useful when you cannot see the screen.
+## Samsung Galaxy and One UI
 
-Remember, mastering TalkBack takes practice. Don't hesitate to explore the settings and customize the experience to your preferences. With these steps, you can confidently navigate your Android device using TalkBack.
+Samsung Galaxy phones ship with the same TalkBack engine, but One UI labels and paths differ on older releases.
+
+| Situation | What to do |
+| --- | --- |
+| **One UI 3.1 and newer** | **Settings**, **Accessibility**, **TalkBack**, then turn off the switch (double tap if TalkBack is already reading the screen). |
+| **Older One UI (Voice Assistant)** | **Settings**, **Accessibility**, **Screen reader**, **Voice Assistant**, then turn the switch off with double taps. |
+| **Volume shortcut** | Press and hold **volume up and volume down** for at least 3 seconds. Tap **Use** on the first prompt if shown, then repeat the shortcut. |
+| **Quick entry to Settings** | Swipe down with **two fingers**, open **Settings**, then follow the TalkBack or Voice Assistant path above. |
+
+Samsung's [TalkBack on Galaxy devices](https://www.samsung.com/us/support/answer/ANS10002553/) support article matches these shortcuts and Settings paths.
+
+## Stuck in TalkBack or TalkBack keeps turning on
+
+**Screen feels locked:** TalkBack is still running. Use the **volume key shortcut** first. If that fails, plug in a USB keyboard on supported Android versions and use accessibility keyboard shortcuts where available, or ask someone to help you reach **Settings**, **Accessibility**, **TalkBack**.
+
+**TalkBack starts after pocket touches:** Turn off **TalkBack shortcut** after you disable TalkBack: **Settings**, **Accessibility**, **TalkBack**, **TalkBack shortcut**, off. Google recommends disabling shortcuts once TalkBack is off so they do not enable it again by accident.
+
+**Password fields:** TalkBack may read letters aloud in secure fields. Change that under TalkBack settings if needed after you regain normal touch mode.
+
+Building Android apps with accessibility in mind? See [Android setup for Capacitor apps](/blog/android-setup-for-capacitor-apps/) and [Capacitor live reload on Android, Windows, and Linux](/blog/capacitor-live-reload-android-windows-linux/) for related development workflows on Android hardware.
+
+## Turn TalkBack back on
+
+Use any of the same channels when you need the screen reader again:
+
+- Hold **both volume keys** for about 3 seconds (with **TalkBack shortcut** enabled).
+- Say **"Hey Google, turn on TalkBack."**
+- Open **Settings**, **Accessibility**, **TalkBack**, and turn on **Use TalkBack**.
+
+On first enable, Android may open the TalkBack tutorial. You can reopen it later from TalkBack settings.
+
+## Basic TalkBack gestures (while it is on)
+
+- **Next item:** Swipe right with one finger.
+- **Previous item:** Swipe left with one finger.
+- **Activate:** Double tap with one finger.
+- **Scroll:** Swipe up or down with two fingers.
+- **TalkBack menu:** Three-finger tap, or swipe down then right on many devices (including Samsung Galaxy on updated Android).
+
+More detail lives in [Get started on Android with TalkBack](https://support.google.com/accessibility/android/answer/6283677) from Google.
+
+## Frequently asked questions
+
+### What is the fastest way to turn off TalkBack on Android?
+
+Press and hold both volume keys for about 3 seconds, confirming again if prompted. You can also say Hey Google, turn off TalkBack when Assistant is set up.
+
+### How do I turn off TalkBack on Samsung?
+
+Use the volume up and volume down shortcut for at least 3 seconds, or open Settings, Accessibility, TalkBack (or Screen reader, Voice Assistant on older One UI), double tap the switch, then double tap Turn off.
+
+### Why does TalkBack keep turning on?
+
+The volume or accessibility shortcut is usually still enabled. After TalkBack is off, disable TalkBack shortcut under Settings, Accessibility, TalkBack.
+
+### How do I turn TalkBack back on?
+
+Hold both volume keys, say Hey Google, turn on TalkBack, or enable Use TalkBack under Settings, Accessibility, TalkBack.
 
 ## Keep going from How to Turn off and Use TalkBack on Android Devices
 
