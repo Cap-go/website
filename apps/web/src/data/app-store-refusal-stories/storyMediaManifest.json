@@ -24,6 +24,7 @@
     "width": 1199,
     "height": 365
   },
+  "copied-terms-and-privacy-links-pointed-to-old-app": null,
   "app-preview-free-trial-wording-rejected": null,
   "crowded-category-4-3": null,
   "demo-account-deleted-five-minutes-then-recording-found-sales-copy": null,
@@ -54,6 +55,7 @@
     "width": 942,
     "height": 1728
   },
+  "matchmaking-timeout-reported-as-bug": null,
   "metadata-iap-checkboxes": null,
   "metadata-loop-launch-week": null,
   "movie-picker-posters-4-1-a-after-fifteen-days": null,
@@ -102,6 +104,7 @@
   "reviewer-could-not-follow-2-1": null,
   "reviewer-license-hid-paywall-2-1-then-china-ai-rejection": null,
   "same-letter-twice-4-3": null,
+  "second-app-2-1-information-needed-89-second-recording": null,
   "seven-questions-2-1": null,
   "seven-template-apps-4-3-same-minute": null,
   "sign-up-required-not-big-app": {
@@ -188,6 +191,7 @@
     "width": 1600,
     "height": 1110
   },
+  "healthkit-sync-2-5-1-missing-apple-health-badge": null,
   "hidden-staking-feature-2-3-1-a": {
     "src": "/app-store-refusal-horror-story/screenshots/hidden-staking-feature-2-3-1-a.webp",
     "alt": "App Review rejection under guideline 2.3.1(a) citing hidden monetary staking and stake forfeiture not described in metadata",
@@ -245,6 +249,7 @@
     "height": 427
   },
   "limited-review-history-video-walkthrough-2-1": null,
+  "live-a-year-no-rejections-then-removed-under-1-1": null,
   "library-update-eight-rejections-then-termination-notice": {
     "src": "/app-store-refusal-horror-story/screenshots/library-update-eight-rejections-then-termination-notice.webp",
     "alt": "Apple message titled Pending Termination Notice, citing repeated guideline violations in an attempt to evade the review process",
