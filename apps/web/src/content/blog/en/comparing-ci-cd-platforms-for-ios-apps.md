@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-02T12:00:00.000Z
+updated_at: 2026-11-03T12:00:00.000Z
 head_image: /RBW_XCode_Cloud_building.webp
 head_image_alt: "Comparison of CI/CD platforms building iOS apps on macOS runners"
 keywords: iOS CI/CD platforms, best CI/CD for iOS, iOS build server, Xcode Cloud vs Bitrise, Codemagic vs Bitrise, GitHub Actions iOS, TestFlight automation, Capacitor iOS builds
@@ -114,13 +114,13 @@ Azure Pipelines provides Microsoft-hosted macOS agents (`macOS-latest`) and supp
 
 ### Capgo Build
 
-[Capgo Build](/native-build/) is not a CI. It is a build service your existing CI calls. A Linux job (GitHub Actions, GitLab, Bitbucket, Gitea, Azure DevOps, anything) runs the web build and `cap sync ios`, then:
+[Capgo Build](/native-build/) is not a CI. It is a build service your pipeline calls from a Linux job (GitHub Actions, GitLab, Bitbucket, Gitea, Azure DevOps, or similar). That job runs the web build and `cap sync ios`, then requests an iOS build from Capgo Build:
 
 ```bash
 bunx @capgo/cli@latest build request com.example.app --platform ios --build-mode release
 ```
 
-Capgo compiles and signs on its Macs, streams logs back to the job, increments the build number from App Store Connect, and uploads to TestFlight. `--submit-to-store-review` sends it to App Review. Signing setup is guided by `bunx @capgo/cli@latest build init --platform ios`, which creates the certificate and profile. The signing credentials stay in your CI secrets and are sent per build rather than stored by Capgo.
+Capgo Build compiles and signs the iOS app in the cloud, streams logs back to the Linux CI job, increments the build number from App Store Connect, and uploads to TestFlight. `--submit-to-store-review` sends it to App Review. Signing setup is guided by `bunx @capgo/cli@latest build init --platform ios`, which creates the certificate and profile. The signing credentials stay in your CI secrets and are sent per build rather than stored by Capgo.
 
 Limits worth knowing: it only builds Capacitor apps, and a single build has a 10-minute limit. Its main advantage is that no job in your pipeline needs a macOS runner, and the same CLI ships [live updates](/live-update/) for web-only changes so many releases skip the native build entirely.
 
