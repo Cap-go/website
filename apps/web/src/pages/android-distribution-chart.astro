@@ -68,8 +68,8 @@ const apiMappingRows = [...data.apiDistribution].filter((row): row is Distributi
 
 const title = 'Android Version Distribution Chart | Market Share by API Level'
 const description = cover95
-  ? `Android version distribution and market share chart. API ${cover95.id}+ covers ${formatPercent(cover95.reach)} of devices, data ${updatedShort}.`
-  : `Android version distribution and market share by API level. Pick minSdkVersion using cumulative reach.`
+  ? `Android version distribution and market share chart by API level. Cumulative reach: API ${cover95.id}+ covers ${formatPercent(cover95.reach)} of devices. Updated ${updatedShort}.`
+  : `Android version distribution and market share chart with API levels. Pick minSdkVersion using cumulative reach from the interactive planner on this page.`
 
 const faqItems = [
   {
