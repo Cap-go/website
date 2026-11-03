@@ -856,9 +856,18 @@ const messages = {
   compare_appflow_support: 'For existing customers until access ends on December 31, 2027.',
   compare_appflow_verdict:
     'Capgo covers what Appflow teams use most, live updates with channels and rollback plus cloud native builds, and keeps running after 2027. Migration swaps one plugin and your upload step.',
+  compare_appflow_not_for_1: 'You are an existing Appflow customer with access until December 31, 2027 and migration can wait.',
+  compare_appflow_not_for_2: 'You want a free plan after the trial; Capgo has a 14-day trial but no free plan.',
   compare_better_eyebrow: 'Honest take',
   compare_better_lead: 'No tool fits every team. These are the cases where we would point you to the other option.',
   compare_better_title: 'Where {competitor} is the better choice',
+  compare_not_for_title: 'Capgo is not the right fit if...',
+  compare_corrections_prefix: 'Work at {competitor} and see something wrong or outdated?',
+  compare_corrections_email: 'Email support@capgo.app',
+  compare_corrections_or: ' or ',
+  compare_corrections_repo: 'open a PR on github.com/Cap-go/website',
+  compare_corrections_source_sep: ', or edit this page at',
+  compare_corrections_source_file: 'View source on GitHub',
   compare_capawesome_better_1_text:
     'If release health data and a fast-moving product do not matter to your team, Capawesome covers the basics: channels, gradual rollouts, and rollback after a crash.',
   compare_capawesome_better_1_title: 'You release a few times a year',
@@ -867,6 +876,11 @@ const messages = {
   compare_capawesome_better_2_title: 'Live updates from a git ref',
   compare_capawesome_better_3_text: 'Their store publishing covers TestFlight, Google Play, Huawei AppGallery, and Firebase App Distribution.',
   compare_capawesome_better_3_title: 'More store destinations',
+  compare_capawesome_better_4_text:
+    'Capawesome ships slower but more carefully. If a conservative release pace matters more than fast fixes and frequent improvements, that trade-off can fit your team.',
+  compare_capawesome_better_4_title: 'You value stability over speed',
+  compare_capawesome_not_for_1: 'You prefer a slower, more conservative release pace over fast fixes and new features.',
+  compare_capawesome_not_for_2: 'You want a free plan after the trial; Capgo has a 14-day trial but no free plan.',
   compare_capawesome_company: 'Capawesome (Genz IT Solutions GmbH), based in Germany. Live updates launched in 2024.',
   compare_capawesome_eyebrow: 'Capawesome Cloud alternative',
   compare_capawesome_frameworks: 'Capacitor, Ionic, and Cordova.',
@@ -955,12 +969,13 @@ const messages = {
     'Set <code>CapacitorUpdater</code> options in <code>capacitor.config.ts</code> and call <code>notifyAppReady()</code> on launch. Channels live in the Capgo dashboard or API.',
   compare_capawesome_step3_text: 'Replace the Capawesome deploy step in CI with <code>npx @capgo/cli@latest bundle upload</code>.',
   compare_capawesome_support: 'Community chat on every plan. Email support from Professional (Live Updates) or Starter (Platform), and priority support on Business.',
-  compare_capawesome_verdict: 'Pick Capgo if you ship often and want to see what each release does on real devices. Pick Capawesome if you release a few times a year.',
-  compare_capgo_company: 'Independent and bootstrapped, founded in 2021. 9,400+ teams, 4.7K+ apps, and 90M+ devices. SOC 2 Type II and ISO 27001 on the Enterprise plan.',
+  compare_capawesome_verdict:
+    'Capgo ships fast and fixes fast. Capawesome ships slower but more carefully. If you value speed and fast evolution, choose Capgo. If you value more stability, choose Capawesome.',
+  compare_capgo_company: 'Independent and bootstrapped, founded in 2021. 9,400+ teams, 5.7K+ apps, and 90M+ devices. SOC 2 Type II and ISO 27001 on the Enterprise plan.',
   compare_capgo_frameworks:
     'Capacitor apps built with React, Vue, Angular, Svelte, Ionic, or any web framework. Live updates also work for Cordova and Electron. Not for React Native.',
   compare_capgo_native_builds:
-    'Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2–3 minutes, and can upload them to the stores. Build time is included in plans.',
+    'Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2-3 minutes, and can upload them to the stores. Build time is included in plans.',
   compare_capgo_open_source:
     'Updater plugin and Capgo plugins are free under MPL-2.0. Backend source is on GitHub under AGPL-3.0. Run your own update server, or use licensed self-hosting on Enterprise.',
   compare_capgo_ota: 'Ships JavaScript, HTML, CSS, and asset changes without waiting for store review, with delta downloads and end-to-end encryption. 1B+ updates per month.',
@@ -973,6 +988,11 @@ const messages = {
   compare_codepush_better_1_title: 'Your app is React Native',
   compare_codepush_better_2_text: 'The standalone server has no license fee. You take on hosting, security patches, and maintenance, with no vendor support.',
   compare_codepush_better_2_title: 'You want to run it all yourself',
+  compare_codepush_better_3_text:
+    'You already run App Center era tooling on React Native and only need basic promote and rollback. The archived standalone server still supports that model when you self-host.',
+  compare_codepush_better_3_title: 'You stay on React Native with App Center-era flows',
+  compare_codepush_not_for_1: 'Your app is React Native; Capgo updates Capacitor, Cordova, and Electron, not React Native.',
+  compare_codepush_not_for_2: 'You want a free plan after the trial; Capgo has a 14-day trial but no free plan.',
   compare_codepush_blog_alternatives: 'CodePush alternatives (blog)',
   compare_codepush_blog_cta: 'App Center migration (blog)',
   compare_codepush_company: 'Microsoft retired App Center, including CodePush, on March 31, 2025, and archived the standalone server repository.',
@@ -1075,6 +1095,8 @@ const messages = {
   compare_expo_source_updates_sdk: 'expo-updates library reference',
   compare_expo_support: 'Community Discord on every plan, priority support from Production, and Slack support as an Enterprise add-on.',
   compare_expo_verdict: 'Choose EAS when the product is React Native. Choose Capgo when the product is a web app and the goal is iOS and Android without rewriting the UI.',
+  compare_expo_not_for_1: 'Your app is React Native; Capgo does not update React Native apps.',
+  compare_expo_not_for_2: 'You need a free plan after the trial; Capgo has a 14-day trial but no free plan.',
   compare_faq_eyebrow: 'FAQ',
   compare_faq_title: 'Common questions',
   compare_median_better_1_text: 'On Business plans, starting at $7,200/year, the Median team builds, publishes, and maintains your iOS and Android apps.',
@@ -1125,8 +1147,10 @@ const messages = {
     'Paid licenses add an annual fee that starts 12 months after activation. Business plans include the Median team building, publishing, and supporting your apps.',
   compare_median_verdict:
     'Choose Median if you want to outsource the mobile shell and accept platform dependency. Choose Capgo with Capacitor if you want web-to-mobile delivery without giving up ownership or exit options.',
-  compare_meta_apps: '4.7K+ apps',
-  compare_meta_build_time: 'Native builds in 2–3 min',
+  compare_median_not_for_1: 'You have no in-house developers and want a managed team to build and publish for you; Median Business plans cover that.',
+  compare_median_not_for_2: 'You want a free non-commercial app license with a Median watermark instead of a paid Capgo trial.',
+  compare_meta_apps: '5.7K+ apps',
+  compare_meta_build_time: 'Native builds in 2-3 min',
   compare_meta_devices: '90M+ devices',
   compare_meta_founded: 'Founded in 2021',
   compare_meta_teams: '9,400+ teams',
@@ -1160,7 +1184,7 @@ const messages = {
   compare_row_support: 'Support',
   compare_source_ref_label: 'Source {n}: {source}',
   compare_sources_note:
-    'Competitor details are as of September 2026 and were checked against the vendor pages below. Plans and prices change, so confirm on the vendor site before you decide.',
+    'Competitor details are as of November 2026 and were checked against the vendor pages below. Plans and prices change, so confirm on the vendor site before you decide.',
   compare_sources_title: 'Sources',
   compare_step_build_text:
     'Run <code>npx @capgo/cli@latest build request --platform ios</code> (or <code>android</code>) to build and sign binaries in the cloud. A typical build takes 2–3 minutes.',
@@ -1173,7 +1197,7 @@ const messages = {
   compare_step_install_title: 'Install the Capgo updater',
   compare_step_ready_title: 'Replace the sync code',
   compare_step_upload_title: 'Upload from your CI',
-  compare_table_caption: 'Capgo vs {competitor}, as of September 2026. Each {competitor} fact links to a numbered source listed below the table.',
+  compare_table_caption: 'Capgo vs {competitor}, as of November 2026. Each {competitor} fact links to a numbered source listed below the table.',
   compare_table_eyebrow: 'Side by side',
   compare_table_title: 'Capgo vs {competitor} at a glance',
   compare_verdict_label: 'Verdict',
@@ -1204,6 +1228,8 @@ const messages = {
   compare_voltbuilder_step2_text: 'Add <code>npx @capgo/cli@latest bundle upload</code> after your web build so each change reaches users without a new store release.',
   compare_voltbuilder_support: 'Email at support@volt.build and a community forum.',
   compare_voltbuilder_verdict: 'Choose VoltBuilder if you only need store builds. Choose Capgo if you want native builds plus live updates, channels, and rollback after release.',
+  compare_voltbuilder_not_for_1: 'You ship a few store releases a year and do not need over-the-air live updates.',
+  compare_voltbuilder_not_for_2: 'You want a free plan after the trial; Capgo has a 14-day trial but no free plan.',
   expo_nav_label: 'EAS vs Capgo',
   footer_best_live_updates_link: 'Best Capacitor live update tools',
   footer_brand_tagline: 'AI-ready platform to build, ship, and live-update Capacitor apps.',
@@ -6955,8 +6981,9 @@ const messages = {
   voltbuilder_alt_blog_cta: 'Read the Voltbuilder alternative blog post',
   review_appflow_title: 'Ionic Appflow review for Capacitor teams',
   review_appflow_meta_description: 'Honest Capgo-voiced overview of Ionic Appflow: who it serves, the wind-down timeline, and where Capgo fits for live updates and native builds.',
-  review_appflow_hero_title: 'Ionic Appflow — what it is today',
-  review_appflow_hero_subtitle: 'Appflow bundled CI, live updates, and store publishing for Ionic apps. Ionic is winding the product down — teams need a migration plan.',
+  review_appflow_hero_title: 'Ionic Appflow: what it is today',
+  review_appflow_hero_subtitle:
+    'Appflow bundled CI, live updates, and store publishing for Ionic apps. Ionic is winding the product down, so teams need a migration plan.',
   review_appflow_what_title: 'What Appflow was',
   review_appflow_what_p1:
     'Appflow connected git repos to cloud builds, channel-based live updates, and store submission helpers. It worked well if your stack stayed inside Ionic’s toolchain.',
@@ -6965,25 +6992,42 @@ const messages = {
   review_appflow_capgo_title: 'How Capgo compares',
   review_appflow_capgo_p1:
     'Capgo keeps live updates and native builds while you retain GitHub Actions or GitLab CI. See the full comparison and migration guide for timelines and feature mapping.',
+  review_appflow_stay_title: 'Who should stay on Ionic Appflow',
+  review_appflow_stay_html_1:
+    'You are an <a class="text-emerald-400 underline" href="https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products" rel="noopener noreferrer" target="_blank">existing Appflow customer</a> with dashboard access until December 31, 2027 and your migration can wait until closer to that date.',
+  review_appflow_stay_html_2:
+    'You still rely on <a class="text-emerald-400 underline" href="https://ionic.io/docs/appflow" rel="noopener noreferrer" target="_blank">Appflow-native automations</a> you have not mapped to another CI yet and the published wind-down timeline still covers your release calendar.',
   review_capawesome_title: 'Capawesome Cloud review for Capacitor teams',
   review_capawesome_meta_description: 'Capgo-voiced overview of Capawesome Cloud: plugins, live updates, and how it differs from Capgo on CI, scale, and open source.',
-  review_capawesome_hero_title: 'Capawesome Cloud — what it is',
+  review_capawesome_hero_title: 'Capawesome Cloud: what it is',
   review_capawesome_hero_subtitle: 'Capawesome ships popular Capacitor plugins and a cloud platform for live updates and builds. Many teams evaluate it next to Capgo.',
   review_capawesome_what_title: 'What Capawesome offers',
   review_capawesome_what_p1: 'Capawesome Cloud combines plugin maintenance with hosted live updates and CI-style workflows tied to their ecosystem.',
   review_capawesome_capgo_title: 'How Capgo differs',
   review_capawesome_capgo_p1:
-    'Capgo is independent, fully open source on the updater, and keeps your CI. Read the detailed comparison — we do not invent pricing or uptime claims beyond that page.',
+    'Capgo is independent, fully open source on the updater, and keeps your CI. Read the detailed comparison; we do not invent pricing or uptime claims beyond that page.',
+  review_capawesome_stay_title: 'Who should stay on Capawesome Cloud',
+  review_capawesome_stay_html_1:
+    'You value <a class="text-emerald-400 underline" href="https://capawesome.io/cloud/live-updates/" rel="noopener noreferrer" target="_blank">live updates triggered from a git ref</a> inside Capawesome Cloud and do not want to build bundles in your own CI yet.',
+  review_capawesome_stay_html_2:
+    'You prefer a slower, more conservative release pace and <a class="text-emerald-400 underline" href="https://capawesome.io/cloud/" rel="noopener noreferrer" target="_blank">Capawesome Cloud</a> already matches how your team ships today.',
   review_codepush_title: 'Microsoft CodePush review',
   review_codepush_meta_description: 'What CodePush was, why Microsoft retired it, and where Capacitor and React Native teams go next.',
-  review_codepush_hero_title: 'Microsoft CodePush — legacy status',
+  review_codepush_hero_title: 'Microsoft CodePush: legacy status',
   review_codepush_hero_subtitle: 'CodePush pioneered JavaScript OTA updates for mobile. The hosted service is gone; Capacitor teams need a successor.',
   review_codepush_what_title: 'What CodePush did well',
-  review_codepush_what_p1: 'Free tier, Microsoft infrastructure, and simple promote/rollback flows for JavaScript bundles — especially for React Native.',
+  review_codepush_what_p1:
+    'Free tier, Microsoft infrastructure, and simple promote/rollback flows for JavaScript bundles, especially for React Native.',
   review_codepush_change_title: 'Retirement',
   review_codepush_change_p1: 'App Center CodePush shutdown pushed teams to self-host, change stacks, or adopt vendors built for their framework.',
   review_codepush_capgo_title: 'Capacitor path',
-  review_codepush_capgo_p1: 'Capgo is built for Capacitor live updates with signing, channels, and analytics — not a drop-in CodePush SDK replacement.',
+  review_codepush_capgo_p1:
+    'Capgo is built for Capacitor live updates with signing, channels, and analytics, not a drop-in CodePush SDK replacement.',
+  review_codepush_stay_title: 'Who should stay on CodePush',
+  review_codepush_stay_html_1:
+    'Your app is <a class="text-emerald-400 underline" href="https://github.com/microsoft/code-push-server" rel="noopener noreferrer" target="_blank">React Native</a> and you self-host the archived standalone server with promote and rollback flows you already run.',
+  review_codepush_stay_html_2:
+    'You are sunsetting the app before you finish a migration and only need <a class="text-emerald-400 underline" href="https://learn.microsoft.com/en-us/appcenter/retirement" rel="noopener noreferrer" target="_blank">legacy App Center exports</a> for a short maintenance window.',
   best_capacitor_live_updates_title: 'Best Capacitor live update platform',
   best_ai_tools_capacitor_title: 'Best AI tools to build Capacitor apps',
   best_ai_tools_capacitor_meta_description:
@@ -7019,7 +7063,12 @@ const messages = {
   best_appflow_alternative_body_li2: 'Native iOS and Android builds',
   best_appflow_alternative_body_li3: 'Documented migration from Appflow',
   best_codepush_alternative_title: 'Best CodePush alternative for Capacitor',
-  best_codepush_alternative_meta_description: 'After App Center CodePush, Capacitor and Ionic teams need a maintained OTA platform — compare options and migration guides.',
+  best_codepush_alternative_meta_description:
+    'After App Center CodePush, Capacitor and Ionic teams need a maintained OTA platform. Compare options and migration guides.',
+  best_codepush_alternative_ranking_html:
+    'For Capacitor and Ionic apps, start with the sourced comparison on <a class="text-emerald-400 underline" href="/alternatives/codepush/">Capgo vs CodePush</a>. React Native teams should compare Expo EAS Update instead.',
+  best_appflow_alternative_ranking_html:
+    'For a maintained feature table with sources, read <a class="text-emerald-400 underline" href="/alternatives/ionic-appflow/">Capgo vs Ionic Appflow</a> before you pick a replacement.',
   best_codepush_alternative_hero_title: 'Best CodePush alternative (Capacitor / Ionic / Cordova)',
   best_codepush_alternative_hero_subtitle: 'CodePush retirement left a gap for hybrid apps. Capacitor-first platforms differ from React Native tooling.',
   best_codepush_alternative_body_title: 'Framework fit',
@@ -7045,16 +7094,26 @@ const messages = {
   migrate_from_capawesome_steps_p1: 'Read Capgo vs Capawesome for scope differences, then follow the from-capawesome upgrade doc for CLI and dashboard steps.',
   migrate_from_capawesome_steps_li1: 'Compare on the Capawesome alternative page',
   migrate_from_capawesome_steps_li2: 'Run through /docs/upgrade/from-capawesome-to-capgo/',
-  migrate_from_capawesome_steps_li3: 'Keep Capawesome plugins if needed — updater is separate',
+  migrate_from_capawesome_steps_li3: 'Keep Capawesome plugins if needed; updater is separate',
+  migrate_from_capawesome_skip_title: 'When not to migrate yet',
+  migrate_from_capawesome_skip_li1: 'You are sunsetting the app before Capawesome access ends and only need short-term maintenance.',
+  migrate_from_capawesome_skip_li2: 'You prefer Capawesome Cloud release pace and git-connected live updates with no CI changes planned.',
+  migrate_from_appflow_skip_title: 'When not to migrate yet',
+  migrate_from_appflow_skip_li1: 'You are sunsetting the app before Appflow access ends on December 31, 2027.',
+  migrate_from_appflow_skip_li2: 'You still depend on Appflow-only automations that are not mapped to another CI pipeline.',
   migrate_from_codepush_title: 'Migrate from Microsoft CodePush',
   migrate_from_codepush_meta_description: 'Export from App Center CodePush, remove SDK wiring, and adopt Capgo for Capacitor live updates.',
   migrate_from_codepush_hero_title: 'Leave App Center CodePush',
-  migrate_from_codepush_hero_subtitle: 'CodePush is retired — uninstall SDK dependencies, update CSP, and ship Capacitor bundles through Capgo.',
+  migrate_from_codepush_hero_subtitle:
+    'CodePush is retired. Uninstall SDK dependencies, update CSP, and ship Capacitor bundles through Capgo.',
   migrate_from_codepush_steps_title: 'Suggested path',
   migrate_from_codepush_steps_p1: 'Use App Center migration blog posts for cleanup, then install the Capgo updater and map channels to your old promote flow.',
   migrate_from_codepush_steps_li1: 'Read App Center migration articles on the blog',
   migrate_from_codepush_steps_li2: 'Compare CodePush vs Capgo on the alternative page',
   migrate_from_codepush_steps_li3: 'Register a Capgo account and upload a test bundle',
+  migrate_from_codepush_skip_title: 'When not to migrate yet',
+  migrate_from_codepush_skip_li1: 'Your app is React Native and you plan to keep self-hosting the archived CodePush server.',
+  migrate_from_codepush_skip_li2: 'You are sunsetting the app before vendor retirement and only need legacy App Center exports.',
   page_last_updated: 'Last updated',
   review_appflow_faq_q1: 'Is Ionic Appflow shutting down?',
   review_appflow_faq_a1:

@@ -69,6 +69,12 @@ Capgo’s open-source architecture is built for flexibility, supporting both clo
 
 Capgo also integrates smoothly with CI/CD pipelines like GitHub Actions and [GitLab CI](https://docs.gitlab.com/ee/ci/). Developers can set up these pipelines without extra hosting costs, giving them more control over their deployment processes [\[1\]](https://capgo.app).
 
+## When to pick Ionic Appflow instead
+
+- You are an existing Appflow customer with access through **December 31, 2027** while you schedule a migration ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
+- You want Appflow's built-in CI/CD and live updates without integrating Capgo into GitHub Actions or GitLab ([Appflow documentation](https://ionic.io/docs/appflow)).
+- Your organization already pays Appflow team pricing and uses Ionic support channels ([Ionic pricing](https://ionic.io/pricing)).
+
 ## Price Comparison
 
 ### Plan Options

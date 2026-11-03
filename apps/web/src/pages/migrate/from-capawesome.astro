@@ -61,7 +61,12 @@ const relatedLinks = [
       title: m.migrate_from_capawesome_steps_title({}, { locale }),
       paragraphs: [m.migrate_from_capawesome_steps_p1({}, { locale })],
       listItems: [m.migrate_from_capawesome_steps_li1({}, { locale }), m.migrate_from_capawesome_steps_li2({}, { locale }), m.migrate_from_capawesome_steps_li3({}, { locale })],
-      htmlParagraphs: [`<a class="text-emerald-400 underline" href="${docsUrl}">${m.documentation({}, { locale })} — from-capawesome-to-capgo</a>`],
+      htmlParagraphs: [`<a class="text-emerald-400 underline" href="${docsUrl}">${m.documentation({}, { locale })}: from-capawesome-to-capgo</a>`],
+    },
+    {
+      title: m.migrate_from_capawesome_skip_title({}, { locale }),
+      paragraphs: [],
+      listItems: [m.migrate_from_capawesome_skip_li1({}, { locale }), m.migrate_from_capawesome_skip_li2({}, { locale })],
     },
   ]}
   relatedLinks={relatedLinks}

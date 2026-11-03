@@ -79,6 +79,8 @@ const better = [
   { title: m.compare_voltbuilder_better_3_title({}, { locale }), text: m.compare_voltbuilder_better_3_text({}, { locale }), sources: [1] },
 ]
 
+const notFor = [m.compare_voltbuilder_not_for_1({}, { locale }), m.compare_voltbuilder_not_for_2({}, { locale })]
+
 const migration = {
   title: m.compare_voltbuilder_migration_title({}, { locale }),
   lead: m.compare_voltbuilder_migration_lead({}, { locale }),
@@ -114,6 +116,8 @@ const related = [
     rows={rows}
     sources={sources}
     better={better}
+    notFor={notFor}
+    sourceFile="apps/web/src/pages/alternatives/voltbuilder.astro"
     migration={migration}
     testimonials={productTestimonials.nativeBuild.concat(productTestimonials.liveUpdate.slice(0, 1))}
     faq={faq}

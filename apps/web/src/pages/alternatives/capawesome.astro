@@ -170,7 +170,10 @@ const better = [
   { title: m.compare_capawesome_better_1_title({}, { locale }), text: m.compare_capawesome_better_1_text({}, { locale }), sources: [1] },
   { title: m.compare_capawesome_better_2_title({}, { locale }), text: m.compare_capawesome_better_2_text({}, { locale }), sources: [3] },
   { title: m.compare_capawesome_better_3_title({}, { locale }), text: m.compare_capawesome_better_3_text({}, { locale }), sources: [2] },
+  { title: m.compare_capawesome_better_4_title({}, { locale }), text: m.compare_capawesome_better_4_text({}, { locale }) },
 ]
+
+const notFor = [m.compare_capawesome_not_for_1({}, { locale }), m.compare_capawesome_not_for_2({}, { locale })]
 
 const migration = {
   title: m.capwesome_migration_title({}, { locale }),
@@ -205,6 +208,8 @@ const related = [
     rows={rows}
     sources={sources}
     better={better}
+    notFor={notFor}
+    sourceFile="apps/web/src/pages/alternatives/capawesome.astro"
     migration={migration}
     testimonials={productTestimonials.liveUpdate}
     reviewWall

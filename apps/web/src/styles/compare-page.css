@@ -224,6 +224,38 @@
 .lu .cmp-sources a:hover {
   text-decoration: underline;
 }
+.lu .cmp-corrections {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
+}
+.lu .cmp-corrections a {
+  color: #93c5fd;
+  word-break: break-word;
+}
+.lu .cmp-corrections a:hover {
+  text-decoration: underline;
+}
+.lu .cmp-not-for {
+  margin-top: 36px;
+  max-width: 860px;
+}
+.lu .cmp-not-for h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+}
+.lu .cmp-not-for ul {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+}
 
 /* honest "better choice" cards */
 .lu .cmp-card-grid {
