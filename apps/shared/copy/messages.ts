@@ -621,6 +621,9 @@ const messages = {
   brand_asset_banner_navy_title: 'Logo on navy banner',
   brand_asset_youtube_banner_desc: '2560×1440 YouTube channel art. The white lockup sits inside the area YouTube shows on every device, on Capgo banner navy.',
   brand_asset_youtube_banner_title: 'YouTube channel banner',
+  brand_asset_podcast_cover_desc:
+    '3000×3000 square cover for the Capgo podcast, sized for Apple Podcasts, Spotify, and other directories. White mark and wordmark on Capgo navy.',
+  brand_asset_podcast_cover_title: 'Podcast cover art',
   brand_asset_dark_desc: 'Navy lockup for light backgrounds, press PDFs, and documents. Keep clear space around the mark.',
   brand_asset_dark_title: 'Logo for light backgrounds',
   brand_asset_header_desc: 'Compact white lockup sized for navigation bars, favicons in decks, and small UI placements.',
