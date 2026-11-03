@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Web wrapper rejected, native rebuild">
+  <title>Web wrapper rejected, native rebuild</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="48" y="56" width="96" height="88" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="56" y="64" width="80" height="14" rx="4" fill="#374151"/>
+  <rect x="56" y="86" width="64" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="56" y="98" width="72" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="56" y="110" width="56" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <path d="M148 100h36" stroke="#44BCFF" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="188,100 176,92 176,108" fill="#44BCFF"/>
+  <rect x="196" y="48" width="76" height="104" rx="14" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <rect x="208" y="72" width="52" height="8" rx="4" fill="#44BCFF" opacity="0.5"/>
+  <rect x="208" y="88" width="40" height="8" rx="4" fill="#9CA3AF" opacity="0.4"/>
+  <circle cx="234" cy="124" r="14" fill="#44BCFF" opacity="0.25"/>
+</svg>
