@@ -214,7 +214,7 @@ If you are already on Appflow, plan the exit now rather than in late 2027. The l
 
 - You are already on Appflow and your access continues through **December 31, 2027** after new sales stopped **February 11, 2025** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 - You want one Ionic-hosted pipeline for native builds, live updates, and store publishing without calling Capgo from GitHub Actions ([Appflow overview](https://ionic.io/appflow)).
-- Your team has already budgeted Appflow enterprise pricing and Ionic support ([Ionic pricing](https://ionic.io/pricing)).
+- Your team has already budgeted Appflow enterprise pricing and Ionic support ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ### Microsoft App Center
 

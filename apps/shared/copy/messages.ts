@@ -7027,7 +7027,7 @@ const messages = {
   review_codepush_stay_html_1:
     'Your app is <a class="text-emerald-400 underline" href="https://github.com/microsoft/code-push-server" rel="noopener noreferrer" target="_blank">React Native</a> and you self-host the archived standalone server with promote and rollback flows you already run.',
   review_codepush_stay_html_2:
-    'You are sunsetting the app before you finish a migration and only need <a class="text-emerald-400 underline" href="https://learn.microsoft.com/en-us/appcenter/retirement" rel="noopener noreferrer" target="_blank">legacy App Center exports</a> for a short maintenance window.',
+    'You are sunsetting the app and only need legacy App Center exports captured before the March 31, 2025 shutdown.',
   best_capacitor_live_updates_title: 'Best Capacitor live update platform',
   best_ai_tools_capacitor_title: 'Best AI tools to build Capacitor apps',
   best_ai_tools_capacitor_meta_description:
@@ -7113,7 +7113,7 @@ const messages = {
   migrate_from_codepush_steps_li3: 'Register a Capgo account and upload a test bundle',
   migrate_from_codepush_skip_title: 'When not to migrate yet',
   migrate_from_codepush_skip_li1: 'Your app is React Native and you plan to keep self-hosting the archived CodePush server.',
-  migrate_from_codepush_skip_li2: 'You are sunsetting the app before vendor retirement and only need legacy App Center exports.',
+  migrate_from_codepush_skip_li2: 'You are sunsetting the app and only need legacy App Center exports captured before the March 31, 2025 shutdown.',
   page_last_updated: 'Last updated',
   review_appflow_faq_q1: 'Is Ionic Appflow shutting down?',
   review_appflow_faq_a1:

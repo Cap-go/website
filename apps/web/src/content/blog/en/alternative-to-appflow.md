@@ -58,7 +58,7 @@ That why we made you a clear and simple table to help you compare.
 
 - You are already an Appflow customer and your contract runs through **December 31, 2027** while Ionic winds down new sales ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 - You want native builds, live updates, and store publishing inside Ionic's hosted CI without wiring your own GitHub Actions workflow ([Appflow overview](https://ionic.io/appflow)).
-- Your team budgets for Appflow list pricing and prefers Ionic's bundled support model over assembling Capgo plus your existing CI ([Ionic pricing](https://ionic.io/pricing)).
+- Your team budgets for Appflow list pricing and prefers Ionic's bundled support model over assembling Capgo plus your existing CI ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ## Continuous integration alternatives
 

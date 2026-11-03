@@ -82,7 +82,7 @@ Capgo offers several advantages over AppFlow:
 
 - You already pay for Appflow and your access continues through **December 31, 2027** while you plan a later migration ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 - You want Ionic-hosted builds, live updates, and store tracks in one dashboard without maintaining GitHub Actions YAML ([Appflow documentation](https://ionic.io/docs/appflow)).
-- Your organization standardized on Appflow's enterprise support and billing before new sales stopped on **February 11, 2025** ([Ionic pricing](https://ionic.io/pricing)).
+- Your organization standardized on Appflow's enterprise support and billing before new sales stopped on **February 11, 2025** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ## Our Commitment to the Ecosystem
 
