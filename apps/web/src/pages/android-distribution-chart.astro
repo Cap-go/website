@@ -34,6 +34,12 @@ const updatedFormatted = new Date(data.updatedAt).toLocaleDateString('en-US', {
   day: 'numeric',
 })
 
+const updatedShort = new Date(data.updatedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+})
+
 const reachRows = [...data.cumulativeDistribution]
   .filter((row) => typeof row.distribution === 'number')
   .map((row) => ({
@@ -61,12 +67,9 @@ const android15Row = rowForMajor(15)
 const apiMappingRows = [...data.apiDistribution].filter((row): row is DistributionRow & { api: number } => typeof row.api === 'number').sort((a, b) => b.api - a.api)
 
 const title = 'Android Version Distribution Chart | Market Share by API Level'
-const description =
-  topShare && cover95
-    ? `Android version distribution and market share chart, updated ${updatedFormatted}. ${topShare.version} leads at ${formatPercent(topShare.distribution)}. Set minSdkVersion using cumulative reach: ${cover95.label} (API ${cover95.id}+) covers about ${formatPercent(cover95.reach)} of devices.`
-    : cover95
-      ? `Android version distribution chart with API levels and cumulative reach. As of ${updatedFormatted}, ${cover95.label} (API ${cover95.id}+) covers about ${formatPercent(cover95.reach)} of devices.`
-      : `Android version distribution and market share by API level. Pick a minimum SDK or coverage target and see what share of devices your app can reach.`
+const description = cover95
+  ? `Android version distribution and market share chart. API ${cover95.id}+ covers ${formatPercent(cover95.reach)} of devices, data ${updatedShort}.`
+  : `Android version distribution and market share by API level. Pick minSdkVersion using cumulative reach.`
 
 const faqItems = [
   {
