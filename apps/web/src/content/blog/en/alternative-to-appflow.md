@@ -46,9 +46,9 @@ That why we made you a clear and simple table to help you compare.
 | Install Stats | ✅ | ❌ |
 | Sandbox app for test | ✅ | ❌ |
 | Capacitor Plugin | ✅ | ❌ Cordova compatible |
-| Cordova plugin | ❌ Could be back port | ✅ |
+| Cordova plugin | ✅ Cordova updater ([docs](https://capgo.app/docs/plugins/cordova-updater/getting-started/)) | ✅ |
 | Affordable pricing | ✅ Start at $12/mo | ❌ Start at $499/mo |
-| Native build | ❌ | ✅ |
+| Native build | ✅ Capgo Builder ([native build](/native-build/)) | ✅ |
 | End-to-End encryption | ✅ | ❌ only for Portal |
 | 100% Open source | ✅ | ❌ |
 | Portal | ❌ coming soon | ✅ |
