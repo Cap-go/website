@@ -87,7 +87,7 @@ With Microsoft retiring App Center on **March 31, 2025** and Ionic winding down 
 
 - You are an existing Appflow subscriber with time left on access through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 - You want Appflow's CI/CD pipeline to bump iOS and Android version codes automatically on each native build ([Appflow auto-incrementing build numbers](https://ionic.io/docs/appflow/cookbook/auto-incrementing-build-numbers)).
-- Your budget already covers Appflow list pricing for bundled builds and live updates ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
+- Your existing Appflow plan for bundled builds and live updates continues under Ionic's wind-down terms through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ## Release Management Effects
 

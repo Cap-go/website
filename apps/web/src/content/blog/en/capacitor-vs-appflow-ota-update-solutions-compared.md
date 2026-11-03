@@ -271,7 +271,7 @@ Based on these distinctions, here’s a quick guide to help you pick the right p
 
 - You already run on Appflow and your subscription remains valid through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 - You prefer Ionic-managed cloud builds and live updates in one product instead of Capgo plus your own CI ([Appflow overview](https://ionic.io/appflow)).
-- Your team has budgeted for Appflow's annual plans and Ionic support channels ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
+- Your existing Appflow annual plan and Ionic support channels continue under Ionic's wind-down terms through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ## Keep going from Capacitor vs Appflow: OTA Update Solutions Compared
 

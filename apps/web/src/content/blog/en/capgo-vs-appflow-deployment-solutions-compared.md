@@ -73,7 +73,7 @@ Capgo also integrates smoothly with CI/CD pipelines like GitHub Actions and [Git
 
 - You are an existing Appflow customer with access through **December 31, 2027** while you schedule a migration ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 - You want Appflow's built-in CI/CD and live updates without integrating Capgo into GitHub Actions or GitLab ([Appflow documentation](https://ionic.io/docs/appflow)).
-- Your organization already pays Appflow team pricing and uses Ionic support channels ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
+- Your organization already pays Appflow team pricing and uses Ionic support channels under the continuity terms that run through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ## Price Comparison
 
