@@ -581,6 +581,8 @@ export const messageContexts = {
   brand_asset_header_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page brand.astro. Message key `brand_asset_header_title` (Brand Asset Header Title).',
   brand_asset_icon_desc: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page brand.astro. Message key `brand_asset_icon_desc` (Brand Asset Icon Desc).',
   brand_asset_icon_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page brand.astro. Message key `brand_asset_icon_title` (Brand Asset Icon Title).',
+  brand_asset_podcast_cover_desc: 'Brand page description of the 3000×3000 podcast cover art. Keep Capgo, Apple Podcasts, Spotify, and 3000×3000 unchanged.',
+  brand_asset_podcast_cover_title: 'Brand page asset heading for the Capgo podcast cover art download.',
   brand_asset_transparent_desc: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page brand.astro. Message key `brand_asset_transparent_desc` (Brand Asset Transparent Desc).',
   brand_asset_transparent_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page brand.astro. Message key `brand_asset_transparent_title` (Brand Asset Transparent Title).',
   brand_asset_youtube_banner_desc: 'Brand page description of the 2560×1440 YouTube channel banner. Keep YouTube, 2560×1440, and Capgo unchanged. The lockup is placed inside the area YouTube shows on phones, desktops, and TVs.',

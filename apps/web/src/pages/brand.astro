@@ -141,6 +141,22 @@ const donts = [
           </BrandAssetCard>
 
           <BrandAssetCard
+            title={m.brand_asset_podcast_cover_title({}, { locale })}
+            description={m.brand_asset_podcast_cover_desc({}, { locale })}
+            previewClass="bg-[#002444]"
+            downloads={[{ href: `${assetBase}/capgo-podcast-cover.png`, label: m.brand_download_png({}, { locale }), format: 'png' }]}
+          >
+            <img
+              src={`${assetBase}/capgo-podcast-cover.png`}
+              alt="Capgo podcast cover art with the Capgo mark, wordmark, and Podcast label"
+              class="h-32 w-32 rounded-xl"
+              width="3000"
+              height="3000"
+              loading="lazy"
+            />
+          </BrandAssetCard>
+
+          <BrandAssetCard
             title={m.brand_asset_transparent_title({}, { locale })}
             description={m.brand_asset_transparent_desc({}, { locale })}
             previewClass="bg-slate-900"
