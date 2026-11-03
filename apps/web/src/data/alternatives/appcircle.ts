@@ -5,7 +5,7 @@ export const appcircle: AlternativeCompetitor = {
   name: 'Appcircle',
   category: 'ci-cd',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-13',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Appcircle Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Appcircle and Capgo for Capacitor apps. Capgo Builder signs iOS and Android builds in the cloud and adds live updates, with pricing from $12/month.',
@@ -72,6 +72,10 @@ export const appcircle: AlternativeCompetitor = {
       text: 'Appcircle Starter is free with 20 builds a month. Capgo has a 14-day trial but no free plan.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'You only need mobile CI/CD, test distribution, or an enterprise app store, not Capacitor live updates.',
+    'Capgo has a 14-day trial but no free plan, while Appcircle Starter includes 20 cloud builds per month at no cost.',
   ],
   alternatives: [
     {

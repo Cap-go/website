@@ -5,7 +5,7 @@ export const natively: AlternativeCompetitor = {
   name: 'Natively',
   category: 'web-to-app',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Natively Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Natively (BuildNatively) and Capgo. A no-code website-to-app wrapper vs Capacitor with live updates, rollback, and cloud native builds.',
@@ -71,6 +71,10 @@ export const natively: AlternativeCompetitor = {
       text: 'Natively offers a paid App Store publishing service from $600 and custom development from $2,000.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'Your app is built on Bubble or another no-code stack with Natively plugins, not a Capacitor codebase you own.',
+    'You want a one-time lifetime Natively price instead of Capgo subscription pricing for live updates.',
   ],
   alternatives: [
     { name: 'Despia', text: 'One-time priced web-to-app runtime with an offline local server and source code export.', href: 'alternatives/despia' },

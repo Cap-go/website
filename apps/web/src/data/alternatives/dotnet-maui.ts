@@ -5,7 +5,7 @@ export const dotnetMaui: AlternativeCompetitor = {
   name: '.NET MAUI',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best .NET MAUI Alternative in 2026 | Capgo',
   metaDescription:
     'Compare .NET MAUI with Capacitor and Capgo. Reuse your web UI on iOS and Android, ship live updates without store review, and build in the cloud.',
@@ -80,6 +80,10 @@ export const dotnetMaui: AlternativeCompetitor = {
       text: 'Blazor Hybrid in MAUI renders Razor components in a BlazorWebView with full .NET access to device APIs, so Blazor teams can reuse UI across web, mobile, and desktop.',
       sources: [4],
     },
+  ],
+  notFor: [
+    'Your team builds in C#, XAML, and Visual Studio with .NET MAUI, not a web app packaged in Capacitor.',
+    'You need Windows and macOS desktop from the same MAUI project rather than a hybrid web shell on phones only.',
   ],
   alternatives: [
     {

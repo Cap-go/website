@@ -5,7 +5,7 @@ export const lynx: AlternativeCompetitor = {
   name: 'Lynx',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Lynx Alternative in 2026 | Capgo',
   metaDescription:
     'Compare ByteDance Lynx with Capacitor and Capgo. Run your existing web app on iOS and Android, ship live updates with rollback, and build in the cloud.',
@@ -80,6 +80,10 @@ export const lynx: AlternativeCompetitor = {
       text: 'Lynx documents HarmonyOS integration and ships Lynx Explorer for the HarmonyOS simulator.',
       sources: [3, 4],
     },
+  ],
+  notFor: [
+    'You embed Lynx surfaces inside a large native app rather than wrapping your whole product in Capacitor.',
+    'Your stack is Lynx native rendering with dual-thread UI, not an Ionic or Cordova web container.',
   ],
   alternatives: [
     {

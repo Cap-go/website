@@ -5,7 +5,7 @@ export const pwabuilder: AlternativeCompetitor = {
   name: 'PWABuilder',
   category: 'web-to-app',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best PWABuilder Alternative in 2026 | Capgo',
   metaDescription:
     'Compare PWABuilder and Capgo. Free PWA store packaging from Microsoft vs Capacitor with native plugins, live updates, rollback, and cloud native builds.',
@@ -77,6 +77,10 @@ export const pwabuilder: AlternativeCompetitor = {
       text: 'If your app needs little native access, a Trusted Web Activity on Android keeps it identical to your web version with no extra code.',
       sources: [5],
     },
+  ],
+  notFor: [
+    'You only need free PWA packaging for stores and your site changes live on the web without Capacitor OTA.',
+    'You target the Microsoft Store with PWABuilder first-class Windows packaging, not Capacitor native plugins.',
   ],
   alternatives: [
     { name: 'Despia', text: 'One-time priced runtime with a native SDK for web apps and an offline local server.', href: 'alternatives/despia' },

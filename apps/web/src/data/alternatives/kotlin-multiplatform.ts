@@ -5,7 +5,7 @@ export const kotlinMultiplatform: AlternativeCompetitor = {
   name: 'Kotlin Multiplatform',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Kotlin Multiplatform Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Kotlin Multiplatform and Compose Multiplatform with Capacitor and Capgo. Reuse web code, ship to web and mobile, and push live updates without review.',
@@ -81,6 +81,10 @@ export const kotlinMultiplatform: AlternativeCompetitor = {
       text: 'KMP can start with one isolated piece, such as validation rules or authentication, inside an existing native app.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'You want fully native SwiftUI and Jetpack Compose UI with shared Kotlin logic, not a single WebView app.',
+    'You embed shared modules inside existing native apps rather than shipping one Capacitor hybrid product.',
   ],
   alternatives: [
     {

@@ -5,7 +5,7 @@ export const nativeDevelopment: AlternativeCompetitor = {
   name: 'Native iOS and Android development',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Native App Development Alternative in 2026 | Capgo',
   metaDescription:
     'Compare native Swift and Kotlin development with Capacitor and Capgo. One web codebase for iOS, Android, and web, plus live updates and cloud builds.',
@@ -80,6 +80,10 @@ export const nativeDevelopment: AlternativeCompetitor = {
       title: 'You already have two strong mobile teams',
       text: 'If iOS and Android engineers are in place and the release cadence fits store review, native keeps each app fully idiomatic.',
     },
+  ],
+  notFor: [
+    'Performance, AR, or camera-heavy features are core to the product and need direct platform APIs.',
+    'You ship a few store releases a year with two native teams and do not need OTA for a web bundle.',
   ],
   alternatives: [
     {

@@ -5,7 +5,7 @@ export const webtonative: AlternativeCompetitor = {
   name: 'WebToNative',
   category: 'web-to-app',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best WebToNative Alternative in 2026 | Capgo',
   metaDescription:
     'Compare WebToNative and Capgo. A low-cost website-to-app wrapper vs Capacitor with live updates, rollback, channels, and cloud native builds you own.',
@@ -71,6 +71,10 @@ export const webtonative: AlternativeCompetitor = {
       text: 'Paste a URL, pick add-ons, and get a demo build, with delivery in about 24 hours.',
       sources: [2],
     },
+  ],
+  notFor: [
+    'You have no developers and want a low-cost URL-to-app wrapper with paid store publishing.',
+    'Your site stays live on the web and you do not need Capacitor plugins or controlled OTA channels.',
   ],
   alternatives: [
     { name: 'Natively', text: 'No-code website-to-app wrapper popular with Bubble, with a lifetime option.', href: 'alternatives/natively' },

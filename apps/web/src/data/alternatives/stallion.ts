@@ -5,7 +5,7 @@ export const stallion: AlternativeCompetitor = {
   name: 'Stallion',
   category: 'live-updates',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Stallion Alternative in 2026 | Capgo',
   metaDescription:
     'Stallion vs Capgo: managed React Native OTA or Capacitor live updates with cloud builds. Compare pricing, patch updates, rollback, open source, and support.',
@@ -72,6 +72,10 @@ export const stallion: AlternativeCompetitor = {
       text: 'Stallion has a built-in way for testers to pick and validate an OTA release from inside the app before promotion.',
       sources: [2, 3],
     },
+  ],
+  notFor: [
+    'Your app is React Native or Expo, which Capgo does not update.',
+    'Capgo has a 14-day trial but no free plan, while Stallion Free covers up to 10,000 MAU.',
   ],
   alternatives: [
     {

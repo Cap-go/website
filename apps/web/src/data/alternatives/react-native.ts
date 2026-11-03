@@ -5,7 +5,7 @@ export const reactNative: AlternativeCompetitor = {
   name: 'React Native',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best React Native Alternative in 2026 | Capgo',
   metaDescription:
     'Compare React Native with Capacitor and Capgo. Reuse your web app and web skills, ship live updates without CodePush, and build iOS and Android in the cloud.',
@@ -78,6 +78,10 @@ export const reactNative: AlternativeCompetitor = {
       text: 'React Native has a large community and companies such as Microsoft, Callstack, and Software Mansion contribute to it.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'Your product is React Native or Expo with native views, not a Capacitor WebView app.',
+    'You want Expo cloud builds and EAS Update in one toolchain instead of Capgo Capacitor live updates.',
   ],
   alternatives: [
     {

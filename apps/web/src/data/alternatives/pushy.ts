@@ -5,7 +5,7 @@ export const pushy: AlternativeCompetitor = {
   name: 'Pushy',
   category: 'live-updates',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Pushy Alternative in 2026 | Capgo',
   metaDescription:
     'Pushy (react-native-update) vs Capgo: React Native hot updates or Capacitor live updates with cloud builds. Compare pricing, diff patches, rollback, support.',
@@ -73,6 +73,10 @@ export const pushy: AlternativeCompetitor = {
       text: 'Hermes-optimized diffs keep small fixes to a few kilobytes.',
       sources: [2, 3],
     },
+  ],
+  notFor: [
+    'Your app is React Native or Expo, which Capgo does not update.',
+    'Most of your users are in China or on HarmonyOS and need Pushy hosted delivery there.',
   ],
   alternatives: [
     {

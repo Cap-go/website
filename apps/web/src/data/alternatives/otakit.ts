@@ -5,7 +5,7 @@ export const otakit: AlternativeCompetitor = {
   name: 'OtaKit',
   category: 'live-updates',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best OtaKit Alternative in 2026 | Capgo',
   metaDescription:
     'Compare OtaKit and Capgo for Capacitor live updates: pricing, rollback, channels, native builds, open source, and support. See which OTA tool fits your team.',
@@ -71,6 +71,10 @@ export const otakit: AlternativeCompetitor = {
       text: 'The $10/month Starter plan covers 100,000 updates, which is enough for many small apps.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'Capgo has a 14-day trial but no free plan, while OtaKit includes a free tier with monthly update allowance.',
+    'You need an MIT-licensed self-hosted OTA backend rather than Capgo hosted service under AGPL.',
   ],
   alternatives: [
     {

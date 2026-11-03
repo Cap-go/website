@@ -5,7 +5,7 @@ export const revopush: AlternativeCompetitor = {
   name: 'Revopush',
   category: 'live-updates',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Revopush Alternative in 2026 | Capgo',
   metaDescription:
     'Revopush vs Capgo: CodePush-compatible React Native updates or Capacitor live updates with cloud builds. Compare pricing, rollback, open source, and support.',
@@ -73,6 +73,10 @@ export const revopush: AlternativeCompetitor = {
       text: 'Revopush has a free Starter plan up to 1K MAU. Capgo has a 14-day trial but no free plan.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'Your app is React Native or Expo migrating from App Center CodePush, not Capacitor or Cordova.',
+    'Capgo has a 14-day trial but no free plan, while Revopush Starter stays free up to 1K MAU.',
   ],
   alternatives: [
     {
