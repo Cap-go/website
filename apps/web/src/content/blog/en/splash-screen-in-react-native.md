@@ -72,7 +72,7 @@ faq:
       Compare stacks in Capgo's React Native vs Capacitor guide if platform
       choice affects how you ship launch branding.
 ---
-**Quick answer:** Use **`expo-splash-screen`** with the **config plugin** in **`app.json`** or **`app.config.js`** when the app runs on **Expo** (including dev clients and EAS builds). Call **`SplashScreen.preventAutoHideAsync()`** in **global scope**, then **`SplashScreen.hideAsync()`** when fonts, auth, and navigation are ready. On **bare React Native CLI**, prefer **`react-native-bootsplash`** for new work; maintain legacy apps with **`react-native-splash-screen`** until you migrate. Keep the **native splash static**, hide it when the first real screen can render, and move **animated splash** branding into the first React screen.
+**Quick answer:** Use **`expo-splash-screen`** with the **config plugin** in **`app.json`** or **`app.config.js`** when the app runs on **Expo** (including dev clients and EAS builds). Call **`SplashScreen.preventAutoHideAsync()`** in **global scope**, then **`SplashScreen.hideAsync()`** when fonts, auth, and navigation are ready. On **bare React Native CLI**, prefer **`react-native-bootsplash`** for new work; maintain legacy apps with **`react-native-splash-screen`** until you migrate. Keep the **native splash static**, hide it when the first real screen can render, and move **animated splash** branding into the first React screen. Building with web tech instead? [Capacitor uses `@capacitor/splash-screen`](#splash-screens-in-capacitor) with the same readiness rule, and [Capgo](https://capgo.app/register/) ships live updates to the app layer.
 
 You tap your app icon on a real device, and for a split second the user gets a white flash, a stretched logo, or a frozen launch screen that disappears before anything useful is ready. That gap is what **`react native splash screen`** setup is meant to cover: native launch UI until JavaScript can show a stable first frame.
 
@@ -97,6 +97,9 @@ You tap your app icon on a real device, and for a split second the user gets a w
 - [Advanced Techniques for Animated and Performant Splash Screens](#advanced-techniques-for-animated-and-performant-splash-screens)
   - [Animation should follow startup reality](#animation-should-follow-startup-reality)
   - [Treat launch as orchestration](#treat-launch-as-orchestration)
+- [React Native vs Capacitor: Splash Screens and Shipping Fixes](#react-native-vs-capacitor-splash-screens)
+  - [Splash screens in Capacitor](#splash-screens-in-capacitor)
+  - [Why web teams pick Capacitor over React Native](#why-web-teams-pick-capacitor)
 - [Troubleshooting Common Splash Screen Issues](#troubleshooting-common-splash-screen-issues)
   - [Stretched or blurry splash image](#stretched-or-blurry-splash-image)
   - [White screen after the splash hides](#white-screen-after-the-splash-hides)
@@ -436,6 +439,54 @@ If you're adding motion in a hybrid stack or evaluating broader rendering perfor
 
 One practical note for teams shipping visual fixes outside full binary releases: platforms such as **Capgo** handle JavaScript, CSS, copy, config, and asset updates for Capacitor and Electron apps, but native splash changes in React Native still belong to the native build pipeline because the true splash screen appears before the JavaScript app is running.
 
+<a id="react-native-vs-capacitor-splash-screens"></a>
+## React Native vs Capacitor: Splash Screens and Shipping Fixes
+
+If you are reading this because you are starting a new app, or because your team already has a web app in React, Vue, Angular, or Svelte, it is worth comparing how splash screens work in **Capacitor**. The native launch screen concept is the same, but the day to day workflow is simpler for web teams.
+
+<a id="splash-screens-in-capacitor"></a>
+### Splash screens in Capacitor
+
+Capacitor apps use the official [`@capacitor/splash-screen`](https://capacitorjs.com/docs/apis/splash-screen) plugin. You configure it once in `capacitor.config.ts` and hide it from your web code when the app is ready:
+
+```ts
+// capacitor.config.ts
+import type { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    SplashScreen: {
+      launchAutoHide: false,
+      backgroundColor: '#ffffff',
+    },
+  },
+}
+
+export default config
+```
+
+```ts
+// main.ts, after your router, fonts, and auth are ready
+import { SplashScreen } from '@capacitor/splash-screen'
+
+await SplashScreen.hide()
+```
+
+The readiness rule from this guide is identical: keep the native splash static, hide it when the first real screen can paint, and run any animation in the first screen of your app. For native assets, `@capacitor/assets` generates the Android and iOS icon and splash files from one source image. The step by step flow is covered in [Capacitor app initialization](/blog/capacitor-app-initialization-step-by-step-guide/).
+
+<a id="why-web-teams-pick-capacitor"></a>
+### Why web teams pick Capacitor over React Native
+
+- **Reuse the app you already have:** Capacitor wraps your existing web app in a native shell, so your components, CSS, and build tooling keep working. React Native requires rewriting the UI in React Native components.
+- **Any framework:** React, Vue, Angular, Svelte, or plain JavaScript all work. You are not tied to React.
+- **Native access when you need it:** official and community plugins cover camera, push, biometrics, and more, and you can write your own Swift or Kotlin plugin.
+- **Live updates for the app layer:** with [Capgo](/), you push JavaScript, HTML, CSS, and asset fixes to users on the next launch, with channels, staged rollouts, and one click rollback, without waiting for store review on every web layer change. Native changes, including the native splash screen itself, still ship through the stores. See the [Capgo live updates docs](/docs/live-updates/).
+
+For a full comparison of performance, tooling, and team fit, read [Comparing React Native vs Capacitor](/blog/comparing-react-native-vs-capacitor/). If you are on Expo today and weighing a move, [Alternative to Expo](/blog/alternative-to-expo/) walks through the options.
+
 <a id="troubleshooting-common-splash-screen-issues"></a>
 ## Troubleshooting Common Splash Screen Issues
 
@@ -501,6 +552,10 @@ On **iOS**, keep the launch screen static. On **Android 12+**, the system splash
 
 **Where does splash setup differ between React Native and Capacitor?**  
 React Native uses **expo-splash-screen** or bare CLI libraries before JS runs. Capacitor uses native launch screens plus **`@capacitor/splash-screen`** in the WebView stack. See [Comparing React Native vs Capacitor](/blog/comparing-react-native-vs-capacitor/) and [Capacitor app initialization](/blog/capacitor-app-initialization-step-by-step-guide/).
+
+## Ship your Capacitor app faster with Capgo
+
+Building with Capacitor, or planning to move a web app to mobile? [Create a free Capgo account](https://capgo.app/register/) and push your first live update in minutes. Capgo delivers JavaScript, CSS, and asset fixes to your users on the next launch, with staged rollouts and instant rollback, so a bug in your app layer never has to wait for store review.
 
 ## Keep going from React Native Splash Screen (Expo and bare CLI)
 
