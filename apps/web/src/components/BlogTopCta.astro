@@ -1,0 +1,30 @@
+---
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  /** Optional problem-matched CTA from the post frontmatter `cta`. Falls back to the default signup CTA. */
+  cta?: { title: string; text: string; href?: string | null; label?: string | null } | null
+}
+
+const locale = Astro.locals.locale
+const { cta } = Astro.props
+const title = cta?.title ?? m.blog_sidebar_cta_lead({}, { locale })
+const text = cta?.text ?? `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
+const href = cta?.href ?? getRelativeLocaleUrl(locale, 'register')
+const label = cta?.label ?? m.solutions_start_free_trial({}, { locale })
+---
+
+<aside id="blog-top-cta" data-cta={cta ? 'post' : 'default'} class="not-content mt-6 flex flex-col gap-4 rounded-2xl border border-azure-500/30 bg-azure-500/5 p-6 sm:flex-row sm:items-center sm:justify-between">
+  <div>
+    <p class="text-lg font-semibold text-white">{title}</p>
+    <p class="mt-1 text-gray-300">{text}</p>
+  </div>
+  <a
+    id="blog-top-cta-link"
+    href={href}
+    class="inline-flex shrink-0 items-center justify-center rounded-lg bg-azure-500 px-5 py-2.5 font-semibold text-white hover:bg-azure-400"
+  >
+    {label}
+  </a>
+</aside>

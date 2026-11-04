@@ -3,6 +3,8 @@ import Blog from '@/components/Blog.astro'
 import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
 import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
 import BlogProductCta from '@/components/BlogProductCta.astro'
+import BlogTakeaways from '@/components/BlogTakeaways.astro'
+import BlogTopCta from '@/components/BlogTopCta.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import SignupCta from '@/components/SignupCta.astro'
 import { HUMAN_EDITORIAL_TEAM, resolveAuthorUrl } from '@/config/blogEditorialTeam'
@@ -173,6 +175,8 @@ content['ldJSON'] =
           </div>
           <h1 class="font-display mt-8 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-tight">{entry.data.title}</h1>
           <p class="mt-4 text-gray-400 sm:text-lg">{entry.data.description}</p>
+          <BlogTakeaways items={entry.data.takeaways} />
+          <BlogTopCta cta={entry.data.cta} />
           {showEditorialByline ? (
             <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="mt-6 md:hidden" />
           ) : (

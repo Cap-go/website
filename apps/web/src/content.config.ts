@@ -37,6 +37,12 @@ const blog = defineCollection({
       locale: localeSchema,
       next_blog: z.string().optional().nullable(),
       faq: faqSchema,
+      /** Optional answer-first bullets rendered in a Key takeaways box at the top of the post. */
+      takeaways: z.array(z.string()).optional(),
+      /** Optional problem-matched CTA shown above the fold. Defaults to the signup CTA when absent. */
+      cta: z
+        .object({ title: z.string(), text: z.string(), href: z.string().optional(), label: z.string().optional() })
+        .optional(),
     })
     .transform((data) => ({
       ...data,

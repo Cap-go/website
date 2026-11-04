@@ -19,6 +19,16 @@ faq:
     answer: "The steps are the same as on any device running iOS 16 or later. Install and open a development build once, then go to Settings, Privacy & Security, Developer Mode, turn the toggle on, tap Restart, and after the reboot unlock the device, tap Enable in the alert, and enter your passcode."
   - question: "How do I turn on Developer Mode on iPhone without a Mac?"
     answer: "You do not need a Mac if a development signed build is already installed locally (not through TestFlight, which does not require Developer Mode). Open that app once so iOS shows the Developer Mode alert, then enable the toggle in Settings, Privacy & Security. A Mac with Xcode is only needed when the toggle never appears."
+takeaways:
+  - "Developer Mode exists on iOS 16 and later and is off by default."
+  - "Open a development-signed app once, then go to Settings, Privacy and Security, Developer Mode and turn it on."
+  - "The iPhone or iPad restarts, then you confirm Turn On after unlocking."
+  - "If the toggle is missing, connect the device to a Mac, trust it, and run the app from Xcode first."
+cta:
+  title: "Ship fixes without waiting on store review"
+  text: "Building a Capacitor app? Capgo live updates push JavaScript, HTML and CSS fixes to users in minutes, within App Store and Google Play rules."
+  href: "https://capgo.app/register/"
+  label: "Try Capgo live updates"
 ---
 On iOS 16 and later, you enable Developer Mode by installing a development-signed app, launching it once, and confirming the prompt in Settings. If the toggle doesn't appear after launch, connect the iPhone or iPad to a Mac and run the app from Xcode first.
 

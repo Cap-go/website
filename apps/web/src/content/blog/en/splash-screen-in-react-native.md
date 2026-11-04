@@ -71,6 +71,16 @@ faq:
       screens plus the @capacitor/splash-screen plugin in the WebView layer.
       Compare stacks in Capgo's React Native vs Capacitor guide if platform
       choice affects how you ship launch branding.
+takeaways:
+  - "On Expo, use expo-splash-screen with its config plugin in app.json or app.config.js."
+  - "Call SplashScreen.preventAutoHideAsync() early, then hideAsync() when fonts, auth and navigation are ready."
+  - "On bare React Native CLI, react-native-bootsplash is the common choice."
+  - "Capacitor apps handle the splash with the official Splash Screen plugin."
+cta:
+  title: "Building with web tech instead of React Native?"
+  text: "Capacitor runs your web app natively on iOS and Android. Capgo live updates ship fixes and splash or UI changes in your web layer without a new store build."
+  href: "https://capgo.app/register/"
+  label: "Try Capgo live updates"
 ---
 **Quick answer:** Use **`expo-splash-screen`** with the **config plugin** in **`app.json`** or **`app.config.js`** when the app runs on **Expo** (including dev clients and EAS builds). Call **`SplashScreen.preventAutoHideAsync()`** in **global scope**, then **`SplashScreen.hideAsync()`** when fonts, auth, and navigation are ready. On **bare React Native CLI**, prefer **`react-native-bootsplash`** for new work; maintain legacy apps with **`react-native-splash-screen`** until you migrate. Keep the **native splash static**, hide it when the first real screen can render, and move **animated splash** branding into the first React screen. Building with web tech instead? [Capacitor uses `@capacitor/splash-screen`](#splash-screens-in-capacitor) with the same readiness rule, and [Capgo](https://capgo.app/register/) ships live updates to the app layer.
 
