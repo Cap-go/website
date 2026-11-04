@@ -869,7 +869,7 @@ const messages = {
   compare_corrections_source_sep: ', or edit this page at',
   compare_corrections_source_file: 'View source on GitHub',
   compare_capawesome_better_1_text:
-    'If release health data and a fast-moving product do not matter to your team, Capawesome covers the basics: channels, gradual rollouts, and rollback after a crash.',
+    'You ship only a few times a year and do not need release health dashboards or frequent upstream plugin updates. Capawesome covers channels, gradual rollouts, and rollback after a crash.',
   compare_capawesome_better_1_title: 'You release a few times a year',
   compare_capawesome_better_2_text:
     'Point their CLI at a branch or tag and the Cloud Runner clones, builds, and ships the live update. With Capgo you build in your own CI and upload the bundle.',
@@ -877,9 +877,10 @@ const messages = {
   compare_capawesome_better_3_text: 'Their store publishing covers TestFlight, Google Play, Huawei AppGallery, and Firebase App Distribution.',
   compare_capawesome_better_3_title: 'More store destinations',
   compare_capawesome_better_4_text:
-    'Capawesome ships slower but more carefully. If a conservative release pace matters more than fast fixes and frequent improvements, that trade-off can fit your team.',
+    'Capawesome ships slower and more carefully. From August through October 19, 2026, its live-update plugin had 13 npm releases on 8 publish days, versus 48 Capgo updater releases on 23 publish days in the same window (npm). That trade-off can mean waiting longer for security patches, bug fixes, and new Capacitor support.',
   compare_capawesome_better_4_title: 'You value stability over speed',
-  compare_capawesome_not_for_1: 'You prefer a slower, more conservative release pace over fast fixes and new features.',
+  compare_capawesome_not_for_1:
+    'You prefer Capawesome\'s slower release rhythm even when security patches, bug fixes, and Capacitor compatibility updates take longer to reach npm.',
   compare_capawesome_not_for_2: 'You want a free plan after the trial; Capgo has a 14-day trial but no free plan.',
   compare_capawesome_company: 'Capawesome (Genz IT Solutions GmbH), based in Germany. Live updates launched in 2024.',
   compare_capawesome_eyebrow: 'Capawesome Cloud alternative',
@@ -896,7 +897,8 @@ const messages = {
   compare_capawesome_faq_q2: 'How much does Capawesome cost?',
   compare_capawesome_faq_q3: 'Is Capawesome free?',
   compare_capawesome_faq_q4: 'How does Capawesome Cloud compare to Capgo?',
-  compare_capawesome_lead: 'Both ship Capacitor live updates. Capgo adds real-device release health, native builds, and push notifications on one plan.',
+  compare_capawesome_lead:
+    'Both ship Capacitor live updates. Capgo adds real-device release health, native builds, and push on one plan, and ships the updater plugin far more often: 48 npm releases from August 1 through November 4, 2026, versus 13 for @capawesome/capacitor-live-update in the same period (npm publish dates).',
   compare_capawesome_native_builds: 'Cloud iOS and Android builds on Platform plans, from 200 to 5,000 build minutes per month, plus store publishing.',
   compare_capawesome_obs_eyebrow: 'After you ship',
   compare_capawesome_obs_title: 'See what every release does on real devices',
@@ -946,8 +948,10 @@ const messages = {
   compare_capawesome_delta_infra_label: 'Update delivery',
   compare_capawesome_delta_infra_capgo: 'Update checks answered from 9 regions on 6 continents, about 50ms typical worldwide.',
   compare_capawesome_delta_infra_them: 'Global CDN for bundle downloads.',
-  compare_capawesome_source_ai: 'Capawesome docs: MCP server',
-  compare_capawesome_pace: 'Capgo ships in the open, several times a week.',
+  compare_capawesome_source_npm_capawesome: '@capawesome/capacitor-live-update on npm',
+  compare_capawesome_source_npm_capgo: '@capgo/capacitor-updater on npm',
+  compare_capawesome_pace:
+    'From August 1 through November 4, 2026, npm publish dates show 48 @capgo/capacitor-updater releases across 23 days and 13 @capawesome/capacitor-live-update releases across 8 days (latest Capawesome publish: October 19, 2026).',
   compare_capawesome_pace_link: 'Follow every change on GitHub',
   compare_capawesome_source_logs: 'Capawesome docs: Live Update logs',
   compare_capawesome_source_plugin_code: 'Capawesome Live Update plugin source: network calls',
@@ -970,7 +974,7 @@ const messages = {
   compare_capawesome_step3_text: 'Replace the Capawesome deploy step in CI with <code>npx @capgo/cli@latest bundle upload</code>.',
   compare_capawesome_support: 'Community chat on every plan. Email support from Professional (Live Updates) or Starter (Platform), and priority support on Business.',
   compare_capawesome_verdict:
-    'Capgo ships fast and fixes fast. Capawesome ships slower but more carefully. If you value speed and fast evolution, choose Capgo. If you value more stability, choose Capawesome.',
+    'Capgo is built for fast evolution: security patches and bug fixes reach npm in days, not weeks; new Capacitor and OS versions get supported quickly; and features ship continuously on a cadence of multiple releases per week (48 npm publishes from August 1 through November 4, 2026, vs 13 for Capawesome live update in the same window). Capawesome ships slower and more carefully, so you often wait longer for fixes, patches, and compatibility updates. Choose Capgo if you value speed and fast evolution, or Capawesome if you value more stability.',
   compare_capgo_company: 'Independent and bootstrapped, founded in 2021. 9,400+ teams, 5.7K+ apps, and 90M+ devices. SOC 2 Type II and ISO 27001 on the Enterprise plan.',
   compare_capgo_frameworks:
     'Capacitor apps built with React, Vue, Angular, Svelte, Ionic, or any web framework. Live updates also work for Cordova and Electron. Not for React Native.',
