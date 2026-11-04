@@ -475,7 +475,7 @@ import { SplashScreen } from '@capacitor/splash-screen'
 await SplashScreen.hide()
 ```
 
-The readiness rule from this guide is identical: keep the native splash static, hide it when the first real screen can paint, and run any animation in the first screen of your app. For native assets, `@capacitor/assets` generates the Android and iOS icon and splash files from one source image. The step by step flow is covered in [Capacitor app initialization](/blog/capacitor-app-initialization-step-by-step-guide/).
+The readiness rule from this guide is identical: keep the native splash static, hide it when the first real screen can paint, and run any animation in the first screen of your app. For native assets, `@capacitor/assets` generates the Android and iOS icon and splash files from your source icon and splash images (for example `icon-only.png` and `splash.png` in an `assets` folder). The step by step flow is covered in [Capacitor app initialization](/blog/capacitor-app-initialization-step-by-step-guide/).
 
 <a id="why-web-teams-pick-capacitor"></a>
 ### Why web teams pick Capacitor over React Native
