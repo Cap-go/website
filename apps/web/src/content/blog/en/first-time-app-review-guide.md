@@ -28,6 +28,8 @@ faq:
     answer: On Apple, frequent first-submission issues include 2.1 App Completeness, crashes, non-working demo logins, or broken support and privacy links, 2.3 Accurate Metadata when screenshots or descriptions do not match the build, and 5.1 Privacy when the privacy policy or permission strings are missing or inaccurate. On Google Play, rejections often involve policy violations, incomplete Data safety or content rating answers, or skipping required testing for new personal accounts. For guideline 4.2 Minimum Functionality and 4.3 Spam on iOS, use a focused follow-up guide rather than repeating that checklist here.
   - question: Where should I start before my first App Store or Play submission?
     answer: Confirm account enrollment and store listing assets, publish an HTTPS privacy policy, complete Apple privacy nutrition labels or Google Data safety honestly, and test on real devices with the same demo account you will give reviewers. Budget for Google closed testing if your Play Console account requires it. For App Store fee context see the cost to publish on the App Store page, for age ratings see the app store age ratings guide, and for Apple guideline 4.2 and 4.3 deep dives see how to pass App Store review in 2026.
+  - question: "Is Sign in with Apple required if my app offers Google or Facebook login in 2026?"
+    answer: "Not strictly, but in practice it is the easiest path. Since Apple revised Guideline 4.8 in January 2024, an app that uses a third-party login like Google or Facebook must also offer an equivalent privacy-focused login option: it limits data to name and email, allows a private email, and does not track users for ads without consent. Sign in with Apple meets those rules, so most teams add it. Exemptions include apps that only use their own account system, apps that require an existing education or enterprise account, and apps that use a government or industry backed citizen ID or electronic ID system. See the Apple Sign-In requirement and the Capgo social login plugin."
 ---
 
 **Quick answer:** **App review guidelines** are the rules Apple and Google enforce before your app goes live. Apple’s [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) are organized into **Safety, Performance, Business, Design, and Legal**. Google Play reviews your release against the [Developer Program Policies](https://support.google.com/googleplay/android-developer/answer/9858738) plus Play Console requirements such as content rating and Data safety. **Review times:** Apple states App Review works around the clock and typically completes at least **50% of submissions within 24 hours** and **90% within 48 hours** ([App Review](https://developer.apple.com/distribute/app-review/)). Google says some accounts may wait **up to seven days or longer** in exceptional cases ([Publish your app](https://support.google.com/googleplay/android-developer/answer/9859751)). New personal Play Console accounts may also need at least **12 testers who stay opted in continuously for 14 consecutive days** in closed testing, with **at least 12 still opted in when you apply** for production. **First-time rejections** often trace to **2.1 App Completeness** (crashes, broken links, bad demo accounts), **2.3 Accurate Metadata**, and **5.1 Privacy** on iOS, plus incomplete Play policy or testing steps on Android. For **guideline 4.2 and 4.3** strategy, read [how to pass App Store review in 2026](/blog/how-to-pass-app-store-review-2026/). For ratings and parental controls, see the [app store age ratings guide](/blog/app-store-age-ratings-guide/). For enrollment fees, see [cost to publish an app on the App Store](/cost/cost-to-publish-app-on-app-store/).
@@ -162,7 +164,7 @@ One of the most common rejection reasons is improper implementation of authentic
 
 ### The Apple Sign-In Requirement (Critical for iOS)
 
-**Apple's Rule**: If your app offers any third-party social login option (Google, Facebook, Twitter, etc.), you **must** also offer Sign in with Apple as an option.
+**Apple's Rule (Guideline 4.8, Login Services)**: If your app uses a third-party or social login service (Google, Facebook, X, etc.) to set up or authenticate the primary account, you must also offer an equivalent login option that limits data collection to the user's name and email, lets users keep their email private, and does not collect app interactions for advertising without consent. Sign in with Apple meets all three conditions, which is why it remains the simplest way to comply in 2026.
 
 **This applies to**:
 - Google Sign-In
@@ -176,6 +178,10 @@ One of the most common rejection reasons is improper implementation of authentic
 - Government ID systems
 - Enterprise SSO systems (when the app is for that specific enterprise)
 - Education provider authentication systems
+
+### Is Sign in with Apple required if my app offers Google or Facebook login in 2026?
+
+Not strictly, but in practice it is the easiest path. Since Apple revised Guideline 4.8 in January 2024, an app that uses a third-party login like Google or Facebook must also offer an equivalent privacy-focused login option: it limits data to name and email, allows a private email, and does not track users for ads without consent. Sign in with Apple meets those rules, so most teams add it. Exemptions include apps that only use their own account system, apps that require an existing education or enterprise account, and apps that use a government or industry backed citizen ID or electronic ID system. See [the Apple Sign-In requirement](#the-apple-sign-in-requirement-critical-for-ios) and the [Capgo social login plugin](/docs/plugins/social-login/).
 
 ### Implementing Sign in with Apple
 

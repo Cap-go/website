@@ -28,6 +28,8 @@ faq:
     answer: 'Most often the Android OAuth client is missing, or the package name and SHA-1 certificate fingerprint in Google Cloud Console do not match the keystore that signed the APK on the device. Add the Play App Signing SHA-1 if users install from Google Play. Use a Web client ID as the server audience where your SDK requires it.'
   - question: 'Can one Google client ID work for Web, Android, and iOS?'
     answer: 'No. Google expects a separate OAuth 2.0 client for each application type. Register a Web client for browser flows, an Android client with package name and SHA-1, and an iOS client with your bundle ID. Capacitor apps often use all three even when the product feels like one app.'
+  - question: "Do the Web client ID and Android client ID need to be in the same Google Cloud project?"
+    answer: "Yes. For Google Sign-In on Android, create the Android client (package name and SHA-1) and the Web application client in the same Google Cloud project. The app passes the Web client ID as the server client ID, and Google checks that the Android client belongs to the same project. A mismatch is a common cause of DEVELOPER_ERROR. The Capgo social login plugin docs show the setup."
 ---
 A **Google OAuth client ID** is the public app identifier Google shows as a string ending in `.apps.googleusercontent.com`. You create and manage it in [Google Cloud Console](https://console.cloud.google.com/) under **Google Auth Platform > Clients** or **APIs & Services > Credentials**. That value tells Google which registered app is starting Sign in with Google or requesting OAuth tokens.
 
@@ -268,6 +270,11 @@ The practical debugging order is simple: **check client type first, then redirec
 
 <a id="faq"></a>
 ## FAQ
+
+
+### Do the Web client ID and Android client ID need to be in the same Google Cloud project?
+
+Yes. For Google Sign-In on Android, create the Android client (package name and SHA-1) and the Web application client in the same Google Cloud project. The app passes the Web client ID as the server client ID, and Google checks that the Android client belongs to the same project. A mismatch is a common cause of DEVELOPER_ERROR. The [Capgo social login plugin](/docs/plugins/social-login/) docs show the setup.
 
 ### What is a Google client ID?
 

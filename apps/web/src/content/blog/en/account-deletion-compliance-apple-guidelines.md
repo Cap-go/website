@@ -15,6 +15,9 @@ published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: "What does the official Apple App Store guideline say about account deletion?"
+    answer: "App Review Guideline 5.1.1(v) says apps that support account creation must also let users initiate deletion of their account from within the app. Apple has enforced this since June 30, 2022. Deactivating or hiding the account is not enough, and if extra steps are required (such as for regulated industries), the app must explain them. See how to implement delete account for a working flow."
 ---
 
 **Apple requires all apps on the [App Store](https://www.apple.com/app-store/) to provide an in-app option to delete user accounts.** This policy, enforced since June 30, 2022, ensures users can fully erase their data, giving them more control over their privacy. Here’s what you need to know:
@@ -213,6 +216,11 @@ Tools like Capgo can simplify updates by enabling live adjustments to your app. 
 <iframe src="https://www.youtube.com/embed/TC6d4pub1jU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## FAQs
+
+
+### What does the official Apple App Store guideline say about account deletion?
+
+App Review Guideline 5.1.1(v) says apps that support account creation must also let users initiate deletion of their account from within the app. Apple has enforced this since June 30, 2022. Deactivating or hiding the account is not enough, and if extra steps are required (such as for regulated industries), the app must explain them. See [how to implement delete account](#how-to-implement-delete-account-in-your-app) for a working flow.
 
 ::: faq
 ### How can developers ensure their app meets Apple's account deletion requirements?

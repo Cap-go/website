@@ -26,6 +26,8 @@ faq:
     answer: "In Developer options, turn on Wireless debugging, open it, and choose Pair device with pairing code. On your computer run adb pair with the IP and port from the pairing dialog, enter the six-digit code, then adb connect using the IP and port on the main Wireless debugging screen. Phone and computer must be on the same Wi-Fi."
   - question: "How do I turn developer options off?"
     answer: "Open Developer options and switch off Use developer options at the top. On Samsung, toggle Developer options off. This disables most developer options, but individual settings may remain configured. Revoke USB debugging authorizations before you lend the phone to someone else."
+  - question: "How do I enable developer options without a Build number?"
+    answer: "Every Android phone has a Build number, but some brands rename or move it. On Samsung, open Settings, About phone, Software information, then tap Build number seven times. On Xiaomi HyperOS, tap OS version, and on older MIUI tap MIUI version. If you still cannot find it, type build number in the Settings search bar. See Build number missing for work profiles and restricted users."
 ---
 
 **Settings** > **About phone** > tap **Build number** **seven times** > enter your **PIN** (or pattern). You see a message that you are a developer. Open **Developer options** and turn on **USB debugging** or **Wireless debugging** when you need `adb`, Android Studio, or a Capacitor run on a real device. Steps are the same on **Android 14, 15 and 16**; only the path to **Build number** changes by brand (table below).
@@ -220,6 +222,11 @@ Before handing a test phone to someone else, also tap **Revoke USB debugging aut
 - Never ship a release build with `android:debuggable="true"`. Capacitor release builds are not debuggable by default.
 
 ## Frequently asked questions
+
+
+### How do I enable developer options without a Build number?
+
+Every Android phone has a Build number, but some brands rename or move it. On Samsung, open Settings, About phone, Software information, then tap Build number seven times. On Xiaomi HyperOS, tap OS version, and on older MIUI tap MIUI version. If you still cannot find it, type build number in the Settings search bar. See [Build number missing](#build-number-missing-or-this-action-is-unavailable) for work profiles and restricted users.
 
 ### How many times do I tap Build number on Android 14 or 15?
 

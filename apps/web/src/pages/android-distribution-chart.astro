@@ -63,6 +63,7 @@ const rowForMajor = (major: number) => data.apiDistribution.find((row) => row.ve
 const android10Row = rowForMajor(10)
 const android14Row = rowForMajor(14)
 const android15Row = rowForMajor(15)
+const oldestListedRow = [...data.apiDistribution].filter((row) => typeof row.api === 'number').sort((a, b) => (a.api ?? 0) - (b.api ?? 0))[0]
 
 const apiMappingRows = [...data.apiDistribution].filter((row): row is DistributionRow & { api: number } => typeof row.api === 'number').sort((a, b) => b.api - a.api)
 
@@ -96,6 +97,12 @@ const faqItems = [
       android14Row && android15Row
         ? `Android 14 is API level ${android14Row.api} (${formatPercent(android14Row.distribution)} market share in this dataset). Android 15 is API level ${android15Row.api} (${formatPercent(android15Row.distribution)} market share). Use cumulative reach when you set minSdkVersion, not these single-version shares.`
         : 'Android 14 is API level 34 and Android 15 is API level 35 per the Android SDK. This page maps each release to its API level in the table below.',
+  },
+  {
+    question: 'What is the market share of old Android versions like Android 4.4 and 5.0 in 2026?',
+    answer: oldestListedRow
+      ? `Android 4.4 KitKat (API 19) and Android 5.0 Lollipop (API 21) are no longer reported as separate rows in ${data.source} data, so their share is too small to list. The oldest version in the current dataset is ${oldestListedRow.version} (API ${oldestListedRow.api}) at about ${formatPercent(oldestListedRow.distribution)} market share. Choose your minSdkVersion floor from your coverage goal and app requirements using the planner above.`
+      : 'Android 4.4 KitKat (API 19) and Android 5.0 Lollipop (API 21) are no longer reported as separate rows in the source data, so their share is too small to list.',
   },
   {
     question: 'How do I read this Android distribution chart?',

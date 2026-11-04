@@ -52,6 +52,10 @@ faq:
       Yes, when the iOS target defines alternate icons in Info.plist and exposes
       UIApplication.setAlternateIconName through a native bridge. The web layer
       triggers the switch; icon assets stay in the native bundle.
+  - question: "How do I change the app icon on iPhone?"
+    answer: "On iOS 18 and later, touch and hold the Home Screen, tap Edit, then Customize to switch icons to Dark, Clear, Tinted, or larger sizes. To use your own picture, open the Shortcuts app, create a shortcut with the Open App action, choose the app, then add it to the Home Screen and tap the icon to pick a photo. The steps are in the Shortcuts method section."
+  - question: "How do I change a web app icon on iPhone?"
+    answer: "A web app saved with Add to Home Screen uses the icon the website declares, so you cannot swap it in Settings. Create a shortcut in the Shortcuts app with the Open URLs action pointing to the site, then add that shortcut to the Home Screen with your own image. If you build the web app, set a custom apple touch icon, or ship it as a native app with Capacitor to control the icon fully."
 ---
 **You can change app icons on iPhone in two ways.** On current iOS versions, touch and hold the Home Screen, open **Customize**, and apply **Dark**, **Tinted**, **Clear**, or **larger** icons to every supported app at once ([Apple's Home Screen guide](https://support.apple.com/guide/iphone/customize-apps-and-widgets-on-the-home-screen-iph385473442/ios)). To use your own photo for one app, build a **Shortcuts** launcher and **Add to Home Screen** with a custom image ([Apple's Shortcuts guide](https://support.apple.com/guide/shortcuts/add-a-shortcut-to-the-home-screen-apd735880972/ios)). App developers can also ship **alternate icons** inside the app through Apple's native API, including from [Capacitor with a native bridge](/blog/implementing-native-bridge-for-ios-in-capacitor/).
 
@@ -425,6 +429,15 @@ The bigger trend is healthy. Apple has made Home Screen customization more nativ
 <a id="frequently-asked-questions"></a>
 
 ## Frequently asked questions
+
+
+### How do I change the app icon on iPhone?
+
+On iOS 18 and later, touch and hold the Home Screen, tap Edit, then Customize to switch icons to Dark, Clear, Tinted, or larger sizes. To use your own picture, open the Shortcuts app, create a shortcut with the Open App action, choose the app, then add it to the Home Screen and tap the icon to pick a photo. The steps are in [the Shortcuts method section](#use-the-shortcuts-method-for-any-image).
+
+### How do I change a web app icon on iPhone?
+
+A web app saved with Add to Home Screen uses the icon the website declares, so you cannot swap it in Settings. Create a shortcut in the Shortcuts app with the Open URLs action pointing to the site, then add that shortcut to the Home Screen with your own image. If you build the web app, set a custom apple touch icon, or ship it as a native app with [Capacitor](/blog/how-easy-is-it-to-make-web-app-into-mobile-app-with-capacitor/) to control the icon fully.
 
 ::: faq
 ### Can you change app icons on iPhone?

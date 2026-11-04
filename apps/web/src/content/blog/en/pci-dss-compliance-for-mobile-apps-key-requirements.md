@@ -15,6 +15,9 @@ published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: "How do I minimize PCI scope when collecting payments, such as telemedicine payments, in a React Native or Capacitor app?"
+    answer: "Never let raw card numbers touch your app code, logs, or servers. Use the native payment sheet or hosted fields from a PCI-compliant processor (for example Stripe, Adyen, or Braintree) so the card data goes straight to the processor and you only handle tokens. That usually keeps you eligible for the smallest self-assessment questionnaire. Keep patient health data separate from payment data, and follow HIPAA guidance for the medical side."
 ---
 
 **Handling payment data through mobile apps? PCI DSS compliance is non-negotiable.** Without it, businesses risk fines up to $500,000 per incident, reputational damage, and potential loss of customer trust.
@@ -195,6 +198,11 @@ But here’s the thing: compliance isn’t a one-and-done deal. It’s an ongoin
 Failing to comply doesn’t just mean hefty fines of up to $500,000 per incident [\[5\]](https://www.ixopay.com/en/news/why-do-online-and-mobile-payments-require-pci-compliance). It also risks damaging customer trust and tarnishing your brand’s reputation - losses that no business can afford.
 
 ## FAQs
+
+
+### How do I minimize PCI scope when collecting payments, such as telemedicine payments, in a React Native or Capacitor app?
+
+Never let raw card numbers touch your app code, logs, or servers. Use the native payment sheet or hosted fields from a PCI-compliant processor (for example Stripe, Adyen, or Braintree) so the card data goes straight to the processor and you only handle tokens. That usually keeps you eligible for the smallest self-assessment questionnaire. Keep patient health data separate from payment data, and follow [HIPAA guidance](/hipaa-compliance/) for the medical side.
 
 ::: faq
 ### What happens if a mobile app doesn’t meet PCI DSS compliance standards?

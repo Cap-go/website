@@ -18,6 +18,9 @@ published: true
 locale: en
 origin: human
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+faq:
+  - question: "How do I convert a Next.js app to a mobile app?"
+    answer: "Set output to export in next.config so Next.js builds a static site, add Capacitor and the iOS and Android platforms, point webDir to the out folder, then run npx cap sync and open the native projects. Server only features like API routes must move to a separate backend. After release, Capgo live updates ship web changes without a new store review."
 ---
 
 ## Introduction
@@ -549,6 +552,12 @@ You've successfully converted your existing Next.js web application into native 
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
+
+## Frequently asked questions
+
+### How do I convert a Next.js app to a mobile app?
+
+Set output to export in next.config so Next.js builds a static site, add Capacitor and the iOS and Android platforms, point webDir to the out folder, then run npx cap sync and open the native projects. Server only features like API routes must move to a separate backend. After release, [Capgo live updates](/live-update/) ship web changes without a new store review.
 
 ## Keep going from Convert Your Next.js App to iOS & Android with Capacitor 8
 

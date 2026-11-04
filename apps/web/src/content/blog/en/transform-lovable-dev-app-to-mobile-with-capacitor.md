@@ -17,6 +17,11 @@ published: true
 locale: en
 origin: human
 next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
+faq:
+  - question: "How do I convert a Lovable app to a mobile app?"
+    answer: "Export the Lovable project to GitHub, build it as a static web app (most Lovable apps use React and Vite), add Capacitor with the iOS and Android platforms, then sync and build store ready binaries. This guide walks through each step, and Capgo Build can compile and sign the iOS and Android apps in the cloud."
+  - question: "Can I turn a Lovable project into an app for the App Store and Google Play?"
+    answer: "Yes. Capacitor wraps the Lovable web build in a native iOS and Android shell, so you keep one codebase and can add native features like the camera. After the first store release, Capgo live updates let you ship web changes without waiting for a new review."
 ---
 
 ## Introduction
@@ -739,6 +744,16 @@ You took a Lovable web app to native iOS and Android — built in the cloud with
 - [Capgo — Live Updates for Capacitor Apps](https://capgo.app/)
 - [Build iOS from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/)
 - [Next.js static export for mobile](/blog/building-a-native-mobile-app-with-nextjs-and-capacitor/)
+
+## Frequently asked questions
+
+### How do I convert a Lovable app to a mobile app?
+
+Export the Lovable project to GitHub, build it as a static web app (most Lovable apps use React and Vite), add Capacitor with the iOS and Android platforms, then sync and build store ready binaries. This guide walks through each step, and [Capgo Build](/native-build/) can compile and sign the iOS and Android apps in the cloud.
+
+### Can I turn a Lovable project into an app for the App Store and Google Play?
+
+Yes. Capacitor wraps the Lovable web build in a native iOS and Android shell, so you keep one codebase and can add native features like the camera. After the first store release, [Capgo live updates](/live-update/) let you ship web changes without waiting for a new review.
 
 ## Keep going from Convert Your Lovable App to iOS and Android with Capacitor
 
