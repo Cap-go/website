@@ -275,5 +275,24 @@
     "width": 1200,
     "height": 534
   },
-  "web-wrapper-first-version-4-3-a-rebuilt-native": null
+  "web-wrapper-first-version-4-3-a-rebuilt-native": null,
+  "new-app-27-days-waiting-then-4-3-a-design-spam": {
+    "src": "/app-store-refusal-horror-story/screenshots/new-app-27-days-waiting-then-4-3-a-design-spam.webp",
+    "alt": "App Store Connect rejection header showing Guideline 4.3(a) Design Spam for an app version",
+    "width": 842,
+    "height": 235
+  },
+  "mac-version-of-live-iphone-app-4-3-a-spam": {
+    "src": "/app-store-refusal-horror-story/screenshots/mac-version-of-live-iphone-app-4-3-a-spam.webp",
+    "alt": "App Review message for Guideline 4.3(a) Design Spam saying the app shares a similar binary, metadata or concept with apps from other developers",
+    "width": 1200,
+    "height": 526
+  },
+  "fourteen-day-review-rejected-then-two-more-weeks-waiting": {
+    "src": "/app-store-refusal-horror-story/screenshots/fourteen-day-review-rejected-then-two-more-weeks-waiting.webp",
+    "alt": "App Store Connect status history showing Prepare for Submission, Ready for Review and Waiting for Review, all on October 21",
+    "width": 1200,
+    "height": 645
+  },
+  "missing-account-deletion-after-reviewer-deleted-accounts": null
 }
