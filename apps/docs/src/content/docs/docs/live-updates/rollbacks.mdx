@@ -9,6 +9,8 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 While Capgo's live updates allow you to quickly deliver improvements and fixes to your users, there may be situations where you need to roll back to a previous version of your app. Perhaps a new update introduced an unexpected critical issue, or maybe you want to revert a specific change while you work on a fix.
 
+**Short answer:** to roll back a bad Capacitor live update with Capgo, point the channel back to the previous bundle in the Capgo dashboard or with the Capgo CLI; devices pick it up on their next update check, and the updater also reverts automatically when a new bundle never calls `notifyAppReady()`.
+
 Capgo provides several ways to manage a channel's builds and control the version of your app that users receive, including both manual rollback options and automatic safety mechanisms.
 
 ## Automatic Rollback Protection

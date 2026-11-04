@@ -44,7 +44,7 @@ next_blog: ''
 | Plugin Name | Capacitor Version | Features | Best For |
 | --- | --- | --- | --- |
 | `@aparajita/capacitor-biometric-auth` | Capacitor 8 | Native biometry, device credentials | New projects using Capacitor 8 |
-| `capacitor-native-biometric` | Capacitor 3, 4 | Secure credential storage, Keychain/Keystore | Credential management |
+| `@capgo/capacitor-native-biometric` | Capacitor 8 (plugin v8; v7 for Capacitor 7) | Biometric check plus secure credential storage, Keychain/Keystore | Credential management and Identity Vault replacement |
 | All versions | Biometric and device credential support | Flexible authentication options |
 
 [Biometric authentication in Capacitor apps](https://capgo.app/plugins/capacitor-native-biometric/) is a secure and user-friendly way to protect sensitive data. The full article details setup steps, code examples, testing strategies, and security standards.
@@ -71,7 +71,7 @@ Before diving into the implementation, ensure the following tools and dependenci
 Choose a [biometric plugin](https://capgo.app/plugins/capacitor-native-biometric/) based on your Capacitor version:
 
 -   **@aparajita/capacitor-biometric-auth** for Capacitor 8
--   **capacitor-native-biometric** for Capacitor 3 and 4
+-   **@capgo/capacitor-native-biometric** for Capacitor 8 (plugin v8) or Capacitor 7 (plugin v7), when you also need biometric-gated credential storage
 
 ### Android Setup Steps
 
@@ -140,7 +140,7 @@ When picking a biometric authentication plugin for your Capacitor app, your choi
 | Plugin Name | Capacitor Version | Key Features | Best For |
 | --- | --- | --- | --- |
 | @aparajita/capacitor-biometric-auth | Capacitor 8 | Native biometry, device credentials, comprehensive API | New projects starting with Capacitor 8 |
-| capacitor-native-biometric | Capacitor 3, 4 | Secure credential storage, Keychain/Keystore integration | Established projects needing credential management |
+| @capgo/capacitor-native-biometric | Capacitor 8 (plugin v8; v7 for Capacitor 7) | Biometric check plus secure credential storage, Keychain/Keystore integration | Projects needing biometric-gated credentials |
 | All versions | Biometric and device credential authentication, clean API | Projects requiring flexible authentication options |
 
 ### Authentication Code Examples

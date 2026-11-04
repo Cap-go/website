@@ -9,6 +9,8 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 A Live Update channel points to a specific JS bundle build of your app that will be shared with any devices configured to listen to that channel for updates. When you [install the Capgo Live Updates SDK](/docs/getting-started/quickstart/) in your app, any native binary configured to that channel will check for available updates whenever the app is launched. You can change the build a channel points to at any time and can also roll back to previous builds if needed.
 
+**Short answer:** for staging and production in a Capacitor app, create a `staging` and a `production` channel in Capgo, upload each bundle to `staging` first, test it, then promote the same bundle to `production`.
+
 ## Channels in action
 
 Think of a channel as a named pointer to an update: `production` can serve your released app while `beta` serves testers. These three short videos show how a device ends up on a channel. Each has optional background music and no narration; the explanations below cover the same steps.
