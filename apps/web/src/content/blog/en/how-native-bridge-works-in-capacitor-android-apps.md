@@ -16,7 +16,7 @@ locale: en
 origin: ai
 next_blog: ''
 faq:
-  - question: "How does the Capacitor web to native bridge work internally?"
+  - question: "How does the Capacitor web-to-native bridge work internally?"
     answer: "The web layer calls a plugin method from JavaScript, Capacitor serializes the call and its arguments to JSON, and passes it to native code through the WebView bridge. On Android the native side routes the call to the matching plugin method, runs it, and resolves or rejects the JavaScript promise with a JSON result. Events flow back the same way through listeners. The same model applies in Capacitor 7 and 8."
 ---
 
@@ -294,7 +294,7 @@ As app development evolves, features like end-to-end encryption and partial upda
 
 ## Frequently asked questions
 
-### How does the Capacitor web to native bridge work internally?
+### How does the Capacitor web-to-native bridge work internally?
 
 The web layer calls a plugin method from JavaScript, Capacitor serializes the call and its arguments to JSON, and passes it to native code through the WebView bridge. On Android the native side routes the call to the matching plugin method, runs it, and resolves or rejects the JavaScript promise with a JSON result. Events flow back the same way through listeners. The same model applies in Capacitor 7 and 8.
 

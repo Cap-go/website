@@ -17,7 +17,7 @@ origin: ai
 next_blog: ''
 faq:
   - question: "What is the performance impact of managed OTA update services in production?"
-    answer: "Usually small. A managed service like Capgo downloads the new bundle in the background and applies it on the next app launch or resume, so users do not wait on a download during a session. Differential updates send only changed files, which keeps bandwidth low. The main costs are a check request at startup and storage for the downloaded bundle, which you can measure in a staging channel before rolling out."
+    answer: "Usually small. A managed service like Capgo downloads the new bundle in the background and applies it depending on the configured update mode. With the default automatic mode, the update is applied when the app goes to the background, so users do not wait on a download during a session. Differential updates send only changed files, which keeps bandwidth low. The main costs are an update check request and storage for the downloaded bundle, which you can measure in a staging channel before rolling out."
 ---
 
 **Over-the-Air (OTA) updates** allow developers to push app changes directly to users without requiring app store approvals. This speeds up bug fixes and feature rollouts, with **95% of active users receiving updates within 24 hours**. However, without a proper staging environment, updates can fail, causing crashes or compatibility issues.
@@ -238,7 +238,7 @@ A well-prepared staging environment, supported by platforms like Capgo, can help
 
 ### What is the performance impact of managed OTA update services in production?
 
-Usually small. A managed service like Capgo downloads the new bundle in the background and applies it on the next app launch or resume, so users do not wait on a download during a session. Differential updates send only changed files, which keeps bandwidth low. The main costs are a check request at startup and storage for the downloaded bundle, which you can measure in a [staging channel](/docs/live-updates/channels/) before rolling out.
+Usually small. A managed service like Capgo downloads the new bundle in the background and applies it depending on the configured update mode. With the default automatic mode, the update is applied when the app goes to the background, so users do not wait on a download during a session. Differential updates send only changed files, which keeps bandwidth low. The main costs are an update check request and storage for the downloaded bundle, which you can measure in a [staging channel](/docs/live-updates/channels/) before rolling out.
 
 ## Keep going from Staging OTA Updates: Best Practices
 

@@ -35,7 +35,7 @@ faq:
   - question: "How do I set the age rating for my app in the App Store?"
     answer: "Log in to App Store Connect, select your app, open App Information, scroll to Age Rating, and click Edit. Answer the questionnaire about content, capabilities, and in-app controls. Apple calculates the rating (4+, 9+, 13+, 16+, or 18+) from your answers, so you change the rating by changing the answers."
   - question: "What does Your app age rating is set to 4+ (or 16+) mean in App Store Connect?"
-    answer: "App Store Connect shows that message after you complete the age rating questionnaire. It is the rating Apple derived from your answers. If 4+ or 16+ does not match your app, click Edit under Age Rating, correct the answers, and submit an update. Underrating user generated content or web access is a common review rejection, covered in common age rating mistakes."
+    answer: "App Store Connect shows that message after you complete the age rating questionnaire. It is the rating Apple derived from your answers. If 4+ or 16+ does not match your app, click Edit under Age Rating, correct the answers, and save them. Underrating user-generated content or web access is a common review rejection, covered in common age rating mistakes."
 ---
 
 **Quick answer:** An **app age rating** is the maturity label on each listing in the App Store or Google Play (for example **4+**, **13+**, **Teen**, or **Mature**). On your **iPhone, iPad, or Android phone**, you change the **highest rating allowed** in parental controls, not the label on a single app. Use **Screen Time** content restrictions on Apple devices and **Google Play content restrictions** or **Family Link** on Android. **Developers** set the store rating in [App Store Connect](#how-to-complete-the-ios-age-rating-questionnaire) or the [Play Console IARC questionnaire](#how-to-complete-the-iarc-questionnaire).
@@ -1338,7 +1338,7 @@ Log in to App Store Connect, select your app, open App Information, scroll to Ag
 
 ### What does Your app age rating is set to 4+ (or 16+) mean in App Store Connect?
 
-App Store Connect shows that message after you complete the age rating questionnaire. It is the rating Apple derived from your answers. If 4+ or 16+ does not match your app, click Edit under Age Rating, correct the answers, and submit an update. Underrating user generated content or web access is a common review rejection, covered in [common age rating mistakes](#common-age-rating-mistakes).
+App Store Connect shows that message after you complete the age rating questionnaire. It is the rating Apple derived from your answers. If 4+ or 16+ does not match your app, click Edit under Age Rating, correct the answers, and save them. Underrating user-generated content or web access is a common review rejection, covered in [common age rating mistakes](#common-age-rating-mistakes).
 
 **What is an app age rating on my phone?**  
 It is the maturity label on each app in the store. Parental controls use that label to block or allow downloads. You change the limit in Screen Time or Play settings.

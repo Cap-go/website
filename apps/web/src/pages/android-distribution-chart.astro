@@ -101,7 +101,7 @@ const faqItems = [
   {
     question: 'What is the market share of old Android versions like Android 4.4 and 5.0 in 2026?',
     answer: oldestListedRow
-      ? `Android 4.4 KitKat (API 19) and Android 5.0 Lollipop (API 21) are no longer reported as separate rows in ${data.source} data, so their share is too small to list. The oldest version in the current dataset is ${oldestListedRow.version} (API ${oldestListedRow.api}) at about ${formatPercent(oldestListedRow.distribution)} market share. Most apps can safely set minSdkVersion above API 21.`
+      ? `Android 4.4 KitKat (API 19) and Android 5.0 Lollipop (API 21) are no longer reported as separate rows in ${data.source} data, so their share is too small to list. The oldest version in the current dataset is ${oldestListedRow.version} (API ${oldestListedRow.api}) at about ${formatPercent(oldestListedRow.distribution)} market share. Choose your minSdkVersion floor from your coverage goal and app requirements using the planner above.`
       : 'Android 4.4 KitKat (API 19) and Android 5.0 Lollipop (API 21) are no longer reported as separate rows in the source data, so their share is too small to list.',
   },
   {
