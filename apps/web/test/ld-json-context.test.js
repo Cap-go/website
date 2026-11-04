@@ -214,6 +214,8 @@ test('createHomepageLdJsonGraph matches homepage structured data policy', () => 
   })
 
   expectHomepageGraph(graph, 'https://capgo.app/')
+  const software = graph['@graph'].find((node) => node['@type'] === 'SoftwareApplication')
+  expect(software.applicationSubCategory).toBe('Capacitor Live Updates, Native Builds and AI Skills')
 })
 
 test('createHomepageLdJsonGraph uses locale homepage URLs for translated homepages', () => {
