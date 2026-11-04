@@ -15,6 +15,9 @@ published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: "Are client SSL certificates for push notifications transferred when an app is transferred to another Apple account?"
+    answer: "No. Apple's app transfer documentation states that client SSL certificates for push notifications are not transferred. After the transfer, the receiving team must create new APNs certificates or, better, use a token based .p8 key from its own account, then update the push provider. See migrating to token based authentication."
 ---
 Apple Push Notification service certificates are valid for one year and must be renewed annually in the Apple Developer Portal to avoid interrupting device communication. If you're responsible for a Capacitor app, an expired or revoked credential can stop notifications even while the app itself appears healthy.
 
@@ -194,3 +197,9 @@ Keep the old credential available during a controlled replacement when the platf
 When an outage has already happened, preserve APNs response bodies and timestamps, identify the first rejected request, and compare the deployment secret before and after the incident. Don't retry indefinitely against an invalid credential. Correct the identity or authentication problem first, then send a small verification notification to a known test device.
 
 Capgo can store and configure iOS push credentials as part of a Capacitor notification workflow, while your team retains responsibility for Apple account access, secret custody, and renewal decisions. Visit [Capgo](https://capgo.app) to review how its mobile delivery tooling can fit alongside your APNs credential lifecycle and release process.
+
+## Frequently asked questions
+
+### Are client SSL certificates for push notifications transferred when an app is transferred to another Apple account?
+
+No. Apple's app transfer documentation states that client SSL certificates for push notifications are not transferred. After the transfer, the receiving team must create new APNs certificates or, better, use a token based .p8 key from its own account, then update the push provider. See [migrating to token based authentication](#migrating-to-the-new-token-based-authentication).

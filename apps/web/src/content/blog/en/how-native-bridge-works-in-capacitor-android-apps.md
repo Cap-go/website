@@ -15,6 +15,9 @@ published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: "How does the Capacitor web to native bridge work internally?"
+    answer: "The web layer calls a plugin method from JavaScript, Capacitor serializes the call and its arguments to JSON, and passes it to native code through the WebView bridge. On Android the native side routes the call to the matching plugin method, runs it, and resolves or rejects the JavaScript promise with a JSON result. Events flow back the same way through listeners. The same model applies in Capacitor 7 and 8."
 ---
 
 **The native bridge in [Capacitor](https://capacitorjs.com/) Android apps enables seamless communication between web-based JavaScript and native Android features.** It allows developers to use Android-specific functionalities like camera, geolocation, and storage directly from their web code, creating apps that feel native while leveraging web technologies.
@@ -288,6 +291,12 @@ Ready to implement the native bridge? Here are three steps to get you moving:
 For enterprise apps, consider using channel systems and integrating CI/CD pipelines for controlled rollouts. These practices can help you create Android apps that meet the demands of today's users.
 
 As app development evolves, features like end-to-end encryption and partial updates are becoming standard for maintaining both security and efficiency. With the right approach, you can achieve the same high-performance results that have powered over 23.5 million successful updates across various applications.
+
+## Frequently asked questions
+
+### How does the Capacitor web to native bridge work internally?
+
+The web layer calls a plugin method from JavaScript, Capacitor serializes the call and its arguments to JSON, and passes it to native code through the WebView bridge. On Android the native side routes the call to the matching plugin method, runs it, and resolves or rejects the JavaScript promise with a JSON result. Events flow back the same way through listeners. The same model applies in Capacitor 7 and 8.
 
 ## Keep going from How Native Bridge Works in Capacitor Android Apps
 
