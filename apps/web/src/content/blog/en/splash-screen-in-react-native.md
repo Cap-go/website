@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-24T07:15:52.262Z
-updated_at: 2026-11-04T10:00:00.000Z
+updated_at: 2026-11-04T10:55:00.000Z
 head_image: /blog-images/splash-screen-in-react-native.webp
 head_image_alt: >-
   React Native splash screen Expo and bare CLI Capgo blog illustration
