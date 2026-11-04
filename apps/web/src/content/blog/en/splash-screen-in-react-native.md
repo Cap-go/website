@@ -36,9 +36,11 @@ faq:
       In Expo, call preventAutoHideAsync() before React renders, return null
       until async startup work finishes, then hideAsync() when the first real
       screen can paint. On bare React Native with react-native-splash-screen,
-      call SplashScreen.show() from MainActivity or AppDelegate, then
-      SplashScreen.hide() from JavaScript when ready. react-native-bootsplash
-      uses BootSplash.hide() from JavaScript after the same readiness checks.
+      call SplashScreen.show(this) in Android MainActivity or [RNSplashScreen
+      show] in iOS AppDelegate, then SplashScreen.hide() from JavaScript when
+      ready. With react-native-bootsplash, call RNBootSplash.init(this,
+      R.style.BootTheme) on Android or RNBootSplash.initWithStoryboard on iOS,
+      then BootSplash.hide() from JavaScript after the same readiness checks.
   - question: What is the difference between react-native-splash-screen and react-native-bootsplash?
     answer: >-
       react-native-bootsplash is actively maintained for current React Native
@@ -49,10 +51,12 @@ faq:
   - question: How do I set up a splash screen on bare React Native without Expo?
     answer: >-
       Install react-native-bootsplash, run its generate command for launch
-      assets, call RNBootSplash.init in the native entry, and call
-      BootSplash.hide() from JavaScript when startup tasks finish. Alternatively, follow the
-      react-native-splash-screen native wiring for MainActivity and AppDelegate,
-      then hide from JS. Rebuild native projects after asset or theme changes.
+      assets, initialize with RNBootSplash.init on Android MainActivity or
+      RNBootSplash.initWithStoryboard on iOS AppDelegate, and call
+      BootSplash.hide() from JavaScript when startup tasks finish.
+      Alternatively, wire react-native-splash-screen with SplashScreen.show(this)
+      on Android or [RNSplashScreen show] on iOS, then hide from JS. Rebuild
+      native projects after asset or theme changes.
   - question: Can I use an animated splash screen in React Native or Expo?
     answer: >-
       iOS launch screens stay static. Android 12+ system splash screens can use
@@ -484,13 +488,13 @@ The fastest teams treat the splash screen as part of release engineering, not a 
 Add the **`expo-splash-screen`** plugin to **`app.json`** or **`app.config.js`**, set **`backgroundColor`** and **`image`**, rebuild a native binary, call **`preventAutoHideAsync()`** in global scope, and **`hideAsync()`** when the first screen is ready. Validate in a dev client or production build, not only Expo Go.
 
 **How do I keep the splash screen visible while my React Native app loads?**  
-In Expo, **`preventAutoHideAsync()`** plus returning **`null`** until async work completes, then **`hideAsync()`**. With **`react-native-splash-screen`**, call **`SplashScreen.show()`** from **`MainActivity`** or **`AppDelegate`**, then **`SplashScreen.hide()`** from JavaScript when ready. **`react-native-bootsplash`** uses **`BootSplash.hide()`** after the same readiness gate.
+In Expo, **`preventAutoHideAsync()`** plus returning **`null`** until async work completes, then **`hideAsync()`**. With **`react-native-splash-screen`**, call **`SplashScreen.show(this)`** in Android **`MainActivity`** or **`[RNSplashScreen show]`** in iOS **`AppDelegate`**, then **`SplashScreen.hide()`** from JavaScript when ready. With **`react-native-bootsplash`**, initialize natively per platform, then call **`BootSplash.hide()`** after the same readiness gate.
 
 **What is the difference between react-native-splash-screen and react-native-bootsplash?**  
 **Bootsplash** is actively maintained and ships a generator for launch assets. **react-native-splash-screen** remains common in older repos but sees slower maintenance; prefer bootsplash for new bare CLI apps.
 
 **How do I set up a splash screen on bare React Native without Expo?**  
-Install **react-native-bootsplash**, generate assets, initialize natively, hide from JS when startup finishes. Legacy projects may keep **react-native-splash-screen** with **`SplashScreen.show()`** / **`hide()`** instead. Rebuild after native asset changes.
+Install **react-native-bootsplash**, generate assets, call **`RNBootSplash.init(this, R.style.BootTheme)`** on Android or **`RNBootSplash.initWithStoryboard("BootSplash", rootView: rootView)`** on iOS, then **`BootSplash.hide()`** from JS when startup finishes. Legacy projects may use **`SplashScreen.show(this)`** / **`[RNSplashScreen show]`** with **`SplashScreen.hide()`** instead. Rebuild after native asset changes.
 
 **Can I use an animated splash screen in React Native or Expo?**  
 On **iOS**, keep the launch screen static. On **Android 12+**, the system splash can use a short animated icon, but most teams keep **`expo-splash-screen`** or bootsplash assets static, hide when ready, then animate in React (for example Lottie). Do not rely on **`setTimeout`** to fake loading time.
@@ -500,4 +504,4 @@ React Native uses **expo-splash-screen** or bare CLI libraries before JS runs. C
 
 ## Keep going from React Native Splash Screen (Expo and bare CLI)
 
-If you are using **Splash Screen in React Native: A Complete Guide for 2026** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.
+If you are using **this guide** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.
