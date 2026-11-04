@@ -1,5 +1,6 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { LLMS_WHEN_TO_USE_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
+import { withDevHostNoindex } from '../../../shared/devHostNoindex'
 
 interface Env {
   ASSETS: {
@@ -233,7 +234,7 @@ function shouldServeBrandedNotFound(pathname: string): boolean {
   return true
 }
 
-export default {
+const baseWorker = {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const url = new URL(request.url)
     const pathname = url.pathname
@@ -284,5 +285,12 @@ export default {
       }
     }
     return trackAICrawler(request, response, ctx)
+  },
+}
+
+export default {
+  ...baseWorker,
+  async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
+    return withDevHostNoindex(request, await baseWorker.fetch(request, env, ctx))
   },
 }

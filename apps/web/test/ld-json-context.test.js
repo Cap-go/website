@@ -208,7 +208,7 @@ test('createHomepageLdJsonGraph matches homepage structured data policy', () => 
     description: 'Build Capacitor apps with AI and ship updates instantly.',
     homepageUrl: 'https://capgo.app/',
     inLanguage: 'en',
-    applicationSubCategory: 'Build Capacitor apps with AI, ship updates instantly',
+    applicationSubCategory: 'Capacitor Live Updates, Native Builds and AI Skills',
     featureList: homepageFeatureList,
     offers: homepageOffers,
   })
