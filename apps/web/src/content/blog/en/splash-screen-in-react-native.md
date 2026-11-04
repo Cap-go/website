@@ -1,29 +1,76 @@
 ---
 slug: splash-screen-in-react-native
-title: 'Splash Screen in React Native: A Complete Guide for 2026'
+title: 'React Native Splash Screen: Expo, Bootsplash, and Bare CLI (2026)'
 description: >-
-  Learn how to implement a professional splash screen in React Native for Expo &
-  CLI. This guide covers asset prep, native setup, performance, and common
-  fixes.
+  React Native splash screen setup for Expo (expo-splash-screen in app.json,
+  preventAutoHideAsync) and bare CLI (react-native-bootsplash,
+  react-native-splash-screen). Loading screens, animated splash tips, and fixes.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-24T07:15:52.262Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-11-04T10:00:00.000Z
 head_image: /blog-images/splash-screen-in-react-native.webp
 head_image_alt: >-
-  'Splash Screen in React Native: A Complete Guide for 2026' Capgo blog
-  illustration
-keywords: 'react native, splash screen, expo, react native cli, mobile development'
+  React Native splash screen Expo and bare CLI Capgo blog illustration
+keywords: >-
+  react native splash screen, expo splash screen, react-native-splash-screen,
+  react-native-bootsplash, splash screen react native, splash screen expo,
+  react native expo splash screen, react native loading screen, animated splash
+  screen react native
 tag: 'Mobile, Guides'
 published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: How do I add a splash screen in Expo (expo splash screen)?
+    answer: >-
+      Add the expo-splash-screen config plugin to app.json or app.config.js with
+      backgroundColor and image paths, rebuild with a development or production
+      binary, then call SplashScreen.preventAutoHideAsync() in global scope and
+      SplashScreen.hideAsync() after fonts, auth, and navigation are ready.
+      Expo Go is not the final check for native splash assets.
+  - question: How do I keep the splash screen visible while my React Native app loads?
+    answer: >-
+      In Expo, call preventAutoHideAsync() before React renders, return null
+      until async startup work finishes, then hideAsync() when the first real
+      screen can paint. On bare React Native with react-native-splash-screen,
+      call SplashScreen.show() from MainActivity or AppDelegate, then
+      SplashScreen.hide() from JavaScript when ready. react-native-bootsplash
+      uses BootSplash.hide() from JavaScript after the same readiness checks.
+  - question: What is the difference between react-native-splash-screen and react-native-bootsplash?
+    answer: >-
+      react-native-bootsplash is actively maintained for current React Native
+      releases and includes a CLI to generate Android and iOS launch assets.
+      react-native-splash-screen is a widely used legacy library still common
+      in older codebases; choose bootsplash for new bare CLI projects unless you
+      are patching an existing splash-screen integration.
+  - question: How do I set up a splash screen on bare React Native without Expo?
+    answer: >-
+      Install react-native-bootsplash, run its generate command for launch
+      assets, call RNBootSplash.init in the native entry, and call
+      BootSplash.hide() from JavaScript when startup tasks finish. Alternatively, follow the
+      react-native-splash-screen native wiring for MainActivity and AppDelegate,
+      then hide from JS. Rebuild native projects after asset or theme changes.
+  - question: Can I use an animated splash screen in React Native or Expo?
+    answer: >-
+      Native launch screens stay static on iOS and on Android 12+. Keep the
+      expo-splash-screen or bootsplash image simple, hide when the app is ready,
+      then run a short Lottie or React Native animation on the first screen.
+      Avoid setTimeout delays that hide the splash before or after real loading
+      finishes.
+  - question: I am choosing React Native or Capacitor for a new app. Where does the splash screen fit?
+    answer: >-
+      React Native splash screens are configured with expo-splash-screen or bare
+      CLI libraries before JavaScript runs. Capacitor apps use native launch
+      screens plus the @capacitor/splash-screen plugin in the WebView layer.
+      Compare stacks in Capgo's React Native vs Capacitor guide if platform
+      choice affects how you ship launch branding.
 ---
-You tap your app icon on a real device, and for a split second the user gets a white flash, a stretched logo, or a frozen launch screen that disappears before anything useful is ready. That's usually the moment a React Native app stops feeling production-grade.
+**Quick answer:** Use **`expo-splash-screen`** with the **config plugin** in **`app.json`** or **`app.config.js`** when the app runs on **Expo** (including dev clients and EAS builds). Call **`SplashScreen.preventAutoHideAsync()`** in **global scope**, then **`SplashScreen.hideAsync()`** when fonts, auth, and navigation are ready. On **bare React Native CLI**, prefer **`react-native-bootsplash`** for new work; maintain legacy apps with **`react-native-splash-screen`** until you migrate. Keep the **native splash static**, hide it when the first real screen can render, and move **animated splash** branding into the first React screen.
 
-A good splash screen in React Native fixes more than branding. It covers the gap between native startup and the first meaningful React-rendered frame. It also forces you to think clearly about startup order, asset preparation, and the difference between what happens in Expo Go, a development client, and a real store build. If you get that timing wrong, users see the cracks immediately.
+You tap your app icon on a real device, and for a split second the user gets a white flash, a stretched logo, or a frozen launch screen that disappears before anything useful is ready. That gap is what **`react native splash screen`** setup is meant to cover: native launch UI until JavaScript can show a stable first frame.
 
 <a id="why-a-professional-splash-screen-matters"></a>
 
@@ -51,6 +98,7 @@ A good splash screen in React Native fixes more than branding. It covers the gap
   - [White screen after the splash hides](#white-screen-after-the-splash-hides)
   - [Splash screen missing on one platform](#splash-screen-missing-on-one-platform)
   - [Build breaks after adding splash configuration](#build-breaks-after-adding-splash-configuration)
+- [Frequently asked questions](#frequently-asked-questions)
 
 ## Why a Professional Splash Screen Matters
 
@@ -76,7 +124,7 @@ This is also where the Expo-managed and bare CLI workflows start to diverge. In 
 
 That trade-off matters in real projects. Expo is faster to configure and easier to keep consistent across environments. Bare projects are often the right choice when the app already depends on custom native modules, custom launch behavior, or stricter control over the startup path.
 
-Teams that treat launch as part of product quality usually review it alongside broader UX work, not as an isolated native task. That is the same mindset covered in [Capgo's guide to app user experience](https://capgo.app/blog/app-user-experience/). If you're also evaluating the broader React Native stack for a new app or migration, [Nerdify solutions for React Native apps](https://getnerdify.com/blog/building-apps-with-react-native) gives a useful production-focused overview.
+Teams that treat launch as part of product quality usually review it alongside broader UX work, not as an isolated native task. That is the same mindset covered in [Capgo's guide to app user experience](/blog/app-user-experience/). If you are weighing **React Native** against **Capacitor** for a greenfield app, read [Comparing React Native vs Capacitor](/blog/comparing-react-native-vs-capacitor/) before you lock launch tooling. Capacitor teams configure splash screens in native projects and with [@capacitor/splash-screen](/blog/nextjs-mobile-app-capacitor-from-scratch/) during app initialization, as outlined in the [Capacitor app initialization guide](/blog/capacitor-app-initialization-step-by-step-guide/).
 
 <a id="preparing-perfect-splash-screen-assets"></a>
 ## Preparing Perfect Splash Screen Assets
@@ -132,18 +180,23 @@ A setup that works well in real projects looks like this:
 That last point matters more than people expect. Many splash screen issues that look like configuration bugs are just stale native assets.
 
 <a id="implementing-with-the-expo-go-and-development-client-workflow"></a>
-## Implementing with the Expo Go and Development Client Workflow
+## Expo splash screen (`expo-splash-screen`)
 
-If you're using Expo, start with `expo-splash-screen`. It fits the managed workflow, keeps most configuration declarative, and gives you explicit control over when the splash should leave.
+If you are searching for **expo splash screen** or **react native expo splash screen**, start with the [`expo-splash-screen`](https://docs.expo.dev/versions/latest/sdk/splash-screen/) package. It fits managed and prebuild workflows, keeps launch assets in config, and exposes JavaScript APIs to control visibility in store builds.
 
 ![Screenshot from https://reactnative.dev/](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/screenshots/16842bff-c5b9-41c6-84c5-b63363e4b741/splash-screen-in-react-native-landing-page.jpg)
 
-The key behavior to understand is simple. **Keep the native splash visible until the first meaningful UI frame is ready.** Expo's `SplashScreen` API supports exactly that pattern with `preventAutoHideAsync()` at startup and `hideAsync()` once critical loading has finished, and Expo warns that hiding too early can briefly expose a blank screen in both iOS and Android builds, as documented in the [Expo splash screen API](https://docs.expo.dev/versions/latest/sdk/splash-screen/).
+The key behavior to understand is simple. **Keep the native splash visible until the first meaningful UI frame is ready.** Expo documents [`preventAutoHideAsync()`](https://docs.expo.dev/versions/latest/sdk/splash-screen/) so the configured splash stays up until you call [`hideAsync()`](https://docs.expo.dev/versions/latest/sdk/splash-screen/). Call **`preventAutoHideAsync()` in global scope without awaiting**, not inside a hook, or the splash may auto-hide before your code runs. Hiding too early can briefly expose a blank screen on iOS and Android.
+
+<a id="keep-splash-visible-expo"></a>
+### Keep the splash on while loading (Expo)
+
+This is the usual **react native loading screen** pattern: the native splash covers font loading, persisted auth, and remote config while React returns `null`. When `isReady` becomes true, call `hideAsync()`. Optional [`SplashScreen.setOptions()`](https://docs.expo.dev/versions/latest/sdk/splash-screen/) adjusts fade behavior on hide. Test splash assets in a **development client**, **preview**, or **production** build; Expo documents that **Expo Go** is not the authoritative environment for native splash configuration.
 
 <a id="configure-the-native-splash-declaratively"></a>
 ### Configure the native splash declaratively
 
-In an Expo project, the visual side usually lives in `app.json` or `app.config.js`.
+In an Expo project, the visual side usually lives in **`app.json`**, **`app.config.js`**, or **`app.config.ts`** under the **`expo-splash-screen` config plugin**, as described in [Expo's splash screen and app icon guide](https://docs.expo.dev/develop/user-interface/splash-screen-and-app-icon/).
 
 A typical `app.json` setup looks like this:
 
@@ -170,7 +223,7 @@ A few practical choices matter here:
 
 - **Use a background color close to your initial screen** so the transition feels continuous.
 - **Keep the image simple** because launch surfaces aren't the place for dense artwork.
-- **Avoid fake “branding delays”** that hold users on a logo when the app is already ready.
+- **Avoid fake branding delays** that hold users on a logo when the app is already ready.
 
 <a id="hide-the-splash-based-on-readiness-not-time"></a>
 ### Hide the splash based on readiness, not time
@@ -252,11 +305,13 @@ Use this mental model:
 If your splash still flashes or lingers, the bug is usually one of three things: hiding too early, rendering `null` for too long after hide, or testing in an environment that doesn't reflect release behavior.
 
 <a id="configuring-for-bare-react-native-cli-projects"></a>
-## Configuring for Bare React Native CLI Projects
+## Bare React Native CLI splash screen
 
-A bare React Native app gives you direct control over launch behavior, which is useful once the splash screen has to match real startup work instead of showing a logo for a fixed delay. That control comes with native responsibility. You have to wire Android and iOS correctly, rebuild often, and test the handoff between native launch UI and the first React screen on actual devices.
+A bare React Native app gives you direct control over launch behavior. For **new bare CLI projects**, [`react-native-bootsplash`](https://github.com/zoontek/react-native-bootsplash) is the maintained option (active releases through 2026 and aligned with current React Native support policy). Many production apps still ship [`react-native-splash-screen`](https://github.com/crazycodeboy/react-native-splash-screen); treat it as **legacy maintenance** unless you are already integrated.
 
-In CLI projects, I usually recommend `react-native-bootsplash` for new work. It fits current React Native projects better than older splash libraries, and the native setup is easier to reason about during upgrades. Older apps still ship with `react-native-splash-screen`, so you will run into it in maintenance work, but for a fresh setup the goal stays the same. Show a native launch surface immediately, then hide it only after the app can render meaningful UI.
+**Animated splash screen (React Native or Expo):** iOS launch storyboards and Android 12+ splash rules stay **static**. Hide the native splash when startup work finishes, then play a short Lottie or React animation on the first screen. See [animation performance in Capacitor apps](/blog/ultimate-guide-to-animation-performance-in-capacitor-apps/) for the same startup discipline on another stack.
+
+In CLI projects, the native handoff goal is unchanged: show launch UI immediately, then hide only after meaningful UI can render.
 
 ![A four-step infographic illustrating the process for setting up a splash screen in React Native CLI.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/325db6b3-7ae6-4106-8a2b-86d8f7971ef7/splash-screen-in-react-native-setup-process.jpg)
 
@@ -420,8 +475,29 @@ Community patterns across recent React Native guides have converged on the same 
 
 **Fix:** Clean the build, reinstall dependencies if needed, and rebuild the native project fully. If you're in Expo with generated native layers, regenerate carefully and verify plugin config. If you're in a bare app, review `MainActivity`, `AppDelegate`, resource names, and any plist or manifest edits for small mismatches.
 
-The fastest teams treat the splash screen as part of release engineering, not a one-time visual task. That matters even more when startup assets, UI text, or app-shell behavior need to change quickly after launch. [Capgo](https://capgo.app) gives Capacitor and Electron teams a way to ship JavaScript, CSS, copy, config, and asset fixes on the next launch with rollout controls and rollback support, which is useful when the problem is in the app layer rather than the native launch screen itself.
+The fastest teams treat the splash screen as part of release engineering, not a one-time visual task. That matters even more when startup assets, UI text, or app-shell behavior need to change quickly after launch. [Capgo](https://capgo.app/) gives Capacitor and Electron teams a way to ship JavaScript, CSS, copy, config, and asset fixes on the next launch with rollout controls and rollback support, which is useful when the problem is in the app layer rather than the native launch screen itself.
 
-## Keep going from Splash Screen in React Native: A Complete Guide for 2026
+<a id="frequently-asked-questions"></a>
+## Frequently asked questions
+
+**How do I add a splash screen in Expo (expo splash screen)?**  
+Add the **`expo-splash-screen`** plugin to **`app.json`** or **`app.config.js`**, set **`backgroundColor`** and **`image`**, rebuild a native binary, call **`preventAutoHideAsync()`** in global scope, and **`hideAsync()`** when the first screen is ready. Validate in a dev client or production build, not only Expo Go.
+
+**How do I keep the splash screen visible while my React Native app loads?**  
+In Expo, **`preventAutoHideAsync()`** plus returning **`null`** until async work completes, then **`hideAsync()`**. With **`react-native-splash-screen`**, call **`SplashScreen.show()`** from **`MainActivity`** or **`AppDelegate`**, then **`SplashScreen.hide()`** from JavaScript when ready. **`react-native-bootsplash`** uses **`BootSplash.hide()`** after the same readiness gate.
+
+**What is the difference between react-native-splash-screen and react-native-bootsplash?**  
+**Bootsplash** is actively maintained and ships a generator for launch assets. **react-native-splash-screen** remains common in older repos but sees slower maintenance; prefer bootsplash for new bare CLI apps.
+
+**How do I set up a splash screen on bare React Native without Expo?**  
+Install **react-native-bootsplash**, generate assets, initialize natively, hide from JS when startup finishes. Legacy projects may keep **react-native-splash-screen** with **`SplashScreen.show()`** / **`hide()`** instead. Rebuild after native asset changes.
+
+**Can I use an animated splash screen in React Native or Expo?**  
+Keep the native launch image static. Hide when ready, then animate in React (for example Lottie). Do not rely on **`setTimeout`** to fake loading time.
+
+**Where does splash setup differ between React Native and Capacitor?**  
+React Native uses **expo-splash-screen** or bare CLI libraries before JS runs. Capacitor uses native launch screens plus **`@capacitor/splash-screen`** in the WebView stack. See [Comparing React Native vs Capacitor](/blog/comparing-react-native-vs-capacitor/) and [Capacitor app initialization](/blog/capacitor-app-initialization-step-by-step-guide/).
+
+## Keep going from React Native Splash Screen (Expo and bare CLI)
 
 If you are using **Splash Screen in React Native: A Complete Guide for 2026** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.
