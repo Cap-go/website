@@ -1,55 +1,55 @@
 {
-  "updatedAt": "2026-10-12T00:00:00.000Z",
+  "updatedAt": "2026-11-03T00:00:00.000Z",
   "source": "iOS Ref",
   "sourceUrl": "https://iosref.com/ios-usage",
-  "fetchedAt": "2026-10-13T07:18:47.299Z",
+  "fetchedAt": "2026-11-04T07:04:25.022Z",
   "data": [
     {
       "version": "iOS 27",
       "released": "2026",
-      "cumulativeUsage": 4.4,
+      "cumulativeUsage": 17.2,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 26",
       "released": "2025",
-      "cumulativeUsage": 76.8,
+      "cumulativeUsage": 77.6,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 18",
       "released": "2024",
-      "cumulativeUsage": 93.1,
+      "cumulativeUsage": 93.5,
       "lastIosFor": "iPhone XS / XS Max , iPhone XR"
     },
     {
       "version": "iOS 17",
       "released": "2023",
-      "cumulativeUsage": 95.2,
+      "cumulativeUsage": 95.5,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 16",
       "released": "2022",
-      "cumulativeUsage": 97.8,
+      "cumulativeUsage": 97.9,
       "lastIosFor": "iPhone X , iPhone 8 / 8 Plus"
     },
     {
       "version": "iOS 15",
       "released": "2021",
-      "cumulativeUsage": 99.3,
+      "cumulativeUsage": 99.4,
       "lastIosFor": "iPhone 7 / 7 Plus ,iPhone SE (gen 1) , iPhone 6s / 6s Plus"
     },
     {
       "version": "iOS 14",
       "released": "2020",
-      "cumulativeUsage": 99.4,
+      "cumulativeUsage": 99.5,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 13",
       "released": "2019",
-      "cumulativeUsage": 99.4,
+      "cumulativeUsage": 99.5,
       "lastIosFor": ""
     },
     {
@@ -61,25 +61,25 @@
     {
       "version": "iOS 11",
       "released": "2017",
-      "cumulativeUsage": 99.7,
+      "cumulativeUsage": 99.8,
       "lastIosFor": "—"
     },
     {
       "version": "iOS 10",
       "released": "2016",
-      "cumulativeUsage": 99.8,
+      "cumulativeUsage": 99.9,
       "lastIosFor": "iPhone 5c , iPhone 5"
     },
     {
       "version": "iOS 9",
       "released": "2015",
-      "cumulativeUsage": 99.8,
+      "cumulativeUsage": 99.9,
       "lastIosFor": "iPhone 4s"
     },
     {
       "version": "iOS 8",
       "released": "2014",
-      "cumulativeUsage": 99.8,
+      "cumulativeUsage": 99.9,
       "lastIosFor": "—"
     },
     {
