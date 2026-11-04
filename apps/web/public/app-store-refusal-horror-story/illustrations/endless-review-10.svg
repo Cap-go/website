@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Rejection then back of the queue">
+  <title>Rejection then back of the queue</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="268" cy="44" r="16" fill="#44BCFF" opacity="0.25"/>
+  <path d="M48 120 H272" stroke="#374151" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="72" cy="120" r="10" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <path d="M66 120 L78 120 M72 114 L72 126" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="140" cy="120" r="10" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="208" cy="120" r="10" fill="#111827" stroke="#9CA3AF" stroke-width="2" opacity="0.5"/>
+  <circle cx="276" cy="120" r="10" fill="#111827" stroke="#44BCFF" stroke-width="2" opacity="0.45"/>
+  <path d="M82 120 Q112 72 140 120" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M150 120 Q178 56 208 120" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6 6" opacity="0.7"/>
+  <path d="M218 120 Q246 48 276 120" fill="none" stroke="#44BCFF" stroke-width="2" stroke-dasharray="6 6" opacity="0.55"/>
+  <rect x="88" y="148" width="144" height="28" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="104" y="158" width="96" height="8" rx="4" fill="#44BCFF" opacity="0.35"/>
+</svg>

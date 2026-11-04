@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Account deletion path for reviewer">
+  <title>Account deletion path for reviewer</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="48" cy="156" r="20" fill="#44BCFF" opacity="0.2"/>
+  <rect x="76" y="40" width="168" height="120" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="108" cy="72" r="16" fill="#374151"/>
+  <rect x="132" y="64" width="88" height="8" rx="4" fill="#9CA3AF" opacity="0.45"/>
+  <rect x="132" y="80" width="72" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="96" y="108" width="128" height="36" rx="8" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M112 126 L120 134 L136 118" fill="none" stroke="#44BCFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="144" y="118" width="64" height="8" rx="4" fill="#44BCFF" opacity="0.4"/>
+  <circle cx="252" cy="88" r="28" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M240 88h24 M252 76v24" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M228 108 Q252 128 228 148" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
+</svg>
