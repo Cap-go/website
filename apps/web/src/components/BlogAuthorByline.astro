@@ -19,7 +19,7 @@ const locale = Astro.locals.locale
     <img width="36" height="36" loading="lazy" decoding="async" alt={author} src={authorImageUrl} class="blur-0 rounded-full transition-all group-hover:brightness-90" />
     <div class="flex flex-col">
       <p class="text-sm font-medium whitespace-nowrap text-gray-400">{author}</p>
-      <p class="text-sm text-gray-400">{m.content_marketer({}, { locale })}</p>
+      <p class="text-sm text-gray-400">{author === 'Martin Donadieu' ? m.about_facts_founder({}, { locale }) : m.content_marketer({}, { locale })}</p>
     </div>
   </a>
 </div>

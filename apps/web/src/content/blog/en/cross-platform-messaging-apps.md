@@ -28,11 +28,6 @@ takeaways:
   - "Slack, Microsoft Teams and Google Chat fit companies already on those work suites."
   - "Element (Matrix), Wire and Threema suit teams that want more control over privacy or hosting."
   - "Discord works best for living communities rather than formal team chat."
-cta:
-  title: "Building your own cross platform app?"
-  text: "Capacitor lets one web codebase run on iOS, Android and the web. Capgo live updates ship fixes to every user without waiting on store review."
-  href: "https://capgo.app/register/"
-  label: "Try Capgo live updates"
 ---
 You're probably in one of two situations right now. Either your team needs a messaging layer that works across iPhone, Android, desktop, and web without turning support and engineering into chaos, or you're reevaluating a stack that looked fine at pilot stage and now has to survive compliance reviews, API changes, and real user volume.
 

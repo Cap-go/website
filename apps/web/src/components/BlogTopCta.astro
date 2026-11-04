@@ -2,29 +2,65 @@
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 
+type Cta = { title: string; text: string; href?: string | null; label?: string | null }
+
 interface Props {
-  /** Optional problem-matched CTA from the post frontmatter `cta`. Falls back to the default signup CTA. */
-  cta?: { title: string; text: string; href?: string | null; label?: string | null } | null
+  /** Optional problem-matched CTA from the post frontmatter `cta`. Wins over the tag map. */
+  cta?: Cta | null
+  /** Comma-separated blog tags, used to pick a matched CTA when frontmatter has none. */
+  tag?: string
+  slug?: string
 }
 
 const locale = Astro.locals.locale
-const { cta } = Astro.props
-const title = cta?.title ?? m.blog_sidebar_cta_lead({}, { locale })
-const text = cta?.text ?? `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
-const href = cta?.href ?? getRelativeLocaleUrl(locale, 'register')
-const label = cta?.label ?? m.solutions_start_free_trial({}, { locale })
+const { cta, tag = '' } = Astro.props
+const register = getRelativeLocaleUrl(locale, 'register')
+
+// Tag -> CTA map. First matching tag wins; otherwise the default signup CTA below.
+const STORE_REVIEW: Cta = {
+  title: 'Ship fixes without waiting on store review',
+  text: 'Building a Capacitor app? Capgo live updates push JavaScript, HTML and CSS fixes to users in minutes, within App Store and Google Play rules.',
+  label: 'Try Capgo live updates',
+}
+const TAG_CTAS: Record<string, Cta & { id: string }> = {
+  'app store': { id: 'store-review', ...STORE_REVIEW },
+  'google play': { id: 'store-review', ...STORE_REVIEW },
+  ios: { id: 'store-review', ...STORE_REVIEW },
+  android: { id: 'store-review', ...STORE_REVIEW },
+  updates: {
+    id: 'live-updates',
+    title: 'Ship live updates to your Capacitor app',
+    text: 'Capgo delivers JavaScript, HTML and CSS changes over the air, with channels and rollbacks, within App Store and Google Play rules.',
+    label: 'Try Capgo live updates',
+  },
+  'ci/cd': {
+    id: 'native-build',
+    title: 'Build and ship your Capacitor app from CI',
+    text: 'Capgo Build compiles and signs your iOS and Android app in the cloud, then live updates ship the fixes in between store releases.',
+    label: 'Start with Capgo',
+  },
+}
+const tags = tag.split(',').map((t) => t.trim().toLowerCase())
+const mapped = tags.map((t) => TAG_CTAS[t]).find(Boolean)
+const ctaId = cta ? 'frontmatter' : (mapped?.id ?? 'default')
+const chosen = cta ?? mapped
+const title = chosen?.title ?? m.blog_sidebar_cta_lead({}, { locale })
+const text = chosen?.text ?? `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
+const href = chosen?.href ?? register
+const label = chosen?.label ?? m.solutions_start_free_trial({}, { locale })
 ---
 
-<aside id="blog-top-cta" data-cta={cta ? 'post' : 'default'} class="not-content mt-6 flex flex-col gap-4 rounded-2xl border border-azure-500/30 bg-azure-500/5 p-6 sm:flex-row sm:items-center sm:justify-between">
+<aside
+  id="blog-top-cta"
+  data-blog-cta="top"
+  data-cta-id={ctaId}
+  class="not-content mt-6 flex flex-col gap-4 rounded-2xl border border-azure-500/30 bg-azure-500/5 p-6 sm:flex-row sm:items-center sm:justify-between"
+>
   <div>
     <p class="text-lg font-semibold text-white">{title}</p>
     <p class="mt-1 text-gray-300">{text}</p>
   </div>
-  <a
-    id="blog-top-cta-link"
-    href={href}
-    class="inline-flex shrink-0 items-center justify-center rounded-lg bg-azure-500 px-5 py-2.5 font-semibold text-white hover:bg-azure-400"
-  >
+  <a id="blog-top-cta-link" href={href} class="inline-flex shrink-0 items-center justify-center rounded-lg bg-azure-500 px-5 py-2.5 font-semibold text-white hover:bg-azure-400">
     {label}
   </a>
 </aside>

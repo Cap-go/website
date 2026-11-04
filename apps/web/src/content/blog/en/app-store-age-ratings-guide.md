@@ -41,11 +41,6 @@ takeaways:
   - "iPhone and iPad: Settings, Screen Time, Content and Privacy Restrictions, App Store, Media, Web and Games, Apps."
   - "Android: Google Play, profile, Settings, Family, Content restrictions, or Family Link for managed accounts."
   - "Developers set their app's rating with the App Store Connect questionnaire and the IARC questionnaire in Google Play."
-cta:
-  title: "Ship fixes without waiting on store review"
-  text: "Building a Capacitor app? Capgo live updates push JavaScript, HTML and CSS fixes to users in minutes, within App Store and Google Play rules."
-  href: "https://capgo.app/register/"
-  label: "Try Capgo live updates"
 ---
 
 **Quick answer:** An **app age rating** is the maturity label on each listing in the App Store or Google Play (for example **4+**, **13+**, **Teen**, or **Mature**). On your **iPhone, iPad, or Android phone**, you change the **highest rating allowed** in parental controls, not the label on a single app. Use **Screen Time** content restrictions on Apple devices and **Google Play content restrictions** or **Family Link** on Android. **Developers** set the store rating in [App Store Connect](#how-to-complete-the-ios-age-rating-questionnaire) or the [Play Console IARC questionnaire](#how-to-complete-the-iarc-questionnaire).

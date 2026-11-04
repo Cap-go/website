@@ -61,11 +61,6 @@ takeaways:
   - "The Shortcuts app lets you set any photo as an icon for a shortcut that opens the app."
   - "Shortcut icons can add a short redirect through Shortcuts when you launch the app."
   - "Developers can offer alternate icons in their own app with the native iOS API, including from Capacitor and Ionic."
-cta:
-  title: "Ship fixes without waiting on store review"
-  text: "Building a Capacitor app? Capgo live updates push JavaScript, HTML and CSS fixes to users in minutes, within App Store and Google Play rules."
-  href: "https://capgo.app/register/"
-  label: "Try Capgo live updates"
 ---
 **You can change app icons on iPhone in two ways.** On current iOS versions, touch and hold the Home Screen, open **Customize**, and apply **Dark**, **Tinted**, **Clear**, or **larger** icons to every supported app at once ([Apple's Home Screen guide](https://support.apple.com/guide/iphone/customize-apps-and-widgets-on-the-home-screen-iph385473442/ios)). To use your own photo for one app, build a **Shortcuts** launcher and **Add to Home Screen** with a custom image ([Apple's Shortcuts guide](https://support.apple.com/guide/shortcuts/add-a-shortcut-to-the-home-screen-apd735880972/ios)). App developers can also ship **alternate icons** inside the app through Apple's native API, including from [Capacitor with a native bridge](/blog/implementing-native-bridge-for-ios-in-capacitor/).
 

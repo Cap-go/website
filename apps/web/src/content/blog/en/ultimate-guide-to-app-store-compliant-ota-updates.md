@@ -31,11 +31,6 @@ takeaways:
   - "Bug fixes and performance updates are generally allowed over the air."
   - "Major new features and native code changes still need store review."
   - "Use HTTPS and signed bundles, and do not change the app's core purpose."
-cta:
-  title: "Ship compliant OTA updates to your Capacitor app"
-  text: "Capgo live updates deliver JavaScript, HTML and CSS changes over the air, with rollbacks and channels, within App Store and Google Play rules."
-  href: "https://capgo.app/register/"
-  label: "Try Capgo live updates"
 ---
 
 **OTA updates** for mobile apps are **over the air updates** to the web layer inside a reviewed native shell: JavaScript, HTML, CSS, and assets can change without replacing the whole store binary. That is different from phone **system OTA updates**, which patch iOS or Android itself. An **OTA app** is any app built to receive those app-level deliveries safely after install. This guide covers App Store and Google Play rules for **OTA app updates** on iPhone and Android. For definitions and delivery mechanics, read [what is an OTA update](https://capgo.app/blog/what-is-ota-update/). To monitor rollouts, see [OTA monitoring for Capacitor apps](https://capgo.app/blog/monitor-ota-updates-in-capacitor-apps/). To ship **Capacitor live updates** with Capgo, see [Capacitor OTA updates](https://capgo.app/live-update/).
