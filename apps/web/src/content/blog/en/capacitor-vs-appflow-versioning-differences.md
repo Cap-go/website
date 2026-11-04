@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-21T04:20:03.700Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-11-03T00:00:00.000Z
 head_image: /blog-images/capacitor-vs-appflow-versioning-differences.webp
 head_image_alt: "\"Capacitor vs Appflow: Versioning Differences\" Capgo blog illustration"
 keywords: version control, app updates, manual versioning, automated versioning, CI/CD, live updates, mobile development, app release management
@@ -17,15 +17,18 @@ origin: ai
 next_blog: ''
 ---
 
+**TL;DR:** Manual Capacitor versioning in `Info.plist` and `build.gradle` gives control but slows releases. **Capgo** adds live web-bundle updates from $12/month; **Appflow** automated versioning still suits some existing customers until **December 31, 2027**. See [Capgo vs Ionic Appflow](/alternatives/ionic-appflow/) for the maintained comparison table.
+
 **Managing app versions can be tricky.** [Capacitor](https://capacitorjs.com/) uses [manual updates](https://capgo.app/docs/getting-started/deploy/), while [Appflow](https://ionic.io/docs/appflow) automates the process. Here’s what you need to know:
 
 -   **Capacitor:** Manual versioning requires editing files like `Info.plist` (iOS) and `build.gradle` (Android). This gives control but risks errors and slows updates.
 -   **Appflow:** Automates versioning with CI/CD tools for faster releases but costs ~$6,000/year and may lack flexibility.
 
-**Key Changes in the Market:**
+**Key changes in the market:**
 
--   **Appflow shuts down in 2026.**
--   Alternatives like **[Capgo](https://capgo.app/)** offer live updates, starting at $12/month, with 95% updates delivered in 24 hours.
+-   **Microsoft App Center** retired build and distribute on **March 31, 2025**; hosted CodePush ended with it ([App Center retirement](https://learn.microsoft.com/en-us/appcenter/retirement)).
+-   **Ionic Appflow** stopped new commercial sales on **February 11, 2025**; existing access continues through **December 31, 2027** ([Ionic announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
+-   Alternatives like **[Capgo](https://capgo.app/)** offer live updates starting at $12/month, with 95% of updates delivered within 24 hours on typical Capgo deployments.
 
 ### Quick Comparison
 
@@ -35,7 +38,7 @@ next_blog: ''
 | **Update Speed** | Slower (App Store delays) | Faster (Code-push) | Near-instant |
 | **Cost** | Free tools | ~$6,000/year | Starting at $12/month |
 | **Error Risk** | Higher (manual errors) | Lower | Lower |
-| **End Date** | Active | Ends 2026 | Active |
+| **End Date** | Active | Access through 2027-12-31 | Active |
 
 When choosing, consider your budget, update frequency, and need for speed.
 
@@ -78,7 +81,13 @@ Here’s a comparison of the key features from each platform, focusing on how th
 
 These differences impact how quickly updates can be released, the level of risk involved, and overall expenses.
 
-With Microsoft’s Code Push shutting down in 2024 and Appflow expected to follow in 2026, many teams are already seeking alternatives [\[1\]](https://capgo.app/).
+With Microsoft retiring App Center on **March 31, 2025** and Ionic winding down Appflow sales while existing access runs through **December 31, 2027**, many teams are already seeking alternatives [\[1\]](https://capgo.app/).
+
+## When to pick Ionic Appflow instead
+
+- You are an existing Appflow subscriber with time left on access through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
+- You want Appflow's CI/CD pipeline to bump iOS and Android version codes automatically on each native build ([Appflow auto-incrementing build numbers](https://ionic.io/docs/appflow/cookbook/auto-incrementing-build-numbers)).
+- Your existing Appflow plan for bundled builds and live updates continues under Ionic's wind-down terms through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ## Release Management Effects
 
@@ -120,9 +129,9 @@ Capgo offers a solution for teams looking to streamline version control without 
 The version control market is shifting as older services phase out. Teams now need to focus on cost, speed, and compliance when choosing a strategy. Here's a snapshot of the current options:
 
 -   **Capgo** (launched 2022): Active, starting at $12/month, supports live updates
--   **Appflow**: Shutting down in 2026, priced at $6,000/year [\[1\]](https://capgo.app/), offers [automated updates](https://capgo.app/docs/live-updates/update-behavior/)
+-   **Appflow**: New sales discontinued **February 11, 2025**; existing access through **December 31, 2027**, priced around $6,000/year for typical teams [\[1\]](https://capgo.app/), offers [automated updates](https://capgo.app/docs/live-updates/update-behavior/)
 
-These tools are stepping in to fill the void left by the closure of CodePush in 2024 and the upcoming end of Appflow in 2026.
+These tools are stepping in to fill the void left by App Center retirement on **March 31, 2025** and Appflow's multi-year wind-down through **December 31, 2027**.
 
 ## Conclusion
 

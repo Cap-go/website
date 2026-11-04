@@ -5,7 +5,7 @@ export const cordova: AlternativeCompetitor = {
   name: 'Apache Cordova',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Apache Cordova Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Apache Cordova with Capacitor and Capgo. Keep your web code and Cordova plugins, add live updates, rollback, and cloud native builds.',
@@ -79,6 +79,10 @@ export const cordova: AlternativeCompetitor = {
       text: 'Cordova is an Apache Software Foundation project under the Apache License 2.0, with no single company behind it.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'You are greenfield and would pick Flutter, React Native, or native stacks instead of a WebView framework.',
+    'You ship a few releases a year, your Cordova app is stable, and you do not need live updates between store builds.',
   ],
   alternatives: [
     {

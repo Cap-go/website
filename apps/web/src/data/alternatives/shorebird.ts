@@ -5,7 +5,7 @@ export const shorebird: AlternativeCompetitor = {
   name: 'Shorebird',
   category: 'live-updates',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-13',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Shorebird Alternative in 2026 | Capgo',
   metaDescription:
     'Shorebird vs Capgo: Flutter code push or Capacitor live updates with cloud native builds. Compare pricing, what you can update, rollback, and open source.',
@@ -77,6 +77,10 @@ export const shorebird: AlternativeCompetitor = {
       text: 'Shorebird Free covers 5,000 patch installs per month. Capgo has a 14-day trial but no free plan.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'Your app is Flutter and you need Dart code push, which Capgo does not provide.',
+    'Capgo has a 14-day trial but no free plan, while Shorebird Free includes monthly patch installs.',
   ],
   alternatives: [
     {

@@ -81,6 +81,8 @@ const better = [
   { title: m.compare_appflow_better_3_title({}, { locale }), text: m.compare_appflow_better_3_text({}, { locale }), sources: [2] },
 ]
 
+const notFor = [m.compare_appflow_not_for_1({}, { locale }), m.compare_appflow_not_for_2({}, { locale })]
+
 const migration = {
   title: m.appflow_migration_how_title({}, { locale }),
   lead: m.compare_appflow_migration_lead({}, { locale }),
@@ -144,6 +146,8 @@ const related = [
     rows={rows}
     sources={sources}
     better={better}
+    notFor={notFor}
+    sourceFile="apps/web/src/pages/alternatives/ionic-appflow.astro"
     migration={migration}
     faq={faq}
     testimonials={productTestimonials.liveUpdate}

@@ -5,7 +5,7 @@ export const nativescript: AlternativeCompetitor = {
   name: 'NativeScript',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best NativeScript Alternative in 2026 | Capgo',
   metaDescription:
     'Compare NativeScript with Capacitor and Capgo. Ship your existing web app to iOS and Android, reuse it on the web, and get live updates and cloud builds.',
@@ -77,6 +77,10 @@ export const nativescript: AlternativeCompetitor = {
       text: 'NativeScript can host UIKit, SwiftUI, Android View, Jetpack Compose, and Flutter UI inside the same app.',
       sources: [3],
     },
+  ],
+  notFor: [
+    'You want real native UI from JavaScript or TypeScript, not a Capacitor WebView around your web app.',
+    'You call platform APIs directly from TypeScript and mix SwiftUI or Compose modules in one native shell.',
   ],
   alternatives: [
     {

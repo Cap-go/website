@@ -5,7 +5,7 @@ export const bitrise: AlternativeCompetitor = {
   name: 'Bitrise',
   category: 'ci-cd',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-13',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Bitrise Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Bitrise and Capgo for Capacitor apps. Capgo Builder signs iOS and Android builds in the cloud and adds live updates and rollback from $12/month.',
@@ -72,6 +72,10 @@ export const bitrise: AlternativeCompetitor = {
       text: 'Bitrise CodePush covers React Native and Expo with a free tier up to 100,000 MAU. Capgo live updates do not support React Native.',
       sources: [2],
     },
+  ],
+  notFor: [
+    'Your app is React Native or you need one CI/CD platform for Flutter, Unity, and native stacks, not Capacitor OTA.',
+    'You ship a few store releases a year and do not need live updates to your web bundle between releases.',
   ],
   alternatives: [
     {

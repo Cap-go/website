@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-07-28T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-11-03T00:00:00.000Z
 head_image: /blog-images/appcenter-migration.webp
 head_image_alt: "Best CodePush Alternatives for Capacitor, Ionic and Cordova Apps Capgo blog illustration"
 keywords: CodePush alternative, App Center replacement, Capacitor CodePush alternative, Ionic CodePush alternative, Cordova CodePush alternative, OTA updates after App Center retirement
@@ -16,6 +16,8 @@ locale: en
 origin: human
 next_blog: appcenter-migration
 ---
+
+**TL;DR:** **Capgo** is the maintained CodePush-style path for Capacitor, Ionic, and Cordova web-layer updates after App Center retirement. **Expo EAS Update** is the default for React Native and Expo apps using `expo-updates`. See the [CodePush vs Capgo](/alternatives/codepush/) comparison table for stack-by-stack notes.
 
 If you are looking for a CodePush alternative in 2026, the right answer depends on your app stack. React Native and Expo teams have a different path from Capacitor, Ionic, and Cordova teams.
 
@@ -40,6 +42,12 @@ Microsoft also published a standalone CodePush server repository as an alternati
 | [Standalone CodePush](https://github.com/microsoft/code-push-server) | Teams that must keep a CodePush-shaped self-hosted workflow | Historically React Native and hybrid CodePush users | CodePush bundle updates | Archived repository | You own hosting, maintenance, security, and long-term support |
 | [Ionic Appflow](https://ionic.io/appflow/) | Existing Appflow customers planning migration | Existing Ionic/Appflow users | Live updates and mobile DevOps | Legacy transition | New commercial sales discontinued; access for existing users through December 31, 2027 |
 | Native app-store workflows | Teams that only ship native releases | iOS and Android native submissions | Full binary releases | Active | Reliable but slow for urgent web-layer fixes |
+
+## When to pick Expo EAS Update instead
+
+- Your app is **React Native or Expo** and already ships with `expo-updates`, so EAS Update matches the runtime Microsoft never built for Capacitor ([EAS Update introduction](https://docs.expo.dev/eas-update/introduction/)).
+- You want OTA tied to **EAS Build** binaries and Expo's runtime version model in one Expo account ([EAS Build introduction](https://docs.expo.dev/build/introduction/)).
+- Your team budgets for Expo's cloud plans and usage rather than self-hosting an archived CodePush server ([Expo pricing](https://expo.dev/pricing)).
 
 ## Choose by migration scenario
 

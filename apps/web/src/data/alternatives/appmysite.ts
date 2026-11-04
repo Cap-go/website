@@ -5,7 +5,7 @@ export const appmysite: AlternativeCompetitor = {
   name: 'AppMySite',
   category: 'web-to-app',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best AppMySite Alternative in 2026 | Capgo',
   metaDescription:
     'Compare AppMySite and Capgo. A no-code app builder with WordPress sync vs Capacitor with live updates, rollback, and cloud native builds you own.',
@@ -71,6 +71,10 @@ export const appmysite: AlternativeCompetitor = {
       text: 'Drag-and-drop design, toggle-based features, and an AI builder let non-technical users build the app.',
       sources: [2],
     },
+  ],
+  notFor: [
+    'Your product is WordPress or WooCommerce synced through AppMySite, not a Capacitor project you develop yourself.',
+    'You need a forever-free Android tier with capped downloads instead of Capgo after its 14-day trial.',
   ],
   alternatives: [
     { name: 'MobiLoud', text: 'Managed service that builds and maintains ecommerce apps, from $1,499/month.', href: 'alternatives/mobiloud' },

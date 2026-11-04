@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-09-01T00:00:00.000Z
-updated_at: 2026-09-17T13:36:23.000Z
+updated_at: 2026-11-03T00:00:00.000Z
 head_image: /blog-images/comparing-ci-cd-platforms-for-capacitor-apps.png
 head_image_alt: Keep your CI. Add Capgo. Native builds, live updates, and device tests.
 keywords: >-
@@ -66,6 +66,8 @@ faq:
       from $9/month at launch and a May 2026 Platform SKU from $19/month with
       Business at $499/month.
 ---
+
+**TL;DR:** Keep **GitHub Actions or GitLab CI** for lint, tests, and web builds, then add **Capgo** for signed native binaries, live updates, and installable previews. **Ionic Appflow** and **Microsoft App Center** are legacy paths in 2026. For maintained comparison tables, see [Capgo alternatives](/alternatives/).
 
 The shortlist for Capacitor CI/CD has shrunk. Microsoft App Center’s build and distribute services retired on March 31, 2025. Ionic Appflow is in a multi-year wind-down. GitHub Actions, GitLab CI, Bitrise, and Codemagic are still here, and they are still good at the jobs they were designed for.
 
@@ -154,7 +156,7 @@ The updater plugin is open source (MPL-2.0) and the backend is open source (AGPL
 
 ### Capawesome Cloud
 
-Capawesome Cloud CI — Native Builds plus Live Updates, now sold as Capawesome Platform — is the other Capacitor-native option that bundles OTA with cloud iOS and Android builds. The product pitch is the opposite of Capgo: **replace** GitHub Actions and GitLab instead of plugging into them.
+Capawesome Cloud CI (Native Builds plus Live Updates, now sold as Capawesome Platform) is the other Capacitor-native option that bundles OTA with cloud iOS and Android builds. The product pitch is the opposite of Capgo: **replace** GitHub Actions and GitLab instead of plugging into them.
 
 Their Native Builds launch post is explicit. No third-party CI/CD. Connect GitHub, GitLab, Bitbucket, or Azure DevOps. Put the pipeline in `capawesome.config.json`. Run it inside Capawesome Cloud. You can trigger a build from a CLI, but the intended workflow is vendor-hosted CI. Git integration, signing, build minutes, live updates, and store submit all sit behind one closed backend. The plugin and CLI are open source. The backend is not. Self-hosting is partial at best: you can host bundles; metadata stays in Capawesome Cloud.
 
@@ -207,6 +209,12 @@ It has the same hole as Bitrise: no managed live updates. You would still upload
 Appflow is the all-in-one Ionic product: native builds, signing, live updates, and store publishing. It is also a replacement CI, not a plugin for GitHub Actions. Ionic announced the commercial wind-down on February 11, 2025. Existing customers keep access through December 31, 2027.
 
 If you are already on Appflow, plan the exit now rather than in late 2027. The like-for-like move is Capgo for live updates and native builds, while you keep (or return to) GitHub Actions for PR automation. Migration: [from Appflow to Capgo](/docs/upgrade/from-appflow-to-capgo/).
+
+## When to pick Ionic Appflow instead
+
+- You are already on Appflow and your access continues through **December 31, 2027** after new sales stopped **February 11, 2025** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
+- You want one Ionic-hosted pipeline for native builds, live updates, and store publishing without calling Capgo from GitHub Actions ([Appflow overview](https://ionic.io/appflow)).
+- Your existing Appflow enterprise plan and Ionic support continue under Ionic's wind-down terms through **December 31, 2027** ([Ionic commercial products announcement](https://ionic.io/blog/important-announcement-the-future-of-ionics-commercial-products)).
 
 ### Microsoft App Center
 

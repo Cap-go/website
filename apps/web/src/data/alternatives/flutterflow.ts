@@ -5,7 +5,7 @@ export const flutterflow: AlternativeCompetitor = {
   name: 'FlutterFlow',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best FlutterFlow Alternative in 2026 | Capgo',
   metaDescription:
     'Compare FlutterFlow with Capacitor and Capgo. Turn your web code into iOS and Android apps, ship live updates without store review, and build in the cloud.',
@@ -80,6 +80,10 @@ export const flutterflow: AlternativeCompetitor = {
       text: 'FlutterFlow generates Flutter and Dart code, so Flutter developers can take over the exported project.',
       sources: [3],
     },
+  ],
+  notFor: [
+    'You design in FlutterFlow and ship generated Flutter, not a Capacitor app from your existing web codebase.',
+    'Capgo has a 14-day trial but no free plan, while FlutterFlow includes a free plan for one editor.',
   ],
   alternatives: [
     {

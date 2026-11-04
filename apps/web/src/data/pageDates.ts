@@ -7,18 +7,20 @@ export interface PageDates {
 }
 
 export const pageDates = {
-  'alternatives/capawesome': { publishedAt: '2025-09-24', updatedAt: '2026-10-28' },
-  'alternatives/codepush': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
-  'alternatives/expo': { publishedAt: '2026-06-18', updatedAt: '2026-09-30' },
-  'alternatives/ionic-appflow': { publishedAt: '2025-09-24', updatedAt: '2026-09-30' },
-  'alternatives/median': { publishedAt: '2026-06-18', updatedAt: '2026-09-30' },
-  'alternatives/voltbuilder': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
-  'reviews/appflow': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
-  'reviews/capawesome': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
-  'reviews/codepush': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
-  'migrate/from-appflow': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
-  'migrate/from-capawesome': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
-  'migrate/from-codepush': { publishedAt: '2026-09-29', updatedAt: '2026-10-15' },
+  'alternatives/capawesome': { publishedAt: '2025-09-24', updatedAt: '2026-11-03' },
+  'alternatives/codepush': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'alternatives/expo': { publishedAt: '2026-06-18', updatedAt: '2026-11-03' },
+  'alternatives/ionic-appflow': { publishedAt: '2025-09-24', updatedAt: '2026-11-03' },
+  'alternatives/median': { publishedAt: '2026-06-18', updatedAt: '2026-11-03' },
+  'alternatives/voltbuilder': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'reviews/appflow': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'reviews/capawesome': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'reviews/codepush': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'migrate/from-appflow': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'migrate/from-capawesome': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'migrate/from-codepush': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'best/appflow-alternative': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
+  'best/codepush-alternative': { publishedAt: '2026-09-29', updatedAt: '2026-11-03' },
 } satisfies Record<string, PageDates>
 
 /** Converts a YYYY-MM-DD date to the ISO timestamp used in JSON-LD and article meta tags. */

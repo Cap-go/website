@@ -5,7 +5,7 @@ export const codemagic: AlternativeCompetitor = {
   name: 'Codemagic',
   category: 'ci-cd',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-13',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Codemagic Alternative in 2026 | Capgo',
   metaDescription:
     'Codemagic vs Capgo for Capacitor: compare Codemagic CI/CD and Codemagic Patch with Capgo hosted live updates, channels, rollback, and cloud native builds.',
@@ -74,6 +74,10 @@ export const codemagic: AlternativeCompetitor = {
       text: 'The Codemagic Patch server is free to run on your own infrastructure up to 1,000,000 monthly active devices, with Apache 2.0 SDKs and CLIs.',
       sources: [6],
     },
+  ],
+  notFor: [
+    'You build Flutter, React Native, Unity, or pure native apps rather than a Capacitor web codebase.',
+    'You want a fully custom codemagic.yaml pipeline and self-hosted Patch on your own machines instead of Capgo cloud OTA.',
   ],
   alternatives: [
     {

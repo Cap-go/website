@@ -5,7 +5,7 @@ export const flutter: AlternativeCompetitor = {
   name: 'Flutter',
   category: 'framework',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Flutter Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Flutter with Capacitor and Capgo. Keep your web stack instead of Dart, ship one codebase to web and mobile, and push live updates without store review.',
@@ -77,6 +77,10 @@ export const flutter: AlternativeCompetitor = {
       text: 'If you start from zero and your team is ready to learn Dart, Flutter avoids the web view layer entirely.',
       sources: [1, 3],
     },
+  ],
+  notFor: [
+    'Your app is Flutter and Dart with custom rendered UI, not a Capacitor WebView wrapping web code.',
+    'You target desktop, embedded, or multi-platform from one Flutter codebase instead of Capacitor plus Capgo OTA.',
   ],
   alternatives: [
     {

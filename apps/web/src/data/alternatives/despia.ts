@@ -5,7 +5,7 @@ export const despia: AlternativeCompetitor = {
   name: 'Despia',
   category: 'web-to-app',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Despia Alternative in 2026 | Capgo',
   metaDescription:
     'Compare Despia and Capgo for shipping a web app to iOS and Android. One-time Despia packs vs open-source Capacitor with live updates, rollback, cloud builds.',
@@ -71,6 +71,10 @@ export const despia: AlternativeCompetitor = {
       text: 'The Despia Platform API adds white-label apps and a custom-branded runtime to a no-code or AI platform.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'You want one-time Despia packs or a white-label runtime for a no-code platform, not Capgo subscription OTA.',
+    'Your team works in no-code or AI builders with Despia plugins rather than maintaining a Capacitor codebase.',
   ],
   alternatives: [
     { name: 'Median', text: 'Managed web-to-app platform with a free tier for testing. Fits no-code sites, with yearly fees for paid licenses.', href: 'alternatives/median' },

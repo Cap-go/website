@@ -49,6 +49,8 @@ export interface AlternativeCompetitor {
   capgoRows?: Partial<Record<ComparisonRowId, string>>
   /** 2 or 3 honest cases where the competitor is the better pick. */
   better: Array<{ title: string; text: string; sources?: number[] }>
+  /** 2 bullets: when Capgo is not the right fit (ICP honesty). */
+  notFor?: string[]
   /** 4 to 6 other alternatives, ranked after Capgo. Do not include the competitor itself. */
   alternatives: AlternativeOption[]
   migration: {

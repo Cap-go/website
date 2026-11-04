@@ -5,7 +5,7 @@ export const hotUpdater: AlternativeCompetitor = {
   name: 'Hot Updater',
   category: 'live-updates',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-10-12',
+  updatedAt: '2026-11-03',
   metaTitle: 'Best Hot Updater Alternative in 2026 | Capgo',
   metaDescription:
     'Hot Updater vs Capgo: self-hosted React Native OTA or managed Capacitor live updates with cloud builds. Compare cost, rollback, open source, and support.',
@@ -72,6 +72,10 @@ export const hotUpdater: AlternativeCompetitor = {
       text: 'Ready-made storage and database adapters for Supabase, Cloudflare R2 and D1, AWS, and Firebase fit into infrastructure you already pay for.',
       sources: [1],
     },
+  ],
+  notFor: [
+    'Your app is React Native or Expo, which Capgo does not update.',
+    'You want zero vendor OTA fees and already host updates on Supabase, Cloudflare, or AWS with Hot Updater.',
   ],
   alternatives: [
     {

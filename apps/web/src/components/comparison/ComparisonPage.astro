@@ -52,6 +52,10 @@ interface Props {
   capgoRows?: Partial<Record<ComparisonRowId, string>>
   /** Ranked list of alternatives shown after the hero. Capgo is always listed first. */
   ranking?: Array<{ name: string; text: string; href: string; external?: boolean }>
+  /** Honest ICP: when Capgo is not the right pick (shown under competitor "better" cards). */
+  notFor?: string[]
+  /** Repo path for corrections link, e.g. apps/web/src/data/alternatives/shorebird.ts */
+  sourceFile?: string
 }
 
 const {
@@ -72,7 +76,12 @@ const {
   related = [],
   capgoRows = {},
   ranking = [],
+  notFor = [],
+  sourceFile,
 } = Astro.props
+
+const websiteRepoUrl = 'https://github.com/Cap-go/website'
+const sourceFileUrl = sourceFile ? `${websiteRepoUrl}/blob/main/${sourceFile}` : undefined
 
 const locale = Astro.locals.locale
 
@@ -227,6 +236,23 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
             </li>
           ))}
         </ol>
+        <p class="cmp-corrections">
+          {m.compare_corrections_prefix({ competitor }, { locale })}{' '}
+          <a href="mailto:support@capgo.app">{m.compare_corrections_email({}, { locale })}</a>
+          {m.compare_corrections_or({}, { locale })}{' '}
+          <a href={websiteRepoUrl} target="_blank" rel="noopener noreferrer">
+            {m.compare_corrections_repo({}, { locale })}
+          </a>
+          {sourceFileUrl && (
+            <>
+              {m.compare_corrections_source_sep({}, { locale })}{' '}
+              <a href={sourceFileUrl} target="_blank" rel="noopener noreferrer">
+                {m.compare_corrections_source_file({}, { locale })}
+              </a>
+            </>
+          )}
+          .
+        </p>
       </div>
       <slot name="after-table" />
     </div>
@@ -254,6 +280,16 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
           </article>
         ))}
       </div>
+      {notFor.length > 0 && (
+        <div class="cmp-not-for">
+          <h3>{m.compare_not_for_title({}, { locale })}</h3>
+          <ul>
+            {notFor.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   </section>
 

@@ -74,7 +74,10 @@ const rows = {
 const better = [
   { title: m.compare_codepush_better_1_title({}, { locale }), text: m.compare_codepush_better_1_text({}, { locale }), sources: [2] },
   { title: m.compare_codepush_better_2_title({}, { locale }), text: m.compare_codepush_better_2_text({}, { locale }), sources: [2] },
+  { title: m.compare_codepush_better_3_title({}, { locale }), text: m.compare_codepush_better_3_text({}, { locale }), sources: [2, 3] },
 ]
+
+const notFor = [m.compare_codepush_not_for_1({}, { locale }), m.compare_codepush_not_for_2({}, { locale })]
 
 const migration = {
   title: m.codepush_alt_migrate_title({}, { locale }),
@@ -110,6 +113,8 @@ const related = [
     rows={rows}
     sources={sources}
     better={better}
+    notFor={notFor}
+    sourceFile="apps/web/src/pages/alternatives/codepush.astro"
     migration={migration}
     testimonials={productTestimonials.liveUpdate}
     faq={faq}
