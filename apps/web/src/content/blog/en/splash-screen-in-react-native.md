@@ -55,11 +55,11 @@ faq:
       then hide from JS. Rebuild native projects after asset or theme changes.
   - question: Can I use an animated splash screen in React Native or Expo?
     answer: >-
-      Native launch screens stay static on iOS and on Android 12+. Keep the
-      expo-splash-screen or bootsplash image simple, hide when the app is ready,
-      then run a short Lottie or React Native animation on the first screen.
-      Avoid setTimeout delays that hide the splash before or after real loading
-      finishes.
+      iOS launch screens stay static. Android 12+ system splash screens can use
+      a short animated icon on the native layer, but most Expo and React Native
+      teams keep the native asset simple, hide when the app is ready, then run a
+      Lottie or React Native animation on the first screen. Avoid setTimeout
+      delays that hide the splash before or after real loading finishes.
   - question: I am choosing React Native or Capacitor for a new app. Where does the splash screen fit?
     answer: >-
       React Native splash screens are configured with expo-splash-screen or bare
@@ -309,7 +309,7 @@ If your splash still flashes or lingers, the bug is usually one of three things:
 
 A bare React Native app gives you direct control over launch behavior. For **new bare CLI projects**, [`react-native-bootsplash`](https://github.com/zoontek/react-native-bootsplash) is the maintained option (active releases through 2026 and aligned with current React Native support policy). Many production apps still ship [`react-native-splash-screen`](https://github.com/crazycodeboy/react-native-splash-screen); treat it as **legacy maintenance** unless you are already integrated.
 
-**Animated splash screen (React Native or Expo):** iOS launch storyboards and Android 12+ splash rules stay **static**. Hide the native splash when startup work finishes, then play a short Lottie or React animation on the first screen. See [animation performance in Capacitor apps](/blog/ultimate-guide-to-animation-performance-in-capacitor-apps/) for the same startup discipline on another stack.
+**Animated splash screen (React Native or Expo):** iOS **`LaunchScreen.storyboard`** stays static. Android 12+ can show a brief **animated vector icon** in the system splash, but **`expo-splash-screen`** and most bare CLI setups still use a **static PNG** and move motion into the first React screen (for example Lottie). Hide the native splash when startup work finishes, then animate there. See [animation performance in Capacitor apps](/blog/ultimate-guide-to-animation-performance-in-capacitor-apps/) for the same startup discipline on another stack.
 
 In CLI projects, the native handoff goal is unchanged: show launch UI immediately, then hide only after meaningful UI can render.
 
@@ -373,7 +373,7 @@ This is the key difference between Expo-managed and bare CLI. Expo gives you a f
 
 That trade-off becomes useful when startup is doing more than loading a bundle. Apps with auth restoration, encrypted storage reads, custom native SDK initialization, or white-label branding rules often need the extra control. Bare projects let you align the splash timing with that work instead of forcing everything through higher-level configuration.
 
-If you plan to add an animated transition after launch, keep the native splash static and move motion into the first React screen. The performance trade-offs are similar to what matters in any mobile startup path. Heavy work during the first paint is expensive. This [guide to animation performance in Capacitor apps](https://capgo.app/blog/ultimate-guide-to-animation-performance-in-capacitor-apps/) covers the same principle from another stack, and the lesson carries over cleanly to React Native.
+If you plan to add an animated transition after launch, keep the native splash static on iOS and prefer a static asset on Android unless you deliberately configure the Android 12 animated icon. Move motion into the first React screen. The performance trade-offs are similar to what matters in any mobile startup path. Heavy work during the first paint is expensive. This [guide to animation performance in Capacitor apps](/blog/ultimate-guide-to-animation-performance-in-capacitor-apps/) covers the same principle from another stack, and the lesson carries over cleanly to React Native.
 
 <a id="expo-managed-versus-bare-cli"></a>
 ### Expo-managed versus bare CLI
@@ -493,7 +493,7 @@ In Expo, **`preventAutoHideAsync()`** plus returning **`null`** until async work
 Install **react-native-bootsplash**, generate assets, initialize natively, hide from JS when startup finishes. Legacy projects may keep **react-native-splash-screen** with **`SplashScreen.show()`** / **`hide()`** instead. Rebuild after native asset changes.
 
 **Can I use an animated splash screen in React Native or Expo?**  
-Keep the native launch image static. Hide when ready, then animate in React (for example Lottie). Do not rely on **`setTimeout`** to fake loading time.
+On **iOS**, keep the launch screen static. On **Android 12+**, the system splash can use a short animated icon, but most teams keep **`expo-splash-screen`** or bootsplash assets static, hide when ready, then animate in React (for example Lottie). Do not rely on **`setTimeout`** to fake loading time.
 
 **Where does splash setup differ between React Native and Capacitor?**  
 React Native uses **expo-splash-screen** or bare CLI libraries before JS runs. Capacitor uses native launch screens plus **`@capacitor/splash-screen`** in the WebView stack. See [Comparing React Native vs Capacitor](/blog/comparing-react-native-vs-capacitor/) and [Capacitor app initialization](/blog/capacitor-app-initialization-step-by-step-guide/).
