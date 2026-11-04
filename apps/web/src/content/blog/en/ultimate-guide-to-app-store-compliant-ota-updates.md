@@ -1,7 +1,7 @@
 ---
 slug: ultimate-guide-to-app-store-compliant-ota-updates
-title: "OTA App Updates: App Store and Google Play Rules"
-description: "OTA updates for mobile apps ship JavaScript, HTML, and CSS without a new store binary. Learn over the air updates vs phone system patches, Apple Guideline 2.5.2, and compliant OTA apps on iOS and Android."
+title: "OTA Apps: How Over the Air Updates Pass App Store Rules"
+description: "What OTA apps are and how over the air updates stay App Store and Google Play compliant: Guideline 2.5.2, what you can ship, and what needs review."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx

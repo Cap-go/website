@@ -1,10 +1,7 @@
 ---
 slug: splash-screen-in-react-native
-title: 'React Native Splash Screen: Expo, Bootsplash, and Bare CLI (2026)'
-description: >-
-  React Native splash screen setup for Expo (expo-splash-screen in app.json,
-  preventAutoHideAsync) and bare CLI (react-native-bootsplash,
-  react-native-splash-screen). Loading screens, animated splash tips, and fixes.
+title: "React Native Splash Screen: Expo and Bare Setup (2026)"
+description: "Add a React Native splash screen in 2026: expo-splash-screen in Expo, react-native-bootsplash in bare apps, and how Capacitor handles splash screens."
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'

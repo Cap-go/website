@@ -1,7 +1,7 @@
 ---
 slug: app-store-age-ratings-guide
-title: How to Change App Age Rating on iPhone and Android
-description: Set app age limits on iPhone (Screen Time) and Android (Play controls). How developers set store ratings in App Store Connect and Google Play.
+title: "App Age Rating Settings: Change Them on iPhone and Android"
+description: "Change app age rating settings on iPhone with Screen Time and on Android with Google Play and Family Link, plus how developers set store ratings."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
