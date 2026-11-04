@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T03:05:03.046Z",
+  "updatedAt": "2026-11-04T03:05:30.793Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -37,6 +37,18 @@
   "releases": [
     {
       "repo": "Cap-go/capgo.app",
+      "tag": "capgo-22.29.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.2",
+      "publishedAt": "2026-11-03T15:10:26Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "capgo-22.29.1",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.1",
+      "publishedAt": "2026-11-03T09:36:47Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
       "tag": "capgo-22.29.0",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.0",
       "publishedAt": "2026-11-02T22:19:07Z"
@@ -49,31 +61,18 @@
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.28.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.0",
-      "publishedAt": "2026-10-30T09:23:11Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
       "tag": "cli-8.99.1",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.1",
       "publishedAt": "2026-10-29T13:23:06Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.99.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.0",
-      "publishedAt": "2026-10-29T02:00:36Z"
     }
   ],
   "metrics": {
     "live": {
-      "success_rate": 84.6,
+      "success_rate": 84.8,
       "first_try_rate": 98.3,
-      "rollback_rate": 14.5,
-      "updated_at": "2026-11-03T03:04:50.606Z",
+      "rollback_rate": 14.3,
+      "updated_at": "2026-11-04T03:05:18.217Z",
       "daily": [
-        74.9,
         79.1,
         82.1,
         84.5,
@@ -102,12 +101,13 @@
         88,
         85.6,
         84.4,
+        86.1,
         86.1
       ]
     },
     "builder": {
-      "success_rate": 79.6,
-      "updated_at": "2026-11-03T03:04:50.609Z"
+      "success_rate": 79.3,
+      "updated_at": "2026-11-04T03:05:18.083Z"
     }
   }
 }

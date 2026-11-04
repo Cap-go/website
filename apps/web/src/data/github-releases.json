@@ -1,6 +1,22 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.29.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.2",
+    "pubDate": "2026-11-03T15:10:26.000Z",
+    "description": "🆕 Changelog Fixed Improved DialogV2 button states using DaisyUI styles. Dialog action buttons now leverage DaisyUI's built in state styling, making interactive states clearer and more consistent across the console. Darkened the light mode error color. Error text and indicators are now easier to read in light themes, improving accessibility and reducing eye strain. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.29.1...capgo 22.29.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.29.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.1",
+    "pubDate": "2026-11-03T09:36:47.000Z",
+    "description": "🆕 Changelog Fixed Prevented transient Stripe read failures from incorrectly marking organizations as canceled, improving reliability of subscription status checks. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.29.0...capgo 22.29.1"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.29.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.0",
@@ -302,22 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.2",
     "pubDate": "2026-10-27T05:20:33.000Z",
     "description": "🆕 Changelog Changed Improved database write performance by skipping unnecessary onboarding and user locks during no op writes, reducing lock contention. Updated the stored credentials encryption key to derive from by default, simplifying setup and improving key consistency across environments. Fixed Fixed billing notification emails to link directly to the console billing page for easier payment management. Fixed image migration scripts to accept the Supabase pooler TLS certificate, resolvin..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.21.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.1",
-    "pubDate": "2026-10-27T04:58:56.000Z",
-    "description": "🆕 Changelog Fixed Fixed redirect handling in the CLI/SDK so it now works reliably on Cloudflare Workers ( 3934). Removed an orphaned Bento dispatch worker from deployments, preventing stale resources ( 3931). 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.98.0...capgo 22.21.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.21.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.0",
-    "pubDate": "2026-10-27T04:29:40.000Z",
-    "description": "🆕 Changelog Added Enable signed URL bundle uploads and native builds directly from the hosted MCP server, simplifying the build and upload workflow. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.20.0...capgo 22.21.0"
   },
   {
     "category": "release",
@@ -721,11 +721,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-inappbrowser 8.27.0",
-    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.0",
-    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.0",
-    "pubDate": "2026-10-28T19:22:53.000Z",
-    "description": "🆕 Changelog Security Added trusted origin enforcement for JavaScript bridges. Only web content served from configured trusted origins can now invoke native bridges, which helps prevent malicious pages from accessing app capabilities. Breaking change / Migration: If your app relies on JavaScript bridges from non trusted origins, you must add those origins to your trusted origins configuration. Bridges are no longer injected for untrusted origins. Changed Updated to 8.2.6 for the latest bug fi..."
+    "title": "capacitor-inappbrowser 8.27.2",
+    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.2",
+    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.2",
+    "pubDate": "2026-11-03T19:30:47.000Z",
+    "description": "🆕 Changelog Fixed Fixed incorrect handling of same host HTTPS URLs when using a custom hostname. Assets served over HTTPS from the same host are no longer incorrectly treated as bundled/local assets, ensuring URLs are processed consistently and preventing broken links. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.27.1...8.27.2"
   },
   {
     "category": "release",
@@ -881,11 +881,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-audio 8.4.38",
-    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.38",
-    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.38",
-    "pubDate": "2026-10-19T11:55:56.000Z",
-    "description": "🆕 Changelog Changed Updated the build dependency to v1.4.3. Fixed Updated the Android dependency to v1.11.1 to resolve media player UI compatibility issues. Updated the example app to call the Capgo updater method, ensuring live updates are applied correctly after deployment. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.4.37...8.4.38"
+    "title": "capacitor-native-audio 8.4.39",
+    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.39",
+    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.39",
+    "pubDate": "2026-11-04T01:44:32.000Z",
+    "description": "🆕 Changelog Fixed Android NativeAudio : Removed type references from the NativeAudio plugin class, improving compatibility on older Android devices. ( 347) Updated the Google Services Gradle plugin ( ) to v4.5.0, incorporating the latest upstream fixes. ( 345) Changed Updated internal tooling: Bun to v1.4.4. ( 344) Updated CI/CD actions: to v6. ( 349) to v7. ( 348) 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.4.38...8.4.39"
   },
   {
     "category": "release",
@@ -1225,11 +1225,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-streamcall 8.0.78",
-    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.78",
-    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.78",
-    "pubDate": "2026-11-02T23:17:18.000Z",
-    "description": "🆕 Changelog Changed Updated Hono framework dependency to v4.13.14 for improved stability and compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.77...8.0.78"
+    "title": "capacitor-streamcall 8.0.79",
+    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.79",
+    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.79",
+    "pubDate": "2026-11-03T03:38:23.000Z",
+    "description": "🆕 Changelog Changed Updated internal Node.js type definitions to v24.19.2 for improved type accuracy and compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.78...8.0.79"
   },
   {
     "category": "release",

@@ -1,6 +1,6 @@
 {
   "https://github.com/Cap-go/capacitor-native-market/": 18,
-  "https://github.com/Cap-go/capacitor-native-navigation/": 43,
+  "https://github.com/Cap-go/capacitor-native-navigation/": 44,
   "https://github.com/Cap-go/capacitor-native-map/": 2,
   "https://github.com/Cap-go/capacitor-native-loader/": 3,
   "https://github.com/Cap-go/capacitor-asset-cache/": 4,
@@ -72,7 +72,7 @@
   "https://github.com/Cap-go/capacitor-launch-navigator/": 10,
   "https://github.com/Cap-go/capacitor-live-activities/": 8,
   "https://github.com/Cap-go/capacitor-live-reload/": 11,
-  "https://github.com/Cap-go/capacitor-llm/": 44,
+  "https://github.com/Cap-go/capacitor-llm/": 45,
   "https://github.com/Cap-go/capacitor-media-session/": 11,
   "https://github.com/Cap-go/capacitor-mux-player/": 11,
   "https://github.com/Cap-go/capacitor-pay/": 13,
