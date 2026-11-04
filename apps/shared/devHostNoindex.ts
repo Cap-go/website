@@ -7,7 +7,7 @@ export function isNoindexHost(hostname: string): boolean {
 
 export function withDevHostNoindex(request: Request, response: Response): Response {
   if (!isNoindexHost(new URL(request.url).hostname)) return response
-  if (response.status === 101 || response.webSocket) return response
+  if (response.status === 101) return response
   const headers = new Headers(response.headers)
   headers.set('X-Robots-Tag', 'noindex, nofollow')
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
