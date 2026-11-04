@@ -120,7 +120,7 @@ Azure Pipelines provides Microsoft-hosted macOS agents (`macOS-latest`) and supp
 bunx @capgo/cli@latest build request com.example.app --platform ios --build-mode release
 ```
 
-Capgo Build compiles and signs the iOS app in the cloud, streams logs back to the Linux CI job, increments the build number from App Store Connect, and uploads to TestFlight. `--submit-to-store-review` sends it to App Review. Run `bunx @capgo/cli@latest build init --platform ios` once during setup, then export the resulting credentials as CI secrets. The CI job should run `bunx @capgo/cli@latest build request`; Capgo receives the credentials for that build only.
+Capgo Build compiles and signs the iOS app in the cloud, streams logs back to the Linux CI job, increments the build number from App Store Connect, and uploads to TestFlight. `--submit-to-store-review` sends it to App Review. Run `bunx @capgo/cli@latest build init --platform ios` once during setup to save credentials in Capgo; the CI job then needs `CAPGO_TOKEN` when it runs `bunx @capgo/cli@latest build request`. Alternatively, use `bunx @capgo/cli@latest build credentials manage` to export signing and App Store Connect values as CI secrets, and pass them with `CAPGO_TOKEN` to the request.
 
 Limits worth knowing: it only builds Capacitor apps, and a single build has a 10-minute limit. Its main advantage is that no job in your pipeline needs a macOS runner, and the same CLI ships [live updates](/live-update/) for web-only changes so many releases skip the native build entirely.
 
