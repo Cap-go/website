@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-03T09:15:23.535Z
-updated_at: 2026-11-02T11:15:00.000Z
+updated_at: 2026-11-04T13:21:46.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/e3751602-0124-4684-ad22-20a67d988230/client-id-google-guide.jpg'
 head_image_alt: 'Google OAuth client ID setup in Google Cloud Console for Web, Android, and iOS apps'
 keywords: 'google client id, client id google, oauth 2.0 client id, google cloud console credentials, android client id, apps googleusercontent com client id'
