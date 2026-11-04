@@ -32,7 +32,7 @@ next_blog: ''
     -   Voice Recognition: Accessibility-focused (limited support).
 -   **Key Tools Required:**
     
-    -   Capacitor 3.0+.
+    -   Capacitor 7.0+.
 -   **Setup Highlights:**
     
     -   Add permissions to AndroidManifest and Info.plist.
@@ -62,7 +62,7 @@ Before diving into the implementation, ensure the following tools and dependenci
 
 | Component | Minimum Version | Purpose |
 | --- | --- | --- |
-| **Capacitor** | 3.0 or higher | Core framework |
+| **Capacitor** | 7.0 or higher | Core framework |
 | **[Node.js](https://nodejs.org/en)** | Latest LTS | Package management |
 | **[Xcode](https://developer.apple.com/xcode/)** | Latest version | iOS development |
 | **[Android Studio](https://developer.android.com/studio)** | Latest version | Android development |
@@ -148,11 +148,11 @@ When picking a biometric authentication plugin for your Capacitor app, your choi
 Here's how to use the **@capgo/capacitor-native-biometric** plugin for biometric authentication:
 
 ```typescript
-import { Biometrics } from '@capgo/capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function setupBiometricAuth() {
   try {
-    const { isAvailable } = await Biometrics.isBiometricsAvailable();
+    const { isAvailable } = await NativeBiometric.isAvailable();
 
     if (!isAvailable) {
       return {
@@ -161,17 +161,13 @@ async function setupBiometricAuth() {
       };
     }
 
-    const result = await Biometrics.authenticate({
+    await NativeBiometric.verifyIdentity({
       reason: "Access your secure data",
       title: "Verify Identity",
-      subtitle: "Use biometrics to authenticate",
-      cancelTitle: "Use Password Instead"
+      subtitle: "Use biometrics to authenticate"
     });
 
-    return {
-      success: true,
-      data: result
-    };
+    return { success: true };
   } catch (error) {
     return {
       success: false,
@@ -220,7 +216,7 @@ To ensure your biometric authentication is reliable and secure, consider these t
     ```typescript
     async function runCompatibilityTests() {
       const tests = {
-        biometricAvailable: await Biometrics.isBiometricsAvailable(),
+        biometricAvailable: (await NativeBiometric.isAvailable()).isAvailable,
         credentialStorage: await testCredentialStorage(),
         authenticationFlow: await testAuthFlow(),
         fallbackMechanism: await testFallbackAuth()
@@ -238,7 +234,7 @@ To ensure your biometric authentication is reliable and secure, consider these t
     async function validateErrorHandling() {
       try {
         await Promise.race([
-          Biometrics.authenticate(),
+          NativeBiometric.verifyIdentity(),
           new Promise((_, reject) =>
             setTimeout(() => reject(new Error("Timeout")), 30000)
           )
@@ -321,18 +317,19 @@ Enhancing security often requires combining [biometric verification](https://cap
 ```typescript
 async function setupMultiFactorAuth() {
   // First factor: Biometric verification
-  const biometricResult = await Biometrics.authenticate({
-    reason: "Verify your identity",
-    title: "Authentication Required"
-  });
-
-  if (biometricResult.verified) {
-    // Second factor: Time-based OTP or similar mechanism
-    const totpResult = await verifyTOTP();
-    return totpResult.success;
+  // verifyIdentity rejects if the user cancels or fails the check
+  try {
+    await NativeBiometric.verifyIdentity({
+      reason: "Verify your identity",
+      title: "Authentication Required"
+    });
+  } catch {
+    return false;
   }
 
-  return false;
+  // Second factor: Time-based OTP or similar mechanism
+  const totpResult = await verifyTOTP();
+  return totpResult.success;
 }
 ```
 
