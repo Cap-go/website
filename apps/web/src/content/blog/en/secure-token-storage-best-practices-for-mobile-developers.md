@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-27T04:28:18.512Z
-updated_at: 2026-11-05T10:45:00.000Z
+updated_at: 2026-11-05T10:52:00.000Z
 head_image: /blog-images/secure-token-storage-best-practices-for-mobile-developers.webp
 head_image_alt: 'How to securely store access and refresh tokens on mobile with Keychain and Keystore'
 keywords: 'most secure way to store access tokens in a modern app, securely manage and rotate refresh tokens in a mobile app, secure storage of access tokens and refresh tokens, how do you implement secure token storage, should mobile apps store refresh tokens, access token storage best practices, secure token storage, token storage mobile'
@@ -63,7 +63,7 @@ Google deprecated the `androidx.security.crypto` helpers, including [`EncryptedS
 
 Use one Tink-backed pipeline end to end:
 
-1. Build a Tink keyset with `AndroidKeysetManager`, storing the master key in Android Keystore via an `android-keystore://` URI (see the [`datastore-tink` release notes](https://developer.android.com/jetpack/androidx/releases/datastore)).
+1. Build a Tink keyset with `AndroidKeysetManager`, storing the master key in Android Keystore via an `android-keystore://` URI (see the [`datastore-tink` release notes](https://developer.android.com/jetpack/androidx/releases/datastore)). Call `isUsingKeystore()` on the manager and fail closed when it returns `false`. Tink can otherwise store the keyset in cleartext.
 2. Obtain an `Aead` primitive from that keyset.
 3. Add `androidx.datastore:datastore-tink` ([DataStore 1.3.0](https://developer.android.com/jetpack/androidx/releases/datastore#1.3.0) ships the artifact; 1.2.x does not), wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer), and pass it to `DataStore`. When multiple stores share one `Aead` key, give each store unique `associatedData`, such as a stable value derived from its filename.
 
