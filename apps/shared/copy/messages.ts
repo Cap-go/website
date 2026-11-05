@@ -2543,7 +2543,7 @@ const messages = {
   instant_ota_updates_capacitor: 'Instant OTA updates for Capacitor apps',
   instant_rollback: 'Instant Rollback',
   instant_updates: 'Push fixes without a store release',
-  instant_updates_for_capacitor: 'Capacitor Live Updates, Native Builds and AI Skills',
+  instant_updates_for_capacitor: 'Build Capacitor apps with AI, ship live updates instantly',
   instant_updates_for_capacitor_apps: 'Live updates for Capacitor apps',
   instant_updates_for_capacitor_apps_description:
     'When a web-layer bug is live, ship the fix through Capgo instead of waiting days for app store approval. Users get the update in the background while native changes stay in the normal review path.',

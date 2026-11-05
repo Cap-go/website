@@ -208,14 +208,14 @@ test('createHomepageLdJsonGraph matches homepage structured data policy', () => 
     description: 'Build Capacitor apps with AI and ship updates instantly.',
     homepageUrl: 'https://capgo.app/',
     inLanguage: 'en',
-    applicationSubCategory: 'Capacitor Live Updates, Native Builds and AI Skills',
+    applicationSubCategory: 'Build Capacitor apps with AI, ship live updates instantly',
     featureList: homepageFeatureList,
     offers: homepageOffers,
   })
 
   expectHomepageGraph(graph, 'https://capgo.app/')
   const software = graph['@graph'].find((node) => node['@type'] === 'SoftwareApplication')
-  expect(software.applicationSubCategory).toBe('Capacitor Live Updates, Native Builds and AI Skills')
+  expect(software.applicationSubCategory).toBe('Build Capacitor apps with AI, ship live updates instantly')
 })
 
 test('createHomepageLdJsonGraph uses locale homepage URLs for translated homepages', () => {
