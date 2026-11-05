@@ -91,8 +91,8 @@ const alternateVersions = locales.map((locale) => {
 
 const { Content, headings } = await render(entry)
 // Takeaways: frontmatter first, else the post's own "Quick answer" paragraph, else hidden.
-const quickAnswer = entry.body?.match(/^\*\*Quick answer:\*\*\s*(.+)$/m)?.[1]
-const quickAnswerText = quickAnswer ? striptags(quickAnswer).replace(/\*\*|`/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim() : ''
+const quickAnswer = entry.body?.match(/(?:^|\n)\*\*Quick answer:\*\*[ \t]*([\s\S]+?)(?=\r?\n[ \t]*\r?\n|$)/)?.[1]
+const quickAnswerText = quickAnswer ? striptags(quickAnswer).replace(/\*\*|`/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\s+/g, ' ').trim() : ''
 // Answer first: keep only the first sentence of the quick answer so the box stays short.
 const quickAnswerLead = quickAnswerText.match(/^.+?[.!?](?=\s|$)/)?.[0] ?? quickAnswerText
 const takeaways = entry.data.takeaways?.length ? entry.data.takeaways : quickAnswerLead && quickAnswerLead.length <= 400 ? [quickAnswerLead] : []
