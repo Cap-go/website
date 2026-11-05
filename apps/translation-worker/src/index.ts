@@ -1,6 +1,7 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
+import { withDevHostNoindex } from '../../shared/devHostNoindex'
 import { isGonePath } from '../../shared/gonePaths'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
@@ -3144,12 +3145,7 @@ function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): stri
   return rewritten
 }
 
-function rewriteMetadataAndLinks(
-  html: string,
-  requestUrl: URL,
-  locale: Locale,
-  options?: { preserveDocumentLanguage?: boolean },
-): string {
+function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, options?: { preserveDocumentLanguage?: boolean }): string {
   const basePath = stripLocalePrefix(requestUrl.pathname)
   const localizedUrl = localizedAbsoluteUrl(requestUrl, locale, basePath)
   let rewritten = options?.preserveDocumentLanguage ? html : updateHtmlLang(html, locale)
@@ -3190,11 +3186,7 @@ async function purgeTranslatedPageCache(env: Env, requestUrl: URL, locale: Local
   }
 }
 
-async function fetchBrandedGoneShellHtml(
-  request: Request,
-  env: Env,
-  requestUrl: URL,
-): Promise<{ html: string; headers: Headers } | null> {
+async function fetchBrandedGoneShellHtml(request: Request, env: Env, requestUrl: URL): Promise<{ html: string; headers: Headers } | null> {
   try {
     let shellUrl = new URL(requestUrl)
     shellUrl.pathname = '/410/'
@@ -3220,14 +3212,7 @@ async function fetchBrandedGoneShellHtml(
   }
 }
 
-async function serveGonePathResponse(
-  request: Request,
-  env: Env,
-  requestUrl: URL,
-  locale: Locale,
-  ctx: WorkerExecutionContext | undefined,
-  isHead: boolean,
-): Promise<Response> {
+async function serveGonePathResponse(request: Request, env: Env, requestUrl: URL, locale: Locale, ctx: WorkerExecutionContext | undefined, isHead: boolean): Promise<Response> {
   scheduleTranslationBackgroundTask(ctx, purgeTranslatedPageCache(env, requestUrl, locale))
 
   const shell = await fetchBrandedGoneShellHtml(request, env, requestUrl)
@@ -4086,7 +4071,7 @@ export const __translationWorkerTest = {
   pickShortestWordCountCandidate,
 }
 
-export default {
+const baseWorker = {
   async fetch(request: Request, env: Env, ctx?: WorkerExecutionContext): Promise<Response> {
     const requestUrl = new URL(request.url)
     if (env.TRANSLATION_TEST_MODE === '1' && requestUrl.pathname.startsWith(TRANSLATION_TEST_ROUTE_PREFIX)) {
@@ -4130,11 +4115,7 @@ export default {
     }
 
     if (isGonePath(requestUrl.pathname)) {
-      return trackAICrawler(
-        request,
-        await serveGonePathResponse(request, env, requestUrl, locale, ctx, request.method === 'HEAD'),
-        ctx,
-      )
+      return trackAICrawler(request, await serveGonePathResponse(request, env, requestUrl, locale, ctx, request.method === 'HEAD'), ctx)
     }
 
     const englishPath = stripLocalePrefix(requestUrl.pathname)
@@ -4188,5 +4169,12 @@ export default {
         }
       }
     }
+  },
+}
+
+export default {
+  ...baseWorker,
+  async fetch(request: Request, env: Env, ctx?: WorkerExecutionContext): Promise<Response> {
+    return withDevHostNoindex(request, await baseWorker.fetch(request, env, ctx))
   },
 }

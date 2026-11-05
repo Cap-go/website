@@ -7,6 +7,7 @@ import {
   OPENAPI_ASSET_PATH,
   prefersMarkdown,
 } from '../../../shared/agentDiscovery'
+import { withDevHostNoindex } from '../../../shared/devHostNoindex'
 import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
@@ -524,6 +525,6 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
 
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
-    return withAbTest(request, await handleRequest(request, env, ctx), env)
+    return withDevHostNoindex(request, await withAbTest(request, await handleRequest(request, env, ctx), env))
   },
 }
