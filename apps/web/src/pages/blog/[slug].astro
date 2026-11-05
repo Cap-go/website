@@ -314,12 +314,24 @@ content['ldJSON'] =
     const box = link?.closest<HTMLElement>('[data-blog-cta]')
     if (!link || !box) return
     const slug = window.location.pathname.split('/').filter(Boolean).pop() ?? ''
-    ;(window as any).posthog?.capture('blog_cta_click', {
+    const ph = (window as any).posthog
+    ph?.capture('blog_cta_click', {
       position: box.dataset.blogCta,
       cta_id: box.dataset.ctaId ?? link.id ?? box.dataset.blogCta,
       slug,
       href: link.getAttribute('href'),
     })
+    // The stub only queues in memory until the SDK loads, so hold a plain same-tab click briefly
+    // until it has loaded and can flush the event on page hide. Never wait more than 800 ms.
+    const plainClick = event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey
+    if (!ph || ph.__loaded || !plainClick || (link.target && link.target !== '_self') || event.defaultPrevented) return
+    event.preventDefault()
+    const started = Date.now()
+    const go = () => {
+      if ((window as any).posthog?.__loaded || Date.now() - started > 800) window.location.assign(link.href)
+      else setTimeout(go, 50)
+    }
+    go()
   })
   document.addEventListener('DOMContentLoaded', () => {
     // Heading slugs may start with a digit (e.g. "1-foo"); getElementById avoids invalid CSS selectors.

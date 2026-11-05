@@ -1,4 +1,5 @@
 ---
+import OfferText from '@/components/OfferText.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -45,9 +46,8 @@ const mapped = tags.map((t) => TAG_CTAS[t]).find(Boolean)
 const ctaId = cta ? 'frontmatter' : (mapped?.id ?? 'default')
 const chosen = cta ?? mapped
 const title = chosen?.title ?? m.blog_sidebar_cta_lead({}, { locale })
-const text = chosen?.text ?? `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
+const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
 const href = chosen?.href ?? register
-const label = chosen?.label ?? m.solutions_start_free_trial({}, { locale })
 ---
 
 <aside
@@ -58,9 +58,9 @@ const label = chosen?.label ?? m.solutions_start_free_trial({}, { locale })
 >
   <div>
     <p class="text-lg font-semibold text-white">{title}</p>
-    <p class="mt-1 text-gray-300">{text}</p>
+    <p class="mt-1 text-gray-300">{chosen?.text ?? <OfferText direct={m.direct_offer_guarantee_note({}, { locale })}>{trialNote}</OfferText>}</p>
   </div>
   <a id="blog-top-cta-link" href={href} class="inline-flex shrink-0 items-center justify-center rounded-lg bg-azure-500 px-5 py-2.5 font-semibold text-white hover:bg-azure-400">
-    {label}
+    {chosen?.label ?? <OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.solutions_start_free_trial({}, { locale })}</OfferText>}
   </a>
 </aside>

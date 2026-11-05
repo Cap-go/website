@@ -23,9 +23,9 @@ takeaways:
   - "Developer Mode exists on iOS 16 and later and is off by default."
   - "Open a development-signed app once, then go to Settings, Privacy and Security, Developer Mode and turn it on."
   - "The iPhone or iPad restarts, then you confirm Turn On after unlocking."
-  - "If the toggle is missing, connect the device to a Mac, trust it, and run the app from Xcode first."
+  - "If the toggle is missing, connect the device to a Mac, trust it, and let Xcode pair with it. The toggle then appears, and you enable it before running the app."
 ---
-On iOS 16 and later, you enable Developer Mode by installing a development-signed app, launching it once, and confirming the prompt in Settings. If the toggle doesn't appear after launch, connect the iPhone or iPad to a Mac and run the app from Xcode first.
+On iOS 16 and later, you enable Developer Mode by installing a development-signed app, launching it once, and confirming the prompt in Settings. If the toggle doesn't appear after launch, connect the iPhone or iPad to a Mac, trust it, and let Xcode pair with it. The toggle then appears, so you can enable Developer Mode before running the app from Xcode.
 
 ## How We Verified the Developer Mode Steps
 
