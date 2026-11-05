@@ -47,6 +47,8 @@ faq:
 
 **Short answer: yes, Apple allows live updates, within limits.** You can push new JavaScript, HTML and CSS to an iOS app without a new App Store review, as long as the update does not change what the app is. You cannot download native code.
 
+**With Capgo:** Capgo live updates ship only the web layer (JavaScript, HTML, CSS, assets) of a Capacitor app, which Apple's rules allow when the update keeps the app's primary purpose, does not create a code storefront, and does not bypass OS security; native changes still go through a store release.
+
 Most of the confusion comes from mixing two different things: live updates of interpreted code (allowed) and downloading new executable code (not allowed). This page quotes the rules, shows where the line is, and explains how Apple enforces it.
 
 > This is not legal advice. It is how the rules read today and how thousands of apps use them in production.

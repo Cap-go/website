@@ -20,7 +20,7 @@ origin: human
 next_blog: ''
 ---
 
-**TL;DR:** **Capgo** fits Capacitor teams that want live updates, channels, and rollback without Appflow-scale pricing, usually alongside GitHub Actions or GitLab CI. **Ionic Appflow** still suits some existing customers until access ends on December 31, 2027. See the maintained [Capgo vs Ionic Appflow](/alternatives/ionic-appflow/) table for pricing, security, and migration FAQs.
+**TL;DR:** **Capgo** fits Capacitor teams that want live updates, channels, rollback, and cloud-native iOS and Android builds without Appflow-scale pricing, usually alongside GitHub Actions or GitLab CI. **Ionic Appflow** still suits some existing customers until access ends on December 31, 2027. See the maintained [Capgo vs Ionic Appflow](/alternatives/ionic-appflow/) table for pricing, security, and migration FAQs.
 
 Ionic Appflow is a cloud-based mobile app development platform that provides developers with a range of tools and services for building, testing, and deploying mobile apps quickly. It offers features such as continuous integration and deployment, crash reporting, allowing developers to track their app's performance and ensure that it is running smoothly for their users.
 
@@ -47,12 +47,12 @@ That why we made you a clear and simple table to help you compare.
 | Sandbox app for test | ✅ | ❌ |
 | Capacitor Plugin | ✅ | ❌ Cordova compatible |
 | Cordova plugin | ✅ Cordova updater ([docs](https://capgo.app/docs/plugins/cordova-updater/getting-started/)) | ✅ |
-| Affordable pricing | ✅ Start at $12/mo | ❌ Start at $499/mo |
+| Affordable pricing | ✅ Pay as you go from $5 in credits, plans from $12/mo billed yearly ([pricing](/pricing/)) | ❌ Start at $499/mo |
 | Native build | ✅ Capgo Builder ([native build](/native-build/)) | ✅ |
 | End-to-End encryption | ✅ | ❌ only for Portal |
 | 100% Open source | ✅ | ❌ |
 | Portal | ❌ coming soon | ✅ |
-| CI/CD | ❌ Tutorial to do it in popular  | ✅ |
+| CI/CD | ✅ One CLI command from GitHub Actions, GitLab CI, or any pipeline ([GitHub Actions guide](/docs/builder/github-actions/)) | ✅ |
 
 ## When to pick Ionic Appflow instead
 
@@ -70,7 +70,7 @@ With this setup in place, any time you introduce changes to your app's code and 
 
 Overall, using GitHub Actions and [Capgo](/register/) can be a cost-effective solution for those who want to use live updates but do not have their own continuous integration setup in place. By leveraging these tools, clients can automate their app development process and quickly and easily deploy updates to their users.
 
-If you are ready to set up your CI/CD with Capgo, you can follow this [tutorial for IOS](https://capgo.app/blog/automatic-capacitor-android-build-github-action/).
+If you are ready to set up your CI/CD with Capgo, you can follow this [tutorial for iOS](/blog/automatic-capacitor-ios-build-github-action/) or the [Capgo Builder GitHub Actions guide](/docs/builder/github-actions/).
 
 ## Let's go further
 
@@ -84,7 +84,7 @@ If you are a big team who requires a dedicated support person, contact me, and w
 
 Even if Capgo is supposed self-service, I'm really present for the users.
 
-I can help you to configure your build for native code as well, you don't need to pay for Appflow to do it.
+Capgo Builder also produces signed native iOS and Android builds in the cloud, so you don't need Appflow for that either.
 
 If you like open-source self-service community-driven tool,
 

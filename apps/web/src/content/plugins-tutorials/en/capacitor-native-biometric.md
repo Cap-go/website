@@ -5,10 +5,17 @@ locale: en
 
 This plugin gives access to the native biometric apis for android and iOS.
 
+## Compatibility
+
+The plugin major version follows Capacitor: use v8 for Capacitor 8 (actively maintained) and v7 for Capacitor 7 (maintained on demand). See the [compatibility table](https://github.com/Cap-go/capacitor-native-biometric/#compatibility).
+
 ## Install
 
 ```bash
-bun add @capgo/capacitor-native-biometric
+# Capacitor 8
+bun add @capgo/capacitor-native-biometric@8
+# Capacitor 7
+bun add @capgo/capacitor-native-biometric@7
 bunx cap sync
 ```
 

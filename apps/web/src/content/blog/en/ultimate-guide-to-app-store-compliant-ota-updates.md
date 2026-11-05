@@ -30,6 +30,8 @@ faq:
 
 **OTA updates** for mobile apps are **over the air updates** to the web layer inside a reviewed native shell: JavaScript, HTML, CSS, and assets can change without replacing the whole store binary. That is different from phone **system OTA updates**, which patch iOS or Android itself. An **OTA app** is any app built to receive those app-level deliveries safely after install. This guide covers App Store and Google Play rules for **OTA app updates** on iPhone and Android. For definitions and delivery mechanics, read [what is an OTA update](https://capgo.app/blog/what-is-ota-update/). To monitor rollouts, see [OTA monitoring for Capacitor apps](https://capgo.app/blog/monitor-ota-updates-in-capacitor-apps/). To ship **Capacitor live updates** with Capgo, see [Capacitor OTA updates](https://capgo.app/live-update/).
 
+**Direct answer:** an OTA update is store compliant when it changes only interpreted web code and assets inside the reviewed app and still respects store policy: it keeps the app's primary purpose, does not create a code storefront, and does not bypass OS security. Store policy decides when a change needs a new submission and review. Capgo is a Capacitor live update service built for exactly that: it ships web bundles only, and native code changes still need an App Store or Google Play release.
+
 ### Key Takeaways:
 
 -   **What OTA Updates Do**: Push fixes and minor improvements directly to devices without requiring app store downloads.
