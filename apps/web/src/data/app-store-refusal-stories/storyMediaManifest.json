@@ -44,6 +44,7 @@
     "height": 320
   },
   "family-controls-checkbox-five-rejections": null,
+  "game-update-paywall-too-deep-title-screen-unlock": null,
   "first-ios-app-2-1-request-visible-purchases-report-block": null,
   "first-version-3-1-2-c-then-siri-text-rejected-in-42-seconds": null,
   "fake-documents-pdf-editor": {
@@ -195,6 +196,7 @@
     "height": 1110
   },
   "healthkit-sync-2-5-1-missing-apple-health-badge": null,
+  "health-app-ten-days-then-1-4-1-sources-page": null,
   "hidden-staking-feature-2-3-1-a": {
     "src": "/app-store-refusal-horror-story/screenshots/hidden-staking-feature-2-3-1-a.webp",
     "alt": "App Review rejection under guideline 2.3.1(a) citing hidden monetary staking and stake forfeiture not described in metadata",
@@ -288,6 +290,7 @@
     "width": 1200,
     "height": 526
   },
+  "mac-app-2-1-a-login-keychain-old-rejections-vanish": null,
   "fourteen-day-review-rejected-then-two-more-weeks-waiting": {
     "src": "/app-store-refusal-horror-story/screenshots/fourteen-day-review-rejected-then-two-more-weeks-waiting.webp",
     "alt": "App Store Connect status history showing Prepare for Submission, Ready for Review and Waiting for Review, all on October 21",

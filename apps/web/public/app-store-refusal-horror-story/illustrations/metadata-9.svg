@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Game title screen unlock versus deep paywall path">
+  <title>Game title screen unlock versus deep paywall path</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="32" y="40" width="112" height="120" rx="14" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <rect x="48" y="56" width="80" height="14" rx="4" fill="#374151"/>
+  <rect x="56" y="88" width="64" height="24" rx="8" fill="#44BCFF" opacity="0.55"/>
+  <rect x="64" y="96" width="48" height="8" rx="4" fill="#0F172A" opacity="0.6"/>
+  <circle cx="88" cy="132" r="6" fill="#9CA3AF" opacity="0.4"/>
+  <path d="M160 100 H184" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <rect x="192" y="48" width="96" height="104" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <path d="M216 72 L240 96 L264 72 L264 120 L240 144 L216 120 Z" fill="none" stroke="#9CA3AF" stroke-width="2" opacity="0.35"/>
+  <circle cx="240" cy="108" r="10" fill="#111827" stroke="#EF4444" stroke-width="2" opacity="0.85"/>
+  <path d="M234 108 L246 108 M240 102 L240 114" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <path d="M208 160 Q240 128 272 160" fill="none" stroke="#44BCFF" stroke-width="2" stroke-dasharray="5 4" opacity="0.6"/>
+  <rect x="228" y="168" width="24" height="12" rx="4" fill="#44BCFF" opacity="0.35"/>
+</svg>
