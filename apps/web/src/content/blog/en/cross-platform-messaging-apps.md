@@ -23,6 +23,11 @@ next_blog: ''
 faq:
   - question: "What is a good app to use with friends who have iPhone and Android?"
     answer: "WhatsApp, Telegram, and Signal all work the same on iPhone and Android and are free. WhatsApp is the most practical default because many people already use it. Signal is the best pick for privacy, and Telegram suits large groups and channels. For gaming groups or ongoing communities, Discord is the usual choice. Compare them in the comparison table."
+takeaways:
+  - "WhatsApp, Telegram and Signal suit personal and small team chat across iPhone, Android and desktop."
+  - "Slack, Microsoft Teams and Google Chat fit companies already on those work suites."
+  - "Element (Matrix), Wire and Threema suit teams that want more control over privacy or hosting."
+  - "Discord works best for living communities rather than formal team chat."
 ---
 You're probably in one of two situations right now. Either your team needs a messaging layer that works across iPhone, Android, desktop, and web without turning support and engineering into chaos, or you're reevaluating a stack that looked fine at pilot stage and now has to survive compliance reviews, API changes, and real user volume.
 

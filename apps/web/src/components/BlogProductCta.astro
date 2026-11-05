@@ -5,6 +5,8 @@ import { getRelativeLocaleUrl } from '@/services/links'
 interface Props {
   /** Comma-separated blog tags from the post frontmatter. */
   tag: string
+  /** Post slug, for CTA click analytics. */
+  slug?: string
 }
 
 // Build/store topics point to Native Build; everything else to Live Updates, the core offer.
@@ -30,7 +32,7 @@ const product = isNativeBuild
     }
 ---
 
-<aside id="blog-product-cta" data-product={product.href} class="mt-10 rounded-2xl border border-azure-500/30 bg-azure-500/5 p-6" aria-label={`Capgo ${product.name}`}>
+<aside id="blog-product-cta" data-blog-cta="end-product" data-cta-id={`product-${product.href}`} data-product={product.href} class="mt-10 rounded-2xl border border-azure-500/30 bg-azure-500/5 p-6" aria-label={`Capgo ${product.name}`}>
   <p class="text-sm font-semibold tracking-wide text-azure-400 uppercase">Capgo {product.name}</p>
   <p class="mt-2 text-xl font-semibold text-white">{product.tagline}</p>
   <p class="mt-2 text-gray-300">{product.desc}</p>

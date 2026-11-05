@@ -36,6 +36,11 @@ faq:
     answer: "Log in to App Store Connect, select your app, open App Information, scroll to Age Rating, and click Edit. Answer the questionnaire about content, capabilities, and in-app controls. Apple calculates the rating (4+, 9+, 13+, 16+, or 18+) from your answers, so you change the rating by changing the answers."
   - question: "What does Your app age rating is set to 4+ (or 16+) mean in App Store Connect?"
     answer: "App Store Connect shows that message after you complete the age rating questionnaire. It is the rating Apple derived from your answers. If 4+ or 16+ does not match your app, click Edit under Age Rating, correct the answers, and save them. Underrating user-generated content or web access is a common review rejection, covered in common age rating mistakes."
+takeaways:
+  - "Parents change the highest allowed app age rating in parental controls, not on a single app."
+  - "iPhone and iPad: Settings, Screen Time, Content and Privacy Restrictions, App Store, Media, Web and Games, Apps."
+  - "Android: Google Play, profile, Settings, Family, Content restrictions, or Family Link for managed accounts."
+  - "Developers set their app's rating with the App Store Connect questionnaire and the IARC questionnaire in Google Play."
 ---
 
 **Quick answer:** An **app age rating** is the maturity label on each listing in the App Store or Google Play (for example **4+**, **13+**, **Teen**, or **Mature**). On your **iPhone, iPad, or Android phone**, you change the **highest rating allowed** in parental controls, not the label on a single app. Use **Screen Time** content restrictions on Apple devices and **Google Play content restrictions** or **Family Link** on Android. **Developers** set the store rating in [App Store Connect](#how-to-complete-the-ios-age-rating-questionnaire) or the [Play Console IARC questionnaire](#how-to-complete-the-iarc-questionnaire).

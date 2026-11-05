@@ -3,6 +3,8 @@ import Blog from '@/components/Blog.astro'
 import BlogAuthorByline from '@/components/BlogAuthorByline.astro'
 import BlogEditorialByline from '@/components/BlogEditorialByline.astro'
 import BlogProductCta from '@/components/BlogProductCta.astro'
+import BlogTakeaways from '@/components/BlogTakeaways.astro'
+import BlogTopCta from '@/components/BlogTopCta.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import SignupCta from '@/components/SignupCta.astro'
 import { HUMAN_EDITORIAL_TEAM, resolveAuthorUrl } from '@/config/blogEditorialTeam'
@@ -66,7 +68,15 @@ if (!entry) {
   return new Response(`entry is not found for: ${Astro.url.pathname}`, { status: 404 })
 }
 
-const related = allPublishedEntries.filter((j) => j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
+const currentTags = new Set(entry.data.tag.split(',').map((t) => t.trim().toLowerCase()))
+const sharedTagCount = (j: CollectionEntry<'blog'>) => j.data.tag.split(',').filter((t) => currentTags.has(t.trim().toLowerCase())).length
+// Related articles: same locale, most shared tags first, then newest. Falls back to newest when nothing shares a tag.
+const related = allPublishedEntries
+  .filter((j) => j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale)
+  .map((j) => ({ j, score: sharedTagCount(j) }))
+  .sort((a, b) => b.score - a.score || new Date(b.j.data.created_at).getTime() - new Date(a.j.data.created_at).getTime())
+  .slice(0, 3)
+  .map(({ j }) => j)
 const entriesByLocale = new Map<string, CollectionEntry<'blog'>>(entries.map((localizedEntry) => [localizedEntry.data.locale, localizedEntry]))
 const fallbackEntry = entriesByLocale.get(defaultLocale) ?? entry
 const alternateVersions = locales.map((locale) => {
@@ -80,6 +90,12 @@ const alternateVersions = locales.map((locale) => {
 })
 
 const { Content, headings } = await render(entry)
+// Takeaways: frontmatter first, else the post's own "Quick answer" paragraph, else hidden.
+const quickAnswer = entry.body?.match(/(?:^|\n)\*\*Quick answer:\*\*[ \t]*([\s\S]+?)(?=\r?\n[ \t]*\r?\n|$)/)?.[1]
+const quickAnswerText = quickAnswer ? striptags(quickAnswer).replace(/\*\*|`/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\s+/g, ' ').trim() : ''
+// Answer first: keep only the first sentence of the quick answer so the box stays short.
+const quickAnswerLead = quickAnswerText.match(/^.+?[.!?](?=\s|$)/)?.[0] ?? quickAnswerText
+const takeaways = entry.data.takeaways?.length ? entry.data.takeaways : quickAnswerLead && quickAnswerLead.length <= 400 ? [quickAnswerLead] : []
 const showEditorialByline = isHumanBlogPost(entry.data.origin)
 const authorUrl = resolveAuthorUrl(entry.data.author, entry.data.author_url)
 
@@ -173,6 +189,8 @@ content['ldJSON'] =
           </div>
           <h1 class="font-display mt-8 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-tight">{entry.data.title}</h1>
           <p class="mt-4 text-gray-400 sm:text-lg">{entry.data.description}</p>
+          <BlogTakeaways items={takeaways} />
+          <BlogTopCta cta={entry.data.cta} tag={entry.data.tag} slug={entry.data.slug} />
           {showEditorialByline ? (
             <BlogEditorialByline members={HUMAN_EDITORIAL_TEAM} class="mt-6 md:hidden" />
           ) : (
@@ -197,7 +215,7 @@ content['ldJSON'] =
           <article class="prose prose-invert blog mt-8 min-w-full">
             <Content />
           </article>
-          <BlogProductCta tag={entry.data.tag} />
+          <BlogProductCta tag={entry.data.tag} slug={entry.data.slug} />
         </div>
         <div class="right-0 hidden px-10 md:block">
           {showEditorialByline ? (
@@ -207,7 +225,9 @@ content['ldJSON'] =
           )}
           {headings?.length > 0 ? (
             <div id="staticToc" class="sticky top-16 pt-4 pb-8">
-              <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4 pb-8" />
+              <div data-blog-cta="sidebar" data-cta-id="blog-sidebar-signup">
+                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4 pb-8" />
+              </div>
               <div>
                 <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-400">
                   <svg
@@ -239,12 +259,16 @@ content['ldJSON'] =
             </div>
           ) : (
             <div class="sticky top-16 pt-4 pb-8">
-              <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4" />
+              <div data-blog-cta="sidebar" data-cta-id="blog-sidebar-signup">
+                <SignupCta id="blog-sidebar-signup-cta" align="start" lead={m.blog_sidebar_cta_lead({}, { locale: Astro.locals.locale })} class="pt-4" />
+              </div>
             </div>
           )}
         </div>
       </div>
-      <GetStarted />
+      <div data-blog-cta="end" data-cta-id="blog-get-started">
+        <GetStarted />
+      </div>
       <div class="mx-auto max-w-xl text-center">
         <p class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{m.latest_from_news({}, { locale: Astro.locals.locale })}</p>
         <p class="mt-4 text-base leading-7 font-normal text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
@@ -283,6 +307,32 @@ content['ldJSON'] =
 </Layout>
 
 <script>
+  // PostHog: one event for every blog CTA click, keyed by position and cta id.
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement | null
+    const link = target?.closest('a')
+    const box = link?.closest<HTMLElement>('[data-blog-cta]')
+    if (!link || !box) return
+    const slug = window.location.pathname.split('/').filter(Boolean).pop() ?? ''
+    const ph = (window as any).posthog
+    ph?.capture('blog_cta_click', {
+      position: box.dataset.blogCta,
+      cta_id: box.dataset.ctaId ?? link.id ?? box.dataset.blogCta,
+      slug,
+      href: link.getAttribute('href'),
+    })
+    // The stub only queues in memory until the SDK loads, so hold a plain same-tab click briefly
+    // until it has loaded and can flush the event on page hide. Never wait more than 800 ms.
+    const plainClick = event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey
+    if (!ph || ph.__loaded || !plainClick || (link.target && link.target !== '_self') || event.defaultPrevented) return
+    event.preventDefault()
+    const started = Date.now()
+    const go = () => {
+      if ((window as any).posthog?.__loaded || Date.now() - started > 800) window.location.assign(link.href)
+      else setTimeout(go, 50)
+    }
+    go()
+  })
   document.addEventListener('DOMContentLoaded', () => {
     // Heading slugs may start with a digit (e.g. "1-foo"); getElementById avoids invalid CSS selectors.
     const getTocLink = (headingId: string) => document.getElementById(`${headingId}-link`)

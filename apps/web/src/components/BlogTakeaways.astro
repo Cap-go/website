@@ -1,0 +1,23 @@
+---
+interface Props {
+  /** Short answer-first bullets from the post frontmatter `takeaways`. */
+  items?: string[] | null
+}
+
+const items = (Astro.props.items ?? []).map((i) => i.trim()).filter(Boolean)
+---
+
+{
+  items.length > 0 && (
+    <aside id="blog-takeaways" class="not-content mt-8 rounded-2xl border border-white/10 bg-white/5 p-6" aria-labelledby="blog-takeaways-title">
+      <p id="blog-takeaways-title" class="text-sm font-semibold tracking-wide text-azure-400 uppercase">
+        Key takeaways
+      </p>
+      <ul class="mt-3 list-disc space-y-2 pl-5 text-gray-200">
+        {items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </aside>
+  )
+}
