@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Long health app review wait then citations page">
+  <title>Long health app review wait then citations page</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="36" y="44" width="108" height="112" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="52" y="60" width="76" height="12" rx="6" fill="#44BCFF" opacity="0.4"/>
+  <circle cx="68" cy="92" r="8" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <circle cx="92" cy="92" r="8" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <circle cx="116" cy="92" r="8" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <circle cx="68" cy="116" r="8" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <circle cx="92" cy="116" r="8" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <circle cx="116" cy="116" r="8" fill="#111827" stroke="#9CA3AF" stroke-width="1.5" opacity="0.45"/>
+  <path d="M100 128 L100 140" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <rect x="72" y="140" width="56" height="6" rx="3" fill="#44BCFF" opacity="0.35"/>
+  <path d="M156 100 H176" stroke="#44BCFF" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="176,100 164,92 164,108" fill="#44BCFF"/>
+  <rect x="188" y="52" width="96" height="96" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M204 72 h56 M204 88 h48 M204 104 h40" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+  <circle cx="212" cy="72" r="4" fill="#44BCFF"/>
+  <circle cx="212" cy="88" r="4" fill="#44BCFF" opacity="0.7"/>
+  <circle cx="212" cy="104" r="4" fill="#44BCFF" opacity="0.5"/>
+  <rect x="204" y="120" width="64" height="16" rx="6" fill="#44BCFF" opacity="0.25"/>
+  <path d="M48 168 H272" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
+  <rect x="48" y="168" width="180" height="4" rx="2" fill="#44BCFF" opacity="0.35"/>
+</svg>

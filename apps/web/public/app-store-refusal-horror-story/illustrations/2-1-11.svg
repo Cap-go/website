@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mac login keychain access and fading submission history">
+  <title>Mac login keychain access and fading submission history</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="40" y="36" width="120" height="128" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="72" cy="68" r="18" fill="none" stroke="#44BCFF" stroke-width="3"/>
+  <circle cx="72" cy="68" r="6" fill="#44BCFF"/>
+  <rect x="96" y="58" width="48" height="8" rx="4" fill="#9CA3AF" opacity="0.45"/>
+  <rect x="96" y="74" width="40" height="6" rx="3" fill="#9CA3AF" opacity="0.3"/>
+  <path d="M56 108 Q72 92 88 108 Q104 124 72 132 Q40 124 56 108" fill="none" stroke="#44BCFF" stroke-width="2" opacity="0.55"/>
+  <circle cx="72" cy="118" r="5" fill="#44BCFF" opacity="0.7"/>
+  <rect x="184" y="48" width="96" height="116" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="196" y="60" width="72" height="10" rx="5" fill="#44BCFF" opacity="0.5"/>
+  <rect x="196" y="78" width="64" height="8" rx="4" fill="#9CA3AF" opacity="0.4"/>
+  <rect x="196" y="92" width="56" height="8" rx="4" fill="#9CA3AF" opacity="0.32"/>
+  <rect x="196" y="106" width="48" height="8" rx="4" fill="#9CA3AF" opacity="0.22"/>
+  <rect x="196" y="120" width="40" height="8" rx="4" fill="#9CA3AF" opacity="0.14"/>
+  <path d="M248 134 L260 146 L272 128" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+  <text x="204" y="152" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="9" opacity="0.55">10 max</text>
+</svg>
