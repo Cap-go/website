@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-27T04:28:18.512Z
-updated_at: 2026-11-05T10:34:13.000Z
+updated_at: 2026-11-05T10:45:00.000Z
 head_image: /blog-images/secure-token-storage-best-practices-for-mobile-developers.webp
 head_image_alt: 'How to securely store access and refresh tokens on mobile with Keychain and Keystore'
 keywords: 'most secure way to store access tokens in a modern app, securely manage and rotate refresh tokens in a mobile app, secure storage of access tokens and refresh tokens, how do you implement secure token storage, should mobile apps store refresh tokens, access token storage best practices, secure token storage, token storage mobile'
@@ -24,7 +24,7 @@ faq:
   - question: 'How do you implement secure token storage?'
     answer: 'On iOS, write refresh tokens to the Keychain with accessibility that matches background refresh needs. On Android, use a Tink keyset in Android Keystore with Jetpack DataStore and AeadSerializer instead of deprecated EncryptedSharedPreferences. Hold access tokens in memory only and use HTTPS; add certificate pinning when your threat model requires it.'
   - question: 'Is secure storage of access tokens and refresh tokens the same on iOS and Android?'
-    answer: 'The split is the same on both platforms: memory for short-lived access tokens, hardware-backed encrypted storage for refresh tokens. The APIs differ (Keychain versus Keystore plus DataStore), but both must avoid WebView localStorage, UserDefaults, and plain SharedPreferences for secrets.'
+    answer: 'The split is the same on both platforms: memory for short-lived access tokens, platform-protected encrypted storage for refresh tokens (Keychain on iOS, Keystore-backed DataStore on Android). The APIs differ, but both must avoid WebView localStorage, UserDefaults, and plain SharedPreferences for secrets.'
   - question: 'Should I encrypt tokens before putting them in Keychain?'
     answer: 'Usually no extra layer is required for standard bearer tokens if Keychain accessibility matches your threat model. Add envelope encryption when regulations or key rotation policies require it.'
   - question: 'Can I store tokens in Capacitor Preferences with obfuscation?'
@@ -34,9 +34,9 @@ The most secure way to store access tokens in a modern app is not to persist the
 
 ## How We Chose These Storage Patterns
 
-Every recommendation here passes four filters. First, hardware backing: the secret material must either live in Keychain/Keystore or be encrypted with keys that do. Second, an officially supported migration path. If Google or Apple has deprecated the approach, we don't recommend it for new code. Third, Capacitor compatibility: the pattern must work from a plugin boundary without exposing raw keys to JavaScript. Fourth, revocability: a leaked credential must be invalidatable server-side.
+Every recommendation here passes four filters. First, platform-protected storage: secrets must live in Keychain or Keystore, or be encrypted with keys stored there. Prefer hardware-backed isolation when the device and key configuration actually provide it (for example StrongBox or Secure Enclave backed keys). Second, an officially supported migration path. If Google or Apple has deprecated the approach, we don't recommend it for new code. Third, Capacitor compatibility: the pattern must work from a plugin boundary without exposing raw keys to JavaScript. Fourth, revocability: a leaked credential must be invalidatable server-side.
 
-That last filter is why refresh token rotation appears throughout this article. In our review of the 2024 incident data Chainalysis assembled, compromises involving private keys and credentials drove the majority of stolen cryptocurrency, including more than $305 million taken from Japan's DMM Bitcoin and $235 million from India's WazirX, and the common failure was sealant-grade trust in a single, continuously valid credential ([Chainalysis 2024 crime report](https://www.chainalysis.com/blog/2024-crypto-crime-mid-year-update-part-1/)). Mobile auth tokens fail the same way: a long-lived bearer token in plaintext storage is a standing invitation. We'd stop recommending any architecture that persists a non-rotating credential indefinitely.
+That last filter is why refresh token rotation appears throughout this article. Chainalysis reported more than $305 million stolen from Japan's DMM Bitcoin after a private key compromise in 2024 ([Chainalysis 2024 crime report](https://www.chainalysis.com/blog/2024-crypto-crime-mid-year-update-part-1/)). Mobile auth tokens fail the same way: a long-lived bearer token in plaintext storage is a standing invitation. We'd stop recommending any architecture that persists a non-rotating credential indefinitely.
 
 ## Principles that apply on every platform
 
@@ -65,11 +65,9 @@ Use one Tink-backed pipeline end to end:
 
 1. Build a Tink keyset with `AndroidKeysetManager`, storing the master key in Android Keystore via an `android-keystore://` URI (see the [`datastore-tink` release notes](https://developer.android.com/jetpack/androidx/releases/datastore)).
 2. Obtain an `Aead` primitive from that keyset.
-3. Add `androidx.datastore:datastore-tink` (available from [DataStore 1.3.0-rc01](https://developer.android.com/jetpack/androidx/releases/datastore#1.3.0-rc01); stable 1.2.x does not ship this artifact), wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer), and pass it to `DataStore`. When multiple stores share one `Aead` key, give each store unique `associatedData`, such as a stable value derived from its filename.
+3. Add `androidx.datastore:datastore-tink` ([DataStore 1.3.0](https://developer.android.com/jetpack/androidx/releases/datastore#1.3.0) ships the artifact; 1.2.x does not), wrap your `Serializer` with [`AeadSerializer`](https://developer.android.com/reference/kotlin/androidx/datastore/tink/AeadSerializer), and pass it to `DataStore`. When multiple stores share one `Aead` key, give each store unique `associatedData`, such as a stable value derived from its filename.
 
 Google documents this as the supported replacement path for deprecated `androidx.security.crypto` helpers. Do not mix a standalone JCA `SecretKey` with `AeadSerializer`; the serializer expects a Tink `Aead` instance.
-
-A note on versioning: because the `datastore-tink` artifact only exists from 1.3.0-rc01 onward, teams pinned to stable 1.2.x releases will find the documented replacement missing from their dependency tree. That gap is several releases old now, and in our editorial view it's the main reason migration plans still stall. Decide deliberately whether to ride a release candidate or wait, rather than letting it happen by accident.
 
 ### Keystore options worth knowing
 
@@ -174,6 +172,18 @@ Worth noting on that last row: the failure mode of JavaScript crypto isn't weak 
 5. Remove `androidx.security.crypto` dependencies when nothing references them.
 
 ## FAQ
+
+### How do you implement secure token storage?
+
+On iOS, write refresh tokens to the Keychain with accessibility that matches background refresh needs. On Android, use a Tink keyset in Android Keystore with Jetpack DataStore and `AeadSerializer` instead of deprecated EncryptedSharedPreferences. Hold access tokens in memory only and use HTTPS. Add [certificate pinning](/blog/ssl-pinning-implementation-tools-and-plugins/) when your threat model requires it.
+
+### How do I securely manage and rotate refresh tokens in a mobile app?
+
+Store the refresh token only in Keychain or Keystore-backed storage. Issue one-time-use refresh tokens so each redemption returns a new refresh token and invalidates the old one. Keep a short reuse-detection window so a replayed token revokes the whole family, with a small grace period for offline or racing clients.
+
+### Is secure storage of access tokens and refresh tokens the same on iOS and Android?
+
+The split is the same on both platforms: memory for short-lived access tokens, platform-protected encrypted storage for refresh tokens. The APIs differ (Keychain versus Keystore plus DataStore), but both must avoid WebView localStorage, UserDefaults, and plain SharedPreferences for secrets.
 
 ### Should I encrypt tokens before putting them in Keychain?
 
