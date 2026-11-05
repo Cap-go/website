@@ -1,10 +1,7 @@
 ---
 slug: how-to-change-the-app-icon-on-iphone
-title: 'How to Change App Icons on iPhone: Home Screen and Shortcuts'
-description: >-
-  Change iPhone app icons with Home Screen Customize (Dark, Tinted, Clear, or
-  larger icons) or add any photo with Shortcuts. Apple steps, trade-offs, and
-  developer alternate icons for Capacitor apps.
+title: "How to Change App Icons on iPhone: Step by Step (2026)"
+description: "Change app icons on iPhone step by step: Home Screen Customize for Dark, Tinted or Clear icons, or Shortcuts for any photo. Plus alternate icons for devs."
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'

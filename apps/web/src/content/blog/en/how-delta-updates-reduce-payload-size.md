@@ -1,7 +1,7 @@
 ---
 slug: how-delta-updates-reduce-payload-size
-title: 'Delta Update Explained: Smaller OTA Downloads for Capacitor Apps'
-description: 'What is a delta update? Learn how differential OTA delivery sends only changed bundle files, cuts download size, and speeds up Capacitor live updates.'
+title: "What Is a Delta Update? Why OTA Payloads Get Smaller"
+description: "A delta update sends only the files that changed since the last version, so OTA downloads shrink. How differential updates work and why payload drops."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
