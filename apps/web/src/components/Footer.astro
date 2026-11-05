@@ -177,6 +177,27 @@ const columns: { title: string; links: FooterLink[] }[] = [
           <img src="/iso27001.svg" alt={m.iso27001_compliant({}, { locale: Astro.locals.locale })} width="36" height="36" loading="lazy" class="h-9 w-auto opacity-70" />
           <img src="/gdpr.svg" alt={m.gdpr_compliant({}, { locale: Astro.locals.locale })} width="36" height="36" loading="lazy" class="h-9 w-auto opacity-70" />
         </div>
+        <div class="mt-6 flex max-w-full flex-wrap items-center gap-3 sm:gap-4">
+          <a href="https://fazier.com" target="_blank" rel="noopener noreferrer" class="shrink-0 opacity-90 transition-opacity hover:opacity-100">
+            <img
+              src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=dark"
+              width="120"
+              alt="Fazier badge"
+              loading="lazy"
+              class="h-8 w-auto max-w-[120px] sm:h-9"
+            />
+          </a>
+          <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer" class="shrink-0 opacity-90 transition-opacity hover:opacity-100">
+            <img
+              src="https://twelve.tools/badge0-dark.svg"
+              alt="Featured on Twelve Tools"
+              width="200"
+              height="54"
+              loading="lazy"
+              class="h-8 w-auto max-w-[min(200px,100%)] sm:h-[54px] sm:max-w-[200px]"
+            />
+          </a>
+        </div>
       </div>
 
       <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 xl:grid-cols-6">
