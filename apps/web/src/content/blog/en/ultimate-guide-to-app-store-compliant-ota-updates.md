@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-28T05:46:14.390Z
-updated_at: 2026-11-05T09:22:33.000Z
+updated_at: 2026-11-05T10:04:09.000Z
 head_image: /blog-images/ultimate-guide-to-app-store-compliant-ota-updates.webp
 head_image_alt: "OTA app updates and App Store compliance for iOS and Android Capgo blog illustration"
 keywords: ota updates, ota app, ota apps, over the air updates, ota updates iphone, capacitor ota, ionic ota, capacitor live updates, app store compliant ota, google play ota

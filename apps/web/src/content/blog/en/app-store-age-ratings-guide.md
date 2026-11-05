@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-29T00:00:00.000Z
-updated_at: 2026-10-27T10:00:00.000Z
+updated_at: 2026-11-05T10:04:09.000Z
 head_image: /apple_appstore.webp
 head_image_alt: "How to change app age rating on iPhone and Android Capgo blog illustration"
 keywords: app age rating, device age rating, app age rating setting, how to change app age rating, age rating iphone, android age rating, Screen Time, parental controls, app store, google play, IARC, App Store Connect

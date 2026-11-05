@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2026-11-05T09:24:35.000Z
+updated_at: 2026-11-05T10:04:09.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
 head_image_alt: How to Enable Developer Mode on iOS 16 and Later (iPhone and iPad)
 keywords: 'ios developer mode, enable developer mode iphone, developer mode not showing, ios 16 developer mode, ipad developer mode'
