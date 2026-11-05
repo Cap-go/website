@@ -45,7 +45,7 @@ next_blog: ''
 | --- | --- | --- | --- |
 | `@aparajita/capacitor-biometric-auth` | Capacitor 8 | Native biometry, device credentials | New projects using Capacitor 8 |
 | `@capgo/capacitor-native-biometric` | Capacitor 8 (plugin v8; v7 for Capacitor 7) | Biometric check plus secure credential storage, Keychain/Keystore | Credential management and Identity Vault replacement |
-| All versions | Biometric and device credential support | Flexible authentication options |
+| Other community plugins | All versions | Biometric and device credential support | Flexible authentication options |
 
 [Biometric authentication in Capacitor apps](https://capgo.app/plugins/capacitor-native-biometric/) is a secure and user-friendly way to protect sensitive data. The full article details setup steps, code examples, testing strategies, and security standards.
 
@@ -141,7 +141,7 @@ When picking a biometric authentication plugin for your Capacitor app, your choi
 | --- | --- | --- | --- |
 | @aparajita/capacitor-biometric-auth | Capacitor 8 | Native biometry, device credentials, comprehensive API | New projects starting with Capacitor 8 |
 | @capgo/capacitor-native-biometric | Capacitor 8 (plugin v8; v7 for Capacitor 7) | Biometric check plus secure credential storage, Keychain/Keystore integration | Projects needing biometric-gated credentials |
-| All versions | Biometric and device credential authentication, clean API | Projects requiring flexible authentication options |
+| Other community plugins | All versions | Biometric and device credential authentication, clean API | Projects requiring flexible authentication options |
 
 ### Authentication Code Examples
 

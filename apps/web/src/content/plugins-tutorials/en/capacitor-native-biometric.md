@@ -12,7 +12,10 @@ The plugin major version follows Capacitor: use v8 for Capacitor 8 (actively mai
 ## Install
 
 ```bash
-bun add @capgo/capacitor-native-biometric
+# Capacitor 8
+bun add @capgo/capacitor-native-biometric@8
+# Capacitor 7
+bun add @capgo/capacitor-native-biometric@7
 bunx cap sync
 ```
 

@@ -20,7 +20,7 @@ origin: human
 next_blog: ''
 ---
 
-**TL;DR:** **Capgo** fits Capacitor teams that want live updates, channels, rollback, and cloud native iOS and Android builds without Appflow-scale pricing, usually alongside GitHub Actions or GitLab CI. **Ionic Appflow** still suits some existing customers until access ends on December 31, 2027. See the maintained [Capgo vs Ionic Appflow](/alternatives/ionic-appflow/) table for pricing, security, and migration FAQs.
+**TL;DR:** **Capgo** fits Capacitor teams that want live updates, channels, rollback, and cloud-native iOS and Android builds without Appflow-scale pricing, usually alongside GitHub Actions or GitLab CI. **Ionic Appflow** still suits some existing customers until access ends on December 31, 2027. See the maintained [Capgo vs Ionic Appflow](/alternatives/ionic-appflow/) table for pricing, security, and migration FAQs.
 
 Ionic Appflow is a cloud-based mobile app development platform that provides developers with a range of tools and services for building, testing, and deploying mobile apps quickly. It offers features such as continuous integration and deployment, crash reporting, allowing developers to track their app's performance and ensure that it is running smoothly for their users.
 

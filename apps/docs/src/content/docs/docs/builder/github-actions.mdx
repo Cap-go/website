@@ -9,7 +9,7 @@ import { Steps, Card, CardGrid, Aside, LinkCard } from '@astrojs/starlight/compo
 
 Automate your iOS and Android builds directly from your GitHub repository. With one workflow file and a handful of repository secrets, every push, tag, or manual trigger can produce signed, store-ready apps — without anyone on the team needing a Mac, Xcode, or Android Studio installed.
 
-**Short answer:** for Capacitor CI/CD on GitHub Actions, add one workflow that runs the Capgo CLI: Capgo Builder produces the signed iOS and Android builds and can upload them to the stores, and the same workflow can ship web-only changes as Capgo live updates.
+**Short answer:** for Capacitor CI/CD on GitHub Actions, add one workflow that runs the Capgo CLI: Capgo Builder produces the signed iOS and Android builds and can upload them to the stores, and, with an added `bundle upload` job (see [Auto OTA or Native](/docs/builder/ci-ota-or-native/)), the same workflow can ship web-only changes as Capgo live updates.
 
 ## What You Get
 
