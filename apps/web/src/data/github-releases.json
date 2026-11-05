@@ -417,11 +417,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-appinsights 8.0.59",
-    "link": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.59",
-    "guid": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.59",
-    "pubDate": "2026-11-02T22:58:22.000Z",
-    "description": "🆕 Changelog Changed Updated dependency lock file to the latest compatible versions, ensuring consistent installations and incorporating upstream improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor appinsights/compare/8.0.58...8.0.59"
+    "title": "capacitor-appinsights 8.0.60",
+    "link": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.60",
+    "guid": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.60",
+    "pubDate": "2026-11-04T13:30:43.000Z",
+    "description": "🆕 Changelog Changed Updated to 1.19.1 and migrated to the AGP 9.1 toolchain, improving compatibility with newer Android SDKs and build tooling. Projects building from source should ensure their build environment supports AGP 9.1. 🔗 Full Changelog : https://github.com/Cap go/capacitor appinsights/compare/8.0.59...8.0.60"
   },
   {
     "category": "release",
@@ -553,11 +553,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-crisp 8.2.10",
-    "link": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.10",
-    "guid": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.10",
-    "pubDate": "2026-10-15T02:08:59.000Z",
-    "description": "🆕 Changelog Changed Updated project documentation. Upgraded development tooling to ESLint 10 and TypeScript 6, ensuring continued compatibility with the latest linting and type checking capabilities. Removed the consulting call to action from the README to simplify project information. 🔗 Full Changelog : https://github.com/Cap go/capacitor crisp/compare/8.2.9...8.2.10"
+    "title": "capacitor-crisp 8.2.11",
+    "link": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.11",
+    "guid": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.11",
+    "pubDate": "2026-11-04T13:56:43.000Z",
+    "description": "🆕 Changelog Fixed Updated the Crisp SDK to v2.0.24, resolving underlying dependency issues and ensuring compatibility with the latest Crisp messaging platform. Changed Upgraded the Node.js runtime dependency to v26; make sure your build and CI environments support Node 26 before upgrading. Updated Bun tooling to v1.4.4 for faster installs and improved build reliability. 🔗 Full Changelog : https://github.com/Cap go/capacitor crisp/compare/8.2.10...8.2.11"
   },
   {
     "category": "release",
@@ -833,11 +833,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-llm 8.1.11",
-    "link": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.1.11",
-    "guid": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.1.11",
-    "pubDate": "2026-10-15T02:25:26.000Z",
-    "description": "🆕 Changelog Changed Removed the consulting call to action from the README. Migrated internal development tooling to ESLint 10 and TypeScript 6; contributors should ensure their environments are aligned with these versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor llm/compare/8.1.10...8.1.11"
+    "title": "capacitor-llm 8.2.0",
+    "link": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.2.0",
+    "guid": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.2.0",
+    "pubDate": "2026-11-04T13:29:07.000Z",
+    "description": "🆕 Changelog Added Added opt in support for the ML Kit GenAI Agent backend with Gemini Nano on Android, enabling on device generative AI capabilities for supported devices. Default behavior remains unchanged; the new backend can be enabled via configuration for apps targeting Android. 🔗 Full Changelog : https://github.com/Cap go/capacitor llm/compare/8.1.11...8.2.0"
   },
   {
     "category": "release",
@@ -921,11 +921,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-navigation 8.16.0",
-    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.0",
-    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.0",
-    "pubDate": "2026-10-28T17:16:32.000Z",
-    "description": "🆕 Changelog Added Android leading navigation slot now displays the first left item — improves navigation affordance in the top app bar by surfacing the primary left side action or icon. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.15.2...8.16.0"
+    "title": "capacitor-native-navigation 8.16.1",
+    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.1",
+    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.1",
+    "pubDate": "2026-11-04T13:37:53.000Z",
+    "description": "🆕 Changelog Added Added automated screenshot workflow for Android navigation bar left items to strengthen visual regression testing coverage. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.16.0...8.16.1"
   },
   {
     "category": "release",
@@ -1289,11 +1289,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-updater 8.54.0",
-    "link": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.0",
-    "guid": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.0",
-    "pubDate": "2026-10-25T00:14:49.000Z",
-    "description": "🆕 Changelog Added Added and download gates so you can control the security and minimum baseline requirements for downloaded bundles. is enabled by default; if you currently serve updates over plain HTTP, migrate to HTTPS or explicitly set to avoid blocked downloads. Changed Improved native update check reliability by keeping up to 32 manifest files in flight and automatically recovering transient failures. Updated documentation with App Store review guidelines and best practices for splash s..."
+    "title": "capacitor-updater 8.54.2",
+    "link": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.2",
+    "guid": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.2",
+    "pubDate": "2026-11-04T13:49:27.000Z",
+    "description": "🆕 Changelog Fixed Fixed the built in hash table size check for compressed assets on Android, ensuring compressed assets are loaded reliably. 🔗 Full Changelog : https://github.com/Cap go/capacitor updater/compare/8.54.1...8.54.2"
   },
   {
     "category": "release",
@@ -1321,11 +1321,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-video-player 8.2.15",
-    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.2.15",
-    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.2.15",
-    "pubDate": "2026-10-16T17:46:24.000Z",
-    "description": "🆕 Changelog Fixed Fixed iOS audio session configuration so audio playback continues smoothly when the app enters background mode or Picture in Picture is active. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/8.2.14...8.2.15"
+    "title": "capacitor-video-player 8.3.0",
+    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.3.0",
+    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.3.0",
+    "pubDate": "2026-11-04T13:40:20.000Z",
+    "description": "🆕 Changelog Added Added a fullscreen chapter list on iOS and Android, making it easier to browse and jump between chapters while watching video content. Fixed Fixed an issue where were not being applied correctly on iOS and embedded Android tracks, ensuring subtitle styling and configuration now work consistently across these platforms. Changed Updated build tooling and runtime dependencies, including Node.js and Bun, to their latest supported versions for improved performance, compatibility..."
   },
   {
     "category": "release",
@@ -1409,11 +1409,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-zebra-datawedge 8.2.1",
-    "link": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.1",
-    "guid": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.1",
-    "pubDate": "2026-10-15T03:23:17.000Z",
-    "description": "🆕 Changelog Changed Migrated development dependencies to ESLint 10 and TypeScript 6, updating the project's linting and type checking toolchain. Removed the consulting call to action from the README to streamline project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor zebra datawedge/compare/8.2.0...8.2.1"
+    "title": "capacitor-zebra-datawedge 8.2.2",
+    "link": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.2",
+    "guid": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.2",
+    "pubDate": "2026-11-04T20:05:23.000Z",
+    "description": "🆕 Changelog Fixed Completed notification requests after dispatch to prevent stalled or incomplete notification handling. Requested and preserved profile app associations to maintain correct mappings between profiles and applications. Fixed parsing of Boolean and legacy scanner connection states to improve reliability of scanner state detection. 🔗 Full Changelog : https://github.com/Cap go/capacitor zebra datawedge/compare/8.2.1...8.2.2"
   },
   {
     "category": "release",

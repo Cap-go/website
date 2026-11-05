@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T03:05:30.793Z",
+  "updatedAt": "2026-11-05T03:05:36.937Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -36,6 +36,18 @@
   },
   "releases": [
     {
+      "repo": "Cap-go/capacitor-updater",
+      "tag": "8.54.2",
+      "url": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.2",
+      "publishedAt": "2026-11-04T13:49:27Z"
+    },
+    {
+      "repo": "Cap-go/capacitor-updater",
+      "tag": "8.54.1",
+      "url": "https://github.com/Cap-go/capacitor-updater/releases/tag/8.54.1",
+      "publishedAt": "2026-11-04T09:17:03Z"
+    },
+    {
       "repo": "Cap-go/capgo.app",
       "tag": "capgo-22.29.2",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.2",
@@ -52,28 +64,15 @@
       "tag": "capgo-22.29.0",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.0",
       "publishedAt": "2026-11-02T22:19:07Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.28.5",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.28.5",
-      "publishedAt": "2026-10-30T16:47:13Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.99.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.1",
-      "publishedAt": "2026-10-29T13:23:06Z"
     }
   ],
   "metrics": {
     "live": {
-      "success_rate": 84.8,
+      "success_rate": 85,
       "first_try_rate": 98.3,
-      "rollback_rate": 14.3,
-      "updated_at": "2026-11-04T03:05:18.217Z",
+      "rollback_rate": 14.1,
+      "updated_at": "2026-11-05T03:05:24.199Z",
       "daily": [
-        79.1,
         82.1,
         84.5,
         83.3,
@@ -102,12 +101,13 @@
         85.6,
         84.4,
         86.1,
-        86.1
+        86.1,
+        85.7
       ]
     },
     "builder": {
       "success_rate": 79.3,
-      "updated_at": "2026-11-04T03:05:18.083Z"
+      "updated_at": "2026-11-04T05:45:43.689Z"
     }
   }
 }

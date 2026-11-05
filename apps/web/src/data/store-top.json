@@ -1,7 +1,708 @@
 {
   "capacitor": {
-    "apps": [],
-    "usage": 0
+    "apps": [
+      {
+        "url": "https://play.google.com/store/apps/details?id=air.com.playtika.slotomania",
+        "title": "Slotomania™ Slots Casino Games",
+        "icon": "https://play-lh.googleusercontent.com/zGFaKYbx3cum12bnLD4E9GTl8ZU3uL_VVkavfiJqYCPx3F7GYHwripUx3lavhytq89M",
+        "installs": 79313129,
+        "category": "GAME"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.jus.tse.eleitoral.etitulo",
+        "title": "e-Título",
+        "icon": "https://play-lh.googleusercontent.com/2K6urTCerr6loFfG7pNP3wRqM3HVpT4xMyCa4BSGwqqm_olC2hoN8fCFOPDryc9kwE8",
+        "installs": 54855118,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.windyty.android",
+        "title": "Windy.com - Weather Forecast",
+        "icon": "https://play-lh.googleusercontent.com/qXBOdC6WVNPPZso8m5_Z_lCiNTG130ZwHAumXlLpF5r9yaPYICJw9tGGtPt5v9yh35E",
+        "installs": 32919408,
+        "category": "WEATHER"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.playtika.caesarscasino",
+        "title": "Caesars Slots: Casino Games",
+        "icon": "https://play-lh.googleusercontent.com/qGzmTgAvvvF5NaFqHB8Y7rejLkffI3zHWFEYJzcXMlXi2yBQBTvvRd69ZRn9ma8LJmw",
+        "installs": 31896616,
+        "category": "GAME_CASINO"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.infrasoft.uboi",
+        "title": "Vyom - Union Bank of India",
+        "icon": "https://play-lh.googleusercontent.com/mlL6e-9TQL_vIcOt79KCDzArLc_hyWJYKDGKKP2bwGe0q3EJS0HRFJuz41d2n-Xvng",
+        "installs": 27979178,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.gov.datasus.cnsdigital",
+        "title": "Conecte SUS",
+        "icon": "https://play-lh.googleusercontent.com/_ItDzVkRcYdSviiAzBB4KECwSfbP7ZfklGjIYMPMrVHGCi1CRcr6qsztHfADDU0IGqDM",
+        "installs": 27678757,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cowinapp.app&hl=en&gl=us",
+        "title": "Co-WIN Vaccinator App",
+        "icon": "https://play-lh.googleusercontent.com/prOx2TrtglSg5FRt08meDUxezPFkrIibGjRbXyGN6gdaNpNGLVqnjpF5o5gnitpF",
+        "installs": 21751125,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.greetingsisland.sam",
+        "title": "Invitation Maker Card Design",
+        "icon": "https://play-lh.googleusercontent.com/9dU02jjAkV7HXxK5AOYMqkJEsZ4In8YWBI2F6XH8l4BnT-vNxUwI16Ms3FfeEcs6Up4",
+        "installs": 19967814,
+        "category": "EVENTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.propel.ebenefits",
+        "title": "Providers: EBT, debit, & more",
+        "icon": "https://play-lh.googleusercontent.com/KZZXWqhPRrC90BMBPYDErwovMvxHgmp9Oq3kWOBPgMl0ySoQktr9sQ1ItEKWtGr_VcJE",
+        "installs": 18190189,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.onehundredpics.onehundredpicsquiz",
+        "title": "100 PICS Quiz - Logo & Trivia",
+        "icon": "https://play-lh.googleusercontent.com/me5yR4H1dZBuwInJvAEDRYcxTpbuEs8zt_FW5IQ5VTdxCf4AuXcpgEdNEINGoQKCGA",
+        "installs": 15735932,
+        "category": "GAME_TRIVIA"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.IndianBank.IndOASIS",
+        "title": "IndOASIS Indian Bank MobileApp",
+        "icon": "https://play-lh.googleusercontent.com/LGtygldnmgC4ji-3ZqfU78iXolZbVw1fjHOxKlmsOui2ZjltZg4TkHzEkO2-yCnSprZf",
+        "installs": 15436092,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.jus.tse.resultados&hl=en&gl=us",
+        "title": "Resultados",
+        "icon": "https://play-lh.googleusercontent.com/rKvQQroGJA86vCG0eDqVeFZsltKxMlQWvmH-nFN-tRBYANShKEQKEPeK7G7NrTyX4g",
+        "installs": 14975218,
+        "category": "Tools"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=de.burgerking.kingfinder",
+        "title": "BURGER KING®",
+        "icon": "https://play-lh.googleusercontent.com/PDSuJ9JjikJ2kNqMoKFEOJ6NpX7_SNXJuW7ixBRiqR_ptEBjjYn5JFm3W4DO7zHMQ5M",
+        "installs": 14264075,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.kai.kaiticketing",
+        "title": "KAI Access: Train Booking App",
+        "icon": "https://play-lh.googleusercontent.com/dnFOQqguRQB6G0BVca-YNaPGYDfgTOK3BGvlyOr4s6w-6-U17V2iYnLKmgau865mWOs",
+        "installs": 13496796,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=de.tvspielfilm",
+        "title": "TV SPIELFILM - TV-Programm",
+        "icon": "https://play-lh.googleusercontent.com/leo6t9uMZUdgwmQNZnk1gqjwV04reFKWmoAjuimPK9k5_Zbzoky_7mrNrfXsULognS8",
+        "installs": 12126454,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=org.lichess.mobileapp",
+        "title": "lichess • Free Online Chess",
+        "icon": "https://play-lh.googleusercontent.com/5bZvh2nmZ-2B-kcKTuATofj5bhscTrJqveAHGYVoJKalfFOMEgx2VnyOth7oJ8bJzQ",
+        "installs": 11343228,
+        "category": "GAME_BOARD"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=net.bitburst.pollpay",
+        "title": "Poll Pay: Money for Surveys",
+        "icon": "https://play-lh.googleusercontent.com/0ChVi4ei7TtNUdAase4IK61Gbm010dCM5AlQVMobw32ZLG_bZyF-u3ToYU032N9XDXQ",
+        "installs": 11295030,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ua.vodafone.myvodafone",
+        "title": "My Vodafone",
+        "icon": "https://play-lh.googleusercontent.com/xuGh4YAt0sOfSJJbfd3unyYKWvcgVZ1xxy62UwICVxct9f53kvT0-xnwVvIpOMSRrgg",
+        "installs": 11056716,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.oi.tecnicovirtual&hl=en&gl=us",
+        "title": "Técnico Virtual – Suporte Técn",
+        "icon": "https://play-lh.googleusercontent.com/Z6dllHB0cJ7mRTder7aN95E9eU-jyuChCVRKQOiVpvuieQjyh3gcswY19J3e_c6t",
+        "installs": 10336382,
+        "category": "Tools"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.orange.miorange",
+        "title": "Mi Orange",
+        "icon": "https://play-lh.googleusercontent.com/NXY743Tphk0kApA9B34LMcOxBotwPrxawdbANUHGTyj2kUVVxmXNm2eX4FDDcaWB6-E",
+        "installs": 9336196,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.freelancer.android.messenger",
+        "title": "Freelancer: Hire & Find Jobs",
+        "icon": "https://play-lh.googleusercontent.com/DK7BGyOA_2Z_oYvoPRdC4f8JnURBCE1pDKPyEXd0B190U2p57Fr9LifujFegPAG6MA",
+        "installs": 8941852,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.aaa.android.discounts",
+        "title": "AAA Mobile",
+        "icon": "https://play-lh.googleusercontent.com/QOXqnUL5ElRoFq26Q6AobPavbT0U2LbzBjhecy6tIghGVZm6twBNk_Y3IB6rGpiZ1x0",
+        "installs": 7424477,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=sworkitapp.sworkit.com",
+        "title": "Sworkit Fitness – Workouts",
+        "icon": "https://play-lh.googleusercontent.com/KyP6tycYadkIuQY-w_4c0_feiK5qw9ftVOGn9rF-Mo0WmUxKgjDeKaIcgeAW7xp0a7s",
+        "installs": 6552738,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.studysmarter",
+        "title": "StudySmarter - School & uni",
+        "icon": "https://play-lh.googleusercontent.com/j2qPOVSwqKIdUCZJjFN4yF-GulBon9moWrM3qUFDFgZCQ6Fjzv97a26OASWmL5JfYw",
+        "installs": 6480843,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.visnalize.win7simu",
+        "title": "Win7 Simu",
+        "icon": "https://play-lh.googleusercontent.com/hhIHRXxOzAzFb6leGaZ-GZ9SvXe21dfYNLMtTJP-YbiCIqWCr383lQQwjKjbJBrgtNk",
+        "installs": 5906244,
+        "category": "GAME"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.douglas.main",
+        "title": "Douglas – Parfüm & Kosmetik",
+        "icon": "https://play-lh.googleusercontent.com/lf0fdMnCvtswmedkd-Gci2r33mDYs970oywFcd9Yv51-wJhgXLJzh5UWfkvDVfxGnQ",
+        "installs": 5372679,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gamefly.android.gamecenter",
+        "title": "GameFly",
+        "icon": "https://play-lh.googleusercontent.com/HKappP8liiPSC-FGStM9ENV9d-ulwFjHBq5li8Wu6KJCksl2k0ndPQNqtFPfG_FBdA",
+        "installs": 5091664,
+        "category": "Entertainment"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.hrblock.blockmobile",
+        "title": "MyBlock",
+        "icon": "https://play-lh.googleusercontent.com/se2MuOmrSIdiBTbx4_fVk-933hnRiFlHcpT1uGAmx4Fq6HwBmJe9UfvwwV4kifSLvQ",
+        "installs": 4983738,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.aymore.sim",
+        "title": "Empréstimo Pessoal SIM",
+        "icon": "https://play-lh.googleusercontent.com/8eOQGc1W4WSpU2kjogJCV6eUlOQKmjTkBqgW_j65KYX8jOCE0U_viCjDh7soeOqagans",
+        "installs": 4873180,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.lcode.ucomobilebanking",
+        "title": "UCO mBanking Plus",
+        "icon": "https://play-lh.googleusercontent.com/Y9FJUz7HxPdFfwYegvolG3W53nt9LSHy_eH0BCM5NX9OZHfBxTVJufbH4IXEuMDgFqA",
+        "installs": 4678983,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ir.rightel.myrightel",
+        "title": "MyRightel",
+        "icon": "https://play-lh.googleusercontent.com/o2ya4fzawHSMcOdJ2DsPRj1Z5f7_bwKe6BE2IZRBbmVomODSF8nd0Iggfe_Mgfo0Tko",
+        "installs": 3986832,
+        "category": "PERSONALIZATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.elasthink.lyricstraining",
+        "title": "Learn Languages with Music",
+        "icon": "https://play-lh.googleusercontent.com/pgM_Ib0cu2dcy2o7toqYv3GGtEqBdtZhfhu7kgHniz0yokc5PV5aIlb9uZtrOe0hJg",
+        "installs": 3702406,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.naxtlab.facebook.colors.pink",
+        "title": "Pink Color for Facebook",
+        "icon": "https://play-lh.googleusercontent.com/8jqre2rfbvP6MUC7CDF16gmRJlP1sytQJyhWwBN4145sEbo_h2DbFL3EZsMrFQcV70s",
+        "installs": 3649579,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.writeit.kor",
+        "title": "Write It! Korean",
+        "icon": "https://play-lh.googleusercontent.com/D5ECxp2tElB4DnzyDmYENRmakEUhgBR5z9K2arhY5pW-V6JQ4wHCCglzQSJZwlbJ6LA",
+        "installs": 3587186,
+        "category": "GAME_EDUCATIONAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.UnipolSaiApp",
+        "title": "UnipolSai Assicurazioni",
+        "icon": "https://play-lh.googleusercontent.com/yHalLKhYHH0IQLKvIv0dEyPOuhi1ckoQEqLThnvEGQAxMBvh-RCRlCTKx5WTX7FSxorj",
+        "installs": 3290940,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.paylocity.paylocitymobile",
+        "title": "Paylocity Mobile",
+        "icon": "https://play-lh.googleusercontent.com/oTtp5ay3Ht12U7sSv1ixCaXgqIjyiYLUgo4eoze4d9mxgpCgMl76-uc4ouoVrIPR9G0",
+        "installs": 3132112,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.orange.mobile.ecare",
+        "title": "mi altice - Rep. Dom.",
+        "icon": "https://play-lh.googleusercontent.com/iRDz5WtbllAJO_vG8oWYsysBdrbqKaaRw0NV2NUeSW10nmwh6FU-4RQpwtFeFfXBSQ8",
+        "installs": 2937801,
+        "category": "PRODUCTIVITY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.emn8.mobilem8.nativeapp.bkuk",
+        "title": "Burger King App: Food & Drink",
+        "icon": "https://play-lh.googleusercontent.com/LacpG4ha7dPghicyCgGkM_kQQBWzAO6M65NBmqz06Lw1FLJsegvBxr3xuvlIAoU0zdHI",
+        "installs": 2883979,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.un7qi3.forceteller",
+        "title": "포스텔러 - 신년운세, 사주, 타로, 궁합, 점성술",
+        "icon": "https://play-lh.googleusercontent.com/z3WEfUIxhfdLe_OX7gWV4NdIRkjC3EOrOSh9R_J74qKCOa7c5IAoaDlKqGWWaMmUn3E4",
+        "installs": 2833881,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.morrisons.matchandmore.app",
+        "title": "My Morrisons",
+        "icon": "https://play-lh.googleusercontent.com/9IKXGc-hU9LvQn7Bhvv6b5kUe6PsPmsnBs9TpDtFZfK_scJ-7QkR8oE8RDgP5FGeHnY",
+        "installs": 2824658,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gettransfer",
+        "title": "GetTransfer.com",
+        "icon": "https://play-lh.googleusercontent.com/QifUjZDBxNTepVdgsMByZfwZFixny8XLFjfwiACJGbCPlRu8LYLX0lIKzc8Fzq9FyoZG",
+        "installs": 2769645,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.bradseg.bscelular",
+        "title": "Bradesco Seguros",
+        "icon": "https://play-lh.googleusercontent.com/yQhfV8pbSkt2VTo2CeD2d301fBAb6Babl_SxpavQ5yCb_6YFB4hCbzcT1GGTL3fhVuo",
+        "installs": 2760477,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.zena.Fosters",
+        "title": "Foster´s Hollywood – Comida am",
+        "icon": "https://play-lh.googleusercontent.com/FHnpktjVaqqVQZ1VfGe9jxGF8weUnLsCf1jvxCv9HPFcaf2A8oywuROOZAXQxL4zYkg",
+        "installs": 2707605,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jackintheboxinc.JackMobileApp",
+        "title": "Jack in the Box® - Order Food",
+        "icon": "https://play-lh.googleusercontent.com/0nYXXrfykZoepAyeF-SUmh8NXCiIptd8bPKZlKueJ0RBA6HXtSRCPmA4hcwADvwmVrc",
+        "installs": 2702012,
+        "category": "Food & Drink"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=zena.dominos",
+        "title": "Domino’s Pizza España.",
+        "icon": "https://play-lh.googleusercontent.com/XFoF95cacSb9XWggu2TasmSIfW-OODjkFgWUV_ib6ePh0F-RuK4m2i_2yEkCikmUOMbH",
+        "installs": 2627000,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.astrapaging.vff",
+        "title": "VesselFinder",
+        "icon": "https://play-lh.googleusercontent.com/Z5XcMJYxyjrDQGDdidIhZuWcxwpFqiBsXNa6nCDUJL19pp7zpdkzvIRTsIiZ8i4cdg",
+        "installs": 2622368,
+        "category": "MAPS_AND_NAVIGATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.tatacapital.moneyfy",
+        "title": "Moneyfy - MF, SIP & Loan App",
+        "icon": "https://play-lh.googleusercontent.com/p0cejUwsrrY-O4Gp48kJYrzOYcI1BEjlSDB2tmkqWa4_0OSkkHwi9P3BheqhJKzuflY",
+        "installs": 2606458,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.orange.mobile.orangemoney",
+        "title": "Orange Money Sénégal",
+        "icon": "https://play-lh.googleusercontent.com/T4ZLP7nx1kM6oXacVqAlCqQ5d11xc1NPdC9i3iofouWGIuXXo9QW0FsQJGA01AEblDRo",
+        "installs": 2574366,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.upland.app",
+        "title": "Upland - Real Estate Simulator",
+        "icon": "https://play-lh.googleusercontent.com/dxQazTH6eyMtLAjzgSwcixVkB58JJBN8Al7PHFsZFcIrLwkkJ03vbgzljfNGwbA10zah",
+        "installs": 2440375,
+        "category": "GAME_CASUAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=fr.agircarrco.smartretraite",
+        "title": "Mon compte retraite",
+        "icon": "https://play-lh.googleusercontent.com/21tS_RiM_BjWXl6iGvuyUD-MhC4P8LmTaadCNOffE4JfDkKAA-vS5JxynAaNZQ43AkM",
+        "installs": 2408004,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=es.nooddle",
+        "title": "ekilu - healthy recipes & plan",
+        "icon": "https://play-lh.googleusercontent.com/JwmTeAS2PMFrA8tASupfnKcG7DNu_qAzf3RwxR65JnSX5LSAuCaf2JpfEi33l25W250",
+        "installs": 2399042,
+        "category": "HEALTH_AND_FITNESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jpma.EBTShopper",
+        "title": "WICShopper",
+        "icon": "https://play-lh.googleusercontent.com/hyKCfBwKQhcdsugaoWPI7bKbB32F7ywPOhJY-u6tbShYwNQDAWkjZRPaOrK8bxEeJA",
+        "installs": 2327771,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cainz.cainz",
+        "title": "カインズ",
+        "icon": "https://play-lh.googleusercontent.com/EAq0L0VsOM7wf0mu3Z1dmDMS4XAZG3YWiYU8KYQPqhELxq5XHPfs1Y1Ec8ZT-AMO-7k",
+        "installs": 2318703,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.jus.tse.eleitoral.mesarios&hl=en&gl=us",
+        "title": "Mesário",
+        "icon": "https://play-lh.googleusercontent.com/YT8lW0SSb_1-Il4I0q11ZpqH3d_nio4im20KYPIfg9VxulivXhK0p1dKCTpb4Z2l3v0",
+        "installs": 2248677,
+        "category": "Productivity"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.woomfertility.woomapp&hl=en&gl=us",
+        "title": "WOOM - Ovulation & Fertility",
+        "icon": "https://play-lh.googleusercontent.com/D_NKEaYvmYoWmEaecowKgiZj0c9vA39M16zyOmNIJ64KqHu6vqEWmRlI_Fvkngkm45o",
+        "installs": 2088121,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.uniasselvi.leonardo",
+        "title": "UNIASSELVI Leo App",
+        "icon": "https://play-lh.googleusercontent.com/lxAibpROnBYS8UdEsiWmEVtBH798TbS3KyKev7KMgdM1YaV349DtjP2L2ckqw3-sPE8",
+        "installs": 2071240,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=au.com.hotdoc.android.hotdoc",
+        "title": "HotDoc",
+        "icon": "https://play-lh.googleusercontent.com/YP3F0StAPaPeVfC2QDtP6qJviIrymUKUHClyQzfSZHsWjW8s6f5djHfaai37iAS6wg",
+        "installs": 2055327,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=en.un7qi3.forceteller",
+        "title": "FORCETELLER Astrology & Saju",
+        "icon": "https://play-lh.googleusercontent.com/k1yZ4tuwpBS1FusUSPqvHfMwDWX-70Hm3Qxy6b_zd-E1K17CB2plBy6Lo3KL-riWG-E",
+        "installs": 1998895,
+        "category": "Entertainment"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=uk.co.bbc.cbeebiesplaytimeisland",
+        "title": "CBeebies Playtime Island: Game",
+        "icon": "https://play-lh.googleusercontent.com/RYIzUFaBK9koyeNawa8KsqKPa6NmS4swruhBPC6J8XHgw4PJazvaEIv4RBuUTTOjonER",
+        "installs": 1939469,
+        "category": "FAMILY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mushroomcloud.cars",
+        "title": "Cars.co.za",
+        "icon": "https://play-lh.googleusercontent.com/WUYcnzz9FG4MTxg98F98km6LYVK3_EhJsQP_hs8m4K902F39iDuomosyhRGIQPxj0_3b",
+        "installs": 1886114,
+        "category": "AUTO_AND_VEHICLES"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.point4more.ios.tak.user.prod",
+        "title": "Takko Friends",
+        "icon": "https://play-lh.googleusercontent.com/D4AhNZ_gkb0qxbwFclJPaI84BrnF9JxF57qE9xSpnp848ACJGm6xakpFI9V-k-73zA",
+        "installs": 1880014,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.passagensimperdiveis",
+        "title": "Passagens Imperdíveis",
+        "icon": "https://play-lh.googleusercontent.com/jE5QB571MGeT825LicGY7LTU9vD-gqp5hf0aA6FTIhq1M-c5_W9GBWouOqBfgs1dT0kx",
+        "installs": 1874636,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.beneficiario.odontoprev",
+        "title": "Odontoprev",
+        "icon": "https://play-lh.googleusercontent.com/-VO9joxW9BAc1pUY1pnIx_GaFnHmNED4-GxQP1IUCfgVo8YIqJj0cpODKqAWSZp6cg",
+        "installs": 1871596,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=air.uk.co.bbc.cbeebiesstorytime",
+        "title": "CBeebies Storytime: Read",
+        "icon": "https://play-lh.googleusercontent.com/ThzRNciiMIdIrlKgbQEzeuuHbg2wEZZcDP773n7VA0PBf-yEQrJujJTRp5V8hrdwCLA",
+        "installs": 1807385,
+        "category": "FAMILY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.infinite.jpn&hl=en&gl=us",
+        "title": "Infinite Japanese",
+        "icon": "https://play-lh.googleusercontent.com/19818WQw8abVv7uXuJZyA6cGyM7HP17Zh-_2PqDT5-9w8DEeJbOg-7Ip1X70rf7AbrT_",
+        "installs": 1804981,
+        "category": "Educational"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jumbo.extras",
+        "title": "Jumbo Extra's",
+        "icon": "https://play-lh.googleusercontent.com/9DKD9qKo8_vVAEz_vR1RRm0YOdvQB-IAcwl85WUa1mE1IcWIAQiaGVz1CMdmY0q_Ib12",
+        "installs": 1763552,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.swisscom.myswisscom",
+        "title": "My Swisscom",
+        "icon": "https://play-lh.googleusercontent.com/a_ElP-zHCheGbkYICNzsqOXqdGAKLbJ-eEq6ukQWj3xfhwc7EjOSI0_WQAi_9zUI_5sl",
+        "installs": 1758453,
+        "category": "PRODUCTIVITY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.card.cardcom&hl=en&gl=us",
+        "title": "CARD Prepaid Debit",
+        "icon": "https://play-lh.googleusercontent.com/f2nGgHqhO5umm9yL7ljXgRTvnMHRiugm9Kkh7RNw8euKZyEG-4UqtuK93Tv7Mi64KR0",
+        "installs": 1746389,
+        "category": "Finance"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.astrolis.Horoscope",
+        "title": "Horoscopes & Tarot",
+        "icon": "https://play-lh.googleusercontent.com/xIXeHtUFX1lJs5CwttKGOADPYktBSh3Vcuqpl6oYyTyOo6fIHuOkpgueqSdNeV2vAQ",
+        "installs": 1728410,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.dennys.mobile",
+        "title": "Denny's",
+        "icon": "https://play-lh.googleusercontent.com/x7yKSH2i3m3mqiBwd2hVrojVq2c-GpiKIFbo2Q3PFdvgj_Z4i6Cb26lUhLVbEf5BIaeu",
+        "installs": 1727335,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.sii.asf",
+        "title": "Ulys by VINCI Autoroutes",
+        "icon": "https://play-lh.googleusercontent.com/vhKx8IhEhafjGTdw_gEJue2W2vcVXXgzdmyyl2q4rv2_eH7Apk6kZBqx8an7eFlwcw",
+        "installs": 1709102,
+        "category": "MAPS_AND_NAVIGATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.espacolaser.Agendamento",
+        "title": "Espaçolaser",
+        "icon": "https://play-lh.googleusercontent.com/rqejRZ3an8hgrDWxHdP2Rp-p8M6D_REaYazES-biuQlqoh3rlGkL5dcWJrAAIZpldA",
+        "installs": 1708115,
+        "category": "BEAUTY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ch.icoaching.typewise",
+        "title": "Typewise Custom Keyboard",
+        "icon": "https://play-lh.googleusercontent.com/dso35eI8dZd0PFHMfoLpZIthufONgNKuXeZrjR1PL0U9wQ0rrrdIoObEdDTEObxhYg",
+        "installs": 1703157,
+        "category": "PERSONALIZATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.writeit.jpn",
+        "title": "Write It! Japanese",
+        "icon": "https://play-lh.googleusercontent.com/8gaXTq2w-9OM2rzyq1gRkG9L2MR9NAoCLs9HQuzIgnk3NWeV6hQEuPG15-qch2fI6YA",
+        "installs": 1688401,
+        "category": "GAME_EDUCATIONAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.rtlinteractive.wwm",
+        "title": "Wer wird Millionär? Training",
+        "icon": "https://play-lh.googleusercontent.com/59fxuKQMCAoS8QE1NB-_GiLLFaYZgtQDdn7FdgfOb3Yw9Q-CxPlhL8lNqWFtbtfF35s",
+        "installs": 1664121,
+        "category": "GAME_TRIVIA"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=gov.fema.mobile.android",
+        "title": "FEMA",
+        "icon": "https://play-lh.googleusercontent.com/okrUGchhgopCmYQ-wqWQ_fIjP7Ujz3Y-qnWUAq_YrmBOhJWOO0TSW8ve_Vtm8Q3OvbA",
+        "installs": 1649325,
+        "category": "WEATHER"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=gt.com.tigosports",
+        "title": "Tigo Sports Guatemala",
+        "icon": "https://play-lh.googleusercontent.com/KH-g_YGtjU5GdfVyNZlvi40ld8mN0Nf5KQuRxRvGd_McffdR7wA95zLDn7eV0khH_0o",
+        "installs": 1569649,
+        "category": "SPORTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gooogle.android.kuvera.app",
+        "title": "Kuvera: MFs, FDs, Stocks",
+        "icon": "https://play-lh.googleusercontent.com/d2gb02hLrqEwit_u51Mmf2-xnz_gXcB47akQvIkEanjtRlUifeLQdg_Akroh1SMmkw",
+        "installs": 1532519,
+        "category": "Finance"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.gov.rs.procergs.nfg",
+        "title": "Nota Fiscal Gaúcha-NFG Oficial",
+        "icon": "https://play-lh.googleusercontent.com/hJttWoevYdTOAk7xZGcdDa2JIrxva0SIsRWsOlVnQAy8MxtQdc_xE3VIngKYqWK3Iw",
+        "installs": 1525930,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.hm.eJobsUsers",
+        "title": "eJobs.ro - Locuri de muncă",
+        "icon": "https://play-lh.googleusercontent.com/nfVqP2xhp4niv5em2EtuZ7JewHSXBIwTNDhr0s0zMYCYWQhIf3TgRk9H0kM5zjPkhw",
+        "installs": 1461811,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.buggames.countryballs",
+        "title": "Countryballs Stickers",
+        "icon": "https://play-lh.googleusercontent.com/urvkmWwfuCBsRcdflXgIkPXDFzBNalOUQpic91Lp4gudySlNI3rPnrO3WjskTyc_8ac",
+        "installs": 1458492,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gestycontrol.samplia",
+        "title": "Samplia",
+        "icon": "https://play-lh.googleusercontent.com/DL46JeAvAfQZPeornZQ2IYhkU3FdODvHxDclizAqAiTMoVG96gfrvQgNRQCsP1dDyNk",
+        "installs": 1434042,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=la.foton.brb.myphone",
+        "title": "BRB Mobile",
+        "icon": "https://play-lh.googleusercontent.com/m_oQMJJKoPlMKYzqHz-JfbU8-bvDyCH6uswF_DqfzgEXdoVxPxL1Oyw7VWO-lxMVnZ8",
+        "installs": 1401081,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=net.groceryshopping.SproutsFarmersMarket",
+        "title": "Sprouts",
+        "icon": "https://play-lh.googleusercontent.com/08bY9GrB1UtfY8T6DGbJgea8NaDkF-XMOFvjLfjqYF-KhJphiNlwznohXyKhvfljdkk",
+        "installs": 1350282,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=bo.com.tigosports",
+        "title": "Tigo Sports Bolivia",
+        "icon": "https://play-lh.googleusercontent.com/g9v96DkMl96R7IJiWnCu2m48GQyc3xipuHc1UtYrzsAeHSt7wweTw9yYeYypHTG6Bk4Z",
+        "installs": 1330049,
+        "category": "SPORTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ch.coop.supercard",
+        "title": "Coop Supercard",
+        "icon": "https://play-lh.googleusercontent.com/w31Ig4jDpNuxIVYElQZnMr-yoIJ8NhdfsRQu7u8YpaDduxAFHkWGzeYK80FkRPG67A",
+        "installs": 1308143,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.youper",
+        "title": "Youper - CBT Therapy",
+        "icon": "https://play-lh.googleusercontent.com/_0v_dDm_VqcAPfFbWlga7HhFftNVr2D-SIPaULwbbgi4OT-gAOHoa6Nw6EbFUmHtDI0",
+        "installs": 1303782,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.wegmans.wegmansapp",
+        "title": "Wegmans",
+        "icon": "https://play-lh.googleusercontent.com/FffojmhAqdpRPWU-DoJDNk0D2zlhCOEVPFm2fQ-RIFxlML1yIIH0UXwEpjsoSNA1kY_e",
+        "installs": 1286319,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.grupozeta.sportes",
+        "title": "SPORT.es",
+        "icon": "https://play-lh.googleusercontent.com/Gp-PwBNfQSpfISz28RHIRaq3BuCX2imnpoyoxS-9Mh2FdJ1xvsJuSlxUFyLZdtLefA",
+        "installs": 1278656,
+        "category": "SPORTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=sv.tigo.mfsapp",
+        "title": "Tigo Money El Salvador",
+        "icon": "https://play-lh.googleusercontent.com/ggVQv8r3xqSQJyheFstK1XTBaVYODsjF81YVKG-Q5vX46S6NTdykLvdopC1tPK33ZZ4",
+        "installs": 1276816,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cocobambu.cupdescprod",
+        "title": "Coco Bambu",
+        "icon": "https://play-lh.googleusercontent.com/iuJDKGY_pzqw5mozRUckxN8TeGHQfhaQp6UG2XntHZMMNqTnwigs5liNQ-si0Qut2OQ",
+        "installs": 1274081,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=uk.co.parentmail.parentmail",
+        "title": "IRIS ParentMail",
+        "icon": "https://play-lh.googleusercontent.com/f_kS--49imp8pRbkLC6rQAZ2kiFCr2s39kyn0L_d_boV23sKRTQI8JVQAhPe_smk2jQ",
+        "installs": 1245646,
+        "category": "Education"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.osde.ar&hl=en&gl=us",
+        "title": "OSDE Móvil",
+        "icon": "https://play-lh.googleusercontent.com/Q8V8muB64C1wFtQeS-bWwZuZSREPSVjE0JwYA76q94WiUBvCfTHZwMBWs40wx0fmILA",
+        "installs": 1239995,
+        "category": "Medical"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=hu.telekomnewmedia.valovilag",
+        "title": "RTL.hu hírek, sztárok, videók",
+        "icon": "https://play-lh.googleusercontent.com/TOHQfZEHdqNgMCpDvrHDJ3LNgPVM4I0Rgzy4hNSBHPqPXLS-jjngLp9b6f469Fj6lg",
+        "installs": 1217719,
+        "category": "NEWS_AND_MAGAZINES"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ru.rambler.mail",
+        "title": "Рамблер/почта",
+        "icon": "https://play-lh.googleusercontent.com/qY_QnP-NbSHnPWSgJXfqSZIiAQgDwVMByb5S6E9rXAxyE2iti1XEaieIjR7AKBFJ2t8",
+        "installs": 1204718,
+        "category": "COMMUNICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.epayon.app",
+        "title": "ePayon: Recharge, Bill, Job",
+        "icon": "https://play-lh.googleusercontent.com/uxIyj6bik9Db-t6YsActW_-k4B-xBgXgq46Uxn0Vd_fyF0sBwjGH5rGy3tsPX_-rHw",
+        "installs": 1189557,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.supercuts.app",
+        "title": "Supercuts Online Check-in",
+        "icon": "https://play-lh.googleusercontent.com/DrzMJYO6cc4KNAMYAKjfMq5DC12m-ypXp4reaRGeSmaTqk0PjOYXn6WUlUTAXGP-Tw8",
+        "installs": 1175498,
+        "category": "Lifestyle"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.adsvlog.backstage",
+        "title": "Get Subscribers, Get Views",
+        "icon": "https://play-lh.googleusercontent.com/ARxOMzEXkn9yYWcT2FfnRsPfAumaia2uim2Cog5YIkdvBCVUw0TMBFALpsmKIsPbB7Q",
+        "installs": 1173928,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.infinite.kor&hl=en&gl=us",
+        "title": "Infinite Korean",
+        "icon": "https://play-lh.googleusercontent.com/MKNGdGWdzankq5_uo8z87vxGa9oCvSJn-zyen7BKo77D4cdEFc-Pt8ze1H0ZflD9_paA",
+        "installs": 1172165,
+        "category": "Educational"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.polleverywhere.mobile",
+        "title": "Poll Everywhere",
+        "icon": "https://play-lh.googleusercontent.com/gVe6IqmsUdPZPI0jS6dSSmEgBNIpAgBbwJlx51lSe_isN8yjNoiXMvxJtqdc64H0RQ",
+        "installs": 1135271,
+        "category": "BUSINESS"
+      }
+    ],
+    "usage": 9.95
   },
   "capgo": {
     "apps": [
@@ -2119,8 +2820,709 @@
     "usage": 0.67
   },
   "kotlin": {
-    "apps": [],
-    "usage": 0
+    "apps": [
+      {
+        "url": "https://play.google.com/store/apps/details?id=air.com.playtika.slotomania",
+        "title": "Slotomania™ Slots Casino Games",
+        "icon": "https://play-lh.googleusercontent.com/zGFaKYbx3cum12bnLD4E9GTl8ZU3uL_VVkavfiJqYCPx3F7GYHwripUx3lavhytq89M",
+        "installs": 79313129,
+        "category": "GAME"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.jus.tse.eleitoral.etitulo",
+        "title": "e-Título",
+        "icon": "https://play-lh.googleusercontent.com/2K6urTCerr6loFfG7pNP3wRqM3HVpT4xMyCa4BSGwqqm_olC2hoN8fCFOPDryc9kwE8",
+        "installs": 54855118,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.windyty.android",
+        "title": "Windy.com - Weather Forecast",
+        "icon": "https://play-lh.googleusercontent.com/qXBOdC6WVNPPZso8m5_Z_lCiNTG130ZwHAumXlLpF5r9yaPYICJw9tGGtPt5v9yh35E",
+        "installs": 32919408,
+        "category": "WEATHER"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.playtika.caesarscasino",
+        "title": "Caesars Slots: Casino Games",
+        "icon": "https://play-lh.googleusercontent.com/qGzmTgAvvvF5NaFqHB8Y7rejLkffI3zHWFEYJzcXMlXi2yBQBTvvRd69ZRn9ma8LJmw",
+        "installs": 31896616,
+        "category": "GAME_CASINO"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.infrasoft.uboi",
+        "title": "Vyom - Union Bank of India",
+        "icon": "https://play-lh.googleusercontent.com/mlL6e-9TQL_vIcOt79KCDzArLc_hyWJYKDGKKP2bwGe0q3EJS0HRFJuz41d2n-Xvng",
+        "installs": 27979178,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.gov.datasus.cnsdigital",
+        "title": "Conecte SUS",
+        "icon": "https://play-lh.googleusercontent.com/_ItDzVkRcYdSviiAzBB4KECwSfbP7ZfklGjIYMPMrVHGCi1CRcr6qsztHfADDU0IGqDM",
+        "installs": 27678757,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cowinapp.app&hl=en&gl=us",
+        "title": "Co-WIN Vaccinator App",
+        "icon": "https://play-lh.googleusercontent.com/prOx2TrtglSg5FRt08meDUxezPFkrIibGjRbXyGN6gdaNpNGLVqnjpF5o5gnitpF",
+        "installs": 21751125,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.greetingsisland.sam",
+        "title": "Invitation Maker Card Design",
+        "icon": "https://play-lh.googleusercontent.com/9dU02jjAkV7HXxK5AOYMqkJEsZ4In8YWBI2F6XH8l4BnT-vNxUwI16Ms3FfeEcs6Up4",
+        "installs": 19967814,
+        "category": "EVENTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.propel.ebenefits",
+        "title": "Providers: EBT, debit, & more",
+        "icon": "https://play-lh.googleusercontent.com/KZZXWqhPRrC90BMBPYDErwovMvxHgmp9Oq3kWOBPgMl0ySoQktr9sQ1ItEKWtGr_VcJE",
+        "installs": 18190189,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.onehundredpics.onehundredpicsquiz",
+        "title": "100 PICS Quiz - Logo & Trivia",
+        "icon": "https://play-lh.googleusercontent.com/me5yR4H1dZBuwInJvAEDRYcxTpbuEs8zt_FW5IQ5VTdxCf4AuXcpgEdNEINGoQKCGA",
+        "installs": 15735932,
+        "category": "GAME_TRIVIA"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.IndianBank.IndOASIS",
+        "title": "IndOASIS Indian Bank MobileApp",
+        "icon": "https://play-lh.googleusercontent.com/LGtygldnmgC4ji-3ZqfU78iXolZbVw1fjHOxKlmsOui2ZjltZg4TkHzEkO2-yCnSprZf",
+        "installs": 15436092,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.jus.tse.resultados&hl=en&gl=us",
+        "title": "Resultados",
+        "icon": "https://play-lh.googleusercontent.com/rKvQQroGJA86vCG0eDqVeFZsltKxMlQWvmH-nFN-tRBYANShKEQKEPeK7G7NrTyX4g",
+        "installs": 14975218,
+        "category": "Tools"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=de.burgerking.kingfinder",
+        "title": "BURGER KING®",
+        "icon": "https://play-lh.googleusercontent.com/PDSuJ9JjikJ2kNqMoKFEOJ6NpX7_SNXJuW7ixBRiqR_ptEBjjYn5JFm3W4DO7zHMQ5M",
+        "installs": 14264075,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.kai.kaiticketing",
+        "title": "KAI Access: Train Booking App",
+        "icon": "https://play-lh.googleusercontent.com/dnFOQqguRQB6G0BVca-YNaPGYDfgTOK3BGvlyOr4s6w-6-U17V2iYnLKmgau865mWOs",
+        "installs": 13496796,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=de.tvspielfilm",
+        "title": "TV SPIELFILM - TV-Programm",
+        "icon": "https://play-lh.googleusercontent.com/leo6t9uMZUdgwmQNZnk1gqjwV04reFKWmoAjuimPK9k5_Zbzoky_7mrNrfXsULognS8",
+        "installs": 12126454,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=org.lichess.mobileapp",
+        "title": "lichess • Free Online Chess",
+        "icon": "https://play-lh.googleusercontent.com/5bZvh2nmZ-2B-kcKTuATofj5bhscTrJqveAHGYVoJKalfFOMEgx2VnyOth7oJ8bJzQ",
+        "installs": 11343228,
+        "category": "GAME_BOARD"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=net.bitburst.pollpay",
+        "title": "Poll Pay: Money for Surveys",
+        "icon": "https://play-lh.googleusercontent.com/0ChVi4ei7TtNUdAase4IK61Gbm010dCM5AlQVMobw32ZLG_bZyF-u3ToYU032N9XDXQ",
+        "installs": 11295030,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ua.vodafone.myvodafone",
+        "title": "My Vodafone",
+        "icon": "https://play-lh.googleusercontent.com/xuGh4YAt0sOfSJJbfd3unyYKWvcgVZ1xxy62UwICVxct9f53kvT0-xnwVvIpOMSRrgg",
+        "installs": 11056716,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.oi.tecnicovirtual&hl=en&gl=us",
+        "title": "Técnico Virtual – Suporte Técn",
+        "icon": "https://play-lh.googleusercontent.com/Z6dllHB0cJ7mRTder7aN95E9eU-jyuChCVRKQOiVpvuieQjyh3gcswY19J3e_c6t",
+        "installs": 10336382,
+        "category": "Tools"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.orange.miorange",
+        "title": "Mi Orange",
+        "icon": "https://play-lh.googleusercontent.com/NXY743Tphk0kApA9B34LMcOxBotwPrxawdbANUHGTyj2kUVVxmXNm2eX4FDDcaWB6-E",
+        "installs": 9336196,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.freelancer.android.messenger",
+        "title": "Freelancer: Hire & Find Jobs",
+        "icon": "https://play-lh.googleusercontent.com/DK7BGyOA_2Z_oYvoPRdC4f8JnURBCE1pDKPyEXd0B190U2p57Fr9LifujFegPAG6MA",
+        "installs": 8941852,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.aaa.android.discounts",
+        "title": "AAA Mobile",
+        "icon": "https://play-lh.googleusercontent.com/QOXqnUL5ElRoFq26Q6AobPavbT0U2LbzBjhecy6tIghGVZm6twBNk_Y3IB6rGpiZ1x0",
+        "installs": 7424477,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=sworkitapp.sworkit.com",
+        "title": "Sworkit Fitness – Workouts",
+        "icon": "https://play-lh.googleusercontent.com/KyP6tycYadkIuQY-w_4c0_feiK5qw9ftVOGn9rF-Mo0WmUxKgjDeKaIcgeAW7xp0a7s",
+        "installs": 6552738,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.studysmarter",
+        "title": "StudySmarter - School & uni",
+        "icon": "https://play-lh.googleusercontent.com/j2qPOVSwqKIdUCZJjFN4yF-GulBon9moWrM3qUFDFgZCQ6Fjzv97a26OASWmL5JfYw",
+        "installs": 6480843,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.visnalize.win7simu",
+        "title": "Win7 Simu",
+        "icon": "https://play-lh.googleusercontent.com/hhIHRXxOzAzFb6leGaZ-GZ9SvXe21dfYNLMtTJP-YbiCIqWCr383lQQwjKjbJBrgtNk",
+        "installs": 5906244,
+        "category": "GAME"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.douglas.main",
+        "title": "Douglas – Parfüm & Kosmetik",
+        "icon": "https://play-lh.googleusercontent.com/lf0fdMnCvtswmedkd-Gci2r33mDYs970oywFcd9Yv51-wJhgXLJzh5UWfkvDVfxGnQ",
+        "installs": 5372679,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gamefly.android.gamecenter",
+        "title": "GameFly",
+        "icon": "https://play-lh.googleusercontent.com/HKappP8liiPSC-FGStM9ENV9d-ulwFjHBq5li8Wu6KJCksl2k0ndPQNqtFPfG_FBdA",
+        "installs": 5091664,
+        "category": "Entertainment"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.hrblock.blockmobile",
+        "title": "MyBlock",
+        "icon": "https://play-lh.googleusercontent.com/se2MuOmrSIdiBTbx4_fVk-933hnRiFlHcpT1uGAmx4Fq6HwBmJe9UfvwwV4kifSLvQ",
+        "installs": 4983738,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.aymore.sim",
+        "title": "Empréstimo Pessoal SIM",
+        "icon": "https://play-lh.googleusercontent.com/8eOQGc1W4WSpU2kjogJCV6eUlOQKmjTkBqgW_j65KYX8jOCE0U_viCjDh7soeOqagans",
+        "installs": 4873180,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.lcode.ucomobilebanking",
+        "title": "UCO mBanking Plus",
+        "icon": "https://play-lh.googleusercontent.com/Y9FJUz7HxPdFfwYegvolG3W53nt9LSHy_eH0BCM5NX9OZHfBxTVJufbH4IXEuMDgFqA",
+        "installs": 4678983,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ir.rightel.myrightel",
+        "title": "MyRightel",
+        "icon": "https://play-lh.googleusercontent.com/o2ya4fzawHSMcOdJ2DsPRj1Z5f7_bwKe6BE2IZRBbmVomODSF8nd0Iggfe_Mgfo0Tko",
+        "installs": 3986832,
+        "category": "PERSONALIZATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.elasthink.lyricstraining",
+        "title": "Learn Languages with Music",
+        "icon": "https://play-lh.googleusercontent.com/pgM_Ib0cu2dcy2o7toqYv3GGtEqBdtZhfhu7kgHniz0yokc5PV5aIlb9uZtrOe0hJg",
+        "installs": 3702406,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.naxtlab.facebook.colors.pink",
+        "title": "Pink Color for Facebook",
+        "icon": "https://play-lh.googleusercontent.com/8jqre2rfbvP6MUC7CDF16gmRJlP1sytQJyhWwBN4145sEbo_h2DbFL3EZsMrFQcV70s",
+        "installs": 3649579,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.writeit.kor",
+        "title": "Write It! Korean",
+        "icon": "https://play-lh.googleusercontent.com/D5ECxp2tElB4DnzyDmYENRmakEUhgBR5z9K2arhY5pW-V6JQ4wHCCglzQSJZwlbJ6LA",
+        "installs": 3587186,
+        "category": "GAME_EDUCATIONAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.UnipolSaiApp",
+        "title": "UnipolSai Assicurazioni",
+        "icon": "https://play-lh.googleusercontent.com/yHalLKhYHH0IQLKvIv0dEyPOuhi1ckoQEqLThnvEGQAxMBvh-RCRlCTKx5WTX7FSxorj",
+        "installs": 3290940,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.paylocity.paylocitymobile",
+        "title": "Paylocity Mobile",
+        "icon": "https://play-lh.googleusercontent.com/oTtp5ay3Ht12U7sSv1ixCaXgqIjyiYLUgo4eoze4d9mxgpCgMl76-uc4ouoVrIPR9G0",
+        "installs": 3132112,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.orange.mobile.ecare",
+        "title": "mi altice - Rep. Dom.",
+        "icon": "https://play-lh.googleusercontent.com/iRDz5WtbllAJO_vG8oWYsysBdrbqKaaRw0NV2NUeSW10nmwh6FU-4RQpwtFeFfXBSQ8",
+        "installs": 2937801,
+        "category": "PRODUCTIVITY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.emn8.mobilem8.nativeapp.bkuk",
+        "title": "Burger King App: Food & Drink",
+        "icon": "https://play-lh.googleusercontent.com/LacpG4ha7dPghicyCgGkM_kQQBWzAO6M65NBmqz06Lw1FLJsegvBxr3xuvlIAoU0zdHI",
+        "installs": 2883979,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.un7qi3.forceteller",
+        "title": "포스텔러 - 신년운세, 사주, 타로, 궁합, 점성술",
+        "icon": "https://play-lh.googleusercontent.com/z3WEfUIxhfdLe_OX7gWV4NdIRkjC3EOrOSh9R_J74qKCOa7c5IAoaDlKqGWWaMmUn3E4",
+        "installs": 2833881,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.morrisons.matchandmore.app",
+        "title": "My Morrisons",
+        "icon": "https://play-lh.googleusercontent.com/9IKXGc-hU9LvQn7Bhvv6b5kUe6PsPmsnBs9TpDtFZfK_scJ-7QkR8oE8RDgP5FGeHnY",
+        "installs": 2824658,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gettransfer",
+        "title": "GetTransfer.com",
+        "icon": "https://play-lh.googleusercontent.com/QifUjZDBxNTepVdgsMByZfwZFixny8XLFjfwiACJGbCPlRu8LYLX0lIKzc8Fzq9FyoZG",
+        "installs": 2769645,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.bradseg.bscelular",
+        "title": "Bradesco Seguros",
+        "icon": "https://play-lh.googleusercontent.com/yQhfV8pbSkt2VTo2CeD2d301fBAb6Babl_SxpavQ5yCb_6YFB4hCbzcT1GGTL3fhVuo",
+        "installs": 2760477,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.zena.Fosters",
+        "title": "Foster´s Hollywood – Comida am",
+        "icon": "https://play-lh.googleusercontent.com/FHnpktjVaqqVQZ1VfGe9jxGF8weUnLsCf1jvxCv9HPFcaf2A8oywuROOZAXQxL4zYkg",
+        "installs": 2707605,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jackintheboxinc.JackMobileApp",
+        "title": "Jack in the Box® - Order Food",
+        "icon": "https://play-lh.googleusercontent.com/0nYXXrfykZoepAyeF-SUmh8NXCiIptd8bPKZlKueJ0RBA6HXtSRCPmA4hcwADvwmVrc",
+        "installs": 2702012,
+        "category": "Food & Drink"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=zena.dominos",
+        "title": "Domino’s Pizza España.",
+        "icon": "https://play-lh.googleusercontent.com/XFoF95cacSb9XWggu2TasmSIfW-OODjkFgWUV_ib6ePh0F-RuK4m2i_2yEkCikmUOMbH",
+        "installs": 2627000,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.astrapaging.vff",
+        "title": "VesselFinder",
+        "icon": "https://play-lh.googleusercontent.com/Z5XcMJYxyjrDQGDdidIhZuWcxwpFqiBsXNa6nCDUJL19pp7zpdkzvIRTsIiZ8i4cdg",
+        "installs": 2622368,
+        "category": "MAPS_AND_NAVIGATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.tatacapital.moneyfy",
+        "title": "Moneyfy - MF, SIP & Loan App",
+        "icon": "https://play-lh.googleusercontent.com/p0cejUwsrrY-O4Gp48kJYrzOYcI1BEjlSDB2tmkqWa4_0OSkkHwi9P3BheqhJKzuflY",
+        "installs": 2606458,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.orange.mobile.orangemoney",
+        "title": "Orange Money Sénégal",
+        "icon": "https://play-lh.googleusercontent.com/T4ZLP7nx1kM6oXacVqAlCqQ5d11xc1NPdC9i3iofouWGIuXXo9QW0FsQJGA01AEblDRo",
+        "installs": 2574366,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.upland.app",
+        "title": "Upland - Real Estate Simulator",
+        "icon": "https://play-lh.googleusercontent.com/dxQazTH6eyMtLAjzgSwcixVkB58JJBN8Al7PHFsZFcIrLwkkJ03vbgzljfNGwbA10zah",
+        "installs": 2440375,
+        "category": "GAME_CASUAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=fr.agircarrco.smartretraite",
+        "title": "Mon compte retraite",
+        "icon": "https://play-lh.googleusercontent.com/21tS_RiM_BjWXl6iGvuyUD-MhC4P8LmTaadCNOffE4JfDkKAA-vS5JxynAaNZQ43AkM",
+        "installs": 2408004,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=es.nooddle",
+        "title": "ekilu - healthy recipes & plan",
+        "icon": "https://play-lh.googleusercontent.com/JwmTeAS2PMFrA8tASupfnKcG7DNu_qAzf3RwxR65JnSX5LSAuCaf2JpfEi33l25W250",
+        "installs": 2399042,
+        "category": "HEALTH_AND_FITNESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jpma.EBTShopper",
+        "title": "WICShopper",
+        "icon": "https://play-lh.googleusercontent.com/hyKCfBwKQhcdsugaoWPI7bKbB32F7ywPOhJY-u6tbShYwNQDAWkjZRPaOrK8bxEeJA",
+        "installs": 2327771,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cainz.cainz",
+        "title": "カインズ",
+        "icon": "https://play-lh.googleusercontent.com/EAq0L0VsOM7wf0mu3Z1dmDMS4XAZG3YWiYU8KYQPqhELxq5XHPfs1Y1Ec8ZT-AMO-7k",
+        "installs": 2318703,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.jus.tse.eleitoral.mesarios&hl=en&gl=us",
+        "title": "Mesário",
+        "icon": "https://play-lh.googleusercontent.com/YT8lW0SSb_1-Il4I0q11ZpqH3d_nio4im20KYPIfg9VxulivXhK0p1dKCTpb4Z2l3v0",
+        "installs": 2248677,
+        "category": "Productivity"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.woomfertility.woomapp&hl=en&gl=us",
+        "title": "WOOM - Ovulation & Fertility",
+        "icon": "https://play-lh.googleusercontent.com/D_NKEaYvmYoWmEaecowKgiZj0c9vA39M16zyOmNIJ64KqHu6vqEWmRlI_Fvkngkm45o",
+        "installs": 2088121,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.uniasselvi.leonardo",
+        "title": "UNIASSELVI Leo App",
+        "icon": "https://play-lh.googleusercontent.com/lxAibpROnBYS8UdEsiWmEVtBH798TbS3KyKev7KMgdM1YaV349DtjP2L2ckqw3-sPE8",
+        "installs": 2071240,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=au.com.hotdoc.android.hotdoc",
+        "title": "HotDoc",
+        "icon": "https://play-lh.googleusercontent.com/YP3F0StAPaPeVfC2QDtP6qJviIrymUKUHClyQzfSZHsWjW8s6f5djHfaai37iAS6wg",
+        "installs": 2055327,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=en.un7qi3.forceteller",
+        "title": "FORCETELLER Astrology & Saju",
+        "icon": "https://play-lh.googleusercontent.com/k1yZ4tuwpBS1FusUSPqvHfMwDWX-70Hm3Qxy6b_zd-E1K17CB2plBy6Lo3KL-riWG-E",
+        "installs": 1998895,
+        "category": "Entertainment"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=uk.co.bbc.cbeebiesplaytimeisland",
+        "title": "CBeebies Playtime Island: Game",
+        "icon": "https://play-lh.googleusercontent.com/RYIzUFaBK9koyeNawa8KsqKPa6NmS4swruhBPC6J8XHgw4PJazvaEIv4RBuUTTOjonER",
+        "installs": 1939469,
+        "category": "FAMILY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mushroomcloud.cars",
+        "title": "Cars.co.za",
+        "icon": "https://play-lh.googleusercontent.com/WUYcnzz9FG4MTxg98F98km6LYVK3_EhJsQP_hs8m4K902F39iDuomosyhRGIQPxj0_3b",
+        "installs": 1886114,
+        "category": "AUTO_AND_VEHICLES"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.point4more.ios.tak.user.prod",
+        "title": "Takko Friends",
+        "icon": "https://play-lh.googleusercontent.com/D4AhNZ_gkb0qxbwFclJPaI84BrnF9JxF57qE9xSpnp848ACJGm6xakpFI9V-k-73zA",
+        "installs": 1880014,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.passagensimperdiveis",
+        "title": "Passagens Imperdíveis",
+        "icon": "https://play-lh.googleusercontent.com/jE5QB571MGeT825LicGY7LTU9vD-gqp5hf0aA6FTIhq1M-c5_W9GBWouOqBfgs1dT0kx",
+        "installs": 1874636,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.beneficiario.odontoprev",
+        "title": "Odontoprev",
+        "icon": "https://play-lh.googleusercontent.com/-VO9joxW9BAc1pUY1pnIx_GaFnHmNED4-GxQP1IUCfgVo8YIqJj0cpODKqAWSZp6cg",
+        "installs": 1871596,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=air.uk.co.bbc.cbeebiesstorytime",
+        "title": "CBeebies Storytime: Read",
+        "icon": "https://play-lh.googleusercontent.com/ThzRNciiMIdIrlKgbQEzeuuHbg2wEZZcDP773n7VA0PBf-yEQrJujJTRp5V8hrdwCLA",
+        "installs": 1807385,
+        "category": "FAMILY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.infinite.jpn&hl=en&gl=us",
+        "title": "Infinite Japanese",
+        "icon": "https://play-lh.googleusercontent.com/19818WQw8abVv7uXuJZyA6cGyM7HP17Zh-_2PqDT5-9w8DEeJbOg-7Ip1X70rf7AbrT_",
+        "installs": 1804981,
+        "category": "Educational"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jumbo.extras",
+        "title": "Jumbo Extra's",
+        "icon": "https://play-lh.googleusercontent.com/9DKD9qKo8_vVAEz_vR1RRm0YOdvQB-IAcwl85WUa1mE1IcWIAQiaGVz1CMdmY0q_Ib12",
+        "installs": 1763552,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.swisscom.myswisscom",
+        "title": "My Swisscom",
+        "icon": "https://play-lh.googleusercontent.com/a_ElP-zHCheGbkYICNzsqOXqdGAKLbJ-eEq6ukQWj3xfhwc7EjOSI0_WQAi_9zUI_5sl",
+        "installs": 1758453,
+        "category": "PRODUCTIVITY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.card.cardcom&hl=en&gl=us",
+        "title": "CARD Prepaid Debit",
+        "icon": "https://play-lh.googleusercontent.com/f2nGgHqhO5umm9yL7ljXgRTvnMHRiugm9Kkh7RNw8euKZyEG-4UqtuK93Tv7Mi64KR0",
+        "installs": 1746389,
+        "category": "Finance"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.astrolis.Horoscope",
+        "title": "Horoscopes & Tarot",
+        "icon": "https://play-lh.googleusercontent.com/xIXeHtUFX1lJs5CwttKGOADPYktBSh3Vcuqpl6oYyTyOo6fIHuOkpgueqSdNeV2vAQ",
+        "installs": 1728410,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.dennys.mobile",
+        "title": "Denny's",
+        "icon": "https://play-lh.googleusercontent.com/x7yKSH2i3m3mqiBwd2hVrojVq2c-GpiKIFbo2Q3PFdvgj_Z4i6Cb26lUhLVbEf5BIaeu",
+        "installs": 1727335,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.sii.asf",
+        "title": "Ulys by VINCI Autoroutes",
+        "icon": "https://play-lh.googleusercontent.com/vhKx8IhEhafjGTdw_gEJue2W2vcVXXgzdmyyl2q4rv2_eH7Apk6kZBqx8an7eFlwcw",
+        "installs": 1709102,
+        "category": "MAPS_AND_NAVIGATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.espacolaser.Agendamento",
+        "title": "Espaçolaser",
+        "icon": "https://play-lh.googleusercontent.com/rqejRZ3an8hgrDWxHdP2Rp-p8M6D_REaYazES-biuQlqoh3rlGkL5dcWJrAAIZpldA",
+        "installs": 1708115,
+        "category": "BEAUTY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ch.icoaching.typewise",
+        "title": "Typewise Custom Keyboard",
+        "icon": "https://play-lh.googleusercontent.com/dso35eI8dZd0PFHMfoLpZIthufONgNKuXeZrjR1PL0U9wQ0rrrdIoObEdDTEObxhYg",
+        "installs": 1703157,
+        "category": "PERSONALIZATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.writeit.jpn",
+        "title": "Write It! Japanese",
+        "icon": "https://play-lh.googleusercontent.com/8gaXTq2w-9OM2rzyq1gRkG9L2MR9NAoCLs9HQuzIgnk3NWeV6hQEuPG15-qch2fI6YA",
+        "installs": 1688401,
+        "category": "GAME_EDUCATIONAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.rtlinteractive.wwm",
+        "title": "Wer wird Millionär? Training",
+        "icon": "https://play-lh.googleusercontent.com/59fxuKQMCAoS8QE1NB-_GiLLFaYZgtQDdn7FdgfOb3Yw9Q-CxPlhL8lNqWFtbtfF35s",
+        "installs": 1664121,
+        "category": "GAME_TRIVIA"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=gov.fema.mobile.android",
+        "title": "FEMA",
+        "icon": "https://play-lh.googleusercontent.com/okrUGchhgopCmYQ-wqWQ_fIjP7Ujz3Y-qnWUAq_YrmBOhJWOO0TSW8ve_Vtm8Q3OvbA",
+        "installs": 1649325,
+        "category": "WEATHER"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=gt.com.tigosports",
+        "title": "Tigo Sports Guatemala",
+        "icon": "https://play-lh.googleusercontent.com/KH-g_YGtjU5GdfVyNZlvi40ld8mN0Nf5KQuRxRvGd_McffdR7wA95zLDn7eV0khH_0o",
+        "installs": 1569649,
+        "category": "SPORTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gooogle.android.kuvera.app",
+        "title": "Kuvera: MFs, FDs, Stocks",
+        "icon": "https://play-lh.googleusercontent.com/d2gb02hLrqEwit_u51Mmf2-xnz_gXcB47akQvIkEanjtRlUifeLQdg_Akroh1SMmkw",
+        "installs": 1532519,
+        "category": "Finance"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.gov.rs.procergs.nfg",
+        "title": "Nota Fiscal Gaúcha-NFG Oficial",
+        "icon": "https://play-lh.googleusercontent.com/hJttWoevYdTOAk7xZGcdDa2JIrxva0SIsRWsOlVnQAy8MxtQdc_xE3VIngKYqWK3Iw",
+        "installs": 1525930,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.hm.eJobsUsers",
+        "title": "eJobs.ro - Locuri de muncă",
+        "icon": "https://play-lh.googleusercontent.com/nfVqP2xhp4niv5em2EtuZ7JewHSXBIwTNDhr0s0zMYCYWQhIf3TgRk9H0kM5zjPkhw",
+        "installs": 1461811,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.buggames.countryballs",
+        "title": "Countryballs Stickers",
+        "icon": "https://play-lh.googleusercontent.com/urvkmWwfuCBsRcdflXgIkPXDFzBNalOUQpic91Lp4gudySlNI3rPnrO3WjskTyc_8ac",
+        "installs": 1458492,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.gestycontrol.samplia",
+        "title": "Samplia",
+        "icon": "https://play-lh.googleusercontent.com/DL46JeAvAfQZPeornZQ2IYhkU3FdODvHxDclizAqAiTMoVG96gfrvQgNRQCsP1dDyNk",
+        "installs": 1434042,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=la.foton.brb.myphone",
+        "title": "BRB Mobile",
+        "icon": "https://play-lh.googleusercontent.com/m_oQMJJKoPlMKYzqHz-JfbU8-bvDyCH6uswF_DqfzgEXdoVxPxL1Oyw7VWO-lxMVnZ8",
+        "installs": 1401081,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=net.groceryshopping.SproutsFarmersMarket",
+        "title": "Sprouts",
+        "icon": "https://play-lh.googleusercontent.com/08bY9GrB1UtfY8T6DGbJgea8NaDkF-XMOFvjLfjqYF-KhJphiNlwznohXyKhvfljdkk",
+        "installs": 1350282,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=bo.com.tigosports",
+        "title": "Tigo Sports Bolivia",
+        "icon": "https://play-lh.googleusercontent.com/g9v96DkMl96R7IJiWnCu2m48GQyc3xipuHc1UtYrzsAeHSt7wweTw9yYeYypHTG6Bk4Z",
+        "installs": 1330049,
+        "category": "SPORTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ch.coop.supercard",
+        "title": "Coop Supercard",
+        "icon": "https://play-lh.googleusercontent.com/w31Ig4jDpNuxIVYElQZnMr-yoIJ8NhdfsRQu7u8YpaDduxAFHkWGzeYK80FkRPG67A",
+        "installs": 1308143,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.youper",
+        "title": "Youper - CBT Therapy",
+        "icon": "https://play-lh.googleusercontent.com/_0v_dDm_VqcAPfFbWlga7HhFftNVr2D-SIPaULwbbgi4OT-gAOHoa6Nw6EbFUmHtDI0",
+        "installs": 1303782,
+        "category": "Health & Fitness"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.wegmans.wegmansapp",
+        "title": "Wegmans",
+        "icon": "https://play-lh.googleusercontent.com/FffojmhAqdpRPWU-DoJDNk0D2zlhCOEVPFm2fQ-RIFxlML1yIIH0UXwEpjsoSNA1kY_e",
+        "installs": 1286319,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.grupozeta.sportes",
+        "title": "SPORT.es",
+        "icon": "https://play-lh.googleusercontent.com/Gp-PwBNfQSpfISz28RHIRaq3BuCX2imnpoyoxS-9Mh2FdJ1xvsJuSlxUFyLZdtLefA",
+        "installs": 1278656,
+        "category": "SPORTS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=sv.tigo.mfsapp",
+        "title": "Tigo Money El Salvador",
+        "icon": "https://play-lh.googleusercontent.com/ggVQv8r3xqSQJyheFstK1XTBaVYODsjF81YVKG-Q5vX46S6NTdykLvdopC1tPK33ZZ4",
+        "installs": 1276816,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cocobambu.cupdescprod",
+        "title": "Coco Bambu",
+        "icon": "https://play-lh.googleusercontent.com/iuJDKGY_pzqw5mozRUckxN8TeGHQfhaQp6UG2XntHZMMNqTnwigs5liNQ-si0Qut2OQ",
+        "installs": 1274081,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=uk.co.parentmail.parentmail",
+        "title": "IRIS ParentMail",
+        "icon": "https://play-lh.googleusercontent.com/f_kS--49imp8pRbkLC6rQAZ2kiFCr2s39kyn0L_d_boV23sKRTQI8JVQAhPe_smk2jQ",
+        "installs": 1245646,
+        "category": "Education"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.osde.ar&hl=en&gl=us",
+        "title": "OSDE Móvil",
+        "icon": "https://play-lh.googleusercontent.com/Q8V8muB64C1wFtQeS-bWwZuZSREPSVjE0JwYA76q94WiUBvCfTHZwMBWs40wx0fmILA",
+        "installs": 1239995,
+        "category": "Medical"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=hu.telekomnewmedia.valovilag",
+        "title": "RTL.hu hírek, sztárok, videók",
+        "icon": "https://play-lh.googleusercontent.com/TOHQfZEHdqNgMCpDvrHDJ3LNgPVM4I0Rgzy4hNSBHPqPXLS-jjngLp9b6f469Fj6lg",
+        "installs": 1217719,
+        "category": "NEWS_AND_MAGAZINES"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ru.rambler.mail",
+        "title": "Рамблер/почта",
+        "icon": "https://play-lh.googleusercontent.com/qY_QnP-NbSHnPWSgJXfqSZIiAQgDwVMByb5S6E9rXAxyE2iti1XEaieIjR7AKBFJ2t8",
+        "installs": 1204718,
+        "category": "COMMUNICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.epayon.app",
+        "title": "ePayon: Recharge, Bill, Job",
+        "icon": "https://play-lh.googleusercontent.com/uxIyj6bik9Db-t6YsActW_-k4B-xBgXgq46Uxn0Vd_fyF0sBwjGH5rGy3tsPX_-rHw",
+        "installs": 1189557,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.supercuts.app",
+        "title": "Supercuts Online Check-in",
+        "icon": "https://play-lh.googleusercontent.com/DrzMJYO6cc4KNAMYAKjfMq5DC12m-ypXp4reaRGeSmaTqk0PjOYXn6WUlUTAXGP-Tw8",
+        "installs": 1175498,
+        "category": "Lifestyle"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.adsvlog.backstage",
+        "title": "Get Subscribers, Get Views",
+        "icon": "https://play-lh.googleusercontent.com/ARxOMzEXkn9yYWcT2FfnRsPfAumaia2uim2Cog5YIkdvBCVUw0TMBFALpsmKIsPbB7Q",
+        "installs": 1173928,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.jernung.infinite.kor&hl=en&gl=us",
+        "title": "Infinite Korean",
+        "icon": "https://play-lh.googleusercontent.com/MKNGdGWdzankq5_uo8z87vxGa9oCvSJn-zyen7BKo77D4cdEFc-Pt8ze1H0ZflD9_paA",
+        "installs": 1172165,
+        "category": "Educational"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.polleverywhere.mobile",
+        "title": "Poll Everywhere",
+        "icon": "https://play-lh.googleusercontent.com/gVe6IqmsUdPZPI0jS6dSSmEgBNIpAgBbwJlx51lSe_isN8yjNoiXMvxJtqdc64H0RQ",
+        "installs": 1135271,
+        "category": "BUSINESS"
+      }
+    ],
+    "usage": 9.95
   },
   "nativeScript": {
     "apps": [
@@ -2681,7 +4083,708 @@
     "usage": 0.01
   },
   "reactNative": {
-    "apps": [],
-    "usage": 0
+    "apps": [
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.next.innovation.takatak",
+        "title": "Takatak (By Moj)",
+        "icon": "https://play-lh.googleusercontent.com/df4Im-cAAfm9Vn_cg5o11xCq8NZxZcEQ8f1O--XIcSp7PdZ2rTilKrMbtXZjFn0VEDE",
+        "installs": 255196309,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.olacabs.customer",
+        "title": "Ola, Safe and affordable rides",
+        "icon": "https://play-lh.googleusercontent.com/FEloWOGywfRkEZL_i26Yb-yxr4efIe_xXD2ZIF3seR0OQ0B-Z1FXSamCv4XrwdrW8N4",
+        "installs": 165656186,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.flipkart.shopsy",
+        "title": "Shopsy Shopping App - Flipkart",
+        "icon": "https://play-lh.googleusercontent.com/LhHDUTjXeuwyiGLB7R-yDzRVSleGZrahYil4slrij4myQlLoNV2-Mizjmc8TL2KkKg",
+        "installs": 136905385,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.shopee.ph",
+        "title": "Shopee PH: Shop this 4.4",
+        "icon": "https://play-lh.googleusercontent.com/Lr-AcPbzB8MZVWqoa2Mp3HiqUr4fs17Tb-bdBqwgO841WMj06t9it3FsJonjPlzVk8p8",
+        "installs": 83558258,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=in.org.npci.upiapp",
+        "title": "BHIM - MAKING INDIA CASHLESS",
+        "icon": "https://play-lh.googleusercontent.com/B5cNBA15IxjCT-8UTXEWgiPcGkJ1C07iHKwm2Hbs8xR3PnJvZ0swTag3abdC_Fj5OfnP",
+        "installs": 81896311,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.makemytrip",
+        "title": "MakeMyTrip Hotels, Flight, Bus",
+        "icon": "https://play-lh.googleusercontent.com/1llAcleLs0UDr5ysUl_C4aHM-vN70HGTy7gjlM78SLsPCOijj7oosBLQc26G2daqOg",
+        "installs": 76535937,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.huya.nimo",
+        "title": "Nimo TV - Live Game Streaming",
+        "icon": "https://play-lh.googleusercontent.com/5J0rPAnACYfHtt9Mh3ZBBOS7jj45LBTWtfDrGlJvsCkoZehtXnmS2Nh4B7Hyq5k6xKE",
+        "installs": 73886438,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.shopee.vn",
+        "title": "4.4 Sale Thời Trang Mỹ Phẩm",
+        "icon": "https://play-lh.googleusercontent.com/7WklTbOUy529L1iqe49YVCpFvG70u-AsKqD4xUoyyc2BiqImObzAAapdN_9yL_iz6g",
+        "installs": 67606695,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.unacademyapp",
+        "title": "Unacademy Learner App",
+        "icon": "https://play-lh.googleusercontent.com/DT0jm91vA_rOkxwatXhI4yVpjU4KI0augje6ZJGYxEyNjKvIhcQt8npiLHf5-ydclsqe",
+        "installs": 66097483,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=in.gov.uidai.mAadhaarPlus",
+        "title": "mAadhaar",
+        "icon": "https://play-lh.googleusercontent.com/j7kM2-v1QBN5YO167Si_6YEmLc2A-f_4vaMyf-imZjwIkV83IkWm6U7NYfOdTbNGyaQ",
+        "installs": 64027352,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.goibibo",
+        "title": "Goibibo: Hotel, Flight Booking",
+        "icon": "https://play-lh.googleusercontent.com/cGj-Aahikzs8xAqdI2iTJi51p1JTR9tUCw-Iy0CE-npOTnTYPpgM2ZUtPXJXhwxLpA",
+        "installs": 62894766,
+        "category": "TRAVEL_AND_LOCAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.shopee.th",
+        "title": "Shopee 4.4 Crazy Flash Sale",
+        "icon": "https://play-lh.googleusercontent.com/NUM1cVaqrILqgpHynwUnBRQ0uq5RQummQha1iSo50D67OG0S2aDhLt4ya8QKr5esjeA",
+        "installs": 62044167,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.nvt.cs",
+        "title": "Minha Claro Móvel",
+        "icon": "https://play-lh.googleusercontent.com/bgNS99GWrSJrooOYqmo4FGID7kfRMeH-BjonG9rBypsH0abm_S84ejFw2WcwfEFzjLI",
+        "installs": 52597174,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.phonepe.app.business",
+        "title": "PhonePe Business",
+        "icon": "https://play-lh.googleusercontent.com/DIj92f1Tkfxm8rOTqPhlMtGsz8bboRju5v2V5ykxdGfpIAN4kTbNFfgBxpcFt5nY3KQ",
+        "installs": 49204147,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.freecharge.android",
+        "title": "Freecharge - Pay Later, UPI",
+        "icon": "https://play-lh.googleusercontent.com/l_7fl4HP1a-lspMA3I3tkcQVvUqzoZZd4XNPo-WbHFChj7Z7--aklMLygX9x8et5Pg",
+        "installs": 49173988,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=live.ablo",
+        "title": "Ablo - Nice to meet you!",
+        "icon": "https://play-lh.googleusercontent.com/cd5dBGoieVVFbgZGLVKGjdggXDZy3Wp5P-lSg2KuE5ya4vBiOfAw-VdXBw-R-rr-z1Lq",
+        "installs": 41235442,
+        "category": "Lifestyle"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.batanga.vix",
+        "title": "VIX - Cine y TV en Español",
+        "icon": "https://play-lh.googleusercontent.com/o0Q8qqJB_ny4NM606LcZH4YozeGRfh5bY6VR13z8Mk3YEIO3soPZmYc9aKnYrhZstbc",
+        "installs": 40180023,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.shopee.my",
+        "title": "Shopee Raya Sayang Hei",
+        "icon": "https://play-lh.googleusercontent.com/f1Ow5Vm0hElQz8AUZod1Zp81GbrGBinYI5eoJkfX7AcWNSMqzvdlFXDtWUtqDIZeoK8",
+        "installs": 34232992,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=net.openvpn.openvpn",
+        "title": "OpenVPN Connect – OpenVPN App",
+        "icon": "https://play-lh.googleusercontent.com/E9DIOxBPab_nMUfmf2fhzNcEAmjOx-wstIak5zwJpZm7184nd8fUPGBeWMvBMnkOHg",
+        "installs": 31441954,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.shopee.mx",
+        "title": "Shopee MX: Compra En Línea",
+        "icon": "https://play-lh.googleusercontent.com/aUvQ9K3l5admVtbgFE5aUJlUNVZzFpAQhpAChrJYRbtLQPJtdUchzyt0uLzVlPfpoQ",
+        "installs": 28634781,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.recarga.recarga",
+        "title": "Pix com cartão, Boletos Contas",
+        "icon": "https://play-lh.googleusercontent.com/Fi17FgHn8x1sA4GhroXk6kpxPPeQCYl2T3VTsrWr-a1gP8nr4xqlu2O3I_Q1BpoPGt8",
+        "installs": 27518049,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mservice.momotransfer",
+        "title": "MoMo: Chuyển tiền & Thanh toán",
+        "icon": "https://play-lh.googleusercontent.com/dQbjuW6Jrwzavx7UCwvGzA_sleZe3-Km1KISpMLGVf1Be5N6hN6-tdKxE5RDQvOiGRg",
+        "installs": 26815973,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mercariapp.mercari",
+        "title": "Mercari: Your Marketplace",
+        "icon": "https://play-lh.googleusercontent.com/-3ZePsu6BNncJzm0dbCnnrVqfFfb_4eB63Ito9tmOxc76hMKwkea0cWDXsOtY8zBLSUl",
+        "installs": 26309711,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=it.vodafone.my190",
+        "title": "My Vodafone Italia",
+        "icon": "https://play-lh.googleusercontent.com/C1zufX9Dwsw54rbdnWG24BrtjRixYgGvEE27g4kDb_s18UGLAVIDbheiS-ilYfQGJQ",
+        "installs": 25790163,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.b2w.submarino",
+        "title": "Submarino: Compras Online",
+        "icon": "https://play-lh.googleusercontent.com/NaYEUBIg62Ku0qs84WuBpJE-bFC48p_psXvzY1VL_ze1il08UHIdyhpTiomeeoCNb4c",
+        "installs": 25474377,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.b2w.shoptime",
+        "title": "Shoptime: Compras online",
+        "icon": "https://play-lh.googleusercontent.com/kyvCMZPMOas0Knt9sN72gU8_N75xHWRjWhbV98JN7_VehEUt-BctruVtdz71xfKvxGY",
+        "installs": 25419850,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.dealshare",
+        "title": "DealShare Online Grocery App",
+        "icon": "https://play-lh.googleusercontent.com/Iddo0KmVlVCbQfWINPvQbqeTp_RQwm8FxIPZwztlGR40eI4KSoW2dLBW9epX3hh9jRc",
+        "installs": 22586744,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.ruangguru.livestudents",
+        "title": "Ruangguru: Bimbel SD SMP SMA",
+        "icon": "https://play-lh.googleusercontent.com/L7LE72GGERzpHXhOFoAXM7SnGERv4BICfg1PcvVi1D_8907J_ltY4O6l5T8A5WuCgQg",
+        "installs": 21925929,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=live.video.shopping.simsim",
+        "title": "simsim - Watch Videos & Shop",
+        "icon": "https://play-lh.googleusercontent.com/oJDtOP31LuM24F6NJlPq-2M5n1pj0r4H0Hf84iKrmnUymR1XzJPN5E2l91sCnu3CrZMv",
+        "installs": 21568435,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cashkaro",
+        "title": "CashKaro - Cashback & Coupons",
+        "icon": "https://play-lh.googleusercontent.com/Mu6eDEbbDf2d4f_rVIPkx9eG5QNfBU0eaCcNQgzuSj5GH3FQ8NxeRJjTx4BQl5SG_4w",
+        "installs": 20483381,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.bewakoof.bewakoof",
+        "title": "Bewakoof - Online Shopping App",
+        "icon": "https://play-lh.googleusercontent.com/NvyThScI1ym_ZQgITYpZwXbdS0HQGckcdNsB31CJnorx8zxnaPMcPWDcne62nP7UZrU",
+        "installs": 20109481,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.maxstream",
+        "title": "MAXstream - Movies, TV, Sports",
+        "icon": "https://play-lh.googleusercontent.com/AvycE5bRSrVJN53jrTCx6djTRM5enDbyfXSP63i91dH1ICBOM3ExbMu9zvOdq8S2e6I",
+        "installs": 19963738,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ahaflix.tv",
+        "title": "aha - 100% Local Entertainment",
+        "icon": "https://play-lh.googleusercontent.com/O22npSabNxePtiq6mHuGgXqNiGKjokR1s0K-if_H0NakVzQ-u-imp0z7jOqqvb4wz1c",
+        "installs": 19887004,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mor.promplus",
+        "title": "หมอพร้อม",
+        "icon": "https://play-lh.googleusercontent.com/WU08Tu8awAUkH2jdPRFGA88XEUP6TSaj6jvnXYCnLnZth3ixNA5v9ovGqhNA2b7hufA",
+        "installs": 19586565,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.clubhouse.app",
+        "title": "Clubhouse",
+        "icon": "https://play-lh.googleusercontent.com/pNerDaUup2WWNWwzZwhbAHS9-GJ9XmPn44gQzvUdneG4hyHLuw8bc3hb7wKbrOa1xA8",
+        "installs": 19395766,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.paisabazaar",
+        "title": "CreditScore, CreditCard, Loans",
+        "icon": "https://play-lh.googleusercontent.com/IXqJjk86zujVgGivvNVeMrWfZu-HJ6qimF3f6VcibAkkQ4Yr539sE6mJf-rIdTJDgAn0",
+        "installs": 18973613,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.digi.portal.mobdev.android",
+        "title": "MyDigi Mobile App",
+        "icon": "https://play-lh.googleusercontent.com/BI-NKPtLfTyAd2IUK985BJL2p4yAq2RxeHbRHl7f7R40ngVYfnXOttPfOSLKU3VQCNg",
+        "installs": 18063879,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=tech.fplabs.score",
+        "title": "OneScore: Credit Score Insight",
+        "icon": "https://play-lh.googleusercontent.com/ZHT2WGhWr3Z85CgUk3FculiKRGNl2xidyk4HTpg-rQf0gaTcJSxNLj5LPU_zIxh9UGg",
+        "installs": 17642213,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.bhxhapp",
+        "title": "VssID",
+        "icon": "https://play-lh.googleusercontent.com/DpWEFRkIV5pPG4--zcLLMB9JuNiJkHPMxY-Z8u7ST99IfN5Xkh20mK2cpGlMuFXNBvgb",
+        "installs": 17268259,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.coindcx.btc",
+        "title": "CoinDCX:Bitcoin Investment App",
+        "icon": "https://play-lh.googleusercontent.com/XECQOnSu6nDDUeROQF2JeckhiZSHm4kiwRGSVkdO-rpuBrZD90c-SDdBGQSNwK2riyI",
+        "installs": 17153273,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=it.pagopa.io.app",
+        "title": "IO, l'app dei servizi pubblici",
+        "icon": "https://play-lh.googleusercontent.com/bdgImlagAusdkm5egX-QMCBusoT0z54iEJQU3uuZAcX1ONgb7mJL6fortE6q9bRbBg03",
+        "installs": 16932524,
+        "category": "COMMUNICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.apollo.patientapp",
+        "title": "Apollo 247 - Health & Medicine",
+        "icon": "https://play-lh.googleusercontent.com/A8kFLcjHjf212e2QElckAYBn9UartHlWXDHeyyoUh19qhODlkQibcpyWvKpVreEfIzU",
+        "installs": 16524460,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mbmobile",
+        "title": "MB Bank",
+        "icon": "https://play-lh.googleusercontent.com/sHcbMrh5EE_RmlIk9D2wY7-KEjB9vOzgzrSkquDT4hP55SyJc0CHrNkDHcC_GN2dBxc",
+        "installs": 16099298,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.yum.kfc",
+        "title": "KFC India online ordering app",
+        "icon": "https://play-lh.googleusercontent.com/NnzW_iKDbRtWXL_am1Ua2K72uSHMUdDze4zsd77PDq0FCAy_33uVC6-UR2dQyn2hmu2r",
+        "installs": 15664562,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.passeidireto",
+        "title": "Passei Direto - App de Estudos",
+        "icon": "https://play-lh.googleusercontent.com/tMtPQ-8l1Rv7t5y-UCxv9ii45_KicsnCOLZqX7R-Sa8jzr1NJVcRRYQWvYtWlEWqE1c",
+        "installs": 15405406,
+        "category": "EDUCATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.nnacres.app",
+        "title": "99acres Buy/Rent/Sell Property",
+        "icon": "https://play-lh.googleusercontent.com/0c3VhbTRqGPb9AH_rhScqpfXTcSk9KZRlgf9dveHVITv-AWmv7Rok88qGyHuLas2lA",
+        "installs": 14984144,
+        "category": "HOUSE_AND_HOME"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.isharing.isharing",
+        "title": "iSharing: GPS Location Tracker",
+        "icon": "https://play-lh.googleusercontent.com/mR2LIkoiJackk9bjRyfu9YXGb03_gc2KzO_SdSjk2zodgXOSJc0CtkyWLgK2CGrL-OL2",
+        "installs": 14898966,
+        "category": "COMMUNICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=online.appflame.app",
+        "title": "App Flame: Play & Earn",
+        "icon": "https://play-lh.googleusercontent.com/-XfiNu4bHOxtB94Si-OehNhUuOWzlhyrOxaE469YUn4BMz4Gt2Y4mQHUDCIHdH6eGw",
+        "installs": 14504312,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.airtel.agilelabs.retailerapp",
+        "title": "Mitra",
+        "icon": "https://play-lh.googleusercontent.com/51O4hKPUv_W9Zrk7jVh9o1huxeq1rmu5Lu24ZR1f481hvqnambZf5o7eZFZGILjK-Sc",
+        "installs": 14047126,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.policybazaar",
+        "title": "Policybazaar - Compare & Buy",
+        "icon": "https://play-lh.googleusercontent.com/lIUAw6VDYJIzFQTP2KxnX8-g6-9f7berzjIRP72xmr1WB7R2tiyZby8ZSZZrdVfTiQ",
+        "installs": 14015244,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.wizzair.WizzAirApp",
+        "title": "Wizz Air - Book, Travel & Save",
+        "icon": "https://play-lh.googleusercontent.com/81dYTbRqUm2rZAWTp54jWpiMoMe5ljaHleFMiIXa0hMrM-NssKym7a2pnoZHOgmXTkam",
+        "installs": 13975669,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ru.fns.lkfl",
+        "title": "Налоги ФЛ",
+        "icon": "https://play-lh.googleusercontent.com/y4rNs6cRtiMcg6bG4VMnrGGm7BneMhO1RmQ60xqLXeX2P6qxN2bM70UeTw7PyoPiDAlX",
+        "installs": 13614887,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=it.fabbricadigitale.android.videomediaset",
+        "title": "Mediaset Infinity",
+        "icon": "https://play-lh.googleusercontent.com/SjvG84dTCMROqtZDLqNF7BKQWm5f1owvifSBwFnUD2SDpw0WIOZv1kTEFAQLOsyMW9DC",
+        "installs": 13560505,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cars24.seller",
+        "title": "CARS24®: Buy & Sell Used Cars",
+        "icon": "https://play-lh.googleusercontent.com/8U9hOcLA9iLQUFHTymwYgAoaJ3x-pg-ihRMD2lwQQYivKI8zn-0OMZNAPTWG0wZFnGM",
+        "installs": 13531549,
+        "category": "AUTO_AND_VEHICLES"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=id.flip",
+        "title": "Flip: Transfer Without Admin",
+        "icon": "https://play-lh.googleusercontent.com/yWfRiFAZeUghsJ5vzfxuHJASF5jrMnNryUmBCl4AN3XbjR9IH3F5NB6KUMQYVduhXvo",
+        "installs": 13514722,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.crictec.cricket",
+        "title": "Cricket.com - Live Score&News",
+        "icon": "https://play-lh.googleusercontent.com/ldi8Bqga_p-ZXhTiVLnospvVaSPfxJgUZOTDvcoSHu_mwn7c5pzSjB4fNi2dBExvBTQ",
+        "installs": 13380277,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.avuscapital.trading212",
+        "title": "Trading 212: Stocks, ETFs, ISA",
+        "icon": "https://play-lh.googleusercontent.com/fHfTlNIq5PMps_296XPMC2N-u5ARCmaSM_lNuukKjhK8ITbHHS5YyYyT5ABJU1s8_Q",
+        "installs": 13288935,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=fr.telemaque.horoscope&hl=en&gl=us",
+        "title": "iHoroscope 2023 DailyHoroscope",
+        "icon": "https://play-lh.googleusercontent.com/1WfZo7gPKHRC7DDOr9FYLBHaG7E7VPthUOvB6AzwaREGKjA7C3xFLN0teG6DM6d9JCYP",
+        "installs": 12814498,
+        "category": "Lifestyle"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=ru.instamart&hl=en&gl=us",
+        "title": "СберМаркет: Доставка продуктов",
+        "icon": "https://play-lh.googleusercontent.com/gocyzmgMUtjzqs9UbFJUJLGW3g0CTaz5tm6yQq1tw54sJKHAAxDaR7K94gjBVc6d0xlN",
+        "installs": 12672243,
+        "category": "Food & Drink"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.flipkart.seller",
+        "title": "Flipkart Seller Hub",
+        "icon": "https://play-lh.googleusercontent.com/9QNVdjpweuehNa-pHHJ1QmnHmAekQOkdrEWyd3FPJJkPAWFfOgjitJoiZrE7IAORKg",
+        "installs": 12507476,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.marisa.android",
+        "title": "Marisa: Roupas, Calçados, Moda",
+        "icon": "https://play-lh.googleusercontent.com/B2mQmpiTGAH-Fs7m4nMo7NqyO85-VM9bWukYX5n1SU90ohwd58Nu0nmDj4vxdCI85w",
+        "installs": 12249090,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mamaearthapp",
+        "title": "Mamaearth: Beauty Shopping App",
+        "icon": "https://play-lh.googleusercontent.com/QnsYThrF3FuJaEx0ppRMlgrKIXBt8NgD175Vuaa8wLyldncPh-GJ2Jn3e_d7mfHmVz4",
+        "installs": 12094155,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.turkcell.paycell",
+        "title": "Paycell – Cüzdan, Ödeme, Kart",
+        "icon": "https://play-lh.googleusercontent.com/EqoHZkxbhswT9UKL7FOe7-FR3mx7Qvq3T3n73NJkvvTucANx7FPtzUaiosr6FHQskqw",
+        "installs": 11884354,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mobimidia.climaTempo",
+        "title": "Climatempo - A melhor previsão",
+        "icon": "https://play-lh.googleusercontent.com/ve3pM-tgzdJXYdUFu3QDPHwYo4acEtMEjJV5-BorsCDz5F9ggQPnJMv06ztGdkMDQlE",
+        "installs": 11874676,
+        "category": "WEATHER"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.ideopay.user",
+        "title": "Pay with Ring",
+        "icon": "https://play-lh.googleusercontent.com/qUN7pfO188vMJnbyn4fzE46j35BID16X2g3mtBfgPMsW9ICEbfKnJpeUWoSRCiNNbNVg",
+        "installs": 11870986,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=co.tslc.cashe.android",
+        "title": "CASHe Personal Loan App",
+        "icon": "https://play-lh.googleusercontent.com/mimdIR411OJQ6bzZkTeX2mPG6CqK7UdH-nneUCAjoaaOcDbcrIRqyS8IAHuO0Qswl94",
+        "installs": 11830211,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=fit.cure.android",
+        "title": "cult.fit Fitness & Gym Workout",
+        "icon": "https://play-lh.googleusercontent.com/JknArWBicl7xtkb54wn82IMZ9xQ8NE6iitMi16XAlPMwNRXI__B7cTMCimX86QLprw",
+        "installs": 11737433,
+        "category": "HEALTH_AND_FITNESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=online.cashalarm.app",
+        "title": "Cash Alarm: Games & Rewards",
+        "icon": "https://play-lh.googleusercontent.com/FLsKpyb5ktdWCZwe0N0nGCvMwwZriPxfTcOWtmlAc0zXyoLM7Vz12VhzNKX9vy9rKAk",
+        "installs": 11500844,
+        "category": "GAME"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.byu.id",
+        "title": "by.U Affordable Internet Card",
+        "icon": "https://play-lh.googleusercontent.com/CvRXjKBm6qwY0gFm8h37wENiXDmyljSQQgrLHFFrBBHPMZ-qNdjlMkFM4gYrzLLKWA",
+        "installs": 11340635,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.myvodafoneapp",
+        "title": "My Vodafone",
+        "icon": "https://play-lh.googleusercontent.com/SlU3j2TzUheXvTz9vseKykjAPvRKrw4MY7Qus620x1_BDwOR_RtMITXYAjBC5ffemWHA",
+        "installs": 11272724,
+        "category": "PRODUCTIVITY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.bb.oewallet",
+        "title": "Ourocard",
+        "icon": "https://play-lh.googleusercontent.com/A-2gfVxBTzcbh3iwTiYUZb2XGX_mQB4kV726_nBnHZLumN8FvkNqq_NecYKpfTTGtMix",
+        "installs": 10684126,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.firstperformance.casasbahia&hl=en&gl=us",
+        "title": "Cartão Casas Bahia",
+        "icon": "https://play-lh.googleusercontent.com/wVjFYciBaYQqF2VaDCENFpwDcUHDH78nI7xKKTIAPOl4f8s66oitfVr4qyylRK98Zvo",
+        "installs": 10430644,
+        "category": "Finance"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.kubi.kucoin",
+        "title": "KuCoin: BTC, Crypto Exchange",
+        "icon": "https://play-lh.googleusercontent.com/dQ9d57qXuaxTEVwMnS6J4qxVsZLSJYSm-X6zKzV-_w7ClLYh8jSe0J83MhSUgy2kuA",
+        "installs": 10393303,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.appmei",
+        "title": "MEI Fácil por Neon: app do MEI",
+        "icon": "https://play-lh.googleusercontent.com/ylqmz8mQgSLpoZpFtoN_7COHA8DVemkkmVrPvV3sd6lWs5H_4zxRlUnT5HwdEpO-pogX",
+        "installs": 10362751,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.stremio.one",
+        "title": "Stremio",
+        "icon": "https://play-lh.googleusercontent.com/ziYggzn6bctZP1fPuuRpjJKrYtL5VglkEaBz5EmThXSnH3phTzjhw9jFT5qwN12yuQCQ",
+        "installs": 10357897,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.creditcard.onecard",
+        "title": "OneCard: Metal Credit Card",
+        "icon": "https://play-lh.googleusercontent.com/Ytbt5ggr-teE6RsNwA8TU73PfAZZVCXHPUCmsiZBsR1ZB1lLQ0cWZ0abUUPjpI1BGI4",
+        "installs": 10296424,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.truelife.mobile.android.trueiservice",
+        "title": "True iService",
+        "icon": "https://play-lh.googleusercontent.com/LWMV1YwxEhTzvZykWXToORojsx9xQMmp6yE_P1ZDxTUPADtvGLXYlY7stzczEGu-Xm0O",
+        "installs": 10246608,
+        "category": "TOOLS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.justwatch.justwatch",
+        "title": "JustWatch - Streaming Guide",
+        "icon": "https://play-lh.googleusercontent.com/Riuz226TXAawu8ZXlL7wnsjtMHkTMTDh_RSRiozAdoKe2TyGG4cLp3rPB0CxQFEUzFc",
+        "installs": 10241986,
+        "category": "ENTERTAINMENT"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.pepkit.ssg",
+        "title": "StepSetGo: Step Counter",
+        "icon": "https://play-lh.googleusercontent.com/fNtQt3QSDAUJLuG4g4MTEVQsO9fzlDYxnLS9I2Hi8E1wV_HLkPcDhVLud__nZf0d_og",
+        "installs": 10014937,
+        "category": "HEALTH_AND_FITNESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.omesti.myumobile",
+        "title": "MyUMobile",
+        "icon": "https://play-lh.googleusercontent.com/FA2zGlU_FfZyBE2CWjjlrb098b-NovjpqQOrh3tbN9lEDmJwr7vjflDkawJ9DbaCG6k",
+        "installs": 9959722,
+        "category": "COMMUNICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.net.shine",
+        "title": "Shine.com Job Search App",
+        "icon": "https://play-lh.googleusercontent.com/XZbAiQrSRgCRnmCX8l0t1095rFdj2I8JXEYMCAsq9AhcKbZmYg6_uSR-ABDjiqX5MHxs",
+        "installs": 9873609,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mgensuite.airfox.recharge",
+        "title": "banQi: Conta Digital",
+        "icon": "https://play-lh.googleusercontent.com/J_8deea0DBt5P7U5H8KLrd5oQxSJZ_-ZOYxoJKOYtCsu8JwP6CBsYqD6H3BXP52wJK8",
+        "installs": 9862587,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.udaan.android",
+        "title": "udaan: B2B for Retailers",
+        "icon": "https://play-lh.googleusercontent.com/B94VjU6i-pmqGzQgNgFBpm1GoH5KL4Yoa_xOFyNaxYudCNraIFkoFcJSnyODYug5Wg0",
+        "installs": 9743808,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.netease.heatup",
+        "title": "Heat Up - Chat & Make friends",
+        "icon": "https://play-lh.googleusercontent.com/SHP3i1hDFYbIGPokY9wAMddEdedt72xTvC-o6zgHqqVk7yYifjEuIq0JphMvQz5UI2Y",
+        "installs": 9530457,
+        "category": "APPLICATION"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.carwale",
+        "title": "CarWale: Buy-Sell New/Used Car",
+        "icon": "https://play-lh.googleusercontent.com/SPcx-zXr-oMf6R7ysx2s3QFKLho4BEwV5gRoleYK0Yi1qhQRztK1hF88-w7TiJMLSyyB",
+        "installs": 9285814,
+        "category": "AUTO_AND_VEHICLES"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=in.hopscotch.android",
+        "title": "Hopscotch - Kids Fashion Brand",
+        "icon": "https://play-lh.googleusercontent.com/mCHYwfOMZ6m_J8TrdFxUOswSHNGqXD_TG6QZYeVquM9rKSDVJY--E4W9nCR5uHLrwg",
+        "installs": 9132662,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.cgt.bharatgas",
+        "title": "Hello BPCL: The One App for al",
+        "icon": "https://play-lh.googleusercontent.com/QKlkHjEHFdmsZjRlC35F_h67Y74b5MA8IcdlubUTxyokoMmKAOLIu9C_LByA_7ZEvNk",
+        "installs": 8776776,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.mhbl.sastasundar",
+        "title": "Flipkart Health+ (SastaSundar)",
+        "icon": "https://play-lh.googleusercontent.com/vLRYqQT8ZRgxMZ4z5UQlk7ultWym0zXVoPY8XM36I6cKHbo6prH0JPaPo4Reir7YnY8",
+        "installs": 8741539,
+        "category": "MEDICAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.vestigeshopping",
+        "title": "Vestige Online Shopping App",
+        "icon": "https://play-lh.googleusercontent.com/DZXJm-Z9h6f1Yk_rMw_x6oaFZhrgn1RwiD5L9gIi71_tKEjhMcqQRK79LQ1iqzOWweQ",
+        "installs": 8662910,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.vingroup.vinid",
+        "title": "VinID - Tiêu dùng thông minh",
+        "icon": "https://play-lh.googleusercontent.com/us9UhPOlDz1dQripO3RFveK370YnBQYcWCXGU1xYGJkGew63OOswvx0-4AXgK1f6Is3J",
+        "installs": 8218402,
+        "category": "LIFESTYLE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.bikayi.android",
+        "title": "Bikayi: Grow on WhatsApp",
+        "icon": "https://play-lh.googleusercontent.com/uAflcAnt0Je8WhZAGAWBkaaI9G0AlM0EiyQl497S_4n2PyJLUOyEZhImsNE--M5uMAiB",
+        "installs": 8188187,
+        "category": "BUSINESS"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.simpl.android",
+        "title": "Simpl Pay Later",
+        "icon": "https://play-lh.googleusercontent.com/a5o6KbDMO2e6UgPClbV6gblwXDFIW3wYK87iP1iEsceZkanhx4SO8UN4ySMF4TmdLA",
+        "installs": 8151999,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=live.citymall.customer.prod",
+        "title": "CityMall: Online Shopping App",
+        "icon": "https://play-lh.googleusercontent.com/Us16LmGy_PeXSn6f-OTVqC6Kxm52yMiSxeLJN-fcLp-DKNark8Tu4t5UIKlTgBc6Ijc",
+        "installs": 8066287,
+        "category": "SHOPPING"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.opsway.boodmo",
+        "title": "boodmo - Spare Parts Expert",
+        "icon": "https://play-lh.googleusercontent.com/iiocq2b-uHR8JLmkpMX2Sx_fqszXpQe_Jzv9DdGRcfKXCWIJLMdaDKZA2Vi5-4FW2g",
+        "installs": 8003295,
+        "category": "AUTO_AND_VEHICLES"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.pagopopmobile",
+        "title": "Spin by OXXO-Tu Cuenta Digital",
+        "icon": "https://play-lh.googleusercontent.com/_Vlvh7jtzOjnqAENYhyu_7ku580tq0ztlCOXJ1eAO5Q6QAyP8N0ibhY23gUetwu57_Q",
+        "installs": 7901663,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.grppl.android.shell.halifax",
+        "title": "Halifax Mobile Banking",
+        "icon": "https://play-lh.googleusercontent.com/gnwz03bfeirJCBbFXqUP87qEeJd8nc4HGmEVCNsxVVoRsT4BesuVrCZSVk256F_TTQ",
+        "installs": 7864908,
+        "category": "FINANCE"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.vnid",
+        "title": "VNeID",
+        "icon": "https://play-lh.googleusercontent.com/QQa5qwDreNgrw9bv3Ie5Sojj3jqIK40UEhPS9X9VX2G-9QxV-MofPAgffYecuSbz8A",
+        "installs": 7858864,
+        "category": "PRODUCTIVITY"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=com.takimi.android",
+        "title": "LGBTQ+ Dating & Chat - Taimi",
+        "icon": "https://play-lh.googleusercontent.com/op9ehmZ-hQxflB4EdR-yca-txlahy2ZEPmXyU-CUB9F0Ntu47_7uj-i34I75Nl2zhsGG",
+        "installs": 7835996,
+        "category": "SOCIAL"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=in.swiggy.deliveryapp",
+        "title": "Swiggy Delivery Partner App",
+        "icon": "https://play-lh.googleusercontent.com/s0JLCfh27w6kxCd81YnGGZeGIc8KdKx_7d2QEZSlMdXPBYFsN8mAUzW9p1s47QCVGb4",
+        "installs": 7773967,
+        "category": "FOOD_AND_DRINK"
+      },
+      {
+        "url": "https://play.google.com/store/apps/details?id=br.com.livelo.app",
+        "title": "Livelo: juntar e trocar pontos",
+        "icon": "https://play-lh.googleusercontent.com/ovNjgkE0n264lV7PEmjvfg1IbN9oyQOIQBFyd1GeL5PXTN5Ewriyh8i8LRufeYJJLw",
+        "installs": 7724835,
+        "category": "TRAVEL_AND_LOCAL"
+      }
+    ],
+    "usage": 1.64
   }
 }
