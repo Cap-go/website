@@ -75,7 +75,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
   <h2 id="plans-heading" class="sr-only">
     {m.pricing_plans_heading({}, { locale: Astro.locals.locale })}
   </h2>
-  <div class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 shadow-sm sm:grid-cols-2 xl:grid-cols-5">
+  <div class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 shadow-sm sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
     <PayAsYouGoPlan />
     {pricing.map((plan) => (
       <div
@@ -100,7 +100,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         <div class="mt-6 lg:mt-8">
           <div class="flex items-end gap-1">
             <p
-              class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl xl:text-4xl"
+              class="text-4xl font-semibold tracking-tight text-gray-950"
               data-price
               data-price-toggle
               data-price-amount={priceAmount(plan.price_m, plan.price_y)}

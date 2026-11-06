@@ -76,6 +76,10 @@ try {
           }),
         )
         assert.equal(cards.length, 5, label)
+        const firstRow = Math.min(...cards.map((card) => card.row))
+        const columns = cards.filter((card) => card.row === firstRow).length
+        if (width >= 1280) assert.equal(columns, 5, `${label}: expected 5 plan columns, got ${columns}`)
+        else if (width >= 1024) assert.ok(columns >= 3, `${label}: expected at least 3 plan columns, got ${columns}`)
         for (const card of cards) {
           const peer = cards.find((candidate) => candidate.row === card.row)
           assert.ok(Math.abs(card.buttonTop - peer.buttonTop) <= 1, `${label}: ${card.name} CTA is not aligned with ${peer.name}`)
