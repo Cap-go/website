@@ -24,7 +24,5 @@ export const messageContextOverrides = {
   brand_asset_podcast_cover_desc:
     'Brand page description of the 3000×3000 podcast cover art. Keep Capgo, Apple Podcasts, Spotify, and 3000×3000 unchanged.',
   hero_title_line1:
-    'Homepage hero H1. English puts the full headline in this key; keep "Capacitor" and "Live Updates" accurate. In other locales the headline may be split with hero_title_line2 as the second line.',
-  hero_title_line2:
-    'Homepage hero H1 continuation. For English this key is intentionally empty: the full headline is only in hero_title_line1. Other locales may use two lines; translate as the second part or accent phrase.',
+    'Homepage hero H1. Translate the full headline in this key; keep "Capacitor" and "Live Updates" accurate.',
 } as const satisfies Partial<Record<MessageKey, string>>

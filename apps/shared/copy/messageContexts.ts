@@ -2118,7 +2118,7 @@ export const messageContexts = {
   hero_subtitle_part1: 'Page/area: Capgo marketing website. Role: Website copy sentence. Message key `hero_subtitle_part1` (Hero Subtitle Part1).',
   hero_subtitle_part2: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `hero_subtitle_part2` (Hero Subtitle Part2).',
   hero_subtitle_v2: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component doc/SignupCta.astro, component Hero.astro. Message key `hero_subtitle_v2` (Hero Subtitle V2).',
-  hero_title_line1: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component doc/SignupCta.astro, component Hero.astro. Preserve Capgo product/brand and developer terms exactly. Message key `hero_title_line1` (Hero Title Line1).',
+  hero_title_line1: 'Homepage hero H1. Translate the full headline in this key; keep "Capacitor" and "Live Updates" accurate.',
   hero_title_line2: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component doc/SignupCta.astro, component Hero.astro. Message key `hero_title_line2` (Hero Title Line2).',
   high_enterprise_response: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page sla.astro. Message key `high_enterprise_response` (High Enterprise Response).',
   high_priority_response: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page sla.astro. Message key `high_priority_response` (High Priority Response).',
