@@ -1245,7 +1245,7 @@ const messages = {
   footer_migrate_appflow_link: 'Migrate from Appflow',
   footer_voltbuilder_link: 'VoltBuilder vs Capgo',
   hero_cta_try_free: 'Get started for free',
-  hero_subtitle_v2: 'Build with your AI coding agent, ship fixes in minutes, build iOS and Android without a Mac, and observe every release.',
+  hero_subtitle_v2: 'Build with your AI coding agent, ship instant live updates, build iOS and Android without a Mac, and observe every release.',
   hero_title_line1: 'Ship Capacitor apps',
   hero_title_line2: 'without the wait',
   median_nav_label: 'Median vs Capgo',
