@@ -167,10 +167,12 @@ function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecut
 }
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
-// Picked from a French benchmark against Workers AI models (see the PR introducing it):
-// Gemma 4 drafts fast and cheap with thinking disabled, then TRANSLATION_REVIEW_MODEL
-// (DeepSeek V4.1 Flash in wrangler.jsonc) reviews the drafts against the style guide.
-const DEFAULT_MODEL = '@cf/google/gemma-4-26b-a4b-it'
+// Qwen 3.8 27B (Workers AI catalog: created 2026-08-17, no planned deprecation) drafts
+// with thinking disabled, then TRANSLATION_REVIEW_MODEL (DeepSeek V4.1 Flash in
+// wrangler.jsonc) reviews the drafts against the style guide. It replaced Gemma 4
+// (created 2026-04-02) once that passed the 5-month model age limit in AGENTS.md.
+// Override with TRANSLATION_MODEL.
+const DEFAULT_MODEL = '@cf/qwen/qwen3.8-27b'
 // Hybrid reasoning models think before answering by default. Translation does not need
 // it (same benchmark score, a fraction of the latency); the optional review pass keeps it.
 const THINKING_MODEL_PREFIXES = ['@cf/deepseek-ai/deepseek-v4', '@cf/google/gemma-4', '@cf/qwen/qwen3', '@cf/zai-org/glm-'] as const
@@ -188,9 +190,11 @@ const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
 // Translation memory: every translated segment is stored in R2 by a hash of its text
 // and context, so a page edit only sends new or edited segments to Workers AI, and the
 // header, footer and other repeated copy are translated once for the whole site.
-// Bump this when the prompt, style guides or models change to translate everything
-// again. Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages
-// are rebuilt from memory without new AI calls.
+// Bump this when the prompt or style guides change, or a model swap should replace
+// existing translations, to translate everything again. A model swap alone does not
+// need a bump: stored segments stay, only new or edited copy uses the new model.
+// Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages are
+// rebuilt from memory without new AI calls.
 const TRANSLATION_MEMORY_VERSION = '2026-10-25-style-guides-v4'
 const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const

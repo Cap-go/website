@@ -282,6 +282,10 @@ assert(
   __translationWorkerTest.aiRequestOptions('@cf/deepseek-ai/deepseek-v4.1-flash-1017').chat_template_kwargs?.enable_thinking === false,
   'Thinking was not disabled for DeepSeek translation requests',
 )
+assert(
+  __translationWorkerTest.aiRequestOptions('@cf/qwen/qwen3.8-27b').chat_template_kwargs?.enable_thinking === false,
+  'Thinking was not disabled for Qwen 3.8 translation drafts',
+)
 assert(!('chat_template_kwargs' in __translationWorkerTest.aiRequestOptions('@cf/meta/llama-3.1-8b-instruct-fast')), 'Thinking options were sent to a non-reasoning model')
 
 assert(__translationWorkerTest.translationWordCount('Ship mobile updates instantly') === 4, 'Word count did not count a short English headline')

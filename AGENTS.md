@@ -106,3 +106,31 @@ bun run visual-diff:capture:after -- --suite web --routes /,/pricing/
 3. Include the visual diff markdown in the PR body.
 4. After subsequent pushes that change visuals, re-run `capture:after`, `compare`, and `report`; post the fresh results.
 5. Do not commit `.visual-diff/` artifacts — they are gitignored.
+
+## AI model freshness (HARD RULE)
+
+Applies to every AI feature in this repo (workers such as `apps/translation-worker`,
+scripts, CI) and to services it calls.
+
+- Never ship or keep a model whose release is more than **5 months** old.
+- Treat a model more than **3 months** old as already old: when you touch an AI
+  feature, move it to the newest good model.
+- Check the age and planned deprecation against the provider's **live catalog**,
+  never from memory. For Workers AI:
+  - `GET https://api.cloudflare.com/client/v4/accounts/<account>/ai/models/search?task=Text%20Generation&per_page=200`
+    (use `created_at` and `properties.planned_deprecation_date`).
+  - `GET https://api.cloudflare.com/client/v4/accounts/<account>/ai/models/schema?model=<id>`
+    for the inputs the model supports (`reasoning_effort`, `chat_template_kwargs`,
+    `response_format`, ...).
+- Never pick a model that has a planned deprecation date.
+- Reasoning models used for short structured output must turn thinking off
+  (`chat_template_kwargs: { enable_thinking: false }` or `reasoning_effort: 'none'`,
+  whichever the model schema supports), or they burn the token budget and return
+  empty content. Confirm with one real call that thinking is actually off: some
+  models ignore the flag (GLM-5.3 still reasoned with `enable_thinking: false`).
+  In the translation worker, add the model family to `THINKING_MODEL_PREFIXES`.
+- Keep the model overridable by env var (for example `TRANSLATION_MODEL`,
+  `TRANSLATION_REVIEW_MODEL`), and note the catalog `created_at` next to the default.
+- A model swap can trigger mass regeneration (for example bumping
+  `TRANSLATION_MEMORY_VERSION` re-translates the whole site): decide it deliberately
+  and state the impact in the PR.

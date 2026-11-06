@@ -16,7 +16,7 @@
     },
   ],
   "vars": {
-    "TRANSLATION_MODEL": "@cf/google/gemma-4-26b-a4b-it",
+    "TRANSLATION_MODEL": "@cf/qwen/qwen3.8-27b",
     "TRANSLATION_REVIEW_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
     "TRANSLATION_TEST_MODE": "1",
   },
