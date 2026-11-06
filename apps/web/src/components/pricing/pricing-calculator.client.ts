@@ -1,5 +1,5 @@
 import { formatDisplay, onCurrencyChange, planAmount, usdToDisplay } from '@/scripts/currency'
-import { deriveUsage, estimateCost, getPlanMonthlyPrice, recommendPlan, type CreditStep, type PricingPlan } from '@/lib/pricingCalculator'
+import { deriveUsage, estimateCost, getPlanMonthlyPrice, recommendOption, usageRowState, type CreditStep, type PricingPlan } from '@/lib/pricingCalculator'
 
 export type PricingCalculatorData = {
   plans: (PricingPlan & { stripeId?: string })[]
@@ -113,9 +113,9 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
     const [mau, updates, size] = fields.map(({ input }) => Math.max(0, Number(input?.value) || 0))
     const usage = deriveUsage(mau, updates, size)
     const yearly = isYearly()
-    const recommended = plans.length ? recommendPlan(plans, steps, usage, yearly) : null
+    const recommended = recommendOption(plans, steps, usage, yearly)
 
-    if (!userPickedPlan && recommended) checkPlan(recommended.id)
+    if (!userPickedPlan) checkPlan(recommended?.id ?? 'credits')
     const value = selectedPlanValue()
     const plan = value && value !== 'credits' ? (plans.find((candidate) => candidate.id === value) ?? null) : null
     const estimate = estimateCost(steps, usage, plan, yearly)
@@ -125,8 +125,13 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
       all<HTMLElement>(`[data-pricing-calculator-best-fit="${candidate.id}"]`).forEach((badge) => (badge.hidden = candidate.id !== recommended?.id))
     }
 
+    all<HTMLElement>('[data-pricing-calculator-best-fit="credits"]').forEach((badge) => (badge.hidden = !!recommended))
+    all<HTMLElement>('[data-pricing-calculator-payg-cheaper]').forEach((note) => (note.hidden = !!recommended || !!plan))
+    all<HTMLElement>('[data-pricing-calculator-cta-plan]').forEach((label) => (label.hidden = !plan))
+    all<HTMLElement>('[data-pricing-calculator-cta-payg]').forEach((label) => (label.hidden = !!plan))
     setText('[data-pricing-calculator-total]', steps.length || !plan ? formatAmount(estimate.totalMonthly) : '—')
-    setText('[data-pricing-calculator-plan-name]', plan?.name ?? '')
+    const paygName = one<HTMLInputElement>('[data-pricing-calculator-plan][value="credits"]')?.dataset.planName ?? ''
+    setText('[data-pricing-calculator-plan-name]', plan?.name ?? paygName)
     setText('[data-pricing-calculator-plan-cost]', formatAmount(estimate.planMonthly))
     setText('[data-pricing-calculator-credits]', steps.length ? formatAmount(estimate.creditsMonthly) : '—')
     all<HTMLElement>('[data-pricing-calculator-plan-row]').forEach((row) => (row.hidden = !plan))
@@ -141,8 +146,7 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
     for (const row of rows) {
       const element = one<HTMLElement>(`[data-pricing-calculator-usage="${row.key}"]`)
       if (!element) continue
-      const over = Math.max(0, row.used - row.included)
-      const fill = row.included > 0 ? Math.min(100, (row.used / row.included) * 100) : row.used > 0 ? 100 : 0
+      const { over, fill } = usageRowState(row.used, row.included, !!plan)
       const bar = element.querySelector<HTMLElement>('[data-usage-bar]')
       if (bar) {
         bar.style.width = `${fill}%`
