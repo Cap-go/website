@@ -1,7 +1,7 @@
 ---
 slug: apple-vs-google-privacy-compliance-for-third-party-data
 title: "Apple vs Google Privacy (2026): Rules for App Developers"
-description: "Apple vs Google privacy for app developers: ATT, Privacy Sandbox, Topics API planned deprecation and phaseout, and the Data Safety section compared for third-party data."
+description: "Apple vs Google privacy for app developers: ATT, Privacy Sandbox, the Topics API phaseout, and Data Safety rules for third-party data compared."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
