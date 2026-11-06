@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test'
 import credits from '../src/data/capgo-credits.json'
 import plansData from '../src/data/capgo-plans.json'
-import { creditsCost, deriveUsage, estimateCost, recommendOption } from '../src/lib/pricingCalculator.ts'
+import { creditsCost, deriveUsage, estimateCost, recommendOption, usageRowState } from '../src/lib/pricingCalculator.ts'
 
 const plans = plansData
   .filter((plan) => plan.name !== 'Free')
@@ -32,4 +32,16 @@ test('499 MAU still picks pay as you go', () => {
 
 test('500 MAU keeps the normal plan pick (Solo)', () => {
   expect(recommendOption(plans, steps, deriveUsage(500, 4, 4), false)?.name).toBe('Solo')
+})
+
+test('pay as you go usage rows are never over a plan quota', () => {
+  const usage = deriveUsage(100, 4, 4)
+  for (const used of [usage.mau, usage.bandwidthGiB, usage.storageGiB]) {
+    expect(usageRowState(used, 0, false).over).toBe(0)
+  }
+})
+
+test('plan usage rows still report overage', () => {
+  expect(usageRowState(1500, 1000, true)).toEqual({ over: 500, fill: 100 })
+  expect(usageRowState(500, 1000, true)).toEqual({ over: 0, fill: 50 })
 })
