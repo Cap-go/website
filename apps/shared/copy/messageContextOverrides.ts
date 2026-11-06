@@ -10,8 +10,6 @@ export const messageContextOverrides = {
   pricing_prepaid_annual_example:
     'Qualifier below the localized $5 prepaid-credit amount in the Pay as you go tier on the pricing page and shared homepage/live-update pricing teaser. That balance can cover a year only for light usage. This is not a fixed annual plan, unlimited usage, a monthly fee, or a guaranteed annual bill.',
   pricing_prepaid_cta: 'Registration link for the Pay as you go tier. Creates an account before purchasing prepaid credits; it does not directly charge or create a subscription.',
-  hero_live_title:
-    'Homepage hero H1, the main headline of capgo.app. Translate the whole sentence as one headline in natural word order. Keep Capacitor unchanged. It says Capgo sends live updates to Capacitor apps right away, without a new store release.',
   // Example:
   // updates: 'Pricing calculator metric label for monthly OTA update volume, not a nav item.',
   live_update_hero_headline:
