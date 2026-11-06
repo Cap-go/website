@@ -72,7 +72,7 @@ const messages = {
   about_facts_founder_value: 'Martin Donadieu',
   about_facts_headquarters: 'Headquarters',
   about_facts_headquarters_value:
-    'Sepapaja 6, 15551 Tallinn, Estonia (legal imprint); US entity at 131 Continental Dr, Suite 305, Newark, DE 19713. Remote-first team with offsites in Madeira.',
+    'Sepapaja tn 6, 15551 Tallinn, Estonia (legal imprint); US entity at 131 Continental Dr, Suite 305, Newark, DE 19713. Remote-first team with offsites in Madeira.',
   about_facts_plugins: 'Plugins maintained',
   about_facts_pricing: 'Pricing',
   about_facts_pricing_fallback: 'Plans from $12/month billed yearly, up to Enterprise. 14-day free trial, no credit card. See the pricing page for current rates.',
@@ -1299,7 +1299,7 @@ const messages = {
   companies_logo_stat_uptime_value: '99.9%',
   company: 'Company',
   company_definition:
-    '<strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
+    '<strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja tn 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
   company_name: 'Company name',
   company_no_liability:
     'In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of the <a href="https://www.termsfeed.com/blog/sample-disclaimer-template/" target="_blank" rel="noopener noreferrer"> Disclaimer Template. </a>',
@@ -2186,7 +2186,7 @@ const messages = {
   eula_definition_application_store:
     '**Application Store** means the digital distribution service operated and developed by Apple Inc. (Apple App Store) or Google Inc. (Google Play Store) by which the Application has been downloaded to your Device.',
   eula_definition_company:
-    '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
+    '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja tn 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
   eula_definition_content:
     '**Content** refers to content such as text, images, or other information that can be posted, uploaded, linked to or otherwise made available by You, regardless of the form of that content.',
   eula_definition_country: '**Country** refers to: the State of Delaware, United States, when the Company is CodepushGo, LLC; Estonia when the Company is Digital Shift OÜ',
@@ -3428,7 +3428,7 @@ const messages = {
   privacy_definition_business:
     "**Business**, for the purpose of the CCPA (California Consumer Privacy Act), refers to the Company as the legal entity that collects Consumers' personal information and determines the purposes and means of the processing of Consumers' personal information, or on behalf of which such information is collected and that alone, or jointly with others, determines the purposes and means of the processing of consumers' personal information, that does business in the State of California.",
   privacy_definition_company:
-    '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
+    '**Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja tn 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
   privacy_definition_company_gdpr: 'For the purpose of the GDPR, the Company is the Data Controller.',
   privacy_definition_consumer:
     '**Consumer**, for the purpose of the CCPA (California Consumer Privacy Act), means a natural person who is a California resident. A resident, as defined in the law, includes (1) every individual who is in the USA for other than a temporary or transitory purpose, and (2) every individual who is domiciled in the USA who is outside the USA for a temporary or transitory purpose.',
@@ -3729,7 +3729,7 @@ const messages = {
   request_demo: 'Request Demo',
   required_storage_space: 'Required storage space',
   requires_capgo_account: 'Requires a Capgo account',
-  return_address: '6 sepapaja\nTallinn, 15510\nEstonia',
+  return_address: 'Sepapaja tn 6\nTallinn, 15551\nEstonia',
   return_eligibility: 'In order for the Goods to be eligible for a return, please make sure that:',
   return_policy: 'Return Policy',
   return_policy_title: 'Return and Refund Policy',
@@ -6064,7 +6064,7 @@ const messages = {
   tos_definition_application_store:
     'Application Store means the digital distribution service operated and developed by Apple Inc. (Apple App Store) or Google Inc. (Google Play Store) in which the Application has been downloaded.',
   tos_definition_company:
-    'Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
+    'Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to the Capgo entity that bills You: CodepushGo, LLC, a Delaware limited liability company, 131 Continental Dr, Suite 305, Newark, DE 19713, United States, for customers billed in the United States; and Digital Shift OÜ (registry code 14236508), Sepapaja tn 6, 15551 Tallinn, Estonia, for all other customers. The contracting entity is the one named on Your invoice.',
   tos_definition_country: 'Country refers to: the State of Delaware, United States, when the Company is CodepushGo, LLC; Estonia when the Company is Digital Shift OÜ',
   tos_definition_device: 'Device means any device that can access the Service such as a computer, a cellphone or a digital tablet.',
   tos_definition_feedback: 'Feedback means feedback, innovations or suggestions sent by You regarding the attributes, performance or features of our Service.',

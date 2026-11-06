@@ -29,7 +29,7 @@ export const LLMS_WHEN_TO_USE_PATHS = new Set(['/llms.txt', '/llms-full.txt', '/
 
 export const CAPGO_POSTAL_ADDRESS = {
   '@type': 'PostalAddress' as const,
-  streetAddress: 'Sepapaja 6',
+  streetAddress: 'Sepapaja tn 6',
   postalCode: '15551',
   addressLocality: 'Tallinn',
   addressCountry: 'EE',

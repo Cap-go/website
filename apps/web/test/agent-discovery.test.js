@@ -114,7 +114,7 @@ test('organization schema includes postal address and support contact', () => {
   })
   expect(org.address).toMatchObject({
     '@type': 'PostalAddress',
-    streetAddress: 'Sepapaja 6',
+    streetAddress: 'Sepapaja tn 6',
     addressLocality: 'Tallinn',
     addressCountry: 'EE',
   })
