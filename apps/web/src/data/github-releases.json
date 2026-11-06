@@ -1,6 +1,22 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.29.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.4",
+    "pubDate": "2026-11-05T12:48:33.000Z",
+    "description": "🆕 Changelog Fixed Prevented preview subdomains from being indexed by search engines , ensuring non production deployments no longer appear in public search results. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.29.3...capgo 22.29.4"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.29.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.3",
+    "pubDate": "2026-11-05T11:14:50.000Z",
+    "description": "🆕 Changelog Changed Improved retention state calculation performance for canceled organizations by computing the relevant state in a single, set based database pass. This reduces overhead and speeds up operations involving canceled organization retention. ( 4016) Updated to v8.1.2 to incorporate upstream fixes and maintain compatibility with the latest Capacitor ecosystem. ( 3584) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.29.2...capgo 22.29.3"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.29.2",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.2",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.2",
@@ -302,22 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.22.1",
     "pubDate": "2026-10-27T22:23:18.000Z",
     "description": "🆕 Changelog Fixed Treats Hyperdrive connect timeouts as transient errors so connections are retried instead of failing immediately. Adds guards and warning gates around retention activities for canceled organizations, preventing unintended lifecycle operations. Delays marking a Stripe subscription as paid until the invoice is actually paid, so billing status accurately reflects payment state. Security Narrows MFA waiver scope so it applies only to registered platform admin impersonation, str..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.21.4",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.4",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.4",
-    "pubDate": "2026-10-27T18:02:10.000Z",
-    "description": "🆕 Changelog Security Updated to version 21.0.4 to resolve reported security vulnerabilities. This ensures the testing environment remains protected and incorporates the latest upstream fixes. No action is required unless your project depends directly on ; in that case, verify compatibility with version 21.0.4. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.21.3...capgo 22.21.4"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.21.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.21.2",
-    "pubDate": "2026-10-27T05:20:33.000Z",
-    "description": "🆕 Changelog Changed Improved database write performance by skipping unnecessary onboarding and user locks during no op writes, reducing lock contention. Updated the stored credentials encryption key to derive from by default, simplifying setup and improving key consistency across environments. Fixed Fixed billing notification emails to link directly to the console billing page for easier payment management. Fixed image migration scripts to accept the Supabase pooler TLS certificate, resolvin..."
   },
   {
     "category": "release",
@@ -1065,11 +1065,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-plus 8.5.3",
-    "link": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.5.3",
-    "guid": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.5.3",
-    "pubDate": "2026-10-12T10:57:58.000Z",
-    "description": "Capacitor+ v8.5.3 Fixed Updated iOS private API usage to be App Store compliant with guideline 2.5.2, reducing the risk of app rejection during review. Installation What is Capacitor+? Capacitor+ is an automated fork of Capacitor that: Syncs daily with upstream Capacitor Runs full CI/CD on all changes Auto publishes verified releases Full Changelog: https://github.com/Cap go/capacitor plus/compare/8.5.2...8.5.3"
+    "title": "capacitor-plus 8.6.1",
+    "link": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.6.1",
+    "guid": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.6.1",
+    "pubDate": "2026-11-05T09:37:26.000Z",
+    "description": "Capacitor+ v8.6.1 Changed Synchronized the project with the latest upstream branch, integrating upstream bug fixes, improvements, and internal updates since . ( ) Applied upstream preferred conflict resolutions during the merge so that behavior in overlapping areas now matches upstream expectations. Fixed Resolved merge conflicts introduced by the upstream synchronization, reducing behavioral drift and inconsistencies between the fork and upstream. Migration notes No breaking changes are expe..."
   },
   {
     "category": "release",
