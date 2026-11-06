@@ -764,7 +764,7 @@ const messages = {
   build_in_public_on_twitter: 'Build in public on Twitter',
   build_minutes: 'build minutes',
   build_time_explanation:
-    'Build time refers to the time Capgo spends building your native app in the cloud using Capgo Build, our cloud-based solution for iOS and Android. It allows you to build your app from any computer without needing a Mac, simplifies CI/CD workflows, and enables teammates who are not familiar with native builds to generate builds reliably. Using the Capgo CLI, you can trigger builds in a simple and reproducible way, often faster and easier than managing your own CI/CD setup.',
+    'Build time refers to the time Capgo spends building your native app in the cloud using Capgo Build, our cloud-based solution for iOS and Android. It allows you to build your app from any computer without needing a Mac, simplifies CI/CD workflows, and enables teammates who are not familiar with native builds to generate builds reliably. Using the Capgo CLI, you can trigger builds in a simple and reproducible way, often faster and easier than managing your own CI/CD setup. When the native build queue is busy, higher plans start sooner; every waiting build gains priority over time so nobody waits forever.',
   built_for_devs_badge: 'DEVELOPER FRIENDLY',
   built_for_devs_code_comment: 'My App',
   built_for_devs_cta: 'Try for free',
@@ -1449,6 +1449,15 @@ const messages = {
   pricing_explainer_bandwidth_title: 'How is bandwidth counted?',
   pricing_explainer_build_body: "Time spent compiling your iOS and Android binaries on Capgo's macOS M4 machines. Extra build minutes use credits.",
   pricing_explainer_build_title: 'What are build hours?',
+  pricing_native_build_queue_priority_label: 'Native build queue priority',
+  pricing_native_build_queue_priority_solo: 'Standard',
+  pricing_native_build_queue_priority_maker: 'Elevated',
+  pricing_native_build_queue_priority_team: 'High',
+  pricing_native_build_queue_priority_enterprise: 'Highest priority',
+  pricing_native_build_queue_priority_line:
+    'Native build queue priority: {tier} when the queue is busy (every waiting build gains priority over time).',
+  native_build_queue_priority_explanation:
+    'Plans set a baseline place in line for native cloud builds when many builds are waiting. Solo is standard, Maker is elevated, Team is high, and Enterprise is highest priority. The queue also gives every waiting build more priority over time, so no build waits forever.',
   pricing_explainer_cancel: 'Cancel anytime, access until the period ends',
   pricing_explainer_eyebrow: 'How Capgo pricing works',
   pricing_explainer_lead: 'Every plan includes Live Updates, Native Builds, Notifications, Observe, plugins, and automations. Plans differ only by usage limits and support.',
@@ -6448,6 +6457,7 @@ const messages = {
   website_title: 'Capacitor Live Update - Capgo Cloud',
   welcome_to_capgo: 'Welcome to Capgo',
   what_does_build_time_refer_to: 'What does "build time" refer to in the plans?',
+  what_does_native_build_queue_priority_mean: 'What does native build queue priority mean?',
   what_happens_if_i_reach_the_bandwidth_limit: 'What happens if I reach the Bandwidth limit?',
   what_happens_if_i_reach_the_bandwidth_limit_answer:
     "We'll notify you by email when you reach 50%, 70%, 90%, and 100% of your bandwidth limit. Once the limit is reached, update downloads will be blocked until your billing cycle resets, you upgrade to a plan with more bandwidth, or you purchase credits to cover the additional usage. Your app will continue to function with its current version.",

@@ -133,6 +133,11 @@ export function buildPricingFaqSections(locale: Locales, urls: PricingFaqUrls): 
           answer: m.build_time_explanation({}, { locale }),
         },
         {
+          id: 'faq-native-build-queue-priority',
+          question: m.what_does_native_build_queue_priority_mean({}, { locale }),
+          answer: m.native_build_queue_priority_explanation({}, { locale }),
+        },
+        {
           id: 'faq-mau-limit',
           question: m.what_happens_if_i_reach_the_mau_limit({}, { locale }),
           answer: m.what_happens_if_i_reach_the_mau_limit_answer({}, { locale }),

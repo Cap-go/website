@@ -67,6 +67,22 @@ function buildConcurrency(planName: string) {
   }
 }
 
+function nativeBuildQueuePriority(planName: string) {
+  const locale = Astro.locals.locale
+  switch (planName) {
+    case 'Solo':
+      return m.pricing_native_build_queue_priority_solo({}, { locale })
+    case 'Maker':
+      return m.pricing_native_build_queue_priority_maker({}, { locale })
+    case 'Team':
+      return m.pricing_native_build_queue_priority_team({}, { locale })
+    case 'Enterprise':
+      return m.pricing_native_build_queue_priority_enterprise({}, { locale })
+    default:
+      return '—'
+  }
+}
+
 const rows: CompareSection[] = [
   {
     group: 'Platform',
@@ -230,6 +246,11 @@ const rows: CompareSection[] = [
         value: (plan: Database['public']['Tables']['plans']['Row']) => buildConcurrency(plan.name),
       },
       {
+        label: m.pricing_native_build_queue_priority_label({}, { locale: Astro.locals.locale }),
+        faqHref: '#faq-native-build-queue-priority',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => nativeBuildQueuePriority(plan.name),
+      },
+      {
         label: 'App Store publishing',
         value: () => true,
       },
@@ -372,10 +393,20 @@ const rows: CompareSection[] = [
                   )}
                 </div>
                 <p class="mt-2 text-xs leading-5 font-medium text-gray-600">
-                  <span data-price-amount={priceParts(plan).yearlyMonthly} data-price-plan={plan.stripe_id} data-price-interval="year-monthly" data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).yearlyMonthly}${priceParts(plan).suffix}`}</span>/mo
-                  yearly or
-                  <span data-price-amount={priceParts(plan).monthly} data-price-plan={plan.stripe_id} data-price-interval="month" data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).monthly}${priceParts(plan).suffix}`}</span>/mo
-                  monthly
+                  <span
+                    data-price-amount={priceParts(plan).yearlyMonthly}
+                    data-price-plan={plan.stripe_id}
+                    data-price-interval="year-monthly"
+                    data-price-suffix={priceParts(plan).suffix}
+                  >{`$${priceParts(plan).yearlyMonthly}${priceParts(plan).suffix}`}</span>
+                  /mo yearly or
+                  <span
+                    data-price-amount={priceParts(plan).monthly}
+                    data-price-plan={plan.stripe_id}
+                    data-price-interval="month"
+                    data-price-suffix={priceParts(plan).suffix}
+                  >{`$${priceParts(plan).monthly}${priceParts(plan).suffix}`}</span>
+                  /mo monthly
                 </p>
               </th>
             ))}
