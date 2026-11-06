@@ -162,10 +162,17 @@ const usageRows = [
                     </span>
                   </label>
                 ))}
-                <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-dashed border-white/15 px-3 py-2 transition-colors hover:border-white/25 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
+                <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2 transition-colors hover:border-white/20 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
                   <input type="radio" name="pricing-calculator-plan" value="credits" data-pricing-calculator-plan class="sr-only" />
                   <span class="text-sm font-semibold text-white">{m.pricing_calculator_credits_only({}, { locale })}</span>
-                  <span class="text-xs text-gray-400"><span data-price-amount="0">$0</span>{perMonth}</span>
+                  <span class="text-xs text-gray-400 tabular-nums"><span data-price-amount="0">$0</span>{perMonth}</span>
+                  <span
+                    data-pricing-calculator-best-fit="credits"
+                    hidden
+                    class="absolute -top-2 right-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-semibold text-gray-950"
+                  >
+                    {m.pricing_calculator_best_fit({}, { locale })}
+                  </span>
                 </label>
               </div>
             </fieldset>
@@ -173,6 +180,9 @@ const usageRows = [
             <div class="space-y-2 text-sm text-gray-400" data-pricing-calculator-notes>
               <p data-pricing-calculator-yearly-note hidden>
                 {m.pricing_calculator_yearly_note({}, { locale })}
+              </p>
+              <p data-pricing-calculator-payg-cheaper hidden class="font-medium text-emerald-400">
+                {m.pricing_calculator_payg_cheaper({}, { locale })}
               </p>
               <p data-pricing-calculator-credits-note hidden>
                 {m.pricing_calculator_credits_only_note({}, { locale })}
@@ -246,7 +256,8 @@ const usageRows = [
               href={getRelativeLocaleUrl(locale, 'register')}
               class="mt-8 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#111214] focus:outline-none"
             >
-              <OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText>
+              <span data-pricing-calculator-cta-plan><OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText></span>
+              <span data-pricing-calculator-cta-payg hidden>{m.pricing_prepaid_cta({}, { locale })}</span>
             </a>
           </aside>
         </div>
@@ -269,7 +280,8 @@ const usageRows = [
           tabindex="-1"
           class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-gray-950"
         >
-          <OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText>
+          <span data-pricing-calculator-cta-plan><OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText></span>
+              <span data-pricing-calculator-cta-payg hidden>{m.pricing_prepaid_cta({}, { locale })}</span>
         </a>
       </div>
     </div>

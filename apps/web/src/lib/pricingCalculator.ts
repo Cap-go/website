@@ -118,3 +118,12 @@ export function recommendPlan(plans: PricingPlan[], steps: CreditStep[], usage: 
   }
   return best
 }
+
+// Below this many monthly active users, pay as you go credits are the best fit.
+export const PAY_AS_YOU_GO_MAU_THRESHOLD = 500
+
+// Best fit for the calculator: null means pay as you go (credits, no plan).
+export function recommendOption(plans: PricingPlan[], steps: CreditStep[], usage: PricingUsage, yearly: boolean): PricingPlan | null {
+  if (usage.mau < PAY_AS_YOU_GO_MAU_THRESHOLD) return null
+  return plans.length ? recommendPlan(plans, steps, usage, yearly) : null
+}
