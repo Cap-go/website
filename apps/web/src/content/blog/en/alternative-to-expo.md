@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-14T00:00:00.000Z
-updated_at: 2026-11-04T15:16:07.000Z
+updated_at: 2026-11-06T16:35:11.000Z
 head_image: /expo_alternative.webp
 head_image_alt: 'Alternative to Expo Live Update Capgo blog illustration'
 keywords: Expo alternative, EAS Update, EAS Build, live updates, OTA updates, Capacitor, Capgo

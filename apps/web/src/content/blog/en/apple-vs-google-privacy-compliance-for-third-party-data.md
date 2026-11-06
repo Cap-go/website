@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-27T02:14:50.081Z
-updated_at: 2026-11-06T15:51:00.000Z
+updated_at: 2026-11-06T16:35:11.000Z
 head_image: /blog-images/apple-vs-google-privacy-compliance-for-third-party-data.webp
 head_image_alt: "\"Apple vs. Google: Privacy Compliance for Third-Party Data\" Capgo blog illustration"
 keywords: privacy compliance, third-party data, App Tracking Transparency, Privacy Sandbox, data protection
