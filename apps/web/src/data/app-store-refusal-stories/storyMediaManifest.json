@@ -297,5 +297,8 @@
     "width": 1200,
     "height": 645
   },
-  "missing-account-deletion-after-reviewer-deleted-accounts": null
+  "missing-account-deletion-after-reviewer-deleted-accounts": null,
+  "paywall-one-month-free-mismatched-annual-charge": null,
+  "resubmit-perf-fixes-removed-gate-crash-on-start": null,
+  "several-games-4-3-a-batch-then-appeals-overturned": null
 }
