@@ -1,0 +1,66 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const content = {
+  title: `${Astro.locals.runtimeConfig.public.brand} | Fair-use policy`,
+  description: 'Fair use for Capgo storage, update bandwidth, and observability. What is included, how excessive usage is reviewed, and how prepaid credits work.',
+}
+---
+
+<Layout content={content}>
+  <div class="mx-auto max-w-3xl px-6 py-24">
+    <h1 class="text-4xl font-bold text-white">Fair-use policy</h1>
+    <div class="prose prose-invert mt-8">
+      <p>Last updated: November 6, 2026</p>
+      <p>
+        Paid Capgo plans include bundle storage, update bandwidth, and Observe for normal app development and production use, subject to this policy. MAU and native build time
+        remain metered according to your plan. Fair use does not remove those allowances.
+      </p>
+
+      <h2 id="storage-and-bandwidth">Storage and bandwidth</h2>
+      <p>
+        Store the bundles and assets you need to release, operate, and roll back your apps. Deliver updates to your app users as often as needed. Paid plans have no automatic
+        storage or bandwidth overage charges and do not block uploads or downloads at the former storage or bandwidth quotas.
+      </p>
+      <p>
+        Keep unused-bundle retention appropriate for your release history. Capgo is not a general-purpose file host, backup service, or CDN for unrelated content. Repeated uploads
+        of unused bundles, artificial download traffic, and attempts to bypass service controls fall outside fair use.
+      </p>
+
+      <h2 id="observability">Observability</h2>
+      <p>
+        Observe, app health signals, device logs, and Logs Insights are included for production monitoring, release checks, and troubleshooting. Fair use applies to event volume,
+        log collection, retention, queries, and exports, including requests made through APIs or AI agents. It does not promise unlimited event ingestion, indefinite retention, or
+        unrestricted queries.
+      </p>
+      <p>
+        Avoid leaving verbose debug logging enabled across your entire user base, streaming unrelated telemetry, repeatedly exporting the full dataset, or polling large date ranges
+        at high frequency. Filter queries by app, version, device, and time range when investigating an issue. Existing retention, request-size, and rate limits still apply.
+      </p>
+
+      <h2 id="review">How we handle excessive usage</h2>
+      <p>
+        We review sustained usage that is disproportionate to normal app operation or affects service reliability. We consider your app's active users, release frequency, bundle
+        sizes, and the purpose and frequency of observability requests. We contact you to explain the issue and agree a solution, such as changing retention, reducing debug events,
+        or adjusting automated queries.
+      </p>
+      <p>
+        We do not automatically convert fair-use usage into overage charges. Any custom commercial arrangement requires your agreement. We may rate-limit or temporarily restrict
+        abusive usage to protect the service, including before contacting you when immediate action is necessary.
+      </p>
+
+      <h2 id="credits">Accounts without a subscription</h2>
+      <p>
+        If you use prepaid credits without an active paid plan, storage and bandwidth remain metered and consume credits, along with MAU and build time. The storage and bandwidth
+        inclusion described above applies to paid subscriptions. Observability remains subject to this policy wherever it is available.
+      </p>
+      <p>
+        See <a href={getRelativeLocaleUrl(locale, 'pricing')}>pricing</a> for allowances and credit rates, and our
+        <a href={getRelativeLocaleUrl(locale, 'aup')}>acceptable use policy</a> for other service rules. Contact <a href="https://support.capgo.app">support</a> to discuss a
+        workload that may need a custom arrangement.
+      </p>
+    </div>
+  </div>
+</Layout>

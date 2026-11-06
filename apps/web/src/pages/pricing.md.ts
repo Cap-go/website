@@ -37,7 +37,7 @@ function renderTiers(credits: CreditStep[], type: string): string {
     return `| ${range} ${config.plural ?? config.unit} | ${usd(step.price_per_unit)} per ${config.unit} |`
   })
 
-  return [`### ${config.title}`, '', `| Usage above plan allowance | Price |`, '| --- | --- |', ...rows].join('\n')
+  return [`### ${config.title}`, '', `| ${type === 'bandwidth' || type === 'storage' ? 'Usage without a subscription' : 'Usage above plan allowance or without a subscription'} | Price |`, '| --- | --- |', ...rows].join('\n')
 }
 
 export const GET: APIRoute = async () => {
@@ -51,7 +51,7 @@ export const GET: APIRoute = async () => {
   const planRows = plans.map((plan) => {
     const buildMinutes = plan.build_time_unit ? Math.round(plan.build_time_unit / 60).toLocaleString('en-US') : '—'
     const yearlyMonthly = plan.price_y ? `$${Math.round(plan.price_y / 12)}/month ($${plan.price_y.toLocaleString('en-US')}/year)` : '—'
-    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB | ${(plan.storage ?? 0).toLocaleString('en-US')} GB | ${buildMinutes} min |`
+    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | Fair use | Fair use | ${buildMinutes} min |`
   })
 
   const markdown = [
@@ -67,7 +67,8 @@ export const GET: APIRoute = async () => {
     '- Yearly billing is about 20% cheaper than monthly.',
     '- Solo has purchasing power parity (PPP) pricing: 15%, 30%, 40%, or 50% off in 227 countries and territories, based on World Bank 2025 price levels, charged in local currency. The prices below are the full USD prices; the pricing page shows each visitor the price for their country. The discount needs a card and billing address from that country, so a VPN alone does not unlock it.',
     '- Maker, Team, and Enterprise are the same price in every country.',
-    '- Usage above a plan allowance is billed with the pay-as-you-go tiers below, or you can move to a bigger plan.',
+    '- MAU and build time above a plan allowance can use prepaid credits, or you can move to a bigger plan.',
+    `- Paid plans include storage, bandwidth, and Observe subject to fair use: ${baseUrl}/fair-use/. Storage and bandwidth have no automatic overage charges on a paid plan. Without a subscription, storage and bandwidth remain metered with credits.`,
     `- Enterprise (SSO, SLA, SOC 2 Type II, ISO 27001, self-hosting options, custom limits): talk to the team at https://book.capgo.app/demo/ or see ${baseUrl}/enterprise/`,
     '',
     '## Plans',

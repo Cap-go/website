@@ -5,9 +5,11 @@ export const PRICING_AGENT_POLICY_MARKDOWN = `## Billing and limits
 
 We'll send you email notifications when you reach 50%, 70%, 90%, and 100% of your MAU limit. Once you hit the limit, your updates will be blocked until the end of your billing cycle. To continue serving updates, you can upgrade to a higher plan or purchase credits to cover the additional usage.
 
-### Bandwidth and storage
+### Storage, bandwidth, and observability fair use
 
-At bandwidth or storage limits, Capgo emails you at 50%, 70%, 90%, and 100%. Update downloads or new bundle uploads pause until the billing cycle resets, you upgrade, or you purchase credits. Apps keep running their current version.
+Paid plans include storage and bandwidth subject to fair use, with no automatic overage charges or blocking at the former plan quotas. MAU and build time remain metered. Without a subscription, storage and bandwidth are paid with credits.
+
+Observe is included for normal production monitoring and troubleshooting, subject to fair use. Excessive event volume, continuous debug logging, repeated bulk exports, or high-frequency automated queries may require changes to collection or query patterns. Capgo contacts you to agree a solution and may limit abusive usage to protect the service. See https://capgo.app/fair-use/.
 
 ### Plan changes
 
