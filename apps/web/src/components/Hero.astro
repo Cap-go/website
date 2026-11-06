@@ -13,9 +13,7 @@ import HeroWorldMap from '@/components/HeroWorldMap.astro'
       <div data-hero-copy class="relative z-10 mx-auto flex max-w-7xl flex-1 flex-col justify-center px-4 pt-10 text-center sm:px-6 sm:pt-12 lg:px-0">
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-[1.08] xl:text-[clamp(5.25rem,9svh,7.5rem)]">
           <span class="sr-only">Capgo. </span>
-          <span class="lg:whitespace-nowrap">{m.hero_live_title_line1({}, { locale: Astro.locals.locale })}</span>
-          <br />
-          <span class="text-azure-500">{m.hero_live_title_line2({}, { locale: Astro.locals.locale })}</span>
+          <span class="block text-balance">{m.hero_live_title({}, { locale: Astro.locals.locale })}</span>
         </h1>
         <p class="font-inter mx-auto mt-6 max-w-3xl text-lg leading-8 text-balance text-gray-400 sm:text-xl xl:mt-8 xl:max-w-4xl xl:text-[clamp(1.25rem,2.2svh,1.625rem)] xl:leading-relaxed">
           {m.hero_live_subtitle({}, { locale: Astro.locals.locale })}
