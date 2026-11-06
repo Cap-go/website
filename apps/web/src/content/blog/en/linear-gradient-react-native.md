@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-29T13:08:56.203Z
-updated_at: 2026-11-06T10:35:00.000Z
+updated_at: 2026-11-06T12:26:33.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/99df39df-0a7c-45b5-b39a-ff77c00ff821/linear-gradient-react-native-tutorial-slide.jpg'
 head_image_alt: >-
   expo-linear-gradient and react-native-linear-gradient in React Native Capgo blog
