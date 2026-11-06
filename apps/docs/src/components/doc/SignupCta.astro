@@ -17,12 +17,21 @@ const route = Astro.locals.starlightRoute as StarlightRouteData | undefined
 const locale = resolveMessageLocale(route?.locale, Astro.currentLocale)
 const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
 const avatars = ['/avatars/jordan-96.webp', '/avatars/martin-96.webp', '/avatars/valeria-96.webp']
+const heroTitleLine1 = m.hero_title_line1({}, { locale })
+const heroTitleLine2 = m.hero_title_line2({}, { locale })
+const heroTitleUsesTwoLines = heroTitleLine2.trim().length > 0
 ---
 
 <div class:list={['docs-signup-cta not-content', compact && 'compact']}>
   <div class="docs-signup-cta-pitch">
     <p class="docs-signup-cta-title">
-      {m.hero_title_line1({}, { locale })} <span>{m.hero_title_line2({}, { locale })}</span>
+      {heroTitleUsesTwoLines ? (
+        <>
+          {heroTitleLine1} <span>{heroTitleLine2}</span>
+        </>
+      ) : (
+        <span>{heroTitleLine1}</span>
+      )}
     </p>
     <p class="docs-signup-cta-description">{m.hero_subtitle_v2({}, { locale })}</p>
   </div>
