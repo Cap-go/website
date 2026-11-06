@@ -75,14 +75,12 @@ function buildTimeDisplay(buildTimeSeconds: number) {
   <h2 id="plans-heading" class="sr-only">
     {m.pricing_plans_heading({}, { locale: Astro.locals.locale })}
   </h2>
-  <div class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 shadow-sm sm:grid-cols-2 xl:grid-cols-5">
-    <PayAsYouGoPlan />
+  <div class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 shadow-sm sm:grid-cols-2 lg:grid-cols-4" data-plans-grid>
     {pricing.map((plan) => (
       <div
         class:list={[
-          'relative flex min-w-0 flex-col p-6 sm:row-span-3 sm:grid sm:grid-rows-subgrid lg:min-h-[580px] lg:p-7 xl:p-6',
+          'relative flex min-w-0 flex-col p-6 sm:row-span-3 sm:grid sm:grid-rows-subgrid lg:min-h-[580px] lg:p-5 xl:p-7',
           plan.name === 'Maker' ? 'bg-blue-50' : 'bg-white',
-          plan.name === 'Enterprise' ? 'sm:col-span-2 xl:col-span-1' : '',
         ]}
         data-plan={plan.name}
         data-enterprise-scale={plan.name === 'Enterprise' && enterpriseScale ? '' : undefined}
@@ -100,7 +98,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         <div class="mt-6 lg:mt-8">
           <div class="flex items-end gap-1">
             <p
-              class="text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl xl:text-4xl"
+              class="text-4xl font-semibold tracking-tight text-gray-950"
               data-price
               data-price-toggle
               data-price-amount={priceAmount(plan.price_m, plan.price_y)}
@@ -282,6 +280,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
       </div>
     ))}
   </div>
+  <PayAsYouGoPlan />
   <p class="mt-3 text-center text-xs text-gray-400" data-currency-note hidden>
     {m.pricing_currency_estimate_note({}, { locale: Astro.locals.locale })}
     <a href="#currency" class="font-semibold text-blue-400 underline-offset-2 hover:underline">
