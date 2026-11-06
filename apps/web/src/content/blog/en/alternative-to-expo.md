@@ -1,9 +1,7 @@
 ---
 slug: alternative-to-expo
-title: Alternative to Expo Live Update
-description: >-
-  Capgo is an Expo alternative for Capacitor teams: EAS Update-style live
-  updates, plus native builds and store submit, without a React Native rewrite.
+title: "Best Expo Alternatives in 2026 for Live Updates | Capgo"
+description: "Looking for an Expo alternative? Capgo gives Capacitor teams EAS Update style live updates, cloud builds and store submit, from $12/month billed yearly."
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
