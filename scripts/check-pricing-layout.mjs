@@ -62,7 +62,7 @@ try {
       for (const interval of ['yearly', 'monthly']) {
         await page.locator(`label[for="${interval}"]`).click()
         const label = `${scenario.name}, ${width}px, ${interval}`
-        const cards = await page.locator('#plans [data-plan]').evaluateAll((elements) =>
+        const cards = await page.locator('#plans [data-plans-grid] > [data-plan]').evaluateAll((elements) =>
           elements.map((element) => {
             const card = element.getBoundingClientRect()
             const button = element.querySelector('a[href*="register"]').getBoundingClientRect()
@@ -75,11 +75,23 @@ try {
             }
           }),
         )
-        assert.equal(cards.length, 5, label)
+        assert.equal(cards.length, 4, label)
+        assert.ok(!cards.some((card) => card.name === 'Pay as you go'), `${label}: Pay as you go must sit outside the plans grid`)
         const firstRow = Math.min(...cards.map((card) => card.row))
         const columns = cards.filter((card) => card.row === firstRow).length
-        if (width >= 1280) assert.equal(columns, 5, `${label}: expected 5 plan columns, got ${columns}`)
-        else if (width >= 1024) assert.ok(columns >= 3, `${label}: expected at least 3 plan columns, got ${columns}`)
+        if (width >= 1024) assert.equal(columns, 4, `${label}: expected 4 plan columns, got ${columns}`)
+        const payg = await page.locator('#plans [data-plan="Pay as you go"]').evaluate((element) => {
+          const grid = document.querySelector('#plans [data-plans-grid]').getBoundingClientRect()
+          const strip = element.getBoundingClientRect()
+          return {
+            outsideGrid: !element.closest('[data-plans-grid]'),
+            fullWidth: Math.abs(strip.width - grid.width) <= 1,
+            overflows: element.scrollWidth > element.clientWidth,
+          }
+        })
+        assert.ok(payg.outsideGrid, `${label}: Pay as you go is inside the plans grid`)
+        assert.ok(payg.fullWidth, `${label}: Pay as you go strip is not full width`)
+        assert.ok(!payg.overflows, `${label}: Pay as you go strip overflows`)
         for (const card of cards) {
           const peer = cards.find((candidate) => candidate.row === card.row)
           assert.ok(Math.abs(card.buttonTop - peer.buttonTop) <= 1, `${label}: ${card.name} CTA is not aligned with ${peer.name}`)
