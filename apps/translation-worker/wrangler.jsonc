@@ -36,7 +36,7 @@
     },
   ],
   "vars": {
-    "TRANSLATION_MODEL": "@cf/google/gemma-4-26b-a4b-it",
+    "TRANSLATION_MODEL": "@cf/qwen/qwen3.8-27b",
     "TRANSLATION_REVIEW_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
   },
   "queues": {
@@ -57,7 +57,7 @@
         "max_batch_timeout": 1,
         "max_retries": 3,
         "retry_delay": 15,
-        // Each job runs one page batch at a time (Gemma draft, then DeepSeek review,
+        // Each job runs one page batch at a time (Qwen draft, then DeepSeek review,
         // 30-60 s). 12 + 6 concurrent jobs stays under the 50 requests/minute
         // DeepSeek cap that prepaid AI Gateway credits allow.
         "max_concurrency": 12,
@@ -121,7 +121,7 @@
         "binding": "AI",
       },
       "vars": {
-        "TRANSLATION_MODEL": "@cf/google/gemma-4-26b-a4b-it",
+        "TRANSLATION_MODEL": "@cf/qwen/qwen3.8-27b",
         "TRANSLATION_REVIEW_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
       },
       "r2_buckets": [

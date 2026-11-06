@@ -115,3 +115,9 @@ After making changes:
 2. Validate structured data at https://search.google.com/test/rich-results
 3. Test keyboard navigation (Tab, Enter, Escape)
 4. Check color contrast and focus visibility
+
+## AI model freshness (HARD RULE)
+
+Never ship or keep an AI model released more than 5 months ago, treat one older than
+3 months as already old, and check age and deprecation in the provider's live catalog,
+never from memory. Full rule: the "AI model freshness" section in [AGENTS.md](AGENTS.md).
