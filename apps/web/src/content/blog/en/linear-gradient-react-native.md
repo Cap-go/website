@@ -1,26 +1,68 @@
 ---
 slug: linear-gradient-react-native
-title: 'Master Linear Gradient React Native: Beautiful UIs in 2026'
-description: 'Learn to implement stunning linear gradient react native effects. This 2026 guide covers Expo, Bare RN, backgrounds, buttons, text masks, animations, and'
+title: 'expo-linear-gradient and react-native-linear-gradient in RN'
+description: >-
+  expo-linear-gradient in Expo, react-native-linear-gradient in bare RN. Backgrounds, rounding, animated shimmer, troubleshooting when it does not show.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-29T13:08:56.203Z
-updated_at: 2026-10-15T12:22:05.000Z
+updated_at: 2026-11-06T10:35:00.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/99df39df-0a7c-45b5-b39a-ff77c00ff821/linear-gradient-react-native-tutorial-slide.jpg'
-head_image_alt: 'Master Linear Gradient React Native: Beautiful UIs in 2026'
-keywords: 'react native, linear gradient, react native ui, mobile ui design, expo'
+head_image_alt: >-
+  expo-linear-gradient and react-native-linear-gradient in React Native Capgo blog
+keywords: >-
+  react-native-linear-gradient, react native linear gradient, expo linear gradient, expo-linear-gradient,
+  react native gradient, react native gradient background, linear gradient react native
 tag: 'Development, Mobile'
 published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: Should I use expo-linear-gradient or react-native-linear-gradient?
+    answer: >-
+      In an Expo-managed app, use expo-linear-gradient from the Expo SDK. In a bare React Native CLI app, use react-native-linear-gradient. Both expose a LinearGradient component with colors and start or end points; pick the package that matches how your project is configured so native linking stays consistent.
+  - question: How do I install linear gradients in Expo and in bare React Native?
+    answer: >-
+      In Expo, run bunx expo install expo-linear-gradient so the version matches your Expo SDK. In bare React Native, run bun add react-native-linear-gradient, then install iOS pods from the ios folder with pod install and rebuild the app. Rebuilding after native install is required for the module to load.
+  - question: How do I make a full screen linear gradient background in React Native?
+    answer: >-
+      Wrap the screen in LinearGradient and give it flex 1 in the style prop so it fills the viewport. Put scrollable content in a child View. Use start and end with x and y from 0 to 1 to control direction, for example vertical top to bottom or diagonal.
+  - question: Why do rounded corners not clip my gradient?
+    answer: >-
+      Rounded corners apply on the view that clips its children. Put borderRadius on a parent with overflow hidden, or set borderRadius on the LinearGradient style plus overflow hidden on an outer wrapper so the gradient does not paint square corners past the rounded bounds.
+  - question: How do I animate a linear gradient in React Native?
+    answer: >-
+      Prefer animating a transform on a small gradient layer inside a parent with overflow hidden, for example a horizontal shimmer. For color shifts you can interpolate animated values into the colors array with Reanimated or Animated, but moving a fixed gradient is usually cheaper and easier to tune than reanimating many color stops every frame.
+  - question: Why is my linear gradient not showing in React Native?
+    answer: >-
+      Common causes are zero height or width, a parent with no flex layout, wrong import for your stack, Expo Go missing a custom native module, or tests loading the real native module without a Jest mock. Fix layout first with flex 1 or explicit dimensions, confirm the correct package for Expo versus bare, rebuild after native changes, and mock react-native-linear-gradient in Jest when needed.
 ---
-You've probably hit one of two situations.
+**Quick pick:** in **Expo**, use **`expo-linear-gradient`**. In **bare React Native**, use **`react-native-linear-gradient`**. Install the one that matches your stack, then render a `LinearGradient` with `colors` and a sized `style` (usually `flex: 1` for a background).
 
-Either your screen looks flat and unfinished, and you want a background or button that feels like an actual product instead of a scaffold. Or you already tried adding a React Native gradient, and now you're stuck in setup limbo because half the examples use Expo and the other half assume a bare native project.
+**Expo**
 
-That split is where most tutorials stop being useful. The component API is simple. The environment choice isn't. A clean linear gradient React Native setup depends less on the `colors` prop and more on whether you're in Expo-managed workflow or dealing with native linking, pods, and test mocks yourself.
+```bash
+bunx expo install expo-linear-gradient
+```
+
+**Bare React Native**
+
+```bash
+bun add react-native-linear-gradient
+```
+
+**Minimal usage** (same idea in both libraries: named export from Expo, default import from bare).
+
+```tsx
+import { LinearGradient } from 'expo-linear-gradient';
+// Bare: import LinearGradient from 'react-native-linear-gradient';
+
+<LinearGradient colors={['#0f172a', '#2563eb']} style={{ flex: 1 }} />;
+```
+
+If you are choosing between native stacks and a web-first shell, [React Native vs Capacitor](https://capgo.app/blog/comparing-react-native-vs-capacitor/) walks through tradeoffs Capgo teams care about. The rest of this post covers backgrounds, buttons, masks, motion, and troubleshooting.
 
 ## Table of Contents
 - [Why Your React Native App Needs Gradients](#why-your-react-native-app-needs-gradients)
@@ -82,7 +124,7 @@ Expo is the smoother path. Installation is straightforward, version matching is 
 Install it like this:
 
 ```bash
-npx expo install expo-linear-gradient
+bunx expo install expo-linear-gradient
 ```
 
 Use it like this:
@@ -127,7 +169,7 @@ Bare React Native gives you direct native module access, but you own the rough e
 Install the package:
 
 ```bash
-npm install react-native-linear-gradient
+bun add react-native-linear-gradient
 ```
 
 For iOS, install pods:
@@ -347,7 +389,7 @@ This is the flashiest pattern in the set, and it's useful when you keep it restr
 You'll need `@react-native-masked-view/masked-view`.
 
 ```bash
-npm install @react-native-masked-view/masked-view
+bun add @react-native-masked-view/masked-view
 ```
 
 Then build the text mask:
