@@ -1,7 +1,7 @@
 ---
 slug: apple-vs-google-privacy-compliance-for-third-party-data
-title: "Apple vs. Google: Privacy Compliance for Third-Party Data"
-description: Explore the contrasting privacy strategies of two major tech companies and how they affect app developers and user data management.
+title: "Apple vs Google Privacy (2026): Rules for App Developers"
+description: "Apple vs Google privacy for app developers: ATT, Privacy Sandbox, Topics API and the Data Safety section compared for third-party data."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx

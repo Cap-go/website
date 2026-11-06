@@ -1,7 +1,7 @@
 ---
 slug: secure-token-storage-best-practices-for-mobile-developers
-title: 'How to Securely Store Access and Refresh Tokens on Mobile'
-description: 'The most secure token storage on mobile: access tokens in memory only, refresh tokens in iOS Keychain or Android Keystore-backed DataStore, plus rotation and migration off EncryptedSharedPreferences.'
+title: "Token Storage Best Practices for Mobile Apps (2026)"
+description: "Token storage best practices: access tokens in memory, refresh tokens in Keychain or Keystore, rotation, and moving off EncryptedSharedPreferences."
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
