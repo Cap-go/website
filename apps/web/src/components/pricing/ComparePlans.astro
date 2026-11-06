@@ -79,7 +79,7 @@ function nativeBuildQueuePriority(planName: string) {
     case 'Enterprise':
       return m.pricing_native_build_queue_priority_enterprise({}, { locale })
     default:
-      return '—'
+      return ''
   }
 }
 
@@ -392,21 +392,12 @@ const rows: CompareSection[] = [
                     <span class="rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
                   )}
                 </div>
+                <!-- prettier-ignore -->
                 <p class="mt-2 text-xs leading-5 font-medium text-gray-600">
-                  <span
-                    data-price-amount={priceParts(plan).yearlyMonthly}
-                    data-price-plan={plan.stripe_id}
-                    data-price-interval="year-monthly"
-                    data-price-suffix={priceParts(plan).suffix}
-                  >{`$${priceParts(plan).yearlyMonthly}${priceParts(plan).suffix}`}</span>
-                  /mo yearly or
-                  <span
-                    data-price-amount={priceParts(plan).monthly}
-                    data-price-plan={plan.stripe_id}
-                    data-price-interval="month"
-                    data-price-suffix={priceParts(plan).suffix}
-                  >{`$${priceParts(plan).monthly}${priceParts(plan).suffix}`}</span>
-                  /mo monthly
+                  <span data-price-amount={priceParts(plan).yearlyMonthly} data-price-plan={plan.stripe_id} data-price-interval="year-monthly" data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).yearlyMonthly}${priceParts(plan).suffix}`}</span>/mo
+                  yearly or
+                  <span data-price-amount={priceParts(plan).monthly} data-price-plan={plan.stripe_id} data-price-interval="month" data-price-suffix={priceParts(plan).suffix}>{`$${priceParts(plan).monthly}${priceParts(plan).suffix}`}</span>/mo
+                  monthly
                 </p>
               </th>
             ))}
