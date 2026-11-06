@@ -678,6 +678,27 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     channelId: 38923,
     version: '1.0.0',
   },
+  'capacitor-stripe-identity': {
+    appName: 'Stripe Identity Example',
+    appId: 'app.capgo.stripe.identity',
+    channelName: 'production',
+    channelId: 49339,
+    version: '1.0.0',
+  },
+  'capacitor-stripe-pay': {
+    appName: 'Stripe Pay Example',
+    appId: 'app.capgo.stripe.pay',
+    channelName: 'production',
+    channelId: 49337,
+    version: '1.0.0',
+  },
+  'capacitor-stripe-terminal': {
+    appName: 'Stripe Terminal Example',
+    appId: 'app.capgo.stripe.terminal',
+    channelName: 'production',
+    channelId: 49338,
+    version: '1.0.0',
+  },
   'capacitor-supabase': {
     appName: 'Supabase Example',
     appId: 'app.capgo.supabase.example',
@@ -718,6 +739,13 @@ const pluginPreviewQrSources: Record<string, PluginPreviewQrSource> = {
     appId: 'app.capgo.uploader',
     channelName: 'production',
     channelId: 38929,
+    version: '1.0.0',
+  },
+  'capacitor-uwb': {
+    appName: 'UWB Example',
+    appId: 'app.capgo.uwb.example',
+    channelName: 'production',
+    channelId: 49330,
     version: '1.0.0',
   },
   'capacitor-verisoul': {
