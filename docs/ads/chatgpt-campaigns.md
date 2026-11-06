@@ -98,3 +98,14 @@ Landing page: https://capgo.app/solutions/webapp-to-mobile/
 | `a_store` | Web app to App Store (20) | Turn your web app into iOS and Android apps (43) | Phone with App Store and Google Play buttons | [image](https://capgo.app/ads/chatgpt/webapp-to-mobile-a_store.png) · [tracking URL](https://capgo.app/solutions/webapp-to-mobile/?offer=direct&utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=chatgpt_webapptomobile&utm_content=a_store) |
 | `b_codebase` | Keep your web codebase (22) | One web codebase for iOS and Android apps. (42) | One web app reaching three phones | [image](https://capgo.app/ads/chatgpt/webapp-to-mobile-b_codebase.png) · [tracking URL](https://capgo.app/solutions/webapp-to-mobile/?offer=direct&utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=chatgpt_webapptomobile&utm_content=b_codebase) |
 | `c_build` | Web app to iOS, no Mac (22) | Signed iOS and Android builds in the cloud. (43) | Terminal running `npx cap add ios && npx cap add android` and `npx @capgo/cli build request --platform ios` | [image](https://capgo.app/ads/chatgpt/webapp-to-mobile-c_build.png) · [tracking URL](https://capgo.app/solutions/webapp-to-mobile/?offer=direct&utm_source=chatgpt&utm_medium=paid_chat&utm_campaign=chatgpt_webapptomobile&utm_content=c_build) |
+
+## CapgoChatGPTSecurityFixes
+
+Landing page: https://capgo.app/solutions/security-fixes/
+Import file: `capgo-chatgpt-ads-security-fixes.xlsx`. Conversions objective on `subscription_created` (event setting `6aedcbcd352481958d20c36a21c4f914`), 75/day, max bid 40, no launch date (starts on approval).
+
+| Variant | Title | Copy | Image | Links |
+|---|---|---|---|---|
+| `a_sameday` | Fix security holes today (24) | Ship the fix to every user. No store review. (44) | Terminal: encrypted, signed upload, fix live at next app open | [image](https://capgo.app/ads/chatgpt/security-fixes-a_sameday.png) · [tracking URL](https://capgo.app/solutions/security-fixes/?offer=direct&utm_source=chatgpt&utm_medium=cpc&utm_campaign=capgo_chatgpt_paid&utm_content=a_sameday&ref=chatgpt) |
+| `b_encrypted` | End-to-end encrypted OTA (24) | Only bundles signed with your key get installed (47) | Machine → CDN → phone: signed, encrypted, signature checked | [image](https://capgo.app/ads/chatgpt/security-fixes-b_encrypted.png) · [tracking URL](https://capgo.app/solutions/security-fixes/?offer=direct&utm_source=chatgpt&utm_medium=cpc&utm_campaign=capgo_chatgpt_paid&utm_content=b_encrypted&ref=chatgpt) |
+| `c_noreview` | Patch apps, skip review (23) | Security fixes reach users at next app open. (44) | Store release vs Capgo live update timeline | [image](https://capgo.app/ads/chatgpt/security-fixes-c_noreview.png) · [tracking URL](https://capgo.app/solutions/security-fixes/?offer=direct&utm_source=chatgpt&utm_medium=cpc&utm_campaign=capgo_chatgpt_paid&utm_content=c_noreview&ref=chatgpt) |
