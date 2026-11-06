@@ -1,0 +1,54 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const title = `${brand} Simulator | iOS and Android devices in the cloud`
+const description = 'Start an iOS or Android simulator from the Capgo console or CLI. Each session has its own URL. A running simulator uses one builder slot and build minutes.'
+const content = { title, description }
+const consoleUrl = 'https://console.capgo.app/'
+const docsUrl = 'https://ios-emulator.capgo.app/docs/'
+---
+
+<Layout content={content}>
+  <main class="bg-gray-950 text-white">
+    <section class="mx-auto max-w-5xl px-4 pt-20 pb-16 sm:px-6 lg:px-8">
+      <p class="text-sm font-semibold tracking-wide text-blue-300 uppercase">Simulator</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl">A device for every session.</h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-300">
+        Start iOS and Android simulators from Capgo. Each one has its own URL, so you can run many at once.
+        A running simulator takes one builder slot and uses build minutes, the same way a native build does.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-950" href={consoleUrl}>Open the console</a>
+        <a class="rounded-full border border-white/20 px-5 py-3 text-sm font-semibold" href={getRelativeLocaleUrl(locale, 'native-build')}>Native builds</a>
+      </div>
+    </section>
+    <section class="mx-auto grid max-w-5xl gap-4 px-4 pb-20 sm:grid-cols-3 sm:px-6 lg:px-8">
+      <article class="rounded-2xl border border-white/10 bg-white/5 p-5">
+        <h2 class="text-lg font-semibold">One URL per device</h2>
+        <p class="mt-2 text-sm leading-6 text-gray-300">Open, share, or hand the session to an agent. Stopping it ends the device.</p>
+      </article>
+      <article class="rounded-2xl border border-white/10 bg-white/5 p-5">
+        <h2 class="text-lg font-semibold">iOS, kept small</h2>
+        <p class="mt-2 text-sm leading-6 text-gray-300">Background work stays off: Siri, Spotlight, photos, News, and iCloud do not start.</p>
+      </article>
+      <article class="rounded-2xl border border-white/10 bg-white/5 p-5">
+        <h2 class="text-lg font-semibold">Android, kept smaller</h2>
+        <p class="mt-2 text-sm leading-6 text-gray-300">1536 MB RAM, 2 cores, no audio, no snapshot, and no boot animation.</p>
+      </article>
+    </section>
+    <section class="mx-auto max-w-5xl px-4 pb-24 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-semibold">Start one from the CLI</h2>
+      <pre class="mt-4 overflow-x-auto rounded-2xl bg-black p-4 text-sm text-gray-100"><code>bunx @capgo/cli@latest simulator start com.example.app --platform ios
+bunx @capgo/cli@latest simulator stop &lt;session-id&gt; com.example.app</code></pre>
+      <p class="mt-4 text-sm text-gray-400">
+        The session page shows a Simulator badge. API details live at <a class="underline" href={docsUrl}>{docsUrl}</a>
+        Agents should read <a class="underline" href="/simulator.md">/simulator.md</a> and connect MCP to <code>/s/&lt;session-id&gt;/mcp</code>.
+      </p>
+      <SignupCta />
+    </section>
+  </main>
+</Layout>
