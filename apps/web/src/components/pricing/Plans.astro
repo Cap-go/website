@@ -26,6 +26,22 @@ const enterpriseMauIndex = Math.max(
   ENTERPRISE_MAU_STOPS.findIndex((stop) => stop >= (enterprisePlan?.mau ?? 0)),
 )
 
+function nativeBuildQueueTier(planName: string) {
+  const locale = Astro.locals.locale
+  switch (planName) {
+    case 'Solo':
+      return m.pricing_native_build_queue_priority_solo({}, { locale })
+    case 'Maker':
+      return m.pricing_native_build_queue_priority_maker({}, { locale })
+    case 'Team':
+      return m.pricing_native_build_queue_priority_team({}, { locale })
+    case 'Enterprise':
+      return m.pricing_native_build_queue_priority_enterprise({}, { locale })
+    default:
+      return null
+  }
+}
+
 function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
   const highlights = [
     `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' && !enterpriseScale ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
@@ -40,6 +56,11 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
 
   if (plan.build_time_unit && plan.build_time_unit > 0) {
     highlights.push(`${buildTimeDisplay(plan.build_time_unit)}${plan.name === 'Enterprise' ? '+' : ''}`)
+  }
+
+  const queueTier = nativeBuildQueueTier(plan.name)
+  if (queueTier) {
+    highlights.push(m.pricing_native_build_queue_priority_line({ tier: queueTier }, { locale: Astro.locals.locale }))
   }
 
   if (plan.name === 'Enterprise') {
