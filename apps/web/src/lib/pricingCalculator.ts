@@ -42,8 +42,8 @@ export function deriveUsage(mau: number, updatesByMonth: number, updateSizeMb: n
 export function getOverageUsage(usage: PricingUsage, plan: PricingPlan): PricingUsage {
   return {
     mau: Math.max(0, usage.mau - plan.mau),
-    bandwidthGiB: Math.max(0, usage.bandwidthGiB - plan.bandwidth),
-    storageGiB: Math.max(0, usage.storageGiB - plan.storage),
+    bandwidthGiB: 0,
+    storageGiB: 0,
   }
 }
 
@@ -105,7 +105,7 @@ export function recommendPlan(plans: PricingPlan[], steps: CreditStep[], usage: 
   const sorted = [...plans].sort((a, b) => getPlanMonthlyPrice(a, yearly) - getPlanMonthlyPrice(b, yearly))
   // Without credit tiers overage looks free: fall back to the smallest plan that fits.
   if (!steps.length) {
-    return sorted.find((plan) => usage.mau <= plan.mau && usage.bandwidthGiB <= plan.bandwidth && usage.storageGiB <= plan.storage) ?? sorted[sorted.length - 1]
+    return sorted.find((plan) => usage.mau <= plan.mau) ?? sorted[sorted.length - 1]
   }
   let best = sorted[0]
   let bestTotal = Number.POSITIVE_INFINITY
@@ -124,8 +124,12 @@ export const PAY_AS_YOU_GO_MAU_THRESHOLD = 500
 
 // Best fit for the calculator: null means pay as you go (credits, no plan).
 export function recommendOption(plans: PricingPlan[], steps: CreditStep[], usage: PricingUsage, yearly: boolean): PricingPlan | null {
-  if (usage.mau < PAY_AS_YOU_GO_MAU_THRESHOLD) return null
-  return plans.length ? recommendPlan(plans, steps, usage, yearly) : null
+  if (!plans.length) return null
+  const plan = recommendPlan(plans, steps, usage, yearly)
+  if (usage.mau < PAY_AS_YOU_GO_MAU_THRESHOLD) {
+    if (!steps.length || creditsCost(steps, usage, null) <= estimateCost(steps, usage, plan, yearly).totalMonthly) return null
+  }
+  return plan
 }
 
 // Usage bar state: without a plan (pay as you go) nothing is over a quota,

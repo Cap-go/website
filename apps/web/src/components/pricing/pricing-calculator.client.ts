@@ -1,5 +1,5 @@
-import { formatDisplay, onCurrencyChange, planAmount, usdToDisplay } from '@/scripts/currency'
 import { deriveUsage, estimateCost, getPlanMonthlyPrice, recommendOption, usageRowState, type CreditStep, type PricingPlan } from '@/lib/pricingCalculator'
+import { formatDisplay, onCurrencyChange, planAmount, usdToDisplay } from '@/scripts/currency'
 
 export type PricingCalculatorData = {
   plans: (PricingPlan & { stripeId?: string })[]
@@ -146,7 +146,12 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
     for (const row of rows) {
       const element = one<HTMLElement>(`[data-pricing-calculator-usage="${row.key}"]`)
       if (!element) continue
-      const { over, fill } = usageRowState(row.used, row.included, !!plan)
+      const fairUse = !!plan && row.key !== 'mau'
+      const { over, fill } = usageRowState(row.used, row.included, !!plan && !fairUse)
+      const fairUseNote = element.querySelector<HTMLElement>('[data-usage-fair-use]')
+      if (fairUseNote) fairUseNote.hidden = !fairUse
+      const barWrap = element.querySelector<HTMLElement>('[data-usage-bar-wrap]')
+      if (barWrap) barWrap.hidden = fairUse
       const bar = element.querySelector<HTMLElement>('[data-usage-bar]')
       if (bar) {
         bar.style.width = `${fill}%`
@@ -158,7 +163,7 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
       const included = element.querySelector('[data-usage-included]')
       if (included) included.textContent = row.format(row.included)
       const includedWrap = element.querySelector<HTMLElement>('[data-usage-included-wrap]')
-      if (includedWrap) includedWrap.hidden = !plan
+      if (includedWrap) includedWrap.hidden = !plan || fairUse
       const overLine = element.querySelector<HTMLElement>('[data-usage-over]')
       if (overLine) overLine.hidden = over <= 0
       const overValue = element.querySelector('[data-usage-over-value]')

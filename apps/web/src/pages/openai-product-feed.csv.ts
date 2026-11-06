@@ -54,8 +54,8 @@ export const GET: APIRoute = async () => {
       .replace(/([^.!?])$/, '$1.')
     const limits = [
       `${(plan.mau ?? 0).toLocaleString('en-US')} monthly active users`,
-      `${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB bandwidth`,
-      `${(plan.storage ?? 0).toLocaleString('en-US')} GB storage`,
+      'fair-use bandwidth',
+      'fair-use storage and Observe',
       plan.build_time_unit ? `${Math.round(plan.build_time_unit / 60).toLocaleString('en-US')} native build minutes` : '',
     ]
       .filter(Boolean)

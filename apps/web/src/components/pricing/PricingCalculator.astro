@@ -63,9 +63,7 @@ const usageRows = [
     class="pricing-calculator-modal fixed inset-0 z-[100] m-0 h-dvh max-h-none w-full max-w-none border-0 bg-transparent p-0 backdrop:bg-gray-950/50 open:flex open:items-end open:justify-center sm:open:items-center sm:open:p-4"
     aria-labelledby="pricing-calculator-title"
   >
-    <div
-      class="flex max-h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-[#111214] text-white shadow-2xl shadow-black/60 sm:max-h-[90dvh] sm:rounded-3xl"
-    >
+    <div class="flex max-h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-[#111214] text-white shadow-2xl shadow-black/60 sm:max-h-[90dvh] sm:rounded-3xl">
       <div class="flex flex-wrap items-center gap-x-4 gap-y-3 px-5 pt-5 pb-4 sm:px-8 sm:pt-7">
         <div class="min-w-0 flex-1">
           <h2 id="pricing-calculator-title" class="flex items-center gap-3 font-mono text-base font-semibold tracking-wider text-white uppercase sm:text-lg">
@@ -79,15 +77,11 @@ const usageRows = [
         </div>
         <fieldset class="order-last flex w-full shrink-0 rounded-full bg-white/5 p-1 ring-1 ring-white/10 sm:order-none sm:w-auto">
           <legend class="sr-only">{m.pricing_calculator_billing_period({}, { locale })}</legend>
-          <label
-            class="flex min-h-8 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500"
-          >
+          <label class="flex min-h-8 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
             <span>{m.monthly_plan({}, { locale })}</span>
             <input type="radio" name="pricing-calculator-billing" value="monthly" data-pricing-calculator-billing checked class="sr-only" />
           </label>
-          <label
-            class="group flex min-h-8 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500"
-          >
+          <label class="group flex min-h-8 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold text-gray-400 transition hover:text-gray-200 has-checked:bg-white/10 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
             <span>{m.yearly_plan({}, { locale })}</span>
             <span class="rounded-full bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-bold text-blue-300">{m.yearly_two_months_free({}, { locale })}</span>
             <input type="radio" name="pricing-calculator-billing" value="yearly" data-pricing-calculator-billing class="sr-only" />
@@ -163,10 +157,19 @@ const usageRows = [
                   </label>
                 ))}
                 <label class="relative flex min-h-16 cursor-pointer flex-col justify-center rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2 transition-colors hover:border-white/20 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500">
-                  <input type="radio" name="pricing-calculator-plan" value="credits" data-pricing-calculator-plan data-plan-name={m.pricing_calculator_credits_only({}, { locale })} class="sr-only" />
+                  <input
+                    type="radio"
+                    name="pricing-calculator-plan"
+                    value="credits"
+                    data-pricing-calculator-plan
+                    data-plan-name={m.pricing_calculator_credits_only({}, { locale })}
+                    class="sr-only"
+                  />
                   <span class="text-sm font-semibold text-white">{m.pricing_calculator_credits_only({}, { locale })}</span>
                   <span class="text-xs text-gray-400 tabular-nums">
-                    <span data-price-amount="5" data-price-format="currency" translate="no">$5</span>
+                    <span data-price-amount="5" data-price-format="currency" translate="no">
+                      $5
+                    </span>
                     {m.pricing_prepaid_price_unit({}, { locale })}
                   </span>
                   <span
@@ -226,6 +229,13 @@ const usageRows = [
               </dl>
             </div>
 
+            <p class="mt-4 text-xs text-gray-400">
+              Paid plans include storage and bandwidth under{' '}
+              <a class="underline" href={getRelativeLocaleUrl(locale, 'fair-use')}>
+                fair use
+              </a>
+              . Build time is estimated separately.
+            </p>
             <h3 class="mt-7 font-mono text-xs tracking-wider text-gray-400 uppercase">{m.pricing_calculator_usage_vs_plan({}, { locale })}</h3>
             <ul class="mt-3 space-y-3">
               {usageRows.map((row) => (
@@ -244,7 +254,10 @@ const usageRows = [
                         </span>
                       </span>
                     </div>
-                    <div class="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
+                    <p data-usage-fair-use hidden class="mt-1 text-xs text-gray-400">
+                      Included subject to fair use
+                    </p>
+                    <div data-usage-bar-wrap class="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
                       <div data-usage-bar class="h-full rounded-full bg-blue-600 transition-[width] duration-200" style="width: 0%" />
                     </div>
                     <p class="mt-1 text-xs text-amber-400" data-usage-over hidden>
@@ -259,8 +272,12 @@ const usageRows = [
               href={getRelativeLocaleUrl(locale, 'register')}
               class="mt-8 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#111214] focus:outline-none"
             >
-              <span data-pricing-calculator-cta-plan><OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText></span>
-              <span data-pricing-calculator-cta-payg hidden>{m.pricing_prepaid_cta({}, { locale })}</span>
+              <span data-pricing-calculator-cta-plan>
+                <OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText>
+              </span>
+              <span data-pricing-calculator-cta-payg hidden>
+                {m.pricing_prepaid_cta({}, { locale })}
+              </span>
             </a>
           </aside>
         </div>
@@ -283,8 +300,12 @@ const usageRows = [
           tabindex="-1"
           class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-gray-950"
         >
-          <span data-pricing-calculator-cta-plan><OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText></span>
-              <span data-pricing-calculator-cta-payg hidden>{m.pricing_prepaid_cta({}, { locale })}</span>
+          <span data-pricing-calculator-cta-plan>
+            <OfferText direct={m.direct_offer_cta_get_started({}, { locale })}>{m.days_free_trial({}, { locale })}</OfferText>
+          </span>
+          <span data-pricing-calculator-cta-payg hidden>
+            {m.pricing_prepaid_cta({}, { locale })}
+          </span>
         </a>
       </div>
     </div>

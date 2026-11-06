@@ -127,6 +127,13 @@ if (plans.length > 0) {
         {plans && plans.length > 0 && <PricingExplainer plans={plans} />}
 
         {plans && plans.length > 0 && <ComparePlans pricing={plans} />}
+        <p class="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-gray-400">
+          Paid plans include storage, bandwidth, and Observe subject to{' '}
+          <a class="text-blue-400 underline" href={getRelativeLocaleUrl(locale, 'fair-use')}>
+            fair use
+          </a>
+          . MAU and build time remain metered. Without a subscription, storage and bandwidth use credits.
+        </p>
 
         <section class="mt-20 mb-8 grid gap-8 border-y border-white/10 py-10 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16" aria-labelledby="pricing-notifications-heading">
           <div>

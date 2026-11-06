@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-11-06T00:00:00.000Z
 head_image: /usage_explained.webp
 head_image_alt: "How your usage is counted in Capgo Capgo blog illustration"
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -19,12 +19,9 @@ origin: human
 next_blog: ''
 ---
 
-In Capgo, 3 values are counted and important to understand
-- User's
-- Storage
-- Bandwidth
+Capgo reports monthly active users (MAU), build time, storage, and bandwidth. On paid plans, MAU and build time determine plan fit and overage charges. Storage and bandwidth are included under the [fair-use policy](/fair-use/).
 
-Each one as a slight different way of being counted
+Organizations without a subscription still pay for storage and bandwidth with credits. See the [payment documentation](/docs/webapp/payment/) for how credits work.
 
 
 ## Users
@@ -63,34 +60,35 @@ You can see both on your account home page.
 
 ## Storage
 
-Each time you upload a bundle, this number is increased by the size of the upload.
+Storage measures the bundle versions and Delta assets retained for your apps. Linking one bundle to several channels or serving it from several regions does not multiply its storage usage.
 
-This data is only related to your upload size, the better your app size is, the better you stay in your plan.
+Paid plans include storage under the [fair-use policy](/fair-use/). You can still monitor storage on the Usage page, but it does not determine your paid plan or create overage charges. Credit-only organizations without a subscription still pay for storage.
 
-If you reach the limit or near, you can list your bundles with the CLI:
-`npx @capgo/cli@latest bundle list`
-To see what you could clean, removing a bundle, free the storage but don't delete the stats.
+Remove unused bundles to keep your release history manageable. List your bundles with:
 
-When you are ready for cleanup, use this command to remove many bundles:
-`npx @capgo/cli@latest bundle cleanup`
+```sh
+npx @capgo/cli@latest bundle list
+```
 
-PS: this is good for the planet, but also for your wallet 💪.
+When you are ready to remove unused versions, use:
 
-> You can also use the `--external` of upload to use your storage, and not count in your plan.
+```sh
+npx @capgo/cli@latest bundle cleanup
+```
+
+Review the cleanup options before deleting versions you may need for delivery or rollback. You can also configure [unused-bundle retention](/docs/webapp/bundles/#can-i-control-how-long-unused-bundles-are-kept).
 
 ## Bandwidth
 
-The calculation of this value is a bit more complex, but the idea is the same as the storage.
+Bandwidth measures bundle delivery to devices. Downloads served from the edge cache do not count toward Capgo bandwidth usage, and regional replication does not multiply it.
 
-Each time a user download a bundle, this number is increased by the size of the download.
+Paid plans include bandwidth under the [fair-use policy](/fair-use/). Passing the former bandwidth allowance does not create overage charges or stop downloads on a paid plan. Credit-only organizations without a subscription still pay for bandwidth.
 
-This data is only related to your download size, the better your Capacitor JS app size is, the better you stay in your plan.
+Keep bundles small and use [Delta updates](/docs/live-updates/differentials/) to reduce the amount your users download. This helps users on slow or metered connections, even when bandwidth is included in your plan.
 
-> One important thing to note, Capgo cannot see what size is downloaded, it only sees the size of the bundle. So if you have a big bundle, and you have many users who fail to download it, you will reach the limit quickly.
+## Observability
 
-The best way to stay in your plan is to have a small bundle, and if you can't, show a download bar to your user, and let them know how much they have left to download.
-
-In the future, Capgo will improve the download system to have more chances to download the bundle at one time.
+[Capgo Observe](/docs/webapp/observe/) supports normal production monitoring and troubleshooting under the [fair-use policy](/fair-use/). Use focused queries for releases, devices, and incidents. Unbounded log streaming, repeated bulk extraction, and excessive automated polling are outside fair use. Capgo will contact you to review excessive usage and agree on changes or a suitable arrangement.
 
 ## Keep going from How your usage is counted in Capgo
 

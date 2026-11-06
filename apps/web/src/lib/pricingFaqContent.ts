@@ -46,7 +46,7 @@ export type PricingFaqSection = {
 }
 
 const ALL_PLANS_FEATURES_ANSWER =
-  'Yes for core products. Every plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. We do not charge per seat or lock those products behind higher tiers. Plans differ by usage limits (MAU, bandwidth, storage, build time) and support level. Enterprise adds extras that take more of our time, such as SSO, custom domains, compliance paperwork, and a dedicated channel.'
+  'Yes for core products. Every plan includes Live Updates, Native Builds, Notifications, Observe, Capgo plugins, and Automations. We do not charge per seat or lock those products behind higher tiers. Plans differ by MAU, build time, and support level. Storage, bandwidth, and Observe are included subject to fair use. Enterprise adds extras that take more of our time, such as SSO, custom domains, compliance paperwork, and a dedicated channel.'
 
 export function pricingFaqItemToPlainAnswer(item: PricingFaqItem): string {
   const parts: string[] = []
@@ -126,6 +126,14 @@ export function buildPricingFaqSections(locale: Locales, urls: PricingFaqUrls): 
           id: 'faq-bandwidth',
           question: m.how_is_bandwidth_counted({}, { locale }),
           answer: m.bandwidth_explanation({}, { locale }),
+        },
+        {
+          id: 'faq-observe-fair-use',
+          question: 'Is Observe subject to fair use?',
+          answer:
+            'Yes. Observe is included for normal production monitoring and troubleshooting. Excessive event volume, continuous debug logging, repeated bulk exports, or high-frequency automated queries may require changes to collection or query patterns. We contact you to agree a solution and may limit abusive usage to protect the service. MAU and build time remain metered separately.',
+          href: '/fair-use/',
+          linkLabel: 'Read the fair-use policy',
         },
         {
           id: 'faq-build-time',
