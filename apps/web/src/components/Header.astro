@@ -132,6 +132,11 @@ const mobileSolutions = [
         name: m.solutions_direct_updates({}, { locale: Astro.locals.locale }),
         tagline: m.solnav_direct_updates({}, { locale: Astro.locals.locale }),
       },
+      {
+        href: 'solutions/security-fixes',
+        name: m.solutions_security_fixes_short({}, { locale: Astro.locals.locale }),
+        tagline: m.solnav_security_fixes({}, { locale: Astro.locals.locale }),
+      },
       { href: 'solutions/pr-preview', name: m.solutions_pr_preview({}, { locale: Astro.locals.locale }), tagline: m.solnav_pr_preview({}, { locale: Astro.locals.locale }) },
       { href: 'solutions/beta-testing', name: m.solutions_beta_testing({}, { locale: Astro.locals.locale }), tagline: m.solnav_beta_testing({}, { locale: Astro.locals.locale }) },
       {
