@@ -333,7 +333,7 @@ Yarn does not ship a `yarn clear cache` subcommand. The documented command is **
 <a id="how-do-i-run-yarn-cache-clean-on-yarn-classic-vs-yarn-berry"></a>
 ### How do I run yarn cache clean on Yarn Classic vs Yarn Berry?
 
-On **Classic v1**, run `yarn cache clean`, then `yarn install`. Inspect the path with `yarn cache dir`. On **Berry**, read `enableGlobalCache` in `.yarnrc.yml` (Yarn 4+ defaults to true; Yarn 2 and 3 default to false). `yarn cache clean` clears whichever cache scope is active. Use `yarn cache clean --all` for the active scope plus a mirror when enabled. Use `--mirror` only when a separate mirror exists.
+On **Classic v1**, run `yarn cache clean`, then `yarn install`. Inspect the path with `yarn cache dir`. On **Berry**, read `enableGlobalCache` in `.yarnrc.yml` (Yarn 4+ defaults to true; Yarn 2 and 3 default to false). `yarn cache clean` clears whichever cache scope is active. Use `yarn cache clean --all` for the active scope plus a mirror when enabled; it may still leave other global or project caches on disk. Use `--mirror` only when a separate mirror exists.
 
 <a id="is-it-safe-to-clear-the-yarn-cache"></a>
 ### Is it safe to clear the Yarn cache?
