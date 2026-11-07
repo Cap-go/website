@@ -1,0 +1,33 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FeaturedDirectoryBadge from '@/components/featured/FeaturedDirectoryBadge.astro'
+import { featuredDirectoryEntries } from '@/config/featuredDirectories'
+
+const brand = Astro.locals.runtimeConfig.public.brand
+const title = `${brand} | Featured on`
+const description = 'Partner directory badges and followed backlinks used for listing verification on Capgo.'
+
+const content = {
+  title,
+  description,
+  robots: 'noindex, follow',
+  alternateVersions: [],
+}
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden px-6 py-20 sm:py-24">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.14),_transparent_55%)]" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl">
+      <header class="mx-auto max-w-2xl text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">Featured on</h1>
+        <p class="mt-4 text-lg text-slate-300">Partner directory badges and backlinks for automated listing checks. This page is not linked from the public site.</p>
+      </header>
+      <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredDirectoryEntries.map((entry) => (
+          <FeaturedDirectoryBadge entry={entry} />
+        ))}
+      </ul>
+    </div>
+  </section>
+</Layout>

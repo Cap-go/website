@@ -116,6 +116,9 @@
 /pricing/
   Link: </pricing.md>; rel="alternate"; type="text/markdown"
 
+/featured/
+  X-Robots-Tag: noindex, follow
+
 /plugins/
   Link: </plugins.md>; rel="alternate"; type="text/markdown"
 
