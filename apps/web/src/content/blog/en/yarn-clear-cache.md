@@ -31,11 +31,11 @@ faq:
     answer: >-
       On Classic v1, run yarn cache clean to wipe the shared global cache, then yarn
       install to repopulate. Inspect the path with yarn cache dir. On Berry, check
-      enableGlobalCache in .yarnrc.yml. With the default true, yarn cache clean clears
-      the global shared cache. With false, yarn cache clean clears the project-local
-      cache, including checked-in zero-install archives. Use yarn cache clean --all for
-      both scopes. Use --mirror only when a separate mirror exists, not when Yarn uses
-      the global cache directly.
+      enableGlobalCache in .yarnrc.yml (Yarn 4+ defaults to true; Yarn 2 and 3 default
+      to false). yarn cache clean clears the active cache for that setting. Use yarn
+      cache clean --all for the active scope plus a mirror when enabled; it may still
+      leave other global or project caches on disk. Use --mirror only when a separate
+      mirror exists.
   - question: Is it safe to clear the Yarn cache?
     answer: >-
       Yes for normal development. Clearing removes downloaded package archives, not
@@ -50,9 +50,9 @@ faq:
   - question: How do I verify where Yarn stores the cache?
     answer: >-
       On Yarn Classic v1, run yarn cache dir to print the global cache path. On
-      Berry, check .yarnrc.yml cache settings and whether the project uses a local
-      .yarn/cache folder. Confirm the user running Yarn owns those directories in
-      CI and containers.
+      Berry, run yarn config get cacheFolder for the effective path and read
+      enableGlobalCache in .yarnrc.yml. Confirm the user running Yarn owns those
+      directories in CI and containers.
   - question: Why do stale packages remain after yarn cache clean?
     answer: >-
       Targeted cleans can leave files under temporary cache folders such as
@@ -69,10 +69,10 @@ yarn --version
 | Yarn | Cache clean command |
 |---|---|
 | **Classic v1** | `yarn cache clean` (global shared cache) |
-| **Berry v2+ (`enableGlobalCache: true`, default)** | `yarn cache clean` (global shared cache) |
-| **Berry v2+ (`enableGlobalCache: false`)** | `yarn cache clean` (project `.yarn/cache`; mind zero-install) |
+| **Berry v2+ (project cache, Yarn 2/3 default)** | `yarn cache clean` (project `.yarn/cache`; mind zero-install) |
+| **Berry v4+ (global cache, default)** | `yarn cache clean` (global shared cache when `enableGlobalCache: true`) |
 
-**Berry flags:** `yarn cache clean --all` clears global and project-local cache files. `yarn cache clean --mirror` removes a separate mirror only when one exists. With default `enableGlobalCache: true`, there is often no mirror, so `--mirror` may remove nothing and plain `yarn cache clean` is the right global reset. **Classic path check:** `yarn cache dir`.
+Check `enableGlobalCache` in `.yarnrc.yml` if you are unsure. **Berry flags:** `yarn cache clean --all` clears the active cache scope plus a mirror when enabled; it does not always wipe every global and project cache on the machine. `yarn cache clean --mirror` removes a separate mirror only when one exists and may be a no-op otherwise. **Path checks:** Classic `yarn cache dir`, Berry `yarn config get cacheFolder`.
 
 You run `yarn install`, and the dependency you just updated still resolves to the old build. Or your laptop installs fine while CI suddenly fails after a harmless lockfile change. Cache behavior depends on **Yarn Classic** versus **Yarn Berry**, cache scope, and whether the real issue is lockfiles or pipeline cache design, not just stored tarballs. For broader CI dependency hygiene, see [Capacitor OTA updates CI/CD integration](https://capgo.app/blog/capacitor-ota-updates-cicd-integration-guide/).
 
@@ -219,19 +219,19 @@ Here's a quick visual explainer before the command details:
 
 Modern Yarn documents `yarn cache clean` in [the current Yarn cache clean command reference](https://yarnpkg.com/cli/cache/clean). Scope depends on `enableGlobalCache` in `.yarnrc.yml`:
 
-- With **`enableGlobalCache: true`** (default), **`yarn cache clean`** clears the global shared cache Yarn uses directly.
-- With **`enableGlobalCache: false`**, **`yarn cache clean`** clears the project-local cache (including checked-in zero-install archives under `.yarn/cache` when you use that workflow).
-- **`yarn cache clean --all`** removes both global and project-local cache files.
-- **`yarn cache clean --mirror`** clears a separate mirror cache only when one exists. When Yarn already uses the global cache directly (default config), `--mirror` may remove nothing; use plain `yarn cache clean` for the active global cache.
+- With **`enableGlobalCache: true`** (Yarn 4+ default), **`yarn cache clean`** clears the global shared cache Yarn uses directly.
+- With **`enableGlobalCache: false`** (Yarn 2 and 3 default), **`yarn cache clean`** clears the project-local cache (including checked-in zero-install archives under `.yarn/cache` when you use that workflow).
+- **`yarn cache clean --all`** clears the active cache scope and a separate mirror when enabled. With `enableMirror: false`, another project's global cache can remain. With `enableGlobalCache: true`, an old project-local `.yarn/cache` can remain.
+- **`yarn cache clean --mirror`** clears a separate mirror cache only when one exists. When Yarn already uses the global cache directly, `--mirror` may remove nothing.
 
 | Goal | Command |
 |---|---|
-| Default global cache (`enableGlobalCache: true`) | `yarn cache clean` |
-| Project-local cache only (`enableGlobalCache: false`) | `yarn cache clean` |
-| Full reset (global + project-local) | `yarn cache clean --all` |
-| Separate mirror when configured | `yarn cache clean --mirror` (not a no-op only when a mirror exists) |
+| Active global cache (`enableGlobalCache: true`) | `yarn cache clean` |
+| Active project cache (`enableGlobalCache: false`) | `yarn cache clean` |
+| Active scope plus mirror when configured | `yarn cache clean --all` |
+| Separate mirror only | `yarn cache clean --mirror` (only when a mirror exists) |
 
-Use `--all` when you want the closest equivalent to “start over completely.” Use `--mirror` only after you confirm the project uses a mirror rather than the default global cache path.
+Use `--all` for the widest clean Berry offers for the current config, then verify with `yarn config get cacheFolder`. Use `--mirror` only after you confirm the project uses a mirror.
 
 > **Decision point:** In Berry, choosing the wrong scope is one of the main reasons a cache clean appears to “do nothing.”
 
@@ -333,7 +333,7 @@ Yarn does not ship a `yarn clear cache` subcommand. The documented command is **
 <a id="how-do-i-run-yarn-cache-clean-on-yarn-classic-vs-yarn-berry"></a>
 ### How do I run yarn cache clean on Yarn Classic vs Yarn Berry?
 
-On **Classic v1**, run `yarn cache clean`, then `yarn install`. Inspect the path with `yarn cache dir`. On **Berry**, with default `enableGlobalCache: true`, `yarn cache clean` clears the global shared cache. With `enableGlobalCache: false`, it clears the project-local cache (watch zero-install check-ins). Use `yarn cache clean --all` for both scopes. Use `--mirror` only when a separate mirror exists.
+On **Classic v1**, run `yarn cache clean`, then `yarn install`. Inspect the path with `yarn cache dir`. On **Berry**, read `enableGlobalCache` in `.yarnrc.yml` (Yarn 4+ defaults to true; Yarn 2 and 3 default to false). `yarn cache clean` clears whichever cache scope is active. Use `yarn cache clean --all` for the active scope plus a mirror when enabled. Use `--mirror` only when a separate mirror exists.
 
 <a id="is-it-safe-to-clear-the-yarn-cache"></a>
 ### Is it safe to clear the Yarn cache?
@@ -348,7 +348,7 @@ Skip routine cache wipes when installs are slow but lockfiles are correct. Fix c
 <a id="how-do-i-verify-where-yarn-stores-the-cache"></a>
 ### How do I verify where Yarn stores the cache?
 
-On **Classic v1**, run `yarn cache dir`. On **Berry**, read `.yarnrc.yml` for `enableGlobalCache` and check whether the project uses a local `.yarn/cache` folder. Confirm the user running Yarn owns those directories in CI and containers.
+On **Classic v1**, run `yarn cache dir`. On **Berry**, run `yarn config get cacheFolder` for the effective path and read `enableGlobalCache` in `.yarnrc.yml`. Confirm the user running Yarn owns those directories in CI and containers.
 
 <a id="why-do-stale-packages-remain-after-yarn-cache-clean"></a>
 ### Why do stale packages remain after yarn cache clean?
