@@ -1,11 +1,11 @@
 ---
-title: "Debugging"
-description: "How to debug your updates of Capgo and understand the issue you can have with your configuration"
+title: 'Debugging'
+description: 'How to debug your updates of Capgo and understand the issue you can have with your configuration'
 sidebar:
   order: 6
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components'
 
 ## Understanding cloud logs
 
@@ -64,6 +64,7 @@ The device sent too many update or channel requests in a short window.
 **What to do**
 
 Stop calling update APIs inside render loops. Call `setChannel` / `getChannel` only from user actions, and set `defaultChannel` in `capacitor.config`.
+
 ## Version format
 
 Backend refusals caused by invalid native version metadata.
@@ -77,6 +78,7 @@ The native app version in config is missing or not valid semver (`x.y.z`).
 **What to do**
 
 Set `plugins.CapacitorUpdater.version` to valid semver, verify it in the [SemVer tester](https://capgo.app/semver_tester/), then rebuild and reinstall the native app.
+
 ## Platform and build targeting
 
 Backend refusals when channel policy blocks a platform, build type, or device class.
@@ -150,6 +152,7 @@ The device is an emulator, but emulator updates are disabled for this channel.
 **What to do**
 
 Enable emulator updates in a test channel, or keep this channel emulator-blocked and use another channel for emulator validation.
+
 ## Auto-update compatibility rules
 
 Backend refusals when semver or metadata rules block the target bundle.
@@ -213,6 +216,7 @@ The channel blocks patch-level changes while keeping the same `MAJOR.MINOR.PATCH
 **What to do**
 
 Align release cadence with channel policy, or allow patch jumps for this track.
+
 ## Channel setup
 
 Backend refusals caused by missing or incompatible channel configuration.
@@ -246,6 +250,7 @@ No default channel is configured and the device has no channel override.
 **What to do**
 
 Set a default channel in the dashboard or configure `defaultChannel` in the build.
+
 ## Bundle delivery and encryption
 
 Backend refusals when Capgo cannot serve or decrypt the bundle.
@@ -279,6 +284,7 @@ The device encryption public key does not match the key used to encrypt the bund
 **What to do**
 
 Compare device and bundle key IDs in the console. Publish with the same key and matching CLI/plugin versions.
+
 ## App configuration and legacy clients
 
 Backend refusals caused by app configuration or unsupported updater versions.
@@ -312,6 +318,7 @@ The updater plugin is v4, which the backend no longer accepts.
 **What to do**
 
 Upgrade plugin and CLI to v5+ (prefer v8) with Capacitor v5+, rebuild, and republish bundle metadata.
+
 ## Update lifecycle
 
 Device-side events for normal update flow, activation, and rollback.
@@ -355,6 +362,7 @@ The device reset to the built-in bundle.
 **What it means**
 
 One bundle was deleted on the device.
+
 ## Download and install failures
 
 Device-side events for download progress, archive validation, and install errors.
@@ -568,6 +576,7 @@ Download failed because the device ran out of memory.
 **What to do**
 
 Reduce bundle size or retry on a device with more free memory.
+
 ## App health and WebView events
 
 Device-side crash, memory, and WebView diagnostics. Always inspect metadata JSON in the dashboard.
@@ -723,6 +732,119 @@ iOS WebView content process terminated.
 **What to do**
 
 Inspect active bundle and page URL from metadata.
+
+## Launch and navigation telemetry
+
+These timing events describe the app lifecycle. They do not establish that every feature works.
+
+### `app_launch_start`
+
+**What it means**
+
+The app started a launch measurement. This is a normal lifecycle event.
+
+### `app_launch_ready`
+
+**What it means**
+
+The app reported it was ready. Timing metadata can help compare startup across versions. This is a normal lifecycle event.
+
+### `app_launch_timeout`
+
+**What it means**
+
+The app did not report ready within its launch measurement window.
+
+**What to do**
+
+Inspect startup errors and the device timeline. Check that startup reaches the readiness call, and call notifyAppReady after bootstrapping succeeds. Compare timing and failures with the previous bundle before changing timeout settings.
+
+### `webview_dom_content_loaded`
+
+**What it means**
+
+The WebView reported DOM content loaded. This is a normal timing event, not proof that all resources or application features are ready.
+
+### `webview_page_loaded`
+
+**What it means**
+
+The WebView reported a page load. This is a normal timing event. Compare duration metadata between versions when investigating slow loads.
+
+### `app_nav`
+
+**What it means**
+
+The app reported a navigation event. This is normal telemetry. Route and duration metadata allow per-screen comparisons when the app supplies them.
+
+## Additional updater outcomes
+
+### `set_next`
+
+**What it means**
+
+A bundle was scheduled for activation on a later app launch. Scheduling is normal and does not mean the bundle has already been activated.
+
+### `channelPaused`
+
+**What it means**
+
+The selected channel is paused. The server sends no update and the device keeps its current bundle. This can be an intentional release policy.
+
+**What to do**
+
+Check why the channel was paused and whether it is safe to resume. Do not resume a rollout automatically to silence this event.
+
+### `finish_download_fail`
+
+**What it means**
+
+The device could not finalize a downloaded bundle.
+
+**What to do**
+
+Inspect metadata and native logs for the underlying filesystem or validation error. Verify available storage and the uploaded archive before retrying.
+
+### `manifest_path_fail`
+
+**What it means**
+
+A manifest file path failed validation or could not be used during the update.
+
+**What to do**
+
+Inspect the failing path in native logs, correct the bundle's file layout and re-upload it. Do not bypass path validation.
+
+### `checksum_required`
+
+**What it means**
+
+The updater requires checksum metadata that is missing for this download.
+
+**What to do**
+
+Upload the bundle again with the current CLI and verify that checksum metadata is present. Do not disable integrity checks to work around the error.
+
+### `insufficient_disk_space`
+
+**What it means**
+
+The device does not have enough storage for the update.
+
+**What to do**
+
+Free device storage, reduce the bundle size where practical, and retry on an affected test device. This is not resolved by changing a channel's version policy.
+
+### `update_check_error`
+
+**What it means**
+
+An update check failed. This event alone does not identify whether the cause is connectivity, server availability, or a specific response refusal.
+
+**What to do**
+
+Inspect response metadata and surrounding native logs. Check connectivity and the configured update URL, then look up any specific backend error in Common Update Problems before changing settings.
+
 ## Environment and channel context
 
 Device-side context events that help correlate update behavior with OS, native version, or channel changes.
@@ -756,13 +878,14 @@ A channel was set successfully for the device.
 **What it means**
 
 The app was uninstalled or Capgo data was cleared.
+
 ## Bundle status
 
-* `SUCCESS`: install bundle done
-* `ERROR`: install or download failed
-* `PENDING`: Download done, pending release
-* `DELETED`: Bundle deleted, still presented for stats
-* `DOWNLOADING`: Currently downloading a bundle
+- `SUCCESS`: install bundle done
+- `ERROR`: install or download failed
+- `PENDING`: Download done, pending release
+- `DELETED`: Bundle deleted, still presented for stats
+- `DOWNLOADING`: Currently downloading a bundle
 
 ## Understanding device logs
 
@@ -780,24 +903,18 @@ This will allow you to check all events happening in the app and find a solution
 
 to find your logs on Xcode
 
-<LinkCard
-    title="Getting the Device Log in Xcode"
-    href="https://intercom.help/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
-/>
+<LinkCard title="Getting the Device Log in Xcode" href="https://intercom.help/deploygate/en/articles/4682692-getting-the-device-log-in-xcode" />
 
 ### Android native logs
 
 to find your logs on Android studio
 
-<LinkCard
-    title="View logs with Logcat"
-    href="https://developer.android.com/studio/debug/am-logcat"
-/>
+<LinkCard title="View logs with Logcat" href="https://developer.android.com/studio/debug/am-logcat" />
 
 ### Native log phrase mapping
 
-* `Failed to download from` maps to **`download_fail`**
-* `notifyAppReady was not called, roll back current bundle` maps to **`update_fail`**
+- `Failed to download from` maps to **`download_fail`**
+- `notifyAppReady was not called, roll back current bundle` maps to **`update_fail`**
 
 ## Finding the downloaded bundle on a device
 
@@ -810,11 +927,11 @@ Xcode has a built-in feature for inspecting the file system of developer-install
 
 To achieve this:
 
-* Connect your device to your Mac and select Window > Devices in the Xcode menubar.
-* Select your device in the left pane under the Devices section.
-* This will show a list of developer-installed apps for that device.
-* Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
-* Here you can view the current file system by selecting download a snapshot of it.
+- Connect your device to your Mac and select Window > Devices in the Xcode menubar.
+- Select your device in the left pane under the Devices section.
+- This will show a list of developer-installed apps for that device.
+- Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
+- Here you can view the current file system by selecting download a snapshot of it.
 
 ![Xcode Devices panel showing app container download option](/ios_debug_update_2.webp)
 
@@ -838,9 +955,9 @@ and `documents/versions` for hot reload
 
 To debug on Android, you need to access the device from Android Studio:
 
-* Click View > Tool Windows > Device File Explorer or click the Device File Explorer button in the tool window bar to open the Device File Explorer.
-* Select a device from the dropdown list.
-* Open the path **data/data/APP\_NAME/** where **APP\_NAME is your app ID.**
+- Click View > Tool Windows > Device File Explorer or click the Device File Explorer button in the tool window bar to open the Device File Explorer.
+- Select a device from the dropdown list.
+- Open the path **data/data/APP_NAME/** where **APP_NAME is your app ID.**
 
 ![Android Studio Device File Explorer showing app data directory](/android_debug_update.webp)
 
@@ -852,12 +969,8 @@ On Android, all versions are stored in one folder, unlike IOS where it has to be
 
 ## Understanding ios production crash logs
 
-<LinkCard
-    title="How to review your app's crash logs"
-    href="https://developer.apple.com/news/?id=nra79npr"
-/>
+<LinkCard title="How to review your app's crash logs" href="https://developer.apple.com/news/?id=nra79npr" />
 
 ## Keep going from Debugging
 
 If you are using **Debugging** to plan native plugin work, connect it with [Using @capgo/capacitor-updater](/plugins/capacitor-updater/) for the native capability in Using @capgo/capacitor-updater, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.
-

@@ -24,9 +24,7 @@
       "CapgoBearerAuth": []
     },
     {
-      "CapgoOAuth": [
-        "capgo"
-      ]
+      "CapgoOAuth": ["capgo"]
     },
     {
       "CapgoLegacyAuthorization": []
@@ -64,14 +62,16 @@
     {
       "name": "statistics",
       "description": "App, organization, user, and bundle usage analytics."
+    },
+    {
+      "name": "monitoring",
+      "description": "Release health, documented diagnostics and native build monitoring."
     }
   ],
   "paths": {
     "/organization/": {
       "get": {
-        "tags": [
-          "organizations"
-        ],
+        "tags": ["organizations"],
         "operationId": "getOrganizations",
         "summary": "List accessible organizations or fetch one organization by `orgId`.",
         "parameters": [
@@ -202,9 +202,7 @@
         "description": "List organizations the API key can access, or fetch one organization when `orgId` is provided. Use this to resolve the org scope before creating apps or inviting members."
       },
       "post": {
-        "tags": [
-          "organizations"
-        ],
+        "tags": ["organizations"],
         "operationId": "createOrganization",
         "summary": "Create a new organization.",
         "requestBody": {
@@ -348,9 +346,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "organizations"
-        ],
+        "tags": ["organizations"],
         "operationId": "updateOrganization",
         "summary": "Update an organization. Admin access is required.",
         "requestBody": {
@@ -494,9 +490,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "organizations"
-        ],
+        "tags": ["organizations"],
         "operationId": "deleteOrganization",
         "summary": "Delete an organization by query parameter.",
         "parameters": [
@@ -622,9 +616,7 @@
     },
     "/organization/members/": {
       "get": {
-        "tags": [
-          "members"
-        ],
+        "tags": ["members"],
         "operationId": "listOrganizationMembers",
         "summary": "List members for one organization.",
         "parameters": [
@@ -748,9 +740,7 @@
         "description": "List members, roles, and invitations for one organization. Pass the organization identifier expected by the members resource."
       },
       "post": {
-        "tags": [
-          "members"
-        ],
+        "tags": ["members"],
         "operationId": "upsertOrganizationMember",
         "summary": "Invite a member or update an existing member role.",
         "requestBody": {
@@ -894,9 +884,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "members"
-        ],
+        "tags": ["members"],
         "operationId": "deleteOrganizationMember",
         "summary": "Remove a member from an organization.",
         "requestBody": {
@@ -1042,9 +1030,7 @@
     },
     "/app/": {
       "get": {
-        "tags": [
-          "apps"
-        ],
+        "tags": ["apps"],
         "operationId": "listApps",
         "summary": "List apps visible to the API key.",
         "parameters": [
@@ -1174,9 +1160,7 @@
         "description": "List Capacitor apps visible to the API key, optionally filtered by organization. Use this to discover `app_id` values for later channel, bundle, and device calls."
       },
       "post": {
-        "tags": [
-          "apps"
-        ],
+        "tags": ["apps"],
         "operationId": "createApp",
         "summary": "Create a new Capgo app.",
         "requestBody": {
@@ -1322,9 +1306,7 @@
     },
     "/app/{appId}": {
       "get": {
-        "tags": [
-          "apps"
-        ],
+        "tags": ["apps"],
         "operationId": "getApp",
         "summary": "Fetch one app by app identifier.",
         "parameters": [
@@ -1443,9 +1425,7 @@
         "description": "Fetch one app by `appId`, including settings needed to confirm the app exists before uploading bundles or changing channels."
       },
       "put": {
-        "tags": [
-          "apps"
-        ],
+        "tags": ["apps"],
         "operationId": "updateApp",
         "summary": "Update one app by app identifier.",
         "parameters": [
@@ -1592,9 +1572,7 @@
         "description": "Update app settings such as name or configuration for a single `appId`. Does not upload a new live-update bundle."
       },
       "delete": {
-        "tags": [
-          "apps"
-        ],
+        "tags": ["apps"],
         "operationId": "deleteApp",
         "summary": "Delete one app by app identifier.",
         "parameters": [
@@ -1715,9 +1693,7 @@
     },
     "/apikey/": {
       "get": {
-        "tags": [
-          "api-keys"
-        ],
+        "tags": ["api-keys"],
         "operationId": "listApiKeys",
         "summary": "List API keys available to the authenticated account.",
         "responses": {
@@ -1833,9 +1809,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "api-keys"
-        ],
+        "tags": ["api-keys"],
         "operationId": "createApiKey",
         "summary": "Create a new API key.",
         "requestBody": {
@@ -1981,9 +1955,7 @@
     },
     "/apikey/{id}/": {
       "delete": {
-        "tags": [
-          "api-keys"
-        ],
+        "tags": ["api-keys"],
         "operationId": "deleteApiKey",
         "summary": "Delete an API key by numeric identifier.",
         "parameters": [
@@ -2109,9 +2081,7 @@
     },
     "/channel/": {
       "get": {
-        "tags": [
-          "channels"
-        ],
+        "tags": ["channels"],
         "operationId": "listChannels",
         "summary": "List channels for one app.",
         "parameters": [
@@ -2246,9 +2216,7 @@
         "description": "List live-update channels for one app, including the current bundle assignment and rollout flags."
       },
       "post": {
-        "tags": [
-          "channels"
-        ],
+        "tags": ["channels"],
         "operationId": "upsertChannel",
         "summary": "Create or update a channel configuration.",
         "requestBody": {
@@ -2392,9 +2360,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "channels"
-        ],
+        "tags": ["channels"],
         "operationId": "deleteChannel",
         "summary": "Delete one channel.",
         "requestBody": {
@@ -2540,9 +2506,7 @@
     },
     "/device/": {
       "get": {
-        "tags": [
-          "devices"
-        ],
+        "tags": ["devices"],
         "operationId": "getDevices",
         "summary": "List devices for one app or fetch one device by `device_id`.",
         "parameters": [
@@ -2692,9 +2656,7 @@
         "description": "List devices for one app or fetch a single device by `device_id`, including the current bundle and channel override."
       },
       "post": {
-        "tags": [
-          "devices"
-        ],
+        "tags": ["devices"],
         "operationId": "linkDevice",
         "summary": "Link a device to a channel or bundle override.",
         "requestBody": {
@@ -2838,9 +2800,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "devices"
-        ],
+        "tags": ["devices"],
         "operationId": "deleteDeviceOverride",
         "summary": "Remove a device-specific override so the device falls back to channel defaults.",
         "requestBody": {
@@ -2986,9 +2946,7 @@
     },
     "/bundle/": {
       "get": {
-        "tags": [
-          "bundles"
-        ],
+        "tags": ["bundles"],
         "operationId": "listBundles",
         "summary": "List or look up bundles for one app.",
         "parameters": [
@@ -3156,9 +3114,7 @@
         "description": "List uploaded live-update bundles for one app, including versions, checksums, and metadata. Optional version or id query parameters return at most one matching bundle for that app. Values rejected by query-schema validation return invalid_query."
       },
       "post": {
-        "tags": [
-          "bundles"
-        ],
+        "tags": ["bundles"],
         "operationId": "createBundle",
         "summary": "Register a new bundle using an externally hosted zip URL and checksum.",
         "requestBody": {
@@ -3302,9 +3258,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "bundles"
-        ],
+        "tags": ["bundles"],
         "operationId": "setBundleChannel",
         "summary": "Attach a bundle to a channel.",
         "requestBody": {
@@ -3448,9 +3402,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "bundles"
-        ],
+        "tags": ["bundles"],
         "operationId": "deleteBundle",
         "summary": "Delete one bundle or all bundles for an app.",
         "requestBody": {
@@ -3596,9 +3548,7 @@
     },
     "/bundle/metadata": {
       "post": {
-        "tags": [
-          "bundles"
-        ],
+        "tags": ["bundles"],
         "operationId": "updateBundleMetadata",
         "summary": "Update bundle metadata such as release link or comment.",
         "requestBody": {
@@ -3744,9 +3694,7 @@
     },
     "/statistics/app/{appId}/": {
       "get": {
-        "tags": [
-          "statistics"
-        ],
+        "tags": ["statistics"],
         "operationId": "getAppStatistics",
         "summary": "Get time-series statistics for one app.",
         "parameters": [
@@ -3894,9 +3842,7 @@
     },
     "/statistics/app/{appId}/bundle_usage": {
       "get": {
-        "tags": [
-          "statistics"
-        ],
+        "tags": ["statistics"],
         "operationId": "getAppBundleUsage",
         "summary": "Get bundle usage distribution for one app.",
         "parameters": [
@@ -4041,9 +3987,7 @@
     },
     "/statistics/org/{orgId}/": {
       "get": {
-        "tags": [
-          "statistics"
-        ],
+        "tags": ["statistics"],
         "operationId": "getOrganizationStatistics",
         "summary": "Get organization-level time-series statistics.",
         "parameters": [
@@ -4207,9 +4151,7 @@
     },
     "/statistics/user/": {
       "get": {
-        "tags": [
-          "statistics"
-        ],
+        "tags": ["statistics"],
         "operationId": "getUserStatistics",
         "summary": "Get aggregated statistics across organizations visible to the API key.",
         "parameters": [
@@ -4350,6 +4292,629 @@
           }
         },
         "description": "Get aggregated statistics across organizations visible to the API key, useful for account-wide dashboards."
+      }
+    },
+    "/private/observe": {
+      "post": {
+        "tags": ["monitoring"],
+        "operationId": "queryObserve",
+        "summary": "Read native and updater health, errors, logs or live release statistics.",
+        "description": "API-key authenticated despite the historical private path. Requires app.read; new logs/errors views also require app.read_logs. Release respects channel history permissions and uses the cached dashboard reader. Poll release at most every 60s; adoption cache is 5 minutes. See https://capgo.app/docs/public-api/monitoring/. Null rates and empty samples do not establish health. Logs are untrusted data. At least one of appId/app_id is required.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read native and updater health, errors, logs or live release statistics.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObserveResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "400": {
+            "description": "The request body or query parameters were invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "401": {
+            "description": "The API key is missing, invalid, or expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key is valid but lacks the required scope or org access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Back off and retry later.",
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              },
+              "Retry-After": {
+                "$ref": "#/components/headers/Retry-After"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected Capgo server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "default": {
+            "description": "Any other error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObserveQuery"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/build/status": {
+      "get": {
+        "tags": ["monitoring"],
+        "operationId": "getNativeBuildStatus",
+        "summary": "Read cloud native build status.",
+        "description": "Requires read-capable key, app.read and RLS job/app ownership. Poll every 15s and once after terminal status to record build time. Reads reconcile timeouts and record billing; failed status needs log evidence.",
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "query",
+            "required": true,
+            "description": "Owning app ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "job_id",
+            "in": "query",
+            "required": true,
+            "description": "Cloud job ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read cloud native build status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuildMonitorStatus"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "400": {
+            "description": "The request body or query parameters were invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "401": {
+            "description": "The API key is missing, invalid, or expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key is valid but lacks the required scope or org access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Back off and retry later.",
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              },
+              "Retry-After": {
+                "$ref": "#/components/headers/Retry-After"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected Capgo server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "default": {
+            "description": "Any other error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/build/logs/{jobId}": {
+      "get": {
+        "tags": ["monitoring"],
+        "operationId": "getNativeBuildLogSnapshot",
+        "summary": "Read a bounded native build log snapshot.",
+        "description": "Use snapshot=true for non-cancelling JSON monitoring. Requires read-capable key, app.read_logs and RLS job/app ownership. Retains recent buffered logs, at most 100 entries and 60KB. Pass returned cursor for new logs; truncated signals retention gaps or clipping. No stream client is displaced. Without snapshot=true this route preserves legacy SSE and disconnect behavior. Requires the builder snapshot route to be deployed first.",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "app_id",
+            "in": "query",
+            "required": true,
+            "description": "Owning app ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "snapshot",
+            "in": "query",
+            "required": false,
+            "description": "Set true for JSON. Omit for legacy SSE.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Previous snapshot cursor; omit for recent tail.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read a bounded native build log snapshot.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuildLogSnapshot"
+                }
+              },
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Legacy stream when snapshot=true is absent."
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "400": {
+            "description": "The request body or query parameters were invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "401": {
+            "description": "The API key is missing, invalid, or expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key is valid but lacks the required scope or org access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Back off and retry later.",
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              },
+              "Retry-After": {
+                "$ref": "#/components/headers/Retry-After"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected Capgo server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "default": {
+            "description": "Any other error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statistics/app/{appId}/native_usage": {
+      "get": {
+        "tags": ["statistics"],
+        "operationId": "getNativeVersionUsage",
+        "summary": "Read native app version usage.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/FromDateParam"
+          },
+          {
+            "$ref": "#/components/parameters/ToDateParam"
+          },
+          {
+            "$ref": "#/components/parameters/CapgoApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bundle usage chart data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NativeUsage"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "400": {
+            "description": "The request body or query parameters were invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "401": {
+            "description": "The API key is missing, invalid, or expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "403": {
+            "description": "The API key is valid but lacks the required scope or org access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Back off and retry later.",
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              },
+              "Retry-After": {
+                "$ref": "#/components/headers/Retry-After"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected Capgo server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {
+              "RateLimit": {
+                "$ref": "#/components/headers/RateLimit"
+              },
+              "RateLimit-Policy": {
+                "$ref": "#/components/headers/RateLimit-Policy"
+              }
+            }
+          },
+          "default": {
+            "description": "Any other error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "description": "Read native versions and platforms reported by devices over the requested date range. Requires access to this app."
       }
     }
   },
@@ -4556,9 +5121,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "status"
-        ],
+        "required": ["status"],
         "additionalProperties": true
       },
       "SuccessResponse": {
@@ -4568,9 +5131,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": true
       },
       "ErrorResponse": {
@@ -4591,10 +5152,7 @@
             "additionalProperties": true
           }
         },
-        "required": [
-          "error",
-          "message"
-        ],
+        "required": ["error", "message"],
         "additionalProperties": true
       },
       "Organization": {
@@ -4615,10 +5173,7 @@
             "format": "date-time"
           },
           "logo": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "uri"
           },
           "management_email": {
@@ -4626,16 +5181,10 @@
             "format": "email"
           },
           "customer_id": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           }
         },
-        "required": [
-          "id",
-          "name"
-        ]
+        "required": ["id", "name"]
       },
       "OrganizationEnvelope": {
         "type": "object",
@@ -4644,9 +5193,7 @@
             "$ref": "#/components/schemas/Organization"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "OrganizationListEnvelope": {
         "type": "object",
@@ -4658,9 +5205,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "OrganizationCreate": {
         "type": "object",
@@ -4670,9 +5215,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "OrganizationUpdate": {
         "type": "object",
@@ -4693,9 +5236,7 @@
             "format": "email"
           }
         },
-        "required": [
-          "orgId"
-        ]
+        "required": ["orgId"]
       },
       "Member": {
         "type": "object",
@@ -4708,21 +5249,14 @@
             "format": "email"
           },
           "image_url": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "uri"
           },
           "role": {
             "type": "string"
           }
         },
-        "required": [
-          "uid",
-          "email",
-          "role"
-        ]
+        "required": ["uid", "email", "role"]
       },
       "MemberListEnvelope": {
         "type": "object",
@@ -4734,9 +5268,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "MemberCreate": {
         "type": "object",
@@ -4751,20 +5283,10 @@
           },
           "role": {
             "type": "string",
-            "enum": [
-              "read",
-              "upload",
-              "write",
-              "admin",
-              "super_admin"
-            ]
+            "enum": ["read", "upload", "write", "admin", "super_admin"]
           }
         },
-        "required": [
-          "orgId",
-          "email",
-          "role"
-        ]
+        "required": ["orgId", "email", "role"]
       },
       "MemberDelete": {
         "type": "object",
@@ -4778,10 +5300,7 @@
             "format": "email"
           }
         },
-        "required": [
-          "orgId",
-          "email"
-        ]
+        "required": ["orgId", "email"]
       },
       "App": {
         "type": "object",
@@ -4790,10 +5309,7 @@
             "type": "string"
           },
           "name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "owner_org": {
             "type": "string"
@@ -4802,39 +5318,25 @@
             "type": "string"
           },
           "icon_url": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "uri"
           },
           "last_version": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "retention": {
             "type": "integer"
           },
           "created_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time"
           },
           "updated_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time"
           }
         },
-        "required": [
-          "app_id"
-        ]
+        "required": ["app_id"]
       },
       "AppEnvelope": {
         "type": "object",
@@ -4843,9 +5345,7 @@
             "$ref": "#/components/schemas/App"
           }
         },
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "additionalProperties": true
       },
       "AppListEnvelope": {
@@ -4858,9 +5358,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "AppCreate": {
         "type": "object",
@@ -4880,11 +5378,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "app_id",
-          "name",
-          "owner_org"
-        ]
+        "required": ["app_id", "name", "owner_org"]
       },
       "AppUpdate": {
         "type": "object",
@@ -4910,42 +5404,25 @@
             "type": "integer"
           },
           "key": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "read",
-              "write",
-              "upload",
-              "all"
-            ]
+            "enum": ["read", "write", "upload", "all"]
           },
           "name": {
             "type": "string"
           },
           "created_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time"
           },
           "updated_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time"
           },
           "expires_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time"
           },
           "limited_to_apps": {
@@ -4961,11 +5438,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "mode",
-          "name"
-        ]
+        "required": ["id", "mode", "name"]
       },
       "ApiKeyListEnvelope": {
         "type": "object",
@@ -4977,9 +5450,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "ApiKeyCreateEnvelope": {
         "type": "object",
@@ -4988,9 +5459,7 @@
             "$ref": "#/components/schemas/ApiKey"
           }
         },
-        "required": [
-          "apikey"
-        ]
+        "required": ["apikey"]
       },
       "ApiKeyCreate": {
         "type": "object",
@@ -5001,12 +5470,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "read",
-              "write",
-              "upload",
-              "all"
-            ]
+            "enum": ["read", "write", "upload", "all"]
           },
           "limited_to_apps": {
             "type": "array",
@@ -5028,10 +5492,7 @@
             "format": "date-time"
           }
         },
-        "required": [
-          "name",
-          "mode"
-        ]
+        "required": ["name", "mode"]
       },
       "ChannelVersion": {
         "type": "object",
@@ -5043,10 +5504,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "name"
-        ]
+        "required": ["id", "name"]
       },
       "Channel": {
         "type": "object",
@@ -5070,10 +5528,7 @@
             "type": "boolean"
           },
           "disableAutoUpdate": {
-            "type": [
-              "string",
-              "boolean"
-            ]
+            "type": ["string", "boolean"]
           },
           "allow_emulator": {
             "type": "boolean"
@@ -5090,11 +5545,7 @@
             "format": "date-time"
           }
         },
-        "required": [
-          "id",
-          "name",
-          "app_id"
-        ]
+        "required": ["id", "name", "app_id"]
       },
       "ChannelListEnvelope": {
         "type": "object",
@@ -5106,9 +5557,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "ChannelSet": {
         "type": "object",
@@ -5131,12 +5580,7 @@
           },
           "disableAutoUpdate": {
             "type": "string",
-            "enum": [
-              "major",
-              "minor",
-              "version_number",
-              "none"
-            ]
+            "enum": ["major", "minor", "version_number", "none"]
           },
           "ios": {
             "type": "boolean"
@@ -5157,10 +5601,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "app_id",
-          "channel"
-        ]
+        "required": ["app_id", "channel"]
       },
       "ChannelDelete": {
         "type": "object",
@@ -5173,10 +5614,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "app_id",
-          "channel"
-        ]
+        "required": ["app_id", "channel"]
       },
       "Device": {
         "type": "object",
@@ -5185,57 +5623,32 @@
             "type": "string"
           },
           "custom_id": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "version": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": ["integer", "null"]
           },
           "version_name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "channel": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "app_id": {
             "type": "string"
           },
           "platform": {
             "type": "string",
-            "enum": [
-              "ios",
-              "android",
-              "electron"
-            ]
+            "enum": ["ios", "android", "electron"]
           },
           "plugin_version": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "os_version": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "version_build": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "is_prod": {
             "type": "boolean"
@@ -5244,21 +5657,14 @@
             "type": "boolean"
           },
           "key_id": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "updated_at": {
             "type": "string",
             "format": "date-time"
           }
         },
-        "required": [
-          "device_id",
-          "app_id",
-          "platform"
-        ]
+        "required": ["device_id", "app_id", "platform"]
       },
       "DeviceEnvelope": {
         "$ref": "#/components/schemas/Device"
@@ -5279,9 +5685,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "DeviceLink": {
         "type": "object",
@@ -5300,10 +5704,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "app_id",
-          "device_id"
-        ]
+        "required": ["app_id", "device_id"]
       },
       "DeviceDelete": {
         "type": "object",
@@ -5316,10 +5717,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "app_id",
-          "device_id"
-        ]
+        "required": ["app_id", "device_id"]
       },
       "Bundle": {
         "type": "object",
@@ -5334,50 +5732,31 @@
             "type": "string"
           },
           "checksum": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "minUpdateVersion": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "storage_provider": {
             "type": "string"
           },
           "external_url": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "uri"
           },
           "deleted": {
             "type": "boolean"
           },
           "created_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time"
           },
           "updated_at": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time"
           }
         },
-        "required": [
-          "id",
-          "app_id",
-          "name"
-        ]
+        "required": ["id", "app_id", "name"]
       },
       "BundleCreate": {
         "type": "object",
@@ -5397,12 +5776,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "app_id",
-          "version",
-          "external_url",
-          "checksum"
-        ]
+        "required": ["app_id", "version", "external_url", "checksum"]
       },
       "BundleDelete": {
         "type": "object",
@@ -5415,9 +5789,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "app_id"
-        ]
+        "required": ["app_id"]
       },
       "BundleMetadataUpdate": {
         "type": "object",
@@ -5437,10 +5809,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "app_id",
-          "version_id"
-        ]
+        "required": ["app_id", "version_id"]
       },
       "BundleChannelSet": {
         "type": "object",
@@ -5456,11 +5825,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "app_id",
-          "version_id",
-          "channel_id"
-        ]
+        "required": ["app_id", "version_id", "channel_id"]
       },
       "StatisticsPoint": {
         "type": "object",
@@ -5479,12 +5844,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "date",
-          "mau",
-          "storage",
-          "bandwidth"
-        ]
+        "required": ["date", "mau", "storage", "bandwidth"]
       },
       "BundleUsageDataset": {
         "type": "object",
@@ -5499,10 +5859,7 @@
             }
           }
         },
-        "required": [
-          "label",
-          "data"
-        ]
+        "required": ["label", "data"]
       },
       "BundleUsage": {
         "type": "object",
@@ -5520,9 +5877,462 @@
             }
           }
         },
-        "required": [
-          "labels",
-          "datasets"
+        "required": ["labels", "datasets"]
+      },
+      "MonitoringDiagnostic": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "classification": {
+            "type": "string",
+            "enum": ["normal", "policy", "error", "unknown", "cancelled"]
+          },
+          "meaning": {
+            "type": "string"
+          },
+          "next_steps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "docs_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "requires_action": {
+            "type": ["boolean", "null"]
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string"
+          }
+        },
+        "required": ["classification", "meaning", "next_steps", "docs_url"]
+      },
+      "ObserveQuery": {
+        "type": "object",
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "App identifier. app_id is an accepted alias."
+          },
+          "app_id": {
+            "type": "string"
+          },
+          "view": {
+            "type": "string",
+            "enum": ["summary", "metrics", "events", "device", "versions", "routes", "logs", "errors", "release"],
+            "default": "summary"
+          },
+          "source": {
+            "type": "string",
+            "enum": ["native", "updater", "all"],
+            "description": "Only for logs, errors, device. Default all."
+          },
+          "channelId": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Only for release; default app default channel."
+          },
+          "days": {
+            "type": "integer",
+            "enum": [1, 3, 7, 30],
+            "default": 7,
+            "description": "Not used for release window."
+          },
+          "action": {
+            "type": "string",
+            "description": "Exact stats action; overrides default view action filter."
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "Required for device view."
+          },
+          "versionName": {
+            "type": "string",
+            "description": "Unsupported for summary and versions."
+          },
+          "sort": {
+            "type": "string",
+            "enum": ["slowest", "fastest", "newest", "oldest"]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          }
+        },
+        "anyOf": [
+          {
+            "required": ["appId"]
+          },
+          {
+            "required": ["app_id"]
+          }
+        ]
+      },
+      "ObserveSample": {
+        "type": "object",
+        "properties": {
+          "device_id": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "version_name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": ["object", "null"],
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "duration_ms": {
+            "type": ["number", "null"]
+          },
+          "route": {
+            "type": ["string", "null"]
+          },
+          "diagnostic": {
+            "$ref": "#/components/schemas/MonitoringDiagnostic"
+          }
+        }
+      },
+      "ObserveResponse": {
+        "type": "object",
+        "properties": {
+          "view": {
+            "type": "string"
+          },
+          "app_id": {
+            "type": "string"
+          },
+          "period": {
+            "type": "object",
+            "properties": {}
+          },
+          "samples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObserveSample"
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObserveSample"
+            }
+          },
+          "sample_scan": {
+            "type": "object",
+            "properties": {}
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "number"
+              },
+              "device_count": {
+                "type": "number"
+              },
+              "action_count": {
+                "type": "number"
+              }
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "daily": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "devices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MonitoringDiagnostic"
+            }
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "agent_instructions": {
+            "type": "string"
+          },
+          "release": {
+            "type": ["object", "null"]
+          },
+          "window": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string"
+              },
+              "end": {
+                "type": "string"
+              },
+              "bucket_minutes": {
+                "type": "integer"
+              },
+              "truncated": {
+                "type": "boolean"
+              }
+            }
+          },
+          "totals": {
+            "type": "object",
+            "properties": {
+              "get": {
+                "type": "number"
+              },
+              "install": {
+                "type": "number"
+              },
+              "fail": {
+                "type": "number"
+              },
+              "success_rate": {
+                "type": ["number", "null"]
+              }
+            }
+          },
+          "adoption": {
+            "type": "object",
+            "properties": {
+              "devices_on_release": {
+                "type": "number"
+              },
+              "total_devices": {
+                "type": "number"
+              },
+              "percent": {
+                "type": ["number", "null"]
+              }
+            }
+          },
+          "failed_devices": {
+            "type": ["object", "null"]
+          },
+          "legacy_check_failures": {
+            "type": ["object", "null"]
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ts": {
+                  "type": "string"
+                },
+                "get": {
+                  "type": "number"
+                },
+                "install": {
+                  "type": "number"
+                },
+                "fail": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "rollout": {
+            "type": ["object", "null"],
+            "description": "Progressive target, fallback, expected audience, reach and baseline comparison."
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "poll_after_seconds": {
+            "type": "integer"
+          },
+          "aggregate_scope": {
+            "type": "object",
+            "description": "Error aggregate counts cover app and optional bundle; deviceId filters samples only.",
+            "properties": {
+              "app_id": {
+                "type": "string"
+              },
+              "version_name": {
+                "type": ["string", "null"]
+              },
+              "device_filter_applied": {
+                "const": false
+              }
+            }
+          }
+        },
+        "required": ["view", "app_id"]
+      },
+      "BuildMonitorStatus": {
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "started_at": {
+            "type": ["number", "null"]
+          },
+          "completed_at": {
+            "type": ["number", "null"]
+          },
+          "runner_wait_seconds": {
+            "type": ["number", "null"]
+          },
+          "build_time_seconds": {
+            "type": ["number", "null"]
+          },
+          "error": {
+            "type": ["string", "null"]
+          },
+          "queue_priority": {
+            "type": ["number", "null"]
+          },
+          "effective_queue_priority": {
+            "type": ["number", "null"]
+          },
+          "queue_priority_tier": {
+            "type": ["string", "null"]
+          },
+          "machine": {
+            "type": ["object", "null"]
+          },
+          "diagnostic": {
+            "$ref": "#/components/schemas/MonitoringDiagnostic"
+          },
+          "poll_after_seconds": {
+            "type": "integer"
+          }
+        },
+        "required": ["job_id", "status"]
+      },
+      "BuildLogSnapshot": {
+        "type": "object",
+        "properties": {
+          "app_id": {
+            "type": "string"
+          },
+          "job_id": {
+            "type": "string"
+          },
+          "logs": {
+            "type": "string",
+            "description": "Bounded retained tail, not a complete archive. At most 100 entries / 60000 UTF-8 bytes; individual lines can be clipped."
+          },
+          "format": {
+            "const": "text"
+          },
+          "cursor": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "first_available_id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "truncated": {
+            "type": "boolean"
+          },
+          "retention": {
+            "type": "string"
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MonitoringDiagnostic"
+            }
+          },
+          "poll_after_seconds": {
+            "type": "integer"
+          },
+          "docs_url": {
+            "type": "string"
+          },
+          "agent_instructions": {
+            "type": "string"
+          }
+        },
+        "required": ["app_id", "job_id", "logs", "cursor", "first_available_id", "truncated"]
+      },
+      "NativeUsage": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleUsage"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "latestVersion": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "percentage": {
+                    "type": "string"
+                  }
+                }
+              },
+              "activeDevices": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number"
+                }
+              },
+              "previousPeriodActiveDevices": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number"
+                }
+              },
+              "dailyPlatformActive": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            }
+          }
         ]
       }
     },
