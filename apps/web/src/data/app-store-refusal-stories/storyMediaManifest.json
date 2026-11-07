@@ -300,5 +300,13 @@
   "missing-account-deletion-after-reviewer-deleted-accounts": null,
   "paywall-one-month-free-mismatched-annual-charge": null,
   "resubmit-perf-fixes-removed-gate-crash-on-start": null,
-  "several-games-4-3-a-batch-then-appeals-overturned": null
+  "several-games-4-3-a-batch-then-appeals-overturned": null,
+  "recovery-app-1-1-porn-keyword-in-metadata-full-review": {
+    "src": "/app-store-refusal-horror-story/screenshots/recovery-app-1-1-porn-keyword-in-metadata-full-review.webp",
+    "alt": "Guideline 1.1 rejection notice and App Review reply naming a keyword in the app marketing",
+    "width": 1128,
+    "height": 706
+  },
+  "already-approved-app-icon-rejected-for-exposed-character": null,
+  "cancel-are-you-sure-screen-rejected-week-before-retention-messaging": null
 }
