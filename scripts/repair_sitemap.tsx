@@ -13,7 +13,7 @@ interface SitemapUrl {
 }
 
 const HOSTNAME = 'https://capgo.app'
-const EXCLUDED_SITEMAP_PATHS = new Set(['/tools/ios-udid-finder/result/'])
+const EXCLUDED_SITEMAP_PATHS = new Set(['/tools/ios-udid-finder/result/', '/featured/'])
 
 // Paths that public/_redirects sends elsewhere must not be listed: a sitemap should only contain final 200 URLs.
 function loadRedirectedPaths(): Set<string> {
@@ -52,12 +52,7 @@ function isAllowedSitemapUrl(item: SitemapUrl): boolean {
   const url = new URL(item.loc)
   const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`
   const basePath = stripLocalePath(pathname)
-  return (
-    !EXCLUDED_SITEMAP_PATHS.has(basePath) &&
-    !REDIRECTED_SITEMAP_PATHS.has(basePath) &&
-    !isGonePath(pathname) &&
-    !isGonePath(basePath)
-  )
+  return !EXCLUDED_SITEMAP_PATHS.has(basePath) && !REDIRECTED_SITEMAP_PATHS.has(basePath) && !isGonePath(pathname) && !isGonePath(basePath)
 }
 
 function expandLocalizedUrls(urls: SitemapUrl[]): SitemapUrl[] {

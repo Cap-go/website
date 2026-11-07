@@ -65,7 +65,11 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates, sitemap
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-      filter: (page) => !page.endsWith('/410/') && !page.endsWith('/410'),
+      filter: (page) => {
+        const pathname = new URL(page).pathname
+        const normalized = pathname.endsWith('/') ? pathname : `${pathname}/`
+        return !normalized.endsWith('/410/') && normalized !== '/410/' && normalized !== '/featured/'
+      },
       serialize(item) {
         return withSitemapLastMod(item, pageLastModDates)
       },
