@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Custom cancel gate versus Apple retention message">
+  <title>Custom cancel gate versus Apple retention message</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="24" y="36" width="120" height="128" rx="12" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="40" y="52" width="88" height="10" rx="5" fill="#9CA3AF" opacity="0.38"/>
+  <rect x="40" y="72" width="72" height="8" rx="4" fill="#9CA3AF" opacity="0.3"/>
+  <rect x="48" y="96" width="72" height="44" rx="8" fill="#1F2937" stroke="#EF4444" stroke-width="1.5" opacity="0.9"/>
+  <text x="84" y="114" text-anchor="middle" fill="#EF4444" font-family="system-ui,sans-serif" font-size="9" font-weight="600">Are you sure?</text>
+  <rect x="56" y="122" width="28" height="12" rx="4" fill="#374151"/>
+  <rect x="88" y="122" width="28" height="12" rx="4" fill="#EF4444" opacity="0.4"/>
+  <circle cx="84" cy="152" r="10" fill="none" stroke="#EF4444" stroke-width="2"/>
+  <path d="M78 152 L90 152 M84 146 L84 158" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <path d="M156 100 H168" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="176,100 168,94 168,106" fill="#9CA3AF" opacity="0.45"/>
+  <rect x="184" y="28" width="112" height="136" rx="14" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <rect x="200" y="44" width="80" height="8" rx="4" fill="#44BCFF" opacity="0.45"/>
+  <rect x="200" y="60" width="64" height="6" rx="3" fill="#9CA3AF" opacity="0.32"/>
+  <rect x="200" y="78" width="80" height="52" rx="8" fill="#1F2937" stroke="#374151" stroke-width="1.5"/>
+  <rect x="208" y="86" width="64" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="208" y="98" width="48" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="208" y="110" width="56" height="10" rx="5" fill="#44BCFF" opacity="0.35"/>
+  <rect x="200" y="142" width="80" height="12" rx="6" fill="#374151"/>
+  <path d="M232 76 L244 64" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+  <circle cx="248" cy="60" r="8" fill="#FBBF24" opacity="0.25"/>
+  <rect x="32" y="172" width="104" height="14" rx="7" fill="#111827" stroke="#374151" stroke-width="1.5"/>
+  <rect x="40" y="177" width="72" height="4" rx="2" fill="#EF4444" opacity="0.4"/>
+  <rect x="192" y="172" width="96" height="14" rx="7" fill="#111827" stroke="#44BCFF" stroke-width="1.5"/>
+  <rect x="200" y="177" width="64" height="4" rx="2" fill="#44BCFF" opacity="0.4"/>
+</svg>
