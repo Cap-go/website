@@ -1,11 +1,11 @@
 ---
-title: "API Overview"
+title: 'API Overview'
 description: "Explore Capgo's public API for managing resources such as organizations, devices, channels, and bundles using RESTful HTTP methods and authentication."
 sidebar:
   order: 1
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
+import { LinkCard } from '@astrojs/starlight/components'
 
 This is the documentation of the public API of Capgo cloud. The API allows you to programmatically manage your Capgo resources, including organizations, devices, channels, and bundles. It's designed to be RESTful and uses standard HTTP methods.
 
@@ -19,11 +19,7 @@ Example:
 curl -H "x-api-key: YOUR_API_KEY" https://api.capgo.app/organization/
 ```
 
-<LinkCard
-	title="Get API key"
-	description="Generate your API key in the Capgo dashboard"
-	href="https://console.capgo.app/settings/organization/api-keys"
-/>
+<LinkCard title="Get API key" description="Generate your API key in the Capgo dashboard" href="https://console.capgo.app/settings/organization/api-keys" />
 
 The `authorization` header with the raw key (no `Bearer` prefix) is still accepted for legacy integrations, but `x-api-key` is the recommended header for all key types, including secure hashed keys.
 
@@ -44,6 +40,7 @@ Removing an operation or field is a breaking change, so it only happens in a new
 ## Rate Limiting
 
 The API implements rate limiting to ensure fair usage. Current limits are:
+
 - 2,000 requests per minute per API key
 - 20,000 requests per minute per API key on bundle upload routes
 - 20 invalid API keys per IP address within 15 minutes, after which the IP is blocked for 15 minutes
@@ -72,6 +69,7 @@ These limits are not account-wide. If your channel switcher can return to a rece
 All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include a machine-readable `error` code, a human-readable `message`, and optional `moreInfo` details.
 
 Example success response:
+
 ```json
 {
   "status": "ok",
@@ -80,6 +78,7 @@ Example success response:
 ```
 
 Example error response:
+
 ```json
 {
   "error": "invalid_apikey",
@@ -91,46 +90,22 @@ Example error response:
 ## Available Endpoints
 
 <LinkCard
-	title="Organizations"
-	description="Create and manage organizations, update settings, and handle organization-level configurations"
-	href="/docs/public-api/organizations/"
+  title="Organizations"
+  description="Create and manage organizations, update settings, and handle organization-level configurations"
+  href="/docs/public-api/organizations/"
 />
 
-<LinkCard
-	title="API Keys"
-	description="Generate, list, and revoke API keys for secure access to the Capgo API"
-	href="/docs/public-api/api-keys/"
-/>
+<LinkCard title="API Keys" description="Generate, list, and revoke API keys for secure access to the Capgo API" href="/docs/public-api/api-keys/" />
 
-<LinkCard
-	title="Members"
-	description="Manage organization members, roles, and permissions"
-	href="/docs/public-api/members/"
-/>
+<LinkCard title="Members" description="Manage organization members, roles, and permissions" href="/docs/public-api/members/" />
 
-<LinkCard
-	title="Statistics"
-	description="Access detailed analytics about app usage, storage, and bandwidth consumption"
-	href="/docs/public-api/statistics/"
-/>
+<LinkCard title="Statistics" description="Access detailed analytics about app usage, storage, and bandwidth consumption" href="/docs/public-api/statistics/" />
 
-<LinkCard
-	title="Channels"
-	description="Control app update channels, bundles (versions), and update policies"
-	href="/docs/public-api/channels/"
-/>
+<LinkCard title="Channels" description="Control app update channels, bundles (versions), and update policies" href="/docs/public-api/channels/" />
 
-<LinkCard
-	title="Devices"
-	description="Track and manage devices running your app, including bundle (version) and channel assignments"
-	href="/docs/public-api/devices/"
-/>
+<LinkCard title="Devices" description="Track and manage devices running your app, including bundle (version) and channel assignments" href="/docs/public-api/devices/" />
 
-<LinkCard
-	title="Bundles"
-	description="Handle app bundles, including uploading, listing, and managing bundles (versions)"
-	href="/docs/public-api/bundles/"
-/>
+<LinkCard title="Bundles" description="Handle app bundles, including uploading, listing, and managing bundles (versions)" href="/docs/public-api/bundles/" />
 
 ## Best Practices
 
@@ -142,3 +117,7 @@ Example error response:
 ## Keep going from API Overview
 
 If you are using **API Overview** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication, and [SSO (Enterprise)](/docs/webapp/enterprise-sso/) for the implementation detail in SSO (Enterprise).
+
+## Release health, errors and native builds
+
+Use the [monitoring API](/docs/public-api/monitoring/) for native and updater diagnostics, logs with metadata, the live release dashboard statistics, and native build status and log snapshots. These reads are also exposed by both account MCP servers.

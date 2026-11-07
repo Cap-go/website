@@ -1,6 +1,6 @@
 ---
-title: "Statistics"
-description: "Detailed guide to Statistics API endpoints, providing insights into Monthly Active Users (MAU), storage, and bandwidth metrics for apps and organizations."
+title: 'Statistics'
+description: 'Detailed guide to Statistics API endpoints, providing insights into Monthly Active Users (MAU), storage, and bandwidth metrics for apps and organizations.'
 sidebar:
   order: 5
 ---
@@ -30,8 +30,8 @@ Get statistics for a specific app. This endpoint is useful for monitoring indivi
 
 ```typescript
 interface StatsQuery {
-  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
-  to: Date    // End date for the statistics (format: YYYY-MM-DD)
+  from: Date // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date // End date for the statistics (format: YYYY-MM-DD)
 }
 ```
 
@@ -49,13 +49,13 @@ curl -H "authorization: your-api-key" \
   {
     "date": "2024-01-01",
     "mau": 1500,
-    "storage": 536870912,  // 512MB in bytes
+    "storage": 536870912, // 512MB in bytes
     "bandwidth": 1073741824 // 1GB in bytes
   },
   {
     "date": "2024-01-02",
     "mau": 1550,
-    "storage": 537919488,  // 513MB in bytes
+    "storage": 537919488, // 513MB in bytes
     "bandwidth": 1074790400 // 1.01GB in bytes
   }
 ]
@@ -69,9 +69,9 @@ Get statistics for a specific organization. Useful for monitoring organization-l
 
 ```typescript
 interface StatsQuery {
-  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
-  to: Date    // End date for the statistics (format: YYYY-MM-DD)
-  breakdown: boolean  // default false, optional if true it return the breakdown by app
+  from: Date // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date // End date for the statistics (format: YYYY-MM-DD)
+  breakdown: boolean // default false, optional if true it return the breakdown by app
   noAccumulate: boolean // default false, optional if true it will not accumulate data and just return day by day result
 }
 ```
@@ -90,14 +90,14 @@ curl -H "authorization: your-api-key" \
   {
     "date": "2024-01-01",
     "mau": 10000,
-    "storage": 536870912,   // 512MB in bytes
-    "bandwidth": 1073741824  // 1GB in bytes
+    "storage": 536870912, // 512MB in bytes
+    "bandwidth": 1073741824 // 1GB in bytes
   },
   {
     "date": "2024-01-02",
     "mau": 10200,
-    "storage": 537919488,   // 513MB in bytes
-    "bandwidth": 1074790400  // 1.01GB in bytes
+    "storage": 537919488, // 513MB in bytes
+    "bandwidth": 1074790400 // 1.01GB in bytes
   }
 ]
 ```
@@ -110,8 +110,8 @@ Get aggregated statistics across all organizations you have access to. Perfect f
 
 ```typescript
 interface StatsQuery {
-  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
-  to: Date    // End date for the statistics (format: YYYY-MM-DD)
+  from: Date // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date // End date for the statistics (format: YYYY-MM-DD)
 }
 ```
 
@@ -129,14 +129,14 @@ curl -H "authorization: your-api-key" \
   {
     "date": "2024-01-01",
     "mau": 25000,
-    "storage": 1073741824,  // 1GB in bytes
-    "bandwidth": 2147483648  // 2GB in bytes
+    "storage": 1073741824, // 1GB in bytes
+    "bandwidth": 2147483648 // 2GB in bytes
   },
   {
     "date": "2024-01-02",
     "mau": 25500,
-    "storage": 1074790400,  // 1.01GB in bytes
-    "bandwidth": 2148532224  // 2.01GB in bytes
+    "storage": 1074790400, // 1.01GB in bytes
+    "bandwidth": 2148532224 // 2.01GB in bytes
   }
 ]
 ```
@@ -149,8 +149,8 @@ Get bundle usage statistics for a specific app, showing the distribution of bund
 
 ```typescript
 interface BundleUsageQuery {
-  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
-  to: Date    // End date for the statistics (format: YYYY-MM-DD)
+  from: Date // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date // End date for the statistics (format: YYYY-MM-DD)
 }
 ```
 
@@ -234,3 +234,7 @@ Common error scenarios and their responses:
 ## Keep going from Statistics
 
 If you are using **Statistics** to plan storage and file handling, connect it with [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.
+
+## Release health, errors and native builds
+
+Use the [monitoring API](/docs/public-api/monitoring/) for native and updater diagnostics, logs with metadata, the live release dashboard statistics, and native build status and log snapshots. These reads are also exposed by both account MCP servers.
