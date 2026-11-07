@@ -1,6 +1,46 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.99.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.3",
+    "pubDate": "2026-11-06T14:00:00.000Z",
+    "description": "🆕 Changelog Added CLI : Warn users of older CLI versions to upgrade before PostgREST support is removed. Billing : Stop sending loss reminder notifications once an offer has been saved. Frontend : Add shared and components for consistent page layouts. Onboarding : Collect company name during the \"About you\" onboarding step. Changed CLI Documentation : Regenerate generated CLI docs and clarify MCP bundle encryption recommendations. Build Runners : Count a running simulator as an occupied buil..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.100.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.100.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.100.0",
+    "pubDate": "2026-11-06T22:13:10.000Z",
+    "description": "🆕 Changelog Added Native Build Queue Priority : Introduced plan based prioritization for native build queues, ensuring higher priority builds are processed first. Simulator Preview : Added the ability to view and open kept native builds directly in the simulator. MCP Promotion & Tracking : Promoted the Capgo MCP in the console and implemented tracking for hosted MCP usage. AI Powered Changelog Digest : Introduced a new changelog feature for console, CLI, updater, and plugins that includes an..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.32.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.32.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.32.0",
+    "pubDate": "2026-11-06T22:15:25.000Z",
+    "description": "🆕 Changelog Added Implemented plan based native build queue priority, allowing builds to be scheduled based on subscription plan levels to improve resource allocation and processing efficiency for enterprise users. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.31.1...capgo 22.32.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.31.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.31.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.31.1",
+    "pubDate": "2026-11-06T18:14:49.000Z",
+    "description": "🆕 Changelog Added Introduced functionality to keep native builds after the build process completes. Added support for automatically opening the generated native build in the iOS simulator. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.31.0...capgo 22.31.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.30.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.30.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.30.0",
+    "pubDate": "2026-11-06T10:49:06.000Z",
+    "description": "🆕 Changelog Added Billing save offers now cancel pending loss reminders. When a customer accepts a billing save/retention offer, any scheduled churn or loss reminder is canceled so users no longer receive conflicting follow up messages. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.29.4...capgo 22.30.0"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.29.4",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.4",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.29.4",
@@ -278,46 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.1",
     "pubDate": "2026-10-27T04:57:52.000Z",
     "description": "🆕 Changelog Fixed Fixed SDK compatibility on Cloudflare Workers by using manual redirect handling ( 3934) Fixed deployment cleanup by deleting orphaned Bento dispatch workers ( 3931) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.98.0...cli 8.98.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.98.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.0",
-    "pubDate": "2026-10-27T04:26:36.000Z",
-    "description": "🆕 Changelog Added Signed URL bundle uploads and native builds from the hosted MCP — publishing and distributing MCP bundles is now faster and more reliable, with native build support handled directly by the hosted MCP service. Local currency Solo plan pricing with regional discounts — Solo plan prices can now be shown in local currency and include regional discounts, making billing clearer and more affordable for eligible users. Fixed Forwarded the real client IP to Supabase Auth and verifie..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.97.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.97.3",
-    "pubDate": "2026-10-27T00:37:53.000Z",
-    "description": "🆕 Changelog Added Added support for serving images exclusively from Cloudflare R2 for improved reliability and reduced origin load ( 3922). Bundle manifest files can now be sorted by name, size, or checksum ( 3912). Added clearer messaging for legacy plugins when failed update checks are intentionally ignored ( 3914). Changed Improved queue dispatch reliability by sending only readable messages and preserving Cloudflare IDs when messages fail ( 3918). Updated agent documentation to clarify t..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.23.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.23.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.23.1",
-    "pubDate": "2026-10-27T23:30:56.000Z",
-    "description": "🆕 Changelog Changed Improved console cold load performance by 50% on low powered mobile devices. Removing unnecessary overhead and caching the app list means the console now appears noticeably faster, especially on weaker connections and older phones. Removed Removed FormKit from the console. The console UI no longer depends on FormKit components. If you have custom plugins or extensions that relied on FormKit markup or styles inside the console, migrate them to the standard Capgo UI compone..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.23.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.23.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.23.0",
-    "pubDate": "2026-10-27T23:11:09.000Z",
-    "description": "🆕 Changelog Added Invite teammates during onboarding. New users can now add teammates directly from the onboarding flow, making it faster to configure collaborative workspaces. AI agent alternatives in onboarding. Users can now choose from AI agent alternatives during setup, making it easier to match the assistant to their workflow. Changed Unified onboarding for new organizations. New organizations now go through the same onboarding steps as existing users, creating a consistent setup exper..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.22.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.22.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.22.1",
-    "pubDate": "2026-10-27T22:23:18.000Z",
-    "description": "🆕 Changelog Fixed Treats Hyperdrive connect timeouts as transient errors so connections are retried instead of failing immediately. Adds guards and warning gates around retention activities for canceled organizations, preventing unintended lifecycle operations. Delays marking a Stripe subscription as paid until the invoice is actually paid, so billing status accurately reflects payment state. Security Narrows MFA waiver scope so it applies only to registered platform admin impersonation, str..."
   },
   {
     "category": "release",
@@ -721,11 +721,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-inappbrowser 8.27.2",
-    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.2",
-    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.2",
-    "pubDate": "2026-11-03T19:30:47.000Z",
-    "description": "🆕 Changelog Fixed Fixed incorrect handling of same host HTTPS URLs when using a custom hostname. Assets served over HTTPS from the same host are no longer incorrectly treated as bundled/local assets, ensuring URLs are processed consistently and preventing broken links. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.27.1...8.27.2"
+    "title": "capacitor-inappbrowser 8.27.4",
+    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.4",
+    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.4",
+    "pubDate": "2026-11-06T12:12:23.000Z",
+    "description": "🆕 Changelog Fixed Improved Android split screen layout by skipping the bottom safe area inset for the top pane, eliminating unnecessary bottom padding in that mode. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.27.3...8.27.4"
   },
   {
     "category": "release",
@@ -1193,11 +1193,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-social-login 8.7.6",
-    "link": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.6",
-    "guid": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.6",
-    "pubDate": "2026-11-02T12:27:14.000Z",
-    "description": "🆕 Changelog Changed Updated React monorepo dependencies to v19.3.1 for improved stability and compatibility ( 500). Updated Vite to v8.3.5 to incorporate the latest build tooling fixes and improvements ( 499). Fixed Resolved a hang during Google sign in on Android for the auth only Credential Manager flow, so login now completes reliably ( 502). 🔗 Full Changelog : https://github.com/Cap go/capacitor social login/compare/8.7.5...8.7.6"
+    "title": "capacitor-social-login 8.7.7",
+    "link": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.7",
+    "guid": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.7",
+    "pubDate": "2026-11-06T11:00:19.000Z",
+    "description": "🆕 Changelog Fixed Fixed handling of Google and Facebook OAuth callback URLs in iOS apps using , ensuring authentication flows complete correctly on newer iOS versions. Documentation has been updated to reflect the required configuration. Changed Updated project documentation. Updated dependencies, including to v7.18.5 and to v4.13.14, to incorporate the latest bug fixes and improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor social login/compare/8.7.6...8.7.7"
   },
   {
     "category": "release",
@@ -1409,11 +1409,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-zebra-datawedge 8.2.2",
-    "link": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.2",
-    "guid": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.2",
-    "pubDate": "2026-11-04T20:05:23.000Z",
-    "description": "🆕 Changelog Fixed Completed notification requests after dispatch to prevent stalled or incomplete notification handling. Requested and preserved profile app associations to maintain correct mappings between profiles and applications. Fixed parsing of Boolean and legacy scanner connection states to improve reliability of scanner state detection. 🔗 Full Changelog : https://github.com/Cap go/capacitor zebra datawedge/compare/8.2.1...8.2.2"
+    "title": "capacitor-zebra-datawedge 8.2.4",
+    "link": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.4",
+    "guid": "https://github.com/Cap-go/capacitor-zebra-datawedge/releases/tag/8.2.4",
+    "pubDate": "2026-11-06T18:24:31.000Z",
+    "description": "🆕 Changelog Fixed Improved Android DataWedge query result correlation : Query results from Android DataWedge are now correlated without relying on command identifiers. This makes query result matching more reliable in scenarios where command IDs are unavailable or inconsistent, ensuring more accurate and predictable responses when querying device data. 🔗 Full Changelog : https://github.com/Cap go/capacitor zebra datawedge/compare/8.2.3...8.2.4"
   },
   {
     "category": "release",
