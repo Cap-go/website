@@ -61,10 +61,18 @@ Only **typed** codegen intents with `awaitJavaScriptResult: true` on **iOS 17+**
 For typed awaiting intents, wrap your handler with `withInvocationCompletion`. `performReturningValue` uses `value` or `summary` for chaining and `message` (or the `dialog` argument to `completeInvocation`) for speech. Throw on unknown awaiting intents so `withInvocationCompletion` calls `failInvocation` instead of completing with a generic `Done`. Handler errors still propagate; if `failInvocation` itself fails on the bridge, that failure does not replace your handler error:
 
 ```typescript
-import { useAppIntentsListener, withInvocationCompletion } from '@capgo/capacitor-app-intents';
+import {
+  isAwaitingResult,
+  useAppIntentsListener,
+  withInvocationCompletion,
+} from '@capgo/capacitor-app-intents';
 
 await useAppIntentsListener(
   withInvocationCompletion(async (invocation) => {
+    if (!isAwaitingResult(invocation)) {
+      await handleInvocation(invocation);
+      return;
+    }
     if (invocation.name === 'orderDish') {
       return { value: 'pasta', message: 'Your pasta order is in.' };
     }
