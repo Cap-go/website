@@ -11,7 +11,7 @@ The hosted account MCP at `https://api.capgo.app/mcp` and the local CLI MCP star
 
 ### POST /private/observe
 
-Despite its historical path name, this endpoint supports API keys and is available to API and MCP callers. Every query requires `app.read`. The new logs and errors views also require `app.read_logs`. Keys restricted to another app cannot read its telemetry. Release history additionally respects channel history permissions.
+Despite its historical path name, this endpoint supports API keys and is available to API and MCP callers. Every query requires `app.read`. All raw sample views (`metrics`, `routes`, `device`, `logs`, `errors`) also require `app.read_logs`. Keys restricted to another app cannot read its telemetry. Release history additionally respects channel history permissions.
 
 ```bash
 curl https://api.capgo.app/private/observe \
@@ -34,6 +34,8 @@ curl https://api.capgo.app/private/observe \
 | `channelId`   | Positive integer, only for `release`. Defaults to the app default channel.                                                                             |
 
 Use `summary` for native launch and WebView health, findings and next queries. It does not cover every updater failure. Also query `errors` with `source: "updater"` to check update health.
+
+Default `errors` queries omit normal lifecycle events and intentional policy restrictions. Inspect policies through `logs` or an explicit `action` filter, which overrides the default failure filter.
 
 `errors` returns aggregate `summary`, `actions`, `daily`, affected `versions` and `devices`, plus bounded `samples`, `sample_scan`, and `diagnostics`. `logs` returns bounded event samples, including normal lifecycle events. Aggregate counts cover the app and optional bundle version; `aggregate_scope` makes this explicit. A `deviceId` filter narrows samples, not these aggregate counts. Samples retain `device_id`, `action`, `version_name`, `created_at`, timing, route, and metadata. Each sample also has a `diagnostic`. `events` provides aggregate action counts and diagnostics without raw samples. The native view defaults remain unchanged for `events`.
 
@@ -76,7 +78,7 @@ curl -H 'x-api-key: YOUR_API_KEY' \
   'https://api.capgo.app/build/status?app_id=com.example.app&job_id=example-cloud-job'
 ```
 
-The response includes `status`, `started_at`, `completed_at`, `runner_wait_seconds`, `build_time_seconds`, `error`, queue priorities, machine details, `diagnostic`, and `poll_after_seconds: 15`. Queued/running is normal. Failure needs log evidence. Poll terminal status once more to record final build time. Status reads can reconcile timeouts and record billing; they are not a way to retry a build.
+The response includes `status`, `started_at`, `completed_at`, `runner_wait_seconds`, `build_time_seconds`, `error`, queue priorities, machine details, `diagnostic`, and `poll_after_seconds: 15`. Queued/running is normal. Failure needs log evidence. Poll terminal status once more to record final build time. Status reads reconcile configured timeouts, may cancel overdue builds, and record billing; they are not a way to retry a build.
 
 ### GET /build/logs/:jobId?snapshot=true
 

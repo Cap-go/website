@@ -757,7 +757,7 @@ The app did not report ready within its launch measurement window.
 
 **What to do**
 
-Inspect startup errors and the device timeline. Check that startup reaches the readiness call, and call notifyAppReady after bootstrapping succeeds. Compare timing and failures with the previous bundle before changing timeout settings.
+Inspect startup errors and the device timeline. Check that startup reaches the readiness call, and call `notifyAppReady()` after bootstrapping succeeds. Compare timing and failures with the previous bundle before changing timeout settings.
 
 ### `webview_dom_content_loaded`
 
@@ -930,7 +930,7 @@ To achieve this:
 - Connect your device to your Mac and select Window > Devices in the Xcode menubar.
 - Select your device in the left pane under the Devices section.
 - This will show a list of developer-installed apps for that device.
-- Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
+- Select the app you want to inspect and then select the 3-dot icon near the bottom of the screen.
 - Here you can view the current file system by selecting download a snapshot of it.
 
 ![Xcode Devices panel showing app container download option](/ios_debug_update_2.webp)

@@ -166,7 +166,7 @@ Tools that delete or overwrite data are annotated as destructive, so MCP clients
 
 ## Monitor releases and explain errors
 
-Both account MCP servers expose `capgo_observe`. Use `view: "errors"` with `source: "updater"` or `"native"` for error counts, daily trends, affected versions/devices, bounded samples with metadata, and documented explanations. `view: "logs"` includes normal lifecycle events too. `view: "device"` with `deviceId` returns a device timeline. Native `summary` does not include all updater failures, so query updater errors too.
+Both account MCP servers expose `capgo_observe`. Use `view: "errors"` with `source: "updater"` or `"native"` for error counts, daily trends, affected versions/devices, bounded samples with metadata, and documented explanations. `view: "logs"` includes normal lifecycle events too. `view: "device"` with `deviceId` returns a device timeline. Native `summary` does not include all updater failures, so query updater errors too. Default error queries exclude policy restrictions; inspect those in logs or by explicit action. Raw sample views require `app.read_logs`.
 
 ```json
 { "appId": "com.example.app", "view": "release", "channelId": 42, "versionName": "1.2.0" }

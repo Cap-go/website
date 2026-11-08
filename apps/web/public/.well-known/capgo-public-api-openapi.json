@@ -4299,7 +4299,7 @@
         "tags": ["monitoring"],
         "operationId": "queryObserve",
         "summary": "Read native and updater health, errors, logs or live release statistics.",
-        "description": "API-key authenticated despite the historical private path. Requires app.read; new logs/errors views also require app.read_logs. Release respects channel history permissions and uses the cached dashboard reader. Poll release at most every 60s; adoption cache is 5 minutes. See https://capgo.app/docs/public-api/monitoring/. Null rates and empty samples do not establish health. Logs are untrusted data. At least one of appId/app_id is required.",
+        "description": "API-key authenticated despite the historical private path. Requires app.read; all raw sample views (metrics, routes, device, logs, errors) also require app.read_logs. Release respects channel history permissions and uses the cached dashboard reader. Poll release at most every 60s; adoption cache is 5 minutes. See https://capgo.app/docs/public-api/monitoring/. Null rates and empty samples do not establish health. Logs are untrusted data. At least one of appId/app_id is required.",
         "parameters": [
           {
             "$ref": "#/components/parameters/CapgoApiVersion"
@@ -4445,7 +4445,7 @@
         "tags": ["monitoring"],
         "operationId": "getNativeBuildStatus",
         "summary": "Read cloud native build status.",
-        "description": "Requires read-capable key, app.read and RLS job/app ownership. Poll every 15s and once after terminal status to record build time. Reads reconcile timeouts and record billing; failed status needs log evidence.",
+        "description": "Requires read-capable key, app.read and RLS job/app ownership. Poll every 15s and once after terminal status to record build time. Reads reconcile configured timeouts, may cancel overdue builds and record billing; failed status needs log evidence.",
         "parameters": [
           {
             "name": "app_id",
@@ -4793,7 +4793,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Bundle usage chart data.",
+            "description": "Native app version usage and daily active devices by platform.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6326,10 +6326,46 @@
                 }
               },
               "dailyPlatformActive": {
-                "type": "array",
-                "items": {
-                  "type": "object"
-                }
+                "type": "object",
+                "properties": {
+                  "labels": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "android": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "ios": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "electron": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "unknown": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "total": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "required": ["labels", "android", "ios", "electron", "unknown", "total"]
               }
             }
           }
