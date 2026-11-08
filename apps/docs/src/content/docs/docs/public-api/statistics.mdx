@@ -238,3 +238,9 @@ If you are using **Statistics** to plan storage and file handling, connect it wi
 ## Release health, errors and native builds
 
 Use the [monitoring API](/docs/public-api/monitoring/) for native and updater diagnostics, logs with metadata, the live release dashboard statistics, and native build status and log snapshots. These reads are also exposed by both account MCP servers.
+
+### GET /statistics/app/:app_id/native_usage
+
+Read native version adoption and daily active-device counts for `from` and `to` dates. The response includes `labels`, chart `datasets`, `latestVersion`, `activeDevices`, `previousPeriodActiveDevices`, and `dailyPlatformActive`.
+
+`dailyPlatformActive` is an object containing `labels` as date strings and `android`, `ios`, `electron`, `unknown`, and `total` as number arrays aligned with those dates. It is not an array of rows. Secondary active-device reads can degrade to empty data if unavailable; empty values do not prove that no devices are active.

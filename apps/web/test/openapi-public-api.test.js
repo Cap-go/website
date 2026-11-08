@@ -56,8 +56,14 @@ test('every error response uses the typed error schema', () => {
   for (const [name, operation] of operations()) {
     const errorCodes = Object.keys(operation.responses).filter((code) => code === 'default' || /^[45]/.test(code))
     expect(errorCodes, name).toContain('default')
-    expect(errorCodes.some((code) => code.startsWith('4')), name).toBe(true)
-    expect(errorCodes.some((code) => code.startsWith('5')), name).toBe(true)
+    expect(
+      errorCodes.some((code) => code.startsWith('4')),
+      name,
+    ).toBe(true)
+    expect(
+      errorCodes.some((code) => code.startsWith('5')),
+      name,
+    ).toBe(true)
     for (const code of errorCodes) {
       expect(operation.responses[code].content?.['application/json']?.schema, `${name} ${code}`).toEqual({ $ref: '#/components/schemas/ErrorResponse' })
     }
@@ -83,4 +89,15 @@ test('public API documents date-based versioning through the capgo_api header', 
   expect(spec.info.description).toContain('`Deprecation` header (RFC 9745)')
   expect(spec.info.description).toContain('`Sunset` header (RFC 8594)')
   expect(JSON.stringify(spec)).not.toContain('/v1')
+})
+
+test('native usage describes daily platform activity as the API object', () => {
+  const nativeUsage = spec.components.schemas.NativeUsage.allOf[1].properties.dailyPlatformActive
+  expect(nativeUsage.type).toBe('object')
+  expect(nativeUsage.properties.labels).toMatchObject({ type: 'array', items: { type: 'string' } })
+  for (const platform of ['android', 'ios', 'electron', 'unknown', 'total']) {
+    expect(nativeUsage.properties[platform]).toMatchObject({ type: 'array', items: { type: 'number' } })
+    expect(nativeUsage.required).toContain(platform)
+  }
+  expect(spec.paths['/statistics/app/{appId}/native_usage'].get.responses['200'].description).toContain('Native app version')
 })
