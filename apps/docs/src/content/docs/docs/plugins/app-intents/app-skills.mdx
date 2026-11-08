@@ -35,7 +35,7 @@ Use a build of the plugin that includes the Siri app skills work (see the [plugi
 
 1. Copy `app-intents.codegen.example.json` from the plugin package to `app-intents.codegen.json` in your app repo.
 2. Define `shortcuts`, `intents`, and `skills`. Each intent can set `tool`, `awaitJavaScriptResult`, `foregroundOnly`, `execution`, and `parameters`. Each skill has `name`, `description`, and markdown `body` that references your tools.
-3. Keep `actionName` aligned with your JavaScript handler and with `shortcuts[].intent` when you use typed intents.
+3. Keep `intents[].actionName` aligned with your JavaScript handler (`orderDish` in the example). Set `shortcuts[].intent` to the generated Swift intent name (`OrderDishToolIntent`), not the `actionName`.
 
 </Steps>
 
@@ -92,6 +92,7 @@ await useAppIntentsListener(
     if (invocation.name === 'orderDish') {
       return { value: 'Ordered pasta', message: 'Your pasta order is in.' };
     }
+    throw new Error(`Unknown awaiting intent: ${invocation.name}`);
   }),
 );
 ```
@@ -141,7 +142,11 @@ await CapgoAppIntents.setEntityCatalog({
 await CapgoAppIntents.setOnscreenEntityContext({
   entities: [{ catalogType: 'dish', entityId: 'pasta', title: 'Pasta' }],
 });
+```
 
+When the user navigates away or the row is no longer visible, clear hints in your cleanup path:
+
+```typescript
 await CapgoAppIntents.clearOnscreenEntityContext();
 ```
 

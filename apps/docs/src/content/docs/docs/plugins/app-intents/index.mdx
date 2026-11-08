@@ -40,7 +40,7 @@ On iOS 27.3, Apple lets apps register **app skills**: multi step instructions Si
 | --- | --- |
 | Multi step skills | `generate-skills-bundle.mjs` turns `SKILL.md` style entries in `app-intents.codegen.json` into `Skills.skillsbundle` for your Xcode app target. |
 | Typed tool intents | `generate-typed-intents.mjs` emits Swift with parameters, entities, `foregroundOnly`, and optional `awaitJavaScriptResult`. |
-| Results back to Siri | `withInvocationCompletion`, `completeInvocation()`, and `failInvocation()` deliver `value` and `message` so the next tool in a skill can use them. |
+| Results back to Siri | `withInvocationCompletion` and `completeInvocation()` return `value` and `message` to Siri for chaining; `failInvocation()` reports an error when JavaScript cannot finish. |
 | Capacitor without recompiling every action | Keep business logic in JavaScript; regenerate Swift only when intents or skill bodies change. |
 
 **Example skill flow:** A skill body tells Siri to pick a dish from your catalog, call an `orderDish` tool intent, then speak the JavaScript order summary. The first tool returns `{ value: "pasta" }`; the second tool reads it and confirms out loud.
