@@ -4599,7 +4599,7 @@
         "tags": ["monitoring"],
         "operationId": "getNativeBuildLogSnapshot",
         "summary": "Read a bounded native build log snapshot.",
-        "description": "Use snapshot=true for non-cancelling JSON monitoring. Requires read-capable key, app.read_logs and RLS job/app ownership. Retains recent buffered logs, at most 100 entries and 60KB. Pass returned cursor for new logs; truncated signals retention gaps or clipping. No stream client is displaced. Without snapshot=true this route preserves legacy SSE and disconnect behavior. Requires the builder snapshot route to be deployed first.",
+        "description": "Use snapshot=true for non-cancelling JSON monitoring. Requires read-capable key, app.read_logs and RLS job/app ownership. Retains recent buffered logs, at most 100 entries and 60KB. Pass returned cursor for new logs; truncated signals retention gaps or clipping. No stream client is displaced. Without snapshot=true this route preserves legacy SSE and disconnect behavior. Requires the builder snapshot route to be deployed first. Snapshot mode reads only the existing live-stream backlog and adds no separate log retention. Acknowledged logs and closed streams are unavailable; an empty snapshot does not prove build success.",
         "parameters": [
           {
             "name": "jobId",
