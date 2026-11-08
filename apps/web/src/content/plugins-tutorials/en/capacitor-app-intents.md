@@ -31,6 +31,12 @@ import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
 | `indexSpotlightEntities` | Index Spotlight items for your app domain. |
 | `removeSpotlightEntities` | Remove Spotlight items by id. |
 | `performAppleSchemaTemplate` | Queue a JavaScript handler for an alpha Apple schema template. |
+| `completeInvocation` | Resolve an invocation awaiting a JavaScript result for Siri. |
+| `failInvocation` | Fail an invocation awaiting a JavaScript result. |
+| `setOnscreenEntityContext` | Hint visible catalog rows for Siri when the UI is web only. |
+| `clearOnscreenEntityContext` | Clear on screen entity hints. |
+
+For Siri app skills, typed tool intents, and `Skills.skillsbundle` on iOS 27.3, see [Siri app skills](/docs/plugins/app-intents/app-skills/).
 
 ## Examples
 
