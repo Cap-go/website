@@ -27,7 +27,7 @@ bun add @capgo/capacitor-app-intents
 bunx cap sync ios
 ```
 
-Use a build of the plugin that includes the Siri app skills work (see the [plugin PR](https://github.com/Cap-go/capacitor-app-intents/pull/2)) until it is released on npm.
+The APIs in this guide ship in plugin **8.2.0+**. npm **8.1.0** does not export them. Use a build from [plugin PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2) (head `175bb323`) until **8.2.0** is on npm.
 
 ## Codegen config
 
@@ -96,6 +96,10 @@ import {
 
 await useAppIntentsListener(
   withInvocationCompletion(async (invocation) => {
+    if (!isAwaitingResult(invocation)) {
+      await handleOrderFlow(invocation);
+      return;
+    }
     if (invocation.name === 'orderDish') {
       return { value: 'pasta', message: 'Your pasta order is in.' };
     }
