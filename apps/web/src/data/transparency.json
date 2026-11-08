@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T03:04:33.730Z",
+  "updatedAt": "2026-11-08T03:05:34.652Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -68,11 +68,13 @@
   ],
   "metrics": {
     "live": {
-      "success_rate": 85.2,
-      "first_try_rate": 98.4,
-      "rollback_rate": 14.3,
-      "updated_at": "2026-11-07T01:27:08.968Z",
+      "success_rate": 85,
+      "first_try_rate": 98.3,
+      "rollback_rate": 14.1,
+      "updated_at": "2026-11-05T16:40:59.554Z",
       "daily": [
+        82.1,
+        84.5,
         83.3,
         85.2,
         83.3,
@@ -100,14 +102,12 @@
         84.4,
         86.1,
         86.1,
-        85.7,
-        85.6,
-        85.6
+        85.7
       ]
     },
     "builder": {
-      "success_rate": 80.2,
-      "updated_at": "2026-11-07T03:04:31.602Z"
+      "success_rate": 81.1,
+      "updated_at": "2026-11-08T03:05:32.043Z"
     }
   }
 }

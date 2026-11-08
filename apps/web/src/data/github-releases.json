@@ -625,11 +625,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-fast-sql 8.2.16",
-    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.16",
-    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.16",
-    "pubDate": "2026-11-02T06:39:01.000Z",
-    "description": "🆕 Changelog Changed Updated SQLCipher for Android to version 4.20.0. This brings the latest stability and compatibility improvements from the SQLCipher library used for encrypted database support. 🔗 Full Changelog : https://github.com/Cap go/capacitor fast sql/compare/8.2.15...8.2.16"
+    "title": "capacitor-fast-sql 8.2.18",
+    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.18",
+    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.18",
+    "pubDate": "2026-11-08T00:11:56.000Z",
+    "description": "🆕 Changelog Added Added a reproducible HTTP transport benchmark to establish a current performance baseline for future comparisons. Fixed Exposed web persistent storage support and added the option to require it, ensuring storage is available on supported platforms. Included R8 consumer keep rules for Android Capacitor 9 integration, preventing required classes from being removed during code shrinking. 🔗 Full Changelog : https://github.com/Cap go/capacitor fast sql/compare/8.2.17...8.2.18"
   },
   {
     "category": "release",
@@ -689,11 +689,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-health 8.11.14",
-    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.11.14",
-    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.11.14",
-    "pubDate": "2026-11-02T13:19:09.000Z",
-    "description": "🆕 Changelog Changed Raised Node.js requirement to v26 ( 119) . Node.js is now required at version 26 for building or running the project, keeping the toolchain current with the latest upstream release. Migration note: If you build from source or manage your own Node environment, upgrade to Node.js 26 to avoid compatibility warnings or installation errors. Refreshed the dependency lock file to the latest compatible package versions and resolved transient dependency drift. 🔗 Full Changelog : ..."
+    "title": "capacitor-health 8.12.0",
+    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.12.0",
+    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.12.0",
+    "pubDate": "2026-11-07T10:18:19.000Z",
+    "description": "🆕 Changelog Added Added support for the data type on iOS 18+, allowing you to read and work with State of Mind samples alongside other HealthKit data types. This makes it possible to build features around mood and mental state tracking on supported devices. 🔗 Full Changelog : https://github.com/Cap go/capacitor health/compare/8.11.14...8.12.0"
   },
   {
     "category": "release",
@@ -1049,11 +1049,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-persona 8.2.2",
-    "link": "https://github.com/Cap-go/capacitor-persona/releases/tag/8.2.2",
-    "guid": "https://github.com/Cap-go/capacitor-persona/releases/tag/8.2.2",
-    "pubDate": "2026-10-15T02:18:51.000Z",
-    "description": "Changelog Changed Migrated the development toolchain to ESLint 10 and TypeScript 6, keeping the project on supported tooling and enabling the latest linting and language features. Contributors may need to update their local environment to remain compatible. Updated project documentation to reflect the latest usage and configuration details. Removed the consulting call to action from the README. Full changelog: https://github.com/Cap go/capacitor persona/compare/8.2.1...8.2.2"
+    "title": "capacitor-persona 8.2.3",
+    "link": "https://github.com/Cap-go/capacitor-persona/releases/tag/8.2.3",
+    "guid": "https://github.com/Cap-go/capacitor-persona/releases/tag/8.2.3",
+    "pubDate": "2026-11-07T19:50:39.000Z",
+    "description": "Changelog Changed Upgraded Persona integration to v3, bringing improved verification workflows and reliability. Modernized CI pipeline with stack based builds for faster, more consistent releases. Refined follow up improvements from previous CodeRabbit review feedback ( 12) to enhance code quality and maintainability. Full changelog: https://github.com/Cap go/capacitor persona/compare/8.2.2...8.2.3"
   },
   {
     "category": "release",
