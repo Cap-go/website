@@ -49,6 +49,8 @@
     ui_host: 'https://eu.posthog.com',
     defaults: '2025-11-30',
     person_profiles: 'always',
+    autocapture: false,
+    capture_performance: { web_vitals: false },
     capture_pageview: false,
     // The Cloudflare version split owns assignment; avoid a second independent flag evaluation.
     advanced_disable_feature_flags: true,
