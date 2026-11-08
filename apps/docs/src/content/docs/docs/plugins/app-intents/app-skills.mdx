@@ -77,7 +77,7 @@ After install, verify `Skills.skillsc` exists under `MyApp.app/Metadata.appinten
 
 ## JavaScript completion for Siri
 
-Register your listener with `withInvocationCompletion` so awaiting invocations call `completeInvocation` or `failInvocation` for you:
+Register your listener with `withInvocationCompletion` so awaiting invocations call `completeInvocation` or `failInvocation` for you. When `value` is present, native code uses it for both the returned string and what Siri speaks; set `message` (or `summary`) only when you omit `value`.
 
 ```typescript
 import {
@@ -90,7 +90,7 @@ import {
 await useAppIntentsListener(
   withInvocationCompletion(async (invocation) => {
     if (invocation.name === 'orderDish') {
-      return { value: 'Ordered pasta', message: 'Your pasta order is in.' };
+      return { value: 'Ordered pasta' };
     }
     throw new Error(`Unknown awaiting intent: ${invocation.name}`);
   }),
@@ -102,7 +102,7 @@ Manual control:
 ```typescript
 await CapgoAppIntents.completeInvocation({
   id: invocation.id,
-  result: { value: 'Done', message: 'Finished in your app.' },
+  result: { value: 'Done' },
 });
 
 await CapgoAppIntents.failInvocation({
