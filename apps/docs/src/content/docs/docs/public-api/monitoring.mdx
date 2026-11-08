@@ -78,7 +78,7 @@ curl -H 'x-api-key: YOUR_API_KEY' \
   'https://api.capgo.app/build/status?app_id=com.example.app&job_id=example-cloud-job'
 ```
 
-The response includes `status`, `started_at`, `completed_at`, `runner_wait_seconds`, `build_time_seconds`, `error`, queue priorities, machine details, `diagnostic`, and `poll_after_seconds: 15`. Successful HTTP reads set `persisted: true` when the stored build request and billing were updated. Queued/running is normal. Failure needs log evidence. Poll terminal status once more to record final build time. Status reads reconcile configured timeouts, may cancel overdue builds, and record billing; they are not a way to retry a build. A `persist` query parameter is not honored over HTTP: every REST poll persists.
+The response includes `status`, `started_at`, `completed_at`, `runner_wait_seconds`, `build_time_seconds`, `error`, queue priorities, machine details, `diagnostic`, and `poll_after_seconds: 15`. Successful HTTP reads set `persisted: true` when the stored `build_requests` row was updated on that poll. Build minutes and billing run only for qualifying terminal outcomes or an applied timeout, so a running job can return `persisted: true` without recording build time yet. Queued/running is normal. Failure needs log evidence. Poll terminal status once more to record final build time. Status reads reconcile configured timeouts, may cancel overdue builds, and record billing; they are not a way to retry a build. A `persist` query parameter is not honored over HTTP: every REST poll persists.
 
 ### Hosted MCP `capgo_get_build_status` (read-only polls)
 

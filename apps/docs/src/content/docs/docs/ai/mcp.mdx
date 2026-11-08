@@ -160,7 +160,7 @@ Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destruc
 | Tool | Annotations | Notes |
 | ---- | ----------- | ----- |
 | `capgo_prepare_bundle_upload` | `destructiveHint: true` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
-| `capgo_prepare_build_credentials_upload` | `destructiveHint: true` | Returns a signed PUT URL for encrypted credentials. `mode: replace` overwrites stored keys for that platform. Confirm with the user before replace. |
+| `capgo_prepare_build_credentials_upload` | `destructiveHint: true` | Returns a signed PUT URL for encrypted credentials. Omitting `mode` defaults to `replace`, which overwrites stored keys for that platform after the PUT. Confirm with the user before that upload. Use `mode: merge` to update only keys present in the JSON. |
 | `capgo_get_build_status` | `readOnlyHint: true` | Read-only poll on the hosted server (see below). Delete and overwrite tools keep `destructiveHint: true` as before. |
 
 ### Hosted MCP read-only build status
