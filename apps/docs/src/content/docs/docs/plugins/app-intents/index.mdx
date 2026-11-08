@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-app-intents"
-description: "Siri, Shortcuts, Spotlight, Home Screen quick actions, and Apple App Intents for Capacitor apps with a JavaScript dispatch bridge."
+description: "Siri, Shortcuts, Spotlight, Home Screen quick actions, Siri app skills, typed tool intents, and Apple App Intents for Capacitor apps with a JavaScript dispatch bridge."
 tableOfContents: false
 next: false
 prev: false
@@ -8,17 +8,23 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Ship Siri phrases, Shortcuts, Spotlight, Home Screen quick actions, and entity catalogs from Capacitor with a cold start safe invocation queue."
+  tagline: "Ship Siri phrases, Shortcuts, Spotlight, Home Screen quick actions, typed tool intents, and Siri app skills from Capacitor with a cold start safe invocation queue."
   actions:
     - text: Get started
       link: /docs/plugins/app-intents/getting-started/
       icon: right-arrow
       variant: primary
+    - text: Siri app skills
+      link: /docs/plugins/app-intents/app-skills/
+      icon: right-arrow
+      variant: secondary
     - text: GitHub
       link: https://github.com/Cap-go/capacitor-app-intents/
       icon: external
       variant: minimal
 ---
+
+import { Aside } from '@astrojs/starlight/components';
 
 ## Overview
 
@@ -26,11 +32,30 @@ hero:
 
 Pair this plugin with [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcuts-widgets-and-intents/) when you also use Widget Kit, Live Activities, Share Target, or Intent Launcher.
 
+## Siri app skills (iOS 27.3 Developer Preview)
+
+On iOS 27.3, Apple lets apps register **app skills**: multi step instructions Siri can follow inside your app, backed by **tool intents** that return real results to Siri so actions chain in one conversation.
+
+| Capability | What Capgo gives you |
+| --- | --- |
+| Multi step skills | `generate-skills-bundle.mjs` turns `SKILL.md` style entries in `app-intents.codegen.json` into `Skills.skillsbundle` for your Xcode app target. |
+| Typed tool intents | `generate-typed-intents.mjs` emits Swift with parameters, entities, `foregroundOnly`, and optional `awaitJavaScriptResult`. |
+| Results back to Siri | `withInvocationCompletion`, `completeInvocation()`, and `failInvocation()` deliver `value` and `message` so the next tool in a skill can use them. |
+| Capacitor without recompiling every action | Keep business logic in JavaScript; regenerate Swift only when intents or skill bodies change. |
+
+**Example skill flow:** A skill body tells Siri to pick a dish from your catalog, call an `orderDish` tool intent, then speak the JavaScript order summary. The first tool returns `{ value: "pasta" }`; the second tool reads it and confirms out loud.
+
+**Why Capgo:** One plugin covers the pending queue, entity catalogs, codegen scripts, and the bridge that lets hybrid apps return structured tool results without rewriting your web stack in Swift for every feature.
+
+<Aside type="note">
+App skills and `@AppIntent(.tool)` require iOS 27.3 SDK tooling and Apple Intelligence on a physical device for full evaluation. See the [step by step guide](/docs/plugins/app-intents/app-skills/) for guarded APIs and CI safe defaults.
+</Aside>
+
 ## Platform support
 
 | Platform | Support | Notes |
 | --- | --- | --- |
-| iOS | Yes | iOS 16 and later |
+| iOS | Yes | iOS 16 and later; Siri app skills and tool traits need iOS 27.3 SDK (preview) |
 | Android | No | Methods reject with a clear error |
 | Web | No | Guard with Capacitor.getPlatform() |
 
@@ -40,6 +65,8 @@ Pair this plugin with [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcut
 - `removePendingInvocation` - Remove one pending invocation after your handler processes it.
 - `setEntityCatalog` - Persist an entity catalog for a given type string.
 - `setHomeScreenShortcutItems` - Replace Home Screen quick actions (UIApplicationShortcutItems).
+- `completeInvocation` / `failInvocation` - Return or fail tool results when Siri awaits JavaScript (iOS 17+ chaining; skills on iOS 27.3 preview).
+- `setOnscreenEntityContext` / `clearOnscreenEntityContext` - Hint visible catalog rows when the UI is web only.
 
 ## Public API
 
@@ -47,6 +74,10 @@ Pair this plugin with [Siri, Shortcuts, and widgets](/docs/plugins/siri-shortcut
 | --- | --- |
 | `getPendingInvocations` | Return invocations queued before JavaScript was ready. |
 | `removePendingInvocation` | Remove one pending invocation after your handler processes it. |
+| `completeInvocation` | Resolve an invocation awaiting a JavaScript result for Siri. |
+| `failInvocation` | Fail an invocation awaiting a JavaScript result. |
+| `setOnscreenEntityContext` | Publish optional on screen entity hints for catalog queries. |
+| `clearOnscreenEntityContext` | Clear on screen entity hints. |
 | `setEntityCatalog` | Persist an entity catalog for a given type string. |
 | `setHomeScreenShortcutItems` | Replace Home Screen quick actions (UIApplicationShortcutItems). |
 | `indexSpotlightEntities` | Index Spotlight items for your app domain. |
