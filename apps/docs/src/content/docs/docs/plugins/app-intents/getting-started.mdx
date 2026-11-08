@@ -52,7 +52,9 @@ await useAppIntentsListener(handleInvocation);
 
 ### Return results to Siri (tool intents)
 
-For typed codegen intents with `awaitJavaScriptResult: true`, wrap your handler with `withInvocationCompletion` so Siri receives `value` and `message`:
+`withInvocationCompletion`, `completeInvocation`, `failInvocation`, and `setOnscreenEntityContext` ship in plugin **8.2.0+** (see [capacitor-app-intents PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2)). npm **8.1.0** does not export them yet. Install a build from that branch or wait for the release before copying the examples below.
+
+For typed codegen intents with `awaitJavaScriptResult: true`, wrap your handler with `withInvocationCompletion` so Siri receives `value` and `message`. Throw on unknown awaiting intents so `withInvocationCompletion` calls `failInvocation` instead of completing with a generic `Done`:
 
 ```typescript
 import { useAppIntentsListener, withInvocationCompletion } from '@capgo/capacitor-app-intents';
@@ -62,6 +64,7 @@ await useAppIntentsListener(
     if (invocation.name === 'orderDish') {
       return { value: 'Ordered pasta', message: 'Your pasta order is in.' };
     }
+    throw new Error(`Unknown awaiting intent: ${invocation.name}`);
   }),
 );
 ```
