@@ -50,11 +50,15 @@ await useAppIntentsListener(handleInvocation);
 
 `useAppIntentsListener` attaches `appIntentInvoked` and then drains pending items. You can also call `getPendingInvocations()` and `removePendingInvocation()` manually if you prefer explicit control.
 
+`useAppIntentsListener` and `drainPendingInvocations` drop stale **awaiting** items without calling your handler. Native forwards `__capgoTimeoutSeconds` in `params` (default 30, max 600). When `createdAt` is older than that budget, the runtime removes the pending row and moves on.
+
 ### Return results to Siri (tool intents)
 
-`withInvocationCompletion`, `completeInvocation`, `failInvocation`, and `setOnscreenEntityContext` ship in plugin **8.2.0+** (see [capacitor-app-intents PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2)). npm **8.1.0** does not export them yet. Install a build from that branch or wait for the release before copying the examples below.
+`withInvocationCompletion`, `completeInvocation`, `failInvocation`, and `setOnscreenEntityContext` ship in plugin **8.2.0+** (see [capacitor-app-intents PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2), head `175bb323`). npm **8.1.0** does not export them yet. Install a build from that branch or wait for the release before copying the examples below.
 
-For typed codegen intents with `awaitJavaScriptResult: true`, wrap your handler with `withInvocationCompletion` so Siri receives a string result. The native layer uses `value` (or `summary`) for both the chained result and spoken dialog. If `value` is set, a separate `message` is not spoken. Throw on unknown awaiting intents so `withInvocationCompletion` calls `failInvocation` instead of completing with a generic `Done`:
+Only **typed** codegen intents with `awaitJavaScriptResult: true` on **iOS 17+** return `ReturnsValue<String>` to Siri for chaining. The generic `CapgoDispatchAppIntent` can still await JavaScript, but its `perform()` returns an empty `.result()` to Siri (Swift opaque `IntentResult` typing).
+
+For typed awaiting intents, wrap your handler with `withInvocationCompletion`. `performReturningValue` uses `value` or `summary` for chaining and `message` (or the `dialog` argument to `completeInvocation`) for speech. Throw on unknown awaiting intents so `withInvocationCompletion` calls `failInvocation` instead of completing with a generic `Done`. Handler errors still propagate; if `failInvocation` itself fails on the bridge, that failure does not replace your handler error:
 
 ```typescript
 import { useAppIntentsListener, withInvocationCompletion } from '@capgo/capacitor-app-intents';
@@ -62,7 +66,7 @@ import { useAppIntentsListener, withInvocationCompletion } from '@capgo/capacito
 await useAppIntentsListener(
   withInvocationCompletion(async (invocation) => {
     if (invocation.name === 'orderDish') {
-      return { value: 'Ordered pasta' };
+      return { value: 'pasta', message: 'Your pasta order is in.' };
     }
     throw new Error(`Unknown awaiting intent: ${invocation.name}`);
   }),

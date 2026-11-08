@@ -40,7 +40,7 @@ On iOS 27.3, Apple lets apps register **app skills**: multi step instructions Si
 | --- | --- |
 | Multi step skills | `generate-skills-bundle.mjs` turns `SKILL.md` style entries in `app-intents.codegen.json` into `Skills.skillsbundle` for your Xcode app target. |
 | Typed tool intents | `generate-typed-intents.mjs` emits Swift with parameters, entities, `foregroundOnly`, and optional `awaitJavaScriptResult`. |
-| Results back to Siri | `withInvocationCompletion` and `completeInvocation()` return a string via `value` (or `summary`); that same string is spoken and chained. `message` applies only when `value` is omitted. `failInvocation()` reports an error when JavaScript cannot finish. |
+| Results back to Siri | Typed iOS 17+ intents with `awaitJavaScriptResult` return `ReturnsValue<String>` via `value`/`summary`; Siri speaks `message` or `dialog`. `CapgoDispatchAppIntent` can await JS but returns an empty `.result()` to Siri. `failInvocation()` reports errors; handler errors from `withInvocationCompletion` still propagate. |
 | Capacitor without recompiling every action | Keep business logic in JavaScript; regenerate Swift only when intents or skill bodies change. |
 
 **Example skill flow:** A skill body tells Siri to pick a dish from your catalog, call an `orderDish` tool intent, then speak the JavaScript order summary. The first tool returns `{ value: "pasta" }`; the second tool reads it and confirms out loud.
@@ -65,7 +65,8 @@ App skills and `@AppIntent(.tool)` require iOS 27.3 SDK tooling and Apple Intell
 - `removePendingInvocation` - Remove one pending invocation after your handler processes it.
 - `setEntityCatalog` - Persist an entity catalog for a given type string.
 - `setHomeScreenShortcutItems` - Replace Home Screen quick actions (UIApplicationShortcutItems).
-- `completeInvocation` / `failInvocation` - Return or fail tool results when Siri awaits JavaScript (iOS 17+ chaining; skills on iOS 27.3 preview).
+- `completeInvocation` / `failInvocation` - Return or fail tool results when Siri awaits JavaScript (typed iOS 17+ chaining; skills on iOS 27.3 preview).
+- Pending queue hygiene - `useAppIntentsListener` / `drainPendingInvocations` drop expired awaiting items using `__capgoTimeoutSeconds` from native.
 - `setOnscreenEntityContext` / `clearOnscreenEntityContext` - Hint visible catalog rows when the UI is web only.
 
 ## Public API

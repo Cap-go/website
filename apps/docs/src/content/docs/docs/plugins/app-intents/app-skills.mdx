@@ -9,14 +9,14 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Apple documents app skills under [Orchestrating complex actions with app skills](https://developer.apple.com/documentation/appintents/orchestrating-complex-actions-with-app-skills/). The feature ships in the **iOS 27.3 Developer Preview** and needs Apple Intelligence on a **physical device** for skills verification. Simulator is not enough for the full skills evaluation loop.
 
-This guide matches the implementation in [`@capgo/capacitor-app-intents` plugin PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2).
+This guide matches [`@capgo/capacitor-app-intents` PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2) (plugin head `175bb323`).
 
 ## What you get
 
 - **Multi step skills**: Siri can follow a skill body that orchestrates several tool intents in one request.
 - **Typed intents**: `generate-typed-intents.mjs` emits Swift with parameters, entities, and string results for chaining.
-- **Real results to Siri**: `awaitJavaScriptResult` intents wait for JavaScript and surface `value` / `message` to Siri via `completeInvocation()` or `withInvocationCompletion`.
-- **Generic path unchanged**: `CapgoDispatchAppIntent` and phrase codegen from `generate-app-shortcuts.mjs` still work for simple shortcuts.
+- **Real results to Siri**: Typed iOS 17+ intents with `awaitJavaScriptResult` return `ReturnsValue<String>` after JavaScript completes (`completeInvocation()` or `withInvocationCompletion`).
+- **Generic dispatch path**: `CapgoDispatchAppIntent` and phrase codegen from `generate-app-shortcuts.mjs` still run JavaScript, including when `awaitsJavaScriptResult` is true, but Siri receives an empty `.result()` because of Swift opaque `IntentResult` limits on that type.
 
 ## Install
 
@@ -46,6 +46,11 @@ Example intent flags (from the plugin example config):
 - `foregroundOnly: true` asks the system to bring your app forward before running the tool.
 - `execution: "javascript"` runs through `CapgoIntentPerformExecutor`; use `"native"` to prefer `CapgoNativeIntentHandlerRegistry`.
 
+**Entity parameters in generated Swift:**
+
+- `CapgoCatalogEntity` parameters add `catalogType`, `entityId`, and `title` keys on the parameter name prefix (for example `dishCatalogType`, `dishEntityId`, `dishTitle`).
+- Other `AppEntity` types add `<name>Id` only (for example `dishId` for parameter `dish`).
+
 ## Generate typed intents
 
 ```bash
@@ -60,7 +65,7 @@ Generated intents compile on iOS 16+ without the `@AppIntent(.tool)` trait. Unco
 
 ## Generate Skills.skillsbundle
 
-Skills bundle content comes from the `skills` array in the same codegen JSON. The generator writes a folder you rename or copy to `Skills.skillsbundle`:
+Skills bundle content comes from the `skills` array in the same codegen JSON. Each generated skill folder includes a `.capgo-generated` marker. Re-running the generator removes only skill directories that still carry that marker; hand-authored skill folders without the marker are kept.
 
 ```bash
 node node_modules/@capgo/capacitor-app-intents/scripts/generate-skills-bundle.mjs \
@@ -77,7 +82,9 @@ After install, verify `Skills.skillsc` exists under `MyApp.app/Metadata.appinten
 
 ## JavaScript completion for Siri
 
-Register your listener with `withInvocationCompletion` so awaiting invocations call `completeInvocation` or `failInvocation` for you. When `value` is present, native code uses it for both the returned string and what Siri speaks; set `message` (or `summary`) only when you omit `value`.
+Register your listener with `withInvocationCompletion` so awaiting invocations call `completeInvocation` or `failInvocation` for you. On typed iOS 17+ tool intents, `performReturningValue` passes `value` or `summary` into `ReturnsValue<String>` and uses `message` or the `dialog` option for what Siri speaks. Handler errors still throw after `failInvocation` is attempted; bridge failures during `failInvocation` do not replace the handler error.
+
+`useAppIntentsListener` and `drainPendingInvocations` skip awaiting invocations whose age exceeds `params.__capgoTimeoutSeconds` (set by native when the intent runs) and remove them from the pending store without calling your handler.
 
 ```typescript
 import {
@@ -90,7 +97,7 @@ import {
 await useAppIntentsListener(
   withInvocationCompletion(async (invocation) => {
     if (invocation.name === 'orderDish') {
-      return { value: 'Ordered pasta' };
+      return { value: 'pasta', message: 'Your pasta order is in.' };
     }
     throw new Error(`Unknown awaiting intent: ${invocation.name}`);
   }),
@@ -123,7 +130,7 @@ CapgoNativeIntentHandlerRegistry.shared.register(actionName: "pingNative") { _ i
 }
 ```
 
-Set `execution: "native"` on the generated intent. Native results use the same `value` / `message` keys Siri expects for chaining.
+Set `execution: "native"` on the generated intent. Native handlers return the same `value` / `summary` / `message` shape; chaining reads `value` or `summary`, speech prefers `message`.
 
 ## Entity catalogs and on screen context
 
@@ -174,7 +181,7 @@ Full on screen awareness (`appEntityIdentifier`, `AppEntityUIElementsContext`) i
 </Aside>
 
 - **SDK**: Typed tool intents and skills bundle metadata expect the iOS 27.3 SDK (Xcode 27.3 beta).
-- **Siri chaining without tools**: `completeInvocation()` / `failInvocation()` also apply to typed codegen on iOS 17+ for string results; the generic `CapgoDispatchAppIntent` path still does not return spoken strings on iOS 16.
+- **Siri chaining without tools**: `completeInvocation()` / `failInvocation()` apply to typed codegen on iOS 17+ with `awaitJavaScriptResult`. Generic `CapgoDispatchAppIntent` still enqueues JavaScript but returns an empty `.result()` to Siri even when it awaits a result.
 - **Simulator**: Fine for shortcut dispatch and JavaScript handlers; not for full app skills evaluation per Apple preview guidance.
 
 ## Related
