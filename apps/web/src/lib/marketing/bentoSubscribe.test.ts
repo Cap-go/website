@@ -2,6 +2,8 @@ import { describe, expect, test } from 'bun:test'
 import { BENTO_SECURITY_ADVISORY_SUBSCRIBER_TAG } from '@/config/bentoMarketing'
 import { isSecurityAdvisoryEmail, subscribeSecurityAdvisoryEmail } from './bentoSubscribe'
 
+type BentoImportBody = { subscribers: { email: string; tags: string }[] }
+
 describe('isSecurityAdvisoryEmail', () => {
   test('accepts a normal address', () => {
     expect(isSecurityAdvisoryEmail('dev@capgo.app')).toBe(true)
@@ -31,11 +33,11 @@ describe('subscribeSecurityAdvisoryEmail', () => {
 
   test('posts subscriber payload to Bento with site_uuid', async () => {
     let calledUrl = ''
-    let body: { subscribers: { email: string; tags: string }[] } | null = null
+    let capturedBody: BentoImportBody | undefined
     const globalFetch = globalThis.fetch
     globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
       calledUrl = typeof input === 'string' ? input : input.toString()
-      body = JSON.parse(String(init?.body))
+      capturedBody = JSON.parse(String(init?.body)) as BentoImportBody
       return new Response('{}', { status: 200 })
     }) as typeof fetch
 
@@ -43,8 +45,8 @@ describe('subscribeSecurityAdvisoryEmail', () => {
       const response = await subscribeSecurityAdvisoryEmail('dev@capgo.app', env)
       expect(response.status).toBe(200)
       expect(calledUrl).toContain('site_uuid=site-uuid-123')
-      expect(body?.subscribers[0].email).toBe('dev@capgo.app')
-      expect(body?.subscribers[0].tags).toBe(BENTO_SECURITY_ADVISORY_SUBSCRIBER_TAG)
+      expect(capturedBody?.subscribers[0]?.email).toBe('dev@capgo.app')
+      expect(capturedBody?.subscribers[0]?.tags).toBe(BENTO_SECURITY_ADVISORY_SUBSCRIBER_TAG)
     } finally {
       globalThis.fetch = globalFetch
     }
