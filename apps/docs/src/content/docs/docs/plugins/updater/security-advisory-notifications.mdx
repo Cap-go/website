@@ -1,6 +1,6 @@
 ---
 title: "Security advisory notifications"
-description: "Opt in to email alerts and a JSON feed when published GitHub security advisories affect Capgo npm packages, with version ranges, patched releases, and upgrade steps."
+description: "Opt in to email alerts and a JSON feed when published GitHub security advisories affect Capgo npm packages, with version ranges, patched releases, and package-specific upgrade steps."
 sidebar:
   order: 8
 ---
@@ -27,13 +27,15 @@ Each notification email summarizes the advisory in plain language. It includes:
 
 - The **affected version range** for each listed package
 - The **patched version** for each affected major release line when a fix is available
-- **Upgrade steps** to move your app to a safe version: install the patched package with npm, run `npx cap sync`, then rebuild and ship your native app so the updated native plugin code is included
+- **Upgrade steps** for each affected package:
+  - **`@capgo/cli`:** Install the patched CLI (for example `npm install -g @capgo/cli@<patched_version>` or bump the version your CI uses). A CLI-only advisory does not require `npx cap sync` or a new native store build.
+  - **Capacitor plugins** (`@capgo/capacitor-updater` and other `@capgo/capacitor-*` packages): Install the patched npm package, run `npx cap sync`, then rebuild and ship your native app so the updated native plugin code is included.
 
 Capgo does not use these emails for marketing. They are limited to published security advisories for the packages above.
 
 <Aside type="note">
 
-Live updates from Capgo deliver web bundles, including JavaScript, HTML, and CSS. Security fixes in native plugin code still require updating the npm package, syncing Capacitor, and releasing a new store build. Treat advisory emails as a prompt to bump dependencies and ship a native release, not only a live update bundle.
+Live updates from Capgo deliver web bundles, including JavaScript, HTML, and CSS. Security fixes in native plugin code still require updating the npm package, syncing Capacitor, and releasing a new store build. When an advisory lists only `@capgo/cli`, updating the CLI is enough for that fix. Treat advisory emails as a prompt to follow the upgrade steps for each listed package, not only a live update bundle.
 
 </Aside>
 
@@ -97,7 +99,7 @@ Field notes:
 | `affected_range` | Semver range of versions impacted for that package |
 | `patched_version` | First fixed version on the relevant major line, or `null` if no fix is published yet |
 | `capacitor_plus_version` | When Capacitor+ bundles a related fix, the Capacitor+ version that includes it |
-| `fix_steps` | Human-readable remediation text aligned with the notification email |
+| `fix_steps` | Human-readable remediation text aligned with the notification email (CLI-only vs native plugin steps as applicable) |
 | `published_at` | ISO 8601 timestamp when the advisory was published |
 | `url` | Canonical link to the GitHub security advisory |
 | `plus_release_url` | Link to a Capacitor+ release when applicable |
