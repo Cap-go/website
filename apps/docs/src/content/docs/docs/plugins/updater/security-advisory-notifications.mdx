@@ -43,7 +43,7 @@ Subscription uses **double opt-in** by email.
 
 <Steps>
 
-1. Submit your email address on the **security updates subscription form** (hosted with the advisory notification service; the public URL is configured at deploy time).
+1. Submit your email address on the **security updates subscription form** (hosted with the advisory notification service; the public URL is configured at deploy time). The form sends a Cloudflare Turnstile token with your request so Capgo can verify the submission before sending a confirmation email.
 2. Open the confirmation message and click the link inside it to confirm you want alerts.
 3. After confirmation, you receive email when new qualifying advisories are published.
 
