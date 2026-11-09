@@ -622,8 +622,7 @@ const messages = {
   brand_asset_banner_navy_title: 'Logo on navy banner',
   brand_asset_youtube_banner_desc: '2560×1440 YouTube channel art. The white lockup sits inside the area YouTube shows on every device, on Capgo banner navy.',
   brand_asset_youtube_banner_title: 'YouTube channel banner',
-  brand_asset_podcast_cover_desc:
-    '3000×3000 square cover for the Capgo podcast, sized for Apple Podcasts, Spotify, and other directories. White mark and wordmark on Capgo navy.',
+  brand_asset_podcast_cover_desc: '3000×3000 square cover for the Capgo podcast, sized for Apple Podcasts, Spotify, and other directories. White mark and wordmark on Capgo navy.',
   brand_asset_podcast_cover_title: 'Podcast cover art',
   brand_asset_dark_desc: 'Navy lockup for light backgrounds, press PDFs, and documents. Keep clear space around the mark.',
   brand_asset_dark_title: 'Logo for light backgrounds',
@@ -881,7 +880,7 @@ const messages = {
     'Capawesome targets stability with fewer npm releases on the live-update plugin (13 publishes on 8 days from August 1 through October 19, 2026, per npm). That steadier rhythm suits teams who prefer less churn over tracking the fastest upstream fixes.',
   compare_capawesome_better_4_title: 'You value stability over speed',
   compare_capawesome_not_for_1:
-    'You want Capawesome\'s slower, more stable release rhythm and accept waiting longer for security patches, bug fixes, and Capacitor compatibility updates on npm.',
+    "You want Capawesome's slower, more stable release rhythm and accept waiting longer for security patches, bug fixes, and Capacitor compatibility updates on npm.",
   compare_capawesome_not_for_2: 'You want a free plan after the trial; Capgo has a 14-day trial but no free plan.',
   compare_capawesome_company: 'Capawesome (Genz IT Solutions GmbH), based in Germany. Live updates launched in 2024.',
   compare_capawesome_eyebrow: 'Capawesome Cloud alternative',
@@ -1454,8 +1453,7 @@ const messages = {
   pricing_native_build_queue_priority_maker: 'Elevated',
   pricing_native_build_queue_priority_team: 'High',
   pricing_native_build_queue_priority_enterprise: 'Highest priority',
-  pricing_native_build_queue_priority_line:
-    'Native build queue priority: {tier} when the queue is busy (every waiting build gains priority over time).',
+  pricing_native_build_queue_priority_line: 'Native build queue priority: {tier} when the queue is busy (every waiting build gains priority over time).',
   native_build_queue_priority_explanation:
     'Plans set a baseline place in line for native cloud builds when many builds are waiting. Solo is standard, Maker is elevated, Team is high, and Enterprise is highest priority. The queue also gives every waiting build more priority over time, so no build waits forever.',
   pricing_explainer_cancel: 'Cancel anytime, access until the period ends',
@@ -4749,11 +4747,13 @@ const messages = {
   solutions_direct_zero_outdated: 'Splash screen held until the update is ready',
   solutions_docs_title: 'Docs for this workflow',
   solutions_security_fixes_title: 'Fix Mobile App Security Holes the Same Day',
-  solutions_security_fixes_description: 'Found a security hole in your Capacitor app? Ship the fix to users the same day with encrypted, signed Capgo live updates. No store review wait.',
+  solutions_security_fixes_description:
+    'Found a security hole in your Capacitor app? Ship the fix to users the same day with encrypted, signed Capgo live updates. No store review wait.',
   solutions_security_fixes_short: 'Same-Day Security Fixes',
   solutions_security_fixes_badge: 'For teams that just found a security hole',
   solutions_security_fixes_h1: 'Found a security hole in your app? Fix it for every user today.',
-  solutions_security_fixes_lead: 'With Capgo, a fix in your web code reaches users at their next app open, not after days of store review. Every update is end-to-end encrypted and signed, so nobody can read or fake it on the way.',
+  solutions_security_fixes_lead:
+    'With Capgo, a fix in your web code reaches users at their next app open, not after days of store review. Every update is end-to-end encrypted and signed, so nobody can read or fake it on the way.',
   solutions_security_fixes_stat1_value: 'Same day',
   solutions_security_fixes_stat1_label: 'from fix to users’ phones',
   solutions_security_fixes_stat2_value: 'End-to-end',
@@ -4766,7 +4766,8 @@ const messages = {
   solutions_security_fixes_visual2_desc: 'Apple and Google allow web code updates without a new review.',
   solutions_security_fixes_problem_title: 'A security hole in a shipped app stays open for days',
   solutions_security_fixes_pain1_title: 'Apps ship fast, with holes',
-  solutions_security_fixes_pain1_desc: 'AI-built and rushed apps ship with exposed API keys, open database rules and old vulnerable packages. Attackers now scan app stores for them.',
+  solutions_security_fixes_pain1_desc:
+    'AI-built and rushed apps ship with exposed API keys, open database rules and old vulnerable packages. Attackers now scan app stores for them.',
   solutions_security_fixes_pain2_title: 'Store review keeps the hole open',
   solutions_security_fixes_pain2_desc: 'Even with a fix ready, App Store or Play Store review can take a day or more. Meanwhile users keep running the vulnerable version.',
   solutions_security_fixes_pain3_title: 'Users don’t update',
@@ -4785,7 +4786,8 @@ const messages = {
   solutions_security_fixes_how1_title: 'Turn on end-to-end encryption once',
   solutions_security_fixes_how1_body: 'Create your key pair. The private key stays on your machine and the public key is saved in your app config.',
   solutions_security_fixes_how2_title: 'Fix the code and upload it',
-  solutions_security_fixes_how2_body: 'Patch the vulnerable code or update the package, build your web app and upload it. The CLI encrypts and signs the bundle before it leaves your machine.',
+  solutions_security_fixes_how2_body:
+    'Patch the vulnerable code or update the package, build your web app and upload it. The CLI encrypts and signs the bundle before it leaves your machine.',
   solutions_security_fixes_how3_title: 'Install the fix right away',
   solutions_security_fixes_how3_body: 'Set autoUpdate to always and the app installs the fix as soon as it downloads, instead of waiting for the next restart.',
   solutions_security_fixes_how4_title: 'Check who has it, roll back if needed',
@@ -4793,13 +4795,17 @@ const messages = {
   solutions_security_fixes_cap_title: 'Why Capgo is safe to ship security fixes with',
   solutions_security_fixes_cap_lead: 'An update system can be attacked too. Capgo is built so it cannot push code that you did not sign.',
   solutions_security_fixes_cap1_title: 'End-to-end encrypted bundles',
-  solutions_security_fixes_cap1_desc: 'Bundles are encrypted before they leave your machine and decrypted only inside your app. Capgo, its storage and its CDN see only encrypted files.',
+  solutions_security_fixes_cap1_desc:
+    'Bundles are encrypted before they leave your machine and decrypted only inside your app. Capgo, its storage and its CDN see only encrypted files.',
   solutions_security_fixes_cap2_title: 'Signed and checked on every device',
-  solutions_security_fixes_cap2_desc: 'Each bundle has a checksum signed with your private key. The app checks it before installing, and deletes any changed or fake bundle without running it.',
+  solutions_security_fixes_cap2_desc:
+    'Each bundle has a checksum signed with your private key. The app checks it before installing, and deletes any changed or fake bundle without running it.',
   solutions_security_fixes_cap3_title: 'Your private key never leaves your machine',
-  solutions_security_fixes_cap3_desc: 'The CLI never sends your private key to Capgo, and Capgo does not store it. Without it, nobody can publish a valid encrypted update to your app.',
+  solutions_security_fixes_cap3_desc:
+    'The CLI never sends your private key to Capgo, and Capgo does not store it. Without it, nobody can publish a valid encrypted update to your app.',
   solutions_security_fixes_cap4_title: 'Native fixes, built fast',
-  solutions_security_fixes_cap4_desc: 'Live updates change web code only. A fix in native code still needs a signed store build, and Capgo Build makes that build in minutes, without a Mac.',
+  solutions_security_fixes_cap4_desc:
+    'Live updates change web code only. A fix in native code still needs a signed store build, and Capgo Build makes that build in minutes, without a Mac.',
   solutions_security_fixes_trust_label: 'Security and compliance',
   solutions_security_fixes_trust_title: 'Certified, and open to review',
   solutions_security_fixes_trust_lead: 'Check how Capgo works instead of taking our word for it.',
@@ -4820,15 +4826,20 @@ const messages = {
   solutions_security_fixes_faq_title: 'Security fix questions',
   solutions_security_fixes_faq_desc: 'What live updates can fix, and what they cannot.',
   solutions_security_fixes_faq1_q: 'Can I ship a security fix without App Store review?',
-  solutions_security_fixes_faq1_a: 'Yes, when the fix is in your web code: JavaScript, HTML, CSS or assets. Apple and Google allow apps to update this code without a new review, as long as the app’s main purpose stays the same. A fix in native code needs a new store build.',
+  solutions_security_fixes_faq1_a:
+    'Yes, when the fix is in your web code: JavaScript, HTML, CSS or assets. Apple and Google allow apps to update this code without a new review, as long as the app’s main purpose stays the same. A fix in native code needs a new store build.',
   solutions_security_fixes_faq2_q: 'How fast does the fix reach users?',
-  solutions_security_fixes_faq2_a: 'The app downloads the fix in the background and installs it at the next app open. With autoUpdate set to always, it is installed as soon as it downloads, so active users get it the same day.',
+  solutions_security_fixes_faq2_a:
+    'The app downloads the fix in the background and installs it at the next app open. With autoUpdate set to always, it is installed as soon as it downloads, so active users get it the same day.',
   solutions_security_fixes_faq3_q: 'Can an attacker use Capgo to push code to my app?',
-  solutions_security_fixes_faq3_a: 'Not without your private key. With encryption on, the app installs only bundles whose signed checksum matches your key, and deletes any other bundle.',
+  solutions_security_fixes_faq3_a:
+    'Not without your private key. With encryption on, the app installs only bundles whose signed checksum matches your key, and deletes any other bundle.',
   solutions_security_fixes_faq4_q: 'Does encryption stop people from reading my app’s code?',
-  solutions_security_fixes_faq4_a: 'No. Encryption protects bundles in storage and on the way to devices. The key that decrypts them is inside your app, so someone with your app can still read the code. Never put secrets in your web code.',
+  solutions_security_fixes_faq4_a:
+    'No. Encryption protects bundles in storage and on the way to devices. The key that decrypts them is inside your app, so someone with your app can still read the code. Never put secrets in your web code.',
   solutions_security_fixes_faq5_q: 'What if the fix breaks something?',
-  solutions_security_fixes_faq5_a: 'Go back to the previous bundle from the dashboard or the CLI. You can also send the fix to a small group first with a channel, then to everyone.',
+  solutions_security_fixes_faq5_a:
+    'Go back to the previous bundle from the dashboard or the CLI. You can also send the fix to a small group first with a channel, then to everyone.',
   solutions_security_fixes_cta_title: 'Be ready before the next security hole',
   solutions_security_fixes_cta_subtitle: 'Set up Capgo during the 14-day free trial, so your next security fix takes minutes to ship, not days.',
   solutions_security_fixes_cta_subtitle_direct: 'Set up Capgo with a 14-day money-back guarantee, so your next security fix takes minutes to ship, not days.',
@@ -7084,8 +7095,7 @@ const messages = {
   review_appflow_title: 'Ionic Appflow review for Capacitor teams',
   review_appflow_meta_description: 'Honest Capgo-voiced overview of Ionic Appflow: who it serves, the wind-down timeline, and where Capgo fits for live updates and native builds.',
   review_appflow_hero_title: 'Ionic Appflow: what it is today',
-  review_appflow_hero_subtitle:
-    'Appflow bundled CI, live updates, and store publishing for Ionic apps. Ionic is winding the product down, so teams need a migration plan.',
+  review_appflow_hero_subtitle: 'Appflow bundled CI, live updates, and store publishing for Ionic apps. Ionic is winding the product down, so teams need a migration plan.',
   review_appflow_what_title: 'What Appflow was',
   review_appflow_what_p1:
     'Appflow connected git repos to cloud builds, channel-based live updates, and store submission helpers. It worked well if your stack stayed inside Ionic’s toolchain.',
@@ -7118,18 +7128,15 @@ const messages = {
   review_codepush_hero_title: 'Microsoft CodePush: legacy status',
   review_codepush_hero_subtitle: 'CodePush pioneered JavaScript OTA updates for mobile. The hosted service is gone; Capacitor teams need a successor.',
   review_codepush_what_title: 'What CodePush did well',
-  review_codepush_what_p1:
-    'Free tier, Microsoft infrastructure, and simple promote/rollback flows for JavaScript bundles, especially for React Native.',
+  review_codepush_what_p1: 'Free tier, Microsoft infrastructure, and simple promote/rollback flows for JavaScript bundles, especially for React Native.',
   review_codepush_change_title: 'Retirement',
   review_codepush_change_p1: 'App Center CodePush shutdown pushed teams to self-host, change stacks, or adopt vendors built for their framework.',
   review_codepush_capgo_title: 'Capacitor path',
-  review_codepush_capgo_p1:
-    'Capgo is built for Capacitor live updates with signing, channels, and analytics, not a drop-in CodePush SDK replacement.',
+  review_codepush_capgo_p1: 'Capgo is built for Capacitor live updates with signing, channels, and analytics, not a drop-in CodePush SDK replacement.',
   review_codepush_stay_title: 'Who should stay on CodePush',
   review_codepush_stay_html_1:
     'Your app is <a class="text-emerald-400 underline" href="https://github.com/microsoft/code-push-server" rel="noopener noreferrer" target="_blank">React Native</a> and you self-host the archived standalone server with promote and rollback flows you already run.',
-  review_codepush_stay_html_2:
-    'You are sunsetting the app and only need legacy App Center exports captured before the March 31, 2025 shutdown.',
+  review_codepush_stay_html_2: 'You are sunsetting the app and only need legacy App Center exports captured before the March 31, 2025 shutdown.',
   best_capacitor_live_updates_title: 'Best Capacitor live update platform',
   best_ai_tools_capacitor_title: 'Best AI tools to build Capacitor apps',
   best_ai_tools_capacitor_meta_description:
@@ -7165,8 +7172,7 @@ const messages = {
   best_appflow_alternative_body_li2: 'Native iOS and Android builds',
   best_appflow_alternative_body_li3: 'Documented migration from Appflow',
   best_codepush_alternative_title: 'Best CodePush alternative for Capacitor',
-  best_codepush_alternative_meta_description:
-    'After App Center CodePush, Capacitor and Ionic teams need a maintained OTA platform. Compare options and migration guides.',
+  best_codepush_alternative_meta_description: 'After App Center CodePush, Capacitor and Ionic teams need a maintained OTA platform. Compare options and migration guides.',
   best_codepush_alternative_ranking_html:
     'For Capacitor and Ionic apps, start with the sourced comparison on <a class="text-emerald-400 underline" href="/alternatives/codepush/">Capgo vs CodePush</a>. React Native teams should compare Expo EAS Update instead.',
   best_appflow_alternative_ranking_html:
@@ -7206,8 +7212,7 @@ const messages = {
   migrate_from_codepush_title: 'Migrate from Microsoft CodePush',
   migrate_from_codepush_meta_description: 'Export from App Center CodePush, remove SDK wiring, and adopt Capgo for Capacitor live updates.',
   migrate_from_codepush_hero_title: 'Leave App Center CodePush',
-  migrate_from_codepush_hero_subtitle:
-    'CodePush is retired. Uninstall SDK dependencies, update CSP, and ship Capacitor bundles through Capgo.',
+  migrate_from_codepush_hero_subtitle: 'CodePush is retired. Uninstall SDK dependencies, update CSP, and ship Capacitor bundles through Capgo.',
   migrate_from_codepush_steps_title: 'Suggested path',
   migrate_from_codepush_steps_p1: 'Use App Center migration blog posts for cleanup, then install the Capgo updater and map channels to your old promote flow.',
   migrate_from_codepush_steps_li1: 'Read App Center migration articles on the blog',
@@ -7521,6 +7526,69 @@ const messages = {
   oss_apps_mimesis_themes_alt: 'Mimesis theme picker with Expressions, Art, Improbable, and Rebus decks',
   oss_apps_forgr_home_alt: 'Forgr home grid of personal tools: Chords, Rent Split, Groceries, Plants, Habits, Tip Split, and Focus',
   oss_apps_forgr_chat_alt: 'Forgr chat turning a request about compound interest into a new tool with sliders',
+  cplus_sec_meta_title: 'Capacitor+ security',
+  cplus_sec_meta_description:
+    'Capacitor+ is Capgo patched, continuously synced Capacitor. Get security-reviewed releases, documented CLI audit findings, and optional advisory emails.',
+  cplus_sec_breadcrumb: 'Capacitor+ security',
+  cplus_sec_eyebrow: 'Patched open source Capacitor',
+  cplus_sec_hero_title: 'Security maintenance for Capacitor, shipped like a product',
+  cplus_sec_hero_lead:
+    'Capacitor+ is an automated fork of Capacitor maintained by Capgo. It tracks upstream, merges community fixes faster, and publishes npm packages under @capacitor-plus while security work stays visible in the repo.',
+  cplus_sec_hero_point_one: 'Drop-in @capacitor-plus packages with the same Capacitor API',
+  cplus_sec_hero_point_two: 'Daily upstream sync with CI and manual review on conflict-prone changes',
+  cplus_sec_hero_point_three: 'Public security notes in the capacitor-plus repo',
+  cplus_sec_hero_point_four: 'Links to Capgo researcher docs and GitHub security advisories',
+  cplus_sec_cta_repo: 'View capacitor-plus on GitHub',
+  cplus_sec_cta_docs: 'Capacitor+ getting started',
+  cplus_sec_what_title: 'What you get with Capacitor+',
+  cplus_sec_what_body:
+    'Think of Capacitor+ as supported open source for your native runtime. You stay close to ionic-team/capacitor, but you are not stuck waiting on a single upstream queue when a security fix or stuck PR matters for production.',
+  cplus_sec_pillar_fork_title: 'Patched fork on npm',
+  cplus_sec_pillar_fork_body:
+    'Install @capacitor-plus/core, @capacitor-plus/cli, @capacitor-plus/android, and @capacitor-plus/ios. Capgo publishes from the plus branch after CI and review.',
+  cplus_sec_pillar_review_title: 'Security checks on upstream sync',
+  cplus_sec_pillar_review_body:
+    'Every upstream sync pull request is reviewed for command injection, path traversal, hardcoded secrets, breaking API changes, stability issues, data safety, and suspicious code.',
+  cplus_sec_pillar_advisories_title: 'Transparent security notes',
+  cplus_sec_pillar_advisories_body:
+    'The repo includes SECURITY_AUDIT_CLI.md, a public CLI audit with severity-tagged findings. Capgo also publishes GitHub security advisories for its own products.',
+  cplus_sec_pillar_upstream_title: 'Upstream coordination',
+  cplus_sec_pillar_upstream_body:
+    'Capgo lands fixes on Capacitor+ first when that is the fastest path for customers, then opens pull requests on ionic-team/capacitor when the change belongs upstream.',
+  cplus_sec_review_title: 'Review checklist on every upstream sync',
+  cplus_sec_review_lead:
+    'The capacitor-plus README lists what reviewers look for before a sync merges. Upstream sync pull requests require manual review and are not automatically merged.',
+  cplus_sec_review_source_prefix: 'See the Review Expectations table in the',
+  cplus_sec_review_source_link: 'Capacitor+ README',
+  cplus_sec_review_security: 'Security: injection, traversal, secrets, XSS',
+  cplus_sec_review_breaking: 'Breaking changes: API removals and signature changes',
+  cplus_sec_review_stability: 'Stability: null checks, exceptions, races',
+  cplus_sec_review_data: 'Data safety: privacy and insecure storage',
+  cplus_sec_review_integrity: 'Code integrity: obfuscation and suspicious network calls',
+  cplus_sec_audit_title: 'Documented CLI audit findings',
+  cplus_sec_audit_lead:
+    'SECURITY_AUDIT_CLI.md in Cap-go/capacitor-plus lists six exploitable CLI issues with file and line references. Treat it as the public record of known risk areas Capgo tracks in the fork.',
+  cplus_sec_audit_no_cve_note:
+    'The capacitor-plus README does not list CVE IDs today. This table reflects documented audit findings, not a guarantee that every row is already fixed in npm.',
+  cplus_sec_audit_col_severity: 'Severity',
+  cplus_sec_audit_col_title: 'Finding',
+  cplus_sec_audit_col_source: 'Source',
+  cplus_sec_audit_pr_note: 'The audit shipped in merged pull request',
+  cplus_sec_subscribe_title: 'Capacitor security advisory emails',
+  cplus_sec_subscribe_lead: 'Get an email when Capgo documents a Capacitor-related security issue, what changed, and how to update. One address, no account required.',
+  cplus_sec_subscribe_placeholder: 'you@company.com',
+  cplus_sec_subscribe_cta: 'Subscribe',
+  cplus_sec_subscribe_success: 'You are on the list. Watch your inbox for the next advisory.',
+  cplus_sec_subscribe_invalid_email: 'Enter a valid email address.',
+  cplus_sec_subscribe_unavailable: 'Sign-up is temporarily unavailable. Try again later.',
+  cplus_sec_subscribe_network: 'We could not reach the server. Check your connection and try again.',
+  cplus_sec_subscribe_privacy: 'We use your email only for security advisories. See our',
+  cplus_sec_resources_title: 'Researcher and policy links',
+  cplus_sec_link_capgo_advisories: 'Capgo GitHub security advisories',
+  cplus_sec_service_name: 'Capacitor+ security maintenance',
+  cplus_sec_nav_label: 'Capacitor+ security',
+  cplus_sec_nav_tagline: 'Patched Capacitor fork and advisories',
+  cplus_sec_platform_desc: 'Stay on supported Capacitor builds with Capgo security review and public audit notes.',
 } as const
 
 export function formatMessage(value: string, values: MessageValues = {}): string {

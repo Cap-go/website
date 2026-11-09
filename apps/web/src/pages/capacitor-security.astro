@@ -1,0 +1,246 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import SecurityAdvisorySubscribe from '@/components/marketing/SecurityAdvisorySubscribe.astro'
+import m from '@/copy/messages'
+import { capacitorPlusCliAuditFindings, capacitorPlusResourceLinks } from '@/data/capacitorPlusSecuritySources'
+import { createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const brand = config.brand
+
+const title = `${brand} | ${m.cplus_sec_meta_title({}, { locale })}`
+const description = m.cplus_sec_meta_description({}, { locale })
+const keywords = ['Capacitor security', 'Capacitor+', 'capacitor-plus', 'patched Capacitor', 'Capacitor CVE', 'Capgo']
+
+const pageUrl = new URL(Astro.url.pathname, Astro.url.origin).href
+const homeUrl = `${config.baseUrl}${getRelativeLocaleUrl(locale, '/')}`
+const docsCapacitorPlus = getRelativeLocaleUrl(locale, 'docs/plugins/capacitor-plus/getting-started/')
+const bugBountyUrl = getRelativeLocaleUrl(locale, 'bug-bounty/')
+const securityPolicyUrl = getRelativeLocaleUrl(locale, 'security/')
+
+const pillars = [
+  {
+    title: m.cplus_sec_pillar_fork_title({}, { locale }),
+    body: m.cplus_sec_pillar_fork_body({}, { locale }),
+  },
+  {
+    title: m.cplus_sec_pillar_review_title({}, { locale }),
+    body: m.cplus_sec_pillar_review_body({}, { locale }),
+  },
+  {
+    title: m.cplus_sec_pillar_advisories_title({}, { locale }),
+    body: m.cplus_sec_pillar_advisories_body({}, { locale }),
+  },
+  {
+    title: m.cplus_sec_pillar_upstream_title({}, { locale }),
+    body: m.cplus_sec_pillar_upstream_body({}, { locale }),
+  },
+]
+
+const reviewChecks = [
+  m.cplus_sec_review_security({}, { locale }),
+  m.cplus_sec_review_breaking({}, { locale }),
+  m.cplus_sec_review_stability({}, { locale }),
+  m.cplus_sec_review_data({}, { locale }),
+  m.cplus_sec_review_integrity({}, { locale }),
+]
+
+const serviceLd = createServiceLdJson(config, {
+  name: m.cplus_sec_service_name({}, { locale }),
+  description,
+  url: pageUrl,
+  serviceType: 'Open source security maintenance',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(
+  config,
+  createWebPageLdJson(config, {
+    name: title,
+    description,
+    url: pageUrl,
+    inLanguage: locale,
+  }),
+  {
+    includeOrganization: true,
+    includeBreadcrumbs: true,
+    breadcrumbs: [
+      { name: m.home({}, { locale }), url: homeUrl },
+      { name: m.cplus_sec_breadcrumb({}, { locale }), url: pageUrl },
+    ],
+    additionalEntities: [serviceLd],
+  },
+)
+
+const content = { title, description, keywords, ldJSON }
+---
+
+<Layout content={content}>
+  <div class="hero-wash">
+    <section class="relative overflow-hidden bg-slate-950 py-20 sm:py-24">
+      <div class="absolute inset-0 -z-10 bg-gray-800/40" aria-hidden="true"></div>
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold tracking-wide text-sky-300 uppercase">{m.cplus_sec_eyebrow({}, { locale })}</p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">{m.cplus_sec_hero_title({}, { locale })}</h1>
+          <p class="mt-6 text-lg leading-8 text-slate-300">{m.cplus_sec_hero_lead({}, { locale })}</p>
+          <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+            <li class="rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-200 ring-1 ring-white/10">{m.cplus_sec_hero_point_one({}, { locale })}</li>
+            <li class="rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-200 ring-1 ring-white/10">{m.cplus_sec_hero_point_two({}, { locale })}</li>
+            <li class="rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-200 ring-1 ring-white/10">{m.cplus_sec_hero_point_three({}, { locale })}</li>
+            <li class="rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-200 ring-1 ring-white/10">{m.cplus_sec_hero_point_four({}, { locale })}</li>
+          </ul>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href={capacitorPlusResourceLinks.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/20 transition hover:bg-slate-100"
+            >
+              {m.cplus_sec_cta_repo({}, { locale })}
+            </a>
+            <a
+              href={docsCapacitorPlus}
+              class="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:text-sky-200"
+            >
+              {m.cplus_sec_cta_docs({}, { locale })}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{m.cplus_sec_what_title({}, { locale })}</h2>
+          <p class="mt-4 text-lg leading-8 text-slate-600">{m.cplus_sec_what_body({}, { locale })}</p>
+        </div>
+        <div class="mt-16 grid gap-6 sm:grid-cols-2">
+          {pillars.map((pillar) => (
+            <div class="flex flex-col rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+              <h3 class="text-xl font-semibold text-slate-900">{pillar.title}</h3>
+              <p class="mt-4 text-base leading-7 text-slate-600">{pillar.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-900 py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-12 lg:items-start">
+          <div class="lg:col-span-5">
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{m.cplus_sec_review_title({}, { locale })}</h2>
+            <p class="mt-4 text-base leading-7 text-slate-300">{m.cplus_sec_review_lead({}, { locale })}</p>
+            <p class="mt-6 text-sm leading-6 text-slate-400">
+              {m.cplus_sec_review_source_prefix({}, { locale })}
+              <a href={capacitorPlusResourceLinks.readme} target="_blank" rel="noopener noreferrer" class="text-sky-300 underline-offset-2 hover:text-white hover:underline">
+                {m.cplus_sec_review_source_link({}, { locale })}
+              </a>
+              .
+            </p>
+          </div>
+          <div class="lg:col-span-7">
+            <ul class="grid gap-3 sm:grid-cols-2">
+              {reviewChecks.map((item) => (
+                <li class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{m.cplus_sec_audit_title({}, { locale })}</h2>
+          <p class="mt-4 text-lg leading-8 text-slate-600">{m.cplus_sec_audit_lead({}, { locale })}</p>
+          <p class="mt-4 text-sm leading-6 text-slate-600">{m.cplus_sec_audit_no_cve_note({}, { locale })}</p>
+        </div>
+        <div class="mt-12 overflow-hidden rounded-3xl border border-slate-200">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+            <thead class="bg-slate-50 text-xs font-semibold tracking-wide text-slate-500 uppercase">
+              <tr>
+                <th scope="col" class="px-4 py-3 sm:px-6">
+                  {m.cplus_sec_audit_col_severity({}, { locale })}
+                </th>
+                <th scope="col" class="px-4 py-3 sm:px-6">
+                  {m.cplus_sec_audit_col_title({}, { locale })}
+                </th>
+                <th scope="col" class="px-4 py-3 sm:px-6">
+                  {m.cplus_sec_audit_col_source({}, { locale })}
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 bg-white">
+              {capacitorPlusCliAuditFindings.map((finding) => (
+                <tr>
+                  <td class="px-4 py-4 font-mono text-xs text-slate-700 sm:px-6">{finding.severity}</td>
+                  <td class="px-4 py-4 text-slate-900 sm:px-6">{finding.title}</td>
+                  <td class="px-4 py-4 sm:px-6">
+                    <a href={finding.sourceHref} class="font-semibold text-sky-700 underline-offset-2 hover:underline" target="_blank" rel="noopener noreferrer">
+                      SECURITY_AUDIT_CLI.md
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-6 text-sm text-slate-600">
+          {m.cplus_sec_audit_pr_note({}, { locale })}
+          <a href="https://github.com/Cap-go/capacitor-plus/pull/104" class="text-sky-700 underline-offset-2 hover:underline" target="_blank" rel="noopener noreferrer">
+            #104
+          </a>
+          .
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-slate-950 py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{m.cplus_sec_subscribe_title({}, { locale })}</h2>
+            <p class="mt-4 text-base leading-7 text-slate-300">{m.cplus_sec_subscribe_lead({}, { locale })}</p>
+            <SecurityAdvisorySubscribe />
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+            <h3 class="text-lg font-semibold text-white">{m.cplus_sec_resources_title({}, { locale })}</h3>
+            <ul class="mt-6 space-y-4 text-sm text-slate-300">
+              <li>
+                <a href={capacitorPlusResourceLinks.repo} class="text-sky-300 hover:text-white" target="_blank" rel="noopener noreferrer">
+                  Cap-go/capacitor-plus
+                </a>
+              </li>
+              <li>
+                <a href={capacitorPlusResourceLinks.securityAudit} class="text-sky-300 hover:text-white" target="_blank" rel="noopener noreferrer">
+                  SECURITY_AUDIT_CLI.md
+                </a>
+              </li>
+              <li>
+                <a href={capacitorPlusResourceLinks.capgoAdvisories} class="text-sky-300 hover:text-white" target="_blank" rel="noopener noreferrer">
+                  {m.cplus_sec_link_capgo_advisories({}, { locale })}
+                </a>
+              </li>
+              <li>
+                <a href={bugBountyUrl} class="text-sky-300 hover:text-white">
+                  {m.bug_bounty({}, { locale })}
+                </a>
+              </li>
+              <li>
+                <a href={securityPolicyUrl} class="text-sky-300 hover:text-white">
+                  {m.security_policy({}, { locale })}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

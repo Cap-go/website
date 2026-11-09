@@ -99,6 +99,15 @@ const products: Product[] = [
     tagline: m.menu_ionic_tagline({}, { locale }),
     desc: m.platform_ionic_desc({}, { locale }),
   },
+  {
+    href: 'capacitor-security',
+    icon: 'shield-check',
+    scene: 'ionic',
+    name: m.cplus_sec_nav_label({}, { locale }),
+    tagline: m.cplus_sec_nav_tagline({}, { locale }),
+    desc: m.cplus_sec_platform_desc({}, { locale }),
+    extra: { href: 'docs/plugins/capacitor-plus/getting-started', label: m.cplus_sec_cta_docs({}, { locale }) },
+  },
 ]
 
 const pluginTiles = [
