@@ -63,7 +63,26 @@ export async function subscribeSecurityAdvisoryEmail(email: string, env: BentoMa
     })
 
     if (bentoResponse.ok) {
-      return webJson({ ok: true })
+      let batchResult: { results?: unknown[]; failed?: unknown[]; failed_count?: number } = {}
+      try {
+        batchResult = (await bentoResponse.json()) as typeof batchResult
+      } catch {
+        batchResult = {}
+      }
+
+      const failedCount = Array.isArray(batchResult.failed)
+        ? batchResult.failed.length
+        : typeof batchResult.failed_count === 'number'
+          ? batchResult.failed_count
+          : 0
+      const resultsCount = Array.isArray(batchResult.results) ? batchResult.results.length : failedCount === 0 ? 1 : 0
+
+      if (failedCount === 0 && resultsCount === 1) {
+        return webJson({ ok: true })
+      }
+
+      console.error('Bento security advisory subscribe partial failure', { failedCount, resultsCount })
+      return webJson({ error: 'subscribe_failed' }, 502)
     }
 
     const details = await bentoResponse.text()

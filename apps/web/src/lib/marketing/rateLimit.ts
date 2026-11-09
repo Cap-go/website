@@ -45,6 +45,17 @@ export function securityAdvisorySubscribeRateLimitResponse(request: Request): Re
   const existing = subscribeEntries.get(clientId)
 
   if (!existing || existing.resetAt <= now) {
+    if (!existing && subscribeEntries.size >= SUBSCRIBE_RATE_MAX_ENTRIES) {
+      let oldestKey: string | null = null
+      let oldestAccess = Number.POSITIVE_INFINITY
+      for (const [key, entry] of subscribeEntries) {
+        if (entry.lastAccess < oldestAccess) {
+          oldestKey = key
+          oldestAccess = entry.lastAccess
+        }
+      }
+      if (oldestKey) subscribeEntries.delete(oldestKey)
+    }
     subscribeEntries.set(clientId, { count: 1, lastAccess: now, resetAt: now + SUBSCRIBE_RATE_WINDOW_MS })
     return null
   }

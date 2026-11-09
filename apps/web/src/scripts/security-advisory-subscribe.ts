@@ -10,12 +10,12 @@ const messages = {
   invalidEmail: form?.dataset.invalidEmailMessage ?? 'Enter a valid email address.',
   unavailable: form?.dataset.unavailableMessage ?? 'Sign-up is temporarily unavailable. Try again later.',
   network: form?.dataset.networkMessage ?? 'We could not reach the server. Check your connection and try again.',
+  rateLimited: form?.dataset.rateLimitedMessage ?? 'Too many attempts. Wait a few minutes and try again.',
 }
 
 function setStatus(text: string, tone: 'neutral' | 'success' | 'error') {
   if (!status) return
   status.textContent = text
-  status.hidden = !text
   status.dataset.tone = tone
 }
 
@@ -47,7 +47,9 @@ async function handleSubmit(event: Event) {
     }
 
     const data = (await response.json().catch(() => null)) as { error?: string } | null
-    if (response.status === 503 || data?.error === 'subscription_unavailable') {
+    if (response.status === 429 || data?.error === 'rate_limited') {
+      setStatus(messages.rateLimited, 'error')
+    } else if (response.status === 503 || data?.error === 'subscription_unavailable') {
       setStatus(messages.unavailable, 'error')
     } else if (response.status === 400) {
       setStatus(messages.invalidEmail, 'error')

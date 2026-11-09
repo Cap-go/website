@@ -7582,6 +7582,7 @@ const messages = {
   cplus_sec_subscribe_invalid_email: 'Enter a valid email address.',
   cplus_sec_subscribe_unavailable: 'Sign-up is temporarily unavailable. Try again later.',
   cplus_sec_subscribe_network: 'We could not reach the server. Check your connection and try again.',
+  cplus_sec_subscribe_rate_limited: 'Too many attempts. Wait a few minutes and try again.',
   cplus_sec_subscribe_privacy: 'We use your email only for security advisories. See our',
   cplus_sec_resources_title: 'Researcher and policy links',
   cplus_sec_link_capgo_advisories: 'Capgo GitHub security advisories',

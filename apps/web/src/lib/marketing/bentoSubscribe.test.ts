@@ -38,7 +38,7 @@ describe('subscribeSecurityAdvisoryEmail', () => {
     globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
       calledUrl = typeof input === 'string' ? input : input.toString()
       capturedBody = JSON.parse(String(init?.body)) as BentoImportBody
-      return new Response('{}', { status: 200 })
+      return new Response(JSON.stringify({ results: [{ email: 'dev@capgo.app' }], failed: [] }), { status: 200 })
     }) as typeof fetch
 
     try {

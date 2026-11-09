@@ -182,7 +182,13 @@ const content = { title, description, keywords, ldJSON }
                   <td class="px-4 py-4 font-mono text-xs text-slate-700 sm:px-6">{finding.severity}</td>
                   <td class="px-4 py-4 text-slate-900 sm:px-6">{finding.title}</td>
                   <td class="px-4 py-4 sm:px-6">
-                    <a href={finding.sourceHref} class="font-semibold text-sky-700 underline-offset-2 hover:underline" target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={finding.sourceHref}
+                        aria-label={`SECURITY_AUDIT_CLI.md: ${finding.title}`}
+                        class="font-semibold text-sky-700 underline-offset-2 hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                       SECURITY_AUDIT_CLI.md
                     </a>
                   </td>
