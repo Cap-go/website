@@ -41,7 +41,10 @@ faq:
     answer: >-
       Yes for normal development. Clearing removes downloaded package archives, not
       your app source. The next install may take longer while packages are fetched
-      again. Treat it as a debugging step, not daily maintenance.
+      again. On Classic, yarn cache dir shows the versioned cache folder, but a full
+      yarn cache clean removes the parent cache root. Inspect that parent and use a
+      dedicated cache-folder path if you customize it. Treat full cleans as a debugging
+      step, not daily maintenance.
   - question: When should you avoid clearing Yarn cache in CI or Docker?
     answer: >-
       Skip routine cache wipes when installs are slow but lockfiles are correct. Fix
@@ -57,9 +60,10 @@ faq:
   - question: Why do stale packages remain after yarn cache clean?
     answer: >-
       Targeted cleans can leave files under temporary cache folders such as
-      cache/.tmp on older Yarn versions. Escalate to a full scope clean on Berry
-      with --all, remove node_modules if needed, reinstall, and inspect temp paths
-      if one package still resolves to an old version.
+      cache/.tmp on older Yarn versions. On Classic, run yarn cache clean with no
+      package name, then yarn install. On Berry, escalate with --all, remove
+      node_modules if needed, reinstall, and inspect temp paths if one package still
+      resolves to an old version.
 ---
 **Quick answer:** People search **yarn clear cache** and **clear yarn cache**, but Yarn's CLI uses **`yarn cache clean`**. Check which Yarn you run:
 
@@ -73,7 +77,7 @@ yarn --version
 | **Berry v2+ (project cache, Yarn 2/3 default)** | `yarn cache clean` (default `./.yarn/cache`; mind zero-install and custom `cacheFolder`) |
 | **Berry v4+ (global cache, default)** | `yarn cache clean` (global shared cache when `enableGlobalCache: true`) |
 
-Run `yarn config get enableGlobalCache` to see the effective setting. **Berry flags:** `yarn cache clean --all` clears the active cache scope plus a mirror when enabled; it does not always wipe every global and project cache on the machine. `yarn cache clean --mirror` removes a separate mirror only when one exists and may be a no-op otherwise. **Path checks:** Classic `yarn cache dir`, Berry `yarn config get cacheFolder`.
+Run `yarn config get enableGlobalCache` to see the effective setting. **Berry flags:** `yarn cache clean --all` clears the active cache scope plus a mirror when enabled; it does not always wipe every global and project cache on the machine. `yarn cache clean --mirror` removes a separate mirror only when one exists and may be a no-op otherwise. **Path checks:** Classic `yarn cache dir` prints the versioned cache folder; a full `yarn cache clean` removes its parent cache root. Berry `yarn config get cacheFolder`.
 
 You run `yarn install`, and the dependency you just updated still resolves to the old build. Or your laptop installs fine while CI suddenly fails after a harmless lockfile change. Cache behavior depends on **Yarn Classic** versus **Yarn Berry**, cache scope, and whether the real issue is lockfiles or pipeline cache design, not just stored tarballs. For broader CI dependency hygiene, see [Capacitor OTA updates CI/CD integration](https://capgo.app/blog/capacitor-ota-updates-cicd-integration-guide/).
 
@@ -188,6 +192,8 @@ When you want to inspect or remove the cache directory directly, Yarn Classic gi
 > `yarn cache dir`
 
 That's useful when the CLI command doesn't appear to fix the issue, or when you need to confirm which user account owns the cache directory in a shared or containerized environment.
+
+On Yarn Classic 1.22, `yarn cache dir` points at the versioned folder under the cache root (for example `v6` under the default macOS `~/Library/Caches/Yarn` tree). A full `yarn cache clean` with no package names deletes that parent cache root, not only the versioned subdirectory. If you set `cache-folder` to a path that also stores non-Yarn files, a full clean can remove them. Use a dedicated cache root, and inspect the parent of `yarn cache dir` before you wipe the cache.
 
 If you're working in an older toolchain and trying to keep local setup predictable, this walkthrough on [installing Capacitor CLI step by step](https://capgo.app/blog/installing-capacitor-cli-step-by-step-guide/) pairs well with a clean dependency reset.
 
@@ -309,7 +315,7 @@ If you suspect version staleness rather than broad corruption, use this order:
 
 - **Start with the obvious check:** Confirm you're debugging the expected package version and source.
 - **Don't trust a package-specific clean too much:** Targeted cleanup can leave temporary artifacts behind.
-- **Escalate to a full cache wipe:** If the stale version persists, clean the broader cache scope.
+- **Escalate to a full cache wipe:** On Classic, run `yarn cache clean` with no package name, then `yarn install`. On Berry, use `yarn cache clean --all` for the widest scope your config allows.
 - **Inspect temp cache paths manually:** In older setups, `cache/.tmp` can be the missing piece.
 
 > When a package keeps resolving to an old artifact, temporary cache files are often the first place I'd inspect after a failed targeted clean.
@@ -339,7 +345,7 @@ On **Classic v1**, run `yarn cache clean`, then `yarn install`. Inspect the path
 <a id="is-it-safe-to-clear-the-yarn-cache"></a>
 ### Is it safe to clear the Yarn cache?
 
-Yes for normal development. Clearing removes downloaded package archives, not your app source. The next install may take longer. Treat it as a debugging step, not daily maintenance.
+Yes for normal development. Clearing removes downloaded package archives, not your app source. The next install may take longer. On Classic, `yarn cache dir` shows the versioned cache folder, but a full `yarn cache clean` removes the parent cache root. Inspect that parent and use a dedicated `cache-folder` if you customize it. Treat full cleans as a debugging step, not daily maintenance.
 
 <a id="when-should-you-avoid-clearing-yarn-cache-in-ci-or-docker"></a>
 ### When should you avoid clearing Yarn cache in CI or Docker?
@@ -354,7 +360,7 @@ On **Classic v1**, run `yarn cache dir`. On **Berry**, run `yarn config get cach
 <a id="why-do-stale-packages-remain-after-yarn-cache-clean"></a>
 ### Why do stale packages remain after yarn cache clean?
 
-Targeted cleans can leave files under temporary folders such as `cache/.tmp` on older Yarn versions. Escalate to `yarn cache clean --all` on Berry, remove `node_modules` if needed, reinstall, and inspect temp paths if one package still resolves to an old version.
+Targeted cleans can leave files under temporary folders such as `cache/.tmp` on older Yarn versions. On Classic, run `yarn cache clean` with no package name, then `yarn install`. On Berry, use `yarn cache clean --all`, remove `node_modules` if needed, reinstall, and inspect temp paths if one package still resolves to an old version.
 
 ---
 
