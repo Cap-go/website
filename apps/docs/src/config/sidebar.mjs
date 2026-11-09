@@ -73,7 +73,7 @@ const pluginEntries = [
   ['Brightness', 'brightness'],
   ['Calendar', 'calendar'],
   ['Camera Preview', 'camera-preview'],
-  ['Capacitor+', 'capacitor-plus'],
+  ['Capacitor+', 'capacitor-plus', [linkItem('Upstream backports', '/docs/plugins/capacitor-plus/upstream-backports/')]],
   ['Capacitor Patch', 'capacitor-patch'],
   ['Compass', 'compass'],
   ['Contentsquare', 'contentsquare', [linkItem('iOS setup', '/docs/plugins/contentsquare/ios'), linkItem('Android setup', '/docs/plugins/contentsquare/android')]],
