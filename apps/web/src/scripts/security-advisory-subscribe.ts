@@ -1,4 +1,4 @@
-import { SECURITY_ADVISORY_SUBSCRIBE_URL } from '@/config/securityAdvisorySubscribe'
+import { SECURITY_ADVISORY_SUBSCRIBE_URL, isSecurityAdvisorySubscribeUrlReady } from '@/config/securityAdvisorySubscribe'
 
 const form = document.getElementById('security-advisory-subscribe-form')
 const emailInput = document.getElementById('security-advisory-email') as HTMLInputElement | null
@@ -17,16 +17,6 @@ const messages = {
 const subscribeUrl = SECURITY_ADVISORY_SUBSCRIBE_URL.trim()
 const defaultSubmitLabel = submitButton?.textContent?.trim() ?? 'Subscribe'
 
-function subscribeEndpointReady(): boolean {
-  if (!subscribeUrl || subscribeUrl === 'pending endpoint URL') return false
-  try {
-    const parsed = new URL(subscribeUrl)
-    return parsed.protocol === 'https:' || parsed.protocol === 'http:'
-  } catch {
-    return false
-  }
-}
-
 function setStatus(text: string, tone: 'neutral' | 'success' | 'error' | 'loading') {
   if (!status) return
   status.textContent = text
@@ -43,7 +33,7 @@ async function handleSubmit(event: Event) {
     return
   }
 
-  if (!subscribeEndpointReady()) {
+  if (!isSecurityAdvisorySubscribeUrlReady(subscribeUrl)) {
     setStatus(messages.unavailable, 'error')
     return
   }

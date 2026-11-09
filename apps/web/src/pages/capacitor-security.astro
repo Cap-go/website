@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import SecurityAdvisorySubscribe from '@/components/marketing/SecurityAdvisorySubscribe.astro'
+import { isSecurityAdvisorySubscribeUrlReady } from '@/config/securityAdvisorySubscribe'
 import m from '@/copy/messages'
 import { capacitorPlusCliAuditFindings, capacitorPlusResourceLinks } from '@/data/capacitorPlusSecuritySources'
 import { createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
@@ -19,6 +20,7 @@ const homeUrl = `${config.baseUrl}${getRelativeLocaleUrl(locale, '/')}`
 const docsCapacitorPlus = getRelativeLocaleUrl(locale, 'docs/plugins/capacitor-plus/getting-started/')
 const bugBountyUrl = getRelativeLocaleUrl(locale, 'bug-bounty/')
 const securityPolicyUrl = getRelativeLocaleUrl(locale, 'security/')
+const showAdvisorySubscribe = isSecurityAdvisorySubscribeUrlReady()
 
 const pillars = [
   {
@@ -209,12 +211,16 @@ const content = { title, description, keywords, ldJSON }
 
     <section class="bg-slate-950 py-20 sm:py-24">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
-          <div>
-            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{m.cplus_sec_subscribe_title({}, { locale })}</h2>
-            <p class="mt-4 text-base leading-7 text-slate-300">{m.cplus_sec_subscribe_lead({}, { locale })}</p>
-            <SecurityAdvisorySubscribe />
-          </div>
+        <div class={`grid gap-12 lg:items-start ${showAdvisorySubscribe ? 'lg:grid-cols-2' : 'max-w-xl'}`}>
+          {
+            showAdvisorySubscribe && (
+              <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{m.cplus_sec_subscribe_title({}, { locale })}</h2>
+                <p class="mt-4 text-base leading-7 text-slate-300">{m.cplus_sec_subscribe_lead({}, { locale })}</p>
+                <SecurityAdvisorySubscribe />
+              </div>
+            )
+          }
           <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
             <h3 class="text-lg font-semibold text-white">{m.cplus_sec_resources_title({}, { locale })}</h3>
             <ul class="mt-6 space-y-4 text-sm text-slate-300">
