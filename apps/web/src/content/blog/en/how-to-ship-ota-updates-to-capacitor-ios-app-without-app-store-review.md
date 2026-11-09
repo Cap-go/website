@@ -36,9 +36,10 @@ faq:
   - question: Why must I call notifyAppReady() after an OTA update?
     answer: >-
       Capgo treats a bundle as healthy only after your app calls
-      CapacitorUpdater.notifyAppReady() during startup. If the app crashes or
-      never reports ready within the timeout, the updater rolls back to the last
-      working bundle automatically.
+      CapacitorUpdater.notifyAppReady() during startup. Automatic rollback
+      applies when a new bundle fails to load or never reports ready within the
+      timeout. Crashes after a successful notifyAppReady() need a manual channel
+      rollback or a new upload.
 takeaways:
   - 'OTA on iOS updates JavaScript, HTML, CSS, and assets inside your reviewed binary.'
   - 'Use @capgo/capacitor-updater, upload bundles to a channel, and call notifyAppReady() on every launch.'
@@ -66,7 +67,7 @@ Capacitor runs your app UI in a WebView. OTA delivery swaps the files that WebVi
 | Layout and styling in your web app | Capacitor major version or native dependency changes |
 | Rollouts and rollbacks of web bundles | Changing the app into a different product purpose |
 
-Capgo [version targeting](https://capgo.app/solutions/version-targeting/) blocks a web bundle from reaching a binary that does not include the native pieces it needs.
+Use [channels](https://capgo.app/docs/live-updates/channels/), [compatibility checks](https://capgo.app/docs/live-updates/compatibility/), and [version targeting](https://capgo.app/solutions/version-targeting/) so a web bundle does not reach a binary that lacks the native pieces it needs.
 
 ## Step by step: @capgo/capacitor-updater and notifyAppReady
 
@@ -83,36 +84,36 @@ Register the app in the Capgo dashboard and note your API keys. The [capacitor-u
 
 ### 2. Call notifyAppReady() on every successful launch
 
-After your web app finishes booting, tell the updater the current bundle is healthy:
+Call it early in your app entry point, before slow network requests or other async work that can exceed the default readiness timeout:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-// Call once your router, data, and shell are ready
+// As soon as the shell can render; do not wait on remote data first
 void CapacitorUpdater.notifyAppReady()
 ```
 
-If a downloaded bundle fails before `notifyAppReady()` runs, Capgo rolls back. See [`notifyAppReady` in the API docs](https://capgo.app/docs/plugins/updater/api/#notifyappready).
+If a downloaded bundle fails during startup or never reaches `notifyAppReady()` in time, Capgo rolls back. See [`notifyAppReady` in the API docs](https://capgo.app/docs/plugins/updater/api/#notifyappready).
 
 ### 3. Build the web bundle and upload
 
 Build your web assets as you do for a store release (`bun run build`, output in `dist/` or `www/`). Upload with the Capgo CLI:
 
 ```bash
-bunx @capgo/cli@latest bundle upload --channel production
+bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible
 ```
 
-The CLI checks native package drift against the channel so you do not accidentally ship a web bundle that requires a newer binary. Details are in [channels](https://capgo.app/docs/live-updates/channels/) and [CI/CD integration](https://capgo.app/docs/getting-started/cicd-integration/).
+The CLI compares native packages against the channel and can fail the upload when the bundle is not compatible with what is live. Use `--fail-on-incompatible` for routine web-only uploads. When a bundle needs a newer binary, ship the native build first, then upload with the right [compatibility rules](https://capgo.app/docs/live-updates/compatibility/).
 
 ### 4. Let iOS devices pull the update
 
-On the next check (foreground, resume, or your configured interval), the plugin downloads the signed bundle, applies it, and reloads the WebView. Users stay on the same App Store install. No review queue for eligible web-only changes.
+On the next check (foreground, resume, or your configured interval), the plugin downloads the bundle, applies it, and reloads the WebView. Users stay on the same App Store install. No review queue for eligible web-only changes.
 
 ## Channels, rollback, and when you still submit to the store
 
 - **Channels:** Use `production`, `beta`, or custom channels for staged rollouts. See [channels documentation](https://capgo.app/docs/live-updates/channels/).
-- **Rollback:** Revert a channel to a prior bundle in the dashboard, or rely on automatic rollback when `notifyAppReady()` does not fire. See [rollbacks](https://capgo.app/docs/live-updates/rollbacks/).
-- **Native release:** When `npx @capgo/cli bundle upload` reports incompatible native packages, ship a new iOS build through the App Store, then upload web bundles tied to that `version_build`.
+- **Rollback:** Revert a channel to a prior bundle in the dashboard, or rely on automatic rollback when a new bundle fails during startup or `notifyAppReady()` does not fire in time. See [rollbacks](https://capgo.app/docs/live-updates/rollbacks/).
+- **Native release:** When the CLI reports incompatible native packages, ship a new iOS build through the App Store, then upload web bundles tied to that `version_build`.
 
 ## iOS policy caveats (no approval guarantees)
 
@@ -121,7 +122,7 @@ Apple's rules are the boundary, not vendor marketing.
 - [App Store Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements) limits downloadable code that changes app features.
 - Section **3.3.1(B)** of the [Apple Developer Program License Agreement](https://developer.apple.com/support/terms/apple-developer-program-license-agreement/) allows **interpreted** code (such as JavaScript in WebKit) only if it does not change the app's primary purpose, does not create a code storefront, and does not bypass OS security.
 
-Capgo ships signed web bundles only. Your team must keep each update inside the app you submitted for review. Read [live updates compliance](https://capgo.app/docs/live-updates/compliance/) and Capgo's [Apple compliance notes](https://capgo.app/blog/capacitor-live-updates-staying-compliant-with-apple/). Review outcomes always belong to Apple.
+Capgo can verify bundle checksums by default. For end-to-end signing, configure your keys as described in [encryption](https://capgo.app/docs/live-updates/encryption/). Your team must keep each update inside the app you submitted for review. Read [live updates compliance](https://capgo.app/docs/live-updates/compliance/) and Capgo's [Apple compliance notes](https://capgo.app/blog/capacitor-live-updates-staying-compliant-with-apple/). Review outcomes always belong to Apple.
 
 ## Start with Capgo
 
