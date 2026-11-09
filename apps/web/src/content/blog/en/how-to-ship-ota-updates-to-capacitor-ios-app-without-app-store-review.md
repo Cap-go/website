@@ -10,7 +10,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-11-09T12:00:00.000Z
 updated_at: 2026-11-09T12:00:00.000Z
-head_image: /blog-images/how-to-ship-ota-updates-to-capacitor-ios-app-without-app-store-review.webp
+head_image: /blog-images/how-to-ship-ota-updates-to-capacitor-ios-app-without-app-store-review.jpg
 head_image_alt: How to ship OTA updates to a Capacitor iOS app without waiting on App Store review
 keywords: capacitor ios ota, ship ota updates ios, capacitor live updates ios, app store review, notifyAppReady, capacitor-updater, capgo ota
 tag: Tutorial, Mobile, Updates
@@ -75,8 +75,8 @@ Capgo [version targeting](https://capgo.app/solutions/version-targeting/) blocks
 Add the plugin to your Capacitor project and sync iOS, following the [Capgo quickstart](https://capgo.app/docs/getting-started/quickstart/) and [updater plugin docs](https://capgo.app/docs/plugins/updater/).
 
 ```bash
-npm install @capgo/capacitor-updater
-npx cap sync ios
+bun add @capgo/capacitor-updater
+bunx cap sync ios
 ```
 
 Register the app in the Capgo dashboard and note your API keys. The [capacitor-updater plugin page](https://capgo.app/plugins/capacitor-updater/) lists compatibility and links to deeper docs.
@@ -96,10 +96,10 @@ If a downloaded bundle fails before `notifyAppReady()` runs, Capgo rolls back. S
 
 ### 3. Build the web bundle and upload
 
-Build your web assets as you do for a store release (`npm run build`, output in `dist/` or `www/`). Upload with the Capgo CLI:
+Build your web assets as you do for a store release (`bun run build`, output in `dist/` or `www/`). Upload with the Capgo CLI:
 
 ```bash
-npx @capgo/cli@latest bundle upload --channel production
+bunx @capgo/cli@latest bundle upload --channel production
 ```
 
 The CLI checks native package drift against the channel so you do not accidentally ship a web bundle that requires a newer binary. Details are in [channels](https://capgo.app/docs/live-updates/channels/) and [CI/CD integration](https://capgo.app/docs/getting-started/cicd-integration/).
