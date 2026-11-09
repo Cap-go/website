@@ -1,0 +1,120 @@
+---
+title: "Security advisory notifications"
+description: "Opt in to email alerts and a JSON feed when published GitHub security advisories affect Capgo npm packages, with version ranges, patched releases, and upgrade steps."
+sidebar:
+  order: 8
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo publishes security advisories on GitHub when issues affect our npm packages. This page explains how to get notified by email when a new advisory is published, and how to consume the same data from a machine-readable JSON feed.
+
+## What you receive
+
+Security advisory notifications are optional. When you subscribe, Capgo sends email only after we publish a GitHub security advisory that affects one or more of these npm scopes:
+
+- `@capgo/capacitor-updater`
+- Other Cap-go `capacitor-*` plugins published under `@capgo`
+- `@capgo/cli`
+
+Each notification email summarizes the advisory in plain language. It includes:
+
+- The **affected version range** for each listed package
+- The **patched version** for each affected major release line when a fix is available
+- **Upgrade steps** to move your app to a safe version: install the patched package with npm, run `npx cap sync`, then rebuild and ship your native app so the updated native plugin code is included
+
+Capgo does not use these emails for marketing. They are limited to published security advisories for the packages above.
+
+<Aside type="note">
+
+Live updates from Capgo deliver JavaScript bundles only. Security fixes in native plugin code still require updating the npm package, syncing Capacitor, and releasing a new store build. Treat advisory emails as a prompt to bump dependencies and ship a native release, not only a live update bundle.
+
+</Aside>
+
+## How to subscribe
+
+Subscription uses **double opt-in** by email.
+
+<Steps>
+
+1. Submit your email address on the **security updates subscription form** (hosted with the advisory notification service; the public URL is configured at deploy time).
+2. Open the confirmation message and click the link inside it to confirm you want alerts.
+3. After confirmation, you receive email when new qualifying advisories are published.
+
+</Steps>
+
+Every notification includes an unsubscribe link. Use it to stop future messages without contacting support.
+
+## Machine-readable advisory feed
+
+Automation and internal tools can poll the same advisory set as JSON. The HTTP endpoint is:
+
+```http
+GET {ADVISORY_API_BASE_URL}/v1/advisories
+```
+
+Replace `{ADVISORY_API_BASE_URL}` with the base URL configured for your deployment. Capgo sets this value when the advisory notification service is deployed. The path is always `/v1/advisories`.
+
+The response is a JSON object matching the types below.
+
+```ts
+type AdvisoryAffected = {
+  package: string
+  affected_range: string
+  patched_version: string | null
+  capacitor_plus_version?: string
+}
+
+type Advisory = {
+  id: string
+  ghsa_id: string
+  cve_id?: string
+  title: string
+  severity: 'low' | 'moderate' | 'high' | 'critical'
+  affected: AdvisoryAffected[]
+  fix_steps: string
+  published_at: string
+  url: string
+  plus_release_url?: string
+}
+
+type AdvisoryFeed = {
+  advisories: Advisory[]
+  generated_at: string
+}
+```
+
+Field notes:
+
+| Field | Meaning |
+| ----- | ------- |
+| `affected_range` | Semver range of versions impacted for that package |
+| `patched_version` | First fixed version on the relevant major line, or `null` if no fix is published yet |
+| `capacitor_plus_version` | When Capacitor+ bundles a related fix, the Capacitor+ version that includes it |
+| `fix_steps` | Human-readable remediation text aligned with the notification email |
+| `published_at` | ISO 8601 timestamp when the advisory was published |
+| `url` | Canonical link to the GitHub security advisory |
+| `plus_release_url` | Link to a Capacitor+ release when applicable |
+| `generated_at` | ISO 8601 timestamp when this JSON snapshot was built |
+
+Example request with a placeholder base URL:
+
+```bash
+curl -sS "https://{ADVISORY_API_BASE_URL}/v1/advisories"
+```
+
+Poll politely. Prefer ETag or `If-Modified-Since` when your client supports conditional requests, and back off on errors.
+
+## Full advisory list on GitHub
+
+Email and JSON feeds mirror published advisories. For the complete history, search filters, and per-repository views, use the Cap-go organization security advisories on GitHub:
+
+[Cap-go security advisories](https://github.com/orgs/Cap-go/security/advisories/)
+
+Individual repositories also publish advisories under their own Security tabs, including [capacitor-updater](https://github.com/Cap-go/capacitor-updater/security/advisories), [CLI](https://github.com/Cap-go/CLI/security/advisories), and [capgo.app](https://github.com/Cap-go/capgo.app/security/advisories).
+
+## Keep going
+
+- [Updater getting started](/docs/plugins/updater/getting-started/) to install and configure `@capgo/capacitor-updater`
+- [Versioning](/docs/versioning/) for how Capgo maps fixes across Capacitor major versions
+- [Compliance](/docs/live-updates/compliance/) for data handling and security practices on the live update service
