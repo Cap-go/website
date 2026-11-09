@@ -1,6 +1,38 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.101.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.101.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.101.1",
+    "pubDate": "2026-11-08T04:15:30.000Z",
+    "description": "🆕 Changelog Changed Preserved existing build log retention settings during monitoring updates, ensuring custom retention policies are not overridden by default configurations. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.101.0...cli 8.101.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.101.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.101.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.101.0",
+    "pubDate": "2026-11-08T03:43:35.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.100.0...cli 8.101.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.33.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.1",
+    "pubDate": "2026-11-08T04:17:35.000Z",
+    "description": "🆕 Changelog Changed Preserved existing build log retention settings during monitoring updates, preventing unintended modification of user defined retention policies. Updated CLI documentation to ensure generated content remains in sync with current implementation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.101.0...capgo 22.33.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.33.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.0",
+    "pubDate": "2026-11-08T03:45:45.000Z",
+    "description": "🆕 Changelog Added Console : Added dependency changelogs and upgrade links to provide better visibility into software versions and facilitate updates. MCP : Implemented release monitoring and documented diagnostics to enhance observability and troubleshooting capabilities. Fixed Onboarding : Refined the channel creation lifecycle to explicitly model state transitions, resolving potential issues during the initial setup process. System : Fixed release checks to prevent blocking issues and hard..."
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.99.3",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.3",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.99.3",
@@ -286,38 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.24.2",
     "pubDate": "2026-10-28T01:35:44.000Z",
     "description": "🆕 Changelog Changed Improved performance when loading a version's file list by reading file identifiers as plain rows and avoiding repeated decompression, reducing memory overhead and latency for bundles with many files. Fixed Fixed intermittent Supabase local startup failures by retrying the start when the edge runtime misses its initial health check. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.24.1...capgo 22.24.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.24.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.24.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.24.1",
-    "pubDate": "2026-10-28T01:08:57.000Z",
-    "description": "🆕 Changelog Fixed Batched delta storage backfill operations to prevent production deployment timeouts and ensure releases complete successfully. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.24.0...capgo 22.24.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.98.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.3",
-    "pubDate": "2026-10-27T22:02:00.000Z",
-    "description": "🆕 Changelog Added Offer AI setup when creating another organization, making it easier to configure automation across multiple orgs. Display regional billing prices in your local currency by default, with an opt out to standard pricing. Allow agents to continue via a sub agent when the Capgo MCP integration has not loaded yet. Fixed Resolve the active project from the agent's workspace instead of the spawn directory in the Capgo MCP CLI flow. Restore public metrics to be served from Capgo aga..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.98.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.2",
-    "pubDate": "2026-10-27T18:00:18.000Z",
-    "description": "🆕 Changelog Security Updated to 21.0.4 to address a security vulnerability ( 3939). Changed Improved queue sync performance by draining up to 10x faster ( 3937). Reduced database contention by skipping onboarding and user locks for no op writes ( 3933). Standardized English UI copy to consistent sentence case and terminology ( 3879). Fixed Updated onboarding getting started steps so they reflect real product usage ( 3881). Corrected billing email links to point to the console billing page ( ..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.98.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.98.1",
-    "pubDate": "2026-10-27T04:57:52.000Z",
-    "description": "🆕 Changelog Fixed Fixed SDK compatibility on Cloudflare Workers by using manual redirect handling ( 3934) Fixed deployment cleanup by deleting orphaned Bento dispatch workers ( 3931) 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.98.0...cli 8.98.1"
   },
   {
     "category": "release",
@@ -625,11 +625,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-fast-sql 8.2.18",
-    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.18",
-    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.2.18",
-    "pubDate": "2026-11-08T00:11:56.000Z",
-    "description": "🆕 Changelog Added Added a reproducible HTTP transport benchmark to establish a current performance baseline for future comparisons. Fixed Exposed web persistent storage support and added the option to require it, ensuring storage is available on supported platforms. Included R8 consumer keep rules for Android Capacitor 9 integration, preventing required classes from being removed during code shrinking. 🔗 Full Changelog : https://github.com/Cap go/capacitor fast sql/compare/8.2.17...8.2.18"
+    "title": "capacitor-fast-sql 8.3.0",
+    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.3.0",
+    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.3.0",
+    "pubDate": "2026-11-08T03:48:43.000Z",
+    "description": "🆕 Changelog Added Added an opt in binary HTTP transport option that can deliver better performance and reduced payload sizes compared to the default text based transport. Added controlled native benchmark support, making it easier to run consistent performance comparisons and validate platform specific behavior. Changed Bumped the release version to 8.3.0 to reflect the new feature additions. Migration Notes The new binary HTTP transport is opt in, so existing integrations remain unaffected...."
   },
   {
     "category": "release",

@@ -1,12 +1,12 @@
 {
   "repositoryCount": 143,
   "contributorCount": 607,
-  "versionCount": 16346,
-  "releaseCount": 7062,
+  "versionCount": 16351,
+  "releaseCount": 7063,
   "closedIssueCount": 1779,
-  "mergedPullRequestCount": 9588,
-  "resolvedItemCount": 11367,
-  "totalStars": 3199,
+  "mergedPullRequestCount": 9591,
+  "resolvedItemCount": 11370,
+  "totalStars": 3200,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -136,7 +136,7 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 884,
+      "stars": 885,
       "contributors": 54,
       "versionTags": 796,
       "releases": 240,
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 212,
       "contributors": 30,
-      "versionTags": 5903,
+      "versionTags": 5907,
       "releases": 1000,
       "closedIssues": 420,
-      "mergedPullRequests": 2765
+      "mergedPullRequests": 2767
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -1020,10 +1020,10 @@
       "url": "https://github.com/Cap-go/capacitor-fast-sql",
       "stars": 23,
       "contributors": 4,
-      "versionTags": 83,
-      "releases": 75,
+      "versionTags": 84,
+      "releases": 76,
       "closedIssues": 5,
-      "mergedPullRequests": 84
+      "mergedPullRequests": 85
     },
     "Cap-go/capacitor-file-compressor": {
       "url": "https://github.com/Cap-go/capacitor-file-compressor",
