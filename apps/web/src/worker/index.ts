@@ -46,6 +46,7 @@ interface Env extends PublicMcpEnv {
   CAPGO_API?: import('./agent-auth-proxy').ServiceBinding
   BENTO_PUBLISHABLE_KEY?: string
   BENTO_SECRET_KEY?: string
+  BENTO_SITE_UUID?: string
 }
 
 const JSON_HEADERS = {
@@ -496,6 +497,7 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
     {
       BENTO_PUBLISHABLE_KEY: env.BENTO_PUBLISHABLE_KEY,
       BENTO_SECRET_KEY: env.BENTO_SECRET_KEY,
+      BENTO_SITE_UUID: env.BENTO_SITE_UUID,
     },
     pathname,
   )

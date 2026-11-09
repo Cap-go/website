@@ -1,8 +1,10 @@
 import { BENTO_SECURITY_ADVISORY_SUBSCRIBER_TAG } from '@/config/bentoMarketing'
+import { securityAdvisorySubscribeRateLimitResponse } from './rateLimit'
 
 export interface BentoMarketingEnv {
   BENTO_PUBLISHABLE_KEY?: string
   BENTO_SECRET_KEY?: string
+  BENTO_SITE_UUID?: string
 }
 
 const JSON_HEADERS = {
@@ -31,38 +33,52 @@ export function isSecurityAdvisoryEmail(value: unknown): value is string {
 export async function subscribeSecurityAdvisoryEmail(email: string, env: BentoMarketingEnv): Promise<Response> {
   const publishable = env.BENTO_PUBLISHABLE_KEY?.trim()
   const secret = env.BENTO_SECRET_KEY?.trim()
-  if (!publishable || !secret) {
+  const siteUuid = env.BENTO_SITE_UUID?.trim()
+  if (!publishable || !secret || !siteUuid) {
     return webJson({ error: 'subscription_unavailable' }, 503)
   }
 
-  const authorization = `Basic ${btoa(`${publishable}:${secret}`)}`
-  const bentoResponse = await fetch('https://app.bentonow.com/api/v1/batch/subscribers', {
-    method: 'POST',
-    headers: {
-      Authorization: authorization,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      subscribers: [
-        {
-          email,
-          tags: [BENTO_SECURITY_ADVISORY_SUBSCRIBER_TAG],
-        },
-      ],
-    }),
-  })
+  const credentials = `${publishable}:${secret}`
+  const authorization = 'Basic ' + btoa(credentials)
+  const bentoUrl = new URL('https://app.bentonow.com/api/v1/batch/subscribers')
+  bentoUrl.searchParams.set('site_uuid', siteUuid)
 
-  if (bentoResponse.ok) {
-    return webJson({ ok: true })
+  try {
+    const bentoResponse = await fetch(bentoUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: authorization,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        subscribers: [
+          {
+            email,
+            tags: BENTO_SECURITY_ADVISORY_SUBSCRIBER_TAG,
+          },
+        ],
+      }),
+      signal: AbortSignal.timeout(10_000),
+    })
+
+    if (bentoResponse.ok) {
+      return webJson({ ok: true })
+    }
+
+    const details = await bentoResponse.text()
+    console.error('Bento security advisory subscribe failed', bentoResponse.status, details.slice(0, 500))
+    return webJson({ error: 'subscribe_failed' }, 502)
+  } catch (error) {
+    console.error('Bento security advisory subscribe request failed', error)
+    return webJson({ error: 'subscribe_failed' }, 502)
   }
-
-  const details = await bentoResponse.text()
-  console.error('Bento security advisory subscribe failed', bentoResponse.status, details.slice(0, 500))
-  return webJson({ error: 'subscribe_failed' }, 502)
 }
 
 export async function handleSecurityAdvisorySubscribeRequest(request: Request, env: BentoMarketingEnv): Promise<Response> {
+  const rateLimited = securityAdvisorySubscribeRateLimitResponse(request)
+  if (rateLimited) return rateLimited
+
   let payload: unknown
   try {
     payload = await request.json()
