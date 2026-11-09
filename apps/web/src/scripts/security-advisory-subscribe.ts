@@ -1,4 +1,4 @@
-import { BENTO_SECURITY_ADVISORY_SUBSCRIBE_PATH } from '@/config/bentoMarketing'
+import { SECURITY_ADVISORY_SUBSCRIBE_URL } from '@/config/securityAdvisorySubscribe'
 
 const form = document.getElementById('security-advisory-subscribe-form')
 const emailInput = document.getElementById('security-advisory-email') as HTMLInputElement | null
@@ -11,12 +11,26 @@ const messages = {
   unavailable: form?.dataset.unavailableMessage ?? 'Sign-up is temporarily unavailable. Try again later.',
   network: form?.dataset.networkMessage ?? 'We could not reach the server. Check your connection and try again.',
   rateLimited: form?.dataset.rateLimitedMessage ?? 'Too many attempts. Wait a few minutes and try again.',
+  loading: form?.dataset.loadingMessage ?? 'Submitting...',
 }
 
-function setStatus(text: string, tone: 'neutral' | 'success' | 'error') {
+const subscribeUrl = SECURITY_ADVISORY_SUBSCRIBE_URL.trim()
+const defaultSubmitLabel = submitButton?.textContent?.trim() ?? 'Subscribe'
+
+function subscribeEndpointReady(): boolean {
+  if (!subscribeUrl || subscribeUrl === 'pending endpoint URL') return false
+  try {
+    const parsed = new URL(subscribeUrl)
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:'
+  } catch {
+    return false
+  }
+}
+
+function setStatus(text: string, tone: 'neutral' | 'success' | 'error' | 'loading') {
   if (!status) return
   status.textContent = text
-  status.dataset.tone = tone
+  status.dataset.tone = tone === 'loading' ? 'neutral' : tone
 }
 
 async function handleSubmit(event: Event) {
@@ -29,11 +43,18 @@ async function handleSubmit(event: Event) {
     return
   }
 
+  if (!subscribeEndpointReady()) {
+    setStatus(messages.unavailable, 'error')
+    return
+  }
+
   submitButton.disabled = true
-  setStatus('', 'neutral')
+  emailInput.readOnly = true
+  submitButton.textContent = messages.loading
+  setStatus(messages.loading, 'loading')
 
   try {
-    const response = await fetch(BENTO_SECURITY_ADVISORY_SUBSCRIBE_PATH, {
+    const response = await fetch(subscribeUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ email }),
@@ -62,6 +83,8 @@ async function handleSubmit(event: Event) {
     ;(window as any).posthog?.capture('capacitor_security_advisory_subscribe', { ok: false, network: true })
   } finally {
     submitButton.disabled = false
+    emailInput.readOnly = false
+    submitButton.textContent = defaultSubmitLabel
   }
 }
 
