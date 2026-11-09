@@ -5953,7 +5953,6 @@ const messages = {
   store_policy_incident_body:
     "Our splash screen auto-hide feature linked at runtime to the separate splash screen plugin. Apple's review flagged that dynamic linking as a dynamic code concern. It was unrelated to OTA updates, and we removed the dynamic link from the plugin.",
   store_policy_incident_label: 'Has Apple ever flagged Capgo?',
-  store_policy_ios_ota_howto_link: 'Ship iOS OTA step by step',
   store_policy_lead:
     'Not for using live updates. Both stores let apps download interpreted code like JavaScript, HTML, and CSS, as long as each update stays within the app you submitted for review.',
   store_policy_note: 'Review decisions always belong to Apple and Google, so no vendor can promise approval. Capgo keeps you on the side of the policies they publish.',
