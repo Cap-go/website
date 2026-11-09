@@ -24,7 +24,6 @@ const updaterPluginSection = section(
     linkItem('Configuration', '/docs/plugins/updater/settings/'),
     linkItem('notifyAppReady call placement', '/docs/plugins/updater/notify-app-ready'),
     linkItem('Known Issues', '/docs/plugins/updater/known-issues'),
-    // TODO(security-advisory-subscribe): wire link target when the public security updates subscription form URL is deployed.
     linkItem('Security advisory notifications', '/docs/plugins/updater/security-advisory-notifications/'),
     linkItem('Common Update Problems', '/docs/plugins/updater/commonproblems'),
     linkItem('Debugging', '/docs/plugins/updater/debugging'),
