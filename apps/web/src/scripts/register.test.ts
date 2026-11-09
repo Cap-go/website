@@ -32,7 +32,7 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
       window: { location: { search: '' } },
       navigator: {},
       URLSearchParams,
-      setTimeout,
+      setTimeout: (callback: () => void) => callback(),
     })
     await Promise.resolve()
     expect(button.disabled).toBe(false)
@@ -42,6 +42,46 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     else expect(toasts.some((text) => text.includes('Verify you are human'))).toBe(false)
     if (captchaEnabled) expect(button.disabled).toBe(false)
   }
+})
+
+test('a submit before the invisible CAPTCHA finishes waits for its token instead of failing', async () => {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
+  const button = { disabled: false }
+  const requests: any[] = []
+  const toasts: string[] = []
+  let polls = 0
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
+    email: { value: 'signup@example.com' },
+    password: { value: 'Password123!', setAttribute() {}, removeAttribute() {}, focus() {} },
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => ({}) },
+    registerUser: async (request: unknown) => {
+      requests.push(request)
+      throw new Error('Stop the test before any auth IO')
+    },
+    RegisterApiError: Error,
+    getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
+    formatPasswordRequirementErrors: () => '',
+    getSignupUserMetadataForRegistration: () => ({}),
+    getSignupAttributionForEvents: () => ({}),
+    getRegistrationDevice: () => ({}),
+    Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
+    // Turnstile hands out its token on the third poll, a moment after the visitor tapped Sign up.
+    window: { location: { search: '' }, turnstile: { getResponse: () => (polls >= 3 ? 'late-token' : ''), reset() {} } },
+    navigator: {},
+    URLSearchParams,
+    setTimeout: (callback: () => void) => {
+      polls++
+      callback()
+    },
+  })
+  await handler({ preventDefault() {} })
+  expect(requests.map((request) => request.captcha_token)).toEqual(['late-token'])
+  expect(toasts.some((text) => text.includes('Verify you are human'))).toBe(false)
 })
 
 test('registration without profile names preserves referral attribution and the console handoff', async () => {
