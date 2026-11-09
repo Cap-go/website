@@ -100,14 +100,14 @@ If a downloaded bundle fails during startup or never reaches `notifyAppReady()` 
 Build your web assets as you do for a store release (`bun run build`, output in `dist/` or `www/`). Upload with the Capgo CLI:
 
 ```bash
-bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible
+bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible --auto-min-update-version
 ```
 
-The CLI compares native packages against the channel and can fail the upload when the bundle is not compatible with what is live. Use `--fail-on-incompatible` for routine web-only uploads. When a bundle needs a newer binary, ship the native build first, then upload with the right [compatibility rules](https://capgo.app/docs/live-updates/compatibility/).
+The CLI compares native packages against the channel and can fail the upload when the bundle is not compatible with what is live. Use `--fail-on-incompatible` for routine web-only uploads. When the channel uses the `metadata` strategy for [version targeting](https://capgo.app/docs/live-updates/version-targeting/), include `--auto-min-update-version` on every upload so Capgo sets the minimum native floor for devices that have not installed the matching binary. See [compatibility](https://capgo.app/docs/live-updates/compatibility/) and the [native + OTA channel workflow](https://capgo.app/docs/live-updates/native-ota-channel-workflow/).
 
 ### 4. Let iOS devices pull the update
 
-On the next check (foreground, resume, or your configured interval), the plugin downloads the bundle, applies it, and reloads the WebView. Users stay on the same App Store install. No review queue for eligible web-only changes.
+With the default `autoUpdate` mode (`atBackground`, the same as `true`), the plugin checks when the app comes to the foreground and on a repeating timer while it stays open. If an update is available, it downloads in the background while the user keeps the current bundle. It applies the update when the app moves to the background, and the user runs the new bundle on the next foreground. Other `autoUpdate` values can apply sooner; see [update behavior](https://capgo.app/docs/live-updates/update-behavior/) and the [updater settings](https://capgo.app/docs/plugins/updater/settings/). Users stay on the same App Store install. No review queue for eligible web-only changes.
 
 ## Channels, rollback, and when you still submit to the store
 
