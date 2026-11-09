@@ -94,7 +94,12 @@ function getCaptchaId() {
   if (!(window as any).turnstile) {
     return undefined
   }
-  return (window as any).turnstile.getResponse() as string
+  // getResponse throws until the widget has rendered: treat that as "no token yet" so the wait keeps polling.
+  try {
+    return (window as any).turnstile.getResponse() as string
+  } catch {
+    return undefined
+  }
 }
 
 // The interaction-only widget is invisible while it works, and a token is also cleared after each failed attempt

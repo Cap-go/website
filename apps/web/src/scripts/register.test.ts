@@ -70,8 +70,17 @@ test('a submit before the invisible CAPTCHA finishes waits for its token instead
     getSignupAttributionForEvents: () => ({}),
     getRegistrationDevice: () => ({}),
     Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
-    // Turnstile hands out its token on the third poll, a moment after the visitor tapped Sign up.
-    window: { location: { search: '' }, turnstile: { getResponse: () => (polls >= 3 ? 'late-token' : ''), reset() {} } },
+    // The widget is not rendered on the first poll (getResponse throws), then hands out its token on the third poll.
+    window: {
+      location: { search: '' },
+      turnstile: {
+        getResponse: () => {
+          if (polls === 0) throw new Error('widget not rendered')
+          return polls >= 3 ? 'late-token' : ''
+        },
+        reset() {},
+      },
+    },
     navigator: {},
     URLSearchParams,
     setTimeout: (callback: () => void) => {
