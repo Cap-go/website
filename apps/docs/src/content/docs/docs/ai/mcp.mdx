@@ -151,6 +151,7 @@ The hosted server exposes account tools in these areas:
 | Statistics and Observe    | App, organization, and account statistics, update health from [Observe](/docs/webapp/observe/)                        |
 | Native builds             | Request, upload and start builds, manage stored credentials, read status and bounded log snapshots, cancel a build    |
 | Webhooks                  | Create, update, test, and delete webhooks, inspect and retry deliveries                                               |
+| MCP Events                | Subscribe to build and bundle events and receive signed HTTPS webhooks ([MCP Events](/docs/ai/mcp-events/))             |
 | Push notifications        | Notification settings, providers, campaigns, sending notifications, stats                                             |
 
 Each tool calls the [Capgo public API](/docs/public-api/) with the key from your session. Permissions (RBAC), rate limits, and audit logs behave exactly as they do for REST API calls with that key.
@@ -200,8 +201,13 @@ Use the hosted server for everyday account work from any chat app. Add the [loca
   tools, use `https://api.capgo.app/mcp`.
 </Aside>
 
+## MCP Events
+
+Agents can subscribe to builds and bundle lifecycle events and receive signed Standard Webhooks instead of polling. See [MCP Events](/docs/ai/mcp-events/) for the catalog, subscribe filters, protocol methods, verification, TTL, and limits.
+
 ## Related
 
+- [MCP Events](/docs/ai/mcp-events/)
 - [CLI MCP server (local)](/docs/cli/reference/mcp/)
 - [API keys in the console](/docs/webapp/api-keys/)
 - [Public API](/docs/public-api/)
