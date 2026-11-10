@@ -1,0 +1,85 @@
+---
+import m from '@/copy/messages'
+import { SECURITY_ADVISORY_TURNSTILE_SITE_KEY } from '@/config/securityAdvisorySubscribe'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const privacyHref = getRelativeLocaleUrl(locale, 'privacy/')
+---
+
+<script is:inline>
+  ;['Success', 'Error', 'Expired', 'Timeout'].forEach(function (kind) {
+    window['capgoSecurityAdvisoryTurnstile' + kind] = function (detail) {
+      document.dispatchEvent(new CustomEvent('capgo-security-advisory-turnstile', { detail: { kind: kind.toLowerCase(), code: detail } }))
+      return kind === 'Error'
+    }
+  })
+</script>
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<form
+  id="security-advisory-subscribe-form"
+  class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-start"
+  data-success-message={m.cplus_sec_subscribe_success({}, { locale })}
+  data-invalid-email-message={m.cplus_sec_subscribe_invalid_email({}, { locale })}
+  data-unavailable-message={m.cplus_sec_subscribe_unavailable({}, { locale })}
+  data-network-message={m.cplus_sec_subscribe_network({}, { locale })}
+  data-loading-message={m.cplus_sec_subscribe_loading({}, { locale })}
+  data-captcha-required-message={m.cplus_sec_subscribe_captcha_required({}, { locale })}
+>
+  <div class="min-w-0 flex-1 space-y-3">
+    <div>
+      <label for="security-advisory-email" class="sr-only">
+        {m.email_label({}, { locale })}
+      </label>
+      <input
+        id="security-advisory-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        class="block w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-[15px] text-white placeholder-slate-500 transition-colors focus:border-sky-400/60 focus:bg-white/10 focus:ring-2 focus:ring-sky-400/30 focus:outline-none"
+        placeholder={m.cplus_sec_subscribe_placeholder({}, { locale })}
+      />
+    </div>
+    <div
+      id="security-advisory-turnstile"
+      class="cf-turnstile"
+      data-sitekey={SECURITY_ADVISORY_TURNSTILE_SITE_KEY}
+      data-size="flexible"
+      data-theme="dark"
+      data-appearance="interaction-only"
+      data-callback="capgoSecurityAdvisoryTurnstileSuccess"
+      data-error-callback="capgoSecurityAdvisoryTurnstileError"
+      data-expired-callback="capgoSecurityAdvisoryTurnstileExpired"
+      data-timeout-callback="capgoSecurityAdvisoryTurnstileTimeout"
+    />
+  </div>
+  <button
+    type="submit"
+    class="inline-flex shrink-0 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400 focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:outline-none sm:self-start"
+  >
+    {m.cplus_sec_subscribe_cta({}, { locale })}
+  </button>
+</form>
+<p id="security-advisory-subscribe-status" class="mt-3 min-h-5 text-sm text-slate-300" role="status" aria-live="polite" aria-atomic="true" data-tone="neutral"></p>
+<p class="mt-3 text-xs leading-5 text-slate-500">
+  {m.cplus_sec_subscribe_privacy({}, { locale })}
+  <a href={privacyHref} class="text-sky-300 underline-offset-2 hover:text-white hover:underline">
+    {m.privacy({}, { locale })}
+  </a>
+  .
+</p>
+
+<script>
+  import '@/scripts/security-advisory-subscribe'
+</script>
+
+<style is:global>
+  #security-advisory-subscribe-status[data-tone='success'] {
+    color: rgb(134 239 172);
+  }
+  #security-advisory-subscribe-status[data-tone='error'] {
+    color: rgb(252 165 172);
+  }
+</style>

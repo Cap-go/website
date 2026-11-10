@@ -87,6 +87,7 @@ const columns: { title: string; links: FooterLink[] }[] = [
     links: [
       { name: m.free_mobile_tools({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'tools') },
       { name: 'Security Scanner', href: getRelativeLocaleUrl(Astro.locals.locale, 'security-scanner') },
+      { name: m.cplus_sec_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'capacitor-security') },
       { name: m.aasa_tester({}, { locale: Astro.locals.locale }), href: 'https://aasa-tester.capgo.app/', external: true },
       { name: m.semver_tester({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'semver_tester') },
       { name: 'Live Update data', href: getRelativeLocaleUrl(Astro.locals.locale, 'data') },
