@@ -41,9 +41,9 @@ The feed timestamp at the bottom reflects when the advisory JSON snapshot was ge
 Capgo does not scan your repository or live devices for this view. It uses versions already stored when you upload bundles:
 
 1. **Native packages:** Capgo reads `native_packages` from the bundle linked to the **production** channel when that channel has a version. If not, it uses the **latest uploaded** bundle for the app.
-2. **`@capgo/cli`:** Capgo uses `cli_version` from the **latest uploaded** bundle (even when production supplies native packages).
+2. **`@capgo/cli`:** Capgo prefers `cli_version` from the **latest uploaded** bundle. If that upload has no CLI version, it falls back to `cli_version` on the production-linked bundle (or latest upload when production is missing).
 
-Packages considered in scope include `@capgo/cli`, `@capgo/capacitor-*`, other `@capgo` plugins such as `@capgo/camera-preview`, `@capacitor/*`, `capacitor-plus`, and community `capacitor-*` packages (excluding `capacitor-plus`). Packages outside that set are ignored for matching.
+Packages considered in scope include `@capgo/cli`, `@capgo/capacitor-*`, `@capgo/camera-preview`, `@capacitor/*`, `capacitor-plus`, and community `capacitor-*` packages (excluding `capacitor-plus`). Other npm packages are ignored for matching.
 
 If iOS or Android platform packages are reported but `@capacitor/core` is missing, Capgo does not guess a core version. Core-related advisories may show **Unknown** until a bundle reports `@capacitor/core`.
 

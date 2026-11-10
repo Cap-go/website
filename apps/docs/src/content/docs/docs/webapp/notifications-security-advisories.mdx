@@ -19,14 +19,14 @@ Capgo does not use this preference for marketing. It is limited to published sec
 
 ## Default is off
 
-For console accounts, `security_updates` defaults to **off**. You must opt in from account settings (or turn it on from the public preferences page, then save). This differs from several other notification toggles on the same page, which default to on.
+For console accounts, `security_updates` defaults to **off**. Opt in only from signed-in account **Notifications** settings. This differs from several other notification toggles on the same page, which default to on.
 
 ## Turn security emails on or off in the console
 
 <Steps>
 
 1. Open [console.capgo.app](https://console.capgo.app/) and sign in.
-2. Click your name, choose **Settings**, then open the **Notifications** tab under account settings. Direct link: [Account notifications](https://console.capgo.app/dashboard/settings/account/notifications).
+2. Click your name, choose **Settings**, then open the **Notifications** tab under account settings. Direct link: [Account notifications](https://console.capgo.app/settings/account/notifications).
 3. Scroll to the **Security advisories** section.
 4. Use the **Security update emails** toggle to opt in or out. Changes save to your user record and sync your Bento subscriber tags for this email address (`security-updates`).
 
@@ -36,17 +36,25 @@ For console accounts, `security_updates` defaults to **off**. You must opt in fr
 
 ## Turn security emails off from an email link
 
-Some Capgo emails include a footer link to the public **Email preferences** page (`/email-preferences` on the console host). That page loads preferences for the email address embedded in the link (signed query parameters).
+Some Capgo emails include a footer link to the public **Email preferences** page (`/email-preferences` on the console host). The link identifies your Bento visitor id or email in the query string.
 
-You can turn off **Security update emails** there without signing in, along with other Capgo email categories. Save the form after changing the toggle. The public page uses Cloudflare Turnstile before accepting updates.
+That form is **opt-out only**. It does not load your saved preferences and all category toggles start in the on position. Turn **Security update emails** off (or use **Unsubscribe from all**), complete Turnstile, and save. Capgo applies only explicit opt-outs (`false` values) to your account; it will not re-enable categories you left on.
+
+You cannot opt in to **Security update emails** from this public page. Use signed-in account **Notifications** to turn them on.
 
 ## Compare with the public signup form
 
 | Channel | Who it is for | Opt-in |
 | ------- | ------------- | ------ |
-| [Capacitor+ security](https://capgo.app/capacitor-security/) signup form | Anyone with an email address (no Capgo account required) | Double opt-in confirmation email |
+| [Capacitor+ security](https://capgo.app/capacitor-security/) signup form | Anyone with an email address (no Capgo account required) | Double opt-in confirmation email when the form is enabled on the site |
 | Console **Notifications** toggle | Signed-in Capgo users | Single toggle, default off |
-| Public **Email preferences** page | Recipients with a valid preferences link | Save form with Turnstile |
+| Public **Email preferences** page | Recipients with a valid preferences link | Opt-out only (cannot enable `security_updates` here) |
+
+<Aside type="note">
+
+The marketing signup form on [Capacitor+ security](https://capgo.app/capacitor-security/) stays hidden until Capgo configures a live subscribe URL and Turnstile site key (see [website#1393](https://github.com/Cap-go/website/pull/1393)). Until then, use GitHub advisory listings or console settings.
+
+</Aside>
 
 You can use more than one channel; Capgo deduplicates by email address on the backend.
 
