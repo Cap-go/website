@@ -77,7 +77,7 @@ For digital goods and services, you **must** use Google Play's billing system:
 - One-time donations to nonprofits
 
 :::note Subscription Setup
-In Play Console, configure Android subscriptions using the current **subscription -> base plan -> offer** model. In `native-purchases`, pass the Base Plan ID with `planIdentifier`.
+In Play Console, configure Android subscriptions using the current **subscription -> base plan -> offer** model. In `native-purchases`, pass the Base Plan ID with `planIdentifier`, or pass `offerToken` from the same `getProducts()` result to charge one exact offer. See [Android subscription offers](/docs/plugins/native-purchases/android-subscription-offers/).
 :::
 
 ### Implementation with Native Purchases
@@ -98,7 +98,7 @@ const { products } = await NativePurchases.getProducts({
 // Plan identifiers are the Base Plan IDs you create in Google Play Console
 const transaction = await NativePurchases.purchaseProduct({
   productIdentifier: 'premium_monthly',
-  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  planIdentifier: 'monthly-plan', // Android base plan id, required unless offerToken is passed; ignored on iOS
   productType: PURCHASE_TYPE.SUBS,
 });
 
@@ -140,7 +140,7 @@ function SubscriptionCard({ product }) {
       {/* Regular price */}
       <div className="regular-price">
         <p className="price">{product.priceString}</p>
-        <p className="period">per {product.subscriptionPeriod}</p>
+        <p className="period">per {product.subscriptionPeriod?.unitString ?? 'period'}</p>
       </div>
 
       {/* Clear description */}

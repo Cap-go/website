@@ -119,7 +119,7 @@ console.log(`${product.title} — ${product.priceString}`);
 // Purchase (planIdentifier = Base Plan ID from Google Play Console)
 const transaction = await NativePurchases.purchaseProduct({
   productIdentifier: 'com.example.premium.monthly',
-  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  planIdentifier: 'monthly-plan', // Android base plan id, required unless offerToken is passed; ignored on iOS
   productType: PURCHASE_TYPE.SUBS,
 });
 
@@ -142,6 +142,7 @@ if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.i
 
 ## Next Steps
 
+- [Android subscription offers](/docs/plugins/native-purchases/android-subscription-offers/) for `offerToken`, optional `subscriptionPeriod`, and `subscriptionBillingCycles`
 - [Create an introductory offer](/docs/plugins/native-purchases/android-introductory-offer/) to attract new subscribers
 - [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your subscriptions
 - Set up backend receipt validation for security
