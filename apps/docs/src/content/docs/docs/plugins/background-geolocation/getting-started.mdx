@@ -194,7 +194,7 @@ await BackgroundGeolocation.addGeofence({
 const handle = await BackgroundGeolocation.addListener(
   'geofenceTransition',
   (event) => {
-    console.log(event.identifier, event.transition);
+    console.log(event.identifier, event.transition, event.time);
   },
 );
 
@@ -218,6 +218,8 @@ On iOS, geofencing requires Always location authorization. On Android 10 and new
 ```xml
 <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 ```
+
+On iOS, a terminated app only receives crossings if you start `GeofenceRelay` from the app delegate. Call `clearGeofenceQueue()` on sign-out, and read `event.time` on the webhook because a queued POST can arrive later. See [Geofence queue](/docs/plugins/background-geolocation/geofence-queue/).
 
 ## Type Reference
 
