@@ -46,15 +46,15 @@ Every payload includes `org_id` and `app_id` inside `data`. Build events add bui
 | Argument | Required | Applies to | Meaning |
 | -------- | -------- | ---------- | ------- |
 | `org_id` | Yes | All events | Organization to watch. |
-| `app_id` | No | All events | Limit deliveries to one app. Omit to receive events for any app in the org you can read. |
-| `channel` | No | `bundle.deployed` only | Limit deployments to one channel name. |
-| `channel` | Yes | `update.failure_spike` | Channel to watch. Spike detection is per channel. |
+| `app_id` | No | `build.*`, `bundle.*` | Limit deliveries to one app. Omit to receive events for any app in the org you can read. |
+| `app_id` | Yes | `update.failure_spike` | App to watch. |
+| `channel` | No | `bundle.deployed`, `update.failure_spike` | Optional channel name filter. Omit on `update.failure_spike` to aggregate across channels for that app. |
 
 ### `update.failure_spike` thresholds (`arguments`)
 
-Each subscription stores its own numbers. Capgo ships **recommended defaults**; tune them to your active device count and traffic so you catch real regressions without noise.
+Each subscription stores its own numbers. Capgo ships **Balanced** recommended defaults; tune them to your active device count and traffic so you catch real regressions without noise. `events/list` and `capgo_list_event_types` expose the same defaults.
 
-| Argument | Default | Meaning |
+| Argument | Default (Balanced) | Meaning |
 | -------- | ------- | ------- |
 | `min_failures` | `10` | Minimum failed update checks in the window. |
 | `failure_rate_percent` | `10` | Minimum failure rate (percent of checks in the window). |
@@ -62,11 +62,11 @@ Each subscription stores its own numbers. Capgo ships **recommended defaults**; 
 | `window_minutes` | `15` | Rolling window length Capgo evaluates. |
 | `cooldown_minutes` | `60` | After one delivery, ignore further spikes for this subscription until cooldown ends. |
 
-Capgo derives checks and failures from updater `version_usage` for the subscribed app and channel (failed checks vs total checks in the window).
+A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. For each subscription it gathers updater stats for the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`).
 
 #### When a spike fires
 
-Within each rolling `window_minutes` interval, Capgo evaluates **all three** conditions at once:
+For the current window snapshot, Capgo evaluates **all three** conditions at once:
 
 1. Total checks in the window is at least `min_checks`.
 2. Failed checks in the window is at least `min_failures`.
@@ -209,21 +209,26 @@ Each `POST` body is a single JSON object:
   "timestamp": "2026-11-10T14:00:00.000Z",
   "cursor": null,
   "data": {
-    "org_id": 42,
+    "org_id": "550e8400-e29b-41d4-a716-446655440000",
     "app_id": "com.example.app",
-    "channel_id": 7,
-    "channel_name": "production",
-    "window_minutes": 15,
-    "checks": 120,
+    "channel": "production",
+    "version": "1.2.3",
     "failures": 18,
-    "failure_rate_percent": 15,
+    "checks": 120,
+    "rate_percent": 15,
+    "window_minutes": 15,
+    "window_start": "2026-11-10T13:45:00.000Z",
+    "window_end": "2026-11-10T14:00:00.000Z",
     "thresholds": {
       "min_failures": 10,
       "failure_rate_percent": 10,
       "min_checks": 50,
       "window_minutes": 15,
       "cooldown_minutes": 60
-    }
+    },
+    "top_failure_action_codes": [
+      { "action": "fail", "count": 12 }
+    ]
   }
 }
 ```
