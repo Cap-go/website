@@ -32,8 +32,8 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components'
     for that relaunch.
   </Card>
   <Card title="Disk queue and retries" icon="setting">
-    Transitions are queued on disk and sent in order. iOS retries on network loss, 5xx, 408, 429, or 401/403. The queue keeps the newest 100 transitions, none older than seven
-    days.
+    On iOS, transitions are queued on disk and sent in order. iOS retries on network loss, 5xx, 408, 429, or 401/403. That iOS queue keeps the newest 100 transitions, none older
+    than seven days. Android retries through WorkManager and does not use this ordered queue or those limits.
   </Card>
   <Card title="clearGeofenceQueue()" icon="approve-check">
     Drop unsent native POSTs on sign-out or an account switch on the same `url`. The queue is also emptied when `setupGeofencing` is given a different `url`. On web there is no
@@ -46,7 +46,8 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components'
 </CardGrid>
 
 <Aside type="tip">
-  Queue APIs landed in 8.6.0 and are additive. Existing <code>setupGeofencing</code> and <code>geofenceTransition</code> flows stay the same. Full examples:{' '}
+  Queue APIs require 8.6.0 or later (not included in 8.5.2) and are additive. Existing <code>setupGeofencing</code> and <code>geofenceTransition</code> flows stay the same. Full
+  examples:{' '}
   <a href="/docs/plugins/background-geolocation/geofence-queue/">Geofence queue</a>.
 </Aside>
 
@@ -82,7 +83,7 @@ Use `@capgo/background-geolocation` when your Capacitor app needs precise locati
 | `removeGeofence`                         | Stops monitoring one geofence by identifier.                                                                             |
 | `removeAllGeofences`                     | Stops monitoring all geofences registered by this plugin.                                                                |
 | `getMonitoredGeofences`                  | Returns the identifiers currently monitored by the native layer.                                                         |
-| `updateHeaders`                          | Replaces persisted HTTP headers for native POST delivery and flushes the geofence queue.                                 |
+| `updateHeaders`                          | Replaces persisted HTTP headers for native POST delivery. On iOS this also flushes the geofence queue. On Android it saves headers without starting queued WorkManager jobs. |
 | `clearGeofenceQueue`                     | Drops geofence transitions queued for a native POST and not yet sent. Resolves at once on web.                           |
 | `addListener('geofenceTransition', ...)` | Receives geofence enter and exit events while the app is alive. Events may include `time`.                               |
 | `addListener('geofenceError', ...)`      | Receives native geofence monitoring errors while the app is alive.                                                       |

@@ -219,7 +219,7 @@ On iOS, geofencing requires Always location authorization. On Android 10 and new
 <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 ```
 
-On iOS, a terminated app only receives crossings if you start `GeofenceRelay` from the app delegate. Call `clearGeofenceQueue()` on sign-out, and read `event.time` on the webhook because a queued POST can arrive later. See [Geofence queue](/docs/plugins/background-geolocation/geofence-queue/).
+On iOS, a terminated app only receives crossings if you start `GeofenceRelay` from the app delegate. When the user signs out or you switch accounts, remove account-specific geofences with `removeGeofence()` or, if they are all account-specific, `removeAllGeofences()`, then call `clearGeofenceQueue()` before setting another account's credentials. Read `event.time` on the webhook because a queued POST can arrive later. See [Geofence queue](/docs/plugins/background-geolocation/geofence-queue/).
 
 ## Type Reference
 

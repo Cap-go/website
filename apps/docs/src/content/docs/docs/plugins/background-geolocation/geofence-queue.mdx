@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-Use the 8.6.0 queue APIs when your backend must receive geofence crossings after the app is terminated, after a network failure, or after a lapsed auth token is refreshed. These APIs are **additive**. Existing `setupGeofencing`, `addGeofence`, and `geofenceTransition` flows stay the same.
+These queue APIs require `@capgo/background-geolocation` 8.6.0 or later, which is not in 8.5.2. Use them when your backend must receive geofence crossings after the app is terminated, after a network failure, or after a lapsed auth token is refreshed. The APIs are **additive**. Existing `setupGeofencing`, `addGeofence`, and `geofenceTransition` flows stay the same.
 
 Source of truth: `src/definitions.ts` and the README on [capacitor-background-geolocation](https://github.com/Cap-go/capacitor-background-geolocation/).
 
@@ -44,6 +44,7 @@ import { BackgroundGeolocation } from '@capgo/background-geolocation'
 await BackgroundGeolocation.setupGeofencing({
   url: 'https://api.example.com/geofences',
   headers: { Authorization: 'Bearer <token>' },
+  backgroundLocation: true,
   notifyOnEntry: true,
   notifyOnExit: true,
   payload: { userId: '123' },
@@ -61,17 +62,17 @@ On Android, native background POST delivery also requires `backgroundLocation: t
 
 ## Queue, retries, and limits
 
-Transitions are queued on disk and sent in order. A flush also runs on the next launch, crossing, network return, return to the foreground, or `updateHeaders()` call.
+On iOS, transitions are queued on disk and sent in order. A flush also runs on the next launch, crossing, network return, return to the foreground, or `updateHeaders()` call. The iOS queue keeps the newest 100 transitions, none older than seven days. It is emptied when `setupGeofencing` is given a different `url`, or when you call `clearGeofenceQueue()`.
+
+On Android, WorkManager retries delivery and does not use this ordered iOS disk queue or those retention limits.
 
 On **iOS**, a POST that fails for lack of network, with a 5xx, a 408 or a 429, or with a 401 or 403 stays queued. Any other response removes it. A 401 or 403 is retried so `updateHeaders()` with a fresh token can let the same transitions through.
 
 On **Android**, WorkManager retries every POST that does not get a 2xx response.
 
-The queue keeps the newest 100 transitions, none older than seven days. It is emptied when `setupGeofencing` is given a different `url`, or when you call `clearGeofenceQueue()`.
-
 ## clearGeofenceQueue()
 
-Queued transitions go out with the `headers` in place when they are sent. Call `clearGeofenceQueue()` when the user signs out, or before another account's credentials are given to `updateHeaders()` or `setupGeofencing`.
+Queued transitions go out with the `headers` in place when they are sent. When the user signs out or you switch accounts, remove account-specific geofences with `removeGeofence()` or `removeAllGeofences()`, then call `clearGeofenceQueue()` before setting another account's credentials on `updateHeaders()` or `setupGeofencing`.
 
 ```typescript
 await BackgroundGeolocation.clearGeofenceQueue()
@@ -91,7 +92,7 @@ await BackgroundGeolocation.updateHeaders({
 })
 ```
 
-`updateHeaders()` persists the new headers and flushes the queue, which is how a 401 or 403 that stayed queued on iOS goes out after a token refresh.
+On iOS, `updateHeaders()` persists the new headers and flushes the queue, which is how a 401 or 403 that stayed queued goes out after a token refresh. On Android, `updateHeaders()` saves the headers only; queued WorkManager jobs wait for their scheduled retry and are not started immediately.
 
 ## GeofenceTransitionEvent.time
 
