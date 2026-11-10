@@ -1,6 +1,30 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.102.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.102.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.102.0",
+    "pubDate": "2026-11-10T02:41:21.000Z",
+    "description": "🆕 Changelog Added CI/CD Onboarding : Added a guided setup workflow for Continuous Integration/Continuous Deployment to facilitate live updates and Builder integration, including tracking of setup progress. Fixed Changelog Security : Fixed an issue where fetching GitHub release data for the changelog required improper handling of authentication; release fetches are now properly authenticated and shared securely. Billing Recovery : Improved the reliability of payment recovery processes and ref..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.34.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.0",
+    "pubDate": "2026-11-10T02:43:52.000Z",
+    "description": "🆕 Changelog Added Introduced an onboarding guide to help users set up CI/CD pipelines for live updates and Builder, including tracking for setup completion. Fixed Improved payment recovery mechanisms and enhanced usage alerts to provide better visibility into billing status. Ensured GitHub release fetches are properly authenticated and shared, resolving potential access issues during changelog generation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.33.2...capgo 2..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.33.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.2",
+    "pubDate": "2026-11-09T16:36:27.000Z",
+    "description": "🆕 Changelog Fixed AI Onboarding Agent Events : Resolved an issue where AI onboarding agent connection events were not being sent from the server, ensuring that status updates and connectivity signals are now correctly propagated to clients. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.101.1...capgo 22.33.2"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.101.1",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.101.1",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.101.1",
@@ -296,44 +320,20 @@
     "description": "🆕 Changelog Changed Improved performance of access control queries for apps and usage credit resources by switching to set based readable row level security sets. This reduces query latency and improves scalability when reading these records. No action is required. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.25.1...capgo 22.25.2"
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.25.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.1",
-    "pubDate": "2026-10-28T09:55:40.000Z",
-    "description": "🆕 Changelog Fixed Fixed a bug where an app could be incorrectly reported as on premise when its owner lookup failed. Apps are now classified as on premise only when ownership is successfully verified, preventing misclassification during lookup failures. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.25.0...capgo 22.25.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.25.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.0",
-    "pubDate": "2026-10-28T03:38:04.000Z",
-    "description": "🆕 Changelog Added Introduced an AI agent option for native builds during onboarding. The flow now recommends the AI agent by default and falls back to manual setup only when the user explicitly selects it. Fixed Repaired a synchronization gap in read replica live subscribers so that subscriber data stays consistent row by row. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.24.2...capgo 22.25.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.24.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.24.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.24.2",
-    "pubDate": "2026-10-28T01:35:44.000Z",
-    "description": "🆕 Changelog Changed Improved performance when loading a version's file list by reading file identifiers as plain rows and avoiding repeated decompression, reducing memory overhead and latency for bundles with many files. Fixed Fixed intermittent Supabase local startup failures by retrying the start when the edge runtime misses its initial health check. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.24.1...capgo 22.24.2"
+    "category": "release",
+    "title": "capacitor-accelerometer 8.0.55",
+    "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.55",
+    "guid": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.55",
+    "pubDate": "2026-11-09T06:55:52.000Z",
+    "description": "🆕 Changelog Changed Performed routine lock file maintenance to update pinned dependencies to their latest compatible versions 🔗 Full Changelog : https://github.com/Cap go/capacitor accelerometer/compare/8.0.54...8.0.55"
   },
   {
     "category": "release",
-    "title": "capacitor-accelerometer 8.0.54",
-    "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.54",
-    "guid": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.54",
-    "pubDate": "2026-11-02T12:21:33.000Z",
-    "description": "🆕 Changelog Changed Updated the required Node.js version to v26 ( 56). This ensures the project builds and runs on the latest supported runtime, picking up recent performance and security fixes. If you build or run this project locally, upgrade your Node.js installation to v26. Refreshed the dependency lock file. Locked dependencies were updated to their latest compatible versions, reducing install drift and resolving potential issues from outdated transitive packages. 🔗 Full Changelog : ht..."
-  },
-  {
-    "category": "release",
-    "title": "capacitor-admob 8.2.6",
-    "link": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.6",
-    "guid": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.6",
-    "pubDate": "2026-11-02T13:19:51.000Z",
-    "description": "🆕 Changelog Changed Upgraded the Node.js runtime dependency to the latest release for improved compatibility and access to recent features. Updated the Bun runtime to the latest patch release to incorporate recent fixes and improvements. Bumped GitHub Artifact actions to their current major versions for more reliable CI artifact handling. Performed lock file maintenance to keep dependency resolutions consistent and reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor admob/c..."
+    "title": "capacitor-admob 8.2.7",
+    "link": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.7",
+    "guid": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.7",
+    "pubDate": "2026-11-09T07:04:27.000Z",
+    "description": "🆕 Changelog Changed Updated the Google Mobile Ads SDK dependency to 13.12.0, incorporating the latest upstream improvements and ensuring continued compatibility with ad provider requirements. 🔗 Full Changelog : https://github.com/Cap go/capacitor admob/compare/8.2.6...8.2.7"
   },
   {
     "category": "release",
@@ -353,11 +353,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-android-age-signals 8.1.29",
-    "link": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.29",
-    "guid": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.29",
-    "pubDate": "2026-11-02T12:44:04.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js dependency to v26. The project now builds and runs against Node.js 26. If you self host or contribute, upgrade your local Node.js installation and deployment images to version 26 to avoid compatibility issues. Refreshed dependency lock files. Pinned dependencies have been updated to their latest compatible versions, improving install reliability and ensuring the latest bug and security fixes are picked up during builds. 🔗 Full Changelog : https://github.c..."
+    "title": "capacitor-android-age-signals 8.1.30",
+    "link": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.30",
+    "guid": "https://github.com/Cap-go/capacitor-android-age-signals/releases/tag/8.1.30",
+    "pubDate": "2026-11-09T07:06:01.000Z",
+    "description": "🆕 Changelog Changed Updated project dependencies via lock file maintenance to incorporate the latest patches and improve overall stability and security. 🔗 Full Changelog : https://github.com/Cap go/capacitor android age signals/compare/8.1.29...8.1.30"
   },
   {
     "category": "release",
@@ -385,19 +385,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-android-usagestatsmanager 8.2.14",
-    "link": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.14",
-    "guid": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.14",
-    "pubDate": "2026-11-02T12:42:32.000Z",
-    "description": "🆕 Changelog Changed Updated the required Node.js runtime to version 26 ( 58). Verify your environment is running Node.js 26 before upgrading. Refreshed project dependencies via lock file maintenance, incorporating the latest compatible updates and patches. 🔗 Full Changelog : https://github.com/Cap go/capacitor android usagestatsmanager/compare/8.2.13...8.2.14"
+    "title": "capacitor-android-usagestatsmanager 8.2.15",
+    "link": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.15",
+    "guid": "https://github.com/Cap-go/capacitor-android-usagestatsmanager/releases/tag/8.2.15",
+    "pubDate": "2026-11-09T07:11:23.000Z",
+    "description": "🆕 Changelog Changed Updated dependencies to their latest maintenance releases via lock file maintenance. This incorporates upstream patch fixes and minor improvements from dependent packages, helping to keep the software stable and secure. No user facing behavior changes or breaking changes are introduced. 🔗 Full Changelog : https://github.com/Cap go/capacitor android usagestatsmanager/compare/8.2.14...8.2.15"
   },
   {
     "category": "release",
-    "title": "capacitor-app-attest 8.2.17",
-    "link": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.17",
-    "guid": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.17",
-    "pubDate": "2026-11-02T07:25:11.000Z",
-    "description": "🆕 Changelog Changed Updated dependencies to their latest compatible versions to maintain stability and incorporate upstream fixes. 🔗 Full Changelog : https://github.com/Cap go/capacitor app attest/compare/8.2.16...8.2.17"
+    "title": "capacitor-app-attest 8.2.18",
+    "link": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.18",
+    "guid": "https://github.com/Cap-go/capacitor-app-attest/releases/tag/8.2.18",
+    "pubDate": "2026-11-09T06:54:42.000Z",
+    "description": "🆕 Changelog Changed Refreshed the dependency lock file to pull in the latest compatible upstream package versions, helping maintain stability and benefit from routine bug fixes. No manual migration is required. Separated CI workflow concurrency groups for and events, reducing workflow cancellation conflicts and improving overall build reliability. 🔗 Full Changelog : https://github.com/Cap go/capacitor app attest/compare/8.2.17...8.2.18"
   },
   {
     "category": "release",
@@ -417,11 +417,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-appinsights 8.0.60",
-    "link": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.60",
-    "guid": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.60",
-    "pubDate": "2026-11-04T13:30:43.000Z",
-    "description": "🆕 Changelog Changed Updated to 1.19.1 and migrated to the AGP 9.1 toolchain, improving compatibility with newer Android SDKs and build tooling. Projects building from source should ensure their build environment supports AGP 9.1. 🔗 Full Changelog : https://github.com/Cap go/capacitor appinsights/compare/8.0.59...8.0.60"
+    "title": "capacitor-appinsights 8.0.62",
+    "link": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.62",
+    "guid": "https://github.com/Cap-go/capacitor-appinsights/releases/tag/8.0.62",
+    "pubDate": "2026-11-09T23:36:32.000Z",
+    "description": "🆕 Changelog Changed Updated Gradle build tool to v9.5.1, ensuring the project uses the latest stable build tooling with bug fixes and performance improvements for contributors building from source. 🔗 Full Changelog : https://github.com/Cap go/capacitor appinsights/compare/8.0.61...8.0.62"
   },
   {
     "category": "release",
@@ -449,11 +449,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-audiosession 8.1.7",
-    "link": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.7",
-    "guid": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.7",
-    "pubDate": "2026-11-02T13:00:21.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js to version 26. Users building or running the project should ensure Node.js 26 is installed. Refreshed the dependency lock file to pull in the latest compatible transitive dependency updates. 🔗 Full Changelog : https://github.com/Cap go/capacitor audiosession/compare/8.1.6...8.1.7"
+    "title": "capacitor-audiosession 8.1.8",
+    "link": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.8",
+    "guid": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.8",
+    "pubDate": "2026-11-09T07:16:43.000Z",
+    "description": "🆕 Changelog Changed Updated dependencies to their latest compatible versions through lock file maintenance, improving overall stability and compatibility with upstream packages. 🔗 Full Changelog : https://github.com/Cap go/capacitor audiosession/compare/8.1.7...8.1.8"
   },
   {
     "category": "release",
@@ -553,19 +553,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-crisp 8.2.11",
-    "link": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.11",
-    "guid": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.11",
-    "pubDate": "2026-11-04T13:56:43.000Z",
-    "description": "🆕 Changelog Fixed Updated the Crisp SDK to v2.0.24, resolving underlying dependency issues and ensuring compatibility with the latest Crisp messaging platform. Changed Upgraded the Node.js runtime dependency to v26; make sure your build and CI environments support Node 26 before upgrading. Updated Bun tooling to v1.4.4 for faster installs and improved build reliability. 🔗 Full Changelog : https://github.com/Cap go/capacitor crisp/compare/8.2.10...8.2.11"
+    "title": "capacitor-crisp 8.2.12",
+    "link": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.12",
+    "guid": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.12",
+    "pubDate": "2026-11-09T07:12:40.000Z",
+    "description": "🆕 Changelog Fixed Updated the Crisp SDK dependency to v2.0.25 to incorporate the latest upstream fixes and improve chat reliability. 🔗 Full Changelog : https://github.com/Cap go/capacitor crisp/compare/8.2.11...8.2.12"
   },
   {
     "category": "release",
-    "title": "capacitor-data-storage-sqlite 8.0.59",
-    "link": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.59",
-    "guid": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.59",
-    "pubDate": "2026-11-02T06:47:49.000Z",
-    "description": "🆕 Changelog Changed Updated SQLCipher Android to 4.20.0 to keep encrypted database support current with the latest upstream stability and security improvements. No breaking changes or migration steps are required. 🔗 Full Changelog : https://github.com/Cap go/capacitor data storage sqlite/compare/8.0.58...8.0.59"
+    "title": "capacitor-data-storage-sqlite 8.0.60",
+    "link": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.60",
+    "guid": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.60",
+    "pubDate": "2026-11-09T07:10:07.000Z",
+    "description": "🆕 Changelog Changed Updated Node.js build dependency to v26, which may require contributors to use Node 26 when working on the project Refreshed lock file to keep dependencies up to date and ensure reproducible installs 🔗 Full Changelog : https://github.com/Cap go/capacitor data storage sqlite/compare/8.0.59...8.0.60"
   },
   {
     "category": "release",
@@ -601,19 +601,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-downloader 8.3.18",
-    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.18",
-    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.18",
-    "pubDate": "2026-11-02T13:19:20.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js runtime requirement to v26 — this release requires Node.js 26. If you manage your own Node installation or CI environment, upgrade to Node.js 26 before deploying this version. Refreshed the dependency lock file — pulls in the latest compatible dependency versions and ensures reproducible installs. No user facing API changes are expected. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.3.17...8.3.18"
+    "title": "capacitor-downloader 8.3.19",
+    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.19",
+    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.3.19",
+    "pubDate": "2026-11-09T07:02:58.000Z",
+    "description": "🆕 Changelog Changed Updated project dependencies to their latest compatible versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.3.18...8.3.19"
   },
   {
     "category": "release",
-    "title": "capacitor-env 8.1.50",
-    "link": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.50",
-    "guid": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.50",
-    "pubDate": "2026-10-26T12:28:57.000Z",
-    "description": "🆕 Changelog Changed Updated the Bun runtime dependency to its latest release for improved stability and compatibility. Refreshed the dependency lock file to keep installed dependencies consistent and reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor env/compare/8.1.49...8.1.50"
+    "title": "capacitor-env 8.1.52",
+    "link": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.52",
+    "guid": "https://github.com/Cap-go/capacitor-env/releases/tag/8.1.52",
+    "pubDate": "2026-11-09T07:08:24.000Z",
+    "description": "🆕 Changelog Changed Updated locked dependency versions as part of routine lock file maintenance. Improved installation reproducibility by ensuring consistent package resolution across environments. 🔗 Full Changelog : https://github.com/Cap go/capacitor env/compare/8.1.51...8.1.52"
   },
   {
     "category": "release",
@@ -625,11 +625,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-fast-sql 8.3.0",
-    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.3.0",
-    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.3.0",
-    "pubDate": "2026-11-08T03:48:43.000Z",
-    "description": "🆕 Changelog Added Added an opt in binary HTTP transport option that can deliver better performance and reduced payload sizes compared to the default text based transport. Added controlled native benchmark support, making it easier to run consistent performance comparisons and validate platform specific behavior. Changed Bumped the release version to 8.3.0 to reflect the new feature additions. Migration Notes The new binary HTTP transport is opt in, so existing integrations remain unaffected...."
+    "title": "capacitor-fast-sql 8.3.1",
+    "link": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.3.1",
+    "guid": "https://github.com/Cap-go/capacitor-fast-sql/releases/tag/8.3.1",
+    "pubDate": "2026-11-09T07:21:27.000Z",
+    "description": "🆕 Changelog Changed Refreshed the dependency lock file to incorporate the latest compatible package updates, improving stability and ensuring the project benefits from upstream bug fixes and improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor fast sql/compare/8.3.0...8.3.1"
   },
   {
     "category": "release",
@@ -641,11 +641,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-file-compressor 8.1.18",
-    "link": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.18",
-    "guid": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.18",
-    "pubDate": "2026-11-02T12:52:41.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js to v26 to align with the latest supported runtime and toolchain changes. ( 56) If you build or run the project locally, verify that your environment supports Node.js v26. Refreshed the dependency lock file to pull in the latest compatible dependency versions and keep builds reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor file compressor/compare/8.1.17...8.1.18"
+    "title": "capacitor-file-compressor 8.1.19",
+    "link": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.19",
+    "guid": "https://github.com/Cap-go/capacitor-file-compressor/releases/tag/8.1.19",
+    "pubDate": "2026-11-09T06:57:21.000Z",
+    "description": "🆕 Changelog Changed Updated dependency lock file to incorporate the latest compatible upstream versions, improving overall stability and reliability. 🔗 Full Changelog : https://github.com/Cap go/capacitor file compressor/compare/8.1.18...8.1.19"
   },
   {
     "category": "release",
@@ -689,11 +689,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-health 8.12.0",
-    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.12.0",
-    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.12.0",
-    "pubDate": "2026-11-07T10:18:19.000Z",
-    "description": "🆕 Changelog Added Added support for the data type on iOS 18+, allowing you to read and work with State of Mind samples alongside other HealthKit data types. This makes it possible to build features around mood and mental state tracking on supported devices. 🔗 Full Changelog : https://github.com/Cap go/capacitor health/compare/8.11.14...8.12.0"
+    "title": "capacitor-health 8.12.1",
+    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.12.1",
+    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.12.1",
+    "pubDate": "2026-11-09T07:09:59.000Z",
+    "description": "🆕 Changelog Changed Updated project dependencies to their latest compatible versions through routine lock file maintenance, ensuring incorporated upstream bug fixes, performance improvements, and stability enhancements are available. 🔗 Full Changelog : https://github.com/Cap go/capacitor health/compare/8.12.0...8.12.1"
   },
   {
     "category": "release",
@@ -705,11 +705,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-ibeacon 8.1.47",
-    "link": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.47",
-    "guid": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.47",
-    "pubDate": "2026-11-02T13:10:14.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js requirement to v26. The project now requires Node.js 26 to run. If you are using an older Node version, you will need to upgrade your environment before installing or running this release. Performed lock file maintenance. Dependencies have been refreshed to keep the project aligned with the latest compatible package versions. No functional changes are expected. 🔗 Full Changelog : https://github.com/Cap go/capacitor ibeacon/compare/8.1.46...8.1.47"
+    "title": "capacitor-ibeacon 8.1.48",
+    "link": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.48",
+    "guid": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.48",
+    "pubDate": "2026-11-09T07:13:43.000Z",
+    "description": "🆕 Changelog Changed Updated the dependency lock file to pull in the latest upstream package releases, ensuring the project stays current with recent patches and improvements from its dependencies. 🔗 Full Changelog : https://github.com/Cap go/capacitor ibeacon/compare/8.1.47...8.1.48"
   },
   {
     "category": "release",
@@ -785,11 +785,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-jw-player 8.0.61",
-    "link": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.61",
-    "guid": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.61",
-    "pubDate": "2026-11-02T06:42:30.000Z",
-    "description": "🆕 Changelog Changed Updated bundled JWPlayerKit dependency to 4.28.2, incorporating the latest upstream improvements and fixes. ( 129) 🔗 Full Changelog : https://github.com/Cap go/capacitor jw player/compare/8.0.60...8.0.61"
+    "title": "capacitor-jw-player 8.0.62",
+    "link": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.62",
+    "guid": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.62",
+    "pubDate": "2026-11-09T06:57:12.000Z",
+    "description": "🆕 Changelog Fixed Updated JW Player to v4.28.0 to incorporate the latest player fixes and resolve dependency issues ( 131) Changed Updated the project’s Node.js runtime requirement to v26 ( 130) 🔗 Full Changelog : https://github.com/Cap go/capacitor jw player/compare/8.0.61...8.0.62"
   },
   {
     "category": "release",
@@ -841,11 +841,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-media-session 8.1.7",
-    "link": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.7",
-    "guid": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.7",
-    "pubDate": "2026-11-02T13:11:30.000Z",
-    "description": "🆕 Changelog Changed Updated project dependencies to their latest compatible versions, keeping the package current with upstream fixes and improvements. Refreshed the dependency lock file to ensure consistent and reproducible installs. Upgraded the Node.js dependency to v26. If you run or deploy this package directly, ensure your environment is using Node.js 26. 🔗 Full Changelog : https://github.com/Cap go/capacitor media session/compare/8.1.6...8.1.7"
+    "title": "capacitor-media-session 8.1.8",
+    "link": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.8",
+    "guid": "https://github.com/Cap-go/capacitor-media-session/releases/tag/8.1.8",
+    "pubDate": "2026-11-09T07:13:14.000Z",
+    "description": "🆕 Changelog Changed Updated dependency lock file to incorporate the latest compatible dependency versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor media session/compare/8.1.7...8.1.8"
   },
   {
     "category": "release",
@@ -865,11 +865,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-mute 8.1.17",
-    "link": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.17",
-    "guid": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.17",
-    "pubDate": "2026-11-02T12:18:05.000Z",
-    "description": "🆕 Changelog Changed Updated the required Node.js version to 26 ( 155), bringing in the latest runtime improvements, performance enhancements, and security fixes. If you build, install, or develop this package locally, ensure your environment is running Node.js 26. Refreshed the dependency lock file to keep package versions consistent and builds reproducible. 🔗 Full Changelog : https://github.com/Cap go/capacitor mute/compare/8.1.16...8.1.17"
+    "title": "capacitor-mute 8.1.18",
+    "link": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.18",
+    "guid": "https://github.com/Cap-go/capacitor-mute/releases/tag/8.1.18",
+    "pubDate": "2026-11-09T06:57:40.000Z",
+    "description": "🆕 Changelog Changed Updated lock file dependencies to their latest compatible versions. This keeps the project current with upstream patches and may include minor bug fixes or security improvements from dependency maintainers. 🔗 Full Changelog : https://github.com/Cap go/capacitor mute/compare/8.1.17...8.1.18"
   },
   {
     "category": "release",
@@ -881,11 +881,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-audio 8.4.39",
-    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.39",
-    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.39",
-    "pubDate": "2026-11-04T01:44:32.000Z",
-    "description": "🆕 Changelog Fixed Android NativeAudio : Removed type references from the NativeAudio plugin class, improving compatibility on older Android devices. ( 347) Updated the Google Services Gradle plugin ( ) to v4.5.0, incorporating the latest upstream fixes. ( 345) Changed Updated internal tooling: Bun to v1.4.4. ( 344) Updated CI/CD actions: to v6. ( 349) to v7. ( 348) 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.4.38...8.4.39"
+    "title": "capacitor-native-audio 8.4.40",
+    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.40",
+    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.40",
+    "pubDate": "2026-11-09T23:15:52.000Z",
+    "description": "🆕 Changelog Changed Updated Node.js to v26, keeping the project's runtime and tooling aligned with the latest Node.js release. Updated the GitHub Actions action to v7, maintaining reliable CI workflow behavior with current action versions. Migration Notes Verify that your local development and deployment environments support Node.js v26 before upgrading to this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.4.39...8.4.40"
   },
   {
     "category": "release",
@@ -913,11 +913,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-market 8.0.56",
-    "link": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.56",
-    "guid": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.56",
-    "pubDate": "2026-11-02T12:37:29.000Z",
-    "description": "🆕 Changelog Changed Updated the Node.js runtime dependency to v26, ensuring compatibility with the latest runtime features and security patches. If you build from source or maintain a deployment environment, you must use Node.js v26 or later. Refreshed the dependency lock file to keep resolved dependencies aligned with their specified ranges. 🔗 Full Changelog : https://github.com/Cap go/capacitor native market/compare/8.0.55...8.0.56"
+    "title": "capacitor-native-market 8.0.57",
+    "link": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.57",
+    "guid": "https://github.com/Cap-go/capacitor-native-market/releases/tag/8.0.57",
+    "pubDate": "2026-11-09T07:18:12.000Z",
+    "description": "🆕 Changelog Changed Updated project dependencies to their latest compatible versions through lock file maintenance. This ensures the project stays current with upstream patches and improvements without introducing functional changes. 🔗 Full Changelog : https://github.com/Cap go/capacitor native market/compare/8.0.56...8.0.57"
   },
   {
     "category": "release",
@@ -937,19 +937,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-nativegeocoder 8.0.60",
-    "link": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.60",
-    "guid": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.60",
-    "pubDate": "2026-11-02T13:00:47.000Z",
-    "description": "🆕 Changelog Changed Updated the supported Node.js runtime to v26 to keep the project aligned with the latest stable runtime, ensuring access to new features and continued maintenance support. Refreshed the dependency lockfile to maintain reproducible installs and keep transitive dependencies current. Migration notes Verify that your deployment and development environments are running Node.js 26, as older versions are no longer supported. 🔗 Full Changelog : https://github.com/Cap go/capacito..."
+    "title": "capacitor-nativegeocoder 8.0.61",
+    "link": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.61",
+    "guid": "https://github.com/Cap-go/capacitor-nativegeocoder/releases/tag/8.0.61",
+    "pubDate": "2026-11-09T07:20:23.000Z",
+    "description": "🆕 Changelog Changed Updated dependencies via lock file maintenance to keep the project aligned with the latest compatible package versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor nativegeocoder/compare/8.0.60...8.0.61"
   },
   {
     "category": "release",
-    "title": "capacitor-navigation-bar 8.2.19",
-    "link": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.19",
-    "guid": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.19",
-    "pubDate": "2026-11-02T13:05:01.000Z",
-    "description": "🆕 Changelog Changed Updated the minimum Node.js version to 26. Development and runtime environments now require Node.js 26, ensuring compatibility with the latest tooling and language features. If you build or run the project locally, upgrade Node before installing dependencies. Older Node versions are no longer supported. Refreshed dependency lock files. Transitive dependencies were brought up to date to pull in bug fixes and patch releases from upstream packages. No action is required for ..."
+    "title": "capacitor-navigation-bar 8.2.20",
+    "link": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.20",
+    "guid": "https://github.com/Cap-go/capacitor-navigation-bar/releases/tag/8.2.20",
+    "pubDate": "2026-11-09T06:58:41.000Z",
+    "description": "🆕 Changelog Changed Updated dependency lock files as part of routine maintenance to ensure compatibility and incorporate the latest upstream fixes. 🔗 Full Changelog : https://github.com/Cap go/capacitor navigation bar/compare/8.2.19...8.2.20"
   },
   {
     "category": "release",
@@ -969,11 +969,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-nfc 8.3.6",
-    "link": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.6",
-    "guid": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.6",
-    "pubDate": "2026-11-02T13:21:39.000Z",
-    "description": "🆕 Changelog Changed Updated the Node.js runtime requirement to v26 to maintain compatibility with the latest supported release and its security fixes. Breaking change / Migration: If you run the project locally or in a self managed environment, upgrade Node.js to version 26. Security Inherits the latest security patches from the Node.js v26 update. 🔗 Full Changelog : https://github.com/Cap go/capacitor nfc/compare/8.3.5...8.3.6"
+    "title": "capacitor-nfc 8.3.7",
+    "link": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.7",
+    "guid": "https://github.com/Cap-go/capacitor-nfc/releases/tag/8.3.7",
+    "pubDate": "2026-11-09T07:06:16.000Z",
+    "description": "🆕 Changelog Changed Refreshed the dependency lock file to the latest compatible versions, improving installation reliability and long term stability. 🔗 Full Changelog : https://github.com/Cap go/capacitor nfc/compare/8.3.6...8.3.7"
   },
   {
     "category": "release",
@@ -1001,11 +1001,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-pdf-generator 8.0.49",
-    "link": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.49",
-    "guid": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.49",
-    "pubDate": "2026-11-02T13:14:46.000Z",
-    "description": "🆕 Changelog Changed Updated the Node.js development dependency to v26 for builds and tooling compatibility. Refreshed the dependency lock file to pull in the latest compatible package versions and maintain reproducible installs. Removed No user facing features were removed in this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor pdf generator/compare/8.0.48...8.0.49"
+    "title": "capacitor-pdf-generator 8.0.50",
+    "link": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.50",
+    "guid": "https://github.com/Cap-go/capacitor-pdf-generator/releases/tag/8.0.50",
+    "pubDate": "2026-11-09T07:00:27.000Z",
+    "description": "🆕 Changelog Changed Updated internal dependencies to their latest compatible versions, capturing upstream fixes and stability improvements. Confirmed no public API changes and no migration steps are required. 🔗 Full Changelog : https://github.com/Cap go/capacitor pdf generator/compare/8.0.49...8.0.50"
   },
   {
     "category": "release",
@@ -1017,11 +1017,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-pedometer 8.0.53",
-    "link": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.53",
-    "guid": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.53",
-    "pubDate": "2026-11-02T13:00:07.000Z",
-    "description": "🆕 Changelog Changed Updated the supported Node.js runtime to v26; if you build or run from source, ensure your environment is using Node.js 26 or later Refreshed the dependency lock file to keep indirect dependencies current and aligned with upstream releases 🔗 Full Changelog : https://github.com/Cap go/capacitor pedometer/compare/8.0.52...8.0.53"
+    "title": "capacitor-pedometer 8.0.54",
+    "link": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.54",
+    "guid": "https://github.com/Cap-go/capacitor-pedometer/releases/tag/8.0.54",
+    "pubDate": "2026-11-09T07:10:48.000Z",
+    "description": "🆕 Changelog Changed Updated dependency lock file to the latest compatible versions, ensuring the project remains stable and secure. 🔗 Full Changelog : https://github.com/Cap go/capacitor pedometer/compare/8.0.53...8.0.54"
   },
   {
     "category": "release",
@@ -1033,11 +1033,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-persistent-account 8.0.50",
-    "link": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.50",
-    "guid": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.50",
-    "pubDate": "2026-11-02T13:16:41.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js runtime support to version 26 ( 66). This aligns the project with the latest Node.js release and ensures compatibility with newer tooling and dependencies. If your deployment or development environment is pinned to an older Node.js version, verify compatibility before upgrading. Refreshed the dependency lock file to incorporate the latest compatible package updates and patches. 🔗 Full Changelog : https://github.com/Cap go/capacitor persistent account/comp..."
+    "title": "capacitor-persistent-account 8.0.51",
+    "link": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.51",
+    "guid": "https://github.com/Cap-go/capacitor-persistent-account/releases/tag/8.0.51",
+    "pubDate": "2026-11-09T07:02:24.000Z",
+    "description": "🆕 Changelog Changed Updated project dependencies to their latest compatible versions for improved stability and to benefit from upstream fixes and enhancements. 🔗 Full Changelog : https://github.com/Cap go/capacitor persistent account/compare/8.0.50...8.0.51"
   },
   {
     "category": "release",
@@ -1105,11 +1105,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-realtimekit 8.0.44",
-    "link": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.44",
-    "guid": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.44",
-    "pubDate": "2026-11-02T12:55:35.000Z",
-    "description": "🆕 Changelog Changed Updated the Node.js runtime requirement to v26 ( 64) to take advantage of the latest platform features, performance improvements, and security patches. If you run this project locally or in production, upgrade your environment to Node.js 26 or later before deploying this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor realtimekit/compare/8.0.43...8.0.44"
+    "title": "capacitor-realtimekit 8.0.45",
+    "link": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.45",
+    "guid": "https://github.com/Cap-go/capacitor-realtimekit/releases/tag/8.0.45",
+    "pubDate": "2026-11-09T07:10:27.000Z",
+    "description": "🆕 Changelog Changed Updated dependency lock file to latest compatible versions, ensuring stability and compatibility with the latest upstream dependency releases. 🔗 Full Changelog : https://github.com/Cap go/capacitor realtimekit/compare/8.0.44...8.0.45"
   },
   {
     "category": "release",
@@ -1153,19 +1153,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-screen-recorder 8.4.6",
-    "link": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.6",
-    "guid": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.6",
-    "pubDate": "2026-11-02T12:51:06.000Z",
-    "description": "🆕 Changelog Changed Updated the required Node.js version to 26; ensure your environment is running Node.js 26 before upgrading ( 252) Refreshed lock file dependencies to their latest compatible versions 🔗 Full Changelog : https://github.com/Cap go/capacitor screen recorder/compare/8.4.5...8.4.6"
+    "title": "capacitor-screen-recorder 8.4.7",
+    "link": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.7",
+    "guid": "https://github.com/Cap-go/capacitor-screen-recorder/releases/tag/8.4.7",
+    "pubDate": "2026-11-09T07:24:58.000Z",
+    "description": "🆕 Changelog Changed Updated dependencies and regenerated the lock file to incorporate the latest compatible package versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor screen recorder/compare/8.4.6...8.4.7"
   },
   {
     "category": "release",
-    "title": "capacitor-shake 8.0.54",
-    "link": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.54",
-    "guid": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.54",
-    "pubDate": "2026-11-02T13:04:01.000Z",
-    "description": "🆕 Changelog Changed Updated required Node.js version to v26 — users must run Node.js 26 or later; older Node versions are no longer supported. Refreshed dependency lock file with the latest compatible versions to improve build stability and reproducibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor shake/compare/8.0.53...8.0.54"
+    "title": "capacitor-shake 8.0.55",
+    "link": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.55",
+    "guid": "https://github.com/Cap-go/capacitor-shake/releases/tag/8.0.55",
+    "pubDate": "2026-11-09T07:07:15.000Z",
+    "description": "🆕 Changelog Changed Updated project dependencies through routine lock file maintenance Keeps the project current with upstream patches and compatibility fixes Helps maintain stability and reliability for downstream users No functional changes or breaking changes are expected 🔗 Full Changelog : https://github.com/Cap go/capacitor shake/compare/8.0.54...8.0.55"
   },
   {
     "category": "release",
@@ -1177,19 +1177,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-sheets v8.2.6",
-    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.6",
-    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.6",
-    "pubDate": "2026-11-02T06:42:20.000Z",
-    "description": "🆕 Changelog Changed Updated Rolldown WebAssembly bindings to v1.2.16 for improved bundling stability and compatibility Updated Bun runtime dependency to v1.4.4 for better build performance and toolchain reliability 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.5...v8.2.6"
+    "title": "capacitor-sheets v8.2.7",
+    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.7",
+    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.7",
+    "pubDate": "2026-11-09T07:01:48.000Z",
+    "description": "🆕 Changelog Changed Updated Rolldown WASM32 WASI binding to v1.3.0. This upgrade brings in the latest upstream improvements for WebAssembly/WASI builds, which may include better stability, performance, or compatibility when running Rolldown in WASM based environments. Fixed Added Removed Deprecated Security 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.6...v8.2.7"
   },
   {
     "category": "release",
-    "title": "capacitor-sim 8.0.51",
-    "link": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.51",
-    "guid": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.51",
-    "pubDate": "2026-11-02T12:51:22.000Z",
-    "description": "🆕 Changelog Changed Updated the project's Node.js runtime dependency to version 26. If you build or deploy with a specific Node.js version, upgrade to Node.js 26 to stay compatible. Refreshed the dependency lock file and transitive dependencies to their latest compatible versions, improving install stability and security. 🔗 Full Changelog : https://github.com/Cap go/capacitor sim/compare/8.0.50...8.0.51"
+    "title": "capacitor-sim 8.0.52",
+    "link": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.52",
+    "guid": "https://github.com/Cap-go/capacitor-sim/releases/tag/8.0.52",
+    "pubDate": "2026-11-09T07:19:02.000Z",
+    "description": "🆕 Changelog Changed Updated the dependency lock file to the latest compatible versions ( 60). This routine maintenance improves overall stability and ensures the project benefits from upstream bug fixes and security patches. 🔗 Full Changelog : https://github.com/Cap go/capacitor sim/compare/8.0.51...8.0.52"
   },
   {
     "category": "release",
@@ -1225,11 +1225,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-streamcall 8.0.79",
-    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.79",
-    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.79",
-    "pubDate": "2026-11-03T03:38:23.000Z",
-    "description": "🆕 Changelog Changed Updated internal Node.js type definitions to v24.19.2 for improved type accuracy and compatibility. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.78...8.0.79"
+    "title": "capacitor-streamcall 8.0.80",
+    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.80",
+    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.80",
+    "pubDate": "2026-11-09T07:00:33.000Z",
+    "description": "🆕 Changelog Changed Updated the Hono framework dependency to v4.13.16, incorporating the latest upstream bug fixes and stability improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.79...8.0.80"
   },
   {
     "category": "release",
@@ -1265,19 +1265,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-textinteraction 8.1.7",
-    "link": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.7",
-    "guid": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.7",
-    "pubDate": "2026-11-02T12:41:14.000Z",
-    "description": "🆕 Changelog Changed Updated supported Node.js runtime to v26. Plan to upgrade your environment to Node.js 26, as older versions are no longer supported or validated in this release. Refreshed the dependency lock file. This pulls in the latest compatible dependency versions, keeping the project current and reducing drift in transitive packages. 🔗 Full Changelog : https://github.com/Cap go/capacitor textinteraction/compare/8.1.6...8.1.7"
+    "title": "capacitor-textinteraction 8.1.8",
+    "link": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.8",
+    "guid": "https://github.com/Cap-go/capacitor-textinteraction/releases/tag/8.1.8",
+    "pubDate": "2026-11-09T07:02:28.000Z",
+    "description": "🆕 Changelog Changed Updated package dependencies through routine lock file maintenance to keep the project current with the latest compatible versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor textinteraction/compare/8.1.7...8.1.8"
   },
   {
     "category": "release",
-    "title": "capacitor-transitions v8.3.8",
-    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.8",
-    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.8",
-    "pubDate": "2026-11-02T06:54:03.000Z",
-    "description": "🆕 Changelog Changed Updated to v8.99.1, bringing in the latest CLI improvements and ensuring continued compatibility with Capgo services. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.7...v8.3.8"
+    "title": "capacitor-transitions v8.3.9",
+    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.9",
+    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.9",
+    "pubDate": "2026-11-09T06:57:30.000Z",
+    "description": "🆕 Changelog Changed Updated dependency to v8.101.1, ensuring compatibility with the latest Capacitor Live Update tooling and improvements. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.8...v8.3.9"
   },
   {
     "category": "release",
@@ -1297,11 +1297,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-uploader 8.3.26",
-    "link": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.26",
-    "guid": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.26",
-    "pubDate": "2026-10-15T02:53:26.000Z",
-    "description": "🆕 Changelog Changed Updated README to remove the consulting call to action. Migrated development dependencies to ESLint 10 and TypeScript 6. 🔗 Full Changelog : https://github.com/Cap go/capacitor uploader/compare/8.3.25...8.3.26"
+    "title": "capacitor-uploader 8.3.27",
+    "link": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.27",
+    "guid": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.27",
+    "pubDate": "2026-11-09T07:18:59.000Z",
+    "description": "🆕 Changelog Changed Refreshed the dependency lock file to bring in the latest transitive dependency updates. Updated GitHub Actions dependencies ( to v7, to v6, to v7) for improved CI stability and compatibility. Updated Bun to v1.4.4. Fixed Updated the Google Services Gradle plugin ( ) to v4.5.0 to resolve downstream dependency issues. 🔗 Full Changelog : https://github.com/Cap go/capacitor uploader/compare/8.3.26...8.3.27"
   },
   {
     "category": "release",
