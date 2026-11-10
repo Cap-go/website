@@ -160,6 +160,7 @@ const pluginEntries = [
       section('Android Setup', [
         linkItem('Sandbox Testing', '/docs/plugins/native-purchases/android-sandbox-testing'),
         linkItem('Create Subscription', '/docs/plugins/native-purchases/android-create-subscription'),
+        linkItem('Subscription Offers', '/docs/plugins/native-purchases/android-subscription-offers'),
         linkItem('Introductory Offers', '/docs/plugins/native-purchases/android-introductory-offer'),
         linkItem('Play Store Review', '/docs/plugins/native-purchases/android-play-store-review'),
       ]),

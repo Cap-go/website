@@ -171,7 +171,7 @@ const { products } = await NativePurchases.getProducts({
 
 products.forEach((product) => {
   console.log(`${product.title}: ${product.priceString}`);
-  console.log(`Duration: ${product.subscriptionPeriod}`);
+  console.log(`Duration: ${product.subscriptionPeriod?.unitString ?? 'unknown'}`);
   console.log(`Description: ${product.description}`);
 });
 
