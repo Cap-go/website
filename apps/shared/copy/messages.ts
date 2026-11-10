@@ -3338,7 +3338,7 @@ const messages = {
   per_country_hosting_gdpr: 'Per-country hosting (GDPR compliance)',
   per_gb: 'per GiB',
   per_1k_users: 'per 1k users',
-  credits_mau_pricing_info: '1k users means 1,000 monthly active users. Usage is billed per user, not in blocks of 1,000.',
+  credits_mau_pricing_info: '1k users means 1,000 monthly active users. Charges are rounded up to your billing unit, which may be one user or a group of users.',
   per_unit: 'per unit',
   perfect_for: 'Perfect for',
   perishable_goods: 'The supply of Goods which according to their nature are not suitable to be returned, deteriorate rapidly or where the date of expiry is over.',

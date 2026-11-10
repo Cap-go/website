@@ -79,7 +79,7 @@ export const GET: APIRoute = async () => {
     '',
     '## Pay-as-you-go usage tiers',
     '',
-    'User rates are shown per 1,000 monthly active users. Usage is billed per user, not in blocks of 1,000.',
+    'User rates are shown per 1,000 monthly active users. Charges are rounded up to the billing unit, which may be one user or a group of users.',
     '',
     ...['mau', 'bandwidth', 'storage', 'build_time'].map((type) => renderTiers(credits, type)).filter(Boolean).flatMap((block) => [block, '']),
     PRICING_AGENT_POLICY_MARKDOWN.trim(),
