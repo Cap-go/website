@@ -3381,7 +3381,6 @@ export const messageContexts = {
   per_added_user: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/PriceDetails.astro. Message key `per_added_user` (Per Added User).',
   per_country_hosting_gdpr: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component enterprise.astro. Message key `per_country_hosting_gdpr` (Per Country Hosting GDPR).',
   per_gb: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_gb` (Per Gb).',
-  per_mau: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_mau` (Per Mau).',
   per_unit: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_unit` (Per Unit).',
   perfect_for: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `perfect_for` (Perfect For).',
   perishable_goods: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page return.astro. Message key `perishable_goods` (Perishable Goods).',
@@ -6580,6 +6579,8 @@ export const messageContexts = {
   your_live_update_solution_for_capacitor_apps: 'Page/area: Capgo marketing website. Role: Website copy sentence. Preserve Capgo product/brand and developer terms exactly. Message key `your_live_update_solution_for_capacitor_apps` (Your Live Update Solution For Capacitor Apps).',
   youre_in_good_company: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component companies-logo.astro. Message key `youre_in_good_company` (Youre In Good Company).',
   zero_trust_security: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `zero_trust_security` (Zero Trust Security).',
+  credits_mau_pricing_info: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component pricing/CreditPricing.astro. Message key `credits_mau_pricing_info` (Credits Mau Pricing Info).',
+  per_1k_users: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_1k_users` (Per 1k Users).',
 } as const satisfies Record<MessageKey, string>
 
 export type MessageContextKey = keyof typeof messageContexts
