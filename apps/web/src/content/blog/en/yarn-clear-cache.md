@@ -60,9 +60,9 @@ faq:
   - question: How do I verify where Yarn stores the cache?
     answer: >-
       On Yarn Classic v1, run yarn cache dir to print the global cache path. On
-      Berry, run yarn config get cacheFolder and yarn config get enableGlobalCache for
-      the effective paths and scope. Confirm the user running Yarn owns those
-      directories in CI and containers.
+      Berry, run yarn config get cacheFolder, yarn config get enableGlobalCache, and
+      yarn config get globalFolder when a mirror or yarn cache clean --all is in play.
+      Confirm the user running Yarn owns those directories in CI and containers.
   - question: Why do stale packages remain after yarn cache clean?
     answer: >-
       Targeted cleans can leave files under temporary cache folders such as
@@ -361,7 +361,7 @@ Skip routine cache wipes when installs are slow but lockfiles are correct. Fix c
 <a id="how-do-i-verify-where-yarn-stores-the-cache"></a>
 ### How do I verify where Yarn stores the cache?
 
-On **Classic v1**, run `yarn cache dir`. On **Berry**, run `yarn config get cacheFolder` and `yarn config get enableGlobalCache`. Confirm the user running Yarn owns those directories in CI and containers.
+On **Classic v1**, run `yarn cache dir`. On **Berry**, run `yarn config get cacheFolder`, `yarn config get enableGlobalCache`, and `yarn config get globalFolder` when a mirror or `yarn cache clean --all` is in play. Confirm the user running Yarn owns those directories in CI and containers.
 
 <a id="why-do-stale-packages-remain-after-yarn-cache-clean"></a>
 ### Why do stale packages remain after yarn cache clean?
