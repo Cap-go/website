@@ -1,0 +1,76 @@
+---
+title: "Observe security updates"
+description: "Review how published security advisories match native package and CLI versions your app reported on uploaded bundles."
+sidebar:
+  order: 11
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+The **Security updates** tab under **Observe** compares package versions Capgo already knows about for an app against published security advisories. It is advisory context to help you prioritize upgrades. It is not a full security audit and does not guarantee that your app is safe or that every relevant package is visible.
+
+Backend support shipped in [capgo.app#4048](https://github.com/Cap-go/capgo.app/pull/4048). Console UI shipped in [capgo.app#4049](https://github.com/Cap-go/capgo.app/pull/4049). Advisory email content and the public JSON feed are documented in [Security advisory notifications](/docs/plugins/updater/security-advisory-notifications/) (website [#1394](https://github.com/Cap-go/website/pull/1394)).
+
+## Open the tab
+
+1. Sign in to the [Capgo console](https://console.capgo.app/).
+2. Open the app you want to review.
+3. Select **Observe**, then the **Security updates** subtab.
+
+<figure><img src="/console-observe-security-updates.png" alt="Observe Security updates tab showing advisory match cards" /><figcaption></figcaption></figure>
+
+## What you see
+
+For each advisory row that applies to an in-scope package, the console shows:
+
+- **Severity** (`low`, `moderate`, `high`, or `critical`)
+- **Match status** for your reported version (see below)
+- Advisory **title** with a link to the GitHub security advisory when a URL is available
+- **Package** npm name (for example `@capgo/capacitor-updater` or `@capacitor/core`)
+- **Reported version** from bundle metadata, or **Not reported** when Capgo has no version string
+- **Patched version for your line** when published, or a note that no patched version exists yet
+- Optional **Capacitor Plus release** link when the advisory includes `plus_release_url`
+- **Suggested fix steps** rendered from the advisory markdown (aligned with notification email steps)
+
+When nothing matches, the tab explains that no known advisories match versions the app reported on recent bundles, and that versions the app never reported cannot be checked here.
+
+The feed timestamp at the bottom reflects when the advisory JSON snapshot was generated.
+
+## How versions are chosen
+
+Capgo does not scan your repository or live devices for this view. It uses versions already stored when you upload bundles:
+
+1. **Native packages:** Capgo reads `native_packages` from the bundle linked to the **production** channel when that channel has a version. If not, it uses the **latest uploaded** bundle for the app.
+2. **`@capgo/cli`:** Capgo uses `cli_version` from the **latest uploaded** bundle (even when production supplies native packages).
+
+Packages considered in scope include `@capgo/cli`, `@capgo/capacitor-*`, other `@capgo` plugins such as `@capgo/camera-preview`, `@capacitor/*`, `capacitor-plus`, and community `capacitor-*` packages (excluding `capacitor-plus`). Packages outside that set are ignored for matching.
+
+If iOS or Android platform packages are reported but `@capacitor/core` is missing, Capgo does not guess a core version. Core-related advisories may show **Unknown** until a bundle reports `@capacitor/core`.
+
+The console calls `GET /private/security_updates/feed?app_id=` (JWT auth and `app.read` permission). The response joins your reported versions with the same advisory feed used for email and automation (fixture data in some environments until `SECURITY_ADVISORIES_BASE_URL` points at a live host).
+
+## Match statuses
+
+| Status | Meaning |
+| ------ | ------- |
+| **Affected** | The reported version parses and falls in the advisory affected range, and is below the published patched version (or no patch is published yet). |
+| **Not in affected range** | The reported version is outside the affected range, or is at/above the patched version for that line. |
+| **Unknown** | The app did not report a version, the version string is not usable, or Capgo cannot compare it to the range. |
+
+<Aside type="caution">
+
+An empty tab or a **Not in affected range** status does not prove your production binaries are patched. Upload metadata can be stale, incomplete, or missing packages you ship. Combine this view with your own release tracking and the authoritative advisory on GitHub.
+
+</Aside>
+
+## What you should do
+
+1. For **Affected** rows, follow the suggested fix steps: bump affected npm packages, run `npx cap sync` when native plugins change, rebuild store binaries when needed, and update `@capgo/cli` in CI when the advisory is CLI-only (details in [Security advisory notifications](/docs/plugins/updater/security-advisory-notifications/)).
+2. For **Unknown**, upload a bundle that reports complete native package versions (including `@capacitor/core` when you use Capacitor platform packages) and a current `cli_version`.
+3. Opt in to [Security advisory emails](/docs/webapp/notifications-security-advisories/) if you want proactive email when new advisories publish. The Security updates tab also links to **Manage security update emails** in account notifications.
+
+## Keep going
+
+- [Observe](/docs/webapp/observe/) for launch timing, WebView metrics, and release health signals
+- [Bundles](/docs/webapp/bundles/) and [Channels](/docs/webapp/channels/) for how production versions are linked
+- [Security advisory notifications](/docs/plugins/updater/security-advisory-notifications/) for email and JSON feed contracts
