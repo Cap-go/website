@@ -53,7 +53,7 @@ await NativeAudio.addListener('playbackState', (state) => {
 | --- | --- | --- |
 | `queueChange` | iOS, Android, Web | Fires when the active queue item changes, including `setQueue` with `autoPlay: true` on Web and native (reason `setQueue`), plus `next`, `previous`, `select`, and `remoteNext`. |
 | `progress` | iOS, Android, Web | Interval from `configure({ progressInterval })`. Default 0.5s. Fields: `assetId`, `position`, `duration`. |
-| `playbackState` | iOS, Android, Web | Fields: `assetId`, `state` (`playing`, `paused`, `stopped`), `reason`, `isPlaying`, optional `currentTime` and `duration`. Includes transport from lock screen and notifications on native. |
+| `playbackState` | iOS, Android, Web | Fields: `assetId`, `state` (`playing`, `paused`, `stopped`), `reason`, `isPlaying`, optional `currentTime` and `duration`. Includes transport from lock screen and notifications on native. Emitted on Web when plugin transport methods change playback state, including play, pause, resume, loop, and complete. |
 | `audioRouteChange` | iOS, Android, Web | Fires when a successful `setSpeaker` or `setEarpiece` call emits the event, even if the route does not change. Does not fire when headphones or Bluetooth connect on their own. On Web, `setSpeaker` emits `route: 'speaker'` and `setEarpiece` emits `route: 'earpiece'`. |
 
 `currentTime` still fires about every 100ms while playing.
@@ -123,7 +123,7 @@ await NativeAudio.addListener('complete', async ({ assetId }) => {
 
 ## Playback snapshot and rate
 
-`getPlaybackState()` returns a `PlaybackStateEvent`: `assetId`, `state`, `reason`, `isPlaying`, and optional `currentTime` and `duration`. The `state` is the tracked playback state and matches the last `playbackState` event for that asset. When no asset is active, `assetId` is empty. Guard `getRate()` so it is only called with a real `assetId`. On Web, `play` recreates the audio element and resets the rate, so call `setRate` after `play`.
+`getPlaybackState()` returns a `PlaybackStateEvent`: `assetId`, `state`, `reason`, `isPlaying`, and optional `currentTime` and `duration`. If the asset is currently playing, `state` is `playing` from the live element, even if a tracked snapshot is stale. Otherwise `state` uses the tracked snapshot, which matches the last `playbackState` event for that asset. When no asset is active, `assetId` is empty. Guard `getRate()` so it is only called with a real `assetId`. On Web, `play` recreates the audio element and resets the rate, so call `setRate` after `play`.
 
 ```typescript
 const snapshot = await NativeAudio.getPlaybackState();
@@ -149,7 +149,7 @@ await NativeAudio.addListener('audioRouteChange', ({ route }) => {
 });
 ```
 
-`route` is `speaker`, `earpiece`, or `external`. Successful `setSpeaker` and `setEarpiece` calls emit `audioRouteChange`, even when the route does not change. The event does not fire when headphones or Bluetooth connect on their own. On Android, `getAudioRoute` reports `earpiece` only in communication mode after `setEarpiece`; otherwise it reports `speaker` when no headset or Bluetooth is connected. On Web, `setSpeaker` and `setEarpiece` are not no-ops: `setSpeaker` emits `audioRouteChange` with `route: 'speaker'`, `setEarpiece` emits `route: 'earpiece'`, and `getAudioRoute` reports `speaker`.
+`route` is `speaker`, `earpiece`, or `external`. Successful `setSpeaker` and `setEarpiece` calls emit `audioRouteChange`, even when the route does not change. The event does not fire when headphones or Bluetooth connect on their own. On Android, `getAudioRoute` reports `earpiece` only in communication mode after `setEarpiece`; otherwise it reports `speaker` when no headset or Bluetooth is connected. On Web, `setSpeaker` and `setEarpiece` are not no-ops: `setSpeaker` emits `audioRouteChange` with `route: 'speaker'`, `setEarpiece` emits `route: 'earpiece'`, and `getAudioRoute` returns the last requested route (`speaker` after `setSpeaker`, `earpiece` after `setEarpiece`). The web platform cannot change the actual output.
 
 ## Related
 
