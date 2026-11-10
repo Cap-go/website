@@ -1,0 +1,65 @@
+---
+title: "Security advisory emails"
+description: "Opt in to security update emails from Capgo account notifications, or turn them off from the public email preferences page."
+sidebar:
+  order: 7
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo can email you when we publish a GitHub security advisory that affects Capacitor, Cap-go `@capgo` plugins, or `@capgo/cli`. The console stores that choice on your user account as the `security_updates` email preference.
+
+This page covers **signed-in console users**. It does not repeat the public signup form or the JSON advisory feed. For those, see [Security advisory notifications](/docs/plugins/updater/security-advisory-notifications/) (website [#1394](https://github.com/Cap-go/website/pull/1394)) and the [Capacitor+ security](https://capgo.app/capacitor-security/) marketing page (website [#1393](https://github.com/Cap-go/website/pull/1393)).
+
+## What the toggle sends
+
+When you turn **Security update emails** on, Capgo may send email after we publish a qualifying advisory. Each message summarizes the issue, affected version ranges, patched releases when available, and package-specific upgrade steps (same content model as the [Security advisory notifications](/docs/plugins/updater/security-advisory-notifications/) guide).
+
+Capgo does not use this preference for marketing. It is limited to published security advisories for in-scope packages.
+
+## Default is off
+
+For console accounts, `security_updates` defaults to **off**. Opt in only from signed-in account **Notifications** settings. This differs from several other notification toggles on the same page, which default to on.
+
+## Turn security emails on or off in the console
+
+<Steps>
+
+1. Open [console.capgo.app](https://console.capgo.app/) and sign in.
+2. Click your name, choose **Settings**, then open the **Notifications** tab under account settings. Direct link: [Account notifications](https://console.capgo.app/settings/account/notifications).
+3. Scroll to the **Security advisories** section.
+4. Use the **Security update emails** toggle to opt in or out. Changes save to your user record and sync your Bento subscriber tags for this email address (`security-updates`).
+
+</Steps>
+
+<figure><img src="/console-notifications-security-updates.png" alt="Account notifications page with Security advisories section and Security update emails toggle" /><figcaption></figcaption></figure>
+
+## Turn security emails off from an email link
+
+Some Capgo emails include a footer link to the public **Email preferences** page (`/email-preferences` on the console host). The link identifies your Bento visitor id or email in the query string.
+
+That form is **opt-out only**. It does not load your saved preferences and all category toggles start in the on position. Turn **Security update emails** off (or use **Unsubscribe from all**), complete Turnstile, and save. Capgo applies only explicit opt-outs (`false` values) to your account; it will not re-enable categories you left on.
+
+You cannot opt in to **Security update emails** from this public page. Use signed-in account **Notifications** to turn them on.
+
+## Compare with the public signup form
+
+| Channel | Who it is for | Opt-in |
+| ------- | ------------- | ------ |
+| [Capacitor+ security](https://capgo.app/capacitor-security/) signup form | Anyone with an email address (no Capgo account required) | Double opt-in confirmation email when the form is enabled on the site |
+| Console **Notifications** toggle | Signed-in Capgo users | Single toggle, default off |
+| Public **Email preferences** page | Recipients with a valid preferences link | Opt-out only (cannot enable `security_updates` here) |
+
+<Aside type="note">
+
+The marketing signup form on [Capacitor+ security](https://capgo.app/capacitor-security/) stays hidden until Capgo configures a live subscribe URL and Turnstile site key (see [website#1393](https://github.com/Cap-go/website/pull/1393)). Until then, use GitHub advisory listings or console settings.
+
+</Aside>
+
+You can use more than one channel; Capgo deduplicates by email address on the backend.
+
+## Keep going
+
+- [Observe security updates](/docs/webapp/observe-security-updates/) to compare bundle-reported versions with advisories per app
+- [Security advisory notifications](/docs/plugins/updater/security-advisory-notifications/) for the JSON feed and public subscription behavior
+- [Settings](/docs/webapp/settings/) for other account controls
