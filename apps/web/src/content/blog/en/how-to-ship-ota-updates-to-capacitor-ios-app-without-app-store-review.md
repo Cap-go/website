@@ -97,17 +97,25 @@ If a downloaded bundle fails during startup or never reaches `notifyAppReady()` 
 
 ### 3. Build the web bundle and upload
 
-Build your web assets as you do for a store release (`bun run build`, output in `dist/` or `www/`). Upload with the Capgo CLI:
+Build your web assets as you do for a store release (`bun run build`, output in `dist/` or `www/`). Upload with the Capgo CLI.
+
+Most channels (plain upload):
+
+```bash
+bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible
+```
+
+When the channel uses the `metadata` strategy **and** the bundle currently live on that channel already has `min_update_version` set, add `--auto-min-update-version` so Capgo can raise or reuse the native floor. Do not use that flag on other channels, or on a metadata channel until the live bundle has `min_update_version`. The first metadata upload needs an explicit `--min-update-version` per the [CLI bundle docs](https://capgo.app/docs/cli/commands/). See [compatibility](https://capgo.app/docs/live-updates/compatibility/) and the [native + OTA channel workflow](https://capgo.app/docs/live-updates/native-ota-channel-workflow/).
 
 ```bash
 bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible --auto-min-update-version
 ```
 
-The CLI compares native packages against the channel and can fail the upload when the bundle is not compatible with what is live. Use `--fail-on-incompatible` for routine web-only uploads. When the channel uses the `metadata` strategy for [version targeting](https://capgo.app/docs/live-updates/version-targeting/), include `--auto-min-update-version` on every upload so Capgo sets the minimum native floor for devices that have not installed the matching binary. See [compatibility](https://capgo.app/docs/live-updates/compatibility/) and the [native + OTA channel workflow](https://capgo.app/docs/live-updates/native-ota-channel-workflow/).
+`--fail-on-incompatible` stops accidental uploads when native packages drift from what is live on the channel.
 
 ### 4. Let iOS devices pull the update
 
-With the default `autoUpdate` mode (`atBackground`, the same as `true`), the plugin checks when the app comes to the foreground and on a repeating timer while it stays open. If an update is available, it downloads in the background while the user keeps the current bundle. It applies the update when the app moves to the background, and the user runs the new bundle on the next foreground. Other `autoUpdate` values can apply sooner; see [update behavior](https://capgo.app/docs/live-updates/update-behavior/) and the [updater settings](https://capgo.app/docs/plugins/updater/settings/). Users stay on the same App Store install. No review queue for eligible web-only changes.
+With the default `autoUpdate` mode (`atBackground`, the same as `true`), the plugin checks when the app comes to the foreground. `periodCheckDelay` defaults to `0`, so there is no repeating timer until you set it (minimum 600 seconds, 10 minutes). If an update is available, it downloads in the background while the user keeps the current bundle. It applies the update when the app moves to the background, and the user runs the new bundle on the next foreground. Other `autoUpdate` values can apply sooner; see [update behavior](https://capgo.app/docs/live-updates/update-behavior/) and [updater settings](https://capgo.app/docs/plugins/updater/settings/#periodcheckdelay). Users stay on the same App Store install. No review queue for eligible web-only changes.
 
 ## Channels, rollback, and when you still submit to the store
 
