@@ -5,10 +5,10 @@ export const BENTO_SECURITY_ADVISORY_SUBSCRIBER_TAG = 'security-updates'
  * POST target for `{ email }` JSON with header `X-Turnstile-Token`.
  * Planned value once live: https://security-api.capgo.app/v1/security-subscriptions
  */
-export const SECURITY_ADVISORY_SUBSCRIBE_URL = 'pending endpoint URL'
+export const SECURITY_ADVISORY_SUBSCRIBE_URL = 'https://security-api.capgo.app/v1/security-subscriptions'
 
-/** Cloudflare Turnstile site key for the advisory form (Martin will publish a real key later). */
-export const SECURITY_ADVISORY_TURNSTILE_SITE_KEY = 'pending turnstile site key'
+/** Cloudflare Turnstile site key for the advisory form (public site key, Capgo PROD widget). */
+export const SECURITY_ADVISORY_TURNSTILE_SITE_KEY = '0x4AAAAAAAxItBa5rCQ3Vvhl'
 
 const PENDING_SUBSCRIBE_URL = 'pending endpoint URL'
 const PENDING_TURNSTILE_SITE_KEY = 'pending turnstile site key'
