@@ -62,7 +62,7 @@ Each subscription stores its own numbers. Capgo ships **Balanced** recommended d
 | `window_minutes` | `15` | Rolling window length Capgo evaluates. |
 | `cooldown_minutes` | `60` | After one delivery, ignore further spikes for this subscription until cooldown ends. |
 
-A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. Each run has an about **12 second** evaluation budget. Subscriptions that share the same app, optional `channel`, and `window_minutes` reuse one stats fetch per tick, then evaluate in that budget. Stats cover the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`). If a spike webhook is queued but delivery fails, Capgo rolls back `mcp_spike_last_fired_at` so cooldown does not block a later attempt.
+A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. Each run has an about **12 second** evaluation budget and processes metric groups **serially** (concurrency **1**) within that window. Groups that share the same app, optional `channel`, and `window_minutes` reuse one stats fetch per tick. Stats cover the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`). If spike dispatch or enqueue fails, Capgo restores the previous `mcp_spike_last_fired_at` so cooldown does not block a later attempt.
 
 #### When a spike fires
 
@@ -72,7 +72,7 @@ For the current window snapshot, Capgo evaluates **all three** conditions at onc
 2. Failed checks in the window is at least `min_failures`.
 3. Failure rate (failures divided by checks, as a percent) is at least `failure_rate_percent`.
 
-When all three are true, Capgo claims the cooldown window and queues **one** `update.failure_spike` webhook. Additional threshold crossings during cooldown do not send another event until cooldown expires. A failed queue or delivery attempt restores the previous cooldown timestamp so you are not stuck in cooldown after a transient outage.
+When all three are true, Capgo claims the cooldown window and queues **one** `update.failure_spike` webhook. Additional threshold crossings during cooldown do not send another event until cooldown expires. A failed enqueue or delivery restores the previous `mcp_spike_last_fired_at` value so you are not stuck in cooldown after a transient outage.
 
 Payloads may include `top_failure_action_codes` (up to five updater failure actions). That field is populated only when the subscription has **no** `channel` filter; channel-scoped subscriptions omit it.
 
@@ -302,11 +302,11 @@ function verifyStandardWebhook(
 | Topic | Behavior |
 | ----- | -------- |
 | Default TTL | **24 hours** from subscribe or refresh. |
-| Refresh | Call `events/subscribe` (or `capgo_subscribe_events`) again with the same URL, event, and arguments before expiry. |
+| Refresh | Call `events/subscribe` (or `capgo_subscribe_events`) again with the same URL, event, and arguments before expiry. Extends TTL on the same row when the subscription is still active. |
 | Unlimited TTL | Not supported. |
 | Callback URL | **HTTPS only.** Same SSRF and safety checks as console webhooks. |
 | Verification | URL must pass the verification challenge before the first event is sent. |
-| Active subscriptions per org | **25** maximum when creating a **new** subscription row. Refreshing an existing subscription (same URL, event, and `arguments`) does not consume another slot. |
+| Active subscriptions per org | **25** maximum **active** MCP rows (`enabled` and unexpired). A **new** subscription or a refresh that **re-enables** an inactive, disabled, or expired row counts against this cap under an org lock. Refreshing a row that is **already active** (same URL, event, and `arguments`) only extends TTL and does not use another slot. |
 | Delivery retries | Up to **5** attempts per delivery via `webhook_delivery`, then the webhook is **disabled** (`enabled = false`). |
 | Permissions | Requires `org.update_settings` (org settings admin), the same right as managing organization webhooks today. **App-scoped API keys cannot subscribe.** The key must be allowed to read every app matched by your filters. OAuth-connected MCP sessions follow the delegated key RBAC. |
 
