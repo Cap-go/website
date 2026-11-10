@@ -103,7 +103,7 @@ These wrap the same behavior for clients that only support tools today:
 | Tool | Purpose |
 | ---- | ------- |
 | `capgo_list_event_types` | Same information as `events/list`. |
-| `capgo_subscribe_events` | Subscribe or refresh. Can generate a `whsec_` signing secret when you do not pass one; the secret is returned **once** in the tool result. |
+| `capgo_subscribe_events` | Subscribe or refresh. Pass a `whsec_` secret your callback already knows when you verify every POST (including the verification challenge). If you omit `secret`, Capgo generates one, runs verification during the tool call, and returns the secret **once** after that attempt. |
 | `capgo_list_event_subscriptions` | List active MCP event subscriptions for the org. |
 | `capgo_unsubscribe_events` | Remove a subscription by id. |
 
@@ -242,7 +242,7 @@ Before the first real event, Capgo `POST`s to your callback URL:
 - **Headers:** `Content-Type: application/json`, Standard Webhooks headers (`webhook-id`, `webhook-timestamp`, `webhook-signature`) signed with the subscription `whsec_` secret, plus `X-MCP-Subscription-Id`, and `User-Agent: Capgo-MCP-Events/1.0`
 - **Your response:** HTTP 2xx and a JSON body that echoes the same `challenge` string. The response body must be at most 65,536 bytes.
 
-Verify the signature the same way as event deliveries before echoing the challenge. If verification fails, Capgo stores `verificationFailed` on the subscribe result and does not deliver events until a later successful subscribe passes the challenge.
+Your callback must answer with HTTP 2xx and echo the `challenge` string. When you supplied the secret on subscribe (protocol path, or `capgo_subscribe_events` with `secret`), verify the Standard Webhooks signature before echoing. When Capgo generates the secret during `capgo_subscribe_events`, the verification POST is sent before the tool returns that secret, so echo the challenge from the JSON body and store the returned `whsec_` for later event deliveries. If verification fails, Capgo stores `verificationFailed` on the subscribe result and does not deliver events until a later successful subscribe passes the challenge.
 
 ## HTTP headers and signature verification
 
