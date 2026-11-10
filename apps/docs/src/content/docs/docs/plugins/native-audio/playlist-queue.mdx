@@ -7,15 +7,19 @@ sidebar:
 
 Use the 8.5 queue APIs to build podcast players, playlists, and guided sessions. All of these APIs are **additive**: existing `preload`, `play`, `pause`, and `complete` flows stay the same.
 
-Source examples also live in the plugin repo: [capacitor-native-audio](https://github.com/Cap-go/capacitor-native-audio/) (`docs/PLAYLIST.md`).
+Source examples also live in the plugin repo: [capacitor-native-audio](https://github.com/Cap-go/capacitor-native-audio/) (`docs/PLAYLIST.md`). These APIs ship with the plugin 8.5 release from [capacitor-native-audio PR #353](https://github.com/Cap-go/capacitor-native-audio/pull/353).
 
 ## Configure notifications and progress
 
-Enable lock screen and notification controls, set how often `progress` fires, and optionally keep Android playback in the background.
+`configure()` options differ by platform. On Web, only `progressInterval` is supported. Passing `showNotification` or `backgroundPlayback` causes `configure()` to reject.
 
 ```typescript
 import { NativeAudio } from '@capgo/capacitor-native-audio';
 
+// Web: only progressInterval is supported in configure().
+await NativeAudio.configure({ progressInterval: 0.5 });
+
+// iOS and Android: notification and background options.
 await NativeAudio.configure({
   showNotification: true,
   backgroundPlayback: true,
@@ -23,9 +27,11 @@ await NativeAudio.configure({
 });
 ```
 
-On iOS, `showNotification: true` switches the audio session so Now Playing appears in Control Center and on the lock screen. See [Getting started](/docs/plugins/native-audio/getting-started/) for mixing trade-offs.
+`backgroundPlayback: true` skips the plugin pause or resume logic when the app backgrounds. On Android it does **not** start a foreground service. You still need manifest permissions (`FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PLAYBACK`, `WAKE_LOCK`) and your own media foreground service before relying on background playback. See [Getting started](/docs/plugins/native-audio/getting-started/) for mixing trade-offs and notification setup.
 
-Lock screen and notification **skip next/previous** are handled on **iOS and Android** when `showNotification` is enabled.
+On iOS, `showNotification: true` switches the audio session so Now Playing appears in Control Center and on the lock screen.
+
+Lock screen and notification skip next and previous are handled on **iOS and Android** when `showNotification` is enabled.
 
 ## Listeners
 
@@ -39,22 +45,22 @@ await NativeAudio.addListener('progress', ({ assetId, position, duration }) => {
 });
 
 await NativeAudio.addListener('playbackState', (state) => {
-  console.log(state.assetId, state.state, state.reason);
+  console.log(state.assetId, state.state, state.reason, state.isPlaying, state.currentTime, state.duration);
 });
 ```
 
 | Event | Platforms | Notes |
 | --- | --- | --- |
 | `queueChange` | iOS, Android, Web | Fires when the active queue item changes (`setQueue`, `next`, `previous`, `select`, `remoteNext`, ...) |
-| `progress` | iOS, Android, Web | Interval from `configure({ progressInterval })`; default 0.5s |
-| `playbackState` | iOS, Android, Web | Includes transport from lock screen and notifications on native |
-| `audioRouteChange` | iOS, Android | Not emitted on web |
+| `progress` | iOS, Android, Web | Interval from `configure({ progressInterval })`. Default 0.5s. Fields: `assetId`, `position`, `duration`. |
+| `playbackState` | iOS, Android, Web | Fields: `assetId`, `state` (`playing`, `paused`, `stopped`), `reason`, `isPlaying`, optional `currentTime` and `duration`. Includes transport from lock screen and notifications on native. |
+| `audioRouteChange` | iOS, Android, Web | Fires only when `setSpeaker` or `setEarpiece` changes routing, not when headphones or Bluetooth connect on their own. On Web those calls still emit the event with `route: 'speaker'`. |
 
 `currentTime` still fires about every 100ms while playing.
 
 ## Build and start a queue
 
-`setQueue` accepts the same fields as `preload` per item (`assetId`, `assetPath`, `isUrl`, `volume`, `notificationMetadata`, ...). Preloaded assets with matching ids are reused.
+`setQueue` accepts the same fields as `preload` per item (`assetId`, `assetPath`, `isUrl`, `volume`, `audioChannelNum`, `notificationMetadata`, `headers`). Preloaded assets with matching ids are reused. Options also include `startIndex` (default 0) and `autoPlay` (default false). It returns a `QueueState` with `assetId`, `index`, `count`, and `assetIds`.
 
 ```typescript
 await NativeAudio.setQueue({
@@ -87,6 +93,8 @@ await NativeAudio.setQueue({
 
 ## Navigate the queue
 
+`queueNext`, `queuePrevious`, and `queueSelect` stop the outgoing item and start the selected item. Each method returns an updated `QueueState`.
+
 ```typescript
 const state = await NativeAudio.getQueueState();
 console.log(state.assetId, state.index, state.count, state.assetIds);
@@ -97,33 +105,34 @@ await NativeAudio.queueSelect({ assetId: 'ep-2' });
 await NativeAudio.clearQueue();
 ```
 
-Each navigation method returns an updated `QueueState`.
-
 ## Advance after `complete`
 
-Auto-advance is app-driven, same as the preload/play model:
+Auto-advance is app-driven, same as the preload and play model. Compare the event `assetId` with the selected queue asset before advancing. `queueNext()` already starts the selected item, so do not call `resume()` after it.
 
 ```typescript
-await NativeAudio.addListener('complete', async () => {
-  const { index, count } = await NativeAudio.getQueueState();
+await NativeAudio.addListener('complete', async ({ assetId }) => {
+  const { assetId: selectedId, index, count } = await NativeAudio.getQueueState();
+  if (assetId !== selectedId) {
+    return;
+  }
   if (index + 1 < count) {
     await NativeAudio.queueNext();
-    const { assetId } = await NativeAudio.getQueueState();
-    await NativeAudio.resume({ assetId });
   }
 });
 ```
 
 ## Playback snapshot and rate
 
-Rehydrate UI after navigation or missed events:
+`getPlaybackState()` returns a `PlaybackStateEvent`: `assetId`, `state`, `reason`, `isPlaying`, and optional `currentTime` and `duration`. When no asset is active, `assetId` is empty. Guard `getRate()` so it is only called with a real `assetId`.
 
 ```typescript
 const snapshot = await NativeAudio.getPlaybackState();
-console.log(snapshot.state, snapshot.isPlaying, snapshot.currentTime, snapshot.duration);
+console.log(snapshot.assetId, snapshot.state, snapshot.reason, snapshot.isPlaying, snapshot.currentTime, snapshot.duration);
 
-const { rate } = await NativeAudio.getRate({ assetId: snapshot.assetId });
-console.log(rate);
+if (snapshot.assetId) {
+  const { rate } = await NativeAudio.getRate({ assetId: snapshot.assetId });
+  console.log(rate);
+}
 ```
 
 ## Audio routing (native)
@@ -140,7 +149,7 @@ await NativeAudio.addListener('audioRouteChange', ({ route }) => {
 });
 ```
 
-`route` is `speaker`, `earpiece`, or `external`. Routing APIs run on **iOS and Android**. On **web**, `setSpeaker` and `setEarpiece` resolve but `getAudioRoute` reports `speaker`, and `audioRouteChange` does not fire.
+`route` is `speaker`, `earpiece`, or `external`. `audioRouteChange` fires only when `setSpeaker` or `setEarpiece` changes routing, not when headphones or Bluetooth connect on their own. On Web, `setSpeaker` and `setEarpiece` resolve, `getAudioRoute` reports `speaker`, and those calls still emit `audioRouteChange` with `route: 'speaker'`.
 
 ## Related
 
