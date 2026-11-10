@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-06-17T08:37:56.714Z
-updated_at: 2026-11-07T10:35:00.000Z
+updated_at: 2026-11-10T10:35:00.000Z
 head_image: /blog-images/yarn-clear-cache.webp
 head_image_alt: >-
   Yarn Cache Clean: How to Clear Yarn Cache (v1, Berry) Capgo blog illustration
