@@ -191,12 +191,13 @@ function verifyStandardWebhook(
   webhookSignatureHeader: string,
   secretWithPrefix: string,
 ): boolean {
-  const secret = secretWithPrefix.startsWith('whsec_')
+  const secretBase64 = secretWithPrefix.startsWith('whsec_')
     ? secretWithPrefix.slice('whsec_'.length)
     : secretWithPrefix
+  const secretKey = Buffer.from(secretBase64, 'base64')
 
   const signedContent = `${webhookId}.${webhookTimestamp}.${rawBody}`
-  const expected = createHmac('sha256', secret).update(signedContent, 'utf8').digest('base64')
+  const expected = createHmac('sha256', secretKey).update(signedContent, 'utf8').digest('base64')
 
   for (const part of webhookSignatureHeader.split(' ')) {
     const [version, sig] = part.split(',', 2)
