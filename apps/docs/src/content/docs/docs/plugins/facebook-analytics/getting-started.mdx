@@ -104,6 +104,46 @@ Add the string resources in `android/app/src/main/res/values/strings.xml`:
 <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
 ```
 
+## Metadata collection and product improvement (SDK 19)
+
+Facebook SDK 19 turns two extra collection features on by default. `@capgo/capacitor-facebook-analytics` does not set either flag, so apps that upgrade to the plugin's SDK 19 pins inherit those defaults. Both features are independent of automatic App Event logging. Setting `com.facebook.sdk.AutoLogAppEventsEnabled` or `FacebookAutoLogAppEventsEnabled` to `false` does not turn them off.
+
+### Event metadata (`AutoLogMetaDataEnabled`)
+
+Starting on 31 October 2026, the SDK includes the current screen title and the AppLink URL with events logged through the Facebook SDK. This is on by default. Disable it with the snippets below, or turn off "Automatically include more app event details" in Events Manager.
+
+### Product improvement (`AutoLogProductImprovementEnabled`)
+
+The SDK can also automatically send sampled information about your app, such as the layout of elements on app screens. Meta says this helps improve ads systems and build new features, and is not used for ads delivery. This is on by default and is independent of metadata collection and automatic App Event logging. Disable it with the snippets below, or turn off "Automatically send more app information" in Events Manager.
+
+Set these native values before Meta SDK initialization (before `FacebookInitProvider` on Android or early FBSDK setup on iOS). Runtime assignments are persisted and take precedence over the manifest or Info.plist values on later launches.
+
+### Android opt-out
+
+Add these entries inside the `application` element of your app `AndroidManifest.xml`:
+
+```xml
+<meta-data android:name="com.facebook.sdk.AutoLogMetaDataEnabled" android:value="false" />
+<meta-data android:name="com.facebook.sdk.AutoLogProductImprovementEnabled" android:value="false" />
+```
+
+At runtime, call `FacebookSdk.setAutoLogMetaDataEnabled(false)` and `FacebookSdk.setAutoLogProductImprovementEnabled(false)` before initialization.
+
+### iOS opt-out
+
+Add these keys to `Info.plist`:
+
+```xml
+<key>FBSDKAutoLogMetaDataEnabled</key>
+<false/>
+<key>FBSDKAutoLogProductImprovementEnabled</key>
+<false/>
+```
+
+At runtime, set `Settings.shared.isMetaDataCollectionEnabled = false` and `Settings.shared.isAutoLogProductImprovementEnabled = false` before initialization.
+
+Setting the metadata flag to `false` also discards metadata already collected on the device, including stored AppLink URLs. Meta may still gate collection with a server-side Events Manager control. Data is sent only when both the client flag and that control are enabled.
+
 ## Enable Advertiser Tracking
 
 Call this after your consent flow allows tracking.
