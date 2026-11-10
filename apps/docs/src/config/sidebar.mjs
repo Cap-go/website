@@ -136,7 +136,7 @@ const pluginEntries = [
   ['Mock Location Detector', 'mock-location-detector'],
   ['Mute', 'mute'],
   ['Mux Player', 'mux-player'], // @capgo/capacitor-mux-player
-  ['Native Audio', 'native-audio'],
+  ['Native Audio', 'native-audio', [linkItem('Playlist queue', '/docs/plugins/native-audio/playlist-queue')]],
   ['Native Biometric', 'native-biometric'],
   ['Native Geocoder', 'nativegeocoder'],
   ['Native Loader', 'native-loader'],

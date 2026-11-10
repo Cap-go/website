@@ -14,11 +14,36 @@ hero:
       link: /docs/plugins/native-audio/getting-started/
       icon: right-arrow
       variant: primary
+    - text: Playlist queue
+      link: /docs/plugins/native-audio/playlist-queue/
+      icon: right-arrow
+      variant: minimal
     - text: GitHub
       link: https://github.com/Cap-go/capacitor-native-audio/
       icon: external
       variant: minimal
 ---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Playlist queue" icon="puzzle">
+    `setQueue`, `queueNext`, `queuePrevious`, `queueSelect`, `getQueueState`, `clearQueue`, and the `queueChange` listener for ordered tracks. Lock screen and notification skip next/previous on iOS and Android with `showNotification`.
+  </Card>
+  <Card title="Playback snapshot" icon="open-book">
+    `getPlaybackState` returns playing, paused, or stopped with position and duration for UI rehydration. `getRate` reads the current speed set with `setRate`.
+  </Card>
+  <Card title="Progress events" icon="setting">
+    The `progress` listener fires on an interval from `configure({ progressInterval })` (default 0.5s) for scrubbers and chapter UI.
+  </Card>
+  <Card title="Audio routing" icon="laptop">
+    Native `setSpeaker`, `setEarpiece`, `getAudioRoute`, and `audioRouteChange` on iOS and Android. Web resolves routing calls but stays on `speaker`.
+  </Card>
+</CardGrid>
+
+<Aside type="tip">
+  New 8.5 APIs are additive. Existing <code>preload</code> and <code>play</code> flows are unchanged. Full examples: <a href="/docs/plugins/native-audio/playlist-queue/">Playlist queue</a>.
+</Aside>
 
 ## Overview
 
@@ -32,7 +57,7 @@ Typical fits: game SFX, notification chimes, guided meditation, podcast players,
 | --- | --- | --- |
 | iOS | Yes | AVFoundation, optional Now Playing and audio session categories |
 | Android | Yes | Media playback, notifications, optional foreground service for background |
-| Web | Partial | Core playback; some listener events are not emitted on web |
+| Web | Partial | Core playback; `playbackState` and `progress` on web; queue and routing APIs resolve with platform limits |
 
 ## Core Capabilities
 
@@ -60,10 +85,24 @@ Typical fits: game SFX, notification chimes, guided meditation, podcast players,
 | `setCurrentTime` | Set the current time of an audio file. |
 | `getCurrentTime` | Get the current time of an audio file. |
 | `getDuration` | Get the duration of an audio file in seconds. |
+| `getPlaybackState` | Snapshot of playback for UI rehydration after navigation or missed events. |
+| `getRate` | Current global playback rate for an asset. |
+| `setQueue` | Prepare an ordered queue; reuses preloaded assets when ids match. |
+| `clearQueue` | Clear the active queue. |
+| `getQueueState` | Active queue item, index, count, and ordered asset ids. |
+| `queueNext` | Select the next queue item. |
+| `queuePrevious` | Select the previous queue item. |
+| `queueSelect` | Jump to a queue item by `assetId`. |
+| `setSpeaker` | Prefer built-in speaker (iOS, Android). |
+| `setEarpiece` | Route call-style audio to the earpiece (iOS, Android). |
+| `getAudioRoute` | Active route: `speaker`, `earpiece`, or `external` (iOS, Android; web reports `speaker`). |
 | `isPlaying` | Check if an audio file is playing. |
 | `addListener` | Listen for complete event. |
 | `addListener` | Listen for current time updates Emits every 100ms while audio is playing. |
-| `addListener` | Listen for playback state changes, including notification and lock-screen transport controls. Emitted by Android and iOS. The current Web implementation does not emit this event. |
+| `addListener` | Listen for playback state changes, including notification and lock-screen transport controls on iOS and Android. Also emitted on web during play, pause, and complete. |
+| `addListener` | Listen for coarse `progress` events; interval from `configure({ progressInterval })`. |
+| `addListener` | Listen for `queueChange` when the active queue item changes. |
+| `addListener` | Listen for `audioRouteChange` when output route changes (iOS and Android only). |
 | `clearCache` | Clear the audio cache for remote audio files. |
 | `setDebugMode` | Set debug mode logging. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |
