@@ -43,7 +43,11 @@ faq:
       your app source. The next install may take longer while packages are fetched
       again. On Classic, yarn cache dir shows the versioned cache folder, but a full
       yarn cache clean removes the parent cache root. Inspect that parent and use a
-      dedicated cache-folder path if you customize it. Treat full cleans as a debugging
+      dedicated cache-folder path if you customize it. On Berry, run yarn config get
+      cacheFolder before a full clean. yarn cache clean and yarn cache clean --all remove
+      the entire effective cache directory. With enableGlobalCache false, that path is
+      usually .yarn/cache, but a custom cacheFolder can target a parent such as .yarn
+      and delete other project files stored there. Treat full cleans as a debugging
       step, not daily maintenance.
   - question: When should you avoid clearing Yarn cache in CI or Docker?
     answer: >-
@@ -345,7 +349,7 @@ On **Classic v1**, run `yarn cache clean`, then `yarn install`. Inspect the path
 <a id="is-it-safe-to-clear-the-yarn-cache"></a>
 ### Is it safe to clear the Yarn cache?
 
-Yes for normal development. Clearing removes downloaded package archives, not your app source. The next install may take longer. On Classic, `yarn cache dir` shows the versioned cache folder, but a full `yarn cache clean` removes the parent cache root. Inspect that parent and use a dedicated `cache-folder` if you customize it. Treat full cleans as a debugging step, not daily maintenance.
+Yes for normal development. Clearing removes downloaded package archives, not your app source. The next install may take longer. On Classic, `yarn cache dir` shows the versioned cache folder, but a full `yarn cache clean` removes the parent cache root. Inspect that parent and use a dedicated `cache-folder` if you customize it. On Berry, run `yarn config get cacheFolder` before a full clean. `yarn cache clean` and `yarn cache clean --all` remove the entire effective cache directory. With `enableGlobalCache: false`, that path is usually `./.yarn/cache`, but a custom `cacheFolder` can target a parent such as `.yarn` and delete other project files stored there. Treat full cleans as a debugging step, not daily maintenance.
 
 <a id="when-should-you-avoid-clearing-yarn-cache-in-ci-or-docker"></a>
 ### When should you avoid clearing Yarn cache in CI or Docker?
