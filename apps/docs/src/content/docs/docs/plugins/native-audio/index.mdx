@@ -14,11 +14,36 @@ hero:
       link: /docs/plugins/native-audio/getting-started/
       icon: right-arrow
       variant: primary
+    - text: Playlist queue
+      link: /docs/plugins/native-audio/playlist-queue/
+      icon: right-arrow
+      variant: minimal
     - text: GitHub
       link: https://github.com/Cap-go/capacitor-native-audio/
       icon: external
       variant: minimal
 ---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Playlist queue" icon="puzzle">
+    `setQueue`, `queueNext`, `queuePrevious`, `queueSelect`, `getQueueState`, `clearQueue`, and the `queueChange` listener for ordered tracks. Lock screen and notification skip next/previous on iOS and Android with `showNotification`.
+  </Card>
+  <Card title="Playback snapshot" icon="open-book">
+    `getPlaybackState` returns the tracked playback state (`playing`, `paused`, or `stopped`) with position and duration for UI rehydration. The snapshot matches the last `playbackState` event for that asset. `getRate` reads the current speed set with `setRate`. On Web, `play` recreates the audio element and resets the rate, so call `setRate` after `play`.
+  </Card>
+  <Card title="Progress events" icon="setting">
+    The `progress` listener fires on an interval from `configure({ progressInterval })` (default 0.5s) for scrubbers and chapter UI.
+  </Card>
+  <Card title="Audio routing" icon="laptop">
+    Native `setSpeaker`, `setEarpiece`, and `getAudioRoute` on iOS and Android. Successful `setSpeaker` and `setEarpiece` calls emit `audioRouteChange`, even when the route does not change (repeated Web calls still emit). The event does not fire when headphones or Bluetooth connect on their own. On Android, `getAudioRoute` reports `earpiece` only in communication mode after `setEarpiece`; otherwise it reports `speaker` when no headset or Bluetooth is connected. On Web, `setSpeaker` emits `audioRouteChange` with `speaker`, `setEarpiece` emits it with `earpiece`, and `getAudioRoute` reports `speaker`.
+  </Card>
+</CardGrid>
+
+<Aside type="tip">
+  New 8.5 APIs are additive. Existing <code>preload</code> and <code>play</code> flows are unchanged. Full examples: <a href="/docs/plugins/native-audio/playlist-queue/">Playlist queue</a>. These APIs ship with the plugin 8.5 release from <a href="https://github.com/Cap-go/capacitor-native-audio/pull/353">capacitor-native-audio PR #353</a>.
+</Aside>
 
 ## Overview
 
@@ -32,7 +57,7 @@ Typical fits: game SFX, notification chimes, guided meditation, podcast players,
 | --- | --- | --- |
 | iOS | Yes | AVFoundation, optional Now Playing and audio session categories |
 | Android | Yes | Media playback, notifications, optional foreground service for background |
-| Web | Partial | Core playback; some listener events are not emitted on web |
+| Web | Partial | Core playback; `playbackState` and `progress` on web; queue and routing APIs resolve with platform limits |
 
 ## Core Capabilities
 
@@ -60,10 +85,24 @@ Typical fits: game SFX, notification chimes, guided meditation, podcast players,
 | `setCurrentTime` | Set the current time of an audio file. |
 | `getCurrentTime` | Get the current time of an audio file. |
 | `getDuration` | Get the duration of an audio file in seconds. |
+| `getPlaybackState` | Snapshot of the tracked playback state for UI rehydration after navigation or missed events. Matches the last `playbackState` event for that asset. |
+| `getRate` | Current playback rate for the given asset (same value set with `setRate`). On Web, `play` recreates the audio element and resets the rate; call `setRate` after `play`. |
+| `setQueue` | Prepare an ordered queue; reuses preloaded assets when ids match. |
+| `clearQueue` | Clear the active queue. |
+| `getQueueState` | Active queue item, index, count, and ordered asset ids. |
+| `queueNext` | Select the next queue item. Stops the outgoing item and starts the selected item. |
+| `queuePrevious` | Select the previous queue item. Stops the outgoing item and starts the selected item. |
+| `queueSelect` | Jump to a queue item by `assetId`. Stops the outgoing item and starts the selected item. |
+| `setSpeaker` | Prefer built-in speaker (iOS, Android). On Web, emits `audioRouteChange` with `speaker` (not a no-op). |
+| `setEarpiece` | Route call-style audio to the earpiece (iOS, Android). On Web, emits `audioRouteChange` with `earpiece` (not a no-op). |
+| `getAudioRoute` | Active route: `speaker`, `earpiece`, or `external`. On Android, `earpiece` is reported only in communication mode after `setEarpiece`; otherwise `speaker` when no headset or Bluetooth is connected. On Web, always reports `speaker`. |
 | `isPlaying` | Check if an audio file is playing. |
 | `addListener` | Listen for complete event. |
 | `addListener` | Listen for current time updates Emits every 100ms while audio is playing. |
-| `addListener` | Listen for playback state changes, including notification and lock-screen transport controls. Emitted by Android and iOS. The current Web implementation does not emit this event. |
+| `addListener` | Listen for playback state changes, including notification and lock-screen transport controls on iOS and Android. Also emitted on web during play, pause, and complete. |
+| `addListener` | Listen for coarse `progress` events; interval from `configure({ progressInterval })`. |
+| `addListener` | Listen for `queueChange` when the active queue item changes, including Web `setQueue` with `autoPlay: true` (reason `setQueue`). |
+| `addListener` | Listen for `audioRouteChange` when a successful `setSpeaker` or `setEarpiece` call emits the event, even if the route does not change. Does not fire for system route changes such as headphones or Bluetooth. Emitted on iOS, Android, and Web (`setSpeaker` reports `speaker`, `setEarpiece` reports `earpiece`). |
 | `clearCache` | Clear the audio cache for remote audio files. |
 | `setDebugMode` | Set debug mode logging. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |
