@@ -67,7 +67,7 @@ const pluginEntries = [
   ['Audio Session', 'audiosession'],
   ['Auto', 'auto', [linkItem('iOS setup', '/docs/plugins/auto/ios'), linkItem('Android setup', '/docs/plugins/auto/android')]],
   ['Autofill Save Password', 'autofill-save-password'],
-  ['Background Geolocation', 'background-geolocation'],
+  ['Background Geolocation', 'background-geolocation', [linkItem('Geofence queue', '/docs/plugins/background-geolocation/geofence-queue')]],
   ['Background Task', 'background-task', [linkItem('iOS setup', '/docs/plugins/background-task/ios'), linkItem('Android behavior', '/docs/plugins/background-task/android')]],
   ['Barometer', 'barometer'],
   ['Bluetooth Low Energy', 'bluetooth-low-energy'],
