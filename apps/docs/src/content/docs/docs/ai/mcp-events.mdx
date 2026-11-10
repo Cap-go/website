@@ -23,7 +23,7 @@ Capgo models this on the [draft MCP Events specification](https://modelcontextpr
 ## How it works
 
 1. Your MCP client calls `events/subscribe` (or `capgo_subscribe_events`) with an HTTPS callback URL, the event name, and filter arguments.
-2. Capgo runs the usual [HTTPS webhook verification challenge](/docs/public-api/) on that URL before the first event.
+2. Capgo runs an [HTTPS verification challenge](#endpoint-verification-challenge) on that URL before the first event.
 3. When matching activity happens in your organization, Capgo `POST`s a JSON envelope to your URL with Standard Webhooks headers.
 4. Calling `events/subscribe` again for the same subscription **refreshes** its time to live (TTL). When TTL expires, deliveries stop until you subscribe again.
 
@@ -62,7 +62,7 @@ Each subscription stores its own numbers. Capgo ships **Balanced** recommended d
 | `window_minutes` | `15` | Rolling window length Capgo evaluates. |
 | `cooldown_minutes` | `60` | After one delivery, ignore further spikes for this subscription until cooldown ends. |
 
-A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. For each subscription it gathers updater stats for the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`).
+A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. Each run has an about **12 second** evaluation budget and evaluates matching subscriptions concurrently within that window. For each subscription it gathers updater stats for the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`).
 
 #### When a spike fires
 
@@ -74,7 +74,7 @@ For the current window snapshot, Capgo evaluates **all three** conditions at onc
 
 When all three are true, Capgo sends **one** `update.failure_spike` webhook, then starts `cooldown_minutes` for that subscription. Additional threshold crossings during cooldown do not send another event until cooldown expires.
 
-Omitting a threshold argument on subscribe uses the default for that field. Change thresholds by subscribing again with new values (refresh TTL as usual).
+Omitting a threshold argument on subscribe uses the default for that field. Subscription identity includes the full `arguments` object (including thresholds). To change thresholds, call `events/unsubscribe` (or `capgo_unsubscribe_events`) on the old subscription, then subscribe again with the new values. Refresh TTL only when URL, event name, and arguments are unchanged.
 
 #### Tuning examples (recommended starting points)
 
@@ -233,6 +233,16 @@ Each `POST` body is a single JSON object:
 }
 ```
 
+## Endpoint verification challenge
+
+Before the first real event, Capgo `POST`s to your callback URL:
+
+- **Body:** `{"type":"verification","challenge":"<uuid>"}` (JSON)
+- **Headers:** `Content-Type: application/json`, Standard Webhooks headers (`webhook-id`, `webhook-timestamp`, `webhook-signature`) signed with the subscription `whsec_` secret, plus `X-MCP-Subscription-Id`, and `User-Agent: Capgo-MCP-Events/1.0`
+- **Your response:** HTTP 2xx and a JSON body that echoes the same `challenge` string. The response body must be at most 65,536 bytes.
+
+Verify the signature the same way as event deliveries before echoing the challenge. If verification fails, Capgo stores `verificationFailed` on the subscribe result and does not deliver events until a later successful subscribe passes the challenge.
+
 ## HTTP headers and signature verification
 
 Capgo sends Standard Webhooks headers on every delivery:
@@ -253,13 +263,20 @@ Reject requests when the timestamp is too far from your server clock (for exampl
 ```ts
 import { createHmac, timingSafeEqual } from 'node:crypto'
 
+const MAX_TIMESTAMP_SKEW_SECONDS = 5 * 60
+
 function verifyStandardWebhook(
   rawBody: string,
   webhookId: string,
   webhookTimestamp: string,
   webhookSignatureHeader: string,
   secretWithPrefix: string,
+  nowSeconds: number = Math.floor(Date.now() / 1000),
 ): boolean {
+  const ts = Number.parseInt(webhookTimestamp, 10)
+  if (!Number.isFinite(ts) || Math.abs(nowSeconds - ts) > MAX_TIMESTAMP_SKEW_SECONDS)
+    return false
+
   const secretBase64 = secretWithPrefix.startsWith('whsec_')
     ? secretWithPrefix.slice('whsec_'.length)
     : secretWithPrefix
