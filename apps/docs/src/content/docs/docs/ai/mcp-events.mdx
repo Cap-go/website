@@ -62,7 +62,7 @@ Each subscription stores its own numbers. Capgo ships **Balanced** recommended d
 | `window_minutes` | `15` | Rolling window length Capgo evaluates. |
 | `cooldown_minutes` | `60` | After one delivery, ignore further spikes for this subscription until cooldown ends. |
 
-A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. Each run has an about **12 second** evaluation budget and processes metric groups **serially** (concurrency **1**) within that window. Groups that share the same app, optional `channel`, and `window_minutes` reuse one stats fetch per tick. Stats cover the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`). If spike dispatch or enqueue fails, Capgo restores the previous `mcp_spike_last_fired_at` so cooldown does not block a later attempt.
+A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. Each run has an about **12 second** evaluation budget and processes metric groups **serially** (concurrency **1**) within that window. Groups that share the same app, optional `channel`, and `window_minutes` reuse one stats fetch per tick. Stats cover the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`). If Capgo cannot create or queue the spike delivery, it restores the previous `mcp_spike_last_fired_at` value. After a delivery is queued, later HTTP failures use the normal webhook retry path and do not roll back spike cooldown.
 
 #### When a spike fires
 
@@ -72,9 +72,9 @@ For the current window snapshot, Capgo evaluates **all three** conditions at onc
 2. Failed checks in the window is at least `min_failures`.
 3. Failure rate (failures divided by checks, as a percent) is at least `failure_rate_percent`.
 
-When all three are true, Capgo claims the cooldown window and queues **one** `update.failure_spike` webhook. Additional threshold crossings during cooldown do not send another event until cooldown expires. A failed enqueue or delivery restores the previous `mcp_spike_last_fired_at` value so you are not stuck in cooldown after a transient outage.
+When all three are true, Capgo claims the cooldown window and queues **one** `update.failure_spike` webhook. Additional threshold crossings during cooldown do not send another event until cooldown expires. If enqueue fails before the delivery row is queued, Capgo restores the previous `mcp_spike_last_fired_at` value. Once queued, delivery retries behave like any other webhook and may disable the endpoint without restoring spike cooldown.
 
-Payloads may include `top_failure_action_codes` (up to five updater failure actions). That field is populated only when the subscription has **no** `channel` filter; channel-scoped subscriptions omit it.
+Payloads always include `top_failure_action_codes`. When the subscription has **no** `channel` filter, the array lists up to five updater failure actions with counts. When a `channel` filter is set, the field is present as an empty array (`[]`).
 
 Omitting a threshold argument on subscribe uses the default for that field. Subscription identity includes the full `arguments` object (including thresholds). To change thresholds, call `events/unsubscribe` (or `capgo_unsubscribe_events`) on the old subscription, then subscribe again with the new values. Refresh TTL only when URL, event name, and arguments are unchanged.
 
@@ -242,7 +242,7 @@ Before the first real event, Capgo `POST`s to your callback URL:
 - **Headers:** `Content-Type: application/json`, Standard Webhooks headers (`webhook-id`, `webhook-timestamp`, `webhook-signature`) signed with the subscription `whsec_` secret, plus `X-MCP-Subscription-Id`, and `User-Agent: Capgo-MCP-Events/1.0`
 - **Your response:** HTTP 2xx and a JSON body that echoes the same `challenge` string. The response body must be at most 65,536 bytes.
 
-Your callback must answer with HTTP 2xx and echo the `challenge` string. When you supplied the secret on subscribe (protocol path, or `capgo_subscribe_events` with `secret`), verify the Standard Webhooks signature before echoing. When Capgo generates the secret during `capgo_subscribe_events`, the verification POST is sent before the tool returns that secret, so echo the challenge from the JSON body and store the returned `whsec_` for later event deliveries. If verification fails, Capgo stores `verificationFailed` on the subscribe result and does not deliver events until a later successful subscribe passes the challenge.
+Your callback must answer with HTTP 2xx and echo the `challenge` string. When you supplied the secret on subscribe (protocol path, or `capgo_subscribe_events` with `secret`), verify the Standard Webhooks signature before echoing. When Capgo generates the secret during `capgo_subscribe_events`, the verification POST is sent before the tool returns that secret, so echo the challenge from the JSON body and store the returned `whsec_` for later event deliveries. On failure, `events/subscribe` returns JSON-RPC error **`-32027`** (`Callback endpoint verification failed`) with `id` and `reason`. `capgo_subscribe_events` returns a normal tool result with `verificationFailed: true` and `verificationReason`. Capgo does not deliver events until a later successful subscribe passes the challenge.
 
 ## HTTP headers and signature verification
 
