@@ -68,7 +68,7 @@ await NativeAudio.deinitPlugin();
 
 - **Now Playing vs mixing**: `showNotification: true` on iOS switches to a playback category that interrupts background music.
 - **Background Android**: enable `backgroundPlayback` only after you start the required foreground service and permissions from the README.
-- **Web listeners**: playback state listener events are not emitted on web; guard UI that depends on them.
+- **Web listeners**: `playbackState` is emitted on Web when plugin transport methods change playback state, including play, pause, resume, loop, and complete.
 
 ## API Overview
 
