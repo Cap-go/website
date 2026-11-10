@@ -151,7 +151,7 @@ The hosted server exposes account tools in these areas:
 | Statistics and Observe    | App, organization, and account statistics, update health from [Observe](/docs/webapp/observe/)                        |
 | Native builds             | Request, upload and start builds, manage stored credentials, read status and bounded log snapshots, cancel a build    |
 | Webhooks                  | Create, update, test, and delete webhooks, inspect and retry deliveries                                               |
-| MCP Events                | Subscribe to build and bundle events and receive signed HTTPS webhooks ([MCP Events](/docs/ai/mcp-events/))             |
+| MCP Events                | Subscribe to build, bundle, and updater failure spike events via signed HTTPS webhooks ([MCP Events](/docs/ai/mcp-events/)) |
 | Push notifications        | Notification settings, providers, campaigns, sending notifications, stats                                             |
 
 Each tool calls the [Capgo public API](/docs/public-api/) with the key from your session. Permissions (RBAC), rate limits, and audit logs behave exactly as they do for REST API calls with that key.
@@ -164,6 +164,7 @@ Tools that delete or overwrite data are annotated as destructive, so MCP clients
 - "Pause the rollout on the production channel of `com.example.app`."
 - "Why did my last iOS native build fail? Show me the logs."
 - "Which devices are still on bundle 1.4.2?"
+- "Subscribe to `update.failure_spike` on production with thresholds that fit our fleet size, and page me only when the rate spike is real."
 
 ## Monitor releases and explain errors
 
@@ -203,7 +204,11 @@ Use the hosted server for everyday account work from any chat app. Add the [loca
 
 ## MCP Events
 
-Agents can subscribe to builds and bundle lifecycle events and receive signed Standard Webhooks instead of polling. See [MCP Events](/docs/ai/mcp-events/) for the catalog, subscribe filters, protocol methods, verification, TTL, and limits.
+Agents can subscribe to builds, bundle lifecycle, and **`update.failure_spike`** (updater failure rate on a channel) and receive signed Standard Webhooks instead of polling.
+
+For failure spikes, each subscription carries its own thresholds (`min_failures`, `failure_rate_percent`, `min_checks`, `window_minutes`, `cooldown_minutes`). Capgo proposes defaults (`10` / `10` / `50` / `15` / `60`); tune them to your device count so agents alert on real regressions, not noise.
+
+See [MCP Events](/docs/ai/mcp-events/) for the catalog, spike tuning examples, protocol methods, verification, TTL, and limits.
 
 ## Related
 

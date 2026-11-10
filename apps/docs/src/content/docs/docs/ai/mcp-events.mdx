@@ -37,8 +37,9 @@ On `initialize`, the server advertises `capabilities.events` so clients know Eve
 | `build.failed` | A cloud native build fails or times out. `data.failure_category` is `timeout` when the job hit the build timeout. |
 | `bundle.uploaded` | A new app bundle version row is created from a real upload (not a metadata-only change). |
 | `bundle.deployed` | A channel's assigned bundle version **changes** (a deployment). Metadata-only channel updates do not emit this event. |
+| `update.failure_spike` | Updater failure rate on a channel crosses your subscribed thresholds inside the rolling window. |
 
-Every payload includes `org_id` and `app_id` inside `data`. Build events add build fields; bundle events add bundle or channel fields.
+Every payload includes `org_id` and `app_id` inside `data`. Build events add build fields; bundle events add bundle or channel fields. Spike events add channel, window stats, and the threshold values that matched.
 
 ### Subscribe filters (`arguments`)
 
@@ -47,6 +48,41 @@ Every payload includes `org_id` and `app_id` inside `data`. Build events add bui
 | `org_id` | Yes | All events | Organization to watch. |
 | `app_id` | No | All events | Limit deliveries to one app. Omit to receive events for any app in the org you can read. |
 | `channel` | No | `bundle.deployed` only | Limit deployments to one channel name. |
+| `channel` | Yes | `update.failure_spike` | Channel to watch. Spike detection is per channel. |
+
+### `update.failure_spike` thresholds (`arguments`)
+
+Each subscription stores its own numbers. Capgo ships **recommended defaults**; tune them to your active device count and traffic so you catch real regressions without noise.
+
+| Argument | Default | Meaning |
+| -------- | ------- | ------- |
+| `min_failures` | `10` | Minimum failed update checks in the window. |
+| `failure_rate_percent` | `10` | Minimum failure rate (percent of checks in the window). |
+| `min_checks` | `50` | Minimum total update checks in the window before a spike can fire. |
+| `window_minutes` | `15` | Rolling window length Capgo evaluates. |
+| `cooldown_minutes` | `60` | After one delivery, ignore further spikes for this subscription until cooldown ends. |
+
+Capgo derives checks and failures from updater `version_usage` for the subscribed app and channel (failed checks vs total checks in the window).
+
+#### When a spike fires
+
+Within each rolling `window_minutes` interval, Capgo evaluates **all three** conditions at once:
+
+1. Total checks in the window is at least `min_checks`.
+2. Failed checks in the window is at least `min_failures`.
+3. Failure rate (failures divided by checks, as a percent) is at least `failure_rate_percent`.
+
+When all three are true, Capgo sends **one** `update.failure_spike` webhook, then starts `cooldown_minutes` for that subscription. Additional threshold crossings during cooldown do not send another event until cooldown expires.
+
+Omitting a threshold argument on subscribe uses the default for that field. Change thresholds by subscribing again with new values (refresh TTL as usual).
+
+#### Tuning examples (recommended starting points)
+
+**Small app** (hundreds of active devices, low daily update volume): defaults can be noisy because `min_checks` may never be reached, or a handful of failures skews the rate. Try stricter rate but lower volume gates, for example `min_failures: 5`, `failure_rate_percent: 15`, `min_checks: 25`, keeping `window_minutes: 15` and `cooldown_minutes: 60`.
+
+**Large app** (tens of thousands of active devices): defaults may be too sensitive to brief blips. Raise the volume gate and absolute failure count, for example `min_failures: 50`, `failure_rate_percent: 8`, `min_checks: 500`, `window_minutes: 15`, `cooldown_minutes: 60`.
+
+Revisit thresholds after each major rollout. Compare with [Observe](/docs/webapp/observe/) and `capgo_observe` when validating an alert.
 
 ## Protocol methods and tools
 
@@ -164,6 +200,34 @@ Each `POST` body is a single JSON object:
 }
 ```
 
+### Example: `update.failure_spike`
+
+```json
+{
+  "eventId": "01J8ZXAMPLESPIKE",
+  "name": "update.failure_spike",
+  "timestamp": "2026-11-10T14:00:00.000Z",
+  "cursor": null,
+  "data": {
+    "org_id": 42,
+    "app_id": "com.example.app",
+    "channel_id": 7,
+    "channel_name": "production",
+    "window_minutes": 15,
+    "checks": 120,
+    "failures": 18,
+    "failure_rate_percent": 15,
+    "thresholds": {
+      "min_failures": 10,
+      "failure_rate_percent": 10,
+      "min_checks": 50,
+      "window_minutes": 15,
+      "cooldown_minutes": 60
+    }
+  }
+}
+```
+
 ## HTTP headers and signature verification
 
 Capgo sends Standard Webhooks headers on every delivery:
@@ -226,11 +290,11 @@ function verifyStandardWebhook(
 
 ```text
 events/list or capgo_list_event_types
-  -> pick build.succeeded / build.failed / bundle.*
+  -> pick build.*, bundle.*, or update.failure_spike (tune thresholds to device count)
 capgo_subscribe_events({ url, name, arguments, secret? })
   -> save subscription id and whsec_ secret
 on POST: verify Standard Webhooks headers
-  -> capgo_get_build_status / capgo_observe / channel tools as needed
+  -> capgo_observe / capgo_get_build_status / channel tools as needed
 before TTL: capgo_subscribe_events again to refresh
 capgo_unsubscribe_events when done
 ```
