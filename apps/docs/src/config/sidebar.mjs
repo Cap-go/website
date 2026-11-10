@@ -185,7 +185,15 @@ const pluginEntries = [
   ['Privacy Screen', 'privacy-screen', [linkItem('iOS behavior', '/docs/plugins/privacy-screen/ios'), linkItem('Android behavior', '/docs/plugins/privacy-screen/android')]],
   ['Proximity', 'proximity'],
   ['PDF Generator', 'pdf-generator'],
-  ['PDF Viewer', 'pdf-viewer', [linkItem('iOS setup', '/docs/plugins/pdf-viewer/ios'), linkItem('Android setup', '/docs/plugins/pdf-viewer/android')]],
+  [
+    'PDF Viewer',
+    'pdf-viewer',
+    [
+      linkItem('underWebView', '/docs/plugins/pdf-viewer/under-webview'),
+      linkItem('iOS setup', '/docs/plugins/pdf-viewer/ios'),
+      linkItem('Android setup', '/docs/plugins/pdf-viewer/android'),
+    ],
+  ],
   ['Permissions', 'permissions', [linkItem('iOS setup', '/docs/plugins/permissions/ios'), linkItem('Android setup', '/docs/plugins/permissions/android')]],
   ['Pedometer', 'pedometer'],
   ['Persona', 'persona'],
