@@ -71,7 +71,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
    const transaction = await NativePurchases.purchaseProduct({
      productIdentifier: 'com.example.premium.monthly',
-     planIdentifier: monthlyPlanId,        // REQUIRED for Android subscriptions, ignored on iOS
+     planIdentifier: monthlyPlanId,        // Android base plan id, required unless offerToken is passed; ignored on iOS
      productType: PURCHASE_TYPE.SUBS,
      quantity: 1,
    });
@@ -83,6 +83,10 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
    :::tip[iOS monthly commitment plans]
    If a supported iOS subscription returns `pricingTerms`, you can show a monthly billing option with a 12-month commitment and pass `billingPlanType: 'monthly'` to `purchaseProduct()`. See [iOS monthly commitment billing plans](/docs/plugins/native-purchases/ios-monthly-commitment/) for the full flow.
+   :::
+
+   :::tip[Android offer tokens]
+   To charge the exact Android offer you displayed, pass `offerToken` from the same `getProducts()` or `getProduct()` result. That makes `planIdentifier` optional. See [Android subscription offers](/docs/plugins/native-purchases/android-subscription-offers/) for selection order, stale-token rejection, optional `subscriptionPeriod`, and `subscriptionBillingCycles`.
    :::
 
    <Tabs>
@@ -144,7 +148,7 @@ class PurchaseService {
   async buyMonthly(appAccountToken?: string) {
     const transaction = await NativePurchases.purchaseProduct({
       productIdentifier: this.monthlySubId,
-      planIdentifier: this.monthlyPlanId, // REQUIRED for Android subscriptions
+      planIdentifier: this.monthlyPlanId, // Android base plan id, required unless offerToken is passed
       productType: PURCHASE_TYPE.SUBS,
       appAccountToken,
     });
@@ -202,7 +206,8 @@ class PurchaseService {
 |--------|----------|-------------|
 | `productIdentifier` | iOS + Android | SKU/Product ID configured in App Store Connect / Google Play Console. |
 | `productType` | Android only | `PURCHASE_TYPE.INAPP` or `PURCHASE_TYPE.SUBS`. Defaults to `INAPP`. Always set to `SUBS` for subscriptions. |
-| `planIdentifier` | Android subscriptions | Base Plan ID from Google Play Console. Required for subscriptions, ignored on iOS and in-app purchases. |
+| `planIdentifier` | Android subscriptions | Base Plan ID from Google Play Console (`Product.identifier` on a subscription, not `Product.planIdentifier`). Required for Android subscriptions unless `offerToken` is given. Ignored on iOS and in-app purchases. |
+| `offerToken` | Android | Token for one exact subscription or one-time offer, from the same `getProducts()` / `getProduct()` call you purchase. For a subscription it takes precedence over `planIdentifier`. A token that matches no current offer is rejected. |
 | `billingPlanType` | iOS subscriptions | StoreKit billing plan to purchase. Use `'monthly'` for monthly billing with a 12-month commitment when `product.pricingTerms` exposes that option. |
 | `quantity` | iOS | Only for in-app purchases, defaults to `1`. Android always purchases one item. |
 | `appAccountToken` | iOS + Android | UUID/string linking the purchase to your user. Required to be UUID on iOS; Android accepts any obfuscated string up to 64 chars. |
@@ -256,6 +261,10 @@ purchases.forEach((purchase) => {
 4. **Handle errors gracefully** – check for user cancellations, network failures, and unsupported billing environments.
 5. **Test thoroughly** – follow the [iOS sandbox guide](/docs/plugins/native-purchases/ios-sandbox-testing/) and [Android sandbox guide](/docs/plugins/native-purchases/android-sandbox-testing/).
 6. **Offer restore & management** – add UI buttons wired to `restorePurchases()` and `manageSubscriptions()`.
+
+## Breaking (TypeScript typings)
+
+`Product.subscriptionPeriod` is now optional. Android omits it on prepaid (non-recurring) offers, which have price only. Reading `product.subscriptionPeriod.unit` without a check is a TypeScript error. Use `product.subscriptionPeriod?.unit`. Details are in [Android subscription offers](/docs/plugins/native-purchases/android-subscription-offers/).
 
 ## Revenue next steps
 
