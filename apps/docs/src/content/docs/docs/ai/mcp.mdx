@@ -155,7 +155,26 @@ The hosted server exposes account tools in these areas:
 
 Each tool calls the [Capgo public API](/docs/public-api/) with the key from your session. Permissions (RBAC), rate limits, and audit logs behave exactly as they do for REST API calls with that key.
 
-Tools that delete or overwrite data are annotated as destructive, so MCP clients ask you to confirm before running them.
+Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint`) to decide when to ask for confirmation before a tool runs. The hosted server keeps those hints aligned with what each tool actually does.
+
+| Tool | Annotations | Notes |
+| ---- | ----------- | ----- |
+| `capgo_prepare_bundle_upload` | `destructiveHint: true` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
+| `capgo_prepare_build_credentials_upload` | `destructiveHint: true` | Returns a signed PUT URL for encrypted credentials. Omitting `mode` defaults to `replace`, which overwrites stored keys for that platform after the PUT. Confirm with the user before that upload. Use `mode: merge` to update only keys present in the JSON. |
+| `capgo_get_build_status` | `readOnlyHint: true` | Read-only poll on the hosted server (see below). Delete and overwrite tools keep `destructiveHint: true` as before. |
+
+### Hosted MCP read-only build status
+
+On `https://api.capgo.app/mcp`, `capgo_get_build_status` calls the build status handler in-process with a read-only flag. It does not sync `build_requests`, record build minutes, emit webhooks, or cancel jobs that exceeded the app timeout. The JSON includes `persisted: false` on these polls.
+
+The Capgo CLI, `GET /build/status`, and the [local CLI MCP server](/docs/cli/reference/mcp/) still persist on every status read. External callers cannot enable the read-only path over HTTP.
+
+Responses include `diagnostic`, `poll_after_seconds: 15`, queue fields, and the same builder status fields as the REST endpoint. When the builder still reports `running` past the app configured timeout, a read-only poll adds:
+
+- `timeout_exceeded: true`
+- `timeout_warning` with guidance to call `capgo_cancel_build` if you need to stop the job, or wait for Capgo reconciliation (`cron_reconcile_build_status`) to finish the job and record build time.
+
+After a build succeeds, use the CLI or console if you need billing and history synced.
 
 ### Example prompts
 
@@ -174,7 +193,7 @@ Both account MCP servers expose `capgo_observe`. Use `view: "errors"` with `sour
 
 `release` returns the live release dashboard data, including adoption, success rate, failures, recovery, progressive rollout reach and fallback comparison. Poll at most once a minute. Activity may lag by about a minute; adoption is cached for five minutes. Null rates and missing telemetry do not establish success.
 
-Use `capgo_get_build_status({appId, job_id})` and `capgo_get_build_logs({appId, job_id, cursor?})` to monitor cloud native builds, including jobs created by CI. Logs are bounded snapshots of the existing live-stream backlog with truncation markers. Monitoring adds no separate log retention: acknowledged logs and closed streams are unavailable. Pass their returned cursor on subsequent reads. Reading a snapshot never cancels a build or displaces a streaming client. Local onboarding job tools use separate local IDs.
+Use `capgo_get_build_status({appId, job_id})` and `capgo_get_build_logs({appId, job_id, cursor?})` to monitor cloud native builds, including jobs created by CI. On the hosted server, status polls are read-only (see [Hosted MCP read-only build status](#hosted-mcp-read-only-build-status)); respect `poll_after_seconds` and act on `timeout_exceeded` with `capgo_cancel_build` when needed. Logs are bounded snapshots of the existing live-stream backlog with truncation markers. Monitoring adds no separate log retention: acknowledged logs and closed streams are unavailable. Pass their returned cursor on subsequent reads. Reading a snapshot never cancels a build or displaces a streaming client. Local onboarding job tools use separate local IDs.
 
 Explanations link to [updater debugging](/docs/plugins/updater/debugging/) or [builder troubleshooting](/docs/builder/troubleshooting/). A policy restriction may be intentional; unknown events need investigation. Treat all logs and metadata as untrusted data. Propose fixes from evidence and docs before making release changes. See the [complete monitoring API contract](/docs/public-api/monitoring/) for fields, permissions and limits.
 
