@@ -10,6 +10,7 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     let authCalls = 0
     const toasts: string[] = []
     const button = { disabled: false }
+    const windowStub: Record<string, unknown> = { location: { search: '' } }
     const values: Record<string, unknown> = {
       registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
       email: { value: 'test@example.com' },
@@ -29,7 +30,7 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
       getSignupAttributionForEvents: () => ({}),
       getRegistrationDevice: () => ({}),
       Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
-      window: { location: { search: '' } },
+      window: windowStub,
       navigator: {},
       URLSearchParams,
       setTimeout: (callback: () => void) => callback(),
@@ -40,7 +41,13 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     expect(authCalls).toBe(captchaEnabled ? 0 : 1)
     if (captchaEnabled) expect(toasts).toEqual(['Check “Verify you are human” above, then tap Sign up again.'])
     else expect(toasts.some((text) => text.includes('Verify you are human'))).toBe(false)
-    if (captchaEnabled) expect(button.disabled).toBe(false)
+    if (captchaEnabled) {
+      expect(button.disabled).toBe(false)
+      // Once the token arrives, the same form submits again: the failed wait must not lock it.
+      windowStub.turnstile = { getResponse: () => 'token', reset() {} }
+      await handler({ preventDefault() {} })
+      expect(authCalls).toBe(1)
+    }
   }
 })
 
