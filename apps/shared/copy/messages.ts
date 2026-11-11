@@ -251,7 +251,7 @@ const messages = {
   alternatives_sum_capawesome_live: 'Capacitor, Ionic, and Cordova',
   alternatives_sum_capawesome_price: 'From $9/month (live updates only)',
   alternatives_sum_capawesome_status: 'Active',
-  alternatives_sum_capgo_builds: 'Yes, Capacitor, typically 2–3 min',
+  alternatives_sum_capgo_builds: 'Yes, Capacitor, CLI + MCP',
   alternatives_sum_capgo_live: 'Capacitor, Cordova, and Electron',
   alternatives_sum_capgo_price: 'From $12/month billed yearly',
   alternatives_sum_capgo_status: 'Active, founded 2021',
@@ -370,7 +370,7 @@ const messages = {
   solutions_builder_to_mobile_pain2_title: '{builder} cannot run native tooling',
   solutions_builder_to_mobile_pain3_desc: 'After the first store release, each new version goes back through store review, often 24–48 hours, sometimes much longer.',
   solutions_builder_to_mobile_pain3_title: 'Every change waits on review',
-  solutions_builder_to_mobile_playbook2_desc: 'Request signed iOS and Android builds from the CLI. iOS builds run on cloud Macs, and a typical build takes 2–3 minutes.',
+  solutions_builder_to_mobile_playbook2_desc: 'Request signed iOS and Android builds from the CLI. iOS builds run on cloud Macs, and live logs show progress throughout the build.',
   solutions_builder_to_mobile_playbook2_title: 'Build it with Capgo Build',
   solutions_builder_to_mobile_playbook3_desc: '{syncNote} A GitHub Action builds the app and uploads the bundle, so installed apps get web changes without a new store release.',
   solutions_builder_to_mobile_playbook3_title: 'Ship each change as a live update',
@@ -388,8 +388,8 @@ const messages = {
   solutions_builder_to_mobile_prompt_title: 'Let your coding agent do the setup',
   solutions_builder_to_mobile_stat1_label: 'needed for iOS builds',
   solutions_builder_to_mobile_stat1_value: 'No Mac',
-  solutions_builder_to_mobile_stat2_label: 'typical native build',
-  solutions_builder_to_mobile_stat2_value: '2–3 min',
+  solutions_builder_to_mobile_stat2_label: 'native platforms',
+  solutions_builder_to_mobile_stat2_value: 'iOS + Android',
   solutions_builder_to_mobile_stat3_label: 'for changes made in {builder}',
   solutions_builder_to_mobile_stat3_value: 'Live updates',
   solutions_builder_to_mobile_title: '{builder} App to iOS and Android',
@@ -516,7 +516,7 @@ const messages = {
     'If your Appflow stack includes Ionic enterprise plugins, use the <a href="{pluginsUrl}">Ionic Enterprise Plugins guide</a>. Paid support is available on demand: <a href="{supportUrl}">see support options</a>. Need a hands-on migration? We offer <a href="{migrationUrl}">paid migration services</a>.',
   appflow_faq_a1: "Nope. Whatever you're using now (GitHub Actions, GitLab CI, Jenkins, etc.) keeps working. Just change the upload step to use our CLI instead of Appflow's.",
   appflow_faq_a2:
-    'Yes. Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2–3 minutes. Trigger it from the CLI or from your existing CI; Capgo does not replace your CI/CD pipeline.',
+    'Yes. Capgo Builder builds and signs iOS and Android binaries in the cloud, with live build logs. Trigger it from the CLI or from your existing CI; Capgo does not replace your CI/CD pipeline.',
   appflow_faq_a3:
     'Appflow Live Updates started at $499/month and is no longer sold to new customers. Capgo starts at $12/month billed yearly ($14 billed monthly), with a 14-day free trial and no credit card required.',
   appflow_faq_a4: 'Capgo delivers 1B+ updates per month to 90M+ devices. Live status and incident history are public at status.capgo.app.',
@@ -606,7 +606,8 @@ const messages = {
   articles: 'Articles',
   articles_description: 'Capacitor and mobile development guides, tutorials, and best practices for building modern apps.',
   articles_title: 'Capgo | Capacitor Articles',
-  blog_category_seo_description: '{category} for Capacitor developers on the Capgo {listing}: guides, tutorials, and best practices for building, releasing, and updating mobile apps.',
+  blog_category_seo_description:
+    '{category} for Capacitor developers on the Capgo {listing}: guides, tutorials, and best practices for building, releasing, and updating mobile apps.',
   blog_category_seo_title: '{category}: Capacitor Guides and Tutorials',
   blog_mid_article_china_cta_body: 'Capgo live updates let Capacitor apps push encrypted OTA fixes while you work through ICP, CSL, and PIPL requirements.',
   blog_mid_article_china_cta_docs_button: 'Live updates docs',
@@ -982,7 +983,7 @@ const messages = {
   compare_capgo_frameworks:
     'Capacitor apps built with React, Vue, Angular, Svelte, Ionic, or any web framework. Live updates also work for Cordova and Electron. Not for React Native.',
   compare_capgo_native_builds:
-    'Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2-3 minutes, and can upload them to the stores. Build time is included in plans.',
+    'Capgo Builder builds and signs iOS and Android binaries in the cloud, with live build logs, and can upload them to the stores. Build time is included in plans.',
   compare_capgo_open_source:
     'Updater plugin and Capgo plugins are free under MPL-2.0. Backend source is on GitHub under AGPL-3.0. Run your own update server, or use licensed self-hosting on Enterprise.',
   compare_capgo_ota: 'Ships JavaScript, HTML, CSS, and asset changes without waiting for store review, with delta downloads and end-to-end encryption. 1B+ updates per month.',
@@ -1065,8 +1066,7 @@ const messages = {
   compare_expo_h1: 'Expo alternative for web apps',
   compare_expo_lead: 'Already React Native? Use Expo and EAS. Have a web app? Use Capacitor with Capgo and skip a React Native rewrite.',
   compare_expo_map_build_link: 'Open Capgo Builder',
-  compare_expo_map_build_text:
-    'Compile and sign iOS and Android binaries in the cloud from any machine, typically in 2–3 minutes. Build time is included in every paid Capgo plan.',
+  compare_expo_map_build_text: 'Compile and sign iOS and Android binaries in the cloud from any machine, with live build logs. Build time is included in every paid Capgo plan.',
   compare_expo_map_eyebrow: 'Mapped to Expo Application Services',
   compare_expo_map_lead: 'Capgo covers the four EAS release jobs for a Capacitor app. EAS Hosting deploys Expo Router websites, which Capgo does not offer.',
   compare_expo_map_list_description: 'Capgo analogs for EAS Update, EAS Build, EAS Submit, and EAS Workflows.',
@@ -1157,7 +1157,7 @@ const messages = {
   compare_median_not_for_1: 'You have no in-house developers and want a managed team to build and publish for you; Median Business plans cover that.',
   compare_median_not_for_2: 'You want a free non-commercial app license with a Median watermark instead of a paid Capgo trial.',
   compare_meta_apps: '5.7K+ apps',
-  compare_meta_build_time: 'Native builds in 2-3 min',
+  compare_meta_build_time: 'Native builds with live logs',
   compare_meta_devices: '90M+ devices',
   compare_meta_founded: 'Founded in 2021',
   compare_meta_teams: '9,400+ teams',
@@ -1174,7 +1174,7 @@ const messages = {
   compare_reviews_wall_title: 'More reviews from Capgo customers',
   compare_rank_capgo_link: 'Capgo vs {competitor}',
   compare_rank_capgo_text:
-    'Capacitor plus Capgo: one web codebase for iOS, Android, and web, live updates that skip store review, and cloud native builds in 2–3 minutes. Open source, from $12/month.',
+    'Capacitor plus Capgo: one web codebase for iOS, Android, and web, live updates that skip store review, and cloud native builds with signing and store submission. Open source, from $12/month.',
   compare_rank_eyebrow: 'Top picks',
   compare_rank_lead: 'Ranked for teams that want to ship mobile apps fast, fix production bugs without waiting on store review, and keep full control of their code.',
   compare_rank_link: 'Learn more',
@@ -1194,7 +1194,7 @@ const messages = {
     'Competitor details are as of November 2026 and were checked against the vendor pages below. Plans and prices change, so confirm on the vendor site before you decide.',
   compare_sources_title: 'Sources',
   compare_step_build_text:
-    'Run <code>npx @capgo/cli@latest build request --platform ios</code> (or <code>android</code>) to build and sign binaries in the cloud. A typical build takes 2–3 minutes.',
+    'Run <code>npx @capgo/cli@latest build request --platform ios</code> (or <code>android</code>) to build and sign binaries in the cloud. Build time depends on your project; see the public Native Build data page for measured processing and queue times.',
   compare_step_build_title: 'Build native binaries',
   compare_step_capacitor_text:
     'Add <code>@capacitor/core</code> and <code>@capacitor/cli</code> to your web project, run <code>npx cap init</code>, then add the iOS and Android platforms.',
@@ -3031,7 +3031,8 @@ const messages = {
   native_build_faq4_a:
     'Build minutes are included in your plan. Need more? Buy credits. Builds run on Mac Mini Silicon M4 machines with the native toolchains already installed. No storage fees - ever.',
   native_build_faq4_q: 'How does pricing work?',
-  native_build_faq5_a: 'Average build time is 2-3 minutes depending on your project size and configuration. iOS and Android can build in parallel to save time.',
+  native_build_faq5_a:
+    'Build time depends on project size, dependencies, cache state, and queue wait. See /builder-data/ for measured processing and queue times. iOS and Android can build in parallel to save time.',
   native_build_faq5_q: 'How long do builds take?',
   native_build_faq6_a: 'iOS and Android. iOS builds for App Store, TestFlight, and ad-hoc distribution. Android builds for Play Store and direct APK/AAB downloads.',
   native_build_faq6_q: 'What platforms do you support?',
@@ -3059,7 +3060,7 @@ const messages = {
   native_build_how_it_works_subtitle: 'From code push to App Store in minutes',
   native_build_how_it_works_title: 'How It Works',
   native_build_pricing_desc:
-    'Build minutes are included in your plan, or purchase extra via our credit system. Builds run on Mac Mini Silicon M4 machines with Xcode, Android Studio, and .NET workloads available. Average build time: 2-3 minutes.',
+    'Build minutes are included in your plan, or purchase extra via our credit system. Builds run on Mac Mini Silicon M4 machines with Xcode, Android Studio, and .NET workloads available. Measured processing and queue times: /builder-data/.',
   native_build_pricing_subtitle: 'No storage costs. No hidden fees. Just build minutes.',
   native_build_pricing_title: 'Pay Only for Build Time',
   native_build_security_feature1_desc:
@@ -3133,8 +3134,8 @@ const messages = {
   native_build_builder_cta_text: "Build signed iOS and Android releases from your machine or CI while keeping Capgo's existing site header, docs, and pricing flow.",
   native_build_builder_cta_title: 'Native builds without the pain.',
   native_build_builder_description:
-    'Build and sign iOS and Android Capacitor apps from any CI when you have no Mac. One CLI step after cap sync, with optional App Store and Play submit.',
-  native_build_seo_title: 'iOS cloud builds for Capacitor without a Mac',
+    'Production iOS and Android cloud builds for Capacitor. Build, sign, and submit from your CLI, CI, or AI agent. No local Mac or Xcode required.',
+  native_build_seo_title: 'Native iOS & Android builds for Capacitor and AI agents',
   native_build_builder_extra_minutes: 'Extra build minutes use prepaid credits.',
   native_build_builder_faq_eyebrow: 'FAQ',
   native_build_builder_faq_live_updates_a:
@@ -4122,11 +4123,12 @@ const messages = {
   solutions_build_without_mac_cta_subtitle_direct: 'Run your first signed iOS build with a 14-day money-back guarantee, then add Android, CI, and live updates when you need them.',
   solutions_build_without_mac_cta_title: 'Ship iOS without buying a Mac',
   solutions_build_without_mac_description:
-    'Build, sign, and upload Capacitor iOS apps from Windows, Linux, or CI with Capgo Build. Cloud Mac machines, guided signing, TestFlight upload, and a typical build time of 2–3 minutes.',
+    'Build, sign, and upload Capacitor iOS apps from Windows, Linux, or CI with Capgo Build. Cloud Mac machines, guided signing, TestFlight upload, and live build logs.',
   solutions_build_without_mac_faq1_a:
     "Not to compile, sign, or upload. Builds run on Capgo's Mac mini M4 machines. You still need an Apple Developer account. On Windows or Linux, you create the App Store Connect API key in your browser, then the CLI handles certificates and profiles.",
   solutions_build_without_mac_faq1_q: 'Do I need a Mac at any point?',
-  solutions_build_without_mac_faq2_a: 'A typical native build takes 2–3 minutes. Logs stream to your terminal while it runs, so you see errors as they happen.',
+  solutions_build_without_mac_faq2_a:
+    'Build time depends on your project; see the public Native Build data page for measured processing and queue times. Logs stream to your terminal while it runs, so you see errors as they happen.',
   solutions_build_without_mac_faq2_q: 'How long does an iOS build take?',
   solutions_build_without_mac_faq3_a:
     'Yes. With an App Store Connect API key in your credentials, the signed build uploads to App Store Connect, where you test it in TestFlight and submit it for App Store review. Add --output-upload if you also want a download link for the IPA.',
@@ -4183,8 +4185,8 @@ const messages = {
   solutions_build_without_mac_problem_title: 'Xcode only runs on macOS',
   solutions_build_without_mac_secondary_cta: 'Explore Capgo Build',
   solutions_build_without_mac_short: 'Build Without Mac',
-  solutions_build_without_mac_stat1_label: 'typical native build',
-  solutions_build_without_mac_stat1_value: '2–3 min',
+  solutions_build_without_mac_stat1_label: 'for CI and AI agents',
+  solutions_build_without_mac_stat1_value: 'CLI + MCP',
   solutions_build_without_mac_stat2_label: 'from the same CLI',
   solutions_build_without_mac_stat2_value: 'iOS + Android',
   solutions_build_without_mac_stat3_label: 'direct upload to App Store Connect',
@@ -4222,7 +4224,7 @@ const messages = {
   solutions_webapp_to_mobile_cap1_desc: 'Capacitor places your built web app in native iOS and Android projects. Plugins give your JavaScript access to device features.',
   solutions_webapp_to_mobile_cap1_title: 'Capacitor wraps your web build',
   solutions_webapp_to_mobile_cap2_desc:
-    'Request iOS and Android builds from the CLI. iOS builds run on cloud Macs, so nobody on the team needs one. A typical build takes 2–3 minutes.',
+    'Request iOS and Android builds from the CLI. iOS builds run on cloud Macs, so nobody on the team needs one. Build time depends on your project; see the public Native Build data page for measured processing and queue times.',
   solutions_webapp_to_mobile_cap2_title: 'Capgo Build compiles and signs',
   solutions_webapp_to_mobile_cap3_desc: 'Signed builds upload to App Store Connect and Google Play. The first release and every native change still go through store review.',
   solutions_webapp_to_mobile_cap3_title: 'Upload to the stores',
@@ -4304,8 +4306,8 @@ const messages = {
   solutions_webapp_to_mobile_source_title: 'What to check in your web app first',
   solutions_webapp_to_mobile_stat1_label: 'for web, iOS, and Android',
   solutions_webapp_to_mobile_stat1_value: 'One codebase',
-  solutions_webapp_to_mobile_stat2_label: 'typical native build',
-  solutions_webapp_to_mobile_stat2_value: '2–3 min',
+  solutions_webapp_to_mobile_stat2_label: 'native platforms',
+  solutions_webapp_to_mobile_stat2_value: 'iOS + Android',
   solutions_webapp_to_mobile_stat3_label: 'for web changes after launch',
   solutions_webapp_to_mobile_stat3_value: 'Live updates',
   solutions_webapp_to_mobile_title: 'Turn Your Web App into iOS and Android Apps',
@@ -4409,7 +4411,7 @@ const messages = {
     '@capgo/cordova-updater brings Capgo live updates to Cordova iOS 7+ and Android 13+. After the move, keep the same Capgo app ID and channels and switch to the Capacitor plugin.',
   solutions_cordova_to_capacitor_benefit3_title: 'Live updates while still on Cordova',
   solutions_cordova_to_capacitor_benefit4_desc:
-    'Capgo Build compiles and signs your new Capacitor projects in the cloud and can send them to the stores. A typical native build takes 2–3 minutes.',
+    'Capgo Build compiles and signs your new Capacitor projects in the cloud and can send them to the stores. Build time depends on your project; see the public Native Build data page for measured processing and queue times.',
   solutions_cordova_to_capacitor_benefit4_title: 'Cloud builds for iOS and Android',
   solutions_cordova_to_capacitor_benefit5_desc:
     'When you upload a bundle, Capgo compares the native plugins in your project with the bundle live on the channel and tells you when a change needs a new store build.',
@@ -5680,7 +5682,7 @@ const messages = {
   solutions_solo_how2_title: 'Upload on every push to main',
   solutions_solo_how3_body: 'Call notifyAppReady() when the app starts. If a new bundle does not call it within 10 seconds, the device goes back to the last working version.',
   solutions_solo_how3_title: 'Let failed bundles roll back',
-  solutions_solo_how4_body: "Save your signing credentials once. Capgo Build compiles the app on Capgo's Mac machines, usually in 2–3 minutes.",
+  solutions_solo_how4_body: "Save your signing credentials once. Capgo Build compiles the app on Capgo's Mac machines, with live build logs.",
   solutions_solo_how4_title: 'Build iOS without a Mac',
   solutions_solo_how_desc: 'The whole setup for one person and one app. Every command below is from the Capgo docs.',
   solutions_solo_how_title: 'How a solo developer ships with Capgo',
@@ -5743,7 +5745,7 @@ const messages = {
     'Send a bundle to a share of devices first. If a new bundle never calls notifyAppReady(), the device goes back to the last working version on its own.',
   solutions_startups_adv3_title: 'Roll out gradually, roll back automatically',
   solutions_startups_adv4_desc:
-    'Capgo Build compiles iOS and Android apps in the cloud and can upload them to App Store Connect and Google Play. A typical build takes 2–3 minutes.',
+    'Capgo Build compiles iOS and Android apps in the cloud and can upload them to App Store Connect and Google Play. Build time depends on your project; see the public Native Build data page for measured processing and queue times.',
   solutions_startups_adv4_point1: "iOS builds on Capgo's Mac machines",
   solutions_startups_adv4_point2: 'Signing credentials saved once with the CLI',
   solutions_startups_adv4_point3: 'Store upload from the same command',
@@ -6549,21 +6551,22 @@ const messages = {
   native_build_v2_hero_badge: 'Capgo Builder',
   native_build_v2_hero_headline: 'Ship without the Mac',
   native_build_v2_hero_tagline: 'One command. Stores optional.',
-  native_build_v2_hero_lead: 'Signed iOS and Android CapacitorJs builds from any machine. Share with a QR from CI, or upload to the stores.',
+  native_build_v2_hero_lead:
+    'Production iOS and Android builds for Capacitor. Build, sign, and submit from Windows, Linux, macOS, CI, or your AI coding agent. Generally available today.',
   native_build_v2_hero_cta: 'Start building',
   native_build_v2_hero_secondary: 'See how it works',
   native_build_v2_meta_ios: 'iOS · Apple Silicon',
   native_build_v2_meta_android: 'Android · Apple Silicon',
   native_build_v2_meta_nosdk: 'No Mac, no Android SDK',
-  native_build_v2_meta_speed: 'Avg build 2-3 min',
+  native_build_v2_meta_speed: 'CLI + MCP for AI agents',
   native_build_v2_strip_ios_k: 'iOS runners',
   native_build_v2_strip_ios_v: 'M4 Mac',
   native_build_v2_strip_android_k: 'Android runners',
   native_build_v2_strip_android_v: 'M4 Mac',
-  native_build_v2_strip_build_k: 'Avg build',
-  native_build_v2_strip_build_v: '2-3 min',
-  native_build_v2_strip_setup_k: 'Setup',
-  native_build_v2_strip_setup_v: '~60 sec',
+  native_build_v2_strip_build_k: 'Native platforms',
+  native_build_v2_strip_build_v: '2',
+  native_build_v2_strip_setup_k: 'CLI + AI workflow',
+  native_build_v2_strip_setup_v: '1 toolchain',
 
   native_build_v2_reveal_line: 'One command, from any machine — to the stores or straight to your users',
 
@@ -6592,7 +6595,7 @@ const messages = {
   native_build_v2_tile_logs_sub: 'Stream logs, then hand testers a scannable QR download.',
   native_build_v2_tile_flavors_title: 'Android flavors + Cordova',
   native_build_v2_tile_flavors_sub: 'Flavors, keystores, and Cordova plugins handled automatically.',
-  native_build_v2_tile_setup_title: 'Setup in 60 seconds',
+  native_build_v2_tile_setup_title: 'Guided signing setup',
   native_build_v2_tile_setup_sub: 'Optional .p8 for iOS, or we create one for you. One Google sign-in for Android.',
   native_build_v2_tile_ci_title: 'CI/CD ready',
   native_build_v2_tile_ci_sub: 'Works in GitHub Actions, GitLab and Bitbucket. No interactive input.',
@@ -6630,7 +6633,7 @@ const messages = {
   native_build_v2_share_scan_label: 'Scan to install',
   native_build_v2_share_ttl: 'Link TTL 1h–7d',
 
-  native_build_v2_wiz_eyebrow: '60 seconds, both platforms',
+  native_build_v2_wiz_eyebrow: 'Guided setup, both platforms',
   native_build_v2_wiz_title_prefix: 'Setup in ',
   native_build_v2_wiz_title_time: '60 seconds',
   native_build_v2_wiz_lead: 'One .p8 for iOS, one Google sign-in for Android. Capgo handles certs and keys.',
@@ -6833,10 +6836,20 @@ const messages = {
   native_build_v2_calc_ios: 'iOS builds',
   native_build_v2_calc_android: 'Android builds',
   native_build_v2_calc_note:
-    'Guide: iOS ~5 build-minutes, Android ~2.5, both on M4 Macs. Typical builds take 2-3 minutes. iOS minutes bill ~2x Android. Plan minutes are free; price shows prepaid top-up cost.',
+    'Guide: iOS ~5 build-minutes, Android ~2.5, both on M4 Macs. Actual duration varies by project; see /builder-data/ for measured times. iOS minutes bill ~2x Android. Plan minutes are free; price shows prepaid top-up cost.',
   native_build_v2_calc_price_label: 'in prepaid credits',
   native_build_v2_pricing_fine: 'Build minutes are included in every plan. Extra minutes use prepaid credits. Final tiers at',
 
+  native_build_v2_faq_availability_q: 'Is Capgo Build generally available for production?',
+  native_build_v2_faq_availability_a:
+    'Yes. Capgo Build is generally available for production iOS and Android Capacitor releases. Start through the CLI, CI, or MCP. Build minutes are included in Capgo plans, with prepaid credits for extra minutes. Store developer accounts, signing permissions, and store review requirements still apply.',
+  native_build_v2_faq_ai_q: 'Can an AI coding agent build and submit my Capacitor app?',
+  native_build_v2_faq_ai_a:
+    'Yes. Capgo MCP supports native builds from Codex, Claude Code, Cursor, and other MCP clients. The local MCP guides signing setup; local and hosted MCP tools can request builds, inspect status, and read logs. The CLI supports App Store Connect and Google Play submission. Signing secrets stay out of chat.',
+  native_build_v2_faq_metrics_q: 'Where can I verify build speed and reliability?',
+  native_build_v2_faq_metrics_a:
+    'The public Native Build data page reports measured processing time, queue wait, success rates, and failure categories over the last 30 days. Results include project and signing errors; they are not an uptime SLA or a guaranteed build time. Check the timestamp and platform breakdown for your evaluation.',
+  native_build_v2_faq_metrics_link: 'See measured Native Build data',
   native_build_v2_faq_q1: 'Can you sign apps with widget + notification-service extensions?',
   native_build_v2_faq_a1: 'Yes. Pass --ios-provisioning-profile bundleId=path per target, including widgets, notification service, and share extensions.',
   native_build_v2_faq_q2: 'Do you handle Cordova plugins in Capacitor projects?',
@@ -7314,7 +7327,7 @@ const messages = {
   voltbuilder_alt_faq_a2:
     'Yes. Keep VoltBuilder for store builds and add npx @capgo/cli@latest bundle upload after your web build, so web changes reach users without a new store release.',
   voltbuilder_alt_faq_q3: 'Do I need a Mac to build iOS apps with Capgo?',
-  voltbuilder_alt_faq_a3: 'No. Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2–3 minutes, and can upload them to the stores.',
+  voltbuilder_alt_faq_a3: 'No. Capgo Builder builds and signs iOS and Android binaries in the cloud, with live build logs, and can upload them to the stores.',
   voltbuilder_alt_faq_q4: 'How do VoltBuilder and Capgo prices compare?',
   voltbuilder_alt_faq_a4:
     'VoltBuilder Indy is $15/month and Pro is $37/month, for builds only. Capgo starts at $12/month billed yearly and includes native build time and live updates.',
