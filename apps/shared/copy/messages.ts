@@ -1420,7 +1420,7 @@ const messages = {
   nav_live_update_data: 'Live Update data',
   nav_native_build_data: 'Native Build data',
   plugins_ai_engineering_body:
-    'Capgo builds, improves, and fixes its Capacitor plugins with heavy use of AI in our own engineering workflow. Most plugin issues get a fix pull request the same day; every pull request gets automated review first. 50+ pull requests merged daily by a human. Your app does not need AI to use our plugins.',
+    'We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews and merges 50+ pull requests daily.',
   plugins_ai_engineering_cta: 'How we maintain plugins',
   plugins_ai_engineering_title: 'AI-accelerated plugin maintenance',
   plugins_license_body: 'Every Capgo plugin is free to use under the Mozilla Public License 2.0, including in commercial apps. Read, fork, and audit the source on GitHub.',
