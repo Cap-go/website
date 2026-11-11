@@ -1,11 +1,75 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.104.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.104.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.104.0",
+    "pubDate": "2026-11-10T20:59:38.000Z",
+    "description": "🆕 Changelog Added MCP Events : Added support for MCP (Model Context Protocol) events on hosted Capgo MCP services. Self Hosted GoTrue Database Support : Introduced role and schema to support self hosted GoTrue instances. Settings Enhancements : Added a profile menu and danger zones to the settings interface, utilizing DaisyUI buttons for improved consistency. AI Fallback UX : Enhanced the frontend experience for AI to manual fallback scenarios by prominently displaying the relevant CLI comma..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.103.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.103.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.103.0",
+    "pubDate": "2026-11-10T14:40:46.000Z",
+    "description": "🆕 Changelog Added Added support for Workers with the compatibility date. Introduced new API endpoints for managing security update emails and per app advisory feeds. Enhanced Cloudflare integration with improved handling for Digital Ocean stub retries and read aborts. Added functionality to dismiss, skip, or restore CI/CD setup during the onboarding process. Fixed Resolved issues preventing users from dismissing, skipping, or restoring CI/CD configuration steps in the onboarding flow. Change..."
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.102.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.102.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.102.0",
     "pubDate": "2026-11-10T02:41:21.000Z",
     "description": "🆕 Changelog Added CI/CD Onboarding : Added a guided setup workflow for Continuous Integration/Continuous Deployment to facilitate live updates and Builder integration, including tracking of setup progress. Fixed Changelog Security : Fixed an issue where fetching GitHub release data for the changelog required improper handling of authentication; release fetches are now properly authenticated and shared securely. Billing Recovery : Improved the reliability of payment recovery processes and ref..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.38.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.1",
+    "pubDate": "2026-11-10T23:43:35.000Z",
+    "description": "🆕 Changelog Fixed Corrected the Cloudflare Worker configuration to resolve deployment issues. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.38.0...capgo 22.38.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.38.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.0",
+    "pubDate": "2026-11-10T22:08:19.000Z",
+    "description": "🆕 Changelog Security Applied security updates to the Console User Interface to mitigate potential vulnerabilities and enhance overall application security. Added Integrated new security features into the frontend console UI as part of the security update release. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.104.0...capgo 22.38.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.37.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.37.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.37.0",
+    "pubDate": "2026-11-10T21:01:43.000Z",
+    "description": "🆕 Changelog Added MCP Events : Introduced support for Model Context Protocol (MCP) events on hosted Capgo MCP servers, enabling real time notifications and event driven interactions for connected clients. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.36.0...capgo 22.37.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.36.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.36.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.36.0",
+    "pubDate": "2026-11-10T16:23:48.000Z",
+    "description": "🆕 Changelog Added Profile Menu & Settings UI : Introduced a new profile menu in the settings area, including dedicated \"Danger Zones\" sections for sensitive account actions, styled with DaisyUI buttons for a consistent user experience. Self Hosted GoTrue Support : Added role and schema to support self hosted GoTrue instances, enabling more robust authentication configurations. AI to Manual Fallback Guidance : Enhanced the frontend lead generation flow to suggest CLI commands as a fallback wh..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.35.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.35.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.35.0",
+    "pubDate": "2026-11-10T14:42:37.000Z",
+    "description": "🆕 Changelog Added Security Update Emails : Introduced automated email notifications to inform users about critical security updates for their applications. Per App Advisory Feed : Added a dedicated feed to display security advisories specific to individual applications, allowing for more granular monitoring and response. Cloudflare Workers 2026 11 17 Compatibility : Updated the Cloudflare integration to support the 2026 11 17 compatibility date. Changed Cloudflare Data Object Stub Retries : ..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.34.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.1",
+    "pubDate": "2026-11-10T04:10:04.000Z",
+    "description": "🆕 Changelog Fixed Allow users to dismiss, skip, and restore the CI/CD setup during onboarding, improving flexibility and reducing friction for users who do not require immediate pipeline configuration. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.102.0...capgo 22.34.1"
   },
   {
     "category": "changelog",
@@ -256,70 +320,6 @@
     "description": "🆕 Changelog Added Added direct Postgres access for backend table reads and remote procedure calls, removing the extra API translation layer. Added more reliable transactional behavior for database operations that previously depended on PostgREST/supabase js roundtrips. Changed Migrated backend data access from PostgREST/supabase js to direct Postgres connections to improve query performance, stability, and consistency. Reduced backend complexity by eliminating the PostgREST/supabase js inter..."
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.26.6",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.6",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.6",
-    "pubDate": "2026-10-28T21:10:28.000Z",
-    "description": "🆕 Changelog Fixed MCP OTA test workflow no longer adds the Capgo banner automatically , ensuring the generated output only contains the intended changes. MCP now prompts for who is making the OTA test change , improving accountability and traceability during updates. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.5...capgo 22.26.6"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.26.4",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.4",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.4",
-    "pubDate": "2026-10-28T19:12:24.000Z",
-    "description": "🆕 Changelog Fixed Resolved an issue where the agent could become stuck in an unrecoverable state after encountering errors, improving reliability during failures. Changed Improved upload performance by skipping delta files that are already stored before inserting new upload records, reducing redundant processing. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.3...capgo 22.26.4"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.26.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.3",
-    "pubDate": "2026-10-28T18:23:19.000Z",
-    "description": "🆕 Changelog Fixed Made error messages actionable by providing clear next steps instead of instructing users to check the browser console. Replaced Tailwind and DaisyUI classes that produced no CSS so UI components render as intended. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.98.4...capgo 22.26.3"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.26.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.2",
-    "pubDate": "2026-10-28T18:08:53.000Z",
-    "description": "🆕 Changelog Fixed Assistant : Allow OpenAI hosts through the console Content Security Policy so ChatGPT sign in works reliably. Internationalization : Translate hardcoded strings on the 404, scan, account deletion, and email change screens for full locale coverage. Internationalization : Load the active locale before components mount and cache translation catalogs by checksum to prevent flickering and reduce redundant fetches. UI : Add dark mode support to so error states match the rest of t..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.26.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.1",
-    "pubDate": "2026-10-28T16:46:32.000Z",
-    "description": "🆕 Changelog Fixed Reordered the onboarding setup checklist to prioritize tasks by importance, making it easier for new users to know which steps to complete first. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.26.0...capgo 22.26.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.26.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.26.0",
-    "pubDate": "2026-10-28T15:36:38.000Z",
-    "description": "🆕 Changelog Added Added a discount offer to encourage monthly plan subscribers to stay instead of canceling. Added the US billing entity option for customers in the Americas and Asia Pacific regions. Changed Improved database performance by bounding audit log access checks and filtering app metrics cache rebuilds to only relevant changes. Fixed Fixed the Cloudflare Turnstile widget so it appears only when an interactive challenge is required, reducing unnecessary interruptions. 🔗 Full Chang..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.25.3",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.3",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.3",
-    "pubDate": "2026-10-28T13:05:08.000Z",
-    "description": "🆕 Changelog Fixed Auth : Return a clear error instead of a generic 500 response when GoTrue rejects a password, making it easier to identify and fix password issues. Plugin : Read from the EU replica when a regional replica falls more than 10 minutes behind, reducing the risk of serving stale data. Alerts : Prevent Discord alerts from being posted by preprod workers, cutting down false positive noise and keeping production alerts actionable. 🔗 Full Changelog : https://github.com/Cap go/capg..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.25.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.25.2",
-    "pubDate": "2026-10-28T11:19:28.000Z",
-    "description": "🆕 Changelog Changed Improved performance of access control queries for apps and usage credit resources by switching to set based readable row level security sets. This reduces query latency and improves scalability when reading these records. No action is required. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.25.1...capgo 22.25.2"
-  },
-  {
     "category": "release",
     "title": "capacitor-accelerometer 8.0.55",
     "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.55",
@@ -441,11 +441,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-audio-recorder 8.3.5",
-    "link": "https://github.com/Cap-go/capacitor-audio-recorder/releases/tag/8.3.5",
-    "guid": "https://github.com/Cap-go/capacitor-audio-recorder/releases/tag/8.3.5",
-    "pubDate": "2026-10-18T15:25:42.000Z",
-    "description": "🆕 Changelog Fixed Fixed missing TypeScript type declarations for iOS audio interruption listeners, improving type safety and autocompletion when handling audio session interruptions. Fixed incomplete TypeScript typings for URIs, ensuring correct type inference when accessing recording error details. 🔗 Full Changelog : https://github.com/Cap go/capacitor audio recorder/compare/8.3.4...8.3.5"
+    "title": "capacitor-audio-recorder 8.3.6",
+    "link": "https://github.com/Cap-go/capacitor-audio-recorder/releases/tag/8.3.6",
+    "guid": "https://github.com/Cap-go/capacitor-audio-recorder/releases/tag/8.3.6",
+    "pubDate": "2026-11-10T20:16:59.000Z",
+    "description": "🆕 Changelog Fixed Android: Added R8 consumer keep rules for Capacitor 9 compatibility, preventing runtime crashes or missing classes when code shrinking is enabled. Apps using R8/ProGuard no longer need to manually keep affected classes. ( 36) 🔗 Full Changelog : https://github.com/Cap go/capacitor audio recorder/compare/8.3.5...8.3.6"
   },
   {
     "category": "release",
@@ -473,11 +473,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-background-geolocation 8.5.2",
-    "link": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.5.2",
-    "guid": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.5.2",
-    "pubDate": "2026-11-02T13:17:59.000Z",
-    "description": "🆕 Changelog Changed Updated Robolectric test dependency to v4.17 to maintain compatibility with the latest Android testing toolchain. 🔗 Full Changelog : https://github.com/Cap go/capacitor background geolocation/compare/8.5.1...8.5.2"
+    "title": "capacitor-background-geolocation 8.6.0",
+    "link": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.6.0",
+    "guid": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.6.0",
+    "pubDate": "2026-11-10T23:45:07.000Z",
+    "description": "🆕 Changelog Added iOS geofence delivery when the app is closed : Geofence transition events are now captured and queued while the iOS app is not running, then delivered as soon as connectivity allows. This ensures location triggered updates are not lost when the app has been swiped away or terminated. Improved reliability of iOS geofence events : Events collected in the background or while the app is closed are buffered until they can be successfully sent, reducing missed transitions in low ..."
   },
   {
     "category": "release",
@@ -521,11 +521,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-camera-preview 8.14.4",
-    "link": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.14.4",
-    "guid": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.14.4",
-    "pubDate": "2026-11-02T13:08:38.000Z",
-    "description": "🆕 Changelog Changed Updated to v21 for improved browser environment simulation and test performance Updated to v65 for enhanced JSDoc documentation linting accuracy and consistency 🔗 Full Changelog : https://github.com/Cap go/capacitor camera preview/compare/8.14.3...8.14.4"
+    "title": "capacitor-camera-preview 8.15.1",
+    "link": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.15.1",
+    "guid": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.15.1",
+    "pubDate": "2026-11-10T07:41:48.000Z",
+    "description": "🆕 Changelog Changed Raised the required Node.js version to 26. Users building or running this project from source must now use Node.js 26 or later. Older Node.js versions are no longer supported, so upgrade your environment before installing or running this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor camera preview/compare/8.15.0...8.15.1"
   },
   {
     "category": "release",
@@ -545,11 +545,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-contentsquare 8.1.16",
-    "link": "https://github.com/Cap-go/capacitor-contentsquare/releases/tag/8.1.16",
-    "guid": "https://github.com/Cap-go/capacitor-contentsquare/releases/tag/8.1.16",
-    "pubDate": "2026-10-15T02:38:49.000Z",
-    "description": "🆕 Changelog Changed Migrated the project's linting and type checking toolchain to ESLint 10 and TypeScript 6 for improved development consistency. Contributors and anyone building from source should ensure their environment supports these versions. Removed the consulting call to action from the README to streamline project documentation. 🔗 Full Changelog : https://github.com/Cap go/capacitor contentsquare/compare/8.1.15...8.1.16"
+    "title": "capacitor-contentsquare 8.1.17",
+    "link": "https://github.com/Cap-go/capacitor-contentsquare/releases/tag/8.1.17",
+    "guid": "https://github.com/Cap-go/capacitor-contentsquare/releases/tag/8.1.17",
+    "pubDate": "2026-11-10T20:13:09.000Z",
+    "description": "🆕 Changelog Fixed Shipped R8 consumer keep rules for Android Capacitor 9 integrations, ensuring the plugin works correctly in release builds that use R8 code shrinking and obfuscation. 🔗 Full Changelog : https://github.com/Cap go/capacitor contentsquare/compare/8.1.16...8.1.17"
   },
   {
     "category": "release",
@@ -561,11 +561,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-data-storage-sqlite 8.0.60",
-    "link": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.60",
-    "guid": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.60",
-    "pubDate": "2026-11-09T07:10:07.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js build dependency to v26, which may require contributors to use Node 26 when working on the project Refreshed lock file to keep dependencies up to date and ensure reproducible installs 🔗 Full Changelog : https://github.com/Cap go/capacitor data storage sqlite/compare/8.0.59...8.0.60"
+    "title": "capacitor-data-storage-sqlite 8.0.61",
+    "link": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.61",
+    "guid": "https://github.com/Cap-go/capacitor-data-storage-sqlite/releases/tag/8.0.61",
+    "pubDate": "2026-11-10T20:15:38.000Z",
+    "description": "🆕 Changelog Fixed Fixed Android compatibility with Capacitor 9 by shipping R8 consumer keep rules, preventing code shrinking from removing classes required at runtime. 🔗 Full Changelog : https://github.com/Cap go/capacitor data storage sqlite/compare/8.0.60...8.0.61"
   },
   {
     "category": "release",
@@ -617,11 +617,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-facebook-analytics 8.1.19",
-    "link": "https://github.com/Cap-go/capacitor-facebook-analytics/releases/tag/8.1.19",
-    "guid": "https://github.com/Cap-go/capacitor-facebook-analytics/releases/tag/8.1.19",
-    "pubDate": "2026-10-15T01:58:36.000Z",
-    "description": "🆕 Changelog Changed Updated project documentation with the latest information and guidance. Upgraded internal development tooling to ESLint 10 and TypeScript 6, improving code quality checks and long term maintainability without changing public APIs. Removed Removed the consulting call to action from the README to keep project documentation focused on usage and contribution information. 🔗 Full Changelog : https://github.com/Cap go/capacitor facebook analytics/compare/8.1.18...8.1.19"
+    "title": "capacitor-facebook-analytics 8.1.20",
+    "link": "https://github.com/Cap-go/capacitor-facebook-analytics/releases/tag/8.1.20",
+    "guid": "https://github.com/Cap-go/capacitor-facebook-analytics/releases/tag/8.1.20",
+    "pubDate": "2026-11-10T20:08:59.000Z",
+    "description": "🆕 Changelog Changed Updated the Meta Facebook SDK to 19.0.1 on iOS and Android, improving compatibility with the latest Facebook platform updates and incorporating recent SDK enhancements. Updated project documentation to reflect the latest guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor facebook analytics/compare/8.1.19...8.1.20"
   },
   {
     "category": "release",
@@ -721,11 +721,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-inappbrowser 8.27.4",
-    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.4",
-    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.4",
-    "pubDate": "2026-11-06T12:12:23.000Z",
-    "description": "🆕 Changelog Fixed Improved Android split screen layout by skipping the bottom safe area inset for the top pane, eliminating unnecessary bottom padding in that mode. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.27.3...8.27.4"
+    "title": "capacitor-inappbrowser 8.27.6",
+    "link": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.6",
+    "guid": "https://github.com/Cap-go/capacitor-inappbrowser/releases/tag/8.27.6",
+    "pubDate": "2026-11-10T20:14:11.000Z",
+    "description": "🆕 Changelog Fixed Included the required R8/ProGuard consumer keep rules for Capacitor 9 Android builds, preventing build failures or runtime errors when code shrinking is enabled. 🔗 Full Changelog : https://github.com/Cap go/capacitor inappbrowser/compare/8.27.5...8.27.6"
   },
   {
     "category": "release",
@@ -769,11 +769,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-is-root 8.2.5",
-    "link": "https://github.com/Cap-go/capacitor-is-root/releases/tag/8.2.5",
-    "guid": "https://github.com/Cap-go/capacitor-is-root/releases/tag/8.2.5",
-    "pubDate": "2026-10-18T13:33:13.000Z",
-    "description": "🆕 Changelog Fixed Android : Resolved an issue where root detection checks could not reliably query installed packages on Android 11+ (API 30+). The necessary package visibility queries are now declared, restoring accurate root status detection on newer Android versions. If you previously saw false negatives or inconsistent root checks on Android 11 and above, update to this version. 🔗 Full Changelog : https://github.com/Cap go/capacitor is root/compare/8.2.4...8.2.5"
+    "title": "capacitor-is-root 8.2.6",
+    "link": "https://github.com/Cap-go/capacitor-is-root/releases/tag/8.2.6",
+    "guid": "https://github.com/Cap-go/capacitor-is-root/releases/tag/8.2.6",
+    "pubDate": "2026-11-10T20:13:36.000Z",
+    "description": "🆕 Changelog Fixed Fixed missing R8 consumer keep rules for Android apps using Capacitor 9. Release builds with R8 enabled now keep the necessary library classes automatically, preventing runtime crashes and removing the need for manual ProGuard/R8 configuration. 🔗 Full Changelog : https://github.com/Cap go/capacitor is root/compare/8.2.5...8.2.6"
   },
   {
     "category": "release",
@@ -817,11 +817,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-live-activities 1.2.5",
-    "link": "https://github.com/Cap-go/capacitor-live-activities/releases/tag/1.2.5",
-    "guid": "https://github.com/Cap-go/capacitor-live-activities/releases/tag/1.2.5",
-    "pubDate": "2026-10-15T02:51:15.000Z",
-    "description": "🆕 Changelog Changed Migrated the development toolchain to ESLint 10 and TypeScript 6, improving static analysis and type checking for contributors. Updated project documentation. Removed Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor live activities/compare/1.2.4...1.2.5"
+    "title": "capacitor-live-activities 1.2.6",
+    "link": "https://github.com/Cap-go/capacitor-live-activities/releases/tag/1.2.6",
+    "guid": "https://github.com/Cap-go/capacitor-live-activities/releases/tag/1.2.6",
+    "pubDate": "2026-11-10T15:41:13.000Z",
+    "description": "🆕 Changelog Changed Updated project documentation to reflect the latest usage and configuration details. Removed committed Python bytecode files and added ignore patterns for and to keep the repository clean. Fixed on iOS now correctly integrates with ActivityKit, restoring Live Activity functionality ( 16). 🔗 Full Changelog : https://github.com/Cap go/capacitor live activities/compare/1.2.5...1.2.6"
   },
   {
     "category": "release",
@@ -881,19 +881,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-audio 8.4.40",
-    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.40",
-    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.4.40",
-    "pubDate": "2026-11-09T23:15:52.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js to v26, keeping the project's runtime and tooling aligned with the latest Node.js release. Updated the GitHub Actions action to v7, maintaining reliable CI workflow behavior with current action versions. Migration Notes Verify that your local development and deployment environments support Node.js v26 before upgrading to this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.4.39...8.4.40"
+    "title": "capacitor-native-audio 8.5.1",
+    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.1",
+    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.1",
+    "pubDate": "2026-11-10T23:43:32.000Z",
+    "description": "🆕 Changelog Changed Updated the web platform documentation to clarify that returns the last requested audio route. This removes ambiguity about the reported route state and helps you write audio routing logic that matches the API behavior. ( 354) 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.5.0...8.5.1"
   },
   {
     "category": "release",
-    "title": "capacitor-native-biometric 8.9.1",
-    "link": "https://github.com/Cap-go/capacitor-native-biometric/releases/tag/8.9.1",
-    "guid": "https://github.com/Cap-go/capacitor-native-biometric/releases/tag/8.9.1",
-    "pubDate": "2026-10-20T22:36:56.000Z",
-    "description": "🆕 Changelog Fixed Updated Android to use Java 21 for JDK 21 builds, resolving compatibility issues when building the Android project with Java 21. 🔗 Full Changelog : https://github.com/Cap go/capacitor native biometric/compare/8.9.0...8.9.1"
+    "title": "capacitor-native-biometric 8.9.2",
+    "link": "https://github.com/Cap-go/capacitor-native-biometric/releases/tag/8.9.2",
+    "guid": "https://github.com/Cap-go/capacitor-native-biometric/releases/tag/8.9.2",
+    "pubDate": "2026-11-10T20:13:16.000Z",
+    "description": "🆕 Changelog Fixed Android : Resolved an issue where R8 code shrinking could strip classes needed by Capacitor 9, causing runtime crashes or build failures in release builds. Android : Shipped consumer ProGuard/R8 keep rules with the library so required classes are preserved automatically, removing the need for manual keep rule configuration. 🔗 Full Changelog : https://github.com/Cap go/capacitor native biometric/compare/8.9.1...8.9.2"
   },
   {
     "category": "release",
@@ -929,11 +929,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-purchases 8.9.6",
-    "link": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.6",
-    "guid": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.6",
-    "pubDate": "2026-10-15T03:19:58.000Z",
-    "description": "🆕 Changelog Changed Upgraded development tooling to ESLint 10 and TypeScript 6, keeping the project aligned with current ecosystem versions. Contributors may need to update their local development environment. Updated README documentation to remove the consulting call to action. 🔗 Full Changelog : https://github.com/Cap go/capacitor native purchases/compare/8.9.5...8.9.6"
+    "title": "capacitor-native-purchases 8.9.8",
+    "link": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.8",
+    "guid": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.8",
+    "pubDate": "2026-11-10T20:03:05.000Z",
+    "description": "🆕 Changelog Fixed Android: Honored the parameter when purchasing subscription products via , so the selected subscription offer or pricing phase is now used instead of being ignored. 🔗 Full Changelog : https://github.com/Cap go/capacitor native purchases/compare/8.9.7...8.9.8"
   },
   {
     "category": "release",
@@ -1009,11 +1009,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-pdf-viewer 8.2.8",
-    "link": "https://github.com/Cap-go/capacitor-pdf-viewer/releases/tag/8.2.8",
-    "guid": "https://github.com/Cap-go/capacitor-pdf-viewer/releases/tag/8.2.8",
-    "pubDate": "2026-10-15T01:58:42.000Z",
-    "description": "🆕 Changelog Changed Updated project documentation. Removed the consulting call to action from the README. 🔗 Full Changelog : https://github.com/Cap go/capacitor pdf viewer/compare/8.2.7...8.2.8"
+    "title": "capacitor-pdf-viewer 8.3.0",
+    "link": "https://github.com/Cap-go/capacitor-pdf-viewer/releases/tag/8.3.0",
+    "guid": "https://github.com/Cap-go/capacitor-pdf-viewer/releases/tag/8.3.0",
+    "pubDate": "2026-11-10T23:44:10.000Z",
+    "description": "🆕 Changelog Added Added ( ) rendering mode for custom HTML PDF UIs, allowing PDF content to be composited behind the Cordova WebView while the app UI remains fully interactive. Introduced support for overlaying custom HTML controls and interfaces on top of rendered PDF content in embedded viewer scenarios. Changed Updated rendering pipeline to support optional backend composition when mode is enabled. Fixed Improved compatibility for PDF viewer integration when used alongside other WebView l..."
   },
   {
     "category": "release",
@@ -1065,11 +1065,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-plus 8.6.1",
-    "link": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.6.1",
-    "guid": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.6.1",
-    "pubDate": "2026-11-05T09:37:26.000Z",
-    "description": "Capacitor+ v8.6.1 Changed Synchronized the project with the latest upstream branch, integrating upstream bug fixes, improvements, and internal updates since . ( ) Applied upstream preferred conflict resolutions during the merge so that behavior in overlapping areas now matches upstream expectations. Fixed Resolved merge conflicts introduced by the upstream synchronization, reducing behavioral drift and inconsistencies between the fork and upstream. Migration notes No breaking changes are expe..."
+    "title": "capacitor-plus 8.6.3",
+    "link": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.6.3",
+    "guid": "https://github.com/Cap-go/capacitor-plus/releases/tag/8.6.3",
+    "pubDate": "2026-11-10T23:52:28.000Z",
+    "description": "Capacitor+ v8.6.3 Fixed Fixed generated Android and iOS plugin paths to reference the project local directory instead of a shared or bundled location, ensuring native builds use the exact plugin versions installed in your project. Removed the deprecated header from HTTP multipart file uploads, improving compatibility with servers that reject obsolete multipart headers. Security Added to the Android template's default , preventing sensitive signing credentials from being accidentally committed..."
   },
   {
     "category": "release",
@@ -1081,11 +1081,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-printer 8.1.8",
-    "link": "https://github.com/Cap-go/capacitor-printer/releases/tag/8.1.8",
-    "guid": "https://github.com/Cap-go/capacitor-printer/releases/tag/8.1.8",
-    "pubDate": "2026-10-15T03:09:39.000Z",
-    "description": "🆕 Changelog Changed Updated development tooling to ESLint 10 and TypeScript 6 . This modernizes the project's build and linting pipeline and improves long term maintainability. No end user facing behavior changes are expected. Removed the consulting call to action from the README, streamlining the project's documentation and keeping the focus on usage instructions and contribution guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor printer/compare/8.1.7...8.1.8"
+    "title": "capacitor-printer 8.1.9",
+    "link": "https://github.com/Cap-go/capacitor-printer/releases/tag/8.1.9",
+    "guid": "https://github.com/Cap-go/capacitor-printer/releases/tag/8.1.9",
+    "pubDate": "2026-11-10T20:11:27.000Z",
+    "description": "🆕 Changelog Fixed Fixed Android builds with Capacitor 9 by shipping R8 consumer keep rules, preventing code shrinking from removing classes required at runtime. 🔗 Full Changelog : https://github.com/Cap go/capacitor printer/compare/8.1.8...8.1.9"
   },
   {
     "category": "release",
@@ -1257,11 +1257,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-supabase 8.2.7",
-    "link": "https://github.com/Cap-go/capacitor-supabase/releases/tag/8.2.7",
-    "guid": "https://github.com/Cap-go/capacitor-supabase/releases/tag/8.2.7",
-    "pubDate": "2026-10-15T03:13:53.000Z",
-    "description": "🆕 Changelog Changed Migrated development tooling to ESLint 10 and TypeScript 6, adopting the latest supported linting and type checking stacks. Contributors and downstream projects that build from source may need to update their local ESLint and TypeScript installations. Updated the README and documentation, including removal of the consulting call to action, for a cleaner project overview. 🔗 Full Changelog : https://github.com/Cap go/capacitor supabase/compare/8.2.6...8.2.7"
+    "title": "capacitor-supabase 8.2.8",
+    "link": "https://github.com/Cap-go/capacitor-supabase/releases/tag/8.2.8",
+    "guid": "https://github.com/Cap-go/capacitor-supabase/releases/tag/8.2.8",
+    "pubDate": "2026-11-10T20:17:49.000Z",
+    "description": "🆕 Changelog Fixed Added R8 consumer ProGuard keep rules for Android to support Capacitor 9. Required Capacitor classes are now preserved automatically when code shrinking is enabled, preventing runtime crashes and removing the need for manually configured keep rules. 🔗 Full Changelog : https://github.com/Cap go/capacitor supabase/compare/8.2.7...8.2.8"
   },
   {
     "category": "release",
@@ -1281,11 +1281,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-twilio-voice 8.2.28",
-    "link": "https://github.com/Cap-go/capacitor-twilio-voice/releases/tag/8.2.28",
-    "guid": "https://github.com/Cap-go/capacitor-twilio-voice/releases/tag/8.2.28",
-    "pubDate": "2026-11-02T06:51:23.000Z",
-    "description": "🆕 Changelog Fixed Updated Logback Classic logging dependency to v1.6.6 to resolve upstream issues and improve logging reliability. Updated AndroidX WebKit dependency to v1.18.0 to address known dependency issues and maintain compatibility with the latest WebView features. Changed Updated Bun runtime dependency to v1.4.4 to keep the build and development tooling current. 🔗 Full Changelog : https://github.com/Cap go/capacitor twilio voice/compare/8.2.27...8.2.28"
+    "title": "capacitor-twilio-voice 8.2.30",
+    "link": "https://github.com/Cap-go/capacitor-twilio-voice/releases/tag/8.2.30",
+    "guid": "https://github.com/Cap-go/capacitor-twilio-voice/releases/tag/8.2.30",
+    "pubDate": "2026-11-11T01:42:09.000Z",
+    "description": "🆕 Changelog Changed Updated Node.js dependency to v26 ( 104). This aligns the project with the latest Node.js runtime release, bringing newer language features, performance improvements, and upstream security patches. Breaking: Node.js 26 or later is now required to build and run this project. 🔗 Full Changelog : https://github.com/Cap go/capacitor twilio voice/compare/8.2.29...8.2.30"
   },
   {
     "category": "release",
@@ -1393,19 +1393,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-wifi 8.5.9",
-    "link": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.9",
-    "guid": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.9",
-    "pubDate": "2026-10-15T03:00:58.000Z",
-    "description": "🆕 Changelog Added Changed Upgraded development tooling to ESLint 10 and TypeScript 6, bringing linting and type checking in line with the latest ecosystem standards. Contributors may need to update their local toolchain and address any newly reported issues. Removed Removed the consulting call to action from the README, streamlining the documentation and keeping the focus on project guidance. 🔗 Full Changelog : https://github.com/Cap go/capacitor wifi/compare/8.5.8...8.5.9"
+    "title": "capacitor-wifi 8.5.10",
+    "link": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.10",
+    "guid": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.10",
+    "pubDate": "2026-11-10T20:13:20.000Z",
+    "description": "🆕 Changelog Fixed Fixed Android compatibility with Capacitor 9 by shipping R8 consumer keep rules, preventing code shrinking from removing required classes. 🔗 Full Changelog : https://github.com/Cap go/capacitor wifi/compare/8.5.9...8.5.10"
   },
   {
     "category": "release",
-    "title": "capacitor-youtube-player 8.3.15",
-    "link": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.15",
-    "guid": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.15",
-    "pubDate": "2026-11-02T12:56:46.000Z",
-    "description": "🆕 Changelog Changed Updated Node.js dependency to version 26 for improved compatibility and support Performed lock file maintenance to keep dependencies consistent and secure 🔗 Full Changelog : https://github.com/Cap go/capacitor youtube player/compare/8.3.14...8.3.15"
+    "title": "capacitor-youtube-player 8.3.16",
+    "link": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.16",
+    "guid": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.16",
+    "pubDate": "2026-11-10T20:13:27.000Z",
+    "description": "🆕 Changelog Fixed Resolved Android compatibility issues with Capacitor 9 by shipping R8 consumer keep rules. This prevents code shrinking from removing classes required by the plugin, avoiding build or runtime crashes when R8 is enabled. Changed Performed routine maintenance on dependency lock files. 🔗 Full Changelog : https://github.com/Cap go/capacitor youtube player/compare/8.3.15...8.3.16"
   },
   {
     "category": "release",
@@ -1417,10 +1417,10 @@
   },
   {
     "category": "release",
-    "title": "capacitor-zip 8.2.2",
-    "link": "https://github.com/Cap-go/capacitor-zip/releases/tag/8.2.2",
-    "guid": "https://github.com/Cap-go/capacitor-zip/releases/tag/8.2.2",
-    "pubDate": "2026-10-21T14:50:02.000Z",
-    "description": "🆕 Changelog Fixed Fixed zip progress tracking to be scoped per concurrent operation, ensuring accurate progress reporting when multiple zip operations run simultaneously. 🔗 Full Changelog : https://github.com/Cap go/capacitor zip/compare/8.2.1...8.2.2"
+    "title": "capacitor-zip 8.2.3",
+    "link": "https://github.com/Cap-go/capacitor-zip/releases/tag/8.2.3",
+    "guid": "https://github.com/Cap-go/capacitor-zip/releases/tag/8.2.3",
+    "pubDate": "2026-11-10T20:14:27.000Z",
+    "description": "🆕 Changelog Fixed Fixed Android build failures or runtime crashes caused by missing R8/ProGuard consumer keep rules when using Capacitor 9. Apps with code shrinking enabled should now build and run without manually adding keep rules. 🔗 Full Changelog : https://github.com/Cap go/capacitor zip/compare/8.2.2...8.2.3"
   }
 ]
