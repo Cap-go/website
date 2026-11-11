@@ -186,7 +186,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-11-11-entity-decoding-v1'
+const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
 // Translation memory: every translated segment is stored in R2 by a hash of its text
 // and context, so a page edit only sends new or edited segments to Workers AI, and the
 // header, footer and other repeated copy are translated once for the whole site.
@@ -3169,6 +3169,50 @@ function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): stri
   return rewritten
 }
 
+const STRUCTURED_DATA_URL_KEYS = new Set(['url', '@id', 'item'])
+
+// JSON-LD is copied from the English page untouched. Point the page's own URL and its breadcrumb
+// trail at the localized paths so structured data agrees with the canonical URL of the translated page.
+// Site-wide identities (organization, website) keep their English URL on purpose.
+function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, basePath: string): string {
+  const pagePath = basePath.endsWith('/') ? basePath : `${basePath}/`
+  const isPageUrl = (value: string): boolean => {
+    try {
+      const url = new URL(value)
+      const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`
+      return url.host === requestUrl.host && pathname === pagePath
+    } catch {
+      return false
+    }
+  }
+  const walk = (node: unknown, inBreadcrumb: boolean): unknown => {
+    if (Array.isArray(node)) return node.map((entry) => walk(entry, inBreadcrumb))
+    if (!node || typeof node !== 'object') return node
+    const record = node as Record<string, unknown>
+    const breadcrumb = inBreadcrumb || record['@type'] === 'BreadcrumbList'
+    const result: Record<string, unknown> = {}
+    let describesPage = false
+    for (const [key, value] of Object.entries(record)) {
+      if (typeof value === 'string' && STRUCTURED_DATA_URL_KEYS.has(key) && (breadcrumb || isPageUrl(value))) {
+        result[key] = localizeHref(value, locale, requestUrl)
+        if (key === 'url' && !breadcrumb) describesPage = true
+      } else {
+        result[key] = walk(value, breadcrumb)
+      }
+    }
+    if (describesPage && typeof result.inLanguage === 'string') result.inLanguage = locale
+    return result
+  }
+
+  return html.replace(/(<script\b[^>]*type=["']?application\/ld\+json["']?[^>]*>)([\s\S]*?)(<\/script>)/gi, (match, open: string, body: string, close: string) => {
+    try {
+      return `${open}${JSON.stringify(walk(JSON.parse(body), false)).replace(/</g, '\\u003c')}${close}`
+    } catch {
+      return match
+    }
+  })
+}
+
 function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, options?: { preserveDocumentLanguage?: boolean }): string {
   const basePath = stripLocalePrefix(requestUrl.pathname)
   const localizedUrl = localizedAbsoluteUrl(requestUrl, locale, basePath)
@@ -3181,6 +3225,7 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, 
   rewritten = setMetaContent(rewritten, 'property', 'twitter:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'name', 'twitter:url', localizedUrl)
   rewritten = localizeUrlAttributes(rewritten, locale, basePath, requestUrl)
+  rewritten = localizeStructuredData(rewritten, requestUrl, locale, basePath)
   rewritten = expandShortMetaDescriptions(rewritten, locale)
   rewritten = updateFooterLanguageButton(rewritten, locale)
   if (!rewritten.includes('capgo-edge-language-selector-hash')) {

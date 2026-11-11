@@ -187,10 +187,22 @@ content['ldJSON'] = createLdJsonGraph(Astro.locals.runtimeConfig.public, article
     <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
       <div class="relative z-0 mx-auto pb-12">
         <div class="relative max-w-(--breakpoint-sm)">
+          <nav aria-label="Breadcrumb" class="mt-4">
+            <ol class="flex flex-row flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-400">
+              {breadcrumbs.slice(0, -1).map((crumb, index) => (
+                <li class="flex items-center gap-x-2">
+                  {index > 0 && <span aria-hidden="true">/</span>}
+                  <a href={new URL(crumb.url).pathname} class="rounded-sm hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                    {crumb.name}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
           <div class="mt-4 flex flex-row flex-wrap items-center gap-3">
             {entry.data.tag.split(',').map((i) => (
               <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(i.trim())}`)}
+                href={getRelativeLocaleUrl(Astro.locals.locale, `${listingPath}/category/${slugify(i.trim())}`)}
                 class="rounded-lg border border-gray-400 px-4 py-1.5 text-sm text-white hover:bg-white hover:text-black"
               >
                 {i.trim()}

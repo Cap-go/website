@@ -141,11 +141,3 @@
   Content-Security-Policy: default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()
   Link: </docs/public-api/>; rel="service-doc"; type="text/html"
-
-# Machine-readable copies of the site for AI agents. They stay fetchable, but must not rank in web search
-# instead of the pages they summarize.
-/llms.txt
-  X-Robots-Tag: noindex
-
-/llms-full.txt
-  X-Robots-Tag: noindex

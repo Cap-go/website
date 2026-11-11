@@ -174,7 +174,7 @@ assert(
 )
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('entity-decoding-v1'), 'Cache version was not bumped for the entity decoding render fix')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('deepseek-style-guides-v1'), 'Cache version was not bumped for the DeepSeek model and style guides')
 
 const keyedSchema = __translationWorkerTest.translationBatchJsonSchema(2) as { properties: { translations: { required: string[] } } }
 assert(keyedSchema.properties.translations.required.join(',') === 't0,t1', 'Batch schema did not require one translation per item id')
@@ -1365,5 +1365,26 @@ try {
   const truncated = __translationWorkerTest.truncateSeoDescription(longDescription)
   assert(truncated.length <= 159, 'Truncated description is longer than the limit')
   assert(longDescription.startsWith(truncated.replace(/\.\.\.$/, '')), 'Truncated description is not a prefix of the source')
-  assert(/[\s]$/.test(longDescription.charAt(truncated.replace(/\.\.\.$/, '').length)) || truncated.endsWith('.'), 'Description was cut in the middle of a word')
+  const truncatedBody = truncated.replace(/\.\.\.$/, '')
+  assert(truncated.endsWith('...') && truncatedBody !== truncated, 'A description without a full sentence in range must end with an ellipsis')
+  assert(longDescription.charAt(truncatedBody.length) === ' ' || /[,;:]$/.test(longDescription.slice(0, truncatedBody.length + 1)), 'Description was cut in the middle of a word')
+
+  const sentenceDescription = `${'Find the UDID of an iPhone or iPad from Safari in seconds, with no iTunes, Finder, Xcode or Mac, and copy it for your profile.'} ${'Then register the device in your Apple developer account today.'}`
+  const sentenceTruncated = __translationWorkerTest.truncateSeoDescription(sentenceDescription)
+  assert(sentenceTruncated.endsWith('profile.') && !sentenceTruncated.endsWith('...'), 'Description was not cut at the last full sentence')
+
+  const structuredHtml = `<html><head><link rel="canonical" href="https://capgo.app/blog/post/" /><script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'NewsArticle', '@id': 'https://capgo.app/blog/post/#newsarticle', url: 'https://capgo.app/blog/post/', inLanguage: 'en', publisher: { '@type': 'Organization', '@id': 'https://capgo.app/#organization', url: 'https://capgo.app/' }, mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/post/' } },
+      { '@type': 'BreadcrumbList', '@id': 'https://capgo.app/blog/post/#breadcrumb', itemListElement: [{ '@type': 'ListItem', position: 1, item: { '@type': 'WebPage', '@id': 'https://capgo.app/', url: 'https://capgo.app/', name: 'Capgo' } }, { '@type': 'ListItem', position: 2, item: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/', url: 'https://capgo.app/blog/', name: 'Blog' } }] },
+    ],
+  })}</script></head><body></body></html>`
+  const structuredRendered = __translationWorkerTest.rewriteMetadataAndLinks(structuredHtml, new URL('https://capgo.app/fr/blog/post/'), 'fr')
+  const structuredData = JSON.parse(structuredRendered.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}')
+  const [structuredArticle, structuredBreadcrumb] = structuredData['@graph']
+  assert(structuredArticle.url === 'https://capgo.app/fr/blog/post/' && structuredArticle.inLanguage === 'fr', 'Article JSON-LD kept the English URL or language')
+  assert(structuredArticle['@id'] === 'https://capgo.app/fr/blog/post/#newsarticle' && structuredArticle.mainEntityOfPage['@id'] === 'https://capgo.app/fr/blog/post/', 'Article JSON-LD ids were not localized')
+  assert(structuredArticle.publisher.url === 'https://capgo.app/' && structuredArticle.publisher['@id'] === 'https://capgo.app/#organization', 'Organization identity must keep its English URL')
+  assert(structuredBreadcrumb.itemListElement[0].item.url === 'https://capgo.app/fr/' && structuredBreadcrumb.itemListElement[1].item.url === 'https://capgo.app/fr/blog/', 'Breadcrumb JSON-LD URLs were not localized')
 }
