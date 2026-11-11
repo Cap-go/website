@@ -14,6 +14,10 @@ hero:
       link: /docs/plugins/zebra-datawedge/getting-started/
       icon: right-arrow
       variant: primary
+    - text: Complete configuration
+      link: /docs/plugins/zebra-datawedge/complete-configuration/
+      icon: right-arrow
+      variant: minimal
     - text: GitHub
       link: https://github.com/Cap-go/capacitor-zebra-datawedge/
       icon: external
@@ -25,6 +29,12 @@ hero:
 Manage Zebra DataWedge profiles, notifications, queries, and scan triggers on Zebra Android devices
 
 Start with `cloneProfile()` and the other core methods listed below.
+
+## Complete configuration results
+
+Opt in to `setConfig({ completeResult: true })` when a multi-plugin update must succeed for every requested plugin, not only the last one. Check native support first with `getConfigurationCapabilities()`. Existing `setConfig` calls keep the LAST_RESULT default.
+
+See [Complete configuration results](/docs/plugins/zebra-datawedge/complete-configuration/). These APIs ship in [capacitor-zebra-datawedge PR #28](https://github.com/Cap-go/capacitor-zebra-datawedge/pull/28).
 
 ## Platform support
 
@@ -40,6 +50,7 @@ Start with `cloneProfile()` and the other core methods listed below.
 - `createProfile`
 - `deleteProfile`
 - `importConfig`
+- `getConfigurationCapabilities`
 
 ## Public API
 
@@ -51,7 +62,8 @@ Start with `cloneProfile()` and the other core methods listed below.
 | `importConfig` | See the source definitions for current behavior. |
 | `renameProfile` | See the source definitions for current behavior. |
 | `restoreConfig` | See the source definitions for current behavior. |
-| `setConfig` | See the source definitions for current behavior. |
+| `setConfig` | Apply profile or plugin configuration. With `completeResult: true`, require success for every requested plugin. |
+| `getConfigurationCapabilities` | Read whether the native binary supports complete configuration results. |
 | `setDisabledAppList` | See the source definitions for current behavior. |
 | `setIgnoreDisabledProfiles` | See the source definitions for current behavior. |
 | `registerForNotification` | See the source definitions for current behavior. |
