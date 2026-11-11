@@ -94,6 +94,7 @@ await CapacitorAudioRecorder.startRecording({
 **Android**
 
 - When `MediaRecorder.stop()` throws, `stopRecording` **rejects** but the file stays on disk. Read `error.data.uri` and `error.data.duration` (milliseconds) from the Capacitor rejection to keep the partial clip.
+- File names are `recording-yyyyMMdd-HHmmss-<uuid>.m4a` or `.aac`, matching `format`. The UUID keeps two recordings started in the same second from overwriting each other. Earlier versions used `recording-yyyyMMdd-HHmmss.m4a` (no UUID, always `.m4a`).
 
 ```typescript
 import type { StopRecordingResult } from '@capgo/capacitor-audio-recorder';
@@ -163,6 +164,7 @@ await CapacitorAudioRecorder.cancelRecording(); // no file persisted
 - **Web vs native return shape**: Android and iOS return `uri` from `stopRecording`. Web returns `blob` (and may omit `uri`).
 - **Crash safety vs default format**: only `format: 'aac'` on Android and iOS keeps audio playable after a hard stop. Default `.m4a` needs a clean `stopRecording` to stay readable.
 - **Failed stop on Android**: handle `stopRecording` rejections and read `error.data` for `uri` and `duration` instead of assuming the file was deleted.
+- **Android file names**: do not parse the old `recording-yyyyMMdd-HHmmss.m4a` pattern. Current files include a UUID and may end in `.aac` when you opt into `format: 'aac'`.
 - **iOS merge failures**: when `mergeFailed` is true, use `segments` or the fallback `uri` from the resolved result.
 - **Quiet playback on iOS after recording**: set `resetToPlaybackOnStop: true` in `startRecording` if users play back the clip inside the same session.
 - **Background capture**: the plugin does not enable background audio by itself. On iOS, add the Audio background mode when you need recording while locked.
