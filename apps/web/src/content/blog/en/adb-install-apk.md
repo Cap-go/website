@@ -46,23 +46,23 @@ faq:
       adb install works the same as over USB.
   - question: How do I install split APKs with adb?
     answer: >-
-      Use adb install-multiple and pass every split file in one command, for
-      example adb install-multiple base.apk config.arm64_v8a.apk. For a debug
-      folder from Gradle, point at all APKs under the output directory. Add -r
-      when updating an existing install.
+      For a bundle extract, use adb install-multiple with the base APK and every
+      configuration split, for example adb install-multiple base.apk
+      config.arm64_v8a.apk. For Gradle per-ABI standalone APKs, install only the
+      one file that matches the device CPU with adb install. Add -r when
+      updating an existing install.
   - question: Why does adb install say failure INSTALL_FAILED_TEST_ONLY?
     answer: >-
       The APK is marked testOnly and the device blocks a normal install. Use adb
       install -t to allow test-only packages. Use that only for builds you trust,
       not for random APKs from unknown sources.
 ---
-**Quick answer:** Connect a phone with USB debugging on, confirm it with `adb devices`, then run:
+**Quick answer:** Connect a phone with USB debugging on, confirm it with `adb devices`, then run `adb install path/to/app.apk`. For an update over an existing install, use `adb install -r path/to/app.apk`.
 
 ```bash
 adb install path/to/app.apk
+adb install -r path/to/app.apk
 ```
-
-For an update over an existing install, use `adb install -r path/to/app.apk`.
 
 Minimum steps:
 
@@ -147,7 +147,7 @@ For Capacitor environment setup beyond ADB, see [Android setup for Capacitor app
 | Flag | Meaning | When to use |
 | --- | --- | --- |
 | `-r` | Replace existing app, keep data when possible | Debug rebuilds, same package name |
-| `-d` | Allow version downgrade | Testing an older build over a newer one |
+| `-d` | Allow downgrade on debuggable apps only | Rolling back a debug build over a newer debug build |
 | `-g` | Grant all runtime permissions at install | Faster QA when permissions block launch |
 | `-t` | Allow test-only APKs | Internal testOnly builds from CI |
 
@@ -162,7 +162,7 @@ adb install -r -t internal-test.apk
 
 **`-r`** is the default habit for iterative development. Without it, Android often returns `INSTALL_FAILED_ALREADY_EXISTS` when the package is already present.
 
-**`-d`** is for deliberate downgrade testing. Without it, a lower `versionCode` triggers `INSTALL_FAILED_VERSION_DOWNGRADE`.
+**`-d`** allows downgrades only when the installed package is debuggable. It does not downgrade a non-debuggable release from Play. Without `-d`, a lower `versionCode` triggers `INSTALL_FAILED_VERSION_DOWNGRADE`.
 
 **`-g`** skips the permission dialog on install. It does not remove the need to test permission flows on a clean install.
 
@@ -194,8 +194,10 @@ Replace `SERIAL` with the value from the first column of `adb devices`.
 
 **Android 11 and later (Wireless debugging):**
 
-1. On the phone: **Settings → Developer options → Wireless debugging**. Note IP, port, and pairing code.
-2. On the computer:
+Put the phone and computer on the same Wi-Fi network.
+
+1. On the phone: **Settings → Developer options → Wireless debugging → Pair device with pairing code**. Note the pairing IP, port, and six-digit code.
+2. On the computer, pair:
 
 ```bash
 adb pair IP:PAIRING_PORT
@@ -203,14 +205,18 @@ adb pair IP:PAIRING_PORT
 
 Enter the pairing code when prompted.
 
-3. Connect to the debugging port shown in Wireless debugging:
+1. Connect to the debug port shown on the Wireless debugging screen:
 
 ```bash
 adb connect IP:DEBUG_PORT
 adb devices
 ```
 
-4. Run `adb install` as usual.
+1. Unplug USB if both USB and Wi-Fi devices appear in `adb devices`, or target Wi-Fi explicitly:
+
+```bash
+adb -s IP:DEBUG_PORT install -r app-debug.apk
+```
 
 **Older Android (USB first):**
 
@@ -286,7 +292,7 @@ adb uninstall -k com.example.app
 Typical Capacitor loop:
 
 ```bash
-bunx cap sync android
+npx cap sync android
 ```
 
 Build the debug APK, then:
@@ -295,7 +301,7 @@ Build the debug APK, then:
 adb install -r android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-For release candidate testing before Play upload, sign with the same key you will use in the store. Mismatched keys between sideload and Play installs are a common source of `INSTALL_FAILED_UPDATE_INCOMPATIBLE`.
+Sign release APKs with your **upload key** before Play upload. If the app uses Play App Signing, users get builds signed by Google’s app signing key, not your upload key. An upload-signed APK cannot replace a Play-installed app over ADB. Test with an APK from an internal testing track, or uninstall the Play build first when comparing upload-signed candidates. Mismatched certificates are a common source of `INSTALL_FAILED_UPDATE_INCOMPATIBLE`.
 
 <a id="troubleshooting-install-errors"></a>
 
@@ -307,7 +313,7 @@ For release candidate testing before Play upload, sign with the same key you wil
 | `no devices/emulators found` | Cable, driver, or debugging off | New cable, enable USB debugging, Windows Google USB driver if needed |
 | `INSTALL_FAILED_ALREADY_EXISTS` | Same package without `-r` | `adb install -r app.apk` or `adb uninstall` first |
 | `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | Different signing key | Uninstall old app, or install build signed with same key |
-| `INSTALL_FAILED_VERSION_DOWNGRADE` | Lower versionCode | `adb install -r -d app.apk` or bump version |
+| `INSTALL_FAILED_VERSION_DOWNGRADE` | Lower versionCode on non-debuggable app | Uninstall, bump version, or use `-d` only on debuggable packages |
 | `INSTALL_FAILED_INSUFFICIENT_STORAGE` | Low disk space | Free space on device, remove unused apps |
 | `INSTALL_FAILED_TEST_ONLY` | testOnly APK | `adb install -t app.apk` for trusted test builds only |
 | `INSTALL_FAILED_INVALID_APK` | Corrupt or wrong split set | Rebuild APK, pass all splits to `install-multiple` |
@@ -343,28 +349,28 @@ adb devices
 
 ### INSTALL_FAILED_UPDATE_INCOMPATIBLE
 
-The installed app was signed with a different certificate than the APK you are pushing. Common when mixing debug and release, or after rotating upload keys without uninstalling.
+The installed app was signed with a different certificate than the APK you are pushing. Common when mixing debug and release, when Play App Signing holds a different key than your upload APK, or after key rotation.
 
-Fix:
+First confirm you are installing a build signed with the same certificate as the app on the device. Use a Play testing-track APK when you need to match a production install.
+
+If you must replace the install, uninstall deletes app data. Back up anything you need, then:
 
 ```bash
 adb uninstall com.example.app
 adb install app.apk
 ```
 
-Or always install builds signed with the same key as the app already on the device.
-
 ### INSTALL_FAILED_VERSION_DOWNGRADE
 
 The APK `versionCode` is lower than the installed version.
 
-Fix for intentional rollback testing:
+For debuggable packages only, intentional rollback testing:
 
 ```bash
 adb install -r -d older.apk
 ```
 
-For production testing, prefer uninstall or bump `versionCode` instead of downgrading.
+On release builds from Play, uninstall first or raise `versionCode` instead of using `-d`.
 
 ### INSTALL_FAILED_INSUFFICIENT_STORAGE
 
