@@ -225,13 +225,15 @@ Unplug USB after `adb devices` shows the TCP endpoint. Firewall and network isol
 
 ## Split APKs with install-multiple
 
-Play Store bundles and some Gradle outputs ship as multiple APKs (base plus configuration splits). Install every piece in one command:
+Play Store App Bundles unpack to a **base APK plus configuration splits** (density, ABI, language). Install those together:
 
 ```bash
 adb install-multiple -r base.apk split_config.xxhdpi.apk split_config.arm64_v8a.apk
 ```
 
-For a full debug output folder, pass all `.apk` files. Order usually does not matter as long as the base module is included. A missing split causes `INSTALL_FAILED_INVALID_APK` or incomplete installs.
+Pass every split from the same bundle extract. A missing split causes `INSTALL_FAILED_INVALID_APK` or incomplete installs.
+
+That is different from **ABI split APKs** when Gradle builds separate standalone APKs per architecture (`app-armeabi-v7a-debug.apk`, `app-arm64-v8a-debug.apk`, and so on). Each of those files is a full app. Pick the one that matches the device CPU and run `adb install -r` on that single file. Do not pass every APK in the output folder to `install-multiple`.
 
 <a id="launch-the-app-after-install"></a>
 
@@ -267,13 +269,15 @@ Remove by package name (not APK path):
 adb uninstall com.example.app
 ```
 
-Keep app data for a later clean install test:
+This removes the app and its data. Use it for first-launch tests and before fixing a signing mismatch.
+
+To remove the app but leave user data on the device:
 
 ```bash
 adb uninstall -k com.example.app
 ```
 
-Use uninstall when you need first-launch behavior or to clear a signing mismatch. Use `adb install -r` when you only need a faster update loop.
+`-k` can make the next install reuse old preferences or databases, so skip it when you need a true clean install. Use `adb install -r` when you only need a faster update loop over an existing install.
 
 <a id="capacitor-example"></a>
 
