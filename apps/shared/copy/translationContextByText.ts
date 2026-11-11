@@ -3887,7 +3887,6 @@ export const translationContextByText: Record<string, string> = {
   'per added GiB': 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/PriceDetails.astro. Message key `per_added_gb` (Per Added Gb).',
   'per added user': 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/PriceDetails.astro. Message key `per_added_user` (Per Added User).',
   'per GiB': 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_gb` (Per Gb).',
-  'per MAU': 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_mau` (Per Mau).',
   'per month': 'Page/area: Homepage problem/solution section. Role: Short UI label or navigation item. Seen in: page premium-support.astro. Message key `ps_per_month` (Ps Per Month).',
   'per unit': 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_unit` (Per Unit).',
   'Per user': 'Page/area: Capgo solutions marketing page. Role: Short UI label or navigation item. Seen in: page solutions/production-updates.astro. Message key `solutions_cost_adoption_value` (Solutions Cost Adoption Value).',
@@ -6411,5 +6410,7 @@ export const translationContextByText: Record<string, string> = {
   'Zero-Trust Security': 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `zero_trust_security` (Zero Trust Security).',
   'Zero.': 'Page/area: Capgo Builder / native cloud build product page. Role: Website copy sentence. Seen in: page native-build.astro. Message key `native_build_v2_comp_maint_capgo_hook` (Native Build V2 Comp Maint Capgo Hook). | Page/area: Capgo Builder / native cloud build product page. Role: Website copy sentence. Seen in: page native-build.astro. Message key `native_build_v2_comp_source_capgo_hook` (Native Build V2 Comp Source Capgo Hook).',
   'Zero. They maintain the platform.': 'Page/area: Capgo Builder / native cloud build product page. Role: Website copy sentence. Seen in: page native-build.astro. Message key `native_build_v2_comp_maint_capa` (Native Build V2 Comp Maint Capa).',
+  '1k users means 1,000 monthly active users. Charges are rounded up to your billing unit, which may be one user or a group of users.': 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: component pricing/CreditPricing.astro. Message key `credits_mau_pricing_info` (Credits Mau Pricing Info).',
+  'per 1k users': 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component pricing/CreditPricing.astro. Message key `per_1k_users` (Per 1k Users).',
 }
 
