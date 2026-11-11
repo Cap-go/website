@@ -6495,7 +6495,7 @@ const messages = {
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
   why_capgo_plugin_engineering_body:
-    'Capgo maintains its Capacitor plugin library with AI-assisted engineering behind the scenes. Fixes move quickly, with automated review on every pull request. 50+ pull requests merged daily by a human. Using Capgo in your app stays AI-optional.',
+    'We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews and merges 50+ pull requests daily.',
   why_capgo_plugin_engineering_link: 'Read how we ship plugin fixes',
   why_capgo_plugin_engineering_title: 'Plugins kept current at high velocity',
   why_capgo_security_title: 'Independently audited security',
