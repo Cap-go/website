@@ -307,7 +307,7 @@ You exported a Base44 AI-generated React app, wrapped it with Capacitor, and hav
 
 ### Next Steps
 
-- **[Capgo Live Updates](/live-updates/)**: Ship UI and copy fixes without waiting on store review
+- **[Capgo Live Updates](/live-update/)**: Ship UI and copy fixes without waiting on store review
 - **[Capgo Builder](/native-build/)**: Automate release builds in CI
 - **Push Notifications**: Add `@capacitor/push-notifications` and rebuild with Capgo Builder
 - **Related guides**: [Lovable to mobile](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/) · [Bolt.new to mobile](/blog/transform-bolt-new-app-to-mobile-with-capacitor/)

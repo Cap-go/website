@@ -1344,3 +1344,62 @@ try {
   const reviewFailsResult = await __translationWorkerTest.translateBatchWithMemory(reviewFails.env, 'fr', [label])
   assert(reviewFailsResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewFails.store.size === 0, 'An unreviewed draft was remembered')
 }
+
+{
+  // Raw page text keeps its entities, and a model may return them as is or decoded: neither may be published double-escaped.
+  const entityHtml = `<!doctype html><html lang="en"><head><meta name="description" content="Open Settings &gt; Privacy &amp; Security to enable Developer Mode on any iPhone or iPad running iOS 16 or later today." /></head><body><p>Fintech &amp; Banking teams</p><p>Read the &lt;head&gt; tag</p></body></html>`
+  const entityParsed = __translationWorkerTest.collectSegments(entityHtml)
+  for (const translations of [entityParsed.segments.map((segment) => segment.text), entityParsed.segments.map((segment) => __translationWorkerTest.decodeHtmlEntities(segment.text))]) {
+    const entityRendered = __translationWorkerTest.renderTranslatedHtml(entityParsed.parts, entityParsed.segments, translations)
+    assert(!/&amp;(amp|gt|lt|quot|#39);/.test(entityRendered), 'Renderer double-escaped an HTML entity')
+    assert(entityRendered.includes('Fintech &amp; Banking teams'), 'Renderer lost an escaped ampersand in body text')
+    assert(entityRendered.includes('Read the &lt;head&gt; tag'), 'Renderer unescaped markup characters in body text')
+    assert(entityRendered.includes('Settings &gt; Privacy &amp; Security'), 'Renderer lost escaped characters in a meta description')
+  }
+
+  const shortMeta = `<meta name="description" content="Privacy &amp; Security guide." />`
+  const expandedMeta = __translationWorkerTest.expandShortMetaDescriptions(shortMeta, 'fr')
+  assert(expandedMeta.includes('Privacy &amp; Security guide.') && !expandedMeta.includes('&amp;amp;'), 'Meta description expansion double-escaped an ampersand')
+
+  const longDescription = 'Free iPhone UDID finder that reads the identifier of your iPhone or iPad in seconds through Safari, without iTunes, Finder, Xcode or a Mac, including the device profile and a walkthrough.'
+  const truncated = __translationWorkerTest.truncateSeoDescription(longDescription)
+  assert(truncated.length <= 159, 'Truncated description is longer than the limit')
+  assert(longDescription.startsWith(truncated.replace(/\.\.\.$/, '')), 'Truncated description is not a prefix of the source')
+  const truncatedBody = truncated.replace(/\.\.\.$/, '')
+  assert(truncated.endsWith('...') && truncatedBody !== truncated, 'A description without a full sentence in range must end with an ellipsis')
+  assert(longDescription.charAt(truncatedBody.length) === ' ' || /[,;:]$/.test(longDescription.slice(0, truncatedBody.length + 1)), 'Description was cut in the middle of a word')
+
+  const sentenceDescription = `${'Find the UDID of an iPhone or iPad from Safari in seconds, with no iTunes, Finder, Xcode or Mac, and copy it for your profile.'} ${'Then register the device in your Apple developer account today.'}`
+  const sentenceTruncated = __translationWorkerTest.truncateSeoDescription(sentenceDescription)
+  assert(sentenceTruncated.endsWith('profile.') && !sentenceTruncated.endsWith('...'), 'Description was not cut at the last full sentence')
+
+  const structuredHtml = `<html><head><link rel="canonical" href="https://capgo.app/blog/post/" /><script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'NewsArticle', '@id': 'https://capgo.app/blog/post/#newsarticle', url: 'https://capgo.app/blog/post/', inLanguage: 'en', publisher: { '@type': 'Organization', '@id': 'https://capgo.app/#organization', url: 'https://capgo.app/' }, mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/post/' } },
+      { '@type': 'BreadcrumbList', '@id': 'https://capgo.app/blog/post/#breadcrumb', itemListElement: [{ '@type': 'ListItem', position: 1, item: { '@type': 'WebPage', '@id': 'https://capgo.app/', url: 'https://capgo.app/', name: 'Capgo' } }, { '@type': 'ListItem', position: 2, item: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/', url: 'https://capgo.app/blog/', name: 'Blog' } }] },
+    ],
+  })}</script></head><body></body></html>`
+  const structuredRendered = __translationWorkerTest.rewriteMetadataAndLinks(structuredHtml, new URL('https://capgo.app/fr/blog/post/'), 'fr')
+  const structuredData = JSON.parse(structuredRendered.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}')
+  const [structuredArticle, structuredBreadcrumb] = structuredData['@graph']
+  assert(structuredArticle.url === 'https://capgo.app/fr/blog/post/' && structuredArticle.inLanguage === 'fr', 'Article JSON-LD kept the English URL or language')
+  assert(structuredArticle['@id'] === 'https://capgo.app/fr/blog/post/#newsarticle' && structuredArticle.mainEntityOfPage['@id'] === 'https://capgo.app/fr/blog/post/', 'Article JSON-LD ids were not localized')
+  assert(structuredArticle.publisher.url === 'https://capgo.app/' && structuredArticle.publisher['@id'] === 'https://capgo.app/#organization', 'Organization identity must keep its English URL')
+  assert(structuredBreadcrumb.itemListElement[0].item.url === 'https://capgo.app/fr/' && structuredBreadcrumb.itemListElement[1].item.url === 'https://capgo.app/fr/blog/', 'Breadcrumb JSON-LD URLs were not localized')
+
+  const homeStructuredHtml = `<html><head><script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'SoftwareApplication', url: 'https://capgo.app/', publisher: { '@id': 'https://capgo.app/#organization' } },
+      { '@type': 'Organization', '@id': 'https://capgo.app/#organization', url: 'https://capgo.app/' },
+      { '@type': 'WebSite', '@id': 'https://capgo.app/#website', url: 'https://capgo.app/', publisher: { '@id': 'https://capgo.app/#organization' } },
+    ],
+  })}</script></head><body></body></html>`
+  const homeStructuredRendered = __translationWorkerTest.rewriteMetadataAndLinks(homeStructuredHtml, new URL('https://capgo.app/fr/'), 'fr')
+  const [homeApp, homeOrganization, homeWebSite] = JSON.parse(homeStructuredRendered.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}')['@graph']
+  assert(homeApp.url === 'https://capgo.app/fr/', 'Homepage entity URL was not localized')
+  assert(homeApp.publisher['@id'] === 'https://capgo.app/#organization', 'Homepage reference to the organization was localized')
+  assert(homeOrganization.url === 'https://capgo.app/' && homeOrganization['@id'] === 'https://capgo.app/#organization', 'Organization identity changed on a translated homepage')
+  assert(homeWebSite.url === 'https://capgo.app/' && homeWebSite['@id'] === 'https://capgo.app/#website', 'WebSite identity changed on a translated homepage')
+}

@@ -4,7 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import { renameCat, shortNumber, plausibleStoreShare } from '@/services/misc'
 import m from '@/copy/messages'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.top_flutter_apps_title({}, { locale: Astro.locals.locale })].join(' | ')
+const title = `${m.top_apps_seo_title({ framework: 'Flutter' }, { locale: Astro.locals.locale })} | ${Astro.locals.runtimeConfig.public.brand}`
 const description = m.top_flutter_apps({}, { locale: Astro.locals.locale })
 
 const content = { title, description }

@@ -729,7 +729,7 @@ You took a Lovable web app to native iOS and Android — built in the cloud with
 
 ### Next Steps
 
-- **[Capgo Live Updates](/live-updates/)** — Ship UI and copy fixes without waiting on store review
+- **[Capgo Live Updates](/live-update/)** — Ship UI and copy fixes without waiting on store review
 - **[Capgo Builder](/native-build/)** — Automate release builds in CI
 - **[Capgo Plugin Directory](/plugins/)** — Biometrics, push notifications, geolocation, and more
 - **Related guides:** [Base44 to mobile](/blog/transform-base44-app-to-mobile-with-capacitor/) · [Bolt.new to mobile](/blog/transform-bolt-new-app-to-mobile-with-capacitor/)

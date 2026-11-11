@@ -454,3 +454,17 @@
 /plugins/capacitor-sheets/ /docs/plugins/sheets/ 301
 /plugins/sheets /docs/plugins/sheets/ 301
 /plugins/sheets/ /docs/plugins/sheets/ 301
+
+# Dead URLs that still receive crawls and internal links (SEO audit 2026-11)
+/live-updates /live-update/ 301
+/live-updates/ /live-update/ 301
+/plugins/capacitor-firebase-analytics /docs/plugins/firebase-analytics/ 301
+/plugins/capacitor-firebase-analytics/ /docs/plugins/firebase-analytics/ 301
+/plugins/capacitor-firebase-crashlytics /docs/plugins/firebase-crashlytics/ 301
+/plugins/capacitor-firebase-crashlytics/ /docs/plugins/firebase-crashlytics/ 301
+/plugins/capacitor-firebase-messaging /docs/plugins/firebase-messaging/ 301
+/plugins/capacitor-firebase-messaging/ /docs/plugins/firebase-messaging/ 301
+/plugins/capacitor-firebase-performance /docs/plugins/firebase-performance/ 301
+/plugins/capacitor-firebase-performance/ /docs/plugins/firebase-performance/ 301
+/plugins/camera-preview /plugins/capacitor-camera-preview/ 301
+/plugins/camera-preview/ /plugins/capacitor-camera-preview/ 301

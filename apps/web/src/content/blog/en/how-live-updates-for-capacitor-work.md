@@ -17,7 +17,7 @@ origin: human
 next_blog: ''
 ---
 
-# Understanding Live Updates in Capgo
+## Understanding Live Updates in Capgo
 
 [Capacitor live updates](https://capgo.app/live-update/) (OTA) replace the web bundle inside your app so you can ship JavaScript, HTML, and CSS changes without a new store binary. Live updates are one of the most powerful features in Capacitor apps, allowing real-time updates without app store submissions. Let's dive deep into how Capgo implements this functionality.
 

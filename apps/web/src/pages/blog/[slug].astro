@@ -156,17 +156,30 @@ const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public,
   locale: Astro.locals.locale,
 })
 const faqItems = entry.data.faq
-content['ldJSON'] =
-  faqItems && faqItems.length > 0
-    ? createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
-        additionalEntities: [
+// Breadcrumb trail (Home > Blog > Category > Post) so search results show the section instead of a raw URL.
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const listingPath = isHumanBlogPost(entry.data.origin) ? 'blog' : 'articles'
+const primaryTag = entry.data.tag?.split(',')[0]?.trim()
+const breadcrumbs = [
+  { name: Astro.locals.runtimeConfig.public.brand, url: new URL(getRelativeLocaleUrl(Astro.locals.locale, '/'), baseUrl).href },
+  { name: listingPath === 'blog' ? 'Blog' : 'Articles', url: new URL(getRelativeLocaleUrl(Astro.locals.locale, `/${listingPath}/`), baseUrl).href },
+  ...(primaryTag ? [{ name: primaryTag, url: new URL(getRelativeLocaleUrl(Astro.locals.locale, `/${listingPath}/category/${slugify(primaryTag)}/`), baseUrl).href }] : []),
+  { name: entry.data.title, url: articleUrl },
+]
+content['ldJSON'] = createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
+  includeBreadcrumbs: true,
+  breadcrumbs,
+  breadcrumbId: articleUrl,
+  additionalEntities:
+    faqItems && faqItems.length > 0
+      ? [
           createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
             url: articleUrl,
             questions: faqItems,
           }),
-        ],
-      })
-    : articleLdJson
+        ]
+      : [],
+})
 ---
 
 <Layout content={content}>
@@ -174,10 +187,22 @@ content['ldJSON'] =
     <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
       <div class="relative z-0 mx-auto pb-12">
         <div class="relative max-w-(--breakpoint-sm)">
+          <nav aria-label="Breadcrumb" class="mt-4">
+            <ol class="flex flex-row flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-400">
+              {breadcrumbs.slice(0, -1).map((crumb, index) => (
+                <li class="flex items-center gap-x-2">
+                  {index > 0 && <span aria-hidden="true">/</span>}
+                  <a href={new URL(crumb.url).pathname} class="rounded-sm hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                    {crumb.name}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
           <div class="mt-4 flex flex-row flex-wrap items-center gap-3">
             {entry.data.tag.split(',').map((i) => (
               <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(i.trim())}`)}
+                href={getRelativeLocaleUrl(Astro.locals.locale, `${listingPath}/category/${slugify(i.trim())}`)}
                 class="rounded-lg border border-gray-400 px-4 py-1.5 text-sm text-white hover:bg-white hover:text-black"
               >
                 {i.trim()}

@@ -1,5 +1,6 @@
 import { glob } from 'glob'
-import { readFileSync, statSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { existsSync, readFileSync } from 'node:fs'
 import os from 'node:os'
 
 export function getBuildConcurrency() {
@@ -84,15 +85,42 @@ export function getPageLastModDates() {
     lastModMap.set(`/blog/${slug}/`, new Date(updatedAt))
   }
 
-  const pageFiles = glob.sync('src/pages/**/*.astro')
-  for (const file of pageFiles) {
-    const stat = statSync(file)
+  // File mtimes are the checkout time in CI, which stamped every page as modified on every deploy.
+  // Search engines stop trusting lastmod once it is wrong, so pages only get one from their last commit.
+  const commitDates = getPageCommitDates('src/pages')
+  for (const [file, committedAt] of commitDates) {
+    if (!file.endsWith('.astro')) continue
     let urlPath = file.replace('src/pages', '').replace('/index.astro', '/').replace('.astro', '/')
     if (!urlPath.endsWith('/')) urlPath += '/'
-    if (!lastModMap.has(urlPath)) {
-      lastModMap.set(urlPath, stat.mtime)
-    }
+    if (!lastModMap.has(urlPath)) lastModMap.set(urlPath, committedAt)
   }
 
   return lastModMap
+}
+
+const GIT_BINARY_PATHS = ['/usr/bin/git', '/usr/local/bin/git', '/opt/homebrew/bin/git']
+
+/**
+ * Last commit date of every file under `directory`, keyed by its path relative to the app.
+ * Returns an empty map when git history is missing or shallow, because a shallow clone
+ * reports the same date for every file.
+ */
+export function getPageCommitDates(directory) {
+  const commitDates = new Map()
+  try {
+    // Absolute path only: the build must not run whatever `git` happens to come first on PATH.
+    const gitBinary = GIT_BINARY_PATHS.find((candidate) => existsSync(candidate))
+    if (!gitBinary) return commitDates
+    const git = (args) => execFileSync(gitBinary, args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] })
+    if (git(['rev-parse', '--is-shallow-repository']).trim() !== 'false') return commitDates
+
+    let committedAt = null
+    for (const line of git(['log', '--format=%x00%cI', '--name-only', '--relative', '--', directory]).split('\n')) {
+      if (line.startsWith('\0')) committedAt = new Date(line.slice(1))
+      else if (line && committedAt && !commitDates.has(line)) commitDates.set(line, committedAt)
+    }
+  } catch {
+    return new Map()
+  }
+  return commitDates
 }

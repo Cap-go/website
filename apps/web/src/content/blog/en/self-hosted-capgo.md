@@ -1,6 +1,6 @@
 ---
 slug: self-hosted-capgo
-title: Self hosted Capgo
+title: 'Self-Hosted Capgo: Run Capacitor Live Updates on Your Server'
 description: >-
   Self-hosting Capgo allows you to deploy Capacitor live updates to your users
   without having to use the Capgo cloud service.
@@ -21,7 +21,7 @@ next_blog: ''
 
 This article provides a step-by-step guide on how to self-host Capgo, as well as a discussion of the benefits and challenges of self-hosting.
 
-# Introduction
+## Introduction
 
 Self Hosting is a form of running your own website or application by setting up a server and network yourself. Instead of using a Platform as a Service or a Public Cloud Provider, those who choose to self-host will run their own networks and be responsible for the maintenance and uptime in addition to building their website or application.
 
@@ -64,11 +64,11 @@ Here are the differences between Capgo Cloud and Capgo Self-Hosted:
 | **Premium Support** | Real support delivered by real human beings who build and maintain Capgo. | Premium support is not included. Self-hosted release is community supported only. |
 | **Releases** | Continuously developed and improved with new features and updates multiple times per week. | It’s a long term release published twice per year, so the latest features won’t be immediately available as they’re battled-tested in the cloud first. |
 
-# How to self-host Capgo
+## How to self-host Capgo
 
 We mainly use Supabase in Capgo, to self host you just need to follow the [Supabase self-hosting documentation](https://supabase.com/docs/guides/self-hosting/docker).
 
-# Using the CLI with self-hosted capgo
+## Using the CLI with self-hosted capgo
 To use the CLI with self-hosted capgo edit the capacitor.config.ts from your app directory and set it like this:
 
 ```ts
@@ -90,7 +90,7 @@ const config: CapacitorConfig = {
 
 Note: To get localSupaAnon please follow this [tutorial](https://capgo.app/docs/plugins/updater/local-dev/getting-started/) and copy the anon key into localSupaAnon
 
-# Using the capacitor updater with self-hosted capgo
+## Using the capacitor updater with self-hosted capgo
 
 **Requirement**
 
@@ -118,7 +118,7 @@ This will enable you to use local capgo in development. However, by default, thi
 
 > You do need to setup HTTPS for Both os to be able to test
 
-# Conclusion
+## Conclusion
 
 In conclusion, self-hosting Capgo can be a good option for organizations that have the resources and expertise to do so. It offers a number of benefits, including control over the update process, security, and compliance. However, it is important to carefully weigh the benefits and challenges before deciding whether to self-host.
 

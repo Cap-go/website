@@ -482,10 +482,10 @@ In other words: **Capacitor is the bridge between web-native AI tooling and mobi
 
 Most AI apps need some native capabilities:
 
-* Camera access (scan, OCR, image input) — [@capgo/camera-preview](https://capgo.app/plugins/camera-preview/) and [@capgo/capacitor-document-scanner](https://capgo.app/plugins/capacitor-document-scanner/)
+* Camera access (scan, OCR, image input) — [@capgo/camera-preview](https://capgo.app/plugins/capacitor-camera-preview/) and [@capgo/capacitor-document-scanner](https://capgo.app/plugins/capacitor-document-scanner/)
 * Microphone and audio session management (voice) — [@capgo/capacitor-speech-recognition](https://capgo.app/plugins/capacitor-speech-recognition/) and [@capgo/capacitor-audiosession](https://capgo.app/plugins/capacitor-audiosession/)
 * On-device LLM inference — [@capgo/capacitor-llm](https://capgo.app/plugins/capacitor-llm/)
-* Push notifications — [@capgo/capacitor-firebase-messaging](https://capgo.app/plugins/capacitor-firebase-messaging/)
+* Push notifications — [@capgo/capacitor-firebase-messaging](https://capgo.app/docs/plugins/firebase-messaging/)
 * Background fetch / background tasks (limited, but important) — [@capgo/capacitor-background-task](https://capgo.app/plugins/capacitor-background-task/)
 * Share sheets, deep links, biometrics — [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) and [@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/)
 

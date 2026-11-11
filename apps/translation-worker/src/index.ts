@@ -319,6 +319,15 @@ function escapeHtmlText(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
+const HTML_ENTITY_CHARACTERS: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", '#39': "'", '#x27': "'" }
+
+// Segments are read from the page as raw HTML, so their text still carries entities such as `&amp;`.
+// A model may hand them back as is or as plain characters. Decoding once before the renderer escapes
+// again keeps both shapes from being published as a visible `&amp;amp;` or `&amp;gt;`.
+function decodeHtmlEntities(value: string): string {
+  return value.replace(/&(amp|lt|gt|quot|apos|#39|#x27);/gi, (match, name: string) => HTML_ENTITY_CHARACTERS[name.toLowerCase()] ?? match)
+}
+
 function escapeHtmlAttribute(value: string, quote = '"'): string {
   const escaped = escapeHtmlText(value)
   return quote === "'" ? escaped.replace(/'/g, '&#39;') : escaped.replace(/"/g, '&quot;')
@@ -2652,9 +2661,9 @@ function renderTranslatedHtml(parts: HtmlPart[], segments: Segment[], translatio
       if (typeof rawTranslated !== 'string') throw new Error(`Missing translation for segment ${part.segmentIndex}`)
       const translated = normalizedTranslationValue(rawTranslated) ? rawTranslated : segment.text
       if (segment.mode === 'attribute') {
-        return `${segment.leading}${escapeHtmlAttribute(translated, segment.quote)}${segment.trailing}`
+        return `${segment.leading}${escapeHtmlAttribute(decodeHtmlEntities(translated), segment.quote)}${segment.trailing}`
       }
-      return `${segment.leading}${escapeHtmlText(translated)}${segment.trailing}`
+      return `${segment.leading}${escapeHtmlText(decodeHtmlEntities(translated))}${segment.trailing}`
     })
     .join('')
 }
@@ -2891,9 +2900,17 @@ function setMetaContent(html: string, keyName: 'name' | 'property', keyValue: st
   return html
 }
 
+// Cuts at the last full sentence that still leaves a useful snippet, otherwise at a word boundary,
+// so search results never show a description chopped in the middle of a word.
 function truncateSeoDescription(value: string): string {
   if (value.length <= SEO_DESCRIPTION_MAX_LENGTH) return value
-  return value.substring(0, SEO_DESCRIPTION_MAX_LENGTH - 3).trimEnd() + '...'
+  const head = value.substring(0, SEO_DESCRIPTION_MAX_LENGTH)
+  const sentenceEnd = Math.max(head.lastIndexOf('. '), head.lastIndexOf('! '), head.lastIndexOf('? '), head.lastIndexOf('。'), head.lastIndexOf('！'), head.lastIndexOf('？'))
+  if (sentenceEnd >= SEO_DESCRIPTION_MIN_LENGTH - 1) return head.substring(0, sentenceEnd + 1)
+  const room = head.substring(0, SEO_DESCRIPTION_MAX_LENGTH - 3)
+  const wordEnd = room.lastIndexOf(' ')
+  const cut = wordEnd >= SEO_DESCRIPTION_MIN_LENGTH ? room.substring(0, wordEnd) : room
+  return cut.replace(/[\s,;:–—-]+$/, '') + '...'
 }
 
 function buildSeoMetaDescription(content: string, locale: Locale): string {
@@ -2921,8 +2938,10 @@ function expandShortMetaDescriptions(html: string, locale: Locale): string {
       const metaKey = getMetaKey(tag)
       const content = readAttributeValue(tag, 'content')
       if (metaKey && SEO_DESCRIPTION_META_KEYS.has(metaKey) && content) {
-        const expanded = buildSeoMetaDescription(content, locale)
-        if (expanded !== content) tag = replaceTagAttributeValue(tag, 'content', expanded) ?? tag
+        // The attribute is read escaped and written back escaped, so measure and rebuild the plain text.
+        const plainContent = decodeHtmlEntities(content)
+        const expanded = buildSeoMetaDescription(plainContent, locale)
+        if (expanded !== plainContent) tag = replaceTagAttributeValue(tag, 'content', expanded) ?? tag
       }
     }
 
@@ -3150,6 +3169,56 @@ function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): stri
   return rewritten
 }
 
+const STRUCTURED_DATA_URL_KEYS = new Set(['url', '@id', 'item'])
+// Entities that describe the whole site: their URL and @id are the same on every page and in every language.
+const STRUCTURED_DATA_SITE_TYPES = new Set(['Organization', 'WebSite', 'Person'])
+const STRUCTURED_DATA_SITE_ID_HASHES = new Set(['#organization', '#website'])
+
+// JSON-LD is copied from the English page untouched. Point the page's own URL and its breadcrumb
+// trail at the localized paths so structured data agrees with the canonical URL of the translated page.
+// Site-wide identities (organization, website) keep their English URL on purpose.
+function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, basePath: string): string {
+  const pagePath = basePath.endsWith('/') ? basePath : `${basePath}/`
+  const isPageUrl = (value: string): boolean => {
+    try {
+      const url = new URL(value)
+      const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`
+      return url.host === requestUrl.host && pathname === pagePath && !STRUCTURED_DATA_SITE_ID_HASHES.has(url.hash)
+    } catch {
+      return false
+    }
+  }
+  const isSiteEntity = (type: unknown): boolean => (Array.isArray(type) ? type : [type]).some((entry) => typeof entry === 'string' && STRUCTURED_DATA_SITE_TYPES.has(entry))
+  const walk = (node: unknown, inBreadcrumb: boolean): unknown => {
+    if (Array.isArray(node)) return node.map((entry) => walk(entry, inBreadcrumb))
+    if (!node || typeof node !== 'object') return node
+    const record = node as Record<string, unknown>
+    // On the homepage the site entities share the page URL, so they are matched by type and left alone.
+    if (!inBreadcrumb && isSiteEntity(record['@type'])) return node
+    const breadcrumb = inBreadcrumb || record['@type'] === 'BreadcrumbList'
+    const result: Record<string, unknown> = {}
+    let describesPage = false
+    for (const [key, value] of Object.entries(record)) {
+      if (typeof value === 'string' && STRUCTURED_DATA_URL_KEYS.has(key) && (breadcrumb || isPageUrl(value))) {
+        result[key] = localizeHref(value, locale, requestUrl)
+        if (key === 'url' && !breadcrumb) describesPage = true
+      } else {
+        result[key] = walk(value, breadcrumb)
+      }
+    }
+    if (describesPage && typeof result.inLanguage === 'string') result.inLanguage = locale
+    return result
+  }
+
+  return html.replace(/(<script\b[^>]*type=["']?application\/ld\+json["']?[^>]*>)([\s\S]*?)(<\/script>)/gi, (match, open: string, body: string, close: string) => {
+    try {
+      return `${open}${JSON.stringify(walk(JSON.parse(body), false)).replace(/</g, '\\u003c')}${close}`
+    } catch {
+      return match
+    }
+  })
+}
+
 function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, options?: { preserveDocumentLanguage?: boolean }): string {
   const basePath = stripLocalePrefix(requestUrl.pathname)
   const localizedUrl = localizedAbsoluteUrl(requestUrl, locale, basePath)
@@ -3162,6 +3231,7 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, 
   rewritten = setMetaContent(rewritten, 'property', 'twitter:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'name', 'twitter:url', localizedUrl)
   rewritten = localizeUrlAttributes(rewritten, locale, basePath, requestUrl)
+  rewritten = localizeStructuredData(rewritten, requestUrl, locale, basePath)
   rewritten = expandShortMetaDescriptions(rewritten, locale)
   rewritten = updateFooterLanguageButton(rewritten, locale)
   if (!rewritten.includes('capgo-edge-language-selector-hash')) {
@@ -4056,6 +4126,8 @@ export const __translationWorkerTest = {
   translationStoreKey,
   collectRenderedNavLinks,
   collectSegments,
+  decodeHtmlEntities,
+  truncateSeoDescription,
   dedupeBatchForTranslation,
   expandDedupedBatchTranslations,
   guardTranslationLength,

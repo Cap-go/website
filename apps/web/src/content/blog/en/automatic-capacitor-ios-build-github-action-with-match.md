@@ -19,7 +19,7 @@ origin: human
 next_blog: automatic-capacitor-android-build-github-action
 ---
 
-# Automatic iOS Builds with GitHub Actions using Match
+## Automatic iOS Builds with GitHub Actions using Match
 
 Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's what you need to know:
 

@@ -19,7 +19,7 @@ origin: human
 next_blog: null
 ---
 
-# Automatic Android Builds with GitLab CI
+## Automatic Android Builds with GitLab CI
 
 Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's what you need to know:
 

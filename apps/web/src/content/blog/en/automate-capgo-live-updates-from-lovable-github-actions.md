@@ -206,4 +206,4 @@ That matches the single-click experience they asked for: Publish in Lovable is t
 - [Convert Lovable to iOS and Android](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/) — Full Capacitor + Capgo setup if you have not wrapped the app yet
 - [Automatic build and release with GitHub Actions](/blog/automatic-build-and-release-with-github-actions/) — Tag-based releases and version bumps
 - [GitHub Actions integration](/docs/live-updates/integrations/github-actions/) — Multi-channel and PR preview channels
-- [Capgo Live Updates](/live-updates/) — Channels, rollbacks, and adoption stats
+- [Capgo Live Updates](/live-update/) — Channels, rollbacks, and adoption stats
