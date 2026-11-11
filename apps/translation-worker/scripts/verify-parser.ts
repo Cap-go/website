@@ -1394,6 +1394,17 @@ try {
   const structuredLabels = __translationWorkerTest.collectStructuredDataLabels(labelSegments, labelTranslations)
   assert(structuredLabels.get('Blog') === 'Blogue', 'Visible text must win over attribute text for a structured data label')
   assert(structuredLabels.get('Tips & Tricks') === 'Trucs & astuces', 'Structured data labels must be keyed and stored without HTML entities')
+  const fallbackSource = '<html><body><a href="/blog/">Blog</a><p>Tips\n   &amp; Tricks</p><span>Blog</span></body></html>'
+  const fallbackSegments = __translationWorkerTest.collectSegments(fallbackSource).segments
+  let blogSeen = 0
+  const fallbackTranslations = fallbackSegments.map((segment) => {
+    if (segment.text === 'Blog') return blogSeen++ === 0 ? 'Blog' : 'Blogue'
+    return segment.text.startsWith('Tips') ? 'Trucs\n &amp; astuces' : segment.text
+  })
+  const fallbackLabels = __translationWorkerTest.collectStructuredDataLabels(fallbackSegments, fallbackTranslations)
+  assert(fallbackLabels.get('Blog') === 'Blogue', 'A later translation must replace an earlier English fallback for the same label')
+  assert(fallbackLabels.get('Tips & Tricks') === 'Trucs & astuces', 'Structured data labels must collapse whitespace in keys and values')
+
   const labelledHtml = structuredHtml.replace('"name":"Blog"', '"name":"Tips & Tricks"')
   const labelledData = JSON.parse(
     __translationWorkerTest.rewriteMetadataAndLinks(labelledHtml, new URL('https://capgo.app/fr/blog/post/'), 'fr', { structuredDataLabels: structuredLabels }).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}',

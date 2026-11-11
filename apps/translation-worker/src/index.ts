@@ -3171,8 +3171,16 @@ function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): stri
 
 type LocalizedHtmlOptions = { preserveDocumentLanguage?: boolean; structuredDataLabels?: ReadonlyMap<string, string> }
 
-// Maps each English text on the page to its translation, so JSON-LD labels can reuse the visible wording.
-// Visible text wins over attribute text, and the first occurrence wins when a label is translated twice.
+function normalizeStructuredDataLabel(value: string): string {
+  return value.replace(/\s+/g, ' ').trim()
+}
+
+/**
+ * Maps each English text on the page to its translation, so JSON-LD labels can reuse the visible wording.
+ * Keys and values are entity-decoded with whitespace collapsed, the way a browser shows the text.
+ * A real translation replaces an earlier entry that fell back to English. Otherwise visible text wins
+ * over attribute text, and the first occurrence wins when a label is translated twice.
+ */
 function collectStructuredDataLabels(segments: Segment[], translations: string[]): Map<string, string> {
   const labels = new Map<string, string>()
   for (const mode of ['text', 'attribute'] as const) {
@@ -3180,9 +3188,11 @@ function collectStructuredDataLabels(segments: Segment[], translations: string[]
       const segment = segments[index]
       const translated = translations[index]
       if (segment.mode !== mode || !segment.inBody || typeof translated !== 'string') continue
-      const source = decodeHtmlEntities(segment.text).trim()
-      const target = decodeHtmlEntities(translated).trim()
-      if (source && target && !labels.has(source)) labels.set(source, target)
+      const source = normalizeStructuredDataLabel(decodeHtmlEntities(segment.text))
+      const target = normalizeStructuredDataLabel(decodeHtmlEntities(translated))
+      if (!source || !target) continue
+      const existing = labels.get(source)
+      if (existing === undefined || (existing === source && target !== source)) labels.set(source, target)
     }
   }
   return labels
@@ -3223,7 +3233,7 @@ function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, b
         result[key] = localizeHref(value, locale, requestUrl)
         if (key === 'url' && !breadcrumb) describesPage = true
       } else if (typeof value === 'string' && key === 'name' && breadcrumb) {
-        result[key] = labels?.get(value.trim()) ?? value
+        result[key] = labels?.get(normalizeStructuredDataLabel(value)) ?? value
       } else {
         result[key] = walk(value, breadcrumb)
       }
