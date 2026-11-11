@@ -62,6 +62,7 @@ Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and 
 Plugin Install Referrer|install attribution plugin for Google Play Install Referrer and Apple AdServices|docs/plugins/install-referrer/**
 Plugin Intent Launcher|Android intent launcher plugin|docs/plugins/intent-launcher/**
 Plugin system surfaces|Siri, Shortcuts, WidgetKit, Live Activities, and Android intents versus expo-app-intents|docs/plugins/siri-shortcuts-widgets-and-intents.mdx
+Plugin AI engineering|How Capgo uses AI in its internal workflow to build, improve, and fix Capacitor plugins|docs/plugins/ai-engineering/**
 Plugin Intercom|Intercom customer messaging and support plugin for native in-app chat|docs/plugins/intercom/**
 Plugin Is Root|root/jailbreak detection plugin|docs/plugins/is-root/**
 Plugin IVS Player|Amazon IVS video player plugin|docs/plugins/ivs-player/**

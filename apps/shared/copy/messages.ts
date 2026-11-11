@@ -1422,6 +1422,10 @@ const messages = {
   plugins_license_body: 'Every Capgo plugin is free to use under the Mozilla Public License 2.0, including in commercial apps. Read, fork, and audit the source on GitHub.',
   plugins_license_cta: 'Browse the source',
   plugins_license_title: 'Free and open source',
+  plugins_ai_engineering_body:
+    'Capgo builds, improves, and fixes its Capacitor plugins with heavy use of AI in our own engineering workflow. Most plugin issues get a fix pull request the same day; every pull request gets automated review, then a human merge. Your app does not need AI to use our plugins.',
+  plugins_ai_engineering_cta: 'How we maintain plugins',
+  plugins_ai_engineering_title: 'AI-accelerated plugin maintenance',
   plugins_priority_body: 'Customers on any Capgo plan get their plugin bug fixes and feature requests handled first by the team that maintains them.',
   plugins_priority_cta: 'See plans',
   plugins_priority_title: 'Priority support with a Capgo plan',
@@ -6490,6 +6494,10 @@ const messages = {
     "When an application works too slow or gets down (even for a few minutes), it can damage users' satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.",
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
+  why_capgo_plugin_engineering_body:
+    'Capgo maintains its Capacitor plugin library with AI-assisted engineering behind the scenes. Fixes move quickly, with automated review on every pull request and a human merge. Using Capgo in your app stays AI-optional.',
+  why_capgo_plugin_engineering_link: 'Read how we ship plugin fixes',
+  why_capgo_plugin_engineering_title: 'Plugins kept current at high velocity',
   why_capgo_security_title: 'Independently audited security',
   why_capgo_title: 'Faster fixes, without giving up control',
   why_capgo_trust_link: 'Visit the Trust Center',

@@ -1,0 +1,61 @@
+---
+title: AI engineering for Capgo plugins
+description: "How Capgo uses AI inside its own engineering workflow to build, improve, and fix Capacitor plugins. Capgo Cloud and plugins stay AI-optional for your app."
+sidebar:
+  order: 2
+  label: "AI engineering"
+---
+
+Capgo maintains a large set of open source Capacitor plugins. Most of that work happens in our engineering system, where we use AI heavily to move faster without skipping review. **Capgo Cloud and the plugins themselves stay AI-optional for your app.** You do not need AI features in your product to use Capgo.
+
+This page explains what happens behind the scenes when you report a plugin issue or when we ship a fix.
+
+## What AI does for us
+
+Our maintainers use AI-assisted tooling to:
+
+- Turn plugin issues into fix pull requests quickly
+- Run automated review on every pull request before a human looks at it
+- Pre-check tests, code style, conventions, and common security issues
+
+AI speeds up drafting and first-pass review. It does not replace maintainer judgment on merges.
+
+## How a typical plugin fix moves
+
+When someone opens an issue on a Capgo plugin repository:
+
+1. **Fix pull request:** For most issues, a fix pull request lands the same day, often within a couple of hours. Resolution usually takes one to two days end to end.
+2. **Automated review:** Every pull request is reviewed by our AI review system, usually within minutes.
+3. **Human merge:** Our AI pre-checks tests, code review, conventions, and security. A Capgo maintainer then validates the change and merges.
+
+In the last 90 days, **95% of plugin issues were resolved** across Cap-go plugin repositories (excluding bot-only dependency churn).
+
+## What you pay for
+
+Customers choose Capgo for live updates, native builds, and a plugin library that stays current with Capacitor. The speed of that maintenance comes from how we run engineering, including AI, not from requiring AI inside your mobile app.
+
+Customers on a Capgo plan still get priority handling for plugin bug reports and feature requests. See [Capgo Plugin Directory](/plugins/) and [pricing](/pricing/) for the product side.
+
+## FAQ
+
+### Is AI-written code safe to ship?
+
+We treat AI output like any other contribution: it must pass automated checks and human review before merge. Security and convention pre-checks run on every pull request, and a maintainer approves the final merge.
+
+### Who merges plugin changes?
+
+A Capgo maintainer always validates and merges. AI review and pre-checks run first; humans own the decision.
+
+### Does my app need AI to use Capgo plugins?
+
+No. **Capgo is AI-optional for customers.** AI described on this page is part of our internal engineering workflow. Your app can use plugins and Capgo Cloud without embedding AI features.
+
+### Does this replace the MCP or agent docs?
+
+No. If you want AI assistants to operate your Capgo account, see [Hosted MCP server](/docs/ai/mcp/) and [Local CLI MCP server](/docs/cli/reference/mcp/). This page is only about how we maintain plugins.
+
+## Keep going
+
+- [All Capacitor plugins](/docs/plugins/)
+- [Adding or updating plugins](/docs/contributing/adding-plugins/)
+- [Capgo Plugin Directory](/plugins/)
