@@ -1,0 +1,98 @@
+---
+title: Native scan sessions
+description: "Use beginScanSession for a renewable, cancellable scan flow that releases scanner input on cancel, pause, or a native deadline."
+sidebar:
+  order: 5
+---
+
+Use a native session for a finite scan flow that must release scanner input on cancel, pause, or a native deadline. Existing low-level methods remain available for applications that manage DataWedge themselves.
+
+These APIs ship in [capacitor-zebra-datawedge PR #30](https://github.com/Cap-go/capacitor-zebra-datawedge/pull/30).
+
+The caller supplies the existing profile name. The profile must already be associated exclusively with the current Android application. Beginning a session queries that association but does not create or overwrite a profile, enable DataWedge, or start the scanner. Avoid overlapping `GET_CONFIG` queries during this validation because DataWedge can omit command identifiers in its replies.
+
+```typescript
+const session = await ZebraDataWedge.beginScanSession({
+  profileName: 'WarehousePicking',
+  timeoutMs: 300000, // Absolute duration. Optional. Default five minutes.
+  leaseTimeoutMs: 10000, // Renewable native deadline. Optional. Default ten seconds.
+});
+
+try {
+  // Use session.sessionId with setConfig calls targeting this profile.
+  // Configure INTENT output to session.intentAction and broadcast delivery,
+  // disable keystroke output, select and enable the intended scanner and decoders,
+  // and verify profile activation and scanner readiness before triggering.
+  // Subscribe to the existing scan event before starting the scanner.
+  await ZebraDataWedge.triggerScanSession({ sessionId: session.sessionId });
+  // Wait for a scan event whose intentAction matches session.intentAction.
+} finally {
+  await ZebraDataWedge.endScanSession({ sessionId: session.sessionId });
+}
+```
+
+`triggerScanSession` checks the active profile and then waits for the software-trigger acknowledgement. It does not return the decoded barcode. Scan data continues through the `scan` event. Use `softScanTrigger` for low-level triggering outside a managed session.
+
+Ending a session cancels its pending calls, unregisters its scan action, and disables Barcode Input in that profile, using the required scanner selector. The profile remains enabled and associated. Disabling the whole profile could activate default-profile keystroke input. An acknowledged end returns `{ confirmed: true }`. A failed or unanswered end leaves the session closing and prevents a new session. Retry end with the same token. Do not hand off to a camera scanner until cleanup is confirmed. Repeating a completed end is idempotent. A concurrent end while acknowledgement is pending rejects `SESSION_BUSY`.
+
+Pause, destroy, and deadline handling do not depend on JavaScript running. They attempt targeted disable and cancel owned pending calls. A global STOP is sent only while this application is foreground and its session triggered scanning, to avoid interrupting another foreground application. These emergency broadcasts are best effort, not proof of hardware release.
+
+Once a profile has been enrolled in a session, `setConfig` requires the matching active token for it for the rest of that process. Do not mutate an active session profile through the other low-level APIs. Session IDs coordinate this plugin, not Android authorization or enterprise policy. Low-level APIs for other profiles keep their existing behavior.
+
+Session enrollment lasts for the current process. Android can kill a process without lifecycle callbacks, so applications that need recovery after process death must implement a recovery policy that validates profile ownership before changing scanner configuration. Package-prefix conventions alone cannot establish profile ownership.
+
+## Automatic heartbeat and deadlines
+
+`beginScanSession` starts a built-in JavaScript heartbeat. It sends a local native renewal one second after each previous acknowledgement, with at most one renewal in flight. Renewals do not send DataWedge commands or extend the absolute `timeoutMs` limit. Raw scanner events and physical triggers do not renew the deadline. Scanner activity is not proof that JavaScript is responding.
+
+The controller stops on explicit end, page hiding or `pagehide`, native closure, renewal failure, or the absolute duration limit. Page hiding and failed renewal attempt best-effort end. It also handles a page disappearing during asynchronous begin and cleans up a late token. Native pause and destroy handling stays independent of JavaScript. Resume never revives an ended session.
+
+You still need to call and await `endScanSession` when your workflow completes or is cancelled, including application-specific SPA navigation. The plugin cannot infer those application intentions. Best-effort automatic cleanup is not a confirmed camera handoff. Failed end remains retryable.
+
+`timeoutMs` is the absolute duration (default 300000, range 1 to 600000 ms). `leaseTimeoutMs` is the renewable native liveness deadline (default 10000, range 2000 to 60000 ms). Both start after association validation. The earlier deadline wins. These deadlines are independent of scanner readiness and the scanner's own illumination or decode timeout.
+
+`getScanSessionCapabilities()` reads the native session API capabilities without sending a DataWedge command. It currently returns `version: 2`, `renewableLease: true`, `customProfileNames: true`, and `sessionAssociationDetails: true`. These fields identify support for renewable leases, caller-supplied profile names, and validated association details. Future versions and additional capabilities will be documented with their behavior.
+
+Listen for `scanSessionClosed` to distinguish `heartbeat_expired`, `max_duration`, `background`, `destroyed`, and explicit `ended`. This event reports logical closure, not acknowledged hardware release. `getScanSessionState({ sessionId })` can inspect a matching active or closing session after a missed event without renewing it. After acknowledged end, state inspection rejects for that token. Keep any collected batch results outside the native lease if a new lease is needed.
+
+For advanced environments only, `autoRenew: false` disables the built-in heartbeat and makes the caller responsible for `renewScanSession({ sessionId })`. Page and native-closure handling and the absolute JavaScript resource timer remain active. Ordinary integrations should retain automatic renewal. Neither form of renewal can revive an expired lease or bypass unconfirmed cleanup.
+
+Automatic lifecycle cleanup and explicit end share the same in-flight cleanup request. If begin is cancelled after native allocation, its rejection exposes `sessionId` and `cleanupConfirmed`. Retry `endScanSession` with that token if confirmation failed. No late token is returned as an active session.
+
+## Ownership discovery and safe begin failures
+
+Begin returns `appList`, a snapshot of the associations checked by its ownership query. Callers can use it to avoid an immediate duplicate `getConfig`. They must still configure output and decoders and verify active-profile and scanner readiness. It does not grant cached permission to mutate another profile. Capability `sessionAssociationDetails` identifies native binaries returning this data.
+
+The native operation constructs reply metadata and registers the action before granting ownership. Timeout, transport, parsing, or lifecycle failure before ownership releases the reservation and leaves no session token to clean up. Background begin rejects `SESSION_INACTIVE`. Another active or reserved session rejects `SESSION_BUSY`. A profile without this app's association rejects `SESSION_UNASSOCIATED`. A foreign association remains `SESSION_OWNERSHIP`.
+
+JavaScript cancellation can race a successful native allocation. That rejection still includes `sessionId` and `cleanupConfirmed`. Explicitly retry end if cleanup is unconfirmed. Application code should distinguish cancellation from scanner unavailability instead of automatically opening a camera after page hiding.
+
+## Updating an enrolled profile
+
+Use explicit `configMode: DataWedgeConfigMode.UPDATE` for incremental `setConfig` calls. DataWedge defaults to OVERWRITE when the mode is omitted, which can reset the profile's app associations. UPDATE does not prevent plugin resets. An omitted `resetConfig` defaults to `true` in this plugin, which matches DataWedge's RESET_CONFIG default, and clears that plugin before applying the new parameters. Set `resetConfig: false` on each plugin you update incrementally. The session token coordinates pending work and cleanup. It does not make arbitrary device configuration transactional or restore overwritten associations.
+
+```typescript
+await ZebraDataWedge.setConfig({
+  profileName: 'WarehousePicking',
+  sessionId: session.sessionId,
+  configMode: DataWedgeConfigMode.UPDATE,
+  pluginConfigs: [
+    {
+      pluginName: DataWedgePlugin.BARCODE,
+      resetConfig: false,
+      paramList: {
+        scanner_input_enabled: 'true',
+      },
+    },
+  ],
+});
+```
+
+A profile remains enrolled for the process after end, so unowned low-level writes stay blocked. Avoid resetting its ownership with OVERWRITE. If associations were removed, begin rejects rather than treating it as still owned. A fresh process and explicit profile setup may be needed before beginning again. See [DataWedge SET_CONFIG](https://techdocs.zebra.com/datawedge/15-0/guide/api/setconfig/).
+
+## Related
+
+- [Overview](/docs/plugins/zebra-datawedge/)
+- [Getting started](/docs/plugins/zebra-datawedge/getting-started/)
+- [Android behavior](/docs/plugins/zebra-datawedge/android/)
+- Plugin pull request: [capacitor-zebra-datawedge PR #30](https://github.com/Cap-go/capacitor-zebra-datawedge/pull/30)
