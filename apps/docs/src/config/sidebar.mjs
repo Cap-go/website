@@ -296,7 +296,14 @@ const pluginEntries = [
   ['WiFi', 'wifi'],
   ['YouTube Player', 'youtube-player'],
   ['Zip', 'zip'],
-  ['Zebra DataWedge', 'zebra-datawedge', [linkItem('Android behavior', '/docs/plugins/zebra-datawedge/android')]],
+  [
+    'Zebra DataWedge',
+    'zebra-datawedge',
+    [
+      linkItem('Android behavior', '/docs/plugins/zebra-datawedge/android'),
+      linkItem('Scan sessions', '/docs/plugins/zebra-datawedge/scan-sessions'),
+    ],
+  ],
 ]
 
 const pluginItems = [
