@@ -1,5 +1,5 @@
 const llmsCustomSetRows =
-  String.raw`Capgo Builder|generally available production iOS and Android builds for Capacitor, CLI and MCP AI workflows, signing, pricing, measured performance, CI triggers, and webhooks|docs/builder/**
+  `Capgo Builder|generally available production iOS and Android builds for Capacitor, CLI and MCP AI workflows, signing, pricing, measured performance, CI triggers, and webhooks|docs/builder/**
 Capgo CLI|full reference documentation for capgo CLI to upload and manage your live updates|docs/cli/**|docs/versioning.mdx
 Capgo MCP|hosted and local MCP servers that connect AI assistants like Claude, ChatGPT, and Cursor to a Capgo account|docs/ai/**|docs/cli/reference/mcp.mdx
 Capgo Versioning|how Capgo versions plugins, CLI, console, and LTS backports across Capacitor majors|docs/versioning.mdx
