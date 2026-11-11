@@ -1,299 +1,381 @@
 ---
 slug: adb-install-apk
-title: 'Adb Install Apk Guide 2026: Sideload Any App'
-description: 'Master `adb install apk` for sideloading apps. This 2026 guide covers flags, common errors, and workflows for Capacitor/Ionic. Get started now!'
+title: 'ADB Install APK: Command, Flags, and Troubleshooting'
+description: >-
+  Install an APK with adb install path/to/app.apk. Enable USB debugging, verify
+  with adb devices, use -r -d -g -t flags, Wi-Fi install, split APKs, launch,
+  uninstall, and fix common failure messages.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-07-02T09:27:56.807Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-11-11T10:35:00.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/7605a097-3d24-4730-801e-be555fdef352/adb-install-apk-guide.jpg'
-head_image_alt: 'Adb Install Apk Guide 2026: Sideload Any App'
-keywords: 'adb install apk, android debug bridge, sideload apk, capacitor development, troubleshooting adb'
+head_image_alt: 'ADB Install APK command, flags, and troubleshooting Capgo blog'
+keywords: >-
+  adb install apk, adb apk install, install apk via adb, apk guide, adb enable
+  new apk, adb run apk, android debug bridge install, sideload apk adb
 tag: 'Mobile, Capacitor, Android'
 published: true
 locale: en
 origin: ai
 next_blog: ''
+faq:
+  - question: What is the adb install apk command?
+    answer: >-
+      Run adb install followed by the path to your APK file, for example adb
+      install path/to/app.apk. ADB copies the package to the device and calls
+      the system package installer. If the app is already installed, add -r to
+      replace it while keeping data when possible.
+  - question: How do I install an APK via adb step by step?
+    answer: >-
+      Install Android SDK Platform Tools on your computer, enable USB debugging
+      on the phone, connect with USB, run adb devices and accept the RSA prompt,
+      then run adb install your-app.apk. You should see Performing Streamed
+      Install and Success when the install completes.
+  - question: What does adb install -r do?
+    answer: >-
+      The -r flag reinstalls or updates an existing app. Without it, adb install
+      often fails when the same package name is already on the device. Daily
+      debug builds usually use adb install -r app-debug.apk.
+  - question: How do I install an APK over Wi-Fi with adb?
+    answer: >-
+      On Android 11 and later, pair once with adb pair IP:PORT and the pairing
+      code from Wireless debugging in Developer options, then adb connect
+      IP:PORT. Older workflows use adb tcpip 5555 over USB first. After connect,
+      adb install works the same as over USB.
+  - question: How do I install split APKs with adb?
+    answer: >-
+      Use adb install-multiple and pass every split file in one command, for
+      example adb install-multiple base.apk config.arm64_v8a.apk. For a debug
+      folder from Gradle, point at all APKs under the output directory. Add -r
+      when updating an existing install.
+  - question: Why does adb install say failure INSTALL_FAILED_TEST_ONLY?
+    answer: >-
+      The APK is marked testOnly and the device blocks a normal install. Use adb
+      install -t to allow test-only packages. Use that only for builds you trust,
+      not for random APKs from unknown sources.
 ---
-You've got a fresh Android build sitting on disk, the browser version looks fine, and now you need it on a real device. Not after an internal testing upload. Not after Android Studio finishes indexing. Right now.
+**Quick answer:** Connect a phone with USB debugging on, confirm it with `adb devices`, then run:
 
-That's where **ADB** becomes the shortest path between a built APK and an actual phone. If you work with Capacitor or Ionic, this command stops being a convenience and starts becoming part of your normal feedback loop. It's how you verify native plugins, permissions, splash behavior, deep links, WebView quirks, and everything else the browser can't tell you.
+```bash
+adb install path/to/app.apk
+```
+
+For an update over an existing install, use `adb install -r path/to/app.apk`.
+
+Minimum steps:
+
+1. Install [SDK Platform Tools](https://developer.android.com/tools/releases/platform-tools) and ensure `adb` is on your PATH.
+2. On the phone, enable [Developer options and USB debugging](https://capgo.app/blog/how-to-enable-developer-options-on-android/).
+3. Connect USB, unlock the phone, accept **Allow USB debugging**.
+4. Run `adb devices` and confirm the serial shows `device`, not `unauthorized`.
+5. Run `adb install path/to/app.apk`.
+
+If you ship Android builds from Capacitor or Ionic, this loop is how you put a fresh APK on hardware without waiting on Play Console. For store rollout after testing, see [Google Play staged rollouts](https://capgo.app/blog/google-play-staged-rollouts-how-it-works/).
 
 ## Table of Contents
-- [Why Adb Install Is Your Most Direct Path to Testing](#why-adb-install-is-your-most-direct-path-to-testing)
-- [Getting Your Environment Ready for Adb](#getting-your-environment-ready-for-adb)
-  - [Install Platform Tools on Your Machine](#install-platform-tools-on-your-machine)
-  - [Enable the Right Settings on the Device](#enable-the-right-settings-on-the-device)
-- [The Core Adb Install Apk Workflow](#the-core-adb-install-apk-workflow)
-  - [Check the Device Before You Install](#check-the-device-before-you-install)
-  - [Run the Install Command](#run-the-install-command)
-  - [Why Streamed Install Beats Manual Push and Pm Install](#why-streamed-install-beats-manual-push-and-pm-install)
-- [Mastering Adb Install Flags for Faster Workflows](#mastering-adb-install-flags-for-faster-workflows)
-  - [Common Adb Install Flags and Their Uses](#common-adb-install-flags-and-their-uses)
-  - [Which Flags Matter in Daily Development](#which-flags-matter-in-daily-development)
-- [Troubleshooting Common Installation Failures](#troubleshooting-common-installation-failures)
-  - [When the Device Shows as Unauthorized](#when-the-device-shows-as-unauthorized)
-  - [When the Package Already Exists](#when-the-package-already-exists)
-  - [When Signatures and Old Package State Collide](#when-signatures-and-old-package-state-collide)
-- [A Complete Example for Capacitor Developers](#a-complete-example-for-capacitor-developers)
 
-<a id="why-adb-install-is-your-most-direct-path-to-testing"></a>
-## Why Adb Install Is Your Most Direct Path to Testing
+- [Install Platform Tools and verify adb](#install-platform-tools-and-verify-adb)
+- [Core adb install apk workflow](#core-adb-install-apk-workflow)
+- [adb install flags](#adb-install-flags)
+- [Multiple devices with -s](#multiple-devices-with--s)
+- [Install APK over Wi-Fi](#install-apk-over-wi-fi)
+- [Split APKs with install-multiple](#split-apks-with-install-multiple)
+- [Launch the app after install](#launch-the-app-after-install)
+- [Uninstall with adb](#uninstall-with-adb)
+- [Capacitor example](#capacitor-example)
+- [Troubleshooting install errors](#troubleshooting-install-errors)
 
-If you build Android apps long enough, you stop treating the Play Store as your primary testing path. It's too slow for routine iteration, especially when you're checking a permission prompt, a plugin bridge issue, or a layout bug that only shows up on one device.
+<a id="install-platform-tools-and-verify-adb"></a>
 
-**ADB** has been part of Android since **Android 1.0 in 2008**, and it's still the standard way to deploy APKs directly to a device. Android's global market share exceeded **70% in 2024**, which is one reason this workflow remains central for mobile teams working across a wide device mix, as noted in the [official Android Debug Bridge documentation](https://developer.android.com/tools/adb).
+## Install Platform Tools and verify adb
 
-For practical development, the value is simple:
+You do not need the full Android Studio download for `adb install`. You need **Platform Tools** from Google.
 
-- **You bypass store friction:** no review queue, no test track delay.
-- **You test the exact build you just created:** debug, release candidate, or a one-off branch build.
-- **You get immediate feedback:** install, launch, inspect logs, repeat.
+1. Download Platform Tools for your OS.
+2. Unzip to a fixed folder.
+3. Add that folder to your PATH.
 
-> **Practical rule:** If the question is “does this APK work on a physical Android device,” `adb install` should usually be your first answer.
+Verify:
 
-This matters even more in Capacitor and Ionic work. A browser run tells you whether your web layer renders. It doesn't tell you whether Android permission handling works, whether a plugin initializes cleanly, or whether your app updates over an existing install without breaking stored data.
+```bash
+adb version
+```
 
-The command itself is small:
+On the device, turn on USB debugging as described in the [Android developer options guide](https://capgo.app/blog/how-to-enable-developer-options-on-android/). Some OEM skins (Xiaomi MIUI is a common case) also require **Install via USB** or similar under developer settings.
 
-> `adb install path/to/app.apk`
+Use a data cable. Charging-only cables produce empty `adb devices` lists and waste time.
 
-What makes it useful isn't the syntax. It's the control. You can install directly, reinstall over an existing app, test older builds, and diagnose package-level failures without leaving the terminal. That's why the phrase **ADB install APK** keeps showing up in real team workflows long after the “getting started” phase is over.
+<a id="core-adb-install-apk-workflow"></a>
 
-<a id="getting-your-environment-ready-for-adb"></a>
-## Getting Your Environment Ready for Adb
+## Core adb install apk workflow
 
-Most ADB problems at the start aren't install problems. They're setup problems. The machine can't find `adb`, the device isn't authorized, or the OEM added one more toggle you didn't know about.
+Always check the connection before you install.
 
-![A seven-step guide illustrating how to set up an Android Debug Bridge environment for developers.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/523366cc-496c-44c2-928a-03c41fede9c3/adb-install-apk-adb-setup.jpg)
+```bash
+adb devices
+```
 
-<a id="install-platform-tools-on-your-machine"></a>
-### Install Platform Tools on Your Machine
+Expected healthy output:
 
-You don't need the full Android Studio install just to run ADB. You need **SDK Platform Tools**, then you need your terminal to know where they live.
+```text
+List of devices attached
+XXXXXXXX    device
+```
 
-On Windows, macOS, and Linux, the cleanest setup is the same:
+Install:
 
-1. **Download Platform Tools** from Google.
-2. **Extract the archive** somewhere stable.
-3. **Add the folder to your PATH** so `adb` works in any terminal window.
+```bash
+adb install path/to/your-app.apk
+```
 
-If you're setting up a Capacitor machine from scratch, this [Android setup guide for Capacitor apps](https://capgo.app/blog/android-setup-for-capacitor-apps/) is a useful companion for the broader toolchain.
+Quote paths that contain spaces. From the APK directory:
 
-Use a terminal to verify the command is available:
+```bash
+adb install app-debug.apk
+```
 
-> `adb version`
+A successful run typically prints **Performing Streamed Install** and **Success**. Under the hood, `adb install` pushes the file to `/data/local/tmp`, runs `pm install`, and removes the temp file. That is simpler than manual `adb push` plus a shell `pm install` for everyday testing.
 
-If that returns a version instead of “command not found,” you're in good shape.
+For Capacitor environment setup beyond ADB, see [Android setup for Capacitor apps](https://capgo.app/blog/android-setup-for-capacitor-apps/).
 
-A few platform-specific habits help:
+<a id="adb-install-flags"></a>
 
-- **Windows:** put Platform Tools in a path that won't change, then add that folder to Environment Variables.
-- **macOS:** add the folder path to your shell profile such as `.zshrc`.
-- **Linux:** add the same path in your shell config, then reload the shell.
+## adb install flags
 
-<a id="enable-the-right-settings-on-the-device"></a>
-### Enable the Right Settings on the Device
+| Flag | Meaning | When to use |
+| --- | --- | --- |
+| `-r` | Replace existing app, keep data when possible | Debug rebuilds, same package name |
+| `-d` | Allow version downgrade | Testing an older build over a newer one |
+| `-g` | Grant all runtime permissions at install | Faster QA when permissions block launch |
+| `-t` | Allow test-only APKs | Internal testOnly builds from CI |
 
-The device side matters just as much. A critical prerequisite is enabling **USB Debugging** through **Developer Options**, which you enable by tapping **Build Number seven times**. On Xiaomi devices with MIUI, you may also need to enable **Install via USB**, as described in this [ADB setup reference on dev.to](https://dev.to/larsonzhong/most-complete-adb-commands-4pcg).
+Common combinations:
 
-That leaves a short checklist:
+```bash
+adb install -r app-debug.apk
+adb install -r -g app-debug.apk
+adb install -r -d older-build.apk
+adb install -r -t internal-test.apk
+```
 
-- **Activate Developer Options:** tap Build Number seven times.
-- **Enable USB Debugging:** this is the setting ADB needs.
-- **Watch for OEM extras:** Xiaomi is the classic example.
-- **Connect with a reliable cable:** charging-only cables waste time.
+**`-r`** is the default habit for iterative development. Without it, Android often returns `INSTALL_FAILED_ALREADY_EXISTS` when the package is already present.
 
-> The prompt on the phone matters as much as the cable. If you miss “Allow USB debugging?”, the computer may see the device but ADB still won't be allowed to use it.
+**`-d`** is for deliberate downgrade testing. Without it, a lower `versionCode` triggers `INSTALL_FAILED_VERSION_DOWNGRADE`.
 
-When you first connect, Android should ask whether to trust the computer. Accept it, and if this is your development machine, allow it permanently. If you skip that prompt, the rest of the workflow fails later and looks more mysterious than it really is.
+**`-g`** skips the permission dialog on install. It does not remove the need to test permission flows on a clean install.
 
-<a id="the-core-adb-install-apk-workflow"></a>
-## The Core Adb Install Apk Workflow
+**`-t`** is required when the manifest sets `android:testOnly="true"`. Without it you get `INSTALL_FAILED_TEST_ONLY`.
 
-Once setup is done, the install path is short. A common mistake is skipping the one check that tells them whether the next command has any chance of working.
+Release builds must be signed consistently. If you generate a new upload key, the [Android keystore generator](https://capgo.app/tools/android-keystore-generator/) documents fingerprints and PKCS#12 output. Signing with a different key than the installed app produces `INSTALL_FAILED_UPDATE_INCOMPATIBLE`.
 
-![A Dell laptop showing ADB device connection status in the terminal with a connected Android smartphone nearby.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/8d1b3038-0d7e-40a2-b5c1-9c2507389809/adb-install-apk-verify-device.jpg)
+<a id="multiple-devices-with--s"></a>
 
-<a id="check-the-device-before-you-install"></a>
-### Check the Device Before You Install
+## Multiple devices with -s
 
-Run this first:
+When more than one device or emulator is attached, `adb install` may fail with **more than one device/emulator**. List serials:
 
-> `adb devices`
+```bash
+adb devices
+```
 
-You want to see a connected serial number with a healthy device state. If the device appears as unauthorized, stop there and fix authorization before you try to install anything.
+Target one serial with `-s`:
 
-For teams juggling debug, QA, and release-candidate outputs, it also helps to be clear about what kind of build you're pushing. This overview of [mobile app build types](https://capgo.app/blog/types-of-builds/) is a good reference if your folder is full of similarly named APKs.
+```bash
+adb -s SERIAL install -r app-debug.apk
+```
 
-<a id="run-the-install-command"></a>
-### Run the Install Command
+Replace `SERIAL` with the value from the first column of `adb devices`.
 
-The base command is straightforward:
+<a id="install-apk-over-wi-fi"></a>
 
-> `adb install path/to/your-app.apk`
+## Install APK over Wi-Fi
 
-If the path contains spaces, quote it in your shell. If you're in the same folder as the APK, the command gets even shorter:
+**Android 11 and later (Wireless debugging):**
 
-> `adb install app-debug.apk`
+1. On the phone: **Settings → Developer options → Wireless debugging**. Note IP, port, and pairing code.
+2. On the computer:
 
-A healthy run usually shows a streamed install message and then a success message in the terminal. That's the output you want because it confirms the package manager accepted the APK and completed the install.
+```bash
+adb pair IP:PAIRING_PORT
+```
 
-Here's a walkthrough if you want to see the flow in action:
+Enter the pairing code when prompted.
 
-<iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/RPCqI9M49bA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+3. Connect to the debugging port shown in Wireless debugging:
 
-<a id="why-streamed-install-beats-manual-push-and-pm-install"></a>
-### Why Streamed Install Beats Manual Push and Pm Install
+```bash
+adb connect IP:DEBUG_PORT
+adb devices
+```
 
-Under the hood, `adb install` is doing more than copying a file. Internally, it pushes the APK to **`/data/local/tmp`**, invokes **`pm install`**, and then removes the temporary file. The streamed workflow is reflected by terminal output such as **“Performing Streamed Install”** followed by **“Success”**, based on the implementation details summarized in the earlier setup reference.
+4. Run `adb install` as usual.
 
-That matters because it's cleaner than the old two-step habit of doing `adb push` and then invoking package manager commands yourself. In daily practice, streamed install has a few advantages:
+**Older Android (USB first):**
 
-- **Less manual work:** one command handles transfer and install.
-- **Less device clutter:** temporary artifacts are cleaned up automatically.
-- **Fewer chances to drift:** you don't accidentally push one file and install another.
+```bash
+adb tcpip 5555
+adb connect PHONE_IP:5555
+```
 
-> If you can use `adb install`, use it. Manual push plus shell install is useful for edge cases, but it's not the default path for normal app testing.
+Unplug USB after `adb devices` shows the TCP endpoint. Firewall and network isolation can block Wi-Fi ADB on corporate LANs.
 
-For an ADB install APK workflow, that's the core loop: verify device, run install, confirm success, launch app, repeat after the next build.
+<a id="split-apks-with-install-multiple"></a>
 
-<a id="mastering-adb-install-flags-for-faster-workflows"></a>
-## Mastering Adb Install Flags for Faster Workflows
+## Split APKs with install-multiple
 
-The base command gets the APK onto the phone. The flags decide whether that process fits real development or keeps fighting you.
+Play Store bundles and some Gradle outputs ship as multiple APKs (base plus configuration splits). Install every piece in one command:
 
-<a id="common-adb-install-flags-and-their-uses"></a>
-### Common Adb Install Flags and Their Uses
+```bash
+adb install-multiple -r base.apk split_config.xxhdpi.apk split_config.arm64_v8a.apk
+```
 
-| Flag | Description | Common Use Case |
-|---|---|---|
-| `-r` | Reinstall an existing app while keeping app data when possible | Iterating on daily debug builds |
-| `-d` | Allow version downgrade | Testing rollback scenarios or older builds |
-| `-g` | Grant runtime permissions at install time | Speeding up tests for camera, storage, location, and similar features |
+For a full debug output folder, pass all `.apk` files. Order usually does not matter as long as the base module is included. A missing split causes `INSTALL_FAILED_INVALID_APK` or incomplete installs.
 
-The flag that matters most for regular development is `-r`.
+<a id="launch-the-app-after-install"></a>
 
-Without it, updating an already installed package often fails because Android treats the new APK as a conflicting install attempt rather than a replacement. That's why many developers make `adb install -r app-debug.apk` their default muscle memory.
+## Launch the app after install
 
-<a id="which-flags-matter-in-daily-development"></a>
-### Which Flags Matter in Daily Development
+**Known launcher activity** (from `AndroidManifest.xml`):
 
-`-r` is the one you'll use constantly. If you're testing a Capacitor app and rebuilding several times an hour, uninstalling the app on every cycle is slow and wipes useful local state. Reinstall lets you keep moving.
+```bash
+adb shell am start -n com.example.app/.MainActivity
+```
 
-`-d` is more situational, but when you need it, you really need it. It's useful for regression testing, rollback drills, or checking whether an older build still opens a legacy database correctly.
+**Quick smoke test** when you only know the package name:
 
-`-g` is a quality-of-life flag. If your app touches permissions early, automatic grants remove some repetitive tapping from device setup. It won't replace proper permission testing, but it's handy when you need to get through install and launch quickly.
+```bash
+adb shell monkey -p com.example.app -c android.intent.category.LAUNCHER 1
+```
 
-A few combinations come up often:
+`monkey` fires one launch intent. It is not a full UI test, but it confirms the app opens after install.
 
-> `adb install -r app-debug.apk`
+View logs:
 
-> `adb install -r -g app-debug.apk`
+```bash
+adb logcat
+```
 
-> `adb install -r -d older-build.apk`
+<a id="uninstall-with-adb"></a>
 
-There's a trade-off with all flags. More convenience can hide real-world user conditions. If you auto-grant everything every time, you may miss a runtime permission edge case. If you always reinstall over old data, you may miss first-launch problems.
+## Uninstall with adb
 
-That's why experienced teams usually split their habits:
+Remove by package name (not APK path):
 
-- **Fast loop builds:** use `-r`, sometimes `-g`.
-- **Clean-state checks:** uninstall first, then install fresh.
-- **Rollback testing:** use `-d` only when version movement is the thing being tested.
+```bash
+adb uninstall com.example.app
+```
 
-If you want a broader refresher on the command-line side of Capacitor development, this guide to [common Capacitor CLI commands and fixes](https://capgo.app/blog/capacitor-cli-commands-common-issues-and-fixes/) fits well alongside an ADB-focused workflow.
+Keep app data for a later clean install test:
 
-<a id="troubleshooting-common-installation-failures"></a>
-## Troubleshooting Common Installation Failures
+```bash
+adb uninstall -k com.example.app
+```
 
-ADB is reliable enough that repeated failures usually point to a specific problem. The trick is to stop treating install errors as random. They tend to cluster around authorization, package replacement, and package identity.
+Use uninstall when you need first-launch behavior or to clear a signing mismatch. Use `adb install -r` when you only need a faster update loop.
 
-![A troubleshooting checklist for common Android Debug Bridge (ADB) installation errors and solutions for developers.](https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/a875404f-77de-46f7-8576-0285eada4efb/adb-install-apk-troubleshooting-checklist.jpg)
+<a id="capacitor-example"></a>
 
-<a id="when-the-device-shows-as-unauthorized"></a>
-### When the Device Shows as Unauthorized
+## Capacitor example
 
-Symptom:
+Typical Capacitor loop:
 
-> `adb devices` shows `unauthorized`
+```bash
+bunx cap sync android
+```
 
-Root cause: the phone hasn't trusted your computer yet, or the prompt was dismissed.
+Build the debug APK, then:
 
-Fix it in this order:
+```bash
+adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+```
 
-1. **Reconnect the device** and dismiss the lock screen.
-2. **Look for the RSA authorization prompt** on the phone.
-3. **Approve the prompt**, ideally with the “always allow” option for your dev machine.
-4. If it still doesn't recover, restart the ADB server:
+For release candidate testing before Play upload, sign with the same key you will use in the store. Mismatched keys between sideload and Play installs are a common source of `INSTALL_FAILED_UPDATE_INCOMPATIBLE`.
 
-> `adb kill-server`
+<a id="troubleshooting-install-errors"></a>
 
-> `adb start-server`
+## Troubleshooting install errors
 
-This is one of those cases where the terminal makes the problem look technical, but the actual fix is often on the phone itself.
+| Error or symptom | Likely cause | What to try |
+| --- | --- | --- |
+| `unauthorized` in `adb devices` | RSA prompt not accepted | Unlock phone, approve USB debugging, `adb kill-server` then `adb start-server` |
+| `no devices/emulators found` | Cable, driver, or debugging off | New cable, enable USB debugging, Windows Google USB driver if needed |
+| `INSTALL_FAILED_ALREADY_EXISTS` | Same package without `-r` | `adb install -r app.apk` or `adb uninstall` first |
+| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | Different signing key | Uninstall old app, or install build signed with same key |
+| `INSTALL_FAILED_VERSION_DOWNGRADE` | Lower versionCode | `adb install -r -d app.apk` or bump version |
+| `INSTALL_FAILED_INSUFFICIENT_STORAGE` | Low disk space | Free space on device, remove unused apps |
+| `INSTALL_FAILED_TEST_ONLY` | testOnly APK | `adb install -t app.apk` for trusted test builds only |
+| `INSTALL_FAILED_INVALID_APK` | Corrupt or wrong split set | Rebuild APK, pass all splits to `install-multiple` |
+| `more than one device/emulator` | Several targets connected | `adb -s SERIAL install ...` |
 
-<a id="when-the-package-already-exists"></a>
-### When the Package Already Exists
+### device unauthorized
 
-Symptom:
+`adb devices` shows:
 
-> `INSTALL_FAILED_ALREADY_EXISTS`
+```text
+XXXXXXXX    unauthorized
+```
 
-This usually means you're trying to install over an existing package without using the replace flag. That common pitfall is documented in this [Stack Overflow discussion of ADB install failures](https://stackoverflow.com/questions/63513361/android-studio-stuck-at-installing-apk-the-adb-sometimes-fails-to-install-the-a).
+Fix on the phone, not only in the terminal:
 
-The quickest fix is:
+1. Replug USB and dismiss the lock screen.
+2. Tap **Allow** on **Allow USB debugging?**
+3. Check **Always allow from this computer** for your dev machine.
+4. Restart ADB:
 
-> `adb install -r app-debug.apk`
+```bash
+adb kill-server
+adb start-server
+adb devices
+```
 
-If you need a clean install instead of an upgrade, uninstall first:
+### no devices/emulators found
 
-> `adb uninstall your.package.name`
+- Confirm USB debugging is on (see [developer options](https://capgo.app/blog/how-to-enable-developer-options-on-android/)).
+- Try another USB port and cable.
+- On Windows, install the Google USB driver from SDK Manager if the OEM driver is missing.
+- For emulators, start the AVD before `adb install`.
 
-Use the reinstall path for routine iteration. Use uninstall only when you want to clear local app state or verify first-run behavior.
+### INSTALL_FAILED_UPDATE_INCOMPATIBLE
 
-<a id="when-signatures-and-old-package-state-collide"></a>
-### When Signatures and Old Package State Collide
+The installed app was signed with a different certificate than the APK you are pushing. Common when mixing debug and release, or after rotating upload keys without uninstalling.
 
-Some failures aren't about the APK file itself. They're about what Android remembers about the package.
+Fix:
 
-Two patterns show up often:
+```bash
+adb uninstall com.example.app
+adb install app.apk
+```
 
-- **Signature mismatch:** the installed app was signed with a different key than the APK you're trying to install.
-- **Duplicate package state:** package remnants survive an uninstall and block the next install.
+Or always install builds signed with the same key as the app already on the device.
 
-The second one is especially frustrating because it can survive what looks like a successful uninstall. On newer Android versions, legacy uninstall behavior can leave behind package state that triggers `INSTALL_FAILED_DUPLICATE_PACKAGE`, as noted in the source above.
+### INSTALL_FAILED_VERSION_DOWNGRADE
 
-A practical diagnostic flow looks like this:
+The APK `versionCode` is lower than the installed version.
 
-- **First, confirm package identity:** make sure the package name is the one you think it is.
-- **Next, check signing consistency:** debug-signed and release-signed builds don't replace each other cleanly.
-- **Then remove the installed package:** use the normal uninstall path first.
-- **If the error persists:** treat it as stale package state, not a random ADB glitch.
+Fix for intentional rollback testing:
 
-There's another wrinkle with debug APKs distributed outside normal dev tooling. Some teams notice the same build installs through ADB but fails when manually sideloaded from messaging or email. That behavior can be tied to Android's context-aware verification of debug-signed apps, which is discussed in this [guide to resolving app install errors on Android](https://bayton.org/android/resolve-app-install-errors/). In practice, that's why QA teams should prefer ADB for internal debug distribution instead of relying on ad hoc manual sideloading.
+```bash
+adb install -r -d older.apk
+```
 
-> **Field note:** If a build installs through ADB but not through manual tap-to-install, don't assume the APK is broken. Check signing context and install path first.
+For production testing, prefer uninstall or bump `versionCode` instead of downgrading.
 
-For Capacitor projects that keep throwing build and deploy issues across native and web layers, this troubleshooting guide for [resolving Android build errors in Capacitor](https://capgo.app/blog/how-to-resolve-android-build-errors-in-capacitor/) is worth keeping nearby.
+### INSTALL_FAILED_INSUFFICIENT_STORAGE
 
-<a id="a-complete-example-for-capacitor-developers"></a>
-## A Complete Example for Capacitor Developers
+The device cannot allocate space for the package. Remove apps or media, then retry. Very large APKs on low-storage test phones hit this often.
 
-In a Capacitor project, the terminal loop is usually short. You sync native files, build the Android app, and push the resulting APK to a connected device without opening Android Studio unless you need native debugging.
+### INSTALL_FAILED_TEST_ONLY
 
-A simple example looks like this:
+The build is marked test-only. For your own CI artifacts:
 
-> `npx cap sync android`
+```bash
+adb install -t -r app.apk
+```
 
-Build the debug APK from your usual Android build step, then install it with replacement enabled:
-
-> `adb install -r android/app/build/outputs/apk/debug/app-debug.apk`
-
-That's the workflow many teams lean on because it keeps the feedback loop tight. For **CapacitorJS** apps, where teams ship differential updates, `adb install` is especially important. IBM research found that **78% of Android-based mobile teams** preferred it over Play Store submission for real-time JavaScript and CSS fixes, according to this [video reference covering ADB-based APK installation in enterprise workflows](https://www.youtube.com/watch?v=-g1ibicltbA).
-
-If you're still setting up the project side of that workflow, this [Capacitor CLI installation guide](https://capgo.app/blog/installing-capacitor-cli-step-by-step-guide/) is a solid starting point.
+Do not use `-t` to sideload untrusted APKs.
 
 ---
 
-If your team uses Capacitor and wants to ship JavaScript, CSS, config, and asset fixes without waiting on app store review, [Capgo](https://capgo.app) is built for that workflow. It gives you signed live updates, staged rollouts, rollback protection, and per-device visibility so you can move faster without losing control.
+For Capacitor teams that fix JavaScript, styles, and config without waiting on store review, [Capgo](https://capgo.app/) supports signed live updates, channels, and rollbacks alongside native store releases.
