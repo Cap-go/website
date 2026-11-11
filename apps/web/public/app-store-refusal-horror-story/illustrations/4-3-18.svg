@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="New game in a series compared against the developer own earlier titles">
+  <title>New game in a series compared against the developer own earlier titles</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="24" y="44" width="72" height="112" rx="14" fill="#111827" stroke="#9CA3AF" stroke-width="2" opacity="0.55"/>
+  <rect x="36" y="58" width="48" height="48" rx="10" fill="#374151"/>
+  <circle cx="60" cy="74" r="10" fill="#44BCFF" opacity="0.25"/>
+  <rect x="40" y="112" width="40" height="6" rx="3" fill="#9CA3AF" opacity="0.3"/>
+  <rect x="40" y="124" width="32" height="6" rx="3" fill="#9CA3AF" opacity="0.25"/>
+  <text x="36" y="36" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8" opacity="0.6">earlier</text>
+  <rect x="108" y="44" width="72" height="112" rx="14" fill="#111827" stroke="#9CA3AF" stroke-width="2" opacity="0.55"/>
+  <rect x="120" y="58" width="48" height="48" rx="10" fill="#374151"/>
+  <circle cx="144" cy="74" r="10" fill="#44BCFF" opacity="0.22"/>
+  <rect x="124" y="112" width="40" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="124" y="124" width="32" height="6" rx="3" fill="#9CA3AF" opacity="0.22"/>
+  <path d="M192 88 L208 88" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="208,88 200,84 200,92" fill="#EF4444"/>
+  <rect x="216" y="36" width="80" height="120" rx="14" fill="#111827" stroke="#EF4444" stroke-width="2.5"/>
+  <rect x="232" y="52" width="48" height="48" rx="10" fill="#1F2937" stroke="#44BCFF" stroke-width="1.5"/>
+  <circle cx="256" cy="68" r="10" fill="#44BCFF" opacity="0.45"/>
+  <rect x="232" y="108" width="48" height="8" rx="4" fill="#44BCFF" opacity="0.35"/>
+  <rect x="232" y="122" width="40" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="232" y="134" width="36" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <text x="224" y="28" fill="#EF4444" font-family="system-ui,sans-serif" font-size="10" font-weight="600">4.3(a)</text>
+  <path d="M96 88 Q156 64 216 88" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.5"/>
+  <rect x="132" y="168" width="56" height="14" rx="7" fill="#111827" stroke="#374151" stroke-width="1.5"/>
+  <text x="160" y="179" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8" opacity="0.75">same series</text>
+</svg>

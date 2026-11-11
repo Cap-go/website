@@ -311,5 +311,13 @@
   "cancel-are-you-sure-screen-rejected-week-before-retention-messaging": null,
   "subscription-sdk-bundled-web-checkout-5-6-hidden-features-cleared-by-reply": null,
   "app-preview-framing-2-3-4-same-video-passed-a-month-earlier": null,
-  "mac-update-45-days-in-review-then-3-2-f-notice": null
+  "mac-update-45-days-in-review-then-3-2-f-notice": null,
+  "paid-step-challenge-3-2-2-penalty-model-rejected-at-concept-level": null,
+  "update-5-6-hidden-features-same-rejection-after-three-week-rereview": {
+    "src": "/app-store-refusal-horror-story/screenshots/update-5-6-hidden-features-same-rejection-after-three-week-rereview.webp",
+    "alt": "Guideline 5.6 rejection notice saying the app contains features that appear intentionally hidden during review",
+    "width": 721,
+    "height": 1008
+  },
+  "series-game-4-3-a-too-similar-to-own-earlier-games": null
 }
