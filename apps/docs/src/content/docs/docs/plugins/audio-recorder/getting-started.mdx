@@ -114,7 +114,7 @@ try {
 **iOS**
 
 - Interrupted `'aac'` recordings are merged into one `.aac` when joining succeeds.
-- When joining fails (for example disk full), `stopRecording` can **resolve** with `mergeFailed: true`, a fallback `uri`, and `segments: string[]` listing every segment in order. You can concatenate ADTS segments yourself or retry upload per segment.
+- When joining fails (for example disk full), `stopRecording` can **resolve** with `mergeFailed: true`, a fallback `uri`, and `segments: string[]` listing every segment in order. For manual recovery, do not blindly concatenate raw files: a segment can end with an incomplete ADTS frame, and naive concatenation can break playback of what follows. Copy only complete frames from each segment (the plugin's join logic does this), or upload each segment separately and stitch server-side.
 - When finalization fails with no usable fallback segment, `stopRecording` **rejects** but segment files remain on disk.
 
 ```typescript
