@@ -3170,6 +3170,9 @@ function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): stri
 }
 
 const STRUCTURED_DATA_URL_KEYS = new Set(['url', '@id', 'item'])
+// Entities that describe the whole site: their URL and @id are the same on every page and in every language.
+const STRUCTURED_DATA_SITE_TYPES = new Set(['Organization', 'WebSite', 'Person'])
+const STRUCTURED_DATA_SITE_ID_HASHES = new Set(['#organization', '#website'])
 
 // JSON-LD is copied from the English page untouched. Point the page's own URL and its breadcrumb
 // trail at the localized paths so structured data agrees with the canonical URL of the translated page.
@@ -3180,15 +3183,18 @@ function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, b
     try {
       const url = new URL(value)
       const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`
-      return url.host === requestUrl.host && pathname === pagePath
+      return url.host === requestUrl.host && pathname === pagePath && !STRUCTURED_DATA_SITE_ID_HASHES.has(url.hash)
     } catch {
       return false
     }
   }
+  const isSiteEntity = (type: unknown): boolean => (Array.isArray(type) ? type : [type]).some((entry) => typeof entry === 'string' && STRUCTURED_DATA_SITE_TYPES.has(entry))
   const walk = (node: unknown, inBreadcrumb: boolean): unknown => {
     if (Array.isArray(node)) return node.map((entry) => walk(entry, inBreadcrumb))
     if (!node || typeof node !== 'object') return node
     const record = node as Record<string, unknown>
+    // On the homepage the site entities share the page URL, so they are matched by type and left alone.
+    if (!inBreadcrumb && isSiteEntity(record['@type'])) return node
     const breadcrumb = inBreadcrumb || record['@type'] === 'BreadcrumbList'
     const result: Record<string, unknown> = {}
     let describesPage = false

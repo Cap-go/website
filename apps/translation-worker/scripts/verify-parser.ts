@@ -1387,4 +1387,19 @@ try {
   assert(structuredArticle['@id'] === 'https://capgo.app/fr/blog/post/#newsarticle' && structuredArticle.mainEntityOfPage['@id'] === 'https://capgo.app/fr/blog/post/', 'Article JSON-LD ids were not localized')
   assert(structuredArticle.publisher.url === 'https://capgo.app/' && structuredArticle.publisher['@id'] === 'https://capgo.app/#organization', 'Organization identity must keep its English URL')
   assert(structuredBreadcrumb.itemListElement[0].item.url === 'https://capgo.app/fr/' && structuredBreadcrumb.itemListElement[1].item.url === 'https://capgo.app/fr/blog/', 'Breadcrumb JSON-LD URLs were not localized')
+
+  const homeStructuredHtml = `<html><head><script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'SoftwareApplication', url: 'https://capgo.app/', publisher: { '@id': 'https://capgo.app/#organization' } },
+      { '@type': 'Organization', '@id': 'https://capgo.app/#organization', url: 'https://capgo.app/' },
+      { '@type': 'WebSite', '@id': 'https://capgo.app/#website', url: 'https://capgo.app/', publisher: { '@id': 'https://capgo.app/#organization' } },
+    ],
+  })}</script></head><body></body></html>`
+  const homeStructuredRendered = __translationWorkerTest.rewriteMetadataAndLinks(homeStructuredHtml, new URL('https://capgo.app/fr/'), 'fr')
+  const [homeApp, homeOrganization, homeWebSite] = JSON.parse(homeStructuredRendered.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}')['@graph']
+  assert(homeApp.url === 'https://capgo.app/fr/', 'Homepage entity URL was not localized')
+  assert(homeApp.publisher['@id'] === 'https://capgo.app/#organization', 'Homepage reference to the organization was localized')
+  assert(homeOrganization.url === 'https://capgo.app/' && homeOrganization['@id'] === 'https://capgo.app/#organization', 'Organization identity changed on a translated homepage')
+  assert(homeWebSite.url === 'https://capgo.app/' && homeWebSite['@id'] === 'https://capgo.app/#website', 'WebSite identity changed on a translated homepage')
 }
