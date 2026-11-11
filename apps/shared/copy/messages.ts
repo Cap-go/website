@@ -1420,7 +1420,7 @@ const messages = {
   nav_live_update_data: 'Live Update data',
   nav_native_build_data: 'Native Build data',
   plugins_ai_engineering_body:
-    'Capgo builds, improves, and fixes its Capacitor plugins with heavy use of AI in our own engineering workflow. Most plugin issues get a fix pull request the same day; every pull request gets automated review, then a human merge. Your app does not need AI to use our plugins.',
+    'Capgo builds, improves, and fixes its Capacitor plugins with heavy use of AI in our own engineering workflow. Most plugin issues get a fix pull request the same day; every pull request gets automated review first. 50+ pull requests merged daily by a human. Your app does not need AI to use our plugins.',
   plugins_ai_engineering_cta: 'How we maintain plugins',
   plugins_ai_engineering_title: 'AI-accelerated plugin maintenance',
   plugins_license_body: 'Every Capgo plugin is free to use under the Mozilla Public License 2.0, including in commercial apps. Read, fork, and audit the source on GitHub.',
@@ -6495,7 +6495,7 @@ const messages = {
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
   why_capgo_plugin_engineering_body:
-    'Capgo maintains its Capacitor plugin library with AI-assisted engineering behind the scenes. Fixes move quickly, with automated review on every pull request and a human merge. Using Capgo in your app stays AI-optional.',
+    'Capgo maintains its Capacitor plugin library with AI-assisted engineering behind the scenes. Fixes move quickly, with automated review on every pull request. 50+ pull requests merged daily by a human. Using Capgo in your app stays AI-optional.',
   why_capgo_plugin_engineering_link: 'Read how we ship plugin fixes',
   why_capgo_plugin_engineering_title: 'Plugins kept current at high velocity',
   why_capgo_security_title: 'Independently audited security',
