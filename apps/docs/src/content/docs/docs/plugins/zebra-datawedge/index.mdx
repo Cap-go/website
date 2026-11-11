@@ -40,7 +40,7 @@ Start with `cloneProfile()` and the other core methods listed below.
 
 ## Native scan sessions
 
-Use `beginScanSession()` for a finite scan flow that releases scanner input on cancel, pause, or a native deadline. Check support with `getScanSessionCapabilities()`. Existing low-level methods stay available if you manage DataWedge yourself.
+Use `beginScanSession()` for a finite scan flow. Automatic cleanup on cancel, pause, or a native deadline is best-effort and does not confirm scanner release, so await `endScanSession()`. Check support with `getScanSessionCapabilities()`. Existing low-level methods stay available if you manage DataWedge yourself.
 
 See [Native scan sessions](/docs/plugins/zebra-datawedge/scan-sessions/). These APIs ship in [capacitor-zebra-datawedge PR #30](https://github.com/Cap-go/capacitor-zebra-datawedge/pull/30).
 
