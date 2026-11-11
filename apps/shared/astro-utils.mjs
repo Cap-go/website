@@ -1,6 +1,6 @@
 import { glob } from 'glob'
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import os from 'node:os'
 
 export function getBuildConcurrency() {
@@ -98,6 +98,8 @@ export function getPageLastModDates() {
   return lastModMap
 }
 
+const GIT_BINARY_PATHS = ['/usr/bin/git', '/usr/local/bin/git', '/opt/homebrew/bin/git']
+
 /**
  * Last commit date of every file under `directory`, keyed by its path relative to the app.
  * Returns an empty map when git history is missing or shallow, because a shallow clone
@@ -106,7 +108,10 @@ export function getPageLastModDates() {
 export function getPageCommitDates(directory) {
   const commitDates = new Map()
   try {
-    const git = (args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] })
+    // Absolute path only: the build must not run whatever `git` happens to come first on PATH.
+    const gitBinary = GIT_BINARY_PATHS.find((candidate) => existsSync(candidate))
+    if (!gitBinary) return commitDates
+    const git = (args) => execFileSync(gitBinary, args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] })
     if (git(['rev-parse', '--is-shallow-repository']).trim() !== 'false') return commitDates
 
     let committedAt = null

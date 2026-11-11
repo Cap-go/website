@@ -1361,7 +1361,7 @@ try {
   const expandedMeta = __translationWorkerTest.expandShortMetaDescriptions(shortMeta, 'fr')
   assert(expandedMeta.includes('Privacy &amp; Security guide.') && !expandedMeta.includes('&amp;amp;'), 'Meta description expansion double-escaped an ampersand')
 
-  const longDescription = 'Kostenloser iPhone-UDID-Finder. Ermitteln Sie die UDID Ihres iPhones oder iPads in Sekunden über Safari, ohne iTunes, Finder, Xcode oder Mac, inklusive Mobilgeräteprofil und Anleitung.'
+  const longDescription = 'Free iPhone UDID finder that reads the identifier of your iPhone or iPad in seconds through Safari, without iTunes, Finder, Xcode or a Mac, including the device profile and a walkthrough.'
   const truncated = __translationWorkerTest.truncateSeoDescription(longDescription)
   assert(truncated.length <= 159, 'Truncated description is longer than the limit')
   assert(longDescription.startsWith(truncated.replace(/\.\.\.$/, '')), 'Truncated description is not a prefix of the source')
