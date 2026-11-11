@@ -3169,6 +3169,25 @@ function rewriteMetadataForEnglishCanonical(html: string, requestUrl: URL): stri
   return rewritten
 }
 
+type LocalizedHtmlOptions = { preserveDocumentLanguage?: boolean; structuredDataLabels?: ReadonlyMap<string, string> }
+
+// Maps each English text on the page to its translation, so JSON-LD labels can reuse the visible wording.
+// Visible text wins over attribute text, and the first occurrence wins when a label is translated twice.
+function collectStructuredDataLabels(segments: Segment[], translations: string[]): Map<string, string> {
+  const labels = new Map<string, string>()
+  for (const mode of ['text', 'attribute'] as const) {
+    for (let index = 0; index < segments.length; index += 1) {
+      const segment = segments[index]
+      const translated = translations[index]
+      if (segment.mode !== mode || !segment.inBody || typeof translated !== 'string') continue
+      const source = decodeHtmlEntities(segment.text).trim()
+      const target = decodeHtmlEntities(translated).trim()
+      if (source && target && !labels.has(source)) labels.set(source, target)
+    }
+  }
+  return labels
+}
+
 const STRUCTURED_DATA_URL_KEYS = new Set(['url', '@id', 'item'])
 // Entities that describe the whole site: their URL and @id are the same on every page and in every language.
 const STRUCTURED_DATA_SITE_TYPES = new Set(['Organization', 'WebSite', 'Person'])
@@ -3177,7 +3196,8 @@ const STRUCTURED_DATA_SITE_ID_HASHES = new Set(['#organization', '#website'])
 // JSON-LD is copied from the English page untouched. Point the page's own URL and its breadcrumb
 // trail at the localized paths so structured data agrees with the canonical URL of the translated page.
 // Site-wide identities (organization, website) keep their English URL on purpose.
-function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, basePath: string): string {
+// Breadcrumb names reuse the translation already made for the same visible text, when there is one.
+function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, basePath: string, labels?: ReadonlyMap<string, string>): string {
   const pagePath = basePath.endsWith('/') ? basePath : `${basePath}/`
   const isPageUrl = (value: string): boolean => {
     try {
@@ -3202,6 +3222,8 @@ function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, b
       if (typeof value === 'string' && STRUCTURED_DATA_URL_KEYS.has(key) && (breadcrumb || isPageUrl(value))) {
         result[key] = localizeHref(value, locale, requestUrl)
         if (key === 'url' && !breadcrumb) describesPage = true
+      } else if (typeof value === 'string' && key === 'name' && breadcrumb) {
+        result[key] = labels?.get(value.trim()) ?? value
       } else {
         result[key] = walk(value, breadcrumb)
       }
@@ -3219,7 +3241,7 @@ function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, b
   })
 }
 
-function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, options?: { preserveDocumentLanguage?: boolean }): string {
+function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, options?: LocalizedHtmlOptions): string {
   const basePath = stripLocalePrefix(requestUrl.pathname)
   const localizedUrl = localizedAbsoluteUrl(requestUrl, locale, basePath)
   let rewritten = options?.preserveDocumentLanguage ? html : updateHtmlLang(html, locale)
@@ -3231,7 +3253,7 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, 
   rewritten = setMetaContent(rewritten, 'property', 'twitter:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'name', 'twitter:url', localizedUrl)
   rewritten = localizeUrlAttributes(rewritten, locale, basePath, requestUrl)
-  rewritten = localizeStructuredData(rewritten, requestUrl, locale, basePath)
+  rewritten = localizeStructuredData(rewritten, requestUrl, locale, basePath, options?.structuredDataLabels)
   rewritten = expandShortMetaDescriptions(rewritten, locale)
   rewritten = updateFooterLanguageButton(rewritten, locale)
   if (!rewritten.includes('capgo-edge-language-selector-hash')) {
@@ -3349,7 +3371,7 @@ function createTranslatedHtmlResponse(
   translatedHtml: string,
   requestUrl: URL,
   locale: Locale,
-  options?: { preserveDocumentLanguage?: boolean },
+  options?: LocalizedHtmlOptions,
 ): Response {
   const localizedHtml = rewriteMetadataAndLinks(translatedHtml, requestUrl, locale, options)
   const headers = new Headers(originResponse.headers)
@@ -3516,7 +3538,9 @@ async function refreshCacheIncrementally(
     translatedHtml = renderTranslatedHtml(parts, segments, translations)
     assertRenderedNavLinkIntegrity(source.sourceHtml, translatedHtml)
   }
-  const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale)
+  const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale, {
+    structuredDataLabels: collectStructuredDataLabels(segments, translations),
+  })
   if (response.ok && isHtmlResponse(response)) {
     const cachedResponse = toCachedResponse(response.clone(), sourceHash)
     await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
@@ -4137,6 +4161,7 @@ export const __translationWorkerTest = {
   expandShortMetaDescriptions,
   isCrawlerRequest,
   rewriteMetadataAndLinks,
+  collectStructuredDataLabels,
   rewriteMetadataForEnglishCanonical,
   resolveTranslationContexts,
   syncExecutableScriptsFromEnglish,

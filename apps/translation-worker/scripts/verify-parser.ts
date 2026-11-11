@@ -1388,6 +1388,21 @@ try {
   assert(structuredArticle.publisher.url === 'https://capgo.app/' && structuredArticle.publisher['@id'] === 'https://capgo.app/#organization', 'Organization identity must keep its English URL')
   assert(structuredBreadcrumb.itemListElement[0].item.url === 'https://capgo.app/fr/' && structuredBreadcrumb.itemListElement[1].item.url === 'https://capgo.app/fr/blog/', 'Breadcrumb JSON-LD URLs were not localized')
 
+  const labelSource = '<html><body><nav aria-label="Breadcrumb"><a href="/blog/">Blog</a><a href="/blog/category/tutorial/">Tips &amp; Tricks</a></nav><img alt="Blog" src="/a.png" /></body></html>'
+  const labelSegments = __translationWorkerTest.collectSegments(labelSource).segments
+  const labelTranslations = labelSegments.map((segment) => ({ Breadcrumb: 'Fil', Blog: segment.mode === 'attribute' ? 'Image du blog' : 'Blogue', 'Tips &amp; Tricks': 'Trucs &amp; astuces' })[segment.text] ?? segment.text)
+  const structuredLabels = __translationWorkerTest.collectStructuredDataLabels(labelSegments, labelTranslations)
+  assert(structuredLabels.get('Blog') === 'Blogue', 'Visible text must win over attribute text for a structured data label')
+  assert(structuredLabels.get('Tips & Tricks') === 'Trucs & astuces', 'Structured data labels must be keyed and stored without HTML entities')
+  const labelledHtml = structuredHtml.replace('"name":"Blog"', '"name":"Tips & Tricks"')
+  const labelledData = JSON.parse(
+    __translationWorkerTest.rewriteMetadataAndLinks(labelledHtml, new URL('https://capgo.app/fr/blog/post/'), 'fr', { structuredDataLabels: structuredLabels }).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}',
+  )
+  const labelledItems = labelledData['@graph'][1].itemListElement
+  assert(labelledItems[1].item.name === 'Trucs & astuces', 'Breadcrumb JSON-LD name did not reuse the visible translation')
+  assert(labelledItems[0].item.name === 'Capgo', 'Breadcrumb JSON-LD name without a visible translation must stay unchanged')
+  assert(structuredBreadcrumb.itemListElement[1].item.name === 'Blog', 'Breadcrumb JSON-LD names must stay unchanged when no labels are passed')
+
   const homeStructuredHtml = `<html><head><script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
