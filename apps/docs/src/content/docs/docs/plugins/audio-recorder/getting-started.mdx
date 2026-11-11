@@ -56,6 +56,76 @@ const clipRef = Capacitor.getPlatform() === 'web' ? blob : uri;
 console.log('Saved clip', clipRef, duration);
 ```
 
+## Crash-safe recording (`format: 'aac'`)
+
+Requires `@capgo/capacitor-audio-recorder` **8.4.0** or newer from [capacitor-audio-recorder PR #35](https://github.com/Cap-go/capacitor-audio-recorder/pull/35/). Merge and release that plugin change before relying on this API in production.
+
+### When to use it
+
+Use `format: 'aac'` for irreplaceable audio: interviews, compliance notes, medical or legal memos, and any clip where losing the whole file is worse than losing the tail after an abnormal end.
+
+Keep the default `format: 'm4a'` when you control the lifecycle (short clips, always in foreground, you can tolerate losing a take on crash) or when downstream tools expect `.m4a` and never `.aac`.
+
+### How it works
+
+| `format` | Container | After an abnormal end (crash, kill, dead battery) |
+| --- | --- | --- |
+| `'m4a'` (default) | MPEG-4 AAC in `.m4a` | Often **unreadable** until `moov` is written at `stop()` |
+| `'aac'` | ADTS AAC in `.aac` | **Readable** up to the last complete frame |
+
+Encoding settings are the same AAC bit rate and sample rate you already pass to `startRecording`. Web ignores `format` and keeps using the browser `MediaRecorder`.
+
+```typescript
+await CapacitorAudioRecorder.startRecording({
+  format: 'aac',
+  sampleRate: 44100,
+  bitRate: 128000,
+});
+```
+
+### Tradeoffs
+
+- **Playback and sharing**: `.aac` (ADTS) is widely supported on mobile but some desktop pipelines expect `.m4a`. Convert in your backend if reviewers require MPEG-4.
+- **File size and seeking**: ADTS has no index like MPEG-4. Seeking and duration metadata can be less precise until the file is fully finalized.
+- **iOS interruptions**: Phone calls and audio session handoffs can leave multiple segment files. On stop, the plugin joins ADTS segments without re-encoding when possible.
+
+### Platform notes for `stopRecording`
+
+**Android**
+
+- When `MediaRecorder.stop()` throws, `stopRecording` **rejects** but the file stays on disk. Read `error.data.uri` and `error.data.duration` (milliseconds) from the Capacitor rejection to keep the partial clip.
+
+```typescript
+import type { StopRecordingResult } from '@capgo/capacitor-audio-recorder';
+
+try {
+  const clip = await CapacitorAudioRecorder.stopRecording();
+  await upload(clip.uri!, clip.duration);
+} catch (error: unknown) {
+  const data = (error as { data?: Pick<StopRecordingResult, 'uri' | 'duration'> }).data;
+  if (data?.uri) {
+    await upload(data.uri, data.duration);
+  } else {
+    throw error;
+  }
+}
+```
+
+**iOS**
+
+- Interrupted `'aac'` recordings are merged into one `.aac` when joining succeeds.
+- When joining fails (for example disk full), `stopRecording` can **resolve** with `mergeFailed: true`, a fallback `uri`, and `segments: string[]` listing every segment in order. You can concatenate ADTS segments yourself or retry upload per segment.
+- When finalization fails with no usable fallback segment, `stopRecording` **rejects** but segment files remain on disk.
+
+```typescript
+const result = await CapacitorAudioRecorder.stopRecording();
+if (result.mergeFailed && result.segments?.length) {
+  console.warn('Join failed, segments on disk', result.segments, result.uri);
+}
+```
+
+`startRecording` now rejects when `AVAudioRecorder.record()` returns `false` (for example the mic is in use elsewhere) instead of returning an empty take.
+
 ## Example: voice memo with pause
 
 ```typescript
@@ -91,6 +161,9 @@ await CapacitorAudioRecorder.cancelRecording(); // no file persisted
 ## Common pitfalls
 
 - **Web vs native return shape**: Android and iOS return `uri` from `stopRecording`. Web returns `blob` (and may omit `uri`).
+- **Crash safety vs default format**: only `format: 'aac'` on Android and iOS keeps audio playable after a hard stop. Default `.m4a` needs a clean `stopRecording` to stay readable.
+- **Failed stop on Android**: handle `stopRecording` rejections and read `error.data` for `uri` and `duration` instead of assuming the file was deleted.
+- **iOS merge failures**: when `mergeFailed` is true, use `segments` or the fallback `uri` from the resolved result.
 - **Quiet playback on iOS after recording**: set `resetToPlaybackOnStop: true` in `startRecording` if users play back the clip inside the same session.
 - **Background capture**: the plugin does not enable background audio by itself. On iOS, add the Audio background mode when you need recording while locked.
 - **Do not spam amplitude**: each `getCurrentAmplitude` call crosses the bridge. Use a UI interval, not a tight loop.
@@ -131,6 +204,10 @@ await CapacitorAudioRecorder.resumeRecording();
 
 Stop the current recording and persist the recorded audio.
 
+On Android, when the recorder cannot stop cleanly, the call is rejected and the recording file is kept on disk. The rejection's `data.uri` points to it and `data.duration` reports elapsed time.
+
+On iOS, when the segments of an interrupted `'aac'` recording cannot be joined but a fallback segment exists, the call resolves with `mergeFailed` and `segments`. When finalization fails with no fallback segment, the call is rejected and segment files remain on disk.
+
 ```typescript
 import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
@@ -166,7 +243,7 @@ number in the `[0, 1]` range.
 
 Intended for driving live visualizations such as VU meters or waveforms
 while recording. Returns `0` when no recording is active. Designed for
-UI-rate polling — a 60–100 ms interval is a good starting point for a
+UI-rate polling. A 60 to 100 ms interval is a good starting point for a
 waveform. Avoid calling it in a tight loop; each call crosses the
 JS/native bridge.
 
@@ -234,7 +311,28 @@ export interface StartRecordingOptions {
    * @since 1.0.0
    */
   sampleRate?: number;
+
+  /**
+   * When `true`, reset the iOS `AVAudioSession` category to `.playback` when recording stops or is canceled.
+   *
+   * @since 8.2.10
+   */
+  resetToPlaybackOnStop?: boolean;
+
+  /**
+   * The container the recording is written in. Only available on Android and iOS.
+   *
+   * @default 'm4a'
+   * @since 8.4.0
+   */
+  format?: RecordingFormat;
 }
+```
+
+### `RecordingFormat`
+
+```typescript
+export type RecordingFormat = 'm4a' | 'aac';
 ```
 
 ### `StopRecordingResult`
@@ -261,6 +359,20 @@ export interface StopRecordingResult {
    * @since 1.0.0
    */
   uri?: string;
+
+  /**
+   * `true` when the segments of an interrupted recording could not be joined. Only available on iOS.
+   *
+   * @since 8.4.0
+   */
+  mergeFailed?: boolean;
+
+  /**
+   * Segment URIs in recording order when `mergeFailed` is `true`. Only available on iOS.
+   *
+   * @since 8.4.0
+   */
+  segments?: string[];
 }
 ```
 
@@ -286,7 +398,7 @@ export interface GetCurrentAmplitudeResult {
    * represents silence and `1` represents the maximum level the platform can
    * report. The value is `0` when no recording is active.
    *
-   * Note: the source signal differs between platforms — Android reports the
+   * Note: the source signal differs between platforms. Android reports the
    * peak sample amplitude since the last call, iOS reports the average power
    * in dB converted to linear, and Web reports the RMS of the latest frame.
    * Consumers that need cross-platform parity may want to apply a

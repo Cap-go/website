@@ -20,6 +20,16 @@ hero:
       variant: minimal
 ---
 
+## Crash-safe recording with `format: 'aac'`
+
+Shipped in plugin **8.4.0** ([implementation PR](https://github.com/Cap-go/capacitor-audio-recorder/pull/35/)). `startRecording` accepts `format?: 'm4a' | 'aac'` on Android and iOS. The default `'m4a'` is unchanged for existing apps.
+
+Choose **`'aac'`** when a recording must survive a crash, force quit, low battery, or a killed `mediaserver` process. ADTS writes self contained AAC frames into an `.aac` file, so playback works up to the last complete frame even when `stopRecording` never runs. **`'m4a'`** still fits when you need a standard MPEG-4 container and you always get a clean stop.
+
+On iOS, interrupted `'aac'` segments are joined **byte for byte** when recording stops, without re-encoding or `AVAssetExportSession`. If joining fails, `stopRecording` can still resolve with `mergeFailed` and `segments` so you can recover manually.
+
+See [Crash-safe recording (`format: 'aac'`)](/docs/plugins/audio-recorder/getting-started/#crash-safe-recording-format-aac) for when to opt in, tradeoffs, and platform specific `stopRecording` behavior.
+
 ## Overview
 
 Use `@capgo/capacitor-audio-recorder` when your Capacitor app needs microphone capture without bolting on a separate native module per platform. Start and stop clips, pause mid take, poll input level for waveforms, and listen for recording errors while users move between foreground and background (with the right native entitlements).
@@ -36,7 +46,7 @@ Typical fits: voice memos, in app audio messages, field notes, lightweight podca
 
 ## Core Capabilities
 
-- `startRecording` - Start recording audio using the device microphone.
+- `startRecording` - Start recording audio using the device microphone. Optional `format: 'm4a' | 'aac'` on Android and iOS for crash tolerant ADTS output.
 - `pauseRecording` - Pause the ongoing recording. Only available on Android (API 24+), iOS, and Web.
 - `resumeRecording` - Resume a previously paused recording.
 - `stopRecording` - Stop the current recording and persist the recorded audio.
