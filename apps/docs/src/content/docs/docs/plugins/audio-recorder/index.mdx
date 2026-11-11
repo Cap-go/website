@@ -26,7 +26,7 @@ Shipped in plugin **8.4.0** ([implementation PR](https://github.com/Cap-go/capac
 
 Choose **`'aac'`** when a recording must survive a crash, force quit, low battery, or a killed `mediaserver` process. ADTS writes self contained AAC frames into an `.aac` file, so playback works up to the last complete frame even when `stopRecording` never runs. **`'m4a'`** still fits when you need a standard MPEG-4 container and you always get a clean stop.
 
-On iOS, interrupted `'aac'` segments are joined **byte for byte** when recording stops, without re-encoding or `AVAssetExportSession`. If joining fails, `stopRecording` can still resolve with `mergeFailed` and `segments` so you can recover manually.
+On iOS, interrupted `'aac'` segments are joined when recording stops by copying complete ADTS frames, without re-encoding or `AVAssetExportSession`. If joining fails, `stopRecording` can still resolve with `mergeFailed` and `segments` so you can recover manually.
 
 See [Crash-safe recording (`format: 'aac'`)](/docs/plugins/audio-recorder/getting-started/#crash-safe-recording-format-aac) for when to opt in, tradeoffs, and platform specific `stopRecording` behavior.
 
