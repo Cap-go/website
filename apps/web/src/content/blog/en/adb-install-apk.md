@@ -46,11 +46,11 @@ faq:
       adb install works the same as over USB.
   - question: How do I install split APKs with adb?
     answer: >-
-      For a bundle extract, use adb install-multiple with the base APK and every
-      configuration split, for example adb install-multiple base.apk
-      config.arm64_v8a.apk. For Gradle per-ABI standalone APKs, install only the
-      one file that matches the device CPU with adb install. Add -r when
-      updating an existing install.
+      For a bundle extract, use adb install-multiple with the base APK plus the
+      splits that match the device (ABI, density, language) and any install-time
+      feature APKs, or run bundletool install-apks on an .apks set. For Gradle
+      per-ABI standalone APKs, install only the one file that matches the device
+      CPU with adb install. Add -r when updating an existing install.
   - question: Why does adb install say failure INSTALL_FAILED_TEST_ONLY?
     answer: >-
       The APK is marked testOnly and the device blocks a normal install. Use adb
@@ -231,13 +231,15 @@ Unplug USB after `adb devices` shows the TCP endpoint. Firewall and network isol
 
 ## Split APKs with install-multiple
 
-Play Store App Bundles unpack to a **base APK plus configuration splits** (density, ABI, language). Install those together:
+Play Store App Bundles unpack to a **base APK plus configuration splits** (density, ABI, language) and sometimes install-time feature modules. Install the base APK and every split that matches the target device in one command:
 
 ```bash
 adb install-multiple -r base.apk split_config.xxhdpi.apk split_config.arm64_v8a.apk
 ```
 
-Pass every split from the same bundle extract. A missing split causes `INSTALL_FAILED_INVALID_APK` or incomplete installs.
+Pass only splits from the same bundle extract that fit the connected device. A missing or wrong split causes `INSTALL_FAILED_INVALID_APK` or incomplete installs.
+
+To sideload from a `.apks` archive, `bundletool install-apks --apks=app.apks` is often simpler than listing files by hand.
 
 That is different from **ABI split APKs** when Gradle builds separate standalone APKs per architecture (`app-armeabi-v7a-debug.apk`, `app-arm64-v8a-debug.apk`, and so on). Each of those files is a full app. Pick the one that matches the device CPU and run `adb install -r` on that single file. Do not pass every APK in the output folder to `install-multiple`.
 
@@ -301,7 +303,7 @@ Build the debug APK, then:
 adb install -r android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Sign release APKs with your **upload key** before Play upload. If the app uses Play App Signing, users get builds signed by Google’s app signing key, not your upload key. An upload-signed APK cannot replace a Play-installed app over ADB. Test with an APK from an internal testing track, or uninstall the Play build first when comparing upload-signed candidates. Mismatched certificates are a common source of `INSTALL_FAILED_UPDATE_INCOMPATIBLE`.
+Sign release APKs with your **upload key** before Play upload. With Play App Signing, store downloads use Google's **app signing certificate**, which may differ from your upload certificate. You can update over ADB only when the APK certificate matches the installed app and normal update rules pass. Compare signing certificates before you uninstall. If they differ, test with an APK from an internal testing track (signed like the Play build) instead of a local upload-signed file. Uninstalling the Play build removes app data.
 
 <a id="troubleshooting-install-errors"></a>
 
