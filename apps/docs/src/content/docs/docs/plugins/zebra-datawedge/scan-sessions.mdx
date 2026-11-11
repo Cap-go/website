@@ -69,7 +69,24 @@ JavaScript cancellation can race a successful native allocation. That rejection 
 
 ## Updating an enrolled profile
 
-Use explicit `configMode: DataWedgeConfigMode.UPDATE` for incremental `setConfig` calls. DataWedge defaults to OVERWRITE when the mode is omitted, which can reset the profile's app associations. The session token coordinates pending work and cleanup. It does not make arbitrary device configuration transactional or restore overwritten associations. Plugin resets can still be requested within UPDATE using each plugin's `resetConfig` option.
+Use explicit `configMode: DataWedgeConfigMode.UPDATE` for incremental `setConfig` calls. DataWedge defaults to OVERWRITE when the mode is omitted, which can reset the profile's app associations. UPDATE does not prevent plugin resets. An omitted `resetConfig` defaults to `true` in this plugin, which matches DataWedge's RESET_CONFIG default, and clears that plugin before applying the new parameters. Set `resetConfig: false` on each plugin you update incrementally. The session token coordinates pending work and cleanup. It does not make arbitrary device configuration transactional or restore overwritten associations.
+
+```typescript
+await ZebraDataWedge.setConfig({
+  profileName: 'WarehousePicking',
+  sessionId: session.sessionId,
+  configMode: DataWedgeConfigMode.UPDATE,
+  pluginConfigs: [
+    {
+      pluginName: DataWedgePlugin.BARCODE,
+      resetConfig: false,
+      paramList: {
+        scanner_input_enabled: 'true',
+      },
+    },
+  ],
+});
+```
 
 A profile remains enrolled for the process after end, so unowned low-level writes stay blocked. Avoid resetting its ownership with OVERWRITE. If associations were removed, begin rejects rather than treating it as still owned. A fresh process and explicit profile setup may be needed before beginning again. See [DataWedge SET_CONFIG](https://techdocs.zebra.com/datawedge/15-0/guide/api/setconfig/).
 
