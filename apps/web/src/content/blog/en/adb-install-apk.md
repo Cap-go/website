@@ -205,14 +205,14 @@ adb pair IP:PAIRING_PORT
 
 Enter the pairing code when prompted.
 
-1. Connect to the debug port shown on the Wireless debugging screen:
+3. Connect to the debug port shown on the Wireless debugging screen:
 
 ```bash
 adb connect IP:DEBUG_PORT
 adb devices
 ```
 
-1. Unplug USB if both USB and Wi-Fi devices appear in `adb devices`, or target Wi-Fi explicitly:
+4. Unplug USB if both USB and Wi-Fi devices appear in `adb devices`, or target Wi-Fi explicitly:
 
 ```bash
 adb -s IP:DEBUG_PORT install -r app-debug.apk
@@ -318,7 +318,7 @@ Sign release APKs with your **upload key** before Play upload. With Play App Sig
 | `INSTALL_FAILED_VERSION_DOWNGRADE` | Lower versionCode on non-debuggable app | Uninstall, bump version, or use `-d` only on debuggable packages |
 | `INSTALL_FAILED_INSUFFICIENT_STORAGE` | Low disk space | Free space on device, remove unused apps |
 | `INSTALL_FAILED_TEST_ONLY` | testOnly APK | `adb install -t app.apk` for trusted test builds only |
-| `INSTALL_FAILED_INVALID_APK` | Corrupt or wrong split set | Rebuild APK, pass all splits to `install-multiple` |
+| `INSTALL_FAILED_INVALID_APK` | Corrupt or wrong split set | Rebuild APK, pass matching bundle splits to `install-multiple` |
 | `more than one device/emulator` | Several targets connected | `adb -s SERIAL install ...` |
 
 ### device unauthorized
