@@ -18,6 +18,10 @@ hero:
       link: https://github.com/Cap-go/capacitor-zebra-datawedge/
       icon: external
       variant: minimal
+    - text: Scan sessions
+      link: /docs/plugins/zebra-datawedge/scan-sessions/
+      icon: right-arrow
+      variant: minimal
 ---
 
 ## Overview
@@ -34,8 +38,18 @@ Start with `cloneProfile()` and the other core methods listed below.
 | Android | Yes | Native |
 | Web | No | Guard with Capacitor.getPlatform() |
 
+## Native scan sessions
+
+Use `beginScanSession()` for a finite scan flow that releases scanner input on cancel, pause, or a native deadline. Check support with `getScanSessionCapabilities()`. Existing low-level methods stay available if you manage DataWedge yourself.
+
+See [Native scan sessions](/docs/plugins/zebra-datawedge/scan-sessions/). These APIs ship in [capacitor-zebra-datawedge PR #30](https://github.com/Cap-go/capacitor-zebra-datawedge/pull/30).
+
 ## Core Capabilities
 
+- `beginScanSession`
+- `triggerScanSession`
+- `endScanSession`
+- `getScanSessionCapabilities`
 - `cloneProfile`
 - `createProfile`
 - `deleteProfile`
@@ -45,6 +59,12 @@ Start with `cloneProfile()` and the other core methods listed below.
 
 | Method | Description |
 | --- | --- |
+| `getScanSessionCapabilities` | Read native scan session API capabilities without sending a DataWedge command. |
+| `beginScanSession` | Start an opt-in cancellable scan session for an existing associated profile. |
+| `renewScanSession` | Renew the native liveness deadline for an active session. |
+| `getScanSessionState` | Inspect a matching active or closing session without renewing it. |
+| `triggerScanSession` | Verify the active profile, then send a software scan trigger. |
+| `endScanSession` | Cancel owned pending calls and disable barcode input for the session profile. |
 | `cloneProfile` | See the source definitions for current behavior. |
 | `createProfile` | See the source definitions for current behavior. |
 | `deleteProfile` | See the source definitions for current behavior. |
