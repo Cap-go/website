@@ -301,6 +301,7 @@ const pluginEntries = [
     'zebra-datawedge',
     [
       linkItem('Android behavior', '/docs/plugins/zebra-datawedge/android'),
+      linkItem('Complete configuration', '/docs/plugins/zebra-datawedge/complete-configuration'),
       linkItem('Scan sessions', '/docs/plugins/zebra-datawedge/scan-sessions'),
     ],
   ],

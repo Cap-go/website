@@ -14,13 +14,17 @@ hero:
       link: /docs/plugins/zebra-datawedge/getting-started/
       icon: right-arrow
       variant: primary
-    - text: GitHub
-      link: https://github.com/Cap-go/capacitor-zebra-datawedge/
-      icon: external
+    - text: Complete configuration
+      link: /docs/plugins/zebra-datawedge/complete-configuration/
+      icon: right-arrow
       variant: minimal
     - text: Scan sessions
       link: /docs/plugins/zebra-datawedge/scan-sessions/
       icon: right-arrow
+      variant: minimal
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-zebra-datawedge/
+      icon: external
       variant: minimal
 ---
 
@@ -29,6 +33,12 @@ hero:
 Manage Zebra DataWedge profiles, notifications, queries, and scan triggers on Zebra Android devices
 
 Start with `cloneProfile()` and the other core methods listed below.
+
+## Complete configuration results
+
+Opt in to `setConfig({ completeResult: true })` when a multi-plugin update must succeed for every requested plugin, not only the last one. Check native support first with `getConfigurationCapabilities()`. Existing `setConfig` calls keep the LAST_RESULT default.
+
+See [Complete configuration results](/docs/plugins/zebra-datawedge/complete-configuration/). These APIs ship in [capacitor-zebra-datawedge PR #28](https://github.com/Cap-go/capacitor-zebra-datawedge/pull/28).
 
 ## Platform support
 
@@ -54,6 +64,7 @@ See [Native scan sessions](/docs/plugins/zebra-datawedge/scan-sessions/). These 
 - `createProfile`
 - `deleteProfile`
 - `importConfig`
+- `getConfigurationCapabilities`
 
 ## Public API
 
@@ -71,7 +82,8 @@ See [Native scan sessions](/docs/plugins/zebra-datawedge/scan-sessions/). These 
 | `importConfig` | See the source definitions for current behavior. |
 | `renameProfile` | See the source definitions for current behavior. |
 | `restoreConfig` | See the source definitions for current behavior. |
-| `setConfig` | See the source definitions for current behavior. |
+| `setConfig` | Apply profile or plugin configuration. With `completeResult: true`, require success for every requested plugin. Enrolled session profiles require a matching `sessionId`. |
+| `getConfigurationCapabilities` | Read whether the native binary supports complete configuration results. |
 | `setDisabledAppList` | See the source definitions for current behavior. |
 | `setIgnoreDisabledProfiles` | See the source definitions for current behavior. |
 | `registerForNotification` | See the source definitions for current behavior. |
