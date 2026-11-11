@@ -51,7 +51,7 @@ That last point matters more than most explainers admit. When you bypass the sub
 
 > **Practical rule:** OTA shortens the distance between finding a web layer bug and fixing it for users. It doesn't shorten the work of deciding whether the fix is safe.
 
-That's why teams treat OTA as a release strategy, not a convenience feature. If you're trying to increase [release velocity without making every fix a store event](https://capgo.app/blog/release-velocity), the win isn't just speed. It's control over which changes deserve a full native release and which can travel through the faster, narrower web path.
+That's why teams treat OTA as a release strategy, not a convenience feature. If you're trying to increase [release velocity without making every fix a store event](https://capgo.app/blog/release-velocity/), the win isn't just speed. It's control over which changes deserve a full native release and which can travel through the faster, narrower web path.
 
 <a id="understanding-how-ota-updates-work"></a>
 ## Understanding How OTA Updates Work
@@ -147,7 +147,7 @@ Next comes **differential delivery** where your system supports it. Instead of s
 
 **Channels** separate audiences such as internal testers, beta users, and production. **Staged rollouts** expose a bundle gradually while you watch installation outcomes and app behavior. Keep the previous bundle available as a stable fallback, and make sure your team knows how to pause exposure without publishing a fresh fix under pressure.
 
-Rollback sounds like the end of the pipeline, but you should design it before the first release. Know which bundle is known good, whether older code can read newer local data, and how you'll handle devices that already migrated storage. For the practical file level questions behind these swaps, [how to update files safely in a live app](https://capgo.app/blog/how-to-update-files) covers the mechanics your release checklist should reflect.
+Rollback sounds like the end of the pipeline, but you should design it before the first release. Know which bundle is known good, whether older code can read newer local data, and how you'll handle devices that already migrated storage. For the practical file level questions behind these swaps, [how to update files safely in a live app](https://capgo.app/blog/how-to-update-files/) covers the mechanics your release checklist should reflect.
 
 > Don't treat rollback as an undo button for data. It restores code. It may not restore the state that bad code created.
 
@@ -172,7 +172,7 @@ Start with artifact trust. [Update bundles should be signed, encrypted where app
 
 Platform governance adds another dependency. Apple notes that apps installed through an alternative marketplace or web distributor depend on that distributor for future updates, and if that marketplace is deleted or stops operating, those apps no longer receive updates, as explained in [Apple Support guidance on alternative app distribution](https://support.apple.com/en-us/118110). Your monitoring should therefore track update source availability and devices stranded on obsolete versions, not just successful downloads.
 
-Observability turns those controls into decisions. Watch adoption by channel and native version, installation failures by reason, signature failures, crash signals after activation, and the share of devices still on the fallback bundle. Strong [signature verification practices for update bundles](https://capgo.app/blog/signature-verification) only help if verification failures are visible and alertable.
+Observability turns those controls into decisions. Watch adoption by channel and native version, installation failures by reason, signature failures, crash signals after activation, and the share of devices still on the fallback bundle. Strong [signature verification practices for update bundles](https://capgo.app/blog/signature-verification/) only help if verification failures are visible and alertable.
 
 For fintech, healthcare, and agency teams managing many client apps, saying the update was reverted isn't a complete incident answer. You also need evidence of exposure, affected devices, and whether sensitive local state changed before withdrawal.
 
@@ -208,7 +208,7 @@ Set the operational cadence around that classification. Test on an internal chan
 
 > A calm OTA release is mostly decided before publish. The channel, threshold, owner, and exit path should already be named.
 
-Review stranded devices as part of the same cadence. An elegant rollout that leaves an old native population behind without a migration plan creates two products to support. Tie minimum version policy, store releases, and bundle channels together through [app release automation](https://capgo.app/blog/app-release-automation) so routine checks happen in your pipeline rather than in someone's memory.
+Review stranded devices as part of the same cadence. An elegant rollout that leaves an old native population behind without a migration plan creates two products to support. Tie minimum version policy, store releases, and bundle channels together through [app release automation](https://capgo.app/blog/app-release-automation/) so routine checks happen in your pipeline rather than in someone's memory.
 
 That gives you a repeatable test for the next hard case. Can this change be delivered live without creating a store policy, compatibility, or compliance incident? If you can't answer with evidence, slow down and take the store path.
 

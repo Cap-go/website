@@ -15,7 +15,7 @@ published: true
 locale: en
 next_blog: ''
 ---
-# Ship Capacitor Fixes Without App Store Delays
+## Ship Capacitor Fixes Without App Store Delays
 
 So your checkout page develops a CSS alignment problem at 8 AM. The panic starts — you need an iOS release, an Android release, native rebuilds, and days of review. Not anymore.
 

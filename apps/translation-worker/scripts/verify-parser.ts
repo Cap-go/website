@@ -174,7 +174,7 @@ assert(
 )
 const emptySuffixContext = __translationWorkerTest.resolveTranslationContexts(['1 build hour'])[0]
 assert(typeof emptySuffixContext === 'string' && emptySuffixContext.includes('native_build_builder_build_hour'), 'Empty placeholder suffix did not resolve build-hour context')
-assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('deepseek-style-guides-v1'), 'Cache version was not bumped for the DeepSeek model and style guides')
+assert(__translationWorkerTest.TRANSLATION_CACHE_VERSION.includes('entity-decoding-v1'), 'Cache version was not bumped for the entity decoding render fix')
 
 const keyedSchema = __translationWorkerTest.translationBatchJsonSchema(2) as { properties: { translations: { required: string[] } } }
 assert(keyedSchema.properties.translations.required.join(',') === 't0,t1', 'Batch schema did not require one translation per item id')
@@ -1343,4 +1343,27 @@ try {
   )
   const reviewFailsResult = await __translationWorkerTest.translateBatchWithMemory(reviewFails.env, 'fr', [label])
   assert(reviewFailsResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewFails.store.size === 0, 'An unreviewed draft was remembered')
+}
+
+{
+  // Raw page text keeps its entities, and a model may return them as is or decoded: neither may be published double-escaped.
+  const entityHtml = `<!doctype html><html lang="en"><head><meta name="description" content="Open Settings &gt; Privacy &amp; Security to enable Developer Mode on any iPhone or iPad running iOS 16 or later today." /></head><body><p>Fintech &amp; Banking teams</p><p>Read the &lt;head&gt; tag</p></body></html>`
+  const entityParsed = __translationWorkerTest.collectSegments(entityHtml)
+  for (const translations of [entityParsed.segments.map((segment) => segment.text), entityParsed.segments.map((segment) => __translationWorkerTest.decodeHtmlEntities(segment.text))]) {
+    const entityRendered = __translationWorkerTest.renderTranslatedHtml(entityParsed.parts, entityParsed.segments, translations)
+    assert(!/&amp;(amp|gt|lt|quot|#39);/.test(entityRendered), 'Renderer double-escaped an HTML entity')
+    assert(entityRendered.includes('Fintech &amp; Banking teams'), 'Renderer lost an escaped ampersand in body text')
+    assert(entityRendered.includes('Read the &lt;head&gt; tag'), 'Renderer unescaped markup characters in body text')
+    assert(entityRendered.includes('Settings &gt; Privacy &amp; Security'), 'Renderer lost escaped characters in a meta description')
+  }
+
+  const shortMeta = `<meta name="description" content="Privacy &amp; Security guide." />`
+  const expandedMeta = __translationWorkerTest.expandShortMetaDescriptions(shortMeta, 'fr')
+  assert(expandedMeta.includes('Privacy &amp; Security guide.') && !expandedMeta.includes('&amp;amp;'), 'Meta description expansion double-escaped an ampersand')
+
+  const longDescription = 'Kostenloser iPhone-UDID-Finder. Ermitteln Sie die UDID Ihres iPhones oder iPads in Sekunden über Safari, ohne iTunes, Finder, Xcode oder Mac, inklusive Mobilgeräteprofil und Anleitung.'
+  const truncated = __translationWorkerTest.truncateSeoDescription(longDescription)
+  assert(truncated.length <= 159, 'Truncated description is longer than the limit')
+  assert(longDescription.startsWith(truncated.replace(/\.\.\.$/, '')), 'Truncated description is not a prefix of the source')
+  assert(/[\s]$/.test(longDescription.charAt(truncated.replace(/\.\.\.$/, '').length)) || truncated.endsWith('.'), 'Description was cut in the middle of a word')
 }

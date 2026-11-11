@@ -4,7 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { renameCat, shortNumber, plausibleStoreShare } from '@/services/misc'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.top_native_script_apps_title({}, { locale: Astro.locals.locale })].join(' | ')
+const title = `${m.top_apps_seo_title({ framework: 'NativeScript' }, { locale: Astro.locals.locale })} | ${Astro.locals.runtimeConfig.public.brand}`
 const description = m.top_native_script_apps({}, { locale: Astro.locals.locale })
 
 const content = { title, description }

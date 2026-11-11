@@ -156,17 +156,30 @@ const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public,
   locale: Astro.locals.locale,
 })
 const faqItems = entry.data.faq
-content['ldJSON'] =
-  faqItems && faqItems.length > 0
-    ? createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
-        additionalEntities: [
+// Breadcrumb trail (Home > Blog > Category > Post) so search results show the section instead of a raw URL.
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const listingPath = isHumanBlogPost(entry.data.origin) ? 'blog' : 'articles'
+const primaryTag = entry.data.tag?.split(',')[0]?.trim()
+const breadcrumbs = [
+  { name: Astro.locals.runtimeConfig.public.brand, url: new URL(getRelativeLocaleUrl(Astro.locals.locale, '/'), baseUrl).href },
+  { name: listingPath === 'blog' ? 'Blog' : 'Articles', url: new URL(getRelativeLocaleUrl(Astro.locals.locale, `/${listingPath}/`), baseUrl).href },
+  ...(primaryTag ? [{ name: primaryTag, url: new URL(getRelativeLocaleUrl(Astro.locals.locale, `/${listingPath}/category/${slugify(primaryTag)}/`), baseUrl).href }] : []),
+  { name: entry.data.title, url: articleUrl },
+]
+content['ldJSON'] = createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
+  includeBreadcrumbs: true,
+  breadcrumbs,
+  breadcrumbId: articleUrl,
+  additionalEntities:
+    faqItems && faqItems.length > 0
+      ? [
           createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
             url: articleUrl,
             questions: faqItems,
           }),
-        ],
-      })
-    : articleLdJson
+        ]
+      : [],
+})
 ---
 
 <Layout content={content}>

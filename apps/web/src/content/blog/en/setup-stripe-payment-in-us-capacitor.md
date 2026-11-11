@@ -16,7 +16,7 @@ locale: en
 origin: human
 ---
 
-# Implementing Stripe Payment Links in Capacitor Apps Following New Apple Guidelines
+## Implementing Stripe Payment Links in Capacitor Apps Following New Apple Guidelines
 
 As of May 1, 2025, Apple has implemented significant changes to its App Store Review Guidelines following the court ruling in the [Epic v. Apple case](https://storage.courtlistener.com/recap/gov.uscourts.cand.364265/gov.uscourts.cand.364265.1508.0_2.pdf). These changes specifically allow app developers in the United States to link out to external payment methods for digital goods and services, opening up alternatives to Apple's in-app purchase system.
 

@@ -87,6 +87,19 @@ const minDescriptionLength = 120
 const maxDescriptionLength = 159
 const shortDescriptionSuffix = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
 
+// Cut at the last full sentence that still leaves a useful snippet, otherwise at a word boundary,
+// so search results never show a description chopped in the middle of a word.
+const truncateMetaDescription = (value: string) => {
+  if (value.length <= maxDescriptionLength) return value
+  const head = value.substring(0, maxDescriptionLength)
+  const sentenceEnd = Math.max(head.lastIndexOf('. '), head.lastIndexOf('! '), head.lastIndexOf('? '))
+  if (sentenceEnd >= minDescriptionLength - 1) return head.substring(0, sentenceEnd + 1)
+  const room = head.substring(0, maxDescriptionLength - 3)
+  const wordEnd = room.lastIndexOf(' ')
+  const cut = wordEnd >= minDescriptionLength ? room.substring(0, wordEnd) : room
+  return cut.replace(/[\s,;:–—-]+$/, '') + '...'
+}
+
 const buildMetaDescription = (value: string) => {
   let nextDescription = normalizeMetaDescription(value)
   const normalizedDefaultDescription = normalizeMetaDescription(defaultDescription)
@@ -99,9 +112,7 @@ const buildMetaDescription = (value: string) => {
     nextDescription = nextDescription + ' - ' + shortDescriptionSuffix
   }
 
-  if (nextDescription.length > maxDescriptionLength) nextDescription = nextDescription.substring(0, maxDescriptionLength - 3) + '...'
-
-  return nextDescription
+  return truncateMetaDescription(nextDescription)
 }
 
 const displayDescription = buildMetaDescription(descriptionString)

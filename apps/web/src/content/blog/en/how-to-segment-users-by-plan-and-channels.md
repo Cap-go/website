@@ -17,7 +17,7 @@ origin: human
 next_blog: ''
 ---
 
-# How to Use Channels for Feature Flags and A/B Testing
+## How to Use Channels for Feature Flags and A/B Testing
 
 Capgo's channel system provides a flexible way to segment users and control feature access. While Capgo doesn't have built-in plan management or A/B testing, you can implement these features by managing channel assignments yourself.
 

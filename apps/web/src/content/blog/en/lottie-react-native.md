@@ -1,6 +1,6 @@
 ---
 slug: lottie-react-native
-title: Lottie React Native
+title: 'Lottie React Native: Expo and Bare CLI Setup, Controls, Tips'
 description: 'Our complete guide teaches you to use lottie react native. Covers Expo & bare workflows, animation controls, performance tuning, and best practices for 2026.'
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'

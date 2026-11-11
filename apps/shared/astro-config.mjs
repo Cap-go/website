@@ -64,7 +64,7 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates, sitemap
       customSitemaps,
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
+      // No build-time default: a page without a known content date is listed without lastmod.
       filter: (page) => {
         const pathname = new URL(page).pathname
         const normalized = pathname.endsWith('/') ? pathname : `${pathname}/`

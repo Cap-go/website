@@ -186,7 +186,7 @@ const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
+const TRANSLATION_CACHE_VERSION = '2026-11-11-entity-decoding-v1'
 // Translation memory: every translated segment is stored in R2 by a hash of its text
 // and context, so a page edit only sends new or edited segments to Workers AI, and the
 // header, footer and other repeated copy are translated once for the whole site.
@@ -317,6 +317,15 @@ const STATIC_PREFIXES = [
 ]
 function escapeHtmlText(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+const HTML_ENTITY_CHARACTERS: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", '#39': "'", '#x27': "'" }
+
+// Segments are read from the page as raw HTML, so their text still carries entities such as `&amp;`.
+// A model may hand them back as is or as plain characters. Decoding once before the renderer escapes
+// again keeps both shapes from being published as a visible `&amp;amp;` or `&amp;gt;`.
+function decodeHtmlEntities(value: string): string {
+  return value.replace(/&(amp|lt|gt|quot|apos|#39|#x27);/gi, (match, name: string) => HTML_ENTITY_CHARACTERS[name.toLowerCase()] ?? match)
 }
 
 function escapeHtmlAttribute(value: string, quote = '"'): string {
@@ -2652,9 +2661,9 @@ function renderTranslatedHtml(parts: HtmlPart[], segments: Segment[], translatio
       if (typeof rawTranslated !== 'string') throw new Error(`Missing translation for segment ${part.segmentIndex}`)
       const translated = normalizedTranslationValue(rawTranslated) ? rawTranslated : segment.text
       if (segment.mode === 'attribute') {
-        return `${segment.leading}${escapeHtmlAttribute(translated, segment.quote)}${segment.trailing}`
+        return `${segment.leading}${escapeHtmlAttribute(decodeHtmlEntities(translated), segment.quote)}${segment.trailing}`
       }
-      return `${segment.leading}${escapeHtmlText(translated)}${segment.trailing}`
+      return `${segment.leading}${escapeHtmlText(decodeHtmlEntities(translated))}${segment.trailing}`
     })
     .join('')
 }
@@ -2891,9 +2900,17 @@ function setMetaContent(html: string, keyName: 'name' | 'property', keyValue: st
   return html
 }
 
+// Cuts at the last full sentence that still leaves a useful snippet, otherwise at a word boundary,
+// so search results never show a description chopped in the middle of a word.
 function truncateSeoDescription(value: string): string {
   if (value.length <= SEO_DESCRIPTION_MAX_LENGTH) return value
-  return value.substring(0, SEO_DESCRIPTION_MAX_LENGTH - 3).trimEnd() + '...'
+  const head = value.substring(0, SEO_DESCRIPTION_MAX_LENGTH)
+  const sentenceEnd = Math.max(head.lastIndexOf('. '), head.lastIndexOf('! '), head.lastIndexOf('? '), head.lastIndexOf('。'), head.lastIndexOf('！'), head.lastIndexOf('？'))
+  if (sentenceEnd >= SEO_DESCRIPTION_MIN_LENGTH - 1) return head.substring(0, sentenceEnd + 1)
+  const room = head.substring(0, SEO_DESCRIPTION_MAX_LENGTH - 3)
+  const wordEnd = room.lastIndexOf(' ')
+  const cut = wordEnd >= SEO_DESCRIPTION_MIN_LENGTH ? room.substring(0, wordEnd) : room
+  return cut.replace(/[\s,;:–—-]+$/, '') + '...'
 }
 
 function buildSeoMetaDescription(content: string, locale: Locale): string {
@@ -2921,8 +2938,10 @@ function expandShortMetaDescriptions(html: string, locale: Locale): string {
       const metaKey = getMetaKey(tag)
       const content = readAttributeValue(tag, 'content')
       if (metaKey && SEO_DESCRIPTION_META_KEYS.has(metaKey) && content) {
-        const expanded = buildSeoMetaDescription(content, locale)
-        if (expanded !== content) tag = replaceTagAttributeValue(tag, 'content', expanded) ?? tag
+        // The attribute is read escaped and written back escaped, so measure and rebuild the plain text.
+        const plainContent = decodeHtmlEntities(content)
+        const expanded = buildSeoMetaDescription(plainContent, locale)
+        if (expanded !== plainContent) tag = replaceTagAttributeValue(tag, 'content', expanded) ?? tag
       }
     }
 
@@ -4056,6 +4075,8 @@ export const __translationWorkerTest = {
   translationStoreKey,
   collectRenderedNavLinks,
   collectSegments,
+  decodeHtmlEntities,
+  truncateSeoDescription,
   dedupeBatchForTranslation,
   expandDedupedBatchTranslations,
   guardTranslationLength,

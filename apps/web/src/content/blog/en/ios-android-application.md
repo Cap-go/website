@@ -93,7 +93,7 @@ A web team can debug DOM layout and browser networking immediately. That advanta
 
 A PWA avoids native packaging, but browser capabilities and installation conditions still matter. Test the exact push, file, and offline workflows you need on iOS rather than assuming desktop-browser behavior carries over.
 
-Use the [cross-platform versus native development comparison](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native) to assess those trade-offs. **For an existing web app centered on content, forms, and standard device integrations, Capacitor is usually the shortest practical route to store distribution.**
+Use the [cross-platform versus native development comparison](https://capgo.app/blog/cross-platform-mobile-app-development-vs-native/) to assess those trade-offs. **For an existing web app centered on content, forms, and standard device integrations, Capacitor is usually the shortest practical route to store distribution.**
 
 <a id="how-to-build-and-package-a-capacitor-app"></a>
 ## How to Build and Package a Capacitor App
@@ -130,7 +130,7 @@ The packaging sequence looks like this:
 
 10. Archive the iOS application in Xcode and generate the signed Android App Bundle using Android Studio or the configured Gradle release task. Upload to TestFlight and Play internal testing before submitting publicly, and install those distributed builds rather than trusting a locally installed debug package.
 
-Use the [guide to mobile build types](https://capgo.app/blog/types-of-builds) to keep development, testing, and production artifacts clearly separated.
+Use the [guide to mobile build types](https://capgo.app/blog/types-of-builds/) to keep development, testing, and production artifacts clearly separated.
 
 <a id="what-apple-and-google-review-actually-check"></a>
 ## What Apple and Google Review Actually Check
@@ -168,7 +168,7 @@ Before submission:
 - **Reconcile disclosures.** Compare App Privacy and Data safety answers with consent flows and SDK behavior.
 - **Delete a fresh account.** Verify the user-facing flow and backend handling, including associated data and legitimate retention exceptions.
 
-The [iOS submission checklist](https://capgo.app/blog/ios-app-submission) helps turn those checks into a repeatable release gate. Give reviewers working credentials and precise instructions for features they can't easily discover.
+The [iOS submission checklist](https://capgo.app/blog/ios-app-submission/) helps turn those checks into a repeatable release gate. Give reviewers working credentials and precise instructions for features they can't easily discover.
 
 <a id="task-design-rules-that-keep-both-platforms-working"></a>
 ## Task Design Rules That Keep Both Platforms Working
@@ -222,7 +222,7 @@ For planning task-based sessions, Uxia's guide to [how to test mobile app usabil
 
 The **European Accessibility Act began applying on 28 June 2025**, with services including e-commerce, banking, and passenger transport covered, as summarized by [Cliffex's mobile development overview](https://cliffex.com/product-engineering/app-development/mobile-app-development-trends-2025-ai-5g-ar-vr-beyond/). Check your service's scope and applicable obligations rather than treating store approval as accessibility certification.
 
-Use a [mobile testing checklist](https://capgo.app/blog/mobile-apps-testing-checklist) to retain evidence for each release. After deployment, compare crashes, failed journeys, and rendering complaints against the previous release by platform, native version, and Android WebView version.
+Use a [mobile testing checklist](https://capgo.app/blog/mobile-apps-testing-checklist/) to retain evidence for each release. After deployment, compare crashes, failed journeys, and rendering complaints against the previous release by platform, native version, and Android WebView version.
 
 <a id="shipping-updates-without-waiting-for-store-review"></a>
 ## Shipping Updates Without Waiting for Store Review
@@ -261,7 +261,7 @@ This walkthrough provides another view of the update workflow:
 
 <iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/FM4t8I4qNao" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-Follow the [OTA update implementation guide](https://capgo.app/blog/how-to-ota-update) to configure the delivery mechanism and compatibility rules. Compare adoption and application failures separately for iOS and Android; an older Android WebView may expose a JavaScript or CSS incompatibility that never appears on iOS.
+Follow the [OTA update implementation guide](https://capgo.app/blog/how-to-ota-update/) to configure the delivery mechanism and compatibility rules. Compare adoption and application failures separately for iOS and Android; an older Android WebView may expose a JavaScript or CSS incompatibility that never appears on iOS.
 
 Keep the initial application usable if update retrieval fails. A network outage should leave the customer on a working bundled or previously validated version, not stranded at an empty loading screen.
 
