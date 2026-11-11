@@ -35,7 +35,7 @@ What we will cover:
 
 [Capacitor](https://capacitorjs.com/) is a cross-platform tool built by the Ionic team. It allows you to convert your web application into an iOS or Android application.
 
-With Capacitor, you can create mobile applications using your JavaScript code. It then renders the apps using your phone's native WebView. Using Capacitor's plugins and APIs, you can access native features like the camera, speaker, and others.
+With Capacitor, you can create mobile applications using your JavaScript code. It then renders the apps using your phone's native WebView. Using Capacitor's plugins and APIs, you can access native features like the camera, speaker, and others. For the full picture, see [what a Capacitor app is, with pros, cons, and project health](/capacitor-app/).
 
 Capacitor is compatible with different JavaScript frameworks, such as React, Vue, Angular, and vanilla JS. Learn more about [building cross-platform apps with Capacitor and React](https://capacitorjs.com/solution/react/).
 
