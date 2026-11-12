@@ -164,6 +164,14 @@ Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destruc
 | `capgo_prepare_build_credentials_upload` | `destructiveHint: true` | Returns a signed PUT URL for encrypted credentials. Omitting `mode` defaults to `replace`, which overwrites stored keys for that platform after the PUT. Confirm with the user before that upload. Use `mode: merge` to update only keys present in the JSON. |
 | `capgo_get_build_status` | `readOnlyHint: true` | Read-only poll on the hosted server (see below). Delete and overwrite tools keep `destructiveHint: true` as before. |
 
+### Structured tool results
+
+Every hosted tool advertises an `outputSchema` in `tools/list`. Successful HTTP API tools return the typed endpoint response under `structuredContent.data`. For example, `capgo_list_apps` returns `{ "data": [{ "app_id": "com.example.app", "name": "Example app" }] }` as structured content. Its text content keeps the original API array for older clients.
+
+Tools implemented directly by the MCP server use the object described by their own output schema. For example, `capgo_whoami` returns `user_id`, `apikey_id`, `apikey_name`, and `apikey_expires_at`, while skill reads return `skill` and `contents`.
+
+Check `isError` before consuming a result. Invalid upstream responses return an actionable tool error instead of an untyped success. A result-size error requires pagination, narrower filters, or a shorter time range. If a write already ran, inspect the resource before retrying to avoid duplicate actions. Reading structured output does not enable additional data collection or retention.
+
 ### Hosted MCP read-only build status
 
 On `https://api.capgo.app/mcp`, `capgo_get_build_status` calls the build status handler in-process with a read-only flag. It does not sync `build_requests`, record build minutes, emit webhooks, or cancel jobs that exceeded the app timeout. The JSON includes `persisted: false` on these polls.
