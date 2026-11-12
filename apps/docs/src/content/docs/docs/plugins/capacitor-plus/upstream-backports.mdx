@@ -31,7 +31,7 @@ This applies to **fork-only** work (not branches named `sync/upstream-*` or `syn
 |------|----------------|------------|
 | Branching | Open a feature branch and a pull request against the [`plus`](https://github.com/Cap-go/capacitor-plus/tree/plus) branch | No |
 | CI | The [CI](https://github.com/Cap-go/capacitor-plus/actions/workflows/ci.yml) workflow runs lint and platform builds on the PR | Yes |
-| Review | A maintainer reviews and merges when CI is green | No (manual) |
+| Review | A maintainer reviews, tests and merges when CI is green | No (manual) |
 | Version tag | After merge to `plus`, the [Bump version](https://github.com/Cap-go/capacitor-plus/actions/workflows/bump_version.yml) workflow runs tests, bumps the patch version with Lerna, and pushes a git tag | Yes |
 | npm release | The tag triggers [Build and publish](https://github.com/Cap-go/capacitor-plus/actions/workflows/build.yml), which stages `@capacitor-plus/*` packages and requests approval. Packages become available after approval; the workflow can finish if the request fails | Staging and request only |
 
