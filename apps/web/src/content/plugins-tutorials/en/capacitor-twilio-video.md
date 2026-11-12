@@ -18,7 +18,7 @@ bunx cap sync
 
 | Platform | SDK floor | Minimum OS |
 | --- | --- | --- |
-| iOS | [twilio-video-ios](https://github.com/twilio/twilio-video-ios) 5.11.3 (`Package.swift` `from: "5.11.3"`, CocoaPods `~> 5.11`) | iOS 15+ |
+| iOS | Swift Package Manager `from: "5.11.3"`. CocoaPods `TwilioVideo ~> 5.11` allows any 5.11.x and does not by itself require 5.11.3. | iOS 15+ |
 | Android | `com.twilio:video-android:7.10.5` | API 24+ |
 | Web | Unimplemented. All methods throw `unimplemented`. | n/a |
 

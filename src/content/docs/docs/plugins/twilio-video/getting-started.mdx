@@ -22,8 +22,8 @@ Use the `capacitor-plugins` skill from `Cap-go/capgo-skills` to install the `@ca
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-bun add @capgo/capacitor-twilio-video
-bunx cap sync
+npm install @capgo/capacitor-twilio-video
+npx cap sync
 ```
 
 ## Import
@@ -37,13 +37,13 @@ import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 ### 1. Install the plugin
 
 ```bash
-bun add @capgo/capacitor-twilio-video
-bunx cap sync ios
+npm install @capgo/capacitor-twilio-video
+npx cap sync ios
 ```
 
 ### 2. Twilio Video SDK floor
 
-This plugin links [twilio-video-ios](https://github.com/twilio/twilio-video-ios) **5.11.3** through Swift Package Manager (`from: "5.11.3"` in `Package.swift`) and CocoaPods (`TwilioVideo ~> 5.11`).
+This plugin links [twilio-video-ios](https://github.com/twilio/twilio-video-ios) through Swift Package Manager with a floor of **5.11.3** (`from: "5.11.3"` in `Package.swift`). The CocoaPods dependency is `TwilioVideo ~> 5.11`, which allows any 5.11.x release and can resolve below 5.11.3 if a lockfile already pinned an older patch. New installs typically get the latest 5.11.x.
 
 Minimum iOS deployment target: **15.0**.
 
@@ -60,15 +60,15 @@ Add the following to `ios/App/App/Info.plist`:
 
 The plugin configures `AVAudioSession` for `videoChat` when you join a room and shows a native in-app call overlay above the WebView.
 
-Run `bunx cap sync ios` after install so Swift Package Manager or CocoaPods picks up `CapgoCapacitorTwilioVideo`.
+Run `npx cap sync ios` after install so Swift Package Manager or CocoaPods picks up `CapgoCapacitorTwilioVideo`.
 
 ## Android setup
 
 ### 1. Install the plugin
 
 ```bash
-bun add @capgo/capacitor-twilio-video
-bunx cap sync android
+npm install @capgo/capacitor-twilio-video
+npx cap sync android
 ```
 
 ### 2. Twilio Video SDK floor
@@ -104,7 +104,8 @@ Tokens use JWT format with a `grants` object. Example:
 
 ```json
 {
-  "iss": "your-account-sid",
+  "iss": "your-api-key-sid",
+  "sub": "your-account-sid",
   "exp": 1234567890,
   "grants": {
     "identity": "user-identity",
@@ -114,6 +115,8 @@ Tokens use JWT format with a `grants` object. Example:
   }
 }
 ```
+
+`iss` is the signing API Key SID (`SK...`). `sub` is the Account SID (`AC...`).
 
 The plugin validates expiration before `login()` and `joinRoom()`. Invalid or expired tokens are rejected on the native layer.
 
