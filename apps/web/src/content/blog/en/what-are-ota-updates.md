@@ -1,23 +1,95 @@
 ---
 slug: what-are-ota-updates
-title: What Are OTA Updates and How Do They Work in 2026
-description: 'Learn what are OTA updates, how over-the-air delivery works for mobile and web apps, and what teams should know about security, adoption, and store rules.'
+title: 'OTA Updates: Definition, Android, iOS, and Store Rules'
+description: >-
+  OTA updates deliver software over the air. Learn what OTA apps are, Android
+  and iOS live updates, store rules, safety, and build vs buy for mobile teams.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-16T07:24:16.867Z
-updated_at: 2026-10-16T07:27:33.000Z
+updated_at: 2026-11-12T10:00:00.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/dc7ab5f8-e52a-410f-b024-c406f84bb954/what-are-ota-updates-software-updates.jpg'
-head_image_alt: What Are OTA Updates and How Do They Work in 2026
-keywords: 'ota updates, mobile updates, capacitor, live updates, app deployment'
+head_image_alt: 'OTA Updates: Definition, Android, iOS, and Store Rules Capgo blog'
+keywords: >-
+  ota updates, ota app, over the air updates, android ota updates, ota release,
+  mobile live updates, capacitor ota, cordova ota, ota apps
 tag: 'Mobile, Updates, Capacitor'
 published: true
 locale: en
 next_blog: ''
+faq:
+  - question: Are OTA apps real?
+    answer: >-
+      Yes. OTA apps are normal installed mobile apps that download updates over
+      Wi-Fi or cellular after install. Device makers use OTA for operating system
+      patches. Hybrid and cross-platform apps use app-level OTA to refresh the
+      web layer inside Capacitor, Cordova, or React Native shells.
+  - question: Do OTA updates work on Android and iOS?
+    answer: >-
+      Yes, with different shapes. Android can update the OS, the Play Store APK
+      via in-app updates, or the web bundle inside a hybrid app. iOS uses OTA
+      for system updates; app-level OTA usually updates JavaScript, HTML, CSS,
+      and assets in the reviewed WebView shell. Native plugin or permission
+      changes still need a new store binary on both platforms.
+  - question: Are OTA updates allowed on the App Store and Google Play?
+    answer: >-
+      Store rules allow many web-layer OTA changes when they do not change the
+      app's primary purpose or bypass platform security. Apple reviews interpreted
+      code boundaries in its App Review Guidelines. Google Play allows updates
+      to JavaScript and web code run in a WebView or JavaScript engine when they
+      stay within the app's declared behavior. See Capgo's guide to
+      app-store-compliant OTA for a practical checklist.
+  - question: What is the difference between Android OTA updates and app OTA?
+    answer: >-
+      Android system OTA updates firmware and the OS image from the device maker
+      or carrier. App OTA updates what your application loads after install, such
+      as a new web bundle, config, or copy. Google Play in-app updates are a
+      third path that replaces the distributed APK. Teams should name which layer
+      they mean before planning a release.
+  - question: Should you build or buy an OTA update system?
+    answer: >-
+      Build when you need full control, can maintain signing, channels, rollback,
+      and telemetry yourself, and have security review capacity. Buy or use a
+      managed platform when you want faster rollout, hosted infrastructure, and
+      proven store-compliant workflows. Compare trade-offs in open source versus
+      proprietary app update solutions before you commit.
+  - question: What is an OTA release for a mobile app?
+    answer: >-
+      An OTA release is a versioned package published to a channel, downloaded by
+      eligible clients, verified, staged, and activated without reinstalling from
+      the store. For Capacitor-style apps it is often a signed web bundle. The
+      same release pipeline can gate beta, staging, and production audiences.
 ---
-A critical bug is live, the fix is ready, and your team can ship it to users without waiting for store review. **OTA updates** are software changes delivered to an already-installed device over a network connection, and on mobile they often mean either an operating-system update or an app-level live update.
+**Quick answer:** **OTA (over-the-air) updates** are software changes delivered to a device over a network without a cable or fresh physical install. **OTA apps** are real installed apps that pull those updates after download from the store or factory image. On phones, the phrase covers both **device OTA** (for example **Android system updates**) and **app-level OTA** (live updates to the web layer in Capacitor, Cordova, or React Native apps).
+
+For store-compliant boundaries, read [ultimate guide to app-store-compliant OTA updates](https://capgo.app/blog/ultimate-guide-to-app-store-compliant-ota-updates/). For product-level live delivery, see [Capacitor live updates](https://capgo.app/live-update/) and [how live updates for Capacitor work](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
+
+## Device and firmware OTA vs app-level OTA
+
+**Device and firmware OTA** updates the operating system or radio firmware. Android OTA updates from Google or the OEM replace the system partition. iOS uses similar over-the-air paths for platform releases. Users see these in system settings, not inside your product's release notes.
+
+**App-level OTA** updates what your application loads at runtime after the install is already on the device. In hybrid stacks that usually means JavaScript, HTML, CSS, images, configuration, and copy inside a WebView or JavaScript engine. The native binary that passed App Store or Google Play review stays in place until you ship a new store build.
+
+| Layer | What changes | Typical example |
+|---|---|---|
+| Device OTA | OS, drivers, security patches | Android system update prompt |
+| Store-mediated app update | Whole APK or IPA | Google Play in-app update |
+| App-level OTA | Web bundle and runtime assets | Capacitor live update channel |
+
+Cordova and Capacitor teams almost always mean the third row when they ask about **over the air apps** or an **OTA release** in CI. If you need a narrower definition, [what is an OTA update](https://capgo.app/blog/what-is-ota-update/) walks the same split with mobile examples.
+
+## Are OTA updates safe and allowed by Apple and Google?
+
+**Safety** depends on signing, integrity checks, staged channels, rollback, and telemetry, not on the word OTA. A production updater should verify manifests, keep a known-good bundle, and activate atomically so a partial download cannot brick the app.
+
+**Store policy** is separate from security engineering. Apple expects interpreted code delivered after review to stay within the app's primary purpose and not introduce unreviewed native behavior. Google Play generally allows updates to JavaScript and other web code executed in a WebView or bundled JavaScript engine when they match the app's declared functionality. Native plugins, new permissions, or SDK swaps still belong in a store release on both platforms.
+
+Capgo's [guide to app-store-compliant OTA updates](https://capgo.app/blog/ultimate-guide-to-app-store-compliant-ota-updates/) maps those rules to day-to-day release choices. For build vs buy on infrastructure, see [open source vs proprietary app update solutions](https://capgo.app/blog/open-source-vs-proprietary-app-update-solutions/).
 
 ## Table of Contents
+- [Device and firmware OTA vs app-level OTA](#device-and-firmware-ota-vs-app-level-ota)
+- [Are OTA updates safe and allowed by Apple and Google?](#are-ota-updates-safe-and-allowed-by-apple-and-google)
 - [A Practical Definition of OTA Updates](#a-practical-definition-of-ota-updates)
 - [How an OTA Update Actually Reaches a Device](#how-an-ota-update-actually-reaches-a-device)
   - [The parts that have to line up](#the-parts-that-have-to-line-up)
