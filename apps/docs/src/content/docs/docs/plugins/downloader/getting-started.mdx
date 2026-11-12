@@ -52,6 +52,24 @@ const task = await CapacitorDownloader.download({
 });
 ```
 
+## Example: completion notification
+
+When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. Tapping the notification reopens the app. Use `downloadCompleted` events when the app stays in the foreground.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/large-pack.zip',
+  destination: 'downloads/offline-pack.zip',
+  downloadCompletedNotificationText: 'Your pack is ready',
+  notification: 'hidden', // Android: rely on plugin events and the completion alert
+});
+```
+
+On Android, pair `notification: 'hidden'` with `downloadCompletedNotificationText` when you do not want DownloadManager progress notifications but still want a completion alert.
+
 ## Example: pause and resume
 
 ```typescript
@@ -169,6 +187,13 @@ export interface DownloadOptions {
   network?: 'cellular' | 'wifi-only';
   /** Download priority level */
   priority?: 'high' | 'normal' | 'low';
+  /** Android DownloadManager notification visibility */
+  notification?: 'completed' | 'progress' | 'hidden';
+  /**
+   * Optional localized text for a system notification after a successful download.
+   * Requires notification permission on iOS and Android.
+   */
+  downloadCompletedNotificationText?: string;
 }
 ```
 
