@@ -1,6 +1,7 @@
 import { XMLParser } from 'fast-xml-parser'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import { isGonePath } from '../apps/shared/gonePaths.ts'
 import { defaultLocale, locales } from '../apps/web/src/services/locale'
@@ -12,12 +13,13 @@ interface SitemapUrl {
   priority?: number
 }
 
+const ROOT = fileURLToPath(new URL('../', import.meta.url))
 const HOSTNAME = 'https://capgo.app'
-const EXCLUDED_SITEMAP_PATHS = new Set(['/tools/ios-udid-finder/result/', '/featured/'])
+const EXCLUDED_SITEMAP_PATHS = new Set(['/tools/ios-udid-finder/result/', '/featured/', '/410/'])
 
 // Paths that public/_redirects sends elsewhere must not be listed: a sitemap should only contain final 200 URLs.
 function loadRedirectedPaths(): Set<string> {
-  const redirectsPath = join(process.cwd(), 'apps/web/public/_redirects')
+  const redirectsPath = join(ROOT, 'apps/web/public/_redirects')
   const redirected = new Set<string>()
   if (!existsSync(redirectsPath)) return redirected
   for (const line of readFileSync(redirectsPath, 'utf8').split('\n')) {
@@ -90,7 +92,7 @@ function appendSupportedLanguagePaths(content: string): string {
 }
 
 function resolveDistDir(appName: 'web' | 'docs'): string {
-  const distRoot = join('apps', appName, 'dist')
+  const distRoot = join(ROOT, 'apps', appName, 'dist')
   const clientDist = join(distRoot, 'client')
   return existsSync(clientDist) ? clientDist : distRoot
 }
@@ -98,7 +100,7 @@ function resolveDistDir(appName: 'web' | 'docs'): string {
 const WEB_DIST = resolveDistDir('web')
 const DOCS_DIST = resolveDistDir('docs')
 
-async function normalizeSitemap(inputPath: string, outputPath = inputPath): Promise<boolean> {
+export async function normalizeSitemap(inputPath: string, outputPath = inputPath): Promise<boolean> {
   if (!existsSync(inputPath)) return false
 
   const xmlData = readFileSync(inputPath, 'utf-8')
@@ -120,6 +122,7 @@ async function normalizeSitemap(inputPath: string, outputPath = inputPath): Prom
       lastmod: item.lastmod,
       changefreq: item.changefreq,
       priority: item.priority,
+      links: [...locales.map((lang) => ({ lang, url: localizedUrl(item.loc, lang) })), { lang: 'x-default', url: localizedUrl(item.loc, defaultLocale) }],
     })
   })
 
@@ -129,31 +132,25 @@ async function normalizeSitemap(inputPath: string, outputPath = inputPath): Prom
   return true
 }
 
-const sitemapEntries: string[] = []
-
-if (await normalizeSitemap(join(WEB_DIST, 'sitemap-0.xml'))) {
-  sitemapEntries.push(`${HOSTNAME}/sitemap-0.xml`)
-}
-
-if (await normalizeSitemap(join(DOCS_DIST, 'sitemap-0.xml'), join(WEB_DIST, 'docs-sitemap-0.xml'))) {
-  sitemapEntries.push(`${HOSTNAME}/docs-sitemap-0.xml`)
-}
-
-for (const docsArtifact of ['llms.txt', 'llms-full.txt']) {
-  const sourcePath = join(DOCS_DIST, docsArtifact)
-  if (existsSync(sourcePath)) {
-    writeFileSync(join(WEB_DIST, docsArtifact), appendSupportedLanguagePaths(readFileSync(sourcePath, 'utf-8')), 'utf-8')
+if (import.meta.main) {
+  if (process.argv.includes('--docs')) {
+    if (!(await normalizeSitemap(join(DOCS_DIST, 'sitemap-docs-0.xml')))) throw new Error('Missing docs sitemap')
+  } else {
+    const sitemapEntries: string[] = []
+    if (await normalizeSitemap(join(WEB_DIST, 'sitemap-0.xml'))) sitemapEntries.push(`${HOSTNAME}/sitemap-0.xml`)
+    // Docs deploy independently, so this entry must not depend on a local docs build.
+    sitemapEntries.push(`${HOSTNAME}/sitemap-docs-0.xml`)
+    for (const docsArtifact of ['llms.txt', 'llms-full.txt']) {
+      const sourcePath = join(DOCS_DIST, docsArtifact)
+      if (existsSync(sourcePath)) writeFileSync(join(WEB_DIST, docsArtifact), appendSupportedLanguagePaths(readFileSync(sourcePath, 'utf-8')), 'utf-8')
+    }
+    const sitemapIndex = [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      ...sitemapEntries.map((loc) => `  <sitemap><loc>${loc}</loc></sitemap>`),
+      '</sitemapindex>',
+      '',
+    ].join('\n')
+    writeFileSync(join(WEB_DIST, 'sitemap-index.xml'), sitemapIndex, 'utf-8')
   }
-}
-
-if (sitemapEntries.length > 0) {
-  const sitemapIndex = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...sitemapEntries.map((loc) => `  <sitemap><loc>${loc}</loc></sitemap>`),
-    '</sitemapindex>',
-    '',
-  ].join('\n')
-
-  writeFileSync(join(WEB_DIST, 'sitemap-index.xml'), sitemapIndex, 'utf-8')
 }

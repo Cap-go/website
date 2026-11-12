@@ -5,6 +5,7 @@ import { withDevHostNoindex } from '../../shared/devHostNoindex'
 import { isGonePath } from '../../shared/gonePaths'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
+import { localeNames } from '../../web/src/services/locale'
 import { translationStyleGuide } from './style-guides'
 
 const SUPPORTED_LOCALES = ['de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'zh'] as const
@@ -19,7 +20,14 @@ type AiMessage = {
 type AiBinding = {
   run(
     model: string,
-    input: { messages: AiMessage[]; temperature?: number; max_tokens?: number; response_format?: unknown; chat_template_kwargs?: { enable_thinking: boolean } },
+    input: {
+      messages: AiMessage[]
+      temperature?: number
+      max_tokens?: number
+      response_format?: unknown
+      chat_template_kwargs?: { enable_thinking: boolean }
+      reasoning_effort?: 'none'
+    },
   ): Promise<unknown>
 }
 
@@ -174,7 +182,7 @@ const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
 // Override with TRANSLATION_MODEL.
 const DEFAULT_MODEL = '@cf/qwen/qwen3.8-27b'
 // Hybrid reasoning models think before answering by default. Translation does not need
-// it (same benchmark score, a fraction of the latency); the optional review pass keeps it.
+// it (same benchmark score, a fraction of the latency); the optional review pass checks the draft without it.
 const THINKING_MODEL_PREFIXES = ['@cf/deepseek-ai/deepseek-v4', '@cf/google/gemma-4', '@cf/qwen/qwen3', '@cf/zai-org/glm-'] as const
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
@@ -193,9 +201,11 @@ const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
 // Bump this when the prompt or style guides change, or a model swap should replace
 // existing translations, to translate everything again. A model swap alone does not
 // need a bump: stored segments stay, only new or edited copy uses the new model.
-// Bump TRANSLATION_CACHE_VERSION alone when only HTML rendering changes: pages are
-// rebuilt from memory without new AI calls.
 const TRANSLATION_MEMORY_VERSION = '2026-10-25-style-guides-v4'
+// Changes the source hash, preserving old pages while a queued refresh rebuilds
+// metadata from memory. Only previously unseen schema text needs new AI calls.
+const TRANSLATION_RENDER_VERSION = '2026-11-11-localized-seo-v1'
+const TRANSLATION_CHECKED_AT_HEADER = 'X-Capgo-Translation-Checked-At'
 const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
@@ -283,17 +293,6 @@ const TRANSLATABLE_META = new Set(['description', 'keywords', 'title', 'og:title
 const SEO_DESCRIPTION_META_KEYS = new Set(['description', 'og:description', 'twitter:description'])
 const SEO_DESCRIPTION_MIN_LENGTH = 120
 const SEO_DESCRIPTION_MAX_LENGTH = 159
-const SEO_DESCRIPTION_FALLBACK_SUFFIX = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
-const SEO_DESCRIPTION_SUFFIXES: Record<Locale, string> = {
-  de: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-  es: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-  fr: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-  id: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-  it: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-  ja: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-  ko: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-  zh: SEO_DESCRIPTION_FALLBACK_SUFFIX,
-}
 const TRANSLATABLE_ATTRIBUTES = new Set(['alt', 'aria-label', 'placeholder', 'title'])
 const STATIC_PREFIXES = [
   '/_astro/',
@@ -1566,6 +1565,14 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
     else addSegment(parts, segments, tail, 'text', insideBody, undefined, currentAnchorPath())
   }
 
+  const known = new Set(segments.map((segment) => normalizeStructuredDataLabel(decodeHtmlEntities(segment.text))))
+  for (const text of collectStructuredDataTexts(html)) {
+    if (!known.has(text) && hasAsciiLetter(text)) {
+      known.add(text)
+      segments.push({ text, leading: '', trailing: '', mode: 'text', inBody: false })
+    }
+  }
+
   return { parts, segments }
 }
 
@@ -2201,7 +2208,8 @@ function parseKeyedTranslations(rawValue: unknown, batchLength: number): string[
   return parseTranslationArray(rawValue)
 }
 
-function aiRequestOptions(model: string): { chat_template_kwargs?: { enable_thinking: boolean } } {
+function aiRequestOptions(model: string): { chat_template_kwargs?: { enable_thinking: boolean }; reasoning_effort?: 'none' } {
+  if (model.startsWith('@cf/deepseek-ai/deepseek-v4')) return { reasoning_effort: 'none' }
   return THINKING_MODEL_PREFIXES.some((prefix) => model.startsWith(prefix)) ? { chat_template_kwargs: { enable_thinking: false } } : {}
 }
 
@@ -2243,7 +2251,7 @@ function polishTranslatedText(targetLanguage: string, text: string): string {
 }
 
 // Optional second pass (TRANSLATION_REVIEW_MODEL): a reviewer model fixes the drafts
-// against the same style guide, with its reasoning left on. Any failure keeps the drafts,
+// against the same style guide, with reasoning disabled for structured output. Any failure keeps the drafts,
 // flagged as unreviewed so they are not stored in translation memory.
 async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<{ translations: string[]; reviewed: boolean }> {
   const reviewModel = env.TRANSLATION_REVIEW_MODEL?.trim()
@@ -2266,6 +2274,7 @@ type ReviewItem = { id: string; text: string; context?: string }
 
 async function reviewTranslatedBatchWithModel(env: Env, reviewModel: string, targetLanguage: string, items: ReviewItem[], drafts: string[]): Promise<string[]> {
   const result = await env.AI.run(reviewModel, {
+    ...aiRequestOptions(reviewModel),
     temperature: 0,
     max_tokens: 16384,
     response_format: {
@@ -2872,7 +2881,7 @@ async function sha256Hex(value: string): Promise<string> {
 }
 
 async function translationSourceHash(locale: Locale, sourceHtml: string): Promise<string> {
-  return await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${sourceHtml}`)
+  return await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${TRANSLATION_RENDER_VERSION}:${locale}:${sourceHtml}`)
 }
 
 function setLinkRel(html: string, rel: string, tag: string): string {
@@ -2913,14 +2922,10 @@ function truncateSeoDescription(value: string): string {
   return cut.replace(/[\s,;:–—-]+$/, '') + '...'
 }
 
-function buildSeoMetaDescription(content: string, locale: Locale): string {
-  const normalized = content.replaceAll(/\s+/g, ' ').trim()
-  if (!normalized || normalized.length >= SEO_DESCRIPTION_MIN_LENGTH) return truncateSeoDescription(normalized)
-
-  let expanded = normalized + ' ' + SEO_DESCRIPTION_SUFFIXES[locale]
-  if (expanded.length < SEO_DESCRIPTION_MIN_LENGTH) expanded = expanded + ' ' + SEO_DESCRIPTION_FALLBACK_SUFFIX
-
-  return truncateSeoDescription(expanded)
+function buildSeoMetaDescription(content: string, _locale: Locale): string {
+  // A minimum character count is not a search requirement. Padding adds unrelated
+  // copy and is especially harmful to naturally concise CJK descriptions.
+  return truncateSeoDescription(content.replaceAll(/\s+/g, ' ').trim())
 }
 
 function expandShortMetaDescriptions(html: string, locale: Locale): string {
@@ -3187,7 +3192,7 @@ function collectStructuredDataLabels(segments: Segment[], translations: string[]
     for (let index = 0; index < segments.length; index += 1) {
       const segment = segments[index]
       const translated = translations[index]
-      if (segment.mode !== mode || !segment.inBody || typeof translated !== 'string') continue
+      if (segment.mode !== mode || typeof translated !== 'string') continue
       const source = normalizeStructuredDataLabel(decodeHtmlEntities(segment.text))
       const target = normalizeStructuredDataLabel(decodeHtmlEntities(translated))
       if (!source || !target) continue
@@ -3198,15 +3203,40 @@ function collectStructuredDataLabels(segments: Segment[], translations: string[]
   return labels
 }
 
+const STRUCTURED_DATA_TEXT_KEYS = new Set(['name', 'headline', 'description', 'text'])
 const STRUCTURED_DATA_URL_KEYS = new Set(['url', '@id', 'item'])
 // Entities that describe the whole site: their URL and @id are the same on every page and in every language.
 const STRUCTURED_DATA_SITE_TYPES = new Set(['Organization', 'WebSite', 'Person'])
 const STRUCTURED_DATA_SITE_ID_HASHES = new Set(['#organization', '#website'])
 
-// JSON-LD is copied from the English page untouched. Point the page's own URL and its breadcrumb
+function collectStructuredDataTexts(html: string): string[] {
+  const texts: string[] = []
+  const walk = (node: unknown): void => {
+    if (Array.isArray(node)) return node.forEach(walk)
+    if (!node || typeof node !== 'object') return
+    const record = node as Record<string, unknown>
+    const types = Array.isArray(record['@type']) ? record['@type'] : [record['@type']]
+    if (types.some((type) => typeof type === 'string' && STRUCTURED_DATA_SITE_TYPES.has(type))) return
+    for (const [key, value] of Object.entries(record)) {
+      if (typeof value === 'string' && STRUCTURED_DATA_TEXT_KEYS.has(key)) texts.push(normalizeStructuredDataLabel(value))
+      else walk(value)
+    }
+  }
+  for (const script of collectHtmlScripts(html)) {
+    if (script.type !== 'application/ld+json') continue
+    try {
+      walk(JSON.parse(executableScriptBody(script)))
+    } catch {
+      // Leave malformed JSON-LD intact; it must not prevent the page translation.
+    }
+  }
+  return texts
+}
+
+// JSON-LD shares translations with page copy and translates schema-only text. Point the page's own URL and its breadcrumb
 // trail at the localized paths so structured data agrees with the canonical URL of the translated page.
 // Site-wide identities (organization, website) keep their English URL on purpose.
-// Breadcrumb names reuse the translation already made for the same visible text, when there is one.
+// Text fields reuse the same translations as visible text and metadata.
 function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, basePath: string, labels?: ReadonlyMap<string, string>): string {
   const pagePath = basePath.endsWith('/') ? basePath : `${basePath}/`
   const isPageUrl = (value: string): boolean => {
@@ -3232,13 +3262,13 @@ function localizeStructuredData(html: string, requestUrl: URL, locale: Locale, b
       if (typeof value === 'string' && STRUCTURED_DATA_URL_KEYS.has(key) && (breadcrumb || isPageUrl(value))) {
         result[key] = localizeHref(value, locale, requestUrl)
         if (key === 'url' && !breadcrumb) describesPage = true
-      } else if (typeof value === 'string' && key === 'name' && breadcrumb) {
+      } else if (typeof value === 'string' && STRUCTURED_DATA_TEXT_KEYS.has(key)) {
         result[key] = labels?.get(normalizeStructuredDataLabel(value)) ?? value
       } else {
         result[key] = walk(value, breadcrumb)
       }
     }
-    if (describesPage && typeof result.inLanguage === 'string') result.inLanguage = locale
+    if (describesPage || typeof result.inLanguage === 'string') result.inLanguage = locale
     return result
   }
 
@@ -3259,6 +3289,16 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale, 
   rewritten = removeTagsByAttribute(rewritten, 'link', 'rel', 'alternate')
   rewritten = setLinkRel(rewritten, 'canonical', `<link rel="canonical" href="${escapeHtmlAttribute(localizedUrl)}" />`)
   rewritten = insertAfterFirstTagByAttribute(rewritten, 'link', 'rel', 'canonical', alternateLinks(requestUrl, basePath))
+  rewritten = removeTagsByAttribute(rewritten, 'meta', 'property', 'og:locale')
+  rewritten = removeTagsByAttribute(rewritten, 'meta', 'property', 'og:locale:alternate')
+  rewritten = insertBeforeClosingTag(
+    rewritten,
+    'head',
+    [
+      `<meta property="og:locale" content="${localeNames[locale].replace('-', '_')}" />`,
+      ...ALL_LOCALES.filter((other) => other !== locale).map((other) => `<meta property="og:locale:alternate" content="${localeNames[other].replace('-', '_')}" />`),
+    ].join('\n'),
+  )
   rewritten = setMetaContent(rewritten, 'property', 'og:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'property', 'twitter:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'name', 'twitter:url', localizedUrl)
@@ -3376,13 +3416,7 @@ async function loadSourceHtml(request: Request, env: Env, requestUrl: URL, local
   return { type: 'html', originResponse, sourceHtml }
 }
 
-function createTranslatedHtmlResponse(
-  originResponse: Response,
-  translatedHtml: string,
-  requestUrl: URL,
-  locale: Locale,
-  options?: LocalizedHtmlOptions,
-): Response {
+function createTranslatedHtmlResponse(originResponse: Response, translatedHtml: string, requestUrl: URL, locale: Locale, options?: LocalizedHtmlOptions): Response {
   const localizedHtml = rewriteMetadataAndLinks(translatedHtml, requestUrl, locale, options)
   const headers = new Headers(originResponse.headers)
   headers.set('Content-Type', 'text/html; charset=utf-8')
@@ -3706,21 +3740,32 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
   const knownSourceHash = readTranslationSourceHash(translatedResponse)
   const translatedHtml = await translatedResponse.text()
 
-  if (cacheState === 'HIT' && Date.now() - translatedAt < TRANSLATION_SOURCE_CHECK_SECONDS * 1000) {
+  if (Date.now() - Math.max(translatedAt, Number(responseHeaders.get(TRANSLATION_CHECKED_AT_HEADER)) || 0) < TRANSLATION_SOURCE_CHECK_SECONDS * 1000) {
     return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, locale, false)
   }
 
   try {
     const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
-    if (englishHtml && knownSourceHash !== (await translationSourceHash(locale, englishHtml))) {
-      // Only cheap, AI-free syncing here: title and meta tags are retranslated by the
-      // queued refresh, never while the visitor waits.
-      let syncedHtml = syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
+    if (englishHtml) {
+      const unchanged = knownSourceHash === (await translationSourceHash(locale, englishHtml))
+      // Keep current executable scripts even while a changed page waits in the queue.
+      let syncedHtml = unchanged ? translatedHtml : syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
       if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
         syncedHtml = insertBeforeClosingTag(syncedHtml, 'body', languageSelectorHashScript())
       }
       if (syncedHtml !== translatedHtml) responseHeaders.set(TRANSLATION_SCRIPTS_HEADER, 'synced')
-      return withResponseHeaders(new Response(syncedHtml, { status, statusText, headers: responseHeaders }), cacheState, locale, false)
+      responseHeaders.set(TRANSLATION_CHECKED_AT_HEADER, Date.now().toString())
+      let checked = new Response(syncedHtml, { status, statusText, headers: responseHeaders })
+      if (unchanged && cacheState === 'STALE') {
+        // The source still matches exactly. Renew the stored page without rebuilding
+        // batches, reading segment memory or calling AI.
+        checked = toCachedResponse(checked, knownSourceHash ?? undefined)
+        await cacheTranslatedResponse(env, requestUrl, locale, cacheKeyFor(requestUrl, locale), checked.clone())
+        cacheState = 'HIT'
+      } else {
+        await repopulateTranslatedPageCacheSafely(cacheKeyFor(requestUrl, locale), checked.clone(), requestUrl, locale)
+      }
+      return withResponseHeaders(checked, cacheState, locale, false)
     }
   } catch (error) {
     console.error('Failed to sync executable scripts from current English source', {
@@ -3788,7 +3833,11 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
   const priority = shouldUsePriorityTranslationQueue(request)
 
   let cachedResponse = await caches.default.match(cacheKey)
-  if (cachedResponse && Date.now() - readTranslatedAt(cachedResponse) > FRESH_MS) {
+  if (
+    cachedResponse &&
+    Date.now() - readTranslatedAt(cachedResponse) > FRESH_MS &&
+    Date.now() - Number(cachedResponse.headers.get(TRANSLATION_CHECKED_AT_HEADER) || 0) >= TRANSLATION_SOURCE_CHECK_SECONDS * 1000
+  ) {
     // A queue job in another datacenter may already have refreshed this page in R2.
     const storedResponse = await readStoredTranslatedResponseSafely(env, requestUrl, locale)
     if (storedResponse && readTranslatedAt(storedResponse) > readTranslatedAt(cachedResponse)) {
@@ -3800,11 +3849,8 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
   if (cachedResponse) {
     const translatedAt = readTranslatedAt(cachedResponse)
     const isStale = Date.now() - translatedAt > FRESH_MS
-    if (isStale) {
-      scheduleTranslationBackgroundTask(ctx, enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority))
-    } else {
-      scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, cachedResponse, priority)
-    }
+    if (isStale && !isHtmlResponse(cachedResponse)) scheduleTranslationBackgroundTask(ctx, enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority))
+    else scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, cachedResponse, priority)
     return await serveTranslatedCachedPage(env, requestUrl, locale, cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
@@ -3813,11 +3859,8 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     const translatedAt = readTranslatedAt(storedResponse)
     const isStale = Date.now() - translatedAt > FRESH_MS
     await repopulateTranslatedPageCacheSafely(cacheKey, storedResponse.clone(), requestUrl, locale)
-    if (isStale) {
-      scheduleTranslationBackgroundTask(ctx, enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority))
-    } else {
-      scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, storedResponse, priority)
-    }
+    if (isStale && !isHtmlResponse(storedResponse)) scheduleTranslationBackgroundTask(ctx, enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority))
+    else scheduleTranslatedSourceCheck(ctx, env, requestUrl, locale, storedResponse, priority)
     return await serveTranslatedCachedPage(env, requestUrl, locale, storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
@@ -4169,6 +4212,7 @@ export const __translationWorkerTest = {
   isNavGuardSegment,
   renderTranslatedHtml,
   expandShortMetaDescriptions,
+  translationSourceHash,
   isCrawlerRequest,
   rewriteMetadataAndLinks,
   collectStructuredDataLabels,
