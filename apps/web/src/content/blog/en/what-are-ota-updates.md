@@ -1,6 +1,6 @@
 ---
 slug: what-are-ota-updates
-title: 'OTA Updates: Definition, Android, iOS, and Store Rules'
+title: 'OTA Updates in 2026: Definition, Android, iOS, and Store Rules'
 description: >-
   OTA updates deliver software over the air. Learn what OTA apps are, Android
   and iOS live updates, store rules, safety, and build vs buy for mobile teams.
