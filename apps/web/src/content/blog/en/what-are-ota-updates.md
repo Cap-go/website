@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-16T07:24:16.867Z
-updated_at: 2026-11-12T10:00:00.000Z
+updated_at: 2026-11-12T17:15:33.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/dc7ab5f8-e52a-410f-b024-c406f84bb954/what-are-ota-updates-software-updates.jpg'
 head_image_alt: 'OTA Updates: Definition, Android, iOS, and Store Rules Capgo blog'
 keywords: >-
