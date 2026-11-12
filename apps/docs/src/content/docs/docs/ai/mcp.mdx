@@ -170,6 +170,8 @@ Every hosted tool advertises an `outputSchema` in `tools/list`. Successful HTTP 
 
 Tools implemented directly by the MCP server use the object described by their own output schema. For example, `capgo_whoami` returns `user_id`, `apikey_id`, `apikey_name`, and `apikey_expires_at`, while skill reads return `skill` and `contents`.
 
+The schema describes each declared field, including identifier sources, units and missing-data states. Native build upload instructions can omit `max_bytes` when the builder does not supply a size limit. Keep the returned `job_id`, upload with the provided method and headers, then start that same job; do not request another build because the optional limit is absent.
+
 Check `isError` before consuming a result. Invalid upstream responses return an actionable tool error instead of an untyped success. A result-size error requires pagination, narrower filters, or a shorter time range. If a write already ran, inspect the resource before retrying to avoid duplicate actions. Reading structured output does not enable additional data collection or retention.
 
 ### Hosted MCP read-only build status
