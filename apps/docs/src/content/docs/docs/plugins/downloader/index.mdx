@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking."
+  tagline: "Capacitor plugin for downloading files with background support. On Android, opt in to an OkHttp engine for app-private destinations (cache, files) with quiet notifications."
   actions:
     - text: Get started
       link: /docs/plugins/downloader/getting-started/
@@ -20,9 +20,17 @@ hero:
       variant: minimal
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
 ## Overview
 
 Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking.
+
+<Aside type="tip" title="Android OkHttp engine (8.4.0+)">
+
+Opt in to **OkHttp** for downloads into app-private storage (`cache/...`, `files/...`). Use `androidHttpEngine: 'auto'` (default) or `'okhttp'`, and `notification: 'hidden'` for silent transfers with `downloadProgress` events. Legacy paths and `public-downloads/...` still use DownloadManager. See [Android OkHttp engine](/docs/plugins/downloader/getting-started/#android-okhttp-engine).
+
+</Aside>
 
 ## Core Capabilities
 

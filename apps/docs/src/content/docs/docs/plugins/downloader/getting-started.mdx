@@ -74,9 +74,60 @@ const path =
 const info = await CapacitorDownloader.getFileInfo({ path });
 ```
 
+## Android OkHttp engine
+
+From plugin **8.4.0+**, Android can use an opt-in **OkHttp** stack for app-private destinations while keeping **DownloadManager** for legacy external storage and the public Downloads folder.
+
+### Choose `androidHttpEngine`
+
+| Value | When to use |
+| ----- | ----------- |
+| `'auto'` (default) | OkHttp for `cache/...`, `files/...`, and absolute paths under internal cache/data/files; DownloadManager for other relative paths and `public-downloads/...` |
+| `'okhttp'` | Force OkHttp (sensitive offline packs, internal-only files) |
+| `'downloadManager'` | Force system DownloadManager (same as pre-8.4 default behavior for external paths) |
+
+### Android `destination` prefixes
+
+| Prefix | Resolves to | `auto` engine |
+| ------ | ----------- | ------------- |
+| `cache/...` | App cache directory | OkHttp |
+| `files/...` | App-private files directory | OkHttp |
+| `public-downloads/...` | Public Downloads folder | DownloadManager |
+| Other relative paths | App external files directory (default) | DownloadManager |
+
+### Example: private offline pack
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const progress = await CapacitorDownloader.addListener('downloadProgress', (event) => {
+  if (event.id === 'offline-pack') {
+    console.log(event.progress);
+  }
+});
+
+await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/pack.zip',
+  destination: 'files/offline/pack.zip',
+  androidHttpEngine: 'auto',
+  notification: 'hidden',
+});
+```
+
+### Notifications with OkHttp
+
+- `'hidden'`: no system notification; use `downloadProgress` / `downloadCompleted` listeners (recommended for OkHttp).
+- `'completed'`: no notification during transfer; one completion notification when the file finishes.
+- `'progress'`: same as `'hidden'` on the OkHttp path (DownloadManager still shows progress notifications).
+
+DownloadManager destinations continue to support `'completed'`, `'progress'`, and `'hidden'` as before.
+
+Shipped in [capacitor-downloader PR #105](https://github.com/Cap-go/capacitor-downloader/pull/105).
+
 ## Common pitfalls
 
-- **Storage destination**: pick a `destination` your app can read on each platform.
+- **Storage destination**: pick a `destination` your app can read on each platform. On Android, use `cache/` or `files/` prefixes for app-private OkHttp downloads.
 - **Background**: downloads run on iOS and Android in the background. On Web, `download()` is not implemented; use a browser download flow instead.
 - **Status**: use `checkStatus` while the app process is still alive. On iOS, task IDs are not restored after relaunch.
 
