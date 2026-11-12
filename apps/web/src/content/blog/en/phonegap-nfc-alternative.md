@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-11-12T09:00:00.000Z
-updated_at: 2026-11-12T09:00:00.000Z
+updated_at: 2026-11-12T17:22:55.000Z
 head_image: /migrating-cordova-to-capacitor.webp
 head_image_alt: "Illustration of migrating a Cordova app to Capacitor, used for an NFC plugin guide"
 keywords: phonegap-nfc alternative, cordova nfc plugin capacitor, capacitor nfc read write, @capgo/capacitor-nfc, phonegap nfc migration
