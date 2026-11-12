@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin for downloading files with background support. On Android, opt in to an OkHttp engine for app-private destinations (cache, files) with quiet notifications."
+  tagline: "Capacitor plugin for downloading files with background support. On Android, 8.4.0 adds an opt-in OkHttp engine for app-private destinations (cache, files) with quiet notifications."
   actions:
     - text: Get started
       link: /docs/plugins/downloader/getting-started/
@@ -26,9 +26,9 @@ import { Aside } from '@astrojs/starlight/components';
 
 Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking.
 
-<Aside type="tip" title="Android OkHttp engine (8.4.0+)">
+<Aside type="tip" title="Android OkHttp engine (upcoming in 8.4.0)">
 
-Opt in to **OkHttp** for downloads into app-private storage (`cache/...`, `files/...`). Use `androidHttpEngine: 'auto'` (default) or `'okhttp'`, and `notification: 'hidden'` for silent transfers with `downloadProgress` events. Legacy paths and `public-downloads/...` still use DownloadManager. See [Android OkHttp engine](/docs/plugins/downloader/getting-started/#android-okhttp-engine).
+Opt in to **OkHttp** for downloads into app-private storage (`cache/...`, `files/...`). Use `androidHttpEngine: 'auto'` (default) or `'okhttp'`, and `notification: 'hidden'` for silent transfers with `downloadProgress` events. When `androidHttpEngine` is `'auto'`, legacy paths and `public-downloads/...` use DownloadManager. Setting it to `'okhttp'` selects OkHttp for those paths too. This API is not in the current npm package; it ships in 8.4.0. See [Android OkHttp engine](/docs/plugins/downloader/getting-started/#android-okhttp-engine).
 
 </Aside>
 
