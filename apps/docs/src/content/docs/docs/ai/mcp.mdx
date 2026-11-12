@@ -172,6 +172,8 @@ Tools implemented directly by the MCP server use the object described by their o
 
 The schema describes each declared field, including identifier sources, units and missing-data states. Native build upload instructions can omit `max_bytes` when the builder does not supply a size limit. Keep the returned `job_id`, upload with the provided method and headers, then start that same job; do not request another build because the optional limit is absent.
 
+Bundle and native-version adoption datasets report percentages on a 0 to 100 scale. Where returned, `latestVersion` identifies the version with the largest share on the most recent day with observed activity, rather than the newest uploaded release.
+
 Check `isError` before consuming a result. Invalid upstream responses return an actionable tool error instead of an untyped success. A result-size error requires pagination, narrower filters, or a shorter time range. If a write already ran, inspect the resource before retrying to avoid duplicate actions. Reading structured output does not enable additional data collection or retention.
 
 ### Hosted MCP read-only build status
@@ -180,7 +182,7 @@ On `https://api.capgo.app/mcp`, `capgo_get_build_status` calls the build status 
 
 The Capgo CLI, `GET /build/status`, and the [local CLI MCP server](/docs/cli/reference/mcp/) still persist on every status read. External callers cannot enable the read-only path over HTTP.
 
-Responses include `diagnostic`, `poll_after_seconds: 15`, queue fields, and the same builder status fields as the REST endpoint. When the builder still reports `running` past the app configured timeout, a read-only poll adds:
+Responses include `diagnostic`, `poll_after_seconds: 15`, queue fields, and the same builder status fields as the REST endpoint. Build timestamps `started_at` and `completed_at` use Unix epoch milliseconds; `null` means the corresponding lifecycle event has not happened or its time is unavailable. When the builder still reports `running` past the app configured timeout, a read-only poll adds:
 
 - `timeout_exceeded: true`
 - `timeout_warning` with guidance to call `capgo_cancel_build` if you need to stop the job, or wait for Capgo reconciliation (`cron_reconcile_build_status`) to finish the job and record build time.
