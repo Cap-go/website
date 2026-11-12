@@ -76,14 +76,14 @@ const info = await CapacitorDownloader.getFileInfo({ path });
 
 ## Android OkHttp engine
 
-This option ships in plugin **8.4.0**, which is not released yet. It is tracked in [capacitor-downloader PR #105](https://github.com/Cap-go/capacitor-downloader/pull/105). Until that version is published, installing `@capgo/capacitor-downloader` from npm does not include `androidHttpEngine`. After 8.4.0, Android can use an opt-in **OkHttp** stack for app-private destinations while keeping **DownloadManager** for legacy external storage and the public Downloads folder when `androidHttpEngine` is `'auto'`.
+This option ships in plugin **8.4.0**, which is not released yet. It is tracked in [capacitor-downloader PR #105](https://github.com/Cap-go/capacitor-downloader/pull/105). Until that version is published, installing `@capgo/capacitor-downloader` from npm does not include `androidHttpEngine`. After 8.4.0, Android can use an opt-in **OkHttp** stack for app-private destinations. With `androidHttpEngine: 'auto'`, **DownloadManager** is used for `public-downloads/...` and for other relative paths under app external files. If app external files storage is unavailable, those other relative paths fall back to app-private internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths.
 
 ### Choose `androidHttpEngine`
 
 | Value | When to use |
 | ----- | ----------- |
-| `'auto'` (default) | OkHttp for `cache/...`, `files/...`, and absolute paths under internal cache/data/files; DownloadManager for other relative paths and `public-downloads/...` |
-| `'okhttp'` | Force OkHttp (sensitive offline packs, internal-only files) |
+| `'auto'` (default) | OkHttp for `cache/...`, `files/...`, and absolute paths under internal cache/data/files; DownloadManager for other relative paths and `public-downloads/...`. If app external files storage is unavailable, other relative paths fall back to internal files storage and `auto` selects OkHttp. |
+| `'okhttp'` | Force OkHttp for app-private and internal destinations (sensitive offline packs, internal-only files). Requests to `public-downloads/...` are rejected. Transfers run in the app process and do not continue after the process is killed. |
 | `'downloadManager'` | Force system DownloadManager (same as pre-8.4 default behavior for external paths). Requests that target `files/...`, `cache/...`, or another app-private path under cache, data, or files are rejected. |
 
 ### Android `destination` prefixes
@@ -92,8 +92,8 @@ This option ships in plugin **8.4.0**, which is not released yet. It is tracked 
 | ------ | ----------- | ------------- |
 | `cache/...` | App cache directory | OkHttp |
 | `files/...` | App-private files directory | OkHttp |
-| `public-downloads/...` | Public Downloads folder | DownloadManager |
-| Other relative paths | App external files directory (default) | DownloadManager |
+| `public-downloads/...` | Public Downloads folder | DownloadManager (`'okhttp'` rejects this prefix) |
+| Other relative paths | App external files directory (default). If that storage is unavailable, app-private internal files. | DownloadManager, or OkHttp when the internal fallback is used |
 
 ### Example: private offline pack
 
@@ -115,7 +115,7 @@ await CapacitorDownloader.download({
 });
 ```
 
-OkHttp runs inside the app process. If Android kills that process, the download does not continue the way a DownloadManager transfer does. App-private destinations (`cache/...`, `files/...`) require OkHttp, so they cannot use DownloadManager's out-of-process continuation. For external and `public-downloads/...` paths, keep `androidHttpEngine` at `'auto'` (or set `'downloadManager'`) when the transfer must outlive the app process.
+OkHttp runs inside the app process. If Android kills that process, the download does not continue the way a DownloadManager transfer does. App-private destinations (`cache/...`, `files/...`) require OkHttp, so they cannot use DownloadManager's out-of-process continuation. For `public-downloads/...` and external-files paths, keep `androidHttpEngine` at `'auto'` (or set `'downloadManager'`) when the transfer must outlive the app process. Do not set `'okhttp'` for `public-downloads/...`; that request is rejected.
 
 ### Notifications with OkHttp
 
@@ -124,6 +124,12 @@ OkHttp runs inside the app process. If Android kills that process, the download 
 - `'progress'`: same as `'hidden'` on the OkHttp path (DownloadManager still shows progress notifications).
 
 DownloadManager destinations continue to support `'completed'`, `'progress'`, and `'hidden'` as before.
+
+### OkHttp limits
+
+- At most 4 OkHttp transfers run at the same time. Additional OkHttp downloads wait until a slot is free.
+- HTTP 206 Partial Content is not supported. The OkHttp path fails that response (this plugin does not resume through range requests).
+- `stop()` cancels an in-flight OkHttp transfer and deletes the destination file, including when the transfer has already finished.
 
 ## Common pitfalls
 
@@ -172,7 +178,7 @@ await CapacitorDownloader.resume({ id: 'id-123' });
 ### `stop`
 
 Stop and cancel a download permanently.
-Downloaded data will be deleted.
+Downloaded data will be deleted, including a file that already finished on the OkHttp path.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
