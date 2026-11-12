@@ -30,7 +30,7 @@ faq:
     answer: "Capgo docs at https://capgo.app/docs/plugins/camera-preview/, npm https://www.npmjs.com/package/@capgo/camera-preview, GitHub https://github.com/Cap-go/capacitor-camera-preview/."
 ---
 
-If you need a **cordova-plugin-camera-preview alternative** in a Capacitor app, use [`@capgo/camera-preview`](/plugins/camera-preview/). The Capgo plugin is explicitly **based on cordova-plugin-camera-preview** and keeps the same idea: a native camera stream behind or in front of your HTML so you can build custom scanners, AR-style overlays, and inline capture screens. This guide covers maintenance context, install steps, a short example, and an API map from Cordova callbacks to Capacitor promises.
+If you need a **cordova-plugin-camera-preview alternative** in a Capacitor app, use [`@capgo/camera-preview`](/plugins/capacitor-camera-preview/). The Capgo plugin is explicitly **based on cordova-plugin-camera-preview** and keeps the same idea: a native camera stream behind or in front of your HTML so you can build custom scanners, AR-style overlays, and inline capture screens. This guide covers maintenance context, install steps, a short example, and an API map from Cordova callbacks to Capacitor promises.
 
 ## Why migrate off the Cordova plugin
 
@@ -128,7 +128,7 @@ The Capgo README documents optional `iosCallKit` in `capacitor.config`. It defau
 ## Links and next steps
 
 - Plugin docs: [https://capgo.app/docs/plugins/camera-preview/](/docs/plugins/camera-preview/)
-- Marketing page: [/plugins/camera-preview/](/plugins/camera-preview/)
+- Marketing page: [/plugins/camera-preview/](/plugins/capacitor-camera-preview/)
 - npm: [https://www.npmjs.com/package/@capgo/camera-preview](https://www.npmjs.com/package/@capgo/camera-preview)
 - GitHub: [https://github.com/Cap-go/capacitor-camera-preview/](https://github.com/Cap-go/capacitor-camera-preview/)
 - Cordova upstream: [https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview](https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview)
