@@ -1,0 +1,32 @@
+---
+title: Downloader getting started
+description: Install and use @capgo/capacitor-downloader, including multi-file batches.
+---
+
+## Multi-file batch downloads
+
+Pass `files` to download several files under one batch id. Native platforms enqueue one transfer per entry and emit aggregate progress.
+
+```ts
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const listener = await CapacitorDownloader.addListener('downloadProgress', (data) => {
+  if (data.fileIndex != null) {
+    console.log(`Batch ${data.id}: file ${data.fileIndex} at ${data.fileProgress}, overall ${data.progress}`);
+  }
+});
+
+await CapacitorDownloader.download({
+  id: 'update-bundle',
+  files: [
+    { url: 'https://example.com/a.zip', destination: 'updates/a.zip' },
+    { url: 'https://example.com/b.zip', destination: 'updates/b.zip' },
+  ],
+  notification: 'hidden',
+});
+
+// Stop the whole batch (cancels every child transfer):
+await CapacitorDownloader.stop({ id: 'update-bundle' });
+```
+
+Progress events may include `fileIndex` (0-based) and `fileProgress` (0 to 1) alongside overall `progress`. `downloadCompleted` fires once when every file succeeds.
