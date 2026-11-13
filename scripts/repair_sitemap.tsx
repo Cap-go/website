@@ -57,19 +57,12 @@ function isAllowedSitemapUrl(item: SitemapUrl): boolean {
   return !EXCLUDED_SITEMAP_PATHS.has(basePath) && !REDIRECTED_SITEMAP_PATHS.has(basePath) && !isGonePath(pathname) && !isGonePath(basePath)
 }
 
-function expandLocalizedUrls(urls: SitemapUrl[]): SitemapUrl[] {
+function canonicalEnglishUrls(urls: SitemapUrl[]): SitemapUrl[] {
   const expanded = new Map<string, SitemapUrl>()
 
   for (const item of urls) {
-    for (const locale of locales) {
-      const loc = localizedUrl(item.loc, locale)
-      if (!expanded.has(loc)) {
-        expanded.set(loc, {
-          ...item,
-          loc,
-        })
-      }
-    }
+    const loc = localizedUrl(item.loc, defaultLocale)
+    if (!expanded.has(loc)) expanded.set(loc, { ...item, loc })
   }
 
   return [...expanded.values()].sort((left, right) => left.loc.localeCompare(right.loc))
@@ -116,13 +109,14 @@ export async function normalizeSitemap(inputPath: string, outputPath = inputPath
   const urls = sitemapUrls.filter(isAllowedSitemapUrl)
   const smStream = new SitemapStream({ hostname: HOSTNAME })
 
-  expandLocalizedUrls(urls).forEach((item) => {
+  canonicalEnglishUrls(urls).forEach((item) => {
     smStream.write({
       url: item.loc,
       lastmod: item.lastmod,
       changefreq: item.changefreq,
       priority: item.priority,
-      links: [...locales.map((lang) => ({ lang, url: localizedUrl(item.loc, lang) })), { lang: 'x-default', url: localizedUrl(item.loc, defaultLocale) }],
+      // Runtime HTML advertises only translations confirmed present in R2.
+      // Do not multiply URLs here: build time cannot know translation readiness.
     })
   })
 

@@ -5,6 +5,7 @@ import { withDevHostNoindex } from '../../shared/devHostNoindex'
 import { isGonePath } from '../../shared/gonePaths'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
 import { shouldIgnoreTranslationQueryParam } from '../../shared/translationQueryParams'
+import { TRANSLATION_CACHE_VERSION, readyTranslationLocales, rewriteReadyAlternates, storedTranslationPageKey } from '../../shared/translationReadiness'
 import { localeNames } from '../../web/src/services/locale'
 import { translationStyleGuide } from './style-guides'
 
@@ -44,6 +45,8 @@ type TranslationJob = {
   reason: TranslationQueueReason
   sourceHash?: string
   priority?: boolean
+  jobId?: string
+  attemptId?: string
 }
 
 type QueueBinding<T> = {
@@ -160,6 +163,10 @@ type TranslationCoordinatorRecord = {
   url: string
   priority: boolean
   pendingUntil: number
+  jobId?: string
+  attemptId?: string
+  activeUntil?: number
+  completed?: boolean
   sourceHash?: string
 }
 type WorkerExecutionContext = {
@@ -193,8 +200,11 @@ const EDGE_CACHE_SECONDS = 10 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_RETRY_SECONDS = 5
-const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-10-22-deepseek-style-guides-v1'
+// Queue retention is 96 hours. Keep deduplication (and completed-job tombstones)
+// beyond that window; requests must not multiply jobs while the queue is delayed.
+const TRANSLATION_COORDINATOR_PENDING_MS = 97 * 60 * 60 * 1000
+// Longer than the queue consumer's 15-minute wall time, recoverable after a crash.
+const TRANSLATION_JOB_LEASE_MS = 20 * 60 * 1000
 // Translation memory: every translated segment is stored in R2 by a hash of its text
 // and context, so a page edit only sends new or edited segments to Workers AI, and the
 // header, footer and other repeated copy are translated once for the whole site.
@@ -651,6 +661,7 @@ function canonicalTranslationStoreUrl(requestUrl: URL, locale: Locale): string {
 }
 
 async function translationStoreKey(kind: 'pages' | 'state', requestUrl: URL, locale: Locale): Promise<string> {
+  if (kind === 'pages') return storedTranslationPageKey(canonicalTranslationStoreUrl(requestUrl, locale), locale)
   const urlHash = await sha256Hex(canonicalTranslationStoreUrl(requestUrl, locale))
   return `${kind}/${TRANSLATION_CACHE_VERSION}/${locale}/${urlHash}.json`
 }
@@ -1771,6 +1782,7 @@ async function stabilizeNavGuardTranslations(
     assertNavSegmentTranslationGuard(segments, translations)
     return { outcome: 'retranslated' }
   } catch (error) {
+    if (isRateLimitError(error)) throw error
     // Covers both a guard failure and a translation call that rejects (for example after exhausted AI retries).
     for (const index of navGuardSegmentIndexes(segments)) {
       translations[index] = segments[index].text
@@ -2259,6 +2271,7 @@ async function reviewTranslatedBatch(env: Env, targetLanguage: string, items: Re
   try {
     return { translations: await reviewTranslatedBatchWithModel(env, reviewModel, targetLanguage, items, drafts), reviewed: true }
   } catch (error) {
+    if (isRateLimitError(error)) throw error
     console.warn('Translation review failed; keeping drafts', { targetLanguage, reviewModel, error: errorMessage(error) })
     return { translations: drafts, reviewed: false }
   }
@@ -2399,6 +2412,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
         return expandDedupedBatchTranslations(guarded, expandIndexes)
       }
     } catch (error) {
+      if (isRateLimitError(error)) throw error
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
     }
 
@@ -2493,6 +2507,7 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[],
   try {
     return await translateBatchWithJsonMode(env, targetLanguage, batch, pagePath, notRemembered)
   } catch (error) {
+    if (isRateLimitError(error)) throw error
     const message = errorMessage(error)
     console.warn('Translation batch JSON failed; falling back to single-text translation', {
       targetLanguage,
@@ -2596,6 +2611,7 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
         lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
       }
     } catch (error) {
+      if (isRateLimitError(error)) throw error
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
     }
 
@@ -3437,32 +3453,38 @@ async function translationCoordinatorName(requestUrl: URL, locale: Locale): Prom
   return await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${canonicalTranslationStoreUrl(requestUrl, locale)}`)
 }
 
-async function coordinateTranslationJob(env: Env, requestUrl: URL, locale: Locale, job: TranslationJob): Promise<boolean> {
+function isRateLimitError(error: unknown): boolean {
+  const record = recordOf(error)
+  return record?.status === 429 || /\b429\b|rate.?limit|too many requests/i.test(errorMessage(error))
+}
+
+function translationRetryDelay(error: unknown, attempts = 1): number {
+  if (!isRateLimitError(error)) return TRANSLATION_QUEUE_RETRY_DELAY_SECONDS
+  return Math.min(3600, 120 * 2 ** Math.min(Math.max(attempts - 1, 0), 5)) + Math.floor(Math.random() * 30)
+}
+
+async function coordinatorAction(env: Env, job: TranslationJob, action: string): Promise<{ queued?: boolean; claimed?: boolean; busy?: boolean }> {
   if (!env.TRANSLATION_COORDINATOR) {
-    await sendTranslationJob(env, job)
-    return true
+    if (action === 'enqueue' || action === 'continue') await sendTranslationJob(env, job)
+    return { queued: true, claimed: true }
   }
-
-  const id = env.TRANSLATION_COORDINATOR.idFromName(await translationCoordinatorName(requestUrl, locale))
-  const response = await env.TRANSLATION_COORDINATOR.get(id).fetch('https://translation-coordinator/enqueue', {
+  const url = new URL(job.url)
+  const id = env.TRANSLATION_COORDINATOR.idFromName(await translationCoordinatorName(url, job.locale))
+  const response = await env.TRANSLATION_COORDINATOR.get(id).fetch(`https://translation-coordinator/${action}`, {
     method: 'POST',
-    body: JSON.stringify(job),
+    body: JSON.stringify({ ...job, url: canonicalTranslationStoreUrl(url, job.locale) }),
   })
-  if (!response.ok) throw new Error(`Translation coordinator failed to enqueue: ${response.status} ${await response.text()}`)
+  if (!response.ok) throw new Error(`Translation coordinator ${action} failed: ${response.status}`)
+  return await response.json()
+}
 
-  const payload = (await response.json()) as { queued?: unknown }
-  return payload.queued === true
+async function coordinateTranslationJob(env: Env, job: TranslationJob): Promise<boolean> {
+  return (await coordinatorAction(env, job, 'enqueue')).queued === true
 }
 
 async function clearTranslationCoordinatorSafely(env: Env, requestUrl: URL, locale: Locale, job: TranslationJob): Promise<void> {
-  if (!env.TRANSLATION_COORDINATOR) return
-
   try {
-    const id = env.TRANSLATION_COORDINATOR.idFromName(await translationCoordinatorName(requestUrl, locale))
-    await env.TRANSLATION_COORDINATOR.get(id).fetch('https://translation-coordinator/complete', {
-      method: 'POST',
-      body: JSON.stringify(job),
-    })
+    await coordinatorAction(env, job, 'complete')
   } catch (error) {
     console.error('Failed to clear translation coordinator', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
   }
@@ -3476,6 +3498,7 @@ async function refreshCacheIncrementally(
   cacheKey: Request,
   expectedSourceHash?: string,
   priority = false,
+  job?: TranslationJob,
 ): Promise<boolean> {
   const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
   const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
@@ -3491,6 +3514,12 @@ async function refreshCacheIncrementally(
   }
 
   const sourceHash = await translationSourceHash(locale, source.sourceHtml)
+  const existing = await readStoredTranslatedResponse(env, requestUrl, locale)
+  if (existing?.ok && isHtmlResponse(existing) && readTranslationSourceHash(existing) === sourceHash) {
+    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, toCachedResponse(existing, sourceHash))
+    await deletePartialTranslationStateSafely(env, requestUrl, locale)
+    return true
+  }
   const { parts, segments } = collectSegments(source.sourceHtml)
   if (segments.length === 0) {
     const response = createTranslatedHtmlResponse(source.originResponse, source.sourceHtml, requestUrl, locale)
@@ -3507,10 +3536,11 @@ async function refreshCacheIncrementally(
   }
   const translatedBatches = state?.translatedBatches ?? []
 
+  const jobDeadline = Date.now() + 8 * 60 * 1000
   let translatedInThisJob = 0
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
-  while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
+  while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB && Date.now() < jobDeadline) {
     const translatedBatch = await translateBatchWithMemory(env, locale, batches[batchIndex], requestUrl.pathname)
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
@@ -3538,14 +3568,19 @@ async function refreshCacheIncrementally(
       updatedAt: Date.now(),
     })
     await putTranslationPendingMarkerSafely(requestUrl, locale, 'continue', priority, sourceHash)
-    await sendTranslationJob(env, {
-      url: requestUrl.toString(),
-      locale,
-      cacheVersion: TRANSLATION_CACHE_VERSION,
-      reason: 'continue',
-      sourceHash,
-      priority,
-    })
+    await coordinatorAction(
+      env,
+      {
+        ...job,
+        url: requestUrl.toString(),
+        locale,
+        cacheVersion: TRANSLATION_CACHE_VERSION,
+        reason: 'continue',
+        sourceHash,
+        priority,
+      },
+      'continue',
+    )
     console.log('Translation queue job continued', { pathname: requestUrl.pathname, locale, batchIndex, batchCount: batches.length })
     return false
   }
@@ -3607,7 +3642,7 @@ async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, rea
     console.error('Failed to mark translated page as pending', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
   }
 
-  await coordinateTranslationJob(env, requestUrl, locale, {
+  await coordinateTranslationJob(env, {
     url: requestUrl.toString(),
     locale,
     cacheVersion: TRANSLATION_CACHE_VERSION,
@@ -3729,16 +3764,33 @@ function scheduleTranslatedSourceCheck(ctx: WorkerExecutionContext | undefined, 
   scheduleTranslationBackgroundTask(ctx, checkTranslatedSourceFreshnessSafely(env, new URL(requestUrl), locale, translatedResponse, priority))
 }
 
+function repairCachedSeoMetadata(html: string, locale: Locale): string {
+  let repaired = removeTagsByAttribute(html, 'meta', 'property', 'og:locale')
+  repaired = removeTagsByAttribute(repaired, 'meta', 'property', 'og:locale:alternate')
+  repaired = insertBeforeClosingTag(repaired, 'head', `<meta property="og:locale" content="${localeNames[locale].replace('-', '_')}" />`)
+  return repaired.replace(/<meta\b[^>]*>/gi, (tag) => {
+    const name = readAttributeValue(tag, 'name') || readAttributeValue(tag, 'property')
+    if (!name || !['description', 'og:description', 'twitter:description'].includes(name)) return tag
+    const value = readAttributeValue(tag, 'content')
+    if (!value) return tag
+    // Old renders appended this English filler, sometimes truncated mid-sentence.
+    const clean = value.replace(/\s+-\s+(?:Manage updates in realtime for your capacitor app|Capgo helps Capacitor teams)[\s\S]*$/i, '').trim()
+    return clean && clean !== value ? (replaceTagAttributeValue(tag, 'content', clean) ?? tag) : tag
+  })
+}
+
 async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Locale, translatedResponse: Response, cacheState: 'HIT' | 'STALE', isHead: boolean): Promise<Response> {
   if (isHead) return withResponseHeaders(translatedResponse, cacheState, locale, true)
-  if (!isHtmlResponse(translatedResponse)) return withResponseHeaders(translatedResponse, cacheState, locale, false)
+  if (translatedResponse.status !== 200 || !isHtmlResponse(translatedResponse)) return withResponseHeaders(translatedResponse, cacheState, locale, false)
 
   const status = translatedResponse.status
   const statusText = translatedResponse.statusText
   const responseHeaders = new Headers(translatedResponse.headers)
   const translatedAt = readTranslatedAt(translatedResponse)
   const knownSourceHash = readTranslationSourceHash(translatedResponse)
-  const translatedHtml = await translatedResponse.text()
+  const originalHtml = await translatedResponse.text()
+  const readyLocales = await readyTranslationLocales(env.TRANSLATION_STORE, requestUrl, caches.default)
+  const translatedHtml = rewriteReadyAlternates(repairCachedSeoMetadata(originalHtml, locale), requestUrl, readyLocales)
 
   if (Date.now() - Math.max(translatedAt, Number(responseHeaders.get(TRANSLATION_CHECKED_AT_HEADER)) || 0) < TRANSLATION_SOURCE_CHECK_SECONDS * 1000) {
     return withResponseHeaders(new Response(translatedHtml, { status, statusText, headers: responseHeaders }), cacheState, locale, false)
@@ -3814,7 +3866,7 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
         'Accept-Language': job.locale,
       },
     })
-    completed = await refreshCacheIncrementally(renderRequest, env, requestUrl, job.locale, cacheKey, job.sourceHash, job.priority === true)
+    completed = await refreshCacheIncrementally(renderRequest, env, requestUrl, job.locale, cacheKey, job.sourceHash, job.priority === true, job)
   } finally {
     if (completed) {
       try {
@@ -4125,60 +4177,110 @@ function translationJobFromUnknown(value: unknown): TranslationJob | null {
     reason: record.reason,
     sourceHash: record.sourceHash,
     priority: record.priority === true,
+    jobId: typeof record.jobId === 'string' ? record.jobId : undefined,
+    attemptId: typeof record.attemptId === 'string' ? record.attemptId : undefined,
   }
-}
-
-function matchesCoordinatorRecord(record: TranslationCoordinatorRecord | undefined, job: TranslationJob): boolean {
-  if (!record || record.cacheVersion !== job.cacheVersion || record.locale !== job.locale || record.url !== job.url) return false
-  return record.sourceHash === job.sourceHash
 }
 
 export class TranslationCoordinator {
-  private readonly state: DurableObjectStateBinding
-  private readonly env: Env
+  // Serialize across queue.send() awaits as well as storage I/O. Storage input
+  // gates alone do not prevent two requests entering during a network send.
+  private serial: Promise<unknown> = Promise.resolve()
 
-  constructor(state: DurableObjectStateBinding, env: Env) {
-    this.state = state
-    this.env = env
+  constructor(
+    private readonly state: DurableObjectStateBinding,
+    private readonly env: Env,
+  ) {}
+
+  fetch(request: Request): Promise<Response> {
+    const result = this.serial.then(() => this.handle(request))
+    this.serial = result.catch(() => {})
+    return result
   }
 
-  async fetch(request: Request): Promise<Response> {
-    if (request.method !== 'POST') return jsonResponse({ ok: false, error: 'Method not allowed' }, 405)
-
-    const requestUrl = new URL(request.url)
+  private async handle(request: Request): Promise<Response> {
+    if (request.method !== 'POST') return jsonResponse({ ok: false }, 405)
+    const action = new URL(request.url).pathname
     const job = translationJobFromUnknown(await request.json().catch(() => null))
     if (!job) return jsonResponse({ ok: false, error: 'Invalid translation job' }, 400)
-
-    if (requestUrl.pathname === '/complete') {
-      const record = await this.state.storage.get<TranslationCoordinatorRecord>('pending')
-      if (matchesCoordinatorRecord(record, job)) await this.state.storage.delete('pending')
-      return jsonResponse({ ok: true, cleared: true })
-    }
-
-    if (requestUrl.pathname !== '/enqueue') return jsonResponse({ ok: false, error: 'Not found' }, 404)
-
     const now = Date.now()
     const record = await this.state.storage.get<TranslationCoordinatorRecord>('pending')
-    if (record && matchesCoordinatorRecord(record, job) && record.pendingUntil > now && (record.priority || !job.priority)) {
-      return jsonResponse({ ok: true, queued: false, pendingUntil: record.pendingUntil, priority: record.priority })
-    }
+    const live = record && record.pendingUntil > now
+    const owns = record && job.jobId && record.jobId === job.jobId
+    const leased = owns && job.attemptId && record.attemptId === job.attemptId
 
-    await sendTranslationJob(this.env, job)
-    const nextRecord: TranslationCoordinatorRecord = {
-      cacheVersion: job.cacheVersion,
-      locale: job.locale,
-      url: job.url,
-      priority: job.priority === true,
-      pendingUntil: now + TRANSLATION_COORDINATOR_PENDING_MS,
-      sourceHash: job.sourceHash,
+    if (action === '/claim') {
+      // Migrate legacy backlog entries to one coordinated job. A modern record,
+      // including a completion tombstone, makes all older messages obsolete.
+      if (!job.jobId) {
+        if (!live || !record.jobId) await this.enqueue(job, record)
+        return jsonResponse({ claimed: false })
+      }
+      if (!owns || record.completed) return jsonResponse({ claimed: false })
+      if ((record.activeUntil ?? 0) > now) return jsonResponse({ claimed: false, busy: true })
+      await this.state.storage.put('pending', {
+        ...record,
+        attemptId: job.attemptId,
+        activeUntil: now + TRANSLATION_JOB_LEASE_MS,
+        pendingUntil: now + TRANSLATION_COORDINATOR_PENDING_MS,
+      })
+      return jsonResponse({ claimed: true })
     }
+    if (action === '/complete' || action === '/release' || action === '/failed') {
+      if (leased) {
+        await this.state.storage.put('pending', {
+          ...record,
+          attemptId: undefined,
+          activeUntil: undefined,
+          completed: action !== '/release',
+          pendingUntil: now + TRANSLATION_COORDINATOR_PENDING_MS,
+        })
+      }
+      return jsonResponse({ cleared: Boolean(leased) })
+    }
+    if (action === '/continue') {
+      if (!leased) return jsonResponse({ queued: false })
+      return this.enqueue(job, record)
+    }
+    if (action !== '/enqueue') return jsonResponse({ ok: false }, 404)
+    if (live && !record.completed) {
+      // Do not supersede an active writer. Requests can check the source again
+      // after completion; queued work can be superseded or promoted immediately.
+      if ((record.activeUntil ?? 0) > now || ((!job.sourceHash || record.sourceHash === job.sourceHash) && (record.priority || !job.priority))) {
+        return jsonResponse({ queued: false })
+      }
+    }
+    return this.enqueue(job, record)
+  }
+
+  private async enqueue(job: TranslationJob, previous?: TranslationCoordinatorRecord): Promise<Response> {
+    const nextJob = { ...job, jobId: crypto.randomUUID(), attemptId: undefined }
+    const nextRecord: TranslationCoordinatorRecord = {
+      ...nextJob,
+      priority: job.priority === true,
+      pendingUntil: Date.now() + 60_000,
+    }
+    // Reserve briefly before sending so a crash cannot strand an unsent job
+    // behind a four-day lock. Accepted messages can still claim an expired
+    // reservation if no newer job has superseded their id.
     await this.state.storage.put('pending', nextRecord)
-    return jsonResponse({ ok: true, queued: true, pendingUntil: nextRecord.pendingUntil, priority: nextRecord.priority })
+    try {
+      await sendTranslationJob(this.env, nextJob)
+      await this.state.storage.put('pending', { ...nextRecord, pendingUntil: Date.now() + TRANSLATION_COORDINATOR_PENDING_MS })
+    } catch (error) {
+      if (previous) await this.state.storage.put('pending', previous)
+      else await this.state.storage.delete('pending')
+      throw error
+    }
+    return jsonResponse({ queued: true })
   }
 }
 
 export const __translationWorkerTest = {
   translateBatchWithMemory,
+  repairCachedSeoMetadata,
+  translationRetryDelay,
+  isRateLimitError,
   shouldBypassTranslation,
   isSpeedBrainRulesPath,
   withResponseHeaders,
@@ -4304,9 +4406,20 @@ const baseWorker = {
   },
   async queue(batch: MessageBatch<TranslationJob>, env: Env): Promise<void> {
     for (const message of batch.messages) {
+      if (message.body.cacheVersion !== TRANSLATION_CACHE_VERSION || !isSupportedLocale(message.body.locale)) continue
+      const job = { ...message.body, attemptId: crypto.randomUUID() }
       try {
-        await processTranslationJob(message.body, env)
+        const claim = await coordinatorAction(env, job, 'claim')
+        if (claim.busy) {
+          if (message.retry) message.retry({ delaySeconds: 1200 })
+          else throw new Error('Translation job is already running')
+          continue
+        }
+        if (!claim.claimed) continue
+        await processTranslationJob(job, env)
       } catch (error) {
+        await coordinatorAction(env, job, (message.attempts ?? 1) >= 4 ? 'failed' : 'release').catch(() => {})
+        const retryDelaySeconds = translationRetryDelay(error, message.attempts)
         console.error('Failed to process translated page queue job; retrying message', {
           messageId: message.id,
           pathname: logPathnameFromUrl(message.body.url),
@@ -4315,11 +4428,11 @@ const baseWorker = {
           priority: message.body.priority === true,
           cacheVersion: message.body.cacheVersion,
           attempts: message.attempts,
-          retryDelaySeconds: TRANSLATION_QUEUE_RETRY_DELAY_SECONDS,
+          retryDelaySeconds,
           error: errorMessage(error),
         })
         if (typeof message.retry === 'function') {
-          message.retry({ delaySeconds: TRANSLATION_QUEUE_RETRY_DELAY_SECONDS })
+          message.retry({ delaySeconds: retryDelaySeconds })
         } else {
           throw error
         }

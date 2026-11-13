@@ -621,12 +621,144 @@ assert(priorityQueued.length === 2, 'Coordinator did not queue the source-specif
 
 response = await coordinator.fetch(coordinatorRequest(queueJob, '/complete'))
 assert(response.ok, 'Coordinator rejected completion for older pending job')
-assert((await response.json()).cleared === true, 'Coordinator did not accept completion for older pending job')
+assert((await response.json()).cleared === false, 'An obsolete job cleared a newer job')
 
 response = await coordinator.fetch(coordinatorRequest({ ...queueJob, priority: true, sourceHash }))
 assert(response.ok, 'Coordinator rejected duplicate source-specific refresh')
 assert((await response.json()).queued === false, 'Coordinator enqueued a duplicate source-specific refresh after older job completion')
 assert(priorityQueued.length === 2, 'Coordinator sent duplicate source-specific refresh messages')
+
+// Queue ownership survives delayed consumption and prevents obsolete writers.
+const currentJob = priorityQueued[1] as Record<string, unknown>
+const oldJob = queued[0] as Record<string, unknown>
+assert(typeof currentJob.jobId === 'string', 'New queue messages need an ownership id')
+response = await coordinator.fetch(coordinatorRequest({ ...oldJob, attemptId: 'old' }, '/claim'))
+assert((await response.json()).claimed === false, 'Superseded job claimed the page')
+const realNow = Date.now
+try {
+  Date.now = () => realNow() + 24 * 60 * 60 * 1000
+  response = await coordinator.fetch(coordinatorRequest({ ...queueJob, sourceHash, priority: true }))
+  assert((await response.json()).queued === false, 'Delayed queue job lost its deduplication after one day')
+} finally {
+  Date.now = realNow
+}
+const ownedJob = { ...currentJob, attemptId: 'first' }
+response = await coordinator.fetch(coordinatorRequest(ownedJob, '/claim'))
+assert((await response.json()).claimed === true, 'Current job could not claim the page')
+response = await coordinator.fetch(coordinatorRequest({ ...currentJob, attemptId: 'duplicate' }, '/claim'))
+assert((await response.json()).busy === true, 'Duplicate delivery acquired an active writer lease')
+response = await coordinator.fetch(coordinatorRequest({ ...queueJob, sourceHash: 'new-source', priority: true }))
+assert((await response.json()).queued === false, 'Source update superseded an active writer')
+response = await coordinator.fetch(coordinatorRequest({ ...currentJob, attemptId: 'wrong-owner' }, '/complete'))
+assert((await response.json()).cleared === false, 'A different attempt cleared the active writer')
+response = await coordinator.fetch(coordinatorRequest(ownedJob, '/release'))
+assert((await response.json()).cleared === true, 'Failed attempt could not release its writer lease')
+const retryJob = { ...currentJob, attemptId: 'retry' }
+response = await coordinator.fetch(coordinatorRequest(retryJob, '/claim'))
+assert((await response.json()).claimed === true, 'Retry could not reclaim a released job')
+response = await coordinator.fetch(coordinatorRequest({ ...retryJob, reason: 'continue', sourceHash: 'new-source' }, '/continue'))
+assert((await response.json()).queued === true, 'Continuation was not queued')
+const continuedJob = { ...(priorityQueued[2] as Record<string, unknown>), attemptId: 'continuation' }
+assert(continuedJob.jobId !== currentJob.jobId, 'Continuation reused an obsolete ownership id')
+response = await coordinator.fetch(coordinatorRequest(retryJob, '/complete'))
+assert((await response.json()).cleared === false, 'Older completion cleared the continuation')
+response = await coordinator.fetch(coordinatorRequest(continuedJob, '/claim'))
+assert((await response.json()).claimed === true, 'Continuation could not claim its job')
+response = await coordinator.fetch(coordinatorRequest(continuedJob, '/complete'))
+assert((await response.json()).cleared === true, 'Continuation could not complete')
+response = await coordinator.fetch(coordinatorRequest(queueJob, '/claim'))
+assert((await response.json()).claimed === false, 'Legacy duplicate revived completed work')
+assert(priorityQueued.length === 3, 'Legacy duplicate created more work after completion')
+
+// Simultaneous requests must stay serialized even while queue.send awaits I/O.
+const racingStore = new Map<string, unknown>()
+let racingSends = 0
+let failSend = true
+const racingCoordinator = new TranslationCoordinator(
+  {
+    storage: {
+      get: async (key: string) => racingStore.get(key),
+      put: async (key: string, value: unknown) => {
+        racingStore.set(key, value)
+      },
+      delete: async (key: string) => racingStore.delete(key),
+    },
+  },
+  {
+    TRANSLATION_QUEUE: {
+      send: async () => {
+        await Promise.resolve()
+        if (failSend) throw new Error('Expected queue send failure')
+        racingSends++
+      },
+    },
+  } as any,
+)
+await racingCoordinator.fetch(coordinatorRequest(queueJob)).then(
+  () => {
+    throw new Error('Expected send failure')
+  },
+  () => {},
+)
+assert(!racingStore.has('pending'), 'Failed enqueue left a four-day deduplication lock')
+failSend = false
+await Promise.all(Array.from({ length: 10 }, () => racingCoordinator.fetch(coordinatorRequest(queueJob))))
+assert(racingSends === 1, 'Concurrent requests sent duplicate queue jobs')
+
+const repairedMetadata = __translationWorkerTest.repairCachedSeoMetadata(
+  '<html><head><meta property="og:locale" content="en_US"><meta name="description" content="日本語の説明 - Manage updates in realtime for your capacitor app without store hassle"></head><body>本文</body></html>',
+  'ja',
+)
+assert(repairedMetadata.includes('content="ja_JP"'), 'Cached OG locale was not repaired')
+assert(!repairedMetadata.includes('Manage updates'), 'Cached English description padding survived')
+assert(repairedMetadata.includes('<body>本文</body>'), 'SEO repair changed visible page content')
+let limitedCalls = 0
+try {
+  await __translationWorkerTest.translateBatchWithMemory(
+    {
+      AI: {
+        run: async () => {
+          limitedCalls++
+          throw new Error('429 Too many requests')
+        },
+      },
+      TRANSLATION_STORE: { get: async () => null, put: async () => {} },
+    } as any,
+    'fr',
+    ['Unique rate limit regression text'],
+    '/queue-test/',
+  )
+  throw new Error('Rate limiting should defer the job')
+} catch (error) {
+  assert(__translationWorkerTest.isRateLimitError(error), 'Rate limit was swallowed by a fallback')
+}
+assert(limitedCalls === 1, 'Rate limit caused immediate batch or single-text retries')
+assert(__translationWorkerTest.translationRetryDelay(new Error('429'), 1) >= 120, 'Rate limit needs a longer initial delay')
+assert(__translationWorkerTest.translationRetryDelay(new Error('429'), 4) >= 960, 'Rate limit backoff did not grow with attempts')
+
+let reviewCalls = 0
+try {
+  await __translationWorkerTest.translateBatchWithMemory(
+    {
+      TRANSLATION_REVIEW_MODEL: '@cf/deepseek-ai/deepseek-v4.1-flash-1017',
+      AI: {
+        run: async () => {
+          reviewCalls++
+          if (reviewCalls === 2) throw new Error('429 review rate limit')
+          return { response: JSON.stringify({ translations: { t0: 'Traduction de test unique' } }) }
+        },
+      },
+      TRANSLATION_STORE: { get: async () => null, put: async () => {} },
+    } as any,
+    'fr',
+    ['Unique reviewer regression text'],
+    '/review-queue-test/',
+  )
+  throw new Error('Reviewer rate limiting should defer the job')
+} catch (error) {
+  assert(__translationWorkerTest.isRateLimitError(error), 'Reviewer rate limit was swallowed')
+}
+assert(reviewCalls === 2, 'Reviewer throttling continued making AI calls')
 
 const originalCaches = Object.getOwnPropertyDescriptor(globalThis, 'caches')
 const cacheEntries = new Map<string, Response>()
