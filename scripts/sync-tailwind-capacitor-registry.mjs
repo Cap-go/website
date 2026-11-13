@@ -53,21 +53,23 @@ async function fetchItem(name) {
 
 const writtenFiles = new Set()
 
-for (const entry of registry.items) {
-  const item = await fetchItem(entry.name)
-  for (const file of item.files ?? []) {
-    const content = file.content
-    if (typeof content !== 'string') {
-      console.warn(`Skip ${entry.name}: missing inline content for ${file.path}`)
-      continue
+await Promise.all(
+  registry.items.map(async (entry) => {
+    const item = await fetchItem(entry.name)
+    for (const file of item.files ?? []) {
+      const content = file.content
+      if (typeof content !== 'string') {
+        console.warn(`Skip ${entry.name}: missing inline content for ${file.path}`)
+        continue
+      }
+      const target = file.target ?? file.path
+      const outPath = targetToSnapshotPath(target)
+      mkdirSync(dirname(outPath), { recursive: true })
+      writeFileSync(outPath, content)
+      writtenFiles.add(outPath)
     }
-    const target = file.target ?? file.path
-    const outPath = targetToSnapshotPath(target)
-    mkdirSync(dirname(outPath), { recursive: true })
-    writeFileSync(outPath, content)
-    writtenFiles.add(outPath)
-  }
-}
+  }),
+)
 
 const componentsDir = join(snapshotRoot, 'capacitor/vue/components')
 const componentNames = readdirSync(componentsDir)
@@ -82,10 +84,11 @@ const barrelLines = [
 ]
 
 for (const name of componentNames) {
-  const ident = name[0].toLowerCase() + name.slice(1)
   const cName = `c${name}`
-  barrelLines.push(`import ${cName} from './vue/components/${name}.vue'`)
-  barrelLines.push(`export { ${cName} as ${name} }`)
+  barrelLines.push(
+    `import ${cName} from './vue/components/${name}.vue'`,
+    `export { ${cName} as ${name} }`,
+  )
 }
 
 writeFileSync(join(snapshotRoot, 'capacitor/index.js'), `${barrelLines.join('\n')}\n`)
@@ -96,8 +99,8 @@ const manifestItems = registry.items.map((item) => {
     vueFile?.path?.match(/\/([^/]+)\.vue$/)?.[1] ??
     item.name
       .replace(/^capacitor-/, '')
-      .replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase())
-      .replace(/-/g, '')
+      .replaceAll(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase())
+      .replaceAll('-', '')
   return {
     name: item.name,
     title: item.title ?? item.name,
@@ -128,6 +131,14 @@ writeFileSync(
 )
 
 const safeCommit = String(commit).replace(/[^\da-f]/gi, '').slice(0, 40)
+const shortCommit = safeCommit.slice(0, 7)
 console.log(
-  `Synced ${registry.items.length} registry items, ${writtenFiles.size} files, ${componentNames.length} Vue components (commit ${safeCommit.slice(0, 7)}).`,
+  'Synced tailwind-capacitor registry:',
+  registry.items.length,
+  'items,',
+  writtenFiles.size,
+  'files,',
+  componentNames.length,
+  'Vue components, commit',
+  shortCommit,
 )

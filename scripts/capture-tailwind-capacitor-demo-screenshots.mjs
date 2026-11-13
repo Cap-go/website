@@ -62,20 +62,13 @@ async function captureShot(browser, { viewport, combo }) {
   }
 }
 
-async function main() {
-  await mkdir(outDir, { recursive: true })
-  const browser = await chromium.launch()
-  try {
-    const manifest = await Promise.all(shots.map((shot) => captureShot(browser, shot)))
-    const manifestPath = join(outDir, 'sha256.json')
-    await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
-    console.log(JSON.stringify({ outDir, manifest }, null, 2))
-  } finally {
-    await browser.close()
-  }
+await mkdir(outDir, { recursive: true })
+const browser = await chromium.launch()
+try {
+  const manifest = await Promise.all(shots.map((shot) => captureShot(browser, shot)))
+  const manifestPath = join(outDir, 'sha256.json')
+  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
+  console.log(JSON.stringify({ outDir, manifest }, null, 2))
+} finally {
+  await browser.close()
 }
-
-main().catch((error) => {
-  console.error(error)
-  process.exit(1)
-})

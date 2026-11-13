@@ -56,7 +56,7 @@
       <Sheet :opened="sheetOpen" @sheet:closed="sheetOpen = false">
         <Toolbar top>
           <div class="left">
-            <Link toolbar @click="sheetOpen = false">Done</Link>
+            <Link toolbar href="#" @click.prevent="sheetOpen = false" @keyup.enter="sheetOpen = false">Done</Link>
           </div>
           <div class="title">Sheet</div>
         </Toolbar>
@@ -264,6 +264,40 @@ function tableWithHeaderCell(label) {
       h(TableHead, {}, {
         default: () => h(TableRow, {}, { default: () => h(TableCell, { header: true }, { default: () => label }) }),
       }),
+  })
+}
+
+function tableWithBodyCells(...labels) {
+  return h(Table, {}, {
+    default: () =>
+      h(TableBody, {}, {
+        default: () =>
+          h(TableRow, {}, {
+            default: () => labels.map((label) => h(TableCell, {}, { default: () => label })),
+          }),
+      }),
+  })
+}
+
+const tableNameValueHeadRow = () =>
+  h(TableRow, {}, {
+    default: () => [
+      h(TableCell, { header: true }, { default: () => 'Name' }),
+      h(TableCell, { header: true }, { default: () => 'Value' }),
+    ],
+  })
+
+const tableRowsCountBodyRow = () =>
+  h(TableRow, {}, {
+    default: () => [h(TableCell, {}, { default: () => 'Rows' }), h(TableCell, {}, { default: () => '2' })],
+  })
+
+function demoTableSample() {
+  return h(Table, {}, {
+    default: () => [
+      h(TableHead, {}, { default: () => tableNameValueHeadRow() }),
+      h(TableBody, {}, { default: () => tableRowsCountBodyRow() }),
+    ],
   })
 }
 
@@ -742,23 +776,7 @@ const sectionMap = {
   }),
   'capacitor-table': defineComponent({
     setup() {
-      return () =>
-        h(Table, {}, {
-          default: () => [
-            h(TableHead, {}, {
-              default: () =>
-                h(TableRow, {}, {
-                  default: () => [h(TableCell, { header: true }, { default: () => 'Name' }), h(TableCell, { header: true }, { default: () => 'Value' })],
-                }),
-            }),
-            h(TableBody, {}, {
-              default: () =>
-                h(TableRow, {}, {
-                  default: () => [h(TableCell, {}, { default: () => 'Rows' }), h(TableCell, {}, { default: () => '2' })],
-                }),
-            }),
-          ],
-        })
+      return () => demoTableSample()
     },
   }),
   'capacitor-table-body': defineComponent({
@@ -768,16 +786,7 @@ const sectionMap = {
   }),
   'capacitor-table-cell': defineComponent({
     setup() {
-      return () =>
-        h(Table, {}, {
-          default: () =>
-            h(TableBody, {}, {
-              default: () =>
-                h(TableRow, {}, {
-                  default: () => [h(TableCell, {}, { default: () => 'Cell A' }), h(TableCell, {}, { default: () => 'Cell B' })],
-                }),
-            }),
-        })
+      return () => tableWithBodyCells('Cell A', 'Cell B')
     },
   }),
   'capacitor-table-head': defineComponent({
