@@ -1,8 +1,10 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { LLMS_WHEN_TO_USE_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
 import { withDevHostNoindex } from '../../../shared/devHostNoindex'
+import { withTranslationReadiness, type TranslationStoreReader } from '../../../shared/translationReadiness'
 
 interface Env {
+  TRANSLATION_STORE?: TranslationStoreReader
   ASSETS: {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
@@ -302,6 +304,14 @@ const baseWorker = {
 export default {
   ...baseWorker,
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
-    return withDevHostNoindex(request, await baseWorker.fetch(request, env, ctx))
+    return withDevHostNoindex(
+      request,
+      await withTranslationReadiness(
+        request,
+        await baseWorker.fetch(request, env, ctx),
+        env.TRANSLATION_STORE,
+        typeof caches === 'undefined' ? undefined : (caches as CacheStorage & { default?: Cache }).default,
+      ),
+    )
   },
 }

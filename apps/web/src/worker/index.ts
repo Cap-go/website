@@ -12,6 +12,7 @@ import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
 import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRedirect'
+import { withTranslationReadiness, type TranslationStoreReader } from '../../../shared/translationReadiness'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
 import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
@@ -29,6 +30,7 @@ import { withVideoRange } from './video-ranges'
 import { handleSignaturesDirectoryRequest, HTTP_MESSAGE_SIGNATURES_DIRECTORY, signedFetch } from './web-bot-auth'
 
 interface Env extends PublicMcpEnv {
+  TRANSLATION_STORE?: TranslationStoreReader
   AB_FLAG?: string
   AB_VARIANT?: string
   ASSETS: {
@@ -525,6 +527,14 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
 
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
-    return withDevHostNoindex(request, await withAbTest(request, await handleRequest(request, env, ctx), env))
+    return withDevHostNoindex(
+      request,
+      await withTranslationReadiness(
+        request,
+        await withAbTest(request, await handleRequest(request, env, ctx), env),
+        env.TRANSLATION_STORE,
+        typeof caches === 'undefined' ? undefined : workerCache(),
+      ),
+    )
   },
 }

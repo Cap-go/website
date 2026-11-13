@@ -62,6 +62,7 @@ jobs:
               - '.github/workflows/deploy-docs.yml'
             translation:
               - 'apps/translation-worker/**'
+              - 'apps/shared/translationReadiness*'
               - 'package.json'
               - 'bun.lock'
               - '.github/workflows/test.yml'
