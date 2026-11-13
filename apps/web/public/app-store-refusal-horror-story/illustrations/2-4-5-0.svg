@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Mac screen recording with keystroke overlay blocked under 2.4.5">
+  <title>Mac screen recording with keystroke overlay blocked under 2.4.5</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="48" y="36" width="200" height="128" rx="10" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="56" y="44" width="48" height="12" rx="6" fill="#1F2937"/>
+  <circle cx="68" cy="50" r="3" fill="#EF4444" opacity="0.8"/>
+  <circle cx="78" cy="50" r="3" fill="#FBBF24" opacity="0.8"/>
+  <circle cx="88" cy="50" r="3" fill="#44BCFF" opacity="0.8"/>
+  <rect x="64" y="72" width="168" height="80" rx="6" fill="#0F172A" stroke="#9CA3AF" stroke-width="1"/>
+  <path d="M80 112 h112 M80 128 h88" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+  <rect x="88" y="92" width="32" height="20" rx="4" fill="#374151"/>
+  <circle cx="104" cy="102" r="6" fill="#44BCFF" opacity="0.45"/>
+  <rect x="72" y="140" width="168" height="28" rx="6" fill="#1F2937" stroke="#EF4444" stroke-width="2"/>
+  <text x="84" y="158" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="11" font-weight="600">cmd</text>
+  <text x="120" y="158" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="11" font-weight="600">shift</text>
+  <text x="168" y="158" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="11">K</text>
+  <path d="M76 136 L236 172" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M236 136 L76 172" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="248" y="48" width="56" height="72" rx="10" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="258" y="72" fill="#EF4444" font-family="system-ui,sans-serif" font-size="10" font-weight="600">2.4.5</text>
+  <rect x="256" y="80" width="40" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="256" y="92" width="32" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="40" y="168" width="88" height="16" rx="8" fill="#111827" stroke="#44BCFF" stroke-width="1.5"/>
+  <text x="52" y="180" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="9" font-weight="600">27 days</text>
+</svg>
