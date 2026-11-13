@@ -9,6 +9,8 @@ import { Steps, Aside, FileTree } from '@astrojs/starlight/components';
 
 This guide walks you through a Wear OS companion app that talks to your Capacitor phone app through the same Data Layer paths as `CapgoWatchPlugin` on Android (`play-services-wearable`).
 
+Prefer the official Kotlin watch SDK in [`watch-sdk/wearos`](https://github.com/Cap-go/capacitor-watch/tree/main/watch-sdk/wearos) (`CapgoWatch`, listeners, and `CapgoWatchListenerService`). It speaks the same paths as this manual module, including phone to watch replies when the phone calls `sendMessage({ expectsReply: true })`. Use the steps below when you want to wire the Data Layer yourself.
+
 ## Prerequisites
 
 Before you begin, ensure you have:
@@ -25,7 +27,7 @@ The phone-side plugin (`CapgoWatchPlugin.java`) uses these Data Layer routes:
 | Route | Type | Purpose |
 | --- | --- | --- |
 | `/capgo/message` | Message | One-way messages (phone to watch and watch to phone) |
-| `/capgo/message/withreply` | Message | Watch to phone messages that expect a JS reply via `replyToMessage` |
+| `/capgo/message/withreply` | Message | Messages that expect a reply: watch to phone (`replyToMessage`) or phone to watch (`sendMessage` with `expectsReply: true`) |
 | `/capgo/reply/{callbackId}` | Message | Phone reply payload back to the watch |
 | `/capgo/context` | DataItem | Latest application context (`payload` string holds JSON) |
 | `/capgo/userinfo/{uuid}` | DataItem | Queued user info (`payload` string holds JSON) |
