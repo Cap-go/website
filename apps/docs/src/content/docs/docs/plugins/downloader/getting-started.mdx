@@ -189,8 +189,8 @@ export interface DownloadOptions {
   priority?: 'high' | 'normal' | 'low';
   /**
    * Android DownloadManager notification visibility. Defaults to `completed` when omitted.
-   * - `completed`: shows a notification only after the download completes.
-   * - `progress`: shows a notification during the download and after it completes.
+   * - `completed`: shows a notification during the download and after it completes.
+   * - `progress`: shows a notification only during the download.
    * - `hidden`: shows no DownloadManager notification.
    */
   notification?: 'completed' | 'progress' | 'hidden';
