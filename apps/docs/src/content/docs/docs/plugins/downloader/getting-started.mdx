@@ -54,7 +54,7 @@ const task = await CapacitorDownloader.download({
 
 ## Example: completion notification
 
-When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. Request notification permission before the download completes: `POST_NOTIFICATIONS` on Android 13 and later, and iOS notification authorization. Tapping the notification reopens the app. Use `downloadCompleted` events when the app stays in the foreground.
+When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. The plugin manifest already merges `POST_NOTIFICATIONS` on Android, so on Android 13 and later your app only needs to request it at runtime; on iOS request notification authorization before the download finishes. Tapping the notification reopens the app. On Android, the completion alert is still posted while your app is in the foreground. On iOS, a notification that arrives in the foreground is shown only if your app's `UNUserNotificationCenter` delegate presents it, so without a notifications plugin it is usually silent and `downloadCompleted` events are the reliable signal there.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
