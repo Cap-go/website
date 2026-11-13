@@ -11,7 +11,7 @@ summary: 'Install Tailwind Capacitor as a shadcn registry. Copy Vue components a
 
 [Tailwind Capacitor](https://github.com/Cap-go/tailwind-capacitor/) ships Tailwind CSS v4 utilities for Capacitor safe areas and platform variants, plus Vue UI components, as a [shadcn registry](https://ui.shadcn.com/docs/registry). You copy source into your app with `shadcn add`.
 
-This page documents the v4 shadcn registry rebuild in [Cap-go/tailwind-capacitor#129](https://github.com/Cap-go/tailwind-capacitor/pull/129). Registry URLs under `main` resolve after that PR is merged.
+This page documents the v4 shadcn registry rebuild in [Cap-go/tailwind-capacitor#129](https://github.com/Cap-go/tailwind-capacitor/pull/129). Registry URLs under `main` resolve after that PR is merged. This docs PR is meant to land with or after #129.
 
 ## Prerequisites
 
@@ -34,25 +34,30 @@ Import the bundle in your global CSS:
 @import '@/capacitor/styles/tailwind-capacitor.css';
 ```
 
-## Install a component
+## Install components used in the example
+
+`App`, `Page`, `Navbar`, and `Button` are separate registry items. Install each one:
 
 ```bash
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-app.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-page.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-navbar.json
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-button.json
 ```
 
-Components land under `src/capacitor/vue/components/` with shared classes in `src/capacitor/shared/`.
+Components land under `src/capacitor/vue/components/`. The provider lands under `src/capacitor/vue/shared/`. Shared classes land under `src/capacitor/shared/`.
 
 ## Vue usage
 
+Import the files that `shadcn add` writes. The library example app generates `@/capacitor/index.js` as a convenience barrel. That file is not created when you install registry items into your own project.
+
 ```vue
 <script setup>
-import {
-  TailwindCapacitorProvider,
-  App,
-  Page,
-  Navbar,
-  Button,
-} from '@/capacitor/index.js'
+import TailwindCapacitorProvider from '@/capacitor/vue/shared/TailwindCapacitorProvider.vue'
+import App from '@/capacitor/vue/components/App.vue'
+import Page from '@/capacitor/vue/components/Page.vue'
+import Navbar from '@/capacitor/vue/components/Navbar.vue'
+import Button from '@/capacitor/vue/components/Button.vue'
 </script>
 
 <template>
@@ -67,12 +72,10 @@ import {
 </template>
 ```
 
-Prefer the generated barrel from your app after you add multiple components.
-
 ## Safe areas
 
 - Put `safe-areas` on the root page shell.
-- Use `pt-safe`, `pb-safe`, `px-safe`, and offset utilities such as `pt-4-safe`.
+- Use `pt-safe`, `pb-safe`, `pl-safe`, and `pr-safe` for insets. There is no `px-safe` utility.
 - Platform variants: `ios:`, `android:`, `capacitor:`, `mobile:`.
 
 ## Registry hosting

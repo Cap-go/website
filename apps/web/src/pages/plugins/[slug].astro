@@ -6,6 +6,7 @@ import { pluginDemosBySlug } from '@/config/pluginDemos'
 import { getPluginPreviewQr } from '@/config/pluginPreviewQrs'
 import type { Plugin } from '@/config/plugins'
 import { actions, pluginCategories } from '@/config/plugins'
+import { pluginInstallOverrides } from '@/config/pluginInstallOverrides'
 import Layout from '@/layouts/Layout.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import m from '@/copy/messages'
@@ -130,14 +131,24 @@ const previewQr = getPluginPreviewQr(id)
 const runtime = /electron/i.test(name ?? href) ? 'Electron' : /cordova/i.test(name ?? href) ? 'Cordova' : 'Capacitor'
 const isCapacitor = runtime === 'Capacitor'
 const runtimeArticle = /^[AEIOU]/.test(runtime) ? 'an' : 'a'
-const installCommand = name ? (isCapacitor ? `bun add ${name}\nbunx cap sync` : `bun add ${name}`) : undefined
-const installManagers = name
-  ? [
-      { label: 'npm', command: `npm install ${name}` },
-      { label: 'pnpm', command: `pnpm add ${name}` },
-      { label: 'yarn', command: `yarn add ${name}` },
-    ]
-  : []
+const installOverride = name ? pluginInstallOverrides[name] : undefined
+const installCommands = installOverride
+  ? installOverride.commands
+  : name
+    ? isCapacitor
+      ? [`bun add ${name}`, 'bunx cap sync']
+      : [`bun add ${name}`]
+    : []
+const installCommand = installCommands.length > 0 ? installCommands.join('\n') : undefined
+const installManagers = installOverride
+  ? (installOverride.managers ?? [])
+  : name
+    ? [
+        { label: 'npm', command: `npm install ${name}` },
+        { label: 'pnpm', command: `pnpm add ${name}` },
+        { label: 'yarn', command: `yarn add ${name}` },
+      ]
+    : []
 
 const tutorialData = thisTut?.data
 const heroDescription = tutorialData?.summary ?? description
@@ -156,15 +167,19 @@ const generatedFaq = [
     question: `How do I install the ${title} plugin in ${runtimeArticle} ${runtime} app?`,
     answer: !name
       ? `Follow the installation steps in the ${title} README on GitHub.`
-      : isCapacitor
-        ? `Run "bun add ${name}" (or "npm install ${name}"), then run "bunx cap sync" so the iOS and Android projects pick up the native code. Import it from "${name}" in your app code.`
-        : `Run "bun add ${name}" (or "npm install ${name}"), then follow the ${runtime} setup steps in the guide and the GitHub README.`,
+      : installOverride
+        ? installOverride.installFaqAnswer
+        : isCapacitor
+          ? `Run "bun add ${name}" (or "npm install ${name}"), then run "bunx cap sync" so the iOS and Android projects pick up the native code. Import it from "${name}" in your app code.`
+          : `Run "bun add ${name}" (or "npm install ${name}"), then follow the ${runtime} setup steps in the guide and the GitHub README.`,
   },
   {
     question: `Does ${packageLabel} work with React, Vue and Angular?`,
-    answer: `Yes. ${title} is ${runtimeArticle} ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
+    answer: installOverride?.frameworkFaqAnswer
+      ? installOverride.frameworkFaqAnswer
+      : `Yes. ${title} is ${runtimeArticle} ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
   },
-  ...(isCapacitor
+  ...(isCapacitor && !installOverride?.skipNativePluginFaqs
     ? [
         {
           question: `Which Capacitor version does ${packageLabel} support?`,
@@ -176,7 +191,7 @@ const generatedFaq = [
     question: `Is ${packageLabel} free and open source?`,
     answer: `Yes. The source code is public on GitHub at ${href} and the package is free to install from npm. Bug reports and pull requests are welcome.`,
   },
-  ...(isCapacitor
+  ...(isCapacitor && !installOverride?.skipNativePluginFaqs
     ? [
         {
           question: `Can I update code that uses ${title} without an App Store review?`,
@@ -382,19 +397,24 @@ const secondaryButtonClass =
                     </button>
                   </div>
                   <div class="flex flex-col gap-1 overflow-x-auto px-4 py-3">
-                    <CommandCode command={`bun add ${name}`} class={commandClass} />
-                    {isCapacitor && <CommandCode command="bunx cap sync" class={commandClass} />}
+                    {installCommands.map((command) => (
+                      <CommandCode command={command} class={commandClass} />
+                    ))}
                   </div>
-                  <details class="overflow-x-auto border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">
-                    <summary class="cursor-pointer select-none hover:text-gray-200">npm, pnpm or yarn</summary>
-                    <ul class="mt-2 flex flex-col gap-1">
-                      {installManagers.map((manager) => (
-                        <li>
-                          <CommandCode command={manager.command} class={commandClass} />
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
+                  {
+                    installManagers.length > 0 && (
+                      <details class="overflow-x-auto border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">
+                        <summary class="cursor-pointer select-none hover:text-gray-200">npm, pnpm or yarn</summary>
+                        <ul class="mt-2 flex flex-col gap-1">
+                          {installManagers.map((manager) => (
+                            <li>
+                              <CommandCode command={manager.command} class={commandClass} />
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    )
+                  }
                 </div>
               )
             }
