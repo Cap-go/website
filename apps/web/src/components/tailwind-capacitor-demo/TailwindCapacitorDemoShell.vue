@@ -249,6 +249,14 @@ const MotionBlock = defineComponent({
   },
 })
 
+function defineDemo(render) {
+  return defineComponent({
+    setup() {
+      return render
+    },
+  })
+}
+
 function tableWithBodyRow(label) {
   return h(Table, {}, {
     default: () =>
@@ -302,12 +310,9 @@ function demoTableSample() {
 }
 
 const sectionMap = {
-  'capacitor-actions': defineComponent({
-    setup() {
-      return () =>
+  'capacitor-actions': defineDemo(() =>
         h(Button, { onClick: () => (actionsOpen.value = true) }, { default: () => 'Open Actions' })
-    },
-  }),
+  ),
   'capacitor-actions-button': defineComponent({
     setup() {
       const open = ref(false)
@@ -363,58 +368,38 @@ const sectionMap = {
         ])
     },
   }),
-  'capacitor-app': defineComponent({
-    setup() {
-      return () =>
+  'capacitor-app': defineDemo(() =>
         h(Block, { strong: true, class: 'm-0' }, {
           default: () => h('p', { class: 'p-3 text-sm' }, `Root App shell with ${platformLabel.value} theme and ${dark.value ? 'dark' : 'light'} mode.`),
         })
-    },
-  }),
-  'capacitor-badge': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-badge': defineDemo(() =>
         h('div', { class: 'flex flex-wrap gap-2' }, [
           h(Badge, {}, { default: () => 'Default' }),
           h(Badge, { colors: { bg: 'bg-red-500' } }, { default: () => 'Hot' }),
         ])
-    },
-  }),
-  'capacitor-block': defineComponent({
-    setup() {
-      return () => h(Block, { inset: true, strong: true }, { default: () => 'Inset strong block' })
-    },
-  }),
-  'capacitor-block-footer': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-block': defineDemo(() => h(Block, { inset: true, strong: true }, { default: () => 'Inset strong block' })
+  ),
+  'capacitor-block-footer': defineDemo(() =>
         h(Block, { strong: true, class: 'm-0' }, {
           default: () => [
             h('p', { class: 'p-4' }, 'Block body'),
             h(BlockFooter, {}, { default: () => 'Block footer' }),
           ],
         })
-    },
-  }),
-  'capacitor-block-header': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-block-header': defineDemo(() =>
         h(Block, { class: 'm-0' }, {
           default: () => [
             h(BlockHeader, {}, { default: () => 'Header' }),
             h('p', { class: 'p-4' }, 'Block body'),
           ],
         })
-    },
-  }),
-  'capacitor-block-title': defineComponent({
-    setup() {
-      return () => h(BlockTitle, {}, { default: () => 'Block title' })
-    },
-  }),
-  'capacitor-breadcrumbs': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-block-title': defineDemo(() => h(BlockTitle, {}, { default: () => 'Block title' })
+  ),
+  'capacitor-breadcrumbs': defineDemo(() =>
         h(Breadcrumbs, {}, {
           default: () => [
             h(BreadcrumbsItem, { active: true }, { default: () => 'Home' }),
@@ -425,11 +410,8 @@ const sectionMap = {
             h(BreadcrumbsItem, {}, { default: () => 'Data' }),
           ],
         })
-    },
-  }),
-  'capacitor-breadcrumbs-collapsed': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-breadcrumbs-collapsed': defineDemo(() =>
         h(Breadcrumbs, {}, {
           default: () => [
             h(BreadcrumbsItem, {}, { default: () => 'Root' }),
@@ -438,11 +420,8 @@ const sectionMap = {
             h(BreadcrumbsItem, { active: true }, { default: () => 'Current' }),
           ],
         })
-    },
-  }),
-  'capacitor-breadcrumbs-item': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-breadcrumbs-item': defineDemo(() =>
         h(Breadcrumbs, {}, {
           default: () => [
             h(BreadcrumbsItem, {}, { default: () => 'Library' }),
@@ -450,11 +429,8 @@ const sectionMap = {
             h(BreadcrumbsItem, { active: true }, { default: () => 'Active item' }),
           ],
         })
-    },
-  }),
-  'capacitor-breadcrumbs-separator': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-breadcrumbs-separator': defineDemo(() =>
         h(Breadcrumbs, {}, {
           default: () => [
             h(BreadcrumbsItem, {}, { default: () => 'Docs' }),
@@ -462,45 +438,29 @@ const sectionMap = {
             h(BreadcrumbsItem, { active: true }, { default: () => 'API' }),
           ],
         })
-    },
-  }),
-  'capacitor-button': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-button': defineDemo(() =>
         h('div', { class: 'flex flex-wrap gap-2' }, [
           h(Button, {}, { default: () => 'Solid' }),
           h(Button, { outline: true }, { default: () => 'Outline' }),
           h(Button, { clear: true }, { default: () => 'Clear' }),
         ])
-    },
-  }),
-  'capacitor-card': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-card': defineDemo(() =>
         h(Card, {}, {
           default: () => h('div', { class: 'p-4' }, [h('h3', { class: 'font-semibold' }, 'Card'), h('p', { class: 'text-sm mt-2 opacity-80' }, 'Card body text.')]),
         })
-    },
-  }),
-  'capacitor-checkbox': defineComponent({
-    setup() {
-      return () => h(Checkbox, { checked: checkboxOn.value, onClick: () => (checkboxOn.value = !checkboxOn.value) })
-    },
-  }),
-  'capacitor-chip': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-checkbox': defineDemo(() => h(Checkbox, { checked: checkboxOn.value, onClick: () => (checkboxOn.value = !checkboxOn.value) })
+  ),
+  'capacitor-chip': defineDemo(() =>
         h('div', { class: 'flex flex-wrap gap-2' }, [
           h(Chip, {}, { default: () => 'Chip' }),
           h(Chip, { deleteButton: true }, { default: () => 'Removable' }),
         ])
-    },
-  }),
-  'capacitor-dialog': defineComponent({
-    setup() {
-      return () => h(Button, { onClick: () => (dialogOpen.value = true) }, { default: () => 'Open dialog' })
-    },
-  }),
+  ),
+  'capacitor-dialog': defineDemo(() => h(Button, { onClick: () => (dialogOpen.value = true) }, { default: () => 'Open dialog' })
+  ),
   'capacitor-dialog-button': defineComponent({
     setup() {
       const open = ref(false)
@@ -518,65 +478,42 @@ const sectionMap = {
         ])
     },
   }),
-  'capacitor-fab': defineComponent({
-    setup() {
-      return () =>
+  'capacitor-fab': defineDemo(() =>
         h('div', { class: 'relative min-h-24' }, [
           h(Fab, { class: 'relative right-0 bottom-0 ml-auto', href: '#' }, { default: () => h('span', { class: 'text-2xl' }, '+') }),
         ])
-    },
-  }),
-  'capacitor-icon': defineComponent({
-    setup() {
-      return () => h(Icon, { material: 'home', class: 'text-2xl' })
-    },
-  }),
-  'capacitor-link': defineComponent({
-    setup() {
-      return () => h(Link, { href: '#' }, { default: () => 'Link' })
-    },
-  }),
-  'capacitor-list': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-icon': defineDemo(() => h(Icon, { material: 'home', class: 'text-2xl' })
+  ),
+  'capacitor-link': defineDemo(() => h(Link, { href: '#' }, { default: () => 'Link' })
+  ),
+  'capacitor-list': defineDemo(() =>
         h(List, {}, {
           default: () => [
             h(ListItem, { title: 'List item', subtitle: 'Subtitle', chevron: true }),
             h(ListButton, {}, { default: () => 'List button' }),
           ],
         })
-    },
-  }),
-  'capacitor-list-button': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-list-button': defineDemo(() =>
         h(List, {}, {
           default: () => h(ListButton, {}, { default: () => 'Standalone list button' }),
         })
-    },
-  }),
-  'capacitor-list-group': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-list-group': defineDemo(() =>
         h(List, {}, {
           default: () =>
             h(ListGroup, {}, {
               default: () => [h(ListItem, { title: 'Grouped' }), h(ListItem, { title: 'Items' })],
             }),
         })
-    },
-  }),
-  'capacitor-list-input': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-list-input': defineDemo(() =>
         h(List, {}, {
           default: () => h(ListInput, { label: 'Email', type: 'email', placeholder: 'you@example.com' }),
         })
-    },
-  }),
-  'capacitor-list-item': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-list-item': defineDemo(() =>
         h(List, {}, {
           default: () =>
             h(ListItem, {}, {
@@ -584,28 +521,19 @@ const sectionMap = {
               after: () => h(Toggle, { checked: toggleOn.value }),
             }),
         })
-    },
-  }),
-  'capacitor-menu-list': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-menu-list': defineDemo(() =>
         h(MenuList, {}, {
           default: () => h(MenuListItem, { href: '#' }, { default: () => 'Menu item' }),
         })
-    },
-  }),
-  'capacitor-menu-list-item': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-menu-list-item': defineDemo(() =>
         h(MenuList, {}, {
           default: () =>
             h(MenuListItem, { href: '#' }, { default: () => 'Dropdown menu item' }),
         })
-    },
-  }),
-  'capacitor-message': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-message': defineDemo(() =>
         h(Messages, {}, {
           default: () => [
             h(MessagesTitle, { name: 'Capgo' }),
@@ -613,91 +541,52 @@ const sectionMap = {
             h(Message, { type: 'received', text: 'All components run in Vue.', name: 'Capgo' }),
           ],
         })
-    },
-  }),
-  'capacitor-messagebar': defineComponent({
-    setup() {
-      return () => h(Messagebar, { placeholder: 'Type a message' })
-    },
-  }),
-  'capacitor-messages': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-messagebar': defineDemo(() => h(Messagebar, { placeholder: 'Type a message' })
+  ),
+  'capacitor-messages': defineDemo(() =>
         h(Messages, {}, {
           default: () =>
             h(Message, { type: 'received', text: 'Messages container layout.', name: 'Capgo' }),
         })
-    },
-  }),
-  'capacitor-messages-title': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-messages-title': defineDemo(() =>
         h(Messages, {}, {
           default: () => [
             h(MessagesTitle, { name: 'Martin' }),
             h(Message, { type: 'received', text: 'MessagesTitle labels the thread.', name: 'Martin' }),
           ],
         })
-    },
-  }),
-  'capacitor-navbar': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-navbar': defineDemo(() =>
         h(Navbar, { title: 'Navbar', subtitle: 'Subtitle' }, {
           left: () => h(NavbarBackLink, { text: 'Back' }),
         })
-    },
-  }),
-  'capacitor-navbar-back-link': defineComponent({
-    setup() {
-      return () => h(NavbarBackLink, { text: 'Back' })
-    },
-  }),
-  'capacitor-notification': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-navbar-back-link': defineDemo(() => h(NavbarBackLink, { text: 'Back' })
+  ),
+  'capacitor-notification': defineDemo(() =>
         h(Notification, { title: 'Notification', subtitle: 'Subtitle', text: 'Supporting text' })
-    },
-  }),
-  'capacitor-page': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-page': defineDemo(() =>
         h(Block, { strong: true, inset: true, class: 'm-0' }, {
           default: () => h('p', { class: 'p-3 text-sm' }, 'The outer scroll view is a Page component wrapping this catalog.'),
         })
-    },
-  }),
-  'capacitor-panel': defineComponent({
-    setup() {
-      return () => h(Button, { onClick: () => (panelOpen.value = true) }, { default: () => 'Open panel' })
-    },
-  }),
-  'capacitor-popover': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-panel': defineDemo(() => h(Button, { onClick: () => (panelOpen.value = true) }, { default: () => 'Open panel' })
+  ),
+  'capacitor-popover': defineDemo(() =>
         h('div', {}, [
           h(Button, { id: 'popover-target', onClick: () => (popoverOpen.value = true) }, { default: () => 'Open popover' }),
         ])
-    },
-  }),
-  'capacitor-popup': defineComponent({
-    setup() {
-      return () => h(Button, { onClick: () => (popupOpen.value = true) }, { default: () => 'Open popup' })
-    },
-  }),
-  'capacitor-preloader': defineComponent({
-    setup() {
-      return () => h(Preloader, { class: 'mx-auto' })
-    },
-  }),
-  'capacitor-progressbar': defineComponent({
-    setup() {
-      return () => h(Progressbar, { progress: 65 })
-    },
-  }),
-  'capacitor-radio': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-popup': defineDemo(() => h(Button, { onClick: () => (popupOpen.value = true) }, { default: () => 'Open popup' })
+  ),
+  'capacitor-preloader': defineDemo(() => h(Preloader, { class: 'mx-auto' })
+  ),
+  'capacitor-progressbar': defineDemo(() => h(Progressbar, { progress: 65 })
+  ),
+  'capacitor-radio': defineDemo(() =>
         h(List, {}, {
           default: () => [
             h(ListItem, { radio: true, checked: radioVal.value === 'a', title: 'Option A', onClick: () => (radioVal.value = 'a') }),
@@ -705,34 +594,24 @@ const sectionMap = {
             h(Radio, { class: 'sr-only', checked: radioVal.value === 'a' }),
           ],
         })
-    },
-  }),
-  'capacitor-range': defineComponent({
-    setup() {
-      return () => h(Range, { value: rangeValue.value, onRange: 'change', onInput: (e) => (rangeValue.value = Number(e.target?.value ?? 0)) })
-    },
-  }),
-  'capacitor-searchbar': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-range': defineDemo(() => h(Range, { value: rangeValue.value, onRange: 'change', onInput: (e) => (rangeValue.value = Number(e.target?.value ?? 0)) })
+  ),
+  'capacitor-searchbar': defineDemo(() =>
         h(Searchbar, {
           value: search.value,
           placeholder: 'Search components',
           onSearchbarInput: (e) => (search.value = String(e.detail?.value ?? '')),
         })
-    },
-  }),
-  'capacitor-segmented': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-segmented': defineDemo(() =>
         h(Segmented, { strong: true }, {
           default: () => [
             h(SegmentedButton, { active: segmented.value === 'tab1', onClick: () => (segmented.value = 'tab1') }, { default: () => 'One' }),
             h(SegmentedButton, { active: segmented.value === 'tab2', onClick: () => (segmented.value = 'tab2') }, { default: () => 'Two' }),
           ],
         })
-    },
-  }),
+  ),
   'capacitor-segmented-button': defineComponent({
     setup() {
       const active = ref('a')
@@ -745,80 +624,44 @@ const sectionMap = {
         })
     },
   }),
-  'capacitor-sheet': defineComponent({
-    setup() {
-      return () => h(Button, { onClick: () => (sheetOpen.value = true) }, { default: () => 'Open sheet' })
-    },
-  }),
-  'capacitor-stepper': defineComponent({
-    setup() {
-      return () => h(Stepper, { value: stepperValue.value, min: 0, max: 10 })
-    },
-  }),
-  'capacitor-tabbar': defineComponent({
-    setup() {
-      return () =>
+  'capacitor-sheet': defineDemo(() => h(Button, { onClick: () => (sheetOpen.value = true) }, { default: () => 'Open sheet' })
+  ),
+  'capacitor-stepper': defineDemo(() => h(Stepper, { value: stepperValue.value, min: 0, max: 10 })
+  ),
+  'capacitor-tabbar': defineDemo(() =>
         h(Tabbar, { labels: true }, {
           default: () => [
             h(TabbarLink, { active: true, icon: 'home', label: 'Home' }),
             h(TabbarLink, { icon: 'search', label: 'Search' }),
           ],
         })
-    },
-  }),
-  'capacitor-tabbar-link': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-tabbar-link': defineDemo(() =>
         h(Tabbar, { labels: true }, {
           default: () => h(TabbarLink, { active: true, icon: 'today', label: 'Today' }),
         })
-    },
-  }),
-  'capacitor-table': defineComponent({
-    setup() {
-      return () => demoTableSample()
-    },
-  }),
-  'capacitor-table-body': defineComponent({
-    setup() {
-      return () => tableWithBodyRow('Body row')
-    },
-  }),
-  'capacitor-table-cell': defineComponent({
-    setup() {
-      return () => tableWithBodyCells('Cell A', 'Cell B')
-    },
-  }),
-  'capacitor-table-head': defineComponent({
-    setup() {
-      return () => tableWithHeaderCell('Header')
-    },
-  }),
-  'capacitor-table-row': defineComponent({
-    setup() {
-      return () => tableWithBodyRow('Single row')
-    },
-  }),
-  'capacitor-toast': defineComponent({
-    setup() {
-      return () => h(Button, { onClick: () => (toastOpen.value = true) }, { default: () => 'Show toast' })
-    },
-  }),
-  'capacitor-toggle': defineComponent({
-    setup() {
-      return () => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) })
-    },
-  }),
-  'capacitor-toolbar': defineComponent({
-    setup() {
-      return () =>
+  ),
+  'capacitor-table': defineDemo(() => demoTableSample()
+  ),
+  'capacitor-table-body': defineDemo(() => tableWithBodyRow('Body row')
+  ),
+  'capacitor-table-cell': defineDemo(() => tableWithBodyCells('Cell A', 'Cell B')
+  ),
+  'capacitor-table-head': defineDemo(() => tableWithHeaderCell('Header')
+  ),
+  'capacitor-table-row': defineDemo(() => tableWithBodyRow('Single row')
+  ),
+  'capacitor-toast': defineDemo(() => h(Button, { onClick: () => (toastOpen.value = true) }, { default: () => 'Show toast' })
+  ),
+  'capacitor-toggle': defineDemo(() => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) })
+  ),
+  'capacitor-toolbar': defineDemo(() =>
         h(Toolbar, { top: true }, {
           left: () => h(Link, { toolbar: true }, { default: () => 'Left' }),
           title: () => 'Toolbar',
           right: () => h(Link, { toolbar: true }, { default: () => 'Right' }),
         })
-    },
-  }),
+  ),
 }
 
 /** @param {string} name */
