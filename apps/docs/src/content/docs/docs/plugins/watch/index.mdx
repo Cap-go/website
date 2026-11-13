@@ -51,7 +51,7 @@ Capabilities below match the native implementations in [CapgoWatchPlugin.swift](
 | `updateApplicationContext` | Yes. Latest value only via WatchConnectivity. | Yes. DataItem at `/capgo/context` with JSON in `payload`. | No |
 | `transferUserInfo` | Yes. Queued user-info transfer. | Yes. DataItem at `/capgo/userinfo/{uuid}` with JSON in `payload`. | No |
 | `replyToMessage` | Yes. After `messageReceivedWithReply`. | Yes. Sends on `/capgo/reply/{callbackId}` to the watch node (5 minute pending TTL). | No |
-| `getReceivedState` | Yes. Last `receivedApplicationContext`. | Yes. Last persisted application context DataItem. | Throws `unavailable` |
+| `getReceivedState` | Yes. Last `receivedApplicationContext`. | Yes. Last persisted application context DataItem. | Resolves `{ context: null }` |
 | `getInfo` | Yes. WatchConnectivity pairing and reachability. | Yes. Connected nodes plus `capgo_watch` capability for watch app install detection. | Returns `isSupported: false` |
 | `getPluginVersion` | Yes | Yes | Returns `{ version: "web" }` |
 | `messageReceived` | Yes | Yes. Incoming `/capgo/message`. | Registers only; no events on web |

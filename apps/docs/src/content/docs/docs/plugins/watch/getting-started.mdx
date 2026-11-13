@@ -209,7 +209,7 @@ if (context) {
 }
 ```
 
-On iOS this is `WCSession.receivedApplicationContext`. On Android it is the last persisted `/capgo/context` DataItem. The method throws `unavailable` on web.
+On iOS this is `WCSession.receivedApplicationContext`. On Android it is the last persisted `/capgo/context` DataItem. On web the method resolves `{ context: null }`.
 
 ### Background replay on Android
 
@@ -345,6 +345,8 @@ Return the last application context received from the watch.
 **Returns:** `ReceivedState` object with:
 - `context`: Object or null - The last context, or null if none is stored
 
+On web this resolves `{ context: null }`.
+
 #### `getInfo()`
 Get watch connectivity status.
 
@@ -414,7 +416,7 @@ See the [platform support table](/docs/plugins/watch/#platform-support) on the p
 - Watch messaging is not supported in the browser
 - `getInfo()` resolves with `isSupported: false` and other fields at safe defaults
 - `getPluginVersion()` resolves with `{ version: "web" }`
-- `sendMessage`, `updateApplicationContext`, `transferUserInfo`, `replyToMessage`, and `getReceivedState` reject with an unavailable error
+- `sendMessage`, `updateApplicationContext`, `transferUserInfo`, and `replyToMessage` reject with an unavailable error. `getReceivedState()` resolves `{ context: null }`.
 - `addListener` resolves a handle via Capacitor `WebPlugin`, but watch events are unsupported in the browser (callbacks never run)
 
 ## Common Use Cases
