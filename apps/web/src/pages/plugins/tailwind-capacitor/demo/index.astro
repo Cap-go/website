@@ -20,6 +20,11 @@ const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
 })
 
 const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, { includeOrganization: true })
+
+const navItems = [
+  { name: 'tc-demo-foundation', title: 'Registry foundation' },
+  ...manifest.items.filter((item) => !['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'].includes(item.name)),
+]
 ---
 
 <Layout content={{ title, description, ldJson, canonical: Astro.url.pathname }}>
@@ -63,14 +68,14 @@ const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, { i
             <iframe
               id="tc-demo-iframe"
               title="Tailwind Capacitor components"
-              class="h-[min(78dvh,820px)] w-full bg-white"
+              class="h-[min(78dvh,820px)] w-full bg-neutral-950"
               src={`${getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/shell/')}?platform=ios&dark=0`}
             ></iframe>
           </div>
         </div>
 
         <div class="mt-8 lg:hidden">
-          <RegistryNav items={manifest.items} />
+          <RegistryNav items={navItems} />
         </div>
 
         <div class="mt-10">
@@ -81,7 +86,7 @@ const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, { i
       </div>
 
       <aside class="hidden lg:block">
-        <RegistryNav items={manifest.items} />
+        <RegistryNav items={navItems} />
       </aside>
     </div>
   </section>
@@ -117,8 +122,17 @@ const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, { i
 
     const pushTheme = () => {
       const qs = new URLSearchParams({ platform, dark: dark ? '1' : '0' })
-      iframe.src = `${shellBase}?${qs.toString()}`
-      iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, '*')
+      const nextSrc = `${shellBase}?${qs.toString()}`
+      const post = () => {
+        iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, '*')
+      }
+      if (iframe.src.split('?')[0] === shellBase && iframe.src !== nextSrc) {
+        iframe.addEventListener('load', post, { once: true })
+        iframe.src = nextSrc
+      } else {
+        iframe.src = nextSrc
+        post()
+      }
     }
 
     root.querySelectorAll('[data-tc-platform]').forEach((btn) => {

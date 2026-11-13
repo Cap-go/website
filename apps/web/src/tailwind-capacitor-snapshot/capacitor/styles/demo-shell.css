@@ -1,3 +1,5 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
 html,
 body.tc-demo-shell-body {
   margin: 0;
@@ -5,7 +7,38 @@ body.tc-demo-shell-body {
   background: var(--color-background, #fff);
 }
 
+html.dark,
+html.dark body.tc-demo-shell-body {
+  background: #000;
+  color: #fff;
+}
+
 .tc-demo-shell-body #tc-demo-root {
   min-height: 100dvh;
   isolation: isolate;
+}
+
+.tc-demo-section-heading {
+  margin: 0 0 0.35rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.tc-demo-section-description {
+  margin: 0 0 0.75rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  opacity: 0.72;
+}
+
+.tc-demo-section {
+  scroll-margin-top: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.tc-demo-section .registry-demo-block {
+  margin-inline: 1rem;
 }

@@ -1,22 +1,38 @@
 <template>
   <App id="tc-demo-root" :theme="platform" :dark="dark" class="min-h-dvh">
-    <Page class="safe-areas bg-ios-light-light dark:bg-ios-dark-dark md:bg-md-light-light md:dark:bg-md-dark-dark">
+    <Page class="safe-areas">
       <Navbar title="Components" :subtitle="platformLabel" />
 
-      <MotionBlock v-for="item in manifest.items" :id="item.name" :key="item.name" class="registry-section">
-        <Block strong class="m-4">
-          <BlockTitle>{{ item.title }}</BlockTitle>
-          <p class="mb-3 text-sm opacity-70">{{ item.description }}</p>
-          <component :is="sectionFor(item.name)" v-if="sectionFor(item.name)" />
-          <p v-else class="text-sm opacity-60">Styles, provider, or shared tokens (see install docs).</p>
+      <section id="tc-demo-foundation" class="tc-demo-section px-1 pb-2">
+        <h2 class="tc-demo-section-heading">Registry foundation</h2>
+        <p class="tc-demo-section-description">
+          Core styles, provider, shared tokens, and icon primitives from the shadcn registry.
+        </p>
+        <Block strong inset class="registry-demo-block">
+          <ul class="divide-y text-sm">
+            <li v-for="item in foundationItems" :key="item.name" class="py-3 first:pt-0 last:pb-0">
+              <p class="font-medium leading-snug">{{ item.title }}</p>
+              <p class="mt-1 text-sm leading-relaxed opacity-70">{{ item.description }}</p>
+            </li>
+          </ul>
+          <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-black/10 pt-4 dark:border-white/10">
+            <Icon material="home" class="text-2xl" aria-label="Home" />
+            <Icon material="person" class="text-2xl" aria-label="Person" />
+            <Icon material="settings" class="text-2xl" aria-label="Settings" />
+            <Icon material="search" class="text-2xl" aria-label="Search" />
+          </div>
+        </Block>
+      </section>
+
+      <MotionBlock v-for="item in registryItems" :id="item.name" :key="item.name" class="tc-demo-section">
+        <h2 class="tc-demo-section-heading">{{ item.title }}</h2>
+        <p class="tc-demo-section-description">{{ item.description }}</p>
+        <Block strong inset class="registry-demo-block">
+          <component :is="sectionFor(item.name)" />
         </Block>
       </MotionBlock>
 
-      <Fab class="fixed bottom-6 right-6 z-20" href @click.prevent="toastOpen = true">
-        <span class="text-2xl leading-none">+</span>
-      </Fab>
-
-      <Actions :opened="actionsOpen" @actions:closed="actionsOpen = false">
+      <Actions :opened="actionsOpen" @backdropclick="actionsOpen = false">
         <ActionsGroup>
           <ActionsLabel>Actions</ActionsLabel>
           <ActionsButton>
@@ -159,6 +175,24 @@ watch(
 
 const platformLabel = computed(() => (platform.value === 'ios' ? 'iOS' : 'Material'))
 
+const foundationNames = new Set([
+  'capacitor-tailwind',
+  'capacitor-provider',
+  'capacitor-shared',
+  'capacitor-icons',
+])
+
+const foundationItems = computed(() => manifest.items.filter((item) => foundationNames.has(item.name)))
+
+const registryItems = computed(() => manifest.items.filter((item) => !foundationNames.has(item.name)))
+
+function syncThemeToDocument() {
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle('dark', dark.value)
+}
+
+watch([platform, dark], syncThemeToDocument, { immediate: true })
+
 const actionsOpen = ref(false)
 const dialogOpen = ref(false)
 const sheetOpen = ref(false)
@@ -179,6 +213,7 @@ function onMessage(event) {
   if (event.data?.type === 'tc-demo-theme') {
     if (event.data.platform === 'ios' || event.data.platform === 'material') platform.value = event.data.platform
     if (typeof event.data.dark === 'boolean') dark.value = event.data.dark
+    syncThemeToDocument()
     return
   }
   if (event.data?.type === 'tc-demo-scroll' && typeof event.data.id === 'string') {
@@ -222,22 +257,65 @@ const sectionMap = {
   }),
   'capacitor-actions-button': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Rendered inside Actions above.')
+      const open = ref(false)
+      return () =>
+        h('div', { class: 'flex flex-col gap-2' }, [
+          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Preview ActionsButton' }),
+          h(Actions, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
+            default: () =>
+              h(ActionsGroup, {}, {
+                default: () => [
+                  h(ActionsLabel, {}, { default: () => 'Label' }),
+                  h(ActionsButton, { bold: true }, { default: () => 'Primary action' }),
+                  h(ActionsButton, {}, { default: () => 'Secondary' }),
+                ],
+              }),
+          }),
+        ])
     },
   }),
   'capacitor-actions-group': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Rendered inside Actions above.')
+      const open = ref(false)
+      return () =>
+        h('div', {}, [
+          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Open grouped actions' }),
+          h(Actions, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
+            default: () =>
+              h(ActionsGroup, {}, {
+                default: () => [
+                  h(ActionsButton, {}, { default: () => 'One' }),
+                  h(ActionsButton, {}, { default: () => 'Two' }),
+                ],
+              }),
+          }),
+        ])
     },
   }),
   'capacitor-actions-label': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Rendered inside Actions above.')
+      const open = ref(false)
+      return () =>
+        h('div', {}, [
+          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Open actions label' }),
+          h(Actions, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
+            default: () =>
+              h(ActionsGroup, {}, {
+                default: () => [
+                  h(ActionsLabel, {}, { default: () => 'Section title' }),
+                  h(ActionsButton, {}, { default: () => 'Item' }),
+                ],
+              }),
+          }),
+        ])
     },
   }),
   'capacitor-app': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm' }, 'The demo shell wraps content in App + Page.')
+      return () =>
+        h(Block, { strong: true, class: 'm-0' }, {
+          default: () => h('p', { class: 'p-3 text-sm' }, `Root App shell with ${platformLabel.value} theme and ${dark.value ? 'dark' : 'light'} mode.`),
+        })
     },
   }),
   'capacitor-badge': defineComponent({
@@ -298,17 +376,39 @@ const sectionMap = {
   }),
   'capacitor-breadcrumbs-collapsed': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in breadcrumbs row.')
+      return () =>
+        h(Breadcrumbs, {}, {
+          default: () => [
+            h(BreadcrumbsItem, {}, { default: () => 'Root' }),
+            h(BreadcrumbsSeparator),
+            h(BreadcrumbsCollapsed),
+            h(BreadcrumbsItem, { active: true }, { default: () => 'Current' }),
+          ],
+        })
     },
   }),
   'capacitor-breadcrumbs-item': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in breadcrumbs row.')
+      return () =>
+        h(Breadcrumbs, {}, {
+          default: () => [
+            h(BreadcrumbsItem, {}, { default: () => 'Library' }),
+            h(BreadcrumbsSeparator),
+            h(BreadcrumbsItem, { active: true }, { default: () => 'Active item' }),
+          ],
+        })
     },
   }),
   'capacitor-breadcrumbs-separator': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in breadcrumbs row.')
+      return () =>
+        h(Breadcrumbs, {}, {
+          default: () => [
+            h(BreadcrumbsItem, {}, { default: () => 'Docs' }),
+            h(BreadcrumbsSeparator),
+            h(BreadcrumbsItem, { active: true }, { default: () => 'API' }),
+          ],
+        })
     },
   }),
   'capacitor-button': defineComponent({
@@ -350,12 +450,27 @@ const sectionMap = {
   }),
   'capacitor-dialog-button': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Used inside Dialog.')
+      const open = ref(false)
+      return () =>
+        h('div', {}, [
+          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Dialog with buttons' }),
+          h(Dialog, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
+            title: () => 'Confirm',
+            default: () => 'DialogButton styles appear below.',
+            buttons: () => [
+              h(DialogButton, { onClick: () => (open.value = false) }, { default: () => 'Cancel' }),
+              h(DialogButton, { strong: true, onClick: () => (open.value = false) }, { default: () => 'OK' }),
+            ],
+          }),
+        ])
     },
   }),
   'capacitor-fab': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm' }, 'Floating action button is fixed at the bottom right of this shell.')
+      return () =>
+        h('div', { class: 'relative min-h-24' }, [
+          h(Fab, { class: 'relative right-0 bottom-0 ml-auto', href: '#' }, { default: () => h('span', { class: 'text-2xl' }, '+') }),
+        ])
     },
   }),
   'capacitor-icon': defineComponent({
@@ -381,7 +496,10 @@ const sectionMap = {
   }),
   'capacitor-list-button': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in List above.')
+      return () =>
+        h(List, {}, {
+          default: () => h(ListButton, {}, { default: () => 'Standalone list button' }),
+        })
     },
   }),
   'capacitor-list-group': defineComponent({
@@ -425,7 +543,11 @@ const sectionMap = {
   }),
   'capacitor-menu-list-item': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in MenuList.')
+      return () =>
+        h(MenuList, {}, {
+          default: () =>
+            h(MenuListItem, { href: '#' }, { default: () => 'Dropdown menu item' }),
+        })
     },
   }),
   'capacitor-message': defineComponent({
@@ -447,12 +569,22 @@ const sectionMap = {
   }),
   'capacitor-messages': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'See Message demo.')
+      return () =>
+        h(Messages, {}, {
+          default: () =>
+            h(Message, { type: 'received', text: 'Messages container layout.', name: 'Capgo' }),
+        })
     },
   }),
   'capacitor-messages-title': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'See Message demo.')
+      return () =>
+        h(Messages, {}, {
+          default: () => [
+            h(MessagesTitle, { name: 'Martin' }),
+            h(Message, { type: 'received', text: 'MessagesTitle labels the thread.', name: 'Martin' }),
+          ],
+        })
     },
   }),
   'capacitor-navbar': defineComponent({
@@ -476,7 +608,10 @@ const sectionMap = {
   }),
   'capacitor-page': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm' }, 'This scrollable view is a Page.')
+      return () =>
+        h(Block, { strong: true, inset: true, class: 'm-0' }, {
+          default: () => h('p', { class: 'p-3 text-sm' }, 'The outer scroll view is a Page component wrapping this catalog.'),
+        })
     },
   }),
   'capacitor-panel': defineComponent({
@@ -547,7 +682,14 @@ const sectionMap = {
   }),
   'capacitor-segmented-button': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in Segmented.')
+      const active = ref('a')
+      return () =>
+        h(Segmented, { strong: true }, {
+          default: () => [
+            h(SegmentedButton, { active: active.value === 'a', onClick: () => (active.value = 'a') }, { default: () => 'A' }),
+            h(SegmentedButton, { active: active.value === 'b', onClick: () => (active.value = 'b') }, { default: () => 'B' }),
+          ],
+        })
     },
   }),
   'capacitor-sheet': defineComponent({
@@ -573,7 +715,10 @@ const sectionMap = {
   }),
   'capacitor-tabbar-link': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in Tabbar.')
+      return () =>
+        h(Tabbar, { labels: true }, {
+          default: () => h(TabbarLink, { active: true, icon: 'today', label: 'Today' }),
+        })
     },
   }),
   'capacitor-table': defineComponent({
@@ -599,22 +744,58 @@ const sectionMap = {
   }),
   'capacitor-table-body': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in Table.')
+      return () =>
+        h(Table, {}, {
+          default: () =>
+            h(TableBody, {}, {
+              default: () =>
+                h(TableRow, {}, {
+                  default: () => h(TableCell, {}, { default: () => 'Body row' }),
+                }),
+            }),
+        })
     },
   }),
   'capacitor-table-cell': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in Table.')
+      return () =>
+        h(Table, {}, {
+          default: () =>
+            h(TableBody, {}, {
+              default: () =>
+                h(TableRow, {}, {
+                  default: () => [h(TableCell, {}, { default: () => 'Cell A' }), h(TableCell, {}, { default: () => 'Cell B' })],
+                }),
+            }),
+        })
     },
   }),
   'capacitor-table-head': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in Table.')
+      return () =>
+        h(Table, {}, {
+          default: () =>
+            h(TableHead, {}, {
+              default: () =>
+                h(TableRow, {}, {
+                  default: () => h(TableCell, { header: true }, { default: () => 'Header' }),
+                }),
+            }),
+        })
     },
   }),
   'capacitor-table-row': defineComponent({
     setup() {
-      return () => h('p', { class: 'text-sm opacity-70' }, 'Shown in Table.')
+      return () =>
+        h(Table, {}, {
+          default: () =>
+            h(TableBody, {}, {
+              default: () =>
+                h(TableRow, {}, {
+                  default: () => h(TableCell, {}, { default: () => 'Single row' }),
+                }),
+            }),
+        })
     },
   }),
   'capacitor-toast': defineComponent({
