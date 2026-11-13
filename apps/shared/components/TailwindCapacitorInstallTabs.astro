@@ -1,0 +1,90 @@
+---
+import type { InstallTabPanel, InstallTabVariant } from '../tailwindCapacitorInstallPanels'
+import { getTailwindCapacitorInstallPanels } from '../tailwindCapacitorInstallPanels'
+
+interface Props {
+  variant?: InstallTabVariant
+  class?: string
+}
+
+const { variant = 'web', class: className = '' } = Astro.props
+const panels = getTailwindCapacitorInstallPanels(variant)
+const isWeb = variant === 'web'
+
+function frameworkLabel(id: InstallTabPanel['id']) {
+  return id === 'vue' ? 'Vue' : id === 'react' ? 'React' : 'Angular'
+}
+---
+
+<div class:list={[isWeb ? ['rounded-2xl border border-white/10 bg-gray-950/70', className] : 'tc-install-tabs not-content']} data-tc-install-tabs data-tc-variant={variant}>
+  <div class:list={[isWeb ? 'flex flex-wrap gap-2 border-b border-white/10 p-3' : 'tc-install-tablist']} role="tablist" aria-label="Framework install">
+    {panels.map((panel) => (
+      <button
+        type="button"
+        class:list={[
+          'tc-install-tab',
+          isWeb
+            ? ['rounded-lg border px-3 py-1.5 text-sm', panel.defaultVisible ? 'border-blue-400/40 text-white' : 'border-white/15 text-gray-300']
+            : { selected: panel.defaultVisible },
+        ]}
+        data-tab={panel.id}
+        role="tab"
+        aria-selected={panel.defaultVisible ? 'true' : 'false'}
+      >
+        {frameworkLabel(panel.id)}
+      </button>
+    ))}
+  </div>
+  {panels.map((panel) => (
+    <div class:list={[isWeb ? 'p-4' : 'tc-install-panel', { hidden: !panel.defaultVisible }]} data-panel={panel.id} role="tabpanel">
+      <p class:list={[{ 'text-sm text-gray-300': isWeb }]}>{panel.description}</p>
+      <ul class:list={[{ 'mt-3 flex flex-col gap-2': isWeb }]}>
+        {panel.commands.map((command) => (
+          <li>
+            {isWeb ? (
+              <code class="block font-mono text-xs leading-6 whitespace-pre-wrap break-all text-slate-200">{command}</code>
+            ) : (
+              <pre>
+                      <code>{command}</code>
+                    </pre>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>
+
+{!isWeb ? (
+  <style>
+    .tc-install-tablist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .tc-install-tab {
+      border: 1px solid var(--sl-color-gray-5);
+      border-radius: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      background: transparent;
+      cursor: pointer;
+    }
+    .tc-install-tab.selected {
+      border-color: var(--sl-color-accent);
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+) : null}
+
+<script>
+  import { bindTailwindCapacitorInstallTabs } from '../tailwindCapacitorInstallTabs.client'
+
+  const root = document.querySelector('[data-tc-install-tabs]')
+  if (root instanceof HTMLElement) {
+    const variant = root.dataset.tcVariant === 'docs' ? 'docs' : 'web'
+    bindTailwindCapacitorInstallTabs(root, variant)
+  }
+</script>

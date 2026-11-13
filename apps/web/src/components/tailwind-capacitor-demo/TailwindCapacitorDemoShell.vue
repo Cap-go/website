@@ -5,9 +5,7 @@
 
       <section id="tc-demo-foundation" class="tc-demo-section px-1 pb-2">
         <h2 class="tc-demo-section-heading">Registry foundation</h2>
-        <p class="tc-demo-section-description">
-          Core styles, provider, shared tokens, and icon primitives from the shadcn registry.
-        </p>
+        <p class="tc-demo-section-description">Core styles, provider, shared tokens, and icon primitives from the shadcn registry.</p>
         <Block strong inset class="registry-demo-block">
           <ul class="divide-y text-sm">
             <li v-for="item in foundationItems" :key="item.name" class="py-3 first:pt-0 last:pb-0">
@@ -84,9 +82,7 @@
         </Page>
       </Panel>
 
-      <Toast :opened="toastOpen" position="center" @toast:closed="toastOpen = false">
-        Toast from registry demo
-      </Toast>
+      <Toast :opened="toastOpen" position="center" @toast:closed="toastOpen = false"> Toast from registry demo </Toast>
     </Page>
   </App>
 </template>
@@ -175,12 +171,7 @@ watch(
 
 const platformLabel = computed(() => (platform.value === 'ios' ? 'iOS' : 'Material'))
 
-const foundationNames = new Set([
-  'capacitor-tailwind',
-  'capacitor-provider',
-  'capacitor-shared',
-  'capacitor-icons',
-])
+const foundationNames = new Set(['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'])
 
 const foundationItems = computed(() => manifest.items.filter((item) => foundationNames.has(item.name)))
 
@@ -257,410 +248,478 @@ function defineDemo(render) {
   })
 }
 
-function tableWithBodyRow(label) {
-  return h(Table, {}, {
-    default: () =>
-      h(TableBody, {}, {
-        default: () => h(TableRow, {}, { default: () => h(TableCell, {}, { default: () => label }) }),
-      }),
+/** @param {import('vue').Ref<boolean>} openRef */
+function defineOpenShellButtonDemo(label, openRef) {
+  return defineDemo(() => h(Button, { onClick: () => (openRef.value = true) }, { default: () => label }))
+}
+
+function defineActionsPreviewDemo(buttonLabel, groupContent) {
+  return defineComponent({
+    setup() {
+      const open = ref(false)
+      const close = () => {
+        open.value = false
+      }
+      return () =>
+        h('div', { class: 'flex flex-col gap-2' }, [
+          h(Button, { onClick: () => (open.value = true) }, { default: () => buttonLabel }),
+          h(
+            Actions,
+            { opened: open.value, onBackdropclick: close },
+            {
+              default: () => h(ActionsGroup, {}, { default: () => groupContent() }),
+            },
+          ),
+        ])
+    },
   })
+}
+
+function tableWithBodyRow(label) {
+  return h(
+    Table,
+    {},
+    {
+      default: () =>
+        h(
+          TableBody,
+          {},
+          {
+            default: () => h(TableRow, {}, { default: () => h(TableCell, {}, { default: () => label }) }),
+          },
+        ),
+    },
+  )
 }
 
 function tableWithHeaderCell(label) {
-  return h(Table, {}, {
-    default: () =>
-      h(TableHead, {}, {
-        default: () => h(TableRow, {}, { default: () => h(TableCell, { header: true }, { default: () => label }) }),
-      }),
-  })
+  return h(
+    Table,
+    {},
+    {
+      default: () =>
+        h(
+          TableHead,
+          {},
+          {
+            default: () => h(TableRow, {}, { default: () => h(TableCell, { header: true }, { default: () => label }) }),
+          },
+        ),
+    },
+  )
 }
 
 function tableBodyRowCells(...labels) {
-  return h(TableRow, {}, {
-    default: () => labels.map((label) => h(TableCell, {}, { default: () => label })),
-  })
+  return h(
+    TableRow,
+    {},
+    {
+      default: () => labels.map((label) => h(TableCell, {}, { default: () => label })),
+    },
+  )
 }
 
 function tableWithBodyCells(...labels) {
-  return h(Table, {}, {
-    default: () => h(TableBody, {}, { default: () => tableBodyRowCells(...labels) }),
-  })
+  return h(
+    Table,
+    {},
+    {
+      default: () => h(TableBody, {}, { default: () => tableBodyRowCells(...labels) }),
+    },
+  )
 }
 
 const tableNameValueHeadRow = () =>
-  h(TableRow, {}, {
-    default: () => [
-      h(TableCell, { header: true }, { default: () => 'Name' }),
-      h(TableCell, { header: true }, { default: () => 'Value' }),
-    ],
-  })
+  h(
+    TableRow,
+    {},
+    {
+      default: () => [h(TableCell, { header: true }, { default: () => 'Name' }), h(TableCell, { header: true }, { default: () => 'Value' })],
+    },
+  )
 
 const tableRowsCountBodyRow = () =>
-  h(TableRow, {}, {
-    default: () => [h(TableCell, {}, { default: () => 'Rows' }), h(TableCell, {}, { default: () => '2' })],
-  })
+  h(
+    TableRow,
+    {},
+    {
+      default: () => [h(TableCell, {}, { default: () => 'Rows' }), h(TableCell, {}, { default: () => '2' })],
+    },
+  )
 
 function demoTableSample() {
-  return h(Table, {}, {
-    default: () => [
-      h(TableHead, {}, { default: () => tableNameValueHeadRow() }),
-      h(TableBody, {}, { default: () => tableRowsCountBodyRow() }),
-    ],
-  })
+  return h(
+    Table,
+    {},
+    {
+      default: () => [h(TableHead, {}, { default: () => tableNameValueHeadRow() }), h(TableBody, {}, { default: () => tableRowsCountBodyRow() })],
+    },
+  )
 }
 
 const sectionMap = {
-  'capacitor-actions': defineDemo(() =>
-        h(Button, { onClick: () => (actionsOpen.value = true) }, { default: () => 'Open Actions' })
-  ),
-  'capacitor-actions-button': defineComponent({
-    setup() {
-      const open = ref(false)
-      return () =>
-        h('div', { class: 'flex flex-col gap-2' }, [
-          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Preview ActionsButton' }),
-          h(Actions, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
-            default: () =>
-              h(ActionsGroup, {}, {
-                default: () => [
-                  h(ActionsLabel, {}, { default: () => 'Label' }),
-                  h(ActionsButton, { bold: true }, { default: () => 'Primary action' }),
-                  h(ActionsButton, {}, { default: () => 'Secondary' }),
-                ],
-              }),
-          }),
-        ])
-    },
-  }),
-  'capacitor-actions-group': defineComponent({
-    setup() {
-      const open = ref(false)
-      return () =>
-        h('div', {}, [
-          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Open grouped actions' }),
-          h(Actions, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
-            default: () =>
-              h(ActionsGroup, {}, {
-                default: () => [
-                  h(ActionsButton, {}, { default: () => 'One' }),
-                  h(ActionsButton, {}, { default: () => 'Two' }),
-                ],
-              }),
-          }),
-        ])
-    },
-  }),
-  'capacitor-actions-label': defineComponent({
-    setup() {
-      const open = ref(false)
-      return () =>
-        h('div', {}, [
-          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Open actions label' }),
-          h(Actions, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
-            default: () =>
-              h(ActionsGroup, {}, {
-                default: () => [
-                  h(ActionsLabel, {}, { default: () => 'Section title' }),
-                  h(ActionsButton, {}, { default: () => 'Item' }),
-                ],
-              }),
-          }),
-        ])
-    },
-  }),
+  'capacitor-actions': defineOpenShellButtonDemo('Open Actions', actionsOpen),
+  'capacitor-actions-button': defineActionsPreviewDemo('Preview ActionsButton', () => [
+    h(ActionsLabel, {}, { default: () => 'Label' }),
+    h(ActionsButton, { bold: true }, { default: () => 'Primary action' }),
+    h(ActionsButton, {}, { default: () => 'Secondary' }),
+  ]),
+  'capacitor-actions-group': defineActionsPreviewDemo('Open grouped actions', () => [
+    h(ActionsButton, {}, { default: () => 'One' }),
+    h(ActionsButton, {}, { default: () => 'Two' }),
+  ]),
+  'capacitor-actions-label': defineActionsPreviewDemo('Open actions label', () => [
+    h(ActionsLabel, {}, { default: () => 'Section title' }),
+    h(ActionsButton, {}, { default: () => 'Item' }),
+  ]),
   'capacitor-app': defineDemo(() =>
-        h(Block, { strong: true, class: 'm-0' }, {
-          default: () => h('p', { class: 'p-3 text-sm' }, `Root App shell with ${platformLabel.value} theme and ${dark.value ? 'dark' : 'light'} mode.`),
-        })
+    h(
+      Block,
+      { strong: true, class: 'm-0' },
+      {
+        default: () => h('p', { class: 'p-3 text-sm' }, `Root App shell with ${platformLabel.value} theme and ${dark.value ? 'dark' : 'light'} mode.`),
+      },
+    ),
   ),
   'capacitor-badge': defineDemo(() =>
-        h('div', { class: 'flex flex-wrap gap-2' }, [
-          h(Badge, {}, { default: () => 'Default' }),
-          h(Badge, { colors: { bg: 'bg-red-500' } }, { default: () => 'Hot' }),
-        ])
+    h('div', { class: 'flex flex-wrap gap-2' }, [h(Badge, {}, { default: () => 'Default' }), h(Badge, { colors: { bg: 'bg-red-500' } }, { default: () => 'Hot' })]),
   ),
-  'capacitor-block': defineDemo(() => h(Block, { inset: true, strong: true }, { default: () => 'Inset strong block' })
-  ),
+  'capacitor-block': defineDemo(() => h(Block, { inset: true, strong: true }, { default: () => 'Inset strong block' })),
   'capacitor-block-footer': defineDemo(() =>
-        h(Block, { strong: true, class: 'm-0' }, {
-          default: () => [
-            h('p', { class: 'p-4' }, 'Block body'),
-            h(BlockFooter, {}, { default: () => 'Block footer' }),
-          ],
-        })
+    h(
+      Block,
+      { strong: true, class: 'm-0' },
+      {
+        default: () => [h('p', { class: 'p-4' }, 'Block body'), h(BlockFooter, {}, { default: () => 'Block footer' })],
+      },
+    ),
   ),
   'capacitor-block-header': defineDemo(() =>
-        h(Block, { class: 'm-0' }, {
-          default: () => [
-            h(BlockHeader, {}, { default: () => 'Header' }),
-            h('p', { class: 'p-4' }, 'Block body'),
-          ],
-        })
+    h(
+      Block,
+      { class: 'm-0' },
+      {
+        default: () => [h(BlockHeader, {}, { default: () => 'Header' }), h('p', { class: 'p-4' }, 'Block body')],
+      },
+    ),
   ),
-  'capacitor-block-title': defineDemo(() => h(BlockTitle, {}, { default: () => 'Block title' })
-  ),
+  'capacitor-block-title': defineDemo(() => h(BlockTitle, {}, { default: () => 'Block title' })),
   'capacitor-breadcrumbs': defineDemo(() =>
-        h(Breadcrumbs, {}, {
-          default: () => [
-            h(BreadcrumbsItem, { active: true }, { default: () => 'Home' }),
-            h(BreadcrumbsSeparator),
-            h(BreadcrumbsItem, {}, { default: () => 'Library' }),
-            h(BreadcrumbsSeparator),
-            h(BreadcrumbsCollapsed),
-            h(BreadcrumbsItem, {}, { default: () => 'Data' }),
-          ],
-        })
+    h(
+      Breadcrumbs,
+      {},
+      {
+        default: () => [
+          h(BreadcrumbsItem, { active: true }, { default: () => 'Home' }),
+          h(BreadcrumbsSeparator),
+          h(BreadcrumbsItem, {}, { default: () => 'Library' }),
+          h(BreadcrumbsSeparator),
+          h(BreadcrumbsCollapsed),
+          h(BreadcrumbsItem, {}, { default: () => 'Data' }),
+        ],
+      },
+    ),
   ),
   'capacitor-breadcrumbs-collapsed': defineDemo(() =>
-        h(Breadcrumbs, {}, {
-          default: () => [
-            h(BreadcrumbsItem, {}, { default: () => 'Root' }),
-            h(BreadcrumbsSeparator),
-            h(BreadcrumbsCollapsed),
-            h(BreadcrumbsItem, { active: true }, { default: () => 'Current' }),
-          ],
-        })
+    h(
+      Breadcrumbs,
+      {},
+      {
+        default: () => [
+          h(BreadcrumbsItem, {}, { default: () => 'Root' }),
+          h(BreadcrumbsSeparator),
+          h(BreadcrumbsCollapsed),
+          h(BreadcrumbsItem, { active: true }, { default: () => 'Current' }),
+        ],
+      },
+    ),
   ),
   'capacitor-breadcrumbs-item': defineDemo(() =>
-        h(Breadcrumbs, {}, {
-          default: () => [
-            h(BreadcrumbsItem, {}, { default: () => 'Library' }),
-            h(BreadcrumbsSeparator),
-            h(BreadcrumbsItem, { active: true }, { default: () => 'Active item' }),
-          ],
-        })
+    h(
+      Breadcrumbs,
+      {},
+      {
+        default: () => [h(BreadcrumbsItem, {}, { default: () => 'Library' }), h(BreadcrumbsSeparator), h(BreadcrumbsItem, { active: true }, { default: () => 'Active item' })],
+      },
+    ),
   ),
   'capacitor-breadcrumbs-separator': defineDemo(() =>
-        h(Breadcrumbs, {}, {
-          default: () => [
-            h(BreadcrumbsItem, {}, { default: () => 'Docs' }),
-            h(BreadcrumbsSeparator),
-            h(BreadcrumbsItem, { active: true }, { default: () => 'API' }),
-          ],
-        })
+    h(
+      Breadcrumbs,
+      {},
+      {
+        default: () => [h(BreadcrumbsItem, {}, { default: () => 'Docs' }), h(BreadcrumbsSeparator), h(BreadcrumbsItem, { active: true }, { default: () => 'API' })],
+      },
+    ),
   ),
   'capacitor-button': defineDemo(() =>
-        h('div', { class: 'flex flex-wrap gap-2' }, [
-          h(Button, {}, { default: () => 'Solid' }),
-          h(Button, { outline: true }, { default: () => 'Outline' }),
-          h(Button, { clear: true }, { default: () => 'Clear' }),
-        ])
+    h('div', { class: 'flex flex-wrap gap-2' }, [
+      h(Button, {}, { default: () => 'Solid' }),
+      h(Button, { outline: true }, { default: () => 'Outline' }),
+      h(Button, { clear: true }, { default: () => 'Clear' }),
+    ]),
   ),
   'capacitor-card': defineDemo(() =>
-        h(Card, {}, {
-          default: () => h('div', { class: 'p-4' }, [h('h3', { class: 'font-semibold' }, 'Card'), h('p', { class: 'text-sm mt-2 opacity-80' }, 'Card body text.')]),
-        })
+    h(
+      Card,
+      {},
+      {
+        default: () => h('div', { class: 'p-4' }, [h('h3', { class: 'font-semibold' }, 'Card'), h('p', { class: 'text-sm mt-2 opacity-80' }, 'Card body text.')]),
+      },
+    ),
   ),
-  'capacitor-checkbox': defineDemo(() => h(Checkbox, { checked: checkboxOn.value, onClick: () => (checkboxOn.value = !checkboxOn.value) })
-  ),
+  'capacitor-checkbox': defineDemo(() => h(Checkbox, { checked: checkboxOn.value, onClick: () => (checkboxOn.value = !checkboxOn.value) })),
   'capacitor-chip': defineDemo(() =>
-        h('div', { class: 'flex flex-wrap gap-2' }, [
-          h(Chip, {}, { default: () => 'Chip' }),
-          h(Chip, { deleteButton: true }, { default: () => 'Removable' }),
-        ])
+    h('div', { class: 'flex flex-wrap gap-2' }, [h(Chip, {}, { default: () => 'Chip' }), h(Chip, { deleteButton: true }, { default: () => 'Removable' })]),
   ),
-  'capacitor-dialog': defineDemo(() => h(Button, { onClick: () => (dialogOpen.value = true) }, { default: () => 'Open dialog' })
-  ),
+  'capacitor-dialog': defineOpenShellButtonDemo('Open dialog', dialogOpen),
   'capacitor-dialog-button': defineComponent({
     setup() {
       const open = ref(false)
       return () =>
         h('div', {}, [
           h(Button, { onClick: () => (open.value = true) }, { default: () => 'Dialog with buttons' }),
-          h(Dialog, { opened: open.value, onBackdropclick: () => (open.value = false) }, {
-            title: () => 'Confirm',
-            default: () => 'DialogButton styles appear below.',
-            buttons: () => [
-              h(DialogButton, { onClick: () => (open.value = false) }, { default: () => 'Cancel' }),
-              h(DialogButton, { strong: true, onClick: () => (open.value = false) }, { default: () => 'OK' }),
-            ],
-          }),
+          h(
+            Dialog,
+            { opened: open.value, onBackdropclick: () => (open.value = false) },
+            {
+              title: () => 'Confirm',
+              default: () => 'DialogButton styles appear below.',
+              buttons: () => [
+                h(DialogButton, { onClick: () => (open.value = false) }, { default: () => 'Cancel' }),
+                h(DialogButton, { strong: true, onClick: () => (open.value = false) }, { default: () => 'OK' }),
+              ],
+            },
+          ),
         ])
     },
   }),
   'capacitor-fab': defineDemo(() =>
-        h('div', { class: 'relative min-h-24' }, [
-          h(Fab, { class: 'relative right-0 bottom-0 ml-auto', href: '#' }, { default: () => h('span', { class: 'text-2xl' }, '+') }),
-        ])
+    h('div', { class: 'relative min-h-24' }, [h(Fab, { class: 'relative right-0 bottom-0 ml-auto', href: '#' }, { default: () => h('span', { class: 'text-2xl' }, '+') })]),
   ),
-  'capacitor-icon': defineDemo(() => h(Icon, { material: 'home', class: 'text-2xl' })
-  ),
-  'capacitor-link': defineDemo(() => h(Link, { href: '#' }, { default: () => 'Link' })
-  ),
+  'capacitor-icon': defineDemo(() => h(Icon, { material: 'home', class: 'text-2xl' })),
+  'capacitor-link': defineDemo(() => h(Link, { href: '#' }, { default: () => 'Link' })),
   'capacitor-list': defineDemo(() =>
-        h(List, {}, {
-          default: () => [
-            h(ListItem, { title: 'List item', subtitle: 'Subtitle', chevron: true }),
-            h(ListButton, {}, { default: () => 'List button' }),
-          ],
-        })
+    h(
+      List,
+      {},
+      {
+        default: () => [h(ListItem, { title: 'List item', subtitle: 'Subtitle', chevron: true }), h(ListButton, {}, { default: () => 'List button' })],
+      },
+    ),
   ),
   'capacitor-list-button': defineDemo(() =>
-        h(List, {}, {
-          default: () => h(ListButton, {}, { default: () => 'Standalone list button' }),
-        })
+    h(
+      List,
+      {},
+      {
+        default: () => h(ListButton, {}, { default: () => 'Standalone list button' }),
+      },
+    ),
   ),
   'capacitor-list-group': defineDemo(() =>
-        h(List, {}, {
-          default: () =>
-            h(ListGroup, {}, {
+    h(
+      List,
+      {},
+      {
+        default: () =>
+          h(
+            ListGroup,
+            {},
+            {
               default: () => [h(ListItem, { title: 'Grouped' }), h(ListItem, { title: 'Items' })],
-            }),
-        })
+            },
+          ),
+      },
+    ),
   ),
   'capacitor-list-input': defineDemo(() =>
-        h(List, {}, {
-          default: () => h(ListInput, { label: 'Email', type: 'email', placeholder: 'you@example.com' }),
-        })
+    h(
+      List,
+      {},
+      {
+        default: () => h(ListInput, { label: 'Email', type: 'email', placeholder: 'you@example.com' }),
+      },
+    ),
   ),
   'capacitor-list-item': defineDemo(() =>
-        h(List, {}, {
-          default: () =>
-            h(ListItem, {}, {
+    h(
+      List,
+      {},
+      {
+        default: () =>
+          h(
+            ListItem,
+            {},
+            {
               title: () => 'Title slot',
               after: () => h(Toggle, { checked: toggleOn.value }),
-            }),
-        })
+            },
+          ),
+      },
+    ),
   ),
   'capacitor-menu-list': defineDemo(() =>
-        h(MenuList, {}, {
-          default: () => h(MenuListItem, { href: '#' }, { default: () => 'Menu item' }),
-        })
+    h(
+      MenuList,
+      {},
+      {
+        default: () => h(MenuListItem, { href: '#' }, { default: () => 'Menu item' }),
+      },
+    ),
   ),
   'capacitor-menu-list-item': defineDemo(() =>
-        h(MenuList, {}, {
-          default: () =>
-            h(MenuListItem, { href: '#' }, { default: () => 'Dropdown menu item' }),
-        })
+    h(
+      MenuList,
+      {},
+      {
+        default: () => h(MenuListItem, { href: '#' }, { default: () => 'Dropdown menu item' }),
+      },
+    ),
   ),
   'capacitor-message': defineDemo(() =>
-        h(Messages, {}, {
-          default: () => [
-            h(MessagesTitle, { name: 'Capgo' }),
-            h(Message, { type: 'sent', text: 'Hello from the registry demo.', name: 'You' }),
-            h(Message, { type: 'received', text: 'All components run in Vue.', name: 'Capgo' }),
-          ],
-        })
+    h(
+      Messages,
+      {},
+      {
+        default: () => [
+          h(MessagesTitle, { name: 'Capgo' }),
+          h(Message, { type: 'sent', text: 'Hello from the registry demo.', name: 'You' }),
+          h(Message, { type: 'received', text: 'All components run in Vue.', name: 'Capgo' }),
+        ],
+      },
+    ),
   ),
-  'capacitor-messagebar': defineDemo(() => h(Messagebar, { placeholder: 'Type a message' })
-  ),
+  'capacitor-messagebar': defineDemo(() => h(Messagebar, { placeholder: 'Type a message' })),
   'capacitor-messages': defineDemo(() =>
-        h(Messages, {}, {
-          default: () =>
-            h(Message, { type: 'received', text: 'Messages container layout.', name: 'Capgo' }),
-        })
+    h(
+      Messages,
+      {},
+      {
+        default: () => h(Message, { type: 'received', text: 'Messages container layout.', name: 'Capgo' }),
+      },
+    ),
   ),
   'capacitor-messages-title': defineDemo(() =>
-        h(Messages, {}, {
-          default: () => [
-            h(MessagesTitle, { name: 'Martin' }),
-            h(Message, { type: 'received', text: 'MessagesTitle labels the thread.', name: 'Martin' }),
-          ],
-        })
+    h(
+      Messages,
+      {},
+      {
+        default: () => [h(MessagesTitle, { name: 'Martin' }), h(Message, { type: 'received', text: 'MessagesTitle labels the thread.', name: 'Martin' })],
+      },
+    ),
   ),
   'capacitor-navbar': defineDemo(() =>
-        h(Navbar, { title: 'Navbar', subtitle: 'Subtitle' }, {
-          left: () => h(NavbarBackLink, { text: 'Back' }),
-        })
+    h(
+      Navbar,
+      { title: 'Navbar', subtitle: 'Subtitle' },
+      {
+        left: () => h(NavbarBackLink, { text: 'Back' }),
+      },
+    ),
   ),
-  'capacitor-navbar-back-link': defineDemo(() => h(NavbarBackLink, { text: 'Back' })
-  ),
-  'capacitor-notification': defineDemo(() =>
-        h(Notification, { title: 'Notification', subtitle: 'Subtitle', text: 'Supporting text' })
-  ),
+  'capacitor-navbar-back-link': defineDemo(() => h(NavbarBackLink, { text: 'Back' })),
+  'capacitor-notification': defineDemo(() => h(Notification, { title: 'Notification', subtitle: 'Subtitle', text: 'Supporting text' })),
   'capacitor-page': defineDemo(() =>
-        h(Block, { strong: true, inset: true, class: 'm-0' }, {
-          default: () => h('p', { class: 'p-3 text-sm' }, 'The outer scroll view is a Page component wrapping this catalog.'),
-        })
+    h(
+      Block,
+      { strong: true, inset: true, class: 'm-0' },
+      {
+        default: () => h('p', { class: 'p-3 text-sm' }, 'The outer scroll view is a Page component wrapping this catalog.'),
+      },
+    ),
   ),
-  'capacitor-panel': defineDemo(() => h(Button, { onClick: () => (panelOpen.value = true) }, { default: () => 'Open panel' })
-  ),
-  'capacitor-popover': defineDemo(() =>
-        h('div', {}, [
-          h(Button, { id: 'popover-target', onClick: () => (popoverOpen.value = true) }, { default: () => 'Open popover' }),
-        ])
-  ),
-  'capacitor-popup': defineDemo(() => h(Button, { onClick: () => (popupOpen.value = true) }, { default: () => 'Open popup' })
-  ),
-  'capacitor-preloader': defineDemo(() => h(Preloader, { class: 'mx-auto' })
-  ),
-  'capacitor-progressbar': defineDemo(() => h(Progressbar, { progress: 65 })
-  ),
+  'capacitor-panel': defineOpenShellButtonDemo('Open panel', panelOpen),
+  'capacitor-popover': defineDemo(() => h('div', {}, [h(Button, { id: 'popover-target', onClick: () => (popoverOpen.value = true) }, { default: () => 'Open popover' })])),
+  'capacitor-popup': defineOpenShellButtonDemo('Open popup', popupOpen),
+  'capacitor-preloader': defineDemo(() => h(Preloader, { class: 'mx-auto' })),
+  'capacitor-progressbar': defineDemo(() => h(Progressbar, { progress: 65 })),
   'capacitor-radio': defineDemo(() =>
-        h(List, {}, {
-          default: () => [
-            h(ListItem, { radio: true, checked: radioVal.value === 'a', title: 'Option A', onClick: () => (radioVal.value = 'a') }),
-            h(ListItem, { radio: true, checked: radioVal.value === 'b', title: 'Option B', onClick: () => (radioVal.value = 'b') }),
-            h(Radio, { class: 'sr-only', checked: radioVal.value === 'a' }),
-          ],
-        })
+    h(
+      List,
+      {},
+      {
+        default: () => [
+          h(ListItem, { radio: true, checked: radioVal.value === 'a', title: 'Option A', onClick: () => (radioVal.value = 'a') }),
+          h(ListItem, { radio: true, checked: radioVal.value === 'b', title: 'Option B', onClick: () => (radioVal.value = 'b') }),
+          h(Radio, { class: 'sr-only', checked: radioVal.value === 'a' }),
+        ],
+      },
+    ),
   ),
-  'capacitor-range': defineDemo(() => h(Range, { value: rangeValue.value, onRange: 'change', onInput: (e) => (rangeValue.value = Number(e.target?.value ?? 0)) })
-  ),
+  'capacitor-range': defineDemo(() => h(Range, { value: rangeValue.value, onRange: 'change', onInput: (e) => (rangeValue.value = Number(e.target?.value ?? 0)) })),
   'capacitor-searchbar': defineDemo(() =>
-        h(Searchbar, {
-          value: search.value,
-          placeholder: 'Search components',
-          onSearchbarInput: (e) => (search.value = String(e.detail?.value ?? '')),
-        })
+    h(Searchbar, {
+      value: search.value,
+      placeholder: 'Search components',
+      onSearchbarInput: (e) => (search.value = String(e.detail?.value ?? '')),
+    }),
   ),
   'capacitor-segmented': defineDemo(() =>
-        h(Segmented, { strong: true }, {
-          default: () => [
-            h(SegmentedButton, { active: segmented.value === 'tab1', onClick: () => (segmented.value = 'tab1') }, { default: () => 'One' }),
-            h(SegmentedButton, { active: segmented.value === 'tab2', onClick: () => (segmented.value = 'tab2') }, { default: () => 'Two' }),
-          ],
-        })
+    h(
+      Segmented,
+      { strong: true },
+      {
+        default: () => [
+          h(SegmentedButton, { active: segmented.value === 'tab1', onClick: () => (segmented.value = 'tab1') }, { default: () => 'One' }),
+          h(SegmentedButton, { active: segmented.value === 'tab2', onClick: () => (segmented.value = 'tab2') }, { default: () => 'Two' }),
+        ],
+      },
+    ),
   ),
   'capacitor-segmented-button': defineComponent({
     setup() {
       const active = ref('a')
       return () =>
-        h(Segmented, { strong: true }, {
-          default: () => [
-            h(SegmentedButton, { active: active.value === 'a', onClick: () => (active.value = 'a') }, { default: () => 'A' }),
-            h(SegmentedButton, { active: active.value === 'b', onClick: () => (active.value = 'b') }, { default: () => 'B' }),
-          ],
-        })
+        h(
+          Segmented,
+          { strong: true },
+          {
+            default: () => [
+              h(SegmentedButton, { active: active.value === 'a', onClick: () => (active.value = 'a') }, { default: () => 'A' }),
+              h(SegmentedButton, { active: active.value === 'b', onClick: () => (active.value = 'b') }, { default: () => 'B' }),
+            ],
+          },
+        )
     },
   }),
-  'capacitor-sheet': defineDemo(() => h(Button, { onClick: () => (sheetOpen.value = true) }, { default: () => 'Open sheet' })
-  ),
-  'capacitor-stepper': defineDemo(() => h(Stepper, { value: stepperValue.value, min: 0, max: 10 })
-  ),
+  'capacitor-sheet': defineOpenShellButtonDemo('Open sheet', sheetOpen),
+  'capacitor-stepper': defineDemo(() => h(Stepper, { value: stepperValue.value, min: 0, max: 10 })),
   'capacitor-tabbar': defineDemo(() =>
-        h(Tabbar, { labels: true }, {
-          default: () => [
-            h(TabbarLink, { active: true, icon: 'home', label: 'Home' }),
-            h(TabbarLink, { icon: 'search', label: 'Search' }),
-          ],
-        })
+    h(
+      Tabbar,
+      { labels: true },
+      {
+        default: () => [h(TabbarLink, { active: true, icon: 'home', label: 'Home' }), h(TabbarLink, { icon: 'search', label: 'Search' })],
+      },
+    ),
   ),
   'capacitor-tabbar-link': defineDemo(() =>
-        h(Tabbar, { labels: true }, {
-          default: () => h(TabbarLink, { active: true, icon: 'today', label: 'Today' }),
-        })
+    h(
+      Tabbar,
+      { labels: true },
+      {
+        default: () => h(TabbarLink, { active: true, icon: 'today', label: 'Today' }),
+      },
+    ),
   ),
-  'capacitor-table': defineDemo(() => demoTableSample()
-  ),
-  'capacitor-table-body': defineDemo(() => tableWithBodyRow('Body row')
-  ),
-  'capacitor-table-cell': defineDemo(() => tableWithBodyCells('Cell A', 'Cell B')
-  ),
-  'capacitor-table-head': defineDemo(() => tableWithHeaderCell('Header')
-  ),
-  'capacitor-table-row': defineDemo(() => tableWithBodyRow('Single row')
-  ),
-  'capacitor-toast': defineDemo(() => h(Button, { onClick: () => (toastOpen.value = true) }, { default: () => 'Show toast' })
-  ),
-  'capacitor-toggle': defineDemo(() => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) })
-  ),
+  'capacitor-table': defineDemo(() => demoTableSample()),
+  'capacitor-table-body': defineDemo(() => tableWithBodyRow('Body row')),
+  'capacitor-table-cell': defineDemo(() => tableWithBodyCells('Cell A', 'Cell B')),
+  'capacitor-table-head': defineDemo(() => tableWithHeaderCell('Header')),
+  'capacitor-table-row': defineDemo(() => tableWithBodyRow('Single row')),
+  'capacitor-toast': defineOpenShellButtonDemo('Show toast', toastOpen),
+  'capacitor-toggle': defineDemo(() => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) })),
   'capacitor-toolbar': defineDemo(() =>
-        h(Toolbar, { top: true }, {
-          left: () => h(Link, { toolbar: true }, { default: () => 'Left' }),
-          title: () => 'Toolbar',
-          right: () => h(Link, { toolbar: true }, { default: () => 'Right' }),
-        })
+    h(
+      Toolbar,
+      { top: true },
+      {
+        left: () => h(Link, { toolbar: true }, { default: () => 'Left' }),
+        title: () => 'Toolbar',
+        right: () => h(Link, { toolbar: true }, { default: () => 'Right' }),
+      },
+    ),
   ),
 }
 
