@@ -67,6 +67,15 @@ const drawers = {
       <circle cx="160" cy="98" r="8" fill="${ACCENT}" opacity="${0.5 + v * 0.1}"/>`,
       'Privacy and tracking shield',
     ),
+  '2-4-5': (v) =>
+    wrap(
+      `${accentDot(268, 44, 18, 0.28)}
+      <rect x="56" y="44" width="168" height="112" rx="10" fill="${INK}" stroke="${MUTED}" stroke-width="2"/>
+      <rect x="72" y="120" width="136" height="24" rx="6" fill="${INK}" stroke="${ACCENT}" stroke-width="2" opacity="${0.7 + v * 0.1}"/>
+      <path d="M88 136 L104 136 M120 136 L136 136" stroke="${SOFT}" stroke-width="2" stroke-linecap="round"/>
+      <path d="M228 72 L252 96 M252 72 L228 96" stroke="${ACCENT}" stroke-width="3" stroke-linecap="round"/>`,
+      'Mac keyboard input overlay under 2.4.5',
+    ),
   '2-1': (v) =>
     wrap(
       `${accentDot(44, 160, 18, 0.28)}
@@ -197,6 +206,7 @@ const maxVariants = {
   '4-3': 11,
   '2-1': 6,
   'endless-review': 6,
+  '2-4-5': 1,
   'account-termination': 2,
   '4-2-6': 1,
   '3-1-2': 1,
