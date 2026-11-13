@@ -94,9 +94,9 @@ const info = await CapacitorDownloader.getFileInfo({ path });
 
 ## Android OkHttp engine
 
-This option ships in the next plugin release, which is not published yet. It is tracked in [capacitor-downloader PR #105](https://github.com/Cap-go/capacitor-downloader/pull/105). Until that version is published, installing `@capgo/capacitor-downloader` from npm does not include `androidHttpEngine`. The **current release** always uses DownloadManager with legacy destination paths, including `cache/...` and `files/...` under app external files.
+`androidHttpEngine` is available since **8.5.0**. Omit `androidHttpEngine` to keep the same default as releases before 8.5.0: DownloadManager with legacy destination paths, including `cache/...` and `files/...` under app external files.
 
-After that release, omit `androidHttpEngine` to keep the same default. Set `'auto'` or `'okhttp'` only when you want app-private roots (`cache/...`, `files/...` under internal storage). With `androidHttpEngine: 'auto'`, **DownloadManager** is used for `public-downloads/...` and for other relative paths under app external files. If app external files storage is unavailable, those other relative paths fall back to app-private internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths.
+Set `'auto'` or `'okhttp'` only when you want app-private roots (`cache/...`, `files/...` under internal storage). With `androidHttpEngine: 'auto'`, **DownloadManager** is used for `public-downloads/...` and for other relative paths under app external files. If app external files storage is unavailable, those other relative paths fall back to app-private internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths.
 
 If you already use `cache/...` or `files/...` strings without `androidHttpEngine`, your files stay on app external storage. Opt in with `'auto'` or `'okhttp'` only when you intend to move those paths to internal cache or files dirs.
 
@@ -104,14 +104,14 @@ If you already use `cache/...` or `files/...` strings without `androidHttpEngine
 
 | Value | When to use |
 | ----- | ----------- |
-| Omitted | Same as the **current release**: DownloadManager only, legacy destination paths for every relative string (including existing `cache/...` and `files/...` under app external files). |
+| Omitted | When omitted, same as releases before 8.5.0: DownloadManager only, legacy destination paths for every relative string (including existing `cache/...` and `files/...` under app external files). Absolute and `file://` paths keep the 8.4.x behavior (nested under app external files). With `androidHttpEngine` `'auto'` or `'okhttp'`, absolute and `file://` paths are used as given. |
 | `'auto'` | OkHttp for `cache/...`, `files/...`, and absolute paths under internal cache/data/files; DownloadManager for other relative paths and `public-downloads/...`. If app external files storage is unavailable, other relative paths fall back to internal files storage and `auto` selects OkHttp. |
 | `'okhttp'` | Force OkHttp for app-private and internal destinations (sensitive offline packs, internal-only files). Requests to `public-downloads/...` are rejected. Transfers run in the app process and do not continue after the process is killed. |
 | `'downloadManager'` | Force system DownloadManager with legacy destination paths (same as omitting the option). |
 
 ### Android `destination` prefixes
 
-| Prefix | Resolves to when `androidHttpEngine` is omitted (current release default) | Resolves to with `'auto'` or `'okhttp'` | `auto` engine |
+| Prefix | Resolves to when `androidHttpEngine` is omitted (releases before 8.5.0) | Resolves to with `'auto'` or `'okhttp'` | `auto` engine |
 | ------ | ---------------------------------------------------------------------------- | --------------------------------------- | ------------- |
 | `cache/...` | App external files (`.../cache/...`) | App cache directory | OkHttp |
 | `files/...` | App external files (`.../files/...`) | App-private files directory | OkHttp |
@@ -152,11 +152,13 @@ DownloadManager destinations continue to support `'completed'`, `'progress'`, an
 
 - At most 4 OkHttp transfers run at the same time. Additional OkHttp downloads wait until a slot is free.
 - HTTP 206 Partial Content is not supported. The OkHttp path fails that response (this plugin does not resume through range requests).
+- An HTTPS to HTTP redirect is not followed; the download fails.
+- With `network: 'wifi-only'`, the transfer is bound to Wi-Fi and fails if Wi-Fi drops, with no cellular fallback.
 - `stop()` cancels an in-flight OkHttp transfer and deletes the destination file, including when the transfer has already finished.
 
 ## Common pitfalls
 
-- **Storage destination**: pick a `destination` your app can read on each platform. On Android, use `cache/` or `files/` prefixes for app-private OkHttp downloads.
+- **Storage destination**: pick a `destination` your app can read on each platform. On Android, use `cache/` or `files/` prefixes for app-private OkHttp downloads with `androidHttpEngine` `'auto'` or `'okhttp'`.
 - **Background**: downloads run on iOS and Android in the background. On Android, DownloadManager can continue after the app process is killed. OkHttp runs in the app process, so a download may stop if Android kills that process. On Web, `download()` is not implemented; use a browser download flow instead.
 - **Status**: use `checkStatus` while the app process is still alive. On iOS, task IDs are not restored after relaunch.
 
