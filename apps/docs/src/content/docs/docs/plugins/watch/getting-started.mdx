@@ -173,7 +173,7 @@ These APIs ship in [capacitor-watch#36](https://github.com/Cap-go/capacitor-watc
 
 `sendMessage` is one-way by default. Pass `expectsReply: true` to wait for the watch to reply. The promise resolves with `{ reply }`. `reply` is the watch payload, or `null` when the watch returned an empty reply.
 
-On iOS this uses the WatchConnectivity `replyHandler`. On Android the phone sends on `/capgo/message/withreply`. Use the Kotlin SDK in `watch-sdk/wearos`, or reply on the Data Layer path the plugin documents in [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/). The watch can include `watchRequestId` in the payload so concurrent replies stay correlated.
+On iOS this uses the WatchConnectivity `replyHandler`. On Android the phone sends on `/capgo/message/withreply`. Prefer the official Kotlin SDK in `watch-sdk/wearos`, which reads that envelope and replies on `/capgo/reply/{callbackId}`. The manual module in [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/) does not handle `/capgo/message/withreply` unless you add that handler. The watch can include `watchRequestId` in the payload so concurrent replies stay correlated.
 
 ```typescript
 import { CapgoWatch } from '@capgo/capacitor-watch';
