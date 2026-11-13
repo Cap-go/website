@@ -249,6 +249,24 @@ const MotionBlock = defineComponent({
   },
 })
 
+function tableWithBodyRow(label) {
+  return h(Table, {}, {
+    default: () =>
+      h(TableBody, {}, {
+        default: () => h(TableRow, {}, { default: () => h(TableCell, {}, { default: () => label }) }),
+      }),
+  })
+}
+
+function tableWithHeaderCell(label) {
+  return h(Table, {}, {
+    default: () =>
+      h(TableHead, {}, {
+        default: () => h(TableRow, {}, { default: () => h(TableCell, { header: true }, { default: () => label }) }),
+      }),
+  })
+}
+
 const sectionMap = {
   'capacitor-actions': defineComponent({
     setup() {
@@ -745,16 +763,7 @@ const sectionMap = {
   }),
   'capacitor-table-body': defineComponent({
     setup() {
-      return () =>
-        h(Table, {}, {
-          default: () =>
-            h(TableBody, {}, {
-              default: () =>
-                h(TableRow, {}, {
-                  default: () => h(TableCell, {}, { default: () => 'Body row' }),
-                }),
-            }),
-        })
+      return () => tableWithBodyRow('Body row')
     },
   }),
   'capacitor-table-cell': defineComponent({
@@ -773,30 +782,12 @@ const sectionMap = {
   }),
   'capacitor-table-head': defineComponent({
     setup() {
-      return () =>
-        h(Table, {}, {
-          default: () =>
-            h(TableHead, {}, {
-              default: () =>
-                h(TableRow, {}, {
-                  default: () => h(TableCell, { header: true }, { default: () => 'Header' }),
-                }),
-            }),
-        })
+      return () => tableWithHeaderCell('Header')
     },
   }),
   'capacitor-table-row': defineComponent({
     setup() {
-      return () =>
-        h(Table, {}, {
-          default: () =>
-            h(TableBody, {}, {
-              default: () =>
-                h(TableRow, {}, {
-                  default: () => h(TableCell, {}, { default: () => 'Single row' }),
-                }),
-            }),
-        })
+      return () => tableWithBodyRow('Single row')
     },
   }),
   'capacitor-toast': defineComponent({
