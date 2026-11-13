@@ -11,6 +11,7 @@ export type PluginInstallOverride = {
   installNote?: string
   skipNativePluginFaqs?: boolean
   frameworkFaqAnswer?: string
+  hideNpm?: boolean
 }
 
 export const pluginInstallOverrides: Record<string, PluginInstallOverride> = {
@@ -18,6 +19,7 @@ export const pluginInstallOverrides: Record<string, PluginInstallOverride> = {
     commands: tailwindCapacitorItems.map((item) => `npx shadcn@latest add ${tailwindCapacitorRegistry}/${item}.json`),
     managers: [],
     skipNativePluginFaqs: true,
+    hideNpm: true,
     installFaqAnswer:
       'This is a shadcn registry, not a native Capacitor plugin. Do not run bun add or bunx cap sync. In a Vue 3 app with Tailwind CSS v4 and a project-level components.json, run npx shadcn@latest add with the raw GitHub registry URLs for capacitor-tailwind, capacitor-provider, capacitor-shared, and capacitor-icons, then add components the same way. The commands are in the Install section on this page. Registry URLs on main resolve after Cap-go/tailwind-capacitor#129 is merged.',
     frameworkFaqAnswer:

@@ -132,6 +132,8 @@ const runtime = /electron/i.test(name ?? href) ? 'Electron' : /cordova/i.test(na
 const isCapacitor = runtime === 'Capacitor'
 const runtimeArticle = /^[AEIOU]/.test(runtime) ? 'an' : 'a'
 const installOverride = name ? pluginInstallOverrides[name] : undefined
+const hideNpm = installOverride?.hideNpm === true
+const packageHref = hideNpm ? href : npmHref
 const installCommands = installOverride
   ? installOverride.commands
   : name
@@ -216,7 +218,7 @@ const relatedPlugins = plugins
   .slice(0, 6)
 
 const stats = [
-  { label: `${m.downloads({}, { locale })}/month`, value: formatCount(npmDownloads), href: npmHref },
+  ...(!hideNpm ? [{ label: `${m.downloads({}, { locale })}/month`, value: formatCount(npmDownloads), href: npmHref }] : []),
   { label: m.github_stars({}, { locale }), value: formatCount(githubStars), href },
   ...(repoStats?.releases ? [{ label: 'Releases', value: formatCount(repoStats.releases), href: `${href.replace(/\/$/, '')}/releases` }] : []),
   ...(repoStats?.contributors ? [{ label: 'Contributors', value: formatCount(repoStats.contributors), href: `${href.replace(/\/$/, '')}/graphs/contributors` }] : []),
@@ -269,7 +271,7 @@ const softwareApplication = createSoftwareApplicationLdJson(runtimePublic, {
   url: absolutePluginUrl,
   applicationCategory: 'DeveloperApplication',
   operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : runtime === 'Electron' ? 'Windows, macOS, Linux' : 'iOS, Android',
-  downloadUrl: npmHref,
+  downloadUrl: packageHref,
   featureList: [m.plugin_ai_feature({}, { locale })],
   offers: { price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 })
@@ -323,7 +325,7 @@ const secondaryButtonClass =
                 name && (
                   <>
                     <a
-                      href={npmHref}
+                      href={packageHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       class="cursor-pointer rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 font-mono text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
@@ -454,10 +456,14 @@ const secondaryButtonClass =
                 <span>{m.view_repo({}, { locale })}</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
               </a>
-              <a href={npmHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
-                <span>{m.view_npm({}, { locale })}</span>
-                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
-              </a>
+              {
+                !hideNpm && (
+                  <a href={npmHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
+                    <span>{m.view_npm({}, { locale })}</span>
+                    <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+                  </a>
+                )
+              }
               <a href={issuesHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
                 <span>Report an issue</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />

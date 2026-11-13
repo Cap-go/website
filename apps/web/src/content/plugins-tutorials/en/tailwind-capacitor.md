@@ -29,7 +29,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacito
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json
 ```
 
-Replace your app global stylesheet with the capacitor bundle. It already includes Tailwind. Do not add a separate `@import "tailwindcss"` when using this file:
+In your app global stylesheet, replace the `@import "tailwindcss"` line with the capacitor bundle import. Keep your other custom CSS. The bundle already includes Tailwind, so do not keep a separate Tailwind import:
 
 ```css
 @import '@/capacitor/styles/tailwind-capacitor.css';
