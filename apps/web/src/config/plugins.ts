@@ -55,6 +55,7 @@ const documentedPluginCategoryOverrides: Record<string, PluginCategoryId> = {
   '@capgo/capacitor-native-map': 'device-apis',
   '@capgo/capacitor-rich-notifications': 'communication',
   '@capgo/capacitor-device-integrity': 'auth-security',
+  '@capgo/tailwind-capacitor': 'ui-system',
 }
 
 const actionDefinitionRows =
@@ -519,7 +520,6 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-live-activities',
     '@capgo/capacitor-widget-kit',
     '@capgo/capacitor-app-intents',
-    '@capgo/tailwind-capacitor',
   ],
   location: [
     '@capgo/capacitor-nativegeocoder',
