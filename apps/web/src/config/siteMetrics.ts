@@ -4,7 +4,6 @@ export const siteMetrics = {
   apps: '4.7K+',
   devices: '90M+',
   foundedYear: 2021,
-  buildTime: '2–3 min',
   latency: '~50ms',
   startingPrice: '$12/month billed yearly',
   uptime: '99.9%',

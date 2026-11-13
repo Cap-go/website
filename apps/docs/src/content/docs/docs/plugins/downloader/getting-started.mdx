@@ -52,6 +52,24 @@ const task = await CapacitorDownloader.download({
 });
 ```
 
+## Example: completion notification
+
+When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. The plugin manifest already merges `POST_NOTIFICATIONS` on Android, so on Android 13 and later your app only needs to request it at runtime; on iOS request notification authorization before the download finishes. Tapping the notification reopens the app. On Android, the completion alert is still posted while your app is in the foreground. On iOS, a notification that arrives in the foreground is shown only if your app's `UNUserNotificationCenter` delegate presents it, so without a notifications plugin it is usually silent and `downloadCompleted` events are the reliable signal there.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/large-pack.zip',
+  destination: 'downloads/offline-pack.zip',
+  downloadCompletedNotificationText: 'Your pack is ready',
+  notification: 'hidden', // Android: rely on plugin events and the completion alert
+});
+```
+
+On Android, pair `notification: 'hidden'` with `downloadCompletedNotificationText` when you do not want DownloadManager progress notifications but still want a completion alert. If Android ends the app process before the download completes, the completion alert is not shown, and `hidden` also suppresses the DownloadManager completion notification.
+
 ## Example: pause and resume
 
 ```typescript
@@ -76,7 +94,7 @@ const info = await CapacitorDownloader.getFileInfo({ path });
 
 ## Android OkHttp engine
 
-This option ships in plugin **8.4.0**, which is not released yet. It is tracked in [capacitor-downloader PR #105](https://github.com/Cap-go/capacitor-downloader/pull/105). Until that version is published, installing `@capgo/capacitor-downloader` from npm does not include `androidHttpEngine`. After 8.4.0, Android can use an opt-in **OkHttp** stack for app-private destinations. With `androidHttpEngine: 'auto'`, **DownloadManager** is used for `public-downloads/...` and for other relative paths under app external files. If app external files storage is unavailable, those other relative paths fall back to app-private internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths.
+This option ships in the next plugin release, which is not published yet. It is tracked in [capacitor-downloader PR #105](https://github.com/Cap-go/capacitor-downloader/pull/105). Until that version is published, installing `@capgo/capacitor-downloader` from npm does not include `androidHttpEngine`. After that release, Android can use an opt-in **OkHttp** stack for app-private destinations. With `androidHttpEngine: 'auto'`, **DownloadManager** is used for `public-downloads/...` and for other relative paths under app external files. If app external files storage is unavailable, those other relative paths fall back to app-private internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths.
 
 ### Choose `androidHttpEngine`
 
@@ -226,6 +244,18 @@ export interface DownloadOptions {
   network?: 'cellular' | 'wifi-only';
   /** Download priority level */
   priority?: 'high' | 'normal' | 'low';
+  /**
+   * Android DownloadManager notification visibility. Defaults to `completed` when omitted.
+   * - `completed`: shows a notification during the download and after it completes.
+   * - `progress`: shows a notification only during the download.
+   * - `hidden`: shows no DownloadManager notification.
+   */
+  notification?: 'completed' | 'progress' | 'hidden';
+  /**
+   * Optional localized text for a system notification after a successful download.
+   * Requires notification permission on iOS and Android.
+   */
+  downloadCompletedNotificationText?: string;
 }
 ```
 

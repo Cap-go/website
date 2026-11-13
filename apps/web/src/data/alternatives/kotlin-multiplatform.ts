@@ -63,7 +63,7 @@ export const kotlinMultiplatform: AlternativeCompetitor = {
     frameworks:
       'Capacitor runs any web app: React, Vue, Angular, Svelte, or plain JS. One codebase ships to web, iOS, and Android. Native Swift or Kotlin code can live in Capacitor plugins.',
     native_builds:
-      'Capgo Builder builds and signs iOS and Android binaries in the cloud, typically in 2-3 minutes, with no Mac needed, and can upload them to the stores.',
+      'Capgo Builder builds and signs iOS and Android binaries in the cloud, with live build logs, with no Mac needed, and can upload them to the stores.',
   },
   better: [
     {

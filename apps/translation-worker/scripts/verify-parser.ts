@@ -1,7 +1,7 @@
-import worker, { __translationWorkerTest, TranslationCoordinator } from '../src/index'
-import messages from '../../shared/copy/messages'
 import { messageContextOverrides } from '../../shared/copy/messageContextOverrides'
+import messages from '../../shared/copy/messages'
 import { isGonePath } from '../../shared/gonePaths.ts'
+import worker, { __translationWorkerTest, TranslationCoordinator } from '../src/index'
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message)
@@ -199,22 +199,15 @@ assert(isGonePath('/de/blog/minimum-viable-product-example/'), 'Localized retire
 assert(!isGonePath('/de/blog/capacitor-comprehensive-guide/'), 'Active localized blog URL was marked gone')
 
 const goneShellHtml = '<html lang="en"><head><title>Gone</title><link rel="canonical" href="https://capgo.app/410/" /></head><body><p>Removed</p></body></html>'
-const goneShellLocalized = __translationWorkerTest.rewriteMetadataAndLinks(
-  goneShellHtml,
-  new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'),
-  'fr',
-  { preserveDocumentLanguage: true },
-)
+const goneShellLocalized = __translationWorkerTest.rewriteMetadataAndLinks(goneShellHtml, new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'), 'fr', {
+  preserveDocumentLanguage: true,
+})
 assert(/<html\b[^>]*\blang="en"/.test(goneShellLocalized), 'Branded gone shell document language was rewritten without translating content')
 assert(
   /<link\b[^>]*\brel="canonical"[^>]*\bhref="https:\/\/capgo\.app\/fr\/blog\/minimum-viable-product-example\/"/.test(goneShellLocalized),
   'Branded gone shell canonical was not localized',
 )
-const goneShellDefaultLang = __translationWorkerTest.rewriteMetadataAndLinks(
-  goneShellHtml,
-  new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'),
-  'fr',
-)
+const goneShellDefaultLang = __translationWorkerTest.rewriteMetadataAndLinks(goneShellHtml, new URL('https://capgo.app/fr/blog/minimum-viable-product-example/'), 'fr')
 assert(/<html\b[^>]*\blang="fr"/.test(goneShellDefaultLang), 'Translated pages should still rewrite document language by default')
 
 const speedBrainRules = await worker.fetch(new Request('https://capgo.app/fr/speculation-rules.json'), {} as any)
@@ -279,7 +272,7 @@ assert(
 assert(__translationWorkerTest.translationStyleGuide('French').includes('channel -> canal'), 'French prompt lost its glossary')
 assert(!__translationWorkerTest.translationStyleGuide('German').includes('channel -> canal'), 'French glossary leaked into another language')
 assert(
-  __translationWorkerTest.aiRequestOptions('@cf/deepseek-ai/deepseek-v4.1-flash-1017').chat_template_kwargs?.enable_thinking === false,
+  __translationWorkerTest.aiRequestOptions('@cf/deepseek-ai/deepseek-v4.1-flash-1017').reasoning_effort === 'none',
   'Thinking was not disabled for DeepSeek translation requests',
 )
 assert(
@@ -402,12 +395,19 @@ assert(pricingSegments.includes(pricingIntroduction), 'Parser split the complete
 assert(pricingSegments.includes(pricingReassurance), 'Parser split the complete no-subscription reassurance')
 assert(!pricingSegments.some((text) => text.includes('$5')), 'Parser should leave the currency amount for the currency renderer')
 const pricingContexts = __translationWorkerTest.resolveTranslationContexts([pricingIntroduction, pricingReassurance])
-assert(pricingContexts.every((context) => typeof context === 'string' && context.length > 0), 'Pricing sentences must each match their translator context')
+assert(
+  pricingContexts.every((context) => typeof context === 'string' && context.length > 0),
+  'Pricing sentences must each match their translator context',
+)
 for (const [messageKey, expectedContext] of Object.entries(messageContextOverrides)) {
   const [actualContext] = __translationWorkerTest.resolveTranslationContexts([messages[messageKey]()])
   assert(actualContext?.includes(expectedContext), `Runtime translation lookup is missing the manual context for ${messageKey}`)
 }
-const pricingTranslated = __translationWorkerTest.renderTranslatedHtml(pricingParsed.parts, pricingParsed.segments, pricingParsed.segments.map((segment) => `FR: ${segment.text}`))
+const pricingTranslated = __translationWorkerTest.renderTranslatedHtml(
+  pricingParsed.parts,
+  pricingParsed.segments,
+  pricingParsed.segments.map((segment) => `FR: ${segment.text}`),
+)
 assert(pricingTranslated.includes(`FR: ${pricingIntroduction}`), 'Renderer dropped the complete translated annual-budget introduction')
 assert(pricingTranslated.includes('translate="no">$5</strong>'), 'Renderer changed the independently formatted credit amount')
 
@@ -496,7 +496,7 @@ const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
 )
 const localizedDescription = /name="description" content="([^"]+)"/.exec(localizedMeta)?.[1] ?? ''
 const localizedOgDescription = /property="og:description" content="([^"]+)"/.exec(localizedMeta)?.[1] ?? ''
-assert(localizedDescription.length >= 120, 'Localized meta description stayed too short')
+assert(localizedDescription === '短い説明', 'Concise CJK descriptions must not receive unrelated English padding')
 assert(localizedDescription.length <= 159, 'Localized meta description exceeded the SEO limit')
 assert(localizedOgDescription === localizedDescription, 'Localized Open Graph description was not expanded consistently')
 const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
@@ -621,12 +621,152 @@ assert(priorityQueued.length === 2, 'Coordinator did not queue the source-specif
 
 response = await coordinator.fetch(coordinatorRequest(queueJob, '/complete'))
 assert(response.ok, 'Coordinator rejected completion for older pending job')
-assert((await response.json()).cleared === true, 'Coordinator did not accept completion for older pending job')
+assert((await response.json()).cleared === false, 'An obsolete job cleared a newer job')
 
 response = await coordinator.fetch(coordinatorRequest({ ...queueJob, priority: true, sourceHash }))
 assert(response.ok, 'Coordinator rejected duplicate source-specific refresh')
 assert((await response.json()).queued === false, 'Coordinator enqueued a duplicate source-specific refresh after older job completion')
 assert(priorityQueued.length === 2, 'Coordinator sent duplicate source-specific refresh messages')
+
+// Queue ownership survives delayed consumption and prevents obsolete writers.
+const currentJob = priorityQueued[1] as Record<string, unknown>
+const oldJob = queued[0] as Record<string, unknown>
+assert(typeof currentJob.jobId === 'string', 'New queue messages need an ownership id')
+response = await coordinator.fetch(coordinatorRequest({ ...oldJob, attemptId: 'old' }, '/claim'))
+assert((await response.json()).claimed === false, 'Superseded job claimed the page')
+const realNow = Date.now
+try {
+  Date.now = () => realNow() + 24 * 60 * 60 * 1000
+  response = await coordinator.fetch(coordinatorRequest({ ...queueJob, sourceHash, priority: true }))
+  assert((await response.json()).queued === false, 'Delayed queue job lost its deduplication after one day')
+} finally {
+  Date.now = realNow
+}
+const ownedJob = { ...currentJob, attemptId: 'first' }
+response = await coordinator.fetch(coordinatorRequest(ownedJob, '/claim'))
+assert((await response.json()).claimed === true, 'Current job could not claim the page')
+response = await coordinator.fetch(coordinatorRequest({ ...currentJob, attemptId: 'duplicate' }, '/claim'))
+assert((await response.json()).busy === true, 'Duplicate delivery acquired an active writer lease')
+response = await coordinator.fetch(coordinatorRequest({ ...queueJob, sourceHash: 'new-source', priority: true }))
+assert((await response.json()).queued === false, 'Source update superseded an active writer')
+response = await coordinator.fetch(coordinatorRequest({ ...currentJob, attemptId: 'wrong-owner' }, '/complete'))
+assert((await response.json()).cleared === false, 'A different attempt cleared the active writer')
+response = await coordinator.fetch(coordinatorRequest(ownedJob, '/release'))
+assert((await response.json()).cleared === true, 'Failed attempt could not release its writer lease')
+const retryJob = { ...currentJob, attemptId: 'retry' }
+response = await coordinator.fetch(coordinatorRequest(retryJob, '/claim'))
+assert((await response.json()).claimed === true, 'Retry could not reclaim a released job')
+response = await coordinator.fetch(coordinatorRequest({ ...retryJob, reason: 'continue', sourceHash: 'new-source' }, '/continue'))
+assert((await response.json()).queued === true, 'Continuation was not queued')
+const continuedJob = { ...(priorityQueued[2] as Record<string, unknown>), attemptId: 'continuation' }
+assert(continuedJob.jobId !== currentJob.jobId, 'Continuation reused an obsolete ownership id')
+response = await coordinator.fetch(coordinatorRequest(retryJob, '/complete'))
+assert((await response.json()).cleared === false, 'Older completion cleared the continuation')
+response = await coordinator.fetch(coordinatorRequest(continuedJob, '/claim'))
+assert((await response.json()).claimed === true, 'Continuation could not claim its job')
+response = await coordinator.fetch(coordinatorRequest(continuedJob, '/complete'))
+assert((await response.json()).cleared === true, 'Continuation could not complete')
+response = await coordinator.fetch(coordinatorRequest(queueJob, '/claim'))
+assert((await response.json()).claimed === false, 'Legacy duplicate revived completed work')
+assert(priorityQueued.length === 3, 'Legacy duplicate created more work after completion')
+
+// Simultaneous requests must stay serialized even while queue.send awaits I/O.
+const racingStore = new Map<string, unknown>()
+let racingSends = 0
+let failSend = true
+const racingCoordinator = new TranslationCoordinator(
+  {
+    storage: {
+      get: async (key: string) => racingStore.get(key),
+      put: async (key: string, value: unknown) => {
+        racingStore.set(key, value)
+      },
+      delete: async (key: string) => racingStore.delete(key),
+    },
+  },
+  {
+    TRANSLATION_QUEUE: {
+      send: async () => {
+        await Promise.resolve()
+        if (failSend) throw new Error('Expected queue send failure')
+        racingSends++
+      },
+    },
+  } as any,
+)
+await racingCoordinator.fetch(coordinatorRequest(queueJob)).then(
+  () => {
+    throw new Error('Expected send failure')
+  },
+  () => {},
+)
+assert(!racingStore.has('pending'), 'Failed enqueue left a four-day deduplication lock')
+failSend = false
+await Promise.all(Array.from({ length: 10 }, () => racingCoordinator.fetch(coordinatorRequest(queueJob))))
+assert(racingSends === 1, 'Concurrent requests sent duplicate queue jobs')
+
+const repairedMetadata = __translationWorkerTest.repairCachedSeoMetadata(
+  '<html><head><meta property="og:locale" content="en_US"><meta name="description" content="日本語の説明 - Manage updates in realtime for your capacitor app without store hassle"></head><body>本文</body></html>',
+  'ja',
+)
+assert(repairedMetadata.includes('content="ja_JP"'), 'Cached OG locale was not repaired')
+assert(!repairedMetadata.includes('Manage updates'), 'Cached English description padding survived')
+assert(repairedMetadata.includes('<body>本文</body>'), 'SEO repair changed visible page content')
+const spacedPadding = __translationWorkerTest.repairCachedSeoMetadata(
+  '<html><head><meta name="description" content="日本語の説明。 Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels..."><meta property="og:description" content="한국어 설명. Capgo helps Capacitor teams ship live updates, au..."><meta name="twitter:description" content="日本語の説明。 — Manage updates in realtime for your capacitor app without store hassle"></head><body>本文</body></html>',
+  'ja',
+)
+assert(!spacedPadding.includes('Capgo helps') && !spacedPadding.includes('Manage updates'), 'Old space-separated or dash-separated filler survived')
+assert(spacedPadding.includes('content="日本語の説明。"') && spacedPadding.includes('content="한국어 설명."'), 'Removing filler damaged the translated description')
+assert(spacedPadding.includes('<body>本文</body>'), 'Space-separated filler repair changed visible content')
+
+let limitedCalls = 0
+try {
+  await __translationWorkerTest.translateBatchWithMemory(
+    {
+      AI: {
+        run: async () => {
+          limitedCalls++
+          throw new Error('429 Too many requests')
+        },
+      },
+      TRANSLATION_STORE: { get: async () => null, put: async () => {} },
+    } as any,
+    'fr',
+    ['Unique rate limit regression text'],
+    '/queue-test/',
+  )
+  throw new Error('Rate limiting should defer the job')
+} catch (error) {
+  assert(__translationWorkerTest.isRateLimitError(error), 'Rate limit was swallowed by a fallback')
+}
+assert(limitedCalls === 1, 'Rate limit caused immediate batch or single-text retries')
+assert(__translationWorkerTest.translationRetryDelay(new Error('429'), 1) >= 120, 'Rate limit needs a longer initial delay')
+assert(__translationWorkerTest.translationRetryDelay(new Error('429'), 4) >= 960, 'Rate limit backoff did not grow with attempts')
+
+let reviewCalls = 0
+try {
+  await __translationWorkerTest.translateBatchWithMemory(
+    {
+      TRANSLATION_REVIEW_MODEL: '@cf/deepseek-ai/deepseek-v4.1-flash-1017',
+      AI: {
+        run: async () => {
+          reviewCalls++
+          if (reviewCalls === 2) throw new Error('429 review rate limit')
+          return { response: JSON.stringify({ translations: { t0: 'Traduction de test unique' } }) }
+        },
+      },
+      TRANSLATION_STORE: { get: async () => null, put: async () => {} },
+    } as any,
+    'fr',
+    ['Unique reviewer regression text'],
+    '/review-queue-test/',
+  )
+  throw new Error('Reviewer rate limiting should defer the job')
+} catch (error) {
+  assert(__translationWorkerTest.isRateLimitError(error), 'Reviewer rate limit was swallowed')
+}
+assert(reviewCalls === 2, 'Reviewer throttling continued making AI calls')
 
 const originalCaches = Object.getOwnPropertyDescriptor(globalThis, 'caches')
 const cacheEntries = new Map<string, Response>()
@@ -914,7 +1054,9 @@ try {
     }),
   )
   const fetchesBeforeAgedHit = blogOriginFetches
-  const agedHitResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
+  const agedHitTasks: Promise<unknown>[] = []
+  const agedHitResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any, { waitUntil: (task: Promise<unknown>) => agedHitTasks.push(task) })
+  await Promise.all(agedHitTasks)
   const agedHitBody = await agedHitResponse.text()
   assert(agedHitResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'A 10-minute HIT did not report HIT')
   assert(agedHitResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A 10-minute HIT with a source-hash mismatch did not sync scripts')
@@ -925,6 +1067,45 @@ try {
   const agedHitReuseResponse = await worker.fetch(new Request(agedHitUrl), blogEnv as any)
   assert(agedHitReuseResponse.headers.get('X-Capgo-Translation-Scripts') === 'synced', 'A repeated 10-minute HIT lost script sync')
   assert(blogOriginFetches === fetchesAfterAgedHit, 'A repeated 10-minute HIT did not reuse the cached English source')
+  assert(
+    translationJobs.some((job) => job.url === agedHitUrl.toString() && job.sourceHash),
+    'Changed source no longer queues a refresh with its new hash',
+  )
+
+  const unchangedUrl = new URL('https://capgo.app/de/blog/unchanged-stale/')
+  cacheEntries.set(
+    __translationWorkerTest.cacheKeyFor(unchangedUrl, 'de').url,
+    new Response(staleBlogHtml, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Capgo-Translated-At': String(Date.now() - 48 * 60 * 60 * 1000),
+        'X-Capgo-Translation-Source-Hash': await __translationWorkerTest.translationSourceHash('de', currentBlogHtml),
+      },
+    }),
+  )
+  const unchangedJobs = translationJobs.length
+  const backgroundTasks: Promise<unknown>[] = []
+  const unchangedResponse = await worker.fetch(new Request(unchangedUrl), blogEnv as any, { waitUntil: (task: Promise<unknown>) => backgroundTasks.push(task) })
+  await Promise.all(backgroundTasks)
+  assert(unchangedResponse.headers.get('X-Capgo-Translation-Cache') === 'HIT', 'Unchanged stale source was not renewed')
+  assert((await unchangedResponse.text()).includes('Übersetzter Anleitungstext'), 'Renewal discarded translated copy')
+  assert(translationJobs.length === unchangedJobs, 'Unchanged source queued an unnecessary translation')
+  assert(blogAiCalls === 0, 'Renewal called AI')
+  const fetchesAfterRenewal = blogOriginFetches
+  await worker.fetch(new Request(unchangedUrl), blogEnv as any)
+  assert(blogOriginFetches === fetchesAfterRenewal, 'Renewed page fetched origin again inside the check interval')
+  let repeatedStaleReads = 0
+  await worker.fetch(new Request(staleBlogUrl), {
+    ...blogEnv,
+    TRANSLATION_STORE: {
+      ...blogEnv.TRANSLATION_STORE,
+      get: async () => {
+        repeatedStaleReads++
+        return null
+      },
+    },
+  } as any)
+  assert(repeatedStaleReads === 0, 'Repeated stale request rechecked R2 inside the check interval')
 
   // A queue job in another datacenter refreshed R2: a stale edge copy must give way to it.
   const r2RefreshedUrl = new URL('https://capgo.app/de/blog/r2-refreshed-elsewhere/')
@@ -1349,7 +1530,10 @@ try {
   // Raw page text keeps its entities, and a model may return them as is or decoded: neither may be published double-escaped.
   const entityHtml = `<!doctype html><html lang="en"><head><meta name="description" content="Open Settings &gt; Privacy &amp; Security to enable Developer Mode on any iPhone or iPad running iOS 16 or later today." /></head><body><p>Fintech &amp; Banking teams</p><p>Read the &lt;head&gt; tag</p></body></html>`
   const entityParsed = __translationWorkerTest.collectSegments(entityHtml)
-  for (const translations of [entityParsed.segments.map((segment) => segment.text), entityParsed.segments.map((segment) => __translationWorkerTest.decodeHtmlEntities(segment.text))]) {
+  for (const translations of [
+    entityParsed.segments.map((segment) => segment.text),
+    entityParsed.segments.map((segment) => __translationWorkerTest.decodeHtmlEntities(segment.text)),
+  ]) {
     const entityRendered = __translationWorkerTest.renderTranslatedHtml(entityParsed.parts, entityParsed.segments, translations)
     assert(!/&amp;(amp|gt|lt|quot|#39);/.test(entityRendered), 'Renderer double-escaped an HTML entity')
     assert(entityRendered.includes('Fintech &amp; Banking teams'), 'Renderer lost an escaped ampersand in body text')
@@ -1361,7 +1545,8 @@ try {
   const expandedMeta = __translationWorkerTest.expandShortMetaDescriptions(shortMeta, 'fr')
   assert(expandedMeta.includes('Privacy &amp; Security guide.') && !expandedMeta.includes('&amp;amp;'), 'Meta description expansion double-escaped an ampersand')
 
-  const longDescription = 'Free iPhone UDID finder that reads the identifier of your iPhone or iPad in seconds through Safari, without iTunes, Finder, Xcode or a Mac, including the device profile and a walkthrough.'
+  const longDescription =
+    'Free iPhone UDID finder that reads the identifier of your iPhone or iPad in seconds through Safari, without iTunes, Finder, Xcode or a Mac, including the device profile and a walkthrough.'
   const truncated = __translationWorkerTest.truncateSeoDescription(longDescription)
   assert(truncated.length <= 159, 'Truncated description is longer than the limit')
   assert(longDescription.startsWith(truncated.replace(/\.\.\.$/, '')), 'Truncated description is not a prefix of the source')
@@ -1376,21 +1561,47 @@ try {
   const structuredHtml = `<html><head><link rel="canonical" href="https://capgo.app/blog/post/" /><script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'NewsArticle', '@id': 'https://capgo.app/blog/post/#newsarticle', url: 'https://capgo.app/blog/post/', inLanguage: 'en', publisher: { '@type': 'Organization', '@id': 'https://capgo.app/#organization', url: 'https://capgo.app/' }, mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/post/' } },
-      { '@type': 'BreadcrumbList', '@id': 'https://capgo.app/blog/post/#breadcrumb', itemListElement: [{ '@type': 'ListItem', position: 1, item: { '@type': 'WebPage', '@id': 'https://capgo.app/', url: 'https://capgo.app/', name: 'Capgo' } }, { '@type': 'ListItem', position: 2, item: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/', url: 'https://capgo.app/blog/', name: 'Blog' } }] },
+      {
+        '@type': 'NewsArticle',
+        '@id': 'https://capgo.app/blog/post/#newsarticle',
+        url: 'https://capgo.app/blog/post/',
+        inLanguage: 'en',
+        publisher: { '@type': 'Organization', '@id': 'https://capgo.app/#organization', url: 'https://capgo.app/' },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/post/' },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': 'https://capgo.app/blog/post/#breadcrumb',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, item: { '@type': 'WebPage', '@id': 'https://capgo.app/', url: 'https://capgo.app/', name: 'Capgo' } },
+          { '@type': 'ListItem', position: 2, item: { '@type': 'WebPage', '@id': 'https://capgo.app/blog/', url: 'https://capgo.app/blog/', name: 'Blog' } },
+        ],
+      },
     ],
   })}</script></head><body></body></html>`
   const structuredRendered = __translationWorkerTest.rewriteMetadataAndLinks(structuredHtml, new URL('https://capgo.app/fr/blog/post/'), 'fr')
   const structuredData = JSON.parse(structuredRendered.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}')
   const [structuredArticle, structuredBreadcrumb] = structuredData['@graph']
   assert(structuredArticle.url === 'https://capgo.app/fr/blog/post/' && structuredArticle.inLanguage === 'fr', 'Article JSON-LD kept the English URL or language')
-  assert(structuredArticle['@id'] === 'https://capgo.app/fr/blog/post/#newsarticle' && structuredArticle.mainEntityOfPage['@id'] === 'https://capgo.app/fr/blog/post/', 'Article JSON-LD ids were not localized')
-  assert(structuredArticle.publisher.url === 'https://capgo.app/' && structuredArticle.publisher['@id'] === 'https://capgo.app/#organization', 'Organization identity must keep its English URL')
-  assert(structuredBreadcrumb.itemListElement[0].item.url === 'https://capgo.app/fr/' && structuredBreadcrumb.itemListElement[1].item.url === 'https://capgo.app/fr/blog/', 'Breadcrumb JSON-LD URLs were not localized')
+  assert(
+    structuredArticle['@id'] === 'https://capgo.app/fr/blog/post/#newsarticle' && structuredArticle.mainEntityOfPage['@id'] === 'https://capgo.app/fr/blog/post/',
+    'Article JSON-LD ids were not localized',
+  )
+  assert(
+    structuredArticle.publisher.url === 'https://capgo.app/' && structuredArticle.publisher['@id'] === 'https://capgo.app/#organization',
+    'Organization identity must keep its English URL',
+  )
+  assert(
+    structuredBreadcrumb.itemListElement[0].item.url === 'https://capgo.app/fr/' && structuredBreadcrumb.itemListElement[1].item.url === 'https://capgo.app/fr/blog/',
+    'Breadcrumb JSON-LD URLs were not localized',
+  )
 
-  const labelSource = '<html><body><nav aria-label="Breadcrumb"><a href="/blog/">Blog</a><a href="/blog/category/tutorial/">Tips &amp; Tricks</a></nav><img alt="Blog" src="/a.png" /></body></html>'
+  const labelSource =
+    '<html><body><nav aria-label="Breadcrumb"><a href="/blog/">Blog</a><a href="/blog/category/tutorial/">Tips &amp; Tricks</a></nav><img alt="Blog" src="/a.png" /></body></html>'
   const labelSegments = __translationWorkerTest.collectSegments(labelSource).segments
-  const labelTranslations = labelSegments.map((segment) => ({ Breadcrumb: 'Fil', Blog: segment.mode === 'attribute' ? 'Image du blog' : 'Blogue', 'Tips &amp; Tricks': 'Trucs &amp; astuces' })[segment.text] ?? segment.text)
+  const labelTranslations = labelSegments.map(
+    (segment) => ({ Breadcrumb: 'Fil', Blog: segment.mode === 'attribute' ? 'Image du blog' : 'Blogue', 'Tips &amp; Tricks': 'Trucs &amp; astuces' })[segment.text] ?? segment.text,
+  )
   const structuredLabels = __translationWorkerTest.collectStructuredDataLabels(labelSegments, labelTranslations)
   assert(structuredLabels.get('Blog') === 'Blogue', 'Visible text must win over attribute text for a structured data label')
   assert(structuredLabels.get('Tips & Tricks') === 'Trucs & astuces', 'Structured data labels must be keyed and stored without HTML entities')
@@ -1407,12 +1618,60 @@ try {
 
   const labelledHtml = structuredHtml.replace('"name":"Blog"', '"name":"Tips & Tricks"')
   const labelledData = JSON.parse(
-    __translationWorkerTest.rewriteMetadataAndLinks(labelledHtml, new URL('https://capgo.app/fr/blog/post/'), 'fr', { structuredDataLabels: structuredLabels }).match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}',
+    __translationWorkerTest
+      .rewriteMetadataAndLinks(labelledHtml, new URL('https://capgo.app/fr/blog/post/'), 'fr', { structuredDataLabels: structuredLabels })
+      .match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}',
   )
   const labelledItems = labelledData['@graph'][1].itemListElement
   assert(labelledItems[1].item.name === 'Trucs & astuces', 'Breadcrumb JSON-LD name did not reuse the visible translation')
   assert(labelledItems[0].item.name === 'Capgo', 'Breadcrumb JSON-LD name without a visible translation must stay unchanged')
   assert(structuredBreadcrumb.itemListElement[1].item.name === 'Blog', 'Breadcrumb JSON-LD names must stay unchanged when no labels are passed')
+
+  const schemaSource = `<html><head><meta name="description" content="App delivery guide" /><script type="application/ld+json">${JSON.stringify({
+    '@graph': [
+      { '@type': 'Article', headline: 'App delivery guide', description: 'Schema only description', author: { '@type': 'Person', name: 'Jane Smith' } },
+      { '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: 'How does it work?', acceptedAnswer: { '@type': 'Answer', text: 'Install the plugin first.' } }] },
+      { '@type': 'SoftwareApplication', name: 'Capgo', description: 'Send app updates', offers: { price: '12', priceCurrency: 'USD' } },
+    ],
+  })}</script></head><body><h1>App delivery guide</h1></body></html>`
+  const schemaSegments = __translationWorkerTest.collectSegments(schemaSource).segments
+  assert(schemaSegments.filter((item) => item.text === 'App delivery guide').length === 2, 'Schema duplicated text already available in title or metadata')
+  assert(
+    schemaSegments.some((item) => item.text === 'Schema only description'),
+    'Schema-only copy was not collected',
+  )
+  assert(!schemaSegments.some((item) => item.text === 'Jane Smith' || item.text === 'USD'), 'Identity or commercial data entered translation')
+  const schemaTranslations = schemaSegments.map(
+    (item) =>
+      ({
+        'App delivery guide': 'Guide des mises à jour',
+        'Schema only description': 'Description du guide',
+        'How does it work?': 'Comment ça marche ?',
+        'Install the plugin first.': 'Installez le plugin.',
+        'Send app updates': 'Envoyez des mises à jour',
+      })[item.text] ?? item.text,
+  )
+  const schemaOutput = __translationWorkerTest.rewriteMetadataAndLinks(schemaSource, new URL('https://capgo.app/fr/'), 'fr', {
+    structuredDataLabels: __translationWorkerTest.collectStructuredDataLabels(schemaSegments, schemaTranslations),
+  })
+  const graph = JSON.parse(schemaOutput.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '{}')['@graph']
+  assert(graph[0].headline === 'Guide des mises à jour' && graph[0].description === 'Description du guide', 'Article text was not localized')
+  assert(graph[1].mainEntity[0].name === 'Comment ça marche ?' && graph[1].mainEntity[0].acceptedAnswer.text === 'Installez le plugin.', 'FAQ text was not localized')
+  assert(graph[2].description === 'Envoyez des mises à jour' && graph[2].offers.priceCurrency === 'USD', 'Product description or offer changed incorrectly')
+  assert(graph[0].author.name === 'Jane Smith', 'Person identity was translated')
+  for (const [locale, og] of Object.entries({ de: 'de_DE', es: 'es_ES', fr: 'fr_FR', id: 'id_ID', it: 'it_IT', ja: 'ja_JP', ko: 'ko_KR', zh: 'zh_CN' })) {
+    const output = __translationWorkerTest.rewriteMetadataAndLinks(
+      '<html><head><meta property="og:locale" content="en" /><meta property="og:locale:alternate" content="en" /></head></html>',
+      new URL(`https://capgo.app/${locale}/docs/`),
+      locale as any,
+    )
+    assert(output.includes(`property="og:locale" content="${og}"`), `Wrong Open Graph locale for ${locale}`)
+    assert((output.match(/property="og:locale:alternate"/g) ?? []).length === 8, 'Incorrect alternate locale count')
+    assert(
+      __translationWorkerTest.rewriteMetadataAndLinks(output, new URL(`https://capgo.app/${locale}/docs/`), locale as any).match(/property="og:locale"/g)?.length === 1,
+      'Locale rewrite is not idempotent',
+    )
+  }
 
   const homeStructuredHtml = `<html><head><script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',

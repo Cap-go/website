@@ -1,12 +1,12 @@
 ---
 title: AI engineering for Capgo plugins
-description: "We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews and merges 50+ pull requests daily."
+description: "We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily."
 sidebar:
   order: 2
   label: "AI engineering"
 ---
 
-Capgo maintains a large set of open source Capacitor plugins. Most of that work happens in our engineering system, where we use AI heavily to move faster without skipping review. **We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews and merges 50+ pull requests daily.**
+Capgo maintains a large set of open source Capacitor plugins. Most of that work happens in our engineering system, where we use AI heavily to move faster without skipping review. **We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily.**
 
 This page explains what happens behind the scenes when you report a plugin issue or when we ship a fix.
 
@@ -18,7 +18,7 @@ Our maintainers use AI-assisted tooling to:
 - Run automated review on every pull request before a human looks at it
 - Pre-check tests, code style, conventions, and common security issues
 
-AI speeds up drafting and first-pass review. It does not replace maintainer judgment on merges.
+AI speeds up drafting and first-pass review. It does not replace maintainer judgment on reviews, tests and merges.
 
 ## How a typical plugin fix moves
 
@@ -26,7 +26,7 @@ When someone opens an issue on a Capgo plugin repository:
 
 1. **Fix pull request:** For most issues, a fix pull request lands the same day, often within a couple of hours. Resolution usually takes one to two days end to end.
 2. **Automated review:** Every pull request is reviewed by our AI review system, usually within minutes.
-3. **Human merge:** **50+ pull requests merged daily by a human.** AI pre-checks tests, code review, conventions, and security first; a Capgo maintainer then validates the change and merges.
+3. **Human review, test and merge:** **50+ pull requests reviewed, tested and merged daily by a human.** AI pre-checks tests, code review, conventions, and security first; a Capgo maintainer then reviews, tests and merges the change.
 
 In the last 90 days, **95% of plugin issues were resolved** across Cap-go plugin repositories (excluding bot-only dependency churn).
 
@@ -34,15 +34,15 @@ In the last 90 days, **95% of plugin issues were resolved** across Cap-go plugin
 
 ### Is AI-written code safe to ship?
 
-We treat AI output like any other contribution: it must pass automated checks and human review before merge. Security and convention pre-checks run on every pull request, and a maintainer approves the final merge.
+We treat AI output like any other contribution: it must pass automated checks before a maintainer reviews, tests and merges it. Security and convention pre-checks run on every pull request.
 
 ### Who merges plugin changes?
 
-A Capgo maintainer always validates and merges. AI review and pre-checks run first; humans own the decision.
+A Capgo maintainer always reviews, tests and merges. AI review and pre-checks run first; humans own the decision.
 
 ### Does my app need AI to use Capgo plugins?
 
-No. We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews and merges 50+ pull requests daily. AI described on this page is part of our internal engineering workflow. Your app can use plugins and Capgo Cloud without embedding AI features.
+No. We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily. AI described on this page is part of our internal engineering workflow. Your app can use plugins and Capgo Cloud without embedding AI features.
 
 ### Does this replace the MCP or agent docs?
 

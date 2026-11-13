@@ -10,13 +10,15 @@ sidebar:
 
 ## Build access and output
 
-Native cloud builds are available on every Capgo plan. Build credentials are never stored on Capgo servers: they are used only for the build and then deleted. Build outputs can optionally be uploaded with time-limited download links.
+Capgo Build is generally available for production iOS and Android Capacitor releases. Build, sign, and submit from Windows, Linux, macOS, CI, or an AI coding agent through Capgo MCP. No local Mac or Xcode is required.
+
+Build minutes are included in Capgo plans; extra minutes use prepaid credits. See [current pricing](/pricing/), [measured build performance](/builder-data/), and [setup requirements](/docs/builder/). Use local or CI signing credentials, or explicitly save encrypted app credentials for hosted MCP workflows. Build outputs can optionally be uploaded with time-limited download links.
 
 ### Save credentials first
 
 ```bash
-npx @capgo/cli build credentials save --appId YOUR_APP_ID --platform ios
-npx @capgo/cli build credentials save --appId YOUR_APP_ID --platform android
+npx @capgo/cli@latest build credentials save --appId YOUR_APP_ID --platform ios
+npx @capgo/cli@latest build credentials save --appId YOUR_APP_ID --platform android
 ```
 
 ### Capture an output URL in CI
@@ -24,8 +26,8 @@ npx @capgo/cli build credentials save --appId YOUR_APP_ID --platform android
 Pass `--output-record` to persist the download URL and QR code, then use `build last-output` to read it:
 
 ```bash
-npx @capgo/cli build request APP_ID --platform android --output-upload --output-record /tmp/build.json
-npx @capgo/cli build last-output --path /tmp/build.json --field outputUrl
+npx @capgo/cli@latest build request APP_ID --platform android --output-upload --output-record /tmp/build.json
+npx @capgo/cli@latest build last-output --path /tmp/build.json --field outputUrl
 ```
 
 ### <a id="build-needed"></a> 🔹 **Needed**
@@ -85,7 +87,7 @@ The build will be processed and sent directly to app stores.
 Credentials are never stored on Capgo servers; they are deleted after the build. Save them before requesting a build:
 
 ```bash
-npx @capgo/cli build credentials save --appId APP_ID --platform ios
+npx @capgo/cli@latest build credentials save --appId APP_ID --platform ios
 ```
 **Example:**
 
@@ -216,9 +218,9 @@ Prints the full JSON by default, a single field with --field, or the ASCII QR
 code with --qr. Useful in CI to grab the download URL or QR for posting back
 to a PR or issue.
 Examples:
-  npx @capgo/cli build last-output --path /tmp/build.json
-  npx @capgo/cli build last-output --path /tmp/build.json --field outputUrl
-  npx @capgo/cli build last-output --path /tmp/build.json --qr
+  npx @capgo/cli@latest build last-output --path /tmp/build.json
+  npx @capgo/cli@latest build last-output --path /tmp/build.json --field outputUrl
+  npx @capgo/cli@latest build last-output --path /tmp/build.json --qr
 
 **Options:**
 
@@ -253,7 +255,7 @@ Opens a native window that walks you through Apple's App Store Connect UI in an
 embedded browser, auto-captures the Issuer ID + Key ID, intercepts the one-time
 .p8, validates it against Apple, and saves it to ~/.appstoreconnect/private_keys.
 Progress statistics are forwarded to Capgo analytics (disable with CAPGO_DISABLE_TELEMETRY).
-  npx @capgo/cli build credentials apple-key --appId com.example.app
+  npx @capgo/cli@latest build credentials apple-key --appId com.example.app
 
 **Example:**
 
@@ -286,22 +288,22 @@ Credentials are stored in:
 📚 Setup guides:
    iOS: https://capgo.app/docs/cli/cloud-build/ios/
    Android: https://capgo.app/docs/cli/cloud-build/android/
-  npx @capgo/cli build credentials save --platform ios \
+  npx @capgo/cli@latest build credentials save --platform ios \
     --certificate ./cert.p12 --p12-password "password" \
     --ios-provisioning-profile ./profile.mobileprovision \
     --apple-key ./AuthKey.p8 --apple-key-id "KEY123" \
     --apple-issuer-id "issuer-uuid" --apple-team-id "team-id"
 Multi-target Example (app + widget extension):
-  npx @capgo/cli build credentials save --platform ios \
+  npx @capgo/cli@latest build credentials save --platform ios \
     --ios-provisioning-profile ./App.mobileprovision \
     --ios-provisioning-profile com.example.widget=./Widget.mobileprovision \
     ...
-  npx @capgo/cli build credentials save --platform android \
+  npx @capgo/cli@latest build credentials save --platform android \
     --keystore ./release.keystore --keystore-alias "my-key" \
     --keystore-key-password "key-pass" \
     --play-config ./service-account.json
 Local storage (per-project):
-  npx @capgo/cli build credentials save --local --platform ios ...
+  npx @capgo/cli@latest build credentials save --local --platform ios ...
 
 **Example:**
 
@@ -351,8 +353,8 @@ npx @capgo/cli@latest build credentials list
 List saved build credentials (passwords masked).
 Shows what credentials are currently saved (both global and local).
 Examples:
-  npx @capgo/cli build credentials list  # List all apps
-  npx @capgo/cli build credentials list --appId com.example.app  # List specific app
+  npx @capgo/cli@latest build credentials list  # List all apps
+  npx @capgo/cli@latest build credentials list --appId com.example.app  # List specific app
 
 **Options:**
 
@@ -371,9 +373,9 @@ Clear saved build credentials.
 Remove credentials from storage.
 Use --appId and --platform to target specific credentials.
 Examples:
-  npx @capgo/cli build credentials clear  # Clear all apps (global)
-  npx @capgo/cli build credentials clear --local  # Clear local credentials
-  npx @capgo/cli build credentials clear --appId com.example.app --platform ios
+  npx @capgo/cli@latest build credentials clear  # Clear all apps (global)
+  npx @capgo/cli@latest build credentials clear --local  # Clear local credentials
+  npx @capgo/cli@latest build credentials clear --appId com.example.app --platform ios
 
 **Options:**
 
@@ -393,8 +395,8 @@ Update specific credentials without providing all of them again.
 Update existing credentials by providing only the fields you want to change.
 Platform is auto-detected from the options you provide.
 Examples:
-  npx @capgo/cli build credentials update --ios-provisioning-profile ./new-profile.mobileprovision
-  npx @capgo/cli build credentials update --local --keystore ./new-keystore.jks
+  npx @capgo/cli@latest build credentials update --ios-provisioning-profile ./new-profile.mobileprovision
+  npx @capgo/cli@latest build credentials update --local --keystore ./new-keystore.jks
 
 **Options:**
 
@@ -440,10 +442,10 @@ Interactively manage saved build credentials.
 Browse stored credentials, view what's configured, export a CI/CD-ready .env file,
 or delete a platform's credentials. Reuses the same TUI as `capgo init`.
 Examples:
-  npx @capgo/cli build credentials manage
-  npx @capgo/cli build credentials manage --appId com.example.app
-  npx @capgo/cli build credentials manage --appId com.example.app --platform ios
-  npx @capgo/cli build credentials manage --local
+  npx @capgo/cli@latest build credentials manage
+  npx @capgo/cli@latest build credentials manage --appId com.example.app
+  npx @capgo/cli@latest build credentials manage --appId com.example.app --platform ios
+  npx @capgo/cli@latest build credentials manage --local
 
 **Options:**
 
@@ -462,7 +464,7 @@ npx @capgo/cli@latest build credentials migrate
 Migrate legacy provisioning profile to the new multi-target format.
 Converts BUILD_PROVISION_PROFILE_BASE64 to CAPGO_IOS_PROVISIONING_MAP.
 Discovers the main bundle ID from your Xcode project automatically.
-  npx @capgo/cli build credentials migrate --platform ios
+  npx @capgo/cli@latest build credentials migrate --platform ios
 
 **Example:**
 

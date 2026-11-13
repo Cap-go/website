@@ -13,6 +13,7 @@
     "run_worker_first": true,
   },
   "workers_dev": false,
+  "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache" }],
   "routes": [
     { "pattern": "capgo.app/llms.txt", "zone_name": "capgo.app" },
     { "pattern": "capgo.app/llms-full.txt", "zone_name": "capgo.app" },
@@ -23,6 +24,7 @@
   ],
   "env": {
     "development": {
+      "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache-development" }],
       "routes": [
         { "pattern": "development.capgo.app/llms.txt", "zone_name": "capgo.app" },
         { "pattern": "development.capgo.app/llms-full.txt", "zone_name": "capgo.app" },

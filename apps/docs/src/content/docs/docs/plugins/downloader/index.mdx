@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin for downloading files with background support. On Android, 8.4.0 adds an opt-in OkHttp engine for app-private destinations (cache, files) with quiet notifications."
+  tagline: "Capacitor plugin for downloading files with background support. On Android, an upcoming release adds an opt-in OkHttp engine for app-private destinations (cache, files) with quiet notifications."
   actions:
     - text: Get started
       link: /docs/plugins/downloader/getting-started/
@@ -26,11 +26,15 @@ import { Aside } from '@astrojs/starlight/components';
 
 Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking.
 
-<Aside type="tip" title="Android OkHttp engine (upcoming in 8.4.0)">
+<Aside type="tip" title="Android OkHttp engine (upcoming release)">
 
-Opt in to **OkHttp** for downloads into app-private storage (`cache/...`, `files/...`). Use `androidHttpEngine: 'auto'` (default) or `'okhttp'`, and `notification: 'hidden'` for silent transfers with `downloadProgress` events. When `androidHttpEngine` is `'auto'`, `public-downloads/...` and other relative paths under app external files use DownloadManager. If app external files storage is unavailable, those other relative paths fall back to internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths. OkHttp transfers run in the app process and do not continue after the process is killed. This API is not in the current npm package; it ships in 8.4.0. See [Android OkHttp engine](/docs/plugins/downloader/getting-started/#android-okhttp-engine).
+Opt in to **OkHttp** for downloads into app-private storage (`cache/...`, `files/...`). Use `androidHttpEngine: 'auto'` (default) or `'okhttp'`, and `notification: 'hidden'` for silent transfers with `downloadProgress` events. When `androidHttpEngine` is `'auto'`, `public-downloads/...` and other relative paths under app external files use DownloadManager. If app external files storage is unavailable, those other relative paths fall back to internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths. OkHttp transfers run in the app process and do not continue after the process is killed. This API is not in the current npm package; it ships in the next release. See [Android OkHttp engine](/docs/plugins/downloader/getting-started/#android-okhttp-engine).
 
 </Aside>
+
+## Completion notifications
+
+Set `downloadCompletedNotificationText` on `download()` to show a localized system notification when a file finishes and the user granted notification permission. See [Getting Started](/docs/plugins/downloader/getting-started/#example-completion-notification) for a full example.
 
 ## Core Capabilities
 
@@ -38,6 +42,7 @@ Opt in to **OkHttp** for downloads into app-private storage (`cache/...`, `files
 - `pause` - Pause an active download. Download can be resumed later from the same position.
 - `resume` - Resume a paused download. Continues from where it was paused.
 - `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.
+- `downloadCompletedNotificationText` (optional on `download`) - Show a localized system notification when a download succeeds and notification permission is granted.
 
 ## Public API
 
