@@ -124,7 +124,7 @@ const navItems = [
       const qs = new URLSearchParams({ platform, dark: dark ? '1' : '0' })
       const nextSrc = `${shellBase}?${qs.toString()}`
       const post = () => {
-        iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, '*')
+        iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
       }
       if (iframe.src.split('?')[0] === shellBase && iframe.src !== nextSrc) {
         iframe.addEventListener('load', post, { once: true })

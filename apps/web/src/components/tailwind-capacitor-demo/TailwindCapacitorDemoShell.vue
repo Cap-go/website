@@ -210,6 +210,7 @@ const search = ref('')
 
 /** @param {MessageEvent} event */
 function onMessage(event) {
+  if (event.origin !== window.location.origin) return
   if (event.data?.type === 'tc-demo-theme') {
     if (event.data.platform === 'ios' || event.data.platform === 'material') platform.value = event.data.platform
     if (typeof event.data.dark === 'boolean') dark.value = event.data.dark

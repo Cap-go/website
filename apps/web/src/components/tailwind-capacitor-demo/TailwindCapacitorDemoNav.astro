@@ -37,7 +37,7 @@ const { items } = Astro.props
     link.addEventListener('click', (event) => {
       event.preventDefault()
       const id = (link as HTMLAnchorElement).dataset.tcNav
-      frame?.contentWindow?.postMessage({ type: 'tc-demo-scroll', id }, '*')
+      frame?.contentWindow?.postMessage({ type: 'tc-demo-scroll', id }, window.location.origin)
     })
   })
 </script>
