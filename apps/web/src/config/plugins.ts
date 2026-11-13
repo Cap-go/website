@@ -214,7 +214,8 @@ const actionDefinitionRows =
 @capgo/capacitor-brightness|github.com/Cap-go|Control device screen brightness programmatically with support for app-specific and system-wide control|https://github.com/Cap-go/capacitor-brightness/|Brightness
 @capgo/capacitor-light-sensor|github.com/Cap-go|Access the ambient light sensor to measure illuminance levels in lux with real-time updates|https://github.com/Cap-go/capacitor-light-sensor/|Light Sensor
 @capgo/capacitor-video-thumbnails|github.com/Cap-go|Generate thumbnail images from local and remote video files at specific timestamps|https://github.com/Cap-go/capacitor-video-thumbnails/|Video Thumbnails
-@capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher`
+@capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher
+tailwind-capacitor|github.com/Cap-go|Tailwind CSS v4 Capacitor UI components and safe areas via a shadcn-compatible Vue registry|https://github.com/Cap-go/tailwind-capacitor/|Tailwind Capacitor`
     .trim()
     .split('\n')
 
@@ -226,6 +227,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-asset-cache': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-auto': 'Truck',
   '@capgo/capacitor-transitions': 'ArrowsRightLeft',
+  'tailwind-capacitor': 'Swatch',
   '@capgo/capacitor-sheets': 'ArrowsPointingOut',
   '@capgo/capacitor-native-biometric': 'FingerPrint',
   '@capgo/camera-preview': 'Camera',
@@ -508,6 +510,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-native-navigation',
     '@capgo/capacitor-native-loader',
     '@capgo/capacitor-transitions',
+    'tailwind-capacitor',
     '@capgo/capacitor-sheets',
     '@capgo/capacitor-inappbrowser',
     '@capgo/capacitor-navigation-bar',

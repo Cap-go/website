@@ -1,5 +1,6 @@
 ---
 import CommandCode from '@/components/CommandCode.astro'
+import TailwindCapacitorInstallTabs from '@/components/tailwind-capacitor-demo/TailwindCapacitorInstallTabs.astro'
 import PluginIcon from '@/components/PluginIcon.astro'
 import PluginPreviewQrCard from '@/components/PluginPreviewQrCard.astro'
 import { pluginDemosBySlug } from '@/config/pluginDemos'
@@ -108,6 +109,8 @@ const formatCount = (count?: number): string => {
 }
 
 const { slug: id } = Astro.params
+const isTailwindCapacitor = id === 'tailwind-capacitor'
+const tailwindCapacitorDemoHref = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/')
 const { title, description, githubStars, npmDownloads, href, name, tutorial, icon, category } = plugin as Plugin
 const demoGroup = id ? pluginDemosBySlug[id] : undefined
 const categoryLabel = pluginCategories.find((item) => item.id === category)?.label ?? 'Plugin'
@@ -368,7 +371,28 @@ const secondaryButtonClass =
             </div>
 
             {
-              installCommand && (
+              isTailwindCapacitor && (
+                <div data-tailwind-capacitor-install class="mt-8 space-y-4">
+                  <a
+                    href={tailwindCapacitorDemoHref}
+                    class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
+                  >
+                    Open live component demo
+                    <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-white" aria-hidden="true" />
+                  </a>
+                  <div class:list={[cardClass, 'overflow-hidden bg-gray-950/70']}>
+                    <div class="border-b border-white/10 px-4 py-2.5">
+                      <p class="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase">Registry install</p>
+                    </div>
+                    <div class="p-2">
+                      <TailwindCapacitorInstallTabs />
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+            {
+              installCommand && !isTailwindCapacitor && (
                 <div class:list={[cardClass, 'mt-8 overflow-hidden bg-gray-950/70']}>
                   <div class="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-2.5">
                     <p class="text-xs font-semibold tracking-[0.2em] text-gray-400 uppercase">Install</p>

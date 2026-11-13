@@ -1,0 +1,43 @@
+---
+title: "tailwind-capacitor"
+description: Tailwind CSS v4 Capacitor UI components and safe areas via a shadcn-compatible registry for Vue, React, and Angular.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Copy native-style Capacitor UI components into your app from a Tailwind v4 shadcn registry.
+  actions:
+    - text: Get started
+      link: /docs/plugins/tailwind-capacitor/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Live demo
+      link: https://capgo.app/plugins/tailwind-capacitor/demo/
+      icon: external
+      variant: minimal
+    - text: GitHub
+      link: https://github.com/Cap-go/tailwind-capacitor/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Registry first" icon="document">
+    Components ship as source files through shadcn-compatible JSON, not as a runtime npm UI kit for v4.
+  </Card>
+  <Card title="Safe areas" icon="setting">
+    Tailwind v4 plugins generate `pt-safe`, platform variants, and theme tokens for iOS and Material.
+  </Card>
+  <Card title="Try every component" icon="rocket">
+    The Capgo site hosts a live demo of all registry items with theme toggles.
+  </Card>
+</CardGrid>
+
+<Aside type="note">
+  React and Angular registry paths are provisional until the tailwind-capacitor multi-framework registry PR merges. Update URLs in `apps/shared/config/tailwindCapacitorRegistry.ts` when those paths are final.
+</Aside>

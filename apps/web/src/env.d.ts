@@ -1,6 +1,17 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
+declare module '*.vue' {
+  import type { DefineComponent } from 'vue'
+  const component: DefineComponent
+  export default component
+}
+
+declare module '*.json' {
+  const value: Record<string, unknown>
+  export default value
+}
+
 declare namespace App {
   interface Locals {
     locale: import('./services/locale').Locales

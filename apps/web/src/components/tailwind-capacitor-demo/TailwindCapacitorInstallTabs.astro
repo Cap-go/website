@@ -1,0 +1,99 @@
+---
+import CommandCode from '@/components/CommandCode.astro'
+import {
+  tailwindCapacitorAngularRegistryBase,
+  tailwindCapacitorCoreVueItems,
+  tailwindCapacitorReactRegistryBase,
+  tailwindCapacitorVueRegistryUrl,
+} from '../../../../shared/config/tailwindCapacitorRegistry'
+
+const { class: className = '' } = Astro.props
+
+const vueCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  slug,
+  command: `bunx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl(slug)}`,
+}))
+
+const vueComponent = {
+  slug: 'capacitor-button',
+  command: `bunx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl('capacitor-button')}`,
+}
+
+const reactCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  slug,
+  command: `npx shadcn@latest add ${tailwindCapacitorReactRegistryBase}/${slug}.json`,
+}))
+
+const angularCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  slug,
+  command: `npx @spartan-ng/cli@latest add ${tailwindCapacitorAngularRegistryBase}/${slug}.json`,
+}))
+---
+
+<div class:list={['rounded-2xl border border-white/10 bg-gray-950/70', className]} data-tc-install-tabs>
+  <div class="flex flex-wrap gap-2 border-b border-white/10 p-3" role="tablist" aria-label="Framework install">
+    <button type="button" class="tc-install-tab rounded-lg border border-blue-400/40 px-3 py-1.5 text-sm text-white" data-tab="vue" role="tab" aria-selected="true">Vue</button>
+    <button type="button" class="tc-install-tab rounded-lg border border-white/15 px-3 py-1.5 text-sm text-gray-300" data-tab="react" role="tab" aria-selected="false">React</button>
+    <button type="button" class="tc-install-tab rounded-lg border border-white/15 px-3 py-1.5 text-sm text-gray-300" data-tab="angular" role="tab" aria-selected="false">Angular</button>
+  </div>
+
+  <div class="p-4" data-panel="vue" role="tabpanel">
+    <p class="text-sm text-gray-300">Core registry items, then any component slug.</p>
+    <ul class="mt-3 flex flex-col gap-2">
+      {vueCore.map((row) => (
+        <li>
+          <CommandCode command={row.command} class="block font-mono text-xs leading-6 whitespace-pre-wrap break-all" />
+        </li>
+      ))}
+      <li>
+        <CommandCode command={vueComponent.command} class="block font-mono text-xs leading-6 whitespace-pre-wrap break-all" />
+      </li>
+    </ul>
+  </div>
+
+  <div class="hidden p-4" data-panel="react" role="tabpanel">
+    <p class="text-sm text-gray-300">React registry URLs are provisional until the tailwind-capacitor multi-framework PR lands.</p>
+    <ul class="mt-3 flex flex-col gap-2">
+      {reactCore.map((row) => (
+        <li>
+          <CommandCode command={row.command} class="block font-mono text-xs leading-6 whitespace-pre-wrap break-all" />
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="hidden p-4" data-panel="angular" role="tabpanel">
+    <p class="text-sm text-gray-300">Angular (spartan/ng) URLs are provisional until the tailwind-capacitor multi-framework PR lands.</p>
+    <ul class="mt-3 flex flex-col gap-2">
+      {angularCore.map((row) => (
+        <li>
+          <CommandCode command={row.command} class="block font-mono text-xs leading-6 whitespace-pre-wrap break-all" />
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector('[data-tc-install-tabs]')
+  if (root) {
+  root.querySelectorAll('[data-tab]').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const id = (tab as HTMLButtonElement).dataset.tab
+      if (!id) return
+      root.querySelectorAll('[data-tab]').forEach((btn) => {
+        const active = (btn as HTMLButtonElement).dataset.tab === id
+        btn.setAttribute('aria-selected', String(active))
+        btn.classList.toggle('border-blue-400/40', active)
+        btn.classList.toggle('text-white', active)
+        btn.classList.toggle('border-white/15', !active)
+        btn.classList.toggle('text-gray-300', !active)
+      })
+      root.querySelectorAll('[data-panel]').forEach((panel) => {
+        const show = (panel as HTMLElement).dataset.panel === id
+        panel.classList.toggle('hidden', !show)
+      })
+    })
+  })
+  }
+</script>

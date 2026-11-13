@@ -268,6 +268,7 @@ const pluginEntries = [
   ['Supabase', 'supabase'],
   ['Text Interaction', 'textinteraction'],
   ['Transitions', 'transitions'],
+  ['Tailwind Capacitor', 'tailwind-capacitor'],
   ['Twilio Video', 'twilio-video'],
   ['Twilio Voice', 'twilio-voice'],
   ['Uploader', 'uploader'],

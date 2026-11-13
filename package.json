@@ -60,6 +60,7 @@
     "blogs:delete_broken_all": "bun run scripts/blogs/delete_broken_all.tsx",
     "blogs:sync_seobot": "bun run scripts/blogs/sync_seobot.js",
     "clean:unused": "bun run scripts/clean_not_used.tsx",
+    "sync:tailwind-capacitor-registry": "bun run scripts/sync-tailwind-capacitor-registry.mjs",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
     "generate:blog-images": "bun run scripts/generate-blog-images.ts",
     "blogs:normalize_tags": "bun run scripts/blogs/normalize_tags.ts",
@@ -81,6 +82,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "14.4.6",
     "@astrojs/mdx": "8.1.3",
+    "@astrojs/vue": "7.1.5",
     "@astrojs/sitemap": "3.7.4",
     "@astrojs/starlight": "0.42.11",
     "@astrojs/starlight-docsearch": "0.8.0",
@@ -105,7 +107,8 @@
     "starlight-package-managers": "^0.13.0",
     "striptags": "^3.2.0",
     "tailwindcss": "^4.3.3",
-    "toastify-js": "^1.12.0"
+    "toastify-js": "^1.12.0",
+    "vue": "^3.5.24"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
@@ -124,6 +127,7 @@
     "@types/node-forge": "^1.3.14",
     "@types/semver": "^7.8.0",
     "@types/toastify-js": "^1.12.4",
+    "@vitejs/plugin-vue": "^6.0.3",
     "astro-font": "^1.2.0",
     "cheerio": "1.2.0",
     "dayjs": "^1.11.23",

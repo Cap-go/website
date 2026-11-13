@@ -1,0 +1,113 @@
+---
+import {
+  tailwindCapacitorAngularRegistryBase,
+  tailwindCapacitorCoreVueItems,
+  tailwindCapacitorReactRegistryBase,
+  tailwindCapacitorVueRegistryUrl,
+} from '../../../shared/config/tailwindCapacitorRegistry'
+
+const vueCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  command: `npx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl(slug)}`,
+}))
+
+const reactCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  command: `npx shadcn@latest add ${tailwindCapacitorReactRegistryBase}/${slug}.json`,
+}))
+
+const angularCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  command: `npx @spartan-ng/cli@latest add ${tailwindCapacitorAngularRegistryBase}/${slug}.json`,
+}))
+---
+
+<div class="tc-install-tabs not-content" data-tc-install-tabs>
+  <div class="tc-install-tablist" role="tablist" aria-label="Framework install">
+    <button type="button" class="tc-install-tab selected" data-tab="vue" role="tab" aria-selected="true">Vue</button>
+    <button type="button" class="tc-install-tab" data-tab="react" role="tab" aria-selected="false">React</button>
+    <button type="button" class="tc-install-tab" data-tab="angular" role="tab" aria-selected="false">Angular</button>
+  </div>
+
+  <div data-panel="vue" role="tabpanel" class="tc-install-panel">
+    <ul>
+      {vueCore.map((row) => (
+        <li>
+          <pre>
+            <code>{row.command}</code>
+          </pre>
+        </li>
+      ))}
+      <li>
+        <pre>
+          <code>{`npx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl('capacitor-button')}`}</code>
+        </pre>
+      </li>
+    </ul>
+  </div>
+
+  <div data-panel="react" role="tabpanel" class="tc-install-panel hidden">
+    <p>Provisional URLs until the tailwind-capacitor React registry PR lands.</p>
+    <ul>
+      {reactCore.map((row) => (
+        <li>
+          <pre>
+            <code>{row.command}</code>
+          </pre>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div data-panel="angular" role="tabpanel" class="tc-install-panel hidden">
+    <p>Provisional URLs until the tailwind-capacitor Angular registry PR lands.</p>
+    <ul>
+      {angularCore.map((row) => (
+        <li>
+          <pre>
+            <code>{row.command}</code>
+          </pre>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .tc-install-tablist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .tc-install-tab {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    background: transparent;
+    cursor: pointer;
+  }
+  .tc-install-tab.selected {
+    border-color: var(--sl-color-accent);
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const root = document.querySelector('[data-tc-install-tabs]')
+  if (root) {
+    root.querySelectorAll('[data-tab]').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = (tab as HTMLButtonElement).dataset.tab
+        if (!id) return
+        root.querySelectorAll('[data-tab]').forEach((btn) => {
+          const active = (btn as HTMLButtonElement).dataset.tab === id
+          btn.classList.toggle('selected', active)
+          btn.setAttribute('aria-selected', String(active))
+        })
+        root.querySelectorAll('[data-panel]').forEach((panel) => {
+          panel.classList.toggle('hidden', (panel as HTMLElement).dataset.panel !== id)
+        })
+      })
+    })
+  }
+</script>
