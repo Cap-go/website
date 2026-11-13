@@ -15,8 +15,9 @@ This page documents the v4 shadcn registry rebuild in [Cap-go/tailwind-capacitor
 
 ## Prerequisites
 
-- Tailwind CSS v4 (`@tailwindcss/vite` or PostCSS)
-- Vue 3 project
+- Vue 3 app with Tailwind CSS v4 (`@tailwindcss/vite` or PostCSS)
+- A project-level `components.json` from the [shadcn CLI](https://ui.shadcn.com/docs/cli) (`npx shadcn@latest init`)
+- Path alias `@/*` pointing at your `src/` folder
 - No `tailwind.config.js` required
 
 ## Install base styles
@@ -25,11 +26,10 @@ This page documents the v4 shadcn registry rebuild in [Cap-go/tailwind-capacitor
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
+npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json
 ```
 
-The capacitor-icons item uses the same URL (`.../public/r/capacitor-icons.json`). #129 still types it as `registry:lib` and is changing that to `registry:item`. Do not run that command until that fix is in #129. The item name and URL stay the same.
-
-Import `tailwind-capacitor.css` in place of your app's own `@import "tailwindcss"`. The bundle already includes that Tailwind import:
+Replace your app global stylesheet with the capacitor bundle. It already includes Tailwind. Do not add a separate `@import "tailwindcss"` when using this file:
 
 ```css
 @import '@/capacitor/styles/tailwind-capacitor.css';
@@ -46,7 +46,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacito
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-button.json
 ```
 
-Components land under `src/capacitor/vue/components/`. The provider lands under `src/capacitor/vue/shared/`. Shared classes land under `src/capacitor/shared/`.
+Components land under `src/capacitor/vue/components/`. The provider lands under `src/capacitor/vue/shared/`. Shared classes land under `src/capacitor/shared/`. Icons land under `src/capacitor/vue/components/icons/`.
 
 ## Vue usage
 
