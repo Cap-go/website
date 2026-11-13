@@ -54,7 +54,7 @@ const task = await CapacitorDownloader.download({
 
 ## Example: completion notification
 
-When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. Tapping the notification reopens the app. Use `downloadCompleted` events when the app stays in the foreground.
+When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. Request notification permission before the download completes: `POST_NOTIFICATIONS` on Android 13 and later, and iOS notification authorization. Tapping the notification reopens the app. Use `downloadCompleted` events when the app stays in the foreground.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
@@ -68,7 +68,7 @@ await CapacitorDownloader.download({
 });
 ```
 
-On Android, pair `notification: 'hidden'` with `downloadCompletedNotificationText` when you do not want DownloadManager progress notifications but still want a completion alert.
+On Android, pair `notification: 'hidden'` with `downloadCompletedNotificationText` when you do not want DownloadManager progress notifications but still want a completion alert. If Android ends the app process before the download completes, the completion alert is not shown, and `hidden` also suppresses the DownloadManager completion notification.
 
 ## Example: pause and resume
 
@@ -187,7 +187,12 @@ export interface DownloadOptions {
   network?: 'cellular' | 'wifi-only';
   /** Download priority level */
   priority?: 'high' | 'normal' | 'low';
-  /** Android DownloadManager notification visibility */
+  /**
+   * Android DownloadManager notification visibility. Defaults to `completed` when omitted.
+   * - `completed`: shows a notification only after the download completes.
+   * - `progress`: shows a notification during the download and after it completes.
+   * - `hidden`: shows no DownloadManager notification.
+   */
   notification?: 'completed' | 'progress' | 'hidden';
   /**
    * Optional localized text for a system notification after a successful download.
