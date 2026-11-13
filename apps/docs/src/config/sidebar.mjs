@@ -58,7 +58,7 @@ const pluginEntries = [
   ['Android SMS Retriever', 'android-sms-retriever'],
   ['Android Usage Stats', 'android-usagestatsmanager'],
   ['App Attest', 'app-attest', [linkItem('iOS setup', '/docs/plugins/app-attest/ios'), linkItem('Android setup', '/docs/plugins/app-attest/android')]],
-  ['App Intents', 'app-intents'],
+  ['App Intents', 'app-intents', [linkItem('Siri app skills (iOS 27.3)', '/docs/plugins/app-intents/app-skills/')]],
   ['App Tracking Transparency', 'app-tracking-transparency'],
   ['AppInsights', 'appinsights'],
   ['AppsFlyer', 'appsflyer'],

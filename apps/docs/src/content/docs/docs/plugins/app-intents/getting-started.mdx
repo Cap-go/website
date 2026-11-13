@@ -50,6 +50,39 @@ await useAppIntentsListener(handleInvocation);
 
 `useAppIntentsListener` attaches `appIntentInvoked` and then drains pending items. You can also call `getPendingInvocations()` and `removePendingInvocation()` manually if you prefer explicit control.
 
+`useAppIntentsListener` and `drainPendingInvocations` drop stale **awaiting** items without calling your handler. Native forwards `__capgoTimeoutSeconds` in `params` (default 30, max 600). When `createdAt` is older than that budget, the runtime removes the pending row and moves on.
+
+### Return results to Siri (tool intents)
+
+`withInvocationCompletion`, `completeInvocation`, `failInvocation`, and `setOnscreenEntityContext` ship in plugin **8.2.0+** (see [capacitor-app-intents PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2), head `175bb323`). npm **8.1.0** does not export them yet. Install a build from that branch or wait for the release before copying the examples below.
+
+Only **typed** codegen intents with `awaitJavaScriptResult: true` on **iOS 17+** return `ReturnsValue<String>` to Siri for chaining. The generic `CapgoDispatchAppIntent` can still await JavaScript, but its `perform()` returns an empty `.result()` to Siri (Swift opaque `IntentResult` typing).
+
+For typed awaiting intents, wrap your handler with `withInvocationCompletion`. `performReturningValue` uses `value` or `summary` for chaining and `message` (or the `dialog` argument to `completeInvocation`) for speech. Throw on unknown awaiting intents so `withInvocationCompletion` calls `failInvocation` instead of completing with a generic `Done`. Handler errors still propagate; if `failInvocation` itself fails on the bridge, that failure does not replace your handler error:
+
+```typescript
+import {
+  isAwaitingResult,
+  useAppIntentsListener,
+  withInvocationCompletion,
+} from '@capgo/capacitor-app-intents';
+
+await useAppIntentsListener(
+  withInvocationCompletion(async (invocation) => {
+    if (!isAwaitingResult(invocation)) {
+      await handleInvocation(invocation);
+      return;
+    }
+    if (invocation.name === 'orderDish') {
+      return { value: 'pasta', message: 'Your pasta order is in.' };
+    }
+    throw new Error(`Unknown awaiting intent: ${invocation.name}`);
+  }),
+);
+```
+
+See [Siri app skills (iOS 27.3)](/docs/plugins/app-intents/app-skills/) for codegen, `Skills.skillsbundle`, native handlers, and device testing.
+
 ## Siri phrases (codegen)
 
 `AppShortcut` phrases and SF Symbol names must be **compile time literals** in Swift. Configure `app-shortcuts.config.json` in your app repo and generate Swift into your iOS **App** target:
@@ -94,6 +127,51 @@ Remove one pending invocation after your handler processes it.
 import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
 
 await CapgoAppIntents.removePendingInvocation({ id: 'id-123' });
+```
+
+### `completeInvocation`
+
+Resolve an invocation that is awaiting a JavaScript result for Siri.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.completeInvocation({
+  id: 'id-123',
+  result: { value: 'Done' },
+});
+```
+
+### `failInvocation`
+
+Fail an invocation that is awaiting a JavaScript result.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.failInvocation({ id: 'id-123', error: 'Could not finish.' });
+```
+
+### `setOnscreenEntityContext`
+
+Publish optional on screen entity context for catalog queries when your UI cannot adopt native entity annotations.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.setOnscreenEntityContext({
+  entities: [{ catalogType: 'dish', entityId: 'pasta', title: 'Pasta' }],
+});
+```
+
+### `clearOnscreenEntityContext`
+
+Clear on screen entity hints when your UI no longer shows those rows.
+
+```typescript
+import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
+
+await CapgoAppIntents.clearOnscreenEntityContext();
 ```
 
 ### `setEntityCatalog`
@@ -221,6 +299,34 @@ export interface AppIntentInvocation {
    * @since 0.1.0
    */
   createdAt: number;
+
+  /**
+   * When true, the native side is waiting for `completeInvocation` or `failInvocation`.
+   *
+   * @since 8.2.0
+   */
+  awaitingResult?: boolean;
+}
+```
+
+### `AppIntentInvocationResult`
+Result payload returned to Siri after JavaScript completes an awaiting invocation.
+```typescript
+export interface AppIntentInvocationResult {
+  value?: string;
+  message?: string;
+  summary?: string;
+  [key: string]: unknown;
+}
+```
+
+### `OnscreenEntityReference`
+Optional on screen entity hint for Siri disambiguation.
+```typescript
+export interface OnscreenEntityReference {
+  catalogType: string;
+  entityId: string;
+  title?: string;
 }
 ```
 

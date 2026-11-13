@@ -19,6 +19,7 @@ Expo recently shipped [expo-app-intents](https://expo.dev/blog/introducing-expo-
 | Receive shares from other apps | [@capgo/capacitor-share-target](/docs/plugins/share-target/) | `shareReceived` events for title, text, and files via Android intents or an iOS Share Extension plus App Group. |
 | Open Android settings or activities; open iOS Settings URLs | [@capgo/capacitor-intent-launcher](/docs/plugins/intent-launcher/) | `startActivityAsync`, `openIOSSettings`, `openApplication`. This is **not** Apple App Intents. |
 | Siri phrases, Shortcuts, Spotlight, quick actions, App Intent queue | [@capgo/capacitor-app-intents](/docs/plugins/app-intents/) | Dispatch bridge, `setEntityCatalog`, `indexSpotlightEntities`, `setHomeScreenShortcutItems`, `getPendingInvocations`, `useAppIntentsListener`. iOS 16+. |
+| Siri app skills and typed tool intents (preview) | [@capgo/capacitor-app-intents](/docs/plugins/app-intents/app-skills/) | `generate-typed-intents.mjs`, `generate-skills-bundle.mjs`, `completeInvocation`, `withInvocationCompletion`. iOS 27.3 Developer Preview on device. |
 | On-device LLM (Apple Intelligence on supported iPhones) | [@capgo/capacitor-llm](/docs/plugins/llm/) | Chat and model APIs. No App Intent or schema bridge. |
 
 ## Comparison with expo-app-intents
