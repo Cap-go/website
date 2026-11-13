@@ -712,6 +712,14 @@ const repairedMetadata = __translationWorkerTest.repairCachedSeoMetadata(
 assert(repairedMetadata.includes('content="ja_JP"'), 'Cached OG locale was not repaired')
 assert(!repairedMetadata.includes('Manage updates'), 'Cached English description padding survived')
 assert(repairedMetadata.includes('<body>本文</body>'), 'SEO repair changed visible page content')
+const spacedPadding = __translationWorkerTest.repairCachedSeoMetadata(
+  '<html><head><meta name="description" content="日本語の説明。 Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels..."><meta property="og:description" content="한국어 설명. Capgo helps Capacitor teams ship live updates, au..."><meta name="twitter:description" content="日本語の説明。 — Manage updates in realtime for your capacitor app without store hassle"></head><body>本文</body></html>',
+  'ja',
+)
+assert(!spacedPadding.includes('Capgo helps') && !spacedPadding.includes('Manage updates'), 'Old space-separated or dash-separated filler survived')
+assert(spacedPadding.includes('content="日本語の説明。"') && spacedPadding.includes('content="한국어 설명."'), 'Removing filler damaged the translated description')
+assert(spacedPadding.includes('<body>本文</body>'), 'Space-separated filler repair changed visible content')
+
 let limitedCalls = 0
 try {
   await __translationWorkerTest.translateBatchWithMemory(

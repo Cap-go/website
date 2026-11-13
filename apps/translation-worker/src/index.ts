@@ -3774,7 +3774,7 @@ function repairCachedSeoMetadata(html: string, locale: Locale): string {
     const value = readAttributeValue(tag, 'content')
     if (!value) return tag
     // Old renders appended this English filler, sometimes truncated mid-sentence.
-    const clean = value.replace(/\s+-\s+(?:Manage updates in realtime for your capacitor app|Capgo helps Capacitor teams)[\s\S]*$/i, '').trim()
+    const clean = value.replace(/\s+(?:[-–—]\s+)?(?:Manage updates in realtime for your capacitor app|Capgo helps Capacitor teams)[\s\S]*$/i, '').trim()
     return clean && clean !== value ? (replaceTagAttributeValue(tag, 'content', clean) ?? tag) : tag
   })
 }
