@@ -16,7 +16,7 @@ This page documents the v4 shadcn registry rebuild in [Cap-go/tailwind-capacitor
 ## Prerequisites
 
 - Tailwind CSS v4 (`@tailwindcss/vite` or PostCSS)
-- Vue 3 project with `components.json` (shadcn CLI)
+- Vue 3 project
 - No `tailwind.config.js` required
 
 ## Install base styles
@@ -25,10 +25,11 @@ This page documents the v4 shadcn registry rebuild in [Cap-go/tailwind-capacitor
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-tailwind.json
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-provider.json
 npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-shared.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/capacitor-icons.json
 ```
 
-Import the bundle in your global CSS:
+The capacitor-icons item uses the same URL (`.../public/r/capacitor-icons.json`). #129 still types it as `registry:lib` and is changing that to `registry:item`. Do not run that command until that fix is in #129. The item name and URL stay the same.
+
+Import `tailwind-capacitor.css` in place of your app's own `@import "tailwindcss"`. The bundle already includes that Tailwind import:
 
 ```css
 @import '@/capacitor/styles/tailwind-capacitor.css';
@@ -51,6 +52,8 @@ Components land under `src/capacitor/vue/components/`. The provider lands under 
 
 Import the files that `shadcn add` writes. The library example app generates `@/capacitor/index.js` as a convenience barrel. That file is not created when you install registry items into your own project.
 
+Button has no `fill` prop. The default style is solid. Use the boolean `outline` or `clear` props for the other styles.
+
 ```vue
 <script setup>
 import TailwindCapacitorProvider from '@/capacitor/vue/shared/TailwindCapacitorProvider.vue'
@@ -65,7 +68,7 @@ import Button from '@/capacitor/vue/components/Button.vue'
     <App theme="ios" class="safe-areas">
       <Page>
         <Navbar title="Home" class="pt-safe" />
-        <Button fill="solid">Continue</Button>
+        <Button>Continue</Button>
       </Page>
     </App>
   </TailwindCapacitorProvider>

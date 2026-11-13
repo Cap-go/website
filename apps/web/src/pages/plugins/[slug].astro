@@ -185,16 +185,22 @@ const generatedFaq = [
           question: `Which Capacitor version does ${packageLabel} support?`,
           answer: `Capgo plugins follow Capacitor's major version: use the plugin major version that matches your Capacitor major version (for example plugin v8 with Capacitor 8). The compatibility table in the GitHub README lists the maintained versions.`,
         },
+      ]
+    : []),
+  {
+    question: `Is ${packageLabel} free and open source?`,
+    answer: installOverride?.openSourceFaqAnswer
+      ? installOverride.openSourceFaqAnswer
+      : `Yes. The source code is public on GitHub at ${href} and the package is free to install from npm. Bug reports and pull requests are welcome.`,
+  },
+  ...(isCapacitor && !installOverride?.skipNativePluginFaqs
+    ? [
         {
           question: `Can I update code that uses ${title} without an App Store review?`,
           answer: `Installing or upgrading the plugin changes native code, so it needs a new store build. After that, JavaScript, HTML and CSS changes that call the plugin can ship instantly with Capgo live updates.`,
         },
       ]
     : []),
-  {
-    question: `Is ${packageLabel} free and open source?`,
-    answer: `Yes. The source code is public on GitHub at ${href} and the package is free to install from npm. Bug reports and pull requests are welcome.`,
-  },
 ]
 const seenQuestions = new Set<string>()
 const faq = [...(tutorialData?.faq ?? []), ...generatedFaq].filter((item) => {
@@ -397,6 +403,11 @@ const secondaryButtonClass =
                       <CommandCode command={command} class={commandClass} />
                     ))}
                   </div>
+                  {
+                    installOverride?.installNote && (
+                      <p class="border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">{installOverride.installNote}</p>
+                    )
+                  }
                   {
                     installManagers.length > 0 && (
                       <details class="overflow-x-auto border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">
