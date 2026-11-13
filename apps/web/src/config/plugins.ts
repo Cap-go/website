@@ -214,7 +214,8 @@ const actionDefinitionRows =
 @capgo/capacitor-brightness|github.com/Cap-go|Control device screen brightness programmatically with support for app-specific and system-wide control|https://github.com/Cap-go/capacitor-brightness/|Brightness
 @capgo/capacitor-light-sensor|github.com/Cap-go|Access the ambient light sensor to measure illuminance levels in lux with real-time updates|https://github.com/Cap-go/capacitor-light-sensor/|Light Sensor
 @capgo/capacitor-video-thumbnails|github.com/Cap-go|Generate thumbnail images from local and remote video files at specific timestamps|https://github.com/Cap-go/capacitor-video-thumbnails/|Video Thumbnails
-@capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher`
+@capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher
+@capgo/tailwind-capacitor|github.com/Cap-go|Ship Tailwind CSS v4 Capacitor UI components as a shadcn registry so you own the source|https://github.com/Cap-go/tailwind-capacitor/|Tailwind Capacitor`
     .trim()
     .split('\n')
 
@@ -376,6 +377,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-light-sensor': 'Eye',
   '@capgo/capacitor-video-thumbnails': 'Film',
   '@capgo/capacitor-intent-launcher': 'RocketLaunch',
+  '@capgo/tailwind-capacitor': 'Swatch',
 }
 
 const pluginNamesByCategory = {
@@ -517,6 +519,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-live-activities',
     '@capgo/capacitor-widget-kit',
     '@capgo/capacitor-app-intents',
+    '@capgo/tailwind-capacitor',
   ],
   location: [
     '@capgo/capacitor-nativegeocoder',
