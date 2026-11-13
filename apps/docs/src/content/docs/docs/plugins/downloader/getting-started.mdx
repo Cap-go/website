@@ -138,7 +138,7 @@ await CapacitorDownloader.download({
 });
 ```
 
-OkHttp runs inside the app process. If Android kills that process, the download does not continue the way a DownloadManager transfer does. Internal `cache/...` and `files/...` destinations need `'auto'` or `'okhttp'`. For `public-downloads/...` and external-files paths, omit `androidHttpEngine` or set `'auto'` / `'downloadManager'` when the transfer must outlive the app process. Do not set `'okhttp'` for `public-downloads/...`; that request is rejected.
+OkHttp runs inside the app process. If Android kills that process, the download does not continue the way a DownloadManager transfer does. Internal `cache/...` and `files/...` destinations need `'auto'` or `'okhttp'`. For `public-downloads/...`, set `'auto'` when the transfer must outlive the app process. Omitting `androidHttpEngine` or setting `'downloadManager'` saves these files under app external files, not the public Downloads folder. For external-files paths, omit `androidHttpEngine` or set `'auto'` / `'downloadManager'` when the transfer must outlive the app process. Do not set `'okhttp'` for `public-downloads/...`; that request is rejected.
 
 ### Notifications with OkHttp
 
