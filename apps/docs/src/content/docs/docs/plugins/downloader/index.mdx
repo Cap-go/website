@@ -24,12 +24,17 @@ hero:
 
 Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking.
 
+## Completion notifications
+
+Set `downloadCompletedNotificationText` on `download()` to show a localized system notification when a file finishes and the user granted notification permission. See [Getting Started](/docs/plugins/downloader/getting-started/#example-completion-notification) for a full example.
+
 ## Core Capabilities
 
 - `download` - Start a new download task.
 - `pause` - Pause an active download. Download can be resumed later from the same position.
 - `resume` - Resume a paused download. Continues from where it was paused.
 - `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.
+- `downloadCompletedNotificationText` (optional on `download`) - Show a localized system notification when a download succeeds and notification permission is granted.
 
 ## Public API
 
