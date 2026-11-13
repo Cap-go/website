@@ -28,7 +28,7 @@ Capacitor plugin for downloading files with background support. Provides resumab
 
 <Aside type="tip" title="Android OkHttp engine (upcoming release)">
 
-Opt in to **OkHttp** for downloads into app-private storage (`cache/...`, `files/...`). Use `androidHttpEngine: 'auto'` (default) or `'okhttp'`, and `notification: 'hidden'` for silent transfers with `downloadProgress` events. When `androidHttpEngine` is `'auto'`, `public-downloads/...` and other relative paths under app external files use DownloadManager. If app external files storage is unavailable, those other relative paths fall back to internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths. OkHttp transfers run in the app process and do not continue after the process is killed. This API is not in the current npm package; it ships in the next release. See [Android OkHttp engine](/docs/plugins/downloader/getting-started/#android-okhttp-engine).
+The **current release** keeps DownloadManager for every destination (including `cache/...` and `files/...` under app external files). Opt in to **OkHttp** for true app-private storage by setting `androidHttpEngine` to `'auto'` or `'okhttp'`, then use `cache/...` or `files/...` for internal dirs. `notification: 'hidden'` hides DownloadManager progress UI; `downloadCompletedNotificationText` can still alert on success. When `androidHttpEngine` is `'auto'`, `public-downloads/...` and other relative paths under app external files use DownloadManager. OkHttp transfers run in the app process and do not continue after the process is killed. This API is not in the current npm package; it ships in the next release. See [Android OkHttp engine](/docs/plugins/downloader/getting-started/#android-okhttp-engine).
 
 </Aside>
 
