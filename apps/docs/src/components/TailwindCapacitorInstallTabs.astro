@@ -1,22 +1,7 @@
 ---
-import {
-  tailwindCapacitorAngularRegistryBase,
-  tailwindCapacitorCoreVueItems,
-  tailwindCapacitorReactRegistryBase,
-  tailwindCapacitorVueRegistryUrl,
-} from '../../../shared/config/tailwindCapacitorRegistry'
+import { buildTailwindCapacitorInstallCommands } from '../../../shared/tailwindCapacitorInstallCommands'
 
-const vueCore = tailwindCapacitorCoreVueItems.map((slug) => ({
-  command: `npx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl(slug)}`,
-}))
-
-const reactCore = tailwindCapacitorCoreVueItems.map((slug) => ({
-  command: `npx shadcn@latest add ${tailwindCapacitorReactRegistryBase}/${slug}.json`,
-}))
-
-const angularCore = tailwindCapacitorCoreVueItems.map((slug) => ({
-  command: `npx @spartan-ng/cli@latest add ${tailwindCapacitorAngularRegistryBase}/${slug}.json`,
-}))
+const { vueCore, vueComponent, reactCore, angularCore } = buildTailwindCapacitorInstallCommands()
 ---
 
 <div class="tc-install-tabs not-content" data-tc-install-tabs>
@@ -37,7 +22,7 @@ const angularCore = tailwindCapacitorCoreVueItems.map((slug) => ({
       ))}
       <li>
         <pre>
-          <code>{`npx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl('capacitor-button')}`}</code>
+          <code>{vueComponent.command}</code>
         </pre>
       </li>
     </ul>

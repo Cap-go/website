@@ -1,33 +1,10 @@
 ---
 import CommandCode from '@/components/CommandCode.astro'
-import {
-  tailwindCapacitorAngularRegistryBase,
-  tailwindCapacitorCoreVueItems,
-  tailwindCapacitorReactRegistryBase,
-  tailwindCapacitorVueRegistryUrl,
-} from '../../../../shared/config/tailwindCapacitorRegistry'
+import { buildTailwindCapacitorInstallCommands } from '../../../../shared/tailwindCapacitorInstallCommands'
 
 const { class: className = '' } = Astro.props
 
-const vueCore = tailwindCapacitorCoreVueItems.map((slug) => ({
-  slug,
-  command: `bunx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl(slug)}`,
-}))
-
-const vueComponent = {
-  slug: 'capacitor-button',
-  command: `bunx shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl('capacitor-button')}`,
-}
-
-const reactCore = tailwindCapacitorCoreVueItems.map((slug) => ({
-  slug,
-  command: `npx shadcn@latest add ${tailwindCapacitorReactRegistryBase}/${slug}.json`,
-}))
-
-const angularCore = tailwindCapacitorCoreVueItems.map((slug) => ({
-  slug,
-  command: `npx @spartan-ng/cli@latest add ${tailwindCapacitorAngularRegistryBase}/${slug}.json`,
-}))
+const { vueCore, vueComponent, reactCore, angularCore } = buildTailwindCapacitorInstallCommands({ vueCli: 'bunx' })
 ---
 
 <div class:list={['rounded-2xl border border-white/10 bg-gray-950/70', className]} data-tc-install-tabs>
