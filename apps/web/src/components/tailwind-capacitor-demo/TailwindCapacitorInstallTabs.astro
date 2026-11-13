@@ -52,25 +52,7 @@ const { vueCore, vueComponent, reactCore, angularCore } = buildTailwindCapacitor
 </div>
 
 <script>
+  import { bindTailwindCapacitorInstallTabs } from '../../../../shared/tailwindCapacitorInstallTabs.client'
   const root = document.querySelector('[data-tc-install-tabs]')
-  if (root) {
-  root.querySelectorAll('[data-tab]').forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const id = (tab as HTMLButtonElement).dataset.tab
-      if (!id) return
-      root.querySelectorAll('[data-tab]').forEach((btn) => {
-        const active = (btn as HTMLButtonElement).dataset.tab === id
-        btn.setAttribute('aria-selected', String(active))
-        btn.classList.toggle('border-blue-400/40', active)
-        btn.classList.toggle('text-white', active)
-        btn.classList.toggle('border-white/15', !active)
-        btn.classList.toggle('text-gray-300', !active)
-      })
-      root.querySelectorAll('[data-panel]').forEach((panel) => {
-        const show = (panel as HTMLElement).dataset.panel === id
-        panel.classList.toggle('hidden', !show)
-      })
-    })
-  })
-  }
+  if (root instanceof HTMLElement) bindTailwindCapacitorInstallTabs(root, 'web')
 </script>

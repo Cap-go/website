@@ -22,7 +22,7 @@ if (
   try {
     const existing = JSON.parse(readFileSync(manifestPath, 'utf8'))
     if (existing.commit === commit) {
-      console.log(`tailwind-capacitor snapshot already at commit ${commit.slice(0, 7)}; skip sync`)
+      console.log('tailwind-capacitor snapshot already at pinned commit; skip sync')
       process.exit(0)
     }
   } catch {
@@ -59,7 +59,7 @@ await Promise.all(
     for (const file of item.files ?? []) {
       const content = file.content
       if (typeof content !== 'string') {
-        console.warn(`Skip ${entry.name}: missing inline content for ${file.path}`)
+        console.warn('Skip registry item with missing inline content')
         continue
       }
       const target = file.target ?? file.path

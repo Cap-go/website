@@ -267,15 +267,15 @@ function tableWithHeaderCell(label) {
   })
 }
 
+function tableBodyRowCells(...labels) {
+  return h(TableRow, {}, {
+    default: () => labels.map((label) => h(TableCell, {}, { default: () => label })),
+  })
+}
+
 function tableWithBodyCells(...labels) {
   return h(Table, {}, {
-    default: () =>
-      h(TableBody, {}, {
-        default: () =>
-          h(TableRow, {}, {
-            default: () => labels.map((label) => h(TableCell, {}, { default: () => label })),
-          }),
-      }),
+    default: () => h(TableBody, {}, { default: () => tableBodyRowCells(...labels) }),
   })
 }
 
