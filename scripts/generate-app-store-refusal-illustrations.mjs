@@ -205,7 +205,7 @@ const drawers = {
 const maxVariants = {
   '4-3': 11,
   '2-1': 6,
-  'endless-review': 13,
+  'endless-review': 6,
   '2-4-5': 1,
   'account-termination': 2,
   '4-2-6': 1,
