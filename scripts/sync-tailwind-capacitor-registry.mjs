@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -13,6 +13,22 @@ if (!commitMatch) {
 const commit = commitMatch[1]
 
 const snapshotRoot = join(repoRoot, 'apps/web/src/tailwind-capacitor-snapshot')
+const manifestPath = join(snapshotRoot, 'registry-manifest.json')
+if (
+  !process.env.TC_REGISTRY_FORCE_SYNC &&
+  existsSync(manifestPath) &&
+  existsSync(join(snapshotRoot, 'capacitor/index.js'))
+) {
+  try {
+    const existing = JSON.parse(readFileSync(manifestPath, 'utf8'))
+    if (existing.commit === commit) {
+      console.log(`tailwind-capacitor snapshot already at commit ${commit.slice(0, 7)}; skip sync`)
+      process.exit(0)
+    }
+  } catch {
+    // stale or corrupt manifest, continue with full sync
+  }
+}
 const registryJsonUrl = `https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/${commit}/registry.json`
 const itemBaseUrl = `https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/${commit}/public/r`
 

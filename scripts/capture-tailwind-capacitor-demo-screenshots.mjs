@@ -22,11 +22,12 @@ const viewports = [
   { prefix: 'mobile', width: 390, height: 844 },
 ]
 
+const shots = viewports.flatMap((viewport) => combos.map((combo) => ({ viewport, combo })))
+
 async function applyTheme(page, platform, dark) {
   const root = page.locator('[data-tc-demo-controls]')
   await root.locator(`[data-tc-platform="${platform}"]`).click()
   await root.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click()
-  const iframe = page.locator('#tc-demo-iframe')
   await page.waitForFunction(
     ({ platform: p, dark: d }) => {
       const frame = document.getElementById('tc-demo-iframe')
@@ -45,31 +46,33 @@ async function applyTheme(page, platform, dark) {
   await page.waitForTimeout(400)
 }
 
+async function captureShot(browser, { viewport, combo }) {
+  const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } })
+  try {
+    await page.goto(`${baseUrl}${demoPath}`, { waitUntil: 'networkidle' })
+    await applyTheme(page, combo.platform, combo.dark)
+    const fileName = `${viewport.prefix}-${combo.tag}.png`
+    const filePath = join(outDir, fileName)
+    await page.screenshot({ path: filePath, fullPage: true })
+    const buffer = await readFile(filePath)
+    const sha256 = createHash('sha256').update(buffer).digest('hex')
+    return { fileName, sha256 }
+  } finally {
+    await page.close()
+  }
+}
+
 async function main() {
   await mkdir(outDir, { recursive: true })
   const browser = await chromium.launch()
-  const manifest = []
   try {
-    for (const viewport of viewports) {
-      for (const combo of combos) {
-        const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } })
-        await page.goto(`${baseUrl}${demoPath}`, { waitUntil: 'networkidle' })
-        await applyTheme(page, combo.platform, combo.dark)
-        const fileName = `${viewport.prefix}-${combo.tag}.png`
-        const filePath = join(outDir, fileName)
-        await page.screenshot({ path: filePath, fullPage: true })
-        const buffer = await readFile(filePath)
-        const sha256 = createHash('sha256').update(buffer).digest('hex')
-        manifest.push({ fileName, sha256 })
-        await page.close()
-      }
-    }
+    const manifest = await Promise.all(shots.map((shot) => captureShot(browser, shot)))
+    const manifestPath = join(outDir, 'sha256.json')
+    await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
+    console.log(JSON.stringify({ outDir, manifest }, null, 2))
   } finally {
     await browser.close()
   }
-  const manifestPath = join(outDir, 'sha256.json')
-  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
-  console.log(JSON.stringify({ outDir, manifest }, null, 2))
 }
 
 main().catch((error) => {

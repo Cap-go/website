@@ -16,7 +16,7 @@
   "scripts": {
     "validate:agent-skills": "bun ../../scripts/validate-agent-skills-digests.mjs",
     "astro": "astro",
-    "dev": "NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} astro dev",
+    "dev": "cd ../.. && bun run sync:tailwind-capacitor-registry && cd apps/web && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} astro dev",
     "start": "NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} astro dev",
     "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs",
     "build": "bun run clean:build-cache && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} BUILD_CONCURRENCY=${BUILD_CONCURRENCY:-1} UV_THREADPOOL_SIZE=${UV_THREADPOOL_SIZE:-16} astro build && rm -rf dist/.prerender",
