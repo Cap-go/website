@@ -48,7 +48,8 @@ export function buildDocBreadcrumbs(pathname: string, pageTitle: string, siteOri
   }
 
   const sectionKey = segments[1]
-  const sectionPath = withTrailingSlash(`/docs/${sectionKey}`)
+  const sectionPath =
+    sectionKey === 'getting-started' ? '/docs/getting-started/quickstart/' : withTrailingSlash(`/docs/${sectionKey}`)
   const section: DocBreadcrumb = {
     name: formatSegment(sectionKey),
     url: new URL(sectionPath, siteOrigin).href,
