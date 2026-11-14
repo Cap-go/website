@@ -56,13 +56,15 @@ const task = await CapacitorDownloader.download({
 
 For several large offline assets while users switch apps, combine private destinations, iOS background session wiring, optional iOS 26 continued processing, and OkHttp progress notifications on Android.
 
+Install `@capgo/capacitor-downloader` at **8.8.0** or newer before you use these options.
+
 Plugin change: [capacitor-downloader#116](https://github.com/Cap-go/capacitor-downloader/pull/116). Website docs: [website#1462](https://github.com/Cap-go/website/pull/1462).
 
 **iOS private paths:** use `files/...`, `cache/...`, or `private/...` instead of ordinary relative paths under Documents.
 
 **iOS lifecycle:** warm up sessions at launch and forward `handleEventsForBackgroundURLSession` through `CapacitorDownloaderLifecycle` (see the plugin README on GitHub).
 
-**iOS 26+:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`) and add `CapacitorDownloader.continuedProcessing.` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`.
+**iOS 26+:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`) and add `$(PRODUCT_BUNDLE_IDENTIFIER).CapacitorDownloader.continuedProcessing.*` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`.
 
 **Android OkHttp:** with `androidHttpEngine: 'auto'` or `'okhttp'`, `notification: 'progress'` or `'completed'` shows an ongoing progress notification while the transfer runs. The plugin manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and a `dataSync` foreground service for Android 14 and later. It also merges `POST_NOTIFICATIONS`; on Android 13 and later your app must request that permission at runtime before notifications appear.
 
@@ -428,6 +430,14 @@ export interface DownloadOptions {
    * Requires notification permission on iOS and Android.
    */
   downloadCompletedNotificationText?: string;
+  /**
+   * iOS 26 and later: opt in to a BGContinuedProcessingTask (since 8.8.0).
+   */
+  iosContinuedProcessingTitle?: string;
+  /**
+   * Optional subtitle for the iOS 26 continued-processing task (since 8.8.0).
+   */
+  iosContinuedProcessingSubtitle?: string;
   /**
    * Multi-file batches use `files` on DownloadBatchOptions instead (since 8.7.0).
    */
