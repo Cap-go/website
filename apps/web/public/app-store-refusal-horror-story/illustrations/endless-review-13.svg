@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="iPad paywall infinite spinner across three fourteen day review rounds">
+  <title>iPad paywall infinite spinner across three fourteen day review rounds</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="88" y="32" width="144" height="112" rx="14" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <rect x="104" y="44" width="24" height="8" rx="4" fill="#374151"/>
+  <text x="112" y="38" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">iPad</text>
+  <rect x="120" y="76" width="80" height="48" rx="8" fill="#0F172A" stroke="#44BCFF" stroke-width="1.5"/>
+  <circle cx="160" cy="100" r="18" fill="none" stroke="#44BCFF" stroke-width="3" stroke-dasharray="14 28" opacity="0.85"/>
+  <rect x="128" y="132" width="64" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="24" y="156" width="72" height="32" rx="8" fill="#111827" stroke="#F87171" stroke-width="2"/>
+  <text x="36" y="176" fill="#F87171" font-family="system-ui,sans-serif" font-size="9" font-weight="600">round 1</text>
+  <rect x="108" y="156" width="72" height="32" rx="8" fill="#111827" stroke="#F87171" stroke-width="2"/>
+  <text x="120" y="176" fill="#F87171" font-family="system-ui,sans-serif" font-size="9" font-weight="600">round 2</text>
+  <rect x="192" y="156" width="72" height="32" rx="8" fill="#111827" stroke="#A3E635" stroke-width="2"/>
+  <text x="204" y="176" fill="#A3E635" font-family="system-ui,sans-serif" font-size="9" font-weight="600">round 3</text>
+  <rect x="248" y="48" width="56" height="56" rx="10" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <text x="276" y="72" text-anchor="middle" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="14" font-weight="700">37</text>
+  <text x="276" y="88" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">days</text>
+</svg>

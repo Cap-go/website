@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Three apps submitted together rejected under 2.1 then 4.3(a)">
+  <title>Three apps submitted together rejected under 2.1 then 4.3(a)</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="24" y="52" width="72" height="112" rx="14" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <rect x="36" y="64" width="48" height="48" rx="10" fill="#374151"/>
+  <text x="52" y="136" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8" font-weight="600">2.1</text>
+  <rect x="104" y="52" width="72" height="112" rx="14" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <rect x="116" y="64" width="48" height="48" rx="10" fill="#374151"/>
+  <text x="132" y="136" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8" font-weight="600">2.1</text>
+  <rect x="184" y="52" width="72" height="112" rx="14" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <rect x="196" y="64" width="48" height="48" rx="10" fill="#374151"/>
+  <text x="212" y="136" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8" font-weight="600">2.1</text>
+  <path d="M60 48 L60 36 M132 48 L132 36 M204 48 L204 36 M60 36 L204 36" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+  <text x="132" y="28" text-anchor="middle" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="9" font-weight="600">10 days</text>
+  <rect x="40" y="168" width="240" height="22" rx="11" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="160" y="183" text-anchor="middle" fill="#EF4444" font-family="system-ui,sans-serif" font-size="10" font-weight="600">4.3(a) all three</text>
+  <path d="M160 164 L160 152" stroke="#EF4444" stroke-width="2" stroke-dasharray="3 3" opacity="0.6"/>
+  <circle cx="268" cy="44" r="16" fill="none" stroke="#44BCFF" stroke-width="2" opacity="0.45"/>
+  <text x="264" y="48" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="7" font-weight="600">x3</text>
+</svg>

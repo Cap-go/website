@@ -325,5 +325,13 @@
   "first-ios-app-four-rejections-37-days-crash-subscriptions-eula-paywall": null,
   "mac-screen-recorder-2-4-5-keystroke-overlay-removed-27-days": null,
   "iphone-app-reviewed-on-ipad-bottom-button-covered-content-2-1-a": null,
-  "stuck-three-weeks-waiting-for-review-unaccepted-agreements": null
+  "stuck-three-weeks-waiting-for-review-unaccepted-agreements": null,
+  "three-apps-2-1-after-ten-days-then-4-3-a-after-explaining": {
+    "src": "/app-store-refusal-horror-story/screenshots/three-apps-2-1-after-ten-days-then-4-3-a-after-explaining.webp",
+    "alt": "Guideline 4.3(a) Design Spam rejection notice saying the app shares a similar binary, metadata or concept with other apps",
+    "width": 945,
+    "height": 2048
+  },
+  "ipad-paywall-infinite-loading-three-rounds-37-days": null,
+  "weekly-subscription-price-review-paused-for-confirmation": null
 }
