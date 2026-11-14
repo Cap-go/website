@@ -74,7 +74,7 @@ If you prefer Manual Setup, install the plugin by running the following commands
 
        1. Add a **Wear OS module** to your Android project (same `applicationId` and signing as the phone app).
        2. Declare the **`capgo_watch`** capability in the wear module (see [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/)).
-       3. Implement Data Layer listeners on the watch using the plugin paths (`/capgo/message`, `/capgo/context`, and others).
+       3. Prefer the official Kotlin SDK in `watch-sdk/wearos`, or implement Data Layer listeners on the watch using the plugin paths (`/capgo/message`, `/capgo/context`, and others).
 
        The phone plugin registers Wearable API listeners when it loads. Use `getInfo()` to check connected nodes and whether the watch app is detected.
 
@@ -163,6 +163,57 @@ await CapgoWatch.sendMessage({
   data: { action: 'refresh', timestamp: Date.now() }
 });
 ```
+
+
+## Phone to watch replies and received state
+
+These APIs ship in [capacitor-watch#36](https://github.com/Cap-go/capacitor-watch/pull/36). The plugin [README promo](https://github.com/Cap-go/capacitor-watch#phone-to-watch-replies-and-getreceivedstate) covers the same features.
+
+### Phone to watch replies
+
+`sendMessage` is one-way by default. Pass `expectsReply: true` to wait for the watch to reply. The promise resolves with `{ reply }`. `reply` is the watch payload, or `null` when the watch returned an empty reply.
+
+On iOS this uses the WatchConnectivity `replyHandler`. On Android the phone sends on `/capgo/message/withreply`. Prefer the official Kotlin SDK in `watch-sdk/wearos`, which reads that envelope and replies on `/capgo/reply/{callbackId}`. The manual module in [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/) does not handle `/capgo/message/withreply` unless you add that handler. The watch can include `watchRequestId` in the payload so concurrent replies stay correlated.
+
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+const info = await CapgoWatch.getInfo();
+if (!info.isReachable) {
+  throw new Error('Watch is not reachable for interactive messaging');
+}
+
+const { reply } = await CapgoWatch.sendMessage({
+  data: {
+    action: 'getStatus',
+    watchRequestId: 'status-1',
+  },
+  expectsReply: true,
+});
+
+console.log('Watch reply:', reply);
+```
+
+Leave `expectsReply` omitted or `false` when you do not need a reply. The method then resolves with no value, as before.
+
+### getReceivedState()
+
+`applicationContextReceived` fires when a new context arrives. If your listener was not registered yet, call `getReceivedState()` to read the last context the plugin already stored.
+
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+const { context } = await CapgoWatch.getReceivedState();
+if (context) {
+  console.log('Last context from the watch:', context);
+}
+```
+
+On iOS this is `WCSession.receivedApplicationContext`. On Android it is the last persisted `/capgo/context` DataItem. On web the method resolves `{ context: null }`.
+
+### Background replay on Android
+
+When a Wear OS event arrives and no JavaScript listener is registered yet, the phone plugin persists the event and replays it once a listener is added. That covers messages, application context, user info, and reachability. Register listeners early in app startup so replayed events are handled.
 
 ## Example: updateApplicationContext
 
@@ -267,6 +318,7 @@ Send an interactive message to the watch. Requires watch to be reachable.
 
 **Parameters:**
 - `data`: Object - The data to send to the watch
+- `expectsReply`: boolean (optional, default `false`) - When `true`, wait for a watch reply and resolve with `{ reply }`
 
 #### `updateApplicationContext(options: UpdateContextOptions)`
 Update application context. Only latest value is kept.
@@ -286,6 +338,14 @@ Reply to a message that requested a response.
 **Parameters:**
 - `callbackId`: string - The callback ID from messageReceivedWithReply event
 - `data`: Object - The reply data
+
+#### `getReceivedState()`
+Return the last application context received from the watch.
+
+**Returns:** `ReceivedState` object with:
+- `context`: Object or null - The last context, or null if none is stored
+
+On web this resolves `{ context: null }`.
 
 #### `getInfo()`
 Get watch connectivity status.
@@ -308,7 +368,7 @@ Get the native plugin version.
 | `messageReceivedWithReply` | Message expecting a reply (includes callbackId) |
 | `applicationContextReceived` | Context update from watch |
 | `userInfoReceived` | User info transfer from watch |
-| `reachabilityChanged` | Watch connectivity changed (iOS only) |
+| `reachabilityChanged` | Watch connectivity changed (iOS and Android) |
 | `activationStateChanged` | Session activation state changed (iOS only) |
 
 ## Communication Patterns
@@ -317,6 +377,7 @@ Get the native plugin version.
 - Requires watch to be reachable
 - Best for interactive, time-sensitive communication
 - Fails immediately if watch is not available
+- Pass `expectsReply: true` to wait for a watch reply (see [Phone to watch replies and received state](#phone-to-watch-replies-and-received-state))
 
 ### Application Context (`updateApplicationContext`)
 - Latest value only - previous values are overwritten
@@ -345,7 +406,9 @@ See the [platform support table](/docs/plugins/watch/#platform-support) on the p
 - Requires Google Play services with Wear OS Data Layer (`play-services-wearable`, included with the plugin)
 - Phone and wear APKs must share the **same `applicationId`** and **signing key**
 - Watch app must advertise capability **`capgo_watch`**
-- Does **not** emit `reachabilityChanged` or `activationStateChanged`; poll `getInfo()` when needed
+- Emits `reachabilityChanged` when connected nodes change. Does **not** emit `activationStateChanged`; poll `getInfo()` for session-like state
+- Incoming events are persisted and replayed when JavaScript listeners are registered
+- Prefer the official Kotlin SDK in `watch-sdk/wearos`
 - Setup guide: [Creating a Wear OS app](/docs/plugins/watch/wear-os-app-setup/)
 
 ### Web
@@ -353,7 +416,7 @@ See the [platform support table](/docs/plugins/watch/#platform-support) on the p
 - Watch messaging is not supported in the browser
 - `getInfo()` resolves with `isSupported: false` and other fields at safe defaults
 - `getPluginVersion()` resolves with `{ version: "web" }`
-- `sendMessage`, `updateApplicationContext`, `transferUserInfo`, and `replyToMessage` reject with an unavailable error
+- `sendMessage`, `updateApplicationContext`, `transferUserInfo`, and `replyToMessage` reject with an unavailable error. `getReceivedState()` resolves `{ context: null }`.
 - `addListener` resolves a handle via Capacitor `WebPlugin`, but watch events are unsupported in the browser (callbacks never run)
 
 ## Common Use Cases
