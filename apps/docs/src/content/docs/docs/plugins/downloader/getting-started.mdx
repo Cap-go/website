@@ -68,7 +68,7 @@ await CapacitorDownloader.download({
 });
 ```
 
-On Android, pair `notification: 'hidden'` with `downloadCompletedNotificationText` when you do not want DownloadManager progress notifications but still want a completion alert. If Android ends the app process before the download completes, the completion alert is not shown, and `hidden` also suppresses the DownloadManager completion notification.
+On Android, pair `notification: 'hidden'` with `downloadCompletedNotificationText` when you do not want DownloadManager progress notifications but still want a completion alert. `hidden` is quiet for in-progress DownloadManager UI only. `downloadCompletedNotificationText` can still post a completion notification on success. If Android ends the app process before the download completes, the completion alert is not shown, and `hidden` also suppresses the DownloadManager completion notification.
 
 ## Example: pause and resume
 
@@ -92,10 +92,74 @@ const path =
 const info = await CapacitorDownloader.getFileInfo({ path });
 ```
 
+## Android OkHttp engine
+
+`androidHttpEngine` is available since **8.5.0**. Omit `androidHttpEngine` to keep the same default as releases before 8.5.0: DownloadManager with legacy destination paths, including `cache/...` and `files/...` under app external files.
+
+Set `'auto'` or `'okhttp'` only when you want app-private roots (`cache/...`, `files/...` under internal storage). With `androidHttpEngine: 'auto'`, **DownloadManager** is used for `public-downloads/...` and for other relative paths under app external files. If app external files storage is unavailable, those other relative paths fall back to app-private internal storage and `auto` selects OkHttp. `'okhttp'` rejects `public-downloads/...` paths.
+
+If you already use `cache/...` or `files/...` strings without `androidHttpEngine`, your files stay on app external storage. Opt in with `'auto'` or `'okhttp'` only when you intend to move those paths to internal cache or files dirs.
+
+### Choose `androidHttpEngine`
+
+| Value | When to use |
+| ----- | ----------- |
+| Omitted | When omitted, same as releases before 8.5.0: DownloadManager only, legacy destination paths for every relative string (including existing `cache/...` and `files/...` under app external files). Absolute and `file://` paths keep the 8.4.x behavior (nested under app external files). With `androidHttpEngine` `'auto'` or `'okhttp'`, absolute and `file://` paths are used as given. |
+| `'auto'` | OkHttp for `cache/...`, `files/...`, and absolute paths under internal cache/data/files; DownloadManager for other relative paths and `public-downloads/...`. If app external files storage is unavailable, other relative paths fall back to internal files storage and `auto` selects OkHttp. |
+| `'okhttp'` | Force OkHttp for app-private and internal destinations (sensitive offline packs, internal-only files). Requests to `public-downloads/...` are rejected. Transfers run in the app process and do not continue after the process is killed. |
+| `'downloadManager'` | Force system DownloadManager with legacy destination paths (same as omitting the option). |
+
+### Android `destination` prefixes
+
+| Prefix | Resolves to when `androidHttpEngine` is omitted (releases before 8.5.0) | Resolves to with `'auto'` or `'okhttp'` | `auto` engine |
+| ------ | ---------------------------------------------------------------------------- | --------------------------------------- | ------------- |
+| `cache/...` | App external files (`.../cache/...`) | App cache directory | OkHttp |
+| `files/...` | App external files (`.../files/...`) | App-private files directory | OkHttp |
+| `public-downloads/...` | App external files under `public-downloads/...` | Public Downloads folder | DownloadManager (`'okhttp'` rejects this prefix) |
+| Other relative paths | App external files directory | App external files (or internal fallback) | DownloadManager, or OkHttp when the internal fallback is used |
+
+### Example: private offline pack
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const progress = await CapacitorDownloader.addListener('downloadProgress', (event) => {
+  if (event.id === 'offline-pack') {
+    console.log(event.progress);
+  }
+});
+
+await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/pack.zip',
+  destination: 'files/offline/pack.zip',
+  androidHttpEngine: 'auto',
+  notification: 'hidden',
+});
+```
+
+OkHttp runs inside the app process. If Android kills that process, the download does not continue the way a DownloadManager transfer does. Internal `cache/...` and `files/...` destinations need `'auto'` or `'okhttp'`. For `public-downloads/...`, set `'auto'` when the transfer must outlive the app process. Omitting `androidHttpEngine` or setting `'downloadManager'` saves these files under app external files, not the public Downloads folder. For external-files paths, omit `androidHttpEngine` or set `'auto'` / `'downloadManager'` when the transfer must outlive the app process. Do not set `'okhttp'` for `public-downloads/...`; that request is rejected.
+
+### Notifications with OkHttp
+
+- `'hidden'`: no DownloadManager progress notification; use `downloadProgress` / `downloadCompleted` listeners (recommended for OkHttp). `downloadCompletedNotificationText` can still post on success.
+- `'completed'`: no notification during an OkHttp transfer. On success, the plugin may post one completion notification with title "Download complete". Failures do not post that OkHttp completion notification (`downloadFailed` still fires). If you also set `downloadCompletedNotificationText`, a successful download can show two notifications on Android. On Android 13 and later, the host app must request the `POST_NOTIFICATIONS` runtime permission. If that permission is denied, the plugin skips notifications (the download still finishes).
+- `'progress'`: same as `'hidden'` on the OkHttp path (DownloadManager still shows progress notifications).
+
+DownloadManager destinations continue to support `'completed'`, `'progress'`, and `'hidden'` as before.
+
+### OkHttp limits
+
+- At most 4 OkHttp transfers run at the same time. Additional OkHttp downloads wait until a slot is free.
+- HTTP 206 Partial Content is not supported. The OkHttp path fails that response (this plugin does not resume through range requests).
+- An HTTPS to HTTP redirect is not followed; the download fails.
+- With `network: 'wifi-only'`, the transfer is bound to Wi-Fi and fails if Wi-Fi drops, with no cellular fallback.
+- `stop()` cancels an in-flight OkHttp transfer and deletes the destination file, including when the transfer has already finished.
+
 ## Common pitfalls
 
-- **Storage destination**: pick a `destination` your app can read on each platform.
-- **Background**: downloads run on iOS and Android in the background. On Web, `download()` is not implemented; use a browser download flow instead.
+- **Storage destination**: pick a `destination` your app can read on each platform. On Android, use `cache/` or `files/` prefixes for app-private OkHttp downloads with `androidHttpEngine` `'auto'` or `'okhttp'`.
+- **Background**: downloads run on iOS and Android in the background. On Android, DownloadManager can continue after the app process is killed. OkHttp runs in the app process, so a download may stop if Android kills that process. On Web, `download()` is not implemented; use a browser download flow instead.
 - **Status**: use `checkStatus` while the app process is still alive. On iOS, task IDs are not restored after relaunch.
 
 ## API Overview
@@ -139,7 +203,7 @@ await CapacitorDownloader.resume({ id: 'id-123' });
 ### `stop`
 
 Stop and cancel a download permanently.
-Downloaded data will be deleted.
+Downloaded data will be deleted, including a file that already finished on the OkHttp path.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
