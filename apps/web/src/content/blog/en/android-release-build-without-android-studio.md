@@ -51,10 +51,12 @@ faq:
       only after backup, then adb install -r the release APK.
   - question: "Do I need Android Studio to build and install a release APK?"
     answer: >-
-      No. A JDK, the Android SDK platform-tools on your PATH, and the Gradle
-      wrapper in android/ are enough. Run assembleRelease or bundleRelease from a
-      terminal on Linux, Windows, or macOS, then adb install -r for on-device
-      tests before you upload an AAB to Play Console.
+      No. A JDK, the Android command line SDK with platform-tools, build-tools,
+      and the matching platform API, plus the Gradle wrapper in android/ are
+      enough. Set ANDROID_HOME or android/local.properties so Gradle finds the
+      SDK; platform-tools on PATH is for adb only. Run ./gradlew assembleRelease
+      for an installable APK (adb install -r). Run bundleRelease only when you
+      need an AAB for Play Console, not for adb install.
 ---
 
 Android Studio is a fine IDE, but it is not required to produce a store-ready Android build. The generated `android/` folder in a Capacitor project contains a Gradle wrapper that builds and signs from any terminal. That matters for Linux servers without a display, for Windows machines where Studio is slow, and for CI.
