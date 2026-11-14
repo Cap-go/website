@@ -58,6 +58,8 @@ Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is no
 
 Plugin change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107).
 
+On iOS, batch `stop()` deletes paths recorded via `recordMovedDestination` only while the plugin still tracks that batch (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`.
+
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
@@ -105,7 +107,7 @@ Call `stop()` from a user action (for example a Cancel button), not immediately 
 await CapacitorDownloader.stop({ id: 'update-bundle' });
 ```
 
-**`stop()` on a batch id (while the batch is still active):** On iOS, deletes every path stored via `recordMovedDestination` for that batch (including files that finished before `stop()`). Batch failure alone does not delete those paths; only `stop()` removes them. After `downloadCompleted` or `downloadFailed`, the batch record is gone and `stop({ id })` rejects with `Task not found`; delete any files you want removed yourself. On Android, removes active DownloadManager entries for in-flight children. Finished children stay on disk (completed batch files, including files finished before `stop()`).
+**`stop()` on a batch id:** On iOS, deletes paths recorded via `recordMovedDestination` only while the batch is still tracked by the plugin (running, paused, or restored after relaunch), including files that finished before that `stop()`. Batch failure alone does not delete those paths; only `stop()` removes them while the batch is tracked. Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched. The plugin rejects that later call with `Task not found` because the batch record is removed after success, failure, or `stop()`. Delete leftover files in your app after a failed batch when you want them removed. On Android, removes active DownloadManager entries for in-flight children while the batch is tracked; finished children stay on disk (completed batch files, including files finished before `stop()`).
 
 ### Batch platform notes
 
@@ -113,6 +115,7 @@ await CapacitorDownloader.stop({ id: 'update-bundle' });
 - **Pause and resume**: iOS supports `pause()` and `resume()` on the batch `id`. Android rejects `pause()` and `resume()` for every download, including single downloads and batches (use `stop()`).
 - **Process death**: on Android, batch state is memory-only and is lost when the process is killed (DownloadManager work may still finish, but the plugin does not rebuild batch progress). On iOS, batch metadata is persisted in `DownloadBatchStore` (UserDefaults) and restored when the plugin initializes (`DownloadBatchCoordinator`).
 - **Partial success on failure**: when one file fails, remaining transfers are cancelled; files that finished before the failure remain on disk on Android and iOS.
+- **iOS batch `stop()`**: deletes `recordMovedDestination` paths only while the batch is still tracked (running, paused, or restored after relaunch). After the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; older generations of the same id are never touched, and iOS rejects with `Task not found`.
 
 ## Example: completion notification
 
@@ -302,9 +305,11 @@ await CapacitorDownloader.resume({ id: 'id-123' });
 
 ### `stop`
 
-Stop and cancel a download permanently while the transfer is still tracked.
+Stop and cancel a download permanently.
 
-**Batch id (active batch only):** On iOS, deletes each path recorded by `recordMovedDestination` for that batch (including files that finished before `stop()`). Batch failure alone does not delete finished files. After `downloadCompleted` or `downloadFailed`, `stop({ id })` rejects with `Task not found`; remove kept files in your app. On Android, removes DownloadManager work for non-finished children; completed batch files stay on disk.
+**Batch id on iOS:** Deletes each path recorded by `recordMovedDestination` only while the batch is still tracked by the plugin (running, paused, or restored after relaunch). Batch failure alone does not delete finished files while the batch is tracked; only `stop()` removes recorded paths. Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and the plugin rejects with `Task not found`.
+
+**Batch id on Android:** Removes DownloadManager work for non-finished children while the batch is tracked. Completed batch files stay on disk (marked complete or `STATUS_SUCCESSFUL`), including files finished before `stop()`. After the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing on completed files; remove leftovers in your app when needed.
 
 **Single downloads:** Cancels the transfer. Single-file OkHttp downloads on Android still delete the destination file when stopped, including after finish. Other platform cleanup depends on the OS.
 
@@ -403,7 +408,7 @@ export interface DownloadOptions {
 
 ### `DownloadBatchOptions`
 
-Multi-file batch (since **8.7.0**, at most 32 files). Uses `files` only; `url` and `destination` are not allowed at the top level. Passing `url` and `files` together is rejected at runtime.
+Multi-file batch (since **8.7.0**, at most 32 files). Uses `files` only; `url` and `destination` are not allowed at the top level. Passing `url` and `files` together is rejected at runtime. On Android, batches use DownloadManager only; `download()` rejects if any file would use OkHttp. When one file fails, remaining transfers are cancelled; files that already finished successfully stay on disk. **`stop({ id })` on a batch id:** On iOS, deletes every path stored via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android, removes active DownloadManager entries for in-flight children while tracked; finished children stay on disk.
 
 ```typescript
 export interface DownloadBatchOptions {
