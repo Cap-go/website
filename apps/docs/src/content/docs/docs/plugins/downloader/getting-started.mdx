@@ -70,6 +70,30 @@ await CapacitorDownloader.download({
 
 On Android, pair `notification: 'hidden'` with `downloadCompletedNotificationText` when you do not want DownloadManager progress notifications but still want a completion alert. `hidden` is quiet for in-progress DownloadManager UI only. `downloadCompletedNotificationText` can still post a completion notification on success. If Android ends the app process before the download completes, the completion alert is not shown, and `hidden` also suppresses the DownloadManager completion notification.
 
+## Android DownloadManager notification labels
+
+Available since **8.6.0**. On Android, when the plugin uses the system DownloadManager (`androidHttpEngine` omitted, `'auto'` for an external-files destination, or `'downloadManager'`), you can set `title` and `description` on `download()` to control the text on the in-progress DownloadManager notification.
+
+- **Android DownloadManager**: non-empty `title` and `description` are passed to `DownloadManager.Request`. Empty or omitted values keep the platform default (the title often falls back to the destination file name).
+- **Android OkHttp**: both fields are ignored. Use `downloadProgress` listeners and optional `downloadCompletedNotificationText` instead.
+- **iOS**: both fields are ignored. iOS does not show a DownloadManager-style progress notification; use `downloadProgress` and optional `downloadCompletedNotificationText`.
+- **Web**: not supported.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+await CapacitorDownloader.download({
+  id: 'region-pack',
+  url: 'https://cdn.example.com/maps/europe.zip',
+  destination: 'downloads/europe.zip',
+  notification: 'progress',
+  title: 'Offline maps',
+  description: 'Downloading Europe region pack',
+});
+```
+
+Related plugin change: [capacitor-downloader#114](https://github.com/Cap-go/capacitor-downloader/pull/114).
+
 ## Example: pause and resume
 
 ```typescript
@@ -258,6 +282,16 @@ export interface DownloadOptions {
    * - `hidden`: shows no DownloadManager notification.
    */
   notification?: 'completed' | 'progress' | 'hidden';
+  /**
+   * Android DownloadManager progress notification title (since 8.6.0).
+   * Ignored on iOS, Web, and the OkHttp Android path.
+   */
+  title?: string;
+  /**
+   * Android DownloadManager progress notification description (since 8.6.0).
+   * Ignored on iOS, Web, and the OkHttp Android path.
+   */
+  description?: string;
   /**
    * Optional localized text for a system notification after a successful download.
    * Requires notification permission on iOS and Android.

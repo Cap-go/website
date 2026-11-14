@@ -32,6 +32,12 @@ Available since **8.5.0**. When `androidHttpEngine` is omitted, behavior matches
 
 </Aside>
 
+<Aside type="tip" title="Android DownloadManager notification labels (8.6.0)">
+
+Available since **8.6.0**. Set optional `title` and `description` on `download()` to customize the Android DownloadManager progress notification. When omitted or empty, the system keeps its default (often the destination file name). **Android only** on the DownloadManager path. iOS and Web ignore both fields. The OkHttp Android path ignores them as well. See [Android DownloadManager notification labels](/docs/plugins/downloader/getting-started/#android-downloadmanager-notification-labels).
+
+</Aside>
+
 ## Completion notifications
 
 Set `downloadCompletedNotificationText` on `download()` to show a localized system notification when a file finishes and the user granted notification permission. See [Getting Started](/docs/plugins/downloader/getting-started/#example-completion-notification) for a full example.
@@ -43,6 +49,7 @@ Set `downloadCompletedNotificationText` on `download()` to show a localized syst
 - `resume` - Resume a paused download. Continues from where it was paused.
 - `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.
 - `downloadCompletedNotificationText` (optional on `download`) - Show a localized system notification when a download succeeds and notification permission is granted.
+- `title` and `description` (optional on `download`, Android DownloadManager since 8.6.0) - Customize progress notification title and description. Ignored on iOS, Web, and OkHttp Android downloads.
 
 ## Public API
 
