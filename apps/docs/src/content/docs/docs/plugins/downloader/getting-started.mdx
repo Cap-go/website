@@ -54,7 +54,7 @@ const task = await CapacitorDownloader.download({
 
 ## Multi-file batch downloads
 
-Available since **8.7.0**. Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `files` on `download()` to run up to **32** transfers under one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
+Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `files` on `download()` to run up to **32** transfers under one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
 
 Plugin change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107).
 
@@ -107,9 +107,9 @@ await CapacitorDownloader.stop({ id: 'update-bundle' });
 
 ### Batch platform notes
 
-- **Android engine**: multi-file batches always use the system DownloadManager with legacy destination paths. `androidHttpEngine: 'auto'` or `'okhttp'` is rejected for batches (including when a path would otherwise select OkHttp on a single download).
+- **Android engine**: multi-file batches use DownloadManager only. `androidHttpEngine: 'okhttp'` is rejected. With `'auto'`, `download()` rejects when any file destination would select OkHttp (for example `cache/...` or `files/...`); legacy relative paths and `public-downloads/...` use DownloadManager and are accepted.
 - **Pause and resume**: iOS supports `pause()` and `resume()` on the batch `id`. Android rejects pause and resume for every download, including batches (use `stop()`).
-- **Process death**: batch metadata and in-flight progress live in memory. If the host process is killed, the plugin does not restore batch ids or per-file progress when the app returns (iOS may still deliver background URLSession events; Android DownloadManager work can continue, but the plugin does not rebuild batch progress until you start a new download).
+- **Process death**: batch metadata and in-flight progress are not restored automatically after the host process is killed (iOS may still deliver background URLSession events; Android DownloadManager work can continue, but the plugin does not rebuild batch progress until you start a new download).
 - **Partial success on failure**: when one file fails, remaining transfers are cancelled; files that finished before the failure remain on disk. `stop({ id })` on the batch id cancels and removes files the plugin recorded after successful writes (iOS).
 
 ## Example: completion notification
@@ -398,7 +398,7 @@ export interface DownloadBatchOptions {
   title?: string;
   description?: string;
   downloadCompletedNotificationText?: string;
-  /** Android: batches reject `'auto'` and `'okhttp'` */
+  /** Android: batches reject `'okhttp'`; `'auto'` rejects when any file would use OkHttp */
   androidHttpEngine?: 'auto' | 'okhttp' | 'downloadManager';
 }
 

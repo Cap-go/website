@@ -40,9 +40,9 @@ Available since **8.6.0**. Set optional `title` and `description` on `download()
 
 <Aside type="tip" title="Multi-file batch downloads (8.7.0)">
 
-Available since **8.7.0**. Pass `files` on `download()` to download up to 32 assets under one batch `id` with overall and per-file progress. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
+Available since **8.7.0** on iOS and Android (not Web). Pass `files` on `download()` to download up to 32 assets under one batch `id` with overall and per-file progress. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
 
-On Android, batches always use DownloadManager and reject `androidHttpEngine` `'auto'` and `'okhttp'`. Android rejects `pause()` and `resume()` for batches; iOS supports them on the batch id. Batch state is held in memory and is not restored after process death. When one file fails, remaining transfers cancel; files that already finished stay on disk.
+On Android, batches use DownloadManager only; `'okhttp'` is rejected, and `'auto'` is rejected when any file would use OkHttp. Android rejects `pause()` and `resume()` for batches; iOS supports them on the batch id. Batch progress is not restored automatically after process death. When one file fails, remaining transfers cancel; files that already finished stay on disk.
 
 </Aside>
 
