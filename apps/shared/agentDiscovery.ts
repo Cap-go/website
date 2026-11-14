@@ -1,5 +1,6 @@
 export const CAPGO_ORIGIN = 'https://capgo.app'
 export const CAPGO_API_ORIGIN = 'https://api.capgo.app'
+export const HOSTED_MCP_ORIGIN = 'https://mcp.capgo.app'
 export const OPENAPI_ASSET_PATH = '/.well-known/capgo-public-api-openapi.json'
 
 export const OPENAPI_ALIAS_PATHS = new Set(['/openapi.json', '/.well-known/openapi.json', '/api/openapi.json'])
@@ -7,7 +8,7 @@ export const OPENAPI_ALIAS_PATHS = new Set(['/openapi.json', '/.well-known/opena
 export const MCP_MANIFEST_PATHS = new Set(['/mcp.json', '/.well-known/mcp.json'])
 
 /** Authenticated account MCP server. capgo.app/mcp is its human-facing setup page. */
-export const HOSTED_MCP_URL = `${CAPGO_API_ORIGIN}/mcp`
+export const HOSTED_MCP_URL = HOSTED_MCP_ORIGIN
 export const PUBLIC_MCP_URL = `${CAPGO_ORIGIN}/mcp/public`
 export const MCP_DOCS_URL = `${CAPGO_ORIGIN}/docs/ai/mcp/`
 
@@ -105,6 +106,7 @@ export const OAUTH_ISSUER = CAPGO_ORIGIN
 export const OAUTH_AUTHORIZATION_SERVER_URL = `${OAUTH_ISSUER}/.well-known/oauth-authorization-server`
 /** Sources of the authorization server metadata that capgo.app serves at OAUTH_AUTHORIZATION_SERVER_URL, in order. */
 export const OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS = [
+  `${HOSTED_MCP_ORIGIN}/oauth/metadata`,
   `${CAPGO_API_ORIGIN}/mcp/oauth/metadata`,
   // API releases before /mcp/oauth/metadata existed served it only here.
   `${CAPGO_API_ORIGIN}/.well-known/oauth-authorization-server`,
@@ -135,7 +137,7 @@ Agents always act on behalf of a human Capgo account. Capgo has no anonymous or 
    - \`identity_endpoint\`: \`${AGENT_IDENTITY_ENDPOINT}\` (also published as \`register_uri\`, its auth.md v0.1 name)
    - \`claim_endpoint\`: \`${AGENT_CLAIM_ENDPOINT}\` (also published as \`claim_uri\`)
    - \`identity_types_supported\`: \`["service_auth", "identity_assertion"]\`, where \`identity_assertion\` only accepts \`verified_email\`, the pre-v0.6 form of the same email flow
-   - Poll \`${OAUTH_TOKEN_ENDPOINT}\` with \`${AGENT_AUTH_CLAIM_GRANT}\`. It is the same token endpoint as \`${CAPGO_API_ORIGIN}/mcp/oauth/token\` in the metadata; either URL works.
+   - Poll \`${OAUTH_TOKEN_ENDPOINT}\` with \`${AGENT_AUTH_CLAIM_GRANT}\`. It is the same token endpoint as \`${HOSTED_MCP_ORIGIN}/oauth/token\` in the metadata; either URL works.
 
 ## Step 2: Pick a method
 
@@ -255,7 +257,7 @@ The user can also delete the key at any time in the Capgo console.
 
 ### OAuth 2.1 for MCP clients
 
-Most MCP clients log in by themselves when you add \`${HOSTED_MCP_URL}\` as a Streamable HTTP server: dynamic client registration at \`${CAPGO_API_ORIGIN}/mcp/oauth/register\` (or a Client ID Metadata Document URL as \`client_id\`), \`authorization_code\` with PKCE \`S256\`, scope \`capgo\`. Setup per client: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
+Most MCP clients log in by themselves when you add \`${HOSTED_MCP_URL}\` as a Streamable HTTP server: dynamic client registration at \`${HOSTED_MCP_ORIGIN}/oauth/register\` (or a Client ID Metadata Document URL as \`client_id\`), \`authorization_code\` with PKCE \`S256\`, scope \`capgo\`. Setup per client: [${MCP_DOCS_URL}](${MCP_DOCS_URL})
 
 ### API key created by the user
 

@@ -18,7 +18,7 @@
     {
       "name": "capgo-cli-mcp",
       "type": "skill-md",
-      "description": "Connect to the hosted Capgo MCP server at api.capgo.app/mcp for account tools and docs search, or run the local Capgo CLI MCP server for bundle uploads and native builds.",
+      "description": "Connect to the hosted Capgo MCP server at mcp.capgo.app for account tools and docs search, or run the local Capgo CLI MCP server for bundle uploads and native builds.",
       "url": "/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
       "digest": "sha256:f8e2d28c261efe4e9021f2405f6b0b7acc7b3dcbd616380c849a0d45b2751a81"
     },

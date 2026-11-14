@@ -28,7 +28,7 @@ test('GET /.well-known/mcp.json points at the hosted MCP server', async () => {
   const response = await agentSurfaceResponse(new Request('https://capgo.app/.well-known/mcp.json'), mockAssetsEnv, '/.well-known/mcp.json')
   expect(response?.status).toBe(200)
   const body = await response?.json()
-  expect(body.transport).toEqual({ type: 'streamable-http', url: 'https://api.capgo.app/mcp' })
+  expect(body.transport).toEqual({ type: 'streamable-http', url: 'https://mcp.capgo.app' })
   expect(body.authentication.required).toBe(true)
   expect(body.authentication.schemes).toEqual(['oauth2', 'bearer'])
   expect(body.websiteUrl).toBe('https://capgo.app/mcp/')
@@ -43,9 +43,9 @@ test('manifest rejects non-GET methods', async () => {
 
 test('server card points at the hosted MCP server', () => {
   const card = JSON.parse(readFileSync(new URL('../public/.well-known/mcp/server-card.json', import.meta.url), 'utf8'))
-  expect(card.transport).toEqual({ type: 'streamable-http', url: 'https://api.capgo.app/mcp' })
+  expect(card.transport).toEqual({ type: 'streamable-http', url: 'https://mcp.capgo.app' })
   expect(card.authentication.required).toBe(true)
-  expect(card.instructions).toContain('https://api.capgo.app/mcp')
+  expect(card.instructions).toContain('https://mcp.capgo.app')
   expect(JSON.stringify(card)).not.toMatch(/"https:\/\/capgo\.app\/mcp"/)
 })
 
