@@ -28,6 +28,9 @@ const appleRejectionStoryBatchDefinitions = [
   { id: 'batch-18', label: 'Batch 18', publishedOn: '2026-11-07' },
   { id: 'batch-19', label: 'Batch 19', publishedOn: '2026-11-10' },
   { id: 'batch-20', label: 'Batch 20', publishedOn: '2026-11-11' },
+  { id: 'batch-21', label: 'Batch 21', publishedOn: '2026-11-12' },
+  { id: 'batch-22', label: 'Batch 22', publishedOn: '2026-11-13' },
+  { id: 'batch-23', label: 'Batch 23', publishedOn: '2026-11-14' },
 ] as const
 
 export const appleRejectionStoryBatches = appleRejectionStoryBatchDefinitions.map((batch) => ({
@@ -50,6 +53,7 @@ export const appleRejectionStoryTags: AppleRejectionStoryTag[] = [
   '5-6-4',
   '5-6',
   '2-5-19',
+  '2-4-5',
   '2-1',
   '2-3-6',
   '2-3-10',

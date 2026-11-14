@@ -12,6 +12,8 @@ on:
       - main
     paths:
       - 'apps/docs/**'
+      - 'scripts/repair_sitemap*'
+      - '.github/workflows/deploy-docs.yml'
       - 'apps/shared/**'
       - 'apps/web/public/**'
       - 'apps/web/src/config/plugins.ts'
@@ -32,6 +34,8 @@ jobs:
     steps:
       # actions/checkout v5
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          fetch-depth: 0
       # Typos run inside the build job: a separate job only added runner queue time before the build.
       # v1.44.0
       - uses: crate-ci/typos@631208b7aac2daa8b707f55e7331f9112b0e062d

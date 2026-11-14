@@ -160,9 +160,9 @@ Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destruc
 
 | Tool | Annotations | Notes |
 | ---- | ----------- | ----- |
-| `capgo_prepare_bundle_upload` | `destructiveHint: true` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
-| `capgo_prepare_build_credentials_upload` | `destructiveHint: true` | Creates a single-use signed upload URL for one app and platform. Confirm the app, platform and mode before calling. Omitting `mode` defaults to `replace`; `merge` preserves stored keys absent from the uploaded file. Stored credentials change only after the separate upload. |
-| `capgo_get_build_status` | `readOnlyHint: true` | Read-only poll on the hosted server (see below). Delete and overwrite tools keep `destructiveHint: true` as before. |
+| `capgo_prepare_bundle_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
+| `capgo_prepare_build_credentials_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Creates a single-use signed upload URL for one app and platform. Confirm the app, platform and mode before calling. Omitting `mode` defaults to `replace`; `merge` preserves stored keys absent from the uploaded file. Stored credentials change only after the separate upload. |
+| `capgo_get_build_status` | `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false` | Read-only poll on the hosted server. The public HTTP handler and CLI polls can persist state; see the distinction below. |
 
 ### Uploading native signing credentials
 
@@ -184,9 +184,9 @@ Check `isError` before consuming a result. Invalid upstream responses return an 
 
 ### Hosted MCP read-only build status
 
-On `https://api.capgo.app/mcp`, `capgo_get_build_status` calls the build status handler in-process with a read-only flag. It does not sync `build_requests`, record build minutes, emit webhooks, or cancel jobs that exceeded the app timeout. The JSON includes `persisted: false` on these polls.
+On `https://api.capgo.app/mcp`, the tool calls that handler in-process with `hostedMcpReadOnly: true`. Hosted polls skip those writes and return `persisted: false`. They do not sync `build_requests`, record build minutes, emit webhooks, or cancel jobs that exceeded the app timeout.
 
-The Capgo CLI, `GET /build/status`, and the [local CLI MCP server](/docs/cli/reference/mcp/) still persist on every status read. External callers cannot enable the read-only path over HTTP.
+The Capgo CLI, `GET /build/status`, and the [local CLI MCP server](/docs/cli/reference/mcp/) still persist on every status read. External callers cannot enable the hosted read-only path over HTTP.
 
 Responses include `diagnostic`, `poll_after_seconds: 15`, queue fields, and the same builder status fields as the REST endpoint. Build timestamps `started_at` and `completed_at` use Unix epoch milliseconds; `null` means the corresponding lifecycle event has not happened or its time is unavailable. When the builder still reports `running` past the app configured timeout, a read-only poll adds:
 

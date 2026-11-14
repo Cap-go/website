@@ -303,6 +303,17 @@ const pluginEntries = [
   ],
 ]
 
+/** @type {Map<string, string>} */
+export const pluginNames = new Map([['updater', updaterPluginSection.label]])
+for (const entry of pluginEntries) {
+  if (Array.isArray(entry)) {
+    pluginNames.set(String(entry[1]), String(entry[0]))
+  } else {
+    const overview = entry.items.find((item) => 'link' in item && /^\/docs\/plugins\/[^/]+\/$/.test(item.link))
+    if (overview && 'link' in overview) pluginNames.set(overview.link.split('/')[3], entry.label)
+  }
+}
+
 const pluginItems = [
   linkItem('Getting Started', '/docs/plugins/'),
   linkItem('Siri, Shortcuts, and widgets', '/docs/plugins/siri-shortcuts-widgets-and-intents/'),
