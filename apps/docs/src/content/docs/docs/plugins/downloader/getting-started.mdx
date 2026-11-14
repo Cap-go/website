@@ -52,6 +52,35 @@ const task = await CapacitorDownloader.download({
 });
 ```
 
+## Robust background downloads
+
+For several large offline assets while users switch apps, combine private destinations, iOS background session wiring, optional iOS 26 continued processing, and OkHttp progress notifications on Android.
+
+Plugin change: [capacitor-downloader#115](https://github.com/Cap-go/capacitor-downloader/pull/115).
+
+**iOS private paths:** use `files/...`, `cache/...`, or `private/...` instead of ordinary relative paths under Documents.
+
+**iOS lifecycle:** warm up sessions at launch and forward `handleEventsForBackgroundURLSession` through `CapacitorDownloaderLifecycle` (see the plugin README on GitHub).
+
+**iOS 26+:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`) and add `CapacitorDownloader.continuedProcessing.` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`.
+
+**Android OkHttp:** with `androidHttpEngine: 'auto'` or `'okhttp'`, `notification: 'progress'` or `'completed'` shows an ongoing progress notification while the transfer runs.
+
+```typescript
+await CapacitorDownloader.download({
+  id: 'offline-pack',
+  url: 'https://cdn.example.com/large-pack.zip',
+  destination: 'files/offline/large-pack.zip',
+  androidHttpEngine: 'auto',
+  notification: 'progress',
+  title: 'Offline pack',
+  iosContinuedProcessingTitle: 'Offline pack',
+  downloadCompletedNotificationText: 'Pack is ready',
+});
+```
+
+See also the [plugin repository README](https://github.com/Cap-go/capacitor-downloader/#robust-background-downloads-offline-packs).
+
 ## Multi-file batch downloads
 
 Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Up to **32** transfers share one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
