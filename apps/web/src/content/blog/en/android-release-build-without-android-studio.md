@@ -24,9 +24,11 @@ next_blog: ''
 faq:
   - question: "What is the adb command to install a release APK after assembleRelease?"
     answer: >-
-      From android/ after bunx cap sync android, run ./gradlew assembleRelease.
-      The signed file is app/build/outputs/apk/release/app-release.apk. Install
-      it with adb install -r app/build/outputs/apk/release/app-release.apk. The
+      Configure release signingConfig first (section 2). From android/ after
+      bunx cap sync android, run ./gradlew assembleRelease. With signing
+      configured the output is app/build/outputs/apk/release/app-release.apk;
+      without it you get app-release-unsigned.apk. Install with adb install -r
+      app/build/outputs/apk/release/app-release.apk after the APK is signed. The
       -r flag replaces an existing install while keeping app data when possible.
   - question: "What does adb install -r do on a release APK?"
     answer: >-
