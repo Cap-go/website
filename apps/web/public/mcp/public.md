@@ -56,7 +56,7 @@ later or use [the docs](https://capgo.app/docs/) directly.
 
 The public server cannot inspect or change accounts, apps, bundles, channels,
 builds, devices, API keys, or notifications. For those operations connect to
-**https://api.capgo.app/mcp** with OAuth or your own Capgo API key.
+**https://mcp.capgo.app** with OAuth or your own Capgo API key.
 See [auth.md](https://capgo.app/auth.md) and
 [MCP setup](https://capgo.app/docs/ai/mcp/).
 

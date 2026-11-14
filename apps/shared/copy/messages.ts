@@ -4622,7 +4622,7 @@ const messages = {
   solutions_cordova_to_capacitor_ai_skills_see_link: 'Capacitor Skills for AI Agents',
   solutions_cordova_to_capacitor_ai_section_help_title: 'Need the All-Inclusive Option?',
   solutions_cordova_to_capacitor_ai_section_mcp_body:
-    'After you log in with the Capgo CLI, run the local MCP server so your agent can list apps, upload bundles, manage channels, check native compatibility, and request native builds. Without a local install, connect your agent to the hosted MCP server at api.capgo.app/mcp to manage your account and search the docs.',
+    'After you log in with the Capgo CLI, run the local MCP server so your agent can list apps, upload bundles, manage channels, check native compatibility, and request native builds. Without a local install, connect your agent to the hosted MCP server at mcp.capgo.app to manage your account and search the docs.',
   solutions_cordova_to_capacitor_ai_section_mcp_title: 'Capgo MCP Server',
   solutions_cordova_to_capacitor_ai_section_help_body:
     'If app store blockers, plugin regressions, or the upgrade path for existing users worry you, our team can run the migration end to end.',
@@ -7185,7 +7185,7 @@ const messages = {
   best_ai_tools_capacitor_lifecycle_li5: 'Ship and maintain: live updates, staged rollouts, one-click rollback, and release health',
   best_ai_tools_capacitor_setup_title: 'Set it up in two minutes',
   best_ai_tools_capacitor_setup_p1:
-    'Install the skills with npx skills add Cap-go/capgo-skills, then add the hosted MCP server https://api.capgo.app/mcp to your agent and sign in. Ask your agent to build a feature, then publish it.',
+    'Install the skills with npx skills add Cap-go/capgo-skills, then add the hosted MCP server https://mcp.capgo.app to your agent and sign in. Ask your agent to build a feature, then publish it.',
   best_appflow_alternative_title: 'Best Ionic Appflow alternative',
   best_appflow_alternative_meta_description: 'Appflow is winding down. Compare live updates, native builds, and migration paths for Ionic and Capacitor apps.',
   best_appflow_alternative_hero_title: 'Best Appflow alternative for Ionic teams',
@@ -7332,13 +7332,13 @@ const messages = {
   voltbuilder_alt_faq_a4:
     'VoltBuilder Indy is $15/month and Pro is $37/month, for builds only. Capgo starts at $12/month billed yearly and includes native build time and live updates.',
   mcp_page_title: 'Capgo MCP for AI agents',
-  mcp_page_meta_description: 'Connect AI agents to the hosted Capgo MCP server at api.capgo.app/mcp with OAuth or an API key, and use the CLI MCP for local uploads and builds.',
+  mcp_page_meta_description: 'Connect AI agents to the hosted Capgo MCP server at mcp.capgo.app with OAuth or an API key, and use the CLI MCP for local uploads and builds.',
   mcp_page_hero_title: 'Model Context Protocol (MCP) on Capgo',
   mcp_page_hero_subtitle:
     'Connect Claude, ChatGPT, Cursor, and other AI assistants to your Capgo account and the Capgo docs with one remote MCP server, and to your project files through the CLI.',
   mcp_page_hosted_title: 'Hosted Capgo MCP server',
   mcp_page_hosted_p1:
-    'Paste https://api.capgo.app/mcp into Claude, ChatGPT, Cursor, VS Code, Lovable, or any remote MCP client. Nothing to install: sign in with OAuth and pick which organizations to share, or send a Capgo API key as a bearer token.',
+    'Paste https://mcp.capgo.app into Claude, ChatGPT, Cursor, VS Code, Lovable, or any remote MCP client. Nothing to install: sign in with OAuth and pick which organizations to share, or send a Capgo API key as a bearer token.',
   mcp_page_hosted_p2:
     'Over 60 tools cover accounts and organizations, apps, bundles, channels and rollouts, devices, statistics and Observe, native builds, webhooks, push notifications, and docs search, with the same permissions and audit logs as the public API.',
   mcp_page_hosted_cta: 'Hosted MCP setup guide',
@@ -7401,7 +7401,7 @@ const messages = {
   agents_hub_methods_subtitle: 'Most agents use more than one. Start with the one your agent supports, add the others later.',
   agents_hub_method_hosted_title: 'Hosted MCP',
   agents_hub_method_hosted_body:
-    'Paste https://api.capgo.app/mcp into your agent and sign in with OAuth. No install, no API key. Manages apps, channels, rollouts, rollbacks, stats, Observe, and build logs.',
+    'Paste https://mcp.capgo.app into your agent and sign in with OAuth. No install, no API key. Manages apps, channels, rollouts, rollbacks, stats, Observe, and build logs.',
   agents_hub_method_local_title: 'Local CLI MCP',
   agents_hub_method_local_body:
     'Runs npx @capgo/cli@latest mcp on your machine after login. Needed when the agent must read your project: upload a bundle or request a native build.',

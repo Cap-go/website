@@ -4934,11 +4934,11 @@
       },
       "CapgoOAuth": {
         "type": "oauth2",
-        "description": "OAuth 2.0 authorization code flow with PKCE (S256) and dynamic client registration (https://api.capgo.app/mcp/oauth/register). Issuer: https://capgo.app. The access token is a Capgo API key limited to the organizations the user selects on the consent screen; send it as a Bearer token.",
+        "description": "OAuth 2.0 authorization code flow with PKCE (S256) and dynamic client registration (https://mcp.capgo.app/oauth/register). Issuer: https://capgo.app. The access token is a Capgo API key limited to the organizations the user selects on the consent screen; send it as a Bearer token.",
         "flows": {
           "authorizationCode": {
-            "authorizationUrl": "https://api.capgo.app/mcp/oauth/authorize",
-            "tokenUrl": "https://api.capgo.app/mcp/oauth/token",
+            "authorizationUrl": "https://mcp.capgo.app/oauth/authorize",
+            "tokenUrl": "https://mcp.capgo.app/oauth/token",
             "scopes": {
               "capgo": "Act on the organizations the user selects on the consent screen, with the user's role in each of them."
             }

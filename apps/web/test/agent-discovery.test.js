@@ -28,7 +28,7 @@ test('auth.md documents agent audience, registration methods, and credential use
   expect(AUTH_MD_MARKDOWN).toContain('## Audience')
   expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/.well-known/oauth-protected-resource/mcp')
   expect(AUTH_MD_MARKDOWN).toContain('https://capgo.app/.well-known/oauth-authorization-server')
-  expect(AUTH_MD_MARKDOWN).toContain('https://api.capgo.app/mcp/oauth/register')
+  expect(AUTH_MD_MARKDOWN).toContain('https://mcp.capgo.app/oauth/register')
   expect(AUTH_MD_MARKDOWN).toContain('Authorization: Bearer')
   expect(AUTH_MD_MARKDOWN).toContain('x-api-key')
   expect(WHEN_TO_USE_MARKDOWN).toContain('https://capgo.app/auth.md')
@@ -93,8 +93,8 @@ test('OpenAPI aliases include the conventional audit paths', () => {
 })
 
 test('agent guidance distinguishes public discovery from the authenticated hosted MCP server', () => {
-  expect(HOSTED_MCP_URL).toBe('https://api.capgo.app/mcp')
-  expect(WHEN_TO_USE_MARKDOWN).toContain('https://api.capgo.app/mcp')
+  expect(HOSTED_MCP_URL).toBe('https://mcp.capgo.app')
+  expect(WHEN_TO_USE_MARKDOWN).toContain('https://mcp.capgo.app')
   expect(WHEN_TO_USE_MARKDOWN).toContain('https://capgo.app/mcp/public')
   expect(WHEN_TO_USE_MARKDOWN).toContain('without credentials')
   expect(WHEN_TO_USE_MARKDOWN).toContain('with OAuth or')

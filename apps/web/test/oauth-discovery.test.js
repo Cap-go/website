@@ -3,8 +3,8 @@ import { loadAuthorizationServerMetadata } from '../src/worker/oauth-discovery.t
 
 const upstream = {
   issuer: 'https://capgo.app',
-  authorization_endpoint: 'https://api.capgo.app/mcp/oauth/authorize',
-  token_endpoint: 'https://api.capgo.app/mcp/oauth/token',
+  authorization_endpoint: 'https://mcp.capgo.app/oauth/authorize',
+  token_endpoint: 'https://mcp.capgo.app/oauth/token',
   response_types_supported: ['code'],
   grant_types_supported: ['authorization_code'],
 }
@@ -14,7 +14,7 @@ const fakeFetch = (responses) => async (url) => {
   return new Response(JSON.stringify(body), { status })
 }
 
-const METADATA_URL = 'https://api.capgo.app/mcp/oauth/metadata'
+const METADATA_URL = 'https://mcp.capgo.app/oauth/metadata'
 const WELL_KNOWN_URL = 'https://api.capgo.app/.well-known/oauth-authorization-server'
 
 test('authorization server metadata comes from the API metadata endpoint for the capgo.app issuer', async () => {
