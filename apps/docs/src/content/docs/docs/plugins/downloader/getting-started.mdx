@@ -105,7 +105,7 @@ Call `stop()` from a user action (for example a Cancel button), not immediately 
 await CapacitorDownloader.stop({ id: 'update-bundle' });
 ```
 
-**`stop()` on a batch id:** iOS removes files recorded after successful writes (paths tracked via `recordMovedDestination`). Android removes active DownloadManager entries, which can delete in-progress partial files but leaves completed batch files on disk (Android skips completed children), including files that finished before `stop()`.
+**`stop()` on a batch id (while the batch is still active):** On iOS, deletes every path stored via `recordMovedDestination` for that batch (including files that finished before `stop()`). Batch failure alone does not delete those paths; only `stop()` removes them. After `downloadCompleted` or `downloadFailed`, the batch record is gone and `stop({ id })` rejects with `Task not found`; delete any files you want removed yourself. On Android, removes active DownloadManager entries for in-flight children. Finished children stay on disk (completed batch files, including files finished before `stop()`).
 
 ### Batch platform notes
 
@@ -302,7 +302,11 @@ await CapacitorDownloader.resume({ id: 'id-123' });
 
 ### `stop`
 
-Stop and cancel a download permanently. Downloaded data is deleted when the platform removes it. For a batch id, iOS removes files recorded after successful writes. Android skips completed children when stopping and removes active DownloadManager entries (completed batch files stay on disk on Android). Finished files stay on disk on both platforms only when the batch fails, not when you call `stop()`. Single-file OkHttp downloads on Android still delete the destination file when stopped, including after finish.
+Stop and cancel a download permanently while the transfer is still tracked.
+
+**Batch id (active batch only):** On iOS, deletes each path recorded by `recordMovedDestination` for that batch (including files that finished before `stop()`). Batch failure alone does not delete finished files. After `downloadCompleted` or `downloadFailed`, `stop({ id })` rejects with `Task not found`; remove kept files in your app. On Android, removes DownloadManager work for non-finished children; completed batch files stay on disk.
+
+**Single downloads:** Cancels the transfer. Single-file OkHttp downloads on Android still delete the destination file when stopped, including after finish. Other platform cleanup depends on the OS.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
