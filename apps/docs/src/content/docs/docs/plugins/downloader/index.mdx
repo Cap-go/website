@@ -42,7 +42,7 @@ Available since **8.6.0**. Set optional `title` and `description` on `download()
 
 Available since **8.7.0** on iOS and Android (not Web). Pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not pass `url` and `files` together. Up to 32 assets share one batch `id`. Progress uses 0 to 1 for overall and per-file values. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
 
-On Android, batches use DownloadManager; `download()` rejects if any file would use OkHttp (`'auto'` with extended roots is allowed when paths stay on DownloadManager). Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death; iOS restores batches from `DownloadBatchStore`. On failure or `stop()`, finished files stay on disk on both platforms (Android skips completed children).
+On Android, batches use DownloadManager; `download()` rejects if any file would use OkHttp (`'auto'` with extended roots is allowed when paths stay on DownloadManager). Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death; iOS restores batches from `DownloadBatchStore`. When a batch file fails, finished files stay on disk on both platforms. `stop()` on a batch id removes files recorded after successful writes on iOS; on Android it skips completed children and removes active DownloadManager work while keeping completed files on disk.
 
 </Aside>
 

@@ -105,7 +105,7 @@ Call `stop()` from a user action (for example a Cancel button), not immediately 
 await CapacitorDownloader.stop({ id: 'update-bundle' });
 ```
 
-**`stop()` on a batch id:** Files that already finished in the batch stay on disk on Android and iOS. Android skips completed children, removes active DownloadManager entries, and may delete in-progress partial files. iOS cancels remaining work without removing files that already finished.
+**`stop()` on a batch id:** iOS removes files recorded after successful writes (paths tracked via `recordMovedDestination`). Android removes active DownloadManager entries, which can delete in-progress partial files but leaves completed batch files on disk (Android skips completed children), including files that finished before `stop()`.
 
 ### Batch platform notes
 
@@ -302,7 +302,7 @@ await CapacitorDownloader.resume({ id: 'id-123' });
 
 ### `stop`
 
-Stop and cancel a download permanently. Downloaded data is deleted when the platform removes it. For a batch id, files that already finished stay on disk on Android and iOS; Android skips completed children when stopping. Single-file OkHttp downloads on Android still delete the destination file when stopped, including after finish.
+Stop and cancel a download permanently. Downloaded data is deleted when the platform removes it. For a batch id, iOS removes files recorded after successful writes. Android skips completed children when stopping and removes active DownloadManager entries (completed batch files stay on disk on Android). Finished files stay on disk on both platforms only when the batch fails, not when you call `stop()`. Single-file OkHttp downloads on Android still delete the destination file when stopped, including after finish.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
