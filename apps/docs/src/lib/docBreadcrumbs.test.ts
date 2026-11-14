@@ -14,6 +14,11 @@ test('buildDocBreadcrumbs for getting started section', () => {
   expect(crumbs[1].url).toBe('https://capgo.app/docs/getting-started/quickstart/')
 })
 
+test('buildDocBreadcrumbs for ai section uses mcp landing', () => {
+  const crumbs = buildDocBreadcrumbs('/docs/ai/mcp-events/', 'MCP Events', 'https://capgo.app')
+  expect(crumbs[1].url).toBe('https://capgo.app/docs/ai/mcp/')
+})
+
 test('buildDocBreadcrumbs for plugin getting started', () => {
   const crumbs = buildDocBreadcrumbs('/docs/plugins/sheets/getting-started/', 'Getting started', 'https://capgo.app')
   expect(crumbs[1].url).toBe('https://capgo.app/docs/plugins/sheets/')

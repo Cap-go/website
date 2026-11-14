@@ -13,6 +13,24 @@ const SECTION_LABELS: Record<string, string> = {
   'public-api': 'Public API',
   upgrade: 'Upgrade',
   webapp: 'Web app',
+  contributing: 'Contributing',
+}
+
+/** Canonical section hubs that return 200 (not bare `/docs/{section}/` when that path 404s). */
+const SECTION_LANDING: Record<string, string> = {
+  'getting-started': '/docs/getting-started/quickstart/',
+  cli: '/docs/cli/',
+  ai: '/docs/ai/mcp/',
+  builder: '/docs/builder/',
+  'live-updates': '/docs/live-updates/',
+  'public-api': '/docs/public-api/',
+  plugins: '/docs/plugins/',
+  webapp: '/docs/webapp/',
+  upgrade: '/docs/upgrade/from-v7-to-v8/',
+  contributing: '/docs/contributing/adding-plugins/',
+  faq: '/docs/faq/',
+  'how-to': '/docs/how-to/',
+  versioning: '/docs/versioning/',
 }
 
 const formatSegment = (segment: string) =>
@@ -48,8 +66,7 @@ export function buildDocBreadcrumbs(pathname: string, pageTitle: string, siteOri
   }
 
   const sectionKey = segments[1]
-  const sectionPath =
-    sectionKey === 'getting-started' ? '/docs/getting-started/quickstart/' : withTrailingSlash(`/docs/${sectionKey}`)
+  const sectionPath = SECTION_LANDING[sectionKey] ?? withTrailingSlash(`/docs/${sectionKey}`)
   const section: DocBreadcrumb = {
     name: formatSegment(sectionKey),
     url: new URL(sectionPath, siteOrigin).href,
