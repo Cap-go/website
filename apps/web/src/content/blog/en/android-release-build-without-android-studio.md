@@ -43,8 +43,10 @@ faq:
   - question: "How do I fix INSTALL_FAILED_UPDATE_INCOMPATIBLE when installing a release APK?"
     answer: >-
       The APK is signed with a different key than the app already on the phone,
-      often after switching from a debug build. Uninstall the old package with
-      adb uninstall your.application.id, then adb install -r the new release APK.
+      often after switching from a debug build. adb uninstall removes app data
+      unless you pass -k to keep data and cache directories. To preserve data,
+      sign the new APK with the same key as the installed build, or uninstall
+      only after backup, then adb install -r the release APK.
   - question: "Do I need Android Studio to build and install a release APK?"
     answer: >-
       No. A JDK, the Android SDK platform-tools on your PATH, and the Gradle
@@ -80,7 +82,7 @@ The **`-r`** flag reinstalls over an existing package with the same `application
 | Error or symptom | Likely cause | Fix |
 | --- | --- | --- |
 | `INSTALL_PARSE_FAILED_NO_CERTIFICATES` or unsigned output | No release `signingConfig` | Sign in Gradle or with `apksigner`, not `app-release-unsigned.apk` |
-| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | Different signing key than installed app (often debug vs release) | `adb uninstall <applicationId>` then `adb install -r` the release APK |
+| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | Different signing key than installed app (often debug vs release) | Sign with the same key as the installed app if you must keep data. Otherwise `adb uninstall <applicationId>` (data is removed; `adb uninstall -k` keeps data but cannot fix a key mismatch by itself) then `adb install -r` |
 | `INSTALL_FAILED_VERSION_DOWNGRADE` | Lower `versionCode` on a non-debuggable install | Bump `versionCode`, uninstall first, or use `adb install -r -d` only on debuggable packages |
 | `adb: device unauthorized` or no devices | USB debugging off or RSA prompt not accepted | Enable [Developer options and USB debugging](/blog/how-to-enable-developer-options-on-android/), unlock the phone, run `adb devices` |
 | `more than one device/emulator` | Several devices attached | `adb devices` then `adb -s SERIAL install -r path/to/app-release.apk` |
