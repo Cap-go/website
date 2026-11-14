@@ -52,6 +52,66 @@ const task = await CapacitorDownloader.download({
 });
 ```
 
+## Multi-file batch downloads
+
+Available since **8.7.0**. Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `files` on `download()` to run up to **32** transfers under one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
+
+Plugin change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107).
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const batchId = 'update-bundle';
+
+const progressListener = await CapacitorDownloader.addListener('downloadProgress', (event) => {
+  if (event.id !== batchId) {
+    return;
+  }
+  if (event.fileIndex != null) {
+    console.log(`file ${event.fileIndex} ${event.fileProgress}, overall ${event.progress}`);
+  }
+});
+
+const completedListener = await CapacitorDownloader.addListener('downloadCompleted', (event) => {
+  if (event.id === batchId) {
+    console.log('batch done');
+  }
+});
+
+const failedListener = await CapacitorDownloader.addListener('downloadFailed', (error) => {
+  if (error.id === batchId) {
+    const which = error.fileIndex != null ? `file ${error.fileIndex}` : 'batch';
+    console.log(`${which} failed: ${error.error}`);
+  }
+});
+
+await CapacitorDownloader.download({
+  id: batchId,
+  files: [
+    { url: 'https://example.com/a.zip', destination: 'updates/a.zip' },
+    { url: 'https://example.com/b.zip', destination: 'updates/b.zip' },
+  ],
+  notification: 'hidden',
+});
+```
+
+`download()` resolves after the batch is enqueued, not when every file finishes. Listen for `downloadProgress`, `downloadCompleted`, and `downloadFailed` as shown above. `downloadProgress` may include `fileIndex` (0-based) and `fileProgress` (0 to 1) alongside overall `progress`. `downloadCompleted` fires once when every file succeeds. `downloadFailed` fires when any file in the batch fails; the payload may include optional `fileIndex`. Any failure cancels the remaining transfers. Files that already finished successfully stay on disk.
+
+### Example: cancel a batch
+
+Call `stop()` from a user action (for example a Cancel button), not immediately after `download()`:
+
+```typescript
+await CapacitorDownloader.stop({ id: 'update-bundle' });
+```
+
+### Batch platform notes
+
+- **Android engine**: multi-file batches always use the system DownloadManager with legacy destination paths. `androidHttpEngine: 'auto'` or `'okhttp'` is rejected for batches (including when a path would otherwise select OkHttp on a single download).
+- **Pause and resume**: iOS supports `pause()` and `resume()` on the batch `id`. Android rejects pause and resume for every download, including batches (use `stop()`).
+- **Process death**: batch metadata and in-flight progress live in memory. If the host process is killed, the plugin does not restore batch ids or per-file progress when the app returns (iOS may still deliver background URLSession events; Android DownloadManager work can continue, but the plugin does not rebuild batch progress until you start a new download).
+- **Partial success on failure**: when one file fails, remaining transfers are cancelled; files that finished before the failure remain on disk. `stop({ id })` on the batch id cancels and removes files the plugin recorded after successful writes (iOS).
+
 ## Example: completion notification
 
 When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. The plugin manifest already merges `POST_NOTIFICATIONS` on Android, so on Android 13 and later your app only needs to request it at runtime; on iOS request notification authorization before the download finishes. Tapping the notification reopens the app. On Android, the completion alert is still posted while your app is in the foreground. On iOS, a notification that arrives in the foreground is shown only if your app's `UNUserNotificationCenter` delegate presents it, so without a notifications plugin it is usually silent and `downloadCompleted` events are the reliable signal there.
@@ -95,6 +155,8 @@ await CapacitorDownloader.download({
 Related plugin change: [capacitor-downloader#114](https://github.com/Cap-go/capacitor-downloader/pull/114).
 
 ## Example: pause and resume
+
+iOS supports pause and resume for single downloads and batch ids. Android rejects `pause()` and `resume()` for every download, including batches.
 
 ```typescript
 await CapacitorDownloader.pause({ id: 'offline-pack' });
@@ -190,7 +252,7 @@ DownloadManager destinations continue to support `'completed'`, `'progress'`, an
 
 ### `download`
 
-Start a new download task.
+Start a new download task (single `url` and `destination`, or a multi-file batch with `files` since **8.7.0**).
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
@@ -199,6 +261,18 @@ const task = await CapacitorDownloader.download({
   id: 'my-download',
   url: 'https://example.com/file.pdf',
   destination: 'downloads/file.pdf'
+});
+```
+
+Batch (at most 32 files):
+
+```typescript
+await CapacitorDownloader.download({
+  id: 'update-bundle',
+  files: [
+    { url: 'https://example.com/a.zip', destination: 'updates/a.zip' },
+    { url: 'https://example.com/b.zip', destination: 'updates/b.zip' },
+  ],
 });
 ```
 
@@ -259,10 +333,23 @@ console.log(result);
 
 ## Type Reference
 
-### `DownloadOptions`
-Configuration options for starting a download.
+### `DownloadFileSpec`
+
+One file inside a batch (`files` array, since **8.7.0**).
+
 ```typescript
-export interface DownloadOptions {
+export interface DownloadFileSpec {
+  url: string;
+  destination: string;
+}
+```
+
+### `DownloadOptions`
+
+Single-file shape (`url` + `destination`) or batch shape (`files`, max 32 entries). Batch downloads require plugin **8.7.0** or newer.
+
+```typescript
+export interface DownloadSingleOptions {
   /** Unique identifier for this download task */
   id: string;
   /** URL of the file to download */
@@ -297,8 +384,30 @@ export interface DownloadOptions {
    * Requires notification permission on iOS and Android.
    */
   downloadCompletedNotificationText?: string;
+  androidHttpEngine?: 'auto' | 'okhttp' | 'downloadManager';
 }
+
+export interface DownloadBatchOptions {
+  id: string;
+  /** At most 32 files (DOWNLOAD_BATCH_MAX_FILES) */
+  files: DownloadFileSpec[];
+  headers?: { [key: string]: string };
+  network?: 'cellular' | 'wifi-only';
+  priority?: 'high' | 'normal' | 'low';
+  notification?: 'completed' | 'progress' | 'hidden';
+  title?: string;
+  description?: string;
+  downloadCompletedNotificationText?: string;
+  /** Android: batches reject `'auto'` and `'okhttp'` */
+  androidHttpEngine?: 'auto' | 'okhttp' | 'downloadManager';
+}
+
+export type DownloadOptions = DownloadSingleOptions | DownloadBatchOptions;
 ```
+
+### Events
+
+`downloadProgress` may include optional `fileIndex` and `fileProgress` for batches. `downloadFailed` includes `{ id, error, fileIndex? }`; for batches, `fileIndex` is set when the failing file is known.
 
 ### `DownloadTask`
 Represents the current state and progress of a download task.
