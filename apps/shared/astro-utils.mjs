@@ -95,6 +95,20 @@ export function getPageLastModDates() {
     if (!lastModMap.has(urlPath)) lastModMap.set(urlPath, committedAt)
   }
 
+  for (const [file, committedAt] of getPageCommitDates('src/content/docs')) {
+    if (!/\.mdx?$/.test(file) || !existsSync(file)) continue
+    const content = readFileSync(file, 'utf8')
+    const frontmatter = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? ''
+    const slug = frontmatter.match(/^slug:\s*['"]?([^'"\r\n]+)['"]?\s*$/m)?.[1]?.trim()
+    const route =
+      slug ??
+      file
+        .replace('src/content/docs/', '')
+        .replace(/\.mdx?$/, '')
+        .replace(/(?:^|\/)index$/, '')
+    lastModMap.set(`/${route.replace(/^\/+|\/+$/g, '')}/`, committedAt)
+  }
+
   return lastModMap
 }
 

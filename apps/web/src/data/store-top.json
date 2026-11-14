@@ -702,7 +702,7 @@
         "category": "BUSINESS"
       }
     ],
-    "usage": 9.96
+    "usage": 9.97
   },
   "capgo": {
     "apps": [
@@ -1407,7 +1407,7 @@
         "category": "Tools"
       }
     ],
-    "usage": 9.37
+    "usage": 9.38
   },
   "cordova": {
     "apps": [
@@ -3522,7 +3522,7 @@
         "category": "BUSINESS"
       }
     ],
-    "usage": 9.96
+    "usage": 9.97
   },
   "nativeScript": {
     "apps": [
@@ -4785,6 +4785,6 @@
         "category": "TRAVEL_AND_LOCAL"
       }
     ],
-    "usage": 0
+    "usage": 1.64
   }
 }

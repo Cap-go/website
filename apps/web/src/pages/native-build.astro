@@ -8,7 +8,7 @@ import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/con
 import Layout from '@/layouts/Layout.astro'
 import { Icon } from 'astro-icon/components'
 import m, { type MessageValues } from '@/copy/messages'
-import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
+import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
@@ -114,10 +114,10 @@ const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfi
   applicationSubCategory: 'Cloud iOS and Android builds for Capacitor apps',
   operatingSystem: 'iOS, Android',
   featureList: [
-    'Cloud iOS and Android builds without a Mac, typically in 2–3 minutes',
+    'Generally available production iOS and Android builds without a local Mac',
     'Code signing with App Store Connect API keys and Android keystores',
     'Upload to App Store Connect and Google Play',
-    'Trigger builds from the Capgo CLI or your existing CI',
+    'Trigger builds from the Capgo CLI, CI, or AI agents through local and hosted MCP',
     'Build time included in Capgo plans',
   ],
   aggregateRating: { ratingValue: ratingSummary.average, reviewCount: ratingSummary.count },
@@ -125,9 +125,37 @@ const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfi
   offers: { price: '12', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 })
 
+const faqs = [
+  { q: copy('native_build_v2_faq_availability_q'), a: copy('native_build_v2_faq_availability_a') },
+  { q: copy('native_build_v2_faq_ai_q'), a: copy('native_build_v2_faq_ai_a') },
+  {
+    q: copy('native_build_v2_faq_metrics_q'),
+    a: copy('native_build_v2_faq_metrics_a'),
+    href: getRelativeLocaleUrl(locale, 'builder-data/'),
+    linkLabel: copy('native_build_v2_faq_metrics_link'),
+  },
+  { q: copy('native_build_v2_faq_q1'), a: copy('native_build_v2_faq_a1') },
+  { q: copy('native_build_v2_faq_q2'), a: copy('native_build_v2_faq_a2') },
+  { q: copy('native_build_v2_faq_q3'), a: copy('native_build_v2_faq_a3') },
+  { q: copy('native_build_v2_faq_q4'), a: copy('native_build_v2_faq_a4') },
+  { q: copy('native_build_v2_faq_q5'), a: copy('native_build_v2_faq_a5') },
+  { q: copy('native_build_v2_faq_q6'), a: copy('native_build_v2_faq_a6') },
+  { q: copy('native_build_v2_faq_q7'), a: copy('native_build_v2_faq_a7') },
+  {
+    q: copy('native_build_v2_faq_q8'),
+    a: copy('native_build_v2_faq_a8'),
+    href: getRelativeLocaleUrl(locale, 'docs/builder/getting-started/'),
+    linkLabel: copy('native_build_v2_faq_a8_link'),
+  },
+  { q: copy('native_build_v2_faq_q9'), a: copy('native_build_v2_faq_a9') },
+]
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
-  additionalEntities: [softwareLdJson],
+  additionalEntities: [
+    softwareLdJson,
+    createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqs.map(({ q, a }) => ({ question: q, answer: a })) }),
+  ],
 })
 
 const content = {
@@ -221,23 +249,6 @@ const comparisonRows = [
 ]
 
 const docsShareUrl = getRelativeLocaleUrl(locale, 'docs/builder/github-actions/')
-
-const faqs = [
-  { q: copy('native_build_v2_faq_q1'), a: copy('native_build_v2_faq_a1') },
-  { q: copy('native_build_v2_faq_q2'), a: copy('native_build_v2_faq_a2') },
-  { q: copy('native_build_v2_faq_q3'), a: copy('native_build_v2_faq_a3') },
-  { q: copy('native_build_v2_faq_q4'), a: copy('native_build_v2_faq_a4') },
-  { q: copy('native_build_v2_faq_q5'), a: copy('native_build_v2_faq_a5') },
-  { q: copy('native_build_v2_faq_q6'), a: copy('native_build_v2_faq_a6') },
-  { q: copy('native_build_v2_faq_q7'), a: copy('native_build_v2_faq_a7') },
-  {
-    q: copy('native_build_v2_faq_q8'),
-    a: copy('native_build_v2_faq_a8'),
-    href: getRelativeLocaleUrl(locale, 'docs/builder/getting-started/'),
-    linkLabel: copy('native_build_v2_faq_a8_link'),
-  },
-  { q: copy('native_build_v2_faq_q9'), a: copy('native_build_v2_faq_a9') },
-]
 
 function annualMonthlyPrice(plan: Plan) {
   const price = Math.round(plan.price_y / 12)

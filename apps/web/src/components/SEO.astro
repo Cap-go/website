@@ -142,11 +142,7 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <link rel="canonical" href={canonicalString} />
 <link rel="ard" type="application/json" href="/.well-known/ard.json" />
 <link rel="ai-catalog" type="application/json" href="/.well-known/ai-catalog.json" />
-{
-  markdownAlternate && (
-    <link rel="alternate" type="text/markdown" href={new URL(markdownAlternate, baseUrl).toString()} />
-  )
-}
+{markdownAlternate && <link rel="alternate" type="text/markdown" href={new URL(markdownAlternate, baseUrl).toString()} />}
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
 <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
@@ -156,7 +152,9 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <!-- Hreflang tags for internationalization -->
 {alternateVersions &&
   alternateVersions.length > 0 &&
-  alternateVersions.map((version: { locale: string; url: string }) => <link rel="alternate" hreflang={version.locale} href={version.url} />)}
+  alternateVersions
+    .filter((version: { locale: string }) => version.locale === 'en')
+    .map((version: { locale: string; url: string }) => <link rel="alternate" hreflang={version.locale} href={version.url} />)}
 {alternateVersions && alternateVersions.length > 0 && (
   <link rel="alternate" hreflang="x-default" href={alternateVersions.find((v: { locale: string }) => v.locale === 'en')?.url || alternateVersions[0].url} />
 )}
@@ -216,4 +214,6 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta name="twitter:app:name:googleplay" content={appName} />
 
 <!-- @ts-ignore -->
-{toLdJsonBlocks(ldJSON).map((block) => <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />)}
+{toLdJsonBlocks(ldJSON).map((block) => (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />
+))}

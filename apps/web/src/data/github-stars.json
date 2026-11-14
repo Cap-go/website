@@ -13,7 +13,7 @@
   "https://github.com/Cap-go/capacitor-date-picker/": 2,
   "https://github.com/Cap-go/capacitor-device-info/": 4,
   "https://github.com/Cap-go/capacitor-device-integrity/": 0,
-  "https://github.com/Cap-go/capacitor-updater/": 885,
+  "https://github.com/Cap-go/capacitor-updater/": 887,
   "https://github.com/Cap-go/capgo/tree/main/packages/capacitor-notifications/": 213,
   "https://github.com/Cap-go/electron-updater/": 7,
   "https://github.com/Cap-go/cordova-updater/": 3,
@@ -50,7 +50,7 @@
   "https://github.com/Cap-go/capacitor-admob/": 14,
   "https://github.com/Cap-go/capacitor-alarm/": 15,
   "https://github.com/Cap-go/capacitor-android-inline-install/": 10,
-  "https://github.com/Cap-go/capacitor-android-kiosk/": 15,
+  "https://github.com/Cap-go/capacitor-android-kiosk/": 16,
   "https://github.com/Cap-go/capacitor-android-sms-retriever/": 2,
   "https://github.com/Cap-go/capacitor-appinsights/": 9,
   "https://github.com/Cap-go/capacitor-app-attest/": 9,
@@ -123,7 +123,7 @@
   "https://github.com/Cap-go/capacitor-zip/": 5,
   "https://github.com/Cap-go/capacitor-zebra-datawedge/": 5,
   "https://github.com/Cap-go/capacitor-network-diagnostics/": 3,
-  "https://github.com/Cap-go/capacitor-wifi/": 9,
+  "https://github.com/Cap-go/capacitor-wifi/": 10,
   "https://github.com/Cap-go/capacitor-screen-orientation/": 8,
   "https://github.com/Cap-go/capacitor-webview-guardian/": 8,
   "https://github.com/Cap-go/capacitor-webview-crash/": 2,
@@ -152,5 +152,6 @@
   "https://github.com/Cap-go/capacitor-brightness/": 5,
   "https://github.com/Cap-go/capacitor-light-sensor/": 5,
   "https://github.com/Cap-go/capacitor-video-thumbnails/": 6,
-  "https://github.com/Cap-go/capacitor-intent-launcher/": 8
+  "https://github.com/Cap-go/capacitor-intent-launcher/": 8,
+  "https://github.com/Cap-go/tailwind-capacitor/": 22
 }
