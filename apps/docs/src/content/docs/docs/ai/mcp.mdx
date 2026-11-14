@@ -161,8 +161,14 @@ Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destruc
 | Tool | Annotations | Notes |
 | ---- | ----------- | ----- |
 | `capgo_prepare_bundle_upload` | `destructiveHint: true` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
-| `capgo_prepare_build_credentials_upload` | `destructiveHint: true` | Returns a signed PUT URL for encrypted credentials. Omitting `mode` defaults to `replace`, which overwrites stored keys for that platform after the PUT. Confirm with the user before that upload. Use `mode: merge` to update only keys present in the JSON. |
+| `capgo_prepare_build_credentials_upload` | `destructiveHint: true` | Creates a single-use signed upload URL for one app and platform. Confirm the app, platform and mode before calling. Omitting `mode` defaults to `replace`; `merge` preserves stored keys absent from the uploaded file. Stored credentials change only after the separate upload. |
 | `capgo_get_build_status` | `readOnlyHint: true` | Read-only poll on the hosted server (see below). Delete and overwrite tools keep `destructiveHint: true` as before. |
+
+### Uploading native signing credentials
+
+Signing credentials are optional and require an explicit upload. `capgo_prepare_build_credentials_upload` accepts only the app ID, platform and mode, with `app.update_settings` permission. It returns a signed URL valid for 10 minutes, the required HTTP method and content type, the size limit, and upload instructions. Preparing the URL does not read a local file or change stored signing credentials.
+
+An authorized file transfer sends your prepared JSON file directly to Capgo, where credentials are encrypted at rest. Permissions are checked again at upload time. Keep credential contents out of chat and MCP arguments, keep the signed URL private, and retain control of your local files. When an assistant cannot transfer a local file, run `npx @capgo/cli@latest build credentials push` from your project. See the [iOS](/docs/builder/ios/) and [Android](/docs/builder/android/) guides for signing setup.
 
 ### Structured tool results
 
