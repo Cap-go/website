@@ -7,6 +7,7 @@ import TeamAvatars from '@/components/TeamAvatars.astro'
 import { planDescriptionToText } from '@/lib/planCopy'
 import { ENTERPRISE_MAU_STOPS, formatMau, type CreditStep } from '@/lib/enterpriseScale'
 import { DISCOUNT_TIERS, tierDiscountPercent } from '@/lib/currency'
+import { observeEventsForPlan } from '@/lib/observePlanAllowance'
 import PayAsYouGoPlan from './PayAsYouGoPlan.astro'
 
 interface Props {
@@ -47,6 +48,7 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
     `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' && !enterpriseScale ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })} ${m.of_bandwidth({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB storage`,
+    `${numberWithSpaces(observeEventsForPlan(plan))} observe events/${m.month({}, { locale: Astro.locals.locale })}`,
     'Native notifications',
     'Capgo Observe',
     ...(plan.name === 'Enterprise'

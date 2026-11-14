@@ -4,6 +4,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
+import { observeEventsForPlan } from '@/lib/observePlanAllowance'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -159,7 +160,8 @@ const rows: CompareSection[] = [
       {
         label: 'Observe events',
         href: getRelativeLocaleUrl(locale, 'observe'),
-        value: () => 'Unlimited',
+        emphasis: true,
+        value: (plan: Plan) => `${numberWithSpaces(observeEventsForPlan(plan))}/${m.month({}, { locale })}`,
       },
       {
         label: 'Crash and native issue monitoring',
