@@ -56,7 +56,7 @@ const task = await CapacitorDownloader.download({
 
 For several large offline assets while users switch apps, combine private destinations, iOS background session wiring, optional iOS 26 continued processing, and OkHttp progress notifications on Android.
 
-Plugin change: [capacitor-downloader#115](https://github.com/Cap-go/capacitor-downloader/pull/115).
+Plugin change: [capacitor-downloader#116](https://github.com/Cap-go/capacitor-downloader/pull/116). Website docs: [website#1462](https://github.com/Cap-go/website/pull/1462).
 
 **iOS private paths:** use `files/...`, `cache/...`, or `private/...` instead of ordinary relative paths under Documents.
 
@@ -64,7 +64,7 @@ Plugin change: [capacitor-downloader#115](https://github.com/Cap-go/capacitor-do
 
 **iOS 26+:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`) and add `CapacitorDownloader.continuedProcessing.` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`.
 
-**Android OkHttp:** with `androidHttpEngine: 'auto'` or `'okhttp'`, `notification: 'progress'` or `'completed'` shows an ongoing progress notification while the transfer runs.
+**Android OkHttp:** with `androidHttpEngine: 'auto'` or `'okhttp'`, `notification: 'progress'` or `'completed'` shows an ongoing progress notification while the transfer runs. The plugin manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and a `dataSync` foreground service for Android 14 and later. It also merges `POST_NOTIFICATIONS`; on Android 13 and later your app must request that permission at runtime before notifications appear.
 
 ```typescript
 await CapacitorDownloader.download({
@@ -262,9 +262,9 @@ OkHttp runs inside the app process. If Android kills that process, the download 
 
 ### Notifications with OkHttp
 
-- `'hidden'`: no DownloadManager progress notification; use `downloadProgress` / `downloadCompleted` listeners (recommended for OkHttp). `downloadCompletedNotificationText` can still post on success.
-- `'completed'`: no notification during an OkHttp transfer. On success, the plugin may post one completion notification with title "Download complete". Failures do not post that OkHttp completion notification (`downloadFailed` still fires). If you also set `downloadCompletedNotificationText`, a successful download can show two notifications on Android. On Android 13 and later, the host app must request the `POST_NOTIFICATIONS` runtime permission. If that permission is denied, the plugin skips notifications (the download still finishes).
-- `'progress'`: same as `'hidden'` on the OkHttp path (DownloadManager still shows progress notifications).
+- `'hidden'`: no OkHttp progress notification; use `downloadProgress` / `downloadCompleted` listeners. `downloadCompletedNotificationText` can still post on success when permission is granted.
+- `'progress'`: ongoing progress notification while the OkHttp transfer runs; the notification is removed when the transfer finishes.
+- `'completed'`: ongoing progress notification while the transfer runs, then one completion notification when it succeeds. Failures do not post that completion notification (`downloadFailed` still fires). `downloadCompletedNotificationText` can still add a separate localized alert. On Android 13 and later, request `POST_NOTIFICATIONS` at runtime; if denied, the plugin skips notifications but the download still finishes.
 
 DownloadManager destinations continue to support `'completed'`, `'progress'`, and `'hidden'` as before.
 
