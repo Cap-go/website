@@ -75,7 +75,7 @@ With [Capgo](<https://capgo.app>), the CLI supports a one-command deployment flo
 
 Run the first deployment against QA. Open the app on a test device and confirm that it checks for the bundle, downloads it, and shows the intended change after the update is applied. Save the bundle version and channel in your release record. That detail helps the team trace a report back to the exact rollout.
 
-If you’re comparing setup patterns before wiring the pipeline, this [OTA updates SaaS setup guide](<https://capgo.app/blog/best-over-the-air-app-updates-saas>) covers channels, rollback planning, analytics, and CI/CD as parts of one release workflow.
+If you’re comparing setup patterns before wiring the pipeline, this [OTA updates SaaS setup guide](https://capgo.app/blog/best-live-update-tools-for-capacitor-apps/) covers channels, rollback planning, analytics, and CI/CD as parts of one release workflow.
 
 **Pro Tip:** Make production deployment require an approval step. The same automation can build and upload a release, while a person still confirms the target channel and rollout plan.
 

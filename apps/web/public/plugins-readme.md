@@ -824,7 +824,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <a href="https://www.npmjs.com/package/@capgo/capacitor-sheets"><img src="https://img.shields.io/npm/dm/@capgo/capacitor-sheets?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-sheets/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-sheets?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
-<p><a href="https://capgo.app/plugins/capacitor-sheets/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-sheets/">GitHub</a></p>
+<p><a href="https://capgo.app/docs/plugins/sheets/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-sheets/">GitHub</a></p>
 </td>
 </tr>
 <tr>
@@ -920,7 +920,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <a href="https://www.npmjs.com/package/@capgo/capacitor-supabase"><img src="https://img.shields.io/npm/dm/@capgo/capacitor-supabase?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-supabase/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-supabase?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
-<p><a href="https://capgo.app/plugins/capacitor-supabase/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-supabase/">GitHub</a></p>
+<p><a href="https://capgo.app/docs/plugins/supabase/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-supabase/">GitHub</a></p>
 </td>
 </tr>
 <tr>
@@ -1230,7 +1230,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <a href="https://www.npmjs.com/package/@capgo/capacitor-pretty-toast"><img src="https://img.shields.io/npm/dm/@capgo/capacitor-pretty-toast?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-pretty-toast/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-pretty-toast?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
-<p><a href="https://capgo.app/plugins/capacitor-pretty-toast/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-pretty-toast/">GitHub</a></p>
+<p><a href="https://capgo.app/docs/plugins/pretty-toast/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-pretty-toast/">GitHub</a></p>
 </td>
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-incoming-call-kit/">Incoming Call Kit</a></h3>
@@ -1742,7 +1742,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <a href="https://www.npmjs.com/package/@capgo/capacitor-neon"><img src="https://img.shields.io/npm/dm/@capgo/capacitor-neon?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-neon/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-neon?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
-<p><a href="https://capgo.app/plugins/capacitor-neon/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-neon/">GitHub</a></p>
+<p><a href="https://capgo.app/docs/plugins/neon/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-neon/">GitHub</a></p>
 </td>
 <td></td>
 </tr>
