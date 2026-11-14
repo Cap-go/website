@@ -205,7 +205,7 @@ If you are planning a 2026 mobile roadmap, make live updates a requirement in th
 **Next steps:**
 
 - Create a free account at [capgo.app](https://capgo.app/)
-- Follow the [getting started guide](https://capgo.app/docs/getting-started/)
+- Follow the [getting started guide](https://capgo.app/docs/getting-started/quickstart/)
 - Install [`@capgo/capacitor-updater`](https://capgo.app/plugins/capacitor-updater/) in your Capacitor app
 - Review [pricing](https://capgo.app/pricing/) and channel strategy before your first production rollout
 

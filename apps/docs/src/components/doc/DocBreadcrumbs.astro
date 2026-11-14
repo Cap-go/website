@@ -1,0 +1,72 @@
+---
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+import { buildDocBreadcrumbs } from '@/lib/docBreadcrumbs'
+import m from '@/copy/messages'
+import { resolveMessageLocale } from '@/services/message-locale'
+
+const route = Astro.locals.starlightRoute as StarlightRouteData
+const entryTitle = typeof route.entry?.data?.title === 'string' ? route.entry.data.title : ''
+const siteOrigin = Astro.site?.toString() || 'https://capgo.app'
+const messageLocale = resolveMessageLocale(route.locale, Astro.currentLocale)
+
+const breadcrumbs = buildDocBreadcrumbs(Astro.url.pathname, entryTitle, siteOrigin).map((crumb, index) =>
+  index === 0 ? { ...crumb, name: m.home({}, { locale: messageLocale }) } : crumb,
+)
+
+const visibleCrumbs = breadcrumbs.slice(0, -1)
+const currentTitle = breadcrumbs.at(-1)?.name
+---
+
+{
+  breadcrumbs.length >= 3 && (
+    <nav aria-label="Breadcrumb" class="doc-breadcrumbs">
+      <ol>
+        {visibleCrumbs.map((crumb, index) => (
+          <li>
+            {index > 0 && <span aria-hidden="true"> / </span>}
+            <a href={crumb.url}>{crumb.name}</a>
+          </li>
+        ))}
+        {currentTitle && (
+          <li>
+            <span aria-hidden="true"> / </span>
+            <span aria-current="page">{currentTitle}</span>
+          </li>
+        )}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .doc-breadcrumbs {
+    margin: 0 0 0.75rem;
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .doc-breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .doc-breadcrumbs a {
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+  }
+
+  .doc-breadcrumbs a:hover,
+  .doc-breadcrumbs a:focus-visible {
+    color: var(--sl-color-accent);
+    text-decoration: underline;
+  }
+
+  .doc-breadcrumbs [aria-current='page'] {
+    color: var(--sl-color-white);
+  }
+</style>

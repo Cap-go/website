@@ -1,6 +1,7 @@
 ---
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import m from '@/copy/messages'
+import { buildDocBreadcrumbs, createDocBreadcrumbLdJson } from '@/lib/docBreadcrumbs'
 import { pluginSetupMetadata, truncateDescription } from '@/lib/seoMetadata'
 import { useRuntimeConfig } from '@/config/runtime'
 import { defaultLocale, locales } from '@/services/locale'
@@ -140,6 +141,31 @@ if (metaDescription) {
 
 // Add og:image if not present
 const hasOgImage = head.some(({ tag, attrs }) => tag === 'meta' && attrs?.property === 'og:image')
+const breadcrumbTitle = entryTitle || seoTitle
+const canonicalPageUrl = localizedUrl(Astro.locals.starlightRoute.locale ?? defaultLocale)
+const docBreadcrumbs = buildDocBreadcrumbs(basePath, breadcrumbTitle, baseUrl).map((crumb, index) =>
+  index === 0 ? { ...crumb, name: m.home({}, { locale: messageLocale }) } : crumb,
+)
+if (docBreadcrumbs.length >= 3) {
+  const breadcrumbJson = JSON.stringify(createDocBreadcrumbLdJson(canonicalPageUrl, docBreadcrumbs))
+  const hasBreadcrumbLd = head.some(
+    ({ tag, attrs }) =>
+      tag === 'script' &&
+      attrs?.type === 'application/ld+json' &&
+      typeof attrs?.['data-doc-breadcrumb'] === 'string',
+  )
+  if (!hasBreadcrumbLd) {
+    head.push({
+      tag: 'script',
+      attrs: {
+        type: 'application/ld+json',
+        'data-doc-breadcrumb': 'true',
+      },
+      content: breadcrumbJson,
+    })
+  }
+}
+
 if (!hasOgImage) {
   head.push({
     tag: 'meta',
