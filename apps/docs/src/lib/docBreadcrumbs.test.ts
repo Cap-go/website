@@ -9,6 +9,11 @@ test('buildDocBreadcrumbs for CLI page', () => {
   expect(crumbs[2].url).toBe('https://capgo.app/docs/cli/reference/build/')
 })
 
+test('buildDocBreadcrumbs for getting started section', () => {
+  const crumbs = buildDocBreadcrumbs('/docs/getting-started/deploy/', 'Deploy', 'https://capgo.app')
+  expect(crumbs[1].url).toBe('https://capgo.app/docs/getting-started/quickstart/')
+})
+
 test('buildDocBreadcrumbs for plugin getting started', () => {
   const crumbs = buildDocBreadcrumbs('/docs/plugins/sheets/getting-started/', 'Getting started', 'https://capgo.app')
   expect(crumbs[1].url).toBe('https://capgo.app/docs/plugins/sheets/')
