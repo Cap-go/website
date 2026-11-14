@@ -40,9 +40,9 @@ Available since **8.6.0**. Set optional `title` and `description` on `download()
 
 <Aside type="tip" title="Multi-file batch downloads (8.7.0)">
 
-Available since **8.7.0** on iOS and Android (not Web). Pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()` for up to 32 assets under one batch `id`. Progress uses 0 to 100 for overall and per-file values. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
+Available since **8.7.0** on iOS and Android (not Web). Pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not pass `url` and `files` together. Up to 32 assets share one batch `id`. Progress uses 0 to 1 for overall and per-file values. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
 
-On Android, batches use DownloadManager only; `'okhttp'` is rejected, and `'auto'` is rejected when any file would use OkHttp. Android rejects `pause()` and `resume()` for batches; iOS supports them on the batch id. Batch progress is not restored automatically after process death. On failure, finished files stay on disk on both platforms. `stop()` on a batch id: iOS removes recorded successful writes; Android removes active DownloadManager work and may delete in-progress partials, leaving completed files that were detached from tracking.
+On Android, batches use DownloadManager; `download()` rejects if any file would use OkHttp (`'auto'` with extended roots is allowed when paths stay on DownloadManager). Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death; iOS restores batches from `DownloadBatchStore`. On failure or `stop()`, finished files stay on disk on both platforms (Android skips completed children).
 
 </Aside>
 
