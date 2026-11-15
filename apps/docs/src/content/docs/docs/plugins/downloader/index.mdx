@@ -46,6 +46,12 @@ On Android, batches use DownloadManager; `download()` rejects if any file would 
 
 </Aside>
 
+<Aside type="tip" title="Robust background downloads (8.8.0)">
+
+Available since **8.8.0**. Large offline packs can keep moving while users switch apps: required `AppDelegate` background session forwarding, optional iOS 26 continued processing, iOS `private/` paths, and opt-in OkHttp `notification: 'progress'` with an optional `dataSync` foreground service on Android (default `completed` unchanged from 8.7.0). See [Robust background downloads](/docs/plugins/downloader/getting-started/#robust-background-downloads).
+
+</Aside>
+
 ## Completion notifications
 
 Set `downloadCompletedNotificationText` on `download()` to show a localized system notification when a file finishes and the user granted notification permission. See [Getting Started](/docs/plugins/downloader/getting-started/#example-completion-notification) for a full example.
