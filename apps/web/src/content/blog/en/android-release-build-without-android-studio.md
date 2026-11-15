@@ -1,37 +1,95 @@
 ---
 slug: android-release-build-without-android-studio
-title: "Android Release Builds Without Android Studio on Linux, Windows and CI"
+title: "Build and Install Release APK Without Android Studio"
 description: >-
-  Produce a signed Android AAB for a Capacitor app with only the command line:
-  keytool keystore, Gradle from a terminal, Play Console service account, and a
-  Capgo Build cloud alternative that keeps the keystore off laptops.
+  Build a signed release APK with ./gradlew assembleRelease, install with adb
+  install -r, and fix unsigned APK or signature errors. No Android Studio on
+  your machine.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-10-08T09:50:00.000Z
-updated_at: 2026-10-08T13:30:13.000Z
+updated_at: 2026-11-14T10:30:00.000Z
 head_image: /capgo_plugins.webp
 head_image_alt: "Android release build without Android Studio Capgo blog illustration"
-keywords: Android release build, without Android Studio, keytool keystore, gradlew bundleRelease, Capacitor Android, Google Play service account, Capgo Build Android, headless Android build
+keywords: >-
+  adb install app-release.apk, gradlew assembleRelease, Android release build
+  without Android Studio, Capacitor Android, keytool keystore, gradlew
+  bundleRelease, release signingConfig, INSTALL_FAILED_UPDATE_INCOMPATIBLE
 tag: Tutorial, Android, CI/CD
 published: true
 locale: en
 origin: human
 next_blog: ''
 faq:
-  - question: "Do I need Android Studio to build a release AAB for a Capacitor app?"
-    answer: "No. A JDK 21, the Android command line SDK and the Gradle wrapper in the generated android/ folder are enough. Run ./gradlew bundleRelease from a terminal on Linux, Windows or a CI runner."
-  - question: "How do I create an Android signing keystore without Android Studio?"
-    answer: "Use keytool, which ships with every JDK: keytool -genkeypair -v -keystore release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias release. Keep the file and both passwords in a secret store; losing them means you cannot update the app unless Play App Signing is enabled."
-  - question: "Can I build a signed Android app in the cloud without Android Studio?"
-    answer: "Yes. Capgo Build accepts the prepared android/ project, signs it with a keystore you saved once, and can upload the AAB to a Google Play track through a service account. It works from Windows, Linux and any CI."
-  - question: "Should I upload an APK or an AAB to Google Play?"
-    answer: "An AAB. Google Play requires the App Bundle format for new apps and generates optimized APKs per device from it. Build APKs only for direct installs with adb or for testers outside Play."
+  - question: "What is the adb command to install a release APK after assembleRelease?"
+    answer: >-
+      Configure release signingConfig first (section 2). From android/ after
+      bunx cap sync android, run ./gradlew assembleRelease. With signing
+      configured the output is app/build/outputs/apk/release/app-release.apk;
+      without it you get app-release-unsigned.apk. Install with adb install -r
+      app/build/outputs/apk/release/app-release.apk after the APK is signed. The
+      -r flag replaces an existing install while keeping app data when possible.
+  - question: "What does adb install -r do on a release APK?"
+    answer: >-
+      The -r flag tells adb to replace an app that is already on the device
+      instead of failing with an existing package. Use it when you rebuild the
+      same applicationId for device testing. See the adb install guide for other
+      flags such as -d for debuggable downgrades.
+  - question: "Why is my APK named app-release-unsigned.apk and adb install fails?"
+    answer: >-
+      Gradle did not apply a release signingConfig, so the output is unsigned
+      and the system installer rejects it. Point release buildTypes at
+      signingConfigs.release in android/app/build.gradle, or sign the APK with
+      apksigner from build-tools, then run adb install -r on the signed file.
+  - question: "How do I fix INSTALL_FAILED_UPDATE_INCOMPATIBLE when installing a release APK?"
+    answer: >-
+      The APK is signed with a different key than the app already on the phone,
+      often after switching from a debug build. adb uninstall removes app data
+      unless you pass -k to keep data and cache directories. To preserve data,
+      sign the new APK with the same key as the installed build, or uninstall
+      only after backup, then adb install -r the release APK.
+  - question: "Do I need Android Studio to build and install a release APK?"
+    answer: >-
+      No. A JDK, the Android command line SDK with platform-tools, build-tools,
+      and the matching platform API, plus the Gradle wrapper in android/ are
+      enough. Set ANDROID_HOME or android/local.properties so Gradle finds the
+      SDK; platform-tools on PATH is for adb only. Run ./gradlew assembleRelease
+      for an installable APK (adb install -r). Run bundleRelease only when you
+      need an AAB for Play Console, not for adb install.
 ---
 
 Android Studio is a fine IDE, but it is not required to produce a store-ready Android build. The generated `android/` folder in a Capacitor project contains a Gradle wrapper that builds and signs from any terminal. That matters for Linux servers without a display, for Windows machines where Studio is slow, and for CI.
 
 This guide builds a signed AAB with the command line only, then shows the cloud variant with [Capgo Build](/docs/builder/android/) for teams that do not want keystores on laptops.
+
+## Install the release APK with adb
+
+**Quick answer:** sync the web build, assemble a signed release APK, then install it with `adb install -r`.
+
+```bash
+bun run build
+bunx cap sync android
+cd android
+./gradlew assembleRelease
+adb install -r app/build/outputs/apk/release/app-release.apk
+```
+
+On Windows use `.\gradlew.bat assembleRelease` from `android\`.
+
+The output path is `android/app/build/outputs/apk/release/app-release.apk` when `release` uses your `signingConfig`. Without that config Gradle writes `app-release-unsigned.apk`, which fails to install because it has no release signature. Configure `keystore.properties` as in section 2 below, or sign the file with `apksigner` before `adb install -r`.
+
+The **`-r`** flag reinstalls over an existing package with the same `applicationId`, which is what you want for iterative release testing on hardware. Full command reference and Wi-Fi install: [ADB install APK guide](/blog/adb-install-apk/).
+
+### adb install troubleshooting
+
+| Error or symptom | Likely cause | Fix |
+| --- | --- | --- |
+| `INSTALL_PARSE_FAILED_NO_CERTIFICATES` or unsigned output | No release `signingConfig` | Sign in Gradle or with `apksigner`, not `app-release-unsigned.apk` |
+| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | Different signing key than installed app (often debug vs release) | Sign with the same key as the installed app if you must keep data. Otherwise `adb uninstall <applicationId>` (data is removed; `adb uninstall -k` keeps data but cannot fix a key mismatch by itself) then `adb install -r` |
+| `INSTALL_FAILED_VERSION_DOWNGRADE` | Lower `versionCode` on a non-debuggable install | Bump `versionCode`, uninstall first, or use `adb install -r -d` only on debuggable packages |
+| `adb: device unauthorized` or no devices | USB debugging off or RSA prompt not accepted | Enable [Developer options and USB debugging](/blog/how-to-enable-developer-options-on-android/), unlock the phone, run `adb devices` |
+| `more than one device/emulator` | Several devices attached | `adb devices` then `adb -s SERIAL install -r path/to/app-release.apk` |
 
 ## Prerequisites
 
@@ -121,7 +179,7 @@ cd android
 
 On Windows use `.\gradlew.bat bundleRelease`. The signed bundle is written to `android/app/build/outputs/bundle/release/app-release.aab`.
 
-Want an APK for direct installs with adb? `./gradlew assembleRelease` produces `app-release.apk` under `outputs/apk/release/`. Install it with `adb install`; the [adb install guide](/blog/adb-install-apk/) covers the edge cases.
+Want an APK for direct installs with adb? `./gradlew assembleRelease` produces `app-release.apk` under `outputs/apk/release/` when signing is configured. Install with `adb install -r app/build/outputs/apk/release/app-release.apk`; the [adb install guide](/blog/adb-install-apk/) covers flags and edge cases, and [Developer options](/blog/how-to-enable-developer-options-on-android/) covers USB debugging setup.
 
 ## 5) Verify the signature
 
