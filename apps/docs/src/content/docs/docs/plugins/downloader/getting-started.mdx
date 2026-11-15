@@ -54,28 +54,57 @@ const task = await CapacitorDownloader.download({
 
 ## Robust background downloads
 
-For several large offline assets while users switch apps, combine private destinations, iOS background session wiring, optional iOS 26 continued processing, and OkHttp progress notifications on Android.
+Available since **8.8.0**. Use this when users fetch large offline assets while switching apps.
 
-Install `@capgo/capacitor-downloader` at **8.8.0** or newer before you use these options.
+### What changed since 8.7.0
 
-Plugin change: [capacitor-downloader#116](https://github.com/Cap-go/capacitor-downloader/pull/116). Website docs: [website#1462](https://github.com/Cap-go/website/pull/1462).
+| Area | 8.7.0 | 8.8.0 |
+|------|-------|-------|
+| OkHttp `notification` default (`completed`) | No ongoing notification, no foreground service | Same (unchanged) |
+| OkHttp `notification: 'progress'` | N/A (no ongoing UI) | Opt-in ongoing progress plus optional `dataSync` foreground service |
+| FGS when service cannot start | N/A | Download still runs; progress UI is skipped |
+| iOS `files/...`, `cache/...` | Under Documents | Same under Documents |
+| iOS `private/...` | N/A (treated as Documents path) | iOS only: Application Support/CapacitorDownloader |
+| iOS continued processing | N/A | Optional `iosContinuedProcessingTitle` on iOS 26+ |
 
-**iOS private paths:** use `files/...`, `cache/...`, or `private/...` instead of ordinary relative paths under Documents.
+**iOS paths:** `files/...` and `cache/...` stay under Documents as in 8.7.0 (`Documents/files/...`, `Documents/cache/...`). Use `private/...` (iOS only) for Application Support. Segments with `..` are rejected. On Android, `private/` is not special (it is a normal relative path under app storage).
 
-**iOS lifecycle:** warm up sessions at launch and forward `handleEventsForBackgroundURLSession` through `CapacitorDownloaderLifecycle` (see the plugin README on GitHub).
+**iOS `AppDelegate` (required):** forward background URL session events. Warmup at launch alone does not deliver relaunched completions.
 
-**iOS 26+:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`) and add `$(PRODUCT_BUNDLE_IDENTIFIER).CapacitorDownloader.continuedProcessing.*` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`.
+```swift
+// SPM
+import CapacitorDownloaderPlugin
+// CocoaPods
+// import CapgoCapacitorDownloader
 
-**Android OkHttp:** with `androidHttpEngine: 'auto'` or `'okhttp'`, `notification: 'progress'` or `'completed'` shows an ongoing progress notification while the transfer runs. The plugin manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and a `dataSync` foreground service for Android 14 and later. It also merges `POST_NOTIFICATIONS`; on Android 13 and later your app must request that permission at runtime before notifications appear.
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  CapacitorDownloaderLifecycle.warmUpBackgroundSessions()
+  return true
+}
+
+func application(
+  _ application: UIApplication,
+  handleEventsForBackgroundURLSession identifier: String,
+  completionHandler: @escaping () -> Void
+) {
+  CapacitorDownloaderLifecycle.handleEventsForBackgroundURLSession(
+    identifier: identifier,
+    completionHandler: completionHandler
+  )
+}
+```
+
+**iOS 26+ continued processing:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`). Add `$(PRODUCT_BUNDLE_IDENTIFIER).CapacitorDownloader.continuedProcessing.*` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`. If the system does not launch the task within a few seconds, the plugin falls back to the background `URLSession`. If the continued processing task expires, the transfer is cancelled with `downloadFailed` and is not resumed automatically on relaunch.
+
+**Android OkHttp notifications:** default `notification: 'completed'` matches 8.7.0. Set `notification: 'progress'` to opt in to ongoing progress and an optional `dataSync` foreground service (plugin minSdk 24; Android 12+ may block background service starts; Android 15 limits dataSync time). If the service cannot start, the download continues without progress UI. The manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and `POST_NOTIFICATIONS`; request `POST_NOTIFICATIONS` at runtime on Android 13+ when you use `'progress'`.
 
 ```typescript
 await CapacitorDownloader.download({
   id: 'offline-pack',
   url: 'https://cdn.example.com/large-pack.zip',
-  destination: 'files/offline/large-pack.zip',
+  destination: 'private/offline/large-pack.zip',
   androidHttpEngine: 'auto',
   notification: 'progress',
-  title: 'Offline pack',
   iosContinuedProcessingTitle: 'Offline pack',
   downloadCompletedNotificationText: 'Pack is ready',
 });
@@ -264,9 +293,9 @@ OkHttp runs inside the app process. If Android kills that process, the download 
 
 ### Notifications with OkHttp
 
-- `'hidden'`: no OkHttp progress notification; use `downloadProgress` / `downloadCompleted` listeners. `downloadCompletedNotificationText` can still post on success when permission is granted.
-- `'progress'`: ongoing progress notification while the OkHttp transfer runs; the notification is removed when the transfer finishes.
-- `'completed'`: ongoing progress notification while the transfer runs, then one completion notification when it succeeds. Failures do not post that completion notification (`downloadFailed` still fires). `downloadCompletedNotificationText` can still add a separate localized alert. On Android 13 and later, request `POST_NOTIFICATIONS` at runtime; if denied, the plugin skips notifications but the download still finishes.
+- `'completed'` (default): same as 8.7.0. No ongoing notification and no foreground service. Use `downloadProgress` / `downloadCompleted` and optional `downloadCompletedNotificationText`.
+- `'hidden'`: no OkHttp progress UI; same completion behavior as above for events and optional completion text.
+- `'progress'`: opt-in ongoing progress notification while the transfer runs plus an optional `dataSync` foreground service. The notification is removed when the transfer finishes (success or failure). If the service cannot start, the download still runs without progress UI. On Android 13 and later, request `POST_NOTIFICATIONS` at runtime when you use `'progress'`.
 
 DownloadManager destinations continue to support `'completed'`, `'progress'`, and `'hidden'` as before.
 
