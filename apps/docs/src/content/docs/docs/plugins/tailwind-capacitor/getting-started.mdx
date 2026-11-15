@@ -18,8 +18,8 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 <TailwindCapacitorInstallTabs />
 
-<Aside type="caution">
-  React and Angular commands use placeholder `public/r/react/` and `public/r/angular/` bases until the tailwind-capacitor multi-framework PR ships. Vue URLs are pinned to the commit in `apps/shared/config/tailwindCapacitorRegistry.ts`.
+<Aside type="note">
+  Install URLs are pinned to Cap-go/tailwind-capacitor commit `dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1` (PR #130). Vue core includes `capacitor-tailwind`; React and Angular core items live under `public/r/react/` and `public/r/angular/`.
 </Aside>
 
 ## Live demo
@@ -41,15 +41,19 @@ Preview every registry component on the site:
 
    ```vue
    <script setup>
-   import { App, Page, TailwindCapacitorProvider } from '@/capacitor'
+   import TailwindCapacitorProvider from '@/capacitor/vue/shared/TailwindCapacitorProvider.vue'
+   import App from '@/capacitor/vue/components/App.vue'
+   import Page from '@/capacitor/vue/components/Page.vue'
    </script>
 
    <template>
-     <App theme="ios">
-       <Page class="safe-areas">
-         <RouterView />
-       </Page>
-     </App>
+     <TailwindCapacitorProvider>
+       <App theme="ios" class="safe-areas">
+         <Page>
+           <RouterView />
+         </Page>
+       </App>
+     </TailwindCapacitorProvider>
    </template>
    ```
 

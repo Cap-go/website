@@ -161,18 +161,34 @@ Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destruc
 | Tool | Annotations | Notes |
 | ---- | ----------- | ----- |
 | `capgo_prepare_bundle_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
-| `capgo_prepare_build_credentials_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Returns a signed PUT URL for encrypted credentials. Omitting `mode` defaults to `replace`, which overwrites stored keys for that platform after the PUT. Confirm with the user before that upload. Use `mode: merge` to update only keys present in the JSON. |
-| `capgo_get_build_status` | `readOnlyHint: false`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false` | Not marked read-only: `GET /build/status`, the CLI, and the [local CLI MCP server](/docs/cli/reference/mcp/) can persist on every poll (timeouts, cancellation, `build_requests`, webhooks, billing). Hosted MCP skips those writes (see below). |
+| `capgo_prepare_build_credentials_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Creates a single-use signed upload URL for one app and platform. Confirm the app, platform and mode before calling. Omitting `mode` defaults to `replace`; `merge` preserves stored keys absent from the uploaded file. Stored credentials change only after the separate upload. |
+| `capgo_get_build_status` | `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false` | Read-only poll on the hosted server. The public HTTP handler and CLI polls can persist state; see the distinction below. |
+
+### Uploading native signing credentials
+
+Signing credentials are optional and require an explicit upload. `capgo_prepare_build_credentials_upload` accepts only the app ID, platform and mode, with `app.update_settings` permission. It returns a signed URL valid for 10 minutes, the required HTTP method and content type, the size limit, and upload instructions. Preparing the URL does not read a local file or change stored signing credentials.
+
+An authorized file transfer sends your prepared JSON file directly to Capgo, where credentials are encrypted at rest. Permissions are checked again at upload time. Keep credential contents out of chat and MCP arguments, keep the signed URL private, and retain control of your local files. When an assistant cannot transfer a local file, run `npx @capgo/cli@latest build credentials push` from your project. See the [iOS](/docs/builder/ios/) and [Android](/docs/builder/android/) guides for signing setup.
+
+### Structured tool results
+
+Every hosted tool advertises an `outputSchema` in `tools/list`. Successful HTTP API tools return the typed endpoint response under `structuredContent.data`. For example, `capgo_list_apps` returns `{ "data": [{ "app_id": "com.example.app", "name": "Example app" }] }` as structured content. Its text content keeps the original API array for older clients.
+
+Tools implemented directly by the MCP server use the object described by their own output schema. For example, `capgo_whoami` returns `user_id`, `apikey_id`, `apikey_name`, and `apikey_expires_at`, while skill reads return `skill` and `contents`.
+
+The schema describes each declared field, including identifier sources, units and missing-data states. Native build upload instructions can omit `max_bytes` when the builder does not supply a size limit. Keep the returned `job_id`, upload with the provided method and headers, then start that same job; do not request another build because the optional limit is absent.
+
+Bundle and native-version adoption datasets report percentages on a 0 to 100 scale. Where returned, `latestVersion` identifies the version with the largest share on the most recent day with observed activity, rather than the newest uploaded release.
+
+Check `isError` before consuming a result. Invalid upstream responses return an actionable tool error instead of an untyped success. A result-size error requires pagination, narrower filters, or a shorter time range. If a write already ran, inspect the resource before retrying to avoid duplicate actions. Reading structured output does not enable additional data collection or retention.
 
 ### Hosted MCP read-only build status
 
-`capgo_get_build_status` keeps `readOnlyHint: false` because the public HTTP handler and CLI MCP relay the same route, where each poll may sync `build_requests`, record build minutes, emit webhooks, cancel jobs past the app timeout, and update billing.
-
 On `https://api.capgo.app/mcp`, the tool calls that handler in-process with `hostedMcpReadOnly: true`. Hosted polls skip those writes and return `persisted: false`. They do not sync `build_requests`, record build minutes, emit webhooks, or cancel jobs that exceeded the app timeout.
 
-The Capgo CLI, `GET /build/status`, and the local CLI MCP server still persist on every status read. External callers cannot enable the hosted read-only path over HTTP.
+The Capgo CLI, `GET /build/status`, and the [local CLI MCP server](/docs/cli/reference/mcp/) still persist on every status read. External callers cannot enable the hosted read-only path over HTTP.
 
-Responses include `diagnostic`, `poll_after_seconds: 15`, queue fields, and the same builder status fields as the REST endpoint. When the builder still reports `running` past the app configured timeout, a read-only poll adds:
+Responses include `diagnostic`, `poll_after_seconds: 15`, queue fields, and the same builder status fields as the REST endpoint. Build timestamps `started_at` and `completed_at` use Unix epoch milliseconds; `null` means the corresponding lifecycle event has not happened or its time is unavailable. When the builder still reports `running` past the app configured timeout, a read-only poll adds:
 
 - `timeout_exceeded: true`
 - `timeout_warning` with guidance to call `capgo_cancel_build` if you need to stop the job, or wait for Capgo reconciliation (`cron_reconcile_build_status`) to finish the job and record build time.

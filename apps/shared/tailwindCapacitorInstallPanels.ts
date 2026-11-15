@@ -23,13 +23,13 @@ export function getTailwindCapacitorInstallPanels(variant: InstallTabVariant): I
     {
       id: 'react',
       defaultVisible: false,
-      description: 'React registry URLs are provisional until the tailwind-capacitor multi-framework PR lands.',
+      description: 'Core React registry items under public/r/react/ (pinned commit in shared config).',
       commands: reactCore.map((row) => row.command),
     },
     {
       id: 'angular',
       defaultVisible: false,
-      description: 'Angular (spartan/ng) URLs are provisional until the tailwind-capacitor multi-framework PR lands.',
+      description: 'Core Angular registry items under public/r/angular/ (pinned commit in shared config).',
       commands: angularCore.map((row) => row.command),
     },
   ]

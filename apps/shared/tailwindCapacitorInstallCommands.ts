@@ -1,7 +1,9 @@
 import {
-  tailwindCapacitorAngularRegistryBase,
+  tailwindCapacitorAngularRegistryUrl,
+  tailwindCapacitorCoreAngularItems,
+  tailwindCapacitorCoreReactItems,
   tailwindCapacitorCoreVueItems,
-  tailwindCapacitorReactRegistryBase,
+  tailwindCapacitorReactRegistryUrl,
   tailwindCapacitorVueRegistryUrl,
 } from './config/tailwindCapacitorRegistry'
 
@@ -15,13 +17,13 @@ export function buildTailwindCapacitorInstallCommands(options?: { vueCli?: 'bunx
     slug: 'capacitor-button',
     command: `${vueCli} shadcn-vue@latest add ${tailwindCapacitorVueRegistryUrl('capacitor-button')}`,
   }
-  const reactCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  const reactCore = tailwindCapacitorCoreReactItems.map((slug) => ({
     slug,
-    command: `npx shadcn@latest add ${tailwindCapacitorReactRegistryBase}/${slug}.json`,
+    command: `npx shadcn@latest add ${tailwindCapacitorReactRegistryUrl(slug)}`,
   }))
-  const angularCore = tailwindCapacitorCoreVueItems.map((slug) => ({
+  const angularCore = tailwindCapacitorCoreAngularItems.map((slug) => ({
     slug,
-    command: `npx @spartan-ng/cli@latest add ${tailwindCapacitorAngularRegistryBase}/${slug}.json`,
+    command: `npx @spartan-ng/cli@latest add ${tailwindCapacitorAngularRegistryUrl(slug)}`,
   }))
   return { vueCore, vueComponent, reactCore, angularCore }
 }

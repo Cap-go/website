@@ -1,24 +1,32 @@
-/** Pinned tailwind-capacitor main commit for registry sync and install URLs. */
-export const TAILWIND_CAPACITOR_REGISTRY_COMMIT = 'e6437809852749b566a8489cd59db362006741f0'
+/** Pinned tailwind-capacitor commit for registry sync and install URLs (Cap-go/tailwind-capacitor#130). */
+export const TAILWIND_CAPACITOR_REGISTRY_COMMIT = 'dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1'
 
 const rawBase = `https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/${TAILWIND_CAPACITOR_REGISTRY_COMMIT}/public/r`
 
-/** Vue registry paths (current main layout). */
+/** Vue registry paths under public/r/. */
 export const tailwindCapacitorVueRegistryBase = rawBase
 
-/**
- * React and Angular registry URL bases.
- * Update when tailwind-capacitor lands per-framework layouts (e.g. public/r/react/).
- * Depends on the in-flight tailwind-capacitor multi-framework registry PR.
- */
-export const tailwindCapacitorReactRegistryBase =
-  'https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/react'
+/** React registry paths under public/r/react/. */
+export const tailwindCapacitorReactRegistryBase = `${rawBase}/react`
 
-export const tailwindCapacitorAngularRegistryBase =
-  'https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/refs/heads/main/public/r/angular'
+/** Angular registry paths under public/r/angular/. */
+export const tailwindCapacitorAngularRegistryBase = `${rawBase}/angular`
 
 export const tailwindCapacitorCoreVueItems = [
   'capacitor-tailwind',
+  'capacitor-provider',
+  'capacitor-shared',
+  'capacitor-icons',
+] as const
+
+/** React and Angular registries ship provider, shared, and icons under public/r/{react,angular}/. */
+export const tailwindCapacitorCoreReactItems = [
+  'capacitor-provider',
+  'capacitor-shared',
+  'capacitor-icons',
+] as const
+
+export const tailwindCapacitorCoreAngularItems = [
   'capacitor-provider',
   'capacitor-shared',
   'capacitor-icons',

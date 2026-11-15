@@ -55,6 +55,7 @@ const documentedPluginCategoryOverrides: Record<string, PluginCategoryId> = {
   '@capgo/capacitor-native-map': 'device-apis',
   '@capgo/capacitor-rich-notifications': 'communication',
   '@capgo/capacitor-device-integrity': 'auth-security',
+  '@capgo/tailwind-capacitor': 'ui-system',
 }
 
 const actionDefinitionRows =
@@ -215,7 +216,7 @@ const actionDefinitionRows =
 @capgo/capacitor-light-sensor|github.com/Cap-go|Access the ambient light sensor to measure illuminance levels in lux with real-time updates|https://github.com/Cap-go/capacitor-light-sensor/|Light Sensor
 @capgo/capacitor-video-thumbnails|github.com/Cap-go|Generate thumbnail images from local and remote video files at specific timestamps|https://github.com/Cap-go/capacitor-video-thumbnails/|Video Thumbnails
 @capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher
-tailwind-capacitor|github.com/Cap-go|Tailwind CSS v4 Capacitor UI components and safe areas via a shadcn-compatible Vue registry|https://github.com/Cap-go/tailwind-capacitor/|Tailwind Capacitor`
+@capgo/tailwind-capacitor|github.com/Cap-go|Ship Tailwind CSS v4 Capacitor UI components as a shadcn registry so you own the source|https://github.com/Cap-go/tailwind-capacitor/|Tailwind Capacitor`
     .trim()
     .split('\n')
 
@@ -227,7 +228,6 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-asset-cache': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-auto': 'Truck',
   '@capgo/capacitor-transitions': 'ArrowsRightLeft',
-  'tailwind-capacitor': 'Swatch',
   '@capgo/capacitor-sheets': 'ArrowsPointingOut',
   '@capgo/capacitor-native-biometric': 'FingerPrint',
   '@capgo/camera-preview': 'Camera',
@@ -378,6 +378,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-light-sensor': 'Eye',
   '@capgo/capacitor-video-thumbnails': 'Film',
   '@capgo/capacitor-intent-launcher': 'RocketLaunch',
+  '@capgo/tailwind-capacitor': 'Swatch',
 }
 
 const pluginNamesByCategory = {
@@ -510,7 +511,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-native-navigation',
     '@capgo/capacitor-native-loader',
     '@capgo/capacitor-transitions',
-    'tailwind-capacitor',
+    '@capgo/tailwind-capacitor',
     '@capgo/capacitor-sheets',
     '@capgo/capacitor-inappbrowser',
     '@capgo/capacitor-navigation-bar',
