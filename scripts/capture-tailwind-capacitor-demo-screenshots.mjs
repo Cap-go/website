@@ -54,9 +54,9 @@ async function scrollSectionIntoView(frame, sectionId) {
   const section = frame.locator(`#${sectionId}`)
   await section.scrollIntoViewIfNeeded({ timeout: 15000 })
   await section.waitFor({ state: 'visible', timeout: 15000 })
-  await frame.locator('.tc-demo-page').evaluate((id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' })
-  }, sectionId)
+  await frame.locator(`#${sectionId}`).evaluate((el) => {
+    el.scrollIntoView({ behavior: 'instant', block: 'start' })
+  })
   await new Promise((r) => setTimeout(r, 350))
 }
 
@@ -69,8 +69,10 @@ async function closeOverlay(frame) {
     await frame.getByRole('button', { name: 'Delete' }).click({ timeout: 800 }).catch(() => {})
     await frame.getByRole('button', { name: 'Done' }).click({ timeout: 800 }).catch(() => {})
     await frame.getByRole('button', { name: 'Close' }).click({ timeout: 800 }).catch(() => {})
-    await host.locator('.fixed').first().click({ position: { x: 8, y: 8 }, force: true }).catch(() => {})
-    await host.locator('> *').first().waitFor({ state: 'detached', timeout: 3000 }).catch(() => {})
+    if ((await host.locator('> *').count()) > 0) {
+      await host.locator('.fixed, [class*="backdrop"]').first().click({ position: { x: 8, y: 8 }, force: true }).catch(() => {})
+      await host.locator('> *').first().waitFor({ state: 'detached', timeout: 3000 }).catch(() => {})
+    }
   }
   await new Promise((r) => setTimeout(r, 250))
 }

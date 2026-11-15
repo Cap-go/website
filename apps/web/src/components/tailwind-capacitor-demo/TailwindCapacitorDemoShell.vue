@@ -30,10 +30,9 @@
         </Block>
       </MotionBlock>
     </Page>
-  </App>
 
-  <Teleport to="body">
-    <div class="tc-demo-overlay-host" data-tc-overlay-host>
+    <Teleport to="body">
+      <div class="tc-demo-overlay-host" data-tc-overlay-host>
       <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
         <ActionsGroup>
           <ActionsLabel>Actions</ActionsLabel>
@@ -88,19 +87,24 @@
       </Panel>
 
       <Toast v-if="toastOpen" :opened="true" position="center" @toast:closed="toastOpen = false">Toast from registry demo</Toast>
-    </div>
-  </Teleport>
+      </div>
+    </Teleport>
+  </App>
 </template>
 
 <script setup>
 import { computed, defineComponent, h, onMounted, onUnmounted, ref, watch } from 'vue'
 import manifest from '../../tailwind-capacitor-snapshot/registry-manifest.json'
 import {
+  Accordion,
+  AccordionItem,
   Actions,
   ActionsButton,
   ActionsGroup,
   ActionsLabel,
+  Alert,
   App,
+  Avatar,
   Badge,
   Block,
   BlockFooter,
@@ -114,10 +118,16 @@ import {
   Card,
   Checkbox,
   Chip,
+  Datetime,
   Dialog,
   DialogButton,
   Fab,
+  Footer,
+  Header,
   Icon,
+  InfiniteScroll,
+  InputOtp,
+  ItemSliding,
   Link,
   List,
   ListButton,
@@ -127,6 +137,8 @@ import {
   MenuList,
   MenuListItem,
   Message,
+  Modal,
+  Note,
   Messagebar,
   Messages,
   MessagesTitle,
@@ -135,27 +147,38 @@ import {
   Notification,
   Page,
   Panel,
+  Picker,
   Popover,
   Popup,
   Preloader,
   Progressbar,
   Radio,
   Range,
+  Refresher,
+  Reorder,
   Searchbar,
   Segmented,
   SegmentedButton,
+  Select,
   Sheet,
+  Skeleton,
+  SplitPane,
   Stepper,
+  Tab,
   Tabbar,
+  Tabs,
   TabbarLink,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  Textarea,
+  Thumbnail,
   Toast,
   Toggle,
   Toolbar,
+  TouchRipple,
 } from '../../tailwind-capacitor-snapshot/capacitor/index.js'
 
 const props = defineProps({
@@ -373,6 +396,22 @@ const sectionMap = {
   ]),
   'capacitor-actions-group': defineStaticActionsDemo([{ text: 'One' }, { text: 'Two' }]),
   'capacitor-actions-label': defineStaticActionsDemo([{ text: 'Section title', bold: true }, { text: 'Item' }]),
+  'capacitor-accordion': defineDemo(() =>
+    h(
+      Accordion,
+      {},
+      {
+        default: () => [
+          h(AccordionItem, {}, { default: () => 'Accounts' }),
+          h(AccordionItem, {}, { default: () => 'Billing' }),
+        ],
+      },
+    ),
+  ),
+  'capacitor-accordion-item': defineDemo(() =>
+    h(Accordion, {}, { default: () => h(AccordionItem, {}, { default: () => 'Accordion item' }) }),
+  ),
+  'capacitor-alert': defineDemo(() => h(Alert, { class: 'p-4' }, { default: () => 'Heads up: registry Alert styles.' })),
   'capacitor-app': defineDemo(() =>
     h(
       Block,
@@ -382,6 +421,7 @@ const sectionMap = {
       },
     ),
   ),
+  'capacitor-avatar': defineDemo(() => h(Avatar, { class: 'inline-flex size-12 items-center justify-center text-sm font-semibold' }, { default: () => 'CG' })),
   'capacitor-badge': defineDemo(() =>
     h('div', { class: 'flex flex-wrap gap-2' }, [h(Badge, {}, { default: () => 'Default' }), h(Badge, { colors: { bg: 'bg-red-500' } }, { default: () => 'Hot' })]),
   ),
@@ -473,37 +513,36 @@ const sectionMap = {
   'capacitor-chip': defineDemo(() =>
     h('div', { class: 'flex flex-wrap gap-2' }, [h(Chip, {}, { default: () => 'Chip' }), h(Chip, { deleteButton: true }, { default: () => 'Removable' })]),
   ),
+  'capacitor-datetime': defineDemo(() => h(Datetime, { class: 'p-3 text-sm' }, { default: () => 'Nov 15, 2026' })),
   'capacitor-dialog': defineOpenShellButtonDemo('Open dialog', dialogOpen),
-  'capacitor-dialog-button': defineComponent({
-    setup() {
-      const open = ref(false)
-      const close = () => {
-        open.value = false
-      }
-      return () =>
-        h('div', { class: 'flex flex-col gap-2' }, [
-          h(Button, { onClick: () => (open.value = true) }, { default: () => 'Dialog with buttons' }),
-          open.value
-            ? h(
-                Dialog,
-                { opened: true, onBackdropclick: close },
-                {
-                  title: () => 'Confirm',
-                  default: () => 'DialogButton styles appear below.',
-                  buttons: () => [
-                    h(DialogButton, { onClick: close }, { default: () => 'Cancel' }),
-                    h(DialogButton, { strong: true, onClick: close }, { default: () => 'OK' }),
-                  ],
-                },
-              )
-            : null,
-        ])
-    },
-  }),
+  'capacitor-dialog-button': defineDemo(() =>
+    h('div', { class: 'flex flex-wrap gap-2' }, [
+      h(DialogButton, {}, { default: () => 'Cancel' }),
+      h(DialogButton, { strong: true }, { default: () => 'OK' }),
+    ]),
+  ),
+  'capacitor-footer': defineDemo(() => h(Footer, {}, { default: () => h('p', { class: 'p-3 text-sm' }, 'Footer region') })),
   'capacitor-fab': defineDemo(() =>
     h('div', { class: 'relative min-h-24' }, [h(Fab, { class: 'relative right-0 bottom-0 ml-auto', href: '#' }, { default: () => h('span', { class: 'text-2xl' }, '+') })]),
   ),
+  'capacitor-header': defineDemo(() => h(Header, {}, { default: () => h('p', { class: 'p-3 text-sm' }, 'Header region') })),
   'capacitor-icon': defineDemo(() => h(Icon, { material: 'home', class: 'text-2xl' })),
+  'capacitor-infinite-scroll': defineDemo(() => h(InfiniteScroll, { class: 'p-3 text-sm' }, { default: () => 'Load more when scrolled' })),
+  'capacitor-input-otp': defineDemo(() =>
+    h(InputOtp, { class: 'p-2' }, { default: () => [h('span', { class: 'px-2 py-1 border rounded' }, '1'), h('span', { class: 'px-2 py-1 border rounded' }, '2')] }),
+  ),
+  'capacitor-item-sliding': defineDemo(() =>
+    h(
+      List,
+      {},
+      {
+        default: () =>
+          h(ItemSliding, {}, {
+            default: () => h(ListItem, { title: 'Swipe row', link: true }),
+          }),
+      },
+    ),
+  ),
   'capacitor-link': defineDemo(() => h(Link, { href: '#' }, { default: () => 'Link' })),
   'capacitor-list': defineDemo(() =>
     h(
@@ -583,6 +622,8 @@ const sectionMap = {
       },
     ),
   ),
+  'capacitor-modal': defineDemo(() => h(Modal, { class: 'p-4 text-sm' }, { default: () => 'Modal surface (inline preview)' })),
+  'capacitor-note': defineDemo(() => h(Note, {}, { default: () => 'Note block from registry' })),
   'capacitor-message': defineDemo(() =>
     h(
       Messages,
@@ -638,6 +679,9 @@ const sectionMap = {
     ),
   ),
   'capacitor-panel': defineOpenShellButtonDemo('Open panel', panelOpen),
+  'capacitor-picker': defineDemo(() =>
+    h(Picker, { class: 'p-4 text-sm' }, { default: () => ['Morning', 'Afternoon', 'Evening'].map((label) => h('div', { class: 'block py-2' }, label)) }),
+  ),
   'capacitor-popover': defineDemo(() => h('div', {}, [h(Button, { id: 'popover-target', onClick: () => (popoverOpen.value = true) }, { default: () => 'Open popover' })])),
   'capacitor-popup': defineOpenShellButtonDemo('Open popup', popupOpen),
   'capacitor-preloader': defineDemo(() => h(Preloader, { class: 'mx-auto' })),
@@ -656,6 +700,25 @@ const sectionMap = {
     ),
   ),
   'capacitor-range': defineDemo(() => h(Range, { value: rangeValue.value, onRange: 'change', onInput: (e) => (rangeValue.value = Number(e.target?.value ?? 0)) })),
+  'capacitor-refresher': defineDemo(() => h(Refresher, { class: 'p-3 text-center text-sm' }, { default: () => 'Pull to refresh' })),
+  'capacitor-reorder': defineDemo(() =>
+    h(
+      List,
+      {},
+      {
+        default: () =>
+          h(Reorder, {}, {
+            default: () => [
+              h(ListItem, { title: 'First' }),
+              h(ListItem, { title: 'Second' }),
+            ],
+          }),
+      },
+    ),
+  ),
+  'capacitor-select': defineDemo(() =>
+    h(Select, { label: 'Fruit' }, { default: () => [h('option', { value: 'apple' }, 'Apple'), h('option', { value: 'pear' }, 'Pear')] }),
+  ),
   'capacitor-searchbar': defineDemo(() =>
     h(Searchbar, {
       value: search.value,
@@ -692,7 +755,17 @@ const sectionMap = {
     },
   }),
   'capacitor-sheet': defineOpenShellButtonDemo('Open sheet', sheetOpen),
+  'capacitor-skeleton': defineDemo(() => h(Skeleton, { class: 'h-10 w-full rounded-lg' })),
+  'capacitor-split-pane': defineDemo(() =>
+    h(SplitPane, { class: 'min-h-24 grid grid-cols-2 gap-2 p-2 text-sm' }, { default: () => [h('div', 'Left pane'), h('div', 'Right pane')] }),
+  ),
   'capacitor-stepper': defineDemo(() => h(Stepper, { value: stepperValue.value, min: 0, max: 10 })),
+  'capacitor-tab': defineDemo(() =>
+    h(Tabs, {}, { default: () => [h(Tab, { active: true }, { default: () => 'Tab A' }), h(Tab, {}, { default: () => 'Tab B' })] }),
+  ),
+  'capacitor-tabs': defineDemo(() =>
+    h(Tabs, {}, { default: () => [h(Tab, { active: true }, { default: () => 'One' }), h(Tab, {}, { default: () => 'Two' })] }),
+  ),
   'capacitor-tabbar': defineDemo(() =>
     h(
       Tabbar,
@@ -716,7 +789,12 @@ const sectionMap = {
   'capacitor-table-cell': defineDemo(() => tableWithBodyCells('Cell A', 'Cell B')),
   'capacitor-table-head': defineDemo(() => tableWithHeaderCell('Header')),
   'capacitor-table-row': defineDemo(() => tableWithBodyRow('Single row')),
+  'capacitor-textarea': defineDemo(() => h(Textarea, { value: 'Hello', label: 'Message', placeholder: 'Type here' })),
+  'capacitor-thumbnail': defineDemo(() => h(Thumbnail, { class: 'size-16 rounded-lg bg-neutral-200 dark:bg-neutral-700' })),
   'capacitor-toast': defineOpenShellButtonDemo('Show toast', toastOpen),
+  'capacitor-touch-ripple': defineDemo(() =>
+    h(TouchRipple, { class: 'inline-flex' }, { default: () => h(Button, {}, { default: () => 'Ripple target' }) }),
+  ),
   'capacitor-toggle': defineDemo(() => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) })),
   'capacitor-toolbar': defineDemo(() =>
     h(
@@ -733,6 +811,6 @@ const sectionMap = {
 
 /** @param {string} name */
 function sectionFor(name) {
-  return sectionMap[name]
+  return sectionMap[name] ?? defineDemo(() => h('p', { class: 'p-3 text-sm opacity-70' }, `No demo registered for ${name}.`))
 }
 </script>

@@ -59,10 +59,10 @@ In your app global stylesheet, replace the `@import "tailwindcss"` line with the
 `App`, `Page`, `Navbar`, and `Button` are separate registry items. Install each one:
 
 ```bash
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-app.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-page.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-navbar.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-button.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-app.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-page.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-navbar.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-button.json
 ```
 
 Components land under `src/capacitor/vue/components/`. The provider lands under `src/capacitor/vue/shared/`. Shared classes land under `src/capacitor/shared/`. Icons land under `src/capacitor/vue/components/icons/`.

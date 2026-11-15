@@ -140,5 +140,12 @@ const navItems = [
         pushTheme()
       })
     })
+
+    iframe.addEventListener('load', () => {
+      pushTheme()
+    })
+    if (iframe.contentDocument?.readyState === 'complete') {
+      pushTheme()
+    }
   }
 </script>
