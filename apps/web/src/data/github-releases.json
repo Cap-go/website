@@ -9,6 +9,54 @@
   },
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.50.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.4",
+    "pubDate": "2026-11-14T23:04:30.000Z",
+    "description": "🆕 Changelog Fixed Ensure billing features remain accessible during the application setup phase to prevent navigation issues for new users. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.50.3...capgo 22.50.4"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.50.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.2",
+    "pubDate": "2026-11-14T19:47:03.000Z",
+    "description": "🆕 Changelog Fixed Unblocked currency translations : Resolved issues preventing proper localization of currency values, ensuring accurate display across different languages and regions. Fixed throttled reviews : Addressed a bug that caused review submissions to be incorrectly throttled, restoring the expected user experience for providing feedback. Improved worker state recovery : Enhanced the reliability of production plugin state recovery by implementing rotation for storage, preventing pot..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.50.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.1",
+    "pubDate": "2026-11-14T19:02:58.000Z",
+    "description": "🆕 Changelog Fixed MCP Metadata Truncation : Prevented metadata from exceeding Claude Code's byte limit, ensuring tool definitions are always valid and preventing integration errors. Tool Contract Clarity : Clarified Model Context Protocol (MCP) tool contracts to improve interaction reliability and reduce ambiguity in tool execution. CI Performance : Optimized the Continuous Integration suite by splitting long running tests, resulting in faster feedback loops and more stable pipeline executio..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.50.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.0",
+    "pubDate": "2026-11-14T17:42:09.000Z",
+    "description": "🆕 Changelog Changed Restricted incompatible bundle notification emails to the default channel only, reducing noise for users operating on alternative channels. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.49.2...capgo 22.50.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.49.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.2",
+    "pubDate": "2026-11-14T14:06:28.000Z",
+    "description": "🆕 Changelog Fixed Clarified guidance for signing uploads and server configuration in the Model Context Protocol (MCP) integration to resolve ambiguities in the documentation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.49.1...capgo 22.49.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.49.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.1",
+    "pubDate": "2026-11-14T13:43:05.000Z",
+    "description": "🆕 Changelog Fixed Settle completed keys on partial drains : Resolved an issue in the plugin state management where keys marked as completed could fail to settle during partial drain operations, ensuring more reliable state transitions and data consistency. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.107.0...capgo 22.49.1"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.49.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.0",
@@ -270,54 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.0",
     "pubDate": "2026-11-10T22:08:19.000Z",
     "description": "🆕 Changelog Security Applied security updates to the Console User Interface to mitigate potential vulnerabilities and enhance overall application security. Added Integrated new security features into the frontend console UI as part of the security update release. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.104.0...capgo 22.38.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.37.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.37.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.37.0",
-    "pubDate": "2026-11-10T21:01:43.000Z",
-    "description": "🆕 Changelog Added MCP Events : Introduced support for Model Context Protocol (MCP) events on hosted Capgo MCP servers, enabling real time notifications and event driven interactions for connected clients. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.36.0...capgo 22.37.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.36.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.36.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.36.0",
-    "pubDate": "2026-11-10T16:23:48.000Z",
-    "description": "🆕 Changelog Added Profile Menu & Settings UI : Introduced a new profile menu in the settings area, including dedicated \"Danger Zones\" sections for sensitive account actions, styled with DaisyUI buttons for a consistent user experience. Self Hosted GoTrue Support : Added role and schema to support self hosted GoTrue instances, enabling more robust authentication configurations. AI to Manual Fallback Guidance : Enhanced the frontend lead generation flow to suggest CLI commands as a fallback wh..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.35.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.35.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.35.0",
-    "pubDate": "2026-11-10T14:42:37.000Z",
-    "description": "🆕 Changelog Added Security Update Emails : Introduced automated email notifications to inform users about critical security updates for their applications. Per App Advisory Feed : Added a dedicated feed to display security advisories specific to individual applications, allowing for more granular monitoring and response. Cloudflare Workers 2026 11 17 Compatibility : Updated the Cloudflare integration to support the 2026 11 17 compatibility date. Changed Cloudflare Data Object Stub Retries : ..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.34.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.1",
-    "pubDate": "2026-11-10T04:10:04.000Z",
-    "description": "🆕 Changelog Fixed Allow users to dismiss, skip, and restore the CI/CD setup during onboarding, improving flexibility and reducing friction for users who do not require immediate pipeline configuration. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.102.0...capgo 22.34.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.34.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.34.0",
-    "pubDate": "2026-11-10T02:43:52.000Z",
-    "description": "🆕 Changelog Added Introduced an onboarding guide to help users set up CI/CD pipelines for live updates and Builder, including tracking for setup completion. Fixed Improved payment recovery mechanisms and enhanced usage alerts to provide better visibility into billing status. Ensured GitHub release fetches are properly authenticated and shared, resolving potential access issues during changelog generation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.33.2...capgo 2..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.33.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.33.2",
-    "pubDate": "2026-11-09T16:36:27.000Z",
-    "description": "🆕 Changelog Fixed AI Onboarding Agent Events : Resolved an issue where AI onboarding agent connection events were not being sent from the server, ensuring that status updates and connectivity signals are now correctly propagated to clients. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.101.1...capgo 22.33.2"
   },
   {
     "category": "release",
@@ -601,11 +601,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-downloader 8.5.1",
-    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.5.1",
-    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.5.1",
-    "pubDate": "2026-11-14T02:44:56.000Z",
-    "description": "🆕 Changelog Fixed Android : Fixed a race condition between OkHttp reservation binding and directory creation that could cause intermittent network request failures or crashes. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.5.0...8.5.1"
+    "title": "capacitor-downloader 8.7.0",
+    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.7.0",
+    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.7.0",
+    "pubDate": "2026-11-14T22:44:40.000Z",
+    "description": "🆕 Changelog Added Support for multi file batch downloads via the new option ( 107). You can now request and download multiple files in a single operation, reducing repeated requests and simplifying scripts or workflows that need several resources at once. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.6.0...8.7.0"
   },
   {
     "category": "release",
@@ -1201,11 +1201,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-speech-recognition 8.5.0",
-    "link": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.5.0",
-    "guid": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.5.0",
-    "pubDate": "2026-11-14T02:17:50.000Z",
-    "description": "🆕 Changelog Added Added an opt in option for the iOS path, enabling dictation based transcription for speech analysis workflows. This provides a new way to generate transcriptions for users who want to experiment with or migrate to the dictation based provider. No breaking changes are expected, as the new transcriber is entirely opt in. 🔗 Full Changelog : https://github.com/Cap go/capacitor speech recognition/compare/8.4.8...8.5.0"
+    "title": "capacitor-speech-recognition 8.5.1",
+    "link": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.5.1",
+    "guid": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.5.1",
+    "pubDate": "2026-11-15T01:18:50.000Z",
+    "description": "🆕 Changelog Fixed Released the iOS audio session when a legacy recognition session ends, preventing audio resources from remaining active and improving compatibility with other audio features in your app. 🔗 Full Changelog : https://github.com/Cap go/capacitor speech recognition/compare/8.5.0...8.5.1"
   },
   {
     "category": "release",

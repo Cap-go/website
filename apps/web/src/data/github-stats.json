@@ -1,12 +1,12 @@
 {
   "repositoryCount": 144,
-  "contributorCount": 612,
-  "versionCount": 16827,
-  "releaseCount": 7495,
-  "closedIssueCount": 1798,
-  "mergedPullRequestCount": 10240,
-  "resolvedItemCount": 12038,
-  "totalStars": 3226,
+  "contributorCount": 613,
+  "versionCount": 16837,
+  "releaseCount": 7498,
+  "closedIssueCount": 1800,
+  "mergedPullRequestCount": 10256,
+  "resolvedItemCount": 12056,
+  "totalStars": 3228,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -136,21 +136,21 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 887,
+      "stars": 889,
       "contributors": 54,
       "versionTags": 796,
       "releases": 240,
       "closedIssues": 272,
-      "mergedPullRequests": 557
+      "mergedPullRequests": 558
     },
     "Cap-go/capgo": {
       "url": "https://github.com/Cap-go/capgo",
       "stars": 213,
       "contributors": 30,
-      "versionTags": 5947,
+      "versionTags": 5954,
       "releases": 1000,
       "closedIssues": 422,
-      "mergedPullRequests": 2823
+      "mergedPullRequests": 2835
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -561,10 +561,10 @@
       "url": "https://github.com/Cap-go/capacitor-downloader",
       "stars": 15,
       "contributors": 3,
-      "versionTags": 114,
-      "releases": 95,
-      "closedIssues": 9,
-      "mergedPullRequests": 67
+      "versionTags": 116,
+      "releases": 97,
+      "closedIssues": 11,
+      "mergedPullRequests": 69
     },
     "Cap-go/capacitor-env": {
       "url": "https://github.com/Cap-go/capacitor-env",
@@ -776,11 +776,11 @@
     "Cap-go/capacitor-speech-recognition": {
       "url": "https://github.com/Cap-go/capacitor-speech-recognition",
       "stars": 18,
-      "contributors": 8,
-      "versionTags": 42,
-      "releases": 40,
+      "contributors": 9,
+      "versionTags": 43,
+      "releases": 41,
       "closedIssues": 9,
-      "mergedPullRequests": 29
+      "mergedPullRequests": 30
     },
     "Cap-go/capacitor-textinteraction": {
       "url": "https://github.com/Cap-go/capacitor-textinteraction",
