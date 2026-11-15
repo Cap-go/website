@@ -31,14 +31,48 @@ const sectionShots = [
   { key: 'searchbar', sectionId: 'capacitor-searchbar' },
 ]
 
+const onlySectionKeys = process.env.TC_DEMO_ONLY_KEYS?.split(',')
+  .map((entry) => entry.trim())
+  .filter(Boolean)
+
+const activeSectionShots =
+  onlySectionKeys && onlySectionKeys.length > 0
+    ? sectionShots.filter((shot) => onlySectionKeys.includes(shot.key))
+    : sectionShots
+
+const captureOverlayShots = activeSectionShots.length === sectionShots.length
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} selector
+ */
+async function scrollBelowStickyHeader(page, selector) {
+  await page.locator(selector).scrollIntoViewIfNeeded()
+  await page.evaluate((sel) => {
+    const header = document.querySelector('header.sticky')
+    const target = document.querySelector(sel)
+    if (!target) return
+    const headerBottom = header ? header.getBoundingClientRect().bottom : 0
+    const top = target.getBoundingClientRect().top
+    if (top < headerBottom + 12) {
+      window.scrollBy({ top: top - headerBottom - 12, left: 0, behavior: 'instant' })
+    }
+  }, selector)
+  await page.waitForTimeout(120)
+}
+
 /**
  * @param {import('playwright').Page} page
  */
 async function applyTheme(page, platform, dark) {
   const controls = page.locator('[data-tc-demo-controls]')
-  await controls.scrollIntoViewIfNeeded()
-  await controls.locator(`[data-tc-platform="${platform}"]`).click({ force: true })
-  await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
+  await scrollBelowStickyHeader(page, '[data-tc-demo-controls]')
+  const platformBtn = controls.locator(`[data-tc-platform="${platform}"]`)
+  const darkBtn = controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`)
+  await platformBtn.waitFor({ state: 'visible', timeout: 15000 })
+  await platformBtn.click()
+  await darkBtn.waitFor({ state: 'visible', timeout: 15000 })
+  await darkBtn.click()
   const frame = page.frameLocator('#tc-demo-iframe')
   const platformLabel = platform === 'ios' ? 'iOS' : 'Material'
   await frame.getByText(platformLabel, { exact: true }).first().waitFor({ state: 'visible', timeout: 30000 })
@@ -102,7 +136,9 @@ async function closeOverlay(frame) {
     await frame.getByRole('button', { name: 'Done' }).click({ timeout: 800 }).catch(() => {})
     await frame.getByRole('button', { name: 'Close' }).click({ timeout: 800 }).catch(() => {})
     if ((await host.locator('> *').count()) > 0) {
-      await host.locator('.fixed, [class*="backdrop"]').first().click({ position: { x: 8, y: 8 }, force: true }).catch(() => {})
+      const backdrop = host.locator('.fixed, [class*="backdrop"]').first()
+      await backdrop.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {})
+      await backdrop.click({ position: { x: 8, y: 8 } }).catch(() => {})
       await host.locator('> *').first().waitFor({ state: 'detached', timeout: 3000 }).catch(() => {})
     }
   }
@@ -116,10 +152,11 @@ async function captureDemoCatalog(browser, { viewport, combo }) {
   const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } })
   const manifest = []
   try {
-    await page.goto(`${baseUrl}${demoPath}`, { waitUntil: 'domcontentloaded' })
+    await page.goto(`${baseUrl}${demoPath}`, { waitUntil: 'networkidle' })
+    await page.locator('[data-tc-demo-controls]').waitFor({ state: 'visible', timeout: 30000 })
     await applyTheme(page, combo.platform, combo.dark)
     const frame = page.frameLocator('#tc-demo-iframe')
-    for (const shot of sectionShots) {
+    for (const shot of activeSectionShots) {
       await closeOverlay(frame)
       await scrollSectionIntoView(frame, shot.sectionId)
       const fileName = `demo-${viewport.prefix}-${combo.tag}-${shot.key}.png`
@@ -127,20 +164,22 @@ async function captureDemoCatalog(browser, { viewport, combo }) {
       const buffer = await readFile(join(outDir, fileName))
       manifest.push({ fileName, sha256: createHash('sha256').update(buffer).digest('hex') })
     }
-    for (const overlay of [
-      { key: 'actions-open', button: 'Open Actions' },
-      { key: 'sheet-open', button: 'Open sheet' },
-    ]) {
-      await closeOverlay(frame)
-      await scrollSectionIntoView(frame, overlay.key === 'actions-open' ? 'capacitor-actions' : 'capacitor-sheet')
-      await frame.getByRole('button', { name: overlay.button, exact: true }).click()
-      await frame.locator('[data-tc-overlay-host]').locator('> *').nth(0).waitFor({ state: 'visible', timeout: 15000 })
-      await new Promise((r) => setTimeout(r, 400))
-      const fileName = `demo-${viewport.prefix}-${combo.tag}-${overlay.key}.png`
-      await screenshotDeviceFrame(page, join(outDir, fileName))
-      const buffer = await readFile(join(outDir, fileName))
-      manifest.push({ fileName, sha256: createHash('sha256').update(buffer).digest('hex') })
-      await closeOverlay(frame)
+    if (captureOverlayShots) {
+      for (const overlay of [
+        { key: 'actions-open', button: 'Open Actions' },
+        { key: 'sheet-open', button: 'Open sheet' },
+      ]) {
+        await closeOverlay(frame)
+        await scrollSectionIntoView(frame, overlay.key === 'actions-open' ? 'capacitor-actions' : 'capacitor-sheet')
+        await frame.getByRole('button', { name: overlay.button, exact: true }).click()
+        await frame.locator('[data-tc-overlay-host]').locator('> *').nth(0).waitFor({ state: 'visible', timeout: 15000 })
+        await new Promise((r) => setTimeout(r, 400))
+        const fileName = `demo-${viewport.prefix}-${combo.tag}-${overlay.key}.png`
+        await screenshotDeviceFrame(page, join(outDir, fileName))
+        const buffer = await readFile(join(outDir, fileName))
+        manifest.push({ fileName, sha256: createHash('sha256').update(buffer).digest('hex') })
+        await closeOverlay(frame)
+      }
     }
     return manifest
   } finally {
@@ -168,18 +207,31 @@ async function capturePluginPage(browser, { viewport, label, urlBase }) {
 
 await mkdir(outDir, { recursive: true })
 const browser = await chromium.launch()
-const manifest = []
+let manifest = []
 try {
+  const skipPluginShots = Boolean(onlySectionKeys?.length)
+
   for (const viewport of viewports) {
     for (const combo of combos) {
       const rows = await captureDemoCatalog(browser, { viewport, combo })
       manifest.push(...rows)
     }
-    manifest.push(await capturePluginPage(browser, { viewport, label: 'after', urlBase: baseUrl }))
-    if (pluginBeforeBaseUrl) {
-      manifest.push(await capturePluginPage(browser, { viewport, label: 'before', urlBase: pluginBeforeBaseUrl }))
+    if (!skipPluginShots) {
+      manifest.push(await capturePluginPage(browser, { viewport, label: 'after', urlBase: baseUrl }))
+      if (pluginBeforeBaseUrl) {
+        manifest.push(await capturePluginPage(browser, { viewport, label: 'before', urlBase: pluginBeforeBaseUrl }))
+      }
     }
   }
+
+  const mergePath = process.env.TC_DEMO_MANIFEST_MERGE
+  if (mergePath) {
+    const existing = JSON.parse(await readFile(mergePath, 'utf8'))
+    const byName = Object.fromEntries(existing.map((row) => [row.fileName, row]))
+    for (const row of manifest) byName[row.fileName] = row
+    manifest = Object.values(byName).sort((a, b) => a.fileName.localeCompare(b.fileName))
+  }
+
   const manifestPath = join(outDir, 'sha256.json')
   await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
   console.log(JSON.stringify({ outDir, manifestCount: manifest.length }, null, 2))

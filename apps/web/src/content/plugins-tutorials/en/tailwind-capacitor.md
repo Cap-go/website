@@ -35,7 +35,7 @@ Use the framework tabs on the [demo page](/plugins/tailwind-capacitor/demo/) or 
 ## Prerequisites
 
 - Vue 3 app with Tailwind CSS v4 (`@tailwindcss/vite` or PostCSS)
-- A project-level `components.json` from the [shadcn CLI](https://ui.shadcn.com/docs/cli) (`npx shadcn@latest init`)
+- A project-level `components.json` from the [shadcn-vue CLI](https://ui.shadcn.com/docs/cli) (`npx shadcn-vue@latest init`)
 - Path alias `@/*` pointing at your `src/` folder
 - No `tailwind.config.js` required
 

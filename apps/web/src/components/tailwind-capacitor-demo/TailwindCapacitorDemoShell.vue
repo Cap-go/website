@@ -803,7 +803,7 @@ const sectionMap = {
           h(Link, { toolbar: true, href: '#' }, { default: () => 'Cancel' }),
         ]),
         h('div', { class: 'title' }, 'Edit item'),
-        h('div', { class: 'right' }, [
+        h('div', { class: 'right flex gap-3' }, [
           h(Link, { toolbar: true, href: '#' }, { default: () => 'Save' }),
           h(Link, { toolbar: true, href: '#' }, { default: () => 'More' }),
         ]),
