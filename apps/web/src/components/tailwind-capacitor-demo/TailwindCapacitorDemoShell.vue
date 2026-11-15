@@ -803,9 +803,9 @@ const sectionMap = {
           h(Link, { toolbar: true, href: '#' }, { default: () => 'Cancel' }),
         ]),
         h('div', { class: 'title' }, 'Edit item'),
-        h('div', { class: 'right flex gap-3' }, [
+        h('div', { class: 'right flex items-center gap-4' }, [
           h(Link, { toolbar: true, href: '#' }, { default: () => 'Save' }),
-          h(Link, { toolbar: true, href: '#' }, { default: () => 'More' }),
+          h(Link, { toolbar: true, href: '#', class: 'ml-1' }, { default: () => 'More' }),
         ]),
       ],
     }),
