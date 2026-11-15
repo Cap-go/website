@@ -25,25 +25,23 @@ const viewports = [
 const shots = viewports.flatMap((viewport) => combos.map((combo) => ({ viewport, combo })))
 
 async function applyTheme(page, platform, dark) {
-  const root = page.locator('[data-tc-demo-controls]')
-  await root.locator(`[data-tc-platform="${platform}"]`).click()
-  await root.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click()
-  await page.waitForFunction(
-    ({ platform: p, dark: d }) => {
-      const frame = document.getElementById('tc-demo-iframe')
-      if (!(frame instanceof HTMLIFrameElement) || !frame.contentWindow) return false
-      const doc = frame.contentWindow.document
-      const isDark = doc.documentElement.classList.contains('dark')
-      const app = doc.querySelector('#tc-demo-root')
-      const isIos = app?.classList.contains('c-ios')
-      const isMaterial = app?.classList.contains('c-material')
-      const platformOk = p === 'ios' ? isIos : isMaterial
-      return platformOk && isDark === d
+  const shellPath = `${demoPath}shell/`
+  const qs = new URLSearchParams({ platform, dark: dark ? '1' : '0' })
+  await page.evaluate(
+    ({ shellPath, query }) => {
+      const iframe = document.getElementById('tc-demo-iframe')
+      if (iframe instanceof HTMLIFrameElement) {
+        iframe.src = `${shellPath}?${query}`
+      }
     },
-    { platform, dark },
-    { timeout: 15000 },
+    { shellPath, query: qs.toString() },
   )
-  await page.waitForTimeout(400)
+  const frame = page.frameLocator('#tc-demo-iframe')
+  const platformLabel = platform === 'ios' ? 'iOS' : 'Material'
+  await frame.getByText(platformLabel, { exact: true }).waitFor({ state: 'visible', timeout: 30000 })
+  await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30000 })
+  await frame.locator(dark ? 'html.dark' : 'html:not(.dark)').waitFor({ state: 'attached', timeout: 30000 })
+  await page.waitForTimeout(500)
 }
 
 async function captureShot(browser, { viewport, combo }) {
