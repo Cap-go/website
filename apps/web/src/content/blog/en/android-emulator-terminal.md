@@ -59,7 +59,7 @@ faq:
       console port until you type quit or exit. Use adb -s emulator-5554 emu
       when more than one emulator is running.
 ---
-To open and control the Android Emulator from your computer terminal, list AVDs with `emulator -list-avds`, start one with `emulator -avd <name>` or `emulator @<name>`, then confirm it with `adb devices`. For emulator lifecycle commands beyond the Android shell, connect to the console port with `telnet localhost <console-port>` and run `auth <token>` using the value in `~/.emulator_console_auth_token`, or use `adb emu <command>` for a single console action without keeping telnet open.
+To open and control the Android Emulator from your computer terminal, list AVDs with `emulator -list-avds`, start one with `emulator -avd <name>` or `emulator @<name>`, and keep that process in the foreground or background per [Google's emulator command line docs](https://developer.android.com/studio/run/emulator-commandline). Use a **second terminal tab** for `adb devices` and other adb commands while the emulator window stays open. For emulator lifecycle commands beyond the Android shell, connect to the console port with `telnet localhost <console-port>` and run `auth <token>` using the value in `~/.emulator_console_auth_token`, or use `adb emu <command>` for a single console action without keeping telnet open.
 
 That workflow is not the same as installing a **terminal emulator on Android itself**. Search traffic mixes both intents. This guide covers host-side emulator and adb CLI control first, then how on-device terminals differ.
 
