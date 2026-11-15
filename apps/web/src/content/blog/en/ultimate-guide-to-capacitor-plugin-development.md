@@ -19,9 +19,11 @@ next_blog: ''
 
 **Want to build powerful mobile apps using web technologies? [Capacitor](https://capacitorjs.com/) plugins let you bridge web apps with [native device features](https://capgo.app/plugins/capacitor-native-biometric/) like GPS, camera, and more - no deep mobile expertise needed.**
 
+Before building a native bridge, check whether a package in the [Capacitor plugin library](/plugins/) already covers your feature. Use this guide when you need a custom API or SDK integration that an existing plugin does not provide.
+
 Here’s what you’ll learn:
 
--   **What [Capacitor plugins](https://capgo.app/plugins/) are**: They connect web apps to iOS and Android features using JavaScript.
+-   **What [Capacitor plugins](/blog/capacitor-plugins-what-you-need-to-know/) are**: They connect web apps to iOS and Android features using JavaScript.
 -   **Why create custom plugins**: For advanced features like integrating third-party SDKs or improving performance.
 -   **How to get started**: Install Capacitor CLI, set up iOS/Android environments, and write cross-platform plugins.
 -   **Advanced techniques**: Handle hardware sensors, optimize performance, and ensure security.

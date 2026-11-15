@@ -23,6 +23,8 @@ next_blog: ''
 -   **Community Plugins**: Offer specialized features like [Firebase Analytics](https://firebase.google.com/docs/analytics), [in-app purchases](https://capgo.app/plugins/capacitor-native-purchases/), and live updates.
 -   **Custom Plugins**: Create your own for unique hardware or business needs.
 
+Looking for a package to add to your app? Browse the [Capacitor plugin library](/plugins/) to search by feature, filter by category, and find installation guides for authentication, payments, storage, media, and other native capabilities.
+
 ### Quick Overview
 
 | **Benefit** | **Impact** | **Example** |
