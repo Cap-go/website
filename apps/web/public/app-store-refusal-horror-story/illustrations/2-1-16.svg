@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Overnight crash report with no log and no reproduction on three simulators">
+  <title>Overnight crash report with no log and no reproduction on three simulators</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="88" y="28" width="144" height="96" rx="14" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="104" y="44" width="72" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="104" y="60" width="112" height="6" rx="3" fill="#EF4444" opacity="0.55"/>
+  <text x="104" y="84" fill="#EF4444" font-family="system-ui,sans-serif" font-size="10" font-weight="600">crash on launch</text>
+  <rect x="104" y="96" width="88" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <text x="104" y="116" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">no log attached</text>
+  <rect x="32" y="140" width="72" height="48" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="44" y="162" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="9">sim 1</text>
+  <path d="M56 172 L56 176" stroke="#A3E635" stroke-width="2" stroke-linecap="round"/>
+  <rect x="116" y="140" width="72" height="48" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="128" y="162" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="9">sim 2</text>
+  <path d="M140 172 L140 176" stroke="#A3E635" stroke-width="2" stroke-linecap="round"/>
+  <rect x="200" y="140" width="72" height="48" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="212" y="162" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="9">sim 3</text>
+  <path d="M224 172 L224 176" stroke="#A3E635" stroke-width="2" stroke-linecap="round"/>
+  <rect x="248" y="40" width="56" height="56" rx="10" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <path d="M264 56 L272 72 L256 72 Z" fill="none" stroke="#FBBF24" stroke-width="2" stroke-linejoin="round"/>
+  <text x="260" y="88" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">1.0.1</text>
+</svg>
