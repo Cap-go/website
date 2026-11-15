@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-11-15T11:00:00.000Z
-updated_at: 2026-11-15T11:00:00.000Z
+updated_at: 2026-11-15T13:12:23.000Z
 head_image: /migrating-cordova-to-capacitor.webp
 head_image_alt: "Illustration of migrating a Cordova app to Capacitor, used for a RudderStack analytics plugin guide"
 keywords: rudder-sdk-cordova alternative, capacitor rudderstack, rudder cordova capacitor, @capgo/capacitor-rudderstack, RudderClient
