@@ -62,7 +62,7 @@ Available since **8.8.0**. Use this when users fetch large offline assets while 
 |------|-------|-------|
 | OkHttp `notification` default (`completed`) | No ongoing notification, no foreground service | Same (unchanged) |
 | OkHttp `notification: 'progress'` | N/A (no ongoing UI) | Opt-in ongoing progress plus optional `dataSync` foreground service |
-| FGS when service cannot start | N/A | Download still runs; progress UI is skipped |
+| FGS when service cannot start | N/A | Download still runs; progress notification still shows without a foreground service |
 | iOS `files/...`, `cache/...` | Under Documents | Same under Documents |
 | iOS `private/...` | N/A (treated as Documents path) | iOS only: Application Support/CapacitorDownloader |
 | iOS continued processing | N/A | Optional `iosContinuedProcessingTitle` on iOS 26+ |
@@ -96,7 +96,7 @@ func application(
 
 **iOS 26+ continued processing:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`). Add `$(PRODUCT_BUNDLE_IDENTIFIER).CapacitorDownloader.continuedProcessing.*` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`. If the system does not launch the task within a few seconds, the plugin falls back to the background `URLSession`. If the continued processing task expires, the transfer is cancelled with `downloadFailed` and is not resumed automatically on relaunch.
 
-**Android OkHttp notifications:** default `notification: 'completed'` matches 8.7.0. Set `notification: 'progress'` to opt in to ongoing progress and an optional `dataSync` foreground service (plugin minSdk 24; Android 12+ may block background service starts; Android 15 limits dataSync time). If the service cannot start, the download continues without progress UI. The manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and `POST_NOTIFICATIONS`; request `POST_NOTIFICATIONS` at runtime on Android 13+ when you use `'progress'`.
+**Android OkHttp notifications:** default `notification: 'completed'` matches 8.7.0. Set `notification: 'progress'` to opt in to ongoing progress and an optional `dataSync` foreground service (plugin minSdk 24; Android 12+ may block background service starts; Android 15 limits dataSync time). If the foreground service cannot start, the download continues and the progress notification still shows. The manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and `POST_NOTIFICATIONS`; request `POST_NOTIFICATIONS` at runtime on Android 13+ when you use `'progress'`.
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -305,9 +305,9 @@ OkHttp runs inside the app process. If Android kills that process, the download 
 
 ### Notifications with OkHttp
 
-- `'completed'` (default): same as 8.7.0. No ongoing notification and no foreground service. Use `downloadProgress` / `downloadCompleted` and optional `downloadCompletedNotificationText`.
-- `'hidden'`: no OkHttp progress UI; same completion behavior as above for events and optional completion text.
-- `'progress'`: opt-in ongoing progress notification while the transfer runs plus an optional `dataSync` foreground service. The notification is removed when the transfer finishes (success or failure). If the service cannot start, the download still runs without progress UI. On Android 13 and later, request `POST_NOTIFICATIONS` at runtime when you use `'progress'`.
+- `'completed'` (default): same as 8.7.0. No ongoing notification and no foreground service. OkHttp still posts one "Download complete" notification on success, as in 8.7.0. With both an in-app event and `downloadCompletedNotificationText`, a second completion notification can appear. `POST_NOTIFICATIONS` may be required when you use `'progress'` or this completion notification path on Android 13 and later. Use `downloadProgress` / `downloadCompleted` and optional `downloadCompletedNotificationText`.
+- `'hidden'`: no OkHttp progress UI and no default "Download complete" notification; plugin events still fire. Only `downloadCompletedNotificationText` can post a completion notification.
+- `'progress'`: opt-in ongoing progress notification while the transfer runs plus an optional `dataSync` foreground service. The notification is removed when the transfer finishes (success or failure). If the foreground service cannot start, the download still runs and the progress notification still shows. On Android 13 and later, request `POST_NOTIFICATIONS` at runtime when you use `'progress'`.
 
 DownloadManager destinations continue to support `'completed'`, `'progress'`, and `'hidden'` as before.
 
