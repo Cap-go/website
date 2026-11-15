@@ -16,6 +16,48 @@ html.dark body.tc-demo-shell-body {
 .tc-demo-shell-body #tc-demo-root {
   min-height: 100dvh;
   isolation: isolate;
+  position: relative;
+  overflow: hidden;
+}
+
+.tc-demo-shell-body .tc-demo-app {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.tc-demo-shell-body .tc-demo-page {
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host > * {
+  pointer-events: auto;
+}
+
+.tc-demo-shell-body .tc-demo-actions-inline {
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.tc-demo-shell-body .c-material .tc-demo-page-navbar .h-16 {
+  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+}
+
+.tc-demo-shell-body .dark.c-ios .tc-demo-page-navbar [class*='bg-'] {
+  background-color: #1c1c1e;
+  color: #fff;
+}
+
+.tc-demo-shell-body .dark.c-ios .tc-demo-page-navbar .opacity-55 {
+  color: rgb(255 255 255 / 0.55);
 }
 
 .tc-demo-section-heading {
@@ -41,4 +83,17 @@ html.dark body.tc-demo-shell-body {
 
 .tc-demo-section .registry-demo-block {
   margin-inline: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.tc-demo-shell-body .registry-demo-block :where(.fixed) {
+  position: absolute !important;
+}
+
+.tc-demo-shell-body .tc-demo-messagebar-host {
+  position: relative;
+  min-height: 3.5rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
 }

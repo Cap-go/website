@@ -1,7 +1,16 @@
 <template>
-  <App id="tc-demo-root" :theme="platform" :dark="dark" class="min-h-dvh">
-    <Page class="safe-areas">
-      <Navbar title="Components" :subtitle="platformLabel" />
+  <App id="tc-demo-root" :theme="platform" :dark="dark" class="tc-demo-app min-h-dvh">
+    <Page class="safe-areas tc-demo-page">
+      <Navbar
+        class="tc-demo-page-navbar"
+        title="Components"
+        :subtitle="platformLabel"
+        :outline="platform === 'ios'"
+        :center-title="platform === 'ios'"
+        :translucent="false"
+        inner-class="px-4"
+        :colors="pageNavbarColors"
+      />
 
       <section id="tc-demo-foundation" class="tc-demo-section px-1 pb-2">
         <h2 class="tc-demo-section-heading">Registry foundation</h2>
@@ -29,21 +38,25 @@
           <component :is="sectionFor(item.name)" />
         </Block>
       </MotionBlock>
+    </Page>
+  </App>
 
-      <Actions :opened="actionsOpen" @backdropclick="actionsOpen = false">
+  <Teleport to="body">
+    <div class="tc-demo-overlay-host" data-tc-overlay-host>
+      <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
         <ActionsGroup>
           <ActionsLabel>Actions</ActionsLabel>
-          <ActionsButton>
+          <ActionsButton @click="actionsOpen = false">
             <template #media>
               <Icon material="share" />
             </template>
             Share
           </ActionsButton>
-          <ActionsButton bold>Delete</ActionsButton>
+          <ActionsButton bold @click="actionsOpen = false">Delete</ActionsButton>
         </ActionsGroup>
       </Actions>
 
-      <Dialog :opened="dialogOpen" @backdropclick="dialogOpen = false">
+      <Dialog v-if="dialogOpen" :opened="true" @backdropclick="dialogOpen = false">
         <template #title>Dialog</template>
         Sample dialog from the registry demo.
         <template #buttons>
@@ -51,7 +64,7 @@
         </template>
       </Dialog>
 
-      <Sheet :opened="sheetOpen" @sheet:closed="sheetOpen = false">
+      <Sheet v-if="sheetOpen" :opened="true" @backdropclick="sheetOpen = false">
         <Toolbar top>
           <div class="left">
             <Link toolbar href="#" @click.prevent="sheetOpen = false" @keyup.enter="sheetOpen = false">Done</Link>
@@ -63,28 +76,29 @@
         </Block>
       </Sheet>
 
-      <Popover :opened="popoverOpen" target-el="#popover-target" @popover:closed="popoverOpen = false">
+      <Popover v-if="popoverOpen" :opened="true" target-el="#popover-target" @backdropclick="popoverOpen = false">
         <List>
           <ListItem title="Popover item" />
         </List>
       </Popover>
 
-      <Popup :opened="popupOpen" @popup:closed="popupOpen = false">
+      <Popup v-if="popupOpen" :opened="true" @backdropclick="popupOpen = false">
         <Block strong class="m-0">
           <p class="p-4">Popup content</p>
+          <Button class="m-4 mt-0 w-[calc(100%-2rem)]" @click="popupOpen = false">Close</Button>
         </Block>
       </Popup>
 
-      <Panel :opened="panelOpen" @panel:closed="panelOpen = false">
+      <Panel v-if="panelOpen" :opened="true" @backdropclick="panelOpen = false">
         <Page>
           <Navbar title="Panel" />
           <Block class="p-4">Panel side content</Block>
         </Page>
       </Panel>
 
-      <Toast :opened="toastOpen" position="center" @toast:closed="toastOpen = false"> Toast from registry demo </Toast>
-    </Page>
-  </App>
+      <Toast v-if="toastOpen" :opened="true" position="center" @toast:closed="toastOpen = false">Toast from registry demo</Toast>
+    </div>
+  </Teleport>
 </template>
 
 <script setup>
@@ -171,6 +185,22 @@ watch(
 
 const platformLabel = computed(() => (platform.value === 'ios' ? 'iOS' : 'Material'))
 
+const pageNavbarColors = computed(() => {
+  if (!dark.value) {
+    return undefined
+  }
+  if (platform.value === 'ios') {
+    return {
+      bgIos: 'bg-[#1c1c1e]',
+      textIos: 'text-white',
+    }
+  }
+  return {
+    bgMaterial: 'bg-[#1c1c1e]',
+    textMaterial: 'text-white',
+  }
+})
+
 const foundationNames = new Set(['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'])
 
 const foundationItems = computed(() => manifest.items.filter((item) => foundationNames.has(item.name)))
@@ -253,26 +283,28 @@ function defineOpenShellButtonDemo(label, openRef) {
   return defineDemo(() => h(Button, { onClick: () => (openRef.value = true) }, { default: () => label }))
 }
 
-function defineActionsPreviewDemo(buttonLabel, groupContent) {
-  return defineComponent({
-    setup() {
-      const open = ref(false)
-      const close = () => {
-        open.value = false
-      }
-      return () =>
-        h('div', { class: 'flex flex-col gap-2' }, [
-          h(Button, { onClick: () => (open.value = true) }, { default: () => buttonLabel }),
-          h(
-            Actions,
-            { opened: open.value, onBackdropclick: close },
-            {
-              default: () => h(ActionsGroup, {}, { default: () => groupContent() }),
-            },
-          ),
-        ])
-    },
-  })
+function defineStaticActionsDemo(lines) {
+  return defineDemo(() =>
+    h(
+      'div',
+      { class: 'tc-demo-actions-inline max-w-sm space-y-0 overflow-hidden rounded-xl text-sm' },
+      lines.map((line, index) =>
+        h(
+          'p',
+          {
+            class: [
+              'px-4 py-3',
+              index > 0 && 'border-t border-black/10 dark:border-white/10',
+              line.bold && 'font-semibold',
+            ]
+              .filter(Boolean)
+              .join(' '),
+          },
+          line.text,
+        ),
+      ),
+    ),
+  )
 }
 
 function tableWithBodyRow(label) {
@@ -359,19 +391,13 @@ function demoTableSample() {
 
 const sectionMap = {
   'capacitor-actions': defineOpenShellButtonDemo('Open Actions', actionsOpen),
-  'capacitor-actions-button': defineActionsPreviewDemo('Preview ActionsButton', () => [
-    h(ActionsLabel, {}, { default: () => 'Label' }),
-    h(ActionsButton, { bold: true }, { default: () => 'Primary action' }),
-    h(ActionsButton, {}, { default: () => 'Secondary' }),
+  'capacitor-actions-button': defineStaticActionsDemo([
+    { text: 'Label', bold: true },
+    { text: 'Primary action', bold: true },
+    { text: 'Secondary' },
   ]),
-  'capacitor-actions-group': defineActionsPreviewDemo('Open grouped actions', () => [
-    h(ActionsButton, {}, { default: () => 'One' }),
-    h(ActionsButton, {}, { default: () => 'Two' }),
-  ]),
-  'capacitor-actions-label': defineActionsPreviewDemo('Open actions label', () => [
-    h(ActionsLabel, {}, { default: () => 'Section title' }),
-    h(ActionsButton, {}, { default: () => 'Item' }),
-  ]),
+  'capacitor-actions-group': defineStaticActionsDemo([{ text: 'One' }, { text: 'Two' }]),
+  'capacitor-actions-label': defineStaticActionsDemo([{ text: 'Section title', bold: true }, { text: 'Item' }]),
   'capacitor-app': defineDemo(() =>
     h(
       Block,
@@ -476,21 +502,26 @@ const sectionMap = {
   'capacitor-dialog-button': defineComponent({
     setup() {
       const open = ref(false)
+      const close = () => {
+        open.value = false
+      }
       return () =>
-        h('div', {}, [
+        h('div', { class: 'flex flex-col gap-2' }, [
           h(Button, { onClick: () => (open.value = true) }, { default: () => 'Dialog with buttons' }),
-          h(
-            Dialog,
-            { opened: open.value, onBackdropclick: () => (open.value = false) },
-            {
-              title: () => 'Confirm',
-              default: () => 'DialogButton styles appear below.',
-              buttons: () => [
-                h(DialogButton, { onClick: () => (open.value = false) }, { default: () => 'Cancel' }),
-                h(DialogButton, { strong: true, onClick: () => (open.value = false) }, { default: () => 'OK' }),
-              ],
-            },
-          ),
+          open.value
+            ? h(
+                Dialog,
+                { opened: true, onBackdropclick: close },
+                {
+                  title: () => 'Confirm',
+                  default: () => 'DialogButton styles appear below.',
+                  buttons: () => [
+                    h(DialogButton, { onClick: close }, { default: () => 'Cancel' }),
+                    h(DialogButton, { strong: true, onClick: close }, { default: () => 'OK' }),
+                  ],
+                },
+              )
+            : null,
         ])
     },
   }),
@@ -590,7 +621,9 @@ const sectionMap = {
       },
     ),
   ),
-  'capacitor-messagebar': defineDemo(() => h(Messagebar, { placeholder: 'Type a message' })),
+  'capacitor-messagebar': defineDemo(() =>
+    h('div', { class: 'tc-demo-messagebar-host' }, h(Messagebar, { placeholder: 'Type a message' })),
+  ),
   'capacitor-messages': defineDemo(() =>
     h(
       Messages,

@@ -27,6 +27,10 @@ const shots = viewports.flatMap((viewport) => combos.map((combo) => ({ viewport,
 async function applyTheme(page, platform, dark) {
   const shellPath = `${demoPath}shell/`
   const qs = new URLSearchParams({ platform, dark: dark ? '1' : '0' })
+  const platformSelector = `[data-tc-platform="${platform}"]`
+  const darkSelector = `[data-tc-dark="${dark ? '1' : '0'}"]`
+  await page.click(platformSelector)
+  await page.click(darkSelector)
   await page.evaluate(
     ({ shellPath, query }) => {
       const iframe = document.getElementById('tc-demo-iframe')
@@ -41,6 +45,7 @@ async function applyTheme(page, platform, dark) {
   await frame.getByText(platformLabel, { exact: true }).waitFor({ state: 'visible', timeout: 30000 })
   await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30000 })
   await frame.locator(dark ? 'html.dark' : 'html:not(.dark)').waitFor({ state: 'attached', timeout: 30000 })
+  await frame.locator('.tc-demo-page').evaluate((el) => el.scrollTo({ top: 0, behavior: 'instant' }))
   await page.waitForTimeout(500)
 }
 
