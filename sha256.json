@@ -21,7 +21,7 @@
   },
   {
     "fileName": "demo-desktop-ios-dark-toolbar.png",
-    "sha256": "9cea2ebb9244886a95e2d577a98a6f0b8a5b59744c784fdfcba6d046780aac8b"
+    "sha256": "4b8679ae49a0c7471bb418d3559d106219f91d470070480015403a5e39c76b4d"
   },
   {
     "fileName": "demo-desktop-ios-light-actions-open.png",
@@ -45,7 +45,7 @@
   },
   {
     "fileName": "demo-desktop-ios-light-toolbar.png",
-    "sha256": "c527faf066df72a9680430caaf612fd9263db7d19700a365b9dc2ff5ebbce901"
+    "sha256": "55391c316c3900be47c357cde3dbfd68927b9c3b80472c72e11d0de105c4504e"
   },
   {
     "fileName": "demo-desktop-material-dark-actions-open.png",
@@ -69,7 +69,7 @@
   },
   {
     "fileName": "demo-desktop-material-dark-toolbar.png",
-    "sha256": "0f1d6819b879e364cf5fe9d25c8607d59d477daf52c136a92651e8f95c188849"
+    "sha256": "ee46406e5b3183cad0aea51085b2efec682634688707408d6d6fcfa88ac0461f"
   },
   {
     "fileName": "demo-desktop-material-light-actions-open.png",
@@ -93,7 +93,7 @@
   },
   {
     "fileName": "demo-desktop-material-light-toolbar.png",
-    "sha256": "4d8e429a9681e35e576b19b9a09136a5ef420938be6cde6bf232443196c8c2aa"
+    "sha256": "afdb818ec8d7df6361bf59339a9a43f568004e2647190982f8bd0c8dce570015"
   },
   {
     "fileName": "demo-mobile-ios-dark-actions-open.png",
@@ -117,7 +117,7 @@
   },
   {
     "fileName": "demo-mobile-ios-dark-toolbar.png",
-    "sha256": "8cd52aa8b94ac1709192908b09bf8716d4cc30ea0740585c84ae14306d105630"
+    "sha256": "d10d7cdd3f0f3e1e1011774cf6322a9e1fdfc2b3b20aee382935ebe4213e5f76"
   },
   {
     "fileName": "demo-mobile-ios-light-actions-open.png",
@@ -141,7 +141,7 @@
   },
   {
     "fileName": "demo-mobile-ios-light-toolbar.png",
-    "sha256": "b82c87c886b2f602ab55d771503432af486e2f7d70b8db83b2a6441faf671020"
+    "sha256": "026a2aa50f34ec317593076200021d7d6cd8fdb8be1f0100a6a90add175e525b"
   },
   {
     "fileName": "demo-mobile-material-dark-actions-open.png",
@@ -165,7 +165,7 @@
   },
   {
     "fileName": "demo-mobile-material-dark-toolbar.png",
-    "sha256": "846e834b3eb36c43d9c2d529b9c97e34c114d5e87bc0818d58a6551362a1cc5d"
+    "sha256": "8d37ff13e54099dd9107f59331cf3e29fbe2f5094c3bcabef6be5af0a72ddf22"
   },
   {
     "fileName": "demo-mobile-material-light-actions-open.png",
@@ -189,7 +189,7 @@
   },
   {
     "fileName": "demo-mobile-material-light-toolbar.png",
-    "sha256": "1e35612d41291f04b73d5dfcd1dde67e539c118d925398242f51a319d21db90d"
+    "sha256": "aa72f374cad81b7b4850208a1de7fa59f31001ab6ffbca7fb6a2106594be5ddb"
   },
   {
     "fileName": "plugin-page-desktop-after.png",
