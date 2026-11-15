@@ -797,15 +797,18 @@ const sectionMap = {
   ),
   'capacitor-toggle': defineDemo(() => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) })),
   'capacitor-toolbar': defineDemo(() =>
-    h(
-      Toolbar,
-      { top: true },
-      {
-        left: () => h(Link, { toolbar: true }, { default: () => 'Left' }),
-        title: () => 'Toolbar',
-        right: () => h(Link, { toolbar: true }, { default: () => 'Right' }),
-      },
-    ),
+    h(Toolbar, { top: true }, {
+      default: () => [
+        h('div', { class: 'left' }, [
+          h(Link, { toolbar: true, href: '#' }, { default: () => 'Cancel' }),
+        ]),
+        h('div', { class: 'title' }, 'Edit item'),
+        h('div', { class: 'right' }, [
+          h(Link, { toolbar: true, href: '#' }, { default: () => 'Save' }),
+          h(Link, { toolbar: true, href: '#' }, { default: () => 'More' }),
+        ]),
+      ],
+    }),
   ),
 }
 

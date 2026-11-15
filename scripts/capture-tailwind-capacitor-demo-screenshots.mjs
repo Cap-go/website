@@ -48,6 +48,38 @@ async function applyTheme(page, platform, dark) {
 }
 
 /**
+ * The demo page uses the full site Layout; its sticky header can paint over the top of the
+ * iframe when catalog scrolling moves the device frame upward. Nudge the parent scroll so
+ * the iframe starts below the header before element screenshots.
+ *
+ * @param {import('playwright').Page} page
+ */
+async function clearStickyHeaderOverlap(page) {
+  await page.locator('#tc-demo-iframe').scrollIntoViewIfNeeded()
+  await page.evaluate(() => {
+    const header = document.querySelector('header.sticky')
+    const frame = document.getElementById('tc-demo-iframe')
+    if (!frame) return
+    const pad = 12
+    const headerBottom = header ? header.getBoundingClientRect().bottom : 0
+    const frameTop = frame.getBoundingClientRect().top
+    if (frameTop < headerBottom + pad) {
+      window.scrollBy({ top: frameTop - headerBottom - pad, left: 0, behavior: 'instant' })
+    }
+  })
+  await page.waitForTimeout(150)
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} filePath
+ */
+async function screenshotDeviceFrame(page, filePath) {
+  await clearStickyHeaderOverlap(page)
+  await page.locator('#tc-demo-iframe').screenshot({ path: filePath })
+}
+
+/**
  * @param {import('playwright').FrameLocator} frame
  */
 async function scrollSectionIntoView(frame, sectionId) {
@@ -91,7 +123,7 @@ async function captureDemoCatalog(browser, { viewport, combo }) {
       await closeOverlay(frame)
       await scrollSectionIntoView(frame, shot.sectionId)
       const fileName = `demo-${viewport.prefix}-${combo.tag}-${shot.key}.png`
-      await page.locator('#tc-demo-iframe').screenshot({ path: join(outDir, fileName) })
+      await screenshotDeviceFrame(page, join(outDir, fileName))
       const buffer = await readFile(join(outDir, fileName))
       manifest.push({ fileName, sha256: createHash('sha256').update(buffer).digest('hex') })
     }
@@ -105,7 +137,7 @@ async function captureDemoCatalog(browser, { viewport, combo }) {
       await frame.locator('[data-tc-overlay-host]').locator('> *').nth(0).waitFor({ state: 'visible', timeout: 15000 })
       await new Promise((r) => setTimeout(r, 400))
       const fileName = `demo-${viewport.prefix}-${combo.tag}-${overlay.key}.png`
-      await page.locator('#tc-demo-iframe').screenshot({ path: join(outDir, fileName) })
+      await screenshotDeviceFrame(page, join(outDir, fileName))
       const buffer = await readFile(join(outDir, fileName))
       manifest.push({ fileName, sha256: createHash('sha256').update(buffer).digest('hex') })
       await closeOverlay(frame)
