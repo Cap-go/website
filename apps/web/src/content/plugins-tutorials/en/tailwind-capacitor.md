@@ -30,7 +30,7 @@ Install commands on Capgo track Cap-go/tailwind-capacitor [PR #130](https://gith
 
 Open the [interactive registry demo](/plugins/tailwind-capacitor/demo/) to preview every registry item with iOS or Material styling and light or dark mode.
 
-Use the framework tabs on the [demo page](/plugins/tailwind-capacitor/demo/) or the [docs getting started](https://capgo.app/docs/plugins/tailwind-capacitor/getting-started/) for Vue (shadcn-vue), React (`shadcn`), and Angular (spartan/ng) install commands.
+Use the framework tabs on the [demo page](/plugins/tailwind-capacitor/demo/) or the [docs getting started](https://capgo.app/docs/plugins/tailwind-capacitor/getting-started/) for Vue (shadcn-vue), React (shadcn), and Angular (registry-add via the tailwind-capacitor package) install commands.
 
 ## Prerequisites
 
@@ -42,10 +42,10 @@ Use the framework tabs on the [demo page](/plugins/tailwind-capacitor/demo/) or 
 ## Install base styles
 
 ```bash
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-tailwind.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-provider.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-shared.json
-npx shadcn@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-icons.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-tailwind.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-provider.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-shared.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-icons.json
 ```
 
 In your app global stylesheet, replace the `@import "tailwindcss"` line with the capacitor bundle import. Keep your other custom CSS. The bundle already includes Tailwind, so do not keep a separate Tailwind import:

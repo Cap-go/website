@@ -99,8 +99,6 @@ const navItems = [
     let platform = 'ios'
     let dark = false
 
-    const shellBase = iframe.getAttribute('src')?.split('?')[0] ?? iframe.src.split('?')[0]
-
     const syncPressed = () => {
       root.querySelectorAll('[data-tc-platform]').forEach((btn) => {
         const el = btn as HTMLButtonElement
@@ -121,18 +119,7 @@ const navItems = [
     }
 
     const pushTheme = () => {
-      const qs = new URLSearchParams({ platform, dark: dark ? '1' : '0' })
-      const nextSrc = `${shellBase}?${qs.toString()}`
-      const post = () => {
-        iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
-      }
-      if (iframe.src.split('?')[0] === shellBase && iframe.src !== nextSrc) {
-        iframe.addEventListener('load', post, { once: true })
-        iframe.src = nextSrc
-      } else {
-        iframe.src = nextSrc
-        post()
-      }
+      iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
     }
 
     root.querySelectorAll('[data-tc-platform]').forEach((btn) => {

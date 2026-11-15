@@ -47,19 +47,6 @@ html.dark body.tc-demo-shell-body {
   border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
 }
 
-.tc-demo-shell-body .c-material .tc-demo-page-navbar .h-16 {
-  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
-}
-
-.tc-demo-shell-body .dark.c-ios .tc-demo-page-navbar [class*='bg-'] {
-  background-color: #1c1c1e;
-  color: #fff;
-}
-
-.tc-demo-shell-body .dark.c-ios .tc-demo-page-navbar .opacity-55 {
-  color: rgb(255 255 255 / 0.55);
-}
-
 .tc-demo-section-heading {
   margin: 0 0 0.35rem;
   padding: 0 1rem;

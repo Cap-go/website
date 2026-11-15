@@ -1,0 +1,5 @@
+/* Tailwind v4 must scan gitignored snapshot sources explicitly. */
+@source '../tailwind-capacitor-snapshot/capacitor/vue/**/*.vue';
+@source '../tailwind-capacitor-snapshot/capacitor/shared/classes/**/*.js';
+@source '../tailwind-capacitor-snapshot/capacitor/shared/colors/**/*.js';
+@import '../tailwind-capacitor-snapshot/capacitor/styles/tailwind-capacitor.css';

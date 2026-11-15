@@ -1,16 +1,7 @@
 <template>
   <App id="tc-demo-root" :theme="platform" :dark="dark" class="tc-demo-app min-h-dvh">
     <Page class="safe-areas tc-demo-page">
-      <Navbar
-        class="tc-demo-page-navbar"
-        title="Components"
-        :subtitle="platformLabel"
-        :outline="platform === 'ios'"
-        :center-title="platform === 'ios'"
-        :translucent="false"
-        inner-class="px-4"
-        :colors="pageNavbarColors"
-      />
+      <Navbar title="Components" :subtitle="platformLabel" :outline="platform === 'ios'" :center-title="platform === 'ios'" />
 
       <section id="tc-demo-foundation" class="tc-demo-section px-1 pb-2">
         <h2 class="tc-demo-section-heading">Registry foundation</h2>
@@ -184,22 +175,6 @@ watch(
 )
 
 const platformLabel = computed(() => (platform.value === 'ios' ? 'iOS' : 'Material'))
-
-const pageNavbarColors = computed(() => {
-  if (!dark.value) {
-    return undefined
-  }
-  if (platform.value === 'ios') {
-    return {
-      bgIos: 'bg-[#1c1c1e]',
-      textIos: 'text-white',
-    }
-  }
-  return {
-    bgMaterial: 'bg-[#1c1c1e]',
-    textMaterial: 'text-white',
-  }
-})
 
 const foundationNames = new Set(['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'])
 

@@ -1,4 +1,5 @@
 import {
+  TAILWIND_CAPACITOR_REGISTRY_COMMIT,
   tailwindCapacitorAngularRegistryUrl,
   tailwindCapacitorCoreAngularItems,
   tailwindCapacitorCoreReactItems,
@@ -6,6 +7,8 @@ import {
   tailwindCapacitorReactRegistryUrl,
   tailwindCapacitorVueRegistryUrl,
 } from './config/tailwindCapacitorRegistry'
+
+const angularRegistryAddCli = `npx --package github:Cap-go/tailwind-capacitor#${TAILWIND_CAPACITOR_REGISTRY_COMMIT} registry-add`
 
 export function buildTailwindCapacitorInstallCommands(options?: { vueCli?: 'bunx' | 'npx' }) {
   const vueCli = options?.vueCli ?? 'npx'
@@ -23,7 +26,7 @@ export function buildTailwindCapacitorInstallCommands(options?: { vueCli?: 'bunx
   }))
   const angularCore = tailwindCapacitorCoreAngularItems.map((slug) => ({
     slug,
-    command: `npx @spartan-ng/cli@latest add ${tailwindCapacitorAngularRegistryUrl(slug)}`,
+    command: `${angularRegistryAddCli} ${tailwindCapacitorAngularRegistryUrl(slug)}`,
   }))
   return { vueCore, vueComponent, reactCore, angularCore }
 }

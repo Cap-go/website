@@ -68,7 +68,12 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates, sitemap
       filter: (page) => {
         const pathname = new URL(page).pathname
         const normalized = pathname.endsWith('/') ? pathname : `${pathname}/`
-        return !normalized.endsWith('/410/') && normalized !== '/410/' && normalized !== '/featured/'
+        return (
+          !normalized.endsWith('/410/') &&
+          normalized !== '/410/' &&
+          normalized !== '/featured/' &&
+          !normalized.includes('/plugins/tailwind-capacitor/demo/shell/')
+        )
       },
       serialize(item) {
         return withSitemapLastMod(item, pageLastModDates)
