@@ -72,8 +72,12 @@ async function fetchWithRetry(url) {
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
     try {
       const res = await fetch(url, { signal: controller.signal })
+      if (res.ok) {
+        const data = await res.json()
+        clearTimeout(timer)
+        return data
+      }
       clearTimeout(timer)
-      if (res.ok) return res
       lastError = new Error(`HTTP ${res.status} for ${url}`)
     } catch (error) {
       clearTimeout(timer)
@@ -86,8 +90,7 @@ async function fetchWithRetry(url) {
   throw lastError
 }
 
-const registryRes = await fetchWithRetry(registryJsonUrl)
-const registry = await registryRes.json()
+const registry = await fetchWithRetry(registryJsonUrl)
 
 function targetToSnapshotPath(target) {
   if (target.startsWith('src/capacitor/')) return join(snapshotRoot, target.replace('src/capacitor/', 'capacitor/'))
@@ -104,8 +107,7 @@ function assertInsideSnapshot(outPath) {
 }
 
 async function fetchItem(name) {
-  const res = await fetchWithRetry(`${itemBaseUrl}/${name}.json`)
-  return res.json()
+  return fetchWithRetry(`${itemBaseUrl}/${name}.json`)
 }
 
 const writtenFiles = new Set()
