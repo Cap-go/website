@@ -333,5 +333,8 @@
     "height": 2048
   },
   "ipad-paywall-infinite-loading-three-rounds-37-days": null,
-  "weekly-subscription-price-review-paused-for-confirmation": null
+  "weekly-subscription-price-review-paused-for-confirmation": null,
+  "iap-not-available-paywall-pointed-at-another-apps-plans-fixed-same-day": null,
+  "new-app-missing-review-video-then-crash-on-low-end-phones-17-days": null,
+  "update-crash-after-launch-not-reproducible-same-build-resubmitted": null
 }
