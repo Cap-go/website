@@ -99,15 +99,27 @@ func application(
 **Android OkHttp notifications:** default `notification: 'completed'` matches 8.7.0. Set `notification: 'progress'` to opt in to ongoing progress and an optional `dataSync` foreground service (plugin minSdk 24; Android 12+ may block background service starts; Android 15 limits dataSync time). If the service cannot start, the download continues without progress UI. The manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and `POST_NOTIFICATIONS`; request `POST_NOTIFICATIONS` at runtime on Android 13+ when you use `'progress'`.
 
 ```typescript
-await CapacitorDownloader.download({
-  id: 'offline-pack',
-  url: 'https://cdn.example.com/large-pack.zip',
-  destination: 'private/offline/large-pack.zip',
-  androidHttpEngine: 'auto',
-  notification: 'progress',
-  iosContinuedProcessingTitle: 'Offline pack',
-  downloadCompletedNotificationText: 'Pack is ready',
-});
+import { Capacitor } from '@capacitor/core';
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+if (Capacitor.getPlatform() === 'ios') {
+  await CapacitorDownloader.download({
+    id: 'offline-pack',
+    url: 'https://cdn.example.com/large-pack.zip',
+    destination: 'private/offline/large-pack.zip',
+    iosContinuedProcessingTitle: 'Offline pack',
+    downloadCompletedNotificationText: 'Pack is ready',
+  });
+} else {
+  await CapacitorDownloader.download({
+    id: 'offline-pack',
+    url: 'https://cdn.example.com/large-pack.zip',
+    destination: 'files/offline/large-pack.zip',
+    androidHttpEngine: 'auto',
+    notification: 'progress',
+    downloadCompletedNotificationText: 'Pack is ready',
+  });
+}
 ```
 
 See also the [plugin repository README](https://github.com/Cap-go/capacitor-downloader/#robust-background-downloads-offline-packs).
