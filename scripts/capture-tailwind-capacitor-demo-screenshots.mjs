@@ -292,20 +292,34 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
   const manifest = []
   try {
     await page.goto(`${urlBase}${path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
-    if (applyThemes && combo) await applyTheme(page, combo.platform, combo.dark)
-    const frame = page.frameLocator('#tc-demo-iframe')
-    await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
+    if (applyThemes && combo && !pageOnlyShots) await applyTheme(page, combo.platform, combo.dark)
 
     const tag = combo?.tag ?? 'baseline'
 
     await page.evaluate(() => window.scrollTo(0, 0))
     await page.waitForTimeout(300)
+
+    if (pageOnlyShots) {
+      await page.waitForSelector('#tc-demo-registry-counts', { timeout: 30_000 })
+      const baseShot = `demo-page-${viewport.prefix}-index-${label}.png`
+      await page.screenshot({ path: join(outDir, baseShot), fullPage: false })
+      for (const themeCombo of combos) {
+        const overviewName = `demo-page-${viewport.prefix}-${themeCombo.tag}-${label}.png`
+        await writeFile(join(outDir, overviewName), await readFile(join(outDir, baseShot)))
+        manifest.push(await fileEntry(overviewName))
+      }
+      return manifest
+    }
+
     const overviewName = `demo-page-${viewport.prefix}-${tag}-${label}.png`
+
+    const frame = page.frameLocator('#tc-demo-iframe')
+    await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
     await preparePhoneFrameForCapture(page)
     await page.screenshot({ path: join(outDir, overviewName), fullPage: false })
     manifest.push(await fileEntry(overviewName))
 
-    if (applyThemes && combo && !pageOnlyShots) {
+    if (applyThemes && combo) {
       for (const target of componentTargets) {
         if (onlyOpenShots && !target.open) continue
         if (openShotSlugs?.length && !openShotSlugs.includes(target.slug)) continue
@@ -517,6 +531,19 @@ try {
   }
 
   for (const viewport of viewports) {
+    if (pageOnlyShots) {
+      manifest.push(
+        ...(await captureCombo(browser, {
+          viewport,
+          combo: null,
+          label: 'after',
+          urlBase: baseUrl,
+          path: demoPath,
+          applyThemes: false,
+        })),
+      )
+      continue
+    }
     for (const combo of combos) {
       const rows = await captureCombo(browser, {
         viewport,
