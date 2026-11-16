@@ -78,6 +78,48 @@ html.dark body.tc-demo-shell-body {
   margin-inline: auto;
 }
 
+.tc-demo-state-heading {
+  margin: 0 0 0.4rem;
+  padding: 0 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+
+.tc-demo-scene-stage {
+  border-radius: 0.75rem;
+}
+
+.tc-demo-shell-body.c-ios .tc-demo-component-stage button[role='button'],
+.tc-demo-shell-body .c-ios .tc-demo-component-stage button[role='button'] {
+  text-transform: none;
+}
+
+.tc-demo-inline-actions-host,
+.tc-demo-state-overlay-preview {
+  position: relative;
+  min-height: 12rem;
+  overflow: visible;
+}
+
+.tc-demo-inline-actions-host :where(.actions-backdrop),
+.tc-demo-state-overlay-preview :where(.actions-backdrop, .dialog-backdrop, .sheet-backdrop, .popup-backdrop) {
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+.tc-demo-inline-actions-host :where(.actions, .dialog, .sheet-modal, .popup, .popover, .toast),
+.tc-demo-state-overlay-preview :where(.actions, .dialog, .sheet-modal, .popup, .popover, .toast) {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+  transform: none !important;
+  max-width: 100%;
+}
+
 .tc-demo-section-heading {
   margin: 0 0 0.35rem;
   padding: 0 1rem;

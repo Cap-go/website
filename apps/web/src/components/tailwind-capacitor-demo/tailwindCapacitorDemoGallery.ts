@@ -116,6 +116,24 @@ const foundationPackageNameSet = new Set<string>(foundationPackageNames)
 
 const DEMO_SLUGS = ['foundation', ...manifest.items.filter((item) => !foundationPackageNameSet.has(item.name)).map((item) => item.name)]
 
+export function attachGalleryContext(partial: Omit<GalleryContext, 'overlayTrigger' | 'h'>): GalleryContext {
+  const overlayTrigger = (label: string, openRef: Ref<boolean>, opts: { id?: string } = {}) =>
+    h(
+      'button',
+      {
+        type: 'button',
+        id: opts.id,
+        class:
+          'tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white',
+        onClick: () => {
+          openRef.value = true
+        },
+      },
+      label,
+    )
+  return { h, ...partial, overlayTrigger }
+}
+
 export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'material'; dark: boolean }>): GalleryContext {
   const platform = ref<'ios' | 'material'>(options?.platform ?? 'ios')
   const dark = ref(options?.dark ?? false)
@@ -567,7 +585,11 @@ function buildActionsFamilyStates(ctx: GalleryContext, focus: 'root' | 'button' 
     label: 'Screen',
     render: (c) => overlayTrigger(c, 'Open actions', c.actionsOpen),
   }
-  const sheetOpen: SlugStateDef = { id: 'sheet-open', label: 'Sheet open', render: (c) => actionsSheetOpen(c) }
+  const sheetOpen: SlugStateDef = {
+    id: 'sheet-open',
+    label: 'Sheet open',
+    render: (c) => h('div', { class: 'tc-demo-inline-actions-host' }, [actionsSheetOpen(c)]),
+  }
   if (focus === 'button') {
     return [
       screen,
@@ -633,7 +655,11 @@ function buildOverlayStates(
       label: 'Screen',
       render: (c) => overlayTrigger(c, triggerLabel, c[openRef] as Ref<boolean>, options),
     },
-    { id: 'open', label: 'Open', render: (c) => openRenderer(c) },
+    {
+      id: 'open',
+      label: 'Open',
+      render: (c) => h('div', { class: 'tc-demo-state-overlay-preview' }, [openRenderer(c)]),
+    },
   ]
 }
 
