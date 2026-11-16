@@ -37,10 +37,13 @@ jobs:
           bun-version: 1.4.4
 
       - id: preview
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
-          pr_number="${{ github.event.pull_request.number }}"
-          branch_name="${{ github.head_ref }}"
+          pr_number="${PR_NUMBER}"
+          branch_name="${HEAD_REF}"
           sanitized_branch=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
           preview_name="pr-${pr_number}-${sanitized_branch}"
           if [ "${#preview_name}" -gt 28 ]; then
@@ -48,7 +51,7 @@ jobs:
           fi
           echo "name=$preview_name" >> "$GITHUB_OUTPUT"
 
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile --ignore-scripts
 
       - run: bun run build:web
         env:
