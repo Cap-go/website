@@ -25,7 +25,7 @@ const overlayChecks = [
   { section: 'capacitor-sheet', trigger: /open sheet/i, expect: 'Sheet overlay content' },
   { section: 'capacitor-actions', trigger: /open actions/i, expect: 'Delete' },
   { section: 'capacitor-dialog', trigger: /open dialog/i, expect: 'Sample dialog' },
-  { section: 'capacitor-popover', trigger: /open popover/i, expect: 'Popover item' },
+  { section: 'capacitor-popover', trigger: /open popover/i, expect: 'Popover item', inSection: true },
   { section: 'capacitor-toast', trigger: /show toast/i, expect: 'Toast from registry demo' },
 ]
 
@@ -84,6 +84,24 @@ if (iosRoot === materialRoot) {
   failures.push({ name: 'theme:compare', reason: 'theme roots missing expected platform markers', iosRoot, materialRoot })
 }
 
+for (const check of overlayChecks) {
+  try {
+    await loadShell(page, 'ios', false)
+    const section = page.locator(`#${check.section}`)
+    await section.scrollIntoViewIfNeeded({ timeout: 15_000 })
+    await section.getByRole('button', { name: check.trigger }).click({ timeout: 10_000, force: true })
+    const scope = check.inSection ? section : page.locator('.tc-demo-overlay-host')
+    await scope.getByText(check.expect, { exact: false }).first().waitFor({ state: 'visible', timeout: 10_000 })
+  } catch (error) {
+    failures.push({
+      name: check.section,
+      reason: 'overlay did not open after trigger click',
+      expect: check.expect,
+      detail: error instanceof Error ? error.message : String(error),
+    })
+  }
+}
+
 await loadShell(page, 'ios', false)
 for (const item of manifest.items) {
   checked += 1
@@ -117,26 +135,8 @@ for (const item of manifest.items) {
   }
 }
 
-for (const check of overlayChecks) {
-  try {
-    const section = page.locator(`#${check.section}`)
-    await section.scrollIntoViewIfNeeded({ timeout: 15_000 })
-    await section.getByRole('button', { name: check.trigger }).click({ timeout: 10_000, force: true })
-    await page.getByText(check.expect, { exact: false }).first().waitFor({ state: 'visible', timeout: 10_000 })
-  } catch (error) {
-    failures.push({
-      name: check.section,
-      reason: 'overlay did not open after trigger click',
-      expect: check.expect,
-      detail: error instanceof Error ? error.message : String(error),
-    })
-  }
-  await page.keyboard.press('Escape').catch(() => {})
-  await page.waitForTimeout(250)
-}
-
-const notificationText = await page.locator('#capacitor-notification').innerText().catch(() => '')
-if (!notificationText.includes('New message') || !notificationText.includes('Your bundle finished uploading')) {
+const notificationText = (await page.locator('#capacitor-notification').innerText().catch(() => '')).toLowerCase()
+if (!notificationText.includes('new message') || !notificationText.includes('your bundle finished uploading')) {
   failures.push({
     name: 'capacitor-notification',
     reason: 'notification demo missing expected title or body',

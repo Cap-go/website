@@ -77,6 +77,11 @@ html.dark body.tc-demo-shell-body {
   overflow: hidden;
 }
 
+#capacitor-popover .registry-demo-block {
+  overflow: visible;
+  min-height: 9.5rem;
+}
+
 #capacitor-notification .registry-demo-block {
   overflow: visible;
   min-height: 9.5rem;
