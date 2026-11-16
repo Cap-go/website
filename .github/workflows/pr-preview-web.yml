@@ -1,0 +1,115 @@
+name: PR Preview (web)
+
+concurrency:
+  group: pr-preview-web-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  deploy-preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: preview
+    env:
+      NODE_OPTIONS: '--max-old-space-size=16384'
+      UV_THREADPOOL_SIZE: '32'
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.4
+
+      - id: preview
+        run: |
+          set -euo pipefail
+          pr_number="${{ github.event.pull_request.number }}"
+          branch_name="${{ github.head_ref }}"
+          sanitized_branch=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
+          preview_name="pr-${pr_number}-${sanitized_branch}"
+          if [ "${#preview_name}" -gt 28 ]; then
+            preview_name="pr-${pr_number}-$(echo "$sanitized_branch" | cut -c1-$((28 - ${#pr_number} - 4)))"
+          fi
+          echo "name=$preview_name" >> "$GITHUB_OUTPUT"
+          echo "url=https://${preview_name}.capgo-website.pages.dev" >> "$GITHUB_OUTPUT"
+
+      - run: bun install --frozen-lockfile
+
+      - run: bun run build:web
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+
+      - name: Deploy to Cloudflare Pages
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          bunx wrangler@4.126.0 pages deploy dist \
+            --project-name capgo-website \
+            --branch "${{ steps.preview.outputs.name }}"
+
+      - name: Update PR preview comment
+        uses: actions/github-script@ed597411d8f924b6eb921c95950e47aea0a39288
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const previewUrl = '${{ steps.preview.outputs.url }}'
+            const previewName = '${{ steps.preview.outputs.name }}'
+            const prNumber = ${{ github.event.pull_request.number }}
+            const commitSha = '${{ github.event.pull_request.head.sha }}'
+            const shortSha = commitSha.substring(0, 7)
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            })
+            const marker = 'PR Preview (web worker build)'
+            const botComment = comments.data.find(
+              (comment) => comment.user.type === 'Bot' && comment.body.includes(marker),
+            )
+            const body = [
+              marker,
+              '',
+              `Preview URL: ${previewUrl}`,
+              `Preview branch: \`${previewName}\``,
+              `Demo: ${previewUrl}/plugins/tailwind-capacitor/demo/`,
+              `Commit: [\`${shortSha}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${commitSha})`,
+              '',
+              'Updated on each push to this PR.',
+            ].join('\n')
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body,
+              })
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              })
+            }

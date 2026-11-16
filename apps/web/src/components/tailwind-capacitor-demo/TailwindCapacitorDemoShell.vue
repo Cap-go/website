@@ -10,7 +10,7 @@
           <ul class="divide-y text-sm">
             <li v-for="item in foundationItems" :key="item.name" class="py-3 first:pt-0 last:pb-0">
               <p class="font-medium leading-snug">{{ item.title }}</p>
-              <p class="mt-1 text-sm leading-relaxed opacity-70">{{ item.description }}</p>
+              <p class="mt-1 text-sm leading-relaxed opacity-70">{{ demoDescription(item.name) }}</p>
             </li>
           </ul>
           <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-black/10 pt-4 dark:border-white/10">
@@ -24,7 +24,7 @@
 
       <MotionBlock v-for="item in registryItems" :id="item.name" :key="item.name" class="tc-demo-section">
         <h2 class="tc-demo-section-heading">{{ item.title }}</h2>
-        <p class="tc-demo-section-description">{{ item.description }}</p>
+        <p class="tc-demo-section-description">{{ demoDescription(item.name) }}</p>
         <Block strong inset class="registry-demo-block">
           <component :is="sectionFor(item.name)" />
         </Block>
@@ -33,60 +33,60 @@
 
     <Teleport to="body">
       <div class="tc-demo-overlay-host" data-tc-overlay-host>
-      <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
-        <ActionsGroup>
-          <ActionsLabel>Actions</ActionsLabel>
-          <ActionsButton @click="actionsOpen = false">
-            <template #media>
-              <Icon material="share" />
-            </template>
-            Share
-          </ActionsButton>
-          <ActionsButton bold @click="actionsOpen = false">Delete</ActionsButton>
-        </ActionsGroup>
-      </Actions>
+        <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
+          <ActionsGroup>
+            <ActionsLabel>Actions</ActionsLabel>
+            <ActionsButton @click="actionsOpen = false">
+              <template #media>
+                <Icon material="share" />
+              </template>
+              Share
+            </ActionsButton>
+            <ActionsButton bold @click="actionsOpen = false">Delete</ActionsButton>
+          </ActionsGroup>
+        </Actions>
 
-      <Dialog v-if="dialogOpen" :opened="true" @backdropclick="dialogOpen = false">
-        <template #title>Dialog</template>
-        Sample dialog from the registry demo.
-        <template #buttons>
-          <DialogButton @click="dialogOpen = false">Close</DialogButton>
-        </template>
-      </Dialog>
+        <Dialog v-if="dialogOpen" :opened="true" @backdropclick="dialogOpen = false">
+          <template #title>Dialog</template>
+          Sample dialog from the registry demo.
+          <template #buttons>
+            <DialogButton @click="dialogOpen = false">Close</DialogButton>
+          </template>
+        </Dialog>
 
-      <Sheet v-if="sheetOpen" :opened="true" @backdropclick="sheetOpen = false">
-        <Toolbar top>
-          <div class="left">
-            <Link toolbar href="#" @click.prevent="sheetOpen = false" @keyup.enter="sheetOpen = false">Done</Link>
-          </div>
-          <div class="title">Sheet</div>
-        </Toolbar>
-        <Block>
-          <p class="p-4">Sheet overlay content.</p>
-        </Block>
-      </Sheet>
+        <Sheet v-if="sheetOpen" :opened="true" @backdropclick="sheetOpen = false">
+          <Toolbar top>
+            <div class="left">
+              <Link toolbar href="#" @click.prevent="sheetOpen = false" @keyup.enter="sheetOpen = false">Done</Link>
+            </div>
+            <div class="title">Sheet</div>
+          </Toolbar>
+          <Block>
+            <p class="p-4">Sheet overlay content.</p>
+          </Block>
+        </Sheet>
 
-      <Popover v-if="popoverOpen" :opened="true" target-el="#popover-target" @backdropclick="popoverOpen = false">
-        <List>
-          <ListItem title="Popover item" />
-        </List>
-      </Popover>
+        <Popover v-if="popoverOpen" :opened="true" target-el="#popover-target" @backdropclick="popoverOpen = false">
+          <List>
+            <ListItem title="Popover item" />
+          </List>
+        </Popover>
 
-      <Popup v-if="popupOpen" :opened="true" @backdropclick="popupOpen = false">
-        <Block strong class="m-0">
-          <p class="p-4">Popup content</p>
-          <Button class="m-4 mt-0 w-[calc(100%-2rem)]" @click="popupOpen = false">Close</Button>
-        </Block>
-      </Popup>
+        <Popup v-if="popupOpen" :opened="true" @backdropclick="popupOpen = false">
+          <Block strong class="m-0">
+            <p class="p-4">Popup content</p>
+            <Button class="m-4 mt-0 w-[calc(100%-2rem)]" @click="popupOpen = false">Close</Button>
+          </Block>
+        </Popup>
 
-      <Panel v-if="panelOpen" :opened="true" @backdropclick="panelOpen = false">
-        <Page>
-          <Navbar title="Panel" />
-          <Block class="p-4">Panel side content</Block>
-        </Page>
-      </Panel>
+        <Panel v-if="panelOpen" :opened="true" @backdropclick="panelOpen = false">
+          <Page>
+            <Navbar title="Panel" />
+            <Block class="p-4">Panel side content</Block>
+          </Page>
+        </Panel>
 
-      <Toast v-if="toastOpen" :opened="true" position="center" @toast:closed="toastOpen = false">Toast from registry demo</Toast>
+        <Toast v-if="toastOpen" :opened="true" position="center" @toast:closed="toastOpen = false">Toast from registry demo</Toast>
       </div>
     </Teleport>
   </App>
@@ -95,6 +95,7 @@
 <script setup>
 import { computed, defineComponent, h, onMounted, onUnmounted, ref, watch } from 'vue'
 import manifest from '../../tailwind-capacitor-snapshot/registry-manifest.json'
+import { tailwindCapacitorDemoDescriptions } from './tailwindCapacitorDemoDescriptions'
 import {
   Accordion,
   AccordionItem,
@@ -205,6 +206,11 @@ const foundationItems = computed(() => manifest.items.filter((item) => foundatio
 
 const registryItems = computed(() => manifest.items.filter((item) => !foundationNames.has(item.name)))
 
+/** @param {string} name */
+function demoDescription(name) {
+  return tailwindCapacitorDemoDescriptions[name] ?? manifest.items.find((item) => item.name === name)?.description ?? ''
+}
+
 function syncThemeToDocument() {
   if (typeof document === 'undefined') return
   document.documentElement.classList.toggle('dark', dark.value)
@@ -290,13 +296,7 @@ function defineStaticActionsDemo(lines) {
         h(
           'p',
           {
-            class: [
-              'px-4 py-3',
-              index > 0 && 'border-t border-black/10 dark:border-white/10',
-              line.bold && 'font-semibold',
-            ]
-              .filter(Boolean)
-              .join(' '),
+            class: ['px-4 py-3', index > 0 && 'border-t border-black/10 dark:border-white/10', line.bold && 'font-semibold'].filter(Boolean).join(' '),
           },
           line.text,
         ),
@@ -389,11 +389,7 @@ function demoTableSample() {
 
 const sectionMap = {
   'capacitor-actions': defineOpenShellButtonDemo('Open Actions', actionsOpen),
-  'capacitor-actions-button': defineStaticActionsDemo([
-    { text: 'Label', bold: true },
-    { text: 'Primary action', bold: true },
-    { text: 'Secondary' },
-  ]),
+  'capacitor-actions-button': defineStaticActionsDemo([{ text: 'Label', bold: true }, { text: 'Primary action', bold: true }, { text: 'Secondary' }]),
   'capacitor-actions-group': defineStaticActionsDemo([{ text: 'One' }, { text: 'Two' }]),
   'capacitor-actions-label': defineStaticActionsDemo([{ text: 'Section title', bold: true }, { text: 'Item' }]),
   'capacitor-accordion': defineDemo(() =>
@@ -401,16 +397,11 @@ const sectionMap = {
       Accordion,
       {},
       {
-        default: () => [
-          h(AccordionItem, {}, { default: () => 'Accounts' }),
-          h(AccordionItem, {}, { default: () => 'Billing' }),
-        ],
+        default: () => [h(AccordionItem, {}, { default: () => 'Accounts' }), h(AccordionItem, {}, { default: () => 'Billing' })],
       },
     ),
   ),
-  'capacitor-accordion-item': defineDemo(() =>
-    h(Accordion, {}, { default: () => h(AccordionItem, {}, { default: () => 'Accordion item' }) }),
-  ),
+  'capacitor-accordion-item': defineDemo(() => h(Accordion, {}, { default: () => h(AccordionItem, {}, { default: () => 'Accordion item' }) })),
   'capacitor-alert': defineDemo(() => h(Alert, { class: 'p-4' }, { default: () => 'Heads up: registry Alert styles.' })),
   'capacitor-app': defineDemo(() =>
     h(
@@ -516,10 +507,7 @@ const sectionMap = {
   'capacitor-datetime': defineDemo(() => h(Datetime, { class: 'p-3 text-sm' }, { default: () => 'Nov 15, 2026' })),
   'capacitor-dialog': defineOpenShellButtonDemo('Open dialog', dialogOpen),
   'capacitor-dialog-button': defineDemo(() =>
-    h('div', { class: 'flex flex-wrap gap-2' }, [
-      h(DialogButton, {}, { default: () => 'Cancel' }),
-      h(DialogButton, { strong: true }, { default: () => 'OK' }),
-    ]),
+    h('div', { class: 'flex flex-wrap gap-2' }, [h(DialogButton, {}, { default: () => 'Cancel' }), h(DialogButton, { strong: true }, { default: () => 'OK' })]),
   ),
   'capacitor-footer': defineDemo(() => h(Footer, {}, { default: () => h('p', { class: 'p-3 text-sm' }, 'Footer region') })),
   'capacitor-fab': defineDemo(() =>
@@ -537,9 +525,13 @@ const sectionMap = {
       {},
       {
         default: () =>
-          h(ItemSliding, {}, {
-            default: () => h(ListItem, { title: 'Swipe row', link: true }),
-          }),
+          h(
+            ItemSliding,
+            {},
+            {
+              default: () => h(ListItem, { title: 'Swipe row', link: true }),
+            },
+          ),
       },
     ),
   ),
@@ -598,7 +590,7 @@ const sectionMap = {
             {},
             {
               title: () => 'Title slot',
-              after: () => h(Toggle, { checked: toggleOn.value }),
+              after: () => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) }),
             },
           ),
       },
@@ -622,7 +614,23 @@ const sectionMap = {
       },
     ),
   ),
-  'capacitor-modal': defineDemo(() => h(Modal, { class: 'p-4 text-sm' }, { default: () => 'Modal surface (inline preview)' })),
+  'capacitor-modal': defineDemo(() =>
+    h(
+      Modal,
+      { class: 'm-0 overflow-hidden rounded-xl' },
+      {
+        default: () =>
+          h('div', { class: 'p-4' }, [
+            h('h3', { class: 'font-semibold' }, 'Save changes?'),
+            h('p', { class: 'mt-2 text-sm opacity-80' }, 'Your draft channel name is updated but not published yet.'),
+            h('div', { class: 'mt-4 flex gap-2' }, [
+              h(Button, { outline: true, class: 'flex-1' }, { default: () => 'Cancel' }),
+              h(Button, { class: 'flex-1' }, { default: () => 'Save' }),
+            ]),
+          ]),
+      },
+    ),
+  ),
   'capacitor-note': defineDemo(() => h(Note, {}, { default: () => 'Note block from registry' })),
   'capacitor-message': defineDemo(() =>
     h(
@@ -638,7 +646,10 @@ const sectionMap = {
     ),
   ),
   'capacitor-messagebar': defineDemo(() =>
-    h('div', { class: 'tc-demo-messagebar-host' }, h(Messagebar, { placeholder: 'Type a message' })),
+    h('div', { class: 'tc-demo-messagebar-host space-y-2' }, [
+      h('p', { class: 'text-xs opacity-70' }, 'Compose a reply'),
+      h(Messagebar, { placeholder: 'Type a message', value: 'On my way' }),
+    ]),
   ),
   'capacitor-messages': defineDemo(() =>
     h(
@@ -668,7 +679,16 @@ const sectionMap = {
     ),
   ),
   'capacitor-navbar-back-link': defineDemo(() => h(NavbarBackLink, { text: 'Back' })),
-  'capacitor-notification': defineDemo(() => h(Notification, { title: 'Notification', subtitle: 'Subtitle', text: 'Supporting text' })),
+  'capacitor-notification': defineDemo(() =>
+    h(Notification, {
+      opened: true,
+      button: 'Dismiss',
+      icon: 'notifications',
+      title: 'New message',
+      subtitle: 'Capgo',
+      text: 'Your bundle finished uploading to the preview channel.',
+    }),
+  ),
   'capacitor-page': defineDemo(() =>
     h(
       Block,
@@ -707,21 +727,18 @@ const sectionMap = {
       {},
       {
         default: () =>
-          h(Reorder, {}, {
-            default: () => [
-              h(ListItem, { title: 'First' }),
-              h(ListItem, { title: 'Second' }),
-            ],
-          }),
+          h(
+            Reorder,
+            {},
+            {
+              default: () => [h(ListItem, { title: 'First' }), h(ListItem, { title: 'Second' })],
+            },
+          ),
       },
     ),
   ),
   'capacitor-select': defineDemo(() =>
-    h(
-      Select,
-      { label: 'Fruit', 'aria-label': 'Fruit' },
-      { default: () => [h('option', { value: 'apple' }, 'Apple'), h('option', { value: 'pear' }, 'Pear')] },
-    ),
+    h(Select, { label: 'Fruit', 'aria-label': 'Fruit' }, { default: () => [h('option', { value: 'apple' }, 'Apple'), h('option', { value: 'pear' }, 'Pear')] }),
   ),
   'capacitor-searchbar': defineDemo(() =>
     h(Searchbar, {
@@ -763,7 +780,23 @@ const sectionMap = {
   'capacitor-split-pane': defineDemo(() =>
     h(SplitPane, { class: 'min-h-24 grid grid-cols-2 gap-2 p-2 text-sm' }, { default: () => [h('div', 'Left pane'), h('div', 'Right pane')] }),
   ),
-  'capacitor-stepper': defineDemo(() => h(Stepper, { value: stepperValue.value, min: 0, max: 10 })),
+  'capacitor-stepper': defineComponent({
+    setup() {
+      const value = ref(stepperValue.value)
+      return () =>
+        h(Stepper, {
+          value: value.value,
+          onPlus: () => {
+            value.value = Math.min(10, value.value + 1)
+            stepperValue.value = value.value
+          },
+          onMinus: () => {
+            value.value = Math.max(0, value.value - 1)
+            stepperValue.value = value.value
+          },
+        })
+    },
+  }),
   'capacitor-tab': defineComponent({
     setup() {
       const active = ref('a')
@@ -819,28 +852,31 @@ const sectionMap = {
   'capacitor-table-cell': defineDemo(() => tableWithBodyCells('Cell A', 'Cell B')),
   'capacitor-table-head': defineDemo(() => tableWithHeaderCell('Header')),
   'capacitor-table-row': defineDemo(() => tableWithBodyRow('Single row')),
-  'capacitor-textarea': defineDemo(() =>
-    h(Textarea, { value: 'Hello', label: 'Message', placeholder: 'Type here', 'aria-label': 'Message' }),
+  'capacitor-textarea': defineDemo(() => h(Textarea, { value: 'Hello', label: 'Message', placeholder: 'Type here', 'aria-label': 'Message' })),
+  'capacitor-thumbnail': defineDemo(() =>
+    h('div', { class: 'flex items-center gap-3' }, [
+      h(Thumbnail, { class: 'size-16 rounded-lg bg-neutral-200 dark:bg-neutral-700', alt: 'Cover art' }),
+      h('p', { class: 'text-sm' }, 'List row media'),
+    ]),
   ),
-  'capacitor-thumbnail': defineDemo(() => h(Thumbnail, { class: 'size-16 rounded-lg bg-neutral-200 dark:bg-neutral-700' })),
   'capacitor-toast': defineOpenShellButtonDemo('Show toast', toastOpen),
-  'capacitor-touch-ripple': defineDemo(() =>
-    h(TouchRipple, { class: 'inline-flex' }, { default: () => h(Button, {}, { default: () => 'Ripple target' }) }),
-  ),
+  'capacitor-touch-ripple': defineDemo(() => h(TouchRipple, { class: 'inline-flex' }, { default: () => h(Button, {}, { default: () => 'Ripple target' }) })),
   'capacitor-toggle': defineDemo(() => h(Toggle, { checked: toggleOn.value, onClick: () => (toggleOn.value = !toggleOn.value) })),
   'capacitor-toolbar': defineDemo(() =>
-    h(Toolbar, { top: true }, {
-      default: () => [
-        h('div', { class: 'left' }, [
-          h(Link, { toolbar: true, href: '#' }, { default: () => 'Cancel' }),
-        ]),
-        h('div', { class: 'title' }, 'Edit item'),
-        h('div', { class: 'right flex items-center gap-4' }, [
-          h(Link, { toolbar: true, href: '#' }, { default: () => 'Save' }),
-          h(Link, { toolbar: true, href: '#', class: 'ml-1' }, { default: () => 'More' }),
-        ]),
-      ],
-    }),
+    h(
+      Toolbar,
+      { top: true },
+      {
+        default: () => [
+          h('div', { class: 'left' }, [h(Link, { toolbar: true, href: '#' }, { default: () => 'Cancel' })]),
+          h('div', { class: 'title' }, 'Edit item'),
+          h('div', { class: 'right flex items-center gap-4' }, [
+            h(Link, { toolbar: true, href: '#' }, { default: () => 'Save' }),
+            h(Link, { toolbar: true, href: '#', class: 'ml-1' }, { default: () => 'More' }),
+          ]),
+        ],
+      },
+    ),
   ),
 }
 
