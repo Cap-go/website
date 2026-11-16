@@ -370,36 +370,127 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
  * @param {string} fileName
  */
 /**
+ * @param {import('playwright').Page} page
+ * @param {import('playwright').Locator} block
+ */
+async function scrollInstallBelowHeader(page, block) {
+  await block.evaluate((el) => {
+    const header = document.querySelector('header')
+    const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0
+    const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 16
+    window.scrollTo({ top: Math.max(0, top), left: 0, behavior: 'instant' })
+  })
+  await page.waitForTimeout(350)
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {import('playwright').Locator} block
+ * @param {number} viewportWidth
+ */
+async function measureInstallBlock(page, block, viewportWidth) {
+  return block.evaluate(
+    (el, width) => {
+      const rect = el.getBoundingClientRect()
+      const overflowsViewport = el.scrollWidth > width + 1
+      return {
+        top: rect.top,
+        height: Math.ceil(rect.height),
+        scrollWidth: el.scrollWidth,
+        overflowsViewport,
+      }
+    },
+    viewportWidth,
+  )
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {import('playwright').Locator} block
+ * @param {string} filePath
+ * @param {{ width: number, height: number }} viewport
+ */
+async function screenshotMobileInstall(page, block, filePath, viewport) {
+  await scrollInstallBelowHeader(page, block)
+  const metrics = await measureInstallBlock(page, block, viewport.width)
+  const clipY = Math.max(0, Math.floor(metrics.top))
+  const clipHeight = Math.min(Math.ceil(metrics.height) + 8, viewport.height - clipY)
+  await page.screenshot({
+    path: filePath,
+    clip: { x: 0, y: clipY, width: viewport.width, height: clipHeight },
+  })
+  return metrics.overflowsViewport
+}
+
+/**
+ * @param {import('playwright').Page} page
+ */
+async function resolveInstallBlock(page) {
+  const tailwind = page.locator('[data-tailwind-capacitor-install]')
+  if ((await tailwind.count()) > 0) {
+    return tailwind.first()
+  }
+  const installCard = page
+    .locator('[data-plugin-copy]')
+    .first()
+    .locator(
+      'xpath=ancestor::div[contains(@class,"overflow-hidden") and (contains(@class,"mt-8") or contains(@class,"mt-8,"))][1]',
+    )
+  if ((await installCard.count()) > 0) {
+    return installCard.first()
+  }
+  return page.locator('[data-plugin-copy]').first().locator('xpath=ancestor::div[contains(@class,"mt-8")][1]').first()
+}
+
+/** @type {{ before?: boolean, after?: boolean }} */
+const mobileInstallOverflow = {}
+
+/**
  * @param {import('playwright').Browser} browser
  */
 async function captureInstallSections(browser) {
   const manifest = []
   const viewports = [
-    { prefix: '', width: 1280, height: 900 },
-    { prefix: 'mobile-', width: 390, height: 844 },
+    { prefix: '', width: 1280, height: 900, mobile: false },
+    { prefix: 'mobile-', width: 390, height: 844, mobile: true },
   ]
-  for (const { prefix, width, height } of viewports) {
-    for (const { label, urlBase } of [
-      { label: 'before', urlBase: installBeforeUrl },
-      { label: 'after', urlBase: baseUrl },
-    ]) {
-      const page = await browser.newPage({ viewport: { width, height } })
+  const mobileOnly = process.env.TC_CAPTURE_INSTALL_MOBILE_ONLY === '1'
+  const installJobs = [
+    { label: 'before', urlBase: installBeforeUrl },
+    { label: 'after', urlBase: baseUrl },
+  ]
+  for (const { prefix, width, height, mobile } of viewports) {
+    if (mobileOnly && !mobile) continue
+    for (const { label, urlBase } of installJobs) {
+      const page = await browser.newPage({
+        viewport: { width, height },
+        deviceScaleFactor: 1,
+      })
       try {
-        await page.goto(`${urlBase}/plugins/tailwind-capacitor/`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
-        let block = page.locator('[data-tailwind-capacitor-install]')
-        if ((await block.count()) === 0) {
-          block = page.locator('[data-plugin-copy]').first().locator('xpath=ancestor::div[contains(@class,"mt-8")]').first()
-        }
+        await page.goto(`${urlBase}/plugins/tailwind-capacitor/`, { waitUntil: 'networkidle', timeout: 120_000 })
+        const block = await resolveInstallBlock(page)
         await block.waitFor({ state: 'visible', timeout: 30_000 })
-        await block.scrollIntoViewIfNeeded()
-        await page.waitForTimeout(400)
         const fileName = `install-section-${prefix}${label}.png`
-        await block.screenshot({ path: join(outDir, fileName) })
+        const filePath = join(outDir, fileName)
+        if (mobile) {
+          const overflows = await screenshotMobileInstall(page, block, filePath, { width, height })
+          if (label === 'before') mobileInstallOverflow.before = overflows
+          if (label === 'after') mobileInstallOverflow.after = overflows
+        } else {
+          await scrollInstallBelowHeader(page, block)
+          await block.screenshot({ path: filePath })
+        }
         manifest.push(await fileEntry(fileName))
       } finally {
         await page.close()
       }
     }
+  }
+  if (mobileOnly) {
+    await writeFile(
+      join(outDir, 'install-mobile-overflow.json'),
+      `${JSON.stringify(mobileInstallOverflow, null, 2)}\n`,
+    )
   }
   return manifest
 }
