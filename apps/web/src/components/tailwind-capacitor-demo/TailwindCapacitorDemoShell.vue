@@ -855,7 +855,7 @@ const sectionMap = {
   'capacitor-textarea': defineDemo(() => h(Textarea, { value: 'Hello', label: 'Message', placeholder: 'Type here', 'aria-label': 'Message' })),
   'capacitor-thumbnail': defineDemo(() =>
     h('div', { class: 'flex items-center gap-3' }, [
-      h(Thumbnail, { class: 'size-16 rounded-lg bg-neutral-200 dark:bg-neutral-700', alt: 'Cover art' }),
+      h(Thumbnail, { class: 'size-16 rounded-lg bg-neutral-200 dark:bg-neutral-700' }),
       h('p', { class: 'text-sm' }, 'List row media'),
     ]),
   ),

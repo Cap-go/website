@@ -65,11 +65,21 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          bunx wrangler@4.137.0 preview --name "${{ steps.preview.outputs.name }}" --json | tee preview.json
+          bunx wrangler@4.137.0 preview --name "${{ steps.preview.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
           preview_url=$(node -e "
             const fs = require('node:fs');
-            const raw = fs.readFileSync('preview.json', 'utf8').trim();
-            const data = JSON.parse(raw);
+            const raw = fs.readFileSync('preview.json', 'utf8');
+            const jsonLine = raw
+              .split('\n')
+              .map((line) => line.trim())
+              .filter((line) => line.startsWith('{') && line.endsWith('}'))
+              .pop();
+            if (!jsonLine) {
+              console.error('No JSON line in wrangler preview output');
+              console.error(raw.slice(0, 2000));
+              process.exit(1);
+            }
+            const data = JSON.parse(jsonLine);
             const urls =
               data.preview?.urls ??
               data.preview_urls ??
