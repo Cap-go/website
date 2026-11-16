@@ -126,7 +126,7 @@ See also the [plugin repository README](https://github.com/Cap-go/capacitor-down
 
 ## lengthHeader for gzip downloads
 
-Available since **8.8.4**. Related plugin change: [capacitor-downloader#144](https://github.com/Cap-go/capacitor-downloader/pull/144).
+Available since **8.9.0**. Related plugin change: [capacitor-downloader#144](https://github.com/Cap-go/capacitor-downloader/pull/144).
 
 Use `lengthHeader` when your CDN compresses the response body (`Content-Encoding: gzip` or similar) and either omits `Content-Length` or sends a value for **compressed** bytes. Many CDNs still send the uncompressed size in a custom header such as `X-Uncompressed-Length`. Pass that header **name** (not the numeric value) on `download()`.
 
@@ -140,6 +140,8 @@ Use `lengthHeader` when your CDN compresses the response body (`Content-Encoding
 | Web | Ignored |
 
 Without `lengthHeader`, progress can stay at `0`, complete too early, or report the wrong `bytesTotal`. The plugin reads the named header from the HTTP response, prefers it over misleading native totals, and clamps `progress` at `1`.
+
+Do not add `Accept-Encoding: gzip` (or similar) to `headers`. That disables OkHttp transparent decompression on Android and leaves `Content-Encoding` on the response, so Android OkHttp ignores `lengthHeader` and progress can stall.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';

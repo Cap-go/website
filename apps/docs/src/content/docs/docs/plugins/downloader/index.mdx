@@ -52,9 +52,9 @@ Available since **8.8.0**. Large offline packs can keep moving while users switc
 
 </Aside>
 
-<Aside type="tip" title="lengthHeader for gzip downloads (8.8.4)">
+<Aside type="tip" title="lengthHeader for gzip downloads (8.9.0)">
 
-Available since **8.8.4**. When responses use `Content-Encoding: gzip` and `Content-Length` is missing or wrong, set `lengthHeader` to the response header that carries the **uncompressed** byte count (for example `X-Uncompressed-Length`). Single downloads: iOS and Android OkHttp. Batch downloads: iOS only (Android batches use DownloadManager and ignore `lengthHeader`). Progress is clamped at `1`. See [lengthHeader for gzip downloads](/docs/plugins/downloader/getting-started/#lengthheader-for-gzip-downloads/) and the [plugin README](https://github.com/Cap-go/capacitor-downloader/#lengthheader-for-gzip-and-compressed-responses) ([capacitor-downloader#144](https://github.com/Cap-go/capacitor-downloader/pull/144)).
+Available since **8.9.0**. When responses use `Content-Encoding: gzip` and `Content-Length` is missing or wrong, set `lengthHeader` to the response header that carries the **uncompressed** byte count (for example `X-Uncompressed-Length`). Single downloads: iOS and Android OkHttp. Batch downloads: iOS only (Android batches use DownloadManager and ignore `lengthHeader`). On Android OkHttp, `lengthHeader` is ignored when the response still includes `Content-Encoding`; do not set request `Accept-Encoding`. Progress is clamped at `1`. See [lengthHeader for gzip downloads](/docs/plugins/downloader/getting-started/#lengthheader-for-gzip-downloads) and the [plugin README](https://github.com/Cap-go/capacitor-downloader/#lengthheader-for-gzip-and-compressed-responses) ([capacitor-downloader#144](https://github.com/Cap-go/capacitor-downloader/pull/144)).
 
 </Aside>
 
