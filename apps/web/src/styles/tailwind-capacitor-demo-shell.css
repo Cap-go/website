@@ -103,6 +103,11 @@ html.dark body.tc-demo-shell-body {
   overflow: visible;
 }
 
+.tc-demo-inline-actions-host :where(.fixed),
+.tc-demo-state-overlay-preview :where(.fixed) {
+  position: absolute !important;
+}
+
 .tc-demo-inline-actions-host :where(.actions-backdrop),
 .tc-demo-state-overlay-preview :where(.actions-backdrop, .dialog-backdrop, .sheet-backdrop, .popup-backdrop) {
   position: absolute !important;

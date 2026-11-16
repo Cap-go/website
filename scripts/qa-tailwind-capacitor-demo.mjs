@@ -103,25 +103,7 @@ async function assertStateClipping(frame, stateId, label) {
  * @param {string} slug
  */
 async function exerciseInteractions(frame, slug) {
-  const overlaySlugs = new Set([
-    'capacitor-actions',
-    'capacitor-dialog',
-    'capacitor-sheet',
-    'capacitor-popup',
-    'capacitor-panel',
-    'capacitor-popover',
-    'capacitor-toast',
-    'capacitor-notification',
-  ])
   try {
-    if (overlaySlugs.has(slug)) {
-      const trigger = frame.locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
-      if (await trigger.count()) {
-        await trigger.click({ timeout: 5000 })
-        await frame.waitForTimeout(400)
-        await frame.locator('.tc-demo-overlay-host').click({ position: { x: 8, y: 8 }, timeout: 2000 }).catch(() => {})
-      }
-    }
     if (slug === 'capacitor-toggle' || slug === 'capacitor-checkbox' || slug === 'capacitor-radio') {
       const control = frame.locator('[data-tc-demo-state="on"] .toggle, [data-tc-demo-state="on"] input, [data-tc-demo-state="on"] [role="checkbox"]').first()
       if (await control.count()) await control.click({ timeout: 3000 }).catch(() => {})
