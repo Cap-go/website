@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-11-16T09:00:00.000Z
-updated_at: 2026-11-16T09:00:00.000Z
+updated_at: 2026-11-16T13:09:24.000Z
 head_image: /migrating-cordova-to-capacitor.webp
 head_image_alt: "Illustration of migrating a Cordova app to Capacitor, used for a media playback plugin guide"
 keywords: cordova-plugin-media alternative, capacitor native audio, @capgo/capacitor-native-audio, Media cordova playback migration
