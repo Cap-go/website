@@ -14,6 +14,7 @@
     "run_worker_first": true,
   },
   "workers_dev": false,
+  "preview_urls": true,
   "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache" }],
   "ratelimits": [
     {
