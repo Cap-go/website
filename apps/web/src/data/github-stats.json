@@ -1,12 +1,12 @@
 {
   "repositoryCount": 144,
   "contributorCount": 613,
-  "versionCount": 16837,
-  "releaseCount": 7498,
-  "closedIssueCount": 1800,
-  "mergedPullRequestCount": 10256,
-  "resolvedItemCount": 12056,
-  "totalStars": 3228,
+  "versionCount": 16847,
+  "releaseCount": 7501,
+  "closedIssueCount": 1802,
+  "mergedPullRequestCount": 10271,
+  "resolvedItemCount": 12073,
+  "totalStars": 3230,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -66,10 +66,10 @@
       "url": "https://github.com/Cap-go/capacitor-transitions",
       "stars": 26,
       "contributors": 3,
-      "versionTags": 54,
-      "releases": 51,
-      "closedIssues": 5,
-      "mergedPullRequests": 59
+      "versionTags": 55,
+      "releases": 52,
+      "closedIssues": 6,
+      "mergedPullRequests": 60
     },
     "Cap-go/capacitor-sheets": {
       "url": "https://github.com/Cap-go/capacitor-sheets",
@@ -136,7 +136,7 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 889,
+      "stars": 890,
       "contributors": 54,
       "versionTags": 796,
       "releases": 240,
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 213,
       "contributors": 30,
-      "versionTags": 5954,
+      "versionTags": 5961,
       "releases": 1000,
       "closedIssues": 422,
-      "mergedPullRequests": 2835
+      "mergedPullRequests": 2847
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -561,10 +561,10 @@
       "url": "https://github.com/Cap-go/capacitor-downloader",
       "stars": 15,
       "contributors": 3,
-      "versionTags": 116,
-      "releases": 97,
-      "closedIssues": 11,
-      "mergedPullRequests": 69
+      "versionTags": 118,
+      "releases": 99,
+      "closedIssues": 12,
+      "mergedPullRequests": 71
     },
     "Cap-go/capacitor-env": {
       "url": "https://github.com/Cap-go/capacitor-env",
@@ -604,7 +604,7 @@
     },
     "Cap-go/capacitor-health": {
       "url": "https://github.com/Cap-go/capacitor-health",
-      "stars": 32,
+      "stars": 33,
       "contributors": 8,
       "versionTags": 115,
       "releases": 114,

@@ -174,6 +174,17 @@ const content = {
 
           <h1 class="font-pj text-3xl font-bold text-white sm:text-4xl md:text-5xl">{m.plugins_directory({}, { locale })}</h1>
           <p class="mt-4 max-w-2xl text-gray-300">{m.plugins_directory_description({}, { locale })}</p>
+          <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4 text-sm font-semibold">
+            <a href="#plugins" class="inline-flex rounded-lg bg-blue-600 px-5 py-3 text-white hover:bg-blue-700">
+              {m.plugins_browse_cta({}, { locale })}
+            </a>
+            <a href={docs('plugins/')} class="text-blue-300! underline underline-offset-4 hover:text-white!">
+              {m.plugins_docs_cta({}, { locale })}
+            </a>
+            <a href="#choose-a-plugin" class="text-blue-300! underline underline-offset-4 hover:text-white!">
+              {m.plugins_guide_cta({}, { locale })}
+            </a>
+          </div>
         </div>
         <div class="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-gray-800 bg-gray-800/80 text-gray-300 sm:grid-cols-3 lg:grid-cols-6">
           {directoryStats.map((stat) => (
@@ -251,7 +262,7 @@ const content = {
     </section>
 
     <!-- Plugins Grid -->
-    <section id="plugins" class="pt-4 pb-20">
+    <section id="plugins" class="scroll-mt-24 pt-4 pb-20">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mb-10 text-center">
           <h2 class="font-pj mb-6 text-4xl font-bold text-white">{m.browse_plugin_library({}, { locale: Astro.locals.locale })}</h2>
@@ -474,6 +485,48 @@ const content = {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="choose-a-plugin" aria-labelledby="plugin-guide-title" class="scroll-mt-24 border-t border-gray-800 px-6 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <h2 id="plugin-guide-title" class="font-pj text-3xl font-bold text-white sm:text-4xl">
+          {m.plugins_guide_title({}, { locale })}
+        </h2>
+        <div class="mt-8 grid gap-10 md:grid-cols-2">
+          <div>
+            <h3 class="text-xl font-semibold text-white">{m.plugins_compatibility_title({}, { locale })}</h3>
+            <p class="mt-4 leading-7 text-gray-300">{m.plugins_compatibility_description({}, { locale })}</p>
+            <ul class="mt-5 space-y-3 text-sm font-semibold">
+              <li>
+                <a href="https://capacitorjs.com/docs/apis" class="text-blue-300! underline underline-offset-4 hover:text-white!">
+                  {m.plugins_official_cta({}, { locale })}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(locale, 'blog/ultimate-guide-to-capacitor-plugin-development/')}
+                  class="text-blue-300! underline underline-offset-4 hover:text-white!"
+                >
+                  {m.plugins_development_cta({}, { locale })}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-xl font-semibold text-white">{m.plugins_install_title({}, { locale })}</h3>
+            <p class="mt-4 leading-7 text-gray-300">{m.plugins_install_description({}, { locale })}</p>
+            <pre class="mt-4 overflow-x-auto rounded-lg border border-gray-700 bg-gray-950 p-4 text-sm text-gray-200"><code>bun add @capgo/capacitor-native-biometric
+bunx cap sync</code></pre>
+            <a
+              href={docs('plugins/native-biometric/getting-started/')}
+              class="mt-4 inline-block text-sm font-semibold text-blue-300! underline underline-offset-4 hover:text-white!"
+            >
+              {m.plugins_install_example_cta({}, { locale })}
+            </a>
+            <p class="mt-4 text-sm leading-6 text-gray-400">{m.plugins_install_native_release({}, { locale })}</p>
           </div>
         </div>
       </div>
