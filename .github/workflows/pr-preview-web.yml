@@ -120,14 +120,6 @@ jobs:
           ")
           echo "url=${preview_url%/}" >> "$GITHUB_OUTPUT"
 
-      - name: Cache Tailwind Capacitor registry snapshot
-        uses: actions/cache@v4
-        with:
-          path: apps/web/src/tailwind-capacitor-snapshot
-          key: tailwind-capacitor-snapshot-${{ hashFiles('apps/shared/config/tailwindCapacitorRegistry.ts', 'apps/web/vendor/tailwind-capacitor-registry-snapshot/registry-manifest.json') }}
-          restore-keys: |
-            tailwind-capacitor-snapshot-
-
       - name: Update PR preview comment
         uses: actions/github-script@v7
         env:

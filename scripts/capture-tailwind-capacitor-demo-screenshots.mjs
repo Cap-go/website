@@ -374,25 +374,31 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
  */
 async function captureInstallSections(browser) {
   const manifest = []
-  for (const { label, urlBase } of [
-    { label: 'before', urlBase: installBeforeUrl },
-    { label: 'after', urlBase: baseUrl },
-  ]) {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
-    try {
-      await page.goto(`${urlBase}/plugins/tailwind-capacitor/`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
-      let block = page.locator('[data-tailwind-capacitor-install]')
-      if ((await block.count()) === 0) {
-        block = page.locator('[data-plugin-copy]').first().locator('xpath=ancestor::div[contains(@class,"mt-8")]').first()
+  const viewports = [
+    { prefix: '', width: 1280, height: 900 },
+    { prefix: 'mobile-', width: 390, height: 844 },
+  ]
+  for (const { prefix, width, height } of viewports) {
+    for (const { label, urlBase } of [
+      { label: 'before', urlBase: installBeforeUrl },
+      { label: 'after', urlBase: baseUrl },
+    ]) {
+      const page = await browser.newPage({ viewport: { width, height } })
+      try {
+        await page.goto(`${urlBase}/plugins/tailwind-capacitor/`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
+        let block = page.locator('[data-tailwind-capacitor-install]')
+        if ((await block.count()) === 0) {
+          block = page.locator('[data-plugin-copy]').first().locator('xpath=ancestor::div[contains(@class,"mt-8")]').first()
+        }
+        await block.waitFor({ state: 'visible', timeout: 30_000 })
+        await block.scrollIntoViewIfNeeded()
+        await page.waitForTimeout(400)
+        const fileName = `install-section-${prefix}${label}.png`
+        await block.screenshot({ path: join(outDir, fileName) })
+        manifest.push(await fileEntry(fileName))
+      } finally {
+        await page.close()
       }
-      await block.waitFor({ state: 'visible', timeout: 30_000 })
-      await block.scrollIntoViewIfNeeded()
-      await page.waitForTimeout(400)
-      const fileName = `install-section-${label}.png`
-      await block.screenshot({ path: join(outDir, fileName) })
-      manifest.push(await fileEntry(fileName))
-    } finally {
-      await page.close()
     }
   }
   return manifest
