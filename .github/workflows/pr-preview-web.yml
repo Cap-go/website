@@ -47,7 +47,6 @@ jobs:
             preview_name="pr-${pr_number}-$(echo "$sanitized_branch" | cut -c1-$((28 - ${#pr_number} - 4)))"
           fi
           echo "name=$preview_name" >> "$GITHUB_OUTPUT"
-          echo "url=https://${preview_name}.capgo-website.pages.dev" >> "$GITHUB_OUTPUT"
 
       - run: bun install --frozen-lockfile
 
@@ -58,23 +57,41 @@ jobs:
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy Worker preview
+        id: worker_preview
         working-directory: apps/web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          bunx wrangler@4.126.0 pages deploy dist \
-            --project-name capgo-website \
-            --branch "${{ steps.preview.outputs.name }}"
+          bunx wrangler@4.137.0 preview --name "${{ steps.preview.outputs.name }}" --json | tee preview.json
+          preview_url=$(node -e "
+            const fs = require('node:fs');
+            const raw = fs.readFileSync('preview.json', 'utf8').trim();
+            const data = JSON.parse(raw);
+            const urls =
+              data.preview?.urls ??
+              data.preview_urls ??
+              data.deployment?.urls ??
+              data.deployment_urls ??
+              [];
+            const url = urls.find((u) => typeof u === 'string' && u.startsWith('https://'));
+            if (!url) {
+              console.error('No preview URL in wrangler output');
+              console.error(raw);
+              process.exit(1);
+            }
+            process.stdout.write(url);
+          ")
+          echo "url=${preview_url%/}" >> "$GITHUB_OUTPUT"
 
       - name: Update PR preview comment
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const previewUrl = '${{ steps.preview.outputs.url }}'
+            const previewUrl = '${{ steps.worker_preview.outputs.url }}'
             const previewName = '${{ steps.preview.outputs.name }}'
             const prNumber = ${{ github.event.pull_request.number }}
             const commitSha = '${{ github.event.pull_request.head.sha }}'
@@ -88,14 +105,16 @@ jobs:
             const botComment = comments.data.find(
               (comment) => comment.user.type === 'Bot' && comment.body.includes(marker),
             )
+            const demoUrl = `${previewUrl}/plugins/tailwind-capacitor/demo/`
             const body = [
               marker,
               '',
               `Preview URL: ${previewUrl}`,
-              `Preview branch: \`${previewName}\``,
-              `Demo: ${previewUrl}/plugins/tailwind-capacitor/demo/`,
+              `Preview name: \`${previewName}\``,
+              `Demo: ${demoUrl}`,
               `Commit: [\`${shortSha}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${commitSha})`,
               '',
+              'Deployed with `wrangler preview` on the `capgo-website` Worker (production is Workers on capgo.app, not Cloudflare Pages).',
               'Updated on each push to this PR.',
             ].join('\n')
             if (botComment) {
