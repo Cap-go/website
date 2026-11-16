@@ -70,7 +70,7 @@ jobs:
             --branch "${{ steps.preview.outputs.name }}"
 
       - name: Update PR preview comment
-        uses: actions/github-script@ed597411d8f924b6eb921c95950e47aea0a39288
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
