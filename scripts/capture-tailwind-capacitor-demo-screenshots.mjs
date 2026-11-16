@@ -38,14 +38,28 @@ const componentTargets = [
 ]
 
 /**
+ * @param {import('playwright').FrameLocator} frame
+ */
+async function dismissOverlays(frame) {
+  await frame
+    .locator('.tc-demo-overlay-host .fixed.inset-0, .tc-demo-overlay-host .fixed.top-0')
+    .first()
+    .click({ force: true, position: { x: 4, y: 4 }, timeout: 3000 })
+    .catch(() => {})
+  await new Promise((resolve) => setTimeout(resolve, 200))
+}
+
+/**
  * @param {import('playwright').Page} page
  */
 async function applyTheme(page, platform, dark) {
   await page.locator('#tc-demo-iframe').waitFor({ state: 'visible', timeout: 60000 })
   const controls = page.locator('[data-tc-demo-controls]')
   await controls.waitFor({ state: 'visible', timeout: 30000 })
-  await controls.locator(`[data-tc-platform="${platform}"]`).click()
-  await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click()
+  await controls.locator(`[data-tc-platform="${platform}"]`).scrollIntoViewIfNeeded()
+  await controls.locator(`[data-tc-platform="${platform}"]`).click({ force: true })
+  await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).scrollIntoViewIfNeeded()
+  await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
   const frame = page.frameLocator('#tc-demo-iframe')
   const platformLabel = platform === 'ios' ? 'iOS' : 'Material'
   await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 90000 })
@@ -61,13 +75,14 @@ async function applyTheme(page, platform, dark) {
  * @param {string | null} openLabel
  */
 async function focusComponentInFrame(frame, sectionId, openLabel) {
+  // Frame-only helper; callers wait after overlays.
   const section = frame.locator(`#${sectionId}`)
   await section.scrollIntoViewIfNeeded()
   await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20000 })
   if (openLabel) {
-    await section.getByRole('button', { name: openLabel }).click()
-    await frame.locator('[data-tc-overlay-host]').waitFor({ state: 'visible', timeout: 10000 }).catch(() => {})
-    await frame.locator('.tc-demo-overlay-host').waitFor({ state: 'attached', timeout: 10000 }).catch(() => {})
+    await section.getByText(openLabel, { exact: true }).click({ timeout: 15000, force: true })
+    await frame.locator('.tc-demo-overlay-host').waitFor({ state: 'attached', timeout: 15000 }).catch(() => {})
+    await new Promise((resolve) => setTimeout(resolve, 400))
   }
   await section.scrollIntoViewIfNeeded()
 }
@@ -101,13 +116,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
         await page.screenshot({ path: join(outDir, fileName), fullPage: false })
         manifest.push(await fileEntry(fileName))
-        if (target.openLabel) {
-          await frame
-            .locator('[data-tc-overlay-host] button, .tc-demo-overlay-host [href="#"]')
-            .first()
-            .click({ timeout: 3000 })
-            .catch(() => {})
-        }
+        if (target.openLabel) await dismissOverlays(frame)
       }
     }
 
