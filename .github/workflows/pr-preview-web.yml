@@ -17,25 +17,13 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
-  deploy-preview:
-    if: github.event.action != 'closed'
+  resolve-preview-name:
+    if: github.event.pull_request.head.repo.fork == false
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-    environment: preview
-    env:
-      NODE_OPTIONS: '--max-old-space-size=16384'
-      UV_THREADPOOL_SIZE: '32'
+    timeout-minutes: 5
+    outputs:
+      name: ${{ steps.preview.outputs.name }}
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
-        with:
-          bun-version: 1.4.4
-
       - id: preview
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -50,6 +38,26 @@ jobs:
             preview_name="pr-${pr_number}-$(echo "$sanitized_branch" | cut -c1-$((28 - ${#pr_number} - 4)))"
           fi
           echo "name=$preview_name" >> "$GITHUB_OUTPUT"
+
+  deploy-preview:
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.fork == false
+    needs: resolve-preview-name
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: preview
+    env:
+      NODE_OPTIONS: '--max-old-space-size=16384'
+      UV_THREADPOOL_SIZE: '32'
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.4
 
       - run: bun install --frozen-lockfile --ignore-scripts
 
@@ -82,7 +90,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          bunx wrangler@4.137.0 preview --name "${{ steps.preview.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
+          bunx wrangler@4.137.0 preview --name "${{ needs.resolve-preview-name.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
           preview_url=$(node -e "
             const fs = require('node:fs');
             const raw = fs.readFileSync('preview.json', 'utf8');
@@ -116,7 +124,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const previewUrl = '${{ steps.worker_preview.outputs.url }}'
-            const previewName = '${{ steps.preview.outputs.name }}'
+            const previewName = '${{ needs.resolve-preview-name.outputs.name }}'
             const prNumber = ${{ github.event.pull_request.number }}
             const commitSha = '${{ github.event.pull_request.head.sha }}'
             const shortSha = commitSha.substring(0, 7)
@@ -139,6 +147,7 @@ jobs:
               `Commit: [\`${shortSha}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${commitSha})`,
               '',
               'Deployed with `wrangler preview` on the `capgo-website` Worker (production is Workers on capgo.app, not Cloudflare Pages).',
+              'When this PR closes, the `cleanup-preview` job runs `wrangler preview delete` for this preview name.',
               'Updated on each push to this PR.',
             ].join('\n')
             if (botComment) {
@@ -156,3 +165,25 @@ jobs:
                 body,
               })
             }
+
+  cleanup-preview:
+    if: github.event.action == 'closed' && github.event.pull_request.head.repo.fork == false
+    needs: resolve-preview-name
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: preview
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.4
+
+      - name: Delete Worker preview
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          bunx wrangler@4.137.0 preview delete "${{ needs.resolve-preview-name.outputs.name }}" -y || echo "Preview delete skipped or already removed."
