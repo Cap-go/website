@@ -672,6 +672,125 @@ function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
   ]
 }
 
+function buildBadgeStates(ctx: GalleryContext): SlugStateDef[] {
+  const { h } = ctx
+  return [
+    { id: 'default', label: 'Default', render: () => h(Badge, {}, { default: () => 'New' }) },
+    { id: 'color', label: 'Color', render: () => h(Badge, { colors: { bg: 'bg-red-500' } }, { default: () => 'Hot' }) },
+    {
+      id: 'on-avatar',
+      label: 'On avatar',
+      render: () =>
+        h('div', { class: 'relative inline-flex' }, [
+          h(Avatar, { class: 'inline-flex size-12 items-center justify-center text-sm font-semibold' }, { default: () => 'CG' }),
+          h(Badge, { class: 'absolute -right-1 -top-1' }, { default: () => '3' }),
+        ]),
+    },
+  ]
+}
+
+function buildChipStates(ctx: GalleryContext): SlugStateDef[] {
+  const { h } = ctx
+  return [
+    { id: 'filled', label: 'Filled', render: () => h(Chip, {}, { default: () => 'Capgo' }) },
+    { id: 'removable', label: 'Removable', render: () => h(Chip, { deleteButton: true }, { default: () => 'Removable' }) },
+    { id: 'outline', label: 'Outline', render: () => h(Chip, { outline: true }, { default: () => 'Outline' }) },
+  ]
+}
+
+function buildCardStates(ctx: GalleryContext): SlugStateDef[] {
+  const { h } = ctx
+  return [
+    {
+      id: 'feed',
+      label: 'Feed card',
+      render: () =>
+        h(Card, {}, {
+          default: () =>
+            h('div', { class: 'p-4' }, [
+              h('h3', { class: 'font-semibold' }, 'Release 2.4.0'),
+              h('p', { class: 'mt-2 text-sm opacity-80' }, 'OTA bundle is live on the preview channel.'),
+            ]),
+        }),
+    },
+    {
+      id: 'media',
+      label: 'Media card',
+      render: () =>
+        h(Card, {}, {
+          default: () =>
+            h('div', { class: 'p-4 flex gap-3 items-center' }, [
+              h(Thumbnail, { class: 'size-14 rounded-lg bg-neutral-200 dark:bg-neutral-700' }),
+              h('div', {}, [h('p', { class: 'font-semibold text-sm' }, 'Plugin docs'), h('p', { class: 'text-xs opacity-70' }, 'Updated today')]),
+            ]),
+        }),
+    },
+    {
+      id: 'outline',
+      label: 'Outline card',
+      render: () =>
+        h(Card, { outline: true }, {
+          default: () => h('div', { class: 'p-4 text-sm' }, 'Outline card for secondary content.'),
+        }),
+    },
+  ]
+}
+
+function buildListItemStates(ctx: GalleryContext): SlugStateDef[] {
+  const { h } = ctx
+  return [
+    { id: 'standard', label: 'Standard', render: () => h(ListItem, { title: 'Updates', subtitle: 'Push and email' }) },
+    { id: 'chevron', label: 'Chevron link', render: () => h(ListItem, { title: 'Account', subtitle: 'Profile', chevron: true, link: true }) },
+    {
+      id: 'toggle-after',
+      label: 'Toggle after',
+      render: (c) =>
+        h(ListItem, {}, {
+          title: () => 'Analytics',
+          after: () => h(Toggle, { checked: c.toggleOn.value, onClick: () => (c.toggleOn.value = !c.toggleOn.value) }),
+        }),
+    },
+    { id: 'badge', label: 'Badge', render: () => h(ListItem, { title: 'Inbox', badge: '12' }) },
+  ]
+}
+
+function buildListStates(ctx: GalleryContext): SlugStateDef[] {
+  const { h } = ctx
+  return [
+    {
+      id: 'inset',
+      label: 'Inset list',
+      render: () =>
+        h(
+          List,
+          { strong: true, inset: true },
+          {
+            default: () => [h(ListItem, { title: 'Home', link: true }), h(ListItem, { title: 'Billing', link: true })],
+          },
+        ),
+    },
+    {
+      id: 'buttons',
+      label: 'List buttons',
+      render: () =>
+        h(List, { inset: true }, {
+          default: () => [h(ListButton, {}, { default: () => 'Sign in' }), h(ListButton, {}, { default: () => 'Create account' })],
+        }),
+    },
+    {
+      id: 'media',
+      label: 'Media rows',
+      render: () =>
+        h(List, { inset: true }, {
+          default: () => [
+            h(ListItem, { title: 'Tailwind Capacitor', subtitle: 'Registry plugin', media: () => h(Icon, { material: 'extension', class: 'text-xl' }) }),
+            h(ListItem, { title: 'Live updates', subtitle: 'Capgo channel', media: () => h(Icon, { material: 'bolt', class: 'text-xl' }) }),
+          ],
+        }),
+    },
+  ]
+}
+
 function buildCheckboxStates(ctx: GalleryContext): SlugStateDef[] {
   return [
     { id: 'off', label: 'Off', render: (c) => h(Checkbox, { checked: false }) },
@@ -1895,6 +2014,11 @@ function expandedStatesForSlug(slug: string, ctx: GalleryContext): SlugStateDef[
   if (slug === 'capacitor-segmented') return buildSegmentedStates(ctx)
   if (slug === 'capacitor-segmented-button') return buildSegmentedButtonStates(ctx)
   if (slug === 'capacitor-tab' || slug === 'capacitor-tabs') return buildTabsStates(ctx, slug)
+  if (slug === 'capacitor-badge') return buildBadgeStates(ctx)
+  if (slug === 'capacitor-chip') return buildChipStates(ctx)
+  if (slug === 'capacitor-card') return buildCardStates(ctx)
+  if (slug === 'capacitor-list') return buildListStates(ctx)
+  if (slug === 'capacitor-list-item') return buildListItemStates(ctx)
   if (slug === 'capacitor-list-input') return buildListInputStates(ctx)
   if (slug === 'capacitor-searchbar') return buildSearchbarStates(ctx)
   if (slug === 'capacitor-textarea') return buildTextareaStates(ctx)

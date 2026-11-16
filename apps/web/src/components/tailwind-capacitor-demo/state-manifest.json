@@ -117,8 +117,12 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "color",
+      "label": "Color"
+    },
+    {
+      "id": "on-avatar",
+      "label": "On avatar"
     }
   ],
   "capacitor-block": [
@@ -253,12 +257,16 @@
   ],
   "capacitor-card": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "feed",
+      "label": "Feed card"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "media",
+      "label": "Media card"
+    },
+    {
+      "id": "outline",
+      "label": "Outline card"
     }
   ],
   "capacitor-checkbox": [
@@ -277,12 +285,16 @@
   ],
   "capacitor-chip": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "filled",
+      "label": "Filled"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "removable",
+      "label": "Removable"
+    },
+    {
+      "id": "outline",
+      "label": "Outline"
     }
   ],
   "capacitor-datetime": [
@@ -397,12 +409,16 @@
   ],
   "capacitor-list": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "inset",
+      "label": "Inset list"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "buttons",
+      "label": "List buttons"
+    },
+    {
+      "id": "media",
+      "label": "Media rows"
     }
   ],
   "capacitor-list-button": [
@@ -441,12 +457,20 @@
   ],
   "capacitor-list-item": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "standard",
+      "label": "Standard"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "chevron",
+      "label": "Chevron link"
+    },
+    {
+      "id": "toggle-after",
+      "label": "Toggle after"
+    },
+    {
+      "id": "badge",
+      "label": "Badge"
     }
   ],
   "capacitor-menu-list": [
