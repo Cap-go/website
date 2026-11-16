@@ -123,7 +123,7 @@ The plan lists the run options that fit your machine:
 
 Native builds run in [Capgo Cloud Build](/docs/builder/getting-started/) from any machine, including iOS without a Mac. Builds requested through the hosted MCP use the signing credentials stored on Capgo:
 
-1. You run `npx @capgo/cli@latest build init` once per platform. It saves the signing credentials on your machine.
+1. You run `npx @capgo/cli@latest build init --platform ios` for iOS and `npx @capgo/cli@latest build init --platform android` for Android. Each run saves the signing credentials for that platform on your machine.
 2. You store them on Capgo once per platform with `npx @capgo/cli@latest build credentials push <appId> --platform <ios|android> --mode merge` from your project. With `merge`, keys already stored on Capgo that your local credentials lack are kept, and local values replace stored values for the same keys. The default, `replace`, removes stored keys that your local credentials lack.
 
    An agent with file access can do this step instead: it calls `capgo_prepare_build_credentials_upload` with `mode: "merge"` (omitting `mode` means `replace`) and uploads the saved credentials file to the single-use URL it returns. Any agent that can read files can read the saved credentials, though. If the agent must never see them, run the push command yourself and block the agent from reading `~/.capgo-credentials/` and the project's `.capgo-credentials.json` (where `build init --local` saves them), for example with your client's file permission settings. Keep credential contents out of the chat.

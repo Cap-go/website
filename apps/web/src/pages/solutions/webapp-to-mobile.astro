@@ -64,7 +64,8 @@ npx cap add android`,
     title: copy('solutions_webapp_to_mobile_how3_title'),
     body: copy('solutions_webapp_to_mobile_how3_body'),
     code: `npm run build && npx cap sync
-npx @capgo/cli@latest build init
+npx @capgo/cli@latest build init --platform ios
+npx @capgo/cli@latest build init --platform android
 npx @capgo/cli@latest build request --platform ios
 npx @capgo/cli@latest build request --platform android`,
     href: links.builder.href,
