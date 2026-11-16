@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T03:05:04.710Z",
+  "updatedAt": "2026-11-16T03:05:37.328Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -37,6 +37,18 @@
   "releases": [
     {
       "repo": "Cap-go/capgo.app",
+      "tag": "capgo-22.52.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.52.2",
+      "publishedAt": "2026-11-15T15:31:58Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
+      "tag": "capgo-22.51.1",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.51.1",
+      "publishedAt": "2026-11-15T12:53:28Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
       "tag": "capgo-22.50.4",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.4",
       "publishedAt": "2026-11-14T23:04:30Z"
@@ -46,18 +58,6 @@
       "tag": "capgo-22.50.2",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.2",
       "publishedAt": "2026-11-14T19:47:03Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.50.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.1",
-      "publishedAt": "2026-11-14T19:02:58Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.50.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.0",
-      "publishedAt": "2026-11-14T17:42:09Z"
     },
     {
       "repo": "Cap-go/capgo.app",
@@ -71,9 +71,8 @@
       "success_rate": 85.7,
       "first_try_rate": 98.3,
       "rollback_rate": 13.9,
-      "updated_at": "2026-11-14T08:35:34.896Z",
+      "updated_at": "2026-11-15T11:31:28.387Z",
       "daily": [
-        83.9,
         85.3,
         85.1,
         83.2,
@@ -102,12 +101,13 @@
         83.8,
         88.1,
         86.7,
-        86.1
+        86.1,
+        84.7
       ]
     },
     "builder": {
-      "success_rate": 81.6,
-      "updated_at": "2026-11-14T03:04:29.424Z"
+      "success_rate": 80.9,
+      "updated_at": "2026-11-15T13:37:43.938Z"
     }
   }
 }

@@ -1,6 +1,22 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.52.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.52.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.52.2",
+    "pubDate": "2026-11-15T15:31:58.000Z",
+    "description": "🆕 Changelog Fixed Removed the Secrets Store binding from the GoTrue Worker to resolve authentication issues. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.52.1...capgo 22.52.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.51.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.51.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.51.1",
+    "pubDate": "2026-11-15T12:53:28.000Z",
+    "description": "🆕 Changelog Changed Refined SQL integration testing workflow to execute exclusively on local Postgres environments. Optimized CI tooling by removing the redundant Supabase test database step. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.51.0...capgo 22.51.1"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.107.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.107.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.107.0",
@@ -304,22 +320,6 @@
     "description": "🆕 Changelog Added CI/CD Onboarding : Added a guided setup workflow for Continuous Integration/Continuous Deployment to facilitate live updates and Builder integration, including tracking of setup progress. Fixed Changelog Security : Fixed an issue where fetching GitHub release data for the changelog required improper handling of authentication; release fetches are now properly authenticated and shared securely. Billing Recovery : Improved the reliability of payment recovery processes and ref..."
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.38.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.1",
-    "pubDate": "2026-11-10T23:43:35.000Z",
-    "description": "🆕 Changelog Fixed Corrected the Cloudflare Worker configuration to resolve deployment issues. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.38.0...capgo 22.38.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.38.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.38.0",
-    "pubDate": "2026-11-10T22:08:19.000Z",
-    "description": "🆕 Changelog Security Applied security updates to the Console User Interface to mitigate potential vulnerabilities and enhance overall application security. Added Integrated new security features into the frontend console UI as part of the security update release. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.104.0...capgo 22.38.0"
-  },
-  {
     "category": "release",
     "title": "capacitor-accelerometer 8.0.58",
     "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.58",
@@ -601,11 +601,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-downloader 8.7.0",
-    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.7.0",
-    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.7.0",
-    "pubDate": "2026-11-14T22:44:40.000Z",
-    "description": "🆕 Changelog Added Support for multi file batch downloads via the new option ( 107). You can now request and download multiple files in a single operation, reducing repeated requests and simplifying scripts or workflows that need several resources at once. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.6.0...8.7.0"
+    "title": "capacitor-downloader 8.8.1",
+    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.8.1",
+    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.8.1",
+    "pubDate": "2026-11-16T01:30:55.000Z",
+    "description": "🆕 Changelog Fixed Updated to v4.12.1, incorporating the latest upstream patch fixes for improved stability in network testing scenarios. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.8.0...8.8.1"
   },
   {
     "category": "release",
@@ -1273,11 +1273,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-transitions v8.3.15",
-    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.15",
-    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.15",
-    "pubDate": "2026-11-13T12:43:45.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain with the official Capacitor 8 versions, ensuring reliable builds for Capacitor 8 projects. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.14...v8.3.15"
+    "title": "capacitor-transitions v8.3.16",
+    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.16",
+    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.16",
+    "pubDate": "2026-11-15T09:10:01.000Z",
+    "description": "🆕 Changelog Fixed Resolved an issue where subpath declaration files were not shipped deterministically, improving build reproducibility and ensuring reliable TypeScript types for subpath imports. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.15...v8.3.16"
   },
   {
     "category": "release",
