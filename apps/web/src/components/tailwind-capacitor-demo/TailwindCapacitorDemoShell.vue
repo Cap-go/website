@@ -66,7 +66,7 @@
           </Block>
         </Sheet>
 
-        <Popover v-if="popoverOpen" :opened="true" target-el="#popover-target" @backdropclick="popoverOpen = false">
+        <Popover v-if="popoverOpen" :opened="true" target="#popover-target" @backdropclick="popoverOpen = false">
           <List>
             <ListItem title="Popover item" />
           </List>
@@ -213,7 +213,14 @@ function demoDescription(name) {
 
 function syncThemeToDocument() {
   if (typeof document === 'undefined') return
-  document.documentElement.classList.toggle('dark', dark.value)
+  const root = document.documentElement
+  root.classList.toggle('dark', dark.value)
+  root.classList.remove('ios', 'material', 'md', 'c-ios', 'c-material')
+  if (platform.value === 'material') {
+    root.classList.add('material', 'md', 'c-material')
+  } else {
+    root.classList.add('ios', 'c-ios')
+  }
 }
 
 watch([platform, dark], syncThemeToDocument, { immediate: true })
@@ -270,7 +277,7 @@ const MotionBlock = defineComponent({
   name: 'MotionBlock',
   props: { id: { type: String, required: true } },
   setup(blockProps, { slots }) {
-    return () => h('section', { id: blockProps.id, class: 'scroll-mt-4' }, slots.default?.())
+    return () => h('section', { id: blockProps.id, class: 'scroll-mt-20' }, slots.default?.())
   },
 })
 
@@ -284,7 +291,21 @@ function defineDemo(render) {
 
 /** @param {import('vue').Ref<boolean>} openRef */
 function defineOpenShellButtonDemo(label, openRef) {
-  return defineDemo(() => h(Button, { onClick: () => (openRef.value = true) }, { default: () => label }))
+  return defineComponent({
+    setup() {
+      return () =>
+        h(
+          Button,
+          {
+            class: 'tc-demo-overlay-trigger',
+            large: true,
+            tonal: dark.value,
+            onClick: () => (openRef.value = true),
+          },
+          { default: () => label },
+        )
+    },
+  })
 }
 
 function defineStaticActionsDemo(lines) {
@@ -680,14 +701,20 @@ const sectionMap = {
   ),
   'capacitor-navbar-back-link': defineDemo(() => h(NavbarBackLink, { text: 'Back' })),
   'capacitor-notification': defineDemo(() =>
-    h(Notification, {
-      opened: true,
-      button: 'Dismiss',
-      icon: 'notifications',
-      title: 'New message',
-      subtitle: 'Capgo',
-      text: 'Your bundle finished uploading to the preview channel.',
-    }),
+    h(
+      Notification,
+      {
+        opened: true,
+        button: 'Dismiss',
+        title: 'New message',
+        subtitle: 'Capgo',
+        text: 'Your bundle finished uploading to the preview channel.',
+        class: 'tc-demo-notification-inline',
+      },
+      {
+        icon: () => h(Icon, { material: 'notifications', class: 'text-xl', 'aria-label': 'Notification' }),
+      },
+    ),
   ),
   'capacitor-page': defineDemo(() =>
     h(
@@ -702,7 +729,35 @@ const sectionMap = {
   'capacitor-picker': defineDemo(() =>
     h(Picker, { class: 'p-4 text-sm' }, { default: () => ['Morning', 'Afternoon', 'Evening'].map((label) => h('div', { class: 'block py-2' }, label)) }),
   ),
-  'capacitor-popover': defineDemo(() => h('div', {}, [h(Button, { id: 'popover-target', onClick: () => (popoverOpen.value = true) }, { default: () => 'Open popover' })])),
+  'capacitor-popover': defineComponent({
+    setup() {
+      const localOpen = ref(false)
+      return () =>
+        h('div', { class: 'relative min-h-36' }, [
+          h(
+            Button,
+            { id: 'popover-target-inline', onClick: () => (localOpen.value = true) },
+            { default: () => 'Open popover' },
+          ),
+          localOpen.value
+            ? h(
+                Popover,
+                {
+                  opened: true,
+                  target: '#popover-target-inline',
+                  onBackdropclick: () => (localOpen.value = false),
+                },
+                {
+                  default: () =>
+                    h(List, {}, {
+                      default: () => h(ListItem, { title: 'Popover item' }),
+                    }),
+                },
+              )
+            : null,
+        ])
+    },
+  }),
   'capacitor-popup': defineOpenShellButtonDemo('Open popup', popupOpen),
   'capacitor-preloader': defineDemo(() => h(Preloader, { class: 'mx-auto' })),
   'capacitor-progressbar': defineDemo(() => h(Progressbar, { progress: 65 })),

@@ -29,7 +29,10 @@ html.dark body.tc-demo-shell-body {
 .tc-demo-shell-body .tc-demo-page {
   position: relative;
   min-height: 100dvh;
+  max-height: 100dvh;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tc-demo-shell-body .tc-demo-overlay-host {
@@ -72,6 +75,26 @@ html.dark body.tc-demo-shell-body {
   margin-inline: 1rem;
   position: relative;
   overflow: hidden;
+}
+
+#capacitor-notification .registry-demo-block {
+  overflow: visible;
+  min-height: 9.5rem;
+  padding-bottom: 1rem;
+}
+
+.tc-demo-shell-body .tc-demo-notification-inline {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+html.dark .tc-demo-shell-body .tc-demo-overlay-trigger {
+  font-weight: 600;
 }
 
 .tc-demo-shell-body .registry-demo-block :where(.fixed) {

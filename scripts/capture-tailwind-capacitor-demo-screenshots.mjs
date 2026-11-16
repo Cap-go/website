@@ -1,8 +1,12 @@
 import { createHash } from 'node:crypto'
+import { execFile } from 'node:child_process'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { promisify } from 'node:util'
 import { chromium } from 'playwright'
+
+const execFileAsync = promisify(execFile)
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const repoRoot = join(__dirname, '..')
@@ -26,65 +30,128 @@ const viewports = [
   { prefix: 'mobile', width: 390, height: 844 },
 ]
 
+const themeCompareSections = [
+  { slug: 'button', sectionId: 'capacitor-button' },
+  { slug: 'select', sectionId: 'capacitor-select' },
+  { slug: 'navbar', sectionId: 'capacitor-navbar' },
+  { slug: 'toggle', sectionId: 'capacitor-toggle' },
+  { slug: 'tabs', sectionId: 'capacitor-tabs' },
+]
+
 const componentTargets = [
-  { slug: 'button', sectionId: 'capacitor-button', openLabel: null },
-  { slug: 'notification', sectionId: 'capacitor-notification', openLabel: null },
-  { slug: 'tabs', sectionId: 'capacitor-tabs', openLabel: null },
-  { slug: 'toggle', sectionId: 'capacitor-toggle', openLabel: null },
-  { slug: 'list', sectionId: 'capacitor-list', openLabel: null },
-  { slug: 'list-input', sectionId: 'capacitor-list-input', openLabel: null },
-  { slug: 'sheet-open', sectionId: 'capacitor-sheet', openLabel: 'Open sheet' },
-  { slug: 'actions-open', sectionId: 'capacitor-actions', openLabel: 'Open Actions' },
+  { slug: 'button', sectionId: 'capacitor-button', open: null, openExpect: null },
+  { slug: 'notification', sectionId: 'capacitor-notification', open: null, openExpect: 'New message' },
+  { slug: 'tabs', sectionId: 'capacitor-tabs', open: null, openExpect: null },
+  { slug: 'toggle', sectionId: 'capacitor-toggle', open: null, openExpect: null },
+  { slug: 'list', sectionId: 'capacitor-list', open: null, openExpect: null },
+  { slug: 'list-input', sectionId: 'capacitor-list-input', open: null, openExpect: null },
+  { slug: 'sheet-open', sectionId: 'capacitor-sheet', open: /open sheet/i, openExpect: 'Sheet overlay content' },
+  { slug: 'actions-open', sectionId: 'capacitor-actions', open: /open actions/i, openExpect: 'Delete' },
+  { slug: 'dialog-open', sectionId: 'capacitor-dialog', open: /open dialog/i, openExpect: 'Sample dialog' },
+  { slug: 'popover-open', sectionId: 'capacitor-popover', open: /open popover/i, openExpect: 'Popover item', expectInSection: true },
+  { slug: 'toast-open', sectionId: 'capacitor-toast', open: /show toast/i, openExpect: 'Toast from registry demo' },
 ]
 
 /**
+ * @param {import('playwright').Page} page
  * @param {import('playwright').FrameLocator} frame
  */
-async function dismissOverlays(frame) {
-  await frame
-    .locator('.tc-demo-overlay-host .fixed.inset-0, .tc-demo-overlay-host .fixed.top-0')
-    .first()
-    .click({ force: true, position: { x: 4, y: 4 }, timeout: 3000 })
-    .catch(() => {})
-  await new Promise((resolve) => setTimeout(resolve, 200))
+async function dismissOverlays(page, frame) {
+  const host = frame.locator('.tc-demo-overlay-host')
+  for (const label of ['Delete', 'Done', 'Close', 'Dismiss']) {
+    const link = host.getByText(label, { exact: true })
+    if (await link.count()) {
+      await link
+        .first()
+        .evaluate((node) => {
+          node.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+        })
+        .catch(() => {})
+    }
+  }
+  const backdrop = host.locator('.fixed.inset-0, [class*="backdrop"]')
+  if (await backdrop.count()) {
+    await backdrop.first().click({ force: true, position: { x: 8, y: 8 }, timeout: 4000 }).catch(() => {})
+  }
+  await page.keyboard.press('Escape').catch(() => {})
+  await new Promise((resolve) => setTimeout(resolve, 450))
 }
 
 /**
  * @param {import('playwright').Page} page
+ * @param {import('playwright').FrameLocator} frame
+ * @param {'ios' | 'material'} platform
+ */
+async function assertThemeInFrame(page, frame, platform) {
+  const want = platform === 'ios' ? 'c-ios' : 'c-material'
+  const root = frame.locator('#tc-demo-root')
+  await root.waitFor({ state: 'visible', timeout: 60_000 })
+  for (let i = 0; i < 25; i += 1) {
+    const classes = (await root.getAttribute('class')) ?? ''
+    if (classes.includes(want)) return
+    await page.waitForTimeout(200)
+  }
+  const classes = (await root.getAttribute('class')) ?? ''
+  throw new Error(`Expected #tc-demo-root to include ${want}, got: ${classes}`)
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {'ios' | 'material'} platform
+ * @param {boolean} dark
  */
 async function applyTheme(page, platform, dark) {
-  await page.locator('#tc-demo-iframe').waitFor({ state: 'visible', timeout: 60000 })
+  await page.locator('#tc-demo-iframe').waitFor({ state: 'visible', timeout: 60_000 })
   const controls = page.locator('[data-tc-demo-controls]')
-  await controls.waitFor({ state: 'visible', timeout: 30000 })
-  await controls.locator(`[data-tc-platform="${platform}"]`).scrollIntoViewIfNeeded()
+  await controls.waitFor({ state: 'visible', timeout: 30_000 })
   await controls.locator(`[data-tc-platform="${platform}"]`).click({ force: true })
-  await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).scrollIntoViewIfNeeded()
   await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
   const frame = page.frameLocator('#tc-demo-iframe')
-  const platformLabel = platform === 'ios' ? 'iOS' : 'Material'
-  await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 90000 })
-  await frame.locator('.tc-demo-section-heading').first().waitFor({ state: 'visible', timeout: 90000 })
-  await frame.getByText(platformLabel, { exact: true }).first().waitFor({ state: 'visible', timeout: 90000 })
-  await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30000 })
-  await page.waitForTimeout(400)
+  await assertThemeInFrame(page, frame, platform)
+  await frame.locator('.tc-demo-section-heading').first().waitFor({ state: 'visible', timeout: 90_000 })
+  await page.waitForTimeout(500)
 }
 
 /**
  * @param {import('playwright').FrameLocator} frame
  * @param {string} sectionId
- * @param {string | null} openLabel
+ * @param {RegExp | null} openPattern
+ * @param {string | null} openExpect
+ * @param {boolean} [expectInSection]
  */
-async function focusComponentInFrame(frame, sectionId, openLabel) {
-  // Frame-only helper; callers wait after overlays.
+async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, expectInSection = false) {
   const section = frame.locator(`#${sectionId}`)
   await section.scrollIntoViewIfNeeded()
-  await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20000 })
-  if (openLabel) {
-    await section.getByText(openLabel, { exact: true }).click({ timeout: 15000, force: true })
-    await frame.locator('.tc-demo-overlay-host').waitFor({ state: 'attached', timeout: 15000 }).catch(() => {})
-    await new Promise((resolve) => setTimeout(resolve, 400))
+  await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20_000 })
+  if (openPattern) {
+    const trigger = section.getByRole('button', { name: openPattern })
+    await trigger.scrollIntoViewIfNeeded()
+    await trigger.click({ timeout: 15_000, force: true })
+    if (openExpect) {
+      const scope = openPattern && !expectInSection ? frame.locator('.tc-demo-overlay-host') : section
+      await scope.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 20_000 })
+    } else {
+      await frame.locator('.tc-demo-overlay-host :not(:empty)').first().waitFor({ state: 'visible', timeout: 12_000 }).catch(() => {})
+    }
+    await new Promise((resolve) => setTimeout(resolve, 900))
+  } else if (openExpect) {
+    await section.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 })
   }
   await section.scrollIntoViewIfNeeded()
+}
+
+/**
+ * @param {string} leftPath
+ * @param {string} rightPath
+ * @param {string} outPath
+ */
+async function stitchSideBySide(leftPath, rightPath, outPath) {
+  try {
+    await execFileAsync('convert', [leftPath, rightPath, '+append', outPath])
+    return true
+  } catch {
+    return false
+  }
 }
 
 /**
@@ -95,28 +162,64 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
   const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } })
   const manifest = []
   try {
-    await page.goto(`${urlBase}${path}`, { waitUntil: 'domcontentloaded', timeout: 120000 })
+    await page.goto(`${urlBase}${path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
     if (applyThemes && combo) await applyTheme(page, combo.platform, combo.dark)
     const frame = page.frameLocator('#tc-demo-iframe')
-    await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30000 })
+    await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
 
     const tag = combo?.tag ?? 'baseline'
 
-    // Full page chrome (nav, switches, device frame at top).
     await page.evaluate(() => window.scrollTo(0, 0))
-    await page.waitForTimeout(250)
+    await page.waitForTimeout(300)
     const overviewName = `demo-page-${viewport.prefix}-${tag}-${label}.png`
     await page.screenshot({ path: join(outDir, overviewName), fullPage: false })
     manifest.push(await fileEntry(overviewName))
 
     if (applyThemes && combo) {
       for (const target of componentTargets) {
-        await focusComponentInFrame(frame, target.sectionId, target.openLabel)
-        await page.waitForTimeout(350)
+        await dismissOverlays(page, frame)
+        await focusComponentInFrame(frame, target.sectionId, target.open, target.openExpect, target.expectInSection)
+        await page.waitForTimeout(300)
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
         await page.screenshot({ path: join(outDir, fileName), fullPage: false })
         manifest.push(await fileEntry(fileName))
-        if (target.openLabel) await dismissOverlays(frame)
+        if (target.open) await dismissOverlays(page, frame)
+      }
+
+      for (const section of themeCompareSections) {
+        const iosName = `demo-compare-${section.slug}-ios-${viewport.prefix}-${tag}-${label}.png`
+        const mdName = `demo-compare-${section.slug}-material-${viewport.prefix}-${tag}-${label}.png`
+        const pairName = `demo-compare-${section.slug}-ios-vs-material-${viewport.prefix}-${tag}-${label}.png`
+
+        await applyTheme(page, 'ios', combo.dark)
+        await focusComponentInFrame(frame, section.sectionId, null, null)
+        await page.waitForTimeout(250)
+        await page.screenshot({ path: join(outDir, iosName), fullPage: false })
+        manifest.push(await fileEntry(iosName))
+
+        await applyTheme(page, 'material', combo.dark)
+        await focusComponentInFrame(frame, section.sectionId, null, null)
+        await page.waitForTimeout(250)
+        await page.screenshot({ path: join(outDir, mdName), fullPage: false })
+        manifest.push(await fileEntry(mdName))
+
+        if (await stitchSideBySide(join(outDir, iosName), join(outDir, mdName), join(outDir, pairName))) {
+          manifest.push(await fileEntry(pairName))
+        }
+      }
+
+      if (viewport.prefix === 'desktop') {
+        await page.evaluate(() => window.scrollTo(0, 0))
+        const navLink = page.locator('aside [data-tc-nav="capacitor-button"]')
+        if (await navLink.count()) {
+          await navLink.scrollIntoViewIfNeeded()
+          await navLink.click({ force: true })
+          await page.waitForTimeout(1200)
+          await frame.locator('#capacitor-button .registry-demo-block').waitFor({ state: 'visible', timeout: 15_000 }).catch(() => {})
+          const navShot = `demo-sidebar-nav-button-${tag}-${label}.png`
+          await page.screenshot({ path: join(outDir, navShot), fullPage: false })
+          manifest.push(await fileEntry(navShot))
+        }
       }
     }
 

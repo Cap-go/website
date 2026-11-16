@@ -33,7 +33,7 @@ const catalogSectionCount = navItems.length
 ---
 
 <Layout content={{ title, description, ldJson, canonical: Astro.url.pathname }}>
-  <section class="border-b border-white/10 bg-gray-950 px-6 py-10 lg:px-8">
+  <section class="border-b border-white/10 bg-gray-950 px-6 pt-24 pb-10 max-lg:scroll-mt-20 lg:px-8 lg:pt-10">
     <div class="mx-auto max-w-6xl">
       <nav class="text-sm text-gray-400" aria-label="Breadcrumb">
         <ol class="flex flex-wrap items-center gap-2">
@@ -126,6 +126,14 @@ const catalogSectionCount = navItems.length
     }
 
     const pushTheme = () => {
+      const shell = new URL(iframe.getAttribute('src') ?? iframe.src, window.location.origin)
+      shell.searchParams.set('platform', platform)
+      shell.searchParams.set('dark', dark ? '1' : '0')
+      const nextSrc = `${shell.pathname}${shell.search}`
+      if (iframe.getAttribute('src') !== nextSrc) {
+        iframe.setAttribute('src', nextSrc)
+        return
+      }
       iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
     }
 
