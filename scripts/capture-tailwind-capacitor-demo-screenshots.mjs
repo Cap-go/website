@@ -86,10 +86,11 @@ async function assertThemeInFrame(page, frame, platform) {
   const want = platform === 'ios' ? 'c-ios' : 'c-material'
   const root = frame.locator('#tc-demo-root')
   await root.waitFor({ state: 'visible', timeout: 60_000 })
-  for (let i = 0; i < 25; i += 1) {
+  const attempts = baseUrl.includes('workers.dev') ? 60 : 25
+  for (let i = 0; i < attempts; i += 1) {
     const classes = (await root.getAttribute('class')) ?? ''
     if (classes.includes(want)) return
-    await page.waitForTimeout(200)
+    await page.waitForTimeout(400)
   }
   const classes = (await root.getAttribute('class')) ?? ''
   throw new Error(`Expected #tc-demo-root to include ${want}, got: ${classes}`)
