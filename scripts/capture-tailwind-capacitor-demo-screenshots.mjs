@@ -39,6 +39,10 @@ const themeCompareSections = [
 ]
 
 const onlyOpenShots = process.env.TC_DEMO_ONLY_OPEN === '1'
+const pageOnlyShots = process.env.TC_DEMO_PAGE_ONLY === '1'
+const captureInstall = process.env.TC_CAPTURE_INSTALL === '1'
+const captureInstallOnly = process.env.TC_CAPTURE_INSTALL_ONLY === '1'
+const installBeforeUrl = process.env.TC_INSTALL_BEFORE_URL ?? 'https://capgo.app'
 const openShotSlugs = process.env.TC_DEMO_OPEN_SLUGS?.split(',')
   .map((slug) => slug.trim())
   .filter(Boolean)
@@ -301,7 +305,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
     await page.screenshot({ path: join(outDir, overviewName), fullPage: false })
     manifest.push(await fileEntry(overviewName))
 
-    if (applyThemes && combo) {
+    if (applyThemes && combo && !pageOnlyShots) {
       for (const target of componentTargets) {
         if (onlyOpenShots && !target.open) continue
         if (openShotSlugs?.length && !openShotSlugs.includes(target.slug)) continue
@@ -315,7 +319,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         if (target.open) await dismissOverlays(page, frame)
       }
 
-      if (onlyOpenShots) {
+      if (onlyOpenShots || pageOnlyShots) {
         return manifest
       }
 
@@ -365,6 +369,38 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
 /**
  * @param {string} fileName
  */
+/**
+ * @param {import('playwright').Browser} browser
+ */
+async function captureInstallSections(browser) {
+  const manifest = []
+  for (const { label, urlBase } of [
+    { label: 'before', urlBase: installBeforeUrl },
+    { label: 'after', urlBase: baseUrl },
+  ]) {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
+    try {
+      await page.goto(`${urlBase}/plugins/tailwind-capacitor/`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
+      let block = page.locator('[data-tailwind-capacitor-install]')
+      if ((await block.count()) === 0) {
+        block = page.locator('[data-plugin-copy]').first().locator('xpath=ancestor::div[contains(@class,"mt-8")]').first()
+      }
+      await block.waitFor({ state: 'visible', timeout: 30_000 })
+      await block.scrollIntoViewIfNeeded()
+      await page.waitForTimeout(400)
+      const fileName = `install-section-${label}.png`
+      await block.screenshot({ path: join(outDir, fileName) })
+      manifest.push(await fileEntry(fileName))
+    } finally {
+      await page.close()
+    }
+  }
+  return manifest
+}
+
+/**
+ * @param {string} fileName
+ */
 async function fileEntry(fileName) {
   const filePath = join(outDir, fileName)
   const buffer = await readFile(filePath)
@@ -375,6 +411,14 @@ await mkdir(outDir, { recursive: true })
 const browser = await chromium.launch()
 let manifest = []
 try {
+  if (captureInstallOnly) {
+    manifest.push(...(await captureInstallSections(browser)))
+    await writeFile(join(outDir, 'sha256.json'), `${JSON.stringify(manifest, null, 2)}\n`)
+    console.log(JSON.stringify({ outDir, manifestCount: manifest.length }, null, 2))
+    await browser.close()
+    process.exit(0)
+  }
+
   for (const viewport of viewports) {
     for (const combo of combos) {
       const rows = await captureCombo(browser, {
@@ -400,7 +444,11 @@ try {
     }
   }
 
-  if (onlyOpenShots) {
+  if (captureInstall) {
+    manifest.push(...(await captureInstallSections(browser)))
+  }
+
+  if (onlyOpenShots || pageOnlyShots) {
     let existing = []
     try {
       existing = JSON.parse(await readFile(join(outDir, 'sha256.json'), 'utf8'))

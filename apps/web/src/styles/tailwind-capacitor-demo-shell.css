@@ -67,6 +67,17 @@ html.dark body.tc-demo-shell-body {
   border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
 }
 
+.tc-demo-shell-body .registry-demo-block .tc-demo-actions-inline-preview:where(.fixed) {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: 100%;
+  max-width: 20rem;
+  margin-inline: auto;
+}
+
 .tc-demo-section-heading {
   margin: 0 0 0.35rem;
   padding: 0 1rem;

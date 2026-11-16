@@ -1,13 +1,13 @@
 # Tailwind Capacitor registry snapshot
 
-The directory `tailwind-capacitor-snapshot/` is generated locally and in CI. It is listed in `.gitignore`.
+Runtime build output still lives in `tailwind-capacitor-snapshot/` (gitignored). A committed vendor copy lives in `apps/web/vendor/tailwind-capacitor-registry-snapshot/`.
 
-Run from the repo root:
+`bun run sync:tailwind-capacitor-registry` (also run by `bun run build:web`):
 
-```bash
-bun run sync:tailwind-capacitor-registry
-```
+1. Hydrates `tailwind-capacitor-snapshot/` from the vendor tree when the pin matches `apps/shared/config/tailwindCapacitorRegistry.ts`.
+2. Skips network when an existing snapshot already matches the pin.
+3. Fetches from GitHub only on a pin bump or when `TC_REGISTRY_FORCE_SYNC=1`.
 
-The pinned commit lives in `apps/shared/config/tailwindCapacitorRegistry.ts` (currently `9791d43d67279d7725d6a1f7865ff10deaf36ba5`, merge commit for Cap-go/tailwind-capacitor#130). Vue JSON is under `public/r/`, React under `public/r/react/`, Angular under `public/r/angular/`. `bun run build:web` runs sync automatically before the Astro build.
+After a network sync, the script refreshes the vendor tree so deploys survive a raw GitHub outage.
 
-Demo-only shell styles that are not part of the upstream registry live in `apps/web/src/styles/tailwind-capacitor-demo-shell.css`.
+The pinned commit lives in `apps/shared/config/tailwindCapacitorRegistry.ts`. Demo-only shell styles live in `apps/web/src/styles/tailwind-capacitor-demo-shell.css`.

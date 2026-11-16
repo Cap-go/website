@@ -340,20 +340,16 @@ function defineOpenShellButtonDemo(label, openRef, options = {}) {
   })
 }
 
-function defineStaticActionsDemo(lines) {
+function defineInlineActionsDemo(renderContent) {
   return defineDemo(() =>
     h(
-      'div',
-      { class: 'tc-demo-actions-inline max-w-sm space-y-0 overflow-hidden rounded-xl text-sm' },
-      lines.map((line, index) =>
-        h(
-          'p',
-          {
-            class: ['px-4 py-3', index > 0 && 'border-t border-black/10 dark:border-white/10', line.bold && 'font-semibold'].filter(Boolean).join(' '),
-          },
-          line.text,
-        ),
-      ),
+      Actions,
+      {
+        opened: true,
+        backdrop: false,
+        class: 'tc-demo-actions-inline-preview pointer-events-auto',
+      },
+      { default: () => renderContent() },
     ),
   )
 }
@@ -442,9 +438,25 @@ function demoTableSample() {
 
 const sectionMap = {
   'capacitor-actions': defineOpenShellButtonDemo('Open Actions', actionsOpen),
-  'capacitor-actions-button': defineStaticActionsDemo([{ text: 'Label', bold: true }, { text: 'Primary action', bold: true }, { text: 'Secondary' }]),
-  'capacitor-actions-group': defineStaticActionsDemo([{ text: 'One' }, { text: 'Two' }]),
-  'capacitor-actions-label': defineStaticActionsDemo([{ text: 'Section title', bold: true }, { text: 'Item' }]),
+  'capacitor-actions-button': defineInlineActionsDemo(() =>
+    h(ActionsGroup, {}, {
+      default: () => [
+        h(ActionsLabel, {}, { default: () => 'Label' }),
+        h(ActionsButton, { bold: true }, { default: () => 'Primary action' }),
+        h(ActionsButton, {}, { default: () => 'Secondary' }),
+      ],
+    }),
+  ),
+  'capacitor-actions-group': defineInlineActionsDemo(() =>
+    h(ActionsGroup, {}, {
+      default: () => [h(ActionsButton, {}, { default: () => 'One' }), h(ActionsButton, {}, { default: () => 'Two' })],
+    }),
+  ),
+  'capacitor-actions-label': defineInlineActionsDemo(() =>
+    h(ActionsGroup, {}, {
+      default: () => [h(ActionsLabel, {}, { default: () => 'Section title' }), h(ActionsButton, {}, { default: () => 'Item' })],
+    }),
+  ),
   'capacitor-accordion': defineDemo(() =>
     h(
       Accordion,

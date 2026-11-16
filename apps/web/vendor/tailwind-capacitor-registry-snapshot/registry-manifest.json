@@ -1,0 +1,617 @@
+{
+  "commit": "9791d43d67279d7725d6a1f7865ff10deaf36ba5",
+  "syncedAt": "2026-11-16T15:58:39.365Z",
+  "itemCount": 87,
+  "vueComponentCount": 83,
+  "items": [
+    {
+      "name": "capacitor-tailwind",
+      "title": "Tailwind Capacitor styles",
+      "description": "Tailwind CSS v4 capacitor utilities, safe areas, and platform variants.",
+      "component": "Tailwind",
+      "hasVue": false
+    },
+    {
+      "name": "capacitor-shared",
+      "title": "Tailwind Capacitor shared tokens",
+      "description": "Shared class and color maps for capacitor components.",
+      "component": "Shared",
+      "hasVue": false
+    },
+    {
+      "name": "capacitor-provider",
+      "title": "Tailwind Capacitor provider (Vue)",
+      "description": "Root provider and Vue composables for theme and context.",
+      "component": "Provider",
+      "hasVue": false
+    },
+    {
+      "name": "capacitor-icons",
+      "title": "Tailwind Capacitor icons (Vue)",
+      "description": "Inline SVG icon components used by capacitor UI.",
+      "component": "BackIcon",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-accordion",
+      "title": "Capacitor Accordion (Vue)",
+      "description": "Capacitor Accordion Vue component.",
+      "component": "Accordion",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-accordion-item",
+      "title": "Capacitor AccordionItem (Vue)",
+      "description": "Capacitor AccordionItem Vue component.",
+      "component": "AccordionItem",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-actions",
+      "title": "Capacitor Actions (Vue)",
+      "description": "Capacitor Actions Vue component.",
+      "component": "Actions",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-actions-button",
+      "title": "Capacitor ActionsButton (Vue)",
+      "description": "Capacitor ActionsButton Vue component.",
+      "component": "ActionsButton",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-actions-group",
+      "title": "Capacitor ActionsGroup (Vue)",
+      "description": "Capacitor ActionsGroup Vue component.",
+      "component": "ActionsGroup",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-actions-label",
+      "title": "Capacitor ActionsLabel (Vue)",
+      "description": "Capacitor ActionsLabel Vue component.",
+      "component": "ActionsLabel",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-alert",
+      "title": "Capacitor Alert (Vue)",
+      "description": "Capacitor Alert Vue component.",
+      "component": "Alert",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-app",
+      "title": "Capacitor App (Vue)",
+      "description": "Capacitor App Vue component.",
+      "component": "App",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-avatar",
+      "title": "Capacitor Avatar (Vue)",
+      "description": "Capacitor Avatar Vue component.",
+      "component": "Avatar",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-badge",
+      "title": "Capacitor Badge (Vue)",
+      "description": "Capacitor Badge Vue component.",
+      "component": "Badge",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-block",
+      "title": "Capacitor Block (Vue)",
+      "description": "Capacitor Block Vue component.",
+      "component": "Block",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-block-footer",
+      "title": "Capacitor BlockFooter (Vue)",
+      "description": "Capacitor BlockFooter Vue component.",
+      "component": "BlockFooter",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-block-header",
+      "title": "Capacitor BlockHeader (Vue)",
+      "description": "Capacitor BlockHeader Vue component.",
+      "component": "BlockHeader",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-block-title",
+      "title": "Capacitor BlockTitle (Vue)",
+      "description": "Capacitor BlockTitle Vue component.",
+      "component": "BlockTitle",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-breadcrumbs",
+      "title": "Capacitor Breadcrumbs (Vue)",
+      "description": "Capacitor Breadcrumbs Vue component.",
+      "component": "Breadcrumbs",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-breadcrumbs-collapsed",
+      "title": "Capacitor BreadcrumbsCollapsed (Vue)",
+      "description": "Capacitor BreadcrumbsCollapsed Vue component.",
+      "component": "BreadcrumbsCollapsed",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-breadcrumbs-item",
+      "title": "Capacitor BreadcrumbsItem (Vue)",
+      "description": "Capacitor BreadcrumbsItem Vue component.",
+      "component": "BreadcrumbsItem",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-breadcrumbs-separator",
+      "title": "Capacitor BreadcrumbsSeparator (Vue)",
+      "description": "Capacitor BreadcrumbsSeparator Vue component.",
+      "component": "BreadcrumbsSeparator",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-button",
+      "title": "Capacitor Button (Vue)",
+      "description": "Capacitor Button Vue component.",
+      "component": "Button",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-card",
+      "title": "Capacitor Card (Vue)",
+      "description": "Capacitor Card Vue component.",
+      "component": "Card",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-checkbox",
+      "title": "Capacitor Checkbox (Vue)",
+      "description": "Capacitor Checkbox Vue component.",
+      "component": "Checkbox",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-chip",
+      "title": "Capacitor Chip (Vue)",
+      "description": "Capacitor Chip Vue component.",
+      "component": "Chip",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-datetime",
+      "title": "Capacitor Datetime (Vue)",
+      "description": "Capacitor Datetime Vue component.",
+      "component": "Datetime",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-dialog",
+      "title": "Capacitor Dialog (Vue)",
+      "description": "Capacitor Dialog Vue component.",
+      "component": "Dialog",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-dialog-button",
+      "title": "Capacitor DialogButton (Vue)",
+      "description": "Capacitor DialogButton Vue component.",
+      "component": "DialogButton",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-fab",
+      "title": "Capacitor Fab (Vue)",
+      "description": "Capacitor Fab Vue component.",
+      "component": "Fab",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-footer",
+      "title": "Capacitor Footer (Vue)",
+      "description": "Capacitor Footer Vue component.",
+      "component": "Footer",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-header",
+      "title": "Capacitor Header (Vue)",
+      "description": "Capacitor Header Vue component.",
+      "component": "Header",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-icon",
+      "title": "Capacitor Icon (Vue)",
+      "description": "Capacitor Icon Vue component.",
+      "component": "Icon",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-infinite-scroll",
+      "title": "Capacitor InfiniteScroll (Vue)",
+      "description": "Capacitor InfiniteScroll Vue component.",
+      "component": "InfiniteScroll",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-input-otp",
+      "title": "Capacitor InputOtp (Vue)",
+      "description": "Capacitor InputOtp Vue component.",
+      "component": "InputOtp",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-item-sliding",
+      "title": "Capacitor ItemSliding (Vue)",
+      "description": "Capacitor ItemSliding Vue component.",
+      "component": "ItemSliding",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-link",
+      "title": "Capacitor Link (Vue)",
+      "description": "Capacitor Link Vue component.",
+      "component": "Link",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-list",
+      "title": "Capacitor List (Vue)",
+      "description": "Capacitor List Vue component.",
+      "component": "List",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-list-button",
+      "title": "Capacitor ListButton (Vue)",
+      "description": "Capacitor ListButton Vue component.",
+      "component": "ListButton",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-list-group",
+      "title": "Capacitor ListGroup (Vue)",
+      "description": "Capacitor ListGroup Vue component.",
+      "component": "ListGroup",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-list-input",
+      "title": "Capacitor ListInput (Vue)",
+      "description": "Capacitor ListInput Vue component.",
+      "component": "ListInput",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-list-item",
+      "title": "Capacitor ListItem (Vue)",
+      "description": "Capacitor ListItem Vue component.",
+      "component": "ListItem",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-menu-list",
+      "title": "Capacitor MenuList (Vue)",
+      "description": "Capacitor MenuList Vue component.",
+      "component": "MenuList",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-menu-list-item",
+      "title": "Capacitor MenuListItem (Vue)",
+      "description": "Capacitor MenuListItem Vue component.",
+      "component": "MenuListItem",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-message",
+      "title": "Capacitor Message (Vue)",
+      "description": "Capacitor Message Vue component.",
+      "component": "Message",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-messagebar",
+      "title": "Capacitor Messagebar (Vue)",
+      "description": "Capacitor Messagebar Vue component.",
+      "component": "Messagebar",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-messages",
+      "title": "Capacitor Messages (Vue)",
+      "description": "Capacitor Messages Vue component.",
+      "component": "Messages",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-messages-title",
+      "title": "Capacitor MessagesTitle (Vue)",
+      "description": "Capacitor MessagesTitle Vue component.",
+      "component": "MessagesTitle",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-modal",
+      "title": "Capacitor Modal (Vue)",
+      "description": "Capacitor Modal Vue component.",
+      "component": "Modal",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-navbar",
+      "title": "Capacitor Navbar (Vue)",
+      "description": "Capacitor Navbar Vue component.",
+      "component": "Navbar",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-navbar-back-link",
+      "title": "Capacitor NavbarBackLink (Vue)",
+      "description": "Capacitor NavbarBackLink Vue component.",
+      "component": "NavbarBackLink",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-note",
+      "title": "Capacitor Note (Vue)",
+      "description": "Capacitor Note Vue component.",
+      "component": "Note",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-notification",
+      "title": "Capacitor Notification (Vue)",
+      "description": "Capacitor Notification Vue component.",
+      "component": "Notification",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-page",
+      "title": "Capacitor Page (Vue)",
+      "description": "Capacitor Page Vue component.",
+      "component": "Page",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-panel",
+      "title": "Capacitor Panel (Vue)",
+      "description": "Capacitor Panel Vue component.",
+      "component": "Panel",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-picker",
+      "title": "Capacitor Picker (Vue)",
+      "description": "Capacitor Picker Vue component.",
+      "component": "Picker",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-popover",
+      "title": "Capacitor Popover (Vue)",
+      "description": "Capacitor Popover Vue component.",
+      "component": "Popover",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-popup",
+      "title": "Capacitor Popup (Vue)",
+      "description": "Capacitor Popup Vue component.",
+      "component": "Popup",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-preloader",
+      "title": "Capacitor Preloader (Vue)",
+      "description": "Capacitor Preloader Vue component.",
+      "component": "Preloader",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-progressbar",
+      "title": "Capacitor Progressbar (Vue)",
+      "description": "Capacitor Progressbar Vue component.",
+      "component": "Progressbar",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-radio",
+      "title": "Capacitor Radio (Vue)",
+      "description": "Capacitor Radio Vue component.",
+      "component": "Radio",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-range",
+      "title": "Capacitor Range (Vue)",
+      "description": "Capacitor Range Vue component.",
+      "component": "Range",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-refresher",
+      "title": "Capacitor Refresher (Vue)",
+      "description": "Capacitor Refresher Vue component.",
+      "component": "Refresher",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-reorder",
+      "title": "Capacitor Reorder (Vue)",
+      "description": "Capacitor Reorder Vue component.",
+      "component": "Reorder",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-searchbar",
+      "title": "Capacitor Searchbar (Vue)",
+      "description": "Capacitor Searchbar Vue component.",
+      "component": "Searchbar",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-segmented",
+      "title": "Capacitor Segmented (Vue)",
+      "description": "Capacitor Segmented Vue component.",
+      "component": "Segmented",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-segmented-button",
+      "title": "Capacitor SegmentedButton (Vue)",
+      "description": "Capacitor SegmentedButton Vue component.",
+      "component": "SegmentedButton",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-select",
+      "title": "Capacitor Select (Vue)",
+      "description": "Capacitor Select Vue component.",
+      "component": "Select",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-sheet",
+      "title": "Capacitor Sheet (Vue)",
+      "description": "Capacitor Sheet Vue component.",
+      "component": "Sheet",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-skeleton",
+      "title": "Capacitor Skeleton (Vue)",
+      "description": "Capacitor Skeleton Vue component.",
+      "component": "Skeleton",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-split-pane",
+      "title": "Capacitor SplitPane (Vue)",
+      "description": "Capacitor SplitPane Vue component.",
+      "component": "SplitPane",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-stepper",
+      "title": "Capacitor Stepper (Vue)",
+      "description": "Capacitor Stepper Vue component.",
+      "component": "Stepper",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-tab",
+      "title": "Capacitor Tab (Vue)",
+      "description": "Capacitor Tab Vue component.",
+      "component": "Tab",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-tabbar",
+      "title": "Capacitor Tabbar (Vue)",
+      "description": "Capacitor Tabbar Vue component.",
+      "component": "Tabbar",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-tabbar-link",
+      "title": "Capacitor TabbarLink (Vue)",
+      "description": "Capacitor TabbarLink Vue component.",
+      "component": "TabbarLink",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-table",
+      "title": "Capacitor Table (Vue)",
+      "description": "Capacitor Table Vue component.",
+      "component": "Table",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-table-body",
+      "title": "Capacitor TableBody (Vue)",
+      "description": "Capacitor TableBody Vue component.",
+      "component": "TableBody",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-table-cell",
+      "title": "Capacitor TableCell (Vue)",
+      "description": "Capacitor TableCell Vue component.",
+      "component": "TableCell",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-table-head",
+      "title": "Capacitor TableHead (Vue)",
+      "description": "Capacitor TableHead Vue component.",
+      "component": "TableHead",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-table-row",
+      "title": "Capacitor TableRow (Vue)",
+      "description": "Capacitor TableRow Vue component.",
+      "component": "TableRow",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-tabs",
+      "title": "Capacitor Tabs (Vue)",
+      "description": "Capacitor Tabs Vue component.",
+      "component": "Tabs",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-textarea",
+      "title": "Capacitor Textarea (Vue)",
+      "description": "Capacitor Textarea Vue component.",
+      "component": "Textarea",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-thumbnail",
+      "title": "Capacitor Thumbnail (Vue)",
+      "description": "Capacitor Thumbnail Vue component.",
+      "component": "Thumbnail",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-toast",
+      "title": "Capacitor Toast (Vue)",
+      "description": "Capacitor Toast Vue component.",
+      "component": "Toast",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-toggle",
+      "title": "Capacitor Toggle (Vue)",
+      "description": "Capacitor Toggle Vue component.",
+      "component": "Toggle",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-toolbar",
+      "title": "Capacitor Toolbar (Vue)",
+      "description": "Capacitor Toolbar Vue component.",
+      "component": "Toolbar",
+      "hasVue": true
+    },
+    {
+      "name": "capacitor-touch-ripple",
+      "title": "Capacitor TouchRipple (Vue)",
+      "description": "Capacitor TouchRipple Vue component.",
+      "component": "TouchRipple",
+      "hasVue": true
+    }
+  ]
+}

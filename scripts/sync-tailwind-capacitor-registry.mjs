@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -13,8 +13,33 @@ if (!commitMatch) {
 const commit = commitMatch[1]
 
 const snapshotRoot = resolve(repoRoot, 'apps/web/src/tailwind-capacitor-snapshot')
+const vendorRoot = join(repoRoot, 'apps/web/vendor/tailwind-capacitor-registry-snapshot')
 const stagingRoot = join(snapshotRoot, '.registry-sync-staging')
 const manifestPath = join(snapshotRoot, 'registry-manifest.json')
+
+function hydrateSnapshotFromVendor() {
+  const vendorManifestPath = join(vendorRoot, 'registry-manifest.json')
+  if (!existsSync(vendorManifestPath) || !existsSync(join(vendorRoot, 'capacitor/index.js'))) {
+    return false
+  }
+  try {
+    const vendorManifest = JSON.parse(readFileSync(vendorManifestPath, 'utf8'))
+    if (vendorManifest.commit !== commit) {
+      return false
+    }
+    rmSync(snapshotRoot, { recursive: true, force: true })
+    cpSync(vendorRoot, snapshotRoot, { recursive: true })
+    console.log(`Hydrated tailwind-capacitor snapshot from vendor at ${commit}`)
+    return true
+  } catch (error) {
+    console.warn('Failed to hydrate tailwind-capacitor snapshot from vendor', error)
+    return false
+  }
+}
+
+if (!process.env.TC_REGISTRY_FORCE_SYNC && hydrateSnapshotFromVendor()) {
+  process.exit(0)
+}
 
 if (
   !process.env.TC_REGISTRY_FORCE_SYNC &&
@@ -178,4 +203,7 @@ for (const stagedPath of writtenFiles) {
 
 rmSync(stagingRoot, { recursive: true, force: true })
 
+rmSync(vendorRoot, { recursive: true, force: true })
+cpSync(snapshotRoot, vendorRoot, { recursive: true })
+console.log(`Updated vendor snapshot at apps/web/vendor/tailwind-capacitor-registry-snapshot`)
 console.log(`Synced ${writtenFiles.size} files from tailwind-capacitor @ ${commit}`)

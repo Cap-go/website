@@ -159,6 +159,15 @@ jobs:
             ${{ runner.os }}-playwright-
 
       - run: bun install --frozen-lockfile
+
+      - name: Cache Tailwind Capacitor registry snapshot
+        uses: actions/cache@v4
+        with:
+          path: apps/web/src/tailwind-capacitor-snapshot
+          key: tailwind-capacitor-snapshot-${{ hashFiles('apps/shared/config/tailwindCapacitorRegistry.ts', 'apps/web/vendor/tailwind-capacitor-registry-snapshot/registry-manifest.json') }}
+          restore-keys: |
+            tailwind-capacitor-snapshot-
+
       - run: bun run lint
       - name: Install Playwright Chromium
         run: node ./node_modules/playwright/cli.js install chromium
