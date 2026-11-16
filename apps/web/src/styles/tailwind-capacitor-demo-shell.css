@@ -95,9 +95,12 @@ html.dark body.tc-demo-shell-body {
 }
 
 .tc-demo-shell-body .tc-demo-registry-toast {
+  inset: auto auto 42% 50% !important;
+  width: min(18rem, calc(100% - 2rem)) !important;
+  max-width: none !important;
   opacity: 1 !important;
-  transform: none !important;
   pointer-events: auto !important;
+  transform: translateX(-50%) !important;
 }
 
 .tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-toast:where(.fixed) {

@@ -151,7 +151,18 @@ async function preparePhoneFrameForCapture(page) {
  */
 async function screenshotPhoneFrame(page, filePath) {
   await preparePhoneFrameForCapture(page)
-  await page.locator('.tc-demo-phone-frame').screenshot({ path: filePath })
+  const phone = page.locator('.tc-demo-phone-frame')
+  await phone.evaluate((el) => {
+    const iframe = el.querySelector('iframe')
+    if (iframe instanceof HTMLIFrameElement) {
+      const doc = iframe.contentDocument
+      const win = iframe.contentWindow
+      doc?.querySelector('.tc-demo-page')?.scrollTo(0, 0)
+      win?.scrollTo(0, 0)
+    }
+  })
+  await page.waitForTimeout(150)
+  await phone.screenshot({ path: filePath })
 }
 
 /**
@@ -263,6 +274,10 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         if (onlyOpenShots && !target.open) continue
         await dismissOverlays(page, frame)
         await focusComponentInFrame(frame, target.sectionId, target.open, target.openExpect, target.expectInSection)
+        if (target.open) {
+          await frame.locator('.tc-demo-page').evaluate((el) => el.scrollTo(0, 0))
+          await page.waitForTimeout(200)
+        }
         await page.waitForTimeout(300)
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
         await screenshotPhoneFrame(page, join(outDir, fileName))
