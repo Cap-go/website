@@ -734,5 +734,13 @@
   {
     "fileName": "install-section-before.png",
     "sha256": "ce8b8e85e6a08ffd6807a077466d0d122cd47a34002b35b48192520c25a42ab3"
+  },
+  {
+    "fileName": "install-section-mobile-after.png",
+    "sha256": "1770621edc051c1a51196ae40cf01a5c3548fd9a69374d29e005ee6b647e0660"
+  },
+  {
+    "fileName": "install-section-mobile-before.png",
+    "sha256": "c4fe1a54240c6b411eda89480d71f453853d35ee21fe74406627aa4479da978a"
   }
 ]
