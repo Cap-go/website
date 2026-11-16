@@ -24,7 +24,7 @@ faq:
 
 [Tailwind Capacitor](https://github.com/Cap-go/tailwind-capacitor/) ships Tailwind CSS v4 utilities for Capacitor safe areas and platform variants, plus Vue, React, and Angular UI components, as a [shadcn registry](https://ui.shadcn.com/docs/registry). You copy source into your app with the shadcn CLI.
 
-Install commands on Capgo track Cap-go/tailwind-capacitor [PR #130](https://github.com/Cap-go/tailwind-capacitor/pull/130) at commit `dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1` until that branch merges to `main`.
+Install commands on Capgo track Cap-go/tailwind-capacitor [main](https://github.com/Cap-go/tailwind-capacitor/) at commit `9791d43d67279d7725d6a1f7865ff10deaf36ba5` (merge commit for [PR #130](https://github.com/Cap-go/tailwind-capacitor/pull/130)).
 
 ## Live component demo
 
@@ -42,10 +42,10 @@ Use the framework tabs on the [demo page](/plugins/tailwind-capacitor/demo/) or 
 ## Install base styles
 
 ```bash
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-tailwind.json
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-provider.json
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-shared.json
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-icons.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-tailwind.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-provider.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-shared.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-icons.json
 ```
 
 In your app global stylesheet, replace the `@import "tailwindcss"` line with the capacitor bundle import. Keep your other custom CSS. The bundle already includes Tailwind, so do not keep a separate Tailwind import:
@@ -59,10 +59,10 @@ In your app global stylesheet, replace the `@import "tailwindcss"` line with the
 `App`, `Page`, `Navbar`, and `Button` are separate registry items. Install each one:
 
 ```bash
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-app.json
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-page.json
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-navbar.json
-npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1/public/r/capacitor-button.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-app.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-page.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-navbar.json
+npx shadcn-vue@latest add https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/9791d43d67279d7725d6a1f7865ff10deaf36ba5/public/r/capacitor-button.json
 ```
 
 Components land under `src/capacitor/vue/components/`. The provider lands under `src/capacitor/vue/shared/`. Shared classes land under `src/capacitor/shared/`. Icons land under `src/capacitor/vue/components/icons/`.

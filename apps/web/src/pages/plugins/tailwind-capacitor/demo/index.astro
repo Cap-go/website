@@ -48,8 +48,12 @@ const navItems = [
   </section>
 
   <section class="px-6 py-8 lg:px-8">
-    <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
-      <div class="min-w-0">
+    <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)]">
+      <aside class="hidden lg:block">
+        <RegistryNav items={navItems} />
+      </aside>
+
+      <div class="min-w-0 lg:col-start-2">
         <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
           <div class="mb-4 flex flex-wrap items-center gap-3" data-tc-demo-controls>
             <fieldset class="flex flex-wrap gap-2 border-0 p-0">
@@ -84,10 +88,6 @@ const navItems = [
           <TailwindCapacitorInstallTabs class="mt-4" />
         </div>
       </div>
-
-      <aside class="hidden lg:block">
-        <RegistryNav items={navItems} />
-      </aside>
     </div>
   </section>
 </Layout>

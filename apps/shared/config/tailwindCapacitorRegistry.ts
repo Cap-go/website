@@ -1,5 +1,5 @@
-/** Pinned tailwind-capacitor commit for registry sync and install URLs (Cap-go/tailwind-capacitor#130). */
-export const TAILWIND_CAPACITOR_REGISTRY_COMMIT = 'dbb2c4a8c7ddb045b465e0ea1abef3f4390ccaa1'
+/** Pinned tailwind-capacitor commit for registry sync and install URLs (merged Cap-go/tailwind-capacitor#130). */
+export const TAILWIND_CAPACITOR_REGISTRY_COMMIT = '9791d43d67279d7725d6a1f7865ff10deaf36ba5'
 
 const rawBase = `https://raw.githubusercontent.com/Cap-go/tailwind-capacitor/${TAILWIND_CAPACITOR_REGISTRY_COMMIT}/public/r`
 
