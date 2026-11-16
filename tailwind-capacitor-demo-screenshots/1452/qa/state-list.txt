@@ -1,0 +1,84 @@
+capacitor-accordion: default, alternate
+capacitor-accordion-item: default, alternate
+capacitor-actions: screen, sheet-open
+capacitor-actions-button: screen, sheet-open, primary-row
+capacitor-actions-group: screen, sheet-open, single-group
+capacitor-actions-label: screen, sheet-open, section-label
+capacitor-alert: default, alternate
+capacitor-app: default, alternate
+capacitor-avatar: default, alternate
+capacitor-badge: default, color, on-avatar
+capacitor-block: default, alternate
+capacitor-block-footer: default, alternate
+capacitor-block-header: default, alternate
+capacitor-block-title: default, alternate
+capacitor-breadcrumbs: default, alternate
+capacitor-breadcrumbs-collapsed: default, alternate
+capacitor-breadcrumbs-item: default, alternate
+capacitor-breadcrumbs-separator: default, alternate
+capacitor-button: solid, outline, clear, tonal, small, large, raised, disabled, with-icon, block, fill-color, outline-color
+capacitor-card: feed, media, outline
+capacitor-checkbox: off, on, disabled
+capacitor-chip: filled, removable, outline
+capacitor-datetime: default, alternate
+capacitor-dialog: screen, open
+capacitor-dialog-button: default, alternate
+capacitor-fab: default, alternate
+capacitor-footer: default, alternate
+capacitor-header: default, alternate
+capacitor-icon: default, alternate
+capacitor-infinite-scroll: default, alternate
+capacitor-input-otp: empty, filled
+capacitor-item-sliding: default, alternate
+capacitor-link: default, alternate
+capacitor-list: inset, buttons, media
+capacitor-list-button: default, alternate
+capacitor-list-group: default, alternate
+capacitor-list-input: empty, filled, focused
+capacitor-list-item: standard, chevron, toggle-after, badge
+capacitor-menu-list: default, alternate
+capacitor-menu-list-item: default, alternate
+capacitor-message: default, alternate
+capacitor-messagebar: default, alternate
+capacitor-messages: default, alternate
+capacitor-messages-title: default, alternate
+capacitor-modal: default, alternate
+capacitor-navbar: default, alternate
+capacitor-navbar-back-link: default, alternate
+capacitor-note: default, alternate
+capacitor-notification: default, alternate
+capacitor-page: default, alternate
+capacitor-panel: screen, open
+capacitor-picker: default, alternate
+capacitor-popover: screen, open
+capacitor-popup: screen, open
+capacitor-preloader: default, alternate
+capacitor-progressbar: default, alternate
+capacitor-radio: option-a, option-b
+capacitor-range: default, alternate
+capacitor-refresher: default, alternate
+capacitor-reorder: default, alternate
+capacitor-searchbar: empty, filled
+capacitor-segmented: one-selected, two-selected
+capacitor-segmented-button: a-selected, b-selected
+capacitor-select: default, alternate
+capacitor-sheet: screen, open
+capacitor-skeleton: default, alternate
+capacitor-split-pane: default, alternate
+capacitor-stepper: default, alternate
+capacitor-tab: tab-a, tab-b
+capacitor-tabbar: default, alternate
+capacitor-tabbar-link: default, alternate
+capacitor-table: default, alternate
+capacitor-table-body: default, alternate
+capacitor-table-cell: default, alternate
+capacitor-table-head: default, alternate
+capacitor-table-row: default, alternate
+capacitor-tabs: tab-one, tab-two
+capacitor-textarea: empty, filled
+capacitor-thumbnail: default, alternate
+capacitor-toast: screen, open
+capacitor-toggle: off, on, disabled
+capacitor-toolbar: default, alternate
+capacitor-touch-ripple: default, alternate
+foundation: packages, icons
