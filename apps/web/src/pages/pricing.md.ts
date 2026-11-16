@@ -1,4 +1,5 @@
 import { creditDisplayPrice } from '@/lib/creditDisplayPrice'
+import { observeEventsForPlan } from '@/lib/observePlanAllowance'
 import { getCredits, getPlans } from '@/lib/siteData'
 import { useRuntimeConfig } from '@/config/app'
 import type { CreditStep } from '@/lib/pricingCalculator'
@@ -52,7 +53,8 @@ export const GET: APIRoute = async () => {
   const planRows = plans.map((plan) => {
     const buildMinutes = plan.build_time_unit ? Math.round(plan.build_time_unit / 60).toLocaleString('en-US') : '—'
     const yearlyMonthly = plan.price_y ? `$${Math.round(plan.price_y / 12)}/month ($${plan.price_y.toLocaleString('en-US')}/year)` : '—'
-    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB | ${(plan.storage ?? 0).toLocaleString('en-US')} GB | ${buildMinutes} min |`
+    const observeEvents = observeEventsForPlan(plan).toLocaleString('en-US')
+    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB | ${(plan.storage ?? 0).toLocaleString('en-US')} GB | ${buildMinutes} min | ${observeEvents} |`
   })
 
   const markdown = [
@@ -73,8 +75,8 @@ export const GET: APIRoute = async () => {
     '',
     '## Plans',
     '',
-    '| Plan | Monthly billing | Yearly billing | Monthly active users | Bandwidth | Storage | Native build time |',
-    '| --- | --- | --- | --- | --- | --- | --- |',
+    '| Plan | Monthly billing | Yearly billing | Monthly active users | Bandwidth | Storage | Native build time | Observe events / month |',
+    '| --- | --- | --- | --- | --- | --- | --- | --- |',
     ...planRows,
     '',
     '## Pay-as-you-go usage tiers',
