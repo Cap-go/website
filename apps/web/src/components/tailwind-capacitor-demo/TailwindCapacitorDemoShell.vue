@@ -62,8 +62,8 @@
           </template>
         </Dialog>
 
-        <Sheet v-if="sheetOpen" :opened="true" @backdropclick="sheetOpen = false">
-          <Toolbar top>
+        <Sheet v-if="sheetOpen" class="tc-demo-registry-sheet" :opened="true" @backdropclick="sheetOpen = false">
+          <Toolbar top inner-class="tc-demo-sheet-toolbar-inner">
             <div class="left">
               <Link toolbar href="#" @click.prevent="sheetOpen = false" @keyup.enter="sheetOpen = false">Done</Link>
             </div>
@@ -108,8 +108,8 @@
           target="#popover-target-inline"
           @backdropclick="popoverOpen = false"
         >
-          <List>
-            <ListItem title="Popover item" />
+          <List class="tc-demo-popover-list">
+            <ListItem title="Popover item" content-class="tc-demo-popover-list-item-content" />
           </List>
         </Popover>
     </div>

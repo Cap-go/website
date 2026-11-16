@@ -39,6 +39,9 @@ const themeCompareSections = [
 ]
 
 const onlyOpenShots = process.env.TC_DEMO_ONLY_OPEN === '1'
+const openShotSlugs = process.env.TC_DEMO_OPEN_SLUGS?.split(',')
+  .map((slug) => slug.trim())
+  .filter(Boolean)
 
 const componentTargets = [
   { slug: 'button', sectionId: 'capacitor-button', open: null, openExpect: null },
@@ -301,6 +304,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
     if (applyThemes && combo) {
       for (const target of componentTargets) {
         if (onlyOpenShots && !target.open) continue
+        if (openShotSlugs?.length && !openShotSlugs.includes(target.slug)) continue
         await dismissOverlays(page, frame)
         await focusComponentInFrame(frame, target.sectionId, target.open, target.openExpect, target.expectInSection)
         if (target.slug === 'popover-open') await stabilizePopoverForCapture(frame)

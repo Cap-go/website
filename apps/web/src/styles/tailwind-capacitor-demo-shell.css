@@ -134,6 +134,17 @@ html.dark body.tc-demo-shell-body {
   pointer-events: auto !important;
 }
 
+/* Registry list items use ps-*-safe; demo iframe keeps logical padding explicit. */
+.tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-popover .tc-demo-popover-list-item-content {
+  padding-inline-start: calc(var(--c-safe-area-left, 0px) + 1rem) !important;
+  padding-inline-end: calc(var(--c-safe-area-right, 0px) + 1rem) !important;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-sheet .tc-demo-sheet-toolbar-inner {
+  padding-inline-start: calc(var(--c-safe-area-left, 0px) + 1rem) !important;
+  padding-inline-end: calc(var(--c-safe-area-right, 0px) + 1rem) !important;
+}
+
 #capacitor-notification .registry-demo-block {
   overflow: visible;
   min-height: 9.5rem;
