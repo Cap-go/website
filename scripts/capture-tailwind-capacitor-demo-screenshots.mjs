@@ -154,7 +154,6 @@ async function screenshotPhoneFrame(page, filePath) {
   const iframeHandle = await page.locator('#tc-demo-iframe').elementHandle()
   const frame = await iframeHandle?.contentFrame()
   if (!frame) throw new Error('Tailwind Capacitor demo iframe is not ready')
-  await frame.locator('.tc-demo-page').evaluate((el) => el.scrollTo(0, 0))
   await page.waitForTimeout(150)
   await frame.locator('#tc-demo-root').screenshot({ path: filePath })
 }
@@ -196,12 +195,14 @@ async function waitOverlayTextInShellViewport(frame, text) {
  * @param {boolean} [expectInSection]
  */
 async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, expectInSection = false) {
-  await frame.locator('body').evaluate(() => {
-    window.scrollTo(0, 0)
-    document.querySelector('.tc-demo-page')?.scrollTo(0, 0)
-  })
+  if (!openPattern) {
+    await frame.locator('body').evaluate(() => {
+      window.scrollTo(0, 0)
+      document.querySelector('.tc-demo-page')?.scrollTo(0, 0)
+    })
+  }
   const section = frame.locator(`#${sectionId}`)
-  await section.scrollIntoViewIfNeeded()
+  await section.scrollIntoViewIfNeeded({ timeout: 20_000 })
   await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20_000 })
   if (openPattern) {
     const trigger = section.getByRole('button', { name: openPattern })
