@@ -1,0 +1,845 @@
+<!doctype html><html><head><meta charset="utf-8"/><title>Tailwind Capacitor demo QA</title></head><body>
+<h1>QA shots (pass 2016, fail 0)</h1>
+<ul>
+<li><a href="#foundation">foundation</a></li>
+<li><a href="#capacitor-accordion">capacitor-accordion</a></li>
+<li><a href="#capacitor-accordion-item">capacitor-accordion-item</a></li>
+<li><a href="#capacitor-actions">capacitor-actions</a></li>
+<li><a href="#capacitor-actions-button">capacitor-actions-button</a></li>
+<li><a href="#capacitor-actions-group">capacitor-actions-group</a></li>
+<li><a href="#capacitor-actions-label">capacitor-actions-label</a></li>
+<li><a href="#capacitor-alert">capacitor-alert</a></li>
+<li><a href="#capacitor-app">capacitor-app</a></li>
+<li><a href="#capacitor-avatar">capacitor-avatar</a></li>
+<li><a href="#capacitor-badge">capacitor-badge</a></li>
+<li><a href="#capacitor-block">capacitor-block</a></li>
+<li><a href="#capacitor-block-footer">capacitor-block-footer</a></li>
+<li><a href="#capacitor-block-header">capacitor-block-header</a></li>
+<li><a href="#capacitor-block-title">capacitor-block-title</a></li>
+<li><a href="#capacitor-breadcrumbs">capacitor-breadcrumbs</a></li>
+<li><a href="#capacitor-breadcrumbs-collapsed">capacitor-breadcrumbs-collapsed</a></li>
+<li><a href="#capacitor-breadcrumbs-item">capacitor-breadcrumbs-item</a></li>
+<li><a href="#capacitor-breadcrumbs-separator">capacitor-breadcrumbs-separator</a></li>
+<li><a href="#capacitor-button">capacitor-button</a></li>
+<li><a href="#capacitor-card">capacitor-card</a></li>
+<li><a href="#capacitor-checkbox">capacitor-checkbox</a></li>
+<li><a href="#capacitor-chip">capacitor-chip</a></li>
+<li><a href="#capacitor-datetime">capacitor-datetime</a></li>
+<li><a href="#capacitor-dialog">capacitor-dialog</a></li>
+<li><a href="#capacitor-dialog-button">capacitor-dialog-button</a></li>
+<li><a href="#capacitor-fab">capacitor-fab</a></li>
+<li><a href="#capacitor-footer">capacitor-footer</a></li>
+<li><a href="#capacitor-header">capacitor-header</a></li>
+<li><a href="#capacitor-icon">capacitor-icon</a></li>
+<li><a href="#capacitor-infinite-scroll">capacitor-infinite-scroll</a></li>
+<li><a href="#capacitor-input-otp">capacitor-input-otp</a></li>
+<li><a href="#capacitor-item-sliding">capacitor-item-sliding</a></li>
+<li><a href="#capacitor-link">capacitor-link</a></li>
+<li><a href="#capacitor-list">capacitor-list</a></li>
+<li><a href="#capacitor-list-button">capacitor-list-button</a></li>
+<li><a href="#capacitor-list-group">capacitor-list-group</a></li>
+<li><a href="#capacitor-list-input">capacitor-list-input</a></li>
+<li><a href="#capacitor-list-item">capacitor-list-item</a></li>
+<li><a href="#capacitor-menu-list">capacitor-menu-list</a></li>
+<li><a href="#capacitor-menu-list-item">capacitor-menu-list-item</a></li>
+<li><a href="#capacitor-message">capacitor-message</a></li>
+<li><a href="#capacitor-messagebar">capacitor-messagebar</a></li>
+<li><a href="#capacitor-messages">capacitor-messages</a></li>
+<li><a href="#capacitor-messages-title">capacitor-messages-title</a></li>
+<li><a href="#capacitor-modal">capacitor-modal</a></li>
+<li><a href="#capacitor-navbar">capacitor-navbar</a></li>
+<li><a href="#capacitor-navbar-back-link">capacitor-navbar-back-link</a></li>
+<li><a href="#capacitor-note">capacitor-note</a></li>
+<li><a href="#capacitor-notification">capacitor-notification</a></li>
+<li><a href="#capacitor-page">capacitor-page</a></li>
+<li><a href="#capacitor-panel">capacitor-panel</a></li>
+<li><a href="#capacitor-picker">capacitor-picker</a></li>
+<li><a href="#capacitor-popover">capacitor-popover</a></li>
+<li><a href="#capacitor-popup">capacitor-popup</a></li>
+<li><a href="#capacitor-preloader">capacitor-preloader</a></li>
+<li><a href="#capacitor-progressbar">capacitor-progressbar</a></li>
+<li><a href="#capacitor-radio">capacitor-radio</a></li>
+<li><a href="#capacitor-range">capacitor-range</a></li>
+<li><a href="#capacitor-refresher">capacitor-refresher</a></li>
+<li><a href="#capacitor-reorder">capacitor-reorder</a></li>
+<li><a href="#capacitor-searchbar">capacitor-searchbar</a></li>
+<li><a href="#capacitor-segmented">capacitor-segmented</a></li>
+<li><a href="#capacitor-segmented-button">capacitor-segmented-button</a></li>
+<li><a href="#capacitor-select">capacitor-select</a></li>
+<li><a href="#capacitor-sheet">capacitor-sheet</a></li>
+<li><a href="#capacitor-skeleton">capacitor-skeleton</a></li>
+<li><a href="#capacitor-split-pane">capacitor-split-pane</a></li>
+<li><a href="#capacitor-stepper">capacitor-stepper</a></li>
+<li><a href="#capacitor-tab">capacitor-tab</a></li>
+<li><a href="#capacitor-tabbar">capacitor-tabbar</a></li>
+<li><a href="#capacitor-tabbar-link">capacitor-tabbar-link</a></li>
+<li><a href="#capacitor-table">capacitor-table</a></li>
+<li><a href="#capacitor-table-body">capacitor-table-body</a></li>
+<li><a href="#capacitor-table-cell">capacitor-table-cell</a></li>
+<li><a href="#capacitor-table-head">capacitor-table-head</a></li>
+<li><a href="#capacitor-table-row">capacitor-table-row</a></li>
+<li><a href="#capacitor-tabs">capacitor-tabs</a></li>
+<li><a href="#capacitor-textarea">capacitor-textarea</a></li>
+<li><a href="#capacitor-thumbnail">capacitor-thumbnail</a></li>
+<li><a href="#capacitor-toast">capacitor-toast</a></li>
+<li><a href="#capacitor-toggle">capacitor-toggle</a></li>
+<li><a href="#capacitor-toolbar">capacitor-toolbar</a></li>
+<li><a href="#capacitor-touch-ripple">capacitor-touch-ripple</a></li>
+</ul>
+<h2 id="foundation">foundation</h2>
+<h3>desktop ios-light</h3><img src="foundation/desktop-ios-light.png" alt="foundation" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="foundation/desktop-ios-dark.png" alt="foundation" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="foundation/desktop-material-light.png" alt="foundation" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="foundation/desktop-material-dark.png" alt="foundation" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="foundation/mobile-ios-light.png" alt="foundation" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="foundation/mobile-ios-dark.png" alt="foundation" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="foundation/mobile-material-light.png" alt="foundation" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="foundation/mobile-material-dark.png" alt="foundation" width="390" loading="lazy"/>
+<h2 id="capacitor-accordion">capacitor-accordion</h2>
+<h3>desktop ios-light</h3><img src="capacitor-accordion/desktop-ios-light.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-accordion/desktop-ios-dark.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-accordion/desktop-material-light.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-accordion/desktop-material-dark.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-accordion/mobile-ios-light.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-accordion/mobile-ios-dark.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-accordion/mobile-material-light.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-accordion/mobile-material-dark.png" alt="capacitor-accordion" width="390" loading="lazy"/>
+<h2 id="capacitor-accordion-item">capacitor-accordion-item</h2>
+<h3>desktop ios-light</h3><img src="capacitor-accordion-item/desktop-ios-light.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-accordion-item/desktop-ios-dark.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-accordion-item/desktop-material-light.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-accordion-item/desktop-material-dark.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-accordion-item/mobile-ios-light.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-accordion-item/mobile-ios-dark.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-accordion-item/mobile-material-light.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-accordion-item/mobile-material-dark.png" alt="capacitor-accordion-item" width="390" loading="lazy"/>
+<h2 id="capacitor-actions">capacitor-actions</h2>
+<h3>desktop ios-light</h3><img src="capacitor-actions/desktop-ios-light.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-actions/desktop-ios-dark.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-actions/desktop-material-light.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-actions/desktop-material-dark.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-actions/mobile-ios-light.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-actions/mobile-ios-dark.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-actions/mobile-material-light.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-actions/mobile-material-dark.png" alt="capacitor-actions" width="390" loading="lazy"/>
+<h2 id="capacitor-actions-button">capacitor-actions-button</h2>
+<h3>desktop ios-light</h3><img src="capacitor-actions-button/desktop-ios-light.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-actions-button/desktop-ios-dark.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-actions-button/desktop-material-light.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-actions-button/desktop-material-dark.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-actions-button/mobile-ios-light.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-actions-button/mobile-ios-dark.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-actions-button/mobile-material-light.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-actions-button/mobile-material-dark.png" alt="capacitor-actions-button" width="390" loading="lazy"/>
+<h2 id="capacitor-actions-group">capacitor-actions-group</h2>
+<h3>desktop ios-light</h3><img src="capacitor-actions-group/desktop-ios-light.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-actions-group/desktop-ios-dark.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-actions-group/desktop-material-light.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-actions-group/desktop-material-dark.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-actions-group/mobile-ios-light.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-actions-group/mobile-ios-dark.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-actions-group/mobile-material-light.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-actions-group/mobile-material-dark.png" alt="capacitor-actions-group" width="390" loading="lazy"/>
+<h2 id="capacitor-actions-label">capacitor-actions-label</h2>
+<h3>desktop ios-light</h3><img src="capacitor-actions-label/desktop-ios-light.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-actions-label/desktop-ios-dark.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-actions-label/desktop-material-light.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-actions-label/desktop-material-dark.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-actions-label/mobile-ios-light.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-actions-label/mobile-ios-dark.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-actions-label/mobile-material-light.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-actions-label/mobile-material-dark.png" alt="capacitor-actions-label" width="390" loading="lazy"/>
+<h2 id="capacitor-alert">capacitor-alert</h2>
+<h3>desktop ios-light</h3><img src="capacitor-alert/desktop-ios-light.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-alert/desktop-ios-dark.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-alert/desktop-material-light.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-alert/desktop-material-dark.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-alert/mobile-ios-light.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-alert/mobile-ios-dark.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-alert/mobile-material-light.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-alert/mobile-material-dark.png" alt="capacitor-alert" width="390" loading="lazy"/>
+<h2 id="capacitor-app">capacitor-app</h2>
+<h3>desktop ios-light</h3><img src="capacitor-app/desktop-ios-light.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-app/desktop-ios-dark.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-app/desktop-material-light.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-app/desktop-material-dark.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-app/mobile-ios-light.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-app/mobile-ios-dark.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-app/mobile-material-light.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-app/mobile-material-dark.png" alt="capacitor-app" width="390" loading="lazy"/>
+<h2 id="capacitor-avatar">capacitor-avatar</h2>
+<h3>desktop ios-light</h3><img src="capacitor-avatar/desktop-ios-light.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-avatar/desktop-ios-dark.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-avatar/desktop-material-light.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-avatar/desktop-material-dark.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-avatar/mobile-ios-light.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-avatar/mobile-ios-dark.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-avatar/mobile-material-light.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-avatar/mobile-material-dark.png" alt="capacitor-avatar" width="390" loading="lazy"/>
+<h2 id="capacitor-badge">capacitor-badge</h2>
+<h3>desktop ios-light</h3><img src="capacitor-badge/desktop-ios-light.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-badge/desktop-ios-dark.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-badge/desktop-material-light.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-badge/desktop-material-dark.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-badge/mobile-ios-light.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-badge/mobile-ios-dark.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-badge/mobile-material-light.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-badge/mobile-material-dark.png" alt="capacitor-badge" width="390" loading="lazy"/>
+<h2 id="capacitor-block">capacitor-block</h2>
+<h3>desktop ios-light</h3><img src="capacitor-block/desktop-ios-light.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-block/desktop-ios-dark.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-block/desktop-material-light.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-block/desktop-material-dark.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-block/mobile-ios-light.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-block/mobile-ios-dark.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-block/mobile-material-light.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-block/mobile-material-dark.png" alt="capacitor-block" width="390" loading="lazy"/>
+<h2 id="capacitor-block-footer">capacitor-block-footer</h2>
+<h3>desktop ios-light</h3><img src="capacitor-block-footer/desktop-ios-light.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-block-footer/desktop-ios-dark.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-block-footer/desktop-material-light.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-block-footer/desktop-material-dark.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-block-footer/mobile-ios-light.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-block-footer/mobile-ios-dark.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-block-footer/mobile-material-light.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-block-footer/mobile-material-dark.png" alt="capacitor-block-footer" width="390" loading="lazy"/>
+<h2 id="capacitor-block-header">capacitor-block-header</h2>
+<h3>desktop ios-light</h3><img src="capacitor-block-header/desktop-ios-light.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-block-header/desktop-ios-dark.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-block-header/desktop-material-light.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-block-header/desktop-material-dark.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-block-header/mobile-ios-light.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-block-header/mobile-ios-dark.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-block-header/mobile-material-light.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-block-header/mobile-material-dark.png" alt="capacitor-block-header" width="390" loading="lazy"/>
+<h2 id="capacitor-block-title">capacitor-block-title</h2>
+<h3>desktop ios-light</h3><img src="capacitor-block-title/desktop-ios-light.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-block-title/desktop-ios-dark.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-block-title/desktop-material-light.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-block-title/desktop-material-dark.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-block-title/mobile-ios-light.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-block-title/mobile-ios-dark.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-block-title/mobile-material-light.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-block-title/mobile-material-dark.png" alt="capacitor-block-title" width="390" loading="lazy"/>
+<h2 id="capacitor-breadcrumbs">capacitor-breadcrumbs</h2>
+<h3>desktop ios-light</h3><img src="capacitor-breadcrumbs/desktop-ios-light.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-breadcrumbs/desktop-ios-dark.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-breadcrumbs/desktop-material-light.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-breadcrumbs/desktop-material-dark.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-breadcrumbs/mobile-ios-light.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-breadcrumbs/mobile-ios-dark.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-breadcrumbs/mobile-material-light.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-breadcrumbs/mobile-material-dark.png" alt="capacitor-breadcrumbs" width="390" loading="lazy"/>
+<h2 id="capacitor-breadcrumbs-collapsed">capacitor-breadcrumbs-collapsed</h2>
+<h3>desktop ios-light</h3><img src="capacitor-breadcrumbs-collapsed/desktop-ios-light.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-breadcrumbs-collapsed/desktop-ios-dark.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-breadcrumbs-collapsed/desktop-material-light.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-breadcrumbs-collapsed/desktop-material-dark.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-breadcrumbs-collapsed/mobile-ios-light.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-breadcrumbs-collapsed/mobile-ios-dark.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-breadcrumbs-collapsed/mobile-material-light.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-breadcrumbs-collapsed/mobile-material-dark.png" alt="capacitor-breadcrumbs-collapsed" width="390" loading="lazy"/>
+<h2 id="capacitor-breadcrumbs-item">capacitor-breadcrumbs-item</h2>
+<h3>desktop ios-light</h3><img src="capacitor-breadcrumbs-item/desktop-ios-light.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-breadcrumbs-item/desktop-ios-dark.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-breadcrumbs-item/desktop-material-light.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-breadcrumbs-item/desktop-material-dark.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-breadcrumbs-item/mobile-ios-light.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-breadcrumbs-item/mobile-ios-dark.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-breadcrumbs-item/mobile-material-light.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-breadcrumbs-item/mobile-material-dark.png" alt="capacitor-breadcrumbs-item" width="390" loading="lazy"/>
+<h2 id="capacitor-breadcrumbs-separator">capacitor-breadcrumbs-separator</h2>
+<h3>desktop ios-light</h3><img src="capacitor-breadcrumbs-separator/desktop-ios-light.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-breadcrumbs-separator/desktop-ios-dark.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-breadcrumbs-separator/desktop-material-light.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-breadcrumbs-separator/desktop-material-dark.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-breadcrumbs-separator/mobile-ios-light.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-breadcrumbs-separator/mobile-ios-dark.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-breadcrumbs-separator/mobile-material-light.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-breadcrumbs-separator/mobile-material-dark.png" alt="capacitor-breadcrumbs-separator" width="390" loading="lazy"/>
+<h2 id="capacitor-button">capacitor-button</h2>
+<h3>desktop ios-light</h3><img src="capacitor-button/desktop-ios-light.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-button/desktop-ios-dark.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-button/desktop-material-light.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-button/desktop-material-dark.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-button/mobile-ios-light.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-button/mobile-ios-dark.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-button/mobile-material-light.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-button/mobile-material-dark.png" alt="capacitor-button" width="390" loading="lazy"/>
+<h2 id="capacitor-card">capacitor-card</h2>
+<h3>desktop ios-light</h3><img src="capacitor-card/desktop-ios-light.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-card/desktop-ios-dark.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-card/desktop-material-light.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-card/desktop-material-dark.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-card/mobile-ios-light.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-card/mobile-ios-dark.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-card/mobile-material-light.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-card/mobile-material-dark.png" alt="capacitor-card" width="390" loading="lazy"/>
+<h2 id="capacitor-checkbox">capacitor-checkbox</h2>
+<h3>desktop ios-light</h3><img src="capacitor-checkbox/desktop-ios-light.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-checkbox/desktop-ios-dark.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-checkbox/desktop-material-light.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-checkbox/desktop-material-dark.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-checkbox/mobile-ios-light.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-checkbox/mobile-ios-dark.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-checkbox/mobile-material-light.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-checkbox/mobile-material-dark.png" alt="capacitor-checkbox" width="390" loading="lazy"/>
+<h2 id="capacitor-chip">capacitor-chip</h2>
+<h3>desktop ios-light</h3><img src="capacitor-chip/desktop-ios-light.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-chip/desktop-ios-dark.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-chip/desktop-material-light.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-chip/desktop-material-dark.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-chip/mobile-ios-light.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-chip/mobile-ios-dark.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-chip/mobile-material-light.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-chip/mobile-material-dark.png" alt="capacitor-chip" width="390" loading="lazy"/>
+<h2 id="capacitor-datetime">capacitor-datetime</h2>
+<h3>desktop ios-light</h3><img src="capacitor-datetime/desktop-ios-light.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-datetime/desktop-ios-dark.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-datetime/desktop-material-light.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-datetime/desktop-material-dark.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-datetime/mobile-ios-light.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-datetime/mobile-ios-dark.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-datetime/mobile-material-light.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-datetime/mobile-material-dark.png" alt="capacitor-datetime" width="390" loading="lazy"/>
+<h2 id="capacitor-dialog">capacitor-dialog</h2>
+<h3>desktop ios-light</h3><img src="capacitor-dialog/desktop-ios-light.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-dialog/desktop-ios-dark.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-dialog/desktop-material-light.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-dialog/desktop-material-dark.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-dialog/mobile-ios-light.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-dialog/mobile-ios-dark.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-dialog/mobile-material-light.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-dialog/mobile-material-dark.png" alt="capacitor-dialog" width="390" loading="lazy"/>
+<h2 id="capacitor-dialog-button">capacitor-dialog-button</h2>
+<h3>desktop ios-light</h3><img src="capacitor-dialog-button/desktop-ios-light.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-dialog-button/desktop-ios-dark.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-dialog-button/desktop-material-light.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-dialog-button/desktop-material-dark.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-dialog-button/mobile-ios-light.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-dialog-button/mobile-ios-dark.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-dialog-button/mobile-material-light.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-dialog-button/mobile-material-dark.png" alt="capacitor-dialog-button" width="390" loading="lazy"/>
+<h2 id="capacitor-fab">capacitor-fab</h2>
+<h3>desktop ios-light</h3><img src="capacitor-fab/desktop-ios-light.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-fab/desktop-ios-dark.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-fab/desktop-material-light.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-fab/desktop-material-dark.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-fab/mobile-ios-light.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-fab/mobile-ios-dark.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-fab/mobile-material-light.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-fab/mobile-material-dark.png" alt="capacitor-fab" width="390" loading="lazy"/>
+<h2 id="capacitor-footer">capacitor-footer</h2>
+<h3>desktop ios-light</h3><img src="capacitor-footer/desktop-ios-light.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-footer/desktop-ios-dark.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-footer/desktop-material-light.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-footer/desktop-material-dark.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-footer/mobile-ios-light.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-footer/mobile-ios-dark.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-footer/mobile-material-light.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-footer/mobile-material-dark.png" alt="capacitor-footer" width="390" loading="lazy"/>
+<h2 id="capacitor-header">capacitor-header</h2>
+<h3>desktop ios-light</h3><img src="capacitor-header/desktop-ios-light.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-header/desktop-ios-dark.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-header/desktop-material-light.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-header/desktop-material-dark.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-header/mobile-ios-light.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-header/mobile-ios-dark.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-header/mobile-material-light.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-header/mobile-material-dark.png" alt="capacitor-header" width="390" loading="lazy"/>
+<h2 id="capacitor-icon">capacitor-icon</h2>
+<h3>desktop ios-light</h3><img src="capacitor-icon/desktop-ios-light.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-icon/desktop-ios-dark.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-icon/desktop-material-light.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-icon/desktop-material-dark.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-icon/mobile-ios-light.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-icon/mobile-ios-dark.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-icon/mobile-material-light.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-icon/mobile-material-dark.png" alt="capacitor-icon" width="390" loading="lazy"/>
+<h2 id="capacitor-infinite-scroll">capacitor-infinite-scroll</h2>
+<h3>desktop ios-light</h3><img src="capacitor-infinite-scroll/desktop-ios-light.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-infinite-scroll/desktop-ios-dark.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-infinite-scroll/desktop-material-light.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-infinite-scroll/desktop-material-dark.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-infinite-scroll/mobile-ios-light.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-infinite-scroll/mobile-ios-dark.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-infinite-scroll/mobile-material-light.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-infinite-scroll/mobile-material-dark.png" alt="capacitor-infinite-scroll" width="390" loading="lazy"/>
+<h2 id="capacitor-input-otp">capacitor-input-otp</h2>
+<h3>desktop ios-light</h3><img src="capacitor-input-otp/desktop-ios-light.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-input-otp/desktop-ios-dark.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-input-otp/desktop-material-light.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-input-otp/desktop-material-dark.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-input-otp/mobile-ios-light.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-input-otp/mobile-ios-dark.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-input-otp/mobile-material-light.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-input-otp/mobile-material-dark.png" alt="capacitor-input-otp" width="390" loading="lazy"/>
+<h2 id="capacitor-item-sliding">capacitor-item-sliding</h2>
+<h3>desktop ios-light</h3><img src="capacitor-item-sliding/desktop-ios-light.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-item-sliding/desktop-ios-dark.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-item-sliding/desktop-material-light.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-item-sliding/desktop-material-dark.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-item-sliding/mobile-ios-light.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-item-sliding/mobile-ios-dark.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-item-sliding/mobile-material-light.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-item-sliding/mobile-material-dark.png" alt="capacitor-item-sliding" width="390" loading="lazy"/>
+<h2 id="capacitor-link">capacitor-link</h2>
+<h3>desktop ios-light</h3><img src="capacitor-link/desktop-ios-light.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-link/desktop-ios-dark.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-link/desktop-material-light.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-link/desktop-material-dark.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-link/mobile-ios-light.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-link/mobile-ios-dark.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-link/mobile-material-light.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-link/mobile-material-dark.png" alt="capacitor-link" width="390" loading="lazy"/>
+<h2 id="capacitor-list">capacitor-list</h2>
+<h3>desktop ios-light</h3><img src="capacitor-list/desktop-ios-light.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-list/desktop-ios-dark.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-list/desktop-material-light.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-list/desktop-material-dark.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-list/mobile-ios-light.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-list/mobile-ios-dark.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-list/mobile-material-light.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-list/mobile-material-dark.png" alt="capacitor-list" width="390" loading="lazy"/>
+<h2 id="capacitor-list-button">capacitor-list-button</h2>
+<h3>desktop ios-light</h3><img src="capacitor-list-button/desktop-ios-light.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-list-button/desktop-ios-dark.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-list-button/desktop-material-light.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-list-button/desktop-material-dark.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-list-button/mobile-ios-light.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-list-button/mobile-ios-dark.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-list-button/mobile-material-light.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-list-button/mobile-material-dark.png" alt="capacitor-list-button" width="390" loading="lazy"/>
+<h2 id="capacitor-list-group">capacitor-list-group</h2>
+<h3>desktop ios-light</h3><img src="capacitor-list-group/desktop-ios-light.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-list-group/desktop-ios-dark.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-list-group/desktop-material-light.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-list-group/desktop-material-dark.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-list-group/mobile-ios-light.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-list-group/mobile-ios-dark.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-list-group/mobile-material-light.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-list-group/mobile-material-dark.png" alt="capacitor-list-group" width="390" loading="lazy"/>
+<h2 id="capacitor-list-input">capacitor-list-input</h2>
+<h3>desktop ios-light</h3><img src="capacitor-list-input/desktop-ios-light.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-list-input/desktop-ios-dark.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-list-input/desktop-material-light.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-list-input/desktop-material-dark.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-list-input/mobile-ios-light.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-list-input/mobile-ios-dark.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-list-input/mobile-material-light.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-list-input/mobile-material-dark.png" alt="capacitor-list-input" width="390" loading="lazy"/>
+<h2 id="capacitor-list-item">capacitor-list-item</h2>
+<h3>desktop ios-light</h3><img src="capacitor-list-item/desktop-ios-light.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-list-item/desktop-ios-dark.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-list-item/desktop-material-light.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-list-item/desktop-material-dark.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-list-item/mobile-ios-light.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-list-item/mobile-ios-dark.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-list-item/mobile-material-light.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-list-item/mobile-material-dark.png" alt="capacitor-list-item" width="390" loading="lazy"/>
+<h2 id="capacitor-menu-list">capacitor-menu-list</h2>
+<h3>desktop ios-light</h3><img src="capacitor-menu-list/desktop-ios-light.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-menu-list/desktop-ios-dark.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-menu-list/desktop-material-light.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-menu-list/desktop-material-dark.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-menu-list/mobile-ios-light.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-menu-list/mobile-ios-dark.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-menu-list/mobile-material-light.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-menu-list/mobile-material-dark.png" alt="capacitor-menu-list" width="390" loading="lazy"/>
+<h2 id="capacitor-menu-list-item">capacitor-menu-list-item</h2>
+<h3>desktop ios-light</h3><img src="capacitor-menu-list-item/desktop-ios-light.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-menu-list-item/desktop-ios-dark.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-menu-list-item/desktop-material-light.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-menu-list-item/desktop-material-dark.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-menu-list-item/mobile-ios-light.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-menu-list-item/mobile-ios-dark.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-menu-list-item/mobile-material-light.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-menu-list-item/mobile-material-dark.png" alt="capacitor-menu-list-item" width="390" loading="lazy"/>
+<h2 id="capacitor-message">capacitor-message</h2>
+<h3>desktop ios-light</h3><img src="capacitor-message/desktop-ios-light.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-message/desktop-ios-dark.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-message/desktop-material-light.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-message/desktop-material-dark.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-message/mobile-ios-light.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-message/mobile-ios-dark.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-message/mobile-material-light.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-message/mobile-material-dark.png" alt="capacitor-message" width="390" loading="lazy"/>
+<h2 id="capacitor-messagebar">capacitor-messagebar</h2>
+<h3>desktop ios-light</h3><img src="capacitor-messagebar/desktop-ios-light.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-messagebar/desktop-ios-dark.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-messagebar/desktop-material-light.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-messagebar/desktop-material-dark.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-messagebar/mobile-ios-light.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-messagebar/mobile-ios-dark.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-messagebar/mobile-material-light.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-messagebar/mobile-material-dark.png" alt="capacitor-messagebar" width="390" loading="lazy"/>
+<h2 id="capacitor-messages">capacitor-messages</h2>
+<h3>desktop ios-light</h3><img src="capacitor-messages/desktop-ios-light.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-messages/desktop-ios-dark.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-messages/desktop-material-light.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-messages/desktop-material-dark.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-messages/mobile-ios-light.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-messages/mobile-ios-dark.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-messages/mobile-material-light.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-messages/mobile-material-dark.png" alt="capacitor-messages" width="390" loading="lazy"/>
+<h2 id="capacitor-messages-title">capacitor-messages-title</h2>
+<h3>desktop ios-light</h3><img src="capacitor-messages-title/desktop-ios-light.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-messages-title/desktop-ios-dark.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-messages-title/desktop-material-light.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-messages-title/desktop-material-dark.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-messages-title/mobile-ios-light.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-messages-title/mobile-ios-dark.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-messages-title/mobile-material-light.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-messages-title/mobile-material-dark.png" alt="capacitor-messages-title" width="390" loading="lazy"/>
+<h2 id="capacitor-modal">capacitor-modal</h2>
+<h3>desktop ios-light</h3><img src="capacitor-modal/desktop-ios-light.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-modal/desktop-ios-dark.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-modal/desktop-material-light.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-modal/desktop-material-dark.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-modal/mobile-ios-light.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-modal/mobile-ios-dark.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-modal/mobile-material-light.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-modal/mobile-material-dark.png" alt="capacitor-modal" width="390" loading="lazy"/>
+<h2 id="capacitor-navbar">capacitor-navbar</h2>
+<h3>desktop ios-light</h3><img src="capacitor-navbar/desktop-ios-light.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-navbar/desktop-ios-dark.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-navbar/desktop-material-light.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-navbar/desktop-material-dark.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-navbar/mobile-ios-light.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-navbar/mobile-ios-dark.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-navbar/mobile-material-light.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-navbar/mobile-material-dark.png" alt="capacitor-navbar" width="390" loading="lazy"/>
+<h2 id="capacitor-navbar-back-link">capacitor-navbar-back-link</h2>
+<h3>desktop ios-light</h3><img src="capacitor-navbar-back-link/desktop-ios-light.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-navbar-back-link/desktop-ios-dark.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-navbar-back-link/desktop-material-light.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-navbar-back-link/desktop-material-dark.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-navbar-back-link/mobile-ios-light.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-navbar-back-link/mobile-ios-dark.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-navbar-back-link/mobile-material-light.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-navbar-back-link/mobile-material-dark.png" alt="capacitor-navbar-back-link" width="390" loading="lazy"/>
+<h2 id="capacitor-note">capacitor-note</h2>
+<h3>desktop ios-light</h3><img src="capacitor-note/desktop-ios-light.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-note/desktop-ios-dark.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-note/desktop-material-light.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-note/desktop-material-dark.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-note/mobile-ios-light.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-note/mobile-ios-dark.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-note/mobile-material-light.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-note/mobile-material-dark.png" alt="capacitor-note" width="390" loading="lazy"/>
+<h2 id="capacitor-notification">capacitor-notification</h2>
+<h3>desktop ios-light</h3><img src="capacitor-notification/desktop-ios-light.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-notification/desktop-ios-dark.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-notification/desktop-material-light.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-notification/desktop-material-dark.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-notification/mobile-ios-light.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-notification/mobile-ios-dark.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-notification/mobile-material-light.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-notification/mobile-material-dark.png" alt="capacitor-notification" width="390" loading="lazy"/>
+<h2 id="capacitor-page">capacitor-page</h2>
+<h3>desktop ios-light</h3><img src="capacitor-page/desktop-ios-light.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-page/desktop-ios-dark.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-page/desktop-material-light.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-page/desktop-material-dark.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-page/mobile-ios-light.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-page/mobile-ios-dark.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-page/mobile-material-light.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-page/mobile-material-dark.png" alt="capacitor-page" width="390" loading="lazy"/>
+<h2 id="capacitor-panel">capacitor-panel</h2>
+<h3>desktop ios-light</h3><img src="capacitor-panel/desktop-ios-light.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-panel/desktop-ios-dark.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-panel/desktop-material-light.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-panel/desktop-material-dark.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-panel/mobile-ios-light.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-panel/mobile-ios-dark.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-panel/mobile-material-light.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-panel/mobile-material-dark.png" alt="capacitor-panel" width="390" loading="lazy"/>
+<h2 id="capacitor-picker">capacitor-picker</h2>
+<h3>desktop ios-light</h3><img src="capacitor-picker/desktop-ios-light.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-picker/desktop-ios-dark.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-picker/desktop-material-light.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-picker/desktop-material-dark.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-picker/mobile-ios-light.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-picker/mobile-ios-dark.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-picker/mobile-material-light.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-picker/mobile-material-dark.png" alt="capacitor-picker" width="390" loading="lazy"/>
+<h2 id="capacitor-popover">capacitor-popover</h2>
+<h3>desktop ios-light</h3><img src="capacitor-popover/desktop-ios-light.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-popover/desktop-ios-dark.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-popover/desktop-material-light.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-popover/desktop-material-dark.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-popover/mobile-ios-light.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-popover/mobile-ios-dark.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-popover/mobile-material-light.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-popover/mobile-material-dark.png" alt="capacitor-popover" width="390" loading="lazy"/>
+<h2 id="capacitor-popup">capacitor-popup</h2>
+<h3>desktop ios-light</h3><img src="capacitor-popup/desktop-ios-light.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-popup/desktop-ios-dark.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-popup/desktop-material-light.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-popup/desktop-material-dark.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-popup/mobile-ios-light.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-popup/mobile-ios-dark.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-popup/mobile-material-light.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-popup/mobile-material-dark.png" alt="capacitor-popup" width="390" loading="lazy"/>
+<h2 id="capacitor-preloader">capacitor-preloader</h2>
+<h3>desktop ios-light</h3><img src="capacitor-preloader/desktop-ios-light.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-preloader/desktop-ios-dark.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-preloader/desktop-material-light.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-preloader/desktop-material-dark.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-preloader/mobile-ios-light.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-preloader/mobile-ios-dark.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-preloader/mobile-material-light.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-preloader/mobile-material-dark.png" alt="capacitor-preloader" width="390" loading="lazy"/>
+<h2 id="capacitor-progressbar">capacitor-progressbar</h2>
+<h3>desktop ios-light</h3><img src="capacitor-progressbar/desktop-ios-light.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-progressbar/desktop-ios-dark.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-progressbar/desktop-material-light.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-progressbar/desktop-material-dark.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-progressbar/mobile-ios-light.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-progressbar/mobile-ios-dark.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-progressbar/mobile-material-light.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-progressbar/mobile-material-dark.png" alt="capacitor-progressbar" width="390" loading="lazy"/>
+<h2 id="capacitor-radio">capacitor-radio</h2>
+<h3>desktop ios-light</h3><img src="capacitor-radio/desktop-ios-light.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-radio/desktop-ios-dark.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-radio/desktop-material-light.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-radio/desktop-material-dark.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-radio/mobile-ios-light.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-radio/mobile-ios-dark.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-radio/mobile-material-light.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-radio/mobile-material-dark.png" alt="capacitor-radio" width="390" loading="lazy"/>
+<h2 id="capacitor-range">capacitor-range</h2>
+<h3>desktop ios-light</h3><img src="capacitor-range/desktop-ios-light.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-range/desktop-ios-dark.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-range/desktop-material-light.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-range/desktop-material-dark.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-range/mobile-ios-light.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-range/mobile-ios-dark.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-range/mobile-material-light.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-range/mobile-material-dark.png" alt="capacitor-range" width="390" loading="lazy"/>
+<h2 id="capacitor-refresher">capacitor-refresher</h2>
+<h3>desktop ios-light</h3><img src="capacitor-refresher/desktop-ios-light.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-refresher/desktop-ios-dark.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-refresher/desktop-material-light.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-refresher/desktop-material-dark.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-refresher/mobile-ios-light.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-refresher/mobile-ios-dark.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-refresher/mobile-material-light.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-refresher/mobile-material-dark.png" alt="capacitor-refresher" width="390" loading="lazy"/>
+<h2 id="capacitor-reorder">capacitor-reorder</h2>
+<h3>desktop ios-light</h3><img src="capacitor-reorder/desktop-ios-light.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-reorder/desktop-ios-dark.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-reorder/desktop-material-light.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-reorder/desktop-material-dark.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-reorder/mobile-ios-light.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-reorder/mobile-ios-dark.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-reorder/mobile-material-light.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-reorder/mobile-material-dark.png" alt="capacitor-reorder" width="390" loading="lazy"/>
+<h2 id="capacitor-searchbar">capacitor-searchbar</h2>
+<h3>desktop ios-light</h3><img src="capacitor-searchbar/desktop-ios-light.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-searchbar/desktop-ios-dark.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-searchbar/desktop-material-light.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-searchbar/desktop-material-dark.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-searchbar/mobile-ios-light.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-searchbar/mobile-ios-dark.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-searchbar/mobile-material-light.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-searchbar/mobile-material-dark.png" alt="capacitor-searchbar" width="390" loading="lazy"/>
+<h2 id="capacitor-segmented">capacitor-segmented</h2>
+<h3>desktop ios-light</h3><img src="capacitor-segmented/desktop-ios-light.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-segmented/desktop-ios-dark.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-segmented/desktop-material-light.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-segmented/desktop-material-dark.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-segmented/mobile-ios-light.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-segmented/mobile-ios-dark.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-segmented/mobile-material-light.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-segmented/mobile-material-dark.png" alt="capacitor-segmented" width="390" loading="lazy"/>
+<h2 id="capacitor-segmented-button">capacitor-segmented-button</h2>
+<h3>desktop ios-light</h3><img src="capacitor-segmented-button/desktop-ios-light.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-segmented-button/desktop-ios-dark.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-segmented-button/desktop-material-light.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-segmented-button/desktop-material-dark.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-segmented-button/mobile-ios-light.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-segmented-button/mobile-ios-dark.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-segmented-button/mobile-material-light.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-segmented-button/mobile-material-dark.png" alt="capacitor-segmented-button" width="390" loading="lazy"/>
+<h2 id="capacitor-select">capacitor-select</h2>
+<h3>desktop ios-light</h3><img src="capacitor-select/desktop-ios-light.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-select/desktop-ios-dark.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-select/desktop-material-light.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-select/desktop-material-dark.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-select/mobile-ios-light.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-select/mobile-ios-dark.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-select/mobile-material-light.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-select/mobile-material-dark.png" alt="capacitor-select" width="390" loading="lazy"/>
+<h2 id="capacitor-sheet">capacitor-sheet</h2>
+<h3>desktop ios-light</h3><img src="capacitor-sheet/desktop-ios-light.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-sheet/desktop-ios-dark.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-sheet/desktop-material-light.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-sheet/desktop-material-dark.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-sheet/mobile-ios-light.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-sheet/mobile-ios-dark.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-sheet/mobile-material-light.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-sheet/mobile-material-dark.png" alt="capacitor-sheet" width="390" loading="lazy"/>
+<h2 id="capacitor-skeleton">capacitor-skeleton</h2>
+<h3>desktop ios-light</h3><img src="capacitor-skeleton/desktop-ios-light.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-skeleton/desktop-ios-dark.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-skeleton/desktop-material-light.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-skeleton/desktop-material-dark.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-skeleton/mobile-ios-light.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-skeleton/mobile-ios-dark.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-skeleton/mobile-material-light.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-skeleton/mobile-material-dark.png" alt="capacitor-skeleton" width="390" loading="lazy"/>
+<h2 id="capacitor-split-pane">capacitor-split-pane</h2>
+<h3>desktop ios-light</h3><img src="capacitor-split-pane/desktop-ios-light.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-split-pane/desktop-ios-dark.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-split-pane/desktop-material-light.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-split-pane/desktop-material-dark.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-split-pane/mobile-ios-light.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-split-pane/mobile-ios-dark.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-split-pane/mobile-material-light.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-split-pane/mobile-material-dark.png" alt="capacitor-split-pane" width="390" loading="lazy"/>
+<h2 id="capacitor-stepper">capacitor-stepper</h2>
+<h3>desktop ios-light</h3><img src="capacitor-stepper/desktop-ios-light.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-stepper/desktop-ios-dark.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-stepper/desktop-material-light.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-stepper/desktop-material-dark.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-stepper/mobile-ios-light.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-stepper/mobile-ios-dark.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-stepper/mobile-material-light.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-stepper/mobile-material-dark.png" alt="capacitor-stepper" width="390" loading="lazy"/>
+<h2 id="capacitor-tab">capacitor-tab</h2>
+<h3>desktop ios-light</h3><img src="capacitor-tab/desktop-ios-light.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-tab/desktop-ios-dark.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-tab/desktop-material-light.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-tab/desktop-material-dark.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-tab/mobile-ios-light.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-tab/mobile-ios-dark.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-tab/mobile-material-light.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-tab/mobile-material-dark.png" alt="capacitor-tab" width="390" loading="lazy"/>
+<h2 id="capacitor-tabbar">capacitor-tabbar</h2>
+<h3>desktop ios-light</h3><img src="capacitor-tabbar/desktop-ios-light.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-tabbar/desktop-ios-dark.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-tabbar/desktop-material-light.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-tabbar/desktop-material-dark.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-tabbar/mobile-ios-light.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-tabbar/mobile-ios-dark.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-tabbar/mobile-material-light.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-tabbar/mobile-material-dark.png" alt="capacitor-tabbar" width="390" loading="lazy"/>
+<h2 id="capacitor-tabbar-link">capacitor-tabbar-link</h2>
+<h3>desktop ios-light</h3><img src="capacitor-tabbar-link/desktop-ios-light.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-tabbar-link/desktop-ios-dark.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-tabbar-link/desktop-material-light.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-tabbar-link/desktop-material-dark.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-tabbar-link/mobile-ios-light.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-tabbar-link/mobile-ios-dark.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-tabbar-link/mobile-material-light.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-tabbar-link/mobile-material-dark.png" alt="capacitor-tabbar-link" width="390" loading="lazy"/>
+<h2 id="capacitor-table">capacitor-table</h2>
+<h3>desktop ios-light</h3><img src="capacitor-table/desktop-ios-light.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-table/desktop-ios-dark.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-table/desktop-material-light.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-table/desktop-material-dark.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-table/mobile-ios-light.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-table/mobile-ios-dark.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-table/mobile-material-light.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-table/mobile-material-dark.png" alt="capacitor-table" width="390" loading="lazy"/>
+<h2 id="capacitor-table-body">capacitor-table-body</h2>
+<h3>desktop ios-light</h3><img src="capacitor-table-body/desktop-ios-light.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-table-body/desktop-ios-dark.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-table-body/desktop-material-light.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-table-body/desktop-material-dark.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-table-body/mobile-ios-light.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-table-body/mobile-ios-dark.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-table-body/mobile-material-light.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-table-body/mobile-material-dark.png" alt="capacitor-table-body" width="390" loading="lazy"/>
+<h2 id="capacitor-table-cell">capacitor-table-cell</h2>
+<h3>desktop ios-light</h3><img src="capacitor-table-cell/desktop-ios-light.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-table-cell/desktop-ios-dark.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-table-cell/desktop-material-light.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-table-cell/desktop-material-dark.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-table-cell/mobile-ios-light.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-table-cell/mobile-ios-dark.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-table-cell/mobile-material-light.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-table-cell/mobile-material-dark.png" alt="capacitor-table-cell" width="390" loading="lazy"/>
+<h2 id="capacitor-table-head">capacitor-table-head</h2>
+<h3>desktop ios-light</h3><img src="capacitor-table-head/desktop-ios-light.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-table-head/desktop-ios-dark.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-table-head/desktop-material-light.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-table-head/desktop-material-dark.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-table-head/mobile-ios-light.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-table-head/mobile-ios-dark.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-table-head/mobile-material-light.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-table-head/mobile-material-dark.png" alt="capacitor-table-head" width="390" loading="lazy"/>
+<h2 id="capacitor-table-row">capacitor-table-row</h2>
+<h3>desktop ios-light</h3><img src="capacitor-table-row/desktop-ios-light.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-table-row/desktop-ios-dark.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-table-row/desktop-material-light.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-table-row/desktop-material-dark.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-table-row/mobile-ios-light.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-table-row/mobile-ios-dark.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-table-row/mobile-material-light.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-table-row/mobile-material-dark.png" alt="capacitor-table-row" width="390" loading="lazy"/>
+<h2 id="capacitor-tabs">capacitor-tabs</h2>
+<h3>desktop ios-light</h3><img src="capacitor-tabs/desktop-ios-light.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-tabs/desktop-ios-dark.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-tabs/desktop-material-light.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-tabs/desktop-material-dark.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-tabs/mobile-ios-light.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-tabs/mobile-ios-dark.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-tabs/mobile-material-light.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-tabs/mobile-material-dark.png" alt="capacitor-tabs" width="390" loading="lazy"/>
+<h2 id="capacitor-textarea">capacitor-textarea</h2>
+<h3>desktop ios-light</h3><img src="capacitor-textarea/desktop-ios-light.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-textarea/desktop-ios-dark.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-textarea/desktop-material-light.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-textarea/desktop-material-dark.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-textarea/mobile-ios-light.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-textarea/mobile-ios-dark.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-textarea/mobile-material-light.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-textarea/mobile-material-dark.png" alt="capacitor-textarea" width="390" loading="lazy"/>
+<h2 id="capacitor-thumbnail">capacitor-thumbnail</h2>
+<h3>desktop ios-light</h3><img src="capacitor-thumbnail/desktop-ios-light.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-thumbnail/desktop-ios-dark.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-thumbnail/desktop-material-light.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-thumbnail/desktop-material-dark.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-thumbnail/mobile-ios-light.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-thumbnail/mobile-ios-dark.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-thumbnail/mobile-material-light.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-thumbnail/mobile-material-dark.png" alt="capacitor-thumbnail" width="390" loading="lazy"/>
+<h2 id="capacitor-toast">capacitor-toast</h2>
+<h3>desktop ios-light</h3><img src="capacitor-toast/desktop-ios-light.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-toast/desktop-ios-dark.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-toast/desktop-material-light.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-toast/desktop-material-dark.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-toast/mobile-ios-light.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-toast/mobile-ios-dark.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-toast/mobile-material-light.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-toast/mobile-material-dark.png" alt="capacitor-toast" width="390" loading="lazy"/>
+<h2 id="capacitor-toggle">capacitor-toggle</h2>
+<h3>desktop ios-light</h3><img src="capacitor-toggle/desktop-ios-light.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-toggle/desktop-ios-dark.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-toggle/desktop-material-light.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-toggle/desktop-material-dark.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-toggle/mobile-ios-light.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-toggle/mobile-ios-dark.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-toggle/mobile-material-light.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-toggle/mobile-material-dark.png" alt="capacitor-toggle" width="390" loading="lazy"/>
+<h2 id="capacitor-toolbar">capacitor-toolbar</h2>
+<h3>desktop ios-light</h3><img src="capacitor-toolbar/desktop-ios-light.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-toolbar/desktop-ios-dark.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-toolbar/desktop-material-light.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-toolbar/desktop-material-dark.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-toolbar/mobile-ios-light.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-toolbar/mobile-ios-dark.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-toolbar/mobile-material-light.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-toolbar/mobile-material-dark.png" alt="capacitor-toolbar" width="390" loading="lazy"/>
+<h2 id="capacitor-touch-ripple">capacitor-touch-ripple</h2>
+<h3>desktop ios-light</h3><img src="capacitor-touch-ripple/desktop-ios-light.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+<h3>desktop ios-dark</h3><img src="capacitor-touch-ripple/desktop-ios-dark.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+<h3>desktop material-light</h3><img src="capacitor-touch-ripple/desktop-material-light.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+<h3>desktop material-dark</h3><img src="capacitor-touch-ripple/desktop-material-dark.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+<h3>mobile ios-light</h3><img src="capacitor-touch-ripple/mobile-ios-light.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+<h3>mobile ios-dark</h3><img src="capacitor-touch-ripple/mobile-ios-dark.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+<h3>mobile material-light</h3><img src="capacitor-touch-ripple/mobile-material-light.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+<h3>mobile material-dark</h3><img src="capacitor-touch-ripple/mobile-material-dark.png" alt="capacitor-touch-ripple" width="390" loading="lazy"/>
+</body></html>
