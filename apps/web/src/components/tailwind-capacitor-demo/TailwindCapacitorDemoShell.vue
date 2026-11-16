@@ -717,7 +717,11 @@ const sectionMap = {
     ),
   ),
   'capacitor-select': defineDemo(() =>
-    h(Select, { label: 'Fruit' }, { default: () => [h('option', { value: 'apple' }, 'Apple'), h('option', { value: 'pear' }, 'Pear')] }),
+    h(
+      Select,
+      { label: 'Fruit', 'aria-label': 'Fruit' },
+      { default: () => [h('option', { value: 'apple' }, 'Apple'), h('option', { value: 'pear' }, 'Pear')] },
+    ),
   ),
   'capacitor-searchbar': defineDemo(() =>
     h(Searchbar, {
@@ -760,12 +764,38 @@ const sectionMap = {
     h(SplitPane, { class: 'min-h-24 grid grid-cols-2 gap-2 p-2 text-sm' }, { default: () => [h('div', 'Left pane'), h('div', 'Right pane')] }),
   ),
   'capacitor-stepper': defineDemo(() => h(Stepper, { value: stepperValue.value, min: 0, max: 10 })),
-  'capacitor-tab': defineDemo(() =>
-    h(Tabs, {}, { default: () => [h(Tab, { active: true }, { default: () => 'Tab A' }), h(Tab, {}, { default: () => 'Tab B' })] }),
-  ),
-  'capacitor-tabs': defineDemo(() =>
-    h(Tabs, {}, { default: () => [h(Tab, { active: true }, { default: () => 'One' }), h(Tab, {}, { default: () => 'Two' })] }),
-  ),
+  'capacitor-tab': defineComponent({
+    setup() {
+      const active = ref('a')
+      return () =>
+        h(
+          Tabs,
+          {},
+          {
+            default: () => [
+              h(Tab, { active: active.value === 'a', onClick: () => (active.value = 'a') }, { default: () => 'Tab A' }),
+              h(Tab, { active: active.value === 'b', onClick: () => (active.value = 'b') }, { default: () => 'Tab B' }),
+            ],
+          },
+        )
+    },
+  }),
+  'capacitor-tabs': defineComponent({
+    setup() {
+      const active = ref('one')
+      return () =>
+        h(
+          Tabs,
+          {},
+          {
+            default: () => [
+              h(Tab, { active: active.value === 'one', onClick: () => (active.value = 'one') }, { default: () => 'One' }),
+              h(Tab, { active: active.value === 'two', onClick: () => (active.value = 'two') }, { default: () => 'Two' }),
+            ],
+          },
+        )
+    },
+  }),
   'capacitor-tabbar': defineDemo(() =>
     h(
       Tabbar,
@@ -789,7 +819,9 @@ const sectionMap = {
   'capacitor-table-cell': defineDemo(() => tableWithBodyCells('Cell A', 'Cell B')),
   'capacitor-table-head': defineDemo(() => tableWithHeaderCell('Header')),
   'capacitor-table-row': defineDemo(() => tableWithBodyRow('Single row')),
-  'capacitor-textarea': defineDemo(() => h(Textarea, { value: 'Hello', label: 'Message', placeholder: 'Type here' })),
+  'capacitor-textarea': defineDemo(() =>
+    h(Textarea, { value: 'Hello', label: 'Message', placeholder: 'Type here', 'aria-label': 'Message' }),
+  ),
   'capacitor-thumbnail': defineDemo(() => h(Thumbnail, { class: 'size-16 rounded-lg bg-neutral-200 dark:bg-neutral-700' })),
   'capacitor-toast': defineOpenShellButtonDemo('Show toast', toastOpen),
   'capacitor-touch-ripple': defineDemo(() =>
