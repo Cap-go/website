@@ -344,29 +344,6 @@ function defineOpenShellButtonDemo(label, openRef, options = {}) {
   })
 }
 
-function defineInlineActionsDemo(renderContent) {
-  return defineDemo(() =>
-    h(
-      'div',
-      {
-        class:
-          'tc-demo-actions-static pointer-events-auto overflow-visible rounded-2xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900',
-      },
-      [
-        h(
-          Actions,
-          {
-            opened: true,
-            backdrop: false,
-            class: 'tc-demo-actions-inline-preview pointer-events-auto !relative !inset-auto !transform-none w-full',
-          },
-          { default: () => renderContent() },
-        ),
-      ],
-    ),
-  )
-}
-
 function tableWithBodyRow(label) {
   return h(
     Table,
@@ -451,24 +428,36 @@ function demoTableSample() {
 
 const sectionMap = {
   'capacitor-actions': defineOpenShellButtonDemo('Open Actions', actionsOpen),
-  'capacitor-actions-button': defineInlineActionsDemo(() =>
-    h(ActionsGroup, {}, {
-      default: () => [
-        h(ActionsLabel, {}, { default: () => 'Label' }),
-        h(ActionsButton, { bold: true }, { default: () => 'Primary action' }),
-        h(ActionsButton, {}, { default: () => 'Secondary' }),
-      ],
-    }),
+  'capacitor-actions-button': defineDemo(() =>
+    h(
+      List,
+      { strong: true, inset: true, class: 'tc-demo-actions-list' },
+      {
+        default: () => [
+          h(ListItem, { title: 'Label', header: true }),
+          h(ListButton, {}, { default: () => 'Primary action' }),
+          h(ListButton, {}, { default: () => 'Secondary' }),
+        ],
+      },
+    ),
   ),
-  'capacitor-actions-group': defineInlineActionsDemo(() =>
-    h(ActionsGroup, {}, {
-      default: () => [h(ActionsButton, {}, { default: () => 'One' }), h(ActionsButton, {}, { default: () => 'Two' })],
-    }),
+  'capacitor-actions-group': defineDemo(() =>
+    h(
+      List,
+      { strong: true, inset: true, class: 'tc-demo-actions-list' },
+      {
+        default: () => [h(ListButton, {}, { default: () => 'One' }), h(ListButton, {}, { default: () => 'Two' })],
+      },
+    ),
   ),
-  'capacitor-actions-label': defineInlineActionsDemo(() =>
-    h(ActionsGroup, {}, {
-      default: () => [h(ActionsLabel, {}, { default: () => 'Section title' }), h(ActionsButton, {}, { default: () => 'Item' })],
-    }),
+  'capacitor-actions-label': defineDemo(() =>
+    h(
+      List,
+      { strong: true, inset: true, class: 'tc-demo-actions-list' },
+      {
+        default: () => [h(ListItem, { title: 'Section title', header: true }), h(ListButton, {}, { default: () => 'Item' })],
+      },
+    ),
   ),
   'capacitor-accordion': defineDemo(() =>
     h(
