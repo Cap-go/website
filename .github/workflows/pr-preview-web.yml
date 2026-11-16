@@ -11,7 +11,6 @@ on:
 
 permissions:
   contents: read
-  pull-requests: write
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
@@ -44,6 +43,9 @@ jobs:
     needs: resolve-preview-name
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: write
     environment: preview
     env:
       NODE_OPTIONS: '--max-old-space-size=16384'
