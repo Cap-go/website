@@ -297,7 +297,7 @@ async function scanRoute(page, route) {
   if (route === '/pricing/') {
     issues.push(...(await pricingCtaIssues(page)))
   }
-  if (route === '/plugins/tailwind-capacitor/demo/') {
+  if (route === '/plugins/tailwind-capacitor/demo/' || route.startsWith('/plugins/tailwind-capacitor/demo/')) {
     issues.push(...(await tailwindCapacitorDemoOverlayTriggers(page)))
   }
   return issues

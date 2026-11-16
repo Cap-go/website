@@ -2,6 +2,7 @@
 import RegistryNav from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoNav.astro'
 import TailwindCapacitorInstallTabs from '@/components/tailwind-capacitor-demo/TailwindCapacitorInstallTabs.astro'
 import { TAILWIND_CAPACITOR_REGISTRY_COMMIT } from '../../../../../../shared/config/tailwindCapacitorRegistry'
+import { tailwindCapacitorDemoNavItems } from '@/lib/tailwindCapacitorDemoCatalog'
 import manifest from '@/tailwind-capacitor-snapshot/registry-manifest.json'
 import Layout from '@/layouts/Layout.astro'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
@@ -9,9 +10,10 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale ?? 'en'
 const pluginHref = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/')
-const title = 'Tailwind Capacitor live component demo'
+const demoBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/')
+const title = 'Tailwind Capacitor component library'
 const description =
-  'Browse every Tailwind Capacitor registry component with iOS or Material styling and light or dark mode. Synced from the shadcn registry on GitHub.'
+  'Browse every Tailwind Capacitor registry component on its own live preview page. Switch iOS or Material and light or dark on each demo.'
 
 const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -20,20 +22,11 @@ const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
 })
 
 const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, { includeOrganization: true })
-
-const foundationPackageNames = ['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'] as const
-const foundationPackageCount = foundationPackageNames.length
-
-const navItems = [
-  { name: 'tc-demo-foundation', title: 'Registry foundation' },
-  ...manifest.items.filter((item) => !foundationPackageNames.includes(item.name as (typeof foundationPackageNames)[number])),
-]
-
-const catalogSectionCount = navItems.length
+const catalogSectionCount = tailwindCapacitorDemoNavItems.length
 ---
 
 <Layout content={{ title, description, ldJson, canonical: Astro.url.pathname }}>
-  <section class="border-b border-white/10 bg-gray-950 px-6 pt-24 pb-10 max-lg:scroll-mt-20 lg:px-8 lg:pt-10">
+  <section class="border-b border-white/10 bg-gray-950 px-4 pt-[max(7rem,calc(env(safe-area-inset-top)+5.5rem))] pb-8 sm:px-6 lg:px-8 lg:pt-12">
     <div class="mx-auto max-w-6xl">
       <nav class="text-sm text-gray-400" aria-label="Breadcrumb">
         <ol class="flex flex-wrap items-center gap-2">
@@ -41,129 +34,60 @@ const catalogSectionCount = navItems.length
           <li aria-hidden="true">/</li>
           <li><a class="text-blue-300 hover:text-blue-200" href={pluginHref}>Tailwind Capacitor</a></li>
           <li aria-hidden="true">/</li>
-          <li class="text-gray-200">Demo</li>
+          <li class="text-gray-200">Components</li>
         </ol>
       </nav>
       <h1 class="mt-4 font-pj text-3xl font-bold text-white sm:text-4xl">{title}</h1>
-      <p class="mt-3 max-w-3xl text-base leading-7 text-gray-300">{description}</p>
-      <p class="mt-2 text-xs text-gray-500" id="tc-demo-registry-counts">
-        Registry pin: <code class="text-gray-400">{TAILWIND_CAPACITOR_REGISTRY_COMMIT}</code>.{' '}
-        {manifest.itemCount} registry items: {manifest.vueComponentCount} Vue component demos plus {foundationPackageCount} foundation packages
-        listed together in the sidebar.
+      <p class="mt-3 max-w-3xl text-sm leading-6 text-gray-300 sm:text-base sm:leading-7">{description}</p>
+      <p class="mt-2 text-xs leading-relaxed text-gray-500" id="tc-demo-registry-counts">
+        Registry pin: <code class="text-gray-400">{TAILWIND_CAPACITOR_REGISTRY_COMMIT}</code>. {manifest.itemCount} registry items,{' '}
+        {catalogSectionCount} component preview pages.
       </p>
     </div>
   </section>
 
-  <section class="px-6 py-8 lg:px-8">
-    <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)]">
+  <section class="px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] lg:gap-8">
       <aside class="hidden lg:block">
-        <RegistryNav items={navItems} registryItemCount={manifest.itemCount} catalogSectionCount={catalogSectionCount} />
+        <RegistryNav
+          items={tailwindCapacitorDemoNavItems}
+          registryItemCount={manifest.itemCount}
+          catalogSectionCount={catalogSectionCount}
+          locale={locale}
+        />
       </aside>
 
-      <div class="min-w-0 lg:col-start-2">
-        <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
-          <div class="mb-4 flex flex-wrap items-center gap-3" data-tc-demo-controls>
-            <fieldset class="flex flex-wrap gap-2 border-0 p-0">
-              <legend class="sr-only">Platform style</legend>
-              <button type="button" data-tc-platform="ios" class="tc-demo-toggle rounded-lg border border-white/15 px-3 py-1.5 text-sm text-white" aria-pressed="true">iOS</button>
-              <button type="button" data-tc-platform="material" class="tc-demo-toggle rounded-lg border border-white/15 px-3 py-1.5 text-sm text-gray-300" aria-pressed="false">Material</button>
-            </fieldset>
-            <fieldset class="flex flex-wrap gap-2 border-0 p-0">
-              <legend class="sr-only">Color mode</legend>
-              <button type="button" data-tc-dark="0" class="tc-demo-toggle rounded-lg border border-white/15 px-3 py-1.5 text-sm text-white" aria-pressed="true">Light</button>
-              <button type="button" data-tc-dark="1" class="tc-demo-toggle rounded-lg border border-white/15 px-3 py-1.5 text-sm text-gray-300" aria-pressed="false">Dark</button>
-            </fieldset>
-          </div>
-
-          <div
-            class="tc-demo-phone-frame mx-auto w-full max-w-[390px] overflow-hidden rounded-[2rem] border border-white/20 bg-black shadow-2xl"
-            style="height: min(78dvh, 820px);"
-          >
-            <iframe
-              id="tc-demo-iframe"
-              title="Tailwind Capacitor components"
-              class="block h-full w-full border-0 bg-neutral-950"
-              src={`${getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/shell/')}?platform=ios&dark=0`}
-            ></iframe>
-          </div>
+      <div class="min-w-0">
+        <div class="lg:hidden">
+          <RegistryNav
+            items={tailwindCapacitorDemoNavItems}
+            registryItemCount={manifest.itemCount}
+            catalogSectionCount={catalogSectionCount}
+            locale={locale}
+          />
         </div>
 
-        <div class="mt-8 lg:hidden">
-          <RegistryNav items={navItems} registryItemCount={manifest.itemCount} catalogSectionCount={catalogSectionCount} />
-        </div>
-
-        <div class="mt-10">
-          <h2 class="text-xl font-semibold text-white">Install from the registry</h2>
-          <p class="mt-2 text-sm leading-6 text-gray-300">Add the same components to your Vue, React, or Angular app.</p>
-          <TailwindCapacitorInstallTabs class="mt-4" />
-        </div>
+        <ul class="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {
+            tailwindCapacitorDemoNavItems.map((item) => (
+              <li>
+                <a
+                  href={`${demoBase}${encodeURIComponent(item.name)}/`}
+                  class="block rounded-xl border border-white/10 bg-gray-950/60 px-4 py-3 text-sm text-gray-200 transition hover:border-blue-400/30 hover:bg-gray-900"
+                >
+                  <span class="font-semibold text-white">{item.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
+    </div>
+
+    <div class="mx-auto mt-10 max-w-6xl">
+      <h2 class="text-xl font-semibold text-white">Install from the registry</h2>
+      <p class="mt-2 text-sm leading-6 text-gray-300">Add the same components to your Vue, React, or Angular app.</p>
+      <TailwindCapacitorInstallTabs class="mt-4" />
     </div>
   </section>
 </Layout>
-
-<script>
-  const root = document.querySelector('[data-tc-demo-controls]')
-  const iframe = document.getElementById('tc-demo-iframe') as HTMLIFrameElement | null
-  if (root && iframe) {
-    let platform = 'ios'
-    let dark = false
-
-    const syncPressed = () => {
-      root.querySelectorAll('[data-tc-platform]').forEach((btn) => {
-        const el = btn as HTMLButtonElement
-        const active = el.dataset.tcPlatform === platform
-        el.setAttribute('aria-pressed', String(active))
-        el.classList.toggle('text-white', active)
-        el.classList.toggle('text-gray-300', !active)
-        el.classList.toggle('border-blue-400/40', active)
-      })
-      root.querySelectorAll('[data-tc-dark]').forEach((btn) => {
-        const el = btn as HTMLButtonElement
-        const active = (el.dataset.tcDark === '1') === dark
-        el.setAttribute('aria-pressed', String(active))
-        el.classList.toggle('text-white', active)
-        el.classList.toggle('text-gray-300', !active)
-        el.classList.toggle('border-blue-400/40', active)
-      })
-    }
-
-    const pushTheme = () => {
-      const shell = new URL(iframe.getAttribute('src') ?? iframe.src, window.location.origin)
-      shell.searchParams.set('platform', platform)
-      shell.searchParams.set('dark', dark ? '1' : '0')
-      const nextSrc = `${shell.pathname}${shell.search}`
-      if (iframe.getAttribute('src') !== nextSrc) {
-        iframe.setAttribute('src', nextSrc)
-        return
-      }
-      iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
-    }
-
-    root.querySelectorAll('[data-tc-platform]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const next = (btn as HTMLButtonElement).dataset.tcPlatform
-        if (next === 'ios' || next === 'material') {
-          platform = next
-          syncPressed()
-          pushTheme()
-        }
-      })
-    })
-
-    root.querySelectorAll('[data-tc-dark]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        dark = (btn as HTMLButtonElement).dataset.tcDark === '1'
-        syncPressed()
-        pushTheme()
-      })
-    })
-
-    iframe.addEventListener('load', () => {
-      pushTheme()
-    })
-    if (iframe.contentDocument?.readyState === 'complete') {
-      pushTheme()
-    }
-  }
-</script>

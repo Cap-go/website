@@ -133,10 +133,36 @@ html.dark body.tc-demo-shell-body {
   position: absolute !important;
 }
 
-.tc-demo-section .registry-demo-block {
-  margin-inline: 1rem;
+.tc-demo-section .registry-demo-block,
+.tc-demo-component-stage {
+  margin-inline: 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.tc-demo-app-screen {
+  min-height: 0;
+}
+
+.tc-demo-single-component {
+  padding-top: 0.25rem;
+}
+
+.tc-demo-actions-static {
+  width: 100%;
+  max-width: 100%;
+}
+
+.tc-demo-actions-static .tc-demo-actions-inline-preview {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
 }
 
 .tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-popover:where(.fixed) {

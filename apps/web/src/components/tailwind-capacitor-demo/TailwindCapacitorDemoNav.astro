@@ -1,4 +1,6 @@
 ---
+import { getRelativeLocaleUrl } from '@/services/links'
+
 interface Item {
   name: string
   title: string
@@ -8,43 +10,42 @@ interface Props {
   items: Item[]
   registryItemCount: number
   catalogSectionCount: number
+  locale: string
+  activeSlug?: string
 }
 
-const { items, registryItemCount, catalogSectionCount } = Astro.props
+const { items, registryItemCount, catalogSectionCount, locale, activeSlug } = Astro.props
+const demoBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/')
 ---
 
-<div class="sticky top-24 max-h-[calc(100dvh-8rem)] overflow-y-auto rounded-2xl border border-white/10 bg-gray-950/80 p-4">
+<div class="sticky top-24 max-h-[calc(100dvh-8rem)] overflow-y-auto rounded-2xl border border-white/10 bg-gray-950/80 p-4 max-lg:top-20 max-lg:max-h-[55dvh]">
   <p class="text-[0.7rem] font-semibold tracking-[0.2em] text-blue-200/70 uppercase" id="tc-demo-sidebar-count">
-    Catalog ({catalogSectionCount} sections)
+    Components ({catalogSectionCount})
   </p>
   <p class="mt-1 text-[0.65rem] leading-snug text-gray-500" aria-describedby="tc-demo-registry-counts">
-    {registryItemCount} registry items total. Foundation packages share one section.
+    {registryItemCount} registry items. One preview page per component.
   </p>
-  <ul class="mt-3 flex flex-col gap-1 text-sm">
+  <ul class="mt-3 flex flex-col gap-0.5 text-sm">
     {
-      items.map((item) => (
-        <li>
-          <a
-            href={`#${item.name}`}
-            class="block rounded-md px-2 py-1 text-gray-300 transition hover:bg-white/5 hover:text-white"
-            data-tc-nav={item.name}
-          >
-            {item.title}
-          </a>
-        </li>
-      ))
+      items.map((item) => {
+        const href = `${demoBase}${encodeURIComponent(item.name)}/`
+        const active = activeSlug === item.name
+        return (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'block rounded-md px-2 py-1.5 transition',
+                active ? 'bg-blue-500/15 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
+              ]}
+              data-tc-nav={item.name}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.title}
+            </a>
+          </li>
+        )
+      })
     }
   </ul>
 </div>
-
-<script>
-  const iframe = document.getElementById('tc-demo-iframe')
-  const frame = iframe instanceof HTMLIFrameElement ? iframe : null
-  document.querySelectorAll('[data-tc-nav]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault()
-      const id = (link as HTMLAnchorElement).dataset.tcNav
-      frame?.contentWindow?.postMessage({ type: 'tc-demo-scroll', id }, window.location.origin)
-    })
-  })
-</script>

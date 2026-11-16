@@ -1,0 +1,65 @@
+---
+import RegistryNav from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoNav.astro'
+import { tailwindCapacitorDemoNavItems } from '@/lib/tailwindCapacitorDemoCatalog'
+import manifest from '@/tailwind-capacitor-snapshot/registry-manifest.json'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+interface Props {
+  locale: string
+  slug: string
+  activeSlug: string
+}
+
+const { locale, slug, activeSlug } = Astro.props
+const catalogSectionCount = tailwindCapacitorDemoNavItems.length
+const shellBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/shell/')
+---
+
+<div class="min-w-0 lg:col-start-2" data-tc-demo-slug={slug}>
+  <div class="rounded-2xl border border-white/10 bg-black/40 p-3 sm:p-4">
+    <div class="mb-3 flex flex-wrap items-center gap-2 sm:gap-3" data-tc-demo-controls>
+      <fieldset class="flex flex-wrap gap-1.5 border-0 p-0 sm:gap-2">
+        <legend class="sr-only">Platform style</legend>
+        <button type="button" data-tc-platform="ios" class="tc-demo-toggle rounded-lg border border-white/15 px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm text-white" aria-pressed="true">iOS</button>
+        <button type="button" data-tc-platform="material" class="tc-demo-toggle rounded-lg border border-white/15 px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm text-gray-300" aria-pressed="false">Material</button>
+      </fieldset>
+      <fieldset class="flex flex-wrap gap-1.5 border-0 p-0 sm:gap-2">
+        <legend class="sr-only">Color mode</legend>
+        <button type="button" data-tc-dark="0" class="tc-demo-toggle rounded-lg border border-white/15 px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm text-white" aria-pressed="true">Light</button>
+        <button type="button" data-tc-dark="1" class="tc-demo-toggle rounded-lg border border-white/15 px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm text-gray-300" aria-pressed="false">Dark</button>
+      </fieldset>
+    </div>
+
+    <div
+      class="tc-demo-phone-frame mx-auto w-full max-w-[390px] overflow-hidden rounded-[2rem] border border-white/20 bg-black shadow-2xl"
+      style="height: min(78dvh, 820px);"
+    >
+      <iframe
+        id="tc-demo-iframe"
+        title={`Tailwind Capacitor demo: ${slug}`}
+        class="block h-full w-full border-0 bg-neutral-950"
+        src={`${shellBase}?slug=${encodeURIComponent(slug)}&platform=ios&dark=0`}
+      ></iframe>
+    </div>
+  </div>
+
+  <div class="mt-6 lg:hidden">
+    <RegistryNav
+      items={tailwindCapacitorDemoNavItems}
+      registryItemCount={manifest.itemCount}
+      catalogSectionCount={catalogSectionCount}
+      locale={locale}
+      activeSlug={activeSlug}
+    />
+  </div>
+</div>
+
+<script define:vars={{ slug }}>
+  import { bindTailwindCapacitorDemoTheme } from '@/scripts/tailwindCapacitorDemoTheme.client'
+
+  const controls = document.querySelector(`[data-tc-demo-slug="${slug}"] [data-tc-demo-controls]`)
+  const iframe = document.querySelector(`[data-tc-demo-slug="${slug}"] #tc-demo-iframe`)
+  if (controls instanceof HTMLElement && iframe instanceof HTMLIFrameElement) {
+    bindTailwindCapacitorDemoTheme(controls, iframe, slug)
+  }
+</script>

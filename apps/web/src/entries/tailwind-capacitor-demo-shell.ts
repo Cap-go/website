@@ -6,5 +6,6 @@ if (mount) {
   const params = new URLSearchParams(window.location.search)
   const platform = params.get('platform') === 'material' ? 'material' : 'ios'
   const dark = params.get('dark') === '1' || params.get('dark') === 'true'
-  createApp(TailwindCapacitorDemoShell, { platform, dark }).mount(mount)
+  const slug = params.get('slug') ?? 'foundation'
+  createApp(TailwindCapacitorDemoShell, { platform, dark, slug }).mount(mount)
 }

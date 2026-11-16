@@ -3,40 +3,41 @@
     <Page class="safe-areas tc-demo-page">
       <Navbar
         class="tc-demo-chrome-navbar"
-        title="Components"
+        :title="pageTitle"
         :subtitle="platformLabel"
         :outline="platform === 'ios'"
         :center-title="platform === 'ios'"
         :translucent="false"
       />
 
-      <div class="tc-demo-below-navbar">
-      <section id="tc-demo-foundation" class="tc-demo-section px-1 pb-2">
-        <h2 class="tc-demo-section-heading">Registry foundation</h2>
-        <p class="tc-demo-section-description">Core styles, provider, shared tokens, and icon primitives from the shadcn registry.</p>
-        <Block strong inset class="registry-demo-block">
-          <ul class="divide-y text-sm">
-            <li v-for="item in foundationItems" :key="item.name" class="py-3 first:pt-0 last:pb-0">
-              <p class="font-medium leading-snug">{{ item.title }}</p>
-              <p class="mt-1 text-sm leading-relaxed opacity-70">{{ demoDescription(item.name) }}</p>
-            </li>
-          </ul>
-          <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-black/10 pt-4 dark:border-white/10">
-            <Icon material="home" class="text-2xl" aria-label="Home" />
-            <Icon material="person" class="text-2xl" aria-label="Person" />
-            <Icon material="settings" class="text-2xl" aria-label="Settings" />
-            <Icon material="search" class="text-2xl" aria-label="Search" />
-          </div>
-        </Block>
-      </section>
+      <div class="tc-demo-below-navbar tc-demo-app-screen">
+        <section v-if="activeSlug === 'foundation'" class="tc-demo-single-component px-3 pb-6">
+          <p class="tc-demo-section-description !px-0">Core styles, provider, shared tokens, and icon primitives from the shadcn registry.</p>
+          <Block strong inset class="tc-demo-component-stage">
+            <ul class="divide-y text-sm">
+              <li v-for="item in foundationItems" :key="item.name" class="py-3 first:pt-0 last:pb-0">
+                <p class="font-medium leading-snug">{{ item.title }}</p>
+                <p class="mt-1 text-sm leading-relaxed opacity-70">{{ demoDescription(item.name) }}</p>
+              </li>
+            </ul>
+            <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-black/10 pt-4 dark:border-white/10">
+              <Icon material="home" class="text-2xl" aria-label="Home" />
+              <Icon material="person" class="text-2xl" aria-label="Person" />
+              <Icon material="settings" class="text-2xl" aria-label="Settings" />
+              <Icon material="search" class="text-2xl" aria-label="Search" />
+            </div>
+          </Block>
+        </section>
 
-      <MotionBlock v-for="item in registryItems" :id="item.name" :key="item.name" class="tc-demo-section">
-        <h2 class="tc-demo-section-heading">{{ item.title }}</h2>
-        <p class="tc-demo-section-description">{{ demoDescription(item.name) }}</p>
-        <Block strong inset class="registry-demo-block">
-          <component :is="sectionFor(item.name)" />
-        </Block>
-      </MotionBlock>
+        <section v-else class="tc-demo-single-component px-3 pb-6">
+          <List v-if="showListChrome" class="tc-demo-app-list mb-4">
+            <ListItem title="Today" after="9:41" />
+            <ListItem title="Notifications" badge="3" />
+          </List>
+          <div class="tc-demo-component-stage">
+            <component :is="sectionFor(activeSlug)" />
+          </div>
+        </section>
       </div>
     </Page>
 
@@ -209,26 +210,38 @@ import {
 const props = defineProps({
   platform: { type: String, default: 'ios' },
   dark: { type: Boolean, default: false },
+  slug: { type: String, default: 'foundation' },
 })
 
 const platform = ref(props.platform)
 const dark = ref(props.dark)
+const activeSlug = ref(props.slug)
 
 watch(
-  () => [props.platform, props.dark],
-  ([nextPlatform, nextDark]) => {
+  () => [props.platform, props.dark, props.slug],
+  ([nextPlatform, nextDark, nextSlug]) => {
     platform.value = nextPlatform
     dark.value = nextDark
+    if (typeof nextSlug === 'string' && nextSlug.length > 0) activeSlug.value = nextSlug
   },
 )
 
 const platformLabel = computed(() => (platform.value === 'ios' ? 'iOS' : 'Material'))
 
+const pageTitle = computed(() => {
+  if (activeSlug.value === 'foundation') return 'Foundation'
+  const item = manifest.items.find((entry) => entry.name === activeSlug.value)
+  return item?.component ?? item?.title?.replace(/\s*\(Vue\)\s*$/i, '') ?? 'Component'
+})
+
+const showListChrome = computed(() => {
+  const slug = activeSlug.value
+  return slug.startsWith('capacitor-actions') || slug.startsWith('capacitor-button') || slug.startsWith('capacitor-list')
+})
+
 const foundationNames = new Set(['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'])
 
 const foundationItems = computed(() => manifest.items.filter((item) => foundationNames.has(item.name)))
-
-const registryItems = computed(() => manifest.items.filter((item) => !foundationNames.has(item.name)))
 
 /** @param {string} name */
 function demoDescription(name) {
@@ -273,9 +286,6 @@ function onMessage(event) {
     syncThemeToDocument()
     return
   }
-  if (event.data?.type === 'tc-demo-scroll' && typeof event.data.id === 'string') {
-    document.getElementById(event.data.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
 }
 
 function readQueryTheme() {
@@ -286,6 +296,8 @@ function readQueryTheme() {
   const d = params.get('dark')
   if (d === '1' || d === 'true') dark.value = true
   if (d === '0' || d === 'false') dark.value = false
+  const slug = params.get('slug')
+  if (slug) activeSlug.value = slug
 }
 
 function onDemoPageScroll() {
@@ -301,14 +313,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('message', onMessage)
   document.querySelector('.tc-demo-page')?.removeEventListener('scroll', onDemoPageScroll)
-})
-
-const MotionBlock = defineComponent({
-  name: 'MotionBlock',
-  props: { id: { type: String, required: true } },
-  setup(blockProps, { slots }) {
-    return () => h('section', { id: blockProps.id, class: 'scroll-mt-20' }, slots.default?.())
-  },
 })
 
 function defineDemo(render) {
@@ -343,13 +347,22 @@ function defineOpenShellButtonDemo(label, openRef, options = {}) {
 function defineInlineActionsDemo(renderContent) {
   return defineDemo(() =>
     h(
-      Actions,
+      'div',
       {
-        opened: true,
-        backdrop: false,
-        class: 'tc-demo-actions-inline-preview pointer-events-auto',
+        class:
+          'tc-demo-actions-static pointer-events-auto overflow-visible rounded-2xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900',
       },
-      { default: () => renderContent() },
+      [
+        h(
+          Actions,
+          {
+            opened: true,
+            backdrop: false,
+            class: 'tc-demo-actions-inline-preview pointer-events-auto !relative !inset-auto !transform-none w-full',
+          },
+          { default: () => renderContent() },
+        ),
+      ],
     ),
   )
 }

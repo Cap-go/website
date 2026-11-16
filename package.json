@@ -61,6 +61,7 @@
     "blogs:sync_seobot": "bun run scripts/blogs/sync_seobot.js",
     "clean:unused": "bun run scripts/clean_not_used.tsx",
     "sync:tailwind-capacitor-registry": "bun run scripts/sync-tailwind-capacitor-registry.mjs",
+    "qa:tailwind-capacitor-demo": "bun run scripts/qa-tailwind-capacitor-demo.mjs",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
     "generate:blog-images": "bun run scripts/generate-blog-images.ts",
     "blogs:normalize_tags": "bun run scripts/blogs/normalize_tags.ts",
