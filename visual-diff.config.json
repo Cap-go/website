@@ -14,7 +14,8 @@
         "/pricing/",
         "/plugins/",
         "/blog/",
-        "/about/"
+        "/about/",
+        "/plugins/tailwind-capacitor/demo/"
       ]
     },
     {

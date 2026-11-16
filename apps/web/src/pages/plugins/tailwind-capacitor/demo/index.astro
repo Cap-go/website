@@ -75,11 +75,14 @@ const catalogSectionCount = navItems.length
             </fieldset>
           </div>
 
-          <div class="mx-auto w-full max-w-[420px] overflow-hidden rounded-[2rem] border border-white/20 bg-black shadow-2xl">
+          <div
+            class="tc-demo-phone-frame mx-auto w-full max-w-[390px] overflow-hidden rounded-[2rem] border border-white/20 bg-black shadow-2xl"
+            style="height: min(78dvh, 820px);"
+          >
             <iframe
               id="tc-demo-iframe"
               title="Tailwind Capacitor components"
-              class="h-[min(78dvh,820px)] w-full bg-neutral-950"
+              class="block h-full w-full border-0 bg-neutral-950"
               src={`${getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/shell/')}?platform=ios&dark=0`}
             ></iframe>
           </div>

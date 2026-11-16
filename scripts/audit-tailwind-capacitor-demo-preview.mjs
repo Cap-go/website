@@ -29,6 +29,35 @@ const overlayChecks = [
   { section: 'capacitor-toast', trigger: /show toast/i, expect: 'Toast from registry demo' },
 ]
 
+/**
+ * @param {{ x: number, y: number, width: number, height: number }} box
+ * @param {number} vw
+ * @param {number} vh
+ */
+function intersectsViewport(box, vw, vh) {
+  const visibleW = Math.max(0, Math.min(box.x + box.width, vw) - Math.max(box.x, 0))
+  const visibleH = Math.max(0, Math.min(box.y + box.height, vh) - Math.max(box.y, 0))
+  if (visibleW < 12 || visibleH < 12) return false
+  const visibleArea = visibleW * visibleH
+  const totalArea = Math.max(1, box.width * box.height)
+  return visibleArea / totalArea >= 0.12
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {import('playwright').Locator} contentLocator
+ */
+async function assertOverlayInViewport(page, contentLocator) {
+  const vp = page.viewportSize() ?? { width: 390, height: 844 }
+  await contentLocator.scrollIntoViewIfNeeded().catch(() => {})
+  const box = await contentLocator.boundingBox()
+  if (!box || !intersectsViewport(box, vp.width, vp.height)) {
+    throw new Error(
+      `overlay content not visible in shell viewport (box=${box ? `${Math.round(box.x)},${Math.round(box.y)} ${Math.round(box.width)}x${Math.round(box.height)}` : 'null'}, viewport=${vp.width}x${vp.height})`,
+    )
+  }
+}
+
 const browser = await chromium.launch()
 const failures = []
 const consoleErrors = []
@@ -88,10 +117,16 @@ for (const check of overlayChecks) {
   try {
     await loadShell(page, 'ios', false)
     const section = page.locator(`#${check.section}`)
+    await page.evaluate(() => {
+      window.scrollTo(0, 0)
+      document.querySelector('.tc-demo-page')?.scrollTo(0, 0)
+    })
     await section.scrollIntoViewIfNeeded({ timeout: 15_000 })
     await section.getByRole('button', { name: check.trigger }).click({ timeout: 10_000, force: true })
     const scope = check.inSection ? section : page.locator('.tc-demo-overlay-host')
-    await scope.getByText(check.expect, { exact: false }).first().waitFor({ state: 'visible', timeout: 10_000 })
+    const content = scope.getByText(check.expect, { exact: false }).first()
+    await content.waitFor({ state: 'visible', timeout: 10_000 })
+    await assertOverlayInViewport(page, content)
   } catch (error) {
     failures.push({
       name: check.section,

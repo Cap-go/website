@@ -1,5 +1,5 @@
 <template>
-  <App id="tc-demo-root" :theme="platform" :dark="dark" class="tc-demo-app min-h-dvh">
+  <App id="tc-demo-root" :theme="platform" :dark="dark" class="tc-demo-app h-full w-full">
     <Page class="safe-areas tc-demo-page">
       <Navbar title="Components" :subtitle="platformLabel" :outline="platform === 'ios'" :center-title="platform === 'ios'" />
 
@@ -31,8 +31,7 @@
       </MotionBlock>
     </Page>
 
-    <Teleport to="body">
-      <div class="tc-demo-overlay-host" data-tc-overlay-host>
+    <div class="tc-demo-overlay-host" data-tc-overlay-host>
         <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
           <ActionsGroup>
             <ActionsLabel>Actions</ActionsLabel>
@@ -87,8 +86,7 @@
         </Panel>
 
         <Toast v-if="toastOpen" :opened="true" position="center" @toast:closed="toastOpen = false">Toast from registry demo</Toast>
-      </div>
-    </Teleport>
+    </div>
   </App>
 </template>
 
@@ -295,14 +293,14 @@ function defineOpenShellButtonDemo(label, openRef) {
     setup() {
       return () =>
         h(
-          Button,
+          'button',
           {
-            class: 'tc-demo-overlay-trigger',
-            large: true,
-            tonal: dark.value,
+            type: 'button',
+            class:
+              'tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white',
             onClick: () => (openRef.value = true),
           },
-          { default: () => label },
+          label,
         )
     },
   })

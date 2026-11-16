@@ -38,6 +38,8 @@ const themeCompareSections = [
   { slug: 'tabs', sectionId: 'capacitor-tabs' },
 ]
 
+const onlyOpenShots = process.env.TC_DEMO_ONLY_OPEN === '1'
+
 const componentTargets = [
   { slug: 'button', sectionId: 'capacitor-button', open: null, openExpect: null },
   { slug: 'notification', sectionId: 'capacitor-notification', open: null, openExpect: 'New message' },
@@ -121,6 +123,10 @@ async function applyTheme(page, platform, dark) {
  * @param {boolean} [expectInSection]
  */
 async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, expectInSection = false) {
+  await frame.locator('body').evaluate(() => {
+    window.scrollTo(0, 0)
+    document.querySelector('.tc-demo-page')?.scrollTo(0, 0)
+  })
   const section = frame.locator(`#${sectionId}`)
   await section.scrollIntoViewIfNeeded()
   await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20_000 })
@@ -178,6 +184,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
 
     if (applyThemes && combo) {
       for (const target of componentTargets) {
+        if (onlyOpenShots && !target.open) continue
         await dismissOverlays(page, frame)
         await focusComponentInFrame(frame, target.sectionId, target.open, target.openExpect, target.expectInSection)
         await page.waitForTimeout(300)
@@ -185,6 +192,10 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         await page.screenshot({ path: join(outDir, fileName), fullPage: false })
         manifest.push(await fileEntry(fileName))
         if (target.open) await dismissOverlays(page, frame)
+      }
+
+      if (onlyOpenShots) {
+        return manifest
       }
 
       for (const section of themeCompareSections) {
@@ -266,6 +277,18 @@ try {
         await page.close()
       }
     }
+  }
+
+  if (onlyOpenShots) {
+    let existing = []
+    try {
+      existing = JSON.parse(await readFile(join(outDir, 'sha256.json'), 'utf8'))
+    } catch {
+      existing = []
+    }
+    const byName = new Map(existing.map((entry) => [entry.fileName, entry]))
+    for (const entry of manifest) byName.set(entry.fileName, entry)
+    manifest = [...byName.values()].sort((a, b) => a.fileName.localeCompare(b.fileName))
   }
 
   await writeFile(join(outDir, 'sha256.json'), `${JSON.stringify(manifest, null, 2)}\n`)

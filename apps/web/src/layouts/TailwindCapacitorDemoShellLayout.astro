@@ -6,7 +6,7 @@ const { title = 'Tailwind Capacitor demo shell' } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full overflow-hidden">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,7 +14,7 @@ const { title = 'Tailwind Capacitor demo shell' } = Astro.props
     <link rel="stylesheet" href={demoStylesHref} />
     <meta name="robots" content="noindex" />
   </head>
-  <body class="tc-demo-shell-body">
+  <body class="tc-demo-shell-body h-full overflow-hidden">
     <slot />
   </body>
 </html>

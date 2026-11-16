@@ -168,11 +168,143 @@ async function pricingCtaIssues(page, label = '') {
   return samples.filter((sample) => sample.ratio < CTA_RATIO).map((sample) => ({ ...sample, text: `${sample.text}${label}` }))
 }
 
+/** @param {import('playwright').FrameLocator} frame */
+async function overlayTriggerContrastIssues(frame, label) {
+  const samples = await frame.locator('#capacitor-sheet button.tc-demo-overlay-trigger').evaluateAll((elements) => {
+    function parseColor(color) {
+      if (!color || color === 'transparent') return null
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return null
+      ctx.fillStyle = color
+      const normalized = ctx.fillStyle
+      const hex = /^#([0-9a-f]{6})$/i.exec(normalized)
+      if (hex) {
+        const value = Number.parseInt(hex[1], 16)
+        return { r: (value >> 16) & 255, g: (value >> 8) & 255, b: value & 255, a: 1 }
+      }
+      const match = normalized.match(/rgba?\(([^)]+)\)/)
+      if (!match) return null
+      const parts = match[1].split(',').map((part) => Number.parseFloat(part.trim()))
+      const [r, g, b, a] = parts
+      if (Number.isNaN(r) || (a ?? 1) === 0) return null
+      return { r, g, b, a: a ?? 1 }
+    }
+    function channel(value) {
+      const scaled = value / 255
+      return scaled <= 0.03928 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4
+    }
+    function luminance({ r, g, b }) {
+      return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
+    }
+    function blend(fg, bg) {
+      const alpha = fg.a
+      return { r: fg.r * alpha + bg.r * (1 - alpha), g: fg.g * alpha + bg.g * (1 - alpha), b: fg.b * alpha + bg.b * (1 - alpha), a: 1 }
+    }
+    function contrast(fg, bg) {
+      const [hi, lo] = [luminance(fg), luminance(bg)].sort((left, right) => right - left)
+      return (hi + 0.05) / (lo + 0.05)
+    }
+    function backgroundOf(el) {
+      let node = el
+      while (node && node !== document.documentElement) {
+        const parsed = parseColor(getComputedStyle(node).backgroundColor)
+        if (parsed) {
+          if (parsed.a >= 0.99) return { r: parsed.r, g: parsed.g, b: parsed.b, a: 1 }
+          const parent = node.parentElement ? backgroundOf(node.parentElement) : { r: 0, g: 0, b: 0, a: 1 }
+          return blend(parsed, parent)
+        }
+        node = node.parentElement
+      }
+      return { r: 0, g: 0, b: 0, a: 1 }
+    }
+    return elements.map((el) => {
+      const fg = parseColor(getComputedStyle(el).color)
+      const ownBg = parseColor(getComputedStyle(el).backgroundColor)
+      const bg =
+        ownBg && ownBg.a > 0.15
+          ? { r: ownBg.r, g: ownBg.g, b: ownBg.b, a: 1 }
+          : backgroundOf(el)
+      const ratio = fg ? contrast(fg.a < 1 ? blend(fg, bg) : fg, bg) : 0
+      return { text: (el.textContent || '').trim().slice(0, 80), ratio }
+    })
+  })
+  if (samples.length === 0) {
+    return [{ selector: 'capacitor-sheet trigger', text: `Open sheet trigger missing in iframe [${label}]`, ratio: 0 }]
+  }
+  return samples
+    .filter((sample) => sample.ratio < CTA_RATIO)
+    .map((sample) => ({
+      selector: `#capacitor-sheet .tc-demo-overlay-trigger (${label})`,
+      text: `${sample.text || 'Open sheet'} [${label}]`,
+      ratio: sample.ratio,
+    }))
+}
+
+async function waitForDemoIframeReady(page) {
+  const iframe = page.locator('#tc-demo-iframe')
+  await iframe.evaluate((el) => {
+    if (el instanceof HTMLIFrameElement) {
+      return new Promise((resolve) => {
+        if (el.contentDocument?.readyState === 'complete') {
+          resolve(undefined)
+          return
+        }
+        el.addEventListener('load', () => resolve(undefined), { once: true })
+      })
+    }
+    return undefined
+  })
+}
+
+async function tailwindCapacitorDemoOverlayTriggers(page) {
+  const combos = [
+    { platform: 'ios', dark: false, label: 'ios-light' },
+    { platform: 'ios', dark: true, label: 'ios-dark' },
+    { platform: 'material', dark: false, label: 'material-light' },
+    { platform: 'material', dark: true, label: 'material-dark' },
+  ]
+  const issues = []
+  await page.locator('[data-tc-demo-controls]').waitFor({ state: 'visible', timeout: 60_000 })
+  const frame = page.frameLocator('#tc-demo-iframe')
+  for (const combo of combos) {
+    await page.locator(`[data-tc-platform="${combo.platform}"]`).click()
+    await page.locator(`[data-tc-dark="${combo.dark ? '1' : '0'}"]`).click()
+    await waitForDemoIframeReady(page)
+    await frame.locator('#capacitor-sheet button.tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
+    await frame
+      .locator('#capacitor-sheet button.tc-demo-overlay-trigger')
+      .first()
+      .waitFor({
+        state: 'attached',
+        timeout: 30_000,
+      })
+    await page.waitForFunction(
+      () => {
+        const iframe = document.getElementById('tc-demo-iframe')
+        const btn = iframe?.contentDocument?.querySelector('#capacitor-sheet button.tc-demo-overlay-trigger')
+        if (!btn) return false
+        const bg = getComputedStyle(btn).backgroundColor
+        return bg.includes('29') || bg.includes('216')
+      },
+      undefined,
+      { timeout: 30_000 },
+    )
+    await frame.locator('#capacitor-sheet').scrollIntoViewIfNeeded({ timeout: 30_000 })
+    await frame.locator('#capacitor-sheet .tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
+    issues.push(...(await overlayTriggerContrastIssues(frame, combo.label)))
+  }
+  return issues
+}
+
 async function scanRoute(page, route) {
   const axe = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze()
   const issues = ghostIssuesFromAxe(axe)
   if (route === '/pricing/') {
     issues.push(...(await pricingCtaIssues(page)))
+  }
+  if (route === '/plugins/tailwind-capacitor/demo/') {
+    issues.push(...(await tailwindCapacitorDemoOverlayTriggers(page)))
   }
   return issues
 }
