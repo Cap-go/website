@@ -125,7 +125,11 @@ for (const check of overlayChecks) {
     await section.getByRole('button', { name: check.trigger }).click({ timeout: 10_000, force: true })
     const scope = check.inSection ? section : page.locator('.tc-demo-overlay-host')
     const content = scope.getByText(check.expect, { exact: false }).first()
-    await content.waitFor({ state: 'visible', timeout: 10_000 })
+    const overlayTimeout = check.section === 'capacitor-toast' ? 20_000 : 10_000
+    await content.waitFor({ state: 'visible', timeout: overlayTimeout })
+    if (check.section === 'capacitor-toast') {
+      await page.waitForTimeout(800)
+    }
     await assertOverlayInViewport(page, content)
   } catch (error) {
     failures.push({

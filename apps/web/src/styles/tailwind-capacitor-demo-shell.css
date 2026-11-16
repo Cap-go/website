@@ -83,9 +83,25 @@ html.dark body.tc-demo-shell-body {
   opacity: 0.72;
 }
 
+.tc-demo-shell-body .tc-demo-chrome-navbar {
+  position: relative !important;
+  top: auto !important;
+  flex-shrink: 0;
+}
+
 .tc-demo-section {
-  scroll-margin-top: 0.75rem;
+  scroll-margin-top: max(4.5rem, calc(2.75rem + env(safe-area-inset-top, 0px)));
   padding-top: 0.5rem;
+}
+
+.tc-demo-shell-body .tc-demo-registry-toast {
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-toast:where(.fixed) {
+  position: absolute !important;
 }
 
 .tc-demo-section .registry-demo-block {

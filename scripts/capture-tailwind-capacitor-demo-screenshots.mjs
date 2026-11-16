@@ -122,6 +122,74 @@ async function applyTheme(page, platform, dark) {
  * @param {string | null} openExpect
  * @param {boolean} [expectInSection]
  */
+/**
+ * @param {import('playwright').Page} page
+ */
+async function preparePhoneFrameForCapture(page) {
+  const phone = page.locator('.tc-demo-phone-frame')
+  await phone.waitFor({ state: 'visible', timeout: 30_000 })
+  await phone.scrollIntoViewIfNeeded()
+  await page.evaluate(() => {
+    const el = document.querySelector('.tc-demo-phone-frame')
+    if (!el) return
+    const margin = 16
+    let rect = el.getBoundingClientRect()
+    if (rect.bottom > window.innerHeight - margin) {
+      window.scrollBy(0, rect.bottom - window.innerHeight + margin)
+    }
+    rect = el.getBoundingClientRect()
+    if (rect.top < margin) {
+      window.scrollBy(0, rect.top - margin)
+    }
+  })
+  await page.waitForTimeout(300)
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} filePath
+ */
+async function screenshotPhoneFrame(page, filePath) {
+  await preparePhoneFrameForCapture(page)
+  await page.locator('.tc-demo-phone-frame').screenshot({ path: filePath })
+}
+
+/**
+ * @param {import('playwright').FrameLocator} frame
+ * @param {string} text
+ */
+async function waitOverlayTextInShellViewport(frame, text) {
+  const content = frame.locator('.tc-demo-overlay-host').getByText(text, { exact: false }).first()
+  await content.waitFor({ state: 'visible', timeout: 25_000 })
+  await content.evaluate((node) => {
+      const root = document.getElementById('tc-demo-root')
+      if (!root) throw new Error('missing #tc-demo-root')
+      const rootBox = root.getBoundingClientRect()
+      let el = node
+      while (el && el !== root) {
+        el = el.parentElement
+      }
+      const box = node.getBoundingClientRect()
+      const visibleW = Math.max(0, Math.min(box.right, rootBox.right) - Math.max(box.left, rootBox.left))
+      const visibleH = Math.max(0, Math.min(box.bottom, rootBox.bottom) - Math.max(box.top, rootBox.top))
+      if (visibleW < 12 || visibleH < 12) {
+        throw new Error(`overlay "${node.textContent?.trim().slice(0, 40)}" outside shell viewport`)
+      }
+      const visibleArea = visibleW * visibleH
+      const totalArea = Math.max(1, box.width * box.height)
+      if (visibleArea / totalArea < 0.12) {
+        throw new Error(`overlay "${node.textContent?.trim().slice(0, 40)}" mostly outside shell viewport`)
+      }
+    })
+}
+
+/**
+ * @param {import('playwright').FrameLocator} frame
+ * @param {string} sectionId
+ * @param {RegExp | null} openPattern
+ * @param {string | null} openExpect
+ * @param {boolean} [expectInSection]
+ */
 async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, expectInSection = false) {
   await frame.locator('body').evaluate(() => {
     window.scrollTo(0, 0)
@@ -136,15 +204,22 @@ async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, 
     await trigger.click({ timeout: 15_000, force: true })
     if (openExpect) {
       const scope = openPattern && !expectInSection ? frame.locator('.tc-demo-overlay-host') : section
-      await scope.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 20_000 })
+      if (!expectInSection) {
+        await waitOverlayTextInShellViewport(frame, openExpect)
+      } else {
+        await scope.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 20_000 })
+      }
     } else {
       await frame.locator('.tc-demo-overlay-host :not(:empty)').first().waitFor({ state: 'visible', timeout: 12_000 }).catch(() => {})
     }
-    await new Promise((resolve) => setTimeout(resolve, 900))
+    const settleMs = openExpect?.includes('Toast') ? 1400 : 900
+    await new Promise((resolve) => setTimeout(resolve, settleMs))
   } else if (openExpect) {
     await section.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 })
   }
-  await section.scrollIntoViewIfNeeded()
+  if (!openPattern) {
+    await section.scrollIntoViewIfNeeded()
+  }
 }
 
 /**
@@ -179,6 +254,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
     await page.evaluate(() => window.scrollTo(0, 0))
     await page.waitForTimeout(300)
     const overviewName = `demo-page-${viewport.prefix}-${tag}-${label}.png`
+    await preparePhoneFrameForCapture(page)
     await page.screenshot({ path: join(outDir, overviewName), fullPage: false })
     manifest.push(await fileEntry(overviewName))
 
@@ -189,7 +265,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         await focusComponentInFrame(frame, target.sectionId, target.open, target.openExpect, target.expectInSection)
         await page.waitForTimeout(300)
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
-        await page.screenshot({ path: join(outDir, fileName), fullPage: false })
+        await screenshotPhoneFrame(page, join(outDir, fileName))
         manifest.push(await fileEntry(fileName))
         if (target.open) await dismissOverlays(page, frame)
       }
@@ -206,13 +282,13 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         await applyTheme(page, 'ios', combo.dark)
         await focusComponentInFrame(frame, section.sectionId, null, null)
         await page.waitForTimeout(250)
-        await page.screenshot({ path: join(outDir, iosName), fullPage: false })
+        await screenshotPhoneFrame(page, join(outDir, iosName))
         manifest.push(await fileEntry(iosName))
 
         await applyTheme(page, 'material', combo.dark)
         await focusComponentInFrame(frame, section.sectionId, null, null)
         await page.waitForTimeout(250)
-        await page.screenshot({ path: join(outDir, mdName), fullPage: false })
+        await screenshotPhoneFrame(page, join(outDir, mdName))
         manifest.push(await fileEntry(mdName))
 
         if (await stitchSideBySide(join(outDir, iosName), join(outDir, mdName), join(outDir, pairName))) {

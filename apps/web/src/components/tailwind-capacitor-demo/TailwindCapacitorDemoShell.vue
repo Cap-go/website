@@ -1,7 +1,13 @@
 <template>
   <App id="tc-demo-root" :theme="platform" :dark="dark" class="tc-demo-app h-full w-full">
     <Page class="safe-areas tc-demo-page">
-      <Navbar title="Components" :subtitle="platformLabel" :outline="platform === 'ios'" :center-title="platform === 'ios'" />
+      <Navbar
+        class="tc-demo-chrome-navbar"
+        title="Components"
+        :subtitle="platformLabel"
+        :outline="platform === 'ios'"
+        :center-title="platform === 'ios'"
+      />
 
       <section id="tc-demo-foundation" class="tc-demo-section px-1 pb-2">
         <h2 class="tc-demo-section-heading">Registry foundation</h2>
@@ -85,7 +91,15 @@
           </Page>
         </Panel>
 
-        <Toast v-if="toastOpen" :opened="true" position="center" @toast:closed="toastOpen = false">Toast from registry demo</Toast>
+        <Toast
+          v-if="toastOpen"
+          class="tc-demo-registry-toast"
+          :opened="true"
+          position="center"
+          @toast:closed="toastOpen = false"
+        >
+          Toast from registry demo
+        </Toast>
     </div>
   </App>
 </template>
