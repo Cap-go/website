@@ -74,12 +74,6 @@
           </Block>
         </Sheet>
 
-        <Popover v-if="popoverOpen" :opened="true" target="#popover-target" @backdropclick="popoverOpen = false">
-          <List>
-            <ListItem title="Popover item" />
-          </List>
-        </Popover>
-
         <Popup v-if="popupOpen" :opened="true" @backdropclick="popupOpen = false">
           <Block strong class="m-0">
             <p class="p-4">Popup content</p>
@@ -243,7 +237,6 @@ watch([platform, dark], syncThemeToDocument, { immediate: true })
 const actionsOpen = ref(false)
 const dialogOpen = ref(false)
 const sheetOpen = ref(false)
-const popoverOpen = ref(false)
 const popupOpen = ref(false)
 const panelOpen = ref(false)
 const toastOpen = ref(false)
@@ -748,17 +741,27 @@ const sectionMap = {
     setup() {
       const localOpen = ref(false)
       return () =>
-        h('div', { class: 'relative min-h-36' }, [
+        h('div', { class: 'tc-demo-popover-inline' }, [
           h(
-            Button,
-            { id: 'popover-target-inline', onClick: () => (localOpen.value = true) },
-            { default: () => 'Open popover' },
+            'button',
+            {
+              type: 'button',
+              id: 'popover-target-inline',
+              class:
+                'tc-demo-overlay-trigger inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white',
+              onClick: () => (localOpen.value = true),
+            },
+            'Open popover',
           ),
           localOpen.value
             ? h(
                 Popover,
                 {
                   opened: true,
+                  backdrop: false,
+                  angle: true,
+                  size: 'w-52',
+                  class: 'tc-demo-popover-panel',
                   target: '#popover-target-inline',
                   onBackdropclick: () => (localOpen.value = false),
                 },

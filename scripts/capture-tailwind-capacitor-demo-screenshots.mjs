@@ -103,12 +103,29 @@ async function assertThemeInFrame(page, frame, platform) {
  * @param {'ios' | 'material'} platform
  * @param {boolean} dark
  */
+async function waitForDemoIframeReady(page) {
+  const iframe = page.locator('#tc-demo-iframe')
+  await iframe.evaluate((el) => {
+    if (el instanceof HTMLIFrameElement) {
+      return new Promise((resolve) => {
+        if (el.contentDocument?.readyState === 'complete') {
+          resolve(undefined)
+          return
+        }
+        el.addEventListener('load', () => resolve(undefined), { once: true })
+      })
+    }
+    return undefined
+  })
+}
+
 async function applyTheme(page, platform, dark) {
   await page.locator('#tc-demo-iframe').waitFor({ state: 'visible', timeout: 60_000 })
   const controls = page.locator('[data-tc-demo-controls]')
   await controls.waitFor({ state: 'visible', timeout: 30_000 })
   await controls.locator(`[data-tc-platform="${platform}"]`).click({ force: true })
   await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
+  await waitForDemoIframeReady(page)
   const frame = page.frameLocator('#tc-demo-iframe')
   await assertThemeInFrame(page, frame, platform)
   await frame.locator('.tc-demo-section-heading').first().waitFor({ state: 'visible', timeout: 90_000 })
@@ -218,7 +235,7 @@ async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, 
     } else {
       await frame.locator('.tc-demo-overlay-host :not(:empty)').first().waitFor({ state: 'visible', timeout: 12_000 }).catch(() => {})
     }
-    const settleMs = openExpect?.includes('Toast') ? 1400 : 900
+    const settleMs = openExpect?.includes('Toast') ? 1400 : openExpect?.includes('Popover') ? 1200 : 900
     await new Promise((resolve) => setTimeout(resolve, settleMs))
   } else if (openExpect) {
     await section.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 })

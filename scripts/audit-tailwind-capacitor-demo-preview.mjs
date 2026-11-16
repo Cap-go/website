@@ -115,7 +115,8 @@ if (iosRoot === materialRoot) {
 
 for (const check of overlayChecks) {
   try {
-    await loadShell(page, 'ios', false)
+    const { consoleErrorsLocal } = await loadShell(page, 'ios', false)
+    consoleErrors.push(...consoleErrorsLocal)
     const section = page.locator(`#${check.section}`)
     await page.evaluate(() => {
       window.scrollTo(0, 0)

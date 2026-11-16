@@ -188,4 +188,16 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          bunx wrangler@4.137.0 preview delete "${{ needs.resolve-preview-name.outputs.name }}" -y || echo "Preview delete skipped or already removed."
+          PREVIEW_NAME="${{ needs.resolve-preview-name.outputs.name }}"
+          set +e
+          output="$(bunx wrangler@4.137.0 preview delete --name "$PREVIEW_NAME" -y 2>&1)"
+          status=$?
+          set -e
+          if [ "$status" -ne 0 ]; then
+            if echo "$output" | grep -qiE 'not found|does not exist|No preview'; then
+              echo "Preview already removed: $PREVIEW_NAME"
+            else
+              echo "$output"
+              exit "$status"
+            fi
+          fi

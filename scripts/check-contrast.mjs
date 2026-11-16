@@ -169,8 +169,8 @@ async function pricingCtaIssues(page, label = '') {
 }
 
 /** @param {import('playwright').FrameLocator} frame */
-async function overlayTriggerContrastIssues(frame, label) {
-  const samples = await frame.locator('#capacitor-sheet button.tc-demo-overlay-trigger').evaluateAll((elements) => {
+async function overlayTriggerContrastIssues(frame, label, sectionId = 'capacitor-sheet', fallbackLabel = 'Open sheet') {
+  const samples = await frame.locator(`#${sectionId} button.tc-demo-overlay-trigger`).evaluateAll((elements) => {
     function parseColor(color) {
       if (!color || color === 'transparent') return null
       const canvas = document.createElement('canvas')
@@ -230,13 +230,13 @@ async function overlayTriggerContrastIssues(frame, label) {
     })
   })
   if (samples.length === 0) {
-    return [{ selector: 'capacitor-sheet trigger', text: `Open sheet trigger missing in iframe [${label}]`, ratio: 0 }]
+    return [{ selector: `${sectionId} trigger`, text: `${fallbackLabel} trigger missing in iframe [${label}]`, ratio: 0 }]
   }
   return samples
     .filter((sample) => sample.ratio < CTA_RATIO)
     .map((sample) => ({
-      selector: `#capacitor-sheet .tc-demo-overlay-trigger (${label})`,
-      text: `${sample.text || 'Open sheet'} [${label}]`,
+      selector: `#${sectionId} .tc-demo-overlay-trigger (${label})`,
+      text: `${sample.text || fallbackLabel} [${label}]`,
       ratio: sample.ratio,
     }))
 }
@@ -271,14 +271,7 @@ async function tailwindCapacitorDemoOverlayTriggers(page) {
     await page.locator(`[data-tc-platform="${combo.platform}"]`).click()
     await page.locator(`[data-tc-dark="${combo.dark ? '1' : '0'}"]`).click()
     await waitForDemoIframeReady(page)
-    await frame.locator('#capacitor-sheet button.tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
-    await frame
-      .locator('#capacitor-sheet button.tc-demo-overlay-trigger')
-      .first()
-      .waitFor({
-        state: 'attached',
-        timeout: 30_000,
-      })
+    await frame.locator('button.tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
     await page.waitForFunction(
       () => {
         const iframe = document.getElementById('tc-demo-iframe')
@@ -293,6 +286,7 @@ async function tailwindCapacitorDemoOverlayTriggers(page) {
     await frame.locator('#capacitor-sheet').scrollIntoViewIfNeeded({ timeout: 30_000 })
     await frame.locator('#capacitor-sheet .tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
     issues.push(...(await overlayTriggerContrastIssues(frame, combo.label)))
+    issues.push(...(await overlayTriggerContrastIssues(frame, combo.label, 'capacitor-dialog', 'Open dialog')))
   }
   return issues
 }
