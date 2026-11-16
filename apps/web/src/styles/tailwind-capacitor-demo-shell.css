@@ -87,6 +87,17 @@ html.dark body.tc-demo-shell-body {
   position: relative !important;
   top: auto !important;
   flex-shrink: 0;
+  z-index: 30;
+}
+
+.tc-demo-shell-body .tc-demo-chrome-navbar .hairline-b::after,
+.tc-demo-shell-body .tc-demo-chrome-navbar [class*='hairline']::after {
+  opacity: 1;
+}
+
+.tc-demo-shell-body .tc-demo-below-navbar {
+  position: relative;
+  z-index: 1;
 }
 
 .tc-demo-section {

@@ -7,8 +7,10 @@
         :subtitle="platformLabel"
         :outline="platform === 'ios'"
         :center-title="platform === 'ios'"
+        :translucent="false"
       />
 
+      <div class="tc-demo-below-navbar">
       <section id="tc-demo-foundation" class="tc-demo-section px-1 pb-2">
         <h2 class="tc-demo-section-heading">Registry foundation</h2>
         <p class="tc-demo-section-description">Core styles, provider, shared tokens, and icon primitives from the shadcn registry.</p>
@@ -35,6 +37,7 @@
           <component :is="sectionFor(item.name)" />
         </Block>
       </MotionBlock>
+      </div>
     </Page>
 
     <div class="tc-demo-overlay-host" data-tc-overlay-host>
