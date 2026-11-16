@@ -15,7 +15,9 @@
         "/plugins/",
         "/blog/",
         "/about/",
-        "/plugins/tailwind-capacitor/demo/"
+        "/plugins/tailwind-capacitor/demo/",
+        "/plugins/tailwind-capacitor/demo/capacitor-sheet/",
+        "/plugins/tailwind-capacitor/demo/capacitor-dialog/"
       ]
     },
     {

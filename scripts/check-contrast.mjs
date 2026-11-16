@@ -169,8 +169,9 @@ async function pricingCtaIssues(page, label = '') {
 }
 
 /** @param {import('playwright').FrameLocator} frame */
-async function overlayTriggerContrastIssues(frame, label, sectionId = 'capacitor-sheet', fallbackLabel = 'Open sheet') {
-  const samples = await frame.locator(`#${sectionId} button.tc-demo-overlay-trigger`).evaluateAll((elements) => {
+async function overlayTriggerContrastIssues(frame, label, sectionId = null, fallbackLabel = 'Open sheet') {
+  const triggerSelector = sectionId ? `#${sectionId} button.tc-demo-overlay-trigger` : 'button.tc-demo-overlay-trigger'
+  const samples = await frame.locator(triggerSelector).evaluateAll((elements) => {
     function parseColor(color) {
       if (!color || color === 'transparent') return null
       const canvas = document.createElement('canvas')
@@ -230,12 +231,12 @@ async function overlayTriggerContrastIssues(frame, label, sectionId = 'capacitor
     })
   })
   if (samples.length === 0) {
-    return [{ selector: `${sectionId} trigger`, text: `${fallbackLabel} trigger missing in iframe [${label}]`, ratio: 0 }]
+    return [{ selector: triggerSelector, text: `${fallbackLabel} trigger missing in iframe [${label}]`, ratio: 0 }]
   }
   return samples
     .filter((sample) => sample.ratio < CTA_RATIO)
     .map((sample) => ({
-      selector: `#${sectionId} .tc-demo-overlay-trigger (${label})`,
+      selector: `${triggerSelector} (${label})`,
       text: `${sample.text || fallbackLabel} [${label}]`,
       ratio: sample.ratio,
     }))
@@ -272,21 +273,7 @@ async function tailwindCapacitorDemoOverlayTriggers(page) {
     await page.locator(`[data-tc-dark="${combo.dark ? '1' : '0'}"]`).click()
     await waitForDemoIframeReady(page)
     await frame.locator('button.tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
-    await page.waitForFunction(
-      () => {
-        const iframe = document.getElementById('tc-demo-iframe')
-        const btn = iframe?.contentDocument?.querySelector('#capacitor-sheet button.tc-demo-overlay-trigger')
-        if (!btn) return false
-        const bg = getComputedStyle(btn).backgroundColor
-        return bg.includes('29') || bg.includes('216')
-      },
-      undefined,
-      { timeout: 30_000 },
-    )
-    await frame.locator('#capacitor-sheet').scrollIntoViewIfNeeded({ timeout: 30_000 })
-    await frame.locator('#capacitor-sheet .tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
     issues.push(...(await overlayTriggerContrastIssues(frame, combo.label)))
-    issues.push(...(await overlayTriggerContrastIssues(frame, combo.label, 'capacitor-dialog', 'Open dialog')))
   }
   return issues
 }
@@ -297,7 +284,7 @@ async function scanRoute(page, route) {
   if (route === '/pricing/') {
     issues.push(...(await pricingCtaIssues(page)))
   }
-  if (route === '/plugins/tailwind-capacitor/demo/' || route.startsWith('/plugins/tailwind-capacitor/demo/')) {
+  if (route.startsWith('/plugins/tailwind-capacitor/demo/') && (await page.locator('#tc-demo-iframe').count())) {
     issues.push(...(await tailwindCapacitorDemoOverlayTriggers(page)))
   }
   return issues
