@@ -97,6 +97,21 @@
         >
           Toast from registry demo
         </Toast>
+
+        <Popover
+          v-if="popoverOpen"
+          class="tc-demo-registry-popover pointer-events-auto"
+          :opened="true"
+          :backdrop="false"
+          :angle="true"
+          size="w-52"
+          target="#popover-target-inline"
+          @backdropclick="popoverOpen = false"
+        >
+          <List>
+            <ListItem title="Popover item" />
+          </List>
+        </Popover>
     </div>
   </App>
 </template>
@@ -240,6 +255,7 @@ const sheetOpen = ref(false)
 const popupOpen = ref(false)
 const panelOpen = ref(false)
 const toastOpen = ref(false)
+const popoverOpen = ref(false)
 const segmented = ref('tab1')
 const rangeValue = ref(40)
 const stepperValue = ref(2)
@@ -272,13 +288,19 @@ function readQueryTheme() {
   if (d === '0' || d === 'false') dark.value = false
 }
 
+function onDemoPageScroll() {
+  if (popoverOpen.value) window.dispatchEvent(new Event('resize'))
+}
+
 onMounted(() => {
   readQueryTheme()
   window.addEventListener('message', onMessage)
+  document.querySelector('.tc-demo-page')?.addEventListener('scroll', onDemoPageScroll, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('message', onMessage)
+  document.querySelector('.tc-demo-page')?.removeEventListener('scroll', onDemoPageScroll)
 })
 
 const MotionBlock = defineComponent({
@@ -298,7 +320,8 @@ function defineDemo(render) {
 }
 
 /** @param {import('vue').Ref<boolean>} openRef */
-function defineOpenShellButtonDemo(label, openRef) {
+/** @param {{ id?: string }} [options] */
+function defineOpenShellButtonDemo(label, openRef, options = {}) {
   return defineComponent({
     setup() {
       return () =>
@@ -306,6 +329,7 @@ function defineOpenShellButtonDemo(label, openRef) {
           'button',
           {
             type: 'button',
+            id: options.id,
             class:
               'tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white',
             onClick: () => (openRef.value = true),
@@ -737,45 +761,7 @@ const sectionMap = {
   'capacitor-picker': defineDemo(() =>
     h(Picker, { class: 'p-4 text-sm' }, { default: () => ['Morning', 'Afternoon', 'Evening'].map((label) => h('div', { class: 'block py-2' }, label)) }),
   ),
-  'capacitor-popover': defineComponent({
-    setup() {
-      const localOpen = ref(false)
-      return () =>
-        h('div', { class: 'tc-demo-popover-inline' }, [
-          h(
-            'button',
-            {
-              type: 'button',
-              id: 'popover-target-inline',
-              class:
-                'tc-demo-overlay-trigger inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white',
-              onClick: () => (localOpen.value = true),
-            },
-            'Open popover',
-          ),
-          localOpen.value
-            ? h(
-                Popover,
-                {
-                  opened: true,
-                  backdrop: false,
-                  angle: true,
-                  size: 'w-52',
-                  class: 'tc-demo-popover-panel',
-                  target: '#popover-target-inline',
-                  onBackdropclick: () => (localOpen.value = false),
-                },
-                {
-                  default: () =>
-                    h(List, {}, {
-                      default: () => h(ListItem, { title: 'Popover item' }),
-                    }),
-                },
-              )
-            : null,
-        ])
-    },
-  }),
+  'capacitor-popover': defineOpenShellButtonDemo('Open popover', popoverOpen, { id: 'popover-target-inline' }),
   'capacitor-popup': defineOpenShellButtonDemo('Open popup', popupOpen),
   'capacitor-preloader': defineDemo(() => h(Preloader, { class: 'mx-auto' })),
   'capacitor-progressbar': defineDemo(() => h(Progressbar, { progress: 65 })),

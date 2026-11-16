@@ -50,7 +50,7 @@ const componentTargets = [
   { slug: 'sheet-open', sectionId: 'capacitor-sheet', open: /open sheet/i, openExpect: 'Sheet overlay content' },
   { slug: 'actions-open', sectionId: 'capacitor-actions', open: /open actions/i, openExpect: 'Delete' },
   { slug: 'dialog-open', sectionId: 'capacitor-dialog', open: /open dialog/i, openExpect: 'Sample dialog' },
-  { slug: 'popover-open', sectionId: 'capacitor-popover', open: /open popover/i, openExpect: 'Popover item', expectInSection: true },
+  { slug: 'popover-open', sectionId: 'capacitor-popover', open: /open popover/i, openExpect: 'Popover item', expectInSection: false },
   { slug: 'toast-open', sectionId: 'capacitor-toast', open: /show toast/i, openExpect: 'Toast from registry demo' },
 ]
 
@@ -166,6 +166,23 @@ async function preparePhoneFrameForCapture(page) {
  * @param {import('playwright').Page} page
  * @param {string} filePath
  */
+/**
+ * @param {import('playwright').FrameLocator} frame
+ */
+async function stabilizePopoverForCapture(frame) {
+  await frame.locator('.tc-demo-page').evaluate(() => {
+    const page = document.querySelector('.tc-demo-page')
+    const btn = document.querySelector('#popover-target-inline')
+    if (!page || !btn) return
+    const pageBox = page.getBoundingClientRect()
+    const btnBox = btn.getBoundingClientRect()
+    const targetTop = pageBox.top + pageBox.height * 0.58
+    page.scrollTop += btnBox.top - targetTop
+  })
+  await frame.locator('#tc-demo-root').evaluate(() => window.dispatchEvent(new Event('resize')))
+  await new Promise((resolve) => setTimeout(resolve, 500))
+}
+
 async function screenshotPhoneFrame(page, filePath) {
   await preparePhoneFrameForCapture(page)
   const iframeHandle = await page.locator('#tc-demo-iframe').elementHandle()
@@ -235,7 +252,7 @@ async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, 
     } else {
       await frame.locator('.tc-demo-overlay-host :not(:empty)').first().waitFor({ state: 'visible', timeout: 12_000 }).catch(() => {})
     }
-    const settleMs = openExpect?.includes('Toast') ? 1400 : openExpect?.includes('Popover') ? 1200 : 900
+    const settleMs = openExpect?.includes('Toast') ? 1400 : openExpect === 'Popover item' ? 1200 : 900
     await new Promise((resolve) => setTimeout(resolve, settleMs))
   } else if (openExpect) {
     await section.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 })
@@ -286,6 +303,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         if (onlyOpenShots && !target.open) continue
         await dismissOverlays(page, frame)
         await focusComponentInFrame(frame, target.sectionId, target.open, target.openExpect, target.expectInSection)
+        if (target.slug === 'popover-open') await stabilizePopoverForCapture(frame)
         await page.waitForTimeout(300)
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
         await screenshotPhoneFrame(page, join(outDir, fileName))
