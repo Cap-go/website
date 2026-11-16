@@ -2,2861 +2,11878 @@
 
 Base URL: http://127.0.0.1:4321
 
-Pass: 2016, Fail: 0
+Pass: 5144, Fail: 40
+
+Each component lists every state with phone-frame and (on mobile) full 390px viewport page shots.
+
+## Failures
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-actions: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open actions</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-300"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex flex-col items-center justify-center p-4 space-y-1 relative hairline-b">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-dialog: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open dialog</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="w-full text-[18px] font-semibold text-center">Dialog</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-panel: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open panel</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="h-full w-full left-0 top-0 overflow-auto absolute bg-ios-light-surface">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-popup: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open popup</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="left-1/2 top-1/2 transition-transform transform -translate-x-1/2 z-40 max-w-full max-h-full overflow-hidden md:no-safe-areas bg-white fixed w-screen h-screen md:w-160 md:h-160 duration-400 md:rounded-lg -translate-y-1/2">…</div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <nav class="hidden items-center gap-0.5 md:flex lg:gap-1">…</nav> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+- interaction failed on capacitor-sheet: click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('[data-tc-demo-state="screen"] button.tc-demo-overlay-trigger').first()
+    - locator resolved to <button type="button" class="tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white">Open sheet</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fixed z-40 w-full h-full left-0 top-0 bg-black/50 duration-400"></div> from <article class="tc-demo-state-block mb-6 last:mb-2">…</article> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="relative flex items-center justify-between gap-3 md:justify-center">…</div> from <header class="sticky top-0 z-50 py-3">…</header> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
 
 ## foundation
 
-### desktop ios-light
+### packages (Packages)
 
-![foundation ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-ios-light-packages.png)
 
-![foundation ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-ios-dark-packages.png)
 
-![foundation material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-material-light-packages.png)
 
-![foundation material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-material-dark-packages.png)
 
-![foundation ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-ios-light-packages.png)
 
-![foundation ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![foundation packages page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-ios-light-packages.png)
 
-![foundation material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-ios-dark-packages.png)
 
-![foundation material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![foundation packages page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-ios-dark-packages.png)
+
+#### mobile material-light (frame)
+
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-material-light-packages.png)
+
+#### mobile material-light (page)
+
+![foundation packages page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-material-light-packages.png)
+
+#### mobile material-dark (frame)
+
+![foundation packages frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-material-dark-packages.png)
+
+#### mobile material-dark (page)
+
+![foundation packages page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-material-dark-packages.png)
+
+### icons (Icons)
+
+#### desktop ios-light (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-ios-light-icons.png)
+
+#### desktop ios-dark (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-ios-dark-icons.png)
+
+#### desktop material-light (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-material-light-icons.png)
+
+#### desktop material-dark (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/desktop-frame-material-dark-icons.png)
+
+#### mobile ios-light (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-ios-light-icons.png)
+
+#### mobile ios-light (page)
+
+![foundation icons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-ios-light-icons.png)
+
+#### mobile ios-dark (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-ios-dark-icons.png)
+
+#### mobile ios-dark (page)
+
+![foundation icons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-ios-dark-icons.png)
+
+#### mobile material-light (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-material-light-icons.png)
+
+#### mobile material-light (page)
+
+![foundation icons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-material-light-icons.png)
+
+#### mobile material-dark (frame)
+
+![foundation icons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-frame-material-dark-icons.png)
+
+#### mobile material-dark (page)
+
+![foundation icons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/foundation/mobile-page-material-dark-icons.png)
 
 ## capacitor-accordion
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-accordion ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-ios-light-default.png)
 
-![capacitor-accordion ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-ios-dark-default.png)
 
-![capacitor-accordion material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-material-light-default.png)
 
-![capacitor-accordion material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-material-dark-default.png)
 
-![capacitor-accordion ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-ios-light-default.png)
 
-![capacitor-accordion ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-accordion default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-ios-light-default.png)
 
-![capacitor-accordion material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-ios-dark-default.png)
 
-![capacitor-accordion material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-accordion default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-accordion default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-accordion default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-accordion default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-accordion alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-accordion alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-accordion alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-accordion alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-accordion alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion/mobile-page-material-dark-alternate.png)
 
 ## capacitor-accordion-item
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-accordion-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-ios-light-default.png)
 
-![capacitor-accordion-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-ios-dark-default.png)
 
-![capacitor-accordion-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-material-light-default.png)
 
-![capacitor-accordion-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-material-dark-default.png)
 
-![capacitor-accordion-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-ios-light-default.png)
 
-![capacitor-accordion-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-accordion-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-ios-light-default.png)
 
-![capacitor-accordion-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-ios-dark-default.png)
 
-![capacitor-accordion-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-accordion-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-accordion-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-accordion-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-accordion-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-accordion-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-accordion-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-accordion-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-accordion-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-accordion-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-accordion-item/mobile-page-material-dark-alternate.png)
 
 ## capacitor-actions
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-actions ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-ios-light-screen.png)
 
-![capacitor-actions ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-ios-dark-screen.png)
 
-![capacitor-actions material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-material-light-screen.png)
 
-![capacitor-actions material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-material-dark-screen.png)
 
-![capacitor-actions ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-ios-light-screen.png)
 
-![capacitor-actions ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-actions screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-ios-light-screen.png)
 
-![capacitor-actions material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-ios-dark-screen.png)
 
-![capacitor-actions material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-actions screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-material-dark-screen.png)
+
+### sheet-open (Sheet open)
+
+#### desktop ios-light (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-ios-light-sheet-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-ios-dark-sheet-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-material-light-sheet-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/desktop-frame-material-dark-sheet-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-ios-light-sheet-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-actions sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-ios-light-sheet-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-ios-dark-sheet-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-actions sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-ios-dark-sheet-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-material-light-sheet-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-material-light-sheet-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-frame-material-dark-sheet-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions/mobile-page-material-dark-sheet-open.png)
 
 ## capacitor-actions-button
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-actions-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-ios-light-screen.png)
 
-![capacitor-actions-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-ios-dark-screen.png)
 
-![capacitor-actions-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-material-light-screen.png)
 
-![capacitor-actions-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-material-dark-screen.png)
 
-![capacitor-actions-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-ios-light-screen.png)
 
-![capacitor-actions-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-actions-button screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-ios-light-screen.png)
 
-![capacitor-actions-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-ios-dark-screen.png)
 
-![capacitor-actions-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-actions-button screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-button screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-button screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-button screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-material-dark-screen.png)
+
+### sheet-open (Sheet open)
+
+#### desktop ios-light (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-ios-light-sheet-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-ios-dark-sheet-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-material-light-sheet-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-material-dark-sheet-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-ios-light-sheet-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-actions-button sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-ios-light-sheet-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-ios-dark-sheet-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-actions-button sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-ios-dark-sheet-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-material-light-sheet-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-button sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-material-light-sheet-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-button sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-material-dark-sheet-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-button sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-material-dark-sheet-open.png)
+
+### primary-row (Primary row)
+
+#### desktop ios-light (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-ios-light-primary-row.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-ios-dark-primary-row.png)
+
+#### desktop material-light (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-material-light-primary-row.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/desktop-frame-material-dark-primary-row.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-ios-light-primary-row.png)
+
+#### mobile ios-light (page)
+
+![capacitor-actions-button primary-row page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-ios-light-primary-row.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-ios-dark-primary-row.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-actions-button primary-row page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-ios-dark-primary-row.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-material-light-primary-row.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-button primary-row page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-material-light-primary-row.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-button primary-row frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-frame-material-dark-primary-row.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-button primary-row page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-button/mobile-page-material-dark-primary-row.png)
 
 ## capacitor-actions-group
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-actions-group ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-ios-light-screen.png)
 
-![capacitor-actions-group ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-ios-dark-screen.png)
 
-![capacitor-actions-group material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-material-light-screen.png)
 
-![capacitor-actions-group material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-material-dark-screen.png)
 
-![capacitor-actions-group ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-ios-light-screen.png)
 
-![capacitor-actions-group ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-actions-group screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-ios-light-screen.png)
 
-![capacitor-actions-group material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-ios-dark-screen.png)
 
-![capacitor-actions-group material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-actions-group screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-group screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-group screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-group screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-material-dark-screen.png)
+
+### sheet-open (Sheet open)
+
+#### desktop ios-light (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-ios-light-sheet-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-ios-dark-sheet-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-material-light-sheet-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-material-dark-sheet-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-ios-light-sheet-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-actions-group sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-ios-light-sheet-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-ios-dark-sheet-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-actions-group sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-ios-dark-sheet-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-material-light-sheet-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-group sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-material-light-sheet-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-group sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-material-dark-sheet-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-group sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-material-dark-sheet-open.png)
+
+### single-group (Single group)
+
+#### desktop ios-light (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-ios-light-single-group.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-ios-dark-single-group.png)
+
+#### desktop material-light (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-material-light-single-group.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/desktop-frame-material-dark-single-group.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-ios-light-single-group.png)
+
+#### mobile ios-light (page)
+
+![capacitor-actions-group single-group page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-ios-light-single-group.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-ios-dark-single-group.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-actions-group single-group page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-ios-dark-single-group.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-material-light-single-group.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-group single-group page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-material-light-single-group.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-group single-group frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-frame-material-dark-single-group.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-group single-group page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-group/mobile-page-material-dark-single-group.png)
 
 ## capacitor-actions-label
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-actions-label ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-ios-light-screen.png)
 
-![capacitor-actions-label ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-ios-dark-screen.png)
 
-![capacitor-actions-label material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-material-light-screen.png)
 
-![capacitor-actions-label material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-material-dark-screen.png)
 
-![capacitor-actions-label ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-ios-light-screen.png)
 
-![capacitor-actions-label ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-actions-label screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-ios-light-screen.png)
 
-![capacitor-actions-label material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-ios-dark-screen.png)
 
-![capacitor-actions-label material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-actions-label screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-label screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-label screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-label screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-material-dark-screen.png)
+
+### sheet-open (Sheet open)
+
+#### desktop ios-light (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-ios-light-sheet-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-ios-dark-sheet-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-material-light-sheet-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-material-dark-sheet-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-ios-light-sheet-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-actions-label sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-ios-light-sheet-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-ios-dark-sheet-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-actions-label sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-ios-dark-sheet-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-material-light-sheet-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-label sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-material-light-sheet-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-label sheet-open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-material-dark-sheet-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-label sheet-open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-material-dark-sheet-open.png)
+
+### section-label (Section label)
+
+#### desktop ios-light (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-ios-light-section-label.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-ios-dark-section-label.png)
+
+#### desktop material-light (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-material-light-section-label.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/desktop-frame-material-dark-section-label.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-ios-light-section-label.png)
+
+#### mobile ios-light (page)
+
+![capacitor-actions-label section-label page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-ios-light-section-label.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-ios-dark-section-label.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-actions-label section-label page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-ios-dark-section-label.png)
+
+#### mobile material-light (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-material-light-section-label.png)
+
+#### mobile material-light (page)
+
+![capacitor-actions-label section-label page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-material-light-section-label.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-actions-label section-label frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-frame-material-dark-section-label.png)
+
+#### mobile material-dark (page)
+
+![capacitor-actions-label section-label page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-actions-label/mobile-page-material-dark-section-label.png)
 
 ## capacitor-alert
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-alert ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-ios-light-default.png)
 
-![capacitor-alert ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-ios-dark-default.png)
 
-![capacitor-alert material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-material-light-default.png)
 
-![capacitor-alert material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-material-dark-default.png)
 
-![capacitor-alert ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-ios-light-default.png)
 
-![capacitor-alert ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-alert default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-ios-light-default.png)
 
-![capacitor-alert material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-ios-dark-default.png)
 
-![capacitor-alert material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-alert default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-alert default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-alert default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-alert default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-alert alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-alert alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-alert alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-alert alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-alert alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-alert/mobile-page-material-dark-alternate.png)
 
 ## capacitor-app
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-app ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-ios-light-default.png)
 
-![capacitor-app ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-ios-dark-default.png)
 
-![capacitor-app material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-material-light-default.png)
 
-![capacitor-app material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-material-dark-default.png)
 
-![capacitor-app ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-ios-light-default.png)
 
-![capacitor-app ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-app default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-ios-light-default.png)
 
-![capacitor-app material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-ios-dark-default.png)
 
-![capacitor-app material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-app default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-app default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-app default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-app default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-app alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-app alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-app alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-app alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-app alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-app/mobile-page-material-dark-alternate.png)
 
 ## capacitor-avatar
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-avatar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-ios-light-default.png)
 
-![capacitor-avatar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-ios-dark-default.png)
 
-![capacitor-avatar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-material-light-default.png)
 
-![capacitor-avatar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-material-dark-default.png)
 
-![capacitor-avatar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-ios-light-default.png)
 
-![capacitor-avatar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-avatar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-ios-light-default.png)
 
-![capacitor-avatar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-ios-dark-default.png)
 
-![capacitor-avatar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-avatar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-avatar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-avatar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-avatar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-avatar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-avatar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-avatar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-avatar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-avatar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-avatar/mobile-page-material-dark-alternate.png)
 
 ## capacitor-badge
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-badge ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-ios-light-default.png)
 
-![capacitor-badge ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-ios-dark-default.png)
 
-![capacitor-badge material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-material-light-default.png)
 
-![capacitor-badge material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-material-dark-default.png)
 
-![capacitor-badge ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-ios-light-default.png)
 
-![capacitor-badge ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-badge default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-ios-light-default.png)
 
-![capacitor-badge material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-ios-dark-default.png)
 
-![capacitor-badge material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-badge default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-badge default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-badge default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-badge default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-material-dark-default.png)
+
+### color (Color)
+
+#### desktop ios-light (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-ios-light-color.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-ios-dark-color.png)
+
+#### desktop material-light (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-material-light-color.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-material-dark-color.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-ios-light-color.png)
+
+#### mobile ios-light (page)
+
+![capacitor-badge color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-ios-light-color.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-ios-dark-color.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-badge color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-ios-dark-color.png)
+
+#### mobile material-light (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-material-light-color.png)
+
+#### mobile material-light (page)
+
+![capacitor-badge color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-material-light-color.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-badge color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-material-dark-color.png)
+
+#### mobile material-dark (page)
+
+![capacitor-badge color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-material-dark-color.png)
+
+### on-avatar (On avatar)
+
+#### desktop ios-light (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-ios-light-on-avatar.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-ios-dark-on-avatar.png)
+
+#### desktop material-light (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-material-light-on-avatar.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/desktop-frame-material-dark-on-avatar.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-ios-light-on-avatar.png)
+
+#### mobile ios-light (page)
+
+![capacitor-badge on-avatar page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-ios-light-on-avatar.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-ios-dark-on-avatar.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-badge on-avatar page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-ios-dark-on-avatar.png)
+
+#### mobile material-light (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-material-light-on-avatar.png)
+
+#### mobile material-light (page)
+
+![capacitor-badge on-avatar page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-material-light-on-avatar.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-badge on-avatar frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-frame-material-dark-on-avatar.png)
+
+#### mobile material-dark (page)
+
+![capacitor-badge on-avatar page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-badge/mobile-page-material-dark-on-avatar.png)
 
 ## capacitor-block
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-block ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-ios-light-default.png)
 
-![capacitor-block ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-ios-dark-default.png)
 
-![capacitor-block material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-material-light-default.png)
 
-![capacitor-block material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-material-dark-default.png)
 
-![capacitor-block ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-ios-light-default.png)
 
-![capacitor-block ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-block default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-ios-light-default.png)
 
-![capacitor-block material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-ios-dark-default.png)
 
-![capacitor-block material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-block default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-block default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-block alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-block alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-block alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block/mobile-page-material-dark-alternate.png)
 
 ## capacitor-block-footer
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-block-footer ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-ios-light-default.png)
 
-![capacitor-block-footer ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-ios-dark-default.png)
 
-![capacitor-block-footer material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-material-light-default.png)
 
-![capacitor-block-footer material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-material-dark-default.png)
 
-![capacitor-block-footer ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-ios-light-default.png)
 
-![capacitor-block-footer ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-block-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-ios-light-default.png)
 
-![capacitor-block-footer material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-ios-dark-default.png)
 
-![capacitor-block-footer material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-block-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-block-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-block-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-block-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-block-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-footer/mobile-page-material-dark-alternate.png)
 
 ## capacitor-block-header
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-block-header ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-ios-light-default.png)
 
-![capacitor-block-header ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-ios-dark-default.png)
 
-![capacitor-block-header material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-material-light-default.png)
 
-![capacitor-block-header material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-material-dark-default.png)
 
-![capacitor-block-header ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-ios-light-default.png)
 
-![capacitor-block-header ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-block-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-ios-light-default.png)
 
-![capacitor-block-header material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-ios-dark-default.png)
 
-![capacitor-block-header material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-block-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-block-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-block-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-block-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-block-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-header/mobile-page-material-dark-alternate.png)
 
 ## capacitor-block-title
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-block-title ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-ios-light-default.png)
 
-![capacitor-block-title ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-ios-dark-default.png)
 
-![capacitor-block-title material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-material-light-default.png)
 
-![capacitor-block-title material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-material-dark-default.png)
 
-![capacitor-block-title ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-ios-light-default.png)
 
-![capacitor-block-title ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-block-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-ios-light-default.png)
 
-![capacitor-block-title material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-ios-dark-default.png)
 
-![capacitor-block-title material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-block-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-block-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-block-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-block-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-block-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-block-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-block-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-block-title/mobile-page-material-dark-alternate.png)
 
 ## capacitor-breadcrumbs
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-breadcrumbs ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-material-light-default.png)
 
-![capacitor-breadcrumbs material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-material-dark-default.png)
 
-![capacitor-breadcrumbs ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-breadcrumbs default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-ios-light-default.png)
 
-![capacitor-breadcrumbs material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-breadcrumbs alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs/mobile-page-material-dark-alternate.png)
 
 ## capacitor-breadcrumbs-collapsed
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-breadcrumbs-collapsed ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs-collapsed ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs-collapsed material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-material-light-default.png)
 
-![capacitor-breadcrumbs-collapsed material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-material-dark-default.png)
 
-![capacitor-breadcrumbs-collapsed ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs-collapsed ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-breadcrumbs-collapsed default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-ios-light-default.png)
 
-![capacitor-breadcrumbs-collapsed material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs-collapsed material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs-collapsed default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs-collapsed default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs-collapsed default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs-collapsed default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-breadcrumbs-collapsed alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs-collapsed alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs-collapsed alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs-collapsed alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs-collapsed alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-collapsed/mobile-page-material-dark-alternate.png)
 
 ## capacitor-breadcrumbs-item
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-breadcrumbs-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-material-light-default.png)
 
-![capacitor-breadcrumbs-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-material-dark-default.png)
 
-![capacitor-breadcrumbs-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-breadcrumbs-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-ios-light-default.png)
 
-![capacitor-breadcrumbs-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-breadcrumbs-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-item/mobile-page-material-dark-alternate.png)
 
 ## capacitor-breadcrumbs-separator
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-breadcrumbs-separator ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs-separator ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs-separator material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-material-light-default.png)
 
-![capacitor-breadcrumbs-separator material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-material-dark-default.png)
 
-![capacitor-breadcrumbs-separator ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-ios-light-default.png)
 
-![capacitor-breadcrumbs-separator ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-breadcrumbs-separator default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-ios-light-default.png)
 
-![capacitor-breadcrumbs-separator material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-ios-dark-default.png)
 
-![capacitor-breadcrumbs-separator material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs-separator default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs-separator default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs-separator default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs-separator default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-breadcrumbs-separator alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-breadcrumbs-separator alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-breadcrumbs-separator alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-breadcrumbs-separator alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-breadcrumbs-separator alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-breadcrumbs-separator/mobile-page-material-dark-alternate.png)
 
 ## capacitor-button
 
-### desktop ios-light
+### solid (Solid)
 
-![capacitor-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-solid.png)
 
-![capacitor-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-solid.png)
 
-![capacitor-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-solid.png)
 
-![capacitor-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-solid.png)
 
-![capacitor-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-solid.png)
 
-![capacitor-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-button solid page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-solid.png)
 
-![capacitor-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-solid.png)
 
-![capacitor-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-button solid page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-solid.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-solid.png)
+
+#### mobile material-light (page)
+
+![capacitor-button solid page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-solid.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button solid frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-solid.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button solid page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-solid.png)
+
+### outline (Outline)
+
+#### desktop ios-light (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-outline.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-outline.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-outline.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-outline.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-outline.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-outline.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-outline.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-outline.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-outline.png)
+
+#### mobile material-light (page)
+
+![capacitor-button outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-outline.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-outline.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-outline.png)
+
+### clear (Clear)
+
+#### desktop ios-light (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-clear.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-clear.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-clear.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-clear.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-clear.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button clear page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-clear.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-clear.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button clear page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-clear.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-clear.png)
+
+#### mobile material-light (page)
+
+![capacitor-button clear page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-clear.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button clear frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-clear.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button clear page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-clear.png)
+
+### tonal (Tonal)
+
+#### desktop ios-light (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-tonal.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-tonal.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-tonal.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-tonal.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-tonal.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button tonal page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-tonal.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-tonal.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button tonal page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-tonal.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-tonal.png)
+
+#### mobile material-light (page)
+
+![capacitor-button tonal page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-tonal.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button tonal frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-tonal.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button tonal page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-tonal.png)
+
+### small (Small)
+
+#### desktop ios-light (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-small.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-small.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-small.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-small.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-small.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button small page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-small.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-small.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button small page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-small.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-small.png)
+
+#### mobile material-light (page)
+
+![capacitor-button small page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-small.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button small frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-small.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button small page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-small.png)
+
+### large (Large)
+
+#### desktop ios-light (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-large.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-large.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-large.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-large.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-large.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button large page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-large.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-large.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button large page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-large.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-large.png)
+
+#### mobile material-light (page)
+
+![capacitor-button large page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-large.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button large frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-large.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button large page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-large.png)
+
+### raised (Raised)
+
+#### desktop ios-light (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-raised.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-raised.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-raised.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-raised.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-raised.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button raised page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-raised.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-raised.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button raised page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-raised.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-raised.png)
+
+#### mobile material-light (page)
+
+![capacitor-button raised page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-raised.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button raised frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-raised.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button raised page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-raised.png)
+
+### disabled (Disabled)
+
+#### desktop ios-light (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-disabled.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-disabled.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-disabled.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-disabled.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-disabled.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-disabled.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-disabled.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-disabled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-disabled.png)
+
+#### mobile material-light (page)
+
+![capacitor-button disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-disabled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-disabled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-disabled.png)
+
+### with-icon (With icon)
+
+#### desktop ios-light (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-with-icon.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-with-icon.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-with-icon.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-with-icon.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-with-icon.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button with-icon page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-with-icon.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-with-icon.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button with-icon page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-with-icon.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-with-icon.png)
+
+#### mobile material-light (page)
+
+![capacitor-button with-icon page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-with-icon.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button with-icon frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-with-icon.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button with-icon page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-with-icon.png)
+
+### block (Block)
+
+#### desktop ios-light (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-block.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-block.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-block.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-block.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-block.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button block page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-block.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-block.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button block page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-block.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-block.png)
+
+#### mobile material-light (page)
+
+![capacitor-button block page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-block.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button block frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-block.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button block page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-block.png)
+
+### fill-color (Fill color)
+
+#### desktop ios-light (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-fill-color.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-fill-color.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-fill-color.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-fill-color.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-fill-color.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button fill-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-fill-color.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-fill-color.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button fill-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-fill-color.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-fill-color.png)
+
+#### mobile material-light (page)
+
+![capacitor-button fill-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-fill-color.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button fill-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-fill-color.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button fill-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-fill-color.png)
+
+### outline-color (Outline color)
+
+#### desktop ios-light (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-light-outline-color.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-ios-dark-outline-color.png)
+
+#### desktop material-light (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-light-outline-color.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/desktop-frame-material-dark-outline-color.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-light-outline-color.png)
+
+#### mobile ios-light (page)
+
+![capacitor-button outline-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-light-outline-color.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-ios-dark-outline-color.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-button outline-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-ios-dark-outline-color.png)
+
+#### mobile material-light (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-light-outline-color.png)
+
+#### mobile material-light (page)
+
+![capacitor-button outline-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-light-outline-color.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-button outline-color frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-frame-material-dark-outline-color.png)
+
+#### mobile material-dark (page)
+
+![capacitor-button outline-color page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-button/mobile-page-material-dark-outline-color.png)
 
 ## capacitor-card
 
-### desktop ios-light
+### feed (Feed card)
 
-![capacitor-card ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-ios-light-feed.png)
 
-![capacitor-card ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-ios-dark-feed.png)
 
-![capacitor-card material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-material-light-feed.png)
 
-![capacitor-card material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-material-dark-feed.png)
 
-![capacitor-card ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-ios-light-feed.png)
 
-![capacitor-card ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-card feed page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-ios-light-feed.png)
 
-![capacitor-card material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-ios-dark-feed.png)
 
-![capacitor-card material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-card feed page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-ios-dark-feed.png)
+
+#### mobile material-light (frame)
+
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-material-light-feed.png)
+
+#### mobile material-light (page)
+
+![capacitor-card feed page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-material-light-feed.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-card feed frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-material-dark-feed.png)
+
+#### mobile material-dark (page)
+
+![capacitor-card feed page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-material-dark-feed.png)
+
+### media (Media card)
+
+#### desktop ios-light (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-ios-light-media.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-ios-dark-media.png)
+
+#### desktop material-light (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-material-light-media.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-material-dark-media.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-ios-light-media.png)
+
+#### mobile ios-light (page)
+
+![capacitor-card media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-ios-light-media.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-ios-dark-media.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-card media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-ios-dark-media.png)
+
+#### mobile material-light (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-material-light-media.png)
+
+#### mobile material-light (page)
+
+![capacitor-card media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-material-light-media.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-card media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-material-dark-media.png)
+
+#### mobile material-dark (page)
+
+![capacitor-card media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-material-dark-media.png)
+
+### outline (Outline card)
+
+#### desktop ios-light (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-ios-light-outline.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-ios-dark-outline.png)
+
+#### desktop material-light (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-material-light-outline.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/desktop-frame-material-dark-outline.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-ios-light-outline.png)
+
+#### mobile ios-light (page)
+
+![capacitor-card outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-ios-light-outline.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-ios-dark-outline.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-card outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-ios-dark-outline.png)
+
+#### mobile material-light (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-material-light-outline.png)
+
+#### mobile material-light (page)
+
+![capacitor-card outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-material-light-outline.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-card outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-frame-material-dark-outline.png)
+
+#### mobile material-dark (page)
+
+![capacitor-card outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-card/mobile-page-material-dark-outline.png)
 
 ## capacitor-checkbox
 
-### desktop ios-light
+### off (Off)
 
-![capacitor-checkbox ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-ios-light-off.png)
 
-![capacitor-checkbox ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-ios-dark-off.png)
 
-![capacitor-checkbox material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-material-light-off.png)
 
-![capacitor-checkbox material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-material-dark-off.png)
 
-![capacitor-checkbox ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-ios-light-off.png)
 
-![capacitor-checkbox ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-checkbox off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-ios-light-off.png)
 
-![capacitor-checkbox material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-ios-dark-off.png)
 
-![capacitor-checkbox material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-checkbox off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-ios-dark-off.png)
+
+#### mobile material-light (frame)
+
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-material-light-off.png)
+
+#### mobile material-light (page)
+
+![capacitor-checkbox off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-material-light-off.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-checkbox off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-material-dark-off.png)
+
+#### mobile material-dark (page)
+
+![capacitor-checkbox off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-material-dark-off.png)
+
+### on (On)
+
+#### desktop ios-light (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-ios-light-on.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-ios-dark-on.png)
+
+#### desktop material-light (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-material-light-on.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-material-dark-on.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-ios-light-on.png)
+
+#### mobile ios-light (page)
+
+![capacitor-checkbox on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-ios-light-on.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-ios-dark-on.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-checkbox on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-ios-dark-on.png)
+
+#### mobile material-light (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-material-light-on.png)
+
+#### mobile material-light (page)
+
+![capacitor-checkbox on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-material-light-on.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-checkbox on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-material-dark-on.png)
+
+#### mobile material-dark (page)
+
+![capacitor-checkbox on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-material-dark-on.png)
+
+### disabled (Disabled)
+
+#### desktop ios-light (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-ios-light-disabled.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-ios-dark-disabled.png)
+
+#### desktop material-light (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-material-light-disabled.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/desktop-frame-material-dark-disabled.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-ios-light-disabled.png)
+
+#### mobile ios-light (page)
+
+![capacitor-checkbox disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-ios-light-disabled.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-ios-dark-disabled.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-checkbox disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-ios-dark-disabled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-material-light-disabled.png)
+
+#### mobile material-light (page)
+
+![capacitor-checkbox disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-material-light-disabled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-checkbox disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-frame-material-dark-disabled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-checkbox disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-checkbox/mobile-page-material-dark-disabled.png)
 
 ## capacitor-chip
 
-### desktop ios-light
+### filled (Filled)
 
-![capacitor-chip ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-ios-light-filled.png)
 
-![capacitor-chip ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-ios-dark-filled.png)
 
-![capacitor-chip material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-material-light-filled.png)
 
-![capacitor-chip material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-material-dark-filled.png)
 
-![capacitor-chip ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-ios-light-filled.png)
 
-![capacitor-chip ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-chip filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-ios-light-filled.png)
 
-![capacitor-chip material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-ios-dark-filled.png)
 
-![capacitor-chip material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-chip filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-ios-dark-filled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-material-light-filled.png)
+
+#### mobile material-light (page)
+
+![capacitor-chip filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-material-light-filled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-chip filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-material-dark-filled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-chip filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-material-dark-filled.png)
+
+### removable (Removable)
+
+#### desktop ios-light (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-ios-light-removable.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-ios-dark-removable.png)
+
+#### desktop material-light (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-material-light-removable.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-material-dark-removable.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-ios-light-removable.png)
+
+#### mobile ios-light (page)
+
+![capacitor-chip removable page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-ios-light-removable.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-ios-dark-removable.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-chip removable page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-ios-dark-removable.png)
+
+#### mobile material-light (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-material-light-removable.png)
+
+#### mobile material-light (page)
+
+![capacitor-chip removable page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-material-light-removable.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-chip removable frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-material-dark-removable.png)
+
+#### mobile material-dark (page)
+
+![capacitor-chip removable page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-material-dark-removable.png)
+
+### outline (Outline)
+
+#### desktop ios-light (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-ios-light-outline.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-ios-dark-outline.png)
+
+#### desktop material-light (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-material-light-outline.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/desktop-frame-material-dark-outline.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-ios-light-outline.png)
+
+#### mobile ios-light (page)
+
+![capacitor-chip outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-ios-light-outline.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-ios-dark-outline.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-chip outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-ios-dark-outline.png)
+
+#### mobile material-light (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-material-light-outline.png)
+
+#### mobile material-light (page)
+
+![capacitor-chip outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-material-light-outline.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-chip outline frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-frame-material-dark-outline.png)
+
+#### mobile material-dark (page)
+
+![capacitor-chip outline page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-chip/mobile-page-material-dark-outline.png)
 
 ## capacitor-datetime
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-datetime ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-ios-light-default.png)
 
-![capacitor-datetime ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-ios-dark-default.png)
 
-![capacitor-datetime material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-material-light-default.png)
 
-![capacitor-datetime material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-material-dark-default.png)
 
-![capacitor-datetime ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-ios-light-default.png)
 
-![capacitor-datetime ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-datetime default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-ios-light-default.png)
 
-![capacitor-datetime material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-ios-dark-default.png)
 
-![capacitor-datetime material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-datetime default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-datetime default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-datetime default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-datetime default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-datetime alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-datetime alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-datetime alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-datetime alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-datetime alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-datetime/mobile-page-material-dark-alternate.png)
 
 ## capacitor-dialog
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-dialog ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-ios-light-screen.png)
 
-![capacitor-dialog ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-ios-dark-screen.png)
 
-![capacitor-dialog material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-material-light-screen.png)
 
-![capacitor-dialog material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-material-dark-screen.png)
 
-![capacitor-dialog ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-ios-light-screen.png)
 
-![capacitor-dialog ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-dialog screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-ios-light-screen.png)
 
-![capacitor-dialog material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-ios-dark-screen.png)
 
-![capacitor-dialog material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-dialog screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-dialog screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-dialog screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-dialog screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-material-dark-screen.png)
+
+### open (Open)
+
+#### desktop ios-light (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-ios-light-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-ios-dark-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-material-light-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/desktop-frame-material-dark-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-ios-light-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-dialog open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-ios-light-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-ios-dark-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-dialog open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-ios-dark-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-material-light-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-dialog open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-material-light-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-dialog open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-frame-material-dark-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-dialog open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog/mobile-page-material-dark-open.png)
 
 ## capacitor-dialog-button
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-dialog-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-ios-light-default.png)
 
-![capacitor-dialog-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-ios-dark-default.png)
 
-![capacitor-dialog-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-material-light-default.png)
 
-![capacitor-dialog-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-material-dark-default.png)
 
-![capacitor-dialog-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-ios-light-default.png)
 
-![capacitor-dialog-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-dialog-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-ios-light-default.png)
 
-![capacitor-dialog-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-ios-dark-default.png)
 
-![capacitor-dialog-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-dialog-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-dialog-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-dialog-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-dialog-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-dialog-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-dialog-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-dialog-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-dialog-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-dialog-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-dialog-button/mobile-page-material-dark-alternate.png)
 
 ## capacitor-fab
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-fab ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-ios-light-default.png)
 
-![capacitor-fab ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-ios-dark-default.png)
 
-![capacitor-fab material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-material-light-default.png)
 
-![capacitor-fab material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-material-dark-default.png)
 
-![capacitor-fab ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-ios-light-default.png)
 
-![capacitor-fab ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-fab default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-ios-light-default.png)
 
-![capacitor-fab material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-ios-dark-default.png)
 
-![capacitor-fab material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-fab default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-fab default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-fab default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-fab default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-fab alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-fab alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-fab alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-fab alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-fab alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-fab/mobile-page-material-dark-alternate.png)
 
 ## capacitor-footer
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-footer ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-ios-light-default.png)
 
-![capacitor-footer ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-ios-dark-default.png)
 
-![capacitor-footer material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-material-light-default.png)
 
-![capacitor-footer material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-material-dark-default.png)
 
-![capacitor-footer ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-ios-light-default.png)
 
-![capacitor-footer ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-ios-light-default.png)
 
-![capacitor-footer material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-ios-dark-default.png)
 
-![capacitor-footer material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-footer default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-footer default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-footer alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-footer alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-footer/mobile-page-material-dark-alternate.png)
 
 ## capacitor-header
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-header ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-ios-light-default.png)
 
-![capacitor-header ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-ios-dark-default.png)
 
-![capacitor-header material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-material-light-default.png)
 
-![capacitor-header material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-material-dark-default.png)
 
-![capacitor-header ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-ios-light-default.png)
 
-![capacitor-header ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-ios-light-default.png)
 
-![capacitor-header material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-ios-dark-default.png)
 
-![capacitor-header material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-header default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-header default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-header alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-header alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-header/mobile-page-material-dark-alternate.png)
 
 ## capacitor-icon
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-icon ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-ios-light-default.png)
 
-![capacitor-icon ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-ios-dark-default.png)
 
-![capacitor-icon material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-material-light-default.png)
 
-![capacitor-icon material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-material-dark-default.png)
 
-![capacitor-icon ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-ios-light-default.png)
 
-![capacitor-icon ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-icon default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-ios-light-default.png)
 
-![capacitor-icon material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-ios-dark-default.png)
 
-![capacitor-icon material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-icon default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-icon default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-icon default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-icon default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-icon alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-icon alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-icon alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-icon alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-icon alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-icon/mobile-page-material-dark-alternate.png)
 
 ## capacitor-infinite-scroll
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-infinite-scroll ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-ios-light-default.png)
 
-![capacitor-infinite-scroll ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-ios-dark-default.png)
 
-![capacitor-infinite-scroll material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-material-light-default.png)
 
-![capacitor-infinite-scroll material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-material-dark-default.png)
 
-![capacitor-infinite-scroll ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-ios-light-default.png)
 
-![capacitor-infinite-scroll ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-infinite-scroll default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-ios-light-default.png)
 
-![capacitor-infinite-scroll material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-ios-dark-default.png)
 
-![capacitor-infinite-scroll material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-infinite-scroll default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-infinite-scroll default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-infinite-scroll default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-infinite-scroll default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-infinite-scroll alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-infinite-scroll alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-infinite-scroll alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-infinite-scroll alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-infinite-scroll alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-infinite-scroll/mobile-page-material-dark-alternate.png)
 
 ## capacitor-input-otp
 
-### desktop ios-light
+### empty (Empty)
 
-![capacitor-input-otp ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-ios-light-empty.png)
 
-![capacitor-input-otp ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-ios-dark-empty.png)
 
-![capacitor-input-otp material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-material-light-empty.png)
 
-![capacitor-input-otp material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-material-dark-empty.png)
 
-![capacitor-input-otp ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-ios-light-empty.png)
 
-![capacitor-input-otp ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-input-otp empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-ios-light-empty.png)
 
-![capacitor-input-otp material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-ios-dark-empty.png)
 
-![capacitor-input-otp material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-input-otp empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-ios-dark-empty.png)
+
+#### mobile material-light (frame)
+
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-material-light-empty.png)
+
+#### mobile material-light (page)
+
+![capacitor-input-otp empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-material-light-empty.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-input-otp empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-material-dark-empty.png)
+
+#### mobile material-dark (page)
+
+![capacitor-input-otp empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-material-dark-empty.png)
+
+### filled (Filled)
+
+#### desktop ios-light (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-ios-light-filled.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-ios-dark-filled.png)
+
+#### desktop material-light (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-material-light-filled.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/desktop-frame-material-dark-filled.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-ios-light-filled.png)
+
+#### mobile ios-light (page)
+
+![capacitor-input-otp filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-ios-light-filled.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-ios-dark-filled.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-input-otp filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-ios-dark-filled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-material-light-filled.png)
+
+#### mobile material-light (page)
+
+![capacitor-input-otp filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-material-light-filled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-input-otp filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-frame-material-dark-filled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-input-otp filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-input-otp/mobile-page-material-dark-filled.png)
 
 ## capacitor-item-sliding
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-item-sliding ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-ios-light-default.png)
 
-![capacitor-item-sliding ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-ios-dark-default.png)
 
-![capacitor-item-sliding material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-material-light-default.png)
 
-![capacitor-item-sliding material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-material-dark-default.png)
 
-![capacitor-item-sliding ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-ios-light-default.png)
 
-![capacitor-item-sliding ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-item-sliding default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-ios-light-default.png)
 
-![capacitor-item-sliding material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-ios-dark-default.png)
 
-![capacitor-item-sliding material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-item-sliding default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-item-sliding default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-item-sliding default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-item-sliding default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-item-sliding alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-item-sliding alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-item-sliding alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-item-sliding alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-item-sliding alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-item-sliding/mobile-page-material-dark-alternate.png)
 
 ## capacitor-link
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-link ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-ios-light-default.png)
 
-![capacitor-link ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-ios-dark-default.png)
 
-![capacitor-link material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-material-light-default.png)
 
-![capacitor-link material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-material-dark-default.png)
 
-![capacitor-link ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-ios-light-default.png)
 
-![capacitor-link ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-ios-light-default.png)
 
-![capacitor-link material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-ios-dark-default.png)
 
-![capacitor-link material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-link/mobile-page-material-dark-alternate.png)
 
 ## capacitor-list
 
-### desktop ios-light
+### inset (Inset list)
 
-![capacitor-list ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-ios-light-inset.png)
 
-![capacitor-list ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-ios-dark-inset.png)
 
-![capacitor-list material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-material-light-inset.png)
 
-![capacitor-list material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-material-dark-inset.png)
 
-![capacitor-list ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-ios-light-inset.png)
 
-![capacitor-list ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-list inset page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-ios-light-inset.png)
 
-![capacitor-list material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-ios-dark-inset.png)
 
-![capacitor-list material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-list inset page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-ios-dark-inset.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-material-light-inset.png)
+
+#### mobile material-light (page)
+
+![capacitor-list inset page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-material-light-inset.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list inset frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-material-dark-inset.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list inset page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-material-dark-inset.png)
+
+### buttons (List buttons)
+
+#### desktop ios-light (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-ios-light-buttons.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-ios-dark-buttons.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-material-light-buttons.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-material-dark-buttons.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-ios-light-buttons.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list buttons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-ios-light-buttons.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-ios-dark-buttons.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list buttons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-ios-dark-buttons.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-material-light-buttons.png)
+
+#### mobile material-light (page)
+
+![capacitor-list buttons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-material-light-buttons.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list buttons frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-material-dark-buttons.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list buttons page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-material-dark-buttons.png)
+
+### media (Media rows)
+
+#### desktop ios-light (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-ios-light-media.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-ios-dark-media.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-material-light-media.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/desktop-frame-material-dark-media.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-ios-light-media.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-ios-light-media.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-ios-dark-media.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-ios-dark-media.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-material-light-media.png)
+
+#### mobile material-light (page)
+
+![capacitor-list media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-material-light-media.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list media frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-frame-material-dark-media.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list media page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list/mobile-page-material-dark-media.png)
 
 ## capacitor-list-button
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-list-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-ios-light-default.png)
 
-![capacitor-list-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-ios-dark-default.png)
 
-![capacitor-list-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-material-light-default.png)
 
-![capacitor-list-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-material-dark-default.png)
 
-![capacitor-list-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-ios-light-default.png)
 
-![capacitor-list-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-list-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-ios-light-default.png)
 
-![capacitor-list-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-ios-dark-default.png)
 
-![capacitor-list-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-list-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-button default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-button default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-button alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-button alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-button/mobile-page-material-dark-alternate.png)
 
 ## capacitor-list-group
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-list-group ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-ios-light-default.png)
 
-![capacitor-list-group ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-ios-dark-default.png)
 
-![capacitor-list-group material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-material-light-default.png)
 
-![capacitor-list-group material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-material-dark-default.png)
 
-![capacitor-list-group ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-ios-light-default.png)
 
-![capacitor-list-group ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-list-group default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-ios-light-default.png)
 
-![capacitor-list-group material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-ios-dark-default.png)
 
-![capacitor-list-group material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-list-group default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-group default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-group default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-group default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list-group alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list-group alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-group alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-group alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-group alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-group/mobile-page-material-dark-alternate.png)
 
 ## capacitor-list-input
 
-### desktop ios-light
+### empty (Empty)
 
-![capacitor-list-input ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-ios-light-empty.png)
 
-![capacitor-list-input ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-ios-dark-empty.png)
 
-![capacitor-list-input material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-material-light-empty.png)
 
-![capacitor-list-input material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-material-dark-empty.png)
 
-![capacitor-list-input ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-ios-light-empty.png)
 
-![capacitor-list-input ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-list-input empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-ios-light-empty.png)
 
-![capacitor-list-input material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-ios-dark-empty.png)
 
-![capacitor-list-input material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-list-input empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-ios-dark-empty.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-material-light-empty.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-input empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-material-light-empty.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-input empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-material-dark-empty.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-input empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-material-dark-empty.png)
+
+### filled (Filled)
+
+#### desktop ios-light (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-ios-light-filled.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-ios-dark-filled.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-material-light-filled.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-material-dark-filled.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-ios-light-filled.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list-input filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-ios-light-filled.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-ios-dark-filled.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list-input filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-ios-dark-filled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-material-light-filled.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-input filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-material-light-filled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-input filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-material-dark-filled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-input filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-material-dark-filled.png)
+
+### focused (Focused)
+
+#### desktop ios-light (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-ios-light-focused.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-ios-dark-focused.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-material-light-focused.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/desktop-frame-material-dark-focused.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-ios-light-focused.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list-input focused page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-ios-light-focused.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-ios-dark-focused.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list-input focused page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-ios-dark-focused.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-material-light-focused.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-input focused page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-material-light-focused.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-input focused frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-frame-material-dark-focused.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-input focused page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-input/mobile-page-material-dark-focused.png)
 
 ## capacitor-list-item
 
-### desktop ios-light
+### standard (Standard)
 
-![capacitor-list-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-light-standard.png)
 
-![capacitor-list-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-dark-standard.png)
 
-![capacitor-list-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-light-standard.png)
 
-![capacitor-list-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-dark-standard.png)
 
-![capacitor-list-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-light-standard.png)
 
-![capacitor-list-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-list-item standard page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-light-standard.png)
 
-![capacitor-list-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-dark-standard.png)
 
-![capacitor-list-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-list-item standard page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-dark-standard.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-light-standard.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-item standard page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-light-standard.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-item standard frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-dark-standard.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-item standard page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-dark-standard.png)
+
+### chevron (Chevron link)
+
+#### desktop ios-light (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-light-chevron.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-dark-chevron.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-light-chevron.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-dark-chevron.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-light-chevron.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list-item chevron page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-light-chevron.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-dark-chevron.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list-item chevron page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-dark-chevron.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-light-chevron.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-item chevron page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-light-chevron.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-item chevron frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-dark-chevron.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-item chevron page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-dark-chevron.png)
+
+### toggle-after (Toggle after)
+
+#### desktop ios-light (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-light-toggle-after.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-dark-toggle-after.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-light-toggle-after.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-dark-toggle-after.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-light-toggle-after.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list-item toggle-after page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-light-toggle-after.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-dark-toggle-after.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list-item toggle-after page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-dark-toggle-after.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-light-toggle-after.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-item toggle-after page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-light-toggle-after.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-item toggle-after frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-dark-toggle-after.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-item toggle-after page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-dark-toggle-after.png)
+
+### badge (Badge)
+
+#### desktop ios-light (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-light-badge.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-ios-dark-badge.png)
+
+#### desktop material-light (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-light-badge.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/desktop-frame-material-dark-badge.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-light-badge.png)
+
+#### mobile ios-light (page)
+
+![capacitor-list-item badge page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-light-badge.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-ios-dark-badge.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-list-item badge page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-ios-dark-badge.png)
+
+#### mobile material-light (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-light-badge.png)
+
+#### mobile material-light (page)
+
+![capacitor-list-item badge page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-light-badge.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-list-item badge frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-frame-material-dark-badge.png)
+
+#### mobile material-dark (page)
+
+![capacitor-list-item badge page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-list-item/mobile-page-material-dark-badge.png)
 
 ## capacitor-menu-list
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-menu-list ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-ios-light-default.png)
 
-![capacitor-menu-list ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-ios-dark-default.png)
 
-![capacitor-menu-list material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-material-light-default.png)
 
-![capacitor-menu-list material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-material-dark-default.png)
 
-![capacitor-menu-list ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-ios-light-default.png)
 
-![capacitor-menu-list ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-menu-list default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-ios-light-default.png)
 
-![capacitor-menu-list material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-ios-dark-default.png)
 
-![capacitor-menu-list material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-menu-list default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-menu-list default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-menu-list default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-menu-list default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-menu-list alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-menu-list alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-menu-list alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-menu-list alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-menu-list alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list/mobile-page-material-dark-alternate.png)
 
 ## capacitor-menu-list-item
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-menu-list-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-ios-light-default.png)
 
-![capacitor-menu-list-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-ios-dark-default.png)
 
-![capacitor-menu-list-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-material-light-default.png)
 
-![capacitor-menu-list-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-material-dark-default.png)
 
-![capacitor-menu-list-item ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-ios-light-default.png)
 
-![capacitor-menu-list-item ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-menu-list-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-ios-light-default.png)
 
-![capacitor-menu-list-item material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-ios-dark-default.png)
 
-![capacitor-menu-list-item material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-menu-list-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-menu-list-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-menu-list-item default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-menu-list-item default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-menu-list-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-menu-list-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-menu-list-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-menu-list-item alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-menu-list-item alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-menu-list-item/mobile-page-material-dark-alternate.png)
 
 ## capacitor-message
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-message ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-ios-light-default.png)
 
-![capacitor-message ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-ios-dark-default.png)
 
-![capacitor-message material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-material-light-default.png)
 
-![capacitor-message material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-material-dark-default.png)
 
-![capacitor-message ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-ios-light-default.png)
 
-![capacitor-message ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-message default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-ios-light-default.png)
 
-![capacitor-message material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-ios-dark-default.png)
 
-![capacitor-message material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-message default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-message default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-message default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-message default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-message alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-message alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-message alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-message alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-message alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-message/mobile-page-material-dark-alternate.png)
 
 ## capacitor-messagebar
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-messagebar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-ios-light-default.png)
 
-![capacitor-messagebar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-ios-dark-default.png)
 
-![capacitor-messagebar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-material-light-default.png)
 
-![capacitor-messagebar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-material-dark-default.png)
 
-![capacitor-messagebar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-ios-light-default.png)
 
-![capacitor-messagebar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-messagebar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-ios-light-default.png)
 
-![capacitor-messagebar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-ios-dark-default.png)
 
-![capacitor-messagebar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-messagebar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-messagebar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-messagebar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-messagebar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-messagebar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-messagebar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-messagebar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-messagebar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-messagebar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messagebar/mobile-page-material-dark-alternate.png)
 
 ## capacitor-messages
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-messages ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-ios-light-default.png)
 
-![capacitor-messages ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-ios-dark-default.png)
 
-![capacitor-messages material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-material-light-default.png)
 
-![capacitor-messages material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-material-dark-default.png)
 
-![capacitor-messages ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-ios-light-default.png)
 
-![capacitor-messages ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-messages default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-ios-light-default.png)
 
-![capacitor-messages material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-ios-dark-default.png)
 
-![capacitor-messages material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-messages default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-messages default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-messages default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-messages default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-messages alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-messages alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-messages alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-messages alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-messages alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages/mobile-page-material-dark-alternate.png)
 
 ## capacitor-messages-title
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-messages-title ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-ios-light-default.png)
 
-![capacitor-messages-title ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-ios-dark-default.png)
 
-![capacitor-messages-title material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-material-light-default.png)
 
-![capacitor-messages-title material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-material-dark-default.png)
 
-![capacitor-messages-title ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-ios-light-default.png)
 
-![capacitor-messages-title ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-messages-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-ios-light-default.png)
 
-![capacitor-messages-title material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-ios-dark-default.png)
 
-![capacitor-messages-title material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-messages-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-messages-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-messages-title default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-messages-title default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-messages-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-messages-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-messages-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-messages-title alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-messages-title alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-messages-title/mobile-page-material-dark-alternate.png)
 
 ## capacitor-modal
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-modal ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-ios-light-default.png)
 
-![capacitor-modal ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-ios-dark-default.png)
 
-![capacitor-modal material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-material-light-default.png)
 
-![capacitor-modal material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-material-dark-default.png)
 
-![capacitor-modal ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-ios-light-default.png)
 
-![capacitor-modal ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-modal default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-ios-light-default.png)
 
-![capacitor-modal material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-ios-dark-default.png)
 
-![capacitor-modal material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-modal default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-modal default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-modal default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-modal default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-modal alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-modal alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-modal alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-modal alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-modal alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-modal/mobile-page-material-dark-alternate.png)
 
 ## capacitor-navbar
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-navbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-ios-light-default.png)
 
-![capacitor-navbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-ios-dark-default.png)
 
-![capacitor-navbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-material-light-default.png)
 
-![capacitor-navbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-material-dark-default.png)
 
-![capacitor-navbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-ios-light-default.png)
 
-![capacitor-navbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-navbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-ios-light-default.png)
 
-![capacitor-navbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-ios-dark-default.png)
 
-![capacitor-navbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-navbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-navbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-navbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-navbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-navbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-navbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-navbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-navbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-navbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar/mobile-page-material-dark-alternate.png)
 
 ## capacitor-navbar-back-link
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-navbar-back-link ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-ios-light-default.png)
 
-![capacitor-navbar-back-link ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-ios-dark-default.png)
 
-![capacitor-navbar-back-link material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-material-light-default.png)
 
-![capacitor-navbar-back-link material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-material-dark-default.png)
 
-![capacitor-navbar-back-link ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-ios-light-default.png)
 
-![capacitor-navbar-back-link ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-navbar-back-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-ios-light-default.png)
 
-![capacitor-navbar-back-link material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-ios-dark-default.png)
 
-![capacitor-navbar-back-link material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-navbar-back-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-navbar-back-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-navbar-back-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-navbar-back-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-navbar-back-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-navbar-back-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-navbar-back-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-navbar-back-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-navbar-back-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-navbar-back-link/mobile-page-material-dark-alternate.png)
 
 ## capacitor-note
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-note ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-ios-light-default.png)
 
-![capacitor-note ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-ios-dark-default.png)
 
-![capacitor-note material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-material-light-default.png)
 
-![capacitor-note material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-material-dark-default.png)
 
-![capacitor-note ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-ios-light-default.png)
 
-![capacitor-note ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-note default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-ios-light-default.png)
 
-![capacitor-note material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-ios-dark-default.png)
 
-![capacitor-note material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-note default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-note default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-note default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-note default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-note alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-note alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-note alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-note alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-note alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-note/mobile-page-material-dark-alternate.png)
 
 ## capacitor-notification
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-notification ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-ios-light-default.png)
 
-![capacitor-notification ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-ios-dark-default.png)
 
-![capacitor-notification material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-material-light-default.png)
 
-![capacitor-notification material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-material-dark-default.png)
 
-![capacitor-notification ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-ios-light-default.png)
 
-![capacitor-notification ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-notification default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-ios-light-default.png)
 
-![capacitor-notification material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-ios-dark-default.png)
 
-![capacitor-notification material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-notification default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-notification default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-notification default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-notification default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-notification alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-notification alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-notification alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-notification alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-notification alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-notification/mobile-page-material-dark-alternate.png)
 
 ## capacitor-page
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-page ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-ios-light-default.png)
 
-![capacitor-page ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-ios-dark-default.png)
 
-![capacitor-page material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-material-light-default.png)
 
-![capacitor-page material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-material-dark-default.png)
 
-![capacitor-page ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-ios-light-default.png)
 
-![capacitor-page ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-page default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-ios-light-default.png)
 
-![capacitor-page material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-ios-dark-default.png)
 
-![capacitor-page material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-page default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-page default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-page default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-page default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-page alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-page alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-page alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-page alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-page alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-page/mobile-page-material-dark-alternate.png)
 
 ## capacitor-panel
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-panel ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-ios-light-screen.png)
 
-![capacitor-panel ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-ios-dark-screen.png)
 
-![capacitor-panel material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-material-light-screen.png)
 
-![capacitor-panel material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-material-dark-screen.png)
 
-![capacitor-panel ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-ios-light-screen.png)
 
-![capacitor-panel ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-panel screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-ios-light-screen.png)
 
-![capacitor-panel material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-ios-dark-screen.png)
 
-![capacitor-panel material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-panel screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-panel screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-panel screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-panel screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-material-dark-screen.png)
+
+### open (Open)
+
+#### desktop ios-light (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-ios-light-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-ios-dark-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-material-light-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/desktop-frame-material-dark-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-ios-light-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-panel open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-ios-light-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-ios-dark-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-panel open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-ios-dark-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-material-light-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-panel open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-material-light-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-panel open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-frame-material-dark-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-panel open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-panel/mobile-page-material-dark-open.png)
 
 ## capacitor-picker
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-picker ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-ios-light-default.png)
 
-![capacitor-picker ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-ios-dark-default.png)
 
-![capacitor-picker material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-material-light-default.png)
 
-![capacitor-picker material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-material-dark-default.png)
 
-![capacitor-picker ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-ios-light-default.png)
 
-![capacitor-picker ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-picker default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-ios-light-default.png)
 
-![capacitor-picker material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-ios-dark-default.png)
 
-![capacitor-picker material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-picker default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-picker default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-picker default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-picker default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-picker alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-picker alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-picker alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-picker alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-picker alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-picker/mobile-page-material-dark-alternate.png)
 
 ## capacitor-popover
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-popover ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-ios-light-screen.png)
 
-![capacitor-popover ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-ios-dark-screen.png)
 
-![capacitor-popover material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-material-light-screen.png)
 
-![capacitor-popover material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-material-dark-screen.png)
 
-![capacitor-popover ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-ios-light-screen.png)
 
-![capacitor-popover ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-popover screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-ios-light-screen.png)
 
-![capacitor-popover material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-ios-dark-screen.png)
 
-![capacitor-popover material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-popover screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-popover screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-popover screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-popover screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-material-dark-screen.png)
+
+### open (Open)
+
+#### desktop ios-light (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-ios-light-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-ios-dark-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-material-light-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/desktop-frame-material-dark-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-ios-light-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-popover open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-ios-light-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-ios-dark-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-popover open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-ios-dark-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-material-light-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-popover open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-material-light-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-popover open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-frame-material-dark-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-popover open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popover/mobile-page-material-dark-open.png)
 
 ## capacitor-popup
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-popup ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-ios-light-screen.png)
 
-![capacitor-popup ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-ios-dark-screen.png)
 
-![capacitor-popup material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-material-light-screen.png)
 
-![capacitor-popup material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-material-dark-screen.png)
 
-![capacitor-popup ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-ios-light-screen.png)
 
-![capacitor-popup ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-popup screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-ios-light-screen.png)
 
-![capacitor-popup material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-ios-dark-screen.png)
 
-![capacitor-popup material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-popup screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-popup screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-popup screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-popup screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-material-dark-screen.png)
+
+### open (Open)
+
+#### desktop ios-light (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-ios-light-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-ios-dark-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-material-light-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/desktop-frame-material-dark-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-ios-light-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-popup open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-ios-light-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-ios-dark-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-popup open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-ios-dark-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-material-light-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-popup open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-material-light-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-popup open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-frame-material-dark-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-popup open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-popup/mobile-page-material-dark-open.png)
 
 ## capacitor-preloader
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-preloader ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-ios-light-default.png)
 
-![capacitor-preloader ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-ios-dark-default.png)
 
-![capacitor-preloader material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-material-light-default.png)
 
-![capacitor-preloader material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-material-dark-default.png)
 
-![capacitor-preloader ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-ios-light-default.png)
 
-![capacitor-preloader ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-preloader default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-ios-light-default.png)
 
-![capacitor-preloader material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-ios-dark-default.png)
 
-![capacitor-preloader material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-preloader default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-preloader default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-preloader default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-preloader default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-preloader alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-preloader alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-preloader alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-preloader alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-preloader alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-preloader/mobile-page-material-dark-alternate.png)
 
 ## capacitor-progressbar
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-progressbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-ios-light-default.png)
 
-![capacitor-progressbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-ios-dark-default.png)
 
-![capacitor-progressbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-material-light-default.png)
 
-![capacitor-progressbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-material-dark-default.png)
 
-![capacitor-progressbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-ios-light-default.png)
 
-![capacitor-progressbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-progressbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-ios-light-default.png)
 
-![capacitor-progressbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-ios-dark-default.png)
 
-![capacitor-progressbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-progressbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-progressbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-progressbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-progressbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-progressbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-progressbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-progressbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-progressbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-progressbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-progressbar/mobile-page-material-dark-alternate.png)
 
 ## capacitor-radio
 
-### desktop ios-light
+### option-a (Option A)
 
-![capacitor-radio ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-ios-light-option-a.png)
 
-![capacitor-radio ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-ios-dark-option-a.png)
 
-![capacitor-radio material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-material-light-option-a.png)
 
-![capacitor-radio material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-material-dark-option-a.png)
 
-![capacitor-radio ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-ios-light-option-a.png)
 
-![capacitor-radio ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-radio option-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-ios-light-option-a.png)
 
-![capacitor-radio material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-ios-dark-option-a.png)
 
-![capacitor-radio material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-radio option-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-ios-dark-option-a.png)
+
+#### mobile material-light (frame)
+
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-material-light-option-a.png)
+
+#### mobile material-light (page)
+
+![capacitor-radio option-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-material-light-option-a.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-radio option-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-material-dark-option-a.png)
+
+#### mobile material-dark (page)
+
+![capacitor-radio option-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-material-dark-option-a.png)
+
+### option-b (Option B)
+
+#### desktop ios-light (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-ios-light-option-b.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-ios-dark-option-b.png)
+
+#### desktop material-light (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-material-light-option-b.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/desktop-frame-material-dark-option-b.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-ios-light-option-b.png)
+
+#### mobile ios-light (page)
+
+![capacitor-radio option-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-ios-light-option-b.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-ios-dark-option-b.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-radio option-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-ios-dark-option-b.png)
+
+#### mobile material-light (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-material-light-option-b.png)
+
+#### mobile material-light (page)
+
+![capacitor-radio option-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-material-light-option-b.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-radio option-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-frame-material-dark-option-b.png)
+
+#### mobile material-dark (page)
+
+![capacitor-radio option-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-radio/mobile-page-material-dark-option-b.png)
 
 ## capacitor-range
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-range ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-ios-light-default.png)
 
-![capacitor-range ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-ios-dark-default.png)
 
-![capacitor-range material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-material-light-default.png)
 
-![capacitor-range material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-material-dark-default.png)
 
-![capacitor-range ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-ios-light-default.png)
 
-![capacitor-range ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-range default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-ios-light-default.png)
 
-![capacitor-range material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-ios-dark-default.png)
 
-![capacitor-range material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-range default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-range default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-range default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-range default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-range alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-range alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-range alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-range alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-range alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-range/mobile-page-material-dark-alternate.png)
 
 ## capacitor-refresher
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-refresher ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-ios-light-default.png)
 
-![capacitor-refresher ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-ios-dark-default.png)
 
-![capacitor-refresher material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-material-light-default.png)
 
-![capacitor-refresher material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-material-dark-default.png)
 
-![capacitor-refresher ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-ios-light-default.png)
 
-![capacitor-refresher ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-refresher default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-ios-light-default.png)
 
-![capacitor-refresher material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-ios-dark-default.png)
 
-![capacitor-refresher material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-refresher default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-refresher default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-refresher default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-refresher default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-refresher alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-refresher alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-refresher alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-refresher alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-refresher alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-refresher/mobile-page-material-dark-alternate.png)
 
 ## capacitor-reorder
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-reorder ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-ios-light-default.png)
 
-![capacitor-reorder ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-ios-dark-default.png)
 
-![capacitor-reorder material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-material-light-default.png)
 
-![capacitor-reorder material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-material-dark-default.png)
 
-![capacitor-reorder ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-ios-light-default.png)
 
-![capacitor-reorder ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-reorder default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-ios-light-default.png)
 
-![capacitor-reorder material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-ios-dark-default.png)
 
-![capacitor-reorder material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-reorder default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-reorder default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-reorder default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-reorder default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-reorder alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-reorder alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-reorder alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-reorder alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-reorder alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-reorder/mobile-page-material-dark-alternate.png)
 
 ## capacitor-searchbar
 
-### desktop ios-light
+### empty (Empty)
 
-![capacitor-searchbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-ios-light-empty.png)
 
-![capacitor-searchbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-ios-dark-empty.png)
 
-![capacitor-searchbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-material-light-empty.png)
 
-![capacitor-searchbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-material-dark-empty.png)
 
-![capacitor-searchbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-ios-light-empty.png)
 
-![capacitor-searchbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-searchbar empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-ios-light-empty.png)
 
-![capacitor-searchbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-ios-dark-empty.png)
 
-![capacitor-searchbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-searchbar empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-ios-dark-empty.png)
+
+#### mobile material-light (frame)
+
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-material-light-empty.png)
+
+#### mobile material-light (page)
+
+![capacitor-searchbar empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-material-light-empty.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-searchbar empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-material-dark-empty.png)
+
+#### mobile material-dark (page)
+
+![capacitor-searchbar empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-material-dark-empty.png)
+
+### filled (Filled)
+
+#### desktop ios-light (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-ios-light-filled.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-ios-dark-filled.png)
+
+#### desktop material-light (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-material-light-filled.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/desktop-frame-material-dark-filled.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-ios-light-filled.png)
+
+#### mobile ios-light (page)
+
+![capacitor-searchbar filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-ios-light-filled.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-ios-dark-filled.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-searchbar filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-ios-dark-filled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-material-light-filled.png)
+
+#### mobile material-light (page)
+
+![capacitor-searchbar filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-material-light-filled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-searchbar filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-frame-material-dark-filled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-searchbar filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-searchbar/mobile-page-material-dark-filled.png)
 
 ## capacitor-segmented
 
-### desktop ios-light
+### one-selected (One selected)
 
-![capacitor-segmented ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-ios-light-one-selected.png)
 
-![capacitor-segmented ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-ios-dark-one-selected.png)
 
-![capacitor-segmented material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-material-light-one-selected.png)
 
-![capacitor-segmented material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-material-dark-one-selected.png)
 
-![capacitor-segmented ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-ios-light-one-selected.png)
 
-![capacitor-segmented ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-segmented one-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-ios-light-one-selected.png)
 
-![capacitor-segmented material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-ios-dark-one-selected.png)
 
-![capacitor-segmented material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-segmented one-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-ios-dark-one-selected.png)
+
+#### mobile material-light (frame)
+
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-material-light-one-selected.png)
+
+#### mobile material-light (page)
+
+![capacitor-segmented one-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-material-light-one-selected.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-segmented one-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-material-dark-one-selected.png)
+
+#### mobile material-dark (page)
+
+![capacitor-segmented one-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-material-dark-one-selected.png)
+
+### two-selected (Two selected)
+
+#### desktop ios-light (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-ios-light-two-selected.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-ios-dark-two-selected.png)
+
+#### desktop material-light (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-material-light-two-selected.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/desktop-frame-material-dark-two-selected.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-ios-light-two-selected.png)
+
+#### mobile ios-light (page)
+
+![capacitor-segmented two-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-ios-light-two-selected.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-ios-dark-two-selected.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-segmented two-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-ios-dark-two-selected.png)
+
+#### mobile material-light (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-material-light-two-selected.png)
+
+#### mobile material-light (page)
+
+![capacitor-segmented two-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-material-light-two-selected.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-segmented two-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-frame-material-dark-two-selected.png)
+
+#### mobile material-dark (page)
+
+![capacitor-segmented two-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented/mobile-page-material-dark-two-selected.png)
 
 ## capacitor-segmented-button
 
-### desktop ios-light
+### a-selected (A selected)
 
-![capacitor-segmented-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-ios-light-a-selected.png)
 
-![capacitor-segmented-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-ios-dark-a-selected.png)
 
-![capacitor-segmented-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-material-light-a-selected.png)
 
-![capacitor-segmented-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-material-dark-a-selected.png)
 
-![capacitor-segmented-button ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-ios-light-a-selected.png)
 
-![capacitor-segmented-button ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-segmented-button a-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-ios-light-a-selected.png)
 
-![capacitor-segmented-button material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-ios-dark-a-selected.png)
 
-![capacitor-segmented-button material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-segmented-button a-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-ios-dark-a-selected.png)
+
+#### mobile material-light (frame)
+
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-material-light-a-selected.png)
+
+#### mobile material-light (page)
+
+![capacitor-segmented-button a-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-material-light-a-selected.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-segmented-button a-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-material-dark-a-selected.png)
+
+#### mobile material-dark (page)
+
+![capacitor-segmented-button a-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-material-dark-a-selected.png)
+
+### b-selected (B selected)
+
+#### desktop ios-light (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-ios-light-b-selected.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-ios-dark-b-selected.png)
+
+#### desktop material-light (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-material-light-b-selected.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/desktop-frame-material-dark-b-selected.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-ios-light-b-selected.png)
+
+#### mobile ios-light (page)
+
+![capacitor-segmented-button b-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-ios-light-b-selected.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-ios-dark-b-selected.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-segmented-button b-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-ios-dark-b-selected.png)
+
+#### mobile material-light (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-material-light-b-selected.png)
+
+#### mobile material-light (page)
+
+![capacitor-segmented-button b-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-material-light-b-selected.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-segmented-button b-selected frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-frame-material-dark-b-selected.png)
+
+#### mobile material-dark (page)
+
+![capacitor-segmented-button b-selected page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-segmented-button/mobile-page-material-dark-b-selected.png)
 
 ## capacitor-select
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-select ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-ios-light-default.png)
 
-![capacitor-select ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-ios-dark-default.png)
 
-![capacitor-select material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-material-light-default.png)
 
-![capacitor-select material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-material-dark-default.png)
 
-![capacitor-select ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-ios-light-default.png)
 
-![capacitor-select ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-select default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-ios-light-default.png)
 
-![capacitor-select material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-ios-dark-default.png)
 
-![capacitor-select material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-select default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-select default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-select default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-select default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-select alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-select alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-select alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-select alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-select alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-select/mobile-page-material-dark-alternate.png)
 
 ## capacitor-sheet
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-sheet ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-ios-light-screen.png)
 
-![capacitor-sheet ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-ios-dark-screen.png)
 
-![capacitor-sheet material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-material-light-screen.png)
 
-![capacitor-sheet material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-material-dark-screen.png)
 
-![capacitor-sheet ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-ios-light-screen.png)
 
-![capacitor-sheet ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-sheet screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-ios-light-screen.png)
 
-![capacitor-sheet material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-ios-dark-screen.png)
 
-![capacitor-sheet material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-sheet screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-sheet screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-sheet screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-sheet screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-material-dark-screen.png)
+
+### open (Open)
+
+#### desktop ios-light (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-ios-light-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-ios-dark-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-material-light-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/desktop-frame-material-dark-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-ios-light-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-sheet open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-ios-light-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-ios-dark-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-sheet open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-ios-dark-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-material-light-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-sheet open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-material-light-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-sheet open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-frame-material-dark-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-sheet open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-sheet/mobile-page-material-dark-open.png)
 
 ## capacitor-skeleton
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-skeleton ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-ios-light-default.png)
 
-![capacitor-skeleton ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-ios-dark-default.png)
 
-![capacitor-skeleton material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-material-light-default.png)
 
-![capacitor-skeleton material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-material-dark-default.png)
 
-![capacitor-skeleton ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-ios-light-default.png)
 
-![capacitor-skeleton ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-skeleton default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-ios-light-default.png)
 
-![capacitor-skeleton material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-ios-dark-default.png)
 
-![capacitor-skeleton material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-skeleton default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-skeleton default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-skeleton default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-skeleton default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-skeleton alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-skeleton alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-skeleton alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-skeleton alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-skeleton alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-skeleton/mobile-page-material-dark-alternate.png)
 
 ## capacitor-split-pane
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-split-pane ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-ios-light-default.png)
 
-![capacitor-split-pane ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-ios-dark-default.png)
 
-![capacitor-split-pane material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-material-light-default.png)
 
-![capacitor-split-pane material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-material-dark-default.png)
 
-![capacitor-split-pane ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-ios-light-default.png)
 
-![capacitor-split-pane ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-split-pane default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-ios-light-default.png)
 
-![capacitor-split-pane material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-ios-dark-default.png)
 
-![capacitor-split-pane material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-split-pane default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-split-pane default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-split-pane default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-split-pane default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-split-pane alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-split-pane alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-split-pane alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-split-pane alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-split-pane alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-split-pane/mobile-page-material-dark-alternate.png)
 
 ## capacitor-stepper
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-stepper ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-ios-light-default.png)
 
-![capacitor-stepper ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-ios-dark-default.png)
 
-![capacitor-stepper material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-material-light-default.png)
 
-![capacitor-stepper material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-material-dark-default.png)
 
-![capacitor-stepper ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-ios-light-default.png)
 
-![capacitor-stepper ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-stepper default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-ios-light-default.png)
 
-![capacitor-stepper material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-ios-dark-default.png)
 
-![capacitor-stepper material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-stepper default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-stepper default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-stepper default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-stepper default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-stepper alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-stepper alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-stepper alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-stepper alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-stepper alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-stepper/mobile-page-material-dark-alternate.png)
 
 ## capacitor-tab
 
-### desktop ios-light
+### tab-a (Tab A selected)
 
-![capacitor-tab ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-ios-light-tab-a.png)
 
-![capacitor-tab ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-ios-dark-tab-a.png)
 
-![capacitor-tab material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-material-light-tab-a.png)
 
-![capacitor-tab material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-material-dark-tab-a.png)
 
-![capacitor-tab ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-ios-light-tab-a.png)
 
-![capacitor-tab ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-tab tab-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-ios-light-tab-a.png)
 
-![capacitor-tab material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-ios-dark-tab-a.png)
 
-![capacitor-tab material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-tab tab-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-ios-dark-tab-a.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-material-light-tab-a.png)
+
+#### mobile material-light (page)
+
+![capacitor-tab tab-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-material-light-tab-a.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tab tab-a frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-material-dark-tab-a.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tab tab-a page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-material-dark-tab-a.png)
+
+### tab-b (Tab B selected)
+
+#### desktop ios-light (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-ios-light-tab-b.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-ios-dark-tab-b.png)
+
+#### desktop material-light (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-material-light-tab-b.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/desktop-frame-material-dark-tab-b.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-ios-light-tab-b.png)
+
+#### mobile ios-light (page)
+
+![capacitor-tab tab-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-ios-light-tab-b.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-ios-dark-tab-b.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-tab tab-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-ios-dark-tab-b.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-material-light-tab-b.png)
+
+#### mobile material-light (page)
+
+![capacitor-tab tab-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-material-light-tab-b.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tab tab-b frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-frame-material-dark-tab-b.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tab tab-b page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tab/mobile-page-material-dark-tab-b.png)
 
 ## capacitor-tabbar
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-tabbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-ios-light-default.png)
 
-![capacitor-tabbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-ios-dark-default.png)
 
-![capacitor-tabbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-material-light-default.png)
 
-![capacitor-tabbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-material-dark-default.png)
 
-![capacitor-tabbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-ios-light-default.png)
 
-![capacitor-tabbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-tabbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-ios-light-default.png)
 
-![capacitor-tabbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-ios-dark-default.png)
 
-![capacitor-tabbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-tabbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-tabbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tabbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tabbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-tabbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-tabbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-tabbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tabbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tabbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar/mobile-page-material-dark-alternate.png)
 
 ## capacitor-tabbar-link
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-tabbar-link ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-ios-light-default.png)
 
-![capacitor-tabbar-link ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-ios-dark-default.png)
 
-![capacitor-tabbar-link material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-material-light-default.png)
 
-![capacitor-tabbar-link material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-material-dark-default.png)
 
-![capacitor-tabbar-link ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-ios-light-default.png)
 
-![capacitor-tabbar-link ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-tabbar-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-ios-light-default.png)
 
-![capacitor-tabbar-link material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-ios-dark-default.png)
 
-![capacitor-tabbar-link material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-tabbar-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-tabbar-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tabbar-link default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tabbar-link default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-tabbar-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-tabbar-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-tabbar-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tabbar-link alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tabbar-link alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabbar-link/mobile-page-material-dark-alternate.png)
 
 ## capacitor-table
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-table ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-ios-light-default.png)
 
-![capacitor-table ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-ios-dark-default.png)
 
-![capacitor-table material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-material-light-default.png)
 
-![capacitor-table material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-material-dark-default.png)
 
-![capacitor-table ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-ios-light-default.png)
 
-![capacitor-table ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-table default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-ios-light-default.png)
 
-![capacitor-table material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-ios-dark-default.png)
 
-![capacitor-table material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-table default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-table default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-table alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-table alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-table alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table/mobile-page-material-dark-alternate.png)
 
 ## capacitor-table-body
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-table-body ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-ios-light-default.png)
 
-![capacitor-table-body ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-ios-dark-default.png)
 
-![capacitor-table-body material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-material-light-default.png)
 
-![capacitor-table-body material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-material-dark-default.png)
 
-![capacitor-table-body ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-ios-light-default.png)
 
-![capacitor-table-body ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-table-body default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-ios-light-default.png)
 
-![capacitor-table-body material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-ios-dark-default.png)
 
-![capacitor-table-body material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-table-body default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-body default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-body default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-body default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-table-body alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-table-body alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-body alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-body alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-body alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-body/mobile-page-material-dark-alternate.png)
 
 ## capacitor-table-cell
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-table-cell ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-ios-light-default.png)
 
-![capacitor-table-cell ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-ios-dark-default.png)
 
-![capacitor-table-cell material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-material-light-default.png)
 
-![capacitor-table-cell material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-material-dark-default.png)
 
-![capacitor-table-cell ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-ios-light-default.png)
 
-![capacitor-table-cell ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-table-cell default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-ios-light-default.png)
 
-![capacitor-table-cell material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-ios-dark-default.png)
 
-![capacitor-table-cell material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-table-cell default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-cell default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-cell default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-cell default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-table-cell alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-table-cell alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-cell alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-cell alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-cell alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-cell/mobile-page-material-dark-alternate.png)
 
 ## capacitor-table-head
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-table-head ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-ios-light-default.png)
 
-![capacitor-table-head ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-ios-dark-default.png)
 
-![capacitor-table-head material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-material-light-default.png)
 
-![capacitor-table-head material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-material-dark-default.png)
 
-![capacitor-table-head ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-ios-light-default.png)
 
-![capacitor-table-head ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-table-head default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-ios-light-default.png)
 
-![capacitor-table-head material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-ios-dark-default.png)
 
-![capacitor-table-head material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-table-head default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-head default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-head default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-head default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-table-head alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-table-head alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-head alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-head alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-head alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-head/mobile-page-material-dark-alternate.png)
 
 ## capacitor-table-row
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-table-row ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-ios-light-default.png)
 
-![capacitor-table-row ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-ios-dark-default.png)
 
-![capacitor-table-row material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-material-light-default.png)
 
-![capacitor-table-row material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-material-dark-default.png)
 
-![capacitor-table-row ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-ios-light-default.png)
 
-![capacitor-table-row ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-table-row default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-ios-light-default.png)
 
-![capacitor-table-row material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-ios-dark-default.png)
 
-![capacitor-table-row material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-table-row default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-row default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-row default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-row default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-table-row alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-table-row alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-table-row alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-table-row alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-table-row alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-table-row/mobile-page-material-dark-alternate.png)
 
 ## capacitor-tabs
 
-### desktop ios-light
+### tab-one (One selected)
 
-![capacitor-tabs ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-ios-light-tab-one.png)
 
-![capacitor-tabs ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-ios-dark-tab-one.png)
 
-![capacitor-tabs material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-material-light-tab-one.png)
 
-![capacitor-tabs material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-material-dark-tab-one.png)
 
-![capacitor-tabs ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-ios-light-tab-one.png)
 
-![capacitor-tabs ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-tabs tab-one page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-ios-light-tab-one.png)
 
-![capacitor-tabs material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-ios-dark-tab-one.png)
 
-![capacitor-tabs material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-tabs tab-one page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-ios-dark-tab-one.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-material-light-tab-one.png)
+
+#### mobile material-light (page)
+
+![capacitor-tabs tab-one page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-material-light-tab-one.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tabs tab-one frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-material-dark-tab-one.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tabs tab-one page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-material-dark-tab-one.png)
+
+### tab-two (Two selected)
+
+#### desktop ios-light (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-ios-light-tab-two.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-ios-dark-tab-two.png)
+
+#### desktop material-light (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-material-light-tab-two.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/desktop-frame-material-dark-tab-two.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-ios-light-tab-two.png)
+
+#### mobile ios-light (page)
+
+![capacitor-tabs tab-two page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-ios-light-tab-two.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-ios-dark-tab-two.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-tabs tab-two page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-ios-dark-tab-two.png)
+
+#### mobile material-light (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-material-light-tab-two.png)
+
+#### mobile material-light (page)
+
+![capacitor-tabs tab-two page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-material-light-tab-two.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-tabs tab-two frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-frame-material-dark-tab-two.png)
+
+#### mobile material-dark (page)
+
+![capacitor-tabs tab-two page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-tabs/mobile-page-material-dark-tab-two.png)
 
 ## capacitor-textarea
 
-### desktop ios-light
+### empty (Empty)
 
-![capacitor-textarea ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-ios-light-empty.png)
 
-![capacitor-textarea ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-ios-dark-empty.png)
 
-![capacitor-textarea material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-material-light-empty.png)
 
-![capacitor-textarea material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-material-dark-empty.png)
 
-![capacitor-textarea ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-ios-light-empty.png)
 
-![capacitor-textarea ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-textarea empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-ios-light-empty.png)
 
-![capacitor-textarea material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-ios-dark-empty.png)
 
-![capacitor-textarea material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-textarea empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-ios-dark-empty.png)
+
+#### mobile material-light (frame)
+
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-material-light-empty.png)
+
+#### mobile material-light (page)
+
+![capacitor-textarea empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-material-light-empty.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-textarea empty frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-material-dark-empty.png)
+
+#### mobile material-dark (page)
+
+![capacitor-textarea empty page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-material-dark-empty.png)
+
+### filled (Filled)
+
+#### desktop ios-light (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-ios-light-filled.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-ios-dark-filled.png)
+
+#### desktop material-light (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-material-light-filled.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/desktop-frame-material-dark-filled.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-ios-light-filled.png)
+
+#### mobile ios-light (page)
+
+![capacitor-textarea filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-ios-light-filled.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-ios-dark-filled.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-textarea filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-ios-dark-filled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-material-light-filled.png)
+
+#### mobile material-light (page)
+
+![capacitor-textarea filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-material-light-filled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-textarea filled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-frame-material-dark-filled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-textarea filled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-textarea/mobile-page-material-dark-filled.png)
 
 ## capacitor-thumbnail
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-thumbnail ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-ios-light-default.png)
 
-![capacitor-thumbnail ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-ios-dark-default.png)
 
-![capacitor-thumbnail material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-material-light-default.png)
 
-![capacitor-thumbnail material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-material-dark-default.png)
 
-![capacitor-thumbnail ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-ios-light-default.png)
 
-![capacitor-thumbnail ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-thumbnail default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-ios-light-default.png)
 
-![capacitor-thumbnail material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-ios-dark-default.png)
 
-![capacitor-thumbnail material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-thumbnail default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-thumbnail default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-thumbnail default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-thumbnail default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-thumbnail alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-thumbnail alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-thumbnail alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-thumbnail alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-thumbnail alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-thumbnail/mobile-page-material-dark-alternate.png)
 
 ## capacitor-toast
 
-### desktop ios-light
+### screen (Screen)
 
-![capacitor-toast ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-ios-light-screen.png)
 
-![capacitor-toast ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-ios-dark-screen.png)
 
-![capacitor-toast material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-material-light-screen.png)
 
-![capacitor-toast material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-material-dark-screen.png)
 
-![capacitor-toast ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-ios-light-screen.png)
 
-![capacitor-toast ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-toast screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-ios-light-screen.png)
 
-![capacitor-toast material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-ios-dark-screen.png)
 
-![capacitor-toast material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-toast screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-ios-dark-screen.png)
+
+#### mobile material-light (frame)
+
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-material-light-screen.png)
+
+#### mobile material-light (page)
+
+![capacitor-toast screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-material-light-screen.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-toast screen frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-material-dark-screen.png)
+
+#### mobile material-dark (page)
+
+![capacitor-toast screen page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-material-dark-screen.png)
+
+### open (Open)
+
+#### desktop ios-light (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-ios-light-open.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-ios-dark-open.png)
+
+#### desktop material-light (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-material-light-open.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/desktop-frame-material-dark-open.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-ios-light-open.png)
+
+#### mobile ios-light (page)
+
+![capacitor-toast open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-ios-light-open.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-ios-dark-open.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-toast open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-ios-dark-open.png)
+
+#### mobile material-light (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-material-light-open.png)
+
+#### mobile material-light (page)
+
+![capacitor-toast open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-material-light-open.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-toast open frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-frame-material-dark-open.png)
+
+#### mobile material-dark (page)
+
+![capacitor-toast open page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toast/mobile-page-material-dark-open.png)
 
 ## capacitor-toggle
 
-### desktop ios-light
+### off (Off)
 
-![capacitor-toggle ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-ios-light-off.png)
 
-![capacitor-toggle ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-ios-dark-off.png)
 
-![capacitor-toggle material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-material-light-off.png)
 
-![capacitor-toggle material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-material-dark-off.png)
 
-![capacitor-toggle ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-ios-light-off.png)
 
-![capacitor-toggle ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-toggle off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-ios-light-off.png)
 
-![capacitor-toggle material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-ios-dark-off.png)
 
-![capacitor-toggle material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-toggle off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-ios-dark-off.png)
+
+#### mobile material-light (frame)
+
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-material-light-off.png)
+
+#### mobile material-light (page)
+
+![capacitor-toggle off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-material-light-off.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-toggle off frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-material-dark-off.png)
+
+#### mobile material-dark (page)
+
+![capacitor-toggle off page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-material-dark-off.png)
+
+### on (On)
+
+#### desktop ios-light (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-ios-light-on.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-ios-dark-on.png)
+
+#### desktop material-light (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-material-light-on.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-material-dark-on.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-ios-light-on.png)
+
+#### mobile ios-light (page)
+
+![capacitor-toggle on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-ios-light-on.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-ios-dark-on.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-toggle on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-ios-dark-on.png)
+
+#### mobile material-light (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-material-light-on.png)
+
+#### mobile material-light (page)
+
+![capacitor-toggle on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-material-light-on.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-toggle on frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-material-dark-on.png)
+
+#### mobile material-dark (page)
+
+![capacitor-toggle on page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-material-dark-on.png)
+
+### disabled (Disabled)
+
+#### desktop ios-light (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-ios-light-disabled.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-ios-dark-disabled.png)
+
+#### desktop material-light (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-material-light-disabled.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/desktop-frame-material-dark-disabled.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-ios-light-disabled.png)
+
+#### mobile ios-light (page)
+
+![capacitor-toggle disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-ios-light-disabled.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-ios-dark-disabled.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-toggle disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-ios-dark-disabled.png)
+
+#### mobile material-light (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-material-light-disabled.png)
+
+#### mobile material-light (page)
+
+![capacitor-toggle disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-material-light-disabled.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-toggle disabled frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-frame-material-dark-disabled.png)
+
+#### mobile material-dark (page)
+
+![capacitor-toggle disabled page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toggle/mobile-page-material-dark-disabled.png)
 
 ## capacitor-toolbar
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-toolbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-ios-light-default.png)
 
-![capacitor-toolbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-ios-dark-default.png)
 
-![capacitor-toolbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-material-light-default.png)
 
-![capacitor-toolbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-material-dark-default.png)
 
-![capacitor-toolbar ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-ios-light-default.png)
 
-![capacitor-toolbar ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-toolbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-ios-light-default.png)
 
-![capacitor-toolbar material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-ios-dark-default.png)
 
-![capacitor-toolbar material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-toolbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-toolbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-toolbar default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-toolbar default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-toolbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-toolbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-toolbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-toolbar alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-toolbar alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-toolbar/mobile-page-material-dark-alternate.png)
 
 ## capacitor-touch-ripple
 
-### desktop ios-light
+### default (Default)
 
-![capacitor-touch-ripple ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-ios-light.png)
+#### desktop ios-light (frame)
 
-### desktop ios-dark
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-ios-light-default.png)
 
-![capacitor-touch-ripple ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-ios-dark.png)
+#### desktop ios-dark (frame)
 
-### desktop material-light
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-ios-dark-default.png)
 
-![capacitor-touch-ripple material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-material-light.png)
+#### desktop material-light (frame)
 
-### desktop material-dark
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-material-light-default.png)
 
-![capacitor-touch-ripple material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-material-dark.png)
+#### desktop material-dark (frame)
 
-### mobile ios-light
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-material-dark-default.png)
 
-![capacitor-touch-ripple ios-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-ios-light.png)
+#### mobile ios-light (frame)
 
-### mobile ios-dark
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-ios-light-default.png)
 
-![capacitor-touch-ripple ios-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-ios-dark.png)
+#### mobile ios-light (page)
 
-### mobile material-light
+![capacitor-touch-ripple default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-ios-light-default.png)
 
-![capacitor-touch-ripple material-light](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-material-light.png)
+#### mobile ios-dark (frame)
 
-### mobile material-dark
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-ios-dark-default.png)
 
-![capacitor-touch-ripple material-dark](https://raw.githubusercontent.com/Cap-go/website/6ec6432fe15ff75e5ed831fc1822c3e0f291257f/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-material-dark.png)
+#### mobile ios-dark (page)
+
+![capacitor-touch-ripple default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-ios-dark-default.png)
+
+#### mobile material-light (frame)
+
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-material-light-default.png)
+
+#### mobile material-light (page)
+
+![capacitor-touch-ripple default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-material-light-default.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-touch-ripple default frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-material-dark-default.png)
+
+#### mobile material-dark (page)
+
+![capacitor-touch-ripple default page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-material-dark-default.png)
+
+### alternate (Alternate)
+
+#### desktop ios-light (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-ios-light-alternate.png)
+
+#### desktop ios-dark (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-ios-dark-alternate.png)
+
+#### desktop material-light (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-material-light-alternate.png)
+
+#### desktop material-dark (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/desktop-frame-material-dark-alternate.png)
+
+#### mobile ios-light (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-ios-light-alternate.png)
+
+#### mobile ios-light (page)
+
+![capacitor-touch-ripple alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-ios-light-alternate.png)
+
+#### mobile ios-dark (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-ios-dark-alternate.png)
+
+#### mobile ios-dark (page)
+
+![capacitor-touch-ripple alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-ios-dark-alternate.png)
+
+#### mobile material-light (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-material-light-alternate.png)
+
+#### mobile material-light (page)
+
+![capacitor-touch-ripple alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-material-light-alternate.png)
+
+#### mobile material-dark (frame)
+
+![capacitor-touch-ripple alternate frame](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-frame-material-dark-alternate.png)
+
+#### mobile material-dark (page)
+
+![capacitor-touch-ripple alternate page](https://raw.githubusercontent.com/Cap-go/website/ASSETS_SHA/tailwind-capacitor-demo-screenshots/1452/qa/capacitor-touch-ripple/mobile-page-material-dark-alternate.png)
 
