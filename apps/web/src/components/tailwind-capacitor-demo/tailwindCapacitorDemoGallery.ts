@@ -1108,10 +1108,7 @@ const legacyDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
     const { h } = ctx
     return h(Accordion, {}, { default: () => h(AccordionItem, {}, { default: () => 'Accordion item' }) })
   },
-  'capacitor-actions': (ctx) => {
-    const { h } = ctx
-    return overlayTrigger(ctx, 'Open actions', ctx.actionsOpen)
-  },
+  'capacitor-actions': (ctx) => overlayTrigger(ctx, 'Open actions', ctx.actionsOpen),
   'capacitor-actions-button': (ctx) => overlayTrigger(ctx, 'Open actions', ctx.actionsOpen),
   'capacitor-actions-group': (ctx) => overlayTrigger(ctx, 'Open actions', ctx.actionsOpen),
   'capacitor-actions-label': (ctx) => overlayTrigger(ctx, 'Open actions', ctx.actionsOpen),
@@ -1529,7 +1526,11 @@ const legacyDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
   },
   'capacitor-range': (ctx) => {
     const { h } = ctx
-    return h(Range, { value: ctx.rangeValue.value, onRange: 'change', onInput: (e) => (ctx.rangeValue.value = Number(e.target?.value ?? 0)) })
+    return h(Range, {
+      value: ctx.rangeValue.value,
+      onRange: 'change',
+      onInput: (e: Event) => (ctx.rangeValue.value = Number((e.target as HTMLInputElement | null)?.value ?? 0)),
+    })
   },
   'capacitor-refresher': (ctx) => {
     const { h } = ctx
@@ -1557,7 +1558,7 @@ const legacyDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
     return h(Searchbar, {
       value: ctx.search.value,
       placeholder: 'Search components',
-      onSearchbarInput: (e) => (ctx.search.value = String(e.detail?.value ?? '')),
+      onSearchbarInput: (e: CustomEvent<{ value?: string }>) => (ctx.search.value = String(e.detail?.value ?? '')),
     })
   },
   'capacitor-segmented': (ctx) => {
