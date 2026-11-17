@@ -11,12 +11,16 @@
   ],
   "capacitor-accordion": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "single-section",
+      "label": "Single section"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "multi-section",
+      "label": "Multi section"
+    },
+    {
+      "id": "nested-copy",
+      "label": "With descriptions"
     }
   ],
   "capacitor-accordion-item": [
@@ -25,8 +29,12 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "expanded-copy",
+      "label": "Expanded copy"
+    },
+    {
+      "id": "stacked",
+      "label": "Stacked items"
     }
   ],
   "capacitor-actions": [
@@ -83,32 +91,44 @@
   ],
   "capacitor-alert": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "inline",
+      "label": "Inline"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "open",
+      "label": "Open"
     }
   ],
   "capacitor-app": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "light-shell",
+      "label": "Light shell"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "dark-shell",
+      "label": "Dark shell"
+    },
+    {
+      "id": "with-block",
+      "label": "With block"
     }
   ],
   "capacitor-avatar": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "initials",
+      "label": "Initials"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "small",
+      "label": "Small"
+    },
+    {
+      "id": "large",
+      "label": "Large"
     }
   ],
   "capacitor-badge": [
@@ -127,82 +147,86 @@
   ],
   "capacitor-block": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "inset-strong",
+      "label": "Inset strong"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "outline",
+      "label": "Outline"
+    },
+    {
+      "id": "plain",
+      "label": "Plain"
     }
   ],
   "capacitor-block-footer": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "with-footer",
+      "label": "With footer"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "footer-note",
+      "label": "Footer note"
     }
   ],
   "capacitor-block-header": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "with-header",
+      "label": "With header"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "section-title",
+      "label": "Section title"
     }
   ],
   "capacitor-block-title": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "standalone",
+      "label": "Standalone"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "with-body",
+      "label": "With body"
     }
   ],
   "capacitor-breadcrumbs": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "trail",
+      "label": "Trail"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "compact",
+      "label": "Compact"
     }
   ],
   "capacitor-breadcrumbs-collapsed": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "collapsed-middle",
+      "label": "Collapsed middle"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "long-trail",
+      "label": "Long trail"
     }
   ],
   "capacitor-breadcrumbs-item": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "link",
+      "label": "Link"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "active",
+      "label": "Active"
     }
   ],
   "capacitor-breadcrumbs-separator": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "between-items",
+      "label": "Between items"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "multi-separator",
+      "label": "Multi separator"
     }
   ],
   "capacitor-button": [
@@ -299,12 +323,12 @@
   ],
   "capacitor-datetime": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "closed",
+      "label": "Closed"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "open",
+      "label": "Open"
     }
   ],
   "capacitor-dialog": [
@@ -319,22 +343,26 @@
   ],
   "capacitor-dialog-button": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "cancel-ok",
+      "label": "Cancel + OK"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "destructive",
+      "label": "Destructive"
+    },
+    {
+      "id": "stacked",
+      "label": "Stacked"
     }
   ],
   "capacitor-fab": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "closed",
+      "label": "Closed"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "list-open",
+      "label": "List open"
     }
   ],
   "capacitor-footer": [
@@ -343,8 +371,8 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "with-toolbar",
+      "label": "With toolbar"
     }
   ],
   "capacitor-header": [
@@ -353,28 +381,28 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "with-navbar",
+      "label": "With navbar"
     }
   ],
   "capacitor-icon": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "navigation",
+      "label": "Navigation"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "large",
+      "label": "Large"
     }
   ],
   "capacitor-infinite-scroll": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "idle",
+      "label": "Idle"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "loading",
+      "label": "Loading"
     }
   ],
   "capacitor-input-otp": [
@@ -393,8 +421,8 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "swiped-open",
+      "label": "Swiped open"
     }
   ],
   "capacitor-link": [
@@ -403,8 +431,8 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "toolbar",
+      "label": "Toolbar"
     }
   ],
   "capacitor-list": [
@@ -423,22 +451,22 @@
   ],
   "capacitor-list-button": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "single",
+      "label": "Single"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "pair",
+      "label": "Pair"
     }
   ],
   "capacitor-list-group": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "grouped",
+      "label": "Grouped"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "nested",
+      "label": "Nested"
     }
   ],
   "capacitor-list-input": [
@@ -475,12 +503,12 @@
   ],
   "capacitor-menu-list": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "basic",
+      "label": "Basic"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "with-icons",
+      "label": "With icons"
     }
   ],
   "capacitor-menu-list-item": [
@@ -489,78 +517,94 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "selected",
+      "label": "Selected"
     }
   ],
   "capacitor-message": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "sent",
+      "label": "Sent"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "received",
+      "label": "Received"
+    },
+    {
+      "id": "thread",
+      "label": "Thread"
     }
   ],
   "capacitor-messagebar": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "empty",
+      "label": "Empty"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "composing",
+      "label": "Composing"
     }
   ],
   "capacitor-messages": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "single",
+      "label": "Single"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "pair",
+      "label": "Pair"
     }
   ],
   "capacitor-messages-title": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "with-title",
+      "label": "With title"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "group-chat",
+      "label": "Group chat"
     }
   ],
   "capacitor-modal": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "closed",
+      "label": "Closed"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "open",
+      "label": "Open"
+    },
+    {
+      "id": "inline",
+      "label": "Inline"
     }
   ],
   "capacitor-navbar": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "standard",
+      "label": "Standard"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "large-title",
+      "label": "Large title"
+    },
+    {
+      "id": "transparent",
+      "label": "Transparent"
+    },
+    {
+      "id": "with-back-link",
+      "label": "With back link"
     }
   ],
   "capacitor-navbar-back-link": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "with-text",
+      "label": "With text"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "in-navbar",
+      "label": "In navbar"
     }
   ],
   "capacitor-note": [
@@ -569,28 +613,32 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "secondary",
+      "label": "Secondary"
     }
   ],
   "capacitor-notification": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "closed",
+      "label": "Closed"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "open",
+      "label": "Open"
+    },
+    {
+      "id": "inline-open",
+      "label": "Inline open"
     }
   ],
   "capacitor-page": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "scroll-content",
+      "label": "Scroll content"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "with-navbar",
+      "label": "With navbar"
     }
   ],
   "capacitor-panel": [
@@ -605,12 +653,16 @@
   ],
   "capacitor-picker": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "closed",
+      "label": "Closed"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "open",
+      "label": "Open"
+    },
+    {
+      "id": "wheels",
+      "label": "Wheels"
     }
   ],
   "capacitor-popover": [
@@ -639,18 +691,26 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "blue",
+      "label": "Blue"
+    },
+    {
+      "id": "large-green",
+      "label": "Large green"
     }
   ],
   "capacitor-progressbar": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "low",
+      "label": "Low"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "high",
+      "label": "High"
+    },
+    {
+      "id": "indeterminate",
+      "label": "Indeterminate"
     }
   ],
   "capacitor-radio": [
@@ -665,22 +725,26 @@
   ],
   "capacitor-range": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "single",
+      "label": "Single"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "dual",
+      "label": "Dual"
+    },
+    {
+      "id": "with-pins",
+      "label": "With pins"
     }
   ],
   "capacitor-refresher": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "idle",
+      "label": "Idle"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "pulling",
+      "label": "Pulling"
     }
   ],
   "capacitor-reorder": [
@@ -689,8 +753,8 @@
       "label": "Default"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "three-rows",
+      "label": "Three rows"
     }
   ],
   "capacitor-searchbar": [
@@ -701,6 +765,14 @@
     {
       "id": "filled",
       "label": "Filled"
+    },
+    {
+      "id": "focused",
+      "label": "Focused"
+    },
+    {
+      "id": "with-cancel",
+      "label": "With cancel"
     }
   ],
   "capacitor-segmented": [
@@ -725,12 +797,12 @@
   ],
   "capacitor-select": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "closed",
+      "label": "Closed"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "open",
+      "label": "Open"
     }
   ],
   "capacitor-sheet": [
@@ -745,32 +817,36 @@
   ],
   "capacitor-skeleton": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "line",
+      "label": "Line"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "avatar-row",
+      "label": "Avatar row"
     }
   ],
   "capacitor-split-pane": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "two-pane",
+      "label": "Two pane"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "master-detail",
+      "label": "Master detail"
     }
   ],
   "capacitor-stepper": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "min",
+      "label": "Min"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "max",
+      "label": "Max"
+    },
+    {
+      "id": "disabled",
+      "label": "Disabled"
     }
   ],
   "capacitor-tab": [
@@ -785,72 +861,76 @@
   ],
   "capacitor-tabbar": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "two-tabs",
+      "label": "Two tabs"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "three-tabs",
+      "label": "Three tabs"
     }
   ],
   "capacitor-tabbar-link": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "inactive",
+      "label": "Inactive"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "active",
+      "label": "Active"
+    },
+    {
+      "id": "badge",
+      "label": "Badge"
     }
   ],
   "capacitor-table": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "sample",
+      "label": "Sample"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "compact",
+      "label": "Compact"
     }
   ],
   "capacitor-table-body": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "single-row",
+      "label": "Single row"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "two-rows",
+      "label": "Two rows"
     }
   ],
   "capacitor-table-cell": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "body-cell",
+      "label": "Body cell"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "header-cell",
+      "label": "Header cell"
     }
   ],
   "capacitor-table-head": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "header",
+      "label": "Header"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "multi-column",
+      "label": "Multi column"
     }
   ],
   "capacitor-table-row": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "single",
+      "label": "Single"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "values",
+      "label": "Values"
     }
   ],
   "capacitor-tabs": [
@@ -875,12 +955,12 @@
   ],
   "capacitor-thumbnail": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "standalone",
+      "label": "Standalone"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "in-list",
+      "label": "In list"
     }
   ],
   "capacitor-toast": [
@@ -909,22 +989,22 @@
   ],
   "capacitor-toolbar": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "top",
+      "label": "Top"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "actions",
+      "label": "Actions"
     }
   ],
   "capacitor-touch-ripple": [
     {
-      "id": "default",
-      "label": "Default"
+      "id": "on-button",
+      "label": "On button"
     },
     {
-      "id": "alternate",
-      "label": "Alternate"
+      "id": "on-card",
+      "label": "On card"
     }
   ]
 }
