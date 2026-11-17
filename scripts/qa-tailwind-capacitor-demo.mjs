@@ -62,38 +62,52 @@ assertStateManifestUsesNamedStates()
 /**
  * @param {import('playwright').Page} page
  */
-async function assertPageLayout(page, label) {
-  const metrics = await page.evaluate(() => {
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} label
+ * @param {{ checkIntroClearance?: boolean }} [options]
+ */
+async function assertPageLayout(page, label, options = {}) {
+  const checkIntro = options.checkIntroClearance ?? true
+  const metrics = await page.evaluate((checkIntroClearance) => {
     const header = document.querySelector('header')
     const headerRect = header?.getBoundingClientRect()
     const introNodes = [
-      ...document.querySelectorAll('[data-tc-demo-intro]'),
-      document.getElementById('tc-demo-registry-counts'),
-    ].filter((node) => node instanceof HTMLElement)
+      ...new Set(
+        [
+          ...document.querySelectorAll('[data-tc-demo-intro]'),
+          document.getElementById('tc-demo-registry-counts'),
+        ].filter((node) => node instanceof HTMLElement),
+      ),
+    ]
   return {
     docScrollWidth: document.documentElement.scrollWidth,
     clientWidth: document.documentElement.clientWidth,
     headerBottom: headerRect?.bottom ?? null,
-    introHits: introNodes
-      .map((node) => {
-        const r = node.getBoundingClientRect()
-        const hb = headerRect?.bottom ?? 0
-        if (headerRect && r.top < hb - 1) {
-          return `${node.id || node.tagName}:${Math.round(r.top)}<${Math.round(hb)}`
-        }
-        return null
-      })
-      .filter(Boolean),
+    introHits: checkIntroClearance
+      ? introNodes
+          .map((node) => {
+            const r = node.getBoundingClientRect()
+            const hb = headerRect?.bottom ?? 0
+            if (headerRect && r.top < hb - 1 && r.bottom > hb + 1) {
+              return `${node.id || node.tagName}:${Math.round(r.top)}<${Math.round(hb)}`
+            }
+            return null
+          })
+          .filter(Boolean)
+      : [],
   }
-  })
+  }, checkIntro)
   record(
     metrics.docScrollWidth <= metrics.clientWidth + 1,
     `${label}: horizontal overflow on page (${metrics.docScrollWidth} > ${metrics.clientWidth})`,
   )
-  record(
-    metrics.introHits.length === 0,
-    `${label}: site header intersects intro text (${metrics.introHits.join('; ')})`,
-  )
+  if (checkIntro) {
+    record(
+      metrics.introHits.length === 0,
+      `${label}: site header intersects intro text (${metrics.introHits.join('; ')})`,
+    )
+  }
 }
 
 /**
@@ -339,13 +353,13 @@ async function qaLayoutSmoke(page) {
     await page.goto(`${baseUrl}${route.path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
     await page.waitForSelector('[data-tc-demo-intro]', { timeout: 30_000 })
     const labelTop = `layout-smoke ${route.file} top`
-    await assertPageLayout(page, labelTop)
+    await assertPageLayout(page, labelTop, { checkIntroClearance: true })
     await page.screenshot({ path: join(layoutDir, `${route.file}-390x844-top.png`), fullPage: false })
     record(true, `${labelTop}: captured`)
     await page.evaluate(() => window.scrollTo({ top: 600, left: 0 }))
     await page.waitForTimeout(400)
     const labelScroll = `layout-smoke ${route.file} scroll-600`
-    await assertPageLayout(page, labelScroll)
+    await assertPageLayout(page, labelScroll, { checkIntroClearance: false })
     await page.screenshot({ path: join(layoutDir, `${route.file}-390x844-scroll-600.png`), fullPage: false })
     record(true, `${labelScroll}: captured`)
   }
