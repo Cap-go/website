@@ -146,7 +146,7 @@ const canonicalPageUrl = localizedUrl(Astro.locals.starlightRoute.locale ?? defa
 const docBreadcrumbs = buildDocBreadcrumbs(basePath, breadcrumbTitle, baseUrl).map((crumb, index) =>
   index === 0 ? { ...crumb, name: m.home({}, { locale: messageLocale }) } : crumb,
 )
-if (docBreadcrumbs.length >= 3) {
+if (docBreadcrumbs.length >= 2) {
   const breadcrumbJson = JSON.stringify(createDocBreadcrumbLdJson(canonicalPageUrl, docBreadcrumbs))
   const hasBreadcrumbLd = head.some(
     ({ tag, attrs }) =>

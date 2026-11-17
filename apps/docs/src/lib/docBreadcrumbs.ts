@@ -42,12 +42,23 @@ const formatSegment = (segment: string) =>
 
 const withTrailingSlash = (pathname: string) => (pathname.endsWith('/') ? pathname : `${pathname}/`)
 
+const pathsEqual = (a: string, b: string) => withTrailingSlash(a) === withTrailingSlash(b)
+
+/** Drop leading emoji/symbols so crumbs match visible titles without MDX icons. */
+export function stripTitleDecorations(title: string): string {
+  return title
+    .replace(/^\s*[\p{Extended_Pictographic}\u{FE0F}\u{200D}]+\s*/u, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 export function buildDocBreadcrumbs(pathname: string, pageTitle: string, siteOrigin: string): DocBreadcrumb[] {
   const normalizedPath = withTrailingSlash(pathname.split('#')[0].split('?')[0])
   const segments = normalizedPath.replace(/\/$/, '').split('/').filter(Boolean)
   if (segments[0] !== 'docs' || segments.length < 2) return []
 
   const pageUrl = new URL(normalizedPath, siteOrigin).href
+  const displayTitle = stripTitleDecorations(pageTitle) || pageTitle
   const home: DocBreadcrumb = {
     name: 'Home',
     url: new URL('/', siteOrigin).href,
@@ -56,23 +67,29 @@ export function buildDocBreadcrumbs(pathname: string, pageTitle: string, siteOri
   const pluginMatch = normalizedPath.match(/^\/docs\/plugins\/([^/]+)\//)
   if (pluginMatch) {
     const slug = pluginMatch[1]
-    const sectionUrl = new URL(`/docs/plugins/${slug}/`, siteOrigin).href
+    const pluginIndexPath = withTrailingSlash(`/docs/plugins/${slug}/`)
+    const sectionUrl = new URL(pluginIndexPath, siteOrigin).href
     const sectionName = pluginNames.get(slug) ?? formatSegment(slug)
-    return [
-      home,
-      { name: sectionName, url: sectionUrl },
-      { name: pageTitle, url: pageUrl },
-    ]
+    const crumbs: DocBreadcrumb[] = [home]
+    if (!pathsEqual(normalizedPath, pluginIndexPath)) {
+      crumbs.push({ name: sectionName, url: sectionUrl })
+    }
+    crumbs.push({ name: displayTitle, url: pageUrl })
+    return crumbs
   }
 
   const sectionKey = segments[1]
   const sectionPath = SECTION_LANDING[sectionKey] ?? withTrailingSlash(`/docs/${sectionKey}`)
-  const section: DocBreadcrumb = {
-    name: formatSegment(sectionKey),
-    url: new URL(sectionPath, siteOrigin).href,
+  const sectionUrl = new URL(sectionPath, siteOrigin).href
+  const crumbs: DocBreadcrumb[] = [home]
+  if (!pathsEqual(normalizedPath, sectionPath)) {
+    crumbs.push({
+      name: formatSegment(sectionKey),
+      url: sectionUrl,
+    })
   }
-
-  return [home, section, { name: pageTitle, url: pageUrl }]
+  crumbs.push({ name: displayTitle, url: pageUrl })
+  return crumbs
 }
 
 export function createDocBreadcrumbLdJson(pageUrl: string, breadcrumbs: DocBreadcrumb[]) {
@@ -83,12 +100,8 @@ export function createDocBreadcrumbLdJson(pageUrl: string, breadcrumbs: DocBread
     itemListElement: breadcrumbs.map((crumb, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      item: {
-        '@type': 'WebPage',
-        '@id': crumb.url,
-        url: crumb.url,
-        name: crumb.name,
-      },
+      name: crumb.name,
+      item: crumb.url,
     })),
   }
 }
