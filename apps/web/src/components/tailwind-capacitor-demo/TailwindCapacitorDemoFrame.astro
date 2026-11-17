@@ -1,6 +1,7 @@
 ---
 import RegistryNav from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoNav.astro'
 import { tailwindCapacitorDemoNavItems } from '@/lib/tailwindCapacitorDemoCatalog'
+import stateManifest from '@/components/tailwind-capacitor-demo/state-manifest.json'
 import manifest from '@/tailwind-capacitor-snapshot/registry-manifest.json'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -13,6 +14,7 @@ interface Props {
 const { locale, slug, activeSlug } = Astro.props
 const catalogSectionCount = tailwindCapacitorDemoNavItems.length
 const shellBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/shell/')
+const states = stateManifest[slug as keyof typeof stateManifest] ?? [{ id: 'default', label: 'Default' }]
 ---
 
 <div class="min-w-0 lg:col-start-2" data-tc-demo-slug={slug}>
@@ -29,18 +31,34 @@ const shellBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/
         <button type="button" data-tc-dark="1" class="tc-demo-toggle rounded-lg border border-white/15 px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm text-gray-300" aria-pressed="false">Dark</button>
       </fieldset>
     </div>
+  </div>
 
-    <div
-      class="tc-demo-phone-frame mx-auto w-full max-w-[390px] overflow-hidden rounded-[2rem] border border-white/20 bg-black shadow-2xl"
-      style="height: min(78dvh, 820px);"
-    >
-      <iframe
-        id="tc-demo-iframe"
-        title={`Tailwind Capacitor demo: ${slug}`}
-        class="block h-full w-full border-0 bg-neutral-950"
-        src={`${shellBase}?slug=${encodeURIComponent(slug)}&platform=ios&dark=0`}
-      ></iframe>
-    </div>
+  <div class="mt-4 space-y-8" data-tc-demo-state-gallery>
+    {
+      states.map((state) => (
+        <section class="min-w-0" data-tc-demo-state-section={state.id}>
+          <h3 class="mb-2 text-sm font-semibold text-gray-200">
+            <span class="text-gray-400">{state.id}</span>
+            <span class="mx-2 text-gray-600" aria-hidden="true">
+              ·
+            </span>
+            {state.label}
+          </h3>
+          <div
+            class="tc-demo-phone-frame mx-auto w-full max-w-[390px] overflow-hidden rounded-[2rem] border border-white/20 bg-black shadow-2xl"
+            style="height: min(70dvh, 720px);"
+          >
+            <iframe
+              class="tc-demo-state-iframe block h-full w-full border-0 bg-neutral-950"
+              title={`Tailwind Capacitor demo: ${slug} — ${state.label}`}
+              data-tc-state={state.id}
+              src={`${shellBase}?slug=${encodeURIComponent(slug)}&state=${encodeURIComponent(state.id)}&platform=ios&dark=0`}
+              loading="lazy"
+            />
+          </div>
+        </section>
+      ))
+    }
   </div>
 
   <div class="mt-6 lg:hidden">
@@ -57,9 +75,8 @@ const shellBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/
 <script define:vars={{ slug }}>
   import { bindTailwindCapacitorDemoTheme } from '@/scripts/tailwindCapacitorDemoTheme.client'
 
-  const controls = document.querySelector(`[data-tc-demo-slug="${slug}"] [data-tc-demo-controls]`)
-  const iframe = document.querySelector(`[data-tc-demo-slug="${slug}"] #tc-demo-iframe`)
-  if (controls instanceof HTMLElement && iframe instanceof HTMLIFrameElement) {
-    bindTailwindCapacitorDemoTheme(controls, iframe, slug)
+  const root = document.querySelector(`[data-tc-demo-slug="${slug}"]`)
+  if (root instanceof HTMLElement) {
+    bindTailwindCapacitorDemoTheme(root, slug)
   }
 </script>

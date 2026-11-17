@@ -17,9 +17,11 @@ function writeStoredTheme(platform: TailwindCapacitorDemoPlatform, dark: boolean
   localStorage.setItem(STORAGE_DARK, dark ? '1' : '0')
 }
 
-export function bindTailwindCapacitorDemoTheme(root: HTMLElement, iframe: HTMLIFrameElement, slug: string) {
+export function bindTailwindCapacitorDemoTheme(root: HTMLElement, slug: string) {
   let platform = readStoredPlatform()
   let dark = readStoredDark()
+
+  const iframes = () => Array.from(root.querySelectorAll<HTMLIFrameElement>('iframe.tc-demo-state-iframe'))
 
   const syncPressed = () => {
     root.querySelectorAll('[data-tc-platform]').forEach((btn) => {
@@ -40,9 +42,11 @@ export function bindTailwindCapacitorDemoTheme(root: HTMLElement, iframe: HTMLIF
     })
   }
 
-  const shellSrc = () => {
+  const shellSrc = (iframe: HTMLIFrameElement) => {
     const shell = new URL(iframe.getAttribute('src') ?? iframe.src, window.location.origin)
+    const stateId = iframe.dataset.tcState ?? shell.searchParams.get('state') ?? ''
     shell.searchParams.set('slug', slug)
+    shell.searchParams.set('state', stateId)
     shell.searchParams.set('platform', platform)
     shell.searchParams.set('dark', dark ? '1' : '0')
     return `${shell.pathname}${shell.search}`
@@ -50,12 +54,20 @@ export function bindTailwindCapacitorDemoTheme(root: HTMLElement, iframe: HTMLIF
 
   const pushTheme = () => {
     writeStoredTheme(platform, dark)
-    const nextSrc = shellSrc()
-    if (iframe.getAttribute('src') !== nextSrc) {
-      iframe.setAttribute('src', nextSrc)
-      return
+    let reloaded = false
+    for (const iframe of iframes()) {
+      const nextSrc = shellSrc(iframe)
+      if (iframe.getAttribute('src') !== nextSrc) {
+        iframe.setAttribute('src', nextSrc)
+        reloaded = true
+      } else {
+        iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
+      }
     }
-    iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
+    if (reloaded) return
+    for (const iframe of iframes()) {
+      iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
+    }
   }
 
   root.querySelectorAll('[data-tc-platform]').forEach((btn) => {
@@ -77,9 +89,12 @@ export function bindTailwindCapacitorDemoTheme(root: HTMLElement, iframe: HTMLIF
     })
   })
 
-  const initial = shellSrc()
-  iframe.setAttribute('src', initial)
+  for (const iframe of iframes()) {
+    iframe.setAttribute('src', shellSrc(iframe))
+    iframe.addEventListener('load', () => {
+      iframe.contentWindow?.postMessage({ type: 'tc-demo-theme', platform, dark }, window.location.origin)
+    })
+  }
 
-  iframe.addEventListener('load', () => pushTheme())
   syncPressed()
 }

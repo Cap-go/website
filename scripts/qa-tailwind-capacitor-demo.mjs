@@ -45,19 +45,37 @@ function record(ok, message) {
  * @param {import('playwright').Page} page
  */
 async function assertPageLayout(page, label) {
-  const metrics = await page.evaluate(() => ({
+  const metrics = await page.evaluate(() => {
+    const header = document.querySelector('header')
+    const headerRect = header?.getBoundingClientRect()
+    const introNodes = [
+      ...document.querySelectorAll('[data-tc-demo-intro]'),
+      document.getElementById('tc-demo-registry-counts'),
+    ].filter((node) => node instanceof HTMLElement)
+  return {
     docScrollWidth: document.documentElement.scrollWidth,
     clientWidth: document.documentElement.clientWidth,
-    introTop: document.getElementById('tc-demo-registry-counts')?.getBoundingClientRect().top ?? null,
-    headerBottom: document.querySelector('header')?.getBoundingClientRect().bottom ?? null,
-  }))
+    headerBottom: headerRect?.bottom ?? null,
+    introHits: introNodes
+      .map((node) => {
+        const r = node.getBoundingClientRect()
+        const hb = headerRect?.bottom ?? 0
+        if (headerRect && r.top < hb - 1) {
+          return `${node.id || node.tagName}:${Math.round(r.top)}<${Math.round(hb)}`
+        }
+        return null
+      })
+      .filter(Boolean),
+  }
+  })
   record(
     metrics.docScrollWidth <= metrics.clientWidth + 1,
     `${label}: horizontal overflow on page (${metrics.docScrollWidth} > ${metrics.clientWidth})`,
   )
-  if (metrics.introTop != null && metrics.headerBottom != null) {
-    record(metrics.introTop >= metrics.headerBottom - 2, `${label}: intro overlaps site header (top ${metrics.introTop} < header ${metrics.headerBottom})`)
-  }
+  record(
+    metrics.introHits.length === 0,
+    `${label}: site header intersects intro text (${metrics.introHits.join('; ')})`,
+  )
 }
 
 /**
@@ -132,41 +150,54 @@ async function qaSlug(page, slug, viewport, theme) {
   const states = stateManifest[slug] ?? [{ id: 'default', label: 'Default' }]
   await page.setViewportSize({ width: viewport.width, height: viewport.height })
   await page.goto(`${baseUrl}${path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
-  await page.waitForSelector('#tc-demo-iframe', { timeout: 30_000 })
+  await page.waitForSelector('[data-tc-demo-state-section]', { timeout: 30_000 })
   await page.click(`[data-tc-platform="${theme.platform}"]`).catch(() => {})
   await page.click(`[data-tc-dark="${theme.dark ? '1' : '0'}"]`)
-  await page.waitForTimeout(600)
-  const iframe = page.frameLocator('#tc-demo-iframe')
-  await iframe.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
+  await page.waitForTimeout(900)
   const pageLabel = `${slug} ${viewport.id} ${theme.id}`
   await assertPageLayout(page, pageLabel)
-
-  const frameHandle = await page.locator('#tc-demo-iframe').elementHandle()
-  const content = await frameHandle?.contentFrame()
-  if (!content) {
-    record(false, `${pageLabel}: missing iframe content`)
-    return
-  }
-
-  await exerciseInteractions(content, slug)
 
   const shotDir = join(outRoot, slug)
   await mkdir(shotDir, { recursive: true })
 
   for (const state of states) {
     const label = `${slug} ${state.id} ${viewport.id} ${theme.id}`
-    const locator = iframe.locator(`[data-tc-demo-state="${state.id}"]`)
-    await locator.scrollIntoViewIfNeeded({ timeout: 20_000 }).catch(() => {})
+    const section = page.locator(`[data-tc-demo-state-section="${state.id}"]`)
+    await section.scrollIntoViewIfNeeded({ timeout: 20_000 }).catch(() => {})
+    const iframeLocator = section.locator('iframe.tc-demo-state-iframe')
+    await iframeLocator.waitFor({ state: 'visible', timeout: 30_000 })
+    const frameHandle = await iframeLocator.elementHandle()
+    const content = await frameHandle?.contentFrame()
+    if (!content) {
+      record(false, `${label}: missing iframe content`)
+      continue
+    }
+    await content.waitForSelector('#tc-demo-root', { timeout: 30_000 }).catch(() => {})
     await page.waitForTimeout(200)
+    await exerciseInteractions(content, slug)
     await assertStateClipping(content, state.id, label)
 
+    if (theme.dark) {
+      const darkOk = await content.evaluate(() => {
+        const fill = document.querySelector('[data-tc-demo-state].tc-demo-state-fill')
+        if (!fill) return 'missing fill'
+        const bg = getComputedStyle(fill).backgroundColor
+        const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+        if (!m) return `no rgb ${bg}`
+        const lum = (Number(m[1]) * 0.2126 + Number(m[2]) * 0.7152 + Number(m[3]) * 0.0722) / 255
+        return lum < 0.35 ? true : `bg too light ${bg}`
+      })
+      record(darkOk === true, `${label}: dark frame background (${String(darkOk)})`)
+    }
+
+    const phone = section.locator('.tc-demo-phone-frame')
     const frameFile = `${viewport.id}-frame-${theme.id}-${state.id}.png`
-    await locator.screenshot({ path: join(shotDir, frameFile) })
+    await phone.screenshot({ path: join(shotDir, frameFile) })
     record(true, `${label}: captured frame`)
 
     if (viewport.id === 'mobile') {
       const pageFile = `${viewport.id}-page-${theme.id}-${state.id}.png`
-      await page.screenshot({ path: join(shotDir, pageFile), fullPage: false })
+      await section.screenshot({ path: join(shotDir, pageFile) })
       record(true, `${label}: captured page`)
     }
   }
