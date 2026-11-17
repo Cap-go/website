@@ -1,4 +1,6 @@
 import { expect, test } from 'bun:test'
+import { readFileSync } from 'node:fs'
+import { runInNewContext } from 'node:vm'
 import {
   appendAttributionToUrl,
   buildFirstTouchAttribution,
@@ -302,6 +304,7 @@ test('getSignupUserMetadataForRegistration and events include the stored direct 
       first_touch_type: 'other',
       first_touch_path: '/live-update/',
       signup_offer: 'direct',
+      first_utm_source: 'google',
     })
   })
 })
@@ -324,4 +327,48 @@ test('an expired stored offer is not sent at registration', () => {
     expect(getSignupUserMetadataForRegistration().offer).toBeUndefined()
     expect(getSignupAttributionForEvents().signup_offer).toBeUndefined()
   })
+})
+
+test('ad creative and click reference survive first capture, storage, links and registration', () => {
+  const oppref = 'opaque-Example_click+/=='
+  const search = `?utm_source=chatgpt&utm_medium=paid&utm_campaign=sales&utm_content=security-a&utm_term=capacitor&offer=direct&oppref=${encodeURIComponent(oppref)}`
+  // Exercise the real synchronous script too: navigation can beat the bundled script.
+  const source = readFileSync(new URL('../src/components/Attribution.astro', import.meta.url), 'utf8')
+  const script = source.match(/<script[\s\S]*?>([\s\S]*?)<\/script>/)[1]
+  const store = new Map()
+  const document = { cookie: '', documentElement: { setAttribute() {} } }
+  runInNewContext(script, {
+    cookieName: 'capgo_attribution',
+    storageKey: 'capgo_attribution',
+    maxAge: 180 * 86400,
+    offerParam: 'offer',
+    directOffer: 'direct',
+    URLSearchParams,
+    location: { search, pathname: '/security/', hostname: 'capgo.app', protocol: 'https:' },
+    document,
+    localStorage: { getItem: (key) => store.get(key), setItem: (key, value) => store.set(key, value) },
+  })
+  const stored = deserializeAttribution(store.get('capgo_attribution'))
+  expect(stored).toMatchObject({ utm_content: 'security-a', utm_term: 'capacitor', oppref, offer: 'direct' })
+  const linked = new URL(appendAttributionToUrl('https://console.capgo.app/login/', stored))
+  expect(linked.searchParams.get('oppref')).toBe(oppref)
+  expect(linked.searchParams.get('utm_content')).toBe('security-a')
+  expect(appendAttributionToUrl('https://example.com/', stored)).toBe('https://example.com/')
+  const later = mergeAttribution(stored, parseAttributionFromSearch('?utm_content=other&oppref=other'))
+  expect(later.oppref).toBe(oppref)
+  expect(later.utm_content).toBe('security-a')
+  withBrowserGlobals('', '/register/', document.cookie, () => {
+    expect(getSignupUserMetadataForRegistration()).toMatchObject({ oppref, utm_content: 'security-a', utm_term: 'capacitor' })
+    expect(getSignupAttributionForEvents()).toMatchObject({ first_utm_campaign: 'sales', first_utm_content: 'security-a', first_utm_term: 'capacitor' })
+    expect(getSignupAttributionForEvents()).not.toHaveProperty('oppref')
+  })
+  expect(toPostHogAttributionProps(stored)).toMatchObject({ first_utm_content: 'security-a', first_utm_term: 'capacitor' })
+  expect(toPostHogAttributionProps(stored)).not.toHaveProperty('oppref')
+})
+
+test('ignores oversized or malformed optional click references', () => {
+  for (const value of ['', 'x'.repeat(1025), 'bad\nreference', ' spaced ']) {
+    expect(parseAttributionFromSearch(`?oppref=${encodeURIComponent(value)}`).oppref).toBeUndefined()
+    expect(deserializeAttribution(JSON.stringify({ oppref: value }))).toBeNull()
+  }
 })

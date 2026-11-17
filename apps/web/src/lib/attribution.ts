@@ -13,6 +13,9 @@ export type CapgoAttribution = {
   utm_source?: string
   utm_medium?: string
   utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+  oppref?: string
   first_touch_type?: FirstTouchType
   first_touch_path?: string
   offer?: CapgoOffer
@@ -20,13 +23,20 @@ export type CapgoAttribution = {
   offer_at?: string
 }
 
+// OpenAI requires the opaque click reference unchanged, not trimmed or hashed.
+// Bound optional tracking input so it cannot crowd out the attribution cookie.
+export function normalizeOpenAIClickReference(value: unknown): string | undefined {
+  // eslint-disable-next-line no-control-regex -- reject control characters in opaque external identifiers
+  return typeof value === 'string' && value.length > 0 && value.length <= 1024 && !/[\u0000-\u0020\u007f]/.test(value) ? value : undefined
+}
+
 export const ATTRIBUTION_COOKIE_NAME = 'capgo_attribution'
 export const ATTRIBUTION_STORAGE_KEY = 'capgo_attribution'
 export const ATTRIBUTION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60
 
-const TRACKED_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'first_touch_type', 'first_touch_path', 'offer', 'offer_at'] as const
+const TRACKED_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'oppref', 'first_touch_type', 'first_touch_path', 'offer', 'offer_at'] as const
 /** Keys forwarded to register/console links. `offer_at` stays client-side: the offer is re-stamped when it is captured from a URL. */
-const LINK_PARAM_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'first_touch_type', 'first_touch_path', 'offer'] as const
+const LINK_PARAM_KEYS = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'oppref', 'first_touch_type', 'first_touch_path', 'offer'] as const
 
 /** Only the exact value `direct` is a recognised offer; anything else (including padded or upper-case variants) is ignored. */
 export function normalizeOffer(value: unknown): CapgoOffer | undefined {
@@ -56,15 +66,27 @@ const QUERY_PARAM_KEYS = [...LINK_PARAM_KEYS, 'signup_source'] as const
 
 export function hasAttributionValues(data: CapgoAttribution | null | undefined): boolean {
   if (!data) return false
-  return Boolean(data.ref || data.utm_source || data.utm_medium || data.utm_campaign || data.first_touch_type || data.first_touch_path || data.offer)
+  return Boolean(
+    data.ref ||
+    data.utm_source ||
+    data.utm_medium ||
+    data.utm_campaign ||
+    data.utm_content ||
+    data.utm_term ||
+    data.oppref ||
+    data.first_touch_type ||
+    data.first_touch_path ||
+    data.offer,
+  )
 }
 
 export function parseAttributionFromSearch(search: string, now: number = Date.now()): CapgoAttribution {
   const normalized = search.startsWith('?') ? search.slice(1) : search
   const params = new URLSearchParams(normalized)
   const data: CapgoAttribution = {}
-  for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign'] as const) {
-    const value = params.get(key)?.trim()
+  for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'oppref'] as const) {
+    const raw = params.get(key)
+    const value = key === 'oppref' ? normalizeOpenAIClickReference(raw) : raw?.trim()
     if (value) {
       data[key] = value
     }
@@ -181,6 +203,8 @@ export function toPostHogAttributionProps(data: CapgoAttribution): Record<string
   if (data.utm_source) props.first_utm_source = data.utm_source
   if (data.utm_medium) props.first_utm_medium = data.utm_medium
   if (data.utm_campaign) props.first_utm_campaign = data.utm_campaign
+  if (data.utm_content) props.first_utm_content = data.utm_content
+  if (data.utm_term) props.first_utm_term = data.utm_term
   if (data.first_touch_type) props.first_touch_type = data.first_touch_type
   if (data.first_touch_path) props.first_touch_path = data.first_touch_path
   const signupSource = deriveSignupSource(data)
@@ -210,6 +234,11 @@ export function pickTrackedAttributionFields(record: Record<string, unknown> | C
   if (!record) return data
   for (const key of TRACKED_KEYS) {
     if (key === 'offer' || key === 'offer_at') continue
+    if (key === 'oppref') {
+      const oppref = normalizeOpenAIClickReference(record[key])
+      if (oppref) data.oppref = oppref
+      continue
+    }
     const value = (record as Record<string, unknown>)[key]
     if (typeof value === 'string' && value.trim()) {
       if (key === 'first_touch_type') {
@@ -255,7 +284,7 @@ function resolveFirstTouchPair(existing: CapgoAttribution, incoming: CapgoAttrib
 export function mergeAttribution(existing: CapgoAttribution | null | undefined, incoming: CapgoAttribution, now: number = Date.now()): CapgoAttribution {
   const base = pickTrackedAttributionFields(existing ?? null, now)
   const merged: CapgoAttribution = { ...base, ...resolveFirstTouchPair(base, incoming) }
-  for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign'] as const) {
+  for (const key of ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'oppref'] as const) {
     if (!merged[key] && incoming[key]) merged[key] = incoming[key]
   }
   // First touch wins: a stored, unexpired offer keeps its original capture time (no renewal on revisit).
@@ -423,6 +452,9 @@ export function getSignupUserMetadataForRegistration(): Record<string, string> {
   if (props.first_utm_source) metadata.utm_source = props.first_utm_source
   if (props.first_utm_medium) metadata.utm_medium = props.first_utm_medium
   if (props.first_utm_campaign) metadata.utm_campaign = props.first_utm_campaign
+  if (props.first_utm_content) metadata.utm_content = props.first_utm_content
+  if (props.first_utm_term) metadata.utm_term = props.first_utm_term
+  if (merged.oppref) metadata.oppref = merged.oppref
   if (merged.offer) metadata.offer = merged.offer
   return metadata
 }
@@ -446,6 +478,9 @@ export function getSignupAttributionForEvents(): Record<string, string> {
   if (props.first_touch_type) events.first_touch_type = props.first_touch_type
   if (props.first_touch_path) events.first_touch_path = props.first_touch_path
   if (props.signup_offer) events.signup_offer = props.signup_offer
+  for (const key of ['first_utm_source', 'first_utm_medium', 'first_utm_campaign', 'first_utm_content', 'first_utm_term']) {
+    if (props[key]) events[key] = props[key]
+  }
   return events
 }
 
