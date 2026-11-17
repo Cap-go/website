@@ -92,7 +92,9 @@ html.dark body.tc-demo-shell-body {
 }
 
 .tc-demo-shell-body.c-ios .tc-demo-component-stage button[role='button'],
-.tc-demo-shell-body .c-ios .tc-demo-component-stage button[role='button'] {
+.tc-demo-shell-body .c-ios .tc-demo-component-stage button[role='button'],
+.tc-demo-shell-body.c-ios .tc-demo-component-stage .actions-button,
+.tc-demo-shell-body .c-ios .tc-demo-component-stage .list-button {
   text-transform: none;
 }
 

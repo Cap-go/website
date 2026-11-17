@@ -1112,36 +1112,9 @@ const legacyDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
     const { h } = ctx
     return overlayTrigger(ctx, 'Open actions', ctx.actionsOpen)
   },
-  'capacitor-actions-button': (ctx) => {
-    const { h } = ctx
-    return h(
-      List,
-      { strong: true, inset: true, class: 'tc-demo-actions-list' },
-      {
-        default: () => [h(ListItem, { title: 'Label', header: true }), h(ListButton, {}, { default: () => 'Primary action' }), h(ListButton, {}, { default: () => 'Secondary' })],
-      },
-    )
-  },
-  'capacitor-actions-group': (ctx) => {
-    const { h } = ctx
-    return h(
-      List,
-      { strong: true, inset: true, class: 'tc-demo-actions-list' },
-      {
-        default: () => [h(ListButton, {}, { default: () => 'One' }), h(ListButton, {}, { default: () => 'Two' })],
-      },
-    )
-  },
-  'capacitor-actions-label': (ctx) => {
-    const { h } = ctx
-    return h(
-      List,
-      { strong: true, inset: true, class: 'tc-demo-actions-list' },
-      {
-        default: () => [h(ListItem, { title: 'Section title', header: true }), h(ListButton, {}, { default: () => 'Item' })],
-      },
-    )
-  },
+  'capacitor-actions-button': (ctx) => overlayTrigger(ctx, 'Open actions', ctx.actionsOpen),
+  'capacitor-actions-group': (ctx) => overlayTrigger(ctx, 'Open actions', ctx.actionsOpen),
+  'capacitor-actions-label': (ctx) => overlayTrigger(ctx, 'Open actions', ctx.actionsOpen),
   'capacitor-alert': (ctx) => {
     const { h } = ctx
     return h(Alert, { class: 'p-4' }, { default: () => 'Heads up: registry Alert styles.' })
