@@ -138,6 +138,10 @@ html.dark body.tc-demo-shell-body {
   background-color: color-mix(in srgb, currentColor 6%, transparent);
 }
 
+.tc-demo-screen-filler-row {
+  min-height: 2.75rem;
+}
+
 .tc-demo-page-single-state {
   display: flex;
   flex-direction: column;
@@ -215,6 +219,12 @@ html.dark body.tc-demo-shell-body {
   top: 50% !important;
   bottom: auto !important;
   transform: translateY(-50%) !important;
+  overflow: hidden !important;
+}
+
+.tc-demo-overlay-layer :where(.dialog) :where(.hairline-b, [class*='hairline']) {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .tc-demo-overlay-layer :where(.panel) {
@@ -227,12 +237,39 @@ html.dark body.tc-demo-shell-body {
 
 .tc-demo-overlay-layer .tc-demo-registry-toast:where(.fixed) {
   top: auto !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
+  bottom: max(0.75rem, env(safe-area-inset-bottom, 0px)) !important;
+  left: 0.75rem !important;
+  right: 0.75rem !important;
+  width: auto !important;
+  max-width: calc(100% - 1.5rem) !important;
   transform: none !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 0.35);
+}
+
+.tc-demo-overlay-layer .tc-demo-registry-toast > div {
+  width: 100%;
+}
+
+.tc-demo-screen-ios-light .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(44 44 46) !important;
+  color: rgb(255 255 255) !important;
+}
+
+.tc-demo-screen-ios-dark .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(44 44 46) !important;
+  color: rgb(255 255 255) !important;
+}
+
+.tc-demo-screen-material-light .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(50 47 53) !important;
+  color: rgb(230 225 229) !important;
+}
+
+.tc-demo-screen-material-dark .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(49 48 51) !important;
+  color: rgb(230 225 229) !important;
 }
 
 .tc-demo-section-heading {

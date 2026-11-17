@@ -111,6 +111,98 @@ async function assertPageLayout(page, label, options = {}) {
 }
 
 /**
+ * @param {import('playwright').Page} page
+ * @param {string} label
+ * @param {{ scrolled?: boolean }} [options]
+ */
+async function assertDemoCatalogChrome(page, label, options = {}) {
+  const scrolled = options.scrolled ?? false
+  const metrics = await page.evaluate(() => {
+    const header = document.querySelector('header')
+    const breadcrumb = document.querySelector('#tc-demo-page-intro nav[aria-label="Breadcrumb"]')
+    const headerStyle = header ? getComputedStyle(header) : null
+    const headerRect = header?.getBoundingClientRect()
+    const crumbRect = breadcrumb?.getBoundingClientRect()
+    const gap = headerRect && crumbRect ? crumbRect.top - headerRect.bottom : null
+    const parseAlpha = (bg) => {
+      if (!bg || bg === 'transparent') return 0
+      const slash = bg.match(/rgba?\([^)]+[/\s]([\d.]+)\)/)
+      if (slash) return Number(slash[1])
+      return bg.startsWith('rgb') ? 1 : 0
+    }
+    const headerAlpha = headerStyle ? parseAlpha(headerStyle.backgroundColor) : 0
+    const headerHasBackdrop = Boolean(headerStyle?.backdropFilter && headerStyle.backdropFilter !== 'none')
+    const menuBtn = document.querySelector('#menu-toggle')
+    let contentBleedsThroughHeader = false
+    if (menuBtn) {
+      const menuRect = menuBtn.getBoundingClientRect()
+      const cx = menuRect.left + menuRect.width / 2
+      const cy = menuRect.top + menuRect.height / 2
+      const stack = document.elementsFromPoint(cx, cy)
+      const under = stack.find((el) => el !== menuBtn && !(header?.contains(el)))
+      if (under && (under.closest('#tc-demo-page-intro') || under.closest('#tc-demo-registry-counts'))) {
+        contentBleedsThroughHeader = true
+      }
+    }
+    return { gap, headerAlpha, headerHasBackdrop, contentBleedsThroughHeader }
+  })
+  if (!scrolled) {
+    record(
+      metrics.gap !== null && metrics.gap >= 0 && metrics.gap <= 32,
+      `${label}: header-to-breadcrumb gap ${metrics.gap}px (want ≤32)`,
+    )
+  }
+  if (scrolled) {
+    record(
+      metrics.headerHasBackdrop || metrics.headerAlpha >= 0.85,
+      `${label}: sticky header backdrop on scroll (alpha=${metrics.headerAlpha}, backdrop=${metrics.headerHasBackdrop})`,
+    )
+    record(!metrics.contentBleedsThroughHeader, `${label}: intro content bleeds through sticky header`)
+  }
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} label
+ */
+async function assertDialogHairlineWithinDialog(page, label) {
+  const ok = await page.evaluate(() => {
+    const dialog = document.querySelector('[role="dialog"]')
+    if (!dialog) return 'no dialog'
+    const dRect = dialog.getBoundingClientRect()
+    for (const sep of dialog.querySelectorAll('[class*="hairline"]')) {
+      const sRect = sep.getBoundingClientRect()
+      if (sRect.width > dRect.width + 2) {
+        return `hairline ${Math.round(sRect.width)}px > dialog ${Math.round(dRect.width)}px`
+      }
+    }
+    return true
+  })
+  record(ok === true, `${label}: dialog divider within dialog width (${String(ok)})`)
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} label
+ */
+async function assertToastHasVisibleSurface(page, label) {
+  const ok = await page.evaluate(() => {
+    const toast = document.querySelector('.tc-demo-registry-toast')
+    const fill = document.querySelector('.tc-demo-state-fill')
+    if (!toast || !fill) return 'missing toast or stage'
+    const lum = (rgb) => {
+      const m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+      if (!m) return 0
+      return (Number(m[1]) * 0.2126 + Number(m[2]) * 0.7152 + Number(m[3]) * 0.0722) / 255
+    }
+    const toastLum = lum(getComputedStyle(toast).backgroundColor)
+    const screenLum = lum(getComputedStyle(fill).backgroundColor)
+    return Math.abs(toastLum - screenLum) > 0.07 ? true : `toast blends (t=${toastLum.toFixed(2)} screen=${screenLum.toFixed(2)})`
+  })
+  record(ok === true, `${label}: toast visible surface (${String(ok)})`)
+}
+
+/**
  * @param {import('playwright').Page | import('playwright').Frame} pageOrFrame
  * @param {string} stateId
  * @param {string} label
@@ -244,6 +336,12 @@ async function qaSlug(page, slug, viewport, theme) {
     await exerciseInteractions(page, slug)
     await assertStateClipping(page, state.id, label)
     if (theme.dark) await assertDarkPhoneBackground(page, label)
+    if ((slug === 'capacitor-dialog' || slug === 'capacitor-alert') && state.id === 'open') {
+      await assertDialogHairlineWithinDialog(page, label)
+    }
+    if (slug === 'capacitor-toast' && state.id === 'open') {
+      await assertToastHasVisibleSurface(page, label)
+    }
 
     const frameFile = `${viewport.id}-frame-${theme.id}-${state.id}.png`
     await page.locator('#tc-demo-root').screenshot({ path: join(shotDir, frameFile) })
@@ -354,12 +452,14 @@ async function qaLayoutSmoke(page) {
     await page.waitForSelector('[data-tc-demo-intro]', { timeout: 30_000 })
     const labelTop = `layout-smoke ${route.file} top`
     await assertPageLayout(page, labelTop, { checkIntroClearance: true })
+    await assertDemoCatalogChrome(page, labelTop, { scrolled: false })
     await page.screenshot({ path: join(layoutDir, `${route.file}-390x844-top.png`), fullPage: false })
     record(true, `${labelTop}: captured`)
     await page.evaluate(() => window.scrollTo({ top: 600, left: 0 }))
     await page.waitForTimeout(400)
     const labelScroll = `layout-smoke ${route.file} scroll-600`
     await assertPageLayout(page, labelScroll, { checkIntroClearance: false })
+    await assertDemoCatalogChrome(page, labelScroll, { scrolled: true })
     await page.screenshot({ path: join(layoutDir, `${route.file}-390x844-scroll-600.png`), fullPage: false })
     record(true, `${labelScroll}: captured`)
   }

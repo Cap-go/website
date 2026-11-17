@@ -25,7 +25,14 @@ export function overlayScreenFiller(ctx: GalleryContext, label = 'Settings'): VN
       'div',
       { class: 'flex-1 space-y-2 p-3' },
       Array.from({ length: 4 }, (_, i) =>
-        h('div', { class: 'tc-demo-screen-filler-row h-10 rounded-lg', key: i }, `Row ${i + 1}`),
+        h(
+          'div',
+          {
+            class: 'tc-demo-screen-filler-row flex h-11 items-center rounded-lg px-3 text-sm leading-none',
+            key: i,
+          },
+          `Row ${i + 1}`,
+        ),
       ),
     ),
   ])

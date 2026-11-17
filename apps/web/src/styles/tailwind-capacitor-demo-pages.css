@@ -1,0 +1,6 @@
+/* Demo catalog pages: sticky site header + intro clearance at 390px */
+body:has(#tc-demo-page-intro) > .min-h-dvh > header {
+  background: rgb(17 24 39 / 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}

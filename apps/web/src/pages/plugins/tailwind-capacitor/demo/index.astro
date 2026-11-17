@@ -6,6 +6,7 @@ import { TAILWIND_CAPACITOR_REGISTRY_COMMIT } from '../../../../../../shared/con
 import { tailwindCapacitorDemoNavItems } from '@/lib/tailwindCapacitorDemoCatalog'
 import manifest from '@/tailwind-capacitor-snapshot/registry-manifest.json'
 import Layout from '@/layouts/Layout.astro'
+import tailwindCapacitorDemoPagesCss from '@/styles/tailwind-capacitor-demo-pages.css?url'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -28,6 +29,7 @@ const metaLine = `Registry pin: <code class="text-gray-400">${TAILWIND_CAPACITOR
 ---
 
 <Layout content={{ title, description, ldJson, canonical: Astro.url.pathname }}>
+  <link rel="stylesheet" href={tailwindCapacitorDemoPagesCss} slot="head" />
   <TailwindCapacitorDemoIntro
     locale={locale}
     title={title}
