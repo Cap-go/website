@@ -42,6 +42,23 @@ function record(ok, message) {
   }
 }
 
+function assertStateManifestUsesNamedStates() {
+  for (const [slug, states] of Object.entries(stateManifest)) {
+    for (const state of states) {
+      record(
+        state.id !== 'default',
+        `state-manifest: ${slug} must not use id "default" (got "${state.label}")`,
+      )
+      record(
+        state.id !== 'alternate',
+        `state-manifest: ${slug} must not use id "alternate" (got "${state.label}")`,
+      )
+    }
+  }
+}
+
+assertStateManifestUsesNamedStates()
+
 /**
  * @param {import('playwright').Page} page
  */
@@ -176,7 +193,7 @@ async function assertDarkPhoneBackground(page, label) {
  */
 async function qaSlug(page, slug, viewport, theme) {
   const path = `/plugins/tailwind-capacitor/demo/${encodeURIComponent(slug)}/`
-  const states = stateManifest[slug] ?? [{ id: 'default', label: 'Default' }]
+  const states = stateManifest[slug] ?? [{ id: 'preview', label: 'Preview' }]
   await page.setViewportSize({ width: viewport.width, height: viewport.height })
   await page.goto(`${baseUrl}${path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
   await page.waitForSelector('[data-tc-demo-state-section]', { timeout: 30_000 })
@@ -306,10 +323,39 @@ async function writeQaIndex() {
   await writeFile(manifestPath, `${JSON.stringify(entries, null, 2)}\n`)
 }
 
+/**
+ * @param {import('playwright').Page} page
+ */
+async function qaLayoutSmoke(page) {
+  if (process.env.TC_QA_ONLY_SLUG) return
+  const layoutDir = join(outRoot, 'layout-smoke')
+  await mkdir(layoutDir, { recursive: true })
+  const routes = [
+    { path: '/plugins/tailwind-capacitor/demo/', file: 'demo-index' },
+    { path: '/plugins/tailwind-capacitor/demo/capacitor-button/', file: 'capacitor-button' },
+  ]
+  await page.setViewportSize({ width: 390, height: 844 })
+  for (const route of routes) {
+    await page.goto(`${baseUrl}${route.path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
+    await page.waitForSelector('[data-tc-demo-intro]', { timeout: 30_000 })
+    const labelTop = `layout-smoke ${route.file} top`
+    await assertPageLayout(page, labelTop)
+    await page.screenshot({ path: join(layoutDir, `${route.file}-390x844-top.png`), fullPage: false })
+    record(true, `${labelTop}: captured`)
+    await page.evaluate(() => window.scrollTo({ top: 600, left: 0 }))
+    await page.waitForTimeout(400)
+    const labelScroll = `layout-smoke ${route.file} scroll-600`
+    await assertPageLayout(page, labelScroll)
+    await page.screenshot({ path: join(layoutDir, `${route.file}-390x844-scroll-600.png`), fullPage: false })
+    record(true, `${labelScroll}: captured`)
+  }
+}
+
 const browser = await chromium.launch()
 const context = await browser.newContext()
 const page = await context.newPage()
 try {
+  await qaLayoutSmoke(page)
   for (const slug of slugs) {
     for (const viewport of viewports) {
       for (const theme of themes) {
