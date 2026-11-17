@@ -493,7 +493,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
     const footerDialog = (buttons: VNode, title = 'Preview') =>
       h(
         Dialog,
-        { opened: true, class: 'tc-demo-dialog-button-stage', translucent: false },
+        { opened: true, class: 'tc-demo-dialog-button-stage tc-demo-dialog-button-preview', translucent: false },
         {
           title: () => title,
           default: () => 'Dialog footer button styles.',
