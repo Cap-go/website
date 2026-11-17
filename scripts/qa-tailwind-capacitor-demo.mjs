@@ -79,12 +79,12 @@ async function assertPageLayout(page, label) {
 }
 
 /**
- * @param {import('playwright').Frame} frame
+ * @param {import('playwright').Page | import('playwright').Frame} pageOrFrame
  * @param {string} stateId
  * @param {string} label
  */
-async function assertStateClipping(frame, stateId, label) {
-  const clipped = await frame.evaluate((id) => {
+async function assertStateClipping(pageOrFrame, stateId, label) {
+  const clipped = await pageOrFrame.evaluate((id) => {
     const stage = document.querySelector(`[data-tc-demo-state="${id}"]`)
     if (!stage) return ['missing state element']
     const bad = []
@@ -117,26 +117,52 @@ async function assertStateClipping(frame, stateId, label) {
 }
 
 /**
- * @param {import('playwright').Frame} frame
+ * @param {import('playwright').Page | import('playwright').Frame} target
  * @param {string} slug
  */
-async function exerciseInteractions(frame, slug) {
+async function exerciseInteractions(target, slug) {
   try {
     if (slug === 'capacitor-toggle' || slug === 'capacitor-checkbox' || slug === 'capacitor-radio') {
-      const control = frame.locator('[data-tc-demo-state="on"] .toggle, [data-tc-demo-state="on"] input, [data-tc-demo-state="on"] [role="checkbox"]').first()
+      const control = target.locator('[data-tc-demo-state="on"] .toggle, [data-tc-demo-state="on"] input, [data-tc-demo-state="on"] [role="checkbox"]').first()
       if (await control.count()) await control.click({ timeout: 3000 }).catch(() => {})
     }
     if (slug === 'capacitor-tabs' || slug === 'capacitor-segmented') {
-      const tab = frame.locator('[data-tc-demo-state] button, [data-tc-demo-state] .tab, [data-tc-demo-state] .segmented button').nth(1)
+      const tab = target.locator('[data-tc-demo-state] button, [data-tc-demo-state] .tab, [data-tc-demo-state] .segmented button').nth(1)
       if (await tab.count()) await tab.click({ timeout: 3000 }).catch(() => {})
     }
     if (slug === 'capacitor-list-input' || slug === 'capacitor-textarea' || slug === 'capacitor-searchbar') {
-      const field = frame.locator('[data-tc-demo-state="filled"] input, [data-tc-demo-state="filled"] textarea').first()
+      const field = target.locator('[data-tc-demo-state="filled"] input, [data-tc-demo-state="filled"] textarea, [data-tc-demo-state="with-cancel"] input').first()
       if (await field.count()) await field.fill('demo', { timeout: 3000 })
     }
   } catch (error) {
     record(false, `interaction failed on ${slug}: ${error instanceof Error ? error.message : String(error)}`)
   }
+}
+
+function shellUrl(slug, stateId, theme) {
+  const q = new URLSearchParams({
+    slug,
+    state: stateId,
+    platform: theme.platform,
+    dark: theme.dark ? '1' : '0',
+  })
+  return `/plugins/tailwind-capacitor/demo/shell/?${q}`
+}
+
+/**
+ * @param {import('playwright').Page} page
+ */
+async function assertDarkPhoneBackground(page, label) {
+  const darkOk = await page.evaluate(() => {
+    const fill = document.querySelector('[data-tc-demo-state].tc-demo-state-fill')
+    if (!fill) return 'missing fill'
+    const bg = getComputedStyle(fill).backgroundColor
+    const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+    if (!m) return `no rgb ${bg}`
+    const lum = (Number(m[1]) * 0.2126 + Number(m[2]) * 0.7152 + Number(m[3]) * 0.0722) / 255
+    return lum < 0.35 ? true : `bg too light ${bg}`
+  })
+  record(darkOk === true, `${label}: dark frame background (${String(darkOk)})`)
 }
 
 /**
@@ -160,47 +186,37 @@ async function qaSlug(page, slug, viewport, theme) {
   const shotDir = join(outRoot, slug)
   await mkdir(shotDir, { recursive: true })
 
-  for (const state of states) {
-    const label = `${slug} ${state.id} ${viewport.id} ${theme.id}`
-    const section = page.locator(`[data-tc-demo-state-section="${state.id}"]`)
-    await section.scrollIntoViewIfNeeded({ timeout: 20_000 }).catch(() => {})
-    const iframeLocator = section.locator('iframe.tc-demo-state-iframe')
-    await iframeLocator.waitFor({ state: 'visible', timeout: 30_000 })
-    const frameHandle = await iframeLocator.elementHandle()
-    const content = await frameHandle?.contentFrame()
-    if (!content) {
-      record(false, `${label}: missing iframe content`)
-      continue
-    }
-    await content.waitForSelector('#tc-demo-root', { timeout: 30_000 }).catch(() => {})
-    await page.waitForTimeout(200)
-    await exerciseInteractions(content, slug)
-    await assertStateClipping(content, state.id, label)
-
-    if (theme.dark) {
-      const darkOk = await content.evaluate(() => {
-        const fill = document.querySelector('[data-tc-demo-state].tc-demo-state-fill')
-        if (!fill) return 'missing fill'
-        const bg = getComputedStyle(fill).backgroundColor
-        const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
-        if (!m) return `no rgb ${bg}`
-        const lum = (Number(m[1]) * 0.2126 + Number(m[2]) * 0.7152 + Number(m[3]) * 0.0722) / 255
-        return lum < 0.35 ? true : `bg too light ${bg}`
-      })
-      record(darkOk === true, `${label}: dark frame background (${String(darkOk)})`)
-    }
-
-    const phone = section.locator('.tc-demo-phone-frame')
-    const frameFile = `${viewport.id}-frame-${theme.id}-${state.id}.png`
-    await phone.screenshot({ path: join(shotDir, frameFile) })
-    record(true, `${label}: captured frame`)
-
-    if (viewport.id === 'mobile') {
+  if (viewport.id === 'mobile') {
+    for (const state of states) {
+      const label = `${slug} ${state.id} ${viewport.id} ${theme.id}`
+      const section = page.locator(`[data-tc-demo-state-section="${state.id}"]`)
+      await section.scrollIntoViewIfNeeded({ timeout: 20_000 }).catch(() => {})
+      await page.waitForTimeout(150)
       const pageFile = `${viewport.id}-page-${theme.id}-${state.id}.png`
       await section.screenshot({ path: join(shotDir, pageFile) })
       record(true, `${label}: captured page`)
     }
   }
+
+  const phoneViewport = { width: 390, height: 720 }
+  await page.setViewportSize(phoneViewport)
+
+  for (const state of states) {
+    const label = `${slug} ${state.id} ${viewport.id} ${theme.id}`
+    await page.goto(`${baseUrl}${shellUrl(slug, state.id, theme)}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
+    await page.waitForSelector('[data-tc-demo-state]', { timeout: 30_000 })
+    await page.waitForSelector('#tc-demo-root', { timeout: 30_000 })
+    await page.waitForTimeout(250)
+    await exerciseInteractions(page, slug)
+    await assertStateClipping(page, state.id, label)
+    if (theme.dark) await assertDarkPhoneBackground(page, label)
+
+    const frameFile = `${viewport.id}-frame-${theme.id}-${state.id}.png`
+    await page.locator('#tc-demo-root').screenshot({ path: join(shotDir, frameFile) })
+    record(true, `${label}: captured frame`)
+  }
+
+  await page.setViewportSize({ width: viewport.width, height: viewport.height })
 }
 
 async function writeQaIndex() {
