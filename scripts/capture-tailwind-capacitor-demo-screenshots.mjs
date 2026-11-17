@@ -173,11 +173,16 @@ async function waitForDemoIframeReady(page) {
 }
 
 async function applyTheme(page, platform, dark) {
-  await resolveDemoFrameLocator(page).waitFor({ state: 'visible', timeout: 60_000 })
   const controls = page.locator('[data-tc-demo-controls]')
-  await controls.waitFor({ state: 'visible', timeout: 30_000 })
-  await controls.locator(`[data-tc-platform="${platform}"]`).click({ force: true })
-  await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
+  const iframeCount = await page.locator('iframe.tc-demo-state-iframe, #tc-demo-iframe').count()
+  if (!iframeCount && !(await controls.count())) return
+  if (await controls.count()) {
+    await controls.waitFor({ state: 'visible', timeout: 30_000 })
+    await controls.locator(`[data-tc-platform="${platform}"]`).click({ force: true })
+    await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
+  }
+  if (!iframeCount) return
+  await resolveDemoFrameLocator(page).waitFor({ state: 'visible', timeout: 60_000 })
   await page.evaluate(
     ([plat, isDark]) => {
       for (const iframe of document.querySelectorAll('iframe.tc-demo-state-iframe, #tc-demo-iframe')) {
@@ -417,9 +422,12 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
     const overviewName = `demo-page-${viewport.prefix}-${tag}-${label}.png`
 
     if (!onlyOpenShots) {
-      const frame = await resolveDemoFrame(page)
-      await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
-      await preparePhoneFrameForCapture(page)
+      const hasEmbeddedFrame = (await page.locator('iframe.tc-demo-state-iframe, #tc-demo-iframe').count()) > 0
+      if (hasEmbeddedFrame) {
+        const frame = await resolveDemoFrame(page)
+        await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
+        await preparePhoneFrameForCapture(page)
+      }
       await page.screenshot({ path: join(outDir, overviewName), fullPage: false })
       manifest.push(await fileEntry(overviewName))
     }
