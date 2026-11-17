@@ -5,15 +5,15 @@
   },
   {
     "fileName": "demo-alert-open-desktop-ios-light-after.png",
-    "sha256": "1d0365a058af95284e0d136fe5dbc757d46f742045eb561346278c45c8e5cb2c"
+    "sha256": "fdff286859a5ab0d52a73ab52bbc805804d86417efe821e3fa35fb71e7771957"
   },
   {
     "fileName": "demo-alert-open-desktop-material-dark-after.png",
-    "sha256": "49da37ac3764f8987746bbb0a6134da291bbcbbedab2a99bf4ba99988d203d8b"
+    "sha256": "b104a178da9aa969447d5f971cb3489d1c7d3fb0917840fdeefa6a4de96b9208"
   },
   {
     "fileName": "demo-alert-open-desktop-material-light-after.png",
-    "sha256": "152b2856001bd1bef994f9d0b14016bfa485881e333ed5590ce1363bc8119a1b"
+    "sha256": "15ca7d3eefca463e7379e4d4913a5d0458a3f7d07214a66144c2b3379e2f2f02"
   },
   {
     "fileName": "demo-alert-open-mobile-ios-dark-after.png",
@@ -21,7 +21,7 @@
   },
   {
     "fileName": "demo-alert-open-mobile-ios-light-after.png",
-    "sha256": "f5cfa80f8add3c307ecd0776e1657cd940eafa79c148780c69e6b89050d1a6e3"
+    "sha256": "a440d497b7b2f075a9973c6d00079b416e2b1b33b2e482195126bb3365b53568"
   },
   {
     "fileName": "demo-alert-open-mobile-material-dark-after.png",
@@ -33,19 +33,19 @@
   },
   {
     "fileName": "demo-dialog-open-desktop-ios-dark-after.png",
-    "sha256": "dd991da1c72af8eff12a2f61d479aca1af9ad8ff145b0164549373c48591e15f"
+    "sha256": "a42d3d338a498aa0f707582da88180fb68dcf7e4b43fcc724dc976fc7a5a97cd"
   },
   {
     "fileName": "demo-dialog-open-desktop-ios-light-after.png",
-    "sha256": "4ef313533a045c4784849e9aadbdc1e645285ef3e69fc4d20d9d77eb00df360c"
+    "sha256": "b4775f05f15fa656cfbe6d1bf7bbc45e65b8f1c9e020867989d77c8090bbcb1d"
   },
   {
     "fileName": "demo-dialog-open-desktop-material-dark-after.png",
-    "sha256": "d3b3edca8f6beebf84393eed039b9cd9c5a4a55da630262765865fd4b704ac82"
+    "sha256": "312d764587004da06762be9d2c3a19c1cd67e52b56ab5b0580224134086d989a"
   },
   {
     "fileName": "demo-dialog-open-desktop-material-light-after.png",
-    "sha256": "7bc0a7b619eb192a288ba9dfa27daa39b0862680645a061764d32ec87536663a"
+    "sha256": "050a6d9765af5d218e56d91ce107452e2398cc0a0df4a6b9a5c96fc91622f685"
   },
   {
     "fileName": "demo-dialog-open-mobile-ios-dark-after.png",
@@ -53,7 +53,7 @@
   },
   {
     "fileName": "demo-dialog-open-mobile-ios-light-after.png",
-    "sha256": "ad239265d4346efaa04092ec395ec3cbe5b47960a7b37b7d7a753ce5e70d5a9f"
+    "sha256": "98b46eb85d6588fd0403974760c1aa7c7cafefef1553af693b8a227038ab4546"
   },
   {
     "fileName": "demo-dialog-open-mobile-material-dark-after.png",
