@@ -71,11 +71,6 @@ import {
   Tab,
   Tabbar,
   TabbarLink,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
   Tabs,
   Textarea,
   Thumbnail,
@@ -93,8 +88,18 @@ import {
   overlayUnderlayTrigger,
 } from './demoOverlayHelpers'
 import { demoComponentStateRegistry } from './demoComponentStateRegistry'
+import {
+  buildTwoOptionSegmentedStates,
+  demoTableBodyCells,
+  demoTableBodyRow,
+  demoTableHeaderCell,
+  demoTableSample,
+  platformLabel,
+  type SlugStateDef,
+} from './demoGalleryShared'
 
 export type DemoState = { id: string; label: string; render: () => VNode }
+export { platformLabel }
 
 export type GalleryContext = {
   h: typeof h
@@ -117,8 +122,6 @@ export type GalleryContext = {
   tabsDemoActive: Ref<string>
   overlayTrigger: (label: string, openRef: Ref<boolean>, options?: { id?: string }) => VNode
 }
-
-type SlugStateDef = { id: string; label: string; render: (ctx: GalleryContext) => VNode }
 
 const foundationPackageNameSet = new Set<string>(foundationPackageNames)
 
@@ -183,98 +186,8 @@ export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'mate
   return { ...ctxBase, overlayTrigger }
 }
 
-export function platformLabel(ctx: GalleryContext): string {
-  return ctx.platform.value === 'ios' ? 'iOS' : 'Material'
-}
-
 function overlayTrigger(ctx: GalleryContext, label: string, openRef: Ref<boolean>, options: { id?: string } = {}) {
   return ctx.overlayTrigger(label, openRef, options)
-}
-
-function tableWithBodyRow(ctx: GalleryContext, label: string) {
-  const { h } = ctx
-  return h(
-    Table,
-    {},
-    {
-      default: () =>
-        h(
-          TableBody,
-          {},
-          {
-            default: () => h(TableRow, {}, { default: () => h(TableCell, {}, { default: () => label }) }),
-          },
-        ),
-    },
-  )
-}
-
-function tableWithHeaderCell(ctx: GalleryContext, label: string) {
-  const { h } = ctx
-  return h(
-    Table,
-    {},
-    {
-      default: () =>
-        h(
-          TableHead,
-          {},
-          {
-            default: () => h(TableRow, {}, { default: () => h(TableCell, { header: true }, { default: () => label }) }),
-          },
-        ),
-    },
-  )
-}
-
-function tableWithBodyCells(ctx: GalleryContext, ...labels: string[]) {
-  const { h } = ctx
-  return h(
-    Table,
-    {},
-    {
-      default: () =>
-        h(
-          TableBody,
-          {},
-          {
-            default: () =>
-              h(
-                TableRow,
-                {},
-                {
-                  default: () => labels.map((label) => h(TableCell, {}, { default: () => label })),
-                },
-              ),
-          },
-        ),
-    },
-  )
-}
-
-function demoTableSample(ctx: GalleryContext) {
-  const { h } = ctx
-  const headRow = h(
-    TableRow,
-    {},
-    {
-      default: () => [h(TableCell, { header: true }, { default: () => 'Name' }), h(TableCell, { header: true }, { default: () => 'Value' })],
-    },
-  )
-  const bodyRow = h(
-    TableRow,
-    {},
-    {
-      default: () => [h(TableCell, {}, { default: () => 'Rows' }), h(TableCell, {}, { default: () => '2' })],
-    },
-  )
-  return h(
-    Table,
-    {},
-    {
-      default: () => [h(TableHead, {}, { default: () => headRow }), h(TableBody, {}, { default: () => bodyRow })],
-    },
-  )
 }
 
 function settingsScene(ctx: GalleryContext) {
@@ -843,69 +756,19 @@ function buildRadioStates(ctx: GalleryContext): SlugStateDef[] {
 }
 
 function buildSegmentedStates(ctx: GalleryContext): SlugStateDef[] {
-  return [
-    {
-      id: 'one-selected',
-      label: 'One selected',
-      render: (c) => {
-        const { h } = c
-        return h(
-          Segmented,
-          { strong: true },
-          {
-            default: () => [h(SegmentedButton, { active: true }, { default: () => 'One' }), h(SegmentedButton, { active: false }, { default: () => 'Two' })],
-          },
-        )
-      },
-    },
-    {
-      id: 'two-selected',
-      label: 'Two selected',
-      render: (c) => {
-        const { h } = c
-        return h(
-          Segmented,
-          { strong: true },
-          {
-            default: () => [h(SegmentedButton, { active: false }, { default: () => 'One' }), h(SegmentedButton, { active: true }, { default: () => 'Two' })],
-          },
-        )
-      },
-    },
-  ]
+  return buildTwoOptionSegmentedStates(
+    ctx,
+    { id: 'one-selected', label: 'One selected', firstActive: true, options: ['One', 'Two'] },
+    { id: 'two-selected', label: 'Two selected', firstActive: false, options: ['One', 'Two'] },
+  )
 }
 
 function buildSegmentedButtonStates(ctx: GalleryContext): SlugStateDef[] {
-  return [
-    {
-      id: 'a-selected',
-      label: 'A selected',
-      render: (c) => {
-        const { h } = c
-        return h(
-          Segmented,
-          { strong: true },
-          {
-            default: () => [h(SegmentedButton, { active: true }, { default: () => 'A' }), h(SegmentedButton, { active: false }, { default: () => 'B' })],
-          },
-        )
-      },
-    },
-    {
-      id: 'b-selected',
-      label: 'B selected',
-      render: (c) => {
-        const { h } = c
-        return h(
-          Segmented,
-          { strong: true },
-          {
-            default: () => [h(SegmentedButton, { active: false }, { default: () => 'A' }), h(SegmentedButton, { active: true }, { default: () => 'B' })],
-          },
-        )
-      },
-    },
-  ]
+  return buildTwoOptionSegmentedStates(
+    ctx,
+    { id: 'a-selected', label: 'A selected', firstActive: true, options: ['A', 'B'] },
+    { id: 'b-selected', label: 'B selected', firstActive: false, options: ['A', 'B'] },
+  )
 }
 
 function buildTabsStates(ctx: GalleryContext, slug: 'capacitor-tab' | 'capacitor-tabs'): SlugStateDef[] {
@@ -1691,22 +1554,10 @@ const legacyDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
     const { h } = ctx
     return demoTableSample(ctx)
   },
-  'capacitor-table-body': (ctx) => {
-    const { h } = ctx
-    return tableWithBodyRow(ctx, 'Body row')
-  },
-  'capacitor-table-cell': (ctx) => {
-    const { h } = ctx
-    return tableWithBodyCells(ctx, 'Cell A', 'Cell B')
-  },
-  'capacitor-table-head': (ctx) => {
-    const { h } = ctx
-    return tableWithHeaderCell(ctx, 'Header')
-  },
-  'capacitor-table-row': (ctx) => {
-    const { h } = ctx
-    return tableWithBodyRow(ctx, 'Single row')
-  },
+  'capacitor-table-body': (ctx) => demoTableBodyRow(ctx, 'Body row'),
+  'capacitor-table-cell': (ctx) => demoTableBodyCells(ctx, 'Cell A', 'Cell B'),
+  'capacitor-table-head': (ctx) => demoTableHeaderCell(ctx, 'Header'),
+  'capacitor-table-row': (ctx) => demoTableBodyRow(ctx, 'Single row'),
   'capacitor-tabs': (ctx) => {
     const { h } = ctx
     return h(
@@ -1761,252 +1612,40 @@ const legacyDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
     return h(TouchRipple, { class: 'inline-flex' }, { default: () => h(Button, {}, { default: () => 'Ripple target' }) })
   },
 }
-const legacyAltDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
-  'capacitor-accordion': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-accordion'](ctx)])
-  },
-  'capacitor-accordion-item': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-accordion-item'](ctx)])
-  },
-  'capacitor-alert': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-alert'](ctx)])
-  },
-  'capacitor-app': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-app'](ctx)])
-  },
-  'capacitor-avatar': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-avatar'](ctx)])
-  },
-  'capacitor-badge': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-badge'](ctx)])
-  },
-  'capacitor-block': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-block'](ctx)])
-  },
-  'capacitor-block-footer': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-block-footer'](ctx)])
-  },
-  'capacitor-block-header': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-block-header'](ctx)])
-  },
-  'capacitor-block-title': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-block-title'](ctx)])
-  },
-  'capacitor-breadcrumbs': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-breadcrumbs'](ctx)])
-  },
-  'capacitor-breadcrumbs-collapsed': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-breadcrumbs-collapsed'](ctx)])
-  },
-  'capacitor-breadcrumbs-item': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-breadcrumbs-item'](ctx)])
-  },
-  'capacitor-breadcrumbs-separator': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-breadcrumbs-separator'](ctx)])
-  },
-  'capacitor-card': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-card'](ctx)])
-  },
-  'capacitor-chip': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-chip'](ctx)])
-  },
-  'capacitor-datetime': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-datetime'](ctx)])
-  },
-  'capacitor-dialog-button': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-dialog-button'](ctx)])
-  },
-  'capacitor-fab': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-fab'](ctx)])
-  },
-  'capacitor-footer': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-footer'](ctx)])
-  },
-  'capacitor-header': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-header'](ctx)])
-  },
-  'capacitor-icon': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-icon'](ctx)])
-  },
-  'capacitor-infinite-scroll': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-infinite-scroll'](ctx)])
-  },
-  'capacitor-item-sliding': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-item-sliding'](ctx)])
-  },
-  'capacitor-link': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-link'](ctx)])
-  },
-  'capacitor-list': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-list'](ctx)])
-  },
-  'capacitor-list-button': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-list-button'](ctx)])
-  },
-  'capacitor-list-group': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-list-group'](ctx)])
-  },
-  'capacitor-list-item': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-list-item'](ctx)])
-  },
-  'capacitor-menu-list': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-menu-list'](ctx)])
-  },
-  'capacitor-menu-list-item': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-menu-list-item'](ctx)])
-  },
-  'capacitor-message': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-message'](ctx)])
-  },
-  'capacitor-messagebar': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-messagebar'](ctx)])
-  },
-  'capacitor-messages': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-messages'](ctx)])
-  },
-  'capacitor-messages-title': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-messages-title'](ctx)])
-  },
-  'capacitor-modal': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-modal'](ctx)])
-  },
-  'capacitor-navbar': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-navbar'](ctx)])
-  },
-  'capacitor-navbar-back-link': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-navbar-back-link'](ctx)])
-  },
-  'capacitor-note': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-note'](ctx)])
-  },
-  'capacitor-notification': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-notification'](ctx)])
-  },
-  'capacitor-page': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-page'](ctx)])
-  },
-  'capacitor-picker': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-picker'](ctx)])
-  },
-  'capacitor-preloader': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-preloader'](ctx)])
-  },
-  'capacitor-progressbar': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-progressbar'](ctx)])
-  },
-  'capacitor-range': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-range'](ctx)])
-  },
-  'capacitor-refresher': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-refresher'](ctx)])
-  },
-  'capacitor-reorder': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-reorder'](ctx)])
-  },
-  'capacitor-select': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-select'](ctx)])
-  },
-  'capacitor-skeleton': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-skeleton'](ctx)])
-  },
-  'capacitor-split-pane': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-split-pane'](ctx)])
-  },
-  'capacitor-stepper': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-stepper'](ctx)])
-  },
-  'capacitor-tabbar': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-tabbar'](ctx)])
-  },
-  'capacitor-tabbar-link': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-tabbar-link'](ctx)])
-  },
-  'capacitor-table': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-table'](ctx)])
-  },
-  'capacitor-table-body': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-table-body'](ctx)])
-  },
-  'capacitor-table-cell': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-table-cell'](ctx)])
-  },
-  'capacitor-table-head': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-table-head'](ctx)])
-  },
-  'capacitor-table-row': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-table-row'](ctx)])
-  },
-  'capacitor-thumbnail': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-thumbnail'](ctx)])
-  },
-  'capacitor-toolbar': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-toolbar'](ctx)])
-  },
-  'capacitor-touch-ripple': (ctx) => {
-    const { h } = ctx
-    return h('div', { class: 'tc-demo-state-alt' }, [legacyDemoRenderers['capacitor-touch-ripple'](ctx)])
-  },
+const LEGACY_ALT_EXCLUDED_SLUGS = new Set([
+  'capacitor-actions',
+  'capacitor-actions-button',
+  'capacitor-actions-group',
+  'capacitor-actions-label',
+  'capacitor-button',
+  'capacitor-checkbox',
+  'capacitor-dialog',
+  'capacitor-input-otp',
+  'capacitor-list-input',
+  'capacitor-panel',
+  'capacitor-popover',
+  'capacitor-popup',
+  'capacitor-radio',
+  'capacitor-searchbar',
+  'capacitor-segmented',
+  'capacitor-segmented-button',
+  'capacitor-sheet',
+  'capacitor-tab',
+  'capacitor-tabs',
+  'capacitor-textarea',
+  'capacitor-toast',
+  'capacitor-toggle',
+])
+
+function wrapLegacyAltRender(render: (ctx: GalleryContext) => VNode): (ctx: GalleryContext) => VNode {
+  return (ctx) => ctx.h('div', { class: 'tc-demo-state-alt' }, [render(ctx)])
 }
+
+const legacyAltDemoRenderers = Object.fromEntries(
+  Object.entries(legacyDemoRenderers)
+    .filter(([slug]) => !LEGACY_ALT_EXCLUDED_SLUGS.has(slug))
+    .map(([slug, render]) => [slug, wrapLegacyAltRender(render)]),
+) as Record<string, (ctx: GalleryContext) => VNode>
 
 function expandedStatesForSlug(slug: string, ctx: GalleryContext): SlugStateDef[] | null {
   if (slug === 'foundation') return buildFoundationStates(ctx)

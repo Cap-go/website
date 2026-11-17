@@ -1,5 +1,14 @@
-import { h, ref, type VNode } from 'vue'
+import { h, type VNode } from 'vue'
 import type { GalleryContext } from './tailwindCapacitorDemoGallery'
+import {
+  demoTableBodyCells,
+  demoTableBodyRow,
+  demoTableHeaderCell,
+  demoTableSample,
+  overlayClosedOpen,
+  platformLabel,
+  type SlugStateDef,
+} from './demoGalleryShared'
 import {
   Accordion,
   AccordionItem,
@@ -56,11 +65,6 @@ import {
   Stepper,
   Tabbar,
   TabbarLink,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
   Thumbnail,
   Toolbar,
   TouchRipple,
@@ -70,8 +74,6 @@ import {
   overlayScreenFiller,
   overlayUnderlayTrigger,
 } from './demoOverlayHelpers'
-
-type SlugStateDef = { id: string; label: string; render: (ctx: GalleryContext) => VNode }
 
 const EXPANDED_IN_GALLERY = new Set([
   'foundation',
@@ -104,86 +106,6 @@ const EXPANDED_IN_GALLERY = new Set([
   'capacitor-input-otp',
 ])
 
-function platformLabel(ctx: GalleryContext): string {
-  return ctx.platform.value === 'ios' ? 'iOS' : 'Material'
-}
-
-function overlayClosedOpen(
-  triggerLabel: string,
-  screenTitle: string,
-  overlay: (ctx: GalleryContext) => VNode,
-  labels: { closed?: string; open?: string } = {},
-): SlugStateDef[] {
-  const openRef = ref(false)
-  return [
-    {
-      id: 'closed',
-      label: labels.closed ?? 'Closed',
-      render: (c) => overlayUnderlayTrigger(c, triggerLabel, openRef),
-    },
-    {
-      id: 'open',
-      label: labels.open ?? 'Open',
-      render: (c) => openOverlayPhoneStage(c, overlayScreenFiller(c, screenTitle), overlay(c)),
-    },
-  ]
-}
-
-function demoTableSample(ctx: GalleryContext): VNode {
-  const { h } = ctx
-  return h(Table, {}, {
-    default: () => [
-      h(TableHead, {}, {
-        default: () =>
-          h(TableRow, {}, {
-            default: () => [
-              h(TableCell, { header: true }, { default: () => 'Name' }),
-              h(TableCell, { header: true }, { default: () => 'Value' }),
-            ],
-          }),
-      }),
-      h(TableBody, {}, {
-        default: () =>
-          h(TableRow, {}, {
-            default: () => [h(TableCell, {}, { default: () => 'Rows' }), h(TableCell, {}, { default: () => '2' })],
-          }),
-      }),
-    ],
-  })
-}
-
-function tableBodyRow(ctx: GalleryContext, label: string): VNode {
-  const { h } = ctx
-  return h(Table, {}, {
-    default: () =>
-      h(TableBody, {}, {
-        default: () => h(TableRow, {}, { default: () => h(TableCell, {}, { default: () => label }) }),
-      }),
-  })
-}
-
-function tableHeaderCell(ctx: GalleryContext, label: string): VNode {
-  const { h } = ctx
-  return h(Table, {}, {
-    default: () =>
-      h(TableHead, {}, {
-        default: () => h(TableRow, {}, { default: () => h(TableCell, { header: true }, { default: () => label }) }),
-      }),
-  })
-}
-
-function tableBodyCells(ctx: GalleryContext, ...labels: string[]): VNode {
-  const { h } = ctx
-  return h(Table, {}, {
-    default: () =>
-      h(TableBody, {}, {
-        default: () =>
-          h(TableRow, {}, {
-            default: () => labels.map((label) => h(TableCell, {}, { default: () => label })),
-          }),
-      }),
-  })
-}
 
 function notificationVNode(ctx: GalleryContext, opened: boolean): VNode {
   const { h } = ctx
@@ -1302,23 +1224,23 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   },
   'capacitor-table': () => [
     { id: 'sample', label: 'Sample', render: (c) => demoTableSample(c) },
-    { id: 'compact', label: 'Compact', render: (c) => tableBodyRow(c, 'Compact row') },
+    { id: 'compact', label: 'Compact', render: (c) => demoTableBodyRow(c, 'Compact row') },
   ],
   'capacitor-table-body': () => [
-    { id: 'single-row', label: 'Single row', render: (c) => tableBodyRow(c, 'Body row') },
-    { id: 'two-rows', label: 'Two rows', render: (c) => tableBodyCells(c, 'A', 'B') },
+    { id: 'single-row', label: 'Single row', render: (c) => demoTableBodyRow(c, 'Body row') },
+    { id: 'two-rows', label: 'Two rows', render: (c) => demoTableBodyCells(c, 'A', 'B') },
   ],
   'capacitor-table-cell': () => [
-    { id: 'body-cell', label: 'Body cell', render: (c) => tableBodyCells(c, 'Cell A', 'Cell B') },
-    { id: 'header-cell', label: 'Header cell', render: (c) => tableHeaderCell(c, 'Header') },
+    { id: 'body-cell', label: 'Body cell', render: (c) => demoTableBodyCells(c, 'Cell A', 'Cell B') },
+    { id: 'header-cell', label: 'Header cell', render: (c) => demoTableHeaderCell(c, 'Header') },
   ],
   'capacitor-table-head': () => [
-    { id: 'header', label: 'Header', render: (c) => tableHeaderCell(c, 'Header') },
+    { id: 'header', label: 'Header', render: (c) => demoTableHeaderCell(c, 'Header') },
     { id: 'multi-column', label: 'Multi column', render: (c) => demoTableSample(c) },
   ],
   'capacitor-table-row': () => [
-    { id: 'single', label: 'Single', render: (c) => tableBodyRow(c, 'Single row') },
-    { id: 'values', label: 'Values', render: (c) => tableBodyCells(c, '42', '99') },
+    { id: 'single', label: 'Single', render: (c) => demoTableBodyRow(c, 'Single row') },
+    { id: 'values', label: 'Values', render: (c) => demoTableBodyCells(c, '42', '99') },
   ],
   'capacitor-thumbnail': (ctx) => {
     const { h } = ctx
