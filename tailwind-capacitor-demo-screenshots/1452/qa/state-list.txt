@@ -1,3 +1,4 @@
+foundation: packages, icons
 capacitor-accordion: default, alternate
 capacitor-accordion-item: default, alternate
 capacitor-actions: screen, sheet-open
@@ -81,4 +82,3 @@ capacitor-toast: screen, open
 capacitor-toggle: off, on, disabled
 capacitor-toolbar: default, alternate
 capacitor-touch-ripple: default, alternate
-foundation: packages, icons
