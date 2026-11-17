@@ -4238,7 +4238,7 @@ const messages = {
   solutions_webapp_to_mobile_cap1_desc: 'Capacitor places your built web app in native iOS and Android projects. Plugins give your JavaScript access to device features.',
   solutions_webapp_to_mobile_cap1_title: 'Capacitor wraps your web build',
   solutions_webapp_to_mobile_cap2_desc:
-    'Request iOS and Android builds from the CLI. iOS builds run on cloud Macs, so nobody on the team needs one. Build time depends on your project; see the public Native Build data page for measured processing and queue times.',
+    'Your AI agent or the CLI requests iOS and Android builds. iOS builds run on cloud Macs, so nobody on the team needs one. Build time depends on your project; see the public Native Build data page for measured processing and queue times.',
   solutions_webapp_to_mobile_cap2_title: 'Capgo Build compiles and signs',
   solutions_webapp_to_mobile_cap3_desc: 'Signed builds upload to App Store Connect and Google Play. The first release and every native change still go through store review.',
   solutions_webapp_to_mobile_cap3_title: 'Upload to the stores',
@@ -4249,9 +4249,9 @@ const messages = {
   solutions_webapp_to_mobile_prompt_card_title: 'Prompt for your coding agent',
   solutions_webapp_to_mobile_prompt_copy: 'Copy prompt',
   solutions_webapp_to_mobile_cta_primary: 'See the steps',
-  solutions_webapp_to_mobile_cta_subtitle: 'Start the 14-day free trial, wrap your app with Capacitor, and request your first iOS and Android builds from the CLI.',
+  solutions_webapp_to_mobile_cta_subtitle: 'Start the 14-day free trial, connect the Capgo MCP, and let your AI agent take your web app to its first iOS and Android builds.',
   solutions_webapp_to_mobile_cta_subtitle_direct:
-    'Pick a plan with a 14-day money-back guarantee, wrap your app with Capacitor, and request your first iOS and Android builds from the CLI.',
+    'Pick a plan with a 14-day money-back guarantee, connect the Capgo MCP, and let your AI agent take your web app to its first iOS and Android builds.',
   solutions_webapp_to_mobile_cta_title: 'Put your web app in the stores',
   solutions_webapp_to_mobile_description:
     'Wrap your existing web app with Capacitor, build signed iOS and Android apps with Capgo Build, publish to the App Store and Google Play, and ship web changes as live updates.',
@@ -4276,9 +4276,15 @@ const messages = {
   solutions_webapp_to_mobile_faq_desc: 'Short answers for teams taking an existing web app to the App Store and Google Play.',
   solutions_webapp_to_mobile_faq_title: 'Questions web teams ask',
   solutions_webapp_to_mobile_h1: 'Turn your web app into iOS and Android apps',
-  solutions_webapp_to_mobile_hero_mcp: 'Or let your AI agent do it with the Capgo MCP',
-  solutions_webapp_to_mobile_how1_body: 'Install Capacitor, set the app name, bundle ID, and build output folder, then add the iOS and Android projects.',
-  solutions_webapp_to_mobile_how1_title: 'Add Capacitor to your web app',
+  solutions_webapp_to_mobile_hero_mcp: 'See how the Capgo MCP guides your agent',
+  solutions_webapp_to_mobile_hero_tool1: 'Plans the static build, the latest Capacitor, the app ID, and the store steps',
+  solutions_webapp_to_mobile_hero_tool2: 'Picks the plugins your features need, with their permissions',
+  solutions_webapp_to_mobile_hero_tool3: 'Applies the mobile design and store review rules',
+  solutions_webapp_to_mobile_hero_tool4: 'Checks the project again until nothing blocks the release',
+  solutions_webapp_to_mobile_hero_tool5: 'Builds signed iOS and Android apps in the cloud',
+  solutions_webapp_to_mobile_how1_body:
+    'Connect the Capgo MCP and ask your agent. It switches the app to a static build, installs the latest Capacitor, sets the app name and ID, adds the iOS and Android projects, and applies the mobile design rules.',
+  solutions_webapp_to_mobile_how1_title: 'Let your AI agent add Capacitor',
   solutions_webapp_to_mobile_how2_body:
     'The onboarding adds your app to Capgo, creates a production channel, installs the updater plugin, and walks you through a first test update.',
   solutions_webapp_to_mobile_how2_title: 'Connect the app to Capgo',
@@ -4287,10 +4293,10 @@ const messages = {
   solutions_webapp_to_mobile_how4_body: 'After users install the store app, upload each new web build to a channel. Native changes still need a new store build.',
   solutions_webapp_to_mobile_how4_title: 'Ship web changes as live updates',
   solutions_webapp_to_mobile_how_desc:
-    'From an existing web app to store builds and live updates. Capacitor commands come from the Capacitor CLI, Capgo commands from the Capgo CLI docs.',
+    'From an existing web app to store builds and live updates. Your AI agent runs these steps through the Capgo MCP, or you run the Capgo CLI commands yourself.',
   solutions_webapp_to_mobile_how_title: 'How web teams ship mobile apps with Capgo',
   solutions_webapp_to_mobile_lead:
-    'Wrap your existing web build with Capacitor, build signed binaries with Capgo Build, and publish to the App Store and Google Play. After launch, ship web changes as live updates. Your web code stays the source.',
+    'Connect the Capgo MCP and your AI agent wraps your web build with Capacitor, applies the mobile design and store rules, and builds signed iOS and Android apps with Capgo Build for the App Store and Google Play. After launch, ship web changes as live updates. Your web code stays the source.',
   solutions_webapp_to_mobile_link_builder: 'Capgo Build docs',
   solutions_webapp_to_mobile_link_capacitor_guide: 'Web app to Capacitor guide',
   solutions_webapp_to_mobile_link_channels: 'Channels docs',
