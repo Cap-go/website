@@ -3,6 +3,7 @@ import { mkdir } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawn } from 'node:child_process'
+import { existsSync } from 'node:fs'
 
 const repoRoot = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const outDir = join(repoRoot, '.pr-screenshots-staging', '1460')
@@ -31,11 +32,17 @@ async function waitForPreviewReady(port, timeoutMs = 180_000) {
   throw new Error(`Preview on port ${port} did not become ready`)
 }
 
+function resolveBunExecutable() {
+  const home = process.env.HOME ?? ''
+  const candidates = [join(home, '.bun', 'bin', 'bun'), '/usr/local/bin/bun', '/usr/bin/bun']
+  return candidates.find((candidate) => candidate && existsSync(candidate)) ?? 'bun'
+}
+
 function startPreview() {
   return new Promise((resolve, reject) => {
-    const child = spawn('bun', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4783'], {
+    const child = spawn(resolveBunExecutable(), ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4783'], {
       cwd: join(repoRoot, 'apps/docs'),
-      env: { ...process.env, PATH: `${process.env.HOME}/.bun/bin:${process.env.PATH}` },
+      env: process.env,
       stdio: ['ignore', 'pipe', 'pipe'],
     })
     child.on('error', reject)
