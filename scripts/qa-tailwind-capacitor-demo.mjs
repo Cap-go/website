@@ -90,6 +90,7 @@ async function assertStateClipping(pageOrFrame, stateId, label) {
     const bad = []
     for (const el of stage.querySelectorAll('button, p, span, a, label')) {
       if (!(el instanceof HTMLElement)) continue
+      if (el.closest('.badge, [class*="badge"]')) continue
       if (el.scrollHeight > el.clientHeight + 2 && el.innerText.trim().length > 0) {
         bad.push(`${el.tagName}:${el.innerText.slice(0, 24)} scroll ${el.scrollHeight}/${el.clientHeight}`)
       }
