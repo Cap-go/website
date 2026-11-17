@@ -1,12 +1,12 @@
 {
   "repositoryCount": 144,
   "contributorCount": 613,
-  "versionCount": 16847,
-  "releaseCount": 7501,
+  "versionCount": 16869,
+  "releaseCount": 7504,
   "closedIssueCount": 1802,
-  "mergedPullRequestCount": 10271,
-  "resolvedItemCount": 12073,
-  "totalStars": 3230,
+  "mergedPullRequestCount": 10305,
+  "resolvedItemCount": 12107,
+  "totalStars": 3232,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 213,
       "contributors": 30,
-      "versionTags": 5961,
+      "versionTags": 5981,
       "releases": 1000,
       "closedIssues": 422,
-      "mergedPullRequests": 2847
+      "mergedPullRequests": 2876
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -388,7 +388,7 @@
     },
     "Cap-go/capacitor-social-login": {
       "url": "https://github.com/Cap-go/capacitor-social-login",
-      "stars": 222,
+      "stars": 223,
       "contributors": 24,
       "versionTags": 354,
       "releases": 138,
@@ -561,10 +561,10 @@
       "url": "https://github.com/Cap-go/capacitor-downloader",
       "stars": 15,
       "contributors": 3,
-      "versionTags": 118,
-      "releases": 99,
+      "versionTags": 120,
+      "releases": 101,
       "closedIssues": 12,
-      "mergedPullRequests": 71
+      "mergedPullRequests": 74
     },
     "Cap-go/capacitor-env": {
       "url": "https://github.com/Cap-go/capacitor-env",
@@ -1165,9 +1165,9 @@
       "stars": 6,
       "contributors": 46,
       "versionTags": 351,
-      "releases": 7,
+      "releases": 8,
       "closedIssues": 1,
-      "mergedPullRequests": 18
+      "mergedPullRequests": 19
     },
     "Cap-go/capacitor-plus": {
       "url": "https://github.com/Cap-go/capacitor-plus",
@@ -1297,12 +1297,12 @@
     },
     "Cap-go/tailwind-capacitor": {
       "url": "https://github.com/Cap-go/tailwind-capacitor",
-      "stars": 22,
+      "stars": 23,
       "contributors": 3,
       "versionTags": 0,
       "releases": 0,
       "closedIssues": 4,
-      "mergedPullRequests": 120
+      "mergedPullRequests": 121
     }
   }
 }

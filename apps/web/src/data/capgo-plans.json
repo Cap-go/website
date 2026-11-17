@@ -1,7 +1,7 @@
 [
   {
     "created_at": "2022-05-31T10:58:34+00:00",
-    "updated_at": "2026-11-06T22:13:14.969161+00:00",
+    "updated_at": "2026-11-16T19:19:43.620817+00:00",
     "name": "Solo",
     "description": "plan.solo.desc",
     "price_m": 14,
@@ -13,7 +13,6 @@
     "storage": 20,
     "bandwidth": 100,
     "mau": 2000,
-    "observe_events": 500000,
     "market_desc": "Best for independent developers",
     "build_time_unit": 3600,
     "credit_id": "prod_TINXCAiTb8Vsxc",
@@ -72,11 +71,12 @@
         "price_y_id_us": "price_1UUwcVLr632EP5z4b3iWS6mZ"
       }
     },
-    "native_build_queue_priority": 10
+    "native_build_queue_priority": 10,
+    "observe_events": 500000
   },
   {
     "created_at": "2022-05-31T10:59:55+00:00",
-    "updated_at": "2026-11-06T22:13:14.969161+00:00",
+    "updated_at": "2026-11-16T19:19:43.620817+00:00",
     "name": "Maker",
     "description": "plan.maker.desc",
     "price_m": 39,
@@ -88,7 +88,6 @@
     "storage": 50,
     "bandwidth": 1000,
     "mau": 10000,
-    "observe_events": 3000000,
     "market_desc": "Best for small business owners",
     "build_time_unit": 7200,
     "credit_id": "prod_TINXCAiTb8Vsxc",
@@ -106,11 +105,12 @@
       "price_1NsEbJGH46eYKnWwkOoCqT95"
     ],
     "regional_price_ids": {},
-    "native_build_queue_priority": 20
+    "native_build_queue_priority": 20,
+    "observe_events": 3000000
   },
   {
     "created_at": "2022-05-31T11:01:56+00:00",
-    "updated_at": "2026-11-06T22:13:14.969161+00:00",
+    "updated_at": "2026-11-16T19:19:43.620817+00:00",
     "name": "Team",
     "description": "plan.team.desc",
     "price_m": 99,
@@ -122,7 +122,6 @@
     "storage": 100,
     "bandwidth": 10000,
     "mau": 100000,
-    "observe_events": 20000000,
     "market_desc": "Best for medium enterprises",
     "build_time_unit": 36000,
     "credit_id": "prod_TINXCAiTb8Vsxc",
@@ -140,11 +139,12 @@
       "price_1UDRGSLr632EP5z4jYu6vC42"
     ],
     "regional_price_ids": {},
-    "native_build_queue_priority": 40
+    "native_build_queue_priority": 40,
+    "observe_events": 20000000
   },
   {
     "created_at": "2022-08-24T16:07:00+00:00",
-    "updated_at": "2026-11-06T22:13:14.969161+00:00",
+    "updated_at": "2026-11-16T19:19:43.620817+00:00",
     "name": "Enterprise",
     "description": "plan.payasyougo.desc",
     "price_m": 249,
@@ -156,7 +156,6 @@
     "storage": 200,
     "bandwidth": 100000,
     "mau": 1000000,
-    "observe_events": 600000000,
     "market_desc": "Best for scalling enterprises",
     "build_time_unit": 1200000,
     "credit_id": "prod_TINXCAiTb8Vsxc",
@@ -174,6 +173,7 @@
       "price_1Sdu3rGH46eYKnWwK9x8sdK4"
     ],
     "regional_price_ids": {},
-    "native_build_queue_priority": 100
+    "native_build_queue_priority": 100,
+    "observe_events": 600000000
   }
 ]
