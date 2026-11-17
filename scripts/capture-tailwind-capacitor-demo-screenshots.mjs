@@ -5,6 +5,12 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
 import { chromium } from 'playwright'
+import sharp from 'sharp'
+import {
+  analyzeDialogChromeScreenshot,
+  dialogMetricsRelativeToRootCrop,
+  effectiveHairlineCss,
+} from './lib/tailwind-capacitor-dialog-chrome.mjs'
 
 const execFileAsync = promisify(execFile)
 
@@ -16,6 +22,38 @@ const outDir =
 const baseUrl = process.env.TC_DEMO_BASE_URL ?? 'http://127.0.0.1:4321'
 const beforeBaseUrl = process.env.TC_DEMO_BEFORE_BASE_URL
 const demoPath = '/plugins/tailwind-capacitor/demo/'
+
+/**
+ * @param {string} sectionId
+ */
+function demoComponentPagePath(sectionId) {
+  return `/plugins/tailwind-capacitor/demo/${encodeURIComponent(sectionId)}/`
+}
+
+/**
+ * @param {import('playwright').Page} page
+ */
+function resolveDemoFrameLocator(page) {
+  return page.locator('iframe.tc-demo-state-iframe[data-tc-state="screen"], #tc-demo-iframe').first()
+}
+
+/**
+ * @param {import('playwright').Page} page
+ */
+async function resolveDemoFrame(page) {
+  const hasScreen = await page.locator('iframe.tc-demo-state-iframe[data-tc-state="screen"]').count()
+  if (hasScreen) return page.frameLocator('iframe.tc-demo-state-iframe[data-tc-state="screen"]').first()
+  return page.frameLocator('#tc-demo-iframe')
+}
+
+/**
+ * @param {import('playwright').Page} page
+ */
+async function resolveDemoContentFrame(page) {
+  const loc = resolveDemoFrameLocator(page)
+  const handle = await loc.elementHandle()
+  return handle?.contentFrame() ?? null
+}
 const beforePath = process.env.TC_DEMO_BEFORE_PATH ?? demoPath
 
 const combos = [
@@ -57,6 +95,7 @@ const componentTargets = [
   { slug: 'sheet-open', sectionId: 'capacitor-sheet', open: /open sheet/i, openExpect: 'Sheet overlay content' },
   { slug: 'actions-open', sectionId: 'capacitor-actions', open: /open actions/i, openExpect: 'Delete' },
   { slug: 'dialog-open', sectionId: 'capacitor-dialog', open: /open dialog/i, openExpect: 'Sample dialog' },
+  { slug: 'alert-open', sectionId: 'capacitor-alert', open: /show alert/i, openExpect: 'Registry Alert' },
   { slug: 'popover-open', sectionId: 'capacitor-popover', open: /open popover/i, openExpect: 'Popover item', expectInSection: false },
   { slug: 'toast-open', sectionId: 'capacitor-toast', open: /show toast/i, openExpect: 'Toast from registry demo' },
 ]
@@ -95,7 +134,7 @@ async function assertThemeInFrame(page, frame, platform) {
   const want = platform === 'ios' ? 'c-ios' : 'c-material'
   const root = frame.locator('#tc-demo-root')
   await root.waitFor({ state: 'visible', timeout: 60_000 })
-  const attempts = baseUrl.includes('workers.dev') ? 60 : 25
+  const attempts = baseUrl.includes('workers.dev') ? 60 : 45
   for (let i = 0; i < attempts; i += 1) {
     const classes = (await root.getAttribute('class')) ?? ''
     if (classes.includes(want)) return
@@ -111,7 +150,7 @@ async function assertThemeInFrame(page, frame, platform) {
  * @param {boolean} dark
  */
 async function waitForDemoIframeReady(page) {
-  const iframe = page.locator('#tc-demo-iframe')
+  const iframe = resolveDemoFrameLocator(page)
   await iframe.evaluate((el) => {
     if (el instanceof HTMLIFrameElement) {
       return new Promise((resolve) => {
@@ -127,16 +166,29 @@ async function waitForDemoIframeReady(page) {
 }
 
 async function applyTheme(page, platform, dark) {
-  await page.locator('#tc-demo-iframe').waitFor({ state: 'visible', timeout: 60_000 })
+  await resolveDemoFrameLocator(page).waitFor({ state: 'visible', timeout: 60_000 })
   const controls = page.locator('[data-tc-demo-controls]')
   await controls.waitFor({ state: 'visible', timeout: 30_000 })
   await controls.locator(`[data-tc-platform="${platform}"]`).click({ force: true })
   await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
+  await page.evaluate(
+    ([plat, isDark]) => {
+      for (const iframe of document.querySelectorAll('iframe.tc-demo-state-iframe, #tc-demo-iframe')) {
+        if (!(iframe instanceof HTMLIFrameElement)) continue
+        const u = new URL(iframe.src, window.location.origin)
+        u.searchParams.set('platform', plat)
+        u.searchParams.set('dark', isDark ? '1' : '0')
+        iframe.src = `${u.pathname}${u.search}`
+      }
+    },
+    [platform, dark],
+  )
   await waitForDemoIframeReady(page)
-  const frame = page.frameLocator('#tc-demo-iframe')
+  await page.waitForTimeout(600)
+  const frame = await resolveDemoFrame(page)
   await assertThemeInFrame(page, frame, platform)
-  await frame.locator('.tc-demo-section-heading').first().waitFor({ state: 'visible', timeout: 90_000 })
-  await page.waitForTimeout(500)
+  await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 90_000 })
+  await page.waitForTimeout(400)
 }
 
 /**
@@ -149,13 +201,13 @@ async function applyTheme(page, platform, dark) {
 /**
  * @param {import('playwright').Page} page
  */
-async function preparePhoneFrameForCapture(page) {
-  const phone = page.locator('.tc-demo-phone-frame')
-  await phone.waitFor({ state: 'visible', timeout: 30_000 })
-  await phone.scrollIntoViewIfNeeded()
-  await page.evaluate(() => {
-    const el = document.querySelector('.tc-demo-phone-frame')
-    if (!el) return
+async function preparePhoneFrameForCapture(page, stateId = 'screen') {
+  const phone = page.locator(`.tc-demo-phone-frame:has(iframe[data-tc-state="${stateId}"])`).first()
+  const fallback = page.locator('.tc-demo-phone-frame').first()
+  const target = (await phone.count()) ? phone : fallback
+  await target.waitFor({ state: 'visible', timeout: 30_000 })
+  await target.scrollIntoViewIfNeeded()
+  await target.evaluate((el) => {
     const margin = 16
     let rect = el.getBoundingClientRect()
     if (rect.bottom > window.innerHeight - margin) {
@@ -192,11 +244,51 @@ async function stabilizePopoverForCapture(frame) {
 
 async function screenshotPhoneFrame(page, filePath) {
   await preparePhoneFrameForCapture(page)
-  const iframeHandle = await page.locator('#tc-demo-iframe').elementHandle()
-  const frame = await iframeHandle?.contentFrame()
+  const frame = await resolveDemoContentFrame(page)
   if (!frame) throw new Error('Tailwind Capacitor demo iframe is not ready')
   await page.waitForTimeout(150)
   await frame.locator('#tc-demo-root').screenshot({ path: filePath })
+}
+
+/**
+ * @param {import('playwright').Frame} frame
+ * @param {string} filePath
+ */
+async function validateDialogChromeScreenshot(frame, filePath) {
+  const metrics = await frame.evaluate(() => {
+    const root = document.getElementById('tc-demo-root')
+    const dialog = document.querySelector('[role="dialog"]')
+    if (!dialog || !root) return { error: 'no dialog' }
+    const rootRect = root.getBoundingClientRect()
+    const dRect = dialog.getBoundingClientRect()
+    const sep = dialog.querySelector('.hairline-b')
+    const sepRect = sep instanceof HTMLElement ? sep.getBoundingClientRect() : null
+    const hairlineCss = getComputedStyle(document.documentElement).getPropertyValue('--c-hairline-color').trim()
+    const dark = document.documentElement.classList.contains('dark')
+    const bg = getComputedStyle(dialog).backgroundColor
+    const bm = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+    const dialogSurfaceRgb = bm ? Math.round((Number(bm[1]) + Number(bm[2]) + Number(bm[3])) / 3) : dark ? 38 : 255
+    return {
+      hasHairline: Boolean(sepRect),
+      dividerY: sepRect ? sepRect.bottom - 0.5 : dRect.top + dRect.height * 0.65,
+      sampleAboveY: sepRect ? sepRect.bottom - 6 : dRect.top + dRect.height * 0.5,
+      dialog: {
+        left: dRect.left,
+        right: dRect.right,
+        bottom: dRect.bottom,
+        top: dRect.top,
+      },
+      root: { x: rootRect.left, y: rootRect.top },
+      hairlineCss,
+      dark,
+      dialogSurfaceRgb,
+    }
+  })
+  if (metrics && 'error' in metrics) throw new Error(metrics.error)
+  const cropped = dialogMetricsRelativeToRootCrop(metrics)
+  cropped.hairlineCss = effectiveHairlineCss(cropped.hairlineCss, cropped.dark)
+  const result = await analyzeDialogChromeScreenshot(sharp(filePath), { ...cropped, scale: 1 })
+  if (!result.ok) throw new Error(result.errors.join('; '))
 }
 
 /**
@@ -243,10 +335,14 @@ async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, 
     })
   }
   const section = frame.locator(`#${sectionId}`)
-  await section.scrollIntoViewIfNeeded({ timeout: 20_000 })
-  await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20_000 })
+  if (await section.count()) {
+    await section.scrollIntoViewIfNeeded({ timeout: 20_000 })
+    await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20_000 })
+  }
   if (openPattern) {
-    const trigger = section.getByRole('button', { name: openPattern })
+    const trigger = (await section.count())
+      ? section.getByRole('button', { name: openPattern })
+      : frame.getByRole('button', { name: openPattern })
     await trigger.scrollIntoViewIfNeeded()
     await trigger.click({ timeout: 15_000, force: true })
     if (openExpect) {
@@ -292,7 +388,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
   const manifest = []
   try {
     await page.goto(`${urlBase}${path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
-    if (applyThemes && combo && !pageOnlyShots) await applyTheme(page, combo.platform, combo.dark)
+    if (applyThemes && combo && !pageOnlyShots && !onlyOpenShots) await applyTheme(page, combo.platform, combo.dark)
 
     const tag = combo?.tag ?? 'baseline'
 
@@ -313,24 +409,40 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
 
     const overviewName = `demo-page-${viewport.prefix}-${tag}-${label}.png`
 
-    const frame = page.frameLocator('#tc-demo-iframe')
-    await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
-    await preparePhoneFrameForCapture(page)
-    await page.screenshot({ path: join(outDir, overviewName), fullPage: false })
-    manifest.push(await fileEntry(overviewName))
+    if (!onlyOpenShots) {
+      const frame = await resolveDemoFrame(page)
+      await frame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 30_000 })
+      await preparePhoneFrameForCapture(page)
+      await page.screenshot({ path: join(outDir, overviewName), fullPage: false })
+      manifest.push(await fileEntry(overviewName))
+    }
 
     if (applyThemes && combo) {
       for (const target of componentTargets) {
         if (onlyOpenShots && !target.open) continue
         if (openShotSlugs?.length && !openShotSlugs.includes(target.slug)) continue
-        await dismissOverlays(page, frame)
-        await focusComponentInFrame(frame, target.sectionId, target.open, target.openExpect, target.expectInSection)
-        if (target.slug === 'popover-open') await stabilizePopoverForCapture(frame)
+        if (target.open) {
+          await page.goto(`${urlBase}${demoComponentPagePath(target.sectionId)}`, {
+            waitUntil: 'domcontentloaded',
+            timeout: 120_000,
+          })
+          await applyTheme(page, combo.platform, combo.dark)
+        }
+        const shotFrame = await resolveDemoFrame(page)
+        await dismissOverlays(page, shotFrame)
+        await focusComponentInFrame(shotFrame, target.sectionId, target.open, target.openExpect, target.expectInSection)
+        if (target.slug === 'popover-open') await stabilizePopoverForCapture(shotFrame)
         await page.waitForTimeout(300)
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
-        await screenshotPhoneFrame(page, join(outDir, fileName))
+        const outPath = join(outDir, fileName)
+        await screenshotPhoneFrame(page, outPath)
+        if (target.slug === 'dialog-open' || target.slug === 'alert-open') {
+          const rawFrame = await resolveDemoContentFrame(page)
+          if (!rawFrame) throw new Error('iframe missing for dialog validation')
+          await validateDialogChromeScreenshot(rawFrame, outPath)
+        }
         manifest.push(await fileEntry(fileName))
-        if (target.open) await dismissOverlays(page, frame)
+        if (target.open) await dismissOverlays(page, shotFrame)
       }
 
       if (onlyOpenShots || pageOnlyShots) {

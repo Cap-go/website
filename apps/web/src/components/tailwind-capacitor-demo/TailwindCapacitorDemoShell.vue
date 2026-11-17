@@ -34,7 +34,7 @@
       </div>
     </Page>
 
-    <div v-if="!singleStateMode" class="tc-demo-overlay-host" data-tc-overlay-host>
+    <div class="tc-demo-overlay-host" data-tc-overlay-host>
       <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
         <ActionsGroup>
           <ActionsLabel>Actions</ActionsLabel>
@@ -53,6 +53,14 @@
         Sample dialog from the registry demo.
         <template #buttons>
           <DialogButton @click="dialogOpen = false">Close</DialogButton>
+        </template>
+      </Dialog>
+
+      <Dialog v-if="alertOpen" :opened="true" @backdropclick="alertOpen = false">
+        <template #title>Heads up</template>
+        Registry Alert styles.
+        <template #buttons>
+          <DialogButton strong @click="alertOpen = false">OK</DialogButton>
         </template>
       </Dialog>
 
@@ -188,6 +196,7 @@ const galleryContext = computed(() =>
     dark,
     actionsOpen,
     dialogOpen,
+    alertOpen,
     sheetOpen,
     popupOpen,
     panelOpen,
@@ -246,6 +255,7 @@ watch([platform, dark], syncThemeToDocument, { immediate: true })
 
 const actionsOpen = ref(false)
 const dialogOpen = ref(false)
+const alertOpen = ref(false)
 const sheetOpen = ref(false)
 const popupOpen = ref(false)
 const panelOpen = ref(false)

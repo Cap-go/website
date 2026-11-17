@@ -144,19 +144,6 @@ function modalContentVNode(ctx: GalleryContext): VNode {
   )
 }
 
-function dialogAlertVNode(ctx: GalleryContext): VNode {
-  const { h } = ctx
-  return h(
-    Dialog,
-    { opened: true },
-    {
-      title: () => 'Heads up',
-      default: () => 'Registry Alert styles.',
-      buttons: () => h(DialogButton, { strong: true }, { default: () => 'OK' }),
-    },
-  )
-}
-
 const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]> = {
   'capacitor-accordion': (ctx) => {
     const { h } = ctx
@@ -226,14 +213,6 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       },
     ]
   },
-  'capacitor-alert': () => [
-    {
-      id: 'inline',
-      label: 'Inline',
-      render: (c) => h(Alert, { class: 'p-4' }, { default: () => 'Heads up: registry Alert styles.' }),
-    },
-    ...overlayClosedOpen('Show alert', 'App', dialogAlertVNode, { closed: 'Closed', open: 'Open' }),
-  ],
   'capacitor-app': (ctx) => {
     const { h } = ctx
     return [
@@ -496,7 +475,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
         id: 'cancel-ok',
         label: 'Cancel + OK',
         render: () =>
-          h('div', { class: 'flex flex-wrap gap-2' }, [
+          h('div', { class: 'tc-demo-dialog-button-preview flex flex-wrap gap-2' }, [
             h(DialogButton, {}, { default: () => 'Cancel' }),
             h(DialogButton, { strong: true }, { default: () => 'OK' }),
           ]),

@@ -107,6 +107,7 @@ export type GalleryContext = {
   dark: Ref<boolean>
   actionsOpen: Ref<boolean>
   dialogOpen: Ref<boolean>
+  alertOpen: Ref<boolean>
   sheetOpen: Ref<boolean>
   popupOpen: Ref<boolean>
   panelOpen: Ref<boolean>
@@ -154,6 +155,7 @@ export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'mate
     dark,
     actionsOpen: ref(false),
     dialogOpen: ref(false),
+    alertOpen: ref(false),
     sheetOpen: ref(false),
     popupOpen: ref(false),
     panelOpen: ref(false),
@@ -887,6 +889,19 @@ function dialogOpenVNode(ctx: GalleryContext) {
   )
 }
 
+function dialogAlertVNode(ctx: GalleryContext) {
+  const { h } = ctx
+  return h(
+    Dialog,
+    { opened: true },
+    {
+      title: () => 'Heads up',
+      default: () => 'Registry Alert styles.',
+      buttons: () => h(DialogButton, { strong: true }, { default: () => 'OK' }),
+    },
+  )
+}
+
 function sheetOpenVNode(ctx: GalleryContext) {
   const { h } = ctx
   return h(
@@ -986,6 +1001,17 @@ function expandedStatesForSlug(slug: string, ctx: GalleryContext): SlugStateDef[
   if (slug === 'capacitor-actions-group') return buildActionsFamilyStates(ctx, 'group')
   if (slug === 'capacitor-actions-label') return buildActionsFamilyStates(ctx, 'label')
   if (slug === 'capacitor-dialog') return buildOverlayStates(ctx, slug, 'Open dialog', 'dialogOpen', dialogOpenVNode)
+  if (slug === 'capacitor-alert') {
+    const { h } = ctx
+    return [
+      {
+        id: 'inline',
+        label: 'Inline',
+        render: (c) => h(Alert, { class: 'p-4' }, { default: () => 'Heads up: registry Alert styles.' }),
+      },
+      ...buildOverlayStates(ctx, slug, 'Show alert', 'alertOpen', dialogAlertVNode),
+    ]
+  }
   if (slug === 'capacitor-sheet') return buildOverlayStates(ctx, slug, 'Open sheet', 'sheetOpen', sheetOpenVNode)
   if (slug === 'capacitor-popup') return buildOverlayStates(ctx, slug, 'Open popup', 'popupOpen', popupOpenVNode)
   if (slug === 'capacitor-panel') return buildOverlayStates(ctx, slug, 'Open panel', 'panelOpen', panelOpenVNode)
