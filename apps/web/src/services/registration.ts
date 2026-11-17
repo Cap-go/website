@@ -12,6 +12,9 @@ export interface RegisterUserInput {
   utm_source?: string
   utm_medium?: string
   utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+  oppref?: string
   /** Paid-ads pay-first offer (no free trial). The backend only acts on `direct`. */
   offer?: 'direct'
   registration_device_type?: string

@@ -1,0 +1,21 @@
+---
+import m from '@/copy/messages'
+import { getPlans } from '@/lib/siteData'
+import { planMonthlyPrice } from '@/lib/planCopy'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const prices = getPlans()
+  .map(planMonthlyPrice)
+  .filter((price) => price > 0)
+const startingPrice = prices.length ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(Math.min(...prices)) : null
+const pricingUrl = `${getRelativeLocaleUrl(locale, 'pricing')}?billing=monthly&offer=direct`
+---
+
+<div data-direct-copy class="max-w-md space-y-2 text-sm leading-6" data-testid="direct-offer-details">
+  {startingPrice && <p class="font-semibold">{m.direct_offer_monthly_start({ price: startingPrice }, { locale })}</p>}
+  <p>{m.direct_offer_payment_step({}, { locale })}</p>
+  <a href={pricingUrl} class="font-semibold underline underline-offset-4">
+    {m.direct_offer_monthly_plans({}, { locale })}
+  </a>
+</div>
