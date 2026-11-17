@@ -1281,16 +1281,18 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
         id: 'badge',
         label: 'Badge',
         render: () =>
-          h(Tabbar, { labels: true }, {
-            default: () =>
-              h(TabbarLink, { active: true, label: 'Inbox' }, {
-                icon: () =>
-                  h('span', { class: 'relative inline-flex' }, [
-                    h(Icon, { material: 'mail', class: 'text-xl' }),
-                    h(Badge, { class: 'absolute -right-2 -top-2 scale-75' }, { default: () => '3' }),
-                  ]),
-              }),
-          }),
+          h('div', { class: 'px-2 pb-8 pt-3' }, [
+            h(Tabbar, { labels: true }, {
+              default: () =>
+                h(TabbarLink, { active: true, label: 'Inbox' }, {
+                  icon: () =>
+                    h('span', { class: 'relative inline-flex overflow-visible p-1' }, [
+                      h(Icon, { material: 'mail', class: 'text-xl', 'aria-hidden': 'true' }),
+                      h(Badge, { class: 'absolute -right-1 -top-1 min-h-4 min-w-4 px-1 text-[10px]' }, { default: () => '3' }),
+                    ]),
+                }),
+            }),
+          ]),
       },
     ]
   },
