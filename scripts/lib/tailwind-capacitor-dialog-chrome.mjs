@@ -2,6 +2,8 @@
  * Pixel validation for Konsta Dialog chrome inside #tc-demo-root screenshots.
  */
 
+import sharp from 'sharp'
+
 /**
  * @param {string} raw
  * @param {boolean} dark
@@ -254,5 +256,53 @@ export async function analyzeDialogChromeScreenshot(shot, opts) {
       blueEdge,
       hairline,
     },
+  }
+}
+
+const BODY_LEAK_MEAN_THRESHOLD = 8
+
+/**
+ * Fail when dialog body pixels change if the underlay trigger is hidden (see-through surface).
+ * @param {import('playwright').Frame} frame
+ */
+export async function assertDialogBodyOpaque(frame) {
+  const body = frame.locator('[role="dialog"] .text-sm.w-full').first()
+  if (!(await body.count())) {
+    return { ok: false, error: 'no dialog body text node' }
+  }
+  await body.waitFor({ state: 'visible', timeout: 12_000 })
+  const withUnderlay = await body.screenshot()
+  await frame.evaluate(() => {
+    for (const el of document.querySelectorAll('.tc-demo-overlay-trigger')) {
+      el.style.visibility = 'hidden'
+    }
+    const under = document.querySelector('.tc-demo-underlay-screen')
+    if (under instanceof HTMLElement) under.style.visibility = 'hidden'
+  })
+  await frame.waitForTimeout(120)
+  const withoutUnderlay = await body.screenshot()
+  await frame.evaluate(() => {
+    for (const el of document.querySelectorAll('.tc-demo-overlay-trigger')) {
+      el.style.visibility = ''
+    }
+    const under = document.querySelector('.tc-demo-underlay-screen')
+    if (under instanceof HTMLElement) under.style.visibility = ''
+  })
+
+  const { data: a, info } = await sharp(withUnderlay).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const { data: b } = await sharp(withoutUnderlay).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const ch = info.channels
+  const pixels = Math.min(a.length, b.length) / ch
+  if (pixels < 16) return { ok: false, error: 'body crop too small' }
+
+  let sum = 0
+  for (let i = 0; i < a.length; i += ch) {
+    sum += Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2])
+  }
+  const mean = sum / (pixels * 3)
+  return {
+    ok: mean <= BODY_LEAK_MEAN_THRESHOLD,
+    mean,
+    threshold: BODY_LEAK_MEAN_THRESHOLD,
   }
 }

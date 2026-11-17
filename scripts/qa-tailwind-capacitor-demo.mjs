@@ -6,6 +6,7 @@ import { chromium } from 'playwright'
 import sharp from 'sharp'
 import {
   analyzeDialogChromeScreenshot,
+  assertDialogBodyOpaque,
   dialogMetricsRelativeToRootCrop,
   effectiveHairlineCss,
 } from './lib/tailwind-capacitor-dialog-chrome.mjs'
@@ -224,6 +225,31 @@ async function assertDialogHairlineWithinDialog(page, label) {
  * @param {import('playwright').Page} page
  * @param {string} label
  */
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} slug
+ * @param {string} label
+ */
+async function assertDialogBodyNotSeeThrough(page, slug, label) {
+  if (slug === 'capacitor-dialog') {
+    const open = page.getByRole('button', { name: /open dialog/i })
+    if (await open.count()) await open.click({ timeout: 8000 }).catch(() => {})
+  } else if (slug === 'capacitor-alert') {
+    const open = page.getByRole('button', { name: /show alert/i })
+    if (await open.count()) await open.click({ timeout: 8000 }).catch(() => {})
+  }
+  await page.waitForSelector('[role="dialog"]', { timeout: 12_000 }).catch(() => {})
+  await page.waitForTimeout(400)
+  const opaque = await assertDialogBodyOpaque(page)
+  const detail =
+    'error' in opaque
+      ? opaque.error
+      : opaque.ok
+        ? `mean ${opaque.mean.toFixed(2)}`
+        : `mean diff ${opaque.mean.toFixed(2)} > ${opaque.threshold}`
+  record(opaque.ok, `${label}: dialog body opaque (${detail})`)
+}
+
 async function assertDialogButtonPreviewNoStrayRule(page, label) {
   const ok = await page.evaluate(() => {
     const wrap = document.querySelector('.tc-demo-dialog-button-preview')
@@ -394,6 +420,14 @@ async function qaSlug(page, slug, viewport, theme) {
     if (theme.dark) await assertDarkPhoneBackground(page, label)
     if ((slug === 'capacitor-dialog' || slug === 'capacitor-alert') && state.id === 'open') {
       await assertDialogHairlineWithinDialog(page, label)
+    }
+    if (
+      (slug === 'capacitor-dialog' || slug === 'capacitor-alert') &&
+      theme.platform === 'ios' &&
+      !theme.dark &&
+      (state.id === 'open' || state.id === 'screen')
+    ) {
+      await assertDialogBodyNotSeeThrough(page, slug, label)
     }
     if (slug === 'capacitor-dialog-button' && state.id === 'cancel-ok') {
       await assertDialogButtonPreviewNoStrayRule(page, label)

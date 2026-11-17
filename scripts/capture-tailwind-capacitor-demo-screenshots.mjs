@@ -8,6 +8,7 @@ import { chromium } from 'playwright'
 import sharp from 'sharp'
 import {
   analyzeDialogChromeScreenshot,
+  assertDialogBodyOpaque,
   dialogMetricsRelativeToRootCrop,
   effectiveHairlineCss,
 } from './lib/tailwind-capacitor-dialog-chrome.mjs'
@@ -433,6 +434,19 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         await focusComponentInFrame(shotFrame, target.sectionId, target.open, target.openExpect, target.expectInSection)
         if (target.slug === 'popover-open') await stabilizePopoverForCapture(shotFrame)
         await page.waitForTimeout(300)
+        if (
+          (target.slug === 'dialog-open' || target.slug === 'alert-open') &&
+          combo.platform === 'ios' &&
+          !combo.dark
+        ) {
+          const rawFrame = await resolveDemoContentFrame(page)
+          if (!rawFrame) throw new Error('iframe missing for dialog opacity check')
+          const opaque = await assertDialogBodyOpaque(rawFrame)
+          if (!opaque.ok) {
+            const detail = 'error' in opaque ? opaque.error : `mean diff ${opaque.mean?.toFixed(2)} > ${opaque.threshold}`
+            throw new Error(`dialog body see-through: ${detail}`)
+          }
+        }
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
         const outPath = join(outDir, fileName)
         await screenshotPhoneFrame(page, outPath)
