@@ -1025,11 +1025,7 @@
   },
   {
     "fileName": "capacitor-alert/desktop-frame-ios-dark-open.png",
-    "sha256": "5e0ef88d16c48e66986dd0a9225450630911cbc40a0e71f6cb21e0329d1c87a0"
-  },
-  {
-    "fileName": "capacitor-alert/desktop-frame-ios-dark-screen.png",
-    "sha256": "89f61381fc174620b06fc34caba3eb575b2bd64db435d8bda1517547a3c2676a"
+    "sha256": "35edb9b61e706a37663bd9cba7a8d7fcaf39512a9c11edcacd0611bada8a87bf"
   },
   {
     "fileName": "capacitor-alert/desktop-frame-ios-light-alternate.png",
@@ -1049,11 +1045,7 @@
   },
   {
     "fileName": "capacitor-alert/desktop-frame-ios-light-open.png",
-    "sha256": "8689db2134a8ae58cc55f0d1ab35a09fa20569bfcaf67a3e6bc5323ed1e99de2"
-  },
-  {
-    "fileName": "capacitor-alert/desktop-frame-ios-light-screen.png",
-    "sha256": "6191f260d608d2e961540a70aec8b7cc95b975655d3c84512212affc3339a6bf"
+    "sha256": "a6ac5cf9a24723da8a67dc99104191e7f4a8162cb711d8211d5faecc6e2ddeda"
   },
   {
     "fileName": "capacitor-alert/desktop-frame-material-dark-alternate.png",
@@ -1073,11 +1065,7 @@
   },
   {
     "fileName": "capacitor-alert/desktop-frame-material-dark-open.png",
-    "sha256": "c3d06314f2ce7417498fea625ced6f2af01ab607b7cec3da4a9c0f8f1b147a17"
-  },
-  {
-    "fileName": "capacitor-alert/desktop-frame-material-dark-screen.png",
-    "sha256": "a29aa0f6d297312d2aeeda04761d010c3be047e5707b3dc3d3c06bcc487d9bd5"
+    "sha256": "ba97e54ab7760b60cdd190b19c9bafd2a85c801bd06c024a739e5abe35823a7d"
   },
   {
     "fileName": "capacitor-alert/desktop-frame-material-light-alternate.png",
@@ -1097,11 +1085,7 @@
   },
   {
     "fileName": "capacitor-alert/desktop-frame-material-light-open.png",
-    "sha256": "28cae59372be474ef6eb63c42f1238884e984c57e73d94078911a4957645e6ab"
-  },
-  {
-    "fileName": "capacitor-alert/desktop-frame-material-light-screen.png",
-    "sha256": "ce5915b56706a599f7bec3add2174f5d9bb01ed6c1958dcdb01395be190c9dc6"
+    "sha256": "48a7b89124a6a98ab39b8816d32842f793dd3db5881b1a0fb5f33a2acee77dbd"
   },
   {
     "fileName": "capacitor-alert/mobile-frame-ios-dark-alternate.png",
@@ -1121,11 +1105,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-frame-ios-dark-open.png",
-    "sha256": "5e0ef88d16c48e66986dd0a9225450630911cbc40a0e71f6cb21e0329d1c87a0"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-frame-ios-dark-screen.png",
-    "sha256": "89f61381fc174620b06fc34caba3eb575b2bd64db435d8bda1517547a3c2676a"
+    "sha256": "35edb9b61e706a37663bd9cba7a8d7fcaf39512a9c11edcacd0611bada8a87bf"
   },
   {
     "fileName": "capacitor-alert/mobile-frame-ios-light-alternate.png",
@@ -1145,11 +1125,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-frame-ios-light-open.png",
-    "sha256": "8689db2134a8ae58cc55f0d1ab35a09fa20569bfcaf67a3e6bc5323ed1e99de2"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-frame-ios-light-screen.png",
-    "sha256": "6191f260d608d2e961540a70aec8b7cc95b975655d3c84512212affc3339a6bf"
+    "sha256": "a6ac5cf9a24723da8a67dc99104191e7f4a8162cb711d8211d5faecc6e2ddeda"
   },
   {
     "fileName": "capacitor-alert/mobile-frame-material-dark-alternate.png",
@@ -1169,11 +1145,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-frame-material-dark-open.png",
-    "sha256": "c3d06314f2ce7417498fea625ced6f2af01ab607b7cec3da4a9c0f8f1b147a17"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-frame-material-dark-screen.png",
-    "sha256": "a29aa0f6d297312d2aeeda04761d010c3be047e5707b3dc3d3c06bcc487d9bd5"
+    "sha256": "ba97e54ab7760b60cdd190b19c9bafd2a85c801bd06c024a739e5abe35823a7d"
   },
   {
     "fileName": "capacitor-alert/mobile-frame-material-light-alternate.png",
@@ -1193,11 +1165,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-frame-material-light-open.png",
-    "sha256": "28cae59372be474ef6eb63c42f1238884e984c57e73d94078911a4957645e6ab"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-frame-material-light-screen.png",
-    "sha256": "ce5915b56706a599f7bec3add2174f5d9bb01ed6c1958dcdb01395be190c9dc6"
+    "sha256": "48a7b89124a6a98ab39b8816d32842f793dd3db5881b1a0fb5f33a2acee77dbd"
   },
   {
     "fileName": "capacitor-alert/mobile-page-ios-dark-alternate.png",
@@ -1217,11 +1185,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-page-ios-dark-open.png",
-    "sha256": "2d5010f1495385ef8bad64cff6210c1b08f968e60562ef16a00d32dde96eec70"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-page-ios-dark-screen.png",
-    "sha256": "835f99563f2696bca00c5818d4f331d7667b483e752aeed113cdc8c4b30feee2"
+    "sha256": "25da2c5b15791509ad863c48fbd8a01a75e38793aeebc3cccae434dbfa888689"
   },
   {
     "fileName": "capacitor-alert/mobile-page-ios-light-alternate.png",
@@ -1241,11 +1205,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-page-ios-light-open.png",
-    "sha256": "2d5010f1495385ef8bad64cff6210c1b08f968e60562ef16a00d32dde96eec70"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-page-ios-light-screen.png",
-    "sha256": "835f99563f2696bca00c5818d4f331d7667b483e752aeed113cdc8c4b30feee2"
+    "sha256": "25da2c5b15791509ad863c48fbd8a01a75e38793aeebc3cccae434dbfa888689"
   },
   {
     "fileName": "capacitor-alert/mobile-page-material-dark-alternate.png",
@@ -1265,11 +1225,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-page-material-dark-open.png",
-    "sha256": "2d5010f1495385ef8bad64cff6210c1b08f968e60562ef16a00d32dde96eec70"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-page-material-dark-screen.png",
-    "sha256": "835f99563f2696bca00c5818d4f331d7667b483e752aeed113cdc8c4b30feee2"
+    "sha256": "25da2c5b15791509ad863c48fbd8a01a75e38793aeebc3cccae434dbfa888689"
   },
   {
     "fileName": "capacitor-alert/mobile-page-material-light-alternate.png",
@@ -1289,11 +1245,7 @@
   },
   {
     "fileName": "capacitor-alert/mobile-page-material-light-open.png",
-    "sha256": "2d5010f1495385ef8bad64cff6210c1b08f968e60562ef16a00d32dde96eec70"
-  },
-  {
-    "fileName": "capacitor-alert/mobile-page-material-light-screen.png",
-    "sha256": "835f99563f2696bca00c5818d4f331d7667b483e752aeed113cdc8c4b30feee2"
+    "sha256": "25da2c5b15791509ad863c48fbd8a01a75e38793aeebc3cccae434dbfa888689"
   },
   {
     "fileName": "capacitor-app/desktop-frame-ios-dark-alternate.png",
@@ -4757,7 +4709,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/desktop-frame-ios-dark-cancel-ok.png",
-    "sha256": "b475842fe48eebef670dbe9233ac95e7ad1720c589aec68b3cf8a18712a3cd68"
+    "sha256": "fa7dc1a3b5c1c680961b85bebe7b0c2bb4c8f0ac2d4149b2e44394f717050040"
   },
   {
     "fileName": "capacitor-dialog-button/desktop-frame-ios-dark-default.png",
@@ -4777,7 +4729,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/desktop-frame-ios-light-cancel-ok.png",
-    "sha256": "1761a56cb82b971c3184b3a19efe291c4a8c456898884231cce1768777f1cae6"
+    "sha256": "d1b0b5e5e9e4103b833243e09a7e203424d7b5167afc6c3c490c5510ad911939"
   },
   {
     "fileName": "capacitor-dialog-button/desktop-frame-ios-light-default.png",
@@ -4837,7 +4789,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/mobile-frame-ios-dark-cancel-ok.png",
-    "sha256": "b475842fe48eebef670dbe9233ac95e7ad1720c589aec68b3cf8a18712a3cd68"
+    "sha256": "fa7dc1a3b5c1c680961b85bebe7b0c2bb4c8f0ac2d4149b2e44394f717050040"
   },
   {
     "fileName": "capacitor-dialog-button/mobile-frame-ios-dark-default.png",
@@ -4857,7 +4809,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/mobile-frame-ios-light-cancel-ok.png",
-    "sha256": "1761a56cb82b971c3184b3a19efe291c4a8c456898884231cce1768777f1cae6"
+    "sha256": "d1b0b5e5e9e4103b833243e09a7e203424d7b5167afc6c3c490c5510ad911939"
   },
   {
     "fileName": "capacitor-dialog-button/mobile-frame-ios-light-default.png",
@@ -4917,7 +4869,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-ios-dark-cancel-ok.png",
-    "sha256": "e0629b35995676e8048f3c4eddf35c30e3ba2bea71cb79fbc059047c99fc1630"
+    "sha256": "00e64ea47045f43e2ddb20ca24da434118e15a83b69f7fba0c6a016d7f751ea7"
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-ios-dark-default.png",
@@ -4937,7 +4889,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-ios-light-cancel-ok.png",
-    "sha256": "e0629b35995676e8048f3c4eddf35c30e3ba2bea71cb79fbc059047c99fc1630"
+    "sha256": "00e64ea47045f43e2ddb20ca24da434118e15a83b69f7fba0c6a016d7f751ea7"
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-ios-light-default.png",
@@ -4957,7 +4909,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-material-dark-cancel-ok.png",
-    "sha256": "e0629b35995676e8048f3c4eddf35c30e3ba2bea71cb79fbc059047c99fc1630"
+    "sha256": "bc7edd7222a0ab976ff1b57cd70096d6b5ac5688c09a6af6b373f2753a76fbee"
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-material-dark-default.png",
@@ -4977,7 +4929,7 @@
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-material-light-cancel-ok.png",
-    "sha256": "e0629b35995676e8048f3c4eddf35c30e3ba2bea71cb79fbc059047c99fc1630"
+    "sha256": "bc7edd7222a0ab976ff1b57cd70096d6b5ac5688c09a6af6b373f2753a76fbee"
   },
   {
     "fileName": "capacitor-dialog-button/mobile-page-material-light-default.png",
@@ -4993,7 +4945,7 @@
   },
   {
     "fileName": "capacitor-dialog/desktop-frame-ios-dark-open.png",
-    "sha256": "4d4646b8ea2b8a1c93439807d5764f1967c262253c45c373d6b24dbf9b794b77"
+    "sha256": "2c0d548f3c98e22d2aaebec6c26da3bb1d9fedbe3beab7eee2e1d75ac3f0e546"
   },
   {
     "fileName": "capacitor-dialog/desktop-frame-ios-dark-screen.png",
@@ -5001,7 +4953,7 @@
   },
   {
     "fileName": "capacitor-dialog/desktop-frame-ios-light-open.png",
-    "sha256": "e01f0feee26d5e920927df3ad8f513e0693ddcd861109586d78fd220370fa69f"
+    "sha256": "c705594420ddc3a8db826280df16e3df4202c50717fe2e2d26769a233904d3cd"
   },
   {
     "fileName": "capacitor-dialog/desktop-frame-ios-light-screen.png",
@@ -5025,7 +4977,7 @@
   },
   {
     "fileName": "capacitor-dialog/mobile-frame-ios-dark-open.png",
-    "sha256": "4d4646b8ea2b8a1c93439807d5764f1967c262253c45c373d6b24dbf9b794b77"
+    "sha256": "2c0d548f3c98e22d2aaebec6c26da3bb1d9fedbe3beab7eee2e1d75ac3f0e546"
   },
   {
     "fileName": "capacitor-dialog/mobile-frame-ios-dark-screen.png",
@@ -5033,7 +4985,7 @@
   },
   {
     "fileName": "capacitor-dialog/mobile-frame-ios-light-open.png",
-    "sha256": "e01f0feee26d5e920927df3ad8f513e0693ddcd861109586d78fd220370fa69f"
+    "sha256": "c705594420ddc3a8db826280df16e3df4202c50717fe2e2d26769a233904d3cd"
   },
   {
     "fileName": "capacitor-dialog/mobile-frame-ios-light-screen.png",
@@ -5057,15 +5009,15 @@
   },
   {
     "fileName": "capacitor-dialog/mobile-page-ios-dark-open.png",
-    "sha256": "25e4458d94e1291c0af9a59ed1b9d6511cfa7315e0849f116773134bb146d2f8"
+    "sha256": "0b98ee74578cb9ee4c5fcfd042fdf0c3519d310e9eca57d81bd435c957820834"
   },
   {
     "fileName": "capacitor-dialog/mobile-page-ios-dark-screen.png",
-    "sha256": "cce5e1514b92c36ea25c4a3b3ee576044ec7fdb2427e5df82ed76b6917f2c34d"
+    "sha256": "c0a5e1a16d1ebec6593c01c6fa6c8c430f70e3ddd54b046d88c8bed0b0c58a27"
   },
   {
     "fileName": "capacitor-dialog/mobile-page-ios-light-open.png",
-    "sha256": "25e4458d94e1291c0af9a59ed1b9d6511cfa7315e0849f116773134bb146d2f8"
+    "sha256": "0b98ee74578cb9ee4c5fcfd042fdf0c3519d310e9eca57d81bd435c957820834"
   },
   {
     "fileName": "capacitor-dialog/mobile-page-ios-light-screen.png",
@@ -5073,7 +5025,7 @@
   },
   {
     "fileName": "capacitor-dialog/mobile-page-material-dark-open.png",
-    "sha256": "25e4458d94e1291c0af9a59ed1b9d6511cfa7315e0849f116773134bb146d2f8"
+    "sha256": "0b98ee74578cb9ee4c5fcfd042fdf0c3519d310e9eca57d81bd435c957820834"
   },
   {
     "fileName": "capacitor-dialog/mobile-page-material-dark-screen.png",
@@ -5081,7 +5033,7 @@
   },
   {
     "fileName": "capacitor-dialog/mobile-page-material-light-open.png",
-    "sha256": "25e4458d94e1291c0af9a59ed1b9d6511cfa7315e0849f116773134bb146d2f8"
+    "sha256": "0b98ee74578cb9ee4c5fcfd042fdf0c3519d310e9eca57d81bd435c957820834"
   },
   {
     "fileName": "capacitor-dialog/mobile-page-material-light-screen.png",

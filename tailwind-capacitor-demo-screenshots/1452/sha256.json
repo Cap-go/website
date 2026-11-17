@@ -62,5 +62,53 @@
   {
     "fileName": "demo-dialog-open-mobile-material-light-after.png",
     "sha256": "0f0871d3dfc83b530a467fc67cc9dc66b73e0eae8537428d69248e20cc0126c5"
+  },
+  {
+    "fileName": "demo-page-desktop-baseline-before.png",
+    "sha256": "fee415d4062d7ea098a65a5d0780ba5e5a9ae1f2ad070ae8531c934fb819408e"
+  },
+  {
+    "fileName": "demo-page-desktop-ios-dark-after.png",
+    "sha256": "14f153b6d83bf6682023ec90031db024d1a89b51c5951138ad71849a9dc8eb1b"
+  },
+  {
+    "fileName": "demo-page-desktop-ios-light-after.png",
+    "sha256": "988961010c0ff3a38c422d2efcaed688fcd7e43455af943c55e713d635746631"
+  },
+  {
+    "fileName": "demo-page-desktop-material-dark-after.png",
+    "sha256": "3b5f346d342f5b4580a51059341159d4c7eb6eb8d4d979e7d0729e4c77681f0c"
+  },
+  {
+    "fileName": "demo-page-desktop-material-light-after.png",
+    "sha256": "d8023a9c38f76126b77f7f6f90e07db41916d35702ed72ddf59d1613d5a4320e"
+  },
+  {
+    "fileName": "demo-page-mobile-baseline-before.png",
+    "sha256": "371414ea648cb277810ee5d1a530f77a0d88a49db087201a903db7c648145dbc"
+  },
+  {
+    "fileName": "demo-page-mobile-ios-dark-after.png",
+    "sha256": "455f5268671ebcaa5607cafe02acbf3d3f402b0a992dc392eb2e3e18b4a3afef"
+  },
+  {
+    "fileName": "demo-page-mobile-ios-light-after.png",
+    "sha256": "73d8260ca615f48505ecb3280d7916dbddce4c5fff71d98836802df312d6e6f5"
+  },
+  {
+    "fileName": "demo-page-mobile-material-dark-after.png",
+    "sha256": "5a76269ce6ae1e4e39687db2c54f1a07c1a6e97ac40d5cd211ad405e79fc8380"
+  },
+  {
+    "fileName": "demo-page-mobile-material-light-after.png",
+    "sha256": "0d2b9a1c858445240dd40d071023031bae177263e1bd9ce88aedfd64ad10918d"
+  },
+  {
+    "fileName": "install-section-mobile-after.png",
+    "sha256": "1767e66bc8aeea1f1c297c6fea6d20c475794740046ebf783024cbc000fdb459"
+  },
+  {
+    "fileName": "install-section-mobile-before.png",
+    "sha256": "648c1e7b76d4a61af8bfcd86a0f6134f86478e05c434566c7348535fde37a9fb"
   }
 ]
