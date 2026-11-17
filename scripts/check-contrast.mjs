@@ -131,7 +131,7 @@ function measureElementContrast(elements, options) {
     const ratio = fg ? contrast(fg.a < 1 ? blend(fg, bg) : fg, bg) : 0
     const text = (el.textContent || '').trim().replace(/\s+/g, ' ')
     return {
-      text: preferOwnBackground ? text.slice(0, 80) : text.slice(0, 80),
+      text: text.slice(0, 80),
       ratio,
     }
   })

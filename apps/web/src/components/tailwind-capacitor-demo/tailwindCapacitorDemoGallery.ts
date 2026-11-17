@@ -169,21 +169,7 @@ export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'mate
     tabsDemoActive: ref('a'),
   }
 
-  const overlayTrigger = (label: string, openRef: Ref<boolean>, opts: { id?: string } = {}) =>
-    h(
-      'button',
-      {
-        type: 'button',
-        id: opts.id,
-        class: 'tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white',
-        onClick: () => {
-          openRef.value = true
-        },
-      },
-      label,
-    )
-
-  return { ...ctxBase, overlayTrigger }
+  return attachGalleryContext(ctxBase)
 }
 
 function settingsScene(ctx: GalleryContext) {

@@ -113,7 +113,7 @@
 
 <script setup>
 import { computed, defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
-import manifest from '../../tailwind-capacitor-snapshot/registry-manifest.json'
+import { resolveTailwindCapacitorDemoSlug, tailwindCapacitorDemoTitle } from '@/lib/tailwindCapacitorDemoCatalog'
 import { destructiveActionColors } from './demoOverlayHelpers'
 import { attachGalleryContext, demoSceneVNode, demoStatesForSlug } from './tailwindCapacitorDemoGallery'
 import {
@@ -167,9 +167,8 @@ const singleStateMode = computed(() => activeStateId.value.length > 0)
 const platformLabel = computed(() => (platform.value === 'ios' ? 'iOS' : 'Material'))
 
 const pageTitle = computed(() => {
-  if (activeSlug.value === 'foundation') return 'Foundation'
-  const item = manifest.items.find((entry) => entry.name === activeSlug.value)
-  return item?.component ?? item?.title?.replace(/\s*\(Vue\)\s*$/i, '') ?? 'Component'
+  const resolved = resolveTailwindCapacitorDemoSlug(activeSlug.value)
+  return resolved ? tailwindCapacitorDemoTitle(resolved) : 'Component'
 })
 
 const showCatalogChrome = computed(() => !singleStateMode.value)
