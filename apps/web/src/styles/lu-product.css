@@ -310,6 +310,19 @@ body:has(.lu) {
   color: #fff;
   letter-spacing: -0.01em;
 }
+.lu .hero-step-link {
+  color: inherit;
+  text-decoration: none;
+}
+.lu .hero-step-link span {
+  color: var(--relief-blue);
+}
+.lu .hero-step-link:hover,
+.lu .hero-step-link:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--relief-blue);
+  text-underline-offset: 3px;
+}
 .lu .hero-step-body {
   margin: 4px 0 0;
   font-size: 13px;
