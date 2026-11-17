@@ -82,15 +82,16 @@
         </Page>
       </Panel>
 
-      <Toast
-        v-if="toastOpen"
-        class="tc-demo-registry-toast"
-        :opened="true"
-        position="center"
-        @toast:closed="toastOpen = false"
-      >
-        Toast from registry demo
-      </Toast>
+        <Toast
+          v-if="toastOpen"
+          class="tc-demo-registry-toast"
+          :opened="true"
+          position="left"
+          :translucent="false"
+          @toast:closed="toastOpen = false"
+        >
+          Bundle uploaded to the preview channel
+        </Toast>
 
       <Popover
         v-if="popoverOpen"

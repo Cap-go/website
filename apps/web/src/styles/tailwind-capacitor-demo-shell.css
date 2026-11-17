@@ -227,9 +227,12 @@ html.dark body.tc-demo-shell-body {
 
 .tc-demo-overlay-layer .tc-demo-registry-toast:where(.fixed) {
   top: auto !important;
-  bottom: 42% !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  transform: none !important;
 }
 
 .tc-demo-section-heading {
@@ -271,14 +274,8 @@ html.dark body.tc-demo-shell-body {
 }
 
 .tc-demo-shell-body .tc-demo-registry-toast {
-  inset: auto auto 42% 50% !important;
-  width: min(18rem, calc(100% - 2rem)) !important;
-  max-width: none !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-  transform: translateX(-50%) !important;
-  border-radius: 0.75rem !important;
-  box-shadow: 0 8px 28px rgb(0 0 0 / 0.35) !important;
 }
 
 .tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-toast:where(.fixed) {
