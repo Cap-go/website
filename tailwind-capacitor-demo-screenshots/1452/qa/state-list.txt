@@ -1,6 +1,6 @@
 foundation: packages, icons
 capacitor-accordion: single-section, multi-section, nested-copy
-capacitor-accordion-item: default, expanded-copy, stacked
+capacitor-accordion-item: collapsed, expanded-copy, stacked
 capacitor-actions: screen, sheet-open
 capacitor-actions-button: screen, sheet-open, primary-row
 capacitor-actions-group: screen, sheet-open, single-group
@@ -8,7 +8,7 @@ capacitor-actions-label: screen, sheet-open, section-label
 capacitor-alert: inline, closed, open
 capacitor-app: light-shell, dark-shell, with-block
 capacitor-avatar: initials, small, large
-capacitor-badge: default, color, on-avatar
+capacitor-badge: count, color, on-avatar
 capacitor-block: inset-strong, outline, plain
 capacitor-block-footer: with-footer, footer-note
 capacitor-block-header: with-header, section-title
@@ -25,20 +25,20 @@ capacitor-datetime: closed, open
 capacitor-dialog: screen, open
 capacitor-dialog-button: cancel-ok, destructive, stacked
 capacitor-fab: closed, list-open
-capacitor-footer: default, with-toolbar
-capacitor-header: default, with-navbar
+capacitor-footer: plain-footer, with-toolbar
+capacitor-header: plain-header, with-navbar
 capacitor-icon: navigation, large
 capacitor-infinite-scroll: idle, loading
 capacitor-input-otp: empty, filled
-capacitor-item-sliding: default, swiped-open
-capacitor-link: default, toolbar
+capacitor-item-sliding: closed, swiped-open
+capacitor-link: text-link, toolbar
 capacitor-list: inset, buttons, media
 capacitor-list-button: single, pair
 capacitor-list-group: grouped, nested
 capacitor-list-input: empty, filled, focused
 capacitor-list-item: standard, chevron, toggle-after, badge
 capacitor-menu-list: basic, with-icons
-capacitor-menu-list-item: default, selected
+capacitor-menu-list-item: basic-item, selected
 capacitor-message: sent, received, thread
 capacitor-messagebar: empty, composing
 capacitor-messages: single, pair
@@ -46,19 +46,19 @@ capacitor-messages-title: with-title, group-chat
 capacitor-modal: closed, open, inline
 capacitor-navbar: standard, large-title, transparent, with-back-link
 capacitor-navbar-back-link: with-text, in-navbar
-capacitor-note: default, secondary
+capacitor-note: body-note, secondary
 capacitor-notification: closed, open, inline-open
 capacitor-page: scroll-content, with-navbar
 capacitor-panel: screen, open
 capacitor-picker: closed, open, wheels
 capacitor-popover: screen, open
 capacitor-popup: screen, open
-capacitor-preloader: default, blue, large-green
+capacitor-preloader: spinner, blue, large-green
 capacitor-progressbar: low, high, indeterminate
 capacitor-radio: option-a, option-b
 capacitor-range: single, dual, with-pins
 capacitor-refresher: idle, pulling
-capacitor-reorder: default, three-rows
+capacitor-reorder: two-rows, three-rows
 capacitor-searchbar: empty, filled, focused, with-cancel
 capacitor-segmented: one-selected, two-selected
 capacitor-segmented-button: a-selected, b-selected
