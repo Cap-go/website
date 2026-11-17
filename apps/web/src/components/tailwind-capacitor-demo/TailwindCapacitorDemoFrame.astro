@@ -72,11 +72,12 @@ const states = stateManifest[slug as keyof typeof stateManifest] ?? [{ id: 'prev
   </div>
 </div>
 
-<script define:vars={{ slug }}>
+<script>
   import { bindTailwindCapacitorDemoTheme } from '@/scripts/tailwindCapacitorDemoTheme.client'
 
-  const root = document.querySelector(`[data-tc-demo-slug="${slug}"]`)
-  if (root instanceof HTMLElement) {
-    bindTailwindCapacitorDemoTheme(root, slug)
+  for (const root of document.querySelectorAll('[data-tc-demo-slug]')) {
+    if (!(root instanceof HTMLElement)) continue
+    const slug = root.getAttribute('data-tc-demo-slug')
+    if (slug) bindTailwindCapacitorDemoTheme(root, slug)
   }
 </script>

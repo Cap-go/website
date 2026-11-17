@@ -331,20 +331,91 @@ async function assertStateClipping(pageOrFrame, stateId, label) {
 async function exerciseInteractions(target, slug) {
   try {
     if (slug === 'capacitor-toggle' || slug === 'capacitor-checkbox' || slug === 'capacitor-radio') {
-      const control = target.locator('[data-tc-demo-state="on"] .toggle, [data-tc-demo-state="on"] input, [data-tc-demo-state="on"] [role="checkbox"]').first()
+      const control = target.locator('[data-tc-demo-state="on"] .toggle, [data-tc-demo-state="on"] input, [data-tc-demo-state="on"] [role="checkbox"], [data-tc-demo-state="option-a"] .item-content').first()
       if (await control.count()) await control.click({ timeout: 3000 }).catch(() => {})
     }
-    if (slug === 'capacitor-tabs' || slug === 'capacitor-segmented') {
-      const tab = target.locator('[data-tc-demo-state] button, [data-tc-demo-state] .tab, [data-tc-demo-state] .segmented button').nth(1)
+    if (slug === 'capacitor-tabs' || slug === 'capacitor-tab' || slug === 'capacitor-segmented' || slug === 'capacitor-segmented-button') {
+      const tab = target.locator('[data-tc-demo-state] .tab-link, [data-tc-demo-state] .tab, [data-tc-demo-state] .segmented button, [data-tc-demo-state] button.tab').nth(1)
       if (await tab.count()) await tab.click({ timeout: 3000 }).catch(() => {})
+    }
+    if (slug === 'capacitor-tabbar' || slug === 'capacitor-tabbar-link') {
+      const link = target.locator('[data-tc-demo-state] .tabbar a, [data-tc-demo-state] .tabbar-link').nth(1)
+      if (await link.count()) await link.click({ timeout: 3000 }).catch(() => {})
+    }
+    if (slug === 'capacitor-stepper') {
+      const plus = target.locator('[data-tc-demo-state] .stepper button').last()
+      if (await plus.count()) await plus.click({ timeout: 3000 }).catch(() => {})
+    }
+    if (slug === 'capacitor-accordion' || slug === 'capacitor-accordion-item') {
+      const item = target.locator('[data-tc-demo-state] .accordion-item button, [data-tc-demo-state] .accordion-item').first()
+      if (await item.count()) await item.click({ timeout: 3000 }).catch(() => {})
+    }
+    if (slug === 'capacitor-chip') {
+      const chip = target.locator('[data-tc-demo-state="filled"] .chip, [data-tc-demo-state="filled"] [class*="chip"]').first()
+      if (await chip.count()) await chip.click({ timeout: 3000 }).catch(() => {})
     }
     if (slug === 'capacitor-list-input' || slug === 'capacitor-textarea' || slug === 'capacitor-searchbar') {
       const field = target.locator('[data-tc-demo-state="filled"] input, [data-tc-demo-state="filled"] textarea, [data-tc-demo-state="with-cancel"] input').first()
       if (await field.count()) await field.fill('demo', { timeout: 3000 })
     }
+    const overlaySlugs = new Set([
+      'capacitor-actions',
+      'capacitor-sheet',
+      'capacitor-popover',
+      'capacitor-popup',
+      'capacitor-panel',
+    ])
+    if (overlaySlugs.has(slug)) {
+      const trigger = target.getByRole('button', { name: /open|show/i }).first()
+      if (await trigger.count()) {
+        await trigger.click({ timeout: 5000 }).catch(() => {})
+        await target.waitForTimeout(350)
+        await target.keyboard.press('Escape')
+        await target.waitForTimeout(250)
+        const open = await target.evaluate(() => Boolean(document.querySelector('.actions-modal, .sheet-modal, .popup, .panel')))
+        record(!open, `${slug}: escape closes overlay (open=${open})`)
+        await trigger.click({ timeout: 5000 }).catch(() => {})
+        await target.waitForTimeout(350)
+        const backdrop = target.locator('.actions-backdrop, .sheet-backdrop, .popup-backdrop, .panel-backdrop, [class*="backdrop"]').first()
+        if (await backdrop.count()) {
+          await backdrop.click({ position: { x: 8, y: 8 }, timeout: 3000 }).catch(() => {})
+          await target.waitForTimeout(250)
+        }
+      }
+    }
   } catch (error) {
     record(false, `interaction failed on ${slug}: ${error instanceof Error ? error.message : String(error)}`)
   }
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} slug
+ * @param {string} label
+ */
+async function assertOuterPageThemeSwitch(page, slug, label) {
+  const pageErrors = []
+  const onConsole = (msg) => {
+    if (msg.type() === 'error') pageErrors.push(msg.text())
+  }
+  page.on('console', onConsole)
+  await page.click('[data-tc-platform="material"]')
+  await page.waitForTimeout(600)
+  const firstFrame = page.locator('iframe.tc-demo-state-iframe').first()
+  const materialOk = await firstFrame.evaluate(() => {
+    const src = document.getAttribute('src') ?? ''
+    return src.includes('platform=material')
+  })
+  record(materialOk, `${label}: outer page platform switch updates iframe src`)
+  await page.click('[data-tc-dark="1"]')
+  await page.waitForTimeout(700)
+  const darkOk = await firstFrame.evaluate(() => {
+    const src = document.getAttribute('src') ?? ''
+    return src.includes('dark=1')
+  })
+  record(darkOk, `${label}: outer page dark switch updates iframe src`)
+  record(pageErrors.length === 0, `${label}: no console errors during theme switch (${pageErrors.join('; ')})`)
+  page.off('console', onConsole)
 }
 
 function shellUrl(slug, stateId, theme) {
@@ -389,6 +460,9 @@ async function qaSlug(page, slug, viewport, theme) {
   await page.click(`[data-tc-dark="${theme.dark ? '1' : '0'}"]`)
   await page.waitForTimeout(900)
   const pageLabel = `${slug} ${viewport.id} ${theme.id}`
+  if (viewport.id === 'desktop' && theme.id === 'ios-light') {
+    await assertOuterPageThemeSwitch(page, slug, `${pageLabel} catalog theme`)
+  }
   await assertPageLayout(page, pageLabel)
 
   const shotDir = join(outRoot, slug)

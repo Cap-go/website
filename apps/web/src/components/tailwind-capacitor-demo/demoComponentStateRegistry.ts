@@ -1,6 +1,7 @@
 import { h, type VNode } from 'vue'
 import type { GalleryContext } from './tailwindCapacitorDemoGallery'
 import {
+  demoIconVnode,
   demoTableBodyCells,
   demoTableBodyRow,
   demoTableHeaderCell,
@@ -120,7 +121,7 @@ function notificationVNode(ctx: GalleryContext, opened: boolean): VNode {
       class: opened ? 'tc-demo-notification-inline' : undefined,
     },
     {
-      icon: () => h(Icon, { material: 'notifications', class: 'text-xl', 'aria-label': 'Notification' }),
+      icon: () => demoIconVnode(ctx, 'notifications', { class: 'text-xl', 'aria-label': 'Notification' }),
     },
   )
 }
@@ -195,10 +196,30 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'expanded-copy',
         label: 'Expanded copy',
-        render: () =>
-          h(Accordion, {}, {
-            default: () => h(AccordionItem, {}, { default: () => 'Billing details' }),
-          }),
+        render: (c) => {
+          c.accordionDemoOpen.value = true
+          return h('div', { class: 'w-full tc-demo-accordion-expanded' }, [
+            h(Accordion, {}, {
+              default: () =>
+                h(
+                  AccordionItem,
+                  {
+                    onClick: () => {
+                      c.accordionDemoOpen.value = !c.accordionDemoOpen.value
+                    },
+                  },
+                  { default: () => 'Billing details' },
+                ),
+            }),
+            c.accordionDemoOpen.value
+              ? h(
+                  'p',
+                  { class: 'px-4 pb-3 text-sm opacity-80 tc-demo-accordion-expanded-body' },
+                  'Invoices, receipts, and tax settings appear here when expanded.',
+                )
+              : null,
+          ])
+        },
       },
       {
         id: 'stacked',
@@ -219,10 +240,9 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'light-shell',
         label: 'Light shell',
-        render: (c) =>
-          h(App, { class: 'p-3' }, {
-            default: () =>
-              h('p', { class: 'text-sm' }, `Root App shell (${platformLabel(c)}, light).`),
+        render: () =>
+          h(Block, { strong: true, inset: true, class: 'tc-demo-app-light-preview m-0' }, {
+            default: () => h('p', { class: 'p-3 text-sm' }, 'Light App surface preview inside the demo shell.'),
           }),
       },
       {
@@ -470,12 +490,22 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   ],
   'capacitor-dialog-button': (ctx) => {
     const { h } = ctx
+    const footerDialog = (buttons: VNode, title = 'Preview') =>
+      h(
+        Dialog,
+        { opened: true, class: 'tc-demo-dialog-button-stage', translucent: false },
+        {
+          title: () => title,
+          default: () => 'Dialog footer button styles.',
+          buttons: () => buttons,
+        },
+      )
     return [
       {
         id: 'cancel-ok',
         label: 'Cancel + OK',
         render: () =>
-          h('div', { class: 'tc-demo-dialog-button-preview flex flex-wrap gap-2' }, [
+          footerDialog([
             h(DialogButton, {}, { default: () => 'Cancel' }),
             h(DialogButton, { strong: true }, { default: () => 'OK' }),
           ]),
@@ -483,16 +513,20 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'destructive',
         label: 'Destructive',
-        render: () => h(DialogButton, { class: 'text-red-500' }, { default: () => 'Delete' }),
+        render: () =>
+          footerDialog([h(DialogButton, { class: 'text-red-500' }, { default: () => 'Delete' })], 'Delete item?'),
       },
       {
         id: 'stacked',
         label: 'Stacked',
         render: () =>
-          h('div', { class: 'flex flex-col gap-1' }, [
-            h(DialogButton, { strong: true }, { default: () => 'Confirm' }),
-            h(DialogButton, {}, { default: () => 'Cancel' }),
-          ]),
+          footerDialog(
+            h('div', { class: 'flex w-full flex-col' }, [
+              h(DialogButton, { strong: true }, { default: () => 'Confirm' }),
+              h(DialogButton, {}, { default: () => 'Cancel' }),
+            ]),
+            'Confirm',
+          ),
       },
     ]
   },
@@ -556,17 +590,17 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'navigation',
         label: 'Navigation',
-        render: () =>
+        render: (c) =>
           h('div', { class: 'flex flex-wrap gap-4 p-2' }, [
-            h(Icon, { material: 'home', class: 'text-2xl', 'aria-label': 'Home' }),
-            h(Icon, { material: 'search', class: 'text-2xl', 'aria-label': 'Search' }),
-            h(Icon, { material: 'settings', class: 'text-2xl', 'aria-label': 'Settings' }),
+            demoIconVnode(c, 'home', { class: 'text-2xl', 'aria-label': 'Home' }),
+            demoIconVnode(c, 'search', { class: 'text-2xl', 'aria-label': 'Search' }),
+            demoIconVnode(c, 'settings', { class: 'text-2xl', 'aria-label': 'Settings' }),
           ]),
       },
       {
         id: 'large',
         label: 'Large',
-        render: () => h(Icon, { material: 'bolt', class: 'text-4xl', 'aria-label': 'Bolt' }),
+        render: (c) => demoIconVnode(c, 'bolt', { class: 'text-4xl', 'aria-label': 'Bolt' }),
       },
     ]
   },
@@ -600,15 +634,16 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
           h('div', { class: 'relative overflow-hidden' }, [
             h(
               'div',
-              { class: 'absolute inset-y-0 right-0 flex items-center gap-2 px-2' },
-              [h(Button, { small: true, class: 'min-w-16' }, { default: () => 'Delete' })],
+              { class: 'absolute inset-y-0 right-0 flex w-16 items-center justify-center bg-red-500 text-white' },
+              [h('span', { class: 'text-xs font-semibold' }, 'Del')],
             ),
             h(ItemSliding, {}, {
               default: () =>
                 h(ListItem, {
                   title: 'Swipe row',
+                  subtitle: swiped ? 'Actions revealed' : 'Swipe left',
                   link: true,
-                  class: swiped ? '-translate-x-20 transition-transform' : '',
+                  class: swiped ? '-translate-x-12 bg-white dark:bg-neutral-900 transition-transform' : 'bg-white dark:bg-neutral-900',
                 }),
             }),
           ]),
@@ -690,8 +725,22 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
         render: () =>
           h(MenuList, {}, {
             default: () => [
-              h(MenuListItem, { href: '#' }, { default: () => [h(Icon, { material: 'edit', class: 'mr-2 inline text-base' }), 'Edit'] }),
-              h(MenuListItem, { href: '#' }, { default: () => [h(Icon, { material: 'delete', class: 'mr-2 inline text-base' }), 'Delete'] }),
+              h(
+                MenuListItem,
+                { href: '#' },
+                {
+                  media: () => demoIconVnode(ctx, 'edit', { class: 'text-xl' }),
+                  default: () => 'Edit',
+                },
+              ),
+              h(
+                MenuListItem,
+                { href: '#' },
+                {
+                  media: () => demoIconVnode(ctx, 'delete', { class: 'text-xl' }),
+                  default: () => 'Delete',
+                },
+              ),
             ],
           }),
       },
@@ -821,8 +870,8 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       },
     ]
   },
-  'capacitor-modal': () => [
-    ...overlayClosedOpen('Open modal', 'Editor', modalContentVNode, { closed: 'Closed', open: 'Open' }),
+  'capacitor-modal': (ctx) => [
+    ...overlayClosedOpen(ctx, 'Open modal', 'Editor', 'modalOpen', modalContentVNode, { closed: 'Closed', open: 'Open' }),
     {
       id: 'inline',
       label: 'Inline',
@@ -845,7 +894,11 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'transparent',
         label: 'Transparent',
-        render: () => h(Navbar, { title: 'Transparent', transparent: true, class: 'border-b border-black/10' }),
+        render: () =>
+          h('div', { class: 'tc-demo-navbar-transparent-stage min-h-36 w-full' }, [
+            h(Navbar, { title: 'Transparent', transparent: true }),
+            h('p', { class: 'px-4 py-6 text-sm text-white' }, 'Content scrolls under a transparent navbar.'),
+          ]),
       },
       {
         id: 'with-back-link',
@@ -882,8 +935,11 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       },
     ]
   },
-  'capacitor-notification': () => [
-  ...overlayClosedOpen('Show notification', 'Inbox', (c) => notificationVNode(c, true), { closed: 'Closed', open: 'Open' }),
+  'capacitor-notification': (ctx) => [
+    ...overlayClosedOpen(ctx, 'Show notification', 'Inbox', 'notificationOpen', (c) => notificationVNode(c, true), {
+      closed: 'Closed',
+      open: 'Open',
+    }),
     {
       id: 'inline-open',
       label: 'Inline open',
@@ -1111,49 +1167,72 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   },
   'capacitor-stepper': (ctx) => {
     const { h } = ctx
+    const stepper = (preset: number) => (c: GalleryContext) => {
+      c.stepperValue.value = preset
+      return h(Stepper, {
+        value: c.stepperValue.value,
+        onInput: (event: Event) => {
+          const target = event.target
+          if (target instanceof HTMLInputElement) c.stepperValue.value = Number(target.value) || 0
+        },
+        onPlus: () => {
+          c.stepperValue.value += 1
+        },
+        onMinus: () => {
+          c.stepperValue.value = Math.max(0, c.stepperValue.value - 1)
+        },
+      })
+    }
     return [
-      {
-        id: 'min',
-        label: 'Min',
-        render: () => h(Stepper, { value: 0 }),
-      },
-      {
-        id: 'max',
-        label: 'Max',
-        render: () => h(Stepper, { value: 10 }),
-      },
-      {
-        id: 'disabled',
-        label: 'Disabled',
-        render: () => h(Stepper, { value: 2, inputDisabled: true }),
-      },
+      { id: 'min', label: 'Min', render: stepper(0) },
+      { id: 'max', label: 'Max', render: stepper(10) },
+      { id: 'disabled', label: 'Disabled', render: () => h(Stepper, { value: 2, inputDisabled: true }) },
     ]
   },
   'capacitor-tabbar': (ctx) => {
     const { h } = ctx
+    const tabbar =
+      (tabs: Array<{ id: string; label: string; icon: Parameters<typeof demoIconVnode>[1] }>) =>
+      (c: GalleryContext) =>
+        h(Tabbar, { labels: true }, {
+          default: () =>
+            tabs.map((tab) =>
+              h(
+                TabbarLink,
+                {
+                  active: c.tabbarDemoActive.value === tab.id,
+                  label: tab.label,
+                  onClick: () => {
+                    c.tabbarDemoActive.value = tab.id
+                  },
+                },
+                { icon: () => demoIconVnode(c, tab.icon, { class: 'text-xl' }) },
+              ),
+            ),
+        })
     return [
       {
         id: 'two-tabs',
         label: 'Two tabs',
-        render: () =>
-          h(Tabbar, { labels: true }, {
-            default: () => [
-              h(TabbarLink, { active: true, label: 'Home' }, { icon: () => h(Icon, { material: 'home', class: 'text-xl' }) }),
-              h(TabbarLink, { label: 'Search' }, { icon: () => h(Icon, { material: 'search', class: 'text-xl' }) }),
-            ],
-          }),
+        render: (c) => {
+          c.tabbarDemoActive.value = 'home'
+          return tabbar([
+            { id: 'home', label: 'Home', icon: 'home' },
+            { id: 'search', label: 'Search', icon: 'search' },
+          ])(c)
+        },
       },
       {
         id: 'three-tabs',
         label: 'Three tabs',
-        render: () =>
-          h(Tabbar, { labels: true }, {
-            default: () => [
-              h(TabbarLink, { active: true, label: 'Today' }, { icon: () => h(Icon, { material: 'today', class: 'text-xl' }) }),
-              h(TabbarLink, { label: 'Calendar' }, { icon: () => h(Icon, { material: 'calendar_month', class: 'text-xl' }) }),
-              h(TabbarLink, { label: 'Profile' }, { icon: () => h(Icon, { material: 'person', class: 'text-xl' }) }),
-            ],
-          }),
+        render: (c) => {
+          c.tabbarDemoActive.value = 'today'
+          return tabbar([
+            { id: 'today', label: 'Today', icon: 'today' },
+            { id: 'calendar', label: 'Calendar', icon: 'calendar_month' },
+            { id: 'profile', label: 'Profile', icon: 'person' },
+          ])(c)
+        },
       },
     ]
   },
@@ -1239,10 +1318,11 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
         render: () =>
           h(List, { inset: true }, {
             default: () =>
-              h(ListItem, {
-                title: 'Thumbnail row',
-                media: () => h(Thumbnail, { class: 'size-10 rounded-lg bg-neutral-200 dark:bg-neutral-700' }),
-              }),
+              h(
+                ListItem,
+                { title: 'Thumbnail row' },
+                { media: () => h(Thumbnail, { class: 'size-10 rounded-lg bg-neutral-200 dark:bg-neutral-700' }) },
+              ),
           }),
       },
     ]

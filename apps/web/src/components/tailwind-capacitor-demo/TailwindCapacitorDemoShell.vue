@@ -115,6 +115,41 @@
           <ListItem title="Popover item" content-class="tc-demo-popover-list-item-content" />
         </List>
       </Popover>
+
+      <div
+        v-if="modalOpen"
+        class="fixed inset-0 z-40 bg-black/50"
+        data-tc-demo-modal-backdrop
+        @click="modalOpen = false"
+      />
+      <Modal
+        v-if="modalOpen"
+        class="tc-demo-overlay-modal fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-xs -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl"
+      >
+        <div class="p-4">
+          <h3 class="font-semibold">Save changes?</h3>
+          <p class="mt-2 text-sm opacity-80">Your draft channel name is updated but not published yet.</p>
+          <div class="mt-4 flex gap-2">
+            <Button outline class="flex-1" @click="modalOpen = false">Cancel</Button>
+            <Button class="flex-1" @click="modalOpen = false">Save</Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Notification
+        v-if="notificationOpen"
+        class="tc-demo-overlay-notification"
+        :opened="true"
+        button="Dismiss"
+        title="New message"
+        subtitle="Capgo"
+        text="Your bundle finished uploading to the preview channel."
+        @close="notificationOpen = false"
+      >
+        <template #icon>
+          <Icon material="notifications" class="text-xl" aria-label="Notification" />
+        </template>
+      </Notification>
     </div>
   </App>
 </template>
@@ -142,6 +177,8 @@ import {
   Page,
   Panel,
   Popover,
+  Modal,
+  Notification,
   Popup,
   Sheet,
   Toast,
@@ -202,6 +239,8 @@ const galleryContext = computed(() =>
     panelOpen,
     toastOpen,
     popoverOpen,
+    modalOpen,
+    notificationOpen,
     segmented,
     rangeValue,
     stepperValue,
@@ -210,6 +249,8 @@ const galleryContext = computed(() =>
     radioVal,
     search,
     tabsDemoActive,
+    tabbarDemoActive,
+    accordionDemoOpen,
   }),
 )
 
@@ -261,6 +302,8 @@ const popupOpen = ref(false)
 const panelOpen = ref(false)
 const toastOpen = ref(false)
 const popoverOpen = ref(false)
+const modalOpen = ref(false)
+const notificationOpen = ref(false)
 const segmented = ref('tab1')
 const rangeValue = ref(40)
 const stepperValue = ref(2)
@@ -269,6 +312,8 @@ const checkboxOn = ref(true)
 const radioVal = ref('a')
 const search = ref('')
 const tabsDemoActive = ref('a')
+const tabbarDemoActive = ref('home')
+const accordionDemoOpen = ref(true)
 
 /** @param {MessageEvent} event */
 function onMessage(event) {
@@ -302,14 +347,34 @@ function onDemoPageScroll() {
   if (popoverOpen.value) window.dispatchEvent(new Event('resize'))
 }
 
+function closeDemoOverlays() {
+  actionsOpen.value = false
+  dialogOpen.value = false
+  alertOpen.value = false
+  sheetOpen.value = false
+  popupOpen.value = false
+  panelOpen.value = false
+  toastOpen.value = false
+  popoverOpen.value = false
+  modalOpen.value = false
+  notificationOpen.value = false
+}
+
+function onKeydown(event) {
+  if (event.key !== 'Escape') return
+  closeDemoOverlays()
+}
+
 onMounted(() => {
   readQueryTheme()
   window.addEventListener('message', onMessage)
+  window.addEventListener('keydown', onKeydown)
   document.querySelector('.tc-demo-page')?.addEventListener('scroll', onDemoPageScroll, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('message', onMessage)
+  window.removeEventListener('keydown', onKeydown)
   document.querySelector('.tc-demo-page')?.removeEventListener('scroll', onDemoPageScroll)
 })
 </script>

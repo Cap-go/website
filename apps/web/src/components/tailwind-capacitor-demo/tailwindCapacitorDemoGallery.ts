@@ -90,6 +90,7 @@ import {
 import { demoComponentStateRegistry } from './demoComponentStateRegistry'
 import {
   buildTwoOptionSegmentedStates,
+  demoIconVnode,
   demoTableBodyCells,
   demoTableBodyRow,
   demoTableHeaderCell,
@@ -113,6 +114,8 @@ export type GalleryContext = {
   panelOpen: Ref<boolean>
   toastOpen: Ref<boolean>
   popoverOpen: Ref<boolean>
+  modalOpen: Ref<boolean>
+  notificationOpen: Ref<boolean>
   segmented: Ref<string>
   rangeValue: Ref<number>
   stepperValue: Ref<number>
@@ -121,6 +124,8 @@ export type GalleryContext = {
   radioVal: Ref<string>
   search: Ref<string>
   tabsDemoActive: Ref<string>
+  tabbarDemoActive: Ref<string>
+  accordionDemoOpen: Ref<boolean>
   overlayTrigger: (label: string, openRef: Ref<boolean>, options?: { id?: string }) => VNode
 }
 
@@ -161,6 +166,8 @@ export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'mate
     panelOpen: ref(false),
     toastOpen: ref(false),
     popoverOpen: ref(false),
+    modalOpen: ref(false),
+    notificationOpen: ref(false),
     segmented: ref('tab1'),
     rangeValue: ref(40),
     stepperValue: ref(2),
@@ -169,6 +176,8 @@ export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'mate
     radioVal: ref('a'),
     search: ref(''),
     tabsDemoActive: ref('a'),
+    tabbarDemoActive: ref('home'),
+    accordionDemoOpen: ref(true),
   }
 
   return attachGalleryContext(ctxBase)
@@ -442,10 +451,10 @@ function buildFoundationStates(ctx: GalleryContext): SlugStateDef[] {
       label: 'Icons',
       render: (c) =>
         h('div', { class: 'flex flex-wrap items-center gap-4 p-3' }, [
-          h(Icon, { material: 'home', class: 'text-2xl', 'aria-label': 'Home' }),
-          h(Icon, { material: 'person', class: 'text-2xl', 'aria-label': 'Person' }),
-          h(Icon, { material: 'search', class: 'text-2xl', 'aria-label': 'Search' }),
-          h(Icon, { material: 'settings', class: 'text-2xl', 'aria-label': 'Settings' }),
+          demoIconVnode(c, 'home', { class: 'text-2xl', 'aria-label': 'Home' }),
+          demoIconVnode(c, 'person', { class: 'text-2xl', 'aria-label': 'Person' }),
+          demoIconVnode(c, 'search', { class: 'text-2xl', 'aria-label': 'Search' }),
+          demoIconVnode(c, 'settings', { class: 'text-2xl', 'aria-label': 'Settings' }),
         ]),
     },
   ]
@@ -575,10 +584,29 @@ function buildOverlayStates(
 }
 
 function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
-  const { h } = ctx
   return [
-    { id: 'off', label: 'Off', render: (c) => h(Toggle, { checked: false }) },
-    { id: 'on', label: 'On', render: (c) => h(Toggle, { checked: true }) },
+    {
+      id: 'off',
+      label: 'Off',
+      render: (c) =>
+        h(Toggle, {
+          checked: c.toggleOn.value,
+          onChange: () => {
+            c.toggleOn.value = !c.toggleOn.value
+          },
+        }),
+    },
+    {
+      id: 'on',
+      label: 'On',
+      render: (c) =>
+        h(Toggle, {
+          checked: c.toggleOn.value,
+          onChange: () => {
+            c.toggleOn.value = !c.toggleOn.value
+          },
+        }),
+    },
     { id: 'disabled', label: 'Disabled', render: (c) => h(Toggle, { checked: false, disabled: true }) },
   ]
 }
@@ -586,7 +614,11 @@ function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
 function buildBadgeStates(ctx: GalleryContext): SlugStateDef[] {
   const { h } = ctx
   return [
-    { id: 'count', label: 'Count', render: () => h(Badge, {}, { default: () => 'New' }) },
+    {
+      id: 'count',
+      label: 'Count',
+      render: () => h(Badge, { class: 'tc-demo-badge-inline' }, { default: () => '3' }),
+    },
     { id: 'color', label: 'Color', render: () => h(Badge, { colors: { bg: 'bg-red-500' } }, { default: () => 'Hot' }) },
     {
       id: 'on-avatar',
@@ -603,7 +635,23 @@ function buildBadgeStates(ctx: GalleryContext): SlugStateDef[] {
 function buildChipStates(ctx: GalleryContext): SlugStateDef[] {
   const { h } = ctx
   return [
-    { id: 'filled', label: 'Filled', render: () => h(Chip, {}, { default: () => 'Capgo' }) },
+    {
+      id: 'filled',
+      label: 'Filled',
+      render: (c) =>
+        h('div', { class: 'tc-demo-chip-row' }, [
+          h(
+            Chip,
+            {
+              onClick: () => {
+                c.toggleOn.value = !c.toggleOn.value
+              },
+              class: c.toggleOn.value ? 'ring-2 ring-primary' : undefined,
+            },
+            { default: () => 'Capgo' },
+          ),
+        ]),
+    },
     { id: 'removable', label: 'Removable', render: () => h(Chip, { deleteButton: true }, { default: () => 'Removable' }) },
     { id: 'outline', label: 'Outline', render: () => h(Chip, { outline: true }, { default: () => 'Outline' }) },
   ]
@@ -691,11 +739,19 @@ function buildListStates(ctx: GalleryContext): SlugStateDef[] {
     {
       id: 'media',
       label: 'Media rows',
-      render: () =>
+      render: (c) =>
         h(List, { inset: true }, {
           default: () => [
-            h(ListItem, { title: 'Tailwind Capacitor', subtitle: 'Registry plugin', media: () => h(Icon, { material: 'extension', class: 'text-xl' }) }),
-            h(ListItem, { title: 'Live updates', subtitle: 'Capgo channel', media: () => h(Icon, { material: 'bolt', class: 'text-xl' }) }),
+            h(
+              ListItem,
+              { title: 'Tailwind Capacitor', subtitle: 'Registry plugin' },
+              { media: () => demoIconVnode(c, 'extension', { class: 'text-xl' }) },
+            ),
+            h(
+              ListItem,
+              { title: 'Live updates', subtitle: 'Capgo channel' },
+              { media: () => h(Icon, { material: 'bolt', class: 'text-xl' }) },
+            ),
           ],
         }),
     },
@@ -704,8 +760,28 @@ function buildListStates(ctx: GalleryContext): SlugStateDef[] {
 
 function buildCheckboxStates(ctx: GalleryContext): SlugStateDef[] {
   return [
-    { id: 'off', label: 'Off', render: (c) => h(Checkbox, { checked: false }) },
-    { id: 'on', label: 'On', render: (c) => h(Checkbox, { checked: true }) },
+    {
+      id: 'off',
+      label: 'Off',
+      render: (c) =>
+        h(Checkbox, {
+          checked: c.checkboxOn.value,
+          onChange: () => {
+            c.checkboxOn.value = !c.checkboxOn.value
+          },
+        }),
+    },
+    {
+      id: 'on',
+      label: 'On',
+      render: (c) =>
+        h(Checkbox, {
+          checked: c.checkboxOn.value,
+          onChange: () => {
+            c.checkboxOn.value = !c.checkboxOn.value
+          },
+        }),
+    },
     { id: 'disabled', label: 'Disabled', render: (c) => h(Checkbox, { checked: false, disabled: true }) },
   ]
 }
@@ -720,21 +796,57 @@ function buildRadioStates(ctx: GalleryContext): SlugStateDef[] {
           List,
           {},
           {
-            default: () => [h(ListItem, { radio: true, checked: true, title: 'Option A' }), h(ListItem, { radio: true, checked: false, title: 'Option B' })],
+            default: () => [
+              h(ListItem, {
+                radio: true,
+                checked: c.radioVal.value === 'a',
+                title: 'Option A',
+                onClick: () => {
+                  c.radioVal.value = 'a'
+                },
+              }),
+              h(ListItem, {
+                radio: true,
+                checked: c.radioVal.value === 'b',
+                title: 'Option B',
+                onClick: () => {
+                  c.radioVal.value = 'b'
+                },
+              }),
+            ],
           },
         ),
     },
     {
       id: 'option-b',
       label: 'Option B',
-      render: (c) =>
-        h(
+      render: (c) => {
+        c.radioVal.value = 'b'
+        return h(
           List,
           {},
           {
-            default: () => [h(ListItem, { radio: true, checked: false, title: 'Option A' }), h(ListItem, { radio: true, checked: true, title: 'Option B' })],
+            default: () => [
+              h(ListItem, {
+                radio: true,
+                checked: c.radioVal.value === 'a',
+                title: 'Option A',
+                onClick: () => {
+                  c.radioVal.value = 'a'
+                },
+              }),
+              h(ListItem, {
+                radio: true,
+                checked: c.radioVal.value === 'b',
+                title: 'Option B',
+                onClick: () => {
+                  c.radioVal.value = 'b'
+                },
+              }),
+            ],
           },
-        ),
+        )
+      },
     },
   ]
 }
@@ -772,11 +884,33 @@ function buildTabsStates(ctx: GalleryContext, slug: 'capacitor-tab' | 'capacitor
     render: (c) => {
       const { h } = c
       const keys = slug === 'capacitor-tab' ? ['a', 'b'] : ['one', 'two']
+      c.tabsDemoActive.value = activeKey
       return h(
         Tabs,
         {},
         {
-          default: () => [h(Tab, { active: activeKey === keys[0] }, { default: () => left }), h(Tab, { active: activeKey === keys[1] }, { default: () => right })],
+          default: () => [
+            h(
+              Tab,
+              {
+                active: c.tabsDemoActive.value === keys[0],
+                onClick: () => {
+                  c.tabsDemoActive.value = keys[0]
+                },
+              },
+              { default: () => left },
+            ),
+            h(
+              Tab,
+              {
+                active: c.tabsDemoActive.value === keys[1],
+                onClick: () => {
+                  c.tabsDemoActive.value = keys[1]
+                },
+              },
+              { default: () => right },
+            ),
+          ],
         },
       )
     },
@@ -849,9 +983,23 @@ function buildSearchbarStates(ctx: GalleryContext): SlugStateDef[] {
 }
 
 function buildTextareaStates(ctx: GalleryContext): SlugStateDef[] {
+  const field = (value: string) => (c: GalleryContext) =>
+    h(List, {}, {
+      default: () =>
+        h(ListInput, {
+          label: 'Message',
+          type: 'textarea',
+          placeholder: 'Type here',
+          value,
+          onInput: (event: Event) => {
+            const target = event.target
+            if (target instanceof HTMLTextAreaElement) c.search.value = target.value
+          },
+        }),
+    })
   return [
-    { id: 'empty', label: 'Empty', render: (c) => h(Textarea, { value: '', label: 'Message', placeholder: 'Type here', 'aria-label': 'Message' }) },
-    { id: 'filled', label: 'Filled', render: (c) => h(Textarea, { value: 'Hello', label: 'Message', placeholder: 'Type here', 'aria-label': 'Message' }) },
+    { id: 'empty', label: 'Empty', render: field('') },
+    { id: 'filled', label: 'Filled', render: field('Hello from the demo shell.') },
   ]
 }
 

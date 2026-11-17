@@ -270,9 +270,7 @@ html:not(.dark).ios #tc-demo-root [role='dialog'] {
   clip-path: inset(0 round 0.75rem);
 }
 
-#tc-demo-root [role='dialog'].rounded-\[1\.75rem\] {
-  clip-path: inset(0 round 1.75rem);
-}
+/* Material dialog radius: avoid clip-path here (it was clipping title glyphs). */
 
 #tc-demo-root .tc-demo-dialog-button-preview button.hairline-r {
   border-right-color: var(--c-hairline-color) !important;
@@ -280,6 +278,63 @@ html:not(.dark).ios #tc-demo-root [role='dialog'] {
 
 #tc-demo-root .tc-demo-dialog-button-preview button.hairline-r:last-child {
   border-right-width: 0 !important;
+}
+
+.tc-demo-dialog-button-stage {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  margin-inline: auto;
+  max-width: 16.875rem;
+}
+
+#tc-demo-root :where(.actions-button, .actions-label, .actions-group) .hairline-b,
+#tc-demo-root :where(.actions-button) .hairline-r,
+#tc-demo-root :where(.actions-button) .hairline-l {
+  border-color: var(--c-hairline-color) !important;
+}
+
+.tc-demo-app-light-preview {
+  background: rgb(255 255 255) !important;
+  color: rgb(17 24 39) !important;
+}
+
+html.dark .tc-demo-app-light-preview {
+  background: rgb(255 255 255) !important;
+  color: rgb(17 24 39) !important;
+}
+
+.tc-demo-navbar-transparent-stage {
+  background: linear-gradient(to bottom, rgb(59 130 246), rgb(147 197 253));
+}
+
+.tc-demo-accordion-expanded .tc-demo-accordion-expanded-body {
+  border-top: 1px solid var(--c-hairline-color);
+}
+
+#tc-demo-root .tc-demo-badge-inline {
+  align-self: center;
+  width: auto !important;
+  max-width: max-content;
+}
+
+#tc-demo-root .tc-demo-chip-row > .chip,
+#tc-demo-root .tc-demo-chip-row > [class*='chip'] {
+  width: auto !important;
+  max-width: max-content;
+}
+
+.tc-demo-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.tc-demo-badge-inline {
+  display: inline-flex;
+  width: auto;
+  max-width: max-content;
 }
 
 .tc-demo-overlay-layer :where(.panel) {
