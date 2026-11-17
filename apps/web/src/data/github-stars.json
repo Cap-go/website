@@ -42,7 +42,7 @@
   "https://github.com/Cap-go/capacitor-android-usagestatsmanager/": 10,
   "https://github.com/Cap-go/capacitor-streamcall/": 16,
   "https://github.com/Cap-go/capacitor-autofill-save-password/": 18,
-  "https://github.com/Cap-go/capacitor-social-login/": 222,
+  "https://github.com/Cap-go/capacitor-social-login/": 223,
   "https://github.com/Cap-go/capacitor-passkey/": 5,
   "https://github.com/Cap-go/capacitor-jw-player/": 11,
   "https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/": 9,
@@ -153,5 +153,5 @@
   "https://github.com/Cap-go/capacitor-light-sensor/": 5,
   "https://github.com/Cap-go/capacitor-video-thumbnails/": 6,
   "https://github.com/Cap-go/capacitor-intent-launcher/": 8,
-  "https://github.com/Cap-go/tailwind-capacitor/": 22
+  "https://github.com/Cap-go/tailwind-capacitor/": 23
 }
