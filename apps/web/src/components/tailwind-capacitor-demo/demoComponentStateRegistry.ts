@@ -505,30 +505,36 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
         id: 'cancel-ok',
         label: 'Cancel + OK',
         render: () =>
-          footerDialog(
-            h('div', { class: 'flex w-full flex-row' }, [
-              h(DialogButton, {}, { default: () => 'Cancel' }),
-              h(DialogButton, { strong: true }, { default: () => 'OK' }),
-            ]),
-          ),
+          h('div', { class: 'tc-demo-dialog-button-preview w-full' }, [
+            footerDialog(
+              h('div', { class: 'flex w-full flex-row' }, [
+                h(DialogButton, {}, { default: () => 'Cancel' }),
+                h(DialogButton, { strong: true }, { default: () => 'OK' }),
+              ]),
+            ),
+          ]),
       },
       {
         id: 'destructive',
         label: 'Destructive',
         render: () =>
-          footerDialog(h(DialogButton, { class: 'text-red-500' }, { default: () => 'Delete' }), 'Delete item?'),
+          h('div', { class: 'tc-demo-dialog-button-preview w-full' }, [
+            footerDialog(h(DialogButton, { class: 'text-red-500' }, { default: () => 'Delete' }), 'Delete item?'),
+          ]),
       },
       {
         id: 'stacked',
         label: 'Stacked',
         render: () =>
-          footerDialog(
-            h('div', { class: 'flex w-full flex-col' }, [
-              h(DialogButton, { strong: true }, { default: () => 'Confirm' }),
-              h(DialogButton, {}, { default: () => 'Cancel' }),
-            ]),
-            'Confirm',
-          ),
+          h('div', { class: 'tc-demo-dialog-button-preview w-full' }, [
+            footerDialog(
+              h('div', { class: 'flex w-full flex-col' }, [
+                h(DialogButton, { strong: true }, { default: () => 'Confirm' }),
+                h(DialogButton, {}, { default: () => 'Cancel' }),
+              ]),
+              'Confirm',
+            ),
+          ]),
       },
     ]
   },
