@@ -441,8 +441,14 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         price.dataset.priceAmount = String(base + credits)
         price.dataset.priceInterval = isYearly ? 'year-monthly' : 'month'
         price.dataset.priceExtra = String(credits)
-        renderPrices(card!)
       }
+      // "Billed annually at": the yearly Stripe price plus twelve months of extra MAU credits.
+      const yearlyAmount = query('[data-yearly-price] [data-price-amount]')
+      if (yearlyAmount) {
+        yearlyAmount.dataset.priceAmount = String(priceYearly + credits * 12)
+        yearlyAmount.dataset.priceExtra = String(credits * 12)
+      }
+      renderPrices(card!)
       const mau = query('[data-enterprise-mau]')
       if (mau) mau.textContent = `${mauLabel} MAU`
       const highlight = query('[data-enterprise-mau-highlight]')
