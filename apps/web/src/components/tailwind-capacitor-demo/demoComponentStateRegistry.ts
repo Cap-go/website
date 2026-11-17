@@ -505,16 +505,18 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
         id: 'cancel-ok',
         label: 'Cancel + OK',
         render: () =>
-          footerDialog([
-            h(DialogButton, {}, { default: () => 'Cancel' }),
-            h(DialogButton, { strong: true }, { default: () => 'OK' }),
-          ]),
+          footerDialog(
+            h('div', { class: 'flex w-full flex-row' }, [
+              h(DialogButton, {}, { default: () => 'Cancel' }),
+              h(DialogButton, { strong: true }, { default: () => 'OK' }),
+            ]),
+          ),
       },
       {
         id: 'destructive',
         label: 'Destructive',
         render: () =>
-          footerDialog([h(DialogButton, { class: 'text-red-500' }, { default: () => 'Delete' })], 'Delete item?'),
+          footerDialog(h(DialogButton, { class: 'text-red-500' }, { default: () => 'Delete' }), 'Delete item?'),
       },
       {
         id: 'stacked',

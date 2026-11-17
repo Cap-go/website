@@ -402,17 +402,13 @@ async function assertOuterPageThemeSwitch(page, slug, label) {
   await page.click('[data-tc-platform="material"]')
   await page.waitForTimeout(600)
   const firstFrame = page.locator('iframe.tc-demo-state-iframe').first()
-  const materialOk = await firstFrame.evaluate(() => {
-    const src = document.getAttribute('src') ?? ''
-    return src.includes('platform=material')
-  })
+  const materialSrc = (await firstFrame.getAttribute('src')) ?? ''
+  const materialOk = materialSrc.includes('platform=material')
   record(materialOk, `${label}: outer page platform switch updates iframe src`)
   await page.click('[data-tc-dark="1"]')
   await page.waitForTimeout(700)
-  const darkOk = await firstFrame.evaluate(() => {
-    const src = document.getAttribute('src') ?? ''
-    return src.includes('dark=1')
-  })
+  const darkSrc = (await firstFrame.getAttribute('src')) ?? ''
+  const darkOk = darkSrc.includes('dark=1')
   record(darkOk, `${label}: outer page dark switch updates iframe src`)
   record(pageErrors.length === 0, `${label}: no console errors during theme switch (${pageErrors.join('; ')})`)
   page.off('console', onConsole)
