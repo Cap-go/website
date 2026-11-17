@@ -55,6 +55,12 @@ for (const { path, title } of hubPages) {
   })
 }
 
+test('buildDocBreadcrumbs strips locale prefix and localizes URLs', () => {
+  const crumbs = buildDocBreadcrumbs('/fr/docs/faq/', 'FAQ', 'https://capgo.app', 'fr')
+  expect(crumbs).toHaveLength(2)
+  expect(crumbs[1].url).toBe('https://capgo.app/fr/docs/faq/')
+})
+
 test('createDocBreadcrumbLdJson matches schema.org BreadcrumbList', () => {
   const crumbs = buildDocBreadcrumbs('/docs/builder/android/', 'Android', 'https://capgo.app')
   const json = createDocBreadcrumbLdJson(crumbs[2].url, crumbs)

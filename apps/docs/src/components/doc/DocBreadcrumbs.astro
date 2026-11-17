@@ -8,8 +8,8 @@ const route = Astro.locals.starlightRoute as StarlightRouteData
 const entryTitle = typeof route.entry?.data?.title === 'string' ? route.entry.data.title : ''
 const siteOrigin = Astro.site?.toString() || 'https://capgo.app'
 const messageLocale = resolveMessageLocale(route.locale, Astro.currentLocale)
-
-const breadcrumbs = buildDocBreadcrumbs(Astro.url.pathname, entryTitle, siteOrigin).map((crumb, index) =>
+const docLocale = route.locale ?? messageLocale
+const breadcrumbs = buildDocBreadcrumbs(Astro.url.pathname, entryTitle, siteOrigin, docLocale).map((crumb, index) =>
   index === 0 ? { ...crumb, name: m.home({}, { locale: messageLocale }) } : crumb,
 )
 

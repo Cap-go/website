@@ -1,7 +1,7 @@
 ---
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import m from '@/copy/messages'
-import { buildDocBreadcrumbs, createDocBreadcrumbLdJson } from '@/lib/docBreadcrumbs'
+import { buildDocBreadcrumbs, createDocBreadcrumbLdJson, stripLocalePath } from '@/lib/docBreadcrumbs'
 import { pluginSetupMetadata, truncateDescription } from '@/lib/seoMetadata'
 import { useRuntimeConfig } from '@/config/runtime'
 import { defaultLocale, locales } from '@/services/locale'
@@ -14,14 +14,6 @@ for (let index = head.length - 1; index >= 0; index -= 1) {
   if (item?.tag === 'link' && item.attrs?.rel === 'alternate') {
     head.splice(index, 1)
   }
-}
-
-const stripLocalePath = (pathname: string): string => {
-  for (const locale of locales) {
-    if (pathname === `/${locale}`) return '/'
-    if (pathname.startsWith(`/${locale}/`)) return pathname.slice(locale.length + 1) || '/'
-  }
-  return pathname || '/'
 }
 
 const runtimeConfig = useRuntimeConfig()
@@ -143,7 +135,8 @@ if (metaDescription) {
 const hasOgImage = head.some(({ tag, attrs }) => tag === 'meta' && attrs?.property === 'og:image')
 const breadcrumbTitle = entryTitle || seoTitle
 const canonicalPageUrl = localizedUrl(Astro.locals.starlightRoute.locale ?? defaultLocale)
-const docBreadcrumbs = buildDocBreadcrumbs(basePath, breadcrumbTitle, baseUrl).map((crumb, index) =>
+const docLocale = Astro.locals.starlightRoute.locale ?? defaultLocale
+const docBreadcrumbs = buildDocBreadcrumbs(basePath, breadcrumbTitle, baseUrl, docLocale).map((crumb, index) =>
   index === 0 ? { ...crumb, name: m.home({}, { locale: messageLocale }) } : crumb,
 )
 if (docBreadcrumbs.length >= 2) {

@@ -1,4 +1,5 @@
 import { pluginNames } from '../config/sidebar.mjs'
+import { defaultLocale, locales } from '../services/locale'
 
 export type DocBreadcrumb = { name: string; url: string }
 
@@ -44,6 +45,21 @@ const withTrailingSlash = (pathname: string) => (pathname.endsWith('/') ? pathna
 
 const pathsEqual = (a: string, b: string) => withTrailingSlash(a) === withTrailingSlash(b)
 
+export const stripLocalePath = (pathname: string): string => {
+  for (const locale of locales) {
+    if (pathname === `/${locale}`) return '/'
+    if (pathname.startsWith(`/${locale}/`)) return pathname.slice(locale.length + 1) || '/'
+  }
+  return pathname || '/'
+}
+
+const toLocalizedUrl = (path: string, siteOrigin: string, locale: string) => {
+  const withSlash = withTrailingSlash(path)
+  if (locale === defaultLocale) return new URL(withSlash, siteOrigin).href
+  const localizedPath = withSlash === '/' ? `/${locale}/` : `/${locale}${withSlash}`
+  return new URL(localizedPath, siteOrigin).href
+}
+
 /** Drop leading emoji/symbols so crumbs match visible titles without MDX icons. */
 export function stripTitleDecorations(title: string): string {
   return title
@@ -52,23 +68,28 @@ export function stripTitleDecorations(title: string): string {
     .trim()
 }
 
-export function buildDocBreadcrumbs(pathname: string, pageTitle: string, siteOrigin: string): DocBreadcrumb[] {
-  const normalizedPath = withTrailingSlash(pathname.split('#')[0].split('?')[0])
+export function buildDocBreadcrumbs(
+  pathname: string,
+  pageTitle: string,
+  siteOrigin: string,
+  locale: string = defaultLocale,
+): DocBreadcrumb[] {
+  const normalizedPath = withTrailingSlash(stripLocalePath(pathname.split('#')[0].split('?')[0]))
   const segments = normalizedPath.replace(/\/$/, '').split('/').filter(Boolean)
   if (segments[0] !== 'docs' || segments.length < 2) return []
 
-  const pageUrl = new URL(normalizedPath, siteOrigin).href
+  const pageUrl = toLocalizedUrl(normalizedPath, siteOrigin, locale)
   const displayTitle = stripTitleDecorations(pageTitle) || pageTitle
   const home: DocBreadcrumb = {
     name: 'Home',
-    url: new URL('/', siteOrigin).href,
+    url: toLocalizedUrl('/', siteOrigin, locale),
   }
 
   const pluginMatch = normalizedPath.match(/^\/docs\/plugins\/([^/]+)\//)
   if (pluginMatch) {
     const slug = pluginMatch[1]
     const pluginIndexPath = withTrailingSlash(`/docs/plugins/${slug}/`)
-    const sectionUrl = new URL(pluginIndexPath, siteOrigin).href
+    const sectionUrl = toLocalizedUrl(pluginIndexPath, siteOrigin, locale)
     const sectionName = pluginNames.get(slug) ?? formatSegment(slug)
     const crumbs: DocBreadcrumb[] = [home]
     if (!pathsEqual(normalizedPath, pluginIndexPath)) {
@@ -80,7 +101,7 @@ export function buildDocBreadcrumbs(pathname: string, pageTitle: string, siteOri
 
   const sectionKey = segments[1]
   const sectionPath = SECTION_LANDING[sectionKey] ?? withTrailingSlash(`/docs/${sectionKey}`)
-  const sectionUrl = new URL(sectionPath, siteOrigin).href
+  const sectionUrl = toLocalizedUrl(sectionPath, siteOrigin, locale)
   const crumbs: DocBreadcrumb[] = [home]
   if (!pathsEqual(normalizedPath, sectionPath)) {
     crumbs.push({
