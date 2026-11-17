@@ -233,12 +233,7 @@ export function pickTrackedAttributionFields(record: Record<string, unknown> | C
   const data: CapgoAttribution = {}
   if (!record) return data
   for (const key of TRACKED_KEYS) {
-    if (key === 'offer' || key === 'offer_at') continue
-    if (key === 'oppref') {
-      const oppref = normalizeOpenAIClickReference(record[key])
-      if (oppref) data.oppref = oppref
-      continue
-    }
+    if (key === 'offer' || key === 'offer_at' || key === 'oppref') continue
     const value = (record as Record<string, unknown>)[key]
     if (typeof value === 'string' && value.trim()) {
       if (key === 'first_touch_type') {
@@ -248,6 +243,8 @@ export function pickTrackedAttributionFields(record: Record<string, unknown> | C
       }
     }
   }
+  const oppref = normalizeOpenAIClickReference(record.oppref)
+  if (oppref) data.oppref = oppref
   return { ...data, ...pickFreshOffer(record as Record<string, unknown>, now) }
 }
 
