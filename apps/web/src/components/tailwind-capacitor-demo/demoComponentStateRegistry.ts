@@ -1288,7 +1288,11 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
                   icon: () =>
                     h('span', { class: 'relative inline-flex overflow-visible p-1' }, [
                       h(Icon, { material: 'mail', class: 'text-xl', 'aria-hidden': 'true' }),
-                      h(Badge, { class: 'absolute -right-1 -top-1 min-h-4 min-w-4 px-1 text-[10px]' }, { default: () => '3' }),
+                      h(
+                        Badge,
+                        { class: 'tc-demo-badge-count absolute -right-1 -top-1 min-h-5 min-w-5 px-1 text-[11px] leading-5' },
+                        { default: () => '3' },
+                      ),
                     ]),
                 }),
             }),

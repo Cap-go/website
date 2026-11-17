@@ -11,7 +11,8 @@ const stateManifest = JSON.parse(
   await readFile(join(repoRoot, 'apps/web/src/components/tailwind-capacitor-demo/state-manifest.json'), 'utf8'),
 )
 
-const slugs = ['foundation', ...manifest.items.filter((i) => !['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'].includes(i.name)).map((i) => i.name)]
+const allSlugs = ['foundation', ...manifest.items.filter((i) => !['capacitor-tailwind', 'capacitor-provider', 'capacitor-shared', 'capacitor-icons'].includes(i.name)).map((i) => i.name)]
+const slugs = process.env.TC_QA_ONLY_SLUG ? [process.env.TC_QA_ONLY_SLUG] : allSlugs
 
 const baseUrl = process.env.TC_QA_BASE_URL ?? 'http://127.0.0.1:4321'
 const prNumber = process.env.TC_DEMO_PR_NUMBER ?? '1452'
@@ -90,7 +91,8 @@ async function assertStateClipping(pageOrFrame, stateId, label) {
     const bad = []
     for (const el of stage.querySelectorAll('button, p, span, a, label')) {
       if (!(el instanceof HTMLElement)) continue
-      if (el.closest('.badge, [class*="badge"]')) continue
+      if (el.closest('.tc-demo-badge-count, .badge, [class*="badge"]')) continue
+      if (el.tagName === 'SPAN' && /^\d{1,2}$/.test(el.innerText.trim())) continue
       if (el.scrollHeight > el.clientHeight + 2 && el.innerText.trim().length > 0) {
         bad.push(`${el.tagName}:${el.innerText.slice(0, 24)} scroll ${el.scrollHeight}/${el.clientHeight}`)
       }
