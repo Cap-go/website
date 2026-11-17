@@ -1,7 +1,8 @@
 <template>
   <App id="tc-demo-root" :theme="platform" :dark="dark" class="tc-demo-app h-full w-full">
-    <Page class="safe-areas tc-demo-page">
+    <Page class="safe-areas tc-demo-page" :class="{ 'tc-demo-page-single-state': singleStateMode }">
       <Navbar
+        v-if="showCatalogChrome"
         class="tc-demo-chrome-navbar"
         :title="pageTitle"
         :subtitle="platformLabel"
@@ -10,95 +11,101 @@
         :translucent="false"
       />
 
-      <div class="tc-demo-below-navbar tc-demo-app-screen">
-        <section class="tc-demo-single-component px-3 pb-8">
+      <div class="tc-demo-below-navbar tc-demo-app-screen" :class="{ 'tc-demo-app-screen-single': singleStateMode }">
+        <section v-if="!singleStateMode" class="tc-demo-single-component px-3 pb-8">
           <component :is="sceneComponent" v-if="sceneComponent" class="tc-demo-scene tc-demo-scene-stage mb-4" />
-          <article v-for="state in galleryStates" :key="state.id" class="tc-demo-state-block mb-6 last:mb-2">
-            <h3 class="tc-demo-state-heading">{{ state.label }}</h3>
-            <div
-              :data-tc-demo-state="state.id"
-              class="tc-demo-component-stage"
-              :class="state.id === 'sheet-open' || state.id === 'open' ? 'tc-demo-state-overlay-preview' : undefined"
-            >
-              <component :is="state.component" />
-            </div>
-          </article>
         </section>
+
+        <article
+          v-for="state in visibleStates"
+          :key="state.id"
+          class="tc-demo-state-block"
+          :class="singleStateMode ? 'tc-demo-state-block-single' : 'mb-6 last:mb-2 px-3'"
+        >
+          <h3 v-if="!singleStateMode" class="tc-demo-state-heading">{{ state.label }}</h3>
+          <div
+            :data-tc-demo-state="state.id"
+            class="tc-demo-component-stage tc-demo-state-fill"
+            :class="stateScreenClass"
+          >
+            <component :is="state.component" />
+          </div>
+        </article>
       </div>
     </Page>
 
-    <div class="tc-demo-overlay-host" data-tc-overlay-host>
-        <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
-          <ActionsGroup>
-            <ActionsLabel>Actions</ActionsLabel>
-            <ActionsButton @click="actionsOpen = false">
-              <template #media>
-                <Icon material="share" />
-              </template>
-              Share
-            </ActionsButton>
-            <ActionsButton bold @click="actionsOpen = false">Delete</ActionsButton>
-          </ActionsGroup>
-        </Actions>
+    <div v-if="!singleStateMode" class="tc-demo-overlay-host" data-tc-overlay-host>
+      <Actions v-if="actionsOpen" :opened="true" @backdropclick="actionsOpen = false">
+        <ActionsGroup>
+          <ActionsLabel>Actions</ActionsLabel>
+          <ActionsButton @click="actionsOpen = false">
+            <template #media>
+              <Icon material="share" />
+            </template>
+            Share
+          </ActionsButton>
+          <ActionsButton bold :colors="destructiveActionColors" @click="actionsOpen = false">Delete</ActionsButton>
+        </ActionsGroup>
+      </Actions>
 
-        <Dialog v-if="dialogOpen" :opened="true" @backdropclick="dialogOpen = false">
-          <template #title>Dialog</template>
-          Sample dialog from the registry demo.
-          <template #buttons>
-            <DialogButton @click="dialogOpen = false">Close</DialogButton>
-          </template>
-        </Dialog>
+      <Dialog v-if="dialogOpen" :opened="true" @backdropclick="dialogOpen = false">
+        <template #title>Dialog</template>
+        Sample dialog from the registry demo.
+        <template #buttons>
+          <DialogButton @click="dialogOpen = false">Close</DialogButton>
+        </template>
+      </Dialog>
 
-        <Sheet v-if="sheetOpen" class="tc-demo-registry-sheet" :opened="true" @backdropclick="sheetOpen = false">
-          <Toolbar top inner-class="tc-demo-sheet-toolbar-inner">
-            <div class="left">
-              <Link toolbar href="#" @click.prevent="sheetOpen = false" @keyup.enter="sheetOpen = false">Done</Link>
-            </div>
-            <div class="title">Sheet</div>
-          </Toolbar>
-          <Block>
-            <p class="p-4">Sheet overlay content.</p>
-          </Block>
-        </Sheet>
+      <Sheet v-if="sheetOpen" class="tc-demo-registry-sheet" :opened="true" @backdropclick="sheetOpen = false">
+        <Toolbar top inner-class="tc-demo-sheet-toolbar-inner">
+          <div class="left">
+            <Link toolbar href="#" @click.prevent="sheetOpen = false" @keyup.enter="sheetOpen = false">Done</Link>
+          </div>
+          <div class="title">Sheet</div>
+        </Toolbar>
+        <Block>
+          <p class="p-4">Sheet overlay content.</p>
+        </Block>
+      </Sheet>
 
-        <Popup v-if="popupOpen" :opened="true" @backdropclick="popupOpen = false">
-          <Block strong class="m-0">
-            <p class="p-4">Popup content</p>
-            <Button class="m-4 mt-0 w-[calc(100%-2rem)]" @click="popupOpen = false">Close</Button>
-          </Block>
-        </Popup>
+      <Popup v-if="popupOpen" :opened="true" @backdropclick="popupOpen = false">
+        <Block strong class="m-0">
+          <p class="p-4">Popup content</p>
+          <Button class="m-4 mt-0 w-[calc(100%-2rem)]" @click="popupOpen = false">Close</Button>
+        </Block>
+      </Popup>
 
-        <Panel v-if="panelOpen" :opened="true" @backdropclick="panelOpen = false">
-          <Page>
-            <Navbar title="Panel" />
-            <Block class="p-4">Panel side content</Block>
-          </Page>
-        </Panel>
+      <Panel v-if="panelOpen" :opened="true" @backdropclick="panelOpen = false">
+        <Page>
+          <Navbar title="Panel" />
+          <Block class="p-4">Panel side content</Block>
+        </Page>
+      </Panel>
 
-        <Toast
-          v-if="toastOpen"
-          class="tc-demo-registry-toast"
-          :opened="true"
-          position="center"
-          @toast:closed="toastOpen = false"
-        >
-          Toast from registry demo
-        </Toast>
+      <Toast
+        v-if="toastOpen"
+        class="tc-demo-registry-toast"
+        :opened="true"
+        position="center"
+        @toast:closed="toastOpen = false"
+      >
+        Toast from registry demo
+      </Toast>
 
-        <Popover
-          v-if="popoverOpen"
-          class="tc-demo-registry-popover pointer-events-auto"
-          :opened="true"
-          :backdrop="false"
-          :angle="true"
-          size="w-52"
-          target="#popover-target-inline"
-          @backdropclick="popoverOpen = false"
-        >
-          <List class="tc-demo-popover-list">
-            <ListItem title="Popover item" content-class="tc-demo-popover-list-item-content" />
-          </List>
-        </Popover>
+      <Popover
+        v-if="popoverOpen"
+        class="tc-demo-registry-popover pointer-events-auto"
+        :opened="true"
+        :backdrop="true"
+        :angle="true"
+        size="w-52"
+        target="#popover-target-inline"
+        @backdropclick="popoverOpen = false"
+      >
+        <List class="tc-demo-popover-list">
+          <ListItem title="Popover item" content-class="tc-demo-popover-list-item-content" />
+        </List>
+      </Popover>
     </div>
   </App>
 </template>
@@ -106,6 +113,7 @@
 <script setup>
 import { computed, defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import manifest from '../../tailwind-capacitor-snapshot/registry-manifest.json'
+import { destructiveActionColors } from './demoOverlayHelpers'
 import { attachGalleryContext, demoSceneVNode, demoStatesForSlug } from './tailwindCapacitorDemoGallery'
 import {
   Actions,
@@ -135,20 +143,25 @@ const props = defineProps({
   platform: { type: String, default: 'ios' },
   dark: { type: Boolean, default: false },
   slug: { type: String, default: 'foundation' },
+  activeState: { type: String, default: '' },
 })
 
 const platform = ref(props.platform)
 const dark = ref(props.dark)
 const activeSlug = ref(props.slug)
+const activeStateId = ref(props.activeState?.trim() ?? '')
 
 watch(
-  () => [props.platform, props.dark, props.slug],
-  ([nextPlatform, nextDark, nextSlug]) => {
+  () => [props.platform, props.dark, props.slug, props.activeState],
+  ([nextPlatform, nextDark, nextSlug, nextState]) => {
     platform.value = nextPlatform
     dark.value = nextDark
     if (typeof nextSlug === 'string' && nextSlug.length > 0) activeSlug.value = nextSlug
+    activeStateId.value = typeof nextState === 'string' ? nextState.trim() : ''
   },
 )
+
+const singleStateMode = computed(() => activeStateId.value.length > 0)
 
 const platformLabel = computed(() => (platform.value === 'ios' ? 'iOS' : 'Material'))
 
@@ -156,6 +169,17 @@ const pageTitle = computed(() => {
   if (activeSlug.value === 'foundation') return 'Foundation'
   const item = manifest.items.find((entry) => entry.name === activeSlug.value)
   return item?.component ?? item?.title?.replace(/\s*\(Vue\)\s*$/i, '') ?? 'Component'
+})
+
+const showCatalogChrome = computed(() => !singleStateMode.value)
+
+const stateScreenClass = computed(() => {
+  const ios = platform.value === 'ios'
+  const d = dark.value
+  if (ios && d) return 'tc-demo-screen-ios-dark'
+  if (ios) return 'tc-demo-screen-ios-light'
+  if (d) return 'tc-demo-screen-material-dark'
+  return 'tc-demo-screen-material-light'
 })
 
 const galleryContext = computed(() =>
@@ -190,7 +214,14 @@ const galleryStates = computed(() =>
   })),
 )
 
+const visibleStates = computed(() => {
+  if (!singleStateMode.value) return galleryStates.value
+  const match = galleryStates.value.find((s) => s.id === activeStateId.value)
+  return match ? [match] : galleryStates.value.slice(0, 1)
+})
+
 const sceneComponent = computed(() => {
+  if (singleStateMode.value) return null
   const vnode = demoSceneVNode(activeSlug.value, galleryContext.value)
   if (!vnode) return null
   return defineComponent({
@@ -238,6 +269,9 @@ function onMessage(event) {
     syncThemeToDocument()
     return
   }
+  if (event.data?.type === 'tc-demo-state' && typeof event.data.state === 'string') {
+    activeStateId.value = event.data.state
+  }
 }
 
 function readQueryTheme() {
@@ -250,6 +284,8 @@ function readQueryTheme() {
   if (d === '0' || d === 'false') dark.value = false
   const slug = params.get('slug')
   if (slug) activeSlug.value = slug
+  const state = params.get('state')
+  if (state) activeStateId.value = state
 }
 
 function onDemoPageScroll() {

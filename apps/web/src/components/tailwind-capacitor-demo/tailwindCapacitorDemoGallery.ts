@@ -85,6 +85,13 @@ import {
   TouchRipple,
 } from '../../tailwind-capacitor-snapshot/capacitor/index.js'
 import manifest from '../../tailwind-capacitor-snapshot/registry-manifest.json'
+import {
+  destructiveActionColors,
+  openOverlayPhoneStage,
+  overlayScreenFiller,
+  overlayUnderlayTrigger,
+} from './demoOverlayHelpers'
+import { demoComponentStateRegistry } from './demoComponentStateRegistry'
 
 export type DemoState = { id: string; label: string; render: () => VNode }
 
@@ -479,7 +486,7 @@ function actionsSheetOpen(ctx: GalleryContext) {
                   default: () => 'Share',
                 },
               ),
-              h(ActionsButton, { bold: true }, { default: () => 'Delete' }),
+              h(ActionsButton, { bold: true, colors: destructiveActionColors }, { default: () => 'Delete' }),
             ],
           },
         ),
@@ -583,12 +590,12 @@ function buildActionsFamilyStates(ctx: GalleryContext, focus: 'root' | 'button' 
   const screen: SlugStateDef = {
     id: 'screen',
     label: 'Screen',
-    render: (c) => overlayTrigger(c, 'Open actions', c.actionsOpen),
+    render: (c) => overlayUnderlayTrigger(c, 'Open actions', c.actionsOpen),
   }
   const sheetOpen: SlugStateDef = {
     id: 'sheet-open',
     label: 'Sheet open',
-    render: (c) => h('div', { class: 'tc-demo-inline-actions-host' }, [actionsSheetOpen(c)]),
+    render: (c) => openOverlayPhoneStage(c, overlayScreenFiller(c, 'Actions'), actionsSheetOpen(c)),
   }
   if (focus === 'button') {
     return [
@@ -642,23 +649,24 @@ function buildActionsFamilyStates(ctx: GalleryContext, focus: 'root' | 'button' 
 }
 
 function buildOverlayStates(
-  ctx: GalleryContext,
-  slug: string,
+  _ctx: GalleryContext,
+  _slug: string,
   triggerLabel: string,
   openRef: keyof GalleryContext,
   openRenderer: (ctx: GalleryContext) => VNode,
   options?: { id?: string },
 ): SlugStateDef[] {
+  const screenTitle = triggerLabel.replace(/^Open |^Show /i, '')
   return [
     {
       id: 'screen',
       label: 'Screen',
-      render: (c) => overlayTrigger(c, triggerLabel, c[openRef] as Ref<boolean>, options),
+      render: (c) => overlayUnderlayTrigger(c, triggerLabel, c[openRef] as Ref<boolean>, options),
     },
     {
       id: 'open',
       label: 'Open',
-      render: (c) => h('div', { class: 'tc-demo-state-overlay-preview' }, [openRenderer(c)]),
+      render: (c) => openOverlayPhoneStage(c, overlayScreenFiller(c, screenTitle || 'App'), openRenderer(c)),
     },
   ]
 }
@@ -963,6 +971,27 @@ function buildSearchbarStates(ctx: GalleryContext): SlugStateDef[] {
       label: 'Filled',
       render: (c) => h(Searchbar, { value: 'capacitor-button', placeholder: 'Search components' }),
     },
+    {
+      id: 'focused',
+      label: 'Focused',
+      render: (c) =>
+        h(Searchbar, {
+          value: 'cap',
+          placeholder: 'Search components',
+          focused: true,
+        }),
+    },
+    {
+      id: 'with-cancel',
+      label: 'With cancel',
+      render: (c) =>
+        h(Searchbar, {
+          value: c.search.value || 'plugins',
+          placeholder: 'Search components',
+          disableButton: true,
+          onSearchbarInput: (e: CustomEvent<{ value?: string }>) => (c.search.value = String(e.detail?.value ?? '')),
+        }),
+    },
   ]
 }
 
@@ -1070,7 +1099,7 @@ function popoverOpenVNode(ctx: GalleryContext) {
     {
       class: 'tc-demo-registry-popover pointer-events-auto',
       opened: true,
-      backdrop: false,
+      backdrop: true,
       angle: true,
       size: 'w-52',
       target: '#popover-target-inline',
@@ -1997,6 +2026,8 @@ function expandedStatesForSlug(slug: string, ctx: GalleryContext): SlugStateDef[
   if (slug === 'capacitor-searchbar') return buildSearchbarStates(ctx)
   if (slug === 'capacitor-textarea') return buildTextareaStates(ctx)
   if (slug === 'capacitor-input-otp') return buildInputOtpStates(ctx)
+  const registry = demoComponentStateRegistry(slug)
+  if (registry) return registry(ctx)
   return null
 }
 

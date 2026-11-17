@@ -98,26 +98,110 @@ html.dark body.tc-demo-shell-body {
   text-transform: none;
 }
 
-.tc-demo-inline-actions-host,
-.tc-demo-state-overlay-preview {
+.tc-demo-state-fill {
   position: relative;
-  min-height: 12rem;
-  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-.tc-demo-inline-actions-host :where(.fixed),
-.tc-demo-state-overlay-preview :where(.fixed) {
+.tc-demo-screen-ios-light {
+  background-color: #efeff4;
+  color: #000;
+}
+
+.tc-demo-screen-ios-dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.tc-demo-screen-material-light {
+  background-color: #fffbfe;
+  color: #1c1b1f;
+}
+
+.tc-demo-screen-material-dark {
+  background-color: #1c1b1f;
+  color: #e6e1e5;
+}
+
+.tc-demo-screen-ios-dark .tc-demo-screen-filler-row,
+.tc-demo-screen-material-dark .tc-demo-screen-filler-row {
+  background-color: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.tc-demo-screen-ios-light .tc-demo-screen-filler-row,
+.tc-demo-screen-material-light .tc-demo-screen-filler-row {
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.tc-demo-page-single-state {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.tc-demo-app-screen-single {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.tc-demo-state-block-single {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.tc-demo-state-block-single .tc-demo-component-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.tc-demo-overlay-open-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tc-demo-underlay-screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.tc-demo-overlay-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tc-demo-overlay-layer > * {
+  pointer-events: auto;
+}
+
+.tc-demo-overlay-layer :where(.fixed) {
   position: absolute !important;
 }
 
-.tc-demo-inline-actions-host :where(.actions-backdrop),
-.tc-demo-state-overlay-preview :where(.actions-backdrop, .dialog-backdrop, .sheet-backdrop, .popup-backdrop) {
+.tc-demo-overlay-layer :where(.actions-backdrop, .dialog-backdrop, .sheet-backdrop, .popup-backdrop, .panel-backdrop, .popover-backdrop, .toast-backdrop) {
   position: absolute !important;
   inset: 0 !important;
+  opacity: 1 !important;
 }
 
-.tc-demo-inline-actions-host :where(.actions, .dialog, .sheet-modal, .popup, .popover, .toast),
-.tc-demo-state-overlay-preview :where(.actions, .dialog, .sheet-modal, .popup, .popover, .toast) {
+.tc-demo-overlay-layer :where(.actions, .dialog, .sheet-modal, .popup, .panel, .popover, .toast) {
   position: absolute !important;
   left: 0 !important;
   right: 0 !important;
@@ -125,6 +209,27 @@ html.dark body.tc-demo-shell-body {
   top: auto !important;
   transform: none !important;
   max-width: 100%;
+}
+
+.tc-demo-overlay-layer :where(.dialog) {
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+}
+
+.tc-demo-overlay-layer :where(.panel) {
+  top: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  right: 0 !important;
+  width: min(85%, 20rem);
+}
+
+.tc-demo-overlay-layer .tc-demo-registry-toast:where(.fixed) {
+  top: auto !important;
+  bottom: 42% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
 
 .tc-demo-section-heading {
@@ -172,8 +277,6 @@ html.dark body.tc-demo-shell-body {
   opacity: 1 !important;
   pointer-events: auto !important;
   transform: translateX(-50%) !important;
-  background-color: rgb(24 24 27) !important;
-  color: rgb(255 255 255) !important;
   border-radius: 0.75rem !important;
   box-shadow: 0 8px 28px rgb(0 0 0 / 0.35) !important;
 }

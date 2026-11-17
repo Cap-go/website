@@ -7,5 +7,6 @@ if (mount) {
   const platform = params.get('platform') === 'material' ? 'material' : 'ios'
   const dark = params.get('dark') === '1' || params.get('dark') === 'true'
   const slug = params.get('slug') ?? 'foundation'
-  createApp(TailwindCapacitorDemoShell, { platform, dark, slug }).mount(mount)
+  const activeState = params.get('state') ?? ''
+  createApp(TailwindCapacitorDemoShell, { platform, dark, slug, activeState }).mount(mount)
 }
