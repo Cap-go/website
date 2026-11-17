@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
+import sharp from 'sharp'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const repoRoot = join(__dirname, '..')
@@ -166,19 +167,137 @@ async function assertDemoCatalogChrome(page, label, options = {}) {
  * @param {string} label
  */
 async function assertDialogHairlineWithinDialog(page, label) {
-  const ok = await page.evaluate(() => {
+  const metrics = await page.evaluate(() => {
     const dialog = document.querySelector('[role="dialog"]')
-    if (!dialog) return 'no dialog'
+    if (!dialog) return { error: 'no dialog' }
     const dRect = dialog.getBoundingClientRect()
-    for (const sep of dialog.querySelectorAll('[class*="hairline"]')) {
-      const sRect = sep.getBoundingClientRect()
-      if (sRect.width > dRect.width + 2) {
-        return `hairline ${Math.round(sRect.width)}px > dialog ${Math.round(dRect.width)}px`
+    const sep =
+      dialog.querySelector('.hairline-b') ??
+      dialog.querySelector('[class*="hairline-b"]') ??
+      dialog.querySelector('[class*="hairline"]')
+    const sepRect = sep instanceof HTMLElement ? sep.getBoundingClientRect() : null
+    const root = document.querySelector('#tc-demo-root')
+    const rootRect = root?.getBoundingClientRect()
+    const fill = document.querySelector('.tc-demo-state-fill, .tc-demo-overlay-open-stage')
+    const fillLum = fill
+      ? (() => {
+          const bg = getComputedStyle(fill).backgroundColor
+          const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+          if (!m) return 120
+          return (Number(m[1]) + Number(m[2]) + Number(m[3])) / 3
+        })()
+      : 120
+    return {
+      hasHairline: Boolean(sepRect),
+      dividerY: sepRect ? sepRect.bottom - 0.5 : dRect.top + dRect.height * 0.65,
+      sampleAboveY: sepRect ? sepRect.bottom - 6 : dRect.top + dRect.height * 0.5,
+      dialog: {
+        left: dRect.left,
+        right: dRect.right,
+        bottom: dRect.bottom,
+        top: dRect.top,
+      },
+      backdropLum: fillLum,
+      rootHeight: rootRect?.height ?? 720,
+    }
+  })
+
+  if ('error' in metrics) {
+    record(false, `${label}: dialog divider pixel check (${metrics.error})`)
+    return
+  }
+
+  const viewport = page.viewportSize()
+  const shot = await page.locator('#tc-demo-root').screenshot()
+  const meta = await sharp(shot).metadata()
+  const scale = (meta.height ?? metrics.rootHeight) / (viewport?.height ?? metrics.rootHeight)
+
+  const dLeft = Math.round(metrics.dialog.left * scale)
+  const dRight = Math.round(metrics.dialog.right * scale)
+  const dBottom = Math.round(metrics.dialog.bottom * scale)
+  const dTop = Math.round(metrics.dialog.top * scale)
+
+  const { data, info } = await sharp(shot).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const w = info.width
+
+  const lumAt = (x, y) => {
+    const yy = Math.min(Math.max(0, y), info.height - 1)
+    const xx = Math.min(Math.max(0, x), w - 1)
+    const i = (yy * w + xx) * info.channels
+    return (data[i] + data[i + 1] + data[i + 2]) / 3
+  }
+
+  const surfaceMin = Math.min(160, metrics.backdropLum + 28)
+
+  const sampleY = Math.max(dTop + 2, Math.round(metrics.sampleAboveY * scale))
+  let visibleLeft = w
+  let visibleRight = 0
+  for (let x = dLeft; x <= dRight; x++) {
+    if (lumAt(x, sampleY) > surfaceMin) {
+      visibleLeft = Math.min(visibleLeft, x)
+      visibleRight = Math.max(visibleRight, x)
+    }
+  }
+
+  let lineLeft = w
+  let lineRight = 0
+  let lineRow = -1
+  if (metrics.hasHairline) {
+    const rowCenter = Math.round(metrics.dividerY * scale)
+    const contrastFloor = metrics.backdropLum < 80 ? 12 : 18
+    for (let rowY = rowCenter - 6; rowY <= rowCenter + 4; rowY++) {
+      let l = w
+      let r = 0
+      let hits = 0
+      for (let x = dLeft - 4; x <= dRight + 4; x++) {
+        const lum = lumAt(x, rowY)
+        const above = lumAt(x, sampleY)
+        if (Math.abs(above - lum) > contrastFloor) {
+          l = Math.min(l, x)
+          r = Math.max(r, x)
+          hits++
+        }
+      }
+      if (l < r && hits > (dRight - dLeft) * 0.25 && (r - l) > (dRight - dLeft) * 0.3) {
+        lineLeft = l
+        lineRight = r
+        lineRow = rowY
+        break
       }
     }
-    return true
-  })
-  record(ok === true, `${label}: dialog divider within dialog width (${String(ok)})`)
+  }
+
+  let linePast = false
+  let lineDetail = 'no-ios-hairline'
+  if (metrics.hasHairline) {
+    if (visibleLeft >= visibleRight) {
+      record(false, `${label}: dialog divider pixel check (no visible dialog fill above divider)`)
+      return
+    }
+    if (lineRow < 0) {
+      record(false, `${label}: dialog divider pixel check (no rendered divider near row ${Math.round(metrics.dividerY * scale)})`)
+      return
+    }
+    linePast =
+      lineLeft < visibleLeft || lineRight > visibleRight || lineLeft < dLeft + 1 || lineRight > dRight - 1
+    lineDetail = `visible=[${visibleLeft},${visibleRight}] line=[${lineLeft},${lineRight}]@${lineRow} dialog=[${dLeft},${dRight}]`
+  }
+
+  let blueOutside = 0
+  for (let y = dBottom - Math.round(24 * scale); y <= dBottom + Math.round(4 * scale); y++) {
+    for (let x = dRight - Math.round(2 * scale); x <= dRight + Math.round(8 * scale); x++) {
+      if (x <= dRight) continue
+      const idx = (y * w + x) * info.channels
+      const r = data[idx]
+      const g = data[idx + 1]
+      const b = data[idx + 2]
+      if (b > 200 && r < 120 && g < 170) blueOutside++
+    }
+  }
+
+  const ok = (metrics.hasHairline ? !linePast : true) && blueOutside === 0
+  const detail = `${lineDetail} blueOutside=${blueOutside}`
+  record(ok, `${label}: dialog chrome clipped to rounded box (${detail})`)
 }
 
 /**

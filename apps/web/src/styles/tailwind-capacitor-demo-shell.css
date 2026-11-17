@@ -222,9 +222,40 @@ html.dark body.tc-demo-shell-body {
   overflow: hidden !important;
 }
 
-.tc-demo-overlay-layer :where(.dialog) :where(.hairline-b, [class*='hairline']) {
+.tc-demo-overlay-layer [role='dialog'] {
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+.tc-demo-overlay-layer :where(.dialog) :where(.hairline-b, [class*='hairline']),
+.tc-demo-overlay-layer [role='dialog'] :where(.hairline-b, [class*='hairline']) {
   max-width: 100%;
   box-sizing: border-box;
+}
+
+/* Konsta ios Dialog divider is a full-width border; clip and inset so it stays inside rounded corners. */
+.tc-demo-overlay-layer [role='dialog'] .hairline-b {
+  border-bottom: none !important;
+  background:
+    linear-gradient(var(--c-hairline-color), var(--c-hairline-color)) bottom / calc(100% - 4px) 1px no-repeat;
+}
+
+.tc-demo-overlay-layer [role='dialog'] > .flex.items-center {
+  overflow: hidden;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.tc-demo-overlay-layer [role='dialog'] .hairline-r:only-child {
+  border-right-width: 0 !important;
+}
+
+.tc-demo-overlay-layer [role='dialog'].rounded-xl {
+  clip-path: inset(0 round 0.75rem);
+}
+
+.tc-demo-overlay-layer [role='dialog'].rounded-\[1\.75rem\] {
+  clip-path: inset(0 round 1.75rem);
 }
 
 .tc-demo-overlay-layer :where(.panel) {
