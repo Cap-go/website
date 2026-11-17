@@ -14,7 +14,7 @@ interface Props {
 const { locale, slug, activeSlug } = Astro.props
 const catalogSectionCount = tailwindCapacitorDemoNavItems.length
 const shellBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/shell/')
-const states = stateManifest[slug as keyof typeof stateManifest] ?? [{ id: 'default', label: 'Default' }]
+const states = stateManifest[slug as keyof typeof stateManifest] ?? [{ id: 'preview', label: 'Preview' }]
 ---
 
 <div class="min-w-0 lg:col-start-2" data-tc-demo-slug={slug}>

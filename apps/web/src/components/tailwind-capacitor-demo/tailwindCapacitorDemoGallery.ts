@@ -84,6 +84,7 @@ import {
   Toolbar,
   TouchRipple,
 } from '../../tailwind-capacitor-snapshot/capacitor/index.js'
+import { tailwindCapacitorDemoTitle, type TailwindCapacitorDemoSlug } from '@/lib/tailwindCapacitorDemoCatalog'
 import manifest from '../../tailwind-capacitor-snapshot/registry-manifest.json'
 import {
   destructiveActionColors,
@@ -648,15 +649,20 @@ function buildActionsFamilyStates(ctx: GalleryContext, focus: 'root' | 'button' 
   return [screen, sheetOpen]
 }
 
+function overlayUnderlayTitle(slug: string): string {
+  if (slug === 'foundation') return 'Foundation'
+  return tailwindCapacitorDemoTitle(slug as TailwindCapacitorDemoSlug)
+}
+
 function buildOverlayStates(
   _ctx: GalleryContext,
-  _slug: string,
+  slug: string,
   triggerLabel: string,
   openRef: keyof GalleryContext,
   openRenderer: (ctx: GalleryContext) => VNode,
   options?: { id?: string },
 ): SlugStateDef[] {
-  const screenTitle = triggerLabel.replace(/^Open |^Show /i, '')
+  const screenTitle = overlayUnderlayTitle(slug)
   return [
     {
       id: 'screen',
@@ -683,7 +689,7 @@ function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
 function buildBadgeStates(ctx: GalleryContext): SlugStateDef[] {
   const { h } = ctx
   return [
-    { id: 'default', label: 'Default', render: () => h(Badge, {}, { default: () => 'New' }) },
+    { id: 'count', label: 'Count', render: () => h(Badge, {}, { default: () => 'New' }) },
     { id: 'color', label: 'Color', render: () => h(Badge, { colors: { bg: 'bg-red-500' } }, { default: () => 'Hot' }) },
     {
       id: 'on-avatar',
@@ -1119,7 +1125,11 @@ function popoverOpenVNode(ctx: GalleryContext) {
 
 function toastOpenVNode(ctx: GalleryContext) {
   const { h } = ctx
-  return h(Toast, { class: 'tc-demo-registry-toast', opened: true, position: 'center' }, { default: () => 'Toast from registry demo' })
+  return h(
+    Toast,
+    { class: 'tc-demo-registry-toast', opened: true, position: 'left', translucent: false },
+    { default: () => 'Bundle uploaded to the preview channel' },
+  )
 }
 
 const legacyDemoRenderers: Record<string, (ctx: GalleryContext) => VNode> = {
@@ -2036,8 +2046,8 @@ function legacyStatesForSlug(slug: string): SlugStateDef[] {
   if (!render) {
     return [
       {
-        id: 'default',
-        label: 'Default',
+        id: 'unregistered',
+        label: 'Unregistered',
         render: (ctx) => {
           const { h } = ctx
           return h('p', { class: 'p-3 text-sm opacity-70' }, `No demo registered for ${slug}.`)
@@ -2054,8 +2064,8 @@ function legacyStatesForSlug(slug: string): SlugStateDef[] {
     ]
   }
   return [
-    { id: 'default', label: 'Default', render },
-    { id: 'alternate', label: 'Alternate', render: legacyAltDemoRenderers[slug] ?? render },
+    { id: 'primary', label: 'Primary', render },
+    { id: 'secondary', label: 'Secondary', render: legacyAltDemoRenderers[slug] ?? render },
   ]
 }
 

@@ -276,8 +276,8 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
     const { h } = ctx
     return [
       {
-        id: 'default',
-        label: 'Default',
+        id: 'collapsed',
+        label: 'Collapsed',
         render: () =>
           h(Accordion, {}, {
             default: () => h(AccordionItem, {}, { default: () => 'Accordion item' }),
@@ -621,7 +621,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   'capacitor-footer': (ctx) => {
     const { h } = ctx
     return [
-      { id: 'default', label: 'Default', render: () => h(Footer, {}, { default: () => h('p', { class: 'p-3 text-sm' }, 'Footer region') }) },
+      { id: 'plain-footer', label: 'Plain footer', render: () => h(Footer, {}, { default: () => h('p', { class: 'p-3 text-sm' }, 'Footer region') }) },
       {
         id: 'with-toolbar',
         label: 'With toolbar',
@@ -638,7 +638,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   'capacitor-header': (ctx) => {
     const { h } = ctx
     return [
-      { id: 'default', label: 'Default', render: () => h(Header, {}, { default: () => h('p', { class: 'p-3 text-sm' }, 'Header region') }) },
+      { id: 'plain-header', label: 'Plain header', render: () => h(Header, {}, { default: () => h('p', { class: 'p-3 text-sm' }, 'Header region') }) },
       {
         id: 'with-navbar',
         label: 'With navbar',
@@ -713,14 +713,14 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
           ]),
       })
     return [
-      { id: 'default', label: 'Default', render: () => row(false) },
+      { id: 'closed', label: 'Closed', render: () => row(false) },
       { id: 'swiped-open', label: 'Swiped open', render: () => row(true) },
     ]
   },
   'capacitor-link': (ctx) => {
     const { h } = ctx
     return [
-      { id: 'default', label: 'Default', render: () => h(Link, { href: '#' }, { default: () => 'Link' }) },
+      { id: 'text-link', label: 'Text link', render: () => h(Link, { href: '#' }, { default: () => 'Link' }) },
       { id: 'toolbar', label: 'Toolbar', render: () => h(Link, { toolbar: true, href: '#' }, { default: () => 'Save' }) },
     ]
   },
@@ -800,8 +800,8 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
     const { h } = ctx
     return [
       {
-        id: 'default',
-        label: 'Default',
+        id: 'basic-item',
+        label: 'Basic item',
         render: () =>
           h(MenuList, {}, {
             default: () => h(MenuListItem, { href: '#' }, { default: () => 'Dropdown menu item' }),
@@ -973,7 +973,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   'capacitor-note': (ctx) => {
     const { h } = ctx
     return [
-      { id: 'default', label: 'Default', render: () => h(Note, {}, { default: () => 'Note block from registry' }) },
+      { id: 'body-note', label: 'Body note', render: () => h(Note, {}, { default: () => 'Note block from registry' }) },
       {
         id: 'secondary',
         label: 'Secondary',
@@ -1039,7 +1039,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   'capacitor-preloader': (ctx) => {
     const { h } = ctx
     return [
-      { id: 'default', label: 'Default', render: () => h(Preloader, { class: 'mx-auto' }) },
+      { id: 'spinner', label: 'Spinner', render: () => h(Preloader, { class: 'mx-auto' }) },
       {
         id: 'blue',
         label: 'Blue',
@@ -1123,8 +1123,8 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
     const { h } = ctx
     return [
       {
-        id: 'default',
-        label: 'Default',
+        id: 'two-rows',
+        label: 'Two rows',
         render: () =>
           h(List, {}, {
             default: () =>
