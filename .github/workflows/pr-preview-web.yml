@@ -46,11 +46,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6 # NOSONAR - pinned by version tag (repo policy)
         with:
           node-version: 24
 
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v2 # NOSONAR - pinned by version tag (repo policy)
         with:
           bun-version: 1.4.4
 
@@ -185,7 +185,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v2 # NOSONAR - pinned by version tag (repo policy)
         with:
           bun-version: 1.4.4
 
