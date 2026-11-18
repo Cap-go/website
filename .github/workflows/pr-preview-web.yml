@@ -26,16 +26,9 @@ jobs:
       - id: preview
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
-          pr_number="${PR_NUMBER}"
-          branch_name="${HEAD_REF}"
-          sanitized_branch=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
-          preview_name="pr-${pr_number}-${sanitized_branch}"
-          if [ "${#preview_name}" -gt 28 ]; then
-            preview_name="pr-${pr_number}-$(echo "$sanitized_branch" | cut -c1-$((28 - ${#pr_number} - 4)))"
-          fi
+          preview_name="pr-${PR_NUMBER}"
           echo "name=$preview_name" >> "$GITHUB_OUTPUT"
 
   deploy-preview:
@@ -92,7 +85,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          bun wrangler preview --name "${{ needs.resolve-preview-name.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
+          bun run --cwd ../.. wrangler preview --name "${{ needs.resolve-preview-name.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
           preview_url=$(PREVIEW_NAME="${{ needs.resolve-preview-name.outputs.name }}" node -e "
             const fs = require('node:fs');
             const raw = fs.readFileSync('preview.json', 'utf8');
@@ -203,6 +196,8 @@ jobs:
         with:
           bun-version: 1.4.4
 
+      - run: bun install --frozen-lockfile --ignore-scripts
+
       - name: Delete Worker preview
         working-directory: apps/web
         env:
@@ -212,7 +207,7 @@ jobs:
           set -euo pipefail
           PREVIEW_NAME="${{ needs.resolve-preview-name.outputs.name }}"
           set +e
-          output="$(bun wrangler preview delete --name "$PREVIEW_NAME" -y 2>&1)"
+          output="$(bun run --cwd ../.. wrangler preview delete --name "$PREVIEW_NAME" -y 2>&1)"
           status=$?
           set -e
           if [ "$status" -ne 0 ]; then
