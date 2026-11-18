@@ -368,7 +368,8 @@ const accordionDemoOpen = ref(false)
 const accordionItemCollapsedOpen = ref(false)
 const accordionItemExpandedCopy = ref(true)
 const itemSlidingSwiped = ref(false)
-const itemSlidingTouchStartX = ref<number | null>(null)
+/** @type {import('vue').Ref<number | null>} */
+const itemSlidingTouchStartX = ref(null)
 
 /** @param {MessageEvent} event */
 function onMessage(event) {
