@@ -1,11 +1,39 @@
 [
   {
+    "fileName": "demo-actions-open-desktop-ios-dark-after.png",
+    "sha256": "9bd57386b795ffab3737c35cf31d81a01688233166629da448ee5ed3b489928e"
+  },
+  {
     "fileName": "demo-actions-open-desktop-ios-light-after.png",
-    "sha256": "4317eefe2ce1606a1aafcf0c357a35faa95a2f5c82f4ddaeb0315681eb313b5d"
+    "sha256": "df13f9616934799ba01f40dd46904186347d5bed78fbc8ba3ac1e2a72b7aa362"
+  },
+  {
+    "fileName": "demo-actions-open-desktop-material-dark-after.png",
+    "sha256": "24777fd91aabffc03ae4d2e429f254e4353696c1ce5e0ff4b7b2ac6b6462d764"
+  },
+  {
+    "fileName": "demo-actions-open-desktop-material-light-after.png",
+    "sha256": "17ddd3d17313150a8cbe99ab89c5bc81f819cabade8abcdc5f47182cfe1cf850"
+  },
+  {
+    "fileName": "demo-actions-open-mobile-ios-dark-after.png",
+    "sha256": "515fb749a55a2116e23e8fb486bf38ffc939cc74ed3c6c62f0222c4aafc20590"
+  },
+  {
+    "fileName": "demo-actions-open-mobile-ios-light-after.png",
+    "sha256": "82a3fdd8642a70c9341a6ecd1393ae92847e90e68512a80807e675b1f1cbdabd"
+  },
+  {
+    "fileName": "demo-actions-open-mobile-material-dark-after.png",
+    "sha256": "73308d5b199077950efd108bebef1fe5b5f677bf26e377b4b0ac5e63f34241f4"
+  },
+  {
+    "fileName": "demo-actions-open-mobile-material-light-after.png",
+    "sha256": "a3e7b100f38db96e058ff2d5cbf5cee7191e5b9a0351f80b7c4e0651733dbd30"
   },
   {
     "fileName": "demo-alert-open-desktop-ios-dark-after.png",
-    "sha256": "78fd9c23a3dc1f6135e1992d96e916fe302e874763e2e58f947cd2d1c177e16e"
+    "sha256": "837d78b49cb049989b022b280d2894d68cba123a6830584818b3119e8d5db127"
   },
   {
     "fileName": "demo-alert-open-desktop-ios-light-after.png",
@@ -13,123 +41,571 @@
   },
   {
     "fileName": "demo-alert-open-desktop-material-dark-after.png",
-    "sha256": "b104a178da9aa969447d5f971cb3489d1c7d3fb0917840fdeefa6a4de96b9208"
+    "sha256": "e7e74e073ba71ea662f36c7d44429513614f98b70288ea6a09ab930aee166398"
   },
   {
     "fileName": "demo-alert-open-desktop-material-light-after.png",
-    "sha256": "15ca7d3eefca463e7379e4d4913a5d0458a3f7d07214a66144c2b3379e2f2f02"
+    "sha256": "81d294d3615ef2f53606335c56729fdec84a894630dbc66016b00df550a71b60"
   },
   {
     "fileName": "demo-alert-open-mobile-ios-dark-after.png",
-    "sha256": "b104ad82825fb4b0e7fe376831d9c2b5f010f31230de1a45547a3ad60e378b90"
+    "sha256": "a8ad719c1c918ffe654797154b8cf56b2d38071113fdad217df1b9f370a4a823"
   },
   {
     "fileName": "demo-alert-open-mobile-ios-light-after.png",
-    "sha256": "a440d497b7b2f075a9973c6d00079b416e2b1b33b2e482195126bb3365b53568"
+    "sha256": "fa9eac007536249aa8b29a0112fefe6c8c03a207400be784c82c649c898adb29"
   },
   {
     "fileName": "demo-alert-open-mobile-material-dark-after.png",
-    "sha256": "493020d13e32600737ef72660a9e0e5edfcdbe001c849f0ae0e4362c8e254156"
+    "sha256": "855cab91082ccd87b7a4120edbb9fc1be2a83baaf3ddaaac5e49d9f1944aee8b"
   },
   {
     "fileName": "demo-alert-open-mobile-material-light-after.png",
-    "sha256": "3558984940bd3cb1aad9c1f5f597f3eee01ed33598d0ed5366f56ec8999f9603"
+    "sha256": "3a6edafe7173aa99b2db7cca7c3862b3ba7454915fe33635cccdd14875e98a26"
+  },
+  {
+    "fileName": "demo-button-desktop-ios-dark-after.png",
+    "sha256": "af7ca20633b904d216830ee31b9625f7bad0bb504e5a6b4f518a3fdabfa9946f"
   },
   {
     "fileName": "demo-button-desktop-ios-light-after.png",
     "sha256": "4392790fd031c00b3294ddd91ed30abbc0db9dd7e25be71837846a6f596ebf4c"
   },
   {
+    "fileName": "demo-button-desktop-material-dark-after.png",
+    "sha256": "be84196635029b04d0c0872c95ecfec30529ea2529c93aa00c530792d11a69e5"
+  },
+  {
+    "fileName": "demo-button-desktop-material-light-after.png",
+    "sha256": "6672e0423475f110268d37d2344f2ac25514cb5959a2cab2544bda52c4796b37"
+  },
+  {
+    "fileName": "demo-button-mobile-ios-dark-after.png",
+    "sha256": "15b5da9c96f4eec23dfecaeea9d557e30bd4d694a2f033cd37e39e0e10e1c4a1"
+  },
+  {
+    "fileName": "demo-button-mobile-ios-light-after.png",
+    "sha256": "17c86b44db7a8d4ec69babf62a63fcd5979214dda1a86d22b7f85c0b62944b02"
+  },
+  {
+    "fileName": "demo-button-mobile-material-dark-after.png",
+    "sha256": "ab91d936b46fa93f83b8058de9d7926ac62287e2ddcea9e8967932b1a617f323"
+  },
+  {
+    "fileName": "demo-button-mobile-material-light-after.png",
+    "sha256": "3157a232c3ab83a55de1e7cb910a2521139e4ed1d5b2a57b696b101dfb70a5f7"
+  },
+  {
+    "fileName": "demo-compare-button-ios-desktop-ios-dark-after.png",
+    "sha256": "63b3b5f7b31737ecd6bb425d84106fbec8aef9fb4566a3b197a56ac53c9bd1c4"
+  },
+  {
     "fileName": "demo-compare-button-ios-desktop-ios-light-after.png",
     "sha256": "060db1d295c3205fdf841e867f24134d40ce49771b636999e489bbe5834fed39"
+  },
+  {
+    "fileName": "demo-compare-button-ios-desktop-material-dark-after.png",
+    "sha256": "63b3b5f7b31737ecd6bb425d84106fbec8aef9fb4566a3b197a56ac53c9bd1c4"
+  },
+  {
+    "fileName": "demo-compare-button-ios-desktop-material-light-after.png",
+    "sha256": "060db1d295c3205fdf841e867f24134d40ce49771b636999e489bbe5834fed39"
+  },
+  {
+    "fileName": "demo-compare-button-ios-mobile-ios-dark-after.png",
+    "sha256": "15b5da9c96f4eec23dfecaeea9d557e30bd4d694a2f033cd37e39e0e10e1c4a1"
+  },
+  {
+    "fileName": "demo-compare-button-ios-mobile-ios-light-after.png",
+    "sha256": "17c86b44db7a8d4ec69babf62a63fcd5979214dda1a86d22b7f85c0b62944b02"
+  },
+  {
+    "fileName": "demo-compare-button-ios-mobile-material-dark-after.png",
+    "sha256": "15b5da9c96f4eec23dfecaeea9d557e30bd4d694a2f033cd37e39e0e10e1c4a1"
+  },
+  {
+    "fileName": "demo-compare-button-ios-mobile-material-light-after.png",
+    "sha256": "17c86b44db7a8d4ec69babf62a63fcd5979214dda1a86d22b7f85c0b62944b02"
+  },
+  {
+    "fileName": "demo-compare-button-material-desktop-ios-dark-after.png",
+    "sha256": "acb82a6e06f7ae7976bab7647fe388f424bcdb5fb39ceddce8b5096a1c78f68e"
   },
   {
     "fileName": "demo-compare-button-material-desktop-ios-light-after.png",
     "sha256": "c25392bb0b8ea661f46d3b07d086318b01b6eb9c4787d4231596fa037216d81e"
   },
   {
+    "fileName": "demo-compare-button-material-desktop-material-dark-after.png",
+    "sha256": "8c8fceba87199830883d482304616d5e163df4c5ccf22e9ae224cbb61c2bcf0d"
+  },
+  {
+    "fileName": "demo-compare-button-material-desktop-material-light-after.png",
+    "sha256": "2c82d43f6c5a092e5ffda27b555482cd382bfa445130ef2d2799d1933751da25"
+  },
+  {
+    "fileName": "demo-compare-button-material-mobile-ios-dark-after.png",
+    "sha256": "14af06ff019f8e18a749bfa538effdc6598bc7e62c26298e16ecfefd973b3efa"
+  },
+  {
+    "fileName": "demo-compare-button-material-mobile-ios-light-after.png",
+    "sha256": "3157a232c3ab83a55de1e7cb910a2521139e4ed1d5b2a57b696b101dfb70a5f7"
+  },
+  {
+    "fileName": "demo-compare-button-material-mobile-material-dark-after.png",
+    "sha256": "14af06ff019f8e18a749bfa538effdc6598bc7e62c26298e16ecfefd973b3efa"
+  },
+  {
+    "fileName": "demo-compare-button-material-mobile-material-light-after.png",
+    "sha256": "efd5212ea7346cb42a1dcf76acb61772acabee67e261b63fc87bfd0abbdb2952"
+  },
+  {
+    "fileName": "demo-compare-navbar-ios-desktop-ios-dark-after.png",
+    "sha256": "4676ce3ab97adbb28c9bea2296d66e911bfa993826b31cc21c515eaa7c6883e2"
+  },
+  {
     "fileName": "demo-compare-navbar-ios-desktop-ios-light-after.png",
+    "sha256": "75dfbf11127748e49878cb9a3734aa8d8800369c98db9fec5e19196517aaaf62"
+  },
+  {
+    "fileName": "demo-compare-navbar-ios-desktop-material-dark-after.png",
+    "sha256": "4676ce3ab97adbb28c9bea2296d66e911bfa993826b31cc21c515eaa7c6883e2"
+  },
+  {
+    "fileName": "demo-compare-navbar-ios-desktop-material-light-after.png",
     "sha256": "3d62c87064a26b2edda707412b0c68621f9420922b2f4d3833f9a96206da9e5d"
   },
   {
+    "fileName": "demo-compare-navbar-ios-mobile-ios-dark-after.png",
+    "sha256": "1dbb00e79b3b55c407822c082e8e047e0c674df0a4e5eb0bfd9773ebd203830f"
+  },
+  {
+    "fileName": "demo-compare-navbar-ios-mobile-ios-light-after.png",
+    "sha256": "be1e7fec25964b9bd1d90ba10ee618e9b8ffa527400391230be6f9f85eda2456"
+  },
+  {
+    "fileName": "demo-compare-navbar-ios-mobile-material-dark-after.png",
+    "sha256": "1dbb00e79b3b55c407822c082e8e047e0c674df0a4e5eb0bfd9773ebd203830f"
+  },
+  {
+    "fileName": "demo-compare-navbar-ios-mobile-material-light-after.png",
+    "sha256": "be1e7fec25964b9bd1d90ba10ee618e9b8ffa527400391230be6f9f85eda2456"
+  },
+  {
+    "fileName": "demo-compare-navbar-material-desktop-ios-dark-after.png",
+    "sha256": "c97d05788492e36b391c43720d57ed5cffd1e7787fdf15909f1128498573865d"
+  },
+  {
     "fileName": "demo-compare-navbar-material-desktop-ios-light-after.png",
-    "sha256": "95c879e487f58be9fc3e40eeac24992dbc67d79d48cb6e6a38587babf12f4e21"
+    "sha256": "2cede8936b2baf8cf92147d71096091b1c62ae0cc2e30da571ee2e0e985e1127"
+  },
+  {
+    "fileName": "demo-compare-navbar-material-desktop-material-dark-after.png",
+    "sha256": "1f75286ebaf62f2840b599bad896b7c56e392bfc7bf719b5562f42fca09a815c"
+  },
+  {
+    "fileName": "demo-compare-navbar-material-desktop-material-light-after.png",
+    "sha256": "2cede8936b2baf8cf92147d71096091b1c62ae0cc2e30da571ee2e0e985e1127"
+  },
+  {
+    "fileName": "demo-compare-navbar-material-mobile-ios-dark-after.png",
+    "sha256": "3a3a5ccb5f3e0130a1a442c0188cb95ab328b663fcfdb3c6d3cf5022bd4224a3"
+  },
+  {
+    "fileName": "demo-compare-navbar-material-mobile-ios-light-after.png",
+    "sha256": "64f9706257e3b91d2de8a67d42f08bf20abc00a571644cc0fe539706bd2ecf37"
+  },
+  {
+    "fileName": "demo-compare-navbar-material-mobile-material-dark-after.png",
+    "sha256": "3a3a5ccb5f3e0130a1a442c0188cb95ab328b663fcfdb3c6d3cf5022bd4224a3"
+  },
+  {
+    "fileName": "demo-compare-navbar-material-mobile-material-light-after.png",
+    "sha256": "4c2e2e99f36af046931d64ec3908e183ccfb8260db659cc104ecf59b459905a5"
+  },
+  {
+    "fileName": "demo-compare-select-ios-desktop-ios-dark-after.png",
+    "sha256": "4089a46af407e8a57177438d9e7c5a07f64771f366972f93a33e82cb3c04aa5a"
   },
   {
     "fileName": "demo-compare-select-ios-desktop-ios-light-after.png",
+    "sha256": "b6317ca78b6c471a69576686e1bb776e6e0488ceb22e7775018bebc2c08a7ae2"
+  },
+  {
+    "fileName": "demo-compare-select-ios-desktop-material-dark-after.png",
+    "sha256": "82d184c1dec2a12640ac2d05b237969ab9e870e6608029aad4b3543f21160353"
+  },
+  {
+    "fileName": "demo-compare-select-ios-desktop-material-light-after.png",
     "sha256": "9e541a5362d188b05c5aa0d0319a09c75d8b2036ac4d2d06f0d47267810db5a3"
   },
   {
+    "fileName": "demo-compare-select-ios-mobile-ios-dark-after.png",
+    "sha256": "0cae5c120634c00dfac40762b32c99348f719781e23c885b11403db61a945b1d"
+  },
+  {
+    "fileName": "demo-compare-select-ios-mobile-ios-light-after.png",
+    "sha256": "b0474a3208a8fb77dc7c1eb87df6b9dc238f486a5c583760b3f49d8cce7c166f"
+  },
+  {
+    "fileName": "demo-compare-select-ios-mobile-material-dark-after.png",
+    "sha256": "0cae5c120634c00dfac40762b32c99348f719781e23c885b11403db61a945b1d"
+  },
+  {
+    "fileName": "demo-compare-select-ios-mobile-material-light-after.png",
+    "sha256": "b0474a3208a8fb77dc7c1eb87df6b9dc238f486a5c583760b3f49d8cce7c166f"
+  },
+  {
+    "fileName": "demo-compare-select-material-desktop-ios-dark-after.png",
+    "sha256": "46d1a936fb807f866ea4f23408643a1e9ab53ec19bdb84f7b562b4fa0a692a14"
+  },
+  {
     "fileName": "demo-compare-select-material-desktop-ios-light-after.png",
-    "sha256": "fe755120804aef2474c1bdb3e46ccf770497fd382591aaa93515243e927ecf8a"
+    "sha256": "cc237e211bbcc4de1f1aef1833bf4efd794511445ca6e98cabf90eee91a1cc5c"
+  },
+  {
+    "fileName": "demo-compare-select-material-desktop-material-dark-after.png",
+    "sha256": "46d1a936fb807f866ea4f23408643a1e9ab53ec19bdb84f7b562b4fa0a692a14"
+  },
+  {
+    "fileName": "demo-compare-select-material-desktop-material-light-after.png",
+    "sha256": "cc237e211bbcc4de1f1aef1833bf4efd794511445ca6e98cabf90eee91a1cc5c"
+  },
+  {
+    "fileName": "demo-compare-select-material-mobile-ios-dark-after.png",
+    "sha256": "1173f2f0a73eb03dbda7e9d80e738e14db6b305e5a6d8972d2ba17a1210aec05"
+  },
+  {
+    "fileName": "demo-compare-select-material-mobile-ios-light-after.png",
+    "sha256": "637f4d3f5f4ba909d4c58632384a5d6741db33d375487252db3c9b295ef539c2"
+  },
+  {
+    "fileName": "demo-compare-select-material-mobile-material-dark-after.png",
+    "sha256": "1173f2f0a73eb03dbda7e9d80e738e14db6b305e5a6d8972d2ba17a1210aec05"
+  },
+  {
+    "fileName": "demo-compare-select-material-mobile-material-light-after.png",
+    "sha256": "637f4d3f5f4ba909d4c58632384a5d6741db33d375487252db3c9b295ef539c2"
+  },
+  {
+    "fileName": "demo-compare-tabs-ios-desktop-ios-dark-after.png",
+    "sha256": "d565d458db346eba1bc4d981fe9b9cd4858f3e31bc9b38916eb9859c40b3ea72"
   },
   {
     "fileName": "demo-compare-tabs-ios-desktop-ios-light-after.png",
+    "sha256": "4e316861495c94a6a97440d55802184ba9eda1b9236798a787525e736db98d85"
+  },
+  {
+    "fileName": "demo-compare-tabs-ios-desktop-material-dark-after.png",
+    "sha256": "c6b9ac9369fbe79aeb000930d7095a1ff1c477cb1148f5ff817a68ff62d54637"
+  },
+  {
+    "fileName": "demo-compare-tabs-ios-desktop-material-light-after.png",
     "sha256": "aed75019fd7ffd36872e476ad31e24bcbec77a2fc333249caaa5073b85147291"
+  },
+  {
+    "fileName": "demo-compare-tabs-ios-mobile-ios-dark-after.png",
+    "sha256": "35b68fa3571b640bebd0f346f554ead8a2db1beda1e325183026774dab1b1090"
+  },
+  {
+    "fileName": "demo-compare-tabs-ios-mobile-ios-light-after.png",
+    "sha256": "283bcc140eee6278694e865787bdeb63f43393802fe38ce73fcde361542d4f76"
+  },
+  {
+    "fileName": "demo-compare-tabs-ios-mobile-material-dark-after.png",
+    "sha256": "35b68fa3571b640bebd0f346f554ead8a2db1beda1e325183026774dab1b1090"
+  },
+  {
+    "fileName": "demo-compare-tabs-ios-mobile-material-light-after.png",
+    "sha256": "283bcc140eee6278694e865787bdeb63f43393802fe38ce73fcde361542d4f76"
+  },
+  {
+    "fileName": "demo-compare-tabs-material-desktop-ios-dark-after.png",
+    "sha256": "eb55265fb0111458ef8c56c248f680b8b4314e7ce50ab76ef60a7db183e82b1c"
   },
   {
     "fileName": "demo-compare-tabs-material-desktop-ios-light-after.png",
     "sha256": "b9f737a91297166bf2b9ab26a07a3d949ac1e326a3398d6e31b920b336fe1854"
   },
   {
+    "fileName": "demo-compare-tabs-material-desktop-material-dark-after.png",
+    "sha256": "8a42637012dfb48f0df1de5786d6894d2e663cdfde94645c4e8665966f4dbbf4"
+  },
+  {
+    "fileName": "demo-compare-tabs-material-desktop-material-light-after.png",
+    "sha256": "b9f737a91297166bf2b9ab26a07a3d949ac1e326a3398d6e31b920b336fe1854"
+  },
+  {
+    "fileName": "demo-compare-tabs-material-mobile-ios-dark-after.png",
+    "sha256": "d258bc20f811061d707e9736d69dfb2445d405c58a6f9e939b9f5607398df95b"
+  },
+  {
+    "fileName": "demo-compare-tabs-material-mobile-ios-light-after.png",
+    "sha256": "83bbff2d8434fdc72aec54d30cbb5bfe65fb7097cddb681ff4781c0f271db543"
+  },
+  {
+    "fileName": "demo-compare-tabs-material-mobile-material-dark-after.png",
+    "sha256": "8c327e34da80d76de03069a6761bb8f863acbf502bc6f549343365cb2f2bd088"
+  },
+  {
+    "fileName": "demo-compare-tabs-material-mobile-material-light-after.png",
+    "sha256": "dcd5683a9f39438cb43769410a7512511c6b3a3c6b9ddfe6513584c30bae16de"
+  },
+  {
+    "fileName": "demo-compare-toggle-ios-desktop-ios-dark-after.png",
+    "sha256": "c2c5e2a0db3679f78a19766ea533216ec33d855a736971bbd50b9f6cc76c6abb"
+  },
+  {
     "fileName": "demo-compare-toggle-ios-desktop-ios-light-after.png",
     "sha256": "ce9c793e83ad64b7fc04155678c1b87fe687fccebd56ca90ad4b2c47ad6ef334"
   },
   {
+    "fileName": "demo-compare-toggle-ios-desktop-material-dark-after.png",
+    "sha256": "c2c5e2a0db3679f78a19766ea533216ec33d855a736971bbd50b9f6cc76c6abb"
+  },
+  {
+    "fileName": "demo-compare-toggle-ios-desktop-material-light-after.png",
+    "sha256": "ce9c793e83ad64b7fc04155678c1b87fe687fccebd56ca90ad4b2c47ad6ef334"
+  },
+  {
+    "fileName": "demo-compare-toggle-ios-mobile-ios-dark-after.png",
+    "sha256": "aa23a40f2f87ce3e9aebb069d8b07f5140c7670a5cd0746e182a73ecaa325963"
+  },
+  {
+    "fileName": "demo-compare-toggle-ios-mobile-ios-light-after.png",
+    "sha256": "dc8208b856044b1051590108d8a016b85a972fa8aaae23c2c15fd4802c983774"
+  },
+  {
+    "fileName": "demo-compare-toggle-ios-mobile-material-dark-after.png",
+    "sha256": "aa23a40f2f87ce3e9aebb069d8b07f5140c7670a5cd0746e182a73ecaa325963"
+  },
+  {
+    "fileName": "demo-compare-toggle-ios-mobile-material-light-after.png",
+    "sha256": "dc8208b856044b1051590108d8a016b85a972fa8aaae23c2c15fd4802c983774"
+  },
+  {
+    "fileName": "demo-compare-toggle-material-desktop-ios-dark-after.png",
+    "sha256": "40c03e21d9202853e50816c7214d2c6dcb369be0fc544e7e1fa33cac8154413f"
+  },
+  {
     "fileName": "demo-compare-toggle-material-desktop-ios-light-after.png",
+    "sha256": "99a0c9846fc1788b916677af39b269877421abaa506c2a6df07622f6646696b3"
+  },
+  {
+    "fileName": "demo-compare-toggle-material-desktop-material-dark-after.png",
+    "sha256": "40c03e21d9202853e50816c7214d2c6dcb369be0fc544e7e1fa33cac8154413f"
+  },
+  {
+    "fileName": "demo-compare-toggle-material-desktop-material-light-after.png",
     "sha256": "91dbbf7a9018d9b4c2284385494738a1f2c7edef28d4f21691658a87df3f2591"
   },
   {
+    "fileName": "demo-compare-toggle-material-mobile-ios-dark-after.png",
+    "sha256": "ced7a2bfd9d913990c25a66ffebb9137a8c9bcb8f520e221727ae961300e02dc"
+  },
+  {
+    "fileName": "demo-compare-toggle-material-mobile-ios-light-after.png",
+    "sha256": "1b3695cf25543522d82826796f0eafb70f9e1be0a3d955e0df45cfaa436c6d05"
+  },
+  {
+    "fileName": "demo-compare-toggle-material-mobile-material-dark-after.png",
+    "sha256": "d3ce76ec1861830f7974a916182a3a75465383fb7130f98c26b44515dce6201e"
+  },
+  {
+    "fileName": "demo-compare-toggle-material-mobile-material-light-after.png",
+    "sha256": "d9b11523bcc4279a5bfe46613920f47f56df6f6ab8cd9dbb64747a666d92f39e"
+  },
+  {
     "fileName": "demo-dialog-open-desktop-ios-dark-after.png",
-    "sha256": "a42d3d338a498aa0f707582da88180fb68dcf7e4b43fcc724dc976fc7a5a97cd"
+    "sha256": "4f2adfd12731b560c63d48bf8f85df58968294b93c7e6edc86341cbf6b09bf99"
   },
   {
     "fileName": "demo-dialog-open-desktop-ios-light-after.png",
-    "sha256": "e54306b3b1fbef7b79c0dfcaf94f807b41e00f55bf4c5be0b1f890a7ffbc7d90"
+    "sha256": "adf8c8d3b73940c25d1d8d17e58c99f3fbcd9a1578f4a552f6bd7ac481e2c9f5"
   },
   {
     "fileName": "demo-dialog-open-desktop-material-dark-after.png",
-    "sha256": "312d764587004da06762be9d2c3a19c1cd67e52b56ab5b0580224134086d989a"
+    "sha256": "3cd661913cc86fd047d957c9bfb672d9a48d648b4120758ac00582407237dde7"
   },
   {
     "fileName": "demo-dialog-open-desktop-material-light-after.png",
-    "sha256": "050a6d9765af5d218e56d91ce107452e2398cc0a0df4a6b9a5c96fc91622f685"
+    "sha256": "7919bce97e4495089b336da897d5262b2c4acca57264403fc281282695ed2f13"
   },
   {
     "fileName": "demo-dialog-open-mobile-ios-dark-after.png",
-    "sha256": "71513b5dd6c0b98912eeefb2eb4979991b458f0c609463726699ebe5df04d9aa"
+    "sha256": "7a06aa81092e78a0f75baddea96c8f4451bd176b78d8d832d53bed0385db8b0e"
   },
   {
     "fileName": "demo-dialog-open-mobile-ios-light-after.png",
-    "sha256": "98b46eb85d6588fd0403974760c1aa7c7cafefef1553af693b8a227038ab4546"
+    "sha256": "c660c2e663206eb90fd3effaa9c6e2ef284e589feb1196dec4b9f2c417d22571"
   },
   {
     "fileName": "demo-dialog-open-mobile-material-dark-after.png",
-    "sha256": "93bd042ade3aee165406c07a625d2b0d902d3f191565606b9225e6e94821c6a3"
+    "sha256": "30867da3fde064c77c012b29cf3e2f59c023adffe276806a3ccb0c1897d655f1"
   },
   {
     "fileName": "demo-dialog-open-mobile-material-light-after.png",
-    "sha256": "0f0871d3dfc83b530a467fc67cc9dc66b73e0eae8537428d69248e20cc0126c5"
+    "sha256": "76329bafa5dc2b943d54b1e7c6f795991093817492719182f766855656585e37"
+  },
+  {
+    "fileName": "demo-list-desktop-ios-dark-after.png",
+    "sha256": "c2cd9b5e980373991460205e241d45b51a66d14797686befe616746f20e4d0e1"
   },
   {
     "fileName": "demo-list-desktop-ios-light-after.png",
     "sha256": "d256e7a706872734e843731867c1c5ee53c8f41717fb14b3bf574b4f3f12d087"
   },
   {
+    "fileName": "demo-list-desktop-material-dark-after.png",
+    "sha256": "82310b93d631c147c643e12c6cb4aae7aa911bc8a2547f88a55198bcd826b81c"
+  },
+  {
+    "fileName": "demo-list-desktop-material-light-after.png",
+    "sha256": "cd6630392dad3f03b9060329d6dfa5bda5940c3ce8e4955e312eb4488f93e125"
+  },
+  {
+    "fileName": "demo-list-input-desktop-ios-dark-after.png",
+    "sha256": "85c0e78c0b743417878ecbf0004cfc13ebb40eb9e5599f3dbfdf0b36a3006f7c"
+  },
+  {
     "fileName": "demo-list-input-desktop-ios-light-after.png",
-    "sha256": "3d2942ff77692ef0826ec32132897291891b23ee4dddcea9d9a755c23c48491d"
+    "sha256": "a112ac387f3f649198c67e83692a4405c53b3daae23fb33cc18ea541674da409"
+  },
+  {
+    "fileName": "demo-list-input-desktop-material-dark-after.png",
+    "sha256": "d0beac00e35393db1ffcad7fdc35c96e2a9f3672b2669d76ff50f1fd5c6e7dc9"
+  },
+  {
+    "fileName": "demo-list-input-desktop-material-light-after.png",
+    "sha256": "bf16e5dbeddd6c0c1e716a1a30d320ed8e984a3c3b980cffd7392773d23cddda"
+  },
+  {
+    "fileName": "demo-list-input-mobile-ios-dark-after.png",
+    "sha256": "ee3bb2b71931aa7e468ddeee5c6ee64ca60ee085e644639e6360c24e0554e64c"
+  },
+  {
+    "fileName": "demo-list-input-mobile-ios-light-after.png",
+    "sha256": "b8e29d14070c4cf5a0e392ea94f8fe768d1ee4044e475f22245f4bee80ad9cbb"
+  },
+  {
+    "fileName": "demo-list-input-mobile-material-dark-after.png",
+    "sha256": "cd2bb991065e49ff0483449bb0064986fda7b1354250d64d2b59fd910f7197a3"
+  },
+  {
+    "fileName": "demo-list-input-mobile-material-light-after.png",
+    "sha256": "77588d26f62c555a45359f363ed7a5af48803043cd43c51aa711e53e41e64a87"
+  },
+  {
+    "fileName": "demo-list-mobile-ios-dark-after.png",
+    "sha256": "2fcb1cd5dea1a0fc17022200ed230905065080424e31ea1e8a95dee7e698ac16"
+  },
+  {
+    "fileName": "demo-list-mobile-ios-light-after.png",
+    "sha256": "f589f36b7451507b788db8c4a3247be18bcb9705402ba6508b5816c04c3991e4"
+  },
+  {
+    "fileName": "demo-list-mobile-material-dark-after.png",
+    "sha256": "77cba6d89a7efb4669191491a72dcb8259c1292805dfd54f5bd67cedfb42d6de"
+  },
+  {
+    "fileName": "demo-list-mobile-material-light-after.png",
+    "sha256": "77c429fd7fc6665618f1ed6e0da386ee59afb07d8acb7108f3d09a73f4e62f0b"
+  },
+  {
+    "fileName": "demo-notification-desktop-ios-dark-after.png",
+    "sha256": "8a0486d8ed9775bc85d1c74b2bbfd7b60f75150311a9def3eed47707286e4f95"
   },
   {
     "fileName": "demo-notification-desktop-ios-light-after.png",
     "sha256": "aa5fba27e1e1e31b92d835a9279054e4d574c72bbc798befa8babd34734b265b"
   },
   {
+    "fileName": "demo-notification-desktop-material-dark-after.png",
+    "sha256": "2d2cdcfeae675311b13ab386277fc353347ea34500cb097041e485b2fc579296"
+  },
+  {
+    "fileName": "demo-notification-desktop-material-light-after.png",
+    "sha256": "a7c3bef98f4b806c9011ef6aed91484ff592ad448d217d255c0e85c5ea024416"
+  },
+  {
+    "fileName": "demo-notification-mobile-ios-dark-after.png",
+    "sha256": "4ab56358ea2630dd4fc38cb3a24d7a356a6c1418a327d78e9fa64828553ddd65"
+  },
+  {
+    "fileName": "demo-notification-mobile-ios-light-after.png",
+    "sha256": "1654e6631a3b77f5f27de19800db178f94f810edf4c2889c4af5016555a82210"
+  },
+  {
+    "fileName": "demo-notification-mobile-material-dark-after.png",
+    "sha256": "45d9aa08ce8a0f56c6d04a35698204ecda72591bfed167d4eefc55f39579899c"
+  },
+  {
+    "fileName": "demo-notification-mobile-material-light-after.png",
+    "sha256": "82221fd8c6b2b1719a54bca4c1585cea38b0b084ad185667218df6416d89fd2d"
+  },
+  {
+    "fileName": "demo-page-desktop-ios-dark-after.png",
+    "sha256": "26d4ae7b7afaaed86635d52835c01b05a5149f83c2fd6680d6389f3204574c10"
+  },
+  {
     "fileName": "demo-page-desktop-ios-light-after.png",
     "sha256": "26d4ae7b7afaaed86635d52835c01b05a5149f83c2fd6680d6389f3204574c10"
   },
   {
+    "fileName": "demo-page-desktop-material-dark-after.png",
+    "sha256": "26d4ae7b7afaaed86635d52835c01b05a5149f83c2fd6680d6389f3204574c10"
+  },
+  {
+    "fileName": "demo-page-desktop-material-light-after.png",
+    "sha256": "26d4ae7b7afaaed86635d52835c01b05a5149f83c2fd6680d6389f3204574c10"
+  },
+  {
+    "fileName": "demo-page-mobile-ios-dark-after.png",
+    "sha256": "a7aee584cf2b458ce0aebf5678f13a6c8d9fed0fb349e0b1a80892f44527bddd"
+  },
+  {
+    "fileName": "demo-page-mobile-ios-light-after.png",
+    "sha256": "a7aee584cf2b458ce0aebf5678f13a6c8d9fed0fb349e0b1a80892f44527bddd"
+  },
+  {
+    "fileName": "demo-page-mobile-material-dark-after.png",
+    "sha256": "a7aee584cf2b458ce0aebf5678f13a6c8d9fed0fb349e0b1a80892f44527bddd"
+  },
+  {
+    "fileName": "demo-page-mobile-material-light-after.png",
+    "sha256": "a7aee584cf2b458ce0aebf5678f13a6c8d9fed0fb349e0b1a80892f44527bddd"
+  },
+  {
+    "fileName": "demo-popover-open-desktop-ios-dark-after.png",
+    "sha256": "c6195f8e4fdef9ff8cbac451850b71d3b8fae6026c39d8efca477eea48fcd4b9"
+  },
+  {
     "fileName": "demo-popover-open-desktop-ios-light-after.png",
-    "sha256": "d6131a1fa7432a1ac18cf17f8efe4203eeb9eead98e33dce03863ae04be8b0f6"
+    "sha256": "32fb521fc6e17031d3af2741f33db40bb1acaf80ca8d61b9dc113182ed9fcfda"
+  },
+  {
+    "fileName": "demo-popover-open-desktop-material-dark-after.png",
+    "sha256": "7cfb89859fa63aac245c08cf764eda9352cef4eb78a593e62cb51fffcc129b5b"
+  },
+  {
+    "fileName": "demo-popover-open-desktop-material-light-after.png",
+    "sha256": "0c15684d9ac13770edcf9e120a2868cced16494deec7b5fe8f85bf6508c2db5e"
+  },
+  {
+    "fileName": "demo-popover-open-mobile-ios-dark-after.png",
+    "sha256": "0fd4d4701e1f51d46d2ebd36fb59b8b1454f16863238bbb17bf713976851aeae"
+  },
+  {
+    "fileName": "demo-popover-open-mobile-ios-light-after.png",
+    "sha256": "45b16e17c0e70f155b2dd380db76aa97d0fcda93b16dbf47ef1cde7baa9fbd55"
+  },
+  {
+    "fileName": "demo-popover-open-mobile-material-dark-after.png",
+    "sha256": "f630b346741011e31ae6eb985a0686f8fc41521f9ee6390a313db37ca1b3c1a1"
+  },
+  {
+    "fileName": "demo-popover-open-mobile-material-light-after.png",
+    "sha256": "0ae1ab9f5092f2383e115ce44142d9e98773baa746f1b4fe3a75590d32487d57"
   },
   {
     "fileName": "demo-sheet-open-desktop-ios-dark-after.png",
@@ -137,15 +613,15 @@
   },
   {
     "fileName": "demo-sheet-open-desktop-ios-light-after.png",
-    "sha256": "2b1e6f0065d6b56e39d6ca8f2e29de93afc87429fb2ab574fc8cd21a4504bfe4"
+    "sha256": "3f82866402d6262df1051b3b6e347256874a85a5109643ee755dcb0d925029b4"
   },
   {
     "fileName": "demo-sheet-open-desktop-material-dark-after.png",
-    "sha256": "7d0e83cada3d39d75fc66d9b56725973c1e6a1606ecbc9b750994a5d1edc039e"
+    "sha256": "e5fa9cdbac84bc4f3ef5fa8cd7ec4ebca8c5e7f7ee0019b1bad4efefec15d0d1"
   },
   {
     "fileName": "demo-sheet-open-desktop-material-light-after.png",
-    "sha256": "54fb1e6e6551aa8b4b48a3749c0ddf888819f4eb19b9bc4a2001fef2fef7b8d8"
+    "sha256": "7ec125ea0480a8f66c439f19c22231515db17f07a5195d3eb6f3ffc7860adadc"
   },
   {
     "fileName": "demo-sheet-open-mobile-ios-dark-after.png",
@@ -164,16 +640,116 @@
     "sha256": "f4721f3030441aad63aa9baa50e03c19b0d68e9570fb19aba80de4441319e918"
   },
   {
+    "fileName": "demo-sidebar-nav-button-ios-dark-after.png",
+    "sha256": "1ce4b79eb6ed80c88e1e87962506b14dc6975a1963b4c6c04d297ba6d40fb014"
+  },
+  {
+    "fileName": "demo-sidebar-nav-button-ios-light-after.png",
+    "sha256": "f7e5b664f6f332d0cacea0e39bacb386c863865ad42bf94408c187f1fbf2d27d"
+  },
+  {
+    "fileName": "demo-sidebar-nav-button-material-dark-after.png",
+    "sha256": "e27b5ed2d76465c0c457b94a6d39cb7b2d816a5e7d3912423e7b3501e144e199"
+  },
+  {
+    "fileName": "demo-sidebar-nav-button-material-light-after.png",
+    "sha256": "f7e5b664f6f332d0cacea0e39bacb386c863865ad42bf94408c187f1fbf2d27d"
+  },
+  {
+    "fileName": "demo-tabs-desktop-ios-dark-after.png",
+    "sha256": "fde76d4919b0d4d16eb83b201bec0a5fab4b99898b68cd26aedf2d200e9d070a"
+  },
+  {
     "fileName": "demo-tabs-desktop-ios-light-after.png",
-    "sha256": "73dad71a82ecb68a881d8bd34882a394a3701d1edf5e5b08c1e657e34143592e"
+    "sha256": "1f1bd4620b9b90365d430535350a84103dda3a24eaed3ae3b5b0338986c944b5"
+  },
+  {
+    "fileName": "demo-tabs-desktop-material-dark-after.png",
+    "sha256": "57ea0f08ee29eec62d56473447ac80ae13cd2168ab09e54d48ccebefde4f79e0"
+  },
+  {
+    "fileName": "demo-tabs-desktop-material-light-after.png",
+    "sha256": "f556757d138a4a2af46a100953fc418b98917eb198ee035b8b69f3c1996da459"
+  },
+  {
+    "fileName": "demo-tabs-mobile-ios-dark-after.png",
+    "sha256": "35b68fa3571b640bebd0f346f554ead8a2db1beda1e325183026774dab1b1090"
+  },
+  {
+    "fileName": "demo-tabs-mobile-ios-light-after.png",
+    "sha256": "283bcc140eee6278694e865787bdeb63f43393802fe38ce73fcde361542d4f76"
+  },
+  {
+    "fileName": "demo-tabs-mobile-material-dark-after.png",
+    "sha256": "d258bc20f811061d707e9736d69dfb2445d405c58a6f9e939b9f5607398df95b"
+  },
+  {
+    "fileName": "demo-tabs-mobile-material-light-after.png",
+    "sha256": "fedb24b6856fee1d28beac6946b314ea06566bcc101956516130fbc0f72f6ec5"
+  },
+  {
+    "fileName": "demo-toast-open-desktop-ios-dark-after.png",
+    "sha256": "c68b94e10a7338b661122ae0f14b9941c89efacd4fee46094e01d505444669e1"
   },
   {
     "fileName": "demo-toast-open-desktop-ios-light-after.png",
-    "sha256": "26cdc9c765965af00103249738edc33fef5d1ec278df0e977f28106b8ad93e60"
+    "sha256": "086ff6c6b790d6d83aad8e889aafd91a6b8383b51dc0e2356d5337fb3152108b"
+  },
+  {
+    "fileName": "demo-toast-open-desktop-material-dark-after.png",
+    "sha256": "a84be5d5d07fa51eeb68a8414a5010530022bf6520c2e70a0e4867be19a856bd"
+  },
+  {
+    "fileName": "demo-toast-open-desktop-material-light-after.png",
+    "sha256": "3d0a8cbd65c4f23bfcfc4e8482c9924a84091c5d0426a915e6cf57cef0137d8e"
+  },
+  {
+    "fileName": "demo-toast-open-mobile-ios-dark-after.png",
+    "sha256": "0fde174e5587843bdc2e58d156c8eee3a614f906adcc37837d55e84983b3cc48"
+  },
+  {
+    "fileName": "demo-toast-open-mobile-ios-light-after.png",
+    "sha256": "0fddb7c85d71d40acd22e3c902828d17d993d8437156fec7a4389e2a4c0717e1"
+  },
+  {
+    "fileName": "demo-toast-open-mobile-material-dark-after.png",
+    "sha256": "8ec4e38553d72d97455d10be447e839adcf40066020a1b1418644e4514a1e942"
+  },
+  {
+    "fileName": "demo-toast-open-mobile-material-light-after.png",
+    "sha256": "3bb5d3ee86ecea292fa595e252b76f5d02b32c8ce04ef62fa1a0bff842155c40"
+  },
+  {
+    "fileName": "demo-toggle-desktop-ios-dark-after.png",
+    "sha256": "f87f04cfaf689dde78a054c05147386af82b601d005da6832d387e1efe4870fa"
   },
   {
     "fileName": "demo-toggle-desktop-ios-light-after.png",
     "sha256": "2375319a3aa4008713ef3a530310e54321a830b4ba5c53d3b12041030df935ed"
+  },
+  {
+    "fileName": "demo-toggle-desktop-material-dark-after.png",
+    "sha256": "61c02ca7d7187cb854806a80bb28ba0820ded3acb91562b7114f7c38ecbffb78"
+  },
+  {
+    "fileName": "demo-toggle-desktop-material-light-after.png",
+    "sha256": "1a0af2731c9a71d22a9ca8f813f347e2750e2828f3253d6b2c740fb1f0786af2"
+  },
+  {
+    "fileName": "demo-toggle-mobile-ios-dark-after.png",
+    "sha256": "aa23a40f2f87ce3e9aebb069d8b07f5140c7670a5cd0746e182a73ecaa325963"
+  },
+  {
+    "fileName": "demo-toggle-mobile-ios-light-after.png",
+    "sha256": "dc8208b856044b1051590108d8a016b85a972fa8aaae23c2c15fd4802c983774"
+  },
+  {
+    "fileName": "demo-toggle-mobile-material-dark-after.png",
+    "sha256": "8cf46e381c9a2ce4d518e7fbb03ea605e9e2b27fd0711d0942f8d5d83b0bb792"
+  },
+  {
+    "fileName": "demo-toggle-mobile-material-light-after.png",
+    "sha256": "d9b11523bcc4279a5bfe46613920f47f56df6f6ab8cd9dbb64747a666d92f39e"
   },
   {
     "fileName": "qa/capacitor-accordion-item/desktop-frame-ios-dark-alternate.png",
@@ -15742,9 +16318,5 @@
   {
     "fileName": "qa/layout-smoke/demo-index-390x844-top.png",
     "sha256": "a7aee584cf2b458ce0aebf5678f13a6c8d9fed0fb349e0b1a80892f44527bddd"
-  },
-  {
-    "fileName": "sha256.json",
-    "sha256": "5c86a129c6e7142d42a06c55f255844bfef6e44c03ca564c0a279863e8651f42"
   }
 ]
