@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-11-18T10:35:00.000Z
+updated_at: 2026-11-18T16:55:51.000Z
 head_image: /RBW_XCode_Cloud_building.webp
 head_image_alt: "Comparison of CI/CD platforms building iOS apps on macOS runners"
 keywords: iOS CI, iOS CI/CD, best CI/CD for iOS apps, iOS CI pipeline, iOS CI runners, CocoaPods CI, Xcode 26 CI, Apple Silicon CI runners, Xcode Cloud vs Bitrise, GitHub Actions iOS, CircleCI iOS
