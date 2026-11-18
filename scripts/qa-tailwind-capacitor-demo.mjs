@@ -366,20 +366,17 @@ async function exerciseInteractions(target, slug, stateId, label) {
   try {
     if (slug === 'capacitor-toggle' && stateId === 'off') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const track = page.locator('label, .toggle').filter({ has: page.locator('input[role="switch"]') }).first()
-        await track.click({ timeout: 4000, force: true })
+        await page.locator('c-toggle').first().click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-toggle' && stateId === 'on') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const track = page.locator('label, .toggle').filter({ has: page.locator('input[role="switch"]') }).first()
-        await track.click({ timeout: 4000, force: true })
+        await page.locator('c-toggle').first().click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-checkbox' && (stateId === 'off' || stateId === 'on')) {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const row = page.locator('label, .checkbox').filter({ has: page.locator('input[type="checkbox"]') }).first()
-        await row.click({ timeout: 4000, force: true })
+        await page.locator('c-checkbox').first().click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-radio' && stateId === 'option-b') {
@@ -389,18 +386,18 @@ async function exerciseInteractions(target, slug, stateId, label) {
     }
     if (slug === 'capacitor-stepper' && stateId === 'min') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('.stepper button').last().click({ timeout: 4000 })
+        await page.locator('c-stepper button').last().click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-accordion-item' && stateId === 'expanded-copy') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('.accordion-item button, .accordion-item').first().click({ timeout: 4000 })
+        await page.locator('.tc-demo-accordion-expanded c-accordion-item, .tc-demo-accordion-expanded button').first().click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-chip' && stateId === 'removable') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const del = page.locator('.chip button, [class*="delete"]').first()
-        if (await del.count()) await del.click({ timeout: 4000 })
+        const del = page.locator('c-chip button[type="button"]').first()
+        if (await del.count()) await del.click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-tabs' || slug === 'capacitor-tab' || slug === 'capacitor-segmented' || slug === 'capacitor-segmented-button') {
