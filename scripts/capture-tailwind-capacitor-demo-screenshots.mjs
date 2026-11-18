@@ -543,7 +543,11 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
           await navLink.scrollIntoViewIfNeeded()
           await navLink.click({ force: true })
           await page.waitForTimeout(1200)
-          await frame.locator('#capacitor-button .registry-demo-block').waitFor({ state: 'visible', timeout: 15_000 }).catch(() => {})
+          await page
+            .locator('#capacitor-button .registry-demo-block, [data-tc-demo-slug="capacitor-button"]')
+            .first()
+            .waitFor({ state: 'visible', timeout: 15_000 })
+            .catch(() => {})
           const navShot = `demo-sidebar-nav-button-${tag}-${label}.png`
           await page.screenshot({ path: join(outDir, navShot), fullPage: false })
           manifest.push(await fileEntry(navShot))
