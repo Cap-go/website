@@ -460,7 +460,7 @@ async function exerciseInteractions(target, slug, stateId, label) {
         if (await backdrop.count()) {
           await backdrop.click({ position: { x: 8, y: 8 }, timeout: 4000 })
           await page.waitForTimeout(300)
-          const afterBd = await host.locator(':scope > *').count()
+          const afterBd = await host.evaluate((el) => el.children.length)
           record(afterBd === 0, `${label}: backdrop closes overlay (children=${afterBd})`)
         }
       }
@@ -719,8 +719,8 @@ async function qaLayoutSmoke(page) {
   ]
   await page.setViewportSize({ width: 390, height: 844 })
   for (const route of routes) {
-    await page.goto(`${baseUrl}${route.path}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
-    await page.waitForSelector('[data-tc-demo-intro]', { timeout: 30_000 })
+    await page.goto(`${baseUrl}${route.path}`, { waitUntil: 'load', timeout: 120_000 })
+    await page.waitForSelector('[data-tc-demo-intro]', { state: 'visible', timeout: 60_000 })
     const labelTop = `layout-smoke ${route.file} top`
     await assertPageLayout(page, labelTop, { checkIntroClearance: true })
     await assertDemoCatalogChrome(page, labelTop, { scrolled: false })
