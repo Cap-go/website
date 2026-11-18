@@ -80,7 +80,12 @@
         <div
           class="tc-demo-popup-backdrop fixed inset-0 z-40 bg-black/50"
           data-tc-demo-popup-backdrop
+          role="button"
+          tabindex="-1"
+          aria-label="Close popup"
           @click="popupOpen = false"
+          @keydown.enter="popupOpen = false"
+          @keydown.space.prevent="popupOpen = false"
         />
         <Popup :opened="true" :backdrop="false" @backdropclick="popupOpen = false">
           <Block strong class="m-0">
@@ -127,7 +132,12 @@
         v-if="modalOpen"
         class="fixed inset-0 z-40 bg-black/50"
         data-tc-demo-modal-backdrop
+        role="button"
+        tabindex="-1"
+        aria-label="Close modal"
         @click="modalOpen = false"
+        @keydown.enter="modalOpen = false"
+        @keydown.space.prevent="modalOpen = false"
       />
       <Modal
         v-if="modalOpen"

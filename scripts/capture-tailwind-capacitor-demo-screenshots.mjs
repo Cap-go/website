@@ -642,6 +642,35 @@ const mobileInstallOverflow = {}
 
 /**
  * @param {import('playwright').Browser} browser
+ * @param {{ prefix: string, width: number, height: number, mobile: boolean }} viewport
+ * @param {{ label: string, urlBase: string }} job
+ */
+async function captureInstallSectionShot(browser, viewport, job) {
+  const { prefix, width, height, mobile } = viewport
+  const { label, urlBase } = job
+  const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 })
+  try {
+    await page.goto(`${urlBase}/plugins/tailwind-capacitor/`, { waitUntil: 'networkidle', timeout: 120_000 })
+    const block = await resolveInstallBlock(page)
+    await block.waitFor({ state: 'visible', timeout: 30_000 })
+    const fileName = `install-section-${prefix}${label}.png`
+    const filePath = join(outDir, fileName)
+    if (mobile) {
+      const overflows = await screenshotMobileInstall(page, block, filePath, { width, height })
+      if (label === 'before') mobileInstallOverflow.before = overflows
+      if (label === 'after') mobileInstallOverflow.after = overflows
+    } else {
+      await scrollInstallBelowHeader(page, block)
+      await block.screenshot({ path: filePath })
+    }
+    return await fileEntry(fileName)
+  } finally {
+    await page.close()
+  }
+}
+
+/**
+ * @param {import('playwright').Browser} browser
  */
 async function captureInstallSections(browser) {
   const manifest = []
@@ -654,31 +683,10 @@ async function captureInstallSections(browser) {
     { label: 'before', urlBase: installBeforeUrl },
     { label: 'after', urlBase: baseUrl },
   ]
-  for (const { prefix, width, height, mobile } of viewports) {
-    if (mobileOnly && !mobile) continue
-    for (const { label, urlBase } of installJobs) {
-      const page = await browser.newPage({
-        viewport: { width, height },
-        deviceScaleFactor: 1,
-      })
-      try {
-        await page.goto(`${urlBase}/plugins/tailwind-capacitor/`, { waitUntil: 'networkidle', timeout: 120_000 })
-        const block = await resolveInstallBlock(page)
-        await block.waitFor({ state: 'visible', timeout: 30_000 })
-        const fileName = `install-section-${prefix}${label}.png`
-        const filePath = join(outDir, fileName)
-        if (mobile) {
-          const overflows = await screenshotMobileInstall(page, block, filePath, { width, height })
-          if (label === 'before') mobileInstallOverflow.before = overflows
-          if (label === 'after') mobileInstallOverflow.after = overflows
-        } else {
-          await scrollInstallBelowHeader(page, block)
-          await block.screenshot({ path: filePath })
-        }
-        manifest.push(await fileEntry(fileName))
-      } finally {
-        await page.close()
-      }
+  for (const viewport of viewports) {
+    if (mobileOnly && !viewport.mobile) continue
+    for (const job of installJobs) {
+      manifest.push(await captureInstallSectionShot(browser, viewport, job))
     }
   }
   if (mobileOnly) {
