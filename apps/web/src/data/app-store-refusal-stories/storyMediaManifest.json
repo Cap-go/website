@@ -336,5 +336,18 @@
   "weekly-subscription-price-review-paused-for-confirmation": null,
   "iap-not-available-paywall-pointed-at-another-apps-plans-fixed-same-day": null,
   "new-app-missing-review-video-then-crash-on-low-end-phones-17-days": null,
-  "update-crash-after-launch-not-reproducible-same-build-resubmitted": null
+  "update-crash-after-launch-not-reproducible-same-build-resubmitted": null,
+  "six-apps-4-3-a-in-21-seconds-spam-warning-approved-after-34-days-silence": {
+    "src": "/app-store-refusal-horror-story/screenshots/six-apps-4-3-a-in-21-seconds-spam-warning-approved-after-34-days-silence.webp",
+    "alt": "App Review reply saying it will continue the review and will notify the developer of any further issues",
+    "width": 1110,
+    "height": 312
+  },
+  "first-review-rejected-in-20-minutes-then-pulled-twice-from-in-review-22-days": {
+    "src": "/app-store-refusal-horror-story/screenshots/first-review-rejected-in-20-minutes-then-pulled-twice-from-in-review-22-days.webp",
+    "alt": "App Store Connect status history showing one rejection, two developer withdrawals during In Review, and a final Ready for Distribution, with dates removed",
+    "width": 1300,
+    "height": 1928
+  },
+  "no-ads-answer-in-age-rating-questionnaire-while-showing-banner-ads": null
 }

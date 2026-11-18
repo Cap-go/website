@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-10-29T07:14:52.829Z
-updated_at: 2026-11-11T16:45:30.000Z
+updated_at: 2026-11-18T15:09:32.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/77db9c1b-afd1-4700-a227-95b6e38b7890/mobile-app-development-for-healthcare-medical-app.jpg'
 head_image_alt: Mobile App Development for Healthcare in 2026
 keywords: 'mobile app development for healthcare, HIPAA compliance, mHealth security, FHIR integration, healthcare apps'
@@ -60,7 +60,7 @@ Assign each feature a regulatory label before implementation. The label should c
 
 For HIPAA, first determine whether the app handles protected health information on behalf of a covered entity or business associate. If it does, plan controlled access, appropriate audit records, a business associate agreement where applicable, and screens that reveal only what a person needs for the task. The relevant question is the data flow and the relationship between the app provider and the organization, not whether the app is about health. Teams can [compare autism apps for HIPAA compliance](https://guidinggrowth.app/hipaa-compliant-app/) as one focused example of how privacy considerations relate to app features and data handling.
 
-Under GDPR, health data is a special category of personal data. Identify the lawful basis for processing, determine whether a data protection impact assessment is required, and design usable ways for people to exercise their data rights. These decisions shape consent wording, account settings, exports, and deletion behavior. Put them in the backlog before implementation, and [use a guide to understanding regulatory compliance](https://capgo.app/blog/understanding-regulatory-compliance/) to help structure decisions by jurisdiction.
+Under GDPR, health data is a special category of personal data. Identify the lawful basis for processing, determine whether a data protection impact assessment is required, and design usable ways for people to exercise their data rights. These decisions shape consent wording, account settings, exports, and deletion behavior. Put them in the backlog before implementation, and [use a guide to understanding regulatory compliance](https://capgo.app/blog/compliance-checks-in-cicd-for-capacitor-apps/) to help structure decisions by jurisdiction.
 
 Give software functions their own device-software label. The FDA's *Policy for Device Software Functions and Mobile Medical Applications* guidance helps developers assess whether a function may qualify as a medical-device function rather than wellness software. Review the intended function, including claims that the software diagnoses, treats, or directs care. A marketing edit cannot resolve a mismatch between what a feature does and how the product describes it.
 
