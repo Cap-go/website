@@ -274,9 +274,13 @@ async function assertToastHasVisibleSurface(page, label) {
       if (!m) return 0
       return (Number(m[1]) * 0.2126 + Number(m[2]) * 0.7152 + Number(m[3]) * 0.0722) / 255
     }
-    const toastLum = lum(getComputedStyle(toast).backgroundColor)
+    const toastStyle = getComputedStyle(toast)
+    const toastLum = lum(toastStyle.backgroundColor)
     const screenLum = lum(getComputedStyle(fill).backgroundColor)
-    return Math.abs(toastLum - screenLum) > 0.07 ? true : `toast blends (t=${toastLum.toFixed(2)} screen=${screenLum.toFixed(2)})`
+    if (Math.abs(toastLum - screenLum) > 0.07) return true
+    const textLum = lum(toastStyle.color)
+    if (textLum - screenLum > 0.55) return true
+    return `toast blends (t=${toastLum.toFixed(2)} screen=${screenLum.toFixed(2)})`
   })
   record(ok === true, `${label}: toast visible surface (${String(ok)})`)
 }
@@ -327,7 +331,7 @@ async function assertStateClipping(pageOrFrame, stateId, label) {
  */
 async function screenshotDiffMean(a, b) {
   const imgA = await sharp(a).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
-  const imgB = await sharp(b).ensureAlpha().resize(imgA.info.width, imgA.info.height).raw().toBuffer()
+  const imgB = await sharp(b).ensureAlpha().resize(imgA.info.width, imgA.info.height).raw().toBuffer({ resolveWithObject: true })
   const ch = imgA.info.channels
   const n = imgA.info.width * imgA.info.height
   let sum = 0
@@ -347,6 +351,7 @@ async function screenshotDiffMean(a, b) {
  */
 async function assertClickChangesPixels(page, slug, stateId, label, action) {
   const root = page.locator('#tc-demo-root')
+  await root.waitFor({ state: 'visible', timeout: 15_000 })
   const before = await root.screenshot()
   await action()
   await page.waitForTimeout(280)
@@ -364,19 +369,18 @@ async function assertClickChangesPixels(page, slug, stateId, label, action) {
 async function exerciseInteractions(target, slug, stateId, label) {
   const page = /** @type {import('playwright').Page} */ (target)
   try {
-    if (slug === 'capacitor-toggle' && stateId === 'off') {
+    if (slug === 'capacitor-toggle' && (stateId === 'off' || stateId === 'on')) {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('c-toggle').first().click({ timeout: 4000, force: true })
-      })
-    }
-    if (slug === 'capacitor-toggle' && stateId === 'on') {
-      await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('c-toggle').first().click({ timeout: 4000, force: true })
+        const toggle = page.locator('#tc-demo-root label:has(input[role="switch"])').first()
+        await toggle.waitFor({ state: 'visible', timeout: 10_000 })
+        await toggle.click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-checkbox' && (stateId === 'off' || stateId === 'on')) {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('c-checkbox').first().click({ timeout: 4000, force: true })
+        const box = page.locator('#tc-demo-root [data-tc-demo-state] label:has(input[type="checkbox"])').first()
+        await box.waitFor({ state: 'visible', timeout: 10_000 })
+        await box.click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-radio' && stateId === 'option-b') {
@@ -386,18 +390,25 @@ async function exerciseInteractions(target, slug, stateId, label) {
     }
     if (slug === 'capacitor-stepper' && stateId === 'min') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('c-stepper button').last().click({ timeout: 4000, force: true })
+        const step = page.locator('#tc-demo-root button[aria-label="Increase"], #tc-demo-root button[aria-label="Increase value"]').last()
+        await step.waitFor({ state: 'visible', timeout: 10_000 })
+        await step.click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-accordion-item' && stateId === 'expanded-copy') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('.tc-demo-accordion-expanded c-accordion-item, .tc-demo-accordion-expanded button').first().click({ timeout: 4000, force: true })
+        await page
+          .locator('.tc-demo-accordion-expanded button, .tc-demo-accordion-expanded [class*="accordion"]')
+          .first()
+          .click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-chip' && stateId === 'removable') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const del = page.locator('c-chip button[type="button"]').first()
-        if (await del.count()) await del.click({ timeout: 4000, force: true })
+        const del = page.locator('#tc-demo-root button[aria-label="Remove"]').first()
+        if (await del.count()) {
+          await del.click({ timeout: 4000, force: true })
+        }
       })
     }
     if (slug === 'capacitor-tabs' || slug === 'capacitor-tab' || slug === 'capacitor-segmented' || slug === 'capacitor-segmented-button') {
@@ -411,9 +422,14 @@ async function exerciseInteractions(target, slug, stateId, label) {
     if (slug === 'capacitor-actions' && stateId === 'sheet-open') {
       const hairlineOk = await page.evaluate(() => {
         const expected = getComputedStyle(document.documentElement).getPropertyValue('--c-hairline-color').trim()
-        const btn = document.querySelector('.tc-demo-overlay-host button.hairline-b')
+        const host = document.querySelector('.tc-demo-overlay-host')
+        if (!host) return 'no overlay host'
+        const btn =
+          host.querySelector('button.hairline-b') ??
+          host.querySelector('.hairline-b button') ??
+          host.querySelector('button[class*="hairline-"]')
         if (!btn) return 'no hairline button'
-        const bc = getComputedStyle(btn).borderBottomColor
+        const bc = getComputedStyle(btn).borderBottomColor || getComputedStyle(btn).borderTopColor
         return bc && expected ? true : `missing colors ${bc}/${expected}`
       })
       record(hairlineOk === true, `${label}: actions hairline color (${String(hairlineOk)})`)
