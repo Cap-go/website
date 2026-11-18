@@ -10,7 +10,7 @@ import {
   TableRow,
 } from '../../tailwind-capacitor-snapshot/capacitor/index.js'
 import type { GalleryContext } from './tailwindCapacitorDemoGallery'
-import { openOverlayPhoneStage, overlayScreenFiller, overlayUnderlayTrigger } from './demoOverlayHelpers'
+import { openOverlayRefStage, overlayScreenFiller, overlayUnderlayTrigger } from './demoOverlayHelpers'
 
 export type SlugStateDef = { id: string; label: string; render: (ctx: GalleryContext) => VNode }
 
@@ -70,7 +70,7 @@ export function overlayClosedOpen(
     {
       id: 'open',
       label: labels.open ?? 'Open',
-      render: (c) => openOverlayPhoneStage(c, overlayScreenFiller(c, screenTitle), overlay(c)),
+      render: (c) => openOverlayRefStage(c, overlayScreenFiller(c, screenTitle), openRef),
     },
   ]
 }

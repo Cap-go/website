@@ -252,7 +252,8 @@ html:not(.dark).ios #tc-demo-root [role='dialog'] {
   background-size: calc(100% - 2rem) calc(1px / var(--c-device-pixel-ratio, 1));
 }
 
-#tc-demo-root [role='dialog'] > .flex.items-center {
+/* Button footer row only (not contentWrap: flex flex-col items-center). */
+#tc-demo-root [role='dialog'] > .flex.items-center:not(.flex-col) {
   overflow: hidden;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
@@ -288,9 +289,12 @@ html:not(.dark).ios #tc-demo-root [role='dialog'] {
   max-width: 16.875rem;
 }
 
-#tc-demo-root :where(.actions-button, .actions-label, .actions-group) .hairline-b,
-#tc-demo-root :where(.actions-button) .hairline-r,
-#tc-demo-root :where(.actions-button) .hairline-l {
+#tc-demo-root .tc-demo-overlay-host :where(button.hairline-b, [role='button'].hairline-b, .hairline-b[role='button']) {
+  border-color: var(--c-hairline-color) !important;
+}
+
+#tc-demo-root .tc-demo-overlay-host button.hairline-r,
+#tc-demo-root .tc-demo-overlay-host button.hairline-l {
   border-color: var(--c-hairline-color) !important;
 }
 

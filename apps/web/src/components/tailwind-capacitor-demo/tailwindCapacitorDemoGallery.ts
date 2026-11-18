@@ -83,7 +83,7 @@ import { tailwindCapacitorDemoTitle, type TailwindCapacitorDemoSlug } from '@/li
 import manifest from '../../tailwind-capacitor-snapshot/registry-manifest.json'
 import {
   destructiveActionColors,
-  openOverlayPhoneStage,
+  openOverlayRefStage,
   overlayScreenFiller,
   overlayUnderlayTrigger,
 } from './demoOverlayHelpers'
@@ -119,6 +119,17 @@ export type GalleryContext = {
   segmented: Ref<string>
   rangeValue: Ref<number>
   stepperValue: Ref<number>
+  stepperMinValue: Ref<number>
+  stepperMaxValue: Ref<number>
+  toggleOffChecked: Ref<boolean>
+  toggleOnChecked: Ref<boolean>
+  toggleAfterChecked: Ref<boolean>
+  checkboxOffChecked: Ref<boolean>
+  checkboxOnChecked: Ref<boolean>
+  chipFilledActive: Ref<boolean>
+  chipRemovableVisible: Ref<boolean>
+  radioOptionA: Ref<string>
+  radioOptionB: Ref<string>
   toggleOn: Ref<boolean>
   checkboxOn: Ref<boolean>
   radioVal: Ref<string>
@@ -126,6 +137,7 @@ export type GalleryContext = {
   tabsDemoActive: Ref<string>
   tabbarDemoActive: Ref<string>
   accordionDemoOpen: Ref<boolean>
+  accordionItemExpandedCopy: Ref<boolean>
   overlayTrigger: (label: string, openRef: Ref<boolean>, options?: { id?: string }) => VNode
 }
 
@@ -171,13 +183,25 @@ export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'mate
     segmented: ref('tab1'),
     rangeValue: ref(40),
     stepperValue: ref(2),
+    stepperMinValue: ref(0),
+    stepperMaxValue: ref(10),
+    toggleOffChecked: ref(false),
+    toggleOnChecked: ref(true),
+    toggleAfterChecked: ref(true),
+    checkboxOffChecked: ref(false),
+    checkboxOnChecked: ref(true),
+    chipFilledActive: ref(false),
+    chipRemovableVisible: ref(true),
+    radioOptionA: ref('a'),
+    radioOptionB: ref('b'),
     toggleOn: ref(true),
     checkboxOn: ref(true),
     radioVal: ref('a'),
     search: ref(''),
     tabsDemoActive: ref('a'),
     tabbarDemoActive: ref('home'),
-    accordionDemoOpen: ref(true),
+    accordionDemoOpen: ref(false),
+    accordionItemExpandedCopy: ref(true),
   }
 
   return attachGalleryContext(ctxBase)
@@ -502,7 +526,7 @@ function buildActionsFamilyStates(ctx: GalleryContext, focus: 'root' | 'button' 
   const sheetOpen: SlugStateDef = {
     id: 'sheet-open',
     label: 'Sheet open',
-    render: (c) => openOverlayPhoneStage(c, overlayScreenFiller(c, 'Actions'), actionsSheetOpen(c)),
+    render: (c) => openOverlayRefStage(c, overlayScreenFiller(c, 'Actions'), c.actionsOpen),
   }
   if (focus === 'button') {
     return [
@@ -565,7 +589,7 @@ function buildOverlayStates(
   slug: string,
   triggerLabel: string,
   openRef: keyof GalleryContext,
-  openRenderer: (ctx: GalleryContext) => VNode,
+  _openRenderer: (ctx: GalleryContext) => VNode,
   options?: { id?: string },
 ): SlugStateDef[] {
   const screenTitle = overlayUnderlayTitle(slug)
@@ -578,7 +602,25 @@ function buildOverlayStates(
     {
       id: 'open',
       label: 'Open',
-      render: (c) => openOverlayPhoneStage(c, overlayScreenFiller(c, screenTitle || 'App'), openRenderer(c)),
+      render: (c) => {
+        const openKey = openRef as keyof GalleryContext
+        const ref = c[openKey] as Ref<boolean>
+        const underlay =
+          options?.id != null
+            ? c.h('div', { class: 'tc-demo-screen-filler flex min-h-full flex-col justify-center p-4' }, [
+                c.h('button', {
+                  type: 'button',
+                  id: options.id,
+                  class:
+                    'tc-demo-overlay-trigger inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-blue-700 px-4 text-sm font-semibold text-white',
+                  onClick: () => {
+                    ref.value = true
+                  },
+                }, 'Open'),
+              ])
+            : overlayScreenFiller(c, screenTitle || 'App')
+        return openOverlayRefStage(c, underlay, ref)
+      },
     },
   ]
 }
@@ -590,9 +632,9 @@ function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
       label: 'Off',
       render: (c) =>
         h(Toggle, {
-          checked: c.toggleOn.value,
+          checked: c.toggleOffChecked.value,
           onChange: () => {
-            c.toggleOn.value = !c.toggleOn.value
+            c.toggleOffChecked.value = !c.toggleOffChecked.value
           },
         }),
     },
@@ -601,9 +643,9 @@ function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
       label: 'On',
       render: (c) =>
         h(Toggle, {
-          checked: c.toggleOn.value,
+          checked: c.toggleOnChecked.value,
           onChange: () => {
-            c.toggleOn.value = !c.toggleOn.value
+            c.toggleOnChecked.value = !c.toggleOnChecked.value
           },
         }),
     },
@@ -644,15 +686,31 @@ function buildChipStates(ctx: GalleryContext): SlugStateDef[] {
             Chip,
             {
               onClick: () => {
-                c.toggleOn.value = !c.toggleOn.value
+                c.chipFilledActive.value = !c.chipFilledActive.value
               },
-              class: c.toggleOn.value ? 'ring-2 ring-primary' : undefined,
+              class: c.chipFilledActive.value ? 'ring-2 ring-primary' : undefined,
             },
             { default: () => 'Capgo' },
           ),
         ]),
     },
-    { id: 'removable', label: 'Removable', render: () => h(Chip, { deleteButton: true }, { default: () => 'Removable' }) },
+    {
+      id: 'removable',
+      label: 'Removable',
+      render: (c) =>
+        c.chipRemovableVisible.value
+          ? h(
+              Chip,
+              {
+                deleteButton: true,
+                onDelete: () => {
+                  c.chipRemovableVisible.value = false
+                },
+              },
+              { default: () => 'Removable' },
+            )
+          : h('p', { class: 'p-3 text-sm opacity-70' }, 'Chip removed'),
+    },
     { id: 'outline', label: 'Outline', render: () => h(Chip, { outline: true }, { default: () => 'Outline' }) },
   ]
 }
@@ -706,7 +764,13 @@ function buildListItemStates(ctx: GalleryContext): SlugStateDef[] {
       render: (c) =>
         h(ListItem, {}, {
           title: () => 'Analytics',
-          after: () => h(Toggle, { checked: c.toggleOn.value, onClick: () => (c.toggleOn.value = !c.toggleOn.value) }),
+          after: () =>
+            h(Toggle, {
+              checked: c.toggleAfterChecked.value,
+              onClick: () => {
+                c.toggleAfterChecked.value = !c.toggleAfterChecked.value
+              },
+            }),
         }),
     },
     { id: 'badge', label: 'Badge', render: () => h(ListItem, { title: 'Inbox', badge: '12' }) },
@@ -750,7 +814,7 @@ function buildListStates(ctx: GalleryContext): SlugStateDef[] {
             h(
               ListItem,
               { title: 'Live updates', subtitle: 'Capgo channel' },
-              { media: () => h(Icon, { material: 'bolt', class: 'text-xl' }) },
+              { media: () => demoIconVnode(c, 'bolt', { class: 'text-xl' }) },
             ),
           ],
         }),
@@ -765,9 +829,9 @@ function buildCheckboxStates(ctx: GalleryContext): SlugStateDef[] {
       label: 'Off',
       render: (c) =>
         h(Checkbox, {
-          checked: c.checkboxOn.value,
+          checked: c.checkboxOffChecked.value,
           onChange: () => {
-            c.checkboxOn.value = !c.checkboxOn.value
+            c.checkboxOffChecked.value = !c.checkboxOffChecked.value
           },
         }),
     },
@@ -776,9 +840,9 @@ function buildCheckboxStates(ctx: GalleryContext): SlugStateDef[] {
       label: 'On',
       render: (c) =>
         h(Checkbox, {
-          checked: c.checkboxOn.value,
+          checked: c.checkboxOnChecked.value,
           onChange: () => {
-            c.checkboxOn.value = !c.checkboxOn.value
+            c.checkboxOnChecked.value = !c.checkboxOnChecked.value
           },
         }),
     },
@@ -786,68 +850,60 @@ function buildCheckboxStates(ctx: GalleryContext): SlugStateDef[] {
   ]
 }
 
-function buildRadioStates(ctx: GalleryContext): SlugStateDef[] {
-  return [
+function buildRadioRow(ctx: GalleryContext, group: 'a' | 'b', selected: Ref<string>) {
+  const { h } = ctx
+  const name = `tc-demo-radio-${group}`
+  const pick = (value: string) => {
+    selected.value = value
+  }
+  return h(
+    List,
+    {},
     {
-      id: 'option-a',
-      label: 'Option A',
-      render: (c) =>
+      default: () => [
         h(
-          List,
-          {},
+          ListItem,
           {
-            default: () => [
-              h(ListItem, {
-                radio: true,
-                checked: c.radioVal.value === 'a',
-                title: 'Option A',
-                onClick: () => {
-                  c.radioVal.value = 'a'
-                },
+            title: 'Option A',
+            label: true,
+            onClick: () => pick('a'),
+          },
+          {
+            media: () =>
+              h(Radio, {
+                name,
+                value: 'a',
+                checked: selected.value === 'a',
+                onChange: () => pick('a'),
               }),
-              h(ListItem, {
-                radio: true,
-                checked: c.radioVal.value === 'b',
-                title: 'Option B',
-                onClick: () => {
-                  c.radioVal.value = 'b'
-                },
-              }),
-            ],
           },
         ),
-    },
-    {
-      id: 'option-b',
-      label: 'Option B',
-      render: (c) => {
-        c.radioVal.value = 'b'
-        return h(
-          List,
-          {},
+        h(
+          ListItem,
           {
-            default: () => [
-              h(ListItem, {
-                radio: true,
-                checked: c.radioVal.value === 'a',
-                title: 'Option A',
-                onClick: () => {
-                  c.radioVal.value = 'a'
-                },
-              }),
-              h(ListItem, {
-                radio: true,
-                checked: c.radioVal.value === 'b',
-                title: 'Option B',
-                onClick: () => {
-                  c.radioVal.value = 'b'
-                },
-              }),
-            ],
+            title: 'Option B',
+            label: true,
+            onClick: () => pick('b'),
           },
-        )
-      },
+          {
+            media: () =>
+              h(Radio, {
+                name,
+                value: 'b',
+                checked: selected.value === 'b',
+                onChange: () => pick('b'),
+              }),
+          },
+        ),
+      ],
     },
+  )
+}
+
+function buildRadioStates(ctx: GalleryContext): SlugStateDef[] {
+  return [
+    { id: 'option-a', label: 'Option A', render: (c) => buildRadioRow(c, 'a', c.radioOptionA) },
+    { id: 'option-b', label: 'Option B', render: (c) => buildRadioRow(c, 'b', c.radioOptionB) },
   ]
 }
 

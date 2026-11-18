@@ -25,10 +25,10 @@ const beforeBaseUrl = process.env.TC_DEMO_BEFORE_BASE_URL
 const demoPath = '/plugins/tailwind-capacitor/demo/'
 
 /**
- * @param {string} sectionId
+ * @param {string} slug
  */
-function demoComponentPagePath(sectionId) {
-  return `/plugins/tailwind-capacitor/demo/${encodeURIComponent(sectionId)}/`
+function demoComponentPagePath(slug) {
+  return `/plugins/tailwind-capacitor/demo/${encodeURIComponent(slug)}/`
 }
 
 /**
@@ -44,8 +44,11 @@ function resolveDemoFrameLocator(page) {
 
 /**
  * @param {import('playwright').Page} page
+ * @param {string} [stateId]
  */
-async function resolveDemoFrame(page) {
+async function resolveDemoFrame(page, stateId = 'screen') {
+  const scoped = page.locator(`iframe.tc-demo-state-iframe[data-tc-state="${stateId}"]`)
+  if (await scoped.count()) return page.frameLocator(`iframe.tc-demo-state-iframe[data-tc-state="${stateId}"]`).first()
   const hasScreen = await page.locator('iframe.tc-demo-state-iframe[data-tc-state="screen"]').count()
   if (hasScreen) return page.frameLocator('iframe.tc-demo-state-iframe[data-tc-state="screen"]').first()
   const hasStateGallery = await page.locator('iframe.tc-demo-state-iframe').count()
@@ -76,11 +79,11 @@ const viewports = [
 ]
 
 const themeCompareSections = [
-  { slug: 'button', sectionId: 'capacitor-button' },
-  { slug: 'select', sectionId: 'capacitor-select' },
-  { slug: 'navbar', sectionId: 'capacitor-navbar' },
-  { slug: 'toggle', sectionId: 'capacitor-toggle' },
-  { slug: 'tabs', sectionId: 'capacitor-tabs' },
+  { slug: 'button', pageSlug: 'capacitor-button', stateId: 'solid' },
+  { slug: 'select', pageSlug: 'capacitor-select', stateId: 'closed' },
+  { slug: 'navbar', pageSlug: 'capacitor-navbar', stateId: 'standard' },
+  { slug: 'toggle', pageSlug: 'capacitor-toggle', stateId: 'off' },
+  { slug: 'tabs', pageSlug: 'capacitor-tabs', stateId: 'tab-one' },
 ]
 
 const onlyOpenShots = process.env.TC_DEMO_ONLY_OPEN === '1'
@@ -93,18 +96,25 @@ const openShotSlugs = process.env.TC_DEMO_OPEN_SLUGS?.split(',')
   .filter(Boolean)
 
 const componentTargets = [
-  { slug: 'button', sectionId: 'capacitor-button', open: null, openExpect: null },
-  { slug: 'notification', sectionId: 'capacitor-notification', open: null, openExpect: 'New message' },
-  { slug: 'tabs', sectionId: 'capacitor-tabs', open: null, openExpect: null },
-  { slug: 'toggle', sectionId: 'capacitor-toggle', open: null, openExpect: null },
-  { slug: 'list', sectionId: 'capacitor-list', open: null, openExpect: null },
-  { slug: 'list-input', sectionId: 'capacitor-list-input', open: null, openExpect: null },
-  { slug: 'sheet-open', sectionId: 'capacitor-sheet', open: /open sheet/i, openExpect: 'Sheet overlay content' },
-  { slug: 'actions-open', sectionId: 'capacitor-actions', open: /open actions/i, openExpect: 'Delete' },
-  { slug: 'dialog-open', sectionId: 'capacitor-dialog', open: /open dialog/i, openExpect: 'Sample dialog' },
-  { slug: 'alert-open', sectionId: 'capacitor-alert', open: /show alert/i, openExpect: 'Registry Alert' },
-  { slug: 'popover-open', sectionId: 'capacitor-popover', open: /open popover/i, openExpect: 'Popover item', expectInSection: false },
-  { slug: 'toast-open', sectionId: 'capacitor-toast', open: /show toast/i, openExpect: 'Toast from registry demo' },
+  { slug: 'button', pageSlug: 'capacitor-button', stateId: 'solid', open: null, openExpect: null },
+  { slug: 'notification', pageSlug: 'capacitor-notification', stateId: 'open', open: null, openExpect: 'New message' },
+  { slug: 'tabs', pageSlug: 'capacitor-tabs', stateId: 'tab-one', open: null, openExpect: null },
+  { slug: 'toggle', pageSlug: 'capacitor-toggle', stateId: 'off', open: null, openExpect: null },
+  { slug: 'list', pageSlug: 'capacitor-list', stateId: 'inset', open: null, openExpect: null },
+  { slug: 'list-input', pageSlug: 'capacitor-list-input', stateId: 'filled', open: null, openExpect: null },
+  { slug: 'sheet-open', pageSlug: 'capacitor-sheet', stateId: 'open', open: null, openExpect: 'Sheet overlay content' },
+  { slug: 'actions-open', pageSlug: 'capacitor-actions', stateId: 'open', open: null, openExpect: 'Delete' },
+  { slug: 'dialog-open', pageSlug: 'capacitor-dialog', stateId: 'open', open: null, openExpect: 'Sample dialog' },
+  { slug: 'alert-open', pageSlug: 'capacitor-alert', stateId: 'open', open: null, openExpect: 'Registry Alert' },
+  {
+    slug: 'popover-open',
+    pageSlug: 'capacitor-popover',
+    stateId: 'open',
+    open: null,
+    openExpect: 'Popover item',
+    expectInSection: false,
+  },
+  { slug: 'toast-open', pageSlug: 'capacitor-toast', stateId: 'open', open: null, openExpect: 'Bundle uploaded' },
 ]
 
 /**
@@ -254,8 +264,8 @@ async function stabilizePopoverForCapture(frame) {
   await new Promise((resolve) => setTimeout(resolve, 500))
 }
 
-async function screenshotPhoneFrame(page, filePath) {
-  await preparePhoneFrameForCapture(page)
+async function screenshotPhoneFrame(page, filePath, stateId = 'screen') {
+  await preparePhoneFrameForCapture(page, stateId)
   const frame = await resolveDemoContentFrame(page)
   if (!frame) throw new Error('Tailwind Capacitor demo iframe is not ready')
   await page.waitForTimeout(150)
@@ -339,26 +349,39 @@ async function waitOverlayTextInShellViewport(frame, text) {
  * @param {string | null} openExpect
  * @param {boolean} [expectInSection]
  */
-async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, expectInSection = false) {
+/**
+ * @param {import('playwright').Page} page
+ * @param {import('playwright').FrameLocator} frame
+ * @param {string} pageSlug
+ * @param {string} stateId
+ * @param {RegExp | null} openPattern
+ * @param {string | null} openExpect
+ * @param {boolean} [expectInSection]
+ */
+async function focusComponentInFrame(page, frame, pageSlug, stateId, openPattern, openExpect, expectInSection = false) {
   if (!openPattern) {
     await frame.locator('body').evaluate(() => {
       window.scrollTo(0, 0)
       document.querySelector('.tc-demo-page')?.scrollTo(0, 0)
     })
   }
-  const section = frame.locator(`#${sectionId}`)
-  if (await section.count()) {
-    await section.scrollIntoViewIfNeeded({ timeout: 20_000 })
-    await section.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20_000 })
+  const legacySection = frame.locator(`#${pageSlug}`)
+  const stateSection = page.locator(`[data-tc-demo-slug="${pageSlug}"] [data-tc-demo-state-section="${stateId}"]`)
+  if (await stateSection.count()) {
+    await stateSection.scrollIntoViewIfNeeded({ timeout: 20_000 })
+    await stateSection.locator('iframe.tc-demo-state-iframe').waitFor({ state: 'visible', timeout: 20_000 })
+  } else if (await legacySection.count()) {
+    await legacySection.scrollIntoViewIfNeeded({ timeout: 20_000 })
+    await legacySection.locator('.registry-demo-block').waitFor({ state: 'visible', timeout: 20_000 }).catch(() => {})
   }
   if (openPattern) {
-    const trigger = (await section.count())
-      ? section.getByRole('button', { name: openPattern })
+    const trigger = (await legacySection.count())
+      ? legacySection.getByRole('button', { name: openPattern })
       : frame.getByRole('button', { name: openPattern })
     await trigger.scrollIntoViewIfNeeded()
     await trigger.click({ timeout: 15_000, force: true })
     if (openExpect) {
-      const scope = openPattern && !expectInSection ? frame.locator('.tc-demo-overlay-host') : section
+      const scope = openPattern && !expectInSection ? frame.locator('.tc-demo-overlay-host') : legacySection
       if (!expectInSection) {
         await waitOverlayTextInShellViewport(frame, openExpect)
       } else {
@@ -370,10 +393,15 @@ async function focusComponentInFrame(frame, sectionId, openPattern, openExpect, 
     const settleMs = openExpect?.includes('Toast') ? 1400 : openExpect === 'Popover item' ? 1200 : 900
     await new Promise((resolve) => setTimeout(resolve, settleMs))
   } else if (openExpect) {
-    await section.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 })
-  }
-  if (!openPattern) {
-    await section.scrollIntoViewIfNeeded()
+    if (!expectInSection) {
+      await waitOverlayTextInShellViewport(frame, openExpect).catch(() =>
+        frame.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 }),
+      )
+    } else {
+      await frame.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 })
+    }
+    const settleMs = openExpect?.includes('Toast') ? 1400 : openExpect === 'Popover item' ? 1200 : 650
+    await new Promise((resolve) => setTimeout(resolve, settleMs))
   }
 }
 
@@ -434,18 +462,24 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
 
     if (applyThemes && combo) {
       for (const target of componentTargets) {
-        if (onlyOpenShots && !target.open) continue
+        if (onlyOpenShots && target.stateId !== 'open') continue
         if (openShotSlugs?.length && !openShotSlugs.includes(target.slug)) continue
-        if (target.open) {
-          await page.goto(`${urlBase}${demoComponentPagePath(target.sectionId)}`, {
-            waitUntil: 'domcontentloaded',
-            timeout: 120_000,
-          })
-          await applyTheme(page, combo.platform, combo.dark)
-        }
-        const shotFrame = await resolveDemoFrame(page)
+        await page.goto(`${urlBase}${demoComponentPagePath(target.pageSlug)}`, {
+          waitUntil: 'domcontentloaded',
+          timeout: 120_000,
+        })
+        await applyTheme(page, combo.platform, combo.dark)
+        const shotFrame = await resolveDemoFrame(page, target.stateId)
         await dismissOverlays(page, shotFrame)
-        await focusComponentInFrame(shotFrame, target.sectionId, target.open, target.openExpect, target.expectInSection)
+        await focusComponentInFrame(
+          page,
+          shotFrame,
+          target.pageSlug,
+          target.stateId,
+          target.open,
+          target.openExpect,
+          target.expectInSection,
+        )
         if (target.slug === 'popover-open') await stabilizePopoverForCapture(shotFrame)
         await page.waitForTimeout(300)
         if (
@@ -463,7 +497,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         }
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
         const outPath = join(outDir, fileName)
-        await screenshotPhoneFrame(page, outPath)
+        await screenshotPhoneFrame(page, outPath, target.stateId)
         if (target.slug === 'dialog-open' || target.slug === 'alert-open') {
           const rawFrame = await resolveDemoContentFrame(page)
           if (!rawFrame) throw new Error('iframe missing for dialog validation')
@@ -482,16 +516,22 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         const mdName = `demo-compare-${section.slug}-material-${viewport.prefix}-${tag}-${label}.png`
         const pairName = `demo-compare-${section.slug}-ios-vs-material-${viewport.prefix}-${tag}-${label}.png`
 
+        await page.goto(`${urlBase}${demoComponentPagePath(section.pageSlug)}`, {
+          waitUntil: 'domcontentloaded',
+          timeout: 120_000,
+        })
         await applyTheme(page, 'ios', combo.dark)
-        await focusComponentInFrame(frame, section.sectionId, null, null)
+        const iosFrame = await resolveDemoFrame(page, section.stateId)
+        await focusComponentInFrame(page, iosFrame, section.pageSlug, section.stateId, null, null)
         await page.waitForTimeout(250)
-        await screenshotPhoneFrame(page, join(outDir, iosName))
+        await screenshotPhoneFrame(page, join(outDir, iosName), section.stateId)
         manifest.push(await fileEntry(iosName))
 
         await applyTheme(page, 'material', combo.dark)
-        await focusComponentInFrame(frame, section.sectionId, null, null)
+        const mdFrame = await resolveDemoFrame(page, section.stateId)
+        await focusComponentInFrame(page, mdFrame, section.pageSlug, section.stateId, null, null)
         await page.waitForTimeout(250)
-        await screenshotPhoneFrame(page, join(outDir, mdName))
+        await screenshotPhoneFrame(page, join(outDir, mdName), section.stateId)
         manifest.push(await fileEntry(mdName))
 
         if (await stitchSideBySide(join(outDir, iosName), join(outDir, mdName), join(outDir, pairName))) {

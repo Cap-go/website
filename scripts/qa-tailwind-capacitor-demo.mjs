@@ -258,7 +258,7 @@ async function assertDialogButtonPreviewNoStrayRule(page, label) {
     if (!hairlineButtons.length) return true
     const last = hairlineButtons[hairlineButtons.length - 1]
     const w = getComputedStyle(last).borderRightWidth
-    return parseFloat(w) < 0.5 ? true : `trailing hairline-r ${w}`
+    return Number.parseFloat(w) < 0.5 ? true : `trailing hairline-r ${w}`
   })
   record(ok === true, `${label}: dialog button preview (${String(ok)})`)
 }

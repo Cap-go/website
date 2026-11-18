@@ -196,30 +196,28 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'expanded-copy',
         label: 'Expanded copy',
-        render: (c) => {
-          c.accordionDemoOpen.value = true
-          return h('div', { class: 'w-full tc-demo-accordion-expanded' }, [
+        render: (c) =>
+          h('div', { class: 'w-full tc-demo-accordion-expanded' }, [
             h(Accordion, {}, {
               default: () =>
                 h(
                   AccordionItem,
                   {
                     onClick: () => {
-                      c.accordionDemoOpen.value = !c.accordionDemoOpen.value
+                      c.accordionItemExpandedCopy.value = !c.accordionItemExpandedCopy.value
                     },
                   },
                   { default: () => 'Billing details' },
                 ),
             }),
-            c.accordionDemoOpen.value
+            c.accordionItemExpandedCopy.value
               ? h(
                   'p',
                   { class: 'px-4 pb-3 text-sm opacity-80 tc-demo-accordion-expanded-body' },
                   'Invoices, receipts, and tax settings appear here when expanded.',
                 )
               : null,
-          ])
-        },
+          ]),
       },
       {
         id: 'stacked',
@@ -651,7 +649,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
                   title: 'Swipe row',
                   subtitle: swiped ? 'Actions revealed' : 'Swipe left',
                   link: true,
-                  class: swiped ? '-translate-x-12 bg-white dark:bg-neutral-900 transition-transform' : 'bg-white dark:bg-neutral-900',
+                  class: swiped ? '-translate-x-16 bg-white dark:bg-neutral-900 transition-transform' : 'bg-white dark:bg-neutral-900',
                 }),
             }),
           ]),
@@ -730,14 +728,14 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'with-icons',
         label: 'With icons',
-        render: () =>
+        render: (c) =>
           h(MenuList, {}, {
             default: () => [
               h(
                 MenuListItem,
                 { href: '#' },
                 {
-                  media: () => demoIconVnode(ctx, 'edit', { class: 'text-xl' }),
+                  media: () => demoIconVnode(c, 'edit', { class: 'text-xl shrink-0' }),
                   default: () => 'Edit',
                 },
               ),
@@ -745,7 +743,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
                 MenuListItem,
                 { href: '#' },
                 {
-                  media: () => demoIconVnode(ctx, 'delete', { class: 'text-xl' }),
+                  media: () => demoIconVnode(c, 'delete', { class: 'text-xl shrink-0' }),
                   default: () => 'Delete',
                 },
               ),
@@ -1175,25 +1173,23 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   },
   'capacitor-stepper': (ctx) => {
     const { h } = ctx
-    const stepper = (preset: number) => (c: GalleryContext) => {
-      c.stepperValue.value = preset
-      return h(Stepper, {
-        value: c.stepperValue.value,
+    const bindStepper = (valueRef: import('vue').Ref<number>) => (c: GalleryContext) =>
+      h(Stepper, {
+        value: valueRef.value,
         onInput: (event: Event) => {
           const target = event.target
-          if (target instanceof HTMLInputElement) c.stepperValue.value = Number(target.value) || 0
+          if (target instanceof HTMLInputElement) valueRef.value = Number(target.value) || 0
         },
         onPlus: () => {
-          c.stepperValue.value += 1
+          valueRef.value += 1
         },
         onMinus: () => {
-          c.stepperValue.value = Math.max(0, c.stepperValue.value - 1)
+          valueRef.value = Math.max(0, valueRef.value - 1)
         },
       })
-    }
     return [
-      { id: 'min', label: 'Min', render: stepper(0) },
-      { id: 'max', label: 'Max', render: stepper(10) },
+      { id: 'min', label: 'Min', render: bindStepper(ctx.stepperMinValue) },
+      { id: 'max', label: 'Max', render: bindStepper(ctx.stepperMaxValue) },
       { id: 'disabled', label: 'Disabled', render: () => h(Stepper, { value: 2, inputDisabled: true }) },
     ]
   },

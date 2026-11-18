@@ -17,6 +17,15 @@ export function openOverlayPhoneStage(ctx: GalleryContext, underlay: VNode, over
   ])
 }
 
+/** Opens a shell overlay via gallery ref; overlay UI lives in TailwindCapacitorDemoShell overlay host. */
+export function openOverlayRefStage(ctx: GalleryContext, underlay: VNode, openRef: Ref<boolean>): VNode {
+  const { h } = ctx
+  openRef.value = true
+  return h('div', { class: 'tc-demo-overlay-open-stage tc-demo-state-fill' }, [
+    h('div', { class: 'tc-demo-underlay-screen' }, [underlay]),
+  ])
+}
+
 export function overlayScreenFiller(ctx: GalleryContext, label = 'Settings'): VNode {
   const { h } = ctx
   return h('div', { class: 'tc-demo-screen-filler flex min-h-full flex-col' }, [

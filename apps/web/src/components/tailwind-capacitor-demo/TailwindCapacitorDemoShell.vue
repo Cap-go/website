@@ -244,6 +244,17 @@ const galleryContext = computed(() =>
     segmented,
     rangeValue,
     stepperValue,
+    stepperMinValue,
+    stepperMaxValue,
+    toggleOffChecked,
+    toggleOnChecked,
+    toggleAfterChecked,
+    checkboxOffChecked,
+    checkboxOnChecked,
+    chipFilledActive,
+    chipRemovableVisible,
+    radioOptionA,
+    radioOptionB,
     toggleOn,
     checkboxOn,
     radioVal,
@@ -251,6 +262,7 @@ const galleryContext = computed(() =>
     tabsDemoActive,
     tabbarDemoActive,
     accordionDemoOpen,
+    accordionItemExpandedCopy,
   }),
 )
 
@@ -294,6 +306,10 @@ function syncThemeToDocument() {
 
 watch([platform, dark], syncThemeToDocument, { immediate: true })
 
+watch([activeSlug, activeStateId], () => {
+  closeDemoOverlays()
+})
+
 const actionsOpen = ref(false)
 const dialogOpen = ref(false)
 const alertOpen = ref(false)
@@ -307,13 +323,25 @@ const notificationOpen = ref(false)
 const segmented = ref('tab1')
 const rangeValue = ref(40)
 const stepperValue = ref(2)
+const stepperMinValue = ref(0)
+const stepperMaxValue = ref(10)
+const toggleOffChecked = ref(false)
+const toggleOnChecked = ref(true)
+const toggleAfterChecked = ref(true)
+const checkboxOffChecked = ref(false)
+const checkboxOnChecked = ref(true)
+const chipFilledActive = ref(false)
+const chipRemovableVisible = ref(true)
+const radioOptionA = ref('a')
+const radioOptionB = ref('b')
 const toggleOn = ref(true)
 const checkboxOn = ref(true)
 const radioVal = ref('a')
 const search = ref('')
 const tabsDemoActive = ref('a')
 const tabbarDemoActive = ref('home')
-const accordionDemoOpen = ref(true)
+const accordionDemoOpen = ref(false)
+const accordionItemExpandedCopy = ref(true)
 
 /** @param {MessageEvent} event */
 function onMessage(event) {
