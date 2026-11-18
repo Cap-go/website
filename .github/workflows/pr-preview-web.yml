@@ -85,7 +85,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          bun run --cwd ../.. wrangler preview --name "${{ needs.resolve-preview-name.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
+          bun wrangler preview --name "${{ needs.resolve-preview-name.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
           preview_url=$(PREVIEW_NAME="${{ needs.resolve-preview-name.outputs.name }}" node -e "
             const fs = require('node:fs');
             const raw = fs.readFileSync('preview.json', 'utf8');
@@ -207,7 +207,7 @@ jobs:
           set -euo pipefail
           PREVIEW_NAME="${{ needs.resolve-preview-name.outputs.name }}"
           set +e
-          output="$(bun run --cwd ../.. wrangler preview delete --name "$PREVIEW_NAME" -y 2>&1)"
+          output="$(bun wrangler preview delete --name "$PREVIEW_NAME" -y 2>&1)"
           status=$?
           set -e
           if [ "$status" -ne 0 ]; then
