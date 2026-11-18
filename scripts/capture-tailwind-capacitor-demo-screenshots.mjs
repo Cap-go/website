@@ -167,7 +167,7 @@ async function assertThemeInFrame(page, frame, platform) {
  * @param {boolean} dark
  */
 async function waitForDemoIframeReady(page) {
-  const iframe = resolveDemoFrameLocator(page)
+  const iframe = page.locator('iframe.tc-demo-state-iframe, #tc-demo-iframe').first()
   await iframe.evaluate((el) => {
     if (el instanceof HTMLIFrameElement) {
       return new Promise((resolve) => {
@@ -192,7 +192,7 @@ async function applyTheme(page, platform, dark) {
     await controls.locator(`[data-tc-dark="${dark ? '1' : '0'}"]`).click({ force: true })
   }
   if (!iframeCount) return
-  await resolveDemoFrameLocator(page).waitFor({ state: 'visible', timeout: 60_000 })
+  await page.locator('iframe.tc-demo-state-iframe, #tc-demo-iframe').first().waitFor({ state: 'visible', timeout: 60_000 })
   await page.evaluate(
     ([plat, isDark]) => {
       for (const iframe of document.querySelectorAll('iframe.tc-demo-state-iframe, #tc-demo-iframe')) {
