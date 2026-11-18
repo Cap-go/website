@@ -279,7 +279,10 @@ const galleryContext = computed(() =>
     tabsDemoActive,
     tabbarDemoActive,
     accordionDemoOpen,
+    accordionItemCollapsedOpen,
     accordionItemExpandedCopy,
+    itemSlidingSwiped,
+    itemSlidingTouchStartX,
   }),
 )
 
@@ -362,7 +365,10 @@ const search = ref('')
 const tabsDemoActive = ref('a')
 const tabbarDemoActive = ref('home')
 const accordionDemoOpen = ref(false)
+const accordionItemCollapsedOpen = ref(false)
 const accordionItemExpandedCopy = ref(true)
+const itemSlidingSwiped = ref(false)
+const itemSlidingTouchStartX = ref<number | null>(null)
 
 /** @param {MessageEvent} event */
 function onMessage(event) {

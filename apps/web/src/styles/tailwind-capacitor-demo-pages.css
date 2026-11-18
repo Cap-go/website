@@ -15,6 +15,6 @@ body:has(#tc-demo-page-intro) #tc-demo-page-intro [data-tc-demo-intro] {
 
 @media (max-width: 639px) {
   body:has(#tc-demo-page-intro) #tc-demo-page-intro {
-    padding-top: max(4.25rem, calc(env(safe-area-inset-top) + 3.5rem));
+    padding-top: max(1.75rem, calc(env(safe-area-inset-top) + 1rem));
   }
 }
