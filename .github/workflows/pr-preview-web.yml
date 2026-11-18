@@ -79,7 +79,7 @@ jobs:
         run: |
           set -euo pipefail
           bunx wrangler@4.137.0 preview --name "${{ needs.resolve-preview-name.outputs.name }}" --json 2>wrangler.stderr | tee preview.json
-          preview_url=$(node -e "
+          preview_url=$(PREVIEW_NAME="${{ needs.resolve-preview-name.outputs.name }}" node -e "
             const fs = require('node:fs');
             const raw = fs.readFileSync('preview.json', 'utf8');
             const start = raw.indexOf('{');
@@ -96,7 +96,15 @@ jobs:
               ...(data.deployment?.urls ?? []),
               ...(data.deployment_urls ?? []),
             ];
-            const url = urls.find((u) => typeof u === 'string' && u.startsWith('https://'));
+            let url = urls.find((u) => typeof u === 'string' && u.startsWith('https://'));
+            if (!url) {
+              const slug = data.preview?.slug || data.preview?.name || process.env.PREVIEW_NAME;
+              const workersSubdomain = process.env.CLOUDFLARE_WORKERS_SUBDOMAIN || 'digitalshift-ee';
+              const workerScript = 'capgo-website';
+              if (slug) {
+                url = \`https://\${slug}-\${workerScript}.\${workersSubdomain}.workers.dev\`;
+              }
+            }
             if (!url) {
               console.error('No preview URL in wrangler output');
               console.error(raw);
