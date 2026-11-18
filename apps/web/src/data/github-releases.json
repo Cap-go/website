@@ -1,6 +1,30 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.108.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.108.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.108.2",
+    "pubDate": "2026-11-17T20:51:32.000Z",
+    "description": "🆕 Changelog Added Billing : Enabled invoice PDF generation for Capgo accounts using existing Stripe invoice numbers. App Deployment : Introduced regional plugin serving policies to control how plugins are served across different regions. Assistant : Added Markdown rendering support to the console chat interface for improved readability of AI responses. MCP : Added guidance for web applications to transition to store ready Capacitor apps. Changed Billing : Updated storage billing model to cal..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.61.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.61.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.61.0",
+    "pubDate": "2026-11-17T12:26:28.000Z",
+    "description": "🆕 Changelog Added Introduced logic to automatically drop the when the private settings configuration matches the specified criteria. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.60.0...capgo 22.61.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.60.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.60.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.60.0",
+    "pubDate": "2026-11-17T03:31:32.000Z",
+    "description": "🆕 Changelog Added Regional Plugin Serving Policies : Introduced support for regional plugin serving policies, allowing for more granular control over how and where plugins are served across different regions. Fixed Dashboard Plan Suggestion Data : Corrected the loading of total organizational storage data in the dashboard, ensuring that plan suggestions are now based on accurate storage metrics. Changed API Performance : Optimized API request handling to significantly reduce request costs an..."
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.59.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.59.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.59.0",
@@ -294,30 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.1",
     "pubDate": "2026-11-13T01:01:49.000Z",
     "description": "🆕 Changelog Fixed Validated and restored 24 hour deployment reports to ensure accurate email delivery of deployment metrics. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.106.1...capgo 22.44.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.44.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.0",
-    "pubDate": "2026-11-13T00:39:22.000Z",
-    "description": "🆕 Changelog Added Auth : Capture user country during signup and automatically attach this data to Stripe customer profiles to improve regional analytics and billing context. Plugin : Serve plugin state from Key Value storage with a progressive rollout strategy to enhance performance and availability. Fixed CLI : Log the updater version string when delta auto encryption is triggered to improve debugging visibility for update processes. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/c..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.106.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.0",
-    "pubDate": "2026-11-12T23:34:35.000Z",
-    "description": "🆕 Changelog Added Introduced structured outputs for all hosted MCP tools to improve type safety and data validation. Changed Updated CLI documentation to reflect recent changes. Upgraded benchmarking infrastructure for Node.js 24 compatibility. Fixed Resolved race conditions in the CI backend test bootstrap process by serializing initialization steps. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.105.1...cli 8.106.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.105.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.105.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.105.1",
-    "pubDate": "2026-11-12T18:29:38.000Z",
-    "description": "🆕 Changelog Added Introduced simulator access key environment configuration to support enhanced simulation workflows. Changed Separated account and organization navigation structures in settings to improve clarity and reduce user confusion. Isolated development database storage and telemetry in pre production environments to prevent data leakage and ensure accurate performance metrics. Removed stale beta messaging from CLI MCP and console interfaces to reflect current feature stability. Fixe..."
   },
   {
     "category": "release",
@@ -665,11 +665,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-firebase authentication/v8.3.1",
-    "link": "https://github.com/Cap-go/capacitor-firebase/releases/tag/authentication/v8.3.1",
-    "guid": "https://github.com/Cap-go/capacitor-firebase/releases/tag/authentication/v8.3.1",
-    "pubDate": "2026-11-17T03:05:20.000Z",
-    "description": "🆕 Changelog chore(release): authentication 8.3.1 (7ce02ad) chore: remove patch package and patches, use plain docgen like other plugins ( 23) (6ba5ec3) chore: sync from upstream capawesome team/capacitor firebase ( 13) (2a34102) docs: add AI assisted setup instructions (f548754) docs: use dynamic readme banner (bae1933) 🔗 Full Changelog : https://github.com/Cap go/capacitor firebase/compare/authentication/v8.0.5...authentication/v8.3.1"
+    "title": "capacitor-firebase storage/v8.3.2",
+    "link": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.3.2",
+    "guid": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.3.2",
+    "pubDate": "2026-11-17T04:27:55.000Z",
+    "description": "🆕 Changelog chore(release): storage 8.3.2 (9225abb) chore: remove patch package and patches, use plain docgen like other plugins ( 23) (6ba5ec3) 🔗 Full Changelog : https://github.com/Cap go/capacitor firebase/compare/storage/v8.3.1...storage/v8.3.2"
   },
   {
     "category": "release",
@@ -705,11 +705,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-ibeacon 8.1.51",
-    "link": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.51",
-    "guid": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.51",
-    "pubDate": "2026-11-13T13:06:17.000Z",
-    "description": "🆕 Changelog Fixed Aligned Android toolchain versions with the official Capacitor 8 templates, improving compatibility with Capacitor 8 projects and reducing build issues. 🔗 Full Changelog : https://github.com/Cap go/capacitor ibeacon/compare/8.1.50...8.1.51"
+    "title": "capacitor-ibeacon 8.1.52",
+    "link": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.52",
+    "guid": "https://github.com/Cap-go/capacitor-ibeacon/releases/tag/8.1.52",
+    "pubDate": "2026-11-17T15:11:54.000Z",
+    "description": "🆕 Changelog Fixed Fixed an issue on Android where the background service scan strategy was not preserved when reloading configuration, ensuring consistent scanning behavior. ( ) 🔗 Full Changelog : https://github.com/Cap go/capacitor ibeacon/compare/8.1.51...8.1.52"
   },
   {
     "category": "release",
@@ -1201,11 +1201,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-speech-recognition 8.5.1",
-    "link": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.5.1",
-    "guid": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.5.1",
-    "pubDate": "2026-11-15T01:18:50.000Z",
-    "description": "🆕 Changelog Fixed Released the iOS audio session when a legacy recognition session ends, preventing audio resources from remaining active and improving compatibility with other audio features in your app. 🔗 Full Changelog : https://github.com/Cap go/capacitor speech recognition/compare/8.5.0...8.5.1"
+    "title": "capacitor-speech-recognition 8.6.0",
+    "link": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.6.0",
+    "guid": "https://github.com/Cap-go/capacitor-speech-recognition/releases/tag/8.6.0",
+    "pubDate": "2026-11-17T15:11:10.000Z",
+    "description": "🆕 Changelog Added Added Android support for to maintain a single listening session across brief pauses, keeping speech recognition active instead of restarting the session after each pause. This improves transcription continuity and responsiveness for intermittent speech. ( 41) 🔗 Full Changelog : https://github.com/Cap go/capacitor speech recognition/compare/8.5.1...8.6.0"
   },
   {
     "category": "release",

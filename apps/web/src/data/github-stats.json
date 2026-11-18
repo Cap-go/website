@@ -1,12 +1,12 @@
 {
   "repositoryCount": 144,
   "contributorCount": 613,
-  "versionCount": 16869,
-  "releaseCount": 7504,
-  "closedIssueCount": 1802,
-  "mergedPullRequestCount": 10305,
-  "resolvedItemCount": 12107,
-  "totalStars": 3232,
+  "versionCount": 16876,
+  "releaseCount": 7516,
+  "closedIssueCount": 1803,
+  "mergedPullRequestCount": 10323,
+  "resolvedItemCount": 12126,
+  "totalStars": 3234,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 213,
       "contributors": 30,
-      "versionTags": 5981,
+      "versionTags": 5986,
       "releases": 1000,
       "closedIssues": 422,
-      "mergedPullRequests": 2876
+      "mergedPullRequests": 2892
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -388,7 +388,7 @@
     },
     "Cap-go/capacitor-social-login": {
       "url": "https://github.com/Cap-go/capacitor-social-login",
-      "stars": 223,
+      "stars": 224,
       "contributors": 24,
       "versionTags": 354,
       "releases": 138,
@@ -777,10 +777,10 @@
       "url": "https://github.com/Cap-go/capacitor-speech-recognition",
       "stars": 18,
       "contributors": 9,
-      "versionTags": 43,
-      "releases": 41,
+      "versionTags": 44,
+      "releases": 42,
       "closedIssues": 9,
-      "mergedPullRequests": 30
+      "mergedPullRequests": 31
     },
     "Cap-go/capacitor-textinteraction": {
       "url": "https://github.com/Cap-go/capacitor-textinteraction",
@@ -849,10 +849,10 @@
       "url": "https://github.com/Cap-go/capacitor-ibeacon",
       "stars": 13,
       "contributors": 4,
-      "versionTags": 68,
-      "releases": 59,
-      "closedIssues": 4,
-      "mergedPullRequests": 58
+      "versionTags": 69,
+      "releases": 60,
+      "closedIssues": 5,
+      "mergedPullRequests": 59
     },
     "Cap-go/capacitor-nfc": {
       "url": "https://github.com/Cap-go/capacitor-nfc",
@@ -1036,7 +1036,7 @@
     },
     "Cap-go/capacitor-stripe-pay": {
       "url": "https://github.com/Cap-go/capacitor-stripe-pay",
-      "stars": 4,
+      "stars": 5,
       "contributors": 2,
       "versionTags": 13,
       "releases": 13,
@@ -1165,7 +1165,7 @@
       "stars": 6,
       "contributors": 46,
       "versionTags": 351,
-      "releases": 8,
+      "releases": 18,
       "closedIssues": 1,
       "mergedPullRequests": 19
     },
