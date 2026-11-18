@@ -35,11 +35,7 @@ function demoComponentPagePath(slug) {
  * @param {import('playwright').Page} page
  */
 function resolveDemoFrameLocator(page) {
-  return page
-    .locator('iframe.tc-demo-state-iframe[data-tc-state="screen"]')
-    .first()
-    .or(page.locator('iframe.tc-demo-state-iframe').first())
-    .or(page.locator('#tc-demo-iframe'))
+  return page.locator('iframe.tc-demo-state-iframe, #tc-demo-iframe').first()
 }
 
 /**
@@ -49,11 +45,7 @@ function resolveDemoFrameLocator(page) {
 async function resolveDemoFrame(page, stateId = 'screen') {
   const scoped = page.locator(`iframe.tc-demo-state-iframe[data-tc-state="${stateId}"]`)
   if (await scoped.count()) return page.frameLocator(`iframe.tc-demo-state-iframe[data-tc-state="${stateId}"]`).first()
-  const hasScreen = await page.locator('iframe.tc-demo-state-iframe[data-tc-state="screen"]').count()
-  if (hasScreen) return page.frameLocator('iframe.tc-demo-state-iframe[data-tc-state="screen"]').first()
-  const hasStateGallery = await page.locator('iframe.tc-demo-state-iframe').count()
-  if (hasStateGallery) return page.frameLocator('iframe.tc-demo-state-iframe').first()
-  return page.frameLocator('#tc-demo-iframe')
+  return page.frameLocator('iframe.tc-demo-state-iframe, #tc-demo-iframe').first()
 }
 
 /**
