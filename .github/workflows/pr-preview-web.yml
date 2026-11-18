@@ -70,6 +70,20 @@ jobs:
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
 
+      - name: Enable workers.dev Preview URLs (production route stays off)
+        working-directory: apps/web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          curl -sf -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts/capgo-website/subdomain" \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"enabled":false,"previews_enabled":true}' \
+            | node -e "const fs=require('fs');const j=JSON.parse(fs.readFileSync(0,'utf8'));if(!j.success)throw new Error(JSON.stringify(j.errors));console.log(JSON.stringify(j.result));"
+
       - name: Deploy Worker preview
         id: worker_preview
         working-directory: apps/web
@@ -101,7 +115,10 @@ jobs:
               const slug = data.preview?.slug || data.preview?.name || process.env.PREVIEW_NAME;
               const workersSubdomain = process.env.CLOUDFLARE_WORKERS_SUBDOMAIN || 'digitalshift-ee';
               const workerScript = 'capgo-website';
-              if (slug) {
+              const deployId = data.deployment?.id?.split('-')?.[0];
+              if (deployId) {
+                url = \`https://\${deployId}-\${workerScript}.\${workersSubdomain}.workers.dev\`;
+              } else if (slug) {
                 url = \`https://\${slug}-\${workerScript}.\${workersSubdomain}.workers.dev\`;
               }
             }
