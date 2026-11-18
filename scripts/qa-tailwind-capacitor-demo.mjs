@@ -409,12 +409,14 @@ async function exerciseInteractions(target, slug, stateId, label) {
         await page.locator('.tc-demo-accordion-interactive button').first().click({ timeout: 4000, force: true })
       })
     }
-    if (slug === 'capacitor-accordion-item' && (stateId === 'expanded-copy' || stateId === 'collapsed')) {
+    if (slug === 'capacitor-accordion-item' && stateId === 'expanded-copy') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page
-          .locator('.tc-demo-accordion-expanded button, .tc-demo-accordion-interactive button')
-          .first()
-          .click({ timeout: 4000, force: true })
+        await page.locator('.tc-demo-accordion-expanded button').first().click({ timeout: 4000, force: true })
+      })
+    }
+    if (slug === 'capacitor-accordion-item' && stateId === 'collapsed') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.locator('.tc-demo-accordion-interactive button').first().click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-chip' && stateId === 'removable') {
