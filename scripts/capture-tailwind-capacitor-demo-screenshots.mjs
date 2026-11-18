@@ -394,9 +394,10 @@ async function focusComponentInFrame(page, frame, pageSlug, stateId, openPattern
     await new Promise((resolve) => setTimeout(resolve, settleMs))
   } else if (openExpect) {
     if (!expectInSection) {
-      await waitOverlayTextInShellViewport(frame, openExpect).catch(() =>
-        frame.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 }),
-      )
+      const overlay = frame.locator('.tc-demo-overlay-host')
+      await overlay.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 25_000 }).catch(async () => {
+        await waitOverlayTextInShellViewport(frame, openExpect)
+      })
     } else {
       await frame.getByText(openExpect, { exact: false }).first().waitFor({ state: 'visible', timeout: 12_000 })
     }

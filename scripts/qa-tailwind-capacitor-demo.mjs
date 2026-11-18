@@ -366,17 +366,20 @@ async function exerciseInteractions(target, slug, stateId, label) {
   try {
     if (slug === 'capacitor-toggle' && stateId === 'off') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('input[role="switch"]').first().click({ timeout: 4000 })
+        const track = page.locator('label, .toggle').filter({ has: page.locator('input[role="switch"]') }).first()
+        await track.click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-toggle' && stateId === 'on') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('input[role="switch"]').first().click({ timeout: 4000 })
+        const track = page.locator('label, .toggle').filter({ has: page.locator('input[role="switch"]') }).first()
+        await track.click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-checkbox' && (stateId === 'off' || stateId === 'on')) {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.locator('input[type="checkbox"]').first().click({ timeout: 4000 })
+        const row = page.locator('label, .checkbox').filter({ has: page.locator('input[type="checkbox"]') }).first()
+        await row.click({ timeout: 4000, force: true })
       })
     }
     if (slug === 'capacitor-radio' && stateId === 'option-b') {
