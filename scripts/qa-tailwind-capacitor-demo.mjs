@@ -231,11 +231,8 @@ async function assertDialogHairlineWithinDialog(page, label) {
  * @param {string} label
  */
 async function assertDialogBodyNotSeeThrough(page, slug, label) {
-  if (slug === 'capacitor-dialog') {
-    const open = page.getByRole('button', { name: /open dialog/i })
-    if (await open.count()) await open.click({ timeout: 8000 }).catch(() => {})
-  } else if (slug === 'capacitor-alert') {
-    const open = page.getByRole('button', { name: /show alert/i })
+  if (!(await page.locator('[role="dialog"]').count())) {
+    const open = page.getByRole('button', { name: /open dialog|show alert/i }).first()
     if (await open.count()) await open.click({ timeout: 8000 }).catch(() => {})
   }
   await page.waitForSelector('[role="dialog"]', { timeout: 12_000 }).catch(() => {})
@@ -325,34 +322,101 @@ async function assertStateClipping(pageOrFrame, stateId, label) {
 }
 
 /**
+ * @param {Buffer} a
+ * @param {Buffer} b
+ */
+async function screenshotDiffMean(a, b) {
+  const imgA = await sharp(a).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const imgB = await sharp(b).ensureAlpha().resize(imgA.info.width, imgA.info.height).raw().toBuffer()
+  const ch = imgA.info.channels
+  const n = imgA.info.width * imgA.info.height
+  let sum = 0
+  for (let i = 0; i < n; i += 1) {
+    const o = i * ch
+    for (let c = 0; c < 3; c += 1) sum += Math.abs(imgA.data[o + c] - imgB.data[o + c])
+  }
+  return sum / (n * 3)
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {string} slug
+ * @param {string} stateId
+ * @param {string} label
+ * @param {() => Promise<void>} action
+ */
+async function assertClickChangesPixels(page, slug, stateId, label, action) {
+  const root = page.locator('#tc-demo-root')
+  const before = await root.screenshot()
+  await action()
+  await page.waitForTimeout(280)
+  const after = await root.screenshot()
+  const mean = await screenshotDiffMean(before, after)
+  record(mean > 2.5, `${label}: click pixel change on ${slug}/${stateId} (mean ${mean.toFixed(2)})`)
+}
+
+/**
  * @param {import('playwright').Page | import('playwright').Frame} target
  * @param {string} slug
+ * @param {string} stateId
+ * @param {string} label
  */
-async function exerciseInteractions(target, slug) {
+async function exerciseInteractions(target, slug, stateId, label) {
+  const page = /** @type {import('playwright').Page} */ (target)
   try {
-    if (slug === 'capacitor-toggle' || slug === 'capacitor-checkbox' || slug === 'capacitor-radio') {
-      const control = target.locator('[data-tc-demo-state="on"] .toggle, [data-tc-demo-state="on"] input, [data-tc-demo-state="on"] [role="checkbox"], [data-tc-demo-state="option-a"] .item-content').first()
-      if (await control.count()) await control.click({ timeout: 3000 }).catch(() => {})
+    if (slug === 'capacitor-toggle' && stateId === 'off') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.locator('input[role="switch"]').first().click({ timeout: 4000 })
+      })
+    }
+    if (slug === 'capacitor-toggle' && stateId === 'on') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.locator('input[role="switch"]').first().click({ timeout: 4000 })
+      })
+    }
+    if (slug === 'capacitor-checkbox' && (stateId === 'off' || stateId === 'on')) {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.locator('input[type="checkbox"]').first().click({ timeout: 4000 })
+      })
+    }
+    if (slug === 'capacitor-radio' && stateId === 'option-b') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.getByText('Option B', { exact: true }).click({ timeout: 4000 })
+      })
+    }
+    if (slug === 'capacitor-stepper' && stateId === 'min') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.locator('.stepper button').last().click({ timeout: 4000 })
+      })
+    }
+    if (slug === 'capacitor-accordion-item' && stateId === 'expanded-copy') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.locator('.accordion-item button, .accordion-item').first().click({ timeout: 4000 })
+      })
+    }
+    if (slug === 'capacitor-chip' && stateId === 'removable') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        const del = page.locator('.chip button, [class*="delete"]').first()
+        if (await del.count()) await del.click({ timeout: 4000 })
+      })
     }
     if (slug === 'capacitor-tabs' || slug === 'capacitor-tab' || slug === 'capacitor-segmented' || slug === 'capacitor-segmented-button') {
       const tab = target.locator('[data-tc-demo-state] .tab-link, [data-tc-demo-state] .tab, [data-tc-demo-state] .segmented button, [data-tc-demo-state] button.tab').nth(1)
       if (await tab.count()) await tab.click({ timeout: 3000 }).catch(() => {})
     }
     if (slug === 'capacitor-tabbar' || slug === 'capacitor-tabbar-link') {
-      const link = target.locator('[data-tc-demo-state] .tabbar a, [data-tc-demo-state] .tabbar-link').nth(1)
+      const link = page.locator('.tabbar a, .tabbar-link').nth(1)
       if (await link.count()) await link.click({ timeout: 3000 }).catch(() => {})
     }
-    if (slug === 'capacitor-stepper') {
-      const plus = target.locator('[data-tc-demo-state] .stepper button').last()
-      if (await plus.count()) await plus.click({ timeout: 3000 }).catch(() => {})
-    }
-    if (slug === 'capacitor-accordion' || slug === 'capacitor-accordion-item') {
-      const item = target.locator('[data-tc-demo-state] .accordion-item button, [data-tc-demo-state] .accordion-item').first()
-      if (await item.count()) await item.click({ timeout: 3000 }).catch(() => {})
-    }
-    if (slug === 'capacitor-chip') {
-      const chip = target.locator('[data-tc-demo-state="filled"] .chip, [data-tc-demo-state="filled"] [class*="chip"]').first()
-      if (await chip.count()) await chip.click({ timeout: 3000 }).catch(() => {})
+    if (slug === 'capacitor-actions' && stateId === 'sheet-open') {
+      const hairlineOk = await page.evaluate(() => {
+        const expected = getComputedStyle(document.documentElement).getPropertyValue('--c-hairline-color').trim()
+        const btn = document.querySelector('.tc-demo-overlay-host button.hairline-b')
+        if (!btn) return 'no hairline button'
+        const bc = getComputedStyle(btn).borderBottomColor
+        return bc && expected ? true : `missing colors ${bc}/${expected}`
+      })
+      record(hairlineOk === true, `${label}: actions hairline color (${String(hairlineOk)})`)
     }
     if (slug === 'capacitor-list-input' || slug === 'capacitor-textarea' || slug === 'capacitor-searchbar') {
       const field = target.locator('[data-tc-demo-state="filled"] input, [data-tc-demo-state="filled"] textarea, [data-tc-demo-state="with-cancel"] input').first()
@@ -364,24 +428,64 @@ async function exerciseInteractions(target, slug) {
       'capacitor-popover',
       'capacitor-popup',
       'capacitor-panel',
+      'capacitor-dialog',
+      'capacitor-alert',
+      'capacitor-toast',
+      'capacitor-notification',
+      'capacitor-modal',
     ])
     if (overlaySlugs.has(slug)) {
-      const trigger = target.getByRole('button', { name: /open|show/i }).first()
-      if (await trigger.count()) {
-        await trigger.click({ timeout: 5000 }).catch(() => {})
-        await target.waitForTimeout(350)
-        await target.keyboard.press('Escape')
-        await target.waitForTimeout(250)
-        const open = await target.evaluate(() => Boolean(document.querySelector('.actions-modal, .sheet-modal, .popup, .panel')))
-        record(!open, `${slug}: escape closes overlay (open=${open})`)
-        await trigger.click({ timeout: 5000 }).catch(() => {})
-        await target.waitForTimeout(350)
-        const backdrop = target.locator('.actions-backdrop, .sheet-backdrop, .popup-backdrop, .panel-backdrop, [class*="backdrop"]').first()
+      const host = page.locator('.tc-demo-overlay-host')
+      const isOpenState = stateId === 'open' || stateId === 'sheet-open' || stateId === 'inline-open'
+      if (!isOpenState) {
+        const trigger = page.getByRole('button', { name: /open|show/i }).first()
+        if (await trigger.count()) await trigger.click({ timeout: 5000 })
+        await page.waitForTimeout(400)
+      }
+      const hadOverlay = await host.locator('[role="dialog"], .actions-modal, .sheet-modal, .popup, .panel, .popover, .toast, .notification, .modal').count()
+      if (hadOverlay) {
+        await page.keyboard.press('Escape')
+        await page.waitForTimeout(300)
+        const afterEsc = await host.locator(':scope > *').count()
+        record(afterEsc === 0, `${label}: escape closes overlay (children=${afterEsc})`)
+        if (!isOpenState) {
+          const trigger = page.getByRole('button', { name: /open|show/i }).first()
+          if (await trigger.count()) await trigger.click({ timeout: 5000 })
+        } else {
+          await page.reload({ waitUntil: 'domcontentloaded' })
+          await page.waitForSelector('#tc-demo-root', { timeout: 30_000 })
+          await page.waitForTimeout(400)
+        }
+        const backdrop = host.locator('.sheet-backdrop, .popup-backdrop, .panel-backdrop, .popover-backdrop, [class*="backdrop"]').first()
         if (await backdrop.count()) {
-          await backdrop.click({ position: { x: 8, y: 8 }, timeout: 3000 }).catch(() => {})
-          await target.waitForTimeout(250)
+          await backdrop.click({ position: { x: 8, y: 8 }, timeout: 4000 })
+          await page.waitForTimeout(300)
+          const afterBd = await host.locator(':scope > *').count()
+          record(afterBd === 0, `${label}: backdrop closes overlay (children=${afterBd})`)
         }
       }
+    }
+    if ((slug === 'capacitor-dialog' || slug === 'capacitor-alert') && (stateId === 'open' || stateId === 'screen')) {
+      const firstChar = await page.evaluate(() => {
+        const dialog = document.querySelector('[role="dialog"]')
+        if (!dialog) return { ok: false, reason: 'no dialog' }
+        const title = dialog.querySelector('.text-lg, .font-semibold, [class*="title"]')
+        const body = dialog.querySelector('.text-sm')
+        const nodes = [title, body].filter(Boolean)
+        for (const el of nodes) {
+          if (!(el instanceof HTMLElement)) continue
+          const text = el.innerText.trim()
+          if (!text) continue
+          const r = document.createRange()
+          r.setStart(el.childNodes[0] ?? el, 0)
+          r.setEnd(el.childNodes[0] ?? el, 1)
+          const rects = r.getClientRects()
+          const box = el.getBoundingClientRect()
+          if (rects.length && rects[0].left < box.left - 1) return { ok: false, reason: `clipped first glyph ${text.slice(0, 12)}` }
+        }
+        return { ok: true }
+      })
+      record(Boolean(firstChar.ok), `${label}: dialog first letter (${firstChar.reason ?? 'ok'})`)
     }
   } catch (error) {
     record(false, `interaction failed on ${slug}: ${error instanceof Error ? error.message : String(error)}`)
@@ -485,7 +589,7 @@ async function qaSlug(page, slug, viewport, theme) {
     await page.waitForSelector('[data-tc-demo-state]', { timeout: 30_000 })
     await page.waitForSelector('#tc-demo-root', { timeout: 30_000 })
     await page.waitForTimeout(250)
-    await exerciseInteractions(page, slug)
+    await exerciseInteractions(page, slug, state.id, label)
     await assertStateClipping(page, state.id, label)
     if (theme.dark) await assertDarkPhoneBackground(page, label)
     if ((slug === 'capacitor-dialog' || slug === 'capacitor-alert') && state.id === 'open') {
