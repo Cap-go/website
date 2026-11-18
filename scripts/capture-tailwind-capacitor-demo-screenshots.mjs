@@ -478,7 +478,8 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         await waitForDemoIframeReady(page)
         await page.waitForTimeout(600)
         const shotFrame = await resolveDemoFrame(page, target.stateId)
-        if (target.stateId !== 'open') await dismissOverlays(page, shotFrame)
+        const openStates = new Set(['open', 'sheet-open', 'inline-open'])
+        if (!openStates.has(target.stateId)) await dismissOverlays(page, shotFrame)
         await focusComponentInFrame(
           page,
           shotFrame,
