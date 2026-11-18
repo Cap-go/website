@@ -152,10 +152,29 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'single-section',
         label: 'Single section',
-        render: () =>
-          h(Accordion, {}, {
-            default: () => [h(AccordionItem, {}, { default: () => 'Accounts' })],
-          }),
+        render: (c) =>
+          h('div', { class: 'w-full tc-demo-accordion-interactive' }, [
+            h(Accordion, {}, {
+              default: () =>
+                h(
+                  AccordionItem,
+                  {
+                    class: c.accordionDemoOpen.value ? 'tc-demo-accordion-open' : undefined,
+                    onClick: () => {
+                      c.accordionDemoOpen.value = !c.accordionDemoOpen.value
+                    },
+                  },
+                  { default: () => 'Accounts' },
+                ),
+            }),
+            c.accordionDemoOpen.value
+              ? h(
+                  'p',
+                  { class: 'px-4 pb-3 text-sm opacity-80 tc-demo-accordion-expanded-body' },
+                  'Manage account email, password, and sign-in options.',
+                )
+              : null,
+          ]),
       },
       {
         id: 'multi-section',
@@ -188,10 +207,29 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
       {
         id: 'collapsed',
         label: 'Collapsed',
-        render: () =>
-          h(Accordion, {}, {
-            default: () => h(AccordionItem, {}, { default: () => 'Accordion item' }),
-          }),
+        render: (c) =>
+          h('div', { class: 'w-full tc-demo-accordion-interactive' }, [
+            h(Accordion, {}, {
+              default: () =>
+                h(
+                  AccordionItem,
+                  {
+                    class: c.accordionItemCollapsedOpen.value ? 'tc-demo-accordion-open' : undefined,
+                    onClick: () => {
+                      c.accordionItemCollapsedOpen.value = !c.accordionItemCollapsedOpen.value
+                    },
+                  },
+                  { default: () => 'Accordion item' },
+                ),
+            }),
+            c.accordionItemCollapsedOpen.value
+              ? h(
+                  'p',
+                  { class: 'px-4 pb-3 text-sm opacity-80 tc-demo-accordion-expanded-body' },
+                  'Section body appears when the header expands.',
+                )
+              : null,
+          ]),
       },
       {
         id: 'expanded-copy',
@@ -203,6 +241,7 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
                 h(
                   AccordionItem,
                   {
+                    class: c.accordionItemExpandedCopy.value ? 'tc-demo-accordion-open' : undefined,
                     onClick: () => {
                       c.accordionItemExpandedCopy.value = !c.accordionItemExpandedCopy.value
                     },
@@ -349,16 +388,20 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   'capacitor-breadcrumbs': (ctx) => {
     const { h } = ctx
     const trail = () =>
-      h(Breadcrumbs, {}, {
-        default: () => [
-          h(BreadcrumbsItem, { active: true }, { default: () => 'Home' }),
-          h(BreadcrumbsSeparator),
-          h(BreadcrumbsItem, {}, { default: () => 'Library' }),
-          h(BreadcrumbsSeparator),
-          h(BreadcrumbsCollapsed),
-          h(BreadcrumbsItem, {}, { default: () => 'Data' }),
-        ],
-      })
+      h(
+        'div',
+        { class: 'tc-demo-breadcrumbs-stage' },
+        h(Breadcrumbs, {}, {
+          default: () => [
+            h(BreadcrumbsItem, { active: true }, { default: () => 'Home' }),
+            h(BreadcrumbsSeparator),
+            h(BreadcrumbsItem, {}, { default: () => 'Library' }),
+            h(BreadcrumbsSeparator),
+            h(BreadcrumbsCollapsed),
+            h(BreadcrumbsItem, {}, { default: () => 'Data' }),
+          ],
+        }),
+      )
     return [
       { id: 'trail', label: 'Trail', render: trail },
       {
@@ -382,14 +425,18 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
         id: 'collapsed-middle',
         label: 'Collapsed middle',
         render: () =>
-          h(Breadcrumbs, {}, {
-            default: () => [
-              h(BreadcrumbsItem, {}, { default: () => 'Root' }),
-              h(BreadcrumbsSeparator),
-              h(BreadcrumbsCollapsed),
-              h(BreadcrumbsItem, { active: true }, { default: () => 'Current' }),
-            ],
-          }),
+          h(
+            'div',
+            { class: 'tc-demo-breadcrumbs-stage' },
+            h(Breadcrumbs, {}, {
+              default: () => [
+                h(BreadcrumbsItem, {}, { default: () => 'Root' }),
+                h(BreadcrumbsSeparator),
+                h(BreadcrumbsCollapsed),
+                h(BreadcrumbsItem, { active: true }, { default: () => 'Current' }),
+              ],
+            }),
+          ),
       },
       {
         id: 'long-trail',
@@ -634,14 +681,17 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
   },
   'capacitor-item-sliding': (ctx) => {
     const { h } = ctx
-    const row = (swiped: boolean) =>
+    const row = (swiped: boolean, c?: GalleryContext) =>
       h(List, {}, {
         default: () =>
           h('div', { class: 'relative overflow-hidden' }, [
             h(
               'div',
-              { class: 'absolute inset-y-0 right-0 flex w-16 items-center justify-center bg-red-500 text-white' },
-              [h('span', { class: 'text-xs font-semibold' }, 'Del')],
+              {
+                class:
+                  'absolute inset-y-0 right-0 flex w-[5.75rem] shrink-0 items-center justify-center bg-red-500 px-2 text-center text-white',
+              },
+              [h('span', { class: 'text-xs font-semibold leading-tight' }, 'Delete')],
             ),
             h(ItemSliding, {}, {
               default: () =>
@@ -649,13 +699,29 @@ const REGISTRY_BUILDERS: Record<string, (ctx: GalleryContext) => SlugStateDef[]>
                   title: 'Swipe row',
                   subtitle: swiped ? 'Actions revealed' : 'Swipe left',
                   link: true,
-                  class: swiped ? '-translate-x-16 bg-white dark:bg-neutral-900 transition-transform' : 'bg-white dark:bg-neutral-900',
+                  class: swiped
+                    ? '-translate-x-[5.75rem] bg-white transition-transform dark:bg-neutral-900'
+                    : 'bg-white dark:bg-neutral-900',
+                  onTouchstart: c
+                    ? (e: TouchEvent) => {
+                        c.itemSlidingTouchStartX.value = e.touches[0]?.clientX ?? null
+                      }
+                    : undefined,
+                  onTouchend: c
+                    ? (e: TouchEvent) => {
+                        const start = c.itemSlidingTouchStartX.value
+                        const end = e.changedTouches[0]?.clientX
+                        c.itemSlidingTouchStartX.value = null
+                        if (start == null || end == null) return
+                        if (start - end > 36) c.itemSlidingSwiped.value = true
+                      }
+                    : undefined,
                 }),
             }),
           ]),
       })
     return [
-      { id: 'closed', label: 'Closed', render: () => row(false) },
+      { id: 'closed', label: 'Closed', render: (c) => row(c.itemSlidingSwiped.value, c) },
       { id: 'swiped-open', label: 'Swiped open', render: () => row(true) },
     ]
   },

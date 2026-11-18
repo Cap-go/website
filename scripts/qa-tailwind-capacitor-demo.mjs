@@ -372,14 +372,10 @@ async function exerciseInteractions(target, slug, stateId, label) {
   try {
     if (slug === 'capacitor-toggle' && (stateId === 'off' || stateId === 'on')) {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const toggle = page
-          .locator('#tc-demo-root .inline-block:has(input[role="switch"]), #tc-demo-root label:has(input[role="switch"])')
-          .first()
+        const toggle = page.locator('#tc-demo-root label:has(input[role="switch"])').first()
         await toggle.waitFor({ state: 'visible', timeout: 10_000 })
         await toggle.click({ timeout: 4000, force: true })
-      }, page
-        .locator('#tc-demo-root .inline-block:has(input[role="switch"]), #tc-demo-root label:has(input[role="switch"])')
-        .first())
+      }, page.locator('#tc-demo-root label:has(input[role="switch"])').first())
     }
     if (slug === 'capacitor-checkbox' && (stateId === 'off' || stateId === 'on')) {
       const box = page.locator('#tc-demo-root [data-tc-demo-state] label:has(input[type="checkbox"])').first()
@@ -408,10 +404,15 @@ async function exerciseInteractions(target, slug, stateId, label) {
       const after = (await stage.innerText()).trim()
       record(before !== after, `${label}: stepper value changes (${before} -> ${after})`)
     }
-    if (slug === 'capacitor-accordion-item' && stateId === 'expanded-copy') {
+    if (slug === 'capacitor-accordion' && stateId === 'single-section') {
+      await assertClickChangesPixels(page, slug, stateId, label, async () => {
+        await page.locator('.tc-demo-accordion-interactive button').first().click({ timeout: 4000, force: true })
+      })
+    }
+    if (slug === 'capacitor-accordion-item' && (stateId === 'expanded-copy' || stateId === 'collapsed')) {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
         await page
-          .locator('.tc-demo-accordion-expanded button, .tc-demo-accordion-expanded [class*="accordion"]')
+          .locator('.tc-demo-accordion-expanded button, .tc-demo-accordion-interactive button')
           .first()
           .click({ timeout: 4000, force: true })
       })

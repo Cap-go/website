@@ -50,7 +50,7 @@ const states = stateManifest[slug as keyof typeof stateManifest] ?? [{ id: 'prev
           >
             <iframe
               class="tc-demo-state-iframe block h-full w-full border-0 bg-neutral-950"
-              title={`Tailwind Capacitor demo: ${slug} — ${state.label}`}
+              title={`Tailwind Capacitor demo: ${slug}: ${state.label}`}
               data-tc-state={state.id}
               src={`${shellBase}?slug=${encodeURIComponent(slug)}&state=${encodeURIComponent(state.id)}&platform=ios&dark=0`}
               loading="lazy"

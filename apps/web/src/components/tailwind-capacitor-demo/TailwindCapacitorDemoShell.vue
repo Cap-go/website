@@ -76,12 +76,19 @@
         </Block>
       </Sheet>
 
-      <Popup v-if="popupOpen" :opened="true" @backdropclick="popupOpen = false">
-        <Block strong class="m-0">
-          <p class="p-4">Popup content</p>
-          <Button class="m-4 mt-0 w-[calc(100%-2rem)]" @click="popupOpen = false">Close</Button>
-        </Block>
-      </Popup>
+      <template v-if="popupOpen">
+        <div
+          class="tc-demo-popup-backdrop fixed inset-0 z-40 bg-black/50"
+          data-tc-demo-popup-backdrop
+          @click="popupOpen = false"
+        />
+        <Popup :opened="true" :backdrop="false" @backdropclick="popupOpen = false">
+          <Block strong class="m-0">
+            <p class="p-4">Popup content</p>
+            <Button class="m-4 mt-0 w-[calc(100%-2rem)]" @click="popupOpen = false">Close</Button>
+          </Block>
+        </Popup>
+      </template>
 
       <Panel v-if="panelOpen" :opened="true" @backdropclick="panelOpen = false">
         <Page>

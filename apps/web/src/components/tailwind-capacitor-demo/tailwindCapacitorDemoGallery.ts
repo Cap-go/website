@@ -137,7 +137,10 @@ export type GalleryContext = {
   tabsDemoActive: Ref<string>
   tabbarDemoActive: Ref<string>
   accordionDemoOpen: Ref<boolean>
+  accordionItemCollapsedOpen: Ref<boolean>
   accordionItemExpandedCopy: Ref<boolean>
+  itemSlidingSwiped: Ref<boolean>
+  itemSlidingTouchStartX: Ref<number | null>
   overlayTrigger: (label: string, openRef: Ref<boolean>, options?: { id?: string }) => VNode
 }
 
@@ -201,7 +204,10 @@ export function createGalleryContext(options?: Partial<{ platform: 'ios' | 'mate
     tabsDemoActive: ref('a'),
     tabbarDemoActive: ref('home'),
     accordionDemoOpen: ref(false),
+    accordionItemCollapsedOpen: ref(false),
     accordionItemExpandedCopy: ref(true),
+    itemSlidingSwiped: ref(false),
+    itemSlidingTouchStartX: ref(null),
   }
 
   return attachGalleryContext(ctxBase)
@@ -627,16 +633,13 @@ function buildOverlayStates(
 
 function interactiveToggleVnode(c: GalleryContext, checkedRef: Ref<boolean>) {
   const { h } = c
-  return h(
-    'div',
-    {
-      class: 'inline-block',
-      onClick: () => {
-        checkedRef.value = !checkedRef.value
-      },
+  return h(Toggle, {
+    checked: checkedRef.value,
+    onClick: (e: MouseEvent) => {
+      e.preventDefault()
+      checkedRef.value = !checkedRef.value
     },
-    [h(Toggle, { checked: checkedRef.value, readonly: true })],
-  )
+  })
 }
 
 function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
@@ -1126,7 +1129,7 @@ function popupOpenVNode(ctx: GalleryContext) {
   const { h } = ctx
   return h(
     Popup,
-    { opened: true },
+    { opened: true, backdrop: false },
     {
       default: () =>
         h(

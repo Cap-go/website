@@ -316,6 +316,23 @@ html.dark .tc-demo-app-light-preview {
   border-top: 1px solid var(--c-hairline-color);
 }
 
+.tc-demo-accordion-interactive .tc-demo-accordion-expanded-body {
+  border-top: 1px solid var(--c-hairline-color);
+}
+
+#tc-demo-root .tc-demo-accordion-open svg {
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+}
+
+.tc-demo-breadcrumbs-stage {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 1rem;
+  overflow-x: auto;
+}
+
 #tc-demo-root .tc-demo-badge-inline {
   align-self: center;
   width: auto !important;
