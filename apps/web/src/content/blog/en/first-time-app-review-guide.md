@@ -700,7 +700,7 @@ function SubscriptionOffer() {
 
       <div className="legal-links">
         <a href="/privacy/">Privacy Policy</a> |
-        <a href="/terms">Terms of Service</a>
+        <a href="/tos/">Terms of Service</a>
       </div>
     </div>
   );
