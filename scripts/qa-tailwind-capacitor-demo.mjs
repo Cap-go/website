@@ -446,7 +446,7 @@ async function exerciseInteractions(target, slug, stateId, label) {
       if (hadOverlay) {
         await page.keyboard.press('Escape')
         await page.waitForTimeout(300)
-        const afterEsc = await host.locator(':scope > *').count()
+        const afterEsc = await host.evaluate((el) => el.children.length)
         record(afterEsc === 0, `${label}: escape closes overlay (children=${afterEsc})`)
         if (!isOpenState) {
           const trigger = page.getByRole('button', { name: /open|show/i }).first()
@@ -476,9 +476,13 @@ async function exerciseInteractions(target, slug, stateId, label) {
           if (!(el instanceof HTMLElement)) continue
           const text = el.innerText.trim()
           if (!text) continue
+          const textNode = [...el.childNodes].find(
+            (n) => n.nodeType === Node.TEXT_NODE && (n.textContent?.trim().length ?? 0) > 0,
+          )
+          if (!textNode || !(textNode.textContent && textNode.textContent.length > 0)) continue
           const r = document.createRange()
-          r.setStart(el.childNodes[0] ?? el, 0)
-          r.setEnd(el.childNodes[0] ?? el, 1)
+          r.setStart(textNode, 0)
+          r.setEnd(textNode, 1)
           const rects = r.getClientRects()
           const box = el.getBoundingClientRect()
           if (rects.length && rects[0].left < box.left - 1) return { ok: false, reason: `clipped first glyph ${text.slice(0, 12)}` }
