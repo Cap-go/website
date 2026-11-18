@@ -318,8 +318,11 @@ async function validateDialogChromeScreenshot(frame, filePath) {
  * @param {string} text
  */
 async function waitOverlayTextInShellViewport(frame, text) {
-  const content = frame.locator('.tc-demo-overlay-host').getByText(text, { exact: false }).first()
-  await content.waitFor({ state: 'visible', timeout: 25_000 })
+  const content = frame
+    .locator('.tc-demo-overlay-host, #tc-demo-root')
+    .getByText(text, { exact: false })
+    .first()
+  await content.waitFor({ state: 'visible', timeout: 40_000 })
   await content.evaluate((node) => {
       const root = document.getElementById('tc-demo-root')
       if (!root) throw new Error('missing #tc-demo-root')
@@ -473,6 +476,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         const stateIframe = page.locator(`iframe.tc-demo-state-iframe[data-tc-state="${target.stateId}"]`).first()
         await stateIframe.waitFor({ state: 'visible', timeout: 60_000 })
         await waitForDemoIframeReady(page)
+        await page.waitForTimeout(600)
         const shotFrame = await resolveDemoFrame(page, target.stateId)
         if (target.stateId !== 'open') await dismissOverlays(page, shotFrame)
         await focusComponentInFrame(
