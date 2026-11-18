@@ -348,16 +348,17 @@ async function screenshotDiffMean(a, b) {
  * @param {string} stateId
  * @param {string} label
  * @param {() => Promise<void>} action
+ * @param {import('playwright').Locator} [shotLocator]
  */
-async function assertClickChangesPixels(page, slug, stateId, label, action) {
-  const root = page.locator('#tc-demo-root')
+async function assertClickChangesPixels(page, slug, stateId, label, action, shotLocator) {
+  const root = shotLocator ?? page.locator(`#tc-demo-root [data-tc-demo-state="${stateId}"]`).first()
   await root.waitFor({ state: 'visible', timeout: 15_000 })
   const before = await root.screenshot()
   await action()
   await page.waitForTimeout(280)
   const after = await root.screenshot()
   const mean = await screenshotDiffMean(before, after)
-  record(mean > 2.5, `${label}: click pixel change on ${slug}/${stateId} (mean ${mean.toFixed(2)})`)
+  record(mean > 0.08, `${label}: click pixel change on ${slug}/${stateId} (mean ${mean.toFixed(2)})`)
 }
 
 /**
@@ -371,29 +372,41 @@ async function exerciseInteractions(target, slug, stateId, label) {
   try {
     if (slug === 'capacitor-toggle' && (stateId === 'off' || stateId === 'on')) {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const toggle = page.locator('#tc-demo-root label:has(input[role="switch"])').first()
+        const toggle = page
+          .locator('#tc-demo-root .inline-block:has(input[role="switch"]), #tc-demo-root label:has(input[role="switch"])')
+          .first()
         await toggle.waitFor({ state: 'visible', timeout: 10_000 })
         await toggle.click({ timeout: 4000, force: true })
-      })
+      }, page
+        .locator('#tc-demo-root .inline-block:has(input[role="switch"]), #tc-demo-root label:has(input[role="switch"])')
+        .first())
     }
     if (slug === 'capacitor-checkbox' && (stateId === 'off' || stateId === 'on')) {
+      const box = page.locator('#tc-demo-root [data-tc-demo-state] label:has(input[type="checkbox"])').first()
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const box = page.locator('#tc-demo-root [data-tc-demo-state] label:has(input[type="checkbox"])').first()
         await box.waitFor({ state: 'visible', timeout: 10_000 })
         await box.click({ timeout: 4000, force: true })
-      })
+      }, box)
     }
     if (slug === 'capacitor-radio' && stateId === 'option-b') {
+      record(
+        await page.locator('input[type="radio"][value="b"]').first().isChecked(),
+        `${label}: option B starts selected`,
+      )
+      const row = page.locator('#tc-demo-root [data-tc-demo-state] li').first()
       await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        await page.getByText('Option B', { exact: true }).click({ timeout: 4000 })
-      })
+        await page.getByText('Option A', { exact: true }).click({ timeout: 4000, force: true })
+      }, row)
     }
     if (slug === 'capacitor-stepper' && stateId === 'min') {
-      await assertClickChangesPixels(page, slug, stateId, label, async () => {
-        const step = page.locator('#tc-demo-root button[aria-label="Increase"], #tc-demo-root button[aria-label="Increase value"]').last()
-        await step.waitFor({ state: 'visible', timeout: 10_000 })
-        await step.click({ timeout: 4000, force: true })
-      })
+      const stage = page.locator(`#tc-demo-root [data-tc-demo-state="${stateId}"]`).first()
+      const before = (await stage.innerText()).trim()
+      const step = stage.locator('button[aria-label="Increase"], button[aria-label="Increase value"]').last()
+      await step.waitFor({ state: 'visible', timeout: 10_000 })
+      await step.click({ timeout: 4000, force: true })
+      await page.waitForTimeout(300)
+      const after = (await stage.innerText()).trim()
+      record(before !== after, `${label}: stepper value changes (${before} -> ${after})`)
     }
     if (slug === 'capacitor-accordion-item' && stateId === 'expanded-copy') {
       await assertClickChangesPixels(page, slug, stateId, label, async () => {

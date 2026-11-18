@@ -625,29 +625,31 @@ function buildOverlayStates(
   ]
 }
 
+function interactiveToggleVnode(c: GalleryContext, checkedRef: Ref<boolean>) {
+  const { h } = c
+  return h(
+    'div',
+    {
+      class: 'inline-block',
+      onClick: () => {
+        checkedRef.value = !checkedRef.value
+      },
+    },
+    [h(Toggle, { checked: checkedRef.value, readonly: true })],
+  )
+}
+
 function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
   return [
     {
       id: 'off',
       label: 'Off',
-      render: (c) =>
-        h(Toggle, {
-          checked: c.toggleOffChecked.value,
-          onClick: () => {
-            c.toggleOffChecked.value = !c.toggleOffChecked.value
-          },
-        }),
+      render: (c) => interactiveToggleVnode(c, c.toggleOffChecked),
     },
     {
       id: 'on',
       label: 'On',
-      render: (c) =>
-        h(Toggle, {
-          checked: c.toggleOnChecked.value,
-          onClick: () => {
-            c.toggleOnChecked.value = !c.toggleOnChecked.value
-          },
-        }),
+      render: (c) => interactiveToggleVnode(c, c.toggleOnChecked),
     },
     { id: 'disabled', label: 'Disabled', render: (c) => h(Toggle, { checked: false, disabled: true }) },
   ]
@@ -764,13 +766,7 @@ function buildListItemStates(ctx: GalleryContext): SlugStateDef[] {
       render: (c) =>
         h(ListItem, {}, {
           title: () => 'Analytics',
-          after: () =>
-            h(Toggle, {
-              checked: c.toggleAfterChecked.value,
-              onClick: () => {
-                c.toggleAfterChecked.value = !c.toggleAfterChecked.value
-              },
-            }),
+          after: () => interactiveToggleVnode(c, c.toggleAfterChecked),
         }),
     },
     { id: 'badge', label: 'Badge', render: () => h(ListItem, { title: 'Inbox', badge: '12' }) },
