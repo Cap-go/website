@@ -508,7 +508,11 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         const outPath = join(outDir, fileName)
         await screenshotPhoneFrame(page, outPath, target.stateId)
         if (target.slug === 'dialog-open' || target.slug === 'alert-open') {
-          const rawFrame = await resolveDemoContentFrame(page)
+          const iframeHandle = await page
+            .locator(`iframe.tc-demo-state-iframe[data-tc-state="${target.stateId}"]`)
+            .first()
+            .elementHandle()
+          const rawFrame = (await iframeHandle?.contentFrame()) ?? (await resolveDemoContentFrame(page))
           if (!rawFrame) throw new Error('iframe missing for dialog validation')
           await validateDialogChromeScreenshot(rawFrame, outPath)
         }
