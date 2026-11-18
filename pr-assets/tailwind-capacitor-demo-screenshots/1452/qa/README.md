@@ -2,88 +2,9 @@
 
 Base URL: https://pr-1452-capgo-website.digitalshift-ee.workers.dev
 
-Pass: 7260, Fail: 12
+Pass: 7272, Fail: 0
 
 Each component lists every state with phone-frame and (on mobile) full 390px viewport page shots.
-
-## Failures
-
-- layout-smoke demo-index top: header-to-breadcrumb gap 68px (want ≤32)
-- layout-smoke capacitor-button top: header-to-breadcrumb gap 68px (want ≤32)
-- capacitor-accordion-item desktop ios-light catalog theme: no console errors during theme switch (TypeError: Cannot read properties of undefined (reading 'value')
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:159101)
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:197798)
-    at Proxy.<anonymous> (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:199272)
-    at tl (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:38506)
-    at xr._ [as fn] (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:48961)
-    at xr.run (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:6045)
-    at Be (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:49346)
-    at ot (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47749)
-    at Ke (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47516)
-    at P (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:44084); TypeError: Cannot read properties of undefined (reading 'value')
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:159101)
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:197798)
-    at Proxy.<anonymous> (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:199272)
-    at tl (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:38506)
-    at xr._ [as fn] (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:48961)
-    at xr.run (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:6045)
-    at Be (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:49346)
-    at ot (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47749)
-    at Ke (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47516)
-    at P (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:44084))
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- interaction failed on capacitor-accordion-item: locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('.tc-demo-accordion-interactive button').first()
-
-- capacitor-item-sliding desktop ios-light catalog theme: no console errors during theme switch (TypeError: Cannot read properties of undefined (reading 'value')
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:167992)
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:197798)
-    at Proxy.<anonymous> (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:199272)
-    at tl (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:38506)
-    at xr._ [as fn] (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:48961)
-    at xr.run (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:6045)
-    at Be (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:49346)
-    at ot (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47749)
-    at Ke (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47516)
-    at P (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:44084); TypeError: Cannot read properties of undefined (reading 'value')
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:167992)
-    at Object.render (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:197798)
-    at Proxy.<anonymous> (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:7:199272)
-    at tl (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:38506)
-    at xr._ [as fn] (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:48961)
-    at xr.run (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:6045)
-    at Be (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:49346)
-    at ot (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47749)
-    at Ke (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:47516)
-    at P (https://pr-1452-capgo-website.digitalshift-ee.workers.dev/_astro/index.astro_astro_type_script_index_0_lang.DELlhnFZ.js:1:44084))
 
 ## foundation
 
