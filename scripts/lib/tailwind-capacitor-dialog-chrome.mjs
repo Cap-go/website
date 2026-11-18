@@ -266,7 +266,7 @@ const BODY_LEAK_MEAN_THRESHOLD = 8
  * @param {import('playwright').Frame} frame
  */
 export async function assertDialogBodyOpaque(frame) {
-  const body = frame.locator('[role="dialog"] .text-sm.w-full').first()
+  const body = frame.locator('[role="dialog"] .text-sm').first()
   if (!(await body.count())) {
     return { ok: false, error: 'no dialog body text node' }
   }
