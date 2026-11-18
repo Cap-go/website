@@ -1,0 +1,84 @@
+foundation: packages, icons
+capacitor-accordion: single-section, multi-section, nested-copy
+capacitor-accordion-item: collapsed, expanded-copy, stacked
+capacitor-actions: screen, sheet-open
+capacitor-actions-button: screen, sheet-open, primary-row
+capacitor-actions-group: screen, sheet-open, single-group
+capacitor-actions-label: screen, sheet-open, section-label
+capacitor-alert: inline, closed, open
+capacitor-app: light-shell, dark-shell, with-block
+capacitor-avatar: initials, small, large
+capacitor-badge: count, color, on-avatar
+capacitor-block: inset-strong, outline, plain
+capacitor-block-footer: with-footer, footer-note
+capacitor-block-header: with-header, section-title
+capacitor-block-title: standalone, with-body
+capacitor-breadcrumbs: trail, compact
+capacitor-breadcrumbs-collapsed: collapsed-middle, long-trail
+capacitor-breadcrumbs-item: link, active
+capacitor-breadcrumbs-separator: between-items, multi-separator
+capacitor-button: solid, outline, clear, tonal, small, large, raised, disabled, with-icon, block, fill-color, outline-color
+capacitor-card: feed, media, outline
+capacitor-checkbox: off, on, disabled
+capacitor-chip: filled, removable, outline
+capacitor-datetime: closed, open
+capacitor-dialog: screen, open
+capacitor-dialog-button: cancel-ok, destructive, stacked
+capacitor-fab: closed, list-open
+capacitor-footer: plain-footer, with-toolbar
+capacitor-header: plain-header, with-navbar
+capacitor-icon: navigation, large
+capacitor-infinite-scroll: idle, loading
+capacitor-input-otp: empty, filled
+capacitor-item-sliding: closed, swiped-open
+capacitor-link: text-link, toolbar
+capacitor-list: inset, buttons, media
+capacitor-list-button: single, pair
+capacitor-list-group: grouped, nested
+capacitor-list-input: empty, filled, focused
+capacitor-list-item: standard, chevron, toggle-after, badge
+capacitor-menu-list: basic, with-icons
+capacitor-menu-list-item: basic-item, selected
+capacitor-message: sent, received, thread
+capacitor-messagebar: empty, composing
+capacitor-messages: single, pair
+capacitor-messages-title: with-title, group-chat
+capacitor-modal: closed, open, inline
+capacitor-navbar: standard, large-title, transparent, with-back-link
+capacitor-navbar-back-link: with-text, in-navbar
+capacitor-note: body-note, secondary
+capacitor-notification: closed, open, inline-open
+capacitor-page: scroll-content, with-navbar
+capacitor-panel: screen, open
+capacitor-picker: closed, open, wheels
+capacitor-popover: screen, open
+capacitor-popup: screen, open
+capacitor-preloader: spinner, blue, large-green
+capacitor-progressbar: low, high, indeterminate
+capacitor-radio: option-a, option-b
+capacitor-range: single, dual, with-pins
+capacitor-refresher: idle, pulling
+capacitor-reorder: two-rows, three-rows
+capacitor-searchbar: empty, filled, focused, with-cancel
+capacitor-segmented: one-selected, two-selected
+capacitor-segmented-button: a-selected, b-selected
+capacitor-select: closed, open
+capacitor-sheet: screen, open
+capacitor-skeleton: line, avatar-row
+capacitor-split-pane: two-pane, master-detail
+capacitor-stepper: min, max, disabled
+capacitor-tab: tab-a, tab-b
+capacitor-tabbar: two-tabs, three-tabs
+capacitor-tabbar-link: inactive, active, badge
+capacitor-table: sample, compact
+capacitor-table-body: single-row, two-rows
+capacitor-table-cell: body-cell, header-cell
+capacitor-table-head: header, multi-column
+capacitor-table-row: single, values
+capacitor-tabs: tab-one, tab-two
+capacitor-textarea: empty, filled
+capacitor-thumbnail: standalone, in-list
+capacitor-toast: screen, open
+capacitor-toggle: off, on, disabled
+capacitor-toolbar: top, actions
+capacitor-touch-ripple: on-button, on-card

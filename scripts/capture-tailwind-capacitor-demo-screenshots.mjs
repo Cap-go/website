@@ -103,7 +103,7 @@ const componentTargets = [
   { slug: 'list', pageSlug: 'capacitor-list', stateId: 'inset', open: null, openExpect: null },
   { slug: 'list-input', pageSlug: 'capacitor-list-input', stateId: 'filled', open: null, openExpect: null },
   { slug: 'sheet-open', pageSlug: 'capacitor-sheet', stateId: 'open', open: null, openExpect: 'Sheet overlay content' },
-  { slug: 'actions-open', pageSlug: 'capacitor-actions', stateId: 'open', open: null, openExpect: 'Delete' },
+  { slug: 'actions-open', pageSlug: 'capacitor-actions', stateId: 'sheet-open', open: null, openExpect: 'Delete' },
   { slug: 'dialog-open', pageSlug: 'capacitor-dialog', stateId: 'open', open: null, openExpect: 'Sample dialog' },
   { slug: 'alert-open', pageSlug: 'capacitor-alert', stateId: 'open', open: null, openExpect: 'Registry Alert' },
   {
@@ -469,8 +469,11 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
           timeout: 120_000,
         })
         await applyTheme(page, combo.platform, combo.dark)
+        const stateIframe = page.locator(`iframe.tc-demo-state-iframe[data-tc-state="${target.stateId}"]`).first()
+        await stateIframe.waitFor({ state: 'visible', timeout: 60_000 })
+        await waitForDemoIframeReady(page)
         const shotFrame = await resolveDemoFrame(page, target.stateId)
-        await dismissOverlays(page, shotFrame)
+        if (target.stateId !== 'open') await dismissOverlays(page, shotFrame)
         await focusComponentInFrame(
           page,
           shotFrame,

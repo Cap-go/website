@@ -633,7 +633,7 @@ function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
       render: (c) =>
         h(Toggle, {
           checked: c.toggleOffChecked.value,
-          onChange: () => {
+          onClick: () => {
             c.toggleOffChecked.value = !c.toggleOffChecked.value
           },
         }),
@@ -644,7 +644,7 @@ function buildToggleStates(ctx: GalleryContext): SlugStateDef[] {
       render: (c) =>
         h(Toggle, {
           checked: c.toggleOnChecked.value,
-          onChange: () => {
+          onClick: () => {
             c.toggleOnChecked.value = !c.toggleOnChecked.value
           },
         }),

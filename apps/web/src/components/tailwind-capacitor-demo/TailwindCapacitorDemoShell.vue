@@ -306,7 +306,11 @@ function syncThemeToDocument() {
 
 watch([platform, dark], syncThemeToDocument, { immediate: true })
 
-watch([activeSlug, activeStateId], () => {
+watch([activeSlug, activeStateId], (next, prev) => {
+  if (prev === undefined) return
+  const [slug, state] = next
+  const [prevSlug, prevState] = prev
+  if (slug === prevSlug && state === prevState) return
   closeDemoOverlays()
 })
 
