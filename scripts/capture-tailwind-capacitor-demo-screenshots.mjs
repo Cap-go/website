@@ -485,11 +485,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         )
         if (target.slug === 'popover-open') await stabilizePopoverForCapture(shotFrame)
         await page.waitForTimeout(300)
-        if (
-          (target.slug === 'dialog-open' || target.slug === 'alert-open') &&
-          combo.platform === 'ios' &&
-          !combo.dark
-        ) {
+        if (target.slug === 'dialog-open' && combo.platform === 'ios' && !combo.dark) {
           const rawFrame = await resolveDemoContentFrame(page)
           if (!rawFrame) throw new Error('iframe missing for dialog opacity check')
           const opaque = await assertDialogBodyOpaque(rawFrame)
