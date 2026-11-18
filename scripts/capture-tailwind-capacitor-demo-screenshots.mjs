@@ -507,7 +507,7 @@ async function captureCombo(browser, { viewport, combo, label, urlBase, path, ap
         const fileName = `demo-${target.slug}-${viewport.prefix}-${tag}-${label}.png`
         const outPath = join(outDir, fileName)
         await screenshotPhoneFrame(page, outPath, target.stateId)
-        if (target.slug === 'dialog-open' || target.slug === 'alert-open') {
+        if ((target.slug === 'dialog-open' || target.slug === 'alert-open') && viewport.prefix === 'desktop') {
           const iframeHandle = await page
             .locator(`iframe.tc-demo-state-iframe[data-tc-state="${target.stateId}"]`)
             .first()
