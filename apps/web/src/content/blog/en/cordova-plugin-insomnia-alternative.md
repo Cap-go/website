@@ -7,7 +7,7 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-11-19T09:00:00.000Z
 updated_at: 2026-11-19T09:00:00.000Z
-head_image: /migrating-cordova-to-capacitor.webp
+head_image: /blog-images/migrating-cordova-to-capacitor.png
 head_image_alt: "Illustration of migrating a Cordova app to Capacitor, used for a keep awake plugin guide"
 keywords: cordova-plugin-insomnia alternative, capacitor keep awake, @capgo/capacitor-keep-awake, window.plugins.insomnia
 tag: Alternatives, Capacitor, Migration
@@ -109,7 +109,7 @@ await KeepAwake.allowSleep();
 | `allowSleepAgain(success, error)` | `allowSleep()` |
 | Not in Cordova www | `isKeptAwake()` returns `{ isKeptAwake }` |
 | Not in Cordova www | `isSupported()` returns `{ isSupported }` |
-| `cordova.plugins.brightness.setKeepScreenOn` | Also maps here; see [cordova-plugin-brightness alternative](/blog/cordova-plugin-brightness-alternative/) |
+| `cordova.plugins.brightness.setKeepScreenOn` | Also maps here; see [brightness plugin docs](/docs/plugins/brightness/) |
 | Cordova plugin install | `bun add @capgo/capacitor-keep-awake` plus `bunx cap sync` |
 
 ## Links and next steps
