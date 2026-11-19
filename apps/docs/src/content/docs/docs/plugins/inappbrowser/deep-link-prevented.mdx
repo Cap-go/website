@@ -7,7 +7,7 @@ sidebar:
 
 ## When to use it
 
-Requires `@capgo/capacitor-inappbrowser` **8.28.0** or newer from [capacitor-inappbrowser #787](https://github.com/Cap-go/capacitor-inappbrowser/pull/787/). The event is not in the current npm release **8.27.9** until that plugin version ships.
+Requires `@capgo/capacitor-inappbrowser` **8.28.0** or newer from [capacitor-inappbrowser #787](https://github.com/Cap-go/capacitor-inappbrowser/pull/787/).
 
 Set `preventDeeplink: true` on `openWebView()` when taps on `tel:`, `mailto:`, custom schemes, or other external hand-offs should stay inside your managed WebView. The plugin emits `deepLinkPrevented` with `{ url, id? }` so your app can show UI, route in-app, or log analytics.
 
@@ -37,7 +37,7 @@ try {
   const { id } = await InAppBrowser.openWebView({
     url: 'https://checkout.example.com/',
     preventDeeplink: true,
-    authorizedAppLinks: ['checkout.example.com'],
+    authorizedAppLinks: ['https://checkout.example.com/'],
   });
   sessionId = id;
 } catch (error) {
@@ -49,5 +49,5 @@ try {
 
 ## Platform notes
 
-- **iOS:** Universal Links emit `deepLinkPrevented` only when the link host matches an entry in `authorizedAppLinks` (see the example). App Store hosts and custom schemes emit the event when prevention blocks the hand-off.
+- **iOS:** Universal Links emit `deepLinkPrevented` only when the link matches an entry in `authorizedAppLinks` (use full URLs such as `https://partner.example`, not bare hostnames). App Store hosts and custom schemes emit the event when prevention blocks the hand-off.
 - **Android:** `preventDeeplink` still blocks non-http(s) URLs and emits the event for those links. Authorized App Links keep the existing external launch behavior on Android.
