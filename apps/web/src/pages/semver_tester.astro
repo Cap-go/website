@@ -4,7 +4,12 @@ import { Icon as AstroIcon } from 'astro-icon/components'
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title="Semver Check - Capgo">
+<Layout
+  content={{
+    title: 'Semver Tester: Compare Versions and Check Update Rules | Capgo',
+    description: 'Free online semver tester. Compare two semantic versions and see which Capgo channel policy (major, minor, patch, or metadata) allows or blocks the update.',
+  }}
+>
   <main class="min-h-screen bg-gray-50 px-4 py-8 text-black">
     <div class="mx-auto max-w-6xl">
       <!-- Header -->

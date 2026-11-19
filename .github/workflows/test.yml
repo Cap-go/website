@@ -51,6 +51,7 @@ jobs:
               - '.github/workflows/deploy-web.yml'
             docs:
               - 'apps/docs/**'
+              - 'scripts/repair_sitemap*'
               - 'apps/shared/**'
               - 'apps/web/public/**'
               - 'apps/web/src/config/plugins.ts'
@@ -61,6 +62,7 @@ jobs:
               - '.github/workflows/deploy-docs.yml'
             translation:
               - 'apps/translation-worker/**'
+              - 'apps/shared/translationReadiness*'
               - 'package.json'
               - 'bun.lock'
               - '.github/workflows/test.yml'

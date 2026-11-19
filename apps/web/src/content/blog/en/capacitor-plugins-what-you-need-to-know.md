@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-10T22:09:04.610Z
-updated_at: 2026-08-25T01:16:42.000Z
+updated_at: 2026-11-15T14:49:31.000Z
 head_image: /blog-images/capacitor-plugins-what-you-need-to-know.webp
 head_image_alt: "\"Capacitor Plugins: What You Need to Know\" Capgo blog illustration"
 keywords: Capacitor plugins, mobile development, cross-platform apps, native features, custom plugins, community plugins
@@ -22,6 +22,8 @@ next_blog: ''
 -   **Core Plugins**: Built by the [Ionic](https://ionicframework.com/) team, these cover basics like file storage (`Filesystem.writeFile`) and network checks (`Network.getStatus`).
 -   **Community Plugins**: Offer specialized features like [Firebase Analytics](https://firebase.google.com/docs/analytics), [in-app purchases](https://capgo.app/plugins/capacitor-native-purchases/), and live updates.
 -   **Custom Plugins**: Create your own for unique hardware or business needs.
+
+Looking for a package to add to your app? Browse the [Capacitor plugin library](/plugins/) to search by feature, filter by category, and find installation guides for authentication, payments, storage, media, and other native capabilities.
 
 ### Quick Overview
 

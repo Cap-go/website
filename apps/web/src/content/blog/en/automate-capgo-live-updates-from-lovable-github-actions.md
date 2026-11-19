@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-08-06T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-11-11T16:45:30.000Z
 head_image: /github_actions.webp
 head_image_alt: "Automate Capgo Live Updates from Lovable with GitHub Actions Capgo blog illustration"
 keywords: Lovable, Lovable.dev, Capgo, GitHub Actions, live updates, OTA, CI/CD, CAPGO_TOKEN, bundle upload, Capacitor
@@ -206,4 +206,4 @@ That matches the single-click experience they asked for: Publish in Lovable is t
 - [Convert Lovable to iOS and Android](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/) — Full Capacitor + Capgo setup if you have not wrapped the app yet
 - [Automatic build and release with GitHub Actions](/blog/automatic-build-and-release-with-github-actions/) — Tag-based releases and version bumps
 - [GitHub Actions integration](/docs/live-updates/integrations/github-actions/) — Multi-channel and PR preview channels
-- [Capgo Live Updates](/live-updates/) — Channels, rollbacks, and adoption stats
+- [Capgo Live Updates](/live-update/) — Channels, rollbacks, and adoption stats

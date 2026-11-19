@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Review queue frozen by unaccepted developer agreements">
+  <title>Review queue frozen by unaccepted developer agreements</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="108" cy="104" r="52" fill="none" stroke="#374151" stroke-width="3"/>
+  <path d="M108 52 V104 L144 124" stroke="#FBBF24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M152 88 A52 52 0 0 1 108 156" fill="none" stroke="#FBBF24" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+  <text x="76" y="172" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="10" font-weight="600">3+ weeks</text>
+  <rect x="176" y="44" width="120" height="112" rx="12" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="192" y="60" width="16" height="16" rx="3" fill="none" stroke="#EF4444" stroke-width="2"/>
+  <path d="M196 68 L204 76 M204 68 L196 76" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <path d="M216 68 h72" stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+  <rect x="192" y="88" width="16" height="16" rx="3" fill="none" stroke="#EF4444" stroke-width="2"/>
+  <path d="M216 96 h64" stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+  <rect x="192" y="116" width="16" height="16" rx="3" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M196 124 L200 128 L204 120" fill="none" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M216 124 h56" stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+  <rect x="192" y="136" width="88" height="12" rx="6" fill="#44BCFF" opacity="0.25"/>
+  <path d="M148 104 H168" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="168,104 160,100 160,108" fill="#44BCFF"/>
+</svg>

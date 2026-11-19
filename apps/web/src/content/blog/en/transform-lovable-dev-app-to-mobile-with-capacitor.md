@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-10-20T00:37:53.000Z
+updated_at: 2026-11-11T16:45:30.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Convert your Lovable app to iOS and Android with Capacitor Capgo blog illustration"
 keywords: Lovable, Lovable.dev, Capacitor, mobile app development, React, Vite, export project, native mobile apps, Capgo Builder, live updates, vibe coding, Cursor
@@ -729,7 +729,7 @@ You took a Lovable web app to native iOS and Android — built in the cloud with
 
 ### Next Steps
 
-- **[Capgo Live Updates](/live-updates/)** — Ship UI and copy fixes without waiting on store review
+- **[Capgo Live Updates](/live-update/)** — Ship UI and copy fixes without waiting on store review
 - **[Capgo Builder](/native-build/)** — Automate release builds in CI
 - **[Capgo Plugin Directory](/plugins/)** — Biometrics, push notifications, geolocation, and more
 - **Related guides:** [Base44 to mobile](/blog/transform-base44-app-to-mobile-with-capacitor/) · [Bolt.new to mobile](/blog/transform-bolt-new-app-to-mobile-with-capacitor/)

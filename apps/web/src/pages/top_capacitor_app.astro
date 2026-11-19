@@ -4,7 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import { renameCat, shortNumber, plausibleStoreShare } from '@/services/misc'
 import m from '@/copy/messages'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.top_capacitor_apps({}, { locale: Astro.locals.locale })].join(' | ')
+const title = `${m.top_apps_seo_title({ framework: 'Capacitor' }, { locale: Astro.locals.locale })} | ${Astro.locals.runtimeConfig.public.brand}`
 const description = m.top_100_app_using_capacitor_on_android_play_store({}, { locale: Astro.locals.locale })
 
 const content = { title, description }

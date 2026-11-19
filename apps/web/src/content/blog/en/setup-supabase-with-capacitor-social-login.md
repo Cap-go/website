@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-27T00:00:00.000Z
-updated_at: 2026-10-23T09:46:15.000Z
+updated_at: 2026-11-18T15:09:32.000Z
 head_image: /blog-images/setup-supabase-react-auth-flow.png
 head_image_alt: Diagram of React app, Capgo Social Login plugin, Google ID token, and Supabase Auth session
 keywords: Supabase, Capacitor, React, social login, authentication, Google, Apple, signInWithIdToken, Vite, mobile app development
@@ -89,7 +89,7 @@ VITE_SUPABASE_APPLE_CALLBACK_URL=https://your-project-ref.supabase.co/functions/
 
 ## Why Use Supabase with Social Login?
 
-**Supabase** provides a robust backend-as-a-service with built-in authentication, while the [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) plugin offers native social authentication across iOS, Android, and web platforms. For tighter Supabase integration, [@capgo/capacitor-supabase](https://capgo.app/plugins/capacitor-supabase/) adds native auth helpers and JWT access. Together, they provide:
+**Supabase** provides a robust backend-as-a-service with built-in authentication, while the [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) plugin offers native social authentication across iOS, Android, and web platforms. For tighter Supabase integration, [@capgo/capacitor-supabase](https://capgo.app/docs/plugins/supabase/) adds native auth helpers and JWT access. Together, they provide:
 
 - Seamless social authentication
 - Secure token management
@@ -115,7 +115,7 @@ bun add @capgo/capacitor-social-login
 
 Run `bunx cap sync` **after** you add Capacitor and native platforms in [Add Capacitor to the React app](#add-capacitor-to-the-react-app). The Vite-only walkthrough below works in the browser before that step.
 
-See the [Social Login](https://capgo.app/plugins/capacitor-social-login/) and [Supabase](https://capgo.app/plugins/capacitor-supabase/) plugin pages for platform-specific setup.
+See the [Social Login](https://capgo.app/plugins/capacitor-social-login/) and [Supabase](https://capgo.app/docs/plugins/supabase/) plugin pages for platform-specific setup.
 
 ## Step 2: Setup Supabase Project
 

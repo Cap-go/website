@@ -1,7 +1,21 @@
 ---
 import Default from '@astrojs/starlight/components/Hero.astro'
+import DocBreadcrumbs from './DocBreadcrumbs.astro'
 import PluginPreviewQr from './PluginPreviewQr.astro'
 ---
 
-<Default><slot /></Default>
+<div class="hero-with-breadcrumbs">
+  <DocBreadcrumbs />
+  <Default><slot /></Default>
+</div>
 <PluginPreviewQr />
+
+<style>
+  .hero-with-breadcrumbs {
+    width: 100%;
+  }
+
+  .hero-with-breadcrumbs :global(.doc-breadcrumbs) {
+    margin-bottom: 0.5rem;
+  }
+</style>

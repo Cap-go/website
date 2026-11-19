@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Review paused until developer confirms weekly subscription price">
+  <title>Review paused until developer confirms weekly subscription price</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="64" y="40" width="192" height="120" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="80" y="56" width="88" height="10" rx="5" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="80" y="76" width="64" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="80" y="112" width="72" height="32" rx="6" fill="#1F2937" stroke="#9CA3AF" stroke-width="1.5" opacity="0.6"/>
+  <text x="92" y="132" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="9">cheaper</text>
+  <rect x="160" y="100" width="80" height="44" rx="8" fill="#1F2937" stroke="#FBBF24" stroke-width="2.5"/>
+  <text x="172" y="120" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="11" font-weight="700">$9.99</text>
+  <text x="172" y="134" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">/ week</text>
+  <rect x="200" y="48" width="88" height="28" rx="14" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <path d="M212 62 H276" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+  <rect x="212" y="64" width="48" height="6" rx="3" fill="#9CA3AF" opacity="0.3"/>
+  <text x="232" y="58" text-anchor="middle" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7" font-weight="600">PAUSED</text>
+  <circle cx="48" cy="100" r="32" fill="none" stroke="#44BCFF" stroke-width="2.5" opacity="0.55"/>
+  <path d="M48 68 V100 L64 116" stroke="#44BCFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="72" y="168" width="176" height="20" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="1.5"/>
+  <text x="160" y="182" text-anchor="middle" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="9">confirm price</text>
+</svg>

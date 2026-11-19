@@ -7,6 +7,7 @@ import TeamAvatars from '@/components/TeamAvatars.astro'
 import { planDescriptionToText } from '@/lib/planCopy'
 import { ENTERPRISE_MAU_STOPS, formatMau, type CreditStep } from '@/lib/enterpriseScale'
 import { DISCOUNT_TIERS, tierDiscountPercent } from '@/lib/currency'
+import { observeEventsForPlan } from '@/lib/observePlanAllowance'
 import PayAsYouGoPlan from './PayAsYouGoPlan.astro'
 
 interface Props {
@@ -47,6 +48,7 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
     `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' && !enterpriseScale ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })} ${m.of_bandwidth({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB storage`,
+    `${numberWithSpaces(observeEventsForPlan(plan))} observe events/${m.month({}, { locale: Astro.locals.locale })}`,
     'Native notifications',
     'Capgo Observe',
     ...(plan.name === 'Enterprise'
@@ -397,7 +399,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
     monthlyRadio?.addEventListener('change', () => updatePrices(false))
 
     // Preselect billing from ?billing=monthly|yearly (used by ad/product feed links)
-    const billing = new URLSearchParams(window.location.search).get('billing')
+    const billing = new URLSearchParams(window.location.search).get('billing') ?? (document.documentElement.dataset.offer === 'direct' ? 'monthly' : null)
     const billingRadio = billing === 'monthly' ? monthlyRadio : billing === 'yearly' ? yearlyRadio : null
     if (billingRadio && !billingRadio.checked) {
       billingRadio.checked = true
@@ -439,8 +441,14 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         price.dataset.priceAmount = String(base + credits)
         price.dataset.priceInterval = isYearly ? 'year-monthly' : 'month'
         price.dataset.priceExtra = String(credits)
-        renderPrices(card!)
       }
+      // "Billed annually at": the yearly Stripe price plus twelve months of extra MAU credits.
+      const yearlyAmount = query('[data-yearly-price] [data-price-amount]')
+      if (yearlyAmount) {
+        yearlyAmount.dataset.priceAmount = String(priceYearly + credits * 12)
+        yearlyAmount.dataset.priceExtra = String(credits * 12)
+      }
+      renderPrices(card!)
       const mau = query('[data-enterprise-mau]')
       if (mau) mau.textContent = `${mauLabel} MAU`
       const highlight = query('[data-enterprise-mau-highlight]')

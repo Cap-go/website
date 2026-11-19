@@ -1,8 +1,10 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { LLMS_WHEN_TO_USE_PATHS, markdownNotFoundResponse, prefersMarkdown, stripRewrittenAssetHeaders, withLlmsWhenToUse } from '../../../shared/agentDiscovery'
 import { withDevHostNoindex } from '../../../shared/devHostNoindex'
+import { withTranslationReadiness, type TranslationStoreReader } from '../../../shared/translationReadiness'
 
 interface Env {
+  TRANSLATION_STORE?: TranslationStoreReader
   ASSETS: {
     fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
   }
@@ -234,6 +236,16 @@ function shouldServeBrandedNotFound(pathname: string): boolean {
   return true
 }
 
+// The llms files are copies of the docs for AI agents: fetchable, but kept out of web search results
+// so they do not rank instead of the pages they summarize.
+const LLMS_ROBOTS_TAG = 'noindex'
+
+function withLlmsRobotsTag(response: Response): Response {
+  const headers = new Headers(response.headers)
+  headers.set('X-Robots-Tag', LLMS_ROBOTS_TAG)
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+}
+
 const baseWorker = {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const url = new URL(request.url)
@@ -255,13 +267,14 @@ const baseWorker = {
     if (LLMS_WHEN_TO_USE_PATHS.has(pathname) && (request.method === 'GET' || request.method === 'HEAD')) {
       const llms = await env.ASSETS.fetch(request)
       if (llms.status === 200) {
-        if (request.method === 'HEAD') return trackAICrawler(request, llms, ctx)
+        if (request.method === 'HEAD') return trackAICrawler(request, withLlmsRobotsTag(llms), ctx)
         const body = withLlmsWhenToUse(await llms.text())
         const headers = stripRewrittenAssetHeaders(new Headers(llms.headers))
         headers.set('Content-Type', 'text/plain; charset=utf-8')
+        headers.set('X-Robots-Tag', LLMS_ROBOTS_TAG)
         return trackAICrawler(request, new Response(body, { status: 200, headers }), ctx)
       }
-      if (llms.ok) return trackAICrawler(request, llms, ctx)
+      if (llms.ok) return trackAICrawler(request, withLlmsRobotsTag(llms), ctx)
     }
     const response = await env.ASSETS.fetch(request)
     if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return trackAICrawler(request, await capgoLogoFallback(request, env), ctx)
@@ -291,6 +304,14 @@ const baseWorker = {
 export default {
   ...baseWorker,
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
-    return withDevHostNoindex(request, await baseWorker.fetch(request, env, ctx))
+    return withDevHostNoindex(
+      request,
+      await withTranslationReadiness(
+        request,
+        await baseWorker.fetch(request, env, ctx),
+        env.TRANSLATION_STORE,
+        typeof caches === 'undefined' ? undefined : (caches as CacheStorage & { default?: Cache }).default,
+      ),
+    )
   },
 }

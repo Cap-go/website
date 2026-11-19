@@ -1,3 +1,5 @@
+import { creditDisplayPrice } from '@/lib/creditDisplayPrice'
+import { observeEventsForPlan } from '@/lib/observePlanAllowance'
 import { getCredits, getPlans } from '@/lib/siteData'
 import { useRuntimeConfig } from '@/config/app'
 import type { CreditStep } from '@/lib/pricingCalculator'
@@ -33,8 +35,8 @@ function renderTiers(credits: CreditStep[], type: string): string {
     const from = config.format(config.amount(step.step_min))
     const isLast = step.step_max >= Number.MAX_SAFE_INTEGER
     const range = isLast ? `${from}+` : `${from} to ${config.format(config.amount(step.step_max))}`
-    // price_per_unit is charged per unit_factor raw units, i.e. per displayed unit (MAU, GB, minute).
-    return `| ${range} ${config.plural ?? config.unit} | ${usd(step.price_per_unit)} per ${config.unit} |`
+    const priceUnit = type === 'mau' ? '1,000 monthly active users' : config.unit
+    return `| ${range} ${config.plural ?? config.unit} | ${usd(creditDisplayPrice(step))} per ${priceUnit} |`
   })
 
   return [`### ${config.title}`, '', `| Usage above plan allowance | Price |`, '| --- | --- |', ...rows].join('\n')
@@ -51,7 +53,8 @@ export const GET: APIRoute = async () => {
   const planRows = plans.map((plan) => {
     const buildMinutes = plan.build_time_unit ? Math.round(plan.build_time_unit / 60).toLocaleString('en-US') : '—'
     const yearlyMonthly = plan.price_y ? `$${Math.round(plan.price_y / 12)}/month ($${plan.price_y.toLocaleString('en-US')}/year)` : '—'
-    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB | ${(plan.storage ?? 0).toLocaleString('en-US')} GB | ${buildMinutes} min |`
+    const observeEvents = observeEventsForPlan(plan).toLocaleString('en-US')
+    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB | ${(plan.storage ?? 0).toLocaleString('en-US')} GB | ${buildMinutes} min | ${observeEvents} |`
   })
 
   const markdown = [
@@ -72,11 +75,13 @@ export const GET: APIRoute = async () => {
     '',
     '## Plans',
     '',
-    '| Plan | Monthly billing | Yearly billing | Monthly active users | Bandwidth | Storage | Native build time |',
-    '| --- | --- | --- | --- | --- | --- | --- |',
+    '| Plan | Monthly billing | Yearly billing | Monthly active users | Bandwidth | Storage | Native build time | Observe events / month |',
+    '| --- | --- | --- | --- | --- | --- | --- | --- |',
     ...planRows,
     '',
     '## Pay-as-you-go usage tiers',
+    '',
+    'User rates are shown per 1,000 monthly active users. Charges are rounded up to the billing unit, which may be one user or a group of users.',
     '',
     ...['mau', 'bandwidth', 'storage', 'build_time'].map((type) => renderTiers(credits, type)).filter(Boolean).flatMap((block) => [block, '']),
     PRICING_AGENT_POLICY_MARKDOWN.trim(),

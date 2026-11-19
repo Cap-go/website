@@ -1,4 +1,5 @@
-const llmsCustomSetRows = String.raw`Capgo Builder|cloud-based native iOS and Android builds with Capgo Build, CI triggers, and webhooks|docs/builder/**
+const llmsCustomSetRows =
+  `Capgo Builder|generally available production iOS and Android builds for Capacitor, CLI and MCP AI workflows, signing, pricing, measured performance, CI triggers, and webhooks|docs/builder/**
 Capgo CLI|full reference documentation for capgo CLI to upload and manage your live updates|docs/cli/**|docs/versioning.mdx
 Capgo MCP|hosted and local MCP servers that connect AI assistants like Claude, ChatGPT, and Cursor to a Capgo account|docs/ai/**|docs/cli/reference/mcp.mdx
 Capgo Versioning|how Capgo versions plugins, CLI, console, and LTS backports across Capacitor majors|docs/versioning.mdx
@@ -62,6 +63,7 @@ Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and 
 Plugin Install Referrer|install attribution plugin for Google Play Install Referrer and Apple AdServices|docs/plugins/install-referrer/**
 Plugin Intent Launcher|Android intent launcher plugin|docs/plugins/intent-launcher/**
 Plugin system surfaces|Siri, Shortcuts, WidgetKit, Live Activities, and Android intents versus expo-app-intents|docs/plugins/siri-shortcuts-widgets-and-intents.mdx
+Plugin AI engineering|How Capgo uses AI in its internal workflow to build, improve, and fix Capacitor plugins|docs/plugins/ai-engineering/**
 Plugin Intercom|Intercom customer messaging and support plugin for native in-app chat|docs/plugins/intercom/**
 Plugin Is Root|root/jailbreak detection plugin|docs/plugins/is-root/**
 Plugin IVS Player|Amazon IVS video player plugin|docs/plugins/ivs-player/**
@@ -150,8 +152,8 @@ Plugin Firebase Messaging|Firebase Cloud Messaging push notifications plugin|doc
 Plugin Firebase Performance|Firebase Performance Monitoring plugin|docs/plugins/firebase-performance/**
 Plugin Firebase Remote Config|Firebase Remote Config plugin|docs/plugins/firebase-remote-config/**
 Plugin Firebase Storage|Firebase Cloud Storage plugin|docs/plugins/firebase-storage/**`
-  .trim()
-  .split('\n')
+    .trim()
+    .split('\n')
 
 export const docsLlmsCustomSets = llmsCustomSetRows.map((row, index) => {
   const [label, description, ...paths] = row.split('|').map((part) => part.trim())

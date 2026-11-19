@@ -10,9 +10,9 @@ import { getRelativeLocaleUrl } from '@/services/links'
 const locale = Astro.locals.locale
 const pageTitle = 'Capacitor CI/CD with Capgo Build and AI Agents | Capgo'
 const pageDescription = 'Run Capgo Build from GitHub Actions, GitLab CI, or your AI agent for signed iOS and Android binaries. The EAS Workflows analog for Capacitor.'
-const buildDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')
-const githubActionsDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/github-actions')
-const credentialsDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/credentials')
+const buildDocsUrl = getRelativeLocaleUrl(locale, 'docs/builder/getting-started')
+const githubActionsDocsUrl = getRelativeLocaleUrl(locale, 'docs/builder/github-actions')
+const credentialsDocsUrl = getRelativeLocaleUrl(locale, 'docs/builder/credentials')
 const ciCdDocsUrl = getRelativeLocaleUrl(locale, 'docs/getting-started/cicd-integration')
 const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')
 const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
@@ -444,8 +444,8 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
             <div class="mt-1 text-sm text-gray-600">From One Workflow</div>
           </div>
           <div class="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
-            <div class="text-3xl font-bold text-gray-900">2–3 min</div>
-            <div class="mt-1 text-sm text-gray-600">Typical Build Time</div>
+            <div class="text-3xl font-bold text-gray-900">CLI + MCP</div>
+            <div class="mt-1 text-sm text-gray-600">Builds for CI and AI Agents</div>
           </div>
         </div>
       </div>

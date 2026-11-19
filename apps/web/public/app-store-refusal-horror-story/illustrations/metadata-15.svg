@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Age rating questionnaire says no ads while build shows banner ads">
+  <title>Age rating questionnaire says no ads while build shows banner ads</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="32" y="44" width="128" height="128" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="48" y="60" width="72" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="48" y="80" width="96" height="8" rx="4" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="48" y="108" width="16" height="16" rx="4" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M52 116 L58 122 L64 110" fill="none" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <text x="70" y="120" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="9" font-weight="600">No ads</text>
+  <rect x="48" y="140" width="88" height="20" rx="10" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="56" y="154" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">age rating</text>
+  <rect x="176" y="36" width="96" height="148" rx="14" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="188" y="48" width="72" height="8" rx="4" fill="#374151"/>
+  <rect x="188" y="68" width="56" height="56" rx="8" fill="#0F172A" stroke="#9CA3AF" stroke-width="1.5"/>
+  <rect x="196" y="132" width="56" height="16" rx="4" fill="#1F2937" stroke="#FBBF24" stroke-width="2"/>
+  <text x="204" y="144" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7" font-weight="600">AD</text>
+  <path d="M168 104 L176 104" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+  <polygon points="176,104 170,100 170,108" fill="#EF4444"/>
+  <rect x="200" y="168" width="80" height="22" rx="11" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="212" y="183" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8" font-weight="600">mismatch</text>
+  <circle cx="280" cy="56" r="18" fill="none" stroke="#44BCFF" stroke-width="2" opacity="0.45"/>
+  <text x="276" y="60" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="8" font-weight="600">45m</text>
+</svg>

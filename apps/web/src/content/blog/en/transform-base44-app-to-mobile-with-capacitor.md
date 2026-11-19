@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-06-24T00:00:00.000Z
-updated_at: 2026-10-20T00:37:53.000Z
+updated_at: 2026-11-11T16:45:30.000Z
 head_image: /base44-capacitor.webp
 head_image_alt: "Base44 to Native Mobile Apps with Capacitor Capgo blog illustration"
 keywords: Base44, Capacitor, mobile app development, React, export project, native mobile apps, Capgo Builder, vibe coding
@@ -307,7 +307,7 @@ You exported a Base44 AI-generated React app, wrapped it with Capacitor, and hav
 
 ### Next Steps
 
-- **[Capgo Live Updates](/live-updates/)**: Ship UI and copy fixes without waiting on store review
+- **[Capgo Live Updates](/live-update/)**: Ship UI and copy fixes without waiting on store review
 - **[Capgo Builder](/native-build/)**: Automate release builds in CI
 - **Push Notifications**: Add `@capacitor/push-notifications` and rebuild with Capgo Builder
 - **Related guides**: [Lovable to mobile](/blog/transform-lovable-dev-app-to-mobile-with-capacitor/) · [Bolt.new to mobile](/blog/transform-bolt-new-app-to-mobile-with-capacitor/)

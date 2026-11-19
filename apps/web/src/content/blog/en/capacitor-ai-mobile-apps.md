@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
-updated_at: 2026-10-25T00:21:37.000Z
+updated_at: 2026-11-11T16:45:30.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: "Why Capacitor Is the Best Way to Build AI Mobile Apps Right Now Capgo blog illustration"
 keywords: Capacitor, Capgo, AI mobile apps, LLM apps, live updates, OTA updates, React Native, Flutter, native iOS, native Android
@@ -482,10 +482,10 @@ In other words: **Capacitor is the bridge between web-native AI tooling and mobi
 
 Most AI apps need some native capabilities:
 
-* Camera access (scan, OCR, image input) — [@capgo/camera-preview](https://capgo.app/plugins/camera-preview/) and [@capgo/capacitor-document-scanner](https://capgo.app/plugins/capacitor-document-scanner/)
+* Camera access (scan, OCR, image input) — [@capgo/camera-preview](https://capgo.app/plugins/capacitor-camera-preview/) and [@capgo/capacitor-document-scanner](https://capgo.app/plugins/capacitor-document-scanner/)
 * Microphone and audio session management (voice) — [@capgo/capacitor-speech-recognition](https://capgo.app/plugins/capacitor-speech-recognition/) and [@capgo/capacitor-audiosession](https://capgo.app/plugins/capacitor-audiosession/)
 * On-device LLM inference — [@capgo/capacitor-llm](https://capgo.app/plugins/capacitor-llm/)
-* Push notifications — [@capgo/capacitor-firebase-messaging](https://capgo.app/plugins/capacitor-firebase-messaging/)
+* Push notifications — [@capgo/capacitor-firebase-messaging](https://capgo.app/docs/plugins/firebase-messaging/)
 * Background fetch / background tasks (limited, but important) — [@capgo/capacitor-background-task](https://capgo.app/plugins/capacitor-background-task/)
 * Share sheets, deep links, biometrics — [@capgo/capacitor-social-login](https://capgo.app/plugins/capacitor-social-login/) and [@capgo/capacitor-native-biometric](https://capgo.app/plugins/capacitor-native-biometric/)
 

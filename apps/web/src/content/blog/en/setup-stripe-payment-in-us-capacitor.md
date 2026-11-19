@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-05-01T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-11-11T16:45:30.000Z
 head_image: /stripe_apple.webp
 head_image_alt: "Stripe Payments in Capacitor: New Apple Guidelines Capgo blog illustration"
 keywords: capacitor, stripe, payment links, app store guidelines, iOS, digital goods, in-app purchases, external payments
@@ -16,7 +16,7 @@ locale: en
 origin: human
 ---
 
-# Implementing Stripe Payment Links in Capacitor Apps Following New Apple Guidelines
+## Implementing Stripe Payment Links in Capacitor Apps Following New Apple Guidelines
 
 As of May 1, 2025, Apple has implemented significant changes to its App Store Review Guidelines following the court ruling in the [Epic v. Apple case](https://storage.courtlistener.com/recap/gov.uscourts.cand.364265/gov.uscourts.cand.364265.1508.0_2.pdf). These changes specifically allow app developers in the United States to link out to external payment methods for digital goods and services, opening up alternatives to Apple's in-app purchase system.
 
