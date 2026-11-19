@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Five apps with icon mismatch, invisible login character and spam answers">
+  <title>Five apps with icon mismatch, invisible login character and spam answers</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="24" y="52" width="36" height="64" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="64" y="52" width="36" height="64" rx="8" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="104" y="52" width="36" height="64" rx="8" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="144" y="52" width="36" height="64" rx="8" fill="#111827" stroke="#F87171" stroke-width="2"/>
+  <rect x="184" y="52" width="36" height="64" rx="8" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <rect x="32" y="60" width="20" height="20" rx="6" fill="#44BCFF" opacity="0.9"/>
+  <rect x="112" y="60" width="20" height="20" rx="6" fill="#FBBF24"/>
+  <rect x="120" y="68" width="12" height="12" rx="4" fill="#EF4444" opacity="0.8"/>
+  <rect x="200" y="132" width="96" height="48" rx="10" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <text x="212" y="156" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">sign in</text>
+  <text x="212" y="170" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">• hidden</text>
+  <rect x="24" y="132" width="148" height="48" rx="10" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="36" y="152" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8" font-weight="600">4.3 spam</text>
+  <text x="36" y="168" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="8">9 answers</text>
+  <rect x="248" y="24" width="56" height="22" rx="11" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="258" y="39" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="8">1 of 5</text>
+</svg>
