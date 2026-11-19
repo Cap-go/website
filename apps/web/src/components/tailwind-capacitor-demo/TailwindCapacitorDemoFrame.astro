@@ -2,7 +2,7 @@
 import RegistryNav from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoNav.astro'
 import { tailwindCapacitorDemoNavItems } from '@/lib/tailwindCapacitorDemoCatalog'
 import stateManifest from '@/components/tailwind-capacitor-demo/state-manifest.json'
-import manifest from '@/tailwind-capacitor-snapshot/registry-manifest.json'
+import { tailwindCapacitorRegistryPackageCount } from '@/lib/tailwindCapacitorDemoCatalog'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 interface Props {
@@ -53,7 +53,7 @@ const states = stateManifest[slug as keyof typeof stateManifest] ?? [{ id: 'prev
               title={`Tailwind Capacitor demo: ${slug}: ${state.label}`}
               data-tc-state={state.id}
               src={`${shellBase}?slug=${encodeURIComponent(slug)}&state=${encodeURIComponent(state.id)}&platform=ios&dark=0`}
-              loading="lazy"
+              loading="eager"
             />
           </div>
         </section>
@@ -64,7 +64,7 @@ const states = stateManifest[slug as keyof typeof stateManifest] ?? [{ id: 'prev
   <div class="mt-6 lg:hidden">
     <RegistryNav
       items={tailwindCapacitorDemoNavItems}
-      registryItemCount={manifest.itemCount}
+      registryPackageCount={tailwindCapacitorRegistryPackageCount}
       catalogSectionCount={catalogSectionCount}
       locale={locale}
       activeSlug={activeSlug}

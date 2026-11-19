@@ -8,13 +8,13 @@ interface Item {
 
 interface Props {
   items: Item[]
-  registryItemCount: number
+  registryPackageCount: number
   catalogSectionCount: number
   locale: string
   activeSlug?: string
 }
 
-const { items, registryItemCount, catalogSectionCount, locale, activeSlug } = Astro.props
+const { items, registryPackageCount, catalogSectionCount, locale, activeSlug } = Astro.props
 const demoBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/')
 ---
 
@@ -23,7 +23,7 @@ const demoBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/'
     Components ({catalogSectionCount})
   </p>
   <p class="mt-1 text-[0.65rem] leading-snug text-gray-500" aria-describedby="tc-demo-registry-counts">
-    {registryItemCount} registry items. One preview page per component.
+    {registryPackageCount} registry JSON packages. {catalogSectionCount} interactive preview pages (foundation plus components with Vue demos).
   </p>
   <ul class="mt-3 flex flex-col gap-0.5 text-sm">
     {

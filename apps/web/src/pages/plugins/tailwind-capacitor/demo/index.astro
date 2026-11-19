@@ -3,8 +3,11 @@ import RegistryNav from '@/components/tailwind-capacitor-demo/TailwindCapacitorD
 import TailwindCapacitorDemoInstallSection from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoInstallSection.astro'
 import TailwindCapacitorDemoIntro from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoIntro.astro'
 import { TAILWIND_CAPACITOR_REGISTRY_COMMIT } from '../../../../../../shared/config/tailwindCapacitorRegistry'
-import { tailwindCapacitorDemoNavItems } from '@/lib/tailwindCapacitorDemoCatalog'
-import manifest from '@/tailwind-capacitor-snapshot/registry-manifest.json'
+import {
+  tailwindCapacitorDemoNavItems,
+  tailwindCapacitorDemoPreviewPageCount,
+  tailwindCapacitorRegistryPackageCount,
+} from '@/lib/tailwindCapacitorDemoCatalog'
 import Layout from '@/layouts/Layout.astro'
 import tailwindCapacitorDemoPagesCss from '@/styles/tailwind-capacitor-demo-pages.css?url'
 import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
@@ -24,8 +27,8 @@ const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
 })
 
 const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, { includeOrganization: true })
-const catalogSectionCount = tailwindCapacitorDemoNavItems.length
-const metaLine = `Registry pin: <code class="text-gray-400">${TAILWIND_CAPACITOR_REGISTRY_COMMIT}</code>. ${manifest.itemCount} registry items, ${catalogSectionCount} component preview pages.`
+const catalogSectionCount = tailwindCapacitorDemoPreviewPageCount
+const metaLine = `Registry pin: <code class="text-gray-400">${TAILWIND_CAPACITOR_REGISTRY_COMMIT}</code>. ${tailwindCapacitorRegistryPackageCount} registry JSON packages, ${catalogSectionCount} interactive preview pages.`
 ---
 
 <Layout content={{ title, description, ldJson, canonical: Astro.url.pathname }}>
@@ -44,7 +47,7 @@ const metaLine = `Registry pin: <code class="text-gray-400">${TAILWIND_CAPACITOR
       <aside class="hidden lg:block">
         <RegistryNav
           items={tailwindCapacitorDemoNavItems}
-          registryItemCount={manifest.itemCount}
+          registryPackageCount={tailwindCapacitorRegistryPackageCount}
           catalogSectionCount={catalogSectionCount}
           locale={locale}
         />
@@ -54,7 +57,7 @@ const metaLine = `Registry pin: <code class="text-gray-400">${TAILWIND_CAPACITOR
         <div class="lg:hidden">
           <RegistryNav
             items={tailwindCapacitorDemoNavItems}
-            registryItemCount={manifest.itemCount}
+            registryPackageCount={tailwindCapacitorRegistryPackageCount}
             catalogSectionCount={catalogSectionCount}
             locale={locale}
           />
