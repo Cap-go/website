@@ -17,6 +17,8 @@ Android and iOS emit this event. The web implementation does not emit `deepLinkP
 
 `openWebView()` resolves when the WebView is ready, not when the user closes it. Register `deepLinkPrevented` before opening, keep the listener for the whole browser session, and remove it when the session ends or your owning component tears down.
 
+In the example below, the WebView loads a checkout page on one host. `authorizedAppLinks` lists a different partner host so iOS can emit `deepLinkPrevented` when the user taps a partner Universal Link, not when they stay on the checkout URL you opened.
+
 ```typescript
 import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
@@ -37,7 +39,7 @@ try {
   const { id } = await InAppBrowser.openWebView({
     url: 'https://checkout.example.com/',
     preventDeeplink: true,
-    authorizedAppLinks: ['https://checkout.example.com/'],
+    authorizedAppLinks: ['https://partner.example'],
   });
   sessionId = id;
 } catch (error) {
@@ -49,5 +51,5 @@ try {
 
 ## Platform notes
 
-- **iOS:** Universal Links emit `deepLinkPrevented` only when the link matches an entry in `authorizedAppLinks` (use full URLs such as `https://partner.example`, not bare hostnames). App Store hosts and custom schemes emit the event when prevention blocks the hand-off.
+- **iOS:** Universal Links emit `deepLinkPrevented` only when the link matches an entry in `authorizedAppLinks` (full URLs such as `https://partner.example`, not bare hostnames). Do not list the same URL you passed to `openWebView()` unless you intend to handle navigation on that host. App Store hosts and custom schemes emit the event when prevention blocks the hand-off.
 - **Android:** `preventDeeplink` still blocks non-http(s) URLs and emits the event for those links. Authorized App Links keep the existing external launch behavior on Android.
