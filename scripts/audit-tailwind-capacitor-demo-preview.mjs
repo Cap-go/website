@@ -2,7 +2,8 @@ import { writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
-import manifest from '../apps/web/src/tailwind-capacitor-snapshot/registry-manifest.json' with { type: 'json' }
+import manifest from '../apps/web/vendor/tailwind-capacitor-registry-snapshot/registry-manifest.json' with { type: 'json' }
+import { assertDemoFrameHasVisibleControl } from './lib/tailwind-capacitor-demo-frame-assert.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const repoRoot = join(__dirname, '..')
@@ -107,6 +108,24 @@ if (iosRoot === materialRoot) {
   failures.push({ name: 'theme:compare', reason: 'iOS and Material roots share identical class lists', iosRoot, materialRoot })
 } else if (!iosRoot.includes('c-ios') || !materialRoot.includes('c-material')) {
   failures.push({ name: 'theme:compare', reason: 'theme roots missing expected platform markers', iosRoot, materialRoot })
+}
+
+try {
+  const catalogPage = await browser.newPage({ viewport: { width: 390, height: 844 } })
+  await catalogPage.goto(`${baseUrl}/plugins/tailwind-capacitor/demo/capacitor-button/`, {
+    waitUntil: 'networkidle',
+    timeout: 120_000,
+  })
+  const solidFrame = catalogPage.frameLocator('iframe.tc-demo-state-iframe[data-tc-state="solid"]').first()
+  await solidFrame.locator('#tc-demo-root').waitFor({ state: 'visible', timeout: 90_000 })
+  await assertDemoFrameHasVisibleControl(solidFrame)
+  await catalogPage.close()
+} catch (error) {
+  failures.push({
+    name: 'capacitor-button:embedded-shell',
+    reason: 'catalog Button page iframe missing a visible control',
+    detail: error instanceof Error ? error.message : String(error),
+  })
 }
 
 for (const check of overlayChecks) {

@@ -172,6 +172,18 @@ html.dark,
 .tc-demo-state-block-single .tc-demo-component-stage {
   flex: 1 1 auto;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+.tc-demo-state-block-single .tc-demo-component-stage > :where(button, [role='button'], .button, a.button) {
+  flex: 0 0 auto;
+  max-width: calc(100% - 0.5rem);
+  min-height: 2.75rem;
 }
 
 .tc-demo-overlay-open-stage {

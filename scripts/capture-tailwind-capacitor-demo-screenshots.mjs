@@ -12,6 +12,7 @@ import {
   dialogMetricsRelativeToRootCrop,
   effectiveHairlineCss,
 } from './lib/tailwind-capacitor-dialog-chrome.mjs'
+import { assertDemoFrameHasVisibleControl } from './lib/tailwind-capacitor-demo-frame-assert.mjs'
 
 const execFileAsync = promisify(execFile)
 
@@ -260,6 +261,7 @@ async function screenshotPhoneFrame(page, filePath, stateId = 'screen') {
   await preparePhoneFrameForCapture(page, stateId)
   const frame = await resolveDemoContentFrame(page)
   if (!frame) throw new Error('Tailwind Capacitor demo iframe is not ready')
+  await assertDemoFrameHasVisibleControl(frame)
   await page.waitForTimeout(150)
   await frame.locator('#tc-demo-root').screenshot({ path: filePath })
 }
