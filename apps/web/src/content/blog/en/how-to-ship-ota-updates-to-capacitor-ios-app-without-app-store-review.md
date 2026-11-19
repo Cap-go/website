@@ -111,7 +111,7 @@ When the channel uses the `metadata` strategy **and** the bundle currently live 
 bunx @capgo/cli@latest bundle upload --channel production --fail-on-incompatible --auto-min-update-version
 ```
 
-`--fail-on-incompatible` stops accidental uploads when native packages drift from what is live on the channel.
+`--fail-on-incompatible` stops accidental uploads when native packages drift from what is live on the channel. The CLI skips that check on a brand-new channel, or when the live bundle has no native-package metadata, so an incompatible bundle can still upload until you ship a compatible baseline. See [compatibility](https://capgo.app/docs/live-updates/compatibility/).
 
 ### 4. Let iOS devices pull the update
 
