@@ -1,12 +1,34 @@
 #!/usr/bin/env bun
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
+import path from 'node:path'
 import { chromium } from 'playwright'
 import plans from '../apps/web/src/data/capgo-plans.json'
-import { startStaticServer } from './lib/static-preview.mjs'
+import { ROOT, startStaticServer } from './lib/static-preview.mjs'
+
+function installChromium() {
+  const playwrightCli = path.join(ROOT, 'node_modules', 'playwright', 'cli.js')
+  const proc = spawnSync(process.execPath, [playwrightCli, 'install', 'chromium'], {
+    cwd: ROOT,
+    stdio: 'inherit',
+  })
+  if (proc.status !== 0) {
+    throw new Error('Failed to install Playwright Chromium')
+  }
+}
+
+async function launchBrowser() {
+  try {
+    return await chromium.launch()
+  } catch {
+    installChromium()
+    return chromium.launch()
+  }
+}
 
 const server = await startStaticServer('apps/web/dist', 0)
 const baseUrl = `http://127.0.0.1:${server.address().port}`
-const browser = await chromium.launch()
+const browser = await launchBrowser()
 const widths = [390, 640, 768, 1024, 1280, 1440, 1920]
 const scenarios = [
   { name: 'USD', currency: 'usd' },
