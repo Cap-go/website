@@ -37,6 +37,10 @@ If the selected period has no matching native events, Observe shows an empty sta
 
 For a [progressive rollout](/docs/live-updates/progressive-rollouts/), keep a small cohort until the target version has enough real signals to compare with stable. Observe helps identify a deteriorating launch or WebView metric before raising rollout exposure; it does not automatically change the rollout. Configure [auto-pause](/docs/live-updates/progressive-rollouts/#auto-pause-policy) when you want Capgo to enforce a failure threshold.
 
+## Security updates tab
+
+The **Security updates** subtab lists published advisories matched to native package and CLI versions your bundles already reported. Use it for remediation context after a release, not as proof that an app is fully patched. See [Observe security updates](/docs/webapp/observe-security-updates/) for how matching works and what each status means.
+
 ## Keep going from Observe
 
-Connect Observe with [Progressive rollouts](/docs/live-updates/progressive-rollouts/) for controlled delivery, [Log Insights](/docs/webapp/log-insights/) for prioritized errors, and [Logs](/docs/webapp/logs/) for raw event evidence.
+Connect Observe with [Progressive rollouts](/docs/live-updates/progressive-rollouts/) for controlled delivery, [Log Insights](/docs/webapp/log-insights/) for prioritized errors, [Logs](/docs/webapp/logs/) for raw event evidence, and [Observe security updates](/docs/webapp/observe-security-updates/) for advisory matching.

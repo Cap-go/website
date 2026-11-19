@@ -8,17 +8,17 @@ import SignupCta from '@/components/SignupCta.astro'
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
 
-const title = 'What is a Capacitor app? Pros, cons, history, and project health'
+const title = 'What Is Capacitor? Capacitor Apps, Pros, Cons, and Health'
 const description =
-  'A practical guide to Capacitor apps, including pros, cons, native tradeoffs, project health, and how Capgo live updates, plugins, and cloud builds improve Capacitor delivery.'
+  'Capacitor runs a web app inside native iOS and Android projects. See how Capacitor apps work, the pros and cons, when it fits, and how healthy the project is.'
 const pageUrl = `${config.baseUrl}/capacitor-app/`
 const image = `${config.baseUrl}/capgo_social.png`
 
 const healthStats = [
-  { label: 'Latest stable release', value: '8.3.1', detail: 'Published April 16, 2026' },
-  { label: 'GitHub stars', value: '15.6k', detail: 'ionic-team/capacitor' },
-  { label: 'Forks', value: '1.2k', detail: 'Public GitHub repo' },
-  { label: 'Monthly downloads', value: '9.6M', detail: '@capacitor/core, Apr 6-May 5 2026' },
+  { label: 'Latest stable release', value: '8.6.0', detail: 'Published October 28, 2026' },
+  { label: 'GitHub stars', value: '17.1k', detail: 'ionic-team/capacitor' },
+  { label: 'Forks', value: '1.3k', detail: 'Public GitHub repo' },
+  { label: 'Monthly downloads', value: '26.6M', detail: '@capacitor/core, Oct 11-Nov 9 2026' },
 ]
 
 const positives = [
@@ -115,30 +115,34 @@ const sources = [
   { label: '@capacitor/core on npm', href: 'https://www.npmjs.com/package/@capacitor/core' },
 ]
 
-const faqLdJson = createFAQPageLdJson(config, {
-  url: pageUrl,
-  questions: [
-    {
-      question: 'What is a Capacitor app?',
-      answer: 'A Capacitor app is a real iOS, Android, or web app that runs a modern web application inside a native container and uses plugins to access native device APIs.',
-    },
-    {
-      question: 'Is Capacitor healthy?',
-      answer:
-        'As of May 6, 2026, Capacitor is actively maintained by the Ionic team, has a recent 8.3.1 release, about 15.6k GitHub stars, and about 9.6 million @capacitor/core downloads in the previous month.',
-    },
-    {
-      question: 'When is Capacitor a bad fit?',
-      answer:
-        'Capacitor is a weaker fit for teams that want only native-language development, stock native UI everywhere, heavy native rendering, advanced games, AR-first products, constant high-volume native bridge traffic, or native-binary changes that must ship without store review.',
-    },
-    {
-      question: 'How does Capgo improve a Capacitor app?',
-      answer:
-        'Capgo adds live updates, rollback, channels, maintained Capacitor plugins, and cloud native builds. It helps teams bypass the store review queue for allowed web bundle updates while keeping native binary changes in the normal app review process.',
-    },
-  ],
-})
+const faqQuestions = [
+  {
+    question: 'What is Capacitor?',
+    answer:
+      'Capacitor is a free, open source native runtime from the Ionic team. It packages a web app built with HTML, CSS, and JavaScript into real iOS and Android projects and gives that web code access to native device APIs through plugins.',
+  },
+  {
+    question: 'What is a Capacitor app?',
+    answer: 'A Capacitor app is a real iOS, Android, or web app that runs a modern web application inside a native container and uses plugins to access native device APIs.',
+  },
+  {
+    question: 'Is Capacitor healthy?',
+    answer:
+      'As of November 11, 2026, Capacitor is actively maintained by the Ionic team, has a recent 8.6.0 release, about 17.1k GitHub stars, and about 26.6 million @capacitor/core downloads in the previous 30 days.',
+  },
+  {
+    question: 'When is Capacitor a bad fit?',
+    answer:
+      'Capacitor is a weaker fit for teams that want only native-language development, stock native UI everywhere, heavy native rendering, advanced games, AR-first products, constant high-volume native bridge traffic, or native-binary changes that must ship without store review.',
+  },
+  {
+    question: 'How does Capgo improve a Capacitor app?',
+    answer:
+      'Capgo adds live updates, rollback, channels, maintained Capacitor plugins, and cloud native builds. It helps teams bypass the store review queue for allowed web bundle updates while keeping native binary changes in the normal app review process.',
+  },
+]
+
+const faqLdJson = createFAQPageLdJson(config, { url: pageUrl, questions: faqQuestions })
 
 const webPageLdJson = createWebPageLdJson(config, {
   name: title,
@@ -364,7 +368,7 @@ const content = {
               Capacitor is maintained by the Ionic team, with community contributors around the ecosystem. The project is healthy, but not perfect: Ionic publicly acknowledged
               backlog debt in February 2026 and started a cleanup process for old issues and pull requests.
             </p>
-            <p class="mt-4 text-sm text-gray-400">Snapshot checked May 6, 2026. Counts move over time.</p>
+            <p class="mt-4 text-sm text-gray-400">Snapshot checked November 11, 2026. Counts move over time.</p>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
             {
@@ -389,6 +393,28 @@ const content = {
             <SignupCta id="capacitor-app-signup-cta" humanSupport align="start" />
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-950 py-14 sm:py-20" aria-labelledby="capacitor-app-faq-heading">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 id="capacitor-app-faq-heading" class="text-3xl font-bold text-white">Capacitor FAQ</h2>
+        <dl class="mt-8 space-y-4">
+          {
+            faqQuestions.map((item) => (
+              <div class="rounded-lg border border-gray-800 bg-gray-900 p-6">
+                <dt class="text-lg font-semibold text-white">{item.question}</dt>
+                <dd class="mt-3 text-gray-300">{item.answer}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="mt-8 text-gray-300">
+          Going deeper? Read the
+          <a href={getRelativeLocaleUrl(locale, 'blog/capacitor-comprehensive-guide')} class="text-sky-300 hover:underline">Capacitor guide with 21 questions answered</a>
+          or the
+          <a href={getRelativeLocaleUrl(locale, 'blog/comparing-react-native-vs-capacitor')} class="text-sky-300 hover:underline">Capacitor vs React Native comparison</a>.
+        </p>
       </div>
     </section>
 

@@ -20,11 +20,28 @@ hero:
       variant: minimal
 ---
 
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
 ## Overview
 
 `@capgo/native-purchases` wraps **StoreKit 2** and **Google Play Billing** with one Capacitor API for subscriptions, consumables, and restore flows. Load product metadata from the stores, purchase in app, and refresh entitlements without maintaining separate native bridges.
 
+
 Choose this plugin when you want first party billing without a third party subscription SDK.
+
+<CardGrid stagger>
+  <Card title="Exact Android offers" icon="approve-check">
+    Pass `offerToken` from the same `getProducts()` result you displayed so `purchaseProduct()` charges that offer. See [Android subscription offers](/docs/plugins/native-purchases/android-subscription-offers/).
+  </Card>
+  <Card title="Optional billing period" icon="open-book">
+    `Product.subscriptionPeriod` is optional. Android omits it on prepaid offers. Use `product.subscriptionPeriod?.unit`.
+  </Card>
+  <Card title="Installment cycles" icon="list-format">
+    Android installment plans can include `subscriptionBillingCycles` from Play's installment commitment payment count.
+  </Card>
+</CardGrid>
+
+These Android offer and product details are documented for [capacitor-native-purchases#245](https://github.com/Cap-go/capacitor-native-purchases/pull/245).
 
 ## Platform support
 
@@ -37,6 +54,7 @@ Choose this plugin when you want first party billing without a third party subsc
 
 - Native in-app purchases and subscriptions with StoreKit 2 and Google Play Billing.
 - Product metadata loaded directly from the stores, including localized titles and prices.
+- Android offer tokens, optional subscription periods, and installment billing cycle counts. See [Android subscription offers](/docs/plugins/native-purchases/android-subscription-offers/).
 - iOS StoreKit pricing terms for monthly subscriptions with 12-month commitments.
 - Purchase, restore, entitlement refresh, and native subscription management flows.
 - App Transaction helpers for migration from older business models.
@@ -48,8 +66,8 @@ Choose this plugin when you want first party billing without a third party subsc
 | `restorePurchases` | Restores a user's previous and links their appUserIDs to any user's also using those . |
 | `getAppTransaction` | Gets the App Transaction information, which provides details about when the user originally downloaded or purchased the app. |
 | `isEntitledToOldBusinessModel` | Compares the original app version from the App Transaction against a target version to determine if the user is entitled to features from an earlier business model. |
-| `purchaseProduct` | Starts the native purchase flow. On supported iOS versions, pass `billingPlanType: 'monthly'` to purchase a monthly billing plan with a 12-month commitment. |
-| `getProducts` | Gets product info associated with product identifiers. On supported iOS versions, subscription products can include `pricingTerms`. |
+| `purchaseProduct` | Starts the native purchase flow. On Android, pass `offerToken` to charge one exact offer from `getProducts()`, or `planIdentifier` for the first offer on that base plan. On supported iOS versions, pass `billingPlanType: 'monthly'` to purchase a monthly billing plan with a 12-month commitment. |
+| `getProducts` | Gets product info associated with product identifiers. On supported iOS versions, subscription products can include `pricingTerms`. On Android, subscription products may include `subscriptionPeriod` and `subscriptionBillingCycles` when Play exposes them. |
 | `getProduct` | Gets the product info for a single product identifier. |
 | `isBillingSupported` | Check if billing is supported for the current device. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |

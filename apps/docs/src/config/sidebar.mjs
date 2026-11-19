@@ -24,6 +24,7 @@ const updaterPluginSection = section(
     linkItem('Configuration', '/docs/plugins/updater/settings/'),
     linkItem('notifyAppReady call placement', '/docs/plugins/updater/notify-app-ready'),
     linkItem('Known Issues', '/docs/plugins/updater/known-issues'),
+    linkItem('Security advisory notifications', '/docs/plugins/updater/security-advisory-notifications/'),
     linkItem('Common Update Problems', '/docs/plugins/updater/commonproblems'),
     linkItem('Debugging', '/docs/plugins/updater/debugging'),
     linkItem('Cordova / Electron', '/docs/plugins/updater/cordova'),
@@ -66,14 +67,14 @@ const pluginEntries = [
   ['Audio Session', 'audiosession'],
   ['Auto', 'auto', [linkItem('iOS setup', '/docs/plugins/auto/ios'), linkItem('Android setup', '/docs/plugins/auto/android')]],
   ['Autofill Save Password', 'autofill-save-password'],
-  ['Background Geolocation', 'background-geolocation'],
+  ['Background Geolocation', 'background-geolocation', [linkItem('Geofence queue', '/docs/plugins/background-geolocation/geofence-queue')]],
   ['Background Task', 'background-task', [linkItem('iOS setup', '/docs/plugins/background-task/ios'), linkItem('Android behavior', '/docs/plugins/background-task/android')]],
   ['Barometer', 'barometer'],
   ['Bluetooth Low Energy', 'bluetooth-low-energy'],
   ['Brightness', 'brightness'],
   ['Calendar', 'calendar'],
   ['Camera Preview', 'camera-preview'],
-  ['Capacitor+', 'capacitor-plus'],
+  ['Capacitor+', 'capacitor-plus', [linkItem('Upstream backports', '/docs/plugins/capacitor-plus/upstream-backports/')]],
   ['Capacitor Patch', 'capacitor-patch'],
   ['Compass', 'compass'],
   ['Contentsquare', 'contentsquare', [linkItem('iOS setup', '/docs/plugins/contentsquare/ios'), linkItem('Android setup', '/docs/plugins/contentsquare/android')]],
@@ -136,7 +137,7 @@ const pluginEntries = [
   ['Mock Location Detector', 'mock-location-detector'],
   ['Mute', 'mute'],
   ['Mux Player', 'mux-player'], // @capgo/capacitor-mux-player
-  ['Native Audio', 'native-audio'],
+  ['Native Audio', 'native-audio', [linkItem('Playlist queue', '/docs/plugins/native-audio/playlist-queue')]],
   ['Native Biometric', 'native-biometric'],
   ['Native Geocoder', 'nativegeocoder'],
   ['Native Loader', 'native-loader'],
@@ -159,6 +160,7 @@ const pluginEntries = [
       section('Android Setup', [
         linkItem('Sandbox Testing', '/docs/plugins/native-purchases/android-sandbox-testing'),
         linkItem('Create Subscription', '/docs/plugins/native-purchases/android-create-subscription'),
+        linkItem('Subscription Offers', '/docs/plugins/native-purchases/android-subscription-offers'),
         linkItem('Introductory Offers', '/docs/plugins/native-purchases/android-introductory-offer'),
         linkItem('Play Store Review', '/docs/plugins/native-purchases/android-play-store-review'),
       ]),
@@ -184,7 +186,15 @@ const pluginEntries = [
   ['Privacy Screen', 'privacy-screen', [linkItem('iOS behavior', '/docs/plugins/privacy-screen/ios'), linkItem('Android behavior', '/docs/plugins/privacy-screen/android')]],
   ['Proximity', 'proximity'],
   ['PDF Generator', 'pdf-generator'],
-  ['PDF Viewer', 'pdf-viewer', [linkItem('iOS setup', '/docs/plugins/pdf-viewer/ios'), linkItem('Android setup', '/docs/plugins/pdf-viewer/android')]],
+  [
+    'PDF Viewer',
+    'pdf-viewer',
+    [
+      linkItem('underWebView', '/docs/plugins/pdf-viewer/under-webview'),
+      linkItem('iOS setup', '/docs/plugins/pdf-viewer/ios'),
+      linkItem('Android setup', '/docs/plugins/pdf-viewer/android'),
+    ],
+  ],
   ['Permissions', 'permissions', [linkItem('iOS setup', '/docs/plugins/permissions/ios'), linkItem('Android setup', '/docs/plugins/permissions/android')]],
   ['Pedometer', 'pedometer'],
   ['Persona', 'persona'],
@@ -286,12 +296,28 @@ const pluginEntries = [
   ['WiFi', 'wifi'],
   ['YouTube Player', 'youtube-player'],
   ['Zip', 'zip'],
-  ['Zebra DataWedge', 'zebra-datawedge', [linkItem('Android behavior', '/docs/plugins/zebra-datawedge/android')]],
+  [
+    'Zebra DataWedge',
+    'zebra-datawedge',
+    [linkItem('Android behavior', '/docs/plugins/zebra-datawedge/android'), linkItem('Complete configuration', '/docs/plugins/zebra-datawedge/complete-configuration')],
+  ],
 ]
+
+/** @type {Map<string, string>} */
+export const pluginNames = new Map([['updater', updaterPluginSection.label]])
+for (const entry of pluginEntries) {
+  if (Array.isArray(entry)) {
+    pluginNames.set(String(entry[1]), String(entry[0]))
+  } else {
+    const overview = entry.items.find((item) => 'link' in item && /^\/docs\/plugins\/[^/]+\/$/.test(item.link))
+    if (overview && 'link' in overview) pluginNames.set(overview.link.split('/')[3], entry.label)
+  }
+}
 
 const pluginItems = [
   linkItem('Getting Started', '/docs/plugins/'),
   linkItem('Siri, Shortcuts, and widgets', '/docs/plugins/siri-shortcuts-widgets-and-intents/'),
+  linkItem('AI engineering', '/docs/plugins/ai-engineering/'),
   updaterPluginSection,
   ...pluginEntries.map((entry) => (Array.isArray(entry) ? pluginDoc(entry[0], entry[1], entry[2] ?? []) : entry)),
   linkItem('👋 Get a custom plugin', '/consulting/'),
@@ -309,7 +335,16 @@ export const docsSidebar = [
     ],
     true,
   ),
-  section('AI agents (MCP)', [linkItem('Hosted MCP server', '/docs/ai/mcp/'), linkItem('Local CLI MCP server', '/docs/cli/reference/mcp/')], true),
+  section(
+    'AI agents (MCP)',
+    [
+      linkItem('Hosted MCP server', '/docs/ai/mcp/'),
+      linkItem('Web app to mobile app', '/docs/ai/webapp-to-mobile/'),
+      linkItem('MCP Events', '/docs/ai/mcp-events/'),
+      linkItem('Local CLI MCP server', '/docs/cli/reference/mcp/'),
+    ],
+    true,
+  ),
   autogeneratedItem('Capgo Builder', 'docs/builder', false),
   autogeneratedItem('Live Updates', 'docs/live-updates', true),
   autogeneratedItem('Public API', 'docs/public-api', true),

@@ -1,4 +1,6 @@
 ---
+import DirectOfferDetails from '@/components/DirectOfferDetails.astro'
+import OfferText from '@/components/OfferText.astro'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -17,7 +19,12 @@ const description = m.register_description
   : 'Create your free Capgo account and start deploying live updates to your Capacitor apps in minutes.'
 // The right column answers "what do I get, how much work is it, who else uses it" next to the form.
 const nextSteps = [
-  { title: m.register_step_account_title({}, { locale: Astro.locals.locale }), body: m.register_step_account_body({}, { locale: Astro.locals.locale }) },
+  {
+    title: m.register_step_account_title({}, { locale: Astro.locals.locale }),
+    body: m.register_step_account_body({}, { locale: Astro.locals.locale }),
+    directTitle: m.direct_offer_account_step({}, { locale: Astro.locals.locale }),
+    directBody: m.direct_offer_account_body({}, { locale: Astro.locals.locale }),
+  },
   {
     title: m.register_step_init_title({}, { locale: Astro.locals.locale }),
     body: m.register_step_init_body({}, { locale: Astro.locals.locale }),
@@ -93,6 +100,13 @@ const content = {
               </span>
               <span class="whitespace-nowrap">{m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}</span>
             </span>
+          </p>
+
+          <div data-direct-copy class="mt-4 rounded-xl border border-blue-400/20 bg-blue-400/5 p-4 text-slate-200">
+            <DirectOfferDetails />
+          </div>
+          <p data-direct-copy class="mt-3 text-sm leading-6 text-slate-300">
+            {m.direct_offer_mobile_setup({}, { locale: Astro.locals.locale })}
           </p>
 
           <form
@@ -215,7 +229,9 @@ const content = {
             </button>
             <div class="space-y-1 text-center text-xs leading-5 text-slate-500">
               <p class="text-sm leading-6 text-slate-400">
-                <PayAsYouGoCopy />{' '}
+                <span data-trial-copy>
+                  <PayAsYouGoCopy />
+                </span>{' '}
                 <a href={pricingUrl} target="_blank" rel="noopener" class="text-slate-300 underline underline-offset-2 hover:text-white">
                   {m.register_pricing_link({}, { locale: Astro.locals.locale })}
                 </a>
@@ -249,8 +265,8 @@ const content = {
                   {index + 1}
                 </span>
                 <div class="min-w-0">
-                  <h3 class="text-base font-semibold text-white">{step.title}</h3>
-                  <p class="mt-1 text-sm leading-6 text-slate-400">{step.body}</p>
+                  <h3 class="text-base font-semibold text-white">{step.directTitle ? <OfferText direct={step.directTitle}>{step.title}</OfferText> : step.title}</h3>
+                  <p class="mt-1 text-sm leading-6 text-slate-400">{step.directBody ? <OfferText direct={step.directBody}>{step.body}</OfferText> : step.body}</p>
                   {step.command && (
                     <code class="mt-2 inline-block max-w-full overflow-x-auto rounded-lg border border-white/10 bg-black/40 px-3 py-1.5 font-mono text-[13px] whitespace-nowrap text-slate-200">
                       <span class="text-slate-500 select-none" aria-hidden="true">

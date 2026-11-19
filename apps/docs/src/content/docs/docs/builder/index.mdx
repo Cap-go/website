@@ -10,6 +10,24 @@ import { Card, CardGrid, Aside, LinkCard } from '@astrojs/starlight/components';
 
 Capgo Build is a cloud-based native app compilation service for Capacitor apps. It lets you build iOS and Android apps without maintaining local development environments - no Xcode, no Android Studio, no Mac hardware required on your own machine.
 
+## Production availability and AI workflows
+
+**Capgo Build is generally available for production iOS and Android releases.** One CLI covers **2 native platforms** from Windows, Linux, macOS, or CI. Build minutes are included in Capgo plans; extra minutes use prepaid credits. See [current pricing](/pricing/) for allowances and rates. Apple and Google developer accounts, signing permissions, and store review requirements still apply.
+
+Use Capgo MCP with Codex, Claude Code, Cursor, or another MCP client to guide signing setup, request builds, inspect status, and diagnose logs. Start the [local MCP](/docs/cli/reference/mcp/) with `npx @capgo/cli@latest mcp`; for first-time signing setup, use `start_capgo_builder_onboarding` and follow its instructions. The [hosted MCP](/docs/ai/mcp/) supports preparing a build, uploading the native archive, starting the build, and reading status and logs. Never put signing secrets in chat.
+
+```bash
+npx @capgo/cli@latest build init
+npx @capgo/cli@latest build request com.example.app --platform ios
+npx @capgo/cli@latest build request com.example.app --platform android
+```
+
+### Measured build performance
+
+The [public Native Build data page](/builder-data/) publishes processing time, queue wait, success rates, and failure categories with a timestamp and platform breakdown. Its [public JSON feed](/builder-metrics.json) is readable without JavaScript.
+
+For the 30-day window reported on **November 11, 2026 at 12:32 UTC**, average processing time was **5.3 minutes** across both platforms (**5.1 minutes for iOS**, **5.7 minutes for Android**). Queue wait is measured separately. These are observed averages across customer projects, not a guaranteed completion time or an uptime SLA. Consult the live data for the latest window.
+
 ## What Capgo Build Does
 
 Capgo Build compiles the **native parts** of your Capacitor app in the cloud:
@@ -103,15 +121,15 @@ When you run the build command:
 2. **Build** - Your app compiles on dedicated infrastructure using Fastlane. Repeat builds restore a per-app compilation cache by default (omit `cache_key` for the shared general cache); set [`--cache-key`](/docs/builder/configuration/#build-cache) to partition RC and production, or pass `--no-cache` to disable restore and save
 3. **Sign** - Certificates and keystores are applied (they exist only in memory during the build)
 4. **Submit** - Signed apps are uploaded directly to App Store Connect or Google Play
-5. **Cleanup** - All build artifacts and credentials are automatically deleted
+5. **Cleanup** - Build-time files are cleaned up. Optional artifact downloads expire; explicitly saved app credentials remain available for later builds.
 
 Your source code stays on your machine. Only the platform-specific native code is uploaded.
 
 ## Security Model
 
-Capgo Build is designed with zero credential storage:
+Capgo Build supports local or CI credentials and optional encrypted credentials stored per app for hosted MCP workflows:
 
-- **Runtime-only credentials** - Certificates and keystores are never stored in Capgo. They are uploaded and removed immediately after the build finishes.
+- **Credential choices** - Keep signing credentials locally or in CI secrets, or explicitly store them encrypted per app for hosted MCP. Build-time copies are cleaned up after the job. See [credential management](/docs/builder/credentials/).
 - **Ephemeral environments** - Each build runs in isolation and is destroyed after completion
 - **No log storage** - Build logs stream to your terminal only, never stored on Capgo servers
 - **Minimal upload** - Only the native platform you request is uploaded, not your full codebase. [See exactly what gets uploaded](/docs/builder/getting-started/#what-gets-built)

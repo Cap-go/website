@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Health button wording, unused Bluetooth permission and missing weather attribution">
+  <title>Health button wording, unused Bluetooth permission and missing weather attribution</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="28" y="48" width="96" height="112" rx="14" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="44" y="64" width="64" height="22" rx="11" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <text x="52" y="79" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7" font-weight="600">Health btn</text>
+  <circle cx="56" cy="108" r="10" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+  <path d="M52 108 L62 108" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <text x="72" y="112" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8">BT unused</text>
+  <rect x="148" y="36" width="88" height="132" rx="14" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="164" y="52" width="56" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <circle cx="192" cy="88" r="20" fill="#1F2937" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="180" y="92" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="9">72°</text>
+  <rect x="164" y="118" width="56" height="20" rx="6" fill="#0F172A" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="172" y="132" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">no logo</text>
+  <rect x="252" y="56" width="48" height="28" rx="8" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="260" y="74" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="8">pass</text>
+  <circle cx="248" cy="148" r="14" fill="none" stroke="#FBBF24" stroke-width="2"/>
+  <text x="242" y="152" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="9" font-weight="700">×2</text>
+</svg>

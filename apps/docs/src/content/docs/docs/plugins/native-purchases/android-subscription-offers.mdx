@@ -1,0 +1,101 @@
+---
+title: Android subscription offers
+description: "Android offerToken purchase rules, optional subscriptionPeriod, and installment subscriptionBillingCycles for @capgo/native-purchases."
+sidebar:
+  order: 5
+---
+
+These Android product fields and `purchaseProduct()` offer rules are documented for [capacitor-native-purchases#245](https://github.com/Cap-go/capacitor-native-purchases/pull/245). The behavior below matches the plugin implementation.
+
+## Charge the offer you displayed
+
+On Android, `offerToken` selects which offer is charged. Read the token from the same `getProducts()` or `getProduct()` result you display, then pass that same token to `purchaseProduct()`. Tokens belong to one product query and go stale.
+
+If the token is missing from the product details returned by the plugin's query, the plugin rejects the purchase instead of selecting another offer. Other failures can also reject the purchase. Google Play may still show a different checkout, for example if the offer stops being eligible after the query, so the final price is not guaranteed.
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { product } = await NativePurchases.getProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: product.identifier, // Android base plan id; ignored on iOS
+  offerToken: product.offerToken, // Android: same offer as the price above; ignored on iOS
+  productType: PURCHASE_TYPE.SUBS,
+});
+```
+
+`getProducts()` can return more than one entry per Android subscription (one per offer or base plan). Purchase the entry whose price you showed.
+
+## Subscription offer selection
+
+For a subscription (`productType: 'subs'` or `PURCHASE_TYPE.SUBS`) the plugin needs either `offerToken` or `planIdentifier`. If both are missing or empty, the purchase is rejected with: `planIdentifier cannot be empty if productType is subs unless offerToken is provided`.
+
+`planIdentifier` is the **base plan id**. `getProducts()` reports that value as `Product.identifier`, not as `Product.planIdentifier` (that field holds the Play product id). It is required for Android subscriptions unless `offerToken` is given. It is ignored for one-time products and on iOS.
+
+When both are given, the token wins, because it already names one offer.
+
+Selection order for a subscription:
+
+1. An explicit `offerToken`, matched exactly.
+2. The first offer whose base plan matches `planIdentifier`.
+3. The first offer the store returned.
+
+These two misses are not treated the same:
+
+- An `offerToken` that matches no current offer is **rejected**. The plugin does not fall through to the plan or to the first offer.
+- A `planIdentifier` that matches no base plan still falls back to the first offer the store returned, as it did before this check.
+
+A base plan can carry several offers (a free trial, an introductory price). `planIdentifier` names only the plan, so the plugin then purchases the first offer Play returned for that plan. Pass `offerToken` whenever a specific offer you displayed must be the one charged.
+
+## One-time product offers
+
+For a one-time product (`productType: 'inapp'` or `PURCHASE_TYPE.INAPP`) there is no base plan, so `planIdentifier` plays no part.
+
+- If you pass `offerToken`, the plugin selects that exact one-time offer. If the token is not in the query result, the purchase is rejected.
+- If you omit `offerToken`, the plugin does not set an offer token whenever the product still has a backward-compatible purchase option. That leaves the choice to Play: it charges whichever buy option is marked backward-compatible (the first created one by default, or another if one was marked `legacyCompatible`). That need not be the first offer `getProducts()` returned.
+- Only when the product has no backward-compatible option does the plugin use the first offer in the list.
+
+Pass the token whenever a specific one-time offer matters.
+
+## `subscriptionPeriod` is optional
+
+`Product.subscriptionPeriod` is now optional. This is a TypeScript typings break: code that reads `product.subscriptionPeriod.unit` without a check now fails typechecking. Use optional chaining, for example `product.subscriptionPeriod?.unit`.
+
+| Platform | When the field is set |
+| --- | --- |
+| iOS | From StoreKit `subscription.subscriptionPeriod`. |
+| Android | From the standard pricing phase billing period when that phase is infinite recurring, or finite recurring on an installment offer (`InstallmentPlanDetails` is present). |
+| Android prepaid | Omitted for prepaid (non-recurring) offers. Those offers still include price fields (`price`, `priceString`, currency) and have no period. |
+
+Finite recurring phases without installment plan details also omit `subscriptionPeriod`.
+
+```typescript
+const periodLabel = product.subscriptionPeriod
+  ? `${product.subscriptionPeriod.numberOfUnits} ${product.subscriptionPeriod.unitString ?? 'period'}`
+  : 'See price at checkout';
+```
+
+## `subscriptionBillingCycles` (Android only)
+
+`Product.subscriptionBillingCycles` is Android-only. It is the committed payment count for installment base plans, taken from `InstallmentPlanDetails.getInstallmentPlanCommitmentPaymentsCount()` when Play exposes that value on the offer. The plugin sets the field only when that count is greater than zero. It is not available on iOS.
+
+```typescript
+const cycles = product.subscriptionBillingCycles;
+if (cycles !== undefined && cycles > 0 && product.subscriptionPeriod?.unitString) {
+  console.log(
+    `${product.priceString} each ${product.subscriptionPeriod.unitString}, ${cycles} payments`,
+  );
+}
+```
+
+## Related
+
+- [Getting started](/docs/plugins/native-purchases/getting-started/)
+- [Create an Android subscription](/docs/plugins/native-purchases/android-create-subscription/)
+- [Android introductory offers](/docs/plugins/native-purchases/android-introductory-offer/)
+- Plugin PR: [capacitor-native-purchases#245](https://github.com/Cap-go/capacitor-native-purchases/pull/245)

@@ -1,0 +1,331 @@
+---
+title: MCP Events
+description: Subscribe to Capgo account events over the hosted MCP server and receive signed HTTPS webhooks instead of polling.
+sidebar:
+  label: MCP Events
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+MCP Events let an agent **subscribe** to specific Capgo activity and receive **signed webhook deliveries** on an HTTPS URL you provide. The agent does not need to poll build status, bundle uploads, or channel deployments.
+
+Capgo models this on the [draft MCP Events specification](https://modelcontextprotocol.io) in the same spirit as other hosted MCP providers (for example Vercel). Deliveries use [Standard Webhooks](https://www.standardwebhooks.com/) signing. The hosted account MCP server at `https://api.capgo.app/mcp` exposes both protocol methods and `capgo_*` tool wrappers for clients that do not speak the Events protocol yet.
+
+<Aside type="note" title="Hosted only">
+  MCP Events exist on the **hosted** account MCP server. The [local CLI MCP server](/docs/cli/reference/mcp/) runs over stdio and cannot receive inbound webhooks, so it does not offer event subscriptions.
+</Aside>
+
+<Aside type="caution" title="No delivery guarantees">
+  Webhooks are best-effort. Capgo does not guarantee ordering, exactly-once delivery, or a maximum latency. Treat each delivery as a signal to refresh state or run a follow-up tool call. Each event goes through the same `webhook_delivery` queue as console webhooks: failed attempts retry with backoff, up to **5** tries per delivery. After the last failed attempt (or an HTTP `410 Gone` opt-out), Capgo sets the webhook row to **disabled** and stops sending until you fix the endpoint and subscribe again.
+</Aside>
+
+## How it works
+
+1. Your MCP client calls `events/subscribe` (or `capgo_subscribe_events`) with an HTTPS callback URL, the event name, and filter arguments.
+2. Capgo runs an [HTTPS verification challenge](#endpoint-verification-challenge) on that URL before the first event.
+3. When matching activity happens in your organization, Capgo `POST`s a JSON envelope to your URL with Standard Webhooks headers.
+4. Calling `events/subscribe` again for the same subscription **refreshes** its time to live (TTL). When TTL expires, deliveries stop until you subscribe again.
+
+On `initialize`, the server advertises `capabilities.events` so clients know Events are available.
+
+## Event catalog
+
+| Event name | When it fires |
+| ---------- | ------------- |
+| `build.succeeded` | A cloud native build reaches a successful terminal state. |
+| `build.failed` | A cloud native build fails or times out. `data.failure_category` is `timeout` when the job hit the build timeout. |
+| `bundle.uploaded` | A new app bundle version row is created from a real upload (not a metadata-only change). |
+| `bundle.deployed` | A channel's assigned bundle version **changes** (a deployment). Metadata-only channel updates do not emit this event. |
+| `update.failure_spike` | Updater failure rate crosses your subscribed thresholds inside the rolling window (per app, optional channel). |
+
+Every payload includes `org_id` and `app_id` inside `data`. Build events add build fields; bundle events add bundle or channel fields. Spike events add channel, window stats, and the threshold values that matched.
+
+### Subscribe filters (`arguments`)
+
+| Argument | Required | Applies to | Meaning |
+| -------- | -------- | ---------- | ------- |
+| `org_id` | Yes | All events | Organization to watch. |
+| `app_id` | No | `build.*`, `bundle.*` | Limit deliveries to one app. Omit to receive events for any app in the org you can read. |
+| `app_id` | Yes | `update.failure_spike` | App to watch. |
+| `channel` | No | `bundle.deployed`, `update.failure_spike` | Optional channel name filter. Omit on `update.failure_spike` to aggregate across channels for that app. |
+
+### `update.failure_spike` thresholds (`arguments`)
+
+Each subscription stores its own numbers. Capgo ships **Balanced** recommended defaults; tune them to your active device count and traffic so you catch real regressions without noise. `events/list` and `capgo_list_event_types` expose the same defaults.
+
+| Argument | Default (Balanced) | Meaning |
+| -------- | ------- | ------- |
+| `min_failures` | `10` | Minimum failed update checks in the window. |
+| `failure_rate_percent` | `10` | Minimum failure rate (percent of checks in the window). |
+| `min_checks` | `50` | Minimum total update checks in the window before a spike can fire. |
+| `window_minutes` | `15` | Rolling window length Capgo evaluates. |
+| `cooldown_minutes` | `60` | After one delivery, ignore further spikes for this subscription until cooldown ends. |
+
+A cron job evaluates active `update.failure_spike` subscriptions about every **5 minutes**. Each run has an about **12 second** evaluation budget and processes metric groups **serially** (concurrency **1**) within that window. Groups that share the same app, optional `channel`, and `window_minutes` reuse one stats fetch per tick. Stats cover the last `window_minutes` (install plus fail actions from version stats, optionally scoped to `channel`). If Capgo cannot create or queue the spike delivery, it restores the previous `mcp_spike_last_fired_at` value. After a delivery is queued, later HTTP failures use the normal webhook retry path and do not roll back spike cooldown.
+
+#### When a spike fires
+
+For the current window snapshot, Capgo evaluates **all three** conditions at once:
+
+1. Total checks in the window is at least `min_checks`.
+2. Failed checks in the window is at least `min_failures`.
+3. Failure rate (failures divided by checks, as a percent) is at least `failure_rate_percent`.
+
+When all three are true, Capgo claims the cooldown window and queues **one** `update.failure_spike` webhook. Additional threshold crossings during cooldown do not send another event until cooldown expires. If enqueue fails before the delivery row is queued, Capgo restores the previous `mcp_spike_last_fired_at` value. Once queued, delivery retries behave like any other webhook and may disable the endpoint without restoring spike cooldown.
+
+Payloads always include `top_failure_action_codes`. When the subscription has **no** `channel` filter, the array lists up to five updater failure actions with counts. When a `channel` filter is set, the field is present as an empty array (`[]`).
+
+Omitting a threshold argument on subscribe uses the default for that field. Subscription identity includes the full `arguments` object (including thresholds). To change thresholds, call `events/unsubscribe` (or `capgo_unsubscribe_events`) on the old subscription, then subscribe again with the new values. Refresh TTL only when URL, event name, and arguments are unchanged.
+
+#### Tuning examples (recommended starting points)
+
+**Small app** (hundreds of active devices, low daily update volume): defaults can be noisy because `min_checks` may never be reached, or a handful of failures skews the rate. Try stricter rate but lower volume gates, for example `min_failures: 5`, `failure_rate_percent: 15`, `min_checks: 25`, keeping `window_minutes: 15` and `cooldown_minutes: 60`.
+
+**Large app** (tens of thousands of active devices): defaults may be too sensitive to brief blips. Raise the volume gate and absolute failure count, for example `min_failures: 50`, `failure_rate_percent: 8`, `min_checks: 500`, `window_minutes: 15`, `cooldown_minutes: 60`.
+
+Revisit thresholds after each major rollout. Compare with [Observe](/docs/webapp/observe/) and `capgo_observe` when validating an alert.
+
+## Protocol methods and tools
+
+### MCP protocol (JSON-RPC)
+
+| Method | Purpose |
+| ------ | ------- |
+| `events/list` | List event types and their argument schema (catalog). |
+| `events/subscribe` | Create or refresh a subscription. Same call extends TTL when the subscription already exists. |
+| `events/unsubscribe` | Remove a subscription and stop deliveries. |
+
+### Account MCP tools
+
+These wrap the same behavior for clients that only support tools today:
+
+| Tool | Purpose |
+| ---- | ------- |
+| `capgo_list_event_types` | Same information as `events/list`. |
+| `capgo_subscribe_events` | Subscribe or refresh. Pass a `whsec_` secret your callback already knows when you verify every POST (including the verification challenge). If you omit `secret`, Capgo generates one, runs verification during the tool call, and returns the secret **once** after that attempt. |
+| `capgo_list_event_subscriptions` | List active MCP event subscriptions for the org. |
+| `capgo_unsubscribe_events` | Remove a subscription by id. |
+
+On the **protocol** subscribe path, you must supply the webhook signing secret. Capgo never echoes that secret back on later calls.
+
+Existing console webhook tools (`capgo_list_webhooks`, `capgo_create_webhook`, and so on) are unchanged. MCP event subscriptions are stored as webhook rows with `source: mcp` and appear in the console webhooks list with an **MCP** badge. Org admins can delete them there.
+
+## Delivery envelope
+
+Each `POST` body is a single JSON object:
+
+```json
+{
+  "eventId": "01J8Z...",
+  "name": "build.succeeded",
+  "timestamp": "2026-11-10T12:00:00.000Z",
+  "cursor": null,
+  "data": {}
+}
+```
+
+`cursor` is reserved for future pagination and is always `null` in v1.
+
+### Example: `build.succeeded`
+
+```json
+{
+  "eventId": "01J8ZXAMPLEBUILDOK",
+  "name": "build.succeeded",
+  "timestamp": "2026-11-10T12:00:00.000Z",
+  "cursor": null,
+  "data": {
+    "org_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "app_id": "com.example.app",
+    "job_id": "build-job-uuid",
+    "platform": "ios",
+    "build_mode": "release",
+    "duration_seconds": 840
+  }
+}
+```
+
+### Example: `build.failed` (timeout)
+
+```json
+{
+  "eventId": "01J8ZXAMPLEBUILDFAIL",
+  "name": "build.failed",
+  "timestamp": "2026-11-10T12:30:00.000Z",
+  "cursor": null,
+  "data": {
+    "org_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "app_id": "com.example.app",
+    "job_id": "build-job-uuid",
+    "platform": "android",
+    "build_mode": "release",
+    "failure_category": "timeout"
+  }
+}
+```
+
+### Example: `bundle.uploaded`
+
+```json
+{
+  "eventId": "01J8ZXAMPLEUPLOAD",
+  "name": "bundle.uploaded",
+  "timestamp": "2026-11-10T13:00:00.000Z",
+  "cursor": null,
+  "data": {
+    "org_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "app_id": "com.example.app",
+    "bundle_id": 9001,
+    "bundle_name": "1.2.3",
+    "checksum": "sha256:abc..."
+  }
+}
+```
+
+### Example: `bundle.deployed`
+
+```json
+{
+  "eventId": "01J8ZXAMPLEDEPLOY",
+  "name": "bundle.deployed",
+  "timestamp": "2026-11-10T13:05:00.000Z",
+  "cursor": null,
+  "data": {
+    "org_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "app_id": "com.example.app",
+    "channel_id": 7,
+    "channel_name": "production",
+    "bundle_id": 9001,
+    "previous_bundle_id": 8990
+  }
+}
+```
+
+### Example: `update.failure_spike`
+
+```json
+{
+  "eventId": "01J8ZXAMPLESPIKE",
+  "name": "update.failure_spike",
+  "timestamp": "2026-11-10T14:00:00.000Z",
+  "cursor": null,
+  "data": {
+    "org_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "app_id": "com.example.app",
+    "version": "1.2.3",
+    "failures": 18,
+    "checks": 120,
+    "rate_percent": 15,
+    "window_minutes": 15,
+    "window_start": "2026-11-10T13:45:00.000Z",
+    "window_end": "2026-11-10T14:00:00.000Z",
+    "thresholds": {
+      "min_failures": 10,
+      "failure_rate_percent": 10,
+      "min_checks": 50,
+      "window_minutes": 15,
+      "cooldown_minutes": 60
+    },
+    "top_failure_action_codes": [
+      { "action": "fail", "count": 12 }
+    ]
+  }
+}
+```
+
+## Endpoint verification challenge
+
+Before the first real event, Capgo `POST`s to your callback URL:
+
+- **Body:** `{"type":"verification","challenge":"<uuid>"}` (JSON)
+- **Headers:** `Content-Type: application/json`, Standard Webhooks headers (`webhook-id`, `webhook-timestamp`, `webhook-signature`) signed with the subscription `whsec_` secret, plus `X-MCP-Subscription-Id`, and `User-Agent: Capgo-MCP-Events/1.0`
+- **Your response:** HTTP 2xx and a JSON body that echoes the same `challenge` string. The response body must be at most 65,536 bytes.
+
+Your callback must answer with HTTP 2xx and echo the `challenge` string. When you supplied the secret on subscribe (protocol path, or `capgo_subscribe_events` with `secret`), verify the Standard Webhooks signature before echoing. When Capgo generates the secret during `capgo_subscribe_events`, the verification POST is sent before the tool returns that secret, so echo the challenge from the JSON body and store the returned `whsec_` for later event deliveries. On failure, `events/subscribe` returns JSON-RPC error **`-32027`** (`Callback endpoint verification failed`) with `id` and `reason`. `capgo_subscribe_events` returns a normal tool result with `verificationFailed: true` and `verificationReason`. Capgo does not deliver events until a later successful subscribe passes the challenge.
+
+## HTTP headers and signature verification
+
+Capgo sends Standard Webhooks headers on every delivery:
+
+| Header | Role |
+| ------ | ---- |
+| `webhook-id` | Same value as `eventId` in the body. |
+| `webhook-timestamp` | Unix timestamp (seconds) when the message was signed. |
+| `webhook-signature` | One or more signatures, each `v1,<base64>` HMAC-SHA256 over ``${webhook-id}.${webhook-timestamp}.${rawBody}`` using the subscription secret (without the `whsec_` prefix). |
+| `X-MCP-Subscription-Id` | Capgo subscription id for debugging and `events/unsubscribe`. |
+
+MCP event deliveries do **not** use the legacy `X-Capgo-Signature` header.
+
+Reject requests when the timestamp is too far from your server clock (for example more than five minutes). Always verify against the **raw** request body bytes, not a re-serialized JSON object.
+
+### Node.js verification sketch
+
+```ts
+import { createHmac, timingSafeEqual } from 'node:crypto'
+
+const MAX_TIMESTAMP_SKEW_SECONDS = 5 * 60
+
+function verifyStandardWebhook(
+  rawBody: string,
+  webhookId: string,
+  webhookTimestamp: string,
+  webhookSignatureHeader: string,
+  secretWithPrefix: string,
+  nowSeconds: number = Math.floor(Date.now() / 1000),
+): boolean {
+  const ts = Number.parseInt(webhookTimestamp, 10)
+  if (!Number.isFinite(ts) || Math.abs(nowSeconds - ts) > MAX_TIMESTAMP_SKEW_SECONDS)
+    return false
+
+  const secretBase64 = secretWithPrefix.startsWith('whsec_')
+    ? secretWithPrefix.slice('whsec_'.length)
+    : secretWithPrefix
+  const secretKey = Buffer.from(secretBase64, 'base64')
+
+  const signedContent = `${webhookId}.${webhookTimestamp}.${rawBody}`
+  const expected = createHmac('sha256', secretKey).update(signedContent, 'utf8').digest('base64')
+
+  for (const part of webhookSignatureHeader.split(' ')) {
+    const [version, sig] = part.split(',', 2)
+    if (version !== 'v1' || !sig) continue
+    const a = Buffer.from(sig)
+    const b = Buffer.from(expected)
+    if (a.length === b.length && timingSafeEqual(a, b)) return true
+  }
+  return false
+}
+```
+
+## Subscription lifetime and limits
+
+| Topic | Behavior |
+| ----- | -------- |
+| Default TTL | **24 hours** from subscribe or refresh. |
+| Refresh | Call `events/subscribe` (or `capgo_subscribe_events`) again with the same URL, event, and arguments before expiry. Extends TTL on the same row when the subscription is still active. |
+| Unlimited TTL | Not supported. |
+| Callback URL | **HTTPS only.** Same SSRF and safety checks as console webhooks. |
+| Verification | URL must pass the verification challenge before the first event is sent. |
+| Active subscriptions per org | **25** maximum **active** MCP rows (`enabled` and unexpired). A **new** subscription or a refresh that **re-enables** an inactive, disabled, or expired row counts against this cap under an org lock. Refreshing a row that is **already active** (same URL, event, and `arguments`) only extends TTL and does not use another slot. |
+| Delivery retries | Up to **5** attempts per delivery via `webhook_delivery`, then the webhook is **disabled** (`enabled = false`). |
+| Permissions | Requires `org.update_settings` (org settings admin), the same right as managing organization webhooks today. **App-scoped API keys cannot subscribe.** The key must be allowed to read every app matched by your filters. OAuth-connected MCP sessions follow the delegated key RBAC. |
+
+## Typical agent workflow
+
+```text
+events/list or capgo_list_event_types
+  -> pick build.*, bundle.*, or update.failure_spike (tune thresholds to device count)
+capgo_subscribe_events({ url, name, arguments, secret? })
+  -> save subscription id and whsec_ secret
+on POST: verify Standard Webhooks headers
+  -> capgo_observe / capgo_get_build_status / channel tools as needed
+before TTL: capgo_subscribe_events again to refresh
+capgo_unsubscribe_events when done
+```
+
+## Related
+
+- [Hosted MCP server](/docs/ai/mcp/)
+- [Organization roles](/docs/webapp/organization-roles/) (`org.update_settings`)
+- [Public API](/docs/public-api/)
+- [Monitor builds and releases](/docs/public-api/monitoring/)

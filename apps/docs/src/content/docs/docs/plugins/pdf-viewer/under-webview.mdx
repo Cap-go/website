@@ -1,0 +1,139 @@
+---
+title: underWebView
+description: 'Place a native PDF behind a transparent WebView and build custom HTML chrome with mode underWebView or toBack in @capgo/capacitor-pdf-viewer.'
+sidebar:
+  order: 3
+---
+
+Use `mode: 'underWebView'` (or `toBack: true`) when you want PDFKit / Pdfium rendering with no native chrome. The PDF sits behind your Capacitor WebView. You draw buttons, page indicators, and toolbars in HTML, while the native layer handles scroll, pinch zoom, and link hit testing through transparent areas.
+
+This mode is **iOS and Android only**. On web, use `fullscreen` or `inline`, or test the custom UI on a device.
+
+Source of truth: `src/definitions.ts` and the README on [capacitor-pdf-viewer](https://github.com/Cap-go/capacitor-pdf-viewer/). The example app button **Custom UI (toBack)** is a working demo.
+
+## Open in underWebView mode
+
+`toBack: true` is a shorthand for `mode: 'underWebView'`. Either one implies `nativeUi: false` (no native close button or toolbars).
+
+```typescript
+import { PdfViewer } from '@capgo/capacitor-pdf-viewer'
+
+document.body.classList.add('pdf-reading')
+
+await PdfViewer.addListener('pageChange', ({ page, pageCount }) => {
+  document.getElementById('pageLabel').textContent = `${page} / ${pageCount}`
+})
+
+await PdfViewer.addListener('close', () => {
+  document.body.classList.remove('pdf-reading')
+})
+
+await PdfViewer.open({
+  source: pdfBase64,
+  sourceType: 'base64',
+  mode: 'underWebView',
+  toBack: true,
+  nativeUi: false,
+  scrollMode: 'continuous',
+})
+```
+
+## Make the WebView transparent
+
+The WebView stack must be transparent so the PDF shows through (the same idea as `@capgo/camera-preview`):
+
+```css
+html,
+body {
+  background: transparent !important;
+}
+
+/* Let touches reach the PDF except on your controls */
+body.pdf-reading {
+  pointer-events: none;
+}
+
+.custom-toolbar,
+.custom-toolbar button,
+.custom-pdf-ui button,
+[data-capgo-pdf-interactive],
+[data-capgo-pdf-interactive] button {
+  pointer-events: auto;
+}
+```
+
+## Touch routing
+
+On Android and iOS the plugin places the PDF below the WebView, makes the WebView stack transparent, and routes touches outside interactive HTML controls to the native PDF view. The native touch router treats only nodes matching these selectors as interactive (their `getBoundingClientRect()` regions receive WebView touches). Touches outside those regions go to the PDF. `pointer-events` is checked only on matched nodes, not on arbitrary DOM elements:
+
+- `button`, `a`, `input`, `textarea`, `select`, `label`
+- any element with `data-capgo-pdf-interactive` (use this on a toolbar container so the whole bar stays tappable)
+- elements matching `.custom-toolbar` or `.custom-pdf-ui button`
+
+Elements with `pointer-events: none`, `visibility: hidden`, or `display: none`, or inside a `[hidden]` ancestor, are ignored. Use `pointer-events: none` on non-interactive page regions and `pointer-events: auto` on controls.
+
+On Android the plugin also calls `requestTransparentRegion` for correct compositing. On iOS a native hit-test wrapper applies the same rules while the WebView keeps HTML controls.
+
+## Custom toolbar example
+
+```html
+<div class="custom-toolbar pdf-toolbar" data-capgo-pdf-interactive>
+  <button type="button" id="prev">Prev</button>
+  <span id="pageLabel">1 / 1</span>
+  <button type="button" id="next">Next</button>
+  <button type="button" id="zoomOut">Zoom out</button>
+  <button type="button" id="zoomIn">Zoom in</button>
+  <button type="button" id="closePdf">Close</button>
+</div>
+```
+
+```typescript
+document.getElementById('prev').onclick = () => PdfViewer.previousPage()
+document.getElementById('next').onclick = () => PdfViewer.nextPage()
+document.getElementById('zoomOut').onclick = () => PdfViewer.setZoom({ scale: 0.75 })
+document.getElementById('zoomIn').onclick = async () => {
+  await PdfViewer.setZoom({ scale: 1.25 })
+}
+document.getElementById('closePdf').onclick = () => PdfViewer.close()
+```
+
+## Layout and updateLayout()
+
+Optional `layout` is in CSS pixels relative to the WebView viewport. Omit width and height to fill the WebView bounds. Call `updateLayout()` after rotation or when your chrome changes size. It is ignored for `inline` and classic fullscreen overlay.
+
+```typescript
+await PdfViewer.open({
+  source: pdfBase64,
+  sourceType: 'base64',
+  mode: 'underWebView',
+  layout: { x: 0, y: 80, width: 360, height: 560 },
+})
+
+await PdfViewer.updateLayout({ x: 0, y: 0, width: 360, height: 640 })
+```
+
+| Prop     | Description                                                              |
+| -------- | ------------------------------------------------------------------------ |
+| `x`      | Horizontal origin in CSS pixels from the WebView viewport left edge.     |
+| `y`      | Vertical origin in CSS pixels from the WebView viewport top edge.        |
+| `width`  | Width in CSS pixels. When omitted with height, fills the WebView width.  |
+| `height` | Height in CSS pixels. When omitted with width, fills the WebView height. |
+
+## hide() and show()
+
+`hide()` hides the PDF layer without unloading the document. `show()` brings it back.
+
+- Android and web accept `hide()` and `show()` in any open mode (`fullscreen`, `inline`, or `underWebView`).
+- iOS accepts them only in `underWebView` or `inline` mode and rejects other modes.
+
+## Web limits
+
+`underWebView` / `toBack` is not available in the browser implementation. `nativeUi: false` with `mode: 'fullscreen'` is rejected on web. Use `inline` mode with `elementId`, or keep `nativeUi` enabled, and test custom HTML chrome on iOS or Android.
+
+## Related
+
+- [Overview](/docs/plugins/pdf-viewer/)
+- [Getting started](/docs/plugins/pdf-viewer/getting-started/)
+- [iOS setup](/docs/plugins/pdf-viewer/ios/)
+- [Android setup](/docs/plugins/pdf-viewer/android/)
+- Plugin PR: [capacitor-pdf-viewer #3](https://github.com/Cap-go/capacitor-pdf-viewer/pull/3)

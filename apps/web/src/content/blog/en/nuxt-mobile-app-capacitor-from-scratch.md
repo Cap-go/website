@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-15T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-11-11T16:45:30.000Z
 head_image: /nuxt_capgo.webp
 head_image_alt: "Build a Nuxt Mobile App from Scratch with Capacitor 8 Capgo blog illustration"
 keywords: Nuxt 4, Capacitor 8, mobile app from scratch, iOS development, Android development, Vue mobile app, native plugins, Tailwind CSS
@@ -516,7 +516,7 @@ You now have a working Nuxt mobile app. Here's what to do next:
 ### Add More Features
 - **Camera:** `bun add @capacitor/camera`
 - **Geolocation:** `bun add @capacitor/geolocation`
-- **Push Notifications:** `bun add @capacitor/push-notifications` or [@capgo/capacitor-firebase-messaging](https://capgo.app/plugins/capacitor-firebase-messaging/) for Firebase Cloud Messaging on iOS and Android
+- **Push Notifications:** `bun add @capacitor/push-notifications` or [@capgo/capacitor-firebase-messaging](https://capgo.app/docs/plugins/firebase-messaging/) for Firebase Cloud Messaging on iOS and Android
 - **File System:** `bun add @capacitor/filesystem`
 
 ### Native UI and transitions

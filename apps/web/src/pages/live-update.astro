@@ -26,7 +26,7 @@ function copy(key: string, values: MessageValues = {}) {
   return m[key](values, { locale })
 }
 
-const title = `${brand} | ${m.live_update_seo_title({}, { locale })}`
+const title = `${m.live_update_seo_title({}, { locale })} | ${brand}`
 const description = m.live_update_description({}, { locale })
 const dataUrl = getRelativeLocaleUrl(locale, 'data')
 const expoUrl = getRelativeLocaleUrl(locale, 'alternatives/expo')

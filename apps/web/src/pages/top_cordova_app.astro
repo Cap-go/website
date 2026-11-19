@@ -6,7 +6,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
 import { renameCat, shortNumber, plausibleStoreShare } from '@/services/misc'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.top_cordova_apps_title({}, { locale: Astro.locals.locale })].join(' | ')
+const title = `${m.top_apps_seo_title({ framework: 'Cordova' }, { locale: Astro.locals.locale })} | ${Astro.locals.runtimeConfig.public.brand}`
 const description = m.top_cordova_apps({}, { locale: Astro.locals.locale })
 
 const content = { title, description }

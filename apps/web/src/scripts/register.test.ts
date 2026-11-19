@@ -10,6 +10,7 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     let authCalls = 0
     const toasts: string[] = []
     const button = { disabled: false }
+    const windowStub: Record<string, unknown> = { location: { search: '' } }
     const values: Record<string, unknown> = {
       registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
       email: { value: 'test@example.com' },
@@ -29,10 +30,10 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
       getSignupAttributionForEvents: () => ({}),
       getRegistrationDevice: () => ({}),
       Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
-      window: { location: { search: '' } },
+      window: windowStub,
       navigator: {},
       URLSearchParams,
-      setTimeout,
+      setTimeout: (callback: () => void) => callback(),
     })
     await Promise.resolve()
     expect(button.disabled).toBe(false)
@@ -40,8 +41,63 @@ test('a slow CAPTCHA cannot send an unverified registration request', async () =
     expect(authCalls).toBe(captchaEnabled ? 0 : 1)
     if (captchaEnabled) expect(toasts).toEqual(['Check “Verify you are human” above, then tap Sign up again.'])
     else expect(toasts.some((text) => text.includes('Verify you are human'))).toBe(false)
-    if (captchaEnabled) expect(button.disabled).toBe(false)
+    if (captchaEnabled) {
+      expect(button.disabled).toBe(false)
+      // Once the token arrives, the same form submits again: the failed wait must not lock it.
+      windowStub.turnstile = { getResponse: () => 'token', reset() {} }
+      await handler({ preventDefault() {} })
+      expect(authCalls).toBe(1)
+    }
   }
+})
+
+test('a submit before the invisible CAPTCHA finishes waits for its token instead of failing', async () => {
+  const source = readFileSync(new URL('./register.ts', import.meta.url), 'utf8').replace(/^import .*\n/gm, '')
+  let handler: (event: { preventDefault(): void }) => Promise<void> = async () => {}
+  const button = { disabled: false }
+  const requests: any[] = []
+  const toasts: string[] = []
+  let polls = 0
+  const values: Record<string, unknown> = {
+    registerForm: { querySelector: () => button, addEventListener: (_name: string, callback: typeof handler) => (handler = callback) },
+    email: { value: 'signup@example.com' },
+    password: { value: 'Password123!', setAttribute() {}, removeAttribute() {}, focus() {} },
+  }
+  runInNewContext(new Bun.Transpiler({ loader: 'ts' }).transformSync(source), {
+    document: { getElementById: (id: string) => values[id], querySelectorAll: () => [], querySelector: () => ({}) },
+    registerUser: async (request: unknown) => {
+      requests.push(request)
+      throw new Error('Stop the test before any auth IO')
+    },
+    RegisterApiError: Error,
+    getPasswordRequirementErrors: () => [],
+    getPasswordRuleStatus: () => ({}),
+    formatPasswordRequirementErrors: () => '',
+    getSignupUserMetadataForRegistration: () => ({}),
+    getSignupAttributionForEvents: () => ({}),
+    getRegistrationDevice: () => ({}),
+    Toastify: ({ text }: { text: string }) => ({ showToast: () => toasts.push(text) }),
+    // The widget is not rendered on the first poll (getResponse throws), then hands out its token on the third poll.
+    window: {
+      location: { search: '' },
+      turnstile: {
+        getResponse: () => {
+          if (polls === 0) throw new Error('widget not rendered')
+          return polls >= 3 ? 'late-token' : ''
+        },
+        reset() {},
+      },
+    },
+    navigator: {},
+    URLSearchParams,
+    setTimeout: (callback: () => void) => {
+      polls++
+      callback()
+    },
+  })
+  await handler({ preventDefault() {} })
+  expect(requests.map((request) => request.captcha_token)).toEqual(['late-token'])
+  expect(toasts.some((text) => text.includes('Verify you are human'))).toBe(false)
 })
 
 test('registration without profile names preserves referral attribution and the console handoff', async () => {

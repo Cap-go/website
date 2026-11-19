@@ -20,7 +20,7 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
 >
   ;(function () {
     try {
-      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign']
+      var tracked = ['first_touch_type', 'first_touch_path', 'ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'oppref']
       var now = Date.now()
 
       function isOfferFresh(capturedAt) {
@@ -61,7 +61,8 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
         if (!source || typeof source !== 'object') return out
         for (var ti = 0; ti < tracked.length; ti++) {
           var tk = tracked[ti]
-          if (!source[tk]) continue
+          if (typeof source[tk] !== 'string' || !source[tk]) continue
+          if (tk === 'oppref' && (source[tk].length > 1024 || /[\u0000-\u0020\u007f]/.test(source[tk]))) continue
           out[tk] = source[tk]
         }
         if (source.offer === directOffer && isOfferFresh(source.offer_at)) {
@@ -105,10 +106,16 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       var utmSource = params.get('utm_source')
       var utmMedium = params.get('utm_medium')
       var utmCampaign = params.get('utm_campaign')
+      var utmContent = params.get('utm_content')
+      var utmTerm = params.get('utm_term')
+      var oppref = params.get('oppref')
       if (ref) incoming.ref = ref
       if (utmSource) incoming.utm_source = utmSource
       if (utmMedium) incoming.utm_medium = utmMedium
       if (utmCampaign) incoming.utm_campaign = utmCampaign
+      if (utmContent) incoming.utm_content = utmContent.trim()
+      if (utmTerm) incoming.utm_term = utmTerm.trim()
+      if (oppref && oppref.length <= 1024 && !/[\u0000-\u0020\u007f]/.test(oppref)) incoming.oppref = oppref
       if (urlOffer) {
         incoming.offer = directOffer
         incoming.offer_at = new Date(now).toISOString()
@@ -160,9 +167,23 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (!data.utm_source && incoming.utm_source) data.utm_source = incoming.utm_source
       if (!data.utm_medium && incoming.utm_medium) data.utm_medium = incoming.utm_medium
       if (!data.utm_campaign && incoming.utm_campaign) data.utm_campaign = incoming.utm_campaign
+      if (!data.utm_content && incoming.utm_content) data.utm_content = incoming.utm_content
+      if (!data.utm_term && incoming.utm_term) data.utm_term = incoming.utm_term
+      if (!data.oppref && incoming.oppref) data.oppref = incoming.oppref
       if (data.offer === directOffer) markDirectOffer()
 
-      if (!data.first_touch_type && !data.first_touch_path && !data.ref && !data.utm_source && !data.utm_medium && !data.utm_campaign && !data.offer) {
+      if (
+        !data.first_touch_type &&
+        !data.first_touch_path &&
+        !data.ref &&
+        !data.utm_source &&
+        !data.utm_medium &&
+        !data.utm_campaign &&
+        !data.utm_content &&
+        !data.utm_term &&
+        !data.oppref &&
+        !data.offer
+      ) {
         return
       }
 

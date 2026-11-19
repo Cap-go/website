@@ -28,6 +28,10 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
   **Why Capacitor+?** Great PRs sit unmerged in the official Capacitor repository for months. Capacitor+ actively merges these community contributions so you don't have to wait.
 </Aside>
 
+<Aside type="note">
+  For the public security story, advisory emails, and documented CLI audit findings, see [Capacitor+ security on Capgo](https://capgo.app/capacitor-security/).
+</Aside>
+
 <CardGrid stagger>
   <Card title="Community PRs Merged Faster" icon="rocket">
     Bug fixes and features stuck in upstream? We merge them so you can benefit immediately.
@@ -42,6 +46,8 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
     Same API as official Capacitor - just change the package scope and you're done.
   </Card>
 </CardGrid>
+
+Fork-only fixes ship on `plus` and `@capacitor-plus/*` first. Maintainers can then propose the same change on [ionic-team/capacitor](https://github.com/ionic-team/capacitor/) `main` by hand. See [Fixes flow back upstream](/docs/plugins/capacitor-plus/upstream-backports/) for CI, npm release, inbound sync vs outbound backports, and how we track status.
 
 ## Platform support
 

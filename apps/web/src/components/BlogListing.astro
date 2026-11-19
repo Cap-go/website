@@ -48,6 +48,14 @@ if (isArticlesListing) {
   if (Astro.locals.runtimeConfig.public.blog_description) content.description = Astro.locals.runtimeConfig.public.blog_description
 }
 
+if (currentCategory) {
+  // Every category used to reuse the listing home title and description, so they all competed as duplicates.
+  const brand = Astro.locals.runtimeConfig.public.brand
+  const listingName = isArticlesListing ? 'Articles' : 'Blog'
+  content.title = `${m.blog_category_seo_title({ category: currentCategory }, { locale: Astro.locals.locale })} | ${brand} ${listingName}`
+  content.description = m.blog_category_seo_description({ category: currentCategory, listing: listingName.toLowerCase() }, { locale: Astro.locals.locale })
+}
+
 const pageHeading = isArticlesListing ? m.latest_from_articles({}, { locale: Astro.locals.locale }) : m.latest_from_the_blog({}, { locale: Astro.locals.locale })
 const pageDescription = isArticlesListing ? m.articles_description({}, { locale: Astro.locals.locale }) : config.public.blog_description
 ---

@@ -14,6 +14,32 @@ bunx cap sync
 
 `bunx cap sync` copies the plugin's native code into your native projects. Run it again after every plugin upgrade.
 
+## Native SDK floors and permissions
+
+| Platform | SDK floor | Minimum OS |
+| --- | --- | --- |
+| iOS | Swift Package Manager `from: "5.11.3"`. CocoaPods `TwilioVideo ~> 5.11` allows any 5.11.x and does not by itself require 5.11.3. | iOS 15+ |
+| Android | `com.twilio:video-android:7.10.5` | API 24+ |
+| Web | Unimplemented. All methods throw `unimplemented`. | n/a |
+
+Add these keys to `ios/App/App/Info.plist`:
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app uses the microphone for video calls</string>
+<key>NSCameraUsageDescription</key>
+<string>This app uses the camera for video calls</string>
+```
+
+The plugin registers Capacitor permission aliases for `RECORD_AUDIO` and `CAMERA`. Request them before joining with audio or video. If your host app does not inherit the plugin manifest merger entries, declare the permissions in `android/app/src/main/AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.CAMERA" />
+```
+
+Mint short-lived Twilio Video access tokens on your backend. Never mint tokens inside the mobile app.
+
 ## Import
 
 ```typescript
@@ -36,6 +62,46 @@ import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 | `requestMicrophonePermission` | Request microphone permission. |
 | `checkCameraPermission` | Check camera permission state. |
 | `requestCameraPermission` | Request camera permission. |
+| `addListener` | Listen for room and participant lifecycle events. |
+| `removeAllListeners` | Remove every listener registered through this plugin instance. |
+
+## Usage
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+const token = await fetchVideoTokenFromYourBackend();
+
+await CapacitorTwilioVideo.requestMicrophonePermission();
+await CapacitorTwilioVideo.requestCameraPermission();
+
+await CapacitorTwilioVideo.login({ accessToken: token });
+
+await CapacitorTwilioVideo.addListener('roomConnected', ({ roomName, participantCount }) => {
+  console.log('Connected', roomName, participantCount);
+});
+
+await CapacitorTwilioVideo.addListener('participantConnected', ({ identity, participantCount }) => {
+  console.log('Participant joined', identity, participantCount);
+});
+
+await CapacitorTwilioVideo.joinRoom({
+  roomName: 'daily-standup',
+  enableAudio: true,
+  enableVideo: true,
+});
+
+const status = await CapacitorTwilioVideo.getCallStatus();
+console.log(status.callState, status.isMicrophoneEnabled, status.isCameraEnabled);
+
+await CapacitorTwilioVideo.setMicrophoneEnabled({ enabled: false });
+await CapacitorTwilioVideo.setCameraEnabled({ enabled: true });
+
+await CapacitorTwilioVideo.leaveRoom();
+await CapacitorTwilioVideo.logout();
+```
+
+`joinRoom` defaults are `enableAudio: true` and `enableVideo: false`.
 
 ## Examples
 
@@ -79,7 +145,11 @@ Join a Twilio room and present the plugin's native in-app call overlay.
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-const result = await CapacitorTwilioVideo.joinRoom({ roomName: 'room' });
+const result = await CapacitorTwilioVideo.joinRoom({
+  roomName: 'daily-standup',
+  enableAudio: true,
+  enableVideo: true,
+});
 console.log(result);
 ```
 

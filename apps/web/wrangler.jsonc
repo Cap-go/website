@@ -14,6 +14,7 @@
     "run_worker_first": true,
   },
   "workers_dev": false,
+  "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache" }],
   "ratelimits": [
     {
       "name": "PUBLIC_MCP_RATE_LIMITER",
@@ -49,6 +50,7 @@
   ],
   "env": {
     "development": {
+      "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache-development" }],
       "ratelimits": [
         {
           "name": "PUBLIC_MCP_RATE_LIMITER",

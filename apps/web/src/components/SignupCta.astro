@@ -3,6 +3,7 @@ import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import HumanSupport from '@/components/HumanSupport.astro'
+import DirectOfferDetails from '@/components/DirectOfferDetails.astro'
 import OfferText from '@/components/OfferText.astro'
 
 interface Props {
@@ -38,6 +39,11 @@ const isCompact = size === 'compact'
 
 <div class:list={['signup-cta not-content flex flex-col gap-4', isLight && 'is-light', align === 'start' ? 'items-start text-left' : 'items-center text-center', className]}>
   {lead && <p class:list={['font-inter m-0 max-w-md text-sm leading-6', isLight ? 'text-gray-700' : 'text-gray-200']}>{lead}</p>}
+  {!isTeam && (
+    <div class:list={[isLight ? 'text-gray-700' : 'text-gray-200']} data-direct-copy>
+      <DirectOfferDetails />
+    </div>
+  )}
   {humanSupport && <HumanSupport size="sm" align={align} tone={isLight ? 'light' : 'dark'} />}
   <div class:list={['group relative inline-flex', isCompact && 'w-full max-w-xs']}>
     <div

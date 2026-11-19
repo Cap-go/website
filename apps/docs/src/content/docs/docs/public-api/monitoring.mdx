@@ -78,7 +78,13 @@ curl -H 'x-api-key: YOUR_API_KEY' \
   'https://api.capgo.app/build/status?app_id=com.example.app&job_id=example-cloud-job'
 ```
 
-The response includes `status`, `started_at`, `completed_at`, `runner_wait_seconds`, `build_time_seconds`, `error`, queue priorities, machine details, `diagnostic`, and `poll_after_seconds: 15`. Queued/running is normal. Failure needs log evidence. Poll terminal status once more to record final build time. Status reads reconcile configured timeouts, may cancel overdue builds, and record billing; they are not a way to retry a build.
+The response includes `status`, `started_at`, `completed_at`, `runner_wait_seconds`, `build_time_seconds`, `error`, queue priorities, machine details, `diagnostic`, and `poll_after_seconds: 15`. Successful HTTP reads set `persisted: true` when the stored `build_requests` row was updated on that poll. Build minutes and billing run only for qualifying terminal outcomes or an applied timeout, so a running job can return `persisted: true` without recording build time yet. Queued/running is normal. Failure needs log evidence. Poll terminal status once more to record final build time. Status reads reconcile configured timeouts, may cancel overdue builds, and record billing; they are not a way to retry a build. A `persist` query parameter is not honored over HTTP: every REST poll persists.
+
+### Hosted MCP `capgo_get_build_status` (read-only polls)
+
+On `https://api.capgo.app/mcp`, the `capgo_get_build_status` tool uses the same handler in-process with a hosted read-only option. Those polls return `persisted: false` and skip DB sync, build minute recording, webhooks, and automatic cancellation of timed-out builder jobs. The local CLI MCP server and `GET /build/status` above always persist.
+
+When a job is still `running` past the app configured timeout, read-only MCP polls include `timeout_exceeded: true` and `timeout_warning` instead of canceling the builder. Call `capgo_cancel_build` to stop the job, or wait for Capgo reconciliation to finish it and record build time. The response still includes `diagnostic` and `poll_after_seconds: 15`. After a successful build, use the CLI or console if you need billing and history synced.
 
 ### GET /build/logs/:jobId?snapshot=true
 
@@ -103,7 +109,7 @@ Build diagnostic matches are documented symptoms, with an evidence line and chec
 | Event metadata and normal lifecycle events | `capgo_observe` with `view: "logs"`                                         |
 | Device timeline                            | `capgo_observe` with `view: "device"`, `deviceId`                           |
 | Live release stats                         | `capgo_observe` with `view: "release"`, optional `channelId`, `versionName` |
-| Cloud build status                         | `capgo_get_build_status` with `appId`, `job_id`                             |
+| Cloud build status (hosted MCP read-only)  | `capgo_get_build_status` with `appId`, `job_id` (`persisted: false`; see above) |
 | Cloud build log snapshot                   | `capgo_get_build_logs` with `appId`, `job_id`, optional `cursor`            |
 | Current documentation                      | `capgo_search_docs` with the exact event/error code                         |
 

@@ -1,6 +1,6 @@
 ---
-title: Capacitor Plugins by Capgo
-description: Explore our comprehensive collection of Capacitor plugins to extend your app's native capabilities with powerful features.
+title: "Capacitor Plugin Documentation: Setup & APIs"
+description: Install and configure Capgo Capacitor plugins with setup guides, native permissions, usage examples, and API references for your iOS and Android app.
 sidebar:
   order: 0
   label: "All Plugins"
@@ -9,7 +9,17 @@ sidebar:
 import { LinkCard } from '@astrojs/starlight/components';
 import PluginsDirectory from '@/components/doc/PluginsDirectory.astro';
 
-Welcome to the Capgo Capacitor Plugins collection. This landing page is generated from the live plugin registry plus the docs tree so newly documented plugins show up here automatically.
+Find installation steps, native configuration, usage examples, and API references for Capgo's Capacitor plugins. Choose a plugin below, then follow its getting-started guide for the platforms your app supports.
+
+Still choosing a package? Browse the [Capacitor plugin library](/plugins/) to search by feature, filter by category, and compare npm downloads and GitHub activity.
+
+## AI engineering
+
+<LinkCard
+  title="AI engineering for plugins"
+  description="We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily."
+  href="/docs/plugins/ai-engineering/"
+/>
 
 ## Siri, Shortcuts, WidgetKit, and intents
 
@@ -34,10 +44,13 @@ The Updater plugin is the foundation of Capgo Cloud and lets you:
 - Monitor adoption and failure signals from the Capgo console.
 - Secure releases with encryption and code signing.
 
-## Plugin Directory
+## Plugin setup guides and API references
 
 <PluginsDirectory />
 
-## Keep going from Capacitor Plugins by Capgo
+## Related guides
 
-If you are using **Capacitor Plugins by Capgo** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, and [Capacitor Plugins: What You Need to Know](/blog/capacitor-plugins-what-you-need-to-know/) for the practical context in Capacitor Plugins: What You Need to Know.
+- New to native APIs? Read [Capacitor Plugins: What You Need to Know](/blog/capacitor-plugins-what-you-need-to-know/).
+- Building a plugin? Follow the [plugin development guide](/blog/ultimate-guide-to-capacitor-plugin-development/) and [Capgo's contribution instructions](/docs/contributing/adding-plugins/).
+- Replacing an Ionic SDK? Find [Ionic Enterprise plugin alternatives and migration guides](/ionic-enterprise-plugins/).
+- Ready to ship native changes? Use [Capgo Native Builds](/native-build/) to build your iOS and Android apps.

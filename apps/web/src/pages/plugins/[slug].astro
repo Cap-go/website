@@ -6,6 +6,7 @@ import { pluginDemosBySlug } from '@/config/pluginDemos'
 import { getPluginPreviewQr } from '@/config/pluginPreviewQrs'
 import type { Plugin } from '@/config/plugins'
 import { actions, pluginCategories } from '@/config/plugins'
+import { pluginInstallOverrides } from '@/config/pluginInstallOverrides'
 import Layout from '@/layouts/Layout.astro'
 import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import m from '@/copy/messages'
@@ -130,14 +131,26 @@ const previewQr = getPluginPreviewQr(id)
 const runtime = /electron/i.test(name ?? href) ? 'Electron' : /cordova/i.test(name ?? href) ? 'Cordova' : 'Capacitor'
 const isCapacitor = runtime === 'Capacitor'
 const runtimeArticle = /^[AEIOU]/.test(runtime) ? 'an' : 'a'
-const installCommand = name ? (isCapacitor ? `bun add ${name}\nbunx cap sync` : `bun add ${name}`) : undefined
-const installManagers = name
-  ? [
-      { label: 'npm', command: `npm install ${name}` },
-      { label: 'pnpm', command: `pnpm add ${name}` },
-      { label: 'yarn', command: `yarn add ${name}` },
-    ]
-  : []
+const installOverride = name ? pluginInstallOverrides[name] : undefined
+const hideNpm = installOverride?.hideNpm === true
+const packageHref = hideNpm ? href : npmHref
+const installCommands = installOverride
+  ? installOverride.commands
+  : name
+    ? isCapacitor
+      ? [`bun add ${name}`, 'bunx cap sync']
+      : [`bun add ${name}`]
+    : []
+const installCommand = installCommands.length > 0 ? installCommands.join('\n') : undefined
+const installManagers = installOverride
+  ? (installOverride.managers ?? [])
+  : name
+    ? [
+        { label: 'npm', command: `npm install ${name}` },
+        { label: 'pnpm', command: `pnpm add ${name}` },
+        { label: 'yarn', command: `yarn add ${name}` },
+      ]
+    : []
 
 const tutorialData = thisTut?.data
 const heroDescription = tutorialData?.summary ?? description
@@ -156,15 +169,19 @@ const generatedFaq = [
     question: `How do I install the ${title} plugin in ${runtimeArticle} ${runtime} app?`,
     answer: !name
       ? `Follow the installation steps in the ${title} README on GitHub.`
-      : isCapacitor
-        ? `Run "bun add ${name}" (or "npm install ${name}"), then run "bunx cap sync" so the iOS and Android projects pick up the native code. Import it from "${name}" in your app code.`
-        : `Run "bun add ${name}" (or "npm install ${name}"), then follow the ${runtime} setup steps in the guide and the GitHub README.`,
+      : installOverride
+        ? installOverride.installFaqAnswer
+        : isCapacitor
+          ? `Run "bun add ${name}" (or "npm install ${name}"), then run "bunx cap sync" so the iOS and Android projects pick up the native code. Import it from "${name}" in your app code.`
+          : `Run "bun add ${name}" (or "npm install ${name}"), then follow the ${runtime} setup steps in the guide and the GitHub README.`,
   },
   {
     question: `Does ${packageLabel} work with React, Vue and Angular?`,
-    answer: `Yes. ${title} is ${runtimeArticle} ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
+    answer: installOverride?.frameworkFaqAnswer
+      ? installOverride.frameworkFaqAnswer
+      : `Yes. ${title} is ${runtimeArticle} ${runtime} package, so it works with any web framework that runs inside ${runtime}${isCapacitor ? ', including Ionic' : ''}, React, Vue, Angular, Svelte and plain JavaScript.`,
   },
-  ...(isCapacitor
+  ...(isCapacitor && !installOverride?.skipNativePluginFaqs
     ? [
         {
           question: `Which Capacitor version does ${packageLabel} support?`,
@@ -174,9 +191,11 @@ const generatedFaq = [
     : []),
   {
     question: `Is ${packageLabel} free and open source?`,
-    answer: `Yes. The source code is public on GitHub at ${href} and the package is free to install from npm. Bug reports and pull requests are welcome.`,
+    answer: installOverride?.openSourceFaqAnswer
+      ? installOverride.openSourceFaqAnswer
+      : `Yes. The source code is public on GitHub at ${href} and the package is free to install from npm. Bug reports and pull requests are welcome.`,
   },
-  ...(isCapacitor
+  ...(isCapacitor && !installOverride?.skipNativePluginFaqs
     ? [
         {
           question: `Can I update code that uses ${title} without an App Store review?`,
@@ -199,7 +218,7 @@ const relatedPlugins = plugins
   .slice(0, 6)
 
 const stats = [
-  { label: `${m.downloads({}, { locale })}/month`, value: formatCount(npmDownloads), href: npmHref },
+  ...(!hideNpm ? [{ label: `${m.downloads({}, { locale })}/month`, value: formatCount(npmDownloads), href: npmHref }] : []),
   { label: m.github_stars({}, { locale }), value: formatCount(githubStars), href },
   ...(repoStats?.releases ? [{ label: 'Releases', value: formatCount(repoStats.releases), href: `${href.replace(/\/$/, '')}/releases` }] : []),
   ...(repoStats?.contributors ? [{ label: 'Contributors', value: formatCount(repoStats.contributors), href: `${href.replace(/\/$/, '')}/graphs/contributors` }] : []),
@@ -252,7 +271,7 @@ const softwareApplication = createSoftwareApplicationLdJson(runtimePublic, {
   url: absolutePluginUrl,
   applicationCategory: 'DeveloperApplication',
   operatingSystem: platforms.length > 0 ? supportedPlatforms.join(', ') : runtime === 'Electron' ? 'Windows, macOS, Linux' : 'iOS, Android',
-  downloadUrl: npmHref,
+  downloadUrl: packageHref,
   featureList: [m.plugin_ai_feature({}, { locale })],
   offers: { price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 })
@@ -306,7 +325,7 @@ const secondaryButtonClass =
                 name && (
                   <>
                     <a
-                      href={npmHref}
+                      href={packageHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       class="cursor-pointer rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 font-mono text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
@@ -382,19 +401,29 @@ const secondaryButtonClass =
                     </button>
                   </div>
                   <div class="flex flex-col gap-1 overflow-x-auto px-4 py-3">
-                    <CommandCode command={`bun add ${name}`} class={commandClass} />
-                    {isCapacitor && <CommandCode command="bunx cap sync" class={commandClass} />}
+                    {installCommands.map((command) => (
+                      <CommandCode command={command} class={commandClass} />
+                    ))}
                   </div>
-                  <details class="overflow-x-auto border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">
-                    <summary class="cursor-pointer select-none hover:text-gray-200">npm, pnpm or yarn</summary>
-                    <ul class="mt-2 flex flex-col gap-1">
-                      {installManagers.map((manager) => (
-                        <li>
-                          <CommandCode command={manager.command} class={commandClass} />
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
+                  {
+                    installOverride?.installNote && (
+                      <p class="border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">{installOverride.installNote}</p>
+                    )
+                  }
+                  {
+                    installManagers.length > 0 && (
+                      <details class="overflow-x-auto border-t border-white/10 px-4 py-2.5 text-xs text-gray-400">
+                        <summary class="cursor-pointer select-none hover:text-gray-200">npm, pnpm or yarn</summary>
+                        <ul class="mt-2 flex flex-col gap-1">
+                          {installManagers.map((manager) => (
+                            <li>
+                              <CommandCode command={manager.command} class={commandClass} />
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    )
+                  }
                 </div>
               )
             }
@@ -427,10 +456,14 @@ const secondaryButtonClass =
                 <span>{m.view_repo({}, { locale })}</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
               </a>
-              <a href={npmHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
-                <span>{m.view_npm({}, { locale })}</span>
-                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
-              </a>
+              {
+                !hideNpm && (
+                  <a href={npmHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
+                    <span>{m.view_npm({}, { locale })}</span>
+                    <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+                  </a>
+                )
+              }
               <a href={issuesHref} target="_blank" rel="noopener noreferrer" class={secondaryButtonClass}>
                 <span>Report an issue</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />

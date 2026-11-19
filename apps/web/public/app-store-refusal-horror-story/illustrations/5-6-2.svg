@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Duplicate 5.6 hidden features rejection after a three week re review">
+  <title>Duplicate 5.6 hidden features rejection after a three week re review</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="28" y="52" width="120" height="112" rx="12" fill="#111827" stroke="#F87171" stroke-width="2"/>
+  <rect x="44" y="68" width="88" height="10" rx="5" fill="#F87171" opacity="0.5"/>
+  <rect x="44" y="86" width="72" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="44" y="98" width="80" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="44" y="116" width="64" height="32" rx="6" fill="#1F2937" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="52" y="136" fill="#EF4444" font-family="system-ui,sans-serif" font-size="9" font-weight="600">5.6 hidden</text>
+  <rect x="172" y="52" width="120" height="112" rx="12" fill="#111827" stroke="#F87171" stroke-width="2"/>
+  <rect x="188" y="68" width="88" height="10" rx="5" fill="#F87171" opacity="0.5"/>
+  <rect x="188" y="86" width="72" height="6" rx="3" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="188" y="98" width="80" height="6" rx="3" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="188" y="116" width="64" height="32" rx="6" fill="#1F2937" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="196" y="136" fill="#EF4444" font-family="system-ui,sans-serif" font-size="9" font-weight="600">5.6 hidden</text>
+  <path d="M148 108 H172" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <polygon points="168,108 162,104 162,112" fill="#9CA3AF" opacity="0.5"/>
+  <rect x="108" y="168" width="104" height="20" rx="10" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="160" y="182" text-anchor="middle" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="10" font-weight="600">~3 weeks</text>
+  <circle cx="76" cy="44" r="14" fill="none" stroke="#44BCFF" stroke-width="2" opacity="0.4"/>
+  <circle cx="244" cy="44" r="14" fill="none" stroke="#44BCFF" stroke-width="2" opacity="0.4"/>
+  <path d="M70 44 L82 44 M76 38 L76 50" stroke="#44BCFF" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+</svg>

@@ -6,12 +6,14 @@ export type AppleRejectionStoryTag =
   | '3-1-1'
   | '3-1-2'
   | '3-1-3'
+  | '3-2-2'
   | '5-1-1'
   | '5-1-2'
   | '5-2-3'
   | '5-6-4'
   | '5-6'
   | '2-5-19'
+  | '2-4-5'
   | '2-1'
   | '2-3-6'
   | '2-3-10'
@@ -40,12 +42,14 @@ export const appleRejectionStoryTagLabels: Record<AppleRejectionStoryTag, string
   '3-1-1': 'Guideline 3.1.1',
   '3-1-2': 'Guideline 3.1.2',
   '3-1-3': 'Guideline 3.1.3',
+  '3-2-2': 'Guideline 3.2.2',
   '5-1-1': 'Guideline 5.1.1',
   '5-1-2': 'Guideline 5.1.2',
   '5-2-3': 'Guideline 5.2.3 Audio/Video Downloading',
   '5-6-4': 'Guideline 5.6.4',
   '5-6': 'Guideline 5.6 Developer Code of Conduct',
   '2-5-19': 'Guideline 2.5.19 Hidden Features',
+  '2-4-5': 'Guideline 2.4.5',
   '2-1': 'Guideline 2.1',
   '2-3-6': 'Guideline 2.3.6',
   '2-3-10': 'Guideline 2.3.10',

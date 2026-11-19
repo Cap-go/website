@@ -1,56 +1,92 @@
 ---
-title: "@capgo/capacitor-pdf-viewer"
-description: "Native PDF viewing on iOS (PDFKit), Android (Pdfium), and web with paths, URLs, base64, and inline mode."
+title: '@capgo/capacitor-pdf-viewer'
+description: 'Native PDF viewing on iOS (PDFKit), Android (Pdfium), and web with paths, URLs, base64, inline mode, and underWebView custom HTML UI.'
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: "Introduction"
+  label: 'Introduction'
 hero:
-  tagline: "Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, and password support"
+  tagline: 'Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, password support, and underWebView custom HTML UI'
   actions:
     - text: Get started
       link: /docs/plugins/pdf-viewer/getting-started/
       icon: right-arrow
       variant: primary
+    - text: underWebView
+      link: /docs/plugins/pdf-viewer/under-webview/
+      icon: right-arrow
+      variant: minimal
     - text: GitHub
       link: https://github.com/Cap-go/capacitor-pdf-viewer/
       icon: external
       variant: minimal
 ---
 
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components'
+
+<CardGrid stagger>
+  <Card title="underWebView / toBack" icon="rocket">
+    Open with `mode: 'underWebView'` or `toBack: true` to place the native PDF behind a transparent Capacitor WebView. `nativeUi` defaults to false in this mode so you can ship
+    your own HTML chrome.
+  </Card>
+  <Card title="Custom HTML controls" icon="pencil">
+    Draw toolbars, page indicators, and buttons in HTML (Ionic, Tailwind, or plain markup). The native layer keeps PDFKit / Pdfium scroll, pinch zoom, and link hit testing.
+  </Card>
+  <Card title="Touch routing" icon="setting">
+    Touches on `button`, `a`, form controls, `[data-capgo-pdf-interactive]`, `.custom-toolbar`, and `.custom-pdf-ui button` stay in the WebView. Other touches go to the PDF.
+  </Card>
+  <Card title="updateLayout()" icon="puzzle">
+    Reposition or resize the native PDF in CSS pixels relative to the WebView viewport. Call it after rotation or when your chrome changes size.
+  </Card>
+</CardGrid>
+
+<Aside type="tip">
+  <code>underWebView</code> / <code>toBack</code> is iOS and Android only. On web, use <code>fullscreen</code> or <code>inline</code>. Full setup:{' '}
+  <a href="/docs/plugins/pdf-viewer/under-webview/">underWebView</a>.
+</Aside>
+
 ## Overview
 
-Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, and password support
+Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, password support, and an optional underWebView presentation for custom HTML UI.
 
 Start with `open()` and the other core methods listed below.
 
 ## Platform support
 
-| Platform | Support | Notes |
-| --- | --- | --- |
-| iOS | Yes | Native |
-| Android | Yes | Native |
-| Web | No | Guard with Capacitor.getPlatform() |
+| Platform | Support | Notes                                                                                                                                                                 |
+| -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| iOS      | Yes     | PDFKit. `underWebView` / `toBack` is supported. `hide()` and `show()` are accepted only in `underWebView` or `inline` mode.                                           |
+| Android  | Yes     | Pdfium. `underWebView` / `toBack` is supported. `hide()` and `show()` work in any open mode.                                                                          |
+| Web      | Partial | Browser PDF viewer with blob URLs. `underWebView` / `toBack` is not available. Use `fullscreen` or `inline`. `nativeUi: false` with `mode: 'fullscreen'` is rejected. |
 
 ## Core Capabilities
 
-- `open` - Open a PDF from a file, path, URL, or base64 source.
+- `open` - Open a PDF from a file, path, URL, or base64 source, including `mode: 'underWebView'` or `toBack: true`.
 - `close` - Close the active viewer and remove any overlay.
-- `goToPage` - Jump to a 1-based page number.
-- `setZoom` - Set the zoom scale multiplier.
+- `goToPage` / `nextPage` / `previousPage` - Jump or step through 1-based pages.
+- `setZoom` - Set the zoom scale multiplier (`1` is the default fit scale on native).
+- `hide` / `show` - Hide or show the PDF layer without unloading the document.
+- `updateLayout` - Reposition or resize the native PDF in `underWebView` / `toBack` mode.
 
 ## Public API
 
-| Method | Description |
-| --- | --- |
-| `open` | Open a PDF from a file, path, URL, or base64 source. |
-| `close` | Close the active viewer and remove any overlay. |
-| `goToPage` | Jump to a 1-based page number. |
-| `setZoom` | Set the zoom scale multiplier. |
-| `getPluginVersion` | Get the native or web implementation version marker. |
-| `addListener` | Listen for load, pageChange, error, close, and linkTap events. |
+| Method             | Description                                                                            |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| `open`             | Open a PDF from a file, path, URL, or base64 source.                                   |
+| `close`            | Close the active viewer and remove any overlay.                                        |
+| `goToPage`         | Jump to a 1-based page number.                                                         |
+| `nextPage`         | Move to the next page when one exists.                                                 |
+| `previousPage`     | Move to the previous page when one exists.                                             |
+| `setZoom`          | Set the zoom scale multiplier. On web this resolves without changing the browser zoom. |
+| `getPageCount`     | Read the total page count. On web this always returns `1`.                             |
+| `getCurrentPage`   | Read the current 1-based page. On web this reflects the last programmatic page only.   |
+| `hide`             | Hide the PDF layer without unloading the document.                                     |
+| `show`             | Show the PDF layer after `hide()`.                                                     |
+| `updateLayout`     | Reposition or resize the native PDF when using `underWebView` / `toBack`.              |
+| `getPluginVersion` | Get the native or web implementation version marker.                                   |
+| `addListener`      | Listen for `load`, `pageChange`, `zoomChange`, `error`, `close`, and `linkTap` events. |
 
 ## Source Of Truth
 

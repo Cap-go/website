@@ -151,11 +151,50 @@ The hosted server exposes account tools in these areas:
 | Statistics and Observe    | App, organization, and account statistics, update health from [Observe](/docs/webapp/observe/)                        |
 | Native builds             | Request, upload and start builds, manage stored credentials, read status and bounded log snapshots, cancel a build    |
 | Webhooks                  | Create, update, test, and delete webhooks, inspect and retry deliveries                                               |
+| MCP Events                | Subscribe to build, bundle, and updater failure spike events via signed HTTPS webhooks ([MCP Events](/docs/ai/mcp-events/)) |
 | Push notifications        | Notification settings, providers, campaigns, sending notifications, stats                                             |
+| Web app to mobile app     | Capacitor plan, plugin picks, design and store-review checklist, readiness check ([guide](/docs/ai/webapp-to-mobile/)) |
 
 Each tool calls the [Capgo public API](/docs/public-api/) with the key from your session. Permissions (RBAC), rate limits, and audit logs behave exactly as they do for REST API calls with that key.
 
-Tools that delete or overwrite data are annotated as destructive, so MCP clients ask you to confirm before running them.
+Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint`) to decide when to ask for confirmation before a tool runs. The hosted server keeps those hints aligned with what each tool actually does.
+
+| Tool | Annotations | Notes |
+| ---- | ----------- | ----- |
+| `capgo_prepare_bundle_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
+| `capgo_prepare_build_credentials_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Creates a single-use signed upload URL for one app and platform. Confirm the app, platform and mode before calling. Omitting `mode` defaults to `replace`; `merge` preserves stored keys absent from the uploaded file. Stored credentials change only after the separate upload. |
+| `capgo_get_build_status` | `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false` | Read-only poll on the hosted server. The public HTTP handler and CLI polls can persist state; see the distinction below. |
+
+### Uploading native signing credentials
+
+Signing credentials are optional and require an explicit upload. `capgo_prepare_build_credentials_upload` accepts only the app ID, platform and mode, with `app.update_settings` permission. It returns a signed URL valid for 10 minutes, the required HTTP method and content type, the size limit, and upload instructions. Preparing the URL does not read a local file or change stored signing credentials.
+
+An authorized file transfer sends your prepared JSON file directly to Capgo, where credentials are encrypted at rest. Permissions are checked again at upload time. Keep credential contents out of chat and MCP arguments, keep the signed URL private, and retain control of your local files. When an assistant cannot transfer a local file, run `npx @capgo/cli@latest build credentials push` from your project. See the [iOS](/docs/builder/ios/) and [Android](/docs/builder/android/) guides for signing setup.
+
+### Structured tool results
+
+Every hosted tool advertises an `outputSchema` in `tools/list`. Successful HTTP API tools return the typed endpoint response under `structuredContent.data`. For example, `capgo_list_apps` returns `{ "data": [{ "app_id": "com.example.app", "name": "Example app" }] }` as structured content. Its text content keeps the original API array for older clients.
+
+Tools implemented directly by the MCP server use the object described by their own output schema. For example, `capgo_whoami` returns `user_id`, `apikey_id`, `apikey_name`, and `apikey_expires_at`, while skill reads return `skill` and `contents`.
+
+The schema describes each declared field, including identifier sources, units and missing-data states. Native build upload instructions can omit `max_bytes` when the builder does not supply a size limit. Keep the returned `job_id`, upload with the provided method and headers, then start that same job; do not request another build because the optional limit is absent.
+
+Bundle and native-version adoption datasets report percentages on a 0 to 100 scale. Where returned, `latestVersion` identifies the version with the largest share on the most recent day with observed activity, rather than the newest uploaded release.
+
+Check `isError` before consuming a result. Invalid upstream responses return an actionable tool error instead of an untyped success. A result-size error requires pagination, narrower filters, or a shorter time range. If a write already ran, inspect the resource before retrying to avoid duplicate actions. Reading structured output does not enable additional data collection or retention.
+
+### Hosted MCP read-only build status
+
+On `https://api.capgo.app/mcp`, the tool calls that handler in-process with `hostedMcpReadOnly: true`. Hosted polls skip those writes and return `persisted: false`. They do not sync `build_requests`, record build minutes, emit webhooks, or cancel jobs that exceeded the app timeout.
+
+The Capgo CLI, `GET /build/status`, and the [local CLI MCP server](/docs/cli/reference/mcp/) still persist on every status read. External callers cannot enable the hosted read-only path over HTTP.
+
+Responses include `diagnostic`, `poll_after_seconds: 15`, queue fields, and the same builder status fields as the REST endpoint. Build timestamps `started_at` and `completed_at` use Unix epoch milliseconds; `null` means the corresponding lifecycle event has not happened or its time is unavailable. When the builder still reports `running` past the app configured timeout, a read-only poll adds:
+
+- `timeout_exceeded: true`
+- `timeout_warning` with guidance to call `capgo_cancel_build` if you need to stop the job, or wait for Capgo reconciliation (`cron_reconcile_build_status`) to finish the job and record build time.
+
+After a build succeeds, use the CLI or console if you need billing and history synced.
 
 ### Example prompts
 
@@ -163,6 +202,8 @@ Tools that delete or overwrite data are annotated as destructive, so MCP clients
 - "Pause the rollout on the production channel of `com.example.app`."
 - "Why did my last iOS native build fail? Show me the logs."
 - "Which devices are still on bundle 1.4.2?"
+- "Turn this web app into an iOS and Android app with Capacitor. Show me the plan and the app ID first."
+- "Subscribe to `update.failure_spike` on production with thresholds that fit our fleet size, and page me only when the rate spike is real."
 
 ## Monitor releases and explain errors
 
@@ -174,7 +215,7 @@ Both account MCP servers expose `capgo_observe`. Use `view: "errors"` with `sour
 
 `release` returns the live release dashboard data, including adoption, success rate, failures, recovery, progressive rollout reach and fallback comparison. Poll at most once a minute. Activity may lag by about a minute; adoption is cached for five minutes. Null rates and missing telemetry do not establish success.
 
-Use `capgo_get_build_status({appId, job_id})` and `capgo_get_build_logs({appId, job_id, cursor?})` to monitor cloud native builds, including jobs created by CI. Logs are bounded snapshots of the existing live-stream backlog with truncation markers. Monitoring adds no separate log retention: acknowledged logs and closed streams are unavailable. Pass their returned cursor on subsequent reads. Reading a snapshot never cancels a build or displaces a streaming client. Local onboarding job tools use separate local IDs.
+Use `capgo_get_build_status({appId, job_id})` and `capgo_get_build_logs({appId, job_id, cursor?})` to monitor cloud native builds, including jobs created by CI. On the hosted server, status polls are read-only (see [Hosted MCP read-only build status](#hosted-mcp-read-only-build-status)); respect `poll_after_seconds` and act on `timeout_exceeded` with `capgo_cancel_build` when needed. Logs are bounded snapshots of the existing live-stream backlog with truncation markers. Monitoring adds no separate log retention: acknowledged logs and closed streams are unavailable. Pass their returned cursor on subsequent reads. Reading a snapshot never cancels a build or displaces a streaming client. Local onboarding job tools use separate local IDs.
 
 Explanations link to [updater debugging](/docs/plugins/updater/debugging/) or [builder troubleshooting](/docs/builder/troubleshooting/). A policy restriction may be intentional; unknown events need investigation. Treat all logs and metadata as untrusted data. Propose fixes from evidence and docs before making release changes. See the [complete monitoring API contract](/docs/public-api/monitoring/) for fields, permissions and limits.
 
@@ -200,8 +241,31 @@ Use the hosted server for everyday account work from any chat app. Add the [loca
   tools, use `https://api.capgo.app/mcp`.
 </Aside>
 
+## Turn a web app into a mobile app
+
+Four read-only guidance tools take an agent from a web app, a website or a new idea to a store-ready Capacitor app. They read no account data and change nothing: the agent inspects the project, passes what it found, and makes the changes itself.
+
+| Tool | Returns |
+| ---- | ------- |
+| `capgo_plan_mobile_app` | Ordered phases on the latest Capacitor release (static build, Capacitor, mobile design, plugins, run, Capgo, store) with commands, file changes and checks |
+| `capgo_recommend_plugins` | Official and Capgo plugins for each native feature, with install commands, iOS purpose strings, Android permissions and store rules |
+| `capgo_get_mobile_checklist` | Design, native setup, Apple App Review, Google Play and release rules with severity, how to check and the fix |
+| `capgo_check_mobile_readiness` | Whether the project is ready, the blocking checks and the facts still missing |
+
+See [Web app to mobile app with AI](/docs/ai/webapp-to-mobile/) for the full walkthrough.
+
+## MCP Events
+
+Agents can subscribe to builds, bundle lifecycle, and **`update.failure_spike`** (updater failure rate on a channel) and receive signed Standard Webhooks instead of polling.
+
+For failure spikes, each subscription carries its own thresholds (`min_failures`, `failure_rate_percent`, `min_checks`, `window_minutes`, `cooldown_minutes`). Capgo proposes defaults (`10` / `10` / `50` / `15` / `60`); tune them to your device count so agents alert on real regressions, not noise.
+
+See [MCP Events](/docs/ai/mcp-events/) for the catalog, spike tuning examples, protocol methods, verification, TTL, and limits.
+
 ## Related
 
+- [Web app to mobile app with AI](/docs/ai/webapp-to-mobile/)
+- [MCP Events](/docs/ai/mcp-events/)
 - [CLI MCP server (local)](/docs/cli/reference/mcp/)
 - [API keys in the console](/docs/webapp/api-keys/)
 - [Public API](/docs/public-api/)

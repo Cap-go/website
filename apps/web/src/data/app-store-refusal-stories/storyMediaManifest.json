@@ -308,5 +308,49 @@
     "height": 706
   },
   "already-approved-app-icon-rejected-for-exposed-character": null,
-  "cancel-are-you-sure-screen-rejected-week-before-retention-messaging": null
+  "cancel-are-you-sure-screen-rejected-week-before-retention-messaging": null,
+  "subscription-sdk-bundled-web-checkout-5-6-hidden-features-cleared-by-reply": null,
+  "app-preview-framing-2-3-4-same-video-passed-a-month-earlier": null,
+  "mac-update-45-days-in-review-then-3-2-f-notice": null,
+  "paid-step-challenge-3-2-2-penalty-model-rejected-at-concept-level": null,
+  "update-5-6-hidden-features-same-rejection-after-three-week-rereview": {
+    "src": "/app-store-refusal-horror-story/screenshots/update-5-6-hidden-features-same-rejection-after-three-week-rereview.webp",
+    "alt": "Guideline 5.6 rejection notice saying the app contains features that appear intentionally hidden during review",
+    "width": 721,
+    "height": 1008
+  },
+  "series-game-4-3-a-too-similar-to-own-earlier-games": null,
+  "screenshot-maker-icon-store-logos-5-2-5-and-google-play-2-3-10": null,
+  "game-purchase-failed-offline-vague-error-rejected-after-release-date": null,
+  "first-ios-app-four-rejections-37-days-crash-subscriptions-eula-paywall": null,
+  "mac-screen-recorder-2-4-5-keystroke-overlay-removed-27-days": null,
+  "iphone-app-reviewed-on-ipad-bottom-button-covered-content-2-1-a": null,
+  "stuck-three-weeks-waiting-for-review-unaccepted-agreements": null,
+  "three-apps-2-1-after-ten-days-then-4-3-a-after-explaining": {
+    "src": "/app-store-refusal-horror-story/screenshots/three-apps-2-1-after-ten-days-then-4-3-a-after-explaining.webp",
+    "alt": "Guideline 4.3(a) Design Spam rejection notice saying the app shares a similar binary, metadata or concept with other apps",
+    "width": 945,
+    "height": 2048
+  },
+  "ipad-paywall-infinite-loading-three-rounds-37-days": null,
+  "weekly-subscription-price-review-paused-for-confirmation": null,
+  "iap-not-available-paywall-pointed-at-another-apps-plans-fixed-same-day": null,
+  "new-app-missing-review-video-then-crash-on-low-end-phones-17-days": null,
+  "update-crash-after-launch-not-reproducible-same-build-resubmitted": null,
+  "six-apps-4-3-a-in-21-seconds-spam-warning-approved-after-34-days-silence": {
+    "src": "/app-store-refusal-horror-story/screenshots/six-apps-4-3-a-in-21-seconds-spam-warning-approved-after-34-days-silence.webp",
+    "alt": "App Review reply saying it will continue the review and will notify the developer of any further issues",
+    "width": 1110,
+    "height": 312
+  },
+  "first-review-rejected-in-20-minutes-then-pulled-twice-from-in-review-22-days": {
+    "src": "/app-store-refusal-horror-story/screenshots/first-review-rejected-in-20-minutes-then-pulled-twice-from-in-review-22-days.webp",
+    "alt": "App Store Connect status history showing one rejection, two developer withdrawals during In Review, and a final Ready for Distribution, with dates removed",
+    "width": 1300,
+    "height": 1928
+  },
+  "no-ads-answer-in-age-rating-questionnaire-while-showing-banner-ads": null,
+  "health-button-wording-unused-bluetooth-permission-then-missing-weather-attribution": null,
+  "five-apps-one-approved-icon-mismatch-invisible-character-login-spam-nine-answers": null,
+  "four-apps-4-3-in-one-month-merged-into-one-app-approved": null
 }

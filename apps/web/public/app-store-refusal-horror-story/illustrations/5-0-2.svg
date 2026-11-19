@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Screenshot tool icon mixing store trademarks on the home screen">
+  <title>Screenshot tool icon mixing store trademarks on the home screen</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="40" y="36" width="240" height="128" rx="14" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="56" y="52" width="56" height="56" rx="14" fill="#1F2937" stroke="#EF4444" stroke-width="2.5"/>
+  <path d="M68 72 L88 72 L88 88 L68 88 Z" fill="#44BCFF" opacity="0.7"/>
+  <path d="M76 68 L80 68 L80 92 L76 92 Z" fill="#FBBF24" opacity="0.85"/>
+  <circle cx="108" cy="120" r="4" fill="#9CA3AF" opacity="0.35"/>
+  <circle cx="128" cy="120" r="4" fill="#9CA3AF" opacity="0.3"/>
+  <circle cx="148" cy="120" r="4" fill="#9CA3AF" opacity="0.28"/>
+  <rect x="180" y="48" width="88" height="104" rx="10" fill="#0F172A" stroke="#9CA3AF" stroke-width="1.5"/>
+  <rect x="192" y="60" width="64" height="48" rx="6" fill="#374151"/>
+  <polygon points="208,76 232,68 232,84 208,92" fill="#34D399" opacity="0.55"/>
+  <rect x="196" y="116" width="52" height="6" rx="3" fill="#EF4444" opacity="0.45"/>
+  <rect x="196" y="128" width="40" height="6" rx="3" fill="#9CA3AF" opacity="0.3"/>
+  <path d="M112 80 L180 80" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 3" opacity="0.65"/>
+  <rect x="228" y="28" width="64" height="18" rx="9" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="238" y="41" fill="#EF4444" font-family="system-ui,sans-serif" font-size="9" font-weight="600">5.2.5</text>
+  <rect x="32" y="168" width="72" height="16" rx="8" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="44" y="180" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="8" opacity="0.9">2.3.10</text>
+  <path d="M52 108 Q72 88 92 108" fill="none" stroke="#44BCFF" stroke-width="1.5" opacity="0.4"/>
+</svg>

@@ -1,0 +1,121 @@
+---
+title: Geofence queue
+description: 'iOS closed-app geofence delivery, clearGeofenceQueue(), and GeofenceTransitionEvent.time for @capgo/background-geolocation.'
+sidebar:
+  order: 3
+---
+
+These queue APIs require `@capgo/background-geolocation` 8.6.0 or later, which is not in 8.5.2. Use them when your backend must receive geofence crossings after the app is terminated, after a network failure, or after a lapsed auth token is refreshed. The APIs are **additive**. Existing `setupGeofencing`, `addGeofence`, and `geofenceTransition` flows stay the same.
+
+Source of truth: `src/definitions.ts` and the README on [capacitor-background-geolocation](https://github.com/Cap-go/capacitor-background-geolocation/).
+
+## Why iOS needs an app delegate call
+
+iOS relaunches a terminated app in the background to deliver a region crossing, but Capacitor only creates its plugins once a view controller has loaded its view. In a scene-based app that happens when a scene connects, which a background relaunch may never do. A crossing delivered to a location manager owned by the plugin was therefore lost whenever the app was closed.
+
+The plugin keeps the location manager that monitors geofences in `GeofenceRelay`, a singleton outside the plugin. Start it from the app delegate:
+
+```swift
+#if canImport(CapgoBackgroundGeolocationPlugin)
+import CapgoBackgroundGeolocationPlugin // Swift Package Manager
+#else
+import CapgoBackgroundGeolocation // CocoaPods
+#endif
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    GeofenceRelay.shared.start()
+    return true
+}
+```
+
+With that call in place, when iOS relaunches the app for a crossing, the crossing is built from the persisted geofence setup, POSTed to `url` with `headers`, and kept on disk for `geofenceTransition` listeners until the WebView loads, even if iOS ends that background launch first.
+
+iOS relaunches the app for this only with Always location access. In one test on an iPhone with iOS 26.6 the relaunch also happened with Background App Refresh turned off for the app, but Apple does not document this, so test it for your app.
+
+Without the call, crossings are still delivered while the app is running or suspended, as before.
+
+Android already delivers closed-app crossings outside the plugin (`GeofenceBroadcastReceiver` and WorkManager). Web has no native queue.
+
+## Configure native POST delivery
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation'
+
+await BackgroundGeolocation.setupGeofencing({
+  url: 'https://api.example.com/geofences',
+  headers: { Authorization: 'Bearer <token>' },
+  backgroundLocation: true,
+  notifyOnEntry: true,
+  notifyOnExit: true,
+  payload: { userId: '123' },
+})
+
+await BackgroundGeolocation.addGeofence({
+  identifier: 'office',
+  latitude: 37.33182,
+  longitude: -122.03118,
+  radius: 150,
+})
+```
+
+On Android, native background POST delivery also requires `backgroundLocation: true` and `ACCESS_BACKGROUND_LOCATION` in the app manifest. See [Getting started](/docs/plugins/background-geolocation/getting-started/).
+
+## Queue, retries, and limits
+
+On iOS, transitions are queued on disk and sent in order. A flush also runs on the next launch, crossing, network return, return to the foreground, or `updateHeaders()` call. The iOS queue keeps the newest 100 transitions, none older than seven days. It is emptied when `setupGeofencing` is given a different `url`, or when you call `clearGeofenceQueue()`.
+
+On Android, WorkManager retries delivery and does not use this ordered iOS disk queue or those retention limits.
+
+On **iOS**, a POST that fails for lack of network, with a 5xx, a 408 or a 429, or with a 401 or 403 stays queued. Any other response removes it. A 401 or 403 is retried so `updateHeaders()` with a fresh token can let the same transitions through.
+
+On **Android**, WorkManager retries every POST that does not get a 2xx response.
+
+## clearGeofenceQueue()
+
+Queued transitions go out with the `headers` in place when they are sent. When the user signs out or you switch accounts, remove account-specific geofences with `removeGeofence()` or `removeAllGeofences()`, then call `clearGeofenceQueue()` before configuring the next account. `updateHeaders()` replaces credentials only and does not replace the persisted setup payload. If that payload contains account-specific data such as a `userId`, call `setupGeofencing()` with the new account's payload and credentials before adding the new account's geofences.
+
+```typescript
+await BackgroundGeolocation.clearGeofenceQueue()
+```
+
+On Android this cancels queued WorkManager jobs and raises a queue generation stored with each job, so a job already running (which cancellation does not stop) is dropped rather than sent with the new `url` or headers. Android does the same when the `url` changes.
+
+On web there is no queue and this resolves at once.
+
+**Since:** 8.6.0
+
+## Refresh headers and flush
+
+```typescript
+await BackgroundGeolocation.updateHeaders({
+  headers: { Authorization: 'Bearer <new-token>' },
+})
+```
+
+On iOS, `updateHeaders()` persists the new headers and flushes the queue, which is how a 401 or 403 that stayed queued goes out after a token refresh. On Android, `updateHeaders()` saves the headers only; queued WorkManager jobs wait for their scheduled retry and are not started immediately.
+
+## GeofenceTransitionEvent.time
+
+Each transition may include optional `time`: when the phone detected the crossing, in milliseconds since the epoch. The field is optional so existing object literals still compile. The same value is included in the native POST body.
+
+| Platform | Source of `time`                                                                             |
+| -------- | -------------------------------------------------------------------------------------------- |
+| Android  | The triggering location fix. Falls back to the receiver's clock only when no fix is present. |
+| iOS      | When iOS delivered the region event, which can follow the crossing by seconds or minutes.    |
+| Web      | The time of the position that crossed.                                                       |
+
+A transition POSTed natively can be sent well after this, once the network or the app comes back, so the receiver should read `time` rather than its own clock.
+
+```typescript
+const handle = await BackgroundGeolocation.addListener('geofenceTransition', (event) => {
+  console.log(event.identifier, event.transition, event.time)
+})
+```
+
+**Since:** 8.6.0
+
+## Related
+
+- [Overview](/docs/plugins/background-geolocation/)
+- [Getting started](/docs/plugins/background-geolocation/getting-started/)
+- Plugin PR: [capacitor-background-geolocation #103](https://github.com/Cap-go/capacitor-background-geolocation/pull/103)

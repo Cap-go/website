@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-14T00:00:00.000Z
-updated_at: 2026-08-27T16:41:24.000Z
+updated_at: 2026-11-11T16:45:30.000Z
 head_image: /push_notif.webp
 head_image_alt: "'Ionic Capacitor Push Notifications with Firebase: A Step-by-Step Guide' Capgo blog illustration"
 keywords: Ionic, Capacitor, push notifications, Firebase, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -19,7 +19,7 @@ origin: human
 next_blog: ''
 ---
 
-In this tutorial, we will integrate push notifications in an Ionic Capacitor app using Firebase. For a maintained Capacitor plugin with Firebase Cloud Messaging support, see [@capgo/capacitor-firebase-messaging](https://capgo.app/plugins/capacitor-firebase-messaging/). You don't need a specific service for this, but you do need to configure several things beforehand. Firebase is an excellent choice since it's required for Android, and you can easily use it to send notifications without using the database.
+In this tutorial, we will integrate push notifications in an Ionic Capacitor app using Firebase. For a maintained Capacitor plugin with Firebase Cloud Messaging support, see [@capgo/capacitor-firebase-messaging](https://capgo.app/docs/plugins/firebase-messaging/). You don't need a specific service for this, but you do need to configure several things beforehand. Firebase is an excellent choice since it's required for Android, and you can easily use it to send notifications without using the database.
 
 <div class="mx-auto" style="width: 50%;">
   <video src="/push_demo.mov" alt="ionic capacitor push" autoplay loop muted>

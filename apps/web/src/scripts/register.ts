@@ -94,7 +94,24 @@ function getCaptchaId() {
   if (!(window as any).turnstile) {
     return undefined
   }
-  return (window as any).turnstile.getResponse() as string
+  // getResponse throws until the widget has rendered: treat that as "no token yet" so the wait keeps polling.
+  try {
+    return (window as any).turnstile.getResponse() as string
+  } catch {
+    return undefined
+  }
+}
+
+// The interaction-only widget is invisible while it works, and a token is also cleared after each failed attempt
+// (tokens are single use). A quick submit, an autofilled form or a retry after an error lands before the next token:
+// wait for it instead of asking the visitor to tick a box they cannot see.
+const CAPTCHA_WAIT_MS = 10_000
+const CAPTCHA_POLL_MS = 250
+async function waitForCaptchaId() {
+  for (let waited = 0; !getCaptchaId() && waited < CAPTCHA_WAIT_MS; waited += CAPTCHA_POLL_MS) {
+    await new Promise((resolve) => setTimeout(resolve, CAPTCHA_POLL_MS))
+  }
+  return getCaptchaId()
 }
 
 // Validation functions
@@ -161,8 +178,12 @@ form?.addEventListener('submit', async (e) => {
   }
   password.removeAttribute('aria-invalid')
 
+  isSubmitting = true
+  submitButton.disabled = true
   const captchaWidget = document.querySelector('.cf-turnstile')
-  if (captchaWidget && !getCaptchaId()) {
+  if (captchaWidget && !(await waitForCaptchaId())) {
+    isSubmitting = false
+    submitButton.disabled = false
     // The usual cause is an unticked "Verify you are human" box: point at it instead of suggesting a refresh that wipes the form.
     ;(window as any).posthog?.capture('website_signup_error', { stage: 'validation', code: 'captcha_missing' })
     ;(captchaWidget as HTMLElement).scrollIntoView?.({ block: 'center', behavior: 'smooth' })
@@ -171,9 +192,6 @@ form?.addEventListener('submit', async (e) => {
       style: { background: '#e7000b' },
     }).showToast()
   }
-
-  isSubmitting = true
-  submitButton.disabled = true
 
   let user
   try {
