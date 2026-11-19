@@ -9,12 +9,12 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-02T11:47:00.000Z
-updated_at: 2026-11-19T10:45:00.000Z
+updated_at: 2026-11-19T15:20:00.000Z
 head_image: /blog-images/google-play-obfuscation-capacitor-android.png
-head_image_alt: "Capgo blog graphic: Fix Google Play obfuscation below 25% in Capacitor apps, with an Android vitals card showing 3% obfuscation and R8 minifyEnabled reaching 25 percent"
+head_image_alt: "Capgo blog graphic: Fix DEX code optimization below threshold in Capacitor apps, with Android vitals and R8 minify on release"
 keywords: >-
   dex code optimization is below our threshold, dex code optimisation below
-  threshold, obfuscation percentage, R8 APK login, android.r8.gradual.support,
+  threshold, obfuscation percentage, r8 apk login, android.r8.gradual.support,
   Capacitor Android, Google Play Console, DEX optimization, R8 minifyEnabled
 tag: Development, Android, Google Play
 published: true
