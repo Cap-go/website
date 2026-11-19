@@ -1,6 +1,14 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.63.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
+    "pubDate": "2026-11-18T21:36:02.000Z",
+    "description": "🆕 Changelog Fixed Simulator : Capped host sync running sessions at a maximum of 40 minutes to prevent prolonged resource consumption and improve stability during extended simulation periods. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.63.1...capgo 22.63.2"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.108.2",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.108.2",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.108.2",
@@ -310,14 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.2",
     "pubDate": "2026-11-13T02:22:12.000Z",
     "description": "🆕 Changelog Fixed Deferred processing of throttled console translations and restored the ability to track queue progress, ensuring that internationalization messages display correctly without blocking or failing in high volume scenarios. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.44.1...capgo 22.44.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.44.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.1",
-    "pubDate": "2026-11-13T01:01:49.000Z",
-    "description": "🆕 Changelog Fixed Validated and restored 24 hour deployment reports to ensure accurate email delivery of deployment metrics. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.106.1...capgo 22.44.1"
   },
   {
     "category": "release",
@@ -662,14 +662,6 @@
     "guid": "https://github.com/Cap-go/capacitor-file-sharer/releases/tag/8.1.18",
     "pubDate": "2026-11-12T16:30:47.000Z",
     "description": "🆕 Changelog Changed Updated documentation to clarify that pull requests are reviewed, tested, and merged by humans ( 16) 🔗 Full Changelog : https://github.com/Cap go/capacitor file sharer/compare/8.1.17...8.1.18"
-  },
-  {
-    "category": "release",
-    "title": "capacitor-firebase storage/v8.3.2",
-    "link": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.3.2",
-    "guid": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.3.2",
-    "pubDate": "2026-11-17T04:27:55.000Z",
-    "description": "🆕 Changelog chore(release): storage 8.3.2 (9225abb) chore: remove patch package and patches, use plain docgen like other plugins ( 23) (6ba5ec3) 🔗 Full Changelog : https://github.com/Cap go/capacitor firebase/compare/storage/v8.3.1...storage/v8.3.2"
   },
   {
     "category": "release",

@@ -1,12 +1,12 @@
 {
   "repositoryCount": 144,
   "contributorCount": 613,
-  "versionCount": 16876,
-  "releaseCount": 7516,
+  "versionCount": 16890,
+  "releaseCount": 7527,
   "closedIssueCount": 1803,
-  "mergedPullRequestCount": 10323,
-  "resolvedItemCount": 12126,
-  "totalStars": 3234,
+  "mergedPullRequestCount": 10328,
+  "resolvedItemCount": 12131,
+  "totalStars": 3236,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -145,12 +145,12 @@
     },
     "Cap-go/capgo": {
       "url": "https://github.com/Cap-go/capgo",
-      "stars": 213,
+      "stars": 214,
       "contributors": 30,
-      "versionTags": 5986,
+      "versionTags": 5989,
       "releases": 1000,
       "closedIssues": 422,
-      "mergedPullRequests": 2892
+      "mergedPullRequests": 2897
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -172,7 +172,7 @@
     },
     "Cap-go/capacitor-uploader": {
       "url": "https://github.com/Cap-go/capacitor-uploader",
-      "stars": 29,
+      "stars": 30,
       "contributors": 5,
       "versionTags": 186,
       "releases": 102,
@@ -1164,8 +1164,8 @@
       "url": "https://github.com/Cap-go/capacitor-firebase",
       "stars": 6,
       "contributors": 46,
-      "versionTags": 351,
-      "releases": 18,
+      "versionTags": 362,
+      "releases": 29,
       "closedIssues": 1,
       "mergedPullRequests": 19
     },
