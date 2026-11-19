@@ -1,7 +1,7 @@
 ---
 slug: enable-ios-developer-mode-ios16
 title: "How to Enable Developer Mode on iPhone (iOS 16 and Later)"
-description: "On iOS 16 and later, enable Developer Mode on iPhone under Settings, Privacy and Security. Open a dev build first, restart, tap Enable or Turn On, or fix a missing toggle."
+description: "Enable Developer Mode on iPhone (iOS 16+) in Settings, Privacy and Security. Open a dev build first, restart, tap Enable, or fix a missing toggle."
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
