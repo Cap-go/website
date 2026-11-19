@@ -191,7 +191,7 @@ Official notes: [Using ProGuard](https://capacitorjs.com/docs/android/troublesho
 
 ## Step 4: Build a real release bundle
 
-Play grades what you upload, not a debug APK. Bump `versionCode` in `android/app/build.gradle` so the new bundle is higher than the last Play upload ([version your app](https://developer.android.com/studio/publish/versioning)). From the project root:
+Play grades what you upload, not a debug APK. Bump `versionCode` in `android/app/build.gradle` or `android/app/build.gradle.kts` (`defaultConfig { versionCode = ... }`) so the new bundle is higher than the last Play upload ([version your app](https://developer.android.com/studio/publish/versioning)). From the project root:
 
 ```bash
 bun run build   # or: npm run build
