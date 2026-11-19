@@ -36,7 +36,7 @@ Invalid colors on `open()` fall back to platform defaults: black on Android, `sy
 
 | Situation | Android | iOS | Web |
 | --------- | ------- | --- | --- |
-| `backgroundColor` omitted | Black canvas | `systemBackground` | Transparent host (no `#111` paint in inline mode) |
+| `backgroundColor` omitted | Black canvas | `systemBackground` | Fullscreen: `rgba(0,0,0,0.92)` host overlay when `nativeUi` is on; inline: leaves the target element background unchanged |
 | `underWebView` / `toBack`, color omitted | Transparent canvas | Clear shell | N/A (`underWebView` is native only) |
 | Valid `#RRGGBB` | Tinted canvas | Tinted around pages | Tinted host around the embedded PDF frame |
 
