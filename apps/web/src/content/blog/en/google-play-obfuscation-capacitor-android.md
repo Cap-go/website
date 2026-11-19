@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-02T11:47:00.000Z
-updated_at: 2026-11-19T10:34:55.000Z
+updated_at: 2026-11-19T10:45:00.000Z
 head_image: /blog-images/google-play-obfuscation-capacitor-android.png
 head_image_alt: "Capgo blog graphic: Fix Google Play obfuscation below 25% in Capacitor apps, with an Android vitals card showing 3% obfuscation and R8 minifyEnabled reaching 25 percent"
 keywords: >-
@@ -46,10 +46,10 @@ faq:
       Why does Gradle say Cannot use optimization.enable=true without setting
       android.r8.gradual.support flag?
     answer: >-
-      You turned on the AGP optimization DSL with enable=true while using
-      packageScope or other gradual R8 features. Add android.r8.gradual.support=true
-      to gradle.properties, or switch a Capacitor app to the legacy release block
-      with isMinifyEnabled true instead of optimization.enable.
+      Some AGP versions require android.r8.gradual.support=true in project
+      gradle.properties when optimization.enable is true, even without
+      packageScope. A separate message names packageScope explicitly. Capacitor
+      apps can avoid the new DSL and use isMinifyEnabled on release instead.
   - question: Why does my Capacitor app crash after I enable R8?
     answer: >-
       A plugin may use reflection without shipping consumer ProGuard rules. Test
@@ -157,17 +157,20 @@ Those rules keep scores low even after you enable R8.
 
 On **Android Gradle Plugin 9.0 and later**, Google added an `optimization { }` block with `enable = true` and an experimental **`packageScope`** path to optimize named packages first ([optimize specified packages](https://developer.android.com/topic/performance/app-optimization/optimize-specified-packages)).
 
-If you set `optimization { enable = true }` together with **`packageScope`**, Gradle requires this property in the project **`gradle.properties`** file (not module level):
+Add this line in the project **`gradle.properties`** file (not module level) when Gradle asks for gradual R8 support:
 
 ```properties
 android.r8.gradual.support=true
 ```
 
-`packageScope` also requires **R8 full mode** (remove `android.enableR8.fullMode=false`).
+Match the fix to the exact error text:
+
+1. **`Cannot use optimization.enable=true without setting android.r8.gradual.support flag.`** Some AGP versions require the flag when you turn on `optimization { enable = true }` even **without** `packageScope`. Adding `android.r8.gradual.support=true` is enough. You do not have to configure `packageScope`.
+2. **`Cannot use optimization.packageScope without setting android.r8.gradual.support flag.`** You set `packageScope` inside `optimization { }`. Add the same `gradle.properties` flag. `packageScope` also requires **R8 full mode** (remove `android.enableR8.fullMode=false`).
 
 **Capacitor recommendation:** Most Capacitor apps should **not** start with `packageScope`. Use the legacy release block at the top of this post (`minifyEnabled` / `isMinifyEnabled` plus `shrinkResources`). That satisfies Play DEX optimization without the gradual DSL.
 
-If you already adopted `optimization { enable = true }` from an AGP 9.3+ template and hit the Gradle error, either add `android.r8.gradual.support=true` and configure `packageScope` per the Android doc, or revert to `isMinifyEnabled = true` and `isShrinkResources = true` with `proguard-android-optimize.txt`. The `optimization.enable` property itself was added in **AGP 8.13**; full `packageScope` gradual mode is documented for **AGP 9.0+**.
+If you already adopted `optimization { enable = true }` from an AGP 9.3+ template, either add the flag and follow the Android doc for your AGP version, or revert to `isMinifyEnabled = true` and `isShrinkResources = true` with `proguard-android-optimize.txt`. The `optimization.enable` property itself was added in **AGP 8.13**; documented `packageScope` gradual mode starts at **AGP 9.0+**.
 
 ## Step 3: Keep Capacitor plugins, not the whole app
 
@@ -188,11 +191,11 @@ Official notes: [Using ProGuard](https://capacitorjs.com/docs/android/troublesho
 
 ## Step 4: Build a real release bundle
 
-Play grades what you upload, not a debug APK. From the project root:
+Play grades what you upload, not a debug APK. Bump `versionCode` in `android/app/build.gradle` so the new bundle is higher than the last Play upload ([version your app](https://developer.android.com/studio/publish/versioning)). From the project root:
 
 ```bash
-bun run build
-bunx cap sync android
+bun run build   # or: npm run build
+bunx cap sync android   # or: npx cap sync android
 cd android
 ./gradlew bundleRelease
 ```
@@ -265,7 +268,7 @@ Enable R8 on the **release** build type, use `proguard-android-optimize.txt`, ru
 <a id="optimization-enable-without-android-r8-gradual-support"></a>
 ### Why does Gradle require android.r8.gradual.support?
 
-When `optimization.enable=true` is used with **`packageScope`** (AGP 9.0+ gradual path), Android Gradle Plugin expects `android.r8.gradual.support=true` in **`gradle.properties`**. Capacitor teams can avoid that path by using `isMinifyEnabled` / `minifyEnabled` instead of the new DSL.
+Gradle may require `android.r8.gradual.support=true` in project **`gradle.properties`** when you use `optimization.enable=true`, when you set `packageScope`, or both, depending on AGP version and the exact error string. Capacitor teams can avoid the new DSL by using `isMinifyEnabled` / `minifyEnabled` on release instead.
 
 <a id="capacitor-crashes-after-r8"></a>
 ### Why does my Capacitor app crash after I enable R8?
