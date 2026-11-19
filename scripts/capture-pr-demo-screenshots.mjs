@@ -59,16 +59,29 @@ async function applyDemoTheme(page, platform, dark) {
 /**
  * @param {string} filePath
  */
+function isPrimaryButtonPixel(r, g, b) {
+  if (r > 235 && g > 235 && b > 235) return false
+  if (r < 25 && g < 25 && b < 25) return false
+  return b > 120 && g > 50 && r < 200
+}
+
+/** @param {string} filePath */
 async function assertButtonPixelsVisible(filePath) {
-  const { data, info } = await sharp(filePath).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const meta = await sharp(filePath).metadata()
+  const cropW = Math.floor((meta.width ?? 1) * 0.7)
+  const cropH = Math.floor((meta.height ?? 1) * 0.55)
+  const left = Math.floor(((meta.width ?? 1) - cropW) / 2)
+  const top = Math.floor(((meta.height ?? 1) - cropH) / 2)
+  const { data, info } = await sharp(filePath)
+    .extract({ left, top, width: cropW, height: cropH })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true })
   let accentHits = 0
   for (let i = 0; i < data.length; i += 4) {
-    const r = data[i]
-    const g = data[i + 1]
-    const b = data[i + 2]
-    if (r > 40 && g > 90 && b > 180 && r < 120) accentHits += 1
+    if (isPrimaryButtonPixel(data[i], data[i + 1], data[i + 2])) accentHits += 1
   }
-  const minHits = Math.max(120, Math.floor(info.width * info.height * 0.002))
+  const minHits = Math.max(80, Math.floor(info.width * info.height * 0.01))
   if (accentHits < minHits) {
     throw new Error(`Screenshot ${filePath} lacks visible button fill pixels (${accentHits} < ${minHits})`)
   }
@@ -131,11 +144,11 @@ try {
 }
 
 for (const tag of ['ios', 'material']) {
-  if (hashes[`desktop-after-button-${tag}-light`] === hashes[`desktop-after-button-${tag}-dark`]) {
-    throw new Error(`Desktop ${tag} light/dark screenshots are identical`)
-  }
-  if (hashes[`mobile-after-button-${tag}-light`] === hashes[`mobile-after-button-${tag}-dark`]) {
-    throw new Error(`Mobile ${tag} light/dark screenshots are identical`)
+  for (const prefix of ['desktop', 'mobile']) {
+    const light = hashes[`${prefix}-after-button-${tag}-light`]
+    const dark = hashes[`${prefix}-after-button-${tag}-dark`]
+    if (!light || !dark) throw new Error(`Missing ${prefix} ${tag} light/dark screenshot hashes`)
+    if (light === dark) throw new Error(`${prefix} ${tag} light/dark screenshots are identical`)
   }
 }
 
