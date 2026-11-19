@@ -102,6 +102,8 @@ console.log(result);
 
 ### `pickMedia()` on iPad
 
+Requires `@capgo/capacitor-photo-library` **8.0.35** or newer from [capacitor-photo-library PR #28](https://github.com/Cap-go/capacitor-photo-library/pull/28/). That release is not on npm yet (latest published is **8.0.34**). Merge and publish the plugin change before relying on this option in production.
+
 On iPad, the system picker opens as a sheet by default. Set `pickMediaFullScreen: true` in `capacitor.config.ts` under `plugins.PhotoLibrary`, or pass it on a single call:
 
 ```typescript
