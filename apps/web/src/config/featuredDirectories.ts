@@ -53,7 +53,7 @@ export const featuredDirectoryEntries: FeaturedDirectoryEntry[] = [
   placeholder('dododirectory', 'DodoDirectory', 'https://dododirectory.com/'),
   placeholder('earlyhunt', 'EarlyHunt', 'https://earlyhunt.com/'),
   placeholder('indiehunt', 'Indiehunt', 'https://indiehunt.io/'),
-  placeholder('launch-llama-tools', 'Launch Llama Tools', 'https://tools.launchllama.co/'),
+  placeholder('launch-llama-tools', 'Launch Llama Tools', 'https://tools.launchllama.co/products/capgo?utm_source=badge&utm_medium=referral'),
   placeholder('listmysaas', 'ListMySaaS', 'https://listmysaas.xyz/'),
   snippet('neeed-directory', 'neeed.directory', 'https://neeed.directory/', {
     href: 'https://neeed.directory/products/capgo?utm_source=capgo',
