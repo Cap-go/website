@@ -100,6 +100,20 @@ const result = await PhotoLibrary.getThumbnailUrl({ id: 'id-123' });
 console.log(result);
 ```
 
+### `pickMedia()` on iPad
+
+On iPad, the system picker opens as a sheet by default. Set `pickMediaFullScreen: true` in `capacitor.config.ts` under `plugins.PhotoLibrary`, or pass it on a single call:
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const picked = await PhotoLibrary.pickMedia({
+  pickMediaFullScreen: true,
+});
+```
+
+See [Getting Started](/docs/plugins/photo-library/getting-started/) for plugin config sync steps on iOS.
+
 The table above lists the 7 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-photo-library/).
 
 ## Full reference

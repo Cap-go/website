@@ -146,6 +146,45 @@ const result = await PhotoLibrary.pickMedia();
 console.log(result);
 ```
 
+## iPad full screen picker (`pickMedia`)
+
+On iPad, iOS presents `PHPickerViewController` as a sheet by default, which does not cover the full screen. Set `pickMediaFullScreen` to present the system picker in full screen on iPad instead.
+
+### Plugin configuration
+
+Applies to every `pickMedia()` call:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    PhotoLibrary: {
+      pickMediaFullScreen: true,
+    },
+  },
+};
+
+export default config;
+```
+
+After you change `capacitor.config.ts`, run `bunx cap copy ios` or `bunx cap sync ios` before rebuilding the iOS app so the native project loads the updated plugin configuration. Per-call `pickMediaFullScreen` on `pickMedia()` does not require this step.
+
+### Per-call override (iOS only)
+
+Overrides plugin configuration when set:
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const picked = await PhotoLibrary.pickMedia({
+  selectionLimit: 5,
+  pickMediaFullScreen: true,
+});
+```
+
+Android ignores this option. When the per-call option is omitted, the resolved value comes from plugin configuration. When the resolved value is `false`, behavior stays the same as before (system default presentation on iPad).
+
 ## Type Reference
 
 ### `PhotoLibraryAuthorizationState`
@@ -159,6 +198,20 @@ export interface PhotoLibraryAlbum {
   id: string;
   title: string;
   assetCount: number;
+}
+```
+
+### `PhotoLibraryPluginConfig`
+
+Plugin configuration for `PhotoLibrary` in `capacitor.config.ts`.
+
+```typescript
+export interface PhotoLibraryPluginConfig {
+  /**
+   * When `true`, presents the iOS `pickMedia()` system picker in full screen on iPad instead of a sheet.
+   * Defaults to `false`. Ignored on Android.
+   */
+  pickMediaFullScreen?: boolean;
 }
 ```
 
@@ -260,6 +313,12 @@ export interface PickMediaOptions {
   thumbnailHeight?: number;
   /** JPEG quality for generated thumbnails (0-1). Defaults to `0.7`. */
   thumbnailQuality?: number;
+  /**
+   * When `true`, presents the system picker in full screen on iPad (iOS only).
+   * Overrides the `pickMediaFullScreen` plugin configuration when set.
+   * Defaults to the plugin configuration value, or `false` when unset.
+   */
+  pickMediaFullScreen?: boolean;
 }
 ```
 
