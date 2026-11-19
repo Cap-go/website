@@ -21,6 +21,7 @@ npx cap sync
 - Cookie, cache, and full browsing-data cleanup with `persistWebViewData`, `clearCookies`, `clearAllCookies`, `clearCache`, and `clearAllBrowsingData`.
 - App-to-page communication with `postMessage()`, page-to-app communication with `window.mobileApp.postMessage(...)`, and script injection with `executeScript()`.
 - Download handling, native-first proxy rules, popup control, Google Pay support, `_blank` link handling, and hidden preloadable browser instances.
+- `deepLinkPrevented` when `preventDeeplink: true` blocks a link that would leave the managed WebView ([guide](/docs/plugins/inappbrowser/deep-link-prevented/)).
 
 ## Common Use Cases
 
@@ -74,6 +75,23 @@ await InAppBrowser.close({ id });
 ```
 
 Use this for account switching, checkout testing, support impersonation, or auth flows where cookies, cache, local storage, and IndexedDB should not survive longer than needed.
+
+### React When Deeplinks Are Blocked
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+await InAppBrowser.addListener('deepLinkPrevented', ({ id, url }) => {
+  console.log('Blocked hand-off', id, url);
+});
+
+await InAppBrowser.openWebView({
+  url: 'https://example.com/checkout',
+  preventDeeplink: true,
+});
+```
+
+See [deepLinkPrevented event](/docs/plugins/inappbrowser/deep-link-prevented/) for platform details.
 
 ### Preload and Swap Multiple WebViews
 

@@ -36,6 +36,7 @@ Use it when the page needs more than a simple external browser: OAuth and checko
 - Run checkout, login, support, or account-switching flows without persistent website storage using `persistWebViewData: false` and `clearAllBrowsingData()`.
 - Keep multiple browser instances loaded with `hidden`, `hide()`, and `show()` while preserving page state.
 - Embed advanced web apps that need request proxying, file uploads, downloads, popup control, Google Pay support, `_blank` link handling, and app-to-page messaging.
+- React when `preventDeeplink` blocks an external hand-off using the `deepLinkPrevented` listener. See [deepLinkPrevented event](/docs/plugins/inappbrowser/deep-link-prevented/).
 
 ## Core Capabilities
 
@@ -84,6 +85,7 @@ Use it when the page needs more than a simple external browser: OAuth and checko
 | `addListener` | Will be triggered whenever a page opens a popup/new window. Use the returned popup id with `executeScript`, `postMessage`, `show`, `hide`, and `close`. |
 | `addListener` | Listen for proxied requests delegated by the native runtime. Prefer `addProxyHandler()` instead of calling this directly. |
 | `addListener` | Listen for JavaScript console output emitted by the managed page. Enable this with `captureConsoleLogs: true` when opening the webview. |
+| `addListener` | Will be triggered when `preventDeeplink` blocks a link that would leave the in-app browser. See [deepLinkPrevented event](/docs/plugins/inappbrowser/deep-link-prevented/). |
 | `handleProxyRequest` | Internal method used by `addProxyHandler()` to send a proxy decision back to native. Forward the original `phase` when replying to a manual `proxyRequest` listener. |
 | `removeAllListeners` | Remove all listeners for this plugin. |
 | `reload` | Reload the current web page. |
