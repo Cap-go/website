@@ -7,7 +7,7 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-11-19T09:00:00.000Z
 updated_at: 2026-11-19T09:00:00.000Z
-head_image: /migrating-cordova-to-capacitor.webp
+head_image: /blog-images/migrating-cordova-to-capacitor.png
 head_image_alt: "Illustration of migrating a Cordova app to Capacitor, used for a speech recognition plugin guide"
 keywords: cordova-plugin-speechrecognition alternative, capacitor speech recognition, @capgo/capacitor-speech-recognition, window.plugins.speechRecognition
 tag: Alternatives, Capacitor, Migration
@@ -67,18 +67,14 @@ export async function dictateOnce() {
     throw new Error('Permission denied');
   }
 
-  await SpeechRecognition.addListener('partialResults', (event) => {
-    console.log('partial', event.matches?.[0] ?? event.accumulatedText);
-  });
-
   const { matches } = await SpeechRecognition.start({
     language: 'en-US',
     maxResults: 5,
-    partialResults: true,
-    popup: false,
+    partialResults: false,
+    popup: true,
+    prompt: 'Say something',
   });
 
-  await SpeechRecognition.stop();
   return matches?.[0];
 }
 ```
