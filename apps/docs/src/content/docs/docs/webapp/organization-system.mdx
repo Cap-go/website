@@ -63,7 +63,7 @@ Active members are sorted by role priority. Pending invitations appear with an o
 The available org-level roles are:
 - **Member** — Read-only access
 - **Billing Manager** — Billing-only access
-- **Admin** — Full administration (billing address and tax ID only; no other billing, no deletion)
+- **Admin** — Full administration (no billing updates, no deletion)
 - **Super Admin** — Complete control
 
 3. Click **Confirm**, then fill in the invitation form (email, optional first/last name, captcha) and click **Send invitation**.
@@ -122,8 +122,8 @@ Assigned when you invite a member. They apply across the entire organization.
 | Role | Internal name | Description |
 |------|---------------|-------------|
 | **Super Admin** | `org_super_admin` | Full control — billing, deletion, transfer. Automatically granted to the org creator. |
-| **Admin** | `org_admin` | Full administration: manage members, apps, channels. Billing address and tax ID only; no other billing or deletion. |
-| **Billing Manager** | `org_billing_admin` | Billing only — view/update payment, invoices, billing audit. No access to apps or members. |
+| **Admin** | `org_admin` | Full administration: manage members, apps, channels. No billing updates or org or app deletion. |
+| **Billing Manager** | `org_billing_admin` | Billing only: view and update payment, invoices, billing profile, billing audit. No access to apps or members. |
 | **Member** | `org_member` | Read-only access across the org and all its apps. |
 
 ### App roles
@@ -246,7 +246,7 @@ For API usage and technical details about groups, see [Access Control Reference 
 
 ## Billing
 
-**Super Admin** (`org_super_admin`) and **Billing Manager** (`org_billing_admin`) manage payment methods, plans, and invoices. **Admin** (`org_admin`) can update [billing address and tax ID](/docs/webapp/org-billing-profile/) only and cannot manage other billing settings. Plans are linked to an organization, not to your personal account.
+**Super Admin** (`org_super_admin`) and **Billing Manager** (`org_billing_admin`) hold `org.update_billing` and manage payment methods, plans, invoices, and [billing address and tax ID](/docs/webapp/org-billing-profile/). **Admin** (`org_admin`) has read-only billing access and cannot update billing settings. Plans are linked to an organization, not to your personal account.
 
 :::danger
 Buying a plan will ONLY affect the currently selected organization.

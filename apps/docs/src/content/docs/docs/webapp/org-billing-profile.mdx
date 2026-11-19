@@ -1,45 +1,46 @@
 ---
 title: "Organization billing address and tax ID"
-description: "Org admins can maintain Stripe billing address and VAT or tax ID in the Capgo console."
+description: "Super Admin and Billing Manager roles can maintain Stripe invoice details and tax IDs in the Capgo console."
 sidebar:
   order: 13
 ---
 
 ## What is this about?
 
-EU and global customers often need a VAT number and billing address on invoices without using Stripe Customer Portal. Organization **Super Admin** and **Admin** roles can edit these fields on the Billing tab.
+EU and global customers often need VAT numbers and a billing address on invoices without using Stripe Customer Portal. The console billing profile shipped on Capgo main in [PR #4148](https://github.com/Cap-go/capgo/pull/4148/) and [PR #4160](https://github.com/Cap-go/capgo/pull/4160/). Organization **Super Admin** and **Billing Manager** roles can edit those fields on the Billing tab.
 
 ## Where to find it
 
-Go to [Organization settings](/docs/webapp/settings/#how-to-get-to-the-settings-page), select the **Organization** tab, open the **Billing** tab, then scroll to **Billing address and tax ID**.
+Go to [Organization settings](/docs/webapp/settings/#how-to-get-to-the-settings-page), select the **Organization** tab, open the **Billing** tab, then scroll to the billing profile section (invoice details and tax IDs).
 
-## Billing address
+## Invoice details
 
-You can set:
+Open **Edit details** to change:
 
-- Address line 1 (required to save)
+- Organization or buyer name (required)
+- Billing email (required)
+- Phone (optional)
+- Address line 1 (required)
 - Address line 2 (optional)
-- City (required)
-- State or province (optional)
-- Postal code (required)
-- Country (required, two-letter ISO code such as `PT` or `DE`)
+- City, state or province, postal code
+- Country (required, pick from the country dropdown)
 
-Clear optional fields by saving an empty value where the form allows it.
+Save applies all fields in the modal. The country you pick must be in the supported country list (`BILLING_COUNTRIES`).
 
-## Tax ID
+## Tax IDs
 
-When Stripe reports at least one supported tax ID type for your customer, the form shows:
+The summary lists every stored tax ID with its type label, value, and verification status (`pending`, `unavailable`, `unverified`, or `verified`).
 
-- **Tax ID type** (for example EU VAT)
-- **Tax ID value** (for example `PT999999990`)
+Open **Manage tax IDs** to add or remove entries:
 
-After a tax ID is stored, **Tax ID type** is locked so you cannot accidentally clear a valid registration by changing the type. Remove the value and save to clear the tax ID.
+- **Remove:** click **Remove** on one ID, confirm, then Capgo deletes that ID from Stripe.
+- **Add:** choose **Tax ID type** from the dropdown (options come from the static `BILLING_TAX_ID_TYPES` list, for example `eu_vat`), enter the value, then click **Add**.
 
-Capgo creates the new tax ID before removing the old one so an invalid value does not wipe your existing registration.
+You can keep multiple tax IDs. The type dropdown is not locked after you add an ID; removal always uses the Remove and confirm flow, not an empty save.
 
 ## Who can edit
 
-Only organization **Super Admin** and **Admin** roles see the save actions. **Billing Manager** and other roles can still open Billing for cards and invoices but cannot change billing address or tax ID.
+The UI checks `org.update_billing`. Only organization **Super Admin** and **Billing Manager** pass that check and see edit actions. **Admin**, **Member**, and other roles can still open Billing for read-only views but cannot save invoice details or change tax IDs.
 
 ## Related docs
 
