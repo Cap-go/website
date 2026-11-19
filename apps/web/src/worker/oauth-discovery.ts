@@ -13,14 +13,18 @@ const METADATA_TTL_SECONDS = 3600
 export async function loadAuthorizationServerMetadata(fetchImpl: typeof fetch = fetch): Promise<Record<string, unknown>> {
   const failures: string[] = []
   for (const url of OAUTH_AUTHORIZATION_SERVER_UPSTREAM_URLS) {
-    const response = await fetchImpl(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(5000) })
-    if (!response.ok) {
-      failures.push(`${url} returned ${response.status}`)
-      continue
+    try {
+      const response = await fetchImpl(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(5000) })
+      if (!response.ok) {
+        failures.push(`${url} returned ${response.status}`)
+        continue
+      }
+      const metadata = (await response.json()) as Record<string, unknown>
+      if (metadata.issuer === OAUTH_ISSUER) return metadata
+      failures.push(`${url} has issuer ${String(metadata.issuer)}`)
+    } catch (error) {
+      failures.push(`${url} failed: ${error instanceof Error ? error.message : String(error)}`)
     }
-    const metadata = (await response.json()) as Record<string, unknown>
-    if (metadata.issuer === OAUTH_ISSUER) return metadata
-    failures.push(`${url} has issuer ${String(metadata.issuer)}`)
   }
   throw new Error(`No authorization server metadata for ${OAUTH_ISSUER}: ${failures.join('; ')}`)
 }

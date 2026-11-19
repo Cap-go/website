@@ -167,7 +167,7 @@ Remote MCP clients such as OpenAI use tool annotations (`readOnlyHint`, `destruc
 | ---- | ----------- | ----- |
 | `capgo_prepare_bundle_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Can create an unfinished version and signed upload URLs. When `version_exists_ok` is true and the version already exists, the response is `{ skipped: true, reason: "VERSION_EXISTS" }` with no upload URLs: stop and do not PUT or call `capgo_complete_bundle_upload`. |
 | `capgo_prepare_build_credentials_upload` | `readOnlyHint: false`, `destructiveHint: true`, `idempotentHint: false`, `openWorldHint: false` | Creates a single-use signed upload URL for one app and platform. Confirm the app, platform and mode before calling. Omitting `mode` defaults to `replace`; `merge` preserves stored keys absent from the uploaded file. Stored credentials change only after the separate upload. |
-| `capgo_get_build_status` | `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false` | Read-only poll on the hosted server. The public HTTP handler and CLI polls can persist state; see the distinction below. |
+| `capgo_get_build_status` | `readOnlyHint: false`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false` | The annotation stays `readOnlyHint: false` because the handler is shared with the CLI MCP relay. On `https://mcp.capgo.app` the in-process path is read-only (`persisted: false`); see [Hosted MCP read-only build status](#hosted-mcp-read-only-build-status) below. |
 
 ### Uploading native signing credentials
 

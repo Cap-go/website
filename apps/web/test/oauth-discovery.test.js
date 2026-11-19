@@ -25,6 +25,14 @@ test('falls back to the API well-known URL served by older API releases', async 
   expect(await loadAuthorizationServerMetadata(fakeFetch({ [WELL_KNOWN_URL]: [upstream] }))).toEqual(upstream)
 })
 
+test('continues to the next metadata source when an upstream fetch throws', async () => {
+  const throwingFetch = async (url) => {
+    if (url === METADATA_URL) throw new Error('connection reset')
+    return fakeFetch({ [WELL_KNOWN_URL]: [upstream] })(url)
+  }
+  expect(await loadAuthorizationServerMetadata(throwingFetch)).toEqual(upstream)
+})
+
 test('metadata naming another issuer is never served from capgo.app', async () => {
   const oldIssuer = { ...upstream, issuer: 'https://api.capgo.app' }
   await expect(loadAuthorizationServerMetadata(fakeFetch({ [METADATA_URL]: [oldIssuer], [WELL_KNOWN_URL]: [oldIssuer] }))).rejects.toThrow()
