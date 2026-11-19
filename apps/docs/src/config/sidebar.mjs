@@ -299,7 +299,11 @@ const pluginEntries = [
   [
     'Zebra DataWedge',
     'zebra-datawedge',
-    [linkItem('Android behavior', '/docs/plugins/zebra-datawedge/android'), linkItem('Complete configuration', '/docs/plugins/zebra-datawedge/complete-configuration')],
+    [
+      linkItem('Android behavior', '/docs/plugins/zebra-datawedge/android'),
+      linkItem('Complete configuration', '/docs/plugins/zebra-datawedge/complete-configuration'),
+      linkItem('Scan sessions', '/docs/plugins/zebra-datawedge/scan-sessions'),
+    ],
   ],
 ]
 
