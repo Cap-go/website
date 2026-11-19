@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-11-09T12:00:00.000Z
-updated_at: 2026-11-09T12:00:00.000Z
+updated_at: 2026-11-19T15:55:29.000Z
 head_image: /blog-images/how-to-ship-ota-updates-to-capacitor-ios-app-without-app-store-review.jpg
 head_image_alt: How to ship OTA updates to a Capacitor iOS app without waiting on App Store review
 keywords: capacitor ios ota, ship ota updates ios, capacitor live updates ios, app store review, notifyAppReady, capacitor-updater, capgo ota
