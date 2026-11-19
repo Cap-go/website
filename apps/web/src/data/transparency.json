@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T03:04:41.901Z",
+  "updatedAt": "2026-11-19T03:05:17.155Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -37,46 +37,42 @@
   "releases": [
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.49.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.0",
-      "publishedAt": "2026-11-14T02:27:07Z"
+      "tag": "capgo-22.63.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
+      "publishedAt": "2026-11-18T21:36:02Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.107.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.107.0",
-      "publishedAt": "2026-11-14T02:25:30Z"
+      "tag": "cli-8.108.2",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.108.2",
+      "publishedAt": "2026-11-17T20:51:32Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.48.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.48.1",
-      "publishedAt": "2026-11-13T22:14:12Z"
+      "tag": "capgo-22.61.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.61.0",
+      "publishedAt": "2026-11-17T12:26:28Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.106.2",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.2",
-      "publishedAt": "2026-11-13T11:19:23Z"
+      "tag": "capgo-22.60.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.60.0",
+      "publishedAt": "2026-11-17T03:31:32Z"
     },
     {
       "repo": "Cap-go/capgo.app",
-      "tag": "cli-8.106.1",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.1",
-      "publishedAt": "2026-11-13T00:37:34Z"
+      "tag": "capgo-22.59.0",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.59.0",
+      "publishedAt": "2026-11-17T01:51:07Z"
     }
   ],
   "metrics": {
     "live": {
-      "success_rate": 85.7,
+      "success_rate": 85.8,
       "first_try_rate": 98.3,
-      "rollback_rate": 13.9,
-      "updated_at": "2026-11-14T03:04:29.384Z",
+      "rollback_rate": 12.8,
+      "updated_at": "2026-11-18T17:34:51.273Z",
       "daily": [
-        83.9,
-        85.3,
-        85.1,
-        83.2,
         84.8,
         85.1,
         86.1,
@@ -102,12 +98,16 @@
         83.8,
         88.1,
         86.7,
+        86.1,
+        84.7,
+        83.7,
+        86.1,
         86.1
       ]
     },
     "builder": {
-      "success_rate": 81.1,
-      "updated_at": "2026-11-13T12:35:36.855Z"
+      "success_rate": 80.7,
+      "updated_at": "2026-11-19T03:05:14.389Z"
     }
   }
 }

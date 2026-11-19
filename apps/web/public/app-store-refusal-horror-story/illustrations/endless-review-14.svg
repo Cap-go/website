@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Seventeen days across missing review video and low end phone crash rejections">
+  <title>Seventeen days across missing review video and low end phone crash rejections</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <path d="M40 108 L280 108" stroke="#374151" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="72" cy="108" r="10" fill="#F87171"/>
+  <circle cx="144" cy="108" r="10" fill="#F87171"/>
+  <circle cx="248" cy="108" r="12" fill="#44BCFF"/>
+  <rect x="48" y="40" width="48" height="52" rx="8" fill="#111827" stroke="#F87171" stroke-width="2"/>
+  <path d="M60 58 L72 50 L84 58 L84 74 L60 74 Z" fill="none" stroke="#F87171" stroke-width="2"/>
+  <text x="52" y="36" fill="#F87171" font-family="system-ui,sans-serif" font-size="7">no video</text>
+  <rect x="120" y="36" width="48" height="56" rx="10" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="128" y="52" width="32" height="40" rx="6" fill="#0F172A"/>
+  <path d="M132 80 L156 68" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <text x="118" y="32" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">low end</text>
+  <rect x="232" y="44" width="56" height="48" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M248 64 L256 72 L272 56" fill="none" stroke="#44BCFF" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="108" y="128" width="104" height="52" rx="10" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <text x="120" y="152" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="11" font-weight="700">17.5 days</text>
+  <text x="120" y="168" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">2 rejections</text>
+  <text x="56" y="124" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">8d wait</text>
+  <text x="168" y="124" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">7d wait</text>
+</svg>

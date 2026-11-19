@@ -38,13 +38,27 @@ Available since **8.6.0**. Set optional `title` and `description` on `download()
 
 </Aside>
 
+<Aside type="tip" title="Multi-file batch downloads (8.7.0)">
+
+Available since **8.7.0** on iOS and Android (not Web). Pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not pass `url` and `files` together. Up to 32 assets share one batch `id`. Progress uses 0 to 1 for overall and per-file values. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
+
+On Android, batches use DownloadManager; `download()` rejects if any file would use OkHttp (`'auto'` with extended roots is allowed when paths stay on DownloadManager). Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death; iOS restores batches from `DownloadBatchStore`. When a batch file fails, finished files stay on disk on both platforms. On iOS, `stop()` deletes paths recorded via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android, `stop()` removes in-flight DownloadManager work while the batch is tracked but keeps completed files. Delete leftover files in your app after failure when you want them removed.
+
+</Aside>
+
+<Aside type="tip" title="Robust background downloads (8.8.0)">
+
+Available since **8.8.0**. Large offline packs can keep moving while users switch apps: required `AppDelegate` background session forwarding, optional iOS 26 continued processing, iOS `private/` paths, and opt-in OkHttp `notification: 'progress'` with an optional `dataSync` foreground service on Android (default `completed` unchanged from 8.7.0). See [Robust background downloads](/docs/plugins/downloader/getting-started/#robust-background-downloads).
+
+</Aside>
+
 ## Completion notifications
 
 Set `downloadCompletedNotificationText` on `download()` to show a localized system notification when a file finishes and the user granted notification permission. See [Getting Started](/docs/plugins/downloader/getting-started/#example-completion-notification) for a full example.
 
 ## Core Capabilities
 
-- `download` - Start a new download task.
+- `download` - Start a single download or a multi-file batch (`files`, since 8.7.0, up to 32 files).
 - `pause` - Pause an active download. Download can be resumed later from the same position.
 - `resume` - Resume a paused download. Continues from where it was paused.
 - `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.

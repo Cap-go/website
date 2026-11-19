@@ -1190,13 +1190,17 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
                 <div>
                   <div class="name">{plan.name === 'Maker' ? `${plan.name} · ${copy('most_popular')}` : plan.name}</div>
                   <div class="price">
-                    {annualMonthlyPrice(plan)}
+                    <OfferText direct={`$${plan.price_m}${plan.name === 'Enterprise' ? '+' : ''}`}>{annualMonthlyPrice(plan)}</OfferText>
                     <small> / mo</small>
                   </div>
                 </div>
                 <p class="what">{planDescription(plan)}</p>
-                <p class="tier-billing">{yearlyBilling(plan)}</p>
-                <p class="tier-billing">{monthlyPrice(plan)}</p>
+                <p class="tier-billing">
+                  <OfferText direct={copy('direct_offer_billed_monthly')}>{yearlyBilling(plan)}</OfferText>
+                </p>
+                <p class="tier-billing" data-trial-copy>
+                  {monthlyPrice(plan)}
+                </p>
                 <a class:list={['btn btn-md', plan.name === 'Maker' ? 'btn-primary' : 'btn-ghost']} href={registerUrl}>
                   <OfferText direct={copy('direct_offer_cta_get_started')}>{copy('native_build_builder_plan_trial')}</OfferText>
                 </a>

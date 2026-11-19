@@ -1,0 +1,144 @@
+---
+title: Web app to mobile app with AI
+description: "Turn a web app, a website or a new idea into a Capacitor iOS and Android app with your AI agent and the hosted Capgo MCP: plan, plugins, design and store checklist, readiness check, simulators and cloud builds."
+sidebar:
+  label: Web app to mobile app
+  order: 3
+---
+
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+The hosted [Capgo MCP server](/docs/ai/mcp/) can guide an AI agent from a web app, a live website or a blank folder to a store-ready Capacitor app. The agent gets a typed plan on the latest Capacitor release, plugin picks with their permissions, the design and store-review rules, and a readiness check it can run until nothing blocks the release. Then it runs the app on a simulator and builds it with Capgo.
+
+It works in any client that supports remote MCP servers: Claude Code, Claude.ai, Cursor, VS Code, Codex, ChatGPT and Lovable.
+
+<Aside type="note" title="Guidance, not magic">
+The hosted server cannot read your files. Your agent inspects the project (package.json, capacitor.config, native folders, installed tools) and passes what it found. The four guidance tools read no account data and change nothing; the agent makes the code changes and runs the commands.
+</Aside>
+
+## Get started
+
+<Steps>
+
+1. **Connect the Capgo MCP.** Add `https://api.capgo.app/mcp` to your client and sign in to Capgo. See [Hosted MCP server](/docs/ai/mcp/#connect-your-client) for every client. In Claude Code:
+
+   ```bash
+   claude mcp add --transport http capgo https://api.capgo.app/mcp
+   ```
+
+2. **Optional: install the Capgo skills.** The plan links each step to a skill with the full procedure (framework settings, safe areas, store submission). Agents that support skills can load them directly:
+
+   ```bash
+   npx skills add Cap-go/capgo-skills
+   ```
+
+3. **Ask your agent.** Describe where you start from:
+
+   <Tabs>
+   <TabItem label="Existing web app">
+
+   ```text
+   Turn this web app into an iOS and Android app with Capacitor using the Capgo MCP.
+   Inspect the project first, show me the plan and the proposed app ID, and wait for my OK.
+   ```
+
+   </TabItem>
+   <TabItem label="Only a website">
+
+   ```text
+   I want an app for https://www.example.com. Use the Capgo MCP to plan it and tell me
+   what you need from me.
+   ```
+
+   </TabItem>
+   <TabItem label="From scratch">
+
+   ```text
+   Create a new mobile app called "Trail Buddy" for iOS and Android with Vue and Capacitor.
+   Use the Capgo MCP plan, apply the design checklist and run it on the simulator.
+   ```
+
+   </TabItem>
+   </Tabs>
+
+4. **Confirm the app name and app ID.** The app ID (for example `com.yourcompany.yourapp`) becomes the iOS bundle identifier and Android application ID and cannot change after the first store release.
+
+5. **Let the agent work through the phases**, then check the result on a simulator or your phone.
+
+</Steps>
+
+## What the agent does
+
+| Phase | What happens | Capgo MCP tools |
+| --- | --- | --- |
+| Prepare | Confirms name, app ID, platforms and native features; checks Node, Xcode and the Android SDK; audits server-only code, auth, payments and PWA pieces | `capgo_plan_mobile_app` |
+| Static build or scaffold | Switches the framework to a static build (Next.js `output: 'export'`, Nuxt `ssr: false`, SvelteKit `adapter-static`, ...) or scaffolds a Vite app | `capgo_plan_mobile_app` |
+| Capacitor | Installs or upgrades to the latest Capacitor, runs `npx cap init`, adds `ios/` and `android/`, syncs | `capgo_plan_mobile_app` |
+| Mobile design | Viewport, safe areas, Android edge-to-edge, keyboard, back button, icon and splash, offline states | `capgo_get_mobile_checklist` |
+| Native features | Installs the plugins the product needs with purpose strings and permissions | `capgo_recommend_plugins` |
+| Run | Starts a simulator, emulator, device, the Capgo app preview or a Capgo cloud simulator | `capgo_start_simulator`, `capgo_simulator_command` |
+| Readiness | Re-checks the project after each round of fixes until nothing blocks the release | `capgo_check_mobile_readiness` |
+| Capgo | Registers the app, adds live updates, uploads the first bundle, builds iOS and Android in the cloud | `capgo_add_app`, `capgo_prepare_bundle_upload`, `capgo_request_build`, `capgo_start_build` |
+| Store | Walks through Apple App Review and Google Play rules before submission | `capgo_get_mobile_checklist` |
+
+Every step in the plan has the commands to run, the file changes, how to verify it, who runs it (the agent, or you for decisions, store accounts and signing) and the skill with the full procedure.
+
+## The four guidance tools
+
+### `capgo_plan_mobile_app`
+
+Builds the plan. The agent passes the starting point (`existing_web_app`, `website_only` or `new_app`), the package.json dependencies, the platforms, the native features (`camera`, `push_notifications`, `in_app_purchases`, ...), product traits (`accounts`, `digital_goods`, `third_party_login`, ...) and what the machine can do (shell, OS, Xcode, Android SDK, Node version).
+
+The result names the framework and its static output folder, the latest Capacitor version read from npm and whether to install, upgrade or keep it, the proposed app identity, warnings (for example Node too old, or iOS without a Mac), ordered phases, plugin picks, run options and the next tool to call. When the agent cannot run commands (a web chat or an app builder), the plan switches to a handoff: the agent writes the changes and a checklist for you or your CI.
+
+### `capgo_recommend_plugins`
+
+Maps native features to plugins: official `@capacitor/*` plugins where they cover the need, and Capgo `@capgo/*` plugins where they do more, such as `@capgo/capacitor-social-login`, `@capgo/native-purchases`, `@capgo/capacitor-native-biometric`, `@capgo/background-geolocation` or `@capgo/capacitor-notifications`. Each pick lists the install command, the iOS purpose strings and capabilities, the Android permissions and the store rules that apply. Browse every plugin in the [plugin directory](https://capgo.app/plugins/).
+
+### `capgo_get_mobile_checklist`
+
+Returns the rules that make a web app feel native and pass review, each with a severity, how to check it, the fix and the skill to load:
+
+- **Design**: `viewport-fit=cover`, safe-area padding, Android 16 edge-to-edge, keyboard, app navigation and the Android back button, 44 pt / 48 dp touch targets, no website chrome or install prompts, external links in the system browser, offline states, icon and splash, dark mode, accessibility.
+- **Native setup**: static build, bundled assets (no remote `server.url`), API origins, login without web redirects, purpose strings, service worker, deep links, real-device testing, live updates.
+- **Apple App Review**: Developer Program, required Xcode and SDK, 4.2 minimum functionality, in-app account deletion, Sign in with Apple, In-App Purchase, privacy manifest, App Tracking Transparency, demo account, listing.
+- **Google Play**: developer account, target API 36, signed App Bundle, the 12-tester closed test for personal accounts, Data safety, account deletion, Play Billing, permission declarations.
+- **Release**: version numbers, Capgo Cloud Build, what live updates may change, channels and rollouts.
+
+### `capgo_check_mobile_readiness`
+
+Checks the facts the agent inspected (package versions, `capacitor.config` values, the viewport meta tag, safe-area CSS, `Info.plist` purpose strings, privacy manifest, Android `targetSdkVersion`, icon, back button, live updates, account deletion, store billing) and returns `ready`, the blocking checks with their fixes, and the facts still missing. The agent calls it again after each round of fixes.
+
+## Run the app
+
+The plan lists the run options that fit your machine:
+
+- **iOS Simulator** on a Mac with Xcode 26 or newer: `npx cap run ios --list`, then `npx cap run ios --target <id>`, or `npx @capgo/cli@latest run device ios`. With Xcode 27, if the simulator does not launch from the CLI, run `npx cap open ios` and choose **Product > Run**.
+- **Android Emulator** with Android Studio: `npx cap run android --list`, then `npx cap run android --target <id>`.
+- **Your phone**: connect it and pick it as the target, or install a Capgo Cloud Build from TestFlight or Google Play internal testing.
+- **Capgo app preview**, no native build needed: upload a bundle, enable bundle preview on the app, then scan the QR code on the bundle's **Preview** tab with the [Capgo app](https://capgo.app/app_mobile/). Native plugins that the Capgo app does not include will not work there.
+- **Capgo cloud simulator** for iOS: `capgo_start_simulator` installs a successful Capgo iOS build in a cloud device the agent can screenshot and tap. It uses a builder slot and build minutes until you stop it.
+
+## Build and publish
+
+Native builds run in [Capgo Cloud Build](/docs/builder/getting-started/) from any machine, including iOS without a Mac. Builds requested through the hosted MCP use the signing credentials stored on Capgo:
+
+1. You run `npx @capgo/cli@latest build init --platform ios` for iOS and `npx @capgo/cli@latest build init --platform android` for Android. Each run saves the signing credentials for that platform on your machine.
+2. You store them on Capgo once per platform with `npx @capgo/cli@latest build credentials push <appId> --platform <ios|android> --mode merge` from your project. With `merge`, keys already stored on Capgo that your local credentials lack are kept, and local values replace stored values for the same keys. The default, `replace`, removes stored keys that your local credentials lack.
+
+   An agent with file access can do this step instead: it calls `capgo_prepare_build_credentials_upload` with `mode: "merge"` (omitting `mode` means `replace`) and uploads the saved credentials file to the single-use URL it returns. Any agent that can read files can read the saved credentials, though. If the agent must never see them, run the push command yourself and block the agent from reading `~/.capgo-credentials/` and the project's `.capgo-credentials.json` (where `build init --local` saves them), for example with your client's file permission settings. Keep credential contents out of the chat.
+3. The agent packages the native project with `npx @capgo/cli@latest build zip <appId> --platform <ios|android> --json` and calls `capgo_request_build`. It uploads the archive to the returned URL with the returned method and headers, calls `capgo_start_build` with the same `job_id`, then follows the build with `capgo_get_build_status` and `capgo_get_build_logs`.
+
+Add [live updates](/docs/live-updates/) before the first store release so later web fixes ship without a new review. Live updates change web code and assets only; new plugins, permissions and native changes still need a store release.
+
+<Aside type="caution" title="Store accounts">
+Publishing needs an Apple Developer Program membership and a Google Play developer account. New personal Google Play accounts must run a closed test with at least 12 testers for 14 days before production. Start these early: they do not depend on the code.
+</Aside>
+
+## Related
+
+- [Hosted MCP server](/docs/ai/mcp/)
+- [Local CLI MCP server](/docs/cli/reference/mcp/)
+- [Capgo Cloud Build](/docs/builder/getting-started/)
+- [Live updates](/docs/live-updates/)
+- [Web app to mobile app](https://capgo.app/solutions/webapp-to-mobile/)

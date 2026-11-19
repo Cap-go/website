@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-09-04T16:13:00.000Z
-updated_at: 2026-09-08T15:36:04.000Z
+updated_at: 2026-11-18T15:09:32.000Z
 head_image: /blog-images/mobile-app-best-practices-2026-live-updates.png
 head_image_alt: "Mobile App Best Practices in 2026 live updates vs store review delays Capgo blog illustration"
 keywords: mobile best practices, live updates, OTA, Capacitor, React Native, App Store review, Capgo, 2026
@@ -205,7 +205,7 @@ If you are planning a 2026 mobile roadmap, make live updates a requirement in th
 **Next steps:**
 
 - Create a free account at [capgo.app](https://capgo.app/)
-- Follow the [getting started guide](https://capgo.app/docs/getting-started/)
+- Follow the [getting started guide](https://capgo.app/docs/getting-started/quickstart/)
 - Install [`@capgo/capacitor-updater`](https://capgo.app/plugins/capacitor-updater/) in your Capacitor app
 - Review [pricing](https://capgo.app/pricing/) and channel strategy before your first production rollout
 

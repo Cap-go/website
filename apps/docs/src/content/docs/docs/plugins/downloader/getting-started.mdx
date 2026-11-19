@@ -52,6 +52,143 @@ const task = await CapacitorDownloader.download({
 });
 ```
 
+## Robust background downloads
+
+Available since **8.8.0**. Use this when users fetch large offline assets while switching apps.
+
+### What changed since 8.7.0
+
+| Area | 8.7.0 | 8.8.0 |
+|------|-------|-------|
+| OkHttp `notification` default (`completed`) | No ongoing notification, no foreground service | Same (unchanged) |
+| OkHttp `notification: 'progress'` | N/A (no ongoing UI) | Opt-in ongoing progress plus optional `dataSync` foreground service |
+| FGS when service cannot start | N/A | Download still runs; progress notification still shows without a foreground service |
+| iOS `files/...`, `cache/...` | Under Documents | Same under Documents |
+| iOS `private/...` | N/A (treated as Documents path) | iOS only: Application Support/CapacitorDownloader |
+| iOS continued processing | N/A | Optional `iosContinuedProcessingTitle` on iOS 26+ |
+
+**iOS paths:** `files/...` and `cache/...` stay under Documents as in 8.7.0 (`Documents/files/...`, `Documents/cache/...`). Use `private/...` (iOS only) for Application Support. Segments with `..` are rejected. On Android, `private/` is not special (it is a normal relative path under app storage).
+
+**iOS `AppDelegate` (required):** forward background URL session events. Warmup at launch alone does not deliver relaunched completions.
+
+```swift
+// SPM
+import CapacitorDownloaderPlugin
+// CocoaPods
+// import CapgoCapacitorDownloader
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  CapacitorDownloaderLifecycle.warmUpBackgroundSessions()
+  return true
+}
+
+func application(
+  _ application: UIApplication,
+  handleEventsForBackgroundURLSession identifier: String,
+  completionHandler: @escaping () -> Void
+) {
+  CapacitorDownloaderLifecycle.handleEventsForBackgroundURLSession(
+    identifier: identifier,
+    completionHandler: completionHandler
+  )
+}
+```
+
+**iOS 26+ continued processing:** set `iosContinuedProcessingTitle` (optional `iosContinuedProcessingSubtitle`). Add `$(PRODUCT_BUNDLE_IDENTIFIER).CapacitorDownloader.continuedProcessing.*` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`. If the system does not launch the task within a few seconds, the plugin falls back to the background `URLSession`. If the continued processing task expires, the transfer is cancelled with `downloadFailed` and is not resumed automatically on relaunch.
+
+**Android OkHttp notifications:** default `notification: 'completed'` matches 8.7.0. Set `notification: 'progress'` to opt in to ongoing progress and an optional `dataSync` foreground service (plugin minSdk 24; Android 12+ may block background service starts; Android 15 limits dataSync time). If the foreground service cannot start, the download continues and the progress notification still shows. The manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and `POST_NOTIFICATIONS`; request `POST_NOTIFICATIONS` at runtime on Android 13+ when you use `'progress'`.
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+if (Capacitor.getPlatform() === 'ios') {
+  await CapacitorDownloader.download({
+    id: 'offline-pack',
+    url: 'https://cdn.example.com/large-pack.zip',
+    destination: 'private/offline/large-pack.zip',
+    iosContinuedProcessingTitle: 'Offline pack',
+    downloadCompletedNotificationText: 'Pack is ready',
+  });
+} else {
+  await CapacitorDownloader.download({
+    id: 'offline-pack',
+    url: 'https://cdn.example.com/large-pack.zip',
+    destination: 'files/offline/large-pack.zip',
+    androidHttpEngine: 'auto',
+    notification: 'progress',
+    downloadCompletedNotificationText: 'Pack is ready',
+  });
+}
+```
+
+See also the [plugin repository README](https://github.com/Cap-go/capacitor-downloader/#robust-background-downloads-offline-packs).
+
+## Multi-file batch downloads
+
+Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Up to **32** transfers share one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
+
+Plugin change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107).
+
+On iOS, batch `stop()` deletes paths recorded via `recordMovedDestination` only while the plugin still tracks that batch (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const batchId = 'update-bundle';
+
+const progressListener = await CapacitorDownloader.addListener('downloadProgress', (event) => {
+  if (event.id !== batchId) {
+    return;
+  }
+  if (event.fileIndex != null) {
+    console.log(`file ${event.fileIndex} ${event.fileProgress}, overall ${event.progress}`);
+  }
+});
+
+const completedListener = await CapacitorDownloader.addListener('downloadCompleted', (event) => {
+  if (event.id === batchId) {
+    console.log('batch done');
+  }
+});
+
+const failedListener = await CapacitorDownloader.addListener('downloadFailed', (error) => {
+  if (error.id === batchId) {
+    const which = error.fileIndex != null ? `file ${error.fileIndex}` : 'batch';
+    console.log(`${which} failed: ${error.error}`);
+  }
+});
+
+await CapacitorDownloader.download({
+  id: batchId,
+  files: [
+    { url: 'https://example.com/a.zip', destination: 'updates/a.zip' },
+    { url: 'https://example.com/b.zip', destination: 'updates/b.zip' },
+  ],
+  notification: 'hidden',
+});
+```
+
+`download()` resolves after the batch is enqueued, not when every file finishes. Listen for `downloadProgress`, `downloadCompleted`, and `downloadFailed` as shown above. For batches, `progress` and `fileProgress` use the same **0 to 1** scale as `DownloadTask.progress` and single-file downloads. `downloadProgress` may include `fileIndex` (0-based) alongside those fields. `downloadCompleted` fires once when every file succeeds. `downloadFailed` fires when any file in the batch fails; the payload may include optional `fileIndex`. Any failure cancels the remaining transfers. Files that already finished successfully stay on disk on both Android and iOS (Android stops tracking completed children without calling DownloadManager.remove on them).
+
+### Example: cancel a batch
+
+Call `stop()` from a user action (for example a Cancel button), not immediately after `download()`:
+
+```typescript
+await CapacitorDownloader.stop({ id: 'update-bundle' });
+```
+
+**`stop()` on a batch id:** On iOS, deletes paths recorded via `recordMovedDestination` only while the batch is still tracked by the plugin (running, paused, or restored after relaunch), including files that finished before that `stop()`. Batch failure alone does not delete those paths; only `stop()` removes them while the batch is tracked. Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched. The plugin rejects that later call with `Task not found` because the batch record is removed after success, failure, or `stop()`. Delete leftover files in your app after a failed batch when you want them removed. On Android, removes active DownloadManager entries for in-flight children while the batch is tracked; finished children stay on disk (completed batch files, including files finished before `stop()`).
+
+### Batch platform notes
+
+- **Android engine**: on Android, batches use DownloadManager only. Each file uses the same `androidHttpEngine` destination rules as a single download (`'auto'` can apply extended roots). `download()` rejects before enqueue if any file would use OkHttp (for example `cache/...` or `files/...` with `'okhttp'`, or `'auto'` when that path selects OkHttp).
+- **Pause and resume**: iOS supports `pause()` and `resume()` on the batch `id`. Android rejects `pause()` and `resume()` for every download, including single downloads and batches (use `stop()`).
+- **Process death**: on Android, batch state is memory-only and is lost when the process is killed (DownloadManager work may still finish, but the plugin does not rebuild batch progress). On iOS, batch metadata is persisted in `DownloadBatchStore` (UserDefaults) and restored when the plugin initializes (`DownloadBatchCoordinator`).
+- **Partial success on failure**: when one file fails, remaining transfers are cancelled; files that finished before the failure remain on disk on Android and iOS.
+- **iOS batch `stop()`**: deletes `recordMovedDestination` paths only while the batch is still tracked (running, paused, or restored after relaunch). After the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; older generations of the same id are never touched, and iOS rejects with `Task not found`.
+
 ## Example: completion notification
 
 When the app may be in the background, set `downloadCompletedNotificationText` to alert the user after a successful download. The plugin shows a system notification only when notification permission is granted. The plugin manifest already merges `POST_NOTIFICATIONS` on Android, so on Android 13 and later your app only needs to request it at runtime; on iOS request notification authorization before the download finishes. Tapping the notification reopens the app. On Android, the completion alert is still posted while your app is in the foreground. On iOS, a notification that arrives in the foreground is shown only if your app's `UNUserNotificationCenter` delegate presents it, so without a notifications plugin it is usually silent and `downloadCompleted` events are the reliable signal there.
@@ -95,6 +232,8 @@ await CapacitorDownloader.download({
 Related plugin change: [capacitor-downloader#114](https://github.com/Cap-go/capacitor-downloader/pull/114).
 
 ## Example: pause and resume
+
+iOS supports pause and resume for single downloads and batch ids. Android rejects `pause()` and `resume()` for every download, including batches.
 
 ```typescript
 await CapacitorDownloader.pause({ id: 'offline-pack' });
@@ -166,9 +305,9 @@ OkHttp runs inside the app process. If Android kills that process, the download 
 
 ### Notifications with OkHttp
 
-- `'hidden'`: no DownloadManager progress notification; use `downloadProgress` / `downloadCompleted` listeners (recommended for OkHttp). `downloadCompletedNotificationText` can still post on success.
-- `'completed'`: no notification during an OkHttp transfer. On success, the plugin may post one completion notification with title "Download complete". Failures do not post that OkHttp completion notification (`downloadFailed` still fires). If you also set `downloadCompletedNotificationText`, a successful download can show two notifications on Android. On Android 13 and later, the host app must request the `POST_NOTIFICATIONS` runtime permission. If that permission is denied, the plugin skips notifications (the download still finishes).
-- `'progress'`: same as `'hidden'` on the OkHttp path (DownloadManager still shows progress notifications).
+- `'completed'` (default): same as 8.7.0. No ongoing notification and no foreground service. OkHttp still posts one "Download complete" notification on success, as in 8.7.0. With both an in-app event and `downloadCompletedNotificationText`, a second completion notification can appear. `POST_NOTIFICATIONS` may be required when you use `'progress'` or this completion notification path on Android 13 and later. Use `downloadProgress` / `downloadCompleted` and optional `downloadCompletedNotificationText`.
+- `'hidden'`: no OkHttp progress UI and no default "Download complete" notification; plugin events still fire. Only `downloadCompletedNotificationText` can post a completion notification.
+- `'progress'`: opt-in ongoing progress notification while the transfer runs plus an optional `dataSync` foreground service. The notification is removed when the transfer finishes (success or failure). If the foreground service cannot start, the download still runs and the progress notification still shows. On Android 13 and later, request `POST_NOTIFICATIONS` at runtime when you use `'progress'`.
 
 DownloadManager destinations continue to support `'completed'`, `'progress'`, and `'hidden'` as before.
 
@@ -190,7 +329,7 @@ DownloadManager destinations continue to support `'completed'`, `'progress'`, an
 
 ### `download`
 
-Start a new download task.
+Start a single-file download (`DownloadOptions`) or a multi-file batch (`DownloadBatchOptions` with `files`, since **8.7.0**). Signature: `download(options: DownloadOptions | DownloadBatchOptions)`.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
@@ -199,6 +338,18 @@ const task = await CapacitorDownloader.download({
   id: 'my-download',
   url: 'https://example.com/file.pdf',
   destination: 'downloads/file.pdf'
+});
+```
+
+Batch (at most 32 files):
+
+```typescript
+await CapacitorDownloader.download({
+  id: 'update-bundle',
+  files: [
+    { url: 'https://example.com/a.zip', destination: 'updates/a.zip' },
+    { url: 'https://example.com/b.zip', destination: 'updates/b.zip' },
+  ],
 });
 ```
 
@@ -227,7 +378,12 @@ await CapacitorDownloader.resume({ id: 'id-123' });
 ### `stop`
 
 Stop and cancel a download permanently.
-Downloaded data will be deleted, including a file that already finished on the OkHttp path.
+
+**Batch id on iOS:** Deletes each path recorded by `recordMovedDestination` only while the batch is still tracked by the plugin (running, paused, or restored after relaunch). Batch failure alone does not delete finished files while the batch is tracked; only `stop()` removes recorded paths. Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and the plugin rejects with `Task not found`.
+
+**Batch id on Android:** Removes DownloadManager work for non-finished children while the batch is tracked. Completed batch files stay on disk (marked complete or `STATUS_SUCCESSFUL`), including files finished before `stop()`. After the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing on completed files; remove leftovers in your app when needed.
+
+**Single downloads:** Cancels the transfer. Single-file OkHttp downloads on Android still delete the destination file when stopped, including after finish. Other platform cleanup depends on the OS.
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
@@ -259,8 +415,21 @@ console.log(result);
 
 ## Type Reference
 
+### `DownloadFileSpec`
+
+One file inside a batch (`files` array, since **8.7.0**). On Android, `destination` follows the same rules as a single download for the batch `androidHttpEngine` value; the batch is rejected only when a file would use OkHttp.
+
+```typescript
+export interface DownloadFileSpec {
+  url: string;
+  destination: string;
+}
+```
+
 ### `DownloadOptions`
-Configuration options for starting a download.
+
+Single-file download options (`url` and `destination` required). Use `files` on `DownloadBatchOptions` instead; do not pass `files` here.
+
 ```typescript
 export interface DownloadOptions {
   /** Unique identifier for this download task */
@@ -293,12 +462,61 @@ export interface DownloadOptions {
    */
   description?: string;
   /**
+   * Android HTTP stack: omitted, `'auto'`, `'okhttp'`, or `'downloadManager'` (since 8.5.0).
+   * Ignored on iOS and Web.
+   */
+  androidHttpEngine?: 'auto' | 'okhttp' | 'downloadManager';
+  /**
    * Optional localized text for a system notification after a successful download.
    * Requires notification permission on iOS and Android.
    */
   downloadCompletedNotificationText?: string;
+  /**
+   * iOS 26 and later: opt in to a BGContinuedProcessingTask (since 8.8.0).
+   */
+  iosContinuedProcessingTitle?: string;
+  /**
+   * Optional subtitle for the iOS 26 continued-processing task (since 8.8.0).
+   */
+  iosContinuedProcessingSubtitle?: string;
+  /**
+   * Multi-file batches use `files` on DownloadBatchOptions instead (since 8.7.0).
+   */
+  files?: never;
 }
 ```
+
+### `DownloadBatchOptions`
+
+Multi-file batch (since **8.7.0**, at most 32 files). Uses `files` only; `url` and `destination` are not allowed at the top level. Passing `url` and `files` together is rejected at runtime. On Android, batches use DownloadManager only; `download()` rejects if any file would use OkHttp. When one file fails, remaining transfers are cancelled; files that already finished successfully stay on disk. **`stop({ id })` on a batch id:** On iOS, deletes every path stored via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android, removes active DownloadManager entries for in-flight children while tracked; finished children stay on disk.
+
+```typescript
+export interface DownloadBatchOptions {
+  /** Unique identifier for this batch (shared by every file in `files`) */
+  id: string;
+  /** Up to 32 files (DOWNLOAD_BATCH_MAX_FILES) */
+  files: DownloadFileSpec[];
+  url?: never;
+  destination?: never;
+  headers?: { [key: string]: string };
+  network?: 'cellular' | 'wifi-only';
+  priority?: 'high' | 'normal' | 'low';
+  notification?: 'completed' | 'progress' | 'hidden';
+  title?: string;
+  description?: string;
+  /**
+   * Same destination rules as single downloads; rejected if any file would use OkHttp on Android.
+   */
+  androidHttpEngine?: 'auto' | 'okhttp' | 'downloadManager';
+  downloadCompletedNotificationText?: string;
+}
+```
+
+Call with either type: `download(options: DownloadOptions | DownloadBatchOptions)`.
+
+### Events
+
+For batches, `downloadProgress` uses `progress` and `fileProgress` from 0 to 1 (same scale as `DownloadTask.progress`), and may include optional `fileIndex`. `downloadFailed` includes `{ id, error, fileIndex? }`; for batches, `fileIndex` is set when the failing file is known.
 
 ### `DownloadTask`
 Represents the current state and progress of a download task.
@@ -306,7 +524,7 @@ Represents the current state and progress of a download task.
 export interface DownloadTask {
   /** Unique identifier for the download task */
   id: string;
-  /** Download progress from 0 to 100 */
+  /** Download progress from 0 to 1 */
   progress: number;
   /** Current state of the download */
   state: 'PENDING' | 'RUNNING' | 'PAUSED' | 'DONE' | 'ERROR';

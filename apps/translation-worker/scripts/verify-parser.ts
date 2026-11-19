@@ -514,7 +514,8 @@ const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
     <a href="//capgo.app/plugins">Plugins</a>
     <a href="support-policy">Support policy</a>
     <a href="/docs/cli/">CLI docs</a>
-    <a href="/docs/cli/cloud-build/ios/">iOS build docs</a>
+    <a href="/docs/cli/cloud-build/ios/">Legacy iOS build docs</a>
+    <a href="/docs/builder/ios/">iOS build docs</a>
     <a href="/#faq">FAQ</a>
     <a href="#local">Local anchor</a>
     <a href="https://github.com/Cap-go/capgo">GitHub</a>
@@ -536,6 +537,7 @@ assert(localizedLinksHtml.includes('href="//capgo.app/fr/plugins/"'), 'Link rewr
 assert(localizedLinksHtml.includes('href="/fr/support-policy/"'), 'Link rewrite did not localize relative internal links')
 assert(localizedLinksHtml.includes('href="/fr/docs/cli/"'), 'Link rewrite did not keep CLI docs root links')
 assert(localizedLinksHtml.includes('href="/fr/docs/builder/ios/"'), 'Link rewrite did not canonicalize legacy build docs links')
+assert(!localizedLinksHtml.includes('href="/fr/docs/cli/cloud-build/'), 'Link rewrite left legacy cloud-build docs links')
 assert(localizedLinksHtml.includes('href="/fr/#faq"'), 'Link rewrite did not localize root anchor links')
 
 const pendingEnglishCanonicalHtml = __translationWorkerTest.rewriteMetadataForEnglishCanonical(
