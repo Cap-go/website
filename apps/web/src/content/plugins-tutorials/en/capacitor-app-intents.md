@@ -36,6 +36,8 @@ import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
 | `setOnscreenEntityContext` | Hint visible catalog rows for Siri when the UI is web only. |
 | `clearOnscreenEntityContext` | Clear on screen entity hints. |
 
+`completeInvocation`, `failInvocation`, `setOnscreenEntityContext`, and `clearOnscreenEntityContext` ship in plugin **8.2.0+**. npm **8.1.0** does not export them. Use a build from [capacitor-app-intents PR #2](https://github.com/Cap-go/capacitor-app-intents/pull/2) until **8.2.0** is on npm.
+
 For Siri app skills, typed tool intents, and `Skills.skillsbundle` on iOS 27.3, see [Siri app skills](/docs/plugins/app-intents/app-skills/).
 
 ## Examples
@@ -124,7 +126,7 @@ import { CapgoAppIntents } from '@capgo/capacitor-app-intents';
 await CapgoAppIntents.removeSpotlightEntities({ ids: ['ids'] });
 ```
 
-The table above lists the 7 core methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-app-intents/).
+The table above lists 11 methods. Listener and version helpers, and the full contract of each method, are documented in the [GitHub repository](https://github.com/Cap-go/capacitor-app-intents/).
 
 ## Listen to events
 
