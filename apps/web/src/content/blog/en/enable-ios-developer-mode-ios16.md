@@ -1,7 +1,7 @@
 ---
 slug: enable-ios-developer-mode-ios16
 title: "How to Enable Developer Mode on iPhone (iOS 16 and Later)"
-description: "On iOS 16 and later, enable Developer Mode on iPhone under Settings, Privacy and Security. Open a dev build first, restart, tap Enable, or fix a missing toggle."
+description: "On iOS 16 and later, enable Developer Mode on iPhone under Settings, Privacy and Security. Open a dev build first, restart, tap Enable or Turn On, or fix a missing toggle."
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -16,13 +16,13 @@ locale: en
 next_blog: ''
 faq:
   - question: "How do I enable Developer Mode on iPhone 16?"
-    answer: "The steps are the same as on any device running iOS 16 or later. Install and open a development build once, then go to Settings, Privacy & Security, Developer Mode, turn the toggle on, tap Restart, and after the reboot unlock the device, tap Enable in the alert, and enter your passcode."
+    answer: "The steps are the same as on any device running iOS 16 or later. Install and open a development build once, then go to Settings, Privacy & Security, Developer Mode, turn the toggle on, tap Restart, and after the reboot unlock the device, tap Enable or Turn On in the alert, and enter your passcode."
   - question: "How do I turn on Developer Mode on iPhone without a Mac?"
     answer: "You do not need a Mac if a development signed build is already installed locally (not through TestFlight, which does not require Developer Mode). Open that app once so iOS shows the Developer Mode alert, then enable the toggle in Settings, Privacy & Security. A Mac with Xcode is only needed when the toggle never appears."
 takeaways:
   - "Developer Mode exists on iOS 16 and later and is off by default."
   - "Open a development-signed app once, then go to Settings, Privacy and Security, Developer Mode and turn it on."
-  - "The iPhone or iPad restarts, then you tap Enable and enter your passcode after unlocking."
+  - "The iPhone or iPad restarts, then you tap Enable or Turn On and enter your passcode after unlocking."
   - "If the toggle is missing, connect the device to a Mac, trust it, and let Xcode pair with it. The toggle then appears, and you enable it before running the app."
 ---
 On iOS 16 and later, you enable Developer Mode by installing a development-signed app, launching it once, and confirming the prompt in Settings. If the toggle doesn't appear after launch, connect the iPhone or iPad to a Mac, trust it, and let Xcode pair with it. The toggle then appears, so you can enable Developer Mode before running the app from Xcode.
@@ -75,7 +75,7 @@ This restart is mandatory. Skipping it is one of the most common reasons the flo
 
 ### Step 4: Finalize the Activation
 
-Once your device restarts and you unlock it, a system alert will appear. Tap **Enable** and enter your device's passcode when prompted to complete the activation of Developer Mode.
+Once your device restarts and you unlock it, a system alert will appear. Tap **Enable** or **Turn On** (wording varies by iOS version) and enter your device's passcode when prompted to complete the activation of Developer Mode.
 
 After this confirmation, Developer Mode stays active until you manually disable it. From here you can run development builds on the device; for broader tester distribution workflows, see [how to distribute iOS and Android apps to testers](/blog/distribute-ios-and-android-apps-to-testers/).
 
@@ -103,7 +103,7 @@ So, to answer the common question directly: you do not need a Mac to enable Deve
 
 ### How do I enable Developer Mode on iPhone 16?
 
-The steps are the same as on any device running iOS 16 or later. Install and open a development build once, then go to Settings, Privacy & Security, Developer Mode, turn the toggle on, tap Restart, and after the reboot unlock the device, tap Enable in the alert, and enter your passcode.
+The steps are the same as on any device running iOS 16 or later. Install and open a development build once, then go to Settings, Privacy & Security, Developer Mode, turn the toggle on, tap Restart, and after the reboot unlock the device, tap Enable or Turn On in the alert, and enter your passcode.
 
 ### How do I turn on Developer Mode on iPhone without a Mac?
 
