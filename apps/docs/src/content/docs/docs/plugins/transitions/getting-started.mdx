@@ -313,9 +313,23 @@ Available entrypoints:
 
 - `@capgo/capacitor-transitions/react`
 - `@capgo/capacitor-transitions/vue`
-- `@capgo/capacitor-transitions/angular`
 - `@capgo/capacitor-transitions/svelte`
 - `@capgo/capacitor-transitions/solid`
+
+Angular has no dedicated entrypoint. It uses the web components through the root import, `@capgo/capacitor-transitions`.
+Add `CUSTOM_ELEMENTS_SCHEMA` to the `schemas` of any Angular component whose template uses the `cap-*` elements, so Angular does not report them as unknown:
+
+```typescript
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@capgo/capacitor-transitions';
+
+@Component({
+  selector: 'app-root',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<cap-router-outlet platform="auto"><router-outlet></router-outlet></cap-router-outlet>`,
+})
+export class AppComponent {}
+```
 
 ## Keep going from Getting Started
 
