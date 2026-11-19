@@ -9,6 +9,8 @@ import { Steps, Aside, FileTree } from '@astrojs/starlight/components';
 
 This guide walks you through a Wear OS companion app that talks to your Capacitor phone app through the same Data Layer paths as `CapgoWatchPlugin` on Android (`play-services-wearable`).
 
+Prefer the official Kotlin watch SDK in [`watch-sdk/wearos`](https://github.com/Cap-go/capacitor-watch/tree/main/watch-sdk/wearos) (`CapgoWatch`, listeners, and `CapgoWatchListenerService`) when the phone calls `sendMessage({ expectsReply: true })`. That SDK reads the `/capgo/message/withreply` envelope and replies on `/capgo/reply/{callbackId}`. The manual module below covers one-way messages and watch-to-phone replies. It does not handle `/capgo/message/withreply` unless you add that handler.
+
 ## Prerequisites
 
 Before you begin, ensure you have:
@@ -25,7 +27,7 @@ The phone-side plugin (`CapgoWatchPlugin.java`) uses these Data Layer routes:
 | Route | Type | Purpose |
 | --- | --- | --- |
 | `/capgo/message` | Message | One-way messages (phone to watch and watch to phone) |
-| `/capgo/message/withreply` | Message | Watch to phone messages that expect a JS reply via `replyToMessage` |
+| `/capgo/message/withreply` | Message | Messages that expect a reply: watch to phone (`replyToMessage`) or phone to watch (`sendMessage` with `expectsReply: true`) |
 | `/capgo/reply/{callbackId}` | Message | Phone reply payload back to the watch |
 | `/capgo/context` | DataItem | Latest application context (`payload` string holds JSON) |
 | `/capgo/userinfo/{uuid}` | DataItem | Queued user info (`payload` string holds JSON) |
@@ -151,7 +153,7 @@ Example **`wear/src/main/AndroidManifest.xml`** skeleton:
 
 Create `CapgoWearBridge.kt` in your wear package. It mirrors the paths in `CapgoWatchPlugin.java`.
 
-The phone plugin assigns an opaque `callbackId` for each `/capgo/message/withreply` and sends the reply on `/capgo/reply/{callbackId}`. The watch never sees that ID ahead of time. For concurrent requests, include a **`requestId`** in your JSON payload, echo it from the phone in `replyToMessage`, and key handlers on the watch by that field.
+When the watch calls `sendMessageWithReply`, send a `{ callbackId, data }` envelope on `/capgo/message/withreply`. Generate `callbackId` on the watch (for example a UUID). The phone keys pending replies by that value and answers on `/capgo/reply/{callbackId}`. When the phone calls `sendMessage({ expectsReply: true })`, the phone assigns `callbackId` instead; use the Kotlin SDK on the watch for that path. For concurrent watch-originated requests, keep a **`requestId`** inside `data`, echo it from the phone in `replyToMessage`, and key handlers on the watch by that field.
 
 ```kotlin
 package com.example.myapp.wear
@@ -249,9 +251,12 @@ class CapgoWearBridge(private val context: Context) :
                     onError("No connected phone node")
                     return@execute
                 }
-                val payloadJson = JSONObject(data.toString()).apply {
-                    put("requestId", requestId)
-                }
+                val payloadJson = JSONObject()
+                    .put("callbackId", requestId)
+                    .put(
+                        "data",
+                        JSONObject(data.toString()).apply { put("requestId", requestId) },
+                    )
                 pendingReplyHandlers[requestId] = onReply
                 val timeout = timeoutScheduler.schedule(
                     {
@@ -449,13 +454,13 @@ Call `setupWatchListeners()` early in your app bootstrap (for example after `pla
 
 4. Send **`CapgoWatch.sendMessage`** from the phone and verify `bridge.onMessage` on the watch.
 
-5. Send from the watch with **`sendMessageWithReply`** and confirm **`messageReceivedWithReply`** plus **`replyToMessage`** delivers on `/capgo/reply/{callbackId}`.
+5. Send from the watch with **`sendMessageWithReply`** (watch-generated `callbackId` in the envelope) and confirm **`messageReceivedWithReply`** plus **`replyToMessage`** delivers on `/capgo/reply/{callbackId}`.
 
 6. Test **`updateApplicationContext`** and **`transferUserInfo`** in both directions using the DataItem paths above.
 </Steps>
 
 <Aside type="tip">
-On Android, the plugin does **not** emit `reachabilityChanged` or `activationStateChanged`. Poll `getInfo()` or track connectivity in your own UI when you need live status on Wear OS.
+On Android, the plugin emits `reachabilityChanged` when connected Wear OS nodes change. It does **not** emit `activationStateChanged`. Register `reachabilityChanged` for live connectivity updates, or poll `getInfo()` when you only need install and pairing status.
 </Aside>
 
 ## Troubleshooting
