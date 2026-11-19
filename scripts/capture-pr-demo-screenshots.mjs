@@ -145,8 +145,8 @@ try {
 
 for (const tag of ['ios', 'material']) {
   for (const prefix of ['desktop', 'mobile']) {
-    const light = hashes[`${prefix}-after-button-${tag}-light`]
-    const dark = hashes[`${prefix}-after-button-${tag}-dark`]
+    const light = hashes[`${prefix}-after-button-${tag}-light.png`]
+    const dark = hashes[`${prefix}-after-button-${tag}-dark.png`]
     if (!light || !dark) throw new Error(`Missing ${prefix} ${tag} light/dark screenshot hashes`)
     if (light === dark) throw new Error(`${prefix} ${tag} light/dark screenshots are identical`)
   }
