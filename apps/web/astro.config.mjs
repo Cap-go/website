@@ -1,5 +1,6 @@
 import mdx from '@astrojs/mdx'
 import { defineConfig } from 'astro/config'
+import vuePlugin from '@vitejs/plugin-vue'
 import { fileURLToPath } from 'node:url'
 import config from '../../configs.json'
 import { buildSharedAstroBaseConfig, buildSharedIntegrations, buildSharedViteConfig } from '../shared/astro-config.mjs'
@@ -9,6 +10,7 @@ import minifyInlineScripts from './integrations/minifyInlineScripts.mjs'
 
 const CPU_COUNT = getBuildConcurrency()
 const SRC_DIR = `${normalizeDirectoryPath(fileURLToPath(new URL('./src/', import.meta.url)))}/`
+const TC_SNAPSHOT_DIR = `${normalizeDirectoryPath(fileURLToPath(new URL('./src/tailwind-capacitor-snapshot/capacitor/', import.meta.url)))}`
 const PUBLIC_DIR = normalizeDirectoryPath(fileURLToPath(new URL('./public/', import.meta.url)))
 const pageLastModDates = getPageLastModDates()
 const pluginIcons = buildPluginIcons('src/config/plugins.ts')
@@ -42,6 +44,14 @@ export default defineConfig({
   ],
   vite: {
     ...viteConfig,
+    plugins: [...(viteConfig.plugins ?? []), vuePlugin()],
+    resolve: {
+      ...viteConfig.resolve,
+      alias: [
+        ...(viteConfig.resolve?.alias ?? []),
+        { find: '@/tailwind-capacitor', replacement: TC_SNAPSHOT_DIR },
+      ],
+    },
     server: {
       ...viteConfig.server,
       // Dev only: the metrics JSON is served by the production worker, so proxy it for /data, /builder-data, and the homepage.

@@ -1,0 +1,547 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body.tc-demo-shell-body {
+  margin: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  background: var(--color-background, #fff);
+}
+
+html.dark,
+html.dark body.tc-demo-shell-body {
+  background: #000;
+  color: #fff;
+}
+
+/* Tailwind bundle duplicates :root after `.dark`, so restore the dark hairline on the shell. */
+html.dark,
+.tc-demo-shell-body.dark {
+  --c-hairline-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.tc-demo-shell-body #tc-demo-mount {
+  height: 100%;
+}
+
+.tc-demo-shell-body #tc-demo-root {
+  position: relative;
+  height: 100%;
+  max-height: 100%;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.tc-demo-shell-body .tc-demo-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.tc-demo-shell-body .tc-demo-page {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host {
+  position: absolute;
+  inset: 0;
+  z-index: 80;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host > * {
+  pointer-events: auto;
+}
+
+/* Registry overlays use Tailwind `fixed`; anchor them to the phone viewport inside #tc-demo-root. */
+.tc-demo-shell-body .tc-demo-overlay-host :where(.fixed) {
+  position: absolute !important;
+}
+
+.tc-demo-shell-body .tc-demo-actions-inline {
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.tc-demo-shell-body .registry-demo-block .tc-demo-actions-inline-preview:where(.fixed) {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: 100%;
+  max-width: 20rem;
+  margin-inline: auto;
+}
+
+.tc-demo-state-heading {
+  margin: 0 0 0.4rem;
+  padding: 0 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+
+.tc-demo-scene-stage {
+  border-radius: 0.75rem;
+}
+
+.tc-demo-shell-body.c-ios .tc-demo-component-stage button[role='button'],
+.tc-demo-shell-body .c-ios .tc-demo-component-stage button[role='button'],
+.tc-demo-shell-body.c-ios .tc-demo-component-stage .actions-button,
+.tc-demo-shell-body .c-ios .tc-demo-component-stage .list-button {
+  text-transform: none;
+}
+
+.tc-demo-state-fill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tc-demo-screen-ios-light {
+  background-color: #efeff4;
+  color: #000;
+}
+
+.tc-demo-screen-ios-dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.tc-demo-screen-material-light {
+  background-color: #fffbfe;
+  color: #1c1b1f;
+}
+
+.tc-demo-screen-material-dark {
+  background-color: #1c1b1f;
+  color: #e6e1e5;
+}
+
+.tc-demo-screen-ios-dark .tc-demo-screen-filler-row,
+.tc-demo-screen-material-dark .tc-demo-screen-filler-row {
+  background-color: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.tc-demo-screen-ios-light .tc-demo-screen-filler-row,
+.tc-demo-screen-material-light .tc-demo-screen-filler-row {
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.tc-demo-screen-filler-row {
+  min-height: 2.75rem;
+}
+
+.tc-demo-page-single-state {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.tc-demo-app-screen-single {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.tc-demo-state-block-single {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.tc-demo-state-block-single .tc-demo-component-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+.tc-demo-state-block-single .tc-demo-component-stage > :where(button, [role='button'], .button, a.button) {
+  flex: 0 0 auto;
+  max-width: calc(100% - 0.5rem);
+  min-height: 2.75rem;
+}
+
+.tc-demo-overlay-open-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tc-demo-underlay-screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.tc-demo-overlay-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tc-demo-overlay-layer > * {
+  pointer-events: auto;
+}
+
+.tc-demo-overlay-layer :where(.fixed) {
+  position: absolute !important;
+}
+
+.tc-demo-overlay-layer :where(.actions-backdrop, .dialog-backdrop, .sheet-backdrop, .popup-backdrop, .panel-backdrop, .popover-backdrop, .toast-backdrop) {
+  position: absolute !important;
+  inset: 0 !important;
+  opacity: 1 !important;
+}
+
+.tc-demo-overlay-layer :where(.actions, .dialog, .sheet-modal, .popup, .panel, .popover, .toast) {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+  transform: none !important;
+  max-width: 100%;
+}
+
+.tc-demo-overlay-layer :where(.dialog) {
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+  overflow: hidden !important;
+}
+
+/* Dialog chrome: #tc-demo-root covers overlay-host (catalog Open dialog) and overlay-layer (state cards). */
+#tc-demo-root [role='dialog'] {
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+/* iOS light: registry translucent is too clear over the blue overlay trigger in the demo shell. */
+html:not(.dark).c-ios #tc-demo-root [role='dialog'],
+html:not(.dark).ios #tc-demo-root [role='dialog'] {
+  background-color: rgb(255 255 255) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+#tc-demo-root [role='dialog'] .hairline-b {
+  border-bottom-width: 0 !important;
+  border-bottom-style: none !important;
+  border-bottom-color: transparent !important;
+  background-image: linear-gradient(var(--c-hairline-color), var(--c-hairline-color));
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: calc(100% - 2rem) calc(1px / var(--c-device-pixel-ratio, 1));
+}
+
+/* Button footer row only (not contentWrap: flex flex-col items-center). */
+#tc-demo-root [role='dialog'] > .flex.items-center:not(.flex-col) {
+  overflow: hidden;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+#tc-demo-root [role='dialog'] button.hairline-r {
+  border-right-color: var(--c-hairline-color) !important;
+}
+
+#tc-demo-root [role='dialog'] button.hairline-r:last-child {
+  border-right-width: 0 !important;
+}
+
+#tc-demo-root [role='dialog'].rounded-xl {
+  clip-path: inset(0 round 0.75rem);
+}
+
+/* Material dialog radius: avoid clip-path here (it was clipping title glyphs). */
+
+#tc-demo-root .tc-demo-dialog-button-preview button.hairline-r {
+  border-right-color: var(--c-hairline-color) !important;
+}
+
+#tc-demo-root .tc-demo-dialog-button-preview button.hairline-r:last-child {
+  border-right-width: 0 !important;
+}
+
+.tc-demo-dialog-button-stage {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  margin-inline: auto;
+  max-width: 16.875rem;
+}
+
+#tc-demo-root .tc-demo-overlay-host :where(button.hairline-b, [role='button'].hairline-b, .hairline-b[role='button']) {
+  border-color: var(--c-hairline-color) !important;
+}
+
+#tc-demo-root .tc-demo-overlay-host button.hairline-r,
+#tc-demo-root .tc-demo-overlay-host button.hairline-l {
+  border-color: var(--c-hairline-color) !important;
+}
+
+.tc-demo-app-light-preview {
+  background: rgb(255 255 255) !important;
+  color: rgb(17 24 39) !important;
+}
+
+html.dark .tc-demo-app-light-preview {
+  background: rgb(255 255 255) !important;
+  color: rgb(17 24 39) !important;
+}
+
+.tc-demo-navbar-transparent-stage {
+  background: linear-gradient(to bottom, rgb(59 130 246), rgb(147 197 253));
+}
+
+.tc-demo-accordion-expanded .tc-demo-accordion-expanded-body {
+  border-top: 1px solid var(--c-hairline-color);
+}
+
+.tc-demo-accordion-interactive .tc-demo-accordion-expanded-body {
+  border-top: 1px solid var(--c-hairline-color);
+}
+
+#tc-demo-root .tc-demo-accordion-open svg {
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+}
+
+.tc-demo-breadcrumbs-stage {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 1rem;
+  overflow-x: auto;
+}
+
+#tc-demo-root .tc-demo-badge-inline {
+  align-self: center;
+  width: auto !important;
+  max-width: max-content;
+}
+
+#tc-demo-root .tc-demo-chip-row > .chip,
+#tc-demo-root .tc-demo-chip-row > [class*='chip'] {
+  width: auto !important;
+  max-width: max-content;
+}
+
+.tc-demo-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.tc-demo-badge-inline {
+  display: inline-flex;
+  width: auto;
+  max-width: max-content;
+}
+
+.tc-demo-overlay-layer :where(.panel) {
+  top: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  right: 0 !important;
+  width: min(85%, 20rem);
+}
+
+.tc-demo-overlay-layer .tc-demo-registry-toast:where(.fixed) {
+  top: auto !important;
+  bottom: max(0.75rem, env(safe-area-inset-bottom, 0px)) !important;
+  left: 0.75rem !important;
+  right: 0.75rem !important;
+  width: auto !important;
+  max-width: calc(100% - 1.5rem) !important;
+  transform: none !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 0.35);
+}
+
+.tc-demo-overlay-layer .tc-demo-registry-toast > div {
+  width: 100%;
+}
+
+.tc-demo-screen-ios-light .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(44 44 46) !important;
+  color: rgb(255 255 255) !important;
+}
+
+.tc-demo-screen-ios-dark .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(44 44 46) !important;
+  color: rgb(255 255 255) !important;
+}
+
+.tc-demo-screen-material-light .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(50 47 53) !important;
+  color: rgb(230 225 229) !important;
+}
+
+.tc-demo-screen-material-dark .tc-demo-overlay-layer .tc-demo-registry-toast {
+  background-color: rgb(49 48 51) !important;
+  color: rgb(230 225 229) !important;
+}
+
+.tc-demo-section-heading {
+  margin: 0 0 0.35rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.tc-demo-section-description {
+  margin: 0 0 0.75rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  opacity: 0.72;
+}
+
+.tc-demo-shell-body .tc-demo-chrome-navbar {
+  position: relative !important;
+  top: auto !important;
+  flex-shrink: 0;
+  z-index: 30;
+}
+
+.tc-demo-shell-body .tc-demo-chrome-navbar .hairline-b::after,
+.tc-demo-shell-body .tc-demo-chrome-navbar [class*='hairline']::after {
+  opacity: 1;
+}
+
+.tc-demo-shell-body .tc-demo-below-navbar {
+  position: relative;
+  z-index: 1;
+}
+
+.tc-demo-section {
+  scroll-margin-top: max(4.5rem, calc(2.75rem + env(safe-area-inset-top, 0px)));
+  padding-top: 0.5rem;
+}
+
+.tc-demo-shell-body .tc-demo-registry-toast {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-toast:where(.fixed) {
+  position: absolute !important;
+}
+
+.tc-demo-section .registry-demo-block,
+.tc-demo-component-stage {
+  margin-inline: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.tc-demo-app-screen {
+  min-height: 0;
+}
+
+.tc-demo-single-component {
+  padding-top: 0.25rem;
+}
+
+.tc-demo-actions-static {
+  width: 100%;
+  max-width: 100%;
+}
+
+.tc-demo-actions-static .tc-demo-actions-inline-preview {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-popover:where(.fixed) {
+  position: fixed !important;
+  z-index: 90 !important;
+  pointer-events: auto !important;
+}
+
+/* Registry list items use ps-*-safe; demo iframe keeps logical padding explicit. */
+.tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-popover .tc-demo-popover-list-item-content {
+  padding-inline-start: calc(var(--c-safe-area-left, 0px) + 1rem) !important;
+  padding-inline-end: calc(var(--c-safe-area-right, 0px) + 1rem) !important;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-host .tc-demo-registry-sheet .tc-demo-sheet-toolbar-inner {
+  padding-inline-start: calc(var(--c-safe-area-left, 0px) + 1rem) !important;
+  padding-inline-end: calc(var(--c-safe-area-right, 0px) + 1rem) !important;
+}
+
+#capacitor-notification .registry-demo-block {
+  overflow: visible;
+  min-height: 9.5rem;
+  padding-bottom: 1rem;
+}
+
+.tc-demo-shell-body .tc-demo-notification-inline {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+.tc-demo-shell-body .registry-demo-block :where(.fixed) {
+  position: absolute !important;
+}
+
+.tc-demo-shell-body .tc-demo-overlay-trigger {
+  /* blue-700: white label meets 4.5:1 (blue-500 fails at ~3.68:1) */
+  background-color: rgb(29 78 216) !important;
+  color: rgb(255 255 255) !important;
+  text-shadow: 0 1px 1px rgb(0 0 0 / 0.45) !important;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.92), 0 2px 6px rgb(0 0 0 / 0.28) !important;
+}
+
+.tc-demo-shell-body .tc-demo-messagebar-host {
+  position: relative;
+  min-height: 3.5rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}

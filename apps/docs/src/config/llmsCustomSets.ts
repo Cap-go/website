@@ -125,6 +125,7 @@ Plugin SSL Pinning|certificate pinning plugin for CapacitorHttp requests|docs/pl
 Plugin StreamCall|Stream video calling plugin|docs/plugins/streamcall/**
 Plugin Text Interaction|text selection and interaction plugin|docs/plugins/textinteraction/**
 Plugin Transitions|framework-agnostic Ionic-style page transitions and iOS edge swipe-back gesture for Capacitor apps|docs/plugins/transitions/**
+Plugin Tailwind Capacitor|Tailwind v4 Capacitor UI shadcn registry with safe areas and live component demo|docs/plugins/tailwind-capacitor/**
 Plugin Twilio Video|Twilio Video room integration plugin|docs/plugins/twilio-video/**
 Plugin Twilio Voice|Twilio voice calling plugin|docs/plugins/twilio-voice/**
 Plugin Uploader|file upload plugin with background support|docs/plugins/uploader/**

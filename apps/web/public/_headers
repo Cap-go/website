@@ -133,6 +133,12 @@
 /sitemap.xml
   Content-Type: text/xml
 
+/plugins/tailwind-capacitor/demo/
+  X-Frame-Options: SAMEORIGIN
+
+/plugins/tailwind-capacitor/demo/shell/
+  X-Frame-Options: SAMEORIGIN
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY

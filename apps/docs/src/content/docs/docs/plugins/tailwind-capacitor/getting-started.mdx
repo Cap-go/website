@@ -1,0 +1,61 @@
+---
+title: Getting Started
+description: Install tailwind-capacitor registry components for Vue, React, or Angular.
+sidebar:
+  order: 2
+---
+
+import TailwindCapacitorInstallTabs from '@/components/TailwindCapacitorInstallTabs.astro';
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## Prerequisites
+
+- Tailwind CSS v4 in your app
+- A shadcn-style CLI setup for your framework (`components.json` or equivalent)
+- Path alias `@/*` pointing at `src/`
+
+## Registry install
+
+<TailwindCapacitorInstallTabs />
+
+<Aside type="note">
+  Install URLs are pinned to Cap-go/tailwind-capacitor commit `9791d43d67279d7725d6a1f7865ff10deaf36ba5` (merge commit for #130). Vue core includes `capacitor-tailwind`; React and Angular core items live under `public/r/react/` and `public/r/angular/`.
+</Aside>
+
+## Live demo
+
+Preview every registry component on the site:
+
+[Open the live demo](https://capgo.app/plugins/tailwind-capacitor/demo/)
+
+<Steps>
+1. **Add core registry items** for your framework (see tabs above).
+
+2. **Import capacitor styles** in your global CSS:
+
+   ```css
+   @import '@/capacitor/styles/tailwind-capacitor.css';
+   ```
+
+3. **Wrap the app** with the provider and `App` shell (Vue example):
+
+   ```vue
+   <script setup>
+   import TailwindCapacitorProvider from '@/capacitor/vue/shared/TailwindCapacitorProvider.vue'
+   import App from '@/capacitor/vue/components/App.vue'
+   import Page from '@/capacitor/vue/components/Page.vue'
+   </script>
+
+   <template>
+     <TailwindCapacitorProvider>
+       <App theme="ios" class="safe-areas">
+         <Page>
+           <RouterView />
+         </Page>
+       </App>
+     </TailwindCapacitorProvider>
+   </template>
+   ```
+
+4. **Add components** such as `capacitor-button` from the registry when you need them.
+</Steps>

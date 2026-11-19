@@ -1,0 +1,85 @@
+---
+import RegistryNav from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoNav.astro'
+import TailwindCapacitorDemoInstallSection from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoInstallSection.astro'
+import TailwindCapacitorDemoIntro from '@/components/tailwind-capacitor-demo/TailwindCapacitorDemoIntro.astro'
+import { TAILWIND_CAPACITOR_REGISTRY_COMMIT } from '../../../../../../shared/config/tailwindCapacitorRegistry'
+import {
+  tailwindCapacitorDemoNavItems,
+  tailwindCapacitorDemoPreviewPageCount,
+  tailwindCapacitorRegistryPackageCount,
+} from '@/lib/tailwindCapacitorDemoCatalog'
+import Layout from '@/layouts/Layout.astro'
+import tailwindCapacitorDemoPagesCss from '@/styles/tailwind-capacitor-demo-pages.css?url'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale ?? 'en'
+const pluginHref = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/')
+const demoBase = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/')
+const title = 'Tailwind Capacitor component library'
+const description =
+  'Browse every Tailwind Capacitor registry component on its own live preview page. Open a component page to switch iOS or Material and light or dark in the live iframe.'
+
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, { includeOrganization: true })
+const catalogSectionCount = tailwindCapacitorDemoPreviewPageCount
+const metaLine = `Registry pin: <code class="text-gray-400">${TAILWIND_CAPACITOR_REGISTRY_COMMIT}</code>. ${tailwindCapacitorRegistryPackageCount} registry JSON packages, ${catalogSectionCount} interactive preview pages.`
+---
+
+<Layout content={{ title, description, ldJson, canonical: Astro.url.pathname }}>
+  <link rel="stylesheet" href={tailwindCapacitorDemoPagesCss} slot="head" />
+  <TailwindCapacitorDemoIntro
+    locale={locale}
+    title={title}
+    description={description}
+    metaLine={metaLine}
+    pluginHref={pluginHref}
+    currentCrumb="Components"
+  />
+
+  <section class="px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] lg:gap-8">
+      <aside class="hidden lg:block">
+        <RegistryNav
+          items={tailwindCapacitorDemoNavItems}
+          registryPackageCount={tailwindCapacitorRegistryPackageCount}
+          catalogSectionCount={catalogSectionCount}
+          locale={locale}
+        />
+      </aside>
+
+      <div class="min-w-0">
+        <div class="lg:hidden">
+          <RegistryNav
+            items={tailwindCapacitorDemoNavItems}
+            registryPackageCount={tailwindCapacitorRegistryPackageCount}
+            catalogSectionCount={catalogSectionCount}
+            locale={locale}
+          />
+        </div>
+
+        <ul class="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {
+            tailwindCapacitorDemoNavItems.map((item) => (
+              <li>
+                <a
+                  href={`${demoBase}${encodeURIComponent(item.name)}/`}
+                  class="block rounded-xl border border-white/10 bg-gray-950/60 px-4 py-3 text-sm text-gray-200 transition hover:border-blue-400/30 hover:bg-gray-900"
+                >
+                  <span class="font-semibold text-white">{item.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <TailwindCapacitorDemoInstallSection />
+  </section>
+</Layout>

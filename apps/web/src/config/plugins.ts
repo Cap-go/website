@@ -511,6 +511,7 @@ const pluginNamesByCategory = {
     '@capgo/capacitor-native-navigation',
     '@capgo/capacitor-native-loader',
     '@capgo/capacitor-transitions',
+    '@capgo/tailwind-capacitor',
     '@capgo/capacitor-sheets',
     '@capgo/capacitor-inappbrowser',
     '@capgo/capacitor-navigation-bar',

@@ -267,6 +267,20 @@ function withGlobalCssCacheHeaders(response: Response): Response {
   })
 }
 
+const DEMO_EMBED_PATH_PREFIX = '/plugins/tailwind-capacitor/demo/'
+
+function withTailwindCapacitorDemoEmbedHeaders(pathname: string, response: Response): Response {
+  if (!pathname.startsWith(DEMO_EMBED_PATH_PREFIX)) return response
+  const headers = new Headers(response.headers)
+  headers.delete('X-Frame-Options')
+  headers.set('X-Frame-Options', 'SAMEORIGIN')
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
+}
+
 const DATAFAST_WEBSITE_ID = 'dfid_hu0aLqOvk52g6hykzIZei'
 const SKIP_AI_CRAWLER_TRACKING_HEADER = 'X-Capgo-Skip-AI-Crawler-Tracking'
 
@@ -522,7 +536,7 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
   if (pathname === '/' || pathname === '/index.html') {
     return trackAICrawler(request, withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS), ctx)
   }
-  return trackAICrawler(request, assetResponse, ctx)
+  return trackAICrawler(request, withTailwindCapacitorDemoEmbedHeaders(pathname, assetResponse), ctx)
 }
 
 export default {

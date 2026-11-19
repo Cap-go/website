@@ -58,72 +58,87 @@ function ratioFromNode(node) {
   return match ? Number.parseFloat(match[1]) : null
 }
 
-async function contrastSamples(page, selector) {
-  return page.locator(selector).evaluateAll((elements) => {
-    function parseColor(color) {
-      if (!color || color === 'transparent') return null
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return null
-      ctx.fillStyle = '#000'
-      ctx.fillStyle = color
-      const normalized = ctx.fillStyle
-      const hex = /^#([0-9a-f]{6})$/i.exec(normalized)
-      if (hex) {
-        const value = Number.parseInt(hex[1], 16)
-        return { r: (value >> 16) & 255, g: (value >> 8) & 255, b: value & 255, a: 1 }
-      }
-      const match = normalized.match(/rgba?\(([^)]+)\)/)
-      if (!match) return null
-      const parts = match[1].split(',').map((part) => Number.parseFloat(part.trim()))
-      const [r, g, b, a] = parts
-      if (Number.isNaN(r) || (a ?? 1) === 0) return null
-      return { r, g, b, a: a ?? 1 }
-    }
-    function channel(value) {
-      const scaled = value / 255
-      return scaled <= 0.03928 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4
-    }
-    function luminance({ r, g, b }) {
-      return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
-    }
-    function blend(fg, bg) {
-      const alpha = fg.a
-      return {
-        r: fg.r * alpha + bg.r * (1 - alpha),
-        g: fg.g * alpha + bg.g * (1 - alpha),
-        b: fg.b * alpha + bg.b * (1 - alpha),
-        a: 1,
-      }
-    }
-    function contrast(fg, bg) {
-      const [hi, lo] = [luminance(fg), luminance(bg)].sort((left, right) => right - left)
-      return (hi + 0.05) / (lo + 0.05)
-    }
-    function backgroundOf(el) {
-      let node = el
-      while (node && node !== document.documentElement) {
-        const parsed = parseColor(getComputedStyle(node).backgroundColor)
-        if (parsed) {
-          if (parsed.a >= 0.99) return { r: parsed.r, g: parsed.g, b: parsed.b, a: 1 }
-          const parent = node.parentElement ? backgroundOf(node.parentElement) : { r: 255, g: 255, b: 255, a: 1 }
-          return blend(parsed, parent)
-        }
-        node = node.parentElement
-      }
-      return { r: 255, g: 255, b: 255, a: 1 }
-    }
+/**
+ * Runs in the browser via Playwright evaluate.
+ * @param {HTMLElement[]} elements
+ * @param {{ pageDefaultBg: { r: number, g: number, b: number, a: number }, preferOwnBackground?: boolean }} options
+ */
+function measureElementContrast(elements, options) {
+  const pageDefaultBg = options?.pageDefaultBg ?? { r: 255, g: 255, b: 255, a: 1 }
+  const preferOwnBackground = options?.preferOwnBackground ?? false
 
-    return elements.map((el) => {
-      const fg = parseColor(getComputedStyle(el).color)
-      const bg = backgroundOf(el)
-      const ratio = fg ? contrast(fg.a < 1 ? blend(fg, bg) : fg, bg) : 0
-      return {
-        text: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
-        ratio,
+  function parseColor(color) {
+    if (!color || color === 'transparent') return null
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return null
+    ctx.fillStyle = '#000'
+    ctx.fillStyle = color
+    const normalized = ctx.fillStyle
+    const hex = /^#([0-9a-f]{6})$/i.exec(normalized)
+    if (hex) {
+      const value = Number.parseInt(hex[1], 16)
+      return { r: (value >> 16) & 255, g: (value >> 8) & 255, b: value & 255, a: 1 }
+    }
+    const match = normalized.match(/rgba?\(([^)]+)\)/)
+    if (!match) return null
+    const parts = match[1].split(',').map((part) => Number.parseFloat(part.trim()))
+    const [r, g, b, a] = parts
+    if (Number.isNaN(r) || (a ?? 1) === 0) return null
+    return { r, g, b, a: a ?? 1 }
+  }
+  function channel(value) {
+    const scaled = value / 255
+    return scaled <= 0.03928 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4
+  }
+  function luminance({ r, g, b }) {
+    return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
+  }
+  function blend(fg, bg) {
+    const alpha = fg.a
+    return {
+      r: fg.r * alpha + bg.r * (1 - alpha),
+      g: fg.g * alpha + bg.g * (1 - alpha),
+      b: fg.b * alpha + bg.b * (1 - alpha),
+      a: 1,
+    }
+  }
+  function contrast(fg, bg) {
+    const [hi, lo] = [luminance(fg), luminance(bg)].sort((left, right) => right - left)
+    return (hi + 0.05) / (lo + 0.05)
+  }
+  function backgroundOf(el) {
+    let node = el
+    while (node && node !== document.documentElement) {
+      const parsed = parseColor(getComputedStyle(node).backgroundColor)
+      if (parsed) {
+        if (parsed.a >= 0.99) return { r: parsed.r, g: parsed.g, b: parsed.b, a: 1 }
+        const parent = node.parentElement ? backgroundOf(node.parentElement) : pageDefaultBg
+        return blend(parsed, parent)
       }
-    })
+      node = node.parentElement
+    }
+    return pageDefaultBg
+  }
+
+  return elements.map((el) => {
+    const fg = parseColor(getComputedStyle(el).color)
+    const ownBg = preferOwnBackground ? parseColor(getComputedStyle(el).backgroundColor) : null
+    const bg =
+      preferOwnBackground && ownBg && ownBg.a > 0.15
+        ? { r: ownBg.r, g: ownBg.g, b: ownBg.b, a: 1 }
+        : backgroundOf(el)
+    const ratio = fg ? contrast(fg.a < 1 ? blend(fg, bg) : fg, bg) : 0
+    const text = (el.textContent || '').trim().replace(/\s+/g, ' ')
+    return {
+      text: text.slice(0, 80),
+      ratio,
+    }
   })
+}
+
+async function contrastSamples(page, selector) {
+  return page.locator(selector).evaluateAll(measureElementContrast, { pageDefaultBg: { r: 255, g: 255, b: 255, a: 1 } })
 }
 
 async function assertProductHeroCtaCanary(page) {
@@ -168,11 +183,88 @@ async function pricingCtaIssues(page, label = '') {
   return samples.filter((sample) => sample.ratio < CTA_RATIO).map((sample) => ({ ...sample, text: `${sample.text}${label}` }))
 }
 
+/** @param {import('playwright').FrameLocator} frame */
+async function overlayTriggerContrastIssues(frame, label, sectionId = null, fallbackLabel = 'Open sheet') {
+  const triggerSelector = sectionId ? `#${sectionId} button.tc-demo-overlay-trigger` : 'button.tc-demo-overlay-trigger'
+  const samples = await frame.locator(triggerSelector).evaluateAll(measureElementContrast, {
+    pageDefaultBg: { r: 0, g: 0, b: 0, a: 1 },
+    preferOwnBackground: true,
+  })
+  if (samples.length === 0) {
+    return [{ selector: triggerSelector, text: `${fallbackLabel} trigger missing in iframe [${label}]`, ratio: 0 }]
+  }
+  return samples
+    .filter((sample) => sample.ratio < CTA_RATIO)
+    .map((sample) => ({
+      selector: `${triggerSelector} (${label})`,
+      text: `${sample.text || fallbackLabel} [${label}]`,
+      ratio: sample.ratio,
+    }))
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {{ platform: 'ios' | 'material', dark: boolean }} combo
+ */
+async function waitForDemoIframeReady(page, combo) {
+  const iframe = page.locator('#tc-demo-iframe')
+  await iframe.evaluate((el) => {
+    if (el instanceof HTMLIFrameElement) {
+      return new Promise((resolve) => {
+        if (el.contentDocument?.readyState === 'complete') {
+          resolve(undefined)
+          return
+        }
+        el.addEventListener('load', () => resolve(undefined), { once: true })
+      })
+    }
+    return undefined
+  })
+  const want = combo.platform === 'ios' ? 'c-ios' : 'c-material'
+  const frame = page.frameLocator('#tc-demo-iframe')
+  const root = frame.locator('#tc-demo-root')
+  await root.waitFor({ state: 'visible', timeout: 60_000 })
+  for (let attempt = 0; attempt < 45; attempt += 1) {
+    const classes = (await root.getAttribute('class')) ?? ''
+    const docDark = await frame.locator('html').evaluate((node) => node.classList.contains('dark')).catch(() => false)
+    if (classes.includes(want) && docDark === combo.dark) return
+    await page.waitForTimeout(400)
+  }
+  const classes = (await root.getAttribute('class')) ?? ''
+  const docDark = await frame.locator('html').evaluate((node) => node.classList.contains('dark')).catch(() => false)
+  throw new Error(
+    `demo iframe theme not ready (want ${want}, dark=${combo.dark}; got classes="${classes}", html.dark=${docDark})`,
+  )
+}
+
+async function tailwindCapacitorDemoOverlayTriggers(page) {
+  const combos = [
+    { platform: 'ios', dark: false, label: 'ios-light' },
+    { platform: 'ios', dark: true, label: 'ios-dark' },
+    { platform: 'material', dark: false, label: 'material-light' },
+    { platform: 'material', dark: true, label: 'material-dark' },
+  ]
+  const issues = []
+  await page.locator('[data-tc-demo-controls]').waitFor({ state: 'visible', timeout: 60_000 })
+  const frame = page.frameLocator('#tc-demo-iframe')
+  for (const combo of combos) {
+    await page.locator(`[data-tc-platform="${combo.platform}"]`).click()
+    await page.locator(`[data-tc-dark="${combo.dark ? '1' : '0'}"]`).click()
+    await waitForDemoIframeReady(page, combo)
+    await frame.locator('button.tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
+    issues.push(...(await overlayTriggerContrastIssues(frame, combo.label)))
+  }
+  return issues
+}
+
 async function scanRoute(page, route) {
   const axe = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze()
   const issues = ghostIssuesFromAxe(axe)
   if (route === '/pricing/') {
     issues.push(...(await pricingCtaIssues(page)))
+  }
+  if (route.startsWith('/plugins/tailwind-capacitor/demo/') && (await page.locator('#tc-demo-iframe').count())) {
+    issues.push(...(await tailwindCapacitorDemoOverlayTriggers(page)))
   }
   return issues
 }

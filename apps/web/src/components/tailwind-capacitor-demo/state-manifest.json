@@ -1,0 +1,1010 @@
+{
+  "foundation": [
+    {
+      "id": "packages",
+      "label": "Packages"
+    },
+    {
+      "id": "icons",
+      "label": "Icons"
+    }
+  ],
+  "capacitor-accordion": [
+    {
+      "id": "single-section",
+      "label": "Single section"
+    },
+    {
+      "id": "multi-section",
+      "label": "Multi section"
+    },
+    {
+      "id": "nested-copy",
+      "label": "With descriptions"
+    }
+  ],
+  "capacitor-accordion-item": [
+    {
+      "id": "collapsed",
+      "label": "Collapsed"
+    },
+    {
+      "id": "expanded-copy",
+      "label": "Expanded copy"
+    },
+    {
+      "id": "stacked",
+      "label": "Stacked items"
+    }
+  ],
+  "capacitor-actions": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "sheet-open",
+      "label": "Sheet open"
+    }
+  ],
+  "capacitor-actions-button": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "sheet-open",
+      "label": "Sheet open"
+    },
+    {
+      "id": "primary-row",
+      "label": "Primary row"
+    }
+  ],
+  "capacitor-actions-group": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "sheet-open",
+      "label": "Sheet open"
+    },
+    {
+      "id": "single-group",
+      "label": "Single group"
+    }
+  ],
+  "capacitor-actions-label": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "sheet-open",
+      "label": "Sheet open"
+    },
+    {
+      "id": "section-label",
+      "label": "Section label"
+    }
+  ],
+  "capacitor-alert": [
+    {
+      "id": "inline",
+      "label": "Inline"
+    },
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-app": [
+    {
+      "id": "light-shell",
+      "label": "Light shell"
+    },
+    {
+      "id": "dark-shell",
+      "label": "Dark shell"
+    },
+    {
+      "id": "with-block",
+      "label": "With block"
+    }
+  ],
+  "capacitor-avatar": [
+    {
+      "id": "initials",
+      "label": "Initials"
+    },
+    {
+      "id": "small",
+      "label": "Small"
+    },
+    {
+      "id": "large",
+      "label": "Large"
+    }
+  ],
+  "capacitor-badge": [
+    {
+      "id": "count",
+      "label": "Count"
+    },
+    {
+      "id": "color",
+      "label": "Color"
+    },
+    {
+      "id": "on-avatar",
+      "label": "On avatar"
+    }
+  ],
+  "capacitor-block": [
+    {
+      "id": "inset-strong",
+      "label": "Inset strong"
+    },
+    {
+      "id": "outline",
+      "label": "Outline"
+    },
+    {
+      "id": "plain",
+      "label": "Plain"
+    }
+  ],
+  "capacitor-block-footer": [
+    {
+      "id": "with-footer",
+      "label": "With footer"
+    },
+    {
+      "id": "footer-note",
+      "label": "Footer note"
+    }
+  ],
+  "capacitor-block-header": [
+    {
+      "id": "with-header",
+      "label": "With header"
+    },
+    {
+      "id": "section-title",
+      "label": "Section title"
+    }
+  ],
+  "capacitor-block-title": [
+    {
+      "id": "standalone",
+      "label": "Standalone"
+    },
+    {
+      "id": "with-body",
+      "label": "With body"
+    }
+  ],
+  "capacitor-breadcrumbs": [
+    {
+      "id": "trail",
+      "label": "Trail"
+    },
+    {
+      "id": "compact",
+      "label": "Compact"
+    }
+  ],
+  "capacitor-breadcrumbs-collapsed": [
+    {
+      "id": "collapsed-middle",
+      "label": "Collapsed middle"
+    },
+    {
+      "id": "long-trail",
+      "label": "Long trail"
+    }
+  ],
+  "capacitor-breadcrumbs-item": [
+    {
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "id": "active",
+      "label": "Active"
+    }
+  ],
+  "capacitor-breadcrumbs-separator": [
+    {
+      "id": "between-items",
+      "label": "Between items"
+    },
+    {
+      "id": "multi-separator",
+      "label": "Multi separator"
+    }
+  ],
+  "capacitor-button": [
+    {
+      "id": "solid",
+      "label": "Solid"
+    },
+    {
+      "id": "outline",
+      "label": "Outline"
+    },
+    {
+      "id": "clear",
+      "label": "Clear"
+    },
+    {
+      "id": "tonal",
+      "label": "Tonal"
+    },
+    {
+      "id": "small",
+      "label": "Small"
+    },
+    {
+      "id": "large",
+      "label": "Large"
+    },
+    {
+      "id": "raised",
+      "label": "Raised"
+    },
+    {
+      "id": "disabled",
+      "label": "Disabled"
+    },
+    {
+      "id": "with-icon",
+      "label": "With icon"
+    },
+    {
+      "id": "block",
+      "label": "Block"
+    },
+    {
+      "id": "fill-color",
+      "label": "Fill color"
+    },
+    {
+      "id": "outline-color",
+      "label": "Outline color"
+    }
+  ],
+  "capacitor-card": [
+    {
+      "id": "feed",
+      "label": "Feed card"
+    },
+    {
+      "id": "media",
+      "label": "Media card"
+    },
+    {
+      "id": "outline",
+      "label": "Outline card"
+    }
+  ],
+  "capacitor-checkbox": [
+    {
+      "id": "off",
+      "label": "Off"
+    },
+    {
+      "id": "on",
+      "label": "On"
+    },
+    {
+      "id": "disabled",
+      "label": "Disabled"
+    }
+  ],
+  "capacitor-chip": [
+    {
+      "id": "filled",
+      "label": "Filled"
+    },
+    {
+      "id": "removable",
+      "label": "Removable"
+    },
+    {
+      "id": "outline",
+      "label": "Outline"
+    }
+  ],
+  "capacitor-datetime": [
+    {
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-dialog": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-dialog-button": [
+    {
+      "id": "cancel-ok",
+      "label": "Cancel + OK"
+    },
+    {
+      "id": "destructive",
+      "label": "Destructive"
+    },
+    {
+      "id": "stacked",
+      "label": "Stacked"
+    }
+  ],
+  "capacitor-fab": [
+    {
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "list-open",
+      "label": "List open"
+    }
+  ],
+  "capacitor-footer": [
+    {
+      "id": "plain-footer",
+      "label": "Plain footer"
+    },
+    {
+      "id": "with-toolbar",
+      "label": "With toolbar"
+    }
+  ],
+  "capacitor-header": [
+    {
+      "id": "plain-header",
+      "label": "Plain header"
+    },
+    {
+      "id": "with-navbar",
+      "label": "With navbar"
+    }
+  ],
+  "capacitor-icon": [
+    {
+      "id": "navigation",
+      "label": "Navigation"
+    },
+    {
+      "id": "large",
+      "label": "Large"
+    }
+  ],
+  "capacitor-infinite-scroll": [
+    {
+      "id": "idle",
+      "label": "Idle"
+    },
+    {
+      "id": "loading",
+      "label": "Loading"
+    }
+  ],
+  "capacitor-input-otp": [
+    {
+      "id": "empty",
+      "label": "Empty"
+    },
+    {
+      "id": "filled",
+      "label": "Filled"
+    }
+  ],
+  "capacitor-item-sliding": [
+    {
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "swiped-open",
+      "label": "Swiped open"
+    }
+  ],
+  "capacitor-link": [
+    {
+      "id": "text-link",
+      "label": "Text link"
+    },
+    {
+      "id": "toolbar",
+      "label": "Toolbar"
+    }
+  ],
+  "capacitor-list": [
+    {
+      "id": "inset",
+      "label": "Inset list"
+    },
+    {
+      "id": "buttons",
+      "label": "List buttons"
+    },
+    {
+      "id": "media",
+      "label": "Media rows"
+    }
+  ],
+  "capacitor-list-button": [
+    {
+      "id": "single",
+      "label": "Single"
+    },
+    {
+      "id": "pair",
+      "label": "Pair"
+    }
+  ],
+  "capacitor-list-group": [
+    {
+      "id": "grouped",
+      "label": "Grouped"
+    },
+    {
+      "id": "nested",
+      "label": "Nested"
+    }
+  ],
+  "capacitor-list-input": [
+    {
+      "id": "empty",
+      "label": "Empty"
+    },
+    {
+      "id": "filled",
+      "label": "Filled"
+    },
+    {
+      "id": "focused",
+      "label": "Focused"
+    }
+  ],
+  "capacitor-list-item": [
+    {
+      "id": "standard",
+      "label": "Standard"
+    },
+    {
+      "id": "chevron",
+      "label": "Chevron link"
+    },
+    {
+      "id": "toggle-after",
+      "label": "Toggle after"
+    },
+    {
+      "id": "badge",
+      "label": "Badge"
+    }
+  ],
+  "capacitor-menu-list": [
+    {
+      "id": "basic",
+      "label": "Basic"
+    },
+    {
+      "id": "with-icons",
+      "label": "With icons"
+    }
+  ],
+  "capacitor-menu-list-item": [
+    {
+      "id": "basic-item",
+      "label": "Basic item"
+    },
+    {
+      "id": "selected",
+      "label": "Selected"
+    }
+  ],
+  "capacitor-message": [
+    {
+      "id": "sent",
+      "label": "Sent"
+    },
+    {
+      "id": "received",
+      "label": "Received"
+    },
+    {
+      "id": "thread",
+      "label": "Thread"
+    }
+  ],
+  "capacitor-messagebar": [
+    {
+      "id": "empty",
+      "label": "Empty"
+    },
+    {
+      "id": "composing",
+      "label": "Composing"
+    }
+  ],
+  "capacitor-messages": [
+    {
+      "id": "single",
+      "label": "Single"
+    },
+    {
+      "id": "pair",
+      "label": "Pair"
+    }
+  ],
+  "capacitor-messages-title": [
+    {
+      "id": "with-title",
+      "label": "With title"
+    },
+    {
+      "id": "group-chat",
+      "label": "Group chat"
+    }
+  ],
+  "capacitor-modal": [
+    {
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    },
+    {
+      "id": "inline",
+      "label": "Inline"
+    }
+  ],
+  "capacitor-navbar": [
+    {
+      "id": "standard",
+      "label": "Standard"
+    },
+    {
+      "id": "large-title",
+      "label": "Large title"
+    },
+    {
+      "id": "transparent",
+      "label": "Transparent"
+    },
+    {
+      "id": "with-back-link",
+      "label": "With back link"
+    }
+  ],
+  "capacitor-navbar-back-link": [
+    {
+      "id": "with-text",
+      "label": "With text"
+    },
+    {
+      "id": "in-navbar",
+      "label": "In navbar"
+    }
+  ],
+  "capacitor-note": [
+    {
+      "id": "body-note",
+      "label": "Body note"
+    },
+    {
+      "id": "secondary",
+      "label": "Secondary"
+    }
+  ],
+  "capacitor-notification": [
+    {
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    },
+    {
+      "id": "inline-open",
+      "label": "Inline open"
+    }
+  ],
+  "capacitor-page": [
+    {
+      "id": "scroll-content",
+      "label": "Scroll content"
+    },
+    {
+      "id": "with-navbar",
+      "label": "With navbar"
+    }
+  ],
+  "capacitor-panel": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-picker": [
+    {
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    },
+    {
+      "id": "wheels",
+      "label": "Wheels"
+    }
+  ],
+  "capacitor-popover": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-popup": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-preloader": [
+    {
+      "id": "spinner",
+      "label": "Spinner"
+    },
+    {
+      "id": "blue",
+      "label": "Blue"
+    },
+    {
+      "id": "large-green",
+      "label": "Large green"
+    }
+  ],
+  "capacitor-progressbar": [
+    {
+      "id": "low",
+      "label": "Low"
+    },
+    {
+      "id": "high",
+      "label": "High"
+    },
+    {
+      "id": "indeterminate",
+      "label": "Indeterminate"
+    }
+  ],
+  "capacitor-radio": [
+    {
+      "id": "option-a",
+      "label": "Option A"
+    },
+    {
+      "id": "option-b",
+      "label": "Option B"
+    }
+  ],
+  "capacitor-range": [
+    {
+      "id": "single",
+      "label": "Single"
+    },
+    {
+      "id": "dual",
+      "label": "Dual"
+    },
+    {
+      "id": "with-pins",
+      "label": "With pins"
+    }
+  ],
+  "capacitor-refresher": [
+    {
+      "id": "idle",
+      "label": "Idle"
+    },
+    {
+      "id": "pulling",
+      "label": "Pulling"
+    }
+  ],
+  "capacitor-reorder": [
+    {
+      "id": "two-rows",
+      "label": "Two rows"
+    },
+    {
+      "id": "three-rows",
+      "label": "Three rows"
+    }
+  ],
+  "capacitor-searchbar": [
+    {
+      "id": "empty",
+      "label": "Empty"
+    },
+    {
+      "id": "filled",
+      "label": "Filled"
+    },
+    {
+      "id": "focused",
+      "label": "Focused"
+    },
+    {
+      "id": "with-cancel",
+      "label": "With cancel"
+    }
+  ],
+  "capacitor-segmented": [
+    {
+      "id": "one-selected",
+      "label": "One selected"
+    },
+    {
+      "id": "two-selected",
+      "label": "Two selected"
+    }
+  ],
+  "capacitor-segmented-button": [
+    {
+      "id": "a-selected",
+      "label": "A selected"
+    },
+    {
+      "id": "b-selected",
+      "label": "B selected"
+    }
+  ],
+  "capacitor-select": [
+    {
+      "id": "closed",
+      "label": "Closed"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-sheet": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-skeleton": [
+    {
+      "id": "line",
+      "label": "Line"
+    },
+    {
+      "id": "avatar-row",
+      "label": "Avatar row"
+    }
+  ],
+  "capacitor-split-pane": [
+    {
+      "id": "two-pane",
+      "label": "Two pane"
+    },
+    {
+      "id": "master-detail",
+      "label": "Master detail"
+    }
+  ],
+  "capacitor-stepper": [
+    {
+      "id": "min",
+      "label": "Min"
+    },
+    {
+      "id": "max",
+      "label": "Max"
+    },
+    {
+      "id": "disabled",
+      "label": "Disabled"
+    }
+  ],
+  "capacitor-tab": [
+    {
+      "id": "tab-a",
+      "label": "Tab A selected"
+    },
+    {
+      "id": "tab-b",
+      "label": "Tab B selected"
+    }
+  ],
+  "capacitor-tabbar": [
+    {
+      "id": "two-tabs",
+      "label": "Two tabs"
+    },
+    {
+      "id": "three-tabs",
+      "label": "Three tabs"
+    }
+  ],
+  "capacitor-tabbar-link": [
+    {
+      "id": "inactive",
+      "label": "Inactive"
+    },
+    {
+      "id": "active",
+      "label": "Active"
+    },
+    {
+      "id": "badge",
+      "label": "Badge"
+    }
+  ],
+  "capacitor-table": [
+    {
+      "id": "sample",
+      "label": "Sample"
+    },
+    {
+      "id": "compact",
+      "label": "Compact"
+    }
+  ],
+  "capacitor-table-body": [
+    {
+      "id": "single-row",
+      "label": "Single row"
+    },
+    {
+      "id": "two-rows",
+      "label": "Two rows"
+    }
+  ],
+  "capacitor-table-cell": [
+    {
+      "id": "body-cell",
+      "label": "Body cell"
+    },
+    {
+      "id": "header-cell",
+      "label": "Header cell"
+    }
+  ],
+  "capacitor-table-head": [
+    {
+      "id": "header",
+      "label": "Header"
+    },
+    {
+      "id": "multi-column",
+      "label": "Multi column"
+    }
+  ],
+  "capacitor-table-row": [
+    {
+      "id": "single",
+      "label": "Single"
+    },
+    {
+      "id": "values",
+      "label": "Values"
+    }
+  ],
+  "capacitor-tabs": [
+    {
+      "id": "tab-one",
+      "label": "One selected"
+    },
+    {
+      "id": "tab-two",
+      "label": "Two selected"
+    }
+  ],
+  "capacitor-textarea": [
+    {
+      "id": "empty",
+      "label": "Empty"
+    },
+    {
+      "id": "filled",
+      "label": "Filled"
+    }
+  ],
+  "capacitor-thumbnail": [
+    {
+      "id": "standalone",
+      "label": "Standalone"
+    },
+    {
+      "id": "in-list",
+      "label": "In list"
+    }
+  ],
+  "capacitor-toast": [
+    {
+      "id": "screen",
+      "label": "Screen"
+    },
+    {
+      "id": "open",
+      "label": "Open"
+    }
+  ],
+  "capacitor-toggle": [
+    {
+      "id": "off",
+      "label": "Off"
+    },
+    {
+      "id": "on",
+      "label": "On"
+    },
+    {
+      "id": "disabled",
+      "label": "Disabled"
+    }
+  ],
+  "capacitor-toolbar": [
+    {
+      "id": "top",
+      "label": "Top"
+    },
+    {
+      "id": "actions",
+      "label": "Actions"
+    }
+  ],
+  "capacitor-touch-ripple": [
+    {
+      "id": "on-button",
+      "label": "On button"
+    },
+    {
+      "id": "on-card",
+      "label": "On card"
+    }
+  ]
+}

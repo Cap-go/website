@@ -1,0 +1,5 @@
+/* Tailwind v4 ignores .gitignore paths unless registered with @source (see detecting-classes docs). */
+@import './tailwind-capacitor-v4-theme-bridge.css';
+@import '../tailwind-capacitor-snapshot/capacitor/styles/tailwind-capacitor.css';
+@source '../tailwind-capacitor-snapshot';
+@source '../components/tailwind-capacitor-demo';

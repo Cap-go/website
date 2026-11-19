@@ -1,0 +1,31 @@
+/* Demo catalog pages: sticky site header + intro clearance at 390px */
+body:has(#tc-demo-page-intro) > .min-h-dvh > header {
+  background: rgb(17 24 39);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body:has(#tc-demo-page-intro) > .min-h-dvh > main {
+  scroll-padding-top: 4.5rem;
+}
+
+body:has(#tc-demo-page-intro) #tc-demo-page-intro [data-tc-demo-intro] {
+  scroll-margin-top: 5.5rem;
+}
+
+@media (max-width: 639px) {
+  body:has(#tc-demo-page-intro) #tc-demo-page-intro {
+    padding-top: max(1.75rem, calc(env(safe-area-inset-top) + 1rem));
+  }
+}
+
+.tc-demo-phone-frame {
+  height: min(70dvh, 720px);
+}
+
+@media (max-width: 639px) {
+  .tc-demo-phone-frame {
+    height: min(44dvh, 380px);
+    max-height: 380px;
+  }
+}

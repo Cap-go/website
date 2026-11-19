@@ -14,6 +14,7 @@
     "run_worker_first": true,
   },
   "workers_dev": false,
+  "preview_urls": true,
   "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache" }],
   "ratelimits": [
     {
@@ -48,6 +49,20 @@
       "custom_domain": true,
     },
   ],
+  "previews": {
+    "vars": {
+      "LIVE_UPDATE_METRICS_URL": "https://api.capgo.app/private/website_stats/live_updates",
+      "BUILDER_METRICS_URL": "https://builder-preprod.capgo.app/stats/public",
+    },
+    "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache-development" }],
+    "ratelimits": [
+      {
+        "name": "PUBLIC_MCP_RATE_LIMITER",
+        "namespace_id": "1002",
+        "simple": { "limit": 60, "period": 60 },
+      },
+    ],
+  },
   "env": {
     "development": {
       "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache-development" }],

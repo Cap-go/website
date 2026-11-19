@@ -24,6 +24,8 @@ extend-exclude = [
     "public/",
     "apps/web/public/",
     "apps/docs/public/",
+    # Pinned upstream registry mirror; typos are upstream content, not ours
+    "apps/web/vendor/tailwind-capacitor-registry-snapshot/**",
 ]
 
 [default]
