@@ -13,6 +13,10 @@ If you're deploying your app to users in China, you'll need to configure Capgo t
 
 Due to network infrastructure and regulations in China (the Great Firewall), direct connections to international servers can be slow or unreliable. Capgo provides dedicated OST URLs with data located in Hong Kong to minimize latency and ensure your users receive updates as quickly and reliably as possible.
 
+## Capgo console
+
+If you manage releases from mainland China, use [console.capgo.com.cn](https://console.capgo.com.cn/) instead of [console.capgo.app](https://console.capgo.app/). The international console talks to `api.capgo.app`, which is blocked there. The China console uses `api.capgo.com.cn` automatically.
+
 ## Configuration
 
 To configure Capgo for China, you need to set three specific URLs in your Capacitor configuration file. These URLs point to Capgo's Hong Kong-based infrastructure.
