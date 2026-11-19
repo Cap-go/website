@@ -33,6 +33,7 @@ const appleRejectionStoryBatchDefinitions = [
   { id: 'batch-23', label: 'Batch 23', publishedOn: '2026-11-14' },
   { id: 'batch-24', label: 'Batch 24', publishedOn: '2026-11-15' },
   { id: 'batch-25', label: 'Batch 25', publishedOn: '2026-11-18' },
+  { id: 'batch-26', label: 'Batch 26', publishedOn: '2026-11-18' },
 ] as const
 
 export const appleRejectionStoryBatches = appleRejectionStoryBatchDefinitions.map((batch) => ({
