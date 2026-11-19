@@ -1,0 +1,63 @@
+---
+title: "Organization billing address and tax ID"
+description: "Super Admin and Billing Manager roles can maintain Stripe invoice details and tax IDs in the Capgo console."
+sidebar:
+  order: 13
+---
+
+## What is this about?
+
+EU and global customers often need VAT numbers and a billing address on invoices without using Stripe Customer Portal. The console billing profile shipped on Capgo main in [PR #4148](https://github.com/Cap-go/capgo/pull/4148/) and [PR #4160](https://github.com/Cap-go/capgo/pull/4160/). **Super Admin** and **Billing Manager** hold `org.update_billing` and can save changes. Everyone else can open the section but is blocked when they try to edit.
+
+## Where to find it
+
+Go to [Organization settings](/docs/webapp/settings/#how-to-get-to-the-settings-page), select the **Organization** tab, open the **Billing** tab, then scroll to the billing profile section (invoice details and tax IDs).
+
+## Invoice details
+
+The summary shows name, email, phone, and address lines. The **Edit billing details** button is always visible. Clicking it runs an `org.update_billing` check; if you are denied, the billing permission modal appears and the editor does not open.
+
+In the editor you can set:
+
+- Organization or buyer name (required)
+- Billing email (required)
+- Phone (optional)
+- Address line 1 (required)
+- Address line 2 (optional)
+- City, state or province, postal code
+- Country (required, pick from the country dropdown)
+
+Save applies all fields in the modal.
+
+## Tax IDs
+
+The summary lists each tax ID with its type label, value, and a status line such as **Verification pending**, **Not verified**, **Verified**, or **Verification unavailable**.
+
+The **Manage tax IDs** button is always visible and uses the same permission check on click.
+
+In the manage modal:
+
+- **Remove tax ID:** click **Remove tax ID** on one row, confirm the prompt, then Capgo deletes that ID from Stripe.
+- **Add tax ID:** choose **Tax ID type** from the dropdown (options come from the static `BILLING_TAX_ID_TYPES` list, for example EU VAT), enter **VAT / tax number**, then click **Add tax ID**.
+
+You can keep multiple tax IDs. The type dropdown stays editable; removal always uses **Remove tax ID** and confirm, not an empty save.
+
+## Who can edit
+
+| RBAC role | `org.update_billing` |
+|-----------|----------------------|
+| **Super Admin** (`org_super_admin`) | Yes |
+| **Billing Manager** (`org_billing_admin`) | Yes |
+| **Admin** (`org_admin`) | No |
+| **Member** and other roles | No |
+
+The console checks `org.update_billing` in `BillingProfileSection.vue` when you click **Edit billing details** or **Manage tax IDs**. The API uses the same permission on profile and tax ID routes. Users without the permission still see the buttons; they are denied before the modal opens (`Billing.vue` shows the billing access modal).
+
+### Legacy org_users path
+
+If a membership row still has only legacy `org_users.user_right` (no `rbac_role_name`), Capgo derives role bindings from `user_right` via `resync_org_user_role_bindings`. `rbac_org_role_for_legacy_right` maps legacy `super_admin` to **Super Admin** and legacy `admin` to **Admin**. Only **Super Admin** includes `org.update_billing`, so on this legacy path only Super Admin can edit billing. **Billing Manager** is an RBAC role; assign it explicitly for billing only access.
+
+## Related docs
+
+- [Payment system](/docs/webapp/payment/)
+- [Organization](/docs/webapp/organization-system/#billing)
