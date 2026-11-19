@@ -7,7 +7,7 @@ author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-11-19T09:00:00.000Z
 updated_at: 2026-11-19T09:00:00.000Z
-head_image: /migrating-cordova-to-capacitor.webp
+head_image: /blog-images/migrating-cordova-to-capacitor.png
 head_image_alt: "Illustration of migrating a Cordova app to Capacitor, used for a screen brightness plugin guide"
 keywords: cordova-plugin-brightness alternative, capacitor brightness, @capgo/capacitor-brightness, cordova.plugins.brightness
 tag: Alternatives, Capacitor, Migration
@@ -111,6 +111,6 @@ await KeepAwake.keepAwake();
 - npm: [https://www.npmjs.com/package/@capgo/capacitor-brightness](https://www.npmjs.com/package/@capgo/capacitor-brightness)
 - GitHub: [https://github.com/Cap-go/capacitor-brightness/](https://github.com/Cap-go/capacitor-brightness/)
 - Cordova upstream: [https://github.com/mgcrea/cordova-plugin-brightness](https://github.com/mgcrea/cordova-plugin-brightness)
-- Keep awake: [/blog/cordova-plugin-insomnia-alternative/](/blog/cordova-plugin-insomnia-alternative/) and [/plugins/capacitor-keep-awake/](/plugins/capacitor-keep-awake/)
+- Keep awake: [/plugins/capacitor-keep-awake/](/plugins/capacitor-keep-awake/) and [keep awake plugin docs](/docs/plugins/keep-awake/)
 
 Brightness changes ship in the native binary. Use [Capgo Build](/native-build/) for store builds, then tune reader or kiosk screens with [Capgo live updates](/live-update/) where the logic stays in JavaScript. For the full platform move, read the [Cordova to Capacitor migration guide](/blog/migrating-cordova-to-capacitor/).
