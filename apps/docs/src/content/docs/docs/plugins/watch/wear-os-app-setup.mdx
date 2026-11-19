@@ -457,7 +457,7 @@ Call `setupWatchListeners()` early in your app bootstrap (for example after `pla
 </Steps>
 
 <Aside type="tip">
-On Android, the plugin does **not** emit `reachabilityChanged` or `activationStateChanged`. Poll `getInfo()` or track connectivity in your own UI when you need live status on Wear OS.
+On Android, the plugin emits `reachabilityChanged` when connected Wear OS nodes change. It does **not** emit `activationStateChanged`. Register `reachabilityChanged` for live connectivity updates, or poll `getInfo()` when you only need install and pairing status.
 </Aside>
 
 ## Troubleshooting
