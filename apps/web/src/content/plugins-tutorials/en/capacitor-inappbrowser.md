@@ -21,7 +21,7 @@ npx cap sync
 - Cookie, cache, and full browsing-data cleanup with `persistWebViewData`, `clearCookies`, `clearAllCookies`, `clearCache`, and `clearAllBrowsingData`.
 - App-to-page communication with `postMessage()`, page-to-app communication with `window.mobileApp.postMessage(...)`, and script injection with `executeScript()`.
 - Download handling, native-first proxy rules, popup control, Google Pay support, `_blank` link handling, and hidden preloadable browser instances.
-- `deepLinkPrevented` when `preventDeeplink: true` blocks a link that would leave the managed WebView ([guide](/docs/plugins/inappbrowser/deep-link-prevented/)).
+- `deepLinkPrevented` when `preventDeeplink: true` blocks a link that would leave the managed WebView (Android and iOS only; [guide](/docs/plugins/inappbrowser/deep-link-prevented/)).
 
 ## Common Use Cases
 

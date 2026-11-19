@@ -15,19 +15,24 @@ Related PR: [capacitor-inappbrowser #787](https://github.com/Cap-go/capacitor-in
 
 ## Example
 
+`openWebView()` resolves when the WebView is ready, not when the user closes it. Register `deepLinkPrevented` before opening, keep the listener for the whole browser session, and remove it when the session ends or your owning component tears down.
+
 ```typescript
 import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
-const listener = await InAppBrowser.addListener('deepLinkPrevented', ({ id, url }) => {
+const deepLinkListener = await InAppBrowser.addListener('deepLinkPrevented', ({ id, url }) => {
   console.log('Blocked hand-off', id, url);
+});
+
+const closeListener = await InAppBrowser.addListener('closeEvent', async () => {
+  await deepLinkListener.remove();
+  await closeListener.remove();
 });
 
 await InAppBrowser.openWebView({
   url: 'https://checkout.example.com/',
   preventDeeplink: true,
 });
-
-await listener.remove();
 ```
 
 ## Platform notes
