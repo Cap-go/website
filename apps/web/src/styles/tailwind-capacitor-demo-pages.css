@@ -18,3 +18,14 @@ body:has(#tc-demo-page-intro) #tc-demo-page-intro [data-tc-demo-intro] {
     padding-top: max(1.75rem, calc(env(safe-area-inset-top) + 1rem));
   }
 }
+
+.tc-demo-phone-frame {
+  height: min(70dvh, 720px);
+}
+
+@media (max-width: 639px) {
+  .tc-demo-phone-frame {
+    height: min(44dvh, 380px);
+    max-height: 380px;
+  }
+}

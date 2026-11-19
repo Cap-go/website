@@ -34,7 +34,7 @@ const pluginHref = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/')
 const indexHref = getRelativeLocaleUrl(locale, 'plugins/tailwind-capacitor/demo/')
 const componentTitle = tailwindCapacitorDemoTitle(slug)
 const title = `${componentTitle} live demo`
-const description = `Interactive ${componentTitle} preview with iOS or Material styling and light or dark mode. Tailwind Capacitor registry pin ${TAILWIND_CAPACITOR_REGISTRY_COMMIT}.`
+const description = `Interactive ${componentTitle} preview with iOS or Material styling and light or dark mode.`
 
 const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
