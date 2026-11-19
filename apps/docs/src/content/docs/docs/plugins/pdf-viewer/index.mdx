@@ -1,6 +1,6 @@
 ---
 title: '@capgo/capacitor-pdf-viewer'
-description: 'Native PDF viewing on iOS (PDFKit), Android (Pdfium), and web with paths, URLs, base64, inline mode, and underWebView custom HTML UI.'
+description: 'Native PDF viewing on iOS (PDFKit), Android (Pdfium), and web with paths, URLs, base64, inline mode, custom background color, and underWebView custom HTML UI.'
 tableOfContents: false
 next: false
 prev: false
@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: 'Introduction'
 hero:
-  tagline: 'Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, password support, and underWebView custom HTML UI'
+  tagline: 'Embed native PDF viewing on iOS, Android, and web with paths, URLs, base64, inline mode, optional background color, password support, and underWebView custom HTML UI'
   actions:
     - text: Get started
       link: /docs/plugins/pdf-viewer/getting-started/
@@ -16,6 +16,10 @@ hero:
       variant: primary
     - text: underWebView
       link: /docs/plugins/pdf-viewer/under-webview/
+      icon: right-arrow
+      variant: minimal
+    - text: Background color
+      link: /docs/plugins/pdf-viewer/background-color/
       icon: right-arrow
       variant: minimal
     - text: GitHub
@@ -39,6 +43,10 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components'
   </Card>
   <Card title="updateLayout()" icon="puzzle">
     Reposition or resize the native PDF in CSS pixels relative to the WebView viewport. Call it after rotation or when your chrome changes size.
+  </Card>
+  <Card title="Background color" icon="star">
+    Pass `backgroundColor` on `open()` or call `setBackgroundColor()` to tint margins and page gaps. Use `#RRGGBB` or `#AARRGGBB` on iOS, Android, and web. Guide:{' '}
+    <a href="/docs/plugins/pdf-viewer/background-color/">background color</a>.
   </Card>
 </CardGrid>
 
@@ -69,6 +77,7 @@ Start with `open()` and the other core methods listed below.
 - `setZoom` - Set the zoom scale multiplier (`1` is the default fit scale on native).
 - `hide` / `show` - Hide or show the PDF layer without unloading the document.
 - `updateLayout` - Reposition or resize the native PDF in `underWebView` / `toBack` mode.
+- `backgroundColor` on `open` and `setBackgroundColor` - Tint the viewer canvas on iOS, Android, and web.
 
 ## Public API
 
@@ -85,6 +94,7 @@ Start with `open()` and the other core methods listed below.
 | `hide`             | Hide the PDF layer without unloading the document.                                     |
 | `show`             | Show the PDF layer after `hide()`.                                                     |
 | `updateLayout`     | Reposition or resize the native PDF when using `underWebView` / `toBack`.              |
+| `setBackgroundColor` | Update the tint around and between pages while a PDF is open.                        |
 | `getPluginVersion` | Get the native or web implementation version marker.                                   |
 | `addListener`      | Listen for `load`, `pageChange`, `zoomChange`, `error`, `close`, and `linkTap` events. |
 

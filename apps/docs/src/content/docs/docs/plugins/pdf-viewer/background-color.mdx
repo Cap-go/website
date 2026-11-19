@@ -1,0 +1,67 @@
+---
+title: Background color
+description: 'Tint the area around and between PDF pages with backgroundColor on open and setBackgroundColor while the viewer is open in @capgo/capacitor-pdf-viewer.'
+sidebar:
+  order: 4
+---
+
+Use `backgroundColor` on `PdfViewer.open()` or `PdfViewer.setBackgroundColor()` to tint the canvas around PDF pages and the gaps in continuous scroll. This helps match your app shell in fullscreen and inline modes without relying on native chrome.
+
+Supported on **iOS, Android, and web**. Accepts `#RRGGBB` or `#AARRGGBB`. On web, eight-digit values are reordered to CSS `#RRGGBBAA`.
+
+Source of truth: `src/definitions.ts` and the README on [capacitor-pdf-viewer](https://github.com/Cap-go/capacitor-pdf-viewer/). Plugin PR: [capacitor-pdf-viewer #11](https://github.com/Cap-go/capacitor-pdf-viewer/pull/11).
+
+## Open with a background color
+
+```typescript
+import { PdfViewer } from '@capgo/capacitor-pdf-viewer';
+
+await PdfViewer.open({
+  source: pdfBase64,
+  sourceType: 'base64',
+  mode: 'fullscreen',
+  backgroundColor: '#1e293b',
+});
+```
+
+## Change the color while open
+
+```typescript
+await PdfViewer.setBackgroundColor({ color: '#0f172a' });
+```
+
+Invalid colors on `open()` fall back to platform defaults: black on Android, `systemBackground` on iOS, and no custom paint on web when omitted. Invalid colors passed to `setBackgroundColor()` are rejected.
+
+## Defaults and underWebView
+
+| Situation | Android | iOS | Web |
+| --------- | ------- | --- | --- |
+| `backgroundColor` omitted | Black canvas | `systemBackground` | Transparent host (no `#111` paint in inline mode) |
+| `underWebView` / `toBack`, color omitted | Transparent canvas | Clear shell | N/A (`underWebView` is native only) |
+| Valid `#RRGGBB` | Tinted canvas | Tinted around pages | Tinted host around the embedded PDF frame |
+
+In `underWebView` / `toBack` mode, omit `backgroundColor` when your HTML chrome should own the visible backdrop. Android and iOS both use a clear native shell in that case.
+
+## Theme toggle example
+
+```typescript
+const dark = '#0f172a';
+const light = '#f8fafc';
+
+await PdfViewer.open({
+  source: 'https://example.com/report.pdf',
+  mode: 'fullscreen',
+  backgroundColor: dark,
+});
+
+// Later, when the user switches theme:
+await PdfViewer.setBackgroundColor({ color: light });
+```
+
+## Related
+
+- [Overview](/docs/plugins/pdf-viewer/)
+- [Getting started](/docs/plugins/pdf-viewer/getting-started/)
+- [underWebView](/docs/plugins/pdf-viewer/under-webview/)
+- [iOS setup](/docs/plugins/pdf-viewer/ios/)
+- [Android setup](/docs/plugins/pdf-viewer/android/)
