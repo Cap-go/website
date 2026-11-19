@@ -288,11 +288,23 @@ class WatchViewModel: NSObject, ObservableObject, WCSessionDelegate {
         WCSession.default.sendMessage(data, replyHandler: completion)
     }
 
-    // Receive message from iPhone
+    // Receive one-way messages from iPhone
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
             self.lastMessage = message
         }
+    }
+
+    // Receive interactive messages from iPhone (sendMessage with expectsReply: true)
+    func session(
+        _ session: WCSession,
+        didReceiveMessage message: [String: Any],
+        replyHandler: @escaping ([String: Any]) -> Void
+    ) {
+        DispatchQueue.main.async {
+            self.lastMessage = message
+        }
+        replyHandler(["status": "ok"])
     }
 
     // Receive application context

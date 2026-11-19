@@ -153,7 +153,7 @@ Example **`wear/src/main/AndroidManifest.xml`** skeleton:
 
 Create `CapgoWearBridge.kt` in your wear package. It mirrors the paths in `CapgoWatchPlugin.java`.
 
-The phone plugin assigns an opaque `callbackId` for each `/capgo/message/withreply` and sends the reply on `/capgo/reply/{callbackId}`. The watch never sees that ID ahead of time. For concurrent requests, include a **`requestId`** in your JSON payload, echo it from the phone in `replyToMessage`, and key handlers on the watch by that field.
+When the watch calls `sendMessageWithReply`, send a `{ callbackId, data }` envelope on `/capgo/message/withreply`. Generate `callbackId` on the watch (for example a UUID). The phone keys pending replies by that value and answers on `/capgo/reply/{callbackId}`. When the phone calls `sendMessage({ expectsReply: true })`, the phone assigns `callbackId` instead; use the Kotlin SDK on the watch for that path. For concurrent watch-originated requests, keep a **`requestId`** inside `data`, echo it from the phone in `replyToMessage`, and key handlers on the watch by that field.
 
 ```kotlin
 package com.example.myapp.wear
@@ -251,9 +251,12 @@ class CapgoWearBridge(private val context: Context) :
                     onError("No connected phone node")
                     return@execute
                 }
-                val payloadJson = JSONObject(data.toString()).apply {
-                    put("requestId", requestId)
-                }
+                val payloadJson = JSONObject()
+                    .put("callbackId", requestId)
+                    .put(
+                        "data",
+                        JSONObject(data.toString()).apply { put("requestId", requestId) },
+                    )
                 pendingReplyHandlers[requestId] = onReply
                 val timeout = timeoutScheduler.schedule(
                     {
@@ -451,7 +454,7 @@ Call `setupWatchListeners()` early in your app bootstrap (for example after `pla
 
 4. Send **`CapgoWatch.sendMessage`** from the phone and verify `bridge.onMessage` on the watch.
 
-5. Send from the watch with **`sendMessageWithReply`** and confirm **`messageReceivedWithReply`** plus **`replyToMessage`** delivers on `/capgo/reply/{callbackId}`.
+5. Send from the watch with **`sendMessageWithReply`** (watch-generated `callbackId` in the envelope) and confirm **`messageReceivedWithReply`** plus **`replyToMessage`** delivers on `/capgo/reply/{callbackId}`.
 
 6. Test **`updateApplicationContext`** and **`transferUserInfo`** in both directions using the DataItem paths above.
 </Steps>
