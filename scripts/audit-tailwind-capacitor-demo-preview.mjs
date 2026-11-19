@@ -68,18 +68,17 @@ const consoleErrors = []
  * @param {boolean} dark
  */
 async function loadShell(page, platform, dark) {
-  const consoleErrorsLocal = []
   page.removeAllListeners('console')
   page.removeAllListeners('pageerror')
   page.on('console', (msg) => {
-    if (msg.type() === 'error') consoleErrorsLocal.push(msg.text())
+    if (msg.type() === 'error') consoleErrors.push(msg.text())
   })
   page.on('pageerror', (err) => {
-    consoleErrorsLocal.push(err.message)
+    consoleErrors.push(err.message)
   })
   const shellUrl = `${baseUrl}/plugins/tailwind-capacitor/demo/shell/?platform=${platform}&dark=${dark ? '1' : '0'}`
   await page.goto(shellUrl, { waitUntil: 'networkidle', timeout: 120_000 })
-  return { shellUrl, consoleErrorsLocal }
+  return { shellUrl }
 }
 
 /**
@@ -97,16 +96,13 @@ async function assertRootTheme(page, platform) {
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } })
 let checked = 0
 
-const iosLoad = await loadShell(page, 'ios', false)
+await loadShell(page, 'ios', false)
 await assertRootTheme(page, 'ios')
 const iosRoot = (await page.locator('#tc-demo-root').getAttribute('class')) ?? ''
-consoleErrors.push(...iosLoad.consoleErrorsLocal)
 
-const materialLoad = await loadShell(page, 'material', false)
+await loadShell(page, 'material', false)
 await assertRootTheme(page, 'material')
 const materialRoot = (await page.locator('#tc-demo-root').getAttribute('class')) ?? ''
-
-consoleErrors.push(...materialLoad.consoleErrorsLocal)
 if (iosRoot === materialRoot) {
   failures.push({ name: 'theme:compare', reason: 'iOS and Material roots share identical class lists', iosRoot, materialRoot })
 } else if (!iosRoot.includes('c-ios') || !materialRoot.includes('c-material')) {
@@ -115,8 +111,7 @@ if (iosRoot === materialRoot) {
 
 for (const check of overlayChecks) {
   try {
-    const { consoleErrorsLocal } = await loadShell(page, 'ios', false)
-    consoleErrors.push(...consoleErrorsLocal)
+    await loadShell(page, 'ios', false)
     const section = page.locator(`#${check.section}`)
     await page.evaluate(() => {
       window.scrollTo(0, 0)
@@ -185,6 +180,14 @@ if (!notificationText.includes('new message') || !notificationText.includes('you
 }
 
 await browser.close()
+
+if (consoleErrors.length > 0) {
+  failures.push({
+    name: 'console',
+    reason: 'console errors during demo audit',
+    console: [...new Set(consoleErrors)].slice(0, 20),
+  })
+}
 
 const report = {
   checked,

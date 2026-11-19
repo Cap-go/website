@@ -202,7 +202,11 @@ async function overlayTriggerContrastIssues(frame, label, sectionId = null, fall
     }))
 }
 
-async function waitForDemoIframeReady(page) {
+/**
+ * @param {import('playwright').Page} page
+ * @param {{ platform: 'ios' | 'material', dark: boolean }} combo
+ */
+async function waitForDemoIframeReady(page, combo) {
   const iframe = page.locator('#tc-demo-iframe')
   await iframe.evaluate((el) => {
     if (el instanceof HTMLIFrameElement) {
@@ -216,6 +220,21 @@ async function waitForDemoIframeReady(page) {
     }
     return undefined
   })
+  const want = combo.platform === 'ios' ? 'c-ios' : 'c-material'
+  const frame = page.frameLocator('#tc-demo-iframe')
+  const root = frame.locator('#tc-demo-root')
+  await root.waitFor({ state: 'visible', timeout: 60_000 })
+  for (let attempt = 0; attempt < 45; attempt += 1) {
+    const classes = (await root.getAttribute('class')) ?? ''
+    const docDark = await frame.locator('html').evaluate((node) => node.classList.contains('dark')).catch(() => false)
+    if (classes.includes(want) && docDark === combo.dark) return
+    await page.waitForTimeout(400)
+  }
+  const classes = (await root.getAttribute('class')) ?? ''
+  const docDark = await frame.locator('html').evaluate((node) => node.classList.contains('dark')).catch(() => false)
+  throw new Error(
+    `demo iframe theme not ready (want ${want}, dark=${combo.dark}; got classes="${classes}", html.dark=${docDark})`,
+  )
 }
 
 async function tailwindCapacitorDemoOverlayTriggers(page) {
@@ -231,7 +250,7 @@ async function tailwindCapacitorDemoOverlayTriggers(page) {
   for (const combo of combos) {
     await page.locator(`[data-tc-platform="${combo.platform}"]`).click()
     await page.locator(`[data-tc-dark="${combo.dark ? '1' : '0'}"]`).click()
-    await waitForDemoIframeReady(page)
+    await waitForDemoIframeReady(page, combo)
     await frame.locator('button.tc-demo-overlay-trigger').first().waitFor({ state: 'visible', timeout: 30_000 })
     issues.push(...(await overlayTriggerContrastIssues(frame, combo.label)))
   }
