@@ -106,6 +106,9 @@ const listener = await BluetoothLowEnergy.addListener('deviceScanned', ({ device
 });
 
 await BluetoothLowEnergy.startScan({ timeout: 5000 });
+
+await new Promise((resolve) => setTimeout(resolve, 5000));
+
 await BluetoothLowEnergy.stopScan();
 await listener.remove();
 ```
