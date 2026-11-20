@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Unanswered appeals, DSA complaint, China AI rule and a false Ready for Distribution email">
+  <title>Unanswered appeals, DSA complaint, China AI rule and a false Ready for Distribution email</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="24" y="40" width="88" height="52" rx="8" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <text x="36" y="58" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">appeal</text>
+  <text x="36" y="72" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7" opacity="0.5">no reply</text>
+  <path d="M76 66 L120 66" stroke="#374151" stroke-width="2" stroke-dasharray="4 4"/>
+  <rect x="120" y="40" width="80" height="52" rx="8" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <text x="132" y="62" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7" font-weight="600">DSA</text>
+  <text x="132" y="76" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">reply</text>
+  <rect x="212" y="36" width="84" height="60" rx="8" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="224" y="56" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7" font-weight="600">China AI</text>
+  <text x="224" y="70" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">full reject</text>
+  <rect x="48" y="108" width="224" height="36" rx="8" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="60" y="128" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="8">Ready for Distribution</text>
+  <rect x="48" y="152" width="224" height="32" rx="8" fill="#111827" stroke="#F87171" stroke-width="2"/>
+  <text x="60" y="172" fill="#F87171" font-family="system-ui,sans-serif" font-size="8">Waiting for Review</text>
+  <path d="M160 144 L160 152" stroke="#FBBF24" stroke-width="2"/>
+  <text x="168" y="148" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">3 days</text>
+</svg>

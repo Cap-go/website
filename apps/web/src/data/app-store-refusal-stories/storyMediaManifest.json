@@ -352,5 +352,18 @@
   "no-ads-answer-in-age-rating-questionnaire-while-showing-banner-ads": null,
   "health-button-wording-unused-bluetooth-permission-then-missing-weather-attribution": null,
   "five-apps-one-approved-icon-mismatch-invisible-character-login-spam-nine-answers": null,
-  "four-apps-4-3-in-one-month-merged-into-one-app-approved": null
+  "four-apps-4-3-in-one-month-merged-into-one-app-approved": null,
+  "two-unanswered-appeals-dsa-complaint-china-ai-rejection-false-ready-for-distribution-email": {
+    "src": "/app-store-refusal-horror-story/screenshots/two-unanswered-appeals-dsa-complaint-china-ai-rejection-false-ready-for-distribution-email.webp",
+    "alt": "App Store Connect still showing the iOS version waiting for review, above an Apple Support email saying the app is Ready for Distribution, with identifiers covered",
+    "width": 1477,
+    "height": 2325
+  },
+  "mac-in-subtitle-5-2-5-same-build-approved-after-three-days": null,
+  "three-weeks-in-review-then-4-1-c-for-a-brand-name-in-the-subtitle": {
+    "src": "/app-store-refusal-horror-story/screenshots/three-weeks-in-review-then-4-1-c-for-a-brand-name-in-the-subtitle.webp",
+    "alt": "App Store search results for the same brand name, with app names, icons and screenshots covered, showing other listings using it in their subtitles",
+    "width": 945,
+    "height": 1631
+  }
 }
