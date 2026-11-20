@@ -45,7 +45,7 @@ If you came here to download signing files, follow these steps first. You need a
 If the certificate and private key are already in your login keychain (for example after a teammate imported a profile), skip to step 4 and export that identity. Creating a new certificate here will not match an existing provisioning profile that lists a different certificate.
 
 1. Open **Keychain Access**, then **Certificate Assistant > Request a Certificate From a Certificate Authority**. Enter your email, choose **Saved to disk**, and continue. That creates a private key in your login keychain and a `.certSigningRequest` file on disk.
-2. In [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources), open **Certificates**, click the add button (**+**), pick **Apple Distribution** or **Apple Development** (under **In-House and Ad Hoc** for the Enterprise Program), upload the CSR, and **Download** the `.cer`.
+2. In [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources), open **Certificates**, click the add button (**+**), then pick **Apple Distribution** or **Apple Development** for the standard Apple Developer Program. In the Enterprise Program, under **Software**, choose **In-House and Ad Hoc**, upload the CSR, and **Download** the `.cer`.
 3. Double-click the `.cer` so Keychain Access pairs it with the private key from step 1.
 4. Under **My Certificates**, right-click the certificate that shows a disclosure triangle (certificate plus private key), choose **Export**, pick **Personal Information Exchange (.p12)**, set a password, and save.
 
@@ -53,7 +53,7 @@ If the certificate and private key are already in your login keychain (for examp
 
 1. Create a private key and CSR with OpenSSL or the [iOS certificate generator](/tools/ios-certificate-generator/).
 2. Upload the CSR under **Certificates** in the Apple Developer portal and download the `.cer`.
-3. Convert the certificate and export a `.p12` with OpenSSL (see [Option 3: create them without a Mac](#option-3-create-them-without-a-mac) below). For a full walkthrough without Xcode, see [Capacitor development on Linux](/blog/capacitor-development-on-linux/) or [build an iOS app from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/).
+3. Convert the certificate and export a `.p12` with OpenSSL (see [Option 3: create them without a Mac](#option-3-create-them-without-a-mac) below). Use `-legacy` only on OpenSSL 3.x; omit it on OpenSSL 1.1.x and LibreSSL. For a full walkthrough without Xcode, see [Capacitor development on Linux](/blog/capacitor-development-on-linux/) or [build an iOS app from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/).
 
 ### Download a `.mobileprovision` provisioning profile
 
@@ -194,7 +194,7 @@ openssl pkcs12 -export -inkey ios_distribution.key -in distribution.pem \
   -out ios_distribution.p12 -legacy
 ```
 
-The `-legacy` flag matters with OpenSSL 3.x: without it, the `.p12` uses encryption algorithms that macOS keychain tools reject with an "invalid password" error even when the password is correct. On OpenSSL 1.1.x, omit `-legacy` because that option does not exist.
+The `-legacy` flag matters with OpenSSL 3.x: without it, the `.p12` uses encryption algorithms that macOS keychain tools reject with an "invalid password" error even when the password is correct. On OpenSSL 1.1.x and LibreSSL, omit `-legacy` because that option is not available.
 
 If you prefer not to install OpenSSL, the [iOS certificate generator](/tools/ios-certificate-generator/) creates the CSR and private key for you. They come from a stateless Capgo endpoint that does not store them, and only its `.cer` to `.p12` converter runs fully in your browser. If your policy requires the key to be generated on your machine, use the OpenSSL commands above.
 
