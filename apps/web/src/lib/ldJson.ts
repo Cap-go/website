@@ -18,7 +18,13 @@ import type {
   WebSite,
   WithContext,
 } from 'schema-dts'
-import { CAPGO_LEGAL_NAME, CAPGO_POSTAL_ADDRESS } from '../../../shared/agentDiscovery'
+import {
+  CAPGO_LEGAL_NAME,
+  CAPGO_POSTAL_ADDRESS,
+  CAPGO_US_ENTITY_LEGAL_NAME,
+  CAPGO_US_POSTAL_ADDRESS,
+  capgoUsEntityId,
+} from '../../../shared/agentDiscovery'
 
 // Re-export schema-dts types for external use
 export type {
@@ -144,10 +150,23 @@ export function toLdJsonBlocks(data: unknown): unknown[] {
 /**
  * Create a complete Organization schema for Capgo
  */
+export function createCapgoUsOrganization(config: RuntimeConfig['public']): Organization {
+  return {
+    '@type': 'Organization',
+    '@id': capgoUsEntityId(config.baseUrl),
+    name: CAPGO_US_ENTITY_LEGAL_NAME,
+    legalName: CAPGO_US_ENTITY_LEGAL_NAME,
+    url: config.baseUrl,
+    parentOrganization: { '@id': capgoOrganizationId(config.baseUrl) },
+    address: CAPGO_US_POSTAL_ADDRESS,
+    areaServed: 'US',
+  }
+}
+
 export function createCapgoOrganization(config: RuntimeConfig['public']): Organization {
   return {
     '@type': 'Organization',
-    '@id': `${config.baseUrl}/#organization`,
+    '@id': capgoOrganizationId(config.baseUrl),
     name: 'Capgo',
     legalName: CAPGO_LEGAL_NAME,
     alternateName: ['Capgo.app', 'Capgo Live Updates'],
@@ -162,13 +181,15 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
     sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
     description: CAPGO_ORGANIZATION_DESCRIPTION,
     email: 'support@capgo.app',
-    address: CAPGO_POSTAL_ADDRESS,
+    address: [CAPGO_POSTAL_ADDRESS, CAPGO_US_POSTAL_ADDRESS],
+    subOrganization: createCapgoUsOrganization(config),
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'technical support',
       email: 'support@capgo.app',
       url: `${config.baseUrl}/contact/`,
       availableLanguage: ['English'],
+      areaServed: ['US', 'EE'],
     },
   }
 }

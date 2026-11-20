@@ -35,7 +35,21 @@ export const CAPGO_POSTAL_ADDRESS = {
   addressCountry: 'EE',
 }
 
+export const CAPGO_US_POSTAL_ADDRESS = {
+  '@type': 'PostalAddress' as const,
+  streetAddress: '131 Continental Dr, Suite 305',
+  addressLocality: 'Newark',
+  addressRegion: 'DE',
+  postalCode: '19713',
+  addressCountry: 'US',
+}
+
 export const CAPGO_LEGAL_NAME = 'Digital Shift OÜ'
+export const CAPGO_US_ENTITY_LEGAL_NAME = 'CodepushGo, LLC'
+
+export function capgoUsEntityId(baseUrl: string): string {
+  return `${baseUrl}/#us-entity`
+}
 
 export const WHEN_TO_USE_MARKDOWN = `## When to use Capgo
 
