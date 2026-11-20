@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-11-20T11:00:00.000Z
-updated_at: 2026-11-20T11:00:00.000Z
+updated_at: 2026-11-20T13:15:49.000Z
 head_image: /blog-images/migrating-cordova-to-capacitor.png
 head_image_alt: "Illustration of migrating a Cordova app to Capacitor, used for a Bluetooth Low Energy plugin guide"
 keywords: cordova-plugin-ble-central alternative, capacitor ble, @capgo/capacitor-bluetooth-low-energy, ble.scan cordova migration
