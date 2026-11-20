@@ -261,6 +261,87 @@ body:has(.lu) {
 .lu .hero-meta .check {
   color: var(--relief-blue);
 }
+.lu .hero-steps {
+  list-style: none;
+  margin: 36px auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 960px;
+  text-align: left;
+}
+@media (max-width: 720px) {
+  .lu .hero-steps {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 28px;
+  }
+}
+.lu .hero-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  background: rgba(13, 21, 37, 0.7);
+}
+.lu .hero-step-num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--cap-blue-600);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.lu .hero-step-copy {
+  min-width: 0;
+}
+.lu .hero-step-title {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.lu .hero-step-link {
+  color: inherit;
+  text-decoration: none;
+}
+.lu .hero-step-link span {
+  color: var(--relief-blue);
+}
+.lu .hero-step-link:hover,
+.lu .hero-step-link:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--relief-blue);
+  text-underline-offset: 3px;
+}
+.lu .hero-step-body {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.68);
+}
+.lu .hero-step-cmd {
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 14, 26, 0.9);
+  color: var(--relief-blue);
+  font-family: var(--lu-font-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
 .lu .hero-strip {
   margin: 40px auto 0;
   display: grid;

@@ -60,6 +60,14 @@ const softwareLdJson = createSoftwareApplicationLdJson(Astro.locals.runtimeConfi
   offers: { price: '12', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 })
 
+// The hero CTA answers "what happens after I click": the same three steps the register page shows next to the form.
+const registerUrl = getRelativeLocaleUrl(locale, 'register')
+const heroSteps = [
+  { title: m.register_step_account_title({}, { locale }), body: m.register_step_account_body({}, { locale }), href: registerUrl },
+  { title: m.register_step_init_title({}, { locale }), body: m.register_step_init_body({}, { locale }), command: 'npx @capgo/cli@latest init' },
+  { title: m.register_step_ship_title({}, { locale }), body: m.register_step_ship_body({}, { locale }) },
+]
+
 const faqItems = [
   { question: m.live_update_faq_q1({}, { locale }), answer: m.live_update_faq_a1({}, { locale }) },
   { question: m.live_update_faq_q2({}, { locale }), answer: m.live_update_faq_a2({}, { locale }) },
@@ -281,6 +289,29 @@ const featureTiles = [
             </span>
           ))}
         </div>
+        <ol class="hero-steps" aria-label={m.live_update_hero_steps_label({}, { locale })}>
+          {heroSteps.map((step, index) => (
+            <li class="hero-step">
+              <span class="hero-step-num" aria-hidden="true">
+                {index + 1}
+              </span>
+              <div class="hero-step-copy">
+                <p class="hero-step-title">
+                  {step.href ? (
+                    <a class="hero-step-link" href={step.href}>
+                      {step.title}
+                      <span aria-hidden="true"> →</span>
+                    </a>
+                  ) : (
+                    step.title
+                  )}
+                </p>
+                <p class="hero-step-body">{step.body}</p>
+                {step.command && <code class="hero-step-cmd">{step.command}</code>}
+              </div>
+            </li>
+          ))}
+        </ol>
         <div class="hero-strip">
           {heroStats.map((item) => (
             <div class="hero-strip-cell">
