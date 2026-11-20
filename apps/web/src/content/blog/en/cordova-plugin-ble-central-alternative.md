@@ -62,19 +62,25 @@ Add the Bluetooth usage strings from the plugin README to `Info.plist` and decla
 ```ts
 import { BluetoothLowEnergy } from '@capgo/capacitor-bluetooth-low-energy';
 
-export async function readHeartRate(deviceId: string) {
+export async function subscribeHeartRate(deviceId: string) {
   await BluetoothLowEnergy.initialize({ mode: 'central' });
   await BluetoothLowEnergy.requestPermissions();
 
   await BluetoothLowEnergy.connect({ deviceId });
 
-  const { value } = await BluetoothLowEnergy.readCharacteristic({
+  await BluetoothLowEnergy.startCharacteristicNotifications({
     deviceId,
     service: '180D',
     characteristic: '2A37',
   });
 
-  return value;
+  const handle = await BluetoothLowEnergy.addListener('characteristicChanged', (event) => {
+    if (event.deviceId === deviceId && event.characteristic === '2A37') {
+      return event.value;
+    }
+  });
+
+  return handle;
 }
 ```
 
