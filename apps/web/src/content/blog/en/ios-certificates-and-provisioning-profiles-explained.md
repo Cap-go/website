@@ -17,9 +17,9 @@ origin: human
 next_blog: ''
 faq:
   - question: "Where do I download a .mobileprovision file?"
-    answer: "Sign in at developer.apple.com, open Certificates, Identifiers & Profiles, choose Profiles in the sidebar, open the profile you need (or create one with the add button), then click Download. The file saves as a .mobileprovision provisioning profile for Xcode or your CI."
+    answer: "Sign in at developer.apple.com, open Certificates, Identifiers & Profiles, choose Profiles in the sidebar, select the profile, then click Download. The file saves as a .mobileprovision for Xcode or your CI. If Xcode manages signing for you, profiles it creates may not appear in the portal: in Xcode open Settings > Accounts, select your team, and click Download Manual Profiles, or copy the profile from ~/Library/MobileDevice/Provisioning Profiles on your Mac."
   - question: "How do I get a .p12 certificate without a Mac?"
-    answer: "Generate a private key and certificate signing request with OpenSSL or the Capgo iOS certificate generator, upload the CSR under Certificates in the Apple Developer portal, download the .cer Apple issues, then run openssl pkcs12 -export with your private key and the certificate PEM to create a .p12. Use the -legacy flag with OpenSSL 3 so macOS can import the file."
+    answer: "Generate a private key and certificate signing request with OpenSSL or the Capgo iOS certificate generator, upload the CSR under Certificates in the Apple Developer portal, download the .cer Apple issues, then run openssl pkcs12 -export with your private key and the certificate PEM to create a .p12. Add -legacy only on OpenSSL 3.x so macOS can import the file; OpenSSL 1.1.x does not support that flag."
   - question: "Does a provisioning profile include the certificate?"
     answer: "The .mobileprovision file lists which Apple-issued certificates may sign the app and embeds the public certificate data, but it does not contain your private key. You still need the matching .p12 (or the certificate plus private key in Keychain) that pairs with one of the certificates named in the profile."
   - question: "What is an iOS enterprise certificate?"
@@ -42,8 +42,10 @@ If you came here to download signing files, follow these steps first. You need a
 
 **On a Mac (Keychain Access):**
 
+If the certificate and private key are already in your login keychain (for example after a teammate imported a profile), skip to step 4 and export that identity. Creating a new certificate here will not match an existing provisioning profile that lists a different certificate.
+
 1. Open **Keychain Access**, then **Certificate Assistant > Request a Certificate From a Certificate Authority**. Enter your email, choose **Saved to disk**, and continue. That creates a private key in your login keychain and a `.certSigningRequest` file on disk.
-2. In [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources), open **Certificates**, click the add button (**+**), pick **Apple Distribution** or **Apple Development**, upload the CSR, and **Download** the `.cer`.
+2. In [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources), open **Certificates**, click the add button (**+**), pick **Apple Distribution** or **Apple Development** (under **In-House and Ad Hoc** for the Enterprise Program), upload the CSR, and **Download** the `.cer`.
 3. Double-click the `.cer` so Keychain Access pairs it with the private key from step 1.
 4. Under **My Certificates**, right-click the certificate that shows a disclosure triangle (certificate plus private key), choose **Export**, pick **Personal Information Exchange (.p12)**, set a password, and save.
 
@@ -55,10 +57,17 @@ If you came here to download signing files, follow these steps first. You need a
 
 ### Download a `.mobileprovision` provisioning profile
 
+**Download an existing profile:**
+
 1. Sign in at [developer.apple.com/account/resources](https://developer.apple.com/account/resources) and open **Certificates, Identifiers & Profiles**.
-2. Click **Profiles** in the sidebar, then the add button (**+**) to create a profile, or select an existing profile.
-3. Pick the profile type (for example **iOS App Development**, **Ad Hoc**, or **App Store Connect**), choose the App ID, one or more certificates, and devices when the type requires them.
-4. Name the profile, click **Generate**, then click **Download**. The file uses the `.mobileprovision` extension.
+2. Click **Profiles** in the sidebar, select the profile you need, then click **Download**. The file uses the `.mobileprovision` extension.
+
+**Create a new profile, then download:**
+
+1. In **Profiles**, click the add button (**+**).
+2. Pick the profile type (for example **iOS App Development**, **Ad Hoc**, **App Store Connect**, or **In-House** for Enterprise).
+3. Choose the App ID, one or more certificates, and devices when the type requires them.
+4. Name the profile, click **Generate**, then click **Download**.
 
 If you change devices, capabilities, or certificates later, edit or recreate the profile in the portal and **download it again**. Old files on disk do not update by themselves.
 
@@ -185,7 +194,7 @@ openssl pkcs12 -export -inkey ios_distribution.key -in distribution.pem \
   -out ios_distribution.p12 -legacy
 ```
 
-The `-legacy` flag matters with OpenSSL 3: without it, the `.p12` uses encryption algorithms that macOS keychain tools reject with an "invalid password" error even when the password is correct.
+The `-legacy` flag matters with OpenSSL 3.x: without it, the `.p12` uses encryption algorithms that macOS keychain tools reject with an "invalid password" error even when the password is correct. On OpenSSL 1.1.x, omit `-legacy` because that option does not exist.
 
 If you prefer not to install OpenSSL, the [iOS certificate generator](/tools/ios-certificate-generator/) creates the CSR and private key for you. They come from a stateless Capgo endpoint that does not store them, and only its `.cer` to `.p12` converter runs fully in your browser. If your policy requires the key to be generated on your machine, use the OpenSSL commands above.
 
