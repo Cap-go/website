@@ -1,15 +1,27 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { CAPGO_LEGAL_NAME, CAPGO_US_ENTITY_LEGAL_NAME } from '../../../shared/agentDiscovery'
 
-const brand = Astro.locals.runtimeConfig.public.brand
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const brand = config.brand
 
-const title = [brand, m.imprint({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.imprint_description({}, { locale: Astro.locals.locale }).replace('$1', brand)
+const title = [brand, m.imprint({}, { locale })].join(' | ')
+const description = m.imprint_description({}, { locale }).replace('$1', brand)
+const imprintUrl = `${config.baseUrl}${getRelativeLocaleUrl(locale, '/imprint/')}`
 
-const content = { title, description }
+const content = {
+  title,
+  description,
+  ldJSON: createLdJsonGraph(config, createWebPageLdJson(config, { name: title, description, url: imprintUrl }), {
+    includeOrganization: true,
+  }),
+}
 
-const props = { locale: Astro.locals.locale }
+const props = { locale }
 ---
 
 <Layout content={content}>
@@ -20,12 +32,35 @@ const props = { locale: Astro.locals.locale }
     <div class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">{m.get_in_touch({}, { locale: props.locale })}</h1>
       <p class="mt-6 max-w-3xl text-xl text-indigo-100">
-        {m.company_name({}, { locale: props.locale })}: Digital Shift OÜ <br />
-        {m.register_code({}, { locale: props.locale })}: 14236508 <br />
-        {m.address({}, { locale: props.locale })}: Sepapaja tn 6, 15551 Tallinn, Estonia <br />
+        <span itemscope itemtype="https://schema.org/Organization">
+          <meta itemprop="name" content={CAPGO_LEGAL_NAME} />
+          <meta itemprop="legalName" content={CAPGO_LEGAL_NAME} />
+          <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <meta itemprop="streetAddress" content="Sepapaja tn 6" />
+            <meta itemprop="postalCode" content="15551" />
+            <meta itemprop="addressLocality" content="Tallinn" />
+            <meta itemprop="addressCountry" content="EE" />
+          </span>
+          {m.company_name({}, { locale: props.locale })}: Digital Shift OÜ <br />
+          {m.register_code({}, { locale: props.locale })}: 14236508 <br />
+          {m.address({}, { locale: props.locale })}: Sepapaja tn 6, 15551 Tallinn, Estonia <br />
+        </span>
         <br />
-        {m.company_name({}, { locale: props.locale })}: CodepushGo, LLC (Delaware, USA) <br />
-        {m.address({}, { locale: props.locale })}: 131 Continental Dr, Suite 305, Newark, DE 19713, United States <br />
+        <span itemscope itemtype="https://schema.org/Organization">
+          <meta itemprop="name" content={CAPGO_US_ENTITY_LEGAL_NAME} />
+          <meta itemprop="legalName" content={CAPGO_US_ENTITY_LEGAL_NAME} />
+          <link itemprop="url" href={config.baseUrl} />
+          <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <meta itemprop="streetAddress" content="131 Continental Dr, Suite 305" />
+            <meta itemprop="addressLocality" content="Newark" />
+            <meta itemprop="addressRegion" content="DE" />
+            <meta itemprop="postalCode" content="19713" />
+            <meta itemprop="addressCountry" content="US" />
+          </span>
+          {m.company_name({}, { locale: props.locale })}: CodepushGo, LLC <br />
+          {m.address({}, { locale: props.locale })}: 131 Continental Dr, Suite 305, Newark, DE 19713, United States <br />
+        </span>
+        <br />
         <br />
         {m.hosting({}, { locale: props.locale })}: Cloudflare Egde, Netlify Egde<br />
         {m.data_storage({}, { locale: props.locale })}: AWS eu-west-2 (London) <br />

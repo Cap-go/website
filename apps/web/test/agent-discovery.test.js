@@ -112,17 +112,47 @@ test('organization schema includes postal address and support contact', () => {
     baseUrl: 'https://capgo.app',
     baseApiUrl: 'https://api.capgo.app',
   })
-  expect(org.address).toMatchObject({
-    '@type': 'PostalAddress',
-    streetAddress: 'Sepapaja tn 6',
-    addressLocality: 'Tallinn',
-    addressCountry: 'EE',
-  })
+  expect(org.address).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        '@type': 'PostalAddress',
+        streetAddress: 'Sepapaja tn 6',
+        addressLocality: 'Tallinn',
+        addressCountry: 'EE',
+      }),
+      expect.objectContaining({
+        '@type': 'PostalAddress',
+        streetAddress: '131 Continental Dr, Suite 305',
+        addressLocality: 'Newark',
+        addressRegion: 'DE',
+        postalCode: '19713',
+        addressCountry: 'US',
+      }),
+    ]),
+  )
   expect(org.contactPoint).toMatchObject({
     contactType: 'technical support',
     email: 'support@capgo.app',
+    areaServed: ['US', 'EE'],
   })
   expect(org.legalName).toBe('Digital Shift OÜ')
+  expect(org.subOrganization).toMatchObject({
+    '@type': 'Organization',
+    '@id': 'https://capgo.app/#us-entity',
+    name: 'CodepushGo, LLC',
+    legalName: 'CodepushGo, LLC',
+    url: 'https://capgo.app',
+    areaServed: 'US',
+    parentOrganization: { '@id': 'https://capgo.app/#organization' },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '131 Continental Dr, Suite 305',
+      addressLocality: 'Newark',
+      addressRegion: 'DE',
+      postalCode: '19713',
+      addressCountry: 'US',
+    },
+  })
 })
 
 const catalogFile = (name) => JSON.parse(readFileSync(new URL(`../public/.well-known/${name}`, import.meta.url), 'utf8'))
