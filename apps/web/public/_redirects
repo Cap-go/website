@@ -12,7 +12,8 @@
 /docs/plugin/know-issues /docs/plugins/updater/known-issues/ 302
 /docs/plugin/know-issues/ /docs/plugins/updater/known-issues/ 302
 /self-hosted-capgo /docs/plugins/updater/self-hosted/getting-started/ 302
-/self-hosted-live-updates /docs/plugins/updater/self-hosted/auto-update/ 200
+/self-hosted-live-updates /blog/self-hosted-live-updates/ 301
+/self-hosted-live-updates/ /blog/self-hosted-live-updates/ 301
 /docs/getting-started/ /docs/getting-started/quickstart/ 301
 /docs/plugin/cloud-mode/getting-started/ /docs/getting-started/quickstart/ 302
 /docs/plugin/cloud-mode/auto-update /docs/getting-started/add-an-app/ 302
@@ -297,6 +298,7 @@
 /sitemap.xml /sitemap-index.xml 301
 /sitemap-index.xml/ /sitemap-index.xml 301
 /sitemap-0.xml/ /sitemap-0.xml 301
+/sitemap-docs-0.xml/ /sitemap-docs-0.xml 301
 /llms-full.txt/ /llms-full.txt 301
 /llm.txt/ /llms.txt 301
 /login/ /register/ 301
@@ -454,6 +456,40 @@
 /plugins/capacitor-sheets/ /docs/plugins/sheets/ 301
 /plugins/sheets /docs/plugins/sheets/ 301
 /plugins/sheets/ /docs/plugins/sheets/ 301
+
+# Bing Site Explorer dead links (0 impressions, 0 backlinks, live 404 verified 2026-11-18)
+/how-to-add-dependencies-in-capacitor-plugins /blog/how-to-add-dependencies-in-capacitor-plugins/ 301
+/how-to-add-dependencies-in-capacitor-plugins/ /blog/how-to-add-dependencies-in-capacitor-plugins/ 301
+/session-management-standards-for-app-stores /blog/session-management-standards-for-app-stores/ 301
+/session-management-standards-for-app-stores/ /blog/session-management-standards-for-app-stores/ 301
+/appflow-shutdown-alternative /blog/appflow-shutdown-alternative/ 301
+/appflow-shutdown-alternative/ /blog/appflow-shutdown-alternative/ 301
+/capacitor-comprehensive-guide /blog/capacitor-comprehensive-guide/ 301
+/capacitor-comprehensive-guide/ /blog/capacitor-comprehensive-guide/ 301
+/create-offline-screen-in-vue-angular-react /blog/create-offline-screen-in-vue-angular-react/ 301
+/create-offline-screen-in-vue-angular-react/ /blog/create-offline-screen-in-vue-angular-react/ 301
+/how-live-updates-for-capacitor-work /blog/how-live-updates-for-capacitor-work/ 301
+/how-live-updates-for-capacitor-work/ /blog/how-live-updates-for-capacitor-work/ 301
+/how-rbac-secures-ota-updates-in-capacitor-apps /blog/how-rbac-secures-ota-updates-in-capacitor-apps/ 301
+/how-rbac-secures-ota-updates-in-capacitor-apps/ /blog/how-rbac-secures-ota-updates-in-capacitor-apps/ 301
+/manage-dev-and-prod-build-with-github-actions /blog/manage-dev-and-prod-build-with-github-actions/ 301
+/manage-dev-and-prod-build-with-github-actions/ /blog/manage-dev-and-prod-build-with-github-actions/ 301
+/capacitor-cli-project-setup-guide /blog/capacitor-cli-project-setup-guide/ 301
+/capacitor-cli-project-setup-guide/ /blog/capacitor-cli-project-setup-guide/ 301
+/how-to-customize-build-scripts-with-capacitor-cli /blog/how-to-customize-build-scripts-with-capacitor-cli/ 301
+/how-to-customize-build-scripts-with-capacitor-cli/ /blog/how-to-customize-build-scripts-with-capacitor-cli/ 301
+/capacitor-app-initialization-step-by-step-guide /blog/capacitor-app-initialization-step-by-step-guide/ 301
+/capacitor-app-initialization-step-by-step-guide/ /blog/capacitor-app-initialization-step-by-step-guide/ 301
+/capgo-plugin-scheduling-updates-tutorial /blog/capgo-plugin-scheduling-updates-tutorial/ 301
+/capgo-plugin-scheduling-updates-tutorial/ /blog/capgo-plugin-scheduling-updates-tutorial/ 301
+/rollback-management-with-capgo-guide /blog/rollback-management-with-capgo-guide/ 301
+/rollback-management-with-capgo-guide/ /blog/rollback-management-with-capgo-guide/ 301
+/icp-filing-for-mobile-apps-in-china-step-by-step-guide /blog/icp-filing-for-mobile-apps-in-china-step-by-step-guide/ 301
+/icp-filing-for-mobile-apps-in-china-step-by-step-guide/ /blog/icp-filing-for-mobile-apps-in-china-step-by-step-guide/ 301
+/ssl-pinning-for-capacitor-apps /blog/ssl-pinning-for-capacitor-apps/ 301
+/ssl-pinning-for-capacitor-apps/ /blog/ssl-pinning-for-capacitor-apps/ 301
+/open-source-licecing /blog/open-source-licence/ 301
+/open-source-licecing/ /blog/open-source-licence/ 301
 
 # Dead URLs that still receive crawls and internal links (SEO audit 2026-11)
 /live-updates /live-update/ 301

@@ -18,6 +18,7 @@ type RedirectDefinition = {
 type RedirectRow = readonly [source: string, destination: string, status: RedirectStatus]
 
 const redirectRows: RedirectRow[] = [
+  ['/sitemap-docs-0.xml/', '/sitemap-docs-0.xml', 301],
   ['/docs/getting-started/', '/docs/getting-started/quickstart/', 301],
   ['/docs/plugins/updater/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 301],
   ['/docs/plugins/updater/commonProblems/', '/docs/plugins/updater/commonproblems/', 301],
