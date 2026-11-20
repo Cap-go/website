@@ -30,7 +30,9 @@ npx cap sync
 
 The plugin uses the [Google Play Age Signals API](https://developer.android.com/google/play/age-signals/). The native dependency defaults to `com.google.android.play:age-signals:0.0.6`. Google Play requires age-signals `0.0.4+` from **January 2027** in mandatory-sharing regions, so the plugin ships `0.0.6` by default.
 
-Override the library version in your app's `android/variables.gradle`:
+**Minimum supported version is `0.0.4`.** The plugin is built and unit tested in CI against both `0.0.4` and `0.0.6`. Play Age Signals `0.0.2` and `0.0.3` are **not supported** (they lack the types the plugin maps result fields from).
+
+Override the library version in your app's `android/variables.gradle` (any value from `0.0.4` up):
 
 ```gradle
 ext {
@@ -39,6 +41,20 @@ ext {
 ```
 
 By default, `requestAgeRange()` calls `checkAgeSignals()` only (`androidAgeSignalsAccess: 'never'`), which does not show Google's in-app sharing prompt. For mandatory-sharing regions or when you want the Play Store sharing UI, set `androidAgeSignalsAccess` to `'always'` or `'whenMandatory'`. See [Request age signals](https://developer.android.com/google/play/age-signals/request-age-signals/).
+
+### Access modes (`androidAgeSignalsAccess`)
+
+| Value | Behavior |
+| --- | --- |
+| `never` (default) | Calls `checkAgeSignals()` only. No in-app sharing prompt. |
+| `always` | Always calls `requestAgeSignalsAccess()` first (Google may show the sharing prompt when applicable). Calls `checkAgeSignals()` when access is `SHARED`; otherwise returns the access status (see the mapping below). |
+| `whenMandatory` | Applied at runtime on Play Age Signals `0.0.6+`: the plugin calls `getApplicableAgeFeatures()` and requests access only when it reports `MANDATORY_SHARING`. On `0.0.4` to `0.0.5` (where that method does not exist), or if the probe fails, it falls back to `checkAgeSignals()` only. |
+
+Unknown `androidAgeSignalsAccess` values are logged on Android and treated as `never`.
+
+### R8 / ProGuard
+
+`whenMandatory` reaches the `0.0.6` APIs through reflection. The plugin AAR ships `consumer-rules.pro` keep rules for `ApplicableAgeFeaturesRequest` and `ApplicableAgeFeature`, so minified release builds keep working with no extra setup. If those rules are stripped, `whenMandatory` falls back to `checkAgeSignals()` only.
 
 Requirements: Android API 24+ (minSdk) and an up-to-date Google Play Store.
 
@@ -114,7 +130,9 @@ export interface RequestAgeRangeOptions {
    *
    * - `never` (default): calls `checkAgeSignals()` only, matching pre-0.0.4 behavior with no in-app sharing prompt.
    * - `always`: always requests access first (Google may show the sharing prompt when applicable).
-   * - `whenMandatory`: requests access only when `getApplicableAgeFeatures()` reports `MANDATORY_SHARING`.
+   * - `whenMandatory`: requests access only when `getApplicableAgeFeatures()` reports `MANDATORY_SHARING` (Play Age Signals 0.0.6+ at runtime; on 0.0.4 to 0.0.5 or failure falls back to `checkAgeSignals()` only).
+   *
+   * Unknown values are logged on Android and treated as `never`.
    *
    * @default 'never'
    * @since 8.3.0
@@ -255,8 +273,11 @@ export type DeclarationSource =
 ```
 
 ### `AndroidUserStatus`
-Android-specific Google Play user status values (deprecated; mapped from `ageRangeSource` / `significantChangeStatus` on Play Age Signals 0.0.4+).
+Android-specific Google Play user status values.
 ```typescript
+/**
+ * @deprecated since 8.3.0. Mapped from `ageRangeSource` / `significantChangeStatus` on Play Age Signals 0.0.4+.
+ */
 export type AndroidUserStatus =
   | 'VERIFIED'
   | 'SUPERVISED'
