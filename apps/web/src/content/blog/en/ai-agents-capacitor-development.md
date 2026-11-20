@@ -48,7 +48,7 @@ You fix this with context the agent can load on demand, and tools it can call in
 | Layer | What it gives the agent | Capgo option |
 | --- | --- | --- |
 | Skills | Step-by-step procedures for specific tasks | [Capacitor skills](/skills/) (open source, Cap-go/capgo-skills) |
-| Hosted MCP | Account actions (apps, channels, rollouts, devices, stats, builds) and docs search | `https://api.capgo.app/mcp` (OAuth or API key) |
+| Hosted MCP | Account actions (apps, channels, rollouts, devices, stats, builds) and docs search | `https://mcp.capgo.app` (OAuth or API key) |
 | CLI MCP | Actions that need local files: bundle uploads, native build requests | `bunx @capgo/cli@latest mcp` |
 | CLI | Same actions as shell commands, easy to review | `bunx @capgo/cli@latest ...` |
 
@@ -72,7 +72,7 @@ claude plugin install capgo-cloud@capgo-skills
 The hosted server needs no install. Add it to Claude Code and sign in with OAuth when prompted:
 
 ```bash
-claude mcp add --transport http capgo https://api.capgo.app/mcp
+claude mcp add --transport http capgo https://mcp.capgo.app
 ```
 
 The CLI server runs locally over stdio and uses your Capgo login, so log in first:

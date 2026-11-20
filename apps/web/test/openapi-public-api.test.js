@@ -39,8 +39,8 @@ test('public API declares OAuth 2.0 with named scopes that match the authorizati
   const { CapgoOAuth, CapgoBearerAuth } = spec.components.securitySchemes
   expect(CapgoOAuth.type).toBe('oauth2')
   expect(CapgoOAuth.flows.authorizationCode).toMatchObject({
-    authorizationUrl: 'https://api.capgo.app/mcp/oauth/authorize',
-    tokenUrl: 'https://api.capgo.app/mcp/oauth/token',
+    authorizationUrl: 'https://mcp.capgo.app/oauth/authorize',
+    tokenUrl: 'https://mcp.capgo.app/oauth/token',
   })
   // Must match scopes_supported in the authorization server and protected resource metadata.
   expect(Object.keys(CapgoOAuth.flows.authorizationCode.scopes)).toEqual(['capgo'])

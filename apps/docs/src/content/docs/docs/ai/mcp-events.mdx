@@ -10,7 +10,7 @@ import { Aside } from '@astrojs/starlight/components'
 
 MCP Events let an agent **subscribe** to specific Capgo activity and receive **signed webhook deliveries** on an HTTPS URL you provide. The agent does not need to poll build status, bundle uploads, or channel deployments.
 
-Capgo models this on the [draft MCP Events specification](https://modelcontextprotocol.io) in the same spirit as other hosted MCP providers (for example Vercel). Deliveries use [Standard Webhooks](https://www.standardwebhooks.com/) signing. The hosted account MCP server at `https://api.capgo.app/mcp` exposes both protocol methods and `capgo_*` tool wrappers for clients that do not speak the Events protocol yet.
+Capgo models this on the [draft MCP Events specification](https://modelcontextprotocol.io) in the same spirit as other hosted MCP providers (for example Vercel). Deliveries use [Standard Webhooks](https://www.standardwebhooks.com/) signing. The hosted account MCP server at `https://mcp.capgo.app` exposes both protocol methods and `capgo_*` tool wrappers for clients that do not speak the Events protocol yet.
 
 <Aside type="note" title="Hosted only">
   MCP Events exist on the **hosted** account MCP server. The [local CLI MCP server](/docs/cli/reference/mcp/) runs over stdio and cannot receive inbound webhooks, so it does not offer event subscriptions.

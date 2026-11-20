@@ -62,7 +62,7 @@ export interface Agent {
   keywords: string[]
 }
 
-const HOSTED_MCP_URL = 'https://api.capgo.app/mcp'
+const HOSTED_MCP_URL = 'https://mcp.capgo.app'
 const LOCAL_MCP_COMMAND = 'npx @capgo/cli@latest mcp'
 const LOGIN_COMMAND = 'npx @capgo/cli@latest login'
 const SKILLS_COMMAND = 'npx skills add Cap-go/capgo-skills'
@@ -245,7 +245,7 @@ export const agents: Agent[] = [
     prompts: fullCycle({ stage: 'update', text: 'Upload this build to a new beta channel and give me a QR code to test it.' }),
     notes: [
       'Codex runs commands in your terminal, so it can build, upload, and roll back with the Capgo CLI too.',
-      'Prefer editing config? Add [mcp_servers.capgo] with url = "https://api.capgo.app/mcp" to ~/.codex/config.toml, then run codex mcp login capgo.',
+      'Prefer editing config? Add [mcp_servers.capgo] with url = "https://mcp.capgo.app" to ~/.codex/config.toml, then run codex mcp login capgo.',
       'Do not skip codex mcp login: without it, Codex connects without signing in and the Capgo tools cannot reach your account.',
       'The same config works in the Codex IDE extension and the Codex app.',
     ],
@@ -367,7 +367,7 @@ export const agents: Agent[] = [
     prompts: fullCycle({ stage: 'update', text: 'Create a beta channel and send this branch to it as a live update.' }),
     notes: [
       'Windsurf is now Devin Desktop. The setup above uses the Cascade MCP config file.',
-      'With the Devin CLI, run devin mcp add -s user capgo https://api.capgo.app/mcp, then devin mcp login capgo.',
+      'With the Devin CLI, run devin mcp add -s user capgo https://mcp.capgo.app, then devin mcp login capgo.',
       'On Teams and Enterprise, an admin MCP allowlist blocks servers that are not on it. Ask your admin to add Capgo.',
     ],
     faqs: [],
@@ -524,7 +524,7 @@ export const agents: Agent[] = [
     }),
     prompts: builderCycle({ stage: 'observe', text: 'Which devices are still on bundle 1.4.2?' }),
     notes: [
-      'Lovable supports custom MCP servers on all plans. Add https://api.capgo.app/mcp in Connectors with OAuth to manage channels, rollbacks, and stats from the Lovable chat.',
+      'Lovable supports custom MCP servers on all plans. Add https://mcp.capgo.app in Connectors with OAuth to manage channels, rollbacks, and stats from the Lovable chat.',
       'The connector is used only in the Lovable chat, never by your published app.',
       'Lovable cannot run the Capgo CLI. Run builds and uploads on your computer or in GitHub Actions.',
       'Keep GitHub sync on: changes you make in Lovable reach your repo, and CI can ship them as live updates.',
@@ -555,7 +555,7 @@ export const agents: Agent[] = [
     }),
     prompts: builderCycle({ stage: 'update', text: 'Pause the rollout on the production channel.' }),
     notes: [
-      'Bolt supports custom MCP servers. In the chat box, open Connectors, add https://api.capgo.app/mcp with HTTP transport and MCP OAuth, then turn it on for the project.',
+      'Bolt supports custom MCP servers. In the chat box, open Connectors, add https://mcp.capgo.app with HTTP transport and MCP OAuth, then turn it on for the project.',
       'Bolt cannot run the Capgo CLI for you. Run builds and uploads on your computer or in GitHub Actions.',
       'Bolt projects are usually Vite apps, so dist is the right webDir.',
     ],
@@ -586,7 +586,7 @@ export const agents: Agent[] = [
     }),
     prompts: builderCycle({ stage: 'publish', text: 'Request an Android release build and send it to the Google Play internal track.' }),
     notes: [
-      'Replit Agent supports remote MCP servers. Go to replit.com/integrations, add https://api.capgo.app/mcp under MCP Servers, and sign in with OAuth.',
+      'Replit Agent supports remote MCP servers. Go to replit.com/integrations, add https://mcp.capgo.app under MCP Servers, and sign in with OAuth.',
       'The Replit Shell can run the Capgo CLI, so builds and uploads work from the browser. Run npx @capgo/cli@latest login there once with your Capgo API key.',
       'Replit Agent does not start local MCP servers. Use the hosted MCP plus the CLI in the Shell.',
     ],
