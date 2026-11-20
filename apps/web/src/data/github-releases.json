@@ -1,6 +1,14 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.64.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.1",
+    "pubDate": "2026-11-19T14:01:37.000Z",
+    "description": "🆕 Changelog Performance Optimized analytics logging : Implemented sampling for high volume writes to reduce performance overhead and improve application responsiveness during heavy logging activities. Fixed Improved CI visual testing reliability : Fixed an issue where the review process would not fail when visual changes were detected but lacked the required screenshots, ensuring stricter quality control for UI changes. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22..."
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.63.2",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
@@ -312,14 +320,6 @@
     "description": "🆕 Changelog Added Introduced virtual inbox RPC for Cloudflare integration to enhance serverless workflow capabilities. Changed Updated Cloudflare legacy CLI manifest handling to provide clear warnings for deprecated configurations, ensuring better migration guidance. Fixed Resolved an issue on Windows where the command failed to spawn correctly in the MCP environment, restoring reliable build initiation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.44.2...capgo 22..."
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.44.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.44.2",
-    "pubDate": "2026-11-13T02:22:12.000Z",
-    "description": "🆕 Changelog Fixed Deferred processing of throttled console translations and restored the ability to track queue progress, ensuring that internationalization messages display correctly without blocking or failing in high volume scenarios. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.44.1...capgo 22.44.2"
-  },
-  {
     "category": "release",
     "title": "capacitor-accelerometer 8.0.58",
     "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.58",
@@ -473,11 +473,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-background-geolocation 8.6.4",
-    "link": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.6.4",
-    "guid": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.6.4",
-    "pubDate": "2026-11-13T13:07:03.000Z",
-    "description": "🆕 Changelog Fixed Aligned Android toolchain versions with official Capacitor 8 releases to ensure compatibility and prevent build issues. ( 110) 🔗 Full Changelog : https://github.com/Cap go/capacitor background geolocation/compare/8.6.3...8.6.4"
+    "title": "capacitor-background-geolocation 8.6.5",
+    "link": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.6.5",
+    "guid": "https://github.com/Cap-go/capacitor-background-geolocation/releases/tag/8.6.5",
+    "pubDate": "2026-11-19T18:08:24.000Z",
+    "description": "🆕 Changelog Changed Publish PR beta packages to the npm dist tag instead of , making pre release builds from pull requests easier to identify and install. Fixed Fix orphaned native deliveries on Android that could occur after Activity recreation, ensuring messages are correctly handled following configuration changes. 🔗 Full Changelog : https://github.com/Cap go/capacitor background geolocation/compare/8.6.4...8.6.5"
   },
   {
     "category": "release",
@@ -665,6 +665,14 @@
   },
   {
     "category": "release",
+    "title": "capacitor-firebase storage/v8.6.1",
+    "link": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.6.1",
+    "guid": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.6.1",
+    "pubDate": "2026-11-19T18:46:15.000Z",
+    "description": "🆕 Changelog chore(release): storage 8.6.1 (854e140) chore: sync from upstream capawesome team/capacitor firebase ( 27) (0a87852) 🔗 Full Changelog : https://github.com/Cap go/capacitor firebase/compare/storage/v9.0.0 beta.0...storage/v8.6.1"
+  },
+  {
+    "category": "release",
     "title": "capacitor-flash 8.0.54",
     "link": "https://github.com/Cap-go/capacitor-flash/releases/tag/8.0.54",
     "guid": "https://github.com/Cap-go/capacitor-flash/releases/tag/8.0.54",
@@ -825,11 +833,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-llm 8.2.3",
-    "link": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.2.3",
-    "guid": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.2.3",
-    "pubDate": "2026-11-13T13:09:58.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor llm/compare/8.2.3...8.2.3"
+    "title": "capacitor-llm 8.2.4",
+    "link": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.2.4",
+    "guid": "https://github.com/Cap-go/capacitor-llm/releases/tag/8.2.4",
+    "pubDate": "2026-11-19T18:10:39.000Z",
+    "description": "🆕 Changelog Fixed Updated Renovate configuration to use a valid Swift manager and matcher, ensuring dependency update rules for Swift packages are correctly recognized and applied. Changed Replaced the npm dist tag with for prerelease packages built from pull requests, making it easier to distinguish PR builds from beta releases. 🔗 Full Changelog : https://github.com/Cap go/capacitor llm/compare/8.2.3...8.2.4"
   },
   {
     "category": "release",
@@ -873,11 +881,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-audio 8.5.4",
-    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.4",
-    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.4",
-    "pubDate": "2026-11-13T13:02:48.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android build toolchain versions with the official Capacitor 8 templates, ensuring consistent and reliable builds for Capacitor 8 projects. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.5.3...8.5.4"
+    "title": "capacitor-native-audio 8.5.5",
+    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.5",
+    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.5",
+    "pubDate": "2026-11-19T14:39:55.000Z",
+    "description": "🆕 Changelog Changed Replaced the npm dist tag with for pre release builds published from pull requests Fixed Fixed background playback on Android so media continues playing when the app is sent to the background 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.5.4...8.5.5"
   },
   {
     "category": "release",
@@ -1033,11 +1041,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-persistent-uuid 8.1.12",
-    "link": "https://github.com/Cap-go/capacitor-persistent-uuid/releases/tag/8.1.12",
-    "guid": "https://github.com/Cap-go/capacitor-persistent-uuid/releases/tag/8.1.12",
-    "pubDate": "2026-11-12T16:31:24.000Z",
-    "description": "🆕 Changelog Changed Clarified documentation to state that pull requests are reviewed, tested, and merged by a human maintainer. 🔗 Full Changelog : https://github.com/Cap go/capacitor persistent uuid/compare/8.1.11...8.1.12"
+    "title": "capacitor-persistent-uuid 8.1.13",
+    "link": "https://github.com/Cap-go/capacitor-persistent-uuid/releases/tag/8.1.13",
+    "guid": "https://github.com/Cap-go/capacitor-persistent-uuid/releases/tag/8.1.13",
+    "pubDate": "2026-11-19T18:14:15.000Z",
+    "description": "🆕 Changelog Fixed Renovate Swift dependency detection — Corrected the Renovate configuration to use the Swift manager with regex based package name matching. This ensures automated dependency update proposals reliably detect and target Swift packages. Changed PR preview npm dist tag — Updated CI to publish pull request preview builds to the npm dist tag rather than . If you install pre release builds by tag, switch from to to get the latest pull request previews. 🔗 Full Changelog : https://..."
   },
   {
     "category": "release",
@@ -1185,11 +1193,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-social-login 8.7.11",
-    "link": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.11",
-    "guid": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.11",
-    "pubDate": "2026-11-13T13:20:12.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain with the official Capacitor 8 versions to prevent build issues caused by mismatched tooling. 🔗 Full Changelog : https://github.com/Cap go/capacitor social login/compare/8.7.10...8.7.11"
+    "title": "capacitor-social-login 8.7.13",
+    "link": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.13",
+    "guid": "https://github.com/Cap-go/capacitor-social-login/releases/tag/8.7.13",
+    "pubDate": "2026-11-19T18:02:31.000Z",
+    "description": "🆕 Changelog Fixed Fixed an issue on Android where restrictions for Google Workspace or organizational accounts were not honored during Credential Manager sign in. Improved Google sign in reliability on Android by using the current when invoking the Credential Manager, resolving authentication failures in certain app contexts. 🔗 Full Changelog : https://github.com/Cap go/capacitor social login/compare/8.7.12...8.7.13"
   },
   {
     "category": "release",
@@ -1233,11 +1241,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-stripe-pay 8.0.13",
-    "link": "https://github.com/Cap-go/capacitor-stripe-pay/releases/tag/8.0.13",
-    "guid": "https://github.com/Cap-go/capacitor-stripe-pay/releases/tag/8.0.13",
-    "pubDate": "2026-11-12T17:08:51.000Z",
-    "description": "🆕 Changelog Changed Updated contribution documentation to clarify that a human reviews, tests, and merges pull requests. 🔗 Full Changelog : https://github.com/Cap go/capacitor stripe pay/compare/8.0.12...8.0.13"
+    "title": "capacitor-stripe-pay 8.0.14",
+    "link": "https://github.com/Cap-go/capacitor-stripe-pay/releases/tag/8.0.14",
+    "guid": "https://github.com/Cap-go/capacitor-stripe-pay/releases/tag/8.0.14",
+    "pubDate": "2026-11-19T18:08:27.000Z",
+    "description": "🆕 Changelog Fixed Added explicit extensions to ESM imports so the package can be consumed reliably from Node ESM environments. Aligned the Android toolchain with official Capacitor 8 versions to prevent build failures on current Capacitor 8 releases. Changed Moved pre release CI publishing for pull requests from the npm dist tag to the dist tag. 🔗 Full Changelog : https://github.com/Cap go/capacitor stripe pay/compare/8.0.13...8.0.14"
   },
   {
     "category": "release",
@@ -1321,11 +1329,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-video-player 8.3.3",
-    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.3.3",
-    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/8.3.3",
-    "pubDate": "2026-11-13T12:50:16.000Z",
-    "description": "🆕 Changelog Fixed android : Aligned the Android toolchain versions with the official Capacitor 8 requirements, ensuring reliable builds and compatibility with Capacitor 8 projects. Changed deps : Performed routine lock file maintenance to keep internal dependencies up to date. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/8.3.2...8.3.3"
+    "title": "capacitor-video-player 9.0.0",
+    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.0",
+    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.0",
+    "pubDate": "2026-11-19T18:08:34.000Z",
+    "description": "🆕 Changelog Changed Breaking: Updated the bundled Google Cast SDK to 4.8.6, raising the minimum supported iOS version to 16. Update your app's deployment target to iOS 16 or later, and ensure your users are on iOS 16+. Switched PR beta publishing to the npm dist tag instead of , making preview packages easier to identify and install. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/8.3.3...9.0.0"
   },
   {
     "category": "release",

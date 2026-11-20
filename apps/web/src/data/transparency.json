@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T03:05:17.155Z",
+  "updatedAt": "2026-11-20T03:05:13.130Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -37,6 +37,12 @@
   "releases": [
     {
       "repo": "Cap-go/capgo.app",
+      "tag": "capgo-22.64.1",
+      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.1",
+      "publishedAt": "2026-11-19T14:01:37Z"
+    },
+    {
+      "repo": "Cap-go/capgo.app",
       "tag": "capgo-22.63.2",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
       "publishedAt": "2026-11-18T21:36:02Z"
@@ -58,12 +64,6 @@
       "tag": "capgo-22.60.0",
       "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.60.0",
       "publishedAt": "2026-11-17T03:31:32Z"
-    },
-    {
-      "repo": "Cap-go/capgo.app",
-      "tag": "capgo-22.59.0",
-      "url": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.59.0",
-      "publishedAt": "2026-11-17T01:51:07Z"
     }
   ],
   "metrics": {
@@ -71,7 +71,7 @@
       "success_rate": 85.8,
       "first_try_rate": 98.3,
       "rollback_rate": 12.8,
-      "updated_at": "2026-11-18T17:34:51.273Z",
+      "updated_at": "2026-11-18T19:46:15.256Z",
       "daily": [
         84.8,
         85.1,
@@ -106,8 +106,8 @@
       ]
     },
     "builder": {
-      "success_rate": 80.7,
-      "updated_at": "2026-11-19T03:05:14.389Z"
+      "success_rate": 80.8,
+      "updated_at": "2026-11-18T19:46:15.265Z"
     }
   }
 }
