@@ -64,22 +64,23 @@ export async function announceTurn(direction: string) {
   const { isAvailable } = await SpeechSynthesis.isAvailable();
   if (!isAvailable) throw new Error('Speech synthesis unavailable');
 
-  const end = await SpeechSynthesis.addListener('end', ({ utteranceId }) => {
-    console.log('Finished', utteranceId);
+  const { utteranceId } = await SpeechSynthesis.speak({
+    text: direction,
+    language: 'en-US',
+    rate: 1.0,
+    pitch: 1.0,
+    volume: 1.0,
+    queueStrategy: 'Flush',
   });
 
-  try {
-    await SpeechSynthesis.speak({
-      text: direction,
-      language: 'en-US',
-      rate: 1.0,
-      pitch: 1.0,
-      volume: 1.0,
-      queueStrategy: 'Flush',
+  await new Promise<void>((resolve) => {
+    void SpeechSynthesis.addListener('end', (event) => {
+      if (event.utteranceId === utteranceId) {
+        console.log('Finished', utteranceId);
+        resolve();
+      }
     });
-  } finally {
-    await end.remove();
-  }
+  });
 }
 ```
 
