@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin for downloading files with background support. On Android since 8.5.0, an opt-in OkHttp engine writes app-private destinations (cache, files) with quiet notifications."
+  tagline: "Capacitor plugin for downloading files with background support. On Android since 8.5.0, an opt-in OkHttp engine writes app-private destinations (cache, files) with quiet notifications. Since 8.9.0, optional connection retries on iOS URLSession and Android OkHttp."
   actions:
     - text: Get started
       link: /docs/plugins/downloader/getting-started/
@@ -52,9 +52,15 @@ Available since **8.8.0**. Large offline packs can keep moving while users switc
 
 </Aside>
 
+<Aside type="tip" title="Connection failure retries (8.9.0)">
+
+Available since **8.9.0**. Set optional `retries` (default `0`) on `download()` so iOS URLSession and Android OkHttp restart a file after transport errors, with backoff between attempts. Optional `downloadFailedNotificationText` can alert when retries are exhausted. Android DownloadManager, Web, and mixed-engine batches ignore `retries`. Related change: [capacitor-downloader#153](https://github.com/Cap-go/capacitor-downloader/pull/153). See [Connection failure retries](/docs/plugins/downloader/getting-started/#connection-failure-retries).
+
+</Aside>
+
 ## Completion notifications
 
-Set `downloadCompletedNotificationText` on `download()` to show a localized system notification when a file finishes and the user granted notification permission. See [Getting Started](/docs/plugins/downloader/getting-started/#example-completion-notification) for a full example.
+Set `downloadCompletedNotificationText` on `download()` to show a localized system notification when a file finishes and the user granted notification permission. Since **8.9.0**, optional `downloadFailedNotificationText` can show a failure alert in the same notification slot when retries are exhausted (not after `stop()`). See [Getting Started](/docs/plugins/downloader/getting-started/#example-completion-notification) and [Connection failure retries](/docs/plugins/downloader/getting-started/#connection-failure-retries).
 
 ## Core Capabilities
 
@@ -63,6 +69,8 @@ Set `downloadCompletedNotificationText` on `download()` to show a localized syst
 - `resume` - Resume a paused download. Continues from where it was paused.
 - `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.
 - `downloadCompletedNotificationText` (optional on `download`) - Show a localized system notification when a download succeeds and notification permission is granted.
+- `downloadFailedNotificationText` (optional on `download`, since 8.9.0) - Show a localized system notification when a download or batch fails after retries. Not shown after `stop()`.
+- `retries` (optional on `download`, since 8.9.0) - Retry after connection failures on iOS URLSession and Android OkHttp (default `0`).
 - `title` and `description` (optional on `download`, Android DownloadManager since 8.6.0) - Customize progress notification title and description. Ignored on iOS, Web, and OkHttp Android downloads.
 
 ## Public API
