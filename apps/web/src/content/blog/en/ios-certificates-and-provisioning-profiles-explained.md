@@ -1,36 +1,66 @@
 ---
 slug: ios-certificates-and-provisioning-profiles-explained
-title: "iOS Certificates and Provisioning Profiles Explained"
-description: "iOS certificates and provisioning profiles explained: certificate and profile types, how they fit together, .p12 files, UDIDs, expiry and signing errors."
+title: "How to Download .p12 and .mobileprovision for iOS"
+description: "Download a .mobileprovision from Apple Developer, export a .p12 with your private key (or build one without a Mac), plus profile types, enterprise certs, and fixes."
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-10-01T09:00:00.000Z
-updated_at: 2026-10-01T03:59:51.000Z
+updated_at: 2026-11-20T10:30:00.000Z
 head_image: /certificates.webp
 head_image_alt: "Apple signing certificates and provisioning profiles in the Apple Developer portal"
-keywords: ios certificates, provisioning profiles, ios code signing, apple distribution certificate, apple development certificate, ad hoc provisioning profile, p12 certificate, create ios certificate without mac, udid
+keywords: p12 certificate download, mobileprovision file download, ios certificates, provisioning profiles, ios code signing, enterprise certificate ios, apple provisioning profile, app store connect provisioning profile, create ios certificate without mac, udid
 tag: iOS, Security, Tutorial
 published: true
 locale: en
 origin: human
 next_blog: ''
 faq:
+  - question: "Where do I download a .mobileprovision file?"
+    answer: "Sign in at developer.apple.com, open Certificates, Identifiers & Profiles, choose Profiles in the sidebar, open the profile you need (or create one with the add button), then click Download. The file saves as a .mobileprovision provisioning profile for Xcode or your CI."
+  - question: "How do I get a .p12 certificate without a Mac?"
+    answer: "Generate a private key and certificate signing request with OpenSSL or the Capgo iOS certificate generator, upload the CSR under Certificates in the Apple Developer portal, download the .cer Apple issues, then run openssl pkcs12 -export with your private key and the certificate PEM to create a .p12. Use the -legacy flag with OpenSSL 3 so macOS can import the file."
+  - question: "Does a provisioning profile include the certificate?"
+    answer: "The .mobileprovision file lists which Apple-issued certificates may sign the app and embeds the public certificate data, but it does not contain your private key. You still need the matching .p12 (or the certificate plus private key in Keychain) that pairs with one of the certificates named in the profile."
+  - question: "What is an iOS enterprise certificate?"
+    answer: "It is a distribution certificate issued through the Apple Developer Enterprise Program, separate from the standard Apple Developer Program. Teams use it with an In-House provisioning profile to distribute apps only inside their organization. You cannot submit Enterprise-signed apps to the App Store or TestFlight."
+  - question: "Why is my provisioning profile invalid or expired?"
+    answer: "Profiles expire after about one year or when an included certificate expires or is revoked. Xcode also marks a profile invalid if the App ID, devices, or capabilities changed and you did not regenerate it, or if the signing identity in your keychain is not one of the certificates listed in the profile. Download a fresh .mobileprovision after you renew certificates or edit the profile."
   - question: "What is the difference between a certificate and a provisioning profile?"
     answer: "A certificate proves who signed the app; it pairs a public key Apple issued with a private key you keep. A provisioning profile says what the signed app is allowed to do: which App ID it is, which certificates may sign it, which devices can run it, and which entitlements it has. Every iOS build needs both."
-  - question: "Can I create an iOS certificate without a Mac?"
-    answer: "Yes. Generate a certificate signing request (CSR) and private key with OpenSSL or a browser tool such as the Capgo iOS certificate generator, upload the CSR in the Apple Developer portal, download the .cer, and combine it with the private key into a .p12 using OpenSSL."
-  - question: "Why does TestFlight need an App Store profile and not Ad Hoc?"
-    answer: "TestFlight builds go through App Store Connect, which only accepts builds signed with an Apple Distribution certificate and an App Store Connect provisioning profile. Ad Hoc profiles are for installing directly on registered devices outside of Apple's distribution."
-  - question: "What happens when my distribution certificate expires?"
-    answer: "Apps already live on the App Store keep working. You just cannot sign new builds with it, so create a new certificate and regenerate profiles. Ad Hoc and development builds stop launching when their provisioning profile expires."
-  - question: "I moved to a new Mac and Xcode says the signing identity is missing. Why?"
-    answer: "The private key for your certificate stayed in the old Mac's keychain. Export the identity as a .p12 from Keychain Access on the old Mac and import it on the new one, or revoke the certificate and create a new one."
 ---
 
 iOS code signing uses two pieces. A **certificate** proves who built the app, and a **provisioning profile** says which app it is, which devices may run it and which capabilities it can use. Xcode refuses to build for a device, and App Store Connect refuses uploads, unless the certificate, its private key and a matching profile all line up.
 
-This guide explains every piece, which combination you need for development, ad hoc, TestFlight, App Store and enterprise builds, how to create them with or without a Mac, and how to fix the errors you will hit.
+This guide starts with how to **download a .mobileprovision file** and **export or create a .p12 certificate**, then explains every piece, which combination you need for development, ad hoc, TestFlight, App Store and enterprise builds, and how to fix the errors you will hit.
+
+## Quick answer: get a .p12 and download a .mobileprovision
+
+If you came here to download signing files, follow these steps first. You need an Apple Developer account with the Account Holder or Admin role for distribution certificates and new profiles.
+
+### Create or export a `.p12` (certificate plus private key)
+
+**On a Mac (Keychain Access):**
+
+1. Open **Keychain Access**, then **Certificate Assistant > Request a Certificate From a Certificate Authority**. Enter your email, choose **Saved to disk**, and continue. That creates a private key in your login keychain and a `.certSigningRequest` file on disk.
+2. In [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources), open **Certificates**, click the add button (**+**), pick **Apple Distribution** or **Apple Development**, upload the CSR, and **Download** the `.cer`.
+3. Double-click the `.cer` so Keychain Access pairs it with the private key from step 1.
+4. Under **My Certificates**, right-click the certificate that shows a disclosure triangle (certificate plus private key), choose **Export**, pick **Personal Information Exchange (.p12)**, set a password, and save.
+
+**Without a Mac:**
+
+1. Create a private key and CSR with OpenSSL or the [iOS certificate generator](/tools/ios-certificate-generator/).
+2. Upload the CSR under **Certificates** in the Apple Developer portal and download the `.cer`.
+3. Convert the certificate and export a `.p12` with OpenSSL (see [Option 3: create them without a Mac](#option-3-create-them-without-a-mac) below). For a full walkthrough without Xcode, see [Capacitor development on Linux](/blog/capacitor-development-on-linux/) or [build an iOS app from Windows](/blog/build-ios-app-from-windows-capacitor-capgo-build/).
+
+### Download a `.mobileprovision` provisioning profile
+
+1. Sign in at [developer.apple.com/account/resources](https://developer.apple.com/account/resources) and open **Certificates, Identifiers & Profiles**.
+2. Click **Profiles** in the sidebar, then the add button (**+**) to create a profile, or select an existing profile.
+3. Pick the profile type (for example **iOS App Development**, **Ad Hoc**, or **App Store Connect**), choose the App ID, one or more certificates, and devices when the type requires them.
+4. Name the profile, click **Generate**, then click **Download**. The file uses the `.mobileprovision` extension.
+
+If you change devices, capabilities, or certificates later, edit or recreate the profile in the portal and **download it again**. Old files on disk do not update by themselves.
 
 ## Why Apple requires code signing
 
@@ -84,6 +114,16 @@ You may still see **iOS Development** and **iOS Distribution** in older accounts
 | In-House | Enterprise distribution certificate | Any device in the organization | Apple Developer Enterprise Program only |
 
 A profile is tied to **one App ID**. If your app has extensions (a widget, a notification service extension, a share extension), each target has its own bundle ID and needs its own profile.
+
+## iOS enterprise certificates (Enterprise Program)
+
+An **iOS enterprise certificate** is not the same as an **Apple Distribution** certificate from the standard Apple Developer Program. It belongs to the **[Apple Developer Enterprise Program](https://developer.apple.com/programs/enterprise/)**, which is for large organizations that distribute proprietary apps to their own employees only.
+
+- **Purpose**: sign **In-House** provisioning profiles so employees install internal apps without going through the App Store.
+- **Not for**: public App Store releases, TestFlight, or sideloading to customers outside your organization.
+- **Files**: you still create an enterprise distribution certificate in the portal, export a `.p12` the same way as other signing identities, and download an In-House `.mobileprovision` tied to your organization's App ID.
+
+Apple reviews Enterprise Program membership strictly. Misuse (distributing consumer apps outside your company) can lead to certificate revocation. For public beta or store release, use Apple Distribution plus App Store Connect or Ad Hoc profiles instead.
 
 ## How the pieces fit together
 
@@ -204,6 +244,8 @@ Put the certificate expiry date in a shared calendar. Our [certificate managemen
 
 **"A valid provisioning profile for this executable was not found"** on install: the device is not in the ad hoc profile, or the profile expired.
 
+More Xcode and Capacitor signing failures are covered in the [Capacitor iOS build errors guide](/blog/troubleshooting-capacitor-ios-build-errors/).
+
 **App installs then closes immediately**: on iOS 16 and later, development and ad hoc builds require Developer Mode on the device. See [how to enable Developer Mode on iOS](/blog/enable-ios-developer-mode-ios16/).
 
 **Extensions fail to sign**: each extension target needs its own App ID and profile. Check every target in Signing & Capabilities, not just App.
@@ -223,7 +265,7 @@ Put the certificate expiry date in a shared calendar. Our [certificate managemen
 
 ## Cloud signing for Capacitor apps
 
-You do not need a Mac on every developer's desk to ship iOS builds. [Capgo Build](/native-build/) builds Capacitor apps on Capgo's macOS machines using a `.p12` and profile you provide. Credentials are used only for the build and not stored on Capgo servers. Save them once from the CLI:
+You do not need a Mac on every developer's desk to ship iOS builds. [Capgo Build](/native-build/) builds Capacitor apps in the cloud using a `.p12` and profile you provide. Credentials are used only for the build and not stored on Capgo servers. Save them once from the CLI:
 
 ```bash
 bunx @capgo/cli@latest build credentials save --appId com.example.app --platform ios
