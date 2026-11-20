@@ -124,6 +124,29 @@ if (Capacitor.getPlatform() === 'ios') {
 
 See also the [plugin repository README](https://github.com/Cap-go/capacitor-downloader/#robust-background-downloads-offline-packs).
 
+### Background multi-file batches
+
+Available since **8.9.0**. Use the same background options as a single download, but pass `files` on one batch `id`:
+
+- **iOS**: set `iosContinuedProcessing: true` so the whole batch runs in one continued processing task. Reuse `title` and `description` for the task UI. Requires the same `BGTaskSchedulerPermittedIdentifiers` entry as single downloads. Background `URLSession` still handles transfers when continued processing does not start in time.
+- **Android (OkHttp batch)**: when every file resolves to OkHttp (for example `files/...` or `cache/...` with `androidHttpEngine: 'auto'`), set `notification: 'progress'` for one ongoing progress notification and optional `dataSync` foreground service for the batch. Default `completed` keeps quiet OkHttp behavior. A batch cannot mix DownloadManager and OkHttp destinations.
+
+```typescript
+await CapacitorDownloader.download({
+  id: 'offline-pack',
+  files: [
+    { url: 'https://cdn.example.com/maps/a.zip', destination: 'files/offline/a.zip' },
+    { url: 'https://cdn.example.com/maps/b.zip', destination: 'files/offline/b.zip' },
+  ],
+  androidHttpEngine: 'auto',
+  notification: 'progress',
+  title: 'Offline maps',
+  description: 'Downloading map data',
+  iosContinuedProcessing: true,
+  downloadCompletedNotificationText: 'Maps are ready',
+});
+```
+
 ## Multi-file batch downloads
 
 Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Up to **32** transfers share one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
@@ -183,7 +206,7 @@ await CapacitorDownloader.stop({ id: 'update-bundle' });
 
 ### Batch platform notes
 
-- **Android engine**: on Android, batches use DownloadManager only. Each file uses the same `androidHttpEngine` destination rules as a single download (`'auto'` can apply extended roots). `download()` rejects before enqueue if any file would use OkHttp (for example `cache/...` or `files/...` with `'okhttp'`, or `'auto'` when that path selects OkHttp).
+- **Android engine**: each file uses the same `androidHttpEngine` destination rules as a single download. Since **8.9.0**, when every file resolves to OkHttp, the batch runs in OkHttp with optional shared `notification: 'progress'`. The call is rejected if files would mix OkHttp and DownloadManager engines.
 - **Pause and resume**: iOS supports `pause()` and `resume()` on the batch `id`. Android rejects `pause()` and `resume()` for every download, including single downloads and batches (use `stop()`).
 - **Process death**: on Android, batch state is memory-only and is lost when the process is killed (DownloadManager work may still finish, but the plugin does not rebuild batch progress). On iOS, batch metadata is persisted in `DownloadBatchStore` (UserDefaults) and restored when the plugin initializes (`DownloadBatchCoordinator`).
 - **Partial success on failure**: when one file fails, remaining transfers are cancelled; files that finished before the failure remain on disk on Android and iOS.
