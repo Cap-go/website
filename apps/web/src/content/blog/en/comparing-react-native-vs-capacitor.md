@@ -86,10 +86,11 @@ That is different from **React Native**, where you never ship a full HTML docume
 Workflow in short:
 
 1. Build and test the React app for the browser.
-2. Install `@capacitor/core`, `@capacitor/cli`, and platform packages, then run `bunx cap init` and set `webDir` to your build output folder.
-3. Run `bunx cap add ios` and `bunx cap add android` to create the native projects.
+2. Install `@capacitor/core`, `@capacitor/cli`, and platform packages, then run `bunx cap init` (or `npx cap init` if you use npm) and set `webDir` to your build output folder.
+3. Run `bunx cap add ios` and `bunx cap add android` (or the `npx cap` equivalents) to create the native projects.
 4. Run `bunx cap sync` after each web build so assets copy into iOS and Android; add plugins for push, biometrics, or other native gaps.
-5. Ship store binaries, then deliver web-layer fixes with [OTA updates](/blog/what-are-ota-updates/) where policy allows.
+5. If you ship OTA with Capgo, install and configure `@capgo/capacitor-updater`, run `bunx cap sync` again, then build the store binary so the native updater is inside the app.
+6. Release to the stores, then deliver web-layer fixes with [OTA updates](/blog/what-are-ota-updates/) where policy allows.
 
 If you use **Ionic React**, you get mobile oriented components on top of the same Capacitor runtime. Ionic is optional: many teams use Capacitor with Tailwind, MUI, or their own design system.
 
