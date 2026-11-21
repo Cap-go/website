@@ -1,252 +1,148 @@
 ---
 slug: comparing-react-native-vs-capacitor
-title: "Capacitor vs React Native (2026): Which Should You Pick?"
-description: "Capacitor vs React Native in 2026: functionality, performance, community and developer experience compared to help web teams pick the right stack."
+title: "Capacitor vs React Native (2026): When to Pick Each"
+description: "Capacitor vs React Native in 2026: WebView vs native UI, Expo, New Architecture, OTA updates, and when web teams should choose each stack."
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-11T00:00:00.000Z
-updated_at: 2026-11-06T16:35:11.000Z
+updated_at: 2026-11-21T10:30:00.000Z
 head_image: /react_native_vs_react_capacitor.webp
 head_image_alt: "Comparing React Native vs Capacitor Capgo blog illustration"
-keywords: React Native, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
+keywords: capacitor vs react native, react native vs capacitor, capacitor react, capacitor react native, capacitor js vs react native, capacitor alternatives, capacitor alternative, mobile app development, live updates, OTA updates, Capacitor 8, Expo, React Native New Architecture
 tag: Alternatives
 published: true
 locale: en
 origin: human
 next_blog: ''
+faq:
+  - question: "Is Capacitor the same as React Native?"
+    answer: "No. React Native renders a tree of native views from React components. Capacitor runs your web app inside a system WebView and reaches native APIs through a bridge and plugins. Both can ship iOS and Android from one JavaScript codebase, but the UI layer is completely different."
+  - question: "Can you use React with Capacitor?"
+    answer: "Yes. Capacitor is framework agnostic. You build the UI with standard React DOM, HTML, and CSS, bundle it with Vite or another web toolchain, then add native projects with the Capacitor CLI. See Capacitor's React solution page at capacitorjs.com and the Capgo guide on what a Capacitor app is."
+  - question: "Is Capacitor slower than React Native?"
+    answer: "For animation heavy, always native UI, React Native usually feels smoother because it paints with platform components. Capacitor is strong when the UI is mostly layouts and forms you already ship on the web. Modern WebViews on recent phones handle typical business apps well, but very heavy CSS, video, or gaming UIs favor React Native or fully native code."
+  - question: "Do Capacitor and React Native support OTA updates?"
+    answer: "Both can refresh JavaScript and web assets over the air within store rules. React Native teams often use Expo Updates or EAS Update. Capacitor teams ship HTML, CSS, and JS bundles into the native shell, then use services such as Capgo or custom pipelines. Native plugin or permission changes still need a new store binary on both stacks. Read capgo.app/blog/what-are-ota-updates/ for store boundaries."
+  - question: "What are good Capacitor alternatives?"
+    answer: "Flutter uses Dart and its own rendering engine for a single UI on iOS and Android. React Native targets teams that want React with native widgets. Fully native Swift and Kotlin apps maximize platform control. You can also pair Ionic UI with Capacitor, or stay on React Native with Expo for managed builds and updates."
+  - question: "Should I pick Capacitor or React Native for a new app in 2026?"
+    answer: "Pick Capacitor when you already have or plan a web app and want maximum code sharing with the browser. Pick React Native when the product must feel fully native, relies on complex gestures and animations, or your team already standardizes on the React Native component model and Expo tooling."
 ---
 
-**TL;DR:** Pick **React Native** when the product needs a fully native UI and maximum performance on older devices. Pick **Capacitor** when you already ship a web app and want iOS and Android without rewriting that UI. For live updates and cloud builds on the Capacitor path, see the maintained [EAS vs Capgo comparison](/alternatives/expo/).
+**Quick answer:** Pick **React Native** when the product needs native UI components, deep platform animations, and a team already invested in the React Native and Expo toolchain, including the New Architecture that is default from React Native 0.82 onward. Pick **Capacitor** when you already ship a **React, Vue, or Angular web app** and want iOS and Android by wrapping that web UI in a native shell, especially if you target **Capacitor 8** and want one codebase for web and mobile. For live updates on the Capacitor path, see [What are OTA updates?](/blog/what-are-ota-updates/) and the [EAS vs Capgo comparison](/alternatives/expo/).
 
-What we will cover:
-
-- What is Capacitor?
-- What is React Native?
-- What do both frameworks have in common?
-- React Native vs. Capacitor: Functionality
-- React Native vs. Capacitor: Performance
-- React Native vs. Capacitor: Community
-- React Native vs. Capacitor: Learning curve
-- React Native vs. Capacitor: Demand for skills
-- Should you use React and Capacitor or React Native?
+| Topic | Capacitor (8.x) | React Native (0.7x+, New Architecture) |
+| --- | --- | --- |
+| Rendering | System **WebView** (WKWebView / Android WebView) runs your **web bundle** | **Fabric** renders **native views** from React components |
+| Languages / skills | HTML, CSS, JavaScript, any web framework | JavaScript / TypeScript, **JSX**, React Native APIs, optional native modules |
+| UI performance | Strong for typical web UIs; heavy animation or gaming may need care | Native widgets, usually better for complex motion and lists |
+| Native access | **Plugins** and custom native code (Swift, Kotlin, Java) via the bridge | **TurboModules**, native modules, **Expo Modules** |
+| Live updates / OTA | Update web assets in the shell (e.g. Capgo); store rules still apply | **expo-updates** / EAS Update for JS bundles; native changes need a new binary |
+| Code sharing with web | **Same UI** as your web app when you design for it | Share logic only; mobile UI is not DOM based |
+| Learning curve | Low if you are a **web developer** | Steeper if you only know DOM React; familiar if you know React Native |
+| Best fit | Existing **web product**, PWA plus stores, fast time to market | **Mobile first** product, native feel, large RN hiring pool |
 
 ## What is Capacitor?
 
-[Capacitor](https://capacitorjs.com/) is a cross-platform tool built by the Ionic team. It allows you to convert your web application into an iOS or Android application.
+[Capacitor](https://capacitorjs.com/) is a native runtime from the Ionic team. You build a normal web application, run `cap sync`, and ship it inside iOS and Android projects. The UI runs in the platform WebView, while [`@capacitor/core`](https://capacitorjs.com/docs/core) and plugins call camera, filesystem, push, and other native APIs.
 
-With Capacitor, you can create mobile applications using your JavaScript code. It then renders the apps using your phone's native WebView. Using Capacitor's plugins and APIs, you can access native features like the camera, speaker, and others. For the full picture, see [what a Capacitor app is, with pros, cons, and project health](/capacitor-app/).
+**Capacitor 8** (2026) raised toolchain bars such as Node 22, Xcode 26, and Android SDK 36. New apps get Swift Package Manager as the default iOS integration option. For migration details, see [How to Upgrade Your Capacitor App to Capacitor 8](/blog/upgrade-capacitor-app-to-capacitor-8/). For scope, limits, and ecosystem health, see [what a Capacitor app is](/capacitor-app/).
 
-Capacitor is compatible with different JavaScript frameworks, such as React, Vue, Angular, and vanilla JS. Learn more about [building cross-platform apps with Capacitor and React](https://capacitorjs.com/solution/react/).
+Capacitor works with **React, Vue, Angular, Svelte**, or vanilla JS. The official [React solution](https://capacitorjs.com/solution/react/) walks through adding iOS and Android to an existing React project.
 
 ## What is React Native?
 
-[React Native](https://reactnative.dev/) is essentially React for mobile applications. It enables you to create apps for Android and iOS using React syntax.
+[React Native](https://reactnative.dev/) lets you build mobile apps with React. Instead of DOM elements, you compose primitives such as `View`, `Text`, and `Image` that map to native controls.
 
-The React code you write interacts with native APIs on mobile devices. React Native provides developers with native components like `Text`, `Image`, and `View` as building blocks for a native UI.
+The **New Architecture** (Fabric for layout and rendering, TurboModules for native calls) is the default path on current releases. From **React Native 0.82**, disabling the New Architecture is no longer supported on Android, and new projects are expected to run with it enabled.
 
-React Native, which is open source, was created and is maintained by Facebook.
+Most greenfield teams also use **[Expo](https://expo.dev/)** for project templates, native module access, and cloud builds. **EAS Update** ships over the air JavaScript and asset changes to production channels after you install `expo-updates`. That is the usual React Native answer to fast iteration without a full store review for JS-only fixes.
 
-## What do both frameworks have in common?
+## Capacitor vs React Native performance
 
-Cross-platform tools like React Native and Capacitor can save you a lot of time and money.
+**Capacitor vs React Native performance** is not one benchmark. It is two rendering models.
 
-Both frameworks eliminate the need to learn native languages like Java, Kotlin, Swift, and Objective C to build mobile apps for specific platforms. Instead of building an Android application with one codebase and an iOS application with another, you can create mobile apps for both platforms using the same codebase.
+Capacitor paints your HTML and CSS inside a WebView. Startup loads your bundled assets from the app package (or from an updated bundle after OTA). Scrolling and transitions depend on the WebView and how lean your web bundle is. Ionic documents WebView behavior in their [core concepts](https://ionicframework.com/docs/core-concepts/webview/). Capacitor apps can feel sluggish on very old hardware or with huge unoptimized bundles, the same way heavy sites can in mobile browsers.
 
-This also means companies building cross-platform applications can hire just one React Native or Capacitor team to build both versions rather than requiring two different teams (one for iOS and one for Android), thus reducing the number of developers on payroll.
+React Native skips the DOM for UI. Fabric lays out native views, which helps lists, gestures, and screen transitions that must match platform conventions. You still pay JavaScript bridge costs, but you avoid WebView layout for the main interface.
 
-Capacitor and React Native share a common approach to integrating custom native code into their projects as modules or plugins. In both frameworks, you are given the ability to write custom native code in Java, Kotlin, Objective C, or Swift for accessing native features that the frameworks do not provide out of the box.
+Practical guidance:
 
-Like React Native, Capacitor uses the native features of mobile phones. The main difference is in rendering. While React Native mobile applications use each device's native view, Capacitor renders applications using the native WebView of devices.
+- **Forms, dashboards, content, B2B tools:** Either stack can be fine. Capacitor wins if that UI already exists on the web.
+- **Social feeds, maps with custom overlays, fluid animations, games:** React Native or native code is usually the safer default.
+- **Testing:** Capacitor lets you exercise much of the UI in a desktop browser. React Native needs simulators or devices, though Expo Go shortens the loop for many flows.
 
-Both frameworks are open source for anyone to contribute their source code to and use.
+Do not rely on old hybrid myths alone. Measure on devices you care about. If you compare splash and perceived startup, see [React Native splash screen](/blog/splash-screen-in-react-native/) for how each stack handles launch screens.
 
-## React Native vs. Capacitor: Functionality
+## Using React with Capacitor
 
-When working in React Native, developers can build native apps using React's syntax and core principles. It is often referred to as an unopinionated framework, meaning it comes with [very few official libraries and functionalities](https://blog.logrocket.com/react-native-component-libraries/).
+Searches such as **capacitor react** usually mean: **Can I run my React web app in Capacitor?** Yes.
 
-React Native's creators preferred to give developers [freedom when structuring apps and solving different problems](https://reactjs.org/docs/add-react-to-a-website.html/), letting developers who do not want to write code from scratch build different functionalities using community-developed third-party libraries.
+You keep **react-dom**, standard CSS, and your Vite or webpack build. Capacitor copies the `webDir` output into the native project on `cap sync`. Native features use `import { Camera } from '@capacitor/camera'` style APIs, not React Native components.
 
-Some of these libraries include:
+That is different from **React Native**, where you never ship a full HTML document for the main UI. You cannot paste a Create React App screen into React Native without rewriting it to React Native primitives.
 
-- [React Hook Form](https://blog.logrocket.com/the-complete-guide-to-react-hook-form/) or [Formik to create and validate forms](https://blog.logrocket.com/building-better-react-forms-with-formik/)
-- [React Testing Library and Jest to test applications](https://blog.logrocket.com/testing-apps-with-jest-and-react-testing-library/)
-- [Fetch API and Axios to make network requests](https://blog.logrocket.com/data-fetching-react-native/)
+Workflow in short:
 
-However, even with third-party libraries that can be seen as an advantage, these libraries often become outdated. If community support for a particular library isn't strong enough and doesn't update often, incompatibility issues can arise.
+1. Build and test the React app for the browser.
+2. Add `@capacitor/core`, `@capacitor/cli`, and platform packages.
+3. Point `capacitor.config` at your build output folder.
+4. Add plugins for push, biometrics, or other native gaps.
+5. Ship store binaries, then deliver web-layer fixes with [OTA updates](/blog/what-are-ota-updates/) where policy allows.
 
-[Capacitor was built on top of Cordova](https://blog.logrocket.com/framework7-vs-ionic-comparing-cordova-frameworks/) and is backwards-compatible with most Cordova plugins. Capacitor, however, is more modern and better-maintained, while Cordova has been deprecated. Capacitor also supports PWA and is faster than Cordova was, giving your app better startup time.
+If you use **Ionic React**, you get mobile oriented components on top of the same Capacitor runtime. Ionic is optional: many teams use Capacitor with Tailwind, MUI, or their own design system.
 
-Even though [Capacitor was developed by the Ionic team](https://blog.logrocket.com/react-native-vs-ionic/), you don't actually need to use Ionic with Capacitor. Capacitor is compatible with any JavaScript framework as well as vanilla JavaScript.
+## Alternatives to Capacitor and React Native
 
-With that said, using Ionic with Capacitor can make your work easier, as Ionic can help you implement native UI and configure some necessary tooling for mobile development.
+**Capacitor alternatives** and **capacitor alternative** queries usually compare the whole hybrid niche, not only React Native.
 
-Capacitor is perfect for web developers to hit the ground running building mobile applications. It can even generate mobile applications from web apps built with [React frameworks like MUI](https://blog.logrocket.com/definitive-guide-react-material/) and Chakra. You cannot do the same with React Native; you have to build your apps from scratch.
+| Option | How it builds UI | Typical reason to choose it |
+| --- | --- | --- |
+| **Flutter** | Skia rendered widgets in Dart | One bespoke UI everywhere, strong custom design, no WebView |
+| **React Native + Expo** | Native views + managed toolchain | Mobile first React, EAS Build, **expo-updates** |
+| **Ionic + Capacitor** | Web components in a WebView | Faster mobile UI kit while staying web based |
+| **Native Swift / Kotlin** | Platform SDKs only | Maximum control, best platform APIs, separate codebases |
 
-One advantage that Capacitor has over React Native is that it can be used to create progressive web apps, as it can access native APIs from the web. Capacitor is also very lightweight compared to other cross-platform tools like Xamarin, Cordova, and NativeScript.
+Cordova is a legacy option in the same family as Capacitor. New projects should start on Capacitor rather than Cordova.
 
-If you were a fan of Cordova, you should consider using Capacitor. It is well-maintained by the Ionic team, which provides fixes to issues regularly.
+For Expo versus Capacitor live updates and pricing shape, use the maintained [EAS vs Capgo](/alternatives/expo/) page instead of guessing from outdated blog posts.
 
-## React Native vs. Capacitor: Performance
+## Functionality and ecosystem
 
-Let's take a look at the design philosophies of these two tools and how they differ from each other.
+React Native is intentionally unopinionated. Navigation, forms, and testing usually come from community libraries. That flexibility is powerful, but you own version compatibility across many packages.
 
-Capacitor takes a web-based approach to mobile development. It renders apps on phones [using the devices' native WebView](https://ionicframework.com/docs/core-concepts/webview/) and it comes with plugins out of the box that convert your web code into APIs that interact with devices' native features.
+Capacitor ships a focused core and a large **plugin** catalog, with Cordova compatibility for many older plugins. You can write Swift or Kotlin when a plugin does not exist. Capacitor also supports **PWA** deployment from the same web codebase, which React Native does not target.
 
-With React Native, on the other hand, developers skip web code and go straight to mobile.
+Both stacks are **open source**. Both let you drop to native code for one feature without rewriting the whole app.
 
-Unlike hybrid applications that use WebViews, React Native applications interact directly with a platform's native components. Because of this, native apps like React Native's are usually faster and more efficient, since they are tailored to the platform they run on.
+## Learning curve and hiring
 
-One common issue with tools like Capacitor that use WebView to render apps is difficulty in rendering animations, CSS effects, and complex layouts with gradients, or anything that is complex or heavy. Displaying video can be an issue too.
+Web developers ramp up on **Capacitor** quickly because the UI stack is unchanged. **React Native** asks you to learn mobile layout (Flexbox without full CSS), platform APIs, and often Expo or native build tooling.
 
-Capacitor apps may struggle on low-end devices or devices with old hardware. This is because usually, some resources have to be loaded from the web before the app's UI can be rendered.
+**React Native** still has a larger job market and tutorial surface. **Capacitor** is smaller but growing with Ionic, enterprise adopters, and teams that already run a strong web product.
 
-Also, when apps aren't rendered on the native view of devices, they cannot fully leverage the devices' hardware capabilities, resulting in sluggish performance.
+## Shared ground: what both give you
 
-Testing is easier with Capacitor, as it permits running apps in a web browser. With React Native, [compiling, running, and testing apps requires installing Xcode](https://blog.logrocket.com/xcode-for-react-native-developers-tutorial-and-best-practices/) or Android Studio, adding another step to the compilation process.
+- One **JavaScript-centric** team for iOS and Android instead of separate Swift and Kotlin apps.
+- **Plugins or native modules** when you outgrow built in APIs.
+- **Store distribution** with Apple and Google review for the native shell.
+- **OTA-style updates** for interpreted assets, within Apple and Google policy limits.
 
-Although you can [skip the Xcode/Android Studio step with Expo](https://blog.logrocket.com/getting-started-with-react-native-and-expo-sdk/), Expo is [not without its limitations](https://docs.expo.dev/faq/).
+The fork is **where UI lives**: web technology inside a shell (Capacitor) versus React components mapped to native widgets (React Native).
 
-A hybrid WebView tool like Capacitor saves you cost and a lot of time. But if high performance is very important to you, or if you're building a complex application that might be run on cheap devices and devices with old hardware, then React Native might be a better option.
+## Should you use React with Capacitor or React Native?
 
-React Native apps are likely to be faster and more performant, as they are converted into the native languages of devices and work directly with the native features of those devices as opposed to running in a WebView.
+Use this checklist:
 
-With [over 2,000 contributors and just under 700,000 users on GitHub](https://github.com/facebook/react-native/), as well as [a large community on Stack Overflow](https://stackoverflow.com/questions/tagged/react-native/?sort=Newest), React Native has the support developers need to learn and grow in the framework.
+- **Existing React web app or strong web team?** Capacitor.
+- **Mobile-only product with no web parity goal?** React Native, often with Expo.
+- **Must share one UI with the public website?** Capacitor.
+- **Need Expo Updates and EAS for RN delivery?** React Native.
+- **Need Capgo or similar for web bundle OTA in a Capacitor shell?** Capacitor. See [What are OTA updates?](/blog/what-are-ota-updates/).
+- **Complex native animations and platform-specific UX?** React Native or native.
 
-Additionally, because React Native is based on JavaScript and is a cross-platform framework, it's accessible and popular among developers.
-
-React Native also became popular because Facebook created it. Facebook is currently using React Native in many of its apps and investing heavily in the framework.
-
-Other [companies that use the React Native framework](https://stackshare.io/react-native/) include:
-
-- Walmart
-- Microsoft
-- Tesla
-- Discord
-- Shopify
-- Instagram
-
-Since Capacitor is still fairly new, there aren't as many resources and materials online for developers to consume. It only has [under 300 contributors on GitHub](https://github.com/ionic-team/capacitor/) and [a small community on Stack Overflow](https://stackoverflow.com/questions/tagged/capacitor/). However, it does have [comprehensive documentation](https://capacitorjs.com/).
-
-Companies that currently use Capacitor include:
-
-- Burger King
-- Popeyes
-- Southwest
-
-Since React Native has been around for longer and has support from Facebook, more developers and large companies use it, so it clearly takes the win here.
-
-Capacitor is open source and MIT licensed, just like other Ionic tools. However, the Ionic team provides paid support for enterprise users of Capacitor.
-
-With Capacitor's paid support service, you can get on phone conversations with the Ionic team (including engineers) to get your problems solved, usually in a matter of hours or days, and even on weekends.
-
-If premium support is top priority for you and your team, then Capacitor might be the better option for you.
-
-## React Native vs. Capacitor: Learning curve
-
-React Native uses JSX as its templating language. Rather than separate markup from logic by putting them in different files, React Native uses separate components that contain the markup and the logic belonging to a component in the same file, achieved through JSX.
-
-This component-oriented approach allows developers to create components once and reuse them as many times as they need by combining markup, styling, and logic.
-
-JSX makes creating these components simple, and since it is statically typed, developers can catch errors early, improving debugging and development quality.
-
-It also optimizes code while compiling, so JavaScript code generated by JSX runs faster than the equivalent written directly in JavaScript.
-
-Because of this, however, developers can't style using CSS and [can only style with JavaScript](https://blog.logrocket.com/react-native-styling-tutorial-with-examples/).
-
-While JSX isn't particularly difficult, most developers use HTML and CSS for markup and styling, and adapting to this new paradigm might take some time.
-
-Here's an example of JSX and styling in React Native:
-
-```jsx
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-
-function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello, World!</Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-})
-
-export default App
-```
-
-In the example above, we import the necessary components from React Native, create a functional component, and use the `StyleSheet` API to create styles for the components.
-
-Capacitor, on the other hand, allows you to use HTML, CSS, and JavaScript for building your app. If you're already familiar with web development, the learning curve for Capacitor will be much lower compared to React Native.
-
-Here's an example of a simple app using Capacitor with React:
-
-```jsx
-import React from 'react'
-import './App.css'
-
-function App() {
-  return (
-    <div className="container">
-      <h1 className="text">Hello, World!</h1>
-    </div>
-  )
-}
-
-export default App
-```
-
-And the corresponding CSS file:
-
-```css
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.text {
-  font-size: 24px;
-  font-weight: bold;
-}
-```
-
-In this example, we use standard HTML and CSS to create and style the components, making it easier for web developers to transition to mobile app development with Capacitor.
-
-In summary, if you're already familiar with web development and prefer using HTML and CSS for styling, Capacitor will have a lower learning curve. However, if you're comfortable with React and JSX, React Native might be a better fit.
-
-## React Native vs. Capacitor: Demand for skills
-
-React Native has been around for longer and is used by many large companies, making it a more in-demand skill in the job market. According to [Indeed](https://www.indeed.com/jobs/?q=react+native&l=), there are thousands of job openings for React Native developers.
-
-Capacitor, being a newer and less popular technology, has fewer job openings. However, as more companies adopt Capacitor for their mobile app development, the demand for Capacitor developers may increase.
-
-If you're looking to maximize your job opportunities, learning React Native might be a better choice. However, if you're interested in working with a newer technology and potentially being at the forefront of its growth, Capacitor could be an exciting option.
-
-## Should you use React and Capacitor or React Native?
-
-The choice between React and Capacitor or React Native depends on your specific needs and preferences. Here are some factors to consider when making your decision:
-
-- If you're already familiar with web development and prefer using HTML and CSS for styling, Capacitor is an excellent choice that allows for a seamless transition.
-- If you value ease of use, faster development time, and compatibility with various JavaScript frameworks, Capacitor is the way to go.
-- If you're interested in working with a newer technology that is gaining traction and has the potential for growth, Capacitor is an exciting option to consider.
-- If you want to build progressive web apps in addition to mobile apps, Capacitor offers this flexibility, making it a more versatile choice.
-
-While React Native has its advantages, Capacitor stands out as a powerful and flexible tool for building cross-platform mobile apps. Its compatibility with various JavaScript frameworks, ability to create progressive web apps, and ease of use for web developers make it a strong contender in the mobile app development space.
-
-Consider your specific needs, preferences, and goals when choosing the right framework for your project. Capacitor offers many benefits that make it an attractive option for developers looking to build high-quality mobile apps with a familiar web development workflow.
-
+Neither framework removes App Store or Play review for binary changes. Plan native version bumps when you add plugins, change entitlements, or alter SDK requirements such as those introduced in [Capacitor 8](/blog/upgrade-capacitor-app-to-capacitor-8/).
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
 
