@@ -1,12 +1,11 @@
 ---
+import InitializeLogoLoop from './InitializeLogoLoop.astro'
 import m from '@/copy/messages'
 import { customerApps, featuredCustomerLogos } from '@/config/customerApps'
 import { getTotalStars } from '@/services/github'
 
-const stripApps = [
-  ...featuredCustomerLogos.map(({ name, slug }) => ({ name, icon: `/logo_cloud/${slug}_logo.webp`, installs: null })),
-  ...customerApps,
-]
+const stripSlotCount = 25
+const stripApps = [...featuredCustomerLogos.map(({ name, slug }) => ({ name, icon: `/logo_cloud/${slug}_logo.webp`, installs: null })), ...customerApps]
 
 const locale = Astro.locals.locale
 const stats = m.app_strip_stats(
@@ -20,36 +19,44 @@ const stats = m.app_strip_stats(
 ---
 
 <div class="app-strip mx-auto mt-12 flex w-full flex-col sm:mt-14" role="group" aria-labelledby="app-strip-title">
-  <p id="app-strip-title" class="px-4 text-center text-sm font-semibold text-slate-300 sm:text-base">{stats}</p>
+  <p id="app-strip-title" class="px-4 text-center text-sm font-semibold text-slate-300 sm:text-base">
+    {stats}
+  </p>
   <div class="app-strip-viewport mt-4 overflow-hidden">
-    <div data-logo-slots={customerApps.length} class="app-strip-track flex w-max gap-3">
-      {
-        [0, 1].map((copy) => (
-          <ul class="flex shrink-0 gap-3" aria-hidden={copy === 1 ? 'true' : undefined}>
-            {stripApps.map((app) => (
-              <li class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] py-2 pr-4 pl-2">
-                <img src={app.icon} alt={`${app.name} app icon`} aria-hidden="true" width="36" height="36" loading="lazy" decoding="async" class="h-9 w-9 rounded-xl object-cover" />
-                <span class="leading-tight">
-                  <span class="block text-sm font-semibold whitespace-nowrap text-white">{app.name}</span>
-                  {app.installs && <span class="block text-xs whitespace-nowrap text-slate-400">{m.app_strip_installs({ count: app.installs }, { locale })}</span>}
-                </span>
-              </li>
+    {(['noscript', 'template'] as const).map((Container) => {
+      const apps = Container === 'template' ? stripApps : stripApps.slice(0, stripSlotCount)
+      return (
+        <Container>
+          <div data-logo-slots={stripSlotCount} class="app-strip-track flex w-max gap-3">
+            {[0, 1].map((copy) => (
+              <ul class="flex shrink-0 gap-3" aria-hidden={copy === 1 ? 'true' : undefined}>
+                {apps.map((app) => (
+                  <li class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] py-2 pr-4 pl-2">
+                    <img
+                      src={app.icon}
+                      alt={`${app.name} app icon`}
+                      aria-hidden="true"
+                      width="36"
+                      height="36"
+                      loading="lazy"
+                      decoding="async"
+                      class="h-9 w-9 rounded-xl object-cover"
+                    />
+                    <span class="leading-tight">
+                      <span class="block text-sm font-semibold whitespace-nowrap text-white">{app.name}</span>
+                      {app.installs && <span class="block text-xs whitespace-nowrap text-slate-400">{m.app_strip_installs({ count: app.installs }, { locale })}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             ))}
-          </ul>
-        ))
-      }
-    </div>
+          </div>
+        </Container>
+      )
+    })}
+    <InitializeLogoLoop />
   </div>
 </div>
-
-<script>
-  import { sampleLogoLoop } from '@/scripts/sampleLogoLoop'
-  document.querySelectorAll<HTMLElement>('.app-strip-track').forEach((track) => {
-    const lists = Array.from(track.children)
-    const groups = lists.map((list) => Array.from(list.children))
-    sampleLogoLoop(lists, groups, Number(track.dataset.logoSlots))
-  })
-</script>
 
 <style is:global>
   .app-strip-viewport {
