@@ -39,7 +39,7 @@ faq:
 | UI performance | Strong for typical web UIs; heavy animation or gaming may need care | Native widgets, usually better for complex motion and lists |
 | Native access | **Plugins** and custom native code (Swift, Kotlin, Java) via the bridge | **TurboModules**, native modules, **Expo Modules** |
 | Live updates / OTA | Update web assets in the shell (e.g. Capgo); store rules still apply | **expo-updates** / EAS Update for JS bundles; native changes need a new binary |
-| Code sharing with web | **Same UI** as your web app when you design for it | Share logic only; mobile UI is not DOM based |
+| Code sharing with web | **Same UI** as your web app when you design for it | Default is separate mobile UI; **React Native for Web** or **Expo web/PWA** can share components when you invest in that setup |
 | Learning curve | Low if you are a **web developer** | Steeper if you only know DOM React; familiar if you know React Native |
 | Best fit | Existing **web product**, PWA plus stores, fast time to market | **Mobile first** product, native feel, large RN hiring pool |
 
@@ -55,7 +55,7 @@ Capacitor works with **React, Vue, Angular, Svelte**, or vanilla JS. The officia
 
 [React Native](https://reactnative.dev/) lets you build mobile apps with React. Instead of DOM elements, you compose primitives such as `View`, `Text`, and `Image` that map to native controls.
 
-The **New Architecture** (Fabric for layout and rendering, TurboModules for native calls) has been the default since **React Native 0.76**. From **React Native 0.82**, disabling the New Architecture is no longer supported on Android, and new projects ship with it only.
+The **New Architecture** (Fabric for layout and rendering, TurboModules for native calls) became the default in **React Native 0.76**. **React Native 0.82** made it the only supported architecture, so disabling it is no longer supported on Android and new projects ship with it only.
 
 Most greenfield teams also use **[Expo](https://expo.dev/)** for project templates, native module access, and cloud builds. **EAS Update** ships over the air JavaScript and asset changes to production channels after you install `expo-updates`. That is the usual React Native answer to fast iteration without a full store review for JS-only fixes.
 
@@ -86,9 +86,9 @@ That is different from **React Native**, where you never ship a full HTML docume
 Workflow in short:
 
 1. Build and test the React app for the browser.
-2. Add `@capacitor/core`, `@capacitor/cli`, and platform packages.
-3. Point `capacitor.config` at your build output folder.
-4. Add plugins for push, biometrics, or other native gaps.
+2. Install `@capacitor/core`, `@capacitor/cli`, and platform packages, then run `bunx cap init` and set `webDir` to your build output folder.
+3. Run `bunx cap add ios` and `bunx cap add android` to create the native projects.
+4. Run `bunx cap sync` after each web build so assets copy into iOS and Android; add plugins for push, biometrics, or other native gaps.
 5. Ship store binaries, then deliver web-layer fixes with [OTA updates](/blog/what-are-ota-updates/) where policy allows.
 
 If you use **Ionic React**, you get mobile oriented components on top of the same Capacitor runtime. Ionic is optional: many teams use Capacitor with Tailwind, MUI, or their own design system.
@@ -112,7 +112,7 @@ For Expo versus Capacitor live updates and pricing shape, use the maintained [EA
 
 React Native is intentionally unopinionated. Navigation, forms, and testing usually come from community libraries. That flexibility is powerful, but you own version compatibility across many packages.
 
-Capacitor ships a focused core and a large **plugin** catalog, with Cordova compatibility for many older plugins. You can write Swift or Kotlin when a plugin does not exist. Capacitor also supports **PWA** deployment from the same web codebase, which React Native does not target.
+Capacitor ships a focused core and a large **plugin** catalog, with Cordova compatibility for many older plugins. You can write Swift or Kotlin when a plugin does not exist. Capacitor also supports **PWA** deployment from the same web codebase. React Native teams can share UI with the browser through **React Native for Web**, and **Expo** documents web and PWA workflows, but that path is optional and differs from Capacitor's default one-to-one web UI reuse.
 
 Both stacks are **open source**. Both let you drop to native code for one feature without rewriting the whole app.
 
