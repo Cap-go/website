@@ -32,3 +32,28 @@ export const customerApps: CustomerApp[] = [
   { name: 'AXA TH Health', icon: '/logo_cloud/axa_th_health_logo.webp', installs: '1K+' },
   { name: 'Scania Meny', icon: '/logo_cloud/scania_logo.webp', installs: '500+' },
 ]
+
+/** Customer apps featured by name, including internal and event apps without public install figures. */
+export const featuredCustomerLogos = [
+  { slug: 'scott_sports', name: 'SCOTT Sports' },
+  { slug: 'kpmg_davos', name: 'KPMG at Davos' },
+  { slug: 'geely_uni3', name: 'Uni3 by Geely' },
+  { slug: 'siemens_realize_live', name: 'Siemens Realize LIVE Asia-Pacific' },
+  { slug: 'nordea_campus', name: 'Nordea Campus' },
+  { slug: 'us_foods', name: 'US Foods MOXē' },
+  { slug: 'breeze_airways', name: 'Breeze Airways' },
+  { slug: 'boston_pizza', name: 'Boston Pizza' },
+  { slug: 'sd_worx', name: 'SD Worx Lønn' },
+  { slug: 'liberty_financial', name: 'Liberty Financial — Liberty Online' },
+  { slug: 'burgerfi', name: 'BurgerFi' },
+  { slug: 'cinchpro', name: 'CinchPro' },
+  { slug: 'slovak_lines', name: 'Slovak Lines' },
+  { slug: 'current_health', name: 'Current Health' },
+  { slug: 'food_and_co', name: 'Food & Co Sverige' },
+  { slug: 'grimaldis', name: 'Grimaldi’s Pizzeria' },
+  { slug: 'snap_kitchen', name: 'Snap Kitchen' },
+  { slug: 'wings_and_rings', name: 'Wings and Rings' },
+  { slug: 'dangelo', name: 'D’Angelo Grilled Sandwiches' },
+  { slug: 'anthonys_pizza', name: 'Anthony’s Coal Fired Pizza' },
+  { slug: 'bad_daddys', name: 'Bad Daddy’s Burger Bar' },
+]

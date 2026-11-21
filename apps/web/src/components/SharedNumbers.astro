@@ -1,11 +1,13 @@
 ---
 import m from '@/copy/messages'
+import { featuredCustomerLogos } from '@/config/customerApps'
 import dayjs from 'dayjs'
 import { siteMetrics } from '@/config/siteMetrics'
 import { getTotalStars } from '@/services/github'
 
 // Every logo in /public/logo_cloud, split into three rows for the scrolling wall.
 const appLogos = [
+  ...featuredCustomerLogos,
   { slug: 'axa_th_health', name: 'AXA TH Health' },
   { slug: 'onemain_financial', name: 'OneMain Financial' },
   { slug: 'abuelos', name: "Abuelo's Mexican Restaurant" },
@@ -265,12 +267,12 @@ const totalStars = getTotalStars()
   }
 
   .app-wall-row {
-    animation: app-wall-scroll 40s linear infinite;
+    animation: app-wall-scroll 60s linear infinite;
   }
 
   .app-wall-row--reverse {
     animation-direction: reverse;
-    animation-duration: 48s;
+    animation-duration: 72s;
   }
 
   @keyframes app-wall-scroll {

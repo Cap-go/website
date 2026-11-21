@@ -1,7 +1,12 @@
 ---
 import m from '@/copy/messages'
-import { customerApps } from '@/config/customerApps'
+import { customerApps, featuredCustomerLogos } from '@/config/customerApps'
 import { getTotalStars } from '@/services/github'
+
+const stripApps = [
+  ...featuredCustomerLogos.map(({ name, slug }) => ({ name, icon: `/logo_cloud/${slug}_logo.webp`, installs: null })),
+  ...customerApps,
+]
 
 const locale = Astro.locals.locale
 const stats = m.app_strip_stats(
@@ -21,12 +26,12 @@ const stats = m.app_strip_stats(
       {
         [0, 1].map((copy) => (
           <ul class="flex shrink-0 gap-3" aria-hidden={copy === 1 ? 'true' : undefined}>
-            {customerApps.map((app) => (
+            {stripApps.map((app) => (
               <li class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] py-2 pr-4 pl-2">
                 <img src={app.icon} alt={`${app.name} app icon`} aria-hidden="true" width="36" height="36" loading="lazy" decoding="async" class="h-9 w-9 rounded-xl object-cover" />
                 <span class="leading-tight">
                   <span class="block text-sm font-semibold whitespace-nowrap text-white">{app.name}</span>
-                  <span class="block text-xs whitespace-nowrap text-slate-400">{m.app_strip_installs({ count: app.installs }, { locale })}</span>
+                  {app.installs && <span class="block text-xs whitespace-nowrap text-slate-400">{m.app_strip_installs({ count: app.installs }, { locale })}</span>}
                 </span>
               </li>
             ))}
@@ -42,7 +47,7 @@ const stats = m.app_strip_stats(
     mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
   }
   .app-strip-track {
-    animation: app-strip-scroll 50s linear infinite;
+    animation: app-strip-scroll 90s linear infinite;
   }
   .app-strip:hover .app-strip-track,
   .app-strip:focus-within .app-strip-track {
@@ -62,6 +67,7 @@ const stats = m.app_strip_stats(
       justify-content: center;
     }
     .app-strip-track > ul {
+      width: 100%;
       flex-wrap: wrap;
       justify-content: center;
     }
