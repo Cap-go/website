@@ -1,6 +1,30 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.109.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.109.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.109.0",
+    "pubDate": "2026-11-20T10:15:20.000Z",
+    "description": "🆕 Changelog Added Prevent update delivery to users in deselected regions, ensuring content compliance and geographic restrictions are strictly enforced. Display a preview of the user audience affected by channel changes before publishing, allowing administrators to verify distribution scope. Route new custom API domains automatically to the correct backend service, reducing manual configuration steps for developers. Changed Sample high volume application log writes in analytics to reduce sto..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.65.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.65.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.65.0",
+    "pubDate": "2026-11-20T10:19:05.000Z",
+    "description": "🆕 Changelog Fixed Prevented duplicate email notifications : Resolved an issue where notifications were being sent multiple times during Bento email processing and Stripe webhook replays, ensuring users receive a single, accurate notification per subscription event. Changed Optimized analytics data volume : Reduced unnecessary PostHog event data transmission by removing unused events, improving performance and reducing storage overhead without impacting core analytics visibility. 🔗 Full Chan..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.64.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.4",
+    "pubDate": "2026-11-20T08:22:51.000Z",
+    "description": "🆕 Changelog Fixed Corrected database migration deploy order : Re stamped the channel bundle alert migration to ensure it executes in the correct sequence during deployment, preventing potential database schema conflicts or failed deployments. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.64.3...capgo 22.64.4"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.64.1",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.1",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.1",
@@ -296,30 +320,6 @@
     "description": "🆕 Changelog Added Local Postgres Support : Introduced a local PostgreSQL container option for development environments. Standalone Database Provisioning : Added the ability to run without requiring , enabling database setup in environments where the full Supabase stack is not running. Changed Test Data Access : Migrated test data access from PostgREST to direct SQL execution. This change improves the reliability of test data operations and reduces dependency on external REST endpoints during..."
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.46.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.46.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.46.0",
-    "pubDate": "2026-11-13T14:14:25.000Z",
-    "description": "🆕 Changelog Added Introduced as a new mechanism for storing and retrieving sensitive configuration data. Removed Removed integration with Supabase Vault for managing secrets and private settings. Changed Migrated secret management from Supabase Vault to the new system. If you were using Supabase Vault to store private configuration, update your implementation to use instead. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.45.1...capgo 22.46.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.45.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.45.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.45.1",
-    "pubDate": "2026-11-13T11:49:53.000Z",
-    "description": "🆕 Changelog Fixed Database : Resolved an issue where the job would fail to start after deploying install stats, ensuring email notifications resume correctly post deployment. Billing : Corrected synchronization logic so that trial plan schedules update automatically when the trial end date changes, preventing discrepancies in billing cycles. Queue : Optimized manifest size lookups by bounding requests within the Cloudflare subrequest budget, improving reliability for large manifest operation..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.45.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.45.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.45.0",
-    "pubDate": "2026-11-13T11:20:18.000Z",
-    "description": "🆕 Changelog Added Introduced virtual inbox RPC for Cloudflare integration to enhance serverless workflow capabilities. Changed Updated Cloudflare legacy CLI manifest handling to provide clear warnings for deprecated configurations, ensuring better migration guidance. Fixed Resolved an issue on Windows where the command failed to spawn correctly in the MCP environment, restoring reliable build initiation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.44.2...capgo 22..."
-  },
-  {
     "category": "release",
     "title": "capacitor-accelerometer 8.0.58",
     "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.58",
@@ -401,11 +401,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-app-intents 8.1.3",
-    "link": "https://github.com/Cap-go/capacitor-app-intents/releases/tag/8.1.3",
-    "guid": "https://github.com/Cap-go/capacitor-app-intents/releases/tag/8.1.3",
-    "pubDate": "2026-11-13T13:05:58.000Z",
-    "description": "Changelog Fixed Aligned Android toolchain versions with official Capacitor 8 requirements to ensure compatibility with standard Capacitor 8 projects and prevent build time mismatches. Full Changelog: https://github.com/Cap go/capacitor app intents/compare/8.1.2...8.1.3"
+    "title": "capacitor-app-intents 8.3.0",
+    "link": "https://github.com/Cap-go/capacitor-app-intents/releases/tag/8.3.0",
+    "guid": "https://github.com/Cap-go/capacitor-app-intents/releases/tag/8.3.0",
+    "pubDate": "2026-11-20T10:07:36.000Z",
+    "description": "Changelog Changelog was not generated automatically for this release. Full Changelog: https://github.com/Cap go/capacitor app intents/releases/tag/8.3.0"
   },
   {
     "category": "release",
@@ -921,19 +921,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-navigation 8.16.3",
-    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.3",
-    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.3",
-    "pubDate": "2026-11-12T16:42:01.000Z",
-    "description": "🆕 Changelog Changed Updated contribution documentation to clarify that pull requests are reviewed, tested, and merged by humans. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.16.2...8.16.3"
+    "title": "capacitor-native-navigation 8.16.4",
+    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.4",
+    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.4",
+    "pubDate": "2026-11-20T10:10:24.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.16.4...8.16.4"
   },
   {
     "category": "release",
-    "title": "capacitor-native-purchases 8.9.16",
-    "link": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.16",
-    "guid": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.16",
-    "pubDate": "2026-11-13T16:39:14.000Z",
-    "description": "🆕 Changelog Fixed Improved reliability of Android in app purchases through Google Play. The billing client connection is now kept active while the Play purchase sheet is open, preventing transactions from failing or being interrupted while the user is completing a purchase. ( 256) 🔗 Full Changelog : https://github.com/Cap go/capacitor native purchases/compare/8.9.15...8.9.16"
+    "title": "capacitor-native-purchases 8.9.17",
+    "link": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.17",
+    "guid": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.17",
+    "pubDate": "2026-11-20T05:17:48.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native purchases/compare/8.9.17...8.9.17"
   },
   {
     "category": "release",
