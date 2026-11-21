@@ -30,7 +30,7 @@ faq:
     answer: "Pick Capacitor when you already have or plan a web app and want maximum code sharing with the browser. Pick React Native when the product must feel fully native, relies on complex gestures and animations, or your team already standardizes on the React Native component model and Expo tooling."
 ---
 
-**Quick answer:** Pick **React Native** when the product needs native UI components, deep platform animations, and a team already invested in the React Native and Expo toolchain, including the New Architecture that is default from React Native 0.82 onward. Pick **Capacitor** when you already ship a **React, Vue, or Angular web app** and want iOS and Android by wrapping that web UI in a native shell, especially if you target **Capacitor 8** and want one codebase for web and mobile. For live updates on the Capacitor path, see [What are OTA updates?](/blog/what-are-ota-updates/) and the [EAS vs Capgo comparison](/alternatives/expo/).
+**Quick answer:** Pick **React Native** when the product needs native UI components, deep platform animations, and a team already invested in the React Native and Expo toolchain, including the New Architecture, enabled by default since React Native 0.76 and required from React Native 0.82 onward. Pick **Capacitor** when you already ship a **React, Vue, or Angular web app** and want iOS and Android by wrapping that web UI in a native shell, especially if you target **Capacitor 8** and want one codebase for web and mobile. For live updates on the Capacitor path, see [What are OTA updates?](/blog/what-are-ota-updates/) and the [EAS vs Capgo comparison](/alternatives/expo/).
 
 | Topic | Capacitor (8.x) | React Native (0.7x+, New Architecture) |
 | --- | --- | --- |
@@ -55,7 +55,7 @@ Capacitor works with **React, Vue, Angular, Svelte**, or vanilla JS. The officia
 
 [React Native](https://reactnative.dev/) lets you build mobile apps with React. Instead of DOM elements, you compose primitives such as `View`, `Text`, and `Image` that map to native controls.
 
-The **New Architecture** (Fabric for layout and rendering, TurboModules for native calls) is the default path on current releases. From **React Native 0.82**, disabling the New Architecture is no longer supported on Android, and new projects are expected to run with it enabled.
+The **New Architecture** (Fabric for layout and rendering, TurboModules for native calls) has been the default since **React Native 0.76**. From **React Native 0.82**, disabling the New Architecture is no longer supported on Android, and new projects ship with it only.
 
 Most greenfield teams also use **[Expo](https://expo.dev/)** for project templates, native module access, and cloud builds. **EAS Update** ships over the air JavaScript and asset changes to production channels after you install `expo-updates`. That is the usual React Native answer to fast iteration without a full store review for JS-only fixes.
 
@@ -65,7 +65,7 @@ Most greenfield teams also use **[Expo](https://expo.dev/)** for project templat
 
 Capacitor paints your HTML and CSS inside a WebView. Startup loads your bundled assets from the app package (or from an updated bundle after OTA). Scrolling and transitions depend on the WebView and how lean your web bundle is. Ionic documents WebView behavior in their [core concepts](https://ionicframework.com/docs/core-concepts/webview/). Capacitor apps can feel sluggish on very old hardware or with huge unoptimized bundles, the same way heavy sites can in mobile browsers.
 
-React Native skips the DOM for UI. Fabric lays out native views, which helps lists, gestures, and screen transitions that must match platform conventions. You still pay JavaScript bridge costs, but you avoid WebView layout for the main interface.
+React Native skips the DOM for UI. Fabric lays out native views, which helps lists, gestures, and screen transitions that must match platform conventions. JavaScript and native work can still add overhead, but the New Architecture uses **JSI** rather than the old asynchronous bridge. You also avoid WebView layout for the main interface.
 
 Practical guidance:
 
@@ -99,9 +99,9 @@ If you use **Ionic React**, you get mobile oriented components on top of the sam
 
 | Option | How it builds UI | Typical reason to choose it |
 | --- | --- | --- |
-| **Flutter** | Skia rendered widgets in Dart | One bespoke UI everywhere, strong custom design, no WebView |
+| **Flutter** | Impeller rendered widgets in Dart | One bespoke UI everywhere, strong custom design, no WebView |
 | **React Native + Expo** | Native views + managed toolchain | Mobile first React, EAS Build, **expo-updates** |
-| **Ionic + Capacitor** | Web components in a WebView | Faster mobile UI kit while staying web based |
+| **Ionic (UI on Capacitor)** | Ionic components in a Capacitor WebView | Mobile oriented UI kit on the same Capacitor runtime |
 | **Native Swift / Kotlin** | Platform SDKs only | Maximum control, best platform APIs, separate codebases |
 
 Cordova is a legacy option in the same family as Capacitor. New projects should start on Capacitor rather than Cordova.
