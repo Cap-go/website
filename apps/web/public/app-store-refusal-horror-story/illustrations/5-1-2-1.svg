@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tracking prompt hidden when ads are off for review">
+  <title>Tracking prompt hidden when ads are off for review</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="40" y="48" width="112" height="112" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <rect x="56" y="64" width="80" height="14" rx="7" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="64" y="74" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">ads</text>
+  <rect x="100" y="66" width="28" height="10" rx="5" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <circle cx="108" cy="71" r="4" fill="#EF4444"/>
+  <path d="M72 100 L112 100" stroke="#374151" stroke-width="2" stroke-dasharray="5 4"/>
+  <rect x="64" y="116" width="64" height="28" rx="8" fill="#0F172A" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="72" y="134" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">ATT ?</text>
+  <path d="M168 104 L204 104" stroke="#9CA3AF" stroke-width="2"/>
+  <polygon points="204,104 198,100 198,108" fill="#9CA3AF"/>
+  <rect x="212" y="56" width="72" height="96" rx="12" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <rect x="228" y="72" width="40" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <rect x="228" y="88" width="40" height="8" rx="4" fill="#9CA3AF" opacity="0.35"/>
+  <path d="M228 112 L228 128 L268 128 L268 112" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <circle cx="248" cy="120" r="10" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <circle cx="248" cy="120" r="4" fill="#44BCFF" opacity="0.6"/>
+  <rect x="40" y="168" width="140" height="22" rx="11" fill="#111827" stroke="#44BCFF" stroke-width="1.5"/>
+  <text x="52" y="183" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="7">after onboarding</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Termination overturned while payouts stay paused for two months">
+  <title>Termination overturned while payouts stay paused for two months</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="28" y="40" width="132" height="56" rx="10" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="40" y="62" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8" font-weight="600">termination</text>
+  <text x="40" y="78" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">notice</text>
+  <path d="M88 96 L88 118" stroke="#FBBF24" stroke-width="2"/>
+  <polygon points="88,118 84,110 92,110" fill="#FBBF24"/>
+  <rect x="52" y="118" width="84" height="48" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="60" y="140" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="7" font-weight="600">overturned</text>
+  <text x="60" y="154" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">no rule broken</text>
+  <rect x="176" y="36" width="116" height="132" rx="12" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <text x="188" y="60" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="10" font-weight="700">2 mo</text>
+  <text x="188" y="78" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">no payout</text>
+  <rect x="192" y="92" width="84" height="12" rx="4" fill="#374151"/>
+  <rect x="192" y="112" width="64" height="12" rx="4" fill="#374151" opacity="0.7"/>
+  <rect x="192" y="132" width="72" height="12" rx="4" fill="#44BCFF" opacity="0.35"/>
+  <circle cx="260" cy="148" r="16" fill="none" stroke="#EF4444" stroke-width="2"/>
+  <path d="M254 148 L258 152 L266 144" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <rect x="176" y="176" width="116" height="18" rx="9" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="188" y="188" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">payments paused</text>
+</svg>
