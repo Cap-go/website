@@ -1,0 +1,28 @@
+<script is:inline>
+  // Select tiles in the inert template so only the finished loop reaches the page.
+  {
+    const template = document.currentScript.previousElementSibling
+    for (const track of template.content.querySelectorAll('[data-logo-slots]')) {
+      const strip = track.classList.contains('app-strip-track')
+      const containers = strip ? Array.from(track.children) : [track]
+      const tiles = Array.from(containers[0].children)
+      const count = strip ? tiles.length : tiles.length / 2
+      const pool = tiles.slice(0, count)
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        const previous = pool[i]
+        pool[i] = pool[j]
+        pool[j] = previous
+      }
+      const sample = pool.slice(0, Number(track.dataset.logoSlots))
+      const duplicate = sample.map((tile) => tile.cloneNode(true))
+      if (strip) {
+        containers[0].replaceChildren(...sample)
+        containers[1].replaceChildren(...duplicate)
+      } else {
+        track.replaceChildren(...sample, ...duplicate)
+      }
+    }
+    template.replaceWith(template.content)
+  }
+</script>

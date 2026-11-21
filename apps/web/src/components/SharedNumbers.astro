@@ -1,5 +1,7 @@
 ---
+import InitializeLogoLoop from './InitializeLogoLoop.astro'
 import m from '@/copy/messages'
+import { featuredCustomerLogos } from '@/config/customerApps'
 import dayjs from 'dayjs'
 import { siteMetrics } from '@/config/siteMetrics'
 import { getTotalStars } from '@/services/github'
@@ -50,7 +52,9 @@ const appLogos = [
   { slug: 'finax', name: 'Finax' },
   { slug: 'vestwell', name: 'Vestwell' },
 ]
-const appLogoRows = [0, 1, 2].map((row) => appLogos.filter((_, index) => index % 3 === row))
+const allLogos = [...featuredCustomerLogos, ...appLogos]
+const wallRowSlots = [15, 14, 14]
+const appLogoRows = [0, 1, 2].map((row) => allLogos.filter((_, index) => index % 3 === row))
 
 // Same total as the header GitHub badge so both numbers match.
 const totalStars = getTotalStars()
@@ -121,17 +125,25 @@ const totalStars = getTotalStars()
       <!-- Apps -->
       <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20">
         <!-- Visual Area -->
-        <div class="app-wall relative mb-6 flex h-44 flex-col justify-center gap-3 overflow-hidden" aria-hidden="true">
-          {appLogoRows.map((row, rowIndex) => (
-            <div class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
-              {[...row, ...row].map((logo) => (
-                <span class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#2B2D30] ring-1 ring-white/5">
-                  <img src={`/logo_cloud/${logo.slug}_logo.webp`} alt={`${logo.name} app icon`} class="h-full w-full object-contain p-1.5" loading="lazy" decoding="async" />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
+        {(['noscript', 'template'] as const).map((Container) => {
+          const rows = Container === 'template' ? appLogoRows : appLogoRows.map((row, i) => row.slice(0, wallRowSlots[i]))
+          return (
+            <Container>
+              <div class="app-wall relative mb-6 flex h-44 flex-col justify-center gap-3 overflow-hidden" aria-hidden="true">
+                {rows.map((row, rowIndex) => (
+                  <div data-logo-slots={wallRowSlots[rowIndex]} class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
+                    {[...row, ...row].map((logo) => (
+                      <span class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#2B2D30] ring-1 ring-white/5">
+                        <img src={`/logo_cloud/${logo.slug}_logo.webp`} alt={`${logo.name} app icon`} class="h-full w-full object-contain p-1.5" loading="lazy" decoding="async" />
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </Container>
+          )
+        })}
+        <InitializeLogoLoop />
 
         <!-- Content -->
         <div class="relative z-10">
