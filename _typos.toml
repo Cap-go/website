@@ -30,6 +30,8 @@ extend-exclude = [
 
 [default]
 extend-ignore-re = [
+    # Official Swedish app titles
+    "(?:Scania|Volvo Cars) Meny",
     # Ignore URLs
     "https?://\\S+",
     # Cloudflare data center (IATA airport) codes in the hero world map config
