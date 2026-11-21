@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Community app read as dating under 4.3(b), appeal denied, groups redesign approved">
+  <title>Community app read as dating under 4.3(b), appeal denied, groups redesign approved</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="32" y="44" width="116" height="128" rx="12" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="48" y="60" width="84" height="22" rx="11" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <path d="M78 90 C78 82 84 76 92 76 C100 76 106 82 106 90 C106 102 92 112 92 112 C92 112 78 102 78 90 Z" fill="none" stroke="#EF4444" stroke-width="2"/>
+  <path d="M56 132 L76 152 L96 132" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <text x="52" y="74" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7" font-weight="600">match</text>
+  <rect x="52" y="156" width="48" height="18" rx="6" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="58" y="168" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">4.3(b)</text>
+  <path d="M156 108 L188 108" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="188,108 182,104 182,112" fill="#9CA3AF"/>
+  <rect x="196" y="48" width="104" height="124" rx="12" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <circle cx="220" cy="72" r="8" fill="#44BCFF" opacity="0.5"/>
+  <circle cx="248" cy="72" r="8" fill="#44BCFF" opacity="0.4"/>
+  <circle cx="276" cy="72" r="8" fill="#44BCFF" opacity="0.35"/>
+  <rect x="212" y="92" width="72" height="28" rx="8" fill="#111827" stroke="#44BCFF" stroke-width="1.5"/>
+  <text x="220" y="110" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="8">groups</text>
+  <path d="M228 148 L236 156 L252 140" fill="none" stroke="#44BCFF" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="32" y="24" width="72" height="18" rx="9" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="42" y="37" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8">appeal no</text>
+</svg>
