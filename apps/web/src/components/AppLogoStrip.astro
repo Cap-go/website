@@ -22,7 +22,7 @@ const stats = m.app_strip_stats(
 <div class="app-strip mx-auto mt-12 flex w-full flex-col sm:mt-14" role="group" aria-labelledby="app-strip-title">
   <p id="app-strip-title" class="px-4 text-center text-sm font-semibold text-slate-300 sm:text-base">{stats}</p>
   <div class="app-strip-viewport mt-4 overflow-hidden">
-    <div class="app-strip-track flex w-max gap-3">
+    <div data-logo-slots={customerApps.length} class="app-strip-track flex w-max gap-3">
       {
         [0, 1].map((copy) => (
           <ul class="flex shrink-0 gap-3" aria-hidden={copy === 1 ? 'true' : undefined}>
@@ -42,12 +42,21 @@ const stats = m.app_strip_stats(
   </div>
 </div>
 
+<script>
+  import { sampleLogoLoop } from '@/scripts/sampleLogoLoop'
+  document.querySelectorAll<HTMLElement>('.app-strip-track').forEach((track) => {
+    const lists = Array.from(track.children)
+    const groups = lists.map((list) => Array.from(list.children))
+    sampleLogoLoop(lists, groups, Number(track.dataset.logoSlots))
+  })
+</script>
+
 <style is:global>
   .app-strip-viewport {
     mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
   }
   .app-strip-track {
-    animation: app-strip-scroll 90s linear infinite;
+    animation: app-strip-scroll 50s linear infinite;
   }
   .app-strip:hover .app-strip-track,
   .app-strip:focus-within .app-strip-track {
@@ -67,7 +76,6 @@ const stats = m.app_strip_stats(
       justify-content: center;
     }
     .app-strip-track > ul {
-      width: 100%;
       flex-wrap: wrap;
       justify-content: center;
     }

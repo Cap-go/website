@@ -7,7 +7,6 @@ import { getTotalStars } from '@/services/github'
 
 // Every logo in /public/logo_cloud, split into three rows for the scrolling wall.
 const appLogos = [
-  ...featuredCustomerLogos,
   { slug: 'axa_th_health', name: 'AXA TH Health' },
   { slug: 'onemain_financial', name: 'OneMain Financial' },
   { slug: 'abuelos', name: "Abuelo's Mexican Restaurant" },
@@ -52,7 +51,8 @@ const appLogos = [
   { slug: 'finax', name: 'Finax' },
   { slug: 'vestwell', name: 'Vestwell' },
 ]
-const appLogoRows = [0, 1, 2].map((row) => appLogos.filter((_, index) => index % 3 === row))
+const allLogos = [...featuredCustomerLogos, ...appLogos]
+const appLogoRows = [0, 1, 2].map((row) => allLogos.filter((_, index) => index % 3 === row))
 
 // Same total as the header GitHub badge so both numbers match.
 const totalStars = getTotalStars()
@@ -125,9 +125,9 @@ const totalStars = getTotalStars()
         <!-- Visual Area -->
         <div class="app-wall relative mb-6 flex h-44 flex-col justify-center gap-3 overflow-hidden" aria-hidden="true">
           {appLogoRows.map((row, rowIndex) => (
-            <div class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
-              {[...row, ...row].map((logo, index) => (
-                <span class:list={[index >= row.length && 'motion-reduce:hidden']} class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#2B2D30] ring-1 ring-white/5">
+            <div data-logo-slots={appLogos.filter((_, index) => index % 3 === rowIndex).length} class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
+              {[...row, ...row].map((logo) => (
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#2B2D30] ring-1 ring-white/5">
                   <img src={`/logo_cloud/${logo.slug}_logo.webp`} alt={`${logo.name} app icon`} class="h-full w-full object-contain p-1.5" loading="lazy" decoding="async" />
                 </span>
               ))}
@@ -261,18 +261,27 @@ const totalStars = getTotalStars()
   </div>
 </section>
 
+<script>
+  import { sampleLogoLoop } from '@/scripts/sampleLogoLoop'
+  document.querySelectorAll<HTMLElement>('.app-wall-row').forEach((row) => {
+    const tiles = Array.from(row.children)
+    const half = tiles.length / 2
+    sampleLogoLoop(row, [tiles.slice(0, half), tiles.slice(half)], Number(row.dataset.logoSlots))
+  })
+</script>
+
 <style is:global>
   .app-wall {
     mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
   }
 
   .app-wall-row {
-    animation: app-wall-scroll 60s linear infinite;
+    animation: app-wall-scroll 40s linear infinite;
   }
 
   .app-wall-row--reverse {
     animation-direction: reverse;
-    animation-duration: 72s;
+    animation-duration: 48s;
   }
 
   @keyframes app-wall-scroll {
@@ -282,15 +291,7 @@ const totalStars = getTotalStars()
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .app-wall {
-      height: auto;
-      mask-image: none;
-    }
-
     .app-wall-row {
-      width: auto;
-      flex-wrap: wrap;
-      justify-content: center;
       animation: none;
     }
   }
