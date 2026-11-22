@@ -29,7 +29,7 @@ export const customerApps: CustomerApp[] = [
   { name: 'IREC', icon: '/logo_cloud/irec_logo.webp', installs: '150K+' },
   { name: '360Player', icon: '/logo_cloud/360player_logo.webp', installs: '100K+' },
   { name: 'Finax', icon: '/logo_cloud/finax_logo.webp', installs: '100K+' },
-  { name: 'OurLiving', icon: '/logo_cloud/our_living_logo.webp', installs: '80K+', role: 'app_strip_coop_news' },
+  { name: 'OurLiving', icon: '/logo_cloud/our_living_logo.webp', installs: '80K+', role: 'app_strip_coop_hub' },
   { name: "Abuelo's Mexican Restaurant", icon: '/logo_cloud/abuelos_logo.webp', installs: '10K+', role: 'app_strip_dining_rewards' },
   { name: 'Volvo Cars Meny', icon: '/logo_cloud/volvo_logo.webp', installs: '1K+', role: 'app_strip_workplace_dining' },
   { name: 'AXA TH Health', icon: '/logo_cloud/axa_th_health_logo.webp', installs: '1K+', role: 'app_strip_health_coverage' },

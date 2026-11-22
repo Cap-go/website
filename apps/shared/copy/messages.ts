@@ -292,7 +292,7 @@ const messages = {
   app_strip_orders_and_rewards: 'Orders & rewards',
   app_strip_vitals_tracking: 'Vitals tracking',
   app_strip_pickup: 'Pickup',
-  app_strip_coop_news: 'Co-op news',
+  app_strip_coop_hub: 'Co-op hub',
   app_strip_repairs: 'Repairs',
   app_strip_staff_meals: 'Staff meals',
   app_strip_supply_orders: 'Supply orders',

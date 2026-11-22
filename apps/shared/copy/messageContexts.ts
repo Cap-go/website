@@ -441,7 +441,7 @@ export const messageContexts = {
   app_strip_bus_tickets: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_bus_tickets` (App Strip Bus Tickets).',
   app_strip_campus_dining: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_campus_dining` (App Strip Campus Dining).',
   app_strip_conference_schedules: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_conference_schedules` (App Strip Conference Schedules).',
-  app_strip_coop_news: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_coop_news` (App Strip Coop News).',
+  app_strip_coop_hub: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_coop_hub` (App Strip Coop Hub).',
   app_strip_delegate_guide: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_delegate_guide` (App Strip Delegate Guide).',
   app_strip_dining_rewards: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_dining_rewards` (App Strip Dining Rewards).',
   app_strip_flight_booking: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Message key `app_strip_flight_booking` (App Strip Flight Booking).',
