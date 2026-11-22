@@ -32,7 +32,7 @@ The response includes:
 - `mcp_url` (`https://api.capgo.app/terminal/mcp/`)
 - `websocket_url` for live command output
 
-Connect your MCP client to `mcp_url` with the same API key (`Authorization: Bearer` or `capgkey` header). Command stdout is also pushed on the WebSocket as JSON lines (`type: stdout`).
+Connect your MCP client to the `mcp_url` from the response (it already includes `?session_key=...`). Use the same API key (`Authorization: Bearer` or `capgkey` header). You can also send `session_key` with header `X-Capgo-Terminal-Session` if your client cannot preserve query strings. Command stdout is also pushed on the WebSocket as JSON lines (`type: stdout`).
 
 ## MCP tools
 
