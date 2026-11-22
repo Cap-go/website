@@ -199,7 +199,7 @@ const rows: CompareSection[] = [
         emphasis: true,
         faqHref: '#faq-storage',
         value: (plan: Database['public']['Tables']['plans']['Row']) =>
-          `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB (${numberWithSpaces(storageGbHoursPerMonth(plan.storage))}${plan.name === 'Enterprise' ? '+' : ''} GBh/${m.month({}, { locale: Astro.locals.locale })})`,
+          `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB (${numberWithSpaces(storageGbHoursPerMonth(plan.storage))}${plan.name === 'Enterprise' ? '+' : ''} ${m.storage_gbh_per_30_days({}, { locale: Astro.locals.locale })})`,
       },
       {
         label: 'Credit-based overages',
