@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T03:05:33.847Z",
+  "updatedAt": "2026-11-22T03:04:54.865Z",
   "advisories": {
     "total": 132,
     "severities": {
@@ -106,8 +106,8 @@
       ]
     },
     "builder": {
-      "success_rate": 80.7,
-      "updated_at": "2026-11-19T04:12:14.435Z"
+      "success_rate": 79.7,
+      "updated_at": "2026-11-21T03:05:20.664Z"
     }
   }
 }
