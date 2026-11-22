@@ -1,6 +1,6 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
-import { resolveTranslationContexts } from '../../shared/copy/translationContextLookup'
+import { resolveTranslationContexts as lookupTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { withDevHostNoindex } from '../../shared/devHostNoindex'
 import { isGonePath } from '../../shared/gonePaths'
 import { resolveLegacyPathRedirect } from '../../shared/legacyPathRedirects'
@@ -335,6 +335,10 @@ const HTML_ENTITY_CHARACTERS: Record<string, string> = { amp: '&', lt: '<', gt: 
 // again keeps both shapes from being published as a visible `&amp;amp;` or `&amp;gt;`.
 function decodeHtmlEntities(value: string): string {
   return value.replace(/&(amp|lt|gt|quot|apos|#39|#x27);/gi, (match, name: string) => HTML_ENTITY_CHARACTERS[name.toLowerCase()] ?? match)
+}
+
+function resolveTranslationContexts(texts: readonly string[]): Array<string | undefined> {
+  return lookupTranslationContexts(texts.map(decodeHtmlEntities))
 }
 
 function escapeHtmlAttribute(value: string, quote = '"'): string {

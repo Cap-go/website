@@ -5,9 +5,15 @@ import { customerApps, featuredCustomerLogos } from '@/config/customerApps'
 import { getTotalStars } from '@/services/github'
 
 const stripSlotCount = 25
-const stripApps = [...featuredCustomerLogos.map(({ name, slug }) => ({ name, icon: `/logo_cloud/${slug}_logo.webp`, installs: null })), ...customerApps]
-
 const locale = Astro.locals.locale
+const stripApps = [
+  ...featuredCustomerLogos.map(({ name, slug, role }) => ({ name, icon: `/logo_cloud/${slug}_logo.webp`, subtitle: m[role]({}, { locale }) })),
+  ...customerApps.map(({ name, icon, role, installs }) => ({
+    name,
+    icon,
+    subtitle: role ? m[role]({}, { locale }) : m.app_strip_installs({ count: installs }, { locale }),
+  })),
+]
 const stats = m.app_strip_stats(
   {
     teams: m.companies_logo_stat_companies_value({}, { locale }),
@@ -44,7 +50,7 @@ const stats = m.app_strip_stats(
                     />
                     <span class="leading-tight">
                       <span class="block text-sm font-semibold whitespace-nowrap text-white">{app.name}</span>
-                      {app.installs && <span class="block text-xs whitespace-nowrap text-slate-400">{m.app_strip_installs({ count: app.installs }, { locale })}</span>}
+                      <span class="block text-xs whitespace-nowrap text-slate-400">{app.subtitle}</span>
                     </span>
                   </li>
                 ))}
