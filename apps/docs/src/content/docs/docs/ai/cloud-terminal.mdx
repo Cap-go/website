@@ -29,11 +29,11 @@ Content-Type: application/json
 The response includes:
 
 - `session_key` (`org_id:app_id:session_id`)
-- `mcp_url` (`https://api.capgo.app/terminal/mcp/`)
+- `mcp_url` (`https://api.capgo.app/terminal/mcp?session_key=...`)
 - `websocket_url` (includes a single-use `ws_token` query parameter for browsers)
 - `ws_connect_token` (same value as `ws_token`; use it once to open the WebSocket)
 
-Connect your MCP client to the `mcp_url` from the response (it already includes `?session_key=...`). MCP still requires the API key (`Authorization: Bearer` or `capgkey` header). For live stdout in a browser, open `websocket_url` with the `ws_token` from the start response (browsers cannot send the `capgkey` header). You can also send `session_key` with header `X-Capgo-Terminal-Session` if your client cannot preserve query strings. Command stdout is pushed on the WebSocket as JSON lines (`type: stdout`).
+Connect your MCP client to `mcp_url` from the start response. MCP uses streamable HTTP on that URL and still requires your API key (`Authorization: Bearer` or `capgkey` header). For live stdout in a browser, open `websocket_url` with the `ws_token` from the start response only: the WebSocket route does not accept API keys. You can also send `session_key` with header `X-Capgo-Terminal-Session` if your client cannot preserve query strings. Command stdout is pushed on the WebSocket as JSON lines (`type: stdout`).
 
 ## End a session
 
