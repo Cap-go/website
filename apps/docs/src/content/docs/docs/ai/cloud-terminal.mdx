@@ -12,7 +12,7 @@ Capgo cloud terminal gives you a Linux workspace per session so you can run CLI 
 
 ## Start a session
 
-Send a Capgo API key that already has access to **one app** (app-scoped RBAC). Server keys that are not limited to a single app are rejected for terminal sessions.
+Send a Capgo API key with **write** or **all** mode that is bound to **one app** (app-scoped RBAC via `role_bindings`). Org-wide or read-only keys are rejected.
 
 ```http
 POST https://api.capgo.app/terminal/sessions/
@@ -30,9 +30,24 @@ The response includes:
 
 - `session_key` (`org_id:app_id:session_id`)
 - `mcp_url` (`https://api.capgo.app/terminal/mcp/`)
-- `websocket_url` for live command output
+- `websocket_url` (includes a single-use `ws_token` query parameter for browsers)
+- `ws_connect_token` (same value as `ws_token`; use it once to open the WebSocket)
 
-Connect your MCP client to the `mcp_url` from the response (it already includes `?session_key=...`). Use the same API key (`Authorization: Bearer` or `capgkey` header). You can also send `session_key` with header `X-Capgo-Terminal-Session` if your client cannot preserve query strings. Command stdout is also pushed on the WebSocket as JSON lines (`type: stdout`).
+Connect your MCP client to the `mcp_url` from the response (it already includes `?session_key=...`). MCP still requires the API key (`Authorization: Bearer` or `capgkey` header). For live stdout in a browser, open `websocket_url` with the `ws_token` from the start response (browsers cannot send the `capgkey` header). You can also send `session_key` with header `X-Capgo-Terminal-Session` if your client cannot preserve query strings. Command stdout is pushed on the WebSocket as JSON lines (`type: stdout`).
+
+## End a session
+
+```http
+POST https://api.capgo.app/terminal/sessions/end/
+Authorization: Bearer <Capgo API key>
+Content-Type: application/json
+
+{
+  "session_key": "<org_id:app_id:session_id>"
+}
+```
+
+Sessions also end on idle timeout (same as container sleep), or when the 60 minute max duration alarm fires.
 
 ## MCP tools
 
@@ -46,18 +61,18 @@ Connect your MCP client to the `mcp_url` from the response (it already includes 
 
 | Setting | Default (preview) |
 | --- | --- |
-| Availability | Paid plans only; org flag `cloud_terminal_enabled` off by default |
+| Availability | Paid plans only; org flag `cloud_terminal_enabled` off by default (service_role only) |
 | Billing | Minutes metered in `terminal_sessions`; not invoiced yet |
 | Max session length | 60 minutes (hard alarm teardown) |
 | Concurrency per org | 2 active sessions |
-| Idle sleep | 10 minutes |
+| Idle sleep / teardown | 10 minutes without MCP activity |
 | Command timeout | 120 seconds |
-| Output cap | 256 KiB per command stream |
+| Output cap | 256 KiB per command stream (reset each `run_command`) |
 | Workspace | Non-root user, paths locked to `/workspace/project/` |
 | Blocked commands | `sudo`, `su`, `mount`, `chroot`, `nsenter`, and similar |
-| Egress allowlist | `registry.npmjs.org`, `github.com`, `codeload.github.com`, `objects.githubusercontent.com` |
+| Egress allowlist | Enforced (`enableInternet: false`); `registry.npmjs.org`, `github.com`, `codeload.github.com`, `objects.githubusercontent.com` |
 | Code ingress | `git clone` of a URL you provide (must resolve through the allowlist). Capgo bundle upload is planned as a follow-up. |
 
 <Aside type="caution" title="Preview defaults">
-  These defaults may change before general availability. Capgo enables cloud terminal per organization after you turn on `cloud_terminal_enabled` and your org is on a paid plan.
+  These defaults may change before general availability. Capgo enables cloud terminal per organization after `cloud_terminal_enabled` is set on a paid plan (Capgo support / service_role).
 </Aside>
