@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Tarot card draw from home screen widget rejected under 4.3(b) saturated fortune telling">
+  <title>Tarot card draw from home screen widget rejected under 4.3(b) saturated fortune telling</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="24" y="56" width="88" height="108" rx="14" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <rect x="32" y="68" width="72" height="20" rx="6" fill="#111827" stroke="#44BCFF" stroke-width="1.5"/>
+  <text x="40" y="82" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="7">widget</text>
+  <rect x="40" y="96" width="56" height="48" rx="6" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <circle cx="52" cy="112" r="4" fill="#FBBF24" opacity="0.8"/>
+  <path d="M72 104 L80 128 L64 128 Z" fill="none" stroke="#FBBF24" stroke-width="1.5"/>
+  <path d="M56 132 L88 132" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="3 2"/>
+  <rect x="36" y="152" width="64" height="6" rx="3" fill="#374151"/>
+  <path d="M124 108 L156 108" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="156,108 150,104 150,112" fill="#9CA3AF"/>
+  <rect x="168" y="44" width="128" height="132" rx="12" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="180" y="68" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8" font-weight="600">4.3(b)</text>
+  <text x="180" y="84" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">fortune telling</text>
+  <rect x="180" y="96" width="96" height="10" rx="4" fill="#374151"/>
+  <rect x="180" y="112" width="80" height="10" rx="4" fill="#374151" opacity="0.75"/>
+  <rect x="180" y="128" width="88" height="10" rx="4" fill="#374151" opacity="0.6"/>
+  <text x="180" y="154" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">saturated</text>
+  <rect x="24" y="28" width="52" height="18" rx="9" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="34" y="41" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8">rejected</text>
+</svg>
