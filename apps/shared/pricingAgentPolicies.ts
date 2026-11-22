@@ -11,7 +11,7 @@ At bandwidth or storage limits, Capgo emails you at 50%, 70%, 90%, and 100%. Upd
 
 ### Storage billing
 
-Storage is billed in GB-hours (GBh): each bundle counts its size for every hour it stays stored. A plan includes its storage in GB times the hours in the billing cycle (20 GB is 14,400 GBh in a 30-day cycle). Deleting a bundle stops its billing from that moment; the hours it was already stored stay billed, so deleting bundles after reaching the storage limit does not lift it before the cycle ends. Storage overage is priced per GB-month, which is 720 GBh in a 30-day cycle.
+Storage is billed in GB-hours (GBh, 1 GiB stored for 1 hour): each bundle counts its size for every hour it stays stored. A plan includes its storage in GiB times the hours in the billing cycle (20 GiB is 14,400 GBh in a 30-day cycle). Deleting a bundle stops its billing from that moment; the hours it was already stored stay billed, so deleting bundles after reaching the storage limit does not lift it before the cycle ends. Storage overage is priced per GiB-month, which is 720 GBh in a 30-day cycle.
 
 ### Plan changes
 

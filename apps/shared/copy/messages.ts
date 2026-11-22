@@ -1498,7 +1498,7 @@ const messages = {
   pricing_calculator_mau_hint: 'Unique devices that check for updates in 30 days.',
   pricing_calculator_over_plan: 'over the plan',
   pricing_calculator_size_hint: 'Download size of one update. Delta updates only send changed files.',
-  pricing_calculator_storage: 'Average storage',
+  pricing_calculator_storage: 'Storage',
   pricing_calculator_subtitle: 'Move the sliders. The price updates instantly.',
   pricing_calculator_updates_hint: 'How many live updates you ship per month.',
   pricing_calculator_usage_vs_plan: 'Usage vs plan',
@@ -3766,7 +3766,7 @@ const messages = {
   repositories_have_different_scopes_use_different_programming_languages_and_have_varying_level_when_it_comes_to_contributions:
     'Repositories have different scopes, use different programming languages and have varying level when it comes to contributions.',
   request_demo: 'Request Demo',
-  required_storage_space: 'Average storage over the month',
+  required_storage_space: 'Required storage space',
   requires_capgo_account: 'Requires a Capgo account',
   return_address: 'Sepapaja tn 6\nTallinn, 15551\nEstonia',
   return_eligibility: 'In order for the Goods to be eligible for a return, please make sure that:',
@@ -5991,7 +5991,7 @@ const messages = {
   status: 'Status',
   storage: 'Storage (GiB)',
   storage_calculated_info:
-    '* Storage is billed in GB-hours (GBh): each bundle counts its size for every hour it stays stored. A plan includes its storage in GiB times the hours in your billing cycle, so 20 GiB is 14,400 GBh in a 30-day cycle. Storage overage is priced per GiB-month, which is 720 GBh in a 30-day cycle.',
+    '* Storage is billed in GB-hours (GBh, 1 GiB stored for 1 hour): each bundle counts its size for every hour it stays stored. A plan includes its storage in GiB times the hours in your billing cycle, so 20 GiB is 14,400 GBh in a 30-day cycle. Storage overage is priced per GiB-month, which is 720 GBh in a 30-day cycle.',
   storage_detailed_explanation:
     'Storage keeps the retained app bundles and assets needed for rollout, rollback, and deployment history. Historical bundles and Delta assets count toward storage while they are retained. You control unused-bundle retention in your app settings; bundles linked to an active channel or rollout stay protected. Regional replication does not multiply storage: each bundle is counted once, regardless of delivery regions. Storage is billed in GB-hours: a bundle counts its size for every hour it stays stored. Deleting a bundle stops its billing from that moment, and the hours it was already stored stay billed. Your plan includes its storage in GiB times the hours in your billing cycle.',
   storage_gb: 'Storage (GiB-month)',
