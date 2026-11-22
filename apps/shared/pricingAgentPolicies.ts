@@ -9,6 +9,10 @@ We'll send you email notifications when you reach 50%, 70%, 90%, and 100% of you
 
 At bandwidth or storage limits, Capgo emails you at 50%, 70%, 90%, and 100%. Update downloads or new bundle uploads pause until the billing cycle resets, you upgrade, or you purchase credits. Apps keep running their current version.
 
+### Storage billing
+
+Storage is billed in GB-hours (GBh, 1 GiB stored for 1 hour): each bundle counts its size for every hour it stays stored. A plan includes its storage in GiB times the hours in the billing cycle (20 GiB is 14,400 GBh in a 30-day cycle). Deleting a bundle stops its billing from that moment; the hours it was already stored stay billed, so deleting bundles after reaching the storage limit does not lift it before the cycle ends. Storage overage is priced per GiB-month, which is 720 GBh in a 30-day cycle.
+
 ### Plan changes
 
 You can upgrade or downgrade your plan at any time. Upgrades take effect immediately. Downgrades apply at the end of your current billing cycle so you keep the limits you already paid for.

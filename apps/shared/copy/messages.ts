@@ -3344,6 +3344,7 @@ const messages = {
   per_added_user: 'per added user',
   per_country_hosting_gdpr: 'Per-country hosting (GDPR compliance)',
   per_gb: 'per GiB',
+  per_gib_month: 'per GiB-month',
   per_1k_users: 'per 1k users',
   credits_mau_pricing_info: '1k users means 1,000 monthly active users. Charges are rounded up to your billing unit, which may be one user or a group of users.',
   per_unit: 'per unit',
@@ -5989,10 +5990,11 @@ const messages = {
   start_your_project: 'Start Your Project',
   status: 'Status',
   storage: 'Storage (GiB)',
-  storage_calculated_info: '* Storage is calculated per GiB per hour',
+  storage_calculated_info:
+    '* Storage is billed in GB-hours (GBh, 1 GiB stored for 1 hour): each bundle counts its size for every hour it stays stored. A plan includes its storage in GiB times the hours in your billing cycle, so 20 GiB is 14,400 GBh in a 30-day cycle. Storage overage is priced per GiB-month, which is 720 GBh in a 30-day cycle.',
   storage_detailed_explanation:
-    'Storage keeps the retained app bundles and assets needed for rollout, rollback, and deployment history. Historical bundles and Delta assets count toward storage while they are retained. You control unused-bundle retention in your app settings; bundles linked to an active channel or rollout stay protected. Regional replication does not multiply storage: each bundle is counted once, regardless of delivery regions.',
-  storage_gb: 'Storage (GiB)',
+    'Storage keeps the retained app bundles and assets needed for rollout, rollback, and deployment history. Historical bundles and Delta assets count toward storage while they are retained. You control unused-bundle retention in your app settings; bundles linked to an active channel or rollout stay protected. Regional replication does not multiply storage: each bundle is counted once, regardless of delivery regions. Storage is billed in GB-hours: a bundle counts its size for every hour it stays stored. Deleting a bundle stops its billing from that moment, and the hours it was already stored stay billed. Your plan includes its storage in GiB times the hours in your billing cycle.',
+  storage_gb: 'Storage (GiB-month)',
   storage_what_is_it_used_for: 'What is storage used for and how does it work?',
   risk_debt_eyebrow: 'Built for production teams',
   risk_debt_title: 'Reduce risk and technical debt',
@@ -6537,7 +6539,7 @@ const messages = {
     "We'll send you email notifications when you reach 50%, 70%, 90%, and 100% of your MAU limit. Once you hit the limit, your updates will be blocked until the end of your billing cycle. To continue serving updates, you can upgrade to a higher plan or purchase credits to cover the additional usage.",
   what_happens_if_i_reach_the_storage_limit: 'What happens if I reach the Storage limit?',
   what_happens_if_i_reach_the_storage_limit_answer:
-    "You'll receive email notifications at 50%, 70%, 90%, and 100% of your storage limit. When you reach the limit, you won't be able to upload new bundles until the end of your billing cycle, you upgrade your plan, or you purchase credits to cover the additional usage. Existing updates will continue to work normally.",
+    "You'll receive email notifications at 50%, 70%, 90%, and 100% of the storage GB-hours your plan includes for the billing cycle. When you reach the limit, you won't be able to upload new bundles until the end of your billing cycle, you upgrade your plan, or you purchase credits to cover the additional usage. GB-hours only grow during a cycle: deleting bundles stops them from adding more hours, but it does not lower the hours already used. Existing updates will continue to work normally.",
   what_payment_methods_answer:
     'We accept all major credit cards (Visa, Mastercard, American Express, Discover). For annual plans, we also accept bank transfers. All payments are processed securely through Stripe.',
   what_payment_methods_do_you_accept: 'What payment methods do you accept?',
