@@ -55,7 +55,7 @@ export const GET: APIRoute = async () => {
     const buildMinutes = plan.build_time_unit ? Math.round(plan.build_time_unit / 60).toLocaleString('en-US') : '—'
     const yearlyMonthly = plan.price_y ? `$${Math.round(plan.price_y / 12)}/month ($${plan.price_y.toLocaleString('en-US')}/year)` : '—'
     const observeEvents = observeEventsForPlan(plan).toLocaleString('en-US')
-    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GiB | ${(plan.storage ?? 0).toLocaleString('en-US')} GiB (${storageGbHoursPerMonth(plan.storage ?? 0).toLocaleString('en-US')} GBh per 30 days) | ${buildMinutes} min | ${observeEvents} |`
+    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GiB | ${(plan.storage ?? 0).toLocaleString('en-US')} GiB (${storageGbHoursPerMonth(plan.storage ?? 0).toLocaleString('en-US')} GBh/month) | ${buildMinutes} min | ${observeEvents} |`
   })
 
   const markdown = [

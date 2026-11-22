@@ -5995,7 +5995,6 @@ const messages = {
   storage_detailed_explanation:
     'Storage keeps the retained app bundles and assets needed for rollout, rollback, and deployment history. Historical bundles and Delta assets count toward storage while they are retained. You control unused-bundle retention in your app settings; bundles linked to an active channel or rollout stay protected. Regional replication does not multiply storage: each bundle is counted once, regardless of delivery regions. Storage is billed in GB-hours: a bundle counts its size for every hour it stays stored. Deleting a bundle stops its billing from that moment, and the hours it was already stored stay billed. Your plan includes its storage in GiB times the hours in your billing cycle.',
   storage_gb: 'Storage (GiB-month)',
-  storage_gbh_per_30_days: 'GBh per 30 days',
   storage_what_is_it_used_for: 'What is storage used for and how does it work?',
   risk_debt_eyebrow: 'Built for production teams',
   risk_debt_title: 'Reduce risk and technical debt',
