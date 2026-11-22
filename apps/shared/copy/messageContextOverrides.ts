@@ -5,6 +5,28 @@
 import type { MessageKey } from './messages'
 
 export const messageContextOverrides = {
+  app_strip_burger_delivery: 'Short customer app subtitle. Ordering burgers for home delivery.',
+  app_strip_bus_tickets: 'Short customer app subtitle. Buying and displaying bus tickets.',
+  app_strip_campus_dining: 'Short customer app subtitle. Finding meals or ordering food at a corporate campus.',
+  app_strip_conference_schedules: 'Short customer app subtitle. Viewing agendas and personal schedules at a conference.',
+  app_strip_coop_hub: 'Short customer app subtitle. News and documents for members of a housing cooperative.',
+  app_strip_delegate_guide: 'Short customer app subtitle. Event information for delegates attending Davos.',
+  app_strip_dining_rewards: 'Short customer app subtitle. Earning and redeeming restaurant loyalty rewards.',
+  app_strip_flight_booking: 'Short customer app subtitle. Booking airline tickets.',
+  app_strip_health_coverage: 'Short customer app subtitle. Viewing health insurance policy details.',
+  app_strip_internal_tools: 'Short customer app subtitle. Tools used internally by SCOTT Sports staff.',
+  app_strip_loan_management: 'Short customer app subtitle. Viewing loan balances and repayment information.',
+  app_strip_meal_delivery: 'Short customer app subtitle. Ordering prepared meals for delivery.',
+  app_strip_order_ahead: 'Short customer app subtitle. Placing a restaurant order before arrival.',
+  app_strip_orders_and_rewards: 'Short customer app subtitle. Ordering food and earning restaurant loyalty rewards.',
+  app_strip_payroll_and_time: 'Short customer app subtitle. Employees access payroll information and record working hours.',
+  app_strip_pickup: 'Short customer app subtitle. Collecting a food order from a restaurant.',
+  app_strip_repairs: 'Short customer app subtitle. Technicians manage assigned home warranty repair jobs.',
+  app_strip_staff_meals: 'Short customer app subtitle. Meals served to employees at work.',
+  app_strip_supply_orders: 'Short customer app subtitle. Restaurants order foodservice supplies from a distributor.',
+  app_strip_takeout_orders: 'Short customer app subtitle. Ordering restaurant food to take away.',
+  app_strip_vitals_tracking: 'Short customer app subtitle. Remote patient monitoring of vital signs.',
+  app_strip_workplace_dining: 'Short customer app subtitle. Menus and meals offered at the workplace.',
   pricing_prepaid_summary:
     'Complete introduction below the registration button. A standalone localized prepaid-credit amount follows the colon, then a separate no-subscription sentence. Translate the entire introduction as one unit. Only light usage can fit this annual budget; it is not a fixed annual plan, unlimited usage, or a monthly fee.',
   pricing_prepaid_annual_example:

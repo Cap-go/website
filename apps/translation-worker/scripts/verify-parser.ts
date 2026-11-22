@@ -157,6 +157,10 @@ assert(
   'Renderer did not preserve the source title when a translated title was empty',
 )
 
+const [plainPayroll, encodedPayroll, pickup] = __translationWorkerTest.resolveTranslationContexts(['Payroll & time', 'Payroll &amp; time', 'Pickup'])
+assert(plainPayroll?.includes('working hours') && encodedPayroll === plainPayroll, 'Encoded payroll subtitle lost its translator context')
+assert(pickup?.includes('food order'), 'Pickup subtitle lost its restaurant context')
+
 const aboutContext = __translationWorkerTest.resolveTranslationContexts(['About'])[0]
 assert(typeof aboutContext === 'string' && aboutContext.includes('navigation'), 'Missing translation context for About')
 const pricingContext = __translationWorkerTest.resolveTranslationContexts(['Pricing'])[0]
