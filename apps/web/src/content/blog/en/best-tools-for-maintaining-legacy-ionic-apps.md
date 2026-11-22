@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-11-22T06:30:42.000Z
-updated_at: 2026-11-22T06:30:42.000Z
+updated_at: 2026-11-22T22:47:58.000Z
 head_image: /capgo_banner.png
 head_image_alt: Developers inventorying a legacy Ionic app and planning safe maintenance.
 keywords: best tools for maintaining legacy Ionic apps
