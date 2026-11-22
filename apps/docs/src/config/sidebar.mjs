@@ -344,6 +344,7 @@ export const docsSidebar = [
     'AI agents (MCP)',
     [
       linkItem('Hosted MCP server', '/docs/ai/mcp/'),
+      linkItem('Cloud terminal', '/docs/ai/cloud-terminal/'),
       linkItem('Web app to mobile app', '/docs/ai/webapp-to-mobile/'),
       linkItem('MCP Events', '/docs/ai/mcp-events/'),
       linkItem('Local CLI MCP server', '/docs/cli/reference/mcp/'),
