@@ -5,6 +5,7 @@ import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
 import { pluginCountLabel } from '@/config/plugins'
 import { observeEventsForPlan } from '@/lib/observePlanAllowance'
+import { storageGbHoursPerMonth } from '@/lib/storageGbHours'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -197,7 +198,8 @@ const rows: CompareSection[] = [
         label: 'Storage',
         emphasis: true,
         faqHref: '#faq-storage',
-        value: (plan: Database['public']['Tables']['plans']['Row']) => `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB`,
+        value: (plan: Database['public']['Tables']['plans']['Row']) =>
+          `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB (${numberWithSpaces(storageGbHoursPerMonth(plan.storage))}${plan.name === 'Enterprise' ? '+' : ''} GBh/${m.month({}, { locale: Astro.locals.locale })})`,
       },
       {
         label: 'Credit-based overages',

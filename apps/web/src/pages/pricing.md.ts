@@ -1,5 +1,6 @@
 import { creditDisplayPrice } from '@/lib/creditDisplayPrice'
 import { observeEventsForPlan } from '@/lib/observePlanAllowance'
+import { storageGbHoursPerMonth } from '@/lib/storageGbHours'
 import { getCredits, getPlans } from '@/lib/siteData'
 import { useRuntimeConfig } from '@/config/app'
 import type { CreditStep } from '@/lib/pricingCalculator'
@@ -14,7 +15,7 @@ type Plan = Database['public']['Tables']['plans']['Row']
 const TIER_UNITS: Record<string, { title: string; unit: string; plural?: string; amount: (raw: number) => number; format: (value: number) => string }> = {
   mau: { title: 'Monthly active users (MAU)', unit: 'MAU', amount: (raw) => raw, format: (value) => value.toLocaleString('en-US') },
   bandwidth: { title: 'Bandwidth', unit: 'GB', amount: (raw) => raw / 1073741824, format: formatGb },
-  storage: { title: 'Storage', unit: 'GB', amount: (raw) => raw / 1073741824, format: formatGb },
+  storage: { title: 'Storage (billed in GB-hours, priced per GB-month = 720 GBh)', unit: 'GB-month', plural: 'GB-months', amount: (raw) => raw / 1073741824, format: formatGb },
   build_time: { title: 'Native build time', unit: 'minute', plural: 'minutes', amount: (raw) => raw / 60, format: (value) => Math.round(value).toLocaleString('en-US') },
 }
 
@@ -54,7 +55,7 @@ export const GET: APIRoute = async () => {
     const buildMinutes = plan.build_time_unit ? Math.round(plan.build_time_unit / 60).toLocaleString('en-US') : '—'
     const yearlyMonthly = plan.price_y ? `$${Math.round(plan.price_y / 12)}/month ($${plan.price_y.toLocaleString('en-US')}/year)` : '—'
     const observeEvents = observeEventsForPlan(plan).toLocaleString('en-US')
-    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB | ${(plan.storage ?? 0).toLocaleString('en-US')} GB | ${buildMinutes} min | ${observeEvents} |`
+    return `| ${plan.name} | $${plan.price_m}/month | ${yearlyMonthly} | ${(plan.mau ?? 0).toLocaleString('en-US')} | ${(plan.bandwidth ?? 0).toLocaleString('en-US')} GB | ${(plan.storage ?? 0).toLocaleString('en-US')} GB (${storageGbHoursPerMonth(plan.storage ?? 0).toLocaleString('en-US')} GBh/month) | ${buildMinutes} min | ${observeEvents} |`
   })
 
   const markdown = [

@@ -88,7 +88,7 @@ function getUnitLabel(type: string): string {
     case 'bandwidth':
       return m.per_gb({}, { locale: Astro.locals.locale })
     case 'storage':
-      return m.per_gb({}, { locale: Astro.locals.locale })
+      return m.per_gib_month({}, { locale: Astro.locals.locale })
     case 'build_time':
       return `/ ${m.build_minutes({}, { locale: Astro.locals.locale })}`
     default:
