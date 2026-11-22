@@ -9,7 +9,7 @@ export const story: AppleRejectionStory = {
   guidelineLabel: 'Guideline 4.3(b) Design Spam: saturated category',
   tags: ['4-3'],
   platform: 'iOS',
-  body: 'A developer built a tarot app with what they saw as a new mechanic: you draw cards straight from a home screen widget, without opening the app. They did not know that guideline 4.3(b) lists fortune telling among the saturated categories, next to dating, flashlights, sound effects, wallpapers and simple timers, where Apple says it will not accept new submissions. The app was rejected anyway, new mechanic or not.',
+  body: 'A developer built a tarot app with what they saw as a new mechanic: you draw cards straight from a home screen widget, without opening the app. They did not know that guideline 4.3(b) lists fortune telling among the saturated categories, next to dating, flashlights, sound effects, wallpapers and simple timers, where Apple says it will not accept new submissions unless they offer a meaningfully different or improved experience. The app was rejected anyway, new mechanic or not.',
   resolution:
     'Not resolved at the time of writing. The developer said they would keep trying, but had little hope it would pass.',
   lesson:
