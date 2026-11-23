@@ -12,7 +12,7 @@ Capgo cloud terminal gives you a Linux workspace per session so you can run CLI 
 
 ## Start a session
 
-Send a Capgo API key with **write** or **all** mode limited to **one app**, or an app-scoped RBAC key with write permissions on that app (`role_bindings` with app scope). Org-wide or read-only keys are rejected.
+Send a Capgo API key with **write** or **all** mode limited to **one app** (a legacy key must still have an app-scoped `role_bindings` entry). RBAC app keys need write permissions on that app. Org-wide or read-only keys are rejected.
 
 ```http
 POST https://api.capgo.app/terminal/sessions/
