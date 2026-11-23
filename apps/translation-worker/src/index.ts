@@ -183,8 +183,8 @@ function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecut
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
 // Qwen 3.8 27B (Workers AI catalog: created 2026-08-17, no planned deprecation) drafts
-// with thinking disabled, then TRANSLATION_REVIEW_MODEL (DeepSeek V4.1 Flash in
-// wrangler.jsonc) reviews the drafts against the style guide. It replaced Gemma 4
+// with thinking disabled. An optional TRANSLATION_REVIEW_MODEL can review the drafts
+// against the style guide; production leaves it unset to keep Workers AI cost down. It replaced Gemma 4
 // (created 2026-04-02) once that passed the 5-month model age limit in AGENTS.md.
 // Override with TRANSLATION_MODEL.
 const DEFAULT_MODEL = '@cf/qwen/qwen3.8-27b'
