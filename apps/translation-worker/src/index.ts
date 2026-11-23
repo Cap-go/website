@@ -2528,6 +2528,7 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
   const keys = await Promise.all(batch.map((text, index) => translationMemoryKey(locale, text, contexts[index] ?? '')))
   const translations = await Promise.all(keys.map((key) => readTranslationMemoryEntry(env, key)))
   const misses = new Map<number, TranslationMissRecord>()
+  const claimedFrom = new Map<number, TranslationMissRecord>()
   await Promise.all(
     translations.map(async (translated, index) => {
       if (translated !== null) return
@@ -2542,6 +2543,7 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
       // and keep serving the fallback instead of retrying the same segment in parallel.
       const claimed = { text: miss.text, attempts: miss.attempts + 1, lastAt: Date.now() }
       misses.set(index, claimed)
+      claimedFrom.set(index, miss)
       await writeTranslationMiss(env, keys[index], claimed)
     }),
   )
@@ -2552,7 +2554,15 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
   // Fallbacks (English kept after a dropped placeholder or length violation, drafts whose
   // review failed) are served but not remembered, so the next refresh retries them.
   const notRemembered = new Set<string>()
-  const translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath, notRemembered)
+  let translated: string[]
+  try {
+    translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath, notRemembered)
+  } catch (error) {
+    // A thrown batch (rate limit, outage) made no real attempt: give the claimed retries back
+    // so the queue retry can try them again instead of burning an attempt and a week.
+    await Promise.all([...claimedFrom].map(([index, miss]) => writeTranslationMiss(env, keys[index], miss)))
+    throw error
+  }
   await Promise.all(
     missingIndexes.map(async (batchIndex, translatedIndex) => {
       const source = batch[batchIndex]

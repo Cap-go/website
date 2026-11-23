@@ -1524,6 +1524,17 @@ try {
   recovering.store.set(missKey, JSON.stringify({ text: 'Pricing', attempts: 1, lastAt: 0 }))
   recoverDraft = () => 'Tarifs'
   const recovered = await __translationWorkerTest.translateBatchWithMemory(recovering.env, 'fr', ['Pricing'])
+  // Workers AI throwing (rate limit, outage) must not consume a due retry.
+  const throwing = createMemoryEnv(() => {
+    throw new Error('rate limited')
+  })
+  const throwText = 'Ship updates without store review'
+  const throwMissKey = (await __translationWorkerTest.translationMemoryKey('fr', throwText, '')).replace(/\.txt$/, '.miss.json')
+  const dueMiss = JSON.stringify({ text: throwText, attempts: 1, lastAt: 0 })
+  throwing.store.set(throwMissKey, dueMiss)
+  const throwResult = await __translationWorkerTest.translateBatchWithMemory(throwing.env, 'fr', [throwText]).catch(() => null)
+  const afterThrow = JSON.parse(throwing.store.get(throwMissKey) ?? '{}') as { attempts?: number }
+  assert(throwResult === null ? throwing.store.get(throwMissKey) === dueMiss : afterThrow.attempts === 2, 'A thrown AI retry was miscounted')
   assert(recovered[0] === 'Tarifs' && recovering.memory().length === 1 && recovering.misses().length === 0, 'A recovered segment kept its miss record')
 
   const nativeBuild = __translationWorkerTest.protectTranslationTokens('Ship with Native Build, then a native build')
