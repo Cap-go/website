@@ -5,6 +5,19 @@
 import type { MessageKey } from './messages'
 
 export const messageContextOverrides = {
+  app_strip_laundry_pickup: 'Short customer app subtitle. Booking laundry pickup and delivery.',
+  app_strip_office_booking: 'Short customer app subtitle. Booking clinical office space by the hour for healthcare professionals.',
+  app_strip_employee_perks: 'Short customer app subtitle. Discounts and benefits offered to employees by their company.',
+  app_strip_online_care: 'Short customer app subtitle. Getting prescriptions and treatment from doctors online.',
+  app_strip_home_services: 'Short customer app subtitle. Booking plumbers, electricians, AC repair and cleaning at home.',
+  app_strip_doctor_finder: 'Short customer app subtitle. Finding recommended in-network doctors through a health benefit.',
+  app_strip_live_updates: 'Short customer app subtitle. The app ships over-the-air updates with Capgo.',
+  app_strip_photo_galleries: 'Short customer app subtitle. Photographers sharing and delivering client photo galleries.',
+  app_strip_shopping: 'Short customer app subtitle. Shopping from many independent sellers in one marketplace.',
+  app_strip_neighborhood_guide: 'Short customer app subtitle. Events, dining and shops in a city waterfront district.',
+  app_strip_legal_help: 'Short customer app subtitle. Creating legal documents and asking lawyers questions.',
+  app_strip_travel_tickets: 'Short customer app subtitle. Booking train, bus, ferry and flight tickets.',
+  app_strip_retirement_savings: 'Short customer app subtitle. Managing a workplace retirement savings account.',
   app_strip_burger_delivery: 'Short customer app subtitle. Ordering burgers for home delivery.',
   app_strip_bus_tickets: 'Short customer app subtitle. Buying and displaying bus tickets.',
   app_strip_campus_dining: 'Short customer app subtitle. Finding meals or ordering food at a corporate campus.',
