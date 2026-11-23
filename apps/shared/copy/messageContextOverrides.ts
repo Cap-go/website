@@ -11,7 +11,7 @@ export const messageContextOverrides = {
   app_strip_online_care: 'Short customer app subtitle. Getting prescriptions and treatment from doctors online.',
   app_strip_home_services: 'Short customer app subtitle. Booking plumbers, electricians, AC repair and cleaning at home.',
   app_strip_doctor_finder: 'Short customer app subtitle. Finding recommended in-network doctors through a health benefit.',
-  app_strip_live_updates: 'Short customer app subtitle. The app ships over-the-air updates with Capgo.',
+  app_strip_live_updates: 'Short customer app subtitle. Generic label naming the product feature (live app updates), used when the app purpose is not described.',
   app_strip_photo_galleries: 'Short customer app subtitle. Photographers sharing and delivering client photo galleries.',
   app_strip_shopping: 'Short customer app subtitle. Shopping from many independent sellers in one marketplace.',
   app_strip_neighborhood_guide: 'Short customer app subtitle. Events, dining and shops in a city waterfront district.',

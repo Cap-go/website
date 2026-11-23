@@ -4,7 +4,8 @@ import m from '@/copy/messages'
 import { customerApps, featuredCustomerLogos } from '@/config/customerApps'
 import { getTotalStars } from '@/services/github'
 
-const stripSlotCount = 25
+// Without JS only the first 25 cards render; with JS every app is shown at the original scroll speed.
+const noscriptSlotCount = 25
 const locale = Astro.locals.locale
 const stripApps = [
   ...featuredCustomerLogos.map(({ name, slug, role }) => ({ name, icon: `/logo_cloud/${slug}_logo.webp`, subtitle: m[role]({}, { locale }) })),
@@ -30,10 +31,10 @@ const stats = m.app_strip_stats(
   </p>
   <div class="app-strip-viewport mt-4 overflow-hidden">
     {(['noscript', 'template'] as const).map((Container) => {
-      const apps = Container === 'template' ? stripApps : stripApps.slice(0, stripSlotCount)
+      const apps = Container === 'template' ? stripApps : stripApps.slice(0, noscriptSlotCount)
       return (
         <Container>
-          <div data-logo-slots={stripSlotCount} class="app-strip-track flex w-max gap-3">
+          <div data-logo-slots={apps.length} class="app-strip-track flex w-max gap-3" style={`animation-duration: ${Math.round((50 * apps.length) / noscriptSlotCount)}s`}>
             {[0, 1].map((copy) => (
               <ul class="flex shrink-0 gap-3" aria-hidden={copy === 1 ? 'true' : undefined}>
                 {apps.map((app) => (

@@ -453,7 +453,7 @@ export const messageContexts = {
   app_strip_internal_tools: 'Short customer app subtitle. Tools used internally by SCOTT Sports staff.',
   app_strip_laundry_pickup: 'Short customer app subtitle. Booking laundry pickup and delivery.',
   app_strip_legal_help: 'Short customer app subtitle. Creating legal documents and asking lawyers questions.',
-  app_strip_live_updates: 'Short customer app subtitle. The app ships over-the-air updates with Capgo.',
+  app_strip_live_updates: 'Short customer app subtitle. Generic label naming the product feature (live app updates), used when the app purpose is not described.',
   app_strip_loan_management: 'Short customer app subtitle. Viewing loan balances and repayment information.',
   app_strip_meal_delivery: 'Short customer app subtitle. Ordering prepared meals for delivery.',
   app_strip_neighborhood_guide: 'Short customer app subtitle. Events, dining and shops in a city waterfront district.',
