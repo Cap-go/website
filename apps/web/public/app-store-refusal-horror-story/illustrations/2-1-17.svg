@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Game with no login rejected because reviewer expected sign in under 2.1(a)">
+  <title>Game with no login rejected because reviewer expected sign in under 2.1(a)</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="32" y="48" width="112" height="112" rx="12" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <circle cx="72" cy="88" r="14" fill="none" stroke="#44BCFF" stroke-width="2"/>
+  <path d="M64 108 L80 108" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <rect x="56" y="118" width="64" height="10" rx="5" fill="#374151"/>
+  <text x="48" y="72" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">play</text>
+  <path d="M52 142 L68 126" stroke="#A3E635" stroke-width="2" stroke-linecap="round"/>
+  <text x="44" y="160" fill="#A3E635" font-family="system-ui,sans-serif" font-size="7">no account</text>
+  <path d="M156 104 L192 104" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="192,104 186,100 186,108" fill="#9CA3AF"/>
+  <rect x="204" y="44" width="88" height="116" rx="12" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="220" y="60" width="56" height="12" rx="6" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="232" y="70" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="6">email</text>
+  <rect x="220" y="80" width="56" height="12" rx="6" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="228" y="90" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="6">password</text>
+  <rect x="220" y="104" width="56" height="18" rx="8" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="228" y="116" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">sign in</text>
+  <rect x="204" y="132" width="88" height="20" rx="10" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="214" y="145" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7" font-weight="600">2.1(a)</text>
+  <rect x="32" y="24" width="100" height="18" rx="9" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="42" y="37" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">review notes</text>
+</svg>
