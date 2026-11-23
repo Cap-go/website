@@ -7,7 +7,7 @@ export const story: AppleRejectionStory = {
   title:
     'After three weeks waiting for review, an app was rejected because its subscriptions were not attached to the submission',
   guidelineLabel: 'Guideline not stated: subscriptions missing from the submission',
-  tags: ['endless-review'],
+  tags: ['endless-review', 'metadata'],
   platform: 'iOS',
   body: "A developer waited about three weeks for their app to come out of review. When the answer finally came, it was a rejection, and the cause was on their side: they had forgotten to attach the app's subscriptions to the submission in App Store Connect.",
   resolution:

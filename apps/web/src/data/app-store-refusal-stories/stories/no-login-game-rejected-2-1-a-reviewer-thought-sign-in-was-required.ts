@@ -7,7 +7,7 @@ export const story: AppleRejectionStory = {
   title:
     'A game with no login at all was rejected under 2.1(a), because the reviewer thought you had to sign in',
   guidelineLabel: 'Guideline 2.1(a) App Completeness: reviewer expected a sign in',
-  tags: ['2-1'],
+  tags: ['2-1', 'login-requirement'],
   platform: 'iOS',
   body: 'A developer submitted their first game, which has no account and no login of any kind. A build was rejected under guideline 2.1(a) because the reviewer believed the game required signing in.',
   resolution:
