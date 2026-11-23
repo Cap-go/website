@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Three weeks in review then rejected because subscriptions were not attached">
+  <title>Three weeks in review then rejected because subscriptions were not attached</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="28" y="40" width="120" height="132" rx="12" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <text x="40" y="64" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="10" font-weight="700">3 wk</text>
+  <text x="40" y="82" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">In Review</text>
+  <rect x="44" y="96" width="88" height="8" rx="4" fill="#374151"/>
+  <rect x="44" y="112" width="72" height="8" rx="4" fill="#374151" opacity="0.75"/>
+  <rect x="44" y="128" width="80" height="8" rx="4" fill="#374151" opacity="0.55"/>
+  <circle cx="108" cy="152" r="12" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="4 3"/>
+  <path d="M160 104 L196 104" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="196,104 190,100 190,108" fill="#9CA3AF"/>
+  <rect x="208" y="36" width="84" height="148" rx="12" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="220" y="60" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="8">version</text>
+  <rect x="220" y="72" width="60" height="10" rx="4" fill="#44BCFF" opacity="0.35"/>
+  <rect x="220" y="92" width="52" height="14" rx="4" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <path d="M224 99 L232 107 L248 91" fill="none" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <text x="252" y="103" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="6">build</text>
+  <rect x="220" y="116" width="52" height="14" rx="4" fill="#111827" stroke="#EF4444" stroke-width="2" stroke-dasharray="3 2"/>
+  <rect x="224" y="120" width="10" height="10" rx="2" fill="none" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="238" y="127" fill="#EF4444" font-family="system-ui,sans-serif" font-size="6">subs</text>
+  <path d="M232 144 L264 144" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <path d="M248 136 L248 152 M240 144 L256 144" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  <rect x="208" y="156" width="84" height="22" rx="11" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="218" y="171" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">rejected</text>
+</svg>
