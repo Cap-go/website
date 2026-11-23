@@ -88,7 +88,7 @@ const totalStars = getTotalStars()
             <Container>
               <div class="app-wall relative mb-6 flex h-44 flex-col justify-center gap-3 overflow-hidden" aria-hidden="true">
                 {rows.map((row, rowIndex) => (
-                  <div data-logo-slots={row.length} style={`animation-duration: ${Math.round((40 * row.length) / wallRowSlots[0])}s`} class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
+                  <div data-logo-slots={row.length} style={`animation-duration: ${Math.round(((rowIndex % 2 === 1 ? 48 : 40) * row.length) / wallRowSlots[rowIndex])}s`} class:list={['app-wall-row flex w-max gap-3', rowIndex % 2 === 1 && 'app-wall-row--reverse']}>
                     {[...row, ...row].map((logo) => (
                       <span class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#2B2D30] ring-1 ring-white/5">
                         <img src={`/logo_cloud/${logo.slug}_logo.webp`} alt={`${logo.name} app icon`} class="h-full w-full object-contain p-1.5" loading="lazy" decoding="async" />
