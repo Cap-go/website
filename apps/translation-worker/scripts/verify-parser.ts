@@ -1489,6 +1489,9 @@ try {
         put: async (key: string, value: string) => {
           store.set(key, value)
         },
+        delete: async (key: string) => {
+          store.delete(key)
+        },
       },
     } as unknown as Parameters<typeof __translationWorkerTest.translateBatchWithMemory>[0]
     // Translation memory entries only; miss records (.miss.json) are counted separately.
@@ -1512,6 +1515,16 @@ try {
   const callsAfterFirstMiss = unchangedLabel.aiCalls()
   const missResult = await __translationWorkerTest.translateBatchWithMemory(unchangedLabel.env, 'fr', ['Pricing'])
   assert(missResult[0] === 'Pricing' && unchangedLabel.aiCalls() === callsAfterFirstMiss, 'A recent translation miss was sent to Workers AI again')
+
+  // A due retry is claimed before the AI call, and a recovered segment drops its miss record.
+  let recoverDraft = (text: string) => text
+  const recovering = createMemoryEnv((text) => recoverDraft(text))
+  await __translationWorkerTest.translateBatchWithMemory(recovering.env, 'fr', ['Pricing'])
+  const [missKey] = recovering.misses()
+  recovering.store.set(missKey, JSON.stringify({ text: 'Pricing', attempts: 1, lastAt: 0 }))
+  recoverDraft = () => 'Tarifs'
+  const recovered = await __translationWorkerTest.translateBatchWithMemory(recovering.env, 'fr', ['Pricing'])
+  assert(recovered[0] === 'Tarifs' && recovering.memory().length === 1 && recovering.misses().length === 0, 'A recovered segment kept its miss record')
 
   const nativeBuild = __translationWorkerTest.protectTranslationTokens('Ship with Native Build, then a native build')
   assert(nativeBuild.text === 'Ship with __CAPGO_KEEP_0__, then a native build', 'Native Build was not protected with exact case, or generic native build was')

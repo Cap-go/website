@@ -2510,6 +2510,14 @@ async function writeTranslationMiss(env: Env, memoryKey: string, record: Transla
   }
 }
 
+async function deleteTranslationMiss(env: Env, memoryKey: string): Promise<void> {
+  try {
+    await env.TRANSLATION_STORE.delete(translationMissKey(memoryKey))
+  } catch (error) {
+    console.warn('Translation miss delete failed', { memoryKey, error: errorMessage(error) })
+  }
+}
+
 function shouldRetryTranslationMiss(miss: TranslationMissRecord, now = Date.now()): boolean {
   return miss.attempts < TRANSLATION_MISS_MAX_ATTEMPTS && now - miss.lastAt >= TRANSLATION_MISS_RETRY_MS
 }
@@ -2525,9 +2533,16 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
       if (translated !== null) return
       const miss = await readTranslationMiss(env, keys[index])
       if (!miss) return
-      misses.set(index, miss)
       // Serve the stored fallback without calling Workers AI until a retry is due.
-      if (!shouldRetryTranslationMiss(miss)) translations[index] = miss.text || batch[index]
+      if (!shouldRetryTranslationMiss(miss)) {
+        translations[index] = miss.text || batch[index]
+        return
+      }
+      // Claim the retry before calling Workers AI so other page jobs see a fresh lastAt
+      // and keep serving the fallback instead of retrying the same segment in parallel.
+      const claimed = { text: miss.text, attempts: miss.attempts + 1, lastAt: Date.now() }
+      misses.set(index, claimed)
+      await writeTranslationMiss(env, keys[index], claimed)
     }),
   )
   const missingIndexes = translations.flatMap((translated, index) => (translated === null ? [index] : []))
@@ -2549,11 +2564,16 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
         !STRAY_PLACEHOLDER_PATTERN.test(text) &&
         !notRemembered.has(source) &&
         (normalizedTranslationValue(text) !== normalizedTranslationValue(source) || isOnlyProtectedNames(source))
-      if (remember) await writeTranslationMemoryEntry(env, keys[batchIndex], text)
-      else
+      if (remember) {
+        await writeTranslationMemoryEntry(env, keys[batchIndex], text)
+        // A recovered segment drops its miss record, so deleting the memory entry later
+        // forces a real retranslation instead of serving the old fallback.
+        if (misses.has(batchIndex)) await deleteTranslationMiss(env, keys[batchIndex])
+      } else
         await writeTranslationMiss(env, keys[batchIndex], {
           text: text && !STRAY_PLACEHOLDER_PATTERN.test(text) ? text : source,
-          attempts: (misses.get(batchIndex)?.attempts ?? 0) + 1,
+          // A claimed retry already counted its attempt.
+          attempts: misses.get(batchIndex)?.attempts ?? 1,
           lastAt: Date.now(),
         })
     }),
