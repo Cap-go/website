@@ -1469,10 +1469,12 @@ try {
   type MemoryTestItem = { id: string; text: string; draft?: string }
   const createMemoryEnv = (draft: (text: string) => string, review?: (item: MemoryTestItem) => string) => {
     const store = new Map<string, string>()
+    let aiCalls = 0
     const env = {
       TRANSLATION_REVIEW_MODEL: review ? 'reviewer' : undefined,
       AI: {
         run: async (model: string, input: { messages: Array<{ content: string }> }) => {
+          aiCalls += 1
           const payload = JSON.parse(input.messages[1].content) as { items?: MemoryTestItem[]; text?: string }
           if (!payload.items) return { response: draft(payload.text ?? '') }
           if (model === 'reviewer') {
@@ -1489,21 +1491,27 @@ try {
         },
       },
     } as unknown as Parameters<typeof __translationWorkerTest.translateBatchWithMemory>[0]
-    return { env, store }
+    // Translation memory entries only; miss records (.miss.json) are counted separately.
+    const memory = () => [...store.keys()].filter((key) => key.endsWith('.txt'))
+    const misses = () => [...store.keys()].filter((key) => key.endsWith('.miss.json'))
+    return { env, store, memory, misses, aiCalls: () => aiCalls }
   }
 
   const label = 'Deploy with Capgo today'
   const dropped = createMemoryEnv((text) => (text.includes('__CAPGO_KEEP_0__') ? 'Déployer avec Capgo dès aujourd’hui' : text))
   const droppedResult = await __translationWorkerTest.translateBatchWithMemory(dropped.env, 'fr', [label])
-  assert(droppedResult[0] === label && dropped.store.size === 0, 'A short English fallback after a dropped placeholder was remembered')
+  assert(droppedResult[0] === label && dropped.memory().length === 0 && dropped.misses().length === 1, 'A short English fallback after a dropped placeholder was remembered')
 
   const kept = createMemoryEnv((text) => text)
   await __translationWorkerTest.translateBatchWithMemory(kept.env, 'fr', ['Capgo CLI'])
-  assert([...kept.store.values()].join() === 'Capgo CLI', 'A name the model kept in English was not remembered')
+  assert(kept.memory().map((key) => kept.store.get(key)).join() === 'Capgo CLI', 'A name the model kept in English was not remembered')
 
   const unchangedLabel = createMemoryEnv((text) => text)
   await __translationWorkerTest.translateBatchWithMemory(unchangedLabel.env, 'fr', ['Pricing'])
-  assert(unchangedLabel.store.size === 0, 'An untranslated short label was remembered')
+  assert(unchangedLabel.memory().length === 0, 'An untranslated short label was remembered')
+  const callsAfterFirstMiss = unchangedLabel.aiCalls()
+  const missResult = await __translationWorkerTest.translateBatchWithMemory(unchangedLabel.env, 'fr', ['Pricing'])
+  assert(missResult[0] === 'Pricing' && unchangedLabel.aiCalls() === callsAfterFirstMiss, 'A recent translation miss was sent to Workers AI again')
 
   const nativeBuild = __translationWorkerTest.protectTranslationTokens('Ship with Native Build, then a native build')
   assert(nativeBuild.text === 'Ship with __CAPGO_KEEP_0__, then a native build', 'Native Build was not protected with exact case, or generic native build was')
@@ -1518,7 +1526,7 @@ try {
   )
   const reviewDropsTokenResult = await __translationWorkerTest.translateBatchWithMemory(reviewDropsToken.env, 'fr', [label])
   assert(
-    reviewDropsTokenResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewDropsToken.store.size === 1,
+    reviewDropsTokenResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewDropsToken.memory().length === 1,
     'A review that dropped a placeholder replaced the draft with English',
   )
 
@@ -1529,7 +1537,7 @@ try {
     },
   )
   const reviewFailsResult = await __translationWorkerTest.translateBatchWithMemory(reviewFails.env, 'fr', [label])
-  assert(reviewFailsResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewFails.store.size === 0, 'An unreviewed draft was remembered')
+  assert(reviewFailsResult[0] === 'Déployer avec Capgo dès aujourd’hui' && reviewFails.memory().length === 0, 'An unreviewed draft was remembered')
 }
 
 {
