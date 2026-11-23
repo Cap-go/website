@@ -1,6 +1,62 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.110.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.110.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.110.0",
+    "pubDate": "2026-11-22T20:46:15.000Z",
+    "description": "🆕 Changelog Added Enabled preservation of iOS simulator build artifacts for pull requests, allowing developers to access and download these builds after the CI/CD pipeline completes. Implemented sampling for download progress by attempt in the statistics module to provide more granular performance insights. Fixed Resolved an issue where saved simulator IPAs could not be opened from the build history, ensuring reliable access to previously generated build artifacts. Fixed the billing payment ..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.109.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.109.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.109.1",
+    "pubDate": "2026-11-22T11:47:16.000Z",
+    "description": "🆕 Changelog Fixed Clarified error messaging when registering an app ID that is already in use. The message now explicitly states that only the Capgo setting is modified, rather than implying a general conflict. Decoupled CI worker deployments from the read replica subscription refresh process to improve deployment reliability and prevent unintended side effects during the refresh cycle. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.109.0...cli 8.109.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.67.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.0",
+    "pubDate": "2026-11-22T20:49:48.000Z",
+    "description": "🆕 Changelog Added iOS Pull Request Builds : Retain build artifacts for iOS simulator environments during pull request verification to streamline testing workflows. Plugin State Cache Prewarming : Automatically prewarm the plugin state cache for each region immediately after a publication event to reduce initial access latency. Fixed Plugin State Cache Refill : Corrected an issue where the plugin state cache was not properly refilled following late provider reads, ensuring data consistency an..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.66.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.66.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.66.2",
+    "pubDate": "2026-11-22T17:07:48.000Z",
+    "description": "🆕 Changelog Fixed Billing : Corrected the processing of for invoices during the payment flow, ensuring accurate invoice handling and resolution of related billing errors. Changed Documentation : Updated requirements for historical dashboard data repairs. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.66.1...capgo 22.66.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.66.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.66.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.66.1",
+    "pubDate": "2026-11-22T14:49:15.000Z",
+    "description": "🆕 Changelog Fixed iOS Build History : Restored functionality to open simulator IPAs directly from the build history view. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.66.0...capgo 22.66.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.66.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.66.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.66.0",
+    "pubDate": "2026-11-22T13:28:37.000Z",
+    "description": "🆕 Changelog Added Stats : Introduce sampling of download progress metrics by attempt to improve statistical accuracy and reduce data overhead. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.109.1...capgo 22.66.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.65.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.65.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.65.1",
+    "pubDate": "2026-11-22T11:50:49.000Z",
+    "description": "🆕 Changelog Fixed Clarified error messaging when attempting to claim an existing application ID, explicitly stating that this action only updates the Capgo settings for the app. Decoupled worker deployments from read replica subscription refreshes in the CI pipeline to prevent deployment failures caused by unrelated infrastructure updates. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.109.0...capgo 22.65.1"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.109.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.109.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.109.0",
@@ -262,62 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.1",
     "pubDate": "2026-11-14T13:43:05.000Z",
     "description": "🆕 Changelog Fixed Settle completed keys on partial drains : Resolved an issue in the plugin state management where keys marked as completed could fail to settle during partial drain operations, ensuring more reliable state transitions and data consistency. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.107.0...capgo 22.49.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.49.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.0",
-    "pubDate": "2026-11-14T02:27:07.000Z",
-    "description": "🆕 Changelog Added Recommend release versions and generate changelogs using paid AI within the CLI Drive cloud simulators from the API, CLI, and both MCP integrations Changed Update CLI documentation to reflect the latest generated content Fixed Retry incomplete translations and recover orphaned leases in the internationalization (i18n) system Restore server timeout handling for console catalog reads 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.48.1...capgo 22.49.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.106.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.2",
-    "pubDate": "2026-11-13T11:19:23.000Z",
-    "description": "🆕 Changelog Added Implemented support for virtual inbox RPC and added handling for legacy CLI manifest warnings in Cloudflare. Fixed Resolved an issue on Windows where failed to spawn correctly. Fixed translation throttling logic to defer console translations appropriately and ensure queue progress recovery. Corrected validation and restoration logic for 24 hour deployment reports to prevent data loss or display errors. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.10..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.106.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.106.1",
-    "pubDate": "2026-11-13T00:37:34.000Z",
-    "description": "🆕 Changelog Added Capture user country during signup and associate it with Stripe customer records for improved localization and compliance. Implement progressive rollout for serving plugin state from Key Value (KV) storage to enhance reliability and performance. Fixed Corrected the updater version string logging when using delta auto encrypt in the CLI to ensure accurate debug and tracking information. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.106.0...cli 8.106.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.48.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.48.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.48.1",
-    "pubDate": "2026-11-13T22:14:12.000Z",
-    "description": "🆕 Changelog Fixed Plugin State : Resolved an issue where state writer mutations were not properly transacted before rollout. This ensures data integrity and consistency during state updates, preventing potential data loss or corruption in plugin scenarios. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.48.0...capgo 22.48.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.48.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.48.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.48.0",
-    "pubDate": "2026-11-13T16:48:37.000Z",
-    "description": "🆕 Changelog Added Hosted GoTrue authentication service on Cloudflare, integrated behind the console auth relay to improve availability and performance for authentication workflows. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.47.1...capgo 22.48.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.47.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.47.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.47.1",
-    "pubDate": "2026-11-13T16:37:32.000Z",
-    "description": "🆕 Changelog Fixed Stopped Bento invitation reminders from sending after the invitation has been accepted or canceled, preventing unnecessary notifications for resolved invites. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.47.0...capgo 22.47.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.47.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.47.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.47.0",
-    "pubDate": "2026-11-13T14:49:46.000Z",
-    "description": "🆕 Changelog Added Local Postgres Support : Introduced a local PostgreSQL container option for development environments. Standalone Database Provisioning : Added the ability to run without requiring , enabling database setup in environments where the full Supabase stack is not running. Changed Test Data Access : Migrated test data access from PostgREST to direct SQL execution. This change improves the reliability of test data operations and reduces dependency on external REST endpoints during..."
   },
   {
     "category": "release",
