@@ -50,13 +50,13 @@ The [PWABuilder to iOS and Android solution](https://capgo.app/solutions/pwabuil
 4. **Add Capacitor** with the same `webDir` as your build output:
 
    ```bash
-   bun add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android
-   bunx cap init "Your App" com.company.app --web-dir dist
-   bunx cap add ios && bunx cap add android
-   bun run build && bunx cap sync
+   npm install @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android
+   npx cap init "Your App" com.company.app --web-dir dist
+   npx cap add ios && npx cap add android
+   npm run build && npx cap sync
    ```
 
-5. **Register Capgo and enable live updates** using [CLI onboarding](/docs/getting-started/onboarding/) or `npx @capgo/cli@latest init`. Install `@capgo/capacitor-updater` before your first store release if you plan to ship web changes without waiting for review, then run `bun run build && bunx cap sync` before requesting native builds.
+5. **Register Capgo and enable live updates** using [CLI onboarding](/docs/getting-started/onboarding/) or `npx @capgo/cli@latest init`. Install `@capgo/capacitor-updater` before your first store release if you plan to ship web changes without waiting for review, then run `npm run build && npx cap sync` before requesting native builds.
 
 6. **Build native binaries in Capgo Cloud** (no Mac required for iOS on the main path):
 
@@ -69,7 +69,7 @@ The [PWABuilder to iOS and Android solution](https://capgo.app/solutions/pwabuil
 7. **Upload web bundles** after each production build:
 
    ```bash
-   bun run build
+   npm run build
    npx @capgo/cli@latest bundle upload --channel=production --auto-bump
    ```
 

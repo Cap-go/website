@@ -103,7 +103,7 @@ PWABuilder's zip contains store projects (for example Bubblewrap Android or iOS 
 2. Run your production build (`bun run build` or equivalent)
 3. Confirm `index.html` exists in `dist`, `build`, `out`, or `www`
 
-If you never had a separate repo and only host static files, use that folder as your Capacitor root.
+If you only have a static host folder and no framework build, copy the site into a child directory such as `www/`, initialize Capacitor at the project root, and set `--web-dir www` (Capacitor does not accept `.` as `webDir`).
 
 Detailed WebView checks live in [Transform your PWA to a native app with Capacitor](/blog/transform-pwa-to-native-app-with-capacitor/).
 
