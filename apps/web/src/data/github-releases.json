@@ -1,6 +1,14 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.67.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.1",
+    "pubDate": "2026-11-23T19:28:08.000Z",
+    "description": "🆕 Changelog Fixed Corrected the display of local currency credit prices to ensure they are rounded to whole cents, resolving potential display inaccuracies in user facing credit information. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.110.0...capgo 22.67.1"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.110.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.110.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.110.0",
@@ -312,14 +320,6 @@
     "description": "🆕 Changelog Fixed Clarified guidance for signing uploads and server configuration in the Model Context Protocol (MCP) integration to resolve ambiguities in the documentation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.49.1...capgo 22.49.2"
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.49.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.1",
-    "pubDate": "2026-11-14T13:43:05.000Z",
-    "description": "🆕 Changelog Fixed Settle completed keys on partial drains : Resolved an issue in the plugin state management where keys marked as completed could fail to settle during partial drain operations, ensuring more reliable state transitions and data consistency. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.107.0...capgo 22.49.1"
-  },
-  {
     "category": "release",
     "title": "capacitor-accelerometer 8.0.58",
     "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.58",
@@ -329,11 +329,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-admob 8.2.12",
-    "link": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.12",
-    "guid": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.12",
-    "pubDate": "2026-11-13T12:45:33.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain versions with official Capacitor 8 releases, restoring compatibility and preventing build issues when using Capacitor 8. 🔗 Full Changelog : https://github.com/Cap go/capacitor admob/compare/8.2.11...8.2.12"
+    "title": "capacitor-admob 8.2.13",
+    "link": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.13",
+    "guid": "https://github.com/Cap-go/capacitor-admob/releases/tag/8.2.13",
+    "pubDate": "2026-11-23T08:55:52.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor admob/compare/8.2.13...8.2.13"
   },
   {
     "category": "release",
@@ -449,11 +449,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-audiosession 8.1.11",
-    "link": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.11",
-    "guid": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.11",
-    "pubDate": "2026-11-13T13:04:24.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain versions with official Capacitor 8 releases, ensuring compatibility and preventing build issues when using Capacitor 8 projects. 🔗 Full Changelog : https://github.com/Cap go/capacitor audiosession/compare/8.1.10...8.1.11"
+    "title": "capacitor-audiosession 8.1.12",
+    "link": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.12",
+    "guid": "https://github.com/Cap-go/capacitor-audiosession/releases/tag/8.1.12",
+    "pubDate": "2026-11-23T18:57:55.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor audiosession/compare/8.1.12...8.1.12"
   },
   {
     "category": "release",
@@ -521,11 +521,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-camera-preview 8.15.4",
-    "link": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.15.4",
-    "guid": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.15.4",
-    "pubDate": "2026-11-13T13:12:21.000Z",
-    "description": "🆕 Changelog Fixed Updated the Android toolchain to match the official Capacitor 8 versions, preventing compatibility issues and build failures with Capacitor 8 projects. 🔗 Full Changelog : https://github.com/Cap go/capacitor camera preview/compare/8.15.3...8.15.4"
+    "title": "capacitor-camera-preview 8.15.5",
+    "link": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.15.5",
+    "guid": "https://github.com/Cap-go/capacitor-camera-preview/releases/tag/8.15.5",
+    "pubDate": "2026-11-23T18:21:12.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor camera preview/compare/8.15.5...8.15.5"
   },
   {
     "category": "release",
@@ -553,11 +553,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-crisp 8.2.17",
-    "link": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.17",
-    "guid": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.17",
-    "pubDate": "2026-11-13T12:47:20.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain versions with the official Capacitor 8 requirements. This ensures compatibility with the latest Capacitor 8 projects and prevents build issues caused by mismatched tooling versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor crisp/compare/8.2.16...8.2.17"
+    "title": "capacitor-crisp 8.2.18",
+    "link": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.18",
+    "guid": "https://github.com/Cap-go/capacitor-crisp/releases/tag/8.2.18",
+    "pubDate": "2026-11-23T19:01:41.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor crisp/compare/8.2.18...8.2.18"
   },
   {
     "category": "release",
@@ -601,11 +601,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-downloader 8.8.3",
-    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.8.3",
-    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.8.3",
-    "pubDate": "2026-11-16T13:36:27.000Z",
-    "description": "🆕 Changelog Security Updated the OkHttp TLS networking dependency to the latest patch release, improving the stability and security of HTTPS connections. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.8.2...8.8.3"
+    "title": "capacitor-downloader 8.9.0",
+    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.9.0",
+    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.9.0",
+    "pubDate": "2026-11-23T08:30:35.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.9.0...8.9.0"
   },
   {
     "category": "release",
@@ -745,11 +745,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-intent-launcher 8.3.44",
-    "link": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.44",
-    "guid": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.44",
-    "pubDate": "2026-11-13T12:43:56.000Z",
-    "description": "🆕 Changelog Fixed Aligned Android toolchain with official Capacitor 8 versions. Ensures compatibility with Capacitor 8's supported tooling and prevents build issues caused by toolchain drift. 🔗 Full Changelog : https://github.com/Cap go/capacitor intent launcher/compare/8.3.43...8.3.44"
+    "title": "capacitor-intent-launcher 8.3.45",
+    "link": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.45",
+    "guid": "https://github.com/Cap-go/capacitor-intent-launcher/releases/tag/8.3.45",
+    "pubDate": "2026-11-23T18:49:59.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor intent launcher/compare/8.3.45...8.3.45"
   },
   {
     "category": "release",
@@ -785,11 +785,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-jw-player 8.0.65",
-    "link": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.65",
-    "guid": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.65",
-    "pubDate": "2026-11-13T13:03:52.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain with official Capacitor 8 versions, ensuring compatibility and preventing build issues when using Capacitor 8 projects. 🔗 Full Changelog : https://github.com/Cap go/capacitor jw player/compare/8.0.64...8.0.65"
+    "title": "capacitor-jw-player 8.0.66",
+    "link": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.66",
+    "guid": "https://github.com/Cap-go/capacitor-jw-player/releases/tag/8.0.66",
+    "pubDate": "2026-11-23T18:52:24.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor jw player/compare/8.0.66...8.0.66"
   },
   {
     "category": "release",
@@ -881,11 +881,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-audio 8.5.5",
-    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.5",
-    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.5",
-    "pubDate": "2026-11-19T14:39:55.000Z",
-    "description": "🆕 Changelog Changed Replaced the npm dist tag with for pre release builds published from pull requests Fixed Fixed background playback on Android so media continues playing when the app is sent to the background 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.5.4...8.5.5"
+    "title": "capacitor-native-audio 8.5.6",
+    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.6",
+    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.6",
+    "pubDate": "2026-11-23T08:52:40.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.5.6...8.5.6"
   },
   {
     "category": "release",
@@ -1177,11 +1177,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-sheets v8.2.11",
-    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.11",
-    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.11",
-    "pubDate": "2026-11-13T12:44:15.000Z",
-    "description": "🆕 Changelog Fixed Updated the Android build toolchain to match the official Capacitor 8 version requirements, resolving compatibility issues when building Android projects with Capacitor 8. If you have manually overridden Android Gradle Plugin, Kotlin, or Gradle versions in your project, verify they align with the Capacitor 8 reference values. 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.10...v8.2.11"
+    "title": "capacitor-sheets v8.2.12",
+    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.12",
+    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.12",
+    "pubDate": "2026-11-23T07:39:34.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.12...v8.2.12"
   },
   {
     "category": "release",
@@ -1225,11 +1225,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-streamcall 8.0.84",
-    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.84",
-    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.84",
-    "pubDate": "2026-11-13T13:22:56.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain versions with the official Capacitor 8 releases, ensuring consistent build compatibility and avoiding mismatched dependency issues when using Capacitor 8. ( 178) 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.83...8.0.84"
+    "title": "capacitor-streamcall 8.0.86",
+    "link": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.86",
+    "guid": "https://github.com/Cap-go/capacitor-streamcall/releases/tag/8.0.86",
+    "pubDate": "2026-11-23T18:58:12.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor streamcall/compare/8.0.86...8.0.86"
   },
   {
     "category": "release",
@@ -1273,11 +1273,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-transitions v8.3.16",
-    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.16",
-    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.16",
-    "pubDate": "2026-11-15T09:10:01.000Z",
-    "description": "🆕 Changelog Fixed Resolved an issue where subpath declaration files were not shipped deterministically, improving build reproducibility and ensuring reliable TypeScript types for subpath imports. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.15...v8.3.16"
+    "title": "capacitor-transitions v8.3.17",
+    "link": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.17",
+    "guid": "https://github.com/Cap-go/capacitor-transitions/releases/tag/v8.3.17",
+    "pubDate": "2026-11-23T18:54:38.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor transitions/compare/v8.3.17...v8.3.17"
   },
   {
     "category": "release",
@@ -1305,11 +1305,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-uploader 8.3.31",
-    "link": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.31",
-    "guid": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.31",
-    "pubDate": "2026-11-13T12:47:14.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain versions with the official Capacitor 8 requirements, ensuring compatible and reliable Android builds. 🔗 Full Changelog : https://github.com/Cap go/capacitor uploader/compare/8.3.30...8.3.31"
+    "title": "capacitor-uploader 8.3.32",
+    "link": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.32",
+    "guid": "https://github.com/Cap-go/capacitor-uploader/releases/tag/8.3.32",
+    "pubDate": "2026-11-23T08:03:23.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor uploader/compare/8.3.32...8.3.32"
   },
   {
     "category": "release",
@@ -1329,11 +1329,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-video-player 9.0.0",
-    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.0",
-    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.0",
-    "pubDate": "2026-11-19T18:08:34.000Z",
-    "description": "🆕 Changelog Changed Breaking: Updated the bundled Google Cast SDK to 4.8.6, raising the minimum supported iOS version to 16. Update your app's deployment target to iOS 16 or later, and ensure your users are on iOS 16+. Switched PR beta publishing to the npm dist tag instead of , making preview packages easier to identify and install. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/8.3.3...9.0.0"
+    "title": "capacitor-video-player 9.0.1",
+    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.1",
+    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.1",
+    "pubDate": "2026-11-23T18:52:14.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/9.0.1...9.0.1"
   },
   {
     "category": "release",
@@ -1353,11 +1353,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-watch 8.2.1",
-    "link": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.2.1",
-    "guid": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.2.1",
-    "pubDate": "2026-11-13T13:15:17.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain with official Capacitor 8 versions, ensuring compatibility and preventing build issues when using this plugin with Capacitor 8. 🔗 Full Changelog : https://github.com/Cap go/capacitor watch/compare/8.2.0...8.2.1"
+    "title": "capacitor-watch 8.2.2",
+    "link": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.2.2",
+    "guid": "https://github.com/Cap-go/capacitor-watch/releases/tag/8.2.2",
+    "pubDate": "2026-11-23T18:19:30.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor watch/compare/8.2.2...8.2.2"
   },
   {
     "category": "release",
