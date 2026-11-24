@@ -37,7 +37,6 @@
   ],
   "vars": {
     "TRANSLATION_MODEL": "@cf/qwen/qwen3.8-27b",
-    "TRANSLATION_REVIEW_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
   },
   "queues": {
     "producers": [
@@ -57,9 +56,9 @@
         "max_batch_timeout": 1,
         "max_retries": 3,
         "retry_delay": 15,
-        // Each job runs one page batch at a time (Qwen draft, then DeepSeek review,
-        // 30-60 s). 12 + 6 concurrent jobs stays under the 50 requests/minute
-        // DeepSeek cap that prepaid AI Gateway credits allow.
+        // Each job runs one page batch at a time with a single Qwen draft call.
+        // TRANSLATION_REVIEW_MODEL is unset: the reasoning review pass was most of
+        // the Workers AI bill, and translation memory already caches by content hash.
         "max_concurrency": 12,
       },
       {
@@ -122,7 +121,6 @@
       },
       "vars": {
         "TRANSLATION_MODEL": "@cf/qwen/qwen3.8-27b",
-        "TRANSLATION_REVIEW_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
       },
       "r2_buckets": [
         {

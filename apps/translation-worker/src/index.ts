@@ -183,8 +183,8 @@ function trackAICrawler(request: Request, response: Response, ctx?: WorkerExecut
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
 // Qwen 3.8 27B (Workers AI catalog: created 2026-08-17, no planned deprecation) drafts
-// with thinking disabled, then TRANSLATION_REVIEW_MODEL (DeepSeek V4.1 Flash in
-// wrangler.jsonc) reviews the drafts against the style guide. It replaced Gemma 4
+// with thinking disabled. An optional TRANSLATION_REVIEW_MODEL can review the drafts
+// against the style guide; production leaves it unset to keep Workers AI cost down. It replaced Gemma 4
 // (created 2026-04-02) once that passed the 5-month model age limit in AGENTS.md.
 // Override with TRANSLATION_MODEL.
 const DEFAULT_MODEL = '@cf/qwen/qwen3.8-27b'
@@ -217,6 +217,12 @@ const TRANSLATION_MEMORY_VERSION = '2026-10-25-style-guides-v4'
 const TRANSLATION_RENDER_VERSION = '2026-11-11-localized-seo-v1'
 const TRANSLATION_CHECKED_AT_HEADER = 'X-Capgo-Translation-Checked-At'
 const TRANSLATION_MEMORY_ISOLATE_ENTRIES = 5_000
+// A segment whose output is a fallback (English kept, unreviewed draft) gets a miss record
+// so it is not sent to Workers AI on every refresh of every page that contains it. It is
+// retried after TRANSLATION_MISS_RETRY_MS, at most TRANSLATION_MISS_MAX_ATTEMPTS times, then
+// the fallback is served until TRANSLATION_MEMORY_VERSION is bumped or the record is deleted.
+const TRANSLATION_MISS_RETRY_MS = 7 * 24 * 60 * 60 * 1000
+const TRANSLATION_MISS_MAX_ATTEMPTS = 3
 const NAV_GUARD_PATHS = ['/pricing/', '/blog/', '/enterprise/'] as const
 const NAV_PATH_EXPECTED_SOURCES: Record<(typeof NAV_GUARD_PATHS)[number], ReadonlySet<string>> = {
   '/pricing/': new Set(['Pricing']),
@@ -2477,11 +2483,70 @@ function isOnlyProtectedNames(source: string): boolean {
   return !/\p{L}/u.test(protectTranslationTokens(source).text.replace(STRAY_PLACEHOLDER_GLOBAL_PATTERN, ''))
 }
 
+type TranslationMissRecord = { text: string; attempts: number; lastAt: number }
+
+function translationMissKey(memoryKey: string): string {
+  return memoryKey.replace(/\.txt$/, '.miss.json')
+}
+
+async function readTranslationMiss(env: Env, memoryKey: string): Promise<TranslationMissRecord | null> {
+  try {
+    const object = await env.TRANSLATION_STORE.get(translationMissKey(memoryKey))
+    if (!object) return null
+    const value = parseStoredJson(await object.text()) as Partial<TranslationMissRecord> | null
+    if (!value || typeof value.text !== 'string' || typeof value.attempts !== 'number' || typeof value.lastAt !== 'number') return null
+    return { text: value.text, attempts: value.attempts, lastAt: value.lastAt }
+  } catch (error) {
+    console.warn('Translation miss read failed', { memoryKey, error: errorMessage(error) })
+    return null
+  }
+}
+
+async function writeTranslationMiss(env: Env, memoryKey: string, record: TranslationMissRecord): Promise<void> {
+  try {
+    await env.TRANSLATION_STORE.put(translationMissKey(memoryKey), JSON.stringify(record))
+  } catch (error) {
+    console.warn('Translation miss write failed', { memoryKey, error: errorMessage(error) })
+  }
+}
+
+async function deleteTranslationMiss(env: Env, memoryKey: string): Promise<void> {
+  try {
+    await env.TRANSLATION_STORE.delete(translationMissKey(memoryKey))
+  } catch (error) {
+    console.warn('Translation miss delete failed', { memoryKey, error: errorMessage(error) })
+  }
+}
+
+function shouldRetryTranslationMiss(miss: TranslationMissRecord, now = Date.now()): boolean {
+  return miss.attempts < TRANSLATION_MISS_MAX_ATTEMPTS && now - miss.lastAt >= TRANSLATION_MISS_RETRY_MS
+}
+
 // Translates a batch of page segments, reusing every segment already in translation memory.
 async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[], pagePath = ''): Promise<string[]> {
   const contexts = resolveTranslationContexts(batch)
   const keys = await Promise.all(batch.map((text, index) => translationMemoryKey(locale, text, contexts[index] ?? '')))
   const translations = await Promise.all(keys.map((key) => readTranslationMemoryEntry(env, key)))
+  const misses = new Map<number, TranslationMissRecord>()
+  const claimedFrom = new Map<number, TranslationMissRecord>()
+  await Promise.all(
+    translations.map(async (translated, index) => {
+      if (translated !== null) return
+      const miss = await readTranslationMiss(env, keys[index])
+      if (!miss) return
+      // Serve the stored fallback without calling Workers AI until a retry is due.
+      if (!shouldRetryTranslationMiss(miss)) {
+        translations[index] = miss.text || batch[index]
+        return
+      }
+      // Claim the retry before calling Workers AI so other page jobs see a fresh lastAt
+      // and keep serving the fallback instead of retrying the same segment in parallel.
+      const claimed = { text: miss.text, attempts: miss.attempts + 1, lastAt: Date.now() }
+      misses.set(index, claimed)
+      claimedFrom.set(index, miss)
+      await writeTranslationMiss(env, keys[index], claimed)
+    }),
+  )
   const missingIndexes = translations.flatMap((translated, index) => (translated === null ? [index] : []))
   if (missingIndexes.length === 0) return translations as string[]
 
@@ -2489,7 +2554,15 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
   // Fallbacks (English kept after a dropped placeholder or length violation, drafts whose
   // review failed) are served but not remembered, so the next refresh retries them.
   const notRemembered = new Set<string>()
-  const translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath, notRemembered)
+  let translated: string[]
+  try {
+    translated = await translateBatch(env, LANGUAGE_NAMES[locale], missingTexts, pagePath, notRemembered)
+  } catch (error) {
+    // A thrown batch (rate limit, outage) made no real attempt: give the claimed retries back
+    // so the queue retry can try them again instead of burning an attempt and a week.
+    await Promise.all([...claimedFrom].map(([index, miss]) => writeTranslationMiss(env, keys[index], miss)))
+    throw error
+  }
   await Promise.all(
     missingIndexes.map(async (batchIndex, translatedIndex) => {
       const source = batch[batchIndex]
@@ -2501,7 +2574,18 @@ async function translateBatchWithMemory(env: Env, locale: Locale, batch: string[
         !STRAY_PLACEHOLDER_PATTERN.test(text) &&
         !notRemembered.has(source) &&
         (normalizedTranslationValue(text) !== normalizedTranslationValue(source) || isOnlyProtectedNames(source))
-      if (remember) await writeTranslationMemoryEntry(env, keys[batchIndex], text)
+      if (remember) {
+        await writeTranslationMemoryEntry(env, keys[batchIndex], text)
+        // A recovered segment drops its miss record, so deleting the memory entry later
+        // forces a real retranslation instead of serving the old fallback.
+        if (misses.has(batchIndex)) await deleteTranslationMiss(env, keys[batchIndex])
+      } else
+        await writeTranslationMiss(env, keys[batchIndex], {
+          text: text && !STRAY_PLACEHOLDER_PATTERN.test(text) ? text : source,
+          // A claimed retry already counted its attempt.
+          attempts: misses.get(batchIndex)?.attempts ?? 1,
+          lastAt: Date.now(),
+        })
     }),
   )
   return translations as string[]
