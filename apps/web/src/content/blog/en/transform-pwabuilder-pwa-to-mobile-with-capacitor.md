@@ -10,7 +10,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-11-24T00:00:00.000Z
 updated_at: 2026-11-24T00:00:00.000Z
-head_image: /blog-images/transform-pwa-to-native-app-with-capacitor.webp
+head_image: /blog-images/migrating-cordova-to-capacitor.png
 head_image_alt: "PWABuilder PWA to Capacitor and Capgo blog illustration"
 keywords: PWABuilder, PWA, Capacitor, Capgo Builder, live updates, Trusted Web Activity, Bubblewrap, Microsoft Store, App Store, Google Play
 tag: Tutorial
@@ -126,14 +126,14 @@ The full onboarding flow is in [Capgo CLI onboarding](/docs/getting-started/onbo
 
 ```bash
 npx @capgo/cli@latest init
-bun add @capgo/capacitor-updater
+bun add @capgo/capacitor-updater && bunx cap sync
 ```
 
-Configure `plugins.CapacitorUpdater` and upload your first bundle:
+Configure `plugins.CapacitorUpdater` (CLI onboarding creates a default `production` channel) and upload your first bundle:
 
 ```bash
 bun run build
-npx @capgo/cli@latest bundle upload --channel=production
+npx @capgo/cli@latest bundle upload --channel=production --auto-bump
 ```
 
 Live updates change web assets only. New plugins, permissions, or native code still need a store build. See [live update compatibility](/docs/live-updates/compatibility/).

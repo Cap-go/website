@@ -102,7 +102,7 @@ export const pwabuilder: AlternativeCompetitor = {
       },
       {
         title: 'Build and update with Capgo',
-        html: 'Run <code>bunx @capgo/cli@latest init</code>, build in Capgo Cloud without a Mac, and ship web changes with <code>bunx @capgo/cli@latest bundle upload</code>.',
+        html: 'Run <code>npx @capgo/cli@latest init</code>, build in Capgo Cloud without a Mac, and ship web changes with <code>npx @capgo/cli@latest bundle upload</code>. See <a href="https://capgo.app/solutions/pwabuilder-to-mobile/">PWABuilder to mobile</a> and <a href="https://capgo.app/docs/ai/pwabuilder-to-capacitor/">PWABuilder to Capacitor docs</a>.',
       },
     ],
   },
@@ -124,11 +124,6 @@ export const pwabuilder: AlternativeCompetitor = {
     {
       question: 'When should I choose Capgo?',
       answer: 'Choose Capgo when you need native features on iOS and Android, cloud builds without a Mac, and live updates with channels and rollback for a Capacitor app.',
-    },
-    {
-      question: 'Where is the Capgo guide for PWABuilder users?',
-      answer:
-        'The PWABuilder to iOS and Android solution page and the PWABuilder to Capacitor docs walk through Capacitor setup, Capgo Build, and live updates when free PWA packaging is not enough.',
     },
   ],
 }

@@ -56,7 +56,7 @@ The [PWABuilder to iOS and Android solution](https://capgo.app/solutions/pwabuil
    bun run build && bunx cap sync
    ```
 
-5. **Register Capgo and enable live updates** using [CLI onboarding](/docs/getting-started/onboarding/) or `npx @capgo/cli@latest init`. Install `@capgo/capacitor-updater` before your first store release if you plan to ship web changes without waiting for review.
+5. **Register Capgo and enable live updates** using [CLI onboarding](/docs/getting-started/onboarding/) or `npx @capgo/cli@latest init`. Install `@capgo/capacitor-updater` before your first store release if you plan to ship web changes without waiting for review, then run `bun run build && bunx cap sync` before requesting native builds.
 
 6. **Build native binaries in Capgo Cloud** (no Mac required for iOS on the main path):
 
@@ -70,7 +70,7 @@ The [PWABuilder to iOS and Android solution](https://capgo.app/solutions/pwabuil
 
    ```bash
    bun run build
-   npx @capgo/cli@latest bundle upload --channel=production
+   npx @capgo/cli@latest bundle upload --channel=production --auto-bump
    ```
 
 </Steps>
