@@ -345,6 +345,7 @@ export const docsSidebar = [
     [
       linkItem('Hosted MCP server', '/docs/ai/mcp/'),
       linkItem('Web app to mobile app', '/docs/ai/webapp-to-mobile/'),
+      linkItem('PWABuilder to Capacitor', '/docs/ai/pwabuilder-to-capacitor/'),
       linkItem('MCP Events', '/docs/ai/mcp-events/'),
       linkItem('Local CLI MCP server', '/docs/cli/reference/mcp/'),
     ],
