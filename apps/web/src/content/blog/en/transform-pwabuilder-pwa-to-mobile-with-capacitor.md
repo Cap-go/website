@@ -129,7 +129,7 @@ npx @capgo/cli@latest init
 bun add @capgo/capacitor-updater && bunx cap sync
 ```
 
-Configure `plugins.CapacitorUpdater` (CLI onboarding creates a default `production` channel) and upload your first bundle:
+Configure `plugins.CapacitorUpdater` (CLI onboarding creates a default `production` channel and injects `CapacitorUpdater.notifyAppReady()` into your app entry). For a static-only `www/` layout, add that call in the first script that runs on load. Upload your first bundle:
 
 ```bash
 bun run build
