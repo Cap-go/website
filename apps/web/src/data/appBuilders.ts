@@ -213,9 +213,8 @@ npm run build`,
       body: 'PWABuilder packages a public HTTPS URL into store projects. Capacitor needs the production build from your repo. Clone the project that ships your PWA, confirm your web manifest, and set Capacitor webDir to that output folder (dist, build, out, or www). If the project has no package.json or build script, skip the build and point webDir at the folder that contains index.html and the assets.',
       code: `git clone https://github.com/you/your-pwa.git
 cd your-pwa
-npm install
-npm run build
-ls dist  # set webDir to build, out, or www if your framework outputs there`,
+# With a framework: npm install && npm run build && ls dist
+# Static-only: skip install/build; point webDir at the folder with index.html`,
     },
     flowDesc: 'Audit the live PWA at pwabuilder.com and download store packages for Microsoft, Google Play, or iOS, or work from the same web codebase in your repo.',
     syncNote:
