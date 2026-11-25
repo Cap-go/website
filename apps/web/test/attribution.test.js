@@ -4,7 +4,9 @@ import { runInNewContext } from 'node:vm'
 import {
   appendAttributionToUrl,
   buildFirstTouchAttribution,
+  captureFirstTouchFromLocation,
   classifyFirstTouchType,
+  decorateAttributionLinks,
   deriveSignupSource,
   deserializeAttribution,
   getSignupAttributionForEvents,
@@ -371,4 +373,61 @@ test('ignores oversized or malformed optional click references', () => {
     expect(parseAttributionFromSearch(`?oppref=${encodeURIComponent(value)}`).oppref).toBeUndefined()
     expect(deserializeAttribution(JSON.stringify({ oppref: value }))).toBeNull()
   }
+})
+
+test('direct-offer hero uses Start shipping now without step copy and preserves attribution', () => {
+  const signupCta = readFileSync(new URL('../src/components/SignupCta.astro', import.meta.url), 'utf8')
+  const directOfferDetails = readFileSync(new URL('../src/components/DirectOfferDetails.astro', import.meta.url), 'utf8')
+  const header = readFileSync(new URL('../src/components/Header.astro', import.meta.url), 'utf8')
+  const messages = readFileSync(new URL('../../shared/copy/messages.ts', import.meta.url), 'utf8')
+
+  expect(messages).toContain("direct_offer_cta_start_shipping: 'Start shipping now'")
+  expect(messages).toContain("direct_offer_price_guarantee_note: 'From {price}/month. 14-day money-back guarantee. Cancel anytime.'")
+
+  expect(signupCta).toContain('m.direct_offer_cta_start_shipping')
+  expect(signupCta).toContain('m.direct_offer_price_guarantee_note')
+  expect(signupCta).toContain('formatStartingMonthlyPrice(getPlans(), locale)')
+  expect(directOfferDetails).toContain('formatStartingMonthlyPrice(getPlans(), locale)')
+  expect(signupCta).not.toContain('DirectOfferDetails')
+  expect(signupCta).not.toContain('direct_offer_cta_get_started')
+  expect(signupCta).not.toContain('No free trial')
+  expect(signupCta).not.toContain('See monthly plans')
+
+  // Verify restored standard nav CTA selection and rendered desktop/mobile anchors
+  expect(header).toContain('const navCtaLabel = isEnterprisePage ? m.enterprise_talk_to_team({}, { locale }) : m.nav_cta_start_free({}, { locale })')
+  expect(header.match(/<a[\s\S]{0,600}href=\{navCtaHref\}[\s\S]{0,600}\{navCtaLabel\}[\s\S]{0,40}<\/a>/g)?.length).toBe(2)
+  expect(header).not.toContain('navCtaDirectLabel')
+  expect(header).not.toContain('direct_offer_cta_get_started')
+
+  // Verify SignupCta register link retains utm_content, oppref, and offer=direct through capture + decorateAttributionLinks
+  expect(signupCta).toContain("const registerUrl = getRelativeLocaleUrl(locale, 'register')")
+  expect(signupCta).toContain('href={isTeam ? inquiryUrl : registerUrl}')
+
+  const heroAnchorAttrs = { href: '/register/', rel: '' }
+  const heroAnchor = {
+    getAttribute: (name) => (name in heroAnchorAttrs ? heroAnchorAttrs[name] : null),
+    setAttribute: (name, value) => {
+      heroAnchorAttrs[name] = value
+    },
+  }
+  withBrowserGlobals('?utm_source=google&utm_medium=cpc&utm_campaign=live_updates&utm_content=hero-direct-v2&oppref=click-ref-987&offer=direct', '/', '', () => {
+    const prevDoc = globalThis.document
+    globalThis.document = {
+      cookie: prevDoc.cookie,
+      querySelectorAll: (selector) => (selector === 'a[href]' ? [heroAnchor] : []),
+    }
+    try {
+      captureFirstTouchFromLocation()
+      decorateAttributionLinks(globalThis.document)
+    } finally {
+      globalThis.document = prevDoc
+    }
+  })
+
+  const url = new URL(heroAnchorAttrs.href, 'https://capgo.app/')
+  expect(url.pathname).toBe('/register/')
+  expect(url.searchParams.get('utm_content')).toBe('hero-direct-v2')
+  expect(url.searchParams.get('oppref')).toBe('click-ref-987')
+  expect(url.searchParams.get('offer')).toBe('direct')
+  expect(heroAnchorAttrs.rel).toContain('nofollow')
 })

@@ -3777,6 +3777,8 @@ const messages = {
   register: 'Register',
   nav_cta_start_free: 'Start for free',
   direct_offer_cta_get_started: 'Choose a paid plan',
+  direct_offer_cta_start_shipping: 'Start shipping now',
+  direct_offer_price_guarantee_note: 'From {price}/month. 14-day money-back guarantee. Cancel anytime.',
   direct_offer_monthly_start: 'Paid plans from {price} USD/month, billed monthly.',
   direct_offer_payment_step: 'Create your account, then choose a plan and pay. No free trial.',
   direct_offer_monthly_plans: 'See monthly plans',

@@ -1,4 +1,5 @@
 import m from '@/copy/messages'
+import { BASE_CURRENCY, formatPrice } from '@/lib/currency'
 import type { Locales } from '@/services/locale'
 import type { Database } from '@/services/supabase.types'
 
@@ -32,4 +33,12 @@ export function planMonthlyPrice(plan: PlanRow): number {
 
 export function planYearlyPrice(plan: PlanRow): number {
   return typeof plan.price_y === 'number' && Number.isFinite(plan.price_y) ? plan.price_y : 0
+}
+
+export function formatStartingMonthlyPrice(plans: PlanRow[], locale: string): string | null {
+  const prices = plans
+    .filter((plan) => plan.name !== 'Free')
+    .map(planMonthlyPrice)
+    .filter((price) => price > 0)
+  return prices.length ? formatPrice(Math.min(...prices), BASE_CURRENCY, 'cents', locale) : null
 }
