@@ -53,7 +53,11 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
     'Native notifications',
     'Capgo Observe',
     ...(plan.name === 'Enterprise'
-      ? [m.soc2_compliance_short({}, { locale: Astro.locals.locale }), m.enterprise_uptime_sla({}, { locale: Astro.locals.locale })]
+      ? [
+          m.soc2_compliance_short({}, { locale: Astro.locals.locale }),
+          m.compliance_iso27001({}, { locale: Astro.locals.locale }),
+          m.enterprise_uptime_sla({}, { locale: Astro.locals.locale }),
+        ]
       : [m.unlimited_live_updates({}, { locale: Astro.locals.locale }), m.mcp_server({}, { locale: Astro.locals.locale })]),
   ]
 

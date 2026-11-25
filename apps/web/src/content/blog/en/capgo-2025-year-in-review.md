@@ -71,7 +71,7 @@ September brought a different kind of growth challenge: major applications with 
 
 ![SOC 2 Type II Certification](/soc2.svg)
 
-On July 16, 2025, Capgo achieved **SOC 2 Type II certification**. This isn't just a badge on our website - it's proof that our security controls, data handling, and operational practices meet the strictest standards that enterprise security teams demand.
+On July 16, 2025, Capgo achieved **SOC 2 Type II certification**. This isn't just a badge on our website - it's proof that our security controls, data handling, and operational practices meet the strictest standards that enterprise security teams demand. Capgo completed its **second year of SOC 2 Type II in 2026** and earned **ISO 27001 in 2026**. Both reports are in the [security trust portal](https://trust.capgo.app/).
 
 For context: SOC 2 certification means independent auditors examined our entire infrastructure, security practices, and operational procedures over an extended period. They verified we're doing everything right - access controls, encryption, monitoring, incident response, data protection, the works.
 

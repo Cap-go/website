@@ -412,7 +412,10 @@ const content = { title, description, ldJSON }
 
         <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 text-center">
-            <img src="/soc2.svg" alt="SOC 2" class="mx-auto mb-4 h-16 opacity-80" />
+            <div class="mb-4 flex items-center justify-center gap-4">
+              <img src="/soc2.svg" alt="SOC 2 Type II" class="h-16 opacity-80" />
+              <img src="/iso27001.svg" alt="ISO 27001" class="h-16 opacity-80" />
+            </div>
             <h4 class="mb-2 text-lg font-bold text-white">{m.solutions_fintech_cert1_title({}, { locale })}</h4>
             <p class="text-sm text-gray-400">{m.solutions_fintech_cert1_desc({}, { locale })}</p>
           </div>
