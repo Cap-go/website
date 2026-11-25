@@ -343,6 +343,7 @@ const content = {
   import '@/scripts/register'
   import { initCurrency } from '@/scripts/currency'
 
-  // Show the starting price in the visitor's currency; it stays in USD if the prices endpoint is unavailable.
+  // Localize trial-path prices such as PayAsYouGoCopy's [data-price-amount] nodes.
+  // The direct-offer starting price is the USD list price from getPlans(), matching the commercial line on this page.
   initCurrency()
 </script>

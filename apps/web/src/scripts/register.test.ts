@@ -1,4 +1,5 @@
 import { expect, test } from 'bun:test'
+import { load } from 'cheerio'
 import { readFileSync } from 'node:fs'
 import { runInNewContext } from 'node:vm'
 
@@ -358,6 +359,7 @@ test('a full-length password that misses a rule shows the rules while typing', a
 
 test('direct-offer register sells the price guarantee and drops payment-order copy', () => {
   const registerPage = readFileSync(new URL('../pages/register.astro', import.meta.url), 'utf8')
+  const globalCss = readFileSync(new URL('../css/global.css', import.meta.url), 'utf8')
 
   expect(registerPage).toContain('getPlans()')
   expect(registerPage).toContain('planMonthlyPrice')
@@ -386,4 +388,53 @@ test('direct-offer register sells the price guarantee and drops payment-order co
   expect(pricingBlockStart).toBeGreaterThan(-1)
   expect(pricingBlockEnd).toBeGreaterThan(pricingBlockStart)
   expect(registerPage.slice(pricingBlockStart, pricingBlockEnd)).toContain('register_pricing_link')
+
+  const directNoteRenderIndex = registerPage.lastIndexOf('{directPriceGuaranteeNote}')
+  expect(directNoteRenderIndex).toBeGreaterThan(-1)
+  expect(registerPage.lastIndexOf('data-direct-copy', directNoteRenderIndex)).toBeGreaterThan(-1)
+  expect(registerPage).toMatch(/data-direct-copy[^>]*>[\s\S]*\{directPriceGuaranteeNote\}/)
+
+  // The page relies on these global selectors; mirror them so we can assert visible copy.
+  expect(globalCss).toContain("[data-offer='direct'] [data-trial-copy]")
+  expect(globalCss).toContain("html:not([data-offer='direct']) [data-direct-copy]")
+
+  const fixture = `
+    <html>
+      <p>
+        <span data-trial-copy>
+          <span>14-day free trial</span>
+          <span>No credit card required</span>
+          <a href="/pricing/">See pricing</a>
+        </span>
+        <span data-direct-copy data-testid="direct-offer-price-note">From $14/month. 14-day money-back guarantee. Cancel anytime.</span>
+      </p>
+      <h3>Create your account</h3>
+      <p>Email and password, about 30 seconds.</p>
+    </html>
+  `
+
+  const visibleText = (offer: 'direct' | null) => {
+    const $ = load(fixture)
+    if (offer === 'direct') $('html').attr('data-offer', 'direct')
+    // Same hide rules as apps/web/src/css/global.css
+    if (offer === 'direct') $('[data-trial-copy]').remove()
+    else $('[data-direct-copy]').remove()
+    return $('body').text().replace(/\s+/g, ' ').trim()
+  }
+
+  const directVisible = visibleText('direct')
+  expect(directVisible).toContain('From $14/month. 14-day money-back guarantee. Cancel anytime.')
+  expect(directVisible).toContain('Create your account')
+  expect(directVisible).toContain('Email and password, about 30 seconds.')
+  expect(directVisible).not.toContain('See pricing')
+  expect(directVisible).not.toContain('14-day free trial')
+  expect(directVisible).not.toContain('No credit card required')
+  expect(directVisible).not.toContain('No free trial')
+  expect(directVisible).not.toContain('Create your account, then choose a plan and pay')
+  expect(directVisible).not.toContain('complete payment before connecting your app')
+
+  const trialVisible = visibleText(null)
+  expect(trialVisible).toContain('14-day free trial')
+  expect(trialVisible).toContain('See pricing')
+  expect(trialVisible).not.toContain('From $14/month')
 })
