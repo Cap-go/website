@@ -27,13 +27,23 @@ type ProbePayload = {
 
 const WORKER_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const MODEL = process.env.TRANSLATION_REAL_TEST_MODEL || '@cf/qwen/qwen3.8-27b'
-const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '240000', 10)
+const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '600000', 10)
 const REQUEST_TIMEOUT_MS = Math.min(60_000, TIMEOUT_MS)
 const LOG_LIMIT = 16_000
 const WRANGLER_CONFIG = 'wrangler.real-test.jsonc'
 const DEVELOPMENT_R2_BUCKET = 'capgo-translation-cache-development'
 const SOURCE_TEXTS = ['Ship updates instantly', 'Pricing', 'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.']
 const REAL_PAGE_PROBES = ['/', '/docs/'] as const
+const RETRY_DELAY_MS = 3000
+// Workers AI rate limits are per account and per minute, shared with production traffic.
+// Retrying every few seconds keeps the window saturated, so back off for a full window.
+const RATE_LIMIT_DELAY_MS = 30_000
+const RATE_LIMIT_MAX_DELAY_MS = 120_000
+
+function isRateLimitError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error)
+  return /\b3021\b|rate limit/i.test(message)
+}
 
 let wranglerLog = ''
 
@@ -245,6 +255,9 @@ void drainStream(wrangler.stderr)
 
 let lastError: unknown = null
 let passed = false
+let runtimeModel: string | undefined
+const passedPages = new Set<string>()
+let rateLimitDelay = RATE_LIMIT_DELAY_MS
 const deadline = Date.now() + TIMEOUT_MS
 
 try {
@@ -253,16 +266,26 @@ try {
     if (code !== null) throw new Error(`wrangler dev exited early with code ${code}`)
 
     try {
-      const payload = await fetchRuntimeProbe(runtimeProbeUrl)
+      // Keep probes that already passed so a retry only repeats what still failed.
+      if (!runtimeModel) runtimeModel = (await fetchRuntimeProbe(runtimeProbeUrl)).model
       for (const probe of realPageProbeUrls) {
+        if (passedPages.has(probe.path)) continue
         await fetchRealPageProbe(probe.url, probe.path)
+        passedPages.add(probe.path)
       }
-      console.log(`Real translation worker probe passed with ${payload.model} on ${REAL_PAGE_PROBES.join(', ')}`)
+      console.log(`Real translation worker probe passed with ${runtimeModel} on ${REAL_PAGE_PROBES.join(', ')}`)
       passed = true
       break
     } catch (error) {
       lastError = error
-      await sleep(3000)
+      if (isRateLimitError(error)) {
+        const delay = Math.min(rateLimitDelay, Math.max(0, deadline - Date.now()))
+        console.warn(`Workers AI rate limited the probe; retrying in ${Math.round(delay / 1000)}s`)
+        await sleep(delay)
+        rateLimitDelay = Math.min(rateLimitDelay * 2, RATE_LIMIT_MAX_DELAY_MS)
+      } else {
+        await sleep(RETRY_DELAY_MS)
+      }
     }
   }
 
