@@ -42,7 +42,7 @@ const RATE_LIMIT_MAX_DELAY_MS = 120_000
 
 function isRateLimitError(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error)
-  return /\b3021\b|rate limit/i.test(message)
+  return /\b3021\b|\b429\b|rate.?limit|too many requests/i.test(message)
 }
 
 let wranglerLog = ''
@@ -173,7 +173,7 @@ async function fetchJsonProbe(url: string): Promise<ProbePayload> {
     throw new Error(`Probe returned non-JSON response ${response.status}: ${text.slice(0, 500)}`)
   }
 
-  if (!response.ok) throw new Error(payload.error || `Probe returned HTTP ${response.status}`)
+  if (!response.ok) throw new Error(`${payload.error || 'Probe failed'} (HTTP ${response.status})`)
   return payload
 }
 
