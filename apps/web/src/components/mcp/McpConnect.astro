@@ -1,0 +1,70 @@
+---
+import CommandCode from '@/components/CommandCode.astro'
+import m from '@/copy/messages'
+import { HOSTED_MCP_URL } from '../../../../shared/agentDiscovery'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const claudeCodeCommand = `claude mcp add --transport http capgo ${HOSTED_MCP_URL}`
+const localCommand = 'npx @capgo/cli@latest mcp'
+const jsonConfig = JSON.stringify({ mcpServers: { capgo: { url: HOSTED_MCP_URL } } }, null, 2)
+const apiKeyConfig = JSON.stringify({ mcpServers: { capgo: { url: HOSTED_MCP_URL, headers: { Authorization: 'Bearer <Capgo API key>' } } } }, null, 2)
+const localConfig = JSON.stringify({ mcpServers: { 'capgo-cli': { command: 'npx', args: ['@capgo/cli@latest', 'mcp'] } } }, null, 2)
+---
+
+<section class="bg-[#1a1a1a] py-16 sm:py-20" id="connect" aria-labelledby="mcp-connect-title">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <p class="font-mono text-sm font-semibold tracking-wide text-emerald-300 uppercase">{m.mcp_page_connect_title({}, { locale })}</p>
+      <h2 id="mcp-connect-title" class="mt-3 text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
+        Add the URL, then sign in
+      </h2>
+      <p class="mt-5 text-base leading-7 text-slate-300">{m.mcp_page_connect_oauth({}, { locale })}</p>
+    </div>
+
+    <div class="mt-10 grid gap-4 lg:grid-cols-2">
+      <article class="rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+        <h3 class="text-lg font-semibold text-white">{m.mcp_page_connect_claude_code({}, { locale })}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-300">Then run /mcp inside Claude Code and pick capgo.</p>
+        <div class="mt-4 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+          <CommandCode command={claudeCodeCommand} />
+        </div>
+      </article>
+
+      <article class="rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+        <h3 class="text-lg font-semibold text-white">{m.mcp_page_connect_json({}, { locale })}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-300">Cursor uses ~/.cursor/mcp.json or .cursor/mcp.json. VS Code uses .vscode/mcp.json with a servers object and type http.</p>
+        <pre class="mt-4 overflow-x-auto rounded-lg bg-slate-950 p-4 font-mono text-[13px] leading-6 text-emerald-200 ring-1 ring-white/10"><code>{jsonConfig}</code></pre>
+      </article>
+
+      <article class="rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+        <h3 class="text-lg font-semibold text-white">API key, when the client has no OAuth</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-300">{m.mcp_page_connect_apikey({}, { locale })}</p>
+        <pre class="mt-4 overflow-x-auto rounded-lg bg-slate-950 p-4 font-mono text-[13px] leading-6 text-emerald-200 ring-1 ring-white/10"><code>{apiKeyConfig}</code></pre>
+      </article>
+
+      <article class="rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+        <h3 class="text-lg font-semibold text-white">Local server</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-300">
+          Login once in the project, then register the stdio server next to the hosted one. Name it capgo-cli so the two servers stay distinct.
+        </p>
+        <div class="mt-4 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10">
+          <CommandCode command={localCommand} />
+        </div>
+        <pre class="mt-4 overflow-x-auto rounded-lg bg-slate-950 p-4 font-mono text-[13px] leading-6 text-emerald-200 ring-1 ring-white/10"><code>{localConfig}</code></pre>
+      </article>
+    </div>
+
+    <p class="mt-8 text-sm leading-6 text-slate-400">
+      Per-client steps for Claude.ai, ChatGPT, Cursor, VS Code, and Lovable are in the
+      <a href={getRelativeLocaleUrl(locale, 'docs/ai/mcp')} class="font-semibold text-emerald-200 underline decoration-emerald-300/40 underline-offset-4 hover:text-white">
+        hosted MCP setup guide
+      </a>
+      . Agent-specific pages live under
+      <a href={getRelativeLocaleUrl(locale, 'agents')} class="font-semibold text-emerald-200 underline decoration-emerald-300/40 underline-offset-4 hover:text-white">
+        Capgo for AI agents
+      </a>
+      .
+    </p>
+  </div>
+</section>

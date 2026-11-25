@@ -1,5 +1,6 @@
 ---
 import m from '@/copy/messages'
+import { HOSTED_MCP_URL } from '../../../shared/agentDiscovery'
 import { productIconPaths as iconPaths } from '@/config/productIcons'
 import { getRelativeLocaleUrl } from '@/services/links'
 import AudienceSwitch from '@/components/AudienceSwitch.astro'
@@ -43,7 +44,7 @@ const tools = [
     icon: 'arrows-right-left',
     title: m.agent_ready_mcp_title({}, { locale }),
     desc: m.agent_ready_mcp_desc({}, { locale }),
-    code: 'npx @capgo/cli@latest mcp',
+    code: HOSTED_MCP_URL,
     href: getRelativeLocaleUrl(locale, 'mcp'),
   },
   {

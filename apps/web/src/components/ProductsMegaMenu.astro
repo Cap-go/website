@@ -5,7 +5,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 
-type Scene = 'live-update' | 'native-build' | 'observe' | 'notifications' | 'cli' | 'skills' | 'app' | 'plugins' | 'ionic'
+type Scene = 'live-update' | 'native-build' | 'observe' | 'notifications' | 'cli' | 'mcp' | 'skills' | 'app' | 'plugins' | 'ionic'
 
 interface Product {
   href: string
@@ -63,6 +63,15 @@ const products: Product[] = [
     desc: m.platform_cli_desc({}, { locale }),
     extra: { href: 'ci_cd', label: 'CI/CD' },
     groupStart: true,
+  },
+  {
+    href: 'mcp',
+    icon: 'arrows-right-left',
+    scene: 'mcp',
+    name: m.nav_capgo_mcp({}, { locale }),
+    tagline: m.menu_mcp_tagline({}, { locale }),
+    desc: m.platform_mcp_desc({}, { locale }),
+    extra: { href: 'docs/ai/mcp', label: 'Setup' },
   },
   {
     href: 'skills',
@@ -259,6 +268,17 @@ const ionicRows = [
               <p class="mm-slot-3 text-slate-400">↳ zipping 16 files · 4.2 MB</p>
               <p class="mm-slot-4 text-emerald-400">✔ checksum verified</p>
               <p class="mm-slot-5 text-emerald-400">✔ 1.4.0 live on production</p>
+            </div>
+          )}
+
+          {product.scene === 'mcp' && (
+            <div class="w-full max-w-[21rem] space-y-2 text-xs">
+              <p class="mm-bubble mm-slot-1">Pause the production rollout at 20%</p>
+              {['Channel production', 'Rollout set to 20%', 'Auto-pause armed'].map((step, i) => (
+                <p class:list={['mm-step', `mm-slot-${i + 2}`]}>
+                  <span class="text-emerald-400">✔</span> {step}
+                </p>
+              ))}
             </div>
           )}
 
