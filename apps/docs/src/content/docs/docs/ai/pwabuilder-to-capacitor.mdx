@@ -1,0 +1,115 @@
+---
+title: PWABuilder PWA to Capacitor with Capgo
+description: "Move from PWABuilder store packaging or the same PWA codebase into Capacitor iOS and Android apps, then build in Capgo Cloud and ship live updates."
+sidebar:
+  label: PWABuilder to Capacitor
+  order: 4
+---
+
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+[PWABuilder](https://www.pwabuilder.com/) is a free, open-source Microsoft tool that scores your PWA and generates store packages for [Microsoft Store](https://docs.pwabuilder.com/#/builder/windows), [Google Play](https://docs.pwabuilder.com/#/builder/android) (Trusted Web Activity via [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap)), and [iOS](https://docs.pwabuilder.com/#/builder/app-store). Store listings load your hosted PWA, so deploying the website updates installed apps without a new store submission.
+
+[Capacitor](https://capacitorjs.com/) bundles your production web build inside native iOS and Android projects. With [Capgo Build](/docs/builder/getting-started/) and [live updates](/docs/live-updates/), you can request signed native binaries from any OS and ship staged web updates with rollback. For an honest comparison, see [PWABuilder vs Capgo](https://capgo.app/alternatives/pwabuilder/) on the marketing site.
+
+<Aside type="note" title="Two valid starting points">
+You can arrive here after packaging with PWABuilder, or without ever downloading a PWABuilder zip. Both paths use the **web app source** that builds your PWA, not only the generated TWA or WebView wrapper.
+</Aside>
+
+## When PWABuilder is enough
+
+PWABuilder fits when:
+
+- Your PWA already has a complete manifest and is served over HTTPS at a public URL
+- You need free store packaging and your UI works as a hosted or TWA experience
+- You do not need Capacitor native plugins, offline asset bundles, or Capgo channel rollouts
+
+Microsoft Store packaging is a first-class PWABuilder path. Android uses a Bubblewrap TWA. PWABuilder documentation notes that iOS packaging is more limited and that App Store acceptance depends on your UI and native capability use.
+
+## When to add Capacitor and Capgo
+
+Move to Capacitor with Capgo when you need:
+
+- Native APIs (push, camera, biometrics, file system, and Capgo plugins from the [plugin directory](https://capgo.app/plugins/))
+- Offline bundles that do not depend on your server being reachable at launch
+- Cloud iOS builds without maintaining a Mac (see [Capgo Cloud Build](/docs/builder/getting-started/))
+- Live updates with channels, staged rollout, and rollback ([live updates](/docs/live-updates/))
+
+The [PWABuilder to iOS and Android solution](https://capgo.app/solutions/pwabuilder-to-mobile/) summarizes the marketing workflow. This doc is the implementation reference.
+
+## Get started
+
+<Steps>
+
+1. **Confirm PWABuilder prerequisites** (optional audit). Your app should be on HTTPS, expose a web manifest, and meet the baseline PWA checks described in [PWABuilder quick start](https://docs.pwabuilder.com/#/builder/quick-start). If you already packaged successfully, you can skip re-running PWABuilder.
+
+2. **Open the web project that builds your PWA.** PWABuilder does not replace your framework repo. Clone your app, install dependencies, and run your production build. Note the output folder (`dist`, `build`, `out`, or `www`).
+
+3. **Adapt browser-only behavior.** Remove or guard install prompts, and avoid assuming a browser tab context. See [Transform your PWA to a native app](https://capgo.app/blog/transform-pwa-to-native-app-with-capacitor/) for WebView-specific checks.
+
+4. **Add Capacitor** with the same `webDir` as your build output:
+
+   ```bash
+   npm install @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android
+   npx cap init "Your App" com.company.app --web-dir dist
+   npx cap add ios && npx cap add android
+   npm run build && npx cap sync
+   ```
+
+5. **Register Capgo and enable live updates** using [CLI onboarding](/docs/getting-started/onboarding/) or `npx @capgo/cli@latest init`. Install `@capgo/capacitor-updater` before your first store release if you plan to ship web changes without waiting for review, then run `npm run build && npx cap sync` before requesting native builds.
+
+6. **Build native binaries in Capgo Cloud** (no Mac required for iOS on the main path):
+
+   ```bash
+   npx @capgo/cli@latest build init
+   npx @capgo/cli@latest build request --platform ios
+   npx @capgo/cli@latest build request --platform android
+   ```
+
+7. **Upload web bundles** after each production build:
+
+   ```bash
+   npm run build
+   npx @capgo/cli@latest bundle upload --channel=production --auto-bump
+   ```
+
+</Steps>
+
+## PWABuilder package vs Capacitor project
+
+<Tabs>
+<TabItem label="PWABuilder store package">
+
+- Wraps a **live URL** (TWA on Android, WebView projects on iOS)
+- Updates when users are online and your server serves new content
+- Little or no native plugin surface beyond what the platform wrapper exposes
+- iOS output requires **Xcode on a Mac** per [PWABuilder App Store docs](https://docs.pwabuilder.com/#/builder/app-store)
+
+</TabItem>
+<TabItem label="Capacitor + Capgo">
+
+- Ships a **static web build** inside `ios/` and `android/` projects
+- Works offline with bundled assets (configure `server.url` only when you intend a hosted shell)
+- Adds native features through Capacitor and Capgo plugins
+- **Capgo Build** can sign iOS and Android binaries in the cloud
+
+</TabItem>
+</Tabs>
+
+## Replacing a Play TWA listing later
+
+If you already published a Bubblewrap TWA from PWABuilder, you can ship a Capacitor Android app to the **same** Play listing when you reuse the signing key and application ID. Plan the migration before changing package names. Push notifications and other native features require a new native build after you add plugins.
+
+## AI-assisted setup
+
+If you use Claude Code, Cursor, or Codex, the [hosted Capgo MCP server](/docs/ai/mcp/) and [Web app to mobile app](/docs/ai/webapp-to-mobile/) guide follow the same phases: plan, static build, Capacitor, plugins, readiness check, cloud build, and live updates.
+
+## Related
+
+- [PWABuilder to iOS and Android](https://capgo.app/solutions/pwabuilder-to-mobile/)
+- [PWABuilder vs Capgo](https://capgo.app/alternatives/pwabuilder/)
+- [Transform PWABuilder PWA to mobile with Capacitor](https://capgo.app/blog/transform-pwabuilder-pwa-to-mobile-with-capacitor/)
+- [Transform your PWA to a native app with Capacitor](https://capgo.app/blog/transform-pwa-to-native-app-with-capacitor/)
+- [Capgo Cloud Build](/docs/builder/getting-started/)
+- [Live updates](/docs/live-updates/)
+- [GitHub Actions integration](/docs/live-updates/integrations/github-actions/)

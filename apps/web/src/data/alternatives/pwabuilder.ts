@@ -5,10 +5,9 @@ export const pwabuilder: AlternativeCompetitor = {
   name: 'PWABuilder',
   category: 'web-to-app',
   publishedAt: '2026-10-12',
-  updatedAt: '2026-11-03',
+  updatedAt: '2026-11-24',
   metaTitle: 'Best PWABuilder Alternative in 2026 | Capgo',
-  metaDescription:
-    'Compare PWABuilder and Capgo. Free PWA store packaging from Microsoft vs Capacitor with native plugins, live updates, rollback, and cloud native builds.',
+  metaDescription: 'Compare PWABuilder and Capgo. Free PWA store packaging from Microsoft vs Capacitor with native plugins, live updates, rollback, and cloud native builds.',
   keywords: 'pwabuilder alternative, pwabuilder vs capacitor, pwa to app store, pwa to ios app, trusted web activity, capgo',
   eyebrow: 'PWABuilder vs Capgo',
   heading: 'PWABuilder alternative: Capacitor and Capgo',
@@ -103,7 +102,7 @@ export const pwabuilder: AlternativeCompetitor = {
       },
       {
         title: 'Build and update with Capgo',
-        html: 'Run <code>bunx @capgo/cli@latest init</code>, build in Capgo Cloud without a Mac, and ship web changes with <code>bunx @capgo/cli@latest bundle upload</code>.',
+        html: 'Run <code>npx @capgo/cli@latest init</code>, build in Capgo Cloud without a Mac, and ship web changes with <code>npx @capgo/cli@latest bundle upload</code>. See <a href="https://capgo.app/solutions/pwabuilder-to-mobile/">PWABuilder to mobile</a> and <a href="https://capgo.app/docs/ai/pwabuilder-to-capacitor/">PWABuilder to Capacitor docs</a>.',
       },
     ],
   },
@@ -114,11 +113,13 @@ export const pwabuilder: AlternativeCompetitor = {
     },
     {
       question: 'Can PWABuilder publish to the Apple App Store?',
-      answer: 'PWABuilder generates a Swift WebView project that you build in Xcode on a Mac. Its docs call iOS packaging experimental and note that acceptance depends on the UI and the use of native capabilities.',
+      answer:
+        'PWABuilder generates a Swift WebView project that you build in Xcode on a Mac. Its docs call iOS packaging experimental and note that acceptance depends on the UI and the use of native capabilities.',
     },
     {
       question: 'What is the difference between PWABuilder and Capacitor?',
-      answer: 'PWABuilder wraps a hosted PWA. Capacitor bundles your web app inside a native project and gives it native APIs through plugins, which helps with App Store review and offline use.',
+      answer:
+        'PWABuilder wraps a hosted PWA. Capacitor bundles your web app inside a native project and gives it native APIs through plugins, which helps with App Store review and offline use.',
     },
     {
       question: 'When should I choose Capgo?',

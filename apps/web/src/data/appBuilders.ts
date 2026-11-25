@@ -1,8 +1,8 @@
-// AI app builders with a dedicated /solutions/<slug>-to-mobile/ landing page.
+// App builders and packagers with a dedicated /solutions/<slug>-to-mobile/ landing page.
 // Each page is an ad landing page: the headline must name the builder exactly as the ad does.
 // Every export step here must match the builder's own docs. Do not claim a feature the builder does not have.
 
-export type AppBuilderSlug = 'lovable' | 'base44' | 'bolt' | 'replit' | 'v0'
+export type AppBuilderSlug = 'lovable' | 'base44' | 'bolt' | 'replit' | 'v0' | 'pwabuilder'
 
 export interface AppBuilderLink {
   label: string
@@ -203,6 +203,56 @@ npm run build`,
     ],
     docs: [{ label: 'Next.js static export docs', href: 'https://nextjs.org/docs/app/guides/static-exports' }],
     keywords: ['v0 mobile app', 'v0 to App Store', 'v0 iOS app', 'v0 Android app', 'v0.dev mobile', 'Next.js to mobile app'],
+  },
+  {
+    slug: 'pwabuilder',
+    name: 'PWABuilder',
+    webDir: 'dist',
+    exportStep: {
+      title: 'Start from your PWA source project',
+      body: 'PWABuilder packages a public HTTPS URL into store projects. Capacitor needs the production build from your repo. Clone the project that ships your PWA, confirm your web manifest, and set Capacitor webDir to that output folder (dist, build, out, or www). If the project has no package.json or build script, skip the build and point webDir at the folder that contains index.html and the assets.',
+      code: `git clone https://github.com/you/your-pwa.git
+cd your-pwa
+# With a framework: npm install && npm run build && ls dist
+# Static-only: skip install/build; point webDir at the folder with index.html`,
+    },
+    flowDesc: 'Audit the live PWA at pwabuilder.com and download store packages for Microsoft, Google Play, or iOS, or work from the same web codebase in your repo.',
+    syncNote:
+      'PWABuilder store listings load your hosted PWA URL, so deploying the site updates those apps. Capgo live updates ship a bundled web build inside the Capacitor shell, including rollback and offline bundles.',
+    faqs: [
+      {
+        question: 'When is PWABuilder enough, and when do I need Capacitor?',
+        answer:
+          'PWABuilder is free packaging when your PWA already meets store requirements and you need little native access. Choose Capacitor with Capgo when you need native plugins, offline bundles, cloud iOS builds without a Mac, or managed live updates with rollback.',
+        href: 'alternatives/pwabuilder',
+        linkLabel: 'PWABuilder vs Capgo',
+      },
+      {
+        question: 'I only downloaded a PWABuilder Android or iOS package. Can I add Capgo to it?',
+        answer:
+          'Use the web app source that PWABuilder pointed at, not only the generated wrapper. Add Capacitor to that project, bundle the static build, then use Capgo Build and live updates on the Capacitor app.',
+        href: 'blog/transform-pwabuilder-pwa-to-mobile-with-capacitor',
+        linkLabel: 'PWABuilder to Capacitor tutorial',
+      },
+      {
+        question: 'Does PWABuilder replace a Mac for iOS?',
+        answer:
+          'No. PWABuilder iOS output is a Swift WebView project you build in Xcode on a Mac. Capgo Build can compile and sign Capacitor iOS binaries in the cloud when you use Capacitor instead.',
+        href: 'docs/builder/getting-started/',
+        linkLabel: 'Capgo Cloud Build',
+      },
+    ],
+    tutorial: {
+      label: 'PWABuilder to Capacitor tutorial',
+      href: 'blog/transform-pwabuilder-pwa-to-mobile-with-capacitor',
+    },
+    docs: [
+      { label: 'PWABuilder quick start', href: 'https://docs.pwabuilder.com/#/builder/quick-start' },
+      { label: 'PWABuilder Android packaging', href: 'https://docs.pwabuilder.com/#/builder/android' },
+      { label: 'PWABuilder App Store packaging', href: 'https://docs.pwabuilder.com/#/builder/app-store' },
+      { label: 'PWABuilder on GitHub', href: 'https://github.com/pwa-builder/PWABuilder' },
+    ],
+    keywords: ['PWABuilder Capacitor', 'PWABuilder mobile app', 'PWA to App Store', 'PWA to iOS app', 'Trusted Web Activity', 'pwabuilder alternative'],
   },
 ]
 
