@@ -94,7 +94,7 @@ func application(
 }
 ```
 
-**iOS 26+ continued processing:** set `iosContinuedProcessing: true` with a non-empty `title` (optional `description`). The 8.8.0 fields `iosContinuedProcessingTitle` and `iosContinuedProcessingSubtitle` still work on single downloads but are deprecated. Add `$(PRODUCT_BUNDLE_IDENTIFIER).CapacitorDownloader.continuedProcessing.*` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`. If the system does not launch the task within a few seconds, the plugin falls back to the background `URLSession`. If the continued processing task expires, the transfer is cancelled with `downloadFailed` and is not resumed automatically on relaunch. For a multi-file batch, see [iOS batch continued processing](#ios-batch-continued-processing).
+**iOS 26+ continued processing (since 8.9.0):** set `iosContinuedProcessing: true` with a non-empty `title` (optional `description`). These replacement options require **8.9.0**. On **8.8.0**, use the legacy `iosContinuedProcessingTitle` (and optional `iosContinuedProcessingSubtitle`) fields for single downloads; those fields still work on single downloads in later versions but are deprecated. Add `$(PRODUCT_BUNDLE_IDENTIFIER).CapacitorDownloader.continuedProcessing.*` to `BGTaskSchedulerPermittedIdentifiers` in `Info.plist`. If the system does not launch the task within a few seconds, the plugin falls back to the background `URLSession`. If the continued processing task expires, the transfer is cancelled with `downloadFailed` and is not resumed automatically on relaunch. For a multi-file batch, see [iOS batch continued processing](#ios-batch-continued-processing).
 
 **Android OkHttp notifications:** default `notification: 'completed'` matches 8.7.0. Set `notification: 'progress'` to opt in to ongoing progress and an optional `dataSync` foreground service (plugin minSdk 24; Android 12+ may block background service starts; Android 15 limits dataSync time). If the foreground service cannot start, the download continues and the progress notification still shows. The manifest merges `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, and `POST_NOTIFICATIONS`; request `POST_NOTIFICATIONS` at runtime on Android 13+ when you use `'progress'`.
 
@@ -129,7 +129,7 @@ For multi-file packs, the same background options apply to a batch `id` since **
 
 ## Multi-file batch downloads
 
-Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Up to **32** transfers share one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
+Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Files in a batch share one batch `id`. Native batches no longer have a fixed maximum file count (`DOWNLOAD_BATCH_MAX_FILES` is deprecated and is not enforced). Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
 
 Plugin change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107).
 
@@ -397,7 +397,7 @@ The same OkHttp modes apply to a multi-file batch when every file resolves to Ok
 
 - **Storage destination**: pick a `destination` your app can read on each platform. On Android, use `cache/` or `files/` prefixes for app-private OkHttp downloads with `androidHttpEngine` `'auto'` or `'okhttp'`.
 - **Background**: downloads run on iOS and Android in the background. On Android, DownloadManager can continue after the app process is killed. OkHttp runs in the app process, so a download may stop if Android kills that process. On Web, `download()` is not implemented; use a browser download flow instead.
-- **Status**: use `checkStatus` while the app process is still alive. On iOS, task IDs are not restored after relaunch.
+- **Status**: use `checkStatus` for active URLSession, OkHttp, or DownloadManager work. Batch child ids also resolve from in-memory batch progress while that batch row exists. On iOS, children that finish successfully keep resolving as `DONE` (with `path` when known) for the rest of the process lifetime. Only after an app restart can they reject with "Task not found".
 
 ## API Overview
 
@@ -415,7 +415,7 @@ const task = await CapacitorDownloader.download({
 });
 ```
 
-Batch (at most 32 files):
+Batch (no fixed maximum file count):
 
 ```typescript
 await CapacitorDownloader.download({
@@ -467,7 +467,7 @@ await CapacitorDownloader.stop({ id: 'id-123' });
 
 ### `checkStatus`
 
-Check the current status of a download.
+Check the current status of a download. Reports active URLSession, OkHttp, or DownloadManager work. Batch child ids also resolve from in-memory batch progress while that batch row exists. On iOS, children that finish successfully keep resolving as `DONE` (with `path` when known) for the rest of the process lifetime. Only after an app restart can they reject with "Task not found".
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
@@ -527,15 +527,16 @@ export interface DownloadOptions {
   notification?: 'completed' | 'progress' | 'hidden';
   /**
    * Android progress notification title (since 8.6.0), and iOS continued processing
-   * title when `iosContinuedProcessing` is set. On Android OkHttp, used when
-   * `notification` is `'progress'`. iOS continued processing requires a non-empty title.
-   * Ignored on Web.
+   * title when `iosContinuedProcessing` is set (since 8.9.0). On Android OkHttp, used
+   * when `notification` is `'progress'`, including OkHttp batches since 8.12.0.
+   * iOS continued processing requires a non-empty title. Ignored on Web.
    */
   title?: string;
   /**
    * Android progress notification description (since 8.6.0), and iOS continued
-   * processing subtitle when `iosContinuedProcessing` is set. On Android OkHttp,
-   * used when `notification` is `'progress'` (including OkHttp batches). Ignored on Web.
+   * processing subtitle when `iosContinuedProcessing` is set (since 8.9.0). On
+   * Android OkHttp, used when `notification` is `'progress'`, including OkHttp
+   * batches since 8.12.0. Ignored on Web.
    */
   description?: string;
   /**
@@ -606,7 +607,7 @@ Call with either type: `download(options: DownloadOptions | DownloadBatchOptions
 
 ### Events
 
-For batches, `downloadProgress` uses `progress` and `fileProgress` from 0 to 1 (same scale as `DownloadTask.progress`), and may include optional `fileIndex`. `downloadFailed` includes `{ id, error, fileIndex? }`; for batches, `fileIndex` is set when the failing file is known.
+For batches, `downloadProgress` uses `progress` and `fileProgress` from 0 to 1 (same scale as `DownloadTask.progress`), and may include optional `fileIndex`. `downloadFailed` includes `{ id, error, fileIndex?, errorCode?, errorDomain? }`; for batches, `fileIndex` is set when the failing file is known. `errorCode` and `errorDomain` are the NSError code and domain on iOS when available.
 
 ### `DownloadTask`
 Represents the current state and progress of a download task.
@@ -618,6 +619,15 @@ export interface DownloadTask {
   progress: number;
   /** Current state of the download */
   state: 'PENDING' | 'RUNNING' | 'PAUSED' | 'DONE' | 'ERROR';
+  /** Absolute on-disk path when `checkStatus` resolves a finished batch child on iOS */
+  path?: string;
+  /**
+   * Batch-only metadata returned when `download()` starts a multi-file batch.
+   * Pair with `childTaskIds` to correlate `checkStatus()` while a batch is active.
+   */
+  batchGeneration?: number;
+  /** Ordered child task ids for batch entries (same order as `files`). */
+  childTaskIds?: string[];
 }
 ```
 
