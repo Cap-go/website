@@ -2848,6 +2848,7 @@ const messages = {
   live_update_hero_headline: 'Capacitor Live Updates (OTA)',
   live_update_hero_tagline: 'Ship web-layer fixes without waiting on store review.',
   live_update_hero_cta: 'Start shipping',
+  live_update_hero_steps_label: 'Your first live update in three steps',
   live_update_hero_subtitle:
     'Capacitor live updates (OTA) push JavaScript, HTML, CSS, and asset changes to users in minutes. Capgo handles signed delivery, channels, rollback, and per-device logs so you can fix production safely.',
   live_update_hero_stat_channels_label: 'Canary, beta, support, and production tracks',
