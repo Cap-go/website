@@ -4,8 +4,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
 import HumanSupport from '@/components/HumanSupport.astro'
 import OfferText from '@/components/OfferText.astro'
-import { BASE_CURRENCY, formatPrice } from '@/lib/currency'
-import { planMonthlyPrice } from '@/lib/planCopy'
+import { formatStartingMonthlyPrice } from '@/lib/planCopy'
 import { getPlans } from '@/lib/siteData'
 
 interface Props {
@@ -33,11 +32,7 @@ const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const teamUrl = 'https://book.capgo.app/demo/'
 const inquiryUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const isTeam = variant === 'team'
-const paidMonthlyPrices = getPlans()
-  .filter((plan) => plan.name !== 'Free')
-  .map(planMonthlyPrice)
-  .filter((price) => price > 0)
-const startingPrice = paidMonthlyPrices.length ? formatPrice(Math.min(...paidMonthlyPrices), BASE_CURRENCY, 'cents', 'en-US') : null
+const startingPrice = formatStartingMonthlyPrice(getPlans())
 const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
 const directNote = startingPrice ? m.direct_offer_price_guarantee_note({ price: startingPrice }, { locale }) : m.direct_offer_guarantee_note({}, { locale })
 const noteId = id ? `${id}-note` : `signup-cta-note-${Math.random().toString(36).slice(2, 8)}`
