@@ -223,9 +223,12 @@ const tradeoffs = [
         </div>
 
         <div class="rounded-lg border border-slate-200 bg-slate-50 p-6">
-          <img src="/soc2.svg" alt="SOC 2 badge" class="h-16 w-auto" loading="lazy" />
+          <div class="flex items-center gap-4">
+            <img src="/soc2.svg" alt="SOC 2 Type II badge" class="h-16 w-auto" loading="lazy" />
+            <img src="/iso27001.svg" alt="ISO 27001 badge" class="h-16 w-auto" loading="lazy" />
+          </div>
           <p class="mt-5 text-sm leading-6 text-slate-700">
-            Need security evidence first? Review the public trust center, then use the HIPAA technical docs to choose the deployment model for your app.
+            Need security evidence first? Capgo is SOC 2 Type II and ISO 27001 certified. Review the public security trust center, then use the HIPAA technical docs to choose the deployment model for your app.
           </p>
           <div class="mt-6 flex flex-col gap-3">
             <a
@@ -234,7 +237,7 @@ const tradeoffs = [
               rel="noreferrer"
               class="inline-flex min-h-11 items-center justify-center rounded-md bg-slate-950 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800"
             >
-              View trust center
+              View the security trust center
             </a>
             <a
               href={docsUrl}

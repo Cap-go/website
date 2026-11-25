@@ -73,7 +73,7 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
         Answers for procurement and security reviews, sourced from public Capgo pages and documentation. For SOC 2, ISO 27001, detailed control mappings, and completed
         questionnaires, use the{' '}
         <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app">
-          trust portal
+          security trust portal
         </a>{' '}
         (request access under NDA). Certification reports are not distributed by email.
       </p>
@@ -106,7 +106,7 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="#gaps">
             Topics not stated publicly
           </a>{' '}
-          still need the trust portal or security@capgo.app.
+          still need the security trust portal or security@capgo.app.
         </p>
         <p>
           Related pages:{' '}
@@ -190,7 +190,7 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('subprocessors/')}>
             subprocessors page
           </a>{' '}
-          (not the trust portal subprocessors counter). Current DPA sub-processors include:
+          (not the security trust portal subprocessors counter). Current DPA sub-processors include:
         </p>
         <ul class="list-disc space-y-2 pl-5">
           <li>
@@ -467,7 +467,7 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           </li>
           <li>
             <strong class="text-white">Penetration testing:</strong> Independent penetration testing per the Trust page. Vendor, date, and report availability are not public; use
-            the trust portal for evidence requests.
+            the security trust portal for evidence requests.
           </li>
           <li>
             <strong class="text-white">Patching targets:</strong> Critical within 7 days and high within 30 days per our Vulnerability Management Policy (see vendor questionnaire
@@ -514,9 +514,9 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
             </a>
             .
           </li>
-          <li>ISO 27001:2022 certified per compliance documentation and trust portal.</li>
+          <li>ISO 27001:2022 certified per compliance documentation and the security trust portal.</li>
           <li>
-            Trust portal badges for SOC 2 Type 1, SOC 2 Type 2, SOC 3, ISO 27001, and GDPR at
+            Security trust portal badges for SOC 2 Type 1, SOC 2 Type 2, SOC 3, ISO 27001, and GDPR at
             <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app" rel="noreferrer" target="_blank">
               trust.capgo.app
             </a>
@@ -531,14 +531,14 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
           , use Request Access for SOC reports, ISO evidence, security questionnaires, and control details under NDA. Do not expect certification PDFs by email.
         </p>
         <p>
-          Enterprise security review packets can include a SOC 2 report, DPA template, and architecture notes per the
+          Enterprise security review packets can include a SOC 2 report, ISO 27001 evidence, a DPA template, and architecture notes per the
           <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href={doc('enterprise/')}>
             Enterprise page
           </a>
-          , still via the trust portal process for formal evidence.
+          , still via the security trust portal process for formal evidence.
         </p>
         <p>
-          Full SOC 2 and ISO audit reports, auditor opinions, and detailed scope are available only through the trust portal. Public marketing pages do not reproduce report PDFs.
+          Full SOC 2 and ISO audit reports, auditor opinions, and detailed scope are available only through the security trust portal. Public marketing pages do not reproduce report PDFs.
         </p>
       </div>
       <SecurityQuestionnaireAnswers items={enterpriseQuestionnaireByTopic.certifications} />
@@ -649,7 +649,7 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
             </a>
           </li>
           <li>
-            <strong class="text-white">Trust portal (questionnaires and certification evidence):</strong>
+            <strong class="text-white">Security trust portal (questionnaires and certification evidence):</strong>
             <a class="text-cyan-200 underline-offset-4 hover:text-white hover:underline" href="https://trust.capgo.app" rel="noreferrer" target="_blank">
               trust.capgo.app
             </a>
@@ -689,10 +689,10 @@ const doc = (path: string) => getRelativeLocaleUrl(locale, path)
     <section class="mt-12 max-w-3xl" id="gaps">
       <h2 class="text-2xl font-semibold text-white">Topics not stated publicly</h2>
       <p class="mt-4 text-base leading-8 text-slate-300">
-        The following are commonly asked in questionnaires but are not answered on public Capgo pages. Request details through the trust portal or security@capgo.app.
+        The following are commonly asked in questionnaires but are not answered on public Capgo pages. Request details through the security trust portal or security@capgo.app.
       </p>
       <ul class="mt-4 list-disc space-y-2 pl-5 text-base leading-8 text-slate-300">
-        <li>SOC 2 report period, scope, and auditor letter detail beyond what the trust portal provides</li>
+        <li>SOC 2 and ISO 27001 report period, scope, and auditor letter detail beyond what the security trust portal provides</li>
         <li>Penetration test vendor, date, and summary letter (annual testing is confirmed under Vulnerability management)</li>
         <li>Published RPO and RTO numeric targets</li>
         <li>Exact log retention periods per system beyond the less-than-three-years summary under Logging, monitoring, and incidents</li>
