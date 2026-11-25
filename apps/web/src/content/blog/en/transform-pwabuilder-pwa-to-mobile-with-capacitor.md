@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-11-24T00:00:00.000Z
-updated_at: 2026-11-24T00:00:00.000Z
+updated_at: 2026-11-25T11:35:37.000Z
 head_image: /blog-images/migrating-cordova-to-capacitor.png
 head_image_alt: "PWABuilder PWA to Capacitor and Capgo blog illustration"
 keywords: PWABuilder, PWA, Capacitor, Capgo Builder, live updates, Trusted Web Activity, Bubblewrap, Microsoft Store, App Store, Google Play
