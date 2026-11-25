@@ -397,7 +397,7 @@ The same OkHttp modes apply to a multi-file batch when every file resolves to Ok
 
 - **Storage destination**: pick a `destination` your app can read on each platform. On Android, use `cache/` or `files/` prefixes for app-private OkHttp downloads with `androidHttpEngine` `'auto'` or `'okhttp'`.
 - **Background**: downloads run on iOS and Android in the background. On Android, DownloadManager can continue after the app process is killed. OkHttp runs in the app process, so a download may stop if Android kills that process. On Web, `download()` is not implemented; use a browser download flow instead.
-- **Status**: use `checkStatus` for active URLSession, OkHttp, or DownloadManager work. Batch child ids also resolve from in-memory batch progress while that batch row exists. On iOS, children that finish successfully keep resolving as `DONE` (with `path` when known) for the rest of the process lifetime. Only after an app restart can they reject with "Task not found".
+- **Status**: use `checkStatus` for active URLSession, OkHttp, or DownloadManager work. Batch child ids also resolve from in-memory batch progress while that batch row exists. On iOS, children from a finished batch keep resolving as `DONE` (with `path` when known) until the app restarts or a new batch reuses the same batch id. If a batch fails or is stopped, or after an app restart, those child ids reject with "Task not found".
 
 ## API Overview
 
@@ -467,7 +467,7 @@ await CapacitorDownloader.stop({ id: 'id-123' });
 
 ### `checkStatus`
 
-Check the current status of a download. Reports active URLSession, OkHttp, or DownloadManager work. Batch child ids also resolve from in-memory batch progress while that batch row exists. On iOS, children that finish successfully keep resolving as `DONE` (with `path` when known) for the rest of the process lifetime. Only after an app restart can they reject with "Task not found".
+Check the current status of a download. Reports active URLSession, OkHttp, or DownloadManager work. Batch child ids also resolve from in-memory batch progress while that batch row exists. On iOS, children from a finished batch keep resolving as `DONE` (with `path` when known) until the app restarts or a new batch reuses the same batch id. If a batch fails or is stopped, or after an app restart, those child ids reject with "Task not found".
 
 ```typescript
 import { CapacitorDownloader } from '@capgo/capacitor-downloader';
