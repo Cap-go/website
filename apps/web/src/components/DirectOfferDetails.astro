@@ -5,7 +5,7 @@ import { getPlans } from '@/lib/siteData'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
-const startingPrice = formatStartingMonthlyPrice(getPlans())
+const startingPrice = formatStartingMonthlyPrice(getPlans(), locale)
 const pricingUrl = `${getRelativeLocaleUrl(locale, 'pricing')}?billing=monthly&offer=direct`
 ---
 

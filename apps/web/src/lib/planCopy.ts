@@ -35,7 +35,7 @@ export function planYearlyPrice(plan: PlanRow): number {
   return typeof plan.price_y === 'number' && Number.isFinite(plan.price_y) ? plan.price_y : 0
 }
 
-export function formatStartingMonthlyPrice(plans: PlanRow[], locale = 'en-US'): string | null {
+export function formatStartingMonthlyPrice(plans: PlanRow[], locale: string): string | null {
   const prices = plans
     .filter((plan) => plan.name !== 'Free')
     .map(planMonthlyPrice)

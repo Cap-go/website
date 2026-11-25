@@ -386,8 +386,8 @@ test('direct-offer hero uses Start shipping now without step copy and preserves 
 
   expect(signupCta).toContain('m.direct_offer_cta_start_shipping')
   expect(signupCta).toContain('m.direct_offer_price_guarantee_note')
-  expect(signupCta).toContain('formatStartingMonthlyPrice(getPlans())')
-  expect(directOfferDetails).toContain('formatStartingMonthlyPrice(getPlans())')
+  expect(signupCta).toContain('formatStartingMonthlyPrice(getPlans(), locale)')
+  expect(directOfferDetails).toContain('formatStartingMonthlyPrice(getPlans(), locale)')
   expect(signupCta).not.toContain('DirectOfferDetails')
   expect(signupCta).not.toContain('direct_offer_cta_get_started')
   expect(signupCta).not.toContain('No free trial')

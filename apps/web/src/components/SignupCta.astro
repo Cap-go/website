@@ -32,7 +32,7 @@ const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const teamUrl = 'https://book.capgo.app/demo/'
 const inquiryUrl = 'https://book.capgo.app/enterprise-inquiry/'
 const isTeam = variant === 'team'
-const startingPrice = formatStartingMonthlyPrice(getPlans())
+const startingPrice = formatStartingMonthlyPrice(getPlans(), locale)
 const trialNote = `${m.days_free_trial({}, { locale })}. ${m.no_credit_card_required({}, { locale })}`
 const directNote = startingPrice ? m.direct_offer_price_guarantee_note({ price: startingPrice }, { locale }) : m.direct_offer_guarantee_note({}, { locale })
 const noteId = id ? `${id}-note` : `signup-cta-note-${Math.random().toString(36).slice(2, 8)}`
