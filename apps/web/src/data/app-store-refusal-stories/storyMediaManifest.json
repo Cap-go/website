@@ -380,5 +380,13 @@
     "width": 750,
     "height": 1091
   },
-  "ad-rejection-then-4-3-design-spam-then-reviewer-could-not-find-the-purchase-over-a-month": null
+  "ad-rejection-then-4-3-design-spam-then-reviewer-could-not-find-the-purchase-over-a-month": null,
+  "no-accounts-only-cloud-provider-sign-in-rejected-4-8-approved-on-appeal": null,
+  "location-purpose-string-too-vague-5-1-1-ii-after-weeks-of-waiting": {
+    "src": "/app-store-refusal-horror-story/screenshots/location-purpose-string-too-vague-5-1-1-ii-after-weeks-of-waiting.webp",
+    "alt": "App Review message citing Guideline 5.1.1(ii) for a location purpose string that does not explain how the location is used, with the app name hidden",
+    "width": 2047,
+    "height": 570
+  },
+  "health-pre-permission-screen-with-not-right-now-button-rejected-5-1-1-iv": null
 }

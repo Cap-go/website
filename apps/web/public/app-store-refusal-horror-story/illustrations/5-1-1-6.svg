@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Not right now button before Health permission rejected under 5.1.1(iv)">
+  <title>Not right now button before Health permission rejected under 5.1.1(iv)</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="72" y="36" width="176" height="128" rx="14" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="84" y="60" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7" font-weight="600">5.1.1(iv)</text>
+  <path d="M100 88 L120 108 L140 88" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="96" y="116" width="64" height="28" rx="8" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="108" y="134" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="6">Connect</text>
+  <rect x="168" y="116" width="64" height="28" rx="8" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="172" y="134" fill="#EF4444" font-family="system-ui,sans-serif" font-size="5">Not now</text>
+  <path d="M160 156 L160 172" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="4 3"/>
+  <rect x="200" y="148" width="88" height="40" rx="10" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="212" y="172" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="7">Continue</text>
+  <circle cx="244" cy="52" r="14" fill="none" stroke="#EF4444" stroke-width="2"/>
+  <path d="M236 52 L242 58 L252 46" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+</svg>
