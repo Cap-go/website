@@ -129,7 +129,7 @@ For multi-file packs, the same background options apply to a batch `id` since **
 
 ## Multi-file batch downloads
 
-Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Files in a batch share one batch `id`. Native batches no longer have a fixed maximum file count (`DOWNLOAD_BATCH_MAX_FILES` is deprecated and is not enforced). Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
+Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Files in a batch share one batch `id`. From **8.7.0** to **8.11.x**, native batches were capped at 32 files. Since **8.12.0**, that fixed maximum is removed (`DOWNLOAD_BATCH_MAX_FILES` is deprecated and is not enforced). Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
 
 Plugin change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107).
 
@@ -415,7 +415,7 @@ const task = await CapacitorDownloader.download({
 });
 ```
 
-Batch (no fixed maximum file count):
+Batch (8.7.0 to 8.11.x capped at 32 files, no fixed maximum since 8.12.0):
 
 ```typescript
 await CapacitorDownloader.download({
