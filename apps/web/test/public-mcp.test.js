@@ -186,7 +186,7 @@ test('uses Cloudflare client IP for rate limiting and fails closed if unavailabl
 
 test('catalogs and agent guidance advertise the public endpoint alongside protected MCP', () => {
   expect(WHEN_TO_USE_MARKDOWN).toContain(PUBLIC_MCP_URL)
-  expect(mcpManifest().transport.url).toBe('https://api.capgo.app/mcp')
+  expect(mcpManifest().transport.url).toBe('https://mcp.capgo.app')
   expect(mcpManifest().publicServers[0]).toMatchObject({ transport: { url: PUBLIC_MCP_URL }, authentication: { required: false } })
   for (const name of ['ard', 'ai-catalog']) {
     const catalog = JSON.parse(readFileSync(new URL(`../public/.well-known/${name}.json`, import.meta.url)))

@@ -11,7 +11,7 @@
       "displayName": "Capgo MCP server",
       "type": "application/mcp-server-card+json",
       "url": "https://capgo.app/.well-known/mcp/server-card.json",
-      "description": "Hosted Streamable HTTP MCP server at https://api.capgo.app/mcp: manage Capacitor apps, live update bundles, channels and rollouts, devices, statistics, native builds, webhooks and push notifications, and search the Capgo docs. OAuth 2.0 sign-in.",
+      "description": "Hosted Streamable HTTP MCP server at https://mcp.capgo.app: manage Capacitor apps, live update bundles, channels and rollouts, devices, statistics, native builds, webhooks and push notifications, and search the Capgo docs. OAuth 2.0 sign-in.",
       "representativeQueries": [
         "roll out a Capacitor live update to 10% of devices",
         "list the bundles and channels of my Capgo app",
@@ -77,7 +77,7 @@
       "displayName": "Capgo CLI and MCP skill",
       "type": "application/agent-skills+md",
       "url": "https://capgo.app/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
-      "description": "Connect to the hosted Capgo MCP server at api.capgo.app/mcp, or run the local Capgo CLI MCP server for bundle uploads and native builds.",
+      "description": "Connect to the hosted Capgo MCP server at mcp.capgo.app, or run the local Capgo CLI MCP server for bundle uploads and native builds.",
       "representativeQueries": [
         "connect my coding agent to Capgo",
         "upload a Capacitor bundle from my agent"

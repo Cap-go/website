@@ -60,7 +60,7 @@ export const GET: APIRoute = () => {
     '',
     '## 4. Give yourself tools (optional)',
     '',
-    '- Hosted MCP server (OAuth, no install): `https://api.capgo.app/mcp`',
+    '- Hosted MCP server (OAuth, no install): `https://mcp.capgo.app`',
     '- Local MCP server: `npx @capgo/cli@latest mcp`',
     '- Capacitor skills for coding agents: `npx skills add Cap-go/capgo-skills`',
     `- Per-agent setup (Claude Code, Codex, Cursor, Copilot, Gemini CLI, Windsurf): ${baseUrl}/agents/`,

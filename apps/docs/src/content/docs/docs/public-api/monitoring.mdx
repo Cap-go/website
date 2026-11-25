@@ -5,7 +5,7 @@ sidebar:
   order: 6
 ---
 
-The hosted account MCP at `https://api.capgo.app/mcp` and the local CLI MCP started with `npx @capgo/cli@latest mcp` support the same monitoring queries. REST callers can use the endpoints below with `x-api-key: YOUR_API_KEY`. The public docs-discovery MCP at `https://capgo.app/mcp` has no account access.
+The hosted account MCP at `https://mcp.capgo.app` and the local CLI MCP started with `npx @capgo/cli@latest mcp` support the same monitoring queries. REST callers can use the endpoints below with `x-api-key: YOUR_API_KEY`. The public docs-discovery MCP at `https://capgo.app/mcp` has no account access.
 
 ## Observe queries
 
@@ -82,7 +82,7 @@ The response includes `status`, `started_at`, `completed_at`, `runner_wait_secon
 
 ### Hosted MCP `capgo_get_build_status` (read-only polls)
 
-On `https://api.capgo.app/mcp`, the `capgo_get_build_status` tool uses the same handler in-process with a hosted read-only option. Those polls return `persisted: false` and skip DB sync, build minute recording, webhooks, and automatic cancellation of timed-out builder jobs. The local CLI MCP server and `GET /build/status` above always persist.
+On `https://mcp.capgo.app`, the `capgo_get_build_status` tool uses the same handler in-process with a hosted read-only option. Those polls return `persisted: false` and skip DB sync, build minute recording, webhooks, and automatic cancellation of timed-out builder jobs. The local CLI MCP server and `GET /build/status` above always persist.
 
 When a job is still `running` past the app configured timeout, read-only MCP polls include `timeout_exceeded: true` and `timeout_warning` instead of canceling the builder. Call `capgo_cancel_build` to stop the job, or wait for Capgo reconciliation to finish it and record build time. The response still includes `diagnostic` and `poll_after_seconds: 15`. After a successful build, use the CLI or console if you need billing and history synced.
 

@@ -31,7 +31,7 @@ npx skills add Cap-go/capgo-skills
 
 Then connect the Capgo MCP server so your agent can manage apps, channels, bundles, native builds, and stats:
 
-- Hosted MCP: `https://api.capgo.app/mcp` ([docs](https://capgo.app/docs/ai/mcp/))
+- Hosted MCP: `https://mcp.capgo.app` ([docs](https://capgo.app/docs/ai/mcp/))
 - Local MCP: `npx @capgo/cli@latest mcp`
 
 ## Community
