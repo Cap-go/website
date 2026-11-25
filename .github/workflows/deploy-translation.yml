@@ -9,6 +9,11 @@ concurrency:
 
 on:
   workflow_dispatch:
+    inputs:
+      skip_real_ai_probe:
+        description: Skip the real Workers AI probe (only when production saturates the Workers AI rate limit, error 3021)
+        type: boolean
+        default: false
   push:
     branches:
       - main
@@ -85,6 +90,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Verify real translation runtime
+        if: ${{ !inputs.skip_real_ai_probe }}
         run: bun run verify:real-translation
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
