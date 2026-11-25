@@ -1,8 +1,9 @@
 ---
-import DirectOfferDetails from '@/components/DirectOfferDetails.astro'
-import OfferText from '@/components/OfferText.astro'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
+import { BASE_CURRENCY, formatPrice } from '@/lib/currency'
+import { planMonthlyPrice } from '@/lib/planCopy'
+import { getPlans } from '@/lib/siteData'
 import { getRelativeLocaleUrl } from '@/services/links'
 import 'toastify-js/src/toastify.css'
 import { capgoReviews, hasRealAvatar } from '@/config/productTestimonials'
@@ -22,8 +23,6 @@ const nextSteps = [
   {
     title: m.register_step_account_title({}, { locale: Astro.locals.locale }),
     body: m.register_step_account_body({}, { locale: Astro.locals.locale }),
-    directTitle: m.direct_offer_account_step({}, { locale: Astro.locals.locale }),
-    directBody: m.direct_offer_account_body({}, { locale: Astro.locals.locale }),
   },
   {
     title: m.register_step_init_title({}, { locale: Astro.locals.locale }),
@@ -57,7 +56,14 @@ const initialsOf = (name: string) =>
     .slice(0, 2)
     .map((word) => word[0]?.toUpperCase() ?? '')
     .join('')
-const pricingUrl = getRelativeLocaleUrl(Astro.locals.locale, 'pricing')
+const locale = Astro.locals.locale
+const paidMonthlyPrices = getPlans()
+  .filter((plan) => plan.name !== 'Free')
+  .map(planMonthlyPrice)
+  .filter((price) => price > 0)
+const startingPrice = paidMonthlyPrices.length ? formatPrice(Math.min(...paidMonthlyPrices), BASE_CURRENCY, 'cents', locale) : null
+const directPriceGuaranteeNote = startingPrice ? `From ${startingPrice}/month. ${m.direct_offer_guarantee_note({}, { locale })}` : m.direct_offer_guarantee_note({}, { locale })
+const pricingUrl = getRelativeLocaleUrl(locale, 'pricing')
 const registerCanonical = new URL(getRelativeLocaleUrl(Astro.locals.locale, 'register'), Astro.site ?? Astro.url.origin).toString()
 const content = {
   title,
@@ -84,7 +90,7 @@ const content = {
       <div class="relative mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
         <div class="rounded-3xl border border-white/10 bg-[#101216]/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl sm:p-8">
           <h1 class="text-3xl font-bold tracking-tight text-white">{m.register_title({}, { locale: Astro.locals.locale })}</h1>
-          <!-- One value line instead of badges. Paid-ads visitors (offer=direct) pay first, backed by a money-back guarantee. -->
+          <!-- One value line instead of badges. Paid-ads visitors (offer=direct) see the starting price and money-back guarantee. -->
           <p class="mt-2 text-[15px] text-slate-300">
             <span data-trial-copy>
               <span class="whitespace-nowrap">{m.days_free_trial({}, { locale: Astro.locals.locale })}</span>
@@ -93,20 +99,9 @@ const content = {
               </span>
               <span class="whitespace-nowrap">{m.no_credit_card_required({}, { locale: Astro.locals.locale })}</span>
             </span>
-            <span data-direct-copy>
-              <span class="whitespace-nowrap">{m.direct_offer_guarantee({}, { locale: Astro.locals.locale })}</span>
-              <span class="text-slate-500" aria-hidden="true">
-                {' · '}
-              </span>
-              <span class="whitespace-nowrap">{m.direct_offer_cancel_anytime({}, { locale: Astro.locals.locale })}</span>
+            <span data-direct-copy data-testid="direct-offer-price-note">
+              {directPriceGuaranteeNote}
             </span>
-          </p>
-
-          <div data-direct-copy class="mt-4 rounded-xl border border-blue-400/20 bg-blue-400/5 p-4 text-slate-200">
-            <DirectOfferDetails />
-          </div>
-          <p data-direct-copy class="mt-3 text-sm leading-6 text-slate-300">
-            {m.direct_offer_mobile_setup({}, { locale: Astro.locals.locale })}
           </p>
 
           <form
@@ -230,11 +225,11 @@ const content = {
             <div class="space-y-1 text-center text-xs leading-5 text-slate-500">
               <p class="text-sm leading-6 text-slate-400">
                 <span data-trial-copy>
-                  <PayAsYouGoCopy />
-                </span>{' '}
-                <a href={pricingUrl} target="_blank" rel="noopener" class="text-slate-300 underline underline-offset-2 hover:text-white">
-                  {m.register_pricing_link({}, { locale: Astro.locals.locale })}
-                </a>
+                  <PayAsYouGoCopy />{' '}
+                  <a href={pricingUrl} target="_blank" rel="noopener" class="text-slate-300 underline underline-offset-2 hover:text-white">
+                    {m.register_pricing_link({}, { locale: Astro.locals.locale })}
+                  </a>
+                </span>
               </p>
               <p class="[&_a]:text-slate-300 [&_a]:underline [&_a]:underline-offset-2" set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })} />
             </div>
@@ -265,8 +260,8 @@ const content = {
                   {index + 1}
                 </span>
                 <div class="min-w-0">
-                  <h3 class="text-base font-semibold text-white">{step.directTitle ? <OfferText direct={step.directTitle}>{step.title}</OfferText> : step.title}</h3>
-                  <p class="mt-1 text-sm leading-6 text-slate-400">{step.directBody ? <OfferText direct={step.directBody}>{step.body}</OfferText> : step.body}</p>
+                  <h3 class="text-base font-semibold text-white">{step.title}</h3>
+                  <p class="mt-1 text-sm leading-6 text-slate-400">{step.body}</p>
                   {step.command && (
                     <code class="mt-2 inline-block max-w-full overflow-x-auto rounded-lg border border-white/10 bg-black/40 px-3 py-1.5 font-mono text-[13px] whitespace-nowrap text-slate-200">
                       <span class="text-slate-500 select-none" aria-hidden="true">
