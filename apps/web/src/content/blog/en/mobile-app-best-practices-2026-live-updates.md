@@ -81,7 +81,7 @@ Apple's [App Store Review Guidelines](https://developer.apple.com/app-store/revi
 
 ### 6. Secure the update path
 
-Encrypt bundles in transit and at rest where your platform supports it. Capgo documents [end-to-end encrypted live updates](https://capgo.app/docs/live-updates/encryption/) for Capacitor apps. Sign packages, restrict who can publish, and audit deployments—especially if you handle regulated data. Capgo is [SOC 2 Type II and ISO 27001 certified](https://trust.capgo.app/) for teams that need enterprise-grade security assurance.
+Encrypt bundles in transit and at rest where your platform supports it. Capgo documents [end-to-end encrypted live updates](https://capgo.app/docs/live-updates/encryption/) for Capacitor apps. Sign packages, restrict who can publish, and audit deployments—especially if you handle regulated data. Capgo completed its [second year of SOC 2 Type II in 2026 and earned ISO 27001 in 2026](https://trust.capgo.app/) for teams that need enterprise-grade security assurance.
 
 ## Why live-update-capable stacks win
 
@@ -155,7 +155,7 @@ The decision in 2026 is not "which tool uploads a zip file." It is **which platf
 
 | Platform | Stack fit | CI/CD model | OTA scope (within store rules) | Rollback / channels | Status in 2026 |
 | --- | --- | --- | --- | --- | --- |
-| **[Capgo](https://capgo.app/)** | Capacitor, Ionic, Cordova, Electron web-layer apps | **Bring your own pipeline**—upload bundles from GitHub Actions, GitLab CI, Bitrise, Codemagic, CircleCI, or any script using the Capgo CLI/API. Native builds are optional, not required for live updates. | JS, HTML, CSS, assets | Channels, staged rollout, `notifyAppReady`, [delta updates](https://capgo.app/docs/live-updates/differentials/) | Active; SOC 2 Type II and ISO 27001 |
+| **[Capgo](https://capgo.app/)** | Capacitor, Ionic, Cordova, Electron web-layer apps | **Bring your own pipeline**—upload bundles from GitHub Actions, GitLab CI, Bitrise, Codemagic, CircleCI, or any script using the Capgo CLI/API. Native builds are optional, not required for live updates. | JS, HTML, CSS, assets | Channels, staged rollout, `notifyAppReady`, [delta updates](https://capgo.app/docs/live-updates/differentials/) | Active; SOC 2 second year 2026, ISO 27001 2026 |
 | **Capawesome Cloud** | Capacitor, Ionic, Cordova | **Managed cloud** with CLI/local bundle uploads and CI integrations—Live Updates without requiring Native Builds; optional cloud web/native builds for teams that want them | JS, HTML, CSS, assets | Channels, rollbacks, audit logs | Active |
 | **Expo EAS Update** | React Native / Expo only (`expo-updates`) | Expo Application Services pipeline—updates tied to the Expo/EAS account model | JS bundle for Expo/RN apps | Republish previous update, channels via EAS | Active; **not a Capacitor path** |
 | **Ionic Appflow** | Legacy Capacitor/Ionic projects | Appflow-centric CI/CD and live updates | Web-layer assets for supported projects | Channels, rollback (plan-dependent) | Legacy—new commercial sales discontinued; existing access through December 31, 2027 |
@@ -174,7 +174,7 @@ The decision in 2026 is not "which tool uploads a zip file." It is **which platf
 | **End-to-end encryption** | Protect bundles beyond TLS alone |
 | **Device logs and analytics** | Debug production issues without guessing |
 | **Self-hosting options** | Enterprise and regulated deployments |
-| **SOC 2 Type II and ISO 27001** | Security reviews go faster with audited controls |
+| **SOC 2 second year (2026) and ISO 27001 (2026)** | Security reviews go faster with audited controls |
 | **Migration paths** | Documented moves from legacy Appflow and CodePush workflows |
 
 Capgo is also the home of a growing [Capacitor plugin directory](https://capgo.app/plugins/) for teams that want updater, builds, and native capabilities in one ecosystem—without hard-coding plugin counts into marketing copy.
