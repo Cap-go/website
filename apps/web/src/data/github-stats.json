@@ -1,12 +1,12 @@
 {
   "repositoryCount": 144,
   "contributorCount": 615,
-  "versionCount": 16942,
-  "releaseCount": 7564,
-  "closedIssueCount": 1814,
-  "mergedPullRequestCount": 10473,
-  "resolvedItemCount": 12287,
-  "totalStars": 3239,
+  "versionCount": 16949,
+  "releaseCount": 7565,
+  "closedIssueCount": 1818,
+  "mergedPullRequestCount": 10480,
+  "resolvedItemCount": 12298,
+  "totalStars": 3240,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -136,7 +136,7 @@
     },
     "Cap-go/capacitor-updater": {
       "url": "https://github.com/Cap-go/capacitor-updater",
-      "stars": 891,
+      "stars": 890,
       "contributors": 55,
       "versionTags": 796,
       "releases": 240,
@@ -147,10 +147,10 @@
       "url": "https://github.com/Cap-go/capgo",
       "stars": 214,
       "contributors": 30,
-      "versionTags": 6004,
+      "versionTags": 6009,
       "releases": 1000,
       "closedIssues": 422,
-      "mergedPullRequests": 2916
+      "mergedPullRequests": 2920
     },
     "Cap-go/electron-updater": {
       "url": "https://github.com/Cap-go/electron-updater",
@@ -532,7 +532,7 @@
     },
     "Cap-go/capacitor-background-geolocation": {
       "url": "https://github.com/Cap-go/capacitor-background-geolocation",
-      "stars": 29,
+      "stars": 30,
       "contributors": 13,
       "versionTags": 105,
       "releases": 87,
@@ -561,10 +561,10 @@
       "url": "https://github.com/Cap-go/capacitor-downloader",
       "stars": 15,
       "contributors": 3,
-      "versionTags": 121,
-      "releases": 102,
-      "closedIssues": 14,
-      "mergedPullRequests": 77
+      "versionTags": 123,
+      "releases": 103,
+      "closedIssues": 18,
+      "mergedPullRequests": 80
     },
     "Cap-go/capacitor-env": {
       "url": "https://github.com/Cap-go/capacitor-env",
@@ -640,7 +640,7 @@
     },
     "Cap-go/capacitor-live-activities": {
       "url": "https://github.com/Cap-go/capacitor-live-activities",
-      "stars": 8,
+      "stars": 9,
       "contributors": 4,
       "versionTags": 16,
       "releases": 15,

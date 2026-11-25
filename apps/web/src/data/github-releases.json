@@ -1,6 +1,46 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.112.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.112.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.112.0",
+    "pubDate": "2026-11-24T17:49:16.000Z",
+    "description": "🆕 Changelog Added Enhanced outdated CLI detection to provide explicit instructions on how to upgrade, improving the path to resolution for users running older versions. Changed Clarified license documentation to specify that the AGPL 3.0 license applies exclusively to code, while aligning license fields across the project and reinforcing the protection of Capgo branding. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.111.0...cli 8.112.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.111.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.111.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.111.0",
+    "pubDate": "2026-11-24T15:37:19.000Z",
+    "description": "🆕 Changelog Added Onboarding : Introduced a new \"Builder setup method\" option, allowing users to select this configuration style instead of choosing a specific platform during the initial setup process. Fixed Dashboard : Corrected the label on the bundle share card to display \"Update offers\" instead of \"Running devices,\" ensuring accurate metric identification. Credits : Implemented proper rounding for local currency credit prices to the nearest whole cent, resolving potential precision erro..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.69.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.0",
+    "pubDate": "2026-11-24T17:53:19.000Z",
+    "description": "🆕 Changelog Added CLI : Provide specific upgrade instructions for outdated CLI versions to streamline the update process. License Documentation : Clarify that the AGPL 3.0 license applies to source code only and explicitly protect Capgo branding assets. Changed License Metadata : Align license fields across repository configuration files to ensure consistency and accuracy. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.111.0...capgo 22.69.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.68.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.68.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.68.0",
+    "pubDate": "2026-11-24T15:42:40.000Z",
+    "description": "🆕 Changelog Added Onboarding : Added a new setup flow that allows you to select the Builder setup method directly, rather than selecting a specific platform first. This streamlines the initial configuration process for users targeting the Builder environment. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.67.2...capgo 22.68.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.67.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.2",
+    "pubDate": "2026-11-24T11:32:00.000Z",
+    "description": "🆕 Changelog Fixed Corrected the label on the dashboard's bundle share card to accurately display \"Update Offers\" instead of \"Running Devices\" 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.67.1...capgo 22.67.2"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app capgo-22.67.1",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.1",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.67.1",
@@ -278,46 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.107.0",
     "pubDate": "2026-11-14T02:25:30.000Z",
     "description": "🆕 Changelog Added AI powered release assistance : Integrated paid AI to recommend release versions and generate changelogs for improved release management workflows. Unified cloud simulator control : Enabled driving cloud simulators directly from the API, CLI, and both MCPs for enhanced testing and debugging capabilities. Local Postgres container support : Added the ability to run a local Postgres container and provision the database without requiring a full initialization. Private settings ..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.50.4",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.4",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.4",
-    "pubDate": "2026-11-14T23:04:30.000Z",
-    "description": "🆕 Changelog Fixed Ensure billing features remain accessible during the application setup phase to prevent navigation issues for new users. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.50.3...capgo 22.50.4"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.50.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.2",
-    "pubDate": "2026-11-14T19:47:03.000Z",
-    "description": "🆕 Changelog Fixed Unblocked currency translations : Resolved issues preventing proper localization of currency values, ensuring accurate display across different languages and regions. Fixed throttled reviews : Addressed a bug that caused review submissions to be incorrectly throttled, restoring the expected user experience for providing feedback. Improved worker state recovery : Enhanced the reliability of production plugin state recovery by implementing rotation for storage, preventing pot..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.50.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.1",
-    "pubDate": "2026-11-14T19:02:58.000Z",
-    "description": "🆕 Changelog Fixed MCP Metadata Truncation : Prevented metadata from exceeding Claude Code's byte limit, ensuring tool definitions are always valid and preventing integration errors. Tool Contract Clarity : Clarified Model Context Protocol (MCP) tool contracts to improve interaction reliability and reduce ambiguity in tool execution. CI Performance : Optimized the Continuous Integration suite by splitting long running tests, resulting in faster feedback loops and more stable pipeline executio..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.50.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.50.0",
-    "pubDate": "2026-11-14T17:42:09.000Z",
-    "description": "🆕 Changelog Changed Restricted incompatible bundle notification emails to the default channel only, reducing noise for users operating on alternative channels. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.49.2...capgo 22.50.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.49.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.49.2",
-    "pubDate": "2026-11-14T14:06:28.000Z",
-    "description": "🆕 Changelog Fixed Clarified guidance for signing uploads and server configuration in the Model Context Protocol (MCP) integration to resolve ambiguities in the documentation. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.49.1...capgo 22.49.2"
   },
   {
     "category": "release",
@@ -601,11 +601,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-downloader 8.9.0",
-    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.9.0",
-    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.9.0",
-    "pubDate": "2026-11-23T08:30:35.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.9.0...8.9.0"
+    "title": "capacitor-downloader 8.10.0",
+    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.10.0",
+    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.10.0",
+    "pubDate": "2026-11-24T13:51:58.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.10.0...8.10.0"
   },
   {
     "category": "release",
