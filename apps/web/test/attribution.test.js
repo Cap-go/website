@@ -372,3 +372,42 @@ test('ignores oversized or malformed optional click references', () => {
     expect(deserializeAttribution(JSON.stringify({ oppref: value }))).toBeNull()
   }
 })
+
+test('direct-offer hero uses Start shipping now without step copy and preserves attribution', () => {
+  const signupCta = readFileSync(new URL('../src/components/SignupCta.astro', import.meta.url), 'utf8')
+  const header = readFileSync(new URL('../src/components/Header.astro', import.meta.url), 'utf8')
+  const messages = readFileSync(new URL('../../shared/copy/messages.ts', import.meta.url), 'utf8')
+
+  expect(messages).toContain("direct_offer_cta_start_shipping: 'Start shipping now'")
+  expect(messages).toContain("direct_offer_price_guarantee_note: 'From {price}/month. 14-day money-back guarantee. Cancel anytime.'")
+
+  expect(signupCta).toContain('m.direct_offer_cta_start_shipping')
+  expect(signupCta).toContain('m.direct_offer_price_guarantee_note')
+  expect(signupCta).toContain('getPlans()')
+  expect(signupCta).toContain('planMonthlyPrice')
+  expect(signupCta).not.toContain('DirectOfferDetails')
+  expect(signupCta).not.toContain('direct_offer_cta_get_started')
+  expect(signupCta).not.toContain('No free trial')
+  expect(signupCta).not.toContain('See monthly plans')
+
+  expect(header).not.toContain('navCtaDirectLabel')
+  expect(header).not.toContain('direct_offer_cta_get_started')
+
+  const attributed = appendAttributionToUrl(
+    '/register/',
+    {
+      utm_source: 'google',
+      utm_medium: 'cpc',
+      utm_campaign: 'live_updates',
+      utm_content: 'hero-direct-v2',
+      oppref: 'click-ref-987',
+      offer: 'direct',
+    },
+    'https://capgo.app/',
+  )
+  const url = new URL(attributed, 'https://capgo.app/')
+  expect(url.pathname).toBe('/register/')
+  expect(url.searchParams.get('utm_content')).toBe('hero-direct-v2')
+  expect(url.searchParams.get('oppref')).toBe('click-ref-987')
+  expect(url.searchParams.get('offer')).toBe('direct')
+})

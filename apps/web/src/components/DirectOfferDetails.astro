@@ -1,14 +1,16 @@
 ---
 import m from '@/copy/messages'
-import { getPlans } from '@/lib/siteData'
+import { BASE_CURRENCY, formatPrice } from '@/lib/currency'
 import { planMonthlyPrice } from '@/lib/planCopy'
+import { getPlans } from '@/lib/siteData'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const prices = getPlans()
+  .filter((plan) => plan.name !== 'Free')
   .map(planMonthlyPrice)
   .filter((price) => price > 0)
-const startingPrice = prices.length ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(Math.min(...prices)) : null
+const startingPrice = prices.length ? formatPrice(Math.min(...prices), BASE_CURRENCY, 'cents', 'en-US') : null
 const pricingUrl = `${getRelativeLocaleUrl(locale, 'pricing')}?billing=monthly&offer=direct`
 ---
 

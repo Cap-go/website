@@ -7,7 +7,6 @@ import SolutionsMegaMenu from '@/components/SolutionsMegaMenu.astro'
 import { productIconPaths } from '@/config/productIcons'
 import { getRelativeLocaleUrl } from '@/services/links'
 import TeamAvatars from '@/components/TeamAvatars.astro'
-import OfferText from '@/components/OfferText.astro'
 
 const brand = Astro.locals.runtimeConfig.public.brand
 const locale = Astro.locals.locale
@@ -21,8 +20,6 @@ const navCtaHref = isEnterprisePage ? 'https://book.capgo.app/enterprise-inquiry
 const navCtaTarget = isEnterprisePage ? '_blank' : undefined
 const navCtaRel = isEnterprisePage ? 'noopener noreferrer' : undefined
 const navCtaLabel = isEnterprisePage ? m.enterprise_talk_to_team({}, { locale }) : m.nav_cta_start_free({}, { locale })
-// Paid-ads visitors (offer=direct) have no free trial, so the self-serve CTA drops the "free" wording for them.
-const navCtaDirectLabel = isEnterprisePage ? null : m.direct_offer_cta_get_started({}, { locale })
 const brandLogoSvgUrl = '/brand/capgo-lockup-white-transparent.svg'
 const brandLogoPngUrl = '/brand/capgo-lockup-white-transparent.png'
 
@@ -321,7 +318,7 @@ const mobileLinks = [
             role="button"
           >
             {isEnterprisePage && <TeamAvatars loading={false} />}
-            {navCtaDirectLabel ? <OfferText direct={navCtaDirectLabel}>{navCtaLabel}</OfferText> : navCtaLabel}
+            {navCtaLabel}
           </a>
         )}
         <a
@@ -471,7 +468,7 @@ const mobileLinks = [
               class="font-pj flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white text-[15px] font-semibold text-gray-950 transition-colors hover:bg-slate-200"
             >
               {isEnterprisePage && <TeamAvatars loading={false} />}
-              {navCtaDirectLabel ? <OfferText direct={navCtaDirectLabel}>{navCtaLabel}</OfferText> : navCtaLabel}
+              {navCtaLabel}
             </a>
           )}
           <a
