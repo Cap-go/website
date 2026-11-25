@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin for downloading files with background support. On Android since 8.5.0, an opt-in OkHttp engine writes app-private destinations (cache, files). Since 8.9.0, Android OkHttp batches run several files/ or cache/ downloads in-process with shared notifications, retries, and lengthHeader. iOS batches can use one BGContinuedProcessingTask when iosContinuedProcessing is true."
+  tagline: "Capacitor plugin for downloading files with background support. On Android since 8.5.0, an opt-in OkHttp engine writes app-private destinations (cache, files). Since 8.12.0, Android OkHttp batches run several files/ or cache/ downloads in-process with shared notifications, retries, and lengthHeader. iOS batches can use one BGContinuedProcessingTask when iosContinuedProcessing is true."
   actions:
     - text: Get started
       link: /docs/plugins/downloader/getting-started/
@@ -34,7 +34,7 @@ Available since **8.5.0**. When `androidHttpEngine` is omitted, behavior matches
 
 <Aside type="tip" title="Android DownloadManager notification labels (8.6.0)">
 
-Available since **8.6.0**. Set optional `title` and `description` on `download()` to customize the Android DownloadManager progress notification. When omitted or empty, the system keeps its default (often the destination file name). Since **8.9.0**, iOS continued processing uses the same fields when `iosContinuedProcessing` is set (a non-empty `title` is required), and Android OkHttp uses them when `notification` is `'progress'`, including [OkHttp batches](/docs/plugins/downloader/getting-started/#android-okhttp-batches). Web ignores both fields. See [Android DownloadManager notification labels](/docs/plugins/downloader/getting-started/#android-downloadmanager-notification-labels).
+Available since **8.6.0**. Set optional `title` and `description` on `download()` to customize the Android DownloadManager progress notification. When omitted or empty, the system keeps its default (often the destination file name). Since **8.9.0**, iOS continued processing uses the same fields when `iosContinuedProcessing` is set (a non-empty `title` is required). Since **8.12.0**, Android OkHttp also uses them when `notification` is `'progress'`, including [OkHttp batches](/docs/plugins/downloader/getting-started/#android-okhttp-batches). Web ignores both fields. See [Android DownloadManager notification labels](/docs/plugins/downloader/getting-started/#android-downloadmanager-notification-labels).
 
 </Aside>
 
@@ -42,19 +42,19 @@ Available since **8.6.0**. Set optional `title` and `description` on `download()
 
 Available since **8.7.0** on iOS and Android (not Web). Pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not pass `url` and `files` together. Up to 32 assets share one batch `id`. Progress uses 0 to 1 for overall and per-file values. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
 
-On Android, each file follows the same `androidHttpEngine` rules as a single download. Since **8.9.0**, a batch whose files all resolve to OkHttp runs in OkHttp with one shared progress notification when `notification` is `'progress'`; mixed engines are rejected. DownloadManager batches behave as before. Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death; iOS restores batches from `DownloadBatchStore`. When a batch file fails, finished files stay on disk on both platforms. On iOS, `stop()` deletes paths recorded via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android, `stop()` removes in-flight work while the batch is tracked but keeps completed files. Delete leftover files in your app after failure when you want them removed.
+On Android, each file follows the same `androidHttpEngine` rules as a single download. Since **8.12.0**, a batch whose files all resolve to OkHttp runs in OkHttp with one shared progress notification when `notification` is `'progress'`; mixed engines are rejected. Single-file OkHttp downloads and all-OkHttp batches share one fair queue capped at 4 concurrent transfers. DownloadManager batches behave as before. Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death (DownloadManager work may still finish in the system without rebuilt progress; OkHttp batch transfers stop and are not resumed); iOS restores batches from `DownloadBatchStore`. When a batch file fails, finished files stay on disk on both platforms. On iOS, `stop()` deletes paths recorded via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android DownloadManager batches, `stop()` removes in-flight work while the batch is tracked and keeps completed files. On OkHttp batches, `stop()` cancels in-flight transfers (temp files removed; committed files from earlier children stay on disk unless removed by `stop()` cleanup for tracked destinations). Delete leftover files in your app after failure when you want them removed.
 
 </Aside>
 
 <Aside type="tip" title="Robust background downloads (8.8.0)">
 
-Available since **8.8.0**. Large offline packs can keep moving while users switch apps: required `AppDelegate` background session forwarding, optional iOS 26 continued processing, iOS `private/` paths, and opt-in OkHttp `notification: 'progress'` with an optional `dataSync` foreground service on Android (default `completed` unchanged from 8.7.0). Since **8.9.0**, use `iosContinuedProcessing` with `title` and `description` (the 8.8.0 title-only fields are deprecated), and the same options apply to [Android OkHttp batches](/docs/plugins/downloader/getting-started/#android-okhttp-batches) and [iOS batch continued processing](/docs/plugins/downloader/getting-started/#ios-batch-continued-processing). See [Robust background downloads](/docs/plugins/downloader/getting-started/#robust-background-downloads).
+Available since **8.8.0**. Large offline packs can keep moving while users switch apps: required `AppDelegate` background session forwarding, optional iOS 26 continued processing, iOS `private/` paths, and opt-in OkHttp `notification: 'progress'` with an optional `dataSync` foreground service on Android (default `completed` unchanged from 8.7.0). Since **8.9.0**, use `iosContinuedProcessing` with `title` and `description` (the 8.8.0 title-only fields are deprecated). Since **8.12.0**, the same options apply to [Android OkHttp batches](/docs/plugins/downloader/getting-started/#android-okhttp-batches) and [iOS batch continued processing](/docs/plugins/downloader/getting-started/#ios-batch-continued-processing). See [Robust background downloads](/docs/plugins/downloader/getting-started/#robust-background-downloads).
 
 </Aside>
 
-<Aside type="tip" title="OkHttp batches and iOS batch continued processing (8.9.0)">
+<Aside type="tip" title="OkHttp batches and iOS batch continued processing (8.12.0)">
 
-Available since **8.9.0**. Android OkHttp batches run several `files/` or `cache/` downloads in-process with shared notifications, `retries`, and `lengthHeader`. iOS batches can use one `BGContinuedProcessingTask` when `iosContinuedProcessing: true`. Mixed Android engines in one batch are rejected. See [Android OkHttp batches](/docs/plugins/downloader/getting-started/#android-okhttp-batches) and [iOS batch continued processing](/docs/plugins/downloader/getting-started/#ios-batch-continued-processing). Related change: [capacitor-downloader#157](https://github.com/Cap-go/capacitor-downloader/pull/157).
+Available since **8.12.0**. Android OkHttp batches run several `files/` or `cache/` downloads in-process with shared notifications, `retries`, and `lengthHeader`. iOS batches can use one `BGContinuedProcessingTask` when `iosContinuedProcessing: true`. Mixed Android engines in one batch are rejected. See [Android OkHttp batches](/docs/plugins/downloader/getting-started/#android-okhttp-batches) and [iOS batch continued processing](/docs/plugins/downloader/getting-started/#ios-batch-continued-processing). Related change: [capacitor-downloader#157](https://github.com/Cap-go/capacitor-downloader/pull/157).
 
 </Aside>
 
@@ -69,8 +69,8 @@ Set `downloadCompletedNotificationText` on `download()` to show a localized syst
 - `resume` - Resume a paused download. Continues from where it was paused.
 - `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.
 - `downloadCompletedNotificationText` (optional on `download`) - Show a localized system notification when a download succeeds and notification permission is granted.
-- `title` and `description` (optional on `download`, Android DownloadManager since 8.6.0) - Customize progress notification title and description. Since **8.9.0**, also used for iOS continued processing (`iosContinuedProcessing`) and Android OkHttp when `notification` is `'progress'` (including batches). Ignored on Web.
-- `iosContinuedProcessing` (optional on `download`, since 8.9.0) - On iOS 26 and later, run the download or whole batch in one `BGContinuedProcessingTask`. Requires a non-empty `title`.
+- `title` and `description` (optional on `download`, Android DownloadManager since 8.6.0) - Customize progress notification title and description. Also used for iOS continued processing (`iosContinuedProcessing`, since 8.9.0) and Android OkHttp when `notification` is `'progress'` (including batches since 8.12.0). Ignored on Web.
+- `iosContinuedProcessing` (optional on `download`, since 8.9.0; batches since 8.12.0) - On iOS 26 and later, run the download or whole batch in one `BGContinuedProcessingTask`. Requires a non-empty `title`.
 
 ## Public API
 

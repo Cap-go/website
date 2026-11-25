@@ -125,7 +125,7 @@ if (Capacitor.getPlatform() === 'ios') {
 
 See also the [plugin repository README](https://github.com/Cap-go/capacitor-downloader/#robust-background-downloads-offline-packs).
 
-For multi-file packs, the same background options apply to a batch `id` since **8.9.0**. See [Android OkHttp batches](#android-okhttp-batches) and [iOS batch continued processing](#ios-batch-continued-processing).
+For multi-file packs, the same background options apply to a batch `id` since **8.12.0**. See [Android OkHttp batches](#android-okhttp-batches) and [iOS batch continued processing](#ios-batch-continued-processing).
 
 ## Multi-file batch downloads
 
@@ -186,15 +186,15 @@ await CapacitorDownloader.stop({ id: 'update-bundle' });
 
 ### Batch platform notes
 
-- **Android engine**: each file uses the same `androidHttpEngine` destination rules as a single download. Since **8.9.0**, when every file resolves to OkHttp, the batch runs in OkHttp with shared `notification`, `retries`, and `lengthHeader`. The call is rejected if files would mix OkHttp and DownloadManager engines. See [Android OkHttp batches](#android-okhttp-batches).
+- **Android engine**: each file uses the same `androidHttpEngine` destination rules as a single download. Since **8.12.0**, when every file resolves to OkHttp, the batch runs in OkHttp with shared `notification`, `retries`, and `lengthHeader`. Single-file OkHttp downloads and all-OkHttp batches share one fair queue capped at 4 concurrent transfers. The call is rejected if files would mix OkHttp and DownloadManager engines. See [Android OkHttp batches](#android-okhttp-batches).
 - **Pause and resume**: iOS supports `pause()` and `resume()` on the batch `id`. Android rejects `pause()` and `resume()` for every download, including single downloads and batches (use `stop()`).
-- **Process death**: on Android, batch state is memory-only and is lost when the process is killed (DownloadManager work may still finish, but the plugin does not rebuild batch progress). On iOS, batch metadata is persisted in `DownloadBatchStore` (UserDefaults) and restored when the plugin initializes (`DownloadBatchCoordinator`).
-- **Partial success on failure**: when one file fails, remaining transfers are cancelled; files that finished before the failure remain on disk on Android and iOS.
+- **Process death**: on Android, batch state is memory-only and is lost when the process is killed. DownloadManager batch work may still finish in the system, but the plugin does not rebuild batch progress. OkHttp batch transfers stop when the process is killed and are not resumed. On iOS, batch metadata is persisted in `DownloadBatchStore` (UserDefaults) and restored when the plugin initializes (`DownloadBatchCoordinator`).
+- **Partial success on failure**: when one file fails, remaining transfers are cancelled; files that finished before the failure remain on disk on Android and iOS. On Android DownloadManager batches, completed children stop being tracked without calling DownloadManager.remove on them. On OkHttp batches, in-flight transfers are cancelled without deleting files that already finished.
 - **iOS batch `stop()`**: deletes `recordMovedDestination` paths only while the batch is still tracked (running, paused, or restored after relaunch). After the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; older generations of the same id are never touched, and iOS rejects with `Task not found`.
 
 ### Android OkHttp batches
 
-Available since **8.9.0**. Use this when every file in `files` resolves to OkHttp (`androidHttpEngine: 'okhttp'`, or `'auto'` with app-private destinations such as `files/...` or `cache/...`) and you want one batch `id`, combined progress events, and optional shared progress UI.
+Available since **8.12.0**. Use this when every file in `files` resolves to OkHttp (`androidHttpEngine: 'okhttp'`, or `'auto'` with app-private destinations such as `files/...` or `cache/...`) and you want one batch `id`, combined progress events, and optional shared progress UI.
 
 ```typescript
 await CapacitorDownloader.download({
@@ -219,13 +219,15 @@ Options on an OkHttp batch:
 | `lengthHeader` | The same header name applies to every file in `files` (for example `X-Uncompressed-Length`). Ignored on Android DownloadManager batches. |
 | `title` / `description` | Used on the OkHttp progress UI when `notification` is `'progress'`. If `title` is omitted or empty, OkHttp falls back to "Downloading". |
 
+Single-file OkHttp downloads and all-OkHttp batches share one fair queue capped at 4 concurrent transfers.
+
 If one file resolves to DownloadManager and another to OkHttp, `download()` rejects with: `All files of a batch must resolve to the same Android HTTP engine`.
 
 Single-file OkHttp notification modes are covered in [Notifications with OkHttp](#notifications-with-okhttp).
 
 ### iOS batch continued processing
 
-Available since **8.9.0**. A multi-file batch can run in one `BGContinuedProcessingTask` that shows `title` and `description`.
+Available since **8.12.0**. A multi-file batch can run in one `BGContinuedProcessingTask` that shows `title` and `description`.
 
 Requirements:
 
@@ -385,7 +387,7 @@ The same OkHttp modes apply to a multi-file batch when every file resolves to Ok
 
 ### OkHttp limits
 
-- At most 4 OkHttp transfers run at the same time. Additional OkHttp downloads wait until a slot is free.
+- Single-file OkHttp downloads and all-OkHttp batches share one fair queue capped at 4 concurrent transfers. Additional transfers wait until a slot is free.
 - HTTP 206 Partial Content is not supported. The OkHttp path fails that response (this plugin does not resume through range requests).
 - An HTTPS to HTTP redirect is not followed; the download fails.
 - With `network: 'wifi-only'`, the transfer is bound to Wi-Fi and fails if Wi-Fi drops, with no cellular fallback.
@@ -453,7 +455,7 @@ Stop and cancel a download permanently.
 
 **Batch id on iOS:** Deletes each path recorded by `recordMovedDestination` only while the batch is still tracked by the plugin (running, paused, or restored after relaunch). Batch failure alone does not delete finished files while the batch is tracked; only `stop()` removes recorded paths. Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and the plugin rejects with `Task not found`.
 
-**Batch id on Android:** Removes DownloadManager work for non-finished children while the batch is tracked. Completed batch files stay on disk (marked complete or `STATUS_SUCCESSFUL`), including files finished before `stop()`. After the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing on completed files; remove leftovers in your app when needed.
+**Batch id on Android:** On DownloadManager batches, removes DownloadManager entries for in-flight children while the batch is tracked; finished children stay on disk (marked complete or `STATUS_SUCCESSFUL`), including files finished before `stop()`. On OkHttp batches, cancels in-flight transfers (temp files removed; committed files from earlier children in the same batch stay on disk unless removed by `stop()` cleanup for tracked destinations). After the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing on completed files; remove leftovers in your app when needed.
 
 **Single downloads:** Cancels the transfer. Single-file OkHttp downloads on Android still delete the destination file when stopped, including after finish. Other platform cleanup depends on the OS.
 
@@ -489,7 +491,7 @@ console.log(result);
 
 ### `DownloadFileSpec`
 
-One file inside a batch (`files` array, since **8.7.0**). On Android, `destination` follows the same rules as a single download for the batch `androidHttpEngine` value. Since **8.9.0**, a batch can use OkHttp when every file resolves to it (for example `cache/...` or `files/...`); a batch that mixes engines is rejected.
+One file inside a batch (`files` array, since **8.7.0**). On Android, `destination` follows the same rules as a single download for the batch `androidHttpEngine` value. Since **8.12.0**, a batch can use OkHttp when every file resolves to it (for example `cache/...` or `files/...`); a batch that mixes engines is rejected.
 
 ```typescript
 export interface DownloadFileSpec {
@@ -568,7 +570,7 @@ export interface DownloadOptions {
 
 ### `DownloadBatchOptions`
 
-Multi-file batch (since **8.7.0**). Uses `files` only; `url` and `destination` are not allowed at the top level. Passing `url` and `files` together is rejected at runtime. On Android, each file uses the same `androidHttpEngine` destination rules as a single download. Since **8.9.0**, a batch whose files all resolve to OkHttp runs through OkHttp; a batch that mixes engines is rejected. When one file fails, remaining transfers are cancelled; files that already finished successfully stay on disk. **`stop({ id })` on a batch id:** On iOS, deletes every path stored via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android, removes in-flight work while tracked; finished children stay on disk.
+Multi-file batch (since **8.7.0**). Uses `files` only; `url` and `destination` are not allowed at the top level. Passing `url` and `files` together is rejected at runtime. On Android, each file uses the same `androidHttpEngine` destination rules as a single download. Since **8.12.0**, a batch whose files all resolve to OkHttp runs through OkHttp; a batch that mixes engines is rejected. Single-file OkHttp downloads and all-OkHttp batches share one fair queue capped at 4 concurrent transfers. When one file fails, remaining transfers are cancelled; files that already finished successfully stay on disk. **`stop({ id })` on a batch id:** On iOS, deletes every path stored via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android DownloadManager batches, removes active DownloadManager entries for in-flight children while tracked; finished children stay on disk. On OkHttp batches, cancels in-flight transfers (temp files removed; committed files from earlier children stay on disk unless removed by `stop()` cleanup for tracked destinations).
 
 ```typescript
 export interface DownloadBatchOptions {
@@ -585,7 +587,7 @@ export interface DownloadBatchOptions {
   title?: string;
   description?: string;
   /**
-   * Same destination rules as single downloads. Since 8.9.0, OkHttp batches are
+   * Same destination rules as single downloads. Since 8.12.0, OkHttp batches are
    * allowed when every file resolves to OkHttp; mixed engines are rejected.
    */
   androidHttpEngine?: 'auto' | 'okhttp' | 'downloadManager';
@@ -594,7 +596,7 @@ export interface DownloadBatchOptions {
   lengthHeader?: string;
   retries?: number;
   /**
-   * iOS 26 and later: run the whole batch in one BGContinuedProcessingTask (since 8.9.0).
+   * iOS 26 and later: run the whole batch in one BGContinuedProcessingTask (since 8.12.0).
    */
   iosContinuedProcessing?: boolean;
 }
