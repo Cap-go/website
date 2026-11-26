@@ -131,7 +131,7 @@ Before blaming your framework or WebView for jank, run through these profiling s
 * **Offload heavy compute to Web Workers:** Move JSON parsing of large payloads, client-side encryption, CSV exports, and image resizing into background workers, or break them into scheduled chunks via `setTimeout` or `scheduler.yield()` so each turn yields to painting.
 * **Break recursive microtask chains:** Audit `Promise.resolve().then(...)` loops and reactive state watchers that trigger cascading synchronous updates inside a single frame.
 
-The last item deserves emphasis because it is the one profilers make hardest to see. A microtask chain rarely shows up as one obvious long block; it shows up as dozens of small blocks packed inside one frame, with no paint in between. When a trace looks busy but no single task dominates, look for reactive watchers or Promise chains requeueing themselves.
+The last item deserves emphasis because it is the one profilers make hardest to see. A microtask chain rarely shows up as one obvious long block; it shows up as dozens of small blocks packed inside one frame, with no paint in between. When a trace looks busy but no single task dominates, look for reactive watchers or Promise chains requeuing themselves.
 
 Upgrading your API servers or adding a CDN will not rescue a choppy screen. Faster networks shrink download waits, but they do nothing for interaction stalls caused by JavaScript hogging the main thread.
 
