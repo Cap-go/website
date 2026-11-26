@@ -546,7 +546,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
             </div>
             <div class="more">
               iOS and Android jobs run on M4 Mac runners with fast Xcode, Gradle, and Fastlane. We pick the runner by platform flag; pin an Xcode with
-              <code class="mono">--xcode-version</code> and list them with <code class="mono">capgo build variants</code>.
+              <code class="mono nowrap">--xcode-version</code> and list them with <code class="mono nowrap">capgo build variants</code>.
             </div>
           </div>
 
@@ -1899,6 +1899,9 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
     }
     .nb .tile .xcode-variants-list {
       display: contents;
+    }
+    .nb .tile .more code.nowrap {
+      white-space: nowrap;
     }
     .nb .tile .xcode-chip {
       font-family: var(--nb-font-mono);
@@ -5486,7 +5489,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
   </style>
 
   <script>
-    import { availableXcodeVersions, normalizeBuilderVariants } from '@/lib/builderVariants'
+    import { availableXcodeVersions, readBuilderVariants } from '@/lib/builderVariants'
 
     // ----------------------------------------------------------------
     // XCODE VARIANTS — live list from the builder (cached a day by the worker)
@@ -5499,7 +5502,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       try {
         const response = await fetch(endpoint, { headers: { Accept: 'application/json' } })
         if (!response.ok) return
-        const versions = availableXcodeVersions(normalizeBuilderVariants(await response.json())?.variants ?? [])
+        const versions = availableXcodeVersions(readBuilderVariants(await response.json())?.variants ?? [])
         if (!versions.length) return
         list.replaceChildren(
           ...versions.map((version) => {

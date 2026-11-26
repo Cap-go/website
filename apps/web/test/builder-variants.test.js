@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, test } from 'bun:test'
-import { availableXcodeVersions, BUILDER_VARIANTS_CACHE_TTL_SECONDS, normalizeBuilderVariants } from '../src/lib/builderVariants.ts'
+import { availableXcodeVersions, BUILDER_VARIANTS_CACHE_TTL_SECONDS, normalizeBuilderVariants, readBuilderVariants } from '../src/lib/builderVariants.ts'
 import { handleBuilderVariants } from '../src/worker/builder-variants.ts'
 
 const builderPayload = {
@@ -66,6 +66,15 @@ test('serves the builder list cached for a day', async () => {
   const again = await handleBuilderVariants(request(), env, undefined, fetchImpl)
   expect(again.status).toBe(200)
   expect(calls).toHaveLength(1)
+})
+
+test('the page reads back what the worker serves', async () => {
+  const served = await (await handleBuilderVariants(request(), env, undefined, upstream(builderPayload).fetchImpl)).json()
+  const read = readBuilderVariants(served)
+  expect(read).toEqual(served)
+  expect(availableXcodeVersions(read.variants)).toEqual(['27.1', '26.2'])
+  expect(readBuilderVariants({ variants: [{ id: 'x', xcode_version: '26 && curl', backend: 'mac' }] }).variants).toEqual([])
+  expect(readBuilderVariants(null)).toBeNull()
 })
 
 test('is unavailable when misconfigured or the builder fails', async () => {

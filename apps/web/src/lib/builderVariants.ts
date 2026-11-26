@@ -39,6 +39,17 @@ export function normalizeBuilderVariants(value: unknown): BuilderVariants | null
   return { default_xcode_major: major, variants }
 }
 
+/** Reads the website's own /builder-variants.json (already snake_case) on the page. */
+export function readBuilderVariants(value: unknown): BuilderVariants | null {
+  if (!isRecord(value) || !Array.isArray(value.variants)) return null
+  return normalizeBuilderVariants({
+    defaultXcodeMajor: value.default_xcode_major,
+    variants: value.variants.map((variant) =>
+      isRecord(variant) ? { id: variant.id, xcodeVersion: variant.xcode_version, macosVersion: variant.macos_version, backend: variant.backend, default: variant.default } : null,
+    ),
+  })
+}
+
 /** Distinct Xcode versions, in the builder's order (newest first). */
 export function availableXcodeVersions(variants: BuilderVariant[]): string[] {
   return [...new Set(variants.map((variant) => variant.xcode_version))]
