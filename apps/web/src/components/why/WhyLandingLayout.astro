@@ -15,7 +15,7 @@ interface Props {
     description: string
     keywords?: string
     robots?: string
-    alternateVersions?: []
+    alternateVersions?: { locale: string; url: string }[]
   }
   h1: string
   heroAnswer: string
@@ -30,13 +30,8 @@ const { content, h1, heroAnswer, commercialLine, reasons, comparisonHtml, locale
 const ctaMidId = 'why-landing-signup-cta-mid'
 const ctaFinalId = 'why-landing-signup-cta-final'
 
-type ReasonBlock = { kind: 'reason'; reason: WhyReason; index: number } | { kind: 'cta' }
-
-const reasonBlocks: ReasonBlock[] = reasons.flatMap((reason, index) => {
-  const blocks: ReasonBlock[] = [{ kind: 'reason', reason, index }]
-  if (index === 2) blocks.push({ kind: 'cta' })
-  return blocks
-})
+const reasonsBeforeMidCta = reasons.slice(0, 3)
+const reasonsAfterMidCta = reasons.slice(3)
 ---
 
 <Layout content={content}>
@@ -53,25 +48,44 @@ const reasonBlocks: ReasonBlock[] = reasons.flatMap((reason, index) => {
 
       <ol class="mt-14 space-y-8">
         {
-          reasonBlocks.map((block) =>
-            block.kind === 'cta' ? (
-              <li class="list-none py-2">
-                <SignupCta id={ctaMidId} directOnly hideNote class="mx-auto max-w-md" />
-              </li>
-            ) : (
+          reasonsBeforeMidCta.map((reason, index) => (
+            <li class="rounded-2xl border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+              <p class="font-mono text-sm font-semibold tracking-wide text-blue-400">
+                {m.why_page_reason_label({ number: String(index + 1) }, { locale })}
+              </p>
+              <h2 class="mt-2 text-2xl font-bold text-white">{reason.title}</h2>
+              {reason.html ? (
+                <p class="mt-4 text-base leading-7 text-gray-300" set:html={reason.body} />
+              ) : (
+                <p class="mt-4 text-base leading-7 text-gray-300">{reason.body}</p>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="py-6">
+        <SignupCta id={ctaMidId} directOnly hideNote class="mx-auto max-w-md" />
+      </div>
+
+      <ol class="space-y-8" start="4">
+        {
+          reasonsAfterMidCta.map((reason, offsetIndex) => {
+            const index = offsetIndex + 3
+            return (
               <li class="rounded-2xl border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
                 <p class="font-mono text-sm font-semibold tracking-wide text-blue-400">
-                  {m.why_page_reason_label({ number: String(block.index + 1) }, { locale })}
+                  {m.why_page_reason_label({ number: String(index + 1) }, { locale })}
                 </p>
-                <h2 class="mt-2 text-2xl font-bold text-white">{block.reason.title}</h2>
-                {block.reason.html ? (
-                  <p class="mt-4 text-base leading-7 text-gray-300" set:html={block.reason.body} />
+                <h2 class="mt-2 text-2xl font-bold text-white">{reason.title}</h2>
+                {reason.html ? (
+                  <p class="mt-4 text-base leading-7 text-gray-300" set:html={reason.body} />
                 ) : (
-                  <p class="mt-4 text-base leading-7 text-gray-300">{block.reason.body}</p>
+                  <p class="mt-4 text-base leading-7 text-gray-300">{reason.body}</p>
                 )}
               </li>
-            ),
-          )
+            )
+          })
         }
       </ol>
 
