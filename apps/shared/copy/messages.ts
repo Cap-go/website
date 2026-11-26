@@ -6598,6 +6598,33 @@ const messages = {
   when_down_review:
     "When an application works too slow or gets down (even for a few minutes), it can damage users' satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.",
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
+  why_capgo_build_commercial: 'From $14/month. 14-day money-back guarantee. Cancel anytime.',
+  why_capgo_build_compare_html:
+    'Expo Application Services targets React Native, while Capgo Build is built for Capacitor apps with signed iOS and Android binaries and store uploads on the same plan as live updates. Ionic Appflow is winding down, and Codemagic is a general mobile CI platform you configure with YAML. For honest side-by-side notes, see our <a href="{appflowUrl}">Ionic Appflow alternative page</a>, <a href="{expoUrl}">Expo EAS alternative page</a>, and <a href="{codemagicUrl}">Codemagic alternative page</a>.',
+  why_capgo_build_compare_title: 'How this compares to Appflow, EAS, and Codemagic',
+  why_capgo_build_description:
+    'Five reasons Capacitor teams use Capgo Build to compile signed iOS and Android apps in the cloud and publish to App Store Connect and Google Play without a Mac on every desk.',
+  why_capgo_build_hero_answer:
+    'Capgo Build compiles signed iOS and Android Capacitor binaries in the cloud and can upload them to App Store Connect and Google Play, so your team ships store releases without local Xcode on every machine.',
+  why_capgo_build_h1: '5 reasons to build your iOS and Android apps with Capgo Build',
+  why_capgo_build_keywords:
+    'Capgo Build, Capacitor native build, cloud iOS build, Android build, App Store Connect, Google Play, build without Mac',
+  why_capgo_build_reason1_body:
+    'Capgo Build runs iOS compiles on cloud Mac infrastructure, so developers on Windows, Linux, or macOS can trigger the same signed binary from the Capgo CLI. The Capgo CLI build command documents that no local Mac or Xcode is required for production iOS and Android Capacitor releases.',
+  why_capgo_build_reason1_title: 'Ship iOS builds without buying a Mac for every developer',
+  why_capgo_build_reason2_body:
+    'The Capgo CLI build init flow sets up iOS certificates, provisioning profiles, and Android keystores interactively. You can also pass signing material at build time through CLI flags or your CI secrets; Capgo uses credentials only in memory during the build instead of parking them on a server.',
+  why_capgo_build_reason2_title: 'Signing setup without fighting Xcode and Gradle locally',
+  why_capgo_build_reason3_body:
+    'After a successful build, Capgo can upload binaries to App Store Connect and Google Play so TestFlight and Play Console review can start without a separate upload step. The Capgo native build product page describes automatic submission to both stores after successful cloud builds.',
+  why_capgo_build_reason3_title: 'Publish to App Store Connect and Google Play from the same flow',
+  why_capgo_build_reason4_body:
+    'Capgo Build runs from the Capgo CLI, hosted Capgo MCP for coding agents, or your existing CI on Windows, Linux, and macOS. App Developer API keys and organization roles documented in Capgo can trigger native builds alongside bundle uploads.',
+  why_capgo_build_reason4_title: 'Trigger builds from the CLI, MCP, or CI',
+  why_capgo_build_reason5_body:
+    'Every Capgo plan includes Native Builds alongside live updates, notifications, and Observe; plans differ by usage limits such as included native build minutes, not by locking builds behind a separate product tier. The Solo plan includes 60 minutes of native build time per month on the public pricing table. See the <a href="{nativeBuildUrl}">Capgo native build product page</a> and <a href="{buildDocsUrl}">Capgo CLI build reference</a> for setup and commands.',
+  why_capgo_build_reason5_title: 'Native builds on the same subscription as live updates',
+  why_capgo_build_seo_title: '5 reasons to build Capacitor apps with Capgo Build',
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
   why_capgo_plugin_engineering_body:
     'We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily.',
@@ -6607,6 +6634,8 @@ const messages = {
   why_capgo_title: 'Faster fixes, without giving up control',
   why_capgo_trust_link: 'Visit the security trust center',
   why_is_it_important: 'Why is it important?',
+  why_page_compare_title: 'How this compares to CodePush and Appflow',
+  why_page_reason_label: 'Reason {number}',
   why_work: 'Why work',
   with_us: 'with us?',
   work_without_internet_connection: 'Work without internet connection',

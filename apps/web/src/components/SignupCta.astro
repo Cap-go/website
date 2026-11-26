@@ -23,10 +23,26 @@ interface Props {
   variant?: 'signup' | 'team'
   /** `compact` renders a smaller full-width button for narrow containers such as sidebars. */
   size?: 'default' | 'compact'
+  /** Always show the paid-ads primary label and optional direct pricing note (for /why/* landings). */
+  directOnly?: boolean
+  /** Hide the trial or direct pricing line under the button. */
+  hideNote?: boolean
   class?: string
 }
 
-const { id, lead, variant = 'signup', enterprise = false, humanSupport = false, align = 'center', tone = 'dark', size = 'default', class: className = '' } = Astro.props
+const {
+  id,
+  lead,
+  variant = 'signup',
+  enterprise = false,
+  humanSupport = false,
+  align = 'center',
+  tone = 'dark',
+  size = 'default',
+  directOnly = false,
+  hideNote = false,
+  class: className = '',
+} = Astro.props
 const locale = Astro.locals.locale
 const registerUrl = getRelativeLocaleUrl(locale, 'register')
 const teamUrl = 'https://book.capgo.app/demo/'
@@ -54,19 +70,25 @@ const isCompact = size === 'compact'
       href={isTeam ? inquiryUrl : registerUrl}
       target={isTeam ? '_blank' : undefined}
       rel={isTeam ? 'noopener noreferrer' : undefined}
-      aria-describedby={isTeam ? undefined : noteId}
+      aria-describedby={isTeam || hideNote ? undefined : noteId}
       class:list={[
         'signup-cta-button font-pj relative z-10 inline-flex items-center justify-center gap-3 rounded-xl bg-blue-600 text-center font-bold text-white no-underline shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none active:scale-[0.98]',
         isCompact ? 'w-full px-4 py-3 text-base' : 'px-8 py-4 text-lg',
       ]}
     >
       {isTeam && <TeamAvatars border="border-blue-600" loading={false} />}
-      {isTeam ? m.enterprise_talk_to_team({}, { locale }) : <OfferText direct={m.direct_offer_cta_start_shipping({}, { locale })}>{m.hero_cta_try_free({}, { locale })}</OfferText>}
+      {isTeam ? (
+        m.enterprise_talk_to_team({}, { locale })
+      ) : directOnly ? (
+        m.direct_offer_cta_start_shipping({}, { locale })
+      ) : (
+        <OfferText direct={m.direct_offer_cta_start_shipping({}, { locale })}>{m.hero_cta_try_free({}, { locale })}</OfferText>
+      )}
     </a>
   </div>
-  {!isTeam && (
+  {!isTeam && !hideNote && (
     <p id={noteId} class:list={['font-inter m-0 text-sm leading-6', isLight ? 'text-gray-600' : 'text-gray-300']}>
-      <OfferText direct={directNote}>{trialNote}</OfferText>
+      {directOnly ? directNote : <OfferText direct={directNote}>{trialNote}</OfferText>}
     </p>
   )}
   {enterprise && !isTeam && (
