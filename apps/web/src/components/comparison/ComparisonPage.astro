@@ -164,7 +164,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
                 aria-label={m.compare_rank_link_aria({ name: item.name }, { locale })}
                 {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
-                {m.compare_rank_link({}, { locale })} →
+                {m.compare_rank_link({ name: item.name }, { locale })} →
               </a>
             </li>
           ))}

@@ -268,7 +268,7 @@ const content = {
               <h3>{item.title}</h3>
               <p>{item.text}</p>
               <a class="cmp-card-link" href={item.href} aria-label={m.alternatives_index_link_aria({ competitor: item.name }, { locale })}>
-                {m.alternatives_index_link({}, { locale })} →
+                {m.alternatives_index_link({ competitor: item.name }, { locale })} →
               </a>
             </article>
           ))}
@@ -290,7 +290,7 @@ const content = {
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
                 <a class="cmp-card-link" href={item.href} aria-label={m.alternatives_index_link_aria({ competitor: item.name }, { locale })}>
-                  {m.alternatives_index_link({}, { locale })} →
+                  {m.alternatives_index_link({ competitor: item.name }, { locale })} →
                 </a>
               </article>
             ))}

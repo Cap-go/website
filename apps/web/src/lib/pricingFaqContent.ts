@@ -98,12 +98,12 @@ export function buildPricingFaqSections(locale: Locales, urls: PricingFaqUrls): 
               link: {
                 beforeLink: m.capgo_usage_explanation({}, { locale }),
                 href: docsNativeBuildsUrl,
-                label: m.here({}, { locale }),
+                label: m.pricing_faq_native_builds_usage_link({}, { locale }),
               },
             },
           ],
           href: docsMauUrl,
-          linkLabel: m.learn_more({}, { locale }),
+          linkLabel: m.pricing_faq_mau_docs_link({}, { locale }),
         },
         {
           id: 'faq-all-features',
@@ -120,7 +120,7 @@ export function buildPricingFaqSections(locale: Locales, urls: PricingFaqUrls): 
           question: m.storage_what_is_it_used_for({}, { locale }),
           answer: m.storage_detailed_explanation({}, { locale }),
           href: docsBundlesUrl,
-          linkLabel: m.learn_more({}, { locale }),
+          linkLabel: m.pricing_faq_bundle_storage_docs_link({}, { locale }),
         },
         {
           id: 'faq-bandwidth',

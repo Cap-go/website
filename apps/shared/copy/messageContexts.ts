@@ -3579,6 +3579,12 @@ export const messageContexts = {
   pricing_explainer_title: 'Page/area: Pricing page or plan calculator UI. Role: Section or page heading. Seen in: component pricing/PricingExplainer.astro. Message key `pricing_explainer_title` (Pricing Explainer Title).',
   pricing_explainer_trial: 'Page/area: Pricing page or plan calculator UI. Role: Website copy sentence. Seen in: component pricing/PricingExplainer.astro. Message key `pricing_explainer_trial` (Pricing Explainer Trial).',
   pricing_explainer_trial_direct: 'Page/area: Pricing page or plan calculator UI. Role: Website copy sentence. Seen in: component pricing/PricingExplainer.astro. Message key `pricing_explainer_trial_direct` (Pricing Explainer Trial Direct).',
+  pricing_faq_bundle_storage_docs_link:
+    'Page/area: Pricing page or plan calculator UI. Role: Call-to-action button or link label. Seen in: apps/web/src/lib/pricingFaqContent.ts. Message key `pricing_faq_bundle_storage_docs_link` (Pricing FAQ Bundle Storage Docs Link).',
+  pricing_faq_mau_docs_link:
+    'Page/area: Pricing page or plan calculator UI. Role: Call-to-action button or link label. Seen in: apps/web/src/lib/pricingFaqContent.ts. Message key `pricing_faq_mau_docs_link` (Pricing FAQ Mau Docs Link).',
+  pricing_faq_native_builds_usage_link:
+    'Page/area: Pricing page or plan calculator UI. Role: Call-to-action button or link label. Seen in: apps/web/src/lib/pricingFaqContent.ts. Message key `pricing_faq_native_builds_usage_link` (Pricing FAQ Native Builds Usage Link).',
   pricing_faq_trial_support_subtitle_direct: 'Page/area: Pricing page or plan calculator UI. Role: FAQ question or answer. Seen in: apps/web/src/lib/pricingFaqContent.ts. Message key `pricing_faq_trial_support_subtitle_direct` (Pricing FAQ Trial Support Subtitle Direct).',
   pricing_faq_trial_support_title_direct: 'Page/area: Pricing page or plan calculator UI. Role: FAQ question or answer. Seen in: apps/web/src/lib/pricingFaqContent.ts. Message key `pricing_faq_trial_support_title_direct` (Pricing FAQ Trial Support Title Direct).',
   pricing_native_build_queue_priority_enterprise: 'Page/area: Pricing page or plan calculator UI. Role: Short UI label or navigation item. Seen in: component pricing/ComparePlans.astro, component pricing/Plans.astro. Message key `pricing_native_build_queue_priority_enterprise` (Pricing Native Build Queue Priority Enterprise).',
