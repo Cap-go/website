@@ -16,9 +16,19 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
+function compareVersionsDesc(a: string, b: string) {
+  const left = a.split('.').map(Number)
+  const right = b.split('.').map(Number)
+  for (let index = 0; index < Math.max(left.length, right.length); index++) {
+    const diff = (right[index] ?? 0) - (left[index] ?? 0)
+    if (diff !== 0) return diff
+  }
+  return 0
+}
+
 function toVariants(major: unknown, versions: unknown): BuilderVariants | null {
   if (!Array.isArray(versions)) return null
-  const xcode_versions = [...new Set(versions.filter((version): version is string => typeof version === 'string' && MACHINE_VERSION_RE.test(version)))]
+  const xcode_versions = [...new Set(versions.filter((version): version is string => typeof version === 'string' && MACHINE_VERSION_RE.test(version)))].sort(compareVersionsDesc)
   return { default_xcode_major: typeof major === 'string' && /^\d{1,3}$/.test(major) ? major : null, xcode_versions }
 }
 

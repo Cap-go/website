@@ -56,6 +56,24 @@ test('serves the builder list cached for a day', async () => {
   expect(calls).toHaveLength(1)
 })
 
+test('sorts versions newest first by number', () => {
+  expect(normalizeBuilderVariants({ xcodeVersions: ['9.4', '26.1', '26.10', '27', '26.2'] }).xcode_versions).toEqual(['27', '26.10', '26.2', '26.1', '9.4'])
+})
+
+test('keeps serving the last good list when a refresh fails or comes back empty', async () => {
+  const good = upstream(builderPayload)
+  expect((await handleBuilderVariants(request(), env, undefined, good.fetchImpl)).status).toBe(200)
+  // The day is over: only the stale copy is left.
+  store.delete('https://capgo.app/builder-variants.json')
+
+  for (const failing of [upstream({}, 500), upstream({ defaultXcodeMajor: '26', xcodeVersions: [] })]) {
+    const response = await handleBuilderVariants(request(), env, undefined, failing.fetchImpl)
+    expect(response.status).toBe(200)
+    expect((await response.json()).xcode_versions).toEqual(['27.1', '26.2', '26.1'])
+    expect(failing.calls).toHaveLength(1)
+  }
+})
+
 test('the page reads back what the worker serves', async () => {
   const served = await (await handleBuilderVariants(request(), env, undefined, upstream(builderPayload).fetchImpl)).json()
   expect(readBuilderVariants(served)).toEqual(served)
