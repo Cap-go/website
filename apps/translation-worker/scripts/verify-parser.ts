@@ -1751,6 +1751,10 @@ try {
     (await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml('<meta name="robots" content="noindex, follow">'))) === 'noindex',
     'A noindex page was translated',
   )
+  assert(
+    (await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml('<meta name=robots content=noindex>'))) === 'noindex',
+    'A noindex page with unquoted attributes was translated',
+  )
   __translationWorkerTest.seedSitemapPathsForTest(null)
   let sitemapFailed = false
   await __translationWorkerTest.untranslatablePageReason(sitemapEnv({}), gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml()).catch(() => {

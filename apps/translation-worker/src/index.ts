@@ -3632,10 +3632,15 @@ async function englishSitemapPaths(env: Env, request: Request, requestUrl: URL):
   return paths
 }
 
+function metaAttribute(tag: string, name: string): string | undefined {
+  const match = new RegExp(`\\b${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'>]+))`, 'i').exec(tag)
+  return match ? (match[1] ?? match[2] ?? match[3]) : undefined
+}
+
 function hasNoindexRobots(html: string): boolean {
   for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = match[0]
-    if (/\bname\s*=\s*["']?robots["']?/i.test(tag) && /\bcontent\s*=\s*["'][^"']*noindex/i.test(tag)) return true
+    if (/^(?:robots|googlebot)$/i.test(metaAttribute(tag, 'name') ?? '') && /\b(?:noindex|none)\b/i.test(metaAttribute(tag, 'content') ?? '')) return true
   }
   return false
 }
@@ -3677,12 +3682,8 @@ async function refreshCacheIncrementally(
   }
 
   const sourceHash = await translationSourceHash(locale, source.sourceHtml)
-  const existing = await readStoredTranslatedResponse(env, requestUrl, locale)
-  if (existing?.ok && isHtmlResponse(existing) && readTranslationSourceHash(existing) === sourceHash) {
-    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, toCachedResponse(existing, sourceHash))
-    await deletePartialTranslationStateSafely(env, requestUrl, locale)
-    return true
-  }
+  // Checked before reusing a stored translation, so a page that leaves the sitemap or
+  // gains noindex stops being served in this locale.
   const skipReason = await untranslatablePageReason(env, renderRequest, requestUrl, source.sourceHtml)
   if (skipReason) {
     // Not a real public page: send visitors to the English page and keep the redirect
@@ -3690,6 +3691,12 @@ async function refreshCacheIncrementally(
     console.log('Translation skipped', { pathname: requestUrl.pathname, locale, reason: skipReason })
     const cachedResponse = toCachedResponse(englishPageRedirect(requestUrl), sourceHash)
     await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
+    await deletePartialTranslationStateSafely(env, requestUrl, locale)
+    return true
+  }
+  const existing = await readStoredTranslatedResponse(env, requestUrl, locale)
+  if (existing?.ok && isHtmlResponse(existing) && readTranslationSourceHash(existing) === sourceHash) {
+    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, toCachedResponse(existing, sourceHash))
     await deletePartialTranslationStateSafely(env, requestUrl, locale)
     return true
   }
