@@ -93,10 +93,10 @@ export function buildPricingFaqSections(locale: Locales, urls: PricingFaqUrls): 
           answer: '',
           paragraphs: [
             { text: m.mau_counting_explanation({}, { locale }) },
+            { text: m.capgo_usage_explanation({}, { locale }) },
             {
               text: '',
               link: {
-                beforeLink: m.capgo_usage_explanation({}, { locale }),
                 href: docsNativeBuildsUrl,
                 label: m.pricing_faq_native_builds_usage_link({}, { locale }),
               },

@@ -1293,7 +1293,7 @@ const messages = {
   capgo_is_used_to_update_its_own_apps_allowing_us_to_continuously_improve_and_refine_our_product_through_real_world_usage:
     'Capgo is used to update its own apps, allowing us to continuously improve and refine our product through real-world usage.',
   capgo_usage_explanation:
-    'You can exclude development builds and emulators from production update channels. That controls update delivery, not MAU: a build can still count when it contacts Capgo. To keep it out of production usage, build it with live updates disabled and do not call Capgo endpoints. Learn more about this',
+    'You can exclude development builds and emulators from production update channels. That controls update delivery, not MAU: a build can still count when it contacts Capgo. To keep it out of production usage, build it with live updates disabled and do not call Capgo endpoints.',
   capgo_was_born_from_a_real_need_in_the_developer_community: 'Capgo was born from a real need in the developer community.',
   capwesome_hero_title: 'Capawesome alternative for Capacitor live updates',
   capwesome_meta_description: 'Compare Capawesome Cloud and Capgo for Capacitor live updates, builds, and pricing. Optional E2E encryption Capgo cannot read when enabled.',
@@ -2510,7 +2510,7 @@ const messages = {
   here: 'here.',
   pricing_faq_bundle_storage_docs_link: 'How bundle storage works',
   pricing_faq_mau_docs_link: 'How MAU is counted',
-  pricing_faq_native_builds_usage_link: 'native builds usage documentation',
+  pricing_faq_native_builds_usage_link: 'Test native builds without live updates',
   hero_secondary_cta: 'See live updates',
   hero_subtitle_line2: 'Protect users with channels, rollback, logs, and CLI checks.',
   hero_subtitle_part1: 'Ship JS and asset fixes in minutes.',

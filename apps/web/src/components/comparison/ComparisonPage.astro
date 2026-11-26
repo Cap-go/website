@@ -161,10 +161,10 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
               <a
                 class="cmp-card-link"
                 href={item.href}
-                aria-label={m.compare_rank_link_aria({ name: item.name }, { locale })}
+                aria-label={item.external ? item.name : m.compare_rank_link_aria({ name: item.name }, { locale })}
                 {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
-                {m.compare_rank_link({ name: item.name }, { locale })} →
+                {item.external ? item.name : m.compare_rank_link({ name: item.name }, { locale })} →
               </a>
             </li>
           ))}
