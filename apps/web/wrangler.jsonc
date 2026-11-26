@@ -27,6 +27,7 @@
   "vars": {
     "LIVE_UPDATE_METRICS_URL": "https://api.capgo.app/private/website_stats/live_updates",
     "BUILDER_METRICS_URL": "https://builder.capgo.app/stats/public",
+    "BUILDER_VARIANTS_URL": "https://builder.capgo.app/variants/public",
   },
   // auth.md agent registration on capgo.app is served by the API worker (see src/worker/agent-auth-proxy.ts).
   "services": [
@@ -53,6 +54,7 @@
     "vars": {
       "LIVE_UPDATE_METRICS_URL": "https://api.capgo.app/private/website_stats/live_updates",
       "BUILDER_METRICS_URL": "https://builder-preprod.capgo.app/stats/public",
+      "BUILDER_VARIANTS_URL": "https://builder-preprod.capgo.app/variants/public",
     },
     "r2_buckets": [{ "binding": "TRANSLATION_STORE", "bucket_name": "capgo-translation-cache-development" }],
     "ratelimits": [
@@ -76,6 +78,7 @@
       "vars": {
         "LIVE_UPDATE_METRICS_URL": "https://api.capgo.app/private/website_stats/live_updates",
         "BUILDER_METRICS_URL": "https://builder-preprod.capgo.app/stats/public",
+        "BUILDER_VARIANTS_URL": "https://builder-preprod.capgo.app/variants/public",
       },
       "routes": [
         {
