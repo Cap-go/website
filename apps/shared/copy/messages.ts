@@ -6604,7 +6604,7 @@ const messages = {
   why_live_updates_description:
     'Five reasons Capacitor teams ship JavaScript, HTML, and CSS fixes through Capgo live updates instead of waiting on app store review.',
   why_live_updates_hero_answer:
-    'Capgo delivers signed, encrypted web bundles to production Capacitor apps through channels, so your team can fix users without a new store build.',
+    'Capgo delivers signed web bundles to production Capacitor apps through channels, with optional end-to-end encryption, so your team can fix users without a new store build.',
   why_live_updates_h1: '5 reasons to ship your Capacitor updates live with Capgo',
   why_live_updates_keywords:
     'Capacitor live updates, OTA updates, Capgo, app store review, rollback, release channels',
@@ -6618,10 +6618,10 @@ const messages = {
     'When a release misbehaves, you need to recover faster than another store submission. Capgo can roll back automatically if a bundle fails to start. From the cloud dashboard you can also roll back instantly with one click.',
   why_live_updates_reason3_title: 'Automatic rollback and one-click revert',
   why_live_updates_reason4_body:
-    'Signed bundles limit tampering in transit. Capgo applies checksumming, signing, and end-to-end encryption for bundles. The updater plugin exposes a publicKey setting for live update encryption version 2 on iOS, Android, and Electron.',
+    'Signed bundles limit tampering in transit. Capgo applies checksumming and signing to bundles. With end-to-end encryption enabled, bundles are also encrypted with your keys before upload. The updater plugin exposes a publicKey setting for live update encryption version 2 on iOS, Android, and Electron.',
   why_live_updates_reason4_title: 'End-to-end encryption for bundles',
   why_live_updates_reason5_body:
-    'Stay inside store rules by updating only the Capacitor web layer while native code still follows the normal release path. Read how OTA fits alongside store review on the <a href="{liveUpdateUrl}">Capgo Live Update product page</a> and in the <a href="{updaterDocsUrl}">Capacitor updater plugin documentation</a>. The open-source updater plugin and Capgo plugins are free under MPL-2.0.',
+    'Stay inside store rules by updating only the Capacitor web layer while native code still follows the normal release path. Web-layer changes that add material functionality still need a normal store release, the same limit described in Capgo store compliance FAQs. Read how OTA fits alongside store review on the <a href="{liveUpdateUrl}">Capgo Live Update product page</a> and in the <a href="{updaterDocsUrl}">Capacitor updater plugin documentation</a>. The open-source updater plugin and Capgo plugins are free under MPL-2.0.',
   why_live_updates_reason5_title: 'Web-layer updates that respect store policy',
   why_live_updates_seo_title: '5 reasons to ship Capacitor live updates with Capgo',
   why_page_compare_title: 'How this compares to CodePush and Appflow',
