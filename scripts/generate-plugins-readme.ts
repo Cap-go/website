@@ -221,7 +221,7 @@ ${capgoCloudSection}
 
 A collection of high-quality Capacitor plugins maintained by [Capgo](https://capgo.app).
 
-**Total Plugins:** ${sortedPlugins.length} | **Monthly Downloads:** ${formatNumber(
+**[Plugin directory](https://capgo.app/plugins/)** | **Monthly Downloads:** ${formatNumber(
   Object.values(npmDownloads).reduce((sum, d) => sum + d, 0),
 )} | **GitHub Stars:** ${formatNumber(Object.values(githubStars).reduce((sum, s) => sum + s, 0))}
 
