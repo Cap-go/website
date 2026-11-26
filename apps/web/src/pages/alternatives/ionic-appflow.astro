@@ -5,6 +5,7 @@ import { productTestimonials } from '@/config/productTestimonials'
 import { productVideos } from '@/config/productVideos'
 import m from '@/copy/messages'
 import { pageDates, toIsoDate } from '@/data/pageDates'
+import { breadcrumbGraphOptions, buildAlternativesPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -14,6 +15,7 @@ const config = Astro.locals.runtimeConfig.public
 const title = m.capflow_title({}, { locale })
 const description = m.capflow_meta_description({}, { locale })
 const competitor = 'Ionic Appflow'
+const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, competitor, 'alternatives/ionic-appflow/')
 
 const faq = [
   { question: m.appflow_faq_q1({}, { locale }), answer: m.appflow_faq_a1({}, { locale }) },
@@ -35,6 +37,7 @@ const ldJSON = createLdJsonGraph(
   }),
   {
     includeOrganization: true,
+    ...breadcrumbGraphOptions(breadcrumbCrumbs),
     additionalEntities: [
       createWebPageLdJson(config, {
         name: title,

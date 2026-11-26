@@ -1,0 +1,76 @@
+---
+import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
+import Layout from '@/layouts/Layout.astro'
+import m from '@/copy/messages'
+import { builderSolutionHubLinks, solutionHubLinks } from '@/data/solutionHubLinks'
+import { breadcrumbGraphOptions, buildSectionHubBreadcrumbs } from '@/lib/pageBreadcrumbs'
+import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+const title = `${config.brand} | ${m.solutions({}, { locale })}`
+const description = m.solnav_teams_tagline({}, { locale })
+const pagePath = 'solutions/'
+const pageUrl = getAbsoluteLocaleUrl(config.baseUrl, locale, pagePath)
+const hubBreadcrumbs = buildSectionHubBreadcrumbs(locale, config.baseUrl, pagePath, m.solutions({}, { locale }))
+
+const hubLinks = [
+  ...solutionHubLinks.map((item) => ({
+    name: m[item.labelKey]({}, { locale }),
+    url: getRelativeLocaleUrl(locale, item.path),
+  })),
+  ...builderSolutionHubLinks.map((item) => ({
+    name: item.name,
+    url: getRelativeLocaleUrl(locale, item.path),
+  })),
+]
+
+const webPage = createWebPageLdJson(config, {
+  name: title,
+  description,
+  url: pageUrl,
+  inLanguage: locale,
+})
+
+const content = {
+  title,
+  description,
+  canonical: pageUrl,
+  ldJSON: createLdJsonGraph(config, webPage, {
+    includeOrganization: true,
+    ...breadcrumbGraphOptions(hubBreadcrumbs),
+    additionalEntities: [
+      createItemListLdJson(config, {
+        url: pageUrl,
+        name: m.solutions({}, { locale }),
+        items: hubLinks.map((link) => ({
+          name: link.name,
+          url: new URL(link.url, config.baseUrl).href,
+        })),
+      }),
+    ],
+  }),
+}
+---
+
+<Layout content={content}>
+  <div class="product-hero">
+    <section class="relative overflow-hidden py-16 sm:py-24">
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <PageBreadcrumbs items={hubBreadcrumbs} class="mb-8" />
+        <h1 class="text-4xl font-bold text-white sm:text-5xl">{m.solutions({}, { locale })}</h1>
+        <p class="mt-4 max-w-2xl text-lg text-gray-300">{description}</p>
+        <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {hubLinks.map((link) => (
+            <li>
+              <a href={link.url} class="block rounded-xl border border-white/10 bg-white/3 px-4 py-3 text-white transition hover:border-white/25 hover:bg-white/6">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -18,7 +18,6 @@ const BLOG_NESTED_SEGMENT_PATTERN = /^\/blog\/([^/]+)\/([^/]+)\/?$/
 const FIREBASE_PLUGIN_PATH_PATTERN = /^\/plugins\/(capacitor-firebase-[^/]+)\/?$/
 
 const STATIC_NOT_FOUND_REDIRECTS: Record<string, string> = {
-  '/solutions': '/solutions/startups/',
   '/live-updates': '/docs/live-updates/',
   '/cli': '/docs/cli/',
 }

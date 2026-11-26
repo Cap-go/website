@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
 import { pageDates, toIsoDate } from '@/data/pageDates'
+import { breadcrumbGraphOptions, buildAlternativesPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -15,6 +16,7 @@ const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update')
 const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build')
 const ciCdUrl = getRelativeLocaleUrl(locale, 'ci_cd')
 const competitor = 'Expo Application Services'
+const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, competitor, 'alternatives/expo/')
 
 const faq = [
   { question: m.compare_expo_faq_q1({}, { locale }), answer: m.compare_expo_faq_a1({}, { locale }) },
@@ -80,6 +82,7 @@ const content = {
     }),
     {
       includeOrganization: true,
+      ...breadcrumbGraphOptions(breadcrumbCrumbs),
       additionalEntities: [
         createFAQPageLdJson(config, {
           url: pageUrl,

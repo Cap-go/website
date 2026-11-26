@@ -7,8 +7,10 @@ import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import SenjaResize from '@/components/SenjaResize.astro'
 import type { ProductTestimonial } from '@/config/productTestimonials'
+import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
 import m from '@/copy/messages'
 import { formatPageDate } from '@/data/pageDates'
+import { buildAlternativesPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 
 export type ComparisonRowId = 'pricing' | 'ota' | 'native_builds' | 'frameworks' | 'open_source' | 'rollback' | 'support' | 'company'
 
@@ -84,6 +86,9 @@ const websiteRepoUrl = 'https://github.com/Cap-go/website'
 const sourceFileUrl = sourceFile ? `${websiteRepoUrl}/blob/main/${sourceFile}` : undefined
 
 const locale = Astro.locals.locale
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const pathname = Astro.url.pathname
+const breadcrumbs = buildAlternativesPageBreadcrumbs(locale, baseUrl, competitor, pathname.replace(/^\//, ''))
 
 const rowOrder: Array<{ id: ComparisonRowId; label: string; capgo: string }> = [
   { id: 'pricing', label: m.compare_row_pricing({}, { locale }), capgo: m.compare_capgo_pricing({}, { locale }) },
@@ -103,6 +108,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
 <div class="lu bg-ad cmp">
   <section class="section hero cmp-hero bg-grid grain" id="top">
     <div class="shell">
+      <PageBreadcrumbs items={breadcrumbs} class="mb-6" />
       <div class="beta-badge">
         <span class="dot" aria-hidden="true"></span>
         {eyebrow}

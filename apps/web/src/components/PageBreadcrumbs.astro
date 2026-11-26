@@ -1,0 +1,34 @@
+---
+import type { PageBreadcrumb } from '@/lib/pageBreadcrumbs'
+
+interface Props {
+  items: PageBreadcrumb[]
+  class?: string
+}
+
+const { items, class: className = '' } = Astro.props
+---
+
+{items.length >= 2 && (
+  <nav aria-label="Breadcrumb" class={className}>
+    <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-400">
+      {items.map((crumb, index) => (
+        <li class="flex items-center gap-x-2">
+          {index > 0 && <span aria-hidden="true">&gt;</span>}
+          {index === items.length - 1 ? (
+            <span aria-current="page" class="text-gray-200">
+              {crumb.name}
+            </span>
+          ) : (
+            <a
+              href={new URL(crumb.url).pathname}
+              class="rounded-sm transition hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {crumb.name}
+            </a>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

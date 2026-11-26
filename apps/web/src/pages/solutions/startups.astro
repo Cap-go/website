@@ -1,4 +1,5 @@
 ---
+import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
@@ -9,6 +10,7 @@ import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
+import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
 
@@ -88,8 +90,12 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const breadcrumbName = m.solutions_startups_short({}, { locale })
+const breadcrumbCrumbs = buildSolutionsPageBreadcrumbs(locale, Astro.locals.runtimeConfig.public.baseUrl, breadcrumbName, 'solutions/startups/')
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  ...breadcrumbGraphOptions(breadcrumbCrumbs),
   additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
@@ -109,6 +115,10 @@ const content = { title, description, ldJSON }
 
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
+        <div class="mb-6 text-left sm:text-center">
+          <PageBreadcrumbs items={breadcrumbCrumbs} />
+        </div>
+
           <div class="mb-8 inline-flex items-center rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-200">
             <svg aria-hidden="true" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>

@@ -1,4 +1,5 @@
 ---
+import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageKey, type MessageValues } from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
@@ -9,6 +10,7 @@ import SignupCta from '@/components/SignupCta.astro'
 import OfferText from '@/components/OfferText.astro'
 import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
+import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -99,8 +101,12 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const breadcrumbName = m.solutions_webapp_to_mobile_short({}, { locale })
+const breadcrumbCrumbs = buildSolutionsPageBreadcrumbs(locale, Astro.locals.runtimeConfig.public.baseUrl, breadcrumbName, 'solutions/webapp-to-mobile/')
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  ...breadcrumbGraphOptions(breadcrumbCrumbs),
   additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
@@ -187,6 +193,10 @@ If the Capgo MCP is not connected or you cannot run local tools, create a clean 
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-center">
           <div class="min-w-0">
+        <div class="mb-6 text-left sm:text-center">
+          <PageBreadcrumbs items={breadcrumbCrumbs} />
+        </div>
+
             <p class="inline-flex min-h-11 items-center rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-4 text-base font-semibold text-cyan-100 sm:text-sm">
               {copy('solutions_webapp_to_mobile_badge')}
             </p>
