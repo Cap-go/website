@@ -3640,7 +3640,7 @@ function metaAttribute(tag: string, name: string): string | undefined {
 function hasNoindexRobots(html: string): boolean {
   for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = match[0]
-    if (/^(?:robots|googlebot)$/i.test(metaAttribute(tag, 'name') ?? '') && /\b(?:noindex|none)\b/i.test(metaAttribute(tag, 'content') ?? '')) return true
+    if (/^(?:robots|googlebot)$/i.test(metaAttribute(tag, 'name') ?? '') && (metaAttribute(tag, 'content') ?? '').split(',').some((directive) => /^(?:noindex|none)$/i.test(directive.trim()))) return true
   }
   return false
 }
