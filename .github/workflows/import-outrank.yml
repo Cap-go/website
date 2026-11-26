@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: outrank-import-${{ github.event.client_payload.timestamp || github.run_id }}
@@ -112,3 +113,15 @@ jobs:
           git commit -m "chore: import Outrank articles"
           git pull --rebase origin "$default_branch"
           git push origin "HEAD:$default_branch"
+
+      - name: Open issue on import failure
+        if: failure()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Outrank import failed (run $GITHUB_RUN_ID)" \
+            --body "The Outrank import workflow failed and articles may not have been published. Run: $RUN_URL (event: $GITHUB_EVENT_NAME). Check the failing step, fix it, and re-run the import with the original payload."
