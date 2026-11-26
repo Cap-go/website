@@ -1757,6 +1757,17 @@ try {
     sitemapFailed = true
   })
   assert(sitemapFailed, 'A missing sitemap did not fail so the queue retries later')
+  for (const [label, pages] of [
+    ['empty', { '/sitemap-index.xml': '<sitemapindex><sitemap><loc>https://capgo.app/sitemap-0.xml</loc></sitemap></sitemapindex>', '/sitemap-0.xml': '<urlset></urlset>' }],
+    ['soft-404', { '/sitemap-index.xml': '<sitemapindex><sitemap><loc>https://capgo.app/sitemap-0.xml</loc></sitemap></sitemapindex>', '/sitemap-0.xml': '<!doctype html><html><body>Not found</body></html>' }],
+  ] as const) {
+    __translationWorkerTest.seedSitemapPathsForTest(null)
+    let failed = false
+    await __translationWorkerTest.untranslatablePageReason(sitemapEnv(pages), gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml()).catch(() => {
+      failed = true
+    })
+    assert(failed, `An ${label} sitemap did not fail so the queue retries later`)
+  }
   __translationWorkerTest.seedSitemapPathsForTest('all')
 }
 console.log('Sitemap gate checks passed')
