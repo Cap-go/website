@@ -13,7 +13,7 @@ import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson
 import m from '@/copy/messages'
 import { getPluginRepoStats, getPluginsWithStars, getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
-import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
+import { getPluginDocsSlugs, getPluginPageHref, resolvePluginDocsSlug } from '@/services/pluginDocs'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
@@ -655,7 +655,7 @@ const secondaryButtonClass =
               {relatedPlugins.map((related) => (
                 <li>
                   <a
-                    href={getRelativeLocaleUrl(locale, `plugins/${getSlug(related.href)}`)}
+                    href={getPluginPageHref(related, docsSlugs, getRelativeLocaleUrl, locale)}
                     class:list={[cardClass, 'flex h-full cursor-pointer gap-4 p-5 transition hover:border-white/20 hover:bg-white/[0.05]']}
                   >
                     {related.icon && <PluginIcon icon={related.icon} name={related.title} className="shrink-0" />}

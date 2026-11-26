@@ -107,7 +107,7 @@ Capgo also says differential updates can reduce update payload size by up to 95%
 
 Automatic rollback deserves a direct check. The research findings identify Capawesome Cloud as offering built-in automatic rollback, while Capgo and OtaKit require manual intervention for rollback. If your team uses a manual path, assign an owner and rehearse the steps before production. A rollback plan that nobody has tried is only a note.
 
-For broader release safety, the [Ionic live update service overview](<https://capgo.app/blog/best-ionic-live-update-service>) covers channels, rollback, analytics, and the limits of web-layer updates.
+For broader release safety, the [Ionic live update service overview](/blog/best-live-update-tools-for-capacitor-apps/) covers channels, rollback, analytics, and the limits of web-layer updates.
 
 ![Mobile developers monitoring a staged Ionic app update and preparing rollback.](https://rebelgrowth.s3.us-east-1.amazonaws.com/blog-images/best-tools-for-maintaining-legacy-ionic-apps-2.webp)
 
