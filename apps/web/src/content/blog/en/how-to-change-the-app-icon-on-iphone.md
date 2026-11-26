@@ -125,7 +125,7 @@ A few practical notes matter:
 - **Limited for custom artwork:** You can style icons, but you can't point an app to any random image from your Photos library through this menu.
 - **Safer for daily-use apps:** Mail, Messages, and other badge-heavy apps behave more naturally when you leave them as real app icons.
 
-If you're pairing icon tinting with wallpaper and widgets, pick a wallpaper first. For bright cyberpunk or night-mode layouts, [the neon aesthetic guide](https://gifpaper.com/aesthetics/neon-aesthetic/) is a useful reference for color direction before you start tinting icons. The optional **Tinted** eyedropper can sample a color from it so the icons match your theme.
+If you're pairing icon tinting with wallpaper and widgets, pick a wallpaper first. The optional **Tinted** eyedropper can sample a color from it so the icons match your theme. For bright cyberpunk or night-mode layouts, [the neon aesthetic guide](https://gifpaper.com/aesthetics/neon-aesthetic/) is a useful reference for color direction before you start tinting icons.
 
 The Shortcuts method still matters because it solves a different problem.
 

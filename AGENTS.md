@@ -55,7 +55,7 @@ bunx @tailwindcss/upgrade --force
 
 ## Outrank Imported Posts (HARD RULE)
 
-- An Outrank-imported post is any blog file first added by a `chore: import Outrank articles` commit. Check with `git log --follow --diff-filter=A --format=%s -- <file>` on a full (non-shallow) clone.
+- An Outrank-imported post is any blog file added or updated by a `chore: import Outrank articles` commit (Outrank also pushes updates to existing posts). Check on a full (non-shallow) clone with `git log --follow --format=%s -- <file> | grep -Fx 'chore: import Outrank articles'`.
 - Never remove or change outbound links in these posts. They are backlink exchanges we must keep, including during SEO rewrites. Rewrite the prose around a link if needed, but keep the link URL and anchor text.
 - Never prune, redirect, or delete an Outrank-imported post without asking Martin first.
 
