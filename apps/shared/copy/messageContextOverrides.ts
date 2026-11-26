@@ -58,4 +58,6 @@ export const messageContextOverrides = {
   brand_asset_podcast_cover_title: 'Brand page asset heading for the Capgo podcast cover art download.',
   brand_asset_podcast_cover_desc:
     'Brand page description of the 3000×3000 podcast cover art. Keep Capgo, Apple Podcasts, Spotify, and 3000×3000 unchanged.',
+  compare_rank_link_aria:
+    'Accessible aria-label on a comparison ranking card link in ComparisonPage. Describe the Capgo vs competitor comparison destination, not visible button text.',
 } as const satisfies Partial<Record<MessageKey, string>>
