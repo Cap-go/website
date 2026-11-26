@@ -1,15 +1,8 @@
 import { afterEach, beforeEach, expect, test } from 'bun:test'
-import { availableXcodeVersions, BUILDER_VARIANTS_CACHE_TTL_SECONDS, normalizeBuilderVariants, readBuilderVariants } from '../src/lib/builderVariants.ts'
+import { BUILDER_VARIANTS_CACHE_TTL_SECONDS, normalizeBuilderVariants, readBuilderVariants } from '../src/lib/builderVariants.ts'
 import { handleBuilderVariants } from '../src/worker/builder-variants.ts'
 
-const builderPayload = {
-  defaultXcodeMajor: '26',
-  variants: [
-    { platform: 'ios', id: 'xcode-27.1-linux', xcodeVersion: '27.1', macosVersion: null, backend: 'linux', default: false },
-    { platform: 'ios', id: 'xcode-26.2-macos-26.1', xcodeVersion: '26.2', macosVersion: '26.1', backend: 'mac', default: true },
-    { platform: 'ios', id: 'xcode-26.2-macos-26.2', xcodeVersion: '26.2', macosVersion: '26.2', backend: 'mac', default: true },
-  ],
-}
+const builderPayload = { defaultXcodeMajor: '26', xcodeVersions: ['27.1', '26.2', '26.1'] }
 
 let previousCaches
 let store
@@ -42,15 +35,10 @@ const env = { BUILDER_VARIANTS_URL: 'https://builder.example.test/variants/publi
 const request = () => new Request('https://capgo.app/builder-variants.json')
 
 test('normalizes the builder list and keeps only safe versions', () => {
-  const normalized = normalizeBuilderVariants({
-    ...builderPayload,
-    variants: [...builderPayload.variants, { id: 'bad', xcodeVersion: '26; rm -rf /', macosVersion: null, backend: 'mac' }, { id: 'x', xcodeVersion: '26', backend: 'windows' }],
-  })
-  expect(normalized.default_xcode_major).toBe('26')
-  expect(normalized.variants.map((v) => v.id)).toEqual(['xcode-27.1-linux', 'xcode-26.2-macos-26.1', 'xcode-26.2-macos-26.2'])
-  expect(normalized.variants[1]).toEqual({ id: 'xcode-26.2-macos-26.1', xcode_version: '26.2', macos_version: '26.1', backend: 'mac', default: true })
-  expect(availableXcodeVersions(normalized.variants)).toEqual(['27.1', '26.2'])
-  expect(normalizeBuilderVariants({ variants: 'nope' })).toBeNull()
+  const normalized = normalizeBuilderVariants({ defaultXcodeMajor: '26', xcodeVersions: ['27.1', '26.2', '26.2', '26; rm -rf /', 26, null] })
+  expect(normalized).toEqual({ default_xcode_major: '26', xcode_versions: ['27.1', '26.2'] })
+  expect(normalizeBuilderVariants({ defaultXcodeMajor: 'x', xcodeVersions: [] })).toEqual({ default_xcode_major: null, xcode_versions: [] })
+  expect(normalizeBuilderVariants({ xcodeVersions: 'nope' })).toBeNull()
 })
 
 test('serves the builder list cached for a day', async () => {
@@ -59,7 +47,7 @@ test('serves the builder list cached for a day', async () => {
   expect(response.status).toBe(200)
   expect(response.headers.get('Cache-Control')).toContain(`max-age=${BUILDER_VARIANTS_CACHE_TTL_SECONDS}`)
   expect(BUILDER_VARIANTS_CACHE_TTL_SECONDS).toBe(86400)
-  expect((await response.json()).variants).toHaveLength(3)
+  expect(await response.json()).toEqual({ default_xcode_major: '26', xcode_versions: ['27.1', '26.2', '26.1'] })
   expect(calls).toEqual(['https://builder.example.test/variants/public'])
 
   // Second read within the day comes from the cache, not the builder.
@@ -70,15 +58,13 @@ test('serves the builder list cached for a day', async () => {
 
 test('the page reads back what the worker serves', async () => {
   const served = await (await handleBuilderVariants(request(), env, undefined, upstream(builderPayload).fetchImpl)).json()
-  const read = readBuilderVariants(served)
-  expect(read).toEqual(served)
-  expect(availableXcodeVersions(read.variants)).toEqual(['27.1', '26.2'])
-  expect(readBuilderVariants({ variants: [{ id: 'x', xcode_version: '26 && curl', backend: 'mac' }] }).variants).toEqual([])
+  expect(readBuilderVariants(served)).toEqual(served)
+  expect(readBuilderVariants({ xcode_versions: ['26 && curl'] }).xcode_versions).toEqual([])
   expect(readBuilderVariants(null)).toBeNull()
 })
 
 test('is unavailable when misconfigured or the builder fails', async () => {
   expect((await handleBuilderVariants(request(), {})).status).toBe(503)
   expect((await handleBuilderVariants(request(), env, undefined, upstream({}, 500).fetchImpl)).status).toBe(503)
-  expect((await handleBuilderVariants(request(), env, undefined, upstream({ defaultXcodeMajor: '26', variants: [] }).fetchImpl)).status).toBe(503)
+  expect((await handleBuilderVariants(request(), env, undefined, upstream({ defaultXcodeMajor: '26', xcodeVersions: [] }).fetchImpl)).status).toBe(503)
 })

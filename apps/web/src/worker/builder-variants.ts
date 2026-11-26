@@ -19,7 +19,7 @@ export async function handleBuilderVariants(request: Request, env: BuilderVarian
     async () => {
       const variants = normalizeBuilderVariants(await fetchUpstreamJson(url, fetchImpl))
       // An empty or malformed answer must not replace the last good list.
-      if (!variants || variants.variants.length === 0) throw new Error('Invalid builder variants payload')
+      if (!variants || variants.xcode_versions.length === 0) throw new Error('Invalid builder variants payload')
       return variants
     },
     'Builder variants are temporarily unavailable',

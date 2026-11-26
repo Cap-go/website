@@ -5489,7 +5489,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
   </style>
 
   <script>
-    import { availableXcodeVersions, readBuilderVariants } from '@/lib/builderVariants'
+    import { readBuilderVariants } from '@/lib/builderVariants'
 
     // ----------------------------------------------------------------
     // XCODE VARIANTS — live list from the builder (cached a day by the worker)
@@ -5502,7 +5502,7 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       try {
         const response = await fetch(endpoint, { headers: { Accept: 'application/json' } })
         if (!response.ok) return
-        const versions = availableXcodeVersions(readBuilderVariants(await response.json())?.variants ?? [])
+        const versions = readBuilderVariants(await response.json())?.xcode_versions ?? []
         if (!versions.length) return
         list.replaceChildren(
           ...versions.map((version) => {
