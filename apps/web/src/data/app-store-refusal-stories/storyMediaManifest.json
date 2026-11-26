@@ -388,5 +388,13 @@
     "width": 2047,
     "height": 570
   },
-  "health-pre-permission-screen-with-not-right-now-button-rejected-5-1-1-iv": null
+  "health-pre-permission-screen-with-not-right-now-button-rejected-5-1-1-iv": null,
+  "ipad-reviewer-could-not-find-subscriptions-2-1-b-paywall-only-after-onboarding": null,
+  "home-inventory-app-sent-back-name-taken-and-looked-like-every-other-one": null,
+  "buy-button-loading-forever-and-same-promo-image-on-five-subscriptions": {
+    "src": "/app-store-refusal-horror-story/screenshots/buy-button-loading-forever-and-same-promo-image-on-five-subscriptions.webp",
+    "alt": "App Store Connect message saying Changes needed for an iOS app, with the app name and icon hidden",
+    "width": 1396,
+    "height": 500
+  }
 }
