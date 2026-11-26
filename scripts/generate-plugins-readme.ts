@@ -6,7 +6,19 @@
  * Run with: bun run scripts/generate-plugins-readme.ts
  */
 
+import { globSync } from 'glob'
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { pluginMarketingRedirectsToDocs } from '../apps/shared/pluginMarketingRedirects'
 import { actions } from '../apps/web/src/config/plugins'
+import { resolvePluginDocsSlug } from '../apps/web/src/services/pluginDocs'
+
+const docsContentRoot = resolve(fileURLToPath(new URL('../apps/docs/src/content/docs/', import.meta.url)))
+const docsSlugs = new Set(
+  globSync('**/plugins/*/index.{md,mdx}', { cwd: docsContentRoot, nodir: true })
+    .map((filePath) => filePath.replaceAll('\\', '/').split('/plugins/')[1]?.split('/')[0])
+    .filter(Boolean),
+)
 
 // Load the data files
 const starsPath = new URL('../apps/web/src/data/github-stars.json', import.meta.url).pathname
@@ -59,11 +71,21 @@ const capgoCloudCards: CardData[] = [
   },
 ]
 
-// Match apps/web/src/services/github.ts getSlug(): plugin routes use the final href segment.
-// Monorepo package URLs intentionally resolve to package pages like /plugins/analytics/.
-const getPluginSlug = (href: string): string => {
-  const normalizedHref = href.replace(/\/$/, '')
-  return normalizedHref.substring(normalizedHref.lastIndexOf('/') + 1).toLowerCase()
+const getPluginSlug = (card: Pick<CardData, 'href' | 'name'>): string => {
+  if (card.name?.includes('/')) return card.name.split('/')[1]!
+  const normalizedHref = card.href.replace(/\/$/, '')
+  const repoHref = normalizedHref.includes('/tree/') ? normalizedHref.slice(0, normalizedHref.indexOf('/tree/')) : normalizedHref
+  return repoHref.slice(repoHref.lastIndexOf('/') + 1).toLowerCase()
+}
+
+const getPluginDocsUrl = (card: CardData): string => {
+  if (card.docsUrl) return card.docsUrl
+  const slug = getPluginSlug(card)
+  const marketingRedirect = pluginMarketingRedirectsToDocs(slug)
+  if (marketingRedirect) return `https://capgo.app${marketingRedirect}`
+  const docsSlug = resolvePluginDocsSlug({ href: card.href, name: card.name }, docsSlugs)
+  if (docsSlug) return `https://capgo.app/docs/plugins/${docsSlug}/`
+  return `https://capgo.app/plugins/${slug}/`
 }
 
 // Generate HTML table rows (3 plugins per row)
@@ -71,7 +93,7 @@ const generatePluginCard = (card: CardData): string => {
   const code = card.code ?? card.name
   const npmPackage = card.npmPackage ?? card.name
   const npmUrl = npmPackage ? `https://www.npmjs.com/package/${npmPackage}` : undefined
-  const docsUrl = card.docsUrl ?? `https://capgo.app/plugins/${getPluginSlug(card.href)}/`
+  const docsUrl = getPluginDocsUrl(card)
   const repoPath = card.href.replace('https://github.com/', '').replace(/\/$/, '').split('/tree/')[0]
 
   const badges: string[] = []

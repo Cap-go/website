@@ -12,6 +12,7 @@ import m from '@/copy/messages'
 import { getSlug, getPluginsWithStars, getTotalStars, getTotalDownloads, getGitHubCommunityStats } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
 import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
+import { pluginMarketingRedirectsToDocs } from '../../../shared/pluginMarketingRedirects'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -87,7 +88,10 @@ const plugins = await Promise.all(
       ...item,
       description: await marked.parse(item.description),
       categoryLabel: categoryLabelById.get(item.category) ?? 'Plugin',
-      docsHref: tutorialHref ?? (docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href),
+      docsHref:
+        docsSlug && (!tutorialHref || pluginMarketingRedirectsToDocs(tutorialSlug))
+          ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`)
+          : tutorialHref ?? (docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href),
       hasSiteDocs: hasTutorial || Boolean(docsSlug),
     }
   }),

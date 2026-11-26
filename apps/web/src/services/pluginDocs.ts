@@ -1,4 +1,6 @@
 import type { Action } from '@/config/plugins'
+import { pluginMarketingRedirectsToDocs } from '../../../shared/pluginMarketingRedirects'
+import { getSlug } from '@/services/github'
 import { defaultLocale, locales, type Locales } from '@/services/locale'
 import { globSync } from 'glob'
 import { existsSync } from 'node:fs'
@@ -117,6 +119,20 @@ export const getPluginDocsSlugCandidates = (plugin: PluginReference): string[] =
 export const resolvePluginDocsSlug = (plugin: PluginReference, docsSlugs: Iterable<string>): string | undefined => {
   const availableSlugs = docsSlugs instanceof Set ? docsSlugs : new Set(docsSlugs)
   return getPluginDocsSlugCandidates(plugin).find((slug) => availableSlugs.has(slug))
+}
+
+export const getPluginPageHref = (
+  plugin: PluginReference,
+  docsSlugs: Iterable<string>,
+  getRelativeLocaleUrl: (locale: string, path: string) => string,
+  locale: string,
+): string => {
+  const slug = getSlug(plugin.href)
+  const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)
+  if (docsSlug && pluginMarketingRedirectsToDocs(slug)) {
+    return getRelativeLocaleUrl(locale, `docs/plugins/${docsSlug}/`)
+  }
+  return getRelativeLocaleUrl(locale, `plugins/${slug}`)
 }
 
 export const getPluginDocsSlugs = async (locale?: string): Promise<PluginDocsSlugs> => {

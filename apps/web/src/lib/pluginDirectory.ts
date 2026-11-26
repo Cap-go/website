@@ -1,6 +1,7 @@
 import { actions, pluginCount, type Plugin } from '@/config/plugins'
 import { getPluginsWithStars, getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
+import { pluginMarketingRedirectsToDocs } from '../../../shared/pluginMarketingRedirects'
 import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
 
 export interface PluginDirectoryEntry {
@@ -59,7 +60,14 @@ export const buildPluginDirectory = async (baseUrl: string, pluginPageSlugs: Rea
     const slug = getSlug(plugin.href)
     const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)
     const repositoryName = getRepositoryName(plugin.href)
-    const capgoUrl = pluginPageSlugs.has(slug) ? absoluteUrl(baseUrl, `/plugins/${slug}/`) : undefined
+    const marketingRedirect = pluginMarketingRedirectsToDocs(slug)
+    const capgoUrl = marketingRedirect
+      ? docsSlug
+        ? absoluteUrl(baseUrl, `/docs/plugins/${docsSlug}/`)
+        : undefined
+      : pluginPageSlugs.has(slug)
+        ? absoluteUrl(baseUrl, `/plugins/${slug}/`)
+        : undefined
     const docsUrl = docsSlug ? absoluteUrl(baseUrl, `/docs/plugins/${docsSlug}/`) : undefined
     const npmUrl = getNpmUrl(plugin.name)
     const searchParts = compact([plugin.title, plugin.name, slug, repositoryName, docsSlug, plugin.description])

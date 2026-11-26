@@ -30,7 +30,7 @@ faq:
     answer: "https://capgo.app/docs/plugins/native-purchases/, npm @capgo/native-purchases, GitHub Cap-go/capacitor-native-purchases."
 ---
 
-The **cordova-plugin-purchase alternative** many Capacitor teams adopt when they outgrow the `CdvPurchase.store` workflow is [`@capgo/native-purchases`](/plugins/native-purchases/). It talks to **StoreKit 2 on iOS** and **Google Play Billing 7 on Android** through promise methods such as `getProducts`, `purchaseProduct`, and `restorePurchases`, with `transactionUpdated` listeners instead of `store.when()` chains. This guide explains when that trade-off makes sense, how to install the plugin, and how to map common `cordova-plugin-purchase` calls.
+The **cordova-plugin-purchase alternative** many Capacitor teams adopt when they outgrow the `CdvPurchase.store` workflow is [`@capgo/native-purchases`](/plugins/capacitor-native-purchases/). It talks to **StoreKit 2 on iOS** and **Google Play Billing 7 on Android** through promise methods such as `getProducts`, `purchaseProduct`, and `restorePurchases`, with `transactionUpdated` listeners instead of `store.when()` chains. This guide explains when that trade-off makes sense, how to install the plugin, and how to map common `cordova-plugin-purchase` calls.
 
 ## Why teams leave cordova-plugin-purchase in new Capacitor code
 
@@ -120,7 +120,7 @@ Uninstall Cordova `cordova-plugin-purchase` or keep it only on screens you have 
 ## Links and next steps
 
 - Plugin docs: [https://capgo.app/docs/plugins/native-purchases/](/docs/plugins/native-purchases/)
-- Marketing page: [/plugins/native-purchases/](/plugins/native-purchases/)
+- Marketing page: [/plugins/capacitor-native-purchases/](/plugins/capacitor-native-purchases/)
 - npm: [https://www.npmjs.com/package/@capgo/native-purchases](https://www.npmjs.com/package/@capgo/native-purchases)
 - GitHub: [https://github.com/Cap-go/capacitor-native-purchases/](https://github.com/Cap-go/capacitor-native-purchases/)
 - cordova-plugin-purchase: [https://github.com/j3k0/cordova-plugin-purchase](https://github.com/j3k0/cordova-plugin-purchase)

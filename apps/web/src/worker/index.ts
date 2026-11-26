@@ -11,6 +11,7 @@ import { withDevHostNoindex } from '../../../shared/devHostNoindex'
 import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
+import { PLUGIN_MARKETING_REDIRECTS_TO_DOCS } from '../../../shared/pluginMarketingRedirects'
 import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRedirect'
 import { withTranslationReadiness, type TranslationStoreReader } from '../../../shared/translationReadiness'
 import { handleToolApiRequest } from '../lib/tools/api'
@@ -340,17 +341,6 @@ function redirectToAbsolute(url: string, status = 301): Response {
   return Response.redirect(url, status)
 }
 
-const PLUGIN_DOCS_REDIRECTS: Record<string, string> = {
-  'capacitor-supabase': '/docs/plugins/supabase/',
-  supabase: '/docs/plugins/supabase/',
-  'capacitor-neon': '/docs/plugins/neon/',
-  neon: '/docs/plugins/neon/',
-  'capacitor-pretty-toast': '/docs/plugins/pretty-toast/',
-  'pretty-toast': '/docs/plugins/pretty-toast/',
-  'capacitor-sheets': '/docs/plugins/sheets/',
-  sheets: '/docs/plugins/sheets/',
-}
-
 export function staticLegacyRedirect(request: Request, pathname: string): Response | null {
   // Former _redirects splat: /en/* → /:splat (must stay out of _redirects; CF dynamic-rule cap)
   if (pathname === '/en' || pathname === '/en/') {
@@ -376,7 +366,7 @@ export function staticLegacyRedirect(request: Request, pathname: string): Respon
   }
   const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
   if (pluginMatch) {
-    const docsPath = PLUGIN_DOCS_REDIRECTS[pluginMatch[1]]
+    const docsPath = PLUGIN_MARKETING_REDIRECTS_TO_DOCS[pluginMatch[1]]
     if (docsPath) {
       return redirectToPath(request, `${localePrefix}${docsPath}`)
     }
