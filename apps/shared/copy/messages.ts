@@ -1466,6 +1466,8 @@ const messages = {
   plugins_priority_body: 'Customers on any Capgo plan get their plugin bug fixes and feature requests handled first by the team that maintains them.',
   plugins_priority_cta: 'See plans',
   plugins_priority_title: 'Priority support with a Capgo plan',
+  plugins_catalog_docs_link: '{title} documentation',
+  plugins_catalog_external_docs_link: '{title} docs',
   ppp_solo_plan_answer:
     'Yes, on the Solo plan. Solo is priced by country with purchasing power parity: 15%, 30%, 40%, or 50% off in 227 countries and territories, based on World Bank 2025 price levels, and charged in your local currency. The pricing page shows the price for your country automatically. The discount follows your country, so checkout needs a card and billing address from there; a VPN alone does not unlock it. Maker, Team, and Enterprise are the same price everywhere.',
   pricing_compare_col_capgo: 'Capgo',
@@ -2942,7 +2944,9 @@ const messages = {
   live_update_platform_cordova_text: 'Keep your Cordova toolchain and still get Capgo OTA on iOS 7+ and Android 13+ with @capgo/cordova-updater and the same JavaScript API.',
   live_update_platform_electron_title: 'Electron',
   live_update_platform_electron_text: 'Push HTML, CSS, and JavaScript updates to desktop apps without rebuilding installers. @capgo/electron-updater mirrors the mobile API.',
-  live_update_platform_read_more: 'Read the {title} guide',
+  live_update_platform_capacitor_docs_link: 'Capgo updater getting started guide',
+  live_update_platform_cordova_docs_link: 'Cordova updater getting started guide',
+  live_update_platform_electron_docs_link: 'Electron updater getting started guide',
 
   live_update_lts_supported: 'Fully Supported',
   live_update_lts_title: 'Long-Term Support',
