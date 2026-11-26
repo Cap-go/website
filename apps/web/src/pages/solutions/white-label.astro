@@ -1,4 +1,5 @@
 ---
+import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageKey, type MessageValues } from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
@@ -8,6 +9,7 @@ import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
+import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
 
@@ -87,8 +89,12 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const breadcrumbName = m.solutions_white_label({}, { locale })
+const breadcrumbCrumbs = buildSolutionsPageBreadcrumbs(locale, Astro.locals.runtimeConfig.public.baseUrl, breadcrumbName, 'solutions/white-label/')
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  ...breadcrumbGraphOptions(breadcrumbCrumbs),
   additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
@@ -124,6 +130,9 @@ const systemCards: { title: MessageKey; desc: MessageKey; link: { href: string; 
   <div class="product-hero">
     <section class="border-b border-white/10 py-16 sm:py-20 lg:py-28">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-6 flex justify-start sm:justify-center">
+          <PageBreadcrumbs items={breadcrumbCrumbs} />
+        </div>
         <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <p class="inline-flex min-h-11 items-center rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-4 text-sm font-semibold text-cyan-100">

@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
 import { pageDates, toIsoDate } from '@/data/pageDates'
+import { breadcrumbGraphOptions, buildAlternativesPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -13,6 +14,7 @@ const config = Astro.locals.runtimeConfig.public
 const title = m.voltbuilder_alt_title({}, { locale })
 const description = m.voltbuilder_alt_meta_description({}, { locale })
 const competitor = 'VoltBuilder'
+const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, competitor, 'alternatives/voltbuilder/')
 
 const faq = [
   { question: m.voltbuilder_alt_faq_q1({}, { locale }), answer: m.voltbuilder_alt_faq_a1({}, { locale }) },
@@ -32,6 +34,7 @@ const ldJSON = createLdJsonGraph(
   }),
   {
     includeOrganization: true,
+    ...breadcrumbGraphOptions(breadcrumbCrumbs),
     additionalEntities: [
       createWebPageLdJson(config, {
         name: title,

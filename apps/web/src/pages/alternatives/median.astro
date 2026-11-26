@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
 import { pageDates, toIsoDate } from '@/data/pageDates'
+import { breadcrumbGraphOptions, buildAlternativesPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -12,6 +13,7 @@ const dates = pageDates['alternatives/median']
 const config = Astro.locals.runtimeConfig.public
 const pageUrl = new URL(Astro.url.pathname, config.baseUrl).href
 const competitor = 'Median'
+const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, competitor, 'alternatives/median/')
 
 const faq = [
   { question: m.compare_median_faq_q1({}, { locale }), answer: m.compare_median_faq_a1({}, { locale }) },
@@ -43,6 +45,7 @@ const content = {
     }),
     {
       includeOrganization: true,
+      ...breadcrumbGraphOptions(breadcrumbCrumbs),
       additionalEntities: [
         createFAQPageLdJson(config, {
           url: pageUrl,

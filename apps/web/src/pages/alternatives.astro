@@ -2,6 +2,7 @@
 import '@/styles/lu-product.css'
 import '@/styles/compare-page.css'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
+import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
 import SignupCta from '@/components/SignupCta.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import Layout from '@/layouts/Layout.astro'
@@ -9,13 +10,16 @@ import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
 import { alternativeCompetitors } from '@/data/alternatives'
 import type { AlternativeCategory } from '@/data/alternatives/types'
+import { breadcrumbGraphOptions, buildSectionHubBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createItemListLdJson, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
-import { getRelativeLocaleUrl } from '@/services/links'
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig.public
 const title = m.alternatives_title({}, { locale })
 const description = m.alternatives_meta_description({}, { locale })
+const pageUrl = getAbsoluteLocaleUrl(config.baseUrl, locale, 'alternatives/')
+const hubBreadcrumbs = buildSectionHubBreadcrumbs(locale, config.baseUrl, 'alternatives/', m.alternatives({}, { locale }))
 
 const comparisons = [
   {
@@ -208,9 +212,10 @@ const ldJSON = createLdJsonGraph(
   }),
   {
     includeOrganization: true,
+    ...breadcrumbGraphOptions(hubBreadcrumbs),
     additionalEntities: [
       createItemListLdJson(config, {
-        url: Astro.url.href,
+        url: pageUrl,
         name: m.alternatives_index_title({}, { locale }),
         description,
         items: [...comparisons, ...categoryGroups.flatMap((group) => group.items)].map((item) => ({
@@ -236,6 +241,7 @@ const content = {
   <div class="lu bg-ad cmp">
     <section class="section cmp-hero bg-grid grain" id="top">
       <div class="shell">
+        <PageBreadcrumbs items={hubBreadcrumbs} class="mb-6" />
         <div class="beta-badge">
           <span class="dot" aria-hidden="true"></span>
           {m.alternatives_hero_eyebrow({}, { locale })}

@@ -1,5 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro'
+import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
 import Layout from '@/layouts/Layout.astro'
 import m, { type MessageKey, type MessageValues } from '@/copy/messages'
 import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
@@ -9,6 +10,7 @@ import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import { solutionTestimonials } from '@/config/productTestimonials'
 import { appBuilderPath, appBuilders, type AppBuilder, type AppBuilderLink } from '@/data/appBuilders'
 import { getRelativeLocaleUrl } from '@/services/links'
+import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
 import OfferText from '@/components/OfferText.astro'
@@ -112,8 +114,12 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   areaServed: ['Worldwide'],
 })
 
+const breadcrumbName = builder.name
+const breadcrumbCrumbs = buildSolutionsPageBreadcrumbs(locale, Astro.locals.runtimeConfig.public.baseUrl, breadcrumbName, `solutions/${builder.slug}-to-mobile/`)
+
 const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
+  ...breadcrumbGraphOptions(breadcrumbCrumbs),
   additionalEntities: [createFAQPageLdJson(Astro.locals.runtimeConfig.public, { url: Astro.url.href, questions: faqItems })],
 })
 
@@ -198,6 +204,10 @@ Set up the project so an AI agent can use Capgo's MCP release tools through inst
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-center">
           <div class="min-w-0">
+        <div class="mb-6 flex justify-start sm:justify-center">
+          <PageBreadcrumbs items={breadcrumbCrumbs} />
+        </div>
+
             <p class="inline-flex min-h-11 items-center rounded-lg border border-pink-400/30 bg-pink-500/10 px-4 text-sm font-semibold text-pink-100">
               {copy('solutions_builder_to_mobile_badge')}
             </p>

@@ -6,6 +6,7 @@ import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
 import { alternativeCompetitors } from '@/data/alternatives'
 import type { AlternativeCategory, AlternativeCompetitor } from '@/data/alternatives/types'
+import { breadcrumbGraphOptions, buildAlternativesPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { toIsoDate } from '@/data/pageDates'
 import { getRelativeLocaleUrl } from '@/services/links'
@@ -60,6 +61,7 @@ const migration = {
 
 const title = competitor.metaTitle
 const description = competitor.metaDescription
+const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, competitor.name, `alternatives/${competitor.slug}/`)
 
 const content = {
   title,
@@ -80,6 +82,7 @@ const content = {
     }),
     {
       includeOrganization: true,
+      ...breadcrumbGraphOptions(breadcrumbCrumbs),
       additionalEntities: [
         createItemListLdJson(config, {
           url: pageUrl,

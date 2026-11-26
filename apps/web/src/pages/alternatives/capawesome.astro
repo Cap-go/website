@@ -6,6 +6,7 @@ import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
 import m from '@/copy/messages'
 import { pageDates, toIsoDate } from '@/data/pageDates'
+import { breadcrumbGraphOptions, buildAlternativesPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createWebPageLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 
@@ -15,6 +16,7 @@ const config = Astro.locals.runtimeConfig.public
 const title = m.capwesome_title({}, { locale })
 const description = m.capwesome_meta_description({}, { locale })
 const competitor = 'Capawesome Cloud'
+const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, competitor, 'alternatives/capawesome/')
 const faq = [
   { question: m.compare_capawesome_faq_q1({}, { locale }), answer: m.compare_capawesome_faq_a1({}, { locale }) },
   { question: m.compare_capawesome_faq_q2({}, { locale }), answer: m.compare_capawesome_faq_a2({}, { locale }) },
@@ -33,6 +35,7 @@ const ldJSON = createLdJsonGraph(
   }),
   {
     includeOrganization: true,
+    ...breadcrumbGraphOptions(breadcrumbCrumbs),
     additionalEntities: [
       createWebPageLdJson(config, {
         name: title,

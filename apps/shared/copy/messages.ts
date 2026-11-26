@@ -2520,6 +2520,7 @@ const messages = {
   high_support_title: '2. High',
   high_team_response: '1 business day<br />Monday - Friday',
   home: 'Home',
+  nav_breadcrumb: 'Breadcrumb',
   home_appflow_bootstrapped_highlight: 'Capgo is fully bootstrapped and profitable',
   home_appflow_bootstrapped_prefix: 'Unlike venture-backed services that can disappear overnight,',
   home_appflow_bootstrapped_suffix: "We've been generating consistent revenue since day one, ensuring long-term stability for your apps.",
