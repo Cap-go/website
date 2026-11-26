@@ -1,0 +1,91 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import SignupCta from '@/components/SignupCta.astro'
+import m from '@/copy/messages'
+
+export interface WhyReason {
+  title: string
+  body: string
+  html?: boolean
+}
+
+interface Props {
+  content: {
+    title: string
+    description: string
+    keywords?: string
+    robots?: string
+    alternateVersions?: []
+  }
+  h1: string
+  heroAnswer: string
+  commercialLine: string
+  reasons: WhyReason[]
+  comparisonHtml: string
+  locale: string
+}
+
+const { content, h1, heroAnswer, commercialLine, reasons, comparisonHtml, locale } = Astro.props
+
+const ctaMidId = 'why-landing-signup-cta-mid'
+const ctaFinalId = 'why-landing-signup-cta-final'
+
+type ReasonBlock = { kind: 'reason'; reason: WhyReason; index: number } | { kind: 'cta' }
+
+const reasonBlocks: ReasonBlock[] = reasons.flatMap((reason, index) => {
+  const blocks: ReasonBlock[] = [{ kind: 'reason', reason, index }]
+  if (index === 2) blocks.push({ kind: 'cta' })
+  return blocks
+})
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-6 lg:px-8">
+      <header class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">{h1}</h1>
+        <p class="mt-5 text-xl leading-8 text-gray-200">{heroAnswer}</p>
+        <div class="mt-8 flex flex-col items-center gap-3">
+          <SignupCta id="why-landing-signup-cta-hero" directOnly hideNote />
+          <p class="font-inter m-0 text-sm text-gray-300">{commercialLine}</p>
+        </div>
+      </header>
+
+      <ol class="mt-14 space-y-8">
+        {
+          reasonBlocks.map((block) =>
+            block.kind === 'cta' ? (
+              <li class="list-none py-2">
+                <SignupCta id={ctaMidId} directOnly hideNote class="mx-auto max-w-md" />
+              </li>
+            ) : (
+              <li class="rounded-2xl border border-gray-700 bg-gray-800/50 p-6 sm:p-8">
+                <p class="font-mono text-sm font-semibold tracking-wide text-blue-400">
+                  {m.why_page_reason_label({ number: String(block.index + 1) }, { locale })}
+                </p>
+                <h2 class="mt-2 text-2xl font-bold text-white">{block.reason.title}</h2>
+                {block.reason.html ? (
+                  <p class="mt-4 text-base leading-7 text-gray-300" set:html={block.reason.body} />
+                ) : (
+                  <p class="mt-4 text-base leading-7 text-gray-300">{block.reason.body}</p>
+                )}
+              </li>
+            ),
+          )
+        }
+      </ol>
+
+      <aside class="mt-10 rounded-2xl border border-gray-700 bg-gray-800/40 p-6 sm:p-8" aria-labelledby="why-compare-title">
+        <h2 id="why-compare-title" class="text-lg font-semibold text-white">
+          {m.why_page_compare_title({}, { locale })}
+        </h2>
+        <p class="mt-3 text-base leading-7 text-gray-300" set:html={comparisonHtml} />
+      </aside>
+
+      <div class="mt-12 rounded-2xl border border-gray-700 bg-gray-800/60 px-6 py-10 text-center sm:px-10">
+        <SignupCta id={ctaFinalId} directOnly hideNote class="mx-auto" />
+        <p class="font-inter mx-auto mt-4 max-w-md text-sm text-gray-300">{commercialLine}</p>
+      </div>
+    </div>
+  </section>
+</Layout>
