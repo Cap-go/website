@@ -6604,7 +6604,7 @@ const messages = {
   why_live_updates_description:
     'Five reasons Capacitor teams ship JavaScript, HTML, and CSS fixes through Capgo live updates instead of waiting on app store review.',
   why_live_updates_hero_answer:
-    'Capgo delivers web bundles to production Capacitor apps through channels, with checksum integrity checks and optional end-to-end encryption when enabled, so your team can fix users without a new store build.',
+    'Capgo delivers web bundles to production Capacitor apps through channels. Devices verify checksums before activation, and RSA signed checksum verification applies when you configure publicKey in the updater. Optional end-to-end encryption applies when enabled, so your team can fix users without a new store build.',
   why_live_updates_h1: '5 reasons to ship your Capacitor updates live with Capgo',
   why_live_updates_keywords:
     'Capacitor live updates, OTA updates, Capgo, app store review, rollback, release channels',
