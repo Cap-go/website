@@ -124,6 +124,44 @@ if (Capacitor.getPlatform() === 'ios') {
 
 See also the [plugin repository README](https://github.com/Cap-go/capacitor-downloader/#robust-background-downloads-offline-packs).
 
+## Connection failure retries
+
+Available since **8.9.0**. Related plugin change: [capacitor-downloader#153](https://github.com/Cap-go/capacitor-downloader/pull/153).
+
+Set `retries` on `download()` when mobile networks drop mid-transfer and you want the plugin to restart the file after a transport error without building your own backoff loop. Defaults to `0` (no retries). Values below `0` are rejected.
+
+Each retry downloads the file again from the start after a delay of 5 seconds times the attempt number (5 s, then 10 s, then 15 s, and so on, capped at 10 minutes). Progress for that file resets to `0` when a retry starts. HTTP errors, cancellation, and file-system errors are not retried.
+
+| Scope | `retries` |
+| --- | --- |
+| Single download, Android OkHttp | `androidHttpEngine: 'auto'` or `'okhttp'` on app-private paths |
+| Single download, iOS | URLSession (foreground and background) |
+| Batch download, iOS | Applied per file; other files keep running |
+| Android DownloadManager (single or batch) | Ignored |
+| Web | Ignored |
+
+Optional `downloadFailedNotificationText` shows a localized system notification when a download or batch ends in failure after retries are exhausted. Uses the same notification slot as `downloadCompletedNotificationText`, so a failure alert replaces a prior completion alert for the same id instead of stacking. Requires notification permission on iOS and Android; the plugin manifest already merges `POST_NOTIFICATIONS` on Android. Not shown when the download is stopped by the app (`stop()`). Omitted or empty means no failure notification from the plugin (use `downloadFailed` events while the app is open).
+
+**Android OkHttp:** each retry re-resolves Wi-Fi when `network` is `'wifi-only'`. Retries run inside the OkHttp transfer loop in the app process.
+
+**iOS URLSession:** retry budgets persist in `DownloadRetryBudgetStore` so a relaunch can still honor remaining retries for in-flight work. Background sessions schedule the next attempt with `earliestBeginDate` on the replacement download task. Foreground sessions wait on a delayed work item before resuming the retry task. If the user called `pause()` (or paused a batch child) before the retry fires, the retry task stays paused until `resume()`.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+await CapacitorDownloader.download({
+  id: 'episode',
+  url: 'https://cdn.example.com/episode.mp4',
+  destination: 'files/episodes/episode.mp4',
+  androidHttpEngine: 'auto',
+  retries: 3,
+  downloadFailedNotificationText: 'Download failed',
+  downloadCompletedNotificationText: 'Episode is ready',
+});
+```
+
+See also the [plugin README section](https://github.com/Cap-go/capacitor-downloader/#retry-after-connection-failures).
+
 ## Multi-file batch downloads
 
 Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Up to **32** transfers share one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
@@ -472,6 +510,16 @@ export interface DownloadOptions {
    */
   downloadCompletedNotificationText?: string;
   /**
+   * Optional localized text for a system notification after a failed download (since 8.9.0).
+   * Same notification slot as downloadCompletedNotificationText. Not shown after stop().
+   */
+  downloadFailedNotificationText?: string;
+  /**
+   * Retries after connection failures on Android OkHttp and iOS URLSession (since 8.9.0).
+   * Defaults to 0. DownloadManager and Web ignore this option.
+   */
+  retries?: number;
+  /**
    * iOS 26 and later: opt in to a BGContinuedProcessingTask (since 8.8.0).
    */
   iosContinuedProcessingTitle?: string;
@@ -509,6 +557,10 @@ export interface DownloadBatchOptions {
    */
   androidHttpEngine?: 'auto' | 'okhttp' | 'downloadManager';
   downloadCompletedNotificationText?: string;
+  /** Failure notification text (since 8.9.0). iOS URLSession batches only; DownloadManager batches ignore retries. */
+  downloadFailedNotificationText?: string;
+  /** Per-file connection retries on iOS URLSession (since 8.9.0). Android DownloadManager batches ignore this option. */
+  retries?: number;
 }
 ```
 
