@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Capacitor plugin for downloading files with background support. On Android since 8.5.0, an opt-in OkHttp engine writes app-private destinations (cache, files) with quiet notifications."
+  tagline: "Capacitor plugin for downloading files with background support. On Android since 8.5.0, an opt-in OkHttp engine writes app-private destinations (cache, files). Since 8.9.0, multi-file batches can use the same background paths on iOS and OkHttp Android."
   actions:
     - text: Get started
       link: /docs/plugins/downloader/getting-started/
@@ -42,13 +42,13 @@ Available since **8.6.0**. Set optional `title` and `description` on `download()
 
 Available since **8.7.0** on iOS and Android (not Web). Pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not pass `url` and `files` together. Up to 32 assets share one batch `id`. Progress uses 0 to 1 for overall and per-file values. Related change: [capacitor-downloader#107](https://github.com/Cap-go/capacitor-downloader/pull/107). See [Multi-file batch downloads](/docs/plugins/downloader/getting-started/#multi-file-batch-downloads).
 
-On Android, batches use DownloadManager; `download()` rejects if any file would use OkHttp (`'auto'` with extended roots is allowed when paths stay on DownloadManager). Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death; iOS restores batches from `DownloadBatchStore`. When a batch file fails, finished files stay on disk on both platforms. On iOS, `stop()` deletes paths recorded via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android, `stop()` removes in-flight DownloadManager work while the batch is tracked but keeps completed files. Delete leftover files in your app after failure when you want them removed.
+On Android, each file follows the same `androidHttpEngine` rules as a single download. Since **8.9.0**, a batch whose files all resolve to OkHttp runs in OkHttp with one shared progress notification when `notification: 'progress'`; mixed engines are rejected. DownloadManager batches behave as before. Android rejects `pause()` and `resume()` for every download, including batches; iOS supports them on the batch id. Android batch tracking is memory-only after process death; iOS restores batches from `DownloadBatchStore`. When a batch file fails, finished files stay on disk on both platforms. On iOS, `stop()` deletes paths recorded via `recordMovedDestination` only while the batch is still tracked (running, paused, or restored after relaunch). Once the batch succeeds, fails, or is stopped, a later `stop({ id })` deletes nothing; files from an older generation of the same id are never touched, and iOS rejects with `Task not found`. On Android, `stop()` removes in-flight work while the batch is tracked but keeps completed files. Delete leftover files in your app after failure when you want them removed.
 
 </Aside>
 
 <Aside type="tip" title="Robust background downloads (8.8.0)">
 
-Available since **8.8.0**. Large offline packs can keep moving while users switch apps: required `AppDelegate` background session forwarding, optional iOS 26 continued processing, iOS `private/` paths, and opt-in OkHttp `notification: 'progress'` with an optional `dataSync` foreground service on Android (default `completed` unchanged from 8.7.0). See [Robust background downloads](/docs/plugins/downloader/getting-started/#robust-background-downloads).
+Available since **8.8.0**. Large offline packs can keep moving while users switch apps: required `AppDelegate` background session forwarding, optional iOS 26 continued processing (`iosContinuedProcessing` with `title` and `description`), iOS `private/` paths, and opt-in OkHttp `notification: 'progress'` with an optional `dataSync` foreground service on Android (default `completed` unchanged from 8.7.0). Since **8.9.0**, the same options apply to [multi-file batches](/docs/plugins/downloader/getting-started/#background-multi-file-batches). See [Robust background downloads](/docs/plugins/downloader/getting-started/#robust-background-downloads).
 
 </Aside>
 
