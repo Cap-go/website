@@ -80,7 +80,7 @@ Then the behavior become :
 
 #### Disable auto-upgrade strategy
 
-There are a couple of strategies you can chose from. You can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+There are a couple of strategies you can chose from. You can learn more about it in [Capgo CLI commands](/docs/cli/commands/#disable-updates-strategy)
 
 ## JavaScript bundle version
 

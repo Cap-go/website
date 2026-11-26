@@ -462,7 +462,7 @@ const content = {
                           href={item.docsHref}
                           class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
                         >
-                          Documentation
+                          {m.plugins_catalog_docs_link({ title: item.title }, { locale })}
                         </a>
                       ) : (
                         <a
@@ -471,7 +471,7 @@ const content = {
                           rel="noopener noreferrer"
                           class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
                         >
-                          Docs
+                          {m.plugins_catalog_external_docs_link({ title: item.title }, { locale })}
                           <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
                         </a>
                       )}
