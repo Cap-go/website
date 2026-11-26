@@ -1,6 +1,70 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app capgo-22.72.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.72.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.72.1",
+    "pubDate": "2026-11-25T15:36:42.000Z",
+    "description": "🆕 Changelog Fixed Prevented the saved build simulator from opening a blank tab upon startup Removed \"preference language\" from plugin recommendations in the MCP integration to improve relevance Stopped the test from importing , resolving unnecessary dependency loads Changed Updated PR review workflow to only mark a turn as finished when the review status is explicitly clear 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.72.0...capgo 22.72.1"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.72.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.72.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.72.0",
+    "pubDate": "2026-11-25T14:37:30.000Z",
+    "description": "🆕 Changelog Added MCP : Serve the Muse connector domain challenge 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.71.1...capgo 22.72.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.71.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.71.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.71.1",
+    "pubDate": "2026-11-25T14:18:14.000Z",
+    "description": "🆕 Changelog Changed Routed legacy storage requests through the Storage REST API using native fetch, replacing previous direct database helpers to improve reliability and standardize communication. Updated backend internal implementation to remove unused utility functions, reducing dependency overhead and simplifying code maintenance. Removed Eliminated imports from Playwright test specifications to ensure testing environments rely on the same REST interfaces as production, aligning test cove..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.71.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.71.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.71.0",
+    "pubDate": "2026-11-25T13:58:19.000Z",
+    "description": "🆕 Changelog Added SSO Admin API Routing : Routed SSO provider administrative calls to GoTrue when the provider is bound, ensuring proper handling of Single Sign On management requests. Local Queue Dispatcher Alignment : Implemented local environment queue processing through the , matching the production workflow for improved consistency and reliability. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.70.0...capgo 22.71.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.70.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.70.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.70.0",
+    "pubDate": "2026-11-25T13:16:32.000Z",
+    "description": "🆕 Changelog Added Billing : Added support for selecting specific \"cancel and save\" offers based on the cancellation reason provided by the user. This allows for more targeted retention strategies and improved user experience during the cancellation process. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.69.3...capgo 22.70.0"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.69.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.3",
+    "pubDate": "2026-11-25T13:10:06.000Z",
+    "description": "🆕 Changelog Changed Updated the Continuous Integration (CI) pipeline to apply database migrations using , ensuring more reliable schema synchronization during automated deployments. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.69.2...capgo 22.69.3"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.69.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.2",
+    "pubDate": "2026-11-25T12:35:57.000Z",
+    "description": "🆕 Changelog Changed Marked legacy snippet responses with header : API responses for legacy snippets now include the header. This allows clients to explicitly identify and handle legacy snippet data, aiding in migration to new snippet formats and improving API response clarity. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.69.1...capgo 22.69.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.69.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.69.1",
+    "pubDate": "2026-11-25T11:41:28.000Z",
+    "description": "🆕 Changelog Fixed Prevented saving of empty minimal update versions in the console interface when focusing out of the input field, ensuring data integrity for release configurations. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.112.0...capgo 22.69.1"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.112.0",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.112.0",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.112.0",
@@ -254,70 +318,6 @@
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.54.1",
     "pubDate": "2026-11-16T17:15:01.000Z",
     "description": "🆕 Changelog Fixed Improved clarity in the console for empty bundle comparison lists by providing explicit explanations when no differences are found, resolving confusion regarding missing data 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.54.0...capgo 22.54.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.54.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.54.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.54.0",
-    "pubDate": "2026-11-16T16:36:55.000Z",
-    "description": "🆕 Changelog Added Automatic deployment for Cloudflare snippets : Implemented CI automation to automatically deploy all Cloudflare snippets, streamlining the release process and ensuring consistent delivery of updates. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.53.7...capgo 22.54.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.53.7",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.7",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.7",
-    "pubDate": "2026-11-16T16:14:43.000Z",
-    "description": "🆕 Changelog Fixed Clarify organization sidebar navigation to improve usability and reduce confusion in the UI Explain ChatGPT connection, privacy, and setup steps in the assistant to assist with integration and user onboarding Correctly pass the partial result flag using hyphens to resolve execution errors in replica workflows 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.53.6...capgo 22.53.7"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.53.6",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.6",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.6",
-    "pubDate": "2026-11-16T15:29:30.000Z",
-    "description": "🆕 Changelog Fixed Assistant : Scoped WAF exceptions specifically to command examples, preventing unintended filtering issues in other assistant contexts. Email : Included specific failure context in first day deployment reports, improving visibility into initial deployment errors. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.53.5...capgo 22.53.6"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.53.5",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.5",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.5",
-    "pubDate": "2026-11-16T14:26:38.000Z",
-    "description": "🆕 Changelog Changed Refactored internal authentication to verify user JWTs directly, removing the dependency on claims. This streamlines the authentication flow and reduces external client library overhead. Updated backend scripts to query PostgreSQL directly, replacing the use of the Supabase SDK. This improves the efficiency of database interactions within the release and maintenance scripts. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.53.4...capgo 22.53.5"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.53.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.53.0",
-    "pubDate": "2026-11-16T06:14:59.000Z",
-    "description": "🆕 Changelog Changed Updated authentication token generation in GoTrue Worker : The service key used by the GoTrue Worker is now swapped for an ES256 token. This enhancement ensures stricter security standards for service to service communication and may require verification of token validation logic in downstream services consuming these tokens. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.52.4...capgo 22.53.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.52.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.52.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.52.2",
-    "pubDate": "2026-11-15T15:31:58.000Z",
-    "description": "🆕 Changelog Fixed Removed the Secrets Store binding from the GoTrue Worker to resolve authentication issues. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.52.1...capgo 22.52.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.51.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.51.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.51.1",
-    "pubDate": "2026-11-15T12:53:28.000Z",
-    "description": "🆕 Changelog Changed Refined SQL integration testing workflow to execute exclusively on local Postgres environments. Optimized CI tooling by removing the redundant Supabase test database step. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.51.0...capgo 22.51.1"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.107.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.107.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.107.0",
-    "pubDate": "2026-11-14T02:25:30.000Z",
-    "description": "🆕 Changelog Added AI powered release assistance : Integrated paid AI to recommend release versions and generate changelogs for improved release management workflows. Unified cloud simulator control : Enabled driving cloud simulators directly from the API, CLI, and both MCPs for enhanced testing and debugging capabilities. Local Postgres container support : Added the ability to run a local Postgres container and provision the database without requiring a full initialization. Private settings ..."
   },
   {
     "category": "release",
@@ -601,11 +601,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-downloader 8.10.0",
-    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.10.0",
-    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.10.0",
-    "pubDate": "2026-11-24T13:51:58.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.10.0...8.10.0"
+    "title": "capacitor-downloader 8.11.0",
+    "link": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.11.0",
+    "guid": "https://github.com/Cap-go/capacitor-downloader/releases/tag/8.11.0",
+    "pubDate": "2026-11-25T13:18:07.000Z",
+    "description": "🆕 Changelog feat: remove 32 file batch download cap ( 145) fix(deps): update OkHttp to 5.4.0 ( 155) 🔗 Full Changelog : https://github.com/Cap go/capacitor downloader/compare/8.10.0...8.11.0"
   },
   {
     "category": "release",
@@ -929,11 +929,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-purchases 8.9.17",
-    "link": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.17",
-    "guid": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.9.17",
-    "pubDate": "2026-11-20T05:17:48.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native purchases/compare/8.9.17...8.9.17"
+    "title": "capacitor-native-purchases 8.10.0",
+    "link": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.10.0",
+    "guid": "https://github.com/Cap-go/capacitor-native-purchases/releases/tag/8.10.0",
+    "pubDate": "2026-11-25T19:27:04.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native purchases/compare/8.10.0...8.10.0"
   },
   {
     "category": "release",
@@ -1401,11 +1401,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-wifi 8.5.12",
-    "link": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.12",
-    "guid": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.5.12",
-    "pubDate": "2026-11-12T17:05:02.000Z",
-    "description": "🆕 Changelog Changed Updated contribution documentation to clarify that a human reviews, tests, and merges pull requests ( 36). 🔗 Full Changelog : https://github.com/Cap go/capacitor wifi/compare/8.5.11...8.5.12"
+    "title": "capacitor-wifi 8.6.0",
+    "link": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.6.0",
+    "guid": "https://github.com/Cap-go/capacitor-wifi/releases/tag/8.6.0",
+    "pubDate": "2026-11-25T15:54:35.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor wifi/compare/8.6.0...8.6.0"
   },
   {
     "category": "release",
