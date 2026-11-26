@@ -251,8 +251,13 @@ const SPEED_BRAIN_RULES_PATH = '/speculation-rules.json'
 const EXECUTABLE_SCRIPT_TYPES = new Set(['', 'module', 'text/javascript', 'application/javascript', 'text/ecmascript', 'application/ecmascript'])
 const WORKER_OWNED_SCRIPT_IDS = new Set(['capgo-edge-language-selector-hash'])
 const MAX_HTML_BYTES = 1_500_000
+// Long text is split into chunks of at most MAX_BATCH_CHARS. Changing it changes those
+// chunks, so their translation-memory keys, and would retranslate every long paragraph.
 const MAX_BATCH_CHARS = 1_500
-const MAX_BATCH_ITEMS = 12
+// One Workers AI call carries up to this much text. Every call resends the full system
+// prompt and style guide (most of the input tokens), so fewer, larger calls cost less.
+const MAX_AI_BATCH_CHARS = 6_000
+const MAX_BATCH_ITEMS = 40
 const TRANSLATION_BATCHES_PER_QUEUE_JOB = 96
 const TRANSLATION_MODEL_ATTEMPTS = 3
 const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
@@ -1617,7 +1622,7 @@ function buildBatches(segments: Segment[]): string[][] {
     }
 
     const nextLength = currentLength + segment.text.length
-    if (currentBatch.length > 0 && (nextLength > MAX_BATCH_CHARS || currentBatch.length >= MAX_BATCH_ITEMS)) {
+    if (currentBatch.length > 0 && (nextLength > MAX_AI_BATCH_CHARS || currentBatch.length >= MAX_BATCH_ITEMS)) {
       flushCurrentBatch()
     }
     currentBatch.push(segment.text)
@@ -3578,6 +3583,76 @@ async function clearTranslationCoordinatorSafely(env: Env, requestUrl: URL, loca
   }
 }
 
+// Only pages listed in the English sitemaps are translated. Everything else (bot probes,
+// soft 404s, stale or typo links, noindex pages) redirects to English with no AI call.
+const SITEMAP_INDEX_PATH = '/sitemap-index.xml'
+const SITEMAP_CACHE_MS = 60 * 60 * 1000
+const SITEMAP_MAX_FILES = 50
+let sitemapPathsCache: { paths: ReadonlySet<string> | 'all'; loadedAt: number } | null = null
+
+// Tests seed the sitemap instead of serving one from every mocked origin.
+function seedSitemapPathsForTest(paths: ReadonlySet<string> | 'all' | null): void {
+  sitemapPathsCache = paths === null ? null : { paths, loadedAt: Number.POSITIVE_INFINITY }
+}
+
+function sitemapLocs(xml: string): string[] {
+  return [...xml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/g)].map((match) => decodeHtmlEntities(match[1]))
+}
+
+async function fetchSitemapXml(env: Env, request: Request, requestUrl: URL, pathname: string): Promise<string> {
+  const sitemapUrl = new URL(pathname, requestUrl)
+  const originRequest = createOriginRequest(new Request(sitemapUrl.toString(), { method: 'GET', headers: request.headers }), sitemapUrl)
+  for (const service of [env.WEB, env.DOCS]) {
+    const response = await service.fetch(originRequest.clone())
+    if (!response.ok) continue
+    const xml = await response.text()
+    // A soft 404 page is not a sitemap: try the other origin instead of reading zero pages.
+    if (/<(?:urlset|sitemapindex)\b/i.test(xml)) return xml
+  }
+  throw new Error(`Sitemap ${pathname} is unavailable`)
+}
+
+// Throws when the sitemaps cannot be read, so the queue retries later instead of
+// translating an unknown page or wrongly redirecting a real one.
+async function englishSitemapPaths(env: Env, request: Request, requestUrl: URL): Promise<ReadonlySet<string> | 'all'> {
+  if (sitemapPathsCache && Date.now() - sitemapPathsCache.loadedAt < SITEMAP_CACHE_MS) return sitemapPathsCache.paths
+  const index = await fetchSitemapXml(env, request, requestUrl, SITEMAP_INDEX_PATH)
+  const files = sitemapLocs(index).slice(0, SITEMAP_MAX_FILES)
+  const paths = new Set<string>()
+  for (const file of files) {
+    const locs = sitemapLocs(await fetchSitemapXml(env, request, requestUrl, new URL(file).pathname))
+    if (locs.length === 0) throw new Error(`Sitemap ${file} lists no pages`)
+    for (const loc of locs) {
+      const pathname = new URL(loc).pathname
+      if (extractLocale(pathname) === null) paths.add(withTrailingSlash(pathname))
+    }
+  }
+  if (paths.size === 0) throw new Error('English sitemaps list no pages')
+  sitemapPathsCache = { paths, loadedAt: Date.now() }
+  return paths
+}
+
+function hasNoindexRobots(html: string): boolean {
+  for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
+    const tag = match[0]
+    if (/\bname\s*=\s*["']?robots["']?/i.test(tag) && /\bcontent\s*=\s*["'][^"']*noindex/i.test(tag)) return true
+  }
+  return false
+}
+
+async function untranslatablePageReason(env: Env, request: Request, requestUrl: URL, sourceHtml: string): Promise<string | null> {
+  if (hasNoindexRobots(sourceHtml)) return 'noindex'
+  const englishPath = withTrailingSlash(stripLocalePrefix(requestUrl.pathname))
+  const paths = await englishSitemapPaths(env, request, requestUrl)
+  return paths === 'all' || paths.has(englishPath) ? null : 'not-in-sitemap'
+}
+
+function englishPageRedirect(requestUrl: URL): Response {
+  const englishUrl = new URL(requestUrl)
+  englishUrl.pathname = stripLocalePrefix(englishUrl.pathname)
+  return new Response(null, { status: 302, headers: { Location: `${englishUrl.pathname}${englishUrl.search}` } })
+}
+
 async function refreshCacheIncrementally(
   request: Request,
   env: Env,
@@ -3605,6 +3680,16 @@ async function refreshCacheIncrementally(
   const existing = await readStoredTranslatedResponse(env, requestUrl, locale)
   if (existing?.ok && isHtmlResponse(existing) && readTranslationSourceHash(existing) === sourceHash) {
     await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, toCachedResponse(existing, sourceHash))
+    await deletePartialTranslationStateSafely(env, requestUrl, locale)
+    return true
+  }
+  const skipReason = await untranslatablePageReason(env, renderRequest, requestUrl, source.sourceHtml)
+  if (skipReason) {
+    // Not a real public page: send visitors to the English page and keep the redirect
+    // stored, so bots and stale links never spend Workers AI calls on it.
+    console.log('Translation skipped', { pathname: requestUrl.pathname, locale, reason: skipReason })
+    const cachedResponse = toCachedResponse(englishPageRedirect(requestUrl), sourceHash)
+    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
     await deletePartialTranslationStateSafely(env, requestUrl, locale)
     return true
   }
@@ -4374,6 +4459,9 @@ export const __translationWorkerTest = {
   withResponseHeaders,
   keepsTranslationPlaceholders,
   translationMemoryKey,
+  seedSitemapPathsForTest,
+  untranslatablePageReason,
+  sitemapLocs,
   TRANSLATION_MEMORY_VERSION,
   aiRequestOptions,
   parseKeyedTranslations,
