@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Buy button loading forever and identical subscription promo images">
+  <title>Buy button loading forever and identical subscription promo images</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="56" y="44" width="128" height="112" rx="14" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="68" y="68" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">paywall</text>
+  <rect x="72" y="80" width="96" height="28" rx="10" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <path d="M88 94 A12 12 0 1 1 87.9 94" fill="none" stroke="#44BCFF" stroke-width="2" stroke-linecap="round"/>
+  <text x="108" y="98" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="6">loading</text>
+  <rect x="208" y="48" width="88" height="120" rx="12" fill="#111827" stroke="#FBBF24" stroke-width="2"/>
+  <text x="216" y="68" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="6">5 plans</text>
+  <rect x="220" y="76" width="28" height="20" rx="4" fill="#374151"/>
+  <rect x="252" y="76" width="28" height="20" rx="4" fill="#374151"/>
+  <rect x="220" y="100" width="28" height="20" rx="4" fill="#374151"/>
+  <rect x="252" y="100" width="28" height="20" rx="4" fill="#374151"/>
+  <rect x="236" y="124" width="28" height="20" rx="4" fill="#374151"/>
+  <text x="212" y="148" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="6">same image</text>
+  <rect x="56" y="168" width="120" height="20" rx="10" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="64" y="182" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">Changes needed</text>
+</svg>

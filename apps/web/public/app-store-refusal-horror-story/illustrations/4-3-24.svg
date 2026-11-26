@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="App name taken and home inventory app looked like every similar app">
+  <title>App name taken and home inventory app looked like every similar app</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="24" y="52" width="104" height="96" rx="12" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <rect x="36" y="64" width="56" height="56" rx="8" fill="#111827" stroke="#9CA3AF" stroke-width="1.5"/>
+  <circle cx="52" cy="88" r="10" fill="none" stroke="#A3E635" stroke-width="2"/>
+  <text x="40" y="132" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">name taken</text>
+  <rect x="48" y="44" width="56" height="14" rx="7" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="54" y="55" fill="#EF4444" font-family="system-ui,sans-serif" font-size="6">duplicate</text>
+  <rect x="148" y="40" width="72" height="52" rx="10" fill="#111827" stroke="#9CA3AF" stroke-width="1.5" opacity="0.85"/>
+  <rect x="164" y="48" width="28" height="28" rx="6" fill="#374151"/>
+  <rect x="164" y="100" width="72" height="52" rx="10" fill="#111827" stroke="#9CA3AF" stroke-width="1.5" opacity="0.7"/>
+  <rect x="180" y="108" width="28" height="28" rx="6" fill="#374151"/>
+  <rect x="236" y="56" width="64" height="88" rx="10" fill="#111827" stroke="#9CA3AF" stroke-width="1.5" opacity="0.55"/>
+  <rect x="252" y="68" width="28" height="28" rx="6" fill="#374151"/>
+  <path d="M132 96 L144 96" stroke="#9CA3AF" stroke-width="2"/>
+  <path d="M220 100 L232 100" stroke="#9CA3AF" stroke-width="2"/>
+  <rect x="148" y="164" width="148" height="22" rx="11" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="156" y="179" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">crowded category</text>
+</svg>
