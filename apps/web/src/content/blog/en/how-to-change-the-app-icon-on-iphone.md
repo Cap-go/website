@@ -125,7 +125,7 @@ A few practical notes matter:
 - **Limited for custom artwork:** You can style icons, but you can't point an app to any random image from your Photos library through this menu.
 - **Safer for daily-use apps:** Mail, Messages, and other badge-heavy apps behave more naturally when you leave them as real app icons.
 
-If you're pairing icon tinting with wallpaper and widgets, pick a wallpaper first. The optional **Tinted** eyedropper can sample a color from it so the icons match your theme.
+If you're pairing icon tinting with wallpaper and widgets, pick a wallpaper first. The optional **Tinted** eyedropper can sample a color from it so the icons match your theme. For bright cyberpunk or night-mode layouts, [the neon aesthetic guide](https://gifpaper.com/aesthetics/neon-aesthetic/) is a useful reference for color direction before you start tinting icons.
 
 The Shortcuts method still matters because it solves a different problem.
 
@@ -136,7 +136,7 @@ This visual walkthrough shows the classic process:
 <a id="use-the-shortcuts-method-for-any-image"></a>
 ### Use the Shortcuts method for any image
 
-Before native styling, the standard route for a fully custom iPhone app icon was the **Shortcuts** app. You still create a shortcut that opens the real app, then [add it to the Home Screen](https://support.apple.com/guide/shortcuts/add-a-shortcut-to-the-home-screen-apd735880972/ios) with a custom photo.
+Before native styling, the standard route for a fully custom iPhone app icon was the **Shortcuts** app. You still create a shortcut that opens the real app, then [add it to the Home Screen](https://support.apple.com/guide/shortcuts/add-a-shortcut-to-the-home-screen-apd735880972/ios) with a custom photo. In practice, that's roughly **5-8 steps** for a visible icon swap, according to [this Shortcuts tutorial](https://themacu.com/2026/03/21/how-to-change-app-icon-iphone-free-tutorial/).
 
 Here's the practical version that works:
 
@@ -260,7 +260,7 @@ A simplified example looks like this:
 
 Some teams prefer managing this in Xcode's asset pipeline. Others edit plist values directly for clarity in code review. Either can work. What matters is consistency between the asset names and the icon names you pass at runtime.
 
-If you're planning alternate icons for a client app, include design and QA time in your scope early. This is one of those features that looks trivial from the outside but still needs artwork, testing, and product decisions.
+If you're planning alternate icons for a client app, include design and QA time in your scope early. This is one of those features that looks trivial from the outside but still needs artwork, testing, and product decisions. A practical budgeting reference is this breakdown on [budgeting for your app](https://www.bruceandeddy.com/mobile-app-development-cost-breakdown/).
 
 <a id="call-the-ios-api-from-swift"></a>
 ### Call the iOS API from Swift

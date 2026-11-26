@@ -29,7 +29,7 @@ On iOS 16 and later, you enable Developer Mode by installing a development-signe
 
 ## How We Verified the Developer Mode Steps
 
-We checked Apple's current documentation and compared the on-device flow with the Xcode-triggered path on iPhone 16, iPad, and recent iOS versions. We treated a workflow as outdated only if it required an obsolete tool, relied on a deprecated setting, or ignored the mandatory restart and post-reboot confirmation. Where possible, we matched each step to an Apple source rather than repeating third-party tutorials.
+We checked Apple's current documentation and compared the on-device flow with the Xcode-triggered path on iPhone 16, iPad, and recent iOS versions. We treated a workflow as outdated only if it required an obsolete tool, relied on a deprecated setting, or ignored the mandatory restart and post-reboot confirmation. Where possible, we matched each step to an Apple source rather than repeating third-party tutorials. If your setup still isn't working, you can find [more from Used Mobiles 4 U](https://usedmobiles4u.com/device-issues-troubleshooting/) covering common device issues and troubleshooting paths.
 
 ## Prerequisites
 
