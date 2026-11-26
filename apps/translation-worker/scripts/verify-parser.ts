@@ -1772,6 +1772,19 @@ try {
     })
     assert(failed, `An ${label} sitemap did not fail so the queue retries later`)
   }
+  // Same English HTML, but the page leaves and rejoins the sitemap: the source hash must
+  // change both ways so stored pages are refreshed instead of renewed.
+  const sameHtml = gateHtml()
+  const pricingUrl = new URL('https://capgo.app/fr/pricing/')
+  __translationWorkerTest.seedSitemapPathsForTest(new Set(['/pricing/']))
+  const listed = await __translationWorkerTest.eligibilityAwareSourceHash(gateEnv, gateRequest, pricingUrl, 'fr', sameHtml)
+  __translationWorkerTest.seedSitemapPathsForTest(new Set(['/other/']))
+  const unlisted = await __translationWorkerTest.eligibilityAwareSourceHash(gateEnv, gateRequest, pricingUrl, 'fr', sameHtml)
+  assert(listed.skipReason === null && unlisted.skipReason === 'not-in-sitemap', 'Eligibility was not reported')
+  assert(listed.hash !== unlisted.hash, 'A page leaving the sitemap kept its source hash, so its translation would be renewed')
+  __translationWorkerTest.seedSitemapPathsForTest(null)
+  const unreadable = await __translationWorkerTest.eligibilityAwareSourceHash(sitemapEnv({}), gateRequest, pricingUrl, 'fr', sameHtml)
+  assert(unreadable.hash === listed.hash, 'An unreadable sitemap on the request path changed the source hash')
   __translationWorkerTest.seedSitemapPathsForTest('all')
 }
 console.log('Sitemap gate checks passed')

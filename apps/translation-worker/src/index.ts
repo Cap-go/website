@@ -3652,6 +3652,23 @@ async function untranslatablePageReason(env: Env, request: Request, requestUrl: 
   return paths === 'all' || paths.has(englishPath) ? null : 'not-in-sitemap'
 }
 
+// Source hash that also changes when a page joins or leaves the sitemap, or gains or
+// loses noindex. Eligible pages keep the plain hash (stored translations stay valid);
+// skipped pages hash differently, so the existing freshness checks refresh a page whose
+// eligibility changed even when its English HTML did not. When the sitemap cannot be
+// read on the request path, the plain hash keeps serving what is stored.
+async function eligibilityAwareSourceHash(env: Env, request: Request, requestUrl: URL, locale: Locale, sourceHtml: string, strict = false): Promise<{ hash: string; skipReason: string | null }> {
+  let skipReason: string | null = null
+  try {
+    skipReason = await untranslatablePageReason(env, request, requestUrl, sourceHtml)
+  } catch (error) {
+    if (strict) throw error
+    console.warn('Translation eligibility check failed', { pathname: requestUrl.pathname, error: errorMessage(error) })
+  }
+  const hash = await translationSourceHash(locale, sourceHtml)
+  return { hash: skipReason ? await sha256Hex(`skip:${skipReason}:${hash}`) : hash, skipReason }
+}
+
 function englishPageRedirect(requestUrl: URL): Response {
   const englishUrl = new URL(requestUrl)
   englishUrl.pathname = stripLocalePrefix(englishUrl.pathname)
@@ -3681,10 +3698,10 @@ async function refreshCacheIncrementally(
     throw new Error(`Translation source returned transient response: ${source.response.status} ${source.response.statusText}`)
   }
 
-  const sourceHash = await translationSourceHash(locale, source.sourceHtml)
   // Checked before reusing a stored translation, so a page that leaves the sitemap or
-  // gains noindex stops being served in this locale.
-  const skipReason = await untranslatablePageReason(env, renderRequest, requestUrl, source.sourceHtml)
+  // gains noindex stops being served in this locale. Strict: an unreadable sitemap fails
+  // the job so the queue retries.
+  const { hash: sourceHash, skipReason } = await eligibilityAwareSourceHash(env, renderRequest, requestUrl, locale, source.sourceHtml, true)
   if (skipReason) {
     // Not a real public page: send visitors to the English page and keep the redirect
     // stored, so bots and stale links never spend Workers AI calls on it.
@@ -3870,7 +3887,7 @@ async function checkTranslatedSourceFreshness(env: Env, requestUrl: URL, locale:
   const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
   if (!englishHtml) return
 
-  const currentSourceHash = await translationSourceHash(locale, englishHtml)
+  const { hash: currentSourceHash } = await eligibilityAwareSourceHash(env, new Request(requestUrl.toString()), requestUrl, locale, englishHtml)
   if (knownSourceHash === currentSourceHash) return
 
   await enqueueTranslation(env, requestUrl, locale, 'stale', priority, currentSourceHash)
@@ -3979,7 +3996,7 @@ async function serveTranslatedCachedPage(env: Env, requestUrl: URL, locale: Loca
   try {
     const englishHtml = await loadCurrentEnglishSourceHtml(env, requestUrl, locale)
     if (englishHtml) {
-      const unchanged = knownSourceHash === (await translationSourceHash(locale, englishHtml))
+      const unchanged = knownSourceHash === (await eligibilityAwareSourceHash(env, new Request(requestUrl.toString()), requestUrl, locale, englishHtml)).hash
       // Keep current executable scripts even while a changed page waits in the queue.
       let syncedHtml = unchanged ? translatedHtml : syncExecutableScriptsFromEnglish(translatedHtml, englishHtml)
       if (!syncedHtml.includes('capgo-edge-language-selector-hash')) {
@@ -4468,6 +4485,7 @@ export const __translationWorkerTest = {
   translationMemoryKey,
   seedSitemapPathsForTest,
   untranslatablePageReason,
+  eligibilityAwareSourceHash,
   sitemapLocs,
   TRANSLATION_MEMORY_VERSION,
   aiRequestOptions,
