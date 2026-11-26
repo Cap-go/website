@@ -69,6 +69,7 @@ test('keeps serving the last good list when a refresh fails or comes back empty'
   for (const failing of [upstream({}, 500), upstream({ defaultXcodeMajor: '26', xcodeVersions: [] })]) {
     const response = await handleBuilderVariants(request(), env, undefined, failing.fetchImpl)
     expect(response.status).toBe(200)
+    expect(response.headers.get('Cache-Control')).toContain('max-age=60,')
     expect((await response.json()).xcode_versions).toEqual(['27.1', '26.2', '26.1'])
     expect(failing.calls).toHaveLength(1)
   }
