@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-11-26T09:44:39.452Z
-updated_at: 2026-11-26T09:44:41.444Z
+updated_at: 2026-11-26T09:47:48.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/1d62239b-8cfa-44f1-9ca9-e61590c827e4/app-development-with-javascript-coding-illustration.jpg'
 head_image_alt: 'App Development with JavaScript: Stacks and Tradeoffs'
 keywords: 'JavaScript app development, Capacitor apps, React Native, hybrid mobile apps, Electron desktop apps'
