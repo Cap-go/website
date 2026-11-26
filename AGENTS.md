@@ -53,6 +53,12 @@ bunx @tailwindcss/upgrade --force
 - Preserve locale prefixes (`/de/`, `/fr/`, etc.) so each language keeps working backlinks.
 - Prefer permanent (301) redirects so earned backlinks are not lost.
 
+## Outrank Imported Posts (HARD RULE)
+
+- An Outrank-imported post is any blog file first added by a `chore: import Outrank articles` commit. Check with `git log --diff-filter=A --format=%s -- <file>` on a full (non-shallow) clone.
+- Never remove or change outbound links in these posts. They are backlink exchanges we must keep, including during SEO rewrites. Rewrite the prose around a link if needed, but keep the link URL and anchor text.
+- Never prune, redirect, or delete an Outrank-imported post without asking Martin first.
+
 ## Visual Diff For PRs
 
 Use the visual diff tool whenever a PR changes page layout, styling, components, or marketing copy that affects rendered HTML.
