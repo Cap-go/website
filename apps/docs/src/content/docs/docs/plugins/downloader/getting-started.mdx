@@ -124,6 +124,47 @@ if (Capacitor.getPlatform() === 'ios') {
 
 See also the [plugin repository README](https://github.com/Cap-go/capacitor-downloader/#robust-background-downloads-offline-packs).
 
+## lengthHeader for gzip downloads
+
+Available since **8.9.0**. Related plugin change: [capacitor-downloader#144](https://github.com/Cap-go/capacitor-downloader/pull/144).
+
+Use `lengthHeader` when your CDN compresses the response body (`Content-Encoding: gzip` or similar) and either omits `Content-Length` or sends a value for **compressed** bytes. Many CDNs still send the uncompressed size in a custom header such as `X-Uncompressed-Length`. Pass that header **name** (not the numeric value) on `download()`.
+
+| Scope | `lengthHeader` |
+| --- | --- |
+| Single download, iOS | Supported |
+| Single download, Android OkHttp | Set `androidHttpEngine` to `'okhttp'` or `'auto'` on app-private destinations |
+| Batch download, iOS | Supported (one header name for every file in `files`) |
+| Batch download, Android | Ignored (batches always use DownloadManager) |
+| Android DownloadManager (single) | Ignored |
+| Web | Ignored |
+
+Without `lengthHeader`, progress can stay at `0`, complete too early, or report the wrong `bytesTotal`. The plugin reads the named header from the HTTP response, prefers it over misleading native totals, and clamps `progress` at `1`.
+
+Do not add `Accept-Encoding: gzip` (or similar) to `headers`. That disables OkHttp transparent decompression on Android and leaves `Content-Encoding` on the response, so Android OkHttp ignores `lengthHeader` and progress can stall.
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+const progressListener = await CapacitorDownloader.addListener('downloadProgress', (event) => {
+  if (event.id === 'gzip-pack') {
+    console.log(event.progress, event.bytesTotal, event.bytesWritten);
+  }
+});
+
+await CapacitorDownloader.download({
+  id: 'gzip-pack',
+  url: 'https://cdn.example.com/bundle.tar.gz',
+  destination: 'files/updates/bundle.tar.gz',
+  androidHttpEngine: 'okhttp',
+  lengthHeader: 'X-Uncompressed-Length',
+});
+```
+
+On iOS, multi-file batches share one `lengthHeader` for every file in `files`. Android batches always use DownloadManager and ignore `lengthHeader`.
+
+See also the [plugin README section](https://github.com/Cap-go/capacitor-downloader/#lengthheader-for-gzip-and-compressed-responses).
+
 ## Multi-file batch downloads
 
 Available since **8.7.0** on **iOS and Android** (not on Web; `download()` is not implemented there). Install `@capgo/capacitor-downloader` at **8.7.0** or newer (see [Install](#install)), then pass `DownloadBatchOptions` (`files`, no top-level `url`/`destination`) to `download()`. Do not mix single-file fields with `files`; the plugin rejects `url` and `files` together at runtime. Up to **32** transfers share one batch `id`. Shared options such as `headers`, `network`, `priority`, and `notification` apply to every entry.
