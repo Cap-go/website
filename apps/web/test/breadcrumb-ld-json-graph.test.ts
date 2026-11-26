@@ -29,6 +29,7 @@ test('createLdJsonGraph embeds a single BreadcrumbList for alternatives pages', 
 
   const breadcrumbNodes = graph['@graph'].filter((node) => (node as { '@type'?: string })['@type'] === 'BreadcrumbList')
   expect(breadcrumbNodes).toHaveLength(1)
-  expect(breadcrumbNodes[0].itemListElement).toHaveLength(3)
+  const breadcrumb = breadcrumbNodes[0] as { itemListElement: unknown[] }
+  expect(breadcrumb.itemListElement).toHaveLength(3)
   expect(JSON.stringify(graph)).toContain('BreadcrumbList')
 })
