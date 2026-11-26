@@ -328,6 +328,7 @@ const STATIC_PREFIXES = [
   '/sponsors.json',
   '/live-update-metrics.json',
   '/builder-metrics.json',
+  '/builder-variants.json',
   '/featured',
 ]
 function escapeHtmlText(value: string): string {

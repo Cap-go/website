@@ -6681,6 +6681,7 @@ const messages = {
   native_build_v2_tile_cli_sub: 'Same flag, both platforms. Build, sign, ship.',
   native_build_v2_tile_hw_title: 'Apple Silicon runners',
   native_build_v2_tile_hw_sub: 'M4 Mac runners for iOS and Android. Fast, consistent builds.',
+  native_build_v2_tile_hw_xcode_label: 'Xcode available now:',
   native_build_v2_tile_sec_title: 'Zero-trust security',
   native_build_v2_tile_sec_sub: 'Credentials never stored. Deleted after every build.',
   native_build_v2_tile_asc_title: 'Stores when you want',
