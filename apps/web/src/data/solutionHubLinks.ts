@@ -23,7 +23,7 @@ const staticSolutions: SolutionHubLink[] = [
   { path: 'solutions/webapp-to-mobile/', labelKey: 'solutions_webapp_to_mobile_short' },
   { path: 'solutions/cordova-to-capacitor/', labelKey: 'solutions_cordova_to_capacitor_short' },
   { path: 'solutions/cordova-to-capacitor-ai/', labelKey: 'solutions_cordova_to_capacitor_ai_short' },
-  { path: 'solutions/ionic-enterprise-plugins/', labelKey: 'solutions_ionic_enterprise_plugins_badge' },
+  { path: 'solutions/ionic-enterprise-plugins/', labelKey: 'solutions_ionic_plugins_short' },
 ]
 
 export const builderSolutionHubLinks = appBuilders.map((builder) => ({

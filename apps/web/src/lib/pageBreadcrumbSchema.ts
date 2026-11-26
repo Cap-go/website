@@ -9,21 +9,3 @@ export function breadcrumbGraphOptions(crumbs: PageBreadcrumb[]) {
     breadcrumbs: crumbs.map(({ name, url }) => ({ name, url })),
   }
 }
-
-export function createBreadcrumbListForValidation(pageUrl: string, breadcrumbs: PageBreadcrumb[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    '@id': `${pageUrl}#breadcrumb`,
-    itemListElement: breadcrumbs.map((crumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      item: {
-        '@type': 'WebPage',
-        '@id': crumb.url,
-        url: crumb.url,
-        name: crumb.name,
-      },
-    })),
-  }
-}

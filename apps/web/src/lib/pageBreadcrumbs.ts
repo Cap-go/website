@@ -1,10 +1,10 @@
 import m from '@/copy/messages'
 import type { PageBreadcrumb } from '@/lib/pageBreadcrumbSchema'
-import { breadcrumbGraphOptions, createBreadcrumbListForValidation } from '@/lib/pageBreadcrumbSchema'
+import { breadcrumbGraphOptions } from '@/lib/pageBreadcrumbSchema'
 import { getAbsoluteLocaleUrl } from '@/services/links'
 
 export type { PageBreadcrumb } from '@/lib/pageBreadcrumbSchema'
-export { breadcrumbGraphOptions, createBreadcrumbListForValidation }
+export { breadcrumbGraphOptions }
 
 export function buildSectionHubBreadcrumbs(locale: string, baseUrl: string, hubPath: string, hubName: string): PageBreadcrumb[] {
   return [

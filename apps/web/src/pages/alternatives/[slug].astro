@@ -61,8 +61,7 @@ const migration = {
 
 const title = competitor.metaTitle
 const description = competitor.metaDescription
-const breadcrumbName = m.alternatives_index_card_title({ competitor: competitor.name }, { locale })
-const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, breadcrumbName, `alternatives/${competitor.slug}/`)
+const breadcrumbCrumbs = buildAlternativesPageBreadcrumbs(locale, config.baseUrl, competitor.name, `alternatives/${competitor.slug}/`)
 
 const content = {
   title,

@@ -6,13 +6,18 @@ const distRoot = join(import.meta.dir, '..', 'dist', 'alternatives', 'bitrise', 
 
 test('built alternatives page includes visible breadcrumb nav and BreadcrumbList JSON-LD', () => {
   if (!existsSync(distRoot)) {
-    console.warn('Skipping built HTML breadcrumb test: run bun run build:web first')
-    return
+    throw new Error(`Missing ${distRoot}. Run "bun run build:web" before this test.`)
   }
 
   const html = readFileSync(distRoot, 'utf8')
   expect(html).toMatch(/<nav[^>]*aria-label="Breadcrumb"/)
-  expect(html).toMatch(/BreadcrumbList/)
-  expect(html).toMatch(/https:\/\/capgo\.app\/alternatives\/"/)
-  expect(html).toMatch(/https:\/\/capgo\.app\/alternatives\/bitrise\/"/)
+
+  const ldJsonBlocks = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]))
+  const breadcrumb = ldJsonBlocks
+    .flatMap((block) => (Array.isArray(block['@graph']) ? block['@graph'] : [block]))
+    .find((block) => block['@type'] === 'BreadcrumbList')
+
+  expect(breadcrumb).toBeDefined()
+  expect(JSON.stringify(breadcrumb)).toContain('https://capgo.app/alternatives/')
+  expect(JSON.stringify(breadcrumb)).toContain('https://capgo.app/alternatives/bitrise/')
 })
