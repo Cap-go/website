@@ -71,11 +71,9 @@ const capgoCloudCards: CardData[] = [
   },
 ]
 
-const getPluginSlug = (card: Pick<CardData, 'href' | 'name'>): string => {
-  if (card.name?.includes('/')) return card.name.split('/')[1]!
+const getPluginSlug = (card: Pick<CardData, 'href'>): string => {
   const normalizedHref = card.href.replace(/\/$/, '')
-  const repoHref = normalizedHref.includes('/tree/') ? normalizedHref.slice(0, normalizedHref.indexOf('/tree/')) : normalizedHref
-  return repoHref.slice(repoHref.lastIndexOf('/') + 1).toLowerCase()
+  return normalizedHref.substring(normalizedHref.lastIndexOf('/') + 1).toLowerCase()
 }
 
 const getPluginDocsUrl = (card: CardData): string => {

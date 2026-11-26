@@ -11,7 +11,7 @@ import { withDevHostNoindex } from '../../../shared/devHostNoindex'
 import { isGonePath } from '../../../shared/gonePaths'
 import { resolveLocalizedLegacyRedirectPath, splitLocalePath } from '../../../shared/localizedLegacyPathRedirect'
 import { resolveNotFoundRecoveryRedirect } from '../../../shared/notFoundRecovery'
-import { PLUGIN_MARKETING_REDIRECTS_TO_DOCS } from '../../../shared/pluginMarketingRedirects'
+import { pluginMarketingRedirectsToDocs } from '../../../shared/pluginMarketingRedirects'
 import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRedirect'
 import { withTranslationReadiness, type TranslationStoreReader } from '../../../shared/translationReadiness'
 import { handleToolApiRequest } from '../lib/tools/api'
@@ -366,7 +366,7 @@ export function staticLegacyRedirect(request: Request, pathname: string): Respon
   }
   const pluginMatch = path.match(/^\/plugins\/([^/]+)\/?$/)
   if (pluginMatch) {
-    const docsPath = PLUGIN_MARKETING_REDIRECTS_TO_DOCS[pluginMatch[1]]
+    const docsPath = pluginMarketingRedirectsToDocs(pluginMatch[1])
     if (docsPath) {
       return redirectToPath(request, `${localePrefix}${docsPath}`)
     }

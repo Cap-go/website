@@ -62,9 +62,7 @@ export const buildPluginDirectory = async (baseUrl: string, pluginPageSlugs: Rea
     const repositoryName = getRepositoryName(plugin.href)
     const marketingRedirect = pluginMarketingRedirectsToDocs(slug)
     const capgoUrl = marketingRedirect
-      ? docsSlug
-        ? absoluteUrl(baseUrl, `/docs/plugins/${docsSlug}/`)
-        : undefined
+      ? absoluteUrl(baseUrl, marketingRedirect)
       : pluginPageSlugs.has(slug)
         ? absoluteUrl(baseUrl, `/plugins/${slug}/`)
         : undefined

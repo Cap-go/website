@@ -11,5 +11,5 @@ export const PLUGIN_MARKETING_REDIRECTS_TO_DOCS: Record<string, string> = {
 }
 
 export function pluginMarketingRedirectsToDocs(slug: string): string | null {
-  return PLUGIN_MARKETING_REDIRECTS_TO_DOCS[slug] ?? null
+  return Object.hasOwn(PLUGIN_MARKETING_REDIRECTS_TO_DOCS, slug) ? PLUGIN_MARKETING_REDIRECTS_TO_DOCS[slug] : null
 }
