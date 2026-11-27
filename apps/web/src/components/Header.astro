@@ -15,11 +15,16 @@ const brandPageUrl = getRelativeLocaleUrl(locale, 'brand/')
 const isEnterprisePage = getRelativeLocaleUrl(locale, 'enterprise').replace(/\/$/, '') === Astro.url.pathname.replace(/\/$/, '')
 // The sign-up page is where the CTA leads: a second sign-up button there only pulls people off the form.
 const isRegisterPage = getRelativeLocaleUrl(locale, 'register').replace(/\/$/, '') === Astro.url.pathname.replace(/\/$/, '')
+const isWhyLandingPage = /(?:^|\/)why\/[^/]+\/?$/.test(Astro.url.pathname)
 const navCtaHref = isEnterprisePage ? 'https://book.capgo.app/enterprise-inquiry/' : getRelativeLocaleUrl(locale, 'register')
 // The sales booking page is external; the trial sign-up stays in the same tab so phones keep their back button.
 const navCtaTarget = isEnterprisePage ? '_blank' : undefined
 const navCtaRel = isEnterprisePage ? 'noopener noreferrer' : undefined
-const navCtaLabel = isEnterprisePage ? m.enterprise_talk_to_team({}, { locale }) : m.nav_cta_start_free({}, { locale })
+const navCtaLabel = isEnterprisePage
+  ? m.enterprise_talk_to_team({}, { locale })
+  : isWhyLandingPage
+    ? m.direct_offer_cta_start_shipping({}, { locale })
+    : m.nav_cta_start_free({}, { locale })
 const brandLogoSvgUrl = '/brand/capgo-lockup-white-transparent.svg'
 const brandLogoPngUrl = '/brand/capgo-lockup-white-transparent.png'
 

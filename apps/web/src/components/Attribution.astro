@@ -97,7 +97,8 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
 
       var params = new URLSearchParams(location.search)
       var urlOffer = params.get(offerParam) === directOffer
-      if (urlOffer) markDirectOffer()
+      var isWhyLanding = path.indexOf('/why/') === 0
+      if (urlOffer || isWhyLanding) markDirectOffer()
       var incoming = {
         first_touch_type: classifyTouchType(path),
         first_touch_path: path,

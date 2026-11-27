@@ -2,6 +2,8 @@
 import WhyLandingLayout from '@/components/why/WhyLandingLayout.astro'
 import { pluginCategories, pluginCountLabel } from '@/config/plugins'
 import m from '@/copy/messages'
+import { formatStartingMonthlyPrice } from '@/lib/planCopy'
+import { getPlans } from '@/lib/siteData'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
@@ -16,6 +18,11 @@ const pluginCopyParams = {
   pluginCountLabel,
   categoryCount: String(pluginCategories.length),
 }
+
+const startingPrice = formatStartingMonthlyPrice(getPlans(), locale)
+const commercialLine = startingPrice
+  ? m.direct_offer_price_guarantee_note({ price: startingPrice }, { locale })
+  : m.direct_offer_guarantee_note({}, { locale })
 
 const h1 = m.why_plugins_h1({}, { locale })
 const title = `${m.why_plugins_seo_title({}, { locale })} | ${brand}`
@@ -68,7 +75,7 @@ const compareTitle = m.why_plugins_compare_title({}, { locale })
   content={content}
   h1={h1}
   heroAnswer={m.why_plugins_hero_answer(pluginCopyParams, { locale })}
-  commercialLine={m.why_plugins_commercial({}, { locale })}
+  commercialLine={commercialLine}
   reasons={reasons}
   comparisonHtml={comparisonHtml}
   compareTitle={compareTitle}

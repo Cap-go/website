@@ -6624,12 +6624,11 @@ const messages = {
     'Stay inside store rules by updating only the Capacitor web layer while native code still follows the normal release path. Web-layer changes that add material functionality still need a normal store release, the same limit described in Capgo store compliance FAQs. Read how OTA fits alongside store review on the <a href="{liveUpdateUrl}">Capgo Live Update product page</a> and in the <a href="{updaterDocsUrl}">Capacitor updater plugin documentation</a>. The open-source updater plugin and Capgo plugins are free under MPL-2.0.',
   why_live_updates_reason5_title: 'Web-layer updates that respect store policy',
   why_live_updates_seo_title: '5 reasons to ship Capacitor live updates with Capgo',
-  why_plugins_commercial: 'From $14/month. 14-day money-back guarantee. Cancel anytime.',
   why_plugins_compare_html:
     'Capacitor community plugins and Capawesome packages are solid choices when they already match your stack. Ionic still sells enterprise plugins for some teams, often with proprietary terms. Capgo focuses on open source MPL-2.0 Capacitor packages maintained alongside live updates. For honest notes, see our <a href="{capawesomeUrl}">Capawesome alternative page</a> and <a href="{ionicPluginsUrl}">Ionic enterprise plugins migration page</a>.',
   why_plugins_compare_title: 'How this compares to community plugins, Ionic, and Capawesome',
   why_plugins_description:
-    'Five reasons Capacitor teams use maintained Capgo plugins for native APIs, with public docs, open source licenses, and the same team that ships live updates.',
+    'Five reasons Capacitor teams pick Capgo plugins: maintained native APIs, open docs, MPL-2.0 licenses, and live update platform.',
   why_plugins_hero_answer:
     'Capgo maintains {pluginCountLabel} open source Capacitor plugins on capgo.app/plugins, each with npm and GitHub links in the public registry. They ship under MPL-2.0 and follow Capacitor major versions so your dependencies stay aligned as you upgrade.',
   why_plugins_h1: '5 reasons to use Capgo plugins',

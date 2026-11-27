@@ -393,8 +393,10 @@ test('direct-offer hero uses Start shipping now without step copy and preserves 
   expect(signupCta).not.toContain('No free trial')
   expect(signupCta).not.toContain('See monthly plans')
 
-  // Verify restored standard nav CTA selection and rendered desktop/mobile anchors
-  expect(header).toContain('const navCtaLabel = isEnterprisePage ? m.enterprise_talk_to_team({}, { locale }) : m.nav_cta_start_free({}, { locale })')
+  // /why/* landings use paid-ads CTA in the header; other pages keep Start for free
+  expect(header).toContain('isWhyLandingPage')
+  expect(header).toContain('m.direct_offer_cta_start_shipping({}, { locale })')
+  expect(header).toContain('m.nav_cta_start_free({}, { locale })')
   expect(header.match(/<a[\s\S]{0,600}href=\{navCtaHref\}[\s\S]{0,600}\{navCtaLabel\}[\s\S]{0,40}<\/a>/g)?.length).toBe(2)
   expect(header).not.toContain('navCtaDirectLabel')
   expect(header).not.toContain('direct_offer_cta_get_started')
