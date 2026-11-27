@@ -1,0 +1,79 @@
+---
+import WhyLandingLayout from '@/components/why/WhyLandingLayout.astro'
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const liveUpdateUrl = getRelativeLocaleUrl(locale, 'live-update/')
+const updaterDocsUrl = getRelativeLocaleUrl(locale, 'docs/plugins/updater/')
+const codepushAltUrl = getRelativeLocaleUrl(locale, 'alternatives/codepush/')
+const appflowAltUrl = getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow/')
+
+const h1 = m.why_live_updates_h1({}, { locale })
+const title = `${m.why_live_updates_seo_title({}, { locale })} | ${brand}`
+const description = m.why_live_updates_description({}, { locale })
+
+const content = {
+  title,
+  description,
+  keywords: m.why_live_updates_keywords({}, { locale }),
+  robots: 'noindex, follow',
+  alternateVersions: [],
+}
+
+const reasons = [
+  {
+    title: m.why_live_updates_reason1_title({}, { locale }),
+    body: m.why_live_updates_reason1_body({}, { locale }),
+  },
+  {
+    title: m.why_live_updates_reason2_title({}, { locale }),
+    body: m.why_live_updates_reason2_body({}, { locale }),
+  },
+  {
+    title: m.why_live_updates_reason3_title({}, { locale }),
+    body: m.why_live_updates_reason3_body({}, { locale }),
+  },
+  {
+    title: m.why_live_updates_reason4_title({}, { locale }),
+    body: m.why_live_updates_reason4_body({}, { locale }),
+  },
+  {
+    title: m.why_live_updates_reason5_title({}, { locale }),
+    body: m.why_live_updates_reason5_body(
+      { liveUpdateUrl, updaterDocsUrl },
+      { locale },
+    ),
+    html: true,
+  },
+]
+
+const comparisonHtml = m.why_live_updates_compare_html(
+  { codepushUrl: codepushAltUrl, appflowUrl: appflowAltUrl },
+  { locale },
+)
+---
+
+<WhyLandingLayout
+  content={content}
+  h1={h1}
+  heroAnswer={m.why_live_updates_hero_answer({}, { locale })}
+  commercialLine={m.why_live_updates_commercial({}, { locale })}
+  reasons={reasons}
+  comparisonHtml={comparisonHtml}
+  locale={locale}
+/>
+
+<style is:global>
+  #main-content a:not(.signup-cta-button) {
+    color: #93c5fd;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #main-content a:not(.signup-cta-button):hover {
+    color: #bfdbfe;
+  }
+</style>

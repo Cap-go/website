@@ -72,6 +72,7 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates, sitemap
           !normalized.endsWith('/410/') &&
           normalized !== '/410/' &&
           normalized !== '/featured/' &&
+          !normalized.startsWith('/why/') &&
           !normalized.includes('/plugins/tailwind-capacitor/demo/shell/')
         )
       },

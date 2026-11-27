@@ -6598,6 +6598,34 @@ const messages = {
   when_down_review:
     "When an application works too slow or gets down (even for a few minutes), it can damage users' satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.",
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
+  why_live_updates_commercial: 'From $14/month. 14-day money-back guarantee. Cancel anytime.',
+  why_live_updates_compare_html:
+    'Microsoft retired App Center CodePush on March 31, 2025. Ionic is winding down Appflow, and live updates are no longer sold to new Appflow customers. For honest side-by-side notes, see our <a href="{codepushUrl}">CodePush alternative page</a> and <a href="{appflowUrl}">Ionic Appflow alternative page</a>.',
+  why_live_updates_description:
+    'Five reasons Capacitor teams ship JavaScript, HTML, and CSS fixes through Capgo live updates instead of waiting on app store review.',
+  why_live_updates_hero_answer:
+    'Capgo delivers web bundles to production Capacitor apps through channels. Devices verify checksums before activation, and RSA signed checksum verification applies when you configure publicKey in the updater. Optional end-to-end encryption applies when enabled, so your team can fix users without a new store build.',
+  why_live_updates_h1: '5 reasons to ship your Capacitor updates live with Capgo',
+  why_live_updates_keywords:
+    'Capacitor live updates, OTA updates, Capgo, app store review, rollback, release channels',
+  why_live_updates_reason1_body:
+    'Production bugs in your web layer do not have to wait on Apple or Google review. Capgo ships those bundles over the air while your native binary stays the same. OTA updates change the Capacitor web layer (JavaScript, HTML, CSS, and assets) without submitting a new native binary.',
+  why_live_updates_reason1_title: 'Fix production without waiting on store review',
+  why_live_updates_reason2_body:
+    'Point testers, beta users, and production devices at different release channels from the dashboard, CLI, or API. Rollout rules and version targeting keep each native build on a compatible bundle. The Solo plan includes 2 channels per organization.',
+  why_live_updates_reason2_title: 'Channels and staged rollouts',
+  why_live_updates_reason3_body:
+    'When a release misbehaves, you need to recover faster than another store submission. Capgo can roll back automatically if a bundle fails to start. From the cloud dashboard you can also roll back instantly with one click.',
+  why_live_updates_reason3_title: 'Automatic rollback and one-click revert',
+  why_live_updates_reason4_body:
+    'Each device validates bundle integrity with checksums before activation. When you configure a publicKey in the updater, RSA-signed checksums are required and missing or invalid signatures are rejected. With end-to-end encryption enabled, bundles are also encrypted with your keys before upload. The updater plugin exposes a publicKey setting for live update encryption version 2 on iOS, Android, and Electron.',
+  why_live_updates_reason4_title: 'End-to-end encryption for bundles',
+  why_live_updates_reason5_body:
+    'Stay inside store rules by updating only the Capacitor web layer while native code still follows the normal release path. Web-layer changes that add material functionality still need a normal store release, the same limit described in Capgo store compliance FAQs. Read how OTA fits alongside store review on the <a href="{liveUpdateUrl}">Capgo Live Update product page</a> and in the <a href="{updaterDocsUrl}">Capacitor updater plugin documentation</a>. The open-source updater plugin and Capgo plugins are free under MPL-2.0.',
+  why_live_updates_reason5_title: 'Web-layer updates that respect store policy',
+  why_live_updates_seo_title: '5 reasons to ship Capacitor live updates with Capgo',
+  why_page_compare_title: 'How this compares to CodePush and Appflow',
+  why_page_reason_label: 'Reason {number}',
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
   why_capgo_plugin_engineering_body:
     'We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily.',
