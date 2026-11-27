@@ -6711,6 +6711,8 @@ export const messageContexts = {
   why_live_updates_reason5_body: 'Page/area: Capgo marketing website. Role: Long marketing or legal paragraph. Seen in: page why/live-updates.astro. Preserve Capgo product/brand and developer terms exactly. Message key `why_live_updates_reason5_body` (Why Live Updates Reason5 Body).',
   why_live_updates_reason5_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: page why/live-updates.astro. Message key `why_live_updates_reason5_title` (Why Live Updates Reason5 Title).',
   why_live_updates_seo_title: 'Page/area: Capgo marketing website. Role: SEO page title. Seen in: page why/live-updates.astro. Preserve Capgo product/brand and developer terms exactly. Message key `why_live_updates_seo_title` (Why Live Updates SEO Title).',
+  why_page_compare_title: 'Page/area: Capgo marketing website. Role: Section or page heading. Seen in: component why/WhyLandingLayout.astro. Preserve Capgo product/brand and developer terms exactly. Message key `why_page_compare_title` (Why Page Compare Title).',
+  why_page_reason_label: 'Page/area: Capgo marketing website. Role: UI label. Seen in: component why/WhyLandingLayout.astro. Message key `why_page_reason_label` (Why Page Reason Label).',
   why_work: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: page consulting.astro. Message key `why_work` (Why Work).',
   with_us: 'Page/area: Capgo marketing website. Role: Website copy sentence. Seen in: page consulting.astro. Message key `with_us` (With Us).',
   work_without_internet_connection: 'Page/area: Capgo marketing website. Role: Website copy sentence. Message key `work_without_internet_connection` (Work Without Internet Connection).',
