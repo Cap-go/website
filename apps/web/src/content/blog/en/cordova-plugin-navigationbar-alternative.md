@@ -17,7 +17,7 @@ origin: human
 next_blog: ''
 faq:
   - question: "What is the best cordova-plugin-navigationbar alternative in Capacitor?"
-    answer: "@capgo/capacitor-navigation-bar replaces Cordova hide and setup calls with typed promises, adds setNavigationBarColor and getNavigationBarColor for Android 5+, and documents divider colors on API 28+."
+    answer: "@capgo/capacitor-navigation-bar replaces Cordova hide and setup calls with typed promises, adds setNavigationBarColor and getNavigationBarColor for Android 7+ (API 24), and documents divider colors on API 28+."
   - question: "Does @capgo/capacitor-navigation-bar work on iOS?"
     answer: "No. iOS has no software navigation bar. The Cordova plugin was Android-only as well. Use safe area and edge-to-edge WebView config on iOS."
   - question: "Is cordova-plugin-navigationbar still maintained?"
@@ -43,6 +43,8 @@ Examples in the upstream repo sometimes call `window.navigationbar.hide()`, but 
 
 ## Install
 
+The command below installs the npm **8.x** line for **Capacitor 8** (`@capacitor/core` >= 8). Capgo plugin majors track Capacitor majors. On Capacitor 7, install the matching **7.x** release instead (see the plugin README).
+
 ```bash
 bun add @capgo/capacitor-navigation-bar
 bunx cap sync
@@ -53,9 +55,11 @@ Optional defaults in `capacitor.config` under `plugins.NavigationBar` can set `c
 ## Usage example
 
 ```ts
+import { Capacitor } from '@capacitor/core';
 import { NavigationBar, NavigationBarColor } from '@capgo/capacitor-navigation-bar';
 
 export async function enterImmersiveReader() {
+  if (Capacitor.getPlatform() !== 'android') return;
   await NavigationBar.setNavigationBarColor({
     color: NavigationBarColor.BLACK,
     darkButtons: false,
@@ -64,6 +68,7 @@ export async function enterImmersiveReader() {
 }
 
 export async function exitImmersiveReader() {
+  if (Capacitor.getPlatform() !== 'android') return;
   await NavigationBar.show();
   const { color, darkButtons } = await NavigationBar.getNavigationBarColor();
   console.log(color, darkButtons);
@@ -78,17 +83,26 @@ Pair navigation bar theming with [edge-to-edge display configuration](/blog/capa
 // Before (Cordova)
 document.addEventListener('deviceready', () => {
   window.navigationbar.setUp(false, success, error);
+  window.navigationbar.hideNavigationBar(success, error);
 });
-window.navigationbar.hideNavigationBar(success, error);
 ```
 
 ```ts
-// After (Capacitor)
+// After (Capacitor), enter immersive screen
+import { Capacitor } from '@capacitor/core';
 import { NavigationBar } from '@capgo/capacitor-navigation-bar';
 
-await NavigationBar.setNavigationBarColor({ color: '#0f172a', darkButtons: false });
-await NavigationBar.hide();
-await NavigationBar.show();
+if (Capacitor.getPlatform() === 'android') {
+  await NavigationBar.setNavigationBarColor({ color: '#0f172a', darkButtons: false });
+  await NavigationBar.hide();
+}
+```
+
+```ts
+// After (Capacitor), leave immersive screen
+if (Capacitor.getPlatform() === 'android') {
+  await NavigationBar.show();
+}
 ```
 
 Cordova `setUp(true, ...)` only toggles auto-hide on the native side. In Capacitor you implement auto-hide in app logic: call `hide()` when entering fullscreen and `show()` when leaving, or listen to your router and keyboard events.
