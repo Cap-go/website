@@ -1,9 +1,12 @@
 ---
 import WhyLandingLayout from '@/components/why/WhyLandingLayout.astro'
 import m from '@/copy/messages'
+import { formatStartingMonthlyPrice } from '@/lib/planCopy'
+import { getPlans } from '@/lib/siteData'
 import { getRelativeLocaleUrl } from '@/services/links'
 
 const locale = Astro.locals.locale
+const startingPrice = formatStartingMonthlyPrice(getPlans(), locale) ?? '$14'
 const brand = Astro.locals.runtimeConfig.public.brand
 
 const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build/')
@@ -63,7 +66,7 @@ const compareTitle = m.why_capgo_build_compare_title({}, { locale })
   content={content}
   h1={h1}
   heroAnswer={m.why_capgo_build_hero_answer({}, { locale })}
-  commercialLine={m.why_capgo_build_commercial({}, { locale })}
+  commercialLine={m.why_capgo_build_commercial({ price: startingPrice }, { locale })}
   reasons={reasons}
   comparisonHtml={comparisonHtml}
   compareTitle={compareTitle}

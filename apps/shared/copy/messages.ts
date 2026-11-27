@@ -6598,12 +6598,12 @@ const messages = {
   when_down_review:
     "When an application works too slow or gets down (even for a few minutes), it can damage users' satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.",
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
-  why_capgo_build_commercial: 'From $14/month. 14-day money-back guarantee. Cancel anytime.',
+  why_capgo_build_commercial: 'From {price}/month. 14-day money-back guarantee. Cancel anytime.',
   why_capgo_build_compare_html:
     'Expo Application Services targets React Native, while Capgo Build is built for Capacitor apps with signed iOS and Android binaries and store uploads on the same plan as live updates. Ionic Appflow is winding down, and Codemagic is a general mobile CI platform you configure with YAML. For honest side-by-side notes, see our <a href="{appflowUrl}">Ionic Appflow alternative page</a>, <a href="{expoUrl}">Expo EAS alternative page</a>, and <a href="{codemagicUrl}">Codemagic alternative page</a>.',
   why_capgo_build_compare_title: 'How this compares to Appflow, EAS, and Codemagic',
   why_capgo_build_description:
-    'Five reasons Capacitor teams use Capgo Build to compile signed iOS and Android apps in the cloud and publish to App Store Connect and Google Play without a Mac on every desk.',
+    'Five reasons Capacitor teams compile signed iOS and Android apps with Capgo Build in the cloud and publish to App Store Connect and Google Play.',
   why_capgo_build_hero_answer:
     'Capgo Build compiles signed iOS and Android Capacitor binaries in the cloud and can upload them to App Store Connect and Google Play, so your team ships store releases without local Xcode on every machine.',
   why_capgo_build_h1: '5 reasons to build your iOS and Android apps with Capgo Build',
@@ -6625,6 +6625,32 @@ const messages = {
     'Every Capgo plan includes Native Builds alongside live updates, notifications, and Observe; plans differ by usage limits such as included native build minutes, not by locking builds behind a separate product tier. The Solo plan includes 60 minutes of native build time per month on the public pricing table. See the <a href="{nativeBuildUrl}">Capgo native build product page</a> and <a href="{buildDocsUrl}">Capgo CLI build reference</a> for setup and commands.',
   why_capgo_build_reason5_title: 'Native builds on the same subscription as live updates',
   why_capgo_build_seo_title: '5 reasons to build Capacitor apps with Capgo Build',
+  why_live_updates_commercial: 'From $14/month. 14-day money-back guarantee. Cancel anytime.',
+  why_live_updates_compare_html:
+    'Microsoft retired App Center CodePush on March 31, 2025. Ionic is winding down Appflow, and live updates are no longer sold to new Appflow customers. For honest side-by-side notes, see our <a href="{codepushUrl}">CodePush alternative page</a> and <a href="{appflowUrl}">Ionic Appflow alternative page</a>.',
+  why_live_updates_description:
+    'Five reasons Capacitor teams ship JavaScript, HTML, and CSS fixes through Capgo live updates instead of waiting on app store review.',
+  why_live_updates_hero_answer:
+    'Capgo delivers web bundles to production Capacitor apps through channels. Devices verify checksums before activation, and RSA signed checksum verification applies when you configure publicKey in the updater. Optional end-to-end encryption applies when enabled, so your team can fix users without a new store build.',
+  why_live_updates_h1: '5 reasons to ship your Capacitor updates live with Capgo',
+  why_live_updates_keywords:
+    'Capacitor live updates, OTA updates, Capgo, app store review, rollback, release channels',
+  why_live_updates_reason1_body:
+    'Production bugs in your web layer do not have to wait on Apple or Google review. Capgo ships those bundles over the air while your native binary stays the same. OTA updates change the Capacitor web layer (JavaScript, HTML, CSS, and assets) without submitting a new native binary.',
+  why_live_updates_reason1_title: 'Fix production without waiting on store review',
+  why_live_updates_reason2_body:
+    'Point testers, beta users, and production devices at different release channels from the dashboard, CLI, or API. Rollout rules and version targeting keep each native build on a compatible bundle. The Solo plan includes 2 channels per organization.',
+  why_live_updates_reason2_title: 'Channels and staged rollouts',
+  why_live_updates_reason3_body:
+    'When a release misbehaves, you need to recover faster than another store submission. Capgo can roll back automatically if a bundle fails to start. From the cloud dashboard you can also roll back instantly with one click.',
+  why_live_updates_reason3_title: 'Automatic rollback and one-click revert',
+  why_live_updates_reason4_body:
+    'Each device validates bundle integrity with checksums before activation. When you configure a publicKey in the updater, RSA-signed checksums are required and missing or invalid signatures are rejected. With end-to-end encryption enabled, bundles are also encrypted with your keys before upload. The updater plugin exposes a publicKey setting for live update encryption version 2 on iOS, Android, and Electron.',
+  why_live_updates_reason4_title: 'End-to-end encryption for bundles',
+  why_live_updates_reason5_body:
+    'Stay inside store rules by updating only the Capacitor web layer while native code still follows the normal release path. Web-layer changes that add material functionality still need a normal store release, the same limit described in Capgo store compliance FAQs. Read how OTA fits alongside store review on the <a href="{liveUpdateUrl}">Capgo Live Update product page</a> and in the <a href="{updaterDocsUrl}">Capacitor updater plugin documentation</a>. The open-source updater plugin and Capgo plugins are free under MPL-2.0.',
+  why_live_updates_reason5_title: 'Web-layer updates that respect store policy',
+  why_live_updates_seo_title: '5 reasons to ship Capacitor live updates with Capgo',
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
   why_capgo_plugin_engineering_body:
     'We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily.',
@@ -6634,8 +6660,6 @@ const messages = {
   why_capgo_title: 'Faster fixes, without giving up control',
   why_capgo_trust_link: 'Visit the security trust center',
   why_is_it_important: 'Why is it important?',
-  why_page_compare_title: 'How this compares to CodePush and Appflow',
-  why_page_reason_label: 'Reason {number}',
   why_work: 'Why work',
   with_us: 'with us?',
   work_without_internet_connection: 'Work without internet connection',
@@ -6977,7 +7001,7 @@ const messages = {
     'Yes. Capgo Build is generally available for production iOS and Android Capacitor releases. Start through the CLI, CI, or MCP. Build minutes are included in Capgo plans, with prepaid credits for extra minutes. Store developer accounts, signing permissions, and store review requirements still apply.',
   native_build_v2_faq_ai_q: 'Can an AI coding agent build and submit my Capacitor app?',
   native_build_v2_faq_ai_a:
-    'Yes. Codex, Claude Code, Cursor, and other MCP clients can use Capgo Build through the local CLI MCP (request a build from your project) or the hosted MCP (upload the packaged project, then start the build, or monitor jobs started from CI). The CLI supports App Store Connect and Google Play submission. Signing secrets stay out of chat.',
+    'Yes. Capgo MCP supports native builds from Codex, Claude Code, Cursor, and other MCP clients. The local MCP guides signing setup; local and hosted MCP tools can request builds, inspect status, and read logs. The CLI supports App Store Connect and Google Play submission. Signing secrets stay out of chat.',
   native_build_v2_faq_metrics_q: 'Where can I verify build speed and reliability?',
   native_build_v2_faq_metrics_a:
     'The public Native Build data page reports measured processing time, queue wait, success rates, and failure categories over the last 30 days. Results include project and signing errors; they are not an uptime SLA or a guaranteed build time. Check the timestamp and platform breakdown for your evaluation.',

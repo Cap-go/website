@@ -7,6 +7,9 @@ function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message)
 }
 
+// Existing fixtures use pages that are not in a sitemap; the sitemap gate has its own tests below.
+__translationWorkerTest.seedSitemapPathsForTest('all')
+
 const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -1725,3 +1728,68 @@ try {
   assert(homeOrganization.url === 'https://capgo.app/' && homeOrganization['@id'] === 'https://capgo.app/#organization', 'Organization identity changed on a translated homepage')
   assert(homeWebSite.url === 'https://capgo.app/' && homeWebSite['@id'] === 'https://capgo.app/#website', 'WebSite identity changed on a translated homepage')
 }
+
+// Only sitemap pages are translated; noindex pages and unknown paths never reach Workers AI.
+{
+  const gateHtml = (robots = '') => `<!doctype html><html lang="en"><head>${robots}<title>Hi</title></head><body><p>Hello world</p></body></html>`
+  const sitemapEnv = (pages: Record<string, string>) =>
+    ({
+      WEB: { fetch: async (request: Request) => (pages[new URL(request.url).pathname] ? new Response(pages[new URL(request.url).pathname]) : new Response('', { status: 404 })) },
+      DOCS: { fetch: async (request: Request) => (pages[new URL(request.url).pathname] ? new Response(pages[new URL(request.url).pathname]) : new Response('', { status: 404 })) },
+    }) as unknown as Parameters<typeof __translationWorkerTest.untranslatablePageReason>[0]
+  const gateEnv = sitemapEnv({
+    '/sitemap-index.xml': '<sitemapindex><sitemap><loc>https://capgo.app/sitemap-0.xml</loc></sitemap><sitemap><loc>https://capgo.app/sitemap-docs-0.xml</loc></sitemap></sitemapindex>',
+    '/sitemap-0.xml': '<urlset><url><loc>https://capgo.app/pricing/</loc></url><url><loc>https://capgo.app/fr/pricing/</loc></url></urlset>',
+    '/sitemap-docs-0.xml': '<urlset><url><loc>https://capgo.app/docs/cli/</loc></url></urlset>',
+  })
+  const gateRequest = new Request('https://capgo.app/fr/pricing/')
+  __translationWorkerTest.seedSitemapPathsForTest(null)
+  assert((await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml())) === null, 'A sitemap page was skipped')
+  assert((await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/ja/docs/cli'), gateHtml())) === null, 'A docs sitemap page without a trailing slash was skipped')
+  assert((await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/fr/redirtest.acx/ai/'), gateHtml())) === 'not-in-sitemap', 'A bot probe path was translated')
+  assert(
+    (await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml('<meta name="robots" content="noindex, follow">'))) === 'noindex',
+    'A noindex page was translated',
+  )
+  assert(
+    (await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml('<meta name=robots content=noindex>'))) === 'noindex',
+    'A noindex page with unquoted attributes was translated',
+  )
+  assert(
+    (await __translationWorkerTest.untranslatablePageReason(gateEnv, gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml('<meta name="robots" content="index, follow, max-image-preview:none">'))) === null,
+    'A max-image-preview:none directive was read as noindex',
+  )
+  __translationWorkerTest.seedSitemapPathsForTest(null)
+  let sitemapFailed = false
+  await __translationWorkerTest.untranslatablePageReason(sitemapEnv({}), gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml()).catch(() => {
+    sitemapFailed = true
+  })
+  assert(sitemapFailed, 'A missing sitemap did not fail so the queue retries later')
+  for (const [label, pages] of [
+    ['empty', { '/sitemap-index.xml': '<sitemapindex><sitemap><loc>https://capgo.app/sitemap-0.xml</loc></sitemap></sitemapindex>', '/sitemap-0.xml': '<urlset></urlset>' }],
+    ['soft-404', { '/sitemap-index.xml': '<sitemapindex><sitemap><loc>https://capgo.app/sitemap-0.xml</loc></sitemap></sitemapindex>', '/sitemap-0.xml': '<!doctype html><html><body>Not found</body></html>' }],
+  ] as const) {
+    __translationWorkerTest.seedSitemapPathsForTest(null)
+    let failed = false
+    await __translationWorkerTest.untranslatablePageReason(sitemapEnv(pages), gateRequest, new URL('https://capgo.app/fr/pricing/'), gateHtml()).catch(() => {
+      failed = true
+    })
+    assert(failed, `An ${label} sitemap did not fail so the queue retries later`)
+  }
+  // Same English HTML, but the page leaves and rejoins the sitemap: the source hash must
+  // change both ways so stored pages are refreshed instead of renewed.
+  const sameHtml = gateHtml()
+  const pricingUrl = new URL('https://capgo.app/fr/pricing/')
+  __translationWorkerTest.seedSitemapPathsForTest(new Set(['/pricing/']))
+  const listed = await __translationWorkerTest.eligibilityAwareSourceHash(gateEnv, gateRequest, pricingUrl, 'fr', sameHtml)
+  __translationWorkerTest.seedSitemapPathsForTest(new Set(['/other/']))
+  const unlisted = await __translationWorkerTest.eligibilityAwareSourceHash(gateEnv, gateRequest, pricingUrl, 'fr', sameHtml)
+  assert(listed.skipReason === null && unlisted.skipReason === 'not-in-sitemap', 'Eligibility was not reported')
+  assert(listed.hash !== unlisted.hash, 'A page leaving the sitemap kept its source hash, so its translation would be renewed')
+  __translationWorkerTest.seedSitemapPathsForTest(null)
+  const unreadable = await __translationWorkerTest.eligibilityAwareSourceHash(sitemapEnv({}), gateRequest, pricingUrl, 'fr', sameHtml)
+  assert(unreadable.hash === listed.hash, 'An unreadable sitemap on the request path changed the source hash')
+  __translationWorkerTest.seedSitemapPathsForTest('all')
+}
+console.log('Sitemap gate checks passed')
+
