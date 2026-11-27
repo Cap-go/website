@@ -1,0 +1,88 @@
+---
+import WhyLandingLayout from '@/components/why/WhyLandingLayout.astro'
+import { pluginCategories, pluginCountLabel } from '@/config/plugins'
+import m from '@/copy/messages'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const pluginsUrl = getRelativeLocaleUrl(locale, 'plugins/')
+const versioningDocsUrl = getRelativeLocaleUrl(locale, 'docs/versioning/')
+const capawesomeAltUrl = getRelativeLocaleUrl(locale, 'alternatives/capawesome/')
+const ionicPluginsUrl = getRelativeLocaleUrl(locale, 'solutions/ionic-enterprise-plugins/')
+
+const pluginCopyParams = {
+  pluginCountLabel,
+  categoryCount: String(pluginCategories.length),
+}
+
+const h1 = m.why_plugins_h1({}, { locale })
+const title = `${m.why_plugins_seo_title({}, { locale })} | ${brand}`
+const description = m.why_plugins_description({}, { locale })
+
+const content = {
+  title,
+  description,
+  keywords: m.why_plugins_keywords({}, { locale }),
+  robots: 'noindex, follow',
+  alternateVersions: [],
+}
+
+const reasons = [
+  {
+    title: m.why_plugins_reason1_title({}, { locale }),
+    body: m.why_plugins_reason1_body(pluginCopyParams, { locale }),
+  },
+  {
+    title: m.why_plugins_reason2_title({}, { locale }),
+    body: m.why_plugins_reason2_body({}, { locale }),
+  },
+  {
+    title: m.why_plugins_reason3_title({}, { locale }),
+    body: m.why_plugins_reason3_body({}, { locale }),
+  },
+  {
+    title: m.why_plugins_reason4_title({}, { locale }),
+    body: m.why_plugins_reason4_body({}, { locale }),
+  },
+  {
+    title: m.why_plugins_reason5_title({}, { locale }),
+    body: m.why_plugins_reason5_body(
+      { pluginsUrl, versioningDocsUrl },
+      { locale },
+    ),
+    html: true,
+  },
+]
+
+const comparisonHtml = m.why_plugins_compare_html(
+  { capawesomeUrl: capawesomeAltUrl, ionicPluginsUrl },
+  { locale },
+)
+
+const compareTitle = m.why_plugins_compare_title({}, { locale })
+---
+
+<WhyLandingLayout
+  content={content}
+  h1={h1}
+  heroAnswer={m.why_plugins_hero_answer(pluginCopyParams, { locale })}
+  commercialLine={m.why_plugins_commercial({}, { locale })}
+  reasons={reasons}
+  comparisonHtml={comparisonHtml}
+  compareTitle={compareTitle}
+  locale={locale}
+/>
+
+<style is:global>
+  #main-content a:not(.signup-cta-button) {
+    color: #93c5fd;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #main-content a:not(.signup-cta-button):hover {
+    color: #bfdbfe;
+  }
+</style>

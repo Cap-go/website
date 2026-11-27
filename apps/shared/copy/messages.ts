@@ -6624,6 +6624,33 @@ const messages = {
     'Stay inside store rules by updating only the Capacitor web layer while native code still follows the normal release path. Web-layer changes that add material functionality still need a normal store release, the same limit described in Capgo store compliance FAQs. Read how OTA fits alongside store review on the <a href="{liveUpdateUrl}">Capgo Live Update product page</a> and in the <a href="{updaterDocsUrl}">Capacitor updater plugin documentation</a>. The open-source updater plugin and Capgo plugins are free under MPL-2.0.',
   why_live_updates_reason5_title: 'Web-layer updates that respect store policy',
   why_live_updates_seo_title: '5 reasons to ship Capacitor live updates with Capgo',
+  why_plugins_commercial: 'From $14/month. 14-day money-back guarantee. Cancel anytime.',
+  why_plugins_compare_html:
+    'Capacitor community plugins and Capawesome packages are solid choices when they already match your stack. Ionic still sells enterprise plugins for some teams, often with proprietary terms. Capgo focuses on open source MPL-2.0 Capacitor packages maintained alongside live updates. For honest notes, see our <a href="{capawesomeUrl}">Capawesome alternative page</a> and <a href="{ionicPluginsUrl}">Ionic enterprise plugins migration page</a>.',
+  why_plugins_compare_title: 'How this compares to community plugins, Ionic, and Capawesome',
+  why_plugins_description:
+    'Five reasons Capacitor teams use maintained Capgo plugins for native APIs, with public docs, open source licenses, and the same team that ships live updates.',
+  why_plugins_hero_answer:
+    'Capgo maintains {pluginCountLabel} open source Capacitor plugins on capgo.app/plugins, each with npm and GitHub links in the public registry. They ship under MPL-2.0 and follow Capacitor major versions so your dependencies stay aligned as you upgrade.',
+  why_plugins_h1: '5 reasons to use Capgo plugins',
+  why_plugins_keywords:
+    'Capgo plugins, Capacitor plugins, open source, MPL-2.0, native APIs, plugin documentation',
+  why_plugins_reason1_body:
+    'The plugin directory lists {pluginCountLabel} Capgo packages across {categoryCount} categories, including auth, commerce, media, location, and updates. Each card links to its GitHub repository and npm package name so you can inspect source before you install.',
+  why_plugins_reason1_title: 'One maintained catalog across native features',
+  why_plugins_reason2_body:
+    'Capgo documents that each plugin major targets the matching Capacitor major, and that a new plugin major ships when Capacitor does. For @capgo/capacitor-updater, monthly LTS dist-tags (lts-v7, lts-v6, and similar) mirror the latest minor and patch for older Capacitor lines.',
+  why_plugins_reason2_title: 'Releases track each Capacitor major',
+  why_plugins_reason3_body:
+    'Capgo states that plugins are released under the Mozilla Public License 2.0 unless a repository notes otherwise. You can read, fork, and audit code on GitHub without paying a separate plugin license.',
+  why_plugins_reason3_title: 'Open source under MPL-2.0',
+  why_plugins_reason4_body:
+    'Capgo builds and runs capacitor-updater, the cloud console, and native build tooling on one platform. Customers on any Capgo plan get plugin bug fixes and feature requests handled first by the team that maintains the packages, while the plugins themselves stay free under MPL-2.0.',
+  why_plugins_reason4_title: 'Maintained by the live update platform team',
+  why_plugins_reason5_body:
+    'Documented plugins include Starlight guides on capgo.app/docs and English tutorials linked from the directory. Browse the <a href="{pluginsUrl}">plugin directory</a>, open <a href="{versioningDocsUrl}">Capgo versioning documentation</a> for LTS tags, and follow published migration guides when you replace Ionic enterprise or community packages.',
+  why_plugins_reason5_title: 'Docs, tutorials, and migration paths',
+  why_plugins_seo_title: '5 reasons to use Capgo Capacitor plugins',
   why_page_compare_title: 'How this compares to CodePush and Appflow',
   why_page_reason_label: 'Reason {number}',
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
