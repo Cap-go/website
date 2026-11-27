@@ -1832,7 +1832,7 @@ const messages = {
   do_you_offer_discounts_for_students_non_profits_or_startups: 'Do you offer discounts for students, non-profits, or startups?',
   do_you_offer_refunds: 'Do you offer refunds?',
   do_you_offer_refunds_answer:
-    'Except when required by law, paid subscription fees are non-refundable. Direct-offer pages describe a 14-day money-back guarantee on your first paid Capgo subscription; contact support within 14 days of payment to request it. Other refund requests may be considered on a case-by-case basis and granted at the sole discretion of Capgo. If you believe you qualify for a refund, please contact our support team.',
+    'Except when required by law, paid subscription fees are non-refundable. However, certain refund requests may be considered on a case-by-case basis and granted at the sole discretion of Capgo. If you believe you qualify for a refund, please contact our support team.',
   docs: 'Docs',
   documentation: 'Documentation',
   documentation_in_markdown_that_powers: 'Documentation in Markdown that powers',
@@ -6393,7 +6393,7 @@ const messages = {
   tos_subscriptions_refunds_subtitle: 'Refunds',
   tos_subscriptions_refunds_text_1: 'Except when required by law, paid Subscription fees are non-refundable.',
   tos_subscriptions_refunds_text_2:
-    'Direct-offer marketing may describe a 14-day money-back guarantee on Your first paid Subscription; contact the Company within 14 days of payment to request it. Certain other refund requests for Subscriptions may be considered by the Company on a case-by-case basis and granted at the sole discretion of the Company.',
+    'Certain refund requests for Subscriptions may be considered by the Company on a case-by-case basis and granted at the sole discretion of the Company.',
   tos_subscriptions_refunds_text_3:
     "If the Subscription has been made through an In-app purchase, the Application Store's refund policy will apply. If You wish to request a refund, You may do so by contacting the Application Store directly.",
   tos_subscriptions_title: 'Subscriptions',
