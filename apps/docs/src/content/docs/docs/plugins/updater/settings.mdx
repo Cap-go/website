@@ -274,7 +274,7 @@ The server hosting your bundles has to advertise HTTP/3 with an `alt-svc: h3=":4
 
 To see which protocol each download used, enable debug logs: the plugin logs `Download protocol h3` (or `h2`) for every file.
 
-Set it to `false` to stop preferring HTTP/3. Android then keeps downloads on the previous HTTP/2 client. On iOS, URLSession can still pick HTTP/3 by itself if it already learned that the server supports it, so `false` is not a strict HTTP/2 guarantee there.
+Set it to `false` to stop preferring HTTP/3. Android then keeps downloads on the OkHttp client (HTTP/2 or HTTP/1.1). On iOS, URLSession can still pick HTTP/3 by itself if it already learned that the server supports it, so `false` is not a strict HTTP/2 guarantee there.
 
 In `capacitor.config.json`:
 
