@@ -43,6 +43,8 @@ Extra Android fields such as phone number and multi-SIM lists require `READ_PHON
 
 ## Install
 
+The command below installs the npm **8.x** line for **Capacitor 8** (`@capacitor/core` >= 8). Capgo plugin majors track Capacitor majors. On Capacitor 7, install the matching **7.x** release instead (see the plugin README).
+
 ```bash
 bun add @capgo/capacitor-sim
 bunx cap sync
