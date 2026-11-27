@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Missing Terms of Use in description and weekly price confirmation">
+  <title>Missing Terms of Use in description and weekly price confirmation</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="32" y="40" width="128" height="112" rx="12" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <text x="44" y="60" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="7">App Description</text>
+  <rect x="44" y="68" width="88" height="6" rx="3" fill="#374151"/>
+  <rect x="44" y="80" width="72" height="6" rx="3" fill="#374151"/>
+  <rect x="44" y="100" width="96" height="14" rx="6" fill="#111827" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="50" y="111" fill="#EF4444" font-family="system-ui,sans-serif" font-size="6">no Terms link</text>
+  <text x="44" y="132" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">3.0.0</text>
+  <rect x="176" y="48" width="120" height="96" rx="12" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <text x="188" y="68" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="7">Connect</text>
+  <text x="188" y="92" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="8">weekly</text>
+  <text x="188" y="112" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="16" font-weight="700">$9.99/wk</text>
+  <text x="188" y="128" fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="6">confirm price?</text>
+  <rect x="176" y="152" width="64" height="20" rx="10" fill="#111827" stroke="#A3E635" stroke-width="1.5"/>
+  <text x="188" y="166" fill="#A3E635" font-family="system-ui,sans-serif" font-size="7">4 min fix</text>
+  <rect x="248" y="152" width="48" height="20" rx="10" fill="#111827" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="256" y="166" fill="#6B7280" font-family="system-ui,sans-serif" font-size="6">resubmit</text>
+</svg>
