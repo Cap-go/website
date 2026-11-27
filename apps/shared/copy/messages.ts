@@ -6598,7 +6598,7 @@ const messages = {
   when_down_review:
     "When an application works too slow or gets down (even for a few minutes), it can damage users' satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.",
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
-  why_capgo_build_commercial: 'From {price}/month. 14-day money-back guarantee. Cancel anytime.',
+  why_capgo_build_commercial: 'From {price}/month. Cancel anytime.',
   why_capgo_build_compare_html:
     'Expo Application Services targets React Native, while Capgo Build is built for Capacitor apps with signed iOS and Android binaries and store uploads on the same plan as live updates. Ionic Appflow is winding down, and Codemagic is a general mobile CI platform you configure with YAML. For honest side-by-side notes, see our <a href="{appflowUrl}">Ionic Appflow alternative page</a>, <a href="{expoUrl}">Expo EAS alternative page</a>, and <a href="{codemagicUrl}">Codemagic alternative page</a>.',
   why_capgo_build_compare_title: 'How this compares to Appflow, EAS, and Codemagic',
