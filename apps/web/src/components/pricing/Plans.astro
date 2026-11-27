@@ -8,7 +8,6 @@ import { planDescriptionToText } from '@/lib/planCopy'
 import { ENTERPRISE_MAU_STOPS, formatMau, type CreditStep } from '@/lib/enterpriseScale'
 import { DISCOUNT_TIERS, tierDiscountPercent } from '@/lib/currency'
 import { observeEventsForPlan } from '@/lib/observePlanAllowance'
-import { storageGbHoursPerMonth } from '@/lib/storageGbHours'
 import PayAsYouGoPlan from './PayAsYouGoPlan.astro'
 
 interface Props {
@@ -44,37 +43,29 @@ function nativeBuildQueueTier(planName: string) {
   }
 }
 
-function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
-  const highlights = [
-    `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' && !enterpriseScale ? '+' : ''} ${m.monthly_active_users({}, { locale: Astro.locals.locale })}`,
-    `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })} ${m.of_bandwidth({}, { locale: Astro.locals.locale })}`,
-    `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB storage (${numberWithSpaces(storageGbHoursPerMonth(plan.storage))}${plan.name === 'Enterprise' ? '+' : ''} GBh/${m.month({}, { locale: Astro.locals.locale })})`,
-    `${numberWithSpaces(observeEventsForPlan(plan))} observe events/${m.month({}, { locale: Astro.locals.locale })}`,
-    'Native notifications',
-    'Capgo Observe',
-    ...(plan.name === 'Enterprise'
-      ? [
-          m.soc2_compliance_short({}, { locale: Astro.locals.locale }),
-          m.compliance_iso27001({}, { locale: Astro.locals.locale }),
-          m.enterprise_uptime_sla({}, { locale: Astro.locals.locale }),
-        ]
-      : [m.unlimited_live_updates({}, { locale: Astro.locals.locale }), m.mcp_server({}, { locale: Astro.locals.locale })]),
-  ]
+const check = 'm4.5 12.75 6 6 9-13.5'
 
-  if (plan.build_time_unit && plan.build_time_unit > 0) {
-    highlights.push(`${buildTimeDisplay(plan.build_time_unit)}${plan.name === 'Enterprise' ? '+' : ''}`)
-  }
-
+function planFeatures(plan: Database['public']['Tables']['plans']['Row']) {
+  const locale = Astro.locals.locale
+  const plus = plan.name === 'Enterprise' ? '+' : ''
   const queueTier = nativeBuildQueueTier(plan.name)
-  if (queueTier) {
-    highlights.push(m.pricing_native_build_queue_priority_line({ tier: queueTier }, { locale: Astro.locals.locale }))
+  return {
+    buildTime: plan.build_time_unit && plan.build_time_unit > 0 ? `${buildTimeDisplay(plan.build_time_unit)}${plus}` : null,
+    queue: queueTier ? `${m.pricing_native_build_queue_priority_label({}, { locale })}: ${queueTier}` : null,
+    observeEvents: m.pricing_plan_observe_events({ count: numberWithSpaces(observeEventsForPlan(plan)) }, { locale }),
+    extras: [
+      m.pricing_plan_native_notifications({}, { locale }),
+      m.mcp_server({}, { locale }),
+      ...(plan.name === 'Enterprise'
+        ? [
+            m.soc2_compliance_short({}, { locale }),
+            m.compliance_iso27001({}, { locale }),
+            m.enterprise_uptime_sla({}, { locale }),
+            m.security_questionnaires({}, { locale }),
+          ]
+        : []),
+    ],
   }
-
-  if (plan.name === 'Enterprise') {
-    highlights.push(m.security_questionnaires({}, { locale: Astro.locals.locale }))
-  }
-
-  return highlights
 }
 
 function priceAmount(monthlyPrice: number, yearlyPrice: number) {
@@ -238,62 +229,79 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             </div>
           )}
 
-          <div class="mt-10 lg:mt-12">
-            <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Includes:</p>
-            <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-700">
-              {planHighlights(plan).map((highlight, index) => (
-                <li class="flex items-start gap-3">
-                  <svg
-                    class="mt-1 h-4 w-4 shrink-0 text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    aria-hidden="true"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                  {plan.name === 'Enterprise' && enterpriseScale && index === 0 ? (
+          {(() => {
+            const features = planFeatures(plan)
+            const locale = Astro.locals.locale
+            return (
+              <div class="mt-10 lg:mt-12">
+                <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Includes:</p>
+                <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-700">
+                  <li class="flex items-start gap-3">
+                    <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={check} />
+                    </svg>
                     <span>
-                      <span class="notranslate" translate="no" data-enterprise-mau-highlight>
-                        {numberWithSpaces(plan.mau)}
-                      </span>{' '}
-                      {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+                      <span class="block text-base font-semibold text-gray-950">
+                        <span class="notranslate" translate="no" data-enterprise-mau-highlight={plan.name === 'Enterprise' && enterpriseScale ? '' : undefined}>
+                          {numberWithSpaces(plan.mau)}
+                        </span>
+                        {plan.name === 'Enterprise' && !enterpriseScale ? '+' : ''} {m.monthly_active_users({}, { locale })}
+                      </span>
+                      <span class="block text-gray-600">{m.unlimited_live_updates({}, { locale })}</span>
                     </span>
-                  ) : (
-                    <span>{highlight}</span>
+                  </li>
+                  {features.buildTime && (
+                    <li class="flex items-start gap-3">
+                      <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d={check} />
+                      </svg>
+                      <span>
+                        <span class="block text-base font-semibold text-gray-950">
+                          {features.buildTime} <span class="font-normal text-gray-700">{m.pricing_plan_native_build_hours({}, { locale })}</span>
+                        </span>
+                        {features.queue && <span class="block text-gray-600">{features.queue}</span>}
+                      </span>
+                    </li>
                   )}
-                </li>
-              ))}
-              <li class="flex items-start gap-3">
-                <svg
-                  class="mt-1 h-4 w-4 shrink-0 text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  aria-hidden="true"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                </svg>
-                <span class="inline-flex items-center gap-1.5">
-                  {m.home_hero_human_support({}, { locale: Astro.locals.locale })}
-                  <img
-                    src="/avatars/martin-96.webp"
-                    alt=""
-                    width="20"
-                    height="20"
-                    class="h-5 w-5 rounded-full object-cover ring-1 ring-gray-200"
-                    loading="lazy"
-                    decoding="async"
-                    aria-hidden="true"
-                  />
-                </span>
-              </li>
-            </ul>
-          </div>
+                  <li class="flex items-start gap-3">
+                    <svg class="mt-1 h-4 w-4 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={check} />
+                    </svg>
+                    <span>
+                      <span class="block font-medium text-gray-900">Capgo Observe</span>
+                      <span class="block text-gray-600">{features.observeEvents}</span>
+                    </span>
+                  </li>
+                  {features.extras.map((extra) => (
+                    <li class="flex items-start gap-3">
+                      <svg class="mt-1 h-4 w-4 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d={check} />
+                      </svg>
+                      <span>{extra}</span>
+                    </li>
+                  ))}
+                  <li class="flex items-start gap-3">
+                    <svg class="mt-1 h-4 w-4 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={check} />
+                    </svg>
+                    <span class="inline-flex items-center gap-1.5">
+                      {m.home_hero_human_support({}, { locale })}
+                      <img
+                        src="/avatars/martin-96.webp"
+                        alt=""
+                        width="20"
+                        height="20"
+                        class="h-5 w-5 rounded-full object-cover ring-1 ring-gray-200"
+                        loading="lazy"
+                        decoding="async"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            )
+          })()}
 
           <a
             href="#compare-plans"

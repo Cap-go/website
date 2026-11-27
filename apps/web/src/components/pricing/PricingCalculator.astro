@@ -20,15 +20,14 @@ const calculatorPlans = plans
     stripeId: plan.stripe_id,
     name: plan.name,
     mau: plan.mau || 0,
-    bandwidth: plan.bandwidth || 0,
-    storage: plan.storage || 0,
+    buildSeconds: plan.build_time_unit || 0,
     price_m: plan.price_m || 0,
     price_y: plan.price_y || 0,
   }))
   .sort((a, b) => a.price_m - b.price_m)
 
 const steps = credits
-  .filter((step) => ['mau', 'bandwidth', 'storage'].includes(step.type))
+  .filter((step) => ['mau', 'build_time'].includes(step.type))
   .map(({ step_min, step_max, price_per_unit, type, unit_factor }) => ({ step_min, step_max, price_per_unit, type, unit_factor }))
 
 const perMonth = `/${m.month({}, { locale }).toLowerCase()}`
@@ -37,9 +36,21 @@ const inputClass =
 const sliderClass = 'pricing-calculator-range mt-5 w-full cursor-pointer appearance-none bg-transparent'
 const usageRows = [
   { key: 'mau', label: m.mau({}, { locale }) },
-  { key: 'bandwidth', label: m.bandwidth({}, { locale }) },
-  { key: 'storage', label: m.pricing_calculator_storage({}, { locale }) },
+  { key: 'build', label: m.pricing_calculator_build_time({}, { locale }) },
 ]
+const platforms = [
+  { value: 1, label: m.pricing_calculator_platform_ios({}, { locale }) },
+  { value: 1, label: m.pricing_calculator_platform_android({}, { locale }) },
+  { value: 2, label: m.pricing_calculator_platform_both({}, { locale }), checked: true },
+]
+// ponytail: minutes are estimates around the measured ~5.3 min average (docs/builder), tune with real data.
+const buildProfiles = [
+  { minutes: 4, label: m.pricing_calculator_build_profile_light({}, { locale }), hint: m.pricing_calculator_build_profile_light_hint({}, { locale }) },
+  { minutes: 6, label: m.pricing_calculator_build_profile_standard({}, { locale }), hint: m.pricing_calculator_build_profile_standard_hint({}, { locale }), checked: true },
+  { minutes: 15, label: m.pricing_calculator_build_profile_heavy({}, { locale }), hint: m.pricing_calculator_build_profile_heavy_hint({}, { locale }) },
+]
+const choiceClass =
+  'relative flex min-h-11 cursor-pointer flex-col justify-center rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2 transition-colors hover:border-white/20 has-checked:border-blue-500 has-checked:bg-blue-500/10 has-checked:ring-1 has-checked:ring-blue-500 has-focus-visible:ring-2 has-focus-visible:ring-blue-500'
 ---
 
 <>
@@ -120,25 +131,51 @@ const usageRows = [
                 <input type="range" min="0" step="1" data-pricing-calculator-mau-range class={sliderClass} aria-label={m.monthly_active_users_mau({}, { locale })} />
                 <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_mau_hint({}, { locale })}</p>
               </div>
-              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
-                <div class="flex items-center justify-between gap-3">
-                  <label for="pricing-calculator-updates" class="text-base font-semibold text-white">
-                    {m.updates_per_month({}, { locale })}
-                  </label>
-                  <input id="pricing-calculator-updates" data-pricing-calculator-updates type="number" inputmode="numeric" min="0" step="1" value="4" class={inputClass} />
+              <div class="space-y-5 rounded-2xl bg-white/[0.04] p-5 sm:p-6">
+                <div>
+                  <div class="flex items-center justify-between gap-3">
+                    <label for="pricing-calculator-apps" class="text-base font-semibold text-white">
+                      {m.pricing_calculator_apps({}, { locale })}
+                    </label>
+                    <input id="pricing-calculator-apps" data-pricing-calculator-apps type="number" inputmode="numeric" min="0" step="1" value="1" class={inputClass} />
+                  </div>
+                  <input type="range" min="0" step="1" data-pricing-calculator-apps-range class={sliderClass} aria-label={m.pricing_calculator_apps({}, { locale })} />
+                  <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_apps_hint({}, { locale })}</p>
                 </div>
-                <input type="range" min="0" step="1" data-pricing-calculator-updates-range class={sliderClass} aria-label={m.updates_per_month({}, { locale })} />
-                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_updates_hint({}, { locale })}</p>
-              </div>
-              <div class="rounded-2xl bg-white/[0.04] p-5 sm:p-6">
-                <div class="flex items-center justify-between gap-3">
-                  <label for="pricing-calculator-size" class="text-base font-semibold text-white">
-                    {m.update_size_mb({}, { locale })}
-                  </label>
-                  <input id="pricing-calculator-size" data-pricing-calculator-size type="number" inputmode="decimal" min="0" step="0.1" value="4" class={inputClass} />
+                <fieldset>
+                  <legend class="mb-3 text-base font-semibold text-white">{m.pricing_calculator_platforms({}, { locale })}</legend>
+                  <div class="grid grid-cols-3 gap-2">
+                    {platforms.map((platform) => (
+                      <label class={choiceClass}>
+                        <input type="radio" name="pricing-calculator-platforms" value={platform.value} data-pricing-calculator-platforms checked={platform.checked} class="sr-only" />
+                        <span class="text-center text-sm font-semibold text-white">{platform.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <div>
+                  <div class="flex items-center justify-between gap-3">
+                    <label for="pricing-calculator-builds" class="text-base font-semibold text-white">
+                      {m.pricing_calculator_builds({}, { locale })}
+                    </label>
+                    <input id="pricing-calculator-builds" data-pricing-calculator-builds type="number" inputmode="numeric" min="0" step="1" value="4" class={inputClass} />
+                  </div>
+                  <input type="range" min="0" step="1" data-pricing-calculator-builds-range class={sliderClass} aria-label={m.pricing_calculator_builds({}, { locale })} />
+                  <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_builds_hint({}, { locale })}</p>
                 </div>
-                <input type="range" min="0" step="1" data-pricing-calculator-size-range class={sliderClass} aria-label={m.update_size_mb({}, { locale })} />
-                <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_size_hint({}, { locale })}</p>
+                <fieldset>
+                  <legend class="mb-3 text-base font-semibold text-white">{m.pricing_calculator_build_profile({}, { locale })}</legend>
+                  <div class="grid grid-cols-3 gap-2">
+                    {buildProfiles.map((profile) => (
+                      <label class={choiceClass}>
+                        <input type="radio" name="pricing-calculator-build-profile" value={profile.minutes} data-pricing-calculator-build-profile checked={profile.checked} class="sr-only" />
+                        <span class="text-sm font-semibold text-white">{profile.label}</span>
+                        <span class="text-xs text-gray-400">{profile.hint}</span>
+                      </label>
+                    ))}
+                  </div>
+                  <p class="mt-3 text-xs text-gray-400">{m.pricing_calculator_build_profile_note({}, { locale })}</p>
+                </fieldset>
               </div>
             </div>
 

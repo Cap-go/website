@@ -9,8 +9,8 @@ export type PricingCalculatorData = {
 const MAU_STOPS = [
   100, 500, 1_000, 2_000, 5_000, 10_000, 25_000, 50_000, 100_000, 250_000, 500_000, 1_000_000, 2_000_000, 3_000_000, 5_000_000, 10_000_000, 25_000_000, 50_000_000, 100_000_000,
 ]
-const UPDATE_STOPS = [1, 2, 3, 4, 6, 8, 10, 12, 15, 20, 30, 45, 60]
-const SIZE_STOPS = [0.5, 1, 2, 3, 4, 5, 6, 8, 10, 15, 20, 30, 50, 100]
+const APP_STOPS = [0, 1, 2, 3, 4, 5, 6, 8, 10, 15, 20, 30, 50]
+const BUILD_STOPS = [0, 1, 2, 4, 6, 8, 10, 15, 20, 30, 50, 100]
 
 function formatCount(num: number) {
   if (num >= 1_000_000) return `${+(num / 1_000_000).toFixed(1)}M`
@@ -19,12 +19,11 @@ function formatCount(num: number) {
   return Math.round(num).toLocaleString('en-US')
 }
 
-function formatGiB(num: number) {
-  if (num >= 1024) return `${+(num / 1024).toFixed(1)} TiB`
-  if (num >= 10) return `${Math.round(num).toLocaleString('en-US')} GiB`
-  if (num >= 1) return `${num.toFixed(1)} GiB`
-  if (num * 1024 >= 1) return `${Math.round(num * 1024)} MiB`
-  return `${num.toFixed(2)} GiB`
+function formatBuildTime(seconds: number) {
+  const minutes = Math.round(seconds / 60)
+  if (minutes < 60) return `${minutes} min`
+  const hours = minutes / 60
+  return `${(+hours.toFixed(hours < 10 ? 1 : 0)).toLocaleString('en-US')} h`
 }
 
 // Amounts are in the display currency, see localized() below.
@@ -68,8 +67,8 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
   // Number field + slider pairs. The slider snaps to stops, the field accepts any value.
   const fields = [
     { input: one<HTMLInputElement>('[data-pricing-calculator-mau]'), range: one<HTMLInputElement>('[data-pricing-calculator-mau-range]'), stops: MAU_STOPS },
-    { input: one<HTMLInputElement>('[data-pricing-calculator-updates]'), range: one<HTMLInputElement>('[data-pricing-calculator-updates-range]'), stops: UPDATE_STOPS },
-    { input: one<HTMLInputElement>('[data-pricing-calculator-size]'), range: one<HTMLInputElement>('[data-pricing-calculator-size-range]'), stops: SIZE_STOPS },
+    { input: one<HTMLInputElement>('[data-pricing-calculator-apps]'), range: one<HTMLInputElement>('[data-pricing-calculator-apps-range]'), stops: APP_STOPS },
+    { input: one<HTMLInputElement>('[data-pricing-calculator-builds]'), range: one<HTMLInputElement>('[data-pricing-calculator-builds-range]'), stops: BUILD_STOPS },
   ]
 
   function paintRange(range: HTMLInputElement) {
@@ -110,8 +109,14 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
   }
 
   function update() {
-    const [mau, updates, size] = fields.map(({ input }) => Math.max(0, Number(input?.value) || 0))
-    const usage = deriveUsage(mau, updates, size)
+    const [mau, apps, buildsPerMonth] = fields.map(({ input }) => Math.max(0, Number(input?.value) || 0))
+    const checkedNumber = (selector: string) => Number(one<HTMLInputElement>(`${selector}:checked`)?.value) || 0
+    const usage = deriveUsage(mau, {
+      apps,
+      buildsPerMonth,
+      platforms: checkedNumber('[data-pricing-calculator-platforms]'),
+      minutesPerBuild: checkedNumber('[data-pricing-calculator-build-profile]'),
+    })
     const yearly = isYearly()
     const recommended = recommendOption(plans, steps, usage, yearly)
 
@@ -140,8 +145,7 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
 
     const rows = [
       { key: 'mau', used: usage.mau, included: plan?.mau ?? 0, format: formatCount },
-      { key: 'bandwidth', used: usage.bandwidthGiB, included: plan?.bandwidth ?? 0, format: formatGiB },
-      { key: 'storage', used: usage.storageGiB, included: plan?.storage ?? 0, format: formatGiB },
+      { key: 'build', used: usage.buildSeconds, included: plan?.buildSeconds ?? 0, format: formatBuildTime },
     ]
     for (const row of rows) {
       const element = one<HTMLElement>(`[data-pricing-calculator-usage="${row.key}"]`)
@@ -218,7 +222,9 @@ export function setupPricingCalculator(data: PricingCalculatorData) {
       update()
     }),
   )
-  all<HTMLInputElement>('[data-pricing-calculator-billing]').forEach((input) => input.addEventListener('change', update))
+  all<HTMLInputElement>('[data-pricing-calculator-billing], [data-pricing-calculator-platforms], [data-pricing-calculator-build-profile]').forEach((input) =>
+    input.addEventListener('change', update),
+  )
   onCurrencyChange(() => {
     ;({ plans, steps } = localized(data))
     update()

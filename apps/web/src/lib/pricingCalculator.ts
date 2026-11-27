@@ -2,16 +2,23 @@ export type PricingPlan = {
   id: string
   name: string
   mau: number
-  bandwidth: number
-  storage: number
+  // Included native build time, in seconds.
+  buildSeconds: number
   price_m: number
   price_y: number
 }
 
 export type PricingUsage = {
   mau: number
-  bandwidthGiB: number
-  storageGiB: number
+  buildSeconds: number
+}
+
+export type BuildInput = {
+  apps: number
+  // 1 for iOS or Android only, 2 for both.
+  platforms: number
+  buildsPerMonth: number
+  minutesPerBuild: number
 }
 
 export type CreditStep = {
@@ -29,21 +36,18 @@ export type CostEstimate = {
   totalMonthly: number
 }
 
-export function deriveUsage(mau: number, updatesByMonth: number, updateSizeMb: number): PricingUsage {
-  const updates = mau * updatesByMonth
-
+// Every app builds on every selected platform, so iOS + Android doubles the build time.
+export function deriveUsage(mau: number, build: BuildInput): PricingUsage {
   return {
     mau,
-    bandwidthGiB: (updates * updateSizeMb) / 1024,
-    storageGiB: updateSizeMb / 1024,
+    buildSeconds: build.apps * build.platforms * build.buildsPerMonth * build.minutesPerBuild * 60,
   }
 }
 
 export function getOverageUsage(usage: PricingUsage, plan: PricingPlan): PricingUsage {
   return {
     mau: Math.max(0, usage.mau - plan.mau),
-    bandwidthGiB: Math.max(0, usage.bandwidthGiB - plan.bandwidth),
-    storageGiB: Math.max(0, usage.storageGiB - plan.storage),
+    buildSeconds: Math.max(0, usage.buildSeconds - plan.buildSeconds),
   }
 }
 
@@ -54,8 +58,6 @@ export function getPlanMonthlyPrice(plan: PricingPlan, yearly: boolean) {
 export function getPlanBillingPrice(plan: PricingPlan, yearly: boolean) {
   return yearly ? plan.price_y : plan.price_m
 }
-
-const gibToBytes = (gib: number) => Math.round(gib * 1024 * 1024 * 1024)
 
 // Mirrors priceCreditTiers in the Capgo backend (utils/credits.ts): tiers follow
 // total usage, so `value` is priced on the slice [included, included + value).
@@ -87,9 +89,7 @@ export function creditsCost(steps: CreditStep[], usage: PricingUsage, plan: Pric
   const billable = plan ? getOverageUsage(usage, plan) : usage
   const ofType = (type: string) => steps.filter((step) => step.type === type)
   return (
-    priceCreditTiers(ofType('mau'), billable.mau, plan?.mau ?? 0) +
-    priceCreditTiers(ofType('bandwidth'), gibToBytes(billable.bandwidthGiB), gibToBytes(plan?.bandwidth ?? 0)) +
-    priceCreditTiers(ofType('storage'), gibToBytes(billable.storageGiB), gibToBytes(plan?.storage ?? 0))
+    priceCreditTiers(ofType('mau'), billable.mau, plan?.mau ?? 0) + priceCreditTiers(ofType('build_time'), billable.buildSeconds, plan?.buildSeconds ?? 0)
   )
 }
 
@@ -105,7 +105,7 @@ export function recommendPlan(plans: PricingPlan[], steps: CreditStep[], usage: 
   const sorted = [...plans].sort((a, b) => getPlanMonthlyPrice(a, yearly) - getPlanMonthlyPrice(b, yearly))
   // Without credit tiers overage looks free: fall back to the smallest plan that fits.
   if (!steps.length) {
-    return sorted.find((plan) => usage.mau <= plan.mau && usage.bandwidthGiB <= plan.bandwidth && usage.storageGiB <= plan.storage) ?? sorted[sorted.length - 1]
+    return sorted.find((plan) => usage.mau <= plan.mau && usage.buildSeconds <= plan.buildSeconds) ?? sorted[sorted.length - 1]
   }
   let best = sorted[0]
   let bestTotal = Number.POSITIVE_INFINITY
