@@ -191,6 +191,7 @@ const pluginEntries = [
     'pdf-viewer',
     [
       linkItem('underWebView', '/docs/plugins/pdf-viewer/under-webview'),
+      linkItem('Background color', '/docs/plugins/pdf-viewer/background-color'),
       linkItem('iOS setup', '/docs/plugins/pdf-viewer/ios'),
       linkItem('Android setup', '/docs/plugins/pdf-viewer/android'),
     ],
