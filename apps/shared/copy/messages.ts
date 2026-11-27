@@ -6651,6 +6651,8 @@ const messages = {
     'Stay inside store rules by updating only the Capacitor web layer while native code still follows the normal release path. Web-layer changes that add material functionality still need a normal store release, the same limit described in Capgo store compliance FAQs. Read how OTA fits alongside store review on the <a href="{liveUpdateUrl}">Capgo Live Update product page</a> and in the <a href="{updaterDocsUrl}">Capacitor updater plugin documentation</a>. The open-source updater plugin and Capgo plugins are free under MPL-2.0.',
   why_live_updates_reason5_title: 'Web-layer updates that respect store policy',
   why_live_updates_seo_title: '5 reasons to ship Capacitor live updates with Capgo',
+  why_page_compare_title: 'How this compares to CodePush and Appflow',
+  why_page_reason_label: 'Reason {number}',
   why_capgo_eyebrow: 'WHY TEAMS CHOOSE CAPGO',
   why_capgo_plugin_engineering_body:
     'We build, improve and fix our plugins with heavy use of AI, so issues usually get fixed in under a day and pull requests get feedback the same day. A human still reviews, tests and merges 50+ pull requests daily.',
