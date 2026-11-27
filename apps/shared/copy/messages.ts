@@ -6619,7 +6619,7 @@ const messages = {
     'After a successful build, Capgo can upload binaries to App Store Connect and Google Play so TestFlight and Play Console review can start without a separate upload step. The Capgo native build product page describes automatic submission to both stores after successful cloud builds.',
   why_capgo_build_reason3_title: 'Publish to App Store Connect and Google Play from the same flow',
   why_capgo_build_reason4_body:
-    'Capgo Build runs from the Capgo CLI, hosted Capgo MCP for coding agents, or your existing CI on Windows, Linux, and macOS. App Developer API keys and organization roles documented in Capgo can trigger native builds alongside bundle uploads.',
+    'Capgo Build runs from the Capgo CLI, your CI pipeline, or a coding agent that runs the Capgo CLI on your machine. The hosted Capgo MCP can monitor builds, read logs, cancel jobs, and start a cloud build after your agent uploads the project archive. App Developer roles can trigger native builds through the Capgo API and CLI.',
   why_capgo_build_reason4_title: 'Trigger builds from the CLI, MCP, or CI',
   why_capgo_build_reason5_body:
     'Every Capgo plan includes Native Builds alongside live updates, notifications, and Observe; plans differ by usage limits such as included native build minutes, not by locking builds behind a separate product tier. The Solo plan includes 60 minutes of native build time per month on the public pricing table. See the <a href="{nativeBuildUrl}">Capgo native build product page</a> and <a href="{buildDocsUrl}">Capgo CLI build reference</a> for setup and commands.',
@@ -6977,7 +6977,7 @@ const messages = {
     'Yes. Capgo Build is generally available for production iOS and Android Capacitor releases. Start through the CLI, CI, or MCP. Build minutes are included in Capgo plans, with prepaid credits for extra minutes. Store developer accounts, signing permissions, and store review requirements still apply.',
   native_build_v2_faq_ai_q: 'Can an AI coding agent build and submit my Capacitor app?',
   native_build_v2_faq_ai_a:
-    'Yes. Capgo MCP supports native builds from Codex, Claude Code, Cursor, and other MCP clients. The local MCP guides signing setup; local and hosted MCP tools can request builds, inspect status, and read logs. The CLI supports App Store Connect and Google Play submission. Signing secrets stay out of chat.',
+    'Yes. Codex, Claude Code, Cursor, and other MCP clients can use Capgo Build through the local CLI MCP (request a build from your project) or the hosted MCP (upload the packaged project, then start the build, or monitor jobs started from CI). The CLI supports App Store Connect and Google Play submission. Signing secrets stay out of chat.',
   native_build_v2_faq_metrics_q: 'Where can I verify build speed and reliability?',
   native_build_v2_faq_metrics_a:
     'The public Native Build data page reports measured processing time, queue wait, success rates, and failure categories over the last 30 days. Results include project and signing errors; they are not an uptime SLA or a guaranteed build time. Check the timestamp and platform breakdown for your evaluation.',
