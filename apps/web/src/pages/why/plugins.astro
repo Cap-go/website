@@ -21,8 +21,8 @@ const pluginCopyParams = {
 
 const startingPrice = formatStartingMonthlyPrice(getPlans(), locale)
 const commercialLine = startingPrice
-  ? m.direct_offer_price_guarantee_note({ price: startingPrice }, { locale })
-  : m.direct_offer_guarantee_note({}, { locale })
+  ? m.why_plugins_commercial({ price: startingPrice }, { locale })
+  : 'Cancel anytime.'
 
 const h1 = m.why_plugins_h1({}, { locale })
 const title = `${m.why_plugins_seo_title({}, { locale })} | ${brand}`
