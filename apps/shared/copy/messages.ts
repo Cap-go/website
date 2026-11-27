@@ -3737,6 +3737,7 @@ const messages = {
   rating_summary_aria: 'Rated {rating} out of 5 by developer teams using Capgo',
   rating_summary_customers: 'teams',
   rating_summary_read_reviews: 'Read reviews',
+  hero_proof_logos_label: 'Trusted by teams at',
   reach_users_now_not_weeks_later: 'Deploy from the CLI or API, then users download the web fix in minutes and apply it on next launch.',
   react_native_power_approximately_1_of_apps_on_google_play_store: 'React Native power approximately $1% of apps on Google Play Store',
   read_our_aup: 'Read our Acceptable Use Policy',

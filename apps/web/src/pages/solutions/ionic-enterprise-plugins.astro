@@ -12,6 +12,7 @@ import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pag
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import HumanSupport from '@/components/HumanSupport.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -211,6 +212,7 @@ const content = { title, description, ldJSON }
               {m.solutions_talk_to_team({}, { locale })}
             </a>
           </div>
+          <HeroProof class="mt-8" />
 
           <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-gray-400">
             {facts.map((fact) => (
@@ -229,6 +231,13 @@ const content = { title, description, ldJSON }
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="ionic-enterprise-plugins" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['ionic-enterprise-plugins']}
+    />
 
     <!-- Plugin Table -->
     <section id="plugin-migration" class="scroll-mt-20 py-16 sm:py-20">
@@ -330,12 +339,6 @@ const content = { title, description, ldJSON }
       </div>
     </section>
 
-    <SolutionAppExample solution="ionic-enterprise-plugins" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials['ionic-enterprise-plugins']}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_ionic_enterprise_plugins_faq_title({}, { locale })}

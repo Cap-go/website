@@ -14,6 +14,7 @@ import SecurityIllustration from '@/components/solutions/SecurityIllustration.as
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -100,7 +101,7 @@ const content = { title, description, ldJSON }
 <Layout content={content}>
   <div class="product-hero">
     <!-- Hero Section -->
-    <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+    <section class="relative overflow-hidden py-16 sm:py-24 lg:py-28">
       <div class="pointer-events-none absolute inset-0 overflow-hidden">
         <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
           <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-green-500/10 blur-3xl"></div>
@@ -135,6 +136,7 @@ const content = { title, description, ldJSON }
           </p>
 
           <SignupCta enterprise class="mt-8" />
+          <HeroProof class="mt-6" />
 
           <!-- Compliance badges -->
           <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
@@ -169,6 +171,13 @@ const content = { title, description, ldJSON }
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="fintech" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.fintech}
+    />
 
     <!-- The Fintech Reality -->
     <section class="bg-gray-800 py-20">
@@ -470,12 +479,6 @@ const content = { title, description, ldJSON }
       </div>
     </section>
 
-    <SolutionAppExample solution="fintech" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials.fintech}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_fintech_faq_title({}, { locale })}

@@ -12,6 +12,7 @@ import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoft
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import OfferText from '@/components/OfferText.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import { getProductScreens } from '@/config/productScreens'
@@ -311,6 +312,7 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         <p class="lead hero-lead">{copy('native_build_v2_hero_lead')}</p>
         <div class="hero-ctas">
           <SignupCta id="native-build-hero-signup-cta" />
+          <HeroProof class="mt-6" />
         </div>
         <div class="hero-meta">
           {heroMeta.map((item) => (
@@ -331,6 +333,17 @@ function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
         </div>
       </div>
     </section>
+
+    <!-- ============================================ PROOF ============================================ -->
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={copy('native_build_v2_proof_eyebrow')}
+      title={copy('native_build_v2_proof_title')}
+      description={copy('native_build_v2_proof_lead')}
+      testimonials={productTestimonials.nativeBuild}
+      maxItems={2}
+    />
 
     <!-- ============================================ REVEAL + DEMO ============================================ -->
     <section class="section" id="how">
@@ -929,17 +942,6 @@ $ capgo build request --platform android  ✔ 1m 22s</pre>
       youtubeId={productVideos.nativeBuild.youtubeId}
       title={productVideos.nativeBuild.title}
       description={productVideos.nativeBuild.description}
-    />
-
-    <!-- ============================================ PROOF ============================================ -->
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={copy('native_build_v2_proof_eyebrow')}
-      title={copy('native_build_v2_proof_title')}
-      description={copy('native_build_v2_proof_lead')}
-      testimonials={productTestimonials.nativeBuild}
-      maxItems={2}
     />
 
     <!-- ============================================ ASK AI / MCP ============================================ -->

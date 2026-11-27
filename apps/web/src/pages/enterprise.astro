@@ -9,6 +9,7 @@ import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createProd
 import { numberWithSpaces } from '@/services/misc'
 import { pluginCountLabel } from '@/config/plugins'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import { getProductScreens } from '@/config/productScreens'
@@ -493,6 +494,7 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         <p class="lead hero-lead">{m.enterprise_hero_desc({}, { locale })}</p>
         <div class="hero-ctas">
           <SignupCta id="enterprise-hero-signup-cta" variant="team" />
+          <HeroProof class="mt-6" />
           <p class="hero-cta-note">{m.enterprise_hero_note({}, { locale })}</p>
         </div>
         <div class="hero-strip enterprise-hero-strip">
@@ -506,6 +508,8 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
       </div>
     </section>
+
+    <ProductTestimonials variant="builder" accent="blue" title={m.they_love_capgo({}, { locale })} description={m.From_indie_devs_to({}, { locale })} testimonials={capgoReviews} />
 
     <section class="section enterprise-proof" id="proof" aria-label={m.trusted_by_the_biggest_capacitor_apps({}, { locale })}>
       <div class="shell">
@@ -853,8 +857,6 @@ const comparisonAfterLabel = m.enterprise_comparison_after({}, { locale })
         </div>
       </div>
     </section>
-
-    <ProductTestimonials variant="builder" accent="blue" title={m.they_love_capgo({}, { locale })} description={m.From_indie_devs_to({}, { locale })} testimonials={capgoReviews} />
 
     <section class="section" id="faq">
       <div class="shell">

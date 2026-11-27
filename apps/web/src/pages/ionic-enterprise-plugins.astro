@@ -8,6 +8,7 @@ import { pluginCountLabel } from '@/config/plugins'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -53,9 +54,19 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
           </p>
 
           <SignupCta id="ionic-plugins-hero-signup-cta" enterprise class="mt-10" />
+          <HeroProof class="mt-6" />
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="ionic-enterprise-plugins" />
+
+    <ProductTestimonials
+      eyebrow="Plugin migration proof"
+      title="Teams replacing plugin gaps need a release path that keeps working"
+      description="Short reviews from developers using Capgo plugins and updater workflows in production apps."
+      testimonials={productTestimonials.ionicEnterprisePlugins}
+    />
 
     <!-- Value Proposition -->
     <section class="py-16 sm:py-20">
@@ -288,7 +299,6 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
       </div>
     </section>
 
-
     <!-- Coverage Boundaries -->
     <section class="py-16 sm:py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -383,15 +393,6 @@ const content = { title, description, image: `${Astro.locals.runtimeConfig.publi
         </div>
       </div>
     </section>
-
-    <SolutionAppExample solution="ionic-enterprise-plugins" />
-
-    <ProductTestimonials
-      eyebrow="Plugin migration proof"
-      title="Teams replacing plugin gaps need a release path that keeps working"
-      description="Short reviews from developers using Capgo plugins and updater workflows in production apps."
-      testimonials={productTestimonials.ionicEnterprisePlugins}
-    />
 
     <!-- Next step -->
     <section class="py-16 sm:py-20">
