@@ -43,7 +43,7 @@ Both calls route through `cordova.exec` with optional success and error callback
 
 ## Install
 
-The command below installs the npm **8.x** line for **Capacitor 8** (`@capacitor/core` >= 8). Capgo plugin majors track Capacitor majors. On Capacitor 7, install the matching **7.x** release instead (see the plugin README).
+The command below installs the npm **8.x** line for **Capacitor 8** (`@capacitor/core` >= 8). `@capgo/capacitor-native-market` has no **7.x** release on npm; it requires **Capacitor 8 or later**.
 
 ```bash
 bun add @capgo/capacitor-native-market
