@@ -186,8 +186,8 @@ async function fetchRuntimeProbe(url: string): Promise<ProbePayload> {
   return payload
 }
 
-async function fetchRealPageProbe(url: string, path: string): Promise<ProbePayload> {
-  const payload = await fetchJsonProbe(url, PAGE_REQUEST_TIMEOUT_MS)
+async function fetchRealPageProbe(url: string, path: string, timeoutMs: number): Promise<ProbePayload> {
+  const payload = await fetchJsonProbe(url, timeoutMs)
   if (!payload.ok) throw new Error(payload.error || `Real page probe failed for ${path}`)
   if (payload.model !== MODEL) throw new Error(`Real page probe used ${payload.model || 'unknown model'} instead of ${MODEL}`)
 
@@ -273,7 +273,10 @@ try {
       if (!runtimeModel) runtimeModel = (await fetchRuntimeProbe(runtimeProbeUrl)).model
       for (const probe of realPageProbeUrls) {
         if (passedPages.has(probe.path)) continue
-        await fetchRealPageProbe(probe.url, probe.path)
+        // Never let one probe run past the overall deadline.
+        const remainingMs = deadline - Date.now()
+        if (remainingMs <= 0) throw new Error(`No time left to probe ${probe.path}`)
+        await fetchRealPageProbe(probe.url, probe.path, Math.min(PAGE_REQUEST_TIMEOUT_MS, remainingMs))
         passedPages.add(probe.path)
       }
       console.log(`Real translation worker probe passed with ${runtimeModel} on ${REAL_PAGE_PROBES.join(', ')}`)
