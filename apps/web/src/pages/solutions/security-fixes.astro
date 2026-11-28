@@ -11,6 +11,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import OfferText from '@/components/OfferText.astro'
 
 const locale = Astro.locals.locale
@@ -152,6 +153,7 @@ const heroCommand = `npx @capgo/cli@latest bundle upload --channel=production
             <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{copy('solutions_security_fixes_h1')}</h1>
             <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{copy('solutions_security_fixes_lead')}</p>
             <SignupCta align="start" class="mt-8" />
+            <HeroProof align="start" class="mt-6" />
             <div class="mt-10 grid gap-3 sm:grid-cols-3">
               {stats.map((stat) => (
                 <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
@@ -188,6 +190,9 @@ const heroCommand = `npx @capgo/cli@latest bundle upload --channel=production
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="fintech" />
+    <ProductTestimonials eyebrow={copy('solutions_testimonials_eyebrow')} title={copy('solutions_testimonials_title')} testimonials={solutionTestimonials.fintech} />
 
     <section id="problem" class="bg-gray-950 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -285,8 +290,6 @@ const heroCommand = `npx @capgo/cli@latest bundle upload --channel=production
       </div>
     </section>
 
-    <SolutionAppExample solution="fintech" />
-    <ProductTestimonials eyebrow={copy('solutions_testimonials_eyebrow')} title={copy('solutions_testimonials_title')} testimonials={solutionTestimonials.fintech} />
     <SolutionFaq
       eyebrow={copy('solutions_faq_eyebrow')}
       title={copy('solutions_security_fixes_faq_title')}

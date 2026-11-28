@@ -3,6 +3,7 @@ import '@/styles/lu-product.css'
 import '@/styles/compare-page.css'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import SenjaResize from '@/components/SenjaResize.astro'
@@ -123,6 +124,7 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
       </div>
       <div class="hero-ctas">
         <SignupCta id="compare-hero-signup-cta" />
+        <HeroProof logos={false} class="mt-6" />
       </div>
       <ul class="cmp-meta">
         {heroMeta.map((item) => (
@@ -137,6 +139,16 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
     </div>
     <AppLogoStrip />
   </section>
+
+  <ProductTestimonials
+    variant="builder"
+    accent="blue"
+    eyebrow={m.compare_proof_eyebrow({}, { locale })}
+    title={m.compare_proof_title({}, { locale })}
+    description={m.compare_proof_lead({}, { locale })}
+    testimonials={testimonials}
+    maxItems={3}
+  />
 
   {ranking.length > 0 && (
     <section class="section" id="ranking">
@@ -326,16 +338,6 @@ const refLabel = (n: number) => m.compare_source_ref_label({ n, source: sources[
   </section>
 
   {video && <ProductVideoSection variant="builder" accent="blue" youtubeId={video.youtubeId} title={video.title} description={video.description} />}
-
-  <ProductTestimonials
-    variant="builder"
-    accent="blue"
-    eyebrow={m.compare_proof_eyebrow({}, { locale })}
-    title={m.compare_proof_title({}, { locale })}
-    description={m.compare_proof_lead({}, { locale })}
-    testimonials={testimonials}
-    maxItems={3}
-  />
 
   {reviewWall && (
     <section class="section" id="reviews">

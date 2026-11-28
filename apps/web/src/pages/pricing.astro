@@ -12,6 +12,7 @@ import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/l
 import m from '@/copy/messages'
 import Enterprise from '@/components/enterprise.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import OfferText from '@/components/OfferText.astro'
 import AiPricingPrompt from '@/components/pricing/AiPricingPrompt.astro'
 import CurrencySelector from '@/components/pricing/CurrencySelector.astro'
@@ -95,6 +96,7 @@ if (plans.length > 0) {
             </OfferText>
           </h1>
           <p class="font-pj mx-auto mt-4 max-w-2xl text-base leading-7 font-normal text-gray-300 sm:text-lg">{m.pricing_payment_options({}, { locale })}</p>
+          <HeroProof class="mt-5" />
         </div>
 
         <div class="mx-auto mb-5 flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:justify-between">

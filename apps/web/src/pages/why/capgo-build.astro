@@ -1,0 +1,86 @@
+---
+import WhyLandingLayout from '@/components/why/WhyLandingLayout.astro'
+import m from '@/copy/messages'
+import { formatStartingMonthlyPrice } from '@/lib/planCopy'
+import { getPlans } from '@/lib/siteData'
+import { getRelativeLocaleUrl } from '@/services/links'
+
+const locale = Astro.locals.locale
+const startingPrice = formatStartingMonthlyPrice(getPlans(), locale) ?? '$14'
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const nativeBuildUrl = getRelativeLocaleUrl(locale, 'native-build/')
+const buildDocsUrl = getRelativeLocaleUrl(locale, 'docs/cli/reference/build/')
+const appflowAltUrl = getRelativeLocaleUrl(locale, 'alternatives/ionic-appflow/')
+const expoAltUrl = getRelativeLocaleUrl(locale, 'alternatives/expo/')
+const codemagicAltUrl = getRelativeLocaleUrl(locale, 'alternatives/codemagic/')
+
+const h1 = m.why_capgo_build_h1({}, { locale })
+const title = `${m.why_capgo_build_seo_title({}, { locale })} | ${brand}`
+const description = m.why_capgo_build_description({}, { locale })
+
+const content = {
+  title,
+  description,
+  keywords: m.why_capgo_build_keywords({}, { locale }),
+  robots: 'noindex, follow',
+  alternateVersions: [],
+}
+
+const reasons = [
+  {
+    title: m.why_capgo_build_reason1_title({}, { locale }),
+    body: m.why_capgo_build_reason1_body({}, { locale }),
+  },
+  {
+    title: m.why_capgo_build_reason2_title({}, { locale }),
+    body: m.why_capgo_build_reason2_body({}, { locale }),
+  },
+  {
+    title: m.why_capgo_build_reason3_title({}, { locale }),
+    body: m.why_capgo_build_reason3_body({}, { locale }),
+  },
+  {
+    title: m.why_capgo_build_reason4_title({}, { locale }),
+    body: m.why_capgo_build_reason4_body({}, { locale }),
+  },
+  {
+    title: m.why_capgo_build_reason5_title({}, { locale }),
+    body: m.why_capgo_build_reason5_body(
+      { nativeBuildUrl, buildDocsUrl },
+      { locale },
+    ),
+    html: true,
+  },
+]
+
+const comparisonHtml = m.why_capgo_build_compare_html(
+  { appflowUrl: appflowAltUrl, expoUrl: expoAltUrl, codemagicUrl: codemagicAltUrl },
+  { locale },
+)
+
+const compareTitle = m.why_capgo_build_compare_title({}, { locale })
+---
+
+<WhyLandingLayout
+  content={content}
+  h1={h1}
+  heroAnswer={m.why_capgo_build_hero_answer({}, { locale })}
+  commercialLine={m.why_capgo_build_commercial({ price: startingPrice }, { locale })}
+  reasons={reasons}
+  comparisonHtml={comparisonHtml}
+  compareTitle={compareTitle}
+  locale={locale}
+/>
+
+<style is:global>
+  #main-content a:not(.signup-cta-button) {
+    color: #93c5fd;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #main-content a:not(.signup-cta-button):hover {
+    color: #bfdbfe;
+  }
+</style>

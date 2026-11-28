@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Random anonymous chat flagged under 1.2, identify before connect">
+  <title>Random anonymous chat flagged under 1.2, identify before connect</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="40" y="48" width="96" height="112" rx="12" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="88" cy="88" r="22" fill="none" stroke="#6B7280" stroke-width="2"/>
+  <text x="58" y="128" fill="#6B7280" font-family="system-ui,sans-serif" font-size="6">?</text>
+  <path d="M136 104 H176" stroke="#44BCFF" stroke-width="2" stroke-dasharray="4 4"/>
+  <rect x="184" y="48" width="96" height="112" rx="12" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="232" cy="88" r="22" fill="none" stroke="#6B7280" stroke-width="2"/>
+  <rect x="24" y="28" width="88" height="18" rx="9" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="32" y="40" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">stranger</text>
+  <rect x="120" y="28" width="92" height="18" rx="9" fill="#111827" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="128" y="40" fill="#EF4444" font-family="system-ui,sans-serif" font-size="7">anonymous</text>
+  <rect x="88" y="168" width="144" height="22" rx="11" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="104" y="183" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">1.2 accept or skip</text>
+</svg>

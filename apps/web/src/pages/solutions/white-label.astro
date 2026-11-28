@@ -12,6 +12,7 @@ import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustratio
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -141,6 +142,7 @@ const systemCards: { title: MessageKey; desc: MessageKey; link: { href: string; 
             <h1 class="mt-6 max-w-4xl text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">{copy('solutions_white_label_page_h1')}</h1>
             <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{copy('solutions_white_label_page_lead')}</p>
             <SignupCta align="start" class="mt-8" />
+            <HeroProof align="start" class="mt-6" />
             <div class="mt-10 grid gap-3 sm:grid-cols-3">
               {stats.map((stat) => (
                 <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
@@ -171,6 +173,9 @@ const systemCards: { title: MessageKey; desc: MessageKey; link: { href: string; 
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="white-label" />
+    <ProductTestimonials eyebrow={copy('solutions_testimonials_eyebrow')} title={copy('solutions_testimonials_title')} testimonials={solutionTestimonials['white-label']} />
 
     <section class="bg-gray-950 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -237,8 +242,6 @@ const systemCards: { title: MessageKey; desc: MessageKey; link: { href: string; 
       class="bg-gray-950"
     />
 
-    <SolutionAppExample solution="white-label" />
-    <ProductTestimonials eyebrow={copy('solutions_testimonials_eyebrow')} title={copy('solutions_testimonials_title')} testimonials={solutionTestimonials['white-label']} />
     <SolutionFaq eyebrow={copy('solutions_faq_eyebrow')} title={copy('solutions_white_label_faq_title')} description={copy('solutions_white_label_faq_desc')} items={faqItems} />
     <section class="bg-slate-900 py-16 sm:py-20">
       <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">

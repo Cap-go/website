@@ -1,11 +1,67 @@
 [
   {
     "category": "changelog",
+    "title": "capgo.app cli-8.114.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.4",
+    "pubDate": "2026-11-28T02:18:12.000Z",
+    "description": "🆕 Changelog Fixed Resolved an issue where snippet statistics queue work and placement data prewarming were not executed in the placement data center. Changed Improved CI pipeline performance by optimizing deploy and test speeds. Stabilized the test suite by addressing flaky tests and removing automatic test retries. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.114.3...cli 8.114.4"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.78.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.78.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.78.2",
+    "pubDate": "2026-11-28T02:21:32.000Z",
+    "description": "🆕 Changelog Fixed Resolved an issue where snippet statistics queue tasks were not being processed correctly in the placement data center. Corrected the initialization of placement checks to ensure prewarming occurs in the appropriate data center context. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.78.1...capgo 22.78.2"
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.78.1",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.78.1",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.78.1",
+    "pubDate": "2026-11-28T02:04:43.000Z",
+    "description": "🆕 Changelog Changed Improved CI Pipeline Performance : Optimized Continuous Integration workflows to enable faster dependency resolution, deployment, and testing cycles. Enhanced Test Reliability : Updated test configurations to eliminate flaky test failures, resulting in more stable and consistent release validation. Removed Discontinued Test Retries : Removed automatic test retry mechanisms from the CI pipeline to ensure that all failures are immediately surfaced rather than masked by tran..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.114.3",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.3",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.3",
+    "pubDate": "2026-11-27T15:14:52.000Z",
+    "description": "🆕 Changelog Added Send PostHog MCP Analytics events from the hosted server to improve product usage insights. Introduce billing warnings for build only organizations that exceed their plan limits. Fixed Ensure plugin state prewarming runs correctly in production environments. Resolve an issue where client IP addresses were not being sent as , preventing accurate geolocation of worker events in PostHog. Changed Shard unit tests in the CI pipeline to ensure jobs complete within the 5 minute ex..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app cli-8.114.2",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.2",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.2",
+    "pubDate": "2026-11-27T04:08:01.000Z",
+    "description": "🆕 Changelog Fixed Ensured all CLI requests are routed to the configured Capgo host for China, resolving connectivity issues for users in that region. Corrected the proxying of direct build logs from China to the builder origin, improving the reliability and accuracy of build log visibility. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.114.1...cli 8.114.2"
+  },
+  {
+    "category": "changelog",
     "title": "capgo.app cli-8.114.1",
     "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.1",
     "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.114.1",
     "pubDate": "2026-11-27T02:46:39.000Z",
     "description": "🆕 Changelog Fixed CLI : Corrected console links to use the China specific domain when the API host is set to , ensuring users are directed to the appropriate management interface. API : Ensured China API requests for upload URLs remain directed to , preventing routing issues for regional users. Bundle : Resolved a 400 error occurring during the completion of encrypted TUS uploads via the endpoint, improving upload reliability for encrypted assets. 🔗 Full Changelog : https://github.com/Cap g..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.78.0",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.78.0",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.78.0",
+    "pubDate": "2026-11-27T15:18:56.000Z",
+    "description": "🆕 Changelog Added Implemented PostHog MCP Analytics event tracking for the hosted server to improve product insight and usage monitoring. Fixed Corrected plugin state prewarming behavior to ensure it functions correctly in production environments. Added warning notifications for paying build only organizations that exceed their subscribed plan limits to prevent unexpected billing issues. Changed Optimized CI/CD unit test execution by sharding tests to ensure jobs complete within the 5 minute..."
+  },
+  {
+    "category": "changelog",
+    "title": "capgo.app capgo-22.77.4",
+    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.77.4",
+    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.77.4",
+    "pubDate": "2026-11-27T13:24:26.000Z",
+    "description": "🆕 Changelog Fixed Send the client IP address as the property in tracking events to ensure PostHog correctly geolocates worker events to the user. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/cli 8.114.2...capgo 22.77.4"
   },
   {
     "category": "changelog",
@@ -264,62 +320,6 @@
     "description": "🆕 Changelog Added Prevent update delivery to users in deselected regions, ensuring content compliance and geographic restrictions are strictly enforced. Display a preview of the user audience affected by channel changes before publishing, allowing administrators to verify distribution scope. Route new custom API domains automatically to the correct backend service, reducing manual configuration steps for developers. Changed Sample high volume application log writes in analytics to reduce sto..."
   },
   {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.65.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.65.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.65.0",
-    "pubDate": "2026-11-20T10:19:05.000Z",
-    "description": "🆕 Changelog Fixed Prevented duplicate email notifications : Resolved an issue where notifications were being sent multiple times during Bento email processing and Stripe webhook replays, ensuring users receive a single, accurate notification per subscription event. Changed Optimized analytics data volume : Reduced unnecessary PostHog event data transmission by removing unused events, improving performance and reducing storage overhead without impacting core analytics visibility. 🔗 Full Chan..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.64.4",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.4",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.4",
-    "pubDate": "2026-11-20T08:22:51.000Z",
-    "description": "🆕 Changelog Fixed Corrected database migration deploy order : Re stamped the channel bundle alert migration to ensure it executes in the correct sequence during deployment, preventing potential database schema conflicts or failed deployments. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.64.3...capgo 22.64.4"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.64.1",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.1",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.64.1",
-    "pubDate": "2026-11-19T14:01:37.000Z",
-    "description": "🆕 Changelog Performance Optimized analytics logging : Implemented sampling for high volume writes to reduce performance overhead and improve application responsiveness during heavy logging activities. Fixed Improved CI visual testing reliability : Fixed an issue where the review process would not fail when visual changes were detected but lacked the required screenshots, ensuring stricter quality control for UI changes. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.63.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.63.2",
-    "pubDate": "2026-11-18T21:36:02.000Z",
-    "description": "🆕 Changelog Fixed Simulator : Capped host sync running sessions at a maximum of 40 minutes to prevent prolonged resource consumption and improve stability during extended simulation periods. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.63.1...capgo 22.63.2"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app cli-8.108.2",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.108.2",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/cli-8.108.2",
-    "pubDate": "2026-11-17T20:51:32.000Z",
-    "description": "🆕 Changelog Added Billing : Enabled invoice PDF generation for Capgo accounts using existing Stripe invoice numbers. App Deployment : Introduced regional plugin serving policies to control how plugins are served across different regions. Assistant : Added Markdown rendering support to the console chat interface for improved readability of AI responses. MCP : Added guidance for web applications to transition to store ready Capacitor apps. Changed Billing : Updated storage billing model to cal..."
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.61.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.61.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.61.0",
-    "pubDate": "2026-11-17T12:26:28.000Z",
-    "description": "🆕 Changelog Added Introduced logic to automatically drop the when the private settings configuration matches the specified criteria. 🔗 Full Changelog : https://github.com/Cap go/capgo.app/compare/capgo 22.60.0...capgo 22.61.0"
-  },
-  {
-    "category": "changelog",
-    "title": "capgo.app capgo-22.60.0",
-    "link": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.60.0",
-    "guid": "https://github.com/Cap-go/capgo.app/releases/tag/capgo-22.60.0",
-    "pubDate": "2026-11-17T03:31:32.000Z",
-    "description": "🆕 Changelog Added Regional Plugin Serving Policies : Introduced support for regional plugin serving policies, allowing for more granular control over how and where plugins are served across different regions. Fixed Dashboard Plan Suggestion Data : Corrected the loading of total organizational storage data in the dashboard, ensuring that plan suggestions are now based on accurate storage metrics. Changed API Performance : Optimized API request handling to significantly reduce request costs an..."
-  },
-  {
     "category": "release",
     "title": "capacitor-accelerometer 8.0.58",
     "link": "https://github.com/Cap-go/capacitor-accelerometer/releases/tag/8.0.58",
@@ -513,11 +513,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-calendar 8.0.17",
-    "link": "https://github.com/Cap-go/capacitor-calendar/releases/tag/8.0.17",
-    "guid": "https://github.com/Cap-go/capacitor-calendar/releases/tag/8.0.17",
-    "pubDate": "2026-11-12T17:07:07.000Z",
-    "description": "🆕 Changelog Changed Updated project documentation to clarify that pull requests are reviewed, tested, and merged by humans, helping contributors understand the manual review workflow. 🔗 Full Changelog : https://github.com/Cap go/capacitor calendar/compare/8.0.16...8.0.17"
+    "title": "capacitor-calendar 8.0.18",
+    "link": "https://github.com/Cap-go/capacitor-calendar/releases/tag/8.0.18",
+    "guid": "https://github.com/Cap-go/capacitor-calendar/releases/tag/8.0.18",
+    "pubDate": "2026-11-27T12:10:26.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor calendar/compare/8.0.18...8.0.18"
   },
   {
     "category": "release",
@@ -569,11 +569,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-date-picker 8.1.16",
-    "link": "https://github.com/Cap-go/capacitor-date-picker/releases/tag/8.1.16",
-    "guid": "https://github.com/Cap-go/capacitor-date-picker/releases/tag/8.1.16",
-    "pubDate": "2026-11-12T17:14:00.000Z",
-    "description": "🆕 Changelog Changed Updated contributor documentation to clarify that pull requests are reviewed, tested, and merged by human maintainers, improving transparency around the contribution process. 🔗 Full Changelog : https://github.com/Cap go/capacitor date picker/compare/8.1.15...8.1.16"
+    "title": "capacitor-date-picker 8.1.17",
+    "link": "https://github.com/Cap-go/capacitor-date-picker/releases/tag/8.1.17",
+    "guid": "https://github.com/Cap-go/capacitor-date-picker/releases/tag/8.1.17",
+    "pubDate": "2026-11-27T12:09:58.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor date picker/compare/8.1.17...8.1.17"
   },
   {
     "category": "release",
@@ -665,11 +665,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-firebase messaging/v8.6.2",
-    "link": "https://github.com/Cap-go/capacitor-firebase/releases/tag/messaging/v8.6.2",
-    "guid": "https://github.com/Cap-go/capacitor-firebase/releases/tag/messaging/v8.6.2",
-    "pubDate": "2026-11-26T20:02:01.000Z",
-    "description": "🆕 Changelog chore(release): messaging 8.6.2 (39d3969) chore: sync upstream capawesome team/capacitor firebase at 15c2107d ( 31) (ef5e3e2) chore(release): messaging 8.6.1 (a94af05) chore: sync from upstream capawesome team/capacitor firebase ( 27) (0a87852) 🔗 Full Changelog : https://github.com/Cap go/capacitor firebase/compare/messaging/v9.0.0 beta.0...messaging/v8.6.2"
+    "title": "capacitor-firebase storage/v8.6.2",
+    "link": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.6.2",
+    "guid": "https://github.com/Cap-go/capacitor-firebase/releases/tag/storage/v8.6.2",
+    "pubDate": "2026-11-27T20:45:21.000Z",
+    "description": "🆕 Changelog chore(release): storage 8.6.2 (4c12fb2) feat: ship ESM only in every firebase package (drop CommonJS and IIFE outputs) ( 34) (c531b8f) chore(release): storage 8.6.1 (854e140) chore: sync from upstream capawesome team/capacitor firebase ( 27) (0a87852) 🔗 Full Changelog : https://github.com/Cap go/capacitor firebase/compare/storage/v9.0.0 beta.0...storage/v8.6.2"
   },
   {
     "category": "release",
@@ -689,11 +689,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-health 8.13.0",
-    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.13.0",
-    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.13.0",
-    "pubDate": "2026-11-14T02:16:31.000Z",
-    "description": "🆕 Changelog Added Added dietary protein support on Android. You can now read and write dietary protein records through the Android implementation. This extends nutrition tracking capabilities to include protein intake alongside other dietary data. 🔗 Full Changelog : https://github.com/Cap go/capacitor health/compare/8.12.4...8.13.0"
+    "title": "capacitor-health 8.13.1",
+    "link": "https://github.com/Cap-go/capacitor-health/releases/tag/8.13.1",
+    "guid": "https://github.com/Cap-go/capacitor-health/releases/tag/8.13.1",
+    "pubDate": "2026-11-27T16:46:41.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor health/compare/8.13.1...8.13.1"
   },
   {
     "category": "release",
@@ -881,11 +881,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-audio 8.5.6",
-    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.6",
-    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.5.6",
-    "pubDate": "2026-11-23T08:52:40.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.5.6...8.5.6"
+    "title": "capacitor-native-audio 8.6.0",
+    "link": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.6.0",
+    "guid": "https://github.com/Cap-go/capacitor-native-audio/releases/tag/8.6.0",
+    "pubDate": "2026-11-27T20:17:33.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native audio/compare/8.6.0...8.6.0"
   },
   {
     "category": "release",
@@ -897,19 +897,19 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-loader 8.1.14",
-    "link": "https://github.com/Cap-go/capacitor-native-loader/releases/tag/8.1.14",
-    "guid": "https://github.com/Cap-go/capacitor-native-loader/releases/tag/8.1.14",
-    "pubDate": "2026-11-12T16:40:14.000Z",
-    "description": "🆕 Changelog Changed Updated documentation to clarify that a human reviews, tests, and merges every pull request, improving transparency for contributors. 🔗 Full Changelog : https://github.com/Cap go/capacitor native loader/compare/8.1.13...8.1.14"
+    "title": "capacitor-native-loader 8.2.0",
+    "link": "https://github.com/Cap-go/capacitor-native-loader/releases/tag/8.2.0",
+    "guid": "https://github.com/Cap-go/capacitor-native-loader/releases/tag/8.2.0",
+    "pubDate": "2026-11-27T20:15:44.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native loader/compare/8.2.0...8.2.0"
   },
   {
     "category": "release",
-    "title": "capacitor-native-map 8.1.5",
-    "link": "https://github.com/Cap-go/capacitor-native-map/releases/tag/8.1.5",
-    "guid": "https://github.com/Cap-go/capacitor-native-map/releases/tag/8.1.5",
-    "pubDate": "2026-11-13T12:52:04.000Z",
-    "description": "🆕 Changelog Fixed Aligned Android toolchain versions with official Capacitor 8 requirements, ensuring compatibility with the latest Capacitor releases and avoiding build time version conflicts. 🔗 Full Changelog : https://github.com/Cap go/capacitor native map/compare/8.1.4...8.1.5"
+    "title": "capacitor-native-map 8.1.6",
+    "link": "https://github.com/Cap-go/capacitor-native-map/releases/tag/8.1.6",
+    "guid": "https://github.com/Cap-go/capacitor-native-map/releases/tag/8.1.6",
+    "pubDate": "2026-11-27T12:09:56.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native map/compare/8.1.6...8.1.6"
   },
   {
     "category": "release",
@@ -921,11 +921,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-native-navigation 8.16.4",
-    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.4",
-    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.4",
-    "pubDate": "2026-11-20T10:10:24.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.16.4...8.16.4"
+    "title": "capacitor-native-navigation 8.16.7",
+    "link": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.7",
+    "guid": "https://github.com/Cap-go/capacitor-native-navigation/releases/tag/8.16.7",
+    "pubDate": "2026-11-27T12:38:14.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor native navigation/compare/8.16.7...8.16.7"
   },
   {
     "category": "release",
@@ -993,11 +993,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-pay 8.2.5",
-    "link": "https://github.com/Cap-go/capacitor-pay/releases/tag/8.2.5",
-    "guid": "https://github.com/Cap-go/capacitor-pay/releases/tag/8.2.5",
-    "pubDate": "2026-11-13T13:09:42.000Z",
-    "description": "🆕 Changelog Fixed Aligned Android toolchain versions with the official Capacitor 8 requirements, resolving potential build and compatibility issues when using Capacitor 8. 🔗 Full Changelog : https://github.com/Cap go/capacitor pay/compare/8.2.4...8.2.5"
+    "title": "capacitor-pay 8.2.6",
+    "link": "https://github.com/Cap-go/capacitor-pay/releases/tag/8.2.6",
+    "guid": "https://github.com/Cap-go/capacitor-pay/releases/tag/8.2.6",
+    "pubDate": "2026-11-27T12:09:01.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor pay/compare/8.2.6...8.2.6"
   },
   {
     "category": "release",
@@ -1073,11 +1073,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-pretty-toast 8.1.31",
-    "link": "https://github.com/Cap-go/capacitor-pretty-toast/releases/tag/8.1.31",
-    "guid": "https://github.com/Cap-go/capacitor-pretty-toast/releases/tag/8.1.31",
-    "pubDate": "2026-11-13T13:01:03.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain with official Capacitor 8 versions, ensuring compatibility with Capacitor 8 projects and preventing build issues caused by mismatched dependencies. 🔗 Full Changelog : https://github.com/Cap go/capacitor pretty toast/compare/8.1.30...8.1.31"
+    "title": "capacitor-pretty-toast 8.1.32",
+    "link": "https://github.com/Cap-go/capacitor-pretty-toast/releases/tag/8.1.32",
+    "guid": "https://github.com/Cap-go/capacitor-pretty-toast/releases/tag/8.1.32",
+    "pubDate": "2026-11-27T12:33:47.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor pretty toast/compare/8.1.32...8.1.32"
   },
   {
     "category": "release",
@@ -1177,11 +1177,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-sheets v8.2.12",
-    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.12",
-    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.2.12",
-    "pubDate": "2026-11-23T07:39:34.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.2.12...v8.2.12"
+    "title": "capacitor-sheets v8.4.0",
+    "link": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.4.0",
+    "guid": "https://github.com/Cap-go/capacitor-sheets/releases/tag/v8.4.0",
+    "pubDate": "2026-11-27T20:13:14.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor sheets/compare/v8.4.0...v8.4.0"
   },
   {
     "category": "release",
@@ -1217,11 +1217,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-ssl-pinning 8.1.17",
-    "link": "https://github.com/Cap-go/capacitor-ssl-pinning/releases/tag/8.1.17",
-    "guid": "https://github.com/Cap-go/capacitor-ssl-pinning/releases/tag/8.1.17",
-    "pubDate": "2026-11-12T17:09:22.000Z",
-    "description": "🆕 Changelog Changed Clarified the contribution guidelines to state that pull requests are reviewed, tested, and merged by human maintainers. This sets clearer expectations for contributors about the review process. 🔗 Full Changelog : https://github.com/Cap go/capacitor ssl pinning/compare/8.1.16...8.1.17"
+    "title": "capacitor-ssl-pinning 8.1.18",
+    "link": "https://github.com/Cap-go/capacitor-ssl-pinning/releases/tag/8.1.18",
+    "guid": "https://github.com/Cap-go/capacitor-ssl-pinning/releases/tag/8.1.18",
+    "pubDate": "2026-11-27T12:26:54.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor ssl pinning/compare/8.1.18...8.1.18"
   },
   {
     "category": "release",
@@ -1329,11 +1329,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-video-player 9.0.1",
-    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.1",
-    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.1",
-    "pubDate": "2026-11-23T18:52:14.000Z",
-    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/9.0.1...9.0.1"
+    "title": "capacitor-video-player 9.0.2",
+    "link": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.2",
+    "guid": "https://github.com/Cap-go/capacitor-video-player/releases/tag/9.0.2",
+    "pubDate": "2026-11-27T12:28:52.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor video player/compare/9.0.2...9.0.2"
   },
   {
     "category": "release",
@@ -1409,11 +1409,11 @@
   },
   {
     "category": "release",
-    "title": "capacitor-youtube-player 8.3.19",
-    "link": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.19",
-    "guid": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.19",
-    "pubDate": "2026-11-13T12:59:26.000Z",
-    "description": "🆕 Changelog Fixed Aligned the Android toolchain with the official versions required by Capacitor 8. This resolves compatibility issues with newer Capacitor releases and ensures builds use the supported dependency versions. 🔗 Full Changelog : https://github.com/Cap go/capacitor youtube player/compare/8.3.18...8.3.19"
+    "title": "capacitor-youtube-player 8.3.20",
+    "link": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.20",
+    "guid": "https://github.com/Cap-go/capacitor-youtube-player/releases/tag/8.3.20",
+    "pubDate": "2026-11-27T12:28:44.000Z",
+    "description": "🆕 Changelog Changelog was not generated automatically for this release. 🔗 Full Changelog : https://github.com/Cap go/capacitor youtube player/compare/8.3.20...8.3.20"
   },
   {
     "category": "release",

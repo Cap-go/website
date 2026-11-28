@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Fourteen days in review, 4.3 spam overturned on a call">
+  <title>Fourteen days in review, 4.3 spam overturned on a call</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <circle cx="160" cy="96" r="52" fill="none" stroke="#374151" stroke-width="3"/>
+  <path d="M160 44 V96 L196 116" stroke="#44BCFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="128" y="168" fill="#44BCFF" font-family="system-ui,sans-serif" font-size="18" font-weight="700">14 days</text>
+  <rect x="212" y="40" width="88" height="28" rx="8" fill="#111827" stroke="#EF4444" stroke-width="2"/>
+  <text x="228" y="58" fill="#EF4444" font-family="system-ui,sans-serif" font-size="8" font-weight="600">4.3 spam</text>
+  <rect x="212" y="80" width="88" height="56" rx="12" fill="#111827" stroke="#A3E635" stroke-width="2"/>
+  <path d="M228 100 C228 96 244 96 244 100 V108 C244 112 228 112 228 108 Z" fill="none" stroke="#A3E635" stroke-width="1.5"/>
+  <path d="M252 100 C256 100 260 104 260 108 V116 C260 120 248 120 244 116" fill="none" stroke="#A3E635" stroke-width="1.5"/>
+  <text x="220" y="124" fill="#A3E635" font-family="system-ui,sans-serif" font-size="6">manager call</text>
+  <rect x="24" y="120" width="72" height="48" rx="10" fill="#111827" stroke="#A3E635" stroke-width="1.5"/>
+  <path d="M44 148 L52 140 L60 152" fill="none" stroke="#A3E635" stroke-width="2" stroke-linecap="round"/>
+  <text x="30" y="160" fill="#A3E635" font-family="system-ui,sans-serif" font-size="7">approved</text>
+</svg>
