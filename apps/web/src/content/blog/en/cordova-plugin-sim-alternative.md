@@ -37,7 +37,7 @@ The JavaScript bridge in `www/sim.js` exposes:
 - `getSimInfo(success, error)` returning one object with `carrierName`, `countryCode`, `mcc`, and `mnc`
 - On Android, `hasReadPermission` and `requestReadPermission` live in `www/android/sim.js`
 
-Extra Android fields such as phone number and multi-SIM lists require `READ_PHONE_STATE` and are documented in the upstream README, but the core Cordova API is still callback based and returns a single JSON object.
+Extra Android fields such as phone number and a `cards` array require `READ_PHONE_STATE` and are documented in the upstream README, but the core Cordova API is still callback based.
 
 [`@capgo/capacitor-sim`](https://www.npmjs.com/package/@capgo/capacitor-sim) latest on npm is **8.0.55** with a `modified` date of **13 November 2026**. `src/definitions.ts` documents `getSimCards`, `checkPermissions`, `requestPermissions`, and optional Android-only `number`, `subscriptionId`, and `simSlotIndex`. Capgo ships fixes on an open source cadence where a human still reviews, tests and merges 50+ pull requests daily.
 
@@ -86,6 +86,7 @@ window.plugins.sim.getSimInfo(
 import { Sim } from '@capgo/capacitor-sim';
 
 const { simCards } = await Sim.getSimCards();
+if (simCards.length === 0) return;
 const primary = simCards[0];
 console.log(primary.carrierName, primary.mobileCountryCode, primary.mobileNetworkCode);
 ```
@@ -113,7 +114,10 @@ await Sim.requestPermissions();
 | Android `hasReadPermission` | `checkPermissions()` returns `{ readSimCard }` |
 | Android `requestReadPermission` | `requestPermissions()` |
 | Single SIM object | `simCards[0]` or iterate all slots |
-| Not in Cordova | `sim.number`, `sim.subscriptionId`, `sim.simSlotIndex` (Android) |
+| `info.cards[]` (Android, `READ_PHONE_STATE`) | `{ simCards }` array |
+| `cards[].phoneNumber` | `sim.number` |
+| `cards[].subscriptionId` | `sim.subscriptionId` |
+| `cards[].simSlotIndex` | `sim.simSlotIndex` |
 | Not in Cordova | `getPluginVersion()` |
 | Cordova plugin install | `bun add @capgo/capacitor-sim` plus `bunx cap sync` |
 
