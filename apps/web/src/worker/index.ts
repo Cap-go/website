@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { withAffonsoClick, type AffonsoEnv } from '../../../shared/affonso'
 import {
   markdownNotFoundResponse,
   MCP_MANIFEST_PATHS,
@@ -31,7 +32,7 @@ import type { BackgroundContext } from './types'
 import { withVideoRange } from './video-ranges'
 import { handleSignaturesDirectoryRequest, HTTP_MESSAGE_SIGNATURES_DIRECTORY, signedFetch } from './web-bot-auth'
 
-interface Env extends PublicMcpEnv {
+interface Env extends PublicMcpEnv, AffonsoEnv {
   TRANSLATION_STORE?: TranslationStoreReader
   AB_FLAG?: string
   AB_VARIANT?: string
@@ -541,7 +542,7 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
 
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
-    return withDevHostNoindex(
+    const response = withDevHostNoindex(
       request,
       await withTranslationReadiness(
         request,
@@ -550,5 +551,7 @@ export default {
         typeof caches === 'undefined' ? undefined : workerCache(),
       ),
     )
+    // Outermost so the per-visitor cookie never reaches the translation cache.
+    return withAffonsoClick(request, response, env)
   },
 }

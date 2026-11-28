@@ -2,7 +2,6 @@
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import SEO from '../components/SEO.astro'
-import Affonso from '../components/Affonso.astro'
 import Attribution from '../components/Attribution.astro'
 import OpenAIPixel from '../components/OpenAIPixel.astro'
 import PostHog from '../components/posthog.astro'
@@ -31,7 +30,6 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     <Attribution />
     {enableThirdPartyScripts && <ThirdPartyLoader />}
     {enableThirdPartyScripts && <PostHog />}
-    {enableThirdPartyScripts && <Affonso />}
     {enableThirdPartyScripts && <OpenAIPixel />}
   </head>
   <body class="bg-gray-900 text-pretty text-white antialiased">

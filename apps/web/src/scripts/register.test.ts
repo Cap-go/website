@@ -174,7 +174,8 @@ test('registration without profile names preserves referral attribution and the 
   ])
   expect(captures[1].properties.signup_source).toBe('plugin_example')
   expect(captures[1].properties.signup_offer).toBe('direct')
-  expect(referrals).toEqual([{ email: 'signup@example.com', externalUserId: 'fake-user-id' }])
+  // The Capgo API records the Affonso signup; the page no longer calls the pixel.
+  expect(referrals).toEqual([])
   const redirect = new URL(windowStub.location.href)
   expect(redirect.origin).toBe('https://console.capgo.app')
   expect(redirect.searchParams.get('access_token')).toBe('fake-access')
