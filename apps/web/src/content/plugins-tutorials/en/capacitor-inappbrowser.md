@@ -22,6 +22,7 @@ npx cap sync
 - App-to-page communication with `postMessage()`, page-to-app communication with `window.mobileApp.postMessage(...)`, and script injection with `executeScript()`.
 - Download handling, native-first proxy rules, popup control, Google Pay support, `_blank` link handling, and hidden preloadable browser instances.
 - `deepLinkPrevented` when `preventDeeplink: true` blocks a link that would leave the managed WebView (Android and iOS only; requires `@capgo/capacitor-inappbrowser` 8.28.0+; [deep link prevented guide](/docs/plugins/inappbrowser/deep-link-prevented/)).
+- Download lifecycle events (`downloadStarted`, `downloadProgress`, `downloadCompleted`, `downloadFailed`, `downloadCancelled`) and `cancelDownload()` for files saved with `handleDownloads: true` (Android and iOS only; requires `@capgo/capacitor-inappbrowser` 8.28.0+; [download progress guide](/docs/plugins/inappbrowser/download-events/)).
 
 ## Common Use Cases
 
@@ -92,6 +93,35 @@ await InAppBrowser.openWebView({
 ```
 
 See [deepLinkPrevented event](/docs/plugins/inappbrowser/deep-link-prevented/) for platform details.
+
+### Show Download Progress and Cancel
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+let activeDownload: string | undefined;
+
+await InAppBrowser.addListener('downloadStarted', ({ downloadId }) => {
+  activeDownload = downloadId;
+});
+await InAppBrowser.addListener('downloadProgress', ({ bytesReceived, bytesExpected }) => {
+  if (bytesExpected > 0) {
+    console.log(`progress ${Math.round((bytesReceived / bytesExpected) * 100)}%`);
+  }
+});
+await InAppBrowser.addListener('downloadCancelled', ({ downloadId }) => {
+  console.log('cancelled', downloadId);
+});
+
+await InAppBrowser.openWebView({ url: 'https://example.com/files', handleDownloads: true });
+
+// From a Cancel button:
+if (activeDownload) {
+  await InAppBrowser.cancelDownload({ downloadId: activeDownload });
+}
+```
+
+See [Download progress and cancel](/docs/plugins/inappbrowser/download-events/) for the full lifecycle and platform notes.
 
 ### Preload and Swap Multiple WebViews
 

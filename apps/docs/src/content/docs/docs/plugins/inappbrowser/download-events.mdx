@@ -1,0 +1,85 @@
+---
+title: Download progress and cancel
+description: "Track managed downloads with downloadStarted, downloadProgress, downloadCompleted, downloadFailed and downloadCancelled, and stop them with cancelDownload."
+sidebar:
+  order: 4
+---
+
+## When to use it
+
+Requires `@capgo/capacitor-inappbrowser` **8.28.0** or newer from [capacitor-inappbrowser #798](https://github.com/Cap-go/capacitor-inappbrowser/pull/798/).
+
+Open the WebView with `handleDownloads: true` when files from the page should be saved by the plugin instead of the system browser. Each managed download then reports its whole lifecycle to your app, so you can show a progress bar, a Cancel button, and a clear result.
+
+Android and iOS emit these events. The web implementation does not download files, and `cancelDownload()` resolves without doing anything there.
+
+## Lifecycle
+
+Every managed download gets a `downloadId` that stays the same in all of its events:
+
+1. `downloadStarted` with `{ id?, downloadId, sourceUrl? }` when the plugin takes over the download.
+2. `downloadProgress` with `{ id?, downloadId, bytesReceived, bytesExpected, fileName? }` while bytes arrive. Native code sends at most four events per second per download.
+3. Exactly one ending event:
+   - `downloadCompleted` when the file is saved. The last `downloadProgress` before it carries the final byte count.
+   - `downloadFailed` with an `error` message, for example when the connection drops before the announced length arrives.
+   - `downloadCancelled` after `cancelDownload({ downloadId })`, or when the WebView closes while the download is still running.
+
+`bytesExpected` is `-1` when the server does not send a length. Use it to switch between a progress bar and an indeterminate spinner.
+
+## Example
+
+`openWebView()` resolves when the WebView is ready, not when the download ends. Register the listeners before opening, and remove them when the browser session ends.
+
+```typescript
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
+
+const running = new Map<string, number>();
+
+const listeners = await Promise.all([
+  InAppBrowser.addListener('downloadStarted', ({ downloadId, sourceUrl }) => {
+    running.set(downloadId, 0);
+    console.log('download started', downloadId, sourceUrl);
+  }),
+  InAppBrowser.addListener('downloadProgress', ({ downloadId, bytesReceived, bytesExpected }) => {
+    if (bytesExpected > 0) {
+      running.set(downloadId, bytesReceived / bytesExpected);
+    }
+  }),
+  InAppBrowser.addListener('downloadCompleted', ({ downloadId, fileName }) => {
+    running.delete(downloadId ?? '');
+    console.log('saved', fileName);
+  }),
+  InAppBrowser.addListener('downloadFailed', ({ downloadId, error }) => {
+    running.delete(downloadId ?? '');
+    console.warn('download failed', error);
+  }),
+  InAppBrowser.addListener('downloadCancelled', ({ downloadId }) => {
+    running.delete(downloadId);
+  }),
+]);
+
+await InAppBrowser.openWebView({
+  url: 'https://example.com/files',
+  handleDownloads: true,
+});
+
+// From a Cancel button in your UI:
+async function cancelAll() {
+  for (const downloadId of running.keys()) {
+    await InAppBrowser.cancelDownload({ downloadId });
+  }
+}
+
+// When the browser session ends:
+async function cleanup() {
+  await Promise.all(listeners.map((listener) => listener.remove()));
+}
+```
+
+`cancelDownload()` resolves whether or not the download was still running. A running download then emits `downloadCancelled`, and it never emits `downloadCompleted` or `downloadFailed` afterwards.
+
+## Platform notes
+
+- **Android:** HTTP downloads and `blob:` downloads both report progress. Cancelling closes the connection right away, even when the server is stalled. A connection that ends before the announced `Content-Length` emits `downloadFailed` and the partial file is deleted.
+- **iOS:** Downloads run through `WKDownload`. Progress follows the received byte count, so it also works when the server sends no length. Closing the WebView cancels running downloads and emits `downloadCancelled`.
+- **App killed mid-download:** the transfer stops with the process. No event is sent for it after relaunch, and new downloads work normally.
