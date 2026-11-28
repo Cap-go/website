@@ -43,7 +43,7 @@ Examples in the upstream repo sometimes call `window.navigationbar.hide()`, but 
 
 ## Install
 
-The command below installs the npm **8.x** line for **Capacitor 8** (`@capacitor/core` >= 8). Capgo plugin majors track Capacitor majors. On Capacitor 7, install the matching **7.x** release instead (see the plugin README).
+The command below installs the npm **8.x** line for **Capacitor 8** (`@capacitor/core` >= 8). Capgo plugin majors track Capacitor majors. On Capacitor 7, install the matching **7.x** release instead (see the plugin README). The `hide()` and `show()` methods require plugin **8.2.0** or later. No 7.x release provides them, so the hide/show examples in this article do not compile on Capacitor 7.
 
 ```bash
 bun add @capgo/capacitor-navigation-bar
