@@ -16,6 +16,7 @@ import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRed
 import { withTranslationReadiness, type TranslationStoreReader } from '../../../shared/translationReadiness'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
+import { withAffonsoClick, type AffonsoEnv } from './affonso'
 import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { BUILDER_VARIANTS_PATH, handleBuilderVariants } from './builder-variants'
@@ -31,7 +32,7 @@ import type { BackgroundContext } from './types'
 import { withVideoRange } from './video-ranges'
 import { handleSignaturesDirectoryRequest, HTTP_MESSAGE_SIGNATURES_DIRECTORY, signedFetch } from './web-bot-auth'
 
-interface Env extends PublicMcpEnv {
+interface Env extends PublicMcpEnv, AffonsoEnv {
   TRANSLATION_STORE?: TranslationStoreReader
   AB_FLAG?: string
   AB_VARIANT?: string
@@ -541,7 +542,7 @@ async function handleRequest(request: Request, env: Env, ctx?: BackgroundContext
 
 export default {
   async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
-    return withDevHostNoindex(
+    const response = withDevHostNoindex(
       request,
       await withTranslationReadiness(
         request,
@@ -550,5 +551,7 @@ export default {
         typeof caches === 'undefined' ? undefined : workerCache(),
       ),
     )
+    // Outermost so the per-visitor cookie never reaches the translation cache.
+    return withAffonsoClick(request, response, env)
   },
 }

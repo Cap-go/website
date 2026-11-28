@@ -240,12 +240,6 @@ form?.addEventListener('submit', async (e) => {
       ...getSignupAttributionForEvents(),
     })
   }
-  if ((window as any).Affonso?.signup) {
-    ;(window as any).Affonso.signup({
-      email: email.value,
-      externalUserId: user.user.id,
-    })
-  }
   const consoleUrl = new URL('https://console.capgo.app/login/')
   consoleUrl.searchParams.set('access_token', user.session.access_token)
   consoleUrl.searchParams.set('refresh_token', user.session.refresh_token)
