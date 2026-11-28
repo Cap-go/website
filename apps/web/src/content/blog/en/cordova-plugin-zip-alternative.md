@@ -17,7 +17,7 @@ origin: human
 next_blog: ''
 faq:
   - question: "What is the best cordova-plugin-zip alternative in Capacitor?"
-    answer: "@capgo/capacitor-zip adds zip and unzip promises, optional AES passwords on Android, zip slip protection on Android, and progress via addListener or onProgress."
+    answer: "@capgo/capacitor-zip adds zip and unzip promises, optional AES passwords on Android, zip slip protection on Android, and progress via addListener('progress') (onProgress from plugin 8.3.0)."
   - question: "Does cordova-plugin-zip compress files?"
     answer: "No. The npm package only exposes zip.unzip in zip.js. Use @capgo/capacitor-zip zip() on native platforms for archiving."
   - question: "Is cordova-plugin-zip still maintained?"
@@ -39,7 +39,7 @@ The published `zip.js` module exposes only:
 
 There is no `zip()` in the Cordova JavaScript API. The plugin depends on `cordova-plugin-file` path strings and legacy `cordova.exec` wiring.
 
-[`@capgo/capacitor-zip`](https://www.npmjs.com/package/@capgo/capacitor-zip) latest on npm is **8.2.5** with a `modified` date of **12 November 2026**. `src/definitions.ts` documents `zip`, `unzip`, `addListener('progress')`, optional `password` on Android, `includeParentFolder`, and `onProgress`. Capgo ships fixes on an open source cadence where a human still reviews, tests and merges 50+ pull requests daily.
+[`@capgo/capacitor-zip`](https://www.npmjs.com/package/@capgo/capacitor-zip) latest on npm is **8.2.5** with a `modified` date of **12 November 2026**. `src/definitions.ts` documents `zip`, `unzip`, `addListener('progress')`, optional `password` on Android, `includeParentFolder`, and `onProgress` from **8.3.0**. Capgo ships fixes on an open source cadence where a human still reviews, tests and merges 50+ pull requests daily.
 
 ## Install
 
@@ -100,21 +100,27 @@ zip.unzip(
 // After (Capacitor)
 import { CapacitorZip } from '@capgo/capacitor-zip';
 
-await CapacitorZip.unzip(
-  {
+const handle = await CapacitorZip.addListener('progress', (event) => {
+  if (event.lengthComputable) {
+    console.log(event.progress, event.currentFile);
+  }
+});
+try {
+  await CapacitorZip.unzip({
     source: sourceZip,
     destination: outputDirectory,
-    onProgress: (event) => console.log(event.loaded, event.total),
-  },
-);
+  });
+} finally {
+  await handle.remove();
+}
 ```
 
 ### API mapping table
 
 | cordova-plugin-zip (`zip` global) | @capgo/capacitor-zip |
 | --- | --- |
-| `unzip(src, dest, callback, progress?)` | `unzip({ source, destination, onProgress?, password? })` rejects on failure instead of code `-1` |
-| Progress `{ loaded, total }` | `ZipProgressEvent` via `addListener('progress')` or `onProgress` |
+| `unzip(src, dest, callback, progress?)` | `unzip({ source, destination, password? })` rejects on failure instead of code `-1` |
+| Progress `{ loaded, total }` | `ZipProgressEvent` via `addListener('progress')`; optional `onProgress` from plugin **8.3.0** |
 | Success callback with `0` | Promise resolves when extraction completes |
 | Failure callback with `-1` | Promise rejects with error message |
 | Not in Cordova JS API | `zip({ source, destination, password?, includeParentFolder? })` |
