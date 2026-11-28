@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="CFBundleName placeholder on English home screen, 2.3.8">
+  <title>CFBundleName placeholder on English home screen, 2.3.8</title>
+  <rect width="320" height="200" fill="#0F172A" rx="16"/>
+  <rect x="100" y="44" width="120" height="128" rx="20" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+  <rect x="112" y="56" width="96" height="16" rx="8" fill="#374151"/>
+  <rect x="124" y="120" width="56" height="56" rx="14" fill="#111827" stroke="#44BCFF" stroke-width="2"/>
+  <rect x="136" y="132" width="32" height="32" rx="8" fill="#374151"/>
+  <text x="112" y="190" fill="#EF4444" font-family="system-ui,sans-serif" font-size="6" font-weight="600">CFBundleName</text>
+  <rect x="232" y="64" width="64" height="22" rx="6" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="240" y="79" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">English</text>
+  <rect x="232" y="96" width="64" height="22" rx="6" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="244" y="111" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="7">9 days</text>
+  <rect x="232" y="128" width="64" height="22" rx="6" fill="#111827" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="238" y="143" fill="#FBBF24" font-family="system-ui,sans-serif" font-size="6">2.3.8</text>
+</svg>
