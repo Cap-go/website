@@ -37,6 +37,7 @@ Use it when the page needs more than a simple external browser: OAuth and checko
 - Keep multiple browser instances loaded with `hidden`, `hide()`, and `show()` while preserving page state.
 - Embed advanced web apps that need request proxying, file uploads, downloads, popup control, Google Pay support, `_blank` link handling, and app-to-page messaging.
 - React when `preventDeeplink` blocks an external hand-off using the `deepLinkPrevented` listener (requires plugin 8.28.0+). See [deepLinkPrevented event](/docs/plugins/inappbrowser/deep-link-prevented/).
+- Show download progress and a Cancel button for files saved with `handleDownloads: true`, using `downloadStarted`, `downloadProgress`, `downloadCancelled` and `cancelDownload()` (requires plugin 8.28.0+). See [Download progress and cancel](/docs/plugins/inappbrowser/download-events/).
 
 ## Core Capabilities
 
@@ -82,6 +83,10 @@ Use it when the page needs more than a simple external browser: OAuth and checko
 | `addListener` | Will be triggered when page load error. |
 | `addListener` | Will be triggered after native download handling saves a file locally. Enable this with `handleDownloads: true` when opening the webview. |
 | `addListener` | Will be triggered when native download handling fails. Enable this with `handleDownloads: true` when opening the webview. |
+| `addListener` | Will be triggered when native download handling starts, with a `downloadId` shared by every later event for that file (plugin 8.28.0+). See [Download progress and cancel](/docs/plugins/inappbrowser/download-events/). |
+| `addListener` | Will be triggered while a managed download is in progress, at most four times per second (plugin 8.28.0+). |
+| `addListener` | Will be triggered when a managed download is cancelled by `cancelDownload` or because the webview closed mid-transfer (plugin 8.28.0+). |
+| `cancelDownload` | Ends a running managed download, which then emits `downloadCancelled` (plugin 8.28.0+). |
 | `addListener` | Will be triggered whenever a page opens a popup/new window. Use the returned popup id with `executeScript`, `postMessage`, `show`, `hide`, and `close`. |
 | `addListener` | Listen for proxied requests delegated by the native runtime. Prefer `addProxyHandler()` instead of calling this directly. |
 | `addListener` | Listen for JavaScript console output emitted by the managed page. Enable this with `captureConsoleLogs: true` when opening the webview. |
