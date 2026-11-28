@@ -19,14 +19,14 @@ faq:
   - question: "What is the best cordova-plugin-market alternative in Capacitor?"
     answer: "@capgo/capacitor-native-market maps market.open to openStoreListing, adds openDevPage, openCollection, openEditorChoicePage, and search with promises instead of cordova.exec callbacks."
   - question: "Does cordova-plugin-market support Play Store search?"
-    answer: "Yes. The Cordova module exposes market.search(key). Capgo adds NativeMarket.search on Android only with typed options."
+    answer: "Yes. The Cordova module exposes cordova.plugins.market.search(key). Capgo adds NativeMarket.search on Android and iOS with typed options."
   - question: "Is cordova-plugin-market still maintained?"
     answer: "npm lists cordova-plugin-market at version 1.2.0. The last version publish on the registry timeline is 31 August 2017. Source: xmartlabs/cordova-plugin-market on GitHub."
   - question: "Where are the docs?"
     answer: "https://capgo.app/docs/plugins/native-market/, npm @capgo/capacitor-native-market, and GitHub Cap-go/capacitor-native-market."
 ---
 
-The practical **cordova-plugin-market alternative** for a Capacitor app is [`@capgo/capacitor-native-market`](/plugins/capacitor-native-market/). It replaces the global `market` object and `cordova.exec` callbacks with `NativeMarket` promises, keeps `open` and `search` behavior, and adds Play Store developer pages, collections, and editor choice deep links on Android. This guide lists npm facts, install steps, usage, and a Cordova to Capacitor API map.
+The practical **cordova-plugin-market alternative** for a Capacitor app is [`@capgo/capacitor-native-market`](/plugins/capacitor-native-market/). It replaces `cordova.plugins.market` and `cordova.exec` callbacks with `NativeMarket` promises, keeps `open` and `search` behavior, and adds Play Store developer pages, collections, and editor choice deep links on Android. This guide lists npm facts, install steps, usage, and a Cordova to Capacitor API map.
 
 ## Why leave cordova-plugin-market in Capacitor
 
@@ -34,8 +34,8 @@ The practical **cordova-plugin-market alternative** for a Capacitor app is [`@ca
 
 The published `www/market.js` module exposes:
 
-- `market.open(appId, callbackContext)` to open a store listing
-- `market.search(key, callbackContext)` to search the store (Android behavior in the native implementation)
+- `cordova.plugins.market.open(appId, callbackContext)` to open a store listing
+- `cordova.plugins.market.search(key, callbackContext)` to search the store
 
 Both calls route through `cordova.exec` with optional success and error callbacks on `callbackContext`. There is no typed promise surface and no extra Play Store marketing URLs beyond open and search.
 
@@ -55,15 +55,15 @@ Use the bundle identifier on iOS and the application id on Android when opening 
 ## Usage example
 
 ```ts
-import { Capacitor } from '@capacitor/core';
 import { NativeMarket } from '@capgo/capacitor-native-market';
 
 export async function openOurStorePage() {
   await NativeMarket.openStoreListing({ appId: 'app.capgo.demo' });
+  // iOS: pass country when the app is not published in the US App Store.
+  await NativeMarket.openStoreListing({ appId: 'app.capgo.demo', country: 'IT' });
 }
 
 export async function findSimilarApps() {
-  if (Capacitor.getPlatform() !== 'android') return;
   await NativeMarket.search({ terms: 'capacitor plugins' });
 }
 ```
@@ -72,31 +72,27 @@ export async function findSimilarApps() {
 
 ```js
 // Before (Cordova)
-market.open('com.example.app', {
+cordova.plugins.market.open('com.example.app', {
   success: () => console.log('opened'),
   error: (err) => console.error(err),
 });
-market.search('photo editor', { success: () => {} });
+cordova.plugins.market.search('photo editor', { success: () => {} });
 ```
 
 ```ts
 // After (Capacitor)
-import { Capacitor } from '@capacitor/core';
 import { NativeMarket } from '@capgo/capacitor-native-market';
 
 await NativeMarket.openStoreListing({ appId: 'com.example.app' });
-
-if (Capacitor.getPlatform() === 'android') {
-  await NativeMarket.search({ terms: 'photo editor' });
-}
+await NativeMarket.search({ terms: 'photo editor' });
 ```
 
 ### API mapping table
 
-| cordova-plugin-market (`market` global) | @capgo/capacitor-native-market |
+| cordova-plugin-market (`cordova.plugins.market`) | @capgo/capacitor-native-market |
 | --- | --- |
-| `open(appId, callbackContext)` | `openStoreListing({ appId, country? })` |
-| `search(key, callbackContext)` | `search({ terms })` (Android only) |
+| `open(appId, callbackContext)` | `openStoreListing({ appId, country? })` (on iOS use bundle ID, not App Store id or short name) |
+| `search(key, callbackContext)` | `search({ terms })` |
 | `callbackContext.success` / `error` | Promise resolve / reject |
 | Not in Cordova | `openDevPage({ devId })` (Android only) |
 | Not in Cordova | `openCollection({ name })` (Android only) |
