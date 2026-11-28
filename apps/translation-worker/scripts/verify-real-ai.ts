@@ -29,6 +29,9 @@ const WORKER_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const MODEL = process.env.TRANSLATION_REAL_TEST_MODEL || '@cf/qwen/qwen3.8-27b'
 const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '600000', 10)
 const REQUEST_TIMEOUT_MS = Math.min(60_000, TIMEOUT_MS)
+// A page probe translates whole AI batches (up to 40 strings each) plus per-string retries
+// in one request, which routinely takes longer than a minute.
+const PAGE_REQUEST_TIMEOUT_MS = Math.min(240_000, TIMEOUT_MS)
 const LOG_LIMIT = 16_000
 const WRANGLER_CONFIG = 'wrangler.real-test.jsonc'
 const DEVELOPMENT_R2_BUCKET = 'capgo-translation-cache-development'
@@ -150,9 +153,9 @@ function assertProbePayload(payload: ProbePayload): void {
   }
 }
 
-async function fetchJsonProbe(url: string): Promise<ProbePayload> {
+async function fetchJsonProbe(url: string, timeoutMs = REQUEST_TIMEOUT_MS): Promise<ProbePayload> {
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
   let response: Response
   try {
     response = await fetch(url, {
@@ -183,8 +186,8 @@ async function fetchRuntimeProbe(url: string): Promise<ProbePayload> {
   return payload
 }
 
-async function fetchRealPageProbe(url: string, path: string): Promise<ProbePayload> {
-  const payload = await fetchJsonProbe(url)
+async function fetchRealPageProbe(url: string, path: string, timeoutMs: number): Promise<ProbePayload> {
+  const payload = await fetchJsonProbe(url, timeoutMs)
   if (!payload.ok) throw new Error(payload.error || `Real page probe failed for ${path}`)
   if (payload.model !== MODEL) throw new Error(`Real page probe used ${payload.model || 'unknown model'} instead of ${MODEL}`)
 
@@ -270,7 +273,10 @@ try {
       if (!runtimeModel) runtimeModel = (await fetchRuntimeProbe(runtimeProbeUrl)).model
       for (const probe of realPageProbeUrls) {
         if (passedPages.has(probe.path)) continue
-        await fetchRealPageProbe(probe.url, probe.path)
+        // Never let one probe run past the overall deadline.
+        const remainingMs = deadline - Date.now()
+        if (remainingMs <= 0) throw new Error(`No time left to probe ${probe.path}`)
+        await fetchRealPageProbe(probe.url, probe.path, Math.min(PAGE_REQUEST_TIMEOUT_MS, remainingMs))
         passedPages.add(probe.path)
       }
       console.log(`Real translation worker probe passed with ${runtimeModel} on ${REAL_PAGE_PROBES.join(', ')}`)
