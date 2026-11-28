@@ -1,0 +1,78 @@
+---
+title: Cloud terminal (preview)
+description: Run a browser terminal for your Capacitor app with a Capgo API key, MCP tools, and sandbox limits on iPad and iPhone.
+sidebar:
+  label: Cloud terminal
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+Capgo cloud terminal gives you a Linux workspace per session so you can run CLI commands from an iPad or iPhone browser without installing a local shell. Each session is isolated, authenticated with your existing Capgo API key, and exposed as an MCP server with `run_command`, `read_file`, and `write_file`.
+
+## Start a session
+
+Send a Capgo API key with **write** or **all** mode limited to **one app** (a legacy key must still have an app-scoped `role_bindings` entry). RBAC app keys need write permissions on that app. Org-wide or read-only keys are rejected.
+
+```http
+POST https://api.capgo.app/terminal/sessions/
+Authorization: Bearer <Capgo API key>
+Content-Type: application/json
+
+{
+  "org_id": "<org uuid>",
+  "app_id": "com.example.app",
+  "session_id": "<client-generated id>"
+}
+```
+
+The response includes:
+
+- `session_key` (`org_id:app_id:session_id`)
+- `mcp_url` (`https://api.capgo.app/terminal/mcp?session_key=...`)
+- `websocket_url` (includes a single-use `ws_token` query parameter for browsers)
+- `ws_connect_token` (same value as `ws_token`; use it once to open the WebSocket)
+
+Connect your MCP client to `mcp_url` from the start response. MCP uses streamable HTTP on that URL and still requires your API key (`Authorization: Bearer` or `capgkey` header). For live stdout in a browser, open `websocket_url` with the `ws_token` from the start response only: the WebSocket route does not accept API keys. You can also send `session_key` with header `X-Capgo-Terminal-Session` if your client cannot preserve query strings. Command stdout is pushed on the WebSocket as JSON lines (`type: stdout`).
+
+## End a session
+
+```http
+POST https://api.capgo.app/terminal/sessions/end/
+Authorization: Bearer <Capgo API key>
+Content-Type: application/json
+
+{
+  "session_key": "<org_id:app_id:session_id>"
+}
+```
+
+Sessions also end on idle timeout (same as container sleep), or when the 60 minute max duration alarm fires.
+
+## MCP tools
+
+| Tool | Purpose |
+| --- | --- |
+| `run_command` | Run a shell command under `/workspace/project`. Output streams to the WebSocket and returns a capped summary in the tool result. |
+| `read_file` | Read a file under `/workspace/project`. |
+| `write_file` | Write a file under `/workspace/project`. |
+
+## Limits and safety
+
+| Setting | Default (preview) |
+| --- | --- |
+| Availability | Paid plans only; org flag `cloud_terminal_enabled` off by default (service_role only) |
+| Billing | Minutes metered in `terminal_sessions`; not invoiced yet |
+| Max session length | 60 minutes (hard alarm teardown) |
+| Concurrency per org | 2 active sessions |
+| Idle sleep / teardown | 10 minutes without MCP activity |
+| Command timeout | 120 seconds |
+| Output cap | 256 KiB per command stream (reset each `run_command`) |
+| Workspace | Non-root user, paths locked to `/workspace/project/` |
+| Blocked commands | `sudo`, `su`, `mount`, `chroot`, `nsenter`, and similar |
+| Egress allowlist | Enforced (`enableInternet: false`); `registry.npmjs.org`, `github.com`, `codeload.github.com`, `objects.githubusercontent.com` |
+| Code ingress | `git clone` of a URL you provide (must resolve through the allowlist). Capgo bundle upload is planned as a follow-up. |
+
+<Aside type="caution" title="Preview defaults">
+  These defaults may change before general availability. Capgo enables cloud terminal per organization after `cloud_terminal_enabled` is set on a paid plan (Capgo support / service_role).
+</Aside>
