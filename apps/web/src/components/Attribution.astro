@@ -97,7 +97,8 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
 
       var params = new URLSearchParams(location.search)
       var urlOffer = params.get(offerParam) === directOffer
-      if (urlOffer) markDirectOffer()
+      var isWhyLanding = path.indexOf('/why/') === 0
+      if (urlOffer || isWhyLanding) markDirectOffer()
       var incoming = {
         first_touch_type: classifyTouchType(path),
         first_touch_path: path,
@@ -117,6 +118,9 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (utmTerm) incoming.utm_term = utmTerm.trim()
       if (oppref && oppref.length <= 1024 && !/[\u0000-\u0020\u007f]/.test(oppref)) incoming.oppref = oppref
       if (urlOffer) {
+        incoming.offer = directOffer
+        incoming.offer_at = new Date(now).toISOString()
+      } else if (isWhyLanding) {
         incoming.offer = directOffer
         incoming.offer_at = new Date(now).toISOString()
       }

@@ -354,6 +354,63 @@ function loadContextOverrides(): Record<string, string> {
   }
 }
 
+function contextForMessageKey(context: string, key: string): boolean {
+  return context.includes(`Message key \`${key}\``)
+}
+
+function requiredLookupTexts(text: string): string[] {
+  const variants = new Set<string>()
+  variants.add(text)
+  const plain = stripHtml(text)
+  if (plain !== normalizeLookupText(text)) variants.add(plain)
+  for (const fragment of htmlTextFragments(text)) variants.add(fragment)
+  return [...variants]
+}
+
+export function verifyWhyPluginsTranslationContexts(
+  messages: MessageMap,
+  byText: Record<string, string>,
+): number {
+  const keys = Object.keys(messages)
+    .filter((key) => key.startsWith('why_plugins_'))
+    .sort((a, b) => a.localeCompare(b))
+
+  let failures = 0
+
+  console.log(`Checking ${keys.length} why_plugins_* messages against translationContextByText.ts\n`)
+
+  for (const key of keys) {
+    const text = messages[key]
+    let keyOk = true
+
+    const primary = byText[text]
+    if (!primary || !contextForMessageKey(primary, key)) {
+      console.log(`FAIL ${key}: primary lookup key missing or wrong context`)
+      console.log(`  expected key bytes: ${JSON.stringify(text)}`)
+      if (byText[text]) {
+        console.log(`  got context: ${byText[text].slice(0, 120)}...`)
+      }
+      keyOk = false
+      failures++
+    }
+
+    for (const variant of requiredLookupTexts(text)) {
+      if (variant === text) continue
+      const ctx = byText[variant]
+      if (!ctx || !contextForMessageKey(ctx, key)) {
+        console.log(`FAIL ${key}: missing fragment lookup ${JSON.stringify(variant.slice(0, 80))}...`)
+        keyOk = false
+        failures++
+      }
+    }
+
+    console.log(keyOk ? `OK   ${key}` : `---- ${key}`)
+  }
+
+  console.log(`\n${failures === 0 ? 'PASS' : 'FAIL'}: ${failures} issue(s)`)
+  return failures
+}
+
 function writeDataFile(messages: MessageMap, contexts: Record<string, string>): void {
   const byText = new Map<string, Set<string>>()
 
@@ -390,6 +447,13 @@ function writeDataFile(messages: MessageMap, contexts: Record<string, string>): 
 
 const source = readFileSync(MESSAGES_PATH, 'utf8')
 const messages = extractMessages(source)
+
+if (process.argv.includes('--check-why-plugins')) {
+  const { translationContextByText } = await import(join(ROOT, 'apps/shared/copy/translationContextByText.ts'))
+  const failures = verifyWhyPluginsTranslationContexts(messages, translationContextByText)
+  process.exit(failures > 0 ? 1 : 0)
+}
+
 const usages = collectUsages()
 const overrides = loadContextOverrides()
 for (const key of Object.keys(overrides)) {

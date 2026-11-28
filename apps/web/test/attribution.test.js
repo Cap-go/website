@@ -270,6 +270,45 @@ test('appendAttributionToUrl forwards offer=direct to register and console links
   )
 })
 
+function runAttributionInlineScript(search, pathname, cookie, store) {
+  const source = readFileSync(new URL('../src/components/Attribution.astro', import.meta.url), 'utf8')
+  const script = source.match(/<script[\s\S]*?define:vars[\s\S]*?>([\s\S]*?)<\/script>/)[1]
+  const document = { cookie: cookie || '', documentElement: { setAttribute() {} } }
+  runInNewContext(script, {
+    cookieName: 'capgo_attribution',
+    storageKey: 'capgo_attribution',
+    maxAge: 180 * 86400,
+    offerParam: 'offer',
+    directOffer: 'direct',
+    URLSearchParams,
+    location: { search, pathname, hostname: 'capgo.app', protocol: 'https:' },
+    document,
+    localStorage: {
+      getItem: (key) => (store.has(key) ? store.get(key) : null),
+      setItem: (key, value) => store.set(key, String(value)),
+    },
+  })
+  return { document, store }
+}
+
+test('/why/plugins/ without query persists direct offer before register', () => {
+  const store = new Map()
+  const { document } = runAttributionInlineScript('', '/why/plugins/', '', store)
+  const stored = deserializeAttribution(store.get('capgo_attribution'))
+  expect(stored?.offer).toBe('direct')
+  expect(stored?.offer_at).toBeTruthy()
+  expect(isOfferFresh(stored.offer_at)).toBe(true)
+  expect(stored?.first_touch_path).toBe('/why/plugins/')
+
+  withBrowserGlobals('', '/register/', document.cookie, () => {
+    expect(getSignupUserMetadataForRegistration().offer).toBe('direct')
+    expect(getSignupAttributionForEvents().signup_offer).toBe('direct')
+  })
+
+  const registerHref = appendAttributionToUrl('/register/', stored)
+  expect(registerHref).toContain('offer=direct')
+})
+
 function withBrowserGlobals(search, pathname, cookie, run) {
   const store = new Map()
   const previous = { window: globalThis.window, document: globalThis.document, localStorage: globalThis.localStorage, location: globalThis.location }
@@ -393,8 +432,10 @@ test('direct-offer hero uses Start shipping now without step copy and preserves 
   expect(signupCta).not.toContain('No free trial')
   expect(signupCta).not.toContain('See monthly plans')
 
-  // Verify restored standard nav CTA selection and rendered desktop/mobile anchors
-  expect(header).toContain('const navCtaLabel = isEnterprisePage ? m.enterprise_talk_to_team({}, { locale }) : m.nav_cta_start_free({}, { locale })')
+  // /why/* landings use paid-ads CTA in the header; other pages keep Start for free
+  expect(header).toContain('isWhyLandingPage')
+  expect(header).toContain('m.direct_offer_cta_start_shipping({}, { locale })')
+  expect(header).toContain('m.nav_cta_start_free({}, { locale })')
   expect(header.match(/<a[\s\S]{0,600}href=\{navCtaHref\}[\s\S]{0,600}\{navCtaLabel\}[\s\S]{0,40}<\/a>/g)?.length).toBe(2)
   expect(header).not.toContain('navCtaDirectLabel')
   expect(header).not.toContain('direct_offer_cta_get_started')
