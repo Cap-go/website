@@ -11,6 +11,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -111,7 +112,7 @@ const content = { title, description, ldJSON }
 <Layout content={content}>
   <div class="product-hero">
     <!-- Hero Section -->
-    <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+    <section class="relative overflow-hidden py-16 sm:py-24 lg:py-28">
       <div class="pointer-events-none absolute inset-0 overflow-hidden">
         <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
           <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl"></div>
@@ -142,6 +143,7 @@ const content = { title, description, ldJSON }
           <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">{m.solutions_healthcare_hero_subtitle({}, { locale })}</p>
 
           <SignupCta enterprise class="mt-8" />
+          <HeroProof class="mt-6" />
 
           <!-- Compliance badges -->
           <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
@@ -179,6 +181,13 @@ const content = { title, description, ldJSON }
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="healthcare" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials.healthcare}
+    />
 
     <!-- The Healthcare Reality -->
     <section id="reality" class="bg-gray-800 py-20">
@@ -563,12 +572,6 @@ console.log(info.native)          <span class="text-gray-500">// Native app vers
       </div>
     </section>
 
-    <SolutionAppExample solution="healthcare" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials.healthcare}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_healthcare_faq_title({}, { locale })}

@@ -11,6 +11,7 @@ import m, { type MessageValues } from '@/copy/messages'
 import { getRelativeLocaleUrl } from '@/services/links'
 import { createFAQPageLdJson, createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import OfferText from '@/components/OfferText.astro'
 import StorePolicySection from '@/components/StorePolicySection.astro'
 import StoreReachSection from '@/components/StoreReachSection.astro'
@@ -280,6 +281,7 @@ const featureTiles = [
         <p class="lead hero-lead">{m.live_update_hero_subtitle({}, { locale })}</p>
         <div class="hero-ctas">
           <SignupCta id="live-update-hero-signup-cta" />
+          <HeroProof class="mt-6" />
         </div>
         <div class="hero-meta">
           {heroMeta.map((item) => (
@@ -328,6 +330,17 @@ const featureTiles = [
         />
       </div>
     </section>
+
+    <!-- PROOF -->
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={copy('live_update_v2_proof_eyebrow')}
+      title={copy('live_update_v2_proof_title')}
+      description={copy('live_update_v2_proof_lead')}
+      testimonials={productTestimonials.liveUpdate}
+      maxItems={2}
+    />
 
     <!-- STORE UPDATE VS LIVE UPDATE REACH -->
     <StoreReachSection background="bg-transparent" />
@@ -464,17 +477,6 @@ const featureTiles = [
       youtubeId={productVideos.liveUpdate.youtubeId}
       title={productVideos.liveUpdate.title}
       description={productVideos.liveUpdate.description}
-    />
-
-    <!-- PROOF -->
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={copy('live_update_v2_proof_eyebrow')}
-      title={copy('live_update_v2_proof_title')}
-      description={copy('live_update_v2_proof_lead')}
-      testimonials={productTestimonials.liveUpdate}
-      maxItems={2}
     />
 
     <AgentReadySection

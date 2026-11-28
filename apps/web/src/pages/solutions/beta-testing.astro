@@ -11,6 +11,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -178,9 +179,17 @@ const content = { title, description, ldJSON }
           <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-pretty text-gray-300">{m.solutions_beta_testing_hero_subtitle({}, { locale })}</p>
 
           <SignupCta lead={m.signup_cta_lead_beta_testing_hero({}, { locale: Astro.locals.locale })} class="mt-10" />
+          <HeroProof class="mt-6" />
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="beta-testing" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['beta-testing']}
+    />
 
     <!-- Features Grid -->
     <section id="beta-features" class="bg-gray-800 py-16 sm:py-20">
@@ -335,12 +344,6 @@ const content = { title, description, ldJSON }
       </div>
     </section>
 
-    <SolutionAppExample solution="beta-testing" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials['beta-testing']}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_beta_testing_faq_title({}, { locale })}

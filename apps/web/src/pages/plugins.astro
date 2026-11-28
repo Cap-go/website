@@ -1,5 +1,6 @@
 ---
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import ProductVideoSection from '@/components/ProductVideoSection.astro'
 import { productVideos } from '@/config/productVideos'
 import PluginIcon from '@/components/PluginIcon.astro'
@@ -189,6 +190,7 @@ const content = {
               {m.plugins_guide_cta({}, { locale })}
             </a>
           </div>
+          <HeroProof align="start" class="mt-8" />
         </div>
         <div class="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-gray-800 bg-gray-800/80 text-gray-300 sm:grid-cols-3 lg:grid-cols-6">
           {directoryStats.map((stat) => (

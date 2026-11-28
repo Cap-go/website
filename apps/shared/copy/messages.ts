@@ -3737,6 +3737,7 @@ const messages = {
   rating_summary_aria: 'Rated {rating} out of 5 by developer teams using Capgo',
   rating_summary_customers: 'teams',
   rating_summary_read_reviews: 'Read reviews',
+  hero_proof_logos_label: 'Trusted by teams at',
   reach_users_now_not_weeks_later: 'Deploy from the CLI or API, then users download the web fix in minutes and apply it on next launch.',
   react_native_power_approximately_1_of_apps_on_google_play_store: 'React Native power approximately $1% of apps on Google Play Store',
   read_our_aup: 'Read our Acceptable Use Policy',
@@ -6598,6 +6599,33 @@ const messages = {
   when_down_review:
     "When an application works too slow or gets down (even for a few minutes), it can damage users' satisfaction and decrease the revenue. To avoid such situations, review the code to find areas for improvement.",
   when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services: "When it's good to ask for Cordova and CapacitorJS consulting services",
+  why_capgo_build_commercial: 'From {price}/month. Cancel anytime.',
+  why_capgo_build_compare_html:
+    'Expo Application Services targets React Native, while Capgo Build is built for Capacitor apps with signed iOS and Android binaries and store uploads on the same plan as live updates. Ionic Appflow is winding down, and Codemagic is a general mobile CI platform you configure with YAML. For honest side-by-side notes, see our <a href="{appflowUrl}">Ionic Appflow alternative page</a>, <a href="{expoUrl}">Expo EAS alternative page</a>, and <a href="{codemagicUrl}">Codemagic alternative page</a>.',
+  why_capgo_build_compare_title: 'How this compares to Appflow, EAS, and Codemagic',
+  why_capgo_build_description:
+    'Five reasons Capacitor teams compile signed iOS and Android apps with Capgo Build in the cloud and publish to App Store Connect and Google Play.',
+  why_capgo_build_hero_answer:
+    'Capgo Build compiles signed iOS and Android Capacitor binaries in the cloud and can upload them to App Store Connect and Google Play, so your team ships store releases without local Xcode on every machine.',
+  why_capgo_build_h1: '5 reasons to build your iOS and Android apps with Capgo Build',
+  why_capgo_build_keywords:
+    'Capgo Build, Capacitor native build, cloud iOS build, Android build, App Store Connect, Google Play, build without Mac',
+  why_capgo_build_reason1_body:
+    'Capgo Build runs iOS compiles on cloud Mac infrastructure, so developers on Windows, Linux, or macOS can trigger the same signed binary from the Capgo CLI. The Capgo CLI build command documents that no local Mac or Xcode is required for production iOS and Android Capacitor releases.',
+  why_capgo_build_reason1_title: 'Ship iOS builds without buying a Mac for every developer',
+  why_capgo_build_reason2_body:
+    'The Capgo CLI build init flow sets up iOS certificates, provisioning profiles, and Android keystores interactively. You can also pass signing material at build time through CLI flags or your CI secrets; Capgo uses credentials only in memory during the build instead of parking them on a server.',
+  why_capgo_build_reason2_title: 'Signing setup without fighting Xcode and Gradle locally',
+  why_capgo_build_reason3_body:
+    'After a successful build, Capgo can upload binaries to App Store Connect and Google Play so TestFlight and Play Console review can start without a separate upload step. The Capgo native build product page describes automatic submission to both stores after successful cloud builds.',
+  why_capgo_build_reason3_title: 'Publish to App Store Connect and Google Play from the same flow',
+  why_capgo_build_reason4_body:
+    'Capgo Build runs from the Capgo CLI, your CI pipeline, or a coding agent that runs the Capgo CLI on your machine. The hosted Capgo MCP can monitor builds, read logs, cancel jobs, and start a cloud build after your agent uploads the project archive. App Developer roles can trigger native builds through the Capgo API and CLI.',
+  why_capgo_build_reason4_title: 'Trigger builds from the CLI, MCP, or CI',
+  why_capgo_build_reason5_body:
+    'Every Capgo plan includes Native Builds alongside live updates, notifications, and Observe; plans differ by usage limits such as included native build minutes, not by locking builds behind a separate product tier. The Solo plan includes 60 minutes of native build time per month on the public pricing table. See the <a href="{nativeBuildUrl}">Capgo native build product page</a> and <a href="{buildDocsUrl}">Capgo CLI build reference</a> for setup and commands.',
+  why_capgo_build_reason5_title: 'Native builds on the same subscription as live updates',
+  why_capgo_build_seo_title: '5 reasons to build Capacitor apps with Capgo Build',
   why_live_updates_commercial: 'From $14/month. 14-day money-back guarantee. Cancel anytime.',
   why_live_updates_compare_html:
     'Microsoft retired App Center CodePush on March 31, 2025. Ionic is winding down Appflow, and live updates are no longer sold to new Appflow customers. For honest side-by-side notes, see our <a href="{codepushUrl}">CodePush alternative page</a> and <a href="{appflowUrl}">Ionic Appflow alternative page</a>.',
@@ -6626,15 +6654,15 @@ const messages = {
   why_live_updates_seo_title: '5 reasons to ship Capacitor live updates with Capgo',
   why_plugins_commercial: 'From {price}/month. Cancel anytime.',
   why_plugins_compare_html:
-    'Capacitor community plugins and Capawesome packages are solid choices when they already match your stack. Ionic still sells enterprise plugins for some teams, often with proprietary terms. Capgo focuses on open source MPL-2.0 Capacitor packages maintained alongside live updates. For honest notes, see our <a href="{capawesomeUrl}">Capawesome alternative page</a> and <a href="{ionicPluginsUrl}">Ionic enterprise plugins migration page</a>.',
+    'Capacitor community plugins and Capawesome packages are solid choices when they already match your stack. Ionic still sells enterprise plugins for some teams, often with proprietary terms. Capgo focuses on open source MPL\u20112.0 Capacitor packages maintained alongside live updates. For honest notes, see our <a href="{capawesomeUrl}">Capawesome alternative page</a> and <a href="{ionicPluginsUrl}">Ionic enterprise plugins migration page</a>.',
   why_plugins_compare_title: 'How this compares to community plugins, Ionic, and Capawesome',
   why_plugins_description:
-    'Five reasons Capacitor teams pick Capgo plugins: maintained native APIs, open docs, MPL-2.0 licenses, and live update platform.',
+    'Five reasons Capacitor teams pick Capgo plugins: maintained native APIs, open docs, MPL\u20112.0 licenses, and live update platform.',
   why_plugins_hero_answer:
-    'Capgo maintains {pluginCountLabel} open source Capacitor plugins on capgo.app/plugins, each with npm and GitHub links in the public registry. They ship under MPL-2.0 and follow Capacitor major versions so your dependencies stay aligned as you upgrade.',
+    'Capgo maintains {pluginCountLabel} open source Capacitor plugins on capgo.app/plugins, each with npm and GitHub links in the public registry. They ship under MPL\u20112.0 and follow Capacitor major versions so your dependencies stay aligned as you upgrade.',
   why_plugins_h1: '5 reasons to use Capgo plugins',
   why_plugins_keywords:
-    'Capgo plugins, Capacitor plugins, open source, MPL-2.0, native APIs, plugin documentation',
+    'Capgo plugins, Capacitor plugins, open source, MPL\u20112.0, native APIs, plugin documentation',
   why_plugins_reason1_body:
     'The plugin directory lists {pluginCountLabel} Capgo packages across {categoryCount} categories, including auth, commerce, media, location, and updates. Each card links to its GitHub repository and npm package name so you can inspect source before you install.',
   why_plugins_reason1_title: 'One maintained catalog across native features',
@@ -6643,9 +6671,9 @@ const messages = {
   why_plugins_reason2_title: 'Releases track each Capacitor major',
   why_plugins_reason3_body:
     'Capgo states that plugins are released under the Mozilla Public License 2.0 unless a repository notes otherwise. You can read, fork, and audit code on GitHub without paying a separate plugin license.',
-  why_plugins_reason3_title: 'Open source under MPL-2.0',
+  why_plugins_reason3_title: 'Open source under MPL\u20112.0',
   why_plugins_reason4_body:
-    'Capgo builds and runs capacitor-updater, the cloud console, and native build tooling on one platform. Customers on any Capgo plan get plugin bug fixes and feature requests handled first by the team that maintains the packages, while the plugins themselves stay free under MPL-2.0.',
+    'Capgo builds and runs capacitor-updater, the cloud console, and native build tooling on one platform. Customers on any Capgo plan get plugin bug fixes and feature requests handled first by the team that maintains the packages, while the plugins themselves stay free under MPL\u20112.0.',
   why_plugins_reason4_title: 'Maintained by the live update platform team',
   why_plugins_reason5_body:
     'Documented plugins include Starlight guides on capgo.app/docs and English tutorials linked from the directory. Browse the <a href="{pluginsUrl}">plugin directory</a>, open <a href="{versioningDocsUrl}">Capgo versioning documentation</a> for LTS tags, and follow published migration guides when you replace Ionic enterprise or community packages.',

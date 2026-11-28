@@ -4,6 +4,7 @@ import '@/styles/compare-page.css'
 import AppLogoStrip from '@/components/AppLogoStrip.astro'
 import PageBreadcrumbs from '@/components/PageBreadcrumbs.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
 import Layout from '@/layouts/Layout.astro'
 import { productTestimonials } from '@/config/productTestimonials'
@@ -250,6 +251,7 @@ const content = {
         <p class="lead">{m.alternatives_hero_subtitle({}, { locale })}</p>
         <div class="hero-ctas">
           <SignupCta id="alternatives-hero-signup-cta" />
+          <HeroProof logos={false} class="mt-6" />
         </div>
         <ul class="cmp-meta">
           <li>{m.compare_meta_updates({}, { locale })}</li>
@@ -259,6 +261,16 @@ const content = {
       </div>
       <AppLogoStrip />
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.compare_proof_eyebrow({}, { locale })}
+      title={m.compare_proof_title({}, { locale })}
+      description={m.compare_proof_lead({}, { locale })}
+      testimonials={productTestimonials.liveUpdate}
+      maxItems={3}
+    />
 
     <section class="section" id="comparisons">
       <div class="shell">
@@ -379,16 +391,6 @@ const content = {
         </div>
       </div>
     </section>
-
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={m.compare_proof_eyebrow({}, { locale })}
-      title={m.compare_proof_title({}, { locale })}
-      description={m.compare_proof_lead({}, { locale })}
-      testimonials={productTestimonials.liveUpdate}
-      maxItems={3}
-    />
 
     <section class="section" id="guides">
       <div class="shell">

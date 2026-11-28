@@ -8,6 +8,7 @@ import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import NotificationsStory from '@/components/notifications/NotificationsStory.astro'
 
@@ -171,6 +172,7 @@ const guidanceChecks = [
         </p>
         <div class="hero-ctas">
           <SignupCta id="notifications-hero-signup-cta" />
+          <HeroProof class="mt-6" />
           <p class="hero-cta-note">Native notifications work alongside Capgo Live Updates and channel rollouts.</p>
         </div>
         <div class="hero-meta">
@@ -200,6 +202,16 @@ const guidanceChecks = [
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_notifications_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_notifications_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.notifications}
+      maxItems={2}
+    />
 
     <section class="section" id="outcomes">
       <div class="shell">
@@ -343,16 +355,6 @@ provider ready | recipients linked | update check enabled</pre>
       title={m.agent_ready_notifications_title({}, { locale })}
       subtitle={m.agent_ready_notifications_subtitle({}, { locale })}
       prompts={[m.agent_ready_notifications_prompt_1({}, { locale }), m.agent_ready_notifications_prompt_2({}, { locale }), m.agent_ready_notifications_prompt_3({}, { locale })]}
-    />
-
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
-      title={m.proof_notifications_title({}, { locale: Astro.locals.locale })}
-      description={m.proof_notifications_desc({}, { locale: Astro.locals.locale })}
-      testimonials={productTestimonials.notifications}
-      maxItems={2}
     />
 
     <section class="section final bg-grid grain" id="cta">
