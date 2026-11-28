@@ -39,7 +39,7 @@ The published `zip.js` module exposes only:
 
 There is no `zip()` in the Cordova JavaScript API. The plugin depends on `cordova-plugin-file` path strings and legacy `cordova.exec` wiring.
 
-[`@capgo/capacitor-zip`](https://www.npmjs.com/package/@capgo/capacitor-zip) latest on npm is **8.2.5** with a `modified` date of **12 November 2026**. `src/definitions.ts` documents `zip`, `unzip`, `addListener('progress')`, optional `password` on Android, `includeParentFolder`, and `onProgress` from **8.3.0**. Capgo ships fixes on an open source cadence where a human still reviews, tests and merges 50+ pull requests daily.
+[`@capgo/capacitor-zip`](https://www.npmjs.com/package/@capgo/capacitor-zip) latest on npm is **8.2.5** with a `modified` date of **12 November 2026**. `src/definitions.ts` documents `zip`, `unzip`, `addListener('progress')`, optional `password` on Android, and `includeParentFolder`. Per-operation `onProgress` in unzip options is marked **8.3.0** and later. Capgo ships fixes on an open source cadence where a human still reviews, tests and merges 50+ pull requests daily.
 
 ## Install
 
@@ -101,9 +101,7 @@ zip.unzip(
 import { CapacitorZip } from '@capgo/capacitor-zip';
 
 const handle = await CapacitorZip.addListener('progress', (event) => {
-  if (event.lengthComputable) {
-    console.log(event.progress, event.currentFile);
-  }
+  console.log(event.loaded, event.total);
 });
 try {
   await CapacitorZip.unzip({
