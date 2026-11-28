@@ -29,6 +29,9 @@ const WORKER_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const MODEL = process.env.TRANSLATION_REAL_TEST_MODEL || '@cf/qwen/qwen3.8-27b'
 const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '600000', 10)
 const REQUEST_TIMEOUT_MS = Math.min(60_000, TIMEOUT_MS)
+// A page probe translates whole AI batches (up to 40 strings each) plus per-string retries
+// in one request, which routinely takes longer than a minute.
+const PAGE_REQUEST_TIMEOUT_MS = Math.min(240_000, TIMEOUT_MS)
 const LOG_LIMIT = 16_000
 const WRANGLER_CONFIG = 'wrangler.real-test.jsonc'
 const DEVELOPMENT_R2_BUCKET = 'capgo-translation-cache-development'
@@ -150,9 +153,9 @@ function assertProbePayload(payload: ProbePayload): void {
   }
 }
 
-async function fetchJsonProbe(url: string): Promise<ProbePayload> {
+async function fetchJsonProbe(url: string, timeoutMs = REQUEST_TIMEOUT_MS): Promise<ProbePayload> {
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
   let response: Response
   try {
     response = await fetch(url, {
@@ -184,7 +187,7 @@ async function fetchRuntimeProbe(url: string): Promise<ProbePayload> {
 }
 
 async function fetchRealPageProbe(url: string, path: string): Promise<ProbePayload> {
-  const payload = await fetchJsonProbe(url)
+  const payload = await fetchJsonProbe(url, PAGE_REQUEST_TIMEOUT_MS)
   if (!payload.ok) throw new Error(payload.error || `Real page probe failed for ${path}`)
   if (payload.model !== MODEL) throw new Error(`Real page probe used ${payload.model || 'unknown model'} instead of ${MODEL}`)
 
