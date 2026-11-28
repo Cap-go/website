@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { type AffonsoEnv, withAffonsoClick } from '../../shared/affonso'
 import { resolveAppleRejectionStoriesPathRedirect } from '../../shared/appleRejectionStoriesPathRedirect'
 import { resolveTranslationContexts as lookupTranslationContexts } from '../../shared/copy/translationContextLookup'
 import { withDevHostNoindex } from '../../shared/devHostNoindex'
@@ -99,7 +100,7 @@ type R2BucketBinding = {
 
 type SourceHtmlResult = { type: 'response'; response: Response } | { type: 'html'; originResponse: Response; sourceHtml: string }
 
-interface Env {
+interface Env extends AffonsoEnv {
   AI: AiBinding
   WEB: WorkerService
   DOCS: WorkerService
@@ -2931,7 +2932,9 @@ async function writeStoredTranslatedResponse(env: Env, requestUrl: URL, locale: 
   const key = await translationStoreKey('pages', requestUrl, locale)
   const headers: [string, string][] = []
   response.headers.forEach((value, name) => {
-    if (name.toLowerCase() !== 'content-length') headers.push([name, value])
+    // Shared record: never replay a visitor's cookie to other visitors.
+    const lower = name.toLowerCase()
+    if (lower !== 'content-length' && lower !== 'set-cookie') headers.push([name, value])
   })
   const sourceHash = readTranslationSourceHash(response)
   const stored: StoredTranslatedResponse = {
@@ -2952,6 +2955,7 @@ async function writeStoredTranslatedResponse(env: Env, requestUrl: URL, locale: 
 function withEdgeCacheTtl(response: Response): Response {
   const headers = new Headers(response.headers)
   headers.set('Cache-Control', `public, max-age=${EDGE_CACHE_SECONDS}`)
+  headers.delete('Set-Cookie')
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
 }
 
@@ -3641,7 +3645,11 @@ function metaAttribute(tag: string, name: string): string | undefined {
 function hasNoindexRobots(html: string): boolean {
   for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = match[0]
-    if (/^(?:robots|googlebot)$/i.test(metaAttribute(tag, 'name') ?? '') && (metaAttribute(tag, 'content') ?? '').split(',').some((directive) => /^(?:noindex|none)$/i.test(directive.trim()))) return true
+    if (
+      /^(?:robots|googlebot)$/i.test(metaAttribute(tag, 'name') ?? '') &&
+      (metaAttribute(tag, 'content') ?? '').split(',').some((directive) => /^(?:noindex|none)$/i.test(directive.trim()))
+    )
+      return true
   }
   return false
 }
@@ -3658,7 +3666,14 @@ async function untranslatablePageReason(env: Env, request: Request, requestUrl: 
 // skipped pages hash differently, so the existing freshness checks refresh a page whose
 // eligibility changed even when its English HTML did not. When the sitemap cannot be
 // read on the request path, the plain hash keeps serving what is stored.
-async function eligibilityAwareSourceHash(env: Env, request: Request, requestUrl: URL, locale: Locale, sourceHtml: string, strict = false): Promise<{ hash: string; skipReason: string | null }> {
+async function eligibilityAwareSourceHash(
+  env: Env,
+  request: Request,
+  requestUrl: URL,
+  locale: Locale,
+  sourceHtml: string,
+  strict = false,
+): Promise<{ hash: string; skipReason: string | null }> {
   let skipReason: string | null = null
   try {
     skipReason = await untranslatablePageReason(env, request, requestUrl, sourceHtml)
@@ -4646,6 +4661,7 @@ const baseWorker = {
 export default {
   ...baseWorker,
   async fetch(request: Request, env: Env, ctx?: WorkerExecutionContext): Promise<Response> {
-    return withDevHostNoindex(request, await baseWorker.fetch(request, env, ctx))
+    // Localized landings (cache hits included) record affiliate clicks here; see apps/shared/affonso.ts.
+    return withAffonsoClick(request, withDevHostNoindex(request, await baseWorker.fetch(request, env, ctx)), env)
   },
 }

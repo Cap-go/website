@@ -20,6 +20,7 @@ on:
     paths:
       - 'apps/translation-worker/**'
       - 'apps/shared/translationReadiness.ts'
+      - 'apps/shared/affonso.ts'
       - 'package.json'
       - 'bun.lock'
 
@@ -95,6 +96,15 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Sync Worker secrets
+        working-directory: apps/translation-worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          AFFONSO_API_KEY: ${{ secrets.AFFONSO_API_KEY }}
+        run: |
+          # Affiliate clicks on localized pages (apps/shared/affonso.ts); without the key the Worker skips them.
+          if [ -n "$AFFONSO_API_KEY" ]; then printf '%s' "$AFFONSO_API_KEY" | bunx wrangler secret put AFFONSO_API_KEY; fi
       - run: bun run deploy:translation
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

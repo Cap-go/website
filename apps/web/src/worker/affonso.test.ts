@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { AFFONSO_PROGRAM_ID, getAffonsoTrackingId, withAffonsoClick } from './affonso'
+import { AFFONSO_PROGRAM_ID, getAffonsoTrackingId, withAffonsoClick } from '../../../shared/affonso'
 
 const env = { AFFONSO_API_KEY: 'sk_test' }
 const navigation = { 'Sec-Fetch-Dest': 'document', 'User-Agent': 'Mozilla/5.0', 'CF-Connecting-IP': '203.0.113.9', Referer: 'https://partner.example/' }
@@ -54,11 +54,13 @@ describe('withAffonsoClick', () => {
     expect(await response.text()).toBe('<html></html>')
   })
 
-  test('skips crawlers, prefetches, assets and pages without a tracking parameter', async () => {
+  test('skips crawlers, prefetches, translation-origin fetches, assets and pages without a tracking parameter', async () => {
     const { calls, fetcher } = recorder(clickResponse())
     const crawler = new Request('https://capgo.app/?via=partner', { headers: { 'User-Agent': 'Googlebot' } })
     const prefetch = new Request('https://capgo.app/?via=partner', { headers: { ...navigation, 'Sec-Purpose': 'prefetch' } })
     const plain = new Request('https://capgo.app/', { headers: navigation })
+    // The translation Worker records localized clicks itself; its origin fetch must not count twice.
+    const translationOrigin = new Request('https://capgo.app/?via=partner', { headers: { ...navigation, 'X-Capgo-Translation-Origin': 'english' } })
     const asset = new Request('https://capgo.app/logo.svg?via=partner', { headers: navigation })
     const svg = new Response('<svg/>', { headers: { 'Content-Type': 'image/svg+xml' } })
 
@@ -66,6 +68,7 @@ describe('withAffonsoClick', () => {
       await withAffonsoClick(crawler, html(), env, fetcher),
       await withAffonsoClick(prefetch, html(), env, fetcher),
       await withAffonsoClick(plain, html(), env, fetcher),
+      await withAffonsoClick(translationOrigin, html(), env, fetcher),
       await withAffonsoClick(asset, svg, env, fetcher),
       await withAffonsoClick(new Request('https://capgo.app/?via=partner', { headers: navigation }), html(), {}, fetcher),
     ]) {

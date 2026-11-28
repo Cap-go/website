@@ -1,4 +1,5 @@
 import { trackAICrawlerResponse } from '@datafast/ai-crawl'
+import { withAffonsoClick, type AffonsoEnv } from '../../../shared/affonso'
 import {
   markdownNotFoundResponse,
   MCP_MANIFEST_PATHS,
@@ -16,7 +17,6 @@ import { permanentTrailingSlashLocation } from '../../../shared/trailingSlashRed
 import { withTranslationReadiness, type TranslationStoreReader } from '../../../shared/translationReadiness'
 import { handleToolApiRequest } from '../lib/tools/api'
 import { withAbTest } from './abtest'
-import { withAffonsoClick, type AffonsoEnv } from './affonso'
 import { agentAuthUpstreamPath, proxyAgentAuthRequest } from './agent-auth-proxy'
 import { BUILDER_METRICS_PATH, handleBuilderMetrics } from './builder-metrics'
 import { BUILDER_VARIANTS_PATH, handleBuilderVariants } from './builder-variants'

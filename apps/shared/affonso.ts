@@ -3,6 +3,7 @@
 // sometimes never recorded. The Worker records the click with Affonso's API and stores
 // the click id in the same `affonso_referral` cookie the pixel used, so the console and
 // Stripe Checkout keep reading it unchanged. The Capgo API records the signup.
+// Used by the web Worker and by the translation Worker (localized pages).
 
 export interface AffonsoEnv {
   AFFONSO_API_KEY?: string
@@ -50,6 +51,9 @@ export function getAffonsoTrackingId(url: URL): string | null {
 // these headers, and the pixel never ran for them either.
 function isBrowserNavigation(request: Request): boolean {
   if (request.method !== 'GET') return false
+  // The translation Worker tracks localized pages itself; its origin fetches to the web
+  // Worker carry the visitor's headers and must not record a second click.
+  if (request.headers.has('X-Capgo-Translation-Origin')) return false
   if (request.headers.get('Sec-Fetch-Dest') !== 'document') return false
   const purpose = `${request.headers.get('Sec-Purpose') ?? ''} ${request.headers.get('Purpose') ?? ''}`
   return !/prefetch|prerender/i.test(purpose)
