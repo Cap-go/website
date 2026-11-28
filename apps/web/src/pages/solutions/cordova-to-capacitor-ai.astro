@@ -8,6 +8,7 @@ import SolutionAppExample from '@/components/solutions/SolutionAppExample.astro'
 import SolutionHowItWorks from '@/components/solutions/SolutionHowItWorks.astro'
 import SolutionFaq from '@/components/solutions/SolutionFaq.astro'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import { solutionTestimonials } from '@/config/productTestimonials'
 import { getRelativeLocaleUrl } from '@/services/links'
 import HumanSupport from '@/components/HumanSupport.astro'
@@ -168,9 +169,17 @@ const content = {
               {m.solutions_cordova_to_capacitor_ai_cta_premium_support({}, { locale })}
             </a>
           </div>
+          <HeroProof class="mt-8" />
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="cordova-to-capacitor-ai" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['cordova-to-capacitor-ai']}
+    />
 
     <SolutionHowItWorks
       eyebrow={m.solutions_how_it_works_eyebrow({}, { locale })}
@@ -476,12 +485,6 @@ npx @capgo/cli@latest mcp</code></pre>
       </div>
     </section>
 
-    <SolutionAppExample solution="cordova-to-capacitor-ai" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials['cordova-to-capacitor-ai']}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_cordova_to_capacitor_ai_faq_title({}, { locale })}

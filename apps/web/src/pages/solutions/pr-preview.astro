@@ -11,6 +11,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -181,7 +182,7 @@ const checkIcon = 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-
 <Layout content={content}>
   <div class="product-hero">
     <!-- Hero Section -->
-    <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+    <section class="relative overflow-hidden py-16 sm:py-24 lg:py-28">
       <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
           <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"></div>
@@ -207,6 +208,7 @@ const checkIcon = 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-
           <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-pretty text-gray-300">{m.solutions_pr_preview_hero_subtitle({}, { locale })}</p>
 
           <SignupCta enterprise class="mt-8" />
+          <HeroProof class="mt-6" />
 
           <!-- Key points -->
           <ul class="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
@@ -222,6 +224,13 @@ const checkIcon = 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="pr-preview" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['pr-preview']}
+    />
 
     <!-- The Problem -->
     <section id="pr-problem" class="bg-gray-800 py-20">
@@ -490,12 +499,6 @@ await CapacitorUpdater.setChannel({'{'}
       </div>
     </section>
 
-    <SolutionAppExample solution="pr-preview" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials['pr-preview']}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_pr_faq_title({}, { locale })}

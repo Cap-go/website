@@ -11,6 +11,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -204,6 +205,7 @@ const content = {
             </h1>
             <p class="mt-6 max-w-[64ch] text-lg text-pretty text-slate-300 sm:text-xl">{m.solutions_set_and_forget_hero_subtitle({}, { locale })}</p>
             <SignupCta align="start" class="mt-8" />
+            <HeroProof align="start" class="mt-6" />
           </div>
 
           <figure class="overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl shadow-slate-950/50">
@@ -251,6 +253,13 @@ const content = {
         </dl>
       </div>
     </section>
+
+    <SolutionAppExample solution="set-and-forget" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['set-and-forget']}
+    />
 
     <section id="saf-problem" class="bg-slate-900 py-16 sm:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -323,12 +332,6 @@ const content = {
       </div>
     </section>
 
-    <SolutionAppExample solution="set-and-forget" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials['set-and-forget']}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_set_and_forget_faq_title({}, { locale })}

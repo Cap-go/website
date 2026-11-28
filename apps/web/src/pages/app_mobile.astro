@@ -9,6 +9,7 @@ import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 
 const locale = Astro.locals.locale
@@ -105,6 +106,7 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
             }
           </div>
           <a class="btn btn-lg btn-ghost" href="#preview">See the app ↓</a>
+          <HeroProof class="mt-2" />
         </div>
         <div class="hero-strip">
           {
@@ -118,6 +120,16 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="cyan"
+      eyebrow={m.mobile_v2_proof_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.mobile_v2_proof_title({}, { locale: Astro.locals.locale })}
+      description={m.mobile_v2_proof_lead({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.mobile}
+      maxItems={2}
+    />
 
     <section class="section bg-grid grain" id="preview">
       <div class="shell">
@@ -199,15 +211,6 @@ const appExampleIds: SolutionStoreAppId[] = ['com.windyty.android', 'com.studysm
       </div>
     </section>
 
-    <ProductTestimonials
-      variant="builder"
-      accent="cyan"
-      eyebrow={m.mobile_v2_proof_eyebrow({}, { locale: Astro.locals.locale })}
-      title={m.mobile_v2_proof_title({}, { locale: Astro.locals.locale })}
-      description={m.mobile_v2_proof_lead({}, { locale: Astro.locals.locale })}
-      testimonials={productTestimonials.mobile}
-      maxItems={2}
-    />
   </div>
 
   <section class="bg-[#1a1a1a] py-16 sm:py-20">

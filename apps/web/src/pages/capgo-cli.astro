@@ -8,6 +8,7 @@ import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import { getProductScreens } from '@/config/productScreens'
 import { productVideos } from '@/config/productVideos'
 import ProductTestimonials from '@/components/ProductTestimonials.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import { productTestimonials, ratingSummary, toProductReviewLdJson } from '@/config/productTestimonials'
 import type { SolutionStoreAppId } from '@/config/solutionStoreApps'
 import Layout from '@/layouts/Layout.astro'
@@ -192,6 +193,7 @@ const comparisonRows = [
             </a>
             .
           </p>
+          <HeroProof class="mt-4" />
         </div>
         <div class="hero-meta">
           {heroMeta.map((item) => (
@@ -203,6 +205,16 @@ const comparisonRows = [
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={copy('cli_v2_proof_eyebrow')}
+      title={copy('cli_v2_proof_title')}
+      description={copy('cli_v2_proof_lead')}
+      testimonials={productTestimonials.cli}
+      maxItems={2}
+    />
 
     <section class="section bg-grid grain" id="how">
       <div class="shell">
@@ -243,16 +255,6 @@ const comparisonRows = [
         </div>
       </div>
     </section>
-
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={copy('cli_v2_proof_eyebrow')}
-      title={copy('cli_v2_proof_title')}
-      description={copy('cli_v2_proof_lead')}
-      testimonials={productTestimonials.cli}
-      maxItems={2}
-    />
 
     <section class="section" id="compare">
       <div class="shell">

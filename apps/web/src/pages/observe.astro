@@ -7,6 +7,7 @@ import m from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import { getRelativeLocaleUrl } from '@/services/links'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 import AgentReadySection from '@/components/AgentReadySection.astro'
 import ProductScreenTour from '@/components/ProductScreenTour.astro'
 import ProductVideoLoop from '@/components/ProductVideoLoop.astro'
@@ -80,6 +81,7 @@ const screenSignals = [
             <p class="observe-statement">See what changed after your rollout, compare health by reported version, and move from a bad signal to the devices and logs behind it.</p>
             <div class="observe-actions">
               <SignupCta id="observe-hero-signup-cta" align="start" />
+              <HeroProof align="start" class="mt-6" />
             </div>
           </div>
 
@@ -113,6 +115,16 @@ const screenSignals = [
         </div>
       </div>
     </section>
+
+    <ProductTestimonials
+      variant="builder"
+      accent="blue"
+      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
+      title={m.proof_observe_title({}, { locale: Astro.locals.locale })}
+      description={m.proof_observe_desc({}, { locale: Astro.locals.locale })}
+      testimonials={productTestimonials.observe}
+      maxItems={2}
+    />
 
     <section class="section observe-proof" id="signals">
       <div class="shell">
@@ -201,16 +213,6 @@ const screenSignals = [
       title={m.agent_ready_observe_title({}, { locale })}
       subtitle={m.agent_ready_observe_subtitle({}, { locale })}
       prompts={[m.agent_ready_observe_prompt_1({}, { locale }), m.agent_ready_observe_prompt_2({}, { locale }), m.agent_ready_observe_prompt_3({}, { locale })]}
-    />
-
-    <ProductTestimonials
-      variant="builder"
-      accent="blue"
-      eyebrow={m.proof_customers_eyebrow({}, { locale: Astro.locals.locale })}
-      title={m.proof_observe_title({}, { locale: Astro.locals.locale })}
-      description={m.proof_observe_desc({}, { locale: Astro.locals.locale })}
-      testimonials={productTestimonials.observe}
-      maxItems={2}
     />
 
     <section class="section final bg-grid grain" id="cta">

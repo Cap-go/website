@@ -1,0 +1,63 @@
+---
+import m from '@/copy/messages'
+import RatingSummary from '@/components/RatingSummary.astro'
+
+/**
+ * Above-the-fold social proof for product and sales heroes: the review rating plus a row of
+ * recognizable customer logos, so visitors see trust signals next to the first CTA instead of
+ * only at the bottom of the page.
+ */
+interface Props {
+  tone?: 'dark' | 'light'
+  align?: 'start' | 'center'
+  /** Anchor of the on-page reviews section. Defaults to the product testimonials block. */
+  reviewsHref?: string
+  /** Hide the logo row on heroes that already show the customer app strip. */
+  logos?: boolean
+  class?: string
+}
+
+const { tone = 'dark', align = 'center', reviewsHref = '#product-testimonials', logos: showLogos = true, class: className } = Astro.props
+const locale = Astro.locals.locale
+const isLight = tone === 'light'
+
+// Well-known brands first; only the first three show on phones so the row stays on one line.
+const logos = [
+  { slug: 'kick', name: 'Kick' },
+  { slug: 'pizza_hut', name: 'Pizza Hut' },
+  { slug: 'breeze_airways', name: 'Breeze Airways' },
+  { slug: 'kpmg_davos', name: 'KPMG' },
+  { slug: 'rocket_lawyer', name: 'Rocket Lawyer' },
+  { slug: 'scott_sports', name: 'SCOTT Sports' },
+]
+---
+
+<div
+  class:list={['hero-proof not-content flex flex-col gap-3', align === 'center' ? 'items-center text-center' : 'items-start text-left', className]}
+  role="group"
+  aria-label={m.hero_proof_logos_label({}, { locale })}
+>
+  <RatingSummary tone={tone} align={align} reviewsHref={reviewsHref} />
+  {showLogos && (
+    <div class:list={['flex flex-wrap items-center gap-x-4 gap-y-2', align === 'center' ? 'justify-center' : 'justify-start']}>
+      <span class:list={['text-xs font-medium tracking-wide uppercase max-sm:sr-only', isLight ? 'text-slate-500' : 'text-gray-400']}>
+        {m.hero_proof_logos_label({}, { locale })}
+      </span>
+      <ul class="m-0 flex list-none flex-wrap items-center gap-x-4 gap-y-2 p-0">
+        {logos.map((logo, index) => (
+          <li class:list={['m-0 flex items-center gap-2', index >= 3 && 'max-sm:hidden']}>
+            <img
+              src={`/logo_cloud/${logo.slug}_logo.webp`}
+              alt=""
+              width="24"
+              height="24"
+              decoding="async"
+              class:list={['h-6 w-6 rounded-md object-cover', isLight ? 'ring-1 ring-slate-200' : 'ring-1 ring-white/10']}
+            />
+            <span class:list={['text-sm font-semibold whitespace-nowrap', isLight ? 'text-slate-800' : 'text-gray-200']}>{logo.name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>

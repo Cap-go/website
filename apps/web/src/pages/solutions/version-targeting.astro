@@ -11,6 +11,7 @@ import { getRelativeLocaleUrl } from '@/services/links'
 import { breadcrumbGraphOptions, buildSolutionsPageBreadcrumbs } from '@/lib/pageBreadcrumbs'
 import { createFAQPageLdJson, createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import SignupCta from '@/components/SignupCta.astro'
+import HeroProof from '@/components/HeroProof.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -191,9 +192,17 @@ const content = { title, description, ldJSON }
           <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-pretty text-gray-300">{m.solutions_version_targeting_hero_subtitle({}, { locale })}</p>
 
           <SignupCta class="mt-10" />
+          <HeroProof class="mt-6" />
         </div>
       </div>
     </section>
+
+    <SolutionAppExample solution="version-targeting" />
+    <ProductTestimonials
+      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
+      title={m.solutions_testimonials_title({}, { locale })}
+      testimonials={solutionTestimonials['version-targeting']}
+    />
 
     <!-- Features Grid -->
     <section id="version-features" class="bg-gray-800 py-16 sm:py-20">
@@ -366,12 +375,6 @@ npx @capgo/cli@latest bundle upload --channel v2 \
       </div>
     </section>
 
-    <SolutionAppExample solution="version-targeting" />
-    <ProductTestimonials
-      eyebrow={m.solutions_testimonials_eyebrow({}, { locale })}
-      title={m.solutions_testimonials_title({}, { locale })}
-      testimonials={solutionTestimonials['version-targeting']}
-    />
     <SolutionFaq
       eyebrow={m.solutions_faq_eyebrow({}, { locale })}
       title={m.solutions_version_targeting_faq_title({}, { locale })}

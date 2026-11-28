@@ -2216,6 +2216,7 @@ export const messageContexts = {
   help_customers_with_app_issues: 'Page/area: Capgo marketing website. Role: Website copy sentence. Message key `help_customers_with_app_issues` (Help Customers With App Issues).',
   here: 'Page/area: Capgo marketing website. Role: Website copy sentence. Message key `here` (Here).',
   hero_cta_try_free: 'Page/area: Capgo marketing website. Role: Short UI label or navigation item. Seen in: component doc/SignupCta.astro, component SignupCta.astro. Message key `hero_cta_try_free` (Hero CTA Try Free).',
+  hero_proof_logos_label: 'Page/area: Capgo marketing website. Role: UI label. Seen in: component HeroProof.astro. Message key `hero_proof_logos_label` (Hero Proof Logos Label).',
   hero_secondary_cta: 'Page/area: Capgo marketing website. Role: Call-to-action button or link label. Message key `hero_secondary_cta` (Hero Secondary CTA).',
   hero_subtitle_line2: 'Page/area: Capgo marketing website. Role: Website copy sentence. Preserve Capgo product/brand and developer terms exactly. Message key `hero_subtitle_line2` (Hero Subtitle Line2).',
   hero_subtitle_part1: 'Page/area: Capgo marketing website. Role: Website copy sentence. Message key `hero_subtitle_part1` (Hero Subtitle Part1).',
