@@ -99,25 +99,37 @@ See [deepLinkPrevented event](/docs/plugins/inappbrowser/deep-link-prevented/) f
 ```typescript
 import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
-let activeDownload: string | undefined;
-
-await InAppBrowser.addListener('downloadStarted', ({ downloadId }) => {
-  activeDownload = downloadId;
-});
-await InAppBrowser.addListener('downloadProgress', ({ bytesReceived, bytesExpected }) => {
-  if (bytesExpected > 0) {
-    console.log(`progress ${Math.round((bytesReceived / bytesExpected) * 100)}%`);
+const running = new Set<string>();
+const finish = ({ downloadId }: { downloadId?: string }) => {
+  if (downloadId) {
+    running.delete(downloadId);
   }
-});
-await InAppBrowser.addListener('downloadCancelled', ({ downloadId }) => {
-  console.log('cancelled', downloadId);
-});
+};
+
+const listeners = await Promise.all([
+  InAppBrowser.addListener('downloadStarted', ({ downloadId }) => running.add(downloadId)),
+  InAppBrowser.addListener('downloadProgress', ({ downloadId, bytesReceived, bytesExpected }) => {
+    if (bytesExpected > 0) {
+      console.log(downloadId, `${Math.round((bytesReceived / bytesExpected) * 100)}%`);
+    }
+  }),
+  InAppBrowser.addListener('downloadCompleted', finish),
+  InAppBrowser.addListener('downloadFailed', finish),
+  InAppBrowser.addListener('downloadCancelled', finish),
+]);
 
 await InAppBrowser.openWebView({ url: 'https://example.com/files', handleDownloads: true });
 
-// From a Cancel button:
-if (activeDownload) {
-  await InAppBrowser.cancelDownload({ downloadId: activeDownload });
+// Call from your Cancel button:
+async function cancelDownloads() {
+  for (const downloadId of running) {
+    await InAppBrowser.cancelDownload({ downloadId });
+  }
+}
+
+// Call when the browser session ends:
+async function removeDownloadListeners() {
+  await Promise.all(listeners.map((listener) => listener.remove()));
 }
 ```
 
