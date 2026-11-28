@@ -120,6 +120,9 @@ import { ATTRIBUTION_COOKIE_NAME, ATTRIBUTION_MAX_AGE_SECONDS, ATTRIBUTION_STORA
       if (urlOffer) {
         incoming.offer = directOffer
         incoming.offer_at = new Date(now).toISOString()
+      } else if (isWhyLanding) {
+        incoming.offer = directOffer
+        incoming.offer_at = new Date(now).toISOString()
       }
 
       var stores = readStoredJson()
