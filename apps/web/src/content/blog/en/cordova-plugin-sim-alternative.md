@@ -115,9 +115,9 @@ await Sim.requestPermissions();
 | Android `requestReadPermission` | `requestPermissions()` |
 | Single SIM object | `simCards[0]` or iterate all slots |
 | `info.cards[]` (Android, `READ_PHONE_STATE`) | `{ simCards }` array |
-| `cards[].phoneNumber` | `sim.number` |
-| `cards[].subscriptionId` | `sim.subscriptionId` |
-| `cards[].simSlotIndex` | `sim.simSlotIndex` |
+| `info.phoneNumber` or `cards[].phoneNumber` (Android, README) | `sim.number` |
+| `cards[].subscriptionId` (Android, README) | `sim.subscriptionId` |
+| `cards[].simSlotIndex` (Android, README) | `sim.simSlotIndex` |
 | Not in Cordova | `getPluginVersion()` |
 | Cordova plugin install | `bun add @capgo/capacitor-sim` plus `bunx cap sync` |
 
