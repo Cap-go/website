@@ -13,7 +13,9 @@ That protects your app from:
 
 - screenshots
 - screen recordings in most normal capture paths
-- the recent apps thumbnail preview
+- supported recent apps snapshot previews
+
+`FLAG_SECURE` blocks capture of the window, including screenshots, recordings, and the task snapshot. Some launchers, such as Pixel, do not use that snapshot for the current app. During the Recents gesture they render the live window surface, so app content can still be visible. Use the opt-in `hideContentOnFocusLoss` option below if you need to cover that live tile.
 
 ## Setup
 
@@ -30,6 +32,33 @@ await PrivacyScreen.disable();
 
 await PrivacyScreen.enable();
 ```
+
+You can also pass Android options to `enable()`:
+
+```typescript
+await PrivacyScreen.enable({
+  android: {
+    hideContentOnFocusLoss: true,
+  },
+});
+```
+
+The same option can be set in the Capacitor config so it applies when the plugin loads with `enabled: true`.
+
+## hideContentOnFocusLoss
+
+`android.hideContentOnFocusLoss` is an opt-in Android option. The default is `false`, so existing apps are unchanged.
+
+When `true`, the plugin shows an opaque overlay as soon as the activity window loses focus, which is the earliest signal before `onPause`. The overlay uses the theme `android:windowBackground` with an opaque black fallback, and it is hidden when focus returns.
+
+Tradeoffs:
+
+- Some launchers, such as Pixel, show the live app window during the Recents gesture, which `FLAG_SECURE` does not hide. The overlay covers that live surface.
+- Focus is also lost when dialogs (for example HTML `<select>` or `alert()`), permission prompts, or the notification shade are displayed, so app content is hidden behind those too.
+- The overlay is skipped in multi-window mode.
+- While the overlay is visible, it takes precedence over `privacyModeOnActivityHidden`. The configured DIM or SPLASH dialog is skipped while the overlay already hides the window.
+
+Enable it only when you need the Recents live tile to be hidden, and you accept those focus-loss cases.
 
 ## Important note
 
