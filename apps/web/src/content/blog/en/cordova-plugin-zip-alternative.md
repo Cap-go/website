@@ -21,7 +21,7 @@ faq:
   - question: "Does cordova-plugin-zip compress files?"
     answer: "No. The npm package only exposes zip.unzip in zip.js. Use @capgo/capacitor-zip zip() on native platforms for archiving."
   - question: "Is cordova-plugin-zip still maintained?"
-    answer: "npm lists cordova-plugin-zip at version 3.1.0. The last version publish on the registry timeline is 23 February 2016. Source: MobileChromeApps/cordova-plugin-zip on GitHub."
+    answer: "npm lists cordova-plugin-zip at version 3.1.0. The last version publish on the registry timeline is 23 February 2016. Source: https://www.npmjs.com/package/cordova-plugin-zip."
   - question: "Where are the docs?"
     answer: "https://capgo.app/docs/plugins/zip/, npm @capgo/capacitor-zip, and GitHub Cap-go/capacitor-zip."
 ---
@@ -30,7 +30,7 @@ The practical **cordova-plugin-zip alternative** for a Capacitor app is [`@capgo
 
 ## Why leave cordova-plugin-zip in Capacitor
 
-**cordova-plugin-zip** on npm is version **3.1.0**. The last numbered release on the npm `time` object is **23 February 2016**. The registry `modified` timestamp is **14 June 2022** (metadata only, not a new plugin version). The npm repository URL points to [MobileChromeApps/cordova-plugin-zip](https://github.com/MobileChromeApps/cordova-plugin-zip).
+**cordova-plugin-zip** on npm is version **3.1.0**. The last numbered release on the npm `time` object is **23 February 2016**. The registry `modified` timestamp is **14 June 2022** (metadata only, not a new plugin version). The npm package page is [cordova-plugin-zip](https://www.npmjs.com/package/cordova-plugin-zip) (the registry lists a GitHub URL that no longer resolves).
 
 The published `zip.js` module exposes only:
 
@@ -128,6 +128,6 @@ await CapacitorZip.unzip(
 - Marketing page: [/plugins/capacitor-zip/](/plugins/capacitor-zip/)
 - npm: [https://www.npmjs.com/package/@capgo/capacitor-zip](https://www.npmjs.com/package/@capgo/capacitor-zip)
 - GitHub: [https://github.com/Cap-go/capacitor-zip/](https://github.com/Cap-go/capacitor-zip/)
-- Cordova upstream: [https://github.com/MobileChromeApps/cordova-plugin-zip](https://github.com/MobileChromeApps/cordova-plugin-zip)
+- Cordova upstream: [https://www.npmjs.com/package/cordova-plugin-zip](https://www.npmjs.com/package/cordova-plugin-zip)
 
 Zip handling runs in native code. Use [Capgo Build](/native-build/) when you add the plugin to production binaries, then adjust unpack paths in [Capgo live updates](/live-update/) with the validation checklist above. For the full platform move, read the [Cordova to Capacitor migration guide](/blog/migrating-cordova-to-capacitor/).
